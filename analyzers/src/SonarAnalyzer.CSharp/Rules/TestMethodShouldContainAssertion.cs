@@ -148,7 +148,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 ?.ApplicationSyntaxReference.GetSyntax() as AttributeSyntax;
 
             return factAttributeSyntax?.ArgumentList != null
-                   && factAttributeSyntax.ArgumentList.Arguments.Any(x => x.NameEquals.Name.Identifier.ValueText == "Skip");
+                 && factAttributeSyntax.ArgumentList.Arguments.Any(x => x.NameEquals.Name.Identifier.ValueText == "Skip");
         }
 
         private static bool IsAssertion(InvocationExpressionSyntax invocation) =>
@@ -159,7 +159,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Any();
 
         private static bool IsKnownAssertion(ISymbol methodSymbol) =>
-            (KnownAssertions.GetValueOrDefault(methodSymbol.Name) is { } types && types.Any(type => methodSymbol.ContainingType.ConstructedFrom.Is(type)))
+            (KnownAssertions.GetValueOrDefault(methodSymbol.Name) is { } types && types.Any(x => methodSymbol.ContainingType.ConstructedFrom.Is(x)))
             || methodSymbol.ContainingType.DerivesFromAny(KnownAssertionTypes);
 
         private static bool IsCustomAssertion(ISymbol methodSymbol) =>
