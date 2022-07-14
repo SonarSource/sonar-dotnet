@@ -174,7 +174,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void Create_UnexpectedType_Throws()
         {
-            var rule = new RuleDescriptor("Sxxxx", string.Empty, "Lorem Ipsum", string.Empty, SourceScope.Main, true, string.Empty);
+            var rule = new RuleDescriptor("Sxxxx", string.Empty, "Lorem Ipsum", string.Empty, string.Empty, SourceScope.Main, true, string.Empty);
             var f = () => DiagnosticDescriptorBuilder.Create(AnalyzerLanguage.CSharp, rule, string.Empty, null, false);
             f.Should().Throw<UnexpectedValueException>().WithMessage("Unexpected Type value: Lorem Ipsum");
         }
@@ -190,12 +190,12 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [DataRow("Whatever Xxx", "BUG", "Whatever Xxx Bug")]
         public void Create_ComputesCategory(string severity, string type, string expected)
         {
-            var rule = new RuleDescriptor("Sxxxx", string.Empty, type, severity, SourceScope.Main, true, string.Empty);
+            var rule = new RuleDescriptor("Sxxxx", string.Empty, type, severity, string.Empty, SourceScope.Main, true, string.Empty);
             DiagnosticDescriptorBuilder.Create(AnalyzerLanguage.CSharp, rule, "Sxxxx Message", null, false).Category.Should().Be(expected);
         }
 
         private static RuleDescriptor CreateRuleDescriptor(SourceScope scope, bool sonarWay) =>
-            new("Sxxxx", "Sxxxx Title", "BUG", "Major", scope, sonarWay, "Sxxxx Description");
+            new("Sxxxx", "Sxxxx Title", "BUG", "Major", string.Empty, scope, sonarWay, "Sxxxx Description");
 
         private static ResourceManager CreateMockedResourceManager(string diagnosticId, bool isActivatedByDefault)
         {
