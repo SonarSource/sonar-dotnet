@@ -238,8 +238,9 @@ function AppendVbTestCase($ruleTestsFolder) {
     $usingToken = "using SonarAnalyzer.Rules.CSharp;"
     $usingTokenCS = "using CS = SonarAnalyzer.Rules.CSharp;"
     $usingTokenVB = "using VB = SonarAnalyzer.Rules.VisualBasic;"
-    $namespaceToken = "namespace SonarAnalyzer.UnitTest.Rules;"
-    $token = "}"
+    $namespaceToken = "namespace SonarAnalyzer.UnitTest.Rules"
+    $oldToken = "    }" # For files using old namespaces
+    $newToken = "}"     # For files using file scoped namespaces
 
     $text = Get-Content -Path "${ruleTestsFolder}\\${csClassName}Test.cs" -Raw
     $methodVB = Get-Content -Path "${RuleTemplateFolder}\\TestMethod.VB.cs" -Raw
@@ -249,6 +250,7 @@ function AppendVbTestCase($ruleTestsFolder) {
         $text = $text.Remove($usingTokenIdx, $usingToken.Length + 1)
     }
 
+    $token = if ($text.Contains("${namespaceToken};")) {$newToken} else {$oldToken}
     $idx = $text.LastIndexOf($token)
     if ($idx -gt -1) {
         $text = $text.Insert($idx, "`n${methodVB}")
