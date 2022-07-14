@@ -40,6 +40,7 @@
     <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
     <sonarAnalyzer.workDirectory>${project.build.directory}/analyzer</sonarAnalyzer.workDirectory>
     <documentationDirectory>${project.basedir}/src/main/resources</documentationDirectory>
+    <analyzers.directory>${project.build.directory}/../../analyzers</analyzers.directory>
   </properties>
 
   <dependencies>
@@ -227,80 +228,61 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>3.1.0</version>
+        <executions>
+          <execution>
+            <id>copy-analyzer-data</id>
+            <phase>validate</phase>
+            <configuration>
+              <exportAntProperties>true</exportAntProperties>
+              <target>
+                <!-- ITs requires the SonarAnalyzer-VERSION.zip to be present so don't remove these lines -->
+                <copy todir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.VisualBasic">
+                  <fileset dir="${analyzers.directory}/packaging/binaries/">
+                    <include name="Google.Protobuf.dll"/>
+                    <include name="SonarAnalyzer.dll"/>
+                    <include name="SonarAnalyzer.CFG.dll"/>
+                    <include name="SonarAnalyzer.VisualBasic.dll"/>
+                  </fileset>
+                  <fileset dir="${project.build.directory}/../..">
+                    <include name="THIRD-PARTY-NOTICES.txt"/>
+                  </fileset>
+                </copy>
+                <zip destfile="${sonarAnalyzer.workDirectory}/static/SonarAnalyzer-${project.version}.zip"
+                     basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.VisualBasic"/>
+                <copy todir="${sonarAnalyzer.workDirectory}/org/sonar/plugins/vbnet">
+                  <fileset
+                    dir="${analyzers.directory}/src/SonarAnalyzer.RuleDescriptorGenerator/bin/Release/net46/vbnet">
+                    <include name="rules.xml"/>
+                  </fileset>
+                  <fileset dir="${analyzers.directory}/rspec/vbnet">
+                    <include name="*.json"/>
+                    <include name="*.html"/>
+                  </fileset>
+                </copy>
+                <exec executable="dotnet"
+                      dir="${analyzers.directory}/src/SonarAnalyzer.RuleDescriptorGenerator/bin/Release/netcoreapp3.1">
+                  <arg value="SonarAnalyzer.RuleDescriptorGenerator.dll"/>
+                  <arg value="${analyzers.directory}/packaging/binaries/SonarAnalyzer.VisualBasic.dll"/>
+                  <arg value="${sonarAnalyzer.workDirectory}/org/sonar/plugins/vbnet/Rules.json"/>
+                </exec>
+                <copy todir="${sonarAnalyzer.workDirectory}/static">
+                  <fileset dir="${documentationDirectory}">
+                    <include name="documentation.md"/>
+                  </fileset>
+                </copy>
+                <echo file="${sonarAnalyzer.workDirectory}/static/version.txt" message="${project.version}" encoding="utf-8"/>
+              </target>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
-
-  <profiles>
-    <profile>
-      <id>local-analyzer</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
-      <properties>
-        <analyzer.configuration>Release</analyzer.configuration>
-        <analyzers.directory>${project.build.directory}/../../analyzers</analyzers.directory>
-      </properties>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-antrun-plugin</artifactId>
-            <version>3.1.0</version>
-            <executions>
-              <execution>
-                <id>copy-analyzer-data</id>
-                <phase>validate</phase>
-                <configuration>
-                  <exportAntProperties>true</exportAntProperties>
-                  <target>
-                    <!-- ITs requires the SonarAnalyzer-VERSION.zip to be present so don't remove these lines -->
-                    <copy todir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.VisualBasic">
-                      <fileset dir="${analyzers.directory}/packaging/binaries/">
-                        <include name="Google.Protobuf.dll"/>
-                        <include name="SonarAnalyzer.dll"/>
-                        <include name="SonarAnalyzer.CFG.dll"/>
-                        <include name="SonarAnalyzer.VisualBasic.dll"/>
-                      </fileset>
-                      <fileset dir="${project.build.directory}/../..">
-                        <include name="THIRD-PARTY-NOTICES.txt"/>
-                      </fileset>
-                    </copy>
-                    <zip destfile="${sonarAnalyzer.workDirectory}/static/SonarAnalyzer-${project.version}.zip"
-                         basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.VisualBasic"/>
-                    <copy todir="${sonarAnalyzer.workDirectory}/org/sonar/plugins/vbnet">
-                      <fileset
-                        dir="${analyzers.directory}/src/SonarAnalyzer.RuleDescriptorGenerator/bin/${analyzer.configuration}/net46/vbnet">
-                        <include name="rules.xml"/>
-                      </fileset>
-                      <fileset dir="${analyzers.directory}/rspec/vbnet">
-                        <include name="*.json"/>
-                        <include name="*.html"/>
-                      </fileset>
-                    </copy>
-                    <exec executable="dotnet"
-                          dir="${analyzers.directory}/src/SonarAnalyzer.RuleDescriptorGenerator/bin/${analyzer.configuration}/netcoreapp3.1">
-                      <arg value="SonarAnalyzer.RuleDescriptorGenerator.dll"/>
-                      <arg value="${analyzers.directory}/packaging/binaries/SonarAnalyzer.VisualBasic.dll"/>
-                      <arg value="${sonarAnalyzer.workDirectory}/org/sonar/plugins/vbnet/Rules.json"/>
-                    </exec>
-                    <copy todir="${sonarAnalyzer.workDirectory}/static">
-                      <fileset dir="${documentationDirectory}">
-                        <include name="documentation.md"/>
-                      </fileset>
-                    </copy>
-                    <echo file="${sonarAnalyzer.workDirectory}/static/version.txt" message="${project.version}" encoding="utf-8"/>
-                  </target>
-                </configuration>
-                <goals>
-                  <goal>run</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-
-  </profiles>
-
 </project>
