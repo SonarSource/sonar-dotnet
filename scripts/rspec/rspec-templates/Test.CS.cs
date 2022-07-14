@@ -20,15 +20,14 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.UnitTest.Rules
-{
-    [TestClass]
-    public class $DiagnosticClassName$Test
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<$DiagnosticClassName$>();
+namespace SonarAnalyzer.UnitTest.Rules;
 
-        [TestMethod]
-        public void $DiagnosticClassName$_CS() =>
-            builder.AddPaths("$DiagnosticClassName$.cs").Verify();
-    }
+[TestClass]
+public class $DiagnosticClassName$Test
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder<$DiagnosticClassName$>();
+
+    [TestMethod]
+    public void $DiagnosticClassName$_CS() =>
+        builder.AddPaths("$DiagnosticClassName$.cs").Verify();
 }
