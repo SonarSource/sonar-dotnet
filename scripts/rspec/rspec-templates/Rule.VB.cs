@@ -35,7 +35,7 @@ public sealed class $DiagnosticClassName$ : SonarDiagnosticAnalyzer
     private const string DiagnosticId = "$DiagnosticId$";
     private const string MessageFormat = "FIXME";
 
-    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);;
+    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
