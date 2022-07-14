@@ -212,10 +212,13 @@ namespace SonarAnalyzer.Helpers.Trackers
                     .OfType<AssignmentExpressionSyntax>()
                     .Any(TrackedPropertySetWithAllowedValue);
 
-            bool TrackedPropertySetWithAllowedValue(AssignmentExpressionSyntax assignment) =>
-                variableSymbol.Equals(GetAssignedVariableSymbol(assignment, semanticModel))
-                && IsTrackedPropertyName(assignment.Left)
-                && IsAllowedValue(assignment.Right, semanticModel);
+            bool TrackedPropertySetWithAllowedValue(AssignmentExpressionSyntax assignment)
+            {
+                var assignmentMap = assignment.MapAssignmentArguments();
+                return assignmentMap.Any(x => variableSymbol.Equals(GetAssignedVariableSymbol(x.Left, semanticModel))
+                                              && IsTrackedPropertyName(x.Left)
+                                              && IsAllowedValue(x.Right, semanticModel));
+            }
         }
 
         private static IEnumerable<ExpressionSyntax> GetInitializerExpressions(InitializerExpressionSyntax initializer) =>
@@ -233,9 +236,9 @@ namespace SonarAnalyzer.Helpers.Trackers
                 : null;
         }
 
-        private static ISymbol GetAssignedVariableSymbol(AssignmentExpressionSyntax assignment, SemanticModel semanticModel)
+        private static ISymbol GetAssignedVariableSymbol(SyntaxNode node, SemanticModel semanticModel)
         {
-            var identifier = (assignment.Left as MemberAccessExpressionSyntax)?.Expression ?? assignment.Left as IdentifierNameSyntax;
+            var identifier = (node as MemberAccessExpressionSyntax)?.Expression ?? node as IdentifierNameSyntax;
             return identifier != null
                 ? semanticModel.GetSymbolInfo(identifier).Symbol
                 : null;
