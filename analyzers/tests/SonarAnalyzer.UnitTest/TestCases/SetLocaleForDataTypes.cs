@@ -8,10 +8,10 @@ namespace Tests.Diagnostics
     {
         private DataTable myTable = new DataTable { Locale = CultureInfo.InvariantCulture };
         private DataTable myWrongTable = new DataTable(); // Noncompliant {{Set the locale for this 'DataTable'.}}
-//                                       ^^^^^^^^^^^^^^^
-        private DataTable myWrongTable1 = new DataTable(),
-//                                        ^^^^^^^^^^^^^^^ {{Set the locale for this 'DataTable'.}}
-                                          myWrongTable2 = new DataTable(); // FN
+        //                               ^^^^^^^^^^^^^^^
+        private DataTable myWrongTable1 = new DataTable(), myWrongTable2 = new DataTable();
+        //                                ^^^^^^^^^^^^^^^                                      {{Set the locale for this 'DataTable'.}}
+        //                                                                 ^^^^^^^^^^^^^^^ @-1 {{Set the locale for this 'DataTable'.}}
 
         void Foo()
         {
@@ -90,10 +90,21 @@ namespace Tests.Diagnostics
             var datatable = new DataTable(); // Noncompliant FP
             Init(datatable);
         }
-    }
 
-    public class FooBar
-    {
-        public FooBar(DataTable datatable) { }
+        void MultipleVariableDeclarators()
+        {
+            DataTable myTable1 = new DataTable { Locale = CultureInfo.CurrentUICulture }, myTable2 = new DataTable();
+            //                                                                                       ^^^^^^^^^^^^^^^  Noncompliant
+            DataTable myTable3 = new DataTable(), myTable4 = new DataTable { Locale = CultureInfo.CurrentUICulture };
+            //                   ^^^^^^^^^^^^^^^                                                                      Noncompliant
+            DataTable myTable5 = new DataTable(), myTable6 = new DataTable();
+            //                   ^^^^^^^^^^^^^^^                                                                      Noncompliant
+            //                                               ^^^^^^^^^^^^^^^                                          @-1
+        }
     }
+}
+
+public class FooBar
+{
+    public FooBar(DataTable datatable) { }
 }

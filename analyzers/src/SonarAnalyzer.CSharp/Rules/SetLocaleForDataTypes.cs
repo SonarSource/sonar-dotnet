@@ -118,7 +118,7 @@ namespace SonarAnalyzer.Rules.CSharp
             objectCreation.GetFirstNonParenthesizedParent() switch
             {
                 AssignmentExpressionSyntax assignment => assignment.Left,
-                EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax { Variables: { Count: > 0 } variables } } } => variables.Last(),
+                EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax declarator } => declarator,
                 ArgumentSyntax argument => argument.FindAssignmentComplement(),
                 _ => null,
             };
@@ -145,7 +145,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var leftSideOfParentAssignment = objectCreation.GetFirstNonParenthesizedParent() switch
             {
                 // var dt = new DataTable { Locale = l }
-                EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax { Variables: { Count: > 0 } variables } } } => variables.Last(),
+                EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax declarator } => declarator,
                 // dt = new DataTable { Locale = l }
                 AssignmentExpressionSyntax assignment => assignment.Left,
                 // var (dt, _) = (new DataTable { Locale = l }, 42)
