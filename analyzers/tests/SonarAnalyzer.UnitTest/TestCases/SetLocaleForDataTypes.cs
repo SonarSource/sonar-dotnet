@@ -108,4 +108,3 @@ namespace Tests.Diagnostics
         public FooBar(DataTable datatable) { }
     }
 }
-
