@@ -159,5 +159,4 @@ namespace Tests.Diagnostics
             parameter = null;
         }
     }
-
 }
