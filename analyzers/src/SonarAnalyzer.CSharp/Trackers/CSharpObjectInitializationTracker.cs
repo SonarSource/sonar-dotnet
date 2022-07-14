@@ -212,10 +212,13 @@ namespace SonarAnalyzer.Helpers.Trackers
                     .OfType<AssignmentExpressionSyntax>()
                     .Any(TrackedPropertySetWithAllowedValue);
 
-            bool TrackedPropertySetWithAllowedValue(AssignmentExpressionSyntax assignment) =>
-                variableSymbol.Equals(GetAssignedVariableSymbol(assignment, semanticModel))
-                && IsTrackedPropertyName(assignment.Left)
-                && IsAllowedValue(assignment.Right, semanticModel);
+            bool TrackedPropertySetWithAllowedValue(AssignmentExpressionSyntax assignment)
+            {
+                var assignmentMap = assignment.MapAssignmentArguments();
+                return assignmentMap.Any(x => IsTrackedPropertyName(x.Left)
+                                              && variableSymbol.Equals(GetAssignedVariableSymbol(x.Left, semanticModel))
+                                              && IsAllowedValue(x.Right, semanticModel));
+            }
         }
 
         private static IEnumerable<ExpressionSyntax> GetInitializerExpressions(InitializerExpressionSyntax initializer) =>
@@ -233,12 +236,10 @@ namespace SonarAnalyzer.Helpers.Trackers
                 : null;
         }
 
-        private static ISymbol GetAssignedVariableSymbol(AssignmentExpressionSyntax assignment, SemanticModel semanticModel)
+        private static ISymbol GetAssignedVariableSymbol(SyntaxNode node, SemanticModel semanticModel)
         {
-            var identifier = (assignment.Left as MemberAccessExpressionSyntax)?.Expression ?? assignment.Left as IdentifierNameSyntax;
-            return identifier != null
-                ? semanticModel.GetSymbolInfo(identifier).Symbol
-                : null;
+            var identifier = node is MemberAccessExpressionSyntax memberAccess ? memberAccess.Expression : node as IdentifierNameSyntax;
+            return semanticModel.GetSymbolInfo(identifier).Symbol;
         }
 
         private static IEnumerable<StatementSyntax> GetNextStatements(StatementSyntax statement) =>

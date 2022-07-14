@@ -16,6 +16,15 @@ public record struct RecordStruct
     {
         new TelnetRecordStruct(); // Noncompliant {{Using telnet protocol is insecure. Use ssh instead.}}
     }
+
+    public void SetValueAfterObjectInitialization()
+    {
+        var propertyTrue = new SmtpClient("host", 25); // Compliant, property is set below
+        (propertyTrue.EnableSsl, var x1) = (true, 0);
+
+        var propertyFalse = new SmtpClient("host", 25); // Noncompliant
+        (propertyFalse.EnableSsl, var x2) = (false, 0);
+    }
 }
 
 public record struct TelnetRecordStruct { }
