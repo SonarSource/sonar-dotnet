@@ -102,9 +102,10 @@ namespace Tests.Diagnostics
             //                                               ^^^^^^^^^^^^^^^                                          @-1
         }
     }
+
+    public class FooBar
+    {
+        public FooBar(DataTable datatable) { }
+    }
 }
 
-public class FooBar
-{
-    public FooBar(DataTable datatable) { }
-}
