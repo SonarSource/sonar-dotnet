@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.Common
 {
-    public record RuleDescriptor(string Id, string Title, string Type, string DefaultSeverity, SourceScope Scope, bool SonarWay, string Description)
+    public record RuleDescriptor(string Id, string Title, string Type, string DefaultSeverity, string Status, SourceScope Scope, bool SonarWay, string Description)
     {
         public string Category =>
             $"{DefaultSeverity} {ReadableType}";

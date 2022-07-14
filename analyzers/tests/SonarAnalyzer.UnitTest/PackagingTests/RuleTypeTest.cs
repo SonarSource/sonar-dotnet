@@ -20,7 +20,7 @@
 
 extern alias csharp;
 extern alias vbnet;
-using System.Resources;
+using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.UnitTest.PackagingTests
 {
@@ -33,21 +33,21 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
 
         [TestMethod]
         public void DetectRuleTypeChanges_CS() =>
-            DetectTypeChanges(csharp::SonarAnalyzer.RspecStrings.ResourceManager, RuleTypeMappingCS.Rules, nameof(RuleTypeMappingCS));
+            DetectTypeChanges(csharp::SonarAnalyzer.RuleCatalog.Rules, RuleTypeMappingCS.Rules, nameof(RuleTypeMappingCS));
 
         [TestMethod]
         public void DetectRuleTypeChanges_VB() =>
-            DetectTypeChanges(vbnet::SonarAnalyzer.RspecStrings.ResourceManager, RuleTypeMappingVB.Rules, nameof(RuleTypeMappingVB));
+            DetectTypeChanges(vbnet::SonarAnalyzer.RuleCatalog.Rules, RuleTypeMappingVB.Rules, nameof(RuleTypeMappingVB));
 
         [AssertionMethod]
-        private static void DetectTypeChanges(ResourceManager resourceManager, IImmutableDictionary<string, string> expectedTypes, string expectedTypesName)
+        private static void DetectTypeChanges(Dictionary<string, RuleDescriptor> rules, IImmutableDictionary<string, string> expectedTypes, string expectedTypesName)
         {
             var items = Enumerable.Range(1, 10000)
                                   .Select(x => "S" + x)
                                   .Select(x => new
                                   {
                                       RuleId = x,
-                                      ActualType = resourceManager.GetString($"{x}_Type"),
+                                      ActualType = rules.ContainsKey(x) ? rules[x].Type : null,
                                       ExpectedType = expectedTypes.GetValueOrDefault(x)
                                   })
                                   .Where(x => x.ActualType != x.ExpectedType)
