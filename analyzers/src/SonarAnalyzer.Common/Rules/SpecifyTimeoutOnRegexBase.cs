@@ -65,7 +65,7 @@ public abstract class SpecifyTimeoutOnRegexBase<TSyntaxKind> : SonarDiagnosticAn
             Language.GeneratedCodeRecognizer,
             c =>
             {
-                if (IsRegexMatchMethod(Language.Syntax.NodeIdentifier(c.Node).Value.Text)
+                if (IsRegexMatchMethod(Language.Syntax.NodeIdentifier(c.Node).GetValueOrDefault().Text)
                     && RegexMethodLacksTimeout(c.Node, c.SemanticModel))
                 {
                     c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));

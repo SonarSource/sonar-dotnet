@@ -66,6 +66,14 @@ class Noncompliant
     }
 }
 
+class DoesNotCrash
+{
+    void MethodWitoutIdentifier(__arglist)
+    {
+        MethodWitoutIdentifier(__arglist(""));
+    }
+}
+
 namespace NoSystem
 {
     public class Regex

@@ -47,3 +47,9 @@ Class Noncompliant
         Dim split = Regex.Split("some input", "some pattern", options) ' Noncompliant
     End Sub
 End Class
+
+Class DoesNotCrash
+    Private Sub MethodWitoutIdentifier(__arglist)
+        MethodWitoutIdentifier("__arglist"(""))
+    End Sub
+End Class

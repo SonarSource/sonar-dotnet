@@ -13,6 +13,10 @@ Namespace TestCasesForRuleFailure
         Public Sub ParamsMethod(i As Integer, ParamArray j() As Integer)
         End Sub
 
+        Public Sub ArgListMethod(__arglist)
+            ArgListMethod("__arglist"(""))
+        End Sub
+
         Public Shared Widening Operator CType(c As SpecialCases) As String
             Return ""
         End Operator
