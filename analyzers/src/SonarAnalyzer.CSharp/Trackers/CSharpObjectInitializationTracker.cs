@@ -215,8 +215,8 @@ namespace SonarAnalyzer.Helpers.Trackers
             bool TrackedPropertySetWithAllowedValue(AssignmentExpressionSyntax assignment)
             {
                 var assignmentMap = assignment.MapAssignmentArguments();
-                return assignmentMap.Any(x => variableSymbol.Equals(GetAssignedVariableSymbol(x.Left, semanticModel))
-                                              && IsTrackedPropertyName(x.Left)
+                return assignmentMap.Any(x => IsTrackedPropertyName(x.Left)
+                                              && variableSymbol.Equals(GetAssignedVariableSymbol(x.Left, semanticModel))
                                               && IsAllowedValue(x.Right, semanticModel));
             }
         }
