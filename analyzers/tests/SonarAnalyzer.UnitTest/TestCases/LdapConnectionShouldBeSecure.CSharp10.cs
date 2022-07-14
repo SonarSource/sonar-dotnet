@@ -17,5 +17,8 @@ public record struct RecordStruct
 
         DirectoryEntry entry2 = new("path", "user", "pass", AuthenticationTypes.None); // Noncompliant
         (entry2.AuthenticationType, var x2) = (AuthenticationTypes.None, 0); // Noncompliant
+
+        AuthenticationTypes AuthenticationType;
+        (AuthenticationType, var x3) = (AuthenticationTypes.None, 0);
     }
 }

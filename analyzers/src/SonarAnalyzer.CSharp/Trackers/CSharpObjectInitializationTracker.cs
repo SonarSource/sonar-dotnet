@@ -238,10 +238,8 @@ namespace SonarAnalyzer.Helpers.Trackers
 
         private static ISymbol GetAssignedVariableSymbol(SyntaxNode node, SemanticModel semanticModel)
         {
-            var identifier = (node as MemberAccessExpressionSyntax)?.Expression ?? node as IdentifierNameSyntax;
-            return identifier != null
-                ? semanticModel.GetSymbolInfo(identifier).Symbol
-                : null;
+            var identifier = node is MemberAccessExpressionSyntax memberAccess ? memberAccess.Expression : node as IdentifierNameSyntax;
+            return semanticModel.GetSymbolInfo(identifier).Symbol;
         }
 
         private static IEnumerable<StatementSyntax> GetNextStatements(StatementSyntax statement) =>
