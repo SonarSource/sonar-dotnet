@@ -16,7 +16,7 @@ namespace Tests.Diagnostics
         public void doSomething(object someParameter)
         {
             int myField = 0, // Noncompliant
-//              ^^^^^^^
+            //  ^^^^^^^
                 other = 5;
             int @int = 42; // Noncompliant
 
@@ -134,4 +134,30 @@ namespace Tests.Diagnostics
             }
         }
     }
+
+    public class DeclarationExpressions
+    {
+        private object myField1 = null;
+
+        public void OutDeclarationWithConcreteType()
+        {
+            OutParameter(out object myField1); // Noncompliant
+        }
+
+        public void OutDeclarationWithVar()
+        {
+            OutParameter(out var myField1);    // Noncompliant
+        }
+
+        public void OutReference()
+        {
+            OutParameter(out myField1);        // Compliant
+        }
+
+        public void OutParameter(out object parameter)
+        {
+            parameter = null;
+        }
+    }
+
 }
