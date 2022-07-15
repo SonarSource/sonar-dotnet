@@ -34,5 +34,7 @@ namespace SonarAnalyzer.Common
                 "SECURITY_HOTSPOT" => "Security Hotspot",
                 _ => throw new UnexpectedValueException(nameof(Type), Type)
             };
+
+        public bool IsHotspot => Type == "SECURITY_HOTSPOT";
     }
 }

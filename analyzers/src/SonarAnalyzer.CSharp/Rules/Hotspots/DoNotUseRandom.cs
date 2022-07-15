@@ -31,27 +31,18 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class DoNotUseRandom : HotspotDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S2245";
+        private const string DiagnosticId = "S2245";
         private const string MessageFormat = "Make sure that using this pseudorandom number generator is safe here.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat)
-                .WithNotConfigurable();
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        public DoNotUseRandom()
-            : base(AnalyzerConfiguration.Hotspot)
-        {
-        }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        public DoNotUseRandom(IAnalyzerConfiguration analyzerConfiguration)
-            : base(analyzerConfiguration)
-        {
-        }
+        public DoNotUseRandom() : base(AnalyzerConfiguration.Hotspot) { }
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public DoNotUseRandom(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration) { }
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterCompilationStartAction(
                 ccc =>
                 {
@@ -64,18 +55,16 @@ namespace SonarAnalyzer.Rules.CSharp
                         c =>
                         {
                             var objectCreationSyntax = (ObjectCreationExpressionSyntax)c.Node;
-
                             var argumentsCount = objectCreationSyntax.ArgumentList?.Arguments.Count;
 
-                            if (argumentsCount <= 1 && // Random has two ctors - with zero and one parameter
-                                c.SemanticModel.GetSymbolInfo(objectCreationSyntax).Symbol is IMethodSymbol methodSymbol &&
-                                methodSymbol.ContainingType.Is(KnownType.System_Random))
+                            if (argumentsCount <= 1 // Random has two ctors - with zero and one parameter
+                                && c.SemanticModel.GetSymbolInfo(objectCreationSyntax).Symbol is IMethodSymbol methodSymbol
+                                && methodSymbol.ContainingType.Is(KnownType.System_Random))
                             {
-                                c.ReportIssue(Diagnostic.Create(rule, objectCreationSyntax.GetLocation()));
+                                c.ReportIssue(Diagnostic.Create(Rule, objectCreationSyntax.GetLocation()));
                             }
                         },
                         SyntaxKind.ObjectCreationExpression);
                 });
-        }
     }
 }

@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules
         protected abstract void VisitInvocations(SyntaxNodeAnalysisContext context);
 
         protected LooseFilePermissionsBase(IAnalyzerConfiguration configuration) : base(configuration) =>
-            Rule = Language.CreateDescriptor(DiagnosticId, MessageFormat).WithNotConfigurable();
+            Rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterCompilationStartAction(c =>

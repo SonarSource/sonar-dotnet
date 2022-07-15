@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules
 
         protected PubliclyWritableDirectoriesBase(IAnalyzerConfiguration configuration) : base(configuration)
         {
-            rule = Language.CreateDescriptor(DiagnosticId, MessageFormat).WithNotConfigurable();
+            rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
             linuxDirectories = new Regex($@"^({linuxDirs.JoinStr("|", x => Regex.Escape(x))})(\/|$)", RegexOptions.Compiled);
             macDirectories = new Regex($@"^({macDirs.JoinStr("|", x => Regex.Escape(x))})(\/|$)", WindowsAndUnixOptions);
             environmentVariables = new Regex($@"^%({InsecureEnvironmentVariables.JoinStr("|")})%([\\\/]|$)", WindowsAndUnixOptions);

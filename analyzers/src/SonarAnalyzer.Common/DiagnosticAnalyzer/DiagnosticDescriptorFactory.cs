@@ -26,14 +26,14 @@ using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
-    public static class DiagnosticDescriptorBuilder
+    public static class DiagnosticDescriptorFactory
     {
         public static readonly string SonarWayTag = "SonarWay";
         public static readonly string UtilityTag = "Utility";
         public static readonly string MainSourceScopeTag = "MainSourceScope";
         public static readonly string TestSourceScopeTag = "TestSourceScope";
 
-        public static DiagnosticDescriptor GetUtilityDescriptor(string diagnosticId, string title) =>
+        public static DiagnosticDescriptor CreateUtility(string diagnosticId, string title) =>
             new(diagnosticId,
                 title,
                 string.Empty,
@@ -48,38 +48,27 @@ namespace SonarAnalyzer.Helpers
                 messageFormat,
                 rule.Category,
                 fadeOutCode ? DiagnosticSeverity.Info : DiagnosticSeverity.Warning,
-                isEnabledByDefault ?? rule.SonarWay,
+                rule.IsHotspot || (isEnabledByDefault ?? rule.SonarWay),
                 rule.Description,
                 language.HelpLink(rule.Id),
-                BuildTags(language.LanguageName, rule.SonarWay, rule.Scope, fadeOutCode));
+                BuildTags(language, rule, fadeOutCode));
 
-        /// <summary>
-        /// Indicates that the Roslyn diagnostic cannot be suppressed, filtered or have its severity changed.
-        /// </summary>
-        public static DiagnosticDescriptor WithNotConfigurable(this DiagnosticDescriptor dd) =>
-            new(dd.Id,
-                dd.Title,
-                dd.MessageFormat,
-                dd.Category,
-                dd.DefaultSeverity,
-                true,
-                dd.Description,
-                dd.HelpLinkUri,
-                dd.CustomTags.Union(new[] { WellKnownDiagnosticTags.NotConfigurable }).ToArray());
-
-        private static string[] BuildTags(string languageName, bool sonarWay, SourceScope scope, bool fadeOutCode)
+        private static string[] BuildTags(AnalyzerLanguage language, RuleDescriptor rule, bool fadeOutCode)
         {
-            var tags = new List<string> { languageName };
-            tags.AddRange(scope.ToTags());
-            if (sonarWay)
-            {
-                tags.Add(SonarWayTag);
-            }
-            if (fadeOutCode)
-            {
-                tags.Add(WellKnownDiagnosticTags.Unnecessary);
-            }
+            var tags = new List<string> { language.LanguageName };
+            tags.AddRange(rule.Scope.ToTags());
+            Add(rule.SonarWay, SonarWayTag);
+            Add(fadeOutCode, WellKnownDiagnosticTags.Unnecessary);
+            Add(rule.IsHotspot, WellKnownDiagnosticTags.NotConfigurable);
             return tags.ToArray();
+
+            void Add(bool condition, string tag)
+            {
+                if (condition)
+                {
+                    tags.Add(tag);
+                }
+            }
         }
 
         private static IEnumerable<string> ToTags(this SourceScope sourceScope) =>
@@ -91,15 +80,12 @@ namespace SonarAnalyzer.Helpers
                 _ => throw new NotSupportedException($"{sourceScope} is not supported 'SourceScope' value."),
             };
 
-        private static string[] BuildUtilityTags()
-        {
-            return SourceScope.All.ToTags().Concat(new[] { UtilityTag })
+        private static string[] BuildUtilityTags() =>
+            SourceScope.All.ToTags().Concat(new[] { UtilityTag })
 #if !DEBUG
-                // Allow to configure the analyzers in debug mode only.
-                // This allows to run test selectively (for example to test only one rule)
+                // Allow to configure the analyzers in debug mode only. This allows to run test selectively (for example to test only one rule)
                 .Union(new[] { WellKnownDiagnosticTags.NotConfigurable })
 #endif
                 .ToArray();
-        }
     }
 }
