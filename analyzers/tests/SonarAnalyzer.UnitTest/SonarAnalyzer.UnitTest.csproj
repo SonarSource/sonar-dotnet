@@ -90,7 +90,6 @@
     <ProjectReference Include="..\..\src\SonarAnalyzer.CSharp\SonarAnalyzer.CSharp.csproj">
       <Aliases>global,csharp</Aliases>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\SonarAnalyzer.RuleDescriptorGenerator\SonarAnalyzer.RuleDescriptorGenerator.csproj" />
     <ProjectReference Include="..\..\src\SonarAnalyzer.Utilities\SonarAnalyzer.Utilities.csproj" />
     <ProjectReference Include="..\..\src\SonarAnalyzer.VisualBasic\SonarAnalyzer.VisualBasic.csproj">
       <Aliases>global,vbnet</Aliases>

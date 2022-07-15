@@ -153,7 +153,6 @@
       <resource>
         <directory>${sonarAnalyzer.workDirectory}</directory>
         <includes>
-          <include>org/sonar/plugins/vbnet/*.xml</include>
           <include>org/sonar/plugins/vbnet/*.json</include>
           <include>org/sonar/plugins/vbnet/*.html</include>
           <include>static/version.txt</include>
@@ -254,17 +253,13 @@
                 <zip destfile="${sonarAnalyzer.workDirectory}/static/SonarAnalyzer-${project.version}.zip"
                      basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.VisualBasic"/>
                 <copy todir="${sonarAnalyzer.workDirectory}/org/sonar/plugins/vbnet">
-                  <fileset
-                    dir="${analyzers.directory}/src/SonarAnalyzer.RuleDescriptorGenerator/bin/Release/net46/vbnet">
-                    <include name="rules.xml"/>
-                  </fileset>
                   <fileset dir="${analyzers.directory}/rspec/vbnet">
                     <include name="*.json"/>
                     <include name="*.html"/>
                   </fileset>
                 </copy>
                 <exec executable="dotnet"
-                      dir="${analyzers.directory}/src/SonarAnalyzer.RuleDescriptorGenerator/bin/Release/netcoreapp3.1">
+                      dir="${analyzers.directory}/src/SonarAnalyzer.RuleDescriptorGenerator/bin/Release/net6">
                   <arg value="SonarAnalyzer.RuleDescriptorGenerator.dll"/>
                   <arg value="${analyzers.directory}/packaging/binaries/SonarAnalyzer.VisualBasic.dll"/>
                   <arg value="${sonarAnalyzer.workDirectory}/org/sonar/plugins/vbnet/Rules.json"/>

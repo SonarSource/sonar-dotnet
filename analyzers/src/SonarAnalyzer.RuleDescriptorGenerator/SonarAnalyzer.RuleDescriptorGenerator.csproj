@@ -4,31 +4,18 @@
     <AssemblyName>SonarAnalyzer.RuleDescriptorGenerator</AssemblyName>
     <RootNamespace>SonarAnalyzer.RuleDescriptorGenerator</RootNamespace>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>net46;netcoreapp3.1</TargetFrameworks>
-    <ProjectGuid>{07e31f39-7419-4b4e-998e-c2bf1a6bb91c}</ProjectGuid>
+    <TargetFramework>net6</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SonarAnalyzer.Common\SonarAnalyzer.Common.csproj" />
-    <ProjectReference Include="..\SonarAnalyzer.Utilities\SonarAnalyzer.Utilities.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Collections.Immutable" Version="1.1.37">
-      <!-- Downgrade System.Collections.Immutable to support VS2015 Update 3 -->
-      <NoWarn>NU1605, NU1701</NoWarn>
-    </PackageReference>
-    <!--  Manually upgrade since the version transitively linked (4.0.1) is marked as vulnerable by WhiteSource. -->
+    <!-- Roslyn packages are needed to properly load rule types at runtime -->
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="1.3.2" />
+    <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic.Workspaces" Version="1.3.2" />
+    <!--  Manually upgrade since the version transitively linked (4.0.1) is marked as vulnerable by Mend. -->
     <PackageReference Include="System.IO.FileSystem" Version="4.3.0" />
   </ItemGroup>
-
-  <!--
-    RuleDescriptorGenerator targets both .Net 4.8 and .Net Core 3.1 to allow referencing in the tests project.
-    Since we want to generate resources only once, we will run the tool only after .Net build. This is done by
-    checking the file extension.
-   -->
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="$(TargetFileName.EndsWith(&quot;exe&quot;))">
-    <Exec Command="cd $(OutDir)&#xD;&#xA;$(TargetFileName) cs&#xD;&#xA;$(TargetFileName) vbnet" />
-  </Target>
-
 </Project>
