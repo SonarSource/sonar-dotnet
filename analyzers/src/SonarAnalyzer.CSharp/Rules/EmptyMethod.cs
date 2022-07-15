@@ -87,8 +87,7 @@ namespace SonarAnalyzer.Rules.CSharp
             !node.Statements.Any() && !ContainsComment(node) && !ContainsConditionalCompilation(node);
 
         private static bool ContainsConditionalCompilation(BlockSyntax node) =>
-            node.HasStructuredTrivia
-                && node.DescendantTrivia().Any(x => x.HasStructure && x.IsKind(SyntaxKind.IfDirectiveTrivia));
+            node.HasStructuredTrivia && node.DescendantTrivia().Any(x => x.HasStructure && x.IsKind(SyntaxKind.IfDirectiveTrivia));
 
         private static bool ContainsComment(BlockSyntax node) =>
             ContainsComment(node.OpenBraceToken.TrailingTrivia)

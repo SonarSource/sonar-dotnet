@@ -21,11 +21,23 @@ namespace Tests.Diagnostics
         {
         }
 
-        public void ConditionlCompilation()
+        public void ConditionalCompilation()
         {
 #if SomeThing
             Console.WriteLine();
 #endif
+        }
+
+        public void ConditionalCompilationEmpty() //FP. We don't check if the conditional contains anything.
+        {
+#if SomeThing
+#endif
+        }
+
+        public void EmptyRegionTrivia() // Noncompliant
+        {
+            #region
+            #endregion
         }
 
         protected virtual void F5()
