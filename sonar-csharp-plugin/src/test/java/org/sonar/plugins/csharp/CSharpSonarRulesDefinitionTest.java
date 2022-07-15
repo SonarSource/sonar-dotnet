@@ -204,7 +204,6 @@ public class CSharpSonarRulesDefinitionTest {
     assertParam(rule.params().get(0), "max", RuleParamType.INTEGER, "5", "Maximum depth of the inheritance tree. (Number)");
     assertParam(rule.params().get(1), "filteredClasses", RuleParamType.STRING, null,
       "Comma-separated list of classes or records to be filtered out of the count of inheritance. Depth counting will stop when a filtered class or record is reached. For example: System.Windows.Controls.UserControl, System.Windows.*. (String)");
-
   }
 
   private static void assertParam(RulesDefinition.Param param, String expectedKey, RuleParamType expectedType, String expectedDefaultValue, String expectedDescription) {
