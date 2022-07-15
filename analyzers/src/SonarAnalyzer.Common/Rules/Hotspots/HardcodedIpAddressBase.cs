@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected HardcodedIpAddressBase(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration) =>
-            rule = Language.CreateDescriptor(DiagnosticId, MessageFormat).WithNotConfigurable();
+            rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, CheckForHardcodedIpAddresses, SyntaxKind);

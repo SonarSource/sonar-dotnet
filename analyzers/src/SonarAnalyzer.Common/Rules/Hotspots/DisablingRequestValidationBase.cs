@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected DisablingRequestValidationBase(IAnalyzerConfiguration configuration) : base(configuration) =>
-            rule = Language.CreateDescriptor(DiagnosticId, MessageFormat).WithNotConfigurable();
+            rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
 
         protected override void Initialize(SonarAnalysisContext context)
         {

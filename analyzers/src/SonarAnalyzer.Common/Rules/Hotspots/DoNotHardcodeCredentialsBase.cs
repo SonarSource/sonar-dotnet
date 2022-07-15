@@ -72,7 +72,7 @@ namespace SonarAnalyzer.Rules
         protected DoNotHardcodeCredentialsBase(IAnalyzerConfiguration configuration)
         {
             this.configuration = configuration;
-            rule = Language.CreateDescriptor(DiagnosticId, MessageFormat).WithNotConfigurable();
+            rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
             CredentialWords = DefaultCredentialWords;   // Property will initialize multiple state variables
         }
 
