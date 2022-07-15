@@ -20,7 +20,6 @@
 
 extern alias csharp;
 extern alias vbnet;
-
 using SonarAnalyzer.Common;
 using SonarAnalyzer.UnitTest.Helpers;
 
@@ -255,22 +254,6 @@ namespace SonarAnalyzer.UnitTest.Common
             foreach (var type in RuleFinder.GetAnalyzerTypes(AnalyzerLanguage.VisualBasic))
             {
                 type.Namespace.Should().Be("SonarAnalyzer.Rules.VisualBasic", $"rule {type.FullName} will not be recognized by the ParseBuildOutput tool on Peach.");
-            }
-        }
-
-        [TestMethod]
-        public void AllRules_AreReadyOrDeprecated_CS() =>
-            AllRules_AreReadyOrDeprecated(csharp::SonarAnalyzer.RuleCatalog.Rules.Values);
-
-        [TestMethod]
-        public void AllRules_AreReadyOrDeprecated_VB() =>
-            AllRules_AreReadyOrDeprecated(vbnet::SonarAnalyzer.RuleCatalog.Rules.Values);
-
-        private static void AllRules_AreReadyOrDeprecated(IEnumerable<RuleDescriptor> rules)
-        {
-            foreach (var rule in rules)
-            {
-                rule.Status.Should().BeOneOf("ready", "deprecated");    // Update RSPEC if this fails
             }
         }
 
