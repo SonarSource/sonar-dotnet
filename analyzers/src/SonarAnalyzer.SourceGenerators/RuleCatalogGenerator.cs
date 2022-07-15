@@ -72,6 +72,7 @@ namespace SonarAnalyzer.SourceGenerators
                     Encode(json.Value<string>("title")),
                     Encode(json.Value<string>("type")),
                     Encode(json.Value<string>("defaultSeverity")),
+                    Encode(json.Value<string>("status")),
                     $"SourceScope.{json.Value<string>("scope")}",
                     sonarWay.Contains(id).ToString().ToLower(),
                     Encode(FirstParagraphText(id, html))

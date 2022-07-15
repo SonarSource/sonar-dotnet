@@ -86,6 +86,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             rule.Title.Should().Be("Lines should not be too long");
             rule.Type.Should().Be("CODE_SMELL");
             rule.DefaultSeverity.Should().Be("Major");
+            rule.Status.Should().Be("ready");
             rule.Scope.Should().Be(SourceScope.All);
             rule.SonarWay.Should().BeFalse();
             rule.Description.Should().Be("Having to scroll horizontally makes it harder to get a quick overview and understanding of any piece of code.");

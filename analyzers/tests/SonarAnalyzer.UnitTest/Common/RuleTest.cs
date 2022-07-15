@@ -20,7 +20,7 @@
 
 extern alias csharp;
 extern alias vbnet;
-using System.Resources;
+
 using SonarAnalyzer.Common;
 using SonarAnalyzer.UnitTest.Helpers;
 using SonarAnalyzer.Utilities;
@@ -259,6 +259,22 @@ namespace SonarAnalyzer.UnitTest.Common
             }
         }
 
+        [TestMethod]
+        public void AllRules_AreReadyOrDeprecated_CS() =>
+            AllRules_AreReadyOrDeprecated(csharp::SonarAnalyzer.RuleCatalog.Rules.Values);
+
+        [TestMethod]
+        public void AllRules_AreReadyOrDeprecated_VB() =>
+            AllRules_AreReadyOrDeprecated(vbnet::SonarAnalyzer.RuleCatalog.Rules.Values);
+
+        private static void AllRules_AreReadyOrDeprecated(IEnumerable<RuleDescriptor> rules)
+        {
+            foreach (var rule in rules)
+            {
+                rule.Status.Should().BeOneOf("ready", "deprecated");    // Update RSPEC if this fails
+            }
+        }
+
         [AssertionMethod]
         private static void OnlySecurityHotspots_AreNotConfigurable(AnalyzerLanguage language)
         {
@@ -286,22 +302,17 @@ namespace SonarAnalyzer.UnitTest.Common
 
         private static bool IsDeprecated(DiagnosticDescriptor diagnostic)
         {
-            return LanguageResources().GetString(diagnostic.Id + "_Status") switch
-            {
-                null => throw new InvalidOperationException($"Missing {diagnostic.Id}_Status in {nameof(csharp::SonarAnalyzer.RspecStrings)} resources"),
-                "deprecated" => true,
-                _ => false
-            };
+            return LanguageRules()[diagnostic.Id].Status == "deprecated";
 
-            ResourceManager LanguageResources()
+            Dictionary<string, RuleDescriptor> LanguageRules()
             {
                 if (diagnostic.CustomTags.Contains(LanguageNames.CSharp))
                 {
-                    return csharp::SonarAnalyzer.RspecStrings.ResourceManager;
+                    return csharp::SonarAnalyzer.RuleCatalog.Rules;
                 }
                 else if (diagnostic.CustomTags.Contains(LanguageNames.VisualBasic))
                 {
-                    return vbnet::SonarAnalyzer.RspecStrings.ResourceManager;
+                    return vbnet::SonarAnalyzer.RuleCatalog.Rules;
                 }
                 else
                 {
