@@ -21,6 +21,13 @@ namespace Tests.Diagnostics
         {
         }
 
+        public void ConditionlCompilation()
+        {
+#if SomeThing
+            Console.WriteLine();
+#endif
+        }
+
         protected virtual void F5()
         {
         }
