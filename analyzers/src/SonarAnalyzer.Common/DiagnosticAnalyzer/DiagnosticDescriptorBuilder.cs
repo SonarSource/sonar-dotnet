@@ -21,7 +21,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Resources;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
 
@@ -54,23 +53,6 @@ namespace SonarAnalyzer.Helpers
                 language.HelpLink(rule.Id),
                 BuildTags(language.LanguageName, rule.SonarWay, rule.Scope, fadeOutCode));
 
-        [Obsolete("Use DescriptorFactory.Create()")]
-        public static DiagnosticDescriptor GetDescriptor(string diagnosticId, string messageFormat,
-            ResourceManager resourceManager, bool? isEnabledByDefault = null, bool fadeOutCode = false) =>
-            new(diagnosticId,
-                resourceManager.GetString($"{diagnosticId}_Title"),
-                messageFormat,
-                resourceManager.GetString($"{diagnosticId}_Category"),
-                fadeOutCode ? DiagnosticSeverity.Info : DiagnosticSeverity.Warning,
-                isEnabledByDefault ?? bool.Parse(resourceManager.GetString($"{diagnosticId}_IsActivatedByDefault")),
-                helpLinkUri: GetHelpLink(resourceManager, diagnosticId),
-                description: resourceManager.GetString($"{diagnosticId}_Description"),
-                customTags: BuildTags(diagnosticId, resourceManager, fadeOutCode));
-
-        [Obsolete]
-        public static string GetHelpLink(ResourceManager resourceManager, string diagnosticId) =>
-            string.Format(resourceManager.GetString("HelpLinkFormat"), diagnosticId.Substring(1));
-
         /// <summary>
         /// Indicates that the Roslyn diagnostic cannot be suppressed, filtered or have its severity changed.
         /// </summary>
@@ -84,14 +66,6 @@ namespace SonarAnalyzer.Helpers
                 dd.Description,
                 dd.HelpLinkUri,
                 dd.CustomTags.Union(new[] { WellKnownDiagnosticTags.NotConfigurable }).ToArray());
-
-        [Obsolete]  // Will be removed with obsolete GetDescriptor method
-        private static string[] BuildTags(string diagnosticId, ResourceManager resourceManager, bool fadeOutCode) =>
-            BuildTags(
-                resourceManager.GetString("RoslynLanguage"),
-                bool.Parse(resourceManager.GetString($"{diagnosticId}_IsActivatedByDefault")),
-                (SourceScope)Enum.Parse(typeof(SourceScope), resourceManager.GetString($"{diagnosticId}_Scope")),
-                fadeOutCode);
 
         private static string[] BuildTags(string languageName, bool sonarWay, SourceScope scope, bool fadeOutCode)
         {
