@@ -258,7 +258,7 @@
                   </fileset>
                 </copy>
                 <exec executable="dotnet"
-                      dir="${analyzers.directory}/src/SonarAnalyzer.RuleDescriptorGenerator/bin/Release/netcoreapp3.1">
+                      dir="${analyzers.directory}/src/SonarAnalyzer.RuleDescriptorGenerator/bin/Release/net6">
                   <arg value="SonarAnalyzer.RuleDescriptorGenerator.dll"/>
                   <arg value="${analyzers.directory}/packaging/binaries/SonarAnalyzer.CSharp.dll"/>
                   <arg value="${sonarAnalyzer.workDirectory}/org/sonar/plugins/csharp/Rules.json"/>
