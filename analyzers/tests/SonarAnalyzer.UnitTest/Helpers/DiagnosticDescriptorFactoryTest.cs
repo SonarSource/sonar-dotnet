@@ -28,7 +28,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void GetUtilityDescriptor_Should_Contain_NotConfigurable_CustomTag()
         {
-            var result = DiagnosticDescriptorFactory.GetUtilityDescriptor("Foo", "");
+            var result = DiagnosticDescriptorFactory.CreateUtility("Foo", "");
 #if DEBUG
             result.CustomTags.Should().NotContain(WellKnownDiagnosticTags.NotConfigurable);
 #else

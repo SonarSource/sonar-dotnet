@@ -335,7 +335,7 @@ namespace SonarAnalyzer.UnitTest.Common
         [DiagnosticAnalyzer(LanguageNames.CSharp)]
         private class ConcurrentExecutionReader : SonarDiagnosticAnalyzer
         {
-            private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorFactory.GetUtilityDescriptor("S9999", "Rule test");
+            private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorFactory.CreateUtility("S9999", "Rule test");
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
             public new bool? IsConcurrentExecutionEnabled { get; private set; }

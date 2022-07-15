@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly string MainSourceScopeTag = "MainSourceScope";
         public static readonly string TestSourceScopeTag = "TestSourceScope";
 
-        public static DiagnosticDescriptor GetUtilityDescriptor(string diagnosticId, string title) =>
+        public static DiagnosticDescriptor CreateUtility(string diagnosticId, string title) =>
             new(diagnosticId,
                 title,
                 string.Empty,
