@@ -18,8 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.IO;
+#if NETFRAMEWORK
 using System.Resources;
+#endif
+using System.IO;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
