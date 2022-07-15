@@ -4,18 +4,13 @@
 This script allows to download metadata for the given language from RSPEC repository.
 
 .DESCRIPTION
-This script allows to download metadata for the given language from RSPEC repository:
-https://jira.sonarsource.com/browse/RSPEC
+This script allows to download metadata for the given language from RSPEC repository.
 If you want to add a rule to both c# and vb.net execute the operation for each language.
 
 Usage: rspec.ps1
     [cs|vbnet]        The language to synchronize
     <rulekey>         The specific rule to synchronize
     <className>       The name to use for the automatically generated classes
-
-NOTES:
-- All operations recreate the projects' resources, do not edit manually.
-
 #>
 param (
     [Parameter(Mandatory = $true, HelpMessage = "language: cs or vbnet", Position = 0)]
@@ -327,10 +322,10 @@ else {
 Write-Host "Ran rule-api, will move back to root"
 popd
 
-$csRuleData = GetRulesInfo "cs"
-$vbRuleData = GetRulesInfo "vbnet"
 
 if ($className -And $ruleKey) {
+    $csRuleData = GetRulesInfo "cs"
+    $vbRuleData = GetRulesInfo "vbnet"
     if ($language -eq "cs") {
        GenerateCsRuleClasses
        UpdateTestEntry $csRuleData
@@ -342,6 +337,3 @@ if ($className -And $ruleKey) {
        GenerateBaseClassIfSecondLanguage
     }
 }
-
-# Generate RspecStrings.resx using the new metadata
-Invoke-Expression -Command "& { scripts\rspec\rspec2resx.ps1 $language .\analyzers\rspec\$language $sonarpediaFolder\RspecStrings.resx }"
