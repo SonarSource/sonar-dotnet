@@ -26,7 +26,7 @@ using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
-    public static class DiagnosticDescriptorBuilder
+    public static class DiagnosticDescriptorFactory
     {
         public static readonly string SonarWayTag = "SonarWay";
         public static readonly string UtilityTag = "Utility";

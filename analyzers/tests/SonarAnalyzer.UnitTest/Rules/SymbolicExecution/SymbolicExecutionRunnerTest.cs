@@ -314,7 +314,7 @@ End Sub");
         string s = null;   // Noncompliant {{Message for SMain}} - this should be raised only once
     }
 }";
-            var another = TestHelper.CreateDescriptor("SAnother", DiagnosticDescriptorBuilder.MainSourceScopeTag);
+            var another = TestHelper.CreateDescriptor("SAnother", DiagnosticDescriptorFactory.MainSourceScopeTag);
             var sut = new ConfigurableSERunnerCS();
             sut.RegisterRule<MainScopeAssignmentRuleCheck>(MainScopeAssignmentRuleCheck.SMain);
             sut.RegisterRule<MainScopeAssignmentRuleCheck>(another);     // Register the same RuleCheck with another ID
@@ -349,7 +349,7 @@ End Sub");
         public void Analyze_Severity_DoesNotExecutesWhenNone() =>
             Verify(@"string s = null;   // Compliant, SMain and SAll are suppressed by test framework, because only 'SAnother' is active
                      s.ToString();      // Compliant, should not raise S2259",
-                TestHelper.CreateDescriptor("SAnother", DiagnosticDescriptorBuilder.MainSourceScopeTag));
+                TestHelper.CreateDescriptor("SAnother", DiagnosticDescriptorFactory.MainSourceScopeTag));
 
         [TestMethod]
         public void Analyze_ShouldExecute_ExcludesCheckFromExecution()

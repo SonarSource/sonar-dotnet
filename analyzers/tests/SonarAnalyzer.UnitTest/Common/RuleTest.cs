@@ -154,7 +154,7 @@ namespace SonarAnalyzer.UnitTest.Common
             {
                 if (descriptor.IsEnabledByDefault)
                 {
-                    descriptor.CustomTags.Should().Contain(DiagnosticDescriptorBuilder.SonarWayTag, $"{descriptor.Id} should be in SonarWay");
+                    descriptor.CustomTags.Should().Contain(DiagnosticDescriptorFactory.SonarWayTag, $"{descriptor.Id} should be in SonarWay");
                 }
             }
         }
@@ -181,7 +181,7 @@ namespace SonarAnalyzer.UnitTest.Common
         {
             foreach (var diagnostic in RuleFinder.RuleAnalyzerTypes.SelectMany(SupportedDiagnostics))
             {
-                diagnostic.CustomTags.Should().NotContain(DiagnosticDescriptorBuilder.UtilityTag);
+                diagnostic.CustomTags.Should().NotContain(DiagnosticDescriptorFactory.UtilityTag);
             }
         }
 
@@ -190,7 +190,7 @@ namespace SonarAnalyzer.UnitTest.Common
         {
             foreach (var diagnostic in RuleFinder.UtilityAnalyzerTypes.SelectMany(SupportedDiagnostics))
             {
-                diagnostic.CustomTags.Should().Contain(DiagnosticDescriptorBuilder.UtilityTag);
+                diagnostic.CustomTags.Should().Contain(DiagnosticDescriptorFactory.UtilityTag);
             }
         }
 
@@ -297,7 +297,7 @@ namespace SonarAnalyzer.UnitTest.Common
             ((DiagnosticAnalyzer)Activator.CreateInstance(type)).SupportedDiagnostics;
 
         private static bool IsSonarWay(DiagnosticDescriptor diagnostic) =>
-            diagnostic.CustomTags.Contains(DiagnosticDescriptorBuilder.SonarWayTag);
+            diagnostic.CustomTags.Contains(DiagnosticDescriptorFactory.SonarWayTag);
 
         private static bool IsDeprecated(DiagnosticDescriptor diagnostic)
         {
@@ -335,7 +335,7 @@ namespace SonarAnalyzer.UnitTest.Common
         [DiagnosticAnalyzer(LanguageNames.CSharp)]
         private class ConcurrentExecutionReader : SonarDiagnosticAnalyzer
         {
-            private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor("S9999", "Rule test");
+            private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorFactory.GetUtilityDescriptor("S9999", "Rule test");
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
             public new bool? IsConcurrentExecutionEnabled { get; private set; }

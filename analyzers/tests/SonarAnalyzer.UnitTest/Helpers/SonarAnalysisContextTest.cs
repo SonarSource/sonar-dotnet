@@ -126,7 +126,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var sonarProjectConfig = TestHelper.CreateSonarProjectConfig(nameof(WhenProjectType_IsTest_RunRulesWithTestScope_SonarLint), ProjectType.Test, false);
             foreach (var testCase in testCases)
             {
-                var hasTestScope = testCase.Analyzer.SupportedDiagnostics.Any(d => d.CustomTags.Contains(DiagnosticDescriptorBuilder.TestSourceScopeTag));
+                var hasTestScope = testCase.Analyzer.SupportedDiagnostics.Any(d => d.CustomTags.Contains(DiagnosticDescriptorFactory.TestSourceScopeTag));
                 if (hasTestScope)
                 {
                     testCase.Verifier
@@ -151,7 +151,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var sonarProjectConfig = TestHelper.CreateSonarProjectConfig(nameof(WhenProjectType_IsTest_RunRulesWithTestScope_Scanner), ProjectType.Test);
             foreach (var testCase in testCases)
             {
-                var hasProductScope = testCase.Analyzer.SupportedDiagnostics.Any(d => d.CustomTags.Contains(DiagnosticDescriptorBuilder.MainSourceScopeTag));
+                var hasProductScope = testCase.Analyzer.SupportedDiagnostics.Any(d => d.CustomTags.Contains(DiagnosticDescriptorFactory.MainSourceScopeTag));
                 if (hasProductScope)
                 {
                     // MAIN-only and MAIN & TEST rules
@@ -176,7 +176,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var sonarProjectConfig = TestHelper.CreateSonarProjectConfig(nameof(WhenProjectType_IsTest_RunRulesWithMainScope), ProjectType.Product);
             foreach (var testCase in testCases)
             {
-                var hasProductScope = testCase.Analyzer.SupportedDiagnostics.Any(d => d.CustomTags.Contains(DiagnosticDescriptorBuilder.MainSourceScopeTag));
+                var hasProductScope = testCase.Analyzer.SupportedDiagnostics.Any(d => d.CustomTags.Contains(DiagnosticDescriptorFactory.MainSourceScopeTag));
                 if (hasProductScope)
                 {
                     testCase.Verifier

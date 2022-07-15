@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules
         protected override bool EnableConcurrentExecution => false;
 
         protected UtilityAnalyzerBase(string diagnosticId, string title) =>
-            rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor(diagnosticId, title);
+            rule = DiagnosticDescriptorFactory.GetUtilityDescriptor(diagnosticId, title);
 
         internal static TextRange GetTextRange(FileLinePositionSpan lineSpan) =>
             new TextRange
