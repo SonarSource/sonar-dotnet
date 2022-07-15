@@ -30,7 +30,7 @@
         for (int i = 0; i < 42; i++)
         {
             var (i, j) = (1, 2); // Error [CS0128] - FN - we still check for SonarLint as it analyzes also code with compile errors.
-            _ = (1, 2) is var (i, b); // Error [CS0128] - FN - we still check for SonarLint as it analyzes also code with compile errors. 
+            _ = (1, 2) is var (i, b); // Error [CS0128] - FN - we still check for SonarLint as it analyzes also code with compile errors.
         }
 
         for (var i = (a: 1, b: 2); i is (a: < 10, _); i = (++i.a, ++i.b))
@@ -39,10 +39,38 @@
             i.a = 1;    // FN
         }
 
+        for (var (i, j, _) = (0, 0, 0); i < 10; ++i, ++j)
+        {
+            i = 0;  // Noncompliant
+            _ = 0;  // Compliant. This discard does not refer to the other one.
+        }
+
+        for ((int i, int j, var _, _) = (0, 0, 0, 0); i < 10; ++i, ++j)
+        {
+            i = 0;  // Noncompliant
+            _ = 0;  // Compliant. This discard does not refer to the other ones.
+        }
+
+        int k, l, m;
+        for ((k, l) = (0, 0), m = 0; k < 10; ++k, ++l)
+        {
+            k = 0; // Noncompliant
+            m = 0; // Noncompliant
+        }
+
         for (int i = 0; i < 42; i++)
         {
             int a = 10;
             (a, var j) = t;
+        }
+    }
+
+    public void LocalNamedAsDiscard()
+    {
+        int i, _;
+        for ((i, _) = (0, 0); i < 10; ++i)
+        {
+            _ = 0; // Noncompliant. Here _ is not a discard but a local reference.
         }
     }
 }
