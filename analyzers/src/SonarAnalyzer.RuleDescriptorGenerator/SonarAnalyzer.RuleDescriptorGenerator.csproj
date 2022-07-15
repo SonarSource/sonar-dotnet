@@ -12,10 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Collections.Immutable" Version="1.1.37">
-      <!-- Downgrade System.Collections.Immutable to support VS2015 Update 3 -->
-      <NoWarn>NU1605, NU1701</NoWarn>
-    </PackageReference>
+    <!-- Roslyn packages are needed to properly load rule types at runtime -->
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="1.3.2" />
+    <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic.Workspaces" Version="1.3.2" />
     <!--  Manually upgrade since the version transitively linked (4.0.1) is marked as vulnerable by Mend. -->
     <PackageReference Include="System.IO.FileSystem" Version="4.3.0" />
   </ItemGroup>
