@@ -300,19 +300,6 @@
         "resolved": "4.3.0",
         "contentHash": "3qjaHvxQPDpSOYICjUoTsmoq5u6QJAFRUITgeT/4gqkF1bajbSmb1kwSxEA8AHlofqgcKJcM8udgieRNhaJ5Cg=="
       },
-      "System.IO.FileSystem": {
-        "type": "Transitive",
-        "resolved": "4.3.0",
-        "contentHash": "3wEMARTnuio+ulnvi+hkRNROYwa1kylvYahhcLk4HSoVdl+xxTFVeVlYOfLwrDPImGls0mDqbMhrza8qnWPTdA==",
-        "dependencies": {
-          "System.IO.FileSystem.Primitives": "4.3.0"
-        }
-      },
-      "System.IO.FileSystem.Primitives": {
-        "type": "Transitive",
-        "resolved": "4.3.0",
-        "contentHash": "6QOb2XFLch7bEc4lIcJH49nJN2HV+OC3fHDgsLVsBVBk3Y4hFAnOBGzJ2lUu7CyDDFo9IBWkSsnbkT6IBwwiMw=="
-      },
       "System.IO.Pipelines": {
         "type": "Transitive",
         "resolved": "5.0.1",
@@ -433,13 +420,7 @@
         }
       },
       "sonaranalyzer.ruledescriptorgenerator": {
-        "type": "Project",
-        "dependencies": {
-          "SonarAnalyzer": "1.0.0",
-          "SonarAnalyzer.Utilities": "1.0.0",
-          "System.Collections.Immutable": "1.1.37",
-          "System.IO.FileSystem": "4.3.0"
-        }
+        "type": "Project"
       },
       "sonaranalyzer.utilities": {
         "type": "Project",
@@ -2044,7 +2025,6 @@
         "type": "Project",
         "dependencies": {
           "SonarAnalyzer": "1.0.0",
-          "SonarAnalyzer.Utilities": "1.0.0",
           "System.Collections.Immutable": "1.1.37",
           "System.IO.FileSystem": "4.3.0"
         }
