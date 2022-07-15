@@ -173,29 +173,28 @@ function GenerateBaseClassIfSecondLanguage()
         $existingCSClassText = Get-Content -Path "${csRulesFolder}\\${csClassName}.cs" -Raw
         $existingVBClassText = Get-Content -Path "${vbRulesFolder}\\${vbClassName}.cs" -Raw
 
-        $oldCsClass ="    public sealed class ${csClassName} : SonarDiagnosticAnalyzer"
-        $newCsClass ="    public sealed class ${csClassName} : ${className}Base<SyntaxKind>"
-        $oldVbClass ="    public sealed class ${vbClassName} : SonarDiagnosticAnalyzer"
-        $newVbClass ="    public sealed class ${vbClassName} : ${className}Base<SyntaxKind>"
+        $oldCsClass ="public sealed class ${csClassName} : SonarDiagnosticAnalyzer"
+        $newCsClass ="public sealed class ${csClassName} : ${className}Base<SyntaxKind>"
+        $oldVbClass ="public sealed class ${vbClassName} : SonarDiagnosticAnalyzer"
+        $newVbClass ="public sealed class ${vbClassName} : ${className}Base<SyntaxKind>"
         $existingCSClassText = ReplaceTextInString -oldText $oldCsClass -newText $newCsClass -modifiableString $existingCSClassText
         $existingVBClassText = ReplaceTextInString -oldText $oldVbClass -newText $newVbClass -modifiableString $existingVBClassText
 
-        $diagnosticIdToken = "        private const string DiagnosticId = ""${ruleKey}"";"
+        $diagnosticIdToken = "    private const string DiagnosticId = ""${ruleKey}"";"
         $existingCSClassText = RemoveText -textToRemove $diagnosticIdToken -modifiableString $existingCSClassText
         $existingVBClassText = RemoveText -textToRemove $diagnosticIdToken -modifiableString $existingVBClassText
 
-        $messageFormatToken = "       private const string MessageFormat = """";"
+        $messageFormatToken = "   private const string MessageFormat = ""FIXME"";"
         $existingCSClassText = RemoveText -textToRemove $messageFormatToken -modifiableString $existingCSClassText
         $existingVBClassText = RemoveText -textToRemove $messageFormatToken -modifiableString $existingVBClassText
 
-        $ruleToken = "        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);"
+        $ruleToken = "    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);"
         $existingCSClassText = RemoveText -textToRemove $ruleToken -modifiableString $existingCSClassText
         $existingVBClassText = RemoveText -textToRemove $ruleToken -modifiableString $existingVBClassText
 
-        $supportedDiagToken = "        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);"
-        $csLanguageFacadeToken = "        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;"
-        $vbLanguageFacadeToken = "        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;"
-
+        $supportedDiagToken = "    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);"
+        $csLanguageFacadeToken = "    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;"
+        $vbLanguageFacadeToken = "    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;"
         $existingCSClassText = ReplaceTextInString -oldText $supportedDiagToken -newText $csLanguageFacadeToken -modifiableString $existingCSClassText
         $existingVBClassText = ReplaceTextInString -oldText $supportedDiagToken -newText $vbLanguageFacadeToken -modifiableString $existingVBClassText
 
@@ -240,7 +239,8 @@ function AppendVbTestCase($ruleTestsFolder) {
     $usingTokenCS = "using CS = SonarAnalyzer.Rules.CSharp;"
     $usingTokenVB = "using VB = SonarAnalyzer.Rules.VisualBasic;"
     $namespaceToken = "namespace SonarAnalyzer.UnitTest.Rules"
-    $token = "    }"
+    $oldToken = "    }" # For files using old namespaces
+    $newToken = "}"     # For files using file scoped namespaces
 
     $text = Get-Content -Path "${ruleTestsFolder}\\${csClassName}Test.cs" -Raw
     $methodVB = Get-Content -Path "${RuleTemplateFolder}\\TestMethod.VB.cs" -Raw
@@ -250,6 +250,7 @@ function AppendVbTestCase($ruleTestsFolder) {
         $text = $text.Remove($usingTokenIdx, $usingToken.Length + 1)
     }
 
+    $token = if ($text.Contains("${namespaceToken};")) {$newToken} else {$oldToken}
     $idx = $text.LastIndexOf($token)
     if ($idx -gt -1) {
         $text = $text.Insert($idx, "`n${methodVB}")

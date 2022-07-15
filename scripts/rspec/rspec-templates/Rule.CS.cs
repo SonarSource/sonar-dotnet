@@ -27,27 +27,26 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.CSharp;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class $DiagnosticClassName$ : SonarDiagnosticAnalyzer
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class $DiagnosticClassName$ : SonarDiagnosticAnalyzer
-    {
-        private const string DiagnosticId = "$DiagnosticId$";
-        private const string MessageFormat = "";
+    private const string DiagnosticId = "$DiagnosticId$";
+    private const string MessageFormat = "FIXME";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            {
+                var node = c.Node;
+                if (true)
                 {
-                    var node = c.Node;
-                    if (true)
-                    {
-                        c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
-                    }
-                },
-                SyntaxKind.InvocationExpression);
-    }
+                    c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
+                }
+            },
+            SyntaxKind.InvocationExpression);
 }

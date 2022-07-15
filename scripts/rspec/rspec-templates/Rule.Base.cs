@@ -23,21 +23,14 @@ using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules
+namespace SonarAnalyzer.Rules;
+
+public abstract class $DiagnosticClassName$Base<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+    where TSyntaxKind : struct
 {
-    public abstract class $DiagnosticClassName$Base<TSyntaxKind> : SonarDiagnosticAnalyzer
-        where TSyntaxKind : struct
-    {
-        protected const string DiagnosticId = "$DiagnosticId$";
-        private const string MessageFormat = "";
+    private const string DiagnosticId = "$DiagnosticId$";
 
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
+    protected override string MessageFormat => "FIXME";
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
-
-        protected DiagnosticDescriptor Rule { get; }
-
-        protected $DiagnosticClassName$Base() =>
-            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
-    }
+    protected $DiagnosticClassName$Base() : base(DiagnosticId) { }
 }
