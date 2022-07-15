@@ -23,7 +23,6 @@ extern alias vbnet;
 
 using SonarAnalyzer.Common;
 using SonarAnalyzer.UnitTest.Helpers;
-using SonarAnalyzer.Utilities;
 
 using static SonarAnalyzer.UnitTest.TestHelper;
 

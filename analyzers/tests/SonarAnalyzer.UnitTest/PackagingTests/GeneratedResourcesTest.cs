@@ -21,8 +21,6 @@
 using System.IO;
 using System.Text.RegularExpressions;
 using SonarAnalyzer.Common;
-using SonarAnalyzer.Rules;
-using SonarAnalyzer.Utilities;
 
 namespace SonarAnalyzer.UnitTest.PackagingTests
 {
@@ -82,7 +80,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
         }
 
         private static string[] SortedRulesFromDetailBuilder(AnalyzerLanguage language) =>
-            RuleDetailBuilder.GetAllRuleDetails(language).Select(x => x.Key).OrderBy(x => x).ToArray();
+            RuleFinder.CreateAnalyzers(language, false).SelectMany(x => x.SupportedDiagnostics).Select(x => x.Id).Distinct().OrderBy(x => x).ToArray();
 
         private static string RuleFromFileName(string fileName)
         {
