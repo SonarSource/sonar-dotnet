@@ -24,6 +24,7 @@ import org.sonar.api.SonarEdition;
 import org.sonar.api.SonarQubeSide;
 import org.sonar.api.SonarRuntime;
 import org.sonar.api.internal.SonarRuntimeImpl;
+import org.sonar.api.rule.RuleStatus;
 import org.sonar.api.rules.RuleType;
 import org.sonar.api.server.debt.DebtRemediationFunction;
 import org.sonar.api.server.rule.RulesDefinition;
@@ -48,10 +49,16 @@ public class VbNetSonarRulesDefinitionTest {
     assertThat(context.repositories()).hasSize(1);
     assertThat(context.repository("vbnet").rules()).isNotEmpty();
 
-    Rule s100 = context.repository("vbnet").rule("S1197");
-    assertThat(s100.debtRemediationFunction().type()).isEqualTo(DebtRemediationFunction.Type.CONSTANT_ISSUE);
-    assertThat(s100.debtRemediationFunction().baseEffort()).isEqualTo("5min");
-    assertThat(s100.type()).isEqualTo(RuleType.CODE_SMELL);
+    Rule s1197 = context.repository("vbnet").rule("S1197");
+
+    assertThat(s1197.name()).isEqualTo("Array designators \"()\" should be on the type, not the variable");
+    assertThat(s1197.type()).isEqualTo(RuleType.CODE_SMELL);
+    assertThat(s1197.status()).isEqualTo(RuleStatus.READY);
+    assertThat(s1197.severity()).isEqualTo("MINOR");
+    assertThat(s1197.debtRemediationFunction().type()).isEqualTo(DebtRemediationFunction.Type.CONSTANT_ISSUE);
+    assertThat(s1197.debtRemediationFunction().baseEffort()).isEqualTo("5min");
+    assertThat(s1197.params()).isEmpty();
+    assertThat(s1197.tags()).hasSize(1).containsExactly("convention");
   }
 
   @Test
@@ -79,13 +86,13 @@ public class VbNetSonarRulesDefinitionTest {
   }
 
   @Test
-  public void test_all_rules_have_status_set(){
+  public void test_all_rules_have_status_set() {
     VbNetSonarRulesDefinition definition = new VbNetSonarRulesDefinition(SONAR_RUNTIME);
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
     RulesDefinition.Repository repository = context.repository("vbnet");
 
-    for (RulesDefinition.Rule rule:repository.rules()) {
+    for (RulesDefinition.Rule rule : repository.rules()) {
       assertThat(rule.status()).isNotNull();
     }
   }

@@ -1,7 +1,11 @@
 {
-  "title": "bla bla",
+  "title": "Constant remediation",
   "type": "SECURITY_HOTSPOT",
   "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
   "tags": [
     "cwe",
     "owasp-a10",

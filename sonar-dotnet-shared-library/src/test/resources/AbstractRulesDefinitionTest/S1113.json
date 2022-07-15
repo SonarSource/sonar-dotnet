@@ -1,5 +1,5 @@
 {
-  "title": "Inheritance tree of classes should not be too deep",
+  "title": "Linear with offset remediation",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
@@ -8,12 +8,8 @@
     "linearOffset": "4h",
     "linearFactor": "30min"
   },
-  "tags": [
-    "design"
-  ],
-  "defaultSeverity": "Major",
-  "ruleSpecification": "RSPEC-110",
-  "sqKey": "S110",
-  "scope": "All",
-  "quickfix": "unknown"
+  "tags": [],
+  "defaultSeverity": "Critical",
+  "ruleSpecification": "RSPEC-1111",
+  "scope": "Main"
 }

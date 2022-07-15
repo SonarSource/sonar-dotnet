@@ -31,6 +31,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Rules;
 using SonarAnalyzer.Utilities;
 
 namespace SonarAnalyzer.RuleDescriptorGenerator
@@ -93,7 +94,7 @@ namespace SonarAnalyzer.RuleDescriptorGenerator
         private static Type[] LoadAnalyzerTypes(string path) =>
             Assembly.LoadFrom(path)  // We don't need 'Load', we have full control over the environment. It would make local build too complicated.
                 .ExportedTypes
-                .Where(x => !x.IsAbstract && typeof(DiagnosticAnalyzer).IsAssignableFrom(x))
+                .Where(x => !x.IsAbstract && typeof(DiagnosticAnalyzer).IsAssignableFrom(x) && !typeof(UtilityAnalyzerBase).IsAssignableFrom(x))
                 .ToArray();
 
         private static Rule[] LoadRules(Type[] analyzers) =>

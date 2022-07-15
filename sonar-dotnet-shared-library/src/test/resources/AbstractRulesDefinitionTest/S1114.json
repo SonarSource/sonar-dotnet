@@ -1,0 +1,9 @@
+{
+  "title": "No remediation",
+  "type": "SECURITY_HOTSPOT",
+  "status": "ready",
+  "tags": [],
+  "defaultSeverity": "Critical",
+  "ruleSpecification": "RSPEC-1111",
+  "scope": "Main"
+}

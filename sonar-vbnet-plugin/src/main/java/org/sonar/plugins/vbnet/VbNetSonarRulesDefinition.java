@@ -23,19 +23,15 @@ import org.sonar.api.SonarRuntime;
 import org.sonar.api.scanner.ScannerSide;
 import org.sonarsource.dotnet.shared.plugins.AbstractRulesDefinition;
 
+import static org.sonar.plugins.vbnet.VbNetPlugin.LANGUAGE_KEY;
 import static org.sonar.plugins.vbnet.VbNetPlugin.REPOSITORY_KEY;
-import static org.sonar.plugins.vbnet.VbNetPlugin.REPOSITORY_NAME;
 
 @ScannerSide
 public class VbNetSonarRulesDefinition extends AbstractRulesDefinition {
-  private static final String RULES_XML = "/org/sonar/plugins/vbnet/rules.xml";
+  private static final String RESOURCES_DIRECTORY = "/org/sonar/plugins/vbnet/";
+  private static final String METADATA_SUFFIX = "_vb.net";
 
   public VbNetSonarRulesDefinition(SonarRuntime sonarRuntime) {
-    super(REPOSITORY_KEY, REPOSITORY_NAME, VbNetPlugin.LANGUAGE_KEY, RULES_XML, sonarRuntime);
-  }
-
-  @Override
-  protected String getRuleJson(String ruleKey) {
-    return "/org/sonar/plugins/vbnet/" + ruleKey + "_vb.net.json";
+    super(REPOSITORY_KEY, LANGUAGE_KEY, sonarRuntime, RESOURCES_DIRECTORY, METADATA_SUFFIX);
   }
 }

@@ -23,19 +23,16 @@ import org.sonar.api.SonarRuntime;
 import org.sonar.api.scanner.ScannerSide;
 import org.sonarsource.dotnet.shared.plugins.AbstractRulesDefinition;
 
+import static org.sonar.plugins.csharp.CSharpPlugin.LANGUAGE_KEY;
 import static org.sonar.plugins.csharp.CSharpPlugin.REPOSITORY_KEY;
-import static org.sonar.plugins.csharp.CSharpPlugin.REPOSITORY_NAME;
 
 @ScannerSide
 public class CSharpSonarRulesDefinition extends AbstractRulesDefinition {
-  private static final String RULES_XML = "/org/sonar/plugins/csharp/rules.xml";
+
+  private static final String RESOURCES_DIRECTORY = "/org/sonar/plugins/csharp/";
+  private static final String METADATA_SUFFIX = "_c#";
 
   public CSharpSonarRulesDefinition(SonarRuntime sonarRuntime) {
-    super(REPOSITORY_KEY, REPOSITORY_NAME, CSharpPlugin.LANGUAGE_KEY, RULES_XML, sonarRuntime);
-  }
-
-  @Override
-  protected String getRuleJson(String ruleKey) {
-    return "/org/sonar/plugins/csharp/" + ruleKey + "_c#.json";
+    super(REPOSITORY_KEY, LANGUAGE_KEY, sonarRuntime, RESOURCES_DIRECTORY, METADATA_SUFFIX);
   }
 }
