@@ -36,7 +36,7 @@ dotnet_diagnostic.Sxxx.severity = none
 ## Related Pages
 * [Importing External Issues](/analysis/external-issues/) (VSTest, NUnit, MSTest, xUnit)
 * [Excluding External Roslyn Issues](/analysis/external-issues/) (See "Notes on external .NET issues")
-* [Test Coverage & Execution](/analysis/coverage/) (Visual Studio Code Coverage, dotCover, OpenCover)
+* [Test Coverage & Execution](/analysis/test-coverage/dotnet-test-coverage/) (Visual Studio Code Coverage, dotCover, OpenCover, coverlet)
 * [SonarScanner for .NET](/analysis/scan/sonarscanner-for-msbuild/)
 * [SonarScanner for Azure DevOps](/analysis/scan/sonarscanner-for-azure-devops/)
 * [Analysis of product projects vs. test projects](https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects)
