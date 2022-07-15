@@ -49,7 +49,7 @@ Class Noncompliant
 End Class
 
 Class DoesNotCrash
-    Private Sub MethodWitoutIdentifier(__arglist)
-        MethodWitoutIdentifier("__arglist"(""))
+    Private Sub MethodWithoutIdentifier(__arglist)
+        MethodWithoutIdentifier("__arglist"(""))
     End Sub
 End Class

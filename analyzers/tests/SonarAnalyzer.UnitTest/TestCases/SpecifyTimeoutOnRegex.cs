@@ -68,9 +68,9 @@ class Noncompliant
 
 class DoesNotCrash
 {
-    void MethodWitoutIdentifier(__arglist)
+    void MethodWithoutIdentifier(__arglist)
     {
-        MethodWitoutIdentifier(__arglist(""));
+        MethodWithoutIdentifier(__arglist(""));
     }
 }
 
