@@ -21,7 +21,8 @@
         //          ^ @-1
 
         var (k, l) = (0, 0);     // Noncompliant [issue1,issue2]
-        (var m, var n) = (0, 0); // Noncompliant
+        (var m, var n) = (0, 0); // Noncompliant m is not declared as field
+        //          ^
         var (o, p) = (0, 0);     // Noncompliant
         (var a, var b) = (0, 0); // Compliant
         var (c, d) = (0, 0);     // Compliant
