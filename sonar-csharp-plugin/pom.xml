@@ -152,7 +152,6 @@
       <resource>
         <directory>${sonarAnalyzer.workDirectory}</directory>
         <includes>
-          <include>org/sonar/plugins/csharp/*.xml</include>
           <include>org/sonar/plugins/csharp/*.json</include>
           <include>org/sonar/plugins/csharp/*.html</include>
           <include>static/version.txt</include>
@@ -216,8 +215,8 @@
             <configuration>
               <rules>
                 <requireFilesSize>
-                  <maxsize>5800000</maxsize>
-                  <minsize>5600000</minsize>
+                  <maxsize>5700000</maxsize>
+                  <minsize>5500000</minsize>
                   <files>
                     <file>${project.build.directory}/${project.build.finalName}.jar</file>
                   </files>
@@ -253,10 +252,6 @@
                 <zip destfile="${sonarAnalyzer.workDirectory}/static/SonarAnalyzer-${project.version}.zip"
                      basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp"/>
                 <copy todir="${sonarAnalyzer.workDirectory}/org/sonar/plugins/csharp">
-                  <fileset
-                    dir="${analyzers.directory}/src/SonarAnalyzer.RuleDescriptorGenerator/bin/Release/net46/cs">
-                    <include name="rules.xml"/>
-                  </fileset>
                   <fileset dir="${analyzers.directory}/rspec/cs">
                     <include name="*.json"/>
                     <include name="*.html"/>
