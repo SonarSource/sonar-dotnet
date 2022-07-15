@@ -210,7 +210,7 @@ pushd $SonarpediaFolder
 
 if ($RuleKey) {
     if ($RspecBranch) {
-#FIXME        java "-Dline.separator=`n" -jar $RuleApiJar generate -rule $RuleKey -branch $RspecBranch
+        java "-Dline.separator=`n" -jar $RuleApiJar generate -rule $RuleKey -branch $RspecBranch
     }
     else {
         java "-Dline.separator=`n" -jar $RuleApiJar generate -rule $RuleKey
