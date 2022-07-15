@@ -23,7 +23,6 @@
 using System.IO;
 using System.Text.RegularExpressions;
 using SonarAnalyzer.Common;
-using SonarAnalyzer.Utilities;
 
 namespace SonarAnalyzer.UnitTest.Common;
 

@@ -16,8 +16,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B7233F78
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.Common", "src\SonarAnalyzer.Common\SonarAnalyzer.Common.csproj", "{8A8A663E-1318-4361-BC97-2E63666FEADB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.Utilities", "src\SonarAnalyzer.Utilities\SonarAnalyzer.Utilities.csproj", "{664E86BD-0863-49D5-B343-141CEAF47F4A}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.UnitTest", "tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj", "{E11606CA-A186-4FEE-BA30-B1688747CD1A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.RuleDescriptorGenerator", "src\SonarAnalyzer.RuleDescriptorGenerator\SonarAnalyzer.RuleDescriptorGenerator.csproj", "{07E31F39-7419-4B4E-998E-C2BF1A6BB91C}"
@@ -73,11 +71,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.SourceGenerators", "src\SonarAnalyzer.SourceGenerators\SonarAnalyzer.SourceGenerators.csproj", "{76D6EBB8-D2B0-41C1-8880-027EC78CB7FF}"
 EndProject
 Global
-	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		src\SonarAnalyzer.Shared\SonarAnalyzer.Shared.projitems*{7cfa8fa5-8842-4e89-bb90-39d5c0f20ba8}*SharedItemsImports = 5
-		src\SonarAnalyzer.Shared\SonarAnalyzer.Shared.projitems*{892cf3fa-3be2-42e8-a7e6-76ae72864dec}*SharedItemsImports = 13
-		src\SonarAnalyzer.Shared\SonarAnalyzer.Shared.projitems*{ca8eec07-8775-42e3-91eb-e51f4db72a48}*SharedItemsImports = 5
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -87,10 +80,6 @@ Global
 		{8A8A663E-1318-4361-BC97-2E63666FEADB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A8A663E-1318-4361-BC97-2E63666FEADB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A8A663E-1318-4361-BC97-2E63666FEADB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{664E86BD-0863-49D5-B343-141CEAF47F4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{664E86BD-0863-49D5-B343-141CEAF47F4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{664E86BD-0863-49D5-B343-141CEAF47F4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{664E86BD-0863-49D5-B343-141CEAF47F4A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E11606CA-A186-4FEE-BA30-B1688747CD1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E11606CA-A186-4FEE-BA30-B1688747CD1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E11606CA-A186-4FEE-BA30-B1688747CD1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -159,5 +148,10 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4259CA71-C565-42DD-8D58-F59819A11065}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		src\SonarAnalyzer.Shared\SonarAnalyzer.Shared.projitems*{7cfa8fa5-8842-4e89-bb90-39d5c0f20ba8}*SharedItemsImports = 5
+		src\SonarAnalyzer.Shared\SonarAnalyzer.Shared.projitems*{892cf3fa-3be2-42e8-a7e6-76ae72864dec}*SharedItemsImports = 13
+		src\SonarAnalyzer.Shared\SonarAnalyzer.Shared.projitems*{ca8eec07-8775-42e3-91eb-e51f4db72a48}*SharedItemsImports = 5
 	EndGlobalSection
 EndGlobal

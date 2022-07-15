@@ -21,7 +21,6 @@
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.Rules;
-using SonarAnalyzer.Utilities;
 using UsingCookies = SonarAnalyzer.UnitTest.Rules.UsingCookies;
 
 namespace SonarAnalyzer.UnitTest.Common

@@ -20,7 +20,6 @@
 
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Rules.CSharp;
-using SonarAnalyzer.Utilities;
 
 namespace SonarAnalyzer.UnitTest.Common
 {

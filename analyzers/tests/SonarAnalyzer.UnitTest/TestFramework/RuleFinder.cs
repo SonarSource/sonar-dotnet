@@ -18,18 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeFixes;
-using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
-using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules;
 
-namespace SonarAnalyzer.Utilities
+namespace SonarAnalyzer.UnitTest.TestFramework
 {
     internal static class RuleFinder
     {
@@ -40,7 +34,12 @@ namespace SonarAnalyzer.Utilities
 
         static RuleFinder()
         {
-            var allTypes = new[] { typeof(Rules.CSharp.FlagsEnumZeroMember), typeof(Rules.VisualBasic.FlagsEnumZeroMember), typeof(Rules.Common.FlagsEnumZeroMemberBase<int>) }
+            var allTypes = new[]
+            {
+                typeof(SonarAnalyzer.Rules.CSharp.FlagsEnumZeroMember),
+                typeof(SonarAnalyzer.Rules.VisualBasic.FlagsEnumZeroMember),
+                typeof(SonarAnalyzer.Rules.Common.FlagsEnumZeroMemberBase<int>)
+            }
                 .SelectMany(x => x.Assembly.GetExportedTypes())
                 .ToArray();
             CodeFixTypes = allTypes.Where(x => typeof(CodeFixProvider).IsAssignableFrom(x) && x.GetCustomAttributes<ExportCodeFixProviderAttribute>().Any()).ToArray();
