@@ -23,14 +23,4 @@ using System.Diagnostics.CodeAnalysis;
 namespace SonarAnalyzer.RuleDescriptorGenerator;
 
 [ExcludeFromCodeCoverage]
-public class Rule   // ToDo: Use records after changing target framework
-{
-    public string Id { get; }
-    public RuleParameter[] Parameters { get; }
-
-    public Rule(string id, RuleParameter[] parameters)
-    {
-        Id = id;
-        Parameters = parameters;
-    }
-}
+public record Rule(string Id, RuleParameter[] Parameters);
