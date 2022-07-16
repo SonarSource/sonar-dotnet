@@ -395,10 +395,6 @@ public class Sample
                 .StartWith("Analyzer 'SonarAnalyzer.UnitTest.Rules.SymbolicExecution.SymbolicExecutionRunnerTest+ConfigurableSERunnerCS' threw an exception of type 'SonarAnalyzer.SymbolicExecution.SymbolicExecutionException' with message 'Error processing method: Method ## Method file: snippet1.cs ## Method line: 4,4 ## Inner exception: System.InvalidOperationException: This check is not useful. ##    at SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution.ThrowAssignmentRuleCheck.PostProcessSimple(SymbolicContext context)");
         }
 
-        [TestMethod]
-        public void Analyze_DeconstructionOfNestedTuple() =>
-            Verify(@"var (_, (_, _)) = (1, (2, 3));", ProjectType.Product, null);
-
         private static void Verify(string body, params DiagnosticDescriptor[] onlyRules) =>
             Verify(body, ProjectType.Product, null, onlyRules);
 
