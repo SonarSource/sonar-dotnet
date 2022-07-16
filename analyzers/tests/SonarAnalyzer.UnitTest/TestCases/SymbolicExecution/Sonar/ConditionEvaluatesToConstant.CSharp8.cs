@@ -103,10 +103,9 @@ namespace Tests.Diagnostics
 
         public void NestedDeconstructionAssignment()
         {
-            var (a, (b, c)) = (true, (true, true));
+            var (a, (b, _)) = (true, (true, true));
             if (a) { }  // FN
             if (b) { }  // FN
-            if (c) { }  // FN
         }
 
         int UsingDeclaration_Null()
