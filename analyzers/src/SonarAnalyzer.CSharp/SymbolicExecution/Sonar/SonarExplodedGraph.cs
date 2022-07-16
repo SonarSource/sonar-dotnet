@@ -639,17 +639,14 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar
             {
                 if (ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(variable))
                 {
-                    programState = VisitParenthesizedVariableDesignationSyntax((ParenthesizedVariableDesignationSyntaxWrapper)variable, programState);
+                    continue;
                 }
-                else
-                {
-                    var variableSymbol = SemanticModel.GetDeclaredSymbol(variable);
-                    var variableSymbolicValue = SymbolicValue.Create(variableSymbol.GetSymbolType());
+                var variableSymbol = SemanticModel.GetDeclaredSymbol(variable);
+                var variableSymbolicValue = SymbolicValue.Create(variableSymbol.GetSymbolType());
 
-                    // No symbolic values are created and pushed to the stack since they are not currently used.
-                    // See also VisitSimpleAssignment where ParenthesizedVariableDesignationSyntaxWrapper are handled.
-                    programState = programState.StoreSymbolicValue(variableSymbol, variableSymbolicValue);
-                }
+                // No symbolic values are created and pushed to the stack since they are not currently used.
+                // See also VisitSimpleAssignment where ParenthesizedVariableDesignationSyntaxWrapper are handled.
+                programState = programState.StoreSymbolicValue(variableSymbol, variableSymbolicValue);
             }
 
             return programState;
