@@ -71,14 +71,15 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void EmptyMethod_WithVirtualOverride_DoesNotRaiseIssuesForTestProject_CS() =>
-            OldVerifier.VerifyNoIssueReportedInTest(@"TestCases\EmptyMethod.OverrideVirtual.cs", new CS.EmptyMethod());
+            verifierCS
+                .AddPaths("EmptyMethod.OverrideVirtual.cs").AddTestReference().VerifyNoIssueReported();
 
         [TestMethod]
         public void EmptyMethod_WithVirtualOverride_RaisesIssueForMainProject_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\EmptyMethod.OverrideVirtual.vb", new VB.EmptyMethod());
+            verifierVB.AddPaths("EmptyMethod.OverrideVirtual.vb").Verify();
 
         [TestMethod]
         public void EmptyMethod_WithVirtualOverride_DoesNotRaiseIssuesForTestProject_VB() =>
-            OldVerifier.VerifyNoIssueReportedInTest(@"TestCases\EmptyMethod.OverrideVirtual.vb", new VB.EmptyMethod());
+            verifierVB.AddPaths("EmptyMethod.OverrideVirtual.vb").AddTestReference().VerifyNoIssueReported();
     }
 }
