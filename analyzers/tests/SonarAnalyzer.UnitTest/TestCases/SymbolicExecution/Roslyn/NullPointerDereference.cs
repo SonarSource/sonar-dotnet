@@ -27,7 +27,7 @@ namespace Tests.Diagnostics
             if (condition)
             {
                 M1(o.ToString()); // FIXME Non-compliant {{'o' is null on at least one execution path.}}
-//                 ^
+//                 * FIXME
             }
             else
             {
@@ -367,7 +367,7 @@ namespace Tests.Diagnostics
         void DoLearnFromConstants()
         {
             NullConst.ToString(); // FIXME Non-compliant
-//          ^^^^^^^^^
+//          ********* FIXME
         }
 
         void DoLearnFromAnyConstant1()
@@ -396,42 +396,42 @@ namespace Tests.Diagnostics
             object o = null;
             _foo1 = o;
             _foo1.ToString(); // FIXME Non-compliant
-//          ^^^^^
+//          ***** FIXME
         }
         void DumbestTestOnFoo2()
         {
             object o = null;
             _foo2 = o;
             _foo2.ToString(); // FIXME Non-compliant
-//          ^^^^^
+//          ***** FIXME
         }
         void DumbestTestOnFoo3()
         {
             object o = null;
             _foo3 = o;
             _foo3.ToString(); // FIXME Non-compliant
-//          ^^^^^
+//          ***** FIXME
         }
         void DumbestTestOnFoo4()
         {
             object o = null;
             _foo4 = o;
             _foo4.ToString(); // FIXME Non-compliant
-//          ^^^^^
+//          ***** FIXME
         }
         void DumbestTestOnFoo5()
         {
             object o = null;
             _foo5 = o;
             _foo5.ToString(); // FIXME Non-compliant
-//          ^^^^^
+//          ***** FIXME
         }
         void DumbestTestOnFoo8()
         {
             object o = null;
             _foo8 = o;
             _foo8.ToString(); // FIXME Non-compliant
-//          ^^^^^
+//          ***** FIXME
         }
         void DumbestTestOnFoo6()
         {
@@ -501,7 +501,7 @@ namespace Tests.Diagnostics
             _foo1 = null;
             var o = _foo1;
             o.ToString(); // FIXME Non-compliant
-//          ^
+//          * FIXME
         }
 
         void LearntConstraintsOnField()
@@ -509,7 +509,7 @@ namespace Tests.Diagnostics
             if (_foo1 == null)
             {
                 _foo1.ToString(); // FIXME Non-compliant
-//              ^^^^^
+//              ***** FIXME
             }
         }
 
@@ -518,7 +518,7 @@ namespace Tests.Diagnostics
             if (_bar == null)
             {
                 _bar.ToString(); // FIXME Non-compliant
-//              ^^^^
+//              **** FIXME
             }
         }
 
@@ -528,7 +528,7 @@ namespace Tests.Diagnostics
             {
                 var o = _foo1;
                 o.ToString(); // FIXME Non-compliant
-//              ^
+//              * FIXME
             }
         }
 
