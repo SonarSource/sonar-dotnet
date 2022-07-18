@@ -30,36 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
             .WithOnlyDiagnostics(new[] { NullPointerDereference.S2259 });
 
         [TestMethod]
-        public void NullPointerDereference_ValidatedNotNull() =>
-            verifierSonar.AddSnippet(@"
-using System;
-
-public sealed class ValidatedNotNullAttribute : Attribute { }
-
-public static class Guard
-{
-    public static void NotNull<T>([ValidatedNotNullAttribute] this T value, string name) where T : class
-    {
-        if (value == null)
-            throw new ArgumentNullException(name);
-    }
-}
-
-public static class Utils
-{
-    public static string ToUpper(string value)
-    {
-        Guard.NotNull(value, nameof(value));
-        if (value != null)
-        {
-            return value.ToUpper(); // Compliant
-        }
-        return value.ToUpper(); // Compliant
-    }
-}
-").Verify();
-
-        [TestMethod]
         public void NullPointerDereference_CS() =>
             verifierSonar.AddPaths("NullPointerDereference.cs").WithConcurrentAnalysis(false).Verify();
 
