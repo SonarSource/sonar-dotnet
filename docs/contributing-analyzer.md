@@ -34,8 +34,9 @@ In general, it is best to run commands from the Visual Studio Developer Command 
     - **JAVA_HOME** (e.g. `C:\Program Files\Java\jdk-11.0.2`)
     - **MSBUILD_PATH** - path to the MSBuild.exe executable (MSBuild 16 e.g. `C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe`)
     - **NUGET_PATH** - path to the nuget.exe executable (related to the [plugin integration tests](./contributing-plugin.md#integration-tests))
-    - **ORCHESTRATOR_CONFIG_URL** - url to orchestrator.properties file (for integration tests) in uri form (i.e. file:///c:/something/orchestrator.properties). TODO: where to get the file, where to place it and document to put that variable in "user" instead of "system"
-    - **RULE_API_PATH** - path to folder containing the rule api jar. The rule api jar can be found at [repox.jfrog](https://repox.jfrog.io/ui/artifactSearchResults?name=rule-api&type=artifacts)
+    - **Sonarsource internal only** These two steps require access to SonarSource internal resources and are not possible for external contributers
+        - **ORCHESTRATOR_CONFIG_URL** - url to orchestrator.properties file (for integration tests) in uri form (i.e. file:///c:/something/orchestrator.properties). See also: [Documentation in the orchestrator repository](https://github.com/sonarsource/orchestrator#configuration)
+        - **RULE_API_PATH** - path to folder containing the rule api jar. The rule api jar can be found at [repox.jfrog search](https://repox.jfrog.io/ui/artifactSearchResults?name=rule-api&type=artifacts) or [repox.jfrog private releases](https://repox.jfrog.io/ui/native/sonarsource-private-releases/com/sonarsource/rule-api/rule-api/)
     - **PATH** - the system **PATH** variable must contain:
         - the path to the dotnet core installation folder (System: `C:\Program Files\dotnet\`)
         - the path to the MSBuild bin folder (System: `C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin`)
