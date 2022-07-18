@@ -25,39 +25,39 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
     [TestClass]
     public class NullPointerDereferenceTest
     {
-        private readonly VerifierBuilder verifierSonar = new VerifierBuilder<SymbolicExecutionRunner>()
+        private readonly VerifierBuilder sonar = new VerifierBuilder<SymbolicExecutionRunner>()
             .WithBasePath(@"SymbolicExecution\Sonar")
             .WithOnlyDiagnostics(new[] { NullPointerDereference.S2259 });
 
         [TestMethod]
         public void NullPointerDereference_CS() =>
-            verifierSonar.AddPaths("NullPointerDereference.cs").WithConcurrentAnalysis(false).Verify();
+            sonar.AddPaths("NullPointerDereference.cs").WithConcurrentAnalysis(false).Verify();
 
         [TestMethod]
         public void NullPointerDereference_DoesNotRaiseIssuesForTestProject() =>
-            verifierSonar.AddTestReference().AddPaths("NullPointerDereference.cs").WithConcurrentAnalysis(false).VerifyNoIssueReported();
+            sonar.AddTestReference().AddPaths("NullPointerDereference.cs").WithConcurrentAnalysis(false).VerifyNoIssueReported();
 
         [TestMethod]
         public void NullPointerDereference_CSharp6() =>
-            verifierSonar.AddPaths("NullPointerDereference.CSharp6.cs").WithOptions(ParseOptionsHelper.FromCSharp6).Verify();
+            sonar.AddPaths("NullPointerDereference.CSharp6.cs").WithOptions(ParseOptionsHelper.FromCSharp6).Verify();
 
         [TestMethod]
         public void NullPointerDereference_CSharp7() =>
-            verifierSonar.AddPaths("NullPointerDereference.CSharp7.cs").WithOptions(ParseOptionsHelper.FromCSharp7).Verify();
+            sonar.AddPaths("NullPointerDereference.CSharp7.cs").WithOptions(ParseOptionsHelper.FromCSharp7).Verify();
 
         [TestMethod]
         public void NullPointerDereference_CSharp8() =>
-            verifierSonar.AddPaths("NullPointerDereference.CSharp8.cs").AddReferences(MetadataReferenceFacade.NETStandard21).WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+            sonar.AddPaths("NullPointerDereference.CSharp8.cs").AddReferences(MetadataReferenceFacade.NETStandard21).WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
 
         [TestMethod]
         public void NullPointerDereference_CSharp9() =>
-            verifierSonar.AddPaths("NullPointerDereference.CSharp9.cs").WithTopLevelStatements().Verify();
+            sonar.AddPaths("NullPointerDereference.CSharp9.cs").WithTopLevelStatements().Verify();
 
         [TestMethod]
         public void NullPointerDereference_CSharp10() =>
-            verifierSonar.AddPaths("NullPointerDereference.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            sonar.AddPaths("NullPointerDereference.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
 #endif
 
