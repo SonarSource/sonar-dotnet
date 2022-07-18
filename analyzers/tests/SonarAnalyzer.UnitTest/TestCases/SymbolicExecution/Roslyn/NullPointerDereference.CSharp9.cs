@@ -111,7 +111,7 @@ public class Sample
         Func<string> a = static () =>
         {
             object o = null;
-            return o.ToString();    // Noncompliant
+            return o.ToString();    // FIXME Non-compliant
         };
         a();
     }
@@ -122,7 +122,7 @@ public class Sample
         init
         {
             object o = null;
-            field = o.ToString();   // Noncompliant
+            field = o.ToString();   // FIXME Non-compliant
         }
     }
 
@@ -133,7 +133,7 @@ public class Sample
         {
             if (value == null)
             {
-                field = value.ToString();   // Noncompliant
+                field = value.ToString();   // FIXME Non-compliant
             }
         }
     }
@@ -144,7 +144,7 @@ public record Record
     public void Method()
     {
         object o = null;
-        o.ToString();   // Noncompliant
+        o.ToString();   // FIXME Non-compliant
     }
 }
 
@@ -158,7 +158,7 @@ public partial class Partial
     public partial void Method()
     {
         object o = null;
-        o.ToString();   // Noncompliant
+        o.ToString();   // FIXME Non-compliant
     }
 }
 
@@ -176,7 +176,7 @@ namespace TartetTypedConditional
             AlphaAndBeta ab = new AlphaAndBeta();
             BetaAndAlpha ba = null;
             IAlpha result = condition ? ab : ba;
-            result.ToString();  // Noncompliant
+            result.ToString();  // FIXME Non-compliant
         }
     }
 }

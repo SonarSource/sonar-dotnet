@@ -17,26 +17,26 @@ namespace Tests.Diagnostics.CSharp8
         {
             string name = null;
             name = name ?? null;
-            name.ToString(); // Noncompliant {{'name' is null on at least one execution path.}}
+            name.ToString(); // FIXME Non-compliant {{'name' is null on at least one execution path.}}
         }
 
         public void NullCoalescenceOperator_Null_Noncompliant2()
         {
             string name = null;
-            name = name ?? name.ToString(); // Noncompliant
+            name = name ?? name.ToString(); // FIXME Non-compliant
         }
 
         public void NullCoalescenceAssignment_Null()
         {
             string name = null;
-            name ??= name.ToString(); // Noncompliant
+            name ??= name.ToString(); // FIXME Non-compliant
         }
 
         public void NullCoalescenceAssignment_NotNull_Noncompliant()
         {
             string name1 = null;
             string name2 = null;
-            name1 ??= name2.ToString(); // Noncompliant {{'name2' is null on at least one execution path.}}
+            name1 ??= name2.ToString(); // FIXME Non-compliant {{'name2' is null on at least one execution path.}}
         }
 
         public void NullCoalescenceAssignment_NotNull()
@@ -62,7 +62,7 @@ namespace Tests.Diagnostics.CSharp8
         {
             var result = s switch
             {
-                null => s.ToString(), // Noncompliant
+                null => s.ToString(), // FIXME Non-compliant
                 _ => s.ToString()
             };
         }
@@ -75,7 +75,7 @@ namespace Tests.Diagnostics.CSharp8
                 2 => null,
                 _ => null
             };
-            result.ToString(); // Noncompliant
+            result.ToString(); // FIXME Non-compliant
         }
 
         public void MaybeNull_Noncompliant(int val)
@@ -86,7 +86,7 @@ namespace Tests.Diagnostics.CSharp8
                 2 => "Not 1",
                 _ => null
             };
-            result.ToString(); // Noncompliant
+            result.ToString(); // FIXME Non-compliant
         }
 
         public void AlwaysNonNull(int val)
@@ -115,7 +115,7 @@ namespace Tests.Diagnostics.CSharp8
         void NoncompliantDefaultLiteral()
         {
             object obj = default;
-            obj.ToString(); // Noncompliant
+            obj.ToString(); // FIXME Non-compliant
         }
 
         void CompliantDefaultLiteral()
@@ -128,7 +128,7 @@ namespace Tests.Diagnostics.CSharp8
     public interface IWithDefaultMembers
     {
         string NoncompliantDefaultInterfaceMethod(string obj) =>
-            obj != null ? null : obj.ToLower(); // Noncompliant
+            obj != null ? null : obj.ToLower(); // FIXME Non-compliant
 
         string CompliantDefaultInterfaceMethod(string obj) =>
             obj == null ? null : obj.ToLower();

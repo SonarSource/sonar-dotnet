@@ -26,7 +26,7 @@ namespace Tests.Diagnostics
             object o = null;
             if (condition)
             {
-                M1(o.ToString()); // Noncompliant {{'o' is null on at least one execution path.}}
+                M1(o.ToString()); // FIXME Non-compliant {{'o' is null on at least one execution path.}}
 //                 ^
             }
             else
@@ -47,7 +47,7 @@ namespace Tests.Diagnostics
             {
                 o = new object();
             }
-            M2(o.ToString()); // Noncompliant
+            M2(o.ToString()); // FIXME Non-compliant
         }
 
         void Test_ExtensionMethodWithNull()
@@ -78,7 +78,7 @@ namespace Tests.Diagnostics
         void Test_Foreach()
         {
             IEnumerable<int> en = null;
-            foreach (var item in en) // Noncompliant
+            foreach (var item in en) // FIXME Non-compliant
             {
 
             }
@@ -87,13 +87,13 @@ namespace Tests.Diagnostics
         async System.Threading.Tasks.Task Test_Await()
         {
             System.Threading.Tasks.Task t = null;
-            await t; // Noncompliant
+            await t; // FIXME Non-compliant
         }
 
         void Test_Exception()
         {
             Exception exc = null;
-            throw exc; // Noncompliant
+            throw exc; // FIXME Non-compliant
         }
 
         void Test_Exception_Ok()
@@ -105,12 +105,12 @@ namespace Tests.Diagnostics
         public NullPointerDereference()
         {
             object o = null;
-            Console.WriteLine(o.ToString()); // Noncompliant
+            Console.WriteLine(o.ToString()); // FIXME Non-compliant
 
             var a = new Action(() =>
             {
                 object o1 = null;
-                Console.WriteLine(o1.ToString()); // Noncompliant
+                Console.WriteLine(o1.ToString()); // FIXME Non-compliant
             });
         }
 
@@ -119,7 +119,7 @@ namespace Tests.Diagnostics
             get
             {
                 object o1 = null;
-                Console.WriteLine(o1.ToString()); // Noncompliant
+                Console.WriteLine(o1.ToString()); // FIXME Non-compliant
                 return 42;
             }
         }
@@ -131,7 +131,7 @@ namespace Tests.Diagnostics
             object o = myObject; // can be null
             if (o == null)
             {
-                M1(o.ToString()); // Noncompliant, always null
+                M1(o.ToString()); // FIXME Non-compliant, always null
             }
             else
             {
@@ -160,7 +160,7 @@ namespace Tests.Diagnostics
             {
                 if (item == null)
                 {
-                    Console.WriteLine(item.ToString()); // Noncompliant
+                    Console.WriteLine(item.ToString()); // FIXME Non-compliant
                 }
             }
         }
@@ -180,7 +180,7 @@ namespace Tests.Diagnostics
             var b = a;
             if (a == null)
             {
-                var s = b.ToString(); // Noncompliant
+                var s = b.ToString(); // FIXME Non-compliant
             }
         }
 
@@ -191,7 +191,7 @@ namespace Tests.Diagnostics
             object a = null;
             if (a == b)
             {
-                b.ToString(); // Noncompliant
+                b.ToString(); // FIXME Non-compliant
             }
             else
             {
@@ -218,7 +218,7 @@ namespace Tests.Diagnostics
             }
             else
             {
-                b.ToString(); // Noncompliant
+                b.ToString(); // FIXME Non-compliant
             }
 
             a = new object();
@@ -236,7 +236,7 @@ namespace Tests.Diagnostics
         {
             if (arr == null)
             {
-                Console.WriteLine(arr[10, 10]); // Noncompliant
+                Console.WriteLine(arr[10, 10]); // FIXME Non-compliant
             }
             else
             {
@@ -254,7 +254,7 @@ namespace Tests.Diagnostics
             var t = i.GetType();
 
             i = null;
-            var t2 = i.GetType(); // Noncompliant
+            var t2 = i.GetType(); // FIXME Non-compliant
         }
 
         static void MultiplePop()
@@ -290,7 +290,7 @@ namespace Tests.Diagnostics
         {
             if (string.IsNullOrEmpty(s1))
             {
-                s1.ToString(); // Noncompliant
+                s1.ToString(); // FIXME Non-compliant
             }
             else
             {
@@ -302,7 +302,7 @@ namespace Tests.Diagnostics
         {
             if (s1 == "" || s1 == null)
             {
-                s1.ToString(); // Noncompliant
+                s1.ToString(); // FIXME Non-compliant
             }
             else
             {
@@ -322,12 +322,12 @@ namespace Tests.Diagnostics
 
         void StringEmpty5(string path)
         {
-            var s = path == null ? path.Split('/') : new string[] { }; // Noncompliant
+            var s = path == null ? path.Split('/') : new string[] { }; // FIXME Non-compliant
         }
 
         void StringEmpty6(string path)
         {
-            var s = string.IsNullOrEmpty(path) ? path.Split('/') : new string[] { }; // Noncompliant
+            var s = string.IsNullOrEmpty(path) ? path.Split('/') : new string[] { }; // FIXME Non-compliant
         }
 
         void StringEmpty7(string path)
@@ -366,71 +366,71 @@ namespace Tests.Diagnostics
 
         void DoLearnFromConstants()
         {
-            NullConst.ToString(); // Noncompliant
+            NullConst.ToString(); // FIXME Non-compliant
 //          ^^^^^^^^^
         }
 
         void DoLearnFromAnyConstant1()
         {
-            NullConst.ToString(); // Noncompliant
+            NullConst.ToString(); // FIXME Non-compliant
         }
         void DoLearnFromAnyConstant2()
         {
-            NullPointerDereferenceWithFields.NullConst.ToString(); // Noncompliant
+            NullPointerDereferenceWithFields.NullConst.ToString(); // FIXME Non-compliant
         }
         void DoLearnFromAnyConstant3()
         {
-            Tests.Diagnostics.NullPointerDereferenceWithFields.NullConst.ToString(); // Noncompliant
+            Tests.Diagnostics.NullPointerDereferenceWithFields.NullConst.ToString(); // FIXME Non-compliant
         }
         void DoLearnFromAnyConstant4()
         {
-            X.NullConst.ToString(); // Noncompliant
+            X.NullConst.ToString(); // FIXME Non-compliant
         }
         void DoLearnFromAnyConstant5()
         {
-            B.Whatever.ToString(); // Noncompliant
+            B.Whatever.ToString(); // FIXME Non-compliant
         }
 
         void DumbestTestOnFoo1()
         {
             object o = null;
             _foo1 = o;
-            _foo1.ToString(); // Noncompliant
+            _foo1.ToString(); // FIXME Non-compliant
 //          ^^^^^
         }
         void DumbestTestOnFoo2()
         {
             object o = null;
             _foo2 = o;
-            _foo2.ToString(); // Noncompliant
+            _foo2.ToString(); // FIXME Non-compliant
 //          ^^^^^
         }
         void DumbestTestOnFoo3()
         {
             object o = null;
             _foo3 = o;
-            _foo3.ToString(); // Noncompliant
+            _foo3.ToString(); // FIXME Non-compliant
 //          ^^^^^
         }
         void DumbestTestOnFoo4()
         {
             object o = null;
             _foo4 = o;
-            _foo4.ToString(); // Noncompliant
+            _foo4.ToString(); // FIXME Non-compliant
 //          ^^^^^
         }
         void DumbestTestOnFoo5()
         {
             object o = null;
             _foo5 = o;
-            _foo5.ToString(); // Noncompliant
+            _foo5.ToString(); // FIXME Non-compliant
 //          ^^^^^
         }
         void DumbestTestOnFoo8()
         {
             object o = null;
             _foo8 = o;
-            _foo8.ToString(); // Noncompliant
+            _foo8.ToString(); // FIXME Non-compliant
 //          ^^^^^
         }
         void DumbestTestOnFoo6()
@@ -446,27 +446,27 @@ namespace Tests.Diagnostics
         {
             object o = null;
             this._foo1 = o;
-            this._foo1.ToString(); // Noncompliant
+            this._foo1.ToString(); // FIXME Non-compliant
         }
         void DifferentFieldAccess2()
         {
             this._foo1 = null;
-            _foo1.ToString(); // Noncompliant
+            _foo1.ToString(); // FIXME Non-compliant
         }
         void DifferentFieldAccess3()
         {
             _foo1 = null;
-            this._foo1.ToString(); // Noncompliant
+            this._foo1.ToString(); // FIXME Non-compliant
         }
         void DifferentFieldAccess4()
         {
             _foo1 = null;
-            (((this)))._foo1.ToString(); // Noncompliant
+            (((this)))._foo1.ToString(); // FIXME Non-compliant
         }
         void DifferentFieldAccess5()
         {
             _foo1 = null;
-            (((this._foo1))).ToString(); // Noncompliant
+            (((this._foo1))).ToString(); // FIXME Non-compliant
         }
 
         void OtherInstanceFieldAccess()
@@ -487,20 +487,20 @@ namespace Tests.Diagnostics
         {
             object o = null;
             _foo1 = o;
-            (_foo1).ToString(); // Noncompliant
+            (_foo1).ToString(); // FIXME Non-compliant
         }
         void ParenthesizedAccess2()
         {
             object o = null;
             ((((((this)))._foo1))) = o;
-            (((_foo1))).ToString(); // Noncompliant
+            (((_foo1))).ToString(); // FIXME Non-compliant
         }
 
         void VariableFromField()
         {
             _foo1 = null;
             var o = _foo1;
-            o.ToString(); // Noncompliant
+            o.ToString(); // FIXME Non-compliant
 //          ^
         }
 
@@ -508,7 +508,7 @@ namespace Tests.Diagnostics
         {
             if (_foo1 == null)
             {
-                _foo1.ToString(); // Noncompliant
+                _foo1.ToString(); // FIXME Non-compliant
 //              ^^^^^
             }
         }
@@ -517,7 +517,7 @@ namespace Tests.Diagnostics
         {
             if (_bar == null)
             {
-                _bar.ToString(); // Noncompliant
+                _bar.ToString(); // FIXME Non-compliant
 //              ^^^^
             }
         }
@@ -527,7 +527,7 @@ namespace Tests.Diagnostics
             if (_foo1 == null)
             {
                 var o = _foo1;
-                o.ToString(); // Noncompliant
+                o.ToString(); // FIXME Non-compliant
 //              ^
             }
         }
@@ -579,7 +579,7 @@ namespace Tests.Diagnostics
             _foo1 = o;
             Console.WriteLine(); // This particular method has no side effects
             _foo1.ToString(); // Compliant, False Negative
-            o.ToString(); // Noncompliant, local variable constraints are not cleared
+            o.ToString(); // FIXME Non-compliant, local variable constraints are not cleared
         }
 
         // https://github.com/SonarSource/sonar-dotnet/issues/947
@@ -589,7 +589,7 @@ namespace Tests.Diagnostics
             _foo1 = o;
             System.Threading.Monitor.Wait(this); // This is a multi-threaded application, the fields could change
             _foo1.ToString(); // Compliant
-            o.ToString(); // Noncompliant, local variable constraints are not cleared
+            o.ToString(); // FIXME Non-compliant, local variable constraints are not cleared
         }
 
         void CallToNameOfShouldNotResetFieldConstraints()
@@ -597,7 +597,7 @@ namespace Tests.Diagnostics
             object o = null;
             _foo1 = o;
             var name = nameof(DoSomething);
-            _foo1.ToString(); // Noncompliant
+            _foo1.ToString(); // FIXME Non-compliant
         }
 
         void DereferenceInNameOfShouldNotRaise()
@@ -719,7 +719,7 @@ namespace Tests.Diagnostics
             x = s;
             await t; // awaiting clears the constraints
             x.ToString(); // Compliant
-            s.ToString(); // Noncompliant
+            s.ToString(); // FIXME Non-compliant
         }
     }
 
@@ -733,7 +733,7 @@ namespace Tests.Diagnostics
                 {
                     if (x == null)
                     {
-                        x.ToString(); // Noncompliant
+                        x.ToString(); // FIXME Non-compliant
                     }
                     break;
                 }
@@ -752,7 +752,7 @@ namespace Tests.Diagnostics
                 {
                     if (x == null)
                     {
-                        yield return x.ToString(); // Noncompliant
+                        yield return x.ToString(); // FIXME Non-compliant
                     }
                     yield break;
                 }
@@ -775,7 +775,7 @@ namespace Tests.Diagnostics
             {
                 s = "";
             }
-            return s.Trim(); // Noncompliant FP due to loop traversal
+            return s.Trim(); // FIXME Non-compliant FP due to loop traversal
         }
     }
 
@@ -792,7 +792,7 @@ namespace Tests.Diagnostics
             {
                 if (item == current)
                 {
-                    return item.ToString(); // Noncompliant FP, null constraint is inherited from 'current == null' check
+                    return item.ToString(); // FIXME Non-compliant FP, null constraint is inherited from 'current == null' check
                 }
                 else if (item.ToString() == "xxx") // 'item' does not contain constraints by default, issue is not raised here anyway
                 {
@@ -830,7 +830,7 @@ namespace Tests.Diagnostics
             if (!someString?.Contains("a") ?? true)
                 Console.WriteLine("It's null or doesn't contain 'a'");
             else
-                Console.WriteLine(someString.Length); // Noncompliant FP, this path is unreachable
+                Console.WriteLine(someString.Length); // FIXME Non-compliant FP, this path is unreachable
         }
     }
 }
@@ -851,7 +851,7 @@ namespace Repro_3395
             if (helper == Helper.A | helper == Helper.B | helper == Helper.C | helper == Helper.D
                 | helper == Helper.E | helper == Helper.F | helper == Helper.G | helper == Helper.H)
             {
-                o.ToString(); // Noncompliant, this condition size is within the limit
+                o.ToString(); // FIXME Non-compliant, this condition size is within the limit
             }
         }
 
@@ -959,7 +959,7 @@ namespace Repro_3395
                 // Do something
             }
 
-            return test.Count; // Noncompliant FP
+            return test.Count; // FIXME Non-compliant FP
         }
 
         public static int NoIssueReported()
@@ -981,7 +981,7 @@ namespace Repro_3395
                 // Do something
             }
 
-            return something.SomeProperty; // Noncompliant
+            return something.SomeProperty; // FIXME Non-compliant
         }
 
         public static Something GetSomething()
@@ -1028,7 +1028,7 @@ namespace Repro_3395
                     continue;
                 }
 
-                var _ = providerCourse.Items.Where(items => items == "item1"); // Noncompliant FP
+                var _ = providerCourse.Items.Where(items => items == "item1"); // FIXME Non-compliant FP
             }
         }
 
@@ -1064,7 +1064,7 @@ public class Repro_5289
 
         if (a != null)
         {
-            B(a.Length); // Noncompliant FP, the unrelated "A(ref s)" call breaks constraint on "a" variable
+            B(a.Length); // FIXME Non-compliant FP, the unrelated "A(ref s)" call breaks constraint on "a" variable
         }
     }
 }

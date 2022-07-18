@@ -13,7 +13,7 @@ namespace Tests.Diagnostics
         {
             object o = null;
             this._foo1 = o;
-            this?._foo1.ToString(); // Noncompliant
+            this?._foo1.ToString(); // FIXME Non-compliant
         }
 
         string TryCatch3()
@@ -43,7 +43,7 @@ namespace Tests.Diagnostics
             }
             catch (ApplicationException) when (o == null)
             {
-                var b = o.ToString(); // Noncompliant
+                var b = o.ToString(); // FIXME Non-compliant
             }
         }
 
@@ -56,7 +56,7 @@ namespace Tests.Diagnostics
             }
             catch (Exception e) when (e.Message != null)
             {
-                var b = o.ToString(); // Noncompliant, o could be null here
+                var b = o.ToString(); // FIXME Non-compliant, o could be null here
             }
         }
 
@@ -88,7 +88,7 @@ namespace Tests.Diagnostics
       var row = list?.Count;
       if (row == null)
       {
-        var type = list.ToArray(); // Noncompliant
+        var type = list.ToArray(); // FIXME Non-compliant
       }
     }
 
@@ -97,7 +97,7 @@ namespace Tests.Diagnostics
       var row = list?.Count;
       if (a.booleanVal = (row == null))
       {
-        var type = list.ToArray(); // Noncompliant
+        var type = list.ToArray(); // FIXME Non-compliant
       }
     }
 
@@ -119,7 +119,7 @@ namespace Tests.Diagnostics
       switch (o?.GetHashCode())
       {
         case null:
-          o.ToString(); // Noncompliant
+          o.ToString(); // FIXME Non-compliant
           break;
         default:
           break;
@@ -136,7 +136,7 @@ namespace Tests.Diagnostics
       switch (obj?.Color)
       {
         case null:
-          Console.ForegroundColor = obj.Color; // Noncompliant
+          Console.ForegroundColor = obj.Color; // FIXME Non-compliant
           break;
         case ConsoleColor.Red:
           Console.ForegroundColor = obj.Color; //compliant
@@ -156,7 +156,7 @@ namespace Tests.Diagnostics
           Console.ForegroundColor = obj.Color; //compliant
           break;
         default:
-          Console.WriteLine($"Color {obj.Color} is not supported."); // Noncompliant
+          Console.WriteLine($"Color {obj.Color} is not supported."); // FIXME Non-compliant
           break;
       }
     }
@@ -210,7 +210,7 @@ namespace Tests.Diagnostics
             if (leftName == null)
             {
                 // rightName is not null
-                if (rightName.EndsWith("foo")) // Noncompliant FP
+                if (rightName.EndsWith("foo")) // FIXME Non-compliant FP
                     return 1;
                 return 0;
             }
@@ -231,7 +231,7 @@ namespace Tests.Diagnostics
                     return valueHolder.Value;
                 case MyEnum.FIVE:
                 case null:
-                    return valueHolder.Value; // Noncompliant Ok
+                    return valueHolder.Value; // FIXME Non-compliant Ok
                 default:
                     return string.Empty;
             }

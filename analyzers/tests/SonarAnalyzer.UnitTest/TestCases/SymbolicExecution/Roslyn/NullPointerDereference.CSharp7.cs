@@ -11,26 +11,26 @@ namespace Tests.Diagnostics
         string Method(string s) =>
             s != null
             ? null
-            : s.ToLower(); // Noncompliant
+            : s.ToLower(); // FIXME Non-compliant
 
         string Prop =>
             field != null
             ? null
-            : field.ToLower(); // Noncompliant
+            : field.ToLower(); // FIXME Non-compliant
 
         string PropGet
         {
             get =>
                 field != null
                 ? null
-                : field.ToLower(); // Noncompliant
+                : field.ToLower(); // FIXME Non-compliant
         }
 
         void ConstantPattern(object o)
         {
             if (o is null)
             {
-                o.ToString(); // Noncompliant
+                o.ToString(); // FIXME Non-compliant
             }
             else
             {
@@ -62,7 +62,7 @@ namespace Tests.Diagnostics
             {
                 if (o == null)
                 {
-                    o.ToString(); // Noncompliant, False Positive
+                    o.ToString(); // FIXME Non-compliant, False Positive
                 }
             }
         }
@@ -73,7 +73,7 @@ namespace Tests.Diagnostics
             {
                 if (o == null)
                 {
-                    o.ToString(); // Noncompliant, False Positive
+                    o.ToString(); // FIXME Non-compliant, False Positive
                 }
             }
         }
@@ -123,7 +123,7 @@ namespace Tests.Diagnostics
                     // We don't set constraints on the switch expression
                     if (o == null)
                     {
-                        o.ToString(); // Noncompliant, False Positive
+                        o.ToString(); // FIXME Non-compliant, False Positive
                     }
                     break;
 
@@ -158,7 +158,7 @@ namespace Tests.Diagnostics
                     break;
 
                 case null:
-                    o.ToString(); // Noncompliant
+                    o.ToString(); // FIXME Non-compliant
                     break;
 
                 default:
@@ -181,7 +181,7 @@ namespace Tests.Diagnostics
         void NonCompliant1()
         {
             Exception exception = null;
-            if (exception.Data is IDictionary data) // Noncompliant
+            if (exception.Data is IDictionary data) // FIXME Non-compliant
             {
                 if (exception.InnerException?.Data is IDictionary innerexceptiondata)
                 {
@@ -205,7 +205,7 @@ namespace Tests.Diagnostics
         {
             if (exception?.Data is null)
             {
-                if (exception.InnerException?.Data is IDictionary innerexceptiondata) // Noncompliant
+                if (exception.InnerException?.Data is IDictionary innerexceptiondata) // FIXME Non-compliant
                 {
 
                 }
@@ -233,7 +233,7 @@ namespace Tests.Diagnostics
         default:
           return;
       }
-      var s1 = obj.ToString(); // Noncompliant
+      var s1 = obj.ToString(); // FIXME Non-compliant
     }
 
     public void Method3(object obj)
@@ -246,7 +246,7 @@ namespace Tests.Diagnostics
         default:
           break;
       }
-      var s = obj.ToString(); // Noncompliant
+      var s = obj.ToString(); // FIXME Non-compliant
     }
 
     public void Method4(object obj)
@@ -270,7 +270,7 @@ namespace Tests.Diagnostics
             return -1;
         }
 
-        return dict.Count; // Noncompliant FP
+        return dict.Count; // FIXME Non-compliant FP
     }
   }
 }
