@@ -25,11 +25,13 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
     [TestClass]
     public class NullPointerDereferenceTest
     {
-        private static readonly DiagnosticDescriptor[] OnlyDiagnostics = new[] { NullPointerDereference.S2259 };
+        private readonly VerifierBuilder verifierSonar = new VerifierBuilder<SymbolicExecutionRunner>()
+            .WithBasePath(@"SymbolicExecution\Sonar")
+            .WithOnlyDiagnostics(new[] { NullPointerDereference.S2259 });
 
         [TestMethod]
         public void NullPointerDereference_ValidatedNotNull() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            verifierSonar.AddSnippet(@"
 using System;
 
 public sealed class ValidatedNotNullAttribute : Attribute { }
@@ -55,60 +57,39 @@ public static class Utils
         return value.ToUpper(); // Compliant
     }
 }
-", new SymbolicExecutionRunner(), onlyDiagnostics: OnlyDiagnostics);
+").Verify();
 
         [TestMethod]
         public void NullPointerDereference_CS() =>
-            OldVerifier.VerifyNonConcurrentAnalyzer(
-                @"TestCases\SymbolicExecution\Sonar\NullPointerDereference.cs",
-                new SymbolicExecutionRunner(),
-                onlyDiagnostics: OnlyDiagnostics);
+            verifierSonar.AddPaths("NullPointerDereference.cs").WithConcurrentAnalysis(false).Verify();
 
         [TestMethod]
         public void NullPointerDereference_DoesNotRaiseIssuesForTestProject() =>
-            new VerifierBuilder<SymbolicExecutionRunner>()
-                .AddTestReference()
-                .AddPaths(@"SymbolicExecution\Sonar\NullPointerDereference.cs")
-                .WithOnlyDiagnostics(OnlyDiagnostics)
-                .WithConcurrentAnalysis(false)
-                .VerifyNoIssueReported();
+            verifierSonar.AddTestReference().AddPaths("NullPointerDereference.cs").WithConcurrentAnalysis(false).VerifyNoIssueReported();
 
         [TestMethod]
         public void NullPointerDereference_CSharp6() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\NullPointerDereference.CSharp6.cs",
-                new SymbolicExecutionRunner(),
-                ParseOptionsHelper.FromCSharp6,
-                onlyDiagnostics: OnlyDiagnostics);
+            verifierSonar.AddPaths("NullPointerDereference.CSharp6.cs").WithOptions(ParseOptionsHelper.FromCSharp6).Verify();
 
         [TestMethod]
         public void NullPointerDereference_CSharp7() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\NullPointerDereference.CSharp7.cs",
-                new SymbolicExecutionRunner(),
-                ParseOptionsHelper.FromCSharp7,
-                onlyDiagnostics: OnlyDiagnostics);
+            verifierSonar.AddPaths("NullPointerDereference.CSharp7.cs").WithOptions(ParseOptionsHelper.FromCSharp7).Verify();
 
         [TestMethod]
-        public void NullPointerDereference_CSharp8() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\NullPointerDereference.CSharp8.cs",
-                new SymbolicExecutionRunner(),
-                ParseOptionsHelper.FromCSharp8,
-                MetadataReferenceFacade.NETStandard21,
-                onlyDiagnostics: OnlyDiagnostics);
+        public void NullPointerDereference_CSharp8() => // TODO: check with CI if MetadataReferenceFacade.NETStandard21 is needed
+            verifierSonar.AddPaths("NullPointerDereference.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
+
         [TestMethod]
         public void NullPointerDereference_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(
-                @"TestCases\SymbolicExecution\Sonar\NullPointerDereference.CSharp9.cs",
-                new SymbolicExecutionRunner(),
-                onlyDiagnostics: OnlyDiagnostics);
+            verifierSonar.AddPaths("NullPointerDereference.CSharp9.cs").WithTopLevelStatements().Verify();
 
         [TestMethod]
         public void NullPointerDereference_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(
-                @"TestCases\SymbolicExecution\Sonar\NullPointerDereference.CSharp10.cs",
-                new SymbolicExecutionRunner(),
-                onlyDiagnostics: OnlyDiagnostics);
+            verifierSonar.AddPaths("NullPointerDereference.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+
 #endif
+
     }
 }
