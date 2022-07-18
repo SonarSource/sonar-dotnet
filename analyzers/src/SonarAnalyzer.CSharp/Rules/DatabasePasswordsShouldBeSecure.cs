@@ -129,7 +129,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private void ReportEmptyPassword(JsonNode doc, string appSettingsPath, CompilationAnalysisContext c)
         {
-            if (doc.TryGetPropertyValue("ConnectionStrings", out var connectionStrings))
+            if (doc.TryGetPropertyNode("ConnectionStrings", out var connectionStrings))
             {
                 foreach (var key in connectionStrings.Keys)
                 {
