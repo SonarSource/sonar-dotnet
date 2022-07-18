@@ -77,7 +77,7 @@ public static class Utils
 
         [TestMethod]
         public void NullPointerDereference_CSharp8() => // TODO: check with CI if MetadataReferenceFacade.NETStandard21 is needed
-            verifierSonar.AddPaths("NullPointerDereference.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+            verifierSonar.AddPaths("NullPointerDereference.CSharp8.cs").AddReferences(MetadataReferenceFacade.NETStandard21).WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
 
