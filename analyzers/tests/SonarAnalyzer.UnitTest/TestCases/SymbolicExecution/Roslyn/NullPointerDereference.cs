@@ -1068,3 +1068,30 @@ public class Repro_5289
         }
     }
 }
+
+namespace ValidatedNotNullAttributeTest
+{
+    public sealed class ValidatedNotNullAttribute : Attribute { }
+
+    public static class Guard
+    {
+        public static void NotNull<T>([ValidatedNotNullAttribute] this T value, string name) where T : class
+        {
+            if (value == null)
+                throw new ArgumentNullException(name);
+        }
+    }
+
+    public static class Utils
+    {
+        public static string ToUpper(string value)
+        {
+            Guard.NotNull(value, nameof(value));
+            if (value != null)
+            {
+                return value.ToUpper(); // Compliant
+            }
+            return value.ToUpper(); // Compliant
+        }
+    }
+}
