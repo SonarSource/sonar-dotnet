@@ -635,25 +635,22 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar
 
         private ProgramState VisitParenthesizedVariableDesignationSyntax(ParenthesizedVariableDesignationSyntaxWrapper designation, ProgramState programState)
         {
-            foreach (var variable in GetVariableDesignationSyntaxCollection(designation))
+            foreach (var variable in designation.Variables)
             {
-                if (ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(variable))
-                {
-                    continue;
-                }
-                var variableSymbol = SemanticModel.GetDeclaredSymbol(variable);
-                var variableSymbolicValue = SymbolicValue.Create(variableSymbol.GetSymbolType());
-
                 // No symbolic values are created and pushed to the stack since they are not currently used.
                 // See also VisitSimpleAssignment where ParenthesizedVariableDesignationSyntaxWrapper are handled.
-                programState = programState.StoreSymbolicValue(variableSymbol, variableSymbolicValue);
+                programState = variable.SyntaxNode.Kind() switch
+                {
+                    SyntaxKindEx.SingleVariableDesignation => SetSymbolValue(SemanticModel.GetDeclaredSymbol(variable)),
+                    SyntaxKindEx.ParenthesizedVariableDesignation => VisitParenthesizedVariableDesignationSyntax((ParenthesizedVariableDesignationSyntaxWrapper)variable, programState),
+                    _ => programState // DiscardDesignation
+                };
             }
-
             return programState;
-        }
 
-        private static IEnumerable<VariableDesignationSyntaxWrapper> GetVariableDesignationSyntaxCollection(ParenthesizedVariableDesignationSyntaxWrapper wrapper)
-            => wrapper.Variables.Where(variableDesignation => !variableDesignation.SyntaxNode.IsKind(SyntaxKindEx.DiscardDesignation));
+            ProgramState SetSymbolValue(ISymbol variableSymbol) =>
+                programState.StoreSymbolicValue(variableSymbol, SymbolicValue.Create(variableSymbol.GetSymbolType()));
+        }
 
         private ProgramState VisitVarPattern(VarPatternSyntaxWrapper varPatternSyntax, ProgramState programState) =>
             // "var x" in "case var x when ..."
