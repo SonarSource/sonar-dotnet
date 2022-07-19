@@ -466,5 +466,97 @@ Tag(""End"");";
             SETestContext.CreateCS("string a = null; a ??= arg;", ", string arg", collector);
             assertions.Should().Be(3);  // Block #3 transitive capture, Block #3 BranchValue, Block #4
         }
+
+        [TestMethod]
+        public void AnonymousObjectCreation_SetsNotNull()
+        {
+            const string code = @"
+var anonymous = new { a = 42 };
+Tag(""anonymous"", anonymous);";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateContainsOperation(OperationKind.AnonymousObjectCreation);
+            validator.ValidateTag("anonymous", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void ArrayCreation_SetsNotNull()
+        {
+            const string code = @"
+var arr1 = new int[] { 42 };
+var arr2 = new int[0];
+int[] arr3 = { };
+int[,] arrMulti = new int[2, 3];
+int[][] arrJagged = new int[2][];
+
+Tag(""arr1"", arr1);
+Tag(""arr2"", arr2);
+Tag(""arr3"", arr3);
+Tag(""arrMulti"", arrMulti);
+Tag(""arrJagged"", arrJagged);";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateContainsOperation(OperationKind.ArrayCreation);
+            validator.ValidateTag("arr1", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("arr2", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("arr3", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("arrMulti", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("arrJagged", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void DelegateCreation_SetsNotNull()
+        {
+            const string code = @"
+var pointer = Main; // Delegate creation to encapsulating method
+Tag(""pointer"", pointer);";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateContainsOperation(OperationKind.DelegateCreation);
+            validator.ValidateTag("pointer", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void DynamicObjectCreation_SetsNotNull()
+        {
+            const string code = @"
+var s = new Sample(dynamicArg);
+Tag(""s"", s);";
+            var validator = SETestContext.CreateCS(code, ", dynamic dynamicArg").Validator;
+            validator.ValidateContainsOperation(OperationKind.DynamicObjectCreation);
+            validator.ValidateTag("s", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void ObjectCreation_SetsNotNull()
+        {
+            const string code = @"
+object assigned;
+var obj = new Object();
+var declared = new Exception();
+assigned = new EventArgs();
+
+Tag(""declared"", declared);
+Tag(""assigned"", assigned);
+Tag(""object"", obj);";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateContainsOperation(OperationKind.ObjectCreation);
+            validator.ValidateTag("declared", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("assigned", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("object", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void TypeParameterObjectCreation_SetsNotNull()
+        {
+            const string code = @"
+public void Main<T>() where T : new()
+{
+    var value = new T();
+    Tag(""value"", value);
+}
+
+private void Tag(string name, object arg) { }";
+            var validator = SETestContext.CreateCSMethod(code).Validator;
+            validator.ValidateContainsOperation(OperationKind.TypeParameterObjectCreation);
+            validator.ValidateTag("value", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        }
     }
 }

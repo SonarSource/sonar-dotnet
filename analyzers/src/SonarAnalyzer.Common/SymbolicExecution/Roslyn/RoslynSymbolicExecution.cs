@@ -244,14 +244,20 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             context.Operation.Instance.Kind switch
             {
                 OperationKindEx.Argument => Invocation.Process(context, IArgumentOperationWrapper.FromOperation(context.Operation.Instance)),
+                OperationKindEx.ArrayCreation => Creation.Process(context),
+                OperationKindEx.AnonymousObjectCreation => Creation.Process(context),
                 OperationKindEx.Binary => Binary.Process(context, IBinaryOperationWrapper.FromOperation(context.Operation.Instance)),
                 OperationKindEx.Conversion => Conversion.Process(context, IConversionOperationWrapper.FromOperation(context.Operation.Instance)),
+                OperationKindEx.DelegateCreation => Creation.Process(context),
+                OperationKindEx.DynamicObjectCreation => Creation.Process(context),
                 OperationKindEx.FieldReference => References.Process(context, IFieldReferenceOperationWrapper.FromOperation(context.Operation.Instance)),
                 OperationKindEx.FlowCapture => FlowCapture.Process(context, IFlowCaptureOperationWrapper.FromOperation(context.Operation.Instance)),
                 OperationKindEx.IsPattern => Pattern.Process(context, IIsPatternOperationWrapper.FromOperation(context.Operation.Instance)),
                 OperationKindEx.LocalReference => References.Process(context, ILocalReferenceOperationWrapper.FromOperation(context.Operation.Instance)),
+                OperationKindEx.ObjectCreation => Creation.Process(context),
                 OperationKindEx.ParameterReference => References.Process(context, IParameterReferenceOperationWrapper.FromOperation(context.Operation.Instance)),
                 OperationKindEx.SimpleAssignment => SimpleAssignment.Process(context, ISimpleAssignmentOperationWrapper.FromOperation(context.Operation.Instance)),
+                OperationKindEx.TypeParameterObjectCreation => Creation.Process(context),
                 _ => context.State
             };
 
