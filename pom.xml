@@ -56,7 +56,7 @@
     <doclint>none</doclint>
     <sonar.analyzer.commons>1.25.0.1003</sonar.analyzer.commons>
     <sonar.version>9.8.0.203</sonar.version>
-    <sonar.api.impl.version>9.6.0.57076</sonar.api.impl.version>
+    <sonar.api.impl.version>9.6.0.58139</sonar.api.impl.version>
   </properties>
 
   <profiles>
