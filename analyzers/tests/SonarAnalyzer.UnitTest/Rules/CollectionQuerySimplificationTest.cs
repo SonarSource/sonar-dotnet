@@ -25,14 +25,15 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class CollectionQuerySimplificationTest
     {
+        private readonly VerifierBuilder verifier = new VerifierBuilder<CollectionQuerySimplification>();
         [TestMethod]
         public void CollectionQuerySimplification() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\CollectionQuerySimplification.cs", new CollectionQuerySimplification());
+            verifier.AddPaths("CollectionQuerySimplification.cs").Verify();
 
 #if NET
         [TestMethod]
         public void CollectionQuerySimplification_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CollectionQuerySimplification.CSharp9.cs", new CollectionQuerySimplification());
+            verifier.AddPaths("CollectionQuerySimplification.CSharp9.cs").WithTopLevelStatements().Verify();
 #endif
     }
 }

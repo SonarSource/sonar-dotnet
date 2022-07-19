@@ -18,8 +18,7 @@ namespace Tests.Diagnostics
             y = coll.Where(element => element is object).Select(element => (object)element); // Noncompliant use OfType
             x = coll.Where(element => element == null).Any();  // Noncompliant use Any([expression])
 //                   ^^^^^
-            var z = coll.Where(element => element == null).Count();  // Noncompliant {{Drop 'Where' and move the condition into the 'Count'.}}
-            z = Enumerable.Count(coll.Where(element => element == null));  // Noncompliant
+            var z = Enumerable.Count(coll.Where(element => element == null));  // Noncompliant
             z = Enumerable.Count(Enumerable.Where(coll, element => element == null));  // Noncompliant
             y = coll.Select(element => element as object);
             y = coll.ToList().Select(element => element as object); // Noncompliant
@@ -37,7 +36,7 @@ namespace Tests.Diagnostics
                 .Select(element => element as object)
                 .ToList();
 
-            var c = coll.Count(); //Noncompliant
+            var c = coll.Count(); // Noncompliant
 //                       ^^^^^
             c = coll.OfType<object>().Count();
 
@@ -54,7 +53,7 @@ namespace Tests.Diagnostics
 
         public void Method(IEnumerable<int> ints)
         {
-            var x = ints.ToList().AsReadOnly(); // compliant, AsReadOnly is defined on List<>
+            var x = ints.ToList().AsReadOnly(); // Compliant, AsReadOnly is defined on List<>
         }
     }
 
@@ -75,5 +74,19 @@ namespace Tests.Diagnostics
         IEnumerator IEnumerable.GetEnumerator() => null;
 
         public bool Equals(SyntaxList<TNode> other) => true;
+
+        public void CollectionQueryPerformantChoices(List<int> coll)
+        {
+            // See issues:
+            // https://github.com/SonarSource/sonar-dotnet/issues/4235
+            // https://github.com/dotnet/runtime/issues/19382
+            // https://github.com/dotnet/runtime/issues/29824
+            // https://github.com/dotnet/runtime/issues/30119
+            coll.Where(x => x > 0).First(); // Noncompliant FP
+            coll.Where(x => x > 0).FirstOrDefault(); // Noncompliant FP
+            coll.Where(x => x > 0).Count(); // Noncompliant FP
+            coll.Where(x => x > 0).Single(); // Noncompliant FP
+
+        }
     }
 }
