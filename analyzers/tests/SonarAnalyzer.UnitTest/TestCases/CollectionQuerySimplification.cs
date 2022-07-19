@@ -82,10 +82,16 @@ namespace Tests.Diagnostics
             // https://github.com/dotnet/runtime/issues/19382
             // https://github.com/dotnet/runtime/issues/29824
             // https://github.com/dotnet/runtime/issues/30119
+            // Benchmark results: https://github.com/dotnet/corefx/pull/39200
             coll.Where(x => x > 0).First(); // Noncompliant FP
             coll.Where(x => x > 0).FirstOrDefault(); // Noncompliant FP
+            coll.Where(x => x > 0).Last(); // Noncompliant FP
+            coll.Where(x => x > 0).LastOrDefault(); // Noncompliant FP
             coll.Where(x => x > 0).Count(); // Noncompliant FP
             coll.Where(x => x > 0).Single(); // Noncompliant FP
+            coll.Where(x => x > 0).SingleOrDefault(); // Noncompliant FP
+            coll.Where(x => x > 0).Any(); // Noncompliant FP
+            coll.Where(x => x > 0).SingleOrDefault(); // Noncompliant FP
 
         }
     }
