@@ -17,10 +17,6 @@
     <ProjectGuid>{e11606ca-a186-4fee-ba30-b1688747cd1a}</ProjectGuid>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <CodeAnalysisRuleSet>..\SonarAnalyzer.Test.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-
   <ItemGroup Condition="'$(TargetFramework)' != 'net48'">
     <!-- Class AspNetCoreMetadataReference needs this FrameworkReference to generate metadata references for ASP.NET Core related test cases. -->
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
