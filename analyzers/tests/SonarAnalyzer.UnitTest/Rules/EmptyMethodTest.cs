@@ -71,8 +71,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void EmptyMethod_WithVirtualOverride_DoesNotRaiseIssuesForTestProject_CS() =>
-            verifierCS
-                .AddPaths("EmptyMethod.OverrideVirtual.cs").AddTestReference().VerifyNoIssueReported();
+            verifierCS.AddPaths("EmptyMethod.OverrideVirtual.cs").AddTestReference().VerifyNoIssueReported();
 
         [TestMethod]
         public void EmptyMethod_WithVirtualOverride_RaisesIssueForMainProject_VB() =>
