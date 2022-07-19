@@ -79,4 +79,24 @@ namespace Tests.Diagnostics
         void SetRef(ref I3874 obj); // Noncompliant
         void SetOut(out I3874 obj); // Noncompliant
     }
-}
+
+    public class Person
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+
+
+        public Person(string fname, string lname)
+        {
+            FirstName = fname;
+            LastName = lname;
+        }
+
+        public void Deconstruct(out string fname, out string lname) // Compliant,
+                                                                    // https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/functional/deconstruct#user-defined-types
+        {
+            fname = FirstName;
+            lname = LastName;
+        }
+    }
+ }
