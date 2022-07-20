@@ -30,7 +30,7 @@ using SonarAnalyzer.Rules.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Sonar;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
 {
     internal sealed class InvalidCastToInterfaceSymbolicExecution : ISymbolicExecutionAnalyzer
     {
@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         internal static readonly DiagnosticDescriptor S1944 = DescriptorFactory.Create(DiagnosticId, "{0}");
 
-        public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics  { get; } = ImmutableArray.Create(S1944);
+        public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(S1944);
 
         public ISymbolicExecutionAnalysisContext CreateContext(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
             new AnalysisContext(explodedGraph, context);

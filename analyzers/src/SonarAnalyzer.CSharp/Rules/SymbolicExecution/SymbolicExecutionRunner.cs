@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
             new PublicMethodArgumentsShouldBeCheckedForNull(),
             new Sonar.EmptyCollectionsShouldNotBeEnumerated(),
             new Sonar.ConditionEvaluatesToConstant(),
-            new InvalidCastToInterfaceSymbolicExecution(),
+            new Sonar.InvalidCastToInterfaceSymbolicExecution(),
             new NullPointerDereference(),
             new RestrictDeserializedTypes(),
             new Sonar.InitializationVectorShouldBeRandom(),
