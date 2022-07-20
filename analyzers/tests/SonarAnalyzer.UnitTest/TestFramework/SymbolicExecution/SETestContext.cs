@@ -46,8 +46,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         public static SETestContext CreateCS(string methodBody, string additionalParameters, params SymbolicCheck[] additionalChecks) =>
             CreateCS(methodBody, additionalParameters, null, additionalChecks);
 
-
-
         public static SETestContext CreateCS(string methodBody, string additionalParameters, string localFunctionName, params SymbolicCheck[] additionalChecks)
         {
             var code = $@"
