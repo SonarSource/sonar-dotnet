@@ -34,13 +34,6 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         // This test is meant to run all the symbolic execution rules together and verify different scenarios.
         [TestMethod]
         public void VerifySymbolicExecutionRules_CS() =>
-
-/* Unmerged change from project 'SonarAnalyzer.UnitTest (net48)'
-Before:
-            new VerifierBuilder<CS.SymbolicExecutionRunner>().AddPaths(@"SymbolicExecution\Sonar\SymbolicExecutionRules.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
-After:
-            new VerifierBuilder<SonarAnalyzer.SymbolicExecution.Sonar.SymbolicExecutionRunner>().AddPaths(@"SymbolicExecution\Sonar\SymbolicExecutionRules.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
-*/
             new VerifierBuilder<SymbolicExecutionRunner>().AddPaths(@"SymbolicExecution\Sonar\SymbolicExecutionRules.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
         [TestMethod]
@@ -450,13 +443,6 @@ End Class";
                 .WithOnlyDiagnostics(onlyRules)
                 .Verify();
 
-
-/* Unmerged change from project 'SonarAnalyzer.UnitTest (net48)'
-Before:
-        private class TestSERunnerCS : CS.SymbolicExecutionRunner
-After:
-        private class TestSERunnerCS : SonarAnalyzer.SymbolicExecution.Sonar.SymbolicExecutionRunner
-*/
         private class TestSERunnerCS : SymbolicExecutionRunner
         {
             public TestSERunnerCS() : base(AnalyzerConfiguration.AlwaysEnabled) { }
@@ -477,13 +463,6 @@ After:
                 .Add(TestScopeAssignmentRuleCheck.STest, CreateFactory<TestScopeAssignmentRuleCheck>());
         }
 
-
-/* Unmerged change from project 'SonarAnalyzer.UnitTest (net48)'
-Before:
-        private class ConfigurableSERunnerCS : CS.SymbolicExecutionRunner
-After:
-        private class ConfigurableSERunnerCS : SonarAnalyzer.SymbolicExecution.Sonar.SymbolicExecutionRunner
-*/
         private class ConfigurableSERunnerCS : SymbolicExecutionRunner
         {
             private ImmutableDictionary<DiagnosticDescriptor, RuleFactory> allRules = ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty;
