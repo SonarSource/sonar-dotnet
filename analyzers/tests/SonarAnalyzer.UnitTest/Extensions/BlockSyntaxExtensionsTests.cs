@@ -283,11 +283,11 @@ public class C
                 Execute.Assertion
                     .BecauseOf(because, becauseArgs)
                     .Given(() => Subject.IsEmpty(treatCommentsAsContent, treatConditionalCompilationAsContent))
-                    .ForCondition(result => result == true)
+                    .ForCondition(result => result)
                     .FailWith("Expected block.IsEmpty() to return true{reason}, but false was returned.")
                     .Then
                     .Given(_ => Subject.IsNotEmpty(treatCommentsAsContent, treatConditionalCompilationAsContent))
-                    .ForCondition(result => result == false)
+                    .ForCondition(result => !result)
                     .FailWith("Expected block.IsNotEmpty() to return false{reason}, but true was returned.");
                 return new AndConstraint<BlockSyntaxAssertions>(this);
             }
@@ -300,11 +300,11 @@ public class C
                 Execute.Assertion
                     .BecauseOf(because, becauseArgs)
                     .Given(() => Subject.IsEmpty(treatCommentsAsContent, treatConditionalCompilationAsContent))
-                    .ForCondition(result => result == false)
+                    .ForCondition(result => !result)
                     .FailWith("Expected block.IsEmpty() to return false{reason}, but true was returned.")
                     .Then
                     .Given(_ => Subject.IsNotEmpty(treatCommentsAsContent, treatConditionalCompilationAsContent))
-                    .ForCondition(result => result == true)
+                    .ForCondition(result => result)
                     .FailWith("Expected block.IsNotEmpty() to return true{reason}, but false was returned.");
                 return new AndConstraint<BlockSyntaxAssertions>(this);
             }
