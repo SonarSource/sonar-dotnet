@@ -33,7 +33,7 @@ using SonarAnalyzer.SymbolicExecution.Sonar;
 using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
 using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
 {
     internal sealed class EmptyCollectionsShouldNotBeEnumerated : ISymbolicExecutionAnalyzer
     {

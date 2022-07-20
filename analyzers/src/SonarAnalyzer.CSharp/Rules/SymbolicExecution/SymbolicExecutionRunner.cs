@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
             new EmptyNullableValueAccess(),
             new ObjectsShouldNotBeDisposedMoreThanOnce(),
             new PublicMethodArgumentsShouldBeCheckedForNull(),
-            new EmptyCollectionsShouldNotBeEnumerated(),
+            new Sonar.EmptyCollectionsShouldNotBeEnumerated(),
             new Sonar.ConditionEvaluatesToConstant(),
             new InvalidCastToInterfaceSymbolicExecution(),
             new NullPointerDereference(),
