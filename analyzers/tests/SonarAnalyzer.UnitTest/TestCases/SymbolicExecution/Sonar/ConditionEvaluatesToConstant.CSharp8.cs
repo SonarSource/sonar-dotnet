@@ -101,6 +101,13 @@ namespace Tests.Diagnostics
             if (isTrue) { } // Noncompliant
         }
 
+        public void NestedDeconstructionAssignment()
+        {
+            var (a, (b, _)) = (true, (true, true));
+            if (a) { }  // FN
+            if (b) { }  // FN
+        }
+
         int UsingDeclaration_Null()
         {
             using System.IO.MemoryStream ms = null;
