@@ -11,6 +11,7 @@
     <!-- Store output of Source Generators in obj\debug\net46\generated for easier debugging -->
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
     <CompilerGeneratedFilesOutputPath>$(IntermediateOutputPath)generated</CompilerGeneratedFilesOutputPath>
+    <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)\.sonarlint\sonaranalyzer-dotnetCSharp.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <ItemGroup>

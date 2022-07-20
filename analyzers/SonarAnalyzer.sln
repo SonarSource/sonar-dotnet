@@ -63,7 +63,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AnalysisConfig", "AnalysisConfig", "{E044950A-098B-4090-B4FB-8D6BD086828B}"
 	ProjectSection(SolutionItems) = preProject
 		.sonarlint\sonaranalyzer-dotnetCSharp.ruleset = .sonarlint\sonaranalyzer-dotnetCSharp.ruleset
-		tests\SonarAnalyzer.Test.ruleset = tests\SonarAnalyzer.Test.ruleset
 		stylecop.json = stylecop.json
 		StyleCopAnalyzers.targets = StyleCopAnalyzers.targets
 	EndProjectSection
