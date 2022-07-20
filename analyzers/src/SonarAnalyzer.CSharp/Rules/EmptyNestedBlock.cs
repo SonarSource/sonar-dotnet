@@ -24,6 +24,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -49,33 +50,19 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.SwitchStatement
         };
 
-        protected override IEnumerable<SyntaxNode> EmptyBlocks(SyntaxNode node)
-        {
-            if ((node is SwitchStatementSyntax switchNode && IsEmpty(switchNode))
-                || (node is BlockSyntax blockNode && IsNestedAndEmpty(blockNode)))
-            {
-                return new[] { node };
-            }
-
-            return Enumerable.Empty<SyntaxNode>();
-        }
+        protected override IEnumerable<SyntaxNode> EmptyBlocks(SyntaxNode node) =>
+            (node is SwitchStatementSyntax switchNode && IsEmpty(switchNode))
+                || (node is BlockSyntax blockNode && IsNestedAndEmpty(blockNode))
+                    ? new[] { node }
+                    : Enumerable.Empty<SyntaxNode>();
 
         private static bool IsEmpty(SwitchStatementSyntax node) =>
             !node.Sections.Any();
 
-        private static bool IsEmpty(BlockSyntax node) =>
-            !node.Statements.Any() && !ContainsCommentOrConditionalCompilation(node);
-
         private static bool IsNestedAndEmpty(BlockSyntax node) =>
-            IsNested(node) && IsEmpty(node);
+            IsNested(node) && node.IsEmpty();
 
         private static bool IsNested(BlockSyntax node) =>
             !node.Parent.IsAnyKind(AllowedContainerKinds);
-
-        private static bool ContainsCommentOrConditionalCompilation(BlockSyntax node) =>
-            ContainsCommentOrConditionalCompilation(node.OpenBraceToken.TrailingTrivia) || ContainsCommentOrConditionalCompilation(node.CloseBraceToken.LeadingTrivia);
-
-        private static bool ContainsCommentOrConditionalCompilation(SyntaxTriviaList trivias) =>
-            trivias.Any(trivia => trivia.IsAnyKind(SyntaxKind.SingleLineCommentTrivia, SyntaxKind.MultiLineCommentTrivia, SyntaxKind.DisabledTextTrivia));
     }
 }
