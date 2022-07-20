@@ -22,6 +22,26 @@ namespace Tests.Diagnostics
             throw new NotSupportedException();
         }
 
+        public void ConditionalCompilation()
+        {
+#if SomeThing
+            Console.WriteLine();
+#endif
+        }
+
+        public void ConditionalCompilationEmpty() // FN. We don't check if the conditional contains anything.
+        {
+#if SomeThing
+#endif
+        }
+
+        public void EmptyRegionTrivia() // Fixed
+        {
+            throw new NotSupportedException();
+            #region
+            #endregion
+        }
+
         protected virtual void F5()
         {
         }

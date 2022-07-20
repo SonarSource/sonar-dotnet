@@ -26,57 +26,59 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class EmptyMethodTest
     {
+        private readonly VerifierBuilder verifierCS = new VerifierBuilder<CS.EmptyMethod>();
+        private readonly VerifierBuilder verifierVB = new VerifierBuilder<VB.EmptyMethod>();
+
         [TestMethod]
         public void EmptyMethod() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\EmptyMethod.cs",
-                new CS.EmptyMethod(),
-                ParseOptionsHelper.FromCSharp8,
-                MetadataReferenceFacade.NETStandard21);
+            verifierCS.AddPaths("EmptyMethod.cs").WithOptions(ParseOptionsHelper.FromCSharp8).AddReferences(MetadataReferenceFacade.NETStandard21).Verify();
 
 #if NET
+
         [TestMethod]
         public void EmptyMethod_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\EmptyMethod.CSharp10.cs", new CS.EmptyMethod());
+            verifierCS.AddPaths("EmptyMethod.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
         [TestMethod]
         public void EmptyMethod_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EmptyMethod.CSharp9.cs", new CS.EmptyMethod());
+            verifierCS.AddPaths("EmptyMethod.CSharp9.cs").WithTopLevelStatements().Verify();
+
 #endif
 
         [TestMethod]
         public void EmptyMethod_CodeFix_Throw() =>
-            OldVerifier.VerifyCodeFix<CS.EmptyMethodCodeFix>(
-                @"TestCases\EmptyMethod.cs",
-                @"TestCases\EmptyMethod.Throw.Fixed.cs",
-                new CS.EmptyMethod(),
-                CS.EmptyMethodCodeFix.TitleThrow);
+            verifierCS.WithCodeFix<CS.EmptyMethodCodeFix>()
+                .AddPaths("EmptyMethod.cs")
+                .WithCodeFixedPaths("EmptyMethod.Throw.Fixed.cs")
+                .WithCodeFixTitle(CS.EmptyMethodCodeFix.TitleThrow)
+                .VerifyCodeFix();
 
         [TestMethod]
         public void EmptyMethod_CodeFix_Comment() =>
-            OldVerifier.VerifyCodeFix<CS.EmptyMethodCodeFix>(
-                @"TestCases\EmptyMethod.cs",
-                @"TestCases\EmptyMethod.Comment.Fixed.cs",
-                new CS.EmptyMethod(),
-                CS.EmptyMethodCodeFix.TitleComment);
+            verifierCS.WithCodeFix<CS.EmptyMethodCodeFix>()
+                .AddPaths("EmptyMethod.cs")
+                .WithCodeFixedPaths("EmptyMethod.Comment.Fixed.cs")
+                .WithCodeFixTitle(CS.EmptyMethodCodeFix.TitleComment)
+                .VerifyCodeFix();
 
         [TestMethod]
         public void EmptyMethod_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\EmptyMethod.vb", new VB.EmptyMethod());
+            verifierVB.AddPaths("EmptyMethod.vb").Verify();
 
         [TestMethod]
         public void EmptyMethod_WithVirtualOverride_RaisesIssueForMainProject_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\EmptyMethod.OverrideVirtual.cs", new CS.EmptyMethod());
+            verifierCS.AddPaths("EmptyMethod.OverrideVirtual.cs").Verify();
 
         [TestMethod]
         public void EmptyMethod_WithVirtualOverride_DoesNotRaiseIssuesForTestProject_CS() =>
-            OldVerifier.VerifyNoIssueReportedInTest(@"TestCases\EmptyMethod.OverrideVirtual.cs", new CS.EmptyMethod());
+            verifierCS.AddPaths("EmptyMethod.OverrideVirtual.cs").AddTestReference().VerifyNoIssueReported();
 
         [TestMethod]
         public void EmptyMethod_WithVirtualOverride_RaisesIssueForMainProject_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\EmptyMethod.OverrideVirtual.vb", new VB.EmptyMethod());
+            verifierVB.AddPaths("EmptyMethod.OverrideVirtual.vb").Verify();
 
         [TestMethod]
         public void EmptyMethod_WithVirtualOverride_DoesNotRaiseIssuesForTestProject_VB() =>
-            OldVerifier.VerifyNoIssueReportedInTest(@"TestCases\EmptyMethod.OverrideVirtual.vb", new VB.EmptyMethod());
+            verifierVB.AddPaths("EmptyMethod.OverrideVirtual.vb").AddTestReference().VerifyNoIssueReported();
     }
 }
