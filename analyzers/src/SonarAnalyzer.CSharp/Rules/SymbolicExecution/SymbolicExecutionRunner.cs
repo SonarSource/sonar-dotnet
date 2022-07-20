@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly ImmutableArray<ISymbolicExecutionAnalyzer> SonarRules = ImmutableArray.Create<ISymbolicExecutionAnalyzer>(
             new Sonar.EmptyNullableValueAccess(),
             new Sonar.ObjectsShouldNotBeDisposedMoreThanOnce(),
-            new PublicMethodArgumentsShouldBeCheckedForNull(),
+            new Sonar.PublicMethodArgumentsShouldBeCheckedForNull(),
             new Sonar.EmptyCollectionsShouldNotBeEnumerated(),
             new Sonar.ConditionEvaluatesToConstant(),
             new Sonar.InvalidCastToInterfaceSymbolicExecution(),
