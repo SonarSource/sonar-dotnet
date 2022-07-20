@@ -22,7 +22,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 
-namespace SonarAnalyzer.Rules.SymbolicExecution
+namespace SonarAnalyzer.SymbolicExecution.Sonar
 {
     // The implementing class is responsible to encapsulate the generated data during method analysis (like diagnostics
     // or cached nodes) and clear it and the end.

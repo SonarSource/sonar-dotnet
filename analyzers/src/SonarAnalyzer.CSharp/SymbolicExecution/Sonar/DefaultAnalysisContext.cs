@@ -23,7 +23,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 
-namespace SonarAnalyzer.Rules.SymbolicExecution
+namespace SonarAnalyzer.SymbolicExecution.Sonar
 {
     internal abstract class DefaultAnalysisContext<T> : ISymbolicExecutionAnalysisContext
     {

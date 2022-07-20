@@ -33,30 +33,28 @@ using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.LiveVariableAnalysis.CSharp;
-using SonarAnalyzer.Rules.SymbolicExecution;
-using SonarAnalyzer.SymbolicExecution;
+using SonarAnalyzer.Rules;
 using SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
-using SonarAnalyzer.SymbolicExecution.Sonar;
+using SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;
 using StyleCop.Analyzers.Lightup;
-using Sonar = SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.SymbolicExecution.Sonar
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
     {
         // ToDo: This should be migrated to SymbolicExecutionRunnerBase.AllRules.
         private static readonly ImmutableArray<ISymbolicExecutionAnalyzer> SonarRules = ImmutableArray.Create<ISymbolicExecutionAnalyzer>(
-            new Sonar.EmptyNullableValueAccess(),
-            new Sonar.ObjectsShouldNotBeDisposedMoreThanOnce(),
-            new Sonar.PublicMethodArgumentsShouldBeCheckedForNull(),
-            new Sonar.EmptyCollectionsShouldNotBeEnumerated(),
-            new Sonar.ConditionEvaluatesToConstant(),
-            new Sonar.InvalidCastToInterfaceSymbolicExecution(),
-            new Sonar.NullPointerDereference(),
-            new Sonar.RestrictDeserializedTypes(),
-            new Sonar.InitializationVectorShouldBeRandom(),
-            new Sonar.HashesShouldHaveUnpredictableSalt());
+            new EmptyNullableValueAccess(),
+            new ObjectsShouldNotBeDisposedMoreThanOnce(),
+            new PublicMethodArgumentsShouldBeCheckedForNull(),
+            new EmptyCollectionsShouldNotBeEnumerated(),
+            new ConditionEvaluatesToConstant(),
+            new InvalidCastToInterfaceSymbolicExecution(),
+            new Analyzers.NullPointerDereference(),
+            new RestrictDeserializedTypes(),
+            new InitializationVectorShouldBeRandom(),
+            new HashesShouldHaveUnpredictableSalt());
 
         public SymbolicExecutionRunner() : this(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg) { }
 
@@ -64,7 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules { get; } = ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
             .Add(LocksReleasedAllPaths.S2222, CreateFactory<LocksReleasedAllPaths>())
-            .Add(NullPointerDereference.S2259, CreateFactory<NullPointerDereference>());
+            .Add(Roslyn.RuleChecks.CSharp.NullPointerDereference.S2259, CreateFactory<Roslyn.RuleChecks.CSharp.NullPointerDereference>());
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => base.SupportedDiagnostics.Concat(SonarRules.SelectMany(x => x.SupportedDiagnostics)).ToImmutableArray();
 
