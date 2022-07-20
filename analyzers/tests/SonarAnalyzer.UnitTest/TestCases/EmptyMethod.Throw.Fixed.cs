@@ -29,8 +29,9 @@ namespace Tests.Diagnostics
 #endif
         }
 
-        public void ConditionalCompilationEmpty() // FN. We don't check if the conditional contains anything.
+        public void ConditionalCompilationEmpty() // Fixed
         {
+            throw new NotSupportedException();
 #if SomeThing
 #endif
         }
