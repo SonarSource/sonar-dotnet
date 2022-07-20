@@ -118,7 +118,7 @@ namespace Classes
 
     }
 
-    [Export(typeof(ISomething<>))] // Noncompliant, generics are now supported. See: https://github.com/SonarSource/sonar-dotnet/issues/5641
+    [Export(typeof(ISomething<>))]
     public class Soomething<T> : ISomething<T>
     {
     }

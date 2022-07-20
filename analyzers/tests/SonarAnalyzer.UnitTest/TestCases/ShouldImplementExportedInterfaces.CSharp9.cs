@@ -35,7 +35,7 @@ record NotExported_NamedArgs_ReverseOrder : MyInterface
 
 interface ISomething<T> { }
 
-[Export(typeof(ISomething<>))] // Noncompliant
+[Export(typeof(ISomething<>))]
 public record Something<T> : ISomething<T>
 {
 }

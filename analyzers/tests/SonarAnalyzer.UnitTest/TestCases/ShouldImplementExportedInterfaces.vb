@@ -94,7 +94,7 @@ Namespace Classes
         Implements ISomething(Of BaseThing2)
     End Class
 
-    <Export(GetType(ISomething(Of)))> ' Noncompliant
+    <Export(GetType(ISomething(Of)))>
     Public Class OtherSomething(Of T)
         Implements ISomething(Of T)
     End Class
