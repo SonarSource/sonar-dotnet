@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using FluentAssertions.Execution;
+using FluentAssertions.Primitives;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Extensions;
@@ -37,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
 }
 ";
             var declaration = MethodDeclarationForBlock(block);
-            declaration.Body.IsEmpty().Should().BeTrue();
+            declaration.Body.Should().BeEmpty();
         }
 
         [TestMethod]
@@ -49,7 +51,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
 }
 ";
             var declaration = MethodDeclarationForBlock(block);
-            declaration.Body.IsEmpty().Should().BeFalse();
+            declaration.Body.Should().BeNotEmpty();
         }
 
         [TestMethod]
@@ -77,7 +79,7 @@ public class C
 }
 ";
             var declaration = MethodDeclarationForBlock(block);
-            declaration.Body.IsEmpty(treatCommentsAsContent: true).Should().BeFalse();
+            declaration.Body.Should().BeNotEmpty(treatCommentsAsContent: true);
         }
 
         [TestMethod]
@@ -89,7 +91,7 @@ public class C
 }
 ";
             var declaration = MethodDeclarationForBlock(block);
-            declaration.Body.IsEmpty(treatCommentsAsContent: false).Should().BeTrue();
+            declaration.Body.Should().BeEmpty(treatCommentsAsContent: false);
         }
 
         [TestMethod]
@@ -101,7 +103,7 @@ public class C
 }
 ";
             var declaration = MethodDeclarationForBlock(block);
-            declaration.Body.IsEmpty(treatCommentsAsContent: true).Should().BeFalse(); // This is a questionable behavior.
+            declaration.Body.Should().BeNotEmpty(treatCommentsAsContent: true); // This is a questionable behavior.
         }
 
         [TestMethod]
@@ -113,7 +115,7 @@ public class C
 }
 ";
             var declaration = MethodDeclarationForBlock(block);
-            declaration.Body.IsEmpty(treatCommentsAsContent: true).Should().BeFalse();
+            declaration.Body.Should().BeNotEmpty(treatCommentsAsContent: true);
         }
 
         [TestMethod]
@@ -125,7 +127,7 @@ public class C
 }
 ";
             var declaration = MethodDeclarationForBlock(block);
-            declaration.Body.IsEmpty(treatCommentsAsContent: false).Should().BeTrue();
+            declaration.Body.Should().BeEmpty(treatCommentsAsContent: false);
         }
 
         [TestMethod]
@@ -139,7 +141,7 @@ public class C
 }
 ";
             var declaration = MethodDeclarationForBlock(block);
-            declaration.Body.IsEmpty(treatConditionalCompilationAsContent: true).Should().BeFalse();
+            declaration.Body.Should().BeNotEmpty(treatConditionalCompilationAsContent: true);
         }
 
         [TestMethod]
@@ -153,7 +155,7 @@ public class C
 }
 ";
             var declaration = MethodDeclarationForBlock(block);
-            declaration.Body.IsEmpty(treatConditionalCompilationAsContent: false).Should().BeTrue();
+            declaration.Body.Should().BeEmpty(treatConditionalCompilationAsContent: false);
         }
 
         [TestMethod]
@@ -166,7 +168,7 @@ public class C
 }
 ";
             var declaration = MethodDeclarationForBlock(block);
-            declaration.Body.IsEmpty(treatConditionalCompilationAsContent: true).Should().BeTrue();
+            declaration.Body.Should().BeEmpty(treatConditionalCompilationAsContent: true);
         }
 
         [TestMethod]
@@ -179,7 +181,7 @@ public class C
 }
 ";
             var declaration = MethodDeclarationForBlock(block);
-            declaration.Body.IsEmpty(treatConditionalCompilationAsContent: true).Should().BeTrue();
+            declaration.Body.Should().BeEmpty(treatConditionalCompilationAsContent: true);
         }
 
         [DataTestMethod]
@@ -197,14 +199,13 @@ public class C
 }
 ";
             var declaration = MethodDeclarationForBlock(block);
-            var result = declaration.Body.IsEmpty(treatCommentsAsContent, treatConditionalCompilationAsContent);
             if (isEmpty)
             {
-                result.Should().BeTrue();
+                declaration.Body.Should().BeEmpty(treatCommentsAsContent, treatConditionalCompilationAsContent);
             }
             else
             {
-                result.Should().BeFalse();
+                declaration.Body.Should().BeNotEmpty(treatCommentsAsContent, treatConditionalCompilationAsContent);
             }
         }
 
@@ -213,7 +214,7 @@ public class C
         {
             var block = BlockWithoutTrivia();
             block = block.WithOpenBraceToken(Token(SyntaxKind.OpenBraceToken).WithTrailingTrivia(ParseTrailingTrivia("// Comment")));
-            block.IsEmpty(treatCommentsAsContent: true).Should().BeFalse();
+            block.Should().BeNotEmpty(treatCommentsAsContent: true);
         }
 
         [TestMethod]
@@ -221,7 +222,7 @@ public class C
         {
             var block = BlockWithoutTrivia();
             block = block.WithCloseBraceToken(Token(SyntaxKind.CloseBraceToken).WithLeadingTrivia(ParseLeadingTrivia("// Comment")));
-            block.IsEmpty(treatCommentsAsContent: true).Should().BeFalse();
+            block.Should().BeNotEmpty(treatCommentsAsContent: true);
         }
 
         [TestMethod]
@@ -229,7 +230,7 @@ public class C
         {
             var block = BlockWithoutTrivia();
             block = block.WithOpenBraceToken(Token(SyntaxKind.OpenBraceToken).WithTrailingTrivia(ParseTrailingTrivia("#if Something\r\n var i = 1; \r\n #endif")));
-            block.IsEmpty(treatConditionalCompilationAsContent: true).Should().BeFalse();
+            block.Should().BeNotEmpty(treatConditionalCompilationAsContent: true);
         }
 
         [TestMethod]
@@ -237,7 +238,7 @@ public class C
         {
             var block = BlockWithoutTrivia();
             block = block.WithCloseBraceToken(Token(SyntaxKind.CloseBraceToken).WithLeadingTrivia(ParseLeadingTrivia("#if Something\r\n var i = 1; \r\n #endif")));
-            block.IsEmpty(treatConditionalCompilationAsContent: true).Should().BeFalse();
+            block.Should().BeNotEmpty(treatConditionalCompilationAsContent: true);
         }
 
         private static BlockSyntax BlockWithoutTrivia()
@@ -265,5 +266,51 @@ public class C
             root.ContainsDiagnostics.Should().BeFalse();
             return root.DescendantNodes().OfType<MethodDeclarationSyntax>().Single();
         }
+    }
+
+    internal static class BlockSyntaxExtensions
+    {
+        public class BlockSyntaxAssertions : ReferenceTypeAssertions<BlockSyntax, BlockSyntaxAssertions>
+        {
+            public BlockSyntaxAssertions(BlockSyntax block) : base(block)
+            {
+            }
+
+            protected override string Identifier => "BlockSyntax";
+
+            public AndConstraint<BlockSyntaxAssertions> BeEmpty(bool treatCommentsAsContent = true, bool treatConditionalCompilationAsContent = true, string because = "", params object[] becauseArgs)
+            {
+                Execute.Assertion
+                    .BecauseOf(because, becauseArgs)
+                    .Given(() => Subject.IsEmpty(treatCommentsAsContent, treatConditionalCompilationAsContent))
+                    .ForCondition(result => result == true)
+                    .FailWith("Expected block.IsEmpty to return true{reason}, but false was returned.")
+                    .Then
+                    .Given(_ => Subject.IsNotEmpty(treatCommentsAsContent, treatConditionalCompilationAsContent))
+                    .ForCondition(result => result == false)
+                    .FailWith("Expected block.IsNotEmpty to return false{reason}, but true was returned.");
+                return new AndConstraint<BlockSyntaxAssertions>(this);
+            }
+
+            public AndConstraint<BlockSyntaxAssertions> BeNotEmpty(bool treatCommentsAsContent = true,
+                                                                   bool treatConditionalCompilationAsContent = true,
+                                                                   string because = "",
+                                                                   params object[] becauseArgs)
+            {
+                Execute.Assertion
+                    .BecauseOf(because, becauseArgs)
+                    .Given(() => Subject.IsEmpty(treatCommentsAsContent, treatConditionalCompilationAsContent))
+                    .ForCondition(result => result == false)
+                    .FailWith("Expected block.IsEmpty to return false{reason}, but true was returned.")
+                    .Then
+                    .Given(_ => Subject.IsNotEmpty(treatCommentsAsContent, treatConditionalCompilationAsContent))
+                    .ForCondition(result => result == true)
+                    .FailWith("Expected block.IsNotEmpty to return true{reason}, but false was returned.");
+                return new AndConstraint<BlockSyntaxAssertions>(this);
+            }
+        }
+
+        public static BlockSyntaxAssertions Should(this BlockSyntax block)
+            => new(block);
     }
 }
