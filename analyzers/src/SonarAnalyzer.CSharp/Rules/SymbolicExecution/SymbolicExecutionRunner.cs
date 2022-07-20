@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
             new NullPointerDereference(),
             new RestrictDeserializedTypes(),
             new InitializationVectorShouldBeRandom(),
-            new HashesShouldHaveUnpredictableSalt());
+            new Sonar.HashesShouldHaveUnpredictableSalt());
 
         public SymbolicExecutionRunner() : this(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg) { }
 
