@@ -20,6 +20,7 @@
 
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;
 
 namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
 {

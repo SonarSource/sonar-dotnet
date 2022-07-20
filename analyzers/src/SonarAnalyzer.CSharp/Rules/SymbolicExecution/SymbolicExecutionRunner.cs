@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
             new Sonar.EmptyCollectionsShouldNotBeEnumerated(),
             new Sonar.ConditionEvaluatesToConstant(),
             new Sonar.InvalidCastToInterfaceSymbolicExecution(),
-            new NullPointerDereference(),
+            new Sonar.NullPointerDereference(),
             new RestrictDeserializedTypes(),
             new Sonar.InitializationVectorShouldBeRandom(),
             new Sonar.HashesShouldHaveUnpredictableSalt());

@@ -33,7 +33,7 @@ using SonarAnalyzer.Rules.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Sonar;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
 {
     internal sealed class NullPointerDereference : ISymbolicExecutionAnalyzer
     {
@@ -137,7 +137,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     return programState;
                 }
 
-                if ((IsNullableValueType(symbol) && !IsGetTypeCall(memberAccess))
+                if (IsNullableValueType(symbol) && !IsGetTypeCall(memberAccess)
                     || semanticModel.IsExtensionMethod(memberAccess))
                 {
                     return programState;
