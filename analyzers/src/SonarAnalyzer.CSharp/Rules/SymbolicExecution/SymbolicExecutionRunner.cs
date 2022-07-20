@@ -36,6 +36,7 @@ using SonarAnalyzer.LiveVariableAnalysis.CSharp;
 using SonarAnalyzer.Rules.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Sonar;
+using Sonar = SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;
 using StyleCop.Analyzers.Lightup;
 using RuleChecks = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 
@@ -50,7 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
             new ObjectsShouldNotBeDisposedMoreThanOnce(),
             new PublicMethodArgumentsShouldBeCheckedForNull(),
             new EmptyCollectionsShouldNotBeEnumerated(),
-            new ConditionEvaluatesToConstant(),
+            new Sonar.ConditionEvaluatesToConstant(),
             new InvalidCastToInterfaceSymbolicExecution(),
             new NullPointerDereference(),
             new RestrictDeserializedTypes(),

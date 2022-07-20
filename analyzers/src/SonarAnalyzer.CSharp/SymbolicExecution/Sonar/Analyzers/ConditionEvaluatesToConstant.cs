@@ -33,7 +33,7 @@ using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Sonar;
 using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
 {
     internal sealed class ConditionEvaluatesToConstant : ISymbolicExecutionAnalyzer
     {
