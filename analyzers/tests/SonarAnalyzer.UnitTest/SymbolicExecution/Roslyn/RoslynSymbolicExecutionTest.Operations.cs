@@ -19,7 +19,9 @@
  */
 
 using Microsoft.CodeAnalysis.Operations;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.SymbolicExecution.Constraints;
+using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 using StyleCop.Analyzers.Lightup;
 
@@ -609,6 +611,98 @@ Tag(""Me"", FromMe)";
             var validator = SETestContext.CreateVB(code).Validator;
             validator.ValidateContainsOperation(OperationKind.InstanceReference);
             validator.ValidateTag("Me", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void Invocation_SetsNotNullOnInstance_CS()
+        {
+            const string code = @"
+public class Sample
+{
+    public void Main(Sample instanceArg, Sample extensionArg)
+    {
+        var preserve = true;
+        Tag(""BeforeInstance"", instanceArg);
+        Tag(""BeforeExtension"", extensionArg);
+        Tag(""BeforePreserve"", preserve);
+
+        instanceArg.InstanceMethod();
+        extensionArg.ExtensionMethod();
+        UntrackedSymbol().InstanceMethod(); // Is not invoked on any symbol, should not fail
+        preserve.ExtensionMethod();
+        preserve.ToString();
+
+        Tag(""AfterInstance"", instanceArg);
+        Tag(""AfterExtension"", extensionArg);
+        Tag(""AfterPreserve"", preserve);
+    }
+
+    private void InstanceMethod() { }
+    private void Tag(string name, object arg) { }
+    private Sample UntrackedSymbol() => this;
+}
+
+public static class Extensions
+{
+    public static void ExtensionMethod(this Sample s) { }
+    public static void ExtensionMethod(this bool b) { }
+}";
+            var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
+            validator.ValidateContainsOperation(OperationKind.Invocation);
+            validator.ValidateTag("BeforeInstance", x => x.Should().BeNull());
+            validator.ValidateTag("BeforeExtension", x => x.Should().BeNull());
+            validator.ValidateTag("BeforePreserve", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+            validator.ValidateTag("AfterInstance", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue("Instance method should set NotNull constraint."));
+            validator.ValidateTag("AfterExtension", x => x.Should().BeNull("Extensions can run on null instances."));
+            validator.ValidateTag("AfterPreserve", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue("Other constraints should not be removed."));
+        }
+
+        [TestMethod]
+        public void Invocation_SetsNotNullOnInstance_VB()
+        {
+            const string code = @"
+Public Class Sample
+
+    Public Sub Main(InstanceArg As Sample, StaticArg As Sample, ExtensionArg As Sample)
+        Tag(""BeforeInstance"", InstanceArg)
+        Tag(""BeforeStatic"", StaticArg)
+        Tag(""BeforeExtension"", ExtensionArg)
+
+        InstanceArg.InstanceMethod()
+        StaticArg.StaticMethod()
+        ExtensionArg.ExtensionMethod()
+
+        Tag(""AfterInstance"", InstanceArg)
+        Tag(""AfterStatic"", StaticArg)
+        Tag(""AfterExtension"", ExtensionArg)
+    End Sub
+
+    Private Sub InstanceMethod()
+    End Sub
+
+    Private Shared Sub StaticMethod()
+    End Sub
+
+    Private Sub Tag(Name As String, Arg As Object)
+    End Sub
+
+End Class
+
+Public Module Extensions
+
+    <Runtime.CompilerServices.Extension>
+    Public Sub ExtensionMethod(S As Sample)
+    End Sub
+
+End Module";
+            var validator = new SETestContext(code, AnalyzerLanguage.VisualBasic, Array.Empty<SymbolicCheck>()).Validator;
+            validator.ValidateContainsOperation(OperationKind.ObjectCreation);
+            validator.ValidateTag("BeforeInstance", x => x.Should().BeNull());
+            validator.ValidateTag("BeforeStatic", x => x.Should().BeNull());
+            validator.ValidateTag("BeforeExtension", x => x.Should().BeNull());
+            validator.ValidateTag("AfterInstance", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue("Instance method should set NotNull constraint."));
+            validator.ValidateTag("AfterStatic", x => x.Should().BeNull("Static method can execute from null instances."));
+            validator.ValidateTag("AfterExtension", x => x.Should().BeNull("Extensions can run on null instances."));
         }
     }
 }

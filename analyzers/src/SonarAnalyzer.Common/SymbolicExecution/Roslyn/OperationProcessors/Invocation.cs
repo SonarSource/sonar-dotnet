@@ -18,12 +18,20 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
 {
     internal static class Invocation
     {
+        public static ProgramState Process(SymbolicContext context, IInvocationOperationWrapper invocation) =>
+            !invocation.TargetMethod.IsStatic               // Also applies to C# extensions
+            && !invocation.TargetMethod.IsExtensionMethod   // VB extensions in modules are not marked as static
+            && invocation.Instance.TrackedSymbol() is { } symbol
+                ? context.SetSymbolConstraint(symbol, ObjectConstraint.NotNull)
+                : context.State;
+
         public static ProgramState Process(SymbolicContext context, IArgumentOperationWrapper argument) =>
             argument.Parameter is not null      // __arglist is not assigned to a parameter
             && argument.Parameter.RefKind != Microsoft.CodeAnalysis.RefKind.None
