@@ -35,7 +35,7 @@ using SonarAnalyzer.SymbolicExecution.Sonar;
 using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
 using SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
 {
     internal sealed class EmptyNullableValueAccess : ISymbolicExecutionAnalyzer
     {
