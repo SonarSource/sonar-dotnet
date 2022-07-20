@@ -22,11 +22,14 @@ using System;
 using System.Collections.Immutable;
 using System.Linq;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
     public sealed record SymbolicValue
     {
+        public static readonly SymbolicValue This = new SymbolicValue().WithConstraint(ObjectConstraint.NotNull);
+
         // SymbolicValue can have only one constraint instance of specific type at a time
         private ImmutableDictionary<Type, SymbolicConstraint> Constraints { get; init; } = ImmutableDictionary<Type, SymbolicConstraint>.Empty;
 

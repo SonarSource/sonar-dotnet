@@ -24,6 +24,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
 {
     internal static class References
     {
+        public static ProgramState ProcessThis(SymbolicContext context) =>
+            context.State.SetOperationValue(context.Operation, SymbolicValue.This);     // Implicit and Explicit
+
         public static ProgramState Process(SymbolicContext context, ILocalReferenceOperationWrapper localReference) =>
             context.State[localReference.Local] is { } value
                 ? context.State.SetOperationValue(context.Operation, value)
