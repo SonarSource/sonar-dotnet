@@ -32,7 +32,7 @@ using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Sonar;
 using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
 {
     internal sealed class RestrictDeserializedTypes : ISymbolicExecutionAnalyzer
     {
@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
             public bool SupportsPartialResults => true;
 
             public IEnumerable<Diagnostic> GetDiagnostics() =>
-                locations.Select(location => Diagnostic.Create(S5773, location.Primary,  location.SecondaryLocations, location.Message));
+                locations.Select(location => Diagnostic.Create(S5773, location.Primary, location.SecondaryLocations, location.Message));
 
             public void Dispose()
             {
@@ -264,7 +264,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     return new TypeDeclarationInfo(true);
                 }
 
-                return semanticModel.GetTypeInfo(objectCreation.ArgumentList.Arguments[0].Expression).Type is {} typeSymbol &&
+                return semanticModel.GetTypeInfo(objectCreation.ArgumentList.Arguments[0].Expression).Type is { } typeSymbol &&
                        !typeSymbol.Is(KnownType.System_Web_Script_Serialization_SimpleTypeResolver)
                     ? GetOrAddSanitizerDeclaration(typeSymbol)
                     : new TypeDeclarationInfo(false);
@@ -329,7 +329,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private bool IsDeserializeOnKnownType(MemberAccessExpressionSyntax memberAccess) =>
                 IsDeserializeMethod(memberAccess)
-                && semanticModel.GetTypeInfo(memberAccess.Expression).Type is {} typeSymbol
+                && semanticModel.GetTypeInfo(memberAccess.Expression).Type is { } typeSymbol
                 && (IsFormatterWithBinder(typeSymbol) || IsJavaScriptSerializer(typeSymbol));
 
             private static bool IsFormatterWithBinder(ITypeSymbol typeSymbol) =>
@@ -360,7 +360,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 Message = message;
                 SecondaryLocations = secondary == null
                     ? Enumerable.Empty<Location>()
-                    : new[] {secondary};
+                    : new[] { secondary };
             }
         }
 

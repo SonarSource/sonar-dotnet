@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
             new Sonar.ConditionEvaluatesToConstant(),
             new Sonar.InvalidCastToInterfaceSymbolicExecution(),
             new Sonar.NullPointerDereference(),
-            new RestrictDeserializedTypes(),
+            new Sonar.RestrictDeserializedTypes(),
             new Sonar.InitializationVectorShouldBeRandom(),
             new Sonar.HashesShouldHaveUnpredictableSalt());
 
