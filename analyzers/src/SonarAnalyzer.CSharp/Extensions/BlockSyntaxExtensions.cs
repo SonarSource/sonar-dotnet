@@ -18,13 +18,32 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
+using System.Linq;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Extensions
 {
     public static class BlockSyntaxExtensions
     {
-        public static bool IsEmpty(this BlockSyntax block)
-            => true;
+        public static bool IsEmpty(this BlockSyntax block, bool treatCommentsAsContent = true, bool treatConditionalCompilationAsContent = true) =>
+            !block.IsNotEmpty(treatCommentsAsContent, treatConditionalCompilationAsContent);
+
+        public static bool IsNotEmpty(this BlockSyntax block, bool treatCommentsAsContent = true, bool treatConditionalCompilationAsContent = true)
+        {
+            _ = block ?? throw new ArgumentNullException(nameof(block));
+
+            return block.Statements.Any()
+                || TriviaContainsCommentOrConditionalCompilation(block.OpenBraceToken.TrailingTrivia)
+                || TriviaContainsCommentOrConditionalCompilation(block.CloseBraceToken.LeadingTrivia);
+
+            bool TriviaContainsCommentOrConditionalCompilation(SyntaxTriviaList trivias) =>
+                trivias.Any(trivia =>
+                    (treatCommentsAsContent && trivia.IsAnyKind(SyntaxKind.SingleLineCommentTrivia, SyntaxKind.MultiLineCommentTrivia))
+                    || (treatConditionalCompilationAsContent && trivia.IsKind(SyntaxKind.DisabledTextTrivia)));
+        }
     }
 }
