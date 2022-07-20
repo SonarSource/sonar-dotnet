@@ -35,13 +35,11 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3874";
         private const string MessageFormat = "Consider refactoring this method in order to remove the need for this '{0}' modifier.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
@@ -57,19 +55,18 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var parameterSymbol = c.SemanticModel.GetDeclaredSymbol(parameter);
 
-                    if (!(parameterSymbol?.ContainingSymbol is IMethodSymbol containingMethod) ||
-                        containingMethod.IsOverride ||
-                        !containingMethod.IsPubliclyAccessible() ||
-                        IsTryPattern(containingMethod, modifier) ||
-                        containingMethod.GetInterfaceMember() != null)
+                    if (!(parameterSymbol.ContainingSymbol is IMethodSymbol { } containingMethod)
+                        || containingMethod.IsOverride
+                        || !containingMethod.IsPubliclyAccessible()
+                        || IsTryPattern(containingMethod, modifier)
+                        || containingMethod.GetInterfaceMember() != null)
                     {
                         return;
                     }
 
-                    c.ReportIssue(Diagnostic.Create(rule, modifier.GetLocation(), modifier.ValueText));
+                    c.ReportIssue(Diagnostic.Create(Rule, modifier.GetLocation(), modifier.ValueText));
                 },
                 SyntaxKind.Parameter);
-        }
 
         private bool IsTryPattern(IMethodSymbol method, SyntaxToken modifier) =>
             method.Name.StartsWith("Try", StringComparison.Ordinal)

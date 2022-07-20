@@ -25,18 +25,20 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DoNotUseOutRefParametersTest
     {
+        private readonly VerifierBuilder verifier = new VerifierBuilder<DoNotUseOutRefParameters>();
+
         [TestMethod]
         public void DoNotUseOutRefParameters() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotUseOutRefParameters.cs", new DoNotUseOutRefParameters());
+            verifier.AddPaths("DoNotUseOutRefParameters.cs").Verify();
 
 #if NET
         [TestMethod]
         public void DoNotUseOutRefParameters_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DoNotUseOutRefParameters.CSharp9.cs", new DoNotUseOutRefParameters());
+            verifier.AddPaths("DoNotUseOutRefParameters.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
         [TestMethod]
         public void DoNotUseOutRefParameters_CSharpPreview() =>
-            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\DoNotUseOutRefParameters.CSharpPreview.cs", new DoNotUseOutRefParameters());
+            verifier.AddPaths("DoNotUseOutRefParameters.CSharpPreview.cs").WithOptions(ParseOptionsHelper.CSharpPreview).Verify();
 #endif
     }
 }
