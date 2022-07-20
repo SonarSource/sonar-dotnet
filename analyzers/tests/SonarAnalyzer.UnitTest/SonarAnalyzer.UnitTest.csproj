@@ -15,6 +15,7 @@
       -->
     <AssetTargetFallback>$(AssetTargetFallback);net40-client;portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
     <ProjectGuid>{e11606ca-a186-4fee-ba30-b1688747cd1a}</ProjectGuid>
+    <IsTestProject>true</IsTestProject>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' != 'net48'">
@@ -27,7 +28,16 @@
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
     <PackageReference Include="FluentAssertions.Analyzers" Version="0.13.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
+    <!-- Update this reference when new version is released -->
+    <PackageReference Include="coverlet.collector" Version="3.1.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="coverlet.msbuild" Version="3.1.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Moq" Version="4.13.1" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.0.0" />
     <PackageReference Include="MSTest.TestFramework" Version="2.0.0" />

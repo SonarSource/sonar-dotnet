@@ -162,11 +162,24 @@ stages:
       - powershell: |
           . .\scripts\utils.ps1
 
+          $TestResultsDir = "analyzers\tests\SonarAnalyzer.UnitTest\TestResults\"
+          if (Test-Path $TestResultsDir) { Remove-Item -Path $TestResultsDir -Recurse -Verbose }
+
           CreateFolder("coverage")
           CreateFolder("TestResults")
 
-          & OpenCover.Console.exe -target:"dotnet.exe" -targetargs:"test analyzers\tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net48\SonarAnalyzer.UnitTest.dll -l trx -l console;verbosity=detailed" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.Utilities]* +[SonarAnalyzer.VisualBasic]*" -output:coverage/net48.xml -safemode:off -excludebyattribute:*.ExcludeFromCodeCoverageAttribute
+          gci analyzers\tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net48
+
+          dotnet test .\analyzers\SonarAnalyzer.sln --no-build --collect:"XPlat Code Coverage" --settings .\analyzers\runsettings.xml -l "trx;logfilename=net48.trx" -l "console;verbosity=diagnostic" -c $(BuildConfiguration) -f net48 -v diag
           Test-ExitCode "ERROR: Unit tests for net48 FAILED."
+
+          gci -Path $TestResultsDir -Recurse
+
+          Get-ChildItem -Path $TestResultsDir -Recurse -File -Filter coverage.opencover.xml | Copy-Item -Verbose -Destination .\coverage\net48.xml
+          Get-ChildItem -Path $TestResultsDir -Recurse -File -Filter net48.trx | Copy-Item -Verbose -Destination .\TestResults\
+
+          ### & OpenCover.Console.exe -target:"dotnet.exe" -targetargs:"test analyzers\tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net48\SonarAnalyzer.UnitTest.dll -l trx -l console;verbosity=detailed" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.Utilities]* +[SonarAnalyzer.VisualBasic]*" -output:coverage/net48.xml -safemode:off -excludebyattribute:*.ExcludeFromCodeCoverageAttribute
+          ### Test-ExitCode "ERROR: Unit tests for net48 FAILED."
         displayName: '.Net UTs'
 
       - task: PublishPipelineArtifact@1
@@ -194,11 +207,24 @@ stages:
       - powershell: |
           . .\scripts\utils.ps1
 
+          $TestResultsDir = "analyzers\tests\SonarAnalyzer.UnitTest\TestResults\"
+          if (Test-Path $TestResultsDir) { Remove-Item -Path $TestResultsDir -Recurse -Verbose }
+
           CreateFolder("coverage")
           CreateFolder("TestResults")
 
-          & OpenCover.Console.exe -target:"dotnet.exe" -targetargs:"test analyzers\tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net6.0\SonarAnalyzer.UnitTest.dll -l trx -l console;verbosity=detailed" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.Utilities]* +[SonarAnalyzer.VisualBasic]*" -output:coverage/net6.0.xml -safemode:off -excludebyattribute:*.ExcludeFromCodeCoverageAttribute
+          gci "analyzers\tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net6.0"
+
+          dotnet test .\analyzers\SonarAnalyzer.sln --no-build --collect:"XPlat Code Coverage" --settings .\analyzers\runsettings.xml -l "trx;logfilename=net6.0.trx" -l "console;verbosity=diagnostic" -c $(BuildConfiguration) -f "net6.0" -v diag
           Test-ExitCode "ERROR: Unit tests for net6.0 FAILED."
+
+          gci -Path $TestResultsDir -Recurse
+
+          Get-ChildItem -Path $TestResultsDir -Recurse -File -Filter coverage.opencover.xml | Copy-Item -Verbose -Destination .\coverage\net6.0.xml
+          Get-ChildItem -Path $TestResultsDir -Recurse -File -Filter net6.0.trx | Copy-Item -Verbose -Destination .\TestResults\
+
+          ## & OpenCover.Console.exe -target:"dotnet.exe" -targetargs:"test analyzers\tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net6.0\SonarAnalyzer.UnitTest.dll -l trx -l console;verbosity=detailed" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.Utilities]* +[SonarAnalyzer.VisualBasic]*" -output:coverage/net6.0.xml -safemode:off -excludebyattribute:*.ExcludeFromCodeCoverageAttribute
+          ## Test-ExitCode "ERROR: Unit tests for net6.0 FAILED."
         displayName: '.Net UTs'
 
       - task: PublishPipelineArtifact@1
