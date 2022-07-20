@@ -123,7 +123,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         {
             var invocation = (IInvocationOperation)context.Operation.Instance;
             invocation.Arguments.Should().HaveCount(2, "Asserted argument is expected in Tag(..) invocation");
-            var symbol = Symbol(((IConversionOperation)invocation.Arguments[1].Value).Operand);
+            var argument = invocation.Arguments[1].Value;
+            var symbol = Symbol(argument is IConversionOperation conversion ? conversion.Operand : argument);
             return context.State[symbol];
         }
     }
