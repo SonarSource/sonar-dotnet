@@ -183,6 +183,17 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             SETestContext.CreateVB(@"Dim B As Boolean = True : Main(BoolParameter, B) : Tag(""B"", B)", ", ByRef ByRefParam As Boolean").Validator.ValidateTag("B", x => x.Should().BeNull());
 
         [TestMethod]
+        public void Argument_ArgList_DoesNotThrow()
+        {
+            const string code = @"
+public void ArgListMethod(__arglist)
+{
+    ArgListMethod(__arglist(""""));
+}";
+            SETestContext.CreateCSMethod(code).Validator.ValidateExitReachCount(1);
+        }
+
+        [TestMethod]
         public void Binary_BoolOperands_Equals_CS()
         {
             const string code = @"

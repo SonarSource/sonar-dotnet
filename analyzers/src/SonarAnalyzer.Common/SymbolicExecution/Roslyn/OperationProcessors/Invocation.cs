@@ -25,7 +25,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
     internal static class Invocation
     {
         public static ProgramState Process(SymbolicContext context, IArgumentOperationWrapper argument) =>
-            argument.Parameter.RefKind != Microsoft.CodeAnalysis.RefKind.None && argument.Value.TrackedSymbol() is { } symbol
+            argument.Parameter is not null      // __arglist is not assigned to a parameter
+            && argument.Parameter.RefKind != Microsoft.CodeAnalysis.RefKind.None
+            && argument.Value.TrackedSymbol() is { } symbol
                 ? context.State.SetSymbolValue(symbol, null)
                 : context.State;
     }
