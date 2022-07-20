@@ -240,26 +240,31 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 _ => null
             };
 
-        private static ProgramState ProcessOperation(SymbolicContext context) =>
-            context.Operation.Instance.Kind switch
+        private static ProgramState ProcessOperation(SymbolicContext context)
+        {
+            return context.Operation.Instance.Kind switch
             {
-                OperationKindEx.Argument => Invocation.Process(context, IArgumentOperationWrapper.FromOperation(context.Operation.Instance)),
+                OperationKindEx.Argument => Invocation.Process(context, As(IArgumentOperationWrapper.FromOperation)),
                 OperationKindEx.ArrayCreation => Creation.Process(context),
                 OperationKindEx.AnonymousObjectCreation => Creation.Process(context),
-                OperationKindEx.Binary => Binary.Process(context, IBinaryOperationWrapper.FromOperation(context.Operation.Instance)),
-                OperationKindEx.Conversion => Conversion.Process(context, IConversionOperationWrapper.FromOperation(context.Operation.Instance)),
+                OperationKindEx.Binary => Binary.Process(context, As(IBinaryOperationWrapper.FromOperation)),
+                OperationKindEx.Conversion => Conversion.Process(context, As(IConversionOperationWrapper.FromOperation)),
                 OperationKindEx.DelegateCreation => Creation.Process(context),
                 OperationKindEx.DynamicObjectCreation => Creation.Process(context),
-                OperationKindEx.FieldReference => References.Process(context, IFieldReferenceOperationWrapper.FromOperation(context.Operation.Instance)),
-                OperationKindEx.FlowCapture => FlowCapture.Process(context, IFlowCaptureOperationWrapper.FromOperation(context.Operation.Instance)),
-                OperationKindEx.IsPattern => Pattern.Process(context, IIsPatternOperationWrapper.FromOperation(context.Operation.Instance)),
-                OperationKindEx.LocalReference => References.Process(context, ILocalReferenceOperationWrapper.FromOperation(context.Operation.Instance)),
+                OperationKindEx.FieldReference => References.Process(context, As(IFieldReferenceOperationWrapper.FromOperation)),
+                OperationKindEx.FlowCapture => FlowCapture.Process(context, As(IFlowCaptureOperationWrapper.FromOperation)),
+                OperationKindEx.IsPattern => Pattern.Process(context, As(IIsPatternOperationWrapper.FromOperation)),
+                OperationKindEx.LocalReference => References.Process(context, As(ILocalReferenceOperationWrapper.FromOperation)),
                 OperationKindEx.ObjectCreation => Creation.Process(context),
-                OperationKindEx.ParameterReference => References.Process(context, IParameterReferenceOperationWrapper.FromOperation(context.Operation.Instance)),
-                OperationKindEx.SimpleAssignment => SimpleAssignment.Process(context, ISimpleAssignmentOperationWrapper.FromOperation(context.Operation.Instance)),
+                OperationKindEx.ParameterReference => References.Process(context, As(IParameterReferenceOperationWrapper.FromOperation)),
+                OperationKindEx.SimpleAssignment => SimpleAssignment.Process(context, As(ISimpleAssignmentOperationWrapper.FromOperation)),
                 OperationKindEx.TypeParameterObjectCreation => Creation.Process(context),
                 _ => context.State
             };
+
+            T As<T>(Func<IOperation, T> fromOperation) =>
+                fromOperation(context.Operation.Instance);
+        }
 
         private static ExceptionState ThrowExceptionType(IOperation operation) =>
             operation.Kind switch
