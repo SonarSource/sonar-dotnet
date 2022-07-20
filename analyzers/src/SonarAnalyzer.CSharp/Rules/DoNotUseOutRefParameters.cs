@@ -47,7 +47,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var parameter = (ParameterSyntax)c.Node;
 
-                    if (!parameter.Modifiers.Any(IsRefOrOut))
+                    if (!parameter.Modifiers.Any(IsRefOrOut)
+                        || (parameter.Parent.Parent as MethodDeclarationSyntax is { } method && IsDeconstructor(method)))
                     {
                         return;
                     }
@@ -78,5 +79,11 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsRefOrOut(SyntaxToken token) =>
             token.IsKind(SyntaxKind.RefKeyword)
             || token.IsKind(SyntaxKind.OutKeyword);
+
+        private static bool IsDeconstructor(MethodDeclarationSyntax node) =>
+            node.ReturnType.ToString().Equals("void")
+            && node.Modifiers.Count == 1
+            && node.Modifiers.Any(SyntaxKind.PublicKeyword)
+            && node.Identifier.Value.Equals("Deconstruct");
     }
 }

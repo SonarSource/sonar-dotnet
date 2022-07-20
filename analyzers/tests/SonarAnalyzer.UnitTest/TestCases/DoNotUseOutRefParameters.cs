@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace Tests.Diagnostics
 {
+
     public interface IProgram
     {
         void Method1(out string value);
@@ -98,5 +99,8 @@ namespace Tests.Diagnostics
             fname = FirstName;
             lname = LastName;
         }
+
+        public static void Deconstruct(out string foo) { foo = "foo"; } // Noncompliant
+        public static int Deconstruct(ref int bar) { return bar; } // Noncompliant
     }
  }
