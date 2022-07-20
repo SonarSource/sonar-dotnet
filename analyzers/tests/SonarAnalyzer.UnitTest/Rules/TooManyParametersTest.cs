@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,31 +26,31 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class TooManyParametersTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void TooManyParameters_CS_CustomValues() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\TooManyParameters_CustomValues.cs", new CS.TooManyParameters { Maximum = 3 }, ParseOptionsHelper.FromCSharp8);
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void TooManyParameters_CS_CustomValues_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\TooManyParameters_CustomValues.CSharp9.cs", new CS.TooManyParameters { Maximum = 3 });
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void TooManyParameters_CS_CustomValues_CSharpPreview() =>
             OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\TooManyParameters_CustomValues.CSharpPreview.cs", new CS.TooManyParameters { Maximum = 3 });
 
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void TooManyParameters_VB_CustomValues() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\TooManyParameters_CustomValues.vb", new VB.TooManyParameters { Maximum = 3 });
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void TooManyParameters_CS_DefaultValues() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\TooManyParameters_DefaultValues.cs", new CS.TooManyParameters(), ParseOptionsHelper.FromCSharp8);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void TooManyParameters_VB_DefaultValues() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\TooManyParameters_DefaultValues.vb", new VB.TooManyParameters());
     }

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -30,11 +30,11 @@ namespace SonarAnalyzer.UnitTest.Extensions.VisualBasic
     [TestClass]
     public class ISymbolExtensionsTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GetDescendantNodes_ForNullSourceTree_ReturnsEmpty_VB() =>
             ISymbolExtensions_VB.GetDescendantNodes(Location.None, SyntaxFactory.ModifiedIdentifier("a")).Should().BeEmpty();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GetDescendantNodes_ForDifferentSyntaxTrees_ReturnsEmpty_VB()
         {
             var first = SyntaxFactory.ParseSyntaxTree("Dim a As String");
@@ -44,14 +44,14 @@ namespace SonarAnalyzer.UnitTest.Extensions.VisualBasic
             ISymbolExtensions_VB.GetDescendantNodes(identifier.GetLocation(), second.GetRoot()).Should().BeEmpty();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GetDescendantNodes_ForMissingVariableDeclarator_ReturnsEmpty_VB()
         {
             var tree = SyntaxFactory.ParseSyntaxTree(@"new FileSystemAccessRule(""User"", FileSystemRights.ListDirectory, AccessControlType.Allow)");
             ISymbolExtensions_VB.GetDescendantNodes(tree.GetRoot().GetLocation(), tree.GetRoot()).Should().BeEmpty();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IsAutoProperty_AutoProperty_CS()
         {
             const string code = @"
@@ -62,7 +62,7 @@ public class Sample
             ISymbolExtensions_Common.IsAutoProperty(CreateSymbol(code, AnalyzerLanguage.CSharp)).Should().BeTrue();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IsAutoProperty_AutoProperty_VB()
         {
             const string code = @"
@@ -74,7 +74,7 @@ End Class";
             ISymbolExtensions_Common.IsAutoProperty(CreateSymbol(code, AnalyzerLanguage.VisualBasic)).Should().BeTrue();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IsAutoProperty_ExplicitProperty_CS()
         {
             const string code = @"
@@ -91,7 +91,7 @@ public class Sample
             ISymbolExtensions_Common.IsAutoProperty(CreateSymbol(code, AnalyzerLanguage.CSharp)).Should().BeFalse();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IsAutoProperty_ExplicitProperty_VB()
         {
             const string code = @"
@@ -112,7 +112,7 @@ End Class";
             ISymbolExtensions_Common.IsAutoProperty(CreateSymbol(code, AnalyzerLanguage.VisualBasic)).Should().BeFalse();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IsAutoProperty_NonpropertySymbol_CS()
         {
             const string code = @"
@@ -123,7 +123,7 @@ public class Sample
             ISymbolExtensions_Common.IsAutoProperty(CreateSymbol(code, AnalyzerLanguage.CSharp)).Should().BeFalse();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IsAutoProperty_NonpropertySymbol_VB()
         {
             const string code = @"

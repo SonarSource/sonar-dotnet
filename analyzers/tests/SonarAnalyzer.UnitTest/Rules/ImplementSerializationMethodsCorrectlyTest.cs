@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,26 +26,26 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ImplementSerializationMethodsCorrectlyTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ImplementSerializationMethodsCorrectly_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\ImplementSerializationMethodsCorrectly.cs", new CS.ImplementSerializationMethodsCorrectly());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ImplementSerializationMethodsCorrectly_CS_FromCSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ImplementSerializationMethodsCorrectly.CSharp9.cs", new CS.ImplementSerializationMethodsCorrectly());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ImplementSerializationMethodsCorrectly_CS_CSharp10() =>
             OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\ImplementSerializationMethodsCorrectly.CSharp10.cs", new CS.ImplementSerializationMethodsCorrectly());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ImplementSerializationMethodsCorrectly_CS_CSharpPreview() =>
             OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\ImplementSerializationMethodsCorrectly.CSharp.Preview.cs", new CS.ImplementSerializationMethodsCorrectly());
 
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ImplementSerializationMethodsCorrectly_CS_InvalidCode() =>
             OldVerifier.VerifyCSharpAnalyzer(@"
 [Serializable]
@@ -55,7 +55,7 @@ public class Foo
     public int  { throw new NotImplementedException(); }
 }", new CS.ImplementSerializationMethodsCorrectly(), CompilationErrorBehavior.Ignore);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ImplementSerializationMethodsCorrectly_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\ImplementSerializationMethodsCorrectly.vb", new VB.ImplementSerializationMethodsCorrectly());
     }

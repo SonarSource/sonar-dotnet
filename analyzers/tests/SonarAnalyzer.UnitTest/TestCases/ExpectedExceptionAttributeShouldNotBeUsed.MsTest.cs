@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Tests.Diagnostics
 {
     class Program
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]  // Noncompliant
         public void TestFoo1()
         {
@@ -13,18 +13,18 @@ namespace Tests.Diagnostics
             x.ToString();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         [ExpectedException(typeof(ArgumentNullException))] // Compliant - one line
         public void TestFoo3()
         {
             new object().ToString();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]  // Compliant - one line
         public string TestFoo5() => new object().ToString();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void TestFoo7()
         {
             bool callFailed = false;
@@ -38,7 +38,7 @@ namespace Tests.Diagnostics
             }
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void TestWithThrowsAssertation()
         {
             object o = new object();

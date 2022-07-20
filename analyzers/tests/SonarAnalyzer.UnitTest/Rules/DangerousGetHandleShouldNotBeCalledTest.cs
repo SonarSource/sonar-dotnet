@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,7 +29,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.DangerousGetHandleShouldNotBeCalled>();
         private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.DangerousGetHandleShouldNotBeCalled>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DangerousGetHandleShouldNotBeCalled_CS() =>
             builderCS.AddPaths("DangerousGetHandleShouldNotBeCalled.cs")
                 .AddReferences(MetadataReferenceFacade.MicrosoftWin32Registry)
@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DangerousGetHandleShouldNotBeCalled_CS_CSharp9() =>
             builderCS.AddPaths("DangerousGetHandleShouldNotBeCalled.CSharp9.cs")
                 .AddReferences(MetadataReferenceFacade.MicrosoftWin32Registry)
@@ -47,7 +47,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DangerousGetHandleShouldNotBeCalled_VB() =>
             builderVB.AddPaths("DangerousGetHandleShouldNotBeCalled.vb")
                 .Verify();

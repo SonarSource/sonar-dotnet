@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,13 +27,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ExpandingArchivesTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ExpandingArchives_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\ExpandingArchives.cs",
                                     new CS.ExpandingArchives(AnalyzerConfiguration.AlwaysEnabled),
                                     AdditionalReferences);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ExpandingArchives_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\ExpandingArchives.vb",
                                     new VB.ExpandingArchives(AnalyzerConfiguration.AlwaysEnabled),

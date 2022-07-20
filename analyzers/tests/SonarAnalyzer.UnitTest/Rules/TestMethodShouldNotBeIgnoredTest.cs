@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,7 +27,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<TestMethodShouldNotBeIgnored>().AddReferences(NuGetMetadataReference.MSTestTestFrameworkV1);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void TestMethodShouldNotBeIgnored_MsTest_Legacy() =>
             builder.AddPaths("TestMethodShouldNotBeIgnored.MsTest.cs")
                 .WithErrorBehavior(CompilationErrorBehavior.Ignore)    // IgnoreAttribute doesn't contain any reason param
@@ -61,13 +61,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void TestMethodShouldNotBeIgnored_Xunit(string testFwkVersion) =>
             builder.AddPaths("TestMethodShouldNotBeIgnored.Xunit.cs").AddReferences(NuGetMetadataReference.XunitFramework(testFwkVersion)).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void TestMethodShouldNotBeIgnored_Xunit_v1() =>
             builder.AddPaths("TestMethodShouldNotBeIgnored.Xunit.v1.cs").AddReferences(NuGetMetadataReference.XunitFrameworkV1).Verify();
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void TestMethodShouldNotBeIgnored_CSharp9() =>
             builder.AddPaths("TestMethodShouldNotBeIgnored.CSharp9.cs")
                 .AddReferences(NuGetMetadataReference.XunitFrameworkV1)

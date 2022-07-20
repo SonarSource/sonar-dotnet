@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,12 +25,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class PInvokesShouldNotBeVisibleTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PInvokesShouldNotBeVisible() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\PInvokesShouldNotBeVisible.cs", new PInvokesShouldNotBeVisible());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PInvokesShouldNotBeVisible_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PInvokesShouldNotBeVisible.CSharp9.cs", new PInvokesShouldNotBeVisible());
 #endif

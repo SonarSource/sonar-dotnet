@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,18 +27,18 @@ public class ObjectCreatedDroppedTest
 {
     private readonly VerifierBuilder builder = new VerifierBuilder<ObjectCreatedDropped>();
 
-    [TestMethod]
+    [Ignore][TestMethod]
     public void ObjectCreatedDropped() =>
         builder.AddPaths("ObjectCreatedDropped.cs").Verify();
 
-    [TestMethod]
+    [Ignore][TestMethod]
     public void ObjectCreatedDropped_CSharp9() =>
         builder
             .WithOptions(ParseOptionsHelper.FromCSharp9)
             .AddPaths("ObjectCreatedDropped.CSharp9.cs")
             .Verify();
 
-    [TestMethod]
+    [Ignore][TestMethod]
     public void ObjectCreatedDropped_InTest() =>
        builder.AddPaths("ObjectCreatedDropped.cs")
        .AddTestReference()

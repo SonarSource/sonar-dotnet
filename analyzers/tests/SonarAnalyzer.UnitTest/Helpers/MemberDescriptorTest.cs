@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -51,21 +51,21 @@ namespace Test
             xmlNodeCloneNodeInvocationContext = CreateContextForMethod("XmlNode.CloneNode", snippet);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IsMatch_WhenMethodNameIsNull_ReturnsFalse()
         {
             var sut = new MemberDescriptor(KnownType.System_Xml_XmlNode, "CloneNode");
             sut.IsMatch(null, new Mock<ITypeSymbol>().Object, StringComparison.OrdinalIgnoreCase).Should().BeFalse();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IsMatch_WhenTypeSymbolIsNull_ReturnsFalse()
         {
             var sut = new MemberDescriptor(KnownType.System_Xml_XmlNode, "CloneNode");
             sut.IsMatch("CloneNode", null, StringComparison.OrdinalIgnoreCase).Should().BeFalse();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IsMatch_WhenContainingTypeIsNull_ReturnsFalse()
         {
             var typeMock = new Mock<IMethodSymbol>();
@@ -100,14 +100,14 @@ namespace Test
             sut.IsMatch(memberName, shouldNotBeUsed, stringComparison).Should().BeFalse();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IsMatch_WhenTypeMatchesButNameIsDifferentCase_ReturnsFalse()
         {
             var sut = new MemberDescriptor(KnownType.System_Xml_XmlNode, "CloneNode");
             sut.IsMatch("clonenode", xmlNodeCloneNodeInvocationContext.MethodSymbol, StringComparison.InvariantCulture).Should().BeFalse();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IsMatch_WhenMethodNameAndTypeMatch_ReturnsTrue()
         {
             var sut = new MemberDescriptor(KnownType.System_Xml_XmlNode, "CloneNode");
@@ -115,7 +115,7 @@ namespace Test
             sut.IsMatch("clonenode", xmlNodeCloneNodeInvocationContext.MethodSymbol, StringComparison.InvariantCultureIgnoreCase).Should().BeTrue();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ExactMatchOnly_OverridesAreNotMatched_CS()
         {
             const string code = @"
@@ -138,7 +138,7 @@ namespace Test
             CheckExactMatchOnly_OverridesAreNotMatched(snippet);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ExactMatchOnly_OverridesAreNotMatched_VB()
         {
             const string code = @"
@@ -161,7 +161,7 @@ End Namespace
             CheckExactMatchOnly_OverridesAreNotMatched(snippet);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ExactMatch_DoesNotMatchOverrides_CS()
         {
             const string code = @"
@@ -183,7 +183,7 @@ namespace Test
             CheckExactMatch_DoesNotMatchOverrides(snippet);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ExactMatch_DoesNotMatchOverrides_VB()
         {
             const string code = @"
@@ -202,7 +202,7 @@ End Namespace
             CheckExactMatch_DoesNotMatchOverrides(snippet);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MatchesAny_AndCheckingOverrides_DoesMatchOverrides_CS()
         {
             const string code = @"
@@ -224,7 +224,7 @@ namespace Test
             CheckMatchesAny_AndCheckingOverrides_DoesMatchOverrides(snippet);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MatchesAny_MethodAndTypeCombination_FindsCorrectOne()
         {
             var nodeClone = new MemberDescriptor(KnownType.System_Xml_XmlNode, "Clone");
@@ -238,7 +238,7 @@ namespace Test
             CheckIsMethodOrDerived(true, xmlNodeCloneNodeInvocationContext, nodeCloneNode, docCloneNode);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MatchesAny_AndCheckingOverrides_DoesMatchOverrides_VB()
         {
             const string code = @"
@@ -256,7 +256,7 @@ End Namespace
             CheckMatchesAny_AndCheckingOverrides_DoesMatchOverrides(snippet);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CheckMatch_InterfaceMethods_CS()
         {
             const string code = @"
@@ -278,7 +278,7 @@ namespace Test
             DoCheckMatch_InterfaceMethods(snippet);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CheckMatch_InterfaceMethods_VB()
         {
             const string code = @"
@@ -301,7 +301,7 @@ End Namespace
             DoCheckMatch_InterfaceMethods(snippet);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CheckMatch_InterfaceMethods_NameMatchButNotOverride_CS()
         {
             const string code = @"
@@ -324,7 +324,7 @@ namespace Test
             DoCheckMatch_InterfaceMethods(snippet);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CheckMatch_InterfaceMethods_NameMatchButNotOverride_VB()
         {
             const string code = @"
@@ -351,7 +351,7 @@ End Namespace
             DoCheckMatch_InterfaceMethods(snippet);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CheckMatch_CaseInsensitivity()
         {
             const string code = @"

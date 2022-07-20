@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,23 +27,23 @@ namespace SonarAnalyzer.UnitTest.Helpers
     [TestClass]
     public class BaseArgumentListSyntaxExtensionsTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GivenEmptyList_GetArgumentByName_ReturnsNull() =>
             CreateNamedArgumentList().GetArgumentByName("argument").Should().BeNull();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GivenListWithAnotherNamedArgument_GetArgumentByName_ReturnsNull() =>
             CreateNamedArgumentList("p1").GetArgumentByName("p2").Should().BeNull();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GivenListWithNamedArgument_GetArgumentByName_ReturnsArgument() =>
             CreateNamedArgumentList("p1").GetArgumentByName("p1").Should().Match(p => ((ArgumentSyntax)p).NameColon.Name.Identifier.Text == "p1");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GivenListWithMultipleNamedArguments_GetArgumentByName_ReturnsArgument() =>
             CreateNamedArgumentList("p1", "p2", "p3").GetArgumentByName("p2").Should().Match(p =>  ((ArgumentSyntax)p).NameColon.Name.Identifier.Text == "p2");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GivenListWithNotNamedArguments_GetArgumentByName_ReturnsNull() =>
             SyntaxFactory.ArgumentList(SyntaxFactory.SeparatedList(
                     new[]
@@ -54,7 +54,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 .GetArgumentByName("p1")
                 .Should().BeNull();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GivenListWithMixedNotNamedAndNamedArguments_GetArgumentByName_ReturnsNull() =>
             SyntaxFactory.ArgumentList(SyntaxFactory.SeparatedList(
                     new[]

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,11 +25,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ThreadStaticWithInitializerTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ThreadStaticWithInitializer() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\ThreadStaticWithInitializer.cs", new ThreadStaticWithInitializer());
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ThreadStaticWithInitializer_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ThreadStaticWithInitializer.CSharp9.cs", new ThreadStaticWithInitializer());
 #endif

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,17 +27,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class HardcodedIpAddressTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void HardcodedIpAddress_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\HardcodedIpAddress.cs", new CS.HardcodedIpAddress(AnalyzerConfiguration.AlwaysEnabled));
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void HardcodedIpAddress_CSharp10() =>
             OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\Hotspots\HardcodedIpAddress.CSharp10.cs", new CS.HardcodedIpAddress(AnalyzerConfiguration.AlwaysEnabled));
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void HardcodedIpAddress_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\HardcodedIpAddress.vb", new VB.HardcodedIpAddress(AnalyzerConfiguration.AlwaysEnabled));
     }

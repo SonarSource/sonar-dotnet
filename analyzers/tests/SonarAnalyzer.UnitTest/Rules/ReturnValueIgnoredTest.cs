@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,12 +25,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ReturnValueIgnoredTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ReturnValueIgnored() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\ReturnValueIgnored.cs", new ReturnValueIgnored());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ReturnValueIgnored_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ReturnValueIgnored.CSharp9.cs", new ReturnValueIgnored());
 #endif

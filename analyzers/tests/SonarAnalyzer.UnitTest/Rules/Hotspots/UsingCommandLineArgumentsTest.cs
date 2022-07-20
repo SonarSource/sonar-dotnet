@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,17 +27,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class UsingCommandLineArgumentsTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UsingCommandLineArguments_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingCommandLineArguments.cs",
                                     new CS.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled));
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UsingCommandLineArguments_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\Hotspots\UsingCommandLineArguments.CSharp9.cs",
                                                       new CS.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled));
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UsingCommandLineArguments_CS_Partial()
         {
             const string code1 = @"
@@ -57,12 +57,12 @@ partial class Program1
             DiagnosticVerifier.Verify(compilation, new CS.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled), CompilationErrorBehavior.Default);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UsingCommandLineArguments_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingCommandLineArguments.vb",
                                     new VB.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled));
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UsingCommandLineArguments_VB_Partial()
         {
             const string code1 = @"

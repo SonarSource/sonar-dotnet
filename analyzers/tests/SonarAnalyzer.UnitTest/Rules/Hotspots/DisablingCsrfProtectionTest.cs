@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,21 +28,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DisablingCsrfProtectionTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DisablingCSRFProtection_CS() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Library(
                 @"TestCases\Hotspots\DisablingCSRFProtection.cs",
                 new DisablingCsrfProtection(AnalyzerConfiguration.AlwaysEnabled),
                 AdditionalReferences());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DisablingCSRFProtection_CSharp10() =>
             OldVerifier.VerifyAnalyzerFromCSharp10Library(
                 @"TestCases\Hotspots\DisablingCSRFProtection.CSharp10.cs",
                 new DisablingCsrfProtection(AnalyzerConfiguration.AlwaysEnabled),
                 AdditionalReferences());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DisablingCSRFProtection_CSharpPreview() =>
             OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(
                 @"TestCases\Hotspots\DisablingCSRFProtection.CSharp.Preview.cs",

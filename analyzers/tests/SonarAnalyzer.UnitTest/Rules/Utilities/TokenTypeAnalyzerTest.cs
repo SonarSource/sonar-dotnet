@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -105,7 +105,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 info.Where(x => x.TokenType == TokenType.Keyword).Should().HaveCount(4);
             });
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Verify_IdentifierTokenThreshold() =>
             Verify("IdentifierTokenThreshold.cs", ProjectType.Product, tokenInfo =>
             {

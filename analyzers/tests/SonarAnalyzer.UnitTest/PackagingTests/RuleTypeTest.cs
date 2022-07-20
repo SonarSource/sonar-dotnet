@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -31,11 +31,11 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
         // When changing this please do not forget to notify the product teams (SQ, SC, SL).
         private static readonly HashSet<string> DeletedRules = new() { "S1145", "S1697", "S4142", "S2758", "S2070", "S3693", "S4432", "S2278" };
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DetectRuleTypeChanges_CS() =>
             DetectTypeChanges(csharp::SonarAnalyzer.RuleCatalog.Rules, RuleTypeMappingCS.Rules, nameof(RuleTypeMappingCS));
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DetectRuleTypeChanges_VB() =>
             DetectTypeChanges(vbnet::SonarAnalyzer.RuleCatalog.Rules, RuleTypeMappingVB.Rules, nameof(RuleTypeMappingVB));
 

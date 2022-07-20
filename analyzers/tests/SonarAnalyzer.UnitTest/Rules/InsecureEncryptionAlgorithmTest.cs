@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,25 +26,25 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class InsecureEncryptionAlgorithmTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void InsecureEncryptionAlgorithm_MainProject_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\InsecureEncryptionAlgorithm.cs", new CS.InsecureEncryptionAlgorithm(), GetAdditionalReferences());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void InsecureEncryptionAlgorithm_DoesNotRaiseIssuesForTestProject_CS() =>
             OldVerifier.VerifyNoIssueReportedInTest(@"TestCases\InsecureEncryptionAlgorithm.cs", new CS.InsecureEncryptionAlgorithm(), GetAdditionalReferences());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void InsecureEncryptionAlgorithm_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\InsecureEncryptionAlgorithm.CSharp9.cs", new CS.InsecureEncryptionAlgorithm(), GetAdditionalReferences());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void InsecureEncryptionAlgorithm_CSharp10() =>
             OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\InsecureEncryptionAlgorithm.CSharp10.cs", new CS.InsecureEncryptionAlgorithm(), GetAdditionalReferences());
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void InsecureEncryptionAlgorithm_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\InsecureEncryptionAlgorithm.vb", new VB.InsecureEncryptionAlgorithm(), GetAdditionalReferences());
 

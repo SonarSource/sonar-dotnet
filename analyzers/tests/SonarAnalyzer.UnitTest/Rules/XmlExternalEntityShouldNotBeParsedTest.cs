@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -42,11 +42,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void XmlExternalEntityShouldNotBeParsed_XmlDocument_CSharp9() =>
             WithAnalyzer(NetFrameworkVersion.After452).AddPaths("XmlExternalEntityShouldNotBeParsed_XmlDocument_CSharp9.cs").WithTopLevelStatements().Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void XmlExternalEntityShouldNotBeParsed_XmlDocument_CSharp10() =>
             WithAnalyzer(NetFrameworkVersion.After452)
                 .AddPaths("XmlExternalEntityShouldNotBeParsed_XmlDocument_CSharp10.cs")
@@ -66,11 +66,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void XmlExternalEntityShouldNotBeParsed_XmlTextReader_CSharp9() =>
             WithAnalyzer(NetFrameworkVersion.After452).AddPaths("XmlExternalEntityShouldNotBeParsed_XmlTextReader_CSharp9.cs").WithTopLevelStatements().Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void XmlExternalEntityShouldNotBeParsed_XmlTextReader_CSharp10() =>
             WithAnalyzer(NetFrameworkVersion.After452).AddPaths("XmlExternalEntityShouldNotBeParsed_XmlTextReader_CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
@@ -92,11 +92,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void XmlExternalEntityShouldNotBeParsed_XmlReader_CSharp9() =>
             WithAnalyzer(NetFrameworkVersion.After452).AddPaths("XmlExternalEntityShouldNotBeParsed_XmlReader_CSharp9.cs").WithTopLevelStatements().Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void XmlExternalEntityShouldNotBeParsed_XPathDocument_CSharp9() =>
             WithAnalyzer(NetFrameworkVersion.After452).AddPaths("XmlExternalEntityShouldNotBeParsed_XPathDocument_CSharp9.cs").WithTopLevelStatements().Verify();
 
@@ -110,7 +110,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void XmlExternalEntityShouldNotBeParsed_XPathDocument(NetFrameworkVersion version, string testFilePath) =>
             WithAnalyzer(version).AddPaths(testFilePath).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void XmlExternalEntityShouldNotBeParsed_NoCrashOnExternalParameterUse() =>
             WithAnalyzer(NetFrameworkVersion.After452)
                 .AddPaths("XmlExternalEntityShouldNotBeParsed_XmlReader_ExternalParameter.cs", "XmlExternalEntityShouldNotBeParsed_XmlReader_ParameterProvider.cs")

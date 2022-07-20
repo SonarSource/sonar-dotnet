@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,13 +27,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<EmptyNamespace>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EmptyNamespace() =>
             builder.AddPaths("EmptyNamespace.cs").Verify();
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EmptyNamespace_CSharp10() =>
             builder.AddPaths("EmptyNamespace.CSharp10.Empty.cs", "EmptyNamespace.CSharp10.NotEmpty.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EmptyNamespace_CodeFix() =>
             builder.AddPaths("EmptyNamespace.cs")
                 .WithCodeFix<EmptyNamespaceCodeFix>()

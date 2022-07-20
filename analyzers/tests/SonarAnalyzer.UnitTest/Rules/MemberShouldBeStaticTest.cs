@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -39,19 +39,19 @@ namespace SonarAnalyzer.UnitTest.Rules
                                         .Concat(NuGetMetadataReference.MicrosoftAspNetCoreRoutingAbstractions(aspnetCoreVersion)))
                 .Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MemberShouldBeStatic_WinForms() =>
             builder.AddPaths("MemberShouldBeStatic.WinForms.cs")
                 .AddReferences(MetadataReferenceFacade.SystemWindowsForms)
                 .Verify();
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MemberShouldBeStatic_CSharp9() =>
             builder.AddPaths("MemberShouldBeStatic.CSharp9.cs").WithTopLevelStatements().Verify();
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MemberShouldBeStatic_CSharp8() =>
             builder.AddPaths("MemberShouldBeStatic.CSharp8.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
@@ -59,7 +59,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Verify();
 
 #if NETFRAMEWORK // HttpApplication is available only on .Net Framework
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MemberShouldBeStatic_HttpApplication() =>
             builder.AddSnippet(@"
 public class HttpApplication1 : System.Web.HttpApplication
@@ -71,7 +71,7 @@ public class HttpApplication1 : System.Web.HttpApplication
 
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MemberShouldBeStatic_InvalidCode() =>
         // Handle invalid code causing NullReferenceException: https://github.com/SonarSource/sonar-dotnet/issues/819
             builder.AddSnippet(@"

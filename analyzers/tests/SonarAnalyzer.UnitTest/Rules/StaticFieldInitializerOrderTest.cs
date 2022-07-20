@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,7 +27,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<StaticFieldInitializerOrder>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void StaticFieldInitializerOrder() =>
             builder.AddPaths("StaticFieldInitializerOrder.cs", "StaticFieldInitializerOrder_PartialClass.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
@@ -36,11 +36,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void StaticFieldInitializerOrder_CSharp9() =>
             builder.AddPaths("StaticFieldInitializerOrder.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void StaticFieldInitializerOrder_CSharp10() =>
             builder.AddPaths("StaticFieldInitializerOrder.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 

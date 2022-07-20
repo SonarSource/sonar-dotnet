@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,20 +28,20 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder verifierCS = new VerifierBuilder<CS.VariableUnused>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void VariableUnused_CS() =>
             verifierCS.AddPaths("VariableUnused.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void VariableUnused_CSharp9() =>
             verifierCS.AddPaths("VariableUnused.CSharp9.cs").WithTopLevelStatements().Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void VariableUnused_CSharp10() =>
             verifierCS.AddPaths("VariableUnused.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void VariableUnused_VB() =>
             new VerifierBuilder<VB.VariableUnused>().AddPaths("VariableUnused.vb").Verify();
     }

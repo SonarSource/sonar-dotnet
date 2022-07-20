@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,13 +27,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class EncryptingDataTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EncryptingData_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\EncryptingData.cs",
                 new CS.EncryptingData(AnalyzerConfiguration.AlwaysEnabled),
                 GetAdditionalReferences());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EncryptingData_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\EncryptingData.vb",
                 new VB.EncryptingData(AnalyzerConfiguration.AlwaysEnabled),

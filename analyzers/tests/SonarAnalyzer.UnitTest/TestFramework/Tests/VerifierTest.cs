@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -36,91 +36,91 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 
         public TestContext TestContext { get; set; }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Constructor_Null_Throws() =>
             ((Func<Verifier>)(() => new(null))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("builder");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Constructor_NoAnalyzers_Throws() =>
             new VerifierBuilder()
                 .Invoking(x => x.Build()).Should().Throw<ArgumentException>()
                 .WithMessage("Analyzers cannot be empty. Use VerifierBuilder<TAnalyzer> instead or add at least one analyzer using builder.AddAnalyzer().");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Constructor_NullAnalyzers_Throws() =>
             new VerifierBuilder().AddAnalyzer(() => null)
                 .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("Analyzer instance cannot be null.");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Constructor_NoPaths_Throws() =>
             DummyCS.Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("Paths cannot be empty. Add at least one file using builder.AddPaths() or AddSnippet().");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Constructor_MixedLanguageAnalyzers_Throws() =>
             DummyCS.AddAnalyzer(() => new SonarAnalyzer.Rules.VisualBasic.OptionStrictOn())
                 .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("All Analyzers must declare the same language in their DiagnosticAnalyzerAttribute.");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Constructor_MixedLanguagePaths_Throws() =>
             DummyCS.AddPaths("File.txt")
                 .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("Path 'File.txt' doesn't match C# file extension '.cs'.");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Constructor_CodeFix_MissingCodeFixedPath_Throws() =>
             DummyCodeFixCS.WithCodeFixedPaths(null)
                 .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("CodeFixedPath was not set.");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Constructor_CodeFix_WrongCodeFixedPath_Throws() =>
             DummyCodeFixCS.WithCodeFixedPaths("File.vb")
                 .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("Path 'File.vb' doesn't match C# file extension '.cs'.");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Constructor_CodeFix_WrongCodeFixedPathBatch_Throws() =>
             DummyCodeFixCS.WithCodeFixedPaths("File.cs", "Batch.vb")
                 .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("Path 'Batch.vb' doesn't match C# file extension '.cs'.");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Constructor_CodeFix_MultipleAnalyzers_Throws() =>
             DummyCodeFixCS.AddAnalyzer(() => new DummyAnalyzerCS())
                 .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("When CodeFix is set, Analyzers must contain only 1 analyzer, but 2 were found.");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Constructor_CodeFix_MultiplePaths_Throws() =>
             DummyCodeFixCS.AddPaths("Second.cs", "Third.cs")
                 .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("Paths must contain only 1 file, but 3 were found.");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Constructor_CodeFix_WithSnippets_Throws() =>
             DummyCodeFixCS.AddSnippet("Wrong")
                 .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("Snippets must be empty when CodeFix is set.");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Constructor_CodeFix_WrongLanguage_Throws() =>
             DummyCodeFixCS.WithCodeFix<DummyCodeFixVB>()
                 .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("DummyAnalyzerCS language C# does not match DummyCodeFixVB language.");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Constructor_CodeFix_FixableDiagnosticsNotSupported_Throws() =>
             DummyCodeFixCS.WithCodeFix<EmptyMethodCodeFix>()
                 .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("DummyAnalyzerCS does not support diagnostics fixable by the EmptyMethodCodeFix.");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Constructor_CodeFix_MissingAttribute_Throws() =>
             DummyCodeFixCS.WithCodeFix<DummyCodeFixNoAttribute>()
                 .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("DummyCodeFixNoAttribute does not have ExportCodeFixProviderAttribute.");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Constructor_ProtobufPath_MultipleAnalyzers_Throws() =>
             DummyCS.AddSnippet("//Empty").WithProtobufPath("Proto.pb").AddAnalyzer(() => new DummyAnalyzerCS())
                 .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("When ProtobufPath is set, Analyzers must contain only 1 analyzer, but 2 were found.");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Constructor_ProtobufPath_WrongAnalyzerType_Throws() =>
             DummyCS.AddSnippet("//Empty").WithProtobufPath("Proto.pb")
                 .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("DummyAnalyzerCS does not inherit from UtilityAnalyzerBase.");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Verify_ThrowsWithCodeFixSet()
         {
             var originalPath = WriteFile("File.cs", null);
@@ -129,7 +129,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
                 .Should().Throw<InvalidOperationException>().WithMessage("Cannot use Verify with CodeFix set.");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Verify_RaiseExpectedIssues_CS() =>
             WithSnippetCS(
 @"public class Sample
@@ -139,7 +139,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
     private bool c = true;
 }").Invoking(x => x.Verify()).Should().NotThrow();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Verify_RaiseExpectedIssues_VB() =>
             WithSnippetVB(
 @"Public Class Sample
@@ -148,7 +148,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
     Private C As Boolean = True
 End Class").Invoking(x => x.Verify()).Should().NotThrow();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Verify_RaiseUnexpectedIssues_CS() =>
             WithSnippetCS(
 @"public class Sample
@@ -158,7 +158,7 @@ End Class").Invoking(x => x.Verify()).Should().NotThrow();
     private bool c = true;
 }").Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>().WithMessage("CSharp7: Unexpected primary issue on line 3, span (2,20)-(2,22) with message 'Message for SDummy'*");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Verify_RaiseUnexpectedIssues_VB() =>
             WithSnippetVB(
 @"Public Class Sample
@@ -167,7 +167,7 @@ End Class").Invoking(x => x.Verify()).Should().NotThrow();
     Private C As Boolean = True
 End Class").Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>().WithMessage("VisualBasic12: Unexpected primary issue on line 2, span (1,27)-(1,29) with message 'Message for SDummy'*");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Verify_MissingExpectedIssues() =>
             WithSnippetCS(
 @"public class Sample
@@ -186,7 +186,7 @@ Line: 3, Type: primary, Id: ''
 Line: 4, Type: primary, Id: ''
 ");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Verify_TwoAnalyzers() =>
             WithSnippetCS(
 @"public class Sample
@@ -200,7 +200,7 @@ Line: 4, Type: primary, Id: ''
             .AddAnalyzer(() => new DummyAnalyzerCS()) // Duplicate
             .Invoking(x => x.Verify()).Should().NotThrow();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Verify_TwoPaths() =>
             WithSnippetCS(
 @"public class First
@@ -222,7 +222,7 @@ File: Second.cs
 Line: 3, Type: primary, Id: ''
 ");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Verify_AutogenerateConcurrentFiles()
         {
             var builder = WithSnippetCS("// Noncompliant - FN");
@@ -243,7 +243,7 @@ Line: 1, Type: primary, Id: ''
 ");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Verify_TestProject()
         {
             var builder = new VerifierBuilder<DoNotWriteToStandardOutput>() // Rule with scope Main
@@ -252,7 +252,7 @@ Line: 1, Type: primary, Id: ''
             builder.AddTestReference().Invoking(x => x.Verify()).Should().NotThrow("Project references should be recognized as Test code.");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Verify_ParseOptions()
         {
             var builder = WithSnippetCS(
@@ -265,7 +265,7 @@ Line: 1, Type: primary, Id: ''
                 .WithMessage("CSharp5: Unexpected build error [CS8026]: Feature 'target-typed object creation' is not available in C# 5. Please use language version 9.0 or greater. on line 3");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Verify_BasePath()
         {
             DummyCS.AddPaths("Nonexistent.cs").Invoking(x => x.Verify()).Should().Throw<FileNotFoundException>("This file should not exist in TestCases directory.");
@@ -273,7 +273,7 @@ Line: 1, Type: primary, Id: ''
             DummyCS.WithBasePath("TestFramework").AddPaths("Verifier.BasePath.cs").Invoking(x => x.Verify()).Should().NotThrow();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Verify_ErrorBehavior()
         {
             var builder = WithSnippetCS("undefined");
@@ -284,7 +284,7 @@ Line: 1, Type: primary, Id: ''
             builder.WithErrorBehavior(CompilationErrorBehavior.Ignore).Invoking(x => x.Verify()).Should().NotThrow();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Verify_OnlyDiagnostics()
         {
             var builder = new VerifierBuilder<SymbolicExecutionRunner>().AddPaths(WriteFile("File.cs",
@@ -308,7 +308,7 @@ Line: 1, Type: primary, Id: ''
             builder.WithOnlyDiagnostics(NullPointerDereference.S2259).Invoking(x => x.Verify()).Should().NotThrow();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Verify_NonConcurrentAnalysis()
         {
             var builder = WithSnippetCS("var topLevelStatement = true;").WithOptions(ParseOptionsHelper.FromCSharp9).WithOutputKind(OutputKind.ConsoleApplication);
@@ -317,7 +317,7 @@ Line: 1, Type: primary, Id: ''
             builder.WithConcurrentAnalysis(false).Invoking(x => x.Verify()).Should().NotThrow();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Verify_OutputKind()
         {
             var builder = WithSnippetCS("var topLevelStatement = true;").WithOptions(ParseOptionsHelper.FromCSharp9);
@@ -327,7 +327,7 @@ Line: 1, Type: primary, Id: ''
                 .WithMessage("CSharp9: Unexpected build error [CS8805]: Program using top-level statements must be an executable. on line 1");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Verify_Snippets() =>
             DummyCS.AddSnippet("public class First { } // Noncompliant [first]  - not raised")
                 .AddSnippet("public class Second { } // Noncompliant [second] - not raised")
@@ -340,7 +340,7 @@ File: snippet2.cs
 Line: 1, Type: primary, Id: 'second'
 ");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void VerifyCodeFix_FixExpected_CS()
         {
             var originalPath = WriteFile("File.cs",
@@ -360,7 +360,7 @@ Line: 1, Type: primary, Id: 'second'
             DummyCS.AddPaths(originalPath).WithCodeFix<DummyCodeFixCS>().WithCodeFixedPaths(fixedPath).Invoking(x => x.VerifyCodeFix()).Should().NotThrow();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void VerifyCodeFix_FixExpected_VB()
         {
             var originalPath = WriteFile("File.vb",
@@ -378,7 +378,7 @@ End Class");
             DummyVB.AddPaths(originalPath).WithCodeFix<DummyCodeFixVB>().WithCodeFixedPaths(fixedPath).Invoking(x => x.VerifyCodeFix()).Should().NotThrow();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void VerifyCodeFix_NotFixed_CS()
         {
             var originalPath = WriteFile("File.cs",
@@ -404,7 +404,7 @@ End Class");
 }"" has a length of 134, differs near ""def"" (index 42).");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void VerifyCodeFix_NotFixed_VB()
         {
             var originalPath = WriteFile("File.vb",
@@ -427,11 +427,11 @@ End Class"" with a length of 155 because VerifyWhileDocumentChanges updates the 
 End Class"" has a length of 151, differs near ""Not"" (index 47).");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void VerifyNoIssueReported_NoIssues_Succeeds() =>
             WithSnippetCS("// Noncompliant - this comment is ignored").Invoking(x => x.VerifyNoIssueReported()).Should().NotThrow();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void VerifyNoIssueReported_WithIssues_Throws() =>
             WithSnippetCS(
 @"public class Sample
@@ -439,15 +439,15 @@ End Class"" has a length of 151, differs near ""Not"" (index 47).");
     private int a = 42;     // This will raise an issue
 }").Invoking(x => x.VerifyNoIssueReported()).Should().Throw<AssertFailedException>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Verify_ConcurrentAnalysis_FileEndingWithComment_CS() =>
             WithSnippetCS("// Nothing to see here, file ends with a comment").Invoking(x => x.Verify()).Should().NotThrow();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Verify_ConcurrentAnalysis_FileEndingWithComment_VB() =>
             WithSnippetVB("' Nothing to see here, file ends with a comment").Invoking(x => x.Verify()).Should().NotThrow();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void VerifyUtilityAnalyzerProducesEmptyProtobuf_EmptyFile()
         {
             var protobufPath = TestHelper.TestPath(TestContext, "Empty.pb");
@@ -456,7 +456,7 @@ End Class"" has a length of 151, differs near ""Not"" (index 47).");
                 .Should().NotThrow();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void VerifyUtilityAnalyzerProducesEmptyProtobuf_WithContent()
         {
             var protobufPath = TestHelper.TestPath(TestContext, "Empty.pb");
@@ -466,7 +466,7 @@ End Class"" has a length of 151, differs near ""Not"" (index 47).");
                 .Should().Throw<AssertFailedException>().WithMessage("Expected value to be 0L because protobuf file should be empty, but found *");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void VerifyUtilityAnalyzer_CorrectProtobuf_CS()
         {
             var protobufPath = TestHelper.TestPath(TestContext, "Log.pb");
@@ -481,7 +481,7 @@ End Class"" has a length of 151, differs near ""Not"" (index 47).");
             wasInvoked.Should().BeTrue();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void VerifyUtilityAnalyzer_CorrectProtobuf_VB()
         {
             var protobufPath = TestHelper.TestPath(TestContext, "Log.pb");
@@ -496,7 +496,7 @@ End Class"" has a length of 151, differs near ""Not"" (index 47).");
             wasInvoked.Should().BeTrue();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void VerifyUtilityAnalyzer_VerifyProtobuf_PropagateFailedAssertion_CS()
         {
             var protobufPath = TestHelper.TestPath(TestContext, "Empty.pb");
@@ -505,7 +505,7 @@ End Class"" has a length of 151, differs near ""Not"" (index 47).");
                 .Should().Throw<AssertFailedException>().WithMessage("Some failed assertion about Protobuf");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void VerifyUtilityAnalyzer_VerifyProtobuf_PropagateFailedAssertion_VB()
         {
             var protobufPath = TestHelper.TestPath(TestContext, "Empty.pb");

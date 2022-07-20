@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,21 +27,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<PropertiesShouldBePreferred>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PropertiesShouldBePreferred() =>
             builder.AddPaths("PropertiesShouldBePreferred.cs").AddReferences(MetadataReferenceFacade.SystemThreadingTasks).Verify();
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PropertiesShouldBePreferred_CSharp9() =>
             builder.AddPaths("PropertiesShouldBePreferred.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PropertiesShouldBePreferred_CSharp10() =>
             builder.AddPaths("PropertiesShouldBePreferred.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PropertiesShouldBePreferred_CSharpPreview() =>
             builder.AddPaths("PropertiesShouldBePreferred.CSharpPreview.cs").WithOptions(ParseOptionsHelper.CSharpPreview).Verify();
 

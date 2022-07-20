@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,12 +25,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class FieldsShouldBeEncapsulatedInPropertiesTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void FieldsShouldBeEncapsulatedInProperties() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\FieldsShouldBeEncapsulatedInProperties.cs", new FieldsShouldBeEncapsulatedInProperties());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void FieldsShouldBeEncapsulatedInProperties_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\FieldsShouldBeEncapsulatedInProperties.CSharp9.cs", new FieldsShouldBeEncapsulatedInProperties());
 #endif

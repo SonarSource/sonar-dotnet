@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -39,14 +39,14 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
                 onlyDiagnostics: OnlyDiagnostics);
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EmptyNullableValueAccess_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(
                 @"TestCases\SymbolicExecution\Sonar\EmptyNullableValueAccess.CSharp9.cs",
                 new SymbolicExecutionRunner(),
                 onlyDiagnostics: OnlyDiagnostics);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EmptyNullableValueAccess_CSharp10() =>
             OldVerifier.VerifyAnalyzerFromCSharp10Library(
                 @"TestCases\SymbolicExecution\Sonar\EmptyNullableValueAccess.CSharp10.cs",

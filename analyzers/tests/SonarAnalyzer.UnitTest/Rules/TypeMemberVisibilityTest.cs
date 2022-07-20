@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,21 +27,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<TypeMemberVisibility>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void TypeMemberVisibility_CS() =>
             builder.AddPaths("TypeMemberVisibility.cs").Verify();
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void TypeMemberVisibility_CSharp9() =>
             builder.AddPaths("TypeMemberVisibility.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void TypeMemberVisibility_CSharp10() =>
             builder.AddPaths("TypeMemberVisibility.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void TypeMemberVisibility_CSharpPreview() =>
             builder.AddPaths("TypeMemberVisibility.CSharpPreview.cs").WithOptions(ParseOptionsHelper.CSharpPreview).Verify();
 

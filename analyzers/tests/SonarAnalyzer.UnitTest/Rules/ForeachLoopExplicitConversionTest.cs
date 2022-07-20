@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,15 +25,15 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ForeachLoopExplicitConversionTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ForeachLoopExplicitConversion() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\ForeachLoopExplicitConversion.cs", new ForeachLoopExplicitConversion());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ForeachLoopExplicitConversion_CSharp10() =>
             OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\ForeachLoopExplicitConversion.CSharp10.cs", new ForeachLoopExplicitConversion());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ForeachLoopExplicitConversion_CodeFix() =>
             OldVerifier.VerifyCodeFix<ForeachLoopExplicitConversionCodeFix>(
                 @"TestCases\ForeachLoopExplicitConversion.cs",
@@ -41,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new ForeachLoopExplicitConversion());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ForeachLoopExplicitConversion_CSharp10_CodeFix() =>
             OldVerifier.VerifyCodeFix<ForeachLoopExplicitConversionCodeFix>(
                 @"TestCases\ForeachLoopExplicitConversion.CSharp10.cs",

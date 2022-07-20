@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,7 +25,7 @@ namespace SonarAnalyzer.UnitTest.Common
     [TestClass]
     public class AnalyzerLanguageTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ToString_ReturnsLanguageName()
         {
             AnalyzerLanguage.CSharp.ToString().Should().Be("C#");
@@ -50,22 +50,22 @@ namespace SonarAnalyzer.UnitTest.Common
         public void FromPath_VB(string path) =>
             AnalyzerLanguage.FromPath(path).Should().Be(AnalyzerLanguage.VisualBasic);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void FromPath_UnexpectedThrows() =>
             ((Func<AnalyzerLanguage>)(() => AnalyzerLanguage.FromPath("File.txt"))).Should().Throw<NotSupportedException>().WithMessage("Unsupported file extension: .txt");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void FromName()
         {
             AnalyzerLanguage.FromName(LanguageNames.CSharp).Should().Be(AnalyzerLanguage.CSharp);
             AnalyzerLanguage.FromName(LanguageNames.VisualBasic).Should().Be(AnalyzerLanguage.VisualBasic);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void FromName_UnexpectedThrows() =>
             ((Func<AnalyzerLanguage>)(() => AnalyzerLanguage.FromName(LanguageNames.FSharp))).Should().Throw<NotSupportedException>().WithMessage("Unsupported language name: F#");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void HelpLink_ReturnsUrl()
         {
             AnalyzerLanguage.CSharp.HelpLink("S2222").Should().Be("https://rules.sonarsource.com/csharp/RSPEC-2222");

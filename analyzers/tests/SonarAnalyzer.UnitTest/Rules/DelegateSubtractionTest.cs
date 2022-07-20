@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,12 +25,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DelegateSubtractionTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DelegateSubtraction() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\DelegateSubtraction.cs", new DelegateSubtraction());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DelegateSubtraction_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DelegateSubtraction.CSharp9.cs", new DelegateSubtraction());
 #endif

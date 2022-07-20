@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,14 +27,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<DoNotCallAssemblyGetExecutingAssemblyMethod>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotCallAssemblyGetExecutingAssembly() =>
             builder.AddPaths("DoNotCallAssemblyGetExecutingAssembly.cs")
                 .Verify();
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotCallAssemblyGetExecutingAssembly_CSharp9() =>
             builder.AddPaths("DoNotCallAssemblyGetExecutingAssembly.CSharp9.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp9)

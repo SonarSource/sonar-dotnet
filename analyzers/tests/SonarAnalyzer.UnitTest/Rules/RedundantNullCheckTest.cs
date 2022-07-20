@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,21 +26,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class RedundantNullCheckTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundantNullCheck_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\RedundantNullCheck.cs", new CS.RedundantNullCheck());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundantNullCheck_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RedundantNullCheck.CSharp9.cs", new CS.RedundantNullCheck());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundantNullCheck_CSharp10() =>
             OldVerifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\RedundantNullCheck.CSharp10.cs", new CS.RedundantNullCheck());
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundantNullCheck_CS_CodeFix() =>
             OldVerifier.VerifyCodeFix<CS.RedundantNullCheckCodeFix>(
                 @"TestCases\RedundantNullCheck.cs",
@@ -49,7 +49,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new CS.RedundantNullCheck());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundantNullCheck_CSharp9_CodeFix() =>
             OldVerifier.VerifyCodeFix<CS.RedundantNullCheckCodeFix>(
                 @"TestCases\RedundantNullCheck.CSharp9.cs",
@@ -58,7 +58,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 ParseOptionsHelper.FromCSharp9,
                 OutputKind.ConsoleApplication);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundantNullCheck_CSharp10_CodeFix() =>
             OldVerifier.VerifyCodeFix<CS.RedundantNullCheckCodeFix>(
                 @"TestCases\RedundantNullCheck.CSharp10.cs",
@@ -68,7 +68,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 OutputKind.ConsoleApplication);
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundantNullCheck_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\RedundantNullCheck.vb", new VB.RedundantNullCheck());
     }

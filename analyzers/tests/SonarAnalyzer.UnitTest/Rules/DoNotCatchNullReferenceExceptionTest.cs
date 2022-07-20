@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,12 +25,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DoNotCatchNullReferenceExceptionTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotCatchNullReferenceException() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\DoNotCatchNullReferenceException.cs", new DoNotCatchNullReferenceException());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotCatchNullReferenceException_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotCatchNullReferenceException.CSharp9.cs", new DoNotCatchNullReferenceException());
 #endif

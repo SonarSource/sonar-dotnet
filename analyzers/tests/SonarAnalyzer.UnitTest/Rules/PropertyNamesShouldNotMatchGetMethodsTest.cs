@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,11 +27,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<PropertyNamesShouldNotMatchGetMethods>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PropertyNamesShouldNotMatchGetMethods() =>
             builder.AddPaths("PropertyNamesShouldNotMatchGetMethods.cs").Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PropertyNamesShouldNotMatchGetMethods_InvalidCode() =>
             builder.AddSnippet(@"
 public class Sample
@@ -43,11 +43,11 @@ public class Sample
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PropertyNamesShouldNotMatchGetMethods_CSharp9() =>
             builder.AddPaths("PropertyNamesShouldNotMatchGetMethods.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PropertyNamesShouldNotMatchGetMethods_CSharp10() =>
             builder.AddPaths("PropertyNamesShouldNotMatchGetMethods.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 

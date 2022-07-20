@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,14 +27,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DoNotHardcodeCredentialsTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotHardcodeCredentials_CS_DefaultValues() =>
             OldVerifier.VerifyAnalyzer(
                 @"TestCases\Hotspots\DoNotHardcodeCredentials_DefaultValues.cs",
                 new CS.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled),
                 AdditionalReferences);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotHardcodeCredentials_CSharp8_DefaultValues() =>
             OldVerifier.VerifyAnalyzer(
                 @"TestCases\Hotspots\DoNotHardcodeCredentials_DefaultValues.CSharp8.cs",
@@ -43,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 AdditionalReferences);
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotHardcodeCredentials_CSharp10_DefaultValues() =>
             OldVerifier.VerifyAnalyzerFromCSharp10Library(
                 @"TestCases\Hotspots\DoNotHardcodeCredentials_DefaultValues.CSharp10.cs",
@@ -52,42 +52,42 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotHardcodeCredentials_CS_CustomValues() =>
             OldVerifier.VerifyAnalyzer(
                 @"TestCases\Hotspots\DoNotHardcodeCredentials_CustomValues.cs",
                 new CS.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = @"kode,facal-faire,*,x\*+?|}{][)(^$.# " },
                 AdditionalReferences);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotHardcodeCredentials_CS_CustomValues_CaseInsensitive() =>
             OldVerifier.VerifyAnalyzer(
                 @"TestCases\Hotspots\DoNotHardcodeCredentials_CustomValues.cs",
                 new CS.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = @"KODE ,,,, FaCaL-FaIrE, x\*+?|}{][)(^$.# " },
                 AdditionalReferences);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotHardcodeCredentials_VB_DefaultValues() =>
             OldVerifier.VerifyAnalyzer(
                 @"TestCases\Hotspots\DoNotHardcodeCredentials_DefaultValues.vb",
                 new VB.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled),
                 AdditionalReferences);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotHardcodeCredentials_VB_CustomValues() =>
             OldVerifier.VerifyAnalyzer(
                 @"TestCases\Hotspots\DoNotHardcodeCredentials_CustomValues.vb",
                 new VB.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = @"kode,facal-faire,*,x\*+?|}{][)(^$.# " },
                 AdditionalReferences);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotHardcodeCredentials_VB_CustomValues_CaseInsensitive() =>
             OldVerifier.VerifyAnalyzer(
                 @"TestCases\Hotspots\DoNotHardcodeCredentials_CustomValues.vb",
                 new VB.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = @"KODE ,,,, FaCaL-FaIrE,x\*+?|}{][)(^$.# " },
                 AdditionalReferences);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotHardcodeCredentials_ConfiguredCredentialsAreRead()
         {
             var cs = new CS.DoNotHardcodeCredentials

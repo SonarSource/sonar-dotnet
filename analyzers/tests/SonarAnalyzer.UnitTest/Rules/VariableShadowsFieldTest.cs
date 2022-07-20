@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,7 +27,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<VariableShadowsField>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void VariableShadowsField() =>
             builder.AddPaths("VariableShadowsField.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
@@ -35,14 +35,14 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void VariableShadowsField_CSharp9() =>
             builder.AddPaths("VariableShadowsField.CSharp9.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp9)
                 .WithTopLevelStatements()
                 .Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void VariableShadowsField_CSharp10() =>
             builder.AddPaths("VariableShadowsField.CSharp10.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp10)

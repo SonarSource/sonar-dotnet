@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,7 +27,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder defaultBuilder = new VerifierBuilder<AvoidExcessiveInheritance>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AvoidExcessiveInheritance_DefaultValues() =>
             defaultBuilder.AddPaths(
                 "AvoidExcessiveInheritance_DefaultValues.cs",
@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AvoidExcessiveInheritance_DefaultValues_Records() =>
             defaultBuilder.AddPaths(
                 "AvoidExcessiveInheritance_DefaultValues.Records.cs",
@@ -50,7 +50,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AvoidExcessiveInheritance_CustomValuesFullyNamedFilteredClass() =>
             new VerifierBuilder()
                 .AddAnalyzer(() => CreateAnalyzerWithFilter("Tests.Diagnostics.SecondSubClass"))
@@ -58,7 +58,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithAutogenerateConcurrentFiles(false)
                 .Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AvoidExcessiveInheritance_CustomValuesWildcardFilteredClass() =>
             new VerifierBuilder()
                 .AddAnalyzer(() => CreateAnalyzerWithFilter("Tests.Diagnostics.*SubClass"))
@@ -68,7 +68,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AvoidExcessiveInheritance_CustomValuesWildcardFilteredRecord() =>
             new VerifierBuilder()
                 .AddAnalyzer(() => CreateAnalyzerWithFilter("Tests.Diagnostics.*SubRecord"))
@@ -79,7 +79,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void FilteredClasses_ByDefault_ShouldBeEmpty() =>
             new AvoidExcessiveInheritance().FilteredClasses.Should().BeEmpty();
 

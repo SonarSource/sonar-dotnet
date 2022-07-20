@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,21 +29,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class CbdeHandlerTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CbdeHandler_CS()
         {
             using var scope = new EnvironmentVariableScope(false) { InternalLogCBDE = true };
             OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\CbdeHandler.cs", CbdeHandlerRule.MakeUnitTestInstance(null, null));
         }
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CbdeHandler_CSharp9()
         {
             using var scope = new EnvironmentVariableScope(false) { InternalLogCBDE = true };
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CbdeHandler.CSharp9.cs", CbdeHandlerRule.MakeUnitTestInstance(null, null));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CbdeHandler_CSharp10()
         {
             using var scope = new EnvironmentVariableScope(false) { InternalLogCBDE = true };
@@ -51,7 +51,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CbdeHandlerWait()
         {
             var cbdeExecuted = false;
@@ -71,7 +71,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Assert.IsTrue(cbdeExecuted);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CbdeHandlerExecutableNotFound()
         {
             var cbdeExecuted = false;
@@ -86,7 +86,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Assert.IsTrue(cbdeExecuted);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CbdeHandlerFailed()
         {
             var cbdeExecuted = false;
@@ -101,7 +101,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Assert.IsTrue(cbdeExecuted);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CbdeHandlerIncorrectOutput()
         {
             var cbdeExecuted = false;

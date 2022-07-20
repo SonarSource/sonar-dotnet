@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,7 +26,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
     [TestClass]
     public class ConstantValueFinderTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void FieldDeclaredInAnotherSyntaxTree()
         {
             const string code1 = @"
@@ -50,7 +50,7 @@ public partial class Sample
             finder.FindConstant(returnExpression).Should().Be(42);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void WrongCompilationBeingUsed()
         {
             const string firstSnippet = @"

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,11 +25,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class LiteralSuffixUpperCaseTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void LiteralSuffixUpperCase() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\LiteralSuffixUpperCase.cs", new LiteralSuffixUpperCase());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void LiteralSuffixUpperCase_CodeFix() =>
             OldVerifier.VerifyCodeFix<LiteralSuffixUpperCaseCodeFix>(
                 @"TestCases\LiteralSuffixUpperCase.cs",
@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new LiteralSuffixUpperCase());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void LiteralSuffixUpperCase_CSharp10() =>
             OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\LiteralSuffixUpperCase.CSharp10.cs", new LiteralSuffixUpperCase());
 #endif

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,27 +29,27 @@ namespace SonarAnalyzer.UnitTest.Rules
         private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ShouldImplementExportedInterfaces>().AddReferences(MetadataReferenceFacade.SystemComponentModelComposition);
         private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.ShouldImplementExportedInterfaces>().AddReferences(MetadataReferenceFacade.SystemComponentModelComposition);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ShouldImplementExportedInterfaces_CS() =>
             builderCS.AddPaths("ShouldImplementExportedInterfaces.cs").Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ShouldImplementExportedInterfaces_SystemComposition_CS() =>
             builderCS.AddPaths("ShouldImplementExportedInterfaces.System.Composition.cs").AddReferences(MetadataReferenceFacade.SystemCompositionAttributedModel).Verify();
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ShouldImplementExportedInterfaces_CSharp9() =>
             builderCS.AddPaths("ShouldImplementExportedInterfaces.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ShouldImplementExportedInterfaces_VB() =>
             builderVB.AddPaths("ShouldImplementExportedInterfaces.vb").Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ShouldImplementExportedInterfaces_Partial() =>
             builderCS.AddPaths("ShouldImplementExportedInterfaces_Part1.cs", "ShouldImplementExportedInterfaces_Part2.cs").Verify();
     }

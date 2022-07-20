@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,15 +28,15 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<CommentedOutCode>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CommentedOutCode_Nonconcurrent() =>
             builder.AddPaths("CommentedOutCode_Nonconcurrent.cs").WithConcurrentAnalysis(false).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CommentedOutCode() =>
             builder.AddPaths("CommentedOutCode.cs").Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CommentedOutCode_NoDocumentation() =>
             builder.AddPaths("CommentedOutCode.cs")
                 .WithConcurrentAnalysis(false)

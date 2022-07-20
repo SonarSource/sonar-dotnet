@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,11 +29,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         private readonly VerifierBuilder builderCS = WithReferences(new VerifierBuilder<CS.WeakSslTlsProtocols>());
         private readonly VerifierBuilder builderVB = WithReferences(new VerifierBuilder<VB.WeakSslTlsProtocols>());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void WeakSslTlsProtocols_CSharp() =>
             builderCS.AddPaths("WeakSslTlsProtocols.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void WeakSslTlsProtocols_VB() =>
             builderVB.AddPaths("WeakSslTlsProtocols.vb").Verify();
 

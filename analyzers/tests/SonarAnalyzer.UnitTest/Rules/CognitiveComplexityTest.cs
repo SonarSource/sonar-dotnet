@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -31,26 +31,26 @@ namespace SonarAnalyzer.UnitTest.Rules
         private readonly VerifierBuilder builderCS = new VerifierBuilder().AddAnalyzer(() => new CS.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
         private readonly VerifierBuilder builderVB = new VerifierBuilder().AddAnalyzer(() => new VB.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CognitiveComplexity_CS() =>
             builderCS.AddPaths(@"CognitiveComplexity.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CognitiveComplexity_CS_LocalFunctions() =>
         builderCS.AddPaths(@"CognitiveComplexity.LocalFunctions.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp8)
             .Verify();
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CognitiveComplexity_CS_CSharp9() =>
             builderCS.AddPaths(@"CognitiveComplexity.CSharp9.cs")
                 .WithTopLevelStatements()
                 .Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CognitiveComplexity_CS_CSharp10() =>
             builderCS.AddPaths(@"CognitiveComplexity.CSharp10.cs")
                 .WithLanguageVersion(LanguageVersion.CSharp10)
@@ -58,10 +58,10 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Verify();
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CognitiveComplexity_VB() => builderVB.AddPaths("CognitiveComplexity.vb").Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CognitiveComplexity_StackOverflow_CS()
         {
             if (!TestContextHelper.IsAzureDevOpsContext) // ToDo: Test throws OOM on Azure DevOps
@@ -70,7 +70,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             }
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CognitiveComplexity_StackOverflow_VB()
         {
             if (!TestContextHelper.IsAzureDevOpsContext) // ToDO: Test throws OOM on Azure DevOps

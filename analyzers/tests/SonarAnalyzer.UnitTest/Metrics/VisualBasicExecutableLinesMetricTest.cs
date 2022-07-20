@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -23,7 +23,7 @@ namespace SonarAnalyzer.UnitTest.Common
     [TestClass]
     public class VisualBasicExecutableLinesMetricTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AttributeList() =>
             AssertLinesOfCode(
 @"<Serializable()>
@@ -33,7 +33,7 @@ Public Class Sample
     End Sub
 End Class");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SyncLockStatement() =>
             AssertLinesOfCode(
 @"Class simpleMessageList
@@ -45,7 +45,7 @@ End Class");
     End Sub
 End Class", 5);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UsingStatement() =>
             AssertLinesOfCode(
 @"Public Module Sample
@@ -55,7 +55,7 @@ End Class", 5);
     End Sub
 End Module", 3);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoUntilStatement() =>
             AssertLinesOfCode(
 @"Public Module Sample
@@ -66,7 +66,7 @@ End Module", 3);
     End Sub
 End Module");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoWhileStatement() =>
             AssertLinesOfCode(
 @"Public Module Sample
@@ -77,7 +77,7 @@ End Module");
     End Sub
 End Module", 4);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ForEachStatement() =>
             AssertLinesOfCode(
 @"Public Module Sample
@@ -87,7 +87,7 @@ End Module", 4);
     End Sub
 End Module", 3);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ForStatement() =>
             AssertLinesOfCode(
 @"Public Module Sample
@@ -97,7 +97,7 @@ End Module", 3);
     End Sub
 End Module", 3);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void WhileStatement() =>
             AssertLinesOfCode(
 @"Public Module Sample
@@ -107,7 +107,7 @@ End Module", 3);
     End Sub
 End Module", 3);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IfStatement() =>
             AssertLinesOfCode(
 @"Public Module Sample
@@ -123,7 +123,7 @@ End Module", 3);
     End Sub
 End Module", 4, 5, 6, 7, 9);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SelectStatement() =>
             AssertLinesOfCode(
 @"Public Module Sample
@@ -138,7 +138,7 @@ End Module", 4, 5, 6, 7, 9);
     End Sub
 End Module", 4, 6, 8);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ConditionalAccessExpression() =>
             AssertLinesOfCode(
 @"Public Module Sample
@@ -147,7 +147,7 @@ End Module", 4, 6, 8);
     End Sub
 End Module", 3);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void BinaryConditionalExpression() =>
             AssertLinesOfCode(
 @"Public Module Sample
@@ -156,7 +156,7 @@ End Module", 3);
     End Function
 End Module", 3);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void TernaryConditionalExpression() =>
             AssertLinesOfCode(
 @"Public Module Sample
@@ -165,7 +165,7 @@ End Module", 3);
     End Sub
 End Module", 3);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GoToStatement() =>
             AssertLinesOfCode(
 @"Public Module Sample
@@ -175,7 +175,7 @@ LastLine:
     End Sub
 End Module", 3, 4);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ThrowStatement() =>
             AssertLinesOfCode(
 @"Public Module Sample
@@ -184,7 +184,7 @@ End Module", 3, 4);
     End Sub
 End Module", 3);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ReturnStatement() =>
             AssertLinesOfCode(
 @"Public Module Sample
@@ -193,7 +193,7 @@ End Module", 3);
     End Function
 End Module", 3);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ExitDoStatement() =>
             AssertLinesOfCode(
 @"Public Module Sample
@@ -206,7 +206,7 @@ End Module", 3);
     End Sub
 End Module", 3, 4, 5);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ExitForStatement() =>
             AssertLinesOfCode(
 @"Public Module Sample
@@ -217,7 +217,7 @@ End Module", 3, 4, 5);
     End Sub
 End Module", 3, 4);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ExitWhileStatement() =>
             AssertLinesOfCode(
 @"Public Module Sample
@@ -228,7 +228,7 @@ End Module", 3, 4);
     End Sub
 End Module", 3, 4);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ContinueDoStatement() =>
             AssertLinesOfCode(
 @"Public Module Sample
@@ -239,7 +239,7 @@ End Module", 3, 4);
     End Sub
 End Module", 4);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ContinueForStatement() =>
             AssertLinesOfCode(
 @"Public Module Sample
@@ -250,7 +250,7 @@ End Module", 4);
     End Sub
 End Module", 3, 4);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SimpleMemberAccessExpression() =>
             AssertLinesOfCode(
 @"Public Module Sample
@@ -259,7 +259,7 @@ End Module", 3, 4);
     End Sub
 End Module", 3);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void InvocationExpression() =>
             AssertLinesOfCode(
 @"Public Module Sample
@@ -271,7 +271,7 @@ End Module", 3);
     End Sub
 End Module", 6);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SingleLineSubLambdaExpression() =>
             AssertLinesOfCode(
 @"Public Module Sample
@@ -280,7 +280,7 @@ End Module", 6);
     End Sub
 End Module", 3);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SingleLineFunctionLambdaExpression() =>
             AssertLinesOfCode(
 @"Public Module Sample
@@ -289,7 +289,7 @@ End Module", 3);
     End Sub
 End Module", 3);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MultiLineSubLambdaExpression() =>
             AssertLinesOfCode(
 @"Public Module Sample
@@ -300,7 +300,7 @@ End Module", 3);
     End Sub
 End Module", 3, 4);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MultiLineFunctionLambdaExpression() =>
             AssertLinesOfCode(
 @"Public Module Sample
@@ -311,25 +311,25 @@ End Module", 3, 4);
     End Sub
 End Module", 3, 4);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void StructureStatement() =>
             AssertLinesOfCode(
 @"Structure foo
 End Structure");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ClassStatement() =>
             AssertLinesOfCode(
 @"Class foo
 End Class");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ModuleStatement() =>
             AssertLinesOfCode(
 @"Module foo
 End Module");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void FunctionStatement() =>
             AssertLinesOfCode(
 @"Public Module Sample
@@ -338,7 +338,7 @@ End Module");
     End Function
 End Module", 3);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SubStatement() =>
             AssertLinesOfCode(
 @"Public Module Sample
@@ -346,7 +346,7 @@ End Module", 3);
     End Sub
 End Module");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SubNewStatement() =>
             AssertLinesOfCode(
 @"Public Class Sample
@@ -354,21 +354,21 @@ End Module");
     End Sub
 End Class");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PropertyStatement() =>
             AssertLinesOfCode(
 @"Public Class Sample
     Public Property Name As String
 End Class");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EventStatement() =>
             AssertLinesOfCode(
 @"Public Class Sample
     Public Event LogonCompleted(ByVal UserName As String)
 End Class");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AddHandlerAccessorStatement() =>
             AssertLinesOfCode(
 @"Public Class Sample
@@ -383,7 +383,7 @@ End Class");
     End Sub
 End Class", 6);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RemoveHandlerAccessorStatement() =>
             AssertLinesOfCode(
 @"Public Class Sample
@@ -398,7 +398,7 @@ End Class", 6);
     End Sub
 End Class", 6);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SetAccessorStatement() =>
             AssertLinesOfCode(
 @"Public Class Sample
@@ -411,7 +411,7 @@ End Class", 6);
     End Property
 End Class", 6);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GetAccessorStatement() =>
             AssertLinesOfCode(
 @"Public Class Sample
@@ -421,7 +421,7 @@ End Class", 6);
     End Property
 End Class");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Assignments() =>
             AssertLinesOfCode(
 @"Public Module Sample

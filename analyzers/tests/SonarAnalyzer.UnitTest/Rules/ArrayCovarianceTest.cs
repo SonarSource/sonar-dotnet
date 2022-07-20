@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,12 +25,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ArrayCovarianceTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ArrayCovariance() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\ArrayCovariance.cs", new ArrayCovariance());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ArrayCovariance_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ArrayCovariance.CSharp9.cs", new ArrayCovariance());
 #endif

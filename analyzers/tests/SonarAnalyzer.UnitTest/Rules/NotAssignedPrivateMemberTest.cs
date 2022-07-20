@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,17 +28,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<NotAssignedPrivateMember>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NotAssignedPrivateMember() =>
             builder.AddPaths("NotAssignedPrivateMember.cs").Verify();
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NotAssignedPrivateMember_CSharp9() =>
             builder.AddPaths("NotAssignedPrivateMember.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NotAssignedPrivateMember_IndexingMovableFixedBuffer() =>
             builder.AddSnippet(@"
 unsafe struct FixedArray

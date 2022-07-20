@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -33,31 +33,31 @@ namespace SonarAnalyzer.UnitTest.Rules
         private readonly VerifierBuilder builderCS = WithReferences.AddAnalyzer(() => new CS.CertificateValidationCheck());
         private readonly VerifierBuilder builderVB = WithReferences.AddAnalyzer(() => new VB.CertificateValidationCheck());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CertificateValidationCheck_CS() =>
             builderCS.AddPaths("CertificateValidationCheck.cs").Verify();
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CertificateValidationCheck_CSharp8() =>
             builderCS.AddPaths("CertificateValidationCheck.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CertificateValidationCheck_CS_CSharp9() =>
             builderCS.AddPaths("CertificateValidationCheck.CSharp9.cs", "CertificateValidationCheck.CSharp9.Partial.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CertificateValidationCheck_CS_TopLevelStatements() =>
             builderCS.AddPaths("CertificateValidationCheck.TopLevelStatements.cs").WithTopLevelStatements().Verify();
 
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CertificateValidationCheck_VB() =>
             builderVB.AddPaths("CertificateValidationCheck.vb").Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CreateParameterLookup_CS_ThrowsException()
         {
             var analyzer = new CS.CertificateValidationCheck();
@@ -65,7 +65,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             a.Should().Throw<ArgumentException>();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CreateParameterLookup_VB_ThrowsException()
         {
             var analyzer = new VB.CertificateValidationCheck();

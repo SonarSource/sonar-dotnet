@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,19 +29,19 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
 #if NETFRAMEWORK
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void TaskConfigureAwait_NetFx() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\TaskConfigureAwait.NetFx.cs", new TaskConfigureAwait());
 
 #else
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void TaskConfigureAwait_NetCore() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\TaskConfigureAwait.NetCore.cs", new TaskConfigureAwait());
 
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void TaskConfigureAwait_ConsoleApp()
         {
             const string code = @"

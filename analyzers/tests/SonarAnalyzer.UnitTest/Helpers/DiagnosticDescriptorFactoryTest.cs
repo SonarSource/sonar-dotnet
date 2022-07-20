@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,7 +25,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
     [TestClass]
     public class DiagnosticDescriptorFactoryTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GetUtilityDescriptor_Should_Contain_NotConfigurable_CustomTag()
         {
             var result = DiagnosticDescriptorFactory.CreateUtility("Sxxx", "Title");
@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
 #endif
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Create_ConfiguresProperties_CS()
         {
             var result = DiagnosticDescriptorFactory.Create(AnalyzerLanguage.CSharp, CreateRuleDescriptor(SourceScope.Main, true), "Sxxxx Message", null, false);
@@ -52,7 +52,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             result.CustomTags.Should().OnlyContain(LanguageNames.CSharp, DiagnosticDescriptorFactory.MainSourceScopeTag, DiagnosticDescriptorFactory.SonarWayTag);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Create_ConfiguresProperties_VB()
         {
             var result = DiagnosticDescriptorFactory.Create(AnalyzerLanguage.VisualBasic, CreateRuleDescriptor(SourceScope.Main, true), "Sxxxx Message", null, false);
@@ -68,7 +68,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             result.CustomTags.Should().OnlyContain(LanguageNames.VisualBasic, DiagnosticDescriptorFactory.MainSourceScopeTag, DiagnosticDescriptorFactory.SonarWayTag);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Create_FadeOutCode_HasUnnecessaryTag_HasInfoSeverity()
         {
             var result = DiagnosticDescriptorFactory.Create(AnalyzerLanguage.CSharp, CreateRuleDescriptor(SourceScope.Main, true), "Sxxxx Message", null, true);
@@ -77,7 +77,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             result.CustomTags.Should().Contain(WellKnownDiagnosticTags.Unnecessary);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Create_HasCorrectSonarWayTag()
         {
             CreateTags(true).Should().Contain(DiagnosticDescriptorFactory.SonarWayTag);
@@ -87,7 +87,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 DiagnosticDescriptorFactory.Create(AnalyzerLanguage.CSharp, CreateRuleDescriptor(SourceScope.Main, sonarWay), "Sxxxx Message", null, false).CustomTags;
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Create_HasCorrectScopeTags()
         {
             CreateTags(SourceScope.Main).Should().Contain(DiagnosticDescriptorFactory.MainSourceScopeTag).And.NotContain(DiagnosticDescriptorFactory.TestSourceScopeTag);
@@ -98,7 +98,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 DiagnosticDescriptorFactory.Create(AnalyzerLanguage.CSharp, CreateRuleDescriptor(scope, true), "Sxxxx Message", null, false).CustomTags;
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Create_UnexpectedType_Throws()
         {
             var rule = new RuleDescriptor("Sxxxx", string.Empty, "Lorem Ipsum", string.Empty, string.Empty, SourceScope.Main, true, string.Empty);

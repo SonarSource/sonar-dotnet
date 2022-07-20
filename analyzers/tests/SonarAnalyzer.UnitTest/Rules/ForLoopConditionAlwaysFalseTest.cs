@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,13 +25,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ForLoopConditionAlwaysFalseTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ForLoopConditionAlwaysFalse() =>
             new VerifierBuilder<ForLoopConditionAlwaysFalse>().AddPaths("ForLoopConditionAlwaysFalse.cs").Verify();
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ForLoopConditionAlwaysFalse_CSharp9() =>
             new VerifierBuilder<ForLoopConditionAlwaysFalse>().AddPaths("ForLoopConditionAlwaysFalse.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 

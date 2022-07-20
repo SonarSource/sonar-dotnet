@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,28 +26,28 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class FieldShadowsParentFieldTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void FieldShadowsParentField_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\FieldShadowsParentField.cs", new CS.FieldShadowsParentField());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void FieldShadowsParentField_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\FieldShadowsParentField.vb", new VB.FieldShadowsParentField());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void FieldShadowsParentField_DoesNotRaiseIssuesForTestProject_CS() =>
             OldVerifier.VerifyNoIssueReportedInTest(@"TestCases\FieldShadowsParentField.cs", new CS.FieldShadowsParentField());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void FieldShadowsParentField_DoesNotRaiseIssuesForTestProject_VB() =>
             OldVerifier.VerifyNoIssueReportedInTest(@"TestCases\FieldShadowsParentField.vb", new VB.FieldShadowsParentField());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void FieldShadowsParentField_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\FieldShadowsParentField.CSharp9.cs", new CS.FieldShadowsParentField());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void FieldsShouldNotDifferByCapitalization_CShar9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\FieldsShouldNotDifferByCapitalization.CSharp9.cs", new CS.FieldShadowsParentField());
 #endif

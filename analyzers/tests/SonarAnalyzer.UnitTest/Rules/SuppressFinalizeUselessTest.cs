@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,17 +25,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class SuppressFinalizeUselessTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SuppressFinalizeUseless() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\SuppressFinalizeUseless.cs", new SuppressFinalizeUseless());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SuppressFinalizeUseless_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SuppressFinalizeUseless.CSharp9.cs", new SuppressFinalizeUseless());
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SuppressFinalizeUseless_CodeFix() =>
             OldVerifier.VerifyCodeFix<SuppressFinalizeUselessCodeFix>(
                 @"TestCases\SuppressFinalizeUseless.cs",

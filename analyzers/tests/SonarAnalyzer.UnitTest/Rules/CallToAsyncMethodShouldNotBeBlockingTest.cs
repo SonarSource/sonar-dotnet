@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,13 +27,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<CallToAsyncMethodShouldNotBeBlocking>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CallToAsyncMethodShouldNotBeBlocking() =>
             builder.AddPaths("CallToAsyncMethodShouldNotBeBlocking.cs").AddReferences(NuGetMetadataReference.MicrosoftNetSdkFunctions()).Verify();
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CallToAsyncMethodShouldNotBeBlocking_CSharp9() =>
             builder.AddPaths("CallToAsyncMethodShouldNotBeBlocking.CSharp9.cs").WithTopLevelStatements().Verify();
 

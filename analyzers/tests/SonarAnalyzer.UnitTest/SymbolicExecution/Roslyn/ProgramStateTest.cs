@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,7 +29,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
     [TestClass]
     public partial class ProgramStateTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Equals_ReturnsTrueForEquivalent()
         {
             var reusedValue = new SymbolicValue().WithConstraint(TestConstraint.First);
@@ -116,7 +116,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             mixedOrig.Equals(empty).Should().BeFalse();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GetHashCode_ReturnsSameForEquivalent()
         {
             var reusedValue = new SymbolicValue().WithConstraint(TestConstraint.First);
@@ -174,13 +174,13 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             mixedOrig.GetHashCode().Should().NotBe(mixedDiff.GetHashCode());
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ToString_Empty() =>
             ProgramState.Empty.ToString().Should().BeIgnoringLineEndings(
 @"Empty
 ");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ToString_WithSymbols()
         {
             var assignment = TestHelper.CompileCfgBodyCS("var a = true;").Blocks[1].Operations[0];
@@ -205,7 +205,7 @@ Sample.Main(): Second
 ");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ToString_WithOperations()
         {
             var assignment = TestHelper.CompileCfgBodyCS("var a = true;").Blocks[1].Operations[0];
@@ -228,7 +228,7 @@ SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true: No constraints
 ");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ToString_WithCaptures()
         {
             var assignment = TestHelper.CompileCfgBodyCS("var a = true;").Blocks[1].Operations[0];
@@ -244,7 +244,7 @@ SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true: No constraints
 ");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ToString_Exception()
         {
             var sut = ProgramState.Empty.PushException(ExceptionState.UnknownException);
@@ -259,7 +259,7 @@ Exception: Unknown
 ");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ToString_WithAll()
         {
             var assignment = TestHelper.CompileCfgBodyCS("var a = true;").Blocks[1].Operations[0];

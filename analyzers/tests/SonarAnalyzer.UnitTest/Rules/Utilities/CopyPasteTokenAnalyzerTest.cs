@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         private const string BasePath = @"Utilities\CopyPasteTokenAnalyzer\";
         private readonly VerifierBuilder verifierBuilder = new VerifierBuilder().WithBasePath(BasePath);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Verify_Unique_CS() =>
             Verify("Unique.cs", info =>
             {
@@ -43,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 info.Count(x => x.TokenValue == "$char").Should().Be(2);
             });
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Verify_Unique_VB() =>
             Verify("Unique.vb", info =>
             {
@@ -53,7 +53,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 info.Should().ContainSingle(x => x.TokenValue == "$char");
             });
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Verify_Duplicated_CS() =>
             Verify("Duplicated.cs", info =>
             {
@@ -61,7 +61,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 info.Where(x => x.TokenValue == "$num").Should().HaveCount(2);
             });
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Verify_Duplicated_CS_GlobalUsings()
         {
             const string testRoot = BasePath + nameof(Verify_NotRunForTestProject_CS);
@@ -83,7 +83,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                     });
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Verify_DuplicatedDifferentLiterals_CS() =>
             Verify("DuplicatedDifferentLiterals.cs", info =>
             {
@@ -91,7 +91,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 info.Where(x => x.TokenValue == "$num").Should().HaveCount(2);
             });
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Verify_NotRunForTestProject_CS()
         {
             const string testRoot = BasePath + nameof(Verify_NotRunForTestProject_CS);

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,23 +26,23 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class SwitchSectionShouldNotHaveTooManyStatementsTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SwitchSectionShouldNotHaveTooManyStatements_DefaultValue_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\SwitchSectionShouldNotHaveTooManyStatements_DefaultValue.cs",
                 new CS.SwitchSectionShouldNotHaveTooManyStatements());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SwitchSectionShouldNotHaveTooManyStatements_CustomValue_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\SwitchSectionShouldNotHaveTooManyStatements_CustomValue.cs",
                 new CS.SwitchSectionShouldNotHaveTooManyStatements { Threshold = 1 },
                 ParseOptionsHelper.FromCSharp8);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SwitchSectionShouldNotHaveTooManyStatements_DefaultValue_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\SwitchSectionShouldNotHaveTooManyStatements_DefaultValue.vb",
                 new VB.SwitchSectionShouldNotHaveTooManyStatements());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SwitchSectionShouldNotHaveTooManyStatements_CustomValue_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\SwitchSectionShouldNotHaveTooManyStatements_CustomValue.vb",
                 new VB.SwitchSectionShouldNotHaveTooManyStatements() { Threshold = 1 });

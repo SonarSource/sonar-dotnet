@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,11 +26,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class GotoStatementTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GotoStatement_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\GotoStatement.cs", new CS.GotoStatement());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GotoStatement_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\GotoStatement.vb", new VB.GotoStatement());
     }

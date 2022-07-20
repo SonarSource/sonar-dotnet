@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,11 +29,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         private readonly VerifierBuilder verifierCS = new VerifierBuilder<CS.DoNotNestTernaryOperators>();
         private readonly VerifierBuilder verifierVB = new VerifierBuilder<VB.DoNotNestTernaryOperators>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotNestTernaryOperators_CS() =>
             verifierCS.AddPaths("DoNotNestTernaryOperators.cs").Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotNestTernaryOperators_VB() =>
             verifierVB.AddPaths("DoNotNestTernaryOperators.vb").Verify();
     }

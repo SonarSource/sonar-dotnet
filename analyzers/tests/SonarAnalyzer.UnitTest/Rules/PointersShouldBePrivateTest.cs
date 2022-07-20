@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,12 +25,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class PointersShouldBePrivateTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PointersShouldBePrivate() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\PointersShouldBePrivate.cs", new PointersShouldBePrivate());
 
 #if NET // Function pointers are supported only by .Net 5 runtime
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PointersShouldBePrivate_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PointersShouldBePrivate.CSharp9.cs", new PointersShouldBePrivate());
 #endif

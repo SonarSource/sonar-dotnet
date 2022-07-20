@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,23 +29,23 @@ namespace SonarAnalyzer.UnitTest.Rules
         private readonly VerifierBuilder verifierCS = new VerifierBuilder<CS.EmptyMethod>();
         private readonly VerifierBuilder verifierVB = new VerifierBuilder<VB.EmptyMethod>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EmptyMethod() =>
             verifierCS.AddPaths("EmptyMethod.cs").WithOptions(ParseOptionsHelper.FromCSharp8).AddReferences(MetadataReferenceFacade.NETStandard21).Verify();
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EmptyMethod_CSharp10() =>
             verifierCS.AddPaths("EmptyMethod.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EmptyMethod_CSharp9() =>
             verifierCS.AddPaths("EmptyMethod.CSharp9.cs").WithTopLevelStatements().Verify();
 
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EmptyMethod_CodeFix_Throw() =>
             verifierCS.WithCodeFix<CS.EmptyMethodCodeFix>()
                 .AddPaths("EmptyMethod.cs")
@@ -53,7 +53,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithCodeFixTitle(CS.EmptyMethodCodeFix.TitleThrow)
                 .VerifyCodeFix();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EmptyMethod_CodeFix_Comment() =>
             verifierCS.WithCodeFix<CS.EmptyMethodCodeFix>()
                 .AddPaths("EmptyMethod.cs")
@@ -61,23 +61,23 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithCodeFixTitle(CS.EmptyMethodCodeFix.TitleComment)
                 .VerifyCodeFix();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EmptyMethod_VB() =>
             verifierVB.AddPaths("EmptyMethod.vb").Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EmptyMethod_WithVirtualOverride_RaisesIssueForMainProject_CS() =>
             verifierCS.AddPaths("EmptyMethod.OverrideVirtual.cs").Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EmptyMethod_WithVirtualOverride_DoesNotRaiseIssuesForTestProject_CS() =>
             verifierCS.AddPaths("EmptyMethod.OverrideVirtual.cs").AddTestReference().VerifyNoIssueReported();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EmptyMethod_WithVirtualOverride_RaisesIssueForMainProject_VB() =>
             verifierVB.AddPaths("EmptyMethod.OverrideVirtual.vb").Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EmptyMethod_WithVirtualOverride_DoesNotRaiseIssuesForTestProject_VB() =>
             verifierVB.AddPaths("EmptyMethod.OverrideVirtual.vb").AddTestReference().VerifyNoIssueReported();
     }

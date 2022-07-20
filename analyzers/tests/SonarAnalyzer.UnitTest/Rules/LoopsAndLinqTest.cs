@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,11 +25,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class LoopsAndLinqTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void LoopsAndLinq_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\LoopsAndLinq.cs", new LoopsAndLinq(), MetadataReferenceFacade.SystemData);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void LoopsAndLinq_CSharp8() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\LoopsAndLinq.CSharp8.cs", new LoopsAndLinq(), ParseOptionsHelper.FromCSharp8);
     }

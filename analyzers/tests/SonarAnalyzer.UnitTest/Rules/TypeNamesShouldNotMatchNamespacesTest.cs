@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,16 +27,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<TypeNamesShouldNotMatchNamespaces>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void TypeNamesShouldNotMatchNamespaces() =>
             builder.AddPaths("TypeNamesShouldNotMatchNamespaces.cs").Verify();
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void TypeNamesShouldNotMatchNamespaces_CSharp9() =>
             builder.AddPaths("TypeNamesShouldNotMatchNamespaces.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void TypeNamesShouldNotMatchNamespaces_CSharp10() =>
             builder.AddPaths("TypeNamesShouldNotMatchNamespaces.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 

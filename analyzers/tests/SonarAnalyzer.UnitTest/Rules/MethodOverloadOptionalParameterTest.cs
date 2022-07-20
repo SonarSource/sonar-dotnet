@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,7 +25,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class MethodOverloadOptionalParameterTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodOverloadOptionalParameter() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\MethodOverloadOptionalParameter.cs",
                 new MethodOverloadOptionalParameter(),
@@ -33,15 +33,15 @@ namespace SonarAnalyzer.UnitTest.Rules
                 MetadataReferenceFacade.NETStandard21);
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodOverloadOptionalParameter_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodOverloadOptionalParameter.CSharp9.cs", new MethodOverloadOptionalParameter());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodOverloadOptionalParameter_CSharp10() =>
             OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\MethodOverloadOptionalParameter.CSharp10.cs", new MethodOverloadOptionalParameter());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodOverloadOptionalParameter_CSharpPreview() =>
             OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\MethodOverloadOptionalParameter.CSharpPreview.cs", new MethodOverloadOptionalParameter());
 #endif

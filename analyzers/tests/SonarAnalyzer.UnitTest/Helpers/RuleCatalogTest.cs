@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -30,11 +30,11 @@ namespace SonarAnalyzer.UnitTest.Helpers
     [TestClass]
     public class RuleCatalogTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RuleCatalog_HasAllFieldsSet_CS() =>
             AssertRuleS103(RuleCatalogCS.Rules["S103"]);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RuleCatalog_HasAllFieldsSet_VB() =>
             AssertRuleS103(RuleCatalogVB.Rules["S103"]);
 
@@ -58,22 +58,22 @@ namespace SonarAnalyzer.UnitTest.Helpers
             RuleCatalogVB.Rules[id].Scope.Should().Be(expected);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Description_TakesFirstParagraph() =>
             ValidateDescription(
                 "S105",
                 "<p>So the use of the tabulation character must be banned.</p>",    // Asserting existence of the second paragraph that should not be part of the description
                 "Developers should not need to configure the tab width of their text editors in order to be able to read source code.");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Description_TagsAreRemoved() =>
             ValidateDescription("S1116", "i.e. <code>;</code>, are", "Empty statements, i.e. ;, are usually introduced by mistake, for example because:");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Description_HtmlIsDecoded() =>
             ValidateDescription("S1067", "<code>&amp;&amp;</code>", "The complexity of an expression is defined by the number of &&, || and condition ? ifTrue : ifFalse operators it contains.");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Description_NewLinesAreSpaces() =>
             ValidateDescription(
                 "S107",

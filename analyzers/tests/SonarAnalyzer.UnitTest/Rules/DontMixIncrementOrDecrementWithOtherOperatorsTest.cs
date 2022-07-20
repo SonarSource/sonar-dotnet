@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,16 +25,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DontMixIncrementOrDecrementWithOtherOperatorsTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DontMixIncrementOrDecrementWithOtherOperators() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\DontMixIncrementOrDecrementWithOtherOperators.cs", new DontMixIncrementOrDecrementWithOtherOperators());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DontMixIncrementOrDecrementWithOtherOperators_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DontMixIncrementOrDecrementWithOtherOperators.CSharp9.cs", new DontMixIncrementOrDecrementWithOtherOperators());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DontMixIncrementOrDecrementWithOtherOperators_CSharp10() =>
             OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\DontMixIncrementOrDecrementWithOtherOperators.CSharp10.cs", new DontMixIncrementOrDecrementWithOtherOperators());
 #endif

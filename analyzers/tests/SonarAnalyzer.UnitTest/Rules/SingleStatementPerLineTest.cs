@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,17 +26,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class SingleStatementPerLineTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SingleStatementPerLine_CSharp() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\SingleStatementPerLine.cs", new CS.SingleStatementPerLine());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SingleStatementPerLine_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SingleStatementPerLine.CSharp9.cs", new CS.SingleStatementPerLine());
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SingleStatementPerLine_VisualBasic() =>
             new VerifierBuilder<VB.SingleStatementPerLine>().AddPaths("SingleStatementPerLine.vb", "SingleStatementPerLine2.vb").WithAutogenerateConcurrentFiles(false).Verify();
     }

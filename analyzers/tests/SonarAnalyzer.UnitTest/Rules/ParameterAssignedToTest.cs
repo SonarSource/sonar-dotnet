@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,21 +29,21 @@ namespace SonarAnalyzer.UnitTest.Rules
         private readonly VerifierBuilder verifierCS = new VerifierBuilder<CS.ParameterAssignedTo>();
         private readonly VerifierBuilder verifierVB = new VerifierBuilder<VB.ParameterAssignedTo>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ParameterAssignedTo_CS() =>
             verifierCS.AddPaths("ParameterAssignedTo.cs").Verify();
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ParameterAssignedTo_CSharp9() =>
             verifierCS.AddPaths("ParameterAssignedTo.CSharp9.cs").WithTopLevelStatements().Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ParameterAssignedTo_CSharp10() =>
             verifierCS.AddPaths("ParameterAssignedTo.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ParameterAssignedTo_VB() =>
             verifierVB.AddPaths("ParameterAssignedTo.vb").Verify();
     }

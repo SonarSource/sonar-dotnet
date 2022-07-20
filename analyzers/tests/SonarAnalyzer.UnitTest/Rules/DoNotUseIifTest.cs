@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,11 +25,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DoNotUseIIfTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotUseIif() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\DoNotUseIif.vb", new DoNotUseIIf());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotUseIif_CodeFix() =>
             OldVerifier.VerifyCodeFix<DoNotUseIIfCodeFix>(
                 @"TestCases\DoNotUseIif.vb",

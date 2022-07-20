@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,17 +26,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class EmptyNestedBlockTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EmptyNestedBlock_CS() =>
             new VerifierBuilder<CS.EmptyNestedBlock>().AddPaths("EmptyNestedBlock.cs", "EmptyNestedBlock2.cs").WithAutogenerateConcurrentFiles(false).Verify();
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EmptyNestedBlock_CSharp10() =>
             new VerifierBuilder<CS.EmptyNestedBlock>().AddPaths("EmptyNestedBlock.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EmptyNestedBlock_VB() =>
             new VerifierBuilder<VB.EmptyNestedBlock>().AddPaths("EmptyNestedBlock.vb").Verify();
     }

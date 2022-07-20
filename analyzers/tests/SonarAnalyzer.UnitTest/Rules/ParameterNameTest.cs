@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,7 +25,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ParameterNameTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ParameterName() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\ParameterName.vb", new ParameterName());
     }

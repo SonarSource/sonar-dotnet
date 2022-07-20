@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,25 +28,25 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<RedundantCast>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundantCast() =>
             builder.AddPaths("RedundantCast.cs").Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundantCast_CSharp8() =>
             builder.AddPaths("RedundantCast.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundantCast_CSharp9() =>
             builder.AddPaths("RedundantCast.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundantCast_CodeFix() =>
             builder.AddPaths("RedundantCast.cs").WithCodeFix<RedundantCastCodeFix>().WithCodeFixedPaths("RedundantCast.Fixed.cs").VerifyCodeFix();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundantCast_DefaultLiteral() =>
             builder.AddSnippet(@"
 using System;

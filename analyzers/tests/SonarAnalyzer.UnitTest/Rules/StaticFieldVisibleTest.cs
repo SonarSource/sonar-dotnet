@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,16 +25,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class StaticFieldVisibleTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void StaticFieldVisible() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\StaticFieldVisible.cs", new StaticFieldVisible());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void StaticFieldVisible_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\StaticFieldVisible.CSharp9.cs", new StaticFieldVisible());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void StaticFieldVisible_CSharp10() =>
             OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\StaticFieldVisible.CSharp10.cs", new StaticFieldVisible());
 #endif

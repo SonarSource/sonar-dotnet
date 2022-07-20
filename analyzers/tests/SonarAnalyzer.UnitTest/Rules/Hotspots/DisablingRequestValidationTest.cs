@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -33,13 +33,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         private const string AspNetMvcVersion = "5.2.7";
         private const string WebConfig = "Web.config";
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DisablingRequestValidation_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\DisablingRequestValidation.cs",
                 new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
                 NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion));
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DisablingRequestValidation_CS_Disabled() =>
             OldVerifier.VerifyNoIssueReported(@"TestCases\Hotspots\DisablingRequestValidation.cs",
                 new CS.DisablingRequestValidation(AnalyzerConfiguration.Hotspot),
@@ -59,7 +59,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DisablingRequestValidation_CS_CorruptAndNonExistingWebConfigs()
         {
             var root = @"TestCases\WebConfig\DisablingRequestValidation\Corrupt";
@@ -116,7 +116,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             }
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DisablingRequestValidation_CS_WebConfig_LowerCase()
         {
             var root = @"TestCases\WebConfig\DisablingRequestValidation\LowerCase";
@@ -139,19 +139,19 @@ namespace SonarAnalyzer.UnitTest.Rules
                 configPath,
                 TestHelper.CreateSonarProjectConfig(Path.GetDirectoryName(configPath), TestHelper.CreateFilesToAnalyze(Path.GetDirectoryName(configPath), configPath)));
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DisablingRequestValidation_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\DisablingRequestValidation.vb",
                 new VB.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
                 NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion));
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DisablingRequestValidation_VB_Disabled() =>
             OldVerifier.VerifyNoIssueReported(@"TestCases\Hotspots\DisablingRequestValidation.vb",
                 new VB.DisablingRequestValidation(AnalyzerConfiguration.Hotspot),
                 NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion));
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DisablingRequestValidation_VB_WebConfig()
         {
             var root = @"TestCases\WebConfig\DisablingRequestValidation\Values";

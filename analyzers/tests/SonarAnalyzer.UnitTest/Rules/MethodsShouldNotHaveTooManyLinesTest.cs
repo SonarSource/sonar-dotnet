@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,28 +26,28 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class MethodsShouldNotHaveTooManyLinesTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodsShouldNotHaveTooManyLines_DefaultValues_CS() =>
             new VerifierBuilder<CS.MethodsShouldNotHaveTooManyLines>().AddPaths("MethodsShouldNotHaveTooManyLines_DefaultValues.cs").Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodsShouldNotHaveTooManyLines_CustomValues_CS() =>
             CreateCSBuilder(2).AddPaths("MethodsShouldNotHaveTooManyLines_CustomValues.cs").Verify();
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodsShouldNotHaveTooManyLines_LocalFunctions() =>
             CreateCSBuilder(5).AddPaths("MethodsShouldNotHaveTooManyLines.LocalFunctions.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodsShouldNotHaveTooManyLines_CustomValues_CSharp9() =>
             CreateCSBuilder(2).AddPaths("MethodsShouldNotHaveTooManyLines_CustomValues.CSharp9.cs").WithTopLevelStatements().Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodsShouldNotHaveTooManyLines_CustomValues_CSharp10() =>
             CreateCSBuilder(2).AddPaths("MethodsShouldNotHaveTooManyLines_CustomValues.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodsShouldNotHaveTooManyLines_CSharp9_NoUsing() =>
             CreateCSBuilder(2).AddSnippet(@"
 int i = 1; i++;
@@ -63,7 +63,7 @@ void LocalFunction() // Noncompliant {{This local function has 4 lines, which is
             .WithOutputKind(OutputKind.ConsoleApplication)
             .Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodsShouldNotHaveTooManyLines_CSharp9_Valid() =>
                         CreateCSBuilder(4).AddSnippet(@"
 int i = 1; i++;
@@ -75,13 +75,13 @@ i++;")
             .Verify();
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodsShouldNotHaveTooManyLines_DoesntReportInTest_CS() =>
             new VerifierBuilder<CS.MethodsShouldNotHaveTooManyLines>().AddPaths("MethodsShouldNotHaveTooManyLines_DefaultValues.cs")
             .AddTestReference()
             .VerifyNoIssueReported();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodsShouldNotHaveTooManyLines_InvalidSyntax_CS() =>
             CreateCSBuilder(2).AddSnippet(@"
 public class Foo
@@ -106,17 +106,17 @@ public class Foo
             diagnostics.Should().OnlyContain(x => x.Id == "AD0001" && x.GetMessage(null).Contains("Invalid rule parameter: maximum number of lines = ")).And.HaveCount(12);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodsShouldNotHaveTooManyLines_DefaultValues_VB() =>
             new VerifierBuilder<VB.MethodsShouldNotHaveTooManyLines>().AddPaths("MethodsShouldNotHaveTooManyLines_DefaultValues.vb").Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodsShouldNotHaveTooManyLines_CustomValues_VB() =>
             new VerifierBuilder().AddAnalyzer(() => new VB.MethodsShouldNotHaveTooManyLines { Max = 2 })
             .AddPaths("MethodsShouldNotHaveTooManyLines_CustomValues.vb")
             .Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodsShouldNotHaveTooManyLines_DoesntReportInTest_VB() =>
             new VerifierBuilder<VB.MethodsShouldNotHaveTooManyLines>().AddPaths("MethodsShouldNotHaveTooManyLines_DefaultValues.vb")
             .AddTestReference()

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,22 +26,22 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class BooleanLiteralUnnecessaryTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void BooleanLiteralUnnecessary_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\BooleanLiteralUnnecessary.cs", new CS.BooleanLiteralUnnecessary());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void BooleanLiteralUnnecessary_CodeFix_CS() =>
             OldVerifier.VerifyCodeFix<CS.BooleanLiteralUnnecessaryCodeFix>(
                 @"TestCases\BooleanLiteralUnnecessary.cs",
                 @"TestCases\BooleanLiteralUnnecessary.Fixed.cs",
                 new CS.BooleanLiteralUnnecessary());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void BooleanLiteralUnnecessary_CSharp8() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\BooleanLiteralUnnecessary.CSharp8.cs", new CS.BooleanLiteralUnnecessary(), ParseOptionsHelper.FromCSharp8);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void BooleanLiteralUnnecessary_CodeFix_CSharp8() =>
             OldVerifier.VerifyCodeFix<CS.BooleanLiteralUnnecessaryCodeFix>(
                 @"TestCases\BooleanLiteralUnnecessary.CSharp8.cs",
@@ -51,11 +51,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void BooleanLiteralUnnecessary_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\BooleanLiteralUnnecessary.CSharp9.cs", new CS.BooleanLiteralUnnecessary());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void BooleanLiteralUnnecessary_CodeFix_CSharp9() =>
             OldVerifier.VerifyCodeFix<CS.BooleanLiteralUnnecessaryCodeFix>(
                 @"TestCases\BooleanLiteralUnnecessary.CSharp9.cs",
@@ -65,7 +65,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void BooleanLiteralUnnecessary_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\BooleanLiteralUnnecessary.vb", new VB.BooleanLiteralUnnecessary());
     }

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,11 +25,11 @@ namespace SonarAnalyzer.UnitTest.Extensions
     [TestClass]
     public class SafeVisualBasicSyntaxWalkerTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GivenSyntaxNodeWithReasonableDepth_SafeVisit_ReturnsTrue() =>
             new Walker().SafeVisit(SyntaxFactory.ParseSyntaxTree("Public Function Main(Arg as Boolean) As Boolean").GetRoot()).Should().BeTrue();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GivenSyntaxNodeWithHighDepth_SafeVisit_ReturnsFalse()
         {
             var code = $@"

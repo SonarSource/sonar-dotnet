@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,7 +27,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<AzureFunctionsCatchExceptions>().WithBasePath("CloudNative").AddReferences(NuGetMetadataReference.MicrosoftNetSdkFunctions());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AzureFunctionsCatchExceptions_CS() =>
             builder.AddPaths("AzureFunctionsCatchExceptions.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
     }

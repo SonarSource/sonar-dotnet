@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -31,19 +31,19 @@ namespace SonarAnalyzer.UnitTest.Rules
         private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.NameOfShouldBeUsed>().AddPaths("NameOfShouldBeUsed.cs");
         private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.NameOfShouldBeUsed>().AddPaths("NameOfShouldBeUsed.vb");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NameOfShouldBeUsed_FromCSharp6() =>
             builderCS.WithOptions(ParseOptionsHelper.FromCSharp6).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NameOfShouldBeUsed_CSharp5() =>
             builderCS.WithLanguageVersion(RoslynCS.LanguageVersion.CSharp5).WithErrorBehavior(CompilationErrorBehavior.Ignore).VerifyNoIssueReported();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NameOfShouldBeUsed_FromVB14() =>
             builderVB.WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NameOfShouldBeUsed_VB12() =>
             builderVB.WithLanguageVersion(RoslynVB.LanguageVersion.VisualBasic12).WithErrorBehavior(CompilationErrorBehavior.Ignore).VerifyNoIssueReported();
     }

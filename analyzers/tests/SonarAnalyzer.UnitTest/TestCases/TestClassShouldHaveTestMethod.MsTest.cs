@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Tests.Diagnostics
@@ -28,7 +28,7 @@ namespace Tests.Diagnostics
     [TestClass]
     class ClassTest9
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Foo() { }
     }
 
@@ -66,7 +66,7 @@ namespace Tests.Diagnostics
     [TestClass]
     public abstract class TestFooBase
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Foo_WhenFoo_ExpectsFoo() { }
     }
 
@@ -248,7 +248,7 @@ namespace Inheritance
     [TestClass]
     public abstract class A
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Test()
         {
         }

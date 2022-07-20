@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,7 +25,7 @@ namespace SonarAnalyzer.UnitTest.CFG.Roslyn
     [TestClass]
     public class ControlFlowBranchTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ValidateReflection()
         {
             const string code = @"
@@ -47,7 +47,7 @@ public class Sample
             branch.FinallyRegions.Should().BeEmpty();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ValidateReflection_Regions()
         {
             const string code = @"

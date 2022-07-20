@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,7 +28,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder().AddAnalyzer(() => new ClearTextProtocolsAreSensitive(AnalyzerConfiguration.AlwaysEnabled));
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ClearTextProtocolsAreSensitive() =>
             builder.AddPaths(@"Hotspots\ClearTextProtocolsAreSensitive.cs")
                 .AddReferences(AdditionalReferences)
@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ClearTextProtocolsAreSensitive_CSharp9() =>
             builder.AddPaths(@"Hotspots\ClearTextProtocolsAreSensitive.CSharp9.cs")
                 .WithTopLevelStatements()
@@ -45,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithOptions(ParseOptionsHelper.FromCSharp9)
                 .Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ClearTextProtocolsAreSensitive_CSharp10() =>
             builder.AddPaths(@"Hotspots\ClearTextProtocolsAreSensitive.CSharp10.cs")
                 .WithTopLevelStatements()

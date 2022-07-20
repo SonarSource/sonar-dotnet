@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,21 +27,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<GenericTypeParameterUnused>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GenericTypeParameterUnused() =>
             builder.AddPaths("GenericTypeParameterUnused.cs", "GenericTypeParameterUnused.Partial.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GenericTypeParameterUnused_CSharp9() =>
             builder.AddPaths("GenericTypeParameterUnused.CSharp9.cs").WithTopLevelStatements().Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GenericTypeParameterUnused_CSharp10() =>
             builder.AddPaths("GenericTypeParameterUnused.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GenericTypeParameterUnused_CSharpPreview() =>
             builder.AddPaths("GenericTypeParameterUnused.CSharpPreview.cs").WithOptions(ParseOptionsHelper.CSharpPreview).Verify();
 

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
     [TestClass]
     public class SyntaxNodeExtensionsTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GetPreviousStatementsCurrentBlockOfNotAStatement()
         {
             const string code = "int x = 42;";
@@ -48,7 +48,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
             SyntaxNodeExtensionsCS.GetPreviousStatementsCurrentBlock(compilationUnit).Should().BeEmpty();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GetPreviousStatementsCurrentBlockOfFirstStatement()
         {
             const string code = "public void M() { int x = 42; }";
@@ -60,7 +60,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
             SyntaxNodeExtensionsCS.GetPreviousStatementsCurrentBlock(parent).Should().BeEmpty();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GetPreviousStatementsCurrentBlockOfSecondStatement()
         {
             const string code = "public void M() { string s = null; int x = 42; }";
@@ -72,7 +72,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
             SyntaxNodeExtensionsCS.GetPreviousStatementsCurrentBlock(parent).Should().HaveCount(1);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GetPreviousStatementsCurrentBlockRetrievesOnlyForCurrentBlock()
         {
             const string code = "public void M(string y) { string s = null; if (y != null) { int x = 42; } }";
@@ -84,7 +84,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
             SyntaxNodeExtensionsCS.GetPreviousStatementsCurrentBlock(parent).Should().BeEmpty();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ArrowExpressionBody_WithNotExpectedNode_ReturnsNull()
         {
             const string code = "var x = 1;";
@@ -92,7 +92,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
             SyntaxNodeExtensionsCS.ArrowExpressionBody(syntaxTree.GetRoot()).Should().BeNull();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GetDeclarationTypeName_UnknownType() =>
 #if DEBUG
             Assert.ThrowsException<System.ArgumentException>(() => SyntaxNodeExtensionsCS.GetDeclarationTypeName(SyntaxFactory.Block()), "Unexpected type Block\r\nParameter name: kind");
@@ -100,7 +100,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
             SyntaxNodeExtensionsCS.GetDeclarationTypeName(SyntaxFactory.Block()).Should().Be("type");
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CreateCfg_MethodBody_ReturnsCfg_CS()
         {
             const string code = @"
@@ -117,7 +117,7 @@ public class Sample
             SyntaxNodeExtensionsCS.CreateCfg(node.Body, semanticModel, default).Should().NotBeNull();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CreateCfg_MethodBlock_ReturnsCfg_VB()
         {
             const string code = @"
@@ -132,7 +132,7 @@ End Class";
             SyntaxNodeExtensionsVB.CreateCfg(node, semanticModel, default).Should().NotBeNull();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CreateCfg_AnyNode_ReturnsCfg_CS()
         {
             const string code = @"
@@ -149,7 +149,7 @@ public class Sample
             SyntaxNodeExtensionsCS.CreateCfg(node, semanticModel, default).Should().NotBeNull();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CreateCfg_AnyNode_ReturnsCfg_VB()
         {
             const string code = @"
@@ -164,7 +164,7 @@ End Class";
             SyntaxNodeExtensionsVB.CreateCfg(node, semanticModel, default).Should().NotBeNull();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CreateCfg_LambdaInsideQuery_CS()
         {
             const string code = @"
@@ -183,7 +183,7 @@ public class Sample
             SyntaxNodeExtensionsCS.CreateCfg(lambda.Body, semanticModel, default).Should().NotBeNull();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CreateCfg_LambdaInsideQuery_VB()
         {
             const string code = @"
@@ -199,7 +199,7 @@ End Class
             SyntaxNodeExtensionsVB.CreateCfg(lambda.Body, semanticModel, default).Should().NotBeNull();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CreateCfg_NestingChain_CS()
         {
             const string code = @"
@@ -252,7 +252,7 @@ public class Sample
             cfg.OriginalOperation.Should().BeAssignableTo<IAnonymousFunctionOperation>().Subject.Symbol.Parameters.Should().HaveCount(1).And.Contain(x => x.Name == "xxx");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CreateCfg_NestingChain_VB()
         {
             const string code = @"
@@ -287,7 +287,7 @@ End Class";
             cfg.OriginalOperation.Should().BeAssignableTo<IAnonymousFunctionOperation>().Subject.Symbol.Parameters.Should().HaveCount(1).And.Contain(x => x.Name == "xxx");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CreateCfg_UndefinedSymbol_ReturnsCfg_CS()
         {
             const string code = @"
@@ -303,7 +303,7 @@ public class Sample
             SyntaxNodeExtensionsCS.CreateCfg(lambda.Body, model, default).Should().NotBeNull();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CreateCfg_UndefinedSymbol_ReturnsNull_VB()
         {
             const string code = @"
@@ -330,7 +330,7 @@ End Class";
             SyntaxNodeExtensionsCS.CreateCfg(lambda.Body, model, default).Should().NotBeNull();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CreateCfg_Performance_UsesCache_CS()
         {
             const string code = @"
@@ -363,7 +363,7 @@ public class Sample
             a.ExecutionTime().Should().BeLessThan(1.Seconds());     // Takes roughly 0.2 sec on CI
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CreateCfg_Performance_UsesCache_VB()
         {
             const string code = @"
@@ -392,7 +392,7 @@ End Class";
             a.ExecutionTime().Should().BeLessThan(1.Seconds());     // Takes roughly 0.4 sec on CI
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CreateCfg_SameNode_DifferentCompilation_DoesNotCache()
         {
             // https://github.com/SonarSource/sonar-dotnet/issues/5491

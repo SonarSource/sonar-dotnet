@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.CBDE
         public static void CheckExecutableExists(TestContext tc) =>
             MlirTestUtilities.CheckExecutableExists();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SimpleMethod()
         {
             const string code = @"
@@ -59,7 +59,7 @@ class C
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IfThenElse()
         {
             const string code = @"
@@ -82,7 +82,7 @@ int WithReturn(int i) {
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void WhileLoops()
         {
             const string code = @"
@@ -120,7 +120,7 @@ private int WhileLoopContinue(int i)
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoWhileLoops()
         {
             const string code = @"
@@ -158,7 +158,7 @@ private int WhileLoopContinue(int i)
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ForLoops()
         {
             const string code = @"
@@ -200,7 +200,7 @@ private int ForLoopContinue(int i)
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ForEachLoops()
         {
             const string code = @"
@@ -219,7 +219,7 @@ int ForEachLoop()
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void WorkWithLong()
         {
             const string code = @"
@@ -240,7 +240,7 @@ long withLong()
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void TryCatchFinally()
         {
             const string code = @"
@@ -341,7 +341,7 @@ int TryThrow(int i)
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void FuncCall()
         {
             const string code = @"
@@ -376,7 +376,7 @@ int g(A a, int i)
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Using()
         {
             const string code = @"
@@ -398,7 +398,7 @@ class A {
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Enum()
         {
             const string code = @"
@@ -448,7 +448,7 @@ class A {
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EmptyBody()
         {
             const string code = @"
@@ -457,7 +457,7 @@ public static extern void Extern(int p1);
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CommentsWithNewLine()
         {
             const string code = @"
@@ -470,7 +470,7 @@ void f()
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ReturnNullLitteral()
         {
             const string code = @"
@@ -481,7 +481,7 @@ public Type f()
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ReturnParenthesizedNullLitteral()
         {
             const string code = @"
@@ -492,7 +492,7 @@ public Type f()
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ParenthesizedExpressions()
         {
             const string code = @"
@@ -507,7 +507,7 @@ public void f(int i, int j)
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnknownMethodOnMultipleLines()
         {
             const string code = @"
@@ -519,7 +519,7 @@ void f(int i, int j)
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ForWithoutCondition()
         {
             const string code = @"
@@ -533,7 +533,7 @@ void f(int i)
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ChainingAssignments()
         {
             const string code = @"
@@ -545,7 +545,7 @@ void f(int i)
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UseOfReadonlyClassField()
         {
             const string code = @"
@@ -561,7 +561,7 @@ public class A
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UseOfConstantClassField()
         {
             const string code = @"
@@ -577,7 +577,7 @@ public class A
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnnamedFunctionParameter()
         {
             const string code = @"
@@ -588,7 +588,7 @@ int Func(int, int, int i)
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SimpleLambdaExpression()
         {
             const string code = @"
@@ -599,7 +599,7 @@ public System.Linq.Expressions.Expression<Func<int, int>> F()
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ParenthesizedLambdaExpression()
         {
             const string code = @"
@@ -610,7 +610,7 @@ Action f()
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SwitchStatement()
         {
             const string code = @"
@@ -627,21 +627,21 @@ int f(int i)
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NonAsciiEncodings()
         {
             const string code = @"
-public void 你好() { }
+public void ??() { }
 
-public void Łódź() { }
+public void L�dz() { }
 
-public void AsciiThen你好ThenAsciiAgain() { }
+public void AsciiThen??ThenAsciiAgain() { }
 
-public int Łódźअनुلمرadım(int 你好) { return 2 * 你好; }";
+public int L�dz??????adim(int ??) { return 2 * ??; }";
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Arglist()
         {
             const string code = @"
@@ -651,7 +651,7 @@ public void f(__arglist)
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ParamsKeyword()
         {
             const string code = @"
@@ -661,7 +661,7 @@ public void f(params int[] args)
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CheckedUnchecked()
         {
             const string code = @"
@@ -692,7 +692,7 @@ public int UncheckedExpr(int i)
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Fixed()
         {
             const string code = @"
@@ -713,7 +713,7 @@ unsafe private static void ModifyFixedStorage()
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Namespace()
         {
             const string code = @"
@@ -728,7 +728,7 @@ namespace Tests
         }
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CSharp10_FileScopedNamespace()
         {
             const string code = @"
@@ -743,7 +743,7 @@ public static void f()
         }
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Overloads()
         {
             const string code = @"
@@ -767,7 +767,7 @@ class B {
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NestedFunction()
         {
             const string code = @"
@@ -782,7 +782,7 @@ void f()
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void FieldAssignment()
         {
             const string code = @"
@@ -799,7 +799,7 @@ void f(Point p)
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void FieldOfThisAssignment()
         {
             const string code = @"
@@ -816,7 +816,7 @@ class Point
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ArrayAssignment()
         {
             const string code = @"
@@ -828,7 +828,7 @@ void f()
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CastOnReturn()
         {
             const string code = @"
@@ -849,7 +849,7 @@ char h(bool c)
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IgnoreParenthesesInAssignment()
         {
             const string code = @"
@@ -860,7 +860,7 @@ void f(int a, int b)
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AssignmentInComparison()
         {
             const string code = @"
@@ -875,7 +875,7 @@ int f(int a, int b)
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AssignmentInBinaryOperator()
         {
             const string code = @"
@@ -886,7 +886,7 @@ void f(int a, int b)
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Goto()
         {
             const string code = @"
@@ -899,7 +899,7 @@ Label:
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnknownConstant()
         {
             const string code = @"
@@ -914,7 +914,7 @@ class A
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Property()
         {
             const string code = @"
@@ -938,7 +938,7 @@ class A {
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AsyncFunction()
         {
             const string code = @"
@@ -951,7 +951,7 @@ class A {
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodGroup()
         {
             const string code = @"
@@ -962,7 +962,7 @@ public static Func<string, bool> CreateFilter()
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MemberFieldAccess()
         {
             const string code = @"
@@ -984,7 +984,7 @@ class A
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void BoolProperty()
         {
             const string code = @"
@@ -1004,7 +1004,7 @@ class B
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodsCallsOnMultipleLines()
         {
             const string code = @"
@@ -1023,7 +1023,7 @@ class A
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AnonymousMethodExpression()
         {
             const string code = @"
@@ -1039,7 +1039,7 @@ class A
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AnonymousObjectCreation()
         {
             const string code = @"
@@ -1051,7 +1051,7 @@ public int f()
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AssignmentInReturn()
         {
             const string code = @"
@@ -1067,7 +1067,7 @@ class A
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void BooleanConstant()
         {
             const string code = @"
@@ -1083,7 +1083,7 @@ public class A
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PropertyFromAnotherAssembly()
         {
             const string code = @"
@@ -1108,7 +1108,7 @@ public class A<T> : Collection<T>
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void InfiniteLoop()
         {
             const string code = @"
@@ -1123,7 +1123,7 @@ int InfiniteLoop(int i) {
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IfDynamic()
         {
             const string code = @"
@@ -1146,7 +1146,7 @@ internal class B
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ModifyFieldParameterAndLocalVariable()
         {
             const string code = @"
@@ -1165,7 +1165,7 @@ class A
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void BinaryOperatorAssignment()
         {
             const string code = @"
@@ -1191,7 +1191,7 @@ public void g(int[] array1, long[] array2)
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NoIdentifier()
         {
             const string code = @"
@@ -1216,7 +1216,7 @@ public int f()
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IncompatibleAssignmentTypes()
         {
             const string code = @"
@@ -1236,7 +1236,7 @@ public int f(int i)
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnaryNeg()
         {
             const string code = @"
@@ -1252,7 +1252,7 @@ public bool neg()
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnaryPlus()
         {
             const string code = @"
@@ -1268,7 +1268,7 @@ public bool plus()
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MixingUintAndNeg()
         {
             const string code = @"
@@ -1282,7 +1282,7 @@ void g() {
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnsafeStatement()
         {
             const string code = @"
@@ -1298,7 +1298,7 @@ int f() {
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnsafeClass()
         {
             const string code = @"
@@ -1312,7 +1312,7 @@ unsafe class C {
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void BoolAssignmentInsideIfCondition()
         {
             const string code = @"
@@ -1337,7 +1337,7 @@ protected bool j;
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void TargetTypedNew()
         {
             const string code = @"
@@ -1361,7 +1361,7 @@ public class TargetTypedNew
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void LambdaDiscardParameters()
         {
             const string code = @"
@@ -1390,7 +1390,7 @@ public class LambdaDiscardParameters
             ValidateCodeGeneration(code);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NativeInts()
         {
             const string code = @"

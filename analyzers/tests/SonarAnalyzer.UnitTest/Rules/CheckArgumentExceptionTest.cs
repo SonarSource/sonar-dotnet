@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,20 +25,20 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class CheckArgumentExceptionTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CheckArgumentException() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\CheckArgumentException.cs", new CheckArgumentException());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CheckArgumentException_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\CheckArgumentException.CSharp9.cs", new CheckArgumentException());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CheckArgumentException_CSharp10() =>
             OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\CheckArgumentException.CSharp10.cs", new CheckArgumentException());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CheckArgumentException_TopLevelStatements() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CheckArgumentException.TopLevelStatements.cs", new CheckArgumentException());
 #endif

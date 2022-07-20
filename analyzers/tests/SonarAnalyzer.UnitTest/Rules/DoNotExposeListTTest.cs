@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,22 +25,22 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DoNotExposeListTTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotExposeListT() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\DoNotExposeListT.cs", new DoNotExposeListT(),
                 MetadataReferences.MetadataReferenceFacade.SystemXml);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotExposeListT_CSharp8() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\DoNotExposeListT.CSharp8.cs", new DoNotExposeListT(), ParseOptionsHelper.FromCSharp8);
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotExposeListT_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotExposeListT.CSharp9.cs", new DoNotExposeListT());
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotExposeListT_InvalidCode() =>
             OldVerifier.VerifyCSharpAnalyzer(
                 @"

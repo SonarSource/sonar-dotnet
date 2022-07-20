@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,11 +26,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class IfCollapsibleTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IfCollapsible_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\IfCollapsible.cs", new CS.IfCollapsible());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IfCollapsible_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\IfCollapsible.vb", new VB.IfCollapsible());
     }

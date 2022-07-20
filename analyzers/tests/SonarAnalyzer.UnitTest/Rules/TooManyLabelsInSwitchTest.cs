@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,13 +26,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class TooManyLabelsInSwitchTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void TooManyLabelsInSwitch() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\TooManyLabelsInSwitch.cs",
                 new CS.TooManyLabelsInSwitch { Maximum = 2 },
                 ParseOptionsHelper.FromCSharp8);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void TooManyLabelsInSwitch_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\TooManyLabelsInSwitch.vb",
                 new VB.TooManyLabelsInSwitch { Maximum = 2 });

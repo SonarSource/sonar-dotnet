@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,16 +25,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DoNotShiftByZeroOrIntSizeTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotShiftByZeroOrIntSize() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\DoNotShiftByZeroOrIntSize.cs", new DoNotShiftByZeroOrIntSize());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotShiftByZeroOrIntSize_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotShiftByZeroOrIntSize.CSharp9.cs", new DoNotShiftByZeroOrIntSize());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotShiftByZeroOrIntSize_CSharp10() =>
             OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\DoNotShiftByZeroOrIntSize.CSharp10.cs", new DoNotShiftByZeroOrIntSize());
 #endif

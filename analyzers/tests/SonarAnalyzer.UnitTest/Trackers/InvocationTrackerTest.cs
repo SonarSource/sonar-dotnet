@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -84,7 +84,7 @@ namespace WebPoc
 ";
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ConstArgumentForParameter_CS()
         {
             var context = CreateContext<CSharpSyntax.InvocationExpressionSyntax>(TestInputCS, "MyMethod", AnalyzerLanguage.CSharp);
@@ -98,7 +98,7 @@ namespace WebPoc
             tracker.ConstArgumentForParameter(context, "nonExistingParameterName").Should().BeNull();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ArgumentIsBoolConstant_CS()
         {
             var context = CreateContext<CSharpSyntax.InvocationExpressionSyntax>(TestInputCS, "MyMethod", AnalyzerLanguage.CSharp);
@@ -112,7 +112,7 @@ namespace WebPoc
             tracker.ArgumentIsBoolConstant("nonExistingParameterName", false)(context).Should().Be(false);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ConstArgumentForParameter_VB()
         {
             var context = CreateContext<VBSyntax.InvocationExpressionSyntax>(TestInputVB, "MyMethod", AnalyzerLanguage.VisualBasic);
@@ -127,7 +127,7 @@ namespace WebPoc
             tracker.ConstArgumentForParameter(context, "nonExistingParameterName").Should().BeNull();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ArgumentIsBoolConstant_VB()
         {
             var context = CreateContext<VBSyntax.InvocationExpressionSyntax>(TestInputVB, "MyMethod", AnalyzerLanguage.VisualBasic);
@@ -141,7 +141,7 @@ namespace WebPoc
             tracker.ArgumentIsBoolConstant("nonExistingParameterName", false)(context).Should().Be(false);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ArgumentAtIndexIsConstant_CS()
         {
             var context = CreateContext<CSharpSyntax.InvocationExpressionSyntax>(TestInputCS, "MyMethod", AnalyzerLanguage.CSharp);
@@ -154,7 +154,7 @@ namespace WebPoc
             tracker.ArgumentAtIndexIsConstant(42)(context).Should().BeFalse();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ArgumentAtIndexIsConstant_VB()
         {
             var context = CreateContext<VBSyntax.InvocationExpressionSyntax>(TestInputVB, "MyMethod", AnalyzerLanguage.VisualBasic);
@@ -171,7 +171,7 @@ namespace WebPoc
             tracker.ArgumentAtIndexIsConstant(0)(context).Should().BeFalse();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ArgumentAtIndexIsAny_CS()
         {
             var context = CreateContext<CSharpSyntax.InvocationExpressionSyntax>(TestInputCS, "MyMethod", AnalyzerLanguage.CSharp);
@@ -184,7 +184,7 @@ namespace WebPoc
             tracker.ArgumentAtIndexIsAny(42, "myConst")(context).Should().BeFalse();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ArgumentAtIndexIsAny_VB()
         {
             var context = CreateContext<VBSyntax.InvocationExpressionSyntax>(TestInputVB, "MyMethod", AnalyzerLanguage.VisualBasic);
@@ -200,7 +200,7 @@ namespace WebPoc
             tracker.ArgumentAtIndexIsAny(0, "myConst")(context).Should().BeFalse();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void InvocationConditionForUndefinedMethod()
         {
             var context = CreateContext<CSharpSyntax.InvocationExpressionSyntax>(TestInputCS, "Undefined", AnalyzerLanguage.CSharp, 1);
@@ -212,7 +212,7 @@ namespace WebPoc
         }
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         [DataRow(0, false)]
         [DataRow(1, false)]
         [DataRow(2, false)]

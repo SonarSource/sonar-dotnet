@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,11 +26,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class IfChainWithoutElseTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IfChainWithoutElse_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\IfChainWithoutElse.cs", new CS.IfChainWithoutElse());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IfChainWithoutElse_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\IfChainWithoutElse.vb", new VB.IfChainWithoutElse());
     }

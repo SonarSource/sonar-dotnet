@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,17 +26,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ProvideDeserializationMethodsForOptionalFieldsTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProvideDeserializationMethodsForOptionalFields_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\ProvideDeserializationMethodsForOptionalFields.cs", new CS.ProvideDeserializationMethodsForOptionalFields());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProvideDeserializationMethodsForOptionalFields_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ProvideDeserializationMethodsForOptionalFields.CSharp9.cs", new CS.ProvideDeserializationMethodsForOptionalFields());
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProvideDeserializationMethodsForOptionalFields_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\ProvideDeserializationMethodsForOptionalFields.vb", new VB.ProvideDeserializationMethodsForOptionalFields());
     }

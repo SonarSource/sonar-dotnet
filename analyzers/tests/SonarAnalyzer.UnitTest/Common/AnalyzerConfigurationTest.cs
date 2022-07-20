@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -44,11 +44,11 @@ namespace SonarAnalyzer.UnitTest.Common
             ruleLoaderMock.Setup(r => r.GetEnabledRules(SecondSonarLintFileContent)).Returns(new HashSet<string> { SecondRuleId });
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AlwaysEnabled_WhenNotInitialized_ReturnsTrue() =>
             AlwaysEnabled.IsEnabled("S101").Should().BeTrue();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AlwaysEnabled_AnyValue_ReturnsTrue()
         {
             AlwaysEnabled.IsEnabled(null).Should().BeTrue();
@@ -56,14 +56,14 @@ namespace SonarAnalyzer.UnitTest.Common
             AlwaysEnabled.IsEnabled("foo").Should().BeTrue();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ForceSonarCfg_DisabledByDefault()
         {
             AlwaysEnabled.ForceSonarCfg.Should().BeFalse();
             new HotspotConfiguration(ruleLoaderMock.Object).ForceSonarCfg.Should().BeFalse();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ForceSonarCfg_DisabledByDefault_ExistExceptionalConfig()
         {
             AlwaysEnabled.ForceSonarCfg.Should().BeFalse();
@@ -71,7 +71,7 @@ namespace SonarAnalyzer.UnitTest.Common
             AlwaysEnabledWithSonarCfg.ForceSonarCfg.Should().BeTrue();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AlwaysEnabled_IgnoresInitialize()
         {
             var sut = AlwaysEnabled;
@@ -80,7 +80,7 @@ namespace SonarAnalyzer.UnitTest.Common
             sut.IsEnabled(FirstRuleId).Should().BeTrue();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void HotspotConfiguration_WhenInitializeIsCalledWithDifferentSonarLintPaths_UpdatesEnabledRules()
         {
             var sut = new HotspotConfiguration(ruleLoaderMock.Object);
@@ -103,7 +103,7 @@ namespace SonarAnalyzer.UnitTest.Common
             ruleLoaderMock.Verify(r => r.GetEnabledRules(SecondSonarLintFileContent), Times.Once);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void HotspotConfiguration_WhenInitializedTwiceWithTheSameFile_DoesNotUpdateEnabledRules()
         {
             var sut = new HotspotConfiguration(ruleLoaderMock.Object);
@@ -117,7 +117,7 @@ namespace SonarAnalyzer.UnitTest.Common
             ruleLoaderMock.Verify(r => r.GetEnabledRules(FirstSonarLintFileContent), Times.Once);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void HotspotConfiguration_WhenInitializeIsSecondTimeWithNonSonarLint_DoesNotUpdateEnabledRules()
         {
             var sut = new HotspotConfiguration(ruleLoaderMock.Object);
@@ -131,21 +131,21 @@ namespace SonarAnalyzer.UnitTest.Common
             ruleLoaderMock.Verify(r => r.GetEnabledRules(FirstSonarLintFileContent), Times.Once);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void HotspotConfiguration_WhenIsEnabledWithoutInitialized_ThrowException()
         {
             var sut = new HotspotConfiguration(ruleLoaderMock.Object);
             sut.Invoking(x => x.IsEnabled("")).Should().Throw<InvalidOperationException>().WithMessage("Call Initialize() before calling IsEnabled().");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void HotspotConfiguration_WhenIsInitializedWithNull_ThrowsException()
         {
             var sut = new HotspotConfiguration(ruleLoaderMock.Object);
             sut.Invoking(x => x.Initialize(null)).Should().Throw<NullReferenceException>();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void HotspotConfiguration_GivenDifferentFileName_WillNotFinishInitialization()
         {
             var sut = new HotspotConfiguration(ruleLoaderMock.Object);

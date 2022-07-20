@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -37,11 +37,11 @@ public class ReadMeTest
     public void Init() =>
        readMe = File.ReadAllText(Path.Combine(TestContext.DeploymentDirectory, @".\..\..\..\..\..\..\README.md"));
 
-    [TestMethod]
+    [Ignore][TestMethod]
     public void HasCorrectRuleCount_CS() =>
         HasCorrectRuleCount(AnalyzerLanguage.CSharp, "C#");
 
-    [TestMethod]
+    [Ignore][TestMethod]
     public void HasCorrectRuleCount_VB() =>
         HasCorrectRuleCount(AnalyzerLanguage.VisualBasic, "VB.&#8203;NET");
 

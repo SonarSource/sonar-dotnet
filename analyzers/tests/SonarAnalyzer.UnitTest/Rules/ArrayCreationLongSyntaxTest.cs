@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,11 +27,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<ArrayCreationLongSyntax>().AddPaths("ArrayCreationLongSyntax.vb");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ArrayCreationLongSyntax() =>
             builder.Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ArrayCreationLongSyntax_CodeFix() =>
             builder.WithCodeFix<ArrayCreationLongSyntaxCodeFix>().WithCodeFixedPaths("ArrayCreationLongSyntax.Fixed.vb").VerifyCodeFix();
     }

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,12 +25,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ClassWithOnlyStaticMemberTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ClassWithOnlyStaticMember() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\ClassWithOnlyStaticMember.cs", new ClassWithOnlyStaticMember());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ClassWithOnlyStaticMember_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ClassWithOnlyStaticMember.CSharp9.cs", new ClassWithOnlyStaticMember());
 #endif

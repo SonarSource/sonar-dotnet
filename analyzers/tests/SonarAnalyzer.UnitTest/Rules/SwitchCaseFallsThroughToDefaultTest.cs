@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,17 +25,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class SwitchCaseFallsThroughToDefaultTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SwitchCaseFallsThroughToDefault() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\SwitchCaseFallsThroughToDefault.cs", new SwitchCaseFallsThroughToDefault());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SwitchCaseFallsThroughToDefault_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SwitchCaseFallsThroughToDefault.CSharp9.cs", new SwitchCaseFallsThroughToDefault());
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SwitchCaseFallsThroughToDefault_CodeFix() =>
             OldVerifier.VerifyCodeFix<SwitchCaseFallsThroughToDefaultCodeFix>(
                 @"TestCases\SwitchCaseFallsThroughToDefault.cs",

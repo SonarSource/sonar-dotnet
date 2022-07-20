@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,11 +29,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ParametersCorrectOrder>();
         private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.ParametersCorrectOrder>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ParametersCorrectOrder_CS() =>
             builderCS.AddPaths("ParametersCorrectOrder.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ParametersCorrectOrder_InvalidCode_CS() =>
             builderCS.AddSnippet(@"
 public class Foo
@@ -46,11 +46,11 @@ public class Foo
     }
 }").WithErrorBehavior(CompilationErrorBehavior.Ignore).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ParametersCorrectOrder_VB() =>
             builderVB.AddPaths("ParametersCorrectOrder.vb").Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ParametersCorrectOrder_InvalidCode_VB() =>
             builderVB.AddSnippet(@"
 Public Class Foo

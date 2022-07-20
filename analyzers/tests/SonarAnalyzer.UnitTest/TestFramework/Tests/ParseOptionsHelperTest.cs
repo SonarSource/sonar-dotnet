@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,7 +28,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
     [TestClass]
     public class ParseOptionsHelperTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ExpectedLanguageVersion()
         {
             var vbVersions = ParseOptionsHelper.FromVisualBasic12.Cast<VB.VisualBasicParseOptions>().Select(x => x.LanguageVersion);

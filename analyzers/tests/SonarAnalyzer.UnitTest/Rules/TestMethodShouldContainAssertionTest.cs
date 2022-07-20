@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -114,7 +114,7 @@ public class Foo
         public void TestMethodShouldContainAssertion_Xunit(string testFwkVersion, string fluentVersion, string nSubstituteVersion) =>
             WithTestReferences(NuGetMetadataReference.XunitFramework(testFwkVersion), fluentVersion, nSubstituteVersion).AddPaths("TestMethodShouldContainAssertion.Xunit.cs").Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void TestMethodShouldContainAssertion_Xunit_Legacy() =>
             WithTestReferences(NuGetMetadataReference.XunitFrameworkV1).AddPaths("TestMethodShouldContainAssertion.Xunit.Legacy.cs").Verify();
 
@@ -151,7 +151,7 @@ public class Foo
     }
 }").Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void TestMethodShouldContainAssertion_NUnit_NFluentLegacy() =>
            WithTestReferences(NuGetMetadataReference.NUnit(NUnitVersions.Ver25), nFluentVersion: "1.3.1").AddSnippet(@"
 using System;
@@ -168,13 +168,13 @@ public class Foo
     }
 }").Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void TestMethodShouldContainAssertion_CustomAssertionMethod() =>
             builder.AddPaths("TestMethodShouldContainAssertion.Custom.cs").AddReferences(NuGetMetadataReference.MSTestTestFramework(Latest)).Verify();
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void TestMethodShouldContainAssertion_CSharp9() =>
             builder.AddPaths("TestMethodShouldContainAssertion.CSharp9.cs")
                 .AddReferences(NuGetMetadataReference.MSTestTestFrameworkV1)

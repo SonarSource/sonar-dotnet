@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,25 +27,25 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<UnusedReturnValue>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnusedReturnValue() =>
             builder.AddPaths("UnusedReturnValue.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnusedReturnValueWithPartialClasses() =>
             builder.AddPaths("UnusedReturnValue.part1.cs", "UnusedReturnValue.part2.cs", "UnusedReturnValue.External.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnusedReturnValue_CSharp9() =>
             builder.AddPaths("UnusedReturnValue.CSharp9.cs").WithTopLevelStatements().Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnusedReturnValue_CSharp10() =>
             builder.AddPaths("UnusedReturnValue.CSharp10.cs").WithTopLevelStatements().WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnusedReturnValue_CSharpPreview() =>
             builder.AddPaths("UnusedReturnValue.CSharpPreview.cs").WithOptions(ParseOptionsHelper.CSharpPreview).Verify();
 

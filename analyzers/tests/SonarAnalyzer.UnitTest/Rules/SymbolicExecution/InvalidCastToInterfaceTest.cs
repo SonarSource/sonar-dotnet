@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -42,11 +42,11 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void InvalidCastToInterface_CSharp9() =>
             builder.AddPaths("InvalidCastToInterface.CSharp9.cs").WithTopLevelStatements().Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void InvalidCastToInterface_CSharp10() =>
             builder.AddPaths("InvalidCastToInterface.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 

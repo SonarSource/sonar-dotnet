@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,17 +28,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder().AddAnalyzer(() => new InsecureDeserialization(AnalyzerConfiguration.AlwaysEnabled)).WithBasePath("Hotspots");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void InsecureDeserialization() =>
             builder.AddPaths("InsecureDeserialization.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void InsecureDeserialization_CSharp9() =>
             builder.AddPaths("InsecureDeserialization.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void InsecureDeserialization_CSharp10() =>
             builder.AddPaths("InsecureDeserialization.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 

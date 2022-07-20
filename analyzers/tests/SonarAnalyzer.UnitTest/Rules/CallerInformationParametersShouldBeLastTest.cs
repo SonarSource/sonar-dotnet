@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,21 +25,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class CallerInformationParametersShouldBeLastTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CallerInformationParametersShouldBeLast() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\CallerInformationParametersShouldBeLast.cs", new CallerInformationParametersShouldBeLast());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CallerInformationParametersShouldBeLast_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CallerInformationParametersShouldBeLast.CSharp9.cs", new CallerInformationParametersShouldBeLast());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CallerInformationParametersShouldBeLast_CSharpPreview() =>
             OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\CallerInformationParametersShouldBeLast.CSharpPreview.cs", new CallerInformationParametersShouldBeLast());
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CallerInformationParametersShouldBeLastInvalidSyntax() =>
             new VerifierBuilder<CallerInformationParametersShouldBeLast>()
                 .AddPaths("CallerInformationParametersShouldBeLastInvalidSyntax.cs")

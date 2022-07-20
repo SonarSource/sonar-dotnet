@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -85,18 +85,18 @@ namespace SonarAnalyzer.UnitTest.Rules.Utilities
             utilityAnalyzer.TestIsAnalyzerEnabled.Should().BeTrue();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NoSonarLintXml_AnalyzerNotEnabled()
         {
             new TestUtilityAnalyzer(LanguageNames.CSharp, DefaultProjectOutFolderPath).TestIsAnalyzerEnabled.Should().BeFalse();
             new TestUtilityAnalyzer(LanguageNames.CSharp, DefaultSonarProjectConfig).TestIsAnalyzerEnabled.Should().BeFalse();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NoOutputPath_AnalyzerNotEnabled() =>
             new TestUtilityAnalyzer(LanguageNames.CSharp, @"ResourceTests\AnalyzeGeneratedTrue\SonarLint.xml").TestIsAnalyzerEnabled.Should().BeFalse();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GetTextRange()
         {
             var fileLinePositionSpan = new FileLinePositionSpan(

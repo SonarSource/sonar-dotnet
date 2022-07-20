@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,16 +27,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<IssueSuppression>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IssueSuppression() =>
             builder.AddPaths("IssueSuppression.cs", "IssueSuppression2.cs").WithAutogenerateConcurrentFiles(false).Verify();
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IssueSuppression_CSharp9() =>
             builder.AddPaths("IssueSuppression.CSharp9.cs").WithTopLevelStatements().Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IssueSuppression_CSharp10() =>
             builder.AddPaths("IssueSuppression.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 #endif

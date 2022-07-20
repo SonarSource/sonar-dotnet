@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,17 +27,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<MethodShouldNotOnlyReturnConstant>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodShouldNotOnlyReturnConstant() =>
             builder.AddPaths("MethodShouldNotOnlyReturnConstant.cs").Verify();
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodShouldNotOnlyReturnConstant_CSharp8() =>
             builder.AddPaths("MethodShouldNotOnlyReturnConstant.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodShouldNotOnlyReturnConstant_CSharpPreview() =>
             builder.AddPaths("MethodShouldNotOnlyReturnConstant.CSharpPreview.cs").WithOptions(ParseOptionsHelper.CSharpPreview).Verify();
 

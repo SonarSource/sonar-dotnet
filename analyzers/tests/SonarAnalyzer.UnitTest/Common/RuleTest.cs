@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Common
     [TestClass]
     public class RuleTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CodeFixes_Named_Properly()
         {
             foreach (var codeFix in RuleFinder.CodeFixTypes)
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Common
             }
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RulesDoNotThrow_CS()
         {
             var analyzers = RuleFinder.CreateAnalyzers(AnalyzerLanguage.CSharp, true).ToArray();
@@ -52,7 +52,7 @@ namespace SonarAnalyzer.UnitTest.Common
             VerifyNoExceptionThrown(@"TestCases\RuleFailure\PerformanceTestCases.cs", analyzers, CompilationErrorBehavior.Ignore);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RulesDoNotThrow_VB()
         {
             var analyzers = RuleFinder.CreateAnalyzers(AnalyzerLanguage.VisualBasic, true).ToArray();
@@ -61,7 +61,7 @@ namespace SonarAnalyzer.UnitTest.Common
             VerifyNoExceptionThrown(@"TestCases\RuleFailure\SpecialCases.vb", analyzers, CompilationErrorBehavior.Ignore);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AllAnalyzers_InheritSonarDiagnosticAnalyzer()
         {
             foreach (var analyzer in RuleFinder.AllAnalyzerTypes)
@@ -70,7 +70,7 @@ namespace SonarAnalyzer.UnitTest.Common
             }
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CodeFixes_InheritSonarCodeFix()
         {
             foreach (var codeFix in RuleFinder.CodeFixTypes)
@@ -79,7 +79,7 @@ namespace SonarAnalyzer.UnitTest.Common
             }
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Rules_WithDiagnosticAnalyzerAttribute_AreNotAbstract()
         {
             foreach (var analyzer in RuleFinder.AllAnalyzerTypes)
@@ -88,7 +88,7 @@ namespace SonarAnalyzer.UnitTest.Common
             }
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CodeFixes_WithExportCodeFixProviderAttribute_AreNotAbstract()
         {
             foreach (var codeFix in RuleFinder.CodeFixTypes)
@@ -97,7 +97,7 @@ namespace SonarAnalyzer.UnitTest.Common
             }
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Verify_ConcurrentExecutionIsEnabledByDefault()
         {
             var reader = new ConcurrentExecutionReader();
@@ -120,7 +120,7 @@ namespace SonarAnalyzer.UnitTest.Common
             reader.IsConcurrentExecutionEnabled.Should().BeTrue();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         [DataRow("false")]
         [DataRow("fALSE")]
         public void Verify_ConcurrentExecutionIsExplicitlyDisabled(string value)
@@ -133,7 +133,7 @@ namespace SonarAnalyzer.UnitTest.Common
             reader.IsConcurrentExecutionEnabled.Should().BeFalse();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AllParameterizedRules_AreDisabledByDefault() =>
             RuleFinder.RuleAnalyzerTypes
                 .Where(RuleFinder.IsParameterized)
@@ -143,19 +143,7 @@ namespace SonarAnalyzer.UnitTest.Common
                 .ToList()
                 .ForEach(diagnostic => diagnostic.IsEnabledByDefault.Should().BeFalse());
 
-        [TestMethod]
-        public void ParameterKey_DoesNotContainWhitespace()
-        {
-            foreach (var analyzer in RuleFinder.RuleAnalyzerTypes.Where(RuleFinder.IsParameterized))
-            {
-                foreach (var parameter in analyzer.GetRuntimeProperties().Select(x => x.GetCustomAttributes<RuleParameterAttribute>().SingleOrDefault()).WhereNotNull())
-                {
-                    parameter.Key.Any(char.IsWhiteSpace).Should().BeFalse($"{analyzer.FullName} should not contain whitespace in '{parameter.Key}' parameter key.");
-                }
-            }
-        }
-
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AllRulesEnabledByDefault_ContainSonarWayCustomTag()
         {
             var descriptors = RuleFinder.RuleAnalyzerTypes.SelectMany(SupportedDiagnostics)
@@ -172,15 +160,15 @@ namespace SonarAnalyzer.UnitTest.Common
             }
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AllCSharpRules_HaveCSharpTag() =>
             SupportedDiagnostics(AnalyzerLanguage.CSharp).Should().OnlyContain(diagnostic => diagnostic.CustomTags.Contains(LanguageNames.CSharp));
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AllVbNetRules_HaveVbNetTag() =>
             SupportedDiagnostics(AnalyzerLanguage.VisualBasic).Should().OnlyContain(diagnostic => diagnostic.CustomTags.Contains(LanguageNames.VisualBasic));
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DeprecatedRules_AreNotInSonarWay()
         {
             foreach (var diagnostic in RuleFinder.RuleAnalyzerTypes.SelectMany(SupportedDiagnostics).Where(IsDeprecated))
@@ -189,7 +177,7 @@ namespace SonarAnalyzer.UnitTest.Common
             }
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AllRules_DoNotHaveUtilityTag()
         {
             foreach (var diagnostic in RuleFinder.RuleAnalyzerTypes.SelectMany(SupportedDiagnostics))
@@ -198,7 +186,7 @@ namespace SonarAnalyzer.UnitTest.Common
             }
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UtilityAnalyzers_HaveUtilityTag()
         {
             foreach (var diagnostic in RuleFinder.UtilityAnalyzerTypes.SelectMany(SupportedDiagnostics))
@@ -207,7 +195,7 @@ namespace SonarAnalyzer.UnitTest.Common
             }
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AllRules_SonarWayTagPresenceMatchesIsEnabledByDefault()
         {
             var parameterized = RuleFinder.RuleAnalyzerTypes
@@ -245,15 +233,15 @@ namespace SonarAnalyzer.UnitTest.Common
             }
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void OnlySecurityHotspots_AreNotConfigurable_CS() =>
             OnlySecurityHotspots_AreNotConfigurable(AnalyzerLanguage.CSharp);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void OnlySecurityHotspots_AreNotConfigurable_VB() =>
             OnlySecurityHotspots_AreNotConfigurable(AnalyzerLanguage.VisualBasic);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RulesAreInNamespace_CS()
         {
             foreach (var type in RuleFinder.GetAnalyzerTypes(AnalyzerLanguage.CSharp))
@@ -262,7 +250,7 @@ namespace SonarAnalyzer.UnitTest.Common
             }
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RulesAreInNamespace_VB()
         {
             foreach (var type in RuleFinder.GetAnalyzerTypes(AnalyzerLanguage.VisualBasic))

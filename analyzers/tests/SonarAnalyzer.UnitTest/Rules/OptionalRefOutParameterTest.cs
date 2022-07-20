@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,17 +25,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class OptionalRefOutParameterTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void OptionalRefOutParameter() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\OptionalRefOutParameter.cs", new OptionalRefOutParameter());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void OptionalRefOutParameter_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\OptionalRefOutParameter.CSharp9.cs", new OptionalRefOutParameter());
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void OptionalRefOutParameter_CodeFix() =>
             OldVerifier.VerifyCodeFix<OptionalRefOutParameterCodeFix>(
                 @"TestCases\OptionalRefOutParameter.cs",

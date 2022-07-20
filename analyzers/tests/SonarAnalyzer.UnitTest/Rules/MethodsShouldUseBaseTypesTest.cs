@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,7 +28,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<MethodsShouldUseBaseTypes>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodsShouldUseBaseTypes_Internals()
         {
             const string code1 = @"
@@ -63,28 +63,28 @@ internal class Bar
             }
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodsShouldUseBaseTypes() =>
             // There are two files provided (identical) in order to be able to test the rule behavior in concurrent environment.
             // The rule is executed concurrently if there are at least 2 syntax trees.
             builder.AddPaths("MethodsShouldUseBaseTypes.cs", "MethodsShouldUseBaseTypes.Concurrent.cs").WithAutogenerateConcurrentFiles(false).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodsShouldUseBaseTypes_CSharp8() =>
             builder.AddPaths("MethodsShouldUseBaseTypes.CSharp8.cs").WithAutogenerateConcurrentFiles(false).WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodsShouldUseBaseTypes_Controllers() =>
             builder.AddPaths("MethodsShouldUseBaseTypes.AspControllers.cs")
                 .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(Constants.NuGetLatestVersion))
                 .Verify();
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodsShouldUseBaseTypes_CSharp9() =>
             builder.AddPaths("MethodsShouldUseBaseTypes.CSharp9.cs").WithTopLevelStatements().Verify();
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodsShouldUseBaseTypes_InvalidCode() =>
             builder.AddSnippet(@"
 using System;

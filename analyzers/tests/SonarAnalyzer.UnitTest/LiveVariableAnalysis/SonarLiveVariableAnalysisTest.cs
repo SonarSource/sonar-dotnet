@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.LiveVariableAnalysis
     [TestClass]
     public class SonarLiveVariableAnalysisTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void WriteOnly()
         {
             var code = @"
@@ -41,7 +41,7 @@ var c = 2 + 3;";
             context.Validate(context.Cfg.EntryBlock);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UsedBeforeAssigned_LiveIn()
         {
             var code = @"
@@ -51,7 +51,7 @@ IsMethod(boolParameter);";
             context.Validate(context.Cfg.EntryBlock, new LiveIn("intParameter", "boolParameter"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UsedAfterBranch_LiveOut()
         {
             /*       Binary
@@ -76,7 +76,7 @@ Method(intParameter);";
             context.Validate(exit);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Captured_NotLiveIn_NotLiveOut()
         {
             /*       Binary
@@ -102,7 +102,7 @@ Method(intParameter);";
             context.Validate(exit, new Captured("intParameter"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Assigned_NotLiveIn_NotLiveOut()
         {
             /*       Binary
@@ -127,7 +127,7 @@ intParameter = 0;";
             context.Validate(exit);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void LongPropagationChain_LiveIn_LiveOut()
         {
             /*    Binary -> Jump (return) ----+
@@ -164,7 +164,7 @@ Method(intParameter, value);";
             context.Validate(context.Cfg.ExitBlock);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void BranchedPropagationChain_LiveIn_LiveOut()
         {
             /*              Binary
@@ -268,7 +268,7 @@ Method(everywhere, reassigned);";
             context.Validate(context.Block<SimpleBlock>("Method(everywhere, reassigned)"), new LiveIn("everywhere"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessIdentifier_InNameOf_NotLiveIn_NotLiveOut()
         {
             var code = @"Method(nameof(intParameter));";
@@ -276,7 +276,7 @@ Method(everywhere, reassigned);";
             context.Validate(context.Cfg.EntryBlock);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessIdentifier_LocalScopeSymbol_LiveIn()
         {
             var code = @"
@@ -288,7 +288,7 @@ Method(intParameter, variable);";
             context.Validate(context.Block<SimpleBlock>(), new LiveIn("intParameter", "variable"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessIdentifier_GlobalScopeSymbol_NotLiveIn_NotLiveOut()
         {
             var code = @"
@@ -298,7 +298,7 @@ Method(field, s.Property);";
             context.Validate(context.Cfg.EntryBlock);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessIdentifier_UndefinedSymbol_NotLiveIn_NotLiveOut()
         {
             var code = @"Method(undefined);";
@@ -306,7 +306,7 @@ Method(field, s.Property);";
             context.Validate(context.Cfg.EntryBlock);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessIdentifier_RefOutArgument_NotLiveIn_LiveOut()
         {
             var code = @"
@@ -316,7 +316,7 @@ Method(outParameter, refParameter);";
             context.Validate(context.Cfg.EntryBlock);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessIdentifier_Assigned_NotLiveIn_LiveOut()
         {
             // Jump (intParamter=42; goto) --> Jump (label) --> Simple (Method) --> Exit
@@ -330,7 +330,7 @@ Method(intParameter);";
             context.Validate(context.Block<SimpleBlock>(), new LiveIn("intParameter"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessIdentifier_NotAssigned_LiveIn_LiveOut()
         {
             // Jump (intParamter=42; goto) --> Jump (label) --> Simple (Method) --> Exit
@@ -344,7 +344,7 @@ Method(value, intParameter);";
             context.Validate(context.Block<SimpleBlock>(), new LiveIn("value", "intParameter"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessSimpleAssignment_Discard_NotLiveIn_NotLiveOut()
         {
             var code = @"_ = intParameter;";
@@ -352,7 +352,7 @@ Method(value, intParameter);";
             context.Validate(context.Cfg.EntryBlock, new LiveIn("intParameter"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessSimpleAssignment_UndefinedSymbol_NotLiveIn_NotLiveOut()
         {
             var code = @"
@@ -363,7 +363,7 @@ if (undefined == 0)
             context.Validate(context.Cfg.EntryBlock, new LiveIn("intParameter"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessSimpleAssignment_GlobalScoped_NotLiveIn_NotLiveOut()
         {
             var code = @"
@@ -374,7 +374,7 @@ if (field == 0)
             context.Validate(context.Cfg.EntryBlock, new LiveIn("intParameter"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessSimpleAssignment_LocalScoped_NotLiveIn_LiveOut()
         {
             var code = @"
@@ -386,7 +386,7 @@ if (value == 0)
             context.Validate(context.Cfg.EntryBlock, new LiveOut("value"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessVariableDeclarator_NotLiveIn_LiveOut()
         {
             var code = @"
@@ -398,7 +398,7 @@ if (intValue == 0)
             context.Validate(context.Cfg.EntryBlock, new LiveOut("intValue", "varValue"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessVariableInForeach_Declared_LiveIn_LiveOut()
         {
             /*
@@ -421,7 +421,7 @@ foreach(var i in new int[] {1, 2, 3})
             context.Validate(context.Block<SimpleBlock>(), new LiveIn("intParameter", "i"), new LiveOut("intParameter"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessVariableInForeach_Reused_LiveIn_LiveOut()
         {
             var code = @"
@@ -436,7 +436,7 @@ foreach(i in new int[] {1, 2, 3})
             context.Validate(context.Block<SimpleBlock>(), new LiveIn("intParameter", "i"), new LiveOut("intParameter", "i"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void StaticLocalFunction_ExpressionLiveIn()
         {
             var code = @"
@@ -446,7 +446,7 @@ static int LocalFunction(int a) => a + 1;";
             context.Validate(context.Cfg.EntryBlock, new LiveIn("a"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void StaticLocalFunction_ExpressionNotLiveIn()
         {
             var code = @"
@@ -456,7 +456,7 @@ static int LocalFunction(int a) => 42;";
             context.Validate(context.Cfg.EntryBlock);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void StaticLocalFunction_LiveIn()
         {
             var code = @"
@@ -469,7 +469,7 @@ static int LocalFunction(int a)
             context.Validate(context.Cfg.EntryBlock, new LiveIn("a"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void StaticLocalFunction_NotLiveIn()
         {
             var code = @"
@@ -482,7 +482,7 @@ static int LocalFunction(int a)
             context.Validate(context.Cfg.EntryBlock);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void StaticLocalFunction_Recursive()
         {
             var code = @"
@@ -498,7 +498,7 @@ static int LocalFunction(int a)
             context.Validate(context.Cfg.EntryBlock, new LiveIn("a"), new LiveOut("a"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UsingBlock_LiveInUntilTheEnd()
         {
             /*     Jump
@@ -529,7 +529,7 @@ using (var ms = new System.IO.MemoryStream())
             context.Validate(context.Block<ExitBlock>());
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UsingVar_NotSupported()
         {
             /* Bad CFG Shape
@@ -554,7 +554,7 @@ if (boolParameter)
             context.Validate(context.Block<ExitBlock>());
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void LocalFunctionInvocation_LiveIn()
         {
             var code = @"
@@ -570,7 +570,7 @@ int LocalFunction() => variable;";
             context.Validate(context.Block<SimpleBlock>(), new LiveIn("variable"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void LocalFunctionInvocation_Generic_LiveIn()
         {
             var code = @"
@@ -586,7 +586,7 @@ T LocalFunction<T>() => variable;";
             context.Validate(context.Block<SimpleBlock>(), new LiveIn("variable"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void LocalFunctionInvocation_NotLiveIn()
         {
             var code = @"

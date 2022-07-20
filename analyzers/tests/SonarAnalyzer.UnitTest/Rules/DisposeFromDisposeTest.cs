@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,7 +28,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<DisposeFromDispose>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DisposeFromDispose_CSharp7_2() =>
             // Readonly structs have been introduced in C# 7.2.
             // In C# 8, readonly structs can be disposed of, and the behavior is different.
@@ -37,17 +37,17 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithLanguageVersion(LanguageVersion.CSharp7_2)
                 .Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DisposeFromDispose_CSharp8() =>
             builder.AddPaths("DisposeFromDispose.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DisposeFromDispose_CSharp9() =>
             builder.AddPaths("DisposeFromDispose.CSharp9.Part1.cs", "DisposeFromDispose.CSharp9.Part2.cs").WithTopLevelStatements().Verify();
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DisposeFromDispose_CSharp10() =>
             builder.AddPaths("DisposeFromDispose.CSharp10.cs").WithTopLevelStatements().WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 

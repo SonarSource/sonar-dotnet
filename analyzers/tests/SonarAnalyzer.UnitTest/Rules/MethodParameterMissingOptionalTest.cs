@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,17 +25,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class MethodParameterMissingOptionalTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodParameterMissingOptional() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\MethodParameterMissingOptional.cs", new MethodParameterMissingOptional());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodParameterMissingOptional_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\MethodParameterMissingOptional.CSharp9.cs", new MethodParameterMissingOptional());
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodParameterMissingOptional_CodeFix() =>
             OldVerifier.VerifyCodeFix<MethodParameterMissingOptionalCodeFix>(
                 @"TestCases\MethodParameterMissingOptional.cs",

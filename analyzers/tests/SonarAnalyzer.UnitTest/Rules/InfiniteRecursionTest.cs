@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,7 +26,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class InfiniteRecursionTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void InfiniteRecursion_SonarCfg() =>
             OldVerifier.VerifyAnalyzer(
                 @"TestCases\InfiniteRecursion.SonarCfg.cs",
@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 ParseOptionsHelper.OnlyCSharp7,
                 MetadataReferenceFacade.NETStandard21);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void InfiniteRecursion_RoslynCfg() =>
             OldVerifier.VerifyAnalyzer(
                 @"TestCases\InfiniteRecursion.RoslynCfg.cs",

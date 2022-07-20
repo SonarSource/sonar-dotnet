@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,7 +29,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
     {
         private const string RspecRelativeFolderPath = @"..\..\..\..\..\rspec\";
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AnalyzersHaveCorrespondingResource_CSharp()
         {
             var rulesFromResources = SortedRulesFromResources(RspecRelativeFolderPath + "cs");          // Unique list
@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             rulesFromResources.Should().Equal(rulesFromTypes);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AnalyzersHaveCorrespondingResource_VisualBasic()
         {
             var rulesFromResources = SortedRulesFromResources(RspecRelativeFolderPath + "vbnet");           // Unique list
@@ -45,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             rulesFromResources.Should().Equal(rulesFromTypes);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ThereShouldBeRuleDetailsForAllCSharpRuleClasses()
         {
             var ruleDetailsKeys = SortedRulesFromDetailBuilder(AnalyzerLanguage.CSharp);
@@ -53,7 +53,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             ruleDetailsKeys.Should().Equal(rulesFromTypes);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ThereShouldBeRuleDetailsForAllVbNetRuleClasses()
         {
             var ruleDetailsKeys = SortedRulesFromDetailBuilder(AnalyzerLanguage.VisualBasic);

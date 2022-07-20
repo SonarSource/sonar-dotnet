@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,23 +27,23 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<ImplementIDisposableCorrectly>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ImplementIDisposableCorrectly() =>
             builder.AddPaths("ImplementIDisposableCorrectly.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ImplementIDisposableCorrectly_FromCSharp9() =>
             builder.AddPaths("ImplementIDisposableCorrectly.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ImplementIDisposableCorrectly_AbstractClass() =>
             builder.AddPaths("ImplementIDisposableCorrectly.AbstractClass.cs").Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ImplementIDisposableCorrectly_PartialClassesInDifferentFiles() =>
             builder.AddPaths("ImplementIDisposableCorrectlyPartial1.cs", "ImplementIDisposableCorrectlyPartial2.cs").Verify();
     }

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,22 +25,22 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class UnchangedLocalVariablesShouldBeConstTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnchangedLocalVariablesShouldBeConst() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\UnchangedLocalVariablesShouldBeConst.cs", new UnchangedLocalVariablesShouldBeConst());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnchangedLocalVariablesShouldBeConst_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnchangedLocalVariablesShouldBeConst.CSharp9.cs", new UnchangedLocalVariablesShouldBeConst());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnchangedLocalVariablesShouldBeConst_CSharp10() =>
             OldVerifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\UnchangedLocalVariablesShouldBeConst.CSharp10.cs", new UnchangedLocalVariablesShouldBeConst());
 
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnchangedLocalVariablesShouldBeConst_InvalidCode() =>
             OldVerifier.VerifyCSharpAnalyzer(@"
 // invalid code

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,12 +25,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ClassShouldNotBeAbstractTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ClassShouldNotBeAbstract() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\ClassShouldNotBeAbstract.cs", new ClassShouldNotBeAbstract());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ClassShouldNotBeAbstract_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ClassShouldNotBeAbstract.CSharp9.cs", new ClassShouldNotBeAbstract());
 #endif

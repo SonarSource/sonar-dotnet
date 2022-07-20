@@ -1,4 +1,4 @@
-﻿/*
+/*
 * SonarAnalyzer for .NET
 * Copyright (C) 2015-2022 SonarSource SA
 * mailto: contact AT sonarsource DOT com
@@ -26,7 +26,7 @@ namespace SonarAnalyzer.UnitTest.Wrappers
     [TestClass]
     public class MethodDeclarationFactoryTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodDeclarationFactory_WithMethodDeclaration()
         {
             const string code = @"
@@ -45,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.Wrappers
             wrapper.IsLocal.Should().BeFalse();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodDeclarationFactory_WithLocalFunctionDeclaration()
         {
             const string code = @"
@@ -68,7 +68,7 @@ namespace SonarAnalyzer.UnitTest.Wrappers
             wrapper.IsLocal.Should().BeTrue();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodDeclarationFactory_WithMethodDeclaration_NoImplementation()
         {
             const string code = @"
@@ -82,14 +82,14 @@ namespace SonarAnalyzer.UnitTest.Wrappers
             wrapper.HasImplementation.Should().BeFalse();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodDeclarationFactory_Throws_WhenNull()
         {
             Action a = () => MethodDeclarationFactory.Create(null);
             a.Should().Throw<ArgumentNullException>().WithMessage("*node*");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodDeclarationFactory_Throws_WhenNotMethodOrLocalFunction()
         {
             const string code = @"

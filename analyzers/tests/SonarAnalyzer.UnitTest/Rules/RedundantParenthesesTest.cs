@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,12 +26,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class RedundantParenthesesTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundantParentheses_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\RedundantParenthesesExpression.cs",
                 new CS.RedundantParentheses());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundantParentheses_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\RedundantParentheses.vb",
                 new VB.RedundantParentheses());

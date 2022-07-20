@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,13 +26,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class UnconditionalJumpStatementTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnconditionalJumpStatement_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\UnconditionalJumpStatement.cs",
                 new CS.UnconditionalJumpStatement(),
                 ParseOptionsHelper.FromCSharp8);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnconditionalJumpStatement_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\UnconditionalJumpStatement.vb",
                 new VB.UnconditionalJumpStatement());

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,21 +29,21 @@ namespace SonarAnalyzer.UnitTest.Rules
         private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.PreferGuidEmpty>().WithOptions(ParseOptionsHelper.FromCSharp8);
         private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.PreferGuidEmpty>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PreferGuidEmpty_CS() =>
             builderCS.AddPaths("PreferGuidEmpty.cs").Verify();
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PreferGuidEmpty_CSharp9() =>
             builderCS.WithOptions(ParseOptionsHelper.FromCSharp9).AddPaths("PreferGuidEmpty.CSharp9.cs").Verify();
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PreferGuidEmpty_VB() =>
             builderVB.AddPaths("PreferGuidEmpty.vb").Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PreferGuidEmpty_CodeFix_CS() =>
             builderCS
             .AddPaths("PreferGuidEmpty.cs")

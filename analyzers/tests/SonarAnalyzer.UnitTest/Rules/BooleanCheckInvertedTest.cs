@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,11 +26,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class BooleanCheckInvertedTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void BooleanCheckInverted_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\BooleanCheckInverted.cs", new CS.BooleanCheckInverted());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void BooleanCheckInverted_CS_CodeFix() =>
             OldVerifier.VerifyCodeFix<CS.BooleanCheckInvertedCodeFix>(
                 @"TestCases\BooleanCheckInverted.cs",
@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 @"TestCases\BooleanCheckInverted.Fixed.Batch.cs",
                 new CS.BooleanCheckInverted());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void BooleanCheckInverted_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\BooleanCheckInverted.vb", new VB.BooleanCheckInverted());
     }

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,12 +25,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class OptionalParameterWithDefaultValueTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void OptionalParameterWithDefaultValue() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\OptionalParameterWithDefaultValue.cs",
                 new OptionalParameterWithDefaultValue());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void OptionalParameterWithDefaultValue_CodeFix() =>
             OldVerifier.VerifyCodeFix<OptionalParameterWithDefaultValueCodeFix>(
                 @"TestCases\OptionalParameterWithDefaultValue.cs",

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,24 +26,24 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class MarkAssemblyWithClsCompliantAttributeTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MarkAssemblyWithClsCompliantAttribute_CS() =>
             OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithClsCompliantAttribute.cs",
                 new CS.MarkAssemblyWithClsCompliantAttribute());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MarkAssemblyWithClsCompliantAttribute_VB() =>
             OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithClsCompliantAttribute.vb",
                 new VB.MarkAssemblyWithClsCompliantAttribute());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MarkAssemblyWithClsCompliantAttributeNoncompliant_CS()
         {
             Action action = () => OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithClsCompliantAttributeNoncompliant.cs", new CS.MarkAssemblyWithClsCompliantAttribute());
             action.Should().Throw<UnexpectedDiagnosticException>().WithMessage("*Provide a 'CLSCompliant' attribute for assembly 'project0'.*");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MarkAssemblyWithClsCompliantAttributeNoncompliant_VB()
         {
             Action action = () => OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithClsCompliantAttributeNoncompliant.vb", new VB.MarkAssemblyWithClsCompliantAttribute());

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,19 +27,19 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<GenericTypeParameterEmptinessChecking>().AddReferences(MetadataReferenceFacade.SystemCollections);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GenericTypeParameterEmptinessChecking() =>
             builder.AddPaths("GenericTypeParameterEmptinessChecking.cs").WithErrorBehavior(CompilationErrorBehavior.Ignore).Verify();
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GenericTypeParameterEmptinessChecking_CSharp9() =>
             builder.AddPaths("GenericTypeParameterEmptinessChecking.CSharp9.cs").WithTopLevelStatements().Verify();
 
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GenericTypeParameterEmptinessChecking_CodeFix() =>
             builder.AddPaths("GenericTypeParameterEmptinessChecking.cs")
                 .WithCodeFix<GenericTypeParameterEmptinessCheckingCodeFix>()

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,17 +26,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ShiftDynamicNotIntegerTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ShiftDynamicNotInteger_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\ShiftDynamicNotInteger.cs", new CS.ShiftDynamicNotInteger());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ShiftDynamicNotInteger_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ShiftDynamicNotInteger.CSharp9.cs", new CS.ShiftDynamicNotInteger());
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ShiftDynamicNotInteger_VB() =>
             new VerifierBuilder<VB.ShiftDynamicNotInteger>().AddPaths("ShiftDynamicNotInteger.vb", "ShiftDynamicNotInteger2.vb").WithAutogenerateConcurrentFiles(false).Verify();
     }

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,11 +25,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class GenericTypeParameterInOutTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GenericTypeParameterInOut() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\GenericTypeParameterInOut.cs", new GenericTypeParameterInOut());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GenericTypeParameterInOut_FromCSharp7() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\GenericTypeParameterInOut.CSharp7.cs", new GenericTypeParameterInOut(), ParseOptionsHelper.FromCSharp7);
     }

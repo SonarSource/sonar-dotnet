@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,29 +29,29 @@ namespace SonarAnalyzer.UnitTest.Rules
         private readonly VerifierBuilder builder = new VerifierBuilder<ConditionalSimplification>();
         private readonly VerifierBuilder codeFix = new VerifierBuilder<ConditionalSimplification>().WithCodeFix<ConditionalSimplificationCodeFix>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ConditionalSimplification_BeforeCSharp8() =>
             builder.AddPaths("ConditionalSimplification.BeforeCSharp8.cs").WithOptions(ParseOptionsHelper.BeforeCSharp8).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ConditionalSimplification_CSharp8() =>
             builder.AddPaths("ConditionalSimplification.CSharp8.cs").WithLanguageVersion(LanguageVersion.CSharp8).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ConditionalSimplification_CSharp8_CodeFix() =>
             codeFix.AddPaths("ConditionalSimplification.CSharp8.cs").WithLanguageVersion(LanguageVersion.CSharp8).WithCodeFixedPaths("ConditionalSimplification.CSharp8.Fixed.cs").VerifyCodeFix();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ConditionalSimplification_FromCSharp8() =>
             builder.AddPaths("ConditionalSimplification.FromCSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ConditionalSimplification_BeforeCSharp8_CodeFix() =>
             codeFix.AddPaths("ConditionalSimplification.BeforeCSharp8.cs")
                 .WithCodeFixedPaths("ConditionalSimplification.BeforeCSharp8.Fixed.cs")
                 .WithOptions(ParseOptionsHelper.BeforeCSharp8).VerifyCodeFix();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ConditionalSimplification_FromCSharp8_CodeFix() =>
             codeFix.AddPaths("ConditionalSimplification.FromCSharp8.cs")
                 .WithCodeFixedPaths("ConditionalSimplification.FromCSharp8.Fixed.cs")
@@ -60,11 +60,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ConditionalSimplification_FromCSharp9() =>
             builder.AddPaths("ConditionalSimplification.FromCSharp9.cs").WithTopLevelStatements().Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ConditionalSimplification_FromCSharp10() =>
             builder.AddPaths("ConditionalSimplification.FromCSharp10.cs")
                 .WithTopLevelStatements()
@@ -76,14 +76,14 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .AddReferences(MetadataReferenceFacade.SystemXmlLinq)
                 .Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ConditionalSimplification_FromCSharp9_CodeFix() =>
             codeFix.AddPaths("ConditionalSimplification.FromCSharp9.cs")
                 .WithCodeFixedPaths("ConditionalSimplification.FromCSharp9.Fixed.cs")
                 .WithTopLevelStatements()
                 .VerifyCodeFix();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ConditionalSimplification_FromCSharp10_CodeFix() =>
             codeFix.AddPaths("ConditionalSimplification.FromCSharp10.cs")
                 .WithCodeFixedPaths("ConditionalSimplification.FromCSharp10.Fixed.cs")

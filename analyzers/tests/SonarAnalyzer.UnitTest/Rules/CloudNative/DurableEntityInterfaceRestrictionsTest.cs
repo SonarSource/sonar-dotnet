@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,7 +29,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             .WithBasePath("CloudNative")
             .AddReferences(NuGetMetadataReference.MicrosoftAzureWebJobsExtensionsDurableTask());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DurableEntityInterfaceRestrictions_CS() =>
             builder.AddPaths("DurableEntityInterfaceRestrictions.cs").Verify();
     }

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,14 +27,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DeliveringDebugFeaturesInProductionTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DeliveringDebugFeaturesInProduction_NetCore2_CS() =>
             OldVerifier.VerifyAnalyzer(
                 @"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore2.cs",
                 new CS.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
                 AdditionalReferencesForAspNetCore2);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DeliveringDebugFeaturesInProduction_NetCore2_VB() =>
             OldVerifier.VerifyAnalyzer(
                 @"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore2.vb",
@@ -43,14 +43,14 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DeliveringDebugFeaturesInProduction_NetCore3_CS() =>
             OldVerifier.VerifyAnalyzer(
                 @"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore3.cs",
                 new CS.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
                 AdditionalReferencesForAspNetCore3AndLater);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DeliveringDebugFeaturesInProduction_NetCore3_VB() =>
             OldVerifier.VerifyAnalyzer(
                 @"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore3.vb",

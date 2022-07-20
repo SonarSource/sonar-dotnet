@@ -1,4 +1,4 @@
-﻿namespace Tests.Diagnostics
+namespace Tests.Diagnostics
 {
     using System.Threading.Tasks;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -12,37 +12,37 @@
         {
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         protected void ProtectedTestMethod() // Noncompliant
         {
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         internal void InternalTestMethod() // Noncompliant
         {
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public async void AsyncTestMethod()  // Noncompliant {{Make this test method non-'async' or return 'Task'.}}
         {
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GenericTestMethod<T>()  // Noncompliant {{Make this test method non-generic.}}
         {
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         private void MultiErrorsMethod1<T>() // Noncompliant {{Make this test method 'public' and non-generic.}}
         {
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         private async void MultiErrorsMethod2<T>() // Noncompliant {{Make this test method 'public', non-generic and non-'async' or return 'Task'.}}
         {
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public async Task DoSomethingAsync() // Compliant
         {
             return;

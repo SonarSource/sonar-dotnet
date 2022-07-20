@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,21 +25,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class UseValueParameterTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UseValueParameter() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\UseValueParameter.cs", new UseValueParameter());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UseValueParameter_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\UseValueParameter.CSharp9.cs", new UseValueParameter());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UseValueParameter_CSharpPreview() =>
             OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\UseValueParameter.CSharpPreview.cs", new UseValueParameter());
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UseValueParameter_InvalidCode() =>
             OldVerifier.VerifyCSharpAnalyzer(@"
 public int Foo

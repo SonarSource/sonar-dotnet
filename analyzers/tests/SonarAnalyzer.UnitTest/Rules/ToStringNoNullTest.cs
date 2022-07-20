@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,12 +25,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ToStringNoNullTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ToStringNoNull() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\ToStringNoNull.cs", new ToStringNoNull());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ToStringNoNull_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ToStringNoNull.CSharp9.cs", new ToStringNoNull());
 #endif

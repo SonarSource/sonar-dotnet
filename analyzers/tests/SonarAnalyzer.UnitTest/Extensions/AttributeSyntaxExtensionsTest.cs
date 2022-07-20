@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,7 +27,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
     [TestClass]
     public class AttributeSyntaxExtensionsTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         [DataRow("[System.ObsoleteAttribute] public class X{}", true)]
         [DataRow("using System; [ObsoleteAttribute] public class X{}", true)]
         [DataRow("using System; [Obsolete] public class X{}", true)]
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
             attribute.IsKnownType(KnownType.System_ObsoleteAttribute, compilation.GetSemanticModel(syntaxTree)).Should().Be(isKnownType);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IsKnownType_TypeNotAnAttribute()
         {
             var compilation = CreateCompilation("[System.ObsoleteAttribute] public class X{}");

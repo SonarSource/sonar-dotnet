@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,12 +27,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<StreamReadStatement>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void StreamReadStatement() =>
             builder.AddPaths("StreamReadStatement.cs").Verify();
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void StreamReadStatement_CSharp10() =>
             builder.AddPaths("StreamReadStatement.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 #endif

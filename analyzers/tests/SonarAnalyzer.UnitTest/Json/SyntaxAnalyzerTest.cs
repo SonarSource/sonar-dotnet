@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -69,7 +69,7 @@ namespace SonarAnalyzer.UnitTest.Common
             ret.Should().BeEmpty();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ParseObject()
         {
             const string json = @"
@@ -92,7 +92,7 @@ namespace SonarAnalyzer.UnitTest.Common
             ret["d"].Value.Should().Be(null);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ParseList()
         {
             const string json = @"[""aaa"", 42, true, null]";
@@ -102,7 +102,7 @@ namespace SonarAnalyzer.UnitTest.Common
             ret.Select(x => x.Value).Should().ContainInOrder("aaa", 42, true, null);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ParseNested()
         {
             const string json = @"
@@ -154,7 +154,7 @@ namespace SonarAnalyzer.UnitTest.Common
             sut.Invoking(x => x.Parse()).Should().Throw<JsonException>().WithMessage(expectedMessage);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Location()
         {
             const string json =
@@ -191,7 +191,7 @@ namespace SonarAnalyzer.UnitTest.Common
             AssertLocation(() => array[3]["x"], 5, 19, 5, 23);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Location_EndOfLines()
         {
             const string json = "[0,\n1,\r2,\r\n3,\u20284,\u20295]";

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,7 +25,7 @@ namespace SonarAnalyzer.UnitTest.Common
     [TestClass]
     public class MetricsTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Lines()
         {
             Lines(AnalyzerLanguage.CSharp, string.Empty).Should().Be(1);
@@ -45,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.Common
             Lines(AnalyzerLanguage.VisualBasic, "Imports System\r\n'hello\r\n'world").Should().Be(3);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void LinesOfCode()
         {
             LinesOfCode(AnalyzerLanguage.CSharp, string.Empty).Should().BeEquivalentTo();
@@ -69,7 +69,7 @@ line 4"")
 End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CommentsWithoutHeaders()
         {
             CommentsWithoutHeaders(AnalyzerLanguage.CSharp, string.Empty).NonBlank.Should().BeEquivalentTo();
@@ -125,7 +125,7 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
             CommentsWithoutHeaders(AnalyzerLanguage.VisualBasic, "Imports System ' fndskgjsdkl \n ' {00000000-0000-0000-0000-000000000000}\n").NonBlank.Should().BeEquivalentTo(1, 2);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CommentsWithHeaders()
         {
             CommentsWithHeaders(AnalyzerLanguage.CSharp, string.Empty).NonBlank.Should().BeEquivalentTo();
@@ -181,7 +181,7 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
             CommentsWithoutHeaders(AnalyzerLanguage.VisualBasic, "Imports System ' fndskgjsdkl \n ' {00000000-0000-0000-0000-000000000000}\n").NonBlank.Should().BeEquivalentTo(1, 2);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Classes()
         {
             Classes(AnalyzerLanguage.CSharp, string.Empty).Should().Be(0);
@@ -206,7 +206,7 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
             Classes(AnalyzerLanguage.VisualBasic, "Class M \n End Class \n Namespace MyNamespace \n Class Sample2 \n End Class \n End Namespace").Should().Be(2);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Accessors()
         {
             Functions(AnalyzerLanguage.CSharp, string.Empty).Should().Be(0);
@@ -252,7 +252,7 @@ End Class")
                 .Should().Be(3);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Statements()
         {
             Statements(AnalyzerLanguage.CSharp, string.Empty).Should().Be(0);
@@ -317,7 +317,7 @@ End Class")
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Functions()
         {
             Functions(AnalyzerLanguage.CSharp, string.Empty).Should().Be(0);
@@ -351,7 +351,7 @@ End Class")
 
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Complexity()
         {
             Complexity(AnalyzerLanguage.CSharp, string.Empty)
@@ -512,7 +512,7 @@ End Class")
                 .Should().Be(2);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CognitiveComplexity()
         {
             var csharpText = System.IO.File.ReadAllText(@"TestCases\CognitiveComplexity.cs");
@@ -529,27 +529,27 @@ End Class")
             CognitiveComplexity(AnalyzerLanguage.VisualBasic, visualBasicCode).Should().Be(122);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void WrongMetrics_CSharp()
         {
             (var syntaxTree, var semanticModel) = TestHelper.CompileVB("");
             Assert.ThrowsException<ArgumentException>(() => new Metrics.CSharp.CSharpMetrics(syntaxTree, semanticModel));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void WrongMetrics_VisualBasic()
         {
             (var syntaxTree, var semanticModel) = TestHelper.CompileCS("");
             Assert.ThrowsException<ArgumentException>(() => new Metrics.VisualBasic.VisualBasicMetrics(syntaxTree, semanticModel));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ExecutableLinesMetricsIsPopulated_CSharp() =>
             ExecutableLines(AnalyzerLanguage.CSharp,
                 @"public class Sample { public void Foo(int x) { int i = 0; if (i == 0) {i++;i--;} else { while(true){i--;} } } }")
                 .Should().BeEquivalentTo(new[] { 1 });
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ExecutableLinesMetricsIsPopulated_VB() =>
             ExecutableLines(AnalyzerLanguage.VisualBasic,
 @"Module MainMod

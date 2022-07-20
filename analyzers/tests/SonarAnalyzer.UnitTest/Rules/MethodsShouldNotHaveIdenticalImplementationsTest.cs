@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -30,23 +30,23 @@ namespace SonarAnalyzer.UnitTest.Rules
         private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.MethodsShouldNotHaveIdenticalImplementations>();
         private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.MethodsShouldNotHaveIdenticalImplementations>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodsShouldNotHaveIdenticalImplementations() =>
             builderCS.AddPaths("MethodsShouldNotHaveIdenticalImplementations.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodsShouldNotHaveIdenticalImplementations_CSharp9() =>
             builderCS.AddPaths("MethodsShouldNotHaveIdenticalImplementations.CSharp9.cs").WithTopLevelStatements().Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodsShouldNotHaveIdenticalImplementations_CSharp10() =>
             builderCS.AddPaths("MethodsShouldNotHaveIdenticalImplementations.CSharp10.cs").WithLanguageVersion(LanguageVersion.CSharp10).Verify();
 
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodsShouldNotHaveIdenticalImplementations_VB() =>
             builderVB.AddPaths("MethodsShouldNotHaveIdenticalImplementations.vb").Verify();
     }

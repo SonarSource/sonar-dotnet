@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,16 +25,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class GetTypeWithIsAssignableFromTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GetTypeWithIsAssignableFrom() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\GetTypeWithIsAssignableFrom.cs", new GetTypeWithIsAssignableFrom());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GetTypeWithIsAssignableFrom_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\GetTypeWithIsAssignableFrom.CSharp9.cs", new GetTypeWithIsAssignableFrom());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GetTypeWithIsAssignableFrom_CSharp9_CodeFix() =>
             OldVerifier.VerifyCodeFix<GetTypeWithIsAssignableFromCodeFix>(
                 @"TestCases\GetTypeWithIsAssignableFrom.CSharp9.cs",
@@ -43,11 +43,11 @@ namespace SonarAnalyzer.UnitTest.Rules
                 ParseOptionsHelper.FromCSharp9,
                 OutputKind.ConsoleApplication);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GetTypeWithIsAssignableFrom_CSharp10() =>
             OldVerifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\GetTypeWithIsAssignableFrom.CSharp10.cs", new GetTypeWithIsAssignableFrom());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GetTypeWithIsAssignableFrom_CSharp10_CodeFix() =>
             OldVerifier.VerifyCodeFix<GetTypeWithIsAssignableFromCodeFix>(
                 @"TestCases\GetTypeWithIsAssignableFrom.CSharp10.cs",
@@ -57,7 +57,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 OutputKind.ConsoleApplication);
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GetTypeWithIsAssignableFrom_CodeFix() =>
             OldVerifier.VerifyCodeFix<GetTypeWithIsAssignableFromCodeFix>(
                 @"TestCases\GetTypeWithIsAssignableFrom.cs",

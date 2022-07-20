@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,28 +26,28 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class SillyBitwiseOperationTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SillyBitwiseOperation_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\SillyBitwiseOperation.cs", new CS.SillyBitwiseOperation());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SillyBitwiseOperation_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SillyBitwiseOperation.CSharp9.cs", new CS.SillyBitwiseOperation());
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SillyBitwiseOperation_CS_CodeFix() =>
             OldVerifier.VerifyCodeFix<CS.SillyBitwiseOperationCodeFix>(
                 @"TestCases\SillyBitwiseOperation.cs",
                 @"TestCases\SillyBitwiseOperation.Fixed.cs",
                 new CS.SillyBitwiseOperation());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SillyBitwiseOperation_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\SillyBitwiseOperation.vb", new VB.SillyBitwiseOperation());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SillyBitwiseOperation_VB_CodeFix() =>
             OldVerifier.VerifyCodeFix<VB.SillyBitwiseOperationCodeFix>(
                 @"TestCases\SillyBitwiseOperation.vb",

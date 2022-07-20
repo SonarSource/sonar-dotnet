@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,7 +27,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<MethodShouldBeNamedAccordingToSynchronicity>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         [DataRow("4.0.0")]
         [DataRow(Constants.NuGetLatestVersion)]
         public void MethodShouldBeNamedAccordingToSynchronicity(string tasksVersion) =>
@@ -37,13 +37,13 @@ namespace SonarAnalyzer.UnitTest.Rules
                     .Union(MetadataReferenceFacade.SystemComponentModelPrimitives))
                 .Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         [DataRow("3.0.20105.1")]
         [DataRow(Constants.NuGetLatestVersion)]
         public void MethodShouldBeNamedAccordingToSynchronicity_MVC(string mvcVersion) =>
             builder.AddPaths("MethodShouldBeNamedAccordingToSynchronicity.MVC.cs").AddReferences(NuGetMetadataReference.MicrosoftAspNetMvc(mvcVersion)).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         [DataRow("2.0.4", "2.0.3")]
         [DataRow(Constants.NuGetLatestVersion, Constants.NuGetLatestVersion)]
         public void MethodShouldBeNamedAccordingToSynchronicity_MVC_Core(string aspNetCoreMvcVersion, string aspNetCoreRoutingVersion) =>
@@ -71,12 +71,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void MethodShouldBeNamedAccordingToSynchronicity_Xunit(string testFwkVersion) =>
             builder.AddPaths("MethodShouldBeNamedAccordingToSynchronicity.Xunit.cs").AddReferences(NuGetMetadataReference.XunitFramework(testFwkVersion)).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodShouldBeNamedAccordingToSynchronicity_CSharp8() =>
             builder.AddPaths("MethodShouldBeNamedAccordingToSynchronicity.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).AddReferences(MetadataReferenceFacade.NETStandard21).Verify();
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodShouldBeNamedAccordingToSynchronicity_CSharpPreview() =>
             builder.AddPaths("MethodShouldBeNamedAccordingToSynchronicity.CSharpPreview.cs")
                 .WithOptions(ParseOptionsHelper.CSharpPreview)

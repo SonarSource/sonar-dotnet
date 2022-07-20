@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,7 +25,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class CollectionPropertiesShouldBeReadOnlyTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CollectionPropertiesShouldBeReadOnly() =>
             OldVerifier.VerifyAnalyzer(
                 @"TestCases\CollectionPropertiesShouldBeReadOnly.cs",
@@ -33,14 +33,14 @@ namespace SonarAnalyzer.UnitTest.Rules
                 MetadataReferenceFacade.SystemRuntimeSerialization);
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CollectionPropertiesShouldBeReadOnly_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(
                 @"TestCases\CollectionPropertiesShouldBeReadOnly.CSharp9.cs",
                 new CollectionPropertiesShouldBeReadOnly(),
                 MetadataReferenceFacade.SystemRuntimeSerialization);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CollectionPropertiesShouldBeReadOnly_CSharpPreview() =>
             OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(
                 @"TestCases\CollectionPropertiesShouldBeReadOnly.CSharpPreview.cs",

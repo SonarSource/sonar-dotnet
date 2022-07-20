@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,17 +26,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ClassNotInstantiatableTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ClassNotInstantiatable_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\ClassNotInstantiatable.cs", new CS.ClassNotInstantiatable());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ClassNotInstantiatable_CS_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ClassNotInstantiatable.CSharp9.cs", new CS.ClassNotInstantiatable());
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ClassNotInstantiatable_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\ClassNotInstantiatable.vb", new VB.ClassNotInstantiatable());
     }

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,15 +26,15 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class MultipleVariableDeclarationTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MultipleVariableDeclaration_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\MultipleVariableDeclaration.cs", new CS.MultipleVariableDeclaration());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MultipleVariableDeclaration_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\MultipleVariableDeclaration.vb", new VB.MultipleVariableDeclaration());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MultipleVariableDeclaration_CodeFix_CS() =>
             OldVerifier.VerifyCodeFix<CS.MultipleVariableDeclarationCodeFix>(
                 @"TestCases\MultipleVariableDeclaration.cs",
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new CS.MultipleVariableDeclaration(),
                 SonarAnalyzer.Rules.Common.MultipleVariableDeclarationCodeFixBase.Title);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MultipleVariableDeclaration_CodeFix_VB() =>
             OldVerifier.VerifyCodeFix<VB.MultipleVariableDeclarationCodeFix>(
                 @"TestCases\MultipleVariableDeclaration.vb",

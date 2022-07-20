@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Tests.Diagnostics
@@ -6,7 +6,7 @@ namespace Tests.Diagnostics
     [TestClass]
     class Program
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Foo()
         {
             var str = "";

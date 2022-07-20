@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,12 +25,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DebugAssertHasNoSideEffectsTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DebugAssertHasNoSideEffects() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\DebugAssertHasNoSideEffects.cs", new DebugAssertHasNoSideEffects());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DebugAssertHasNoSideEffects_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DebugAssertHasNoSideEffects.CSharp9.cs", new DebugAssertHasNoSideEffects());
 #endif

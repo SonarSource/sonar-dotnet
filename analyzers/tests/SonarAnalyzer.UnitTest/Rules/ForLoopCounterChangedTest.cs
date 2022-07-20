@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,12 +27,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder verifier = new VerifierBuilder<ForLoopCounterChanged>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ForLoopCounterChanged() =>
             verifier.AddPaths("ForLoopCounterChanged.cs").Verify();
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ForLoopCounterChanged_CSharp10() =>
             verifier.AddPaths("ForLoopCounterChanged.CSharp10.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp10)

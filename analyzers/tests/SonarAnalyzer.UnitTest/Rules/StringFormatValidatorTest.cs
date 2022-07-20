@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void StringFormatTypoFreeValidator(ProjectType projectType) =>
             OldVerifier.VerifyAnalyzer(@"TestCases\StringFormatTypoFreeValidator.cs", new StringFormatValidator(), TestHelper.ProjectTypeReference(projectType));
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void StringFormatEdgeCasesValidator() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\StringFormatEdgeCasesValidator.cs", new StringFormatValidator());
     }

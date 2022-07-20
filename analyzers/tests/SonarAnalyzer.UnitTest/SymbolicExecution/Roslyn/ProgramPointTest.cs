@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,7 +25,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
     [TestClass]
     public class ProgramPointTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void HasSupportedSize_Supported()
         {
             var cfg = TestHelper.CompileCfgBodyCS("var a = true;");
@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             ProgramPoint.HasSupportedSize(cfg).Should().BeTrue();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void HasSupportedSize_Unsupported()
         {
             var cfg = TestHelper.CompileCfgBodyCS($"var a = true{Enumerable.Repeat(" && true", 1020).JoinStr(null)};");
@@ -45,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             ProgramPoint.HasSupportedSize(cfg).Should().BeFalse();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Hash()
         {
             var cfg = TestHelper.CompileCfgBodyCS("var a = true;");

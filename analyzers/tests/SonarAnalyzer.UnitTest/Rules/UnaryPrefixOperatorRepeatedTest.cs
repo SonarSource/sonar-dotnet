@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,24 +26,24 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class UnaryPrefixOperatorRepeatedTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnaryPrefixOperatorRepeated() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\UnaryPrefixOperatorRepeated.cs", new CS.UnaryPrefixOperatorRepeated());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnaryPrefixOperatorRepeated_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnaryPrefixOperatorRepeated.CSharp9.cs", new CS.UnaryPrefixOperatorRepeated());
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnaryPrefixOperatorRepeated_CodeFix() =>
             OldVerifier.VerifyCodeFix<CS.UnaryPrefixOperatorRepeatedCodeFix>(
                 @"TestCases\UnaryPrefixOperatorRepeated.cs",
                 @"TestCases\UnaryPrefixOperatorRepeated.Fixed.cs",
                 new CS.UnaryPrefixOperatorRepeated());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnaryPrefixOperatorRepeated_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\UnaryPrefixOperatorRepeated.vb", new VB.UnaryPrefixOperatorRepeated());
     }

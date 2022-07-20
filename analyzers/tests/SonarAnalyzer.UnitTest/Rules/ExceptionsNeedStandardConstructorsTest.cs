@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,11 +25,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ExceptionsNeedStandardConstructorsTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ExceptionsNeedStandardConstructors() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\ExceptionsNeedStandardConstructors.cs", new ExceptionsNeedStandardConstructors());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ExceptionsNeedStandardConstructors_InvalidCode() =>
             OldVerifier.VerifyCSharpAnalyzer(@"
 public class  : Exception

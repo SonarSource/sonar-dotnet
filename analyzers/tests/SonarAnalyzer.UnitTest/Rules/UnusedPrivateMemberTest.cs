@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,7 +28,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<UnusedPrivateMember>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnusedPrivateMember_DebuggerDisplay_Attribute() =>
             builder.AddSnippet(@"
 // https://github.com/SonarSource/sonar-dotnet/issues/1195
@@ -49,7 +49,7 @@ public class MethodUsages
     }
 }").Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnusedPrivateMember_Members_With_Attributes_Are_Not_Removable() =>
             builder.AddSnippet(@"
 using System;
@@ -68,7 +68,7 @@ public class FieldUsages
     private class Class1 { }
 }").Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnusedPrivateMember_Assembly_Level_Attributes() =>
             builder.AddSnippet(@"
 [assembly: System.Reflection.AssemblyCompany(Foo.Constants.AppCompany)]
@@ -80,11 +80,11 @@ public static class Foo
     }
 }").Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnusedPrivateMemberWithPartialClasses() =>
             builder.AddPaths("UnusedPrivateMember.part1.cs", "UnusedPrivateMember.part2.cs").Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnusedPrivateMember_Methods_EventHandler() =>
             // Event handler methods are not reported because in WPF an event handler
             // could be added through XAML and no warning will be generated if the
@@ -101,7 +101,7 @@ public partial class PartialClass
     private void Handler(object sender, EventArgs e) { } // intentional False Negative
 }").Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnusedPrivateMember_Unity3D_Ignored() =>
             builder.AddSnippet(@"
 // https://github.com/SonarSource/sonar-dotnet/issues/159
@@ -137,7 +137,7 @@ namespace UnityEditor
     public class AssetModificationProcessor { }
 }").Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EntityFrameworkMigration_Ignored() =>
             builder.AddSnippet(@"
 namespace EntityFrameworkMigrations
@@ -158,11 +158,11 @@ namespace EntityFrameworkMigrations
         public void UnusedPrivateMember(ProjectType projectType) =>
             builder.AddPaths("UnusedPrivateMember.cs").AddReferences(TestHelper.ProjectTypeReference(projectType)).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnusedPrivateMember_FromCSharp7() =>
             builder.AddPaths("UnusedPrivateMember.CSharp7.cs").WithOptions(ParseOptionsHelper.FromCSharp7).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnusedPrivateMember_FromCSharp8() =>
             builder.AddPaths("UnusedPrivateMember.CSharp8.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
@@ -172,36 +172,36 @@ namespace EntityFrameworkMigrations
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnusedPrivateMember_FromCSharp9() =>
             builder.AddPaths("UnusedPrivateMember.CSharp9.cs", "UnusedPrivateMember.CSharp9.Second.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnusedPrivateMember_FromCSharp9_TopLevelStatements() =>
             builder.AddPaths("UnusedPrivateMember.CSharp9.TopLevelStatements.cs").WithTopLevelStatements().Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnusedPrivateMember_FromCSharp10() =>
             builder.AddPaths("UnusedPrivateMember.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnusedPrivateMember_FromCSharpPreview() =>
             builder.AddPaths("UnusedPrivateMember.CSharpPreview.cs").WithOptions(ParseOptionsHelper.CSharpPreview).Verify();
 
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnusedPrivateMember_CodeFix() =>
             builder.AddPaths("UnusedPrivateMember.cs")
                 .WithCodeFix<UnusedPrivateMemberCodeFix>()
                 .WithCodeFixedPaths("UnusedPrivateMember.Fixed.cs", "UnusedPrivateMember.Fixed.Batch.cs")
                 .VerifyCodeFix();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnusedPrivateMember_UsedInGeneratedFile() =>
             builder.AddPaths("UnusedPrivateMember.CalledFromGenerated.cs", "UnusedPrivateMember.Generated.cs").Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnusedPrivateMember_Performance() =>
             // Once the NuGet packages are downloaded, the time to execute the analyzer on the given file is
             // about ~1 sec. It was reduced from ~11 min by skipping Guids when processing ObjectCreationExpression.

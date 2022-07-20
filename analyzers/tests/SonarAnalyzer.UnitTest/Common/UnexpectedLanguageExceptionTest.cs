@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,11 +25,11 @@ namespace SonarAnalyzer.UnitTest.Common
     [TestClass]
     public class UnexpectedLanguageExceptionTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Message_CS() =>
             new UnexpectedLanguageException(AnalyzerLanguage.CSharp).Message.Should().Be("Unexpected language: C#");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Message_VB() =>
             new UnexpectedLanguageException(AnalyzerLanguage.VisualBasic).Message.Should().Be("Unexpected language: Visual Basic");
     }

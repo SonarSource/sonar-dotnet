@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,17 +26,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class PropertyWriteOnlyTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PropertyWriteOnly_CSharp() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\PropertyWriteOnly.cs", new CS.PropertyWriteOnly());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PropertyWriteOnly_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PropertyWriteOnly.CSharp9.cs", new CS.PropertyWriteOnly());
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PropertyWriteOnly_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\PropertyWriteOnly.vb", new VB.PropertyWriteOnly());
     }

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -38,11 +38,11 @@ namespace SonarAnalyzer.UnitTest.Rules
                                                      .WithBasePath(@"Hotspots")
                                                      .AddReferences(GetAdditionalReferences());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RequestsWithExcessiveLength_CS() =>
             builderCS.AddPaths(@"RequestsWithExcessiveLength.cs").Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RequestsWithExcessiveLength_CS_CustomValues() =>
             new VerifierBuilder()
                 .AddAnalyzer(() => new CS.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled) { FileUploadSizeLimit = 42 })
@@ -51,15 +51,15 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Verify();
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RequestsWithExcessiveLength_Csharp9() =>
             builderCS.AddPaths(@"RequestsWithExcessiveLength.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RequestsWithExcessiveLength_Csharp10() =>
             builderCS.AddPaths(@"RequestsWithExcessiveLength.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RequestsWithExcessiveLength_CsharpPreview() =>
             builderCS
                 .AddPaths(@"RequestsWithExcessiveLength.CSharp.Preview.cs")
@@ -67,11 +67,11 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithOptions(ParseOptionsHelper.CSharpPreview).Verify();
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RequestsWithExcessiveLength_VB() =>
             builderVB.AddPaths(@"RequestsWithExcessiveLength.vb").Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RequestsWithExcessiveLength_VB_CustomValues() =>
             new VerifierBuilder()
                 .AddAnalyzer(() => new VB.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled) { FileUploadSizeLimit = 42 })
@@ -103,7 +103,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RequestsWithExcessiveLength_CS_CorruptAndNonExistingWebConfigs_ShouldNotFail()
         {
             const string root = @"TestCases\WebConfig\RequestsWithExcessiveLength\Corrupt";

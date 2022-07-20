@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,7 +25,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class StaticFieldWrittenFromInstanceMemberTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void StaticFieldWrittenFromInstanceMember() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\StaticFieldWrittenFromInstanceMember.cs",
                                     new StaticFieldWrittenFromInstanceMember(),
@@ -33,11 +33,11 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     MetadataReferenceFacade.NETStandard21);
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void StaticFieldWrittenFromInstanceMember_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\StaticFieldWrittenFromInstanceMember.CSharp9.cs", new StaticFieldWrittenFromInstanceMember());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void StaticFieldWrittenFromInstanceMember_CSharp10() =>
             OldVerifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\StaticFieldWrittenFromInstanceMember.CSharp10.cs", new StaticFieldWrittenFromInstanceMember());
 #endif

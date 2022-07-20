@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,17 +27,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ReadingStandardInputTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ReadingStandardInput_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\ReadingStandardInput.cs", new CS.ReadingStandardInput(AnalyzerConfiguration.AlwaysEnabled));
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ReadingStandardInput_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\Hotspots\ReadingStandardInput.CSharp9.cs", new CS.ReadingStandardInput(AnalyzerConfiguration.AlwaysEnabled));
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ReadingStandardInput_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\ReadingStandardInput.vb", new VB.ReadingStandardInput(AnalyzerConfiguration.AlwaysEnabled));
     }

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -52,7 +52,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             }
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Type_DerivesOrImplementsAny()
         {
             var baseType = new KnownType("NS.Base");
@@ -68,7 +68,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             derived1Type.DerivesOrImplementsAny(baseTypes).Should().BeTrue();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Type_Is()
         {
             var baseKnownType = new KnownType("NS.Base");
@@ -80,7 +80,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             baseType.IsAny(baseKnownTypes).Should().BeTrue();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Type_GetSymbolType_Alias()
         {
             var aliasUsing = root.DescendantNodesAndSelf().OfType<UsingDirectiveSyntax>().FirstOrDefault(x => x.Alias is not null);

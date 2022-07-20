@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,17 +27,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<AssignmentInsideSubExpression>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AssignmentInsideSubExpression() =>
             builder.AddPaths("AssignmentInsideSubExpression.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AssignmentInsideSubExpression_CSharp9() =>
             builder.AddPaths("AssignmentInsideSubExpression.CSharp9.cs").WithTopLevelStatements().Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AssignmentInsideSubExpression_CSharp10() =>
             builder.AddPaths("AssignmentInsideSubExpression.CSharp10.cs").WithTopLevelStatements().WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 

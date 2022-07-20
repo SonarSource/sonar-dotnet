@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,7 +27,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class UsingRegularExpressionsTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UsingRegularExpressions_CS() =>
             OldVerifier.VerifyAnalyzer(
                 @"TestCases\Hotspots\UsingRegularExpressions.cs",
@@ -35,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 MetadataReferenceFacade.RegularExpressions);
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UsingRegularExpressions_CSharp10() =>
             OldVerifier.VerifyAnalyzerFromCSharp10Library(
                 @"TestCases\Hotspots\UsingRegularExpressions.CSharp10.cs",
@@ -43,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 MetadataReferenceFacade.RegularExpressions);
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UsingRegularExpressions_VB() =>
             OldVerifier.VerifyAnalyzer(
                 @"TestCases\Hotspots\UsingRegularExpressions.vb",

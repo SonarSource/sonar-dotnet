@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,13 +26,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<NonDerivedPrivateClassesShouldBeSealed>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NonDerivedPrivateClassesShouldBeSealed_CS() =>
             builder.AddPaths("NonDerivedPrivateClassesShouldBeSealed.cs", "NonDerivedPrivateClassesShouldBeSealed_PartialClass.cs").Verify();
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NonDerivedPrivateClassesShouldBeSealed_CSharp9() =>
              builder.AddPaths("NonDerivedPrivateClassesShouldBeSealed.Csharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 

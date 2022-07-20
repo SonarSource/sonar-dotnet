@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,7 +27,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<DoNotCallAssemblyLoadInvalidMethods>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotCallAssemblyLoadInvalidMethods() =>
             builder.AddPaths("DoNotCallAssemblyLoadInvalidMethods.cs")
                 .AddReferences(MetadataReferenceFacade.SystemSecurityPermissions)
@@ -35,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotCallAssemblyLoadInvalidMethods_CSharp9() =>
             builder.AddPaths("DoNotCallAssemblyLoadInvalidMethods.CSharp9.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp9)
@@ -47,7 +47,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NETFRAMEWORK // The overloads with Evidence are obsolete on .Net Framework 4.8 and not available on .Net Core
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotCallAssemblyLoadInvalidMethods_EvidenceParameter() =>
             builder.AddPaths("DoNotCallAssemblyLoadInvalidMethods.Evidence.cs")
                 .Verify();

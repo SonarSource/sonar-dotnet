@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,12 +25,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DoNotCopyArraysInPropertiesTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotCopyArraysInProperties() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\DoNotCopyArraysInProperties.cs", new DoNotCopyArraysInProperties());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotCopyArraysInProperties_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DoNotCopyArraysInProperties.CSharp9.cs", new DoNotCopyArraysInProperties());
 #endif

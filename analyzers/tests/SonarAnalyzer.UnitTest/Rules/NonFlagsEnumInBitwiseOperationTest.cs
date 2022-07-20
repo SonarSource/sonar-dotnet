@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,13 +25,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class NonFlagsEnumInBitwiseOperationTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NonFlagsEnumInBitwiseOperation() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\NonFlagsEnumInBitwiseOperation.cs",
                                     new NonFlagsEnumInBitwiseOperation(),
                                     MetadataReferenceFacade.SystemComponentModelPrimitives);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NonFlagsEnumInBitwiseOperation_CodeFix() =>
             OldVerifier.VerifyCodeFix<NonFlagsEnumInBitwiseOperationCodeFix>(
                 @"TestCases\NonFlagsEnumInBitwiseOperation.cs",

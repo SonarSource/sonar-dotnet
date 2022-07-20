@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,7 +28,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
     {
         private static readonly DiagnosticDescriptor[] OnlyDiagnostics = new[] { InitializationVectorShouldBeRandom.S3329 };
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void InitializationVectorShouldBeRandom_CS() =>
             OldVerifier.VerifyAnalyzer(
                 @"TestCases\SymbolicExecution\Sonar\InitializationVectorShouldBeRandom.cs",
@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
                 MetadataReferenceFacade.SystemSecurityCryptography,
                 onlyDiagnostics: OnlyDiagnostics);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void InitializationVectorShouldBeRandom_DoesNotRaiseIssuesForTestProject() =>
             OldVerifier.VerifyNoIssueReportedInTest(
                 @"TestCases\SymbolicExecution\Sonar\InitializationVectorShouldBeRandom.cs",
@@ -48,7 +48,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void InitializationVectorShouldBeRandom_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(
                 @"TestCases\SymbolicExecution\Sonar\InitializationVectorShouldBeRandom.CSharp9.cs",
@@ -56,7 +56,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
                 MetadataReferenceFacade.SystemSecurityCryptography,
                 onlyDiagnostics: OnlyDiagnostics);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void InitializationVectorShouldBeRandom_CSharp10() =>
             OldVerifier.VerifyAnalyzerFromCSharp10Library(
                 @"TestCases\SymbolicExecution\Sonar\InitializationVectorShouldBeRandom.CSharp10.cs",

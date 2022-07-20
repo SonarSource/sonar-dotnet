@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,11 +27,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<RedundantModifier>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundantModifier() =>
             builder.AddPaths("RedundantModifier.cs").Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundantModifier_CodeFix() =>
             builder.AddPaths("RedundantModifier.cs")
                 .WithCodeFix<RedundantModifierCodeFix>()
@@ -40,11 +40,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundantModifier_CSharp9() =>
             builder.AddPaths("RedundantModifier.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundantModifier_CodeFix_CSharp9() =>
             builder.AddPaths("RedundantModifier.CSharp9.cs")
                 .WithCodeFix<RedundantModifierCodeFix>()
@@ -52,11 +52,11 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithOptions(ParseOptionsHelper.FromCSharp9)
                 .VerifyCodeFix();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundantModifier_CSharp10() =>
             builder.AddPaths("RedundantModifier.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundantModifier_CodeFix_CSharp10() =>
             builder.AddPaths("RedundantModifier.CSharp10.cs")
                 .WithCodeFix<RedundantModifierCodeFix>()

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -48,7 +48,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
     End Function
 End Class";
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GetName_CS()
         {
             var nodes = Parse_CS(CsSourceInputToString);
@@ -58,7 +58,7 @@ End Class";
             nodes.OfType<CS.InvocationExpressionSyntax>().Single().GetName().Should().BeEmpty();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GetName_VB()
         {
             var nodes = Parse_VB(VbSourceInputToString);
@@ -74,7 +74,7 @@ End Class";
             nodes.OfType<VB.ReturnStatementSyntax>().Single().GetName().Should().BeEmpty();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NameIs_CS()
         {
             var toString = Parse_CS(CsSourceInputToString).OfType<CS.MemberAccessExpressionSyntax>().Single();
@@ -86,7 +86,7 @@ End Class";
             toString.NameIs(null).Should().BeFalse();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NameIs_VB()
         {
             var toString = Parse_VB(VbSourceInputToString).OfType<VB.MemberAccessExpressionSyntax>().Single();
@@ -98,7 +98,7 @@ End Class";
             toString.NameIs(null).Should().BeFalse();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IsAssignmentToTuple_IsTrue()
         {
             const string code = @"
@@ -114,7 +114,7 @@ public class Sample
             argument.IsInTupleAssignmentTarget().Should().BeTrue();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IsAssignmentToTuple_IsFalse()
         {
             const string code = @"
@@ -194,11 +194,11 @@ public class C
             }
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IsNullLiteral_Null_CS() =>
             CSharpSyntaxHelper.IsNullLiteral(null).Should().BeFalse();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IsNothingLiteral_Null_VB() =>
             VisualBasicSyntaxHelper.IsNothingLiteral(null).Should().BeFalse();
 

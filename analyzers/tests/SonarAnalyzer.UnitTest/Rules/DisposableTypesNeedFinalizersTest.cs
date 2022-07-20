@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,19 +27,19 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<DisposableTypesNeedFinalizers>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DisposableTypesNeedFinalizers() =>
             builder.AddPaths("DisposableTypesNeedFinalizers.cs").Verify();
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DisposableTypesNeedFinalizers_CSharp9() =>
             builder.AddPaths("DisposableTypesNeedFinalizers.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DisposableTypesNeedFinalizers_InvalidCode() =>
             builder.AddSnippet(@"
 public class Foo_05 : IDisposable

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,17 +27,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder verifier = new VerifierBuilder<LiteralsShouldNotBePassedAsLocalizedParameters>().AddReferences(MetadataReferenceFacade.SystemComponentModelPrimitives);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void LiteralsShouldNotBePassedAsLocalizedParameters() =>
             verifier.AddPaths("LiteralsShouldNotBePassedAsLocalizedParameters.cs").Verify();
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void LiteralsShouldNotBePassedAsLocalizedParameters_CSharp9() =>
             verifier.AddPaths("LiteralsShouldNotBePassedAsLocalizedParameters.CSharp9.cs").WithTopLevelStatements().Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void LiteralsShouldNotBePassedAsLocalizedParameters_CSharp10() =>
             verifier.AddPaths("LiteralsShouldNotBePassedAsLocalizedParameters.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 

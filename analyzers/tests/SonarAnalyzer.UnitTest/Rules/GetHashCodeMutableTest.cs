@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,24 +25,24 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class GetHashCodeMutableTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GetHashCodeMutable() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\GetHashCodeMutable.cs", new GetHashCodeMutable());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GetHashCodeMutable_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\GetHashCodeMutable.CSharp9.cs", new GetHashCodeMutable());
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GetHashCodeMutable_CodeFix() =>
             OldVerifier.VerifyCodeFix<GetHashCodeMutableCodeFix>(
                 @"TestCases\GetHashCodeMutable.cs",
                 @"TestCases\GetHashCodeMutable.Fixed.cs",
                 new GetHashCodeMutable());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GetHashCodeMutable_InvalidCode() =>
             OldVerifier.VerifyCSharpAnalyzer(@"class
 {

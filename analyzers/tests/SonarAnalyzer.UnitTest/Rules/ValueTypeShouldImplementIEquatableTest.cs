@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,13 +27,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<ValueTypeShouldImplementIEquatable>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ValueTypeShouldImplementIEquatable() =>
             builder.AddPaths("ValueTypeShouldImplementIEquatable.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ValueTypeShouldImplementIEquatable_CSharp10() =>
             builder.AddPaths("ValueTypeShouldImplementIEquatable.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,17 +27,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<MutableFieldsShouldNotBePublicReadonly>().AddReferences(NuGetMetadataReference.SystemCollectionsImmutable("1.3.0"));
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PublicMutableFieldsShouldNotBeReadonly() =>
             builder.AddPaths("MutableFieldsShouldNotBePublicReadonly.cs").Verify();
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PublicMutableFieldsShouldNotBeReadonly_CSharp9() =>
             builder.AddPaths("MutableFieldsShouldNotBePublicReadonly.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PublicMutableFieldsShouldNotBeReadonly_CSharp10() =>
             builder.AddPaths("MutableFieldsShouldNotBePublicReadonly.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 

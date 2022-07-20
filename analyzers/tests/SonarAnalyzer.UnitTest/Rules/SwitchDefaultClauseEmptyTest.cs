@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,11 +25,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class SwitchDefaultClauseEmptyTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SwitchDefaultClauseEmpty() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\SwitchDefaultClauseEmpty.cs", new SwitchDefaultClauseEmpty());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SwitchDefaultClauseEmpty_CodeFix() =>
             OldVerifier.VerifyCodeFix<SwitchDefaultClauseEmptyCodeFix>(
                 @"TestCases\SwitchDefaultClauseEmpty.cs",

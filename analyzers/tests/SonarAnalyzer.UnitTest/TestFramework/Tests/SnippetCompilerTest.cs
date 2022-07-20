@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,7 +25,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
     [TestClass]
     public class SnippetCompilerTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AllowsUnsafe_CS()
         {
             const string code = @"
@@ -45,7 +45,7 @@ public class Sample
             sut.SemanticModel.Should().NotBeNull();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ImportsDefaultNamespaces_VB()
         {
             const string code = @"
@@ -59,7 +59,7 @@ End Class";
             sut.SemanticModel.Should().NotBeNull();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IgnoreErrors_CreatesCompilation()
         {
             const string code = @"
@@ -73,7 +73,7 @@ public class Sample
             sut.SemanticModel.Should().NotBeNull();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ValidCode_DoNotIgnoreErrors_CreatesCompilation()
         {
             const string code = @"
@@ -88,7 +88,7 @@ public class Sample
             sut.SemanticModel.Should().NotBeNull();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CodeWithWarning_DoNotIgnoreErrors_CreatesCompilation()
         {
             const string code = @"
@@ -108,7 +108,7 @@ public class Sample
             sut.SemanticModel.Should().NotBeNull();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void InvalidCode_DoNotIgnoreErrors_Throws()
         {
             const string code = @"

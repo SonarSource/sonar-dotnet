@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,7 +27,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
     [TestClass]
     public class RemovableDeclarationCollectorTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GetRemovableFieldLikeDeclarations_SearchesInNestedTypes_VB()
         {
             const string code = @"
@@ -55,7 +55,7 @@ End Class";
             ret.Select(x => x.Symbol.Name).Should().BeEquivalentTo("CompliantA", "CompliantB", "CompliantC", "FieldInNestedClass", "FieldInNestedStruct");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GetRemovableDeclarations_VB()
         {
             const string code = @"
@@ -111,7 +111,7 @@ End Class";
             ret.Single().Symbol.Name.Should().Be("RemovableMethod");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IsRemovable_Null_ReturnsFalse() =>
             VisualBasicRemovableDeclarationCollector.IsRemovable(null, CodeAnalysisAccessibility.Public).Should().BeFalse();
 

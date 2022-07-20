@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,7 +27,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<SetLocaleForDataTypes>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SetLocaleForDataTypes() =>
             builder.AddPaths("SetLocaleForDataTypes.cs")
                 .AddReferences(MetadataReferenceFacade.SystemData)
@@ -35,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SetLocaleForDataTypes_CSharp9() =>
             builder.AddPaths("SetLocaleForDataTypes.CSharp9.cs")
                 .WithTopLevelStatements()
@@ -43,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithOptions(ParseOptionsHelper.FromCSharp9)
                 .Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SetLocaleForDataTypes_CSharp10() =>
             builder.AddPaths("SetLocaleForDataTypes.CSharp10.cs")
                 .WithTopLevelStatements()

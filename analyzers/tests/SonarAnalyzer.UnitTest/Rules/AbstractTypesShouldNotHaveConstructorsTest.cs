@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,16 +25,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class AbstractTypesShouldNotHaveConstructorsTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AbstractTypesShouldNotHaveConstructors() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\AbstractTypesShouldNotHaveConstructors.cs", new AbstractTypesShouldNotHaveConstructors());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AbstractTypesShouldNotHaveConstructors_Records() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\AbstractTypesShouldNotHaveConstructors.Records.cs", new AbstractTypesShouldNotHaveConstructors());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AbstractTypesShouldNotHaveConstructors_TopLevelStatements() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\AbstractTypesShouldNotHaveConstructors.TopLevelStatements.cs", new AbstractTypesShouldNotHaveConstructors());
 #endif

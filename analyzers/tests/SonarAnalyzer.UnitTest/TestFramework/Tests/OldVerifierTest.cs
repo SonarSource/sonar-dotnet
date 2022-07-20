@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,7 +28,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
     [TestClass]
     public class OldVerifierTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void VerifyCodeFix_WithDuplicateIssues()
         {
             const string filename = @"TestCases\VerifyCodeFix.Empty.cs";

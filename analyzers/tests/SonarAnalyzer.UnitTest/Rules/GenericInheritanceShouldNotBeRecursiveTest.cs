@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,19 +29,19 @@ namespace SonarAnalyzer.UnitTest.Rules
         private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.GenericInheritanceShouldNotBeRecursive>();
         private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.GenericInheritanceShouldNotBeRecursive>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GenericInheritanceShouldNotBeRecursive_CS() =>
             builderCS.AddPaths("GenericInheritanceShouldNotBeRecursive.cs").Verify();
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GenericInheritanceShouldNotBeRecursive_CSharp9() =>
             builderCS.AddPaths("GenericInheritanceShouldNotBeRecursive.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GenericInheritanceShouldNotBeRecursive_VB() =>
             builderVB.AddPaths("GenericInheritanceShouldNotBeRecursive.vb").Verify();
     }

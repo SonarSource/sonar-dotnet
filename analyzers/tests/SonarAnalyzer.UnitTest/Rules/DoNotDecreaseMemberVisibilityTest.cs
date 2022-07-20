@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,7 +27,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<DoNotDecreaseMemberVisibility>().WithConcurrentAnalysis(false);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotDecreaseMemberVisibility() =>
             builder.AddPaths("DoNotDecreaseMemberVisibility.cs", "DoNotDecreaseMemberVisibility2.cs")
                 .AddReferences(MetadataReferenceFacade.NETStandard21)
@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotDecreaseMemberVisibility_CSharp9() =>
             builder.AddPaths("DoNotDecreaseMemberVisibility.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 

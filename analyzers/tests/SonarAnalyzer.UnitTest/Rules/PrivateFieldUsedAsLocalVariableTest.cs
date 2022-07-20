@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,20 +27,20 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<PrivateFieldUsedAsLocalVariable>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PrivateFieldUsedAsLocalVariable() =>
             builder.AddPaths("PrivateFieldUsedAsLocalVariable.cs")
                 .Verify();
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PrivateFieldUsedAsLocalVariable_CSharp9() =>
             builder.AddPaths("PrivateFieldUsedAsLocalVariable.CSharp9.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp9)
                 .Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PrivateFieldUsedAsLocalVariable_CSharp10() =>
             builder.AddPaths("PrivateFieldUsedAsLocalVariable.CSharp10.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp10)

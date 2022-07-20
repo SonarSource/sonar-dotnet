@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,25 +25,25 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class RedundantParenthesesObjectCreationTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundantParenthesesObjectCreation() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\RedundantParenthesesObjectCreation.cs", new RedundantParenthesesObjectsCreation());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundantParenthesesObjectCreation_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RedundantParenthesesObjectCreation.CSharp9.cs", new RedundantParenthesesObjectsCreation());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundantParenthesesObjectCreation_CSharp10() =>
             OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\RedundantParenthesesObjectCreation.CSharp10.cs", new RedundantParenthesesObjectsCreation());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundantParenthesesObjectCreation_CSharpPreview() =>
             OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\RedundantParenthesesObjectCreation.CSharp.Preview.cs", new RedundantParenthesesObjectsCreation());
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundantParenthesesObjectCreation_CodeFix() =>
             OldVerifier.VerifyCodeFix<RedundantParenthesesCodeFix>(
                 @"TestCases\RedundantParenthesesObjectCreation.cs",

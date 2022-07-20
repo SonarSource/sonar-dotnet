@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,16 +27,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder verifier = new VerifierBuilder<MemberOverrideCallsBaseMember>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MemberOverrideCallsBaseMember() =>
             verifier.AddPaths("MemberOverrideCallsBaseMember.cs").Verify();
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MemberOverrideCallsBaseMember_CSharp10() =>
             verifier.AddPaths("MemberOverrideCallsBaseMember.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MemberOverrideCallsBaseMember_CSharp10_CodeFix() => verifier
             .AddPaths("MemberOverrideCallsBaseMember.CSharp10.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp10)
@@ -45,14 +45,14 @@ namespace SonarAnalyzer.UnitTest.Rules
             .VerifyCodeFix();
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MemberOverrideCallsBaseMember_CodeFix() => verifier
             .AddPaths("MemberOverrideCallsBaseMember.cs")
             .WithCodeFix<MemberOverrideCallsBaseMemberCodeFix>()
             .WithCodeFixedPaths("MemberOverrideCallsBaseMember.Fixed.cs")
             .VerifyCodeFix();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MemberOverrideCallsBaseMember_ToString()
         {
             var toString = "public override string ToString() => base.ToString();";

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private static readonly DiagnosticDescriptor[] OnlyDiagnostics = new[] { HashesShouldHaveUnpredictableSalt.S2053 };
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void HashesShouldHaveUnpredictableSalt_CS() =>
             OldVerifier.VerifyAnalyzer(
                 @"TestCases\SymbolicExecution\Sonar\HashesShouldHaveUnpredictableSalt.cs",
@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 MetadataReferenceFacade.SystemSecurityCryptography,
                 onlyDiagnostics: OnlyDiagnostics);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void HashesShouldHaveUnpredictableSalt_DoesNotRaiseIssuesForTestProject() =>
             OldVerifier.VerifyNoIssueReportedInTest(
                 @"TestCases\SymbolicExecution\Sonar\HashesShouldHaveUnpredictableSalt.cs",
@@ -50,7 +50,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void HashesShouldHaveUnpredictableSalt_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(
                 @"TestCases\SymbolicExecution\Sonar\HashesShouldHaveUnpredictableSalt.CSharp9.cs",
@@ -58,7 +58,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 MetadataReferenceFacade.SystemSecurityCryptography,
                 onlyDiagnostics: OnlyDiagnostics);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void HashesShouldHaveUnpredictableSalt_CSharp10() =>
             OldVerifier.VerifyAnalyzerFromCSharp10Library(
                 @"TestCases\SymbolicExecution\Sonar\HashesShouldHaveUnpredictableSalt.CSharp10.cs",
@@ -68,7 +68,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void HashesShouldHaveUnpredictableSalt_LocationContext_Equals()
         {
             var tree = SyntaxFactory.ParseSyntaxTree("public class Test {}");

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,12 +25,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class UseParamsForVariableArgumentsTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UseParamsForVariableArguments() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\UseParamsForVariableArguments.cs", new UseParamsForVariableArguments());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UseParamsForVariableArguments_CSharpPreview() =>
             OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\UseParamsForVariableArguments.CSharpPreview.cs", new UseParamsForVariableArguments());
 #endif

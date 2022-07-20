@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,25 +26,25 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class JwtSignedTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void JwtSigned_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\JwtSigned.cs", new CS.JwtSigned(), NuGetMetadataReference.JWT("6.1.0"));
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void JwtSigned_JWTDecoderExtensions_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\JwtSigned.Extensions.cs", new CS.JwtSigned(), NuGetMetadataReference.JWT("7.3.1"));
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void JwtSigned_CS_FromCSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\JwtSigned.CSharp9.cs", new CS.JwtSigned(), NuGetMetadataReference.JWT("6.1.0"));
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void JwtSigned_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\JwtSigned.vb", new VB.JwtSigned(), NuGetMetadataReference.JWT("6.1.0"));
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void JwtSigned_JWTDecoderExtensions_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\JwtSigned.Extensions.vb", new VB.JwtSigned(), NuGetMetadataReference.JWT("7.3.1"));
     }

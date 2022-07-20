@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,7 +25,7 @@ namespace SonarAnalyzer.UnitTest.Common
     [TestClass]
     public class AnalyzerAdditionalFileTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AnalyzerAdditionalFile_GetText()
         {
             var additionalFile = new AnalyzerAdditionalFile(@"Common\Resources\input.txt");

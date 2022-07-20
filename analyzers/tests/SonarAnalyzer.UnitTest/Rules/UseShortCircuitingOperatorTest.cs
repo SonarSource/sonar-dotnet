@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,28 +26,28 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class UseShortCircuitingOperatorTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UseShortCircuitingOperators_VisualBasic() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\UseShortCircuitingOperator.vb", new VB.UseShortCircuitingOperator());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UseShortCircuitingOperators_VisualBasic_CodeFix() =>
             OldVerifier.VerifyCodeFix<VB.UseShortCircuitingOperatorCodeFix>(
                 @"TestCases\UseShortCircuitingOperator.vb",
                 @"TestCases\UseShortCircuitingOperator.Fixed.vb",
                 new VB.UseShortCircuitingOperator());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UseShortCircuitingOperators_CSharp() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\UseShortCircuitingOperator.cs", new CS.UseShortCircuitingOperator());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UseShortCircuitingOperators_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UseShortCircuitingOperator.CSharp9.cs",
                                                       new CS.UseShortCircuitingOperator());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UseShortCircuitingOperators_CSharp9_CodeFix() =>
             OldVerifier.VerifyCodeFix<CS.UseShortCircuitingOperatorCodeFix>(
                 @"TestCases\UseShortCircuitingOperator.CSharp9.cs",
@@ -56,7 +56,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 ParseOptionsHelper.FromCSharp9);
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UseShortCircuitingOperators_CSharp_CodeFix() =>
             OldVerifier.VerifyCodeFix<CS.UseShortCircuitingOperatorCodeFix>(
                 @"TestCases\UseShortCircuitingOperator.cs",

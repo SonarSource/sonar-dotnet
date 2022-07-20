@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,15 +25,15 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DoNotWriteToStandardOutputTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotWriteToStandardOutput() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\ConsoleLogging.cs", new DoNotWriteToStandardOutput());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotWriteToStandardOutput_ConditionalDirectives1() =>
             OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\ConsoleLogging_Conditionals1.cs", new DoNotWriteToStandardOutput());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotWriteToStandardOutput_ConditionalDirectives2() =>
             OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\ConsoleLogging_Conditionals2.cs", new DoNotWriteToStandardOutput());
     }

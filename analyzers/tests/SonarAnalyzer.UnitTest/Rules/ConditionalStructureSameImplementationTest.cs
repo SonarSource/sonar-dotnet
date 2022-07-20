@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,19 +29,19 @@ namespace SonarAnalyzer.UnitTest.Rules
         private readonly VerifierBuilder csBuilder = new VerifierBuilder<CS.ConditionalStructureSameImplementation>();
         private readonly VerifierBuilder vbBuilder = new VerifierBuilder<VB.ConditionalStructureSameImplementation>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ConditionalStructureSameImplementation_If_CSharp() =>
             csBuilder.AddPaths("ConditionalStructureSameImplementation_If.cs").Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ConditionalStructureSameImplementation_Switch_CSharp() =>
             csBuilder.AddPaths("ConditionalStructureSameImplementation_Switch.cs").Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ConditionalStructureSameImplementation_If_VisualBasic() =>
             vbBuilder.AddPaths("ConditionalStructureSameImplementation_If.vb").Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ConditionalStructureSameImplementation_Switch_VisualBasic() =>
             vbBuilder.AddPaths("ConditionalStructureSameImplementation_Switch.vb").Verify();
     }

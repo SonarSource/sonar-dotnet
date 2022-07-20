@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,12 +25,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class UseGenericWithRefParametersTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UseGenericWithRefParameters() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\UseGenericWithRefParameters.cs",
                 new UseGenericWithRefParameters());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UseGenericWithRefParameters_InvalidCode() =>
             OldVerifier.VerifyCSharpAnalyzer(@"
 public void (ref object o1)

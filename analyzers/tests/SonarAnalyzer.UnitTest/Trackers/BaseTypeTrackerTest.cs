@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -36,7 +36,7 @@ Public Class Sample
     Inherits System.Exception
 End Class";
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MatchSubclassesOf_CS()
         {
             var tracker = new CSharpBaseTypeTracker();
@@ -52,7 +52,7 @@ End Class";
             tracker.MatchSubclassesOf(KnownType.System_Attribute)(context).Should().BeFalse();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MatchSubclassesOf_VB()
         {
             var tracker = new VisualBasicBaseTypeTracker();

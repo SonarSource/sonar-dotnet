@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,17 +27,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<StaticFieldWrittenFromInstanceConstructor>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void StaticFieldWrittenFromInstanceConstructor() =>
             builder.AddPaths("StaticFieldWrittenFromInstanceConstructor.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void StaticFieldWrittenFromInstanceConstructor_CSharp9() =>
             builder.AddPaths("StaticFieldWrittenFromInstanceConstructor.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void StaticFieldWrittenFromInstanceConstructor_CSharp10() =>
             builder.AddPaths("StaticFieldWrittenFromInstanceConstructor.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 

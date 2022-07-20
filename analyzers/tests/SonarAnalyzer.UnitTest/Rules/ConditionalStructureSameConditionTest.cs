@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,24 +26,24 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ConditionalStructureSameConditionTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ConditionalStructureSameCondition_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\ConditionalStructureSameCondition.cs",
                 new CS.ConditionalStructureSameCondition());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ConditionalStructureSameCondition_CS_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ConditionalStructureSameCondition.CSharp9.cs",
                 new CS.ConditionalStructureSameCondition());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ConditionalStructureSameCondition_CS_CSharp10() =>
             OldVerifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\ConditionalStructureSameCondition.CSharp10.cs",
                 new CS.ConditionalStructureSameCondition());
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ConditionalStructureSameCondition_VisualBasic() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\ConditionalStructureSameCondition.vb",
                 new VB.ConditionalStructureSameCondition());

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,11 +26,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DoNotOverwriteCollectionElementsTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotOverwriteCollectionElements_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\DoNotOverwriteCollectionElements.cs", new CS.DoNotOverwriteCollectionElements());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotOverwriteCollectionElements_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\DoNotOverwriteCollectionElements.vb", new VB.DoNotOverwriteCollectionElements());
     }

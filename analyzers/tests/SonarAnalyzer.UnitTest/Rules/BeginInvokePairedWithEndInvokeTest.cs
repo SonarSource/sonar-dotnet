@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,23 +29,23 @@ namespace SonarAnalyzer.UnitTest.Rules
         private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.BeginInvokePairedWithEndInvoke>();
         private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.BeginInvokePairedWithEndInvoke>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void BeginInvokePairedWithEndInvoke_CS() =>
             builderCS.AddPaths("BeginInvokePairedWithEndInvoke.cs").Verify();
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void BeginInvokePairedWithEndInvoke_CSharp9() =>
             builderCS.AddPaths("BeginInvokePairedWithEndInvoke.CSharp9.Part1.cs", "BeginInvokePairedWithEndInvoke.CSharp9.Part2.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void BeginInvokePairedWithEndInvoke_CSharp10() =>
             builderCS.AddPaths("BeginInvokePairedWithEndInvoke.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void BeginInvokePairedWithEndInvoke_VB() =>
             builderVB.AddPaths("BeginInvokePairedWithEndInvoke.vb").Verify();
     }

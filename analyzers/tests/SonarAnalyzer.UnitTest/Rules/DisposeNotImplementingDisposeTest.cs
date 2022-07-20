@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,17 +27,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<DisposeNotImplementingDispose>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DisposeNotImplementingDispose() =>
             builder.AddPaths("DisposeNotImplementingDispose.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DisposeNotImplementingDispose_CSharp9() =>
             builder.AddPaths("DisposeNotImplementingDispose.CSharp9.Part1.cs", "DisposeNotImplementingDispose.CSharp9.Part2.cs").WithTopLevelStatements().Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DisposeNotImplementingDispose_CSharp10() =>
             builder.AddPaths("DisposeNotImplementingDispose.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 

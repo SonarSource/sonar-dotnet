@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,19 +27,19 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<SerializationConstructorsShouldBeSecured>().AddReferences(MetadataReferenceFacade.SystemSecurityPermissions);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SerializationConstructorsShouldBeSecured() =>
             builder.AddPaths("SerializationConstructorsShouldBeSecured.cs").WithConcurrentAnalysis(false).Verify();
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SerializationConstructorsShouldBeSecured_CSharp9() =>
             builder.AddPaths("SerializationConstructorsShouldBeSecured.CSharp9.cs").WithConcurrentAnalysis(false).WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SerializationConstructorsShouldBeSecured_InvalidCode() =>
             builder.AddSnippet(@"
 [Serializable]
@@ -54,11 +54,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void GetObjectData(SerializationInfo info, StreamingContext context) { }
     }").WithErrorBehavior(CompilationErrorBehavior.Ignore).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SerializationConstructorsShouldBeSecured_NoAssemblyAttribute() =>
             builder.AddPaths("SerializationConstructorsShouldBeSecured_NoAssemblyAttribute.cs").Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SerializationConstructorsShouldBeSecured_PartialClasses() =>
             builder.AddPaths("SerializationConstructorsShouldBeSecured_Part1.cs", "SerializationConstructorsShouldBeSecured_Part2.cs").WithConcurrentAnalysis(false).Verify();
     }

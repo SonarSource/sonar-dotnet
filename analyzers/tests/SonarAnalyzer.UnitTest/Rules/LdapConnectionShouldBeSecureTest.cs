@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,7 +27,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<LdapConnectionShouldBeSecure>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void LdapConnectionsShouldBeSecure() =>
             builder.AddPaths("LdapConnectionShouldBeSecure.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
@@ -37,14 +37,14 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void LdapConnectionsShouldBeSecure_FromCSharp9() =>
             builder.AddPaths("LdapConnectionShouldBeSecure.CSharp9.cs")
                 .WithTopLevelStatements()
                 .AddReferences(MetadataReferenceFacade.SystemDirectoryServices)
                 .Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void LdapConnectionsShouldBeSecure_FromCSharp10() =>
             builder.AddPaths("LdapConnectionShouldBeSecure.CSharp10.cs")
                 .WithTopLevelStatements()

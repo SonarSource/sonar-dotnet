@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,21 +26,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DoNotCheckZeroSizeCollectionTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotCheckZeroSizeCollection_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\DoNotCheckZeroSizeCollection.cs", new CS.DoNotCheckZeroSizeCollection());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotCheckZeroSizeCollection_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotCheckZeroSizeCollection.CSharp9.cs", new CS.DoNotCheckZeroSizeCollection());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotCheckZeroSizeCollection_CSharp10() =>
             OldVerifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\DoNotCheckZeroSizeCollection.CSharp10.cs", new CS.DoNotCheckZeroSizeCollection());
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotCheckZeroSizeCollection_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\DoNotCheckZeroSizeCollection.vb",
                 new VB.DoNotCheckZeroSizeCollection());

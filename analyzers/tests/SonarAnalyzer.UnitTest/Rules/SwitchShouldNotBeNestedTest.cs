@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,13 +26,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class SwitchShouldNotBeNestedTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SwitchShouldNotBeNested_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\SwitchShouldNotBeNested.cs",
                 new CS.SwitchShouldNotBeNested(),
                 ParseOptionsHelper.FromCSharp8);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SwitchShouldNotBeNested_VB() => OldVerifier.VerifyAnalyzer(@"TestCases\SwitchShouldNotBeNested.vb",
                 new VB.SwitchShouldNotBeNested());
     }

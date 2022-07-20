@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,17 +25,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class EmptyStatementTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EmptyStatement() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\EmptyStatement.cs", new EmptyStatement());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EmptyStatement_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EmptyStatement.CSharp9.cs", new EmptyStatement());
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EmptyStatement_CodeFix() =>
             OldVerifier.VerifyCodeFix<EmptyStatementCodeFix>(
                 @"TestCases\EmptyStatement.cs",
@@ -43,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new EmptyStatement());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EmptyStatement_CodeFix_CSharp9() =>
             OldVerifier.VerifyCodeFix<EmptyStatementCodeFix>(
                 @"TestCases\EmptyStatement.CSharp9.cs",

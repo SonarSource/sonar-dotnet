@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,14 +27,14 @@ namespace SonarAnalyzer.UnitTest.Extensions
     [TestClass]
     public class PatternSyntaxWrapperExtensionsTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IsNull_ForNullPattern_ReturnsTrue()
         {
             var isPattern = (IsPatternExpressionSyntaxWrapper)SyntaxFactory.ParseExpression("is null");
             isPattern.Pattern.IsNull().Should().BeTrue();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IsNull_ForDifferentPattern_ReturnsFalse()
         {
             var isPattern = (IsPatternExpressionSyntaxWrapper)SyntaxFactory.ParseExpression("is not 1");

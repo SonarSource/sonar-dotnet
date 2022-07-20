@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,7 +27,7 @@ namespace SonarAnalyzer.UnitTest.CFG.Sonar
     [TestClass]
     public class SonarCfgSerializerTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Serialize_Empty_Method()
         {
             var code = @"
@@ -46,7 +46,7 @@ class C
 ");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Serialize_Branch_Jump()
         {
             var code = @"
@@ -87,7 +87,7 @@ class C
 ");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Serialize_BinaryBranch_Simple()
         {
             var code = @"
@@ -116,7 +116,7 @@ class C
 ");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Serialize_Foreach_Binary_Simple()
         {
             var code = @"
@@ -146,7 +146,7 @@ class C
 ");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Serialize_Foreach_Binary_VarDeclaration()
         {
             var code = @"
@@ -180,7 +180,7 @@ namespace Namespace
 ");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Serialize_For_Binary_Simple()
         {
             var code = @"
@@ -212,7 +212,7 @@ class C
 ");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Serialize_Jump_Using()
         {
             var code = @"
@@ -239,7 +239,7 @@ class C
 ");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Serialize_Lock_Simple()
         {
             var code = @"
@@ -266,7 +266,7 @@ class C
 ");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Serialize_Lambda()
         {
             var code = @"
@@ -291,7 +291,7 @@ class C
 ");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Serialize_Range()
         {
             var code = @"
@@ -313,7 +313,7 @@ internal class Test
 ");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Serialize_Index()
         {
             var code = @"
@@ -335,7 +335,7 @@ internal class Test
 ");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Serialize_IndexInRange()
         {
             var code = @"
@@ -357,7 +357,7 @@ internal class Test
 ");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Serialize_RangeInIndexer()
         {
             var code = @"

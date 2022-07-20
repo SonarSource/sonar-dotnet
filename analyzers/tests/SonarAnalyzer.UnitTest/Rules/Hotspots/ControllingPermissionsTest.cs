@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -34,14 +34,14 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Concat(FrameworkMetadataReference.SystemIdentityModel)
                 .Concat(FrameworkMetadataReference.SystemWeb);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ControllingPermissions_CS() =>
             OldVerifier.VerifyAnalyzer(
                 @"TestCases\Hotspots\ControllingPermissions.cs",
                 new CS.ControllingPermissions(AnalyzerConfiguration.AlwaysEnabled),
                 AdditionalReferences);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ControllingPermissions_VB() =>
             OldVerifier.VerifyAnalyzer(
                 @"TestCases\Hotspots\ControllingPermissions.vb",

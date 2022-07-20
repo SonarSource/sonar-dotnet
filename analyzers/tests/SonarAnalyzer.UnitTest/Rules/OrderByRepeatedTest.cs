@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,11 +25,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class OrderByRepeatedTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void OrderByRepeated() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\OrderByRepeated.cs", new OrderByRepeated());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void OrderByRepeated_CodeFix() =>
             OldVerifier.VerifyCodeFix<OrderByRepeatedCodeFix>(
                 @"TestCases\OrderByRepeated.cs",

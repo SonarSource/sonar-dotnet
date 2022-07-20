@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,7 +26,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class OptionalParameterTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void OptionalParameter()
         {
             OldVerifier.VerifyAnalyzer(@"TestCases\OptionalParameter.cs", new CS.OptionalParameter());
@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void OptionalParameter_CSharpPreview() =>
             OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\OptionalParameter.CSharpPreview.cs", new CS.OptionalParameter());
 #endif

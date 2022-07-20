@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -30,44 +30,44 @@ namespace SonarAnalyzer.UnitTest.Rules
             .AddReferences(MetadataReferenceFacade.MicrosoftWin32Primitives)
             .AddReferences(MetadataReferenceFacade.SystemSecurityCryptography);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnnecessaryUsings() =>
             builder.AddPaths("UnnecessaryUsings.cs", "UnnecessaryUsings2.cs", "UnnecessaryUsingsFNRepro.cs").WithAutogenerateConcurrentFiles(false).Verify();
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnnecessaryUsings_CSharp10_GlobalUsings() =>
             builder.AddPaths("UnnecessaryUsings.CSharp10.Global.cs", "UnnecessaryUsings.CSharp10.Consumer.cs").WithTopLevelStatements().WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnnecessaryUsings_CSharp10_FileScopedNamespace() =>
             builder.AddPaths("UnnecessaryUsings.CSharp10.FileScopedNamespace.cs").WithOptions(ParseOptionsHelper.FromCSharp10).WithConcurrentAnalysis(false).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnnecessaryUsings_CSharp9() =>
             builder.AddPaths("UnnecessaryUsings.CSharp9.cs").WithTopLevelStatements().Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnnecessaryUsings_TupleDeconstruct_NetCore() =>
             builder.AddPaths("UnnecessaryUsings.TupleDeconstruct.NetCore.cs").Verify();
 
 #elif NETFRAMEWORK
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnnecessaryUsings_TupleDeconstruct_NetFx() =>
             builder.AddPaths("UnnecessaryUsings.TupleDeconstruct.NetFx.cs").Verify();
 
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnnecessaryUsings_CodeFix() =>
             builder.AddPaths("UnnecessaryUsings.cs")
                 .WithCodeFix<UnnecessaryUsingsCodeFix>()
                 .WithCodeFixedPaths("UnnecessaryUsings.Fixed.cs", "UnnecessaryUsings.Fixed.Batch.cs")
                 .VerifyCodeFix();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EquivalentNameSyntax_Equals_Object()
         {
             var main = new EquivalentNameSyntax(SyntaxFactory.IdentifierName("Lorem"));
@@ -80,7 +80,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             main.Equals(different).Should().BeFalse();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EquivalentNameSyntax_Equals_EquivalentNameSyntax()
         {
             var main = new EquivalentNameSyntax(SyntaxFactory.IdentifierName("Lorem"));

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -30,23 +30,23 @@ namespace SonarAnalyzer.UnitTest.Rules
         private readonly VerifierBuilder builderCS = CreateBuilder().AddAnalyzer(() => new CS.UsingNonstandardCryptography(AnalyzerConfiguration.AlwaysEnabled));
         private readonly VerifierBuilder builderVB = CreateBuilder().AddAnalyzer(() => new VB.UsingNonstandardCryptography(AnalyzerConfiguration.AlwaysEnabled));
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UsingNonstandardCryptography_CS() =>
             builderCS.AddPaths("UsingNonstandardCryptography.cs").Verify();
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UsingNonstandardCryptography_CSharp9() =>
             builderCS.AddPaths("UsingNonstandardCryptography.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UsingNonstandardCryptography_CSharp10() =>
             builderCS.AddPaths("UsingNonstandardCryptography.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UsingNonstandardCryptography_VB() =>
             builderVB.AddPaths("UsingNonstandardCryptography.vb").Verify();
 

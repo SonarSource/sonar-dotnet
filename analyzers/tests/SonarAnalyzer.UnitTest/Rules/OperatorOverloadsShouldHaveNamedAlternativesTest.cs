@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,12 +25,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class OperatorOverloadsShouldHaveNamedAlternativesTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void OperatorOverloadsShouldHaveNamedAlternatives() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\OperatorOverloadsShouldHaveNamedAlternatives.cs", new OperatorOverloadsShouldHaveNamedAlternatives());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void OperatorOverloadsShouldHaveNamedAlternatives_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\OperatorOverloadsShouldHaveNamedAlternatives.CSharp9.cs", new OperatorOverloadsShouldHaveNamedAlternatives());
 #endif

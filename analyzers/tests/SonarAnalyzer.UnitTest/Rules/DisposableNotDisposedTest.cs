@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,7 +25,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DisposableNotDisposedTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DisposableNotDisposed() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\DisposableNotDisposed.cs",
                                     new DisposableNotDisposed(),
@@ -33,13 +33,13 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     MetadataReferenceFacade.SystemNetHttp.Concat(NuGetMetadataReference.FluentAssertions("5.9.0")));
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DisposableNotDisposed_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DisposableNotDisposed.CSharp9.cs",
                                                       new DisposableNotDisposed(),
                                                       MetadataReferenceFacade.SystemNetHttp);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DisposableNotDisposed_CSharp10() =>
             OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\DisposableNotDisposed.CSharp10.cs", new DisposableNotDisposed());
 #endif

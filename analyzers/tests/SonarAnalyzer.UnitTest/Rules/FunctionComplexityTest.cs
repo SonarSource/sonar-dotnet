@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,25 +27,25 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class FunctionComplexityTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void FunctionComplexity_CS() =>
             CreateCSBuilder(3).AddPaths("FunctionComplexity.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void FunctionComplexity_LocalFunctions() =>
             CreateCSBuilder(3).AddPaths("FunctionComplexity.LocalFunctions.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void FunctionComplexity_CSharp9() =>
             CreateCSBuilder(3).AddPaths("FunctionComplexity.CSharp9.cs").WithTopLevelStatements().Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void FunctionComplexity_CSharp10() =>
             CreateCSBuilder(1).AddPaths("FunctionComplexity.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void FunctionComplexity_InsufficientExecutionStack_CS()
         {
             if (!TestContextHelper.IsAzureDevOpsContext) // ToDo: Test doesn't work on Azure DevOps
@@ -54,7 +54,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             }
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void FunctionComplexity_VB() =>
             new VerifierBuilder().AddAnalyzer(() => new VB.FunctionComplexity { Maximum = 3 })
                 .AddPaths("FunctionComplexity.vb")

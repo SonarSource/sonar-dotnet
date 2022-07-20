@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 Console.WriteLine("");
 
 class Foo_Bar { }

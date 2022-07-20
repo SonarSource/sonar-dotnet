@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,14 +26,14 @@ namespace SonarAnalyzer.UnitTest.Common
     [TestClass]
     public class RuleFinderTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GetAnalyzerTypes()
         {
             var analyzers = RuleFinder.GetAnalyzerTypes(AnalyzerLanguage.CSharp);
             analyzers.Should().Contain(typeof(EmptyStatement));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GetAllAnalyzerTypes()
         {
             var countParameterless = RuleFinder.GetAnalyzerTypes(AnalyzerLanguage.CSharp).Count(x => !RuleFinder.IsParameterized(x));

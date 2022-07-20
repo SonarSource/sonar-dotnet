@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,20 +25,20 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class RedundancyInConstructorDestructorDeclarationTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundancyInConstructorDestructorDeclaration() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\RedundancyInConstructorDestructorDeclaration.cs", new RedundancyInConstructorDestructorDeclaration());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundancyInConstructorDestructorDeclaration_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\RedundancyInConstructorDestructorDeclaration.CSharp9.cs", new RedundancyInConstructorDestructorDeclaration());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundancyInConstructorDestructorDeclaration_CSharp10() =>
             OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\RedundancyInConstructorDestructorDeclaration.CSharp10.cs", new RedundancyInConstructorDestructorDeclaration());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundancyInConstructorDestructorDeclaration_CodeFix_CSharp9() =>
             OldVerifier.VerifyCodeFix<RedundancyInConstructorDestructorDeclarationCodeFix>(
                 @"TestCases\RedundancyInConstructorDestructorDeclaration.CSharp9.cs",
@@ -47,7 +47,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 RedundancyInConstructorDestructorDeclarationCodeFix.TitleRemoveBaseCall,
                 ParseOptionsHelper.FromCSharp9);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundancyInConstructorDestructorDeclaration_CodeFix_CSharp10() =>
             OldVerifier.VerifyCodeFix<RedundancyInConstructorDestructorDeclarationCodeFix>(
                 @"TestCases\RedundancyInConstructorDestructorDeclaration.CSharp10.cs",
@@ -57,7 +57,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 ParseOptionsHelper.FromCSharp10);
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundancyInConstructorDestructorDeclaration_CodeFix_BaseCall() =>
             OldVerifier.VerifyCodeFix<RedundancyInConstructorDestructorDeclarationCodeFix>(
                 @"TestCases\RedundancyInConstructorDestructorDeclaration.cs",
@@ -65,7 +65,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new RedundancyInConstructorDestructorDeclaration(),
                 RedundancyInConstructorDestructorDeclarationCodeFix.TitleRemoveBaseCall);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundancyInConstructorDestructorDeclaration_CodeFix_Constructor() =>
             OldVerifier.VerifyCodeFix<RedundancyInConstructorDestructorDeclarationCodeFix>(
                 @"TestCases\RedundancyInConstructorDestructorDeclaration.cs",
@@ -73,7 +73,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new RedundancyInConstructorDestructorDeclaration(),
                 RedundancyInConstructorDestructorDeclarationCodeFix.TitleRemoveConstructor);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundancyInConstructorDestructorDeclaration_CodeFix_Destructor() =>
             OldVerifier.VerifyCodeFix<RedundancyInConstructorDestructorDeclarationCodeFix>(
                 @"TestCases\RedundancyInConstructorDestructorDeclaration.cs",

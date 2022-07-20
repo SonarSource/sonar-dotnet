@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,12 +25,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class EquatableClassShouldBeSealedTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EquatableClassShouldBeSealed() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\EquatableClassShouldBeSealed.cs", new EquatableClassShouldBeSealed());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EquatableClassShouldBeSealed_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\EquatableClassShouldBeSealed.CSharp9.cs", new EquatableClassShouldBeSealed());
 #endif

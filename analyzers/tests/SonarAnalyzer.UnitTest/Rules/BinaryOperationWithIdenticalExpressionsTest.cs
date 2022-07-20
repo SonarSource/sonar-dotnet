@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,23 +26,23 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class BinaryOperationWithIdenticalExpressionsTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void BinaryOperationWithIdenticalExpressions_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\BinaryOperationWithIdenticalExpressions.cs",
                 new CS.BinaryOperationWithIdenticalExpressions());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void BinaryOperationWithIdenticalExpressions_TestProject_CS() =>
             OldVerifier.VerifyNoIssueReported(@"TestCases\BinaryOperationWithIdenticalExpressions.cs",
                 new CS.BinaryOperationWithIdenticalExpressions(),
                 TestHelper.ProjectTypeReference(SonarAnalyzer.Helpers.ProjectType.Test));
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void BinaryOperationWithIdenticalExpressions_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\BinaryOperationWithIdenticalExpressions.vb",
                 new VB.BinaryOperationWithIdenticalExpressions());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void BinaryOperationWithIdenticalExpressions_TestProject_VB() =>
             OldVerifier.VerifyNoIssueReported(@"TestCases\BinaryOperationWithIdenticalExpressions.vb",
                 new VB.BinaryOperationWithIdenticalExpressions(),

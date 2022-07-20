@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -90,7 +90,7 @@ Method(4);";
             ValidateOrder(code, expected, reverseOrder);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void InterruptedEvaluation()
         {
             var enumerator = Compile("Method(0);", false).GetEnumerator();
@@ -106,7 +106,7 @@ Method(4);";
             enumerator.Current.Should().BeNull();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AsIEnumerable()
         {
             var enumerator = ((IEnumerable)Compile("Method(0);", false)).GetEnumerator();

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,13 +25,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class EventHandlerDelegateShouldHaveProperArgumentsTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EventHandlerDelegateShouldHaveProperArguments() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\EventHandlerDelegateShouldHaveProperArguments.cs",
                 new EventHandlerDelegateShouldHaveProperArguments());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EventHandlerDelegateShouldHaveProperArguments_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\EventHandlerDelegateShouldHaveProperArguments.CSharp9.cs",
                 new EventHandlerDelegateShouldHaveProperArguments());

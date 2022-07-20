@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,12 +27,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class CommandPathTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CommandPath_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\CommandPath.cs", new CS.CommandPath(AnalyzerConfiguration.AlwaysEnabled), MetadataReferenceFacade.SystemDiagnosticsProcess);
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CommandPath_CSharp10() =>
             OldVerifier.VerifyAnalyzerFromCSharp10Library(
                 @"TestCases\Hotspots\CommandPath.CSharp10.cs",
@@ -40,7 +40,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 MetadataReferenceFacade.SystemDiagnosticsProcess);
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CommandPath_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\CommandPath.vb", new VB.CommandPath(AnalyzerConfiguration.AlwaysEnabled), MetadataReferenceFacade.SystemDiagnosticsProcess);
     }

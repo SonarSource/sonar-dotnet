@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.LiveVariableAnalysis
             Captured
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void WriteOnly()
         {
             var code = @"
@@ -49,7 +49,7 @@ var c = 2 + 3;";
             CreateContextCS(code).ValidateAllEmpty();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessParameterReference_LiveIn()
         {
             var code = @"
@@ -60,7 +60,7 @@ IsMethod(boolParameter);";
             context.Validate("Method(intParameter);", LiveIn("intParameter", "boolParameter"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessParameterReference_UsedAsOutArgument_NotLiveIn_NotLiveOut()
         {
             var code = @"Main(true, 0, out outParameter, ref refParameter);";
@@ -69,14 +69,14 @@ IsMethod(boolParameter);";
             context.Validate(code, LiveIn("refParameter"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessParameterReference_InNameOf_NotLiveIn_NotLiveOut()
         {
             var code = @"Method(nameof(intParameter));";
             CreateContextCS(code).ValidateAllEmpty();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessParameterReference_Assigned_NotLiveIn_LiveOut()
         {
             var code = @"
@@ -89,7 +89,7 @@ Method(intParameter);";
             context.Validate("Method(intParameter);", LiveIn("intParameter"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessParameterReference_MemberBinding_LiveIn()
         {
             var code = @"Method(intParameter.ToString());";
@@ -98,7 +98,7 @@ Method(intParameter);";
             context.Validate("Method(intParameter.ToString());", LiveIn("intParameter"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessParameterReference_MemberBindingByReference_LiveIn()
         {
             var code = @"Capturing(intParameter.CompareTo);";
@@ -107,7 +107,7 @@ Method(intParameter);";
             context.Validate("Capturing(intParameter.CompareTo);", LiveIn("intParameter"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessParameterReference_MemberBindingByReference_DifferentCfgOnNetFx_LiveIn()
         {
             // This specific char/string scenario produces different CFG shape under .NET Framework build.
@@ -128,7 +128,7 @@ if (boolParameter)
 #endif
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessParameterReference_Reassigned_LiveIn()
         {
             var code = @"
@@ -142,7 +142,7 @@ Method(stringParameter);";
             context.Validate("Method(intParameter);", LiveIn("intParameter", "stringParameter"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessParameterReference_SelfAssigned_LiveIn()
         {
             var code = @"
@@ -154,7 +154,7 @@ Method(intParameter);";
             context.Validate("Method(intParameter);", LiveIn("intParameter"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UsedAfterBranch_LiveOut()
         {
             /*       Binary
@@ -207,7 +207,7 @@ Method(field, variable, intParameter);";
             context.ValidateExit(expectedCaptured);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Captured_StaticLambda_NotLiveIn_NotLiveOut()
         {
             var code = @"
@@ -221,7 +221,7 @@ Method(0);";
             context.Validate("Method(0);");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Assigned_NotLiveIn_NotLiveOut()
         {
             /*       Entry
@@ -245,7 +245,7 @@ intParameter = 0;";
             context.ValidateExit();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void LongPropagationChain_LiveIn_LiveOut()
         {
             /*    Entry
@@ -283,7 +283,7 @@ Method(intParameter, value);";
             context.ValidateExit();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void BranchedPropagationChain_LiveIn_LiveOut_CS()
         {
             /*              Binary
@@ -387,7 +387,7 @@ Method(everywhere, reassigned);";
             context.Validate("Method(everywhere, reassigned);", LiveIn("everywhere"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void BranchedPropagationChain_LiveIn_LiveOut_VB()
         {
             /*              Binary
@@ -482,7 +482,7 @@ Method(Everywhere, Reassigned)";
             context.Validate("Method(Everywhere, Reassigned)", LiveIn("Everywhere"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessBlockInternal_EvaluationOrder_UsedBeforeAssigned_LiveIn()
         {
             var code = @"
@@ -495,7 +495,7 @@ Method(variable, variable = 42);";
             context.Validate("Method(variable, variable = 42);", LiveIn("variable"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessBlockInternal_EvaluationOrder_UsedBeforeAssignedInSubexpression_LiveIn()
         {
             var code = @"
@@ -508,7 +508,7 @@ Method(1 + 1 + Method(variable), variable = 42);";
             context.Validate("Method(1 + 1 + Method(variable), variable = 42);", LiveIn("variable"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessBlockInternal_EvaluationOrder_AssignedBeforeUsed_NotLiveIn()
         {
             var code = @"
@@ -521,7 +521,7 @@ Method(variable = 42, variable);";
             context.Validate("Method(variable = 42, variable);");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessBlockInternal_EvaluationOrder_AssignedBeforeUsedInSubexpression_NotLiveIn()
         {
             var code = @"
@@ -534,7 +534,7 @@ Method(variable = 42, 1 + 1 + Method(variable));";
             context.Validate("Method(variable = 42, 1 + 1 + Method(variable));");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessLocalReference_InNameOf_NotLiveIn_NotLiveOut()
         {
             var code = @"
@@ -547,7 +547,7 @@ Method(nameof(variable));";
             context.Validate("Method(nameof(variable));");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessLocalReference_LocalScopeSymbol_LiveIn()
         {
             var code = @"
@@ -560,7 +560,7 @@ Method(intParameter, variable);";
             context.Validate("Method(intParameter, variable);", LiveIn("intParameter", "variable"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessLocalReference_ReassignedBeforeLastBlock_LiveIn()
         {
             var code = @"
@@ -574,7 +574,7 @@ Method(intParameter, variable);";
             context.Validate("Method(intParameter, variable);", LiveIn("intParameter", "variable"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessLocalReference_ReassignedInLastBlock_NotLiveIn()
         {
             var code = @"
@@ -588,7 +588,7 @@ Method(intParameter, variable);";
             context.Validate("Method(intParameter, variable);", LiveIn("intParameter"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessLocalReference_GlobalScopeSymbol_NotLiveIn_NotLiveOut()
         {
             var code = @"
@@ -597,14 +597,14 @@ Method(field, s.Property);";
             CreateContextCS(code).ValidateAllEmpty();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessLocalReference_UndefinedSymbol_NotLiveIn_NotLiveOut()
         {
             var code = @"Method(undefined); // Error CS0103 The name 'undefined' does not exist in the current context";
             CreateContextCS(code).ValidateAllEmpty();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessLocalReference_UsedAsOutArgument_NotLiveIn()
         {
             var code = @"
@@ -619,7 +619,7 @@ Main(true, 0, out outVariable, ref refVariable);";
             context.Validate("Main(true, 0, out outVariable, ref refVariable);", LiveIn("refVariable"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessLocalReference_NotAssigned_LiveIn_LiveOut()
         {
             var code = @"
@@ -633,7 +633,7 @@ Method(variable, intParameter);";
             context.Validate("Method(variable, intParameter);", LiveIn("variable", "intParameter"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessLocalReference_VariableDeclarator_NotLiveIn_LiveOut()
         {
             var code = @"
@@ -647,7 +647,7 @@ if (intValue == 0)
             context.Validate("Method(intValue, varValue);", LiveIn("intValue", "varValue"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessLocalReference_MemberBinding_LiveIn()
         {
             var code = @"
@@ -659,7 +659,7 @@ if (boolParameter)
             context.Validate("Method(variable.ToString());", LiveIn("variable"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessLocalReference_MemberBindingByReference_LiveIn()
         {
             var code = @"
@@ -671,7 +671,7 @@ if (boolParameter)
             context.Validate("Capturing(variable.CompareTo);", LiveIn("variable"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessLocalReference_Reassigned_LiveIn()
         {
             var code = @"
@@ -689,7 +689,7 @@ Method(stringVariable);";
             context.Validate("Method(intVariable);", LiveIn("intVariable", "stringVariable"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessLocalReference_SelfAssigned_LiveIn()
         {
             var code = @"
@@ -704,7 +704,7 @@ Method(intVariable);";
             context.Validate("Method(intVariable);", LiveIn("intVariable"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessSimpleAssignment_Discard_NotLiveIn_NotLiveOut()
         {
             var code = @"_ = intParameter;";
@@ -713,7 +713,7 @@ Method(intVariable);";
             context.Validate("_ = intParameter;", LiveIn("intParameter"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessSimpleAssignment_UndefinedSymbol_NotLiveIn_NotLiveOut()
         {
             var code = @"
@@ -725,7 +725,7 @@ if (undefined == 0)         // Error CS0103 The name 'undefined' does not exist 
             context.Validate("Method(undefined);");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessSimpleAssignment_GlobalScoped_NotLiveIn_NotLiveOut()
         {
             var code = @"
@@ -737,7 +737,7 @@ if (field == 0)
             context.Validate("Method(field);");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessSimpleAssignment_LocalScoped_NotLiveIn_LiveOut()
         {
             var code = @"
@@ -751,7 +751,7 @@ if (value == 0)
             context.Validate("Method(value);", LiveIn("value"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProcessVariableInForeach_Declared_LiveIn_LiveOut()
         {
             /*
@@ -786,7 +786,7 @@ foreach(var i in new int[] {1, 2, 3})
             context.ValidateExit();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NestedImplicitFinally_Lock_ForEach_LiveIn()
         {
             const string code = @"
@@ -811,7 +811,7 @@ Method(2);";
             context.ValidateExit();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NestedImplicitFinally_ForEach_ForEach_LiveIn()
         {
             const string code = @"
@@ -836,7 +836,7 @@ Method(2);";
             context.ValidateExit();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Loop_Propagates_LiveIn_LiveOut()
         {
             var code = @"
@@ -855,7 +855,7 @@ Method(1);";
             context.Validate("Method(1);");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void InvokedDelegate_LiveIn()
         {
             var code = @"action();";
@@ -864,7 +864,7 @@ Method(1);";
             context.Validate("action();", LiveIn("action"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ReturningDelegate_LiveIn()
         {
             var code = @"
@@ -878,7 +878,7 @@ public class Sample
             context.Validate("() => intParameter", Captured("intParameter"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ReturningDelegate_NestedByReference_LiveIn()
         {
             var code = @"
@@ -901,7 +901,7 @@ public class Sample
             context.ValidateEntry(Captured("asyncHandler"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ReturningDelegate_Nested_LiveIn()
         {
             var code = @"
@@ -920,7 +920,7 @@ public class Sample
             context.ValidateEntry(Captured("intParameter"));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PropertyWithWriteOnly()
         {
             var code = @"
@@ -931,7 +931,7 @@ public class Sample
             new Context(code, SyntaxKind.NumericLiteralExpression).ValidateAllEmpty();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AnonyomousFunctionWriteOnly()
         {
             var code = @"
@@ -947,7 +947,7 @@ public class Sample
             new Context(code, SyntaxKind.Block).ValidateAllEmpty();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ConstructorWriteOnly()
         {
             var code = @"

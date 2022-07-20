@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,11 +25,11 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
     [TestClass]
     public class ExceptionStateTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Constructor_Null_Throws() =>
             ((Func<ExceptionState>)(() => new ExceptionState(null))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("type");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ToString_Unknown() =>
             ExceptionState.UnknownException.ToString().Should().Be("Unknown");
 
@@ -40,7 +40,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         public void ToString_Known(string typeName, string expected) =>
             new ExceptionState(TestHelper.CompileCS(string.Empty).Model.Compilation.GetTypeByMetadataName(typeName)).ToString().Should().Be(expected);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Equals_ReturnsTrueForEquivalent()
         {
             var compilation = TestHelper.CompileCS(string.Empty).Model.Compilation;
@@ -59,7 +59,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             ExceptionState.UnknownException.Equals(null).Should().BeFalse();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GetHashCode_ReturnsSameForEquivalent()
         {
             var compilation = TestHelper.CompileCS(string.Empty).Model.Compilation;

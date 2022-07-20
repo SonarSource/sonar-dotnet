@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -88,7 +88,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 new TestSetup("ClassShouldNotBeAbstract.cs", new ClassShouldNotBeAbstract()),
             });
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void WhenShouldAnalysisBeDisabledReturnsTrue_NoIssueReported()
         {
             SonarAnalysisContext.ShouldExecuteRegisteredAction = (diags, tree) => false;
@@ -108,7 +108,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             }
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ByDefault_ExecuteRule()
         {
             foreach (var testCase in testCases)
@@ -120,7 +120,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             }
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void WhenProjectType_IsTest_RunRulesWithTestScope_SonarLint()
         {
             var sonarProjectConfig = TestHelper.CreateSonarProjectConfig(nameof(WhenProjectType_IsTest_RunRulesWithTestScope_SonarLint), ProjectType.Test, false);
@@ -145,7 +145,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             }
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void WhenProjectType_IsTest_RunRulesWithTestScope_Scanner()
         {
             var sonarProjectConfig = TestHelper.CreateSonarProjectConfig(nameof(WhenProjectType_IsTest_RunRulesWithTestScope_Scanner), ProjectType.Test);
@@ -170,7 +170,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             }
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void WhenProjectType_IsTest_RunRulesWithMainScope()
         {
             var sonarProjectConfig = TestHelper.CreateSonarProjectConfig(nameof(WhenProjectType_IsTest_RunRulesWithMainScope), ProjectType.Product);
@@ -195,7 +195,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             }
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void WhenAnalysisDisabledBaseOnSyntaxTree_ReportIssuesForEnabledRules()
         {
             testCases.Should().HaveCountGreaterThan(2);
@@ -214,7 +214,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             }
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void WhenReportDiagnosticActionNotNull_AllowToControlWhetherOrNotToReport()
         {
             try
@@ -259,7 +259,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             }
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProjectConfiguration_LoadsExpectedValues()
         {
             var options = TestHelper.CreateOptions($@"ResourceTests\SonarProjectConfig\Path_Windows\SonarProjectConfig.xml");
@@ -270,7 +270,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             config.AnalysisConfigPath.Should().Be(@"c:\foo\bar\.sonarqube\conf\SonarQubeAnalysisConfig.xml");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProjectConfiguration_UsesCachedValue()
         {
             var options = TestHelper.CreateOptions($@"ResourceTests\SonarProjectConfig\Path_Windows\SonarProjectConfig.xml");
@@ -282,7 +282,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             secondSut.ProjectConfiguration(options).Should().BeSameAs(firstConfig);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProjectConfiguration_WhenFileChanges_RebuildsCache()
         {
             var firstOptions = TestHelper.CreateOptions($@"ResourceTests\SonarProjectConfig\Path_Windows\SonarProjectConfig.xml");
@@ -293,7 +293,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             sut.ProjectConfiguration(secondOptions).Should().NotBeSameAs(firstConfig);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         [DataRow(null)]
         [DataRow("/foo/bar/does-not-exit")]
         [DataRow("/foo/bar/x.xml")]
@@ -312,7 +312,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             config.TargetFramework.Should().BeNull();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProjectConfiguration_WhenFileIsMissing_ThrowException()
         {
             var options = TestHelper.CreateOptions("ThisPathDoesNotExist\\SonarProjectConfig.xml");
@@ -325,7 +325,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                .WithMessage("File SonarProjectConfig.xml has been added as an AdditionalFile but could not be read and parsed.");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ProjectConfiguration_WhenInvalidXml_ThrowException()
         {
             var options = TestHelper.CreateOptions($@"ResourceTests\SonarProjectConfig\Invalid_Xml\SonarProjectConfig.xml");
@@ -338,7 +338,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                .WithMessage("File SonarProjectConfig.xml has been added as an AdditionalFile but could not be read and parsed.");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IsAnalysisScopeMatching_NoCompilation_IsMatching() =>
             SonarAnalysisContext.IsAnalysisScopeMatching(null, true, false, null).Should().BeTrue();
 
@@ -413,7 +413,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             SonarAnalysisContext.IsAnalysisScopeMatching(compilation, projectType == ProjectType.Test, true, diagnostics).Should().Be(expectedResult);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IsTestProject_Standalone_NoCompilation_IsFalse()
         {
             var options = new AnalyzerOptions(ImmutableArray<AdditionalText>.Empty);

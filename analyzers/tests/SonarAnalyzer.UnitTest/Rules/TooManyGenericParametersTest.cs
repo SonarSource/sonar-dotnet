@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,11 +27,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<TooManyGenericParameters>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void TooManyGenericParameters_DefaultValues() =>
             builder.AddPaths("TooManyGenericParameters.DefaultValues.cs").Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void TooManyGenericParameters_CustomValues() =>
             new VerifierBuilder()
             .AddAnalyzer(() => new TooManyGenericParameters { MaxNumberOfGenericParametersInClass = 4, MaxNumberOfGenericParametersInMethod = 4 })
@@ -39,11 +39,11 @@ namespace SonarAnalyzer.UnitTest.Rules
             .Verify();
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void TooManyGenericParameters_CSharp9() =>
             builder.AddPaths("TooManyGenericParameters.CSharp9.cs").WithTopLevelStatements().Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void TooManyGenericParameters_CSharp10() =>
             builder.AddPaths("TooManyGenericParameters.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 #endif

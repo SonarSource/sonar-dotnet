@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,21 +26,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class PureAttributeOnVoidMethodTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PureAttributeOnVoidMethod_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\PureAttributeOnVoidMethod.cs", new CS.PureAttributeOnVoidMethod());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PureAttributeOnVoidMethod_CSharp8() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\PureAttributeOnVoidMethod.CSharp8.cs", new CS.PureAttributeOnVoidMethod(), ParseOptionsHelper.FromCSharp8);
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PureAttributeOnVoidMethod_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\PureAttributeOnVoidMethod.CSharp9.cs", new CS.PureAttributeOnVoidMethod());
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PureAttributeOnVoidMethod_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\PureAttributeOnVoidMethod.vb", new VB.PureAttributeOnVoidMethod());
     }

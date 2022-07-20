@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,17 +29,17 @@ namespace SonarAnalyzer.UnitTest.Rules
             .AddReferences(MetadataReferenceFacade.SystemCollections)
             .WithErrorBehavior(CompilationErrorBehavior.Ignore);    // It would be too tedious to implement all those interfaces
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CollectionsShouldImplementGenericInterface() =>
             builder.AddPaths("CollectionsShouldImplementGenericInterface.cs").Verify();
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CollectionsShouldImplementGenericInterface_Csharp9() =>
             builder.AddPaths("CollectionsShouldImplementGenericInterface.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CollectionsShouldImplementGenericInterface_Csharp10() =>
             builder.AddPaths("CollectionsShouldImplementGenericInterface.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,17 +27,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<PartialMethodNoImplementation>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PartialMethodNoImplementation() =>
             builder.AddPaths("PartialMethodNoImplementation.cs").Verify();
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PartialMethodNoImplementation_CSharp9() =>
             builder.AddPaths("PartialMethodNoImplementation.CSharp9.Part1.cs", "PartialMethodNoImplementation.CSharp9.Part2.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PartialMethodNoImplementation_CSharp10() =>
             builder.AddPaths("PartialMethodNoImplementation.CSharp10.Part1.cs", "PartialMethodNoImplementation.CSharp10.Part2.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 

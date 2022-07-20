@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,11 +25,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class NegatedIsExpressionTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NegatedIsExpression() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\NegatedIsExpression.vb", new NegatedIsExpression());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NegatedIsExpression_CodeFix() =>
             OldVerifier.VerifyCodeFix<NegatedIsExpressionCodeFix>(
                 @"TestCases\NegatedIsExpression.vb",

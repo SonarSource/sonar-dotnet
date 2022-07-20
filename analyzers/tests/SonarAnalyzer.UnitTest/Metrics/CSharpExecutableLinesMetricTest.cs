@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -23,7 +23,7 @@ namespace SonarAnalyzer.UnitTest.Common
     [TestClass]
     public class CSharpExecutableLinesMetricTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void No_Executable_Lines() =>
             AssertLinesOfCode(
 @"using System;
@@ -39,14 +39,14 @@ namespace Test
     }
 }");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Class() =>
             AssertLinesOfCode(
 @"class Program
 {
 }");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Checked_Unchecked() =>
             AssertLinesOfCode(
 @"class Program
@@ -62,7 +62,7 @@ namespace Test
     }
 }", 5, 7);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Blocks() =>
             AssertLinesOfCode(
 @"class Program
@@ -76,7 +76,7 @@ namespace Test
     }
 }", 5, 6, 7, 8);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Statements() =>
             AssertLinesOfCode(
 @"class Program
@@ -88,7 +88,7 @@ namespace Test
     }
 }", 5, 6);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Loops() =>
             AssertLinesOfCode(
 @"class Program
@@ -104,7 +104,7 @@ namespace Test
     }
 }", 5, 7, 8, 9);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Conditionals() =>
             AssertLinesOfCode(
 @"class Program
@@ -125,7 +125,7 @@ namespace Test
     }
 }", 5, 6, 7, 12, 14, 15);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Conditionals2() =>
             AssertLinesOfCode(
 @"class Program
@@ -145,7 +145,7 @@ namespace Test
     }
 }", 5, 6, 7, 9, 11, 12, 14);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Yields() =>
             AssertLinesOfCode(
 @"using System.Collections.Generic;
@@ -162,7 +162,7 @@ namespace Test
     }
 }", 9, 10);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AccessAndInvocation() =>
             AssertLinesOfCode(
 @"class Program
@@ -174,7 +174,7 @@ namespace Test
     }
 }", 5, 6);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Initialization() =>
             AssertLinesOfCode(
 @"class Program
@@ -194,7 +194,7 @@ namespace Test
     }
 }", 8, 12);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Property_Set() =>
             AssertLinesOfCode(
 @"class Program
@@ -207,7 +207,7 @@ namespace Test
     }
 }", 7);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Property_Get() =>
             AssertLinesOfCode(
 @"class Program
@@ -220,7 +220,7 @@ namespace Test
     }
 }");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Lambdas() =>
             AssertLinesOfCode(
 @"using System;
@@ -237,7 +237,7 @@ class Program
     }
 }", 8, 9, 10);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void TryCatch() =>
             AssertLinesOfCode(
 @"using System;
@@ -261,7 +261,7 @@ class Program
     }
 }", 8, 13);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Test_16() =>
             AssertLinesOfCode(
 @"using System;
@@ -273,7 +273,7 @@ class Program
     }
 }", 5, 6);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Test_17() =>
             AssertLinesOfCode(
 @"class Program
@@ -293,7 +293,7 @@ class Program
     }
 }", 5);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Class_Excluded() =>
             AssertLinesOfCode(
 @"using System.Diagnostics.CodeAnalysis;
@@ -324,7 +324,7 @@ public class ComplicatedCode
 
 public class SomeAttribute : System.Attribute { }", 19, 22);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AttributeOnLocalFunction_Excluded() =>
             AssertLinesOfCode(
 @"using System.Diagnostics.CodeAnalysis;
@@ -366,7 +366,7 @@ public class ComplicatedCode
     }}
 }}");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Record_Excluded() =>
             AssertLinesOfCode(
 @"using System.Diagnostics.CodeAnalysis;
@@ -379,7 +379,7 @@ record Program
     }
 }");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RecordStruct_Excluded() =>
             AssertLinesOfCode(
 @"using System.Diagnostics.CodeAnalysis;
@@ -392,7 +392,7 @@ record struct Program
     }
 }");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Struct_Excluded() =>
             AssertLinesOfCode(
 @"using System.Diagnostics.CodeAnalysis;
@@ -408,7 +408,7 @@ namespace project_1
     }
 }");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Constructor_Excluded() =>
             AssertLinesOfCode(
 @"using System.Diagnostics.CodeAnalysis;
@@ -430,7 +430,7 @@ class Program
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Property_Excluded() =>
             AssertLinesOfCode(
 @"using System.Diagnostics.CodeAnalysis;
@@ -474,7 +474,7 @@ class EventClass
 
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Event_Excluded() =>
             AssertLinesOfCode(
 @"using System.Diagnostics.CodeAnalysis;
@@ -503,7 +503,7 @@ class EventClass
     }
 }", 15, 22, 23);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PartialClasses_Excluded() =>
             AssertLinesOfCode(
 @"using System.Diagnostics.CodeAnalysis;
@@ -529,7 +529,7 @@ partial class AnotherClass
     }
 } ", 20);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PartialMethods_Excluded() =>
             AssertLinesOfCode(
 @"using System.Diagnostics.CodeAnalysis;
@@ -561,14 +561,14 @@ partial class AnotherClass
     }
 }");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AttributeAreIgnored() =>
             AssertLinesOfCode(
 @"using System.Reflection;
 using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo(""FOO"")]");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void OnlyAttributeAreIgnored() =>
             AssertLinesOfCode(
 @"[AnAttribute]
@@ -583,21 +583,21 @@ public class Foo
 
 public class AnAttribute : System.Attribute { }", 7);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ExpressionsAreCounted() =>
             AssertLinesOfCode(
 @"class Program
 {
     public void Foo(bool flag)
-    {
-        if (flag) // +1
-        {
-            flag = true; flag = false; flag = true; // +1
-        }
-    }
+    {
+        if (flag) // +1
+        {
+            flag = true; flag = false; flag = true; // +1
+        }
+    }
 }", 5, 7);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MultiLineLoop() =>
             AssertLinesOfCode(
 @"class Program
@@ -615,7 +615,7 @@ public class AnAttribute : System.Attribute { }", 7);
     }
 }", 5);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SwitchStatementWithMultipleCases() =>
             AssertLinesOfCode(
 @"class Program
@@ -636,7 +636,7 @@ public class AnAttribute : System.Attribute { }", 7);
     }
 }", 5, 8, 9, 11, 12, 14);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SwitchExpressionWithMultipleCases() =>
             AssertLinesOfCode(
 @"class Program
@@ -659,7 +659,7 @@ public class AnAttribute : System.Attribute { }", 7);
     bool Foo(string s) => true;
 }", 13, 14);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MultiLineInterpolatedString() =>
             AssertLinesOfCode(
 @"class Program
@@ -674,7 +674,7 @@ public class AnAttribute : System.Attribute { }", 7);
     }
 }", 6);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MultiLineInterpolatedConstString() =>
             AssertLinesOfCode(
 @"class Program
@@ -690,7 +690,7 @@ public class AnAttribute : System.Attribute { }", 7);
     }
 }"); // Not correct should be 6
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MultiLineInterpolatedStringWithMultipleLineExpressions() =>
             AssertLinesOfCode(
 @"public class C
@@ -707,7 +707,7 @@ public class AnAttribute : System.Attribute { }", 7);
     public string Bar(int i) => ""y"" + i;
 }", 5, 6, 7, 8);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UsingDeclaration() =>
             AssertLinesOfCode(
 @"class Program
@@ -718,7 +718,7 @@ public class AnAttribute : System.Attribute { }", 7);
     }
 }");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void LocalFunctions() =>
             AssertLinesOfCode(
 @"class Program
@@ -744,7 +744,7 @@ public class AnAttribute : System.Attribute { }", 7);
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IndicesAndRanges() =>
             AssertLinesOfCode(
 @"using System;
@@ -773,7 +773,7 @@ class Program
 
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NullCoalescingAssignment() =>
             AssertLinesOfCode(
 @"using System;
@@ -789,7 +789,7 @@ class Program
     }
 }", 10);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AssignmentAndDeclarationInTheSameDeconstruction() =>
             AssertLinesOfCode(
 @"using System;
@@ -805,7 +805,7 @@ class Program
     }
 }", 10);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NullCoalescingOperator() =>
             AssertLinesOfCode(
 @"using System;
@@ -820,7 +820,7 @@ class Program
     }
 }", 8, 9);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SingleLinePatternMatching() =>
             AssertLinesOfCode(
 @"static class Program
@@ -829,7 +829,7 @@ class Program
         c is >= 'a' and <= 'z' or >= 'A' and <= 'Z';
 }");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MultiLinePatternMatching() =>
             AssertLinesOfCode(
 @"using System;
@@ -849,7 +849,7 @@ class Program
     }
 }", 7, 12, 14);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MultiLineInvocation() =>
             AssertLinesOfCode(
 @"using System;

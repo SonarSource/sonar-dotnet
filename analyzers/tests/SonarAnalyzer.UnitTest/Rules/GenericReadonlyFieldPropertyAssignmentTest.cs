@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,21 +28,21 @@ namespace SonarAnalyzer.UnitTest.Rules
         private readonly VerifierBuilder builder = new VerifierBuilder<GenericReadonlyFieldPropertyAssignment>();
         private readonly VerifierBuilder codeFix = new VerifierBuilder<GenericReadonlyFieldPropertyAssignment>().WithCodeFix<GenericReadonlyFieldPropertyAssignmentCodeFix>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GenericReadonlyFieldPropertyAssignment() =>
             builder.AddPaths("GenericReadonlyFieldPropertyAssignment.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GenericReadonlyFieldPropertyAssignment_CSharp9() =>
             builder.AddPaths("GenericReadonlyFieldPropertyAssignment.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GenericReadonlyFieldPropertyAssignment_CSharp10() =>
              builder.AddPaths("GenericReadonlyFieldPropertyAssignment.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GenericReadonlyFieldPropertyAssignment_CSharp10_CodeFix_Remove_Statement() =>
             codeFix.AddPaths("GenericReadonlyFieldPropertyAssignment.CSharp10.cs")
                 .WithCodeFixedPaths("GenericReadonlyFieldPropertyAssignment.CSharp10.Remove.Fixed.cs")
@@ -52,7 +52,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GenericReadonlyFieldPropertyAssignment_CodeFix_Remove_Statement() =>
             codeFix.AddPaths("GenericReadonlyFieldPropertyAssignment.cs")
                 .WithCodeFixedPaths("GenericReadonlyFieldPropertyAssignment.Remove.Fixed.cs")
@@ -60,7 +60,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .VerifyCodeFix();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GenericReadonlyFieldPropertyAssignment_CodeFix_Add_Generic_Type_Constraint() =>
             codeFix.AddPaths("GenericReadonlyFieldPropertyAssignment.cs")
                 .WithCodeFixedPaths("GenericReadonlyFieldPropertyAssignment.AddConstraint.Fixed.cs")

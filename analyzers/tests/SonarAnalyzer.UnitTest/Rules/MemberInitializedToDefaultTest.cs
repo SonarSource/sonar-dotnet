@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,17 +25,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class MemberInitializedToDefaultTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MemberInitializedToDefault() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\MemberInitializedToDefault.cs", new MemberInitializedToDefault());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MemberInitializedToDefault_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MemberInitializedToDefault.CSharp9.cs", new MemberInitializedToDefault());
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MemberInitializedToDefault_CodeFix() =>
             OldVerifier.VerifyCodeFix<MemberInitializedToDefaultCodeFix>(
                 @"TestCases\MemberInitializedToDefault.cs",

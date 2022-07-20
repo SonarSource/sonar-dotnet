@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -30,71 +30,71 @@ namespace SonarAnalyzer.UnitTest.Helpers
         private readonly CSharpSyntaxFacade cs = new CSharpSyntaxFacade();
         private readonly VisualBasicSyntaxFacade vb = new VisualBasicSyntaxFacade();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EnumMembers_Null_CS() =>
             cs.EnumMembers(null).Should().BeEmpty();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EnumMembers_Null_VB() =>
             vb.EnumMembers(null).Should().BeEmpty();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void InvocationIdentifier_Null_CS() =>
             cs.InvocationIdentifier(null).Should().BeNull();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void InvocationIdentifier_Null_VB() =>
             vb.InvocationIdentifier(null).Should().BeNull();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void InvocationIdentifier_UnexpectedTypeThrows_CS() =>
             cs.Invoking(x => x.InvocationIdentifier(CS.SyntaxFactory.IdentifierName("ThisIsNotInvocation"))).Should().Throw<InvalidCastException>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void InvocationIdentifier_UnexpectedTypeThrows_VB() =>
             vb.Invoking(x => x.InvocationIdentifier(VB.SyntaxFactory.IdentifierName("ThisIsNotInvocation"))).Should().Throw<InvalidCastException>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NodeExpression_Null_CS() =>
             cs.NodeExpression(null).Should().BeNull();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NodeExpression_Null_VB() =>
             vb.NodeExpression(null).Should().BeNull();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NodeExpression_UnexpectedTypeThrows_CS() =>
             cs.Invoking(x => x.NodeExpression(CS.SyntaxFactory.IdentifierName("ThisTypeDoesNotHaveExpression"))).Should().Throw<InvalidOperationException>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NodeExpression_UnexpectedTypeThrows_VB() =>
             vb.Invoking(x => x.NodeExpression(VB.SyntaxFactory.IdentifierName("ThisTypeDoesNotHaveExpression"))).Should().Throw<InvalidOperationException>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NodeIdentifier_Null_CS() =>
             cs.NodeIdentifier(null).Should().BeNull();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NodeIdentifier_Null_VB() =>
             vb.NodeIdentifier(null).Should().BeNull();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NodeIdentifier_Unexpected_Returns_Null_CS() =>
            cs.NodeIdentifier(CS.SyntaxFactory.AttributeList()).Should().BeNull();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NodeIdentifier_Unexpected_Returns_Null_VB() =>
             vb.NodeIdentifier(VB.SyntaxFactory.AttributeList()).Should().BeNull();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NodeStringTextValue_UnexpectedType_CS() =>
              cs.NodeStringTextValue(CS.SyntaxFactory.ThrowStatement()).Should().BeEmpty();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NodeStringTextValue_UnexpectedType_VB() =>
             vb.NodeStringTextValue(VB.SyntaxFactory.ThrowStatement()).Should().BeEmpty();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RemoveConditionalAccess_Null_CS() =>
             cs.RemoveConditionalAccess(null).Should().BeNull();
 

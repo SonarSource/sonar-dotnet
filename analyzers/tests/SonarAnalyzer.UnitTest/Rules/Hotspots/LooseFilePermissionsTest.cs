@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,31 +27,31 @@ namespace SonarAnalyzer.UnitTest.Rules.Hotspots
     [TestClass]
     public class LooseFilePermissionsTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void LooseFilePermissions_Windows_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\LooseFilePermissions.Windows.cs", new LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled));
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void LooseFilePermissions_Windows_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\LooseFilePermissions.Windows.vb", new VB.LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled));
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void LooseFilePermissions_Windows_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\Hotspots\LooseFilePermissions.Windows.CSharp9.cs", new LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled));
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void LooseFilePermissions_Windows_CSharp10() =>
             OldVerifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\Hotspots\LooseFilePermissions.Windows.CSharp10.cs", new LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled));
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void LooseFilePermissions_Unix_CS() =>
             OldVerifier.VerifyAnalyzer(
                 @"TestCases\Hotspots\LooseFilePermissions.Unix.cs",
                 new LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled),
                 NuGetMetadataReference.MonoPosixNetStandard());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void LooseFilePermissions_Unix_VB() =>
             OldVerifier.VerifyAnalyzer(
                 @"TestCases\Hotspots\LooseFilePermissions.Unix.vb",

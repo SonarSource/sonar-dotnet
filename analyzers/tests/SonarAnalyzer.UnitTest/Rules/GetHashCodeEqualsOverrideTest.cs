@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,14 +25,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class GetHashCodeEqualsOverrideTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GetHashCodeEqualsOverride() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\GetHashCodeEqualsOverride.cs",
                                     new GetHashCodeEqualsOverride(),
                                     MetadataReferenceFacade.SystemComponentModelPrimitives);
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GetHashCodeEqualsOverride_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\GetHashCodeEqualsOverride.CSharp9.cs",
                                                       new GetHashCodeEqualsOverride(),

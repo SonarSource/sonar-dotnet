@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -30,38 +30,38 @@ namespace SonarAnalyzer.UnitTest.Rules
         private readonly VerifierBuilder sonarCS = new VerifierBuilder().AddAnalyzer(() => new CS.MethodParameterUnused(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg));
         private readonly VerifierBuilder roslynCS = new VerifierBuilder<CS.MethodParameterUnused>();   // Default constructor uses Roslyn CFG
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodParameterUnused_CS_SonarCfg() =>
             sonarCS.AddPaths("MethodParameterUnused.SonarCfg.cs").Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodParameterUnused_CS_RoslynCfg() =>
             roslynCS.AddPaths("MethodParameterUnused.RoslynCfg.cs").Verify();
 
 #if NETFRAMEWORK
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodParameterUnused_CS_RoslynCfg_NetFx() =>
             roslynCS.AddPaths("MethodParameterUnused.RoslynCfg.NetFx.cs").Verify();
 
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodParameterUnused_CodeFix_CS() =>
             roslynCS.AddPaths("MethodParameterUnused.RoslynCfg.cs")
                 .WithCodeFix<CS.MethodParameterUnusedCodeFix>()
                 .WithCodeFixedPaths("MethodParameterUnused.RoslynCfg.Fixed.cs")
                 .VerifyCodeFix();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodParameterUnused_CSharp7_CS() =>
             roslynCS.AddPaths("MethodParameterUnused.CSharp7.cs").WithOptions(ParseOptionsHelper.FromCSharp7).AddReferences(NuGetMetadataReference.SystemValueTuple("4.5.0")).VerifyNoIssueReported();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodParameterUnused_CSharp8_CS() =>
             roslynCS.AddPaths("MethodParameterUnused.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).AddReferences(MetadataReferenceFacade.NETStandard21).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodParameterUnused_DoubleCompilation_CS()
         {
             // https://github.com/SonarSource/sonar-dotnet/issues/5491
@@ -81,13 +81,13 @@ public class Sample
                 compilation.WithAnalyzers(roslynCS.Analyzers.Select(x => x()).ToImmutableArray()).GetAllDiagnosticsAsync(default).Result;
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodParameterUnused_VB() =>
             new VerifierBuilder<VB.MethodParameterUnused>().AddPaths("MethodParameterUnused.vb").Verify();
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodParameterUnused_CSharp10_RoslynCfg() =>
             roslynCS.AddPaths("MethodParameterUnused.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 

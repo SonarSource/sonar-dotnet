@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,13 +26,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class NonAsyncTaskShouldNotReturnNullTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NonAsyncTaskShouldNotReturnNull_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\NonAsyncTaskShouldNotReturnNull.cs",
                 new CS.NonAsyncTaskShouldNotReturnNull(),
                 ParseOptionsHelper.FromCSharp8);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NonAsyncTaskShouldNotReturnNull_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\NonAsyncTaskShouldNotReturnNull.vb",
                 new VB.NonAsyncTaskShouldNotReturnNull());

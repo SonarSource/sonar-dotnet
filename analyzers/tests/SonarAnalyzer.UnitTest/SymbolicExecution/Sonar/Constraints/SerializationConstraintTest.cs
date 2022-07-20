@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,19 +25,19 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.Constraints
     [TestClass]
     public class SerializationConstraintTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GivenBinderIsSafe_OppositeShouldBe_Unsafe() =>
             SerializationConstraint.Safe.Opposite.Should().Be(SerializationConstraint.Unsafe);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GivenBinderIsUnsafe_OppositeShouldBe_Safe() =>
             SerializationConstraint.Unsafe.Opposite.Should().Be(SerializationConstraint.Safe);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GivenBinderIsSafe_ToStringShouldBe_Safe() =>
             SerializationConstraint.Safe.ToString().Should().Be("Safe");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GivenBinderIsUnsafe_ToStringShouldBe_Unsafe() =>
             SerializationConstraint.Unsafe.ToString().Should().Be("Unsafe");
     }

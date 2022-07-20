@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,17 +25,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class MethodOverrideNoParamsTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodOverrideNoParams() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\MethodOverrideNoParams.cs", new MethodOverrideNoParams());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodOverrideNoParams_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodOverrideNoParams.CSharp9.cs", new MethodOverrideNoParams());
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodOverrideNoParams_CodeFix() =>
             OldVerifier.VerifyCodeFix<MethodOverrideNoParamsCodeFix>(
                 @"TestCases\MethodOverrideNoParams.cs",

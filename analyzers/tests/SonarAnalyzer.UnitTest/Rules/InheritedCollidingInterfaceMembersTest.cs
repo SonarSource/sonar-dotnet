@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,11 +25,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class InheritedCollidingInterfaceMembersTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void InheritedCollidingInterfaceMembers() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\InheritedCollidingInterfaceMembers.cs", new InheritedCollidingInterfaceMembers());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void InheritedCollidingInterfaceMembers_CSharp8() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\InheritedCollidingInterfaceMembers.AfterCSharp8.cs",
                                     new InheritedCollidingInterfaceMembers(),

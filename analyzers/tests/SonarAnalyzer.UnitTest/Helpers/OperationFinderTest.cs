@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,7 +27,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
     [TestClass]
     public class OperationFinderTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ValidateFinder()
         {
             const string code = @"

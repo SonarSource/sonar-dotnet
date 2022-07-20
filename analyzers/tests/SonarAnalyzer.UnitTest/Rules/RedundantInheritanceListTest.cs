@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,28 +28,28 @@ namespace SonarAnalyzer.UnitTest.Rules
         private readonly VerifierBuilder rule = new VerifierBuilder<RedundantInheritanceList>();
         private readonly VerifierBuilder codeFix = new VerifierBuilder<RedundantInheritanceList>().WithCodeFix<RedundantInheritanceListCodeFix>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundantInheritanceList() =>
             rule.AddPaths("RedundantInheritanceList.cs").Verify();
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundantInheritanceList_CSharp9() =>
             rule.AddPaths("RedundantInheritanceList.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundantInheritanceList_CSharp9_CodeFix() =>
             codeFix.AddPaths("RedundantInheritanceList.CSharp9.cs")
                 .WithCodeFixedPaths("RedundantInheritanceList.CSharp9.Fixed.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp9)
                 .VerifyCodeFix();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundantInheritanceList_CSharp10() =>
             rule.AddPaths("RedundantInheritanceList.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundantInheritanceList_CSharp10_CodeFix() =>
             codeFix.AddPaths("RedundantInheritanceList.CSharp10.cs")
                 .WithCodeFixedPaths("RedundantInheritanceList.CSharp10.Fixed.cs")
@@ -58,7 +58,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundantInheritanceList_CodeFix() =>
             codeFix.AddPaths("RedundantInheritanceList.cs")
                 .WithCodeFixedPaths("RedundantInheritanceList.Fixed.cs")

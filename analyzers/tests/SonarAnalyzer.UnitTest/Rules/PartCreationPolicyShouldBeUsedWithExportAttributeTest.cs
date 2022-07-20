@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,13 +26,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class PartCreationPolicyShouldBeUsedWithExportAttributeTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PartCreationPolicyShouldBeUsedWithExportAttribute_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\PartCreationPolicyShouldBeUsedWithExportAttribute.cs",
                                     new CS.PartCreationPolicyShouldBeUsedWithExportAttribute(),
                                     MetadataReferenceFacade.SystemComponentModelComposition);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PartCreationPolicyShouldBeUsedWithExportAttribute_UnresolvedSymbol_CS() =>
             OldVerifier.VerifyCSharpAnalyzer(@"
 [UnresolvedAttribute] // Error [CS0246]
@@ -41,14 +41,14 @@ class Bar { }",
                                           CompilationErrorBehavior.Ignore,
                                           MetadataReferenceFacade.SystemComponentModelComposition);
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PartCreationPolicyShouldBeUsedWithExportAttribute_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PartCreationPolicyShouldBeUsedWithExportAttribute.CSharp9.cs",
                                                       new CS.PartCreationPolicyShouldBeUsedWithExportAttribute(),
                                                       MetadataReferenceFacade.SystemComponentModelComposition);
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PartCreationPolicyShouldBeUsedWithExportAttribute_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\PartCreationPolicyShouldBeUsedWithExportAttribute.vb",
                                     new VB.PartCreationPolicyShouldBeUsedWithExportAttribute(),

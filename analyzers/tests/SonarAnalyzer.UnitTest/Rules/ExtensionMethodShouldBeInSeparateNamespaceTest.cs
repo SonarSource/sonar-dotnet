@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,7 +27,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<ExtensionMethodShouldBeInSeparateNamespace>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ExtensionMethodShouldBeInSeparateNamespace() =>
             builder
                 .AddPaths("ExtensionMethodShouldBeInSeparateNamespace.cs", "ExtensionMethodShouldBeInSeparateNamespace.GeneratedCode.cs")
@@ -35,11 +35,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ExtensionMethodShouldBeInSeparateNamespace_CSharp9() =>
             builder.AddPaths("ExtensionMethodShouldBeInSeparateNamespace.CSharp9.cs").WithTopLevelStatements().Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ExtensionMethodShouldBeInSeparateNamespace_CSharp10() =>
             builder
                 .AddPaths("ExtensionMethodShouldBeInSeparateNamespace.CSharp10.cs")

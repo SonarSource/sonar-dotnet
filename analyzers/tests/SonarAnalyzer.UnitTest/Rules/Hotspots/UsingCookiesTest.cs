@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -37,14 +37,14 @@ namespace SonarAnalyzer.UnitTest.Rules
             .WithBasePath(@"Hotspots\");
 
 #if NETFRAMEWORK // HttpCookie is available only when targeting .Net Framework
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UsingCookies_CS_Net46() =>
             builderCS
                 .AddPaths("UsingCookies_Net46.cs")
                 .AddReferences(GetAdditionalReferencesForNet46())
                 .Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UsingCookies_VB_Net46() =>
             builderVB
                 .AddPaths("UsingCookies_Net46.vb")
@@ -55,21 +55,21 @@ namespace SonarAnalyzer.UnitTest.Rules
             FrameworkMetadataReference.SystemWeb;
 
 #else
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UsingCookies_CS_NetCore() =>
             builderCS
                 .AddPaths("UsingCookies_NetCore.cs")
                 .AddReferences(GetAspNetCoreReferences(Constants.DotNetCore220Version))
                 .Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UsingCookies_CS_NetCore_DotnetCoreLatest() =>
             builderCS
                 .AddPaths("UsingCookies_NetCore.cs")
                 .AddReferences(GetAspNetCoreReferences(Constants.NuGetLatestVersion))
                 .Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UsingCookies_CSharp10_DotnetCoreLatest() =>
             builderCS
                 .AddPaths("UsingCookies_NetCore.CSharp10.cs")
@@ -77,7 +77,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithLanguageVersion(LanguageVersion.CSharp10)
                 .Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UsingCookies_VB_NetCore_DotnetCoreLatest() =>
             builderVB
                 .AddPaths("UsingCookies_NetCore.vb")

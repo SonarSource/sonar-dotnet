@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,19 +26,19 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class MemberInitializerRedundantTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MemberInitializerRedundant_RoslynCfg() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\MemberInitializerRedundant.cs", new MemberInitializerRedundant(), ParseOptionsHelper.FromCSharp8);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MemberInitializerRedundant_RoslynCfg_FlowCaptureOperationNotSupported() =>
             OldVerifier.VerifyNoIssueReported(@"TestCases\MemberInitializerRedundant.RoslynCfg.FlowCaptureBug.cs", new MemberInitializerRedundant(), ParseOptionsHelper.FromCSharp8);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MemberInitializerRedundant_SonarCfg() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\MemberInitializerRedundant.cs", new MemberInitializerRedundant(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg), ParseOptionsHelper.FromCSharp8);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MemberInitializerRedundant_CodeFix() =>
             OldVerifier.VerifyCodeFix<MemberInitializedToDefaultCodeFix>(
                 @"TestCases\MemberInitializerRedundant.cs",
@@ -46,11 +46,11 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new MemberInitializerRedundant());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MemberInitializerRedundant_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MemberInitializerRedundant.CSharp9.cs", new MemberInitializerRedundant());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MemberInitializerRedundant_CSharp9_CodeFix() =>
             OldVerifier.VerifyCodeFix<MemberInitializedToDefaultCodeFix>(
                 @"TestCases\MemberInitializerRedundant.CSharp9.cs",
@@ -58,11 +58,11 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new MemberInitializerRedundant(),
                 ParseOptionsHelper.FromCSharp9);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MemberInitializerRedundant_CSharp10() =>
             OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\MemberInitializerRedundant.CSharp10.cs", new MemberInitializerRedundant());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MemberInitializerRedundant_CSharp10_CodeFix() =>
             OldVerifier.VerifyCodeFix<MemberInitializedToDefaultCodeFix>(
                 @"TestCases\MemberInitializerRedundant.CSharp10.cs",

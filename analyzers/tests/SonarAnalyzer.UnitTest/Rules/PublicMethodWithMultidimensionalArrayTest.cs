@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,17 +26,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class PublicMethodWithMultidimensionalArrayTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PublicMethodWithMultidimensionalArray_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\PublicMethodWithMultidimensionalArray.cs", new CS.PublicMethodWithMultidimensionalArray());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PublicMethodWithMultidimensionalArray_CSharpPreview() =>
             OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\PublicMethodWithMultidimensionalArray.CSharpPreview.cs", new CS.PublicMethodWithMultidimensionalArray());
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PublicMethodWithMultidimensionalArray_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\PublicMethodWithMultidimensionalArray.vb", new VB.PublicMethodWithMultidimensionalArray());
     }

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -34,21 +34,21 @@ namespace SonarAnalyzer.UnitTest.Rules
         private readonly VerifierBuilder roslynCfg = new VerifierBuilder<DeadStores>()
             .AddReferences(MetadataReferenceFacade.NETStandard21);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DeadStores_SonarCfg() =>
             sonarCfg.AddPaths("DeadStores.SonarCfg.cs").Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DeadStores_RoslynCfg() =>
             roslynCfg.AddPaths("DeadStores.RoslynCfg.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DeadStores_CSharp9() =>
             roslynCfg.AddPaths("DeadStores.CSharp9.cs").WithTopLevelStatements().Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DeadStores_CSharp10() =>
             roslynCfg.AddPaths("DeadStores.CSharp10.cs").WithTopLevelStatements().WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 

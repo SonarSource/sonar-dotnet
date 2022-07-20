@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,11 +26,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class FlagsEnumWithoutInitializerTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void FlagsEnumWithoutInitializer_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\FlagsEnumWithoutInitializer.cs", new CS.FlagsEnumWithoutInitializer());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void FlagsEnumWithoutInitializer_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\FlagsEnumWithoutInitializer.vb", new VB.FlagsEnumWithoutInitializer());
     }

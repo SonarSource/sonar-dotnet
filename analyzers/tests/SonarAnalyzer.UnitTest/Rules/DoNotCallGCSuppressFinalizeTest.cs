@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,20 +27,20 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<DoNotCallGCSuppressFinalize>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotCallGCSuppressFinalize() =>
             builder.AddPaths("DoNotCallGCSuppressFinalize.cs")
                 .Verify();
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotCallGCSuppressFinalize_NetCore() =>
             builder.AddPaths("DoNotCallGCSuppressFinalize.NetCore.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotCallGCSuppressFinalize_Net5() =>
             builder.AddPaths("DoNotCallGCSuppressFinalize.Net5.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp9)

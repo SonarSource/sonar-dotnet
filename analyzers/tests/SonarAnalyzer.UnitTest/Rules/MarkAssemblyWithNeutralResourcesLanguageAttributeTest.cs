@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,19 +27,19 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<MarkAssemblyWithNeutralResourcesLanguageAttribute>().WithConcurrentAnalysis(false);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MarkAssemblyWithNeutralResourcesLanguageAttribute_HasResx_HasAttribute_Compliant() =>
             builder.AddPaths("MarkAssemblyWithNeutralResourcesLanguageAttribute.cs", @"Resources\SomeResources.Designer.cs", @"Resources\AnotherResources.Designer.cs").Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MarkAssemblyWithNeutralResourcesLanguageAttribute_NoResx_HasAttribute_Compliant() =>
             builder.AddPaths("MarkAssemblyWithNeutralResourcesLanguageAttribute.cs").Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MarkAssemblyWithNeutralResourcesLanguageAttribute_HasResx_HasInvalidAttribute_Noncompliant() =>
             builder.AddPaths("MarkAssemblyWithNeutralResourcesLanguageAttributeNonCompliant.Invalid.cs", @"Resources\SomeResources.Designer.cs").Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MarkAssemblyWithNeutralResourcesLanguageAttribute_HasResx_NoAttribute_Noncompliant() =>
             builder.AddPaths("MarkAssemblyWithNeutralResourcesLanguageAttributeNonCompliant.cs", @"Resources\SomeResources.Designer.cs").Verify();
     }

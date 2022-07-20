@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         private readonly VerifierBuilder builder = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled));
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CookiesShouldBeHttpOnly_Nancy() =>
             builder.AddPaths("CookieShouldBeHttpOnly_Nancy.cs")
                 .AddReferences(AdditionalReferences)
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NETFRAMEWORK // The analyzed code is valid only for .Net Framework
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CookiesShouldBeHttpOnly() =>
             builder.AddPaths("CookieShouldBeHttpOnly.cs")
                 .AddReferences(MetadataReferenceFacade.SystemWeb)
@@ -78,13 +78,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 
 #else
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CookiesShouldBeHttpOnly_NetCore() =>
             builder.AddPaths("CookieShouldBeHttpOnly_NetCore.cs")
                 .AddReferences(GetAdditionalReferences_NetCore())
                 .Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CookiesShouldBeHttpOnly_CSharp9() =>
             builder.AddPaths("CookieShouldBeHttpOnly.CSharp9.cs")
                 .WithTopLevelStatements()
@@ -92,7 +92,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .AddReferences(NuGetMetadataReference.Nancy())
                 .Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CookiesShouldBeHttpOnly_CSharp10() =>
             builder.AddPaths("CookieShouldBeHttpOnly.CSharp10.cs")
                 .WithTopLevelStatements()

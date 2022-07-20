@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,7 +27,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<DoNotCallExitMethods>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotCallExitMethods() =>
             builder.AddPaths("DoNotCallExitMethods.cs")
                 .AddReferences(MetadataReferenceFacade.SystemWindowsForms)
@@ -35,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotCallExitMethods_CSharp9() =>
             builder.AddPaths("DoNotCallExitMethods.CSharp9.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp9)

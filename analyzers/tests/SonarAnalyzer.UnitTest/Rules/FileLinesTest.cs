@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,11 +26,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class FileLinesTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void FileLines_CS() =>
             new VerifierBuilder().AddAnalyzer(() => new CS.FileLines { Maximum = 10 }).AddPaths("FileLines20.cs", "FileLines9.cs").WithAutogenerateConcurrentFiles(false).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void FileLines_VB() =>
             new VerifierBuilder().AddAnalyzer(() => new VB.FileLines { Maximum = 10 }).AddPaths("FileLines20.vb", "FileLines9.vb").WithAutogenerateConcurrentFiles(false).Verify();
     }

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,11 +26,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class IndexOfCheckAgainstZeroTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IndexOfCheckAgainstZero_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\IndexOfCheckAgainstZero.cs", new CS.IndexOfCheckAgainstZero());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IndexOfCheckAgainstZero_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\IndexOfCheckAgainstZero.vb", new VB.IndexOfCheckAgainstZero());
     }

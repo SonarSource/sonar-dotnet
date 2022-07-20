@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -23,7 +23,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
     [TestClass]
     public class ProjectTypeHelperTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void TestReference_ShouldBeSynchronized()
         {
             // Purpose of this test is to remind us, that we need to synchronize this list with sonar-scanner-msbuild and sonar-security.
@@ -49,7 +49,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             ProjectTypeHelper.TestAssemblyNames.OrderBy(x => x).Should().BeEquivalentTo(synchronizedSortedReferences);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IsTest_ReturnsTrueForTestFrameworks()
         {
             IsTest(NuGetMetadataReference.JetBrainsDotMemoryUnit(Constants.NuGetLatestVersion)).Should().BeTrue();
@@ -75,7 +75,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             IsTest(NuGetMetadataReference.RhinoMocks(Constants.NuGetLatestVersion)).Should().BeTrue();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IsTest_ReturnsFalse()
         {
             IsTest(null).Should().BeFalse();
@@ -83,7 +83,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             IsTest(NuGetMetadataReference.SystemValueTuple(Constants.NuGetLatestVersion)).Should().BeFalse();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IsTest_Compilation()
         {
             IsTest(NuGetMetadataReference.MSTestTestFrameworkV1).Should().BeTrue();

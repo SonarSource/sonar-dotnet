@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -31,11 +31,11 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
     public class SymbolicExecutionRunnerTest
     {
         // This test is meant to run all the symbolic execution rules together and verify different scenarios.
-        [TestMethod]
+        [Ignore][TestMethod]
         public void VerifySymbolicExecutionRules_CS() =>
             new VerifierBuilder<CS.SymbolicExecutionRunner>().AddPaths(@"SymbolicExecution\Sonar\SymbolicExecutionRules.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Initialize_MethodBase_CS() =>
             VerifyClassMainCS(@"
 public Sample() // ConstructorDeclaration
@@ -77,7 +77,7 @@ public void MethodDeclaration()
 public void MethodDeclaration(string s) =>
     s = null;   // Noncompliant {{Message for SMain}}");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Initialize_MethodBase_VB() =>
             VerifyClassMainVB(@"
 Public Sub New() ' ConstructorDeclaration
@@ -108,19 +108,19 @@ Public Function FunctionDeclaration() As Integer
     Dim S As String = Nothing ' Noncompliant {{Message for SMain}}
 End Function");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Initialize_Property_CS() =>
             VerifyClassMainCS(@"
 private int target;
 public int Property => target = 42;     // Noncompliant {{Message for SMain}}");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Initialize_Indexer_CS() =>
             VerifyClassMainCS(@"
 private string target;
 public string this[int index] => target = null; // Noncompliant {{Message for SMain}}");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Initialize_Accessors_CS() =>
             VerifyClassMainCS(@"
 private string target;
@@ -184,7 +184,7 @@ public string this[float index]
 
 ");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Initialize_Accessors_VB() =>
             VerifyClassMainVB(@"
 Public Property BodyProperty
@@ -210,7 +210,7 @@ End Event");
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Initialize_Accessors_Init_CS() =>
             VerifyClassMainCS(@"
 private string target;
@@ -232,7 +232,7 @@ public string InitOnlyPropertyArrow
 
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Initialize_AnonymousFunction_CS() =>
             VerifyClassMainCS(@"
 delegate void VoidDelegate();
@@ -255,7 +255,7 @@ public void Method()
     };
 }");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Initialize_AnonymousFunction_VB() =>
             VerifyClassMainVB(@"
 Public Sub Method()
@@ -276,34 +276,34 @@ End Sub
 Private Sub Use(F As Func(Of Integer))
 End Sub");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Analyze_DoNotRunWhenContainsDiagnostics() =>
             Verify(@"string s = null;   // Error CS1525: Invalid expression term '>' - misleading location, duplicate reporting from Roslyn
                      >>;                // Error CS1525: Invalid expression term '>' - this will set body.ContainsDiagnostics",
                 ProjectType.Product,
                 null);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Enabled_MainProject() =>
             Verify(@"string s = null;   // Noncompliant    {{Message for SAll}}
                                         // Noncompliant@-1 {{Message for SMain}}",
                 ProjectType.Product,
                 null);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Enabled_TestProject_StandaloneRun() =>
             Verify(@"string s = null;   // Noncompliant    {{Message for SAll}}
                                         // Noncompliant@-1 {{Message for STest}}",
                 ProjectType.Test,
                 null);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Enabled_TestProject_ScannerRun() =>
             Verify(@"string s = null;   // Noncompliant {{Message for STest}}",
                 ProjectType.Test,
                 TestHelper.CreateSonarProjectConfig(nameof(Enabled_TestProject_ScannerRun), ProjectType.Test));
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Analyze_DescriptorsWithSameType_ExecutesOnce()
         {
             var code =
@@ -325,13 +325,13 @@ End Sub");
                 .Verify();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Analyze_Severity_ExecutesWhenAll() =>
             Verify(@"string s = null;   // Noncompliant    {{Message for SAll}}
                                         // Noncompliant@-1 {{Message for SMain}}
                     s.ToString();       // Noncompliant    {{'s' is null on at least one execution path.}} - rule S2259");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Analyze_Severity_ExecutesWhenMore() =>
             Verify(@"string s = null;   // Noncompliant    {{Message for SAll}}
                                         // Noncompliant@-1 {{Message for SMain}}
@@ -339,19 +339,19 @@ End Sub");
                 AllScopeAssignmentRuleCheck.SAll,
                 MainScopeAssignmentRuleCheck.SMain);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Analyze_Severity_ExecutesWhenOne() =>
             Verify(@"string s = null; // Noncompliant {{Message for SMain}}
                      s.ToString();    // Compliant, should not raise S2259",
                 MainScopeAssignmentRuleCheck.SMain);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Analyze_Severity_DoesNotExecutesWhenNone() =>
             Verify(@"string s = null;   // Compliant, SMain and SAll are suppressed by test framework, because only 'SAnother' is active
                      s.ToString();      // Compliant, should not raise S2259",
                 TestHelper.CreateDescriptor("SAnother", DiagnosticDescriptorFactory.MainSourceScopeTag));
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Analyze_ShouldExecute_ExcludesCheckFromExecution()
         {
             var sut = new ConfigurableSERunnerCS();
@@ -376,7 +376,7 @@ public class Sample
 }").Verify();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Analyze_Rethrows_SymbolicExecutionException()
         {
             var code = @"

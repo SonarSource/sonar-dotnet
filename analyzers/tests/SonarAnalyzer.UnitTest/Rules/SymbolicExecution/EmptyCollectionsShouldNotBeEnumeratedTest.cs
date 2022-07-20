@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -42,11 +42,11 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EmptyCollectionsShouldNotBeEnumerated_CSharp9() =>
             Builder.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp9.cs").WithTopLevelStatements().Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EmptyCollectionsShouldNotBeEnumerated_CSharp10() =>
             Builder.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 

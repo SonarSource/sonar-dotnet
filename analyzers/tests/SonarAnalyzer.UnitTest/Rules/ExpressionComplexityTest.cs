@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,25 +26,25 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ExpressionComplexityTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ExpressionComplexity_CSharp() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\ExpressionComplexity.cs",
                 new CS.ExpressionComplexity { Maximum = 3},
                 ParseOptionsHelper.FromCSharp8);
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ExpressionComplexity_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ExpressionComplexity.CSharp9.cs",
                 new CS.ExpressionComplexity { Maximum = 3});
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ExpressionComplexity_CSharp10() =>
             OldVerifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\ExpressionComplexity.CSharp10.cs",
                 new CS.ExpressionComplexity { Maximum = 3});
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ExpressionComplexity_VisualBasic() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\ExpressionComplexity.vb",
                 new VB.ExpressionComplexity { Maximum = 3 });

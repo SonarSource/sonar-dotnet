@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,19 +27,19 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<NativeMethodsShouldBeWrapped>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NativeMethodsShouldBeWrapped() =>
             builder.AddPaths("NativeMethodsShouldBeWrapped.cs").WithErrorBehavior(CompilationErrorBehavior.Ignore).Verify();
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NativeMethodsShouldBeWrapped_CSharp9() =>
             builder.AddPaths("NativeMethodsShouldBeWrapped.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NativeMethodsShouldBeWrapped_InvalidCode() =>
             builder.AddSnippet(@"
 public class InvalidSyntax

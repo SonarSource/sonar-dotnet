@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,7 +28,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
     [TestClass]
     public class MethodParameterLookupTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void TestMethodParameterLookup_CS()
         {
             const string Source = @"
@@ -92,7 +92,7 @@ namespace Test
             actionThrow.Should().Throw<InvalidOperationException>();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void TestMethodParameterLookup_VB()
         {
             const string Source = @"

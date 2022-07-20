@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<OptionExplicitOn>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void OptionExplicitOn_IsOffForProject()
         {
             var project = SolutionBuilder.Create().AddProject(AnalyzerLanguage.VisualBasic).AddSnippet("' Noncompliant ^1#0 {{Configure 'Option Explicit On' for assembly 'project0'.}}");
@@ -39,19 +39,19 @@ namespace SonarAnalyzer.UnitTest.Rules
             DiagnosticVerifier.Verify(compilation, new OptionExplicitOn(), CompilationErrorBehavior.Default);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void OptionExplicitOn_IsOff() =>
             builder.AddSnippet("Option Explicit Off ' Noncompliant ^1#19 {{Change this to 'Option Explicit On'.}}").Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void OptionExplicitOn_IsOn() =>
             builder.AddSnippet("Option Explicit On").Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void OptionExplicitOn_IsMissing() =>
             builder.AddSnippet("Option Strict Off").Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void OptionExplicitOn_Concurrent()
         {
             using var scope = new EnvironmentVariableScope { EnableConcurrentAnalysis = true};

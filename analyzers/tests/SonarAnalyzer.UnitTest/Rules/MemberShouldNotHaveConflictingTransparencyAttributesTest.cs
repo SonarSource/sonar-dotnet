@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,16 +25,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class MemberShouldNotHaveConflictingTransparencyAttributesTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MemberShouldNotHaveConflictingTransparencyAttributes() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\MemberShouldNotHaveConflictingTransparencyAttributes.cs", new MemberShouldNotHaveConflictingTransparencyAttributes());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MemberShouldNotHaveConflictingTransparencyAttributes_AssemblyLevel() =>
             OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\MemberShouldNotHaveConflictingTransparencyAttributes_AssemblyLevel.cs", new MemberShouldNotHaveConflictingTransparencyAttributes());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MemberShouldNotHaveConflictingTransparencyAttributes_CSharp10() =>
             OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\MemberShouldNotHaveConflictingTransparencyAttributes.CSharp10.cs", new MemberShouldNotHaveConflictingTransparencyAttributes());
 #endif

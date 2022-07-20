@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -65,7 +65,7 @@ Public Class Sample
     End Sub
 End Class";
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MatchSet_CS()
         {
             var tracker = new CSharpFieldAccessTracker();
@@ -76,7 +76,7 @@ End Class";
             tracker.MatchSet()(context).Should().BeFalse();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MatchSet_VB()
         {
             var tracker = new VisualBasicFieldAccessTracker();
@@ -87,7 +87,7 @@ End Class";
             tracker.MatchSet()(context).Should().BeFalse();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AssignedValueIsConstant_CS()
         {
             var tracker = new CSharpFieldAccessTracker();
@@ -101,7 +101,7 @@ End Class";
             tracker.AssignedValueIsConstant()(context).Should().BeFalse();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AssignedValueIsConstant_VB()
         {
             var tracker = new VisualBasicFieldAccessTracker();

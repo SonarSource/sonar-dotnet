@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,11 +26,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DoNotLockWeakIdentityObjectsTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotLockWeakIdentityObjects_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\DoNotLockWeakIdentityObjects.cs", new CS.DoNotLockWeakIdentityObjects());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotLockWeakIdentityObjects_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\DoNotLockWeakIdentityObjects.vb", new VB.DoNotLockWeakIdentityObjects());
     }

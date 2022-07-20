@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -78,7 +78,7 @@ namespace NS
             testCode = new SnippetCompiler(TestInput, ignoreErrors: true, language: AnalyzerLanguage.CSharp);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Symbol_IsPublicApi()
         {
             ISymbol symbol = testCode.GetMethodSymbol("Base.Method1");
@@ -97,7 +97,7 @@ namespace NS
             symbol.IsPubliclyAccessible().Should().BeFalse();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Symbol_IsInterfaceImplementationOrMemberOverride()
         {
             ISymbol symbol = testCode.GetMethodSymbol("Base.Method1");
@@ -114,7 +114,7 @@ namespace NS
             symbol.GetInterfaceMember().Should().NotBeNull();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Symbol_TryGetOverriddenOrInterfaceMember()
         {
             var methodSymbol = testCode.GetMethodSymbol("Base.Method1");
@@ -136,7 +136,7 @@ namespace NS
             actualOverriddenMethod.Should().Be(expectedOverriddenMethod);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Symbol_IsChangeable()
         {
             var symbol = testCode.GetMethodSymbol("Base.Method1");
@@ -152,7 +152,7 @@ namespace NS
             symbol.IsChangeable().Should().BeFalse();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Symbol_IsProbablyEventHandler()
         {
             var symbol = testCode.GetMethodSymbol("Derived2.Method3");
@@ -162,7 +162,7 @@ namespace NS
             symbol.IsEventHandler().Should().BeTrue();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Symbol_GetSelfAndBaseTypes()
         {
             var objectType = testCode.GetTypeByMetadataName("System.Object");
@@ -178,7 +178,7 @@ namespace NS
             baseTypes.Should().HaveElementAt(2, objectType);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Symbol_GetAllNamedTypes_Namespace()
         {
             var nsSymbol = testCode.GetNamespaceSymbol("NS");
@@ -187,7 +187,7 @@ namespace NS
             typeSymbols.Should().HaveCount(6);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Symbol_GetAllNamedTypes_Type()
         {
             var typeSymbol = testCode.GetTypeSymbol("Base") as INamedTypeSymbol;
@@ -195,7 +195,7 @@ namespace NS
             typeSymbols.Should().HaveCount(3);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Symbol_IsKnownType()
         {
             var method4 = (MethodDeclarationSyntax)testCode.GetMethodDeclaration("IInterface.Method4");
@@ -225,55 +225,55 @@ namespace NS
                 .Should().BeFalse();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IsAnyAttributeInOverridingChain_WhenMethodSymbolIsNull_ReturnsFalse() =>
             SymbolHelper.IsAnyAttributeInOverridingChain((IMethodSymbol)null).Should().BeFalse();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IsAnyAttributeInOverridingChain_WhenPropertySymbolIsNull_ReturnsFalse() =>
             SymbolHelper.IsAnyAttributeInOverridingChain((IPropertySymbol)null).Should().BeFalse();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AnyAttributeDerivesFrom_WhenSymbolIsNull_ReturnsFalse() =>
             SymbolHelper.AnyAttributeDerivesFrom(null, KnownType.Void).Should().BeFalse();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AnyAttributeDerivesFromAny_WhenSymbolIsNull_ReturnsFalse() =>
             SymbolHelper.AnyAttributeDerivesFromAny(null, ImmutableArray.Create(KnownType.Void)).Should().BeFalse();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GetAttributesForKnownType_WhenSymbolIsNull_ReturnsEmpty() =>
             SymbolHelper.GetAttributes(null, KnownType.Void).Should().BeEmpty();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GetAttributesForKnownTypes_WhenSymbolIsNull_ReturnsEmpty() =>
             SymbolHelper.GetAttributes(null, ImmutableArray.Create(KnownType.Void)).Should().BeEmpty();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GetParameters_WhenSymbolIsNotMethodOrProperty_ReturnsEmpty() =>
             Mock.Of<ISymbol>(x => x.Kind == SymbolKind.Alias).GetParameters().Should().BeEmpty();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GetInterfaceMember_WhenSymbolIsNull_ReturnsEmpty() =>
             ((ISymbol)null).GetInterfaceMember().Should().BeNull();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GetOverriddenMember_WhenSymbolIsNull_ReturnsEmpty() =>
             ((ISymbol)null).GetOverriddenMember().Should().BeNull();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GetAllNamedTypesForNamespace_WhenSymbolIsNull_ReturnsEmpty() =>
             ((INamespaceSymbol)null).GetAllNamedTypes().Should().BeEmpty();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GetAllNamedTypesForNamedType_WhenSymbolIsNull_ReturnsEmpty() =>
             ((INamedTypeSymbol)null).GetAllNamedTypes().Should().BeEmpty();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GetSelfAndBaseTypes_WhenSymbolIsNull_ReturnsEmpty() =>
             ((ITypeSymbol)null).GetSelfAndBaseTypes().Should().BeEmpty();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GetEffectiveAccessibility_WhenSymbolIsNull_ReturnsNotApplicable() =>
             ((ISymbol)null).GetEffectiveAccessibility().Should().Be(CodeAnalysisAccessibility.NotApplicable);
     }

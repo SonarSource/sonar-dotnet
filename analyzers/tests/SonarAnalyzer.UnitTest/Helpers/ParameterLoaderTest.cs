@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,7 +27,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
     [TestClass]
     public class ParameterLoaderTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         [DataRow("path//aSonarLint.xml")] // different name
         [DataRow("path//SonarLint.xmla")] // different extension
         public void SetParameterValues_WhenNoSonarLintIsGiven_DoesNotPopulateParameters(string filePath)
@@ -43,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             analyzer.Maximum.Should().Be(3); // Default value
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         [DataRow("a/SonarLint.xml")] // unix path
         [DataRow("a\\SonarLint.xml")]
         public void SetParameterValues_WhenGivenValidSonarLintFilePath_PopulatesProperties(string filePath)
@@ -59,7 +59,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             analyzer.Maximum.Should().Be(1); // Value from the xml file
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SetParameterValues_WhenGivenSonarLintFileHasIntParameterType_PopulatesProperties()
         {
             // Arrange
@@ -73,7 +73,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             analyzer.Maximum.Should().Be(1); // Value from the xml file
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SetParameterValues_WhenGivenSonarLintFileHasStringParameterType_OnlyOneParameter_PopulatesProperty()
         {
             // Arrange
@@ -87,7 +87,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             analyzer.FlagsEnumNamePattern.Should().Be("1"); // value from XML file
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SetParameterValues_WhenGivenSonarLintFileHasBooleanParameterType_OnlyOneParameter_PopulatesProperty()
         {
             // Arrange
@@ -101,7 +101,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             analyzer.IsRegularExpression.Should().BeTrue(); // value from XML file
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SetParameterValues_WhenGivenValidSonarLintFileAndDoesNotContainAnalyzerParameters_DoesNotPopulateProperties()
         {
             // Arrange
@@ -115,7 +115,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             analyzer.Maximum.Should().Be(200); // Default value
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SetParameterValues_WithNonExistentPath_UsesInMemoryText()
         {
             // Arrange
@@ -148,7 +148,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             analyzer.Maximum.Should().Be(1); // In-memory value
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SetParameterValues_CalledTwiceAfterChangeInConfigFile_UpdatesProperties()
         {
             // Arrange
@@ -186,7 +186,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             analyzer.Maximum.Should().Be(42);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         [DataRow("")]
         [DataRow("this is not an xml")]
         [DataRow(@"<?xml version=""1.0"" encoding=""UTF - 8""?><AnalysisInput><Settings>")]
@@ -203,7 +203,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             analyzer.Maximum.Should().Be(3); // Default value
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SetParameterValues_WithWrongPropertyType_StringInsteadOfInt_DoesNotPopulateProperties()
         {
             // Arrange
@@ -217,7 +217,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             analyzer.Maximum.Should().Be(3); // Default value
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SetParameterValues_WithWrongPropertyType_StringInsteadOfBoolean_DoesNotPopulateProperties()
         {
             // Arrange

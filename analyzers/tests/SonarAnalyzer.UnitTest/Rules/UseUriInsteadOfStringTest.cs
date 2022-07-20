@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -35,17 +35,17 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UseUriInsteadOfString_CSharp9() =>
             builder.AddPaths("UseUriInsteadOfString.CSharp9.cs").WithTopLevelStatements().Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UseUriInsteadOfString_CSharp10() =>
             builder.AddPaths("UseUriInsteadOfString.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UseUriInsteadOfString_InvalidCode() =>
             builder.AddSnippet(@"
 public class NoMembers

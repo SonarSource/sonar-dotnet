@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,17 +26,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class InsecureTemporaryFilesCreationTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void InsecureTemporaryFilesCreation_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\InsecureTemporaryFilesCreation.cs", new CS.InsecureTemporaryFilesCreation());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void InsecureTemporaryFilesCreation_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\InsecureTemporaryFilesCreation.CSharp9.cs", new CS.InsecureTemporaryFilesCreation());
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void InsecureTemporaryFilesCreation_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\InsecureTemporaryFilesCreation.vb", new VB.InsecureTemporaryFilesCreation());
     }

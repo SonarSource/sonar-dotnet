@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,25 +29,25 @@ namespace SonarAnalyzer.UnitTest.Rules
         private readonly VerifierBuilder builder = new VerifierBuilder<CS.DeclareTypesInNamespaces>();
         private readonly VerifierBuilder nonConcurrent = new VerifierBuilder<CS.DeclareTypesInNamespaces>().WithConcurrentAnalysis(false);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DeclareTypesInNamespaces_CS() =>
             builder.AddPaths("DeclareTypesInNamespaces.cs", "DeclareTypesInNamespaces2.cs").WithAutogenerateConcurrentFiles(false).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DeclareTypesInNamespaces_CS_Before8() =>
             nonConcurrent.AddPaths("DeclareTypesInNamespaces.BeforeCSharp8.cs").WithOptions(ParseOptionsHelper.BeforeCSharp8).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DeclareTypesInNamespaces_CS_After8() =>
             nonConcurrent.AddPaths("DeclareTypesInNamespaces.AfterCSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DeclareTypesInNamespaces_CS_AfterCSharp9() =>
             builder.AddPaths("DeclareTypesInNamespaces.AfterCSharp9.cs").WithTopLevelStatements().Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DeclareTypesInNamespaces_CS_AfterCSharp10() =>
             nonConcurrent
                 .AddPaths("DeclareTypesInNamespaces.AfterCSharp10.FileScopedNamespace.cs", "DeclareTypesInNamespaces.AfterCSharp10.RecordStruct.cs")
@@ -56,7 +56,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DeclareTypesInNamespaces_VB() =>
             new VerifierBuilder<VB.DeclareTypesInNamespaces>()
                 .AddPaths("DeclareTypesInNamespaces.vb", "DeclareTypesInNamespaces2.vb")

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,7 +27,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
     [TestClass]
     public class ObjectCreationExpressionSyntaxExtensionsTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         [DataRow("new System.DateTime()", true)]
         [DataRow("using System; class T { DateTime field = new DateTime(); }", true)]
         [DataRow("new double()", false)]

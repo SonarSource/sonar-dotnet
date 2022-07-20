@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,17 +27,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class PubliclyWritableDirectoriesTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PubliclyWritableDirectories_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\PubliclyWritableDirectories.cs", new CS.PubliclyWritableDirectories(AnalyzerConfiguration.AlwaysEnabled));
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PubliclyWritableDirectories_CSharp10() =>
             OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\Hotspots\PubliclyWritableDirectories.CSharp10.cs", new CS.PubliclyWritableDirectories(AnalyzerConfiguration.AlwaysEnabled));
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PubliclyWritableDirectories_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\PubliclyWritableDirectories.vb", new VB.PubliclyWritableDirectories(AnalyzerConfiguration.AlwaysEnabled));
     }

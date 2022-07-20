@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Verify();
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PublicMethodArgumentsShouldBeCheckedForNull_CSharp9() =>
             builder.AddPaths("PublicMethodArgumentsShouldBeCheckedForNull.CSharp9.cs")
                 .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(Constants.NuGetLatestVersion))

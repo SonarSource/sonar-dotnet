@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,11 +27,11 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
     [TestClass]
     public class SymbolicCheckListTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Constructor_Null_Throws() =>
             ((Func<SymbolicCheckList>)(() => new SymbolicCheckList(null))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("checks");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Notifications_ExecutedForAll()
         {
             var a = new Mock<SymbolicCheck>();
@@ -66,7 +66,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             b.Verify(x => x.PostProcess(context), Times.Once);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PostProcess_CanReturnMultipleStates()
         {
             var triple = new PostProcessTestCheck(x => new[] { x.State, x.State, x.State });
@@ -74,7 +74,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             sut.PostProcess(new(null, ProgramState.Empty)).Should().HaveCount(9);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PostProcess_CanReturnNoStates()
         {
             var empty = new PostProcessTestCheck(x => Array.Empty<ProgramState>());

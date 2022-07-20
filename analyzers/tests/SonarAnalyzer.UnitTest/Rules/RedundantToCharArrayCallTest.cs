@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,11 +25,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class RedundantToCharArrayCallTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundantToCharArrayCall() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\RedundantToCharArrayCall.cs", new RedundantToCharArrayCall());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundantToCharArrayCall_CodeFix() =>
             OldVerifier.VerifyCodeFix<RedundantToCharArrayCallCodeFix>(
                 @"TestCases\RedundantToCharArrayCall.cs",

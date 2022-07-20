@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,16 +25,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ThisShouldNotBeExposedFromConstructorsTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ThisShouldNotBeExposedFromConstructors() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\ThisShouldNotBeExposedFromConstructors.cs", new ThisShouldNotBeExposedFromConstructors());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ThisShouldNotBeExposedFromConstructors_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ThisShouldNotBeExposedFromConstructors.CSharp9.cs", new ThisShouldNotBeExposedFromConstructors());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ThisShouldNotBeExposedFromConstructors_CSharp10() =>
             OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\ThisShouldNotBeExposedFromConstructors.CSharp10.cs", new ThisShouldNotBeExposedFromConstructors());
 

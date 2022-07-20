@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
     [TestClass]
     public partial class RoslynSymbolicExecutionTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Constructor_Throws()
         {
             var cfg = TestHelper.CompileCfgCS("public class Sample { public void Main() { } }");
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             ((Action)(() => new RoslynSymbolicExecution(cfg, Array.Empty<SymbolicCheck>(), default))).Should().Throw<ArgumentException>().WithMessage("At least one check is expected*");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Execute_SecondRun_Throws()
         {
             var cfg = TestHelper.CompileCfgBodyCS();
@@ -51,7 +51,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             se.Invoking(x => x.Execute()).Should().Throw<InvalidOperationException>().WithMessage("Engine can be executed only once.");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SequentialInput_CS()
         {
             var context = SETestContext.CreateCS("var a = true; var b = false; b = !b; a = (b);");
@@ -73,7 +73,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
                 "ExpressionStatement: a = (b);");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SequentialInput_VB()
         {
             var context = SETestContext.CreateVB("Dim A As Boolean = True, B As Boolean = False : B = Not B : A = (B)");
@@ -96,7 +96,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
                 "ExpressionStatement: A = (B)");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PreProcess_Null_StopsExecution()
         {
             var stopper = new PreProcessTestCheck(OperationKind.Unary, x => null);
@@ -112,7 +112,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
                 "LocalReference: b");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PostProcess_Null_StopsExecution()
         {
             var stopper = new PostProcessTestCheck(OperationKind.Unary, x => null);
@@ -128,7 +128,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
                 "LocalReference: b");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PostProcess_OperationDoesNotHaveValuesByDefault()
         {
             var validator = SETestContext.CreateCS("int x = 0;").Validator;
@@ -136,7 +136,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             validator.ValidateOperationValuesAreNull();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Execute_PersistConstraints()
         {
             var validator = SETestContext.CreateCS("var a = true;").Validator;
@@ -148,7 +148,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             validator.Validate("SimpleAssignment: a = true (Implicit)", x => x.State[x.Operation].HasConstraint(BoolConstraint.True).Should().BeTrue());
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Execute_PersistSymbols_InsideBlock()
         {
             var validator = SETestContext.CreateCS("var first = true; var second = false; first = second;").Validator;
@@ -170,7 +170,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
                 ((ILocalReferenceOperation)operation.Instance).Local;
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Execute_UnusedVariable_ClearedAfterBlock()
         {
             const string code = @"
@@ -191,7 +191,7 @@ Tag(""AfterLastUse"");";
             validator.TagStates("AfterLastUse").Should().HaveCount(2).And.OnlyContain(x => x[firstSymbol] == null); // Once emtpy and once with the learned boolParameter true
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Execute_OuterMethodParameter_NotCleared()
         {
             const string code = @"
@@ -207,7 +207,7 @@ void LocalFunction()
                 .And.OnlyContain(x => x.SymbolsWith(BoolConstraint.False).Count() == 1);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Execute_TooManyBlocks_NotSupported()
         {
             var validator = SETestContext.CreateCS($"var a = true{Enumerable.Repeat(" && true", 1020).JoinStr(null)};").Validator;
@@ -215,7 +215,7 @@ void LocalFunction()
             validator.ValidateExecutionNotCompleted();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Execute_CheckProducesMoreStates_PreProcess()
         {
             var check = new PreProcessTestCheck(x => DecorateIntLiteral(x, TestConstraint.First, TestConstraint.Second));
@@ -225,7 +225,7 @@ void LocalFunction()
                 .And.ContainSingle(x => x.HasConstraint(TestConstraint.Second));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Execute_CheckProducesMoreStates_PostProcess()
         {
             var check = new PostProcessTestCheck(x => DecorateIntLiteral(x, TestConstraint.First, TestConstraint.Second));
@@ -235,7 +235,7 @@ void LocalFunction()
                 .And.ContainSingle(x => x.HasConstraint(TestConstraint.Second));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Execute_CheckProducesMoreStates_Both()
         {
             var preProcess = new PreProcessTestCheck(x => DecorateIntLiteral(x, TestConstraint.First, TestConstraint.Second));
@@ -248,7 +248,7 @@ void LocalFunction()
                 .And.ContainSingle(x => x.HasConstraint(TestConstraint.Second) && x.HasConstraint(BoolConstraint.False));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Execute_ClearsCapturesAfterBranching()
         {
             const string code = @"
@@ -273,11 +273,11 @@ Tag(""End"");";
             }
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Execute_LocalScopeRegion_AssignDefaultBoolConstraint() =>
             SETestContext.CreateVB(@"Dim B As Boolean : Tag(""B"", B)").Validator.ValidateTag("B", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Execute_FieldSymbolsAreNotRemovedByLva()
         {
             const string code = @"

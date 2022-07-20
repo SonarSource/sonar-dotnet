@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,12 +25,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class OperatorsShouldBeOverloadedConsistentlyTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void OperatorsShouldBeOverloadedConsistently() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\OperatorsShouldBeOverloadedConsistently.cs", new OperatorsShouldBeOverloadedConsistently());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void OperatorsShouldBeOverloadedConsistently_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\OperatorsShouldBeOverloadedConsistently.CSharp9.cs", new OperatorsShouldBeOverloadedConsistently());
 #endif

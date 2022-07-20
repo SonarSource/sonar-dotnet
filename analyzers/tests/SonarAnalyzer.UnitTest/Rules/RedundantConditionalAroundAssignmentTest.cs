@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,16 +25,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class RedundantConditionalAroundAssignmentTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundantConditionalAroundAssignment() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\RedundantConditionalAroundAssignment.cs", new RedundantConditionalAroundAssignment());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundantConditionalAroundAssignment_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RedundantConditionalAroundAssignment.CSharp9.cs", new RedundantConditionalAroundAssignment());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundantConditionalAroundAssignment_CSharp9_CodeFix() =>
             OldVerifier.VerifyCodeFix<RedundantConditionalAroundAssignmentCodeFix>(
                 @"TestCases\RedundantConditionalAroundAssignment.CSharp9.cs",
@@ -43,11 +43,11 @@ namespace SonarAnalyzer.UnitTest.Rules
                 ParseOptionsHelper.FromCSharp9,
                 OutputKind.ConsoleApplication);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundantConditionalAroundAssignment_CSharp10() =>
             OldVerifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\RedundantConditionalAroundAssignment.CSharp10.cs", new RedundantConditionalAroundAssignment());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundantConditionalAroundAssignment_CSharp10_CodeFix() =>
             OldVerifier.VerifyCodeFix<RedundantConditionalAroundAssignmentCodeFix>(
                 @"TestCases\RedundantConditionalAroundAssignment.CSharp10.cs",
@@ -57,7 +57,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 OutputKind.ConsoleApplication);
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RedundantConditionalAroundAssignment_CodeFix() =>
             OldVerifier.VerifyCodeFix<RedundantConditionalAroundAssignmentCodeFix>(
                 @"TestCases\RedundantConditionalAroundAssignment.cs",

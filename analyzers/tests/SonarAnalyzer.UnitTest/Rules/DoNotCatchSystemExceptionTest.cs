@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,16 +27,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<DoNotCatchSystemException>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotCatchSystemException() =>
             builder.AddReferences(NuGetMetadataReference.MicrosoftAzureWebJobsCore()).AddPaths("DoNotCatchSystemException.cs").Verify();
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotCatchSystemException_CSharp9() =>
             builder.AddPaths("DoNotCatchSystemException.CSharp9.cs").WithTopLevelStatements().Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DoNotCatchSystemException_CSharp10() =>
             builder.AddPaths("DoNotCatchSystemException.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).WithTopLevelStatements().Verify();
 #endif

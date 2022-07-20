@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,11 +25,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class StringConcatenationWithPlusTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void StringConcatenationWithPlus() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\StringConcatenationWithPlus.vb", new StringConcatenationWithPlus(), MetadataReferenceFacade.SystemXml.Concat(MetadataReferenceFacade.SystemXmlLinq));
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void StringConcatenationWithPlus_CodeFix() =>
             OldVerifier.VerifyCodeFix<StringConcatenationWithPlusCodeFix>(
                 @"TestCases\StringConcatenationWithPlus.vb",

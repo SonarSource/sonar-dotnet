@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -167,7 +167,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void Verify_TypeParameter_VB(ProjectType projectType) =>
             Verify("TypeParameter.vb", projectType, 5, 2, 4, 5);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Verify_TokenThreshold() =>
             // In TokenThreshold.cs there are 40009 tokens which is more than the current limit of 40000
             Verify("TokenThreshold.cs", ProjectType.Product, _ => { }, false);

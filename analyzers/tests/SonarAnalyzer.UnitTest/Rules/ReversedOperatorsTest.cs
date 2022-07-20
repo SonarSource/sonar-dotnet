@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,17 +26,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ReversedOperatorsTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ReversedOperators_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\ReversedOperators.cs", new CS.ReversedOperators());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ReversedOperators_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ReversedOperators.CSharp9.cs", new CS.ReversedOperators());
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ReversedOperators_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\ReversedOperators.vb", new VB.ReversedOperators());
     }

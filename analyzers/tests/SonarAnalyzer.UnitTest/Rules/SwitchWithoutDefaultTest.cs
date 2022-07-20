@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,7 +26,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class StringConcatenationInLoopSwitchWithoutDefaultTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SwitchWithoutDefault()
         {
             OldVerifier.VerifyAnalyzer(@"TestCases\SwitchWithoutDefault.cs", new CS.SwitchWithoutDefault());

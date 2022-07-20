@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,7 +27,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<BinaryOperationWithIdenticalExpressions>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PrimaryIssueNotExpected() =>
             VerifyThrows<UnexpectedDiagnosticException>(@"
 public class UnexpectedSecondary
@@ -42,7 +42,7 @@ public class UnexpectedSecondary
                 "CSharp*: Unexpected primary issue on line 7, span (6,17)-(6,18) with message 'Correct one of the identical expressions on both sides of operator '=='.'." + Environment.NewLine +
                 "See output to see all actual diagnostics raised on the file");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SecondaryIssueNotExpected() =>
             VerifyThrows<UnexpectedDiagnosticException>(@"
 public class UnexpectedSecondary
@@ -56,7 +56,7 @@ public class UnexpectedSecondary
                 "CSharp*: Unexpected secondary issue on line 6, span (5,12)-(5,13) with message ''." + Environment.NewLine +
                 "See output to see all actual diagnostics raised on the file");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnexpectedSecondaryIssueWrongId() =>
             VerifyThrows<UnexpectedDiagnosticException>(@"
 public class UnexpectedSecondary
@@ -71,7 +71,7 @@ public class UnexpectedSecondary
                 "CSharp*: Unexpected secondary issue [myId] on line 7, span (6,12)-(6,13) with message ''." + Environment.NewLine +
                 "See output to see all actual diagnostics raised on the file");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SecondaryIssueUnexpectedMessage() =>
             VerifyThrows<UnexpectedDiagnosticException>(@"
 public class UnexpectedSecondary
@@ -87,7 +87,7 @@ public class UnexpectedSecondary
                 "Expected: 'Wrong message'" + Environment.NewLine +
                 "Actual  : ''");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SecondaryIssueUnexpectedStartPosition() =>
             VerifyThrows<UnexpectedDiagnosticException>(@"
 public class UnexpectedSecondary
@@ -102,7 +102,7 @@ public class UnexpectedSecondary
 }",
                 "CSharp*: Expected secondary issue on line 6 to start on column 10 but got column 12.");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SecondaryIssueUnexpectedLength() =>
             VerifyThrows<UnexpectedDiagnosticException>(@"
 public class UnexpectedSecondary
@@ -117,7 +117,7 @@ public class UnexpectedSecondary
 }",
                 "CSharp*: Expected secondary issue on line 6 to have a length of 4 but got a length of 1.");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ValidVerification() =>
             builder.AddSnippet(@"
 public class UnexpectedSecondary
@@ -130,14 +130,14 @@ public class UnexpectedSecondary
     }
 }").Invoking(x => x.Verify()).Should().NotThrow();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void BuildError() =>
             VerifyThrows<UnexpectedDiagnosticException>(@"
 public class UnexpectedBuildError
 {",
                 "CSharp*: Unexpected build error [CS1513]: } expected on line 3");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnexpectedRemainingOpeningCurlyBrace() =>
             VerifyThrows<AssertFailedException>(@"
 public class UnexpectedRemainingCurlyBrace
@@ -150,7 +150,7 @@ public class UnexpectedRemainingCurlyBrace
 }",
                 "Unexpected '{' or '}' found on line: 5. Either correctly use the '{{message}}' format or remove the curly braces on the line of the expected issue");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnexpectedRemainingClosingCurlyBrace() =>
             VerifyThrows<AssertFailedException>(@"
 public class UnexpectedRemainingCurlyBrace
@@ -163,7 +163,7 @@ public class UnexpectedRemainingCurlyBrace
 }",
                 "Unexpected '{' or '}' found on line: 5. Either correctly use the '{{message}}' format or remove the curly braces on the line of the expected issue");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ExpectedIssuesNotRaised() =>
             VerifyThrows<AssertFailedException>(@"
 public class ExpectedIssuesNotRaised
@@ -180,7 +180,7 @@ public class ExpectedIssuesNotRaised
                 "Line: 6, Type: primary, Id: ''" + Environment.NewLine +
                 "Line: 7, Type: secondary, Id: 'MyId1'");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ExpectedIssuesNotRaised_MultipleFiles() =>
             builder.WithBasePath("DiagnosticsVerifier")
                 .AddPaths("ExpectedIssuesNotRaised.cs", "ExpectedIssuesNotRaised2.cs")

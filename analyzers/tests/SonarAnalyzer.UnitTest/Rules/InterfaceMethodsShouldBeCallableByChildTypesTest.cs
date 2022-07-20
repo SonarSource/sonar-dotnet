@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,12 +25,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class InterfaceMethodsShouldBeCallableByChildTypesTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void InterfaceMethodsShouldBeCallableByChildTypes() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\InterfaceMethodsShouldBeCallableByChildTypes.cs", new InterfaceMethodsShouldBeCallableByChildTypes());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void InterfaceMethodsShouldBeCallableByChildTypes_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\InterfaceMethodsShouldBeCallableByChildTypes.CSharp9.cs", new InterfaceMethodsShouldBeCallableByChildTypes());
 #endif

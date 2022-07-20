@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,11 +26,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class EnumNameShouldFollowRegexTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EnumNameShouldFollowRegex_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\EnumNameShouldFollowRegex.cs", new CS.EnumNameShouldFollowRegex());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EnumNameShouldFollowRegex_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\EnumNameShouldFollowRegex.vb", new VB.EnumNameShouldFollowRegex());
     }

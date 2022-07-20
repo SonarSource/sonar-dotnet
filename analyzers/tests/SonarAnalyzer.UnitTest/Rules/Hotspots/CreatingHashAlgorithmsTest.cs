@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,14 +27,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class CreatingHashAlgorithmsTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CreatingHashAlgorithms_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\CreatingHashAlgorithms.cs",
                                     new CS.CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled),
                                     ParseOptionsHelper.FromCSharp8,
                                     GetAdditionalReferences());
 #if NETFRAMEWORK // HMACRIPEMD160, MD5Cng, RIPEMD160Managed and RIPEMD160 are available only for .Net Framework
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CreatingHashAlgorithms_CS_NetFx() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\CreatingHashAlgorithms.NetFramework.cs",
                                     new CS.CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled),
@@ -42,14 +42,14 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     GetAdditionalReferences());
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CreatingHashAlgorithms_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\CreatingHashAlgorithms.vb",
                                     new VB.CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled),
                                     GetAdditionalReferences());
 
 #if NETFRAMEWORK // HMACRIPEMD160, MD5Cng, RIPEMD160Managed and RIPEMD160 are available only for .Net Framework
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CreatingHashAlgorithms_VB_NetFx() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\CreatingHashAlgorithms.NetFramework.vb",
                                     new VB.CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled),

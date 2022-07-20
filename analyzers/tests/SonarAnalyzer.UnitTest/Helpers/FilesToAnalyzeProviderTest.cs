@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         private const string FilesToAnalyzePath = @"ResourceTests\FilesToAnalyze\FilesToAnalyze.txt";
         private const string InvalidFilesToAnalyzePath = @"ResourceTests\FilesToAnalyze\FilesToAnalyzeWithInvalidValues.txt";
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void FileNameWithMixedCapitalizationAndMixedSlashes_FindFilesWithFileName_ReturnsAllWebConfigFiles()
         {
             var sut = new FilesToAnalyzeProvider(FilesToAnalyzePath);
@@ -40,7 +40,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             results.Should().BeEquivalentTo(new[] { MixedSlashesWebConfigPath1, MixedSlashesWebConfigPath2 });
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void FileNameWithMixedCapitalizationAndMixedSlashes_FindFilesWithRegex_ReturnsAllWebConfigFiles()
         {
             var fileNamePattern = new Regex(@"[\\\/]web\.config$", RegexOptions.IgnoreCase);
@@ -51,7 +51,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             results.Should().BeEquivalentTo(new[] { MixedSlashesWebConfigPath1, MixedSlashesWebConfigPath2 });
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void FileWithInvalidValues_FindFilesWithFileName_ReturnsValidValue()
         {
             var sut = new FilesToAnalyzeProvider(InvalidFilesToAnalyzePath);
@@ -61,7 +61,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             results.Should().Contain("123");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void FileWithInvalidValues_FindFilesWithRegex_ReturnsValidValue()
         {
             var fileNamePattern = new Regex("web\\.config$", RegexOptions.IgnoreCase);
@@ -79,7 +79,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             });
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EmptyFile_FindFiles_ReturnsEmptyEnumerable()
         {
             var sut = new FilesToAnalyzeProvider(@"ResourceTests\FilesToAnalyze\EmptyFilesToAnalyze.txt");
@@ -101,7 +101,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             results.Should().BeEmpty();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void FileWithValidValues_FindFilesRequestingAnyFile_AllValuesFromTheFileAreReturned()
         {
             var sut = new FilesToAnalyzeProvider(FilesToAnalyzePath);
@@ -118,7 +118,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             });
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnableToOpenFile_FindFiles_ReturnsEmptyEnumerable()
         {
             using (Stream iStream = File.Open(FilesToAnalyzePath, FileMode.Open, FileAccess.Read, FileShare.None))

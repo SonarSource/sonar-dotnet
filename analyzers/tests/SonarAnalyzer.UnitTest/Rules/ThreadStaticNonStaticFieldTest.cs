@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,20 +25,20 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ThreadStaticNonStaticFieldTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ThreadStaticNonStaticField() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\ThreadStaticNonStaticField.cs", new ThreadStaticNonStaticField());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ThreadStaticNonStaticField_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ThreadStaticNonStaticField.CSharp9.cs", new ThreadStaticNonStaticField());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ThreadStaticNonStaticField_CSharp10() =>
             OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\ThreadStaticNonStaticField.CSharp10.cs", new ThreadStaticNonStaticField());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ThreadStaticNonStaticField_CodeFix_CSharp10() =>
             OldVerifier.VerifyCodeFix<ThreadStaticNonStaticFieldCodeFix>(
                 @"TestCases\ThreadStaticNonStaticField.CSharp10.cs",
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new ThreadStaticNonStaticField());
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ThreadStaticNonStaticField_CodeFix() =>
             OldVerifier.VerifyCodeFix<ThreadStaticNonStaticFieldCodeFix>(
                 @"TestCases\ThreadStaticNonStaticField.cs",

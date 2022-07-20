@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -31,18 +31,18 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class ConstructorArgumentValueShouldExistTest
     {
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ConstructorArgumentValueShouldExist_CS_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ConstructorArgumentValueShouldExist.CSharp9.cs",
                 new CS.ConstructorArgumentValueShouldExist());
 #else
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ConstructorArgumentValueShouldExist_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\ConstructorArgumentValueShouldExist.cs",
                 new CS.ConstructorArgumentValueShouldExist(),
                 MetadataReferenceFacade.SystemXaml);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ConstructorArgumentValueShouldExist_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\ConstructorArgumentValueShouldExist.vb",
                 new VB.ConstructorArgumentValueShouldExist(),

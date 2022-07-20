@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
     [TestClass]
     public class IfDirectiveTestHelper
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NoDirectives()
         {
             // Arrange
@@ -53,7 +53,7 @@ namespace Test
             activeSections.Should().BeEmpty();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ActiveBlocks_NonNestedIfs()
         {
             // Arrange
@@ -98,7 +98,7 @@ namespace Test
             activeSections.Should().BeEquivalentTo(new[] { "BLOCK3" });
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ActiveBlocks_NestedIfs()
         {
             // Arrange
@@ -141,7 +141,7 @@ namespace Test
             activeSections.Should().BeEquivalentTo(new[] { "BLOCK1", "BLOCK2", "BLOCK3" });
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ActiveBlocks_DirectivesInLeadingTrivia()
         {
             // Arrange
@@ -183,7 +183,7 @@ namespace Test
             activeSections.Should().BeEquivalentTo(new[] { "BLOCK2", "BLOCK3" });
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ActiveBlocks_ElseInPrecedingCode()
         {
             // Arrange
@@ -220,7 +220,7 @@ namespace Test
             activeSections.Should().BeEquivalentTo(new[] { "BLOCK2" });
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ActiveBlocks_NegativeConditions_InIf()
         {
             // Arrange
@@ -246,7 +246,7 @@ namespace Test
             activeSections.Should().BeEmpty();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ActiveBlocks_NegativeConditions_InElse()
         {
             // Arrange
@@ -274,7 +274,7 @@ namespace Test
             activeSections.Should().BeEmpty();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ActiveBlocks_Else_FirstBranchIsActive()
         {
             // Arrange
@@ -303,7 +303,7 @@ namespace Test
             activeSections.Should().BeEquivalentTo(new[] { "BLOCK1" });
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ActiveBlocks_Else_SecondBranchIsActive()
         {
             // Arrange
@@ -332,7 +332,7 @@ namespace Test
             activeSections.Should().BeEmpty();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ActiveBlocks_Elif_FirstBranchIsActive()
         {
             // Arrange
@@ -364,7 +364,7 @@ namespace Test
             activeSections.Should().BeEquivalentTo(new[] { "BLOCK1" });
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ActiveBlocks_Elif_SecondBranchIsActive()
         {
             // Arrange
@@ -395,7 +395,7 @@ namespace Test
             activeSections.Should().BeEquivalentTo(new[] { "BLOCK2" });
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ActiveBlocks_Elif_FirstBranchIsActive_InLeadingTrivia()
         {
             // Arrange
@@ -425,7 +425,7 @@ namespace Test
             activeSections.Should().BeEquivalentTo(new[] { "BLOCK1" });
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ActiveBlocks_Elif_SecondBranchIsActive_InLeadingTrivia()
         {
             // Arrange
@@ -454,7 +454,7 @@ namespace Test
             activeSections.Should().BeEquivalentTo(new[] { "BLOCK2" });
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void InactiveDirectives_ShouldBeIgnored()
         {
             // Arrange
@@ -499,7 +499,7 @@ namespace Test
             activeSections.Should().BeEquivalentTo(new[] { "BLOCK3", "BLOCK4" });
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void BadDirectives_ShouldBeIgnored()
         {
             // Arrange

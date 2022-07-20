@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,7 +26,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class MarkWindowsFormsMainWithStaThreadTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MarkWindowsFormsMainWithStaThread_CS() =>
             OldVerifier.VerifyAnalyzer(
                 @"TestCases\MarkWindowsFormsMainWithStaThread.cs",
@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 OutputKind.WindowsApplication,
                 MetadataReferenceFacade.SystemWindowsForms);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MarkWindowsFormsMainWithStaThread_VB() =>
             OldVerifier.VerifyAnalyzer(
                 @"TestCases\MarkWindowsFormsMainWithStaThread.vb",
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 OutputKind.WindowsApplication,
                 MetadataReferenceFacade.SystemWindowsForms);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MarkWindowsFormsMainWithStaThread_ClassLibrary_CS() =>
             OldVerifier.VerifyNoIssueReported(
                 @"TestCases\MarkWindowsFormsMainWithStaThread.cs",
@@ -56,7 +56,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 OutputKind.DynamicallyLinkedLibrary,
                 MetadataReferenceFacade.SystemWindowsForms);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MarkWindowsFormsMainWithStaThread_ClassLibrary_VB() =>
             OldVerifier.VerifyNoIssueReported(
                 @"TestCases\MarkWindowsFormsMainWithStaThread.vb",
@@ -66,7 +66,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 OutputKind.DynamicallyLinkedLibrary,
                 MetadataReferenceFacade.SystemWindowsForms);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MarkWindowsFormsMainWithStaThread_CS_NoWindowsForms() =>
             OldVerifier.VerifyAnalyzer(
                 @"TestCases\MarkWindowsFormsMainWithStaThread_NoWindowsForms.cs",
@@ -75,7 +75,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 CompilationErrorBehavior.Ignore,
                 OutputKind.WindowsApplication);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MarkWindowsFormsMainWithStaThread_VB_NoWindowsForms() =>
             OldVerifier.VerifyAnalyzer(
                 @"TestCases\MarkWindowsFormsMainWithStaThread_NoWindowsForms.vb",

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,14 +26,14 @@ namespace SonarAnalyzer.UnitTest.Wrappers
     [TestClass]
     public class IOperationWrapperSonarTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Null_Throws()
         {
             Action a = () => new IOperationWrapperSonar(null).ToString();
             a.Should().Throw<ArgumentNullException>();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ValidateReflection()
         {
             var sut = CreateWrapper(out var semanticModel);
@@ -48,14 +48,14 @@ namespace SonarAnalyzer.UnitTest.Wrappers
             sut.SemanticModel.Should().Be(semanticModel);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void GetHashCode_ReturnsOperationHash()
         {
             var sut = CreateWrapper(out _);
             sut.GetHashCode().Should().Be(sut.Instance.GetHashCode());
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Equals_ComparesUnderlyingInstance()
         {
             var sut = CreateWrapper(out _);
@@ -63,7 +63,7 @@ namespace SonarAnalyzer.UnitTest.Wrappers
             sut.Equals(other).Should().BeTrue();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Equals_NotEqual()
         {
             var sut = CreateWrapper(out _);
@@ -74,7 +74,7 @@ namespace SonarAnalyzer.UnitTest.Wrappers
             sut.Equals(sut.Parent).Should().BeFalse();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ToString_ReturnsInstanceToString()
         {
             var sut = CreateWrapper(out _);

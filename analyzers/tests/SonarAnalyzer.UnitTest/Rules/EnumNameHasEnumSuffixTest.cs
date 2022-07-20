@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,11 +26,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class EnumNameHasEnumSuffixTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EnumNameHasEnumSuffix_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\EnumNameHasEnumSuffix.cs", new CS.EnumNameHasEnumSuffix());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EnumNameHasEnumSuffix_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\EnumNameHasEnumSuffix.vb", new VB.EnumNameHasEnumSuffix());
     }

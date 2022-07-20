@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             vbContext = CreateContext_VB();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ConstructorIsSafe_CS()
         {
             var safeConstructor = new CSharpBuilderPatternCondition(true, new BuilderPatternDescriptorCS(false, (context) => false));
@@ -49,7 +49,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             unsafeConstructor.IsInvalidBuilderInitialization(csContext).Should().BeTrue();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ConstructorIsSafe_VB()
         {
             var safeConstructor = new VisualBasicBuilderPatternCondition(true, new BuilderPatternDescriptorVB(false, (context) => false));
@@ -59,7 +59,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             unsafeConstructor.IsInvalidBuilderInitialization(vbContext).Should().BeTrue();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IsInvalidBuilderInitialization_CS()
         {
             var aaaInvalidator = new BuilderPatternDescriptorCS(false, (context) => context.MethodName == "Aaa");
@@ -95,7 +95,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             condition9.IsInvalidBuilderInitialization(dddContext).Should().BeFalse(); // Invalid constructor is not tracked through array propagation
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IsInvalidBuilderInitialization_VB()
         {
             var aaaInvalidator = new BuilderPatternDescriptorVB(false, (context) => context.MethodName == "Aaa");

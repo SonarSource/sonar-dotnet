@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -34,7 +34,7 @@ public class Sample
     public void NoArgs() {}
 }";
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MatchMethodName()
         {
             var tracker = new CSharpMethodDeclarationTracker();
@@ -45,7 +45,7 @@ public class Sample
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Track_VerifyMethodIdentifierLocations_CS()
         {
             const string code = @"
@@ -98,7 +98,7 @@ public class Sample
 
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Track_VerifyMethodIdentifierLocations_VB()
         {
             const string code = @"

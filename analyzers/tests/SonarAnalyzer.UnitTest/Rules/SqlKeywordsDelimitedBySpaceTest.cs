@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,35 +27,35 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<SqlKeywordsDelimitedBySpace>().AddReferences(NuGetMetadataReference.SystemDataSqlClient());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SqlKeywordsDelimitedBySpace() =>
             builder.AddPaths("SqlKeywordsDelimitedBySpace.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SqlKeywordsDelimitedBySpace_UsingInsideNamespace() =>
             builder.AddPaths("SqlKeywordsDelimitedBySpace_InsideNamespace.cs").WithConcurrentAnalysis(false).Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SqlKeywordsDelimitedBySpace_DefaultNamespace() =>
             builder.AddPaths("SqlKeywordsDelimitedBySpace_DefaultNamespace.cs").AddTestReference().VerifyNoIssueReported();
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SqlKeywordsDelimitedBySpace_CSharp10_GlobalUsings() =>
             builder.AddPaths("SqlKeywordsDelimitedBySpace.CSharp10.GlobalUsing.cs", "SqlKeywordsDelimitedBySpace.CSharp10.GlobalUsingConsumer.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
                 .WithConcurrentAnalysis(false)
                 .Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SqlKeywordsDelimitedBySpace_CSharp10_FileScopesNamespace() =>
             builder.AddPaths("SqlKeywordsDelimitedBySpace.CSharp10.FileScopedNamespaceDeclaration.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
                 .WithConcurrentAnalysis(false)
                 .Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SqlKeywordsDelimitedBySpace_CSharp10() =>
             builder.AddPaths("SqlKeywordsDelimitedBySpace.CSharp10.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp10)

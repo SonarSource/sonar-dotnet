@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,7 +26,7 @@ namespace SonarAnalyzer.UnitTest.CFG.Sonar
     [TestClass]
     public class RoslynCfgSerializerTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Serialize_MethodNameUsedInTitle()
         {
             var code = @"
@@ -44,7 +44,7 @@ cfg0_block0 -> cfg0_block1
 ");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Serialize_EmptyMethod()
         {
             var code = @"
@@ -63,7 +63,7 @@ cfg0_block0 -> cfg0_block1
 ");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Serialize_OperationSequence()
         {
             var code = @"
@@ -95,7 +95,7 @@ cfg0_block1 -> cfg0_block2
 ");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Serialize_Switch()
         {
             var code = @"
@@ -141,7 +141,7 @@ cfg0_block4 -> cfg0_block5
 ");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Serialize_If()
         {
             var code = @"
@@ -173,7 +173,7 @@ cfg0_block2 -> cfg0_block3
 ");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Serialize_Foreach_Simple()
         {
             var code = @"
@@ -227,7 +227,7 @@ cfg0_block2 -> cfg0_block7 [label=""WhenFalse""]
 ");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Serialize_Foreach_TupleVarDeclaration()
         {
             var code = @"
@@ -286,7 +286,7 @@ cfg0_block2 -> cfg0_block8 [label=""WhenFalse""]
 ");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Serialize_For()
         {
             var code = @"
@@ -322,7 +322,7 @@ cfg0_block2 -> cfg0_block4 [label=""WhenFalse""]
 ");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Serialize_Using()
         {
             var code = @"
@@ -370,7 +370,7 @@ cfg0_block2 -> cfg0_block6
 ");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Serialize_Lock()
         {
             var code = @"
@@ -420,7 +420,7 @@ cfg0_block2 -> cfg0_block6
 ");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Serialize_Regions()
         {
             var code = @"
@@ -471,7 +471,7 @@ cfg0_block4 -> cfg0_block5
 ");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Serialize_Region_ExceptionType()
         {
             var code = @"
@@ -506,7 +506,7 @@ cfg0_block2 -> cfg0_block3
 ");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Serialize_LocalFunctions()
         {
             var code = @"
@@ -562,7 +562,7 @@ cfg6_block1 -> cfg6_block2 [label=""Return""]
 ");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Serialize_Lambdas()
         {
             var code = @"
@@ -603,7 +603,7 @@ cfg3_block1 -> cfg3_block2 [label=""Return""]
 ");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Serialize_CaptureId()
         {
             var code = @"
@@ -652,7 +652,7 @@ cfg0_block8 -> cfg0_block9
 ");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Serialize_InvalidOperation()
         {
             var code = @"
@@ -675,7 +675,7 @@ cfg0_block1 -> cfg0_block2
 ");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Serialize_TryCatchChain()
         {
             var code = @"

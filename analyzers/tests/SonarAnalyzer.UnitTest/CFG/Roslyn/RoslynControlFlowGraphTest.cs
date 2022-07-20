@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -30,11 +30,11 @@ namespace SonarAnalyzer.UnitTest.CFG.Roslyn
     [TestClass]
     public class RoslynControlFlowGraphTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IsAvailable_IsTrue() =>
             ControlFlowGraph.IsAvailable.Should().BeTrue();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Create_ReturnsCfg_CS()
         {
             const string code = @"
@@ -48,7 +48,7 @@ public class Sample
             TestHelper.CompileCfgCS(code).Should().NotBeNull();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Create_ReturnsCfg_VB()
         {
             const string code = @"
@@ -60,7 +60,7 @@ End Class";
             TestHelper.CompileCfg(code, AnalyzerLanguage.VisualBasic).Should().NotBeNull();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ValidateReflection()
         {
             const string code = @"
@@ -90,7 +90,7 @@ public class Sample
             cfg.GetAnonymousFunctionControlFlowGraph(IFlowAnonymousFunctionOperationWrapper.FromOperation(anonymousFunction), default).Should().NotBeNull();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void FlowAnonymousFunctionOperations_FindsAll()
         {
             const string code = @"
@@ -112,7 +112,7 @@ public class Sample {
             cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunctionOperations[1], default).Should().NotBeNull();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void RoslynCfgSupportedVersions()
         {
             // We are running on 3 rd major version - it is the minimum requirement

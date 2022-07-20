@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,25 +27,25 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<AsyncVoidMethod>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AsyncVoidMethod() =>
             builder.AddPaths("AsyncVoidMethod.cs")
                 .Verify();
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AsyncVoidMethod_CSharp9() =>
             builder.AddPaths("AsyncVoidMethod.CSharp9.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp9)
                 .Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AsyncVoidMethod_CSharpPreview() =>
             builder.AddPaths("AsyncVoidMethod.CSharpPreview.cs")
                 .WithLanguageVersion(Microsoft.CodeAnalysis.CSharp.LanguageVersion.Preview)
                 .Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AsyncVoidMethod_CSharp10() =>
             builder.AddPaths("AsyncVoidMethod.CSharp10.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
@@ -73,7 +73,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion))
                 .Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AsyncVoidMethod_MsTestV1() =>
             builder.AddPaths("AsyncVoidMethod_MsTestV1.cs")
                 .AddReferences(NuGetMetadataReference.MicrosoftVisualStudioQualityToolsUnitTestFramework)

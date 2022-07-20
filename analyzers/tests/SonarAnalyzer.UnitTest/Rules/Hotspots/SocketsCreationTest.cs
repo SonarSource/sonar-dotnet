@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,14 +27,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class SocketsCreationTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SocketsCreation_CS() =>
             OldVerifier.VerifyAnalyzer(
                 @"TestCases\Hotspots\SocketsCreation.cs",
                 new CS.SocketsCreation(AnalyzerConfiguration.AlwaysEnabled),
                 GetAdditionalReferences());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SocketsCreation_VB() =>
             OldVerifier.VerifyAnalyzer(
                 @"TestCases\Hotspots\SocketsCreation.vb",

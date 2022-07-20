@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -40,14 +40,14 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .AddReferences(GetReferences(entityFrameworkCoreVersion, oracleVersion))
                 .Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DatabasePasswordsShouldBeSecure_Net5_CS() =>
             builder.AddPaths("DatabasePasswordsShouldBeSecure.Net5.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .AddReferences(GetReferences("5.0.2", "5.21.1"))
                 .Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DatabasePasswordsShouldBeSecure_NetCore3_CS() =>
             builder.AddPaths("DatabasePasswordsShouldBeSecure.NetCore31.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
@@ -67,7 +67,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DatabasePasswordsShouldBeSecure_CS_ExternalConnection()
         {
             var root = @"TestCases\WebConfig\DatabasePasswordsShouldBeSecure\ExternalConfig";
@@ -80,7 +80,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath, externalConfigPath)));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DatabasePasswordsShouldBeSecure_CS_CorruptAndNonExistingWebConfigs_ShouldNotFail()
         {
             var root = @"TestCases\WebConfig\DatabasePasswordsShouldBeSecure\Corrupt";
@@ -114,7 +114,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, appSettingsPath)));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DatabasePasswordsShouldBeSecure_CS_CorruptAndNonExistingAppSettings_ShouldNotFail()
         {
             var root = @"TestCases\AppSettings\DatabasePasswordsShouldBeSecure\Corrupt";

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,25 +26,25 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class EncryptionAlgorithmsShouldBeSecureTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EncryptionAlgorithmsShouldBeSecure_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure.cs",
                 new CS.EncryptionAlgorithmsShouldBeSecure(),
                 GetAdditionalReferences());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EncryptionAlgorithmsShouldBeSecure_CS_NetStandard21() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure_NetStandard21.cs",
                 new CS.EncryptionAlgorithmsShouldBeSecure(),
                 MetadataReferenceFacade.NETStandard21.Concat(GetAdditionalReferences()));
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EncryptionAlgorithmsShouldBeSecure_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure.vb",
                 new VB.EncryptionAlgorithmsShouldBeSecure(),
                 GetAdditionalReferences());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void EncryptionAlgorithmsShouldBeSecure_VB_NetStandard21() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure_NetStandard21.vb",
                 new VB.EncryptionAlgorithmsShouldBeSecure(),

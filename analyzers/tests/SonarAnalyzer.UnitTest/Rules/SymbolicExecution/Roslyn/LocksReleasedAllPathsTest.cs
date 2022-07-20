@@ -1,4 +1,4 @@
-﻿/*
+/*
 * SonarAnalyzer for .NET
 * Copyright (C) 2015-2022 SonarSource SA
 * mailto: contact AT sonarsource DOT com
@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                                                         .WithOptions(ParseOptionsHelper.FromCSharp8);
         private readonly VerifierBuilder builderVB = CreateVerifier(() => new VB.SymbolicExecutionRunner(), Checks.VisualBasic.LocksReleasedAllPaths.S2222);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void LocksReleasedAllPaths_CS() =>
             builderCS.AddPaths(
                 "LocksReleasedAllPaths.Monitor.Conditions.cs",
@@ -47,7 +47,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 "LocksReleasedAllPaths.SpinLock.cs")
                 .Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void LocksReleasedAllPaths_VB() =>
             builderVB.AddPaths(
                 "LocksReleasedAllPaths.Monitor.Conditions.vb",
@@ -62,13 +62,13 @@ namespace SonarAnalyzer.UnitTest.Rules
                 "LocksReleasedAllPaths.SpinLock.vb")
                 .Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void LocksReleasedAllPaths_CSharp8() =>
             builderCS.AddPaths("LocksReleasedAllPaths.Monitor.Conditions.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NETFRAMEWORK
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void LocksReleasedAllPaths_CS_NetFx() =>
             builderCS.AddPaths("LocksReleasedAllPaths.Mutex.NetFx.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 

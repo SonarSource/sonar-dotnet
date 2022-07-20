@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,14 +26,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class UseTestableTimeProviderTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UseTestableTimeProvider_CS() =>
              new VerifierBuilder()
                 .AddAnalyzer(() => new CS.UseTestableTimeProvider())
                 .AddPaths("UseTestableTimeProvider.cs")
                 .Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UseTestableTimeProvider_VB() =>
              new VerifierBuilder()
                 .AddAnalyzer(() => new VB.UseTestableTimeProvider())

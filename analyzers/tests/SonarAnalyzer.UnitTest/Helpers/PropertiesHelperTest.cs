@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,32 +27,32 @@ namespace SonarAnalyzer.UnitTest.Helpers
     [TestClass]
     public class PropertiesHelperTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         [DataRow("a/SonarLint.xml")] // unix path
         [DataRow("a\\SonarLint.xml")]
         public void ShouldAnalyzeGeneratedCode_WithTrueSetting_ReturnsTrue(string filePath) =>
             GetSetting(SourceText.From(File.ReadAllText("ResourceTests\\AnalyzeGeneratedTrue\\SonarLint.xml")), filePath).Should().BeTrue();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ShouldAnalyzeGeneratedCode_WithFalseSetting_ReturnsFalse() =>
             GetSetting(SourceText.From(File.ReadAllText("ResourceTests\\AnalyzeGeneratedFalse\\SonarLint.xml"))).Should().BeFalse();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ShouldAnalyzeGeneratedCode_WithNoSetting_ReturnsFalse() =>
             GetSetting(SourceText.From(File.ReadAllText("ResourceTests\\NoSettings\\SonarLint.xml"))).Should().BeFalse();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         [DataRow("")]
         [DataRow("this is not an xml")]
         [DataRow(@"<?xml version=""1.0"" encoding=""UTF - 8""?><AnalysisInput><Settings>")]
         public void ShouldAnalyzeGeneratedCode_WithMalformedXml_ReturnsFalse(string sonarLintXmlContent) =>
             GetSetting(SourceText.From(sonarLintXmlContent)).Should().BeFalse();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ShouldAnalyzeGeneratedCode_WithNotBooleanValue_ReturnsFalse() =>
             GetSetting(SourceText.From(File.ReadAllText("ResourceTests\\NotBoolean\\SonarLint.xml"))).Should().BeFalse();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         [DataRow("path//aSonarLint.xml")] // different name
         [DataRow("path//SonarLint.xmla")] // different extension
         public void ShouldAnalyzeGeneratedCode_NonSonarLintXmlPath_ReturnsFalse(string filePath) =>

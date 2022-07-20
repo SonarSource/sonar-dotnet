@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,19 +25,19 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class NumberPatternShouldBeRegularTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NumberPatternShouldBeRegular_BeforeCSharp7() =>
             OldVerifier.VerifyNoIssueReported(@"TestCases\NumberPatternShouldBeRegular.cs",
                                            new NumberPatternShouldBeRegular(),
                                            ParseOptionsHelper.BeforeCSharp7,
                                            CompilationErrorBehavior.Ignore);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NumberPatternShouldBeRegular_FromCSharp7() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\NumberPatternShouldBeRegular.cs", new NumberPatternShouldBeRegular(), ParseOptionsHelper.FromCSharp7);
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void NumberPatternShouldBeRegular_FromCSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\NumberPatternShouldBeRegular.CSharp9.cs", new NumberPatternShouldBeRegular());
 #endif

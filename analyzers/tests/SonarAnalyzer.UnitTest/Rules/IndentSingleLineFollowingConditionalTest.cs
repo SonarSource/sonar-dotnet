@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,12 +25,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class IndentSingleLineFollowingConditionalTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IndentSingleLineFollowingConditional() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\IndentSingleLineFollowingConditional.cs", new IndentSingleLineFollowingConditional());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void IndentSingleLineFollowingConditional_FromCSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\IndentSingleLineFollowingConditional.CSharp9.cs", new IndentSingleLineFollowingConditional());
 #endif

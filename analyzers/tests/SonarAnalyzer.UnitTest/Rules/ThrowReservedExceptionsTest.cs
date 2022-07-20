@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,12 +26,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ThrowReservedExceptionsTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ThrowReservedExceptions_CSharp() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\ThrowReservedExceptions.cs",
                 new CS.ThrowReservedExceptions());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ThrowReservedExceptions_VisualBasic() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\ThrowReservedExceptions.vb",
                 new VB.ThrowReservedExceptions());

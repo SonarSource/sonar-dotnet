@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 onlyDiagnostics: OnlyDiagnostics);
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ObjectsShouldNotBeDisposedMoreThanOnce_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(
                 @"TestCases\SymbolicExecution\Sonar\ObjectsShouldNotBeDisposedMoreThanOnce.CSharp9.cs",

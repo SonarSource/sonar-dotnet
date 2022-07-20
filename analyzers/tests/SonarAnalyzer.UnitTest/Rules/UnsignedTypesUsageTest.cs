@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,7 +25,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class UnsignedTypesUsageTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void UnsignedTypesUsage() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\UnsignedTypesUsage.vb", new UnsignedTypesUsage());
     }

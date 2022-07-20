@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,11 +28,11 @@ namespace SonarAnalyzer.UnitTest.Common
     [TestClass]
     public class SecurityHotspotTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SecurityHotspotRules_DoNotRaiseIssues_CS() =>
             VerifyNoIssueReported(AnalyzerLanguage.CSharp, ParseOptionsHelper.FromCSharp9);
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void SecurityHotspotRules_DoNotRaiseIssues_VB() =>
             VerifyNoIssueReported(AnalyzerLanguage.VisualBasic, ParseOptionsHelper.FromVisualBasic12);
 

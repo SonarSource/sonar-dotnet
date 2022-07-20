@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,11 +25,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DisposableReturnedFromUsingTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DisposableReturnedFromUsing() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\DisposableReturnedFromUsing.cs", new DisposableReturnedFromUsing(), ParseOptionsHelper.FromCSharp8);
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DisposableReturnedFromUsing_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DisposableReturnedFromUsing.CSharp9.cs", new DisposableReturnedFromUsing());
 #endif

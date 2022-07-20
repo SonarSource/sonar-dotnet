@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,24 +26,24 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class MarkAssemblyWithComVisibleAttributeTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MarkAssemblyWithComVisibleAttribute_CS() =>
             OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithComVisibleAttribute.cs",
                 new CS.MarkAssemblyWithComVisibleAttribute());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MarkAssemblyWithComVisibleAttribute_VB() =>
             OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithComVisibleAttribute.vb",
                 new VB.MarkAssemblyWithComVisibleAttribute());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MarkAssemblyWithComVisibleAttributeNoncompliant_CS()
         {
             Action action = () => OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithComVisibleAttributeNoncompliant.cs", new CS.MarkAssemblyWithComVisibleAttribute());
             action.Should().Throw<UnexpectedDiagnosticException>().WithMessage("*Provide a 'ComVisible' attribute for assembly 'project0'.*");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MarkAssemblyWithComVisibleAttributeNoncompliant_VB()
         {
             Action action = () => OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithComVisibleAttributeNoncompliant.vb", new VB.MarkAssemblyWithComVisibleAttribute());

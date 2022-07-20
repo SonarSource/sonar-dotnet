@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -32,21 +32,21 @@ namespace SonarAnalyzer.UnitTest.Rules
             .WithBasePath(@"Hotspots\")
             .AddReferences(AdditionalReferences);
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PermissiveCors_CS() =>
             builder
                 .AddPaths("PermissiveCors.Net.cs")
                 .WithLanguageVersion(LanguageVersion.CSharp9)
                 .Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PermissiveCors_CSharp10() =>
             builder
                 .AddPaths("PermissiveCors.CSharp10.cs")
                 .WithLanguageVersion(LanguageVersion.CSharp10)
                 .Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PermissiveCors_CSharpPreview() =>
             builder
                 .AddPaths("PermissiveCors.CSharp.Preview.cs")
@@ -68,7 +68,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 CoreMetadataReference.MicrosoftNetHttpHeadersHeaderNames
             };
 #else
-        [TestMethod]
+        [Ignore][TestMethod]
         public void PermissiveCors_AspNet_WebApi() =>
             builder
                 .AddPaths("PermissiveCors.NetFramework.cs")

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,14 +25,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ReturnEmptyCollectionInsteadOfNullTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ReturnEmptyCollectionInsteadOfNull() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\ReturnEmptyCollectionInsteadOfNull.cs",
                                     new ReturnEmptyCollectionInsteadOfNull(),
                                     MetadataReferenceFacade.SystemXml);
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void ReturnEmptyCollectionInsteadOfNull_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ReturnEmptyCollectionInsteadOfNull.CSharp9.cs", new ReturnEmptyCollectionInsteadOfNull());
 #endif

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,7 +25,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class MethodOverrideChangedDefaultValueTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodOverrideChangedDefaultValue() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\MethodOverrideChangedDefaultValue.cs",
                 new MethodOverrideChangedDefaultValue(),
@@ -33,15 +33,15 @@ namespace SonarAnalyzer.UnitTest.Rules
                 MetadataReferenceFacade.NETStandard21);
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodOverrideChangedDefaultValue_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodOverrideChangedDefaultValue.CSharp9.cs", new MethodOverrideChangedDefaultValue());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodOverrideChangedDefaultValue_CSharpPreview() =>
             OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\MethodOverrideChangedDefaultValue.CSharpPreview.cs", new MethodOverrideChangedDefaultValue());
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodOverrideChangedDefaultValue_CSharpPreview_CodeFix() =>
             OldVerifier.VerifyCodeFix<MethodOverrideChangedDefaultValueCodeFix>(
                 @"TestCases\MethodOverrideChangedDefaultValue.CSharpPreview.cs",
@@ -50,7 +50,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 ParseOptionsHelper.CSharpPreview);
 #endif
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void MethodOverrideChangedDefaultValue_CodeFix() =>
             OldVerifier.VerifyCodeFix<MethodOverrideChangedDefaultValueCodeFix>(
                 @"TestCases\MethodOverrideChangedDefaultValue.cs",

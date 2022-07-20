@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         private readonly VerifierBuilder builder = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled));
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CookiesShouldBeSecure_Nancy() =>
             builder.AddPaths("CookieShouldBeSecure_Nancy.cs")
                 .AddReferences(AdditionalReferences)
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NETFRAMEWORK // HttpCookie is not available on .Net Core
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CookiesShouldBeSecure() =>
              builder.AddPaths("CookieShouldBeSecure.cs")
                 .AddReferences(MetadataReferenceFacade.SystemWeb)
@@ -80,13 +80,13 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #else
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CookiesShouldBeSecure_NetCore() =>
              builder.AddPaths("CookieShouldBeSecure_NetCore.cs")
                 .AddReferences(GetAdditionalReferences_NetCore())
                 .Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CookiesShouldBeSecure_CSharp9() =>
             builder.AddPaths("CookieShouldBeSecure.CSharp9.cs")
                 .WithTopLevelStatements()
@@ -94,7 +94,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .AddReferences(NuGetMetadataReference.Nancy())
                 .Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CookiesShouldBeSecure_CSharp10() =>
             builder.AddPaths("CookieShouldBeSecure.CSharp10.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp10)

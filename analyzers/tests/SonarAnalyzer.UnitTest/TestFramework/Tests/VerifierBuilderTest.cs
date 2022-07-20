@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,7 +29,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
     {
         private static readonly VerifierBuilder Empty = new();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AddAnalyzer_Concatenates_IsImmutable()
         {
             var one = Empty.AddAnalyzer(() => new DummyAnalyzerCS());
@@ -41,14 +41,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
                 .And.ContainSingle(x => ((DummyAnalyzerCS)x()).DummyProperty == 42);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AddAnalyzer_Generic_AddAnalyzer()
         {
             var sut = new VerifierBuilder<DummyAnalyzerCS>();
             sut.Analyzers.Should().ContainSingle().Which().Should().BeOfType<DummyAnalyzerCS>();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AddPaths_Concatenates_IsImmutable()
         {
             var one = Empty.AddPaths("First");
@@ -58,7 +58,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             three.Paths.Should().BeEquivalentTo("First", "Second", "Third");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AddReferences_Concatenates_IsImmutable()
         {
             var one = Empty.AddReferences(MetadataReferenceFacade.MsCorLib);
@@ -68,7 +68,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             two.References.Should().BeEquivalentTo(MetadataReferenceFacade.MsCorLib.Concat(MetadataReferenceFacade.SystemData)).And.HaveCount(2);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AddSnippet_Appends_IsImmutable()
         {
             var one = Empty.AddSnippet("First");
@@ -78,7 +78,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             two.Snippets.Should().BeEquivalentTo("First", "Second");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void AddTestReference_Concatenates_IsImmutable()
         {
             var one = Empty.AddReferences(MetadataReferenceFacade.MsCorLib);
@@ -88,7 +88,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             two.References.Should().BeEquivalentTo(MetadataReferenceFacade.MsCorLib.Concat(NuGetMetadataReference.MSTestTestFrameworkV1));
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void WithAutogenerateConcurrentFiles_Overwrites_IsImmutable()
         {
             var one = Empty.WithAutogenerateConcurrentFiles(false);
@@ -98,7 +98,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             two.AutogenerateConcurrentFiles.Should().BeTrue();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void WithBasePath_Overwrites_IsImmutable()
         {
             var one = Empty.WithBasePath("Hotspots");
@@ -108,7 +108,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             two.BasePath.Should().Be("SymbolicExecution");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void WithCodeFix_Overwrites_IsImmutable()
         {
             var one = Empty.WithCodeFix<DummyCodeFixCS>();
@@ -118,7 +118,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             two.CodeFix().Should().BeOfType<DummyCodeFixVB>();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void WithCodeFixedPaths_Overwrites_IsImmutable()
         {
             var one = Empty.WithCodeFixedPaths("First");
@@ -135,7 +135,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             withBatch.CodeFixedPathBatch.Should().Be("Batch");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void WithConcurrentAnalysis_Overwrites_IsImmutable()
         {
             var one = Empty.WithConcurrentAnalysis(false);
@@ -145,7 +145,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             two.ConcurrentAnalysis.Should().BeTrue();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void WithCodeFixTitle_Overwrites_IsImmutable()
         {
             var one = Empty.WithCodeFixTitle("First");
@@ -155,7 +155,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             two.CodeFixTitle.Should().Be("Second");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void WithErrorBehavior_Overwrites_IsImmutable()
         {
             var one = Empty.WithErrorBehavior(CompilationErrorBehavior.FailTest);
@@ -165,7 +165,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             two.ErrorBehavior.Should().Be(CompilationErrorBehavior.Ignore);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void WithLanguageVersion_Overwrites_IsImmutable_CS()
         {
             var one = Empty.WithLanguageVersion(CS.LanguageVersion.CSharp10);
@@ -175,7 +175,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             two.ParseOptions.Should().ContainSingle().Which.Should().BeOfType<CS.CSharpParseOptions>().Which.LanguageVersion.Should().Be(CS.LanguageVersion.CSharp7);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void WithLanguageVersion_Overwrites_IsImmutable_VB()
         {
             var one = Empty.WithLanguageVersion(VB.LanguageVersion.VisualBasic16);
@@ -185,7 +185,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             two.ParseOptions.Should().ContainSingle().Which.Should().BeOfType<VB.VisualBasicParseOptions>().Which.LanguageVersion.Should().Be(VB.LanguageVersion.VisualBasic10);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void WithOnlyDiagnostics_Overwrites_IsImmutable()
         {
             var one = Empty.WithOnlyDiagnostics(NullPointerDereference.S2259);
@@ -195,7 +195,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             two.OnlyDiagnostics.Should().BeEquivalentTo(PublicMethodArgumentsShouldBeCheckedForNull.S3900, ConditionEvaluatesToConstant.S2583);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void WithOptions_Overwrites_IsImmutable()
         {
             var only7 = Empty.WithOptions(ParseOptionsHelper.OnlyCSharp7);
@@ -205,7 +205,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             from8.ParseOptions.Should().BeEquivalentTo(ParseOptionsHelper.FromCSharp8);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void WithOutputKind_Overwrites_IsImmutable()
         {
             var one = Empty.WithOutputKind(OutputKind.WindowsApplication);
@@ -215,7 +215,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             two.OutputKind.Should().Be(OutputKind.NetModule);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void WithProtobufPath_Overwrites_IsImmutable()
         {
             var one = Empty.WithProtobufPath("First");
@@ -225,7 +225,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             two.ProtobufPath.Should().Be("Second");
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void WithSonarProjectConfig_Overwrites_IsImmutable()
         {
             var one = Empty.WithSonarProjectConfigPath("First");
@@ -237,7 +237,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             three.SonarProjectConfigPath.Should().BeNull();
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void WithTopLevelSupport_Overwrites_IsImmutable()
         {
             var sut = Empty.WithTopLevelStatements();
@@ -247,7 +247,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             sut.ParseOptions.Should().BeEquivalentTo(ParseOptionsHelper.FromCSharp9);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void WithTopLevelSupport_PreservesParseOptions()
         {
             var sut = Empty.WithOptions(ParseOptionsHelper.FromCSharp10).WithTopLevelStatements();
@@ -255,17 +255,17 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             sut.ParseOptions.Should().BeEquivalentTo(ParseOptionsHelper.FromCSharp10);
         }
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void WithTopLevelSupport_ForVisualBasicOptions_NotSupported() =>
             Empty.WithOptions(ParseOptionsHelper.FromVisualBasic15).Invoking(x => x.WithTopLevelStatements()).Should().Throw<InvalidOperationException>()
                 .WithMessage("WithTopLevelStatements is not supported with VisualBasicParseOptions.");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void WithTopLevelSupport_ForOldCSharp_NotSupported() =>
             Empty.WithOptions(ParseOptionsHelper.FromCSharp8).Invoking(x => x.WithTopLevelStatements()).Should().Throw<InvalidOperationException>()
                 .WithMessage("WithTopLevelStatements is supported from CSharp9.");
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void Build_ReturnsVerifier() =>
             new VerifierBuilder<DummyAnalyzerCS>().AddPaths("File.cs").Build().Should().NotBeNull();
     }

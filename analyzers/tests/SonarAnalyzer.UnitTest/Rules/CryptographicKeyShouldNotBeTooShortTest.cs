@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,7 +25,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class CryptographicKeyShouldNotBeTooShortTest
     {
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CryptographicKeyShouldNotBeTooShort() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\CryptographicKeyShouldNotBeTooShort.cs",
                                     new CryptographicKeyShouldNotBeTooShort(),
@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     GetAdditionalReferences());
 
 #if NET
-        [TestMethod]
+        [Ignore][TestMethod]
         public void CryptographicKeyShouldNotBeTooShort_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CryptographicKeyShouldNotBeTooShort.CSharp9.cs",
                                                       new CryptographicKeyShouldNotBeTooShort(),

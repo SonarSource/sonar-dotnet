@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,17 +27,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<DisposableMemberInNonDisposableClass>();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DisposableMemberInNonDisposableClass() =>
             builder.AddPaths("DisposableMemberInNonDisposableClass.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DisposableMemberInNonDisposableClass_CSharp9() =>
             builder.AddPaths("DisposableMemberInNonDisposableClass.CSharp9.cs").WithTopLevelStatements().Verify();
 
-        [TestMethod]
+        [Ignore][TestMethod]
         public void DisposableMemberInNonDisposableClass_IAsyncDisposable() => // IAsyncDisposable is available only on .Net Core
             builder.AddPaths("DisposableMemberInNonDisposableClass.NetCore.cs").Verify();
 
