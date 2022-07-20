@@ -346,6 +346,7 @@ stages:
 
     - job: runIntegrationTestsJob
       displayName: '.NET ITs'
+      condition: false
       workspace:
         clean: all
       steps:
@@ -368,6 +369,7 @@ stages:
 
     - job: runJavaBuild
       displayName: 'Java build'
+      condition: false
       workspace:
         clean: all
       steps:
@@ -425,6 +427,7 @@ stages:
     - job: runJavaUnitTests
       displayName: 'Java UTs'
       dependsOn: runJavaBuild
+      condition: false
       workspace:
         clean: all
       steps:
@@ -481,6 +484,7 @@ stages:
     - job: runJavaIntegrationTests
       displayName: 'Java ITs'
       dependsOn: runJavaBuild
+      condition: false
       workspace:
         clean: all
       strategy:
@@ -549,7 +553,7 @@ stages:
 - stage: promoteNugets
   displayName: Promote NuGet on repox
   dependsOn: qa
-  condition: succeeded()
+  condition: false
   jobs:
     - job: promoteRepox
       displayName: 'SonarAnalyzer.CFG.CSharp'
