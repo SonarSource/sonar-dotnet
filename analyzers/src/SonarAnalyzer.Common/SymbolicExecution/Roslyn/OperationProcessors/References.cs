@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
@@ -37,9 +38,24 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                 ? context.State.SetOperationValue(context.Operation, value)
                 : context.State;
 
-        public static ProgramState Process(SymbolicContext context, IFieldReferenceOperationWrapper fieldReference) =>
-            context.State[fieldReference.Field] is { } value
+        public static ProgramState Process(SymbolicContext context, IFieldReferenceOperationWrapper fieldReference)
+        {
+            var state = context.State[fieldReference.Field] is { } value
                 ? context.State.SetOperationValue(context.Operation, value)
+                : context.State;
+            return fieldReference.Instance.TrackedSymbol() is { } symbol
+                ? state.SetSymbolConstraint(symbol, ObjectConstraint.NotNull)
+                : state;
+        }
+
+        public static ProgramState Process(SymbolicContext context, IPropertyReferenceOperationWrapper propertyReference) =>
+            propertyReference.Instance.TrackedSymbol() is { } symbol
+                ? context.SetSymbolConstraint(symbol, ObjectConstraint.NotNull)
+                : context.State;
+
+        public static ProgramState Process(SymbolicContext context, IArrayElementReferenceOperationWrapper arrayElementReference) =>
+            arrayElementReference.ArrayReference.TrackedSymbol() is { } symbol
+                ? context.SetSymbolConstraint(symbol, ObjectConstraint.NotNull)
                 : context.State;
     }
 }

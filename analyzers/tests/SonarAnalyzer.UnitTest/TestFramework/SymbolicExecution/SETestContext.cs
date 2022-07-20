@@ -46,6 +46,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         public static SETestContext CreateCS(string methodBody, string additionalParameters, params SymbolicCheck[] additionalChecks) =>
             CreateCS(methodBody, additionalParameters, null, additionalChecks);
 
+
+
         public static SETestContext CreateCS(string methodBody, string additionalParameters, string localFunctionName, params SymbolicCheck[] additionalChecks)
         {
             var code = $@"
@@ -60,6 +62,7 @@ public unsafe class Sample
     public event EventHandler Event;
     public int Property {{ get; set; }}
     public NotImplementedException PropertyException {{ get; set; }}
+    public int this[int index] {{get => 42; set {{ }} }}
     private int field;
     private NotImplementedException fieldException;
 
