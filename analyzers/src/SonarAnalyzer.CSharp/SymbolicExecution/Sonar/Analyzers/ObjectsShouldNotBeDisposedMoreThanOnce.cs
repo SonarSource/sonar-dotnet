@@ -34,7 +34,7 @@ using SonarAnalyzer.SymbolicExecution.Sonar;
 using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
 using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
 {
     internal sealed class ObjectsShouldNotBeDisposedMoreThanOnce : ISymbolicExecutionAnalyzer
     {
@@ -153,7 +153,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                         if (disposableSymbol is IMethodSymbol
                             // Special case - if the parameter symbol is "this" then resolve it to the containing type
-                            || (disposableSymbol is IParameterSymbol parameter && parameter.IsThis))
+                            || disposableSymbol is IParameterSymbol parameter && parameter.IsThis)
                         {
                             disposableSymbol = disposableSymbol.ContainingType;
                         }
