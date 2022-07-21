@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -32,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class DoNotUseOutRefParameters : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3874";
+        private const string DiagnosticId = "S3874";
         private const string MessageFormat = "Consider refactoring this method in order to remove the need for this '{0}' modifier.";
 
         private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
@@ -46,7 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var parameter = (ParameterSyntax)c.Node;
 
                     if (!parameter.Modifiers.Any(IsRefOrOut)
-                        || (parameter.Parent.Parent as MethodDeclarationSyntax is { } method && IsDeconstructor(method)))
+                        || IsDeconstructor((MethodDeclarationSyntax)parameter.Parent.Parent))
                     {
                         return;
                     }
@@ -55,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var parameterSymbol = c.SemanticModel.GetDeclaredSymbol(parameter);
 
-                    if (!(parameterSymbol.ContainingSymbol is IMethodSymbol { } containingMethod)
+                    if (parameterSymbol.ContainingSymbol is not IMethodSymbol containingMethod
                         || containingMethod.IsOverride
                         || !containingMethod.IsPubliclyAccessible()
                         || IsTryPattern(containingMethod, modifier)
@@ -68,7 +69,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.Parameter);
 
-        private bool IsTryPattern(IMethodSymbol method, SyntaxToken modifier) =>
+        private static bool IsTryPattern(IMethodSymbol method, SyntaxToken modifier) =>
             method.Name.StartsWith("Try", StringComparison.Ordinal)
             && method.ReturnType.Is(KnownType.System_Boolean)
             && modifier.IsKind(SyntaxKind.OutKeyword);
@@ -78,9 +79,9 @@ namespace SonarAnalyzer.Rules.CSharp
             || token.IsKind(SyntaxKind.OutKeyword);
 
         private static bool IsDeconstructor(MethodDeclarationSyntax node) =>
-            node.ReturnType.ToString().Equals("void")
-            && node.Modifiers.Count == 1
-            && node.Modifiers.Any(SyntaxKind.PublicKeyword)
-            && node.Identifier.Value.Equals("Deconstruct");
+            node.IsVoid()
+            && node.Identifier.Value.Equals("Deconstruct")
+            && ((node.Modifiers.Count == 1 && node.Modifiers.Any(SyntaxKind.PublicKeyword))
+                 || node.IsExtensionMethod());
     }
 }

@@ -81,15 +81,17 @@ namespace Tests.Diagnostics
         void SetOut(out I3874 obj); // Noncompliant
     }
 
+
     public class Person
     {
         public string FirstName { get; set; }
+        public string MiddleName { get; set; }
         public string LastName { get; set; }
 
-
-        public Person(string fname, string lname)
+        public Person(string fname, string mname, string lname)
         {
             FirstName = fname;
+            MiddleName = mname;
             LastName = lname;
         }
 
@@ -103,4 +105,15 @@ namespace Tests.Diagnostics
         public static void Deconstruct(out string foo) { foo = "foo"; } // Noncompliant
         public static int Deconstruct(ref int bar) { return bar; } // Noncompliant
     }
- }
+
+    public static class PersonExtention
+    {
+        public static void Deconstruct(this Person p, out string fname, out string lname) // Compliant - it's a deconstruct method for class Person
+        {
+            fname = p.FirstName;
+            lname = p.LastName;
+        }
+
+        public static int Deconstruct(this Person p, out int bar) { bar = 1; return bar; } // Noncompliant
+    }
+}
