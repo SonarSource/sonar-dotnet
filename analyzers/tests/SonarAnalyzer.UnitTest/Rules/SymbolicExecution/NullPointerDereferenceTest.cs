@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
@@ -25,12 +26,13 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
     [TestClass]
     public class NullPointerDereferenceTest
     {
-        private readonly VerifierBuilder sonar = new VerifierBuilder<SymbolicExecutionRunner>()
+        private readonly VerifierBuilder sonar = new VerifierBuilder()
+            .AddAnalyzer(() => new SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg))
             .WithBasePath(@"SymbolicExecution\Sonar")
             .WithOnlyDiagnostics(new[] { NullPointerDereference.S2259 });
 
         private readonly VerifierBuilder roslyn = new VerifierBuilder()
-            .AddAnalyzer(() => new SymbolicExecutionRunner())
+            .AddAnalyzer(() => new SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabled))
             .WithBasePath(@"SymbolicExecution\Roslyn")
             .WithOnlyDiagnostics(new[] { NullPointerDereference.S2259 });
 
