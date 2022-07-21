@@ -30,7 +30,6 @@ using SonarAnalyzer.CFG.Sonar;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
-using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
 {
@@ -136,7 +135,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
                     return programState;
                 }
 
-                if (IsNullableValueType(symbol) && !IsGetTypeCall(memberAccess)
+                if ((IsNullableValueType(symbol) && !IsGetTypeCall(memberAccess))
                     || semanticModel.IsExtensionMethod(memberAccess))
                 {
                     return programState;
