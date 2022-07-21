@@ -69,9 +69,13 @@ namespace SonarAnalyzer.Rules
             {
                 var isTestProject = sonarContext.IsTestProject(nodeContext.Compilation, nodeContext.Options);
                 var isScannerRun = sonarContext.IsScannerRun(nodeContext.Options);
-                AnalyzeSonar(nodeContext, isTestProject, isScannerRun, body, symbol);
-                if (ControlFlowGraph.IsAvailable)   // ToDo: Make this configurable for UTs when migrating other rules, see DeadStores
+                if (UseSonarCfg)
                 {
+                    AnalyzeSonar(nodeContext, isTestProject, isScannerRun, body, symbol);
+                }
+                else
+                {
+                    // TODO: Run AnalyzeSonar for non-migrated rules.
                     AnalyzeRoslyn(sonarContext, nodeContext, isTestProject, isScannerRun, body, symbol);
                 }
             }
