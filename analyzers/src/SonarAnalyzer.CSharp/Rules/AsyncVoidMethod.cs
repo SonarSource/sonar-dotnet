@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -49,6 +50,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
+        private static readonly SyntaxKind[] ParentTypeSyntaxKinds =
+        {
+            SyntaxKind.ClassDeclaration,
+            SyntaxKind.StructDeclaration,
+            SyntaxKindEx.RecordClassDeclaration,
+            SyntaxKindEx.RecordStructDeclaration,
+            SyntaxKind.InterfaceDeclaration
+        };
+
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
@@ -69,24 +79,36 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsExceptionToTheRule(MethodDeclarationSyntax methodDeclaration, IMethodSymbol methodSymbol) =>
             methodSymbol.IsEventHandler()
-            || IsUsedAsEventHandler(methodDeclaration)
+            || IsAcceptedUsage(methodDeclaration)
             || IsNamedAsEventHandler(methodSymbol)
             || HasAnyMsTestV1AllowedAttribute(methodSymbol);
 
-        private static bool IsUsedAsEventHandler(MethodDeclarationSyntax methodDeclaration) =>
-            methodDeclaration.FirstAncestorOrSelf<TypeDeclarationSyntax>(x =>
-                x.IsAnyKind(
-                    SyntaxKind.ClassDeclaration,
-                    SyntaxKind.StructDeclaration,
-                    SyntaxKindEx.RecordClassDeclaration,
-                    SyntaxKindEx.RecordStructDeclaration,
-                    SyntaxKind.InterfaceDeclaration)) is { } parentDeclaration
-            && parentDeclaration.DescendantNodes()
-                .OfType<AssignmentExpressionSyntax>()
-                .Where(x => x.IsKind(SyntaxKind.AddAssignmentExpression))
-                .Select(x => x.Right)
-                .OfType<IdentifierNameSyntax>()
-                .Any(x => x.Identifier.ValueText == methodDeclaration.Identifier.ValueText);
+        private static bool IsAcceptedUsage(MethodDeclarationSyntax methodDeclaration) =>
+            GetParentDeclaration(methodDeclaration) is { } parentDeclaration
+            && parentDeclaration
+               .DescendantNodes()
+               .SelectMany(node => node switch
+                                   {
+                                       ObjectCreationExpressionSyntax objectCreation => GetIdentifierArguments(objectCreation),
+                                       InvocationExpressionSyntax invocation => GetIdentifierArguments(invocation),
+                                       AssignmentExpressionSyntax assignment => GetIdentifierRightHandSide(assignment),
+                                       _ => Enumerable.Empty<IdentifierNameSyntax>()
+                                   })
+               .Any(x => x.Identifier.ValueText == methodDeclaration.Identifier.ValueText);
+
+        private static IEnumerable<IdentifierNameSyntax> GetIdentifierArguments(ObjectCreationExpressionSyntax objectCreation) =>
+            objectCreation.ArgumentList?.Arguments.Select(x => x.Expression).OfType<IdentifierNameSyntax>() ?? Enumerable.Empty<IdentifierNameSyntax>();
+
+        private static IEnumerable<IdentifierNameSyntax> GetIdentifierArguments(InvocationExpressionSyntax invocation) =>
+            invocation.ArgumentList.Arguments.Select(x => x.Expression).OfType<IdentifierNameSyntax>();
+
+        private static IEnumerable<IdentifierNameSyntax> GetIdentifierRightHandSide(AssignmentExpressionSyntax assignment) =>
+            assignment.IsKind(SyntaxKind.AddAssignmentExpression) && assignment.Right is IdentifierNameSyntax identifier
+                ? new[] { identifier }
+                : Enumerable.Empty<IdentifierNameSyntax>();
+
+        private static SyntaxNode GetParentDeclaration(SyntaxNode syntaxNode) =>
+            syntaxNode.FirstAncestorOrSelf<TypeDeclarationSyntax>(x => x.IsAnyKind(ParentTypeSyntaxKinds));
 
         private static bool IsNamedAsEventHandler(ISymbol symbol) =>
             symbol.Name.Length > 2

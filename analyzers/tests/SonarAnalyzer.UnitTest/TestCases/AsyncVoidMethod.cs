@@ -147,16 +147,27 @@ namespace Tests.Diagnostics
         }
     }
 
-    // https://github.com/SonarSource/sonar-dotnet/issues/5432
     public class Reproducer5432
     {
+        public delegate void CustomDelegate(int value);
+
         public void SomeMethod()
         {
             var _timer = new System.Threading.Timer(RunOnceAsync);
+            _ = new DateTime { }; // For coverage, check constructor without an ArgumentList.
+
+            CallAction(Do);
+            CallDelegate(Do);
         }
 
-        private async void RunOnceAsync(object _) // Noncompliant FP, cannot change signature because it's used as a delegate
-        {
-        }
+        private void CallAction(Action<bool> action) { }
+
+        private void CallDelegate(CustomDelegate @delegate) { }
+
+        private async void RunOnceAsync(object _) { } // Compliant, see: https://github.com/SonarSource/sonar-dotnet/issues/5432
+
+        private async void Do(bool b) { }
+
+        private async void Do(int i) { }
     }
 }
