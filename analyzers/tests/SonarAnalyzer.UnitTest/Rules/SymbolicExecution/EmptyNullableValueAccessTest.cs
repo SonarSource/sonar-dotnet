@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
@@ -33,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         public void EmptyNullableValueAccess_CS(ProjectType projectType) =>
             OldVerifier.VerifyAnalyzer(
                 @"TestCases\SymbolicExecution\Sonar\EmptyNullableValueAccess.cs",
-                new SymbolicExecutionRunner(),
+                new SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg),
                 ParseOptionsHelper.FromCSharp8,
                 TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21),
                 onlyDiagnostics: OnlyDiagnostics);
@@ -43,14 +44,14 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         public void EmptyNullableValueAccess_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(
                 @"TestCases\SymbolicExecution\Sonar\EmptyNullableValueAccess.CSharp9.cs",
-                new SymbolicExecutionRunner(),
+                new SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg),
                 onlyDiagnostics: OnlyDiagnostics);
 
         [TestMethod]
         public void EmptyNullableValueAccess_CSharp10() =>
             OldVerifier.VerifyAnalyzerFromCSharp10Library(
                 @"TestCases\SymbolicExecution\Sonar\EmptyNullableValueAccess.CSharp10.cs",
-                new SymbolicExecutionRunner(),
+                new SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg),
                 onlyDiagnostics: OnlyDiagnostics);
 #endif
     }

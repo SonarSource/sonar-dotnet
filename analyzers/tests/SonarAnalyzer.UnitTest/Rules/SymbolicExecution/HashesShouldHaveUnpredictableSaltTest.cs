@@ -20,6 +20,7 @@
 
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.Rules.SymbolicExecution;
 
@@ -34,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void HashesShouldHaveUnpredictableSalt_CS() =>
             OldVerifier.VerifyAnalyzer(
                 @"TestCases\SymbolicExecution\Sonar\HashesShouldHaveUnpredictableSalt.cs",
-                new SymbolicExecutionRunner(),
+                new SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg),
                 ParseOptionsHelper.FromCSharp8,
                 MetadataReferenceFacade.SystemSecurityCryptography,
                 onlyDiagnostics: OnlyDiagnostics);
@@ -43,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void HashesShouldHaveUnpredictableSalt_DoesNotRaiseIssuesForTestProject() =>
             OldVerifier.VerifyNoIssueReportedInTest(
                 @"TestCases\SymbolicExecution\Sonar\HashesShouldHaveUnpredictableSalt.cs",
-                new SymbolicExecutionRunner(),
+                new SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg),
                 ParseOptionsHelper.FromCSharp8,
                 MetadataReferenceFacade.SystemSecurityCryptography,
                 onlyDiagnostics: OnlyDiagnostics);
@@ -54,7 +55,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void HashesShouldHaveUnpredictableSalt_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(
                 @"TestCases\SymbolicExecution\Sonar\HashesShouldHaveUnpredictableSalt.CSharp9.cs",
-                new SymbolicExecutionRunner(),
+                new SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg),
                 MetadataReferenceFacade.SystemSecurityCryptography,
                 onlyDiagnostics: OnlyDiagnostics);
 
@@ -62,7 +63,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void HashesShouldHaveUnpredictableSalt_CSharp10() =>
             OldVerifier.VerifyAnalyzerFromCSharp10Library(
                 @"TestCases\SymbolicExecution\Sonar\HashesShouldHaveUnpredictableSalt.CSharp10.cs",
-                new SymbolicExecutionRunner(),
+                new SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg),
                 MetadataReferenceFacade.SystemSecurityCryptography,
                 onlyDiagnostics: OnlyDiagnostics);
 

@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.Rules.SymbolicExecution;
 
@@ -32,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         public void InitializationVectorShouldBeRandom_CS() =>
             OldVerifier.VerifyAnalyzer(
                 @"TestCases\SymbolicExecution\Sonar\InitializationVectorShouldBeRandom.cs",
-                new SymbolicExecutionRunner(),
+                new SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg),
                 ParseOptionsHelper.FromCSharp8,
                 MetadataReferenceFacade.SystemSecurityCryptography,
                 onlyDiagnostics: OnlyDiagnostics);
@@ -41,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         public void InitializationVectorShouldBeRandom_DoesNotRaiseIssuesForTestProject() =>
             OldVerifier.VerifyNoIssueReportedInTest(
                 @"TestCases\SymbolicExecution\Sonar\InitializationVectorShouldBeRandom.cs",
-                new SymbolicExecutionRunner(),
+                new SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg),
                 ParseOptionsHelper.FromCSharp8,
                 MetadataReferenceFacade.SystemSecurityCryptography,
                 onlyDiagnostics: OnlyDiagnostics);
@@ -52,7 +53,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         public void InitializationVectorShouldBeRandom_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(
                 @"TestCases\SymbolicExecution\Sonar\InitializationVectorShouldBeRandom.CSharp9.cs",
-                new SymbolicExecutionRunner(),
+                new SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg),
                 MetadataReferenceFacade.SystemSecurityCryptography,
                 onlyDiagnostics: OnlyDiagnostics);
 
@@ -60,7 +61,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         public void InitializationVectorShouldBeRandom_CSharp10() =>
             OldVerifier.VerifyAnalyzerFromCSharp10Library(
                 @"TestCases\SymbolicExecution\Sonar\InitializationVectorShouldBeRandom.CSharp10.cs",
-                new SymbolicExecutionRunner(),
+                new SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg),
                 MetadataReferenceFacade.SystemSecurityCryptography,
                 onlyDiagnostics: OnlyDiagnostics);
 

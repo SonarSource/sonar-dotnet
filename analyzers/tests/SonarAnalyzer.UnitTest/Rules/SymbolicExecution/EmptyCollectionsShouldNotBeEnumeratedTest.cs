@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
@@ -25,7 +26,8 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
     [TestClass]
     public class EmptyCollectionsShouldNotBeEnumeratedTest
     {
-        private static readonly VerifierBuilder Builder = new VerifierBuilder<SymbolicExecutionRunner>()
+        private static readonly VerifierBuilder Builder = new VerifierBuilder()
+            .AddAnalyzer(()=>new SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg))
             .WithOnlyDiagnostics(EmptyCollectionsShouldNotBeEnumerated.S4158)
             .WithBasePath(@"SymbolicExecution\Sonar")
             .WithConcurrentAnalysis(false);
