@@ -98,6 +98,9 @@ namespace SonarAnalyzer.Json
         public bool ContainsKey(string key) =>
             Kind == Kind.Object ? map.ContainsKey(key) : throw InvalidKind();
 
+        public bool TryGetPropertyNode(string key, out JsonNode node) =>
+            map.TryGetValue(key, out node);
+
         public IEnumerator<JsonNode> GetEnumerator() =>
             Kind == Kind.List ? list.GetEnumerator() : throw InvalidKind();
 

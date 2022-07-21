@@ -29,28 +29,30 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DatabasePasswordsShouldBeSecureTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<DatabasePasswordsShouldBeSecure>();
+
         [DataTestMethod]
         [DataRow("3.1.11", "3.19.80")]
         [DataRow("5.0.2", "5.21.1")]
         public void DatabasePasswordsShouldBeSecure_CS(string entityFrameworkCoreVersion, string oracleVersion) =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DatabasePasswordsShouldBeSecure.cs",
-                                    new DatabasePasswordsShouldBeSecure(),
-                                    ParseOptionsHelper.FromCSharp8,
-                                    GetReferences(entityFrameworkCoreVersion, oracleVersion));
+            builder.AddPaths("DatabasePasswordsShouldBeSecure.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .AddReferences(GetReferences(entityFrameworkCoreVersion, oracleVersion))
+                .Verify();
 
         [TestMethod]
         public void DatabasePasswordsShouldBeSecure_Net5_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DatabasePasswordsShouldBeSecure.Net5.cs",
-                                    new DatabasePasswordsShouldBeSecure(),
-                                    ParseOptionsHelper.FromCSharp8,
-                                    GetReferences("5.0.2", "5.21.1"));
+            builder.AddPaths("DatabasePasswordsShouldBeSecure.Net5.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .AddReferences(GetReferences("5.0.2", "5.21.1"))
+                .Verify();
 
         [TestMethod]
         public void DatabasePasswordsShouldBeSecure_NetCore3_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DatabasePasswordsShouldBeSecure.NetCore31.cs",
-                                    new DatabasePasswordsShouldBeSecure(),
-                                    ParseOptionsHelper.FromCSharp8,
-                                    GetReferences("3.1.11", "3.19.80"));
+            builder.AddPaths("DatabasePasswordsShouldBeSecure.NetCore31.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .AddReferences(GetReferences("3.1.11", "3.19.80"))
+                .Verify();
 
         [DataTestMethod]
         [DataRow(@"TestCases\WebConfig\DatabasePasswordsShouldBeSecure\Values")]
@@ -98,6 +100,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(@"TestCases\AppSettings\DatabasePasswordsShouldBeSecure\UnexpectedContent\EmptyArray")]
         [DataRow(@"TestCases\AppSettings\DatabasePasswordsShouldBeSecure\UnexpectedContent\EmptyFile")]
         [DataRow(@"TestCases\AppSettings\DatabasePasswordsShouldBeSecure\UnexpectedContent\WrongStructure")]
+        [DataRow(@"TestCases\AppSettings\DatabasePasswordsShouldBeSecure\UnexpectedContent\ConnectionStringComment")]
+        [DataRow(@"TestCases\AppSettings\DatabasePasswordsShouldBeSecure\UnexpectedContent\ValueKind")]
+        [DataRow(@"TestCases\AppSettings\DatabasePasswordsShouldBeSecure\UnexpectedContent\PropertyKinds")]
+        [DataRow(@"TestCases\AppSettings\DatabasePasswordsShouldBeSecure\UnexpectedContent\Null")]
         public void DatabasePasswordsShouldBeSecure_CS_AppSettings(string root)
         {
             var appSettingsPath = GetAppSettingsPath(root);

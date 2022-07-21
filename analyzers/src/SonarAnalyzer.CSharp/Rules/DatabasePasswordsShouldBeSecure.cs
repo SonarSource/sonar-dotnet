@@ -32,6 +32,7 @@ using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Json;
+using SonarAnalyzer.Json.Parsing;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -106,7 +107,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     ReportEmptyPassword(JsonNode.FromString(appSettings), fullPath, c);
                 }
-                catch (Exception ex) when (ex is JsonException or InvalidOperationException)
+                catch (JsonException)
                 {
                     // Happens when JSON file is malformed
                 }
@@ -129,11 +130,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private void ReportEmptyPassword(JsonNode doc, string appSettingsPath, CompilationAnalysisContext c)
         {
-            foreach (var key in doc["ConnectionStrings"].Keys)
+            if (doc.TryGetPropertyNode("ConnectionStrings", out var connectionStrings) && connectionStrings.Kind == Kind.Object)
             {
-                if (doc["ConnectionStrings"][key] is var connectionStringNode && IsVulnerable(connectionStringNode.Value.ToString()))
+                foreach (var key in connectionStrings.Keys)
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, CreateLocation(connectionStringNode, appSettingsPath)));
+                    if (connectionStrings[key] is { Kind: Kind.Value, Value: string value } connectionStringNode && IsVulnerable(value))
+                    {
+                        c.ReportIssue(Diagnostic.Create(Rule, CreateLocation(connectionStringNode, appSettingsPath)));
+                    }
                 }
             }
         }
