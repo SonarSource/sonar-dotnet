@@ -168,10 +168,11 @@ stages:
           dotnet test .\analyzers\SonarAnalyzer.sln --no-build --collect:"XPlat Code Coverage" --settings .\analyzers\runsettings.xml -l trx -l "console;verbosity=detailed" -c $(BuildConfiguration) -f net48
           Test-ExitCode "ERROR: Unit tests for FAILED."
 
-          ################## & OpenCover.Console.exe -target:"dotnet.exe" -targetargs:"test analyzers\tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net48\SonarAnalyzer.UnitTest.dll -l trx -l console;verbosity=detailed" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.Utilities]* +[SonarAnalyzer.VisualBasic]*" -output:coverage/net48.xml -safemode:off -excludebyattribute:*.ExcludeFromCodeCoverageAttribute
-          Get-ChildItem -Path analyzers\tests\SonarAnalyzer.UnitTest\TestResults\ -Recurse -File
-          Get-ChildItem -Path . -Recurse -Filter *coverage.opencover.xml
-          Get-ChildItem -Path . -Recurse -Filter *.trx
+          Get-ChildItem -Path analyzers\tests\SonarAnalyzer.UnitTest\TestResults\ -Recurse -File -Filter coverage.opencover.xml | Copy-Item -Verbose -Destination .\coverage\ 
+          Get-ChildItem -Path analyzers\tests\SonarAnalyzer.UnitTest\TestResults\ -Recurse -File -Filter *.trx | Copy-Item -Verbose -Destination .\TestResults\ 
+
+          ### & OpenCover.Console.exe -target:"dotnet.exe" -targetargs:"test analyzers\tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net48\SonarAnalyzer.UnitTest.dll -l trx -l console;verbosity=detailed" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.Utilities]* +[SonarAnalyzer.VisualBasic]*" -output:coverage/net48.xml -safemode:off -excludebyattribute:*.ExcludeFromCodeCoverageAttribute
+          ### Test-ExitCode "ERROR: Unit tests for net48 FAILED."
         displayName: '.Net UTs'
 
       - task: PublishPipelineArtifact@1
@@ -186,6 +187,43 @@ stages:
           path: 'TestResults'
           artifact: DotnetTestResultsNet48
 
+    - job: runUnitTestsJobNet6
+      displayName: '.NET 6 UTs'
+
+      steps:
+      - task: DownloadPipelineArtifact@2
+        displayName: 'Download binaries to test'
+        inputs:
+          artifact: TestBinaries
+          targetPath: 'analyzers\tests\SonarAnalyzer.UnitTest\bin'
+
+      - powershell: |
+          . .\scripts\utils.ps1
+
+          CreateFolder("coverage")
+          CreateFolder("TestResults")
+
+          dotnet test .\analyzers\SonarAnalyzer.sln --no-build --collect:"XPlat Code Coverage" --settings .\analyzers\runsettings.xml -l trx -l "console;verbosity=detailed" -c $(BuildConfiguration) -f "net6.0"
+          Test-ExitCode "ERROR: Unit tests for FAILED."
+
+          Get-ChildItem -Path analyzers\tests\SonarAnalyzer.UnitTest\TestResults\ -Recurse -File -Filter coverage.opencover.xml | Copy-Item -Verbose -Destination .\coverage\ 
+          Get-ChildItem -Path analyzers\tests\SonarAnalyzer.UnitTest\TestResults\ -Recurse -File -Filter *.trx | Copy-Item -Verbose -Destination .\TestResults\ 
+
+          ## & OpenCover.Console.exe -target:"dotnet.exe" -targetargs:"test analyzers\tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net6.0\SonarAnalyzer.UnitTest.dll -l trx -l console;verbosity=detailed" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.Utilities]* +[SonarAnalyzer.VisualBasic]*" -output:coverage/net6.0.xml -safemode:off -excludebyattribute:*.ExcludeFromCodeCoverageAttribute
+          ## Test-ExitCode "ERROR: Unit tests for net6.0 FAILED."
+        displayName: '.Net UTs'
+
+      - task: PublishPipelineArtifact@1
+        displayName: 'Save coverage files'
+        inputs:
+          path: 'coverage'
+          artifact: DotnetCoverageNet6
+
+      - task: PublishPipelineArtifact@1
+        displayName: 'Save test results files'
+        inputs:
+          path: 'TestResults'
+          artifact: DotnetTestResultsNet6
 
     - job: dotNetAnalysis
       displayName: '.Net Analysis'
@@ -193,6 +231,7 @@ stages:
       # in previous jobs.
       dependsOn:
       - runUnitTestsJobNet48
+      - runUnitTestsJobNet6
       steps:
       - task: NuGetToolInstaller@1
         displayName: "Install NuGet"
