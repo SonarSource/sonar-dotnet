@@ -2,6 +2,8 @@
 
 record struct RecordStruct
 {
+    public RecordStruct() { }
+
     private string name = "foobar"; // Noncompliant
 
     public static readonly string NameReadonly = "foobar";
@@ -24,6 +26,8 @@ record struct RecordStruct
     [DebuggerDisplay("foobar", Name = "foobar", TargetTypeName = "foobar")] // Compliant - in attribute -> ignored
     record struct InnerRecordStruct
     {
+        public InnerRecordStruct() { }
+
         private string name = "foobar";
         //                    ^^^^^^^^ Secondary
 

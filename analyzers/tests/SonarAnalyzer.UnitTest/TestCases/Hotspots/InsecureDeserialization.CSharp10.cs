@@ -6,6 +6,8 @@ namespace Tests.Diagnostics
     [Serializable]
     public record struct RecordStructWithoutConstructorIsSafe
     {
+        public RecordStructWithoutConstructorIsSafe() { }
+
         public string Name { get; set; } = "";
     }
 

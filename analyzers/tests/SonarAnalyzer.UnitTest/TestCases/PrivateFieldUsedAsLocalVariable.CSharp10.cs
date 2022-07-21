@@ -1,5 +1,7 @@
 ﻿record struct RecordStruct
 {
+    public RecordStruct() { }
+
     private int privateUnused = 0; // Compliant - unused
     private int privateUsed = 0;   // Noncompliant {{Remove the field 'privateUsed' and declare it as a local variable in the relevant methods.}}
     //          ^^^^^^^^^^^^^^^

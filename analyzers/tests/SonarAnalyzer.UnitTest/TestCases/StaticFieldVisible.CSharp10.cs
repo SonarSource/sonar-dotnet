@@ -2,6 +2,8 @@
 
 public struct StaticFieldVisibleStruct
 {
+    public StaticFieldVisibleStruct() { }
+
     public static double Pi = 3.14;  // Noncompliant
 //                       ^^
     public const double Pi2 = 3.14;

@@ -1,5 +1,7 @@
 ﻿public record struct RecordStruct
 {
+    public RecordStruct() { }
+
     private string name = "";
 
     public string GetName() // Noncompliant {{Consider making method 'GetName' a property.}}
