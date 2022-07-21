@@ -34,9 +34,9 @@ using SonarAnalyzer.Helpers;
 using SonarAnalyzer.LiveVariableAnalysis.CSharp;
 using SonarAnalyzer.Rules.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution;
-using SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 using SonarAnalyzer.SymbolicExecution.Sonar;
 using StyleCop.Analyzers.Lightup;
+using RuleChecks = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -56,8 +56,9 @@ namespace SonarAnalyzer.Rules.CSharp
             new InitializationVectorShouldBeRandom(),
             new HashesShouldHaveUnpredictableSalt());
 
-        protected override ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules => ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
-            .Add(LocksReleasedAllPaths.S2222, CreateFactory<LocksReleasedAllPaths>());
+        protected override ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules { get; } = ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
+            .Add(RuleChecks.LocksReleasedAllPaths.S2222, CreateFactory<RuleChecks.LocksReleasedAllPaths>())
+            .Add(RuleChecks.NullPointerDereference.S2259, CreateFactory<RuleChecks.NullPointerDereference>());
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => base.SupportedDiagnostics.Concat(SonarRules.SelectMany(x => x.SupportedDiagnostics)).ToImmutableArray();
 
