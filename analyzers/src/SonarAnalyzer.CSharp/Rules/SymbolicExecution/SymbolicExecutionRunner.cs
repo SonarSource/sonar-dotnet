@@ -57,12 +57,13 @@ namespace SonarAnalyzer.Rules.CSharp
             new InitializationVectorShouldBeRandom(),
             new HashesShouldHaveUnpredictableSalt());
 
-        private readonly bool useSonarCfg;
+        public SymbolicExecutionRunner() : this(AnalyzerConfiguration.AlwaysEnabled)
+        {
+        }
 
-        public SymbolicExecutionRunner() : this(AnalyzerConfiguration.AlwaysEnabled) { }
-
-        internal /* for testing */ SymbolicExecutionRunner(IAnalyzerConfiguration configuration) =>
-            useSonarCfg = configuration.UseSonarCfg();
+        internal /* for testing */ SymbolicExecutionRunner(IAnalyzerConfiguration configuration) : base(configuration)
+        {
+        }
 
         protected override ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules { get; } = ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
             .Add(RuleChecks.LocksReleasedAllPaths.S2222, CreateFactory<RuleChecks.LocksReleasedAllPaths>())

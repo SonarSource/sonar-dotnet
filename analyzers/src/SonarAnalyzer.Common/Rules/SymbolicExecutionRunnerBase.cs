@@ -25,6 +25,8 @@ using System.Threading;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.CFG.Roslyn;
+using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
@@ -36,6 +38,11 @@ namespace SonarAnalyzer.Rules
         protected abstract ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules { get; }
         protected abstract ControlFlowGraph CreateCfg(SemanticModel model, SyntaxNode node, CancellationToken cancel);
         protected abstract void AnalyzeSonar(SyntaxNodeAnalysisContext context, bool isTestProject, bool isScannerRun, SyntaxNode body, ISymbol symbol);
+
+        protected bool UseSonarCfg { get; }
+
+        private protected /* for testing */ SymbolicExecutionRunnerBase(IAnalyzerConfiguration configuration) =>
+            UseSonarCfg = configuration.UseSonarCfg();
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => AllRules.Keys.ToImmutableArray();
         protected override bool EnableConcurrentExecution => false;
