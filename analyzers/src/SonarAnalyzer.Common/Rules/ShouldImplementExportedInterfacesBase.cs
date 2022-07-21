@@ -84,10 +84,13 @@ namespace SonarAnalyzer.Rules.Common
                 },
                 Language.SyntaxKind.Attribute);
 
-        private static bool IsOfExportType(ITypeSymbol type, ISymbol exportedType) =>
+        private static bool IsOfExportType(ITypeSymbol type, INamedTypeSymbol exportedType) =>
             type.GetSelfAndBaseTypes()
                 .Union(type.AllInterfaces)
-                .Any(currentType => currentType.Equals(exportedType));
+                .Any(currentType =>
+                         exportedType.IsUnboundGenericType
+                             ? currentType.OriginalDefinition.Equals(exportedType.ConstructedFrom)
+                             : currentType.Equals(exportedType));
 
         private INamedTypeSymbol GetExportedTypeSymbol(SeparatedSyntaxList<TArgumentSyntax>? attributeArguments, SemanticModel semanticModel)
         {
