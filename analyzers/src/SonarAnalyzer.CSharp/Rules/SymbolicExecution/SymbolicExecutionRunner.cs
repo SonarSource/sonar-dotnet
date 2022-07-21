@@ -29,6 +29,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.CFG.Sonar;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.LiveVariableAnalysis.CSharp;
@@ -55,6 +56,13 @@ namespace SonarAnalyzer.Rules.CSharp
             new RestrictDeserializedTypes(),
             new InitializationVectorShouldBeRandom(),
             new HashesShouldHaveUnpredictableSalt());
+
+        private readonly bool useSonarCfg;
+
+        public SymbolicExecutionRunner() : this(AnalyzerConfiguration.AlwaysEnabled) { }
+
+        internal /* for testing */ SymbolicExecutionRunner(IAnalyzerConfiguration configuration) =>
+            useSonarCfg = configuration.UseSonarCfg();
 
         protected override ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules { get; } = ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
             .Add(RuleChecks.LocksReleasedAllPaths.S2222, CreateFactory<RuleChecks.LocksReleasedAllPaths>())
