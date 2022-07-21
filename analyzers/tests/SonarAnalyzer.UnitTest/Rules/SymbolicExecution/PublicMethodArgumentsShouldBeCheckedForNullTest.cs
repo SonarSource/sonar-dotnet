@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -25,7 +26,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class PublicMethodArgumentsShouldBeCheckedForNullTest
     {
-        private readonly VerifierBuilder builder = new VerifierBuilder().AddAnalyzer(() => new SymbolicExecutionRunner())
+        private readonly VerifierBuilder builder = new VerifierBuilder().AddAnalyzer(() => new SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg))
                                                        .WithOnlyDiagnostics(PublicMethodArgumentsShouldBeCheckedForNull.S3900)
                                                        .WithBasePath(@"SymbolicExecution\Sonar");
 
