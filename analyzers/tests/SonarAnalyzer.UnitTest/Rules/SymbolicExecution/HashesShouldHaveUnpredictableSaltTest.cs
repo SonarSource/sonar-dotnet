@@ -20,7 +20,7 @@
 
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
-using SonarAnalyzer.SymbolicExecution.Sonar;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;
 
 namespace SonarAnalyzer.UnitTest.Rules

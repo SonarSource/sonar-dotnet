@@ -21,7 +21,6 @@
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Rules;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
-using SonarAnalyzer.SymbolicExecution.Sonar;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
@@ -34,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         // This test is meant to run all the symbolic execution rules together and verify different scenarios.
         [TestMethod]
         public void VerifySymbolicExecutionRules_CS() =>
-            new VerifierBuilder<SymbolicExecutionRunner>().AddPaths(@"SymbolicExecution\Sonar\SymbolicExecutionRules.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+            new VerifierBuilder<CS.SymbolicExecutionRunner>().AddPaths(@"SymbolicExecution\Sonar\SymbolicExecutionRules.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
         [TestMethod]
         public void Initialize_MethodBase_CS() =>
@@ -443,7 +442,7 @@ End Class";
                 .WithOnlyDiagnostics(onlyRules)
                 .Verify();
 
-        private class TestSERunnerCS : SymbolicExecutionRunner
+        private class TestSERunnerCS : CS.SymbolicExecutionRunner
         {
             public TestSERunnerCS() : base(AnalyzerConfiguration.AlwaysEnabled) { }
 
@@ -463,7 +462,7 @@ End Class";
                 .Add(TestScopeAssignmentRuleCheck.STest, CreateFactory<TestScopeAssignmentRuleCheck>());
         }
 
-        private class ConfigurableSERunnerCS : SymbolicExecutionRunner
+        private class ConfigurableSERunnerCS : CS.SymbolicExecutionRunner
         {
             private ImmutableDictionary<DiagnosticDescriptor, RuleFactory> allRules = ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty;
 
