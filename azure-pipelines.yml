@@ -162,7 +162,8 @@ stages:
       - powershell: |
           . .\scripts\utils.ps1
 
-          Remove-Item -Path analyzers\tests\SonarAnalyzer.UnitTest\TestResults\ -Recurse -Verbose
+          $TestResultsDir = "analyzers\tests\SonarAnalyzer.UnitTest\TestResults\"
+          if (Test-Path $TestResultsDir) { Remove-Item -Path $TestResultsDir -Recurse -Verbose }
 
           CreateFolder("coverage")
           CreateFolder("TestResults")
@@ -202,7 +203,8 @@ stages:
       - powershell: |
           . .\scripts\utils.ps1
 
-          Remove-Item -Path analyzers\tests\SonarAnalyzer.UnitTest\TestResults\ -Recurse -Verbose
+          $TestResultsDir = "analyzers\tests\SonarAnalyzer.UnitTest\TestResults\"
+          if (Test-Path $TestResultsDir) { Remove-Item -Path $TestResultsDir -Recurse -Verbose }
 
           CreateFolder("coverage")
           CreateFolder("TestResults")
