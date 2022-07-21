@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using FluentAssertions;
 
 Fruit a = null;
 var y = a switch
@@ -10,3 +11,24 @@ var y = a switch
 };
 
 class Fruit { public List<int> Prop; }
+
+class FPRepro_5789
+{
+    // https://github.com/SonarSource/sonar-dotnet/issues/5789
+    public void SomeMethod()
+    {
+        double from = 16;
+        double to = 23;
+        var dt = DateTime.Now;
+        var sut = TimeSpan.MaxValue;
+        if (sut.Ticks > 0)
+            sut.Should().BeGreaterThan(TimeSpan.FromMilliseconds(from)).And.BeLessThan(TimeSpan.FromMilliseconds(to));
+        else
+            sut.Should().BeGreaterThan(TimeSpan.FromMilliseconds(to)).And.BeLessThan(TimeSpan.FromMilliseconds(from));
+
+        if (sut.Ticks > 0) // Noncompliant
+            sut.Should().BeGreaterThan(TimeSpan.FromMilliseconds(from)).And.BeLessThan(TimeSpan.FromMilliseconds(to));
+        else
+            sut.Should().BeGreaterThan(TimeSpan.FromMilliseconds(from)).And.BeLessThan(TimeSpan.FromMilliseconds(from));
+    }
+}

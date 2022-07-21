@@ -294,17 +294,18 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            var methodSymbol1 = semanticModel.GetSymbolInfo(methodCall1).Symbol;
-            var methodSymbol2 = semanticModel.GetSymbolInfo(methodCall2).Symbol;
-
-            if (methodSymbol1 == null || methodSymbol2 == null || !methodSymbol1.Equals(methodSymbol2))
+            if (methodCall1.ArgumentList == null
+                || methodCall2.ArgumentList == null
+                || methodCall1.ArgumentList.Arguments.Count != methodCall2.ArgumentList.Arguments.Count
+                || !CSharpEquivalenceChecker.AreEquivalent(methodCall1.Expression, methodCall2.Expression))
             {
                 return false;
             }
 
-            if (methodCall1.ArgumentList == null
-                || methodCall2.ArgumentList == null
-                || methodCall1.ArgumentList.Arguments.Count != methodCall2.ArgumentList.Arguments.Count)
+            var methodSymbol1 = semanticModel.GetSymbolInfo(methodCall1).Symbol;
+            var methodSymbol2 = semanticModel.GetSymbolInfo(methodCall2).Symbol;
+
+            if (methodSymbol1 == null || methodSymbol2 == null || !methodSymbol1.Equals(methodSymbol2))
             {
                 return false;
             }

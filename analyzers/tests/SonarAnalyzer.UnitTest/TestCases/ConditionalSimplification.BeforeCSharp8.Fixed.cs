@@ -28,7 +28,8 @@ namespace Tests.TestCases
             var dictionary2 = new Dictionary<string, string>();
 
             string value;
-            dictionary2.TryGetValue(string.IsNullOrEmpty(key1) ? key2 : key1, out value);
+            if (string.IsNullOrEmpty(key1)) dictionary2.TryGetValue(key2, out value);
+            else dictionary1.TryGetValue(key1, out value);
 
             return value;
         }

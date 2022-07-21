@@ -32,7 +32,7 @@ namespace Tests.TestCases
             var dictionary2 = new Dictionary<string, string>();
 
             string value;
-            if (string.IsNullOrEmpty(key1)) dictionary2.TryGetValue(key2, out value); // Noncompliant FP
+            if (string.IsNullOrEmpty(key1)) dictionary2.TryGetValue(key2, out value);
             else dictionary1.TryGetValue(key1, out value);
 
             return value;
