@@ -21,7 +21,6 @@
 using System.IO;
 using SonarAnalyzer.Protobuf;
 using SonarAnalyzer.Rules.CSharp;
-using SonarAnalyzer.SymbolicExecution.Sonar;
 using SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.Tests
