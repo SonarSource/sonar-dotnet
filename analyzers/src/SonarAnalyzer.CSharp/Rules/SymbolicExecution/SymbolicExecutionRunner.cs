@@ -33,12 +33,13 @@ using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.LiveVariableAnalysis.CSharp;
-using SonarAnalyzer.Rules;
+using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
+using SonarAnalyzer.SymbolicExecution.Sonar;
 using StyleCop.Analyzers.Lightup;
 using SonarRules = SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;
 
-namespace SonarAnalyzer.SymbolicExecution.Sonar
+namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
