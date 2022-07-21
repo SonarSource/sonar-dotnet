@@ -29,7 +29,8 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
             .WithBasePath(@"SymbolicExecution\Sonar")
             .WithOnlyDiagnostics(new[] { NullPointerDereference.S2259 });
 
-        private readonly VerifierBuilder roslyn = new VerifierBuilder<SymbolicExecutionRunner>()
+        private readonly VerifierBuilder roslyn = new VerifierBuilder()
+            .AddAnalyzer(() => new SymbolicExecutionRunner())
             .WithBasePath(@"SymbolicExecution\Roslyn")
             .WithOnlyDiagnostics(new[] { NullPointerDereference.S2259 });
 
