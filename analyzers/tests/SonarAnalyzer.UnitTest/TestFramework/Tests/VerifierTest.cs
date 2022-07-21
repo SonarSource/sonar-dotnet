@@ -19,6 +19,7 @@
  */
 
 using System.IO;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Protobuf;
 using SonarAnalyzer.Rules.CSharp;
 
@@ -287,7 +288,9 @@ Line: 1, Type: primary, Id: ''
         [TestMethod]
         public void Verify_OnlyDiagnostics()
         {
-            var builder = new VerifierBuilder<SymbolicExecutionRunner>().AddPaths(WriteFile("File.cs",
+            var builder = new VerifierBuilder()
+                .AddAnalyzer(() => new SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg))
+                .AddPaths(WriteFile("File.cs",
 @"public class Sample
 {
     public void Method()
