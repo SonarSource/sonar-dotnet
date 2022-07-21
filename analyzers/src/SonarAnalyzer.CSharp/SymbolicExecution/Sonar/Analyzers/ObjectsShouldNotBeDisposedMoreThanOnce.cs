@@ -151,7 +151,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
 
                         if (disposableSymbol is IMethodSymbol
                             // Special case - if the parameter symbol is "this" then resolve it to the containing type
-                            || disposableSymbol is IParameterSymbol parameter && parameter.IsThis)
+                            || (disposableSymbol is IParameterSymbol parameter && parameter.IsThis))
                         {
                             disposableSymbol = disposableSymbol.ContainingType;
                         }
