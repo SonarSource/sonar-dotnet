@@ -294,9 +294,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            if (methodCall1.ArgumentList == null
-                || methodCall2.ArgumentList == null
-                || methodCall1.ArgumentList.Arguments.Count != methodCall2.ArgumentList.Arguments.Count
+            if (methodCall1.ArgumentList.Arguments.Count != methodCall2.ArgumentList.Arguments.Count
                 || !CSharpEquivalenceChecker.AreEquivalent(methodCall1.Expression, methodCall2.Expression))
             {
                 return false;

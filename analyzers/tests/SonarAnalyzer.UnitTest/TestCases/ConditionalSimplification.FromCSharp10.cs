@@ -19,8 +19,14 @@ class FPRepro_5789
     {
         double from = 16;
         double to = 23;
+        int x = 1;
+        double y = 1;
         var dt = DateTime.Now;
         var sut = TimeSpan.MaxValue;
+        if (sut.Ticks > 0)
+            Convert.ToChar(x);
+        else
+            Convert.ToChar(y);
         if (sut.Ticks > 0)
             sut.Should().BeGreaterThan(TimeSpan.FromMilliseconds(from)).And.BeLessThan(TimeSpan.FromMilliseconds(to));
         else

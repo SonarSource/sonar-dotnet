@@ -94,6 +94,15 @@ namespace Tests.TestCases
                 elem = new NonExistentType(); // Error [CS0246]
             }
 
+            if (condition) // Non-compliant, but not handled because of the type difference
+            {
+                elem = new NonExistentType(); // Error [CS0246]
+            }
+            else
+            {
+                elem = new A();
+            }
+
             elem = false ? null : (null);
         }
 
