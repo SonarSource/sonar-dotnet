@@ -622,8 +622,10 @@ public class Sample
     public void Main(Sample instanceArg, Sample extensionArg)
     {
         var preserve = true;
+        Sample extensionNull = null;
         Tag(""BeforeInstance"", instanceArg);
-        Tag(""BeforeExtension"", extensionArg);
+        Tag(""BeforeExtensionArg"", extensionArg);
+        Tag(""BeforeExtensionNull"", extensionNull);
         Tag(""BeforePreserve"", preserve);
 
         instanceArg.InstanceMethod();
@@ -633,7 +635,8 @@ public class Sample
         preserve.ToString();
 
         Tag(""AfterInstance"", instanceArg);
-        Tag(""AfterExtension"", extensionArg);
+        Tag(""AfterExtensionArg"", extensionArg);
+        Tag(""AfterExtensionNull"", extensionNull);
         Tag(""AfterPreserve"", preserve);
     }
 
@@ -650,10 +653,12 @@ public static class Extensions
             var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
             validator.ValidateContainsOperation(OperationKind.Invocation);
             validator.ValidateTag("BeforeInstance", x => x.Should().BeNull());
-            validator.ValidateTag("BeforeExtension", x => x.Should().BeNull());
+            validator.ValidateTag("BeforeExtensionArg", x => x.Should().BeNull());
+            validator.ValidateTag("BeforeExtensionNull", x => x.Should().BeNull()); // ToDo: This will have 'null' constraint
             validator.ValidateTag("BeforePreserve", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
             validator.ValidateTag("AfterInstance", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue("Instance method should set NotNull constraint."));
-            validator.ValidateTag("AfterExtension", x => x.Should().BeNull("Extensions can run on null instances."));
+            validator.ValidateTag("AfterExtensionArg", x => x.Should().BeNull("Extensions can run on null instances."));
+            validator.ValidateTag("AfterExtensionNull", x => x.Should().BeNull("Extensions can run on null instances."));
             validator.ValidateTag("AfterPreserve", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue("Other constraints should not be removed."));
         }
 
