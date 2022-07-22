@@ -61,7 +61,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
                 Location.GetHashCode() * 397 ^ Message.GetHashCode();
 
             public override bool Equals(object obj) =>
-                ReferenceEquals(this, obj) || obj is LocationContext other && Equals(other);
+                ReferenceEquals(this, obj) || (obj is LocationContext other && Equals(other));
 
             private bool Equals(LocationContext other) =>
                 Equals(Location, other.Location) && Message == other.Message;
