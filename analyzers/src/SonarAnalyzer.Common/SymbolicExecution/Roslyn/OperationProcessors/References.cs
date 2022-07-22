@@ -57,5 +57,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
             arrayElementReference.ArrayReference.TrackedSymbol() is { } symbol
                 ? context.SetSymbolConstraint(symbol, ObjectConstraint.NotNull)
                 : context.State;
+
+        public static ProgramState Process(SymbolicContext context, IEventReferenceOperationWrapper eventReference) =>
+            eventReference.Instance.TrackedSymbol() is { } symbol
+                ? context.SetSymbolConstraint(symbol, ObjectConstraint.NotNull)
+                : context.State;
     }
 }

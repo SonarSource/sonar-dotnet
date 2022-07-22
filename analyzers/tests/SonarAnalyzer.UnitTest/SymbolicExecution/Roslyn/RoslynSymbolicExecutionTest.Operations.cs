@@ -816,7 +816,7 @@ _ = array[42];
 Tag(""After"", array);
 
 int[] UntrackedSymbol() => new[] { 42 };";
-            var validator = SETestContext.CreateCS(code, ", int[] array, Dictionary<int, int> dictionary, Sample indexer").Validator;
+            var validator = SETestContext.CreateCS(code, ", int[] array").Validator;
             validator.ValidateContainsOperation(OperationKind.ArrayElementReference);
             validator.ValidateTag("Before", x => x.Should().BeNull());
             validator.ValidateTag("After", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
@@ -836,6 +836,24 @@ int[] UntrackedSymbol() => new[] { 42 };";
             validator.ValidateContainsOperation(OperationKind.ArrayElementReference);
             validator.ValidateTag("Before", x => x.Should().BeNull());
             validator.ValidateTag("After", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void EventReference_SetsNotNull()
+        {
+            const string code = @"
+Tag(""BeforeAdd"", add);
+Tag(""BeforeRemove"", remove);
+add.Event += (sender, e) => { };
+remove.Event -= (sender, e) => { };
+Tag(""AfterAdd"", add);
+Tag(""AfterRemove"", remove);";
+            var validator = SETestContext.CreateCS(code, ", Sample add, Sample remove").Validator;
+            validator.ValidateContainsOperation(OperationKind.ArrayElementReference);
+            validator.ValidateTag("BeforeAdd", x => x.Should().BeNull());
+            validator.ValidateTag("BeforeRemove", x => x.Should().BeNull());
+            validator.ValidateTag("AfterAdd", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("AfterRemove", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
         }
     }
 }
