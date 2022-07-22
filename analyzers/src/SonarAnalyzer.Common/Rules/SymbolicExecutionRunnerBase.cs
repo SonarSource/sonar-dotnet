@@ -36,22 +36,23 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class SymbolicExecutionRunnerBase : SonarDiagnosticAnalyzer
     {
+        private readonly bool useSonarCfg;
+
         protected abstract ImmutableArray<DiagnosticDescriptor> SonarRules { get; }
         protected abstract ImmutableDictionary<DiagnosticDescriptor, RuleFactory> RoslynRules { get; }
         protected abstract ControlFlowGraph CreateCfg(SemanticModel model, SyntaxNode node, CancellationToken cancel);
         protected abstract void AnalyzeSonar(SyntaxNodeAnalysisContext context, IEnumerable<DiagnosticDescriptor> diagnosticsToRun, bool isTestProject, bool isScannerRun, SyntaxNode body, ISymbol symbol);
 
-        private ImmutableArray<DiagnosticDescriptor> NonMigratedRules => SonarRules.Where(sonar => !RoslynRules.Keys.Any(roslyn => sonar.Id == roslyn.Id)).ToImmutableArray();
-        protected bool UseSonarCfg { get; }
-
-        private protected /* for testing */ SymbolicExecutionRunnerBase(IAnalyzerConfiguration configuration) =>
-            UseSonarCfg = configuration.UseSonarCfg();
+        protected static RuleFactory CreateFactory<TRuleCheck>() where TRuleCheck : SymbolicRuleCheck, new() =>
+            new RuleFactory<TRuleCheck>();
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => RoslynRules.Keys.Union(SonarRules).ToImmutableArray();
         protected override bool EnableConcurrentExecution => false;
+        private ImmutableArray<DiagnosticDescriptor> NonMigratedRules => SonarRules.Where(sonar => !RoslynRules.Keys.Any(roslyn => sonar.Id == roslyn.Id)).ToImmutableArray();
 
-        protected static RuleFactory CreateFactory<TRuleCheck>() where TRuleCheck : SymbolicRuleCheck, new() =>
-            new RuleFactory<TRuleCheck>();
+        private protected /* for testing */ SymbolicExecutionRunnerBase(IAnalyzerConfiguration configuration) =>
+        useSonarCfg = configuration.UseSonarCfg();
+
 
         // We need to rewrite this https://github.com/SonarSource/sonar-dotnet/issues/4824
         protected static bool IsEnabled(SyntaxNodeAnalysisContext context, bool isTestProject, bool isScannerRun, DiagnosticDescriptor descriptor) =>
@@ -72,7 +73,7 @@ namespace SonarAnalyzer.Rules
             {
                 var isTestProject = sonarContext.IsTestProject(nodeContext.Compilation, nodeContext.Options);
                 var isScannerRun = sonarContext.IsScannerRun(nodeContext.Options);
-                if (UseSonarCfg)
+                if (useSonarCfg)
                 {
                     AnalyzeSonar(nodeContext, SonarRules, isTestProject, isScannerRun, body, symbol);
                 }
