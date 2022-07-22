@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading;
 using Microsoft.CodeAnalysis;
@@ -76,7 +77,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override ControlFlowGraph CreateCfg(SemanticModel model, SyntaxNode node, CancellationToken cancel) =>
             node.CreateCfg(model, cancel);
 
-        protected override void AnalyzeSonar(SyntaxNodeAnalysisContext context, bool isTestProject, bool isScannerRun, SyntaxNode body, ISymbol symbol)
+        protected override void AnalyzeSonar(SyntaxNodeAnalysisContext context, IEnumerable<DiagnosticDescriptor> diagnosticsToRun, bool isTestProject, bool isScannerRun, SyntaxNode body, ISymbol symbol)
         {
             // There are no old Sonar rules in VB.NET
         }

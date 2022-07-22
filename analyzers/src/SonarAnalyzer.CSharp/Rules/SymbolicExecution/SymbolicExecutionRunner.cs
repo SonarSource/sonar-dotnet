@@ -114,9 +114,9 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override ControlFlowGraph CreateCfg(SemanticModel model, SyntaxNode node, CancellationToken cancel) =>
             node.CreateCfg(model, cancel);
 
-        protected override void AnalyzeSonar(SyntaxNodeAnalysisContext context, bool isTestProject, bool isScannerRun, SyntaxNode body, ISymbol symbol)
+        protected override void AnalyzeSonar(SyntaxNodeAnalysisContext context, IEnumerable<DiagnosticDescriptor> diagnosticsToRun, bool isTestProject, bool isScannerRun, SyntaxNode body, ISymbol symbol)
         {
-            var enabledAnalyzers = SonarAnalyzer.Where(x => x.SupportedDiagnostics.Any(descriptor => IsEnabled(context, isTestProject, isScannerRun, descriptor))).ToArray();
+            var enabledAnalyzers = SonarAnalyzer.Where(x => diagnosticsToRun.Any(descriptor => IsEnabled(context, isTestProject, isScannerRun, descriptor))).ToArray();
             if (enabledAnalyzers.Any() && CSharpControlFlowGraph.TryGet((CSharpSyntaxNode)body, context.SemanticModel, out var cfg))
             {
                 var lva = new SonarCSharpLiveVariableAnalysis(cfg, symbol, context.SemanticModel, context.CancellationToken);

@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
@@ -38,7 +39,7 @@ namespace SonarAnalyzer.Rules
         protected abstract ImmutableArray<DiagnosticDescriptor> SonarRules { get; }
         protected abstract ImmutableDictionary<DiagnosticDescriptor, RuleFactory> RoslynRules { get; }
         protected abstract ControlFlowGraph CreateCfg(SemanticModel model, SyntaxNode node, CancellationToken cancel);
-        protected abstract void AnalyzeSonar(SyntaxNodeAnalysisContext context, bool isTestProject, bool isScannerRun, SyntaxNode body, ISymbol symbol);
+        protected abstract void AnalyzeSonar(SyntaxNodeAnalysisContext context, IEnumerable<DiagnosticDescriptor> diagnosticsToRun, bool isTestProject, bool isScannerRun, SyntaxNode body, ISymbol symbol);
 
         protected bool UseSonarCfg { get; }
 
@@ -72,11 +73,12 @@ namespace SonarAnalyzer.Rules
                 var isScannerRun = sonarContext.IsScannerRun(nodeContext.Options);
                 if (UseSonarCfg)
                 {
-                    AnalyzeSonar(nodeContext, isTestProject, isScannerRun, body, symbol);
+                    AnalyzeSonar(nodeContext, SonarRules, isTestProject, isScannerRun, body, symbol);
                 }
                 else
                 {
-                    // TODO: Run AnalyzeSonar for non-migrated rules.
+                    var nonMigratedRules = SonarRules.Except(RoslynRules.Keys);
+                    AnalyzeSonar(nodeContext, nonMigratedRules, isTestProject, isScannerRun, body, symbol);
                     AnalyzeRoslyn(sonarContext, nodeContext, isTestProject, isScannerRun, body, symbol);
                 }
             }
