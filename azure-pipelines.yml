@@ -168,7 +168,9 @@ stages:
           CreateFolder("coverage")
           CreateFolder("TestResults")
 
-          dotnet test .\analyzers\SonarAnalyzer.sln --no-build --collect:"XPlat Code Coverage" --settings .\analyzers\runsettings.xml -l "trx;logfilename=net48.trx" -l "console;verbosity=detailed" -c $(BuildConfiguration) -f net48
+          gci analyzers\tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net48
+
+          dotnet test .\analyzers\SonarAnalyzer.sln --no-build --collect:"XPlat Code Coverage" --settings .\analyzers\runsettings.xml -l "trx;logfilename=net48.trx" -l "console;verbosity=diagnostic" -c $(BuildConfiguration) -f net48 -v diag
           Test-ExitCode "ERROR: Unit tests for net48 FAILED."
 
           Get-ChildItem -Path analyzers\tests\SonarAnalyzer.UnitTest\TestResults\ -Recurse -File -Filter coverage.opencover.xml | Copy-Item -Verbose -Destination .\coverage\net48.xml
@@ -209,7 +211,9 @@ stages:
           CreateFolder("coverage")
           CreateFolder("TestResults")
 
-          dotnet test .\analyzers\SonarAnalyzer.sln --no-build --collect:"XPlat Code Coverage" --settings .\analyzers\runsettings.xml -l "trx;logfilename=net6.0.trx" -l "console;verbosity=detailed" -c $(BuildConfiguration) -f "net6.0"
+          gci "analyzers\tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net6.0"
+
+          dotnet test .\analyzers\SonarAnalyzer.sln --no-build --collect:"XPlat Code Coverage" --settings .\analyzers\runsettings.xml -l "trx;logfilename=net6.0.trx" -l "console;verbosity=diagnostic" -c $(BuildConfiguration) -f "net6.0" -v diag
           Test-ExitCode "ERROR: Unit tests for net6.0 FAILED."
 
           Get-ChildItem -Path analyzers\tests\SonarAnalyzer.UnitTest\TestResults\ -Recurse -File -Filter coverage.opencover.xml | Copy-Item -Verbose -Destination .\coverage\net6.0.xml
