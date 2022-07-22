@@ -41,6 +41,7 @@ namespace SonarAnalyzer.Rules
         protected abstract ControlFlowGraph CreateCfg(SemanticModel model, SyntaxNode node, CancellationToken cancel);
         protected abstract void AnalyzeSonar(SyntaxNodeAnalysisContext context, IEnumerable<DiagnosticDescriptor> diagnosticsToRun, bool isTestProject, bool isScannerRun, SyntaxNode body, ISymbol symbol);
 
+        private ImmutableArray<DiagnosticDescriptor> NonMigratedRules => SonarRules.Where(sonar => !RoslynRules.Keys.Any(roslyn => sonar.Id == roslyn.Id)).ToImmutableArray();
         protected bool UseSonarCfg { get; }
 
         private protected /* for testing */ SymbolicExecutionRunnerBase(IAnalyzerConfiguration configuration) =>
@@ -77,8 +78,7 @@ namespace SonarAnalyzer.Rules
                 }
                 else
                 {
-                    var nonMigratedRules = SonarRules.Except(RoslynRules.Keys);
-                    AnalyzeSonar(nodeContext, nonMigratedRules, isTestProject, isScannerRun, body, symbol);
+                    AnalyzeSonar(nodeContext, NonMigratedRules, isTestProject, isScannerRun, body, symbol);
                     AnalyzeRoslyn(sonarContext, nodeContext, isTestProject, isScannerRun, body, symbol);
                 }
             }
