@@ -36,6 +36,33 @@ namespace SonarAnalyzer.Helpers
         public static bool AreEquivalent(SyntaxList<SyntaxNode> nodeList1, SyntaxList<SyntaxNode> nodeList2) =>
             Common.EquivalenceChecker.AreEquivalent(nodeList1, nodeList2, NodeComparator);
 
+        public static bool AreEquivalentWithEqualInvocations(SyntaxList<SyntaxNode> nodeList1, SyntaxList<SyntaxNode> nodeList2, SemanticModel model)
+        {
+            if (nodeList1.Count != nodeList2.Count)
+            {
+                return false;
+            }
+
+            for (var i = 0; i < nodeList1.Count; i++)
+            {
+                if (!AreEquivalent(nodeList1[i], nodeList2[i]))
+                {
+                    return false;
+                }
+                if (FindInvocationExpression(nodeList1[i]) is { } invocation1
+                    && FindInvocationExpression(nodeList2[i]) is { } invocation2
+                    && !invocation1.IsEqualTo(invocation2, model))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+
+            static InvocationExpressionSyntax FindInvocationExpression(SyntaxNode node) =>
+                node.DescendantNodes().OfType<InvocationExpressionSyntax>().FirstOrDefault();
+        }
+
         private static bool NodeComparator(SyntaxNode node1, SyntaxNode node2) =>
             NullCheckState(node1, true) is { } nullCheck1
             && NullCheckState(node2, true) is { } nullCheck2

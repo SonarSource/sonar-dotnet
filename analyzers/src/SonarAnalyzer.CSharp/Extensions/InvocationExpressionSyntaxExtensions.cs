@@ -43,5 +43,8 @@ namespace SonarAnalyzer.Extensions
 
         internal static bool IsOnBase(this InvocationExpressionSyntax invocation) =>
             (invocation.Expression as MemberAccessExpressionSyntax)?.Expression is BaseExpressionSyntax;
+
+        internal static bool IsEqualTo(this InvocationExpressionSyntax invocation1, InvocationExpressionSyntax invocation2, SemanticModel model) =>
+            model.GetSymbolInfo(invocation1).Symbol.Equals(model.GetSymbolInfo(invocation2).Symbol);
     }
 }

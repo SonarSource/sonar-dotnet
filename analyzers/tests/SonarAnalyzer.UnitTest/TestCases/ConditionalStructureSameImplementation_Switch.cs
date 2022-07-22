@@ -138,13 +138,26 @@ namespace Tests.TestCases
             int result = 1;
             switch (o)
             {
-                case float a: // Secondary
+                case float a: // Compliant
                     result++;
                     result = ValueConverter.ToInt32(a);
                     break;
-                case bool a: // Noncompliant - FP See: https://github.com/SonarSource/sonar-dotnet/issues/5587
+                case bool a: // Compliant - ValueConverter.ToInt32 is an overload.
                     result++;
                     result = ValueConverter.ToInt32(a);
+                    break;
+                case int a: // // Secondary
+                    result++;
+                    result = ValueConverter.ToInt32(true);
+                    break;
+                case double a: // Noncompliant
+                    result++;
+                    result = ValueConverter.ToInt32(true);
+                    break;
+                case string a:
+                    var flag = true;
+                    result++;
+                    result = ValueConverter.ToInt32(flag);
                     break;
                 default:
                     throw new InvalidOperationException("Unsupported array type");
@@ -157,5 +170,54 @@ namespace Tests.TestCases
             public static int ToInt32(float f) => 0;
             public static int ToInt32(bool b) => 0;
         }
+
+        public int SwitchDifferentSameAction(object o)
+        {
+            int result = 1;
+            Action action = () => { };
+            switch (o)
+            {
+                case float a: // Secondary
+                    result++;
+                    action();
+                    break;
+                case bool a: // Noncompliant
+                    result++;
+                    action();
+                    break;
+                case int a:
+                    result++;
+                    action.Invoke(); // FN - it's the same actions but invoked in a different way.
+                    break;
+                default:
+                    throw new InvalidOperationException("Unsupported array type");
+            }
+            return result;
+        }
+
+        public int SwitchDifferentSameExtensionMethod(object o)
+        {
+            int result = 1;
+            switch (o)
+            {
+                case float a:
+                    result++;
+                    result = result.FooInt(""); // FN - it's the same method with the same input invoked in different ways.
+                    break;
+                case bool a:
+                    result++;
+                    result = IntExtension.FooInt(result, "");
+                    break;
+                default:
+                    throw new InvalidOperationException("Unsupported array type");
+            }
+            return result;
+        }
+
+    }
+
+    public static class IntExtension
+    {
+        public static int FooInt(this int a, string s) => 0;
     }
 }

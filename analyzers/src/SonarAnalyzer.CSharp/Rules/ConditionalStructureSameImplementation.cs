@@ -78,7 +78,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var precedingSection = switchSection
                         .GetPrecedingSections()
-                        .FirstOrDefault(preceding => CSharpEquivalenceChecker.AreEquivalent(switchSection.Statements, preceding.Statements));
+                        .FirstOrDefault(preceding => CSharpEquivalenceChecker.AreEquivalentWithEqualInvocations(switchSection.Statements, preceding.Statements, c.SemanticModel));
 
                     if (precedingSection != null)
                     {
