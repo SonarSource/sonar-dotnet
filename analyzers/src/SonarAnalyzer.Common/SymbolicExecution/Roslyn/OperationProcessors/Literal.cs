@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
@@ -25,8 +26,20 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
     internal static class Literal
     {
         public static ProgramState Process(SymbolicContext context, ILiteralOperationWrapper literal) =>
-            literal.WrappedOperation.ConstantValue is { HasValue: true, Value: null }
+            Process(context, literal.Type);
+
+        public static ProgramState Process(SymbolicContext context, IDefaultValueOperationWrapper defaultValue) =>
+            Process(context, defaultValue.Type);
+
+        private static ProgramState Process(SymbolicContext context, ITypeSymbol type) =>
+            context.Operation.Instance.ConstantValue is { HasValue: true, Value: null }
+            && (type ?? ConvertedType(context.Operation.Parent)) is { IsReferenceType: true }
                 ? context.State.SetOperationValue(context.Operation, SymbolicValue.Null)
                 : context.State;
+
+        private static ITypeSymbol ConvertedType(IOperation operation) =>
+            IConversionOperationWrapper.IsInstance(operation)
+                ? IConversionOperationWrapper.FromOperation(operation).Type
+                : null;
     }
 }

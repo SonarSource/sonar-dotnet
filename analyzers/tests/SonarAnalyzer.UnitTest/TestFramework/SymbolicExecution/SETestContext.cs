@@ -96,9 +96,13 @@ public class PersonBase
 
         public static SETestContext CreateCSMethod(string method, params SymbolicCheck[] additionalChecks) =>
             new($@"
+using System;
+
 public class Sample
 {{
     {method}
+
+    private void Tag(string name, object arg) {{ }}
 }}", AnalyzerLanguage.CSharp, additionalChecks);
 
         public static SETestContext CreateVB(string methodBody, params SymbolicCheck[] additionalChecks) =>

@@ -573,38 +573,81 @@ public void Main<T>() where T : new()
 {
     var value = new T();
     Tag(""Value"", value);
-}
-
-private void Tag(string name, object arg) { }";
+}";
             var validator = SETestContext.CreateCSMethod(code).Validator;
             validator.ValidateContainsOperation(OperationKind.TypeParameterObjectCreation);
             validator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
         }
 
         [TestMethod]
-        public void Literal_Null_SetsNull_CS()
+        public void Literal_NullAndDefault_SetsNull_CS()
         {
             const string code = @"
-Tag(""Before"", arg);
-arg = null;
-Tag(""After"", arg);";
-            var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+Tag(""BeforeObjNull"", argObjNull);
+Tag(""BeforeObjDefault"", argObjDefault);
+Tag(""BeforeInt"", argInt);
+argObjNull = null;
+argObjDefault = default;
+argInt = default;
+Tag(""AfterObjNull"", argObjNull);
+Tag(""AfterObjDefault"", argObjDefault);
+Tag(""AfterInt"", argInt);";
+            var validator = SETestContext.CreateCS(code, ", object argObjNull, object argObjDefault, int argInt").Validator;
             validator.ValidateContainsOperation(OperationKind.Literal);
-            validator.ValidateTag("Before", x => x.Should().BeNull());
-            validator.ValidateTag("After", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("BeforeObjNull", x => x.Should().BeNull());
+            validator.ValidateTag("BeforeObjDefault", x => x.Should().BeNull());
+            validator.ValidateTag("BeforeInt", x => x.Should().BeNull());
+            validator.ValidateTag("AfterObjNull", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("AfterObjDefault", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("AfterInt", x => x.Should().BeNull());
         }
 
         [TestMethod]
         public void Literal_Null_SetsNull_VB()
         {
             const string code = @"
-Tag(""Before"", Arg)
-Arg = Nothing
-Tag(""After"", Arg)";
-            var validator = SETestContext.CreateVB(code, ", Arg As Object").Validator;
+Tag(""BeforeObj"", ArgObj)
+Tag(""BeforeInt"", ArgInt)
+ArgObj = Nothing
+ArgInt = Nothing
+Tag(""AfterObj"", ArgObj)
+Tag(""AfterInt"", ArgInt)";
+            var validator = SETestContext.CreateVB(code, ", ArgObj As Object, ArgInt As Integer").Validator;
             validator.ValidateContainsOperation(OperationKind.Literal);
-            validator.ValidateTag("Before", x => x.Should().BeNull());
-            validator.ValidateTag("After", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("BeforeObj", x => x.Should().BeNull());
+            validator.ValidateTag("BeforeInt", x => x.Should().BeNull());
+            validator.ValidateTag("AfterObj", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("AfterInt", x => x.Should().BeNull());
+        }
+
+        [TestMethod]
+        public void Literal_Default_ForGenericType()
+        {
+            const string code = @"
+public void Main<TClass, TStruct, TUnknown, TType, TInterface>(TClass argClass, TStruct argStruct, TUnknown argUnknown, TType argType, TInterface argInterface)
+    where TClass : class
+    where TStruct: struct
+    where TType : EventArgs
+    where TInterface : IDisposable
+{
+    argClass = default;
+    argStruct = default;
+    argUnknown = default;
+    argType = default;
+    argInterface = default;
+    Tag(""Class"", argClass);
+    Tag(""Struct"", argStruct);
+    Tag(""Unknown"", argUnknown);
+    Tag(""Type"", argType);
+    Tag(""Interface"", argInterface);
+}";
+            var validator = SETestContext.CreateCSMethod(code).Validator;
+            validator.ValidateContainsOperation(OperationKind.Literal);
+            validator.ValidateTag("Class", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("Struct", x => x.Should().BeNull("struct cannot be null."));
+            validator.ValidateTag("Unknown", x => x.Should().BeNull("it can be struct."));
+            validator.ValidateTag("Type", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("Interface", x => x.Should().BeNull("interfaces can be implemented by a struct."));
         }
 
         [TestMethod]
