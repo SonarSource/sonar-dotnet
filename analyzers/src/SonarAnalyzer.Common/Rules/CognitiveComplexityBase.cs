@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules
         [RuleParameter("threshold", PropertyType.Integer, "The maximum authorized complexity.", DefaultThreshold)]
         public int Threshold { get; set; } = DefaultThreshold;
 
-        [RuleParameter("propertyThreshold ", PropertyType.Integer, "The maximum authorized complexity in a property.", DefaultPropertyThreshold)]
+        [RuleParameter("propertyThreshold", PropertyType.Integer, "The maximum authorized complexity in a property.", DefaultPropertyThreshold)]
         public int PropertyThreshold { get; set; } = DefaultPropertyThreshold;
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
