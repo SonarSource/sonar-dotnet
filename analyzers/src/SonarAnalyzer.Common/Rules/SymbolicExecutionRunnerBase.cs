@@ -41,17 +41,14 @@ namespace SonarAnalyzer.Rules
         protected abstract ControlFlowGraph CreateCfg(SemanticModel model, SyntaxNode node, CancellationToken cancel);
         protected abstract void AnalyzeSonar(SyntaxNodeAnalysisContext context, IEnumerable<DiagnosticDescriptor> diagnosticsToRun, bool isTestProject, bool isScannerRun, SyntaxNode body, ISymbol symbol);
 
-        private protected /* for testing */ SymbolicExecutionRunnerBase(IAnalyzerConfiguration configuration)
-        {
-            UseSonarCfg = configuration.UseSonarCfg();
-            SupportedDiagnostics = RoslynRules.Keys.Union(SonarRules).ToImmutableArray();
-            NonMigratedRules = SonarRules.Where(sonar => !RoslynRules.Keys.Any(roslyn => sonar.Id == roslyn.Id)).ToImmutableArray();
-        }
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; }
-        protected override bool EnableConcurrentExecution => false;
-        private ImmutableArray<DiagnosticDescriptor> NonMigratedRules { get; }
+        private ImmutableArray<DiagnosticDescriptor> NonMigratedRules => SonarRules.Where(sonar => !RoslynRules.Keys.Any(roslyn => sonar.Id == roslyn.Id)).ToImmutableArray();
         protected bool UseSonarCfg { get; }
+
+        private protected /* for testing */ SymbolicExecutionRunnerBase(IAnalyzerConfiguration configuration) =>
+            UseSonarCfg = configuration.UseSonarCfg();
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => RoslynRules.Keys.Union(SonarRules).ToImmutableArray();
+        protected override bool EnableConcurrentExecution => false;
 
         protected static RuleFactory CreateFactory<TRuleCheck>() where TRuleCheck : SymbolicRuleCheck, new() =>
             new RuleFactory<TRuleCheck>();
