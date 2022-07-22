@@ -447,7 +447,7 @@ End Class";
 
         private class TestSERunnerCS : CS.SymbolicExecutionRunner
         {
-            protected override ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules => ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
+            protected override ImmutableDictionary<DiagnosticDescriptor, RuleFactory> RoslynRules => ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
                 .Add(BinaryRuleCheck.SBinary, CreateFactory<BinaryRuleCheck>())
                 .Add(AllScopeAssignmentRuleCheck.SAll, CreateFactory<AllScopeAssignmentRuleCheck>())
                 .Add(MainScopeAssignmentRuleCheck.SMain, CreateFactory<MainScopeAssignmentRuleCheck>())
@@ -456,7 +456,7 @@ End Class";
 
         private class TestSERunnerVB : VB.SymbolicExecutionRunner
         {
-            protected override ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules => ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
+            protected override ImmutableDictionary<DiagnosticDescriptor, RuleFactory> RoslynRules => ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
                 .Add(BinaryRuleCheck.SBinary, CreateFactory<BinaryRuleCheck>())
                 .Add(AllScopeAssignmentRuleCheck.SAll, CreateFactory<AllScopeAssignmentRuleCheck>())
                 .Add(MainScopeAssignmentRuleCheck.SMain, CreateFactory<MainScopeAssignmentRuleCheck>())
@@ -467,7 +467,7 @@ End Class";
         {
             private ImmutableDictionary<DiagnosticDescriptor, RuleFactory> allRules = ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty;
 
-            protected override ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules => allRules;
+            protected override ImmutableDictionary<DiagnosticDescriptor, RuleFactory> RoslynRules => allRules;
 
             public void RegisterRule<TRuleCheck>(DiagnosticDescriptor descriptor) where TRuleCheck : SymbolicRuleCheck, new() =>
                 allRules = allRules.Add(descriptor, CreateFactory<TRuleCheck>());

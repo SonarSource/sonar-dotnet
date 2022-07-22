@@ -35,7 +35,8 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class SymbolicExecutionRunnerBase : SonarDiagnosticAnalyzer
     {
-        protected abstract ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules { get; }
+        protected abstract ImmutableArray<DiagnosticDescriptor> SonarRules { get; }
+        protected abstract ImmutableDictionary<DiagnosticDescriptor, RuleFactory> RoslynRules { get; }
         protected abstract ControlFlowGraph CreateCfg(SemanticModel model, SyntaxNode node, CancellationToken cancel);
         protected abstract void AnalyzeSonar(SyntaxNodeAnalysisContext context, bool isTestProject, bool isScannerRun, SyntaxNode body, ISymbol symbol);
 
@@ -44,7 +45,7 @@ namespace SonarAnalyzer.Rules
         private protected /* for testing */ SymbolicExecutionRunnerBase(IAnalyzerConfiguration configuration) =>
             UseSonarCfg = configuration.UseSonarCfg();
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => AllRules.Keys.ToImmutableArray();
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => RoslynRules.Keys.Union(SonarRules).ToImmutableArray();
         protected override bool EnableConcurrentExecution => false;
 
         protected static RuleFactory CreateFactory<TRuleCheck>() where TRuleCheck : SymbolicRuleCheck, new() =>
@@ -83,7 +84,7 @@ namespace SonarAnalyzer.Rules
 
         private void AnalyzeRoslyn(SonarAnalysisContext sonarContext, SyntaxNodeAnalysisContext nodeContext, bool isTestProject, bool isScannerRun, SyntaxNode body, ISymbol symbol)
         {
-            var checks = AllRules
+            var checks = RoslynRules
                 .Where(x => IsEnabled(nodeContext, isTestProject, isScannerRun, x.Key))
                 .GroupBy(x => x.Value.Type)                             // Multiple DiagnosticDescriptors (S2583, S2589) can share the same check type
                 .Select(x => x.First().Value.CreateInstance(sonarContext, nodeContext))   // We need just one instance in that case

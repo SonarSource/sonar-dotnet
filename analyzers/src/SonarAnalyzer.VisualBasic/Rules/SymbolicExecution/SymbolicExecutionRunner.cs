@@ -39,8 +39,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
         {
         }
 
-        protected override ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules { get; } = ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
+        protected override ImmutableDictionary<DiagnosticDescriptor, RuleFactory> RoslynRules { get; } = ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
             .Add(LocksReleasedAllPaths.S2222, CreateFactory<LocksReleasedAllPaths>());
+
+        protected override ImmutableArray<DiagnosticDescriptor> SonarRules => ImmutableArray<DiagnosticDescriptor>.Empty;
 
         protected override void Initialize(SonarAnalysisContext context)
         {

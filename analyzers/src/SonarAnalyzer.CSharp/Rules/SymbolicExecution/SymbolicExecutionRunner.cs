@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
     {
         // ToDo: This should be migrated to SymbolicExecutionRunnerBase.AllRules.
-        private static readonly ImmutableArray<ISymbolicExecutionAnalyzer> SonarRules = ImmutableArray.Create<ISymbolicExecutionAnalyzer>(
+        private static readonly ImmutableArray<ISymbolicExecutionAnalyzer> SonarAnalyzer = ImmutableArray.Create<ISymbolicExecutionAnalyzer>(
             new EmptyNullableValueAccess(),
             new ObjectsShouldNotBeDisposedMoreThanOnce(),
             new PublicMethodArgumentsShouldBeCheckedForNull(),
@@ -65,11 +65,11 @@ namespace SonarAnalyzer.Rules.CSharp
         {
         }
 
-        protected override ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules { get; } = ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
+        protected override ImmutableDictionary<DiagnosticDescriptor, RuleFactory> RoslynRules { get; } = ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
             .Add(RuleChecks.LocksReleasedAllPaths.S2222, CreateFactory<RuleChecks.LocksReleasedAllPaths>())
             .Add(RuleChecks.NullPointerDereference.S2259, CreateFactory<RuleChecks.NullPointerDereference>());
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => base.SupportedDiagnostics.Concat(SonarRules.SelectMany(x => x.SupportedDiagnostics)).ToImmutableArray();
+        protected override ImmutableArray<DiagnosticDescriptor> SonarRules => SonarAnalyzer.SelectMany(x => x.SupportedDiagnostics).ToImmutableArray();
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -116,7 +116,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void AnalyzeSonar(SyntaxNodeAnalysisContext context, bool isTestProject, bool isScannerRun, SyntaxNode body, ISymbol symbol)
         {
-            var enabledAnalyzers = SonarRules.Where(x => x.SupportedDiagnostics.Any(descriptor => IsEnabled(context, isTestProject, isScannerRun, descriptor))).ToArray();
+            var enabledAnalyzers = SonarAnalyzer.Where(x => x.SupportedDiagnostics.Any(descriptor => IsEnabled(context, isTestProject, isScannerRun, descriptor))).ToArray();
             if (enabledAnalyzers.Any() && CSharpControlFlowGraph.TryGet((CSharpSyntaxNode)body, context.SemanticModel, out var cfg))
             {
                 var lva = new SonarCSharpLiveVariableAnalysis(cfg, symbol, context.SemanticModel, context.CancellationToken);
