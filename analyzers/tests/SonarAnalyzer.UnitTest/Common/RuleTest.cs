@@ -20,6 +20,8 @@
 
 extern alias csharp;
 extern alias vbnet;
+
+using System.Reflection;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.UnitTest.Helpers;
 
@@ -140,6 +142,18 @@ namespace SonarAnalyzer.UnitTest.Common
                 .Where(analyzer => !IsSecurityHotspot(analyzer))
                 .ToList()
                 .ForEach(diagnostic => diagnostic.IsEnabledByDefault.Should().BeFalse());
+
+        [TestMethod]
+        public void ParameterKey_DoesNotContainWhitespace()
+        {
+            foreach (var analyzer in RuleFinder.RuleAnalyzerTypes.Where(RuleFinder.IsParameterized))
+            {
+                foreach (var parameter in analyzer.GetRuntimeProperties().Select(x => x.GetCustomAttributes<RuleParameterAttribute>().SingleOrDefault()).WhereNotNull())
+                {
+                    parameter.Key.Any(char.IsWhiteSpace).Should().BeFalse($"{analyzer.FullName} should not contain whitespace in '{parameter.Key}' parameter key.");
+                }
+            }
+        }
 
         [TestMethod]
         public void AllRulesEnabledByDefault_ContainSonarWayCustomTag()
