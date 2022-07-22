@@ -78,5 +78,25 @@ namespace Tests.TestCases
                 DoSomething1();
             }
         }
+
+        public void Test_Overloads()
+        {
+            int foo = 0;
+            if (someCondition1)
+            {
+                foo++;
+                foo = foo.FooInt(); // FN
+            }
+            else
+            {
+                foo++;
+                foo = IntExtension.FooInt(foo);
+            }
+        }
+    }
+
+    public static class IntExtension
+    {
+        public static int FooInt(this int a) => 0;
     }
 }
