@@ -578,5 +578,37 @@ private void Tag(string name, object arg) { }";
             validator.ValidateContainsOperation(OperationKind.TypeParameterObjectCreation);
             validator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
         }
+
+        [TestMethod]
+        public void InstanceReference_SetsNotNull_CS()
+        {
+            const string code = @"
+var fromThis = this;
+var _ = field;
+Tag(""This"", fromThis);";
+            var implicitCheck = new PostProcessTestCheck(OperationKind.FieldReference, x =>
+            {
+                var reference = (IFieldReferenceOperation)x.Operation.Instance;
+                reference.Instance.Kind.Should().Be(OperationKind.InstanceReference);
+                reference.Instance.IsImplicit.Should().BeTrue();
+                x.State[reference.Instance].HasConstraint(ObjectConstraint.NotNull).Should().BeTrue();
+                return x.State;
+            });
+            var validator = SETestContext.CreateCS(code, implicitCheck).Validator;
+            validator.ValidateContainsOperation(OperationKind.InstanceReference);
+            validator.ValidateContainsOperation(OperationKind.FieldReference);  // To execute implicitCheck
+            validator.ValidateTag("This", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void InstanceReference_SetsNotNull_VB()
+        {
+            const string code = @"
+Dim FromMe As Sample = Me
+Tag(""Me"", FromMe)";
+            var validator = SETestContext.CreateVB(code).Validator;
+            validator.ValidateContainsOperation(OperationKind.InstanceReference);
+            validator.ValidateTag("Me", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        }
     }
 }
