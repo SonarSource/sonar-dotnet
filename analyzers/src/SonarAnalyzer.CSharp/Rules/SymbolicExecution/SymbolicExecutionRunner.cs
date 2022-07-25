@@ -66,8 +66,8 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         protected override ImmutableDictionary<DiagnosticDescriptor, RuleFactory> RoslynRules { get; } = ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
-            .Add(RuleChecks.LocksReleasedAllPaths.S2222, CreateFactory<RuleChecks.LocksReleasedAllPaths>())
-            .Add(RuleChecks.NullPointerDereference.S2259, CreateFactory<RuleChecks.NullPointerDereference>());
+            // Turn S2259 on in production .Add(RuleChecks.NullPointerDereference.S2259, CreateFactory<RuleChecks.NullPointerDereference>())
+            .Add(RuleChecks.LocksReleasedAllPaths.S2222, CreateFactory<RuleChecks.LocksReleasedAllPaths>());
 
         protected override ImmutableArray<DiagnosticDescriptor> SonarRules => SonarAnalyzer.SelectMany(x => x.SupportedDiagnostics).ToImmutableArray();
 

@@ -20,6 +20,7 @@
 
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Rules.CSharp;
+using RuleChecks = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
 {
@@ -32,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
             .WithOnlyDiagnostics(new[] { NullPointerDereference.S2259 });
 
         private readonly VerifierBuilder roslyn = new VerifierBuilder()
-            .AddAnalyzer(() => new SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabled))
+            .AddAnalyzer(() => new SymbolicExecutionRunnerRoslyn())
             .WithBasePath(@"SymbolicExecution\Roslyn")
             .WithOnlyDiagnostics(new[] { NullPointerDereference.S2259 });
 
@@ -95,6 +96,11 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
             roslyn.AddPaths("NullPointerDereference.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
 #endif
-
+        private class SymbolicExecutionRunnerRoslyn : SymbolicExecutionRunner
+        {
+            public SymbolicExecutionRunnerRoslyn() : base(AnalyzerConfiguration.AlwaysEnabled) { }
+            protected override ImmutableDictionary<DiagnosticDescriptor, RuleFactory> RoslynRules => ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
+                .Add(RuleChecks.NullPointerDereference.S2259, CreateFactory<RuleChecks.NullPointerDereference>());
+        }
     }
 }
