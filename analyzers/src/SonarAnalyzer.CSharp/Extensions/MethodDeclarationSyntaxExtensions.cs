@@ -17,28 +17,13 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-using SonarAnalyzer.Rules.CSharp;
-
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.Extensions
 {
-    [TestClass]
-    public class DoNotUseOutRefParametersTest
+    internal static class MethodDeclarationSyntaxExtensions
     {
-        private readonly VerifierBuilder verifier = new VerifierBuilder<DoNotUseOutRefParameters>();
-
-        [TestMethod]
-        public void DoNotUseOutRefParameters() =>
-            verifier.AddPaths("DoNotUseOutRefParameters.cs").Verify();
-
-#if NET
-        [TestMethod]
-        public void DoNotUseOutRefParameters_CSharp9() =>
-            verifier.AddPaths("DoNotUseOutRefParameters.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
-
-        [TestMethod]
-        public void DoNotUseOutRefParameters_CSharpPreview() =>
-            verifier.AddPaths("DoNotUseOutRefParameters.CSharpPreview.cs").WithOptions(ParseOptionsHelper.CSharpPreview).Verify();
-#endif
+        public static bool HasReturnTypeVoid(this MethodDeclarationSyntax methodDeclaration) =>
+            methodDeclaration.ReturnType.ToString() == "void";
     }
 }
