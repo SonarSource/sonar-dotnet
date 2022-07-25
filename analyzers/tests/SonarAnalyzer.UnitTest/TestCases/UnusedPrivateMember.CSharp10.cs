@@ -5,10 +5,7 @@ namespace Tests.Diagnostics
 {
     public record struct RecordStruct
     {
-        public RecordStruct()
-        {
-            UnusedValue = 0;
-        }
+        public RecordStruct() { }
 
         private int a = 42; // Noncompliant {{Remove the unused private field 'a'.}}
 
@@ -17,7 +14,7 @@ namespace Tests.Diagnostics
 
         private nint Value { get; init; } = 42;
 
-        private nint UnusedValue { get; init; } // Noncompliant
+        private nint UnusedValue { get; init; } = 0; // Compliant - properties with initializer are considered as used.
 
         public RecordStruct Create() => new() { Value = 1 };
 
