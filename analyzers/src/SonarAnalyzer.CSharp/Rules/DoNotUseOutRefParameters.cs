@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var parameterSymbol = c.SemanticModel.GetDeclaredSymbol(parameter);
 
-                    if (parameterSymbol.ContainingSymbol is not IMethodSymbol containingMethod
+                    if (parameterSymbol?.ContainingSymbol is not IMethodSymbol containingMethod
                         || containingMethod.IsOverride
                         || !containingMethod.IsPubliclyAccessible()
                         || IsTryPattern(containingMethod, modifier)
@@ -79,7 +79,7 @@ namespace SonarAnalyzer.Rules.CSharp
             || token.IsKind(SyntaxKind.OutKeyword);
 
         private static bool IsDeconstructor(MethodDeclarationSyntax node) =>
-            node.IsVoid()
+            node.HasReturnTypeVoid()
             && node.Identifier.Value.Equals("Deconstruct")
             && ((node.Modifiers.Count == 1 && node.Modifiers.Any(SyntaxKind.PublicKeyword))
                  || node.IsExtensionMethod());

@@ -23,7 +23,7 @@ namespace SonarAnalyzer.Extensions
 {
     internal static class MethodDeclarationSyntaxExtensions
     {
-        public static bool IsVoid(this MethodDeclarationSyntax methodDeclaration) =>
+        public static bool HasReturnTypeVoid(this MethodDeclarationSyntax methodDeclaration) =>
             methodDeclaration.ReturnType.ToString() == "void";
     }
 }
