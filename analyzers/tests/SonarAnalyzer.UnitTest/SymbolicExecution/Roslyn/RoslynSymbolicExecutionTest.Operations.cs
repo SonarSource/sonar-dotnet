@@ -709,5 +709,151 @@ End Module";
             validator.ValidateTag("AfterStatic", x => x.Should().BeNull("Static method can execute from null instances."));
             validator.ValidateTag("AfterExtension", x => x.Should().BeNull("Extensions can run on null instances."));
         }
+
+        [TestMethod]
+        public void FieldReference_Read_SetsNotNull()
+        {
+            const string code = @"
+_ = StaticField;            // Do not fail, do nothing
+_ = Sample.StaticField;
+_ = field;
+_ = UntrackedSymbol().field;
+Tag(""Before"", arg);
+_ = arg.field;
+Tag(""After"", arg);
+
+Sample UntrackedSymbol() => this;";
+            var validator = SETestContext.CreateCS(code, ", Sample arg").Validator;
+            validator.ValidateContainsOperation(OperationKind.FieldReference);
+            validator.ValidateTag("Before", x => x.Should().BeNull());
+            validator.ValidateTag("After", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void FieldReference_Write_SetsNotNull()
+        {
+            const string code = @"
+StaticField = 42;            // Do not fail, do nothing
+Sample.StaticField = 42;
+field = 42;
+UntrackedSymbol().field = 42;
+Tag(""Before"", arg);
+arg.field = 42;
+Tag(""After"", arg);
+
+Sample UntrackedSymbol() => this;";
+            var validator = SETestContext.CreateCS(code, ", Sample arg").Validator;
+            validator.ValidateContainsOperation(OperationKind.FieldReference);
+            validator.ValidateTag("Before", x => x.Should().BeNull());
+            validator.ValidateTag("After", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void PropertyReference_Read_SetsNotNull()
+        {
+            const string code = @"
+_ = StaticProperty;            // Do not fail, do nothing
+_ = Sample.StaticProperty;
+_ = Property;
+_ = UntrackedSymbol().Property;
+Tag(""BeforeProperty"", arg);
+Tag(""BeforeDictionary"", dictionary);
+Tag(""BeforeIndexer"", indexer);
+_ = arg.Property;
+_ = dictionary[42];
+_ = indexer[42];
+Tag(""AfterProperty"", arg);
+Tag(""AfterDictionary"", dictionary);
+Tag(""AfterIndexer"", indexer);
+
+Sample UntrackedSymbol() => this;";
+            var validator = SETestContext.CreateCS(code, ", Sample arg, Dictionary<int, int> dictionary, Sample indexer").Validator;
+            validator.ValidateContainsOperation(OperationKind.PropertyReference);
+            validator.ValidateTag("BeforeProperty", x => x.Should().BeNull());
+            validator.ValidateTag("BeforeDictionary", x => x.Should().BeNull());
+            validator.ValidateTag("BeforeIndexer", x => x.Should().BeNull());
+            validator.ValidateTag("AfterProperty", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("AfterDictionary", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("AfterIndexer", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void PropertyReference_Write_SetsNotNull()
+        {
+            const string code = @"
+StaticProperty = 42;            // Do not fail, do nothing
+Sample.StaticProperty = 42;
+Property = 42;
+UntrackedSymbol().Property = 42;
+Tag(""BeforeProperty"", arg);
+Tag(""BeforeDictionary"", dictionary);
+Tag(""BeforeIndexer"", indexer);
+arg.Property = 42;
+dictionary[42] = 42;
+indexer[42] = 42;
+Tag(""AfterProperty"", arg);
+Tag(""AfterDictionary"", dictionary);
+Tag(""AfterIndexer"", indexer);
+
+Sample UntrackedSymbol() => this;";
+            var validator = SETestContext.CreateCS(code, ", Sample arg, Dictionary<int, int> dictionary, Sample indexer").Validator;
+            validator.ValidateContainsOperation(OperationKind.PropertyReference);
+            validator.ValidateTag("BeforeProperty", x => x.Should().BeNull());
+            validator.ValidateTag("BeforeDictionary", x => x.Should().BeNull());
+            validator.ValidateTag("BeforeIndexer", x => x.Should().BeNull());
+            validator.ValidateTag("AfterProperty", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("AfterDictionary", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("AfterIndexer", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void ArrayElementReference_Read_SetsNotNull()
+        {
+            const string code = @"
+_ = UntrackedSymbol()[42]; // Do not fail
+Tag(""Before"", array);
+_ = array[42];
+Tag(""After"", array);
+
+int[] UntrackedSymbol() => new[] { 42 };";
+            var validator = SETestContext.CreateCS(code, ", int[] array").Validator;
+            validator.ValidateContainsOperation(OperationKind.ArrayElementReference);
+            validator.ValidateTag("Before", x => x.Should().BeNull());
+            validator.ValidateTag("After", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void ArrayElementReference_Write_SetsNotNull()
+        {
+            const string code = @"
+UntrackedSymbol()[42] = 42; // Do not fail
+Tag(""Before"", array);
+array[42] = 42;
+Tag(""After"", array);
+
+int[] UntrackedSymbol() => new[] { 42 };";
+            var validator = SETestContext.CreateCS(code, ", int[] array").Validator;
+            validator.ValidateContainsOperation(OperationKind.ArrayElementReference);
+            validator.ValidateTag("Before", x => x.Should().BeNull());
+            validator.ValidateTag("After", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void EventReference_SetsNotNull()
+        {
+            const string code = @"
+Tag(""BeforeAdd"", add);
+Tag(""BeforeRemove"", remove);
+add.Event += (sender, e) => { };
+remove.Event -= (sender, e) => { };
+Tag(""AfterAdd"", add);
+Tag(""AfterRemove"", remove);";
+            var validator = SETestContext.CreateCS(code, ", Sample add, Sample remove").Validator;
+            validator.ValidateContainsOperation(OperationKind.ArrayElementReference);
+            validator.ValidateTag("BeforeAdd", x => x.Should().BeNull());
+            validator.ValidateTag("BeforeRemove", x => x.Should().BeNull());
+            validator.ValidateTag("AfterAdd", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("AfterRemove", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        }
     }
 }

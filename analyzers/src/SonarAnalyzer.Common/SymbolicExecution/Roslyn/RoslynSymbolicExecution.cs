@@ -246,11 +246,13 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             {
                 OperationKindEx.Argument => Invocation.Process(context, As(IArgumentOperationWrapper.FromOperation)),
                 OperationKindEx.ArrayCreation => Creation.Process(context),
+                OperationKindEx.ArrayElementReference=> References.Process(context, As(IArrayElementReferenceOperationWrapper.FromOperation)),
                 OperationKindEx.AnonymousObjectCreation => Creation.Process(context),
                 OperationKindEx.Binary => Binary.Process(context, As(IBinaryOperationWrapper.FromOperation)),
                 OperationKindEx.Conversion => Conversion.Process(context, As(IConversionOperationWrapper.FromOperation)),
                 OperationKindEx.DelegateCreation => Creation.Process(context),
                 OperationKindEx.DynamicObjectCreation => Creation.Process(context),
+                OperationKindEx.EventReference => References.Process(context, As(IEventReferenceOperationWrapper.FromOperation)),
                 OperationKindEx.FieldReference => References.Process(context, As(IFieldReferenceOperationWrapper.FromOperation)),
                 OperationKindEx.FlowCapture => FlowCapture.Process(context, As(IFlowCaptureOperationWrapper.FromOperation)),
                 OperationKindEx.InstanceReference => References.ProcessThis(context),
@@ -259,6 +261,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 OperationKindEx.LocalReference => References.Process(context, As(ILocalReferenceOperationWrapper.FromOperation)),
                 OperationKindEx.ObjectCreation => Creation.Process(context),
                 OperationKindEx.ParameterReference => References.Process(context, As(IParameterReferenceOperationWrapper.FromOperation)),
+                OperationKindEx.PropertyReference => References.Process(context, As(IPropertyReferenceOperationWrapper.FromOperation)),
                 OperationKindEx.SimpleAssignment => SimpleAssignment.Process(context, As(ISimpleAssignmentOperationWrapper.FromOperation)),
                 OperationKindEx.TypeParameterObjectCreation => Creation.Process(context),
                 _ => context.State
