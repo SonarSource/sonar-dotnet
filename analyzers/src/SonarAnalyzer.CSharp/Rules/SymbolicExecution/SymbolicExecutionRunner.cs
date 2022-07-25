@@ -117,6 +117,10 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void AnalyzeSonar(SyntaxNodeAnalysisContext context, bool isTestProject, bool isScannerRun, SyntaxNode body, ISymbol symbol)
         {
             var enabledAnalyzers = SonarRules.Where(x => x.SupportedDiagnostics.Any(descriptor => IsEnabled(context, isTestProject, isScannerRun, descriptor))).ToArray();
+            if (!Configuration.ForceSonarCfg)
+            {
+                enabledAnalyzers = enabledAnalyzers.Where(x => !x.SupportedDiagnostics.Any(descriptor => AllRules.Keys.Any(dd => descriptor.Id == dd.Id))).ToArray();
+            }
             if (enabledAnalyzers.Any() && CSharpControlFlowGraph.TryGet((CSharpSyntaxNode)body, context.SemanticModel, out var cfg))
             {
                 var lva = new SonarCSharpLiveVariableAnalysis(cfg, symbol, context.SemanticModel, context.CancellationToken);

@@ -74,7 +74,7 @@ namespace SonarAnalyzer.Rules
                 }
                 else
                 {
-                    // TODO: Run AnalyzeSonar for non-migrated rules.
+                    AnalyzeSonar(nodeContext, isTestProject, isScannerRun, body, symbol);
                     AnalyzeRoslyn(sonarContext, nodeContext, isTestProject, isScannerRun, body, symbol);
                 }
             }
