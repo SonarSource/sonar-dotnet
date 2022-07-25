@@ -18,6 +18,7 @@
 * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+using SonarAnalyzer.Common;
 using Checks = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
@@ -27,8 +28,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class LocksReleasedAllPathsTest
     {
-        private readonly VerifierBuilder builderCS = CreateVerifier<CS.SymbolicExecutionRunner>(Checks.CSharp.LocksReleasedAllPaths.S2222).WithOptions(ParseOptionsHelper.FromCSharp8);
-        private readonly VerifierBuilder builderVB = CreateVerifier<VB.SymbolicExecutionRunner>(Checks.VisualBasic.LocksReleasedAllPaths.S2222);
+        private readonly VerifierBuilder builderCS = CreateVerifier(() =>
+            new CS.SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabled), Checks.CSharp.LocksReleasedAllPaths.S2222)
+            .WithOptions(ParseOptionsHelper.FromCSharp8);
+        private readonly VerifierBuilder builderVB = CreateVerifier(() => new VB.SymbolicExecutionRunner(), Checks.VisualBasic.LocksReleasedAllPaths.S2222);
 
         [TestMethod]
         public void LocksReleasedAllPaths_CS() =>
@@ -72,8 +75,9 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #endif
 
-        private static VerifierBuilder CreateVerifier<TAnalyzer>(DiagnosticDescriptor onlyDiagnostics) where TAnalyzer : DiagnosticAnalyzer, new() =>
-            new VerifierBuilder<TAnalyzer>()
+        private static VerifierBuilder CreateVerifier(Func<DiagnosticAnalyzer> createConfiguredAnalyzer, DiagnosticDescriptor onlyDiagnostics) =>
+            new VerifierBuilder()
+            .AddAnalyzer(createConfiguredAnalyzer)
             .WithOnlyDiagnostics(onlyDiagnostics)
             .AddReferences(MetadataReferenceFacade.SystemThreading)
             .WithBasePath(@"SymbolicExecution\Roslyn")
