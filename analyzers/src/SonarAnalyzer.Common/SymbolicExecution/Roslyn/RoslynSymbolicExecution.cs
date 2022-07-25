@@ -258,6 +258,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 OperationKindEx.InstanceReference => References.ProcessThis(context),
                 OperationKindEx.Invocation => Invocation.Process(context, As(IInvocationOperationWrapper.FromOperation)),
                 OperationKindEx.IsPattern => Pattern.Process(context, As(IIsPatternOperationWrapper.FromOperation)),
+                OperationKindEx.Literal => Literal.Process(context, As(ILiteralOperationWrapper.FromOperation)),
                 OperationKindEx.LocalReference => References.Process(context, As(ILocalReferenceOperationWrapper.FromOperation)),
                 OperationKindEx.ObjectCreation => Creation.Process(context),
                 OperationKindEx.ParameterReference => References.Process(context, As(IParameterReferenceOperationWrapper.FromOperation)),

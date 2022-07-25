@@ -582,6 +582,32 @@ private void Tag(string name, object arg) { }";
         }
 
         [TestMethod]
+        public void Literal_Null_SetsNull_CS()
+        {
+            const string code = @"
+Tag(""Before"", arg);
+arg = null;
+Tag(""After"", arg);";
+            var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+            validator.ValidateContainsOperation(OperationKind.Literal);
+            validator.ValidateTag("Before", x => x.Should().BeNull());
+            validator.ValidateTag("After", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void Literal_Null_SetsNull_VB()
+        {
+            const string code = @"
+Tag(""Before"", Arg)
+Arg = Nothing
+Tag(""After"", Arg)";
+            var validator = SETestContext.CreateVB(code, ", Arg As Object").Validator;
+            validator.ValidateContainsOperation(OperationKind.Literal);
+            validator.ValidateTag("Before", x => x.Should().BeNull());
+            validator.ValidateTag("After", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+        }
+
+        [TestMethod]
         public void InstanceReference_SetsNotNull_CS()
         {
             const string code = @"
