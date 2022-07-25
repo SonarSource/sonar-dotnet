@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules
         where TSyntaxKind : struct
         where TLiteralExpressionSyntax : SyntaxNode
     {
-        protected const string DiagnosticId = "S1192";
+        private const string DiagnosticId = "S1192";
         private const string MessageFormat = "Define a constant instead of using this literal '{0}' {1} times.";
         private const int MinimumStringLength = 5;
         private const int ThresholdDefaultValue = 3;

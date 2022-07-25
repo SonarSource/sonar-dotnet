@@ -24,6 +24,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -40,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.StructDeclaration,
             SyntaxKindEx.RecordClassDeclaration,
             SyntaxKindEx.RecordStructDeclaration,
-            SyntaxKind.CompilationUnit,
+            SyntaxKind.CompilationUnit
         };
 
         private SyntaxKind[] TypeDeclarationSyntaxKinds { get; } =
@@ -48,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.ClassDeclaration,
             SyntaxKind.StructDeclaration,
             SyntaxKindEx.RecordClassDeclaration,
-            SyntaxKindEx.RecordStructDeclaration,
+            SyntaxKindEx.RecordStructDeclaration
         };
 
         protected override bool IsMatchingMethodParameterName(LiteralExpressionSyntax literalExpression) =>
@@ -75,6 +76,6 @@ namespace SonarAnalyzer.Rules.CSharp
             IsNamedType(context) || IsTopLevelMain(context);
 
         private static bool IsTopLevelMain(SyntaxNodeAnalysisContext context) =>
-            context.ContainingSymbol.IsTopLevelMain();
+            context.Node.IsInTopLevelMain();
     }
 }

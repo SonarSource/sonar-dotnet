@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 using NodeSymbolAndModel = SonarAnalyzer.Common.NodeSymbolAndModel<Microsoft.CodeAnalysis.CSharp.Syntax.InvocationExpressionSyntax, Microsoft.CodeAnalysis.IMethodSymbol>;
@@ -83,7 +84,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void AnalyzeLocalFunctionStatements(SyntaxNodeAnalysisContext context)
         {
             var localFunctionSyntax = (LocalFunctionStatementSyntaxWrapper)context.Node;
-            var isInTopLevelMain = context.ContainingSymbol.IsTopLevelMain();
+            var isInTopLevelMain = context.Node.IsInTopLevelMain();
 
             var topMostContainingMethod = isInTopLevelMain
                                               ? context.Node.Parent.Parent // .Parent.Parent is the CompilationUnit

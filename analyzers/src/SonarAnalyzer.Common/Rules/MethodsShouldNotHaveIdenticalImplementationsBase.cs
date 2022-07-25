@@ -21,6 +21,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
@@ -44,7 +45,7 @@ namespace SonarAnalyzer.Rules
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer,
                 c =>
                 {
-                    if (IsExcludedFromBeingExamined(c.ContainingSymbol))
+                    if (IsExcludedFromBeingExamined(c))
                     {
                         return;
                     }
@@ -68,8 +69,8 @@ namespace SonarAnalyzer.Rules
                 },
                 SyntaxKinds);
 
-        protected virtual bool IsExcludedFromBeingExamined(ISymbol nodeContainingSymbol) =>
-            nodeContainingSymbol.Kind != SymbolKind.NamedType;
+        protected virtual bool IsExcludedFromBeingExamined(SyntaxNodeAnalysisContext context) =>
+            context.ContainingSymbol.Kind != SymbolKind.NamedType;
 
         protected static bool HaveSameParameters<TSyntax>(SeparatedSyntaxList<TSyntax>? leftParameters, SeparatedSyntaxList<TSyntax>? rightParameters)
             where TSyntax : SyntaxNode =>
