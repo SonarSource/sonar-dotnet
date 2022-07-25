@@ -1,0 +1,15 @@
+{
+  "title": "Extension methods should not extend \"Object\"",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "15min"
+  },
+  "tags": [],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-4225",
+  "sqKey": "S4225",
+  "scope": "All",
+  "quickfix": "unknown"
+}

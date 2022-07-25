@@ -23,19 +23,18 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Extensions
+namespace SonarAnalyzer.Extensions;
+
+internal static class AttributeSyntaxExtensions
 {
-    internal static class AttributeSyntaxExtensions
-    {
-        private const int AttributeLength = 9;
+    private const int AttributeLength = 9;
 
-        public static bool IsKnownType(this AttributeSyntax attribute, KnownType knownType, SemanticModel semanticModel) =>
-            attribute.Name.GetName().Contains(GetShortNameWithoutAttributeSuffix(knownType))
-            && SymbolHelper.IsKnownType(attribute, knownType, semanticModel);
+    public static bool IsKnownType(this AttributeSyntax attribute, KnownType knownType, SemanticModel semanticModel) =>
+        attribute.Name.GetName().Contains(GetShortNameWithoutAttributeSuffix(knownType))
+        && SymbolHelper.IsKnownType(attribute, knownType, semanticModel);
 
-        private static string GetShortNameWithoutAttributeSuffix(KnownType knownType) =>
-            knownType.TypeName == nameof(Attribute) || !knownType.TypeName.EndsWith(nameof(Attribute))
-                ? knownType.TypeName
-                : knownType.TypeName.Remove(knownType.TypeName.Length - AttributeLength);
-    }
+    private static string GetShortNameWithoutAttributeSuffix(KnownType knownType) =>
+        knownType.TypeName == nameof(Attribute) || !knownType.TypeName.EndsWith(nameof(Attribute))
+            ? knownType.TypeName
+            : knownType.TypeName.Remove(knownType.TypeName.Length - AttributeLength);
 }

@@ -18,20 +18,22 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.CSharp;
+namespace SonarAnalyzer.Rules.VisualBasic;
 
-[DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class ExtensionMethodShouldNotExtendObject : ExtensionMethodShouldNotExtendObjectBase<SyntaxKind, MethodDeclarationSyntax>
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class ExtensionMethodShouldNotExtendObject : ExtensionMethodShouldNotExtendObjectBase<SyntaxKind, MethodStatementSyntax>
 {
-    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-    protected override bool IsExtensionMethod(MethodDeclarationSyntax declaration, SemanticModel semanticModel) =>
-        declaration.IsExtensionMethod();
+    protected override bool IsExtensionMethod(MethodStatementSyntax declaration, SemanticModel semanticModel) =>
+        declaration.Parent.Parent is ModuleBlockSyntax
+        && declaration.AttributeLists.SelectMany(x => x.Attributes).Any(x => x.IsKnownType(KnownType.System_Runtime_CompilerServices_ExtensionAttribute, semanticModel));
 }

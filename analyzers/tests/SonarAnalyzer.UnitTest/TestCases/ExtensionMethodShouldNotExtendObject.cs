@@ -1,17 +1,23 @@
 ﻿using System;
 
-namespace Tests.Diagnostics
+static class Compliant
 {
-    static class Program
+    static void ExtendsValueType(this int i) { }
+    static int ExtendsWithArguments(this int i, int n)
     {
-        static void Foo(this object obj) // Noncompliant {{Refactor this extension to extend a more concrete type.}}
-//                  ^^^
-        {
-        }
-
-        static void Bar(this int i) { }
-        static System.Collections.Generic.IEnumerable<int> GetBaz() { return new[] { 0 }; }
-
-        static void NotAnExtensionMethod(object o) { }
+        return i + n;
     }
+    static void ExtendsReferenceType(this Exception i) { }
+
+    static void NotAnExtension(object o) { }
+}
+
+static class NonCompliant
+{
+    static void ExtendsObject(this object obj) // Noncompliant {{Refactor this extension to extend a more concrete type.}}
+    //          ^^^^^^^^^^^^^
+    {
+    }
+
+    static void ExtendsWithArguments(this object obj, int other) { } // Noncompliant
 }

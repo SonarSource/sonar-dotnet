@@ -18,20 +18,23 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Extensions;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.CSharp;
+namespace SonarAnalyzer.Extensions;
 
-[DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class ExtensionMethodShouldNotExtendObject : ExtensionMethodShouldNotExtendObjectBase<SyntaxKind, MethodDeclarationSyntax>
+internal static class AttributeSyntaxExtensions
 {
-    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+    private const int AttributeLength = 9;
 
-    protected override bool IsExtensionMethod(MethodDeclarationSyntax declaration, SemanticModel semanticModel) =>
-        declaration.IsExtensionMethod();
+    public static bool IsKnownType(this AttributeSyntax attribute, KnownType knownType, SemanticModel semanticModel) =>
+        attribute.Name.GetName().Contains(GetShortNameWithoutAttributeSuffix(knownType))
+        && SymbolHelper.IsKnownType(attribute, knownType, semanticModel);
+
+    private static string GetShortNameWithoutAttributeSuffix(KnownType knownType) =>
+        knownType.TypeName == nameof(Attribute) || !knownType.TypeName.EndsWith(nameof(Attribute))
+            ? knownType.TypeName
+            : knownType.TypeName.Remove(knownType.TypeName.Length - AttributeLength);
 }

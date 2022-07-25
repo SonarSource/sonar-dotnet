@@ -18,15 +18,23 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Rules.CSharp;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.UnitTest.Rules;
+
+[TestClass]
+public class ExtensionMethodShouldNotExtendObjectTest
 {
-    [TestClass]
-    public class ExtensionMethodShouldNotExtendObjectTest
-    {
-        [TestMethod]
-        public void ExtensionMethodShouldNotExtendObject() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ExtensionMethodShouldNotExtendObject.cs", new ExtensionMethodShouldNotExtendObject());
-    }
+    [TestMethod]
+    public void ExtensionMethodShouldNotExtendObject_CS() =>
+        new VerifierBuilder<CS.ExtensionMethodShouldNotExtendObject>()
+        .AddPaths("ExtensionMethodShouldNotExtendObject.cs")
+        .Verify();
+
+    [TestMethod]
+    public void ExtensionMethodShouldNotExtendObject_VB() =>
+        new VerifierBuilder<VB.ExtensionMethodShouldNotExtendObject>()
+        .AddPaths("ExtensionMethodShouldNotExtendObject.vb")
+        .Verify();
 }
