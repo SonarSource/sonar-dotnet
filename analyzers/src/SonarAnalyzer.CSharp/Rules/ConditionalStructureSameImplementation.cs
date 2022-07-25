@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -78,7 +79,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var precedingSection = switchSection
                         .GetPrecedingSections()
-                        .FirstOrDefault(preceding => CSharpEquivalenceChecker.AreEquivalentWithEqualInvocations(switchSection.Statements, preceding.Statements, c.SemanticModel));
+                        .FirstOrDefault(preceding => CSharpEquivalenceChecker.AreEquivalent(switchSection.Statements, preceding.Statements)
+                                                     && HaveTheSameInvocations(switchSection.Statements, preceding.Statements, c.SemanticModel));
 
                     if (precedingSection != null)
                     {
@@ -116,5 +118,24 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsApprovedStatement(StatementSyntax statement) =>
             !statement.IsAnyKind(IgnoredStatementsInSwitch);
+
+        public static bool HaveTheSameInvocations(SyntaxList<SyntaxNode> first, SyntaxList<SyntaxNode> second, SemanticModel model)
+        {
+            var referenceInvocations = first.SelectMany(x => x.DescendantNodes().OfType<InvocationExpressionSyntax>()).ToArray();
+            var candidateInvocations = second.SelectMany(x => x.DescendantNodes().OfType<InvocationExpressionSyntax>()).ToArray();
+            if (referenceInvocations.Length != candidateInvocations.Length)
+            {
+                return false;
+            }
+
+            for (var i = 0; i < referenceInvocations.Length; i++)
+            {
+                if (!referenceInvocations[i].IsEqualTo(candidateInvocations[i], model))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }

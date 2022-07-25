@@ -115,6 +115,7 @@ namespace Tests.TestCases
                     break;
             }
 
+            int k = 0;
             switch (i)
             {
                 case 1:
@@ -125,6 +126,16 @@ namespace Tests.TestCases
                 case 2:
                     doSomethingDifferent();
                     doSomethingDifferent();
+                    break;
+                case 4:
+                    k++;
+                    doSomething();
+                    doSomethingDifferent();
+                    break;
+                case 5:
+                    k++;
+                    doSomethingDifferent();
+                    doSomething();
                     break;
                 default:
                     doTheRest();
