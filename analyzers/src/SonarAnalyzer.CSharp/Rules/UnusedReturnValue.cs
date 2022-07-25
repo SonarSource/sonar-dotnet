@@ -84,9 +84,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void AnalyzeLocalFunctionStatements(SyntaxNodeAnalysisContext context)
         {
             var localFunctionSyntax = (LocalFunctionStatementSyntaxWrapper)context.Node;
-            var isInTopLevelMain = context.Node.IsInTopLevelMain();
-
-            var topMostContainingMethod = isInTopLevelMain
+            var topMostContainingMethod = localFunctionSyntax.IsTopLevel()
                                               ? context.Node.Parent.Parent // .Parent.Parent is the CompilationUnit
                                               : context.Node.GetTopMostContainingMethod();
 
