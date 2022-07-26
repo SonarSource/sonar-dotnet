@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Extensions
 
         public static bool IsExtensionMethod(this BaseMethodDeclarationSyntax methodDeclaration) =>
             methodDeclaration.ParameterList.Parameters.Count > 0
-            && methodDeclaration.ParameterList.Parameters[0].Modifiers.Any(s => s.ValueText == "this");
+            && methodDeclaration.ParameterList.Parameters[0].Modifiers.Any(s => s.IsKind(SyntaxKind.ThisKeyword));
 
         public static bool HasReturnTypeVoid(this MethodDeclarationSyntax methodDeclaration) =>
             methodDeclaration.ReturnType is PredefinedTypeSyntax { Keyword: { RawKind: (int)SyntaxKind.VoidKeyword } };
