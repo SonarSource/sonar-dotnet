@@ -1,6 +1,6 @@
 ﻿var x = 1;
 
-public partial class Program { } // Noncompliant - FP, See: https://github.com/SonarSource/sonar-dotnet/issues/5660
+public partial class Program { } // Compliant, See: https://github.com/SonarSource/sonar-dotnet/issues/5660
 
 class Foo // Noncompliant {{Move 'Foo' into a named namespace.}}
 {
@@ -13,6 +13,8 @@ record Bar // Noncompliant
 }
 
 record PositionalRecord(string FirstParam, string SecondParam); // Noncompliant
+
+public interface InterfaceInTopLevelStatement { } // Noncompliant
 
 namespace Tests.Diagnostics
 {

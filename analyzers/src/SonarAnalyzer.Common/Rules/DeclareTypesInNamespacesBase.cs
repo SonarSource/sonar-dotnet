@@ -32,6 +32,7 @@ namespace SonarAnalyzer.Rules
         protected abstract TSyntaxKind[] SyntaxKinds { get; }
         protected abstract bool IsInnerTypeOrWithinNamespace(SyntaxNode declaration, SemanticModel semanticModel);
         protected abstract SyntaxToken GetTypeIdentifier(SyntaxNode declaration);
+        protected abstract bool IsException(SyntaxNode declaration);
 
         protected override string MessageFormat => "Move '{0}' into a named namespace.";
 
@@ -42,7 +43,7 @@ namespace SonarAnalyzer.Rules
               c =>
               {
                   var declaration = c.Node;
-                  if (c.IsRedundantPositionalRecordContext() || IsInnerTypeOrWithinNamespace(declaration, c.SemanticModel))
+                  if (c.IsRedundantPositionalRecordContext() || IsInnerTypeOrWithinNamespace(declaration, c.SemanticModel) || IsException(c.Node))
                   {
                       return;
                   }
