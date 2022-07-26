@@ -68,13 +68,9 @@ namespace SonarAnalyzer.Rules
             {
                 var isTestProject = sonarContext.IsTestProject(nodeContext.Compilation, nodeContext.Options);
                 var isScannerRun = sonarContext.IsScannerRun(nodeContext.Options);
-                if (!ControlFlowGraph.IsAvailable || Configuration.ForceSonarCfg)
+                AnalyzeSonar(nodeContext, isTestProject, isScannerRun, body, symbol);
+                if (ControlFlowGraph.IsAvailable)
                 {
-                    AnalyzeSonar(nodeContext, isTestProject, isScannerRun, body, symbol);
-                }
-                else
-                {
-                    AnalyzeSonar(nodeContext, isTestProject, isScannerRun, body, symbol);
                     AnalyzeRoslyn(sonarContext, nodeContext, isTestProject, isScannerRun, body, symbol);
                 }
             }
