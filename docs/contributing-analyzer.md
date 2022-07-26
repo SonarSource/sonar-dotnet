@@ -126,7 +126,7 @@ After the debug session, remove the `Debugger.Launch()` line.
 
 * Use IntelliJ IDEA
 * Open the root folder of the repo
-* Make sure the `its`, `sonar-csharp-plugin`, `sonar-dotnet-shared-library`, and `sonar-vbnet-plugin` folders are marked with a blue square. Search for `pom.xml` in the folders and make it a maven project if not.
+* Make sure the `its`, `sonar-csharp-plugin`, `sonar-dotnet-shared-library`, and `sonar-vbnet-plugin` folders are are imported as Maven modules (indicated by a blue square). Search for `pom.xml` in the folders and make it a maven project if not.
 * Add the following environment variables (user)
   * **ARTIFACTORY_URL** https://repox.jfrog.io/repox
   * **ARTIFACTORY_USER** your repox.jfrog username (see e.g. orchestrator.properties)
