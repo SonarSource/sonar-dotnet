@@ -47,15 +47,16 @@ namespace SonarAnalyzer.Extensions
 
         public static bool IsDeconstructor(this MethodDeclarationSyntax methodDeclaration)
         {
-            var parameterList = methodDeclaration.ParameterList;
-            var parametersCount = methodDeclaration.ParameterList.Parameters.Count;
             return  methodDeclaration.HasReturnTypeVoid()
+                    && (methodDeclaration.IsExtensionMethod() || !methodDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword))
                     && methodDeclaration.Identifier.Value.Equals("Deconstruct")
-                    && ((methodDeclaration.Modifiers.Count == 1 && methodDeclaration.Modifiers.Any(SyntaxKind.PublicKeyword) && CountOfOutParameters(parameterList) == parametersCount)
-                         || (methodDeclaration.IsExtensionMethod() && CountOfOutParameters(parameterList) == parametersCount - 1));
+                    && AllParameteresHaveModifierOut(methodDeclaration);
 
-            static int CountOfOutParameters(ParameterListSyntax parameters) =>
-                parameters.Parameters.Count(x => x.Modifiers.Any(x => x.IsKind(SyntaxKind.OutKeyword)));
+            static bool AllParameteresHaveModifierOut(MethodDeclarationSyntax methodDeclaration) =>
+                (methodDeclaration.IsExtensionMethod()
+                 ? methodDeclaration.ParameterList.Parameters.Skip(1)
+                 : methodDeclaration.ParameterList.Parameters)
+                .All(x => x.Modifiers.Any(y => y.IsKind(SyntaxKind.OutKeyword)));
         }
     }
 }
