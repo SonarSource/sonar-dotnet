@@ -50,9 +50,9 @@ namespace SonarAnalyzer.Extensions
             return  methodDeclaration.HasReturnTypeVoid()
                     && (methodDeclaration.IsExtensionMethod() || !methodDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword))
                     && methodDeclaration.Identifier.Value.Equals("Deconstruct")
-                    && AllParameteresHaveModifierOut(methodDeclaration);
+                    && AllParametersHaveModifierOut(methodDeclaration);
 
-            static bool AllParameteresHaveModifierOut(MethodDeclarationSyntax methodDeclaration) =>
+            static bool AllParametersHaveModifierOut(MethodDeclarationSyntax methodDeclaration) =>
                 (methodDeclaration.IsExtensionMethod()
                  ? methodDeclaration.ParameterList.Parameters.Skip(1)
                  : methodDeclaration.ParameterList.Parameters)
