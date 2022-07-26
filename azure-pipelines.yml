@@ -175,6 +175,7 @@ stages:
 
           gci
           gci -Path analyzers\tests\SonarAnalyzer.UnitTest\
+          gci -Path $TestResultsDir
           Get-ChildItem -Path $TestResultsDir -Recurse -File -Filter coverage.opencover.xml | Copy-Item -Verbose -Destination .\coverage\net48.xml
           Get-ChildItem -Path $TestResultsDir -Recurse -File -Filter net48.trx | Copy-Item -Verbose -Destination .\TestResults\
 
@@ -220,6 +221,7 @@ stages:
 
           gci
           gci -Path analyzers\tests\SonarAnalyzer.UnitTest\
+          gci -Path $TestResultsDir
           Get-ChildItem -Path $TestResultsDir -Recurse -File -Filter coverage.opencover.xml | Copy-Item -Verbose -Destination .\coverage\net6.0.xml
           Get-ChildItem -Path $TestResultsDir -Recurse -File -Filter net6.0.trx | Copy-Item -Verbose -Destination .\TestResults\
 
