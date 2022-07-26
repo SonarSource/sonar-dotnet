@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Threading.Tasks;
+using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -31,6 +33,35 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void StaticFieldWrittenFromInstanceMember() =>
             builder.AddPaths(@"StaticFieldWrittenFromInstanceMember.cs").WithOptions(ParseOptionsHelper.FromCSharp8).AddReferences(MetadataReferenceFacade.NETStandard21).Verify();
 
+        [TestMethod]
+        public async Task SecondaryIssueInReferencedCompilation()
+        {
+            const string firstClass =
+                @"
+public class Foo
+{
+    public static int Count = 0; // Secondary
+}
+";
+
+            const string secondClass =
+                @"
+public class Bar
+{
+    public int Increment() => Foo.Count++;
+}
+";
+
+            var analyzers = ImmutableArray<DiagnosticAnalyzer>.Empty.Add(new StaticFieldWrittenFromInstanceMember());
+            var firstCompilation = CreateCompilation(CSharpSyntaxTree.ParseText(firstClass), "First").WithAnalyzers(analyzers).Compilation;
+            var secondCompilation = CreateCompilation(CSharpSyntaxTree.ParseText(secondClass), "Second")
+                                    .AddReferences(firstCompilation.ToMetadataReference())
+                                    .WithAnalyzers(analyzers);
+
+            var result = await secondCompilation.GetAnalyzerDiagnosticsAsync();
+            result.Single().GetMessage().Should().StartWith("Analyzer 'SonarAnalyzer.Rules.CSharp.StaticFieldWrittenFromInstanceMember' threw an exception of type 'System.ArgumentException' with message 'Reported diagnostic 'S2696' has a source location in file '', which is not part of the compilation being analyzed.");
+        }
+
 #if NET
         [TestMethod]
         public void StaticFieldWrittenFromInstanceMember_CSharp9() =>
@@ -40,5 +71,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void StaticFieldWrittenFromInstanceMember_CSharp10() =>
             builder.AddPaths(@"StaticFieldWrittenFromInstanceMember.CSharp10.cs").WithTopLevelStatements().WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 #endif
+
+        private static CSharpCompilation CreateCompilation(SyntaxTree tree, string name) =>
+            CSharpCompilation
+                .Create(name, options: new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary))
+                .AddReferences(MetadataReference.CreateFromFile(typeof(string).Assembly.Location))
+                .AddSyntaxTrees(tree);
     }
 }
