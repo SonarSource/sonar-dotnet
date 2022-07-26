@@ -53,19 +53,9 @@ namespace SonarAnalyzer.Extensions
                     && methodDeclaration.Identifier.Value.Equals("Deconstruct")
                     && ((methodDeclaration.Modifiers.Count == 1 && methodDeclaration.Modifiers.Any(SyntaxKind.PublicKeyword) && CountOfOutParameters(parameterList) == parametersCount)
                          || (methodDeclaration.IsExtensionMethod() && CountOfOutParameters(parameterList) == parametersCount - 1));
-        }
 
-        private static int CountOfOutParameters(ParameterListSyntax parameteres)
-        {
-            var outParametersCount = 0;
-            foreach (var param in parameteres.Parameters)
-            {
-                if (param.Modifiers.Any(x => x.IsKind(SyntaxKind.OutKeyword)))
-                {
-                    outParametersCount++;
-                }
-            }
-            return outParametersCount;
+            static int CountOfOutParameters(ParameterListSyntax parameters) =>
+                parameters.Parameters.Count(x => x.Modifiers.Any(x => x.IsKind(SyntaxKind.OutKeyword)));
         }
     }
 }
