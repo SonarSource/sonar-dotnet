@@ -680,11 +680,11 @@ public static class Extensions
             validator.ValidateContainsOperation(OperationKind.Invocation);
             validator.ValidateTag("BeforeInstance", x => x.Should().BeNull());
             validator.ValidateTag("BeforeExtensionArg", x => x.Should().BeNull());
-            validator.ValidateTag("BeforeExtensionNull", x => x.Should().BeNull()); // ToDo: This will have 'null' constraint
+            validator.ValidateTag("BeforeExtensionNull", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
             validator.ValidateTag("BeforePreserve", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
             validator.ValidateTag("AfterInstance", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue("Instance method should set NotNull constraint."));
             validator.ValidateTag("AfterExtensionArg", x => x.Should().BeNull("Extensions can run on null instances."));
-            validator.ValidateTag("AfterExtensionNull", x => x.Should().BeNull("Extensions can run on null instances."));
+            validator.ValidateTag("AfterExtensionNull", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue("Extensions can run on null instances."));
             validator.ValidateTag("AfterPreserve", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue("Other constraints should not be removed."));
         }
 
