@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -57,21 +58,16 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    if (c.ContainingSymbol.IsTopLevelMain()
-                        || ((LocalFunctionStatementSyntaxWrapper)c.Node).Modifiers.Any(SyntaxKind.StaticKeyword))
+                    var localFunctionStatement = (LocalFunctionStatementSyntaxWrapper)c.Node;
+                    if (localFunctionStatement.IsTopLevel()
+                        || localFunctionStatement.Modifiers.Any(SyntaxKind.StaticKeyword))
                     {
                         var wrapper = (LocalFunctionStatementSyntaxWrapper)c.Node;
                         var linesCount = CountLines(wrapper);
                         if (linesCount > Max)
                         {
-                            c.ReportIssue(
-                                Diagnostic.Create(
-                                    LocalFunctionRule,
-                                    wrapper.Identifier.GetLocation(),
-                                    wrapper.Modifiers.Any(SyntaxKind.StaticKeyword) ? "This static" : "This",
-                                    linesCount,
-                                    Max,
-                                    MethodKeyword));
+                            var modifierPrefix = wrapper.Modifiers.Any(SyntaxKind.StaticKeyword) ? "This static" : "This";
+                            c.ReportIssue(Diagnostic.Create(LocalFunctionRule, wrapper.Identifier.GetLocation(), modifierPrefix, linesCount, Max, MethodKeyword));
                         }
                     }
                 },

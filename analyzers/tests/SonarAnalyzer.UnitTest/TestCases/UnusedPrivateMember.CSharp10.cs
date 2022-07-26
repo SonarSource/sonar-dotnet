@@ -5,6 +5,8 @@ namespace Tests.Diagnostics
 {
     public record struct RecordStruct
     {
+        public RecordStruct() { }
+
         private int a = 42; // Noncompliant {{Remove the unused private field 'a'.}}
 
         private int b = 42;
@@ -12,7 +14,7 @@ namespace Tests.Diagnostics
 
         private nint Value { get; init; } = 42;
 
-        private nint UnusedValue { get; init; } // Noncompliant
+        private nint UnusedValue { get; init; } = 0; // Compliant - properties with initializer are considered as used.
 
         public RecordStruct Create() => new() { Value = 1 };
 
@@ -85,7 +87,9 @@ namespace Tests.Diagnostics
     {
         private record struct PrivateRecordStruct
         {
-            public uint part1; // Noncompliant FP. Type is communicated an external call.
+            public PrivateRecordStruct() { }
+
+            public uint part1 = 0; // Noncompliant FP. Type is communicated an external call.
         }
 
         [DllImport("user32.dll")]

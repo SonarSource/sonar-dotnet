@@ -5,6 +5,8 @@ namespace Tests.Diagnostics
     class XAttribute : Attribute { }
     record struct ThreadStaticNonStaticField
     {
+        public ThreadStaticNonStaticField() { }
+
         [ThreadStatic]  // Noncompliant
 //       ^^^^^^^^^^^^
         private int count1 = 0, count11 = 0;

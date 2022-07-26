@@ -1,6 +1,8 @@
 ﻿record struct StaticFieldInGenericRecordStruct<T>
     where T : class
 {
+    public StaticFieldInGenericRecordStruct() { }
+
     internal static string field; // Noncompliant
 
     public static string Prop1 { get; set; } // Noncompliant
@@ -13,6 +15,8 @@
 record struct StaticFieldInGenericPositionalRecordStruct<T>(int Property)
     where T : class
 {
+    public StaticFieldInGenericPositionalRecordStruct() : this(1) { }
+
     internal static string field; // Noncompliant
 
     public static string Prop1 { get; set; } // Noncompliant

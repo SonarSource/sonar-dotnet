@@ -59,7 +59,8 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override SyntaxToken GetMethodIdentifier(IMethodDeclaration method) =>
             method.Identifier;
 
-        protected override bool IsExcludedFromBeingExamined(ISymbol nodeContainingSymbol) =>
-            base.IsExcludedFromBeingExamined(nodeContainingSymbol) && !nodeContainingSymbol.IsTopLevelMain();
+        protected override bool IsExcludedFromBeingExamined(SyntaxNodeAnalysisContext context) =>
+            base.IsExcludedFromBeingExamined(context)
+            && !(context.Node is CompilationUnitSyntax compilationUnit && compilationUnit.IsTopLevelMain());
     }
 }

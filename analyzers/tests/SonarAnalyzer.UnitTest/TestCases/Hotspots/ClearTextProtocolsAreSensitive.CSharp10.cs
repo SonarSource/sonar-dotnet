@@ -12,6 +12,8 @@ public record struct RecordStruct
 {
     public string Address { get; init; } = "http://foo.com"; // Noncompliant
 
+    public RecordStruct() { }
+
     public void Method()
     {
         new TelnetRecordStruct(); // Noncompliant {{Using telnet protocol is insecure. Use ssh instead.}}

@@ -42,10 +42,14 @@ namespace Tests.Diagnostics
 
     public record struct OutterRecordStruct // Noncompliant
     {
+        public OutterRecordStruct() { }
+
         InnerRecordStruct whatever = new InnerRecordStruct();
 
         public record struct InnerRecordStruct // Noncompliant
         {
+            public InnerRecordStruct() { }
+
             public Stream stream = new FileStream("", FileMode.Open);
         }
     }

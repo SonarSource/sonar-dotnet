@@ -52,9 +52,9 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
                 $"LocalReference: a = 1 == {constant} (Implicit)",
                 "Literal: 1",
                 $"Literal: {constant}",
-                $"BinaryOperator: 1 == {constant}",
+                $"Binary: 1 == {constant}",
                 $"SimpleAssignment: a = 1 == {constant} (Implicit)");
-            validator.Validate($"BinaryOperator: 1 == {constant}", x => x.State[x.Operation].HasConstraint(expectedConstraint).Should().BeTrue());
+            validator.Validate($"Binary: 1 == {constant}", x => x.State[x.Operation].HasConstraint(expectedConstraint).Should().BeTrue());
             validator.Validate($"SimpleAssignment: a = 1 == {constant} (Implicit)", x => x.State[x.Operation].HasConstraint(expectedConstraint).Should().BeTrue());
         }
 
@@ -69,16 +69,16 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
                 "LocalReference: f = 1 == zero (Implicit)",
                 "Literal: 1",
                 "LocalReference: zero",
-                "BinaryOperator: 1 == zero",
+                "Binary: 1 == zero",
                 "SimpleAssignment: f = 1 == zero (Implicit)",
                 "LocalReference: t = 0 == zero (Implicit)",
                 "Literal: 0",
                 "LocalReference: zero",
-                "BinaryOperator: 0 == zero",
+                "Binary: 0 == zero",
                 "SimpleAssignment: t = 0 == zero (Implicit)");
-            validator.Validate("BinaryOperator: 1 == zero", x => x.State[x.Operation].HasConstraint(BoolConstraint.False).Should().BeTrue());
+            validator.Validate("Binary: 1 == zero", x => x.State[x.Operation].HasConstraint(BoolConstraint.False).Should().BeTrue());
             validator.Validate("SimpleAssignment: f = 1 == zero (Implicit)", x => x.State[x.Operation].HasConstraint(BoolConstraint.False).Should().BeTrue());
-            validator.Validate("BinaryOperator: 0 == zero", x => x.State[x.Operation].HasConstraint(BoolConstraint.True).Should().BeTrue());
+            validator.Validate("Binary: 0 == zero", x => x.State[x.Operation].HasConstraint(BoolConstraint.True).Should().BeTrue());
             validator.Validate("SimpleAssignment: t = 0 == zero (Implicit)", x => x.State[x.Operation].HasConstraint(BoolConstraint.True).Should().BeTrue());
         }
 

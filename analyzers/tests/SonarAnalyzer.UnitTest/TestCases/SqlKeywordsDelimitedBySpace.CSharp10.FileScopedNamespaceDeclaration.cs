@@ -16,6 +16,8 @@ record Record
 
 record struct RecordStruct
 {
+    public RecordStruct() { }
+
     private string field = "SELECT col,col2" +
         "FROM TABLE" +  // FN
         "WHERE X = 1;"; // FN

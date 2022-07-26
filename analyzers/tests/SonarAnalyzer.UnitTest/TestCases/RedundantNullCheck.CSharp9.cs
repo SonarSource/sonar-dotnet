@@ -165,7 +165,7 @@ result = (n is not Apple && n is not null); // Compliant
 result = (a is null && a is string); // Compliant - rule ConditionEvaluatesToConstant should raise issue here (to be consistent with the non-C#9 tests)
 x = m switch
 {
-    string s2 and null => s2, // Compliant - rule ConditionEvaluatesToConstant will raise issue here
+    string s2 and null => s2, // Error [CS8502] The pattern is unreachable. It has already been handled by a previous arm of the switch expression or it is impossible to match.
     _ => ""
 };
 
