@@ -26,7 +26,7 @@ using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Extensions
 {
-    internal static class MethodDeclarationExtensions
+    internal static class MethodDeclarationSyntaxExtensions
     {
         /// <summary>
         /// Returns true if the method throws exceptions or returns null.
