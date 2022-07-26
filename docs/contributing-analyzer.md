@@ -37,14 +37,14 @@ In general, it is best to run commands from the Visual Studio Developer Command 
     - **Sonarsource internal only** These two steps require access to SonarSource internal resources and are not possible for external contributers
         - **ORCHESTRATOR_CONFIG_URL** - url to orchestrator.properties file (for integration tests) in uri form (i.e. file:///c:/something/orchestrator.properties). See also: [Documentation in the orchestrator repository](https://github.com/sonarsource/orchestrator#configuration)
         - **RULE_API_PATH** - path to folder containing the rule api jar. The rule api jar can be found at [repox.jfrog search](https://repox.jfrog.io/ui/artifactSearchResults?name=rule-api&type=artifacts) or [repox.jfrog private releases](https://repox.jfrog.io/ui/native/sonarsource-private-releases/com/sonarsource/rule-api/rule-api/)
-    - **PATH** - the system **PATH** variable must contain:
-        - the path to the dotnet core installation folder (System: `C:\Program Files\dotnet\`)
-        - the path to the MSBuild bin folder (System: `C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin`)
-        - the path to the visual studo installer folder (for vswhere.exe) (System: `C:\Program Files (x86)\Microsoft Visual Studio\Installer`)
-        - the path to the nuget executable folder ((System: `C:\Program Files\nuget`)
-        - the path to the JDK bin folder (System: `C:\Program Files\Java\jdk-11.0.2\bin`)
-        - %M2_HOME%\bin
-        - the path to the SonarScanner for .NET folder and to the Scanner CLI ([SonarScanner download](https://github.com/SonarSource/sonar-scanner-msbuild/releases))
+    - **PATH** - the **PATH** variable must contain (either *system* or *user* scope):
+        - [*System*] the path to the dotnet core installation folder (`C:\Program Files\dotnet\`)
+        - [*System*] the path to the MSBuild bin folder (`C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin`)
+        - [*System*] the path to the visual studo installer folder (for vswhere.exe) (`C:\Program Files (x86)\Microsoft Visual Studio\Installer`)
+        - [*System*] the path to the nuget executable folder (`C:\Program Files\nuget`)
+        - [*System*] the path to the JDK bin folder (`C:\Program Files\Java\jdk-11.0.2\bin`)
+        - [*System*] %M2_HOME%\bin (`C:\Program Files\JetBrains\IntelliJ IDEA\plugins\maven\lib\maven3\bin`)
+        - [*System*] the path to the SonarScanner for .NET folder and to the Scanner CLI ([SonarScanner download](https://github.com/SonarSource/sonar-scanner-msbuild/releases))
 1. Open `analyzers/SonarAnalyzer.sln`
 
 ## Running Tests
