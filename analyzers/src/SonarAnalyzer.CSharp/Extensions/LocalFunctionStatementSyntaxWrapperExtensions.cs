@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Extensions;
@@ -25,6 +26,5 @@ namespace SonarAnalyzer.Extensions;
 public static class LocalFunctionStatementSyntaxWrapperExtensions
 {
     public static bool IsTopLevel(this LocalFunctionStatementSyntaxWrapper localFunction) =>
-        // The tree looks like: CompilationUnit -> GlobalStatement -> LocalFunction and we check the compilation unit to be top-level main
-        localFunction.SyntaxNode.Parent.Parent.IsTopLevelMain();
+        localFunction is { SyntaxNode.Parent: GlobalStatementSyntax { Parent: CompilationUnitSyntax } };
 }

@@ -255,8 +255,8 @@ namespace SonarAnalyzer.Extensions
                     : null;
         }
 
-        public static bool IsTopLevelMain(this SyntaxNode node) =>
-            node is CompilationUnitSyntax compilationUnit && compilationUnit.Members.Any(x => x.IsKind(SyntaxKind.GlobalStatement));
+        public static bool IsTopLevelMain(this CompilationUnitSyntax compilationUnit) =>
+            compilationUnit.Members.Any(x => x.IsKind(SyntaxKind.GlobalStatement));
 
         private static string GetUnknownType(SyntaxKind kind) =>
 
