@@ -25,7 +25,7 @@ using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
+namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
     public class SymbolicExecutionRunnerTest

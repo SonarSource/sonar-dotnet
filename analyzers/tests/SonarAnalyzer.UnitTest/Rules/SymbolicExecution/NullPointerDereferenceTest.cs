@@ -22,7 +22,7 @@ using SonarAnalyzer.Common;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 
-namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
+namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
     public class NullPointerDereferenceTest
