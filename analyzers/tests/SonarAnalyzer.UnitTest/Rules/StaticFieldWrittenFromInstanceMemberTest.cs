@@ -25,21 +25,20 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class StaticFieldWrittenFromInstanceMemberTest
     {
+        private readonly VerifierBuilder<StaticFieldWrittenFromInstanceMember> builder = new();
+
         [TestMethod]
         public void StaticFieldWrittenFromInstanceMember() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\StaticFieldWrittenFromInstanceMember.cs",
-                                    new StaticFieldWrittenFromInstanceMember(),
-                                    ParseOptionsHelper.FromCSharp8,
-                                    MetadataReferenceFacade.NETStandard21);
+            builder.AddPaths(@"StaticFieldWrittenFromInstanceMember.cs").WithOptions(ParseOptionsHelper.FromCSharp8).AddReferences(MetadataReferenceFacade.NETStandard21).Verify();
 
 #if NET
         [TestMethod]
         public void StaticFieldWrittenFromInstanceMember_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\StaticFieldWrittenFromInstanceMember.CSharp9.cs", new StaticFieldWrittenFromInstanceMember());
+            builder.AddPaths(@"StaticFieldWrittenFromInstanceMember.CSharp9.cs").WithTopLevelStatements().Verify();
 
         [TestMethod]
         public void StaticFieldWrittenFromInstanceMember_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\StaticFieldWrittenFromInstanceMember.CSharp10.cs", new StaticFieldWrittenFromInstanceMember());
+            builder.AddPaths(@"StaticFieldWrittenFromInstanceMember.CSharp10.cs").WithTopLevelStatements().WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 #endif
     }
 }
