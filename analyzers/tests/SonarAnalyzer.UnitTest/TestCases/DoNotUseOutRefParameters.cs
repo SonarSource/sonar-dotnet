@@ -104,6 +104,14 @@ namespace Tests.Diagnostics
 
         public static void Deconstruct(out string foo) { foo = "foo"; } // Noncompliant
         public static int Deconstruct(ref int bar) { return bar; } // Noncompliant
+        public static void Method(string foo)
+        {
+            LocalMethod(foo);
+            void LocalMethod(string outFoo)
+            {
+                outFoo = "foo";
+            }
+        }
     }
 
     public static class PersonExtention
