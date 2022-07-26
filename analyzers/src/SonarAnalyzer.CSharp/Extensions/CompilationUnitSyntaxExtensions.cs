@@ -41,5 +41,8 @@ namespace SonarAnalyzer.Extensions
                                  .Select(x => x.ChildNodes().FirstOrDefault(y => y.IsKind(SyntaxKindEx.LocalFunctionStatement)))
                                  .Where(x => x != null)
                                  .Select(x => MethodDeclarationFactory.Create(x));
+
+        public static bool IsTopLevelMain(this CompilationUnitSyntax compilationUnit) =>
+            compilationUnit.Members.Any(x => x.IsKind(SyntaxKind.GlobalStatement));
     }
 }
