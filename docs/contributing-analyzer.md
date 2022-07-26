@@ -132,7 +132,7 @@ After the debug session, remove the `Debugger.Launch()` line.
   * **ARTIFACTORY_URL** https://repox.jfrog.io/repox
   * **ARTIFACTORY_USER** your repox.jfrog username (see e.g. orchestrator.properties)
   * **ARTIFACTORY_PASSWORD** the api key for repox.jfrog (see e.g. orchestrator.properties)
-* Create `settings.xml` in the `%USERPROFILE%\.m2` directory. A template can be found in the "Developer box" section in the extranet. Change the username and password settings with the values from the environment variables above.
+* Create `settings.xml` in the `%USERPROFILE%\.m2` directory. A template can be found in the [Developer box section in the extranet](https://xtranet-sonarsource.atlassian.net/wiki/spaces/DEV/pages/776711/Developer+Box#Maven-Settings). Change the username and password settings with the values from the environment variables above.
 * Run `mvn install clean -DskipTests=true` in the respective directories (pom.xml)
 * Use the IDE to run unit tests in the projects.
 
