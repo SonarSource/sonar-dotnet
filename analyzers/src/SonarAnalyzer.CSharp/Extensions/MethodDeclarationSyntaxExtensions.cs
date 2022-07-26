@@ -17,13 +17,46 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
+
+using System.Linq;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Extensions
 {
     internal static class MethodDeclarationSyntaxExtensions
     {
+        /// <summary>
+        /// Returns true if the method throws exceptions or returns null.
+        /// </summary>
+        public static bool ThrowsOrReturnsNull(this MethodDeclarationSyntax syntaxNode) =>
+            syntaxNode.DescendantNodes().OfType<ThrowStatementSyntax>().Any() ||
+            syntaxNode.DescendantNodes().OfType<ExpressionSyntax>().Any(expression => expression.IsKind(SyntaxKindEx.ThrowExpression)) ||
+            syntaxNode.DescendantNodes().OfType<ReturnStatementSyntax>().Any(returnStatement => returnStatement.Expression.IsKind(SyntaxKind.NullLiteralExpression)) ||
+            // For simplicity this returns true for any method witch contains a NullLiteralExpression but this could be a source of FNs
+            syntaxNode.DescendantNodes().OfType<ExpressionSyntax>().Any(expression => expression.IsKind(SyntaxKind.NullLiteralExpression));
+
+        public static bool IsExtensionMethod(this BaseMethodDeclarationSyntax methodDeclaration) =>
+            methodDeclaration.ParameterList.Parameters.Count > 0
+            && methodDeclaration.ParameterList.Parameters[0].Modifiers.Any(s => s.IsKind(SyntaxKind.ThisKeyword));
+
         public static bool HasReturnTypeVoid(this MethodDeclarationSyntax methodDeclaration) =>
-            methodDeclaration.ReturnType.ToString() == "void";
+            methodDeclaration.ReturnType is PredefinedTypeSyntax { Keyword: { RawKind: (int)SyntaxKind.VoidKeyword } };
+
+        public static bool IsDeconstructor(this MethodDeclarationSyntax methodDeclaration)
+        {
+            return  methodDeclaration.HasReturnTypeVoid()
+                    && (methodDeclaration.IsExtensionMethod() || !methodDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword))
+                    && methodDeclaration.Identifier.Value.Equals("Deconstruct")
+                    && AllParametersHaveModifierOut(methodDeclaration);
+
+            static bool AllParametersHaveModifierOut(MethodDeclarationSyntax methodDeclaration) =>
+                (methodDeclaration.IsExtensionMethod()
+                 ? methodDeclaration.ParameterList.Parameters.Skip(1)
+                 : methodDeclaration.ParameterList.Parameters)
+                .All(x => x.Modifiers.Any(y => y.IsKind(SyntaxKind.OutKeyword)));
+        }
     }
 }
