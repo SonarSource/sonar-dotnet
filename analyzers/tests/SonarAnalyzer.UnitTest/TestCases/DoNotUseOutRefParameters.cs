@@ -102,6 +102,14 @@ namespace Tests.Diagnostics
             lname = LastName;
         }
 
+        public void Deconstruct(out string fname, out string lname, string notAnOutParam) // in Deconstruct all parameters have to be out parameteres.
+//                              ^^^
+//                                                ^^^ Noncompliant@-1
+        {
+            fname = FirstName;
+            lname = LastName + notAnOutParam;
+        }
+
         public static void Deconstruct(out string foo) { foo = "foo"; } // Noncompliant
         public static int Deconstruct(ref int bar) { return bar; } // Noncompliant
         public static void Method(string foo)
@@ -120,6 +128,14 @@ namespace Tests.Diagnostics
         {
             fname = p.FirstName;
             lname = p.LastName;
+        }
+
+        public static void Deconstruct(this Person p, out string fname, out string lname, string notAnOutParameter) // in Deconstruct all parameters have to be out parameteres.
+//                                                    ^^^
+//                                                                      ^^^ Noncompliant@-1
+        {
+            fname = p.FirstName;
+            lname = p.LastName + notAnOutParameter;
         }
 
         public static int Deconstruct(this Person p, out int bar) { bar = 1; return bar; } // Noncompliant

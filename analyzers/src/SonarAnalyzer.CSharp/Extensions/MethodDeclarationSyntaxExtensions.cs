@@ -17,13 +17,55 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
+
+using System.Linq;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Extensions
 {
     internal static class MethodDeclarationSyntaxExtensions
     {
+        /// <summary>
+        /// Returns true if the method throws exceptions or returns null.
+        /// </summary>
+        public static bool ThrowsOrReturnsNull(this MethodDeclarationSyntax syntaxNode) =>
+            syntaxNode.DescendantNodes().OfType<ThrowStatementSyntax>().Any() ||
+            syntaxNode.DescendantNodes().OfType<ExpressionSyntax>().Any(expression => expression.IsKind(SyntaxKindEx.ThrowExpression)) ||
+            syntaxNode.DescendantNodes().OfType<ReturnStatementSyntax>().Any(returnStatement => returnStatement.Expression.IsKind(SyntaxKind.NullLiteralExpression)) ||
+            // For simplicity this returns true for any method witch contains a NullLiteralExpression but this could be a source of FNs
+            syntaxNode.DescendantNodes().OfType<ExpressionSyntax>().Any(expression => expression.IsKind(SyntaxKind.NullLiteralExpression));
+
+        public static bool IsExtensionMethod(this BaseMethodDeclarationSyntax methodDeclaration) =>
+            methodDeclaration.ParameterList.Parameters.Count > 0
+            && methodDeclaration.ParameterList.Parameters[0].Modifiers.Any(s => s.ValueText == "this");
+
         public static bool HasReturnTypeVoid(this MethodDeclarationSyntax methodDeclaration) =>
             methodDeclaration.ReturnType.ToString() == "void";
+
+        public static bool IsDeconstructor(this MethodDeclarationSyntax methodDeclaration)
+        {
+            var parameterList = methodDeclaration.ParameterList;
+            var parametersCount = methodDeclaration.ParameterList.Parameters.Count;
+            return  methodDeclaration.HasReturnTypeVoid()
+                    && methodDeclaration.Identifier.Value.Equals("Deconstruct")
+                    && ((methodDeclaration.Modifiers.Count == 1 && methodDeclaration.Modifiers.Any(SyntaxKind.PublicKeyword) && CountOfOutParameters(parameterList) == parametersCount)
+                         || (methodDeclaration.IsExtensionMethod() && CountOfOutParameters(parameterList) == parametersCount - 1));
+        }
+
+        private static int CountOfOutParameters(ParameterListSyntax parameteres)
+        {
+            var outParametersCount = 0;
+            foreach (var param in parameteres.Parameters)
+            {
+                if (param.Modifiers.Any(x => x.IsKind(SyntaxKind.OutKeyword)))
+                {
+                    outParametersCount++;
+                }
+            }
+            return outParametersCount;
+        }
     }
 }
