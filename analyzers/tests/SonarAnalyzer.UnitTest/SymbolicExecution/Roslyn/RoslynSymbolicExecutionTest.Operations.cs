@@ -624,22 +624,32 @@ Tag(""AfterInt"", ArgInt)";
         public void Literal_Default_ForGenericType()
         {
             const string code = @"
-public void Main<TClass, TStruct, TUnknown, TType, TInterface>(TClass argClass, TStruct argStruct, TUnknown argUnknown, TType argType, TInterface argInterface)
+public void Main<TClass, TStruct, TUnknown, TType, TInterface, TUnmanaged, TEnum, TDelegate>
+    (TClass argClass, TStruct argStruct, TUnknown argUnknown, TType argType, TInterface argInterface, TUnmanaged argUnmanaged, TEnum argEnum, TDelegate argDelegate)
     where TClass : class
     where TStruct: struct
     where TType : EventArgs
     where TInterface : IDisposable
+    where TUnmanaged : unmanaged
+    where TEnum : Enum
+    where TDelegate : Delegate
 {
     argClass = default;
     argStruct = default;
     argUnknown = default;
     argType = default;
     argInterface = default;
+    argUnmanaged = default;
+    argEnum = default;
+    argDelegate = default;
     Tag(""Class"", argClass);
     Tag(""Struct"", argStruct);
     Tag(""Unknown"", argUnknown);
     Tag(""Type"", argType);
     Tag(""Interface"", argInterface);
+    Tag(""Unmanaged"", argUnmanaged);
+    Tag(""Enum"", argEnum);
+    Tag(""Delegate"", argDelegate);
 }";
             var validator = SETestContext.CreateCSMethod(code).Validator;
             validator.ValidateContainsOperation(OperationKind.Literal);
@@ -648,6 +658,22 @@ public void Main<TClass, TStruct, TUnknown, TType, TInterface>(TClass argClass, 
             validator.ValidateTag("Unknown", x => x.Should().BeNull("it can be struct."));
             validator.ValidateTag("Type", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
             validator.ValidateTag("Interface", x => x.Should().BeNull("interfaces can be implemented by a struct."));
+            validator.ValidateTag("Unmanaged", x => x.Should().BeNull("unmanaged cannot be null."));
+            validator.ValidateTag("Enum", x => x.Should().BeNull("unmanaged cannot be null."));
+            validator.ValidateTag("Delegate", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void Literal_Default_ConversionsFromAnotherType()
+        {
+            const string code = @"
+object o = default(Exception);
+int i = default(byte);
+Tag(""ObjectFromException"", o);
+Tag(""IntegerFromByte"", i);";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("ObjectFromException", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("IntegerFromByte", x => x.Should().BeNull());
         }
 
         [TestMethod]
