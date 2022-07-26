@@ -283,38 +283,29 @@ namespace SonarAnalyzer.Rules.CSharp
             return true;
         }
 
-        private static bool AreCandidateInvocations(ExpressionSyntax expression1,
-                                                    ExpressionSyntax expression2,
+        private static bool AreCandidateInvocations(ExpressionSyntax firstExpression,
+                                                    ExpressionSyntax secondExpression,
                                                     SyntaxNode comparedToNull,
                                                     SemanticModel semanticModel,
                                                     bool comparedIsNullInTrue)
         {
-            if (!(expression1 is InvocationExpressionSyntax methodCall1) || !(expression2 is InvocationExpressionSyntax methodCall2))
-            {
-                return false;
-            }
-
-            var methodSymbol1 = semanticModel.GetSymbolInfo(methodCall1).Symbol;
-            var methodSymbol2 = semanticModel.GetSymbolInfo(methodCall2).Symbol;
-
-            if (methodSymbol1 == null || methodSymbol2 == null || !methodSymbol1.Equals(methodSymbol2))
-            {
-                return false;
-            }
-
-            if (methodCall1.ArgumentList == null
-                || methodCall2.ArgumentList == null
-                || methodCall1.ArgumentList.Arguments.Count != methodCall2.ArgumentList.Arguments.Count)
+            if (firstExpression is not InvocationExpressionSyntax firstInvocation
+                || secondExpression is not InvocationExpressionSyntax secondInvocation
+                || firstInvocation.ArgumentList.Arguments.Count != secondInvocation.ArgumentList.Arguments.Count
+                || !CSharpEquivalenceChecker.AreEquivalent(firstInvocation.Expression, secondInvocation.Expression)
+                || semanticModel.GetSymbolInfo(firstInvocation).Symbol is not { } firstSymbol
+                || semanticModel.GetSymbolInfo(secondInvocation).Symbol is not { } secondSymbol
+                || !firstSymbol.Equals(secondSymbol))
             {
                 return false;
             }
 
             var numberOfDifferences = 0;
             var numberOfComparisonsToCondition = 0;
-            for (var i = 0; i < methodCall1.ArgumentList.Arguments.Count; i++)
+            for (var i = 0; i < firstInvocation.ArgumentList.Arguments.Count; i++)
             {
-                var arg1 = methodCall1.ArgumentList.Arguments[i]?.Expression.RemoveParentheses();
-                var arg2 = methodCall2.ArgumentList.Arguments[i]?.Expression.RemoveParentheses();
+                var arg1 = firstInvocation.ArgumentList.Arguments[i].Expression.RemoveParentheses();
+                var arg2 = secondInvocation.ArgumentList.Arguments[i].Expression.RemoveParentheses();
                 if (!CSharpEquivalenceChecker.AreEquivalent(arg1, arg2))
                 {
                     numberOfDifferences++;

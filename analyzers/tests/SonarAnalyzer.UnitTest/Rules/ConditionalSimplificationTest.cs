@@ -66,7 +66,15 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void ConditionalSimplification_FromCSharp10() =>
-            builder.AddPaths("ConditionalSimplification.FromCSharp10.cs").WithTopLevelStatements().WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            builder.AddPaths("ConditionalSimplification.FromCSharp10.cs")
+                .WithTopLevelStatements()
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .AddReferences(NuGetMetadataReference.FluentAssertions(Constants.NuGetLatestVersion))
+                .AddReferences(MetadataReferenceFacade.SystemData)
+                .AddReferences(MetadataReferenceFacade.SystemNetHttp)
+                .AddReferences(MetadataReferenceFacade.SystemXml)
+                .AddReferences(MetadataReferenceFacade.SystemXmlLinq)
+                .Verify();
 
         [TestMethod]
         public void ConditionalSimplification_FromCSharp9_CodeFix() =>
@@ -81,6 +89,11 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithCodeFixedPaths("ConditionalSimplification.FromCSharp10.Fixed.cs")
                 .WithTopLevelStatements()
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .AddReferences(NuGetMetadataReference.FluentAssertions(Constants.NuGetLatestVersion))
+                .AddReferences(MetadataReferenceFacade.SystemData)
+                .AddReferences(MetadataReferenceFacade.SystemNetHttp)
+                .AddReferences(MetadataReferenceFacade.SystemXml)
+                .AddReferences(MetadataReferenceFacade.SystemXmlLinq)
                 .VerifyCodeFix();
 
 #endif

@@ -1,12 +1,22 @@
 ﻿using System;
 
 Apple a = null, b = null;
+int c = 42;
 bool condition = false;
 
 a ??= b; // Fixed
 a ??= b; // Fixed
 
 Apple x;
+if (a is not null) // Compliant
+{
+    x = a;
+}
+else
+{
+    x = c; // Error [CS0128]
+}
+
 x = a ?? b;
 
 x = a ?? b;

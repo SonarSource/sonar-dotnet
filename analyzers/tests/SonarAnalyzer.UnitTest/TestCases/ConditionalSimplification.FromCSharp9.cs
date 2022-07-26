@@ -1,12 +1,22 @@
 ﻿using System;
 
 Apple a = null, b = null;
+int c = 42;
 bool condition = false;
 
 a = a is not null ? (a) : b; // Noncompliant a ??= b;
 a = a is null ? (b) : a; // Noncompliant a ??= b;
 
 Apple x;
+if (a is not null) // Compliant
+{
+    x = a;
+}
+else
+{
+    x = c; // Error [CS0128]
+}
+
 if (a is not null) // Noncompliant {{Use the '??' operator here.}}
 {
     x = a;
