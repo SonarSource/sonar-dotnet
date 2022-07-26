@@ -25,6 +25,7 @@ using System.Threading;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.CFG.Roslyn;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
@@ -36,6 +37,11 @@ namespace SonarAnalyzer.Rules
         protected abstract ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules { get; }
         protected abstract ControlFlowGraph CreateCfg(SemanticModel model, SyntaxNode node, CancellationToken cancel);
         protected abstract void AnalyzeSonar(SyntaxNodeAnalysisContext context, bool isTestProject, bool isScannerRun, SyntaxNode body, ISymbol symbol);
+
+        protected IAnalyzerConfiguration Configuration { get; }
+
+        private protected /* for testing */ SymbolicExecutionRunnerBase(IAnalyzerConfiguration configuration) =>
+            Configuration = configuration;
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => AllRules.Keys.ToImmutableArray();
         protected override bool EnableConcurrentExecution => false;
@@ -63,7 +69,7 @@ namespace SonarAnalyzer.Rules
                 var isTestProject = sonarContext.IsTestProject(nodeContext.Compilation, nodeContext.Options);
                 var isScannerRun = sonarContext.IsScannerRun(nodeContext.Options);
                 AnalyzeSonar(nodeContext, isTestProject, isScannerRun, body, symbol);
-                if (ControlFlowGraph.IsAvailable)   // ToDo: Make this configurable for UTs when migrating other rules, see DeadStores
+                if (ControlFlowGraph.IsAvailable)
                 {
                     AnalyzeRoslyn(sonarContext, nodeContext, isTestProject, isScannerRun, body, symbol);
                 }

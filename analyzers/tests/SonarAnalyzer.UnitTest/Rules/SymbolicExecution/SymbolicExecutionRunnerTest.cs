@@ -444,6 +444,8 @@ End Class";
 
         private class TestSERunnerCS : CS.SymbolicExecutionRunner
         {
+            public TestSERunnerCS() : base(AnalyzerConfiguration.AlwaysEnabled) { }
+
             protected override ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules => ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
                 .Add(BinaryRuleCheck.SBinary, CreateFactory<BinaryRuleCheck>())
                 .Add(AllScopeAssignmentRuleCheck.SAll, CreateFactory<AllScopeAssignmentRuleCheck>())
@@ -463,6 +465,8 @@ End Class";
         private class ConfigurableSERunnerCS : CS.SymbolicExecutionRunner
         {
             private ImmutableDictionary<DiagnosticDescriptor, RuleFactory> allRules = ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty;
+
+            public ConfigurableSERunnerCS() : base(AnalyzerConfiguration.AlwaysEnabled) { }
 
             protected override ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules => allRules;
 
