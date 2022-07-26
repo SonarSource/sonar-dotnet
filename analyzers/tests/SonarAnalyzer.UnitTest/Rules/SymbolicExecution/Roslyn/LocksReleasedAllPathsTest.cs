@@ -28,9 +28,8 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class LocksReleasedAllPathsTest
     {
-        private readonly VerifierBuilder builderCS = CreateVerifier(() =>
-            new CS.SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabled), Checks.CSharp.LocksReleasedAllPaths.S2222)
-            .WithOptions(ParseOptionsHelper.FromCSharp8);
+        private readonly VerifierBuilder builderCS = CreateVerifier(() => new CS.SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabled), Checks.CSharp.LocksReleasedAllPaths.S2222)
+                                                        .WithOptions(ParseOptionsHelper.FromCSharp8);
         private readonly VerifierBuilder builderVB = CreateVerifier(() => new VB.SymbolicExecutionRunner(), Checks.VisualBasic.LocksReleasedAllPaths.S2222);
 
         [TestMethod]

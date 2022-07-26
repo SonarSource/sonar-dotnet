@@ -35,9 +35,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
     {
-        public SymbolicExecutionRunner() : base(AnalyzerConfiguration.AlwaysEnabled)
-        {
-        }
+        public SymbolicExecutionRunner() : base(AnalyzerConfiguration.AlwaysEnabled) { }
 
         protected override ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules { get; } = ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
             .Add(LocksReleasedAllPaths.S2222, CreateFactory<LocksReleasedAllPaths>());
