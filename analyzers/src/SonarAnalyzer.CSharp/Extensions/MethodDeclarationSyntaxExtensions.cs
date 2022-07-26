@@ -26,7 +26,7 @@ using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Extensions
 {
-    internal static class MethodDeclarationSyntaxExtensions
+    internal static class MethodDeclarationExtensions
     {
         /// <summary>
         /// Returns true if the method throws exceptions or returns null.
@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Extensions
             && methodDeclaration.ParameterList.Parameters[0].Modifiers.Any(s => s.ValueText == "this");
 
         public static bool HasReturnTypeVoid(this MethodDeclarationSyntax methodDeclaration) =>
-            methodDeclaration.ReturnType.ToString() == "void";
+            methodDeclaration.ReturnType is PredefinedTypeSyntax { Keyword: { RawKind: (int)SyntaxKind.VoidKeyword } };
 
         public static bool IsDeconstructor(this MethodDeclarationSyntax methodDeclaration)
         {
