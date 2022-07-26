@@ -43,7 +43,7 @@ In general, it is best to run commands from the Visual Studio Developer Command 
         - [*System*] the path to the visual studo installer folder (for vswhere.exe) (`C:\Program Files (x86)\Microsoft Visual Studio\Installer`)
         - [*System*] the path to the nuget executable folder (`C:\Program Files\nuget`)
         - [*System*] the path to the JDK bin folder (`C:\Program Files\Java\jdk-11.0.2\bin`)
-        - [*System*] %M2_HOME%\bin (`C:\Program Files\JetBrains\IntelliJ IDEA\plugins\maven\lib\maven3\bin`)
+        - [*System*] %M2_HOME%\bin (`C:\Program Files\JetBrains\IntelliJ IDEA\plugins\maven\lib\maven3\bin` [Maven cli](https://maven.apache.org/install.html). Here installed via IntelliJ IDEA.)
         - [*System*] the path to the SonarScanner for .NET folder and to the Scanner CLI ([SonarScanner download](https://github.com/SonarSource/sonar-scanner-msbuild/releases))
 1. Open `analyzers/SonarAnalyzer.sln`
 
@@ -128,7 +128,7 @@ After the debug session, remove the `Debugger.Launch()` line.
   * Follow the [Code Style Configuration for Intellij](https://github.com/SonarSource/sonar-developer-toolset#code-style-configuration-for-intellij) instructions
   * Open the root folder of the repo
   * Make sure the `its`, `sonar-csharp-plugin`, `sonar-dotnet-shared-library`, and `sonar-vbnet-plugin` folders are are imported as Maven modules (indicated by a blue square). Search for `pom.xml` in the folders and make it a maven project if not.
-* Add the following environment variables (user)
+* Add the following environment variables (*user* scope)
   * **ARTIFACTORY_URL** https://repox.jfrog.io/repox
   * **ARTIFACTORY_USER** your repox.jfrog username (see e.g. orchestrator.properties)
   * **ARTIFACTORY_PASSWORD** the api key for repox.jfrog (see e.g. orchestrator.properties)
