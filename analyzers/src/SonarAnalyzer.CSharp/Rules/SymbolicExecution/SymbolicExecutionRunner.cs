@@ -117,7 +117,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void AnalyzeSonar(SyntaxNodeAnalysisContext context, bool isTestProject, bool isScannerRun, SyntaxNode body, ISymbol symbol)
         {
             var enabledAnalyzers = SonarRules.Where(x => x.SupportedDiagnostics.Any(descriptor => IsEnabled(context, isTestProject, isScannerRun, descriptor))).ToArray();
-            if (!Configuration.ForceSonarCfg)
+            if (!Configuration.ForceSonarCfg) // ToDo: Will be removed in RuleFactory PR
             {
                 enabledAnalyzers = enabledAnalyzers.Where(x => !x.SupportedDiagnostics.Any(descriptor => AllRules.Keys.Any(dd => descriptor.Id == dd.Id))).ToArray();
             }
