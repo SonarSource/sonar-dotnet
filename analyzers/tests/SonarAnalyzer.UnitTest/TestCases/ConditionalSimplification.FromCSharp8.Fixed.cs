@@ -104,7 +104,36 @@ namespace Tests.TestCases
             }
 
             elem = false ? null : (null);
+
+            if (condition)
+            {
+                Undefined(new object());    // Error [CS0103]: The name 'Undefined' does not exist in the current context
+            }
+            else
+            {
+                Undefined(y);               // Error [CS0103]: The name 'Undefined' does not exist in the current context
+            }
+
+            if (condition)
+            {
+                WithIntArg(42);
+            }
+            else
+            {
+                WithIntArg(new object());   // Error [CS1503]: Argument 1: cannot convert from 'object' to 'int'
+            }
+
+            if (condition)
+            {
+                Identity(new object());
+            }
+            else
+            {
+                x = null;
+            }
         }
+
+        object WithIntArg(int arg) => null;
 
         object IsNull1(object a, object b)
         {
