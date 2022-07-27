@@ -23,6 +23,7 @@ using SonarAnalyzer.Rules;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 using CS = SonarAnalyzer.Rules.CSharp;
+using CSRoslyn = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -444,10 +445,11 @@ End Class";
 
         private class TestSERunnerCS : CS.SymbolicExecutionRunner
         {
-            public TestSERunnerCS() : base(AnalyzerConfiguration.AlwaysEnabled) { }
+            public TestSERunnerCS() : base(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg) { }
 
             protected override ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules => ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
                 .Add(BinaryRuleCheck.SBinary, CreateFactory<BinaryRuleCheck>())
+                .Add(CSRoslyn.NullPointerDereference.S2259, CreateFactory<CSRoslyn.NullPointerDereference, CS.NullPointerDereference>())
                 .Add(AllScopeAssignmentRuleCheck.SAll, CreateFactory<AllScopeAssignmentRuleCheck>())
                 .Add(MainScopeAssignmentRuleCheck.SMain, CreateFactory<MainScopeAssignmentRuleCheck>())
                 .Add(TestScopeAssignmentRuleCheck.STest, CreateFactory<TestScopeAssignmentRuleCheck>());

@@ -37,7 +37,6 @@ namespace SonarAnalyzer.Rules.CSharp
             new SonarRules.EmptyCollectionsShouldNotBeEnumerated(),
             new SonarRules.ConditionEvaluatesToConstant(),
             new SonarRules.InvalidCastToInterfaceSymbolicExecution(),
-            new SonarRules.NullPointerDereference(),
             new SonarRules.RestrictDeserializedTypes(),
             new SonarRules.InitializationVectorShouldBeRandom(),
             new SonarRules.HashesShouldHaveUnpredictableSalt());
@@ -97,11 +96,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void AnalyzeSonar(SyntaxNodeAnalysisContext context, bool isTestProject, bool isScannerRun, SyntaxNode body, ISymbol symbol)
         {
-            var enabledAnalyzers = SonarRules.Where(x => x.SupportedDiagnostics.Any(descriptor => IsEnabled(context, isTestProject, isScannerRun, descriptor))).ToArray();
-            if (!Configuration.ForceSonarCfg) // ToDo: Will be removed in RuleFactory PR
-            {
-                enabledAnalyzers = enabledAnalyzers.Where(x => !x.SupportedDiagnostics.Any(descriptor => AllRules.Keys.Any(dd => descriptor.Id == dd.Id))).ToArray();
-            }
+            var allSonarRules = Configuration.ForceSonarCfg
+                ? SonarRules.Union(AllRules
+                    .Select(x => x.Value.CreateSonarFallback())
+                    .OfType<ISymbolicExecutionAnalyzer>())
+                : SonarRules;
+            var enabledAnalyzers = allSonarRules.Where(x => x.SupportedDiagnostics.Any(descriptor => IsEnabled(context, isTestProject, isScannerRun, descriptor))).ToList();
             if (enabledAnalyzers.Any() && CSharpControlFlowGraph.TryGet((CSharpSyntaxNode)body, context.SemanticModel, out var cfg))
             {
                 var lva = new SonarCSharpLiveVariableAnalysis(cfg, symbol, context.SemanticModel, context.CancellationToken);
