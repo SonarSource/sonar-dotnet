@@ -49,6 +49,9 @@ namespace SonarAnalyzer.Rules
         protected static RuleFactory CreateFactory<TRuleCheck>() where TRuleCheck : SymbolicRuleCheck, new() =>
             new RuleFactory<TRuleCheck>();
 
+        protected static RuleFactory CreateFactory<TRuleCheck, TSonarAnalyzer>(TSonarAnalyzer sonarFallback) where TRuleCheck : SymbolicRuleCheck, new() =>
+            new RuleFactory<TRuleCheck>();
+
         // We need to rewrite this https://github.com/SonarSource/sonar-dotnet/issues/4824
         protected static bool IsEnabled(SyntaxNodeAnalysisContext context, bool isTestProject, bool isScannerRun, DiagnosticDescriptor descriptor) =>
             SonarAnalysisContext.IsAnalysisScopeMatching(context.Compilation, isTestProject, isScannerRun, new[] { descriptor })
