@@ -95,7 +95,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             private readonly SemanticModel model;
             private readonly CancellationToken cancel;
-            private List<Location> invalidInvocations = new();
+            private readonly List<Location> invalidInvocations = new();
 
             public bool HasValidLoggerCall { get; private set; }
             public IEnumerable<Location> InvalidLoggerInvocationLocations => invalidInvocations;
