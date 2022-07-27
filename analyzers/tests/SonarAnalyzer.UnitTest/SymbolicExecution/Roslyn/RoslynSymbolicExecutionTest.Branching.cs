@@ -572,5 +572,43 @@ Tag(""End"");";
             var check = new ConditionEvaluatedTestCheck(x => x.State[x.Operation].HasConstraint(BoolConstraint.True) ? null : x.State);
             SETestContext.CreateCS(code, check).Validator.ValidateTagOrder("Begin", "End");
         }
+
+        [TestMethod]
+        public void Branching_NullConstraints_VisitsIfBranch()
+        {
+            const string code = @"
+object value = null;
+if (value == null)
+{
+    Tag(""If"");
+}
+else
+{
+    Tag(""Else"");
+}
+Tag(""End"");";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+                "If",
+                "End");
+        }
+
+        [TestMethod]
+        public void Branching_NotNullConstraints_VisitsElseBranch()
+        {
+            const string code = @"
+var value = new Object();
+if (value == null)
+{
+    Tag(""If"");
+}
+else
+{
+    Tag(""Else"");
+}
+Tag(""End"");";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+                "Else",
+                "End");
+        }
     }
 }
