@@ -27,5 +27,5 @@ namespace SonarAnalyzer.Helpers;
 public static class DiagnosticFactory
 {
     public static Diagnostic Create(DiagnosticDescriptor descriptor, Compilation compilation, Location location, IEnumerable<Location> additionalLocations, params object[] messageArgs) =>
-        Diagnostic.Create(descriptor, location, additionalLocations.Where(x => compilation.ContainsSyntaxTree(x.SourceTree.GetRoot()?.SyntaxTree)), messageArgs);
+        Diagnostic.Create(descriptor, location, additionalLocations?.Where(x => compilation.ContainsSyntaxTree(x.SourceTree.GetRoot()?.SyntaxTree)), messageArgs);
 }
