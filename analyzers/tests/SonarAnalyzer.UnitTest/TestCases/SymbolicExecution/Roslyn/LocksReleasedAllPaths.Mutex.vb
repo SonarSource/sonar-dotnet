@@ -197,7 +197,7 @@ Namespace Mutex_Type
             Try
                 M = Mutex.OpenExisting(MutexName)
                 If ShouldAcquire Then
-                    M.WaitOne()     ' Noncompliant FP because we don't track the bool condition
+                    M.WaitOne()     ' Compliant, depends on tracking Null constraint for 'm'
                     Acquired = True
                 End If
             Catch ex As UnauthorizedAccessException
