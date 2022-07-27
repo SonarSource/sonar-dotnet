@@ -37,5 +37,8 @@ namespace SonarAnalyzer.Helpers
 
         public static bool IsTopLevelMain(this ISymbol symbol) =>
             symbol is IMethodSymbol { Name: TopLevelStatements.MainMethodImplicitName };
+
+        public static bool IsGlobalNamespace(this ISymbol symbol) =>
+            symbol is INamespaceSymbol { Name: "" };
     }
 }

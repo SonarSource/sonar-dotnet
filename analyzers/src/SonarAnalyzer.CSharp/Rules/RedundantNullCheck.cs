@@ -42,21 +42,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                CheckAndExpression,
-                SyntaxKind.LogicalAndExpression);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                CheckOrExpression,
-                SyntaxKind.LogicalOrExpression);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                CheckAndPattern,
-                SyntaxKindEx.AndPattern);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                CheckOrPattern,
-                SyntaxKindEx.OrPattern);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckAndExpression, SyntaxKind.LogicalAndExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckOrExpression, SyntaxKind.LogicalOrExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckAndPattern, SyntaxKindEx.AndPattern);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckOrPattern, SyntaxKindEx.OrPattern);
         }
 
         protected override SyntaxNode GetLeftNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Left.RemoveParentheses();
