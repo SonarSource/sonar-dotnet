@@ -67,7 +67,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
             isNullLeft || isNullRight
                 ? kind switch
                 {
-                    BinaryOperatorKind.Equals => BoolConstraint.From(isNullLeft && isNullRight),
+                    BinaryOperatorKind.Equals or BinaryOperatorKind.ObjectValueEquals => BoolConstraint.From(isNullLeft && isNullRight),
                     _ => null
                 }
                 : null;

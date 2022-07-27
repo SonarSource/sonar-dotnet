@@ -356,8 +356,8 @@ Tag(""EqualsUnknown"", EqualsUnknown)";
             validator.ValidateTag("IsTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
             validator.ValidateTag("IsFalse", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
             validator.ValidateTag("IsUnknown", x => x.Should().BeNull());
-            validator.ValidateTag("EqualsTrue", x => x.Should().BeNull());  // FIXME: x.HasConstraint(BoolConstraint.True).Should().BeTrue());
-            validator.ValidateTag("EqualsFalse", x => x.Should().BeNull()); // FIXME: x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+            validator.ValidateTag("EqualsTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+            validator.ValidateTag("EqualsFalse", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
             validator.ValidateTag("EqualsUnknown", x => x.Should().BeNull());
         }
 
