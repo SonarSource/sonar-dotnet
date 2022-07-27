@@ -27,7 +27,7 @@ namespace SonarAnalyzer.Extensions
     internal static class SyntaxNodeAnalysisContextExtensions
     {
         /// <summary>
-        /// Roslyn invokes the analzyer twice for positional records. The first invocation is for the class declaration and the second for the ctor represented by the positional parameter list.
+        /// Roslyn invokes the analyzer twice for positional records. The first invocation is for the class declaration and the second for the ctor represented by the positional parameter list.
         /// </summary>
         /// <returns>
         /// Returns <see langword="true"/> for the invocation on the class declaration and <see langword="false"/> for the ctor invocation.

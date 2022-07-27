@@ -61,6 +61,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override bool IsExcludedFromBeingExamined(SyntaxNodeAnalysisContext context) =>
             base.IsExcludedFromBeingExamined(context)
-            && !(context.Node is CompilationUnitSyntax compilationUnit && compilationUnit.IsTopLevelMain());
+            && !context.IsTopLevelMain();
     }
 }

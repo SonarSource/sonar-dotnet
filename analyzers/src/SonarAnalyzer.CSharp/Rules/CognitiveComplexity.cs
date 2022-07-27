@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    if (((CompilationUnitSyntax)c.Node).IsTopLevelMain())
+                    if (c.IsTopLevelMain())
                     {
                         CheckComplexity<CompilationUnitSyntax>(
                             c,
