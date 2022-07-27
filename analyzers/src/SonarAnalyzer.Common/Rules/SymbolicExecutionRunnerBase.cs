@@ -49,8 +49,10 @@ namespace SonarAnalyzer.Rules
         protected static RuleFactory CreateFactory<TRuleCheck>() where TRuleCheck : SymbolicRuleCheck, new() =>
             new RuleFactory<TRuleCheck>();
 
-        protected static RuleFactory CreateFactory<TRuleCheck, TSonarAnalyzer>(TSonarAnalyzer sonarFallback) where TRuleCheck : SymbolicRuleCheck, new() =>
-            new RuleFactory<TRuleCheck>();
+        protected static RuleFactory CreateFactory<TRuleCheck, TSonarFallback>()
+            where TRuleCheck : SymbolicRuleCheck, new()
+            where TSonarFallback : new() =>
+            new RuleFactory<TRuleCheck, TSonarFallback>();
 
         // We need to rewrite this https://github.com/SonarSource/sonar-dotnet/issues/4824
         protected static bool IsEnabled(SyntaxNodeAnalysisContext context, bool isTestProject, bool isScannerRun, DiagnosticDescriptor descriptor) =>
@@ -106,13 +108,16 @@ namespace SonarAnalyzer.Rules
 
         protected class RuleFactory
         {
-            public Type Type { get; }
             private readonly Func<SymbolicRuleCheck> createInstance;
+            private readonly Lazy<object> sonarFallbackFactory;
 
-            protected RuleFactory(Type type, Func<SymbolicRuleCheck> createInstance)
+            public Type Type { get; }
+
+            protected RuleFactory(Type type, Func<SymbolicRuleCheck> createInstance, Func<object> sonarFallbackFactory)
             {
                 Type = type;
                 this.createInstance = createInstance;
+                this.sonarFallbackFactory = new Lazy<object>(sonarFallbackFactory);
             }
 
             public SymbolicRuleCheck CreateInstance(SonarAnalysisContext sonarContext, SyntaxNodeAnalysisContext nodeContext)
@@ -121,12 +126,21 @@ namespace SonarAnalyzer.Rules
                 ret.Init(sonarContext, nodeContext);
                 return ret;
             }
+            public object GetSonar() => sonarFallbackFactory.Value;
         }
 
-        private sealed class RuleFactory<TCheck> : RuleFactory
+        protected class RuleFactory<TCheck> : RuleFactory
             where TCheck : SymbolicRuleCheck, new()
         {
-            public RuleFactory() : base(typeof(TCheck), () => new TCheck()) { }
+            public RuleFactory() : this(() => null) { }
+            public RuleFactory(Func<object> sonarFallbackFactory) : base(typeof(TCheck), () => new TCheck(), sonarFallbackFactory) { }
+        }
+
+        protected class RuleFactory<TCheck, TSonarFallback> : RuleFactory<TCheck>
+            where TCheck : SymbolicRuleCheck, new()
+            where TSonarFallback : new()
+        {
+            public RuleFactory() : base(() => new TSonarFallback()) { }
         }
     }
 }

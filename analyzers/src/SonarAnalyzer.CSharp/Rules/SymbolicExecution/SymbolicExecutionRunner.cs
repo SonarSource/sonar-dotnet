@@ -20,23 +20,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.CFG.Roslyn;
-using SonarAnalyzer.CFG.Sonar;
-using SonarAnalyzer.Common;
-using SonarAnalyzer.Extensions;
-using SonarAnalyzer.Helpers;
-using SonarAnalyzer.LiveVariableAnalysis.CSharp;
-using SonarAnalyzer.SymbolicExecution;
-using SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
-using SonarAnalyzer.SymbolicExecution.Sonar;
-using StyleCop.Analyzers.Lightup;
 using SonarRules = SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -63,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules { get; } = ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
             .Add(LocksReleasedAllPaths.S2222, CreateFactory<LocksReleasedAllPaths>())
-            .Add(NullPointerDereference.S2259, CreateFactory<NullPointerDereference>());
+            .Add(NullPointerDereference.S2259, CreateFactory<NullPointerDereference, SonarRules.NullPointerDereference>());
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => base.SupportedDiagnostics.Concat(SonarRules.SelectMany(x => x.SupportedDiagnostics)).ToImmutableArray();
 
