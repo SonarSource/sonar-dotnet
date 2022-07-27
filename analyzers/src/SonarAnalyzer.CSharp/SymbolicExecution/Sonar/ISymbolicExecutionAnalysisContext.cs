@@ -20,34 +20,20 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 
-namespace SonarAnalyzer.Rules.SymbolicExecution
+namespace SonarAnalyzer.SymbolicExecution.Sonar
 {
-    internal abstract class DefaultAnalysisContext<T> : ISymbolicExecutionAnalysisContext
+    // The implementing class is responsible to encapsulate the generated data during method analysis (like diagnostics
+    // or cached nodes) and clear it and the end.
+    public interface ISymbolicExecutionAnalysisContext : IDisposable
     {
-        private readonly List<T> locations = new List<T>();
+        // Some of the rules can return good results even if the tree was only partially visited; others need to completely
+        // walk the tree in order to avoid false positives.
+        // After the exploded graph was visited, a context could get in a state with partial results if a maximum number
+        // of steps was reached or an exception was thrown during analysis.
+        bool SupportsPartialResults { get; }
 
-        protected abstract Diagnostic CreateDiagnostic(T location);
-
-        public bool SupportsPartialResults => false;
-
-        public IEnumerable<Diagnostic> GetDiagnostics() =>
-            locations.Distinct().Select(CreateDiagnostic);
-
-        public void AddLocation(T location) =>
-            locations.Add(location);
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            // Nothing to do here
-        }
+        IEnumerable<Diagnostic> GetDiagnostics();
     }
 }

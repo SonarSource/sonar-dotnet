@@ -26,11 +26,10 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.SymbolicExecution.Sonar;
 using SonarAnalyzer.SymbolicExecution.Sonar.Checks;
 using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
 
-namespace SonarAnalyzer.Rules.SymbolicExecution
+namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
 {
     internal sealed class InitializationVectorShouldBeRandom : ISymbolicExecutionAnalyzer
     {
@@ -79,7 +78,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
             private ProgramState InvocationExpressionPostProcess(InvocationExpressionSyntax invocation, ProgramState programState)
             {
                 if (IsSymmetricAlgorithmGenerateIVMethod(invocation, semanticModel)
-                    && GetSymbolicValue(invocation, programState) is {} ivSymbolicValue)
+                    && GetSymbolicValue(invocation, programState) is { } ivSymbolicValue)
                 {
                     programState = programState.SetConstraint(ivSymbolicValue, InitializationVectorConstraint.Initialized);
                 }
@@ -90,8 +89,8 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
             private ProgramState AssignmentExpressionPostProcess(AssignmentExpressionSyntax assignment, ProgramState programState) =>
                 assignment.Left is MemberAccessExpressionSyntax memberAccess
                 && IsSymmetricAlgorithmIVMemberAccess(memberAccess)
-                && GetSymbolicValue(memberAccess.Expression, programState) is {} leftSymbolicValue
-                && GetSymbolicValue(assignment.Right, programState) is {} rightSymbolicValue
+                && GetSymbolicValue(memberAccess.Expression, programState) is { } leftSymbolicValue
+                && GetSymbolicValue(assignment.Right, programState) is { } rightSymbolicValue
                 && programState.HasConstraint(rightSymbolicValue, ByteArrayConstraint.Constant)
                     ? programState.SetConstraint(leftSymbolicValue, InitializationVectorConstraint.NotInitialized)
                     : programState;
@@ -121,9 +120,9 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                 argument.Expression switch
                 {
                     MemberAccessExpressionSyntax memberAccess => memberAccess.NameIs("IV")
-                                                                 && programState.GetSymbolValue(semanticModel.GetSymbolInfo(memberAccess.Expression).Symbol) is {} symbolicValue
+                                                                 && programState.GetSymbolValue(semanticModel.GetSymbolInfo(memberAccess.Expression).Symbol) is { } symbolicValue
                                                                  && HasNotInitializedIVConstraint(symbolicValue, programState),
-                    IdentifierNameSyntax identifier => programState.GetSymbolValue(semanticModel.GetSymbolInfo(identifier).Symbol) is {} symbolicValue
+                    IdentifierNameSyntax identifier => programState.GetSymbolValue(semanticModel.GetSymbolInfo(identifier).Symbol) is { } symbolicValue
                                                        && programState.HasConstraint(symbolicValue, ByteArrayConstraint.Constant),
                     ArrayCreationExpressionSyntax _ => true,
                     _ => false
@@ -133,8 +132,8 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                 GetSymbolicValue(((MemberAccessExpressionSyntax)invocation.Expression).Expression, programState);
 
             private SymbolicValue GetSymbolicValue(ExpressionSyntax expression, ProgramState programState) =>
-                semanticModel.GetSymbolInfo(expression).Symbol is {} symbol
-                && programState.GetSymbolValue(symbol) is {} symbolicValue
+                semanticModel.GetSymbolInfo(expression).Symbol is { } symbol
+                && programState.GetSymbolValue(symbol) is { } symbolicValue
                     ? symbolicValue
                     : null;
 

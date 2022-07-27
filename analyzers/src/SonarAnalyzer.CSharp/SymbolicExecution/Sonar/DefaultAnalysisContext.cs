@@ -18,17 +18,36 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.SymbolicExecution.Sonar;
 
-namespace SonarAnalyzer.Rules.SymbolicExecution
+namespace SonarAnalyzer.SymbolicExecution.Sonar
 {
-    internal interface ISymbolicExecutionAnalyzer
+    internal abstract class DefaultAnalysisContext<T> : ISymbolicExecutionAnalysisContext
     {
-        IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; }
+        private readonly List<T> locations = new List<T>();
 
-        ISymbolicExecutionAnalysisContext CreateContext(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context);
+        protected abstract Diagnostic CreateDiagnostic(T location);
+
+        public bool SupportsPartialResults => false;
+
+        public IEnumerable<Diagnostic> GetDiagnostics() =>
+            locations.Distinct().Select(CreateDiagnostic);
+
+        public void AddLocation(T location) =>
+            locations.Add(location);
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            // Nothing to do here
+        }
     }
 }

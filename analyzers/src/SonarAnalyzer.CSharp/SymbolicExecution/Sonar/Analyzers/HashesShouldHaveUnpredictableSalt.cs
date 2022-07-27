@@ -26,11 +26,10 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.SymbolicExecution.Sonar;
 using SonarAnalyzer.SymbolicExecution.Sonar.Checks;
 using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
 
-namespace SonarAnalyzer.Rules.SymbolicExecution
+namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
 {
     internal sealed class HashesShouldHaveUnpredictableSalt : ISymbolicExecutionAnalyzer
     {
@@ -118,12 +117,12 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
 
             private ProgramState ObjectCreationPreProcess(ObjectCreationExpressionSyntax objectCreation, ProgramState programState)
             {
-                if (semanticModel.GetSymbolInfo(objectCreation).Symbol is {} symbol
-                    && symbol.ContainingType is {} symbolType
+                if (semanticModel.GetSymbolInfo(objectCreation).Symbol is { } symbol
+                    && symbol.ContainingType is { } symbolType
                     && symbolType.IsAny(VulnerableTypes)
                     // There are cases when the symbol corresponding to the salt parameter does not exists (e.g. the byte[] is created directly when calling the ctor)
                     // but we should always have a symbolic value for it.
-                    && programState.ExpressionStack.Skip(objectCreation.ArgumentList.Arguments.Count - SaltParameterIndex).FirstOrDefault() is {} symbolicValue)
+                    && programState.ExpressionStack.Skip(objectCreation.ArgumentList.Arguments.Count - SaltParameterIndex).FirstOrDefault() is { } symbolicValue)
                 {
                     if (programState.HasConstraint(symbolicValue, ByteArrayConstraint.Constant))
                     {
@@ -146,8 +145,8 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                 }
 
                 if (arrayCreation.Type.RankSpecifiers.Count == 1
-                    && arrayCreation.Type.RankSpecifiers[0].Sizes[0] is {} rankSpecifierSize
-                    && semanticModel.GetConstantValue(rankSpecifierSize) is {HasValue: true, Value: int size})
+                    && arrayCreation.Type.RankSpecifiers[0].Sizes[0] is { } rankSpecifierSize
+                    && semanticModel.GetConstantValue(rankSpecifierSize) is { HasValue: true, Value: int size })
                 {
                     return size;
                 }

@@ -19,8 +19,9 @@
  */
 
 using SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;
 
-namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
+namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
     public class EmptyCollectionsShouldNotBeEnumeratedTest

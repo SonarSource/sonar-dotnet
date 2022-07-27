@@ -33,11 +33,11 @@ using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.LiveVariableAnalysis.CSharp;
-using SonarAnalyzer.Rules.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution;
+using SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 using SonarAnalyzer.SymbolicExecution.Sonar;
 using StyleCop.Analyzers.Lightup;
-using RuleChecks = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
+using SonarRules = SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -46,24 +46,24 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         // ToDo: This should be migrated to SymbolicExecutionRunnerBase.AllRules.
         private static readonly ImmutableArray<ISymbolicExecutionAnalyzer> SonarRules = ImmutableArray.Create<ISymbolicExecutionAnalyzer>(
-            new EmptyNullableValueAccess(),
-            new ObjectsShouldNotBeDisposedMoreThanOnce(),
-            new PublicMethodArgumentsShouldBeCheckedForNull(),
-            new EmptyCollectionsShouldNotBeEnumerated(),
-            new ConditionEvaluatesToConstant(),
-            new InvalidCastToInterfaceSymbolicExecution(),
-            new NullPointerDereference(),
-            new RestrictDeserializedTypes(),
-            new InitializationVectorShouldBeRandom(),
-            new HashesShouldHaveUnpredictableSalt());
+            new SonarRules.EmptyNullableValueAccess(),
+            new SonarRules.ObjectsShouldNotBeDisposedMoreThanOnce(),
+            new SonarRules.PublicMethodArgumentsShouldBeCheckedForNull(),
+            new SonarRules.EmptyCollectionsShouldNotBeEnumerated(),
+            new SonarRules.ConditionEvaluatesToConstant(),
+            new SonarRules.InvalidCastToInterfaceSymbolicExecution(),
+            new SonarRules.NullPointerDereference(),
+            new SonarRules.RestrictDeserializedTypes(),
+            new SonarRules.InitializationVectorShouldBeRandom(),
+            new SonarRules.HashesShouldHaveUnpredictableSalt());
 
         public SymbolicExecutionRunner() : this(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg) { }
 
         internal /* for testing */ SymbolicExecutionRunner(IAnalyzerConfiguration configuration) : base(configuration) { }
 
         protected override ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules { get; } = ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
-            .Add(RuleChecks.LocksReleasedAllPaths.S2222, CreateFactory<RuleChecks.LocksReleasedAllPaths>())
-            .Add(RuleChecks.NullPointerDereference.S2259, CreateFactory<RuleChecks.NullPointerDereference>());
+            .Add(LocksReleasedAllPaths.S2222, CreateFactory<LocksReleasedAllPaths>())
+            .Add(NullPointerDereference.S2259, CreateFactory<NullPointerDereference>());
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => base.SupportedDiagnostics.Concat(SonarRules.SelectMany(x => x.SupportedDiagnostics)).ToImmutableArray();
 

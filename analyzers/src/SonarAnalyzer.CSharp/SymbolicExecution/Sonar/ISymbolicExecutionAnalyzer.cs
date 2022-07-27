@@ -18,22 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 
-namespace SonarAnalyzer.Rules.SymbolicExecution
+namespace SonarAnalyzer.SymbolicExecution.Sonar
 {
-    // The implementing class is responsible to encapsulate the generated data during method analysis (like diagnostics
-    // or cached nodes) and clear it and the end.
-    public interface ISymbolicExecutionAnalysisContext : IDisposable
+    internal interface ISymbolicExecutionAnalyzer
     {
-        // Some of the rules can return good results even if the tree was only partially visited; others need to completely
-        // walk the tree in order to avoid false positives.
-        // After the exploded graph was visited, a context could get in a state with partial results if a maximum number
-        // of steps was reached or an exception was thrown during analysis.
-        bool SupportsPartialResults { get; }
+        IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; }
 
-        IEnumerable<Diagnostic> GetDiagnostics();
+        ISymbolicExecutionAnalysisContext CreateContext(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context);
     }
 }
