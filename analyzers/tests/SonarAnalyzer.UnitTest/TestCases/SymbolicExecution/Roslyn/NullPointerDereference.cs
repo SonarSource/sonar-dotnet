@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-
 using X = global::Tests.Diagnostics.NullPointerDereferenceWithFields;
 
 namespace Tests.Diagnostics
@@ -26,8 +25,8 @@ namespace Tests.Diagnostics
             object o = null;
             if (condition)
             {
-                M1(o.ToString()); // FIXME Non-compliant {{'o' is null on at least one execution path.}}
-//                 * FIXME
+                M1(o.ToString()); // Noncompliant {{'o' is null on at least one execution path.}}
+//                 ^
             }
             else
             {
@@ -47,7 +46,7 @@ namespace Tests.Diagnostics
             {
                 o = new object();
             }
-            M2(o.ToString()); // FIXME Non-compliant
+            M2(o.ToString()); // Noncompliant
         }
 
         void Test_ExtensionMethodWithNull()
@@ -78,7 +77,7 @@ namespace Tests.Diagnostics
         void Test_Foreach()
         {
             IEnumerable<int> en = null;
-            foreach (var item in en) // FIXME Non-compliant
+            foreach (var item in en) // Noncompliant
             {
 
             }
@@ -105,12 +104,12 @@ namespace Tests.Diagnostics
         public NullPointerDereference()
         {
             object o = null;
-            Console.WriteLine(o.ToString()); // FIXME Non-compliant
+            Console.WriteLine(o.ToString()); // Noncompliant
 
             var a = new Action(() =>
             {
                 object o1 = null;
-                Console.WriteLine(o1.ToString()); // FIXME Non-compliant
+                Console.WriteLine(o1.ToString()); // Noncompliant
             });
         }
 
@@ -119,7 +118,7 @@ namespace Tests.Diagnostics
             get
             {
                 object o1 = null;
-                Console.WriteLine(o1.ToString()); // FIXME Non-compliant
+                Console.WriteLine(o1.ToString()); // Noncompliant
                 return 42;
             }
         }
@@ -395,43 +394,43 @@ namespace Tests.Diagnostics
         {
             object o = null;
             _foo1 = o;
-            _foo1.ToString(); // FIXME Non-compliant
-//          ***** FIXME
+            _foo1.ToString(); // Noncompliant
+//          ^^^^^
         }
         void DumbestTestOnFoo2()
         {
             object o = null;
             _foo2 = o;
-            _foo2.ToString(); // FIXME Non-compliant
-//          ***** FIXME
+            _foo2.ToString(); // Noncompliant
+//          ^^^^^
         }
         void DumbestTestOnFoo3()
         {
             object o = null;
             _foo3 = o;
-            _foo3.ToString(); // FIXME Non-compliant
-//          ***** FIXME
+            _foo3.ToString(); // Noncompliant
+//          ^^^^^
         }
         void DumbestTestOnFoo4()
         {
             object o = null;
             _foo4 = o;
-            _foo4.ToString(); // FIXME Non-compliant
-//          ***** FIXME
+            _foo4.ToString(); // Noncompliant
+//          ^^^^^
         }
         void DumbestTestOnFoo5()
         {
             object o = null;
             _foo5 = o;
-            _foo5.ToString(); // FIXME Non-compliant
-//          ***** FIXME
+            _foo5.ToString(); // Noncompliant
+//          ^^^^^
         }
         void DumbestTestOnFoo8()
         {
             object o = null;
             _foo8 = o;
-            _foo8.ToString(); // FIXME Non-compliant
-//          ***** FIXME
+            _foo8.ToString(); // Noncompliant
+//          ^^^^^
         }
         void DumbestTestOnFoo6()
         {
@@ -446,27 +445,27 @@ namespace Tests.Diagnostics
         {
             object o = null;
             this._foo1 = o;
-            this._foo1.ToString(); // FIXME Non-compliant
+            this._foo1.ToString(); // Noncompliant
         }
         void DifferentFieldAccess2()
         {
             this._foo1 = null;
-            _foo1.ToString(); // FIXME Non-compliant
+            _foo1.ToString(); // Noncompliant
         }
         void DifferentFieldAccess3()
         {
             _foo1 = null;
-            this._foo1.ToString(); // FIXME Non-compliant
+            this._foo1.ToString(); // Noncompliant
         }
         void DifferentFieldAccess4()
         {
             _foo1 = null;
-            (((this)))._foo1.ToString(); // FIXME Non-compliant
+            (((this)))._foo1.ToString(); // Noncompliant
         }
         void DifferentFieldAccess5()
         {
             _foo1 = null;
-            (((this._foo1))).ToString(); // FIXME Non-compliant
+            (((this._foo1))).ToString(); // Noncompliant
         }
 
         void OtherInstanceFieldAccess()
@@ -480,28 +479,28 @@ namespace Tests.Diagnostics
         {
             object o = null;
             _foo1 = o;
-            (new NullPointerDereferenceWithFields())._foo1.ToString(); // Compliant
+            (new NullPointerDereferenceWithFields())._foo1.ToString(); // Noncompliant
         }
 
         void ParenthesizedAccess1()
         {
             object o = null;
             _foo1 = o;
-            (_foo1).ToString(); // FIXME Non-compliant
+            (_foo1).ToString(); // Noncompliant
         }
         void ParenthesizedAccess2()
         {
             object o = null;
             ((((((this)))._foo1))) = o;
-            (((_foo1))).ToString(); // FIXME Non-compliant
+            (((_foo1))).ToString(); // Noncompliant
         }
 
         void VariableFromField()
         {
             _foo1 = null;
             var o = _foo1;
-            o.ToString(); // FIXME Non-compliant
-//          * FIXME
+            o.ToString(); // Noncompliant
+//          ^
         }
 
         void LearntConstraintsOnField()
@@ -562,7 +561,7 @@ namespace Tests.Diagnostics
             object o = null;
             _foo1 = o;
             (((this))).DoSomething();
-            _foo1.ToString(); // Compliant
+            _foo1.ToString(); // Noncompliant FIXME (was compliant before)
         }
 
         void CallToExtensionMethodsShouldResetFieldConstraints()
@@ -570,7 +569,7 @@ namespace Tests.Diagnostics
             object o = null;
             _foo1 = o;
             this.MyExtension();
-            _foo1.ToString(); // Compliant
+            _foo1.ToString(); // Noncompliant FIXME (was compliant before)
         }
 
         void CallToStaticMethodsShouldResetFieldConstraints()
@@ -578,8 +577,8 @@ namespace Tests.Diagnostics
             object o = null;
             _foo1 = o;
             Console.WriteLine(); // This particular method has no side effects
-            _foo1.ToString(); // Compliant, False Negative
-            o.ToString(); // FIXME Non-compliant, local variable constraints are not cleared
+            _foo1.ToString(); // Noncompliant
+            o.ToString(); // Noncompliant, local variable constraints are not cleared
         }
 
         // https://github.com/SonarSource/sonar-dotnet/issues/947
@@ -588,8 +587,8 @@ namespace Tests.Diagnostics
             object o = null;
             _foo1 = o;
             System.Threading.Monitor.Wait(this); // This is a multi-threaded application, the fields could change
-            _foo1.ToString(); // Compliant
-            o.ToString(); // FIXME Non-compliant, local variable constraints are not cleared
+            _foo1.ToString(); // Noncompliant FIXME (was compliant before)
+            o.ToString(); // Noncompliant, local variable constraints are not cleared
         }
 
         void CallToNameOfShouldNotResetFieldConstraints()
@@ -597,7 +596,7 @@ namespace Tests.Diagnostics
             object o = null;
             _foo1 = o;
             var name = nameof(DoSomething);
-            _foo1.ToString(); // FIXME Non-compliant
+            _foo1.ToString(); // Noncompliant
         }
 
         void DereferenceInNameOfShouldNotRaise()
@@ -670,7 +669,7 @@ namespace Tests.Diagnostics
         {
             this.bar = null;
             if (this.bar != null)
-                this.bar.GetHashCode();
+                this.bar.GetHashCode(); // Compliant
         }
     }
 
@@ -691,7 +690,7 @@ namespace Tests.Diagnostics
             object a = null;
             if (a.IsNotNull())
             {
-                a.ToString();
+                a.ToString(); // Noncompliant FIXME (was compliant before)
             }
         }
 
@@ -700,7 +699,7 @@ namespace Tests.Diagnostics
             object a = null;
             if (IsNotNull(a))
             {
-                a.ToString();   // Compliant
+                a.ToString(); // Noncompliant FIXME (was compliant before)
             }
         }
 
@@ -718,8 +717,8 @@ namespace Tests.Diagnostics
             string s = null;
             x = s;
             await t; // awaiting clears the constraints
-            x.ToString(); // Compliant
-            s.ToString(); // FIXME Non-compliant
+            x.ToString(); // Noncompliant FIXME (was compliant before)
+            s.ToString(); // Noncompliant
         }
     }
 
@@ -775,7 +774,7 @@ namespace Tests.Diagnostics
             {
                 s = "";
             }
-            return s.Trim(); // FIXME Non-compliant FP due to loop traversal
+            return s.Trim(); // Noncompliant FP due to loop traversal
         }
     }
 
@@ -851,7 +850,7 @@ namespace Repro_3395
             if (helper == Helper.A | helper == Helper.B | helper == Helper.C | helper == Helper.D
                 | helper == Helper.E | helper == Helper.F | helper == Helper.G | helper == Helper.H)
             {
-                o.ToString(); // FIXME Non-compliant, this condition size is within the limit
+                o.ToString(); // Noncompliant, this condition size is within the limit
             }
         }
 
@@ -863,7 +862,7 @@ namespace Repro_3395
                 | helper == Helper.E | helper == Helper.F | helper == Helper.G | helper == Helper.H
                 | helper == Helper.I)
             {
-                o.ToString(); // FN, the condition state generation is too big to explore all constraint combinations
+                o.ToString(); // Noncompliant (old engine: FN, the condition state generation is too big to explore all constraint combinations)
             }
         }
 
@@ -879,7 +878,7 @@ namespace Repro_3395
                 | helper == Helper.C | helper == Helper.D | helper == Helper.E | helper == Helper.F
                 | helper == Helper.G | helper == Helper.H | helper == Helper.I | helper == Helper.J)
             {
-                o.ToString(); // FN, the condition state generation is too big to explore all constraint combinations
+                o.ToString(); // Noncompliant (old engine: FN, the condition state generation is too big to explore all constraint combinations)
             }
         }
 
@@ -895,7 +894,7 @@ namespace Repro_3395
                 & helper == Helper.C & helper == Helper.D & helper == Helper.E & helper == Helper.F
                 & helper == Helper.G & helper == Helper.H & helper == Helper.I & helper == Helper.J)
             {
-                o.ToString(); // FN, the condition state generation is too big to explore all constraint combinations
+                o.ToString(); // Noncompliant (old engine: FN, the condition state generation is too big to explore all constraint combinations)
             }
         }
 
@@ -911,7 +910,7 @@ namespace Repro_3395
                 ^ helper == Helper.C ^ helper == Helper.D ^ helper == Helper.E ^ helper == Helper.F
                 ^ helper == Helper.G ^ helper == Helper.H ^ helper == Helper.I ^ helper == Helper.J)
             {
-                o.ToString(); // FN, the condition state generation is too big to explore all constraint combinations
+                o.ToString(); // Noncompliant (old engine: FN, the condition state generation is too big to explore all constraint combinations)
             }
         }
 
@@ -927,7 +926,7 @@ namespace Repro_3395
                 | helper != Helper.C | helper != Helper.D | helper != Helper.E | helper != Helper.F
                 | helper == Helper.G | helper == Helper.H | helper == Helper.I | helper == Helper.J)
             {
-                o.ToString(); // FN, the condition state generation is too big to explore all constraint combinations
+                o.ToString(); // Noncompliant (old engine: FN, the condition state generation is too big to explore all constraint combinations)
             }
         }
 
@@ -943,7 +942,7 @@ namespace Repro_3395
                 | helper == Helper.C & helper == Helper.D ^ helper == Helper.E & helper == Helper.F
                 | helper == Helper.G & helper == Helper.H ^ helper == Helper.I & helper == Helper.J)
             {
-                o.ToString(); // FN, the condition state generation is too big to explore all constraint combinations
+                o.ToString(); // Noncompliant (old engine: FN, the condition state generation is too big to explore all constraint combinations)
             }
         }
     }
