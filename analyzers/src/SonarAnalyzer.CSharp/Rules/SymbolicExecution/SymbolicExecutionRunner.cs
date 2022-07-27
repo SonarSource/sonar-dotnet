@@ -111,11 +111,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void AnalyzeSonar(SyntaxNodeAnalysisContext context, bool isTestProject, bool isScannerRun, SyntaxNode body, ISymbol symbol)
         {
-            var allSonarRules = Configuration.ForceSonarCfg
-                ? SonarRules.Union(AllRules
-                    .Select(x => x.Value.CreateSonarFallback())
-                    .OfType<ISymbolicExecutionAnalyzer>())
-                : SonarRules;
+            var allSonarRules = SonarRules.Union(AllRules
+                                .Select(x => x.Value.CreateSonarFallback(Configuration))
+                                .OfType<ISymbolicExecutionAnalyzer>());
             var enabledAnalyzers = allSonarRules.Where(x => x.SupportedDiagnostics.Any(descriptor => IsEnabled(context, isTestProject, isScannerRun, descriptor))).ToList();
             if (enabledAnalyzers.Any() && CSharpControlFlowGraph.TryGet((CSharpSyntaxNode)body, context.SemanticModel, out var cfg))
             {

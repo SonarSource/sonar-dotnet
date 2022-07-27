@@ -86,8 +86,8 @@ namespace SonarAnalyzer.Rules
             var checks = AllRules
                 .Where(x => IsEnabled(nodeContext, isTestProject, isScannerRun, x.Key))
                 .GroupBy(x => x.Value.Type)                             // Multiple DiagnosticDescriptors (S2583, S2589) can share the same check type
-                .Select(x => x.First().Value.CreateInstance(sonarContext, nodeContext))   // We need just one instance in that case
-                .Where(x => x.ShouldExecute())
+                .Select(x => x.First().Value.CreateInstance(Configuration, sonarContext, nodeContext))   // We need just one instance in that case
+                .Where(x => x?.ShouldExecute() == true)
                 .ToArray();
             if (checks.Any())
             {
@@ -120,13 +120,19 @@ namespace SonarAnalyzer.Rules
                 this.sonarFallbackFactory = new Lazy<object>(sonarFallbackFactory);
             }
 
-            public SymbolicRuleCheck CreateInstance(SonarAnalysisContext sonarContext, SyntaxNodeAnalysisContext nodeContext)
+            public SymbolicRuleCheck CreateInstance(IAnalyzerConfiguration configuration, SonarAnalysisContext sonarContext, SyntaxNodeAnalysisContext nodeContext)
             {
+                if (configuration.ForceSonarCfg)
+                {
+                    return null;
+                }
+
                 var ret = createInstance();
                 ret.Init(sonarContext, nodeContext);
                 return ret;
             }
-            public object CreateSonarFallback() => sonarFallbackFactory.Value;
+            public object CreateSonarFallback(IAnalyzerConfiguration configuration) =>
+                configuration.ForceSonarCfg ? sonarFallbackFactory.Value : null;
         }
 
         protected class RuleFactory<TCheck> : RuleFactory
