@@ -113,7 +113,8 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var allSonarRules = SonarRules.Union(AllRules
                                 .Select(x => x.Value.CreateSonarFallback(Configuration))
-                                .OfType<ISymbolicExecutionAnalyzer>());
+                                .WhereNotNull()
+                                .Cast<ISymbolicExecutionAnalyzer>()); // Only ISymbolicExecutionAnalyzer should be passed as TSonarFallback to CreateFactory. Have you passed a Roslyn rule instead?
             var enabledAnalyzers = allSonarRules.Where(x => x.SupportedDiagnostics.Any(descriptor => IsEnabled(context, isTestProject, isScannerRun, descriptor))).ToList();
             if (enabledAnalyzers.Any() && CSharpControlFlowGraph.TryGet((CSharpSyntaxNode)body, context.SemanticModel, out var cfg))
             {
