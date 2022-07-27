@@ -126,7 +126,7 @@ namespace SonarAnalyzer.Rules
                 ret.Init(sonarContext, nodeContext);
                 return ret;
             }
-            public object GetSonar() => sonarFallbackFactory.Value;
+            public object CreateSonarFallback() => sonarFallbackFactory.Value;
         }
 
         protected class RuleFactory<TCheck> : RuleFactory
