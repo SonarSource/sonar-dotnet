@@ -6,7 +6,7 @@
         {
             string name = null;
             name = name ?? "Laxmi";
-            name.ToString();
+            name.ToString(); // Noncompliant FIXME (was compliant before)
         }
 
         public void NullCoalescenceOperator_Null_Noncompliant1()
