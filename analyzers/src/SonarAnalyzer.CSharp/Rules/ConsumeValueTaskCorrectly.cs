@@ -52,8 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var walker = new ConsumeValueTaskWalker(c.SemanticModel);
@@ -63,7 +62,9 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         if (syntaxNodes.Count > 1)
                         {
-                            c.ReportIssue(Diagnostic.Create(rule, syntaxNodes.First().GetLocation(),
+                            c.ReportIssue(DiagnosticFactory.Create(rule,
+                                c.Compilation,
+                                syntaxNodes.First().GetLocation(),
                                 additionalLocations: syntaxNodes.Skip(1).Select(node => node.GetLocation()).ToArray(),
                                 messageArgs: ConsumeOnlyOnceMessage));
                         }
@@ -81,7 +82,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.PropertyDeclaration,
                 SyntaxKind.DestructorDeclaration,
                 SyntaxKind.MethodDeclaration);
-        }
 
         private sealed class ConsumeValueTaskWalker : SafeCSharpSyntaxWalker
         {

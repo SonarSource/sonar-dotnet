@@ -209,7 +209,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
         private sealed class AnalysisContext : ISymbolicExecutionAnalysisContext
         {
             private readonly SyntaxNodeAnalysisContext context;
-            private readonly HashSet<IdentifierNameSyntax> nullIdentifiers = new HashSet<IdentifierNameSyntax>();
+            private readonly HashSet<IdentifierNameSyntax> nullIdentifiers = new();
             private readonly NullPointerCheck nullPointerCheck;
 
             public AnalysisContext(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
@@ -222,7 +222,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
 
             public bool SupportsPartialResults => true;
 
-            public IEnumerable<Diagnostic> GetDiagnostics() =>
+            public IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation) =>
                 nullIdentifiers.Select(nullIdentifier => Diagnostic.Create(S2259, nullIdentifier.GetLocation(), nullIdentifier.Identifier.ValueText));
 
             public void Dispose() => nullPointerCheck.MemberAccessed -= MemberAccessedHandler;

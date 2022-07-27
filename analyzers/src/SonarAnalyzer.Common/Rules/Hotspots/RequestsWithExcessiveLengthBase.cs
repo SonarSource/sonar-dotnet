@@ -129,7 +129,7 @@ namespace SonarAnalyzer.Rules
             {
                 context.ReportIssue(
                     invalidAttributes.SecondaryAttribute != null
-                        ? Diagnostic.Create(rule, invalidAttributes.MainAttribute.GetLocation(), new List<Location> { invalidAttributes.SecondaryAttribute.GetLocation() })
+                        ? DiagnosticFactory.Create(rule, context.Compilation, invalidAttributes.MainAttribute.GetLocation(), new List<Location> { invalidAttributes.SecondaryAttribute.GetLocation() })
                         : Diagnostic.Create(rule, invalidAttributes.MainAttribute.GetLocation()));
             }
         }

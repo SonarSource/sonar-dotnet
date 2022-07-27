@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override bool IsValidCodeBlockContext(SyntaxNode node, ISymbol owningSymbol) =>
             owningSymbol is { IsStatic: false }
-            && (node is MethodDeclarationSyntax || node is AccessorDeclarationSyntax);
+            && node is MethodDeclarationSyntax or AccessorDeclarationSyntax;
 
         protected override string GetDiagnosticMessageArgument(SyntaxNode node, ISymbol owningSymbol, IFieldSymbol field)
         {

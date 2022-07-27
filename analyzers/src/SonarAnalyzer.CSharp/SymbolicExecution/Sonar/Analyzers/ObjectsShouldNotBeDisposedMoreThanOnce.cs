@@ -52,14 +52,14 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
             // This is needed because we generate two CFG blocks for the finally statements and even
             // though the syntax nodes are the same, when there is a return inside a try/catch block
             // the walked CFG paths could be different and FPs will appear.
-            private readonly Dictionary<SyntaxNode, string> nodesToReport = new Dictionary<SyntaxNode, string>();
+            private readonly Dictionary<SyntaxNode, string> nodesToReport = new();
 
             public AnalysisContext(SonarExplodedGraph explodedGraph) =>
                 explodedGraph.AddExplodedGraphCheck(new ObjectDisposedPointerCheck(explodedGraph, this));
 
             public bool SupportsPartialResults => true;
 
-            public IEnumerable<Diagnostic> GetDiagnostics() =>
+            public IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation) =>
                 nodesToReport.Select(item => Diagnostic.Create(S3966, item.Key.GetLocation(), item.Value));
 
             public void Dispose()

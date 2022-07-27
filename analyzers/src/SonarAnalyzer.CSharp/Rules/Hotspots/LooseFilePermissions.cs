@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 var diagnostic = invocationLocation.GetLineSpan().StartLinePosition.Line == secondaryLocation.GetLineSpan().StartLinePosition.Line
                     ? Diagnostic.Create(Rule, invocationLocation)
-                    : Diagnostic.Create(Rule, invocationLocation, additionalLocations: new[] {secondaryLocation});
+                    : DiagnosticFactory.Create(Rule, context.Compilation, invocationLocation, additionalLocations: new[] {secondaryLocation});
 
                 context.ReportIssue(diagnostic);
             }

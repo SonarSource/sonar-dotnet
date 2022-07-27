@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     walker.SafeVisit(method);
                     if (walker.ArgumentExceptionLocations.Any())
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, method.Identifier.GetLocation(), walker.ArgumentExceptionLocations));
+                        c.ReportIssue(DiagnosticFactory.Create(Rule, c.Compilation, method.Identifier.GetLocation(), walker.ArgumentExceptionLocations));
                     }
                 },
                 SyntaxKind.MethodDeclaration);

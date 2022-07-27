@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         var secondaryLocations = collidingMembers.SelectMany(x => x.Locations)
                                                                  .Where(x => x.IsInSource);
 
-                        c.ReportIssue(Diagnostic.Create(Rule, interfaceDeclaration.Identifier.GetLocation(), secondaryLocations, membersText, pluralize));
+                        c.ReportIssue(DiagnosticFactory.Create(Rule, c.Compilation, interfaceDeclaration.Identifier.GetLocation(), secondaryLocations, membersText, pluralize));
                     }
                 },
                 SyntaxKind.InterfaceDeclaration);

@@ -57,8 +57,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
                         return;
                     }
 
-                    c.ReportIssue(Diagnostic.Create(
+                    c.ReportIssue(DiagnosticFactory.Create(
                         rule,
+                        c.Compilation,
                         multilineIfBlock.IfStatement.IfKeyword.GetLocation(),
                         additionalLocations: new[] { parentMultilineIfBlock.IfStatement.IfKeyword.GetLocation() }));
                 },

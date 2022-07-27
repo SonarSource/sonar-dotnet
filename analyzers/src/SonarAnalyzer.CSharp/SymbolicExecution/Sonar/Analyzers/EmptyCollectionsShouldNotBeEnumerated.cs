@@ -97,7 +97,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
 
             public bool SupportsPartialResults => false;
 
-            public IEnumerable<Diagnostic> GetDiagnostics() =>
+            public IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation) =>
                 emptyCollections.Except(nonEmptyCollections).Select(node => Diagnostic.Create(S4158, node.GetLocation()));
 
             public void Dispose()

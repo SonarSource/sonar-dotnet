@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     walker.SafeVisit(catchClause.Filter?.FilterExpression);
                     if (!walker.HasValidLoggerCall)
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, catchClause.CatchKeyword.GetLocation(), walker.InvalidLoggerInvocationLocations));
+                        c.ReportIssue(DiagnosticFactory.Create(Rule, c.Compilation, catchClause.CatchKeyword.GetLocation(), walker.InvalidLoggerInvocationLocations));
                     }
                 }
             },
@@ -95,7 +95,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             private readonly SemanticModel model;
             private readonly CancellationToken cancel;
-            private List<Location> invalidInvocations;
+            private List<Location> invalidInvocations = new();
 
             public bool HasValidLoggerCall { get; private set; }
             public IEnumerable<Location> InvalidLoggerInvocationLocations => invalidInvocations;
@@ -126,7 +126,6 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                     else
                     {
-                        invalidInvocations ??= new();
                         invalidInvocations.Add(node.GetLocation());
                     }
                 }

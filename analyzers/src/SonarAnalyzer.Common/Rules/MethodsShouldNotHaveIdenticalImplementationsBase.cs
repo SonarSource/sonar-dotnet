@@ -61,7 +61,9 @@ namespace SonarAnalyzer.Rules
                         foreach (var duplicate in duplicates)
                         {
                             methodsToHandle.Remove(duplicate);
-                            c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], GetMethodIdentifier(duplicate).GetLocation(),
+                            c.ReportIssue(DiagnosticFactory.Create(SupportedDiagnostics[0],
+                                c.Compilation,
+                                GetMethodIdentifier(duplicate).GetLocation(),
                                 additionalLocations: new[] { GetMethodIdentifier(method).GetLocation() },
                                 messageArgs: GetMethodIdentifier(method).ValueText));
                         }

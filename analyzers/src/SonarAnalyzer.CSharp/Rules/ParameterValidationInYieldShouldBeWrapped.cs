@@ -53,8 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (walker.HasYieldStatement &&
                         walker.ArgumentExceptionLocations.Any())
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation(),
-                            additionalLocations: walker.ArgumentExceptionLocations));
+                        c.ReportIssue(DiagnosticFactory.Create(rule, c.Compilation, methodDeclaration.Identifier.GetLocation(), additionalLocations: walker.ArgumentExceptionLocations));
                     }
                 },
                 SyntaxKind.MethodDeclaration);

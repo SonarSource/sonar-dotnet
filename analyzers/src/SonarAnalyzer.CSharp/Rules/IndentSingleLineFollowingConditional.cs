@@ -139,7 +139,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void ReportIssue(SyntaxNodeAnalysisContext context, Location primaryLocation,
             SyntaxNode secondaryLocationNode, string conditionLabelText) =>
-               context.ReportIssue(Diagnostic.Create(Rule, primaryLocation, new[] { GetFirstLineOfNode(secondaryLocationNode) }, conditionLabelText));
+               context.ReportIssue(DiagnosticFactory.Create(Rule, context.Compilation, primaryLocation, new[] { GetFirstLineOfNode(secondaryLocationNode) }, conditionLabelText));
 
         private static Location GetFirstLineOfNode(SyntaxNode node)
         {

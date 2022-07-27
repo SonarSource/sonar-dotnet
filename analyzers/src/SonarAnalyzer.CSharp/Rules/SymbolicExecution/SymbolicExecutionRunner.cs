@@ -157,7 +157,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             foreach (var analyzerContext in analyzerContexts.Where(x => x.SupportsPartialResults == supportsPartialResults))
             {
-                foreach (var diagnostic in analyzerContext.GetDiagnostics())
+                foreach (var diagnostic in analyzerContext.GetDiagnostics(context.Compilation))
                 {
                     context.ReportIssue(diagnostic);
                 }

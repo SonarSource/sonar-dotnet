@@ -49,7 +49,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
 
         private sealed class AnalysisContext : ISymbolicExecutionAnalysisContext
         {
-            private readonly HashSet<IdentifierNameSyntax> nullIdentifiers = new HashSet<IdentifierNameSyntax>();
+            private readonly HashSet<IdentifierNameSyntax> nullIdentifiers = new();
             private readonly NullableValueAccessedCheck nullableValueCheck;
 
             public bool SupportsPartialResults => true;
@@ -60,7 +60,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
                 nullableValueCheck.ValuePropertyAccessed += AddIdentifier;
             }
 
-            public IEnumerable<Diagnostic> GetDiagnostics() =>
+            public IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation) =>
                 nullIdentifiers.Select(x => Diagnostic.Create(S3655, x.Parent.GetLocation(), x.Identifier.ValueText));
 
             private void AddIdentifier(object sender, MemberAccessedEventArgs args) =>

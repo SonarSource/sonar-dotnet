@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var forEachStatementSyntax = (ForEachStatementSyntax)c.Node;
                     if (CanBeSimplifiedUsingWhere(forEachStatementSyntax.Statement, out var ifConditionLocation))
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, forEachStatementSyntax.Expression.GetLocation(), new[] {ifConditionLocation}, WhereMessageFormat));
+                        c.ReportIssue(DiagnosticFactory.Create(Rule, c.Compilation, forEachStatementSyntax.Expression.GetLocation(), new[] { ifConditionLocation }, WhereMessageFormat));
                     }
                     else
                     {

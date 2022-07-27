@@ -59,7 +59,8 @@ public class Bar
                                     .WithAnalyzers(analyzers);
 
             var result = await secondCompilation.GetAnalyzerDiagnosticsAsync();
-            result.Single().GetMessage().Should().StartWith("Analyzer 'SonarAnalyzer.Rules.CSharp.StaticFieldWrittenFromInstanceMember' threw an exception of type 'System.ArgumentException' with message 'Reported diagnostic 'S2696' has a source location in file '', which is not part of the compilation being analyzed.");
+            result.Single().Id.Should().Be("S2696");
+            result.Single().GetMessage().Should().StartWith("Make the enclosing instance method 'static' or remove this set on the 'static' field.");
         }
 
 #if NET

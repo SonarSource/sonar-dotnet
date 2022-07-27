@@ -157,7 +157,7 @@ namespace SonarAnalyzer.Rules
             if (!locations.IsEmpty)
             {
                 // Report both, assignment as well as all implementation occurrences
-                c.Context.ReportIssue(Diagnostic.Create(Rule, primaryLocation, locations));
+                c.Context.ReportIssue(DiagnosticFactory.Create(Rule, c.Context.Compilation, primaryLocation, locations));
             }
         }
 
