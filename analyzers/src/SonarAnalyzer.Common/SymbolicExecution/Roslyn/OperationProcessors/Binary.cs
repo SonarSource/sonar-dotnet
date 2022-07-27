@@ -25,43 +25,39 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
 {
     internal static class Binary
     {
-        public static ProgramState Process(SymbolicContext context, IBinaryOperationWrapper binary)
+        public static ProgramState Process(SymbolicContext context, IBinaryOperationWrapper binary) =>
+            context.State[binary.LeftOperand] is { } left
+            && context.State[binary.RightOperand] is { } right
+            && BinaryConstraint(binary.OperatorKind, left, right) is { } newConstraint
+                ? context.SetOperationConstraint(newConstraint)
+                : context.State;
+
+        private static SymbolicConstraint BinaryConstraint(BinaryOperatorKind kind, SymbolicValue left, SymbolicValue right)
         {
-            if (context.State[binary.LeftOperand] is { } left && context.State[binary.RightOperand] is { } right)
+            if (left.HasConstraint<BoolConstraint>() && right.HasConstraint<BoolConstraint>())
             {
-                if (left.HasConstraint<BoolConstraint>() && right.HasConstraint<BoolConstraint>())
-                {
-                    return BinaryBoolConstraint(binary.OperatorKind, left.HasConstraint(BoolConstraint.True), right.HasConstraint(BoolConstraint.True)) is { } newConstraint
-                        ? context.SetOperationConstraint(newConstraint)
-                        : context.State;
-                }
-                else if (left.HasConstraint<ObjectConstraint>() && right.HasConstraint<ObjectConstraint>())
-                {
-                    return BinaryNullConstraint(binary.OperatorKind, left.HasConstraint(ObjectConstraint.Null), right.HasConstraint(ObjectConstraint.Null)) is { } newConstraint
-                        ? context.SetOperationConstraint(newConstraint)
-                        : context.State;
-                }
-                else
-                {
-                    return context.State;
-                }
+                return BinaryBoolConstraint(kind, left.HasConstraint(BoolConstraint.True), right.HasConstraint(BoolConstraint.True));
+            }
+            else if (left.HasConstraint<ObjectConstraint>() && right.HasConstraint<ObjectConstraint>())
+            {
+                return BinaryNullConstraint(kind, left.HasConstraint(ObjectConstraint.Null), right.HasConstraint(ObjectConstraint.Null));
             }
             else
             {
-                return context.State;
+                return null;
             }
         }
 
         private static SymbolicConstraint BinaryBoolConstraint(BinaryOperatorKind kind, bool left, bool right) =>
-            kind switch
-            {
-                BinaryOperatorKind.Equals or BinaryOperatorKind.ObjectValueEquals => BoolConstraint.From(left == right),
-                BinaryOperatorKind.NotEquals or BinaryOperatorKind.ObjectValueNotEquals => BoolConstraint.From(left != right),
-                BinaryOperatorKind.And or BinaryOperatorKind.ConditionalAnd => BoolConstraint.From(left && right),
-                BinaryOperatorKind.Or or BinaryOperatorKind.ConditionalOr => BoolConstraint.From(left || right),
-                BinaryOperatorKind.ExclusiveOr => BoolConstraint.From(left ^ right),
-                _ => null
-            };
+                    kind switch
+                    {
+                        BinaryOperatorKind.Equals or BinaryOperatorKind.ObjectValueEquals => BoolConstraint.From(left == right),
+                        BinaryOperatorKind.NotEquals or BinaryOperatorKind.ObjectValueNotEquals => BoolConstraint.From(left != right),
+                        BinaryOperatorKind.And or BinaryOperatorKind.ConditionalAnd => BoolConstraint.From(left && right),
+                        BinaryOperatorKind.Or or BinaryOperatorKind.ConditionalOr => BoolConstraint.From(left || right),
+                        BinaryOperatorKind.ExclusiveOr => BoolConstraint.From(left ^ right),
+                        _ => null
+                    };
 
         private static SymbolicConstraint BinaryNullConstraint(BinaryOperatorKind kind, bool isNullLeft, bool isNullRight) =>
             isNullLeft || isNullRight
