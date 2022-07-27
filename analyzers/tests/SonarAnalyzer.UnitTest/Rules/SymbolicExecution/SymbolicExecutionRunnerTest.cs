@@ -21,9 +21,10 @@
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Rules;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
+using SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 using CS = SonarAnalyzer.Rules.CSharp;
-using CSRoslyn = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
+using SonarRules = SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -449,7 +450,7 @@ End Class";
 
             protected override ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules => ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
                 .Add(BinaryRuleCheck.SBinary, CreateFactory<BinaryRuleCheck>())
-                .Add(CSRoslyn.NullPointerDereference.S2259, CreateFactory<CSRoslyn.NullPointerDereference, CS.NullPointerDereference>())
+                .Add(NullPointerDereference.S2259, CreateFactory<NullPointerDereference, SonarRules.NullPointerDereference>())
                 .Add(AllScopeAssignmentRuleCheck.SAll, CreateFactory<AllScopeAssignmentRuleCheck>())
                 .Add(MainScopeAssignmentRuleCheck.SMain, CreateFactory<MainScopeAssignmentRuleCheck>())
                 .Add(TestScopeAssignmentRuleCheck.STest, CreateFactory<TestScopeAssignmentRuleCheck>());
