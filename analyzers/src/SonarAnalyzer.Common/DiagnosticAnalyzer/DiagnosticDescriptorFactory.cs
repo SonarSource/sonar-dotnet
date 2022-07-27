@@ -59,7 +59,6 @@ namespace SonarAnalyzer.Helpers
             tags.AddRange(rule.Scope.ToTags());
             Add(rule.SonarWay, SonarWayTag);
             Add(fadeOutCode, WellKnownDiagnosticTags.Unnecessary);
-            Add(rule.IsHotspot, WellKnownDiagnosticTags.NotConfigurable);
             return tags.ToArray();
 
             void Add(bool condition, string tag)
