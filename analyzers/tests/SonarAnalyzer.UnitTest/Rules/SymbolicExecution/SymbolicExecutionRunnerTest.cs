@@ -24,7 +24,6 @@ using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 using CS = SonarAnalyzer.Rules.CSharp;
-using SonarRules = SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -329,9 +328,25 @@ End Sub");
 
         [TestMethod]
         public void Analyze_Severity_ExecutesWhenAll() =>
-            Verify(@"string s = null;   // Noncompliant    {{Message for SAll}}
-                                        // Noncompliant@-1 {{Message for SMain}}
-                    s.ToString();       // Noncompliant    {{'s' is null on at least one execution path.}} - rule S2259");
+            VerifyCode<TestSERunnerCS>(@"
+using System.Threading;
+namespace Monitor_Conditions
+{
+    class Program
+    {
+        private object obj = new object();
+        public void Method1(bool condition)
+        {
+            string s = null;    // Noncompliant    {{Message for SAll}}
+                                // Noncompliant@-1 {{Message for SMain}}
+            Monitor.Enter(obj); // Noncompliant    {{Unlock this lock along all executions paths of this method.}} - S2222
+            if (condition)
+            {
+                Monitor.Exit(obj);
+            }
+        }
+    }
+}", ProjectType.Product, ParseOptionsHelper.FromCSharp9, null);
 
         [TestMethod]
         public void Analyze_Severity_ExecutesWhenMore() =>
@@ -403,7 +418,9 @@ public class Sample
         private static void Verify(string body, ProjectType projectType, string sonarProjectConfigPath, params DiagnosticDescriptor[] onlyRules)
         {
             var code =
-$@"public class Sample
+$@"
+using System.Threading;
+public class Sample
 {{
     public void Main()
     {{
@@ -446,11 +463,11 @@ End Class";
 
         private class TestSERunnerCS : CS.SymbolicExecutionRunner
         {
-            public TestSERunnerCS() : base(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg) { }
+            public TestSERunnerCS() : base(AnalyzerConfiguration.AlwaysEnabled) { }
 
             protected override ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules => ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
                 .Add(BinaryRuleCheck.SBinary, CreateFactory<BinaryRuleCheck>())
-                .Add(NullPointerDereference.S2259, CreateFactory<NullPointerDereference, SonarRules.NullPointerDereference>())
+                .Add(LocksReleasedAllPaths.S2222, CreateFactory<LocksReleasedAllPaths>())
                 .Add(AllScopeAssignmentRuleCheck.SAll, CreateFactory<AllScopeAssignmentRuleCheck>())
                 .Add(MainScopeAssignmentRuleCheck.SMain, CreateFactory<MainScopeAssignmentRuleCheck>())
                 .Add(TestScopeAssignmentRuleCheck.STest, CreateFactory<TestScopeAssignmentRuleCheck>());
