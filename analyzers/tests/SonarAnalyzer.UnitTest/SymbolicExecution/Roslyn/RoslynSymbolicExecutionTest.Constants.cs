@@ -89,8 +89,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
 public void Main(bool arg = true)
 {
     Tag(""Arg"", arg);
-}
-private void Tag(string name, object arg) { }";
+}";
             SETestContext.CreateCSMethod(code).Validator.ValidateTag("Arg", x => x.Should().BeNull());
         }
 
