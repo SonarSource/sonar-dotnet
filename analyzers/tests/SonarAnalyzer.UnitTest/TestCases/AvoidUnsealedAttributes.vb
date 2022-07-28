@@ -1,4 +1,5 @@
-﻿Public Class PublicAttribute ' Noncompliant {{Seal this attribute or make it abstract.}}
+' Test framework can't assert location on 1st line
+Public Class PublicAttribute ' Noncompliant {{Seal this attribute or make it abstract.}}
     Inherits Attribute
     '        ^^^^^^^^^^^^^^^ @-1
 End Class
