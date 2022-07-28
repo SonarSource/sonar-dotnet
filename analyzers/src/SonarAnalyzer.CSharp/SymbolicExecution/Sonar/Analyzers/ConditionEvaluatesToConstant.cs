@@ -212,7 +212,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
                 var unreachableLocations = GetUnreachableLocations(constantNode, constantValue).ToList();
                 var constantText = constantValue.ToString().ToLowerInvariant();
                 return unreachableLocations.Count > 0
-                    ? DiagnosticFactory.Create(S2583, compilation, constantNode.GetLocation(), unreachableLocations, string.Format(S2583MessageFormatBool, constantText))
+                    ? S2583.CreateDiagnostic(compilation, constantNode.GetLocation(), unreachableLocations, string.Format(S2583MessageFormatBool, constantText))
                     : Diagnostic.Create(S2589, constantNode.GetLocation(), messageArgs: string.Format(S2589MessageFormatBool, constantText));
             }
 

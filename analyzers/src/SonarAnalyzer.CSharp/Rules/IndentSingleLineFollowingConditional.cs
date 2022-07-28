@@ -23,6 +23,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 // Note: this rule only covers the indentation of the first line after a conditional.
@@ -139,7 +140,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void ReportIssue(SyntaxNodeAnalysisContext context, Location primaryLocation,
             SyntaxNode secondaryLocationNode, string conditionLabelText) =>
-               context.ReportIssue(DiagnosticFactory.Create(Rule, context.Compilation, primaryLocation, new[] { GetFirstLineOfNode(secondaryLocationNode) }, conditionLabelText));
+               context.ReportIssue(Rule.CreateDiagnostic(context.Compilation, primaryLocation, new[] { GetFirstLineOfNode(secondaryLocationNode) }, conditionLabelText));
 
         private static Location GetFirstLineOfNode(SyntaxNode node)
         {

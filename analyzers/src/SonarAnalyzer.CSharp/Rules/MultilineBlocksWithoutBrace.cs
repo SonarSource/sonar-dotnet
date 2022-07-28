@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -154,8 +155,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var lineSpan = context.Node.SyntaxTree.GetText().Lines[nextStatementPosition.Line].Span;
                 var location = Location.Create(context.Node.SyntaxTree, TextSpan.FromBounds(nextStatement.SpanStart, lineSpan.End));
 
-                context.ReportIssue(DiagnosticFactory.Create(rule,
-                    context.Compilation,
+                context.ReportIssue(rule.CreateDiagnostic(context.Compilation,
                     location,
                     additionalLocations: new[] { statement.GetLocation() },
                     messageArgs: new object[] { executed, execute, nextStatementPosition.Line - statementPosition.Line + 1 }));

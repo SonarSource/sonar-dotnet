@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
@@ -61,8 +62,7 @@ namespace SonarAnalyzer.Rules
                         foreach (var duplicate in duplicates)
                         {
                             methodsToHandle.Remove(duplicate);
-                            c.ReportIssue(DiagnosticFactory.Create(SupportedDiagnostics[0],
-                                c.Compilation,
+                            c.ReportIssue(SupportedDiagnostics[0].CreateDiagnostic(c.Compilation,
                                 GetMethodIdentifier(duplicate).GetLocation(),
                                 additionalLocations: new[] { GetMethodIdentifier(method).GetLocation() },
                                 messageArgs: GetMethodIdentifier(method).ValueText));

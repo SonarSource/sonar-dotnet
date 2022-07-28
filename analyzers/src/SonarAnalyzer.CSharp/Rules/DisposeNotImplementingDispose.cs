@@ -125,7 +125,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 foreach (var location in disposeMethod.Locations)
                 {
-                    var diagnostic = DiagnosticFactory.Create(Rule, context.Compilation, location, disposeMethod.PartialImplementationPart?.Locations ?? Enumerable.Empty<Location>());
+                    var diagnostic = Rule.CreateDiagnostic(context.Compilation, location, disposeMethod.PartialImplementationPart?.Locations ?? Enumerable.Empty<Location>());
                     context.ReportDiagnosticIfNonGenerated(diagnostic);
                 }
             }

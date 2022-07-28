@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -62,8 +63,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         if (syntaxNodes.Count > 1)
                         {
-                            c.ReportIssue(DiagnosticFactory.Create(rule,
-                                c.Compilation,
+                            c.ReportIssue(rule.CreateDiagnostic(c.Compilation,
                                 syntaxNodes.First().GetLocation(),
                                 additionalLocations: syntaxNodes.Skip(1).Select(node => node.GetLocation()).ToArray(),
                                 messageArgs: ConsumeOnlyOnceMessage));

@@ -98,7 +98,7 @@ namespace SonarAnalyzer.Rules
                             var location = fieldWithLocations.Value.First(x => x.SourceSpan.Start == firstPosition);
                             var message = GetDiagnosticMessageArgument(cbc.CodeBlock, cbc.OwningSymbol, fieldWithLocations.Key);
                             var secondaryLocations = fieldWithLocations.Key.DeclaringSyntaxReferences.Select(x => x.GetSyntax().GetLocation());
-                            c.ReportIssue(DiagnosticFactory.Create(Rule, c.SemanticModel.Compilation, location, secondaryLocations, message));
+                            c.ReportIssue(Rule.CreateDiagnostic(c.SemanticModel.Compilation, location, secondaryLocations, message));
                         }
                     });
                 });

@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
@@ -77,7 +78,7 @@ namespace SonarAnalyzer.Rules
 
             if (previousSet != null)
             {
-                context.ReportIssue(DiagnosticFactory.Create(Rule, context.Compilation, context.Node.GetLocation(), additionalLocations: new[] { previousSet.GetLocation() }));
+                context.ReportIssue(Rule.CreateDiagnostic(context.Compilation, context.Node.GetLocation(), additionalLocations: new[] { previousSet.GetLocation() }));
             }
         }
 

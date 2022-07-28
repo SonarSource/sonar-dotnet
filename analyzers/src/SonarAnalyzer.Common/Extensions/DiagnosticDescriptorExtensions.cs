@@ -22,10 +22,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.Extensions;
 
-public static class DiagnosticFactory
+public static class DiagnosticDescriptorExtensions
 {
-    public static Diagnostic Create(DiagnosticDescriptor descriptor, Compilation compilation, Location location, IEnumerable<Location> additionalLocations, params object[] messageArgs) =>
+    public static Diagnostic CreateDiagnostic(this DiagnosticDescriptor descriptor, Compilation compilation, Location location, IEnumerable<Location> additionalLocations, params object[] messageArgs) =>
         Diagnostic.Create(descriptor, location, additionalLocations?.Where(x => compilation.ContainsSyntaxTree(x.SourceTree.GetRoot()?.SyntaxTree)), messageArgs);
 }

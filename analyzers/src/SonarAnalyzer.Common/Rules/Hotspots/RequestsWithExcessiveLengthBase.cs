@@ -27,6 +27,7 @@ using System.Xml.XPath;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
@@ -129,7 +130,7 @@ namespace SonarAnalyzer.Rules
             {
                 context.ReportIssue(
                     invalidAttributes.SecondaryAttribute != null
-                        ? DiagnosticFactory.Create(rule, context.Compilation, invalidAttributes.MainAttribute.GetLocation(), new List<Location> { invalidAttributes.SecondaryAttribute.GetLocation() })
+                        ? rule.CreateDiagnostic(context.Compilation, invalidAttributes.MainAttribute.GetLocation(), new List<Location> { invalidAttributes.SecondaryAttribute.GetLocation() })
                         : Diagnostic.Create(rule, invalidAttributes.MainAttribute.GetLocation()));
             }
         }

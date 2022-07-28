@@ -56,7 +56,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
             public bool SupportsPartialResults => true;
 
             public IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation) =>
-                locations.Select(location => DiagnosticFactory.Create(S5773, compilation, location.Primary,  location.SecondaryLocations, location.Message));
+                locations.Select(location => S5773.CreateDiagnostic(compilation, location.Primary,  location.SecondaryLocations, location.Message));
 
             public void Dispose()
             {

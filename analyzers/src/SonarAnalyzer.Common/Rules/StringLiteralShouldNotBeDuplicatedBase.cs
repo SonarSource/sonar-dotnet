@@ -24,6 +24,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
@@ -87,8 +88,7 @@ namespace SonarAnalyzer.Rules
             {
                 var duplicates = item.ToList();
                 var firstToken = duplicates[0];
-                context.ReportIssue(DiagnosticFactory.Create(rule,
-                    context.Compilation,
+                context.ReportIssue(rule.CreateDiagnostic(context.Compilation,
                     firstToken.GetLocation(),
                     duplicates.Skip(1).Select(x => x.GetLocation()),
                     ExtractStringContent(firstToken), duplicates.Count));
