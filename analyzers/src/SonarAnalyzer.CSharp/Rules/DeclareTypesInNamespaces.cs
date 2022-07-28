@@ -22,6 +22,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -54,5 +55,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKindEx.RecordClassDeclaration,
                 SyntaxKindEx.RecordStructDeclaration,
                 SyntaxKindEx.FileScopedNamespaceDeclaration);
+
+        protected override bool IsException(SyntaxNode node) =>
+            IsTopLevelStatementPartialProgramClass(node);
+
+        private static bool IsTopLevelStatementPartialProgramClass(SyntaxNode declaration) =>
+            declaration is ClassDeclarationSyntax { Identifier.Text: "Program" } classDeclaration
+            && classDeclaration.Modifiers.Any(SyntaxKind.PartialKeyword)
+            && declaration.Parent is CompilationUnitSyntax compilationUnit
+            && compilationUnit.IsTopLevelMain();
     }
 }

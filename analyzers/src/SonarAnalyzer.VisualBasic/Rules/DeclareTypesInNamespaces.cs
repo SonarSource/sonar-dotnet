@@ -54,6 +54,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
             }
         }
 
+        protected override bool IsException(SyntaxNode node) => false;
+
         protected override bool IsInnerTypeOrWithinNamespace(SyntaxNode declaration, SemanticModel semanticModel)
         {
             switch (declaration.Parent.Parent.Kind())
