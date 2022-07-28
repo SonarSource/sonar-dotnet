@@ -292,7 +292,6 @@ Tag(""End"");";
                 "End");
         }
 
-
         [TestMethod]
         public void BinaryEqualsNull_SetsBoolConstraint_CS()
         {

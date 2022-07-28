@@ -49,15 +49,15 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
         }
 
         private static SymbolicConstraint BinaryBoolConstraint(BinaryOperatorKind kind, bool left, bool right) =>
-                    kind switch
-                    {
-                        BinaryOperatorKind.Equals or BinaryOperatorKind.ObjectValueEquals => BoolConstraint.From(left == right),
-                        BinaryOperatorKind.NotEquals or BinaryOperatorKind.ObjectValueNotEquals => BoolConstraint.From(left != right),
-                        BinaryOperatorKind.And or BinaryOperatorKind.ConditionalAnd => BoolConstraint.From(left && right),
-                        BinaryOperatorKind.Or or BinaryOperatorKind.ConditionalOr => BoolConstraint.From(left || right),
-                        BinaryOperatorKind.ExclusiveOr => BoolConstraint.From(left ^ right),
-                        _ => null
-                    };
+            kind switch
+            {
+                BinaryOperatorKind.Equals or BinaryOperatorKind.ObjectValueEquals => BoolConstraint.From(left == right),
+                BinaryOperatorKind.NotEquals or BinaryOperatorKind.ObjectValueNotEquals => BoolConstraint.From(left != right),
+                BinaryOperatorKind.And or BinaryOperatorKind.ConditionalAnd => BoolConstraint.From(left && right),
+                BinaryOperatorKind.Or or BinaryOperatorKind.ConditionalOr => BoolConstraint.From(left || right),
+                BinaryOperatorKind.ExclusiveOr => BoolConstraint.From(left ^ right),
+                _ => null
+            };
 
         private static SymbolicConstraint BinaryNullConstraint(BinaryOperatorKind kind, bool isNullLeft, bool isNullRight) =>
             isNullLeft || isNullRight
