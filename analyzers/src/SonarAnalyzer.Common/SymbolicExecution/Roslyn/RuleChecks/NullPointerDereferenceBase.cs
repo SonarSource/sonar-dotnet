@@ -18,10 +18,32 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
+using SonarAnalyzer.SymbolicExecution.Constraints;
+using StyleCop.Analyzers.Lightup;
+
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
 {
     public abstract class NullPointerDereferenceBase : SymbolicRuleCheck
     {
         internal const string DiagnosticId = "S2259";
+
+        protected override ProgramState PostProcessSimple(SymbolicContext context)
+        {
+            switch (context.Operation.Instance.Kind)
+            {
+                case OperationKindEx.Invocation:
+                    if (IInvocationOperationWrapper.FromOperation(context.Operation.Instance) is { } invocation
+                        && invocation.Instance is { } instance
+                        && instance.TrackedSymbol() is { } instanceSymbol
+                        && context.State[instanceSymbol] is { } instanceState
+                        && instanceState.HasConstraint(ObjectConstraint.Null))
+                    {
+                        NodeContext.ReportDiagnostic(Diagnostic.Create(Rule, instance.Syntax.GetLocation(), instanceSymbol.Name));
+                    }
+                    break;
+            }
+            return base.PostProcessSimple(context);
+        }
     }
 }

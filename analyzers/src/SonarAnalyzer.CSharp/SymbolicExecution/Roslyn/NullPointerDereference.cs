@@ -31,10 +31,5 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp
         protected override DiagnosticDescriptor Rule => S2259;
 
         public override bool ShouldExecute() => true;
-
-        protected override ProgramState PostProcessSimple(SymbolicContext context)
-        {
-            return base.PostProcessSimple(context);
-        }
     }
 }
