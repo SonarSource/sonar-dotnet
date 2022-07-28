@@ -42,16 +42,24 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
                     break;
                 case OperationKindEx.PropertyReference:
                     if (IPropertyReferenceOperationWrapper.FromOperation(context.Operation.Instance) is { } propertyReference
-                        && propertyReference.Instance is { } instance1
-                        && context.State[instance1] is { } instanceState1
-                        && instanceState1.HasConstraint(ObjectConstraint.Null)
-                        && instance1.TrackedSymbol() is { } instanceSymbol1)
+                        && propertyReference.Instance is { } propertyInstance
+)
                     {
-                        NodeContext.ReportIssue(Diagnostic.Create(Rule, instance1.Syntax.GetLocation(), instanceSymbol1.Name));
+                        ReportOnNullInstance(context, propertyInstance);
                     }
                     break;
             }
             return context.State;
+        }
+
+        private void ReportOnNullInstance(SymbolicContext context, IOperation instance)
+        {
+            if (instance.TrackedSymbol() is { } instanceSymbol
+            && context.State[instance] is { } instanceState
+            && instanceState.HasConstraint(ObjectConstraint.Null))
+            {
+                NodeContext.ReportIssue(Diagnostic.Create(Rule, instance.Syntax.GetLocation(), instanceSymbol.Name));
+            }
         }
     }
 }
