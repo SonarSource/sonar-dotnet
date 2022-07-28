@@ -56,12 +56,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKindEx.RecordStructDeclaration,
                 SyntaxKindEx.FileScopedNamespaceDeclaration);
 
-        protected override bool IsException(SyntaxNode declaration) =>
-            IsTopLevelStatementPartialProgramClass(declaration);
+        protected override bool IsException(SyntaxNode node) =>
+            IsTopLevelStatementPartialProgramClass(node);
 
         private static bool IsTopLevelStatementPartialProgramClass(SyntaxNode declaration) =>
-            declaration is ClassDeclarationSyntax classDeclaration
-            && classDeclaration.Identifier.Text.Equals("Program")
+            declaration is ClassDeclarationSyntax { Identifier.Text: "Program" } classDeclaration
             && classDeclaration.Modifiers.Any(SyntaxKind.PartialKeyword)
             && declaration.Parent is CompilationUnitSyntax compilationUnit
             && compilationUnit.IsTopLevelMain();

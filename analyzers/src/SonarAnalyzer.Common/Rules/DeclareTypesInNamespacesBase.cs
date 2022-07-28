@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules
         protected abstract TSyntaxKind[] SyntaxKinds { get; }
         protected abstract bool IsInnerTypeOrWithinNamespace(SyntaxNode declaration, SemanticModel semanticModel);
         protected abstract SyntaxToken GetTypeIdentifier(SyntaxNode declaration);
-        protected abstract bool IsException(SyntaxNode declaration);
+        protected abstract bool IsException(SyntaxNode node);
 
         protected override string MessageFormat => "Move '{0}' into a named namespace.";
 
