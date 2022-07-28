@@ -113,16 +113,16 @@ namespace SonarAnalyzer.Rules
 
             public Type Type { get; }
 
-            protected RuleFactory(Type type, Func<SymbolicRuleCheck> createInstance, Func<object> sonarFallbackFactory)
+            protected RuleFactory(Type type, Func<SymbolicRuleCheck> createInstance, Func<object> createSonarFallbackInstance)
             {
                 Type = type;
                 this.createInstance = createInstance;
-                this.sonarFallbackFactory = sonarFallbackFactory;
+                this.createSonarFallbackInstance = createSonarFallbackInstance;
             }
 
             public SymbolicRuleCheck CreateInstance(IAnalyzerConfiguration configuration, SonarAnalysisContext sonarContext, SyntaxNodeAnalysisContext nodeContext)
             {
-                if (configuration.ForceSonarCfg && sonarFallbackFactory is not null)
+                if (configuration.ForceSonarCfg && createSonarFallbackInstance is not null)
                 {
                     return null;
                 }
@@ -133,7 +133,7 @@ namespace SonarAnalyzer.Rules
             }
 
             public object CreateSonarFallback(IAnalyzerConfiguration configuration) =>
-                configuration.ForceSonarCfg && sonarFallbackFactory is not null ? sonarFallbackFactory() : null;
+                configuration.ForceSonarCfg && createSonarFallbackInstance is not null ? createSonarFallbackInstance() : null;
         }
 
         protected class RuleFactory<TCheck> : RuleFactory
