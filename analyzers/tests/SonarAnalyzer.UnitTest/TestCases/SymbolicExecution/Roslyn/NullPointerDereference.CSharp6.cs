@@ -155,10 +155,14 @@ namespace Tests.Diagnostics
       switch (obj?.Color)
       {
         case ConsoleColor.Red:
-          Console.ForegroundColor = obj.Color; //compliant
+          Console.ForegroundColor = obj.Color;  // FIXME was compliant before
+//                                  ^^^    {{'obj' is null on at least one execution path.}}
+//                                  ^^^@-1 {{'obj' is null on at least one execution path.}}
           break;
         default:
-          Console.WriteLine($"Color {obj.Color} is not supported."); // FIXME Non-compliant
+          Console.WriteLine($"Color {obj.Color} is not supported."); // FIXME double reported
+//                                   ^^^    {{'obj' is null on at least one execution path.}}
+//                                   ^^^@-1 {{'obj' is null on at least one execution path.}}
           break;
       }
     }

@@ -181,7 +181,7 @@ namespace Tests.Diagnostics
         void NonCompliant1()
         {
             Exception exception = null;
-            if (exception.Data is IDictionary data) // FIXME Non-compliant
+            if (exception.Data is IDictionary data) // Noncompliant
             {
                 if (exception.InnerException?.Data is IDictionary innerexceptiondata)
                 {
