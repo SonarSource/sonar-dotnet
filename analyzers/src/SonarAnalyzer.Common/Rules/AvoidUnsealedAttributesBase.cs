@@ -46,5 +46,5 @@ public abstract class AvoidUnsealedAttributesBase<TSyntaxKind> : SonarDiagnostic
                     c.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation()));
                 }
             },
-            Language.SyntaxKind.ClassAndRecordDeclaration);
+            Language.SyntaxKind.ClassDeclaration);
 }
