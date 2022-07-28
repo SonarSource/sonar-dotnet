@@ -29,7 +29,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
     {
         internal const string DiagnosticId = "S2259";
 
-        protected override ProgramState PostProcessSimple(SymbolicContext context)
+        protected override ProgramState PreProcessSimple(SymbolicContext context)
         {
             switch (context.Operation.Instance.Kind)
             {
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
                     }
                     break;
             }
-            return base.PostProcessSimple(context);
+            return base.PreProcessSimple(context);
         }
     }
 }
