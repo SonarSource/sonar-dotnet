@@ -31,7 +31,7 @@ public class Sample
         sb.Append("Value");
 
         sb = null;
-        sb.ToString(); // FN, can't build CFG for this method
+        sb.ToString(); // Noncompliant
     }
 
     public void PatternMatching(object arg)
@@ -72,9 +72,9 @@ public class Sample
             object o = null;
             if (o is not null)
             {
-                o.ToString();
+                o.ToString();   // Noncompliant FIXME (was compliant before)
             }
-            o.ToString();       // FN, can't build CFG for this method
+            o.ToString();       // Noncompliant
         }
     }
 
@@ -103,7 +103,7 @@ public class Sample
         res.ToString();     // FN
 
         object o = null;
-        o.ToString();       // FN, can't build CFG for this method
+        o.ToString();       // Noncompliant
     }
 
     public void StaticLambda()
@@ -111,7 +111,7 @@ public class Sample
         Func<string> a = static () =>
         {
             object o = null;
-            return o.ToString();    // FIXME Non-compliant
+            return o.ToString();    // Noncompliant
         };
         a();
     }
@@ -122,7 +122,7 @@ public class Sample
         init
         {
             object o = null;
-            field = o.ToString();   // FIXME Non-compliant
+            field = o.ToString();   // Noncompliant
         }
     }
 
@@ -144,7 +144,7 @@ public record Record
     public void Method()
     {
         object o = null;
-        o.ToString();   // FIXME Non-compliant
+        o.ToString();   // Noncompliant
     }
 }
 
@@ -158,7 +158,7 @@ public partial class Partial
     public partial void Method()
     {
         object o = null;
-        o.ToString();   // FIXME Non-compliant
+        o.ToString();   // Noncompliant
     }
 }
 
@@ -176,7 +176,7 @@ namespace TartetTypedConditional
             AlphaAndBeta ab = new AlphaAndBeta();
             BetaAndAlpha ba = null;
             IAlpha result = condition ? ab : ba;
-            result.ToString();  // FIXME Non-compliant
+            result.ToString();  // Noncompliant
         }
     }
 }

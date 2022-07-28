@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace Tests.Diagnostics
 {
@@ -246,7 +246,7 @@ namespace Tests.Diagnostics
         default:
           break;
       }
-      var s = obj.ToString(); // FIXME Non-compliant
+      var s = obj.ToString(); // Noncompliant
     }
 
     public void Method4(object obj)
@@ -259,7 +259,7 @@ namespace Tests.Diagnostics
         default:
           break;
       }
-      var s = obj.ToString();
+      var s = obj.ToString(); // Noncompliant FIXME (was compliant before)
     }
 
     // https://github.com/SonarSource/sonar-dotnet/issues/2528
