@@ -18,15 +18,23 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Rules.CSharp;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
+namespace SonarAnalyzer.UnitTest.Rules;
 
-namespace SonarAnalyzer.UnitTest.Rules
+[TestClass]
+public class ExceptionsShouldBePublicTest
 {
-    [TestClass]
-    public class ExceptionsShouldBePublicTest
-    {
-        [TestMethod]
-        public void ExceptionsShouldBePublic() =>
-            new VerifierBuilder<ExceptionsShouldBePublic>().AddPaths("ExceptionsShouldBePublic.cs").Verify();
-    }
+    [TestMethod]
+    public void ExceptionsShouldBePublic_CS() =>
+        new VerifierBuilder<CS.ExceptionsShouldBePublic>()
+        .AddPaths("ExceptionsShouldBePublic.cs")
+        .Verify();
+
+    [TestMethod]
+    public void ExceptionsShouldBePublic_VB() =>
+        new VerifierBuilder<VB.ExceptionsShouldBePublic>()
+        .AddPaths("ExceptionsShouldBePublic.vb")
+        .WithConcurrentAnalysis(false)
+        .Verify();
 }

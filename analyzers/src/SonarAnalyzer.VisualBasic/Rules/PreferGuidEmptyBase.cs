@@ -19,15 +19,15 @@
  */
 
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.CSharp;
+namespace SonarAnalyzer.Rules.VisualBasic;
 
-[DiagnosticAnalyzer(LanguageNames.CSharp)]
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
 public sealed class ExceptionsShouldBePublic : ExceptionsShouldBePublicBase<SyntaxKind>
 {
-    protected override string MessageFormat => "Make this exception 'public'.";
-    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+    protected override string MessageFormat => "Make this exception 'Public'.";
+    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 }
