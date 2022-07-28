@@ -19,6 +19,7 @@
  */
 
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
 
@@ -36,10 +37,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
                     if (IInvocationOperationWrapper.FromOperation(context.Operation.Instance) is { } invocation
                         && invocation.Instance is { } instance
                         && instance.TrackedSymbol() is { } instanceSymbol
-                        && context.State[instanceSymbol] is { } instanceState
+                        && context.State[instance] is { } instanceState
                         && instanceState.HasConstraint(ObjectConstraint.Null))
                     {
-                        NodeContext.ReportDiagnostic(Diagnostic.Create(Rule, instance.Syntax.GetLocation(), instanceSymbol.Name));
+                        NodeContext.ReportIssue(Diagnostic.Create(Rule, instance.Syntax.GetLocation(), instanceSymbol.Name));
                     }
                     break;
             }
