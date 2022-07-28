@@ -87,7 +87,7 @@ namespace SonarAnalyzer.Rules
                 .Where(x => IsEnabled(nodeContext, isTestProject, isScannerRun, x.Key))
                 .GroupBy(x => x.Value.Type)                             // Multiple DiagnosticDescriptors (S2583, S2589) can share the same check type
                 .Select(x => x.First().Value.CreateInstance(Configuration, sonarContext, nodeContext))   // We need just one instance in that case
-                .Where(x => x?.ShouldExecute() == true)
+                .Where(x => x?.ShouldExecute() is true)
                 .ToArray();
             if (checks.Any())
             {
@@ -109,7 +109,7 @@ namespace SonarAnalyzer.Rules
         protected class RuleFactory
         {
             private readonly Func<SymbolicRuleCheck> createInstance;
-            private readonly Func<object> sonarFallbackFactory;
+            private readonly Func<object> createSonarFallbackInstance;
 
             public Type Type { get; }
 
@@ -122,7 +122,7 @@ namespace SonarAnalyzer.Rules
 
             public SymbolicRuleCheck CreateInstance(IAnalyzerConfiguration configuration, SonarAnalysisContext sonarContext, SyntaxNodeAnalysisContext nodeContext)
             {
-                if (configuration.ForceSonarCfg && sonarFallbackFactory != null)
+                if (configuration.ForceSonarCfg && sonarFallbackFactory is not null)
                 {
                     return null;
                 }
@@ -133,14 +133,14 @@ namespace SonarAnalyzer.Rules
             }
 
             public object CreateSonarFallback(IAnalyzerConfiguration configuration) =>
-                configuration.ForceSonarCfg ? sonarFallbackFactory?.Invoke() : null;
+                configuration.ForceSonarCfg && sonarFallbackFactory is not null ? sonarFallbackFactory() : null;
         }
 
         protected class RuleFactory<TCheck> : RuleFactory
             where TCheck : SymbolicRuleCheck, new()
         {
             public RuleFactory() : this(null) { }
-            public RuleFactory(Func<object> sonarFallbackFactory) : base(typeof(TCheck), () => new TCheck(), sonarFallbackFactory) { }
+            protected RuleFactory(Func<object> sonarFallbackFactory) : base(typeof(TCheck), () => new TCheck(), sonarFallbackFactory) { }
         }
 
         protected class RuleFactory<TCheck, TSonarFallback> : RuleFactory<TCheck>
