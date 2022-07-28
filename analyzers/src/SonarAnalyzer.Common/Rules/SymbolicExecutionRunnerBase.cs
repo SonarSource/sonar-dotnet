@@ -136,18 +136,17 @@ namespace SonarAnalyzer.Rules
                 configuration.ForceSonarCfg && createSonarFallbackInstance is not null ? createSonarFallbackInstance() : null;
         }
 
-        private sealed class RuleFactory<TCheck> : RuleFactory
+        protected sealed class RuleFactory<TCheck> : RuleFactory
             where TCheck : SymbolicRuleCheck, new()
         {
-            internal RuleFactory() : this(null) { }
-            internal RuleFactory(Func<object> sonarFallbackFactory) : base(typeof(TCheck), () => new TCheck(), sonarFallbackFactory) { }
+            public RuleFactory() : base(typeof(TCheck), () => new TCheck(), null) { }
         }
 
-        private sealed class RuleFactory<TCheck, TSonarFallback> : RuleFactory
+        protected sealed class RuleFactory<TCheck, TSonarFallback> : RuleFactory
             where TCheck : SymbolicRuleCheck, new()
             where TSonarFallback : new()
         {
-            internal RuleFactory() : base(typeof(TCheck), () => new TCheck(), () => new TSonarFallback()) { }
+            public RuleFactory() : base(typeof(TCheck), () => new TCheck(), () => new TSonarFallback()) { }
         }
     }
 }
