@@ -25,22 +25,24 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class CheckArgumentExceptionTest
     {
+        private readonly VerifierBuilder verifier = new VerifierBuilder<CheckArgumentException>();
+
         [TestMethod]
         public void CheckArgumentException() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\CheckArgumentException.cs", new CheckArgumentException());
+            verifier.AddPaths("CheckArgumentException.cs").Verify();
 
 #if NET
         [TestMethod]
         public void CheckArgumentException_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\CheckArgumentException.CSharp9.cs", new CheckArgumentException());
+            verifier.AddPaths("CheckArgumentException.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
         [TestMethod]
         public void CheckArgumentException_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\CheckArgumentException.CSharp10.cs", new CheckArgumentException());
+            verifier.AddPaths("CheckArgumentException.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
         [TestMethod]
         public void CheckArgumentException_TopLevelStatements() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CheckArgumentException.TopLevelStatements.cs", new CheckArgumentException());
+            verifier.AddPaths("CheckArgumentException.TopLevelStatements.cs").WithTopLevelStatements().Verify();
 #endif
     }
 }
