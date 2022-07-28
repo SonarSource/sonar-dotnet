@@ -349,5 +349,32 @@ namespace Monitor_TryCatch
             {
             }
         }
+
+        // https://github.com/SonarSource/sonar-dotnet/issues/5916
+        public void TryFinally_NestedCfg(bool condition)
+        {
+            Monitor.Enter(obj);
+            try
+            {
+                Action a = () =>
+                {
+                    M();
+                    Monitor.Enter(obj);
+                    Monitor.Exit(obj);
+                };
+                a();
+            }
+            finally
+            {
+                M();
+            }
+
+            if (condition)
+            {
+                Monitor.Exit(obj);
+            }
+
+            void M() { }
+        }
     }
 }
