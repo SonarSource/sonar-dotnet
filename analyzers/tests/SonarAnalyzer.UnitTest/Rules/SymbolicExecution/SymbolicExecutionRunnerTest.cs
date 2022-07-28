@@ -328,25 +328,14 @@ End Sub");
 
         [TestMethod]
         public void Analyze_Severity_ExecutesWhenAll() =>
-            VerifyCode<TestSERunnerCS>(@"
-using System.Threading;
-namespace Monitor_Conditions
+            Verify(@"
+var obj = new object(); // Noncompliant    {{Message for SAll}}
+                        // Noncompliant@-1 {{Message for SMain}}
+Monitor.Enter(obj);     // Noncompliant    {{Unlock this lock along all executions paths of this method.}} - S2222
+if (condition)
 {
-    class Program
-    {
-        private object obj = new object();
-        public void Method1(bool condition)
-        {
-            string s = null;    // Noncompliant    {{Message for SAll}}
-                                // Noncompliant@-1 {{Message for SMain}}
-            Monitor.Enter(obj); // Noncompliant    {{Unlock this lock along all executions paths of this method.}} - S2222
-            if (condition)
-            {
-                Monitor.Exit(obj);
-            }
-        }
-    }
-}", ProjectType.Product, ParseOptionsHelper.FromCSharp9, null);
+    Monitor.Exit(obj);
+}");
 
         [TestMethod]
         public void Analyze_Severity_ExecutesWhenMore() =>
@@ -422,7 +411,7 @@ $@"
 using System.Threading;
 public class Sample
 {{
-    public void Main()
+    public void Main(bool condition)
     {{
         {body}
     }}
