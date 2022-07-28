@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis.Text;
 using Moq;
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.UnitTest.PackagingTests;
 using StyleCop.Analyzers.Lightup;
 using CS = Microsoft.CodeAnalysis.CSharp;
@@ -80,16 +81,33 @@ End Class", AnalyzerLanguage.VisualBasic);
                                                   AnalyzerLanguage language,
                                                   bool ignoreErrors = false,
                                                   string localFunctionName = null,
+                                                  string anonymousFunctionFragment = null,
                                                   OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary)
         {
             var (tree, semanticModel) = Compile(snippet, ignoreErrors, language, outputKind: outputKind);
             var method = tree.GetRoot().DescendantNodes().First(IsMethod);
             var cfg = ControlFlowGraph.Create(method, semanticModel, default);
-            if (localFunctionName != null)
+            if (localFunctionName is not null && anonymousFunctionFragment is not null)
             {
-                cfg = cfg.GetLocalFunctionControlFlowGraph(cfg.LocalFunctions.Single(x => x.Name == localFunctionName), default);
+                throw new InvalidOperationException($"Specify {nameof(localFunctionName)} or {nameof(anonymousFunctionFragment)}.");
             }
-            return cfg;
+            if (localFunctionName is not null)
+            {
+                return cfg.GetLocalFunctionControlFlowGraph(cfg.LocalFunctions.Single(x => x.Name == localFunctionName), default);
+            }
+            else if (anonymousFunctionFragment is not null)
+            {
+                var anonymousFunction = cfg.FlowAnonymousFunctionOperations().SingleOrDefault(x => x.WrappedOperation.Syntax.ToString().Contains(anonymousFunctionFragment));
+                if (anonymousFunction.WrappedOperation is null)
+                {
+                    throw new ArgumentException($"Anonymous function with '{anonymousFunctionFragment}' fragment was not found.");
+                }
+                return cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunction, default);
+            }
+            else
+            {
+                return cfg;
+            }
 
             bool IsMethod(SyntaxNode node) =>
                 language == AnalyzerLanguage.CSharp
