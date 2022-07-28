@@ -56,7 +56,7 @@ namespace Tests.Diagnostics
             }
             catch (Exception e) when (e.Message != null)
             {
-                var b = o.ToString(); // FIXME Non-compliant, o could be null here
+                var b = o.ToString(); // Noncompliant, o could be null here
             }
         }
 
@@ -119,7 +119,8 @@ namespace Tests.Diagnostics
       switch (o?.GetHashCode())
       {
         case null:
-          o.ToString(); // FIXME Non-compliant
+          o.ToString(); // Noncompliant
+                        // Noncompliant@-1 FIXME: double reporting
           break;
         default:
           break;
@@ -210,7 +211,7 @@ namespace Tests.Diagnostics
             if (leftName == null)
             {
                 // rightName is not null
-                if (rightName.EndsWith("foo")) // FIXME Non-compliant FP
+                if (rightName.EndsWith("foo")) // Noncompliant FP
                     return 1;
                 return 0;
             }
