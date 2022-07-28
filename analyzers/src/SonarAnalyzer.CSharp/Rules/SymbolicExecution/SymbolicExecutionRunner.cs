@@ -52,7 +52,6 @@ namespace SonarAnalyzer.Rules.CSharp
             new SonarRules.EmptyCollectionsShouldNotBeEnumerated(),
             new SonarRules.ConditionEvaluatesToConstant(),
             new SonarRules.InvalidCastToInterfaceSymbolicExecution(),
-            new SonarRules.NullPointerDereference(),
             new SonarRules.RestrictDeserializedTypes(),
             new SonarRules.InitializationVectorShouldBeRandom(),
             new SonarRules.HashesShouldHaveUnpredictableSalt());
@@ -63,7 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules { get; } = ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
             .Add(LocksReleasedAllPaths.S2222, CreateFactory<LocksReleasedAllPaths>())
-            .Add(NullPointerDereference.S2259, CreateFactory<NullPointerDereference>());
+            .Add(NullPointerDereference.S2259, CreateFactory<NullPointerDereference, SonarRules.NullPointerDereference>());
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => base.SupportedDiagnostics.Concat(SonarRules.SelectMany(x => x.SupportedDiagnostics)).ToImmutableArray();
 
@@ -112,11 +111,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void AnalyzeSonar(SyntaxNodeAnalysisContext context, bool isTestProject, bool isScannerRun, SyntaxNode body, ISymbol symbol)
         {
-            var enabledAnalyzers = SonarRules.Where(x => x.SupportedDiagnostics.Any(descriptor => IsEnabled(context, isTestProject, isScannerRun, descriptor))).ToArray();
-            if (!Configuration.ForceSonarCfg) // ToDo: Will be removed in RuleFactory PR
-            {
-                enabledAnalyzers = enabledAnalyzers.Where(x => !x.SupportedDiagnostics.Any(descriptor => AllRules.Keys.Any(dd => descriptor.Id == dd.Id))).ToArray();
-            }
+            var enabledAnalyzers = AllRules.Select(x => x.Value.CreateSonarFallback(Configuration))
+                                           .WhereNotNull()
+                                           .Cast<ISymbolicExecutionAnalyzer>() // ISymbolicExecutionAnalyzer should be passed as TSonarFallback to CreateFactory. Have you passed a Roslyn rule instead?
+                                           .Union(SonarRules)
+                                           .Where(x => x.SupportedDiagnostics.Any(descriptor => IsEnabled(context, isTestProject, isScannerRun, descriptor)))
+                                           .ToList();
             if (enabledAnalyzers.Any() && CSharpControlFlowGraph.TryGet((CSharpSyntaxNode)body, context.SemanticModel, out var cfg))
             {
                 var lva = new SonarCSharpLiveVariableAnalysis(cfg, symbol, context.SemanticModel, context.CancellationToken);

@@ -49,6 +49,11 @@ namespace SonarAnalyzer.Rules
         protected static RuleFactory CreateFactory<TRuleCheck>() where TRuleCheck : SymbolicRuleCheck, new() =>
             new RuleFactory<TRuleCheck>();
 
+        protected static RuleFactory CreateFactory<TRuleCheck, TSonarFallback>()
+            where TRuleCheck : SymbolicRuleCheck, new()
+            where TSonarFallback : new() =>
+            new RuleFactory<TRuleCheck, TSonarFallback>();
+
         // We need to rewrite this https://github.com/SonarSource/sonar-dotnet/issues/4824
         protected static bool IsEnabled(SyntaxNodeAnalysisContext context, bool isTestProject, bool isScannerRun, DiagnosticDescriptor descriptor) =>
             SonarAnalysisContext.IsAnalysisScopeMatching(context.Compilation, isTestProject, isScannerRun, new[] { descriptor })
@@ -81,8 +86,8 @@ namespace SonarAnalyzer.Rules
             var checks = AllRules
                 .Where(x => IsEnabled(nodeContext, isTestProject, isScannerRun, x.Key))
                 .GroupBy(x => x.Value.Type)                             // Multiple DiagnosticDescriptors (S2583, S2589) can share the same check type
-                .Select(x => x.First().Value.CreateInstance(sonarContext, nodeContext))   // We need just one instance in that case
-                .Where(x => x.ShouldExecute())
+                .Select(x => x.First().Value.CreateInstance(Configuration, sonarContext, nodeContext))   // We need just one instance in that case
+                .Where(x => x?.ShouldExecute() is true)
                 .ToArray();
             if (checks.Any())
             {
@@ -103,27 +108,45 @@ namespace SonarAnalyzer.Rules
 
         protected class RuleFactory
         {
-            public Type Type { get; }
             private readonly Func<SymbolicRuleCheck> createInstance;
+            private readonly Func<object> createSonarFallbackInstance;
 
-            protected RuleFactory(Type type, Func<SymbolicRuleCheck> createInstance)
+            public Type Type { get; }
+
+            protected RuleFactory(Type type, Func<SymbolicRuleCheck> createInstance, Func<object> createSonarFallbackInstance)
             {
                 Type = type;
                 this.createInstance = createInstance;
+                this.createSonarFallbackInstance = createSonarFallbackInstance;
             }
 
-            public SymbolicRuleCheck CreateInstance(SonarAnalysisContext sonarContext, SyntaxNodeAnalysisContext nodeContext)
+            public SymbolicRuleCheck CreateInstance(IAnalyzerConfiguration configuration, SonarAnalysisContext sonarContext, SyntaxNodeAnalysisContext nodeContext)
             {
+                if (configuration.ForceSonarCfg && createSonarFallbackInstance is not null)
+                {
+                    return null;
+                }
+
                 var ret = createInstance();
                 ret.Init(sonarContext, nodeContext);
                 return ret;
             }
+
+            public object CreateSonarFallback(IAnalyzerConfiguration configuration) =>
+                configuration.ForceSonarCfg && createSonarFallbackInstance is not null ? createSonarFallbackInstance() : null;
         }
 
-        private sealed class RuleFactory<TCheck> : RuleFactory
+        protected sealed class RuleFactory<TCheck> : RuleFactory
             where TCheck : SymbolicRuleCheck, new()
         {
-            public RuleFactory() : base(typeof(TCheck), () => new TCheck()) { }
+            public RuleFactory() : base(typeof(TCheck), () => new TCheck(), null) { }
+        }
+
+        protected sealed class RuleFactory<TCheck, TSonarFallback> : RuleFactory
+            where TCheck : SymbolicRuleCheck, new()
+            where TSonarFallback : new()
+        {
+            public RuleFactory() : base(typeof(TCheck), () => new TCheck(), () => new TSonarFallback()) { }
         }
     }
 }

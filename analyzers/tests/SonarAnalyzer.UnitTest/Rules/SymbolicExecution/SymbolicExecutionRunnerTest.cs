@@ -21,6 +21,7 @@
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Rules;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
+using SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
@@ -327,9 +328,14 @@ End Sub");
 
         [TestMethod]
         public void Analyze_Severity_ExecutesWhenAll() =>
-            Verify(@"string s = null;   // Noncompliant    {{Message for SAll}}
-                                        // Noncompliant@-1 {{Message for SMain}}
-                    s.ToString();       // Noncompliant    {{'s' is null on at least one execution path.}} - rule S2259");
+            Verify(@"
+var obj = new object(); // Noncompliant    {{Message for SAll}}
+                        // Noncompliant@-1 {{Message for SMain}}
+Monitor.Enter(obj);     // Noncompliant    {{Unlock this lock along all executions paths of this method.}} - S2222
+if (condition)
+{
+    Monitor.Exit(obj);
+}");
 
         [TestMethod]
         public void Analyze_Severity_ExecutesWhenMore() =>
@@ -401,9 +407,11 @@ public class Sample
         private static void Verify(string body, ProjectType projectType, string sonarProjectConfigPath, params DiagnosticDescriptor[] onlyRules)
         {
             var code =
-$@"public class Sample
+$@"
+using System.Threading;
+public class Sample
 {{
-    public void Main()
+    public void Main(bool condition)
     {{
         {body}
     }}
@@ -448,6 +456,7 @@ End Class";
 
             protected override ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules => ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
                 .Add(BinaryRuleCheck.SBinary, CreateFactory<BinaryRuleCheck>())
+                .Add(LocksReleasedAllPaths.S2222, CreateFactory<LocksReleasedAllPaths>())
                 .Add(AllScopeAssignmentRuleCheck.SAll, CreateFactory<AllScopeAssignmentRuleCheck>())
                 .Add(MainScopeAssignmentRuleCheck.SMain, CreateFactory<MainScopeAssignmentRuleCheck>())
                 .Add(TestScopeAssignmentRuleCheck.STest, CreateFactory<TestScopeAssignmentRuleCheck>());
