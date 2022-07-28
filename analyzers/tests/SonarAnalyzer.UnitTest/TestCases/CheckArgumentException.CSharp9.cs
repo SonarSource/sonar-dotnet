@@ -95,9 +95,15 @@ public class Repro_4423
 }
 
 // https://github.com/SonarSource/sonar-dotnet/issues/5094
-public record Data(string Code)
+public record Data(string Code, string Name)
 {
-    public string Code { get; } = Code ?? throw new ArgumentNullException(nameof(Code)); // Noncompliant, FP - Code is a record parameter
+    public string Code { get; } = Code ?? throw new ArgumentNullException(nameof(Code)); // Compliant - Code is a record parameter
+    public string GetName()
+    {
+        return Name ?? throw new ArgumentNullException(nameof(Name)); // Compliant - Name is a record parameter
+    }
+
+    public string GetNameLambda() => Name ?? throw new ArgumentNullException(nameof(Name)); // Compliant - Name is a record parameter
 }
 
 // https://github.com/SonarSource/sonar-dotnet/issues/5226

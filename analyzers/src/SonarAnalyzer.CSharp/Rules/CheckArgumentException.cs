@@ -125,9 +125,10 @@ namespace SonarAnalyzer.Rules.CSharp
                     or BaseMethodDeclarationSyntax
                     or IndexerDeclarationSyntax
                     or CompilationUnitSyntax
-                || LocalFunctionStatementSyntaxWrapper.IsInstance(ancestor));
+                || LocalFunctionStatementSyntaxWrapper.IsInstance(ancestor)
+                || RecordDeclarationSyntaxWrapper.IsInstance(ancestor));
 
-            return node switch
+            var parameterList = node switch
             {
                 SimpleLambdaExpressionSyntax simpleLambda => new[] { simpleLambda.Parameter.Identifier.ValueText },
                 BaseMethodDeclarationSyntax method => IdentifierNames(method.ParameterList),
@@ -136,8 +137,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 IndexerDeclarationSyntax indexerDeclaration => IdentifierNames(indexerDeclaration.ParameterList),
                 CompilationUnitSyntax => new[] { "args" },
                 { } when LocalFunctionStatementSyntaxWrapper.IsInstance(node) => IdentifierNames(((LocalFunctionStatementSyntaxWrapper)node).ParameterList),
+                { } when RecordDeclarationSyntaxWrapper.IsInstance(node) => IdentifierNames(((RecordDeclarationSyntaxWrapper)node).ParameterList),
                 _ => Enumerable.Empty<string>()
             };
+
+            return node.Ancestors().FirstOrDefault(x => RecordDeclarationSyntaxWrapper.IsInstance(x)) is { } recordAncenstor
+                   && ((RecordDeclarationSyntaxWrapper)recordAncenstor).ParameterList  is { } recordParameterList
+                   ? parameterList.Union(IdentifierNames(recordParameterList))
+                   : parameterList;
 
             static IEnumerable<string> IdentifierNames(BaseParameterListSyntax parameterList) =>
                     parameterList.Parameters.Select(x => x.Identifier.ValueText);
