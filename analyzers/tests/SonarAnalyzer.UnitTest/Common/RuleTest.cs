@@ -246,12 +246,12 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
-        public void OnlySecurityHotspots_AreNotConfigurable_CS() =>
-            OnlySecurityHotspots_AreNotConfigurable(AnalyzerLanguage.CSharp);
+        public void AllRulesAreConfigurable_CS() =>
+            AllRulesAreConfigurable(AnalyzerLanguage.CSharp);
 
         [TestMethod]
-        public void OnlySecurityHotspots_AreNotConfigurable_VB() =>
-            OnlySecurityHotspots_AreNotConfigurable(AnalyzerLanguage.VisualBasic);
+        public void AllRulesAreConfigurable_VB() =>
+            AllRulesAreConfigurable(AnalyzerLanguage.VisualBasic);
 
         [TestMethod]
         public void RulesAreInNamespace_CS()
@@ -272,18 +272,11 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [AssertionMethod]
-        private static void OnlySecurityHotspots_AreNotConfigurable(AnalyzerLanguage language)
+        private static void AllRulesAreConfigurable(AnalyzerLanguage language)
         {
             foreach (var diagnostic in SupportedDiagnostics(language))
             {
-                if (IsSecurityHotspot(diagnostic))
-                {
-                    diagnostic.CustomTags.Should().Contain(WellKnownDiagnosticTags.NotConfigurable, diagnostic.Id + " is a Security Hotspot and should not be configurable");
-                }
-                else
-                {
-                    diagnostic.CustomTags.Should().NotContain(WellKnownDiagnosticTags.NotConfigurable, diagnostic.Id + " is not a Security Hotspot and should be configurable");
-                }
+                diagnostic.CustomTags.Should().NotContain(WellKnownDiagnosticTags.NotConfigurable, diagnostic.Id + " should be configurable");
             }
         }
 
