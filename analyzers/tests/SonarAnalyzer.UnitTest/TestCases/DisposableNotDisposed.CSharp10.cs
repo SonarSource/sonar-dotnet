@@ -1,5 +1,4 @@
-﻿namespace Tests.Diagnostics;
-using System.IO;
+﻿using System.IO;
 
 public class DisposableNotDisposed
 {
