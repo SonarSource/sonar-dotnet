@@ -48,6 +48,9 @@ namespace Tests.Diagnostics
             var d = "";
             var e = new List<String> { d };
             Console.WriteLine(e);
+
+            string f;
+            f = "something"; // Compliant, S1854 (Deadstores) reports on this.
         }
 
         private object DoSomething(string foo, string p1)
