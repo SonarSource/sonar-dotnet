@@ -22,7 +22,7 @@ using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
 {
-    internal static class SimpleAssignment
+    internal static class Assignment
     {
         public static ProgramState Process(SymbolicContext context, ISimpleAssignmentOperationWrapper assignment)
         {
@@ -30,7 +30,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
             var newState = context.State
                 .SetOperationValue(assignment.Target, rightSide)
                 .SetOperationValue(assignment.WrappedOperation, rightSide);
-            return assignment.Target.TrackedSymbol() is { } symbol
+            return newState.ResolveCapture(assignment.Target).TrackedSymbol() is { } symbol
                 ? newState.SetSymbolValue(symbol, rightSide)
                 : newState;
         }
