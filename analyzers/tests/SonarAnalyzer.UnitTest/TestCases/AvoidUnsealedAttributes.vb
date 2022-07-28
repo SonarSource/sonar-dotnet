@@ -12,6 +12,9 @@ Public MustInherit Class AbstractAttribute
     Inherits Attribute ' Compliant
 End Class
 
+Public Class NotAnAttribute ' Compliant - not an attribute
+End Class
+
 Public Class Container
 
     Protected Class ProtectedAttribute ' Noncompliant
