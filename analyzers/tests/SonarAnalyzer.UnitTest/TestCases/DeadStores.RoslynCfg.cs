@@ -633,6 +633,9 @@ namespace Tests.Diagnostics
 
             var y = 5;  // Noncompliant
             y = 6;      // Noncompliant
+
+            string f;
+            f = "something"; // Noncompliant
         }
 
         // https://github.com/SonarSource/sonar-dotnet/issues/4937
