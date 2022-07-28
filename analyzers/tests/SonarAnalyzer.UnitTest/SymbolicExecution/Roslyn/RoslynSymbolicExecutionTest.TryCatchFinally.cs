@@ -906,6 +906,7 @@ try
 {
     Action a = () =>
     {
+        // Lambda marker
         var tag = ""Before"";
         Tag(""CanThrow"");
         tag = ""After"";
@@ -913,9 +914,9 @@ try
 }
 finally
 {
-    var nonEmptyFinallyBlock = true;
+    Tag(""Unreachable - outer CFG is not analyzed"");
 }";
-            SETestContext.CreateCSLambda(code, "tag").Validator.ValidateTagOrder("Before", "CanThrow", "After");
+            SETestContext.CreateCSLambda(code, "// Lambda marker").Validator.ValidateTagOrder("Before", "CanThrow", "After");
         }
 
         private static bool HasNoException(ProgramState state) =>
