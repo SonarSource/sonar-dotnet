@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using System.Threading;
+using System.Threading.Tasks;
 
 var fs0 = new FileStream(@"c:\foo.txt", FileMode.Open); // Noncompliant
 FileStream fs1 = new(@"c:\foo.txt", FileMode.Open);     // Noncompliant
@@ -93,5 +95,20 @@ record MyRecord
         FileStream fs1 = new(@"c:\foo.txt", FileMode.Open);        // Noncompliant
         var fs2 = File.Open(@"c:\foo.txt", FileMode.Open);         // Noncompliant - instantiated with factory method
         var s = new WebClient();                                   // Noncompliant - another tracked type
+    }
+}
+
+public class Test : IAsyncDisposable
+{
+    private readonly FileStream stream;
+
+    public Test()
+    {
+        stream = new FileStream("C://some-path", FileMode.CreateNew); // Noncompliant - FP stream is disposed in DisposeAsync
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        await stream.DisposeAsync();
     }
 }
