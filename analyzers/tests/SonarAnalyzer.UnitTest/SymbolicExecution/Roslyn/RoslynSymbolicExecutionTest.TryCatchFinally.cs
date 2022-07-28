@@ -897,6 +897,28 @@ tag = ""End"";";
             validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
         }
 
+        [TestMethod]
+        public void Finally_NestedLambda_ShouldNotFail()
+        {
+            const string code = @"
+Tag(""Unreachable - outer CFG is not analyzed"");
+try
+{
+    Action a = () =>
+    {
+        // Lambda marker
+        var tag = ""Before"";
+        Tag(""CanThrow"");
+        tag = ""After"";
+    };
+}
+finally
+{
+    Tag(""Unreachable - outer CFG is not analyzed"");
+}";
+            SETestContext.CreateCSLambda(code, "// Lambda marker").Validator.ValidateTagOrder("Before", "CanThrow", "After");
+        }
+
         private static bool HasNoException(ProgramState state) =>
             state.Exception == null;
 

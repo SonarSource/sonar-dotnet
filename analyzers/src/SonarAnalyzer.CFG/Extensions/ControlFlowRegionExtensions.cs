@@ -42,6 +42,10 @@ namespace SonarAnalyzer.Extensions
         {
             while (region is not null && region.Kind != kind)
             {
+                if (region.Kind == ControlFlowRegionKind.Root)
+                {
+                    return null;    // Do not traverse from inner lambda CFG to the outer method CFG
+                }
                 region = region.EnclosingRegion;
             }
             return region;

@@ -28,10 +28,15 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
     {
         public readonly ValidatorTestCheck Validator;
 
-        public SETestContext(string code, AnalyzerLanguage language, SymbolicCheck[] additionalChecks, string localFunctionName = null, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary)
+        public SETestContext(string code,
+                             AnalyzerLanguage language,
+                             SymbolicCheck[] additionalChecks,
+                             string localFunctionName = null,
+                             string anonymousFunctionFragment = null,
+                             OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary)
         {
             const string Separator = "----------";
-            var cfg = TestHelper.CompileCfg(code, language, false, localFunctionName, outputKind: outputKind);
+            var cfg = TestHelper.CompileCfg(code, language, false, localFunctionName, anonymousFunctionFragment, outputKind);
             Validator = new ValidatorTestCheck(cfg);
             var se = new RoslynSymbolicExecution(cfg, additionalChecks.Concat(new[] { Validator }).ToArray(), default);
             Console.WriteLine(Separator);
@@ -46,9 +51,46 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         public static SETestContext CreateCS(string methodBody, string additionalParameters, params SymbolicCheck[] additionalChecks) =>
             CreateCS(methodBody, additionalParameters, null, additionalChecks);
 
-        public static SETestContext CreateCS(string methodBody, string additionalParameters, string localFunctionName, params SymbolicCheck[] additionalChecks)
+        public static SETestContext CreateCS(string methodBody, string additionalParameters, string localFunctionName, params SymbolicCheck[] additionalChecks) =>
+            new(ClassCodeCS(methodBody, additionalParameters), AnalyzerLanguage.CSharp, additionalChecks, localFunctionName);
+
+        public static SETestContext CreateCSLambda(string methodBody, string lambdaFragment, params SymbolicCheck[] additionalChecks) =>
+            new(ClassCodeCS(methodBody, null), AnalyzerLanguage.CSharp, additionalChecks, null, lambdaFragment);
+
+        public static SETestContext CreateCSMethod(string method, params SymbolicCheck[] additionalChecks) =>
+            new($@"
+using System;
+
+public class Sample
+{{
+    {method}
+
+    private void Tag(string name, object arg) {{ }}
+}}", AnalyzerLanguage.CSharp, additionalChecks);
+
+        public static SETestContext CreateVB(string methodBody, params SymbolicCheck[] additionalChecks) =>
+            CreateVB(methodBody, null, additionalChecks);
+
+        public static SETestContext CreateVB(string methodBody, string additionalParameters, params SymbolicCheck[] additionalChecks)
         {
             var code = $@"
+Public Class Sample
+
+    Private Readonly Property Condition As Boolean = Environment.ProcessorCount = 42    ' Something that cannot have constraint
+
+    Public Sub Main(BoolParameter As Boolean{additionalParameters})
+        {methodBody}
+    End Sub
+
+    Private Sub Tag(Name As String, Optional Arg As Object = Nothing)
+    End Sub
+
+End Class";
+            return new(code, AnalyzerLanguage.VisualBasic, additionalChecks);
+        }
+
+        private static string ClassCodeCS(string methodBody, string additionalParameters) =>
+            $@"
 using System;
 using System.Collections.Generic;
 
@@ -91,39 +133,5 @@ public class Person : PersonBase
 public class PersonBase
 {{
 }}";
-            return new(code, AnalyzerLanguage.CSharp, additionalChecks, localFunctionName);
-        }
-
-        public static SETestContext CreateCSMethod(string method, params SymbolicCheck[] additionalChecks) =>
-            new($@"
-using System;
-
-public class Sample
-{{
-    {method}
-
-    private void Tag(string name, object arg) {{ }}
-}}", AnalyzerLanguage.CSharp, additionalChecks);
-
-        public static SETestContext CreateVB(string methodBody, params SymbolicCheck[] additionalChecks) =>
-            CreateVB(methodBody, null, additionalChecks);
-
-        public static SETestContext CreateVB(string methodBody, string additionalParameters, params SymbolicCheck[] additionalChecks)
-        {
-            var code = $@"
-Public Class Sample
-
-    Private Readonly Property Condition As Boolean = Environment.ProcessorCount = 42    ' Something that cannot have constraint
-
-    Public Sub Main(BoolParameter As Boolean{additionalParameters})
-        {methodBody}
-    End Sub
-
-    Private Sub Tag(Name As String, Optional Arg As Object = Nothing)
-    End Sub
-
-End Class";
-            return new(code, AnalyzerLanguage.VisualBasic, additionalChecks);
-        }
     }
 }
