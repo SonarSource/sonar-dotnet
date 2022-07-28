@@ -98,6 +98,7 @@ record MyRecord
     }
 }
 
+// Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/5879
 public class Test : IAsyncDisposable
 {
     private readonly FileStream stream;
