@@ -21,49 +21,49 @@
 using Microsoft.CodeAnalysis.CSharp;
 using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer.Helpers.Facade
+namespace SonarAnalyzer.Helpers.Facade;
+
+internal sealed class CSharpSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind>
 {
-    internal sealed class CSharpSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind>
+    public SyntaxKind Attribute => SyntaxKind.Attribute;
+    public SyntaxKind[] ClassAndRecordDeclaration => new[]
     {
-        public SyntaxKind Attribute => SyntaxKind.Attribute;
-        public SyntaxKind[] ClassAndRecordDeclaration => new[]
-        {
-            SyntaxKind.ClassDeclaration,
-            SyntaxKindEx.RecordClassDeclaration,
-        };
-        public SyntaxKind[] ComparisonKinds => new[]
-        {
-            SyntaxKind.GreaterThanExpression,
-            SyntaxKind.GreaterThanOrEqualExpression,
-            SyntaxKind.LessThanExpression,
-            SyntaxKind.LessThanOrEqualExpression,
-            SyntaxKind.EqualsExpression,
-            SyntaxKind.NotEqualsExpression,
-        };
-        public SyntaxKind ConstructorDeclaration => SyntaxKind.ConstructorDeclaration;
-        public SyntaxKind[] DefaultExpressions => new[] { SyntaxKind.DefaultExpression, SyntaxKindEx.DefaultLiteralExpression };
-        public SyntaxKind EnumDeclaration => SyntaxKind.EnumDeclaration;
-        public SyntaxKind FieldDeclaration => SyntaxKind.FieldDeclaration;
-        public SyntaxKind IdentifierName => SyntaxKind.IdentifierName;
-        public SyntaxKind IdentifierToken => SyntaxKind.IdentifierToken;
-        public SyntaxKind InvocationExpression => SyntaxKind.InvocationExpression;
-        public SyntaxKind InterpolatedStringExpression => SyntaxKind.InterpolatedStringExpression;
-        public SyntaxKind[] MethodDeclarations => new[] { SyntaxKind.MethodDeclaration };
-        public SyntaxKind[] ObjectCreationExpressions => new[] { SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression };
-        public SyntaxKind Parameter => SyntaxKind.Parameter;
-        public SyntaxKind ParameterList => SyntaxKind.ParameterList;
-        public SyntaxKind ReturnStatement => SyntaxKind.ReturnStatement;
-        public SyntaxKind SimpleAssignment => SyntaxKind.SimpleAssignmentExpression;
-        public SyntaxKind SimpleMemberAccessExpression => SyntaxKind.SimpleMemberAccessExpression;
-        public SyntaxKind StringLiteralExpression => SyntaxKind.StringLiteralExpression;
-        public SyntaxKind[] TypeDeclaration => new[]
-        {
-            SyntaxKind.ClassDeclaration,
-            SyntaxKind.StructDeclaration,
-            SyntaxKind.InterfaceDeclaration,
-            SyntaxKind.EnumDeclaration,
-            SyntaxKindEx.RecordClassDeclaration,
-            SyntaxKindEx.RecordStructDeclaration,
-        };
-    }
+        SyntaxKind.ClassDeclaration,
+        SyntaxKindEx.RecordClassDeclaration,
+    };
+    public SyntaxKind ClassDeclaration => SyntaxKind.ClassDeclaration;
+    public SyntaxKind[] ComparisonKinds => new[]
+    {
+        SyntaxKind.GreaterThanExpression,
+        SyntaxKind.GreaterThanOrEqualExpression,
+        SyntaxKind.LessThanExpression,
+        SyntaxKind.LessThanOrEqualExpression,
+        SyntaxKind.EqualsExpression,
+        SyntaxKind.NotEqualsExpression,
+    };
+    public SyntaxKind ConstructorDeclaration => SyntaxKind.ConstructorDeclaration;
+    public SyntaxKind[] DefaultExpressions => new[] { SyntaxKind.DefaultExpression, SyntaxKindEx.DefaultLiteralExpression };
+    public SyntaxKind EnumDeclaration => SyntaxKind.EnumDeclaration;
+    public SyntaxKind FieldDeclaration => SyntaxKind.FieldDeclaration;
+    public SyntaxKind IdentifierName => SyntaxKind.IdentifierName;
+    public SyntaxKind IdentifierToken => SyntaxKind.IdentifierToken;
+    public SyntaxKind InvocationExpression => SyntaxKind.InvocationExpression;
+    public SyntaxKind InterpolatedStringExpression => SyntaxKind.InterpolatedStringExpression;
+    public SyntaxKind[] MethodDeclarations => new[] { SyntaxKind.MethodDeclaration };
+    public SyntaxKind[] ObjectCreationExpressions => new[] { SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression };
+    public SyntaxKind Parameter => SyntaxKind.Parameter;
+    public SyntaxKind ParameterList => SyntaxKind.ParameterList;
+    public SyntaxKind ReturnStatement => SyntaxKind.ReturnStatement;
+    public SyntaxKind SimpleAssignment => SyntaxKind.SimpleAssignmentExpression;
+    public SyntaxKind SimpleMemberAccessExpression => SyntaxKind.SimpleMemberAccessExpression;
+    public SyntaxKind StringLiteralExpression => SyntaxKind.StringLiteralExpression;
+    public SyntaxKind[] TypeDeclaration => new[]
+    {
+        SyntaxKind.ClassDeclaration,
+        SyntaxKind.StructDeclaration,
+        SyntaxKind.InterfaceDeclaration,
+        SyntaxKind.EnumDeclaration,
+        SyntaxKindEx.RecordClassDeclaration,
+        SyntaxKindEx.RecordStructDeclaration,
+    };
 }

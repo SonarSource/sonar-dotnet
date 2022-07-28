@@ -18,30 +18,30 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers.Facade
+namespace SonarAnalyzer.Helpers.Facade;
+
+public interface ISyntaxKindFacade<out TSyntaxKind>
+    where TSyntaxKind : struct
 {
-    public interface ISyntaxKindFacade<out TSyntaxKind>
-        where TSyntaxKind : struct
-    {
-        abstract TSyntaxKind Attribute { get; }
-        abstract TSyntaxKind[] ClassAndRecordDeclaration { get; }
-        abstract TSyntaxKind[] ComparisonKinds { get; }
-        abstract TSyntaxKind ConstructorDeclaration { get; }
-        abstract TSyntaxKind[] DefaultExpressions { get; }
-        abstract TSyntaxKind EnumDeclaration { get; }
-        abstract TSyntaxKind FieldDeclaration { get; }
-        abstract TSyntaxKind IdentifierName { get; }
-        abstract TSyntaxKind IdentifierToken { get; }
-        abstract TSyntaxKind InvocationExpression { get; }
-        abstract TSyntaxKind InterpolatedStringExpression { get; }
-        abstract TSyntaxKind[] MethodDeclarations { get; }
-        abstract TSyntaxKind[] ObjectCreationExpressions { get; }
-        abstract TSyntaxKind Parameter { get; }
-        abstract TSyntaxKind ParameterList { get; }
-        abstract TSyntaxKind ReturnStatement { get; }
-        abstract TSyntaxKind SimpleAssignment { get; }
-        abstract TSyntaxKind SimpleMemberAccessExpression { get; }
-        abstract TSyntaxKind StringLiteralExpression { get; }
-        abstract TSyntaxKind[] TypeDeclaration { get; }
-    }
+    abstract TSyntaxKind Attribute { get; }
+    abstract TSyntaxKind[] ClassAndRecordDeclaration { get; }
+    abstract TSyntaxKind ClassDeclaration { get; }
+    abstract TSyntaxKind[] ComparisonKinds { get; }
+    abstract TSyntaxKind ConstructorDeclaration { get; }
+    abstract TSyntaxKind[] DefaultExpressions { get; }
+    abstract TSyntaxKind EnumDeclaration { get; }
+    abstract TSyntaxKind FieldDeclaration { get; }
+    abstract TSyntaxKind IdentifierName { get; }
+    abstract TSyntaxKind IdentifierToken { get; }
+    abstract TSyntaxKind InvocationExpression { get; }
+    abstract TSyntaxKind InterpolatedStringExpression { get; }
+    abstract TSyntaxKind[] MethodDeclarations { get; }
+    abstract TSyntaxKind[] ObjectCreationExpressions { get; }
+    abstract TSyntaxKind Parameter { get; }
+    abstract TSyntaxKind ParameterList { get; }
+    abstract TSyntaxKind ReturnStatement { get; }
+    abstract TSyntaxKind SimpleAssignment { get; }
+    abstract TSyntaxKind SimpleMemberAccessExpression { get; }
+    abstract TSyntaxKind StringLiteralExpression { get; }
+    abstract TSyntaxKind[] TypeDeclaration { get; }
 }
