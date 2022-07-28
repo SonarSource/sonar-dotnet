@@ -588,3 +588,15 @@ namespace Repro_3624
         public virtual string Overriden { get; set; }
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/5261
+public class Repro_5261
+{
+    public IEnumerable<T> Repeat<T>(T element)  // Noncompliant FP, it's not a recursion.
+    {
+        while (true)
+        {
+            yield return element;
+        }
+    }
+}
