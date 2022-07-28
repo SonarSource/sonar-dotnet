@@ -106,6 +106,16 @@ public record Data(string Code, string Name)
     public string GetNameLambda() => Name ?? throw new ArgumentNullException(nameof(Name)); // Compliant - Name is a record parameter
 }
 
+public class TestClass
+{
+    public static string ClassProperty { get; }
+
+    public record TestRecord()
+    {
+        public string RecordProperty { get; } = ClassProperty ?? throw new ArgumentNullException(nameof(ClassProperty)); // Noncompliant
+    }
+}
+
 // https://github.com/SonarSource/sonar-dotnet/issues/5226
 public class Repro_5226
 {
