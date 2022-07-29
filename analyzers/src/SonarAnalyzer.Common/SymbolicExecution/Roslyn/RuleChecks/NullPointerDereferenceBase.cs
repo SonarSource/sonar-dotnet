@@ -34,8 +34,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
             switch (context.Operation.Instance.Kind)
             {
                 case OperationKindEx.Invocation:
-                    if (IInvocationOperationWrapper.FromOperation(context.Operation.Instance) is { } invocation
-                        && invocation.Instance is { } instance
+                    if (context.Operation.Instance.ToInvocation() is { Instance: { } instance }
                         && context.HasConstraint(ObjectConstraint.Null, instance))
                     {
                         NodeContext.ReportIssue(Diagnostic.Create(Rule, instance.Syntax.GetLocation(), instance.Syntax.ToString()));
