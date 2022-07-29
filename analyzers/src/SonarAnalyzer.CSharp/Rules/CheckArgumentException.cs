@@ -141,10 +141,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 _ => Enumerable.Empty<string>()
             };
 
-            return node.Ancestors().FirstOrDefault(x => RecordDeclarationSyntaxWrapper.IsInstance(x)) is { } recordAncenstor
-                   && ((RecordDeclarationSyntaxWrapper)recordAncenstor).ParameterList  is { } recordParameterList
-                   ? parameterList.Union(IdentifierNames(recordParameterList))
-                   : parameterList;
+            return parameterList.Union(ParentParameterList(node));
 
             static IEnumerable<string> IdentifierNames(BaseParameterListSyntax parameterList) =>
                     parameterList.Parameters.Select(x => x.Identifier.ValueText);
@@ -166,6 +163,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
                 return arguments;
             }
+
+            static IEnumerable<string> ParentParameterList(SyntaxNode node) =>
+                node?.Ancestors().FirstOrDefault(RecordDeclarationSyntaxWrapper.IsInstance) is { } recordAncestor
+                && ((RecordDeclarationSyntaxWrapper)recordAncestor).ParameterList is { } recordParameterList
+                    ? IdentifierNames(recordParameterList)
+                    : Enumerable.Empty<string>();
         }
 
         private static string TakeOnlyBeforeDot(Optional<object> value) =>

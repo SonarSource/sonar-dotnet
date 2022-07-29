@@ -116,6 +116,16 @@ public class TestClass
     }
 }
 
+public record R(string Prop)
+{
+    public class TestClass
+    {
+        public static string ClassProperty { get; }
+
+        public string RecordProperty { get; } = ClassProperty ?? throw new ArgumentNullException(nameof(Prop)); // Compliant - Prop is a record parameter
+    }
+}
+
 // https://github.com/SonarSource/sonar-dotnet/issues/5226
 public class Repro_5226
 {
