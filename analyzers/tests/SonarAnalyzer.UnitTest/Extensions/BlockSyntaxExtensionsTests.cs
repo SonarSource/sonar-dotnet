@@ -187,43 +187,45 @@ public class C
         [TestMethod]
         public void IsEmpty_TrailingTriviaOnOpenBrace_Comment()
         {
-            var block = BlockWithoutTrivia();
-            block = block.WithOpenBraceToken(Token(SyntaxKind.OpenBraceToken).WithTrailingTrivia(ParseTrailingTrivia("// Comment")));
+            var block = CreateBlock(afterOpen: CreateTriviaListWithComment());
             block.Should().BeNotEmpty(treatCommentsAsContent: true);
         }
 
         [TestMethod]
         public void IsEmpty_LeadingTriviaOnCloseBrace_Comment()
         {
-            var block = BlockWithoutTrivia();
-            block = block.WithCloseBraceToken(Token(SyntaxKind.CloseBraceToken).WithLeadingTrivia(ParseLeadingTrivia("// Comment")));
+            var block = CreateBlock(beforeClose: CreateTriviaListWithComment());
             block.Should().BeNotEmpty(treatCommentsAsContent: true);
         }
 
         [TestMethod]
         public void IsEmpty_TrailingTriviaOnOpenBrace_ConditionalCompilation()
         {
-            var block = BlockWithoutTrivia();
-            block = block.WithOpenBraceToken(Token(SyntaxKind.OpenBraceToken).WithTrailingTrivia(ParseTrailingTrivia("#if Something\r\n var i = 1; \r\n #endif")));
+            var block = CreateBlock(afterOpen: CreateTriviaListWithConditionalCompilation());
             block.Should().BeNotEmpty(treatConditionalCompilationAsContent: true);
         }
 
         [TestMethod]
         public void IsEmpty_LeadingTriviaOnCloseBrace_ConditionalCompilation()
         {
-            var block = BlockWithoutTrivia();
-            block = block.WithCloseBraceToken(Token(SyntaxKind.CloseBraceToken).WithLeadingTrivia(ParseLeadingTrivia("#if Something\r\n var i = 1; \r\n #endif")));
+            var block = CreateBlock(beforeClose: CreateTriviaListWithConditionalCompilation());
             block.Should().BeNotEmpty(treatConditionalCompilationAsContent: true);
         }
 
-        private static BlockSyntax BlockWithoutTrivia()
-        {
-            var block = MethodDeclarationForBlock("{}").Body;
-            block = block
-                .WithOpenBraceToken(block.OpenBraceToken.WithoutTrivia())
-                .WithCloseBraceToken(block.CloseBraceToken.WithoutTrivia());
-            return block;
-        }
+        private static SyntaxTriviaList CreateTriviaListWithComment() =>
+            TriviaList(Comment("// Comment"));
+
+        private static SyntaxTriviaList CreateTriviaListWithConditionalCompilation() =>
+            TriviaList(
+                Trivia(IfDirectiveTrivia(IdentifierName("Something"), isActive: false, branchTaken: false, conditionValue: false)),
+                DisabledText(@"var i= 0;"),
+                Trivia(EndIfDirectiveTrivia(isActive: false)));
+
+        private static BlockSyntax CreateBlock(SyntaxTriviaList beforeOpen = default,
+                                               SyntaxTriviaList afterOpen = default,
+                                               SyntaxTriviaList beforeClose = default,
+                                               SyntaxTriviaList afterClose = default) =>
+            Block(Token(beforeOpen, SyntaxKind.OpenBraceToken, afterOpen), statements: default, Token(beforeClose, SyntaxKind.CloseBraceToken, afterClose));
 
         private static MethodDeclarationSyntax MethodDeclarationForBlock(string methodBlock)
             => MethodDeclaration(WrapInClass(methodBlock));
