@@ -34,5 +34,5 @@ public static class DiagnosticDescriptorExtensions
         Diagnostic.Create(descriptor, location, additionalLocations?.Where(x => IsLocationValid(x, compilation)), messageArgs);
 
     private static bool IsLocationValid(Location location, Compilation compilation) =>
-        location.Kind != LocationKind.SourceFile || compilation.ContainsSyntaxTree(location.SourceTree.GetRoot()?.SyntaxTree);
+        location.Kind != LocationKind.SourceFile || compilation.ContainsSyntaxTree(location.SourceTree);
 }
