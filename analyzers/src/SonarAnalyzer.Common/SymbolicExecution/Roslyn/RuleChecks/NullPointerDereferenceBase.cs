@@ -36,15 +36,13 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
                 case OperationKindEx.Invocation:
                     if (IInvocationOperationWrapper.FromOperation(context.Operation.Instance) is { } invocation
                         && invocation.Instance is { } instance
-                        && instance.TrackedSymbol() is { } instanceSymbol
-                        && context.State[instance] is { } instanceState
-                        && instanceState.HasConstraint(ObjectConstraint.Null))
+                        && context.HasConstraint(ObjectConstraint.Null)
                     {
                         NodeContext.ReportIssue(Diagnostic.Create(Rule, instance.Syntax.GetLocation(), instanceSymbol.Name));
                     }
                     break;
             }
-            return base.PreProcessSimple(context);
+            return context.State;
         }
     }
 }

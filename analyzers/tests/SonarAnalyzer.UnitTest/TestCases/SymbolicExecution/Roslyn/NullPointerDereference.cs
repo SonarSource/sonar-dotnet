@@ -422,14 +422,14 @@ namespace Tests.Diagnostics
         {
             object o = null;
             _foo5 = o;
-            _foo5.ToString(); // Non-compliant
+            _foo5.ToString(); // Noncompliant
 //          ^^^^^
         }
         void DumbestTestOnFoo8()
         {
             object o = null;
             _foo8 = o;
-            _foo8.ToString(); // Non-compliant
+            _foo8.ToString(); // Noncompliant
 //          ^^^^^
         }
         void DumbestTestOnFoo6()
