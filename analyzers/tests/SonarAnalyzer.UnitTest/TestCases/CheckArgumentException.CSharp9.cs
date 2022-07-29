@@ -122,7 +122,7 @@ public record R(string Prop)
     {
         public static string ClassProperty { get; }
 
-        public string RecordProperty { get; } = ClassProperty ?? throw new ArgumentNullException(nameof(Prop)); // Compliant - Prop is a record parameter
+        public string RecordProperty { get; } = ClassProperty ?? throw new ArgumentNullException(nameof(Prop)); // Noncompliant
     }
 }
 

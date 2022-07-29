@@ -124,9 +124,9 @@ namespace SonarAnalyzer.Rules.CSharp
                     or AccessorDeclarationSyntax
                     or BaseMethodDeclarationSyntax
                     or IndexerDeclarationSyntax
+                    or PropertyDeclarationSyntax
                     or CompilationUnitSyntax
-                || LocalFunctionStatementSyntaxWrapper.IsInstance(ancestor)
-                || RecordDeclarationSyntaxWrapper.IsInstance(ancestor));
+                || LocalFunctionStatementSyntaxWrapper.IsInstance(ancestor));
 
             var parameterList = node switch
             {
@@ -135,9 +135,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 ParenthesizedLambdaExpressionSyntax lambda => IdentifierNames(lambda.ParameterList),
                 AccessorDeclarationSyntax accessor => AccessorIdentifierNames(accessor),
                 IndexerDeclarationSyntax indexerDeclaration => IdentifierNames(indexerDeclaration.ParameterList),
+                PropertyDeclarationSyntax propertyDeclaration => ParentParameterList(propertyDeclaration),
                 CompilationUnitSyntax => new[] { "args" },
                 { } when LocalFunctionStatementSyntaxWrapper.IsInstance(node) => IdentifierNames(((LocalFunctionStatementSyntaxWrapper)node).ParameterList),
-                { } when RecordDeclarationSyntaxWrapper.IsInstance(node) => IdentifierNames(((RecordDeclarationSyntaxWrapper)node).ParameterList),
                 _ => Enumerable.Empty<string>()
             };
 
@@ -165,8 +165,9 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             static IEnumerable<string> ParentParameterList(SyntaxNode node) =>
-                node?.Ancestors().FirstOrDefault(RecordDeclarationSyntaxWrapper.IsInstance) is { } recordAncestor
-                && ((RecordDeclarationSyntaxWrapper)recordAncestor).ParameterList is { } recordParameterList
+                node?.Ancestors().OfType<BaseTypeDeclarationSyntax>().FirstOrDefault() is { } baseTypeAncestor
+                && RecordDeclarationSyntaxWrapper.IsInstance(baseTypeAncestor)
+                && ((RecordDeclarationSyntaxWrapper)baseTypeAncestor).ParameterList is { } recordParameterList
                     ? IdentifierNames(recordParameterList)
                     : Enumerable.Empty<string>();
         }
