@@ -33,24 +33,20 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [TestMethod]
         public void IsEmpty_BlockMethodEmpty()
         {
-            var block = @"
+            var declaration = MethodDeclarationForBlock(@"
 {
 
-}
-";
-            var declaration = MethodDeclarationForBlock(block);
+}");
             declaration.Body.Should().BeEmpty();
         }
 
         [TestMethod]
         public void IsEmpty_BlockMethodWithCode()
         {
-            var block = @"
+            var declaration = MethodDeclarationForBlock(@"
 {
     var i = 0;
-}
-";
-            var declaration = MethodDeclarationForBlock(block);
+}");
             declaration.Body.Should().BeNotEmpty();
         }
 
@@ -61,8 +57,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
 public class C
 {
     public int M() => 1;
-}
-";
+}";
 
             var declaration = MethodDeclaration(code);
             declaration.Body.Should().BeNull();
@@ -73,114 +68,96 @@ public class C
         [TestMethod]
         public void IsEmpty_BlockMethodWithComment_Singleline_On()
         {
-            var block = @"
+            var declaration = MethodDeclarationForBlock(@"
 {
     // Single line
-}
-";
-            var declaration = MethodDeclarationForBlock(block);
+}");
             declaration.Body.Should().BeNotEmpty(treatCommentsAsContent: true);
         }
 
         [TestMethod]
         public void IsEmpty_BlockMethodWithComment_Singleline_Off()
         {
-            var block = @"
+            var declaration = MethodDeclarationForBlock(@"
 {
     // Single line
-}
-";
-            var declaration = MethodDeclarationForBlock(block);
+}");
             declaration.Body.Should().BeEmpty(treatCommentsAsContent: false);
         }
 
         [TestMethod]
         public void IsEmpty_BlockMethodWithComment_Empty_On()
         {
-            var block = @"
+            var declaration = MethodDeclarationForBlock(@"
 {
     //
-}
-";
-            var declaration = MethodDeclarationForBlock(block);
+}");
             declaration.Body.Should().BeNotEmpty(treatCommentsAsContent: true); // This is a questionable behavior.
         }
 
         [TestMethod]
         public void IsEmpty_BlockMethodWithComment_Multiline_On()
         {
-            var block = @"
+            var declaration = MethodDeclarationForBlock(@"
 {
     /* Multi line */
-}
-";
-            var declaration = MethodDeclarationForBlock(block);
+}");
             declaration.Body.Should().BeNotEmpty(treatCommentsAsContent: true);
         }
 
         [TestMethod]
         public void IsEmpty_BlockMethodWithComment_Multiline_Off()
         {
-            var block = @"
+            var declaration = MethodDeclarationForBlock(@"
 {
     /* Multi line */
-}
-";
-            var declaration = MethodDeclarationForBlock(block);
+}");
             declaration.Body.Should().BeEmpty(treatCommentsAsContent: false);
         }
 
         [TestMethod]
         public void IsEmpty_BlockMethodWithConditionalCompilation_WithDisabledCode_On()
         {
-            var block = @"
+            var declaration = MethodDeclarationForBlock(@"
 {
 #if SomeThing
     var i = 0;
 #endif
-}
-";
-            var declaration = MethodDeclarationForBlock(block);
+}");
             declaration.Body.Should().BeNotEmpty(treatConditionalCompilationAsContent: true);
         }
 
         [TestMethod]
         public void IsEmpty_BlockMethodWithConditionalCompilation_WithDisabledCode_Off()
         {
-            var block = @"
+            var declaration = MethodDeclarationForBlock(@"
 {
 #if SomeThing
     var i = 0;
 #endif
-}
-";
-            var declaration = MethodDeclarationForBlock(block);
+}");
             declaration.Body.Should().BeEmpty(treatConditionalCompilationAsContent: false);
         }
 
         [TestMethod]
         public void IsEmpty_BlockMethodWithConditionalCompilation_WithEmptyRegion_On()
         {
-            var block = @"
+            var declaration = MethodDeclarationForBlock(@"
 {
 #region SomeRegion
 #endregion
-}
-";
-            var declaration = MethodDeclarationForBlock(block);
+}");
             declaration.Body.Should().BeEmpty(treatConditionalCompilationAsContent: true);
         }
 
         [TestMethod]
         public void IsEmpty_BlockMethodWithConditionalCompilation_WithEmptyConditional_On()
         {
-            var block = @"
+            var declaration = MethodDeclarationForBlock(@"
 {
 #if SomeCondition
 #endif
-}
-";
-            var declaration = MethodDeclarationForBlock(block);
+}");
             declaration.Body.Should().BeEmpty(treatConditionalCompilationAsContent: true);
         }
 
@@ -191,14 +168,12 @@ public class C
         [DataRow(false, false, true)]
         public void IsEmpty_BlockMethodCombinations_CommentInConditional(bool treatCommentsAsContent, bool treatConditionalCompilationAsContent, bool isEmpty)
         {
-            var block = @"
+            var declaration = MethodDeclarationForBlock(@"
 {
 #if SomeCondition
     // Some comment
 #endif
-}
-";
-            var declaration = MethodDeclarationForBlock(block);
+}");
             if (isEmpty)
             {
                 declaration.Body.Should().BeEmpty(treatCommentsAsContent, treatConditionalCompilationAsContent);
