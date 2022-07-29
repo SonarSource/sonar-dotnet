@@ -53,7 +53,7 @@ namespace Tests.Diagnostics
             o = null;
             try
             {
-                var a = o?.ToString();  // Compliant
+                var a = o?.ToString();
             }
             catch (Exception e) when (e.Message != null)
             {
@@ -118,7 +118,7 @@ namespace Tests.Diagnostics
     {
       object o = null;
       switch (o?.GetHashCode()) // Compliant
-            {
+      {
         case null:
           o.ToString(); // Noncompliant
           break;
