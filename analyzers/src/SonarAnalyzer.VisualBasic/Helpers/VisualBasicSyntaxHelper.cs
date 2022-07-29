@@ -168,6 +168,7 @@ namespace SonarAnalyzer.Helpers
         public static SyntaxToken? GetIdentifier(this SyntaxNode node) =>
             node?.RemoveParentheses() switch
             {
+                ClassBlockSyntax x => x.ClassStatement.Identifier,
                 ClassStatementSyntax x => x.Identifier,
                 IdentifierNameSyntax x => x.Identifier,
                 MemberAccessExpressionSyntax x => x.Name.Identifier,

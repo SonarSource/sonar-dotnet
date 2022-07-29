@@ -1,0 +1,17 @@
+{
+  "title": "Non-abstract attributes should be sealed",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "2min"
+  },
+  "tags": [
+    "performance"
+  ],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-4060",
+  "sqKey": "S4060",
+  "scope": "Main",
+  "quickfix": "unknown"
+}

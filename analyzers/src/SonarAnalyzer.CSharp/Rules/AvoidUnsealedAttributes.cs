@@ -18,44 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.CSharp;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class AvoidUnsealedAttributes : AvoidUnsealedAttributesBase<SyntaxKind>
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class AvoidUnsealedAttributes : SonarDiagnosticAnalyzer
-    {
-        internal const string DiagnosticId = "S4060";
-        private const string MessageFormat = "Seal this attribute or make it abstract.";
-
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var classDeclaration = (ClassDeclarationSyntax)c.Node;
-                    var classSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration);
-
-                    if (!classDeclaration.Identifier.IsMissing &&
-                        classSymbol != null &&
-                        classSymbol.DerivesFrom(KnownType.System_Attribute) &&
-                        classSymbol.IsPubliclyAccessible() &&
-                        !classSymbol.IsAbstract &&
-                        !classSymbol.IsSealed)
-                    {
-                        c.ReportIssue(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation()));
-                    }
-                },
-                SyntaxKind.ClassDeclaration);
-        }
-    }
+    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 }

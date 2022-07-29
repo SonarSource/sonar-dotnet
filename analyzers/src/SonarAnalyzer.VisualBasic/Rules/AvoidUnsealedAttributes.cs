@@ -18,19 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using CS = SonarAnalyzer.Rules.CSharp;
-using VB = SonarAnalyzer.Rules.VisualBasic;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
+using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.UnitTest.Rules;
+namespace SonarAnalyzer.Rules.VisualBasic;
 
-[TestClass]
-public class AvoidUnsealedAttributesTest
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class AvoidUnsealedAttributes : AvoidUnsealedAttributesBase<SyntaxKind>
 {
-    [TestMethod]
-    public void AvoidUnsealedAttributes_CS() =>
-        new VerifierBuilder<CS.AvoidUnsealedAttributes>().AddPaths("AvoidUnsealedAttributes.cs").Verify();
-
-    [TestMethod]
-    public void AvoidUnsealedAttributes_VB() =>
-        new VerifierBuilder<VB.AvoidUnsealedAttributes>().AddPaths("AvoidUnsealedAttributes.vb").Verify();
+    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 }
