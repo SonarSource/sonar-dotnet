@@ -23,6 +23,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 using Moq;
+using SonarAnalyzer.CFG;
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
@@ -93,7 +94,7 @@ End Class", AnalyzerLanguage.VisualBasic);
             }
             if (localFunctionName is not null)
             {
-                return cfg.GetLocalFunctionControlFlowGraph(cfg.LocalFunctions.Single(x => x.Name == localFunctionName), default);
+                cfg = cfg.GetLocalFunctionControlFlowGraph(cfg.LocalFunctions.Single(x => x.Name == localFunctionName), default);
             }
             else if (anonymousFunctionFragment is not null)
             {
@@ -102,12 +103,15 @@ End Class", AnalyzerLanguage.VisualBasic);
                 {
                     throw new ArgumentException($"Anonymous function with '{anonymousFunctionFragment}' fragment was not found.");
                 }
-                return cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunction, default);
+                cfg = cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunction, default);
             }
-            else
-            {
-                return cfg;
-            }
+
+            const string Separator = "----------";
+            Console.WriteLine(Separator);
+            Console.Write(CfgSerializer.Serialize(cfg));
+            Console.WriteLine(Separator);
+
+            return cfg;
 
             bool IsMethod(SyntaxNode node) =>
                 language == AnalyzerLanguage.CSharp
