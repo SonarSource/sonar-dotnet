@@ -164,8 +164,16 @@ stages:
 
           CreateFolder("coverage")
           CreateFolder("TestResults")
+          $TestResultsDir = "analyzers\tests\SonarAnalyzer.UnitTest\"
 
-          & OpenCover.Console.exe -target:"dotnet.exe" -targetargs:"test analyzers\tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net48\SonarAnalyzer.UnitTest.dll -l trx -l console;verbosity=detailed" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.Utilities]* +[SonarAnalyzer.VisualBasic]*" -output:coverage/net48.xml -safemode:off -excludebyattribute:*.ExcludeFromCodeCoverageAttribute
+          dotnet test .\analyzers\SonarAnalyzer.sln --no-build /p:AltCover=true -l "trx;logfilename=net48.trx" -l "console;verbosity=diagnostic" -c $(BuildConfiguration) -f net48 -v diag
+
+          gci -Path $TestResultsDir -Recurse
+
+          Get-ChildItem -Path $TestResultsDir -File -Filter coverage.net48.xml | Copy-Item -Verbose -Destination .\coverage\net48.xml
+          Get-ChildItem -Path $TestResultsDir -Recurse -File -Filter net48.trx | Copy-Item -Verbose -Destination .\TestResults\
+
+          #& OpenCover.Console.exe -target:"dotnet.exe" -targetargs:"test analyzers\tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net48\SonarAnalyzer.UnitTest.dll -l trx -l console;verbosity=detailed" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.Utilities]* +[SonarAnalyzer.VisualBasic]*" -output:coverage/net48.xml -safemode:off -excludebyattribute:*.ExcludeFromCodeCoverageAttribute
           Test-ExitCode "ERROR: Unit tests for net48 FAILED."
         displayName: '.Net UTs'
 
@@ -196,8 +204,16 @@ stages:
 
           CreateFolder("coverage")
           CreateFolder("TestResults")
+          $TestResultsDir = "analyzers\tests\SonarAnalyzer.UnitTest\"
 
-          & OpenCover.Console.exe -target:"dotnet.exe" -targetargs:"test analyzers\tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net6.0\SonarAnalyzer.UnitTest.dll -l trx -l console;verbosity=detailed" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.Utilities]* +[SonarAnalyzer.VisualBasic]*" -output:coverage/net6.0.xml -safemode:off -excludebyattribute:*.ExcludeFromCodeCoverageAttribute
+          dotnet test .\analyzers\SonarAnalyzer.sln --no-build /p:AltCover=true -l "trx;logfilename=net6.0.trx" -l "console;verbosity=diagnostic" -c $(BuildConfiguration) -f net48 -v diag
+
+          gci -Path $TestResultsDir -Recurse
+
+          Get-ChildItem -Path $TestResultsDir -File -Filter coverage.net6.0.xml | Copy-Item -Verbose -Destination .\coverage\net6.0.xml
+          Get-ChildItem -Path $TestResultsDir -Recurse -File -Filter net6.0.trx | Copy-Item -Verbose -Destination .\TestResults\
+
+          #& OpenCover.Console.exe -target:"dotnet.exe" -targetargs:"test analyzers\tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net6.0\SonarAnalyzer.UnitTest.dll -l trx -l console;verbosity=detailed" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.Utilities]* +[SonarAnalyzer.VisualBasic]*" -output:coverage/net6.0.xml -safemode:off -excludebyattribute:*.ExcludeFromCodeCoverageAttribute
           Test-ExitCode "ERROR: Unit tests for net6.0 FAILED."
         displayName: '.Net UTs'
 
