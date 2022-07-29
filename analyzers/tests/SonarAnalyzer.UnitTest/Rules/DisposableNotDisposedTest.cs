@@ -25,23 +25,28 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DisposableNotDisposedTest
     {
+        private readonly VerifierBuilder verifier = new VerifierBuilder<DisposableNotDisposed>();
+
         [TestMethod]
         public void DisposableNotDisposed() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DisposableNotDisposed.cs",
-                                    new DisposableNotDisposed(),
-                                    ParseOptionsHelper.FromCSharp8,
-                                    MetadataReferenceFacade.SystemNetHttp.Concat(NuGetMetadataReference.FluentAssertions("5.9.0")));
+            verifier.AddPaths("DisposableNotDisposed.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .AddReferences(MetadataReferenceFacade.SystemNetHttp.Concat(NuGetMetadataReference.FluentAssertions("5.9.0")))
+                .Verify();
 
 #if NET
         [TestMethod]
         public void DisposableNotDisposed_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DisposableNotDisposed.CSharp9.cs",
-                                                      new DisposableNotDisposed(),
-                                                      MetadataReferenceFacade.SystemNetHttp);
+            verifier.AddPaths("DisposableNotDisposed.CSharp9.cs")
+                .WithTopLevelStatements()
+                .AddReferences(MetadataReferenceFacade.SystemNetHttp)
+                .Verify();
 
         [TestMethod]
         public void DisposableNotDisposed_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\DisposableNotDisposed.CSharp10.cs", new DisposableNotDisposed());
+            verifier.AddPaths("DisposableNotDisposed.CSharp10.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .Verify();
 #endif
     }
 }
