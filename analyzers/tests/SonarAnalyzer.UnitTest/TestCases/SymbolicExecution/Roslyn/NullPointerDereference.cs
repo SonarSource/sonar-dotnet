@@ -263,7 +263,7 @@ namespace Tests.Diagnostics
             {
                 MyProperty = ""
             };
-            o.ToString(); // Noncompliant FIXME (was compliant)
+            o.ToString(); // Compliant
         }
 
         class MyClass
@@ -669,7 +669,7 @@ namespace Tests.Diagnostics
         {
             this.bar = null;
             if (this.bar != null)
-                this.bar.GetHashCode(); // Noncompliant FIXME (was compliant before)
+                this.bar.GetHashCode(); // Compliant
         }
     }
 
@@ -826,7 +826,7 @@ namespace Tests.Diagnostics
         {
             string someString = null;
 
-            if (!someString?.Contains("a") ?? true)   // Noncompliant FIXME (was compliant before)
+            if (!someString?.Contains("a") ?? true)   // Compliant
                 Console.WriteLine("It's null or doesn't contain 'a'");
             else
                 Console.WriteLine(someString.Length); // FIXME Non-compliant FP, this path is unreachable

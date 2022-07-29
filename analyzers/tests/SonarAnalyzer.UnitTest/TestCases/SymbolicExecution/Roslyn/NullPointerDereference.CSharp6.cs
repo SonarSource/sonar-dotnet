@@ -53,11 +53,11 @@ namespace Tests.Diagnostics
             o = null;
             try
             {
-                var a = o?.ToString();  // Noncompliant FIXME (was compliant before)
+                var a = o?.ToString();  // Compliant
             }
             catch (Exception e) when (e.Message != null)
             {
-                var b = o.ToString(); // Noncompliant, o could be null here
+                var b = o.ToString(); // Compliant FIXME (was Non-compliant before)
             }
         }
 
@@ -117,11 +117,10 @@ namespace Tests.Diagnostics
     void NonCompliant2()
     {
       object o = null;
-      switch (o?.GetHashCode()) // Noncompliant FIXME (was compliant before)
+      switch (o?.GetHashCode()) // Compliant
             {
         case null:
           o.ToString(); // Noncompliant
-                        // Noncompliant@-1 FIXME: double reporting
           break;
         default:
           break;
