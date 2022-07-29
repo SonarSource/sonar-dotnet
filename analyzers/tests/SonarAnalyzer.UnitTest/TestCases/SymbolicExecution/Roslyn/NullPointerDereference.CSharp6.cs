@@ -117,7 +117,7 @@ namespace Tests.Diagnostics
     void NonCompliant2()
     {
       object o = null;
-      switch (o?.GetHashCode()) // Compliant
+      switch (o?.GetHashCode())
       {
         case null:
           o.ToString(); // Noncompliant

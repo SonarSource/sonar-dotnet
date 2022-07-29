@@ -6,7 +6,7 @@
         {
             string name = null;
             name = name ?? "Laxmi";
-            name.ToString(); // Compliant
+            name.ToString();
         }
 
         public void NullCoalescenceOperator_Null_Noncompliant1()
