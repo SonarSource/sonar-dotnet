@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -66,8 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var parameterName = parameter.ToString();
                 if (string.Equals(parameterName, methodName, StringComparison.OrdinalIgnoreCase))
                 {
-                    context.ReportIssue(Diagnostic.Create(rule, parameter.GetLocation(),
-                        new[] { identifier.GetLocation() }, parameterName));
+                    context.ReportIssue(rule.CreateDiagnostic(context.Compilation, parameter.GetLocation(), new[] { identifier.GetLocation() }, parameterName));
                 }
             }
         }

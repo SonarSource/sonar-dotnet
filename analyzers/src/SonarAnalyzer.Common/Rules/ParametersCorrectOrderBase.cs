@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
@@ -72,9 +73,7 @@ namespace SonarAnalyzer.Rules
                     .Select(s => GetMethodDeclarationIdentifierLocation(s.GetSyntax()))
                     .WhereNotNull();
 
-                analysisContext.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], getLocationToReport(),
-                    additionalLocations: secondaryLocations,
-                    messageArgs: methodSymbol.Name));
+                analysisContext.ReportIssue(SupportedDiagnostics[0].CreateDiagnostic(analysisContext.Compilation,  getLocationToReport(), secondaryLocations, methodSymbol.Name));
             }
         }
 

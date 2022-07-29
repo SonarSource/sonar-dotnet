@@ -84,13 +84,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var operands = GetOperands(invocation, methodSymbol);
             if (operands != null &&
-                CSharpEquivalenceChecker.AreEquivalent(RemoveParantheses(operands.Item1), RemoveParantheses(operands.Item2)))
+                CSharpEquivalenceChecker.AreEquivalent(RemoveParentheses(operands.Item1), RemoveParentheses(operands.Item2)))
             {
                 var message = string.Format(EqualsMessage, operands.Item2);
-
-                context.ReportIssue(Diagnostic.Create(Rule, operands.Item1.GetLocation(),
-                    additionalLocations: new[] { operands.Item2.GetLocation() },
-                    messageArgs: message));
+                var diagnostic = Rule.CreateDiagnostic(context.Compilation, operands.Item1.GetLocation(), additionalLocations: new[] { operands.Item2.GetLocation() }, messageArgs: message);
+                context.ReportIssue(diagnostic);
             }
         }
 
@@ -118,21 +116,15 @@ namespace SonarAnalyzer.Rules.CSharp
             return null;
         }
 
-        private static SyntaxNode RemoveParantheses(SyntaxNode node)
-        {
-            return !(node is ExpressionSyntax expression) ? node : expression.RemoveParentheses();
-        }
+        private static SyntaxNode RemoveParentheses(SyntaxNode node) =>
+            node is ExpressionSyntax expression ? expression.RemoveParentheses() : node;
 
-        private static void ReportIfOperatorExpressionsMatch(SyntaxNodeAnalysisContext context, ExpressionSyntax left, ExpressionSyntax right,
-            SyntaxToken operatorToken)
+        private static void ReportIfOperatorExpressionsMatch(SyntaxNodeAnalysisContext context, ExpressionSyntax left, ExpressionSyntax right, SyntaxToken operatorToken)
         {
             if (CSharpEquivalenceChecker.AreEquivalent(left.RemoveParentheses(), right.RemoveParentheses()))
             {
                 var message = string.Format(OperatorMessageFormat, operatorToken);
-
-                context.ReportIssue(Diagnostic.Create(Rule, right.GetLocation(),
-                    additionalLocations: new[] { left.GetLocation() },
-                    messageArgs: message));
+                context.ReportIssue(Rule.CreateDiagnostic(context.Compilation, right.GetLocation(), additionalLocations: new[] { left.GetLocation() }, messageArgs: message));
             }
         }
     }

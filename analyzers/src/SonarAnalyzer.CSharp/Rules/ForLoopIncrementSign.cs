@@ -24,6 +24,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -99,7 +100,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (incrementorData.Operation == ArithmeticOperation.Addition &&
                         condition == Condition.Greater)
                     {
-                        c.ReportIssue(Diagnostic.Create(rule,
+                        c.ReportIssue(rule.CreateDiagnostic(c.Compilation,
                             forNode.Incrementors.First().GetLocation(),
                             new[] { forNode.Condition.GetLocation() },
                             incrementorData.IdentifierName, "inc"));
@@ -107,7 +108,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     else if (incrementorData.Operation == ArithmeticOperation.Substraction &&
                              condition == Condition.Less)
                     {
-                        c.ReportIssue(Diagnostic.Create(rule,
+                        c.ReportIssue(rule.CreateDiagnostic(c.Compilation,
                             forNode.Incrementors.First().GetLocation(),
                             new[] { forNode.Condition.GetLocation() },
                             incrementorData.IdentifierName, "dec"));

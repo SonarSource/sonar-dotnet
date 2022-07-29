@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -52,8 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var walker = new ConsumeValueTaskWalker(c.SemanticModel);
@@ -63,7 +63,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         if (syntaxNodes.Count > 1)
                         {
-                            c.ReportIssue(Diagnostic.Create(rule, syntaxNodes.First().GetLocation(),
+                            c.ReportIssue(rule.CreateDiagnostic(c.Compilation,
+                                syntaxNodes.First().GetLocation(),
                                 additionalLocations: syntaxNodes.Skip(1).Select(node => node.GetLocation()).ToArray(),
                                 messageArgs: ConsumeOnlyOnceMessage));
                         }
@@ -81,7 +82,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.PropertyDeclaration,
                 SyntaxKind.DestructorDeclaration,
                 SyntaxKind.MethodDeclaration);
-        }
 
         private sealed class ConsumeValueTaskWalker : SafeCSharpSyntaxWalker
         {

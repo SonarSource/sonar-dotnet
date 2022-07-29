@@ -18,10 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Helpers;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Extensions;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
@@ -60,8 +61,7 @@ namespace SonarAnalyzer.Rules
 
                         var secondaryLocation = GetCloseParenToken(innermostExpression).CreateLocation(GetCloseParenToken(expression));
 
-                        c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0],
-                            location, additionalLocations: new[] { secondaryLocation }));
+                        c.ReportIssue(SupportedDiagnostics[0].CreateDiagnostic(c.Compilation, location, additionalLocations: new[] { secondaryLocation }));
                     }
                 },
                 ParenthesizedExpressionSyntaxKind);

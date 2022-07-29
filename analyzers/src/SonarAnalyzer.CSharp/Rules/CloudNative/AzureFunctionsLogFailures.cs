@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     walker.SafeVisit(catchClause.Filter?.FilterExpression);
                     if (!walker.HasValidLoggerCall)
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, catchClause.CatchKeyword.GetLocation(), walker.InvalidLoggerInvocationLocations));
+                        c.ReportIssue(Rule.CreateDiagnostic(c.Compilation, catchClause.CatchKeyword.GetLocation(), walker.InvalidLoggerInvocationLocations));
                     }
                 }
             },

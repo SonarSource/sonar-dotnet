@@ -23,6 +23,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -39,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var currentCondition = ifStatement.Condition;
                     if (ifStatement.GetPrecedingConditionsInConditionChain().FirstOrDefault(x => CSharpEquivalenceChecker.AreEquivalent(currentCondition, x)) is { } precedingCondition)
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, currentCondition.GetLocation(), new[] { precedingCondition.GetLocation() }, precedingCondition.GetLineNumberToReport()));
+                        c.ReportIssue(rule.CreateDiagnostic(c.Compilation, currentCondition.GetLocation(), new[] { precedingCondition.GetLocation() }, precedingCondition.GetLineNumberToReport()));
                     }
                 },
                 SyntaxKind.IfStatement);

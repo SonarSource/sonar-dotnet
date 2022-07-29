@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -73,8 +74,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (invalidMembers.Count > 0)
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, enumDeclaration.Identifier.GetLocation(),
-                            additionalLocations: invalidMembers));
+                        c.ReportIssue(rule.CreateDiagnostic(c.Compilation, enumDeclaration.Identifier.GetLocation(), additionalLocations: invalidMembers));
                     }
                 }, SyntaxKind.EnumDeclaration);
         }

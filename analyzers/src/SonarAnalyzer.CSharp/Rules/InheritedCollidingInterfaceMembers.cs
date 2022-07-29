@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -66,7 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         var secondaryLocations = collidingMembers.SelectMany(x => x.Locations)
                                                                  .Where(x => x.IsInSource);
 
-                        c.ReportIssue(Diagnostic.Create(Rule, interfaceDeclaration.Identifier.GetLocation(), secondaryLocations, membersText, pluralize));
+                        c.ReportIssue(Rule.CreateDiagnostic(c.Compilation, interfaceDeclaration.Identifier.GetLocation(), secondaryLocations, membersText, pluralize));
                     }
                 },
                 SyntaxKind.InterfaceDeclaration);

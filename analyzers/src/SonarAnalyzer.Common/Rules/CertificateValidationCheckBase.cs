@@ -23,6 +23,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
@@ -157,7 +158,7 @@ namespace SonarAnalyzer.Rules
             if (!locations.IsEmpty)
             {
                 // Report both, assignment as well as all implementation occurrences
-                c.Context.ReportIssue(Diagnostic.Create(Rule, primaryLocation, locations));
+                c.Context.ReportIssue(Rule.CreateDiagnostic(c.Context.Compilation, primaryLocation, locations));
             }
         }
 

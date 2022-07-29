@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -56,7 +57,10 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         var propertyIdentifier = collidingMembers.Item1;
                         var methodIdentifier = collidingMembers.Item2;
-                        c.ReportIssue(Diagnostic.Create(Rule, propertyIdentifier.GetLocation(), new[] { methodIdentifier.GetLocation() }, propertyIdentifier.ValueText, methodIdentifier.ValueText));
+                        c.ReportIssue(Rule.CreateDiagnostic(c.Compilation,
+                            propertyIdentifier.GetLocation(),
+                            new[] { methodIdentifier.GetLocation() },
+                            propertyIdentifier.ValueText, methodIdentifier.ValueText));
                     }
                 },
                 SyntaxKind.ClassDeclaration,

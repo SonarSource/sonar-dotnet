@@ -34,6 +34,6 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar
         // of steps was reached or an exception was thrown during analysis.
         bool SupportsPartialResults { get; }
 
-        IEnumerable<Diagnostic> GetDiagnostics();
+        IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation);
     }
 }

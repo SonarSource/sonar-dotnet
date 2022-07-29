@@ -48,15 +48,15 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
 
         private sealed class AnalysisContext : ISymbolicExecutionAnalysisContext
         {
-            private readonly List<LocationInfo> locations = new List<LocationInfo>();
+            private readonly List<LocationInfo> locations = new();
 
             public AnalysisContext(AbstractExplodedGraph explodedGraph) =>
                 explodedGraph.AddExplodedGraphCheck(new SerializationBinderCheck(explodedGraph, this));
 
             public bool SupportsPartialResults => true;
 
-            public IEnumerable<Diagnostic> GetDiagnostics() =>
-                locations.Select(location => Diagnostic.Create(S5773, location.Primary, location.SecondaryLocations, location.Message));
+            public IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation) =>
+                locations.Select(location => S5773.CreateDiagnostic(compilation, location.Primary, location.SecondaryLocations, location.Message));
 
             public void Dispose()
             {

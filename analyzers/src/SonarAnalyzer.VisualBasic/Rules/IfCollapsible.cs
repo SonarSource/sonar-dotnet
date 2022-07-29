@@ -23,6 +23,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.VisualBasic
@@ -57,10 +58,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                         return;
                     }
 
-                    c.ReportIssue(Diagnostic.Create(
-                        rule,
-                        multilineIfBlock.IfStatement.IfKeyword.GetLocation(),
-                        additionalLocations: new[] { parentMultilineIfBlock.IfStatement.IfKeyword.GetLocation() }));
+                    c.ReportIssue(rule.CreateDiagnostic(c.Compilation, multilineIfBlock.IfStatement.IfKeyword.GetLocation(), new[] { parentMultilineIfBlock.IfStatement.IfKeyword.GetLocation() }));
                 },
                 SyntaxKind.MultiLineIfBlock);
         }

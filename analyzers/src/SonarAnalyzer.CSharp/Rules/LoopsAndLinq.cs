@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -48,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var forEachStatementSyntax = (ForEachStatementSyntax)c.Node;
                     if (CanBeSimplifiedUsingWhere(forEachStatementSyntax.Statement, out var ifConditionLocation))
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, forEachStatementSyntax.Expression.GetLocation(), new[] {ifConditionLocation}, WhereMessageFormat));
+                        c.ReportIssue(Rule.CreateDiagnostic(c.Compilation, forEachStatementSyntax.Expression.GetLocation(), new[] { ifConditionLocation }, WhereMessageFormat));
                     }
                     else
                     {

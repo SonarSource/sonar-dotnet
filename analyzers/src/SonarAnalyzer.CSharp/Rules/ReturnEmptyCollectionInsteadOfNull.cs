@@ -79,8 +79,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (returnNullStatements.Count > 0 &&
                     IsReturningCollection(context))
                 {
-                    context.ReportIssue(Diagnostic.Create(rule, returnNullStatements[0],
-                        additionalLocations: returnNullStatements.Skip(1)));
+                    context.ReportIssue(rule.CreateDiagnostic(context.Compilation, returnNullStatements[0], additionalLocations: returnNullStatements.Skip(1)));
                 }
             }
         }

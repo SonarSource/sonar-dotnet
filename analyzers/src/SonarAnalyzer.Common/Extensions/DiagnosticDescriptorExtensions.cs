@@ -18,36 +18,21 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 
-namespace SonarAnalyzer.SymbolicExecution.Sonar
+namespace SonarAnalyzer.Extensions;
+
+public static class DiagnosticDescriptorExtensions
 {
-    internal abstract class DefaultAnalysisContext<T> : ISymbolicExecutionAnalysisContext
-    {
-        private readonly List<T> locations = new List<T>();
+    public static Diagnostic CreateDiagnostic(this DiagnosticDescriptor descriptor,
+                                              Compilation compilation,
+                                              Location location,
+                                              IEnumerable<Location> additionalLocations,
+                                              params object[] messageArgs) =>
+        Diagnostic.Create(descriptor, location, additionalLocations?.Where(x => IsLocationValid(x, compilation)), messageArgs);
 
-        protected abstract Diagnostic CreateDiagnostic(T location);
-
-        public bool SupportsPartialResults => false;
-
-        public IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation) =>
-            locations.Distinct().Select(CreateDiagnostic);
-
-        public void AddLocation(T location) =>
-            locations.Add(location);
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            // Nothing to do here
-        }
-    }
+    private static bool IsLocationValid(Location location, Compilation compilation) =>
+        location.Kind != LocationKind.SourceFile || compilation.ContainsSyntaxTree(location.SourceTree);
 }

@@ -217,35 +217,35 @@ namespace SonarAnalyzer.Rules.CSharp
             return null;
         }
 
-        private static void ReportPatternAtMainVariable(SyntaxNodeAnalysisContext analysisContext,
+        private static void ReportPatternAtMainVariable(SyntaxNodeAnalysisContext context,
                                                         SyntaxNode variableExpression,
                                                         Location mainLocation,
                                                         SyntaxNode parentStatement,
                                                         TypeSyntax castType,
                                                         string message)
         {
-            var duplicatedCastLocations = GetDuplicatedCastLocations(analysisContext, parentStatement, castType, variableExpression);
+            var duplicatedCastLocations = GetDuplicatedCastLocations(context, parentStatement, castType, variableExpression);
 
             if (duplicatedCastLocations.Any())
             {
-                analysisContext.ReportIssue(Diagnostic.Create(Rule, mainLocation, duplicatedCastLocations, message));
+                context.ReportIssue(Rule.CreateDiagnostic(context.Compilation, mainLocation, duplicatedCastLocations, message));
             }
         }
 
-        private static void ReportPatternAtCastLocation(SyntaxNodeAnalysisContext analysisContext,
+        private static void ReportPatternAtCastLocation(SyntaxNodeAnalysisContext context,
                                                         SyntaxNode variableExpression,
                                                         Location patternLocation,
                                                         SyntaxNode parentStatement,
                                                         TypeSyntax castType,
                                                         string message)
         {
-            if (analysisContext.SemanticModel.GetSymbolInfo(castType).Symbol is INamedTypeSymbol castTypeSymbol
+            if (context.SemanticModel.GetSymbolInfo(castType).Symbol is INamedTypeSymbol castTypeSymbol
                 && castTypeSymbol.TypeKind != TypeKind.Struct)
             {
-                var duplicatedCastLocations = GetDuplicatedCastLocations(analysisContext, parentStatement, castType, variableExpression);
+                var duplicatedCastLocations = GetDuplicatedCastLocations(context, parentStatement, castType, variableExpression);
                 foreach (var castLocation in duplicatedCastLocations)
                 {
-                    analysisContext.ReportIssue(Diagnostic.Create(Rule, castLocation, new[] { patternLocation }, message));
+                    context.ReportIssue(Rule.CreateDiagnostic(context.Compilation, castLocation, new[] { patternLocation }, message));
                 }
             }
         }

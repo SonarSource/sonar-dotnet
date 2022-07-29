@@ -23,6 +23,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -48,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var parentIfStatement = GetParentIfStatement(ifStatement);
                     if (parentIfStatement is { Else: null })
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, ifStatement.IfKeyword.GetLocation(), additionalLocations: new[] { parentIfStatement.IfKeyword.GetLocation() }));
+                        c.ReportIssue(Rule.CreateDiagnostic(c.Compilation, ifStatement.IfKeyword.GetLocation(), additionalLocations: new[] { parentIfStatement.IfKeyword.GetLocation() }));
                     }
                 },
                 SyntaxKind.IfStatement);
