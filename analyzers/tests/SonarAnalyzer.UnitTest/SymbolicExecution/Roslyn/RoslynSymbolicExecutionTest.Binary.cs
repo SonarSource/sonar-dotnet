@@ -291,5 +291,141 @@ Tag(""End"");";
                 "Else",
                 "End");
         }
+
+        [TestMethod]
+        public void BinaryEqualsNull_SetsBoolConstraint_CS()
+        {
+            const string code = @"
+object nullValue = null;
+object notNullValue = new object();
+var isTrue = nullValue == null;
+var isFalse = notNullValue == null;
+var isUnknown = arg == null;
+var forNullNull = null == null;
+var forNullSymbol = null == nullValue;
+var forSymbolSymbolTrue = nullValue == nullValue;
+var forSymbolSymbolFalse = notNullValue == nullValue;
+var forSymbolSymbolNone1 = notNullValue == notNullValue;
+var forSymbolSymbolNone2 = notNullValue == arg;
+var forSymbolSymbolNone3 = nullValue == arg;
+Tag(""IsTrue"", isTrue);
+Tag(""IsFalse"", isFalse);
+Tag(""IsUnknown"", isUnknown);
+Tag(""ForNullNull"", forNullNull);
+Tag(""ForNullSymbol"", forNullSymbol);
+Tag(""ForSymbolSymbolTrue"", forSymbolSymbolTrue);
+Tag(""ForSymbolSymbolFalse"", forSymbolSymbolFalse);
+Tag(""ForSymbolSymbolNone1"", forSymbolSymbolNone1);
+Tag(""ForSymbolSymbolNone2"", forSymbolSymbolNone1);
+Tag(""ForSymbolSymbolNone3"", forSymbolSymbolNone1);";
+            var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+            validator.ValidateContainsOperation(OperationKind.Binary);
+            validator.ValidateTag("IsTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+            validator.ValidateTag("IsFalse", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+            validator.ValidateTag("IsUnknown", x => x.Should().BeNull());
+            validator.ValidateTag("ForNullNull", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());  // null == null is Literal with constant value 'true'
+            validator.ValidateTag("ForNullSymbol", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+            validator.ValidateTag("ForSymbolSymbolTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+            validator.ValidateTag("ForSymbolSymbolFalse", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+            validator.ValidateTag("ForSymbolSymbolNone1", x => x.Should().BeNull("We can't tell if two instances are equivalent."));
+            validator.ValidateTag("ForSymbolSymbolNone2", x => x.Should().BeNull("We can't tell if two instances are equivalent."));
+            validator.ValidateTag("ForSymbolSymbolNone3", x => x.Should().BeNull("We can't tell if arg was null."));
+        }
+
+        [TestMethod]
+        public void BinaryEqualsNull_SetsBoolConstraint_VB()
+        {
+            const string code = @"
+Dim NullValue As Object = Nothing
+Dim NotNullValue As New Object()
+Dim IsTrue As Boolean = NullValue Is Nothing
+Dim IsFalse = NotNullValue Is Nothing
+Dim IsUnknown = Arg Is Nothing
+Dim EqualsTrue As Boolean = NullValue = Nothing
+Dim EqualsFalse = NotNullValue = Nothing
+Dim EqualsUnknown = Arg = Nothing
+Tag(""IsTrue"", IsTrue)
+Tag(""IsFalse"", IsFalse)
+Tag(""IsUnknown"", IsUnknown)
+Tag(""EqualsTrue"", EqualsTrue)
+Tag(""EqualsFalse"", EqualsFalse)
+Tag(""EqualsUnknown"", EqualsUnknown)";
+            var validator = SETestContext.CreateVB(code, ", Arg As Object").Validator;
+            validator.ValidateContainsOperation(OperationKind.Binary);
+            validator.ValidateTag("IsTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+            validator.ValidateTag("IsFalse", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+            validator.ValidateTag("IsUnknown", x => x.Should().BeNull());
+            validator.ValidateTag("EqualsTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+            validator.ValidateTag("EqualsFalse", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+            validator.ValidateTag("EqualsUnknown", x => x.Should().BeNull());
+        }
+
+        [TestMethod]
+        public void BinaryNotEqualsNull_SetsBoolConstraint_CS()
+        {
+            const string code = @"
+object nullValue = null;
+object notNullValue = new object();
+var isTrue = notNullValue != null;
+var isFalse = nullValue != null;
+var isUnknown = arg != null;
+var forNullNull = null != null;
+var forNullSymbol = null != nullValue;
+var forSymbolSymbolTrue = notNullValue != nullValue;
+var forSymbolSymbolFalse = nullValue != nullValue;
+var forSymbolSymbolNone1 = notNullValue != notNullValue;
+var forSymbolSymbolNone2 = notNullValue != arg;
+var forSymbolSymbolNone3 = nullValue != arg;
+Tag(""IsTrue"", isTrue);
+Tag(""IsFalse"", isFalse);
+Tag(""IsUnknown"", isUnknown);
+Tag(""ForNullNull"", forNullNull);
+Tag(""ForNullSymbol"", forNullSymbol);
+Tag(""ForSymbolSymbolTrue"", forSymbolSymbolTrue);
+Tag(""ForSymbolSymbolFalse"", forSymbolSymbolFalse);
+Tag(""ForSymbolSymbolNone1"", forSymbolSymbolNone1);
+Tag(""ForSymbolSymbolNone2"", forSymbolSymbolNone1);
+Tag(""ForSymbolSymbolNone3"", forSymbolSymbolNone1);";
+            var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+            validator.ValidateContainsOperation(OperationKind.Binary);
+            validator.ValidateTag("IsTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+            validator.ValidateTag("IsFalse", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+            validator.ValidateTag("IsUnknown", x => x.Should().BeNull());
+            validator.ValidateTag("ForNullNull", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());  // null != null is Literal with constant value 'false'
+            validator.ValidateTag("ForNullSymbol", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+            validator.ValidateTag("ForSymbolSymbolTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+            validator.ValidateTag("ForSymbolSymbolFalse", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+            validator.ValidateTag("ForSymbolSymbolNone1", x => x.Should().BeNull("We can't tell if two instances are equivalent."));
+            validator.ValidateTag("ForSymbolSymbolNone2", x => x.Should().BeNull("We can't tell if two instances are equivalent."));
+            validator.ValidateTag("ForSymbolSymbolNone3", x => x.Should().BeNull("We can't tell if arg was null."));
+        }
+
+        [TestMethod]
+        public void BinaryNotEqualsNull_SetsBoolConstraint_VB()
+        {
+            const string code = @"
+Dim NullValue As Object = Nothing
+Dim NotNullValue As New Object()
+Dim IsTrue = NotNullValue IsNot Nothing
+Dim IsFalse As Boolean = NullValue IsNot Nothing
+Dim IsUnknown = Arg IsNot Nothing
+Dim EqualsTrue = NotNullValue <> Nothing
+Dim EqualsFalse As Boolean = NullValue <> Nothing
+Dim EqualsUnknown = Arg <> Nothing
+Tag(""IsTrue"", IsTrue)
+Tag(""IsFalse"", IsFalse)
+Tag(""IsUnknown"", IsUnknown)
+Tag(""EqualsTrue"", EqualsTrue)
+Tag(""EqualsFalse"", EqualsFalse)
+Tag(""EqualsUnknown"", EqualsUnknown)";
+            var validator = SETestContext.CreateVB(code, ", Arg As Object").Validator;
+            validator.ValidateContainsOperation(OperationKind.Binary);
+            validator.ValidateTag("IsTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+            validator.ValidateTag("IsFalse", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+            validator.ValidateTag("IsUnknown", x => x.Should().BeNull());
+            validator.ValidateTag("EqualsTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+            validator.ValidateTag("EqualsFalse", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+            validator.ValidateTag("EqualsUnknown", x => x.Should().BeNull());
+        }
     }
 }

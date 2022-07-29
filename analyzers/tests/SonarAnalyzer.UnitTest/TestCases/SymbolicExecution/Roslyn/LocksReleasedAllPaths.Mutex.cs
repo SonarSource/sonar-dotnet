@@ -265,7 +265,7 @@ namespace Mutex_Type
                 m = Mutex.OpenExisting(mutexName);
                 if (shouldAcquire)
                 {
-                    m.WaitOne();    // Noncompliant FP because we don't track the bool condition
+                    m.WaitOne();    // Compliant, depends on tracking Null constraint for 'm'
                     acquired = true;
                 }
             }
@@ -355,7 +355,7 @@ namespace Mutex_Type
         {
             if (instanceMutex != null)
             {
-                instanceMutex.WaitOne();    // Noncompliant FP
+                instanceMutex.WaitOne();    // Compliant, depends on tracking null conditions
             }
 
 
