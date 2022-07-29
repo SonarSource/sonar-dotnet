@@ -81,6 +81,14 @@ namespace SonarAnalyzer.Helpers
                 return;
             }
 
+            if (reportingContext.Compilation is { } compilation
+                && reportingContext.Diagnostic.Location.Kind == LocationKind.SourceFile
+                && !compilation.ContainsSyntaxTree(reportingContext.Diagnostic.Location.SourceTree.GetRoot()?.SyntaxTree))
+            {
+                Debug.Fail("Primary location should be part of the compilation. An AD0001 is raised if this is not the case.");
+                return;
+            }
+
             // This is the current way SonarLint will handle how and what to report.
             if (SonarAnalysisContext.ReportDiagnostic != null)
             {
