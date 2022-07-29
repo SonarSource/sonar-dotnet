@@ -58,8 +58,10 @@ public class Bar
                                     .AddReferences(firstCompilation.ToMetadataReference())
                                     .WithAnalyzers(analyzers);
 
+            firstCompilation.GetDiagnostics().Should().BeEmpty();
+
             var result = await secondCompilation.GetAnalyzerDiagnosticsAsync();
-            result.Single().Id.Should().Be("S2696");
+            result.Should().BeEquivalentTo(new [] { new { Id = "S2696", AdditionalLocations = Array.Empty<Location>() } });
             result.Single().GetMessage().Should().StartWith("Make the enclosing instance method 'static' or remove this set on the 'static' field.");
         }
 
