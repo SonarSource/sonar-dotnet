@@ -1,5 +1,5 @@
 {
-  "title": "Azure Functions: Restrictions on entity interfaces",
+  "title": "Interfaces for durable entities should satisfy the restrictions",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
