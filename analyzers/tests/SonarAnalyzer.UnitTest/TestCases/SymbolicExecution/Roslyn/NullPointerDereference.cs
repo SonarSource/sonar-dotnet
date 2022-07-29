@@ -826,7 +826,7 @@ namespace Tests.Diagnostics
         {
             string someString = null;
 
-            if (!someString?.Contains("a") ?? true)   // Compliant
+            if (!someString?.Contains("a") ?? true)
                 Console.WriteLine("It's null or doesn't contain 'a'");
             else
                 Console.WriteLine(someString.Length); // FIXME Non-compliant FP, this path is unreachable
