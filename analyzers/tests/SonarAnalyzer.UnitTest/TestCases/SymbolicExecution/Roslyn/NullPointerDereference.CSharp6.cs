@@ -13,7 +13,8 @@ namespace Tests.Diagnostics
         {
             object o = null;
             this._foo1 = o;
-            this?._foo1.ToString(); // FIXME Non-compliant
+            this?._foo1.ToString();
+            //   ^^^^^^              {{'._foo1' is null on at least one execution path.}}
         }
 
         string TryCatch3()
@@ -52,7 +53,7 @@ namespace Tests.Diagnostics
             o = null;
             try
             {
-                var a = o?.ToString();
+                var a = o?.ToString();  // Noncompliant FIXME (was compliant before)
             }
             catch (Exception e) when (e.Message != null)
             {
@@ -116,8 +117,8 @@ namespace Tests.Diagnostics
     void NonCompliant2()
     {
       object o = null;
-      switch (o?.GetHashCode())
-      {
+      switch (o?.GetHashCode()) // Noncompliant FIXME (was compliant before)
+            {
         case null:
           o.ToString(); // Noncompliant
                         // Noncompliant@-1 FIXME: double reporting

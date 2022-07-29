@@ -77,7 +77,7 @@ namespace Tests.Diagnostics
         void Test_Foreach()
         {
             IEnumerable<int> en = null;
-            foreach (var item in en) // FIXME Non-compliant
+            foreach (var item in en) // Noncompliant
             {
 
             }
@@ -479,7 +479,7 @@ namespace Tests.Diagnostics
         {
             object o = null;
             _foo1 = o;
-            (new NullPointerDereferenceWithFields())._foo1.ToString(); // Compliant
+            (new NullPointerDereferenceWithFields())._foo1.ToString(); // Noncompliant
         }
 
         void ParenthesizedAccess1()
@@ -826,7 +826,7 @@ namespace Tests.Diagnostics
         {
             string someString = null;
 
-            if (!someString?.Contains("a") ?? true)
+            if (!someString?.Contains("a") ?? true)   // Noncompliant FIXME (was compliant before)
                 Console.WriteLine("It's null or doesn't contain 'a'");
             else
                 Console.WriteLine(someString.Length); // FIXME Non-compliant FP, this path is unreachable
