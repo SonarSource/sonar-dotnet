@@ -40,10 +40,11 @@ namespace SonarAnalyzer.Extensions
                 || TriviaContainsCommentOrConditionalCompilation(block.OpenBraceToken.TrailingTrivia)
                 || TriviaContainsCommentOrConditionalCompilation(block.CloseBraceToken.LeadingTrivia);
 
-            bool TriviaContainsCommentOrConditionalCompilation(SyntaxTriviaList trivias) =>
-                trivias.Any(trivia =>
+            bool TriviaContainsCommentOrConditionalCompilation(SyntaxTriviaList triviaList) =>
+                (treatCommentsAsContent || treatConditionalCompilationAsContent)
+                && triviaList.Any(trivia =>
                     (treatCommentsAsContent && trivia.IsAnyKind(SyntaxKind.SingleLineCommentTrivia, SyntaxKind.MultiLineCommentTrivia))
-                    || (treatConditionalCompilationAsContent && trivia.IsKind(SyntaxKind.DisabledTextTrivia)));
+                     || (treatConditionalCompilationAsContent && trivia.IsKind(SyntaxKind.DisabledTextTrivia)));
         }
     }
 }
