@@ -2,6 +2,12 @@
   "version": 1,
   "dependencies": {
     ".NETFramework,Version=v4.8": {
+      "altcover": {
+        "type": "Direct",
+        "requested": "[8.3.838, )",
+        "resolved": "8.3.838",
+        "contentHash": "MYGKI6cuA9IKhpvhAgrgHWVHt8U2ASu26TxW3ZS72IpYg3M/zAeCXAKUKh//aW7xbAGM2MiDchepbYOwiZRJXw=="
+      },
       "FluentAssertions": {
         "type": "Direct",
         "requested": "[5.10.3, )",
@@ -431,6 +437,12 @@
       }
     },
     "net6.0": {
+      "altcover": {
+        "type": "Direct",
+        "requested": "[8.3.838, )",
+        "resolved": "8.3.838",
+        "contentHash": "MYGKI6cuA9IKhpvhAgrgHWVHt8U2ASu26TxW3ZS72IpYg3M/zAeCXAKUKh//aW7xbAGM2MiDchepbYOwiZRJXw=="
+      },
       "FluentAssertions": {
         "type": "Direct",
         "requested": "[5.10.3, )",

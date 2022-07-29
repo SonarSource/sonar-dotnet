@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AltCover" Version="8.3.838" />
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
     <PackageReference Include="FluentAssertions.Analyzers" Version="0.13.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
