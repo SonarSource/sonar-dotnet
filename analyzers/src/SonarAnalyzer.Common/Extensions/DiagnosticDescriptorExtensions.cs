@@ -26,7 +26,11 @@ namespace SonarAnalyzer.Extensions;
 
 public static class DiagnosticDescriptorExtensions
 {
-    public static Diagnostic CreateDiagnostic(this DiagnosticDescriptor descriptor, Compilation compilation, Location location, IEnumerable<Location> additionalLocations, params object[] messageArgs) =>
+    public static Diagnostic CreateDiagnostic(this DiagnosticDescriptor descriptor,
+                                              Compilation compilation,
+                                              Location location,
+                                              IEnumerable<Location> additionalLocations,
+                                              params object[] messageArgs) =>
         Diagnostic.Create(descriptor, location, additionalLocations?.Where(x => IsLocationValid(x, compilation)), messageArgs);
 
     private static bool IsLocationValid(Location location, Compilation compilation) =>
