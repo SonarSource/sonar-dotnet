@@ -30,11 +30,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         private readonly VerifierBuilder verifierVB = new VerifierBuilder<VB.OptionalParameter>();
 
         [TestMethod]
-        public void OptionalParameter()
-        {
+        public void OptionalParameter_CS() =>
             verifierCS.AddPaths("OptionalParameter.cs").Verify();
+
+        [TestMethod]
+        public void OptionalParameter_VB() =>
             verifierVB.AddPaths("OptionalParameter.vb").Verify();
-        }
 
 #if NET
 
