@@ -67,7 +67,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove the unused private type 'Derived'.",
+"message":  "Remove the unused private record 'Derived'.",
 "location":  {
 "uri":  "sources\Net5\Net5\S1185.cs",
 "region":  {
@@ -340,7 +340,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove the unused private type 'B'.",
+"message":  "Remove the unused private class 'B'.",
 "location":  {
 "uri":  "sources\Net5\Net5\S4015.cs",
 "region":  {

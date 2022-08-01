@@ -15,7 +15,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove the unused private type 'QueueWithAddFirst'.",
+"message":  "Remove the unused private class 'QueueWithAddFirst'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\BlockingQueue.cs",
 "region":  {
