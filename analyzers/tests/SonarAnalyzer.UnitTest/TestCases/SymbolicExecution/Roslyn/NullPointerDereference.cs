@@ -86,7 +86,7 @@ namespace Tests.Diagnostics
         async System.Threading.Tasks.Task Test_Await()
         {
             System.Threading.Tasks.Task t = null;
-            await t; // FIXME Non-compliant
+            await t; // Noncompliant
         }
 
         void Test_Exception()
