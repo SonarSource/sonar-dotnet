@@ -48,26 +48,14 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
-                var methodCall = (InvocationExpressionSyntax)c.Node;
-                var methodParameterLookup = new CSharpMethodParameterLookup(methodCall, c.SemanticModel);
-
-                if (methodParameterLookup.MethodSymbol is not null
+                if (new CSharpMethodParameterLookup((InvocationExpressionSyntax)c.Node, c.SemanticModel) is { MethodSymbol: { } } methodParameterLookup
                     && methodParameterLookup.GetAllArgumentParameterMappings() is { } argumentMappings)
                 {
-                    foreach (var argumentMapping in argumentMappings)
+                    foreach (var argumentMapping in argumentMappings.Where(x => x.Symbol.GetAttributes(CallerInfoAttributesToReportOn).Any()))
                     {
-                        var parameter = argumentMapping.Symbol;
-                        var argument = argumentMapping.Node;
-
-                        if (GetCallerInfoAttribute(parameter) is { } callerInfoAttributeDataOnCall)
-                        {
-                            c.ReportIssue(Diagnostic.Create(rule, argument.GetLocation()));
-                        }
+                        c.ReportIssue(Diagnostic.Create(rule, argumentMapping.Node.GetLocation()));
                     }
                 }
             }, SyntaxKind.InvocationExpression);
-
-        private static AttributeData GetCallerInfoAttribute(IParameterSymbol parameter) =>
-            parameter.GetAttributes(CallerInfoAttributesToReportOn).FirstOrDefault();
     }
 }
