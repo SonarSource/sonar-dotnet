@@ -34,8 +34,8 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3236";
         private const string MessageFormat = "Remove this argument from the method call; it hides the caller information.";
 
-        private static readonly DiagnosticDescriptor Rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         private static readonly ImmutableArray<KnownType> CallerInfoAttributesToReportOn =
