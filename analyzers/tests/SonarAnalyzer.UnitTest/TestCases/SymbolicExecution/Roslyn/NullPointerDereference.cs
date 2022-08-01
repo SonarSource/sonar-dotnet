@@ -101,6 +101,13 @@ namespace Tests.Diagnostics
             throw exc;
         }
 
+        void Test_Exception_ElementAccess()
+        {
+            int[] arr = null;
+            var i = arr[0];   // Noncompliant
+            //      ^^^
+        }
+
         public NullPointerDereference()
         {
             object o = null;
