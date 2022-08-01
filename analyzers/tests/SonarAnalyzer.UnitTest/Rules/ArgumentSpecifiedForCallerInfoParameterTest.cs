@@ -25,8 +25,19 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ArgumentSpecifiedForCallerInfoParameterTest
     {
+        private readonly VerifierBuilder verifier = new VerifierBuilder<ArgumentSpecifiedForCallerInfoParameter>();
+
         [TestMethod]
         public void ArgumentSpecifiedForCallerInfoParameter() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ArgumentSpecifiedForCallerInfoParameter.cs", new ArgumentSpecifiedForCallerInfoParameter());
+            verifier.AddPaths("ArgumentSpecifiedForCallerInfoParameter.cs").Verify();
+
+#if NET
+
+        [TestMethod]
+        public void ArgumentSpecifiedForCallerInfoParameter_CSharp10() =>
+            verifier.AddPaths("ArgumentSpecifiedForCallerInfoParameter.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+
+#endif
+
     }
 }

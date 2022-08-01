@@ -40,6 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly ImmutableArray<KnownType> CallerInfoAttributesToReportOn =
             ImmutableArray.Create(
+                KnownType.System_Runtime_CompilerServices_CallerArgumentExpressionAttribute,
                 KnownType.System_Runtime_CompilerServices_CallerFilePathAttribute,
                 KnownType.System_Runtime_CompilerServices_CallerLineNumberAttribute
             );
