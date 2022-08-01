@@ -267,32 +267,57 @@ namespace SonarAnalyzer.Helpers
         public static string GetClassification(this ISymbol symbol) =>
             symbol switch
             {
+                { Kind: SymbolKind.Alias } => "alias",
+                { Kind: SymbolKind.ArrayType } => "array",
+                { Kind: SymbolKind.Assembly } => "assembly",
+                { Kind: SymbolKind.DynamicType } => "dynamic",
+                { Kind: SymbolKind.ErrorType } => "error",
                 { Kind: SymbolKind.Event } => "event",
                 { Kind: SymbolKind.Field } => "field",
-                IMethodSymbol { MethodKind: MethodKind.Constructor or MethodKind.StaticConstructor } => "constructor",
-                IMethodSymbol { MethodKind: MethodKind.Destructor } => "destructor",
-                { Kind: SymbolKind.Method } => "method",
+                { Kind: SymbolKind.Label } => "label",
+                { Kind: SymbolKind.Local } => "local",
                 { Kind: SymbolKind.Namespace } => "namespace",
+                { Kind: SymbolKind.NetModule } => "netmodule",
+                { Kind: SymbolKind.PointerType } => "pointer",
+                { Kind: SymbolKind.Preprocessing } => "preprocessing",
+                { Kind: SymbolKind.Parameter } => "parameter",
+                { Kind: SymbolKind.RangeVariable } => "range",
                 { Kind: SymbolKind.Property } => "property",
-                INamedTypeSymbol { TypeKind: TypeKind.Array } => "array",
-                INamedTypeSymbol { TypeKind: TypeKind.Class } namedType => namedType.IsRecord() ? "record" : "class",
-                INamedTypeSymbol { TypeKind: TypeKind.Dynamic } => "dynamic",
-                INamedTypeSymbol { TypeKind: TypeKind.Delegate } => "delegate",
-                INamedTypeSymbol { TypeKind: TypeKind.Enum } => "enum",
-                INamedTypeSymbol { TypeKind: TypeKind.Error } => "error",
-                INamedTypeSymbol { TypeKind: TypeKind.Interface } => "interface",
-                INamedTypeSymbol { TypeKind: TypeKind.Module } => "module",
-                INamedTypeSymbol { TypeKind: TypeKind.Pointer } => "pointer",
-                INamedTypeSymbol { TypeKind: TypeKind.Struct or TypeKind.Structure } namedType => namedType.IsRecord() ? "record struct" : "struct",
-                INamedTypeSymbol { TypeKind: TypeKind.Submission } => "submisson",
-                INamedTypeSymbol { TypeKind: TypeKind.TypeParameter } => "type parameter",
-                INamedTypeSymbol { TypeKind: TypeKind.Unknown } => "unknown",
-
+                { Kind: SymbolKind.TypeParameter } => "type parameter",
+                IMethodSymbol methodSymbol => methodSymbol switch
+                {
+                    { MethodKind: MethodKind.BuiltinOperator or MethodKind.UserDefinedOperator or MethodKind.Conversion} => "operator",
+                    { MethodKind: MethodKind.Constructor or MethodKind.StaticConstructor or MethodKind.SharedConstructor } => "constructor",
+                    { MethodKind: MethodKind.Destructor } => "destructor",
+                    { MethodKind: MethodKind.PropertyGet } => "getter",
+                    { MethodKind: MethodKind.PropertySet } => "setter",
+                    _ => "method",
+                },
+                INamedTypeSymbol namedTypeSymbol => namedTypeSymbol switch
+                {
+                    { TypeKind: TypeKind.Array } => "array",
+                    { TypeKind: TypeKind.Class } namedType => namedType.IsRecord() ? "record" : "class",
+                    { TypeKind: TypeKind.Dynamic } => "dynamic",
+                    { TypeKind: TypeKind.Delegate } => "delegate",
+                    { TypeKind: TypeKind.Enum } => "enum",
+                    { TypeKind: TypeKind.Error } => "error",
+                    { TypeKind: TypeKind.Interface } => "interface",
+                    { TypeKind: TypeKind.Module } => "module",
+                    { TypeKind: TypeKind.Pointer } => "pointer",
+                    { TypeKind: TypeKind.Struct or TypeKind.Structure } namedType => namedType.IsRecord() ? "record struct" : "struct",
+                    { TypeKind: TypeKind.Submission } => "submisson",
+                    { TypeKind: TypeKind.TypeParameter } => "type parameter",
+                    { TypeKind: TypeKind.Unknown } => "unknown",
+#if DEBUG
+                    _ => throw new NotSupportedException($"symbol {symbol.ToDisplayString()} is of a not yet supported kind."),
+#else
+                    _ => "type",
+#endif
+                },
 #if DEBUG
                 _ => throw new NotSupportedException($"symbol {symbol.ToDisplayString()} is of a not yet supported kind."),
 #else
-                { Kind: SymbolKind.NamedType} => "type",
-                _ => "",
+                { Kind: var kind } => kind.ToString().ToLower(),
 #endif
 
             };
