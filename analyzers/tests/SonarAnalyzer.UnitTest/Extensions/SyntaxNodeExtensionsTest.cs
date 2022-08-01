@@ -101,6 +101,75 @@ namespace SonarAnalyzer.UnitTest.Extensions
 #endif
 
         [TestMethod]
+        public void GetDeclarationTypeName_Class() =>
+            SyntaxNodeExtensionsCS.GetDeclarationTypeName(SyntaxFactory.ClassDeclaration("MyClass")).Should().Be("class");
+
+        [TestMethod]
+        public void GetDeclarationTypeName_Constructor() =>
+            SyntaxNodeExtensionsCS.GetDeclarationTypeName(SyntaxFactory.ConstructorDeclaration("MyConstructor")).Should().Be("constructor");
+
+        [TestMethod]
+        public void GetDeclarationTypeName_Delegate() =>
+            SyntaxNodeExtensionsCS.GetDeclarationTypeName(SyntaxFactory.DelegateDeclaration(SyntaxFactory.ParseTypeName("void"), "MyDelegate")).Should().Be("delegate");
+
+        [TestMethod]
+        public void GetDeclarationTypeName_Destructor() =>
+            SyntaxNodeExtensionsCS.GetDeclarationTypeName(SyntaxFactory.DestructorDeclaration("~")).Should().Be("destructor");
+
+        [TestMethod]
+        public void GetDeclarationTypeName_Enum() =>
+            SyntaxNodeExtensionsCS.GetDeclarationTypeName(SyntaxFactory.EnumDeclaration("MyEnum")).Should().Be("enum");
+
+        [TestMethod]
+        public void GetDeclarationTypeName_EnumMember() =>
+            SyntaxNodeExtensionsCS.GetDeclarationTypeName(SyntaxFactory.EnumMemberDeclaration("EnumValue1")).Should().Be("enum");
+
+        [TestMethod]
+        public void GetDeclarationTypeName_Event() =>
+            SyntaxNodeExtensionsCS.GetDeclarationTypeName(SyntaxFactory.EventDeclaration(SyntaxFactory.ParseTypeName("void"), "MyEvent")).Should().Be("event");
+
+        [TestMethod]
+        public void GetDeclarationTypeName_EventField() =>
+            SyntaxNodeExtensionsCS.GetDeclarationTypeName(SyntaxFactory.EventFieldDeclaration(SyntaxFactory.VariableDeclaration(SyntaxFactory.ParseTypeName("MyEvent")))).Should().Be("event");
+
+        [TestMethod]
+        public void GetDeclarationTypeName_Field() =>
+            SyntaxNodeExtensionsCS.GetDeclarationTypeName(SyntaxFactory.FieldDeclaration(SyntaxFactory.VariableDeclaration(SyntaxFactory.ParseTypeName("int")))).Should().Be("field");
+
+        [TestMethod]
+        public void GetDeclarationTypeName_Indexer() =>
+            SyntaxNodeExtensionsCS.GetDeclarationTypeName(SyntaxFactory.IndexerDeclaration(SyntaxFactory.ParseTypeName("int"))).Should().Be("indexer");
+
+        [TestMethod]
+        public void GetDeclarationTypeName_Interface() =>
+            SyntaxNodeExtensionsCS.GetDeclarationTypeName(SyntaxFactory.InterfaceDeclaration("MyInterface")).Should().Be("interface");
+
+        [TestMethod]
+        public void GetDeclarationTypeName_LocalFunction() =>
+            SyntaxNodeExtensionsCS.GetDeclarationTypeName(SyntaxFactory.LocalFunctionStatement(SyntaxFactory.ParseTypeName("void"), "MyLocalFunction")).Should().Be("local function");
+
+        [TestMethod]
+        public void GetDeclarationTypeName_Method() =>
+            SyntaxNodeExtensionsCS.GetDeclarationTypeName(SyntaxFactory.MethodDeclaration(SyntaxFactory.ParseTypeName("void"), "MyMethod")).Should().Be("method");
+
+        [TestMethod]
+        public void GetDeclarationTypeName_Property() =>
+            SyntaxNodeExtensionsCS.GetDeclarationTypeName(SyntaxFactory.PropertyDeclaration(SyntaxFactory.ParseTypeName("void"), "MyProperty")).Should().Be("property");
+
+        [TestMethod]
+        public void GetDeclarationTypeName_Record() =>
+            SyntaxNodeExtensionsCS.GetDeclarationTypeName(SyntaxFactory.RecordDeclaration(SyntaxFactory.Token(SyntaxKind.RecordKeyword), "MyRecord")).Should().Be("record");
+
+        [TestMethod]
+        public void GetDeclarationTypeName_RecordStruct() =>
+            SyntaxNodeExtensionsCS.GetDeclarationTypeName(SyntaxFactory.RecordDeclaration(SyntaxKind.RecordStructDeclaration, SyntaxFactory.Token(SyntaxKind.RecordKeyword), "MyRecord"))
+                .Should().Be("record struct");
+
+        [TestMethod]
+        public void GetDeclarationTypeName_Struct() =>
+            SyntaxNodeExtensionsCS.GetDeclarationTypeName(SyntaxFactory.StructDeclaration("MyStruct")).Should().Be("struct");
+
+        [TestMethod]
         public void CreateCfg_MethodBody_ReturnsCfg_CS()
         {
             const string code = @"

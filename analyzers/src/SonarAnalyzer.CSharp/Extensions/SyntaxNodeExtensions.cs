@@ -90,10 +90,22 @@ namespace SonarAnalyzer.Extensions
             node.Kind() switch
             {
                 SyntaxKind.ClassDeclaration => "class",
-                SyntaxKind.StructDeclaration => "struct",
+                SyntaxKind.ConstructorDeclaration => "constructor",
+                SyntaxKind.DelegateDeclaration => "delegate",
+                SyntaxKind.DestructorDeclaration => "destructor",
+                SyntaxKind.EnumDeclaration => "enum",
+                SyntaxKind.EnumMemberDeclaration => "enum",
+                SyntaxKind.EventDeclaration => "event",
+                SyntaxKind.EventFieldDeclaration => "event",
+                SyntaxKind.FieldDeclaration => "field",
+                SyntaxKind.IndexerDeclaration => "indexer",
                 SyntaxKind.InterfaceDeclaration => "interface",
+                SyntaxKindEx.LocalFunctionStatement => "local function",
+                SyntaxKind.MethodDeclaration => "method",
+                SyntaxKind.PropertyDeclaration => "property",
                 SyntaxKindEx.RecordClassDeclaration => "record",
                 SyntaxKindEx.RecordStructDeclaration => "record struct",
+                SyntaxKind.StructDeclaration => "struct",
                 _ => GetUnknownType(node.Kind())
             };
 
@@ -147,7 +159,7 @@ namespace SonarAnalyzer.Extensions
         /// </returns>
         public static SyntaxNode FindAssignmentComplement(this SyntaxNode node)
         {
-            if (node is { Parent: AssignmentExpressionSyntax assigment})
+            if (node is { Parent: AssignmentExpressionSyntax assigment })
             {
                 return OtherSideOfAssignment(node, assigment);
             }
