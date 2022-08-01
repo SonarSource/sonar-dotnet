@@ -284,7 +284,7 @@ namespace SonarAnalyzer.Helpers
                 { Kind: SymbolKind.PointerType } => "pointer",
                 { Kind: SymbolKind.Preprocessing } => "preprocessing",
                 { Kind: SymbolKind.Parameter } => "parameter",
-                { Kind: SymbolKind.RangeVariable } => "range",
+                { Kind: SymbolKind.RangeVariable } => "range variable",
                 { Kind: SymbolKind.Property } => "property",
                 { Kind: SymbolKind.TypeParameter } => "type parameter",
                 IMethodSymbol methodSymbol => methodSymbol switch

@@ -295,7 +295,7 @@ namespace NS
         [DataRow(SymbolKind.PointerType, "pointer")]
         [DataRow(SymbolKind.Preprocessing, "preprocessing")]
         [DataRow(SymbolKind.Property, "property")]
-        [DataRow(SymbolKind.RangeVariable, "range")]
+        [DataRow(SymbolKind.RangeVariable, "range variable")]
         [DataRow(SymbolKind.TypeParameter, "type parameter")]
         public void GetClassification_SimpleKinds(SymbolKind symbolKind, string expected) =>
             new FakeSymbol(symbolKind).GetClassification().Should().Be(expected);
