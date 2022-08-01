@@ -264,7 +264,7 @@ namespace SonarAnalyzer.Helpers
             || symbol.Kind == SymbolKind.Property
             || symbol.Kind == SymbolKind.Event;
 
-        // https://github.com/dotnet/roslyn/blob/main/src/Workspaces/Core/Portable/Classification/ClassificationExtensions.cs
+#pragma warning disable S109 // Magic numbers should not be used. Some new kinds are not yet defined in the facade
         public static string GetClassification(this ISymbol symbol) =>
             symbol switch
             {
@@ -325,6 +325,7 @@ namespace SonarAnalyzer.Helpers
 #endif
 
             };
+#pragma warning restore S109 // Magic numbers should not be used
 
         public static bool IsRecord(this ITypeSymbol typeSymbol)
             => ITypeSymbolIsRecord?.GetValue(typeSymbol) is true;
