@@ -101,6 +101,13 @@ namespace Tests.Diagnostics
             throw exc;
         }
 
+        void Test_IndexerElementAccess()
+        {
+            List<int> list = null;
+            var i = list[0];   // Noncompliant
+            //      ^^^^
+        }
+
         public NullPointerDereference()
         {
             object o = null;
