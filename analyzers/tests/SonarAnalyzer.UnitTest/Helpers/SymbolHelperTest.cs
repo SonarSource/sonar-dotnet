@@ -300,6 +300,14 @@ namespace NS
         public void GetClassification_SimpleKinds(SymbolKind symbolKind, string expected) =>
             new FakeSymbol(symbolKind).GetClassification().Should().Be(expected);
 
+        [TestMethod]
+        public void GetClassification_UnknowKind() =>
+#if DEBUG
+            new Action(() => new FakeSymbol((SymbolKind)999).GetClassification()).Should().Throw<NotSupportedException>();
+#else
+            new FakeSymbol((SymbolKind)999).GetClassification().Should().Be("symbol");
+#endif
+
         [DataTestMethod]
         [DataRow(TypeKind.Array, "array")]
         [DataRow(TypeKind.Class, "class")]
@@ -318,6 +326,14 @@ namespace NS
         [DataRow(TypeKind.Unknown, "unknown")]
         public void GetClassification_NamedTypes(TypeKind typeKind, string expected) =>
             new FakeNamedTypeSymbol(typeKind).GetClassification().Should().Be(expected);
+
+        [TestMethod]
+        public void GetClassification_NamedType_Unknown() =>
+#if DEBUG
+            new Action(() => new FakeNamedTypeSymbol((TypeKind)255).GetClassification()).Should().Throw<NotSupportedException>();
+#else
+            new FakeNamedTypeSymbol((TypeKind)255).GetClassification().Should().Be("type");
+#endif
 
         [DataTestMethod]
         [DataRow(TypeKind.Class, "record")]

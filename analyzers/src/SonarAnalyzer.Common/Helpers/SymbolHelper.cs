@@ -313,15 +313,15 @@ namespace SonarAnalyzer.Helpers
                     { TypeKind: TypeKind.TypeParameter } => "type parameter",
                     { TypeKind: TypeKind.Unknown } => "unknown",
 #if DEBUG
-                    _ => throw new NotSupportedException($"symbol {symbol.ToDisplayString()} is of a not yet supported kind."),
+                    _ => throw new NotSupportedException($"symbol is of a not yet supported kind."),
 #else
                     _ => "type",
 #endif
                 },
 #if DEBUG
-                _ => throw new NotSupportedException($"symbol {symbol.ToDisplayString()} is of a not yet supported kind."),
+                _ => throw new NotSupportedException($"symbol is of a not yet supported kind."),
 #else
-                { Kind: var kind } => kind.ToString().ToLower(),
+                _ => "symbol",
 #endif
 
             };
