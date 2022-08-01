@@ -26,7 +26,7 @@ using CodeAnalysisAccessibility = Microsoft.CodeAnalysis.Accessibility; // This 
 namespace SonarAnalyzer.UnitTest.Helpers
 {
     [TestClass]
-    public class SymbolHelperTest
+    public partial class SymbolHelperTest
     {
         internal const string TestInput = @"
 namespace NS
@@ -276,5 +276,78 @@ namespace NS
         [TestMethod]
         public void GetEffectiveAccessibility_WhenSymbolIsNull_ReturnsNotApplicable() =>
             ((ISymbol)null).GetEffectiveAccessibility().Should().Be(CodeAnalysisAccessibility.NotApplicable);
+
+        [DataTestMethod]
+        [DataRow(SymbolKind.Alias, "alias")]
+        [DataRow(SymbolKind.ArrayType, "array")]
+        [DataRow(SymbolKind.Assembly, "assembly")]
+        [DataRow(SymbolKind.Discard, "discard")]
+        [DataRow(SymbolKind.DynamicType, "dynamic")]
+        [DataRow(SymbolKind.ErrorType, "error")]
+        [DataRow(SymbolKind.Event, "event")]
+        [DataRow(SymbolKind.Field, "field")]
+        [DataRow(SymbolKind.FunctionPointerType, "function pointer")]
+        [DataRow(SymbolKind.Label, "label")]
+        [DataRow(SymbolKind.Local, "local")]
+        [DataRow(SymbolKind.Namespace, "namespace")]
+        [DataRow(SymbolKind.NetModule, "netmodule")]
+        [DataRow(SymbolKind.Parameter, "parameter")]
+        [DataRow(SymbolKind.PointerType, "pointer")]
+        [DataRow(SymbolKind.Preprocessing, "preprocessing")]
+        [DataRow(SymbolKind.Property, "property")]
+        [DataRow(SymbolKind.RangeVariable, "range")]
+        [DataRow(SymbolKind.TypeParameter, "type parameter")]
+        public void GetClassification_SimpleKinds(SymbolKind symbolKind, string expected) =>
+            new FakeSymbol(symbolKind).GetClassification().Should().Be(expected);
+
+        [DataTestMethod]
+        [DataRow(TypeKind.Array, "array")]
+        [DataRow(TypeKind.Class, "class")]
+        [DataRow(TypeKind.Delegate, "delegate")]
+        [DataRow(TypeKind.Dynamic, "dynamic")]
+        [DataRow(TypeKind.Enum, "enum")]
+        [DataRow(TypeKind.Error, "error")]
+        [DataRow(TypeKind.FunctionPointer, "function pointer")]
+        [DataRow(TypeKind.Interface, "interface")]
+        [DataRow(TypeKind.Module, "module")]
+        [DataRow(TypeKind.Pointer, "pointer")]
+        [DataRow(TypeKind.Struct, "struct")]
+        [DataRow(TypeKind.Structure, "struct")]
+        [DataRow(TypeKind.Submission, "submission")]
+        [DataRow(TypeKind.TypeParameter, "type parameter")]
+        [DataRow(TypeKind.Unknown, "unknown")]
+        public void GetClassification_NamedTypes(TypeKind typeKind, string expected) =>
+            new FakeNamedTypeSymbol(typeKind).GetClassification().Should().Be(expected);
+
+        [DataTestMethod]
+        [DataRow(TypeKind.Class, "record")]
+        [DataRow(TypeKind.Struct, "record struct")]
+        public void GetClassification_Record(TypeKind typeKind, string expected) =>
+            new FakeNamedTypeSymbol(typeKind, isRecord: true).GetClassification().Should().Be(expected);
+
+        [DataTestMethod]
+        [DataRow(MethodKind.AnonymousFunction, "method")]
+        [DataRow(MethodKind.BuiltinOperator, "operator")]
+        [DataRow(MethodKind.Constructor, "constructor")]
+        [DataRow(MethodKind.Conversion, "operator")]
+        [DataRow(MethodKind.DeclareMethod, "method")]
+        [DataRow(MethodKind.DelegateInvoke, "method")]
+        [DataRow(MethodKind.Destructor, "destructor")]
+        [DataRow(MethodKind.EventAdd, "method")]
+        [DataRow(MethodKind.EventRaise, "method")]
+        [DataRow(MethodKind.EventRemove, "method")]
+        [DataRow(MethodKind.ExplicitInterfaceImplementation, "method")]
+        [DataRow(MethodKind.FunctionPointerSignature, "method")]
+        [DataRow(MethodKind.LambdaMethod, "method")]
+        [DataRow(MethodKind.LocalFunction, "method")]
+        [DataRow(MethodKind.Ordinary, "method")]
+        [DataRow(MethodKind.PropertyGet, "getter")]
+        [DataRow(MethodKind.PropertySet, "setter")]
+        [DataRow(MethodKind.ReducedExtension, "method")]
+        [DataRow(MethodKind.SharedConstructor, "constructor")]
+        [DataRow(MethodKind.StaticConstructor, "constructor")]
+        [DataRow(MethodKind.UserDefinedOperator, "operator")]
+        public void GetClassification_Method(MethodKind methodKind, string expected) =>
+            new FakeMethodSymbol(methodKind).GetClassification().Should().Be(expected);
     }
 }

@@ -24,6 +24,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Reflection;
 using Microsoft.CodeAnalysis;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -270,9 +271,11 @@ namespace SonarAnalyzer.Helpers
                 { Kind: SymbolKind.Alias } => "alias",
                 { Kind: SymbolKind.ArrayType } => "array",
                 { Kind: SymbolKind.Assembly } => "assembly",
+                { Kind: SymbolKindEx.Discard } => "discard",
                 { Kind: SymbolKind.DynamicType } => "dynamic",
                 { Kind: SymbolKind.ErrorType } => "error",
                 { Kind: SymbolKind.Event } => "event",
+                { Kind: SymbolKindEx.FunctionPointerType } => "function pointer",
                 { Kind: SymbolKind.Field } => "field",
                 { Kind: SymbolKind.Label } => "label",
                 { Kind: SymbolKind.Local } => "local",
@@ -301,11 +304,12 @@ namespace SonarAnalyzer.Helpers
                     { TypeKind: TypeKind.Delegate } => "delegate",
                     { TypeKind: TypeKind.Enum } => "enum",
                     { TypeKind: TypeKind.Error } => "error",
+                    { TypeKind: (TypeKind)13 } => "function pointer",
                     { TypeKind: TypeKind.Interface } => "interface",
                     { TypeKind: TypeKind.Module } => "module",
                     { TypeKind: TypeKind.Pointer } => "pointer",
                     { TypeKind: TypeKind.Struct or TypeKind.Structure } namedType => namedType.IsRecord() ? "record struct" : "struct",
-                    { TypeKind: TypeKind.Submission } => "submisson",
+                    { TypeKind: TypeKind.Submission } => "submission",
                     { TypeKind: TypeKind.TypeParameter } => "type parameter",
                     { TypeKind: TypeKind.Unknown } => "unknown",
 #if DEBUG
