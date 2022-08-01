@@ -269,12 +269,32 @@ namespace SonarAnalyzer.Helpers
             {
                 { Kind: SymbolKind.Event } => "event",
                 { Kind: SymbolKind.Field } => "field",
+                IMethodSymbol { MethodKind: MethodKind.Constructor or MethodKind.StaticConstructor } => "constructor",
+                IMethodSymbol { MethodKind: MethodKind.Destructor } => "destructor",
                 { Kind: SymbolKind.Method } => "method",
+                { Kind: SymbolKind.Namespace } => "namespace",
                 { Kind: SymbolKind.Property } => "property",
-                INamedTypeSymbol { TypeKind: TypeKind.Delegate } => "delegate",
+                INamedTypeSymbol { TypeKind: TypeKind.Array } => "array",
                 INamedTypeSymbol { TypeKind: TypeKind.Class } namedType => namedType.IsRecord() ? "record" : "class",
-                INamedTypeSymbol { TypeKind: TypeKind.Struct } namedType => namedType.IsRecord() ? "record struct" : "struct",
+                INamedTypeSymbol { TypeKind: TypeKind.Dynamic } => "dynamic",
+                INamedTypeSymbol { TypeKind: TypeKind.Delegate } => "delegate",
                 INamedTypeSymbol { TypeKind: TypeKind.Enum } => "enum",
+                INamedTypeSymbol { TypeKind: TypeKind.Error } => "error",
+                INamedTypeSymbol { TypeKind: TypeKind.Interface } => "interface",
+                INamedTypeSymbol { TypeKind: TypeKind.Module } => "module",
+                INamedTypeSymbol { TypeKind: TypeKind.Pointer } => "pointer",
+                INamedTypeSymbol { TypeKind: TypeKind.Struct or TypeKind.Structure } namedType => namedType.IsRecord() ? "record struct" : "struct",
+                INamedTypeSymbol { TypeKind: TypeKind.Submission } => "submisson",
+                INamedTypeSymbol { TypeKind: TypeKind.TypeParameter } => "type parameter",
+                INamedTypeSymbol { TypeKind: TypeKind.Unknown } => "unknown",
+
+#if DEBUG
+                _ => throw new NotSupportedException($"symbol {symbol.ToDisplayString()} is of a not yet supported kind."),
+#else
+                { Kind: SymbolKind.NamedType} => "type",
+                _ => "",
+#endif
+
             };
 
         public static bool IsRecord(this ITypeSymbol typeSymbol)

@@ -226,7 +226,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 };
 
             Diagnostic CreateS1144Diagnostic(SyntaxNode syntaxNode, ISymbol symbol) =>
-                Diagnostic.Create(RuleS1144, syntaxNode.GetLocation(), accessibility, GetMemberType(symbol), GetMemberName(symbol));
+                Diagnostic.Create(RuleS1144, syntaxNode.GetLocation(), accessibility, symbol.GetClassification(), GetMemberName(symbol));
         }
 
         private static Diagnostic GetDiagnosticsForProperty(IPropertySymbol property, IReadOnlyDictionary<IPropertySymbol, AccessorAccess> propertyAccessorAccess)
@@ -256,16 +256,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static string GetMemberName(ISymbol symbol) =>
             symbol.IsConstructor() ? symbol.ContainingType.Name : symbol.Name;
-
-        private static string GetMemberType(ISymbol symbol) =>
-            symbol.IsConstructor()
-                ? "constructor"
-                : symbol.Kind switch
-                  {
-                      SymbolKind.Event or SymbolKind.Field or SymbolKind.Method or SymbolKind.Property => symbol.Kind.ToString().ToLowerInvariant(),
-                      SymbolKind.NamedType => "type",
-                      _ => "member",
-                  };
 
         private static bool VisitDeclaringReferences(ISymbol symbol, ISafeSyntaxWalker visitor, Compilation compilation, bool includeGeneratedFile)
         {
