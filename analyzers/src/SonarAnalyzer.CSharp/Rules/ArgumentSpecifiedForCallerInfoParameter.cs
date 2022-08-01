@@ -34,16 +34,15 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3236";
         private const string MessageFormat = "Remove this argument from the method call; it hides the caller information.";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         private static readonly ImmutableArray<KnownType> CallerInfoAttributesToReportOn =
             ImmutableArray.Create(
                 KnownType.System_Runtime_CompilerServices_CallerArgumentExpressionAttribute,
                 KnownType.System_Runtime_CompilerServices_CallerFilePathAttribute,
-                KnownType.System_Runtime_CompilerServices_CallerLineNumberAttribute
-            );
+                KnownType.System_Runtime_CompilerServices_CallerLineNumberAttribute);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
@@ -53,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     foreach (var argumentMapping in argumentMappings.Where(x => x.Symbol.GetAttributes(CallerInfoAttributesToReportOn).Any()))
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, argumentMapping.Node.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(Rule, argumentMapping.Node.GetLocation()));
                     }
                 }
             }, SyntaxKind.InvocationExpression);
