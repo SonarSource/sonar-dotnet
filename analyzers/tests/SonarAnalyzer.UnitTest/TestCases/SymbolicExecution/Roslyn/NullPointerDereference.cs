@@ -89,6 +89,16 @@ namespace Tests.Diagnostics
             await t; // Noncompliant
         }
 
+        void Test_Query()
+        {
+            int[] arr = null;
+            var qry = from i1 in arr       // Compliant FN
+                      from i2 in arr       // Compliant FN
+                      let o = (object)null
+                      where i1 > 0
+                      select o.ToString(); // Compliant FN
+        }
+
         void Test_Exception()
         {
             Exception exc = null;
