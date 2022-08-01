@@ -45,43 +45,27 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.System_Runtime_CompilerServices_CallerLineNumberAttribute
             );
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            {
+                var methodCall = (InvocationExpressionSyntax)c.Node;
+                var methodParameterLookup = new CSharpMethodParameterLookup(methodCall, c.SemanticModel);
+
+                if (methodParameterLookup.MethodSymbol is not null
+                    && methodParameterLookup.GetAllArgumentParameterMappings() is { } argumentMappings)
                 {
-                    var methodCall = (InvocationExpressionSyntax)c.Node;
-                    var methodParameterLookup = new CSharpMethodParameterLookup(methodCall, c.SemanticModel);
-
-                    var methodSymbol = methodParameterLookup.MethodSymbol;
-                    if (methodSymbol == null)
-                    {
-                        return;
-                    }
-
-                    var argumentMappings = methodParameterLookup.GetAllArgumentParameterMappings();
                     foreach (var argumentMapping in argumentMappings)
                     {
                         var parameter = argumentMapping.Symbol;
                         var argument = argumentMapping.Node;
 
-                        var callerInfoAttributeDataOnCall = GetCallerInfoAttribute(parameter);
-                        if (callerInfoAttributeDataOnCall == null)
+                        if (GetCallerInfoAttribute(parameter) is { } callerInfoAttributeDataOnCall)
                         {
-                            continue;
+                            c.ReportIssue(Diagnostic.Create(rule, argument.GetLocation()));
                         }
-
-                        if (c.SemanticModel.GetSymbolInfo(argument.Expression).Symbol is IParameterSymbol symbolForArgument &&
-                            Equals(callerInfoAttributeDataOnCall.AttributeClass, GetCallerInfoAttribute(symbolForArgument)?.AttributeClass))
-                        {
-                            continue;
-                        }
-
-                        c.ReportIssue(Diagnostic.Create(rule, argument.GetLocation()));
                     }
-                },
-                SyntaxKind.InvocationExpression);
-        }
+                }
+            }, SyntaxKind.InvocationExpression);
 
         private static AttributeData GetCallerInfoAttribute(IParameterSymbol parameter) =>
             parameter.GetAttributes(CallerInfoAttributesToReportOn).FirstOrDefault();
