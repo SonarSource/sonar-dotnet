@@ -101,7 +101,7 @@ namespace Tests.Diagnostics
             throw exc;
         }
 
-        void Test_Exception_ElementAccess()
+        void Test_ArrayElementAccess()
         {
             int[] arr = null;
             var i = arr[0];   // Noncompliant
