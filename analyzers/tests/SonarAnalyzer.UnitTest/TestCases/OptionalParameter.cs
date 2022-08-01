@@ -50,7 +50,7 @@ namespace Tests.Diagnostics
 
     public class CallerMember
     {
-        public void Caller_LineNumber([CallerLineNumberAttribute] int line = 0) { }
+        public void Caller_LineNumber([CallerLineNumber] int line = 0) { }
         public void Caller_FilePath([CallerFilePath] string sourceFilePath = "") { }
         public void Caller_MemberName([CallerMemberName] string memberName = "") { }
     }
