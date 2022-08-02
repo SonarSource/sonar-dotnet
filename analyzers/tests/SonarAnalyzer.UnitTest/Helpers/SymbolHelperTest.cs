@@ -26,7 +26,7 @@ using CodeAnalysisAccessibility = Microsoft.CodeAnalysis.Accessibility; // This 
 namespace SonarAnalyzer.UnitTest.Helpers
 {
     [TestClass]
-    public partial class SymbolHelperTest
+    public class SymbolHelperTest
     {
         internal const string TestInput = @"
 namespace NS
