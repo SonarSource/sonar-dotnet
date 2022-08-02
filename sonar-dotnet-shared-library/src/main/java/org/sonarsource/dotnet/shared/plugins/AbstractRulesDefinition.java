@@ -102,19 +102,36 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
   }
 
   private void addSecurityStandards(NewRule rule, SecurityStandards securityStandards) {
+    addASVS(rule, securityStandards);
+    addCwe(rule, securityStandards);
+    addOwasp(rule, securityStandards);
+    addPciDss(rule, securityStandards);
+  }
+
+  private void addASVS(NewRule rule, SecurityStandards securityStandards){
+    if (!isASVSSupported) {
+      return;
+    }
+
+    if (securityStandards.asvs4_0.length > 0){
+      rule.addOwaspAsvs(OwaspAsvsVersion.V4_0, securityStandards.asvs4_0);
+    }
+  }
+
+  private void addCwe(NewRule rule, SecurityStandards securityStandards) {
+    rule.addCwe(securityStandards.cwe);
+  }
+
+  private void addOwasp(NewRule rule, SecurityStandards securityStandards) {
     for (String s : securityStandards.owasp2017) {
       rule.addOwaspTop10(RulesDefinition.OwaspTop10.valueOf(s));
     }
+
     if (isOwaspByVersionSupported) {
       for (String s : securityStandards.owasp2021) {
         rule.addOwaspTop10(RulesDefinition.OwaspTop10Version.Y2021, RulesDefinition.OwaspTop10.valueOf(s));
       }
     }
-
-    addPciDss(rule, securityStandards);
-    addASVS(rule, securityStandards);
-
-    rule.addCwe(securityStandards.cwe);
   }
 
   private void addPciDss(NewRule rule, SecurityStandards securityStandards) {
@@ -128,16 +145,6 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
 
     if (securityStandards.pciDss4_0.length > 0){
       rule.addPciDss(PciDssVersion.V4_0, securityStandards.pciDss4_0);
-    }
-  }
-
-  private void addASVS(NewRule rule, SecurityStandards securityStandards){
-    if (!isASVSSupported) {
-      return;
-    }
-
-    if (securityStandards.asvs4_0.length > 0){
-      rule.addOwaspAsvs(OwaspAsvsVersion.V4_0, securityStandards.asvs4_0);
     }
   }
 
