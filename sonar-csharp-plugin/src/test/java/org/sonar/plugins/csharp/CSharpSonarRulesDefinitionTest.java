@@ -41,8 +41,9 @@ public class CSharpSonarRulesDefinitionTest {
   private static final String NO_TAGS_RULE_KEY = "S1048";
   private static final String SINGLE_PARAM_RULE_KEY = "S1200";
   private static final String MULTI_PARAM_RULE_KEY = "S110";
+  private static final String PCI_DSS_RULE_KEY = "S2068";
 
-  private static final SonarRuntime SONAR_RUNTIME = SonarRuntimeImpl.forSonarQube(Version.create(9, 3), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
+  private static final SonarRuntime SONAR_RUNTIME = SonarRuntimeImpl.forSonarQube(Version.create(9, 9), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
 
   @Test
   public void test() {
@@ -111,6 +112,28 @@ public class CSharpSonarRulesDefinitionTest {
 
     RulesDefinition.Rule rule = repository.rule(VULNERABILITY_RULE_KEY);
     assertThat(rule.securityStandards()).containsExactlyInAnyOrder("cwe:326", "owaspTop10:a3", "owaspTop10:a6");
+  }
+
+  @Test
+  public void test_security_standards_9_4_PCI_DSS_is_not_available() {
+    SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(9, 4), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
+    RulesDefinition.Context context = new RulesDefinition.Context();
+    new CSharpSonarRulesDefinition(sonarRuntime).define(context);
+    RulesDefinition.Repository repository = context.repository("csharpsquid");
+
+    RulesDefinition.Rule rule = repository.rule(PCI_DSS_RULE_KEY);
+    assertThat(rule.securityStandards()).containsExactlyInAnyOrder("cwe:259", "cwe:798", "owaspTop10-2021:a7", "owaspTop10:a2");
+  }
+
+  @Test
+  public void test_security_standards_9_5_PCI_DSS_is_available() {
+    SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(9, 5), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
+    RulesDefinition.Context context = new RulesDefinition.Context();
+    new CSharpSonarRulesDefinition(sonarRuntime).define(context);
+    RulesDefinition.Repository repository = context.repository("csharpsquid");
+
+    RulesDefinition.Rule rule = repository.rule(PCI_DSS_RULE_KEY);
+    assertThat(rule.securityStandards()).containsExactlyInAnyOrder("cwe:259", "cwe:798", "owaspTop10-2021:a7", "owaspTop10:a2", "pciDss-3.2:6.5.10", "pciDss-4.0:6.2.4");
   }
 
   @Test
