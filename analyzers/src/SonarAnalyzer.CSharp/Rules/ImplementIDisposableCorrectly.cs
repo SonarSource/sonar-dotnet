@@ -243,22 +243,17 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private bool CallsSuppressFinalize(BaseMethodDeclarationSyntax methodDeclaration) =>
                 methodDeclaration.ContainsMethodInvocation(semanticModel,
-                    method => method is
-                    {
-                        Expression: MemberAccessExpressionSyntax { Name.Identifier.Text: nameof(GC.SuppressFinalize) },
-                        ArgumentList.Arguments: { Count: 1 } arguments
-                    } && arguments[0] is { Expression: ThisExpressionSyntax },
+                    method => method.Expression.GetName() == nameof(GC.SuppressFinalize)
+                        && method is { ArgumentList.Arguments: { Count: 1 } arguments }
+                        && arguments[0] is { Expression: ThisExpressionSyntax },
                     KnownMethods.IsGcSuppressFinalize);
 
             private bool CallsVirtualDispose(BaseMethodDeclarationSyntax methodDeclaration, Func<ArgumentSyntax, bool> argumentValue) =>
                 methodDeclaration.ContainsMethodInvocation(semanticModel,
-                    method => method is
-                    {
-                        Expression: MemberAccessExpressionSyntax { Name.Identifier.Text: nameof(IDisposable.Dispose) } or IdentifierNameSyntax { Identifier.Text: nameof(IDisposable.Dispose)},
-                        ArgumentList.Arguments: { Count: 1 } arguments,
-                    }
-                    && arguments[0] is var argument
-                    && argumentValue(argument),
+                    method => method.Expression.GetName() == nameof(IDisposable.Dispose)
+                        && method is { ArgumentList.Arguments: { Count: 1 } arguments }
+                        && arguments[0] is var argument
+                        && argumentValue(argument),
                     IsDisposeBool);
 
             private static bool IsDisposeBool(IMethodSymbol method) =>
