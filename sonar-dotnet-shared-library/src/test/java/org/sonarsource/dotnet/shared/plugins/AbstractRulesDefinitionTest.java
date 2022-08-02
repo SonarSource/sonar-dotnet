@@ -60,7 +60,7 @@ public class AbstractRulesDefinitionTest {
   }
 
   @Test
-  public void test_security_standards_9_4_PCI_DSS_is_not_available() {
+  public void test_security_standards_9_4_PCI_DSS_is_empty() {
     assertThat(getSecurityStandards(Version.create(9, 4), PCI_DSS_RULE_KEY)).containsExactlyInAnyOrder();
   }
 
@@ -70,7 +70,7 @@ public class AbstractRulesDefinitionTest {
   }
 
   @Test
-  public void test_security_standards_9_8_ASVS_is_not_available() {
+  public void test_security_standards_9_8_ASVS_is_empty() {
     assertThat(getSecurityStandards(Version.create(9, 8), OWASP_ASVS_RULE_KEY)).containsExactlyInAnyOrder();
   }
 
