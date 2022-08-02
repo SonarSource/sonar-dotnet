@@ -289,7 +289,7 @@ namespace SonarAnalyzer.Helpers
                 { Kind: SymbolKind.TypeParameter } => "type parameter",
                 IMethodSymbol methodSymbol => methodSymbol switch
                 {
-                    { MethodKind: MethodKind.BuiltinOperator or MethodKind.UserDefinedOperator or MethodKind.Conversion} => "operator",
+                    { MethodKind: MethodKind.BuiltinOperator or MethodKind.UserDefinedOperator or MethodKind.Conversion } => "operator",
                     { MethodKind: MethodKind.Constructor or MethodKind.StaticConstructor or MethodKind.SharedConstructor } => "constructor",
                     { MethodKind: MethodKind.Destructor } => "destructor",
                     { MethodKind: MethodKind.PropertyGet } => "getter",
@@ -304,7 +304,7 @@ namespace SonarAnalyzer.Helpers
                     { TypeKind: TypeKind.Delegate } => "delegate",
                     { TypeKind: TypeKind.Enum } => "enum",
                     { TypeKind: TypeKind.Error } => "error",
-                    { TypeKind: (TypeKind)13 } => "function pointer",
+                    { TypeKind: TypeKindEx.FunctionPointer } => "function pointer",
                     { TypeKind: TypeKind.Interface } => "interface",
                     { TypeKind: TypeKind.Module } => "module",
                     { TypeKind: TypeKind.Pointer } => "pointer",
