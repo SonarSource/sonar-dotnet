@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.IO;
 using System.Runtime.CompilerServices;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Protobuf;
@@ -135,7 +136,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                     {
                         messages.Should().HaveCount(1);
                         var info = messages.Single();
-                        info.FilePath.Should().Be(fileName);
+                        info.FilePath.Should().Be(Path.Combine(BasePath, fileName));
                         verifyTokenInfo(info.TokenInfo);
                     });
         }

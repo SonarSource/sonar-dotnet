@@ -188,12 +188,12 @@ public class ExpectedIssuesNotRaised
                 .Invoking(x => x.Verify())
                 .Should().Throw<AssertFailedException>().WithMessage(
                     @"CSharp*: Issue(s) expected but not raised in file(s):" + Environment.NewLine +
-                    "File: ExpectedIssuesNotRaised.cs" + Environment.NewLine +
+                    "File: DiagnosticsVerifier\\ExpectedIssuesNotRaised.cs" + Environment.NewLine +
                     "Line: 3, Type: primary, Id: 'MyId0'" + Environment.NewLine +
                     "Line: 5, Type: primary, Id: ''" + Environment.NewLine +
                     "Line: 6, Type: secondary, Id: 'MyId1'" + Environment.NewLine +
                     Environment.NewLine +
-                    "File: ExpectedIssuesNotRaised2.cs" + Environment.NewLine +
+                    "File: DiagnosticsVerifier\\ExpectedIssuesNotRaised2.cs" + Environment.NewLine +
                     "Line: 3, Type: primary, Id: 'MyId0'" + Environment.NewLine +
                     "Line: 5, Type: primary, Id: ''" + Environment.NewLine +
                     "Line: 6, Type: secondary, Id: 'MyId1'");

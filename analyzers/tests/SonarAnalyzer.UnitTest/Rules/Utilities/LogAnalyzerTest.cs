@@ -117,12 +117,12 @@ namespace SonarAnalyzer.UnitTest.Rules
             var generatedByName = messages.SingleOrDefault(x => x.Text.Contains("GeneratedByName.generated."));
             generatedByName.Should().NotBeNull();
             generatedByName.Severity.Should().Be(LogSeverity.Debug);
-            generatedByName.Text.Should().Match(@"File 'GeneratedByName.generated.*' was recognized as generated");
+            generatedByName.Text.Should().Match(@"File 'Utilities\LogAnalyzer\GeneratedByName.generated.*' was recognized as generated");
 
             var generatedByContent = messages.SingleOrDefault(x => x.Text.Contains("GeneratedByContent."));
             generatedByContent.Should().NotBeNull();
             generatedByContent.Severity.Should().Be(LogSeverity.Debug);
-            generatedByContent.Text.Should().Match(@"File 'GeneratedByContent.*' was recognized as generated");
+            generatedByContent.Text.Should().Match(@"File 'Utilities\LogAnalyzer\GeneratedByContent.*' was recognized as generated");
         }
 
         // We need to set protected properties and this class exists just to enable the analyzer without bothering with additional files with parameters
