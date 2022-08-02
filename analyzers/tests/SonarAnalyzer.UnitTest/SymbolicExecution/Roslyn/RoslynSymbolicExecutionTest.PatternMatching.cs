@@ -117,5 +117,43 @@ Tag(""Value"", value);";
                 .And.ContainSingle(x => x.HasConstraint(BoolConstraint.True))
                 .And.ContainSingle(x => x.HasConstraint(BoolConstraint.False));
         }
+
+        [TestMethod]
+        public void RecursivePattern_SetsNotNull_FirstLevel()
+        {
+            const string code = @"
+if (arg is { } value)
+{
+    Tag(""Value"", value);
+    Tag(""ArgNotNull"", arg);
+}
+Tag(""End"", arg);";
+            var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+            validator.ValidateContainsOperation(OperationKind.RecursivePattern);
+            validator.ValidateTag("Value", x => x.Should().BeNull());           // FIXME: HasConstraint NotNull
+            validator.ValidateTag("ArgNotNull", x => x.Should().BeNull());      // FIXME: HasConstraint NotNull ?
+            validator.TagValues("End").Should().HaveCount(1);    // FIXME: 2
+                //.And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.Null))
+                //.And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
+        }
+
+        [TestMethod]
+        public void RecursivePattern_SetsNotNull_Nested()
+        {
+            const string code = @"
+if (arg is Exception { Message: { } value })
+{
+    Tag(""Value"", value);
+    Tag(""ArgNotNull"", arg);
+}
+Tag(""End"", arg);";
+            var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+            validator.ValidateContainsOperation(OperationKind.RecursivePattern);
+            validator.ValidateTag("Value", x => x.Should().BeNull());           // FIXME: HasConstraint NotNull
+            validator.ValidateTag("ArgNotNull", x => x.Should().BeNull());      // FIXME: HasConstraint NotNull ?
+            validator.TagValues("End").Should().HaveCount(1);    // FIXME: 2
+                //.And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.Null))
+                //.And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
+        }
     }
 }
