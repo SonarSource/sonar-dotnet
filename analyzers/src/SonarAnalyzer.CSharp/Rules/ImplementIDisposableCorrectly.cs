@@ -156,7 +156,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     return;
                 }
 
-                if (!HasStatementsCount(destructorSyntax, 1) || !CallsVirtualDispose(destructorSyntax, argumentValue: "false"))
+                if (!HasStatementsCount(destructorSyntax, 1) || !CallsVirtualDispose(destructorSyntax, argumentValue: a =>
+                    a is { Expression: LiteralExpressionSyntax { Token.RawKind: (int)SyntaxKind.FalseKeyword } }))
                 {
                     AddSecondaryLocation(destructorSyntax.Identifier.GetLocation(),
                                          $"Modify '{typeSymbol.Name}.~{typeSymbol.Name}()' so that it calls 'Dispose(false)' and "
@@ -171,9 +172,9 @@ namespace SonarAnalyzer.Rules.CSharp
                     return;
                 }
 
-                var parameterName = disposeMethod.ParameterList.Parameters.Single().Identifier.ToString();
+                var parameterName = disposeMethod.ParameterList.Parameters.Single().Identifier.Text;
 
-                if (!CallsVirtualDispose(disposeMethod, argumentValue: parameterName))
+                if (!CallsVirtualDispose(disposeMethod, argumentValue: a => a is { Expression: IdentifierNameSyntax { Identifier.Text: { } text } } && text == parameterName))
                 {
                     AddSecondaryLocation(disposeMethod.Identifier.GetLocation(), $"Modify 'Dispose({parameterName})' so that it calls 'base.Dispose({parameterName})'.");
                 }
@@ -188,7 +189,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 if (disposeMethod.HasBodyOrExpressionBody() && !isSealedClass)
                 {
-                    var missingVirtualDispose = !CallsVirtualDispose(disposeMethod, argumentValue: "true");
+                    var missingVirtualDispose = !CallsVirtualDispose(disposeMethod, argumentValue: a => a is { Expression: LiteralExpressionSyntax { Token.RawKind: (int)SyntaxKind.TrueKeyword } });
                     var missingSuppressFinalize = !CallsSuppressFinalize(disposeMethod);
                     string remediation = null;
 
@@ -241,10 +242,24 @@ namespace SonarAnalyzer.Rules.CSharp
                 (semanticModel.GetSymbolInfo(baseType.Type).Symbol as INamedTypeSymbol).Is(KnownType.System_IDisposable);
 
             private bool CallsSuppressFinalize(BaseMethodDeclarationSyntax methodDeclaration) =>
-                methodDeclaration.ContainsMethodInvocation(semanticModel, method => HasArgumentValues(method, "this"), KnownMethods.IsGcSuppressFinalize);
+                methodDeclaration.ContainsMethodInvocation(semanticModel,
+                    method => method is
+                    {
+                        Expression: MemberAccessExpressionSyntax { Name.Identifier.Text: nameof(GC.SuppressFinalize) },
+                        ArgumentList.Arguments: { Count: 1 } arguments
+                    } && arguments[0] is { Expression: ThisExpressionSyntax },
+                    KnownMethods.IsGcSuppressFinalize);
 
-            private bool CallsVirtualDispose(BaseMethodDeclarationSyntax methodDeclaration, string argumentValue) =>
-                methodDeclaration.ContainsMethodInvocation(semanticModel, method => HasArgumentValues(method, argumentValue), IsDisposeBool);
+            private bool CallsVirtualDispose(BaseMethodDeclarationSyntax methodDeclaration, Func<ArgumentSyntax, bool> argumentValue) =>
+                methodDeclaration.ContainsMethodInvocation(semanticModel,
+                    method => method is
+                    {
+                        Expression: MemberAccessExpressionSyntax { Name.Identifier.Text: nameof(IDisposable.Dispose) } or IdentifierNameSyntax { Identifier.Text: nameof(IDisposable.Dispose)},
+                        ArgumentList.Arguments: { Count: 1 } arguments,
+                    }
+                    && arguments[0] is var argument
+                    && argumentValue(argument),
+                    IsDisposeBool);
 
             private static bool IsDisposeBool(IMethodSymbol method) =>
                 method.Name == nameof(IDisposable.Dispose)
@@ -252,10 +267,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 && method.DeclaredAccessibility == Accessibility.Protected
                 && method.Parameters.Length == 1
                 && method.Parameters.Any(p => p.Type.Is(KnownType.System_Boolean));
-
-            private static bool HasArgumentValues(InvocationExpressionSyntax invocation, params string[] arguments) =>
-                invocation.HasExactlyNArguments(arguments.Length)
-                && invocation.ArgumentList.Arguments.Select((x, index) => x.Expression.ToString() == arguments[index]).All(x => x);
 
             private static bool HasStatementsCount(BaseMethodDeclarationSyntax methodDeclaration, int expectedStatementsCount) =>
                 methodDeclaration.Body?.Statements.Count == expectedStatementsCount
