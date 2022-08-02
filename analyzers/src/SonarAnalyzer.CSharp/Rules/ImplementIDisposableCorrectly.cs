@@ -287,7 +287,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private static bool IsLiteralArgument(ArgumentSyntax argument, SyntaxKind literalTokenKind) =>
                 argument is { Expression: LiteralExpressionSyntax { Token: var token } } && token.IsKind(literalTokenKind);
-
         }
     }
 }
