@@ -51,7 +51,7 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
   private final String metadataSuffix;
   private final boolean isOwaspByVersionSupported;
   private final boolean isAddPciDssSupported;
-  private final boolean isAddPciDssSupported;
+  private final boolean isASVSSupported;
 
   protected AbstractRulesDefinition(String repositoryKey, String languageKey, SonarRuntime sonarRuntime, String resourcesDirectory, String metadataSuffix) {
     this.repositoryKey = repositoryKey;
@@ -60,6 +60,7 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
     this.metadataSuffix = metadataSuffix;
     this.isOwaspByVersionSupported = sonarRuntime.getApiVersion().isGreaterThanOrEqual(Version.create(9, 3));
     this.isAddPciDssSupported = sonarRuntime.getApiVersion().isGreaterThanOrEqual(Version.create(9, 5));
+    this.isASVSSupported = sonarRuntime.getApiVersion().isGreaterThanOrEqual(Version.create(9, 9));
   }
 
   @Override
@@ -111,6 +112,7 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
     }
 
     addPciDss(rule, securityStandards);
+    addASVS(rule, securityStandards);
 
     rule.addCwe(securityStandards.cwe);
   }
@@ -126,6 +128,16 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
 
     if (securityStandards.pciDss4_0.length > 0){
       rule.addPciDss(PciDssVersion.V4_0, securityStandards.pciDss4_0);
+    }
+  }
+
+  private void addASVS(NewRule rule, SecurityStandards securityStandards){
+    if (!isASVSSupported) {
+      return;
+    }
+
+    if (securityStandards.asvs4_0.length > 0){
+      rule.addOwaspAsvs(OwaspAsvsVersion.V4_0, securityStandards.asvs4_0);
     }
   }
 
@@ -205,5 +217,8 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
 
     @SerializedName("PCI DSS 4.0")
     String[] pciDss4_0 = {};
+
+    @SerializedName("ASVS 4.0")
+    String[] asvs4_0 = {};
   }
 }

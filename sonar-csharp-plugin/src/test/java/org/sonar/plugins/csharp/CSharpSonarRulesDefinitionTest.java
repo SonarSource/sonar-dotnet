@@ -42,6 +42,7 @@ public class CSharpSonarRulesDefinitionTest {
   private static final String SINGLE_PARAM_RULE_KEY = "S1200";
   private static final String MULTI_PARAM_RULE_KEY = "S110";
   private static final String PCI_DSS_RULE_KEY = "S2068";
+  private static final String OWASP_ASVS_RULE_KEY = "S2184";
 
   private static final SonarRuntime SONAR_RUNTIME = SonarRuntimeImpl.forSonarQube(Version.create(9, 9), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
 
@@ -134,6 +135,28 @@ public class CSharpSonarRulesDefinitionTest {
 
     RulesDefinition.Rule rule = repository.rule(PCI_DSS_RULE_KEY);
     assertThat(rule.securityStandards()).containsExactlyInAnyOrder("cwe:259", "cwe:798", "owaspTop10-2021:a7", "owaspTop10:a2", "pciDss-3.2:6.5.10", "pciDss-4.0:6.2.4");
+  }
+
+  @Test
+  public void test_security_standards_9_8_ASVS_is_not_available() {
+    SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(9, 8), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
+    RulesDefinition.Context context = new RulesDefinition.Context();
+    new CSharpSonarRulesDefinition(sonarRuntime).define(context);
+    RulesDefinition.Repository repository = context.repository("csharpsquid");
+
+    RulesDefinition.Rule rule = repository.rule(OWASP_ASVS_RULE_KEY);
+    assertThat(rule.securityStandards()).containsExactlyInAnyOrder("cwe:190");
+  }
+
+  @Test
+  public void test_security_standards_9_9_ASVS_is_available() {
+    SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(9, 9), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
+    RulesDefinition.Context context = new RulesDefinition.Context();
+    new CSharpSonarRulesDefinition(sonarRuntime).define(context);
+    RulesDefinition.Repository repository = context.repository("csharpsquid");
+
+    RulesDefinition.Rule rule = repository.rule(OWASP_ASVS_RULE_KEY);
+    assertThat(rule.securityStandards()).containsExactlyInAnyOrder("cwe:190", "owaspAsvs-4.0:5.4.3");
   }
 
   @Test
