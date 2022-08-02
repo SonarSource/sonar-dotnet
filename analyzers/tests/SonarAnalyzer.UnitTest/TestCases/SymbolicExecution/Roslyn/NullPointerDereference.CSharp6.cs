@@ -13,8 +13,8 @@ namespace Tests.Diagnostics
         {
             object o = null;
             this._foo1 = o;
-            this?._foo1.ToString();
-            //   ^^^^^^              {{'._foo1' is null on at least one execution path.}}
+            this?._foo1.ToString(); // Noncompliant {{'._foo1' is null on at least one execution path.}}
+            //   ^^^^^^
         }
 
         string TryCatch3()
@@ -54,10 +54,11 @@ namespace Tests.Diagnostics
             try
             {
                 var a = o?.ToString();
+                Console.WriteLine(""); // some call that can throw
             }
             catch (Exception e) when (e.Message != null)
             {
-                var b = o.ToString(); // Compliant FIXME (was Non-compliant before)
+                var b = o.ToString(); // Noncompliant
             }
         }
 

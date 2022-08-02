@@ -477,9 +477,14 @@ namespace Tests.Diagnostics
         }
         void OtherInstanceFieldAccess2()
         {
-            object o = null;
-            _foo1 = o;
-            (new NullPointerDereferenceWithFields())._foo1.ToString(); // Noncompliant
+            _foo1 = null;
+            (new NullPointerDereferenceWithFields())._foo1.ToString(); // Noncompliant. _foo1 is null here
+//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        }
+        void OtherInstanceFieldAccess3()
+        {
+            _foo1 = new object();
+            (new NullPointerDereferenceWithFields())._foo1.ToString(); // FIXME. OtherInstanceFieldAccess2 and OtherInstanceFieldAccess3 should behave the same.
         }
 
         void ParenthesizedAccess1()
