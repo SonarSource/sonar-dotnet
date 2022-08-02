@@ -156,8 +156,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     return;
                 }
 
-                if (!HasStatementsCount(destructorSyntax, 1) || !CallsVirtualDispose(destructorSyntax, argumentValue: a =>
-                    a is { Expression: LiteralExpressionSyntax { Token.RawKind: (int)SyntaxKind.FalseKeyword } }))
+                if (!HasStatementsCount(destructorSyntax, 1) || !CallsVirtualDispose(destructorSyntax, argumentValue: a => IsLiteralArgument(a, SyntaxKind.FalseKeyword)))
                 {
                     AddSecondaryLocation(destructorSyntax.Identifier.GetLocation(),
                                          $"Modify '{typeSymbol.Name}.~{typeSymbol.Name}()' so that it calls 'Dispose(false)' and "
@@ -189,7 +188,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 if (disposeMethod.HasBodyOrExpressionBody() && !isSealedClass)
                 {
-                    var missingVirtualDispose = !CallsVirtualDispose(disposeMethod, argumentValue: a => a is { Expression: LiteralExpressionSyntax { Token.RawKind: (int)SyntaxKind.TrueKeyword } });
+                    var missingVirtualDispose = !CallsVirtualDispose(disposeMethod, argumentValue: a => IsLiteralArgument(a, SyntaxKind.TrueKeyword));
                     var missingSuppressFinalize = !CallsSuppressFinalize(disposeMethod);
                     string remediation = null;
 
@@ -285,6 +284,10 @@ namespace SonarAnalyzer.Rules.CSharp
                           .OfType<IMethodSymbol>()
                           .Where(IsDisposeBool)
                           .Any(symbol => !symbol.IsAbstract);
+
+            private static bool IsLiteralArgument(ArgumentSyntax argument, SyntaxKind literalTokenKind) =>
+                argument is { Expression: LiteralExpressionSyntax { Token: var token } } && token.IsKind(literalTokenKind);
+
         }
     }
 }
