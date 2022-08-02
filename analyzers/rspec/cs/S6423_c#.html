@@ -32,7 +32,7 @@ public static async Task&lt;IActionResult&gt; Run(
 	}
 	catch (Exception ex)
 	{
-		log.LogError("Give details that will help investigations", ex);
+		log.LogError(ex, "Give details that will help investigations");
 	}
 }
 </pre>

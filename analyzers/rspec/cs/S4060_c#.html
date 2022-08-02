@@ -5,50 +5,24 @@ inheritance hierarchy, and can improve performance.</p>
 <pre>
 using System;
 
-namespace MyLibrary
+public class MyAttribute: Attribute // Noncompliant
 {
-    [AttributeUsage(AttributeTargets.Class|AttributeTargets.Struct)]
-    public class MyAttribute: Attribute // Noncompliant
-    {
-        private string nameValue;
-        public MyAttribute(string name)
-        {
-            nameValue = name;
-        }
+    public string Name { get; }
 
-        public string Name
-        {
-            get
-            {
-                return nameValue;
-            }
-        }
-    }
+    public MyAttribute(string name) =&gt;
+        Name = name;
 }
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
 using System;
 
-namespace MyLibrary
+public sealed class MyAttribute : Attribute
 {
-    [AttributeUsage(AttributeTargets.Class|AttributeTargets.Struct)]
-    public sealed class MyAttribute: Attribute
-    {
-        private string nameValue;
-        public MyAttribute(string name)
-        {
-            nameValue = name;
-        }
+    public string Name { get; }
 
-        public string Name
-        {
-            get
-            {
-                return nameValue;
-            }
-        }
-    }
+    public MyAttribute(string name) =&gt;
+        Name = name;
 }
 </pre>
 
