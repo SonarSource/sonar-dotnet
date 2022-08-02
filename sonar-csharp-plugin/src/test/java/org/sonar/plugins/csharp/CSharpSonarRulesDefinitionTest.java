@@ -42,7 +42,7 @@ public class CSharpSonarRulesDefinitionTest {
   private static final String SINGLE_PARAM_RULE_KEY = "S1200";
   private static final String MULTI_PARAM_RULE_KEY = "S110";
 
-  private static final SonarRuntime SONAR_RUNTIME = SonarRuntimeImpl.forSonarQube(Version.create(9, 3), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
+  private static final SonarRuntime SONAR_RUNTIME = SonarRuntimeImpl.forSonarQube(Version.create(9, 9), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
 
   @Test
   public void test() {
@@ -87,7 +87,13 @@ public class CSharpSonarRulesDefinitionTest {
 
     RulesDefinition.Rule rule = repository.rule(SECURITY_HOTSPOT_RULE_KEY);
     assertThat(rule.type()).isEqualTo(RuleType.SECURITY_HOTSPOT);
-    assertThat(rule.securityStandards()).containsExactlyInAnyOrder("cwe:502", "owaspTop10:a8", "owaspTop10-2021:a8");
+    assertThat(rule.securityStandards()).containsExactlyInAnyOrder(
+      "cwe:502",
+      "owaspAsvs-4.0:1.5.2",
+      "owaspAsvs-4.0:5.5.1",
+      "owaspAsvs-4.0:5.5.3",
+      "owaspTop10-2021:a8",
+      "owaspTop10:a8");
   }
 
   @Test
@@ -99,7 +105,19 @@ public class CSharpSonarRulesDefinitionTest {
 
     RulesDefinition.Rule rule = repository.rule(VULNERABILITY_RULE_KEY);
     assertThat(rule.type()).isEqualTo(RuleType.VULNERABILITY);
-    assertThat(rule.securityStandards()).containsExactlyInAnyOrder("cwe:326", "owaspTop10:a3", "owaspTop10:a6", "owaspTop10-2021:a2");
+    assertThat(rule.securityStandards()).containsExactlyInAnyOrder(
+      "cwe:326",
+      "owaspAsvs-4.0:2.8.3",
+      "owaspAsvs-4.0:6.2.3",
+      "owaspAsvs-4.0:6.2.4",
+      "owaspAsvs-4.0:6.2.5",
+      "owaspAsvs-4.0:6.2.6",
+      "owaspAsvs-4.0:6.2.7",
+      "owaspAsvs-4.0:9.1.2",
+      "owaspAsvs-4.0:9.1.3",
+      "owaspTop10-2021:a2",
+      "owaspTop10:a3",
+      "owaspTop10:a6");
   }
 
   @Test

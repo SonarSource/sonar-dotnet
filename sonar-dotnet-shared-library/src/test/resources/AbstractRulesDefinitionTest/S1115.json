@@ -1,0 +1,17 @@
+{
+  "title": "No remediation",
+  "type": "SECURITY_HOTSPOT",
+  "status": "ready",
+  "tags": [ ],
+  "defaultSeverity": "Critical",
+  "ruleSpecification": "RSPEC-1115",
+  "scope": "Main",
+  "securityStandards": {
+    "PCI DSS 3.2": [
+      "6.5.10"
+    ],
+    "PCI DSS 4.0": [
+      "6.2.4"
+    ]
+  }
+}

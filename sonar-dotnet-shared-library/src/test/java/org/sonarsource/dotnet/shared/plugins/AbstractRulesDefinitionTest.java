@@ -20,6 +20,8 @@
 package org.sonarsource.dotnet.shared.plugins;
 
 import java.io.InputStream;
+import java.util.Set;
+
 import org.junit.Test;
 import org.sonar.api.SonarEdition;
 import org.sonar.api.SonarQubeSide;
@@ -32,6 +34,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class AbstractRulesDefinitionTest {
+
+  private static final String PCI_DSS_RULE_KEY = "S1115";
+  private static final String OWASP_ASVS_RULE_KEY = "S1116";
 
   @Test
   public void test() {
@@ -51,17 +56,27 @@ public class AbstractRulesDefinitionTest {
 
   @Test
   public void test_before_9_3() {
-    SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(9, 2), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
-    AbstractRulesDefinition sut = new TestRulesDefinition(sonarRuntime);
-    RulesDefinition.Context context = new RulesDefinition.Context();
-    sut.define(context);
+    assertThat(getSecurityStandards(Version.create(9, 2), "S1111")).containsExactlyInAnyOrder("cwe:117", "cwe:532", "owaspTop10:a10", "owaspTop10:a3");
+  }
 
-    RulesDefinition.Repository repository = context.repository("test");
-    assertThat(repository).isNotNull();
+  @Test
+  public void test_security_standards_9_4_PCI_DSS_is_not_available() {
+    assertThat(getSecurityStandards(Version.create(9, 4), PCI_DSS_RULE_KEY)).isEmpty();
+  }
 
-    RulesDefinition.Rule rule = repository.rule("S1111");
-    assertThat(rule).isNotNull();
-    assertThat(rule.securityStandards()).containsExactlyInAnyOrder("cwe:117", "cwe:532", "owaspTop10:a10", "owaspTop10:a3");
+  @Test
+  public void test_security_standards_9_5_PCI_DSS_is_available() {
+    assertThat(getSecurityStandards(Version.create(9, 5), PCI_DSS_RULE_KEY)).containsExactlyInAnyOrder("pciDss-3.2:6.5.10", "pciDss-4.0:6.2.4");
+  }
+
+  @Test
+  public void test_security_standards_9_8_ASVS_is_not_available() {
+    assertThat(getSecurityStandards(Version.create(9, 8), OWASP_ASVS_RULE_KEY)).isEmpty();
+  }
+
+  @Test
+  public void test_security_standards_9_9_ASVS_is_available() {
+    assertThat(getSecurityStandards(Version.create(9, 9), OWASP_ASVS_RULE_KEY)).containsExactlyInAnyOrder("owaspAsvs-4.0:2.10.4", "owaspAsvs-4.0:3.5.2", "owaspAsvs-4.0:6.4.1");
   }
 
   @Test
@@ -77,7 +92,6 @@ public class AbstractRulesDefinitionTest {
     assertThat(repository.rule("S1112").debtRemediationFunction()).hasToString("DebtRemediationFunction{type=LINEAR, gap multiplier=10min, base effort=null}");
     assertThat(repository.rule("S1113").debtRemediationFunction()).hasToString("DebtRemediationFunction{type=LINEAR_OFFSET, gap multiplier=30min, base effort=4h}");
     assertThat(repository.rule("S1114").debtRemediationFunction()).isNull();
-
   }
 
   @Test
@@ -90,6 +104,20 @@ public class AbstractRulesDefinitionTest {
     assertThatExceptionOfType(IllegalStateException.class)
       .isThrownBy(() -> sut.define(context))
       .withMessage("Resource does not exist: Rules.json");
+  }
+
+  private static Set<String> getSecurityStandards(Version version, String ruleId) {
+    SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(version, SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
+    AbstractRulesDefinition sut = new TestRulesDefinition(sonarRuntime);
+    RulesDefinition.Context context = new RulesDefinition.Context();
+    sut.define(context);
+
+    RulesDefinition.Repository repository = context.repository("test");
+    assertThat(repository).isNotNull();
+
+    RulesDefinition.Rule rule = repository.rule(ruleId);
+    assertThat(rule).isNotNull();
+    return rule.securityStandards();
   }
 
   private static class TestRulesDefinition extends AbstractRulesDefinition {

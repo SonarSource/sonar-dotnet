@@ -50,6 +50,8 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
   private final String resourcesDirectory;
   private final String metadataSuffix;
   private final boolean isOwaspByVersionSupported;
+  private final boolean isAddPciDssSupported;
+  private final boolean isASVSSupported;
 
   protected AbstractRulesDefinition(String repositoryKey, String languageKey, SonarRuntime sonarRuntime, String resourcesDirectory, String metadataSuffix) {
     this.repositoryKey = repositoryKey;
@@ -57,6 +59,8 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
     this.resourcesDirectory = resourcesDirectory;
     this.metadataSuffix = metadataSuffix;
     this.isOwaspByVersionSupported = sonarRuntime.getApiVersion().isGreaterThanOrEqual(Version.create(9, 3));
+    this.isAddPciDssSupported = sonarRuntime.getApiVersion().isGreaterThanOrEqual(Version.create(9, 5));
+    this.isASVSSupported = sonarRuntime.getApiVersion().isGreaterThanOrEqual(Version.create(9, 9));
   }
 
   @Override
@@ -98,15 +102,50 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
   }
 
   private void addSecurityStandards(NewRule rule, SecurityStandards securityStandards) {
+    addASVS(rule, securityStandards);
+    addCwe(rule, securityStandards);
+    addOwasp(rule, securityStandards);
+    addPciDss(rule, securityStandards);
+  }
+
+  private void addASVS(NewRule rule, SecurityStandards securityStandards){
+    if (!isASVSSupported) {
+      return;
+    }
+
+    if (securityStandards.asvs4_0.length > 0){
+      rule.addOwaspAsvs(OwaspAsvsVersion.V4_0, securityStandards.asvs4_0);
+    }
+  }
+
+  private void addCwe(NewRule rule, SecurityStandards securityStandards) {
+    rule.addCwe(securityStandards.cwe);
+  }
+
+  private void addOwasp(NewRule rule, SecurityStandards securityStandards) {
     for (String s : securityStandards.owasp2017) {
       rule.addOwaspTop10(RulesDefinition.OwaspTop10.valueOf(s));
     }
+
     if (isOwaspByVersionSupported) {
       for (String s : securityStandards.owasp2021) {
         rule.addOwaspTop10(RulesDefinition.OwaspTop10Version.Y2021, RulesDefinition.OwaspTop10.valueOf(s));
       }
     }
-    rule.addCwe(securityStandards.cwe);
+  }
+
+  private void addPciDss(NewRule rule, SecurityStandards securityStandards) {
+    if (!isAddPciDssSupported) {
+      return;
+    }
+
+    if (securityStandards.pciDss3_2.length > 0){
+      rule.addPciDss(PciDssVersion.V3_2, securityStandards.pciDss3_2);
+    }
+
+    if (securityStandards.pciDss4_0.length > 0){
+      rule.addPciDss(PciDssVersion.V4_0, securityStandards.pciDss4_0);
+    }
   }
 
   private RuleMetadata loadMetadata(String id) {
@@ -179,5 +218,14 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
 
     @SerializedName("OWASP")
     String[] owasp2017 = {};
+
+    @SerializedName("PCI DSS 3.2")
+    String[] pciDss3_2 = {};
+
+    @SerializedName("PCI DSS 4.0")
+    String[] pciDss4_0 = {};
+
+    @SerializedName("ASVS 4.0")
+    String[] asvs4_0 = {};
   }
 }

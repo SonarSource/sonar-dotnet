@@ -1,0 +1,16 @@
+{
+  "title": "No remediation",
+  "type": "SECURITY_HOTSPOT",
+  "status": "ready",
+  "tags": [ ],
+  "defaultSeverity": "Critical",
+  "ruleSpecification": "RSPEC-1116",
+  "scope": "Main",
+  "securityStandards": {
+    "ASVS 4.0": [
+      "2.10.4",
+      "3.5.2",
+      "6.4.1"
+    ]
+  }
+}
