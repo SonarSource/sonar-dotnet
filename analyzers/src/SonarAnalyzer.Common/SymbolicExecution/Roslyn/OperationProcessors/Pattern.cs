@@ -34,6 +34,12 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
             ? context.SetOperationConstraint(newConstraint)
             : context.State;
 
+        public static ProgramState Process(SymbolicContext context, IRecursivePatternOperationWrapper recursive) =>
+            recursive.DeclaredSymbol is null
+                ? context.State
+                : context.SetSymbolConstraint(recursive.DeclaredSymbol, ObjectConstraint.NotNull);
+
+
         private static BoolConstraint PatternBoolConstraint(SymbolicValue value, BoolConstraint pattern) =>
             value.HasConstraint<BoolConstraint>()
                 ? BoolConstraint.From(value.HasConstraint(pattern))

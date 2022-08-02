@@ -130,9 +130,10 @@ if (arg is { } value)
 Tag(""End"", arg);";
             var validator = SETestContext.CreateCS(code, ", object arg").Validator;
             validator.ValidateContainsOperation(OperationKind.RecursivePattern);
-            validator.ValidateTag("Value", x => x.Should().BeNull());           // FIXME: HasConstraint NotNull
+            validator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.ValidateTag("ArgNotNull", x => x.Should().BeNull());      // FIXME: HasConstraint NotNull ?
-            validator.TagValues("End").Should().HaveCount(1);    // FIXME: 2
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.OnlyContain(x => x == null);       // 2x because value has different states
                 //.And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.Null))
                 //.And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
         }
@@ -149,9 +150,10 @@ if (arg is Exception { Message: { } value })
 Tag(""End"", arg);";
             var validator = SETestContext.CreateCS(code, ", object arg").Validator;
             validator.ValidateContainsOperation(OperationKind.RecursivePattern);
-            validator.ValidateTag("Value", x => x.Should().BeNull());           // FIXME: HasConstraint NotNull
+            validator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.ValidateTag("ArgNotNull", x => x.Should().BeNull());      // FIXME: HasConstraint NotNull ?
-            validator.TagValues("End").Should().HaveCount(1);    // FIXME: 2
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.OnlyContain(x => x == null);       // 2x because value has different states
                 //.And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.Null))
                 //.And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
         }
