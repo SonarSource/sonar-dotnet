@@ -160,8 +160,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             var paths = builder.Paths.Select(TestCasePath).ToArray();
             return SolutionBuilder.Create()
                 .AddProject(language, true, builder.OutputKind)
-                .AddDocuments(paths)
-                .AddDocuments(concurrentAnalysis && builder.AutogenerateConcurrentFiles ? CreateConcurrencyTest(paths) : Enumerable.Empty<string>())
+                .AddDocuments(paths, builder.BasePath)
+                .AddDocuments(concurrentAnalysis && builder.AutogenerateConcurrentFiles ? CreateConcurrencyTest(paths) : Enumerable.Empty<string>(), builder.BasePath)
                 .AddSnippets(builder.Snippets.ToArray())
                 .AddReferences(builder.References);
         }

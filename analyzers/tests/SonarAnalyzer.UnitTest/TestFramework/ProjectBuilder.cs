@@ -65,15 +65,15 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public ProjectBuilder AddProjectReference(Func<SolutionBuilder, ProjectId> getProjectId) =>
             FromProject(project.AddProjectReference(new ProjectReference(getProjectId(Solution))));
 
-        public ProjectBuilder AddDocuments(IEnumerable<string> paths) =>
-            paths.Aggregate(this, (projectBuilder, path) => projectBuilder.AddDocument(path));
+        public ProjectBuilder AddDocuments(IEnumerable<string> paths, string basePath = "") =>
+            paths.Aggregate(this, (projectBuilder, path) => projectBuilder.AddDocument(path, basePath));
 
-        public ProjectBuilder AddDocument(string path)
+        public ProjectBuilder AddDocument(string path, string basePath = "")
         {
             _ = path ?? throw new ArgumentNullException(nameof(path));
             var fileInfo = new FileInfo(path);
             return fileInfo.Extension == fileExtension
-                ? AddDocument(project, fileInfo.Name, File.ReadAllText(fileInfo.FullName, Encoding.UTF8))
+                ? AddDocument(project, Path.Combine(basePath ?? string.Empty, fileInfo.Name), File.ReadAllText(fileInfo.FullName, Encoding.UTF8))
                 : throw new ArgumentException($"The file extension '{fileInfo.Extension}' does not match the project language '{project.Language}'.", nameof(path));
         }
 
