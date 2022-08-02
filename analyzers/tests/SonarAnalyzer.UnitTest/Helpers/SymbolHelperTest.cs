@@ -297,16 +297,24 @@ namespace NS
         [DataRow(SymbolKind.Property, "property")]
         [DataRow(SymbolKind.RangeVariable, "range variable")]
         [DataRow(SymbolKind.TypeParameter, "type parameter")]
-        public void GetClassification_SimpleKinds(SymbolKind symbolKind, string expected) =>
-            new FakeSymbol(symbolKind).GetClassification().Should().Be(expected);
+        public void GetClassification_SimpleKinds(SymbolKind symbolKind, string expected)
+        {
+            var fakeSymbol = new Mock<ISymbol>();
+            fakeSymbol.Setup(x => x.Kind).Returns(symbolKind);
+            fakeSymbol.Object.GetClassification().Should().Be(expected);
+        }
 
         [TestMethod]
-        public void GetClassification_UnknowKind() =>
+        public void GetClassification_UnknowKind()
+        {
+            var fakeSymbol = new Mock<ISymbol>();
+            fakeSymbol.Setup(x => x.Kind).Returns((SymbolKind)999);
 #if DEBUG
-            new Action(() => new FakeSymbol((SymbolKind)999).GetClassification()).Should().Throw<NotSupportedException>();
+            new Action(() => fakeSymbol.Object.GetClassification()).Should().Throw<NotSupportedException>();
 #else
-            new FakeSymbol((SymbolKind)999).GetClassification().Should().Be("symbol");
+            fakeSymbol.Object.GetClassification().Should().Be("symbol");
 #endif
+        }
 
         [DataTestMethod]
         [DataRow(TypeKind.Array, "array")]
@@ -324,22 +332,41 @@ namespace NS
         [DataRow(TypeKind.Submission, "submission")]
         [DataRow(TypeKind.TypeParameter, "type parameter")]
         [DataRow(TypeKind.Unknown, "unknown")]
-        public void GetClassification_NamedTypes(TypeKind typeKind, string expected) =>
-            new FakeNamedTypeSymbol(typeKind).GetClassification().Should().Be(expected);
+        public void GetClassification_NamedTypes(TypeKind typeKind, string expected)
+        {
+            var fakeSymbol = new Mock<INamedTypeSymbol>();
+            fakeSymbol.Setup(x => x.Kind).Returns(SymbolKind.NamedType);
+            fakeSymbol.Setup(x => x.TypeKind).Returns(typeKind);
+            fakeSymbol.Setup(x => x.IsRecord).Returns(false);
+
+            fakeSymbol.Object.GetClassification().Should().Be(expected);
+        }
 
         [TestMethod]
-        public void GetClassification_NamedType_Unknown() =>
+        public void GetClassification_NamedType_Unknown()
+        {
+            var fakeSymbol = new Mock<INamedTypeSymbol>();
+            fakeSymbol.Setup(x => x.Kind).Returns(SymbolKind.NamedType);
+            fakeSymbol.Setup(x => x.TypeKind).Returns((TypeKind)255);
 #if DEBUG
-            new Action(() => new FakeNamedTypeSymbol((TypeKind)255).GetClassification()).Should().Throw<NotSupportedException>();
+            new Action(() => fakeSymbol.Object.GetClassification()).Should().Throw<NotSupportedException>();
 #else
-            new FakeNamedTypeSymbol((TypeKind)255).GetClassification().Should().Be("type");
+            fakeSymbol.Object.GetClassification().Should().Be("type");
 #endif
+        }
 
         [DataTestMethod]
         [DataRow(TypeKind.Class, "record")]
         [DataRow(TypeKind.Struct, "record struct")]
-        public void GetClassification_Record(TypeKind typeKind, string expected) =>
-            new FakeNamedTypeSymbol(typeKind, isRecord: true).GetClassification().Should().Be(expected);
+        public void GetClassification_Record(TypeKind typeKind, string expected)
+        {
+            var fakeSymbol = new Mock<INamedTypeSymbol>();
+            fakeSymbol.Setup(x => x.Kind).Returns(SymbolKind.NamedType);
+            fakeSymbol.Setup(x => x.TypeKind).Returns(typeKind);
+            fakeSymbol.Setup(x => x.IsRecord).Returns(true);
+
+            fakeSymbol.Object.GetClassification().Should().Be(expected);
+        }
 
         [DataTestMethod]
         [DataRow(MethodKind.AnonymousFunction, "method")]
@@ -363,7 +390,13 @@ namespace NS
         [DataRow(MethodKind.SharedConstructor, "constructor")]
         [DataRow(MethodKind.StaticConstructor, "constructor")]
         [DataRow(MethodKind.UserDefinedOperator, "operator")]
-        public void GetClassification_Method(MethodKind methodKind, string expected) =>
-            new FakeMethodSymbol(methodKind).GetClassification().Should().Be(expected);
+        public void GetClassification_Method(MethodKind methodKind, string expected)
+        {
+            var fakeSymbol = new Mock<IMethodSymbol>();
+            fakeSymbol.Setup(x => x.Kind).Returns(SymbolKind.Method);
+            fakeSymbol.Setup(x => x.MethodKind).Returns(methodKind);
+
+            fakeSymbol.Object.GetClassification().Should().Be(expected);
+        }
     }
 }
