@@ -31,58 +31,30 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class ArgumentSpecifiedForCallerInfoParameter : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3236";
+        private const string DiagnosticId = "S3236";
         private const string MessageFormat = "Remove this argument from the method call; it hides the caller information.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         private static readonly ImmutableArray<KnownType> CallerInfoAttributesToReportOn =
             ImmutableArray.Create(
+                KnownType.System_Runtime_CompilerServices_CallerArgumentExpressionAttribute,
                 KnownType.System_Runtime_CompilerServices_CallerFilePathAttribute,
-                KnownType.System_Runtime_CompilerServices_CallerLineNumberAttribute
-            );
+                KnownType.System_Runtime_CompilerServices_CallerLineNumberAttribute);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            {
+                if (new CSharpMethodParameterLookup((InvocationExpressionSyntax)c.Node, c.SemanticModel) is { MethodSymbol: { } } methodParameterLookup
+                    && methodParameterLookup.GetAllArgumentParameterMappings() is { } argumentMappings)
                 {
-                    var methodCall = (InvocationExpressionSyntax)c.Node;
-                    var methodParameterLookup = new CSharpMethodParameterLookup(methodCall, c.SemanticModel);
-
-                    var methodSymbol = methodParameterLookup.MethodSymbol;
-                    if (methodSymbol == null)
+                    foreach (var argumentMapping in argumentMappings.Where(x => x.Symbol.GetAttributes(CallerInfoAttributesToReportOn).Any()))
                     {
-                        return;
+                        c.ReportIssue(Diagnostic.Create(Rule, argumentMapping.Node.GetLocation()));
                     }
-
-                    var argumentMappings = methodParameterLookup.GetAllArgumentParameterMappings();
-                    foreach (var argumentMapping in argumentMappings)
-                    {
-                        var parameter = argumentMapping.Symbol;
-                        var argument = argumentMapping.Node;
-
-                        var callerInfoAttributeDataOnCall = GetCallerInfoAttribute(parameter);
-                        if (callerInfoAttributeDataOnCall == null)
-                        {
-                            continue;
-                        }
-
-                        if (c.SemanticModel.GetSymbolInfo(argument.Expression).Symbol is IParameterSymbol symbolForArgument &&
-                            Equals(callerInfoAttributeDataOnCall.AttributeClass, GetCallerInfoAttribute(symbolForArgument)?.AttributeClass))
-                        {
-                            continue;
-                        }
-
-                        c.ReportIssue(Diagnostic.Create(rule, argument.GetLocation()));
-                    }
-                },
-                SyntaxKind.InvocationExpression);
-        }
-
-        private static AttributeData GetCallerInfoAttribute(IParameterSymbol parameter) =>
-            parameter.GetAttributes(CallerInfoAttributesToReportOn).FirstOrDefault();
+                }
+            }, SyntaxKind.InvocationExpression);
     }
 }

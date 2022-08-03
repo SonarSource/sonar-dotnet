@@ -26,17 +26,28 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class OptionalParameterTest
     {
+        private readonly VerifierBuilder verifierCS = new VerifierBuilder<CS.OptionalParameter>();
+        private readonly VerifierBuilder verifierVB = new VerifierBuilder<VB.OptionalParameter>();
+
         [TestMethod]
-        public void OptionalParameter()
-        {
-            OldVerifier.VerifyAnalyzer(@"TestCases\OptionalParameter.cs", new CS.OptionalParameter());
-            OldVerifier.VerifyAnalyzer(@"TestCases\OptionalParameter.vb", new VB.OptionalParameter());
-        }
+        public void OptionalParameter_CS() =>
+            verifierCS.AddPaths("OptionalParameter.cs").Verify();
+
+        [TestMethod]
+        public void OptionalParameter_VB() =>
+            verifierVB.AddPaths("OptionalParameter.vb").Verify();
 
 #if NET
+
+        [TestMethod]
+        public void OptionalParameter_CSharp10() =>
+            verifierCS.AddPaths("OptionalParameter.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+
         [TestMethod]
         public void OptionalParameter_CSharpPreview() =>
-            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\OptionalParameter.CSharpPreview.cs", new CS.OptionalParameter());
+            verifierCS.AddPaths("OptionalParameter.CSharpPreview.cs").WithOptions(ParseOptionsHelper.CSharpPreview).Verify();
+
 #endif
+
     }
 }

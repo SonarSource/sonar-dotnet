@@ -1,4 +1,6 @@
-﻿namespace Tests.Diagnostics
+﻿using System.Runtime.CompilerServices;
+
+namespace Tests.Diagnostics
 {
     public interface IInterface
     {
@@ -48,6 +50,8 @@
 
     public class CallerMember
     {
-        public void Method([System.Runtime.CompilerServices.CallerLineNumberAttribute] int line = 0) { }
+        public void Caller_LineNumber([CallerLineNumber] int line = 0) { }
+        public void Caller_FilePath([CallerFilePath] string sourceFilePath = "") { }
+        public void Caller_MemberName([CallerMemberName] string memberName = "") { }
     }
 }

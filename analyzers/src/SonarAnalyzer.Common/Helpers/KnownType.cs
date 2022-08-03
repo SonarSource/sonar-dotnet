@@ -337,6 +337,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Reflection_ParameterInfo = new("System.Reflection.ParameterInfo");
         internal static readonly KnownType System_Resources_NeutralResourcesLanguageAttribute = new("System.Resources.NeutralResourcesLanguageAttribute");
         internal static readonly KnownType System_Runtime_CompilerServices_ExtensionAttribute = new("System.Runtime.CompilerServices.ExtensionAttribute");
+        internal static readonly KnownType System_Runtime_CompilerServices_CallerArgumentExpressionAttribute = new("System.Runtime.CompilerServices.CallerArgumentExpressionAttribute");
         internal static readonly KnownType System_Runtime_CompilerServices_CallerFilePathAttribute = new("System.Runtime.CompilerServices.CallerFilePathAttribute");
         internal static readonly KnownType System_Runtime_CompilerServices_CallerLineNumberAttribute = new("System.Runtime.CompilerServices.CallerLineNumberAttribute");
         internal static readonly KnownType System_Runtime_CompilerServices_CallerMemberNameAttribute = new("System.Runtime.CompilerServices.CallerMemberNameAttribute");
@@ -540,6 +541,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType LegacyXunit_TheoryAttribute = new("Xunit.Extensions.TheoryAttribute");
         internal static readonly ImmutableArray<KnownType> CallerInfoAttributes =
             ImmutableArray.Create(
+                System_Runtime_CompilerServices_CallerArgumentExpressionAttribute,
                 System_Runtime_CompilerServices_CallerFilePathAttribute,
                 System_Runtime_CompilerServices_CallerLineNumberAttribute,
                 System_Runtime_CompilerServices_CallerMemberNameAttribute);
