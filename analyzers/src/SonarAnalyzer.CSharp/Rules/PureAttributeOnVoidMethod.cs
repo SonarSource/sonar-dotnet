@@ -51,6 +51,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsPureAttribute(AttributeSyntax attribute) =>
             attribute.Name.GetIdentifier() is { } name
-            && (name.Identifier.ValueText == "Pure" || name.Identifier.ValueText == "PureAttribute");
+            && (name.ValueText == "Pure" || name.ValueText == "PureAttribute");
     }
 }

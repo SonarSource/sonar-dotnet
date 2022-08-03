@@ -409,7 +409,7 @@ End Namespace
 
             IEnumerable<(SyntaxNode node, string name)> GetCSharpNodes() =>
                 snippet.GetNodes<CSharpSyntax.InvocationExpressionSyntax>()
-                    .Select(n => ((SyntaxNode)n, n.Expression.GetIdentifier()?.Identifier.ValueText));
+                    .Select(n => ((SyntaxNode)n, CSharpSyntaxHelper.GetIdentifier(n.Expression)?.ValueText));
 
             IEnumerable<(SyntaxNode node, string name)> GetVbNodes() =>
                 snippet.GetNodes<VBSyntax.InvocationExpressionSyntax>()

@@ -296,25 +296,37 @@ namespace SonarAnalyzer.Helpers
         public static bool HasBodyOrExpressionBody(this BaseMethodDeclarationSyntax node) =>
             node?.Body != null || node?.ExpressionBody() != null;
 
-        public static SimpleNameSyntax GetIdentifier(this ExpressionSyntax expression) =>
-            expression switch
+        public static SyntaxToken? GetIdentifier(this SyntaxNode node) =>
+            node switch
             {
-                MemberBindingExpressionSyntax memberBinding => memberBinding.Name,
-                MemberAccessExpressionSyntax memberAccess => memberAccess.Name,
-                QualifiedNameSyntax qualified => qualified.Right,
-                IdentifierNameSyntax identifier => identifier,
+                AliasQualifiedNameSyntax { Name.Identifier: var i } => i,
+                ArrayTypeSyntax { ElementType: { } elementType } => GetIdentifier(elementType),
+                BaseTypeDeclarationSyntax { Identifier: var i } => i,
+                ConstructorDeclarationSyntax { Identifier: var i } => i,
+                ConversionOperatorDeclarationSyntax { Type: { } type } => GetIdentifier(type),
+                DelegateDeclarationSyntax { Identifier: var i } => i,
+                DestructorDeclarationSyntax { Identifier: var i } => i,
+                EnumMemberDeclarationSyntax { Identifier: var i } => i,
+                MethodDeclarationSyntax { Identifier: var i } => i,
+                MemberBindingExpressionSyntax { Name.Identifier: var i } => i,
+                MemberAccessExpressionSyntax { Name.Identifier: var i } => i,
+                NamespaceDeclarationSyntax { Name: { } name } => GetIdentifier(name),
+                NullableTypeSyntax { ElementType: { } elementType } => GetIdentifier(elementType),
+                OperatorDeclarationSyntax { OperatorToken: var token } => token,
+                ParameterSyntax { Identifier: var i } => i,
+                PropertyDeclarationSyntax { Identifier: var i } => i,
+                PointerTypeSyntax { ElementType: { } elementType } => GetIdentifier(elementType),
+                PredefinedTypeSyntax { Keyword: var k } => k,
+                QualifiedNameSyntax { Right.Identifier: var i } => i,
+                SimpleNameSyntax { Identifier: var i } => i,
+                UsingDirectiveSyntax { Alias.Name: { } name } => GetIdentifier(name),
+                VariableDeclaratorSyntax { Identifier: var i } => i,
+                { } refType when RefTypeSyntaxWrapper.IsInstance(refType) => GetIdentifier(((RefTypeSyntaxWrapper)refType).Type),
                 _ => null
             };
 
         public static string GetName(this ExpressionSyntax expression) =>
-            expression switch
-            {
-                MemberAccessExpressionSyntax memberAccess => memberAccess.Name.Identifier.ValueText,
-                QualifiedNameSyntax qualifiedName => qualifiedName.Right.Identifier.ValueText,
-                SimpleNameSyntax simpleNameSyntax => simpleNameSyntax.Identifier.ValueText,
-                NameSyntax nameSyntax => nameSyntax.GetText().ToString(),
-                _ => string.Empty
-            };
+            expression.GetIdentifier()?.ValueText ?? string.Empty;
 
         public static bool NameIs(this ExpressionSyntax expression, string name) =>
             expression.GetName().Equals(name, StringComparison.InvariantCulture);

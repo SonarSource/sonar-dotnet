@@ -59,6 +59,6 @@ namespace SonarAnalyzer.Helpers.Trackers
         }
 
         protected override SyntaxToken? ExpectedExpressionIdentifier(SyntaxNode expression) =>
-            ((ExpressionSyntax)expression).GetIdentifier()?.Identifier;
+            ((ExpressionSyntax)expression).GetIdentifier();
     }
 }
