@@ -42,17 +42,19 @@ namespace MyNamespace.MyNamespaceNested
         ~Example() { }
         int MyProp { get; }
 
-        unsafe string Method<T>(object input) where T: new()
+        unsafe ref byte Method<T>(byte[] input) where T: new()
         {
-            int[] arr = null;
             int? i = null;
-            int* intPtr;
+            int* iPtr;
             System.Exception qualified;
             global::System.Exception global;
-            return input.ToString()?.ToString();
+            input.ToString()?.ToString();
+            ref byte result = ref input[0];
+            return ref result;
         }
         public static explicit operator int(Example e) => 0;
         public static int operator +(Example e) => 0;
+        ref struct MyRefStruct { }
     }
 }";
 
@@ -70,15 +72,14 @@ End Class";
         {
             var nodes = Parse_CS(CsSourceInputToString);
             Assert<CS.AliasQualifiedNameSyntax>("global");
-            Assert<CS.ArrayTypeSyntax>("int");
-            Assert<CS.BaseTypeDeclarationSyntax>("Example", "MyEnum");
+            Assert<CS.ArrayTypeSyntax>("byte");
+            Assert<CS.BaseTypeDeclarationSyntax>("Example", "MyEnum", "MyRefStruct");
             Assert<CS.ConstructorDeclarationSyntax>("Example");
             Assert<CS.ConversionOperatorDeclarationSyntax>("int");
             Assert<CS.DelegateDeclarationSyntax>("MyDelegate");
             Assert<CS.DestructorDeclarationSyntax>("Example");
             Assert<CS.EnumMemberDeclarationSyntax>("MyEnumValue");
-            Assert<CS.IdentifierNameSyntax>("C", "System", "Collections", "MyNamespace", "MyNamespaceNested", "T", "System", "Exception", "global", "System", "Exception", "input",
-                "ToString", "ToString", "Example", "Example");
+            Assert<CS.IdentifierNameSyntax>("C", "System", "Collections", "MyNamespace", "MyNamespaceNested", "T", "System", "Exception", "global", "System", "Exception", "input", "ToString", "ToString", "input", "result", "Example", "Example");
             Assert<CS.InvocationExpressionSyntax>("ToString", "ToString");
             Assert<CS.MethodDeclarationSyntax>("Method");
             Assert<CS.MemberAccessExpressionSyntax>("ToString");
@@ -89,14 +90,15 @@ End Class";
             Assert<CS.ParameterSyntax>("input", "e", "e");
             Assert<CS.PropertyDeclarationSyntax>("MyProp");
             Assert<CS.PointerTypeSyntax>("int");
-            Assert<CS.PredefinedTypeSyntax>("void", "int", "string", "object", "int", "int", "int", "int", "int");
+            Assert<CS.PredefinedTypeSyntax>("void", "int", "int", "int", "int", "int", "byte", "byte", "byte");
             Assert<CS.QualifiedNameSyntax>("Collections", "MyNamespaceNested", "Exception", "Exception");
-            Assert<CS.SimpleNameSyntax>("C", "System", "Collections", "MyNamespace", "MyNamespaceNested", "T", "System", "Exception", "global", "System", "Exception", "input",
-                "ToString", "ToString", "Example", "Example");
+            Assert<CS.SimpleNameSyntax>("C", "System", "Collections", "MyNamespace", "MyNamespaceNested", "T", "System", "Exception", "global", "System", "Exception", "input", "ToString", "ToString", "input", "result", "Example", "Example");
             Assert<CS.TypeParameterConstraintClauseSyntax>("T");
             Assert<CS.TypeParameterSyntax>("T");
             Assert<CS.UsingDirectiveSyntax>("C");
-            Assert<CS.VariableDeclaratorSyntax>("arr", "i", "intPtr", "qualified", "global");
+            Assert<CS.VariableDeclaratorSyntax>("i", "iPtr", "qualified", "global", "result");
+            Assert<CS.RefTypeSyntax>("byte", "byte");
+            Assert<CS.ReturnStatementSyntax>(string.Empty);
 
             void Assert<T>(params string[] expectedNames) where T : SyntaxNode =>
                 nodes.OfType<T>().Select(x => CSharpSyntaxHelper.GetName(x)).Should().BeEquivalentTo(expectedNames, because: "GetName for {0} should return the identifier", typeof(T));
