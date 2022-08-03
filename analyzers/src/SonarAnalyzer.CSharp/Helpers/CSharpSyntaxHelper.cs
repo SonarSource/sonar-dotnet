@@ -299,7 +299,7 @@ namespace SonarAnalyzer.Helpers
         public static SyntaxToken? GetIdentifier(this SyntaxNode node) =>
             node switch
             {
-                AliasQualifiedNameSyntax { Name.Identifier: var i } => i,
+                AliasQualifiedNameSyntax { Alias.Identifier: var i } => i,
                 ArrayTypeSyntax { ElementType: { } elementType } => GetIdentifier(elementType),
                 BaseTypeDeclarationSyntax { Identifier: var i } => i,
                 ConstructorDeclarationSyntax { Identifier: var i } => i,
@@ -307,12 +307,13 @@ namespace SonarAnalyzer.Helpers
                 DelegateDeclarationSyntax { Identifier: var i } => i,
                 DestructorDeclarationSyntax { Identifier: var i } => i,
                 EnumMemberDeclarationSyntax { Identifier: var i } => i,
+                InvocationExpressionSyntax { Expression: { } expression } => GetIdentifier(expression),
                 MethodDeclarationSyntax { Identifier: var i } => i,
                 MemberBindingExpressionSyntax { Name.Identifier: var i } => i,
                 MemberAccessExpressionSyntax { Name.Identifier: var i } => i,
                 NamespaceDeclarationSyntax { Name: { } name } => GetIdentifier(name),
                 NullableTypeSyntax { ElementType: { } elementType } => GetIdentifier(elementType),
-                OperatorDeclarationSyntax { OperatorToken: var token } => token,
+                OperatorDeclarationSyntax { OperatorToken: var o } => o,
                 ParameterSyntax { Identifier: var i } => i,
                 PropertyDeclarationSyntax { Identifier: var i } => i,
                 PointerTypeSyntax { ElementType: { } elementType } => GetIdentifier(elementType),
@@ -327,11 +328,11 @@ namespace SonarAnalyzer.Helpers
                 _ => null
             };
 
-        public static string GetName(this ExpressionSyntax expression) =>
-            expression.GetIdentifier()?.ValueText ?? string.Empty;
+        public static string GetName(this SyntaxNode node) =>
+            node.GetIdentifier()?.ValueText ?? string.Empty;
 
-        public static bool NameIs(this ExpressionSyntax expression, string name) =>
-            expression.GetName().Equals(name, StringComparison.InvariantCulture);
+        public static bool NameIs(this SyntaxNode node, string name) =>
+            node.GetName().Equals(name, StringComparison.InvariantCulture);
 
         public static bool HasConstantValue(this ExpressionSyntax expression, SemanticModel semanticModel) =>
             expression.RemoveParentheses().IsAnyKind(LiteralSyntaxKinds) || expression.FindConstantValue(semanticModel) != null;
