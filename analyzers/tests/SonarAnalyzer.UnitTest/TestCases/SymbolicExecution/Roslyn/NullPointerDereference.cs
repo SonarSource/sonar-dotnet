@@ -270,7 +270,7 @@ namespace Tests.Diagnostics
             {
                 MyProperty = ""
             };
-            o.ToString(); // Noncompliant FIXME (was compliant)
+            o.ToString(); // Compliant
         }
 
         class MyClass
