@@ -25,7 +25,7 @@ namespace SonarAnalyzer.UnitTest.Common
     {
         [TestMethod]
         public void No_Executable_Lines() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"using System;
 using System.Linq;
 
@@ -41,14 +41,14 @@ namespace Test
 
         [TestMethod]
         public void Class() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"class Program
 {
 }");
 
         [TestMethod]
         public void Checked_Unchecked() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"class Program
 {
     static void Main(string[] args)
@@ -64,7 +64,7 @@ namespace Test
 
         [TestMethod]
         public void Blocks() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"class Program
 {
     unsafe static void Main(int[] arr, object obj)
@@ -78,7 +78,7 @@ namespace Test
 
         [TestMethod]
         public void Statements() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"class Program
 {
     void Foo(int i)
@@ -90,7 +90,7 @@ namespace Test
 
         [TestMethod]
         public void Loops() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"class Program
 {
     void Foo(int[] arr)
@@ -106,7 +106,7 @@ namespace Test
 
         [TestMethod]
         public void Conditionals() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"class Program
 {
     void Foo(int? i, string s)
@@ -127,7 +127,7 @@ namespace Test
 
         [TestMethod]
         public void Conditionals2() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"class Program
 {
     void Foo(System.Exception ex)
@@ -147,7 +147,7 @@ namespace Test
 
         [TestMethod]
         public void Yields() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"using System.Collections.Generic;
 
 namespace Test
@@ -164,7 +164,7 @@ namespace Test
 
         [TestMethod]
         public void AccessAndInvocation() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"class Program
 {
     static void Main(string[] args)
@@ -176,7 +176,7 @@ namespace Test
 
         [TestMethod]
         public void Initialization() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"class Program
 {
     static string GetString() => """";
@@ -196,7 +196,7 @@ namespace Test
 
         [TestMethod]
         public void Property_Set() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"class Program
 {
     int Prop { get; set; }
@@ -209,7 +209,7 @@ namespace Test
 
         [TestMethod]
         public void Property_Get() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"class Program
 {
     int Prop { get; set; }
@@ -222,7 +222,7 @@ namespace Test
 
         [TestMethod]
         public void Lambdas() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -239,7 +239,7 @@ class Program
 
         [TestMethod]
         public void TryCatch() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"using System;
 class Program
 {
@@ -263,7 +263,7 @@ class Program
 
         [TestMethod]
         public void Test_16() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"using System;
 class Program
 {
@@ -275,7 +275,7 @@ class Program
 
         [TestMethod]
         public void Test_17() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"class Program
 {
     static void Main(string[] args)
@@ -295,7 +295,7 @@ class Program
 
         [TestMethod]
         public void Class_Excluded() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"using System.Diagnostics.CodeAnalysis;
 public class ComplicatedCode
 {
@@ -326,7 +326,7 @@ public class SomeAttribute : System.Attribute { }", 19, 22);
 
         [TestMethod]
         public void AttributeOnLocalFunction_Excluded() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"using System.Diagnostics.CodeAnalysis;
 public class ComplicatedCode
 {
@@ -354,7 +354,7 @@ public class SomeAttribute : System.Attribute { }", 8, 14);
         [DataRow("ExcludeFromCodeCoverageAttribute()")]
         [DataRow("System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()")]
         public void ExcludeFromCodeCoverage_AttributeVariants(string attribute) =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @$"using System.Diagnostics.CodeAnalysis;
 public class ComplicatedCode
 {{
@@ -368,7 +368,7 @@ public class ComplicatedCode
 
         [TestMethod]
         public void Record_Excluded() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"using System.Diagnostics.CodeAnalysis;
 [ExcludeFromCodeCoverage]
 record Program
@@ -381,7 +381,7 @@ record Program
 
         [TestMethod]
         public void RecordStruct_Excluded() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"using System.Diagnostics.CodeAnalysis;
 [ExcludeFromCodeCoverage]
 record struct Program
@@ -394,7 +394,7 @@ record struct Program
 
         [TestMethod]
         public void Struct_Excluded() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"using System.Diagnostics.CodeAnalysis;
 namespace project_1
 {
@@ -410,7 +410,7 @@ namespace project_1
 
         [TestMethod]
         public void Constructor_Excluded() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"using System.Diagnostics.CodeAnalysis;
 class Program
 {
@@ -432,7 +432,7 @@ class Program
 
         [TestMethod]
         public void Property_Excluded() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"using System.Diagnostics.CodeAnalysis;
 class EventClass
 {
@@ -476,7 +476,7 @@ class EventClass
 
         [TestMethod]
         public void Event_Excluded() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"using System.Diagnostics.CodeAnalysis;
 class EventClass
 {
@@ -505,7 +505,7 @@ class EventClass
 
         [TestMethod]
         public void PartialClasses_Excluded() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"using System.Diagnostics.CodeAnalysis;
 [ExcludeFromCodeCoverage]
 partial class Program
@@ -531,7 +531,7 @@ partial class AnotherClass
 
         [TestMethod]
         public void PartialMethods_Excluded() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"using System.Diagnostics.CodeAnalysis;
 partial class Program
 {
@@ -563,14 +563,14 @@ partial class AnotherClass
 
         [TestMethod]
         public void AttributeAreIgnored() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"using System.Reflection;
 using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo(""FOO"")]");
 
         [TestMethod]
         public void OnlyAttributeAreIgnored() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"[AnAttribute]
 public class Foo
 {
@@ -585,7 +585,7 @@ public class AnAttribute : System.Attribute { }", 7);
 
         [TestMethod]
         public void ExpressionsAreCounted() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"class Program
 {
     public void Foo(bool flag)
@@ -599,7 +599,7 @@ public class AnAttribute : System.Attribute { }", 7);
 
         [TestMethod]
         public void MultiLineLoop() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"class Program
 {
     void Foo(int[] arr)
@@ -617,7 +617,7 @@ public class AnAttribute : System.Attribute { }", 7);
 
         [TestMethod]
         public void SwitchStatementWithMultipleCases() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"class Program
 {
     void Foo(int? i)
@@ -638,7 +638,7 @@ public class AnAttribute : System.Attribute { }", 7);
 
         [TestMethod]
         public void SwitchExpressionWithMultipleCases() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"class Program
 {
     void Foo(int? i, string s)
@@ -661,7 +661,7 @@ public class AnAttribute : System.Attribute { }", 7);
 
         [TestMethod]
         public void MultiLineInterpolatedString() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"class Program
 {
     void Foo(int? i, string s)
@@ -676,7 +676,7 @@ public class AnAttribute : System.Attribute { }", 7);
 
         [TestMethod]
         public void MultiLineInterpolatedStringWithMultipleLineExpressions() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"public class C
 {
     public string M(int i)
@@ -693,7 +693,7 @@ public class AnAttribute : System.Attribute { }", 7);
 
         [TestMethod]
         public void UsingDeclaration() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"class Program
 {
     void Foo(int? i, string s)
@@ -704,7 +704,7 @@ public class AnAttribute : System.Attribute { }", 7);
 
         [TestMethod]
         public void LocalFunctions() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"class Program
 {
     int M1()
@@ -730,7 +730,7 @@ public class AnAttribute : System.Attribute { }", 7);
 
         [TestMethod]
         public void IndicesAndRanges() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"using System;
 class Program
 {
@@ -759,7 +759,7 @@ class Program
 
         [TestMethod]
         public void NullCoalescingAssignment() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"using System;
 using System.Collections.Generic;
 class Program
@@ -775,7 +775,7 @@ class Program
 
         [TestMethod]
         public void AssignmentAndDeclarationInTheSameDeconstruction() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"using System;
 using System.Collections.Generic;
 class Program
@@ -791,7 +791,7 @@ class Program
 
         [TestMethod]
         public void NullCoalescingOperator() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -806,7 +806,7 @@ class Program
 
         [TestMethod]
         public void SingleLinePatternMatching() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"static class Program
 {
     public static bool IsLetter(this char c) =>
@@ -815,7 +815,7 @@ class Program
 
         [TestMethod]
         public void MultiLinePatternMatching() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"using System;
 using System.Collections.Generic;
 class Program
@@ -835,7 +835,7 @@ class Program
 
         [TestMethod]
         public void MultiLineInvocation() =>
-            AssertLinesOfCode(
+            AssertLineNumbersOfExecutableLines(
 @"using System;
 using System.Collections.Generic;
 class Program
@@ -849,7 +849,7 @@ class Program
     public static int Bar() => 42;
 }", 7, 8);
 
-        private static void AssertLinesOfCode(string code, params int[] expectedExecutableLines)
+        private static void AssertLineNumbersOfExecutableLines(string code, params int[] expectedExecutableLines)
         {
             (var syntaxTree, var semanticModel) = TestHelper.CompileCS(code);
             Metrics.CSharp.CSharpExecutableLinesMetric.GetLineNumbers(syntaxTree, semanticModel).Should().BeEquivalentTo(expectedExecutableLines);
