@@ -120,6 +120,25 @@ namespace SonarAnalyzer.Rules.CSharp
                 this.context = context;
             }
 
+            public override void VisitInterpolatedStringExpression(InterpolatedStringExpressionSyntax node)
+            {
+                var strings = new List<StringWrapper>();
+                foreach (var content in node.Contents)
+                {
+                    if (content is InterpolationSyntax interpolation &&
+                        interpolation.Expression.FindConstantValue(context.SemanticModel) is string constantValue)
+                    {
+                        strings.Add(new StringWrapper(content, constantValue));
+                    }
+                    else if (content is InterpolatedStringTextSyntax interpolatedText)
+                    {
+                        strings.Add(new StringWrapper(interpolatedText, interpolatedText.TextToken.Text));
+                    }
+                }
+                CheckSpaceBetweenStrings(strings);
+                base.VisitInterpolatedStringExpression(node);
+            }
+
             // The assumption is that in a chain of concatenations "a" + "b" + "c"
             // the AST form is
             //        +
