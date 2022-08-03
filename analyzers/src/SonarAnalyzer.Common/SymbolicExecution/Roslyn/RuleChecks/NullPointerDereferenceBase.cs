@@ -31,35 +31,18 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
 
         protected override ProgramState PreProcessSimple(SymbolicContext context)
         {
-            switch (context.Operation.Instance.Kind)
+            var operation = context.Operation.Instance switch
             {
-                case OperationKindEx.Invocation:
-                    if (context.Operation.Instance.ToInvocation() is { Instance: { } instance }
-                        && context.HasConstraint(ObjectConstraint.Null, instance))
-                    {
-                        NodeContext.ReportIssue(Diagnostic.Create(Rule, instance.Syntax.GetLocation(), instance.Syntax.ToString()));
-                    }
-                    break;
-                case OperationKindEx.PropertyReference:
-                    if (IPropertyReferenceOperationWrapper.FromOperation(context.Operation.Instance) is { } propertyReference
-                        && propertyReference.Instance is { } propertyInstance
-)
-                    {
-                        ReportOnNullInstance(context, propertyInstance);
-                    }
-                    break;
+                { Kind: OperationKindEx.Invocation } => context.Operation.Instance.ToInvocation().Instance,
+                { Kind: OperationKindEx.PropertyReference } => context.Operation.Instance.ToPropertyReference().Instance,
+                _ => null,
+            };
+            if (operation != null && context.HasConstraint(ObjectConstraint.Null, operation))
+            {
+                NodeContext.ReportIssue(Diagnostic.Create(Rule, operation.Syntax.GetLocation(), operation.Syntax.ToString()));
             }
-            return context.State;
-        }
 
-        private void ReportOnNullInstance(SymbolicContext context, IOperation instance)
-        {
-            if (instance.TrackedSymbol() is { } instanceSymbol
-            && context.State[instance] is { } instanceState
-            && instanceState.HasConstraint(ObjectConstraint.Null))
-            {
-                NodeContext.ReportIssue(Diagnostic.Create(Rule, instance.Syntax.GetLocation(), instanceSymbol.Name));
-            }
+            return context.State;
         }
     }
 }
