@@ -34,15 +34,14 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class SqlKeywordsDelimitedBySpace : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S2857";
+        private const string DiagnosticId = "S2857";
         private const string MessageFormat = "Add a space before '{0}'.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        private static readonly IList<NameSyntax> SqlNamespaces = new List<NameSyntax>()
+        private static readonly IList<NameSyntax> SqlNamespaces = new List<NameSyntax>
         {
             CSharpSyntaxHelper.BuildQualifiedNameSyntax("System", "Data"),
             CSharpSyntaxHelper.BuildQualifiedNameSyntax("Microsoft", "EntityFrameworkCore"),
@@ -85,48 +84,42 @@ namespace SonarAnalyzer.Rules.CSharp
             .OrderBy(i => i)
             .First();
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
                     var namespaceDeclaration = (NamespaceDeclarationSyntax)c.Node;
-                    var compilationUnit = namespaceDeclaration.Parent as CompilationUnitSyntax;
-                    if (compilationUnit == null ||
-                        (!HasSqlNamespace(compilationUnit.Usings) &&
-                        !HasSqlNamespace(namespaceDeclaration.Usings)))
+                    if (namespaceDeclaration.Parent is CompilationUnitSyntax compilationUnit
+                        && (HasSqlNamespace(compilationUnit.Usings)
+                           || HasSqlNamespace(namespaceDeclaration.Usings)))
                     {
-                        return;
+                        var visitor = new StringConcatenationWalker(c);
+                        foreach (var member in namespaceDeclaration.Members)
+                        {
+                            visitor.SafeVisit(member);
+                        }
                     }
-                    var visitor = new StringConcatenationWalker(c);
-                    foreach (var member in namespaceDeclaration.Members)
-                    {
-                        visitor.SafeVisit(member);
-                    }
-            },
-            SyntaxKind.NamespaceDeclaration);
-        }
+                },
+                SyntaxKind.NamespaceDeclaration);
 
-        private bool HasSqlNamespace(SyntaxList<UsingDirectiveSyntax> usings) =>
+        private static bool HasSqlNamespace(SyntaxList<UsingDirectiveSyntax> usings) =>
             usings.Select(usingDirective => usingDirective.Name)
                 .Any(name => SqlNamespaces.Any(sn => SyntaxFactory.AreEquivalent(name, sn)));
 
-        private class StringConcatenationWalker : SafeCSharpSyntaxWalker
+        private sealed class StringConcatenationWalker : SafeCSharpSyntaxWalker
         {
             private readonly SyntaxNodeAnalysisContext context;
 
-            public StringConcatenationWalker(SyntaxNodeAnalysisContext context)
-            {
+            public StringConcatenationWalker(SyntaxNodeAnalysisContext context) =>
                 this.context = context;
-            }
 
             public override void VisitInterpolatedStringExpression(InterpolatedStringExpressionSyntax node)
             {
                 var strings = new List<StringWrapper>();
                 foreach (var content in node.Contents)
                 {
-                    if (content is InterpolationSyntax interpolation &&
-                        interpolation.Expression.FindConstantValue(context.SemanticModel) is string constantValue)
+                    if (content is InterpolationSyntax interpolation
+                        && interpolation.Expression.FindConstantValue(context.SemanticModel) is string constantValue)
                     {
                         strings.Add(new StringWrapper(content, constantValue));
                     }
@@ -149,11 +142,11 @@ namespace SonarAnalyzer.Rules.CSharp
             // So we start from the lower-left node which should contain the SQL start keyword
             public override void VisitBinaryExpression(BinaryExpressionSyntax node)
             {
-                if (node.IsKind(SyntaxKind.AddExpression) &&
+                if (node.IsKind(SyntaxKind.AddExpression)
                     // we do the analysis only if it's a SQL keyword on the left
-                    TryGetStringWrapper(node.Left, out var leftSide) &&
-                    TryGetStringWrapper(node.Right, out var rightSide) &&
-                    StartsWithSqlKeyword(leftSide.Text.Trim()))
+                    && TryGetStringWrapper(node.Left, out var leftSide)
+                    && TryGetStringWrapper(node.Right, out var rightSide)
+                    && StartsWithSqlKeyword(leftSide.Text.Trim()))
                 {
                     var strings = new List<StringWrapper>();
                     strings.Add(leftSide);
@@ -168,25 +161,25 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
                 else
                 {
-                    base.Visit(node.Left);
-                    base.Visit(node.Right);
+                    Visit(node.Left);
+                    Visit(node.Right);
                 }
             }
 
             private void CheckSpaceBetweenStrings(List<StringWrapper> stringWrappers)
             {
-                for (var i = 0; i < stringWrappers.Count -1; i++)
+                for (var i = 0; i < stringWrappers.Count - 1; i++)
                 {
                     var firstStringText = stringWrappers[i].Text;
                     var secondString = stringWrappers[i + 1];
                     var secondStringText = secondString.Text;
-                    if (firstStringText.Length > 0 &&
-                        IsAlphaNumericOrAt(firstStringText.ToCharArray().Last()) &&
-                        secondStringText.Length > 0 &&
-                        IsAlphaNumericOrAt(secondStringText[0]))
+                    if (firstStringText.Length > 0
+                        && IsAlphaNumericOrAt(firstStringText.ToCharArray().Last())
+                        && secondStringText.Length > 0
+                        && IsAlphaNumericOrAt(secondStringText[0]))
                     {
                         var word = secondStringText.Split(' ').FirstOrDefault();
-                        this.context.ReportIssue(Diagnostic.Create(rule, secondString.Node.GetLocation(), word));
+                        context.ReportIssue(Diagnostic.Create(Rule, secondString.Node.GetLocation(), word));
                     }
                 }
             }
@@ -222,8 +215,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 var parent = node.Parent;
                 while (parent is BinaryExpressionSyntax concatenation)
                 {
-                    if (concatenation.IsKind(SyntaxKind.AddExpression) &&
-                        TryGetStringWrapper(concatenation.Right, out var stringWrapper))
+                    if (concatenation.IsKind(SyntaxKind.AddExpression)
+                        && TryGetStringWrapper(concatenation.Right, out var stringWrapper))
                     {
                         strings.Add(stringWrapper);
                     }
@@ -245,10 +238,11 @@ namespace SonarAnalyzer.Rules.CSharp
              * The '@' symbol is used for named parameters. The '{' and '}' symbols are used in string interpolations.
              * We ignore other non-alphanumeric characters (e.g. '>','=') to avoid false positives.
              */
-            private static bool IsAlphaNumericOrAt(char c) => char.IsLetterOrDigit(c) || c == '@' || c == '{' || c == '}';
+            private static bool IsAlphaNumericOrAt(char c) =>
+                char.IsLetterOrDigit(c) || c == '@' || c == '{' || c == '}';
         }
 
-        private class StringWrapper
+        private sealed class StringWrapper
         {
             public SyntaxNode Node { get; }
             public string Text { get; }
