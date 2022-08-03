@@ -319,6 +319,8 @@ namespace SonarAnalyzer.Helpers
                 PredefinedTypeSyntax { Keyword: var k } => k,
                 QualifiedNameSyntax { Right.Identifier: var i } => i,
                 SimpleNameSyntax { Identifier: var i } => i,
+                TypeParameterConstraintClauseSyntax { Name.Identifier: var i } => i,
+                TypeParameterSyntax { Identifier: var i } => i,
                 UsingDirectiveSyntax { Alias.Name: { } name } => GetIdentifier(name),
                 VariableDeclaratorSyntax { Identifier: var i } => i,
                 { } refType when RefTypeSyntaxWrapper.IsInstance(refType) => GetIdentifier(((RefTypeSyntaxWrapper)refType).Type),
