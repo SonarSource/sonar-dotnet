@@ -72,9 +72,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         {
             _ = path ?? throw new ArgumentNullException(nameof(path));
             var fileInfo = new FileInfo(path);
-            var relativePathToTestCases = RelativePathFromTestCases(fileInfo);
+            var relativePathFromTestCases = RelativePathFromTestCases(fileInfo);
             return fileInfo.Extension == fileExtension
-                ? AddDocument(project, relativePathToTestCases, File.ReadAllText(fileInfo.FullName, Encoding.UTF8))
+                ? AddDocument(project, relativePathFromTestCases, File.ReadAllText(fileInfo.FullName, Encoding.UTF8))
                 : throw new ArgumentException($"The file extension '{fileInfo.Extension}' does not match the project language '{project.Language}'.", nameof(path));
 
             static string RelativePathFromTestCases(FileInfo fileInfo)
