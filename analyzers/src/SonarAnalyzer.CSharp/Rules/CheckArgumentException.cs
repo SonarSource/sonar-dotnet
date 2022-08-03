@@ -124,20 +124,24 @@ namespace SonarAnalyzer.Rules.CSharp
                     or AccessorDeclarationSyntax
                     or BaseMethodDeclarationSyntax
                     or IndexerDeclarationSyntax
+                    or PropertyDeclarationSyntax
                     or CompilationUnitSyntax
                 || LocalFunctionStatementSyntaxWrapper.IsInstance(ancestor));
 
-            return node switch
+            var parameterList = node switch
             {
                 SimpleLambdaExpressionSyntax simpleLambda => new[] { simpleLambda.Parameter.Identifier.ValueText },
                 BaseMethodDeclarationSyntax method => IdentifierNames(method.ParameterList),
                 ParenthesizedLambdaExpressionSyntax lambda => IdentifierNames(lambda.ParameterList),
                 AccessorDeclarationSyntax accessor => AccessorIdentifierNames(accessor),
                 IndexerDeclarationSyntax indexerDeclaration => IdentifierNames(indexerDeclaration.ParameterList),
+                PropertyDeclarationSyntax propertyDeclaration => ParentParameterList(propertyDeclaration),
                 CompilationUnitSyntax => new[] { "args" },
                 { } when LocalFunctionStatementSyntaxWrapper.IsInstance(node) => IdentifierNames(((LocalFunctionStatementSyntaxWrapper)node).ParameterList),
                 _ => Enumerable.Empty<string>()
             };
+
+            return parameterList.Union(ParentParameterList(node));
 
             static IEnumerable<string> IdentifierNames(BaseParameterListSyntax parameterList) =>
                     parameterList.Parameters.Select(x => x.Identifier.ValueText);
@@ -159,6 +163,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
                 return arguments;
             }
+
+            static IEnumerable<string> ParentParameterList(SyntaxNode node) =>
+                node?.Ancestors().OfType<BaseTypeDeclarationSyntax>().FirstOrDefault() is { } baseTypeAncestor
+                && RecordDeclarationSyntaxWrapper.IsInstance(baseTypeAncestor)
+                && ((RecordDeclarationSyntaxWrapper)baseTypeAncestor).ParameterList is { } recordParameterList
+                    ? IdentifierNames(recordParameterList)
+                    : Enumerable.Empty<string>();
         }
 
         private static string TakeOnlyBeforeDot(Optional<object> value) =>
