@@ -276,5 +276,127 @@ namespace NS
         [TestMethod]
         public void GetEffectiveAccessibility_WhenSymbolIsNull_ReturnsNotApplicable() =>
             ((ISymbol)null).GetEffectiveAccessibility().Should().Be(CodeAnalysisAccessibility.NotApplicable);
+
+        [DataTestMethod]
+        [DataRow(SymbolKind.Alias, "alias")]
+        [DataRow(SymbolKind.ArrayType, "array")]
+        [DataRow(SymbolKind.Assembly, "assembly")]
+        [DataRow(SymbolKind.Discard, "discard")]
+        [DataRow(SymbolKind.DynamicType, "dynamic")]
+        [DataRow(SymbolKind.ErrorType, "error")]
+        [DataRow(SymbolKind.Event, "event")]
+        [DataRow(SymbolKind.Field, "field")]
+        [DataRow(SymbolKind.FunctionPointerType, "function pointer")]
+        [DataRow(SymbolKind.Label, "label")]
+        [DataRow(SymbolKind.Local, "local")]
+        [DataRow(SymbolKind.Namespace, "namespace")]
+        [DataRow(SymbolKind.NetModule, "netmodule")]
+        [DataRow(SymbolKind.Parameter, "parameter")]
+        [DataRow(SymbolKind.PointerType, "pointer")]
+        [DataRow(SymbolKind.Preprocessing, "preprocessing")]
+        [DataRow(SymbolKind.Property, "property")]
+        [DataRow(SymbolKind.RangeVariable, "range variable")]
+        [DataRow(SymbolKind.TypeParameter, "type parameter")]
+        public void GetClassification_SimpleKinds(SymbolKind symbolKind, string expected)
+        {
+            var fakeSymbol = new Mock<ISymbol>();
+            fakeSymbol.Setup(x => x.Kind).Returns(symbolKind);
+            fakeSymbol.Object.GetClassification().Should().Be(expected);
+        }
+
+        [TestMethod]
+        public void GetClassification_UnknowKind()
+        {
+            var fakeSymbol = new Mock<ISymbol>();
+            fakeSymbol.Setup(x => x.Kind).Returns((SymbolKind)999);
+#if DEBUG
+            new Action(() => fakeSymbol.Object.GetClassification()).Should().Throw<NotSupportedException>();
+#else
+            fakeSymbol.Object.GetClassification().Should().Be("symbol");
+#endif
+        }
+
+        [DataTestMethod]
+        [DataRow(TypeKind.Array, "array")]
+        [DataRow(TypeKind.Class, "class")]
+        [DataRow(TypeKind.Delegate, "delegate")]
+        [DataRow(TypeKind.Dynamic, "dynamic")]
+        [DataRow(TypeKind.Enum, "enum")]
+        [DataRow(TypeKind.Error, "error")]
+        [DataRow(TypeKind.FunctionPointer, "function pointer")]
+        [DataRow(TypeKind.Interface, "interface")]
+        [DataRow(TypeKind.Module, "module")]
+        [DataRow(TypeKind.Pointer, "pointer")]
+        [DataRow(TypeKind.Struct, "struct")]
+        [DataRow(TypeKind.Structure, "struct")]
+        [DataRow(TypeKind.Submission, "submission")]
+        [DataRow(TypeKind.TypeParameter, "type parameter")]
+        [DataRow(TypeKind.Unknown, "unknown")]
+        public void GetClassification_NamedTypes(TypeKind typeKind, string expected)
+        {
+            var fakeSymbol = new Mock<INamedTypeSymbol>();
+            fakeSymbol.Setup(x => x.Kind).Returns(SymbolKind.NamedType);
+            fakeSymbol.Setup(x => x.TypeKind).Returns(typeKind);
+            fakeSymbol.Setup(x => x.IsRecord).Returns(false);
+
+            fakeSymbol.Object.GetClassification().Should().Be(expected);
+        }
+
+        [TestMethod]
+        public void GetClassification_NamedType_Unknown()
+        {
+            var fakeSymbol = new Mock<INamedTypeSymbol>();
+            fakeSymbol.Setup(x => x.Kind).Returns(SymbolKind.NamedType);
+            fakeSymbol.Setup(x => x.TypeKind).Returns((TypeKind)255);
+#if DEBUG
+            new Action(() => fakeSymbol.Object.GetClassification()).Should().Throw<NotSupportedException>();
+#else
+            fakeSymbol.Object.GetClassification().Should().Be("type");
+#endif
+        }
+
+        [DataTestMethod]
+        [DataRow(TypeKind.Class, "record")]
+        [DataRow(TypeKind.Struct, "record struct")]
+        public void GetClassification_Record(TypeKind typeKind, string expected)
+        {
+            var fakeSymbol = new Mock<INamedTypeSymbol>();
+            fakeSymbol.Setup(x => x.Kind).Returns(SymbolKind.NamedType);
+            fakeSymbol.Setup(x => x.TypeKind).Returns(typeKind);
+            fakeSymbol.Setup(x => x.IsRecord).Returns(true);
+
+            fakeSymbol.Object.GetClassification().Should().Be(expected);
+        }
+
+        [DataTestMethod]
+        [DataRow(MethodKind.AnonymousFunction, "method")]
+        [DataRow(MethodKind.BuiltinOperator, "operator")]
+        [DataRow(MethodKind.Constructor, "constructor")]
+        [DataRow(MethodKind.Conversion, "operator")]
+        [DataRow(MethodKind.DeclareMethod, "method")]
+        [DataRow(MethodKind.DelegateInvoke, "method")]
+        [DataRow(MethodKind.Destructor, "destructor")]
+        [DataRow(MethodKind.EventAdd, "method")]
+        [DataRow(MethodKind.EventRaise, "method")]
+        [DataRow(MethodKind.EventRemove, "method")]
+        [DataRow(MethodKind.ExplicitInterfaceImplementation, "method")]
+        [DataRow(MethodKind.FunctionPointerSignature, "method")]
+        [DataRow(MethodKind.LambdaMethod, "method")]
+        [DataRow(MethodKind.LocalFunction, "method")]
+        [DataRow(MethodKind.Ordinary, "method")]
+        [DataRow(MethodKind.PropertyGet, "getter")]
+        [DataRow(MethodKind.PropertySet, "setter")]
+        [DataRow(MethodKind.ReducedExtension, "method")]
+        [DataRow(MethodKind.SharedConstructor, "constructor")]
+        [DataRow(MethodKind.StaticConstructor, "constructor")]
+        [DataRow(MethodKind.UserDefinedOperator, "operator")]
+        public void GetClassification_Method(MethodKind methodKind, string expected)
+        {
+            var fakeSymbol = new Mock<IMethodSymbol>();
+            fakeSymbol.Setup(x => x.Kind).Returns(SymbolKind.Method);
+            fakeSymbol.Setup(x => x.MethodKind).Returns(methodKind);
+
+            fakeSymbol.Object.GetClassification().Should().Be(expected);
+        }
     }
 }

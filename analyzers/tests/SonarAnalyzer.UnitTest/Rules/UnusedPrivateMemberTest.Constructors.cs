@@ -102,7 +102,7 @@ public class Inheritance
         protected BaseClass1() { var x = 5; }
     }
 
-    private class DerivedClass1 : BaseClass1 // Noncompliant {{Remove the unused private type 'DerivedClass1'.}}
+    private class DerivedClass1 : BaseClass1 // Noncompliant {{Remove the unused private class 'DerivedClass1'.}}
     {
         public DerivedClass1() : base() { }
     }
@@ -113,7 +113,7 @@ public class Inheritance
         protected BaseClass2() { var x = 5; }
     }
 
-    private class DerivedClass2 : BaseClass2 // Noncompliant {{Remove the unused private type 'DerivedClass2'.}}
+    private class DerivedClass2 : BaseClass2 // Noncompliant {{Remove the unused private class 'DerivedClass2'.}}
     {
         public DerivedClass2() { }
     }

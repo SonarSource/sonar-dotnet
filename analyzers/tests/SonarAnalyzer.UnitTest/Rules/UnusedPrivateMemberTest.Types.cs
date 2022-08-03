@@ -27,7 +27,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             builder.AddSnippet(@"
 public class PrivateTypes
 {
-    private class InnerPrivateClass // Noncompliant {{Remove the unused private type 'InnerPrivateClass'.}}
+    private class InnerPrivateClass // Noncompliant {{Remove the unused private class 'InnerPrivateClass'.}}
     {
         protected class ProtectedClass { } // Noncompliant
         protected internal class ProtectedInternalClass { } // Noncompliant

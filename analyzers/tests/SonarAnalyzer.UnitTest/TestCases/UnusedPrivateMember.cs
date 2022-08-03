@@ -67,12 +67,12 @@ namespace Tests.Diagnostics
             get; set;
         }
         private void Method() { } // Noncompliant {{Remove the unused private method 'Method'.}}
-        private class Class { }// Noncompliant {{Remove the unused private type 'Class'.}}
+        private class Class { }// Noncompliant {{Remove the unused private class 'Class'.}}
 //      ^^^^^^^^^^^^^^^^^^^^^^^
-        private struct Struct { }// Noncompliant {{Remove the unused private type 'Struct'.}}
+        private struct Struct { }// Noncompliant {{Remove the unused private struct 'Struct'.}}
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^
         private delegate void Delegate();
-        private delegate void Delegate2(); // Noncompliant {{Remove the unused private type 'Delegate2'.}}
+        private delegate void Delegate2(); // Noncompliant {{Remove the unused private delegate 'Delegate2'.}}
         private event Delegate Event; //Noncompliant {{Remove the unused private event 'Event'.}}
         private event Delegate MyEvent; //Noncompliant {{Remove this unread private field 'MyEvent' or refactor the code to use its value.}}
         private int[][] array = new int[0][];
@@ -128,7 +128,7 @@ namespace Tests.Diagnostics
         {
             void Method();
         }
-        private class Class3 : MyInterface // Noncompliant {{Remove the unused private type 'Class3'.}}
+        private class Class3 : MyInterface // Noncompliant {{Remove the unused private class 'Class3'.}}
         {
             public void Method() { var x = this[20]; }
             public void Method1() { var x = Method2(); } // Noncompliant {{Remove the unused private method 'Method1'.}}
@@ -140,7 +140,7 @@ namespace Tests.Diagnostics
             }
         }
 
-        internal class Class4 : MyInterface // Noncompliant {{Remove the unused internal type 'Class4'.}}
+        internal class Class4 : MyInterface // Noncompliant {{Remove the unused internal class 'Class4'.}}
         {
             public void Method() { }
         }

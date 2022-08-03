@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1144",
-"message":  "Remove the unused private type 'FactoryConsumer'.",
+"message":  "Remove the unused private class 'FactoryConsumer'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
 "region":  {
