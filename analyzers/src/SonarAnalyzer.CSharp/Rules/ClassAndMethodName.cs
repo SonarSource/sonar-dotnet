@@ -46,18 +46,6 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor MethodNameRule = DescriptorFactory.Create(MethodNameDiagnosticId, MessageFormat);
         private static readonly DiagnosticDescriptor TypeNameRule = DescriptorFactory.Create(TypeNameDiagnosticId, MessageFormat);
 
-        private static readonly Dictionary<SyntaxKind, string> TypeKindNameMapping = new()
-        {
-            { SyntaxKind.StructDeclaration, "struct" },
-            { SyntaxKind.ClassDeclaration, "class" },
-            { SyntaxKind.InterfaceDeclaration, "interface" },
-            { SyntaxKindEx.RecordClassDeclaration, "record" },
-            { SyntaxKindEx.RecordStructDeclaration, "record struct" },
-            { SyntaxKind.MethodDeclaration, "method" },
-            { SyntaxKind.PropertyDeclaration, "property" },
-            { SyntaxKindEx.LocalFunctionStatement, "local function" },
-        };
-
         private static readonly ImmutableArray<KnownType> ComRelatedTypes =
             ImmutableArray.Create(
                 KnownType.System_Runtime_InteropServices_ComImportAttribute,
@@ -153,7 +141,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 || identifier.ValueText.EndsWith("_", StringComparison.Ordinal))
             {
                 context.ReportIssue(Diagnostic.Create(TypeNameRule, identifier.GetLocation(),
-                    TypeKindNameMapping[typeDeclaration.Kind()],
+                    typeDeclaration.GetDeclarationTypeName(),
                     identifier.ValueText, MessageFormatUnderscore));
                 return;
             }
@@ -178,8 +166,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (!isNameValid)
             {
                 var messageEnding = string.Format(MessageFormatNonUnderscore, suggestion);
-                context.ReportIssue(Diagnostic.Create(TypeNameRule, identifier.GetLocation(),
-                    TypeKindNameMapping[typeDeclaration.Kind()], identifier.ValueText, messageEnding));
+                context.ReportIssue(Diagnostic.Create(TypeNameRule, identifier.GetLocation(), typeDeclaration.GetDeclarationTypeName(), identifier.ValueText, messageEnding));
             }
         }
 
@@ -203,9 +190,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (identifier.ValueText.StartsWith("_", StringComparison.Ordinal)
                 || identifier.ValueText.EndsWith("_", StringComparison.Ordinal))
             {
-                context.ReportIssue(Diagnostic.Create(MethodNameRule, identifier.GetLocation(),
-                    TypeKindNameMapping[member.Kind()],
-                    identifier.ValueText, MessageFormatUnderscore));
+                context.ReportIssue(Diagnostic.Create(MethodNameRule, identifier.GetLocation(), member.GetDeclarationTypeName(), identifier.ValueText, MessageFormatUnderscore));
                 return;
             }
 
@@ -217,9 +202,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (!IsMemberNameValid(identifier.ValueText, out var suggestion))
             {
                 var messageEnding = string.Format(MessageFormatNonUnderscore, suggestion);
-                context.ReportIssue(Diagnostic.Create(MethodNameRule, identifier.GetLocation(),
-                    TypeKindNameMapping[member.Kind()],
-                    identifier.ValueText, messageEnding));
+                context.ReportIssue(Diagnostic.Create(MethodNameRule, identifier.GetLocation(), member.GetDeclarationTypeName(), identifier.ValueText, messageEnding));
             }
         }
 
