@@ -13,7 +13,8 @@ namespace Tests.Diagnostics
         {
             object o = null;
             this._foo1 = o;
-            this?._foo1.ToString(); // FIXME Non-compliant
+            this?._foo1.ToString(); // Noncompliant {{'._foo1' is null on at least one execution path.}}
+            //   ^^^^^^
         }
 
         string TryCatch3()
@@ -53,10 +54,11 @@ namespace Tests.Diagnostics
             try
             {
                 var a = o?.ToString();
+                Console.WriteLine(""); // some call that can throw
             }
             catch (Exception e) when (e.Message != null)
             {
-                var b = o.ToString(); // FIXME Non-compliant, o could be null here
+                var b = o.ToString(); // Noncompliant
             }
         }
 
@@ -119,7 +121,7 @@ namespace Tests.Diagnostics
       switch (o?.GetHashCode())
       {
         case null:
-          o.ToString(); // FIXME Non-compliant
+          o.ToString(); // Noncompliant
           break;
         default:
           break;
@@ -210,7 +212,7 @@ namespace Tests.Diagnostics
             if (leftName == null)
             {
                 // rightName is not null
-                if (rightName.EndsWith("foo")) // FIXME Non-compliant FP
+                if (rightName.EndsWith("foo")) // Noncompliant FP
                     return 1;
                 return 0;
             }
