@@ -212,6 +212,11 @@ stages:
         inputs:
           path: 'TestResults'
           artifact: DotnetTestResultsNet6
+      
+      - task: PublishTestResults@2
+        inputs:
+          testRunner: VSTest
+          testResultsFiles: 'TestResults/**/*.trx'
 
     - job: dotNetAnalysis
       displayName: '.Net Analysis'
