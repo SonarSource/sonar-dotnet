@@ -29,20 +29,19 @@ namespace SonarAnalyzer.Extensions
 {
     public static class BlockSyntaxExtensions
     {
-        public static bool IsEmpty(this BlockSyntax block, bool treatCommentsAsContent = true, bool treatConditionalCompilationAsContent = true) =>
-            !block.IsNotEmpty(treatCommentsAsContent, treatConditionalCompilationAsContent);
-
-        public static bool IsNotEmpty(this BlockSyntax block, bool treatCommentsAsContent = true, bool treatConditionalCompilationAsContent = true)
+        public static bool IsEmpty(this BlockSyntax block, bool treatCommentsAsContent = true, bool treatConditionalCompilationAsContent = true)
         {
             _ = block ?? throw new ArgumentNullException(nameof(block));
+            return !IsNotEmpty();
 
-            return block.Statements.Any()
-                || TriviaContainsCommentOrConditionalCompilation(block.OpenBraceToken.TrailingTrivia)
-                || TriviaContainsCommentOrConditionalCompilation(block.CloseBraceToken.LeadingTrivia);
+            bool IsNotEmpty() =>
+                block.Statements.Any()
+                || ((treatCommentsAsContent || treatConditionalCompilationAsContent)
+                    && (TriviaContainsCommentOrConditionalCompilation(block.OpenBraceToken.TrailingTrivia)
+                        || TriviaContainsCommentOrConditionalCompilation(block.CloseBraceToken.LeadingTrivia)));
 
             bool TriviaContainsCommentOrConditionalCompilation(SyntaxTriviaList triviaList) =>
-                (treatCommentsAsContent || treatConditionalCompilationAsContent)
-                && triviaList.Any(trivia =>
+                triviaList.Any(trivia =>
                     (treatCommentsAsContent && trivia.IsAnyKind(SyntaxKind.SingleLineCommentTrivia, SyntaxKind.MultiLineCommentTrivia))
                      || (treatConditionalCompilationAsContent && trivia.IsKind(SyntaxKind.DisabledTextTrivia)));
         }
