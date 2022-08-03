@@ -233,7 +233,7 @@ End Class", AnalyzerLanguage.VisualBasic);
 
         public static string TestPath(TestContext context, string fileName)
         {
-            var path = Path.Combine(context.TestDir, context.FullyQualifiedTestClassName.Replace("SonarAnalyzer.UnitTest.", null), context.TestName, fileName);
+            var path = Path.Combine(context.TestDir, context.FullyQualifiedTestClassName.Replace("SonarAnalyzer.UnitTest.", null), context.TestName, "TestCases", fileName);
             Directory.CreateDirectory(Path.GetDirectoryName(path));
             return path;
         }

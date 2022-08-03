@@ -65,16 +65,32 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public ProjectBuilder AddProjectReference(Func<SolutionBuilder, ProjectId> getProjectId) =>
             FromProject(project.AddProjectReference(new ProjectReference(getProjectId(Solution))));
 
-        public ProjectBuilder AddDocuments(IEnumerable<string> paths, string basePath = "") =>
-            paths.Aggregate(this, (projectBuilder, path) => projectBuilder.AddDocument(path, basePath));
+        public ProjectBuilder AddDocuments(IEnumerable<string> paths) =>
+            paths.Aggregate(this, (projectBuilder, path) => projectBuilder.AddDocument(path));
 
-        public ProjectBuilder AddDocument(string path, string basePath = "")
+        public ProjectBuilder AddDocument(string path)
         {
             _ = path ?? throw new ArgumentNullException(nameof(path));
             var fileInfo = new FileInfo(path);
+            var relativePathToTestCases = RelativePathFromTestCases(fileInfo);
             return fileInfo.Extension == fileExtension
-                ? AddDocument(project, Path.Combine(basePath ?? string.Empty, fileInfo.Name), File.ReadAllText(fileInfo.FullName, Encoding.UTF8))
+                ? AddDocument(project, relativePathToTestCases, File.ReadAllText(fileInfo.FullName, Encoding.UTF8))
                 : throw new ArgumentException($"The file extension '{fileInfo.Extension}' does not match the project language '{project.Language}'.", nameof(path));
+
+            static string RelativePathFromTestCases(FileInfo fileInfo)
+            {
+                Stack<string> directories = new();
+                directories.Push(fileInfo.Name);
+                var directory = fileInfo.Directory;
+                while (directory != null && directory.Name.ToUpper() != "TESTCASES")
+                {
+                    directories.Push(directory.Name);
+                    directory = directory.Parent;
+                }
+                return directory == null
+                    ? throw new ArgumentException("path must contain 'TestCases'", nameof(fileInfo))
+                    : Path.Combine(directories.ToArray());
+            }
         }
 
         public ProjectBuilder AddSnippets(params string[] snippets) =>
