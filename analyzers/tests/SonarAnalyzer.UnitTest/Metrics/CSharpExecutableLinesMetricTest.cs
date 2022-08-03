@@ -675,22 +675,6 @@ public class AnAttribute : System.Attribute { }", 7);
 }", 6);
 
         [TestMethod]
-        public void MultiLineInterpolatedConstString() =>
-            AssertLinesOfCode(
-@"class Program
-{
-    void Foo()
-    {
-        const string a = ""Hello"";
-        const string b = ""Hello again"";
-        const string c = @$""This is a Multi
-                                Line
-                                interpolated
-                                const string {a} {b}"";
-    }
-}"); // Not correct should be 6
-
-        [TestMethod]
         public void MultiLineInterpolatedStringWithMultipleLineExpressions() =>
             AssertLinesOfCode(
 @"public class C
