@@ -70,27 +70,16 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public ProjectBuilder AddDocument(string path)
         {
+            const string TestCases = @"TestCases\";
             _ = path ?? throw new ArgumentNullException(nameof(path));
             var fileInfo = new FileInfo(path);
-            var relativePathFromTestCases = RelativePathFromTestCases(fileInfo);
+            var testCasesIndex = fileInfo.FullName.IndexOf(TestCases);
+            var relativePathFromTestCases = testCasesIndex < 0
+                ? throw new ArgumentException($"{nameof(path)} must contain '{TestCases}'", nameof(path))
+                : fileInfo.FullName.Substring(testCasesIndex + TestCases.Length);
             return fileInfo.Extension == fileExtension
                 ? AddDocument(project, relativePathFromTestCases, File.ReadAllText(fileInfo.FullName, Encoding.UTF8))
                 : throw new ArgumentException($"The file extension '{fileInfo.Extension}' does not match the project language '{project.Language}'.", nameof(path));
-
-            static string RelativePathFromTestCases(FileInfo fileInfo)
-            {
-                Stack<string> directories = new();
-                directories.Push(fileInfo.Name);
-                var directory = fileInfo.Directory;
-                while (directory != null && directory.Name.ToUpper() != "TESTCASES")
-                {
-                    directories.Push(directory.Name);
-                    directory = directory.Parent;
-                }
-                return directory == null
-                    ? throw new ArgumentException("path must contain 'TestCases'", nameof(fileInfo))
-                    : Path.Combine(directories.ToArray());
-            }
         }
 
         public ProjectBuilder AddSnippets(params string[] snippets) =>
