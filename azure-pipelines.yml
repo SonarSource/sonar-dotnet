@@ -190,7 +190,7 @@ stages:
           testRunner: VSTest
           testResultsFiles: '*.trx'
           searchFolder: 'TestResults'
-          testRunTitle: '.NET 4.8 UTs'
+          testRunTitle: '$(System.JobDisplayName)'
 
     - job: runUnitTestsJobNet6
       displayName: '.NET 6 UTs'
@@ -233,7 +233,7 @@ stages:
           testRunner: VSTest
           testResultsFiles: '*.trx'
           searchFolder: '$(Build.SourcesDirectory)/TestResults'
-          testRunTitle: '.NET 6 UTs'
+          testRunTitle: '$(Agent.JobName)'
 
     - job: dotNetAnalysis
       displayName: '.Net Analysis'
@@ -488,7 +488,7 @@ stages:
           options: -B --settings $(mavenSettings.secureFilePath) -Pcoverage -Dsonar.projectVersion=$(SONAR_PROJECT_VERSION)
           publishJUnitResults: true
           testResultsFiles: '**/surefire-reports/TEST-*.xml'
-          testRunTitle: 'UTs on Windows'
+          testRunTitle: '$(Agent.JobName)'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: '1.11'
           mavenOptions: $(MAVEN_OPTS)
@@ -564,7 +564,7 @@ stages:
           options: -Dtest=$(testClasses) -B --settings $(mavenSettings.secureFilePath)
           publishJUnitResults: true
           testResultsFiles: '**/surefire-reports/TEST-*.xml'
-          testRunTitle: 'ITs on Windows $(Agent.JobName)'
+          testRunTitle: '$(Agent.JobName)'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: '1.11'
           mavenOptions: $(MAVEN_OPTS)
