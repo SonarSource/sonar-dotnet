@@ -175,7 +175,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (firstStringText.Length > 0
                         && IsAlphaNumericOrAt(firstStringText.Last())
                         && secondStringText.Length > 0
-                        && IsAlphaNumericOrAt(secondStringText[0]))
+                        && IsAlphaNumericOrAt(secondStringText.First()))
                     {
                         var word = secondStringText.Split(' ').FirstOrDefault();
                         context.ReportIssue(Diagnostic.Create(Rule, secondString.Node.GetLocation(), word));
