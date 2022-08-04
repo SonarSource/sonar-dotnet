@@ -59,6 +59,6 @@ public class AnalysisWarningsTest {
 
     Ce.Task task = TestUtils.getAnalysisWarningsTask(ORCHESTRATOR, buildResult);
     assertThat(task.getStatus()).isEqualTo(Ce.TaskStatus.SUCCESS);
-    assertThat(task.getWarningsList()).containsExactly("First message", "Second message");
+    assertThat(task.getWarningsList()).containsExactly("First message", "Second message", "BROKEN IT");
   }
 }

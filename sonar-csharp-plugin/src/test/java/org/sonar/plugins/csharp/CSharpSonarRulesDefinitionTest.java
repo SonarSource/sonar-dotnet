@@ -52,7 +52,7 @@ public class CSharpSonarRulesDefinitionTest {
     CSharpSonarRulesDefinition csharpRulesDefinition = new CSharpSonarRulesDefinition(SONAR_RUNTIME);
     csharpRulesDefinition.define(context);
 
-    assertThat(context.repositories()).hasSize(1);
+    assertThat(context.repositories()).hasSize(42);
     assertThat(context.repository("csharpsquid").rules()).isNotEmpty();
 
     Rule s100 = context.repository("csharpsquid").rule("S100");
