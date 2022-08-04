@@ -184,7 +184,8 @@ stages:
       - task: PublishTestResults@2
         inputs:
           testRunner: VSTest
-          testResultsFiles: '$(Build.SourcesDirectory)/TestResults/*.trx'
+          testResultsFiles: '*.trx'
+          searchFolder: 'TestResults'
           testRunTitle: '.NET 4.8 UTs'
 
     - job: runUnitTestsJobNet6
@@ -222,7 +223,8 @@ stages:
       - task: PublishTestResults@2
         inputs:
           testRunner: VSTest
-          testResultsFiles: '$(Build.SourcesDirectory)/TestResults/*.trx'
+          testResultsFiles: '*.trx'
+          searchFolder: '$(System.DefaultWorkingDirectory)/TestResults'
           testRunTitle: '.NET 6 UTs'
 
     - job: dotNetAnalysis
