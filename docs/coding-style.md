@@ -58,13 +58,13 @@ Variable name `sut` (System Under Test) is recommended in unit tests that really
 * Dot before an invocation `.Method()` is placed at the beginning of a line.
 * The comma separating arguments is placed at the end of a line.
 * Method declaration parameters should be on the same line. If S103 is violated, parameters should be placed each on a separate line; the first parameter should be on the same line with the declaration; the other parameters should be aligned with the first parameter.
-    ```
+    ```csharp
     public void MethodWithManyParameters(int firstParameter,
                                          string secondParameter,
                                          Function<int, string, string> complexParameter);
     ```
 * Long ternary operator statements should have `?` and `:` on separate lines, aligned with a left-most single indendation.
-    ```
+    ```csharp
     object.Property is SomeType something
     && something.AnotherProperty is OtherType other
     && other.Value == 42
@@ -72,7 +72,7 @@ Variable name `sut` (System Under Test) is recommended in unit tests that really
         : object;
     ```
 * Chained invocations and member accesses violating S103 can have a chain of properties on the first line. Every other `.Invocation()` or `.Member` should be on a separate line, aligned with a left-most single indendation.
-    ```
+    ```csharp
     object.Property.Children
         .Select(x => x.Something)
         .Where(x => x != null)
@@ -81,20 +81,20 @@ Variable name `sut` (System Under Test) is recommended in unit tests that really
         .Length;
     ```
   * Exception from this rule: Chains of assertions can have supporting properties, `.Should()` and assertion on the same line.
-    ```
+    ```csharp
     values.Should().HaveCount(2)
         .And.ContainSingle(x => x.HasConstraint(BoolConstraint.True))
         .And.ContainSingle(x => x.HasConstraint(BoolConstraint.False));
     ```
 * Method invocation arguments should be placed on the same line only when they are few and simple. Otherwise, they should be placed on separate lines. The first argument should be on a separate line, aligned with a left-most single indendation.
-    ```
+    ```csharp
     object.MethodName(
         firstArgument,
         x => x.Bar(),
         thirdArgument.Property);
     ```
   * Exception from this rule: chained LINQ queries where the alignment of parameter expressions should be right-most.
-    ```
+    ```csharp
     someEnumerable.Where(x => x.Condition1
                               && x.Condition2);
     ```
