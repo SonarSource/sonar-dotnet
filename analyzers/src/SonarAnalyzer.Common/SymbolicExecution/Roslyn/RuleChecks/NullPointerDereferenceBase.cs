@@ -36,6 +36,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
                 OperationKindEx.Invocation => context.Operation.Instance.ToInvocation().Instance,
                 OperationKindEx.PropertyReference => context.Operation.Instance.ToPropertyReference().Instance,
                 OperationKindEx.Await => context.Operation.Instance.ToAwait().Operation,
+                OperationKindEx.ArrayElementReference => context.Operation.Instance.ToArrayElementReference().ArrayReference,
                 _ => null,
             };
             if (reference != null && context.HasConstraint(ObjectConstraint.Null, reference))

@@ -56,6 +56,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         internal static IArgumentOperationWrapper ToArgument(this IOperation operation) =>
             IArgumentOperationWrapper.FromOperation(operation);
 
+        internal static IArrayElementReferenceOperationWrapper ToArrayElementReference(this IOperation operation) =>
+            IArrayElementReferenceOperationWrapper.FromOperation(operation);
+
         internal static IInvocationOperationWrapper ToInvocation(this IOperation operation) =>
             IInvocationOperationWrapper.FromOperation(operation);
 
