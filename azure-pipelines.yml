@@ -168,21 +168,23 @@ stages:
           & OpenCover.Console.exe -target:"dotnet.exe" -targetargs:"test analyzers\tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net48\SonarAnalyzer.UnitTest.dll -l trx -l console;verbosity=detailed" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.Utilities]* +[SonarAnalyzer.VisualBasic]*" -output:coverage/net48.xml -safemode:off -excludebyattribute:*.ExcludeFromCodeCoverageAttribute
           Test-ExitCode "ERROR: Unit tests for net48 FAILED."
         displayName: '.Net UTs'
-        continueOnError: true
 
       - task: PublishPipelineArtifact@1
+        condition: always()
         displayName: 'Save coverage files'
         inputs:
           path: 'coverage'
           artifact: DotnetCoverageNet48
 
       - task: PublishPipelineArtifact@1
+        condition: always()
         displayName: 'Save test results files'
         inputs:
           path: 'TestResults'
           artifact: DotnetTestResultsNet48
 
       - task: PublishTestResults@2
+        condition: always()
         inputs:
           testRunner: VSTest
           testResultsFiles: '*.trx'
