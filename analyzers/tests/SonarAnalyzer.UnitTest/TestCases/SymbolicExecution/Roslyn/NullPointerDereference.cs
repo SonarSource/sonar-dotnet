@@ -101,6 +101,13 @@ namespace Tests.Diagnostics
             throw exc;
         }
 
+        void Test_IndexerElementAccess()
+        {
+            List<int> list = null;
+            var i = list[0];   // Noncompliant
+            //      ^^^^
+        }
+
         public NullPointerDereference()
         {
             object o = null;
@@ -834,7 +841,7 @@ namespace Tests.Diagnostics
             if (!someString?.Contains("a") ?? true)
                 Console.WriteLine("It's null or doesn't contain 'a'");
             else
-                Console.WriteLine(someString.Length); // FIXME Non-compliant FP, this path is unreachable
+                Console.WriteLine(someString.Length); // Noncompliant FP, this path is unreachable
         }
     }
 }
