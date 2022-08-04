@@ -29,6 +29,17 @@ Static methods are preferred to be after instance methods.
 
 Individual members must be separated by empty line, except sequence of constants, fields and abstract members. These should not be separated by empty lines.
 
+Local Functions should always be placed at the end of a method.
+
+```csharp
+    public int MethodWithLocalFunction(int x)
+    {
+        return LocalFunction(x);
+        
+        int LocalFunction(int x) => return x;
+    }
+```
+
 ## Naming conventions
 
 Single variable lambdas should use `x` as the variable name (based on lambda calculus λx). Multi variable lambdas should use descriptive names, where `x` can be used for the main iterated item like `(x, index) => ...`. Name `c` can be used for context of Roslyn callback.
