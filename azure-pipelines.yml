@@ -190,7 +190,7 @@ stages:
           testRunner: VSTest
           testResultsFiles: '*.trx'
           searchFolder: 'TestResults'
-          testRunTitle: '$(System.JobDisplayName)'
+          testRunTitle: '$(Agent.JobName)'
 
     - job: runUnitTestsJobNet6
       displayName: '.NET 6 UTs'
