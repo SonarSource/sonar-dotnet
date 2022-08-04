@@ -185,6 +185,7 @@ stages:
 
       - task: PublishTestResults@2
         condition: always()
+        displayName: 'Publish test results'
         inputs:
           testRunner: VSTest
           testResultsFiles: '*.trx'
@@ -210,21 +211,24 @@ stages:
           & OpenCover.Console.exe -target:"dotnet.exe" -targetargs:"test analyzers\tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net6.0\SonarAnalyzer.UnitTest.dll -l trx -l console;verbosity=detailed" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.Utilities]* +[SonarAnalyzer.VisualBasic]*" -output:coverage/net6.0.xml -safemode:off -excludebyattribute:*.ExcludeFromCodeCoverageAttribute
           Test-ExitCode "ERROR: Unit tests for net6.0 FAILED."
         displayName: '.Net UTs'
-        continueOnError: true
 
       - task: PublishPipelineArtifact@1
+        condition: always()
         displayName: 'Save coverage files'
         inputs:
           path: 'coverage'
           artifact: DotnetCoverageNet6
 
       - task: PublishPipelineArtifact@1
+        condition: always()
         displayName: 'Save test results files'
         inputs:
           path: 'TestResults'
           artifact: DotnetTestResultsNet6
 
       - task: PublishTestResults@2
+        condition: always()
+        displayName: 'Publish test results'
         inputs:
           testRunner: VSTest
           testResultsFiles: '*.trx'
