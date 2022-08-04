@@ -50,6 +50,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         internal static IPropertyReferenceOperationWrapper? AsPropertyReference(this IOperation operation) =>
             operation.As(OperationKindEx.PropertyReference, IPropertyReferenceOperationWrapper.FromOperation);
 
+        internal static IAwaitOperationWrapper ToAwait(this IOperation operation) =>
+            IAwaitOperationWrapper.FromOperation(operation);
+
         internal static IArgumentOperationWrapper ToArgument(this IOperation operation) =>
             IArgumentOperationWrapper.FromOperation(operation);
 
