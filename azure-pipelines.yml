@@ -232,7 +232,7 @@ stages:
         inputs:
           testRunner: VSTest
           testResultsFiles: '*.trx'
-          searchFolder: '$(Build.SourcesDirectory)/TestResults'
+          searchFolder: 'TestResults'
           testRunTitle: '$(Agent.JobName)'
 
     - job: dotNetAnalysis
