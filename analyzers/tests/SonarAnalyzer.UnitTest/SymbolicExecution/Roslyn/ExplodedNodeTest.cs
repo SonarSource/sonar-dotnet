@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         public void Constructor_NullState_Throws()
         {
             var cfg = TestHelper.CompileCfgBodyCS();
-            ((Action)(() => new ExplodedNode(cfg.EntryBlock, null, null))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("state");
+            ((Action)(() => new ExplodedNode(cfg.EntryBlock, null, null))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("state_fail");
         }
 
         [TestMethod]
