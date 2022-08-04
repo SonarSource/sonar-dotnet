@@ -29,7 +29,7 @@ Static methods are preferred to be after instance methods.
 
 Individual members must be separated by empty line, except sequence of constants, fields and abstract members. These should not be separated by empty lines.
 
-Local Functions should always be placed at the end of a method.
+Local functions should always be placed at the end of a method.
 
 ```csharp
     public int MethodWithLocalFunction(int x)
