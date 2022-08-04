@@ -563,7 +563,7 @@ stages:
           options: -Dtest=$(testClasses) -B --settings $(mavenSettings.secureFilePath)
           publishJUnitResults: true
           testResultsFiles: '**/surefire-reports/TEST-*.xml'
-          testRunTitle: 'ITs on Windows'
+          testRunTitle: 'ITs on Windows $(testClasses)'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: '1.11'
           mavenOptions: $(MAVEN_OPTS)
