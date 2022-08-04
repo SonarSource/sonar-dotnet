@@ -108,6 +108,13 @@ namespace Tests.Diagnostics
             //      ^^^^
         }
 
+        void Test_ArrayElementAccess()
+        {
+            int[] arr = null;
+            var i = arr[0];   // Noncompliant
+            //      ^^^
+        }
+
         public NullPointerDereference()
         {
             object o = null;
