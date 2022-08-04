@@ -31,15 +31,15 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
 
         protected override ProgramState PreProcessSimple(SymbolicContext context)
         {
-            var reference = context.Operation.Instance switch
+            var reference = context.Operation.Instance.Kind switch
             {
-                { Kind: OperationKindEx.Invocation } => context.Operation.Instance.ToInvocation().Instance,
-                { Kind: OperationKindEx.PropertyReference } => context.Operation.Instance.ToPropertyReference().Instance,
+                OperationKindEx.Invocation => context.Operation.Instance.ToInvocation().Instance,
+                OperationKindEx.PropertyReference => context.Operation.Instance.ToPropertyReference().Instance,
                 _ => null,
             };
-            if (operation != null && context.HasConstraint(ObjectConstraint.Null, operation))
+            if (reference != null && context.HasConstraint(ObjectConstraint.Null, reference))
             {
-                NodeContext.ReportIssue(Diagnostic.Create(Rule, operation.Syntax.GetLocation(), operation.Syntax.ToString()));
+                NodeContext.ReportIssue(Diagnostic.Create(Rule, reference.Syntax.GetLocation(), reference.Syntax.ToString()));
             }
 
             return context.State;
