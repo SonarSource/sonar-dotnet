@@ -31,7 +31,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
 
         protected override ProgramState PreProcessSimple(SymbolicContext context)
         {
-            var operation = context.Operation.Instance switch
+            var reference = context.Operation.Instance switch
             {
                 { Kind: OperationKindEx.Invocation } => context.Operation.Instance.ToInvocation().Instance,
                 { Kind: OperationKindEx.PropertyReference } => context.Operation.Instance.ToPropertyReference().Instance,
