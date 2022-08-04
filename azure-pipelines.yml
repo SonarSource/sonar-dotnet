@@ -239,6 +239,7 @@ stages:
       displayName: '.Net Analysis'
       # This job runs the .Net code analysis and uploads to SonarCloud the test results and coverage reports generated
       # in previous jobs.
+      condition: always()
       dependsOn:
       - runUnitTestsJobNet48
       - runUnitTestsJobNet6
