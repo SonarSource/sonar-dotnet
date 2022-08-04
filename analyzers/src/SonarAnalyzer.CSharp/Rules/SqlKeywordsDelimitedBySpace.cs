@@ -103,7 +103,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool HasSqlNamespace(SyntaxList<UsingDirectiveSyntax> usings) =>
             usings.Select(x => x.Name)
-                .Any(name => SqlNamespaces.Any(sn => SyntaxFactory.AreEquivalent(name, sn)));
+                .Any(x => SqlNamespaces.Any(usingsNamespace => SyntaxFactory.AreEquivalent(x, usingsNamespace)));
 
         private sealed class StringConcatenationWalker : SafeCSharpSyntaxWalker
         {
@@ -230,8 +230,8 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             private static bool StartsWithSqlKeyword(string firstString) =>
-                firstString.Length >= SqlKeywordMinSize &&
-                SqlStartQueryKeywords.Any(s => firstString.StartsWith(s, StringComparison.OrdinalIgnoreCase));
+                firstString.Length >= SqlKeywordMinSize
+                && SqlStartQueryKeywords.Any(x => firstString.StartsWith(x, StringComparison.OrdinalIgnoreCase));
 
             /**
              * The '@' symbol is used for named parameters. The '{' and '}' symbols are used in string interpolations.
