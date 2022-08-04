@@ -224,7 +224,7 @@ stages:
         inputs:
           testRunner: VSTest
           testResultsFiles: '*.trx'
-          searchFolder: '$(System.DefaultWorkingDirectory)/TestResults'
+          searchFolder: '$(Build.SourcesDirectory)/TestResults'
           testRunTitle: '.NET 6 UTs'
 
     - job: dotNetAnalysis
