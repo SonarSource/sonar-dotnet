@@ -90,8 +90,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var namespaceDeclaration = (NamespaceDeclarationSyntax)c.Node;
                     if (namespaceDeclaration.Parent is CompilationUnitSyntax compilationUnit
-                        && (HasSqlNamespace(compilationUnit.Usings)
-                           || HasSqlNamespace(namespaceDeclaration.Usings)))
+                        && (HasSqlNamespace(compilationUnit.Usings) || HasSqlNamespace(namespaceDeclaration.Usings)))
                     {
                         var visitor = new StringConcatenationWalker(c);
                         foreach (var member in namespaceDeclaration.Members)
@@ -103,7 +102,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.NamespaceDeclaration);
 
         private static bool HasSqlNamespace(SyntaxList<UsingDirectiveSyntax> usings) =>
-            usings.Select(usingDirective => usingDirective.Name)
+            usings.Select(x => x.Name)
                 .Any(name => SqlNamespaces.Any(sn => SyntaxFactory.AreEquivalent(name, sn)));
 
         private sealed class StringConcatenationWalker : SafeCSharpSyntaxWalker
@@ -116,19 +115,19 @@ namespace SonarAnalyzer.Rules.CSharp
             public override void VisitInterpolatedStringExpression(InterpolatedStringExpressionSyntax node)
             {
                 var strings = new List<StringWrapper>();
-                foreach (var content in node.Contents)
+                foreach (var interpolatedStringContent in node.Contents)
                 {
-                    if (content is InterpolationSyntax interpolation
+                    if (interpolatedStringContent is InterpolationSyntax interpolation
                         && interpolation.Expression.FindConstantValue(context.SemanticModel) is string constantValue)
                     {
-                        strings.Add(new StringWrapper(content, constantValue));
+                        strings.Add(new StringWrapper(interpolatedStringContent, constantValue));
                     }
-                    else if (content is InterpolatedStringTextSyntax interpolatedText)
+                    else if (interpolatedStringContent is InterpolatedStringTextSyntax interpolatedText)
                     {
                         strings.Add(new StringWrapper(interpolatedText, interpolatedText.TextToken.Text));
                     }
                 }
-                CheckSpaceBetweenStrings(strings);
+                RaiseIssueIfSpaceDoesNotExistBetweenStrings(strings);
                 base.VisitInterpolatedStringExpression(node);
             }
 
@@ -157,7 +156,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    CheckSpaceBetweenStrings(strings);
+                    RaiseIssueIfSpaceDoesNotExistBetweenStrings(strings);
                 }
                 else
                 {
@@ -166,7 +165,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
 
-            private void CheckSpaceBetweenStrings(List<StringWrapper> stringWrappers)
+            private void RaiseIssueIfSpaceDoesNotExistBetweenStrings(List<StringWrapper> stringWrappers)
             {
                 for (var i = 0; i < stringWrappers.Count - 1; i++)
                 {
@@ -174,7 +173,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var secondString = stringWrappers[i + 1];
                     var secondStringText = secondString.Text;
                     if (firstStringText.Length > 0
-                        && IsAlphaNumericOrAt(firstStringText.ToCharArray().Last())
+                        && IsAlphaNumericOrAt(firstStringText.Last())
                         && secondStringText.Length > 0
                         && IsAlphaNumericOrAt(secondStringText[0]))
                     {
