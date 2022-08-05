@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
@@ -29,6 +30,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
     {
         protected SonarAnalysisContext SonarContext { get; private set; }
         protected SyntaxNodeAnalysisContext NodeContext { get; private set; }
+
+        private readonly HashSet<Location> reportedDiagnostics = new();
 
         protected abstract DiagnosticDescriptor Rule { get; }
 
@@ -46,7 +49,17 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             NodeContext = nodeContext;
         }
 
-        protected void ReportIssue(IOperationWrapperSonar operation) =>
-            NodeContext.ReportIssue(Diagnostic.Create(Rule, operation.Instance.Syntax.GetLocation()));
+        protected void ReportIssue(IOperationWrapperSonar operation, params object[] messageArgs) =>
+            ReportIssue(operation.Instance, messageArgs);
+
+        protected void ReportIssue(IOperation operation, params object[] messageArgs)
+        {
+            var location = operation.Syntax.GetLocation();
+            if (!reportedDiagnostics.Contains(location))
+            {
+                NodeContext.ReportIssue(Diagnostic.Create(Rule, location, messageArgs));
+                reportedDiagnostics.Add(location);
+            }
+        }
     }
 }

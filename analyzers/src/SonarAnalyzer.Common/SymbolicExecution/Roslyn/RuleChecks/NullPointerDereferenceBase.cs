@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
 
@@ -41,7 +39,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
             };
             if (reference != null && context.HasConstraint(ObjectConstraint.Null, reference))
             {
-                NodeContext.ReportIssue(Diagnostic.Create(Rule, reference.Syntax.GetLocation(), reference.Syntax.ToString()));
+                ReportIssue(reference, reference.Syntax.ToString());
             }
 
             return context.State;
