@@ -36,7 +36,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
 
         public static ProgramState Process(SymbolicContext context, IRecursivePatternOperationWrapper recursive)
         {
-            if (recursive.DeclaredSymbol is null)
+            if( recursive.DeclaredSymbol is null)
             {
                 return context.State;
             }

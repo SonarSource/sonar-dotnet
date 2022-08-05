@@ -190,5 +190,44 @@ Tag(""End"", arg);";
             validator.ValidateTag("Ex", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.TagValues("End").Should().HaveCount(2).And.OnlyContain(x => x != null && x.HasConstraint(TestConstraint.First));   // 2x because value has different states
         }
+
+        [TestMethod]
+        public void DeclarationPattern_SetsNotNull_NoPreviousConstraint()
+        {
+            const string code = @"
+if (arg is Exception value)
+{
+    Tag(""Value"", value);
+    Tag(""ArgNotNull"", arg);
+}
+Tag(""End"", arg);";
+            var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+            validator.ValidateContainsOperation(OperationKind.DeclarationPattern);
+            validator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("ArgNotNull", x => x.Should().BeNull());  // ToDo: MMF-2563 should have NotNull instead
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.OnlyContain(x => x == null);       // 2x because value has different states
+        }
+
+        [TestMethod]
+        public void DeclarationPattern_SetsNotNull_PreservePreviousConstraint()
+        {
+            const string code = @"
+if (arg is Exception value)
+{
+    Tag(""Value"", value);
+    Tag(""ArgNotNull"", arg);
+}
+Tag(""End"", arg);";
+            var setter = new PreProcessTestCheck(OperationKind.ParameterReference, x => x.SetSymbolConstraint(x.Operation.Instance.TrackedSymbol(), TestConstraint.First));
+            var validator = SETestContext.CreateCS(code, ", object arg", setter).Validator;
+            validator.ValidateContainsOperation(OperationKind.DeclarationPattern);
+            validator.ValidateTag("Value", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());
+            validator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("ArgNotNull", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());
+            validator.ValidateTag("ArgNotNull", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeFalse());     // ToDo: MMF-2563 should BeTrue() instead
+            validator.TagValues("End").Should().HaveCount(2).And.OnlyContain(x => x != null && x.HasConstraint(TestConstraint.First));  // 2x because value has different states
+        }
+
     }
 }
