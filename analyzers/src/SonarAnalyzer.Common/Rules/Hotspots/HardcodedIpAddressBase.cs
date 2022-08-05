@@ -36,23 +36,23 @@ namespace SonarAnalyzer.Rules
     {
         protected const string DiagnosticId = "S1313";
         private const string MessageFormat = "Make sure using this hardcoded IP address '{0}' is safe here.";
-        private const int IPv4AddressParts  = 4;
-        private const string IPv4Broadcast = "255.255.255.255";
+        protected const int IPv4AddressParts  = 4;
+        protected const string IPv4Broadcast = "255.255.255.255";
 
-        private readonly string[] ignoredVariableNames =
-            {
-                "VERSION",
-                "ASSEMBLY",
-            };
+        protected readonly string[] ignoredVariableNames =
+        {
+            "VERSION",
+            "ASSEMBLY",
+        };
 
-        private readonly DiagnosticDescriptor rule;
+        protected readonly DiagnosticDescriptor rule;
 
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract TSyntaxKind SyntaxKind { get; }
 
-        protected abstract string GetAssignedVariableName(TLiteralExpression stringLiteral);
+        protected abstract string GetAssignedVariableName(SyntaxNode stringLiteral);
         protected abstract string GetValueText(TLiteralExpression literalExpression);
-        protected abstract bool HasAttributes(TLiteralExpression literalExpression);
+        protected abstract bool HasAttributes(SyntaxNode literalExpression);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
@@ -72,21 +72,19 @@ namespace SonarAnalyzer.Rules
             var stringLiteral = (TLiteralExpression)context.Node;
             var literalValue = GetValueText(stringLiteral);
 
-            if (literalValue == IPv4Broadcast
-                || literalValue.StartsWith("2.5.")                                  // Looks like OID
-                || !IPAddress.TryParse(literalValue, out var address)
-                || IPAddress.IsLoopback(address)
-                || address.GetAddressBytes().All(x => x == 0)                       // Nonroutable 0.0.0.0 or 0::0
-                || (address.AddressFamily == AddressFamily.InterNetwork
-                    && literalValue.Count(x => x == '.') != IPv4AddressParts - 1)
-                || (GetAssignedVariableName(stringLiteral) is { } variableName
-                    && ignoredVariableNames.Any(x => variableName.IndexOf(x, StringComparison.InvariantCultureIgnoreCase) >= 0))
-                || HasAttributes(stringLiteral))
+            if (literalValue != IPv4Broadcast
+                && !literalValue.StartsWith("2.5.")                                  // Looks like OID
+                && IPAddress.TryParse(literalValue, out var address)
+                && !IPAddress.IsLoopback(address)
+                && !address.GetAddressBytes().All(x => x == 0)                       // Nonroutable 0.0.0.0 or 0::0
+                && (address.AddressFamily != AddressFamily.InterNetwork
+                    || literalValue.Count(x => x == '.') == IPv4AddressParts - 1)
+                && (!(GetAssignedVariableName(stringLiteral) is { } variableName)
+                    || !ignoredVariableNames.Any(x => variableName.IndexOf(x, StringComparison.InvariantCultureIgnoreCase) >= 0))
+                && !HasAttributes(stringLiteral))
             {
-                return;
+                context.ReportIssue(Diagnostic.Create(rule, stringLiteral.GetLocation(), literalValue));
             }
-
-            context.ReportIssue(Diagnostic.Create(rule, stringLiteral.GetLocation(), literalValue));
         }
     }
 }
