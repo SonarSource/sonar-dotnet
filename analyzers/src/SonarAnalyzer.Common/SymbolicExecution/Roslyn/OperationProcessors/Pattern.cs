@@ -50,8 +50,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
             }
         }
 
-
-
         private static BoolConstraint PatternBoolConstraint(SymbolicValue value, BoolConstraint pattern) =>
             value.HasConstraint<BoolConstraint>()
                 ? BoolConstraint.From(value.HasConstraint(pattern))
