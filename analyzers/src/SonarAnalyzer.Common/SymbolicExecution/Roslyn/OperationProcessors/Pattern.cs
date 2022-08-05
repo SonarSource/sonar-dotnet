@@ -34,10 +34,22 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
             ? context.SetOperationConstraint(newConstraint)
             : context.State;
 
-        public static ProgramState Process(SymbolicContext context, IRecursivePatternOperationWrapper recursive) =>
-            recursive.DeclaredSymbol is null
-                ? context.State
-                : context.SetSymbolConstraint(recursive.DeclaredSymbol, ObjectConstraint.NotNull);
+        public static ProgramState Process(SymbolicContext context, IRecursivePatternOperationWrapper recursive)
+        {
+            if (recursive.DeclaredSymbol is null)
+            {
+                return context.State;
+            }
+            else
+            {
+                var state = new IOperationWrapperSonar(recursive.WrappedOperation).Parent.AsIsPattern() is { } parentIsPattern
+                                && parentIsPattern.Value.TrackedSymbol() is { } sourceSymbol
+                                ? context.State.SetSymbolValue(recursive.DeclaredSymbol, context.State[sourceSymbol])  // ToDo: MMF-2563 should define relation between tested and declared symbol
+                                : context.State;
+                return state.SetSymbolConstraint(recursive.DeclaredSymbol, ObjectConstraint.NotNull);
+            }
+        }
+
 
 
         private static BoolConstraint PatternBoolConstraint(SymbolicValue value, BoolConstraint pattern) =>

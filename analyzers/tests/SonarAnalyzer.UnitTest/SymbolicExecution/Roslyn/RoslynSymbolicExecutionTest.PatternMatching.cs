@@ -19,6 +19,7 @@
  */
 
 using SonarAnalyzer.SymbolicExecution.Constraints;
+using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
@@ -119,7 +120,7 @@ Tag(""Value"", value);";
         }
 
         [TestMethod]
-        public void RecursivePattern_SetsNotNull_FirstLevel()
+        public void RecursivePattern_SetsNotNull_FirstLevel_NoPreviousConstraint()
         {
             const string code = @"
 if (arg is { } value)
@@ -131,11 +132,29 @@ Tag(""End"", arg);";
             var validator = SETestContext.CreateCS(code, ", object arg").Validator;
             validator.ValidateContainsOperation(OperationKind.RecursivePattern);
             validator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-            validator.ValidateTag("ArgNotNull", x => x.Should().BeNull());      // FIXME: HasConstraint NotNull ?
+            validator.ValidateTag("ArgNotNull", x => x.Should().BeNull());  // ToDo: MMF-2563 should have NotNull instead
             validator.TagValues("End").Should().HaveCount(2)
                 .And.OnlyContain(x => x == null);       // 2x because value has different states
-                //.And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.Null))
-                //.And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
+        }
+
+        [TestMethod]
+        public void RecursivePattern_SetsNotNull_FirstLevel_PreservePreviousConstraint()
+        {
+            const string code = @"
+if (arg is { } value)
+{
+    Tag(""Value"", value);
+    Tag(""ArgNotNull"", arg);
+}
+Tag(""End"", arg);";
+            var setter = new PreProcessTestCheck(OperationKind.ParameterReference, x => x.SetSymbolConstraint(x.Operation.Instance.TrackedSymbol(), TestConstraint.First));
+            var validator = SETestContext.CreateCS(code, ", object arg", setter).Validator;
+            validator.ValidateContainsOperation(OperationKind.RecursivePattern);
+            validator.ValidateTag("Value", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());
+            validator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("ArgNotNull", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());
+            validator.ValidateTag("ArgNotNull", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeFalse());     // ToDo: MMF-2563 should BeTrue() instead
+            validator.TagValues("End").Should().HaveCount(2).And.OnlyContain(x => x != null && x.HasConstraint(TestConstraint.First));  // 2x because value has different states
         }
 
         [TestMethod]
@@ -145,17 +164,14 @@ Tag(""End"", arg);";
 if (arg is Exception { Message: { } value })
 {
     Tag(""Value"", value);
-    Tag(""ArgNotNull"", arg);
 }
 Tag(""End"", arg);";
-            var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+            var setter = new PreProcessTestCheck(OperationKind.ParameterReference, x => x.SetSymbolConstraint(x.Operation.Instance.TrackedSymbol(), TestConstraint.First));
+            var validator = SETestContext.CreateCS(code, ", object arg", setter).Validator;
             validator.ValidateContainsOperation(OperationKind.RecursivePattern);
             validator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-            validator.ValidateTag("ArgNotNull", x => x.Should().BeNull());      // FIXME: HasConstraint NotNull ?
-            validator.TagValues("End").Should().HaveCount(2)
-                .And.OnlyContain(x => x == null);       // 2x because value has different states
-                //.And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.Null))
-                //.And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("Value", x => x.HasConstraint(TestConstraint.First).Should().BeFalse("Constraint from source value should not be propagated to child property"));
+            validator.TagValues("End").Should().HaveCount(2).And.OnlyContain(x => x != null && x.HasConstraint(TestConstraint.First));   // 2x because value has different states
         }
     }
 }
