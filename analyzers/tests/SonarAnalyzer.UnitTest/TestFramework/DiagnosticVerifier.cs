@@ -196,7 +196,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                     var expectedIssuesDescription = fileWithIssues.IssueLocations.Select(i => $"{Environment.NewLine}Line: {i.LineNumber}, Type: {IssueType(i.IsPrimary)}, Id: '{i.IssueId}'");
                     issuesString.AppendLine(expectedIssuesDescription.JoinStr(string.Empty));
                 }
-                throw new UnexpectedDiagnosticException(firstLocation.FileName, firstLocation.IssueLocations.First().LineNumber, $"{languageVersion}: Issue(s) expected but not raised in file(s):{issuesString}");
+                throw new MissingDiagnosticException(firstLocation.FileName,
+                                                     firstLocation.IssueLocations.First().LineNumber,
+                                                     $"{languageVersion}: Issue(s) expected but not raised in file(s):{issuesString}");
             }
         }
 

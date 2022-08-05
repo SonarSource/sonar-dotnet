@@ -28,21 +28,20 @@ namespace SonarAnalyzer.UnitTest.TestFramework
     /// <summary>
     /// This exception class is used in unit tests that analyze some code to report a violation.
     /// It differs from classical unit test failure reporting in that it injects in its call
-    /// stack a location that correspond to the source file that is being analyzed (when analysing
+    /// stack a location that correspond to the source file that is being analyzed (when analyzing
     /// inline code snippets, this location will be incorrect).
     /// As a result, in the UI, we can just click on this line to directly open the right file at
     /// the right place to see the actual issue.
     /// </summary>
-    ///
-    public class UnexpectedDiagnosticException : Exception
+    public abstract class TestfileDiagnosticException : Exception
     {
         private readonly string additionalLine;
 
-        public UnexpectedDiagnosticException(Location location, string message) : this(location.GetLineSpan().Path, location.GetLineNumberToReport(), message)
+        protected TestfileDiagnosticException(Location location, string message) : this(location.GetLineSpan().Path, location.GetLineNumberToReport(), message)
         {
         }
 
-        public UnexpectedDiagnosticException(string filePath, int lineNumber, string message) : base(message)
+        protected TestfileDiagnosticException(string filePath, int lineNumber, string message) : base(message)
         {
             if (string.IsNullOrEmpty(filePath))
             {
@@ -83,5 +82,17 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 $"at Test Case in {path}:line {line}";
         }
 #endif
+    }
+
+    /// <inheritdoc/>
+    public sealed class UnexpectedDiagnosticException : TestfileDiagnosticException
+    {
+        public UnexpectedDiagnosticException(Location location, string message) : base(location, message) { }
+    }
+
+    /// <inheritdoc/>
+    public sealed class MissingDiagnosticException : TestfileDiagnosticException
+    {
+        public MissingDiagnosticException(string filePath, int lineNumber, string message) : base(filePath, lineNumber, message) { }
     }
 }

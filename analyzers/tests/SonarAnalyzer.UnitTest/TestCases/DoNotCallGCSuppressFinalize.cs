@@ -23,7 +23,7 @@ namespace Tests.Diagnostics
         public void Dispose()
         {
             Dispose(true);
-            GC.SuppressFinalize(this); // Noncompliant
+            GC.SuppressFinalize(this); // Compliant
         }
 
         protected virtual void Dispose(bool disposing)
