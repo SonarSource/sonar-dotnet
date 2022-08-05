@@ -36,7 +36,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
             : context.State;
 
         public static ProgramState Process(SymbolicContext context, IRecursivePatternOperationWrapper recursive) =>
-            recursive.DeclaredSymbol is null ? context.State : SetDeclarationNotNull(context, recursive.DeclaredSymbol);
+            SetDeclarationNotNull(context, recursive.DeclaredSymbol);
 
         public static ProgramState Process(SymbolicContext context, IDeclarationPatternOperationWrapper declaration) =>
             SetDeclarationNotNull(context, declaration.DeclaredSymbol);
@@ -48,10 +48,17 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
 
         private static ProgramState SetDeclarationNotNull(SymbolicContext context, ISymbol declaredSymbol)
         {
-            var state = context.Operation.Parent.AsIsPattern() is { } parentIsPattern && parentIsPattern.Value.TrackedSymbol() is { } sourceSymbol
-                ? context.State.SetSymbolValue(declaredSymbol, context.State[sourceSymbol])  // ToDo: MMF-2563 should define relation between tested and declared symbol
-                : context.State;
-            return state.SetSymbolConstraint(declaredSymbol, ObjectConstraint.NotNull);
+            if (declaredSymbol == null)
+            {
+                return context.State;
+            }
+            else
+            {
+                var state = context.Operation.Parent.AsIsPattern() is { } parentIsPattern && parentIsPattern.Value.TrackedSymbol() is { } sourceSymbol
+                    ? context.State.SetSymbolValue(declaredSymbol, context.State[sourceSymbol])  // ToDo: MMF-2563 should define relation between tested and declared symbol
+                    : context.State;
+                return state.SetSymbolConstraint(declaredSymbol, ObjectConstraint.NotNull);
+            }
         }
     }
 }

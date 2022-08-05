@@ -227,5 +227,21 @@ Tag(""End"", arg);";
             validator.ValidateTag("ArgNotNull", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeFalse());     // ToDo: MMF-2563 should BeTrue() instead
             validator.TagValues("End").Should().HaveCount(2).And.OnlyContain(x => x != null && x.HasConstraint(TestConstraint.First));  // 2x because value has different states
         }
+
+        [TestMethod]
+        public void DeclarationPattern_Discard_DoesNotFail()
+        {
+            const string code = @"
+if (arg is Exception _)
+{
+    Tag(""Arg"", arg);
+}
+Tag(""End"", arg);";
+            var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+            validator.ValidateContainsOperation(OperationKind.DeclarationPattern);
+            validator.ValidateTag("Arg", x => x.Should().BeNull());  // ToDo: MMF-2563 should have NotNull instead
+            validator.TagValues("End").Should().HaveCount(1).And.OnlyContain(x => x == null);
+        }
+
     }
 }
