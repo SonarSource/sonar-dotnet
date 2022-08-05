@@ -153,13 +153,15 @@ stages:
       strategy:
         matrix:
           Net48:
-            frameworkMoniker: 'net48'
-            artifactName: 'DotnetCoverageNet48'
+            FrameworkMoniker: 'net48'
+            ArtifactName: 'DotnetCoverageNet48'
+            TestResultsArtifactName: 'DotnetTestResultsNet48'
           Net60:
-            frameworkMoniker: 'net6.0'
-            artifactName: 'DotnetCoverageNet6'
+            FrameworkMoniker: 'net6.0'
+            CoverageArtifactName: 'DotnetCoverageNet6'
+            TestResultsArtifactName: 'DotnetTestResultsNet6'
 
-      displayName: '.NET UTs $(Agent.JobName)'
+      displayName: '.NET UTs'
 
       steps:
       - task: DownloadPipelineArtifact@2
@@ -174,7 +176,7 @@ stages:
           CreateFolder("coverage")
           CreateFolder("TestResults")
 
-          & OpenCover.Console.exe -target:"dotnet.exe" -targetargs:"test analyzers\tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\$(frameworkMoniker)\SonarAnalyzer.UnitTest.dll -l trx -l console;verbosity=detailed" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.VisualBasic]*" -output:coverage/$(frameworkMoniker).xml -safemode:off -excludebyattribute:*.ExcludeFromCodeCoverageAttribute
+          & OpenCover.Console.exe -target:"dotnet.exe" -targetargs:"test analyzers\tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\$(FrameworkMoniker)\SonarAnalyzer.UnitTest.dll -l trx -l console;verbosity=detailed" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.VisualBasic]*" -output:coverage/$(FrameworkMoniker).xml -safemode:off -excludebyattribute:*.ExcludeFromCodeCoverageAttribute
           Test-ExitCode "ERROR: Unit tests for net48 FAILED."
         displayName: '.Net UTs'
 
@@ -183,7 +185,7 @@ stages:
         displayName: 'Save coverage files'
         inputs:
           path: 'coverage'
-          artifact: $(artifactName)
+          artifact: $(CoverageArtifactName)
 
       - task: PublishPipelineArtifact@1
         condition: always()
