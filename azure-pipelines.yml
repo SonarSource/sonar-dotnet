@@ -170,16 +170,27 @@ stages:
         displayName: '.Net UTs'
 
       - task: PublishPipelineArtifact@1
+        condition: always()
         displayName: 'Save coverage files'
         inputs:
           path: 'coverage'
           artifact: DotnetCoverageNet48
 
       - task: PublishPipelineArtifact@1
+        condition: always()
         displayName: 'Save test results files'
         inputs:
           path: 'TestResults'
           artifact: DotnetTestResultsNet48
+
+      - task: PublishTestResults@2
+        condition: always()
+        displayName: 'Publish test results'
+        inputs:
+          testRunner: VSTest
+          testResultsFiles: '*.trx'
+          searchFolder: 'TestResults'
+          testRunTitle: '$(Agent.JobName)'
 
     - job: runUnitTestsJobNet6
       displayName: '.NET 6 UTs'
@@ -202,21 +213,33 @@ stages:
         displayName: '.Net UTs'
 
       - task: PublishPipelineArtifact@1
+        condition: always()
         displayName: 'Save coverage files'
         inputs:
           path: 'coverage'
           artifact: DotnetCoverageNet6
 
       - task: PublishPipelineArtifact@1
+        condition: always()
         displayName: 'Save test results files'
         inputs:
           path: 'TestResults'
           artifact: DotnetTestResultsNet6
 
+      - task: PublishTestResults@2
+        condition: always()
+        displayName: 'Publish test results'
+        inputs:
+          testRunner: VSTest
+          testResultsFiles: '*.trx'
+          searchFolder: 'TestResults'
+          testRunTitle: '$(Agent.JobName)'
+
     - job: dotNetAnalysis
       displayName: '.Net Analysis'
       # This job runs the .Net code analysis and uploads to SonarCloud the test results and coverage reports generated
       # in previous jobs.
+      condition: always()
       dependsOn:
       - runUnitTestsJobNet48
       - runUnitTestsJobNet6
@@ -466,7 +489,7 @@ stages:
           options: -B --settings $(mavenSettings.secureFilePath) -Pcoverage -Dsonar.projectVersion=$(SONAR_PROJECT_VERSION)
           publishJUnitResults: true
           testResultsFiles: '**/surefire-reports/TEST-*.xml'
-          testRunTitle: 'UTs on Windows'
+          testRunTitle: '$(Agent.JobName)'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: '1.11'
           mavenOptions: $(MAVEN_OPTS)
@@ -541,7 +564,7 @@ stages:
           options: -Dtest=$(testClasses) -B --settings $(mavenSettings.secureFilePath)
           publishJUnitResults: true
           testResultsFiles: '**/surefire-reports/TEST-*.xml'
-          testRunTitle: 'ITs on Windows'
+          testRunTitle: '$(Agent.JobName)'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: '1.11'
           mavenOptions: $(MAVEN_OPTS)
