@@ -38,21 +38,22 @@ namespace SonarAnalyzer.UnitTest.TestFramework
     {
         private readonly string additionalLine;
 
-        public UnexpectedDiagnosticException(Location location, string message) : base(message)
+        public UnexpectedDiagnosticException(Location location, string message) : this(location.GetLineSpan().Path, location.GetLineNumberToReport(), message)
         {
-            var locationPath = location.GetLineSpan().Path;
-            if (string.IsNullOrEmpty(locationPath))
+        }
+
+        public UnexpectedDiagnosticException(string filePath, int lineNumber, string message) : base(message)
+        {
+            if (string.IsNullOrEmpty(filePath))
             {
                 return;
             }
-
-            var testCasePath = GetTestCasePath(locationPath);
-            var testCaseLine = location.GetLineNumberToReport();
+            var testCasePath = GetTestCasePath(filePath);
 
 #if NETFRAMEWORK
-            additionalLine = NetFrameworkFormatter.GetAdditionalLine(testCasePath, testCaseLine) + Environment.NewLine;
+            additionalLine = NetFrameworkFormatter.GetAdditionalLine(testCasePath, lineNumber) + Environment.NewLine;
 #else
-            additionalLine = NetCoreFormatter.GetAdditionalLine(testCasePath, testCaseLine) + Environment.NewLine;
+            additionalLine = NetCoreFormatter.GetAdditionalLine(testCasePath, lineNumber) + Environment.NewLine;
 #endif
         }
 

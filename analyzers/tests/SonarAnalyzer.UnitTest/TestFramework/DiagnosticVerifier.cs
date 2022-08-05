@@ -188,13 +188,15 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             if (expectedIssuesPerFile.Any(x => x.IssueLocations.Any()))
             {
                 var issuesString = new StringBuilder();
+                FileIssueLocations firstLocation = null;
                 foreach (var fileWithIssues in expectedIssuesPerFile.Where(x => x.IssueLocations.Any()).OrderBy(x => x.IssueLocations.First().Start))
                 {
+                    firstLocation ??= fileWithIssues;
                     issuesString.Append($"{Environment.NewLine}File: {fileWithIssues.FileName}");
                     var expectedIssuesDescription = fileWithIssues.IssueLocations.Select(i => $"{Environment.NewLine}Line: {i.LineNumber}, Type: {IssueType(i.IsPrimary)}, Id: '{i.IssueId}'");
                     issuesString.AppendLine(expectedIssuesDescription.JoinStr(string.Empty));
                 }
-                Execute.Assertion.FailWith($"{languageVersion}: Issue(s) expected but not raised in file(s):{issuesString}");
+                throw new UnexpectedDiagnosticException(firstLocation.FileName, firstLocation.IssueLocations.First().LineNumber, $"{languageVersion}: Issue(s) expected but not raised in file(s):{issuesString}");
             }
         }
 
