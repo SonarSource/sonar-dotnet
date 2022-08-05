@@ -25,8 +25,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
 {
     internal static class IsNull
     {
-        public static ProgramState Process(SymbolicContext context, IIsNullOperationWrapper isPattern) =>
-            context.State[isPattern.Operand] is { } value
+        public static ProgramState Process(SymbolicContext context, IIsNullOperationWrapper isNull) =>
+            context.State[isNull.Operand] is { } value
             && value.HasConstraint<ObjectConstraint>()
                 ? context.SetOperationConstraint(BoolConstraint.From(value.HasConstraint(ObjectConstraint.Null)))
                 : context.State;
