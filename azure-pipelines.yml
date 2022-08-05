@@ -497,7 +497,6 @@ stages:
           sqMavenPluginVersionChoice: 'latest'
 
       - task: SonarCloudPublish@1
-        condition: always()
         displayName: 'Code Analysis - Publish QG'
         inputs:
           pollingTimeoutSec: '300'
