@@ -161,16 +161,19 @@ Tag(""End"", arg);";
         public void RecursivePattern_SetsNotNull_Nested()
         {
             const string code = @"
-if (arg is Exception { Message: { } value })
+if (arg is Exception { Message: { } msg } ex)
 {
-    Tag(""Value"", value);
+    Tag(""Msg"", msg);
+    Tag(""Ex"", ex);
 }
 Tag(""End"", arg);";
             var setter = new PreProcessTestCheck(OperationKind.ParameterReference, x => x.SetSymbolConstraint(x.Operation.Instance.TrackedSymbol(), TestConstraint.First));
             var validator = SETestContext.CreateCS(code, ", object arg", setter).Validator;
             validator.ValidateContainsOperation(OperationKind.RecursivePattern);
-            validator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-            validator.ValidateTag("Value", x => x.HasConstraint(TestConstraint.First).Should().BeFalse("Constraint from source value should not be propagated to child property"));
+            validator.ValidateTag("Msg", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("Msg", x => x.HasConstraint(TestConstraint.First).Should().BeFalse("Constraint from source value should not be propagated to child property"));
+            validator.ValidateTag("Ex", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());
+            validator.ValidateTag("Ex", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.TagValues("End").Should().HaveCount(2).And.OnlyContain(x => x != null && x.HasConstraint(TestConstraint.First));   // 2x because value has different states
         }
     }
