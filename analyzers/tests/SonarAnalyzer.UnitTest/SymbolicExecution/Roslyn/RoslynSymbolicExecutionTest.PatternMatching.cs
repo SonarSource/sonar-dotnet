@@ -120,6 +120,21 @@ Tag(""Value"", value);";
         }
 
         [TestMethod]
+        public void RecursivePattern_NoSymbol_DoesNothing()
+        {
+            const string code = @"
+if (arg is { })
+{
+    Tag(""ArgNotNull"", arg);
+}
+Tag(""End"", arg);";
+            var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+            validator.ValidateContainsOperation(OperationKind.RecursivePattern);
+            validator.ValidateTag("ArgNotNull", x => x.Should().BeNull());  // ToDo: Should learn that it is not null too
+            validator.TagValues("End").Should().HaveCount(1).And.OnlyContain(x => x == null);
+        }
+
+        [TestMethod]
         public void RecursivePattern_SetsNotNull_FirstLevel_NoPreviousConstraint()
         {
             const string code = @"
@@ -133,8 +148,7 @@ Tag(""End"", arg);";
             validator.ValidateContainsOperation(OperationKind.RecursivePattern);
             validator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.ValidateTag("ArgNotNull", x => x.Should().BeNull());  // ToDo: MMF-2563 should have NotNull instead
-            validator.TagValues("End").Should().HaveCount(2)
-                .And.OnlyContain(x => x == null);       // 2x because value has different states
+            validator.TagValues("End").Should().HaveCount(2).And.OnlyContain(x => x == null);       // 2x because value has different states
         }
 
         [TestMethod]
