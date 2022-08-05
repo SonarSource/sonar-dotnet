@@ -154,7 +154,7 @@ stages:
         matrix:
           Net48:
             FrameworkMoniker: 'net48'
-            ArtifactName: 'DotnetCoverageNet48'
+            CoverageArtifactName: 'DotnetCoverageNet48'
             TestResultsArtifactName: 'DotnetTestResultsNet48'
           Net60:
             FrameworkMoniker: 'net6.0'
