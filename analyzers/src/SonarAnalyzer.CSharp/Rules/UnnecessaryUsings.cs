@@ -85,6 +85,12 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             foreach (var usingDirective in usingDirectives)
             {
+                // This will create some FNs but will kill noise from FPs.
+                // For more info see issue: https://github.com/SonarSource/sonar-dotnet/issues/5946
+                if (usingDirective.GetFirstToken().IsKind(SyntaxKind.GlobalKeyword))
+                {
+                    return;
+                }
                 if (context.SemanticModel.GetSymbolInfo(usingDirective.Name).Symbol is INamespaceSymbol namespaceSymbol
                     && !necessaryNamespaces.Any(usedNamespace => usedNamespace.IsSameNamespace(namespaceSymbol)))
                 {
