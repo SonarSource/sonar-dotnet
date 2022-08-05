@@ -176,7 +176,7 @@ End Class").Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticExcepti
     private bool a = true;   // Noncompliant - FN
     private bool b = true;   // Noncompliant - FN
     private bool c = true;
-}").Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage(
+}").Invoking(x => x.Verify()).Should().Throw<MissingDiagnosticException>().WithMessage(
 @"CSharp7: Issue(s) expected but not raised in file(s):
 File: File.cs
 Line: 3, Type: primary, Id: ''
@@ -214,7 +214,7 @@ Line: 4, Type: primary, Id: ''
     private bool a = true;     // Noncompliant - FN in Second.cs
 }"))
             .WithConcurrentAnalysis(false)
-            .Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage(
+            .Invoking(x => x.Verify()).Should().Throw<MissingDiagnosticException>().WithMessage(
 @"CSharp7: Issue(s) expected but not raised in file(s):
 File: File.cs
 Line: 3, Type: primary, Id: ''
@@ -228,7 +228,7 @@ Line: 3, Type: primary, Id: ''
         {
             var builder = WithSnippetCS("// Noncompliant - FN");
             // Concurrent analysis by-default automatically generates concurrent files - File.Concurrent.cs
-            builder.Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage(
+            builder.Invoking(x => x.Verify()).Should().Throw<MissingDiagnosticException>().WithMessage(
     @"CSharp7: Issue(s) expected but not raised in file(s):
 File: File.cs
 Line: 1, Type: primary, Id: ''
@@ -237,7 +237,7 @@ File: File.Concurrent.cs
 Line: 1, Type: primary, Id: ''
 ");
             // When AutogenerateConcurrentFiles is turned off, only the provided snippet is analyzed
-            builder.WithAutogenerateConcurrentFiles(false).Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage(
+            builder.WithAutogenerateConcurrentFiles(false).Invoking(x => x.Verify()).Should().Throw<MissingDiagnosticException>().WithMessage(
     @"CSharp7: Issue(s) expected but not raised in file(s):
 File: File.cs
 Line: 1, Type: primary, Id: ''
@@ -332,7 +332,7 @@ Line: 1, Type: primary, Id: ''
         public void Verify_Snippets() =>
             DummyCS.AddSnippet("public class First { } // Noncompliant [first]  - not raised")
                 .AddSnippet("public class Second { } // Noncompliant [second] - not raised")
-                .Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage(
+                .Invoking(x => x.Verify()).Should().Throw<MissingDiagnosticException>().WithMessage(
 @"CSharp7: Issue(s) expected but not raised in file(s):
 File: snippet1.cs
 Line: 1, Type: primary, Id: 'first'

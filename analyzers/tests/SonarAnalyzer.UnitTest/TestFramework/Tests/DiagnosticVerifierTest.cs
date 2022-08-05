@@ -165,7 +165,7 @@ public class UnexpectedRemainingCurlyBrace
 
         [TestMethod]
         public void ExpectedIssuesNotRaised() =>
-            VerifyThrows<AssertFailedException>(@"
+            VerifyThrows<MissingDiagnosticException>(@"
 public class ExpectedIssuesNotRaised
 {
     public void Test(bool a, bool b) // Noncompliant [MyId0]
@@ -186,7 +186,7 @@ public class ExpectedIssuesNotRaised
                 .AddPaths("ExpectedIssuesNotRaised.cs", "ExpectedIssuesNotRaised2.cs")
                 .WithConcurrentAnalysis(false)
                 .Invoking(x => x.Verify())
-                .Should().Throw<AssertFailedException>().WithMessage(
+                .Should().Throw<MissingDiagnosticException>().WithMessage(
                     @"CSharp*: Issue(s) expected but not raised in file(s):" + Environment.NewLine +
                     "File: DiagnosticsVerifier\\ExpectedIssuesNotRaised.cs" + Environment.NewLine +
                     "Line: 3, Type: primary, Id: 'MyId0'" + Environment.NewLine +
