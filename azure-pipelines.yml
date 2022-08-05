@@ -177,7 +177,7 @@ stages:
           CreateFolder("TestResults")
 
           & OpenCover.Console.exe -target:"dotnet.exe" -targetargs:"test analyzers\tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\$(FrameworkMoniker)\SonarAnalyzer.UnitTest.dll -l trx -l console;verbosity=detailed" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.VisualBasic]*" -output:coverage/$(FrameworkMoniker).xml -safemode:off -excludebyattribute:*.ExcludeFromCodeCoverageAttribute
-          Test-ExitCode "ERROR: Unit tests for net48 FAILED."
+          Test-ExitCode "ERROR: Unit tests for $(FrameworkMoniker) FAILED."
         displayName: '.Net UTs'
 
       - task: PublishPipelineArtifact@1
