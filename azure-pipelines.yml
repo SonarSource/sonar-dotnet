@@ -149,8 +149,17 @@ stages:
     stageDependencies: build
 
     jobs:
-    - job: runUnitTestsJobNet48
-      displayName: '.NET 4.8 UTs'
+    - job: runUnitTestsDotNet
+      strategy:
+        matrix:
+          Net48:
+            frameworkMoniker: 'net48'
+            artifactName: 'DotnetCoverageNet48'
+          Net60:
+            frameworkMoniker: 'net6.0'
+            artifactName: 'DotnetCoverageNet6'
+
+      displayName: '.NET UTs $(Agent.JobName)'
 
       steps:
       - task: DownloadPipelineArtifact@2
@@ -165,7 +174,7 @@ stages:
           CreateFolder("coverage")
           CreateFolder("TestResults")
 
-          & OpenCover.Console.exe -target:"dotnet.exe" -targetargs:"test analyzers\tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net48\SonarAnalyzer.UnitTest.dll -l trx -l console;verbosity=detailed" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.VisualBasic]*" -output:coverage/net48.xml -safemode:off -excludebyattribute:*.ExcludeFromCodeCoverageAttribute
+          & OpenCover.Console.exe -target:"dotnet.exe" -targetargs:"test analyzers\tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\$(frameworkMoniker)\SonarAnalyzer.UnitTest.dll -l trx -l console;verbosity=detailed" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.VisualBasic]*" -output:coverage/$(frameworkMoniker).xml -safemode:off -excludebyattribute:*.ExcludeFromCodeCoverageAttribute
           Test-ExitCode "ERROR: Unit tests for net48 FAILED."
         displayName: '.Net UTs'
 
@@ -174,7 +183,7 @@ stages:
         displayName: 'Save coverage files'
         inputs:
           path: 'coverage'
-          artifact: DotnetCoverageNet48
+          artifact: $(artifactName)
 
       - task: PublishPipelineArtifact@1
         condition: always()
@@ -192,57 +201,13 @@ stages:
           searchFolder: 'TestResults'
           testRunTitle: '$(Agent.JobName)'
 
-    - job: runUnitTestsJobNet6
-      displayName: '.NET 6 UTs'
-
-      steps:
-      - task: DownloadPipelineArtifact@2
-        displayName: 'Download binaries to test'
-        inputs:
-          artifact: TestBinaries
-          targetPath: 'analyzers\tests\SonarAnalyzer.UnitTest\bin'
-
-      - powershell: |
-          . .\scripts\utils.ps1
-
-          CreateFolder("coverage")
-          CreateFolder("TestResults")
-
-          & OpenCover.Console.exe -target:"dotnet.exe" -targetargs:"test analyzers\tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net6.0\SonarAnalyzer.UnitTest.dll -l trx -l console;verbosity=detailed" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.VisualBasic]*" -output:coverage/net6.0.xml -safemode:off -excludebyattribute:*.ExcludeFromCodeCoverageAttribute
-          Test-ExitCode "ERROR: Unit tests for net6.0 FAILED."
-        displayName: '.Net UTs'
-
-      - task: PublishPipelineArtifact@1
-        condition: always()
-        displayName: 'Save coverage files'
-        inputs:
-          path: 'coverage'
-          artifact: DotnetCoverageNet6
-
-      - task: PublishPipelineArtifact@1
-        condition: always()
-        displayName: 'Save test results files'
-        inputs:
-          path: 'TestResults'
-          artifact: DotnetTestResultsNet6
-
-      - task: PublishTestResults@2
-        condition: always()
-        displayName: 'Publish test results'
-        inputs:
-          testRunner: VSTest
-          testResultsFiles: '*.trx'
-          searchFolder: 'TestResults'
-          testRunTitle: '$(Agent.JobName)'
-
     - job: dotNetAnalysis
       displayName: '.Net Analysis'
       # This job runs the .Net code analysis and uploads to SonarCloud the test results and coverage reports generated
       # in previous jobs.
       condition: always()
       dependsOn:
-      - runUnitTestsJobNet48
-      - runUnitTestsJobNet6
+      - runUnitTestsDotNet
       steps:
       - task: NuGetToolInstaller@1
         displayName: "Install NuGet"
