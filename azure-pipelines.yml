@@ -192,7 +192,7 @@ stages:
         displayName: 'Save test results files'
         inputs:
           path: 'TestResults'
-          artifact: DotnetTestResultsNet48
+          artifact: $(TestResultsArtifactName)
 
       - task: PublishTestResults@2
         condition: always()
