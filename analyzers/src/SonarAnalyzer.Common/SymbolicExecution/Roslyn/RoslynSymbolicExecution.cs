@@ -250,6 +250,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 OperationKindEx.AnonymousObjectCreation => Creation.Process(context),
                 OperationKindEx.Binary => Binary.Process(context, As(IBinaryOperationWrapper.FromOperation)),
                 OperationKindEx.Conversion => Conversion.Process(context, As(IConversionOperationWrapper.FromOperation)),
+                OperationKindEx.DeclarationPattern => Pattern.Process(context, As(IDeclarationPatternOperationWrapper.FromOperation)),
                 OperationKindEx.DefaultValue => Literal.Process(context, As(IDefaultValueOperationWrapper.FromOperation)),
                 OperationKindEx.DelegateCreation => Creation.Process(context),
                 OperationKindEx.DynamicObjectCreation => Creation.Process(context),

@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn.Checks;
 using StyleCop.Analyzers.Lightup;
@@ -34,25 +35,23 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
             ? context.SetOperationConstraint(newConstraint)
             : context.State;
 
-        public static ProgramState Process(SymbolicContext context, IRecursivePatternOperationWrapper recursive)
-        {
-            if( recursive.DeclaredSymbol is null)
-            {
-                return context.State;
-            }
-            else
-            {
-                var state = new IOperationWrapperSonar(recursive.WrappedOperation).Parent.AsIsPattern() is { } parentIsPattern
-                                && parentIsPattern.Value.TrackedSymbol() is { } sourceSymbol
-                                ? context.State.SetSymbolValue(recursive.DeclaredSymbol, context.State[sourceSymbol])  // ToDo: MMF-2563 should define relation between tested and declared symbol
-                                : context.State;
-                return state.SetSymbolConstraint(recursive.DeclaredSymbol, ObjectConstraint.NotNull);
-            }
-        }
+        public static ProgramState Process(SymbolicContext context, IRecursivePatternOperationWrapper recursive) =>
+            recursive.DeclaredSymbol is null ? context.State : SetDeclarationNotNull(context, recursive.DeclaredSymbol);
+
+        public static ProgramState Process(SymbolicContext context, IDeclarationPatternOperationWrapper declaration) =>
+            SetDeclarationNotNull(context, declaration.DeclaredSymbol);
 
         private static BoolConstraint PatternBoolConstraint(SymbolicValue value, BoolConstraint pattern) =>
             value.HasConstraint<BoolConstraint>()
                 ? BoolConstraint.From(value.HasConstraint(pattern))
                 : null; // We cannot take conclusive decision
+
+        private static ProgramState SetDeclarationNotNull(SymbolicContext context, ISymbol declaredSymbol)
+        {
+            var state = context.Operation.Parent.AsIsPattern() is { } parentIsPattern && parentIsPattern.Value.TrackedSymbol() is { } sourceSymbol
+                ? context.State.SetSymbolValue(declaredSymbol, context.State[sourceSymbol])  // ToDo: MMF-2563 should define relation between tested and declared symbol
+                : context.State;
+            return state.SetSymbolConstraint(declaredSymbol, ObjectConstraint.NotNull);
+        }
     }
 }
