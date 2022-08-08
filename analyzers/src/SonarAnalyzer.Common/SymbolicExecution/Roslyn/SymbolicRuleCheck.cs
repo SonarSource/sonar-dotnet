@@ -55,10 +55,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         protected void ReportIssue(IOperation operation, params object[] messageArgs)
         {
             var location = operation.Syntax.GetLocation();
-            if (!reportedDiagnostics.Contains(location))
+            if (reportedDiagnostics.Add(location))
             {
                 NodeContext.ReportIssue(Diagnostic.Create(Rule, location, messageArgs));
-                reportedDiagnostics.Add(location);
             }
         }
     }
