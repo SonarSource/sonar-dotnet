@@ -149,8 +149,19 @@ stages:
     stageDependencies: build
 
     jobs:
-    - job: runUnitTestsJobNet48
-      displayName: '.NET 4.8 UTs'
+    - job: runUnitTestsDotNet
+      strategy:
+        matrix:
+          Net48:
+            FrameworkMoniker: 'net48'
+            CoverageArtifactName: 'DotnetCoverageNet48'
+            TestResultsArtifactName: 'DotnetTestResultsNet48'
+          Net60:
+            FrameworkMoniker: 'net6.0'
+            CoverageArtifactName: 'DotnetCoverageNet6'
+            TestResultsArtifactName: 'DotnetTestResultsNet6'
+
+      displayName: '.NET UTs'
 
       steps:
       - task: DownloadPipelineArtifact@2
@@ -165,8 +176,8 @@ stages:
           CreateFolder("coverage")
           CreateFolder("TestResults")
 
-          & OpenCover.Console.exe -target:"dotnet.exe" -targetargs:"test analyzers\tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net48\SonarAnalyzer.UnitTest.dll -l trx -l console;verbosity=detailed" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.VisualBasic]*" -output:coverage/net48.xml -safemode:off -excludebyattribute:*.ExcludeFromCodeCoverageAttribute
-          Test-ExitCode "ERROR: Unit tests for net48 FAILED."
+          & OpenCover.Console.exe -target:"dotnet.exe" -targetargs:"test analyzers\tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\$(FrameworkMoniker)\SonarAnalyzer.UnitTest.dll -l trx -l console;verbosity=detailed" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.VisualBasic]*" -output:coverage/$(FrameworkMoniker).xml -safemode:off -excludebyattribute:*.ExcludeFromCodeCoverageAttribute
+          Test-ExitCode "ERROR: Unit tests for $(FrameworkMoniker) FAILED."
         displayName: '.Net UTs'
 
       - task: PublishPipelineArtifact@1
@@ -174,57 +185,14 @@ stages:
         displayName: 'Save coverage files'
         inputs:
           path: 'coverage'
-          artifact: DotnetCoverageNet48
+          artifact: $(CoverageArtifactName)
 
       - task: PublishPipelineArtifact@1
         condition: always()
         displayName: 'Save test results files'
         inputs:
           path: 'TestResults'
-          artifact: DotnetTestResultsNet48
-
-      - task: PublishTestResults@2
-        condition: always()
-        displayName: 'Publish test results'
-        inputs:
-          testRunner: VSTest
-          testResultsFiles: '*.trx'
-          searchFolder: 'TestResults'
-          testRunTitle: '$(Agent.JobName)'
-
-    - job: runUnitTestsJobNet6
-      displayName: '.NET 6 UTs'
-
-      steps:
-      - task: DownloadPipelineArtifact@2
-        displayName: 'Download binaries to test'
-        inputs:
-          artifact: TestBinaries
-          targetPath: 'analyzers\tests\SonarAnalyzer.UnitTest\bin'
-
-      - powershell: |
-          . .\scripts\utils.ps1
-
-          CreateFolder("coverage")
-          CreateFolder("TestResults")
-
-          & OpenCover.Console.exe -target:"dotnet.exe" -targetargs:"test analyzers\tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net6.0\SonarAnalyzer.UnitTest.dll -l trx -l console;verbosity=detailed" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.VisualBasic]*" -output:coverage/net6.0.xml -safemode:off -excludebyattribute:*.ExcludeFromCodeCoverageAttribute
-          Test-ExitCode "ERROR: Unit tests for net6.0 FAILED."
-        displayName: '.Net UTs'
-
-      - task: PublishPipelineArtifact@1
-        condition: always()
-        displayName: 'Save coverage files'
-        inputs:
-          path: 'coverage'
-          artifact: DotnetCoverageNet6
-
-      - task: PublishPipelineArtifact@1
-        condition: always()
-        displayName: 'Save test results files'
-        inputs:
-          path: 'TestResults'
-          artifact: DotnetTestResultsNet6
+          artifact: $(TestResultsArtifactName)
 
       - task: PublishTestResults@2
         condition: always()
@@ -241,8 +209,7 @@ stages:
       # in previous jobs.
       condition: always()
       dependsOn:
-      - runUnitTestsJobNet48
-      - runUnitTestsJobNet6
+      - runUnitTestsDotNet
       steps:
       - task: NuGetToolInstaller@1
         displayName: "Install NuGet"
