@@ -381,7 +381,7 @@ namespace Tests.Diagnostics
         private static object _foo8;
         private const object NullConst = null;
         private readonly object NullReadOnly = null;
-        public static event EventHandler e;
+        public static event EventHandler MyEvent;
 
         void DoNotLearnFromReadonly()
         {
@@ -645,7 +645,7 @@ namespace Tests.Diagnostics
 
         void EventInvocation()
         {
-            e(this, EventArgs.Empty); // Compliant FN. Invocation on event reference e
+            MyEvent(this, EventArgs.Empty); // Compliant FN. Invocation on event reference MyEvent
         }
 
         string TryCatch1()
