@@ -180,7 +180,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static string AddionalMessageHints(SemanticModel semanticModel, VariableDeclaratorSyntax declaratorSyntax)
         {
             var result = string.Empty;
-            if (declaratorSyntax.Parent is VariableDeclarationSyntax { Type: { IsVar: true } typeSyntax })
+            if (declaratorSyntax is { Parent: VariableDeclarationSyntax { Type: { IsVar: true } typeSyntax } })
             {
                 result = $", and replace 'var' with '{semanticModel.GetTypeInfo(typeSyntax).Type.ToMinimalDisplayString(semanticModel, typeSyntax.SpanStart)}'";
             }
