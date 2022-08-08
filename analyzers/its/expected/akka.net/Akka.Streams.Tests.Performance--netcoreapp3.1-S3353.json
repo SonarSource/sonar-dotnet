@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3353",
-"message":  "Add the 'const' modifier to 'i'.",
+"message":  "Add the 'const' modifier to 'i', and replace 'var' with 'int'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams.Tests.Performance\FusedGraphsBenchmark.cs",
 "region":  {

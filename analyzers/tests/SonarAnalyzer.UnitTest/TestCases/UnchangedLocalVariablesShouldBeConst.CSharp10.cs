@@ -1,4 +1,5 @@
-﻿using System;
+﻿#nullable enable
+using System;
 
 int target = 32; // Noncompliant {{Add the 'const' modifier to 'target'.}}
 //  ^^^^^^
@@ -8,4 +9,4 @@ const int alreadyConst = 32;
 (int i, usedTarget) = (target, target);
 (usedTarget, int k) = (alreadyConst, alreadyConst);
 
-var s = $"This is { nameof(target) }"; // Noncompliant {{Add the 'const' modifier to 's', and replace 'var' with 'string'.}}
+var s = $"This is { nameof(target) }"; // Noncompliant {{Add the 'const' modifier to 's', and replace 'var' with 'string?'.}}

@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3353",
-"message":  "Add the 'const' modifier to 'alternateIndex'.",
+"message":  "Add the 'const' modifier to 'alternateIndex', and replace 'var' with 'int'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
 "region":  {

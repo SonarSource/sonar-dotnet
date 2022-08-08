@@ -15,7 +15,7 @@
 },
 {
 "id":  "S3353",
-"message":  "Add the 'const' modifier to 'bufferSizeLogKey'.",
+"message":  "Add the 'const' modifier to 'bufferSizeLogKey', and replace 'var' with 'string'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
 "region":  {

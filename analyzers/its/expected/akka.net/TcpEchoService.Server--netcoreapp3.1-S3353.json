@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3353",
-"message":  "Add the 'const' modifier to 'port'.",
+"message":  "Add the 'const' modifier to 'port', and replace 'var' with 'int'.",
 "location":  {
 "uri":  "sources\akka.net\src\examples\TcpEchoService.Server\Program.cs",
 "region":  {

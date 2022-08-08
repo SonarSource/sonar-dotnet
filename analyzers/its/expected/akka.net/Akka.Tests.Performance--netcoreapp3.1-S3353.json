@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3353",
-"message":  "Add the 'const' modifier to 'warmupCount'.",
+"message":  "Add the 'const' modifier to 'warmupCount', and replace 'var' with 'long'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\DispatcherThroughputSpecBase.cs",
 "region":  {

@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3353",
-"message":  "Add the 'const' modifier to 'weight'.",
+"message":  "Add the 'const' modifier to 'weight', and replace 'var' with 'int'.",
 "location":  {
 "uri":  "sources\Net5\Net5Samples\RecordWithStaticHelper\Program.cs",
 "region":  {
