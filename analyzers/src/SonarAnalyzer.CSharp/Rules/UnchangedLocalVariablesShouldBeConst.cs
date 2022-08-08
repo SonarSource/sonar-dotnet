@@ -176,6 +176,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 declaratorSyntax.Identifier.GetLocation(),
                 declaratorSyntax.Identifier.ValueText,
                 AddionalMessageHints(c.SemanticModel, declaratorSyntax)));
+
         private static string AddionalMessageHints(SemanticModel semanticModel, VariableDeclaratorSyntax declaratorSyntax)
         {
             var result = string.Empty;
@@ -184,7 +185,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 result = $", and replace 'var' with '{semanticModel.GetTypeInfo(typeSyntax).Type.ToMinimalDisplayString(semanticModel, typeSyntax.SpanStart)}'";
             }
             if (!semanticModel.Compilation.IsAtLeastLanguageVersion(LanguageVersionEx.CSharp10)
-                && declaratorSyntax is { Initializer: { Value: { } initializer } }
+                && declaratorSyntax is { Initializer.Value: { } initializer }
                 && initializer.DescendantNodesAndSelf().Any(x => x.IsKind(SyntaxKind.InterpolatedStringExpression)))
             {
                 result += ", and use string concatenation instead of an interpolated string";
