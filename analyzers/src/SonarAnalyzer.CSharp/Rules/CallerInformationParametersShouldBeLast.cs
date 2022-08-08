@@ -32,37 +32,27 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class CallerInformationParametersShouldBeLast : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3343";
+        private const string DiagnosticId = "S3343";
         private const string MessageFormat = "Move '{0}' to the end of the parameter list.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
-                ReportOnMethodDeclarationViolation,
+                ReportOnViolation,
                 SyntaxKind.MethodDeclaration,
-                SyntaxKind.ConstructorDeclaration);
-            context.RegisterSyntaxNodeActionInNonGenerated(ReportOnLocalFunctionDeclarationViolation, SyntaxKindEx.LocalFunctionStatement);
-        }
+                SyntaxKind.ConstructorDeclaration,
+                SyntaxKindEx.LocalFunctionStatement);
 
-        private static void ReportOnLocalFunctionDeclarationViolation(SyntaxNodeAnalysisContext context)
+        private static void ReportOnViolation(SyntaxNodeAnalysisContext context)
         {
-            var localFunction = (LocalFunctionStatementSyntaxWrapper)context.Node;
-            ReportOnViolation(context, localFunction.SyntaxNode, localFunction.ParameterList);
-        }
+            var methodDeclaration = context.Node;
+            var parameterList = LocalFunctionStatementSyntaxWrapper.IsInstance(methodDeclaration)
+                ? ((LocalFunctionStatementSyntaxWrapper)methodDeclaration).ParameterList
+                : ((BaseMethodDeclarationSyntax)methodDeclaration).ParameterList;
 
-        private static void ReportOnMethodDeclarationViolation(SyntaxNodeAnalysisContext context)
-        {
-            var methodDeclaration = (BaseMethodDeclarationSyntax)context.Node;
-            ReportOnViolation(context, methodDeclaration, methodDeclaration.ParameterList);
-        }
-
-        private static void ReportOnViolation(SyntaxNodeAnalysisContext context, SyntaxNode methodDeclaration, ParameterListSyntax parameterList)
-        {
             if (parameterList is null or { Parameters.Count: 0 })
             {
                 return;
@@ -83,7 +73,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     if (noCallerInfoParameter != null && HasIdentifier(parameter))
                     {
-                        context.ReportIssue(Diagnostic.Create(rule, parameter.GetLocation(), parameter.Identifier.Text));
+                        context.ReportIssue(Diagnostic.Create(Rule, parameter.GetLocation(), parameter.Identifier.Text));
                     }
                 }
                 else
