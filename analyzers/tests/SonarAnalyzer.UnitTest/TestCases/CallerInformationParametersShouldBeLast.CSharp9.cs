@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 void Local1([CallerFilePath] string callerFilePath = "") { }
 void Local2(string other, [CallerFilePath] string callerFilePath = "") { }
-void Local3([CallerFilePath] string callerFilePath = "", string other = "") { } // FN
+void Local3([CallerFilePath] string callerFilePath = "", string other = "") { } // Noncompliant
 
 class TestProgram
 {
@@ -15,7 +15,9 @@ class TestProgram
         Local4("");
         void Local1([CallerFilePath] string callerFilePath = "") { }
         void Local2(string other, [CallerFilePath] string callerFilePath = "") { }
-        void Local3([CallerFilePath] string callerFilePath = "", string other = "") { } // FN
+        void Local3([CallerFilePath] string callerFilePath = "", string other = "") { } // Noncompliant
         static void Local4(string first, [CallerFilePath] string callerFilePath = "", [CallerLineNumber] int callerLineNumber = 0, string other = "") { }
+        //                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        //                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^@-1
     }
 }

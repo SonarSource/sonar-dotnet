@@ -12,6 +12,6 @@ namespace Tests.Diagnostics
         public void Method4([CallerFilePath],string other) { }
         public void Method5([CallerFilePath] string, string other) { }
         public void Method6([CallerFilePathAttribute string parameter) { }
-        public void Method6([CallerLineNumber][CallerFilePath]string callerFilePath, string other) { } // Noncompliant
+        public void Method6([CallerLineNumber][CallerFilePath]string callerFilePath, string other) { } //Noncompliant
     }
 }

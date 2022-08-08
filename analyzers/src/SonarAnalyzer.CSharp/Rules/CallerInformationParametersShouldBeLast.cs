@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -42,15 +43,27 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-                ReportOnViolation,
+                ReportOnMethodDeclarationViolation,
                 SyntaxKind.MethodDeclaration,
                 SyntaxKind.ConstructorDeclaration);
+            context.RegisterSyntaxNodeActionInNonGenerated(ReportOnLocalFunctionDeclarationViolation, SyntaxKindEx.LocalFunctionStatement);
         }
 
-        private static void ReportOnViolation(SyntaxNodeAnalysisContext context)
+        private static void ReportOnLocalFunctionDeclarationViolation(SyntaxNodeAnalysisContext context)
+        {
+            var localFunction = (LocalFunctionStatementSyntaxWrapper)context.Node;
+            ReportOnViolation(context, localFunction.SyntaxNode, localFunction.ParameterList);
+        }
+
+        private static void ReportOnMethodDeclarationViolation(SyntaxNodeAnalysisContext context)
         {
             var methodDeclaration = (BaseMethodDeclarationSyntax)context.Node;
-            if (methodDeclaration.ParameterList == null)
+            ReportOnViolation(context, methodDeclaration, methodDeclaration.ParameterList);
+        }
+
+        private static void ReportOnViolation(SyntaxNodeAnalysisContext context, SyntaxNode methodDeclaration, ParameterListSyntax parameterList)
+        {
+            if (parameterList is null or { Parameters.Count: 0 })
             {
                 return;
             }
@@ -64,15 +77,13 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             ParameterSyntax noCallerInfoParameter = null;
-            foreach (var parameter in methodDeclaration.ParameterList.Parameters.Reverse())
+            foreach (var parameter in parameterList.Parameters.Reverse())
             {
                 if (parameter.AttributeLists.GetAttributes(KnownType.CallerInfoAttributes, context.SemanticModel).Any())
                 {
-                    if (noCallerInfoParameter != null &&
-                        HasIdentifier(parameter))
+                    if (noCallerInfoParameter != null && HasIdentifier(parameter))
                     {
-                        context.ReportIssue(Diagnostic.Create(rule, parameter.GetLocation(),
-                            parameter.Identifier.Text));
+                        context.ReportIssue(Diagnostic.Create(rule, parameter.GetLocation(), parameter.Identifier.Text));
                     }
                 }
                 else
