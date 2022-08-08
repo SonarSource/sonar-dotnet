@@ -673,6 +673,21 @@ namespace Tests.Diagnostics
             }
             return o.ToString();
         }
+
+        void TryCatch4(object arg)
+        {
+            object a = null;
+            try
+            {
+                ToString();           // Visit catch the first time
+                var b = new object(); // Introduce new "state" to force the second visit of catch
+                ToString();           // Visit catch the second time
+            }
+            catch
+            {
+                a.ToString(); // Noncompliant - only one issue should be reported
+            }
+        }
     }
 
     static class Extensions
