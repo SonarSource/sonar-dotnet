@@ -262,5 +262,30 @@ Tag(""End"", arg);";
             validator.ValidateTag("Arg", x => x.HasConstraint<ObjectConstraint>().Should().BeFalse("'var' only propagates existing constraints"));
             validator.TagValues("End").Should().HaveCount(2).And.OnlyContain(x => x != null && x.HasConstraint(TestConstraint.First));     // 2x because value has different states
         }
+
+        [TestMethod]
+        public void DeclarationPattern_Var_Deconstruction_DoesNotSetConstraint()
+        {
+            const string code = @"
+if (arg is var (a, b))
+{
+    Tag(""A"", a);
+    Tag(""B"", b);
+}
+if (arg is (var c, var d))
+{
+    Tag(""C"", c);
+    Tag(""D"", d);
+}
+Tag(""End"", arg);";
+            var setter = new PreProcessTestCheck(OperationKind.ParameterReference, x => x.SetSymbolConstraint(x.Operation.Instance.TrackedSymbol(), TestConstraint.First));
+            var validator = SETestContext.CreateCS(code, ", object arg", setter).Validator;
+            validator.ValidateContainsOperation(OperationKind.DeclarationPattern);
+            validator.ValidateTag("A", x => x.Should().BeNull());
+            validator.ValidateTag("B", x => x.Should().BeNull());
+            validator.ValidateTag("C", x => x.Should().BeNull());
+            validator.ValidateTag("D", x => x.Should().BeNull());
+            validator.ValidateTag("End", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());
+        }
     }
 }
