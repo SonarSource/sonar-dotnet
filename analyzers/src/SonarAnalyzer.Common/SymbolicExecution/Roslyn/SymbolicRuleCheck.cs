@@ -47,7 +47,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public void Init(SonarAnalysisContext sonarContext, SyntaxNodeAnalysisContext nodeContext)
         {
             SonarContext = sonarContext;
-            this.context = nodeContext;
+            context = nodeContext;
         }
 
         protected void ReportIssue(IOperationWrapperSonar operation, params object[] messageArgs) =>
