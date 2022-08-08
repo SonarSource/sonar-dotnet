@@ -190,5 +190,102 @@ Tag(""End"", arg);";
             validator.ValidateTag("Ex", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.TagValues("End").Should().HaveCount(2).And.OnlyContain(x => x != null && x.HasConstraint(TestConstraint.First));   // 2x because value has different states
         }
+
+        [TestMethod]
+        public void DeclarationPattern_SetsNotNull_NoPreviousConstraint()
+        {
+            const string code = @"
+if (arg is Exception value)
+{
+    Tag(""Value"", value);
+    Tag(""ArgNotNull"", arg);
+}
+Tag(""End"", arg);";
+            var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+            validator.ValidateContainsOperation(OperationKind.DeclarationPattern);
+            validator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("ArgNotNull", x => x.Should().BeNull());  // ToDo: MMF-2563 should have NotNull instead
+            validator.TagValues("End").Should().HaveCount(2).And.OnlyContain(x => x == null);       // 2x because value has different states
+        }
+
+        [TestMethod]
+        public void DeclarationPattern_SetsNotNull_PreservePreviousConstraint()
+        {
+            const string code = @"
+if (arg is Exception value)
+{
+    Tag(""Value"", value);
+    Tag(""ArgNotNull"", arg);
+}
+Tag(""End"", arg);";
+            var setter = new PreProcessTestCheck(OperationKind.ParameterReference, x => x.SetSymbolConstraint(x.Operation.Instance.TrackedSymbol(), TestConstraint.First));
+            var validator = SETestContext.CreateCS(code, ", object arg", setter).Validator;
+            validator.ValidateContainsOperation(OperationKind.DeclarationPattern);
+            validator.ValidateTag("Value", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());
+            validator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("ArgNotNull", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());
+            validator.ValidateTag("ArgNotNull", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeFalse());     // ToDo: MMF-2563 should BeTrue() instead
+            validator.TagValues("End").Should().HaveCount(2).And.OnlyContain(x => x != null && x.HasConstraint(TestConstraint.First));  // 2x because value has different states
+        }
+
+        [TestMethod]
+        public void DeclarationPattern_Discard_DoesNotFail()
+        {
+            const string code = @"
+if (arg is Exception _)
+{
+    Tag(""Arg"", arg);
+}
+Tag(""End"", arg);";
+            var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+            validator.ValidateContainsOperation(OperationKind.DeclarationPattern);
+            validator.ValidateTag("Arg", x => x.Should().BeNull());  // ToDo: MMF-2563 should have NotNull instead
+            validator.TagValues("End").Should().HaveCount(1).And.OnlyContain(x => x == null);
+        }
+
+        [TestMethod]
+        public void DeclarationPattern_Var_PreservePreviousConstraint_DoesNotSetNotNullConstraint()
+        {
+            const string code = @"
+if (arg is var value)
+{
+    Tag(""Value"", value);
+    Tag(""Arg"", arg);
+}
+Tag(""End"", arg);";
+            var setter = new PreProcessTestCheck(OperationKind.ParameterReference, x => x.SetSymbolConstraint(x.Operation.Instance.TrackedSymbol(), TestConstraint.First));
+            var validator = SETestContext.CreateCS(code, ", object arg", setter).Validator;
+            validator.ValidateContainsOperation(OperationKind.DeclarationPattern);
+            validator.ValidateTag("Value", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());
+            validator.ValidateTag("Value", x => x.HasConstraint<ObjectConstraint>().Should().BeFalse("'var' only propagates existing constraints"));
+            validator.ValidateTag("Arg", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());
+            validator.ValidateTag("Arg", x => x.HasConstraint<ObjectConstraint>().Should().BeFalse("'var' only propagates existing constraints"));
+            validator.TagValues("End").Should().HaveCount(2).And.OnlyContain(x => x != null && x.HasConstraint(TestConstraint.First));     // 2x because value has different states
+        }
+
+        [TestMethod]
+        public void DeclarationPattern_Var_Deconstruction_DoesNotSetConstraint()
+        {
+            const string code = @"
+if (arg is var (a, b))
+{
+    Tag(""A"", a);
+    Tag(""B"", b);
+}
+if (arg is (var c, var d))
+{
+    Tag(""C"", c);
+    Tag(""D"", d);
+}
+Tag(""End"", arg);";
+            var setter = new PreProcessTestCheck(OperationKind.ParameterReference, x => x.SetSymbolConstraint(x.Operation.Instance.TrackedSymbol(), TestConstraint.First));
+            var validator = SETestContext.CreateCS(code, ", object arg", setter).Validator;
+            validator.ValidateContainsOperation(OperationKind.DeclarationPattern);
+            validator.ValidateTag("A", x => x.Should().BeNull());
+            validator.ValidateTag("B", x => x.Should().BeNull());
+            validator.ValidateTag("C", x => x.Should().BeNull());
+            validator.ValidateTag("D", x => x.Should().BeNull());
+            validator.ValidateTag("End", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());
+        }
     }
 }
