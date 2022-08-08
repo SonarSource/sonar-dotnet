@@ -25,26 +25,29 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class CallerInformationParametersShouldBeLastTest
     {
+        private readonly VerifierBuilder verifier = new VerifierBuilder<CallerInformationParametersShouldBeLast>();
+
         [TestMethod]
         public void CallerInformationParametersShouldBeLast() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\CallerInformationParametersShouldBeLast.cs", new CallerInformationParametersShouldBeLast());
+            verifier.AddPaths("CallerInformationParametersShouldBeLast.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void CallerInformationParametersShouldBeLast_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CallerInformationParametersShouldBeLast.CSharp9.cs", new CallerInformationParametersShouldBeLast());
+            verifier.AddPaths("CallerInformationParametersShouldBeLast.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
         [TestMethod]
         public void CallerInformationParametersShouldBeLast_CSharpPreview() =>
-            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\CallerInformationParametersShouldBeLast.CSharpPreview.cs", new CallerInformationParametersShouldBeLast());
+            verifier.AddPaths("CallerInformationParametersShouldBeLast.CSharpPreview.cs").WithOptions(ParseOptionsHelper.CSharpPreview).Verify();
+
 #endif
 
         [TestMethod]
         public void CallerInformationParametersShouldBeLastInvalidSyntax() =>
-            new VerifierBuilder<CallerInformationParametersShouldBeLast>()
-                .AddPaths("CallerInformationParametersShouldBeLastInvalidSyntax.cs")
-                .WithErrorBehavior(CompilationErrorBehavior.Ignore)
-                .WithConcurrentAnalysis(false)
-                .VerifyNoIssueReported();
+            verifier.AddPaths("CallerInformationParametersShouldBeLastInvalidSyntax.cs")
+                    .WithErrorBehavior(CompilationErrorBehavior.Ignore)
+                    .WithConcurrentAnalysis(false)
+                    .VerifyNoIssueReported();
     }
 }
