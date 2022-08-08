@@ -243,5 +243,24 @@ Tag(""End"", arg);";
             validator.TagValues("End").Should().HaveCount(1).And.OnlyContain(x => x == null);
         }
 
+        [TestMethod]
+        public void DeclarationPattern_Var_PreservePreviousConstraint_DoesNotSetNotNullConstraint()
+        {
+            const string code = @"
+if (arg is var value)
+{
+    Tag(""Value"", value);
+    Tag(""Arg"", arg);
+}
+Tag(""End"", arg);";
+            var setter = new PreProcessTestCheck(OperationKind.ParameterReference, x => x.SetSymbolConstraint(x.Operation.Instance.TrackedSymbol(), TestConstraint.First));
+            var validator = SETestContext.CreateCS(code, ", object arg", setter).Validator;
+            validator.ValidateContainsOperation(OperationKind.DeclarationPattern);
+            validator.ValidateTag("Value", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());
+            validator.ValidateTag("Value", x => x.HasConstraint<ObjectConstraint>().Should().BeFalse("'var' only propagates existing constraints"));
+            validator.ValidateTag("Arg", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());
+            validator.ValidateTag("Arg", x => x.HasConstraint<ObjectConstraint>().Should().BeFalse("'var' only propagates existing constraints"));
+            validator.TagValues("End").Should().HaveCount(2).And.OnlyContain(x => x != null && x.HasConstraint(TestConstraint.First));     // 2x because value has different states
+        }
     }
 }
