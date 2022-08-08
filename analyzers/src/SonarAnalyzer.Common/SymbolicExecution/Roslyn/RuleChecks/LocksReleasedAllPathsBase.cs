@@ -72,7 +72,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
         {
             var collector = new LockAcquireReleaseCollector();
             var walker = CreateSyntaxWalker(collector);
-            foreach (var child in NodeContext.Node.ChildNodes())
+            foreach (var child in Node.ChildNodes())
             {
                 walker.SafeVisit(child);
             }

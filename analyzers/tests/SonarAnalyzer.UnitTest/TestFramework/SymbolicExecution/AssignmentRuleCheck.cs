@@ -67,7 +67,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 
         // This RuleCheck executes ONLY on methods that contains at least one invocation
         public override bool ShouldExecute() =>
-            NodeContext.Node.DescendantNodes().Any(x => x.IsKind(SyntaxKind.InvocationExpression));
+            Node.DescendantNodes().Any(x => x.IsKind(SyntaxKind.InvocationExpression));
     }
 
     internal class ThrowAssignmentRuleCheck : AssignmentRuleCheck
