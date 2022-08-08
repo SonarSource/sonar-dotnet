@@ -29,10 +29,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
     public abstract class SymbolicRuleCheck : SymbolicCheck
     {
         protected SonarAnalysisContext SonarContext { get; private set; }
-        protected SyntaxNode Node => nodeContext.Node;
+        protected SyntaxNode Node => context.Node;
 
         private readonly HashSet<Location> reportedDiagnostics = new();
-        private SyntaxNodeAnalysisContext nodeContext;
+        private SyntaxNodeAnalysisContext context;
 
         protected abstract DiagnosticDescriptor Rule { get; }
 
@@ -47,7 +47,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public void Init(SonarAnalysisContext sonarContext, SyntaxNodeAnalysisContext nodeContext)
         {
             SonarContext = sonarContext;
-            this.nodeContext = nodeContext;
+            this.context = nodeContext;
         }
 
         protected void ReportIssue(IOperationWrapperSonar operation, params object[] messageArgs) =>
@@ -58,7 +58,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             var location = operation.Syntax.GetLocation();
             if (reportedDiagnostics.Add(location))
             {
-                nodeContext.ReportIssue(Diagnostic.Create(Rule, location, messageArgs));
+                context.ReportIssue(Diagnostic.Create(Rule, location, messageArgs));
             }
         }
     }
