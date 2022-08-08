@@ -25,24 +25,27 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class UnchangedLocalVariablesShouldBeConstTest
     {
+        private readonly VerifierBuilder verifier = new VerifierBuilder<UnchangedLocalVariablesShouldBeConst>();
+
         [TestMethod]
         public void UnchangedLocalVariablesShouldBeConst() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\UnchangedLocalVariablesShouldBeConst.cs", new UnchangedLocalVariablesShouldBeConst());
+            verifier.AddPaths("UnchangedLocalVariablesShouldBeConst.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void UnchangedLocalVariablesShouldBeConst_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnchangedLocalVariablesShouldBeConst.CSharp9.cs", new UnchangedLocalVariablesShouldBeConst());
+            verifier.AddPaths("UnchangedLocalVariablesShouldBeConst.CSharp9.cs").WithTopLevelStatements().Verify();
 
         [TestMethod]
         public void UnchangedLocalVariablesShouldBeConst_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\UnchangedLocalVariablesShouldBeConst.CSharp10.cs", new UnchangedLocalVariablesShouldBeConst());
+            verifier.AddPaths("UnchangedLocalVariablesShouldBeConst.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).WithTopLevelStatements().Verify();
 
 #endif
 
         [TestMethod]
         public void UnchangedLocalVariablesShouldBeConst_InvalidCode() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            verifier.AddSnippet(@"
 // invalid code
 public void Test_TypeThatCannotBeConst(int arg)
 {
@@ -53,6 +56,6 @@ public void Test_TypeThatCannotBeConst(int arg)
 public void (int arg)
 {
     int intVar = 1; // Noncompliant
-}", new UnchangedLocalVariablesShouldBeConst(), CompilationErrorBehavior.Ignore);
+}").WithErrorBehavior(CompilationErrorBehavior.Ignore).Verify();
     }
 }
