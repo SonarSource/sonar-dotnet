@@ -64,9 +64,7 @@ namespace SonarAnalyzer.Rules
         protected bool IsHardcodedIp(string literalValue, SyntaxNode node) =>
             literalValue != IPv4Broadcast
             && !literalValue.StartsWith("2.5.")                                  // Looks like OID
-            && IPAddress.TryParse(literalValue, out var address)
-            && !IPAddress.IsLoopback(address)
-            && !address.GetAddressBytes().All(x => x == 0)                       // Nonroutable 0.0.0.0 or 0::0
+            && IsRoutableNonLoopbackIPAddress(literalValue, out var address)
             && (address.AddressFamily != AddressFamily.InterNetwork
                 || literalValue.Count(x => x == '.') == IPv4AddressParts - 1)
             && (!(GetAssignedVariableName(node) is { } variableName)
@@ -83,5 +81,10 @@ namespace SonarAnalyzer.Rules
                 context.ReportIssue(Diagnostic.Create(Rule, stringLiteral.GetLocation(), literalValue));
             }
         }
+
+        private static bool IsRoutableNonLoopbackIPAddress(string literalValue, out IPAddress ipAddress) =>
+            IPAddress.TryParse(literalValue, out ipAddress)
+            && !IPAddress.IsLoopback(ipAddress)
+            && !ipAddress.GetAddressBytes().All(x => x == 0); // Nonroutable 0.0.0.0 or 0::0
     }
 }
