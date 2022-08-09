@@ -34,56 +34,53 @@ namespace SonarAnalyzer.Rules
         where TSyntaxKind : struct
         where TLiteralExpression : SyntaxNode
     {
-        protected const string DiagnosticId = "S1313";
+        private const string DiagnosticId = "S1313";
         private const string MessageFormat = "Make sure using this hardcoded IP address '{0}' is safe here.";
-        protected const int IPv4AddressParts  = 4;
-        protected const string IPv4Broadcast = "255.255.255.255";
+        private const int IPv4AddressParts  = 4;
+        private const string IPv4Broadcast = "255.255.255.255";
 
-        protected readonly string[] ignoredVariableNames =
+        private readonly string[] ignoredVariableNames =
         {
             "VERSION",
             "ASSEMBLY",
         };
 
-        protected readonly DiagnosticDescriptor rule;
-
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
-        protected abstract TSyntaxKind SyntaxKind { get; }
 
         protected abstract string GetAssignedVariableName(SyntaxNode stringLiteral);
         protected abstract string GetValueText(TLiteralExpression literalExpression);
         protected abstract bool HasAttributes(SyntaxNode literalExpression);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+
+        protected DiagnosticDescriptor Rule { get; init; }
 
         protected HardcodedIpAddressBase(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration) =>
-            rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
+            Rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, CheckForHardcodedIpAddresses, SyntaxKind);
+            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, CheckForHardcodedIpAddresses, Language.SyntaxKind.StringLiteralExpression);
+
+        protected bool IsHardcodedIp(string literalValue, SyntaxNode node) =>
+            literalValue != IPv4Broadcast
+            && !literalValue.StartsWith("2.5.")                                  // Looks like OID
+            && IPAddress.TryParse(literalValue, out var address)
+            && !IPAddress.IsLoopback(address)
+            && !address.GetAddressBytes().All(x => x == 0)                       // Nonroutable 0.0.0.0 or 0::0
+            && (address.AddressFamily != AddressFamily.InterNetwork
+                || literalValue.Count(x => x == '.') == IPv4AddressParts - 1)
+            && (!(GetAssignedVariableName(node) is { } variableName)
+                || !ignoredVariableNames.Any(x => variableName.IndexOf(x, StringComparison.InvariantCultureIgnoreCase) >= 0))
+            && !HasAttributes(node);
 
         private void CheckForHardcodedIpAddresses(SyntaxNodeAnalysisContext context)
         {
-            if (!IsEnabled(context.Options))
+            if (IsEnabled(context.Options)
+                && (TLiteralExpression)context.Node is var stringLiteral
+                && GetValueText(stringLiteral) is var literalValue
+                && IsHardcodedIp(literalValue, stringLiteral))
             {
-                return;
-            }
-
-            var stringLiteral = (TLiteralExpression)context.Node;
-            var literalValue = GetValueText(stringLiteral);
-
-            if (literalValue != IPv4Broadcast
-                && !literalValue.StartsWith("2.5.")                                  // Looks like OID
-                && IPAddress.TryParse(literalValue, out var address)
-                && !IPAddress.IsLoopback(address)
-                && !address.GetAddressBytes().All(x => x == 0)                       // Nonroutable 0.0.0.0 or 0::0
-                && (address.AddressFamily != AddressFamily.InterNetwork
-                    || literalValue.Count(x => x == '.') == IPv4AddressParts - 1)
-                && (!(GetAssignedVariableName(stringLiteral) is { } variableName)
-                    || !ignoredVariableNames.Any(x => variableName.IndexOf(x, StringComparison.InvariantCultureIgnoreCase) >= 0))
-                && !HasAttributes(stringLiteral))
-            {
-                context.ReportIssue(Diagnostic.Create(rule, stringLiteral.GetLocation(), literalValue));
+                context.ReportIssue(Diagnostic.Create(Rule, stringLiteral.GetLocation(), literalValue));
             }
         }
     }

@@ -18,10 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
-using System.Linq;
-using System.Net;
-using System.Net.Sockets;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -36,7 +32,6 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class HardcodedIpAddress : HardcodedIpAddressBase<SyntaxKind, LiteralExpressionSyntax>
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
-        protected override SyntaxKind SyntaxKind { get; } = SyntaxKind.StringLiteralExpression;
 
         public HardcodedIpAddress() : this(AnalyzerConfiguration.Hotspot) { }
 
@@ -46,38 +41,14 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    var stringContent = string.Empty;
                     var interpolatedString = (InterpolatedStringExpressionSyntax)c.Node;
-                    foreach (var interpolatedStringContent in interpolatedString.Contents)
+                    if (interpolatedString.TryGetGetInterpolatedTextValue(c.SemanticModel, out var stringContent)
+                        && IsHardcodedIp(stringContent, interpolatedString))
                     {
-                        if (interpolatedStringContent is InterpolationSyntax interpolation
-                            && interpolation.Expression.FindConstantValue(c.SemanticModel) is string constantValue)
-                        {
-                            stringContent += constantValue;
-                        }
-                        else if (interpolatedStringContent is InterpolatedStringTextSyntax interpolatedText)
-                        {
-                            stringContent += interpolatedText.TextToken.Text;
-                        }
+                        c.ReportIssue(Diagnostic.Create(Rule, interpolatedString.GetLocation(), stringContent));
                     }
-
-                    if (stringContent != IPv4Broadcast
-                        && !stringContent.StartsWith("2.5.")                                  // Looks like OID
-                        && IPAddress.TryParse(stringContent, out var address)
-                        && !IPAddress.IsLoopback(address)
-                        && !address.GetAddressBytes().All(x => x == 0)                       // Nonroutable 0.0.0.0 or 0::0
-                        && (address.AddressFamily != AddressFamily.InterNetwork
-                            || stringContent.Count(x => x == '.') == IPv4AddressParts - 1)
-                        && (!(GetAssignedVariableName(interpolatedString) is { } variableName)
-                            || !ignoredVariableNames.Any(x => variableName.IndexOf(x, StringComparison.InvariantCultureIgnoreCase) >= 0))
-                        && !HasAttributes(interpolatedString))
-                    {
-                        c.ReportIssue(Diagnostic.Create(rule, interpolatedString.GetLocation(), stringContent));
-                    }
-
                 },
                 SyntaxKind.InterpolatedStringExpression);
-
             base.Initialize(context);
         }
 

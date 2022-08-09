@@ -31,7 +31,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
     public sealed class HardcodedIpAddress : HardcodedIpAddressBase<SyntaxKind, LiteralExpressionSyntax>
     {
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
-        protected override SyntaxKind SyntaxKind { get; } = SyntaxKind.StringLiteralExpression;
 
         public HardcodedIpAddress() : this(AnalyzerConfiguration.Hotspot) { }
 

@@ -27,18 +27,25 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class HardcodedIpAddressTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder().AddAnalyzer(() => new CS.HardcodedIpAddress(AnalyzerConfiguration.AlwaysEnabled));
+        private readonly VerifierBuilder builderVB = new VerifierBuilder().AddAnalyzer(() => new VB.HardcodedIpAddress(AnalyzerConfiguration.AlwaysEnabled));
+
         [TestMethod]
         public void HardcodedIpAddress_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\HardcodedIpAddress.cs", new CS.HardcodedIpAddress(AnalyzerConfiguration.AlwaysEnabled));
+            builderCS.AddPaths(@"Hotspots\HardcodedIpAddress.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void HardcodedIpAddress_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\Hotspots\HardcodedIpAddress.CSharp10.cs", new CS.HardcodedIpAddress(AnalyzerConfiguration.AlwaysEnabled));
+            builderCS.AddPaths(@"Hotspots\HardcodedIpAddress.CSharp10.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .Verify();
+
 #endif
 
         [TestMethod]
         public void HardcodedIpAddress_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\HardcodedIpAddress.vb", new VB.HardcodedIpAddress(AnalyzerConfiguration.AlwaysEnabled));
+            builderVB.AddPaths(@"Hotspots\HardcodedIpAddress.vb").Verify();
     }
 }
