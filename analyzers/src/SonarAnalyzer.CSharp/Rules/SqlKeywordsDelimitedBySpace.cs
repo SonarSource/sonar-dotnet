@@ -114,20 +114,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override void VisitInterpolatedStringExpression(InterpolatedStringExpressionSyntax node)
             {
-                var strings = new List<StringWrapper>();
-                foreach (var interpolatedStringContent in node.Contents)
+                if (TryGetConstantValuesOfInterpolatedStringExpression(node, out var stringParts))
                 {
-                    if (interpolatedStringContent is InterpolationSyntax interpolation
-                        && interpolation.Expression.FindConstantValue(context.SemanticModel) is string constantValue)
-                    {
-                        strings.Add(new StringWrapper(interpolatedStringContent, constantValue));
-                    }
-                    else if (interpolatedStringContent is InterpolatedStringTextSyntax interpolatedText)
-                    {
-                        strings.Add(new StringWrapper(interpolatedText, interpolatedText.TextToken.Text));
-                    }
+                    RaiseIssueIfSpaceDoesNotExistBetweenStrings(stringParts);
                 }
-                RaiseIssueIfSpaceDoesNotExistBetweenStrings(strings);
                 base.VisitInterpolatedStringExpression(node);
             }
 
@@ -225,6 +215,29 @@ namespace SonarAnalyzer.Rules.CSharp
                         return false;
                     }
                     parent = parent.Parent;
+                }
+                return true;
+            }
+
+            private bool TryGetConstantValuesOfInterpolatedStringExpression(InterpolatedStringExpressionSyntax interpolatedStringExpression, out List<StringWrapper> parts)
+            {
+                parts = new List<StringWrapper>();
+                foreach (var interpolatedStringContent in interpolatedStringExpression.Contents)
+                {
+                    if (interpolatedStringContent is InterpolationSyntax interpolation
+                        && interpolation.Expression.FindConstantValue(context.SemanticModel) is string constantValue)
+                    {
+                        parts.Add(new StringWrapper(interpolatedStringContent, constantValue));
+                    }
+                    else if (interpolatedStringContent is InterpolatedStringTextSyntax interpolatedText)
+                    {
+                        parts.Add(new StringWrapper(interpolatedText, interpolatedText.TextToken.Text));
+                    }
+                    else
+                    {
+                        parts = null;
+                        return false;
+                    }
                 }
                 return true;
             }
