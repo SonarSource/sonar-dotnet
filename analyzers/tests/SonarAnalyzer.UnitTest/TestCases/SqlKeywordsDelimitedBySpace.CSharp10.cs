@@ -6,7 +6,7 @@ namespace Tests.Diagnostics
 {
     class Examples
     {
-        public void VariousSqlKeywords()
+        public void VariousSqlKeywords(string unknownValue)
         {
             const string s1 = "TRUNCATE";
             const string s2 = "TABLE HumanResources.JobCandidate;";
@@ -34,6 +34,8 @@ namespace Tests.Diagnostics
 
             const string compliant3 = $"{s1} {s2}";
             string compliant4 = $"{s1}{42}";
+
+            string compliant5 = $"{s1}{unknownValue}{s2}";
 
             string a = string.Empty;
             string b = "TABLE HumanResources.JobCandidate;";
