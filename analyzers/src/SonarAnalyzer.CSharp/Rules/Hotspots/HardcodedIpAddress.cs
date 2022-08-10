@@ -23,6 +23,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -31,19 +32,33 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class HardcodedIpAddress : HardcodedIpAddressBase<SyntaxKind, LiteralExpressionSyntax>
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
-        protected override SyntaxKind SyntaxKind { get; } = SyntaxKind.StringLiteralExpression;
 
         public HardcodedIpAddress() : this(AnalyzerConfiguration.Hotspot) { }
 
         public HardcodedIpAddress(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration) { }
 
+        protected override void Initialize(SonarAnalysisContext context)
+        {
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+                {
+                    var interpolatedString = (InterpolatedStringExpressionSyntax)c.Node;
+                    if (interpolatedString.TryGetGetInterpolatedTextValue(c.SemanticModel, out var stringContent)
+                        && IsHardcodedIp(stringContent, interpolatedString))
+                    {
+                        c.ReportIssue(Diagnostic.Create(Rule, interpolatedString.GetLocation(), stringContent));
+                    }
+                },
+                SyntaxKind.InterpolatedStringExpression);
+            base.Initialize(context);
+        }
+
         protected override string GetValueText(LiteralExpressionSyntax literalExpression) =>
             literalExpression.Token.ValueText;
 
-        protected override bool HasAttributes(LiteralExpressionSyntax literalExpression) =>
+        protected override bool HasAttributes(SyntaxNode literalExpression) =>
             literalExpression.Ancestors().AnyOfKind(SyntaxKind.Attribute);
 
-        protected override string GetAssignedVariableName(LiteralExpressionSyntax stringLiteral) =>
+        protected override string GetAssignedVariableName(SyntaxNode stringLiteral) =>
             stringLiteral.FirstAncestorOrSelf<SyntaxNode>(IsVariableIdentifier)?.ToString();
 
         private static bool IsVariableIdentifier(SyntaxNode syntaxNode) =>

@@ -31,7 +31,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
     public sealed class HardcodedIpAddress : HardcodedIpAddressBase<SyntaxKind, LiteralExpressionSyntax>
     {
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
-        protected override SyntaxKind SyntaxKind { get; } = SyntaxKind.StringLiteralExpression;
 
         public HardcodedIpAddress() : this(AnalyzerConfiguration.Hotspot) { }
 
@@ -40,10 +39,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override string GetValueText(LiteralExpressionSyntax literalExpression) =>
             literalExpression.Token.ValueText;
 
-        protected override bool HasAttributes(LiteralExpressionSyntax literalExpression) =>
+        protected override bool HasAttributes(SyntaxNode literalExpression) =>
             literalExpression.Ancestors().AnyOfKind(SyntaxKind.Attribute);
 
-        protected override string GetAssignedVariableName(LiteralExpressionSyntax stringLiteral) =>
+        protected override string GetAssignedVariableName(SyntaxNode stringLiteral) =>
             stringLiteral.FirstAncestorOrSelf<SyntaxNode>(IsVariableIdentifier)?.ToString();
 
         private static bool IsVariableIdentifier(SyntaxNode syntaxNode) =>
