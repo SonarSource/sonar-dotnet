@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1117",
+"message":  "Rename 'sonar' which hides the field with the same name.",
+"location":  {
+"uri":  "sources\Net6\Net6\Deconstruction.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  18,
+"endLine":  12,
+"endColumn":  23
+}
+}
+}
+]
+}
