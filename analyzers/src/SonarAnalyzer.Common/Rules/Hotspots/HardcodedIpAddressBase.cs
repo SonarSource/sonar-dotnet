@@ -64,12 +64,11 @@ namespace SonarAnalyzer.Rules
 
         protected bool IsHardcodedIp(string literalValue, SyntaxNode node) =>
             literalValue != IPv4Broadcast
-            && IsNotAnObjectIdentifier(literalValue)
+            && !IsObjectIdentifier(literalValue)
             && IsRoutableNonLoopbackIPAddress(literalValue, out var address)
             && (address.AddressFamily != AddressFamily.InterNetwork
                 || literalValue.Count(x => x == '.') == IPv4AddressParts - 1)
-            && (!(GetAssignedVariableName(node) is { } variableName)
-                || !ignoredVariableNames.Any(x => variableName.IndexOf(x, StringComparison.InvariantCultureIgnoreCase) >= 0))
+            && !IsIgnoredVariableName(node)
             && !HasAttributes(node);
 
         private void CheckForHardcodedIpAddresses(SyntaxNodeAnalysisContext context)
@@ -88,7 +87,11 @@ namespace SonarAnalyzer.Rules
             && !IPAddress.IsLoopback(ipAddress)
             && !ipAddress.GetAddressBytes().All(x => x == 0); // Nonroutable 0.0.0.0 or 0::0
 
-        private static bool IsNotAnObjectIdentifier(string literalValue)
-            => !literalValue.StartsWith(OIDPrefix);   // Looks like OID
+        private static bool IsObjectIdentifier(string literalValue) =>
+            literalValue.StartsWith(OIDPrefix);   // Looks like OID
+
+        private bool IsIgnoredVariableName(SyntaxNode node) =>
+            GetAssignedVariableName(node) is { } variableName
+            && ignoredVariableNames.Any(x => variableName.IndexOf(x, StringComparison.InvariantCultureIgnoreCase) >= 0);
     }
 }
