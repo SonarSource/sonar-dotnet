@@ -87,7 +87,7 @@ Variable name `sut` (System Under Test) is recommended in unit tests that really
     someEnumerable.Where(x => x.Condition1
                               && x.Condition2);
     ```
-  * Exception from this rule: If the first argument is a lambda expression, the parameter name and the arrow token should go in the same line with the invocation.
+  * Exception from this rule: Lambda parameter name and arrow token should be on the same line as the invocation.
     ```
     context.RegisterSyntaxNodeAction(c =>
         {
