@@ -98,6 +98,13 @@ Variable name `sut` (System Under Test) is recommended in unit tests that really
     someEnumerable.Where(x => x.Condition1
                               && x.Condition2);
     ```
+  * Exception from this rule: Lambda parameter name and arrow token should be on the same line as the invocation.
+    ```
+    context.RegisterSyntaxNodeAction(c =>
+        {
+            // Action
+        }
+    ```
 * Expression body of arrow property should be on the same line, as the property declaration. It should be on next line only when S103 is violated.
 * Expression body of method should be on the same line only for trivial cases: literal or simple identifier. Member access, indexer, invocation and other complex structures should be on the next line.
 
