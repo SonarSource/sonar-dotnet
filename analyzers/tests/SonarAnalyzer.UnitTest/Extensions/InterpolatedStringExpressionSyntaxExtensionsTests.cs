@@ -61,15 +61,15 @@ public class C
                  ",
                  "TextOnly")]
         [DataRow(@"
-                    const string constantString = ""ConstantValue"";
+                    const string constantString = ""Foo"";
                     const string constantInterpolation = $""{constantString} with text."";
                  ",
-                 "ConstantValue with text.")]
+                 "Foo with text.")]
         [DataRow(@"
-                    const string constantString = ""ConstantValue"";
+                    const string constantString = ""Foo"";
                     const string constantInterpolation = $""{$""Nested {constantString}""} with text."";
                  ",
-                 "Nested ConstantValue with text.")]
+                 "Nested Foo with text.")]
         [DataRow(@"
                     notConstantString = ""SomeValue"";
                  string interpolatedString = $""{notConstantString}"";
