@@ -28,6 +28,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -88,18 +89,23 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var namespaceDeclaration = (NamespaceDeclarationSyntax)c.Node;
-                    if (namespaceDeclaration.Parent is CompilationUnitSyntax compilationUnit
-                        && (HasSqlNamespace(compilationUnit.Usings) || HasSqlNamespace(namespaceDeclaration.Usings)))
+                    if (BaseNamespaceDeclarationSyntaxWrapper.IsInstance(c.Node))
                     {
                         var visitor = new StringConcatenationWalker(c);
-                        foreach (var member in namespaceDeclaration.Members)
+                        foreach (var member in NamespaceMembers((BaseNamespaceDeclarationSyntaxWrapper)c.Node))
                         {
                             visitor.SafeVisit(member);
                         }
                     }
                 },
-                SyntaxKind.NamespaceDeclaration);
+                SyntaxKind.NamespaceDeclaration,
+                SyntaxKindEx.FileScopedNamespaceDeclaration);
+
+        private static SyntaxList<MemberDeclarationSyntax> NamespaceMembers(BaseNamespaceDeclarationSyntaxWrapper namespaceWrapper) =>
+            namespaceWrapper.SyntaxNode.Parent is CompilationUnitSyntax compilationUnit
+                && (HasSqlNamespace(compilationUnit.Usings) || HasSqlNamespace(namespaceWrapper.Usings))
+                ? namespaceWrapper.Members
+                : new SyntaxList<MemberDeclarationSyntax> { };
 
         private static bool HasSqlNamespace(SyntaxList<UsingDirectiveSyntax> usings) =>
             usings.Select(x => x.Name)
