@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         SyntaxKind.InvocationExpression);
                 });
 
-        private class VariableDeclarationBannedWordsFinder : CredentialWordsFinderBase<VariableDeclaratorSyntax>
+        private sealed class VariableDeclarationBannedWordsFinder : CredentialWordsFinderBase<VariableDeclaratorSyntax>
         {
             public VariableDeclarationBannedWordsFinder(DoNotHardcodeCredentials analyzer) : base(analyzer) { }
 
@@ -89,7 +89,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 && syntaxNode.IsDeclarationKnownType(KnownType.System_String, semanticModel);
         }
 
-        private class AssignmentExpressionBannedWordsFinder : CredentialWordsFinderBase<AssignmentExpressionSyntax>
+        private sealed class AssignmentExpressionBannedWordsFinder : CredentialWordsFinderBase<AssignmentExpressionSyntax>
         {
             public AssignmentExpressionBannedWordsFinder(DoNotHardcodeCredentials analyzer) : base(analyzer) { }
 
@@ -111,7 +111,7 @@ namespace SonarAnalyzer.Rules.CSharp
         /// This class inspects all other standalone string literals for values considered as hardcoded passwords (in connection strings)
         /// based on same rules as in VariableDeclarationBannedWordsFinder and AssignmentExpressionBannedWordsFinder.
         /// </summary>
-        private class StringLiteralBannedWordsFinder : CredentialWordsFinderBase<LiteralExpressionSyntax>
+        private sealed class StringLiteralBannedWordsFinder : CredentialWordsFinderBase<LiteralExpressionSyntax>
         {
             public StringLiteralBannedWordsFinder(DoNotHardcodeCredentials analyzer) : base(analyzer) { }
 
@@ -159,7 +159,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private class AddExpressionBannedWordsFinder : CredentialWordsFinderBase<BinaryExpressionSyntax>
+        private sealed class AddExpressionBannedWordsFinder : CredentialWordsFinderBase<BinaryExpressionSyntax>
         {
             public AddExpressionBannedWordsFinder(DoNotHardcodeCredentials analyzer) : base(analyzer) { }
 
@@ -177,7 +177,7 @@ namespace SonarAnalyzer.Rules.CSharp
             protected override bool ShouldHandle(BinaryExpressionSyntax syntaxNode, SemanticModel semanticModel) => true;
         }
 
-        private class InterpolatedStringBannedWordsFinder : CredentialWordsFinderBase<InterpolatedStringExpressionSyntax>
+        private sealed class InterpolatedStringBannedWordsFinder : CredentialWordsFinderBase<InterpolatedStringExpressionSyntax>
         {
             public InterpolatedStringBannedWordsFinder(DoNotHardcodeCredentials analyzer) : base(analyzer) { }
 
@@ -194,7 +194,7 @@ namespace SonarAnalyzer.Rules.CSharp
             protected override bool ShouldHandle(InterpolatedStringExpressionSyntax syntaxNode, SemanticModel semanticModel) => true;
         }
 
-        private class InvocationBannedWordsFinder : CredentialWordsFinderBase<InvocationExpressionSyntax>
+        private sealed class InvocationBannedWordsFinder : CredentialWordsFinderBase<InvocationExpressionSyntax>
         {
             public InvocationBannedWordsFinder(DoNotHardcodeCredentials analyzer) : base(analyzer) { }
 

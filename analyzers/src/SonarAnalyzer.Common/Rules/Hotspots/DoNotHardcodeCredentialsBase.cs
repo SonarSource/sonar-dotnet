@@ -33,8 +33,8 @@ namespace SonarAnalyzer.Rules
     public abstract class DoNotHardcodeCredentialsBase<TSyntaxKind> : ParameterLoadingDiagnosticAnalyzer
         where TSyntaxKind : struct
     {
-        protected const string DiagnosticId = "S2068";
         protected const char CredentialSeparator = ';';
+        private const string DiagnosticId = "S2068";
         private const string MessageFormat = "{0}";
         private const string MessageHardcodedPassword = "Please review this hard-coded password.";
         private const string MessageFormatCredential = @"""{0}"" detected here, make sure this is not a hard-coded credential.";
@@ -109,7 +109,7 @@ namespace SonarAnalyzer.Rules
         protected abstract class CredentialWordsFinderBase<TSyntaxNode>
              where TSyntaxNode : SyntaxNode
         {
-            private readonly Regex validCredentialPattern = new Regex(@"^\?|:\w+|\{\d+[^}]*\}|""|'$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            private readonly Regex validCredentialPattern = new(@"^\?|:\w+|\{\d+[^}]*\}|""|'$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
             private readonly Regex uriUserInfoPattern;
             private readonly DoNotHardcodeCredentialsBase<TSyntaxKind> analyzer;
 
