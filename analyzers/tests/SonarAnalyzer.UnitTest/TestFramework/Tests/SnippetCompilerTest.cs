@@ -123,5 +123,59 @@ public class Sample
             log.AssertContain("CS1519 Line: 5: Invalid token '{' in class, record, struct, or interface member declaration");
             log.AssertContain("CS1513 Line: 5: } expected");
         }
+
+        [TestMethod]
+        public void GetNamespaceSymbol_NamespaceExists_ReturnsSymbol()
+        {
+            const string code = @"
+namespace Test {
+    public class Sample { }
+}";
+            var sut = new SnippetCompiler(code);
+            var namespaceSymbol = sut.GetNamespaceSymbol("Test");
+            namespaceSymbol.Name.Should().Be("Test");
+        }
+
+        [TestMethod]
+        public void GetNamespaceSymbol_NestedNamespaces_ReturnsSymbols()
+        {
+            const string code = @"
+namespace Test {
+    namespace Nested {
+        public class Sample { }
+    }
+}";
+            var sut = new SnippetCompiler(code);
+            var namespaceSymbol = sut.GetNamespaceSymbol("Test");
+            namespaceSymbol.Name.Should().Be("Test");
+            var nestedNamespaceSymbol = sut.GetNamespaceSymbol("Nested");
+            nestedNamespaceSymbol.Name.Should().Be("Nested");
+        }
+
+        [TestMethod]
+        public void GetNamespaceSymbol_NestedNamespacesWithDot_ReturnsSymbols()
+        {
+            const string code = @"
+namespace Test.Nested {
+     public class Sample { }
+}";
+            var sut = new SnippetCompiler(code);
+            // Searching in nested namespaces of the form Namespace.NestedNamespace
+            // is not supported by this method. We can get back the symbol of the most nested namespace.
+            var namespaceSymbol = sut.GetNamespaceSymbol("Nested");
+            namespaceSymbol.Name.Should().Be("Nested");
+        }
+
+        [TestMethod]
+        public void GetNamespaceSymbol_FileScopedNamespace_ReturnsSymbol()
+        {
+            const string code = @"
+namespace Test;
+public class Sample { }
+";
+            var sut = new SnippetCompiler(code);
+            var namespaceSymbol = sut.GetNamespaceSymbol("Test");
+            namespaceSymbol.Name.Should().Be("Test");
+        }
     }
 }
