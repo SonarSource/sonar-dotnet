@@ -32,14 +32,25 @@ namespace SonarAnalyzer.Extensions
 
         public static bool TryGetGetInterpolatedTextValue(this InterpolatedStringExpressionSyntax interpolatedStringExpression, SemanticModel semanticModel, out string interpolatedValue)
         {
-            interpolatedValue = null;
             var resolvedContent = new StringBuilder();
             foreach (var interpolatedStringContent in interpolatedStringExpression.Contents)
             {
-                if (interpolatedStringContent is InterpolationSyntax interpolation
-                    && interpolation.Expression.FindConstantValue(semanticModel) is string constantValue)
+                if (interpolatedStringContent is InterpolationSyntax interpolation)
                 {
-                    resolvedContent.Append(constantValue);
+                    if (interpolation.Expression is InterpolatedStringExpressionSyntax nestedInterpolatedString
+                        && TryGetGetInterpolatedTextValue(nestedInterpolatedString, semanticModel, out var innerInterpolatedValue))
+                    {
+                        resolvedContent.Append(innerInterpolatedValue);
+                    }
+                    else if (interpolation.Expression.FindConstantValue(semanticModel) is string constantValue)
+                    {
+                        resolvedContent.Append(constantValue);
+                    }
+                    else
+                    {
+                        interpolatedValue = null;
+                        return false;
+                    }
                 }
                 else if (interpolatedStringContent is InterpolatedStringTextSyntax interpolatedText)
                 {
@@ -47,6 +58,7 @@ namespace SonarAnalyzer.Extensions
                 }
                 else
                 {
+                    interpolatedValue = null;
                     return false;
                 }
             }

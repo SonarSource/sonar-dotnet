@@ -36,8 +36,9 @@ namespace SonarAnalyzer.Rules
     {
         private const string DiagnosticId = "S1313";
         private const string MessageFormat = "Make sure using this hardcoded IP address '{0}' is safe here.";
-        private const int IPv4AddressParts  = 4;
+        private const int IPv4AddressParts = 4;
         private const string IPv4Broadcast = "255.255.255.255";
+        private const string OIDPrefix = "2.5.";
 
         private readonly string[] ignoredVariableNames =
         {
@@ -63,7 +64,7 @@ namespace SonarAnalyzer.Rules
 
         protected bool IsHardcodedIp(string literalValue, SyntaxNode node) =>
             literalValue != IPv4Broadcast
-            && !literalValue.StartsWith("2.5.")                                  // Looks like OID
+            && IsNotAnObjectIdentifier(literalValue)
             && IsRoutableNonLoopbackIPAddress(literalValue, out var address)
             && (address.AddressFamily != AddressFamily.InterNetwork
                 || literalValue.Count(x => x == '.') == IPv4AddressParts - 1)
@@ -86,5 +87,8 @@ namespace SonarAnalyzer.Rules
             IPAddress.TryParse(literalValue, out ipAddress)
             && !IPAddress.IsLoopback(ipAddress)
             && !ipAddress.GetAddressBytes().All(x => x == 0); // Nonroutable 0.0.0.0 or 0::0
+
+        private static bool IsNotAnObjectIdentifier(string literalValue)
+            => !literalValue.StartsWith(OIDPrefix);   // Looks like OID
     }
 }
