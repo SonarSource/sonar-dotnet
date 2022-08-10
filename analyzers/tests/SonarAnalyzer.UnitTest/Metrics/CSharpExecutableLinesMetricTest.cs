@@ -584,6 +584,24 @@ public class Foo
 public class AnAttribute : System.Attribute { }", 7);
 
         [TestMethod]
+        public void AttributeOnLambdaIsIgnored() =>
+            AssertLineNumbersOfExecutableLines(
+@"using System;
+using System.Linq;
+using System.Collections.Generic;
+class Test
+{
+    static void Main(string[] args)
+    {
+        [AnAttribute]
+        List<string> LambdaWithAttribute(string[] args) =>
+            args.Where(s => s != null).ToList(); // +1
+    }
+}
+
+public class AnAttribute : System.Attribute { }", 10);
+
+        [TestMethod]
         public void ExpressionsAreCounted() =>
             AssertLineNumbersOfExecutableLines(
 @"class Program
