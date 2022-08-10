@@ -39,12 +39,12 @@ public class C
 }}";
 
         [DataTestMethod]
-        [DataRow("var methodCall = $\"{Foo()}\";")]
-        [DataRow("var nestedMethodCall = $\"{$\"{$\"{Foo()}\"}\"}\";")]
+        [DataRow(@"var methodCall = $""{Foo()}"";")]
+        [DataRow(@"var nestedMethodCall = $""{$""{$""{Foo()}""}""}"";")]
         [DataRow(@"const int constant = 1;
                  var mixConstantNonConstant = $""{notConstant}{constant}"";")]
         [DataRow(@"const int constant = 1;
-                 var mixConstantNonConstant = $""TextValue {constant}"";")]
+                 var mixConstantAndLiteral = $""TextValue {constant}"";")]
         [DataRow(@"const int constant = 1;
                  var mix = $""{constant}{$""{Foo()}""}{""{notConstant}""}"";")]
         public void TryGetGetInterpolatedTextValue_Returns_False(string code)
@@ -56,13 +56,25 @@ public class C
         }
 
         [DataTestMethod]
-        [DataRow("var textOnly = $\"TextOnly\" ", "TextOnly")]
-        [DataRow(@"const string constantString = ""ConstantValue"";
-                 const string constantInterpolation = $""{constantString} with text.""", "ConstantValue with text.")]
-        [DataRow(@"const string constantString = ""ConstantValue"";
-                 const string constantInterpolation = $""{$""Nested {constantString}""} with text.""", "Nested ConstantValue with text.")]
-        [DataRow(@"notConstantString = ""SomeValue"";
-                 string interpolatedString = $""{notConstantString}""", "SomeValue")]
+        [DataRow(@"
+                   var textOnly = $""TextOnly"";
+                 ",
+                 "TextOnly")]
+        [DataRow(@"
+                    const string constantString = ""ConstantValue"";
+                    const string constantInterpolation = $""{constantString} with text."";
+                 ",
+                 "ConstantValue with text.")]
+        [DataRow(@"
+                    const string constantString = ""ConstantValue"";
+                    const string constantInterpolation = $""{$""Nested {constantString}""} with text."";
+                 ",
+                 "Nested ConstantValue with text.")]
+        [DataRow(@"
+                    notConstantString = ""SomeValue"";
+                 string interpolatedString = $""{notConstantString}"";
+                 ",
+                 "SomeValue")]
         public void TryGetGetInterpolatedTextValue_Returns_False(string code, string expectedTextValue)
         {
             var codeSnipet = string.Format(CodeSnipet, code);
