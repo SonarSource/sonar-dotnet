@@ -28,6 +28,19 @@
 },
 {
 "id":  "S1481",
+"message":  "Remove the unused local variable 'sonar'.",
+"location":  {
+"uri":  "sources\Net6\Net6\Deconstruction.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  18,
+"endLine":  12,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1481",
 "message":  "Remove the unused local variable 'a'.",
 "location":  {
 "uri":  "sources\Net6\Net6\LambdaAttributes.cs",

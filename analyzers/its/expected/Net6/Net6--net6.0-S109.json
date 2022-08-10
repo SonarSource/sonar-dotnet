@@ -28,6 +28,32 @@
 },
 {
 "id":  "S109",
+"message":  "Assign this magic number '24' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net6\Net6\Deconstruction.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  55,
+"endLine":  12,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '7' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net6\Net6\Deconstruction.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  60,
+"endLine":  12,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S109",
 "message":  "Assign this magic number '42' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "sources\Net6\Net6\ExtendedPropertyPatterns.cs",

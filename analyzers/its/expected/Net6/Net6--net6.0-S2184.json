@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2184",
+"message":  "Cast one of the operands of this division to 'double'.",
+"location":  {
+"uri":  "sources\Net6\Net6\Deconstruction.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  55,
+"endLine":  12,
+"endColumn":  61
+}
+}
+}
+]
+}
