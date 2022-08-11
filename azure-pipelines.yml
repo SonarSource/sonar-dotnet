@@ -87,7 +87,7 @@ stages:
           solution: '$(solution)'
           platform: '$(buildPlatform)'
           configuration: '$(buildConfiguration)'
-          msbuildArgs: '/p:DeployExtension=false /p:SignAssembly=$(isReleaseBranch) /p:AssemblyOriginatorKeyFile="$(snk.secureFilePath)" /p:Sha1=$(Build.SourceVersion) /p:BuildNumber=$(Build.BuildId) /p:WarningLevel=0'
+          msbuildArgs: '/p:DeployExtension=false /p:SignAssembly=$(isReleaseBranch) /p:AssemblyOriginatorKeyFile="$(snk.secureFilePath)" /p:Sha1=$(Build.SourceVersion) /p:BuildNumber=$(Build.BuildId) /p:WarningLevel=0 /p:BuildOnlyNet46=true'
           vsVersion: $(vsVersion)
 
       - task: NuGetCommand@2
@@ -271,7 +271,7 @@ stages:
           solution: '$(solution)'
           platform: '$(buildPlatform)'
           configuration: '$(buildConfiguration)'
-          msbuildArgs: '/p:DeployExtension=false /p:RunAnalyzers=true'
+          msbuildArgs: '/p:DeployExtension=false /p:RunAnalyzers=true /p:BuildOnlyNet46=true'
           vsVersion: $(vsVersion)
 
       - task: DownloadPipelineArtifact@2
