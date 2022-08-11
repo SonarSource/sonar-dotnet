@@ -91,8 +91,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public INamespaceSymbol GetNamespaceSymbol(string name)
         {
-            var symbol = GetNodes<CSharpSyntax.NamespaceDeclarationSyntax>()
-                .Concat<SyntaxNode>(GetNodes<CSharpSyntax.FileScopedNamespaceDeclarationSyntax>())
+            var symbol = GetNodes<CSharpSyntax.BaseNamespaceDeclarationSyntax>()
                 .Concat<SyntaxNode>(GetNodes<VBSyntax.NamespaceStatementSyntax>())
                 .Select(s => SemanticModel.GetDeclaredSymbol(s))
                 .First(s => s.Name == name) as INamespaceSymbol;
