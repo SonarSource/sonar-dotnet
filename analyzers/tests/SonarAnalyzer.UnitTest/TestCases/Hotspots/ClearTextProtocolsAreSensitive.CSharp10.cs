@@ -8,6 +8,9 @@ const string address = "foo.com";
 const string noncompliant = $"{protocol1}{address}"; // Noncompliant
 const string compliant = $"{protocol2}{address}";
 
+string nestedNoncompliant = $"{$"{protocol1}somtehing."}{address}"; // Noncompliant
+// Noncompliant@-1
+
 public record struct RecordStruct
 {
     public string Address { get; init; } = "http://foo.com"; // Noncompliant
