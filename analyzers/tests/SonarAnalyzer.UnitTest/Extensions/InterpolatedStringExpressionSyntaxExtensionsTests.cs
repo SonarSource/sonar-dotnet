@@ -47,7 +47,7 @@ public class C
                  var mixConstantAndLiteral = $""TextValue {constant}"";")]
         [DataRow(@"const int constant = 1;
                  var mix = $""{constant}{$""{Foo()}""}{""{notConstant}""}"";")]
-        public void TryGetGetInterpolatedTextValue_Returns_False(string code)
+        public void TryGetGetInterpolatedTextValue_UnsupportedSyntaxKinds_ReturnsFalse(string code)
         {
             var codeSnipet = string.Format(CodeSnipet, code);
             var (expression, semanticModel) = Compile(codeSnipet);
@@ -75,7 +75,7 @@ public class C
                  string interpolatedString = $""{notConstantString}"";
                  ",
                  "SomeValue")]
-        public void TryGetGetInterpolatedTextValue_Returns_False(string code, string expectedTextValue)
+        public void TryGetGetInterpolatedTextValue_SupportedSyntaxKinds_ReturnsTrue(string code, string expectedTextValue)
         {
             var codeSnipet = string.Format(CodeSnipet, code);
             var (expression, semanticModel) = Compile(codeSnipet);

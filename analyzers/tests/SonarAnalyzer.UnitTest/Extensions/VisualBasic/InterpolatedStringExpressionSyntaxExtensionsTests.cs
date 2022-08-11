@@ -47,7 +47,7 @@ End Class";
                    Dim mixConstantAndLiteral = $""TextValue {constant}""")]
         [DataRow(@"Const constant As Integer = 1
                    Dim mix = $""{constant}{$""{Foo()}""}{""{notConstant}""}""")]
-        public void TryGetGetInterpolatedTextValue_Returns_False(string code)
+        public void TryGetGetInterpolatedTextValue_UnsupportedSyntaxKinds_ReturnsFalse(string code)
         {
             var codeSnipet = string.Format(CodeSnipet, code);
             var (expression, semanticModel) = Compile(codeSnipet);
@@ -74,7 +74,7 @@ End Class";
                     Dim interpolatedString As String = $""{notConstantString}""
                  ",
                  "SomeValue")]
-        public void TryGetGetInterpolatedTextValue_Returns_True(string code, string expectedTextValue)
+        public void TryGetGetInterpolatedTextValue_SupportedSyntaxKinds_ReturnsTrue(string code, string expectedTextValue)
         {
             var codeSnipet = string.Format(CodeSnipet, code);
             var (expression, semanticModel) = Compile(codeSnipet);
