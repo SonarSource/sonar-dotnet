@@ -27,18 +27,25 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class PubliclyWritableDirectoriesTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder().AddAnalyzer(() => new CS.PubliclyWritableDirectories(AnalyzerConfiguration.AlwaysEnabled));
+        private readonly VerifierBuilder builderVB = new VerifierBuilder().AddAnalyzer(() => new VB.PubliclyWritableDirectories(AnalyzerConfiguration.AlwaysEnabled));
+
         [TestMethod]
         public void PubliclyWritableDirectories_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\PubliclyWritableDirectories.cs", new CS.PubliclyWritableDirectories(AnalyzerConfiguration.AlwaysEnabled));
+            builderCS.AddPaths(@"Hotspots\PubliclyWritableDirectories.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void PubliclyWritableDirectories_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\Hotspots\PubliclyWritableDirectories.CSharp10.cs", new CS.PubliclyWritableDirectories(AnalyzerConfiguration.AlwaysEnabled));
+            builderCS.AddPaths(@"Hotspots\PubliclyWritableDirectories.CSharp10.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .Verify();
+
 #endif
 
         [TestMethod]
         public void PubliclyWritableDirectories_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\PubliclyWritableDirectories.vb", new VB.PubliclyWritableDirectories(AnalyzerConfiguration.AlwaysEnabled));
+            builderVB.AddPaths(@"Hotspots\PubliclyWritableDirectories.vb").Verify();
     }
 }
