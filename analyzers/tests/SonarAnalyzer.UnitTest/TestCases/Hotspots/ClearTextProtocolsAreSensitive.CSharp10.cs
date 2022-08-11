@@ -5,8 +5,11 @@ using System.Net.Mail;
 const string protocol1 = "http://";
 const string protocol2 = "https://";
 const string address = "foo.com";
-const string noncompliant = $"{protocol1}{address}"; // FN
+const string noncompliant = $"{protocol1}{address}"; // Noncompliant
 const string compliant = $"{protocol2}{address}";
+
+string nestedNoncompliant = $"{$"{protocol1}somtehing."}{address}"; // Noncompliant
+// Noncompliant@-1
 
 public record struct RecordStruct
 {

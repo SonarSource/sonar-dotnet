@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor DefaultRule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
         private static readonly DiagnosticDescriptor EnableSslRule = DescriptorFactory.Create(DiagnosticId, EnableSslMessage);
 
-        private readonly Dictionary<string, string> recommendedProtocols = new Dictionary<string, string>
+        private readonly Dictionary<string, string> recommendedProtocols = new()
         {
             {"telnet", "ssh"},
             {"ftp", "sftp, scp or ftps"},
@@ -129,7 +129,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var objectCreation = ObjectCreationFactory.Create(context.Node);
 
-            if (!IsServerSafe(objectCreation) && objectInitializationTracker.ShouldBeReported(objectCreation, context.SemanticModel, false))
+            if (!IsServerSafe(objectCreation, context.SemanticModel) && objectInitializationTracker.ShouldBeReported(objectCreation, context.SemanticModel, false))
             {
                 context.ReportIssue(Diagnostic.Create(EnableSslRule, objectCreation.Expression.GetLocation()));
             }
@@ -162,19 +162,19 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private void VisitStringExpressions(SyntaxNodeAnalysisContext c)
         {
-            if (GetUnsafeProtocol(c.Node) is {} unsafeProtocol)
+            if (GetUnsafeProtocol(c.Node, c.SemanticModel) is {} unsafeProtocol)
             {
                 c.ReportIssue(Diagnostic.Create(DefaultRule, c.Node.GetLocation(), unsafeProtocol, recommendedProtocols[unsafeProtocol]));
             }
         }
 
-        private bool IsServerSafe(IObjectCreation objectCreation) =>
+        private bool IsServerSafe(IObjectCreation objectCreation, SemanticModel semanticModel) =>
             objectCreation.ArgumentList?.Arguments.Count > 0
-            && validServerRegex.IsMatch(GetText(objectCreation.ArgumentList.Arguments[0].Expression));
+            && validServerRegex.IsMatch(GetText(objectCreation.ArgumentList.Arguments[0].Expression, semanticModel));
 
-        private string GetUnsafeProtocol(SyntaxNode node)
+        private string GetUnsafeProtocol(SyntaxNode node, SemanticModel semanticModel)
         {
-            var text = GetText(node);
+            var text = GetText(node, semanticModel);
             if (httpRegex.IsMatch(text) && !IsNamespace(node.Parent))
             {
                 return "http";
@@ -193,13 +193,18 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static string GetText(SyntaxNode node) =>
-            node switch
+        private static string GetText(SyntaxNode node, SemanticModel semanticModel)
+        {
+            if (node is InterpolatedStringExpressionSyntax interpolatedStringExpression)
             {
-                InterpolatedStringExpressionSyntax interpolatedStringExpression => interpolatedStringExpression.GetContentsText(),
-                LiteralExpressionSyntax literalExpression => literalExpression.Token.ValueText,
-                _ => string.Empty
-            };
+                interpolatedStringExpression.TryGetGetInterpolatedTextValue(semanticModel, out var interpolatedValue);
+                return interpolatedValue ?? interpolatedStringExpression.GetContentsText();
+            }
+            else
+            {
+                return node is LiteralExpressionSyntax literalExpression ? literalExpression.Token.ValueText : string.Empty;
+            }
+        }
 
         private static bool IsNamespace(SyntaxNode node) =>
             node switch
