@@ -11,11 +11,12 @@ namespace Tests.Diagnostics
             const string e = "E";
             const string m = "M";
             const string p = "P";
-            const string compliant = $"{p}{m}{e}{t}";
-            const string noncompliant = $"{t}{e}{m}{p}";
+            const string part1 = "/tEmP"; // Noncompliant
+            const string part2 = "/f";
+            const string noncompliant2 = $"{part1}{part2}"; // Noncompliant
 
-            var tmp1 = Environment.GetEnvironmentVariable(compliant);
-            var tmp2 = Environment.GetEnvironmentVariable(noncompliant); // FN
+            var tmp = Environment.GetEnvironmentVariable($"{t}{e}{m}{p}"); // Noncompliant
+            tmp = Environment.GetEnvironmentVariable($"{t}{e}{m}{p}{5}");
         }
     }
 }

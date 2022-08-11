@@ -93,7 +93,7 @@ namespace SonarAnalyzer.Helpers.Facade
         public override SyntaxToken? NodeIdentifier(SyntaxNode node) =>
             node.GetIdentifier();
 
-        public override string NodeStringTextValue(SyntaxNode node) =>
+        public override string NodeStringTextValue(SyntaxNode node, SemanticModel semanticModel) =>
             node switch
             {
                 InterpolatedStringExpressionSyntax interpolatedStringExpression => interpolatedStringExpression.GetContentsText(),

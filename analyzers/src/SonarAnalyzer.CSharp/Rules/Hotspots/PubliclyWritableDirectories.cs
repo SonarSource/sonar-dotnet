@@ -45,6 +45,6 @@ namespace SonarAnalyzer.Rules.CSharp
         private protected override bool IsInsecureEnvironmentVariableRetrieval(InvocationExpressionSyntax invocation, KnownType type, string methodName, SemanticModel semanticModel) =>
             invocation.IsMethodInvocation(type, methodName, semanticModel)
             && invocation.ArgumentList?.Arguments.FirstOrDefault() is { } firstArgument
-            && InsecureEnvironmentVariables.Any(x => x.Equals(firstArgument.Expression?.GetStringValue(), StringComparison.OrdinalIgnoreCase));
+            && InsecureEnvironmentVariables.Any(x => x.Equals(firstArgument.Expression?.GetStringValue(semanticModel), StringComparison.OrdinalIgnoreCase));
     }
 }
