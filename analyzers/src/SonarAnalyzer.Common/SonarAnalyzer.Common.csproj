@@ -3,6 +3,14 @@
   <PropertyGroup>
     <AssemblyName>SonarAnalyzer</AssemblyName>
     <RootNamespace>SonarAnalyzer</RootNamespace>
+    <!--
+      We need to target netstandard2.0 during:
+      - local builds, to properly generate packages.lock.json
+      - "restore" on CI builds due to a NuGet bug https://github.com/NuGet/Home/issues/12010
+      We need to target net46
+      - during CI build to speed up the pipeline. We do not use netstandard2.0 binaries anywhere.
+      We should be able to remove this complication from project files and azure-pipelines.yml once NuGet issue is fixed.
+    -->
     <TargetFrameworks Condition="$(BuildOnlyNet46) != 'true'">net46;netstandard2.0</TargetFrameworks>
     <TargetFrameworks Condition="$(BuildOnlyNet46) == 'true'">net46</TargetFrameworks>
   </PropertyGroup>

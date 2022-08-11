@@ -3,6 +3,7 @@
   <PropertyGroup>
     <AssemblyName>SonarAnalyzer.CSharp</AssemblyName>
     <RootNamespace>SonarAnalyzer</RootNamespace>
+    <!-- See SonarAnalyzer.Common.csproj for more details-->
     <TargetFrameworks Condition="$(BuildOnlyNet46) != 'true'">net46;netstandard2.0</TargetFrameworks>
     <TargetFrameworks Condition="$(BuildOnlyNet46) == 'true'">net46</TargetFrameworks>
     <DefineConstants>TRACE;CS</DefineConstants>
