@@ -117,5 +117,8 @@ namespace SonarAnalyzer.Helpers.Facade
 
         public override SyntaxNode RemoveParentheses(SyntaxNode node) =>
             node.RemoveParentheses();
+
+        public override bool TryGetGetInterpolatedTextValue(SyntaxNode node, SemanticModel semanticModel, out string interpolatedValue) =>
+            Cast<InterpolatedStringExpressionSyntax>(node).TryGetGetInterpolatedTextValue(semanticModel, out interpolatedValue);
     }
 }

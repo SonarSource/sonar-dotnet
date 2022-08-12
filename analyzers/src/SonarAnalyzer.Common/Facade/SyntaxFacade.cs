@@ -49,6 +49,7 @@ namespace SonarAnalyzer.Helpers.Facade
         public abstract SyntaxNode RemoveConditionalAccess(SyntaxNode node);
         public abstract SyntaxNode RemoveParentheses(SyntaxNode node);
         public abstract string NodeStringTextValue(SyntaxNode node, SemanticModel semanticModel);
+        public abstract bool TryGetGetInterpolatedTextValue(SyntaxNode node, SemanticModel semanticModel, out string interpolatedValue);
 
         protected static T Cast<T>(SyntaxNode node) where T : SyntaxNode =>
             node as T ?? throw new InvalidCastException($"A {node.GetType().Name} node can not be cast to a {typeof(T).Name} node.");
