@@ -86,8 +86,8 @@ End Class";
         {
             var tree = VisualBasicSyntaxTree.ParseText(code);
             var compilation = VisualBasicCompilation.Create("TempAssembly.dll")
-                                               .AddSyntaxTrees(tree)
-                                               .AddReferences(MetadataReferenceFacade.ProjectDefaultReferences);
+                                                    .AddSyntaxTrees(tree)
+                                                    .AddReferences(MetadataReferenceFacade.ProjectDefaultReferences);
 
             var semanticModel = compilation.GetSemanticModel(tree);
 
