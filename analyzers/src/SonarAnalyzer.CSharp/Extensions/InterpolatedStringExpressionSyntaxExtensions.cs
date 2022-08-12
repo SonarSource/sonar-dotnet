@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Helpers;
@@ -30,40 +29,7 @@ namespace SonarAnalyzer.Extensions
         public static string GetContentsText(this InterpolatedStringExpressionSyntax interpolatedStringExpression) =>
             interpolatedStringExpression.Contents.JoinStr(null, content => content.ToString());
 
-        public static bool TryGetGetInterpolatedTextValue(this InterpolatedStringExpressionSyntax interpolatedStringExpression, SemanticModel semanticModel, out string interpolatedValue)
-        {
-            var resolvedContent = new StringBuilder();
-            foreach (var interpolatedStringContent in interpolatedStringExpression.Contents)
-            {
-                if (interpolatedStringContent is InterpolationSyntax interpolation)
-                {
-                    if (interpolation.Expression is InterpolatedStringExpressionSyntax nestedInterpolatedString
-                        && TryGetGetInterpolatedTextValue(nestedInterpolatedString, semanticModel, out var innerInterpolatedValue))
-                    {
-                        resolvedContent.Append(innerInterpolatedValue);
-                    }
-                    else if (interpolation.Expression.FindConstantValue(semanticModel) is string constantValue)
-                    {
-                        resolvedContent.Append(constantValue);
-                    }
-                    else
-                    {
-                        interpolatedValue = null;
-                        return false;
-                    }
-                }
-                else if (interpolatedStringContent is InterpolatedStringTextSyntax interpolatedText)
-                {
-                    resolvedContent.Append(interpolatedText.TextToken.Text);
-                }
-                else
-                {
-                    interpolatedValue = null;
-                    return false;
-                }
-            }
-            interpolatedValue = resolvedContent.ToString();
-            return true;
-        }
+        public static bool TryGetGetInterpolatedTextValue(this InterpolatedStringExpressionSyntax interpolatedStringExpression, SemanticModel semanticModel, out string interpolatedValue) =>
+            CsharpStringInterpolationConstantValueResolver.Instance.TryGetGetInterpolatedTextValue(interpolatedStringExpression, semanticModel, out interpolatedValue);
     }
 }
