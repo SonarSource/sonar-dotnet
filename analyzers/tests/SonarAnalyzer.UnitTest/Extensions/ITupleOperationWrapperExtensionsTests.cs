@@ -60,8 +60,8 @@ namespace SonarAnalyzer.UnitTest.Extensions
         public void AllElements_Performance_LargeTuple()
         {
             var largeTuple = LargeTuple(500); // (1, 2,... , 500)
-            // Actual execution time is about 0.5ms.
-            AssertAllElementsExecutionTimeBeLessThan(largeTuple, 5.Milliseconds());
+            // Actual execution time is about 0.4ms - 0.7ms
+            AssertAllElementsExecutionTimeBeLessThan(largeTuple, 10.Milliseconds());
 
             static string LargeTuple(int length)
             {
