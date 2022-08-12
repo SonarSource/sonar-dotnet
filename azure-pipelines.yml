@@ -41,6 +41,8 @@ stages:
     jobs:
     - job: dotnetBuildjob
       displayName: 'Build and package'
+      workspace:
+        clean: all
 
       steps:
       - task: NuGetToolInstaller@1
@@ -150,6 +152,9 @@ stages:
 
     jobs:
     - job: runUnitTestsDotNet
+      displayName: '.NET UTs'
+      workspace:
+        clean: all
       strategy:
         matrix:
           Net48:
@@ -160,8 +165,6 @@ stages:
             FrameworkMoniker: 'net6.0'
             CoverageArtifactName: 'DotnetCoverageNet6'
             TestResultsArtifactName: 'DotnetTestResultsNet6'
-
-      displayName: '.NET UTs'
 
       steps:
       - task: DownloadPipelineArtifact@2
@@ -205,6 +208,8 @@ stages:
 
     - job: dotNetAnalysis
       displayName: '.Net Analysis'
+      workspace:
+        clean: all
       # This job runs the .Net code analysis and uploads to SonarCloud the test results and coverage reports generated
       # in previous jobs.
       condition: always()
@@ -543,6 +548,8 @@ stages:
   jobs:
     - job: promoteRepox
       displayName: 'SonarAnalyzer.CFG.CSharp'
+      workspace:
+        clean: all
       steps:
         - template: set-azp-variables-steps.yml@pipelines-yaml-templates
 
@@ -593,6 +600,8 @@ stages:
 
     - job: nugetBurgrFailed
       dependsOn: promoteRepox
+      workspace:
+        clean: all
       pool: server
       condition: failed()
       steps:
@@ -605,6 +614,8 @@ stages:
 
     - job: nugetBurgrCanceled
       dependsOn: promoteRepox
+      workspace:
+        clean: all
       pool: server
       condition: canceled()
       steps:
