@@ -26,12 +26,15 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class SecurityPInvokeMethodShouldNotBeCalledTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.SecurityPInvokeMethodShouldNotBeCalled>();
+        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.SecurityPInvokeMethodShouldNotBeCalled>();
+
         [TestMethod]
         public void SecurityPInvokeMethodShouldNotBeCalled_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\SecurityPInvokeMethodShouldNotBeCalled.cs", new CS.SecurityPInvokeMethodShouldNotBeCalled());
+            builderCS.AddPaths("SecurityPInvokeMethodShouldNotBeCalled.cs").Verify();
 
         [TestMethod]
         public void SecurityPInvokeMethodShouldNotBeCalled_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\SecurityPInvokeMethodShouldNotBeCalled.vb", new VB.SecurityPInvokeMethodShouldNotBeCalled());
+            builderVB.AddPaths("SecurityPInvokeMethodShouldNotBeCalled.vb").Verify();
     }
 }

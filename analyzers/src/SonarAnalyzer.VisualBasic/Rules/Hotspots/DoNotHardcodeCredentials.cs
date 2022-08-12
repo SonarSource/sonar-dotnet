@@ -79,7 +79,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             public VariableDeclarationBannedWordsFinder(DoNotHardcodeCredentialsBase<SyntaxKind> analyzer) : base(analyzer) { }
 
             protected override string GetAssignedValue(VariableDeclaratorSyntax syntaxNode, SemanticModel semanticModel) =>
-                syntaxNode.Initializer?.Value.GetStringValue();
+                syntaxNode.Initializer?.Value.GetStringValue(semanticModel);
 
             protected override string GetVariableName(VariableDeclaratorSyntax syntaxNode) =>
                 syntaxNode.Names[0].Identifier.ValueText; // We already tested the count in IsAssignedWithStringLiteral
@@ -96,7 +96,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             public AssignmentExpressionBannedWordsFinder(DoNotHardcodeCredentialsBase<SyntaxKind> analyzer) : base(analyzer) { }
 
             protected override string GetAssignedValue(AssignmentStatementSyntax syntaxNode, SemanticModel semanticModel) =>
-                syntaxNode.Right.GetStringValue();
+                syntaxNode.Right.GetStringValue(semanticModel);
 
             protected override string GetVariableName(AssignmentStatementSyntax syntaxNode) =>
                 (syntaxNode.Left as IdentifierNameSyntax)?.Identifier.ValueText;
@@ -118,7 +118,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             public StringLiteralBannedWordsFinder(DoNotHardcodeCredentialsBase<SyntaxKind> analyzer) : base(analyzer) { }
 
             protected override string GetAssignedValue(LiteralExpressionSyntax syntaxNode, SemanticModel semanticModel) =>
-                syntaxNode.GetStringValue();
+                syntaxNode.GetStringValue(semanticModel);
 
             // We don't have a variable for cases that this finder should handle.  Cases with variable name are
             // handled by VariableDeclarationBannedWordsFinder and AssignmentExpressionBannedWordsFinder
