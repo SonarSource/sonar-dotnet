@@ -60,5 +60,20 @@ Namespace Tests.Diagnostics
             invalidIPv6 = "2001:db8:1234:ffff:ffff:ffff:ffff:ffff:1623:2316" ' Compliant
             invalidIPv6 = ":::4" ' Compliant
         End Sub
+
+        Public Sub StringInterpolation(ByVal unknownPart As String, ByVal knownPart As String)
+            Dim part1 As String = "192"
+            Dim part2 As String = "168"
+            Dim part3 As String = "0"
+            Dim part4 As String = "1"
+            knownPart = "255"
+            Dim ip1 As String = $"{part1}.{part2}.{part3}.{part4}"    ' Noncompliant
+            Dim nonIp As String = $"{part1}:{part2}"
+            Dim ip2 As String = $"{part1}.{part2}.{part3}.{knownPart}"  ' Noncompliant
+            Dim ip3 As String = $"{part1}.{part2}.{part3}.{unknownPart}"
+            Dim nestedConstInterpolation As String = $"{$"{part1}.{part2}"}.{part3}.{part4}" ' Noncompliant
+            Dim nestedInterpolation As String = $"{$"{part1}.{knownPart}"}.{part3}.{part4}"    ' Noncompliant
+        End Sub
+
     End Class
 End Namespace
