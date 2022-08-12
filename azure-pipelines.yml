@@ -1,47 +1,13 @@
-schedules:
-# Run from Monday to Friday at 5:30 UTC (https://docs.microsoft.com/en-us/azure/devops/pipelines/process/scheduled-triggers?view=azure-devops&tabs=yaml#cron-syntax)
-- cron: "30 5 * * 1-5"
-  displayName: Daily build
-  branches:
-    include:
-    - master
-  always: true
-
-trigger:
-- master
 
 pool: '.Net Bubble - GCP'
 
-variables:
-  - group: sonar-dotnet-variables-tmp
-  - group: sonarsource-build-variables
-  # To make sure we don`t use MsBuild 17.
-  - name: MsBuildPath
-    value: 'C:\Program Files\Microsoft Visual Studio\2022\Community\Msbuild\Current\Bin\msbuild.exe'
-  - name: isReleaseBranch
-    value: ${{ or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), startsWith(variables['Build.SourceBranch'], 'refs/heads/branch-')) }}
-  - name: vsVersion
-    value: '17.0'
-
-resources:
-  repositories:
-    - repository: pipelines-yaml-templates
-      type: git
-      name: pipelines-yaml-templates
-      ref:  refs/tags/v1.0.13
-
 stages:
-- template: stage-with-burgr-notifications.yml@pipelines-yaml-templates
-  parameters:
-    burgrName: 'build'
-    burgrType: 'build'
-    stageName: 'build'
-    # Build the dotnet analyzers and stage to repox
-    stageDisplayName: 'Build:'
-    jobs:
-    - job: dotnetBuildjob
-      displayName: 'Build and package'
+- stage: Debug
+  displayName: Debug
+  jobs:
+  - job: ListFiles
+    displayName: 'List Files'
 
-      steps:
-      - script: 'cd analyzers\src & dir /S'
-        displayName: "List files"
+    steps:
+    - script: 'cd analyzers\src & dir /S'
+      displayName: "List files"
