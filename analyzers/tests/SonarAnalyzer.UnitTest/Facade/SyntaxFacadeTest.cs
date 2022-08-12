@@ -27,8 +27,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
     [TestClass]
     public class SyntaxFacadeTest
     {
-        private readonly CSharpSyntaxFacade cs = new CSharpSyntaxFacade();
-        private readonly VisualBasicSyntaxFacade vb = new VisualBasicSyntaxFacade();
+        private readonly CSharpSyntaxFacade cs = new();
+        private readonly VisualBasicSyntaxFacade vb = new();
 
         [TestMethod]
         public void EnumMembers_Null_CS() =>
@@ -88,11 +88,11 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
         [TestMethod]
         public void NodeStringTextValue_UnexpectedType_CS() =>
-             cs.NodeStringTextValue(CS.SyntaxFactory.ThrowStatement()).Should().BeEmpty();
+             cs.NodeStringTextValue(CS.SyntaxFactory.ThrowStatement(), null).Should().BeEmpty();
 
         [TestMethod]
         public void NodeStringTextValue_UnexpectedType_VB() =>
-            vb.NodeStringTextValue(VB.SyntaxFactory.ThrowStatement()).Should().BeEmpty();
+            vb.NodeStringTextValue(VB.SyntaxFactory.ThrowStatement(), null).Should().BeEmpty();
 
         [TestMethod]
         public void RemoveConditionalAccess_Null_CS() =>

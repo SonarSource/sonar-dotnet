@@ -35,6 +35,10 @@ namespace Tests.Diagnostics
 //                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             tmp = Environment.GetEnvironmentVariable("TMP");            // Noncompliant
             tmp = Environment.GetEnvironmentVariable("TEMP");           // Noncompliant
+
+            string temp = "TEMP";
+            tmp = Environment.GetEnvironmentVariable(temp); // FN
+
             tmp = Environment.GetEnvironmentVariable(42); // Error [CS1503]
             tmp = Environment.GetEnvironmentVariable();   // Error [CS1501]
 
@@ -86,7 +90,6 @@ namespace Tests.Diagnostics
             // Interpolated
             tmp = $"/tmp/{partOfPath}";                                             // Noncompliant
 //                ^^^^^^^^^^^^^^^^^^^^
-
         }
 
         private string NonCompliantWithArg(string dir = "/tmp") // Noncompliant

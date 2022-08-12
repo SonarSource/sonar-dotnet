@@ -96,13 +96,18 @@ namespace SonarAnalyzer.Helpers.Facade
         public override SyntaxToken? NodeIdentifier(SyntaxNode node) =>
             node.NodeIdentifier();
 
-        public override string NodeStringTextValue(SyntaxNode node) =>
-            node switch
+        public override string NodeStringTextValue(SyntaxNode node, SemanticModel semanticModel)
+        {
+            if (node is InterpolatedStringExpressionSyntax interpolatedStringExpression)
             {
-                InterpolatedStringExpressionSyntax interpolatedStringExpression => interpolatedStringExpression.GetContentsText(),
-                LiteralExpressionSyntax literalExpression => literalExpression.Token.ValueText,
-                _ => string.Empty
-            };
+                interpolatedStringExpression.TryGetGetInterpolatedTextValue(semanticModel, out var interpolatedValue);
+                return interpolatedValue ?? interpolatedStringExpression.GetContentsText();
+            }
+            else
+            {
+                return node is LiteralExpressionSyntax literalExpression ? literalExpression.Token.ValueText : string.Empty;
+            }
+        }
 
         public override SyntaxNode RemoveConditionalAccess(SyntaxNode node) =>
             node is ExpressionSyntax expression

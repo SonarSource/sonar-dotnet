@@ -49,10 +49,10 @@ namespace SonarAnalyzer.Rules
             "/private/tmp",
             "/private/var/tmp",
         };
-        private readonly Regex userProfile = new Regex(@"^%USERPROFILE%[\\\/]AppData[\\\/]Local[\\\/]Temp", WindowsAndUnixOptions);
+        private readonly Regex userProfile = new(@"^%USERPROFILE%[\\\/]AppData[\\\/]Local[\\\/]Temp", WindowsAndUnixOptions);
         private readonly Regex linuxDirectories;
         private readonly Regex macDirectories;
-        private readonly Regex windowsDirectories = new Regex(@"^([a-z]:[\\\/]?|[\\\/][\\\/][^\\\/]+[\\\/]|[\\\/])(windows[\\\/])?te?mp([\\\/]|$)", WindowsAndUnixOptions);
+        private readonly Regex windowsDirectories = new(@"^([a-z]:[\\\/]?|[\\\/][\\\/][^\\\/]+[\\\/]|[\\\/])(windows[\\\/])?te?mp([\\\/]|$)", WindowsAndUnixOptions);
         private readonly Regex environmentVariables;
         private readonly DiagnosticDescriptor rule;
 
@@ -80,7 +80,7 @@ namespace SonarAnalyzer.Rules
                 c =>
                 {
                     if (IsEnabled(c.Options)
-                        && Language.Syntax.NodeStringTextValue(c.Node) is { } stringValue
+                        && Language.Syntax.NodeStringTextValue(c.Node, c.SemanticModel) is { } stringValue
                         && IsSensitiveDirectoryUsage(stringValue))
                     {
                         c.ReportIssue(Diagnostic.Create(rule, c.Node.GetLocation()));
