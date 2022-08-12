@@ -18,35 +18,35 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Extensions;
 
-namespace SonarAnalyzer.UnitTest.Extensions
+namespace SonarAnalyzer.UnitTest.Extensions.VisualBasic
 {
     [TestClass]
     public class InterpolatedStringExpressionSyntaxExtensionsTests
     {
         private const string CodeSnipet = @"
-public class C
-{{
-    public void M(int notConstant, string notConstantString)
-    {{
-        {0}
-    }}
+Public Class C
+        Public Sub M(ByVal notConstant As Integer, ByVal notConstantString As String)
+            {0}
+        End Sub
 
-    string Foo() => ""x"";
-}}";
+        Private Function Foo() As String
+            Return ""x""
+        End Function
+End Class";
 
         [DataTestMethod]
-        [DataRow(@"var methodCall = $""{Foo()}"";")]
-        [DataRow(@"var nestedMethodCall = $""{$""{$""{Foo()}""}""}"";")]
-        [DataRow(@"const int constant = 1;
-                 var mixConstantNonConstant = $""{notConstant}{constant}"";")]
-        [DataRow(@"const int constant = 1;
-                 var mixConstantAndLiteral = $""TextValue {constant}"";")]
-        [DataRow(@"const int constant = 1;
-                 var mix = $""{constant}{$""{Foo()}""}{""{notConstant}""}"";")]
+        [DataRow(@"Dim methodCall = $""{Foo()}""")]
+        [DataRow(@"Dim nestedMethodCall = $""{$""{$""{Foo()}""}""}""")]
+        [DataRow(@"Const constant As Integer = 1
+                   Dim mixConstantNonConstant = $""{notConstant}{constant}""")]
+        [DataRow(@"Const constant As Integer = 1
+                   Dim mixConstantAndLiteral = $""TextValue {constant}""")]
+        [DataRow(@"Const constant As Integer = 1
+                   Dim mix = $""{constant}{$""{Foo()}""}{""{notConstant}""}""")]
         public void TryGetGetInterpolatedTextValue_UnsupportedSyntaxKinds_ReturnsFalse(string code)
         {
             var codeSnipet = string.Format(CodeSnipet, code);
@@ -57,22 +57,21 @@ public class C
 
         [DataTestMethod]
         [DataRow(@"
-                   var textOnly = $""TextOnly"";
+                   Dim textOnly = $""TextOnly""
                  ",
                  "TextOnly")]
         [DataRow(@"
-                    const string constantString = ""Foo"";
-                    const string constantInterpolation = $""{constantString} with text."";
+                    Const constantString As String = ""Foo""
+                    Const constantInterpolation As String = $""{constantString} with text.""
                  ",
                  "Foo with text.")]
         [DataRow(@"
-                    const string constantString = ""Foo"";
-                    const string constantInterpolation = $""{$""Nested {constantString}""} with text."";
-                 ",
+                    Const constantString As String = ""Foo""
+                    Const constantInterpolation As String = $""{$""Nested {constantString}""} with text.""",
                  "Nested Foo with text.")]
         [DataRow(@"
-                    notConstantString = ""SomeValue"";
-                 string interpolatedString = $""{notConstantString}"";
+                    notConstantString = ""SomeValue""
+                    Dim interpolatedString As String = $""{notConstantString}""
                  ",
                  "SomeValue")]
         public void TryGetGetInterpolatedTextValue_SupportedSyntaxKinds_ReturnsTrue(string code, string expectedTextValue)
@@ -85,10 +84,10 @@ public class C
 
         private static (InterpolatedStringExpressionSyntax InterpolatedStringExpression, SemanticModel SemanticModel) Compile(string code)
         {
-            var tree = CSharpSyntaxTree.ParseText(code);
-            var compilation = CSharpCompilation.Create("TempAssembly.dll")
-                                               .AddSyntaxTrees(tree)
-                                               .AddReferences(MetadataReferenceFacade.ProjectDefaultReferences);
+            var tree = VisualBasicSyntaxTree.ParseText(code);
+            var compilation = VisualBasicCompilation.Create("TempAssembly.dll")
+                                                    .AddSyntaxTrees(tree)
+                                                    .AddReferences(MetadataReferenceFacade.ProjectDefaultReferences);
 
             var semanticModel = compilation.GetSemanticModel(tree);
 

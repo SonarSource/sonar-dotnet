@@ -86,6 +86,7 @@ namespace SonarAnalyzer.Helpers.Facade
                 ArgumentSyntax argument => argument.GetExpression(),
                 InvocationExpressionSyntax invocation => invocation.Expression,
                 SyncLockStatementSyntax syncLock => syncLock.Expression,
+                InterpolationSyntax interpolation => interpolation.Expression,
                 null => null,
                 _ => throw InvalidOperation(node, nameof(NodeExpression)),
             };
