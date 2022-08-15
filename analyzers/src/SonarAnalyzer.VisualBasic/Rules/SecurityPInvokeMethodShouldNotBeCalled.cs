@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override IMethodSymbol MethodSymbolForInvalidInvocation(SyntaxNode syntaxNode, SemanticModel semanticModel) =>
             semanticModel.GetSymbolInfo(syntaxNode).Symbol is IMethodSymbol methodSymbol
-            && GetMethodName(methodSymbol, semanticModel) is { } methodName
+            && GetMethodName(methodSymbol, semanticModel) is var methodName
             && InvalidMethods.Any(x => methodName.Equals(x, StringComparison.OrdinalIgnoreCase))
                 ? methodSymbol
                 : null;
