@@ -19,11 +19,11 @@
  */
 
 using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (LocalFunctionStatementSyntaxWrapper.IsInstance(context.Node))
             {
                 var wrapper = (LocalFunctionStatementSyntaxWrapper)context.Node;
-                if (wrapper.Body != null && IsEmpty(wrapper.Body))
+                if (wrapper.Body is { } body && body.IsEmpty())
                 {
                     context.ReportIssue(Diagnostic.Create(Rule, wrapper.Identifier.GetLocation()));
                 }
@@ -58,8 +58,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 var methodDeclaration = (MethodDeclarationSyntax)context.Node;
 
                 // No need to check for ExpressionBody as arrowed methods can't be empty
-                if (methodDeclaration.Body != null
-                    && IsEmpty(methodDeclaration.Body)
+                if (methodDeclaration.Body is { } body
+                    && body.IsEmpty()
                     && !ShouldMethodBeExcluded(methodDeclaration, context.SemanticModel, isTestProject))
                 {
                     context.ReportIssue(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation()));
@@ -82,19 +82,5 @@ namespace SonarAnalyzer.Rules.CSharp
 
             return methodNode.Modifiers.Any(SyntaxKind.OverrideKeyword) && isTestProject;
         }
-
-        private static bool IsEmpty(BlockSyntax node) =>
-            !node.Statements.Any() && !ContainsComment(node) && !ContainsConditionalCompilation(node);
-
-        private static bool ContainsConditionalCompilation(BlockSyntax node) =>
-            node.HasStructuredTrivia && node.DescendantTrivia().Any(x => x.HasStructure && x.IsKind(SyntaxKind.IfDirectiveTrivia));
-
-        private static bool ContainsComment(BlockSyntax node) =>
-            ContainsComment(node.OpenBraceToken.TrailingTrivia)
-            || ContainsComment(node.CloseBraceToken.LeadingTrivia);
-
-        private static bool ContainsComment(SyntaxTriviaList triviaList) =>
-            triviaList.Any(trivia => trivia.IsKind(SyntaxKind.SingleLineCommentTrivia)
-                                     || trivia.IsKind(SyntaxKind.MultiLineCommentTrivia));
     }
 }
