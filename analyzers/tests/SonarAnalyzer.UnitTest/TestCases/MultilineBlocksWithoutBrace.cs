@@ -1,173 +1,228 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Tests.TestCases
+﻿class SecondWithIdentationRoot
 {
-    class MultilineBlocksWithoutBrace
+    void While(bool condition)
     {
-        public static void Tests() { throw new Exception();}
-        public static int SomeMethod(int a)
-        {
-            if (a == 1)
-                a++;
-//              ^^^^ Secondary
-                return a; // Noncompliant
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^
+        while (condition)
+            Act.First();
 
-            if (true)
-            { }
-            else if (a == 2)
-            {
-
-            }
-            else if (a == 1)
-                a *= 3; // Secondary
-
-                return a; // Noncompliant {{This line will not be executed conditionally; only the first line of this 3-line block will be. The rest will execute unconditionally.}}
-
-            while (true)
-                while (true)
-                    a++; /*comment */ // Secondary
-    /**/            return a; // Noncompliant
-
-
-//            String empty = "";
-            return a + 10;
-        }
-
-        public void Test()
-        {
-            while (true)
-                Tests(); // Secondary
-                Tests(); // Noncompliant {{This line will not be executed in a loop; only the first line of this 2-line block will be. The rest will execute only once.}}
-
-            while (true)
-Tests(); // Secondary
-Tests(); // Noncompliant
-
-            if (true)
-                Tests();
-            Tests();
-
-            while (true)
-            {
-                Tests();
-            }
-            Tests();
-
-            if (true)
-                Tests(); // Secondary
-
-                Tests(); // Noncompliant
-
-            if (true)
-                Tests();
-            else
-                Tests(); // Secondary
-                Tests(); // Noncompliant
-
-            while (true)
-                Tests(); // Secondary
-   /*comment*/  Tests(); // Noncompliant
-
-            while (true)
-                Tests(); // Secondary
-            /*comment*/
-                Tests(); // Noncompliant
-        }
-
-        public void Test2(bool b)
-        {
-            int i = 1;
-            if (true)
-                i = 2;
-            else
-            if (false)
-            {
-                i = 3;
-            }
-            i = 4; // Compliant
-
-            if (b)
-                i = 2;
-            else
-            if (b)
-                i = 2;
-            else
-            if (b)
-                i = 2;
-            else
-            if (b)
-                i = 2;
-            i = 4; // Compliant
-
-            if (i==45)
-            {
-                ;
-            }
-            else
-            foreach(var j in new[] { 1 })
-            {
-                    ; ; ;
-            }
-
-            var x = b;
-            if (x) // Compliant
-            {
-                ; ;
-            }
-
-            if (i==45)
-            {
-                ;
-            }
-            else
-            foreach(var j in new[] { 1 })
-            ; // Secondary
-
-            if (x)  // Noncompliant, but should report only once
-            {
-                ; ;
-            }
-
-            if (true)
-                ;
-            else
-            if (false)
-                ;
-            ; // Compliant
-        }
-
-        void TestIfs(bool a, bool b)
-        {
-            if (a)
-            if (b)
-               Console.WriteLine();
-
-            Console.WriteLine();
-
-            if (a)
-            while (b)
-               Console.WriteLine();
-
-            Console.WriteLine();
-
-            while (a)
-            if (b)
-               Console.WriteLine();
-
-            Console.WriteLine();
-        }
-
-        void TestWeirdAlignment(bool a)
-        {
-            try {
-              if (a)
-                Console.WriteLine(); // This statement is aligned with the '{' of the try on purpose to fix https://github.com/SonarSource/sonar-dotnet/issues/264
-            } finally { }
-        }
+        Act.Second(); // Compliant
     }
+
+    void ForEach(string[] args)
+    {
+        foreach (var arg in args)
+            Act.First(arg);
+
+        Act.Second(); // Compliant
+    }
+
+    void If(bool condition)
+    {
+        if (condition)
+            Act.First();
+
+        Act.Second(); // Compliant
+    }
+
+    void Else(bool condition)
+    {
+        if(condition)
+            Act.Other();
+
+        else
+            Act.First();
+
+        Act.Second(); // Compliant
+    }
+
+    void ElseIf(bool condition)
+    {
+        if (condition)
+            Act.Other();
+
+        else if(condition)
+            Act.First();
+
+        Act.Second(); // Compliant
+    }
+}
+
+class SecondWithIdentationFirst
+{
+    void While(bool condition)
+    {
+        while (condition)
+            Act.First();
+        //  ^^^^^^^^^^^^ Secondary
+            Act.Second();
+        //  ^^^^^^^^^^^^^
+    }
+
+    void ForEach(string[] args)
+    {
+        foreach (var arg in args)
+            Act.First(arg); // Secondary
+            Act.Second(); // Noncompliant {{This line will not be executed in a loop; only the first line of this 2-line block will be. The rest will execute only once.}}
+    }
+
+    void If(bool condition)
+    {
+        if (condition)
+            Act.First(); // Secondary
+            Act.Second(); // Noncompliant {{This line will not be executed conditionally; only the first line of this 2-line block will be. The rest will execute unconditionally.}}
+    }
+
+    void Else(bool condition)
+    {
+        if (condition)
+            Act.Other();
+
+        else
+            Act.First(); // Secondary
+            Act.Second(); // Noncompliant {{This line will not be executed conditionally; only the first line of this 2-line block will be. The rest will execute unconditionally.}}
+    }
+
+    void ElseIf(bool condition)
+    {
+        if (condition)
+            Act.Other();
+
+        else if (condition)
+            Act.First(); // Secondary
+            Act.Second(); // Noncompliant {{This line will not be executed conditionally; only the first line of this 2-line block will be. The rest will execute unconditionally.}}
+    }
+}
+
+class FirstAndSecondOneSameLine
+{
+    void While(bool condition)
+    {
+        while (condition) Act.First(); Act.Second();
+        //                ^^^^^^^^^^^^ Secondary
+        //                             ^^^^^^^^^^^^^ @-1
+    }
+
+    void ForEach(string[] args)
+    {
+        foreach (var arg in args) Act.First(arg); Act.Second();
+        //                        ^^^^^^^^^^^^^^^ Secondary
+        //                                        ^^^^^^^^^^^^^ @-1
+    }
+
+    void If(bool condition)
+    {
+        if (condition) Act.First(); Act.Second();
+        //             ^^^^^^^^^^^^ Secondary
+        //                          ^^^^^^^^^^^^^ @-1
+    }
+
+    void Else(bool condition)
+    {
+        if (condition) Act.Other();
+        else Act.First(); Act.Second();
+        //   ^^^^^^^^^^^^ Secondary
+        //                ^^^^^^^^^^^^^ @-1
+    }
+
+    void ElseIf(bool condition)
+    {
+        if (condition) Act.Other();
+        else if (condition) Act.First(); Act.Second();
+        //                  ^^^^^^^^^^^^ Secondary
+        //                               ^^^^^^^^^^^^^ @-1
+    }
+}
+
+class FirstOneSameLineAndSecondWithIndentation
+{
+    void While(bool condition)
+    {
+        while (condition) Act.First(); // Secondary
+            Act.Second(); // Noncompliant
+    }
+
+    void ForEach(string[] args)
+    {
+        foreach (var arg in args) Act.First(arg); // Secondary
+            Act.Second(); // Noncompliant
+    }
+
+    void If(bool condition)
+    {
+        if (condition) Act.First(); // Secondary
+            Act.Second(); // Noncompliant
+    }
+
+    void Else(bool condition)
+    {
+        if (condition) Act.Other();
+        else Act.First(); // Secondary
+            Act.Second(); // Noncompliant
+    }
+
+    void ElseIf(bool condition)
+    {
+        if (condition) Act.Other();
+        else if (condition) Act.First(); // Secondary
+            Act.Second(); // Noncompliant
+    }
+}
+
+class Nested
+{
+    void While(bool condition)
+    {
+        while(true)
+            while (condition) Act.First(); // Secondary
+                Act.Second(); // Noncompliant
+    }
+
+    void ForEach(string[] args)
+    {
+        foreach(var _ in args)
+            foreach (var arg in args) Act.First(arg); // Secondary
+                Act.Second(); // Noncompliant
+    }
+
+    void If(bool condition)
+    {
+        if (condition)
+            if (condition) Act.First(); // Secondary
+                Act.Second(); // Noncompliant
+    }
+}
+
+class Other
+{
+    int WithReturnStatement(bool condition)
+    {
+        while (condition)
+            Act.First();
+        //  ^^^^^^^^^^^^ Secondary
+            return Act.Second();
+        //  ^^^^^^^^^^^^^^^^^^^^
+    }
+
+    void ZeroIdentation(bool condition)
+    {
+        if (condition)
+Act.First(); // Secondary
+Act.Second(); // Noncompliant
+    }
+
+    void AlternativeIndentation(bool condition)
+    {
+        try {
+          if (condition)
+            Act.First(); // This statement is aligned with the '{' of the try on purpose to fix https://github.com/SonarSource/sonar-dotnet/issues/264
+        }
+        finally { }
+    }
+}
+
+class Act
+{
+    public static void First(string arg = "") { }
+    public static int Second() { return 42; }
+    public static void Other() { }
 }
