@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -89,10 +90,12 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    if (BaseNamespaceDeclarationSyntaxWrapper.IsInstance(c.Node))
+                    var namespaceDeclaration = (BaseNamespaceDeclarationSyntaxWrapper)c.Node;
+                    if (c.Node.Parent is CompilationUnitSyntax compilationUnit
+                        && (HasSqlNamespace(compilationUnit.Usings) || HasSqlNamespace(namespaceDeclaration.Usings)))
                     {
                         var visitor = new StringConcatenationWalker(c);
-                        foreach (var member in NamespaceMembers((BaseNamespaceDeclarationSyntaxWrapper)c.Node))
+                        foreach (var member in namespaceDeclaration.Members)
                         {
                             visitor.SafeVisit(member);
                         }
@@ -100,12 +103,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.NamespaceDeclaration,
                 SyntaxKindEx.FileScopedNamespaceDeclaration);
-
-        private static SyntaxList<MemberDeclarationSyntax> NamespaceMembers(BaseNamespaceDeclarationSyntaxWrapper namespaceWrapper) =>
-            namespaceWrapper.SyntaxNode.Parent is CompilationUnitSyntax compilationUnit
-                && (HasSqlNamespace(compilationUnit.Usings) || HasSqlNamespace(namespaceWrapper.Usings))
-                ? namespaceWrapper.Members
-                : new SyntaxList<MemberDeclarationSyntax> { };
 
         private static bool HasSqlNamespace(SyntaxList<UsingDirectiveSyntax> usings) =>
             usings.Select(x => x.Name)
