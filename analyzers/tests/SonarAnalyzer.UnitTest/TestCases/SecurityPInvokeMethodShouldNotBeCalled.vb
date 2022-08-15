@@ -83,4 +83,16 @@ Namespace Tests.TestCases
 
     End Class
 
+    Public Class Compliant
+
+        Declare Function CoInitializeSecurity Lib "Random.dll" (pVoid As IntPtr, cAuthSvc As Integer, asAuthSvc As IntPtr, pReserved1 As IntPtr, level As RpcAuthnLevel, impers As RpcImpLevel, pAuthList As IntPtr, dwCapabilities As EoAuthnCap, pReserved3 As IntPtr) As Integer
+
+        Public Sub DoSomething()
+            Dim Hres1 As Integer = CoInitializeSecurity(IntPtr.Zero, -1, IntPtr.Zero, IntPtr.Zero, RpcAuthnLevel.None, RpcImpLevel.Impersonate, IntPtr.Zero, EoAuthnCap.None, IntPtr.Zero)
+
+            NonexistentMethod() ' Error [BC30451]
+        End Sub
+
+    End Class
+
 End Namespace
