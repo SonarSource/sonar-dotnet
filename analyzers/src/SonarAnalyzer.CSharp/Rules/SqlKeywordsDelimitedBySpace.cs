@@ -89,20 +89,19 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var visitor = new StringConcatenationWalker(c);
-                    foreach (var member in NamespaceMembers((BaseNamespaceDeclarationSyntaxWrapper)c.Node))
+                    var namespaceDeclaration = (BaseNamespaceDeclarationSyntaxWrapper)c.Node;
+                    if (namespaceDeclaration.SyntaxNode.Parent is CompilationUnitSyntax compilationUnit
+                        && (HasSqlNamespace(compilationUnit.Usings) || HasSqlNamespace(namespaceDeclaration.Usings)))
                     {
-                        visitor.SafeVisit(member);
+                        var visitor = new StringConcatenationWalker(c);
+                        foreach (var member in namespaceDeclaration.Members)
+                        {
+                            visitor.SafeVisit(member);
+                        }
                     }
                 },
                 SyntaxKind.NamespaceDeclaration,
                 SyntaxKindEx.FileScopedNamespaceDeclaration);
-
-        private static SyntaxList<MemberDeclarationSyntax> NamespaceMembers(BaseNamespaceDeclarationSyntaxWrapper namespaceWrapper) =>
-            namespaceWrapper.SyntaxNode.Parent is CompilationUnitSyntax compilationUnit
-                && (HasSqlNamespace(compilationUnit.Usings) || HasSqlNamespace(namespaceWrapper.Usings))
-                ? namespaceWrapper.Members
-                : new SyntaxList<MemberDeclarationSyntax> { };
 
         private static bool HasSqlNamespace(SyntaxList<UsingDirectiveSyntax> usings) =>
             usings.Select(x => x.Name)
