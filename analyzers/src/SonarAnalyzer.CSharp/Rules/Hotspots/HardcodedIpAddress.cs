@@ -23,7 +23,6 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
-using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -36,21 +35,6 @@ namespace SonarAnalyzer.Rules.CSharp
         public HardcodedIpAddress() : this(AnalyzerConfiguration.Hotspot) { }
 
         public HardcodedIpAddress(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration) { }
-
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
-                {
-                    var interpolatedString = (InterpolatedStringExpressionSyntax)c.Node;
-                    if (interpolatedString.TryGetGetInterpolatedTextValue(c.SemanticModel, out var stringContent)
-                        && IsHardcodedIp(stringContent, interpolatedString))
-                    {
-                        c.ReportIssue(Diagnostic.Create(Rule, interpolatedString.GetLocation(), stringContent));
-                    }
-                },
-                SyntaxKind.InterpolatedStringExpression);
-            base.Initialize(context);
-        }
 
         protected override string GetValueText(LiteralExpressionSyntax literalExpression) =>
             literalExpression.Token.ValueText;

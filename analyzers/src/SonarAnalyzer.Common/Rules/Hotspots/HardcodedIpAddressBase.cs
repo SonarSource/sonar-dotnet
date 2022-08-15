@@ -59,8 +59,11 @@ namespace SonarAnalyzer.Rules
         protected HardcodedIpAddressBase(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration) =>
             Rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
 
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, CheckForHardcodedIpAddresses, Language.SyntaxKind.StringLiteralExpression);
+        protected override void Initialize(SonarAnalysisContext context)
+        {
+            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, CheckForHardcodedIpAddressesInStringLiteral, Language.SyntaxKind.StringLiteralExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, CheckForHardcodedIpAddressesInStringInterpolation, Language.SyntaxKind.InterpolatedStringExpression);
+        }
 
         protected bool IsHardcodedIp(string literalValue, SyntaxNode node) =>
             literalValue != IPv4Broadcast
@@ -71,7 +74,7 @@ namespace SonarAnalyzer.Rules
             && !IsIgnoredVariableName(node)
             && !HasAttributes(node);
 
-        private void CheckForHardcodedIpAddresses(SyntaxNodeAnalysisContext context)
+        private void CheckForHardcodedIpAddressesInStringLiteral(SyntaxNodeAnalysisContext context)
         {
             if (IsEnabled(context.Options)
                 && (TLiteralExpression)context.Node is var stringLiteral
@@ -79,6 +82,16 @@ namespace SonarAnalyzer.Rules
                 && IsHardcodedIp(literalValue, stringLiteral))
             {
                 context.ReportIssue(Diagnostic.Create(Rule, stringLiteral.GetLocation(), literalValue));
+            }
+        }
+
+        private void CheckForHardcodedIpAddressesInStringInterpolation(SyntaxNodeAnalysisContext context)
+        {
+            if (IsEnabled(context.Options)
+                && Language.Syntax.TryGetGetInterpolatedTextValue(context.Node, context.SemanticModel, out var stringContent)
+                && IsHardcodedIp(stringContent, context.Node))
+            {
+                context.ReportIssue(Diagnostic.Create(Rule, context.Node.GetLocation(), stringContent));
             }
         }
 
