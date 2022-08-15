@@ -26,23 +26,34 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DoNotCheckZeroSizeCollectionTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.DoNotCheckZeroSizeCollection>();
+        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.DoNotCheckZeroSizeCollection>();
+
         [TestMethod]
         public void DoNotCheckZeroSizeCollection_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotCheckZeroSizeCollection.cs", new CS.DoNotCheckZeroSizeCollection());
+            builderCS.AddPaths("DoNotCheckZeroSizeCollection.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void DoNotCheckZeroSizeCollection_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotCheckZeroSizeCollection.CSharp9.cs", new CS.DoNotCheckZeroSizeCollection());
+            builderCS.AddPaths("DoNotCheckZeroSizeCollection.CSharp9.cs")
+                .WithTopLevelStatements()
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
 
         [TestMethod]
         public void DoNotCheckZeroSizeCollection_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\DoNotCheckZeroSizeCollection.CSharp10.cs", new CS.DoNotCheckZeroSizeCollection());
+            builderCS.AddPaths("DoNotCheckZeroSizeCollection.CSharp10.cs")
+                .WithTopLevelStatements()
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .Verify();
+
 #endif
 
         [TestMethod]
         public void DoNotCheckZeroSizeCollection_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotCheckZeroSizeCollection.vb",
-                new VB.DoNotCheckZeroSizeCollection());
+            builderVB.AddPaths("DoNotCheckZeroSizeCollection.vb")
+                .Verify();
     }
 }
