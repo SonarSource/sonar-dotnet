@@ -89,13 +89,10 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    if (BaseNamespaceDeclarationSyntaxWrapper.IsInstance(c.Node))
+                    var visitor = new StringConcatenationWalker(c);
+                    foreach (var member in NamespaceMembers((BaseNamespaceDeclarationSyntaxWrapper)c.Node))
                     {
-                        var visitor = new StringConcatenationWalker(c);
-                        foreach (var member in NamespaceMembers((BaseNamespaceDeclarationSyntaxWrapper)c.Node))
-                        {
-                            visitor.SafeVisit(member);
-                        }
+                        visitor.SafeVisit(member);
                     }
                 },
                 SyntaxKind.NamespaceDeclaration,
