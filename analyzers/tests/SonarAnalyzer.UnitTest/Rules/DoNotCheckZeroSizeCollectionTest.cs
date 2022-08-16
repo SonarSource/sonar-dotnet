@@ -53,7 +53,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void DoNotCheckZeroSizeCollection_VB() =>
-            builderVB.AddPaths("DoNotCheckZeroSizeCollection.vb")
-                .Verify();
+            builderVB.AddPaths("DoNotCheckZeroSizeCollection.vb").Verify();
     }
 }

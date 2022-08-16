@@ -24,6 +24,10 @@ if (r is R { SomeProperty.Length: >= 42 })
 {
 }
 
+if (r is R {  :  52 }) // Error [CS1001, CS8503]
+{
+}
+
 record R
 {
     public string[] SomeProperty { get; set; }
