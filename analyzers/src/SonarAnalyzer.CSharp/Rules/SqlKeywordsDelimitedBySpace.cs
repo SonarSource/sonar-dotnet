@@ -28,6 +28,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -88,8 +89,8 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var namespaceDeclaration = (NamespaceDeclarationSyntax)c.Node;
-                    if (namespaceDeclaration.Parent is CompilationUnitSyntax compilationUnit
+                    var namespaceDeclaration = (BaseNamespaceDeclarationSyntaxWrapper)c.Node;
+                    if (namespaceDeclaration.SyntaxNode.Parent is CompilationUnitSyntax compilationUnit
                         && (HasSqlNamespace(compilationUnit.Usings) || HasSqlNamespace(namespaceDeclaration.Usings)))
                     {
                         var visitor = new StringConcatenationWalker(c);
@@ -99,7 +100,8 @@ namespace SonarAnalyzer.Rules.CSharp
                         }
                     }
                 },
-                SyntaxKind.NamespaceDeclaration);
+                SyntaxKind.NamespaceDeclaration,
+                SyntaxKindEx.FileScopedNamespaceDeclaration);
 
         private static bool HasSqlNamespace(SyntaxList<UsingDirectiveSyntax> usings) =>
             usings.Select(x => x.Name)

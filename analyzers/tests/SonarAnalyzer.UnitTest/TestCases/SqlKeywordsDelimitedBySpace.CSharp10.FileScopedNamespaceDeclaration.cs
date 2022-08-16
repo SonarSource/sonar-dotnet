@@ -9,8 +9,8 @@ record Record
     public void VariousSqlKeywords()
     {
         var select = "SELECT e.*, f" +
-            "FROM DimEmployee AS e" + // FN
-            "ORDER BY LastName;"; // FN
+            "FROM DimEmployee AS e" + // Noncompliant
+            "ORDER BY LastName;"; // Noncompliant
     }
 }
 
@@ -19,6 +19,6 @@ record struct RecordStruct
     public RecordStruct() { }
 
     private string field = "SELECT col,col2" +
-        "FROM TABLE" +  // FN
-        "WHERE X = 1;"; // FN
+        "FROM TABLE" +  // Noncompliant
+        "WHERE X = 1;"; // Noncompliant
 }
