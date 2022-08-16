@@ -108,6 +108,18 @@ Namespace Tests.TestCases
             End Get
         End Property
 
+        Public Sub Examples()
+            Const t As String = "T"
+            Const e As String = "E"
+            Const m As String = "M"
+            Const p As String = "P"
+            Const part1 As String = "/tEmP" ' Noncompliant
+            Const part2 As String = "/f"
+            Dim noncompliant2 As String = $"{part1}{part2}" ' Noncompliant
+            Dim tmp = Environment.GetEnvironmentVariable($"{t}{e}{m}{p}") ' Noncompliant
+            tmp = Environment.GetEnvironmentVariable($"{t}{e}{m}{p}{5}")
+        End Sub
+
     End Class
 
 End Namespace

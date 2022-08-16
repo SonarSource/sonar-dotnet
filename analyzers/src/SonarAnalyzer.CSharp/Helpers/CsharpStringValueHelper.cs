@@ -18,23 +18,21 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using CS = SonarAnalyzer.Rules.CSharp;
-using VB = SonarAnalyzer.Rules.VisualBasic;
+using System;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.Helpers
 {
-    [TestClass]
-    public class SecurityPInvokeMethodShouldNotBeCalledTest
+    public class CsharpStringValueHelper : StringValueHelper<SyntaxKind, InterpolatedStringExpressionSyntax, LiteralExpressionSyntax>
     {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.SecurityPInvokeMethodShouldNotBeCalled>();
-        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.SecurityPInvokeMethodShouldNotBeCalled>();
+        private static readonly Lazy<CsharpStringValueHelper> Singleton = new(() => new CsharpStringValueHelper());
 
-        [TestMethod]
-        public void SecurityPInvokeMethodShouldNotBeCalled_CS() =>
-            builderCS.AddPaths("SecurityPInvokeMethodShouldNotBeCalled.cs").Verify();
+        public static CsharpStringValueHelper Instance => Singleton.Value;
 
-        [TestMethod]
-        public void SecurityPInvokeMethodShouldNotBeCalled_VB() =>
-            builderVB.AddPaths("SecurityPInvokeMethodShouldNotBeCalled.vb").Verify();
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
+        protected override SyntaxToken Token(LiteralExpressionSyntax literalExpression) => literalExpression.Token;
     }
 }

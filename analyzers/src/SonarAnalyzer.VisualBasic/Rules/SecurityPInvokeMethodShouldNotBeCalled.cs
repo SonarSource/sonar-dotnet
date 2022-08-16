@@ -33,20 +33,20 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        protected override bool IsImportFromInteropDll(ISymbol symbol) =>
-            base.IsImportFromInteropDll(symbol)
+        protected override bool IsImportFromInteropDll(ISymbol symbol, SemanticModel semanticModel) =>
+            base.IsImportFromInteropDll(symbol, semanticModel)
             || (symbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is DeclareStatementSyntax declaration
-                && IsInterop(declaration.LibraryName?.GetStringValue()));
+                && IsInterop(declaration.LibraryName?.GetStringValue(semanticModel)));
 
-        protected override string GetMethodName(ISymbol symbol) =>
+        protected override string GetMethodName(ISymbol symbol, SemanticModel semanticModel) =>
             symbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is DeclareStatementSyntax declaration
             && declaration.AliasName != null
-                ? declaration.AliasName.GetStringValue()
+                ? declaration.AliasName.GetStringValue(semanticModel)
                 : symbol.Name;
 
         protected override IMethodSymbol MethodSymbolForInvalidInvocation(SyntaxNode syntaxNode, SemanticModel semanticModel) =>
             semanticModel.GetSymbolInfo(syntaxNode).Symbol is IMethodSymbol methodSymbol
-            && GetMethodName(methodSymbol) is { } methodName
+            && GetMethodName(methodSymbol, semanticModel) is var methodName
             && InvalidMethods.Any(x => methodName.Equals(x, StringComparison.OrdinalIgnoreCase))
                 ? methodSymbol
                 : null;

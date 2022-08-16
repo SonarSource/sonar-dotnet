@@ -50,11 +50,11 @@ namespace SonarAnalyzer.Rules
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, CheckForIssue, Language.SyntaxKind.InvocationExpression);
 
-        protected virtual bool IsImportFromInteropDll(ISymbol symbol) =>
+        protected virtual bool IsImportFromInteropDll(ISymbol symbol, SemanticModel semanticModel) =>
             symbol.GetAttributes(KnownType.System_Runtime_InteropServices_DllImportAttribute).FirstOrDefault() is AttributeData attributeData
             && attributeData.ConstructorArguments.Any(x => x.Value is string stringValue && IsInterop(stringValue));
 
-        protected virtual string GetMethodName(ISymbol symbol) =>
+        protected virtual string GetMethodName(ISymbol symbol, SemanticModel semanticModel) =>
             symbol.Name;
 
         protected static bool IsInterop(string dllName) =>
@@ -68,9 +68,9 @@ namespace SonarAnalyzer.Rules
                 && MethodSymbolForInvalidInvocation(directMethodCall, analysisContext.SemanticModel) is IMethodSymbol methodSymbol
                 && methodSymbol.IsExtern
                 && methodSymbol.IsStatic
-                && IsImportFromInteropDll(methodSymbol))
+                && IsImportFromInteropDll(methodSymbol, analysisContext.SemanticModel))
             {
-                analysisContext.ReportIssue(Diagnostic.Create(Rule, Language.Syntax.NodeIdentifier(directMethodCall).Value.GetLocation(), GetMethodName(methodSymbol)));
+                analysisContext.ReportIssue(Diagnostic.Create(Rule, Language.Syntax.NodeIdentifier(directMethodCall).Value.GetLocation(), GetMethodName(methodSymbol, analysisContext.SemanticModel)));
             }
         }
     }
