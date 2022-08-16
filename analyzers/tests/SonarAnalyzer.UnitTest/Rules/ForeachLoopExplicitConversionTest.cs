@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.Diagnostics;
-using System.IO;
 using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -35,9 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void ForeachLoopExplicitConversion_CSharp10() =>
-           // OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\ForeachLoopExplicitConversion.CSharp10.cs", new ForeachLoopExplicitConversion());
-        verifier
-                .AddPaths("ForeachLoopExplicitConversion.CSharp10.cs")
+            verifier.AddPaths("ForeachLoopExplicitConversion.CSharp10.cs")
                 .WithConcurrentAnalysis(false)
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
                 .Verify();
