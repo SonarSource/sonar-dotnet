@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -34,28 +35,21 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3261";
         private const string MessageFormat = "Remove this empty namespace.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            // in order to let the tests work properly, we do this in a tree action
-            // https://github.com/dotnet/roslyn/issues/4745 was fixed in Roslyn 1.1,
-            // so in the IDE it should already be fine.
-            context.RegisterSyntaxTreeActionInNonGenerated(
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var namespaces = c.Tree.GetCompilationUnitRoot().DescendantNodes()
-                        .OfType<NamespaceDeclarationSyntax>()
-                        .Where(ns=> !ns.Members.Any());
-
-                    foreach (var ns in namespaces)
+                    var namespaceDeclaration = (BaseNamespaceDeclarationSyntaxWrapper)c.Node;
+                    if (!namespaceDeclaration.Members.Any())
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, ns.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(Rule, namespaceDeclaration.SyntaxNode.GetLocation()));
                     }
-                });
-        }
+                },
+                SyntaxKind.NamespaceDeclaration,
+                SyntaxKindEx.FileScopedNamespaceDeclaration);
     }
 }
