@@ -1,10 +1,9 @@
 ﻿global using System.Collections;
 global using System.Collections.Generic;
-using System.Linq;
 
 namespace Tests.Diagnostics;
 using System;
-// the System.Linq using should be here as this is the closest namespace
+using System.Linq;
 
 interface I { }
 class A : I { }
