@@ -52,13 +52,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var subPattern in propertyPatternClause.Subpatterns)
             {
-                if (subPattern.NameColon != null)
+                if (subPattern.ExpressionColon.SyntaxNode is NameColonSyntax nameColon)
                 {
-                    CheckPatternCondition(c, subPattern.NameColon.Name, subPattern.Pattern.SyntaxNode.RemoveParentheses());
+                    CheckPatternCondition(c, nameColon.Name, subPattern.Pattern.SyntaxNode.RemoveParentheses());
                 }
-                else
+                else if (ExpressionColonSyntaxWrapper.IsInstance(subPattern.ExpressionColon.SyntaxNode)
+                         && (ExpressionColonSyntaxWrapper)subPattern.ExpressionColon.SyntaxNode is var expressionColon)
                 {
-                    // Handle C#10 ExpressionColon
+                    CheckPatternCondition(c, expressionColon.Expression, subPattern.Pattern.SyntaxNode.RemoveParentheses());
                 }
             }
         }
