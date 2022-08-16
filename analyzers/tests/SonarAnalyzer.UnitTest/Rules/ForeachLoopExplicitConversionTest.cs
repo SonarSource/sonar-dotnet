@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis.Diagnostics;
+using System.IO;
 using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -25,30 +27,36 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ForeachLoopExplicitConversionTest
     {
+        private readonly VerifierBuilder verifier = new VerifierBuilder<ForeachLoopExplicitConversion>();
+
         [TestMethod]
         public void ForeachLoopExplicitConversion() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ForeachLoopExplicitConversion.cs", new ForeachLoopExplicitConversion());
+            verifier.AddPaths("ForeachLoopExplicitConversion.cs").Verify();
 
         [TestMethod]
         public void ForeachLoopExplicitConversion_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\ForeachLoopExplicitConversion.CSharp10.cs", new ForeachLoopExplicitConversion());
+           // OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\ForeachLoopExplicitConversion.CSharp10.cs", new ForeachLoopExplicitConversion());
+        verifier
+                .AddPaths("ForeachLoopExplicitConversion.CSharp10.cs")
+                .WithConcurrentAnalysis(false)
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .Verify();
 
         [TestMethod]
         public void ForeachLoopExplicitConversion_CodeFix() =>
-            OldVerifier.VerifyCodeFix<ForeachLoopExplicitConversionCodeFix>(
-                @"TestCases\ForeachLoopExplicitConversion.cs",
-                @"TestCases\ForeachLoopExplicitConversion.Fixed.cs",
-                new ForeachLoopExplicitConversion());
-
+            verifier.WithCodeFix<ForeachLoopExplicitConversionCodeFix>()
+                .AddPaths("ForeachLoopExplicitConversion.cs")
+                .WithCodeFixedPaths("ForeachLoopExplicitConversion.Fixed.cs")
+                .VerifyCodeFix();
 #if NET
         [TestMethod]
         public void ForeachLoopExplicitConversion_CSharp10_CodeFix() =>
-            OldVerifier.VerifyCodeFix<ForeachLoopExplicitConversionCodeFix>(
-                @"TestCases\ForeachLoopExplicitConversion.CSharp10.cs",
-                @"TestCases\ForeachLoopExplicitConversion.CSharp10.Fixed.cs",
-                new ForeachLoopExplicitConversion(),
-                ParseOptionsHelper.FromCSharp10,
-                OutputKind.DynamicallyLinkedLibrary);
+            verifier.WithCodeFix<ForeachLoopExplicitConversionCodeFix>()
+                .AddPaths("ForeachLoopExplicitConversion.CSharp10.cs")
+                .WithCodeFixedPaths("ForeachLoopExplicitConversion.CSharp10.Fixed.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .WithOutputKind(OutputKind.DynamicallyLinkedLibrary)
+                .VerifyCodeFix();
 #endif
 
     }
