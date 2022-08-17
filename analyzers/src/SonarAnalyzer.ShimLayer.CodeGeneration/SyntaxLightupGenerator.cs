@@ -1239,6 +1239,13 @@ namespace StyleCop.Analyzers.CodeGeneration
 
         private sealed class NodeData
         {
+            private static readonly ImmutableHashSet<string> ClassesThatShouldBeAlwaysGenerated = ImmutableHashSet.Create<string>(
+                nameof(AnonymousFunctionExpressionSyntax),
+                nameof(LambdaExpressionSyntax),
+                nameof(ParenthesizedLambdaExpressionSyntax),
+                nameof(SimpleLambdaExpressionSyntax)
+                );
+
             public NodeData(in GeneratorExecutionContext context, XElement element)
             {
                 this.Kind = element.Name.LocalName switch
@@ -1254,7 +1261,9 @@ namespace StyleCop.Analyzers.CodeGeneration
                 this.ExistingType = context.Compilation.GetTypeByMetadataName($"Microsoft.CodeAnalysis.CSharp.Syntax.{this.Name}")
                     ?? context.Compilation.GetTypeByMetadataName($"Microsoft.CodeAnalysis.CSharp.{this.Name}")
                     ?? context.Compilation.GetTypeByMetadataName($"Microsoft.CodeAnalysis.{this.Name}");
-                if (this.ExistingType?.DeclaredAccessibility == Accessibility.Public)
+
+                if (this.ExistingType?.DeclaredAccessibility == Accessibility.Public
+                    && !ClassesThatShouldBeAlwaysGenerated.Contains(this.Name))
                 {
                     this.WrapperName = null;
                 }

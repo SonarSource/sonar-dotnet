@@ -11,15 +11,15 @@ namespace Net6Poc.ImplementSerializationMethodsCorrectly
         {
             [OnSerializing] int Get() => 1; // Noncompliant {{Serialization attributes on local functions are not considered.}}
 
-            _ = collection.Select([OnSerialized] (x) => x + 1);  // Compliant - FN
+            _ = collection.Select([OnSerialized] (x) => x + 1);  // Noncompliant {{Serialization attributes on lambdas are not considered.}}
 
-            Action a = [OnDeserializing] () => { }; // Compliant - FN
+            Action a = [OnDeserializing] () => { }; // Noncompliant
 
             Action x = true
-                           ? ([OnDeserialized] () => { }) // Compliant - FN
-                           : [OnDeserialized] () => { };  // Compliant - FN
+                           ? ([OnDeserialized] () => { }) // Noncompliant
+                           : [OnDeserialized] () => { };  // Noncompliant
 
-            Call([OnDeserialized] (x) => { });
+            Call([OnDeserialized] (x) => { }); // Noncompliant
         }
 
         private void Call(Action<int> action) => action(1);
