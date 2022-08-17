@@ -26,37 +26,50 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ImplementSerializationMethodsCorrectlyTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ImplementSerializationMethodsCorrectly>();
+        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.ImplementSerializationMethodsCorrectly>();
+
         [TestMethod]
         public void ImplementSerializationMethodsCorrectly_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ImplementSerializationMethodsCorrectly.cs", new CS.ImplementSerializationMethodsCorrectly());
+            builderCS.AddPaths("ImplementSerializationMethodsCorrectly.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void ImplementSerializationMethodsCorrectly_CS_FromCSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ImplementSerializationMethodsCorrectly.CSharp9.cs", new CS.ImplementSerializationMethodsCorrectly());
+            builderCS.AddPaths("ImplementSerializationMethodsCorrectly.CSharp9.cs")
+                .WithTopLevelStatements()
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
 
         [TestMethod]
         public void ImplementSerializationMethodsCorrectly_CS_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\ImplementSerializationMethodsCorrectly.CSharp10.cs", new CS.ImplementSerializationMethodsCorrectly());
+            builderCS.AddPaths("ImplementSerializationMethodsCorrectly.CSharp10.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .Verify();
 
         [TestMethod]
         public void ImplementSerializationMethodsCorrectly_CS_CSharpPreview() =>
-            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\ImplementSerializationMethodsCorrectly.CSharp.Preview.cs", new CS.ImplementSerializationMethodsCorrectly());
+            builderCS.AddPaths("ImplementSerializationMethodsCorrectly.CSharp.Preview.cs")
+                .WithOptions(ParseOptionsHelper.CSharpPreview)
+                .Verify();
 
 #endif
 
         [TestMethod]
         public void ImplementSerializationMethodsCorrectly_CS_InvalidCode() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builderCS.AddSnippet(@"
 [Serializable]
 public class Foo
 {
     [OnDeserializing]
     public int  { throw new NotImplementedException(); }
-}", new CS.ImplementSerializationMethodsCorrectly(), CompilationErrorBehavior.Ignore);
+}")
+                .WithErrorBehavior(CompilationErrorBehavior.Ignore)
+                .Verify();
 
         [TestMethod]
         public void ImplementSerializationMethodsCorrectly_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ImplementSerializationMethodsCorrectly.vb", new VB.ImplementSerializationMethodsCorrectly());
+            builderVB.AddPaths("ImplementSerializationMethodsCorrectly.vb").Verify();
     }
 }

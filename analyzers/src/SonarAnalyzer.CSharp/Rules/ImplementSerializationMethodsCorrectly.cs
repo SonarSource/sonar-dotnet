@@ -21,6 +21,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Extensions;
@@ -49,18 +50,30 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
-            {
-                var wrapper = (LocalFunctionStatementSyntaxWrapper)c.Node;
-                var attributes = GetSerializationAttributes(wrapper.AttributeLists, c.SemanticModel);
-
-                foreach (var attribute in attributes)
                 {
-                    c.ReportIssue(Diagnostic.Create(attributeOnLocalFunctionRule, attribute.GetLocation()));
-                }
-            },
-            SyntaxKindEx.LocalFunctionStatement);
+                    var wrapper = (LocalFunctionStatementSyntaxWrapper)c.Node;
+                    var attributes = GetSerializationAttributes(wrapper.AttributeLists, c.SemanticModel);
+                    ReportOnAttributes(c, attributes, "local functions");
+                },
+                SyntaxKindEx.LocalFunctionStatement);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+                {
+                    var wrapper = (ParenthesizedLambdaExpressionSyntaxWrapper)c.Node;
+                    var attributes = GetSerializationAttributes(wrapper.AttributeLists, c.SemanticModel);
+                    ReportOnAttributes(c, attributes, "lambdas");
+                },
+                SyntaxKind.ParenthesizedLambdaExpression);
 
             base.Initialize(context);
+        }
+
+        private void ReportOnAttributes(SyntaxNodeAnalysisContext context, IEnumerable<AttributeSyntax> attributes, string memberType)
+        {
+            foreach (var attribute in attributes)
+            {
+                context.ReportIssue(Diagnostic.Create(AttributeNotConsideredRule, attribute.GetLocation(), memberType));
+            }
         }
 
         private static IEnumerable<AttributeSyntax> GetSerializationAttributes(SyntaxList<AttributeListSyntax> attributeList, SemanticModel model) =>

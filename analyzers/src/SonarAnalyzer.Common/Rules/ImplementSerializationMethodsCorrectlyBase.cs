@@ -28,17 +28,13 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class ImplementSerializationMethodsCorrectlyBase : SonarDiagnosticAnalyzer
     {
-        protected const string DiagnosticId = "S3927";
-        private const string AttributeOnLocalMethodMessageFormat = "Serialization attributes on local functions are not considered.";
+        private const string DiagnosticId = "S3927";
         private const string MessageFormat = "Make this method {0}.";
+        private const string AttributeNotConsideredMessageFormat = "Serialization attributes on {0} are not considered.";
         private const string ProblemParameterText = "have a single parameter of type 'StreamingContext'";
         private const string ProblemGenericParameterText = "have no type parameters";
         private const string ProblemPublicText = "non-public";
-
         private readonly DiagnosticDescriptor rule;
-        protected readonly DiagnosticDescriptor attributeOnLocalFunctionRule;
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule, attributeOnLocalFunctionRule);
 
         private static readonly ImmutableArray<KnownType> SerializationAttributes =
             ImmutableArray.Create(KnownType.System_Runtime_Serialization_OnSerializingAttribute,
@@ -51,15 +47,18 @@ namespace SonarAnalyzer.Rules
         protected abstract string MethodReturnTypeShouldBeVoidMessage { get; }
         protected abstract Location GetIdentifierLocation(IMethodSymbol methodSymbol);
 
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule, AttributeNotConsideredRule);
+
+        protected DiagnosticDescriptor AttributeNotConsideredRule { get; init; }
+
         protected ImplementSerializationMethodsCorrectlyBase()
         {
             rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
-            attributeOnLocalFunctionRule = Language.CreateDescriptor(DiagnosticId, AttributeOnLocalMethodMessageFormat);
+            AttributeNotConsideredRule = Language.CreateDescriptor(DiagnosticId, AttributeNotConsideredMessageFormat);
         }
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSymbolAction(
-                c =>
+            context.RegisterSymbolAction(c =>
                 {
                     var methodSymbol = (IMethodSymbol)c.Symbol;
                     if (!methodSymbol.GetAttributes(SerializationAttributes).Any() || HiddenByEditorBrowsableAttribute(methodSymbol))
