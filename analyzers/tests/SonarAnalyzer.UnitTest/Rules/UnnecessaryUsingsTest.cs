@@ -45,6 +45,14 @@ namespace SonarAnalyzer.UnitTest.Rules
             builder.AddPaths("UnnecessaryUsings.CSharp10.FileScopedNamespace.cs").WithOptions(ParseOptionsHelper.FromCSharp10).WithConcurrentAnalysis(false).Verify();
 
         [TestMethod]
+        public void UnnecessaryUsings_CodeFix_CSharp10_FileScopedNamespace() =>
+            builder.AddPaths("UnnecessaryUsings.CSharp10.FileScopedNamespace.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .WithCodeFix<UnnecessaryUsingsCodeFix>()
+                .WithCodeFixedPaths("UnnecessaryUsings.CSharp10.FileScopedNamespace.Fixed.cs")
+                .VerifyCodeFix();
+
+        [TestMethod]
         public void UnnecessaryUsings_CSharp9() =>
             builder.AddPaths("UnnecessaryUsings.CSharp9.cs").WithTopLevelStatements().Verify();
 

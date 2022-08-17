@@ -120,23 +120,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 VisitNamespace(node, node.Usings, node.Name, node.Members);
             }
 
-            private void VisitNamespace(SyntaxNode node, SyntaxList<UsingDirectiveSyntax> usings, NameSyntax name, SyntaxList<MemberDeclarationSyntax> members)
-            {
-                var simpleNamespaces = usings.Where(usingDirective => usingDirective.Alias == null).ToList();
-                var newUsingDirectives = new HashSet<EquivalentNameSyntax>();
-                newUsingDirectives.UnionWith(usingDirectivesFromParent);
-                newUsingDirectives.UnionWith(simpleNamespaces.Select(x => new EquivalentNameSyntax(x.Name)));
-
-                // We visit the namespace declaration with the updated set of parent 'usings', this is needed in case of nested namespaces
-                var visitingNamespace = context.SemanticModel.GetSymbolInfo(name).Symbol as INamespaceSymbol;
-                var visitor = new CSharpRemovableUsingWalker(context, newUsingDirectives.ToImmutableHashSet(), visitingNamespace);
-
-                VisitContent(visitor, members, node.DescendantTrivia());
-                CheckUnnecessaryUsings(context, simpleNamespaces, visitor.NecessaryNamespaces);
-
-                NecessaryNamespaces.UnionWith(visitor.NecessaryNamespaces);
-            }
-
             public override void VisitInitializerExpression(InitializerExpressionSyntax node)
             {
                 if (node.IsKind(SyntaxKind.CollectionInitializerExpression))
@@ -190,6 +173,23 @@ namespace SonarAnalyzer.Rules.CSharp
                     NecessaryNamespaces.Add(context.Compilation.GetSpecialType(SpecialType.System_Object).ContainingNamespace);
                 }
                 base.Visit(node);
+            }
+
+            private void VisitNamespace(SyntaxNode node, SyntaxList<UsingDirectiveSyntax> usings, NameSyntax name, SyntaxList<MemberDeclarationSyntax> members)
+            {
+                var simpleNamespaces = usings.Where(usingDirective => usingDirective.Alias == null).ToList();
+                var newUsingDirectives = new HashSet<EquivalentNameSyntax>();
+                newUsingDirectives.UnionWith(usingDirectivesFromParent);
+                newUsingDirectives.UnionWith(simpleNamespaces.Select(x => new EquivalentNameSyntax(x.Name)));
+
+                // We visit the namespace declaration with the updated set of parent 'usings', this is needed in case of nested namespaces
+                var visitingNamespace = context.SemanticModel.GetSymbolInfo(name).Symbol as INamespaceSymbol;
+                var visitor = new CSharpRemovableUsingWalker(context, newUsingDirectives.ToImmutableHashSet(), visitingNamespace);
+
+                VisitContent(visitor, members, node.DescendantTrivia());
+                CheckUnnecessaryUsings(context, simpleNamespaces, visitor.NecessaryNamespaces);
+
+                NecessaryNamespaces.UnionWith(visitor.NecessaryNamespaces);
             }
 
             private bool TryGetSystemLinkNamespace(out INamespaceSymbol systemLinqNamespace)
