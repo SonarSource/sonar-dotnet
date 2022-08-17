@@ -30,6 +30,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
     {
         private const string CsSourceInputToString =
 @"
+using System;
 using C = System.Collections;
 namespace MyNamespace.MyNamespaceNested
 {
@@ -49,6 +50,8 @@ namespace MyNamespace.MyNamespaceNested
             System.Exception qualified;
             global::System.Exception global;
             input.ToString()?.ToString();
+            Func<Action> fun = () => () => {};
+            fun()();
             ref byte result = ref input[0];
             return ref result;
         }
@@ -79,8 +82,8 @@ End Class";
             Assert<CS.DelegateDeclarationSyntax>("MyDelegate");
             Assert<CS.DestructorDeclarationSyntax>("Example");
             Assert<CS.EnumMemberDeclarationSyntax>("MyEnumValue");
-            Assert<CS.IdentifierNameSyntax>("C", "System", "Collections", "MyNamespace", "MyNamespaceNested", "T", "System", "Exception", "global", "System", "Exception", "input", "ToString", "ToString", "input", "result", "Example", "Example");
-            Assert<CS.InvocationExpressionSyntax>("ToString", "ToString");
+            Assert<CS.IdentifierNameSyntax>("System", "C", "System", "Collections", "MyNamespace", "MyNamespaceNested", "T", "System", "Exception", "global", "System", "Exception", "input", "ToString", "ToString", "Action", "fun", "input", "result", "Example", "Example");
+            Assert<CS.InvocationExpressionSyntax>("ToString", "ToString", string.Empty, "fun");
             Assert<CS.MethodDeclarationSyntax>("Method");
             Assert<CS.MemberAccessExpressionSyntax>("ToString");
             Assert<CS.MemberBindingExpressionSyntax>("ToString");
@@ -92,11 +95,11 @@ End Class";
             Assert<CS.PointerTypeSyntax>("int");
             Assert<CS.PredefinedTypeSyntax>("void", "int", "int", "int", "int", "int", "byte", "byte", "byte");
             Assert<CS.QualifiedNameSyntax>("Collections", "MyNamespaceNested", "Exception", "Exception");
-            Assert<CS.SimpleNameSyntax>("C", "System", "Collections", "MyNamespace", "MyNamespaceNested", "T", "System", "Exception", "global", "System", "Exception", "input", "ToString", "ToString", "input", "result", "Example", "Example");
+            Assert<CS.SimpleNameSyntax>("System", "C", "System", "Collections", "MyNamespace", "MyNamespaceNested", "T", "System", "Exception", "global", "System", "Exception", "input", "ToString", "ToString", "Func", "Action", "fun", "input", "result", "Example", "Example");
             Assert<CS.TypeParameterConstraintClauseSyntax>("T");
             Assert<CS.TypeParameterSyntax>("T");
-            Assert<CS.UsingDirectiveSyntax>("C");
-            Assert<CS.VariableDeclaratorSyntax>("i", "iPtr", "qualified", "global", "result");
+            Assert<CS.UsingDirectiveSyntax>(string.Empty, "C");
+            Assert<CS.VariableDeclaratorSyntax>("i", "iPtr", "qualified", "global", "fun", "result");
             Assert<CS.RefTypeSyntax>("byte", "byte");
             Assert<CS.ReturnStatementSyntax>(string.Empty);
 
