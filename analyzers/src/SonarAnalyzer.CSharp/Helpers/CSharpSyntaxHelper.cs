@@ -250,7 +250,7 @@ namespace SonarAnalyzer.Helpers
         /// <summary>
         /// Determines whether the node is being used as part of an expression tree
         /// i.e. whether it is part of lambda being assigned to System.Linq.Expressions.Expression[TDelegate].
-        /// This could be a local declaration, an assignment, a field, or a property
+        /// This could be a local declaration, an assignment, a field, or a property.
         /// </summary>
         public static bool IsInExpressionTree(this SyntaxNode node, SemanticModel semanticModel)
         {
