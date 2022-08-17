@@ -58,8 +58,7 @@ namespace SonarAnalyzer.Rules
         }
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSymbolAction(
-                c =>
+            context.RegisterSymbolAction(c =>
                 {
                     var methodSymbol = (IMethodSymbol)c.Symbol;
                     if (!methodSymbol.GetAttributes(SerializationAttributes).Any() || HiddenByEditorBrowsableAttribute(methodSymbol))
