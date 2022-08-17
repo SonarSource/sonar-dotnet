@@ -3,7 +3,6 @@ global using System.Collections.Generic;
 
 namespace Tests.Diagnostics;
 using System;
-// the System.Linq using should be here as this is the closest namespace
 
 interface I { }
 class A : I { }

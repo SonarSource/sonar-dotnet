@@ -29,6 +29,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Formatting;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -94,16 +95,19 @@ namespace SonarAnalyzer.Rules.CSharp
                 collection.WithAdditionalAnnotations(annotation));
 
             var node = newRoot.GetAnnotatedNodes(annotation).First();
+
             var closestNamespaceWithUsing = node.AncestorsAndSelf()
-                .OfType<NamespaceDeclarationSyntax>()
-                .FirstOrDefault(n => n.Usings.Count > 0);
+                .FirstOrDefault(x => BaseNamespaceDeclarationSyntaxWrapper.IsInstance(x)
+                                     && ((BaseNamespaceDeclarationSyntaxWrapper)x).Usings.Count > 0);
 
             if (closestNamespaceWithUsing != null)
             {
+                var namespaceDeclarationWrapper = (BaseNamespaceDeclarationSyntaxWrapper)closestNamespaceWithUsing;
+                var namespaceWithAdditionalUsing = namespaceDeclarationWrapper.WithUsings(namespaceDeclarationWrapper.Usings.Add(usingDirectiveToAdd));
+
                 newRoot = newRoot.ReplaceNode(
-                    closestNamespaceWithUsing,
-                    closestNamespaceWithUsing.AddUsings(usingDirectiveToAdd))
-                    .WithAdditionalAnnotations(Formatter.Annotation);
+                    namespaceDeclarationWrapper,
+                    namespaceWithAdditionalUsing.SyntaxNode.WithAdditionalAnnotations(Formatter.Annotation));
             }
             else
             {
