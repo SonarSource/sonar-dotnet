@@ -117,16 +117,21 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override void VisitNamespaceDeclaration(NamespaceDeclarationSyntax node)
             {
-                var simpleNamespaces = node.Usings.Where(usingDirective => usingDirective.Alias == null).ToList();
+                VisitNamespace(node, node.Usings, node.Name, node.Members);
+            }
+
+            private void VisitNamespace(SyntaxNode node, SyntaxList<UsingDirectiveSyntax> usings, NameSyntax name, SyntaxList<MemberDeclarationSyntax> members)
+            {
+                var simpleNamespaces = usings.Where(usingDirective => usingDirective.Alias == null).ToList();
                 var newUsingDirectives = new HashSet<EquivalentNameSyntax>();
                 newUsingDirectives.UnionWith(usingDirectivesFromParent);
                 newUsingDirectives.UnionWith(simpleNamespaces.Select(x => new EquivalentNameSyntax(x.Name)));
 
                 // We visit the namespace declaration with the updated set of parent 'usings', this is needed in case of nested namespaces
-                var visitingNamespace = context.SemanticModel.GetSymbolInfo(node.Name).Symbol as INamespaceSymbol;
+                var visitingNamespace = context.SemanticModel.GetSymbolInfo(name).Symbol as INamespaceSymbol;
                 var visitor = new CSharpRemovableUsingWalker(context, newUsingDirectives.ToImmutableHashSet(), visitingNamespace);
 
-                VisitContent(visitor, node.Members, node.DescendantTrivia());
+                VisitContent(visitor, members, node.DescendantTrivia());
                 CheckUnnecessaryUsings(context, simpleNamespaces, visitor.NecessaryNamespaces);
 
                 NecessaryNamespaces.UnionWith(visitor.NecessaryNamespaces);
@@ -175,6 +180,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override void Visit(SyntaxNode node)
             {
+                if (node.IsKind(SyntaxKindEx.FileScopedNamespaceDeclaration))
+                {
+                    var fileScopedNamespace = (FileScopedNamespaceDeclarationSyntaxWrapper)node;
+                    VisitNamespace(node, fileScopedNamespace.Usings, fileScopedNamespace.Name, fileScopedNamespace.Members);
+                }
                 if (node.IsKind(SyntaxKindEx.ParenthesizedVariableDesignation)) // Tuple deconstruction declaration
                 {
                     NecessaryNamespaces.Add(context.Compilation.GetSpecialType(SpecialType.System_Object).ContainingNamespace);

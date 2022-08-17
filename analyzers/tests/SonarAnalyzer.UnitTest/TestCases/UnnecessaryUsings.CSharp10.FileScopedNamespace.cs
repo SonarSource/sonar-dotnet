@@ -3,9 +3,9 @@
 namespace MyNamespace0;
 
 using MySysAlias = System;
-using System.Linq; // FN
-using System.Collections; // FN
-using System.Globalization; // FN
+using System.Linq; // Noncompliant {{Remove this unnecessary 'using'.}}
+using System.Collections; // Noncompliant
+using System.Globalization; // Noncompliant
 using System.Collections.Generic;
 using static System.Console;
 
