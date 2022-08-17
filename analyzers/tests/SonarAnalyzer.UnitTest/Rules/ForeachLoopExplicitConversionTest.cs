@@ -25,34 +25,36 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ForeachLoopExplicitConversionTest
     {
-        private readonly VerifierBuilder verifier = new VerifierBuilder<ForeachLoopExplicitConversion>();
+        private readonly VerifierBuilder builder = new VerifierBuilder<ForeachLoopExplicitConversion>();
 
         [TestMethod]
         public void ForeachLoopExplicitConversion() =>
-            verifier.AddPaths("ForeachLoopExplicitConversion.cs").Verify();
-
-        [TestMethod]
-        public void ForeachLoopExplicitConversion_CSharp10() =>
-            verifier.AddPaths("ForeachLoopExplicitConversion.CSharp10.cs")
-                .WithConcurrentAnalysis(false)
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .Verify();
+            builder.AddPaths("ForeachLoopExplicitConversion.cs").Verify();
 
         [TestMethod]
         public void ForeachLoopExplicitConversion_CodeFix() =>
-            verifier.WithCodeFix<ForeachLoopExplicitConversionCodeFix>()
+            builder.WithCodeFix<ForeachLoopExplicitConversionCodeFix>()
                 .AddPaths("ForeachLoopExplicitConversion.cs")
                 .WithCodeFixedPaths("ForeachLoopExplicitConversion.Fixed.cs")
                 .VerifyCodeFix();
 #if NET
+
+        [TestMethod]
+        public void ForeachLoopExplicitConversion_CSharp10() =>
+            builder.AddPaths("ForeachLoopExplicitConversion.CSharp10.cs")
+                .WithAutogenerateConcurrentFiles(false)
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .Verify();
+
         [TestMethod]
         public void ForeachLoopExplicitConversion_CSharp10_CodeFix() =>
-            verifier.WithCodeFix<ForeachLoopExplicitConversionCodeFix>()
+            builder.WithCodeFix<ForeachLoopExplicitConversionCodeFix>()
                 .AddPaths("ForeachLoopExplicitConversion.CSharp10.cs")
                 .WithCodeFixedPaths("ForeachLoopExplicitConversion.CSharp10.Fixed.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
                 .WithOutputKind(OutputKind.DynamicallyLinkedLibrary)
                 .VerifyCodeFix();
+
 #endif
 
     }
