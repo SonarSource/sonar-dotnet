@@ -1,5 +1,3 @@
-﻿namespace Tests.Diagnostics; // FN
+﻿namespace Tests.Diagnostics; // Noncompliant
 using System;
 using System.Diagnostics;
-
-

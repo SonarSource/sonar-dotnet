@@ -24,8 +24,8 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -41,7 +41,9 @@ namespace SonarAnalyzer.Rules.CSharp
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
 
-            if (!(root.FindNode(diagnosticSpan) is NamespaceDeclarationSyntax syntaxNode))
+            var syntaxNode = root.FindNode(diagnosticSpan);
+
+            if (!BaseNamespaceDeclarationSyntaxWrapper.IsInstance(syntaxNode))
             {
                 return Task.CompletedTask;
             }
