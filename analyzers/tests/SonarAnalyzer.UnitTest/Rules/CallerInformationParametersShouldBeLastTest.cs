@@ -25,31 +25,31 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class CallerInformationParametersShouldBeLastTest
     {
-        private readonly VerifierBuilder verifier = new VerifierBuilder<CallerInformationParametersShouldBeLast>();
+        private readonly VerifierBuilder builder = new VerifierBuilder<CallerInformationParametersShouldBeLast>();
 
         [TestMethod]
         public void CallerInformationParametersShouldBeLast() =>
-            verifier.AddPaths("CallerInformationParametersShouldBeLast.cs").Verify();
+            builder.AddPaths("CallerInformationParametersShouldBeLast.cs").Verify();
 
 #if NET
 
         [TestMethod]
         public void CallerInformationParametersShouldBeLast_CSharp9() =>
-            verifier.AddPaths("CallerInformationParametersShouldBeLast.CSharp9.cs").WithTopLevelStatements().Verify();
+            builder.AddPaths("CallerInformationParametersShouldBeLast.CSharp9.cs").WithTopLevelStatements().Verify();
 
         [TestMethod]
         public void CallerInformationParametersShouldBeLast_CSharp10() =>
-            verifier.AddPaths("CallerInformationParametersShouldBeLast.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            builder.AddPaths("CallerInformationParametersShouldBeLast.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
         [TestMethod]
         public void CallerInformationParametersShouldBeLast_CSharpPreview() =>
-            verifier.AddPaths("CallerInformationParametersShouldBeLast.CSharpPreview.cs").WithOptions(ParseOptionsHelper.CSharpPreview).Verify();
+            builder.AddPaths("CallerInformationParametersShouldBeLast.CSharpPreview.cs").WithOptions(ParseOptionsHelper.CSharpPreview).Verify();
 
 #endif
 
         [TestMethod]
         public void CallerInformationParametersShouldBeLastInvalidSyntax() =>
-            verifier.AddPaths("CallerInformationParametersShouldBeLastInvalidSyntax.cs")
+            builder.AddPaths("CallerInformationParametersShouldBeLastInvalidSyntax.cs")
                     .WithErrorBehavior(CompilationErrorBehavior.Ignore)
                     .WithConcurrentAnalysis(false)
                     .Verify();

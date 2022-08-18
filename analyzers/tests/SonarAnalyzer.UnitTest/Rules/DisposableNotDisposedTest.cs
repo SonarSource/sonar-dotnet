@@ -25,28 +25,31 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DisposableNotDisposedTest
     {
-        private readonly VerifierBuilder verifier = new VerifierBuilder<DisposableNotDisposed>();
+        private readonly VerifierBuilder builder = new VerifierBuilder<DisposableNotDisposed>();
 
         [TestMethod]
         public void DisposableNotDisposed() =>
-            verifier.AddPaths("DisposableNotDisposed.cs")
+            builder.AddPaths("DisposableNotDisposed.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .AddReferences(MetadataReferenceFacade.SystemNetHttp.Concat(NuGetMetadataReference.FluentAssertions("5.9.0")))
                 .Verify();
 
 #if NET
+
         [TestMethod]
         public void DisposableNotDisposed_CSharp9() =>
-            verifier.AddPaths("DisposableNotDisposed.CSharp9.cs")
+            builder.AddPaths("DisposableNotDisposed.CSharp9.cs")
                 .WithTopLevelStatements()
                 .AddReferences(MetadataReferenceFacade.SystemNetHttp)
                 .Verify();
 
         [TestMethod]
         public void DisposableNotDisposed_CSharp10() =>
-            verifier.AddPaths("DisposableNotDisposed.CSharp10.cs")
+            builder.AddPaths("DisposableNotDisposed.CSharp10.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
                 .Verify();
+
 #endif
+
     }
 }

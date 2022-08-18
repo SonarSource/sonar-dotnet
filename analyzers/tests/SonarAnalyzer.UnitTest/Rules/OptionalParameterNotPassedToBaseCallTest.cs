@@ -26,21 +26,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class OptionalParameterNotPassedToBaseCallTest
     {
-        private readonly VerifierBuilder verifierCS = new VerifierBuilder<CS.OptionalParameterNotPassedToBaseCall>();
-        private readonly VerifierBuilder verifierVB = new VerifierBuilder<VB.OptionalParameterNotPassedToBaseCall>();
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.OptionalParameterNotPassedToBaseCall>();
+        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.OptionalParameterNotPassedToBaseCall>();
 
         [TestMethod]
         public void OptionalParameterNotPassedToBaseCall_CS() =>
-            verifierCS.AddPaths("OptionalParameterNotPassedToBaseCall.cs").Verify();
+            builderCS.AddPaths("OptionalParameterNotPassedToBaseCall.cs").Verify();
 
 #if NET
         [TestMethod]
         public void OptionalParameterNotPassedToBaseCall_CSharp9() =>
-            verifierCS.AddPaths("OptionalParameterNotPassedToBaseCall.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+            builderCS.AddPaths("OptionalParameterNotPassedToBaseCall.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 #endif
 
         [TestMethod]
         public void OptionalParameterNotPassedToBaseCall_VB() =>
-            verifierVB.AddPaths("OptionalParameterNotPassedToBaseCall.vb").Verify();
+            builderVB.AddPaths("OptionalParameterNotPassedToBaseCall.vb").Verify();
     }
 }

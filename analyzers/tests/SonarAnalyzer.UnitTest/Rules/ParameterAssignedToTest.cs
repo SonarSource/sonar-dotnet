@@ -26,25 +26,27 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ParameterAssignedToTest
     {
-        private readonly VerifierBuilder verifierCS = new VerifierBuilder<CS.ParameterAssignedTo>();
-        private readonly VerifierBuilder verifierVB = new VerifierBuilder<VB.ParameterAssignedTo>();
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ParameterAssignedTo>();
+        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.ParameterAssignedTo>();
 
         [TestMethod]
         public void ParameterAssignedTo_CS() =>
-            verifierCS.AddPaths("ParameterAssignedTo.cs").Verify();
+            builderCS.AddPaths("ParameterAssignedTo.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void ParameterAssignedTo_CSharp9() =>
-            verifierCS.AddPaths("ParameterAssignedTo.CSharp9.cs").WithTopLevelStatements().Verify();
+            builderCS.AddPaths("ParameterAssignedTo.CSharp9.cs").WithTopLevelStatements().Verify();
 
         [TestMethod]
         public void ParameterAssignedTo_CSharp10() =>
-            verifierCS.AddPaths("ParameterAssignedTo.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            builderCS.AddPaths("ParameterAssignedTo.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+
 #endif
 
         [TestMethod]
         public void ParameterAssignedTo_VB() =>
-            verifierVB.AddPaths("ParameterAssignedTo.vb").Verify();
+            builderVB.AddPaths("ParameterAssignedTo.vb").Verify();
     }
 }

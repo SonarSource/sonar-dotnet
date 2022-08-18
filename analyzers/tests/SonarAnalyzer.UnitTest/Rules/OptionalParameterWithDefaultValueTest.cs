@@ -25,15 +25,15 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class OptionalParameterWithDefaultValueTest
     {
-        private readonly VerifierBuilder verifier = new VerifierBuilder<OptionalParameterWithDefaultValue>();
+        private readonly VerifierBuilder builder = new VerifierBuilder<OptionalParameterWithDefaultValue>();
 
         [TestMethod]
         public void OptionalParameterWithDefaultValue() =>
-            verifier.AddPaths("OptionalParameterWithDefaultValue.cs").Verify();
+            builder.AddPaths("OptionalParameterWithDefaultValue.cs").Verify();
 
         [TestMethod]
         public void OptionalParameterWithDefaultValue_CodeFix() =>
-            verifier.WithCodeFix<OptionalParameterWithDefaultValueCodeFix>()
+            builder.WithCodeFix<OptionalParameterWithDefaultValueCodeFix>()
                 .AddPaths("OptionalParameterWithDefaultValue.cs")
                 .WithCodeFixedPaths("OptionalParameterWithDefaultValue.Fixed.cs")
                 .VerifyCodeFix();

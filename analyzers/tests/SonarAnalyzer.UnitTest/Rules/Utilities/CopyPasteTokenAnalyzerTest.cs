@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class CopyPasteTokenAnalyzerTest
     {
         private const string BasePath = @"Utilities\CopyPasteTokenAnalyzer\";
-        private readonly VerifierBuilder verifierBuilder = new VerifierBuilder().WithBasePath(BasePath);
+        private readonly VerifierBuilder builder = new VerifierBuilder().WithBasePath(BasePath);
 
         [TestMethod]
         public void Verify_Unique_CS() =>
@@ -68,7 +68,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             const string testRoot = BasePath + nameof(Verify_NotRunForTestProject_CS);
             const string fileName = "Duplicated.CSharp10.cs";
 
-            verifierBuilder
+            builder
                 .AddAnalyzer(() => new TestCopyPasteTokenAnalyzer_CS(testRoot, false))
                 .AddPaths(fileName)
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
@@ -78,7 +78,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                     {
                         messages.Should().HaveCount(1);
                         var info = messages.Single();
-                        info.FilePath.Should().Be(Path.Combine(verifierBuilder.BasePath, fileName));
+                        info.FilePath.Should().Be(Path.Combine(builder.BasePath, fileName));
                         info.TokenInfo.Should().HaveCount(39);
                         info.TokenInfo.Where(x => x.TokenValue == "$num").Should().HaveCount(2);
                     });
@@ -96,7 +96,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void Verify_NotRunForTestProject_CS()
         {
             const string testRoot = BasePath + nameof(Verify_NotRunForTestProject_CS);
-            verifierBuilder
+            builder
                 .AddAnalyzer(() => new TestCopyPasteTokenAnalyzer_CS(testRoot, true))
                 .AddPaths("DuplicatedDifferentLiterals.cs")
                 .WithProtobufPath(@$"{testRoot}\token-cpd.pb")
@@ -114,7 +114,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 _ => throw new UnexpectedLanguageException(language)
             };
 
-            verifierBuilder
+            builder
                 .AddAnalyzer(() => analyzer)
                 .AddPaths(fileName)
                 .WithOptions(ParseOptionsHelper.Latest(language))
@@ -124,7 +124,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                     {
                         messages.Should().HaveCount(1);
                         var info = messages.Single();
-                        info.FilePath.Should().Be(Path.Combine(verifierBuilder.BasePath, fileName));
+                        info.FilePath.Should().Be(Path.Combine(builder.BasePath, fileName));
                         verifyTokenInfo(info.TokenInfo);
                     });
         }
