@@ -552,3 +552,19 @@ public class ConditionalAccess
 
     private ConditionalAccess DoSomething() => null;
 }
+
+public class Repro
+{
+
+    [FunctionName(nameof(CheckLicense))]
+    public async Task CheckLicense() // Noncompliant FP
+    {
+        try
+        {
+            //check authorization
+        }
+        catch (Exception e)
+        {
+        }
+    }
+}
