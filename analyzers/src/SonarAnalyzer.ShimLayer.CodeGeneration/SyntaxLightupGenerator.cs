@@ -982,7 +982,7 @@ namespace StyleCop.Analyzers.CodeGeneration
                     continue;
                 }
 
-                if (node.Name == "BaseNamespaceDeclarationSyntax")
+                if (node.Name == nameof(BaseNamespaceDeclarationSyntax))
                 {
                     // Prior to C# 10, NamespaceDeclarationSyntax was the base type for all namespace declarations.
                     // If the BaseNamespaceDeclarationSyntax type isn't found at runtime, we fall back
