@@ -553,9 +553,10 @@ public class ConditionalAccess
     private ConditionalAccess DoSomething() => null;
 }
 
-public class Repro
+public class Foo
 {
 
+    // Repro for https://github.com/SonarSource/sonar-dotnet/issues/5995
     [FunctionName(nameof(CheckLicense))]
     public async Task CheckLicense() // Noncompliant FP
     {
