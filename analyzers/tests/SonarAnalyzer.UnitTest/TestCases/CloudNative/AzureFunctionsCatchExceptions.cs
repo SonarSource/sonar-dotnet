@@ -558,7 +558,7 @@ public class Foo
 
     // Repro for https://github.com/SonarSource/sonar-dotnet/issues/5995
     [FunctionName(nameof(CheckLicense))]
-    public async Task CheckLicense() // Noncompliant FP
+    public async Task CheckLicense()
     {
         try
         {
@@ -567,5 +567,31 @@ public class Foo
         catch (Exception e)
         {
         }
+    }
+
+    [FunctionName("Sample")]
+    public async Task NameOfOutsideTry()
+    {
+        var x = nameof(NameOfOutsideTry);
+        try
+        {
+        }
+        catch (Exception e)
+        {
+        }
+    }
+
+    [FunctionName("Sample")]
+    public async Task NameOfOutsideTryWithNameOfMethodInScope() // Noncompliant
+    {
+        var x = nameof(NameOfOutsideTryWithNameOfMethodInScope);
+        try
+        {
+        }
+        catch (Exception e)
+        {
+        }
+
+        string nameof(Func<Task> x) => "";
     }
 }

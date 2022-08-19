@@ -47,8 +47,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (c.IsAzureFunction())
                     {
                         var method = (MethodDeclarationSyntax)c.Node;
-                        var walker = new Walker();
-                        if (walker.SafeVisit(c.Node) && walker.HasInvocationOutsideTryCatch)
+                        var walker = new Walker(c.SemanticModel);
+                        if (walker.SafeVisit(method.GetBodyOrExpressionBody()) && walker.HasInvocationOutsideTryCatch)
                         {
                             c.ReportIssue(Diagnostic.Create(Rule, method.Identifier.GetLocation()));
                         }
@@ -58,6 +58,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private sealed class Walker : SafeCSharpSyntaxWalker
         {
+            private readonly SemanticModel semanticModel;
+
+            public Walker(SemanticModel semanticModel) =>
+                this.semanticModel = semanticModel;
+
             public bool HasInvocationOutsideTryCatch { get; private set; }
 
             public override void Visit(SyntaxNode node)
@@ -74,8 +79,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
 
-            public override void VisitInvocationExpression(InvocationExpressionSyntax node) =>
-                HasInvocationOutsideTryCatch = true;
+            public override void VisitInvocationExpression(InvocationExpressionSyntax node)
+            {
+                if (!node.IsNameof(semanticModel))
+                {
+                    HasInvocationOutsideTryCatch = true;
+                }
+            }
 
             public override void VisitTryStatement(TryStatementSyntax node)
             {
