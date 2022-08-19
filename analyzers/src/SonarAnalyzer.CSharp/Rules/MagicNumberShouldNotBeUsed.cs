@@ -109,7 +109,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool LooksLikeTimeApi(SyntaxNode node) =>
             node is InvocationExpressionSyntax invocationExpression
             && invocationExpression.Expression.GetIdentifier() is { } identifier
-            && identifier.Identifier.ValueText.StartsWith("From");
+            && identifier.ValueText.StartsWith("From");
 
         private static bool IsSingleOrNamedAttributeArgument(LiteralExpressionSyntax literalExpression) =>
             literalExpression.Parent is AttributeArgumentSyntax arg

@@ -250,7 +250,7 @@ namespace SonarAnalyzer.Helpers
         /// <summary>
         /// Determines whether the node is being used as part of an expression tree
         /// i.e. whether it is part of lambda being assigned to System.Linq.Expressions.Expression[TDelegate].
-        /// This could be a local declaration, an assignment, a field, or a property
+        /// This could be a local declaration, an assignment, a field, or a property.
         /// </summary>
         public static bool IsInExpressionTree(this SyntaxNode node, SemanticModel semanticModel)
         {
@@ -296,28 +296,46 @@ namespace SonarAnalyzer.Helpers
         public static bool HasBodyOrExpressionBody(this BaseMethodDeclarationSyntax node) =>
             node?.Body != null || node?.ExpressionBody() != null;
 
-        public static SimpleNameSyntax GetIdentifier(this ExpressionSyntax expression) =>
-            expression switch
+        public static SyntaxToken? GetIdentifier(this SyntaxNode node) =>
+            node switch
             {
-                MemberBindingExpressionSyntax memberBinding => memberBinding.Name,
-                MemberAccessExpressionSyntax memberAccess => memberAccess.Name,
-                QualifiedNameSyntax qualified => qualified.Right,
-                IdentifierNameSyntax identifier => identifier,
+                AliasQualifiedNameSyntax { Alias.Identifier: var identifier } => identifier,
+                ArrayTypeSyntax { ElementType: { } elementType } => GetIdentifier(elementType),
+                BaseTypeDeclarationSyntax { Identifier: var identifier } => identifier,
+                ConstructorDeclarationSyntax { Identifier: var identifier } => identifier,
+                ConversionOperatorDeclarationSyntax { Type: { } type } => GetIdentifier(type),
+                DelegateDeclarationSyntax { Identifier: var identifier } => identifier,
+                DestructorDeclarationSyntax { Identifier: var identifier } => identifier,
+                EnumMemberDeclarationSyntax { Identifier: var identifier } => identifier,
+                InvocationExpressionSyntax
+                {
+                    Expression: not InvocationExpressionSyntax // We don't want to recurse into nested invocations like: fun()()
+                } invocation => GetIdentifier(invocation.Expression),
+                MethodDeclarationSyntax { Identifier: var identifier } => identifier,
+                MemberBindingExpressionSyntax { Name.Identifier: var identifier } => identifier,
+                MemberAccessExpressionSyntax { Name.Identifier: var identifier } => identifier,
+                NamespaceDeclarationSyntax { Name: { } name } => GetIdentifier(name),
+                NullableTypeSyntax { ElementType: { } elementType } => GetIdentifier(elementType),
+                OperatorDeclarationSyntax { OperatorToken: var operatorToken } => operatorToken,
+                ParameterSyntax { Identifier: var identifier } => identifier,
+                PropertyDeclarationSyntax { Identifier: var identifier } => identifier,
+                PointerTypeSyntax { ElementType: { } elementType } => GetIdentifier(elementType),
+                PredefinedTypeSyntax { Keyword: var keyword } => keyword,
+                QualifiedNameSyntax { Right.Identifier: var identifier } => identifier,
+                SimpleNameSyntax { Identifier: var identifier } => identifier,
+                TypeParameterConstraintClauseSyntax { Name.Identifier: var identifier } => identifier,
+                TypeParameterSyntax { Identifier: var identifier } => identifier,
+                UsingDirectiveSyntax { Alias.Name: { } name } => GetIdentifier(name),
+                VariableDeclaratorSyntax { Identifier: var identifier } => identifier,
+                { } refType when RefTypeSyntaxWrapper.IsInstance(refType) => GetIdentifier(((RefTypeSyntaxWrapper)refType).Type),
                 _ => null
             };
 
-        public static string GetName(this ExpressionSyntax expression) =>
-            expression switch
-            {
-                MemberAccessExpressionSyntax memberAccess => memberAccess.Name.Identifier.ValueText,
-                QualifiedNameSyntax qualifiedName => qualifiedName.Right.Identifier.ValueText,
-                SimpleNameSyntax simpleNameSyntax => simpleNameSyntax.Identifier.ValueText,
-                NameSyntax nameSyntax => nameSyntax.GetText().ToString(),
-                _ => string.Empty
-            };
+        public static string GetName(this SyntaxNode node) =>
+            node.GetIdentifier()?.ValueText ?? string.Empty;
 
-        public static bool NameIs(this ExpressionSyntax expression, string name) =>
-            expression.GetName().Equals(name, StringComparison.InvariantCulture);
+        public static bool NameIs(this SyntaxNode node, string name) =>
+            node.GetName().Equals(name, StringComparison.InvariantCulture);
 
         public static bool HasConstantValue(this ExpressionSyntax expression, SemanticModel semanticModel) =>
             expression.RemoveParentheses().IsAnyKind(LiteralSyntaxKinds) || expression.FindConstantValue(semanticModel) != null;
