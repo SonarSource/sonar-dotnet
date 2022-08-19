@@ -63,7 +63,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    localDeclaration?.Declaration?.Variables
+                    localDeclaration.Declaration?.Variables
                         .Where(v => v is { Identifier: { } }
                             && c.SemanticModel.GetDeclaredSymbol(v) is { } symbol
                             && IsInitializedWithCompatibleConstant(v, c.SemanticModel, declaredType)
@@ -182,14 +182,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 declaratorSyntax.Identifier.ValueText,
                 AddionalMessageHints(c.SemanticModel, declaratorSyntax)));
 
-        private static string AddionalMessageHints(SemanticModel semanticModel, VariableDeclaratorSyntax declaratorSyntax)
-        {
-            var result = string.Empty;
-            if (declaratorSyntax is { Parent: VariableDeclarationSyntax { Type: { IsVar: true } typeSyntax } })
-            {
-                result = $", and replace 'var' with '{semanticModel.GetTypeInfo(typeSyntax).Type.ToMinimalDisplayString(semanticModel, typeSyntax.SpanStart)}'";
-            }
-            return result;
-        }
+        private static string AddionalMessageHints(SemanticModel semanticModel, VariableDeclaratorSyntax declaratorSyntax) =>
+            declaratorSyntax is { Parent: VariableDeclarationSyntax { Type: { IsVar: true } typeSyntax } }
+                ? $", and replace 'var' with '{semanticModel.GetTypeInfo(typeSyntax).Type.ToMinimalDisplayString(semanticModel, typeSyntax.SpanStart)}'"
+                : string.Empty;
     }
 }
