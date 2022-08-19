@@ -198,7 +198,7 @@ namespace SonarAnalyzer.Helpers
 
         public override void VisitElementAccessExpression(ElementAccessExpressionSyntax node)
         {
-            if (node.Expression.IsKind(SyntaxKind.ThisExpression) || knownSymbolNames.Contains(node.Expression.GetIdentifier()?.Identifier.ValueText))
+            if (node.Expression.IsKind(SyntaxKind.ThisExpression) || knownSymbolNames.Contains(node.Expression.GetIdentifier()?.ValueText))
             {
                 var symbols = GetSymbols(node);
                 UsedSymbols.UnionWith(symbols);

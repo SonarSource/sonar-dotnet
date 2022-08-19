@@ -89,8 +89,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsAssignedToStaticFieldOrProperty(SyntaxNodeAnalysisContext context) =>
             context.Node.Parent.WalkUpParentheses() is AssignmentExpressionSyntax assignment
-                && assignment.Left.GetIdentifier() is { } identifier
-                && context.SemanticModel.GetSymbolInfo(identifier, context.CancellationToken).Symbol is { IsStatic: true, Kind: SymbolKind.Field or SymbolKind.Property };
+                && context.SemanticModel.GetSymbolInfo(assignment.Left, context.CancellationToken).Symbol is { IsStatic: true, Kind: SymbolKind.Field or SymbolKind.Property };
 
         private static bool IsResuableClient(SyntaxNodeAnalysisContext context)
         {

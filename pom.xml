@@ -5,12 +5,12 @@
   <parent>
     <groupId>org.sonarsource.parent</groupId>
     <artifactId>parent</artifactId>
-    <version>62.0.180</version>
+    <version>63.0.187</version>
   </parent>
 
   <groupId>org.sonarsource.dotnet</groupId>
   <artifactId>sonar-dotnet</artifactId>
-  <version>8.44-SNAPSHOT</version>
+  <version>8.45-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>.NET Analyzers parent</name>

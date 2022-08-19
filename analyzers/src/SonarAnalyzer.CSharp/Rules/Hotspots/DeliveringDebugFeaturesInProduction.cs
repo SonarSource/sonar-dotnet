@@ -49,6 +49,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private bool IsDevelopmentCheck(SyntaxNode node, SemanticModel semanticModel) =>
             node is InvocationExpressionSyntax condition
-            && IsValidationMethod(semanticModel, condition, condition.Expression.GetIdentifier()?.Identifier.ValueText);
+            && IsValidationMethod(semanticModel, condition, condition.Expression.GetIdentifier()?.ValueText);
     }
 }

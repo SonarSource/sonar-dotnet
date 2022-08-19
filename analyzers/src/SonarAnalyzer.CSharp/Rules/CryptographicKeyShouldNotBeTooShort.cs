@@ -241,10 +241,10 @@ namespace SonarAnalyzer.Rules.CSharp
             keyLengthSyntax.FindConstantValue(c.SemanticModel) is int keyLength && keyLength < MinimalCommonKeyLength;
 
         private static string GetMethodName(InvocationExpressionSyntax invocationExpression) =>
-            invocationExpression.Expression.GetIdentifier()?.Identifier.ValueText;
+            invocationExpression.Expression.GetIdentifier()?.ValueText;
 
         private static string GetPropertyName(ExpressionSyntax expression) =>
-            expression.GetIdentifier() is { } nameSyntax ? nameSyntax.Identifier.ValueText : null;
+            expression.GetIdentifier() is { } nameSyntax ? nameSyntax.ValueText : null;
 
         private static string CipherName(ITypeSymbol containingType) =>
             containingType.Is(KnownType.System_Security_Cryptography_DSA) || containingType.DerivesFrom(KnownType.System_Security_Cryptography_DSA) ? "DSA" : "RSA";

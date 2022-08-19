@@ -204,11 +204,11 @@ End Class";
         private static SyntaxNode FindMethodInvocation_CS(SyntaxTree tree, string name) =>
             tree.GetRoot().DescendantNodes()
                 .OfType<CSharpSyntax.InvocationExpressionSyntax>()
-                .Single(x => x.Expression.GetIdentifier()?.Identifier.ValueText == name);
+                .Single(x => CSharpSyntaxHelper.GetIdentifier(x.Expression)?.ValueText == name);
 
         private static SyntaxNode FindMethodInvocation_VB(SyntaxTree tree, string name) =>
             tree.GetRoot().DescendantNodes()
                 .OfType<VBSyntax.InvocationExpressionSyntax>()
-                .Single(x => x.Expression.GetIdentifier()?.ValueText == name);
+                .Single(x => VisualBasicSyntaxHelper.GetIdentifier(x.Expression)?.ValueText == name);
     }
 }

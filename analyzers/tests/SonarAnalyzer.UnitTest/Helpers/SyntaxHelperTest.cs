@@ -29,13 +29,35 @@ namespace SonarAnalyzer.UnitTest.Helpers
     public class SyntaxHelperTest
     {
         private const string CsSourceInputToString =
-@"class Example
+@"
+using System;
+using C = System.Collections;
+namespace MyNamespace.MyNamespaceNested
 {
-    string Method(object input)
+    class Example
     {
-        System.Exception qualified;
-        global::System.Exception global;
-        return input.ToString();
+        delegate void MyDelegate();
+        enum MyEnum { MyEnumValue };
+
+        Example() { }
+        ~Example() { }
+        int MyProp { get; }
+
+        unsafe ref byte Method<T>(byte[] input) where T: new()
+        {
+            int? i = null;
+            int* iPtr;
+            System.Exception qualified;
+            global::System.Exception global;
+            input.ToString()?.ToString();
+            Func<Action> fun = () => () => {};
+            fun()();
+            ref byte result = ref input[0];
+            return ref result;
+        }
+        public static explicit operator int(Example e) => 0;
+        public static int operator +(Example e) => 0;
+        ref struct MyRefStruct { }
     }
 }";
 
@@ -52,26 +74,55 @@ End Class";
         public void GetName_CS()
         {
             var nodes = Parse_CS(CsSourceInputToString);
-            nodes.OfType<CS.MemberAccessExpressionSyntax>().Single().GetName().Should().Be("ToString");
-            nodes.OfType<CS.IdentifierNameSyntax>().Select(x => x.GetName()).Should().BeEquivalentTo("System", "Exception", "global", "System", "Exception", "input", "ToString");
-            nodes.OfType<CS.QualifiedNameSyntax>().Select(x => x.GetName()).Should().BeEquivalentTo("Exception", "Exception");
-            nodes.OfType<CS.InvocationExpressionSyntax>().Single().GetName().Should().BeEmpty();
+            Assert<CS.AliasQualifiedNameSyntax>("global");
+            Assert<CS.ArrayTypeSyntax>("byte");
+            Assert<CS.BaseTypeDeclarationSyntax>("Example", "MyEnum", "MyRefStruct");
+            Assert<CS.ConstructorDeclarationSyntax>("Example");
+            Assert<CS.ConversionOperatorDeclarationSyntax>("int");
+            Assert<CS.DelegateDeclarationSyntax>("MyDelegate");
+            Assert<CS.DestructorDeclarationSyntax>("Example");
+            Assert<CS.EnumMemberDeclarationSyntax>("MyEnumValue");
+            Assert<CS.IdentifierNameSyntax>("System", "C", "System", "Collections", "MyNamespace", "MyNamespaceNested", "T", "System", "Exception", "global", "System", "Exception", "input", "ToString", "ToString", "Action", "fun", "input", "result", "Example", "Example");
+            Assert<CS.InvocationExpressionSyntax>("ToString", "ToString", string.Empty, "fun");
+            Assert<CS.MethodDeclarationSyntax>("Method");
+            Assert<CS.MemberAccessExpressionSyntax>("ToString");
+            Assert<CS.MemberBindingExpressionSyntax>("ToString");
+            Assert<CS.NamespaceDeclarationSyntax>("MyNamespaceNested");
+            Assert<CS.NullableTypeSyntax>("int");
+            Assert<CS.OperatorDeclarationSyntax>("+");
+            Assert<CS.ParameterSyntax>("input", "e", "e");
+            Assert<CS.PropertyDeclarationSyntax>("MyProp");
+            Assert<CS.PointerTypeSyntax>("int");
+            Assert<CS.PredefinedTypeSyntax>("void", "int", "int", "int", "int", "int", "byte", "byte", "byte");
+            Assert<CS.QualifiedNameSyntax>("Collections", "MyNamespaceNested", "Exception", "Exception");
+            Assert<CS.SimpleNameSyntax>("System", "C", "System", "Collections", "MyNamespace", "MyNamespaceNested", "T", "System", "Exception", "global", "System", "Exception", "input", "ToString", "ToString", "Func", "Action", "fun", "input", "result", "Example", "Example");
+            Assert<CS.TypeParameterConstraintClauseSyntax>("T");
+            Assert<CS.TypeParameterSyntax>("T");
+            Assert<CS.UsingDirectiveSyntax>(string.Empty, "C");
+            Assert<CS.VariableDeclaratorSyntax>("i", "iPtr", "qualified", "global", "fun", "result");
+            Assert<CS.RefTypeSyntax>("byte", "byte");
+            Assert<CS.ReturnStatementSyntax>(string.Empty);
+
+            void Assert<T>(params string[] expectedNames) where T : SyntaxNode =>
+                nodes.OfType<T>().Select(x => CSharpSyntaxHelper.GetName(x)).Should().BeEquivalentTo(expectedNames, because: "GetName for {0} should return the identifier", typeof(T));
         }
 
         [TestMethod]
         public void GetName_VB()
         {
             var nodes = Parse_VB(VbSourceInputToString);
-            nodes.OfType<VB.ClassStatementSyntax>().Single().GetName().Should().Be("Example");
-            nodes.OfType<VB.MethodBlockSyntax>().Single().GetName().Should().Be("Method");
-            nodes.OfType<VB.MethodStatementSyntax>().Single().GetName().Should().Be("Method");
-            nodes.OfType<VB.ParameterSyntax>().Single().GetName().Should().Be("Input");
-            nodes.OfType<VB.PredefinedTypeSyntax>().First().GetName().Should().Be("Object");
-            nodes.OfType<VB.MemberAccessExpressionSyntax>().Single().GetName().Should().Be("ToString");
-            nodes.OfType<VB.IdentifierNameSyntax>().Select(x => x.GetName()).Should().BeEquivalentTo("System", "Exception", "System", "Exception", "Input", "ToString");
-            nodes.OfType<VB.QualifiedNameSyntax>().Select(x => x.GetName()).Should().BeEquivalentTo("Exception", "Exception", "System");
-            nodes.OfType<VB.InvocationExpressionSyntax>().Single().GetName().Should().Be("ToString");
-            nodes.OfType<VB.ReturnStatementSyntax>().Single().GetName().Should().BeEmpty();
+            GetName(nodes.OfType<VB.ClassStatementSyntax>().Single()).Should().Be("Example");
+            GetName(nodes.OfType<VB.MethodBlockSyntax>().Single()).Should().Be("Method");
+            GetName(nodes.OfType<VB.MethodStatementSyntax>().Single()).Should().Be("Method");
+            GetName(nodes.OfType<VB.ParameterSyntax>().Single()).Should().Be("Input");
+            GetName(nodes.OfType<VB.PredefinedTypeSyntax>().First()).Should().Be("Object");
+            GetName(nodes.OfType<VB.MemberAccessExpressionSyntax>().Single()).Should().Be("ToString");
+            nodes.OfType<VB.IdentifierNameSyntax>().Select(x => GetName(x)).Should().BeEquivalentTo("System", "Exception", "System", "Exception", "Input", "ToString");
+            nodes.OfType<VB.QualifiedNameSyntax>().Select(x => GetName(x)).Should().BeEquivalentTo("Exception", "Exception", "System");
+            GetName(nodes.OfType<VB.InvocationExpressionSyntax>().Single()).Should().Be("ToString");
+            GetName(nodes.OfType<VB.ReturnStatementSyntax>().Single()).Should().BeEmpty();
+
+            static string GetName(SyntaxNode node) => VisualBasicSyntaxHelper.GetName(node);
         }
 
         [TestMethod]
