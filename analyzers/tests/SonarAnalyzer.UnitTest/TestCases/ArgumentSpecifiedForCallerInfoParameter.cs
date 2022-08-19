@@ -32,7 +32,7 @@ namespace Tests.Diagnostics
         {
             TraceMessage(message, memberName, filePath, lineNumber); // Compliant
             TraceMessage(message, filePath: memberName);             // Noncompliant parameters are switched
-            TraceMessage(message, memberName: filePath);             // Compliant
+            TraceMessage(message, memberName: filePath);             // Compliant "memberName" can be specified
         }
     }
 }
