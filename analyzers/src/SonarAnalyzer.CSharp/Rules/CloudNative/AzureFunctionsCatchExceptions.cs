@@ -47,9 +47,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (c.IsAzureFunction())
                     {
                         var method = (MethodDeclarationSyntax)c.Node;
-                        var body = method.GetBodyOrExpressionBody();
                         var walker = new Walker(c.SemanticModel);
-                        if (walker.SafeVisit(body) && walker.HasInvocationOutsideTryCatch)
+                        if (walker.SafeVisit(method.GetBodyOrExpressionBody()) && walker.HasInvocationOutsideTryCatch)
                         {
                             c.ReportIssue(Diagnostic.Create(Rule, method.Identifier.GetLocation()));
                         }
