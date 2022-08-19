@@ -77,7 +77,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
             yield return new object[] { methodWithExpressionBody, methodWithExpressionBody.ExpressionBody.Expression };
             yield return new object[] { methodWithBoth, methodWithBoth.Body };
 
-            static BaseMethodDeclarationSyntax Method() => MethodDeclaration(PredefinedType(Token(SyntaxKind.BoolKeyword)), "Test");
+            static BaseMethodDeclarationSyntax Method() =>
+                MethodDeclaration(PredefinedType(Token(SyntaxKind.BoolKeyword)), "Test");
         }
     }
 }
