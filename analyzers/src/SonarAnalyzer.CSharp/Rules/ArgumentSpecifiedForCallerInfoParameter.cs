@@ -64,6 +64,6 @@ namespace SonarAnalyzer.Rules.CSharp
                                                                                                         // Let's check if it has the same attributes.
                 && sourceParameter.GetAttributes(CallerInfoAttributesToReportOn).ToList() is var sourceAttributes
                 && targetParameter.GetAttributes(CallerInfoAttributesToReportOn).ToList() is var targetAttributes
-                && targetAttributes.All(source => sourceAttributes.Any(target => source.AttributeClass.Name == target.AttributeClass.Name));
+                && targetAttributes.All(target => sourceAttributes.Any(source => target.AttributeClass.Name == source.AttributeClass.Name));
     }
 }
