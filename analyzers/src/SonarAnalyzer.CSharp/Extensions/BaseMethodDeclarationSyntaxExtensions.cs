@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Extensions
             methodDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword);
 
         public static bool HasBodyOrExpressionBody(this BaseMethodDeclarationSyntax node) =>
-            node?.Body != null || node?.ExpressionBody() != null;
+            node.GetBodyOrExpressionBody() is not null;
 
         public static SyntaxNode GetBodyOrExpressionBody(this BaseMethodDeclarationSyntax node) =>
             (node?.Body as SyntaxNode) ?? node?.ExpressionBody()?.Expression;
