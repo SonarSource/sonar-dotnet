@@ -61,7 +61,8 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             private readonly SemanticModel semanticModel;
 
-            public Walker(SemanticModel semanticModel) => this.semanticModel = semanticModel;
+            public Walker(SemanticModel semanticModel) =>
+                this.semanticModel = semanticModel;
 
             public bool HasInvocationOutsideTryCatch { get; private set; }
 
