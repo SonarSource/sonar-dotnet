@@ -18,8 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Extensions;
+using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace SonarAnalyzer.UnitTest.Helpers
 {
@@ -32,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
 #if NETFRAMEWORK
              var messageFormat = "Value cannot be null." + Environment.NewLine + "Parameter name: {0}";
 #else
-             var messageFormat = "Value cannot be null. (Parameter '{0}')";
+            var messageFormat = "Value cannot be null. (Parameter '{0}')";
 #endif
 
             BaseMethodDeclarationSyntax sut = null;
@@ -40,6 +42,41 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var exception = Assert.ThrowsException<ArgumentNullException>(() => sut.GetBodyDescendantNodes());
 
             exception.Message.Should().Be(string.Format(messageFormat, "method"));
+        }
+
+        [TestMethod]
+        [DynamicData(nameof(GetMethodDeclarations), DynamicDataSourceType.Method)]
+        public void HasBodyOrExpressionBody(BaseMethodDeclarationSyntax methodDeclaration, SyntaxNode expectedBody)
+        {
+            if (expectedBody is null)
+            {
+                methodDeclaration.HasBodyOrExpressionBody().Should().BeFalse();
+            }
+            else
+            {
+                methodDeclaration.HasBodyOrExpressionBody().Should().BeTrue();
+            }
+        }
+
+        [TestMethod]
+        [DynamicData(nameof(GetMethodDeclarations), DynamicDataSourceType.Method)]
+        public void GetBodyOrExpressionBody(BaseMethodDeclarationSyntax methodDeclaration, SyntaxNode expectedBody) =>
+            methodDeclaration.GetBodyOrExpressionBody().Should().Be(expectedBody);
+
+        private static IEnumerable<object[]> GetMethodDeclarations()
+        {
+            var methodWithBlock = Method().WithBody(Block());
+            var methodWithExpressionBody = Method().WithExpressionBody(ArrowExpressionClause(LiteralExpression(SyntaxKind.TrueLiteralExpression)));
+            var methodWithBoth = Method().WithBody(Block()).WithExpressionBody(ArrowExpressionClause(LiteralExpression(SyntaxKind.TrueLiteralExpression)));
+            yield return new object[] { null, null };
+            yield return new object[] { Method(), null };
+            yield return new object[] { methodWithBlock, methodWithBlock.Body };
+            yield return new object[] { Method().WithBody(null), null };
+            yield return new object[] { Method().WithExpressionBody(null), null };
+            yield return new object[] { methodWithExpressionBody, methodWithExpressionBody.ExpressionBody.Expression };
+            yield return new object[] { methodWithBoth, methodWithBoth.Body };
+
+            static BaseMethodDeclarationSyntax Method() => MethodDeclaration(PredefinedType(Token(SyntaxKind.BoolKeyword)), "Test");
         }
     }
 }
