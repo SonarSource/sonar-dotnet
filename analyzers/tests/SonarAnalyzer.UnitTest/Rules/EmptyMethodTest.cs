@@ -26,28 +26,28 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class EmptyMethodTest
     {
-        private readonly VerifierBuilder verifierCS = new VerifierBuilder<CS.EmptyMethod>();
-        private readonly VerifierBuilder verifierVB = new VerifierBuilder<VB.EmptyMethod>();
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.EmptyMethod>();
+        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.EmptyMethod>();
 
         [TestMethod]
         public void EmptyMethod() =>
-            verifierCS.AddPaths("EmptyMethod.cs").WithOptions(ParseOptionsHelper.FromCSharp8).AddReferences(MetadataReferenceFacade.NETStandard21).Verify();
+            builderCS.AddPaths("EmptyMethod.cs").WithOptions(ParseOptionsHelper.FromCSharp8).AddReferences(MetadataReferenceFacade.NETStandard21).Verify();
 
 #if NET
 
         [TestMethod]
         public void EmptyMethod_CSharp10() =>
-            verifierCS.AddPaths("EmptyMethod.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            builderCS.AddPaths("EmptyMethod.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
         [TestMethod]
         public void EmptyMethod_CSharp9() =>
-            verifierCS.AddPaths("EmptyMethod.CSharp9.cs").WithTopLevelStatements().Verify();
+            builderCS.AddPaths("EmptyMethod.CSharp9.cs").WithTopLevelStatements().Verify();
 
 #endif
 
         [TestMethod]
         public void EmptyMethod_CodeFix_Throw() =>
-            verifierCS.WithCodeFix<CS.EmptyMethodCodeFix>()
+            builderCS.WithCodeFix<CS.EmptyMethodCodeFix>()
                 .AddPaths("EmptyMethod.cs")
                 .WithCodeFixedPaths("EmptyMethod.Throw.Fixed.cs")
                 .WithCodeFixTitle(CS.EmptyMethodCodeFix.TitleThrow)
@@ -55,7 +55,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void EmptyMethod_CodeFix_Comment() =>
-            verifierCS.WithCodeFix<CS.EmptyMethodCodeFix>()
+            builderCS.WithCodeFix<CS.EmptyMethodCodeFix>()
                 .AddPaths("EmptyMethod.cs")
                 .WithCodeFixedPaths("EmptyMethod.Comment.Fixed.cs")
                 .WithCodeFixTitle(CS.EmptyMethodCodeFix.TitleComment)
@@ -63,22 +63,22 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void EmptyMethod_VB() =>
-            verifierVB.AddPaths("EmptyMethod.vb").Verify();
+            builderVB.AddPaths("EmptyMethod.vb").Verify();
 
         [TestMethod]
         public void EmptyMethod_WithVirtualOverride_RaisesIssueForMainProject_CS() =>
-            verifierCS.AddPaths("EmptyMethod.OverrideVirtual.cs").Verify();
+            builderCS.AddPaths("EmptyMethod.OverrideVirtual.cs").Verify();
 
         [TestMethod]
         public void EmptyMethod_WithVirtualOverride_DoesNotRaiseIssuesForTestProject_CS() =>
-            verifierCS.AddPaths("EmptyMethod.OverrideVirtual.cs").AddTestReference().VerifyNoIssueReported();
+            builderCS.AddPaths("EmptyMethod.OverrideVirtual.cs").AddTestReference().VerifyNoIssueReported();
 
         [TestMethod]
         public void EmptyMethod_WithVirtualOverride_RaisesIssueForMainProject_VB() =>
-            verifierVB.AddPaths("EmptyMethod.OverrideVirtual.vb").Verify();
+            builderVB.AddPaths("EmptyMethod.OverrideVirtual.vb").Verify();
 
         [TestMethod]
         public void EmptyMethod_WithVirtualOverride_DoesNotRaiseIssuesForTestProject_VB() =>
-            verifierVB.AddPaths("EmptyMethod.OverrideVirtual.vb").AddTestReference().VerifyNoIssueReported();
+            builderVB.AddPaths("EmptyMethod.OverrideVirtual.vb").AddTestReference().VerifyNoIssueReported();
     }
 }

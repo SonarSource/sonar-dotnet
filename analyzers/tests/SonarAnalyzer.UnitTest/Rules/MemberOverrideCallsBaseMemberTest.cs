@@ -25,20 +25,20 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class MemberOverrideCallsBaseMemberTest
     {
-        private readonly VerifierBuilder verifier = new VerifierBuilder<MemberOverrideCallsBaseMember>();
+        private readonly VerifierBuilder builder = new VerifierBuilder<MemberOverrideCallsBaseMember>();
 
         [TestMethod]
         public void MemberOverrideCallsBaseMember() =>
-            verifier.AddPaths("MemberOverrideCallsBaseMember.cs").Verify();
+            builder.AddPaths("MemberOverrideCallsBaseMember.cs").Verify();
 
 #if NET
         [TestMethod]
         public void MemberOverrideCallsBaseMember_CSharp10() =>
-            verifier.AddPaths("MemberOverrideCallsBaseMember.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            builder.AddPaths("MemberOverrideCallsBaseMember.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
         [TestMethod]
-        public void MemberOverrideCallsBaseMember_CSharp10_CodeFix() => verifier
-            .AddPaths("MemberOverrideCallsBaseMember.CSharp10.cs")
+        public void MemberOverrideCallsBaseMember_CSharp10_CodeFix() =>
+            builder.AddPaths("MemberOverrideCallsBaseMember.CSharp10.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp10)
             .WithCodeFix<MemberOverrideCallsBaseMemberCodeFix>()
             .WithCodeFixedPaths("MemberOverrideCallsBaseMember.CSharp10.Fixed.cs")
@@ -46,8 +46,8 @@ namespace SonarAnalyzer.UnitTest.Rules
 #endif
 
         [TestMethod]
-        public void MemberOverrideCallsBaseMember_CodeFix() => verifier
-            .AddPaths("MemberOverrideCallsBaseMember.cs")
+        public void MemberOverrideCallsBaseMember_CodeFix() =>
+            builder.AddPaths("MemberOverrideCallsBaseMember.cs")
             .WithCodeFix<MemberOverrideCallsBaseMemberCodeFix>()
             .WithCodeFixedPaths("MemberOverrideCallsBaseMember.Fixed.cs")
             .VerifyCodeFix();
@@ -62,7 +62,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 #elif NETFRAMEWORK
                 "// FN. ToString has a [__DynamicallyInvokable] attribute in .Net framework";
 #endif
-            verifier.AddSnippet($@"
+            builder.AddSnippet($@"
                 class Test
                 {{
                     {toString}

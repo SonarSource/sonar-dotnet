@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         {
             public string Path { get; }
             public DiagnosticAnalyzer Analyzer { get; }
-            public VerifierBuilder Verifier { get; }
+            public VerifierBuilder Builder { get; }
 
             public TestSetup(string testCase, SonarDiagnosticAnalyzer analyzer) : this(testCase, analyzer, Enumerable.Empty<MetadataReference>()) { }
 
@@ -48,7 +48,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                     .Concat(MetadataReferenceFacade.SystemComponentModelPrimitives)
                     .Concat(NetStandardMetadataReference.Netstandard)
                     .Concat(MetadataReferenceFacade.SystemData);
-                Verifier = new VerifierBuilder().AddAnalyzer(() => analyzer).AddPaths(Path).AddReferences(additionalReferences);
+                Builder = new VerifierBuilder().AddAnalyzer(() => analyzer).AddPaths(Path).AddReferences(additionalReferences);
             }
         }
 
@@ -97,7 +97,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 foreach (var testCase in testCases)
                 {
                     // ToDo: We should find a way to ack the fact the action was not run
-                    testCase.Verifier
+                    testCase.Builder
                         .WithOptions(ParseOptionsHelper.FromCSharp8)
                         .VerifyNoIssueReported();
                 }
@@ -114,7 +114,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             foreach (var testCase in testCases)
             {
                 // ToDo: We test that a rule is enabled only by checking the issues are reported
-                testCase.Verifier
+                testCase.Builder
                     .WithOptions(ParseOptionsHelper.FromCSharp8)
                     .Verify();
             }
@@ -129,7 +129,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 var hasTestScope = testCase.Analyzer.SupportedDiagnostics.Any(d => d.CustomTags.Contains(DiagnosticDescriptorFactory.TestSourceScopeTag));
                 if (hasTestScope)
                 {
-                    testCase.Verifier
+                    testCase.Builder
                         .WithOptions(ParseOptionsHelper.FromCSharp8)
                         .WithSonarProjectConfigPath(sonarProjectConfig)
                         .Verify();
@@ -137,7 +137,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 else
                 {
                     // MAIN-only
-                    testCase.Verifier
+                    testCase.Builder
                         .WithOptions(ParseOptionsHelper.FromCSharp8)
                         .WithSonarProjectConfigPath(sonarProjectConfig)
                         .VerifyNoIssueReported();
@@ -155,14 +155,14 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 if (hasProductScope)
                 {
                     // MAIN-only and MAIN & TEST rules
-                    testCase.Verifier
+                    testCase.Builder
                         .WithOptions(ParseOptionsHelper.FromCSharp8)
                         .WithSonarProjectConfigPath(sonarProjectConfig)
                         .VerifyNoIssueReported();
                 }
                 else
                 {
-                    testCase.Verifier
+                    testCase.Builder
                         .WithOptions(ParseOptionsHelper.FromCSharp8)
                         .WithSonarProjectConfigPath(sonarProjectConfig)
                         .Verify();
@@ -179,7 +179,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 var hasProductScope = testCase.Analyzer.SupportedDiagnostics.Any(d => d.CustomTags.Contains(DiagnosticDescriptorFactory.MainSourceScopeTag));
                 if (hasProductScope)
                 {
-                    testCase.Verifier
+                    testCase.Builder
                         .WithOptions(ParseOptionsHelper.FromCSharp8)
                         .WithSonarProjectConfigPath(sonarProjectConfig)
                         .Verify();
@@ -187,7 +187,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 else
                 {
                     // TEST-only rule
-                    testCase.Verifier
+                    testCase.Builder
                         .WithOptions(ParseOptionsHelper.FromCSharp8)
                         .WithSonarProjectConfigPath(sonarProjectConfig)
                         .VerifyNoIssueReported();
@@ -205,8 +205,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 var testCase = testCases[0];
                 var testCase2 = testCases[2];
                 SonarAnalysisContext.ShouldExecuteRegisteredAction = (diags, tree) => tree.FilePath.EndsWith(new FileInfo(testCase.Path).Name, StringComparison.OrdinalIgnoreCase);
-                testCase.Verifier.WithConcurrentAnalysis(false).Verify();
-                testCase2.Verifier.VerifyNoIssueReported();
+                testCase.Builder.WithConcurrentAnalysis(false).Verify();
+                testCase2.Builder.VerifyNoIssueReported();
             }
             finally
             {
@@ -240,13 +240,13 @@ namespace SonarAnalyzer.UnitTest.Helpers
                         // special logic for rules with SyntaxNodeAnalysisContext
                         if (testCase.Analyzer is AnonymousDelegateEventUnsubscribe || testCase.Analyzer is TestMethodShouldContainAssertion)
                         {
-                            testCase.Verifier
+                            testCase.Builder
                                 .WithOptions(ParseOptionsHelper.FromCSharp8)
                                 .VerifyNoIssueReported();
                         }
                         else
                         {
-                            testCase.Verifier
+                            testCase.Builder
                                 .WithOptions(ParseOptionsHelper.FromCSharp8)
                                 .Verify();
                         }

@@ -26,19 +26,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class VariableUnusedTest
     {
-        private readonly VerifierBuilder verifierCS = new VerifierBuilder<CS.VariableUnused>();
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.VariableUnused>();
 
         [TestMethod]
         public void VariableUnused_CS() =>
-            verifierCS.AddPaths("VariableUnused.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+            builderCS.AddPaths("VariableUnused.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+
 #if NET
+
         [TestMethod]
         public void VariableUnused_CSharp9() =>
-            verifierCS.AddPaths("VariableUnused.CSharp9.cs").WithTopLevelStatements().Verify();
+            builderCS.AddPaths("VariableUnused.CSharp9.cs").WithTopLevelStatements().Verify();
 
         [TestMethod]
         public void VariableUnused_CSharp10() =>
-            verifierCS.AddPaths("VariableUnused.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            builderCS.AddPaths("VariableUnused.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 #endif
 
         [TestMethod]

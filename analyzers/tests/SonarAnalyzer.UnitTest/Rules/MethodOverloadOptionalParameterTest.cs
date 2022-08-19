@@ -25,25 +25,25 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class MethodOverloadOptionalParameterTest
     {
-        private readonly VerifierBuilder verifier = new VerifierBuilder<MethodOverloadOptionalParameter>();
+        private readonly VerifierBuilder builder = new VerifierBuilder<MethodOverloadOptionalParameter>();
 
         [TestMethod]
         public void MethodOverloadOptionalParameter() =>
-            verifier.AddPaths("MethodOverloadOptionalParameter.cs").AddReferences(MetadataReferenceFacade.NETStandard21).WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+            builder.AddPaths("MethodOverloadOptionalParameter.cs").AddReferences(MetadataReferenceFacade.NETStandard21).WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
 
         [TestMethod]
         public void MethodOverloadOptionalParameter_CSharp9() =>
-            verifier.AddPaths("MethodOverloadOptionalParameter.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+            builder.AddPaths("MethodOverloadOptionalParameter.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
         [TestMethod]
         public void MethodOverloadOptionalParameter_CSharp10() =>
-            verifier.AddPaths("MethodOverloadOptionalParameter.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            builder.AddPaths("MethodOverloadOptionalParameter.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
         [TestMethod]
         public void MethodOverloadOptionalParameter_CSharpPreview() =>
-            verifier.AddPaths("MethodOverloadOptionalParameter.CSharpPreview.cs").WithOptions(ParseOptionsHelper.CSharpPreview).Verify();
+            builder.AddPaths("MethodOverloadOptionalParameter.CSharpPreview.cs").WithOptions(ParseOptionsHelper.CSharpPreview).Verify();
 
 #endif
 
