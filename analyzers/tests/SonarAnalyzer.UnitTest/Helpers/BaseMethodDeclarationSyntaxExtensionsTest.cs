@@ -48,13 +48,14 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [DynamicData(nameof(GetMethodDeclarationsAndExpectedBody), DynamicDataSourceType.Method)]
         public void HasBodyOrExpressionBody(BaseMethodDeclarationSyntax methodDeclaration, SyntaxNode expectedBody)
         {
+            var hasBody = methodDeclaration.HasBodyOrExpressionBody();
             if (expectedBody is null)
             {
-                methodDeclaration.HasBodyOrExpressionBody().Should().BeFalse();
+                hasBody.Should().BeFalse();
             }
             else
             {
-                methodDeclaration.HasBodyOrExpressionBody().Should().BeTrue();
+                hasBody.Should().BeTrue();
             }
         }
 
