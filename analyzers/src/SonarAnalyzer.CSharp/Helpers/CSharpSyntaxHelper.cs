@@ -296,6 +296,9 @@ namespace SonarAnalyzer.Helpers
         public static bool HasBodyOrExpressionBody(this BaseMethodDeclarationSyntax node) =>
             node?.Body != null || node?.ExpressionBody() != null;
 
+        public static SyntaxNode GetBodyOrExpressionBody(this BaseMethodDeclarationSyntax node) =>
+            (node?.Body as SyntaxNode) ?? node?.ExpressionBody()?.Expression;
+
         public static SimpleNameSyntax GetIdentifier(this ExpressionSyntax expression) =>
             expression switch
             {
