@@ -50,11 +50,20 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (new CSharpMethodParameterLookup((InvocationExpressionSyntax)c.Node, c.SemanticModel) is { MethodSymbol: { } } methodParameterLookup
                     && methodParameterLookup.GetAllArgumentParameterMappings() is { } argumentMappings)
                 {
-                    foreach (var argumentMapping in argumentMappings.Where(x => x.Symbol.GetAttributes(CallerInfoAttributesToReportOn).Any()))
+                    foreach (var argumentMapping in argumentMappings.Where(x =>
+                        x.Symbol.GetAttributes(CallerInfoAttributesToReportOn).Any()
+                        && !IsArgumentPassthroughOfParameter(c.SemanticModel, x.Node, x.Symbol)))
                     {
                         c.ReportIssue(Diagnostic.Create(Rule, argumentMapping.Node.GetLocation()));
                     }
                 }
             }, SyntaxKind.InvocationExpression);
+
+        private static bool IsArgumentPassthroughOfParameter(SemanticModel semanticModel, ArgumentSyntax argument, IParameterSymbol targetParameter) =>
+            semanticModel.GetSymbolInfo(argument.Expression).Symbol is IParameterSymbol sourceParameter // the argument passed to the method is itself an parameter.
+                                                                                                        // Let's check if it has the same attributes.
+                && sourceParameter.GetAttributes(CallerInfoAttributesToReportOn).ToList() is var sourceAttributes
+                && targetParameter.GetAttributes(CallerInfoAttributesToReportOn).ToList() is var targetAttributes
+                && targetAttributes.All(source => sourceAttributes.Any(target => source.AttributeClass.Name == target.AttributeClass.Name));
     }
 }
