@@ -45,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         }
 
         [TestMethod]
-        [DynamicData(nameof(GetMethodDeclarations), DynamicDataSourceType.Method)]
+        [DynamicData(nameof(GetMethodDeclarationsAndExpectedBody), DynamicDataSourceType.Method)]
         public void HasBodyOrExpressionBody(BaseMethodDeclarationSyntax methodDeclaration, SyntaxNode expectedBody)
         {
             if (expectedBody is null)
@@ -59,20 +59,21 @@ namespace SonarAnalyzer.UnitTest.Helpers
         }
 
         [TestMethod]
-        [DynamicData(nameof(GetMethodDeclarations), DynamicDataSourceType.Method)]
+        [DynamicData(nameof(GetMethodDeclarationsAndExpectedBody), DynamicDataSourceType.Method)]
         public void GetBodyOrExpressionBody(BaseMethodDeclarationSyntax methodDeclaration, SyntaxNode expectedBody) =>
             methodDeclaration.GetBodyOrExpressionBody().Should().Be(expectedBody);
 
-        private static IEnumerable<object[]> GetMethodDeclarations()
+        private static IEnumerable<object[]> GetMethodDeclarationsAndExpectedBody()
         {
-            var methodWithBlock = Method().WithBody(Block());
-            var methodWithExpressionBody = Method().WithExpressionBody(ArrowExpressionClause(LiteralExpression(SyntaxKind.TrueLiteralExpression)));
-            var methodWithBoth = Method().WithBody(Block()).WithExpressionBody(ArrowExpressionClause(LiteralExpression(SyntaxKind.TrueLiteralExpression)));
+            var methodWithBody = Method().WithBody(Block());
+            var expressionBody = ArrowExpressionClause(LiteralExpression(SyntaxKind.TrueLiteralExpression));
+            var methodWithExpressionBody = Method().WithExpressionBody(expressionBody);
+            var methodWithBoth = Method().WithBody(Block()).WithExpressionBody(expressionBody);
+
+            // Corresponds to (BaseMethodDeclarationSyntax methodDeclaration, SyntaxNode expectedBody)
             yield return new object[] { null, null };
             yield return new object[] { Method(), null };
-            yield return new object[] { methodWithBlock, methodWithBlock.Body };
-            yield return new object[] { Method().WithBody(null), null };
-            yield return new object[] { Method().WithExpressionBody(null), null };
+            yield return new object[] { methodWithBody, methodWithBody.Body };
             yield return new object[] { methodWithExpressionBody, methodWithExpressionBody.ExpressionBody.Expression };
             yield return new object[] { methodWithBoth, methodWithBoth.Body };
 
