@@ -67,7 +67,8 @@ namespace SonarAnalyzer.Rules.CSharp
                         .Where(v => v is { Identifier: { } }
                             && c.SemanticModel.GetDeclaredSymbol(v) is { } symbol
                             && IsInitializedWithCompatibleConstant(v, c.SemanticModel, declaredType)
-                            && !HasMutableUsagesInMethod(v, symbol, c.SemanticModel))
+                            && !HasMutableUsagesInMethod(v, symbol, c.SemanticModel)
+                            && (c.SemanticModel.Compilation.IsAtLeastLanguageVersion(LanguageVersionEx.CSharp10) || !ContainsInterpolation(v)))
                         .ToList()
                         .ForEach(x => Report(x, c));
                 },
@@ -171,6 +172,10 @@ namespace SonarAnalyzer.Rules.CSharp
             return false;
         }
 
+        private static bool ContainsInterpolation(VariableDeclaratorSyntax declaratorSyntax) =>
+            declaratorSyntax is { Initializer.Value: { } initializer }
+                && initializer.DescendantNodesAndSelf().Any(x => x.IsKind(SyntaxKind.Interpolation));
+
         private static void Report(VariableDeclaratorSyntax declaratorSyntax, SyntaxNodeAnalysisContext c) =>
             c.ReportIssue(Diagnostic.Create(Rule,
                 declaratorSyntax.Identifier.GetLocation(),
@@ -183,12 +188,6 @@ namespace SonarAnalyzer.Rules.CSharp
             if (declaratorSyntax is { Parent: VariableDeclarationSyntax { Type: { IsVar: true } typeSyntax } })
             {
                 result = $", and replace 'var' with '{semanticModel.GetTypeInfo(typeSyntax).Type.ToMinimalDisplayString(semanticModel, typeSyntax.SpanStart)}'";
-            }
-            if (!semanticModel.Compilation.IsAtLeastLanguageVersion(LanguageVersionEx.CSharp10)
-                && declaratorSyntax is { Initializer.Value: { } initializer }
-                && initializer.DescendantNodesAndSelf().Any(x => x.IsKind(SyntaxKind.InterpolatedStringExpression)))
-            {
-                result += ", and use string concatenation instead of an interpolated string";
             }
             return result;
         }

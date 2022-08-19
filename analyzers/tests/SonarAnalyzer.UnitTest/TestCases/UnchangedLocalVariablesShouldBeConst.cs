@@ -467,10 +467,9 @@ public class Repro_4015
     public void Message()
     {
         var s1 = "Test";                              // Noncompliant {{Add the 'const' modifier to 's1', and replace 'var' with 'string'.}}
-        string s2 = $"This is a {nameof(Message)}";   // Noncompliant {{Add the 'const' modifier to 's2', and use string concatenation instead of an interpolated string.}}
-        var s3 = $"This is a {nameof(Message)}";      // Noncompliant {{Add the 'const' modifier to 's3', and replace 'var' with 'string', and use string concatenation instead of an interpolated string.}}
-        var s4 = "This is a" + $" {nameof(Message)}"; // Noncompliant {{Add the 'const' modifier to 's4', and replace 'var' with 'string', and use string concatenation instead of an interpolated string.}}
-        var s5 = $@"This is a {nameof(Message)}";     // Noncompliant {{Add the 'const' modifier to 's5', and replace 'var' with 'string', and use string concatenation instead of an interpolated string.}}
-        FormattableString s6 = $"hello";              // Compliant
+        string s2 = $"This is a {nameof(Message)}";   // Compliant - Only valid in C# 10 and above
+        var s3 = $"This is a {nameof(Message)}";      // Compliant - Only valid in C# 10 and above
+        var s4 = "This is a" + $" {nameof(Message)}"; // Compliant - Only valid in C# 10 and above
+        var s5 = $@"This is a {nameof(Message)}";     // Compliant - Only valid in C# 10 and above
     }
 }
