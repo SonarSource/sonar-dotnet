@@ -65,9 +65,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     localDeclaration.Declaration?.Variables
                         .Where(v => v is { Identifier: { } }
-                            && c.SemanticModel.GetDeclaredSymbol(v) is { } symbol
                             && IsInitializedWithCompatibleConstant(v, c.SemanticModel, declaredType)
-                            && !HasMutableUsagesInMethod(v, symbol, c.SemanticModel)
+                            && !HasMutableUsagesInMethod(c.SemanticModel, v)
                             && (c.SemanticModel.Compilation.IsAtLeastLanguageVersion(LanguageVersionEx.CSharp10) || !ContainsInterpolation(v)))
                         .ToList()
                         .ForEach(x => Report(x, c));
@@ -117,7 +116,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     _ => declarationType is DeclarationType.Reference or DeclarationType.String,
                 };
 
-        private static bool HasMutableUsagesInMethod(VariableDeclaratorSyntax variable, ISymbol variableSymbol, SemanticModel semanticModel)
+        private static bool HasMutableUsagesInMethod(SemanticModel semanticModel, VariableDeclaratorSyntax variable)
         {
             var parentSyntax = variable.Ancestors().FirstOrDefault(IsMethodLike);
             if (parentSyntax == null)
@@ -130,6 +129,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 parentSyntax = parentSyntax.Parent;
             }
 
+            ISymbol variableSymbol = null;
+
             return parentSyntax
                 .DescendantNodes()
                 .OfType<IdentifierNameSyntax>()
@@ -139,8 +140,11 @@ namespace SonarAnalyzer.Rules.CSharp
             static bool IsMethodLike(SyntaxNode arg) =>
                 arg is BaseMethodDeclarationSyntax or IndexerDeclarationSyntax or AccessorDeclarationSyntax or LambdaExpressionSyntax or GlobalStatementSyntax;
 
-            bool MatchesIdentifier(IdentifierNameSyntax id) =>
-                variableSymbol.Equals(semanticModel.GetSymbolInfo(id).Symbol);
+            bool MatchesIdentifier(IdentifierNameSyntax id)
+            {
+                variableSymbol ??= semanticModel.GetDeclaredSymbol(variable);
+                return variableSymbol.Equals(semanticModel.GetSymbolInfo(id).Symbol);
+            }
         }
 
         private static bool IsMutatingUse(SemanticModel semanticModel, IdentifierNameSyntax identifier) =>
