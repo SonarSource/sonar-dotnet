@@ -124,6 +124,8 @@ public sealed class MultilineBlocksWithoutBrace : SonarDiagnosticAnalyzer
 
     private static SyntaxNode SecondStatement(SyntaxNode root, SyntaxNode first) =>
         !first.IsKind(SyntaxKind.Block)
+        // This algorithm to get the next statement can sometimes return a parent statement (for example a BlockSyntax)
+        // so we need to filter this case by returning if the nextStatement happens to be one ancestor of statement.
         && root.GetLastToken().GetNextToken().Parent is { } second
         && !first.Ancestors().Contains(second)
         ? second
