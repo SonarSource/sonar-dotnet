@@ -1102,6 +1102,24 @@ public class Repro_5289
     }
 }
 
+namespace SonarLint_S2259_False_Positive_Replication
+{
+    public class FPReplication
+    {
+        public int PartialChecksForSemanticVersionComparison(string preRelease, string otherPreRelease)
+        {
+            if (preRelease == otherPreRelease) return 0;
+            if (preRelease != null && otherPreRelease == null) return -1;
+            if (preRelease == null && otherPreRelease != null) return 1;
+
+            preRelease.Split('.'); // Compliant
+            otherPreRelease.Split('.');
+
+            return 0;
+        }
+    }
+}
+
 namespace ValidatedNotNullAttributeTest
 {
     public sealed class ValidatedNotNullAttribute : Attribute { }
