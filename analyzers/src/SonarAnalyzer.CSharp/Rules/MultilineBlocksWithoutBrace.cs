@@ -31,7 +31,7 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class MultilineBlocksWithoutBrace : SonarDiagnosticAnalyzer
+public sealed class MultilineBlocksWithoutBrace : SonarDiagnosticAnalyzer<SyntaxKind>
 {
     private const string DiagnosticId = "S2681";
     private const string MessageFormat =
