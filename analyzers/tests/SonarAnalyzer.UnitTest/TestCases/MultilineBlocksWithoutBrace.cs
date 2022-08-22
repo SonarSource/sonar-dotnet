@@ -194,6 +194,12 @@ class Nested
 
 class Other
 {
+    void FirstSameLineSecondTooFar(bool condition)
+    {
+        if (condition) Act.First(); // Secondary
+                            Act.Second(); // Noncompliant
+    }
+
     int WithReturnStatement(bool condition)
     {
         while (condition)
@@ -210,6 +216,20 @@ Act.First(); // Secondary
 Act.Second(); // Noncompliant
     }
 
+    void DesendingIndentation(bool condition)
+    {
+                if (condition)
+            Act.First(); // Secondary
+        Act.Second(); // Noncompliant
+    }
+
+    void ShiftedIndentation(bool condition)
+    {
+                if (condition)
+        Act.First(); // Secondary
+            Act.Second(); // Noncompliant
+    }
+
     void AlternativeIndentation(bool condition)
     {
         try {
@@ -217,6 +237,15 @@ Act.Second(); // Noncompliant
             Act.First(); // This statement is aligned with the '{' of the try on purpose to fix https://github.com/SonarSource/sonar-dotnet/issues/264
         }
         finally { }
+    }
+}
+class DoesNotCrash
+{
+    void OnMissingStatement(bool condition)
+    {
+        if (condition)
+            // Error@-1 [CS1002] ; expected
+            // Error@-2 [CS1525] Invalid expression term
     }
 }
 
