@@ -96,10 +96,7 @@ public sealed class MultilineBlocksWithoutBrace : SonarDiagnosticAnalyzer
         return statement;
     }
 
-    private static void CheckStatement(
-        SyntaxNodeAnalysisContext context,
-        StatementSyntax first,
-        string executed, string execute)
+    private static void CheckStatement(SyntaxNodeAnalysisContext context,StatementSyntax first, string executed, string execute)
     {
         if (SecondStatement(context.Node, first) is { } second)
         {
@@ -133,13 +130,8 @@ public sealed class MultilineBlocksWithoutBrace : SonarDiagnosticAnalyzer
         : null;
 
     private static bool IsNestedStatement(StatementSyntax statement) =>
-        statement.IsKind(SyntaxKind.IfStatement)
-        || statement.IsKind(SyntaxKind.ForStatement)
-        || statement.IsKind(SyntaxKind.ForEachStatement)
-        || statement.IsKind(SyntaxKind.WhileStatement);
+        statement.IsAnyKind(SyntaxKind.IfStatement, SyntaxKind.ForStatement, SyntaxKind.ForEachStatement, SyntaxKind.WhileStatement);
 
     private static bool IsStatementCandidateLoop(StatementSyntax statement) =>
-        statement.IsKind(SyntaxKind.ForEachStatement)
-        || statement.IsKind(SyntaxKind.ForStatement)
-        || statement.IsKind(SyntaxKind.WhileStatement);
+        statement.IsAnyKind(SyntaxKind.ForEachStatement, SyntaxKind.ForStatement, SyntaxKind.WhileStatement);
 }
