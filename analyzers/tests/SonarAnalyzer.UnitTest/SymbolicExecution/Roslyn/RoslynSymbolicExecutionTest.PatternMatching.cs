@@ -343,6 +343,8 @@ Tag(""IsEmpty"", isEmpty);";
             validator.ValidateTag("IsEmpty", x => x.Should().BeNull());
         }
 
+#if NET
+
         [TestMethod]
         public void LearnFromObjectContraint_IsRecursivePattern_WithDeconstruction()
         {
@@ -353,6 +355,8 @@ Tag(""IsPattern"", isPattern);";
             var validator = SETestContext.CreateCS(code, additionalTypes: "record R(int A, int B);").Validator;
             validator.ValidateTag("IsPattern", x => x.Should().BeNull());
         }
+
+#endif
 
         [TestMethod]
         public void LearnFromObjectContraint_IsDeclarationPattern_MatchesNull_Null()
