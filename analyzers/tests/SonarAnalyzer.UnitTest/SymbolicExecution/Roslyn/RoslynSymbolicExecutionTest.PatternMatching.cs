@@ -287,5 +287,27 @@ Tag(""End"", arg);";
             validator.ValidateTag("D", x => x.Should().BeNull());
             validator.ValidateTag("End", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());
         }
+
+        [TestMethod]
+        public void LearnFromObjectContraint_IsNull()
+        {
+            const string code = @"
+var notNull = new object();
+var isNull = notNull is null;
+Tag(""IsNull"", isNull);";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("IsNull", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void LearnFromObjectContraint_IsRecursivePattern()
+        {
+            const string code = @"
+var notNull = new object();
+var isNotNull = notNull is {};
+Tag(""IsNotNull"", isNotNull);";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("IsNotNull", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+        }
     }
 }

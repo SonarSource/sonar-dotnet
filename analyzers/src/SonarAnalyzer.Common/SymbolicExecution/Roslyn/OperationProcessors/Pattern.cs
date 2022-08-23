@@ -28,6 +28,37 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
 {
     internal static class Pattern
     {
+        public static ProgramState Process(SymbolicContext context, IIsPatternOperationWrapper isPattern)
+        {
+            var state = LearnFromBoolContraint(context.State, isPattern);
+            state = LearnFromObjectContraint(state, isPattern);
+            return state;
+        }
+
+        private static ProgramState LearnFromBoolContraint(ProgramState state, IIsPatternOperationWrapper isPattern) =>
+            state[isPattern.Value] is { } value
+                && isPattern.Pattern.WrappedOperation.Kind == OperationKindEx.ConstantPattern
+                && ConstantCheck.ConstraintFromValue(IConstantPatternOperationWrapper.FromOperation(isPattern.Pattern.WrappedOperation).Value.ConstantValue.Value) is BoolConstraint boolPattern
+                && PatternBoolConstraint(value, boolPattern) is { } newConstraint
+                    ? state.SetOperationConstraint(isPattern.WrappedOperation, newConstraint)
+                    : state;
+
+        private static ProgramState LearnFromObjectContraint(ProgramState state, IIsPatternOperationWrapper isPattern) =>
+            state[isPattern.Value] is { } value
+            && value.TryGetConstraint<ObjectConstraint>(out var valueConstraint)
+            && MatchValueConstraintToPattern(state, valueConstraint, isPattern.Pattern) is { } boolConstraint
+                ? state.SetOperationConstraint(isPattern.WrappedOperation, boolConstraint)
+                : state;
+
+        private static BoolConstraint MatchValueConstraintToPattern(ProgramState state, SymbolicConstraint valueConstraint, IPatternOperationWrapper pattern) =>
+            pattern.WrappedOperation.Kind switch
+            {
+                OperationKindEx.ConstantPattern => state[IConstantPatternOperationWrapper.FromOperation(pattern.WrappedOperation).Value].TryGetConstraint<ObjectConstraint>(out var patternContraint)
+                    ? BoolConstraint.From(valueConstraint.Equals(patternContraint))
+                    : null,
+                OperationKindEx.RecursivePattern => BoolConstraint.From(valueConstraint == ObjectConstraint.NotNull),
+                _ => null,
+            };
         public static ProgramState Process(SymbolicContext context, IIsPatternOperationWrapper isPattern) =>
             context.State[isPattern.Value] is { } value
             && isPattern.Pattern.WrappedOperation.Kind == OperationKindEx.ConstantPattern
