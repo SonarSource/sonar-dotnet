@@ -73,6 +73,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                     && IsTypeAssignableTo(typePattern.InputType, typePattern.NarrowedType) => BoolConstraint.From(valueConstraint == ObjectConstraint.NotNull),
                 OperationKindEx.NegatedPattern when INegatedPatternOperationWrapper.FromOperation(pattern.WrappedOperation) is var negated =>
                     MatchValueConstraintToPattern(state, valueConstraint, negated.Pattern)?.Opposite as BoolConstraint,
+                OperationKindEx.DiscardPattern => BoolConstraint.True,
                 _ => null,
             };
         public static ProgramState Process(SymbolicContext context, IIsPatternOperationWrapper isPattern) =>

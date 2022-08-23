@@ -441,5 +441,27 @@ Tag(""IsNotNull"", isNotNull);";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateTag("IsNotNull", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
         }
+
+        [TestMethod]
+        public void LearnFromObjectContraint_IsNegatePattern_NotNotObject()
+        {
+            const string code = @"
+var nullObject = (object)null;
+var isNotNull = nullObject is not not object;
+Tag(""IsNotNull"", isNotNull);";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("IsNotNull", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void LearnFromObjectContraint_IsDiscard()
+        {
+            const string code = @"
+var nullObject = (object)null;
+var isDiscard = nullObject is not not _;
+Tag(""IsDiscard"", isDiscard);";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("IsDiscard", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+        }
     }
 }
