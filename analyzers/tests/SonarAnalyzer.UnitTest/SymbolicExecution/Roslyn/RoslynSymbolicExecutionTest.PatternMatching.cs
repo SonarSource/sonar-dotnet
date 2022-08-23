@@ -300,7 +300,7 @@ Tag(""IsNull"", isNull);";
         }
 
         [TestMethod]
-        public void LearnFromObjectContraint_IsRecursivePattern()
+        public void LearnFromObjectContraint_IsRecursivePattern_Empty()
         {
             const string code = @"
 var notNull = new object();
@@ -308,6 +308,28 @@ var isNotNull = notNull is {};
 Tag(""IsNotNull"", isNotNull);";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateTag("IsNotNull", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void LearnFromObjectContraint_IsRecursivePattern_WithProps()
+        {
+            const string code = @"
+var s = new string('c', 1);  // Make sure, we learn 's is not null'
+var isEmpty = s is { Length: 0 };
+Tag(""IsEmpty"", isEmpty);";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("IsEmpty", x => x.Should().BeNull());
+        }
+
+        [TestMethod]
+        public void LearnFromObjectContraint_IsRecursivePattern_WithDeconstruction()
+        {
+            const string code = @"
+var r = new R(1,2);
+var isPattern  = r is (A:1, B:2);
+Tag(""IsPattern"", isPattern);";
+            var validator = SETestContext.CreateCS(code, additionalTypes: "record R(int A, int B);").Validator;
+            validator.ValidateTag("IsPattern", x => x.Should().BeNull());
         }
 
         [TestMethod]
@@ -344,11 +366,44 @@ Tag(""IsNotNull"", isNotNull);";
         }
 
         [TestMethod]
-        public void LearnFromObjectContraint_IsDeclarationPattern_NotMatchesNull_Null()
+        public void LearnFromObjectContraint_IsDeclarationPattern_NotMatchesNull_MatchTypeNotAssignable()
+        {
+            const string code = @"
+var notNull = new object();
+var isNotNull = notNull is int i;
+Tag(""IsNotNull"", isNotNull);";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("IsNotNull", x => x.Should().BeNull());
+        }
+
+        [TestMethod]
+        public void LearnFromObjectContraint_IsDeclarationPattern_NotMatchesNull_MatchTypeAssignable()
+        {
+            const string code = @"
+var i = 1;
+var isNotNull = i is object o;
+Tag(""IsNotNull"", isNotNull);";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("IsNotNull", x => x.Should().BeNull()); // Should have BoolConstraint.True. We probably need Compilation.ClassifyConversion to fix this
+        }
+
+        [TestMethod]
+        public void LearnFromObjectContraint_IsDeclarationPattern_NotMatchesNull_MatchTypeEqual()
         {
             const string code = @"
 var nullObject = (object)null;
 var isNotNull = nullObject is object o;
+Tag(""IsNotNull"", isNotNull);";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("IsNotNull", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void LearnFromObjectContraint_IsDeclarationPattern_NotMatchesNull_InputTypeNull()
+        {
+            const string code = @"
+var nullObject = (object)null;
+var isNotNull = nullObject is int i;
 Tag(""IsNotNull"", isNotNull);";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateTag("IsNotNull", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());

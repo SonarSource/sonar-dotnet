@@ -47,10 +47,13 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
             CreateCS(methodBody, additionalParameters, null, additionalChecks);
 
         public static SETestContext CreateCS(string methodBody, string additionalParameters, string localFunctionName, params SymbolicCheck[] additionalChecks) =>
-            new(ClassCodeCS(methodBody, additionalParameters), AnalyzerLanguage.CSharp, additionalChecks, localFunctionName);
+            new(ClassCodeCS(methodBody, additionalParameters, null), AnalyzerLanguage.CSharp, additionalChecks, localFunctionName);
+
+        public static SETestContext CreateCS(string methodBody, string additionalParameters = null, string localFunctionName = null, string additionalTypes = null, params SymbolicCheck[] additionalChecks) =>
+            new(ClassCodeCS(methodBody, additionalParameters, additionalTypes), AnalyzerLanguage.CSharp, additionalChecks, localFunctionName, null);
 
         public static SETestContext CreateCSLambda(string methodBody, string lambdaFragment, params SymbolicCheck[] additionalChecks) =>
-            new(ClassCodeCS(methodBody, null), AnalyzerLanguage.CSharp, additionalChecks, null, lambdaFragment);
+            new(ClassCodeCS(methodBody, null, null), AnalyzerLanguage.CSharp, additionalChecks, null, lambdaFragment);
 
         public static SETestContext CreateCSMethod(string method, params SymbolicCheck[] additionalChecks) =>
             new($@"
@@ -62,6 +65,9 @@ public class Sample
 
     private void Tag(string name, object arg) {{ }}
 }}", AnalyzerLanguage.CSharp, additionalChecks);
+
+        public static SETestContext CreateCSCompilationUnit(string compilationUnit, params SymbolicCheck[] additionalChecks) =>
+            new(compilationUnit, AnalyzerLanguage.CSharp, additionalChecks);
 
         public static SETestContext CreateVB(string methodBody, params SymbolicCheck[] additionalChecks) =>
             CreateVB(methodBody, null, additionalChecks);
@@ -84,10 +90,12 @@ End Class";
             return new(code, AnalyzerLanguage.VisualBasic, additionalChecks);
         }
 
-        private static string ClassCodeCS(string methodBody, string additionalParameters) =>
+        private static string ClassCodeCS(string methodBody, string additionalParameters, string additionalTypes) =>
             $@"
 using System;
 using System.Collections.Generic;
+
+{additionalTypes}
 
 public unsafe class Sample
 {{

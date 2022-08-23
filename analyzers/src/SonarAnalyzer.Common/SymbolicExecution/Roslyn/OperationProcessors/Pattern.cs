@@ -56,10 +56,19 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                 OperationKindEx.ConstantPattern => state[IConstantPatternOperationWrapper.FromOperation(pattern.WrappedOperation).Value].TryGetConstraint<ObjectConstraint>(out var patternContraint)
                     ? BoolConstraint.From(valueConstraint.Equals(patternContraint))
                     : null,
-                OperationKindEx.RecursivePattern => BoolConstraint.From(valueConstraint == ObjectConstraint.NotNull),
-                OperationKindEx.DeclarationPattern => IDeclarationPatternOperationWrapper.FromOperation(pattern.WrappedOperation).MatchesNull
-                    ? BoolConstraint.From(true)
-                    : BoolConstraint.From(valueConstraint == ObjectConstraint.NotNull),
+                OperationKindEx.RecursivePattern when IRecursivePatternOperationWrapper.FromOperation(pattern.WrappedOperation) is
+                {
+                    PropertySubpatterns.Length: 0,
+                    DeconstructionSubpatterns.Length: 0,
+                } => BoolConstraint.From(valueConstraint == ObjectConstraint.NotNull),
+                OperationKindEx.DeclarationPattern when IDeclarationPatternOperationWrapper.FromOperation(pattern.WrappedOperation) is var delcarationPattern => delcarationPattern switch
+                {
+                    { MatchesNull: true } => BoolConstraint.From(true),
+                    _ when valueConstraint.Equals(ObjectConstraint.Null) => BoolConstraint.From(false),
+                    var notNull when notNull.InputType.Equals(notNull.MatchedType) => // Use Compilation.ClassifyConversion for better results
+                        BoolConstraint.From(valueConstraint == ObjectConstraint.NotNull),
+                    _ => null,
+                },
                 _ => null,
             };
         public static ProgramState Process(SymbolicContext context, IIsPatternOperationWrapper isPattern) =>
