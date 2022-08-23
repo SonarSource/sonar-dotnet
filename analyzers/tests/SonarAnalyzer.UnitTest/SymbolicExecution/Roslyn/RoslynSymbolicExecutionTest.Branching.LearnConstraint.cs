@@ -124,12 +124,26 @@ if (value = boolParameter)
 
         [DataTestMethod]
         [DataRow("arg == null")]
+        [DataRow("arg == isNull")]
+        [DataRow("arg == isObject")]
         [DataRow("arg != null")]
+        [DataRow("arg != isNull")]
+        [DataRow("arg != isObject")]
+        [DataRow("null == arg")]
+        [DataRow("null != arg")]
+        [DataRow("isNull == arg")]
+        [DataRow("isNull != arg")]
+        [DataRow("isObject == arg")]
+        [DataRow("isObject != arg")]
         [DataRow("!!!(arg == null)")]
         [DataRow("!!!(arg != null)")]
+        [DataRow("!!!(null == arg)")]
+        [DataRow("!!!(null != arg)")]
         public void Branching_LearnsObjectConstraint_NotSupported_CS(string expression)     // FIXME: Should be removed at the end
         {
             var code = @$"
+object isNull = null;
+var isObject = new object();
 if ({expression})
 {{
     Tag(""If"", arg);
@@ -151,9 +165,15 @@ Tag(""End"", arg);";
         [DataRow("Arg = Nothing")]
         [DataRow("Arg Is Nothing")]
         [DataRow("Arg <> Nothing")]
+        [DataRow("Nothing = Arg")]
+        [DataRow("Nothing Is Arg")]
+        [DataRow("Nothing <> Arg")]
         [DataRow("Not Not Not Arg = Nothing")]
         [DataRow("Not Not Not Arg Is Nothing")]
         [DataRow("Not Not Not Arg <> Nothing")]
+        [DataRow("Not Not Not Nothing = Arg")]
+        [DataRow("Not Not Not Nothing Is Arg")]
+        [DataRow("Not Not Not Nothing <> Arg")]
         public void Branching_LearnsObjectConstraint_NotSupported_VB(string expression)     // FIXME: Should be removed at the end
         {
             var code = @$"
