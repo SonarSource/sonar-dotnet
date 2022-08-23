@@ -417,7 +417,7 @@ Tag(""IsNotNull"", isNotNull);";
         public void LearnFromObjectContraint_IsDeclarationPattern_NotMatchesNull_MatchTypeAssignable()
         {
             const string code = @"
-var i = 1;
+var i = new int();
 var isNotNull = i is object o;
 Tag(""IsNotNull"", isNotNull);";
             var validator = SETestContext.CreateCS(code).Validator;

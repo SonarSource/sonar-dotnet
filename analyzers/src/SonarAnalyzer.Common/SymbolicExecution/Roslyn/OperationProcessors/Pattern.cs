@@ -106,7 +106,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
         }
 
         private static bool IsTypeAssignableTo(ITypeSymbol type, ITypeSymbol assignableTo)
-            => type.Equals(assignableTo); // Compilation.ClassifyConversion should be used for better results
+            => type.Equals(assignableTo); // Compilation.ClassifyConversion should be used for better results (Note: for cfg IOperation.SemanticModel is null)
 
         public static ProgramState Process(SymbolicContext context, IRecursivePatternOperationWrapper recursive) =>
             ProcessDeclaration(context, recursive.DeclaredSymbol, true);
