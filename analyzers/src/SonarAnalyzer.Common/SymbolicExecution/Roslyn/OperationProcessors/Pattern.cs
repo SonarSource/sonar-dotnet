@@ -62,20 +62,20 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                     {
                         PropertySubpatterns.Length: 0,
                         DeconstructionSubpatterns.Length: 0,
-                    } => BoolConstraint.From(valueConstraint == ObjectConstraint.NotNull),
+                    } => BoolConstraint.From(valueConstraint.Equals(ObjectConstraint.NotNull)),
                 OperationKindEx.DeclarationPattern when
                     IDeclarationPatternOperationWrapper.FromOperation(pattern.WrappedOperation) is var declarationPattern =>
                         declarationPattern switch
                         {
                             { MatchesNull: true } => BoolConstraint.True,
-                            { MatchesNull: false } when valueConstraint.Equals(ObjectConstraint.Null) => BoolConstraint.From(false),
-                            var notNull when IsTypeAssignableTo(notNull.InputType, notNull.NarrowedType) => BoolConstraint.From(valueConstraint == ObjectConstraint.NotNull),
+                            { MatchesNull: false } when valueConstraint.Equals(ObjectConstraint.Null) => BoolConstraint.False,
+                            var notNull when IsTypeAssignableTo(notNull.InputType, notNull.NarrowedType) => BoolConstraint.From(valueConstraint.Equals(ObjectConstraint.NotNull)),
                             _ => null,
                         },
                 OperationKindEx.TypePattern when
                     ITypePatternOperationWrapper.FromOperation(pattern.WrappedOperation) is var typePattern
                     && IsTypeAssignableTo(typePattern.InputType, typePattern.NarrowedType) =>
-                        BoolConstraint.From(valueConstraint == ObjectConstraint.NotNull),
+                        BoolConstraint.From(valueConstraint.Equals(ObjectConstraint.NotNull)),
                 OperationKindEx.NegatedPattern when
                     INegatedPatternOperationWrapper.FromOperation(pattern.WrappedOperation) is var negatedPattern =>
                         MatchValueConstraintToPattern(state, valueConstraint, negatedPattern.Pattern)?.Opposite as BoolConstraint,
