@@ -121,5 +121,54 @@ if (value = boolParameter)
             validator.ValidateTag("BoolParameter", x => x.Should().BeNull());
             validator.ValidateTag("Value", x => x.Should().BeNull());
         }
+
+        [DataTestMethod]
+        [DataRow("arg == null")]
+        [DataRow("arg != null")]
+        [DataRow("!!!(arg == null)")]
+        [DataRow("!!!(arg != null)")]
+        public void Branching_LearnsObjectConstraint_NotSupported_CS(string expression)     // FIXME: Should be removed at the end
+        {
+            var code = @$"
+if ({expression})
+{{
+    Tag(""If"", arg);
+}}
+else
+{{
+    Tag(""Else"", arg);
+}}
+Tag(""End"", arg);";
+            var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+            validator.ValidateTag("If", x => x.Should().BeNull());      // FIXME: Has Null or NotNull instead
+            validator.ValidateTag("Else", x => x.Should().BeNull());    // FIXME: Has Null or NotNull instead
+            validator.TagValues("End").Should().HaveCount(1)            // FIXME: 2
+                .And.ContainSingle(x => x == null)                      // FIXME: Has Null instead
+                .And.ContainSingle(x => x == null);                     // FIXME: Has NotNull instead
+        }
+
+        [DataTestMethod]
+        [DataRow("Arg = Nothing")]
+        [DataRow("Arg Is Nothing")]
+        [DataRow("Arg <> Nothing")]
+        [DataRow("Not Not Not Arg = Nothing")]
+        [DataRow("Not Not Not Arg Is Nothing")]
+        [DataRow("Not Not Not Arg <> Nothing")]
+        public void Branching_LearnsObjectConstraint_NotSupported_VB(string expression)     // FIXME: Should be removed at the end
+        {
+            var code = @$"
+If {expression} Then
+    Tag(""If"", Arg)
+Else
+    Tag(""Else"", Arg)
+End If
+Tag(""End"", Arg)";
+            var validator = SETestContext.CreateVB(code, ", Arg As Object").Validator;
+            validator.ValidateTag("If", x => x.Should().BeNull());      // FIXME: Has Null or NotNull instead
+            validator.ValidateTag("Else", x => x.Should().BeNull());    // FIXME: Has Null or NotNull instead
+            validator.TagValues("End").Should().HaveCount(1)            // FIXME: 2
+                .And.ContainSingle(x => x == null)                      // FIXME: Has Null
+                .And.ContainSingle(x => x == null);                     // FIXME: Has NotNull
+        }
     }
 }
