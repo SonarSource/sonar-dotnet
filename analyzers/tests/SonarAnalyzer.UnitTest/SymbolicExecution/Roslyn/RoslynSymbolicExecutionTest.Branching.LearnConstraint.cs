@@ -123,8 +123,6 @@ if (value = boolParameter)
         }
 
         [DataTestMethod]
-        [DataRow("arg == null")]
-        [DataRow("arg == isNull")]
         [DataRow("arg == isObject")]
         [DataRow("arg != null")]
         [DataRow("arg != isNull")]
@@ -135,7 +133,6 @@ if (value = boolParameter)
         [DataRow("isNull != arg")]
         [DataRow("isObject == arg")]
         [DataRow("isObject != arg")]
-        [DataRow("!!!(arg == null)")]
         [DataRow("!!!(arg != null)")]
         [DataRow("!!!(null == arg)")]
         [DataRow("!!!(null != arg)")]
@@ -154,22 +151,70 @@ else
 }}
 Tag(""End"", arg);";
             var validator = SETestContext.CreateCS(code, ", object arg").Validator;
-            validator.ValidateTag("If", x => x.Should().BeNull());      // FIXME: Has Null or NotNull instead
-            validator.ValidateTag("Else", x => x.Should().BeNull());    // FIXME: Has Null or NotNull instead
-            validator.TagValues("End").Should().HaveCount(1)            // FIXME: 2
-                .And.ContainSingle(x => x == null)                      // FIXME: Has Null instead
-                .And.ContainSingle(x => x == null);                     // FIXME: Has NotNull instead
+            validator.ValidateTag("If", x => x.Should().BeNull());
+            validator.ValidateTag("Else", x => x.Should().BeNull());
+            validator.TagValues("End").Should().HaveCount(1)
+                .And.ContainSingle(x => x == null)
+                .And.ContainSingle(x => x == null);
+        }
+
+        [DataTestMethod]
+        [DataRow("arg == null")]
+        [DataRow("arg == isNull")]
+        public void Branching_LearnsObjectConstraint_CS(string expression)     // FIXME: Should be removed at the end
+        {
+            var code = @$"
+object isNull = null;
+var isObject = new object();
+if ({expression})
+{{
+    Tag(""If"", arg);
+}}
+else
+{{
+    Tag(""Else"", arg);
+}}
+Tag(""End"", arg);";
+            var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+            validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
+        }
+
+        [DataTestMethod]
+        [DataRow("!!!(arg == null)")]
+        [DataRow("!!!(arg == null)  ")] // FIXME: Remove duplication
+        public void Branching_LearnsObjectConstraint_Negated_CS(string expression)     // FIXME: Should be removed at the end
+        {
+            var code = @$"
+object isNull = null;
+var isObject = new object();
+if ({expression})
+{{
+    Tag(""If"", arg);
+}}
+else
+{{
+    Tag(""Else"", arg);
+}}
+Tag(""End"", arg);";
+            var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+            validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
         }
 
         [DataTestMethod]
         [DataRow("Arg = Nothing")]
-        [DataRow("Arg Is Nothing")]
         [DataRow("Arg <> Nothing")]
         [DataRow("Nothing = Arg")]
         [DataRow("Nothing Is Arg")]
         [DataRow("Nothing <> Arg")]
         [DataRow("Not Not Not Arg = Nothing")]
-        [DataRow("Not Not Not Arg Is Nothing")]
         [DataRow("Not Not Not Arg <> Nothing")]
         [DataRow("Not Not Not Nothing = Arg")]
         [DataRow("Not Not Not Nothing Is Arg")]
@@ -184,11 +229,51 @@ Else
 End If
 Tag(""End"", Arg)";
             var validator = SETestContext.CreateVB(code, ", Arg As Object").Validator;
-            validator.ValidateTag("If", x => x.Should().BeNull());      // FIXME: Has Null or NotNull instead
-            validator.ValidateTag("Else", x => x.Should().BeNull());    // FIXME: Has Null or NotNull instead
-            validator.TagValues("End").Should().HaveCount(1)            // FIXME: 2
-                .And.ContainSingle(x => x == null)                      // FIXME: Has Null
-                .And.ContainSingle(x => x == null);                     // FIXME: Has NotNull
+            validator.ValidateTag("If", x => x.Should().BeNull());
+            validator.ValidateTag("Else", x => x.Should().BeNull());
+            validator.TagValues("End").Should().HaveCount(1)
+                .And.ContainSingle(x => x == null)
+                .And.ContainSingle(x => x == null);
+        }
+
+        [DataTestMethod]
+        [DataRow("Arg Is Nothing")]
+        [DataRow("Arg Is Nothing   ")] // FIXME: Remove duplication
+        public void Branching_LearnsObjectConstraint_VB(string expression)
+        {
+            var code = @$"
+If {expression} Then
+    Tag(""If"", Arg)
+Else
+    Tag(""Else"", Arg)
+End If
+Tag(""End"", Arg)";
+            var validator = SETestContext.CreateVB(code, ", Arg As Object").Validator;
+            validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
+        }
+
+        [DataTestMethod]
+        [DataRow("Not Not Not Arg Is Nothing")]
+        [DataRow("Not Not Not Arg Is Nothing   ")] // FIXME: Remove duplication
+        public void Branching_LearnsObjectConstraint_Negated_VB(string expression)
+        {
+            var code = @$"
+If {expression} Then
+    Tag(""If"", Arg)
+Else
+    Tag(""Else"", Arg)
+End If
+Tag(""End"", Arg)";
+            var validator = SETestContext.CreateVB(code, ", Arg As Object").Validator;
+            validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
         }
     }
 }
