@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn.Checks;
@@ -65,6 +66,16 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                             DeconstructionSubpatterns.Length: 0,
                         } => BoolConstraint.From(valueConstraint.Equals(ObjectConstraint.NotNull)),
                         _ when valueConstraint.Equals(ObjectConstraint.Null) => BoolConstraint.False,
+                        {
+                            PropertySubpatterns: var propertySubPatterns,
+                            DeconstructionSubpatterns: var deconstructSubpatterns,
+                        } when propertySubPatterns // check if all sub pattern are always matching.
+                                   .Select(x => IPropertySubpatternOperationWrapper.FromOperation(x).Pattern)
+                                   .Concat(deconstructSubpatterns.Select(x => IPatternOperationWrapper.FromOperation(x)))
+                                   .All(x => x is { WrappedOperation.Kind: OperationKindEx.DiscardPattern }
+                                        || (x.WrappedOperation.Kind == OperationKindEx.DeclarationPattern
+                                            && IDeclarationPatternOperationWrapper.FromOperation(x.WrappedOperation).MatchesNull)) =>
+                                BoolConstraint.From(valueConstraint.Equals(ObjectConstraint.NotNull)),
                         _ => null,
                     },
                 OperationKindEx.DeclarationPattern when

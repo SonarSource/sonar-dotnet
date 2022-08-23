@@ -365,6 +365,17 @@ Tag(""IsEmpty"", isEmpty);";
             validator.ValidateTag("IsEmpty", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
         }
 
+        [TestMethod]
+        public void LearnFromObjectContraint_IsRecursivePattern_OnlyDeconstruct()
+        {
+            const string code = @"
+var s = new string('c', 1);
+var isLength = s is { Length: var length };
+Tag(""IsLength"", isLength);";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("IsLength", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+        }
+
 #if NET
 
         [TestMethod]
@@ -376,6 +387,28 @@ var isPattern  = r is (A:1, B:2);
 Tag(""IsPattern"", isPattern);";
             var validator = SETestContext.CreateCS(code, additionalTypes: "record R(int A, int B);").Validator;
             validator.ValidateTag("IsPattern", x => x.Should().BeNull());
+        }
+
+        [TestMethod]
+        public void LearnFromObjectContraint_IsRecursivePattern_WithDeconstructionOnly()
+        {
+            const string code = @"
+var r = new R(1,2);
+var isPattern  = r is (A: var a, B: _);
+Tag(""IsPattern"", isPattern);";
+            var validator = SETestContext.CreateCS(code, additionalTypes: "record R(int A, int B);").Validator;
+            validator.ValidateTag("IsPattern", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void LearnFromObjectContraint_IsRecursivePattern_WithDeconstructionOnly_OnNull()
+        {
+            const string code = @"
+R r = null;
+var isPattern  = r is (A: var a, B: _);
+Tag(""IsPattern"", isPattern);";
+            var validator = SETestContext.CreateCS(code, additionalTypes: "record R(int A, int B);").Validator;
+            validator.ValidateTag("IsPattern", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
         }
 
 #endif
