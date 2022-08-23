@@ -57,6 +57,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                     ? BoolConstraint.From(valueConstraint.Equals(patternContraint))
                     : null,
                 OperationKindEx.RecursivePattern => BoolConstraint.From(valueConstraint == ObjectConstraint.NotNull),
+                OperationKindEx.DeclarationPattern => IDeclarationPatternOperationWrapper.FromOperation(pattern.WrappedOperation).MatchesNull
+                    ? BoolConstraint.From(true)
+                    : BoolConstraint.From(valueConstraint == ObjectConstraint.NotNull),
                 _ => null,
             };
         public static ProgramState Process(SymbolicContext context, IIsPatternOperationWrapper isPattern) =>

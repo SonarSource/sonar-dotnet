@@ -309,5 +309,49 @@ Tag(""IsNotNull"", isNotNull);";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateTag("IsNotNull", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
         }
+
+        [TestMethod]
+        public void LearnFromObjectContraint_IsDeclarationPattern_MatchesNull_Null()
+        {
+            const string code = @"
+var nullObject = (object)null;
+var alwaysTrue = nullObject is var a;
+Tag(""AlwaysTrue"", alwaysTrue);";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("AlwaysTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void LearnFromObjectContraint_IsDeclarationPattern_MatchesNull_NotNull()
+        {
+            const string code = @"
+var notNull = new object();
+var alwaysTrue = notNull is var a;
+Tag(""AlwaysTrue"", alwaysTrue);";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("AlwaysTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void LearnFromObjectContraint_IsDeclarationPattern_NotMatchesNull_NotNull()
+        {
+            const string code = @"
+var notNull = new object();
+var isNotNull = notNull is object o;
+Tag(""IsNotNull"", isNotNull);";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("IsNotNull", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void LearnFromObjectContraint_IsDeclarationPattern_NotMatchesNull_Null()
+        {
+            const string code = @"
+var nullObject = (object)null;
+var isNotNull = nullObject is object o;
+Tag(""IsNotNull"", isNotNull);";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("IsNotNull", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+        }
     }
 }
