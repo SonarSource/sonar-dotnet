@@ -311,6 +311,17 @@ Tag(""IsNull"", isNull);";
         }
 
         [TestMethod]
+        public void LearnFromObjectContraint_IsConstant_String()
+        {
+            const string code = @"
+var notNull = new object();
+var isNull = notNull is """";
+Tag(""IsNull"", isNull);";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("IsNull", x => x.Should().BeNull());
+        }
+
+        [TestMethod]
         public void LearnFromObjectContraint_IsConstant_Boolean()
         {
             const string code = @"
