@@ -53,27 +53,26 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
         private static BoolConstraint MatchValueConstraintToPattern(ProgramState state, SymbolicConstraint valueConstraint, IPatternOperationWrapper pattern) =>
             pattern.WrappedOperation.Kind switch
             {
-                OperationKindEx.ConstantPattern when IConstantPatternOperationWrapper.FromOperation(pattern.WrappedOperation) is var constantPattern =>
-                    state[constantPattern.Value]?.TryGetConstraint<ObjectConstraint>(out var patternContraint) is true
-                        ? BoolConstraint.From(valueConstraint.Equals(patternContraint))
-                        : null,
+                OperationKindEx.ConstantPattern when IConstantPatternOperationWrapper.FromOperation(pattern.WrappedOperation) is var constantPattern
+                    && state[constantPattern.Value]?.TryGetConstraint<ObjectConstraint>(out var patternContraint) is true =>
+                        BoolConstraint.From(valueConstraint.Equals(patternContraint)),
                 OperationKindEx.RecursivePattern when IRecursivePatternOperationWrapper.FromOperation(pattern.WrappedOperation) is
                 {
                     PropertySubpatterns.Length: 0,
                     DeconstructionSubpatterns.Length: 0,
                 } => BoolConstraint.From(valueConstraint == ObjectConstraint.NotNull),
-                OperationKindEx.DeclarationPattern when IDeclarationPatternOperationWrapper.FromOperation(pattern.WrappedOperation) is var delcarationPattern => delcarationPattern switch
-                {
-                    { MatchesNull: true } => BoolConstraint.True,
-                    _ when valueConstraint.Equals(ObjectConstraint.Null) => BoolConstraint.From(false),
-                    var notNull when IsTypeAssignableTo(notNull.InputType, notNull.NarrowedType) => // Use Compilation.ClassifyConversion for better results
-                        BoolConstraint.From(valueConstraint == ObjectConstraint.NotNull),
-                    _ => null,
-                },
+                OperationKindEx.DeclarationPattern when IDeclarationPatternOperationWrapper.FromOperation(pattern.WrappedOperation) is var declarationPattern =>
+                    declarationPattern switch
+                    {
+                        { MatchesNull: true } => BoolConstraint.True,
+                        { MatchesNull: false } when valueConstraint.Equals(ObjectConstraint.Null) => BoolConstraint.From(false),
+                        var notNull when IsTypeAssignableTo(notNull.InputType, notNull.NarrowedType) => BoolConstraint.From(valueConstraint == ObjectConstraint.NotNull),
+                        _ => null,
+                    },
                 OperationKindEx.TypePattern when ITypePatternOperationWrapper.FromOperation(pattern.WrappedOperation) is var typePattern
                     && IsTypeAssignableTo(typePattern.InputType, typePattern.NarrowedType) => BoolConstraint.From(valueConstraint == ObjectConstraint.NotNull),
-                OperationKindEx.NegatedPattern when INegatedPatternOperationWrapper.FromOperation(pattern.WrappedOperation) is var negated =>
-                    MatchValueConstraintToPattern(state, valueConstraint, negated.Pattern)?.Opposite as BoolConstraint,
+                OperationKindEx.NegatedPattern when INegatedPatternOperationWrapper.FromOperation(pattern.WrappedOperation) is var negatedPattern =>
+                    MatchValueConstraintToPattern(state, valueConstraint, negatedPattern.Pattern)?.Opposite as BoolConstraint,
                 OperationKindEx.DiscardPattern => BoolConstraint.True,
                 OperationKindEx.BinaryPattern when IBinaryPatternOperationWrapper.FromOperation(pattern.WrappedOperation) is var binaryPattern =>
                     MatchValueConstraintOfBinaryPattern(state, valueConstraint, binaryPattern),
@@ -100,7 +99,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
         }
 
         private static bool IsTypeAssignableTo(ITypeSymbol type, ITypeSymbol assignableTo)
-            => type.Equals(assignableTo);
+            => type.Equals(assignableTo); // Compilation.ClassifyConversion should be used for better results
 
         public static ProgramState Process(SymbolicContext context, IRecursivePatternOperationWrapper recursive) =>
             ProcessDeclaration(context, recursive.DeclaredSymbol, true);
