@@ -340,7 +340,8 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Runtime_CompilerServices_CallerArgumentExpressionAttribute = new("System.Runtime.CompilerServices.CallerArgumentExpressionAttribute");
         internal static readonly KnownType System_Runtime_CompilerServices_CallerFilePathAttribute = new("System.Runtime.CompilerServices.CallerFilePathAttribute");
         internal static readonly KnownType System_Runtime_CompilerServices_CallerLineNumberAttribute = new("System.Runtime.CompilerServices.CallerLineNumberAttribute");
-        internal static readonly KnownType System_Runtime_CompilerServices_CallerMemberNameAttribute = new("System.Runtime.CompilerServices.CallerMemberNameAttribute");
+        internal static readonly KnownType System_Runtime_CompilerServices_CallerMemberNameAttribute = new("System.Runtime.CompilerServices.EnumeratorCancellationAttribute");
+        internal static readonly KnownType System_Runtime_CompilerServices_EnumeratorCancellationAttribute = new("System.Runtime.CompilerServices.EnumeratorCancellationAttribute");
         internal static readonly KnownType System_Runtime_CompilerServices_InternalsVisibleToAttribute = new("System.Runtime.CompilerServices.InternalsVisibleToAttribute");
         internal static readonly KnownType System_Runtime_CompilerServices_ModuleInitializerAttribute = new("System.Runtime.CompilerServices.ModuleInitializerAttribute");
         internal static readonly KnownType System_Runtime_CompilerServices_ValueTaskAwaiter = new("System.Runtime.CompilerServices.ValueTaskAwaiter");
@@ -432,6 +433,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_SystemException = new("System.SystemException");
         internal static readonly KnownType System_Text_RegularExpressions_Regex = new("System.Text.RegularExpressions.Regex");
         internal static readonly KnownType System_Text_StringBuilder = new("System.Text.StringBuilder");
+        internal static readonly KnownType System_Threading_CancellationToken = new("System.Threading.CancellationToken");
         internal static readonly KnownType System_Threading_Monitor = new("System.Threading.Monitor");
         internal static readonly KnownType System_Threading_Mutex = new("System.Threading.Mutex");
         internal static readonly KnownType System_Threading_ReaderWriterLock = new("System.Threading.ReaderWriterLock");
