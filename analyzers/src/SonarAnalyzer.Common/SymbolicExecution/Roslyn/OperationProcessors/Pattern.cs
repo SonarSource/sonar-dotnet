@@ -55,8 +55,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
             {
                 OperationKindEx.ConstantPattern when
                     IConstantPatternOperationWrapper.FromOperation(pattern.WrappedOperation) is var constantPattern
-                    && state[constantPattern.Value]?.TryGetConstraint<ObjectConstraint>(out var patternContraint) is true =>
-                        BoolConstraint.From(valueConstraint.Equals(patternContraint)),
+                    && state[constantPattern.Value]?.HasConstraint(ObjectConstraint.Null) is true =>
+                        BoolConstraint.From(valueConstraint.Equals(ObjectConstraint.Null)),
                 OperationKindEx.RecursivePattern when
                     IRecursivePatternOperationWrapper.FromOperation(pattern.WrappedOperation) is
                     {
