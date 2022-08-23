@@ -65,10 +65,14 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                 {
                     { MatchesNull: true } => BoolConstraint.From(true),
                     _ when valueConstraint.Equals(ObjectConstraint.Null) => BoolConstraint.From(false),
-                    var notNull when notNull.InputType.Equals(notNull.MatchedType) => // Use Compilation.ClassifyConversion for better results
+                    var notNull when IsTypeAssignableTo(notNull.InputType, notNull.NarrowedType) => // Use Compilation.ClassifyConversion for better results
                         BoolConstraint.From(valueConstraint == ObjectConstraint.NotNull),
                     _ => null,
                 },
+                OperationKindEx.TypePattern when ITypePatternOperationWrapper.FromOperation(pattern.WrappedOperation) is var typePattern
+                    && IsTypeAssignableTo(typePattern.InputType, typePattern.NarrowedType) => BoolConstraint.From(valueConstraint == ObjectConstraint.NotNull),
+                OperationKindEx.NegatedPattern when INegatedPatternOperationWrapper.FromOperation(pattern.WrappedOperation) is var negated =>
+                    MatchValueConstraintToPattern(state, valueConstraint, negated.Pattern)?.Opposite as BoolConstraint,
                 _ => null,
             };
         public static ProgramState Process(SymbolicContext context, IIsPatternOperationWrapper isPattern) =>
@@ -78,6 +82,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
             && PatternBoolConstraint(value, boolPattern) is { } newConstraint
                 ? context.SetOperationConstraint(newConstraint)
                 : context.State;
+
+        private static bool IsTypeAssignableTo(ITypeSymbol type, ITypeSymbol assignableTo)
+            => type.Equals(assignableTo);
 
         public static ProgramState Process(SymbolicContext context, IRecursivePatternOperationWrapper recursive) =>
             ProcessDeclaration(context, recursive.DeclaredSymbol, true);

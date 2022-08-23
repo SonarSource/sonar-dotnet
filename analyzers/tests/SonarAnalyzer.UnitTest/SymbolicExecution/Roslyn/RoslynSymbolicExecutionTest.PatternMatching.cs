@@ -408,5 +408,38 @@ Tag(""IsNotNull"", isNotNull);";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateTag("IsNotNull", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
         }
+
+        [TestMethod]
+        public void LearnFromObjectContraint_IsNegatePattern_NotNull()
+        {
+            const string code = @"
+var nullObject = (object)null;
+var isNotNull = nullObject is not null;
+Tag(""IsNotNull"", isNotNull);";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("IsNotNull", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void LearnFromObjectContraint_IsNegatePattern_NotNotNull()
+        {
+            const string code = @"
+var nullObject = (object)null;
+var isNotNull = nullObject is not { };
+Tag(""IsNotNull"", isNotNull);";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("IsNotNull", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void LearnFromObjectContraint_IsNegatePattern_NotObject()
+        {
+            const string code = @"
+var nullObject = (object)null;
+var isNotNull = nullObject is not object;
+Tag(""IsNotNull"", isNotNull);";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("IsNotNull", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+        }
     }
 }
