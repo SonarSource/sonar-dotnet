@@ -74,6 +74,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                 OperationKindEx.NegatedPattern when INegatedPatternOperationWrapper.FromOperation(pattern.WrappedOperation) is var negated =>
                     MatchValueConstraintToPattern(state, valueConstraint, negated.Pattern)?.Opposite as BoolConstraint,
                 OperationKindEx.DiscardPattern => BoolConstraint.True,
+                OperationKindEx.BinaryPattern when IBinaryPatternOperationWrapper.FromOperation(pattern.WrappedOperation) is var binaryPattern =>
+                    MatchValueConstraintOfBinaryPattern(state, valueConstraint, binaryPattern),
                 _ => null,
             };
         public static ProgramState Process(SymbolicContext context, IIsPatternOperationWrapper isPattern) =>
@@ -83,6 +85,18 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
             && PatternBoolConstraint(value, boolPattern) is { } newConstraint
                 ? context.SetOperationConstraint(newConstraint)
                 : context.State;
+
+        private static BoolConstraint MatchValueConstraintOfBinaryPattern(ProgramState state, SymbolicConstraint valueConstraint, IBinaryPatternOperationWrapper binaryPattern)
+        {
+            var left = MatchValueConstraintToPattern(state, valueConstraint, binaryPattern.LeftPattern);
+            var right = MatchValueConstraintToPattern(state, valueConstraint, binaryPattern.RightPattern);
+            return binaryPattern.OperatorKind switch
+            {
+                BinaryOperatorKind.And => BoolConstraint.From(left == BoolConstraint.True && right == BoolConstraint.True),
+                BinaryOperatorKind.Or => BoolConstraint.From(left == BoolConstraint.True || right == BoolConstraint.True),
+                _ => null,
+            };
+        }
 
         private static bool IsTypeAssignableTo(ITypeSymbol type, ITypeSymbol assignableTo)
             => type.Equals(assignableTo);
