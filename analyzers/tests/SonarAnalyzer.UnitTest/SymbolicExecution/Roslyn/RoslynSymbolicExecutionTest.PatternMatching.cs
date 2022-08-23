@@ -354,6 +354,17 @@ Tag(""IsEmpty"", isEmpty);";
             validator.ValidateTag("IsEmpty", x => x.Should().BeNull());
         }
 
+        [TestMethod]
+        public void LearnFromObjectContraint_IsRecursivePattern_Null_WithProps()
+        {
+            const string code = @"
+string s = null;
+var isEmpty = s is { Length: 0 };
+Tag(""IsEmpty"", isEmpty);";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("IsEmpty", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+        }
+
 #if NET
 
         [TestMethod]

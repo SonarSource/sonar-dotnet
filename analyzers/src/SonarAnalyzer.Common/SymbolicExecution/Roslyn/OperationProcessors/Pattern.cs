@@ -58,11 +58,15 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                     && state[constantPattern.Value]?.HasConstraint(ObjectConstraint.Null) is true =>
                         BoolConstraint.From(valueConstraint.Equals(ObjectConstraint.Null)),
                 OperationKindEx.RecursivePattern when
-                    IRecursivePatternOperationWrapper.FromOperation(pattern.WrappedOperation) is
+                    IRecursivePatternOperationWrapper.FromOperation(pattern.WrappedOperation) is var recursivePattern => recursivePattern switch
                     {
-                        PropertySubpatterns.Length: 0,
-                        DeconstructionSubpatterns.Length: 0,
-                    } => BoolConstraint.From(valueConstraint.Equals(ObjectConstraint.NotNull)),
+                        {
+                            PropertySubpatterns.Length: 0,
+                            DeconstructionSubpatterns.Length: 0,
+                        } => BoolConstraint.From(valueConstraint.Equals(ObjectConstraint.NotNull)),
+                        _ when valueConstraint.Equals(ObjectConstraint.Null) => BoolConstraint.False,
+                        _ => null,
+                    },
                 OperationKindEx.DeclarationPattern when
                     IDeclarationPatternOperationWrapper.FromOperation(pattern.WrappedOperation) is var declarationPattern =>
                         declarationPattern switch
