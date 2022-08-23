@@ -53,9 +53,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
         private static BoolConstraint MatchValueConstraintToPattern(ProgramState state, SymbolicConstraint valueConstraint, IPatternOperationWrapper pattern) =>
             pattern.WrappedOperation.Kind switch
             {
-                OperationKindEx.ConstantPattern => state[IConstantPatternOperationWrapper.FromOperation(pattern.WrappedOperation).Value].TryGetConstraint<ObjectConstraint>(out var patternContraint)
-                    ? BoolConstraint.From(valueConstraint.Equals(patternContraint))
-                    : null,
+                OperationKindEx.ConstantPattern when IConstantPatternOperationWrapper.FromOperation(pattern.WrappedOperation) is var constantPattern =>
+                    state[constantPattern.Value]?.TryGetConstraint<ObjectConstraint>(out var patternContraint) is true
+                        ? BoolConstraint.From(valueConstraint.Equals(patternContraint))
+                        : null,
                 OperationKindEx.RecursivePattern when IRecursivePatternOperationWrapper.FromOperation(pattern.WrappedOperation) is
                 {
                     PropertySubpatterns.Length: 0,
@@ -63,7 +64,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                 } => BoolConstraint.From(valueConstraint == ObjectConstraint.NotNull),
                 OperationKindEx.DeclarationPattern when IDeclarationPatternOperationWrapper.FromOperation(pattern.WrappedOperation) is var delcarationPattern => delcarationPattern switch
                 {
-                    { MatchesNull: true } => BoolConstraint.From(true),
+                    { MatchesNull: true } => BoolConstraint.True,
                     _ when valueConstraint.Equals(ObjectConstraint.Null) => BoolConstraint.From(false),
                     var notNull when IsTypeAssignableTo(notNull.InputType, notNull.NarrowedType) => // Use Compilation.ClassifyConversion for better results
                         BoolConstraint.From(valueConstraint == ObjectConstraint.NotNull),
@@ -92,8 +93,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
             var right = MatchValueConstraintToPattern(state, valueConstraint, binaryPattern.RightPattern);
             return binaryPattern.OperatorKind switch
             {
-                BinaryOperatorKind.And => BoolConstraint.From(left == BoolConstraint.True && right == BoolConstraint.True),
-                BinaryOperatorKind.Or => BoolConstraint.From(left == BoolConstraint.True || right == BoolConstraint.True),
+                BinaryOperatorKind.And when left != null && right != null => BoolConstraint.From(left == BoolConstraint.True && right == BoolConstraint.True),
+                BinaryOperatorKind.Or when left != null || right != null => BoolConstraint.From(left == BoolConstraint.True || right == BoolConstraint.True),
                 _ => null,
             };
         }

@@ -300,6 +300,28 @@ Tag(""IsNull"", isNull);";
         }
 
         [TestMethod]
+        public void LearnFromObjectContraint_IsConstant_Number()
+        {
+            const string code = @"
+var notNull = new object();
+var isNull = notNull is 1;
+Tag(""IsNull"", isNull);";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("IsNull", x => x.Should().BeNull());
+        }
+
+        [TestMethod]
+        public void LearnFromObjectContraint_IsConstant_Boolean()
+        {
+            const string code = @"
+var notNull = new object();
+var isNull = notNull is true;
+Tag(""IsNull"", isNull);";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("IsNull", x => x.Should().BeNull());
+        }
+
+        [TestMethod]
         public void LearnFromObjectContraint_IsRecursivePattern_Empty()
         {
             const string code = @"
@@ -509,6 +531,17 @@ Tag(""IsBinary"", isBinary);";
         }
 
         [TestMethod]
+        public void LearnFromObjectContraint_Binary_And_BothNotDeterministic()
+        {
+            const string code = @"
+var s = new string('c', 1);
+var isBinary = s is { Length: > 10 } and { Length: < 100 };
+Tag(""IsBinary"", isBinary);";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("IsBinary", x => x.Should().BeNull());
+        }
+
+        [TestMethod]
         public void LearnFromObjectContraint_Binary_Or_True()
         {
             const string code = @"
@@ -550,6 +583,17 @@ var isBinary = s is not null or { Length: 0 };
 Tag(""IsBinary"", isBinary);";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateTag("IsBinary", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void LearnFromObjectContraint_Binary_Or_BothNotDeterministic()
+        {
+            const string code = @"
+var s = new string('c', 1);
+var isBinary = s is { Length: < 10 } or { Length: > 100 };
+Tag(""IsBinary"", isBinary);";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("IsBinary", x => x.Should().BeNull());
         }
     }
 }
