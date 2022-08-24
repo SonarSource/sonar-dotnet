@@ -31,12 +31,18 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
     {
         public static ProgramState Process(SymbolicContext context, IIsPatternOperationWrapper isPattern)
         {
-            var state = LearnFromBoolContraint(context.State, isPattern);
-            state = LearnFromObjectContraint(state, isPattern);
+            var state = LearnBoolFromBoolContraint(context.State, isPattern);
+            state = LearnBoolFromObjectContraint(state, isPattern);
             return state;
         }
 
-        private static ProgramState LearnFromBoolContraint(ProgramState state, IIsPatternOperationWrapper isPattern) =>
+        public static ProgramState Process(SymbolicContext context, IRecursivePatternOperationWrapper recursive) =>
+            ProcessDeclaration(context, recursive.DeclaredSymbol, true);
+
+        public static ProgramState Process(SymbolicContext context, IDeclarationPatternOperationWrapper declaration) =>
+            ProcessDeclaration(context, declaration.DeclaredSymbol, !declaration.MatchesNull);  // "... is var ..." should not set NotNull
+
+        private static ProgramState LearnBoolFromBoolContraint(ProgramState state, IIsPatternOperationWrapper isPattern) =>
             state[isPattern.Value] is { } value
                 && isPattern.Pattern.WrappedOperation.Kind == OperationKindEx.ConstantPattern
                 && ConstantCheck.ConstraintFromValue(IConstantPatternOperationWrapper.FromOperation(isPattern.Pattern.WrappedOperation).Value.ConstantValue.Value) is BoolConstraint boolPattern
@@ -44,7 +50,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                     ? state.SetOperationConstraint(isPattern.WrappedOperation, newConstraint)
                     : state;
 
-        private static ProgramState LearnFromObjectContraint(ProgramState state, IIsPatternOperationWrapper isPattern) =>
+        private static ProgramState LearnBoolFromObjectContraint(ProgramState state, IIsPatternOperationWrapper isPattern) =>
             state[isPattern.Value] is { } value
             && value.TryGetConstraint<ObjectConstraint>(out var valueConstraint)
             && MatchValueConstraintToPattern(state, valueConstraint, isPattern.Pattern) is { } boolConstraint
