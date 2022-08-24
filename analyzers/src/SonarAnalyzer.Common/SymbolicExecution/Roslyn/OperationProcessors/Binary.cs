@@ -19,6 +19,7 @@
  */
 
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Editing;
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
@@ -37,10 +38,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
         public static ProgramState LearnBranchingConstraint(ProgramState state, IBinaryOperationWrapper binary)
         {
             // FIXME: Still ugly
-            if ((OperandSymbolWithoutConstraint(binary.LeftOperand) ?? OperandSymbolWithoutConstraint(binary.RightOperand)) is { } testedSymbol
-                && (OperandConstraint(binary.LeftOperand) ?? OperandConstraint(binary.RightOperand)) is { } constraint
-                && binary.OperatorKind == BinaryOperatorKind.Equals // FIXME: Operation swap
-                    )
+            if (binary.OperatorKind is BinaryOperatorKind.Equals or BinaryOperatorKind.NotEquals
+                && (OperandSymbolWithoutConstraint(binary.LeftOperand) ?? OperandSymbolWithoutConstraint(binary.RightOperand)) is { } testedSymbol
+                && (OperandConstraint(binary.LeftOperand) ?? OperandConstraint(binary.RightOperand)) is { } constraint)
             {
                 if (UseOpposite())
                 {
@@ -65,11 +65,11 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                 state[candidate] is { } value && value.HasConstraint<ObjectConstraint>()
                     ? value.Constraint<ObjectConstraint>()
                     : null;
+
             bool UseOpposite()
             {
                 var ret = state[binary.WrappedOperation].HasConstraint(BoolConstraint.False);   // Opposite between "if" and "else" branches
-                // FIXME: More magic
-                return ret;
+                return binary.OperatorKind == BinaryOperatorKind.NotEquals ? !ret : ret;
             }
         }
 

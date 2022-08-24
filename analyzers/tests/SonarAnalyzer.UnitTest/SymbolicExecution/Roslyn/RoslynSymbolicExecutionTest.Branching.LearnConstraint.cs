@@ -123,41 +123,12 @@ if (value = boolParameter)
         }
 
         [DataTestMethod]
-        [DataRow("arg != null")]
-        [DataRow("arg != isNull")]
-        [DataRow("arg != isObject")]
-        [DataRow("null != arg")]
-        [DataRow("isNull != arg")]
-        [DataRow("isObject != arg")]
-        [DataRow("!!!(arg != null)")]
-        [DataRow("!!!(null != arg)")]
-        public void Branching_LearnsObjectConstraint_NotSupported_CS(string expression)     // FIXME: Should be removed at the end
-        {
-            var code = @$"
-object isNull = null;
-var isObject = new object();
-if ({expression})
-{{
-    Tag(""If"", arg);
-}}
-else
-{{
-    Tag(""Else"", arg);
-}}
-Tag(""End"", arg);";
-            var validator = SETestContext.CreateCS(code, ", object arg").Validator;
-            validator.ValidateTag("If", x => x.Should().BeNull());
-            validator.ValidateTag("Else", x => x.Should().BeNull());
-            validator.TagValues("End").Should().HaveCount(1)
-                .And.ContainSingle(x => x == null)
-                .And.ContainSingle(x => x == null);
-        }
-
-        [DataTestMethod]
         [DataRow("arg == null")]
         [DataRow("arg == isNull")]
         [DataRow("null == arg")]
         [DataRow("isNull == arg")]
+        [DataRow("!!!(arg != null)")]
+        [DataRow("!!!(null != arg)")]
         public void Branching_LearnsObjectConstraint_CS(string expression)
         {
             var code = @$"
@@ -181,6 +152,10 @@ Tag(""End"", arg);";
         }
 
         [DataTestMethod]
+        [DataRow("arg != null")]
+        [DataRow("arg != isNull")]
+        [DataRow("null != arg")]
+        [DataRow("isNull != arg")]
         [DataRow("!!!(arg == null)")]
         [DataRow("!!!(null == arg)")]
         public void Branching_LearnsObjectConstraint_Negated_CS(string expression)
@@ -225,6 +200,31 @@ Tag(""End"", arg);";
             var validator = SETestContext.CreateCS(code, ", object arg").Validator;
             validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.ValidateTag("Else", x => x.Should().BeNull("We can't tell if it is Null or NotNull in this branch"));
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x == null)
+                .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
+        }
+
+        [DataTestMethod]
+        [DataRow("arg != isObject")]
+        [DataRow("isObject != arg")]
+        public void Branching_LearnsObjectConstraint_UndefinedInOtherBranch_Negated_CS(string expression)
+        {
+            var code = @$"
+object isNull = null;
+var isObject = new object();
+if ({expression})
+{{
+    Tag(""If"", arg);
+}}
+else
+{{
+    Tag(""Else"", arg);
+}}
+Tag(""End"", arg);";
+            var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+            validator.ValidateTag("If", x => x.Should().BeNull("We can't tell if it is Null or NotNull in this branch"));
+            validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x == null)
                 .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
