@@ -22,6 +22,7 @@ using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
+    [DebuggerDisplay($"{{{nameof(SerializeConstraints)}(),nq}}")]
     public sealed record SymbolicValue
     {
         // Reuse instances to save memory. This "True" has the same semantic meaning and any other symbolic value with BoolConstraint.True constraint
@@ -61,6 +62,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         public T Constraint<T>() where T : SymbolicConstraint =>
             Constraints.TryGetValue(typeof(T), out var value) ? (T)value : null;
+
+        public IEnumerable<SymbolicConstraint> AllConstraints
+            => Constraints.Values;
 
         public override int GetHashCode() =>
             HashCode.DictionaryContentHash(Constraints);
