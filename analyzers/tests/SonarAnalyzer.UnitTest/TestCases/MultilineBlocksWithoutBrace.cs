@@ -192,27 +192,28 @@ class Nested
     }
 }
 
-class EmptyStatements
+class EmptyStatements // Compliant, we ignore cases where at least one of the statements is empty
 {
     public void Two(bool condition)
     {
         if (condition) ;
-            ; // Noncompliant
+            ;
     }
     public void First(bool condition)
     {
-        if (condition) ; // <-- note the empty statement
-            Act.Second(); // Noncompliant
+        if (condition) ;
+            Act.Second();
     }
     public void Second(bool condition)
     {
         if (condition)
             Act.First();
-            ; // <-- note the empty statement
+            ;
     }
     public void TwoSingleLine(bool condition)
     {
-        if (condition) ; ; // Noncompliant
+        if (condition) ;
+        ;
     }
     public void FirstSingleLine(bool condition)
     {
@@ -220,7 +221,12 @@ class EmptyStatements
     }
     public void SecondSingleLine(bool condition)
     {
-        if (condition) Act.First(); ; // <-- note the empty statement
+        if (condition) Act.First(); ;
+    }
+
+    public void WithBlockComment(bool condition)
+    {
+        if(condition) /* comment */; Act.Second();
     }
 }
 

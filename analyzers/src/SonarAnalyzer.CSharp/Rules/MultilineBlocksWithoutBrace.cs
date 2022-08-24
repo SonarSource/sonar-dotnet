@@ -95,7 +95,8 @@ public sealed class MultilineBlocksWithoutBrace : SonarDiagnosticAnalyzer
 
     private static void CheckStatement(SyntaxNodeAnalysisContext context, StatementSyntax first, string executed, string execute)
     {
-        if (SecondStatement(context.Node, first) is { } second)
+        if (SecondStatement(context.Node, first) is { } second
+            && NotEmpty(first) && NotEmpty(second))
         {
             var firstPosition = first.GetLocation().GetLineSpan().StartLinePosition;
             var secondPosition = second.GetLocation().GetLineSpan().StartLinePosition;
@@ -112,6 +113,9 @@ public sealed class MultilineBlocksWithoutBrace : SonarDiagnosticAnalyzer
             }
         }
     }
+
+    private static bool NotEmpty(SyntaxNode node) =>
+        node is not EmptyStatementSyntax;
 
     private static bool SameIndentation(LinePosition first, LinePosition second) =>
         first.Character == second.Character;
