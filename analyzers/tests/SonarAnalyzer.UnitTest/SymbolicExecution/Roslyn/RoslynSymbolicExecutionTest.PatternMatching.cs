@@ -411,6 +411,17 @@ Tag(""IsPattern"", isPattern);";
             validator.ValidateTag("IsPattern", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
         }
 
+        [TestMethod]
+        public void LearnFromObjectContraint_IsRecursivePattern_WithDeconstruction_OnNull()
+        {
+            const string code = @"
+R r = null;
+var isPattern  = r is (A: 1, B: 2);
+Tag(""IsPattern"", isPattern);";
+            var validator = SETestContext.CreateCS(code, additionalTypes: "record R(int A, int B);").Validator;
+            validator.ValidateTag("IsPattern", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+        }
+
 #endif
 
         [TestMethod]
