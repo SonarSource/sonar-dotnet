@@ -58,14 +58,14 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                     IConstantPatternOperationWrapper.FromOperation(pattern.WrappedOperation) is var constantPattern
                     && state[constantPattern.Value]?.HasConstraint(ObjectConstraint.Null) is true =>
                         BoolConstraint.From(valueConstraint.Equals(ObjectConstraint.Null)),
-                OperationKindEx.RecursivePattern when
-                    IRecursivePatternOperationWrapper.FromOperation(pattern.WrappedOperation) is var recursivePattern => recursivePattern switch
+                OperationKindEx.RecursivePattern when IRecursivePatternOperationWrapper.FromOperation(pattern.WrappedOperation) is var recursivePattern =>
+                    recursivePattern switch
                     {
+                        _ when valueConstraint.Equals(ObjectConstraint.Null) => BoolConstraint.False,
                         {
                             PropertySubpatterns.Length: 0,
                             DeconstructionSubpatterns.Length: 0,
-                        } => BoolConstraint.From(valueConstraint.Equals(ObjectConstraint.NotNull)),
-                        _ when valueConstraint.Equals(ObjectConstraint.Null) => BoolConstraint.False,
+                        } => BoolConstraint.True,
                         {
                             PropertySubpatterns: var propertySubPatterns,
                             DeconstructionSubpatterns: var deconstructSubpatterns,
@@ -75,11 +75,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                                    .All(x => x is { WrappedOperation.Kind: OperationKindEx.DiscardPattern }
                                         || (x.WrappedOperation.Kind == OperationKindEx.DeclarationPattern
                                             && IDeclarationPatternOperationWrapper.FromOperation(x.WrappedOperation).MatchesNull)) =>
-                                BoolConstraint.From(valueConstraint.Equals(ObjectConstraint.NotNull)),
+                                BoolConstraint.True,
                         _ => null,
                     },
-                OperationKindEx.DeclarationPattern when
-                    IDeclarationPatternOperationWrapper.FromOperation(pattern.WrappedOperation) is var declarationPattern =>
+                OperationKindEx.DeclarationPattern when IDeclarationPatternOperationWrapper.FromOperation(pattern.WrappedOperation) is var declarationPattern =>
                         declarationPattern switch
                         {
                             { MatchesNull: true } => BoolConstraint.True,
