@@ -1102,21 +1102,18 @@ public class Repro_5289
     }
 }
 
-namespace SonarLint_S2259_False_Positive_Replication
+public class Repro_GridChecks
 {
-    public class FPReplication
+    public int Go(string first, string second)
     {
-        public int PartialChecksForSemanticVersionComparison(string preRelease, string otherPreRelease)
-        {
-            if (preRelease == otherPreRelease) return 0;
-            if (preRelease != null && otherPreRelease == null) return -1;
-            if (preRelease == null && otherPreRelease != null) return 1;
+        if (first == second) return 0;
+        if (first != null && second == null) return -1;
+        if (first == null && second != null) return 1;
 
-            preRelease.Split('.'); // Compliant
-            otherPreRelease.Split('.');
+        first.Split('.');   // Noncompliant FP
+        second.Split('.');  // Noncompliant FP
 
-            return 0;
-        }
+        return 0;
     }
 }
 
