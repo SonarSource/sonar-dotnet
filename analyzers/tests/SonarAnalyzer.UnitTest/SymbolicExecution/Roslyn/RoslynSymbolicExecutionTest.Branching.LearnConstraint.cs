@@ -105,12 +105,16 @@ Tag(""End"", collection);";
         }
 
         [TestMethod]
-        public void Branching_BoolExpression_LearnsBoolConstraint_NotSupported()
+        public void Branching_BoolExpression_LearnsBoolConstraint()
         {
             const string code = @"
 if (boolParameter == true)
 {
-    Tag(""BoolParameter"", boolParameter);
+    Tag(""True"", boolParameter);
+}
+else
+{
+    Tag(""False"", boolParameter);
 }
 bool value;
 if (value = boolParameter)
@@ -118,8 +122,9 @@ if (value = boolParameter)
     Tag(""Value"", value);
 }";
             var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("BoolParameter", x => x.Should().BeNull());
-            validator.ValidateTag("Value", x => x.Should().BeNull());
+            validator.ValidateTag("True", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+            validator.ValidateTag("False", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+            validator.ValidateTag("Value", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());    // Visited only for "true" condition
         }
 
         [DataTestMethod]

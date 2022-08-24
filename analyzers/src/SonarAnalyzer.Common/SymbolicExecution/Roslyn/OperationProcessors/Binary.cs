@@ -35,7 +35,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
 
         public static ProgramState LearnBranchingConstraint(ProgramState state, IBinaryOperationWrapper binary, bool useOpposite) =>
             binary.OperatorKind is BinaryOperatorKind.Equals or BinaryOperatorKind.NotEquals or BinaryOperatorKind.ObjectValueEquals or BinaryOperatorKind.ObjectValueNotEquals
-                ? LearnBranchingConstraint<ObjectConstraint>(state, binary, useOpposite) ?? state
+                ? LearnBranchingConstraint<ObjectConstraint>(state, binary, useOpposite) ?? LearnBranchingConstraint<BoolConstraint>(state, binary, useOpposite) ?? state
                 : state;
 
         private static ProgramState LearnBranchingConstraint<T>(ProgramState state, IBinaryOperationWrapper binary, bool useOpposite)
