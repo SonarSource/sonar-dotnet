@@ -77,7 +77,7 @@ public sealed class MultilineBlocksWithoutBrace : SonarDiagnosticAnalyzer
         }
     }
 
-    private static StatementSyntax GetLastStatementInIfChain(IfStatementSyntax ifStatement)
+    private static StatementSyntax LastStatementInIfChain(IfStatementSyntax ifStatement)
     {
         var currentIfStatement = ifStatement;
         var statement = currentIfStatement.Statement;
