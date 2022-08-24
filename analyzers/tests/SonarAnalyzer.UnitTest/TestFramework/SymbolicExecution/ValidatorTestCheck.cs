@@ -125,6 +125,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
             invocation.Arguments.Should().HaveCount(2, "Asserted argument is expected in Tag(..) invocation");
             var argument = invocation.Arguments[1].Value;
             var symbol = Symbol(argument is IConversionOperation conversion ? conversion.Operand : argument);
+            symbol.Should().NotBeNull("Tag should have symbol specified");
             return context.State[symbol];
         }
     }

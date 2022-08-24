@@ -67,6 +67,27 @@ Tag(""End"");";
         }
 
         [TestMethod]
+        public void Branching_ConversionAndBoolSymbol_LearnsBoolConstraint()
+        {
+            const string code = @"
+if ((bool)(object)(bool)boolParameter)
+{
+    Tag(""True"", boolParameter);
+}
+else
+{
+    Tag(""False"", boolParameter);
+};
+Tag(""End"", boolParameter);";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("True", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+            validator.ValidateTag("False", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x.HasConstraint(BoolConstraint.True))
+                .And.ContainSingle(x => x.HasConstraint(BoolConstraint.False));
+        }
+
+        [TestMethod]
         public void Branching_BoolOperation_LearnsBoolConstraint()
         {
             const string code = @"

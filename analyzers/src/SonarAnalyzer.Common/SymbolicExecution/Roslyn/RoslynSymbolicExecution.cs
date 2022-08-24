@@ -287,11 +287,20 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         private static ProgramState LearnBranchingConstraints(ControlFlowBranch branch, ProgramState state, IOperation branchValue)
         {
-            var constraint = BoolConstraint.From((branch.Source.ConditionKind == ControlFlowConditionKind.WhenTrue) == branch.IsConditionalSuccessor);
-            state = state.SetOperationConstraint(branchValue, constraint);
-            return branchValue.TrackedSymbol() is { } symbol
-                ? state.SetSymbolConstraint(symbol, constraint)
-                : state;
+            if (branchValue.Kind == OperationKindEx.Conversion)
+            {
+                var operand = IConversionOperationWrapper.FromOperation(branchValue).Operand;
+                state = LearnBranchingConstraints(branch, state, operand);
+                return state.SetOperationValue(branchValue, state[operand]);    // Propagate value from operand to conversion operation itself
+            }
+            else
+            {
+                var constraint = BoolConstraint.From((branch.Source.ConditionKind == ControlFlowConditionKind.WhenTrue) == branch.IsConditionalSuccessor);
+                state = state.SetOperationConstraint(branchValue, constraint);
+                return branchValue.TrackedSymbol() is { } symbol
+                    ? state.SetSymbolConstraint(symbol, constraint)
+                    : state;
+            }
         }
 
         private static bool IsReachable(ExplodedNode node, ControlFlowBranch branch) =>
