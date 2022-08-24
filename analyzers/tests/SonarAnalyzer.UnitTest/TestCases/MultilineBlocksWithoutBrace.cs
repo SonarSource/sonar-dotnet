@@ -192,6 +192,38 @@ class Nested
     }
 }
 
+class EmptyStatements
+{
+    public void Two(bool condition)
+    {
+        if (condition) ;
+            ; // Noncompliant
+    }
+    public void First(bool condition)
+    {
+        if (condition) ; // <-- note the empty statement
+            Act.Second(); // Noncompliant
+    }
+    public void Second(bool condition)
+    {
+        if (condition)
+            Act.First();
+            ; // <-- note the empty statement
+    }
+    public void TwoSingleLine(bool condition)
+    {
+        if (condition) ; ; // Noncompliant
+    }
+    public void FirstSingleLine(bool condition)
+    {
+        if (condition) ; Act.Second();
+    }
+    public void SecondSingleLine(bool condition)
+    {
+        if (condition) Act.First(); ; // <-- note the empty statement
+    }
+}
+
 class Other
 {
     void FirstSameLineSecondTooFar(bool condition)
