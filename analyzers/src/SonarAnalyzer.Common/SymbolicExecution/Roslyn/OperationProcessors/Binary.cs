@@ -19,8 +19,6 @@
  */
 
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Editing;
-using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
 
@@ -35,14 +33,14 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                 ? context.SetOperationConstraint(newConstraint)
                 : context.State;
 
-        public static ProgramState LearnBranchingConstraint(ProgramState state, IBinaryOperationWrapper binary)
+        public static ProgramState LearnBranchingConstraint(ProgramState state, IBinaryOperationWrapper binary, bool useOpposite)
         {
             // FIXME: Still ugly
             if (binary.OperatorKind is BinaryOperatorKind.Equals or BinaryOperatorKind.NotEquals or BinaryOperatorKind.ObjectValueEquals or BinaryOperatorKind.ObjectValueNotEquals
                 && (OperandSymbolWithoutConstraint(binary.LeftOperand) ?? OperandSymbolWithoutConstraint(binary.RightOperand)) is { } testedSymbol
                 && (OperandConstraint(binary.LeftOperand) ?? OperandConstraint(binary.RightOperand)) is { } constraint)
             {
-                if (UseOpposite())
+                if (useOpposite ^ binary.OperatorKind is BinaryOperatorKind.NotEquals or BinaryOperatorKind.ObjectValueNotEquals)
                 {
                     constraint = constraint.Opposite;
                 }
@@ -65,12 +63,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                 state[candidate] is { } value && value.HasConstraint<ObjectConstraint>()
                     ? value.Constraint<ObjectConstraint>()
                     : null;
-
-            bool UseOpposite()
-            {
-                var ret = state[binary.WrappedOperation].HasConstraint(BoolConstraint.False);   // Opposite between "if" and "else" branches
-                return binary.OperatorKind is BinaryOperatorKind.NotEquals or BinaryOperatorKind.ObjectValueNotEquals ? !ret : ret;
-            }
         }
 
         private static SymbolicConstraint BinaryConstraint(BinaryOperatorKind kind, SymbolicValue left, SymbolicValue right)

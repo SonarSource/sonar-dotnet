@@ -295,20 +295,22 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             }
             else
             {
-                var constraint = BoolConstraint.From((branch.Source.ConditionKind == ControlFlowConditionKind.WhenTrue) == branch.IsConditionalSuccessor);
+                var trueBranch = (branch.Source.ConditionKind == ControlFlowConditionKind.WhenTrue) == branch.IsConditionalSuccessor;
+                var constraint = BoolConstraint.From(trueBranch);
                 state = state.SetOperationConstraint(branchValue, constraint);
                 return branchValue.TrackedSymbol() is { } symbol
                     ? state.SetSymbolConstraint(symbol, constraint)
-                    : LearnBranchingConstraintsFromOperation(state, branchValue);
+                    : LearnBranchingConstraintsFromOperation(state, branchValue, !trueBranch);
             }
         }
 
-        private static ProgramState LearnBranchingConstraintsFromOperation(ProgramState state, IOperation operation)
+        private static ProgramState LearnBranchingConstraintsFromOperation(ProgramState state, IOperation operation, bool useOpposite)
         {
             return operation.Kind switch
             {
-                OperationKindEx.Binary => Binary.LearnBranchingConstraint(state, As(IBinaryOperationWrapper.FromOperation)),
-                OperationKindEx.Conversion => LearnBranchingConstraintsFromOperation(state, As(IConversionOperationWrapper.FromOperation).Operand),
+                OperationKindEx.Binary => Binary.LearnBranchingConstraint(state, As(IBinaryOperationWrapper.FromOperation), useOpposite),
+                OperationKindEx.Conversion => LearnBranchingConstraintsFromOperation(state, As(IConversionOperationWrapper.FromOperation).Operand, useOpposite),
+                OperationKindEx.Unary when operation.ToUnary() is { OperatorKind: UnaryOperatorKind.Not } unary => LearnBranchingConstraintsFromOperation(state, unary.Operand, !useOpposite),
                 _ => state
             };
 

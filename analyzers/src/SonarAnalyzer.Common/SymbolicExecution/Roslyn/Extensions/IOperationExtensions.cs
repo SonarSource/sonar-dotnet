@@ -68,6 +68,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         internal static IPropertyReferenceOperationWrapper ToPropertyReference(this IOperation operation) =>
             IPropertyReferenceOperationWrapper.FromOperation(operation);
 
+        internal static IUnaryOperationWrapper ToUnary(this IOperation operation) =>
+            IUnaryOperationWrapper.FromOperation(operation);
+
         public static bool IsStaticOrThis(this IMemberReferenceOperationWrapper reference) =>
             reference.Instance == null // static fields
             || reference.Instance.IsAnyKind(OperationKindEx.InstanceReference);
