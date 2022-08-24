@@ -87,6 +87,22 @@ Tag(""End"", boolParameter);";
                 .And.ContainSingle(x => x.HasConstraint(BoolConstraint.False));
         }
 
+        [DataTestMethod]
+        [DataRow("~")]
+        [DataRow("+")]
+        [DataRow("-")]
+        public void Branching_ConversionAndOtherUnaryOperators_DoNotLearnConstraints(string unary)
+        {
+            var code = @$"
+if ((bool)(object)({unary}arg))
+{{
+    Tag(""Arg"", arg);
+}}";
+            var validator = SETestContext.CreateCS(code, ", int arg").Validator;
+            validator.ValidateContainsOperation(OperationKind.Unary);
+            validator.ValidateTag("Arg", x => x.Should().BeNull());
+        }
+
         [TestMethod]
         public void Branching_BoolOperation_LearnsBoolConstraint()
         {
@@ -264,10 +280,10 @@ Tag(""End"", Arg)";
         }
 
         [DataTestMethod]
-        //[DataRow("Arg <> Nothing")]
-        //[DataRow("Nothing <> Arg")]
-        //[DataRow("Not Not Not Arg Is Nothing")]
-        //[DataRow("Not Not Not Nothing Is Arg")]
+        [DataRow("Arg <> Nothing")]
+        [DataRow("Nothing <> Arg")]
+        [DataRow("Not Not Not Arg Is Nothing")]
+        [DataRow("Not Not Not Nothing Is Arg")]
         [DataRow("Not Not Not Arg = Nothing")]
         [DataRow("Not Not Not Nothing = Arg")]
         public void Branching_LearnsObjectConstraint_Negated_VB(string expression)
