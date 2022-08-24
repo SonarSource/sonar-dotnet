@@ -231,10 +231,6 @@ Tag(""End"", arg);";
         }
 
         [DataTestMethod]
-        [DataRow("Arg = Nothing")]
-        [DataRow("Arg <> Nothing")]
-        [DataRow("Nothing = Arg")]
-        [DataRow("Nothing <> Arg")]
         [DataRow("Not Not Not Arg = Nothing")]
         [DataRow("Not Not Not Arg <> Nothing")]
         [DataRow("Not Not Not Nothing = Arg")]
@@ -258,7 +254,9 @@ Tag(""End"", Arg)";
 
         [DataTestMethod]
         [DataRow("Arg Is Nothing")]
+        [DataRow("Arg = Nothing")]
         [DataRow("Nothing Is Arg")]
+        [DataRow("Nothing = Arg")]
         public void Branching_LearnsObjectConstraint_VB(string expression)
         {
             var code = @$"
@@ -277,6 +275,8 @@ Tag(""End"", Arg)";
         }
 
         [DataTestMethod]
+        [DataRow("Arg <> Nothing")]
+        [DataRow("Nothing <> Arg")]
         [DataRow("Not Not Not Arg Is Nothing")]
         [DataRow("Not Not Not Nothing Is Arg")]
         public void Branching_LearnsObjectConstraint_Negated_VB(string expression)

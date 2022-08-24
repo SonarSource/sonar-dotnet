@@ -299,16 +299,21 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 state = state.SetOperationConstraint(branchValue, constraint);
                 return branchValue.TrackedSymbol() is { } symbol
                     ? state.SetSymbolConstraint(symbol, constraint)
-                    : branchValue.Kind switch
-                    {
-                        OperationKindEx.Binary => Binary.LearnBranchingConstraint(state, As(IBinaryOperationWrapper.FromOperation)),
-                        // ToDo: Other null-checking operations
-                        _ => state
-                    };
+                    : LearnBranchingConstraintsFromOperation(state, branchValue);
             }
+        }
+
+        private static ProgramState LearnBranchingConstraintsFromOperation(ProgramState state, IOperation operation)
+        {
+            return operation.Kind switch
+            {
+                OperationKindEx.Binary => Binary.LearnBranchingConstraint(state, As(IBinaryOperationWrapper.FromOperation)),
+                OperationKindEx.Conversion => LearnBranchingConstraintsFromOperation(state, As(IConversionOperationWrapper.FromOperation).Operand),
+                _ => state
+            };
 
             T As<T>(Func<IOperation, T> fromOperation) =>
-                fromOperation(branchValue); ;
+                fromOperation(operation);
         }
 
         private static bool IsReachable(ExplodedNode node, ControlFlowBranch branch) =>
