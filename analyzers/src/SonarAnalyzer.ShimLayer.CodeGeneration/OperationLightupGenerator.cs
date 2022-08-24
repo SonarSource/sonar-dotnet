@@ -1048,7 +1048,6 @@ namespace StyleCop.Analyzers.CodeGeneration
                     "InstanceReferenceKind" => true,
                     "LoopKind" => true,
                     "PlaceholderKind" => true,
-                    "UnaryOperatorKind" => true,
                     _ => !this.IsPublicProperty,
                 };
 
