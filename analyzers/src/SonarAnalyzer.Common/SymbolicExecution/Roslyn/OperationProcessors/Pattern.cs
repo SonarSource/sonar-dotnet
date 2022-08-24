@@ -31,9 +31,11 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
     {
         public static ProgramState Process(SymbolicContext context, IIsPatternOperationWrapper isPattern)
         {
-            var state = LearnBoolFromBoolContraint(context.State, isPattern);
-            state = LearnBoolFromObjectContraint(state, isPattern);
-            return state;
+            var boolConstraint = LearnBoolFromBoolContraint(context.State, isPattern) ?? LearnBoolFromObjectContraint(context.State, isPattern);
+
+            return boolConstraint is null
+                ? context.State
+                : context.SetOperationConstraint(boolConstraint);
         }
 
         public static ProgramState Process(SymbolicContext context, IRecursivePatternOperationWrapper recursive) =>
@@ -42,20 +44,20 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
         public static ProgramState Process(SymbolicContext context, IDeclarationPatternOperationWrapper declaration) =>
             ProcessDeclaration(context, declaration.DeclaredSymbol, !declaration.MatchesNull);  // "... is var ..." should not set NotNull
 
-        private static ProgramState LearnBoolFromBoolContraint(ProgramState state, IIsPatternOperationWrapper isPattern) =>
+        private static BoolConstraint LearnBoolFromBoolContraint(ProgramState state, IIsPatternOperationWrapper isPattern) =>
             state[isPattern.Value] is { } value
                 && isPattern.Pattern.WrappedOperation.Kind == OperationKindEx.ConstantPattern
                 && ConstantCheck.ConstraintFromValue(IConstantPatternOperationWrapper.FromOperation(isPattern.Pattern.WrappedOperation).Value.ConstantValue.Value) is BoolConstraint boolPattern
                 && PatternBoolConstraint(value, boolPattern) is { } newConstraint
-                    ? state.SetOperationConstraint(isPattern.WrappedOperation, newConstraint)
-                    : state;
+                    ? newConstraint
+                    : null;
 
-        private static ProgramState LearnBoolFromObjectContraint(ProgramState state, IIsPatternOperationWrapper isPattern) =>
+        private static BoolConstraint LearnBoolFromObjectContraint(ProgramState state, IIsPatternOperationWrapper isPattern) =>
             state[isPattern.Value] is { } value
             && value.TryGetConstraint<ObjectConstraint>(out var valueConstraint)
             && MatchValueConstraintToPattern(state, valueConstraint, isPattern.Pattern) is { } boolConstraint
-                ? state.SetOperationConstraint(isPattern.WrappedOperation, boolConstraint)
-                : state;
+                ? boolConstraint
+                : null;
 
         private static BoolConstraint MatchValueConstraintToPattern(ProgramState state, ObjectConstraint valueConstraint, IPatternOperationWrapper pattern) =>
             pattern.WrappedOperation.Kind switch
