@@ -194,39 +194,21 @@ class Nested
 
 class EmptyStatements // Compliant, we ignore cases where at least one of the statements is empty
 {
-    public void Two(bool condition)
-    {
-        if (condition) ;
-            ;
-    }
     public void First(bool condition)
-    {
-        if (condition) ;
-            Act.Second();
-    }
-    public void Second(bool condition)
-    {
-        if (condition)
-            Act.First();
-            ;
-    }
-    public void TwoSingleLine(bool condition)
-    {
-        if (condition) ;
-        ;
-    }
-    public void FirstSingleLine(bool condition)
     {
         if (condition) ; Act.Second();
     }
-    public void SecondSingleLine(bool condition)
+    public void Second(bool condition)
     {
         if (condition) Act.First(); ;
     }
-
-    public void WithBlockComment(bool condition)
+    public void Both(bool condition)
     {
-        if(condition) /* comment */; Act.Second();
+        if (condition) ; ;
+    }
+    public void BlockComment(bool condition)
+    {
+        if (condition) /* comment */; Act.Second();
     }
 }
 
