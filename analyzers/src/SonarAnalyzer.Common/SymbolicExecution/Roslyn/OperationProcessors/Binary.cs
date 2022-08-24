@@ -33,35 +33,37 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                 ? context.SetOperationConstraint(newConstraint)
                 : context.State;
 
-        public static ProgramState LearnBranchingConstraint(ProgramState state, IBinaryOperationWrapper binary, bool useOpposite)
+        public static ProgramState LearnBranchingConstraint(ProgramState state, IBinaryOperationWrapper binary, bool useOpposite) =>
+            binary.OperatorKind is BinaryOperatorKind.Equals or BinaryOperatorKind.NotEquals or BinaryOperatorKind.ObjectValueEquals or BinaryOperatorKind.ObjectValueNotEquals
+                ? LearnBranchingConstraint<ObjectConstraint>(state, binary, useOpposite) ?? state
+                : state;
+
+        private static ProgramState LearnBranchingConstraint<T>(ProgramState state, IBinaryOperationWrapper binary, bool useOpposite)
+            where T : SymbolicConstraint
         {
-            // FIXME: Still ugly
-            if (binary.OperatorKind is BinaryOperatorKind.Equals or BinaryOperatorKind.NotEquals or BinaryOperatorKind.ObjectValueEquals or BinaryOperatorKind.ObjectValueNotEquals
-                && (OperandSymbolWithoutConstraint(binary.LeftOperand) ?? OperandSymbolWithoutConstraint(binary.RightOperand)) is { } testedSymbol
+            if ((OperandSymbolWithoutConstraint(binary.LeftOperand) ?? OperandSymbolWithoutConstraint(binary.RightOperand)) is { } testedSymbol
                 && (OperandConstraint(binary.LeftOperand) ?? OperandConstraint(binary.RightOperand)) is { } constraint)
             {
                 if (useOpposite ^ binary.OperatorKind is BinaryOperatorKind.NotEquals or BinaryOperatorKind.ObjectValueNotEquals)
                 {
                     constraint = constraint.Opposite;
                 }
-                // FIXME: Also for BoolConstraint, == true, == false, != true...
-
-                return constraint is null ? state : state.SetSymbolConstraint(testedSymbol, constraint);
+                return constraint is null ? null : state.SetSymbolConstraint(testedSymbol, constraint);
             }
             else
             {
-                return state;
+                return null;
             }
 
             ISymbol OperandSymbolWithoutConstraint(IOperation candidate) =>
                 candidate.TrackedSymbol() is { } symbol
-                && (state[symbol] is null || !state[symbol].HasConstraint<ObjectConstraint>())
+                && (state[symbol] is null || !state[symbol].HasConstraint<T>())
                     ? symbol
                     : null;
 
             SymbolicConstraint OperandConstraint(IOperation candidate) =>
-                state[candidate] is { } value && value.HasConstraint<ObjectConstraint>()
-                    ? value.Constraint<ObjectConstraint>()
+                state[candidate] is { } value && value.HasConstraint<T>()
+                    ? value.Constraint<T>()
                     : null;
         }
 
