@@ -28,9 +28,4 @@ public class MultilineBlocksWithoutBraceTest
     [TestMethod]
     public void MultilineBlocksWithoutBrace() =>
         new VerifierBuilder<MultilineBlocksWithoutBrace>().AddPaths("MultilineBlocksWithoutBrace.cs").Verify();
-
-    [Obsolete("Should be dropped before merged to master, but after at least one successful test run")]
-    [TestMethod]
-    public void MultilineBlocksWithoutBrace_old() =>
-      new VerifierBuilder<MultilineBlocksWithoutBrace>().AddPaths("MultilineBlocksWithoutBrace.old.cs").Verify();
 }
