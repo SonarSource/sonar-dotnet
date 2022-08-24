@@ -81,9 +81,9 @@ public sealed class MultilineBlocksWithoutBrace : SonarDiagnosticAnalyzer
     {
         var statement = ifStatement.Statement;
 
-        while (ifStatement != null)
+        while (ifStatement is { })
         {
-            if (ifStatement.Else == null)
+            if (ifStatement.Else is null)
             {
                 return ifStatement.Statement;
             }
