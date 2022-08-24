@@ -8,6 +8,14 @@
         Act.Second(); // Compliant
     }
 
+    void For(string[] args)
+    {
+        for (var i = 0; i < args.Length; i++)
+            Act.First(args[i]);
+
+        Act.Second(); // Compliant
+    }
+
     void ForEach(string[] args)
     {
         foreach (var arg in args)
@@ -58,6 +66,13 @@ class SecondWithIdentationFirst
         //  ^^^^^^^^^^^^^
     }
 
+    void For(string[] args)
+    {
+        for (var i = 0; i < args.Length; i++)
+            Act.First(args[i]); // Secondary
+            Act.Second(); // Noncompliant {{This line will not be executed in a loop; only the first line of this 2-line block will be. The rest will execute only once.}}
+    }
+
     void ForEach(string[] args)
     {
         foreach (var arg in args)
@@ -102,6 +117,13 @@ class FirstAndSecondOneSameLine
         //                             ^^^^^^^^^^^^^ @-1
     }
 
+    void For(string[] args)
+    {
+        for (var i = 0; i < args.Length; i++) Act.First(args[i]); Act.Second();
+        //                                    ^^^^^^^^^^^^^^^^^^^ Secondary
+        //                                                        ^^^^^^^^^^^^^ @-1
+    }
+
     void ForEach(string[] args)
     {
         foreach (var arg in args) Act.First(arg); Act.Second();
@@ -141,6 +163,12 @@ class FirstOneSameLineAndSecondWithIndentation
             Act.Second(); // Noncompliant
     }
 
+    void For(string[] args)
+    {
+        for (var i = 0; i < args.Length; i++) Act.First(args[i]); // Secondary
+            Act.Second(); // Noncompliant
+    }
+
     void ForEach(string[] args)
     {
         foreach (var arg in args) Act.First(arg); // Secondary
@@ -174,6 +202,13 @@ class Nested
     {
         while(true)
             while (condition) Act.First(); // Secondary
+                Act.Second(); // Noncompliant
+    }
+
+    void For(string[] args)
+    {
+        for (var ii = 0; ii < args.Length; ii++)
+            for (var i = 0; i < args.Length; i++) Act.First(args[i]); // Secondary
                 Act.Second(); // Noncompliant
     }
 
