@@ -469,7 +469,7 @@ Tag(""IsNotNull"", isNotNull);";
         }
 
         [TestMethod]
-        public void LearnFromObjectContraint_IsDeclarationPattern_NotMatchesNull_MatchTypeEqual()
+        public void LearnFromObjectContraint_IsDeclarationPattern_NotMatchesNull_MatchTypeEqual_Null()
         {
             const string code = @"
 var nullObject = (object)null;
@@ -477,6 +477,17 @@ var isNotNull = nullObject is object o;
 Tag(""IsNotNull"", isNotNull);";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateTag("IsNotNull", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void LearnFromObjectContraint_IsDeclarationPattern_NotMatchesNull_MatchTypeEqual_NotNull()
+        {
+            const string code = @"
+var notNullObject = new object();
+var isNotNull = notNullObject is object o;
+Tag(""IsNotNull"", isNotNull);";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("IsNotNull", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
         }
 
         [TestMethod]
