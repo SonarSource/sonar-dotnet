@@ -123,18 +123,13 @@ if (value = boolParameter)
         }
 
         [DataTestMethod]
-        [DataRow("arg == isObject")]
         [DataRow("arg != null")]
         [DataRow("arg != isNull")]
         [DataRow("arg != isObject")]
-        [DataRow("null == arg")]
         [DataRow("null != arg")]
-        [DataRow("isNull == arg")]
         [DataRow("isNull != arg")]
-        [DataRow("isObject == arg")]
         [DataRow("isObject != arg")]
         [DataRow("!!!(arg != null)")]
-        [DataRow("!!!(null == arg)")]
         [DataRow("!!!(null != arg)")]
         public void Branching_LearnsObjectConstraint_NotSupported_CS(string expression)     // FIXME: Should be removed at the end
         {
@@ -161,7 +156,9 @@ Tag(""End"", arg);";
         [DataTestMethod]
         [DataRow("arg == null")]
         [DataRow("arg == isNull")]
-        public void Branching_LearnsObjectConstraint_CS(string expression)     // FIXME: Should be removed at the end
+        [DataRow("null == arg")]
+        [DataRow("isNull == arg")]
+        public void Branching_LearnsObjectConstraint_CS(string expression)
         {
             var code = @$"
 object isNull = null;
@@ -185,8 +182,8 @@ Tag(""End"", arg);";
 
         [DataTestMethod]
         [DataRow("!!!(arg == null)")]
-        [DataRow("!!!(arg == null)  ")] // FIXME: Remove duplication
-        public void Branching_LearnsObjectConstraint_Negated_CS(string expression)     // FIXME: Should be removed at the end
+        [DataRow("!!!(null == arg)")]
+        public void Branching_LearnsObjectConstraint_Negated_CS(string expression)
         {
             var code = @$"
 object isNull = null;
@@ -209,15 +206,38 @@ Tag(""End"", arg);";
         }
 
         [DataTestMethod]
+        [DataRow("arg == isObject")]
+        [DataRow("isObject == arg")]
+        public void Branching_LearnsObjectConstraint_UndefinedInOtherBranch_CS(string expression)
+        {
+            var code = @$"
+object isNull = null;
+var isObject = new object();
+if ({expression})
+{{
+    Tag(""If"", arg);
+}}
+else
+{{
+    Tag(""Else"", arg);
+}}
+Tag(""End"", arg);";
+            var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+            validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("Else", x => x.Should().BeNull("We can't tell if it is Null or NotNull in this branch"));
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x == null)
+                .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
+        }
+
+        [DataTestMethod]
         [DataRow("Arg = Nothing")]
         [DataRow("Arg <> Nothing")]
         [DataRow("Nothing = Arg")]
-        [DataRow("Nothing Is Arg")]
         [DataRow("Nothing <> Arg")]
         [DataRow("Not Not Not Arg = Nothing")]
         [DataRow("Not Not Not Arg <> Nothing")]
         [DataRow("Not Not Not Nothing = Arg")]
-        [DataRow("Not Not Not Nothing Is Arg")]
         [DataRow("Not Not Not Nothing <> Arg")]
         public void Branching_LearnsObjectConstraint_NotSupported_VB(string expression)     // FIXME: Should be removed at the end
         {
@@ -238,7 +258,7 @@ Tag(""End"", Arg)";
 
         [DataTestMethod]
         [DataRow("Arg Is Nothing")]
-        [DataRow("Arg Is Nothing   ")] // FIXME: Remove duplication
+        [DataRow("Nothing Is Arg")]
         public void Branching_LearnsObjectConstraint_VB(string expression)
         {
             var code = @$"
@@ -258,7 +278,7 @@ Tag(""End"", Arg)";
 
         [DataTestMethod]
         [DataRow("Not Not Not Arg Is Nothing")]
-        [DataRow("Not Not Not Arg Is Nothing   ")] // FIXME: Remove duplication
+        [DataRow("Not Not Not Nothing Is Arg")]
         public void Branching_LearnsObjectConstraint_Negated_VB(string expression)
         {
             var code = @$"

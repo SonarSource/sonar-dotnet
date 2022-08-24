@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
@@ -33,24 +34,43 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                 ? context.SetOperationConstraint(newConstraint)
                 : context.State;
 
-        public static ProgramState LearnBranchingConstraint(ControlFlowBranch branch, ProgramState state, IBinaryOperationWrapper binary)
+        public static ProgramState LearnBranchingConstraint(ProgramState state, IBinaryOperationWrapper binary)
         {
-            // FIXME: Ugly hardcoded single-scenario prototype
-            if (state[binary.WrappedOperation].HasConstraint(BoolConstraint.True)
-                && binary.OperatorKind == BinaryOperatorKind.Equals
-                && binary.LeftOperand.TrackedSymbol() is { } symbol
-                && state[binary.RightOperand] is { } right
-                && right.HasConstraint(ObjectConstraint.Null))
-                return state.SetSymbolConstraint(symbol, ObjectConstraint.Null);
-            else if (state[binary.WrappedOperation].HasConstraint(BoolConstraint.False)
-                && binary.OperatorKind == BinaryOperatorKind.Equals
-                && binary.LeftOperand.TrackedSymbol() is { } symbol2
-                && state[binary.RightOperand] is { } right2
-                && right2.HasConstraint(ObjectConstraint.Null))
-                return state.SetSymbolConstraint(symbol2, ObjectConstraint.NotNull);
-            else
+            // FIXME: Still ugly
+            if ((OperandSymbolWithoutConstraint(binary.LeftOperand) ?? OperandSymbolWithoutConstraint(binary.RightOperand)) is { } testedSymbol
+                && (OperandConstraint(binary.LeftOperand) ?? OperandConstraint(binary.RightOperand)) is { } constraint
+                && binary.OperatorKind == BinaryOperatorKind.Equals // FIXME: Operation swap
+                    )
+            {
+                if (UseOpposite())
+                {
+                    constraint = constraint.Opposite;
+                }
+                // FIXME: Also for BoolConstraint, == true, == false, != true...
 
+                return constraint is null ? state : state.SetSymbolConstraint(testedSymbol, constraint);
+            }
+            else
+            {
                 return state;
+            }
+
+            ISymbol OperandSymbolWithoutConstraint(IOperation candidate) =>
+                candidate.TrackedSymbol() is { } symbol
+                && (state[symbol] is null || !state[symbol].HasConstraint<ObjectConstraint>())
+                    ? symbol
+                    : null;
+
+            SymbolicConstraint OperandConstraint(IOperation candidate) =>
+                state[candidate] is { } value && value.HasConstraint<ObjectConstraint>()
+                    ? value.Constraint<ObjectConstraint>()
+                    : null;
+            bool UseOpposite()
+            {
+                var ret = state[binary.WrappedOperation].HasConstraint(BoolConstraint.False);   // Opposite between "if" and "else" branches
+                // FIXME: More magic
+                return ret;
+            }
         }
 
         private static SymbolicConstraint BinaryConstraint(BinaryOperatorKind kind, SymbolicValue left, SymbolicValue right)

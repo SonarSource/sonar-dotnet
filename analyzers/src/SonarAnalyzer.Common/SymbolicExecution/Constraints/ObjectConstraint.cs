@@ -26,7 +26,9 @@ namespace SonarAnalyzer.SymbolicExecution.Constraints
         public static readonly ObjectConstraint NotNull = new();
 
         public override SymbolicConstraint Opposite =>
-            this == Null ? NotNull : null /* not NotNull can be Null or another NotNull */;
+            // x == null ? <Null> : <NotNull>
+            // x == "" ? <NotNull> : <unknown, could be Null or NotNull here>
+            this == Null ? NotNull : null;
 
         protected override string Name =>
             this == Null ? nameof(Null) : nameof(NotNull);

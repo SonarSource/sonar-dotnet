@@ -48,6 +48,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public bool HasConstraint<T>() where T : SymbolicConstraint =>
             Constraints.ContainsKey(typeof(T));
 
+        public T Constraint<T>() where T : SymbolicConstraint =>
+            Constraints.TryGetValue(typeof(T), out var value) ? (T)value : null;
+
         public bool HasConstraint(SymbolicConstraint constraint) =>
             Constraints.TryGetValue(constraint.GetType(), out var current) && constraint == current;
 

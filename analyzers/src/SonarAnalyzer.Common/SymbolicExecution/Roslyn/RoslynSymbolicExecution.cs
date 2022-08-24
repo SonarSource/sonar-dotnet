@@ -301,7 +301,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                     ? state.SetSymbolConstraint(symbol, constraint)
                     : branchValue.Kind switch
                     {
-                        OperationKindEx.Binary => Binary.LearnBranchingConstraint(branch, state, As(IBinaryOperationWrapper.FromOperation)),
+                        OperationKindEx.Binary => Binary.LearnBranchingConstraint(state, As(IBinaryOperationWrapper.FromOperation)),
+                        // ToDo: Other null-checking operations
                         _ => state
                     };
             }
