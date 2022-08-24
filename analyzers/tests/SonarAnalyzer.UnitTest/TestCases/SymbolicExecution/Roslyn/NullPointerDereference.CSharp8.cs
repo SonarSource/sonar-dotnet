@@ -124,7 +124,7 @@
     public interface IWithDefaultMembers
     {
         string NoncompliantDefaultInterfaceMethod(string obj) =>
-            obj != null ? null : obj.ToLower(); // FIXME Non-compliant
+            obj != null ? null : obj.ToLower(); // Noncompliant
 
         string CompliantDefaultInterfaceMethod(string obj) =>
             obj == null ? null : obj.ToLower();

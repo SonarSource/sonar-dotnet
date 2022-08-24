@@ -133,7 +133,7 @@ public class Sample
         {
             if (value == null)
             {
-                field = value.ToString();   // FIXME Non-compliant
+                field = value.ToString();   // Noncompliant
             }
         }
     }
