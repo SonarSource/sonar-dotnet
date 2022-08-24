@@ -51,7 +51,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                 ? state.SetOperationConstraint(isPattern.WrappedOperation, boolConstraint)
                 : state;
 
-        private static BoolConstraint MatchValueConstraintToPattern(ProgramState state, SymbolicConstraint valueConstraint, IPatternOperationWrapper pattern) =>
+        private static BoolConstraint MatchValueConstraintToPattern(ProgramState state, ObjectConstraint valueConstraint, IPatternOperationWrapper pattern) =>
             pattern.WrappedOperation.Kind switch
             {
                 OperationKindEx.ConstantPattern when
@@ -107,7 +107,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                 ? context.SetOperationConstraint(newConstraint)
                 : context.State;
 
-        private static BoolConstraint MatchValueConstraintOfBinaryPattern(ProgramState state, SymbolicConstraint valueConstraint, IBinaryPatternOperationWrapper binaryPattern)
+        private static BoolConstraint MatchValueConstraintOfBinaryPattern(ProgramState state, ObjectConstraint valueConstraint, IBinaryPatternOperationWrapper binaryPattern)
         {
             var left = MatchValueConstraintToPattern(state, valueConstraint, binaryPattern.LeftPattern);
             var right = MatchValueConstraintToPattern(state, valueConstraint, binaryPattern.RightPattern);
