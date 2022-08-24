@@ -341,7 +341,6 @@ var isTrue = b is true;
 Tag(""IsTrue"", isTrue);";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateTag("IsTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
-            validator.ValidateTag("IsTrue", x => x.HasConstraint<ObjectConstraint>().Should().BeFalse()); // Should be HasConstraint(ObjectConstraint.NotNull).Should().BeTrue()
         }
 
         [TestMethod]
