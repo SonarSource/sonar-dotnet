@@ -70,7 +70,7 @@ public sealed class MultilineBlocksWithoutBrace : SonarDiagnosticAnalyzer
     {
         if (!ifStatement.GetPrecedingIfsInConditionChain().Any()
             && !IsNestedStatement(ifStatement.Statement)
-            && GetLastStatementInIfChain(ifStatement) is { } lastStatementInIfChain
+            && LastStatementInIfChain(ifStatement) is { } lastStatementInIfChain
             && !IsStatementCandidateLoop(lastStatementInIfChain))
         {
             CheckStatement(context, lastStatementInIfChain, "conditionally", "unconditionally");
@@ -79,17 +79,16 @@ public sealed class MultilineBlocksWithoutBrace : SonarDiagnosticAnalyzer
 
     private static StatementSyntax LastStatementInIfChain(IfStatementSyntax ifStatement)
     {
-        var currentIfStatement = ifStatement;
-        var statement = currentIfStatement.Statement;
+        var statement = ifStatement.Statement;
 
-        while (currentIfStatement != null)
+        while (ifStatement != null)
         {
-            if (currentIfStatement.Else == null)
+            if (ifStatement.Else == null)
             {
-                return currentIfStatement.Statement;
+                return ifStatement.Statement;
             }
-            statement = currentIfStatement.Else.Statement;
-            currentIfStatement = statement as IfStatementSyntax;
+            statement = ifStatement.Else.Statement;
+            ifStatement = statement as IfStatementSyntax;
         }
         return statement;
     }
