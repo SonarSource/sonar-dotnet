@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Immutable;
+using Microsoft.CodeAnalysis;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
 
@@ -33,10 +35,37 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                 : context.State;
 
         public static ProgramState Process(SymbolicContext context, IArgumentOperationWrapper argument) =>
-            argument.Parameter is not null      // __arglist is not assigned to a parameter
-            && argument.Parameter.RefKind != Microsoft.CodeAnalysis.RefKind.None
-            && argument.Value.TrackedSymbol() is { } symbol
-                ? context.State.SetSymbolValue(symbol, null)
-                : context.State;
+            ProcessArgument(context.State, argument) ?? context.State;
+
+        private static ProgramState ProcessArgument(ProgramState state, IArgumentOperationWrapper argument) =>
+            argument switch
+            {
+                { Parameter: null } => null, // __arglist is not assigned to a parameter
+                { Parameter.RefKind: not RefKind.None, Value: { } value } when value.TrackedSymbol() is { } symbol =>
+                    // The argument is passed by some kind of reference, so we need to forget all we knew about it.
+                    state.SetSymbolValue(symbol, null),
+                { Parameter: { } parameter } when parameter.GetAttributes() is { Length: > 0 } attributes =>
+                    // Learn from parameter nullable annotations
+                    ProcessArgumentAttributes(state, argument, attributes),
+                _ => null,
+            };
+
+        private static ProgramState ProcessArgumentAttributes(ProgramState state, IArgumentOperationWrapper argument, ImmutableArray<AttributeData> attributes)
+        {
+            foreach (var attribute in attributes)
+            {
+                if (IsValidatedNotNullAttribute(attribute) && argument.Value.TrackedSymbol() is { } symbol)
+                {
+                    return state.SetSymbolConstraint(symbol, ObjectConstraint.NotNull);
+                }
+            }
+            return null;
+        }
+
+        // Copy of SonarAnalyzer.CSharp\SymbolicExecution\Sonar\InvocationVisitor.cs
+        // Same as [NotNull] https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/attributes/nullable-analysis#postconditions-maybenull-and-notnull
+        private static bool IsValidatedNotNullAttribute(AttributeData attribute) =>
+            "ValidatedNotNullAttribute".Equals(attribute.AttributeClass?.Name);
+
     }
 }
