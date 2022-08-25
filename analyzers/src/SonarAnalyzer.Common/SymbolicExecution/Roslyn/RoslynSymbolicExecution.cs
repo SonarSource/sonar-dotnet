@@ -157,12 +157,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             }
             if (branch.Source.BranchValue is { } branchValue && branch.Source.ConditionalSuccessor is not null) // This branching was conditional
             {
-                var constraint = BoolConstraint.From((branch.Source.ConditionKind == ControlFlowConditionKind.WhenTrue) == branch.IsConditionalSuccessor);
-                state = state.SetOperationConstraint(branchValue, constraint);
-                if (branchValue.TrackedSymbol() is { } symbol)
-                {
-                    state = state.SetSymbolConstraint(symbol, constraint);
-                }
+                state = LearnBranchingConstraints(branch, state, branchValue);
                 state = checks.ConditionEvaluated(new(new IOperationWrapperSonar(branchValue), state));
                 if (state is null)
                 {
@@ -246,7 +241,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             {
                 OperationKindEx.Argument => Invocation.Process(context, As(IArgumentOperationWrapper.FromOperation)),
                 OperationKindEx.ArrayCreation => Creation.Process(context),
-                OperationKindEx.ArrayElementReference=> References.Process(context, As(IArrayElementReferenceOperationWrapper.FromOperation)),
+                OperationKindEx.ArrayElementReference => References.Process(context, As(IArrayElementReferenceOperationWrapper.FromOperation)),
                 OperationKindEx.AnonymousObjectCreation => Creation.Process(context),
                 OperationKindEx.Binary => Binary.Process(context, As(IBinaryOperationWrapper.FromOperation)),
                 OperationKindEx.Conversion => Conversion.Process(context, As(IConversionOperationWrapper.FromOperation)),
@@ -289,6 +284,24 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 OperationKindEx.Conversion => ThrowExceptionType(IConversionOperationWrapper.FromOperation(operation).Operand),
                 _ => null
             };
+
+        private static ProgramState LearnBranchingConstraints(ControlFlowBranch branch, ProgramState state, IOperation branchValue)
+        {
+            if (branchValue.Kind == OperationKindEx.Conversion)
+            {
+                var operand = IConversionOperationWrapper.FromOperation(branchValue).Operand;
+                state = LearnBranchingConstraints(branch, state, operand);
+                return state.SetOperationValue(branchValue, state[operand]);    // Propagate value from operand to conversion operation itself
+            }
+            else
+            {
+                var constraint = BoolConstraint.From((branch.Source.ConditionKind == ControlFlowConditionKind.WhenTrue) == branch.IsConditionalSuccessor);
+                state = state.SetOperationConstraint(branchValue, constraint);
+                return branchValue.TrackedSymbol() is { } symbol
+                    ? state.SetSymbolConstraint(symbol, constraint)
+                    : state;
+            }
+        }
 
         private static bool IsReachable(ExplodedNode node, ControlFlowBranch branch) =>
             node.Block.ConditionKind == ControlFlowConditionKind.None
