@@ -95,7 +95,7 @@ public sealed class MultilineBlocksWithoutBrace : SonarDiagnosticAnalyzer
 
     private static void CheckStatement(SyntaxNodeAnalysisContext context, StatementSyntax first, string executed, string execute)
     {
-        if (SecondStatement(context.Node, first) is { } second && NotEmpty(first) && NotEmpty(second))
+        if (SecondStatement(context.Node, first) is { } second && IsNotEmpty(first) && IsNotEmpty(second))
         {
             var firstPosition = first.GetLocation().GetLineSpan().StartLinePosition;
             var secondPosition = second.GetLocation().GetLineSpan().StartLinePosition;
