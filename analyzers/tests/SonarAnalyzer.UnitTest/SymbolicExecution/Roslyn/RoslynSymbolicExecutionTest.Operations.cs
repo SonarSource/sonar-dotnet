@@ -501,12 +501,26 @@ using System;
 
 public class Sample
 {
-    public void Main(string value)
+    public void Main(object o1, object o2, object o3, object o4, object o5)
     {
-        Tag(""BeforeGuard"", value);
-        Guard.NotNull(value);
-        Tag(""AfterGuard"", value);
+        Guard.NotNullExt(o1);
+        o2.NotNullExt();
+        GuardInst(o3);
+        GuardInst(o4, o5);
+        Tag(""AfterGuard_o1"", o1);
+        Tag(""AfterGuard_o2"", o2);
+        Tag(""AfterGuard_o3"", o3);
+        Tag(""AfterGuard_o4"", o4);
+        Tag(""AfterGuard_o5"", o5);
     }
+
+    private void GuardInst([ValidatedNotNullAttribute] object value)
+    {
+        // Skip implementation to make sure, the attribute is driving the constraint
+        // _ = value ?? throw new ArgumentNullException();
+    }
+
+    private void GuardInst([ValidatedNotNullAttribute] object value1, [ValidatedNotNullAttribute] object value2) { }
 
     private void Tag(string name, object arg) { }
 }
@@ -515,16 +529,15 @@ public sealed class ValidatedNotNullAttribute : Attribute { }
 
 public static class Guard
 {
-    public static void NotNull<T>([ValidatedNotNullAttribute] this T value) where T : class
-    {
-        if (value == null)
-            throw new ArgumentNullException();
-    }
+    public static void NotNullExt<T>([ValidatedNotNullAttribute] this T value) where T : class { }
 }
 ";
             var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
-            validator.ValidateTag("BeforeGuard", x => x.Should().BeNull());
-            validator.ValidateTag("AfterGuard", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("AfterGuard_o1", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("AfterGuard_o2", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("AfterGuard_o3", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("AfterGuard_o4", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("AfterGuard_o5", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
         }
 
         [TestMethod]
