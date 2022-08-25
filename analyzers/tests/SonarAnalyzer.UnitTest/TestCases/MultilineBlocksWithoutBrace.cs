@@ -331,6 +331,23 @@ Act.Second(); // Noncompliant
         }
         finally { }
     }
+
+    void IfElseWithAlternativeSpacing(bool condition)
+    {
+        var n = 0;
+        if (condition)
+            n = 2;
+        else
+        if (condition)
+            n = 2;
+        else
+        if (condition)
+            n = 2;
+        else
+        if (condition)
+            n = 2;
+        n = 4; // Compliant
+    }
 }
 class DoesNotCrash
 {
