@@ -113,7 +113,7 @@ public sealed class MultilineBlocksWithoutBrace : SonarDiagnosticAnalyzer
         }
     }
 
-    private static bool NotEmpty(SyntaxNode node) =>
+    private static bool IsNotEmpty(SyntaxNode node) =>
         node is not EmptyStatementSyntax;
 
     private static bool SameIndentation(LinePosition first, LinePosition second) =>
