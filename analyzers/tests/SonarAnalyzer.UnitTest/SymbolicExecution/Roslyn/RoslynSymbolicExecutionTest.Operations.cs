@@ -494,7 +494,41 @@ Tag(""This"", fromThis);";
         }
 
         [TestMethod]
-        public void FieldReference_Read_SetsNotNull()
+        public void Invocation_ValidatedNotNullAttribute_SetsNotNullOnArgumentsMarkedWithAttribute()
+        {
+            var code = @"
+using System;
+
+public class Sample
+{
+    public void Main(string value)
+    {
+        Tag(""BeforeGuard"", value);
+        Guard.NotNull(value);
+        Tag(""AfterGuard"", value);
+    }
+
+    private void Tag(string name, object arg) { }
+}
+
+public sealed class ValidatedNotNullAttribute : Attribute { }
+
+public static class Guard
+{
+    public static void NotNull<T>([ValidatedNotNullAttribute] this T value) where T : class
+    {
+        if (value == null)
+            throw new ArgumentNullException();
+    }
+}
+";
+            var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
+            validator.ValidateTag("BeforeGuard", x => x.Should().BeNull());
+            validator.ValidateTag("AfterGuard", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void Invocation_Read_SetsNotNull()
         {
             const string code = @"
 _ = StaticField;            // Do not fail, do nothing
