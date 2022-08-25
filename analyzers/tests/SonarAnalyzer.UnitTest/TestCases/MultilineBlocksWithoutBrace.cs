@@ -227,6 +227,44 @@ class Nested
     }
 }
 
+class Comments
+{
+    int BlockComment(int n)
+    {
+        while (true)
+            while (true)
+                n++; /* first */ // Secondary
+        /*   */ return n; // Noncompliant
+    }
+
+    void BlockComment(bool condition)
+    {
+        if (condition)
+            Act.First(); // Secondary
+            /* Comment in the middle */
+            Act.Second(); // Noncompliant
+    }
+
+    void LineComment(bool condition)
+    {
+        if (condition)
+            Act.First(); // Secondary
+            // Commented line
+            Act.Second(); // Noncompliant
+    }
+}
+
+class EmptyLines
+{
+    void HaveNoEffect(bool condition)
+    {
+        if (condition)
+            Act.First(); // Secondary
+
+            Act.Second(); // Noncompliant
+    }
+}
+
 class EmptyStatements // Compliant, we ignore cases where at least one of the statements is empty
 {
     public void First(bool condition)
