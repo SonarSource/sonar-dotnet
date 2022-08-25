@@ -35,7 +35,8 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class UnchangedLocalVariablesShouldBeConst : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S3353";
-        private const string MessageFormat = "Add the 'const' modifier to '{0}'{1}.";
+        private const string MessageFormat = "Add the 'const' modifier to '{0}'{1}."; // {1} is a placeholder for optional MessageFormatVarHint
+        private const string MessageFormatVarHint = ", and replace 'var' with '{0}'";
 
         private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
@@ -189,7 +190,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static string AddionalMessageHints(SemanticModel semanticModel, VariableDeclaratorSyntax declaratorSyntax) =>
             declaratorSyntax is { Parent: VariableDeclarationSyntax { Type: { IsVar: true } typeSyntax } }
-                ? $", and replace 'var' with '{semanticModel.GetTypeInfo(typeSyntax).Type.ToMinimalDisplayString(semanticModel, typeSyntax.SpanStart)}'"
+                ? string.Format(MessageFormatVarHint, semanticModel.GetTypeInfo(typeSyntax).Type.ToMinimalDisplayString(semanticModel, typeSyntax.SpanStart))
                 : string.Empty;
     }
 }
