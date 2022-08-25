@@ -30,7 +30,7 @@ namespace Tests.Diagnostics
         {
             if (o is null)
             {
-                o.ToString(); // FIXME Non-compliant
+                o.ToString(); // Noncompliant
             }
             else
             {

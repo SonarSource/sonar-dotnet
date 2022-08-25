@@ -36,6 +36,7 @@ public class Sample
 
     public void PatternMatching(object arg)
     {
+        object o = null;
         if (arg is string)
         {
             arg.ToString();     // Compliant
@@ -53,7 +54,7 @@ public class Sample
 
         if (arg is null)
         {
-            arg.ToString();     // FN
+            arg.ToString();     // Noncompliant
         }
         if (arg is int or bool or null)
         {
@@ -69,12 +70,35 @@ public class Sample
         }
         else
         {
-            object o = null;
             if (o is not null)
             {
                 o.ToString();   // Noncompliant FIXME (was compliant before)
             }
             o.ToString();       // Noncompliant
+        }
+
+        if (arg is false)
+        {
+            if ((bool)arg)
+            {
+                o.ToString();   // Compliant, unreachable
+            }
+            else
+            {
+                o.ToString();   // Noncompliant
+            }
+        }
+
+        if (arg is true)
+        {
+            if (!(bool)arg)
+            {
+                o.ToString();   // Compliant, unreachable
+            }
+            else
+            {
+                o.ToString();   // Noncompliant
+            }
         }
     }
 
