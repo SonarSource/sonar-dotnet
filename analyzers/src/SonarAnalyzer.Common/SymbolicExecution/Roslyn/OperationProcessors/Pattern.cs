@@ -29,14 +29,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
 {
     internal static class Pattern
     {
-        public static ProgramState Process(SymbolicContext context, IIsPatternOperationWrapper isPattern)
-        {
-            var boolConstraint = LearnBoolFromBoolContraint(context.State, isPattern) ?? LearnBoolFromObjectContraint(context.State, isPattern);
-
-            return boolConstraint is null
-                ? context.State
-                : context.SetOperationConstraint(boolConstraint);
-        }
+        public static ProgramState Process(SymbolicContext context, IIsPatternOperationWrapper isPattern) =>
+            (LearnBoolFromBoolContraint(context.State, isPattern) ?? LearnBoolFromObjectContraint(context.State, isPattern)) is { } constraint
+                ? context.SetOperationConstraint(constraint)
+                : context.State;
 
         public static ProgramState Process(SymbolicContext context, IRecursivePatternOperationWrapper recursive) =>
             ProcessDeclaration(context, recursive.DeclaredSymbol, true);
