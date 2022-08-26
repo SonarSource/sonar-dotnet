@@ -122,6 +122,7 @@ public unsafe class Sample
     public NotImplementedException CreateException() => new NotImplementedException();
 
     private void Tag(string name, object arg = null) {{ }}
+    private T Unknown<T>() => default;
 }}
 
 public class Person : PersonBase

@@ -289,16 +289,21 @@ Tag(""End"", arg);";
         }
 
         [DataTestMethod]
-        [DataRow("notNullObject", "null", false)]
-        [DataRow("notNullObject", "1", null)]
-        [DataRow("notNullObject", @"""""", null)]
-        [DataRow("notNullObject", "true", null)]
-        [DataRow("notNullObject", "false", null)]
-        [DataRow("nullObject", "null", true)]
-        [DataRow("nullObject", "1", null)]
-        [DataRow("nullObject", @"""""", null)]
-        [DataRow("nullObject", "true", null)]
-        [DataRow("nullObject", "false", null)]
+        [DataRow("objectNotNull", "null", false)]
+        [DataRow("objectNotNull", "1", null)]
+        [DataRow("objectNotNull", @"""""", null)]
+        [DataRow("objectNotNull", "true", null)]
+        [DataRow("objectNotNull", "false", null)]
+        [DataRow("objectNull", "null", true)]
+        [DataRow("objectNull", "1", null)]
+        [DataRow("objectNull", @"""""", null)]
+        [DataRow("objectNull", "true", null)]
+        [DataRow("objectNull", "false", null)]
+        [DataRow("objectUnknown", "null", null)]
+        [DataRow("objectUnknown", "1", null)]
+        [DataRow("objectUnknown", @"""""", null)]
+        [DataRow("objectUnknown", "true", null)]
+        [DataRow("objectUnknown", "false", null)]
         [DataRow("nullableBoolTrue", "true", true)]
         [DataRow("nullableBoolTrue", "false", false)]
         [DataRow("nullableBoolFalse", "true", false)]
@@ -308,8 +313,9 @@ Tag(""End"", arg);";
         public void ConstantPatternSetBoolConstraint(string variableName, string isPattern, bool? expectedBoolConstraint)
         {
             var code = @$"
-var notNullObject = new object();
-var nullObject = (object)null;
+var objectNotNull = new object();
+var objectNull = (object)null;
+var objectUnknown = Unknown<object>();
 var nullableBoolTrue = (bool?)true;
 var nullableBoolFalse = (bool?)false;
 var nullableBoolNull = (bool?)null;
@@ -321,6 +327,7 @@ Tag(""Result"", result);";
             {
                 if (expectedBoolConstraint is bool expected)
                 {
+                    x.Should().NotBeNull("we expect and constraint on the symbolValue");
                     x.HasConstraint(BoolConstraint.From(expected)).Should().BeTrue(because: "we should have learned that result is {0}", expected);
                 }
                 else
@@ -333,94 +340,76 @@ Tag(""Result"", result);";
             });
         }
 
-        [TestMethod]
-        public void LearnFromObjectContraint_IsRecursivePattern_Empty()
+        [DataTestMethod]
+        [DataRow("objectNotNull", "{ }", true)]
+        [DataRow("objectNull", "{ }", false)]
+        [DataRow("objectUnknown", "{ }", null)]
+        [DataRow("stringNotNull", "{ }", true)]
+        [DataRow("stringNotNull", "{ Length: 0 }", null)]
+        [DataRow("stringNull", "{ Length: 0 }", false)]
+        [DataRow("stringNotNull", "{ Length: var length }", true)] // only deconstruction
+        public void RecursivePatternPropertySubPatternSetBoolConstraint(string variableName, string isPattern, bool? expectedBoolConstraint)
         {
-            const string code = @"
-var notNull = new object();
-var isNotNull = notNull is {};
-Tag(""IsNotNull"", isNotNull);";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("IsNotNull", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
-        }
+            var code = @$"
+var objectNotNull = new object();
+var objectNull = (object)null;
+var objectUnknown = Unknown<object>();
+var stringNotNull = new string('c', 1);  // Make sure, we learn 's is not null'
+var stringNull = (string)null;
 
-        [TestMethod]
-        public void LearnFromObjectContraint_IsRecursivePattern_WithProps()
-        {
-            const string code = @"
-var s = new string('c', 1);  // Make sure, we learn 's is not null'
-var isEmpty = s is { Length: 0 };
-Tag(""IsEmpty"", isEmpty);";
+var result = {variableName} is {isPattern};
+Tag(""Result"", result);";
             var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("IsEmpty", x => x.Should().BeNull());
-        }
-
-        [TestMethod]
-        public void LearnFromObjectContraint_IsRecursivePattern_Null_WithProps()
-        {
-            const string code = @"
-string s = null;
-var isEmpty = s is { Length: 0 };
-Tag(""IsEmpty"", isEmpty);";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("IsEmpty", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
-        }
-
-        [TestMethod]
-        public void LearnFromObjectContraint_IsRecursivePattern_OnlyDeconstruct()
-        {
-            const string code = @"
-var s = new string('c', 1);
-var isLength = s is { Length: var length };
-Tag(""IsLength"", isLength);";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("IsLength", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+            validator.ValidateTag("Result", x =>
+            {
+                if (expectedBoolConstraint is bool expected)
+                {
+                    x.Should().NotBeNull("we expect and constraint on the symbolValue");
+                    x.HasConstraint(BoolConstraint.From(expected)).Should().BeTrue(because: "we should have learned that result is {0}", expected);
+                }
+                else
+                {
+                    if (x != null)
+                    {
+                        x.HasConstraint<BoolConstraint>().Should().BeFalse(because: "we should not learn about the state of result");
+                    }
+                }
+            });
         }
 
 #if NET
 
-        [TestMethod]
-        public void LearnFromObjectContraint_IsRecursivePattern_WithDeconstruction()
+        [DataTestMethod]
+        [DataRow("recordNotNull", "(A: 1, B: 2)", null)]
+        [DataRow("recordNotNull", "(A: var a, B: _)", true)]
+        [DataRow("recordNull", "(A: 1, B: 2)", false)]
+        [DataRow("recordNull", "(A: var a, B: _)", false)]
+        [DataRow("recordUnknown", "(A: var a, B: _)", null)]
+        public void RecursivePatternDeconstructionSubpatternSetBoolConstraint(string variableName, string isPattern, bool? expectedBoolConstraint)
         {
-            const string code = @"
-var r = new R(1,2);
-var isPattern  = r is (A:1, B:2);
-Tag(""IsPattern"", isPattern);";
-            var validator = SETestContext.CreateCS(code, additionalTypes: "record R(int A, int B);").Validator;
-            validator.ValidateTag("IsPattern", x => x.Should().BeNull());
-        }
+            var code = @$"
+var recordNotNull = new R(1, 2);
+var recordNull = (R)null;
+var recordUnknown = Unknown<R>();
 
-        [TestMethod]
-        public void LearnFromObjectContraint_IsRecursivePattern_WithDeconstructionOnly()
-        {
-            const string code = @"
-var r = new R(1,2);
-var isPattern  = r is (A: var a, B: _);
-Tag(""IsPattern"", isPattern);";
+var result = {variableName} is {isPattern};
+Tag(""Result"", result);";
             var validator = SETestContext.CreateCS(code, additionalTypes: "record R(int A, int B);").Validator;
-            validator.ValidateTag("IsPattern", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
-        }
-
-        [TestMethod]
-        public void LearnFromObjectContraint_IsRecursivePattern_WithDeconstructionOnly_OnNull()
-        {
-            const string code = @"
-R r = null;
-var isPattern  = r is (A: var a, B: _);
-Tag(""IsPattern"", isPattern);";
-            var validator = SETestContext.CreateCS(code, additionalTypes: "record R(int A, int B);").Validator;
-            validator.ValidateTag("IsPattern", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
-        }
-
-        [TestMethod]
-        public void LearnFromObjectContraint_IsRecursivePattern_WithDeconstruction_OnNull()
-        {
-            const string code = @"
-R r = null;
-var isPattern  = r is (A: 1, B: 2);
-Tag(""IsPattern"", isPattern);";
-            var validator = SETestContext.CreateCS(code, additionalTypes: "record R(int A, int B);").Validator;
-            validator.ValidateTag("IsPattern", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+            validator.ValidateTag("Result", x =>
+            {
+                if (expectedBoolConstraint is bool expected)
+                {
+                    x.Should().NotBeNull("we expect and constraint on the symbolValue");
+                    x.HasConstraint(BoolConstraint.From(expected)).Should().BeTrue(because: "we should have learned that result is {0}", expected);
+                }
+                else
+                {
+                    if (x != null)
+                    {
+                        x.HasConstraint<BoolConstraint>().Should().BeFalse(because: "we should not learn about the state of result");
+                    }
+                }
+            });
         }
 
 #endif
