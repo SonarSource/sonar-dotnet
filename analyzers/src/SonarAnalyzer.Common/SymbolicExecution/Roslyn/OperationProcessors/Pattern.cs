@@ -54,7 +54,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
             {
                 OperationKindEx.ConstantPattern => ConstraintFromConstantPattern(state, As(IConstantPatternOperationWrapper.FromOperation), useOpposite),
                 OperationKindEx.NegatedPattern => LearnBranchingConstraint(state, As(INegatedPatternOperationWrapper.FromOperation).Pattern, !useOpposite),
-                OperationKindEx.TypePattern => ConstraintFromTypePattern(useOpposite),
+                OperationKindEx.TypePattern => ObjectConstraint.NotNull.ApplyOpposite(useOpposite),
                 _ => null
             };
 
@@ -72,14 +72,11 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                 }
                 else if (value.Constraint<ObjectConstraint>() is { } objectConstraint)
                 {
-                    return useOpposite ? objectConstraint.Opposite : objectConstraint;
+                    return objectConstraint.ApplyOpposite(useOpposite);
                 }
             }
             return null;
         }
-
-        private static SymbolicConstraint ConstraintFromTypePattern(bool useOpposite) =>
-            useOpposite ? null : ObjectConstraint.NotNull;  // Cannot use opposite. If it is not XxxType, it could be null, or any other type
 
         private static BoolConstraint PatternBoolConstraint(SymbolicValue value, BoolConstraint pattern) =>
             value.HasConstraint<BoolConstraint>()

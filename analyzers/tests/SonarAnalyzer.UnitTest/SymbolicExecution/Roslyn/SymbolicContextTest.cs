@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 using StyleCop.Analyzers.Lightup;
@@ -114,6 +115,18 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var sut = new SymbolicContext(null, state);
             var newState = state.SetOperationValue(CreateOperation(), new());
             sut.WithState(newState).Should().NotBe(sut);
+        }
+
+        [TestMethod]
+        public void ApplyOpposite_RespectsArgument()
+        {
+            BoolConstraint.True.ApplyOpposite(false).Should().Be(BoolConstraint.True);
+            BoolConstraint.True.ApplyOpposite(true).Should().Be(BoolConstraint.False);
+            BoolConstraint.False.ApplyOpposite(false).Should().Be(BoolConstraint.False);
+            BoolConstraint.False.ApplyOpposite(true).Should().Be(BoolConstraint.True);
+            // Special constraint behavior
+            ObjectConstraint.Null.ApplyOpposite(true).Should().Be(ObjectConstraint.NotNull);
+            ObjectConstraint.NotNull.ApplyOpposite(true).Should().BeNull("because NotNull can be Null or any other NotNull");
         }
 
         private static IOperationWrapperSonar CreateOperation() =>
