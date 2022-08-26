@@ -414,92 +414,42 @@ Tag(""Result"", result);";
 
 #endif
 
-        [TestMethod]
-        public void LearnFromObjectContraint_IsDeclarationPattern_MatchesNull_Null()
+        [DataTestMethod]
+        [DataRow("objectNull", "var a", true)]
+        [DataRow("objectNotNull", "var a", true)]
+        [DataRow("objectUnknown", "var a", null)] // FN. Should be "true". Some patterns always match.
+        [DataRow("objectNull", "object o", false)]
+        [DataRow("objectNotNull", "object o", true)]
+        [DataRow("objectUnknown", "object o", null)]
+        [DataRow("objectNull", "int i", false)]
+        [DataRow("objectNotNull", "int i", null)]
+        [DataRow("integer", "object o", true)]
+        public void DeclarationPatternSetBoolConstraint(string variableName, string isPattern, bool? expectedBoolConstraint)
         {
-            const string code = @"
-var nullObject = (object)null;
-var alwaysTrue = nullObject is var a;
-Tag(""AlwaysTrue"", alwaysTrue);";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("AlwaysTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
-        }
+            var code = @$"
+var objectNotNull = new object();
+var objectNull = (object)null;
+var objectUnknown = Unknown<object>();
+var integer = new int();
 
-        [TestMethod]
-        public void LearnFromObjectContraint_IsDeclarationPattern_MatchesNull_NotNull()
-        {
-            const string code = @"
-var notNull = new object();
-var alwaysTrue = notNull is var a;
-Tag(""AlwaysTrue"", alwaysTrue);";
+var result = {variableName} is {isPattern};
+Tag(""Result"", result);";
             var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("AlwaysTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
-        }
-
-        [TestMethod]
-        public void LearnFromObjectContraint_IsDeclarationPattern_NotMatchesNull_NotNull()
-        {
-            const string code = @"
-var notNull = new object();
-var isNotNull = notNull is object o;
-Tag(""IsNotNull"", isNotNull);";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("IsNotNull", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
-        }
-
-        [TestMethod]
-        public void LearnFromObjectContraint_IsDeclarationPattern_NotMatchesNull_MatchTypeNotAssignable()
-        {
-            const string code = @"
-var notNull = new object();
-var isNotNull = notNull is int i;
-Tag(""IsNotNull"", isNotNull);";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("IsNotNull", x => x.Should().BeNull());
-        }
-
-        [TestMethod]
-        public void LearnFromObjectContraint_IsDeclarationPattern_NotMatchesNull_MatchTypeAssignable()
-        {
-            const string code = @"
-var i = new int();
-var isNotNull = i is object o;
-Tag(""IsNotNull"", isNotNull);";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("IsNotNull", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
-        }
-
-        [TestMethod]
-        public void LearnFromObjectContraint_IsDeclarationPattern_NotMatchesNull_MatchTypeEqual_Null()
-        {
-            const string code = @"
-var nullObject = (object)null;
-var isNotNull = nullObject is object o;
-Tag(""IsNotNull"", isNotNull);";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("IsNotNull", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
-        }
-
-        [TestMethod]
-        public void LearnFromObjectContraint_IsDeclarationPattern_NotMatchesNull_MatchTypeEqual_NotNull()
-        {
-            const string code = @"
-var notNullObject = new object();
-var isNotNull = notNullObject is object o;
-Tag(""IsNotNull"", isNotNull);";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("IsNotNull", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
-        }
-
-        [TestMethod]
-        public void LearnFromObjectContraint_IsDeclarationPattern_NotMatchesNull_InputTypeNull()
-        {
-            const string code = @"
-var nullObject = (object)null;
-var isNotNull = nullObject is int i;
-Tag(""IsNotNull"", isNotNull);";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("IsNotNull", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+            validator.ValidateTag("Result", x =>
+            {
+                if (expectedBoolConstraint is bool expected)
+                {
+                    x.Should().NotBeNull("we expect and constraint on the symbolValue");
+                    x.HasConstraint(BoolConstraint.From(expected)).Should().BeTrue(because: "we should have learned that result is {0}", expected);
+                }
+                else
+                {
+                    if (x != null)
+                    {
+                        x.HasConstraint<BoolConstraint>().Should().BeFalse(because: "we should not learn about the state of result");
+                    }
+                }
+            });
         }
 
         [TestMethod]
