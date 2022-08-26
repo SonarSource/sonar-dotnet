@@ -487,7 +487,7 @@ var i = new int();
 var isNotNull = i is object o;
 Tag(""IsNotNull"", isNotNull);";
             var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("IsNotNull", x => x.Should().BeNull()); // Should have BoolConstraint.True. We probably need Compilation.ClassifyConversion to fix this
+            validator.ValidateTag("IsNotNull", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
         }
 
         [TestMethod]
@@ -546,7 +546,7 @@ Tag(""IsNotNull"", isNotNull);";
         }
 
         [TestMethod]
-        public void LearnFromObjectContraint_IsNegatePattern_NotObject()
+        public void LearnFromObjectContraint_IsTypePattern_NotObject()
         {
             const string code = @"
 var nullObject = (object)null;
@@ -557,7 +557,7 @@ Tag(""IsNotNull"", isNotNull);";
         }
 
         [TestMethod]
-        public void LearnFromObjectContraint_IsNegatePattern_NotNotObject()
+        public void LearnFromObjectContraint_IsTypePattern_NotNotObject()
         {
             const string code = @"
 var nullObject = (object)null;
@@ -565,6 +565,28 @@ var isNotNull = nullObject is not not object;
 Tag(""IsNotNull"", isNotNull);";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateTag("IsNotNull", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void LearnFromObjectContraint_IsTypePattern_Assignable()
+        {
+            const string code = @"
+var ex = new Exception();
+var isNotNull = ex is not not object;
+Tag(""IsNotNull"", isNotNull);";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("IsNotNull", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void LearnFromObjectContraint_IsTypePattern_NotAssignable()
+        {
+            const string code = @"
+var notNullObject = new object();
+var isNotNull = notNullObject is not not Exception;
+Tag(""IsNotNull"", isNotNull);";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("IsNotNull", x => x.Should().BeNull());
         }
 
         [TestMethod]

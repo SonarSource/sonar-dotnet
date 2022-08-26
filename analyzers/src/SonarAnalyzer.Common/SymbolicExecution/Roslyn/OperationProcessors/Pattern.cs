@@ -21,6 +21,7 @@
 using System;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn.Checks;
 using StyleCop.Analyzers.Lightup;
@@ -88,12 +89,12 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                         {
                             { MatchesNull: true } => BoolConstraint.True,
                             { MatchesNull: false } when valueConstraint == ObjectConstraint.Null => BoolConstraint.False,
-                            var notNull when IsTypeAssignableTo(notNull.InputType, notNull.NarrowedType) => BoolConstraint.From(valueConstraint == ObjectConstraint.NotNull),
+                            var notNull when notNull.InputType.DerivesOrImplements(notNull.NarrowedType) => BoolConstraint.From(valueConstraint == ObjectConstraint.NotNull),
                             _ => null,
                         },
                 OperationKindEx.TypePattern when
                     As(ITypePatternOperationWrapper.FromOperation) is var typePattern
-                    && IsTypeAssignableTo(typePattern.InputType, typePattern.NarrowedType) =>
+                    && typePattern.InputType.DerivesOrImplements(typePattern.NarrowedType) =>
                         BoolConstraint.From(valueConstraint == ObjectConstraint.NotNull),
                 OperationKindEx.NegatedPattern when
                     As(INegatedPatternOperationWrapper.FromOperation) is var negatedPattern =>
