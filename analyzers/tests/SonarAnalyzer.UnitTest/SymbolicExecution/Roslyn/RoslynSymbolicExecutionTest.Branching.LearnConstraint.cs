@@ -277,6 +277,15 @@ if (value = boolParameter)
                 .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
         }
 
+        [TestMethod]
+        public void Branching_LearnsObjectConstraint_IsType_NoSymbol_DoesNotChangeState()
+        {
+            var validator = CreateIfElseEndValidatorCS("(object)arg is Exception", OperationKind.IsType);
+            validator.ValidateTag("If", x => x.Should().BeNull());
+            validator.ValidateTag("Else", x => x.Should().BeNull());
+            validator.ValidateTag("End", x => x.Should().BeNull());
+        }
+
         [DataTestMethod]
         [DataRow("TypeOf Arg Is Object")]
         [DataRow("TypeOf Arg Is Exception")]
