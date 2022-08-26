@@ -54,7 +54,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
 
         private static BoolConstraint LearnBoolFromObjectContraint(ProgramState state, IIsPatternOperationWrapper isPattern) =>
             state[isPattern.Value] is { } value
-            && value.TryGetConstraint<ObjectConstraint>(out var valueConstraint)
+            && value.Constraint<ObjectConstraint>() is { } valueConstraint
             && MatchValueConstraintToPattern(state, valueConstraint, isPattern.Pattern) is { } boolConstraint
                 ? boolConstraint
                 : null;
