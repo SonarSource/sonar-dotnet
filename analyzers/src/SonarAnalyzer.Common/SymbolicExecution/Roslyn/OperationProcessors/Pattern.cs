@@ -76,11 +76,11 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                             PropertySubpatterns: var propertySubPatterns,
                             DeconstructionSubpatterns: var deconstructSubpatterns,
                         } when propertySubPatterns // check if all sub pattern are always matching.
-                                   .Select(x => IPropertySubpatternOperationWrapper.FromOperation(x).Pattern)
-                                   .Concat(deconstructSubpatterns.Select(x => IPatternOperationWrapper.FromOperation(x)))
-                                   .All(x => x is { WrappedOperation.Kind: OperationKindEx.DiscardPattern }
-                                        || (x.WrappedOperation.Kind == OperationKindEx.DeclarationPattern
-                                            && IDeclarationPatternOperationWrapper.FromOperation(x.WrappedOperation).MatchesNull)) =>
+                            .Select(x => IPropertySubpatternOperationWrapper.FromOperation(x).Pattern)
+                            .Concat(deconstructSubpatterns.Select(x => IPatternOperationWrapper.FromOperation(x)))
+                            .All(x => x is { WrappedOperation.Kind: OperationKindEx.DiscardPattern }
+                                || (x.WrappedOperation.Kind == OperationKindEx.DeclarationPattern
+                                    && IDeclarationPatternOperationWrapper.FromOperation(x.WrappedOperation).MatchesNull)) =>
                                 BoolConstraint.True,
                         _ => null,
                     },
