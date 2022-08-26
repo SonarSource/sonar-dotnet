@@ -49,25 +49,25 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                 ? newConstraint
                 : null;
 
-        private static BoolConstraint BoolConstraintFromPattern(ProgramState state, IIsPatternOperationWrapper isPattern) =>
+        private static SymbolicConstraint BoolConstraintFromPattern(ProgramState state, IIsPatternOperationWrapper isPattern) =>
             state[isPattern.Value] is { } value
             && value.Constraint<ObjectConstraint>() is { } valueConstraint
             && BoolConstraintFromPattern(state, valueConstraint, isPattern.Pattern) is { } newConstraint
                 ? newConstraint
                 : null;
 
-        private static BoolConstraint BoolConstraintFromPattern(ProgramState state, ObjectConstraint valueConstraint, IPatternOperationWrapper pattern)
+        private static SymbolicConstraint BoolConstraintFromPattern(ProgramState state, ObjectConstraint valueConstraint, IPatternOperationWrapper pattern)
         {
             return pattern.WrappedOperation.Kind switch
             {
                 OperationKindEx.ConstantPattern when
                     As(IConstantPatternOperationWrapper.FromOperation) is var constantPattern
                     && state[constantPattern.Value]?.HasConstraint(ObjectConstraint.Null) is true =>
-                        BoolConstraint.From(valueConstraint.Equals(ObjectConstraint.Null)),
+                        BoolConstraint.From(valueConstraint == ObjectConstraint.Null),
                 OperationKindEx.RecursivePattern when As(IRecursivePatternOperationWrapper.FromOperation) is var recursivePattern =>
                     recursivePattern switch
                     {
-                        _ when valueConstraint.Equals(ObjectConstraint.Null) => BoolConstraint.False,
+                        _ when valueConstraint == ObjectConstraint.Null => BoolConstraint.False,
                         {
                             PropertySubpatterns.Length: 0,
                             DeconstructionSubpatterns.Length: 0,
@@ -88,17 +88,17 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                         declarationPattern switch
                         {
                             { MatchesNull: true } => BoolConstraint.True,
-                            { MatchesNull: false } when valueConstraint.Equals(ObjectConstraint.Null) => BoolConstraint.False,
-                            var notNull when IsTypeAssignableTo(notNull.InputType, notNull.NarrowedType) => BoolConstraint.From(valueConstraint.Equals(ObjectConstraint.NotNull)),
+                            { MatchesNull: false } when valueConstraint == ObjectConstraint.Null => BoolConstraint.False,
+                            var notNull when IsTypeAssignableTo(notNull.InputType, notNull.NarrowedType) => BoolConstraint.From(valueConstraint == ObjectConstraint.NotNull),
                             _ => null,
                         },
                 OperationKindEx.TypePattern when
                     As(ITypePatternOperationWrapper.FromOperation) is var typePattern
                     && IsTypeAssignableTo(typePattern.InputType, typePattern.NarrowedType) =>
-                        BoolConstraint.From(valueConstraint.Equals(ObjectConstraint.NotNull)),
+                        BoolConstraint.From(valueConstraint == ObjectConstraint.NotNull),
                 OperationKindEx.NegatedPattern when
                     As(INegatedPatternOperationWrapper.FromOperation) is var negatedPattern =>
-                        BoolConstraintFromPattern(state, valueConstraint, negatedPattern.Pattern)?.Opposite as BoolConstraint,
+                        BoolConstraintFromPattern(state, valueConstraint, negatedPattern.Pattern)?.Opposite,
                 OperationKindEx.DiscardPattern => BoolConstraint.True,
                 OperationKindEx.BinaryPattern when
                     As(IBinaryPatternOperationWrapper.FromOperation) is var binaryPattern =>
