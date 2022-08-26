@@ -28,7 +28,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
     internal static class IOperationExtensions
     {
         internal static ISymbol TrackedSymbol(this IOperation operation) =>
-            operation.Kind switch
+            operation?.Kind switch
             {
                 OperationKindEx.Conversion => TrackedSymbol(IConversionOperationWrapper.FromOperation(operation).Operand),
                 OperationKindEx.FieldReference when IFieldReferenceOperationWrapper.FromOperation(operation) is var fieldReference && IsStaticOrThis(fieldReference) => fieldReference.Field,

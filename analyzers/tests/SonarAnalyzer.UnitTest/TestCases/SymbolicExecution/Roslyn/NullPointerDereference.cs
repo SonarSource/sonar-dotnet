@@ -249,7 +249,7 @@ namespace Tests.Diagnostics
         {
             if (arr == null)
             {
-                Console.WriteLine(arr[10, 10]); // FIXME Non-compliant
+                Console.WriteLine(arr[10, 10]); // Noncompliant
             }
             else
             {
