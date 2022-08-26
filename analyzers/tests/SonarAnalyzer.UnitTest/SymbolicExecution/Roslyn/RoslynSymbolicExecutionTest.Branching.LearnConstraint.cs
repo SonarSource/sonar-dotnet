@@ -148,10 +148,14 @@ if (value = boolParameter)
         [DataRow("arg == isNull")]
         [DataRow("null == arg")]
         [DataRow("isNull == arg")]
+        [DataRow("(object)(object)arg == (object)(object)null")]
+        [DataRow("(object)(object)arg == (object)(object)isNull")]
         [DataRow("!!!(arg != null)")]
         [DataRow("!!!(null != arg)")]
         [DataRow("!(bool)(object)!!(arg != null)")]
         [DataRow("!(bool)(object)!!(null != arg)")]
+        [DataRow("!!!((object)arg != (object)null)")]
+        [DataRow("!!!((object)null != (object)arg)")]
         public void Branching_LearnsObjectConstraint_CS(string expression)
         {
             var code = @$"
@@ -179,6 +183,8 @@ Tag(""End"", arg);";
         [DataRow("arg != isNull")]
         [DataRow("null != arg")]
         [DataRow("isNull != arg")]
+        [DataRow("(object)(object)arg != (object)(object)null")]
+        [DataRow("(object)(object)arg != (object)(object)isNull")]
         [DataRow("!!!(arg == null)")]
         [DataRow("!!!(null == arg)")]
         [DataRow("!(bool)(object)!!(arg == null)")]
