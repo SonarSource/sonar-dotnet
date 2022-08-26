@@ -288,59 +288,49 @@ Tag(""End"", arg);";
             validator.ValidateTag("End", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());
         }
 
-        [TestMethod]
-        public void LearnFromObjectContraint_IsNull()
+        [DataTestMethod]
+        [DataRow("notNullObject", "null", false)]
+        [DataRow("notNullObject", "1", null)]
+        [DataRow("notNullObject", @"""""", null)]
+        [DataRow("notNullObject", "true", null)]
+        [DataRow("notNullObject", "false", null)]
+        [DataRow("nullObject", "null", true)]
+        [DataRow("nullObject", "1", null)]
+        [DataRow("nullObject", @"""""", null)]
+        [DataRow("nullObject", "true", null)]
+        [DataRow("nullObject", "false", null)]
+        [DataRow("nullableBoolTrue", "true", true)]
+        [DataRow("nullableBoolTrue", "false", false)]
+        [DataRow("nullableBoolFalse", "true", false)]
+        [DataRow("nullableBoolFalse", "false", true)]
+        [DataRow("nullableBoolNull", "true", null)]
+        [DataRow("nullableBoolNull", "false", null)]
+        public void ConstantPatternSetBoolConstraint(string variableName, string isPattern, bool? expectedBoolConstraint)
         {
-            const string code = @"
-var notNull = new object();
-var isNull = notNull is null;
-Tag(""IsNull"", isNull);";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("IsNull", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
-        }
+            var code = @$"
+var notNullObject = new object();
+var nullObject = (object)null;
+var nullableBoolTrue = (bool?)true;
+var nullableBoolFalse = (bool?)false;
+var nullableBoolNull = (bool?)null;
 
-        [TestMethod]
-        public void LearnFromObjectContraint_IsConstant_Number()
-        {
-            const string code = @"
-var notNull = new object();
-var isNull = notNull is 1;
-Tag(""IsNull"", isNull);";
+var result = {variableName} is {isPattern};
+Tag(""Result"", result);";
             var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("IsNull", x => x.Should().BeNull());
-        }
-
-        [TestMethod]
-        public void LearnFromObjectContraint_IsConstant_String()
-        {
-            const string code = @"
-var notNull = new object();
-var isNull = notNull is """";
-Tag(""IsNull"", isNull);";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("IsNull", x => x.Should().BeNull());
-        }
-
-        [TestMethod]
-        public void LearnFromObjectContraint_IsConstant_Boolean()
-        {
-            const string code = @"
-var notNull = new object();
-var isNull = notNull is true;
-Tag(""IsNull"", isNull);";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("IsNull", x => x.Should().BeNull());
-        }
-
-        [TestMethod]
-        public void LearnFromObjectContraint_IsConstant_NullableBoolean()
-        {
-            const string code = @"
-bool? b = true;
-var isTrue = b is true;
-Tag(""IsTrue"", isTrue);";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("IsTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+            validator.ValidateTag("Result", x =>
+            {
+                if (expectedBoolConstraint is bool expected)
+                {
+                    x.HasConstraint(BoolConstraint.From(expected)).Should().BeTrue(because: "we should have learned that result is {0}", expected);
+                }
+                else
+                {
+                    if (x != null)
+                    {
+                        x.HasConstraint<BoolConstraint>().Should().BeFalse(because: "we should not learn about the state of result");
+                    }
+                }
+            });
         }
 
         [TestMethod]
