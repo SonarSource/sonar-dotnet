@@ -402,7 +402,7 @@ Tag(""End"", arg);";
         }
 
         [DataTestMethod]
-        [DataRow(@"""string""")]
+        [DataRow(@"""some text""")]
         [DataRow(@"""""")]
         [DataRow("42")]
         [DataRow("System.ConsoleKey.Enter")]    // Enum
