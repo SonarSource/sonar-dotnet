@@ -20,6 +20,7 @@
 
 using System;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn.Checks;
@@ -30,7 +31,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
     internal static class Pattern
     {
         public static ProgramState Process(SymbolicContext context, IIsPatternOperationWrapper isPattern) =>
-            (LearnBoolFromBoolContraint(context.State, isPattern) ?? LearnBoolFromObjectContraint(context.State, isPattern)) is { } constraint
+            (BoolContraintFromConstant(context.State, isPattern) ?? BoolConstraintFromPattern(context.State, isPattern)) is { } constraint
                 ? context.SetOperationConstraint(constraint)
                 : context.State;
 
@@ -40,29 +41,30 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
         public static ProgramState Process(SymbolicContext context, IDeclarationPatternOperationWrapper declaration) =>
             ProcessDeclaration(context, declaration.DeclaredSymbol, !declaration.MatchesNull);  // "... is var ..." should not set NotNull
 
-        private static BoolConstraint LearnBoolFromBoolContraint(ProgramState state, IIsPatternOperationWrapper isPattern) =>
+        private static BoolConstraint BoolContraintFromConstant(ProgramState state, IIsPatternOperationWrapper isPattern) =>
             state[isPattern.Value] is { } value
-                && isPattern.Pattern.WrappedOperation.Kind == OperationKindEx.ConstantPattern
-                && ConstantCheck.ConstraintFromValue(IConstantPatternOperationWrapper.FromOperation(isPattern.Pattern.WrappedOperation).Value.ConstantValue.Value) is BoolConstraint boolPattern
-                && PatternBoolConstraint(value, boolPattern) is { } newConstraint
-                    ? newConstraint
-                    : null;
-
-        private static BoolConstraint LearnBoolFromObjectContraint(ProgramState state, IIsPatternOperationWrapper isPattern) =>
-            state[isPattern.Value] is { } value
-            && value.Constraint<ObjectConstraint>() is { } valueConstraint
-            && MatchValueConstraintToPattern(state, valueConstraint, isPattern.Pattern) is { } boolConstraint
-                ? boolConstraint
+            && isPattern.Pattern.WrappedOperation.Kind == OperationKindEx.ConstantPattern
+            && ConstantCheck.ConstraintFromValue(IConstantPatternOperationWrapper.FromOperation(isPattern.Pattern.WrappedOperation).Value.ConstantValue.Value) is BoolConstraint boolPattern
+            && PatternBoolConstraint(value, boolPattern) is { } newConstraint
+                ? newConstraint
                 : null;
 
-        private static BoolConstraint MatchValueConstraintToPattern(ProgramState state, ObjectConstraint valueConstraint, IPatternOperationWrapper pattern) =>
-            pattern.WrappedOperation.Kind switch
+        private static BoolConstraint BoolConstraintFromPattern(ProgramState state, IIsPatternOperationWrapper isPattern) =>
+            state[isPattern.Value] is { } value
+            && value.Constraint<ObjectConstraint>() is { } valueConstraint
+            && BoolConstraintFromPattern(state, valueConstraint, isPattern.Pattern) is { } newConstraint
+                ? newConstraint
+                : null;
+
+        private static BoolConstraint BoolConstraintFromPattern(ProgramState state, ObjectConstraint valueConstraint, IPatternOperationWrapper pattern)
+        {
+            return pattern.WrappedOperation.Kind switch
             {
                 OperationKindEx.ConstantPattern when
-                    IConstantPatternOperationWrapper.FromOperation(pattern.WrappedOperation) is var constantPattern
+                    As(IConstantPatternOperationWrapper.FromOperation) is var constantPattern
                     && state[constantPattern.Value]?.HasConstraint(ObjectConstraint.Null) is true =>
                         BoolConstraint.From(valueConstraint.Equals(ObjectConstraint.Null)),
-                OperationKindEx.RecursivePattern when IRecursivePatternOperationWrapper.FromOperation(pattern.WrappedOperation) is var recursivePattern =>
+                OperationKindEx.RecursivePattern when As(IRecursivePatternOperationWrapper.FromOperation) is var recursivePattern =>
                     recursivePattern switch
                     {
                         _ when valueConstraint.Equals(ObjectConstraint.Null) => BoolConstraint.False,
@@ -82,7 +84,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                                 BoolConstraint.True,
                         _ => null,
                     },
-                OperationKindEx.DeclarationPattern when IDeclarationPatternOperationWrapper.FromOperation(pattern.WrappedOperation) is var declarationPattern =>
+                OperationKindEx.DeclarationPattern when As(IDeclarationPatternOperationWrapper.FromOperation) is var declarationPattern =>
                         declarationPattern switch
                         {
                             { MatchesNull: true } => BoolConstraint.True,
@@ -91,16 +93,16 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                             _ => null,
                         },
                 OperationKindEx.TypePattern when
-                    ITypePatternOperationWrapper.FromOperation(pattern.WrappedOperation) is var typePattern
+                    As(ITypePatternOperationWrapper.FromOperation) is var typePattern
                     && IsTypeAssignableTo(typePattern.InputType, typePattern.NarrowedType) =>
                         BoolConstraint.From(valueConstraint.Equals(ObjectConstraint.NotNull)),
                 OperationKindEx.NegatedPattern when
-                    INegatedPatternOperationWrapper.FromOperation(pattern.WrappedOperation) is var negatedPattern =>
-                        MatchValueConstraintToPattern(state, valueConstraint, negatedPattern.Pattern)?.Opposite as BoolConstraint,
+                    As(INegatedPatternOperationWrapper.FromOperation) is var negatedPattern =>
+                        BoolConstraintFromPattern(state, valueConstraint, negatedPattern.Pattern)?.Opposite as BoolConstraint,
                 OperationKindEx.DiscardPattern => BoolConstraint.True,
                 OperationKindEx.BinaryPattern when
-                    IBinaryPatternOperationWrapper.FromOperation(pattern.WrappedOperation) is var binaryPattern =>
-                        MatchValueConstraintOfBinaryPattern(state, valueConstraint, binaryPattern),
+                    As(IBinaryPatternOperationWrapper.FromOperation) is var binaryPattern =>
+                        BoolConstraintFromBinarryPattern(state, valueConstraint, binaryPattern),
                 _ => null,
             };
         public static ProgramState Process(SymbolicContext context, IIsPatternOperationWrapper isPattern) =>
@@ -111,10 +113,14 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                 ? context.SetOperationConstraint(newConstraint)
                 : context.State;
 
-        private static BoolConstraint MatchValueConstraintOfBinaryPattern(ProgramState state, ObjectConstraint valueConstraint, IBinaryPatternOperationWrapper binaryPattern)
+            T As<T>(Func<IOperation, T> fromOperation) =>
+                 fromOperation(pattern.WrappedOperation);
+        }
+
+        private static BoolConstraint BoolConstraintFromBinarryPattern(ProgramState state, ObjectConstraint valueConstraint, IBinaryPatternOperationWrapper binaryPattern)
         {
-            var left = MatchValueConstraintToPattern(state, valueConstraint, binaryPattern.LeftPattern);
-            var right = MatchValueConstraintToPattern(state, valueConstraint, binaryPattern.RightPattern);
+            var left = BoolConstraintFromPattern(state, valueConstraint, binaryPattern.LeftPattern);
+            var right = BoolConstraintFromPattern(state, valueConstraint, binaryPattern.RightPattern);
             return binaryPattern.OperatorKind switch
             {
                 BinaryOperatorKind.And when left != null && right != null => BoolConstraint.From(left == BoolConstraint.True && right == BoolConstraint.True),
