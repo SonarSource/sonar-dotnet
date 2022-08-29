@@ -28,8 +28,8 @@ public static class BinaryOperatorKindExtensions
         kind.IsEquals() || kind.IsNotEquals();
 
     public static bool IsEquals(this BinaryOperatorKind kind) =>
-        kind == BinaryOperatorKind.Equals || kind == BinaryOperatorKind.ObjectValueEquals;
+        kind is BinaryOperatorKind.Equals or BinaryOperatorKind.ObjectValueEquals;
 
     public static bool IsNotEquals(this BinaryOperatorKind kind) =>
-        kind == BinaryOperatorKind.NotEquals || kind == BinaryOperatorKind.ObjectValueNotEquals;
+        kind is BinaryOperatorKind.NotEquals or BinaryOperatorKind.ObjectValueNotEquals;
 }
