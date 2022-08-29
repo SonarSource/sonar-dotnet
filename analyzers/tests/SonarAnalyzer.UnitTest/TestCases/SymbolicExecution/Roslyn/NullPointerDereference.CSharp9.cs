@@ -62,11 +62,11 @@ public class Sample
         }
         else if (arg is not not null)
         {
-            arg.ToString();     // Noncompliant
+            arg.ToString();     // Non-compliant FIXME
         }
         else if (!(arg is not null))
         {
-            arg.ToString();     // Noncompliant
+            arg.ToString();     // Non-compliant FIXME
         }
         else
         {
@@ -85,7 +85,7 @@ public class Sample
             }
             else
             {
-                o.ToString();   // Noncompliant
+                o.ToString();   // Non-compliant FIXME
             }
         }
 
@@ -97,7 +97,7 @@ public class Sample
             }
             else
             {
-                o.ToString();   // Noncompliant
+                o.ToString();   // Non-compliant FIXME
             }
         }
     }

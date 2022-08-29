@@ -391,10 +391,13 @@ var integer = new int();
         [DataTestMethod]
         [DataRow("objectNull", "not null", OperationKindEx.NegatedPattern, false)]
         [DataRow("objectNull", "not { }", OperationKindEx.NegatedPattern, true)]
+        [DataRow("objectNull", "not not null", OperationKindEx.NegatedPattern, true)]
         [DataRow("objectNotNull", "not null", OperationKindEx.NegatedPattern, true)]
         [DataRow("objectNotNull", "not { }", OperationKindEx.NegatedPattern, false)]
+        [DataRow("objectNotNull", "not not null", OperationKindEx.NegatedPattern, false)]
         [DataRow("objectUnknown", "not null", OperationKindEx.NegatedPattern, null)]
         [DataRow("objectUnknown", "not { }", OperationKindEx.NegatedPattern, null)]
+        [DataRow("objectUnknown", "not not null", OperationKindEx.NegatedPattern, null)]
         [DataRow("nullableBoolTrue", "not true", OperationKindEx.NegatedPattern, null)]     // FN. Should be false
         [DataRow("nullableBoolTrue", "not false", OperationKindEx.NegatedPattern, null)]    // FN. Should be true
         [DataRow("nullableBoolFalse", "not true", OperationKindEx.NegatedPattern, null)]    // FN. Should be true
