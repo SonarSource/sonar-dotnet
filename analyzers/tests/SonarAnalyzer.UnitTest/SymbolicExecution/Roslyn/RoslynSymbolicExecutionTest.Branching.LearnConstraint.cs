@@ -448,5 +448,51 @@ Tag(""End"", arg);";
             validator.ValidateTag("Else", x => x.Should().BeNull());
             validator.ValidateTag("End", x => x.Should().BeNull());
         }
+
+        [DataTestMethod]
+        [DataRow("arg is not not object")]
+        [DataRow("arg is not not Exception")]
+        public void Branching_LearnsObjectConstraint_TypePattern(string expression)
+        {
+            var code = @$"
+if ({expression})
+{{
+    Tag(""If"", arg);
+}}
+else
+{{
+    Tag(""Else"", arg);
+}}
+Tag(""End"", arg);";
+            var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+            validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("Else", x => x.Should().BeNull("it could be null or any other type"));
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x == null)
+                .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
+        }
+
+        [DataTestMethod]
+        [DataRow("arg is not object")]
+        [DataRow("arg is not Exception")]
+        public void Branching_LearnsObjectConstraint_TypePattern_Negated(string expression)
+        {
+            var code = @$"
+if ({expression})
+{{
+    Tag(""If"", arg);
+}}
+else
+{{
+    Tag(""Else"", arg);
+}}
+Tag(""End"", arg);";
+            var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+            validator.ValidateTag("If", x => x.Should().BeNull("it could be null or any other type"));
+            validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x == null)
+                .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
+        }
     }
 }

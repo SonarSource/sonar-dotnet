@@ -54,6 +54,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
             {
                 OperationKindEx.ConstantPattern => ConstraintFromConstantPattern(state, As(IConstantPatternOperationWrapper.FromOperation), useOpposite),
                 OperationKindEx.NegatedPattern => LearnBranchingConstraint(state, As(INegatedPatternOperationWrapper.FromOperation).Pattern, !useOpposite),
+                OperationKindEx.TypePattern => ObjectConstraint.NotNull.ApplyOpposite(useOpposite),
                 _ => null
             };
 
@@ -71,7 +72,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                 }
                 else if (value.Constraint<ObjectConstraint>() is { } objectConstraint)
                 {
-                    return useOpposite ? objectConstraint.Opposite : objectConstraint;
+                    return objectConstraint.ApplyOpposite(useOpposite);
                 }
             }
             return null;
