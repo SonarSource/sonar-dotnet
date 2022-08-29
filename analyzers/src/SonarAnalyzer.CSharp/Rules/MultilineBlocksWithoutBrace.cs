@@ -117,10 +117,7 @@ public sealed class MultilineBlocksWithoutBrace : SonarDiagnosticAnalyzer
     private static LinePosition ReferencePosition(SyntaxNode node)
     {
         var line = StartPosition(node).Line;
-        return node.AncestorsAndSelf()
-            .Where(x => StartPosition(x).Line == line)
-            .Select(x => x.GetLocation().GetLineSpan().StartLinePosition)
-            .Last();
+        return StartPosition(node.AncestorsAndSelf().Last(x => StartPosition(x).Line == line));
     }
 
     private static LinePosition StartPosition(SyntaxNode node) =>
