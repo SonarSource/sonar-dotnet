@@ -126,7 +126,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             BoolConstraint.False.ApplyOpposite(true).Should().Be(BoolConstraint.True);
             // Special constraint behavior
             ObjectConstraint.Null.ApplyOpposite(true).Should().Be(ObjectConstraint.NotNull);
-            ObjectConstraint.NotNull.ApplyOpposite(true).Should().BeNull("because NotNull can be Null or any other NotNull");
+            ObjectConstraint.NotNull.ApplyOpposite(true).Should().BeNull("NotNull can be Null or any other NotNull");
         }
 
         private static IOperationWrapperSonar CreateOperation() =>
