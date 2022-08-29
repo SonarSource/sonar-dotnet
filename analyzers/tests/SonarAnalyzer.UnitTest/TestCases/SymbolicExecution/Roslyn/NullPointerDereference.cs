@@ -716,7 +716,7 @@ namespace Tests.Diagnostics
         {
             Guard1(s1);
 
-            if (s1 == null) s1.ToUpper(); // Noncompliant FP, FIXME: Compliant, this code is unreachable
+            if (s1 == null) s1.ToUpper(); // Compliant, this code is unreachable
         }
 
         public static void Guard1<T>([ValidatedNotNull]T value) where T : class { }
@@ -727,7 +727,7 @@ namespace Tests.Diagnostics
             object a = null;
             if (a.IsNotNull())
             {
-                a.ToString(); // Noncompliant FIXME (was compliant before)
+                a.ToString(); // Compliant
             }
         }
 
@@ -736,7 +736,7 @@ namespace Tests.Diagnostics
             object a = null;
             if (IsNotNull(a))
             {
-                a.ToString(); // Noncompliant FIXME (was compliant before)
+                a.ToString(); // Compliant
             }
         }
 
@@ -1153,7 +1153,7 @@ namespace ValidatedNotNullAttributeTest
             {
                 return value.ToUpper(); // Compliant
             }
-            return value.ToUpper(); // Noncompliant FP, FIXME
+            return value.ToUpper(); // Compliant
         }
     }
 }
