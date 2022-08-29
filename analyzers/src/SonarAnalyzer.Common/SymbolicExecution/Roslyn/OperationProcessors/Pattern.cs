@@ -32,14 +32,43 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
             && isPattern.Pattern.WrappedOperation.Kind == OperationKindEx.ConstantPattern
             && ConstantCheck.ConstraintFromValue(IConstantPatternOperationWrapper.FromOperation(isPattern.Pattern.WrappedOperation).Value.ConstantValue.Value) is BoolConstraint boolPattern
             && PatternBoolConstraint(value, boolPattern) is { } newConstraint
-            ? context.SetOperationConstraint(newConstraint)
-            : context.State;
+                ? context.SetOperationConstraint(newConstraint)
+                : context.State;
 
         public static ProgramState Process(SymbolicContext context, IRecursivePatternOperationWrapper recursive) =>
             ProcessDeclaration(context, recursive.DeclaredSymbol, true);
 
         public static ProgramState Process(SymbolicContext context, IDeclarationPatternOperationWrapper declaration) =>
             ProcessDeclaration(context, declaration.DeclaredSymbol, !declaration.MatchesNull);  // "... is var ..." should not set NotNull
+
+        public static ProgramState LearnBranchingConstraint(ProgramState state, IIsPatternOperationWrapper isPattern, bool useOpposite) =>
+            isPattern.Value.TrackedSymbol() is { } testedSymbol
+            && LearnBranchingConstraint(state, isPattern.Pattern, useOpposite) is { } constraint
+                ? state.SetSymbolConstraint(testedSymbol, constraint)
+                : state;
+
+        private static SymbolicConstraint LearnBranchingConstraint(ProgramState state, IPatternOperationWrapper pattern, bool useOpposite) =>
+            pattern.WrappedOperation.Kind switch
+            {
+                OperationKindEx.ConstantPattern => ConstraintFromConstantPattern(state, IConstantPatternOperationWrapper.FromOperation(pattern.WrappedOperation), useOpposite),
+                _ => null
+            };
+
+        private static SymbolicConstraint ConstraintFromConstantPattern(ProgramState state, IConstantPatternOperationWrapper constant, bool useOpposite)
+        {
+            if (state[constant.Value] is { } value)
+            {
+                if (value.Constraint<BoolConstraint>() is { } boolConstraint && !useOpposite)   // Cannot use opposite on booleans. If it is not "true", it could be null, false or any other type
+                {
+                    return boolConstraint;
+                }
+                else if (value.Constraint<ObjectConstraint>() is { } objectConstraint)
+                {
+                    return useOpposite ? objectConstraint.Opposite : objectConstraint;
+                }
+            }
+            return null;
+        }
 
         private static BoolConstraint PatternBoolConstraint(SymbolicValue value, BoolConstraint pattern) =>
             value.HasConstraint<BoolConstraint>()

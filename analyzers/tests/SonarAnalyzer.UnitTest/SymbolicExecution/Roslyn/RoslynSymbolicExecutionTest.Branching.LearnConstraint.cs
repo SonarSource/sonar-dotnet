@@ -308,5 +308,120 @@ Tag(""End"", Arg)";
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
         }
+
+        [DataTestMethod]
+        [DataRow("arg is null")]
+        [DataRow("!!(arg is null)")]
+        public void Branching_LearnsObjectConstraint_ConstantPattern_Null(string expression)
+        {
+            var code = @$"
+if ({expression})
+{{
+    Tag(""If"", arg);
+}}
+else
+{{
+    Tag(""Else"", arg);
+}}
+Tag(""End"", arg);";
+            var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+            validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
+        }
+
+        [DataTestMethod]
+        [DataRow("!(arg is null)")]
+        [DataRow("!!!(arg is null)")]
+        public void Branching_LearnsObjectConstraint_ConstantPattern_Null_Negated(string expression)
+        {
+            var code = @$"
+if ({expression})
+{{
+    Tag(""If"", arg);
+}}
+else
+{{
+    Tag(""Else"", arg);
+}}
+Tag(""End"", arg);";
+            var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+            validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
+        }
+
+        [DataTestMethod]
+        [DataRow("arg is true")]
+        [DataRow("!!(arg is true)")]
+        public void Branching_LearnsObjectConstraint_ConstantPattern_True(string expression)
+        {
+            var code = @$"
+if ({expression})
+{{
+    Tag(""If"", arg);
+}}
+else
+{{
+    Tag(""Else"", arg);
+}}
+Tag(""End"", arg);";
+            var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+            validator.ValidateTag("If", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+            validator.ValidateTag("Else", x => x.Should().BeNull("it could be False, null or any other type"));
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x == null)
+                .And.ContainSingle(x => x != null && x.HasConstraint(BoolConstraint.True));
+        }
+
+        [DataTestMethod]
+        [DataRow("arg is false")]
+        [DataRow("!!(arg is false)")]
+        public void Branching_LearnsObjectConstraint_ConstantPattern_False(string expression)
+        {
+            var code = @$"
+if ({expression})
+{{
+    Tag(""If"", arg);
+}}
+else
+{{
+    Tag(""Else"", arg);
+}}
+Tag(""End"", arg);";
+            var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+            validator.ValidateTag("If", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+            validator.ValidateTag("Else", x => x.Should().BeNull("it could be True, null or any other type"));
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x == null)
+                .And.ContainSingle(x => x != null && x.HasConstraint(BoolConstraint.False));
+        }
+
+        [DataTestMethod]
+        [DataRow(@"""some text""")]
+        [DataRow(@"""""")]
+        [DataRow("42")]
+        [DataRow("System.ConsoleKey.Enter")]    // Enum
+        public void Branching_LearnsObjectConstraint_ConstantPattern_Other(string expression)
+        {
+            var code = @$"
+if (arg is {expression})
+{{
+    Tag(""If"", arg);
+}}
+else
+{{
+    Tag(""Else"", arg);
+}}
+Tag(""End"", arg);";
+            var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+            validator.ValidateTag("If", x => x.Should().BeNull());
+            validator.ValidateTag("Else", x => x.Should().BeNull());
+            validator.ValidateTag("End", x => x.Should().BeNull());
+        }
     }
 }
