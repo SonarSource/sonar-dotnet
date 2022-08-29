@@ -280,7 +280,7 @@ if (value = boolParameter)
         [TestMethod]
         public void Branching_LearnsObjectConstraint_IsType_NoSymbol_DoesNotChangeState()
         {
-            var validator = CreateIfElseEndValidatorCS("(object)arg is Exception", OperationKind.IsType);
+            var validator = CreateIfElseEndValidatorCS("(object)(40 + 2) is Exception", OperationKind.IsType); // Check something that doesn't have a tracked symbol
             validator.ValidateTag("If", x => x.Should().BeNull());
             validator.ValidateTag("Else", x => x.Should().BeNull());
             validator.ValidateTag("End", x => x.Should().BeNull());
