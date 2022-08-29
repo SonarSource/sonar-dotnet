@@ -308,36 +308,19 @@ Tag(""End"", arg);";
         [DataRow("nullableBoolTrue", "false", false)]
         [DataRow("nullableBoolFalse", "true", false)]
         [DataRow("nullableBoolFalse", "false", true)]
-        [DataRow("nullableBoolNull", "true", null)]
-        [DataRow("nullableBoolNull", "false", null)]
+        [DataRow("nullableBoolNull", "true", null)]  // FN. Should be false.
+        [DataRow("nullableBoolNull", "false", null)] // FN. Should be false.
         public void ConstantPatternSetBoolConstraint(string variableName, string isPattern, bool? expectedBoolConstraint)
         {
-            var code = @$"
+            const string variableDeclarations = @"
 var objectNotNull = new object();
 var objectNull = (object)null;
 var objectUnknown = Unknown<object>();
 var nullableBoolTrue = (bool?)true;
 var nullableBoolFalse = (bool?)false;
 var nullableBoolNull = (bool?)null;
-
-var result = {variableName} is {isPattern};
-Tag(""Result"", result);";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("Result", x =>
-            {
-                if (expectedBoolConstraint is bool expected)
-                {
-                    x.Should().NotBeNull("we expect and constraint on the symbolValue");
-                    x.HasConstraint(BoolConstraint.From(expected)).Should().BeTrue(because: "we should have learned that result is {0}", expected);
-                }
-                else
-                {
-                    if (x != null)
-                    {
-                        x.HasConstraint<BoolConstraint>().Should().BeFalse(because: "we should not learn about the state of result");
-                    }
-                }
-            });
+";
+            ValidateSetBoolConstraint(variableDeclarations, variableName, isPattern, expectedBoolConstraint);
         }
 
         [DataTestMethod]
@@ -350,31 +333,14 @@ Tag(""Result"", result);";
         [DataRow("stringNotNull", "{ Length: var length }", true)] // only deconstruction
         public void RecursivePatternPropertySubPatternSetBoolConstraint(string variableName, string isPattern, bool? expectedBoolConstraint)
         {
-            var code = @$"
+            const string variableDeclarations = @"
 var objectNotNull = new object();
 var objectNull = (object)null;
 var objectUnknown = Unknown<object>();
 var stringNotNull = new string('c', 1);  // Make sure, we learn 's is not null'
 var stringNull = (string)null;
-
-var result = {variableName} is {isPattern};
-Tag(""Result"", result);";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("Result", x =>
-            {
-                if (expectedBoolConstraint is bool expected)
-                {
-                    x.Should().NotBeNull("we expect and constraint on the symbolValue");
-                    x.HasConstraint(BoolConstraint.From(expected)).Should().BeTrue(because: "we should have learned that result is {0}", expected);
-                }
-                else
-                {
-                    if (x != null)
-                    {
-                        x.HasConstraint<BoolConstraint>().Should().BeFalse(because: "we should not learn about the state of result");
-                    }
-                }
-            });
+";
+            ValidateSetBoolConstraint(variableDeclarations, variableName, isPattern, expectedBoolConstraint);
         }
 
 #if NET
@@ -387,29 +353,12 @@ Tag(""Result"", result);";
         [DataRow("recordUnknown", "(A: var a, B: _)", null)]
         public void RecursivePatternDeconstructionSubpatternSetBoolConstraint(string variableName, string isPattern, bool? expectedBoolConstraint)
         {
-            var code = @$"
+            const string variableDeclarations = @"
 var recordNotNull = new R(1, 2);
 var recordNull = (R)null;
 var recordUnknown = Unknown<R>();
-
-var result = {variableName} is {isPattern};
-Tag(""Result"", result);";
-            var validator = SETestContext.CreateCS(code, additionalTypes: "record R(int A, int B);").Validator;
-            validator.ValidateTag("Result", x =>
-            {
-                if (expectedBoolConstraint is bool expected)
-                {
-                    x.Should().NotBeNull("we expect and constraint on the symbolValue");
-                    x.HasConstraint(BoolConstraint.From(expected)).Should().BeTrue(because: "we should have learned that result is {0}", expected);
-                }
-                else
-                {
-                    if (x != null)
-                    {
-                        x.HasConstraint<BoolConstraint>().Should().BeFalse(because: "we should not learn about the state of result");
-                    }
-                }
-            });
+";
+            ValidateSetBoolConstraint(variableDeclarations, additionalTypes: "record R(int A, int B);", variableName, isPattern, expectedBoolConstraint);
         }
 
 #endif
@@ -426,30 +375,13 @@ Tag(""Result"", result);";
         [DataRow("integer", "object o", true)]
         public void DeclarationPatternSetBoolConstraint(string variableName, string isPattern, bool? expectedBoolConstraint)
         {
-            var code = @$"
+            const string variableDeclarations = @"
 var objectNotNull = new object();
 var objectNull = (object)null;
 var objectUnknown = Unknown<object>();
 var integer = new int();
-
-var result = {variableName} is {isPattern};
-Tag(""Result"", result);";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("Result", x =>
-            {
-                if (expectedBoolConstraint is bool expected)
-                {
-                    x.Should().NotBeNull("we expect and constraint on the symbolValue");
-                    x.HasConstraint(BoolConstraint.From(expected)).Should().BeTrue(because: "we should have learned that result is {0}", expected);
-                }
-                else
-                {
-                    if (x != null)
-                    {
-                        x.HasConstraint<BoolConstraint>().Should().BeFalse(because: "we should not learn about the state of result");
-                    }
-                }
-            });
+";
+            ValidateSetBoolConstraint(variableDeclarations, variableName, isPattern, expectedBoolConstraint);
         }
 
         [DataTestMethod]
@@ -482,32 +414,15 @@ Tag(""Result"", result);";
         [DataRow("objectUnknown", "not not _", null)] // FN. Some patterns always match
         public void NegateTypeDiscardPatternsSetBoolConstraint(string variableName, string isPattern, bool? expectedBoolConstraint)
         {
-            var code = @$"
+            const string variableDeclarations = @"
 var objectNotNull = new object();
 var objectNull = (object)null;
 var objectUnknown = Unknown<object>();
 var exceptionNotNull = new Exception();
 var exceptionNull = (Exception)null;
 var exceptionUnknown = Unknown<Exception>();
-
-var result = {variableName} is {isPattern};
-Tag(""Result"", result);";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("Result", x =>
-            {
-                if (expectedBoolConstraint is bool expected)
-                {
-                    x.Should().NotBeNull("we expect and constraint on the symbolValue");
-                    x.HasConstraint(BoolConstraint.From(expected)).Should().BeTrue(because: "we should have learned that result is {0}", expected);
-                }
-                else
-                {
-                    if (x != null)
-                    {
-                        x.HasConstraint<BoolConstraint>().Should().BeFalse(because: "we should not learn about the state of result");
-                    }
-                }
-            });
+";
+            ValidateSetBoolConstraint(variableDeclarations, variableName, isPattern, expectedBoolConstraint);
         }
 
         [DataTestMethod]
@@ -541,22 +456,33 @@ Tag(""Result"", result);";
         [DataRow("stringUnknown", "{ Length: > 10 } or { Length: < 100 }", null)]
         public void AndOrPatternsSetBoolConstraint(string variableName, string isPattern, bool? expectedBoolConstraint)
         {
-            var code = @$"
+            const string variableDeclarations = @"
 var objectNotNull = new object();
 var objectNull = (object)null;
 var objectUnknown = Unknown<object>();
 var stringNotNull = new string('c', 1);  // Make sure, we learn 's is not null'
 var stringNull = (string)null;
 var stringUnknown = Unknown<string>();
+";
+            ValidateSetBoolConstraint(variableDeclarations, variableName, isPattern, expectedBoolConstraint);
+        }
+
+        private static void ValidateSetBoolConstraint(string variableDeclarations, string variableName, string isPattern, bool? expectedBoolConstraint)
+            => ValidateSetBoolConstraint(variableDeclarations, additionalTypes: "", variableName, isPattern, expectedBoolConstraint);
+
+        private static void ValidateSetBoolConstraint(string variableDeclarations, string additionalTypes, string variableName, string isPattern, bool? expectedBoolConstraint)
+        {
+            var code = @$"
+{variableDeclarations}
 
 var result = {variableName} is {isPattern};
 Tag(""Result"", result);";
-            var validator = SETestContext.CreateCS(code).Validator;
+            var validator = SETestContext.CreateCS(code, additionalTypes: additionalTypes).Validator;
             validator.ValidateTag("Result", x =>
             {
                 if (expectedBoolConstraint is bool expected)
                 {
-                    x.Should().NotBeNull("we expect and constraint on the symbolValue");
+                    x.Should().NotBeNull("we expect an constraint on the symbolValue");
                     x.HasConstraint(BoolConstraint.From(expected)).Should().BeTrue(because: "we should have learned that result is {0}", expected);
                 }
                 else
