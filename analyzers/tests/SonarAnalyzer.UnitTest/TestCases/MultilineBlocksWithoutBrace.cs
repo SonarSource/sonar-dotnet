@@ -34,7 +34,7 @@
 
     void Else(bool condition)
     {
-        if(condition)
+        if (condition)
             Act.Other();
 
         else
@@ -48,7 +48,7 @@
         if (condition)
             Act.Other();
 
-        else if(condition)
+        else if (condition)
             Act.First();
 
         Act.Second(); // Compliant
@@ -200,7 +200,7 @@ class Nested
 {
     void While(bool condition)
     {
-        while(true)
+        while (true)
             while (condition) Act.First(); // Secondary
                 Act.Second(); // Noncompliant
     }
@@ -214,7 +214,7 @@ class Nested
 
     void ForEach(string[] args)
     {
-        foreach(var _ in args)
+        foreach (var _ in args)
             foreach (var arg in args) Act.First(arg); // Secondary
                 Act.Second(); // Noncompliant
     }
@@ -224,6 +224,52 @@ class Nested
         if (condition)
             if (condition) Act.First(); // Secondary
                 Act.Second(); // Noncompliant
+    }
+}
+
+class SecondPartIsPartOfIfStructure
+{
+    void Else(bool condition)
+    {
+        if (condition)
+            Act.First();
+            else Act.Second(); // Compliant
+    }
+    void ElseIf(bool condition)
+    {
+        if (condition)
+            Act.First();
+            else if(condition) Act.Second(); // Compliant
+    }
+}
+
+class SecondPartOfOtherScope
+{
+    void LowerElseIf(bool condition)
+    {
+        if (condition)
+            if (condition)
+                Act.First("if", "if");
+            else
+                Act.First("if", "else");
+        else if (condition)  // Compliant
+            Act.First("else if");
+    }
+    void LowerElse(bool condition)
+    {
+        if (condition)
+            if (condition)
+                Act.First("if", "if");
+            else
+                Act.First("if", "else");
+        else Act.First("else"); // Compliant
+    }
+    void If(bool condition)
+    {
+        while (condition)
+            if(condition)
+                Act.First("while");
+        if (condition) Act.First("while", "if");  // Compliant
     }
 }
 
@@ -312,8 +358,8 @@ Act.Second(); // Noncompliant
     void DesendingIndentation(bool condition)
     {
                 if (condition)
-            Act.First(); // Secondary
-        Act.Second(); // Noncompliant
+            Act.First();
+        Act.Second(); // Compliant, although inconvenient.
     }
 
     void ShiftedIndentation(bool condition)
@@ -361,7 +407,7 @@ class DoesNotCrash
 
 class Act
 {
-    public static void First(string arg = "") { }
+    public static void First(params string[] args) { }
     public static int Second() { return 42; }
     public static void Other() { }
 }

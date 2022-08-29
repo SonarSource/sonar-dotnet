@@ -97,16 +97,14 @@ public sealed class MultilineBlocksWithoutBrace : SonarDiagnosticAnalyzer
     {
         if (SecondStatement(context.Node, first) is { } second && IsNotEmpty(first) && IsNotEmpty(second))
         {
-            var firstPosition = first.GetLocation().GetLineSpan().StartLinePosition;
-            var secondPosition = second.GetLocation().GetLineSpan().StartLinePosition;
-            var rootPosition = context.Node.GetLocation().GetLineSpan().StartLinePosition;
+            var firstPosition = ReferencePosition(first);
+            var secondPosition = StartPosition(second);
 
-            if (SameIndentation(firstPosition, secondPosition)
-                || DifferentIndentation(rootPosition, secondPosition))
+            if (secondPosition.Character > firstPosition.Character - 4)
             {
                 var lineSpan = context.Node.SyntaxTree.GetText().Lines[secondPosition.Line].Span;
                 var location = Location.Create(context.Node.SyntaxTree, TextSpan.FromBounds(second.SpanStart, lineSpan.End));
-                var blockSize = secondPosition.Line - firstPosition.Line + 1;
+                var blockSize = secondPosition.Line - StartPosition(first).Line + 1;
                 var additional = new[] { first.GetLocation() };
                 context.ReportIssue(Rule.CreateDiagnostic(context.Compilation, location, additional, executed, execute, blockSize));
             }
@@ -116,11 +114,17 @@ public sealed class MultilineBlocksWithoutBrace : SonarDiagnosticAnalyzer
     private static bool IsNotEmpty(SyntaxNode node) =>
         node is not EmptyStatementSyntax;
 
-    private static bool SameIndentation(LinePosition first, LinePosition second) =>
-        first.Character == second.Character;
+    private static LinePosition ReferencePosition(SyntaxNode node)
+    {
+        var line = StartPosition(node).Line;
+        return node.AncestorsAndSelf()
+            .Where(x => StartPosition(x).Line == line)
+            .Select(x => x.GetLocation().GetLineSpan().StartLinePosition)
+            .Last();
+    }
 
-    private static bool DifferentIndentation(LinePosition first, LinePosition second) =>
-        first.Character != second.Character;
+    private static LinePosition StartPosition(SyntaxNode node) =>
+        node.GetLocation().GetLineSpan().StartLinePosition;
 
     private static SyntaxNode SecondStatement(SyntaxNode root, SyntaxNode first) =>
         !first.IsKind(SyntaxKind.Block)
@@ -128,6 +132,7 @@ public sealed class MultilineBlocksWithoutBrace : SonarDiagnosticAnalyzer
         // so we need to filter this case by returning if the nextStatement happens to be one ancestor of statement.
         && root.GetLastToken().GetNextToken().Parent is { } second
         && !first.Ancestors().Contains(second)
+        && second is not ElseClauseSyntax
         ? second
         : null;
 
