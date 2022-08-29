@@ -397,6 +397,14 @@ var integer = new int();
         [DataRow("objectNotNull", "not { }", OperationKindEx.NegatedPattern, false)]
         [DataRow("objectUnknown", "not null", OperationKindEx.NegatedPattern, null)]
         [DataRow("objectUnknown", "not { }", OperationKindEx.NegatedPattern, null)]
+        [DataRow("nullableBoolTrue", "not true", OperationKindEx.NegatedPattern, null)]     // FN. Should be false
+        [DataRow("nullableBoolTrue", "not false", OperationKindEx.NegatedPattern, null)]    // FN. Should be true
+        [DataRow("nullableBoolFalse", "not true", OperationKindEx.NegatedPattern, null)]    // FN. Should be true
+        [DataRow("nullableBoolFalse", "not false", OperationKindEx.NegatedPattern, null)]   // FN. Should be false
+        [DataRow("nullableBoolNull", "not true", OperationKindEx.NegatedPattern, null)]     // FN. Should be true
+        [DataRow("nullableBoolNull", "not false", OperationKindEx.NegatedPattern, null)]    // FN. Should be true
+        [DataRow("nullableBoolUnknown", "not true", OperationKindEx.NegatedPattern, null)]  // FN. Should be true
+        [DataRow("nullableBoolUnknown", "not false", OperationKindEx.NegatedPattern, null)] // FN. Should be true
         [DataRow("objectNull", "not object", OperationKindEx.TypePattern, true)]
         [DataRow("objectNull", "not not object", OperationKindEx.TypePattern, false)]
         [DataRow("objectNotNull", "not object", OperationKindEx.TypePattern, false)]
@@ -427,6 +435,10 @@ var objectUnknown = Unknown<object>();
 var exceptionNotNull = new Exception();
 var exceptionNull = (Exception)null;
 var exceptionUnknown = Unknown<Exception>();
+var nullableBoolTrue = (bool?)true;
+var nullableBoolFalse = (bool?)false;
+var nullableBoolNull = (bool?)null;
+var nullableBoolUnknown = Unknown<bool?>();
 ";
             ValidateSetBoolConstraint(variableDeclarations, variableName, isPattern, expectedOperation, expectedBoolConstraint);
         }
@@ -466,7 +478,7 @@ var exceptionUnknown = Unknown<Exception>();
 var objectNotNull = new object();
 var objectNull = (object)null;
 var objectUnknown = Unknown<object>();
-var stringNotNull = new string('c', 1);  // Make sure, we learn 's is not null'
+var stringNotNull = new string('c', 1);  // Make sure, we learn 'stringNotNull is not null'
 var stringNull = (string)null;
 var stringUnknown = Unknown<string>();
 ";
