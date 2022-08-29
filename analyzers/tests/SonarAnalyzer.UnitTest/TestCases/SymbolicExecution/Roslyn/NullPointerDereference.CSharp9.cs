@@ -62,17 +62,17 @@ public class Sample
         }
         else if (arg is not not null)
         {
-            arg.ToString();     // FN
+            arg.ToString();     // Noncompliant
         }
         else if (!(arg is not null))
         {
-            arg.ToString();     // FN
+            arg.ToString();     // Noncompliant
         }
         else
         {
             if (o is not null)
             {
-                o.ToString();   // Noncompliant FIXME (was compliant before)
+                o.ToString();   // Compliant
             }
             o.ToString();       // Noncompliant
         }

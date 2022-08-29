@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn.Checks;
@@ -47,12 +48,18 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                 ? state.SetSymbolConstraint(testedSymbol, constraint)
                 : state;
 
-        private static SymbolicConstraint LearnBranchingConstraint(ProgramState state, IPatternOperationWrapper pattern, bool useOpposite) =>
-            pattern.WrappedOperation.Kind switch
+        private static SymbolicConstraint LearnBranchingConstraint(ProgramState state, IPatternOperationWrapper pattern, bool useOpposite)
+        {
+            return pattern.WrappedOperation.Kind switch
             {
-                OperationKindEx.ConstantPattern => ConstraintFromConstantPattern(state, IConstantPatternOperationWrapper.FromOperation(pattern.WrappedOperation), useOpposite),
+                OperationKindEx.ConstantPattern => ConstraintFromConstantPattern(state, As(IConstantPatternOperationWrapper.FromOperation), useOpposite),
+                OperationKindEx.NegatedPattern => LearnBranchingConstraint(state, As(INegatedPatternOperationWrapper.FromOperation).Pattern, !useOpposite),
                 _ => null
             };
+
+            T As<T>(Func<IOperation, T> fromOperation) =>
+                fromOperation(pattern.WrappedOperation);
+        }
 
         private static SymbolicConstraint ConstraintFromConstantPattern(ProgramState state, IConstantPatternOperationWrapper constant, bool useOpposite)
         {
