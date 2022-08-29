@@ -401,8 +401,8 @@ var integer = new int();
         [DataRow("nullableBoolFalse", "not false", OperationKindEx.NegatedPattern, null)]   // FN. Should be false
         [DataRow("nullableBoolNull", "not true", OperationKindEx.NegatedPattern, null)]     // FN. Should be true
         [DataRow("nullableBoolNull", "not false", OperationKindEx.NegatedPattern, null)]    // FN. Should be true
-        [DataRow("nullableBoolUnknown", "not true", OperationKindEx.NegatedPattern, null)]  // FN. Should be true
-        [DataRow("nullableBoolUnknown", "not false", OperationKindEx.NegatedPattern, null)] // FN. Should be true
+        [DataRow("nullableBoolUnknown", "not true", OperationKindEx.NegatedPattern, null)]
+        [DataRow("nullableBoolUnknown", "not false", OperationKindEx.NegatedPattern, null)]
         [DataRow("objectNull", "not object", OperationKindEx.TypePattern, true)]
         [DataRow("objectNull", "not not object", OperationKindEx.TypePattern, false)]
         [DataRow("objectNotNull", "not object", OperationKindEx.TypePattern, false)]
