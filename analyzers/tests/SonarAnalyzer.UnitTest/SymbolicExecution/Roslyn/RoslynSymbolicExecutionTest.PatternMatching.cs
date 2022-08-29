@@ -311,6 +311,8 @@ Tag(""End"", arg);";
         [DataRow("nullableBoolFalse", "false", true)]
         [DataRow("nullableBoolNull", "true", null)]  // FN. Should be false.
         [DataRow("nullableBoolNull", "false", null)] // FN. Should be false.
+        [DataRow("nullableBoolUnknown", "true", null)]
+        [DataRow("nullableBoolUnknown", "false", null)]
         public void ConstantPatternSetBoolConstraint(string variableName, string isPattern, bool? expectedBoolConstraint)
         {
             const string variableDeclarations = @"
@@ -320,6 +322,7 @@ var objectUnknown = Unknown<object>();
 var nullableBoolTrue = (bool?)true;
 var nullableBoolFalse = (bool?)false;
 var nullableBoolNull = (bool?)null;
+var nullableBoolUnknown = Unknown<bool?>();
 ";
             ValidateSetBoolConstraint(variableDeclarations, variableName, isPattern, OperationKindEx.ConstantPattern, expectedBoolConstraint);
         }
