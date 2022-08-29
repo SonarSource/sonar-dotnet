@@ -452,81 +452,62 @@ Tag(""Result"", result);";
             });
         }
 
-        [TestMethod]
-        public void LearnFromObjectContraint_IsNegatePattern_NotNull()
+        [DataTestMethod]
+        [DataRow("objectNull", "not null", false)]
+        [DataRow("objectNull", "not { }", true)]
+        [DataRow("objectNotNull", "not null", true)]
+        [DataRow("objectNotNull", "not { }", false)]
+        [DataRow("objectUnknown", "not null", null)]
+        [DataRow("objectUnknown", "not { }", null)]
+        [DataRow("objectNull", "not object", true)]
+        [DataRow("objectNull", "not not object", false)]
+        [DataRow("objectNotNull", "not object", false)]
+        [DataRow("objectNotNull", "not not object", true)]
+        [DataRow("objectUnknown", "not object", null)]
+        [DataRow("objectUnknown", "not not object", null)]
+        [DataRow("exceptionNull", "not object", true)]
+        [DataRow("exceptionNull", "not not object", false)]
+        [DataRow("exceptionNotNull", "not object", false)]
+        [DataRow("exceptionNotNull", "not not object", true)]
+        [DataRow("exceptionUnknown", "not object", null)]
+        [DataRow("exceptionUnknown", "not not object", null)]
+        [DataRow("objectNull", "not Exception", null)]
+        [DataRow("objectNull", "not not Exception", null)]
+        [DataRow("objectNotNull", "not Exception", null)]
+        [DataRow("objectNotNull", "not not Exception", null)]
+        [DataRow("objectUnknown", "not Exception", null)]
+        [DataRow("objectUnknown", "not not Exception", null)]
+        [DataRow("objectNull", "not not _", true)]
+        [DataRow("objectNotNull", "not not _", true)]
+        [DataRow("objectUnknown", "not not _", null)] // FN. Some patterns always match
+        public void NegateTypeDiscardPatternsSetBoolConstraint(string variableName, string isPattern, bool? expectedBoolConstraint)
         {
-            const string code = @"
-var nullObject = (object)null;
-var isNotNull = nullObject is not null;
-Tag(""IsNotNull"", isNotNull);";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("IsNotNull", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
-        }
+            var code = @$"
+var objectNotNull = new object();
+var objectNull = (object)null;
+var objectUnknown = Unknown<object>();
+var exceptionNotNull = new Exception();
+var exceptionNull = (Exception)null;
+var exceptionUnknown = Unknown<Exception>();
 
-        [TestMethod]
-        public void LearnFromObjectContraint_IsNegatePattern_NotNotNull()
-        {
-            const string code = @"
-var nullObject = (object)null;
-var isNotNull = nullObject is not { };
-Tag(""IsNotNull"", isNotNull);";
+var result = {variableName} is {isPattern};
+Tag(""Result"", result);";
             var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("IsNotNull", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
-        }
-
-        [TestMethod]
-        public void LearnFromObjectContraint_IsTypePattern_NotObject()
-        {
-            const string code = @"
-var nullObject = (object)null;
-var isNotNull = nullObject is not object;
-Tag(""IsNotNull"", isNotNull);";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("IsNotNull", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
-        }
-
-        [TestMethod]
-        public void LearnFromObjectContraint_IsTypePattern_NotNotObject()
-        {
-            const string code = @"
-var nullObject = (object)null;
-var isNotNull = nullObject is not not object;
-Tag(""IsNotNull"", isNotNull);";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("IsNotNull", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
-        }
-
-        [TestMethod]
-        public void LearnFromObjectContraint_IsTypePattern_Assignable()
-        {
-            const string code = @"
-var ex = new Exception();
-var isNotNull = ex is not not object;
-Tag(""IsNotNull"", isNotNull);";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("IsNotNull", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
-        }
-
-        [TestMethod]
-        public void LearnFromObjectContraint_IsTypePattern_NotAssignable()
-        {
-            const string code = @"
-var notNullObject = new object();
-var isNotNull = notNullObject is not not Exception;
-Tag(""IsNotNull"", isNotNull);";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("IsNotNull", x => x.Should().BeNull());
-        }
-
-        [TestMethod]
-        public void LearnFromObjectContraint_IsDiscard()
-        {
-            const string code = @"
-var nullObject = (object)null;
-var isDiscard = nullObject is not not _;
-Tag(""IsDiscard"", isDiscard);";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("IsDiscard", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+            validator.ValidateTag("Result", x =>
+            {
+                if (expectedBoolConstraint is bool expected)
+                {
+                    x.Should().NotBeNull("we expect and constraint on the symbolValue");
+                    x.HasConstraint(BoolConstraint.From(expected)).Should().BeTrue(because: "we should have learned that result is {0}", expected);
+                }
+                else
+                {
+                    if (x != null)
+                    {
+                        x.HasConstraint<BoolConstraint>().Should().BeFalse(because: "we should not learn about the state of result");
+                    }
+                }
+            });
         }
 
         [TestMethod]
