@@ -492,7 +492,7 @@ var stringUnknown = Unknown<string>();
 
 var result = {variableName} is {isPattern};
 Tag(""Result"", result);";
-            var validator = SETestContext.CreateCS(code, additionalTypes: additionalTypes).Validator;
+            var validator = SETestContext.CreateCSWithAddtitionalTypes(code, additionalTypes).Validator;
             validator.ValidateContainsOperation(expectedOperation);
             validator.ValidateTag("Result", x =>
             {

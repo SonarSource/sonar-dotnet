@@ -49,11 +49,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         public static SETestContext CreateCS(string methodBody, string additionalParameters, string localFunctionName, params SymbolicCheck[] additionalChecks) =>
             new(ClassCodeCS(methodBody, additionalParameters, null), AnalyzerLanguage.CSharp, additionalChecks, localFunctionName);
 
-        public static SETestContext CreateCS(string methodBody, string additionalParameters = null, string localFunctionName = null, string additionalTypes = null, params SymbolicCheck[] additionalChecks) =>
-            new(ClassCodeCS(methodBody, additionalParameters, additionalTypes), AnalyzerLanguage.CSharp, additionalChecks, localFunctionName, null);
-
         public static SETestContext CreateCSLambda(string methodBody, string lambdaFragment, params SymbolicCheck[] additionalChecks) =>
             new(ClassCodeCS(methodBody, null, null), AnalyzerLanguage.CSharp, additionalChecks, null, lambdaFragment);
+
+        public static SETestContext CreateCSWithAddtitionalTypes(string methodBody, string additionalTypes, params SymbolicCheck[] additionalChecks) =>
+            new(ClassCodeCS(methodBody, null, additionalTypes), AnalyzerLanguage.CSharp, additionalChecks, null, null);
 
         public static SETestContext CreateCSMethod(string method, params SymbolicCheck[] additionalChecks) =>
             new($@"
