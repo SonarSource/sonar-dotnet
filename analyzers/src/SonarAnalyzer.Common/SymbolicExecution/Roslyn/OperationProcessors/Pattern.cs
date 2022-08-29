@@ -61,48 +61,16 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
             return pattern.WrappedOperation.Kind switch
             {
                 OperationKindEx.ConstantPattern when
-                    As(IConstantPatternOperationWrapper.FromOperation) is var constantPattern
-                    && state[constantPattern.Value]?.HasConstraint(ObjectConstraint.Null) is true =>
-                        BoolConstraint.From(valueConstraint == ObjectConstraint.Null),
-                OperationKindEx.RecursivePattern when As(IRecursivePatternOperationWrapper.FromOperation) is var recursivePattern =>
-                    recursivePattern switch
-                    {
-                        _ when valueConstraint == ObjectConstraint.Null => BoolConstraint.False,
-                        {
-                            PropertySubpatterns.Length: 0,
-                            DeconstructionSubpatterns.Length: 0,
-                        } => BoolConstraint.True,
-                        {
-                            PropertySubpatterns: var propertySubPatterns,
-                            DeconstructionSubpatterns: var deconstructSubpatterns,
-                        } when propertySubPatterns // check if all sub pattern are always matching.
-                            .Select(x => IPropertySubpatternOperationWrapper.FromOperation(x).Pattern)
-                            .Concat(deconstructSubpatterns.Select(x => IPatternOperationWrapper.FromOperation(x)))
-                            .All(x => x is { WrappedOperation.Kind: OperationKindEx.DiscardPattern }
-                                || (x.WrappedOperation.Kind == OperationKindEx.DeclarationPattern
-                                    && IDeclarationPatternOperationWrapper.FromOperation(x.WrappedOperation).MatchesNull)) =>
-                                BoolConstraint.True,
-                        _ => null,
-                    },
-                OperationKindEx.DeclarationPattern when As(IDeclarationPatternOperationWrapper.FromOperation) is var declarationPattern =>
-                        declarationPattern switch
-                        {
-                            { MatchesNull: true } => BoolConstraint.True,
-                            _ when valueConstraint == ObjectConstraint.Null => BoolConstraint.False,
-                            var notNull when notNull.InputType.DerivesOrImplements(notNull.NarrowedType) => BoolConstraint.From(valueConstraint == ObjectConstraint.NotNull),
-                            _ => null,
-                        },
+                    As(IConstantPatternOperationWrapper.FromOperation) is var constant
+                    && state[constant.Value]?.HasConstraint(ObjectConstraint.Null) is true => BoolConstraint.From(valueConstraint == ObjectConstraint.Null),
+                OperationKindEx.RecursivePattern when As(IRecursivePatternOperationWrapper.FromOperation) is var recursive => BoolConstraintFromRecursivePattern(valueConstraint, recursive),
+                OperationKindEx.DeclarationPattern when As(IDeclarationPatternOperationWrapper.FromOperation) is var declaration => BoolConstraintFromDeclarationPattern(valueConstraint, declaration),
                 OperationKindEx.TypePattern when
-                    As(ITypePatternOperationWrapper.FromOperation) is var typePattern
-                    && typePattern.InputType.DerivesOrImplements(typePattern.NarrowedType) =>
-                        BoolConstraint.From(valueConstraint == ObjectConstraint.NotNull),
-                OperationKindEx.NegatedPattern when
-                    As(INegatedPatternOperationWrapper.FromOperation) is var negatedPattern =>
-                        BoolConstraintFromPattern(state, valueConstraint, negatedPattern.Pattern)?.Opposite,
+                    As(ITypePatternOperationWrapper.FromOperation) is var type
+                    && type.InputType.DerivesOrImplements(type.NarrowedType) => BoolConstraint.From(valueConstraint == ObjectConstraint.NotNull),
+                OperationKindEx.NegatedPattern when As(INegatedPatternOperationWrapper.FromOperation) is var negated => BoolConstraintFromPattern(state, valueConstraint, negated.Pattern)?.Opposite,
                 OperationKindEx.DiscardPattern => BoolConstraint.True,
-                OperationKindEx.BinaryPattern when
-                    As(IBinaryPatternOperationWrapper.FromOperation) is var binaryPattern =>
-                        BoolConstraintFromBinarryPattern(state, valueConstraint, binaryPattern),
+                OperationKindEx.BinaryPattern when As(IBinaryPatternOperationWrapper.FromOperation) is var binary => BoolConstraintFromBinaryPattern(state, valueConstraint, binary),
                 _ => null,
             };
         public static ProgramState Process(SymbolicContext context, IIsPatternOperationWrapper isPattern) =>
@@ -117,7 +85,36 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                  fromOperation(pattern.WrappedOperation);
         }
 
-        private static BoolConstraint BoolConstraintFromBinarryPattern(ProgramState state, ObjectConstraint valueConstraint, IBinaryPatternOperationWrapper binaryPattern)
+        private static BoolConstraint BoolConstraintFromDeclarationPattern(ObjectConstraint valueConstraint, IDeclarationPatternOperationWrapper declaration) =>
+            declaration switch
+            {
+                { MatchesNull: true } => BoolConstraint.True,
+                _ when valueConstraint == ObjectConstraint.Null => BoolConstraint.False,
+                var notNull when notNull.InputType.DerivesOrImplements(notNull.NarrowedType) => BoolConstraint.From(valueConstraint == ObjectConstraint.NotNull),
+                _ => null,
+            };
+
+        private static BoolConstraint BoolConstraintFromRecursivePattern(ObjectConstraint valueConstraint, IRecursivePatternOperationWrapper recursive) =>
+            recursive switch
+            {
+                _ when valueConstraint == ObjectConstraint.Null => BoolConstraint.False,
+                {
+                    PropertySubpatterns.Length: 0,
+                    DeconstructionSubpatterns.Length: 0,
+                } => BoolConstraint.True,
+                _ when SubPatternsAlwaysMatch(recursive) => BoolConstraint.True,
+                _ => null,
+            };
+
+        private static bool SubPatternsAlwaysMatch(IRecursivePatternOperationWrapper recursivePattern) =>
+            recursivePattern.PropertySubpatterns
+                .Select(x => IPropertySubpatternOperationWrapper.FromOperation(x).Pattern)
+                .Concat(recursivePattern.DeconstructionSubpatterns.Select(x => IPatternOperationWrapper.FromOperation(x)))
+                .All(x => x is { WrappedOperation.Kind: OperationKindEx.DiscardPattern }
+                    || (x.WrappedOperation.Kind == OperationKindEx.DeclarationPattern
+                        && IDeclarationPatternOperationWrapper.FromOperation(x.WrappedOperation).MatchesNull));
+
+        private static BoolConstraint BoolConstraintFromBinaryPattern(ProgramState state, ObjectConstraint valueConstraint, IBinaryPatternOperationWrapper binaryPattern)
         {
             var left = BoolConstraintFromPattern(state, valueConstraint, binaryPattern.LeftPattern);
             var right = BoolConstraintFromPattern(state, valueConstraint, binaryPattern.RightPattern);

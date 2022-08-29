@@ -359,7 +359,12 @@ var recordNotNull = new R(1, 2);
 var recordNull = (R)null;
 var recordUnknown = Unknown<R>();
 ";
-            ValidateSetBoolConstraint(additionalTypes: "record R(int A, int B);", variableDeclarations: variableDeclarations, variableName: variableName, isPattern: isPattern, expectedOperation: OperationKindEx.RecursivePattern, expectedBoolConstraint: expectedBoolConstraint);
+            ValidateSetBoolConstraint(additionalTypes: "record R(int A, int B);",
+                                      variableDeclarations: variableDeclarations,
+                                      variableName: variableName,
+                                      isPattern: isPattern,
+                                      expectedOperation: OperationKindEx.RecursivePattern,
+                                      expectedBoolConstraint: expectedBoolConstraint);
         }
 
 #endif
