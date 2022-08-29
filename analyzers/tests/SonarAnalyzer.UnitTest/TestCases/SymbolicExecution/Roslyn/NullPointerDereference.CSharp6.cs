@@ -44,7 +44,7 @@ namespace Tests.Diagnostics
             }
             catch (ApplicationException) when (o == null)
             {
-                var b = o.ToString(); // FIXME Non-compliant
+                var b = o.ToString(); // Noncompliant
             }
         }
 

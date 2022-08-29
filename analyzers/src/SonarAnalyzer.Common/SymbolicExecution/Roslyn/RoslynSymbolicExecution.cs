@@ -287,20 +287,25 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         private static ProgramState LearnBranchingConstraints(ControlFlowBranch branch, ProgramState state, IOperation branchValue)
         {
-            if (branchValue.Kind == OperationKindEx.Conversion)
-            {
-                var operand = IConversionOperationWrapper.FromOperation(branchValue).Operand;
-                state = LearnBranchingConstraints(branch, state, operand);
-                return state.SetOperationValue(branchValue, state[operand]);    // Propagate value from operand to conversion operation itself
-            }
-            else
-            {
-                var constraint = BoolConstraint.From((branch.Source.ConditionKind == ControlFlowConditionKind.WhenTrue) == branch.IsConditionalSuccessor);
-                state = state.SetOperationConstraint(branchValue, constraint);
-                return branchValue.TrackedSymbol() is { } symbol
-                    ? state.SetSymbolConstraint(symbol, constraint)
-                    : state;
-            }
+            var trueBranch = (branch.Source.ConditionKind == ControlFlowConditionKind.WhenTrue) == branch.IsConditionalSuccessor;
+            state = state.SetOperationConstraint(branchValue, BoolConstraint.From(trueBranch));
+            return LearnBranchingConstraintsFromOperation(state, branchValue, !trueBranch);
+        }
+
+        private static ProgramState LearnBranchingConstraintsFromOperation(ProgramState state, IOperation operation, bool useOpposite)
+        {
+            return operation.TrackedSymbol() is { } symbol
+                ? state.SetSymbolConstraint(symbol, BoolConstraint.From(!useOpposite))
+                : operation.Kind switch
+                {
+                    OperationKindEx.Binary => Binary.LearnBranchingConstraint(state, As(IBinaryOperationWrapper.FromOperation), useOpposite),
+                    OperationKindEx.Conversion => LearnBranchingConstraintsFromOperation(state, As(IConversionOperationWrapper.FromOperation).Operand, useOpposite),
+                    OperationKindEx.Unary when operation.ToUnary() is { OperatorKind: UnaryOperatorKind.Not } unary => LearnBranchingConstraintsFromOperation(state, unary.Operand, !useOpposite),
+                    _ => state
+                };
+
+            T As<T>(Func<IOperation, T> fromOperation) =>
+                fromOperation(operation);
         }
 
         private static bool IsReachable(ExplodedNode node, ControlFlowBranch branch) =>

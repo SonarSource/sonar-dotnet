@@ -101,6 +101,17 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         }
 
         [TestMethod]
+        public void Constraint_Existing_ReturnsInstance()
+        {
+            var sut = new SymbolicValue().WithConstraint(TestConstraint.First).WithConstraint(DummyConstraint.Dummy);
+            sut.Constraint<TestConstraint>().Should().Be(TestConstraint.First);
+        }
+
+        [TestMethod]
+        public void Constraint_Missing_ReturnsNull() =>
+            new SymbolicValue().Constraint<BoolConstraint>().Should().BeNull();
+
+        [TestMethod]
         public void GetHashCode_ComputedFromConstraints()
         {
             var empty1 = new SymbolicValue();

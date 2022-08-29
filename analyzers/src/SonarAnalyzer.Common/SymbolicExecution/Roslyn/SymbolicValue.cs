@@ -51,6 +51,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public bool HasConstraint(SymbolicConstraint constraint) =>
             Constraints.TryGetValue(constraint.GetType(), out var current) && constraint == current;
 
+        public T Constraint<T>() where T : SymbolicConstraint =>
+            Constraints.TryGetValue(typeof(T), out var value) ? (T)value : null;
+
         public override int GetHashCode() =>
             HashCode.DictionaryContentHash(Constraints);
 

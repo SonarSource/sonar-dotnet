@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
 
@@ -31,6 +33,41 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
             && BinaryConstraint(binary.OperatorKind, left, right) is { } newConstraint
                 ? context.SetOperationConstraint(newConstraint)
                 : context.State;
+
+        public static ProgramState LearnBranchingConstraint(ProgramState state, IBinaryOperationWrapper binary, bool useOpposite) =>
+            binary.OperatorKind.IsAnyEquality()
+                ? LearnBranchingConstraint<ObjectConstraint>(state, binary, useOpposite) ?? LearnBranchingConstraint<BoolConstraint>(state, binary, useOpposite) ?? state
+                : state;
+
+        private static ProgramState LearnBranchingConstraint<T>(ProgramState state, IBinaryOperationWrapper binary, bool useOpposite)
+            where T : SymbolicConstraint
+        {
+            // We can fall through ?? because "constraint" and "testedSymbol" are exclusive. Symbols with the constraint will be recognized as "constraint" side.
+            if ((OperandConstraint(binary.LeftOperand) ?? OperandConstraint(binary.RightOperand)) is { } constraint
+                && (OperandSymbolWithoutConstraint(binary.LeftOperand) ?? OperandSymbolWithoutConstraint(binary.RightOperand)) is { } testedSymbol)
+            {
+                if (useOpposite ^ binary.OperatorKind.IsNotEquals())
+                {
+                    constraint = constraint.Opposite;
+                }
+                return constraint is null ? null : state.SetSymbolConstraint(testedSymbol, constraint);
+            }
+            else
+            {
+                return null;
+            }
+
+            ISymbol OperandSymbolWithoutConstraint(IOperation candidate) =>
+                candidate.TrackedSymbol() is { } symbol
+                && (state[symbol] is null || !state[symbol].HasConstraint<T>())
+                    ? symbol
+                    : null;
+
+            SymbolicConstraint OperandConstraint(IOperation candidate) =>
+                state[candidate] is { } value && value.HasConstraint<T>()
+                    ? value.Constraint<T>()
+                    : null;
+        }
 
         private static SymbolicConstraint BinaryConstraint(BinaryOperatorKind kind, SymbolicValue left, SymbolicValue right)
         {

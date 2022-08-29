@@ -792,7 +792,7 @@ namespace Tests.Diagnostics
             {
                 if (item == current)
                 {
-                    return item.ToString(); // Noncompliant FP, null constraint is inherited from 'current == null' check
+                    return item.ToString(); // Noncompliant, null constraint is inherited from 'current == null' check. If list would contain a "null" item, it's a TP.
                 }
                 else if (item.ToString() == "xxx") // 'item' does not contain constraints by default, issue is not raised here anyway
                 {

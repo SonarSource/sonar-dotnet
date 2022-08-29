@@ -18,21 +18,18 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.SymbolicExecution.Constraints
+using StyleCop.Analyzers.Lightup;
+
+namespace SonarAnalyzer.Extensions;
+
+public static class BinaryOperatorKindExtensions
 {
-    internal sealed class ObjectConstraint : SymbolicConstraint
-    {
-        public static readonly ObjectConstraint Null = new();
-        public static readonly ObjectConstraint NotNull = new();
+    public static bool IsAnyEquality(this BinaryOperatorKind kind) =>
+        kind.IsEquals() || kind.IsNotEquals();
 
-        public override SymbolicConstraint Opposite =>
-            // x == null ? <Null> : <NotNull>
-            // x == "" ? <NotNull> : <unknown, could be Null or NotNull here>
-            this == Null ? NotNull : null;
+    public static bool IsEquals(this BinaryOperatorKind kind) =>
+        kind is BinaryOperatorKind.Equals or BinaryOperatorKind.ObjectValueEquals;
 
-        protected override string Name =>
-            this == Null ? nameof(Null) : nameof(NotNull);
-
-        private ObjectConstraint() { }
-    }
+    public static bool IsNotEquals(this BinaryOperatorKind kind) =>
+        kind is BinaryOperatorKind.NotEquals or BinaryOperatorKind.ObjectValueNotEquals;
 }

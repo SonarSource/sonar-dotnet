@@ -11,19 +11,19 @@ namespace Tests.Diagnostics
         string Method(string s) =>
             s != null
             ? null
-            : s.ToLower(); // FIXME Non-compliant
+            : s.ToLower(); // Noncompliant
 
         string Prop =>
             field != null
             ? null
-            : field.ToLower(); // FIXME Non-compliant
+            : field.ToLower(); // Noncompliant
 
         string PropGet
         {
             get =>
                 field != null
                 ? null
-                : field.ToLower(); // FIXME Non-compliant
+                : field.ToLower(); // Noncompliant
         }
 
         void ConstantPattern(object o)
@@ -62,7 +62,7 @@ namespace Tests.Diagnostics
             {
                 if (o == null)
                 {
-                    o.ToString(); // FIXME Non-compliant, False Positive
+                    o.ToString(); // Noncompliant, False Positive
                 }
             }
         }
@@ -73,7 +73,7 @@ namespace Tests.Diagnostics
             {
                 if (o == null)
                 {
-                    o.ToString(); // FIXME Non-compliant, False Positive
+                    o.ToString(); // Noncompliant, False Positive FIXME: pattern matching
                 }
             }
         }
@@ -123,7 +123,7 @@ namespace Tests.Diagnostics
                     // We don't set constraints on the switch expression
                     if (o == null)
                     {
-                        o.ToString(); // FIXME Non-compliant, False Positive
+                        o.ToString(); // Noncompliant, False Positive, FIXME: Pattern matching
                     }
                     break;
 

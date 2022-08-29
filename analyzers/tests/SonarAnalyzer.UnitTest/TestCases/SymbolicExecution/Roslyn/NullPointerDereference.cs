@@ -144,7 +144,7 @@ namespace Tests.Diagnostics
             object o = myObject; // can be null
             if (o == null)
             {
-                M1(o.ToString()); // FIXME Non-compliant, always null
+                M1(o.ToString()); // Noncompliant, always null
             }
             else
             {
@@ -173,7 +173,7 @@ namespace Tests.Diagnostics
             {
                 if (item == null)
                 {
-                    Console.WriteLine(item.ToString()); // FIXME Non-compliant
+                    Console.WriteLine(item.ToString()); // Noncompliant
                 }
             }
         }
@@ -204,7 +204,7 @@ namespace Tests.Diagnostics
             object a = null;
             if (a == b)
             {
-                b.ToString(); // FIXME Non-compliant
+                b.ToString(); // Noncompliant
             }
             else
             {
@@ -231,7 +231,7 @@ namespace Tests.Diagnostics
             }
             else
             {
-                b.ToString(); // FIXME Non-compliant
+                b.ToString(); // Noncompliant
             }
 
             a = new object();
@@ -249,7 +249,7 @@ namespace Tests.Diagnostics
         {
             if (arr == null)
             {
-                Console.WriteLine(arr[10, 10]); // FIXME Non-compliant
+                Console.WriteLine(arr[10, 10]); // Noncompliant
             }
             else
             {
@@ -315,7 +315,7 @@ namespace Tests.Diagnostics
         {
             if (s1 == "" || s1 == null)
             {
-                s1.ToString(); // FIXME Non-compliant
+                s1.ToString(); // Noncompliant
             }
             else
             {
@@ -335,7 +335,7 @@ namespace Tests.Diagnostics
 
         void StringEmpty5(string path)
         {
-            var s = path == null ? path.Split('/') : new string[] { }; // FIXME Non-compliant
+            var s = path == null ? path.Split('/') : new string[] { }; // Noncompliant
         }
 
         void StringEmpty6(string path)
@@ -526,8 +526,8 @@ namespace Tests.Diagnostics
         {
             if (_foo1 == null)
             {
-                _foo1.ToString(); // FIXME Non-compliant
-//              ***** FIXME
+                _foo1.ToString(); // Noncompliant
+//              ^^^^^
             }
         }
 
@@ -535,8 +535,8 @@ namespace Tests.Diagnostics
         {
             if (_bar == null)
             {
-                _bar.ToString(); // FIXME Non-compliant
-//              **** FIXME
+                _bar.ToString(); // Noncompliant
+//              ^^^^
             }
         }
 
@@ -545,8 +545,8 @@ namespace Tests.Diagnostics
             if (_foo1 == null)
             {
                 var o = _foo1;
-                o.ToString(); // FIXME Non-compliant
-//              * FIXME
+                o.ToString(); // Noncompliant
+//              ^
             }
         }
 
@@ -713,7 +713,7 @@ namespace Tests.Diagnostics
         {
             Guard1(s1);
 
-            if (s1 == null) s1.ToUpper(); // Compliant, this code is unreachable
+            if (s1 == null) s1.ToUpper(); // Noncompliant FP, FIXME: Compliant, this code is unreachable
         }
 
         public static void Guard1<T>([ValidatedNotNull]T value) where T : class { }
@@ -766,7 +766,7 @@ namespace Tests.Diagnostics
                 {
                     if (x == null)
                     {
-                        x.ToString(); // FIXME Non-compliant
+                        x.ToString(); // Noncompliant
                     }
                     break;
                 }
@@ -785,7 +785,7 @@ namespace Tests.Diagnostics
                 {
                     if (x == null)
                     {
-                        yield return x.ToString(); // FIXME Non-compliant
+                        yield return x.ToString(); // Noncompliant
                     }
                     yield break;
                 }
@@ -825,7 +825,7 @@ namespace Tests.Diagnostics
             {
                 if (item == current)
                 {
-                    return item.ToString(); // FIXME Non-compliant FP, null constraint is inherited from 'current == null' check
+                    return item.ToString(); // Noncompliant, null constraint is inherited from 'current == null' check. If list would contain a "null" item, it's a TP.
                 }
                 else if (item.ToString() == "xxx") // 'item' does not contain constraints by default, issue is not raised here anyway
                 {
@@ -1102,21 +1102,18 @@ public class Repro_5289
     }
 }
 
-namespace SonarLint_S2259_False_Positive_Replication
+public class Repro_GridChecks
 {
-    public class FPReplication
+    public int Go(string first, string second)
     {
-        public int PartialChecksForSemanticVersionComparison(string preRelease, string otherPreRelease)
-        {
-            if (preRelease == otherPreRelease) return 0;
-            if (preRelease != null && otherPreRelease == null) return -1;
-            if (preRelease == null && otherPreRelease != null) return 1;
+        if (first == second) return 0;
+        if (first != null && second == null) return -1;
+        if (first == null && second != null) return 1;
 
-            preRelease.Split('.'); // Compliant
-            otherPreRelease.Split('.');
+        first.Split('.');   // Noncompliant FP
+        second.Split('.');  // Noncompliant FP
 
-            return 0;
-        }
+        return 0;
     }
 }
 
@@ -1142,7 +1139,7 @@ namespace ValidatedNotNullAttributeTest
             {
                 return value.ToUpper(); // Compliant
             }
-            return value.ToUpper(); // Compliant
+            return value.ToUpper(); // Noncompliant FP, FIXME
         }
     }
 }
