@@ -66,6 +66,5 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
         // Same as [NotNull] https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/attributes/nullable-analysis#postconditions-maybenull-and-notnull
         private static bool IsValidatedNotNullAttribute(AttributeData attribute) =>
             "ValidatedNotNullAttribute".Equals(attribute.AttributeClass?.Name);
-
     }
 }
