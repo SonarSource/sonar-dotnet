@@ -510,114 +510,63 @@ Tag(""Result"", result);";
             });
         }
 
-        [TestMethod]
-        public void LearnFromObjectContraint_Binary_And_True()
-        {
-            const string code = @"
-var nullObject = (object)null;
-var isBinary = nullObject is null and not { };
-Tag(""IsBinary"", isBinary);";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("IsBinary", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
-        }
+        [DataTestMethod]
+        [DataRow("objectNull", "null and not { }", true)]
+        [DataRow("objectNotNull", "null and not { }", false)]
+        [DataRow("objectUnknown", "null and not { }", null)]
+        [DataRow("stringNull", "{ Length: 0 } and not null", false)]
+        [DataRow("stringNotNull", "{ Length: 0 } and not null", null)]
+        [DataRow("stringUnknown", "{ Length: 0 } and not null", null)]
+        [DataRow("stringNull", "not null and { Length: 0 }", false)]
+        [DataRow("stringNotNull", "not null and { Length: 0 }", null)]
+        [DataRow("stringUnknown", "not null and { Length: 0 }", null)]
+        [DataRow("stringNull", "{ Length: > 10 } and { Length: < 100 }", false)]
+        [DataRow("stringNotNull", "{ Length: > 10 } and { Length: < 100 }", null)]
+        [DataRow("stringUnknown", "{ Length: > 10 } and { Length: < 100 }", null)]
 
-        [TestMethod]
-        public void LearnFromObjectContraint_Binary_And_False()
+        [DataRow("objectNull", "null or not { }", true)]
+        [DataRow("objectNotNull", "null or not { }", false)]
+        [DataRow("objectUnknown", "null or not { }", null)]
+        [DataRow("objectNull", "null or { }", true)]
+        [DataRow("objectNotNull", "null or { }", true)]
+        [DataRow("objectUnknown", "null or { }", null)]  // FN. Matches always.
+        [DataRow("stringNull", "{ Length: 0 } or not null", false)]
+        [DataRow("stringNotNull", "{ Length: 0 } or not null", true)]
+        [DataRow("stringUnknown", "{ Length: 0 } or not null", null)]
+        [DataRow("stringNull", "not null or { Length: 0 }", false)]
+        [DataRow("stringNotNull", "not null or { Length: 0 }", true)]
+        [DataRow("stringUnknown", "not null or { Length: 0 }", null)]
+        [DataRow("stringNull", "{ Length: > 10 } or { Length: < 100 }", false)]
+        [DataRow("stringNotNull", "{ Length: > 10 } or { Length: < 100 }", null)]
+        [DataRow("stringUnknown", "{ Length: > 10 } or { Length: < 100 }", null)]
+        public void AndOrPatternsSetBoolConstraint(string variableName, string isPattern, bool? expectedBoolConstraint)
         {
-            const string code = @"
-var nullObject = (object)null;
-var isBinary = nullObject is not null and { };
-Tag(""IsBinary"", isBinary);";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("IsBinary", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
-        }
+            var code = @$"
+var objectNotNull = new object();
+var objectNull = (object)null;
+var objectUnknown = Unknown<object>();
+var stringNotNull = new string('c', 1);  // Make sure, we learn 's is not null'
+var stringNull = (string)null;
+var stringUnknown = Unknown<string>();
 
-        [TestMethod]
-        public void LearnFromObjectContraint_Binary_And_LeftNotDeterministic()
-        {
-            const string code = @"
-var s = new string('c', 1);
-var isBinary = s is { Length: 0 } and not null;
-Tag(""IsBinary"", isBinary);";
+var result = {variableName} is {isPattern};
+Tag(""Result"", result);";
             var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("IsBinary", x => x.Should().BeNull());
-        }
-
-        [TestMethod]
-        public void LearnFromObjectContraint_Binary_And_RightNotDeterministic()
-        {
-            const string code = @"
-var s = new string('c', 1);
-var isBinary = s is not null and { Length: 0 };
-Tag(""IsBinary"", isBinary);";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("IsBinary", x => x.Should().BeNull());
-        }
-
-        [TestMethod]
-        public void LearnFromObjectContraint_Binary_And_BothNotDeterministic()
-        {
-            const string code = @"
-var s = new string('c', 1);
-var isBinary = s is { Length: > 10 } and { Length: < 100 };
-Tag(""IsBinary"", isBinary);";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("IsBinary", x => x.Should().BeNull());
-        }
-
-        [TestMethod]
-        public void LearnFromObjectContraint_Binary_Or_True()
-        {
-            const string code = @"
-var nullObject = (object)null;
-var isBinary = nullObject is null or not { };
-Tag(""IsBinary"", isBinary);";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("IsBinary", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
-        }
-
-        [TestMethod]
-        public void LearnFromObjectContraint_Binary_Or_False()
-        {
-            const string code = @"
-var nullObject = (object)null;
-var isBinary = nullObject is not null or { };
-Tag(""IsBinary"", isBinary);";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("IsBinary", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
-        }
-
-        [TestMethod]
-        public void LearnFromObjectContraint_Binary_Or_LeftNotDeterministic()
-        {
-            const string code = @"
-var s = new string('c', 1);
-var isBinary = s is { Length: 0 } or not null;
-Tag(""IsBinary"", isBinary);";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("IsBinary", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
-        }
-
-        [TestMethod]
-        public void LearnFromObjectContraint_Binary_Or_RightNotDeterministic()
-        {
-            const string code = @"
-var s = new string('c', 1);
-var isBinary = s is not null or { Length: 0 };
-Tag(""IsBinary"", isBinary);";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("IsBinary", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
-        }
-
-        [TestMethod]
-        public void LearnFromObjectContraint_Binary_Or_BothNotDeterministic()
-        {
-            const string code = @"
-var s = new string('c', 1);
-var isBinary = s is { Length: < 10 } or { Length: > 100 };
-Tag(""IsBinary"", isBinary);";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("IsBinary", x => x.Should().BeNull());
+            validator.ValidateTag("Result", x =>
+            {
+                if (expectedBoolConstraint is bool expected)
+                {
+                    x.Should().NotBeNull("we expect and constraint on the symbolValue");
+                    x.HasConstraint(BoolConstraint.From(expected)).Should().BeTrue(because: "we should have learned that result is {0}", expected);
+                }
+                else
+                {
+                    if (x != null)
+                    {
+                        x.HasConstraint<BoolConstraint>().Should().BeFalse(because: "we should not learn about the state of result");
+                    }
+                }
+            });
         }
     }
 }
