@@ -66,9 +66,6 @@ public class Sample
     private void Tag(string name, object arg) {{ }}
 }}", AnalyzerLanguage.CSharp, additionalChecks);
 
-        public static SETestContext CreateCSCompilationUnit(string compilationUnit, params SymbolicCheck[] additionalChecks) =>
-            new(compilationUnit, AnalyzerLanguage.CSharp, additionalChecks);
-
         public static SETestContext CreateVB(string methodBody, params SymbolicCheck[] additionalChecks) =>
             CreateVB(methodBody, null, additionalChecks);
 
