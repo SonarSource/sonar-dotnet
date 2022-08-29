@@ -21,6 +21,7 @@
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
 {
@@ -320,7 +321,7 @@ var nullableBoolTrue = (bool?)true;
 var nullableBoolFalse = (bool?)false;
 var nullableBoolNull = (bool?)null;
 ";
-            ValidateSetBoolConstraint(variableDeclarations, variableName, isPattern, expectedBoolConstraint);
+            ValidateSetBoolConstraint(variableDeclarations, variableName, isPattern, OperationKindEx.ConstantPattern, expectedBoolConstraint);
         }
 
         [DataTestMethod]
@@ -340,7 +341,7 @@ var objectUnknown = Unknown<object>();
 var stringNotNull = new string('c', 1);  // Make sure, we learn 's is not null'
 var stringNull = (string)null;
 ";
-            ValidateSetBoolConstraint(variableDeclarations, variableName, isPattern, expectedBoolConstraint);
+            ValidateSetBoolConstraint(variableDeclarations, variableName, isPattern, OperationKindEx.RecursivePattern, expectedBoolConstraint);
         }
 
 #if NET
@@ -358,7 +359,7 @@ var recordNotNull = new R(1, 2);
 var recordNull = (R)null;
 var recordUnknown = Unknown<R>();
 ";
-            ValidateSetBoolConstraint(variableDeclarations, additionalTypes: "record R(int A, int B);", variableName, isPattern, expectedBoolConstraint);
+            ValidateSetBoolConstraint(additionalTypes: "record R(int A, int B);", variableDeclarations: variableDeclarations, variableName: variableName, isPattern: isPattern, expectedOperation: OperationKindEx.RecursivePattern, expectedBoolConstraint: expectedBoolConstraint);
         }
 
 #endif
@@ -381,38 +382,38 @@ var objectNull = (object)null;
 var objectUnknown = Unknown<object>();
 var integer = new int();
 ";
-            ValidateSetBoolConstraint(variableDeclarations, variableName, isPattern, expectedBoolConstraint);
+            ValidateSetBoolConstraint(variableDeclarations, variableName, isPattern, OperationKindEx.DeclarationPattern, expectedBoolConstraint);
         }
 
         [DataTestMethod]
-        [DataRow("objectNull", "not null", false)]
-        [DataRow("objectNull", "not { }", true)]
-        [DataRow("objectNotNull", "not null", true)]
-        [DataRow("objectNotNull", "not { }", false)]
-        [DataRow("objectUnknown", "not null", null)]
-        [DataRow("objectUnknown", "not { }", null)]
-        [DataRow("objectNull", "not object", true)]
-        [DataRow("objectNull", "not not object", false)]
-        [DataRow("objectNotNull", "not object", false)]
-        [DataRow("objectNotNull", "not not object", true)]
-        [DataRow("objectUnknown", "not object", null)]
-        [DataRow("objectUnknown", "not not object", null)]
-        [DataRow("exceptionNull", "not object", true)]
-        [DataRow("exceptionNull", "not not object", false)]
-        [DataRow("exceptionNotNull", "not object", false)]
-        [DataRow("exceptionNotNull", "not not object", true)]
-        [DataRow("exceptionUnknown", "not object", null)]
-        [DataRow("exceptionUnknown", "not not object", null)]
-        [DataRow("objectNull", "not Exception", null)]
-        [DataRow("objectNull", "not not Exception", null)]
-        [DataRow("objectNotNull", "not Exception", null)]
-        [DataRow("objectNotNull", "not not Exception", null)]
-        [DataRow("objectUnknown", "not Exception", null)]
-        [DataRow("objectUnknown", "not not Exception", null)]
-        [DataRow("objectNull", "not not _", true)]
-        [DataRow("objectNotNull", "not not _", true)]
-        [DataRow("objectUnknown", "not not _", null)] // FN. Some patterns always match
-        public void NegateTypeDiscardPatternsSetBoolConstraint(string variableName, string isPattern, bool? expectedBoolConstraint)
+        [DataRow("objectNull", "not null", OperationKindEx.NegatedPattern, false)]
+        [DataRow("objectNull", "not { }", OperationKindEx.NegatedPattern, true)]
+        [DataRow("objectNotNull", "not null", OperationKindEx.NegatedPattern, true)]
+        [DataRow("objectNotNull", "not { }", OperationKindEx.NegatedPattern, false)]
+        [DataRow("objectUnknown", "not null", OperationKindEx.NegatedPattern, null)]
+        [DataRow("objectUnknown", "not { }", OperationKindEx.NegatedPattern, null)]
+        [DataRow("objectNull", "not object", OperationKindEx.TypePattern, true)]
+        [DataRow("objectNull", "not not object", OperationKindEx.TypePattern, false)]
+        [DataRow("objectNotNull", "not object", OperationKindEx.TypePattern, false)]
+        [DataRow("objectNotNull", "not not object", OperationKindEx.TypePattern, true)]
+        [DataRow("objectUnknown", "not object", OperationKindEx.TypePattern, null)]
+        [DataRow("objectUnknown", "not not object", OperationKindEx.TypePattern, null)]
+        [DataRow("exceptionNull", "not object", OperationKindEx.TypePattern, true)]
+        [DataRow("exceptionNull", "not not object", OperationKindEx.TypePattern, false)]
+        [DataRow("exceptionNotNull", "not object", OperationKindEx.TypePattern, false)]
+        [DataRow("exceptionNotNull", "not not object", OperationKindEx.TypePattern, true)]
+        [DataRow("exceptionUnknown", "not object", OperationKindEx.TypePattern, null)]
+        [DataRow("exceptionUnknown", "not not object", OperationKindEx.TypePattern, null)]
+        [DataRow("objectNull", "not Exception", OperationKindEx.TypePattern, null)]
+        [DataRow("objectNull", "not not Exception", OperationKindEx.TypePattern, null)]
+        [DataRow("objectNotNull", "not Exception", OperationKindEx.TypePattern, null)]
+        [DataRow("objectNotNull", "not not Exception", OperationKindEx.TypePattern, null)]
+        [DataRow("objectUnknown", "not Exception", OperationKindEx.TypePattern, null)]
+        [DataRow("objectUnknown", "not not Exception", OperationKindEx.TypePattern, null)]
+        [DataRow("objectNull", "not not _", OperationKindEx.DiscardPattern, true)]
+        [DataRow("objectNotNull", "not not _", OperationKindEx.DiscardPattern, true)]
+        [DataRow("objectUnknown", "not not _", OperationKindEx.DiscardPattern, null)] // FN. Some patterns always match
+        public void NegateTypeDiscardPatternsSetBoolConstraint(string variableName, string isPattern, OperationKind expectedOperation, bool? expectedBoolConstraint)
         {
             const string variableDeclarations = @"
 var objectNotNull = new object();
@@ -422,7 +423,7 @@ var exceptionNotNull = new Exception();
 var exceptionNull = (Exception)null;
 var exceptionUnknown = Unknown<Exception>();
 ";
-            ValidateSetBoolConstraint(variableDeclarations, variableName, isPattern, expectedBoolConstraint);
+            ValidateSetBoolConstraint(variableDeclarations, variableName, isPattern, expectedOperation, expectedBoolConstraint);
         }
 
         [DataTestMethod]
@@ -464,13 +465,22 @@ var stringNotNull = new string('c', 1);  // Make sure, we learn 's is not null'
 var stringNull = (string)null;
 var stringUnknown = Unknown<string>();
 ";
-            ValidateSetBoolConstraint(variableDeclarations, variableName, isPattern, expectedBoolConstraint);
+            ValidateSetBoolConstraint(variableDeclarations, variableName, isPattern, OperationKindEx.BinaryPattern, expectedBoolConstraint);
         }
 
-        private static void ValidateSetBoolConstraint(string variableDeclarations, string variableName, string isPattern, bool? expectedBoolConstraint)
-            => ValidateSetBoolConstraint(variableDeclarations, additionalTypes: "", variableName, isPattern, expectedBoolConstraint);
+        private static void ValidateSetBoolConstraint(string variableDeclarations,
+                                                      string variableName,
+                                                      string isPattern,
+                                                      OperationKind expectedOperation,
+                                                      bool? expectedBoolConstraint)
+            => ValidateSetBoolConstraint(additionalTypes: string.Empty, variableDeclarations, variableName, isPattern, expectedOperation, expectedBoolConstraint);
 
-        private static void ValidateSetBoolConstraint(string variableDeclarations, string additionalTypes, string variableName, string isPattern, bool? expectedBoolConstraint)
+        private static void ValidateSetBoolConstraint(string additionalTypes,
+                                                      string variableDeclarations,
+                                                      string variableName,
+                                                      string isPattern,
+                                                      OperationKind expectedOperation,
+                                                      bool? expectedBoolConstraint)
         {
             var code = @$"
 {variableDeclarations}
@@ -478,18 +488,19 @@ var stringUnknown = Unknown<string>();
 var result = {variableName} is {isPattern};
 Tag(""Result"", result);";
             var validator = SETestContext.CreateCS(code, additionalTypes: additionalTypes).Validator;
+            validator.ValidateContainsOperation(expectedOperation);
             validator.ValidateTag("Result", x =>
             {
                 if (expectedBoolConstraint is bool expected)
                 {
                     x.Should().NotBeNull("we expect an constraint on the symbolValue");
-                    x.HasConstraint(BoolConstraint.From(expected)).Should().BeTrue(because: "we should have learned that result is {0}", expected);
+                    x.HasConstraint(BoolConstraint.From(expected)).Should().BeTrue("we should have learned that result is {0}", expected);
                 }
                 else
                 {
                     if (x != null)
                     {
-                        x.HasConstraint<BoolConstraint>().Should().BeFalse(because: "we should not learn about the state of result");
+                        x.HasConstraint<BoolConstraint>().Should().BeFalse("we should not learn about the state of result");
                     }
                 }
             });
