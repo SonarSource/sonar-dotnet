@@ -46,7 +46,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
             if ((OperandConstraint(binary.LeftOperand) ?? OperandConstraint(binary.RightOperand)) is { } constraint
                 && (OperandSymbolWithoutConstraint(binary.LeftOperand) ?? OperandSymbolWithoutConstraint(binary.RightOperand)) is { } testedSymbol)
             {
-                constraint = constraint.ApplyOpposite(useOpposite ^ binary.OperatorKind is BinaryOperatorKind.NotEquals or BinaryOperatorKind.ObjectValueNotEquals);
+                constraint = constraint.ApplyOpposite(useOpposite ^ binary.OperatorKind.IsNotEquals());
                 return constraint is null ? null : state.SetSymbolConstraint(testedSymbol, constraint);
             }
             else
