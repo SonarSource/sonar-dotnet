@@ -35,12 +35,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                 ? context.SetOperationConstraint(constraint)
                 : context.State;
 
-        public static ProgramState Process(SymbolicContext context, IRecursivePatternOperationWrapper recursive) =>
-            ProcessDeclaration(context, recursive.DeclaredSymbol, true);
-
-        public static ProgramState Process(SymbolicContext context, IDeclarationPatternOperationWrapper declaration) =>
-            ProcessDeclaration(context, declaration.DeclaredSymbol, !declaration.MatchesNull);  // "... is var ..." should not set NotNull
-
         private static BoolConstraint BoolContraintFromConstant(ProgramState state, IIsPatternOperationWrapper isPattern) =>
             state[isPattern.Value] is { } value
             && isPattern.Pattern.WrappedOperation.Kind == OperationKindEx.ConstantPattern
@@ -73,13 +67,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                 OperationKindEx.BinaryPattern when As(IBinaryPatternOperationWrapper.FromOperation) is var binary => BoolConstraintFromBinaryPattern(state, valueConstraint, binary),
                 _ => null,
             };
-        public static ProgramState Process(SymbolicContext context, IIsPatternOperationWrapper isPattern) =>
-            context.State[isPattern.Value] is { } value
-            && isPattern.Pattern.WrappedOperation.Kind == OperationKindEx.ConstantPattern
-            && ConstantCheck.ConstraintFromValue(IConstantPatternOperationWrapper.FromOperation(isPattern.Pattern.WrappedOperation).Value.ConstantValue.Value) is BoolConstraint boolPattern
-            && PatternBoolConstraint(value, boolPattern) is { } newConstraint
-                ? context.SetOperationConstraint(newConstraint)
-                : context.State;
 
             T As<T>(Func<IOperation, T> fromOperation) =>
                  fromOperation(pattern.WrappedOperation);
@@ -125,9 +112,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                 _ => null,
             };
         }
-
-        private static bool IsTypeAssignableTo(ITypeSymbol type, ITypeSymbol assignableTo) =>
-            type.Equals(assignableTo); // Compilation.ClassifyConversion should be used for better results (Note: for cfg IOperation.SemanticModel is null)
 
         public static ProgramState Process(SymbolicContext context, IRecursivePatternOperationWrapper recursive) =>
             ProcessDeclaration(context, recursive.DeclaredSymbol, true);
