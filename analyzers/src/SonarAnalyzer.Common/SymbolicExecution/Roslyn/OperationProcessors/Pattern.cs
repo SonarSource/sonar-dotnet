@@ -35,6 +35,65 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                 ? context.SetOperationConstraint(constraint)
                 : context.State;
 
+        public static ProgramState Process(SymbolicContext context, IRecursivePatternOperationWrapper recursive) =>
+            ProcessDeclaration(context, recursive.DeclaredSymbol, true);
+
+        public static ProgramState Process(SymbolicContext context, IDeclarationPatternOperationWrapper declaration) =>
+            ProcessDeclaration(context, declaration.DeclaredSymbol, !declaration.MatchesNull);  // "... is var ..." should not set NotNull
+
+        public static ProgramState LearnBranchingConstraint(ProgramState state, IIsPatternOperationWrapper isPattern, bool useOpposite) =>
+            state.ResolveCapture(isPattern.Value).TrackedSymbol() is { } testedSymbol
+            && LearnBranchingConstraint(state, isPattern.Pattern, useOpposite) is { } constraint
+                ? state.SetSymbolConstraint(testedSymbol, constraint)
+                : state;
+
+        private static SymbolicConstraint LearnBranchingConstraint(ProgramState state, IPatternOperationWrapper pattern, bool useOpposite)
+        {
+            return pattern.WrappedOperation.Kind switch
+            {
+                OperationKindEx.ConstantPattern => ConstraintFromConstantPattern(state, As(IConstantPatternOperationWrapper.FromOperation), useOpposite),
+                OperationKindEx.NegatedPattern => LearnBranchingConstraint(state, As(INegatedPatternOperationWrapper.FromOperation).Pattern, !useOpposite),
+                OperationKindEx.TypePattern => ObjectConstraint.NotNull.ApplyOpposite(useOpposite),
+                _ => null
+            };
+
+            T As<T>(Func<IOperation, T> fromOperation) =>
+                fromOperation(pattern.WrappedOperation);
+        }
+
+        private static SymbolicConstraint ConstraintFromConstantPattern(ProgramState state, IConstantPatternOperationWrapper constant, bool useOpposite)
+        {
+            if (state[constant.Value] is { } value)
+            {
+                if (value.Constraint<BoolConstraint>() is { } boolConstraint && !useOpposite)   // Cannot use opposite on booleans. If it is not "true", it could be null, false or any other type
+                {
+                    return boolConstraint;
+                }
+                else if (value.Constraint<ObjectConstraint>() is { } objectConstraint)
+                {
+                    return objectConstraint.ApplyOpposite(useOpposite);
+                }
+            }
+            return null;
+        }
+
+        private static ProgramState ProcessDeclaration(SymbolicContext context, ISymbol declaredSymbol, bool setNotNull)
+        {
+            if (declaredSymbol == null)
+            {
+                return context.State;
+            }
+            else
+            {
+                var state = context.Operation.Parent.AsIsPattern() is { } parentIsPattern && parentIsPattern.Value.TrackedSymbol() is { } sourceSymbol
+                    ? context.State.SetSymbolValue(declaredSymbol, context.State[sourceSymbol])  // ToDo: MMF-2563 should define relation between tested and declared symbol
+                    : context.State;
+                return setNotNull
+                    ? state.SetSymbolConstraint(declaredSymbol, ObjectConstraint.NotNull)
+                    : state;
+            }
+        }
+
         private static BoolConstraint BoolContraintFromConstant(ProgramState state, IIsPatternOperationWrapper isPattern) =>
             state[isPattern.Value] is { } value
             && isPattern.Pattern.WrappedOperation.Kind == OperationKindEx.ConstantPattern
@@ -42,6 +101,11 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
             && PatternBoolConstraint(value, boolPattern) is { } newConstraint
                 ? newConstraint
                 : null;
+
+        private static BoolConstraint PatternBoolConstraint(SymbolicValue value, BoolConstraint pattern) =>
+            value.HasConstraint<BoolConstraint>()
+                ? BoolConstraint.From(value.HasConstraint(pattern))
+                : null; // We cannot take conclusive decision
 
         private static SymbolicConstraint BoolConstraintFromPattern(ProgramState state, IIsPatternOperationWrapper isPattern) =>
             state[isPattern.Value] is { } value
@@ -118,7 +182,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                 }
                 else if (left == BoolConstraint.False || right == BoolConstraint.False)
                 {
-                    return BoolConstraint.From(false);
+                    return BoolConstraint.False;
                 }
                 else
                 {
@@ -130,80 +194,16 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
             {
                 if (left == BoolConstraint.True || right == BoolConstraint.True)
                 {
-                    return BoolConstraint.From(true);
+                    return BoolConstraint.True;
                 }
                 else if (left == BoolConstraint.False && right == BoolConstraint.False)
                 {
-                    return BoolConstraint.From(false);
+                    return BoolConstraint.False;
                 }
                 else
                 {
                     return null;
                 }
-            }
-        }
-
-        public static ProgramState Process(SymbolicContext context, IRecursivePatternOperationWrapper recursive) =>
-            ProcessDeclaration(context, recursive.DeclaredSymbol, true);
-
-        public static ProgramState Process(SymbolicContext context, IDeclarationPatternOperationWrapper declaration) =>
-            ProcessDeclaration(context, declaration.DeclaredSymbol, !declaration.MatchesNull);  // "... is var ..." should not set NotNull
-
-        public static ProgramState LearnBranchingConstraint(ProgramState state, IIsPatternOperationWrapper isPattern, bool useOpposite) =>
-            state.ResolveCapture(isPattern.Value).TrackedSymbol() is { } testedSymbol
-            && LearnBranchingConstraint(state, isPattern.Pattern, useOpposite) is { } constraint
-                ? state.SetSymbolConstraint(testedSymbol, constraint)
-                : state;
-
-        private static SymbolicConstraint LearnBranchingConstraint(ProgramState state, IPatternOperationWrapper pattern, bool useOpposite)
-        {
-            return pattern.WrappedOperation.Kind switch
-            {
-                OperationKindEx.ConstantPattern => ConstraintFromConstantPattern(state, As(IConstantPatternOperationWrapper.FromOperation), useOpposite),
-                OperationKindEx.NegatedPattern => LearnBranchingConstraint(state, As(INegatedPatternOperationWrapper.FromOperation).Pattern, !useOpposite),
-                OperationKindEx.TypePattern => ObjectConstraint.NotNull.ApplyOpposite(useOpposite),
-                _ => null
-            };
-
-            T As<T>(Func<IOperation, T> fromOperation) =>
-                fromOperation(pattern.WrappedOperation);
-        }
-
-        private static SymbolicConstraint ConstraintFromConstantPattern(ProgramState state, IConstantPatternOperationWrapper constant, bool useOpposite)
-        {
-            if (state[constant.Value] is { } value)
-            {
-                if (value.Constraint<BoolConstraint>() is { } boolConstraint && !useOpposite)   // Cannot use opposite on booleans. If it is not "true", it could be null, false or any other type
-                {
-                    return boolConstraint;
-                }
-                else if (value.Constraint<ObjectConstraint>() is { } objectConstraint)
-                {
-                    return objectConstraint.ApplyOpposite(useOpposite);
-                }
-            }
-            return null;
-        }
-
-        private static BoolConstraint PatternBoolConstraint(SymbolicValue value, BoolConstraint pattern) =>
-            value.HasConstraint<BoolConstraint>()
-                ? BoolConstraint.From(value.HasConstraint(pattern))
-                : null; // We cannot take conclusive decision
-
-        private static ProgramState ProcessDeclaration(SymbolicContext context, ISymbol declaredSymbol, bool setNotNull)
-        {
-            if (declaredSymbol == null)
-            {
-                return context.State;
-            }
-            else
-            {
-                var state = context.Operation.Parent.AsIsPattern() is { } parentIsPattern && parentIsPattern.Value.TrackedSymbol() is { } sourceSymbol
-                    ? context.State.SetSymbolValue(declaredSymbol, context.State[sourceSymbol])  // ToDo: MMF-2563 should define relation between tested and declared symbol
-                    : context.State;
-                return setNotNull
-                    ? state.SetSymbolConstraint(declaredSymbol, ObjectConstraint.NotNull)
-                    : state;
             }
         }
     }
