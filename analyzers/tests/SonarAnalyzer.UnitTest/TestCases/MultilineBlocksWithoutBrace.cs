@@ -397,7 +397,7 @@ Act.Second(); // Noncompliant
 
     public override bool Equals(object obj)
     {
-        if (obj is null) return false; // probably irrelevant, just pasting as is
+        if (obj is null) return false;
         return obj is Other other && Equals(other); // Compliant
     }
 
