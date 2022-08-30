@@ -327,25 +327,14 @@ Tag(""End"", arg);";
         public void RecursivePatternPropertySubPatternSetBoolConstraint(string isPattern, bool? expectedBoolConstraint) =>
             ValidateSetBoolConstraint(isPattern, OperationKindEx.RecursivePattern, expectedBoolConstraint);
 
-#if NET
-
         [DataTestMethod]
-        [DataRow("recordNotNull is (A: 1, B: 2)", null)]
-        [DataRow("recordNotNull is (A: var a, B: _)", true)]
-        [DataRow("recordNull is (A: 1, B: 2)", false)]
-        [DataRow("recordNull is (A: var a, B: _)", false)]
-        [DataRow("recordUnknown is (A: var a, B: _)", null)]
-        public void RecursivePatternDeconstructionSubpatternSetBoolConstraint(string isPattern, bool? expectedBoolConstraint)
-        {
-            const string variableDeclarations = @"
-var recordNotNull = new R(1, 2);
-var recordNull = (R)null;
-var recordUnknown = Unknown<R>();
-";
-            ValidateSetBoolConstraint(additionalTypes: "record R(int A, int B);", additionalVariables: variableDeclarations, isPattern, OperationKindEx.RecursivePattern, expectedBoolConstraint);
-        }
-
-#endif
+        [DataRow("deconstructableNotNull is (A: 1, B: 2)", null)]
+        [DataRow("deconstructableNotNull is (A: var a, B: _)", true)]
+        [DataRow("deconstructableNull is (A: 1, B: 2)", false)]
+        [DataRow("deconstructableNull is (A: var a, B: _)", false)]
+        [DataRow("deconstructableUnknown is (A: var a, B: _)", null)]
+        public void RecursivePatternDeconstructionSubpatternSetBoolConstraint(string isPattern, bool? expectedBoolConstraint) =>
+            ValidateSetBoolConstraint(isPattern, OperationKindEx.RecursivePattern, expectedBoolConstraint);
 
         [DataTestMethod]
         [DataRow("objectNull is var a", true)]
@@ -435,35 +424,41 @@ var recordUnknown = Unknown<R>();
         public void AndOrPatternsSetBoolConstraint(string isPattern, bool? expectedBoolConstraint) =>
             ValidateSetBoolConstraint(isPattern, OperationKindEx.BinaryPattern, expectedBoolConstraint);
 
-        private static void ValidateSetBoolConstraint(string isPattern, OperationKind expectedOperation, bool? expectedBoolConstraint) =>
-            ValidateSetBoolConstraint(additionalTypes: string.Empty, additionalVariables: string.Empty, isPattern, expectedOperation, expectedBoolConstraint);
-
-        private static void ValidateSetBoolConstraint(string additionalTypes, string additionalVariables, string isPattern, OperationKind expectedOperation, bool? expectedBoolConstraint)
+        private static void ValidateSetBoolConstraint(string isPattern, OperationKind expectedOperation, bool? expectedBoolConstraint)
         {
             var code = @$"
-public void Main()
-{{
-    var objectNotNull = new object();
-    var objectNull = (object)null;
-    var objectUnknown = Unknown<object>();
-    var exceptionNotNull = new Exception();
-    var exceptionNull = (Exception)null;
-    var exceptionUnknown = Unknown<Exception>();
-    var nullableBoolTrue = (bool?)true;
-    var nullableBoolFalse = (bool?)false;
-    var nullableBoolNull = (bool?)null;
-    var nullableBoolUnknown = Unknown<bool?>();
-    var stringNotNull = new string('c', 1);  // Make sure, we learn 's is not null'
-    var stringNull = (string)null;
-    var stringUnknown = Unknown<string>();
-    var integer = new int();
-    {additionalVariables}
+    public void Main()
+    {{
+        var objectNotNull = new object();
+        var objectNull = (object)null;
+        var objectUnknown = Unknown<object>();
+        var exceptionNotNull = new Exception();
+        var exceptionNull = (Exception)null;
+        var exceptionUnknown = Unknown<Exception>();
+        var nullableBoolTrue = (bool?)true;
+        var nullableBoolFalse = (bool?)false;
+        var nullableBoolNull = (bool?)null;
+        var nullableBoolUnknown = Unknown<bool?>();
+        var stringNotNull = new string('c', 1);  // Make sure, we learn 's is not null'
+        var stringNull = (string)null;
+        var stringUnknown = Unknown<string>();
+        var integer = new int();
+        var deconstructableNull = (Deconstructable)null;
+        var deconstructableNotNull = new Deconstructable();
+        var deconstructableUnknown = Unknown<Deconstructable>();
 
-    var result = {isPattern};
-    Tag(""Result"", result);
-}}
+        var result = {isPattern};
+        Tag(""Result"", result);
+    }}
 
-{additionalTypes}
+    public class Deconstructable
+    {{
+        public void Deconstruct(out int A, out int B)
+        {{
+            A = 1;
+            B = 2;
+        }}
+    }}
 ";
             var validator = SETestContext.CreateCSMethod(code).Validator;
             validator.ValidateContainsOperation(expectedOperation);
