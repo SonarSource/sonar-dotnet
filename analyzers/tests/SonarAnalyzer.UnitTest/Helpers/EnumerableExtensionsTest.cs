@@ -20,6 +20,7 @@
 
 #pragma warning disable SA1122 // Use string.Empty for empty strings
 
+using System.Globalization;
 using System.Threading;
 
 namespace SonarAnalyzer.UnitTest.Helpers
