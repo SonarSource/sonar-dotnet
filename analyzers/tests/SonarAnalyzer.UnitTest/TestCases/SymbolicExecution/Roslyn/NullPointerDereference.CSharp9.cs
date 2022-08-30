@@ -116,7 +116,7 @@ public class Sample
             string and not null => arg,
             _ => ""
         };
-        res.ToString();
+        res.ToString();     // Noncompliant FP FIXME
 
         res = arg switch
         {
@@ -124,7 +124,7 @@ public class Sample
             not not null => arg,
             _ => ""
         };
-        res.ToString();     // FN
+        res.ToString();     // Noncompliant
 
         object o = null;
         o.ToString();       // Noncompliant

@@ -158,7 +158,7 @@ namespace Tests.Diagnostics
                     break;
 
                 case null:
-                    o.ToString(); // FIXME Non-compliant
+                    o.ToString(); // Noncompliant
                     break;
 
                 default:
@@ -233,7 +233,7 @@ namespace Tests.Diagnostics
         default:
           return;
       }
-      var s1 = obj.ToString(); // FIXME Non-compliant
+      var s1 = obj.ToString(); // Noncompliant
     }
 
     public void Method3(object obj)
@@ -259,7 +259,7 @@ namespace Tests.Diagnostics
         default:
           break;
       }
-      var s = obj.ToString(); // Noncompliant FIXME (was compliant before)
+      var s = obj.ToString();
     }
 
     // https://github.com/SonarSource/sonar-dotnet/issues/2528

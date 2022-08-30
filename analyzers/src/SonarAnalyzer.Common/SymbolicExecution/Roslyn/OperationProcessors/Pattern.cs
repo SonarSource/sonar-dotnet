@@ -29,7 +29,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
     internal static class Pattern
     {
         public static ProgramState Process(SymbolicContext context, IIsPatternOperationWrapper isPattern) =>
-            context.State[isPattern.Value] is { } value // FIXME: Here as well
+            context.State[isPattern.Value] is { } value
             && isPattern.Pattern.WrappedOperation.Kind == OperationKindEx.ConstantPattern
             && ConstantCheck.ConstraintFromValue(IConstantPatternOperationWrapper.FromOperation(isPattern.Pattern.WrappedOperation).Value.ConstantValue.Value) is BoolConstraint boolPattern
             && PatternBoolConstraint(value, boolPattern) is { } newConstraint
