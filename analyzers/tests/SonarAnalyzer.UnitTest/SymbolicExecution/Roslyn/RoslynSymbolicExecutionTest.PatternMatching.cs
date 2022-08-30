@@ -313,19 +313,8 @@ Tag(""End"", arg);";
         [DataRow("nullableBoolNull is false", null)] // Should be false.
         [DataRow("nullableBoolUnknown is true", null)]
         [DataRow("nullableBoolUnknown is false", null)]
-        public void ConstantPatternSetBoolConstraint(string isPattern, bool? expectedBoolConstraint)
-        {
-            const string variableDeclarations = @"
-var objectNotNull = new object();
-var objectNull = (object)null;
-var objectUnknown = Unknown<object>();
-var nullableBoolTrue = (bool?)true;
-var nullableBoolFalse = (bool?)false;
-var nullableBoolNull = (bool?)null;
-var nullableBoolUnknown = Unknown<bool?>();
-";
-            ValidateSetBoolConstraint(variableDeclarations, isPattern, OperationKindEx.ConstantPattern, expectedBoolConstraint);
-        }
+        public void ConstantPatternSetBoolConstraint(string isPattern, bool? expectedBoolConstraint) =>
+            ValidateSetBoolConstraint(isPattern, OperationKindEx.ConstantPattern, expectedBoolConstraint);
 
         [DataTestMethod]
         [DataRow("objectNotNull is { }", true)]
@@ -335,17 +324,8 @@ var nullableBoolUnknown = Unknown<bool?>();
         [DataRow("stringNotNull is { Length: 0 }", null)]
         [DataRow("stringNull is { Length: 0 }", false)]
         [DataRow("stringNotNull is { Length: var length }", true)] // only deconstruction
-        public void RecursivePatternPropertySubPatternSetBoolConstraint(string isPattern, bool? expectedBoolConstraint)
-        {
-            const string variableDeclarations = @"
-var objectNotNull = new object();
-var objectNull = (object)null;
-var objectUnknown = Unknown<object>();
-var stringNotNull = new string('c', 1);  // Make sure, we learn 's is not null'
-var stringNull = (string)null;
-";
-            ValidateSetBoolConstraint(variableDeclarations, isPattern, OperationKindEx.RecursivePattern, expectedBoolConstraint);
-        }
+        public void RecursivePatternPropertySubPatternSetBoolConstraint(string isPattern, bool? expectedBoolConstraint) =>
+            ValidateSetBoolConstraint(isPattern, OperationKindEx.RecursivePattern, expectedBoolConstraint);
 
 #if NET
 
@@ -362,7 +342,7 @@ var recordNotNull = new R(1, 2);
 var recordNull = (R)null;
 var recordUnknown = Unknown<R>();
 ";
-            ValidateSetBoolConstraint(additionalTypes: "record R(int A, int B);", variableDeclarations, isPattern, OperationKindEx.RecursivePattern, expectedBoolConstraint);
+            ValidateSetBoolConstraint(additionalTypes: "record R(int A, int B);", additionalVariables: variableDeclarations, isPattern, OperationKindEx.RecursivePattern, expectedBoolConstraint);
         }
 
 #endif
@@ -377,16 +357,8 @@ var recordUnknown = Unknown<R>();
         [DataRow("objectNull is int i", false)]
         [DataRow("objectNotNull is int i", null)]
         [DataRow("integer is object o", true)]
-        public void DeclarationPatternSetBoolConstraint(string isPattern, bool? expectedBoolConstraint)
-        {
-            const string variableDeclarations = @"
-var objectNotNull = new object();
-var objectNull = (object)null;
-var objectUnknown = Unknown<object>();
-var integer = new int();
-";
-            ValidateSetBoolConstraint(variableDeclarations, isPattern, OperationKindEx.DeclarationPattern, expectedBoolConstraint);
-        }
+        public void DeclarationPatternSetBoolConstraint(string isPattern, bool? expectedBoolConstraint) =>
+            ValidateSetBoolConstraint(isPattern, OperationKindEx.DeclarationPattern, expectedBoolConstraint);
 
         [DataTestMethod]
         [DataRow("objectNull is not null", OperationKindEx.NegatedPattern, false)]
@@ -427,22 +399,8 @@ var integer = new int();
         [DataRow("objectNull is not not _", OperationKindEx.DiscardPattern, true)]
         [DataRow("objectNotNull is not not _", OperationKindEx.DiscardPattern, true)]
         [DataRow("objectUnknown is not not _", OperationKindEx.DiscardPattern, null)] // FN. Some patterns always match
-        public void NegateTypeDiscardPatternsSetBoolConstraint(string isPattern, OperationKind expectedOperation, bool? expectedBoolConstraint)
-        {
-            const string variableDeclarations = @"
-var objectNotNull = new object();
-var objectNull = (object)null;
-var objectUnknown = Unknown<object>();
-var exceptionNotNull = new Exception();
-var exceptionNull = (Exception)null;
-var exceptionUnknown = Unknown<Exception>();
-var nullableBoolTrue = (bool?)true;
-var nullableBoolFalse = (bool?)false;
-var nullableBoolNull = (bool?)null;
-var nullableBoolUnknown = Unknown<bool?>();
-";
-            ValidateSetBoolConstraint(variableDeclarations, isPattern, expectedOperation, expectedBoolConstraint);
-        }
+        public void NegateTypeDiscardPatternsSetBoolConstraint(string isPattern, OperationKind expectedOperation, bool? expectedBoolConstraint) =>
+            ValidateSetBoolConstraint(isPattern, expectedOperation, expectedBoolConstraint);
 
         [DataTestMethod]
         [DataRow("objectNull is null and not { }", true)]
@@ -474,36 +432,32 @@ var nullableBoolUnknown = Unknown<bool?>();
         [DataRow("stringNull is { Length: > 10 } or { Length: < 100 }", false)]
         [DataRow("stringNotNull is { Length: > 10 } or { Length: < 100 }", null)]
         [DataRow("stringUnknown is { Length: > 10 } or { Length: < 100 }", null)]
-        public void AndOrPatternsSetBoolConstraint(string isPattern, bool? expectedBoolConstraint)
-        {
-            const string variableDeclarations = @"
-var objectNotNull = new object();
-var objectNull = (object)null;
-var objectUnknown = Unknown<object>();
-var stringNotNull = new string('c', 1);  // Make sure, we learn 'stringNotNull is not null'
-var stringNull = (string)null;
-var stringUnknown = Unknown<string>();
-var exceptionNotNull = new Exception();
-";
-            ValidateSetBoolConstraint(variableDeclarations, isPattern, OperationKindEx.BinaryPattern, expectedBoolConstraint);
-        }
+        public void AndOrPatternsSetBoolConstraint(string isPattern, bool? expectedBoolConstraint) =>
+            ValidateSetBoolConstraint(isPattern, OperationKindEx.BinaryPattern, expectedBoolConstraint);
 
-        private static void ValidateSetBoolConstraint(string variableDeclarations,
-                                                      string isPattern,
-                                                      OperationKind expectedOperation,
-                                                      bool? expectedBoolConstraint) =>
-            ValidateSetBoolConstraint(additionalTypes: string.Empty, variableDeclarations, isPattern, expectedOperation, expectedBoolConstraint);
+        private static void ValidateSetBoolConstraint(string isPattern, OperationKind expectedOperation, bool? expectedBoolConstraint) =>
+            ValidateSetBoolConstraint(additionalTypes: string.Empty, additionalVariables: string.Empty, isPattern, expectedOperation, expectedBoolConstraint);
 
-        private static void ValidateSetBoolConstraint(string additionalTypes,
-                                                      string variableDeclarations,
-                                                      string isPattern,
-                                                      OperationKind expectedOperation,
-                                                      bool? expectedBoolConstraint)
+        private static void ValidateSetBoolConstraint(string additionalTypes, string additionalVariables, string isPattern, OperationKind expectedOperation, bool? expectedBoolConstraint)
         {
             var code = @$"
 public void Main()
 {{
-    {variableDeclarations}
+    var objectNotNull = new object();
+    var objectNull = (object)null;
+    var objectUnknown = Unknown<object>();
+    var exceptionNotNull = new Exception();
+    var exceptionNull = (Exception)null;
+    var exceptionUnknown = Unknown<Exception>();
+    var nullableBoolTrue = (bool?)true;
+    var nullableBoolFalse = (bool?)false;
+    var nullableBoolNull = (bool?)null;
+    var nullableBoolUnknown = Unknown<bool?>();
+    var stringNotNull = new string('c', 1);  // Make sure, we learn 's is not null'
+    var stringNull = (string)null;
+    var stringUnknown = Unknown<string>();
+    var integer = new int();
+    {additionalVariables}
 
     var result = {isPattern};
     Tag(""Result"", result);
