@@ -118,10 +118,8 @@ public sealed class MultilineBlocksWithoutBrace : SonarDiagnosticAnalyzer
     private static LinePosition ProxyStartPosition(SyntaxNode node)
     {
         var line = StartPosition(node).Line;
-        return node.AncestorsAndSelf()
-            .Where(x => StartPosition(x).Line == line)
-            .Select(x => Proxy(x, x != node))
-            .Last();
+        var firstOnLine = node.AncestorsAndSelf().Last(x => StartPosition(x).Line == line);
+        return Proxy(firstOnLine, firstOnLine != node);
 
         static LinePosition Proxy(SyntaxNode node, bool isAncestor)
         {
