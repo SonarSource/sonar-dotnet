@@ -25,7 +25,7 @@ using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 {
     [TestClass]
-    public class SymbolicValueAssertionsTests
+    public class SymbolicValueAssertionsTest
     {
         [TestMethod]
         public void SymbolicValue_HaveConstraint_Pass()
