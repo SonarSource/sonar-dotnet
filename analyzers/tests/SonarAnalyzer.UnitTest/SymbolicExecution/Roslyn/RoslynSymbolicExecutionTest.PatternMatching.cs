@@ -493,7 +493,7 @@ var exceptionNotNull = new Exception();
                                                       string isPattern,
                                                       OperationKind expectedOperation,
                                                       bool? expectedBoolConstraint) =>
-            => ValidateSetBoolConstraint(additionalTypes: string.Empty, variableDeclarations, variableName, isPattern, expectedOperation, expectedBoolConstraint);
+            ValidateSetBoolConstraint(additionalTypes: string.Empty, variableDeclarations, variableName, isPattern, expectedOperation, expectedBoolConstraint);
 
         private static void ValidateSetBoolConstraint(string additionalTypes,
                                                       string variableDeclarations,
