@@ -106,10 +106,36 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
             var right = BoolConstraintFromPattern(state, valueConstraint, binaryPattern.RightPattern);
             return binaryPattern.OperatorKind switch
             {
-                BinaryOperatorKind.And when left != null && right != null => BoolConstraint.From(left == BoolConstraint.True && right == BoolConstraint.True),
-                BinaryOperatorKind.Or when left != null || right != null => BoolConstraint.From(left == BoolConstraint.True || right == BoolConstraint.True),
+                BinaryOperatorKind.And => AndCombine(left, right),
+                BinaryOperatorKind.Or => OrCombine(left, right),
                 _ => null,
             };
+
+            static BoolConstraint AndCombine(SymbolicConstraint left, SymbolicConstraint right)
+            {
+                if (left == BoolConstraint.True && right == BoolConstraint.True)
+                {
+                    return BoolConstraint.From(true);
+                }
+                else if (left == BoolConstraint.False || right == BoolConstraint.False)
+                {
+                    return BoolConstraint.From(false);
+                }
+                return null;
+            }
+
+            static BoolConstraint OrCombine(SymbolicConstraint left, SymbolicConstraint right)
+            {
+                if (left == BoolConstraint.True || right == BoolConstraint.True)
+                {
+                    return BoolConstraint.From(true);
+                }
+                else if (left == BoolConstraint.False && right == BoolConstraint.False)
+                {
+                    return BoolConstraint.From(false);
+                }
+                return null;
+            }
         }
 
         public static ProgramState Process(SymbolicContext context, IRecursivePatternOperationWrapper recursive) =>

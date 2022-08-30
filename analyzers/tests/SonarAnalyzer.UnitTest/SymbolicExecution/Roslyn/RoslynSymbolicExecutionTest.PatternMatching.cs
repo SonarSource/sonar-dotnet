@@ -466,6 +466,7 @@ var nullableBoolUnknown = Unknown<bool?>();
         [DataRow("objectUnknown", "null or { }", null)]  // FN. Matches always.
         [DataRow("stringNull", "{ Length: 0 } or not null", false)]
         [DataRow("stringNotNull", "{ Length: 0 } or not null", true)]
+        [DataRow("stringNotNull", "{ Length: 0 } or null", null)]
         [DataRow("stringUnknown", "{ Length: 0 } or not null", null)]
         [DataRow("stringNull", "not null or { Length: 0 }", false)]
         [DataRow("stringNotNull", "not null or { Length: 0 }", true)]
@@ -482,6 +483,7 @@ var objectUnknown = Unknown<object>();
 var stringNotNull = new string('c', 1);  // Make sure, we learn 'stringNotNull is not null'
 var stringNull = (string)null;
 var stringUnknown = Unknown<string>();
+var exceptionNotNull = new Exception();
 ";
             ValidateSetBoolConstraint(variableDeclarations, variableName, isPattern, OperationKindEx.BinaryPattern, expectedBoolConstraint);
         }
