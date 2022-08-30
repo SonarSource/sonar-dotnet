@@ -26,6 +26,13 @@ namespace SonarAnalyzer.UnitTest.Extensions
     [TestClass]
     public class EnumerableExtensionsTest
     {
+        [TestMethod]
+        public void JoinAndNull()
+        {
+            var result = ((object[])null).JoinAnd();
+            result.Should().Be(string.Empty);
+        }
+
         [DataTestMethod]
         [DataRow("")]
         [DataRow("", null)]
