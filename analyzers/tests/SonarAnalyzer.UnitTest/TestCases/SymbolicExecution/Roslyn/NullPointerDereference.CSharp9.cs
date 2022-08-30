@@ -85,7 +85,7 @@ public class Sample
             }
             else
             {
-                o.ToString();   // Non-compliant FIXME
+                o.ToString();   // Noncompliant
             }
         }
 
@@ -97,7 +97,7 @@ public class Sample
             }
             else
             {
-                o.ToString();   // Non-compliant FIXME
+                o.ToString();   // Noncompliant
             }
         }
     }
@@ -116,7 +116,7 @@ public class Sample
             string and not null => arg,
             _ => ""
         };
-        res.ToString();     // Noncompliant FP FIXME
+        res.ToString();     // Compliant
 
         res = arg switch
         {
