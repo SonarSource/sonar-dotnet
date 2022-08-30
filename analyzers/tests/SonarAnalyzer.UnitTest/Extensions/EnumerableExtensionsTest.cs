@@ -78,5 +78,18 @@ namespace SonarAnalyzer.UnitTest.Extensions
                 Thread.CurrentThread.CurrentUICulture = oldUiLocale;
             }
         }
+
+        [TestMethod]
+        public void JoinAndMixedClasses()
+        {
+            var collection = new Exception[] {
+                new IndexOutOfRangeException("IndexOutOfRangeMessage"),
+                new InvalidOperationException("OperationMessage"),
+                null,
+                new NotSupportedException("NotSupportedMessage"),
+            };
+            var result = collection.JoinAnd();
+            result.Should().Be("System.IndexOutOfRangeException: IndexOutOfRangeMessage, System.InvalidOperationException: OperationMessage, and System.NotSupportedException: NotSupportedMessage");
+        }
     }
 }

@@ -161,7 +161,7 @@ namespace SonarAnalyzer.Helpers
         /// </list>
         /// </summary>
         public static string JoinAnd<T>(this IEnumerable<T> values) =>
-            values?.Select(x => x?.ToString() ?? string.Empty).Where(x => !string.IsNullOrWhiteSpace(x)).ToList() switch
+            values?.Select(x => x?.ToString()).Where(x => !string.IsNullOrWhiteSpace(x)).ToList() switch
             {
                 { Count: > 2 } serial => $"{string.Join(", ", serial.Take(serial.Count - 1))}, and {serial[serial.Count - 1]}",
                 { Count: 2 } pair => $"{pair[0]} and {pair[1]}",
