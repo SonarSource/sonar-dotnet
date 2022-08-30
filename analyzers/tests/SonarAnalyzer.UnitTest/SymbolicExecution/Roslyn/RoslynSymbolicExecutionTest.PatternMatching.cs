@@ -350,7 +350,7 @@ var recordUnknown = Unknown<R>();
         [DataTestMethod]
         [DataRow("objectNull is var a", true)]
         [DataRow("objectNotNull is var a", true)]
-        [DataRow("objectUnknown is var a", null)] // FN. Should be "true". Some patterns always match.
+        [DataRow("objectUnknown is var a", null)] // Should be "true". Some patterns always match.
         [DataRow("objectNull is object o", false)]
         [DataRow("objectNotNull is object o", true)]
         [DataRow("objectUnknown is object o", null)]
@@ -421,7 +421,7 @@ var recordUnknown = Unknown<R>();
         [DataRow("objectUnknown is null or not { }", null)]
         [DataRow("objectNull is null or { }", true)]
         [DataRow("objectNotNull is null or { }", true)]
-        [DataRow("objectUnknown is null or { }", null)]  // FN. Matches always.
+        [DataRow("objectUnknown is null or { }", null)]  // Should be true. Matches always.
         [DataRow("stringNull is { Length: 0 } or not null", false)]
         [DataRow("stringNotNull is { Length: 0 } or not null", true)]
         [DataRow("stringNotNull is { Length: 0 } or null", null)]
@@ -474,12 +474,9 @@ public void Main()
                     x.Should().NotBeNull("we expect {expectedBoolConstraint} on the result");
                     x.HasConstraint(BoolConstraint.From(expected)).Should().BeTrue("we should have learned that result is {0}", expected);
                 }
-                else
+                else if (x != null)
                 {
-                    if (x != null)
-                    {
-                        x.HasConstraint<BoolConstraint>().Should().BeFalse("we should not learn about the state of result");
-                    }
+                    x.HasConstraint<BoolConstraint>().Should().BeFalse("we should not learn about the state of result");
                 }
             });
         }
