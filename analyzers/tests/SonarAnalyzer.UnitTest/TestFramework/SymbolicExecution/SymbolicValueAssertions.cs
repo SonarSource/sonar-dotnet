@@ -26,6 +26,12 @@ using SonarAnalyzer.SymbolicExecution.Roslyn;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 {
+    public static class SymbolicValueExtensions
+    {
+        public static SymbolicValueAssertions Should(this SymbolicValue instance) =>
+            new(instance);
+    }
+
     public class SymbolicValueAssertions : ReferenceTypeAssertions<SymbolicValue, SymbolicValueAssertions>
     {
         protected override string Identifier => "symbolicValue";
@@ -154,11 +160,5 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
                 .ForCondition(allConstraints => allConstraints.Count != 0)
                 .FailWith("Expected {context:symbolicValue} to have constraints {0}{reason}, but symbolicValue has no constraints.", constraints)
                 .Then;
-    }
-
-    public static class SymbolicValueExtensions
-    {
-        public static SymbolicValueAssertions Should(this SymbolicValue instance) =>
-            new(instance);
     }
 }
