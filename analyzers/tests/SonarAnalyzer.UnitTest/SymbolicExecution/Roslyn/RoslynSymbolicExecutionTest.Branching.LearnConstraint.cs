@@ -422,6 +422,29 @@ if (value = boolParameter)
                 .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
         }
 
+        [TestMethod]
+        public void Branching_LearnsObjectConstraint_FlowCapture()
+        {
+            const string code = @"
+switch (arg)
+{
+    case null:
+        Tag(""Null"", arg);
+        break;
+    default:
+        Tag(""Default"", arg);
+        break;
+}
+Tag(""End"", arg);";
+            var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+            validator.ValidateContainsOperation(OperationKind.FlowCaptureReference);
+            validator.ValidateTag("Null", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("Default", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
+        }
+
         private static ValidatorTestCheck CreateIfElseEndValidatorCS(string expression, OperationKind expectedOperation)
         {
             var code = @$"

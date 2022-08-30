@@ -43,7 +43,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
             ProcessDeclaration(context, declaration.DeclaredSymbol, !declaration.MatchesNull);  // "... is var ..." should not set NotNull
 
         public static ProgramState LearnBranchingConstraint(ProgramState state, IIsPatternOperationWrapper isPattern, bool useOpposite) =>
-            isPattern.Value.TrackedSymbol() is { } testedSymbol
+            state.ResolveCapture(isPattern.Value).TrackedSymbol() is { } testedSymbol
             && LearnBranchingConstraint(state, isPattern.Pattern, useOpposite) is { } constraint
                 ? state.SetSymbolConstraint(testedSymbol, constraint)
                 : state;

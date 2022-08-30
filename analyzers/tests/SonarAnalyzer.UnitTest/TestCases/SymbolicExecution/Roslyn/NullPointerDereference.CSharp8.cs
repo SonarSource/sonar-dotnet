@@ -58,7 +58,7 @@
         {
             var result = s switch
             {
-                null => s.ToString(), // FIXME Non-compliant
+                null => s.ToString(), // Noncompliant
                 _ => s.ToString()
             };
         }
