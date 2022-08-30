@@ -76,7 +76,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
             {
                 { MatchesNull: true } => BoolConstraint.True,
                 _ when valueConstraint == ObjectConstraint.Null => BoolConstraint.False,
-                var notNull when notNull.InputType.DerivesOrImplements(notNull.NarrowedType) => BoolConstraint.From(valueConstraint == ObjectConstraint.NotNull),
+                _ when declaration.InputType.DerivesOrImplements(declaration.NarrowedType) => BoolConstraint.From(valueConstraint == ObjectConstraint.NotNull),
                 _ => null,
             };
 
