@@ -23,7 +23,7 @@
 using System.Globalization;
 using System.Threading;
 
-namespace SonarAnalyzer.UnitTest.Helpers
+namespace SonarAnalyzer.UnitTest.Extensions
 {
     [TestClass]
     public class EnumerableExtensionsTest
@@ -150,7 +150,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void WhereNotNull_Class()
         {
-            var instance = new Object();
+            var instance = new object();
             Array.Empty<object>().WhereNotNull().Should().BeEmpty();
             new object[] { null, null, null }.WhereNotNull().Should().BeEmpty();
             new object[] { 1, "a", instance }.WhereNotNull().Should().BeEquivalentTo(new object[] { 1, "a", instance });
