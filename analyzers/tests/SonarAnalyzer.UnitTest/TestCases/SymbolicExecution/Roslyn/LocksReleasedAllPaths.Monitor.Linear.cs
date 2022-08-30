@@ -261,6 +261,19 @@ namespace Monitor_Linear
             Monitor.Enter(first.obj);
         }
 
+        public void FirstReleasedThanAcquired() // Issues from Peach
+        {
+            Monitor.Exit(obj);
+            try
+            {
+                Console.WriteLine();
+            }
+            finally
+            {
+                Monitor.Enter(obj); // Noncompliant FP
+            }
+        }
+
         static int Property
         {
             get // Adds coverage for handling FlowCaptureReference operations.
