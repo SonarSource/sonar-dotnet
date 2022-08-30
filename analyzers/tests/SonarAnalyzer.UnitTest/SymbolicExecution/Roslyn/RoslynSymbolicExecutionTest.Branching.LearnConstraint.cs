@@ -248,6 +248,75 @@ if (value = boolParameter)
         }
 
         [DataTestMethod]
+        [DataRow("arg is object")]
+        [DataRow("arg is Exception")]
+        [DataRow("!!(arg is object)")]
+        [DataRow("!!(arg is Exception)")]
+        public void Branching_LearnsObjectConstraint_IsType_CS(string expression)
+        {
+            var validator = CreateIfElseEndValidatorCS(expression, OperationKind.IsType);
+            validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("Else", x => x.Should().BeNull("it could be null or any other type"));
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x == null)
+                .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
+        }
+
+        [DataTestMethod]
+        [DataRow("!(arg is object)")]
+        [DataRow("!(arg is Exception)")]
+        [DataRow("!!!(arg is object)")]
+        [DataRow("!!!(arg is Exception)")]
+        public void Branching_LearnsObjectConstraint_IsType_Negated_CS(string expression)
+        {
+            var validator = CreateIfElseEndValidatorCS(expression, OperationKind.IsType);
+            validator.ValidateTag("If", x => x.Should().BeNull("it could be null or any other type"));
+            validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x == null)
+                .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
+        }
+
+        [TestMethod]
+        public void Branching_LearnsObjectConstraint_IsType_NoSymbol_DoesNotChangeState()
+        {
+            var validator = CreateIfElseEndValidatorCS("(object)(40 + 2) is Exception", OperationKind.IsType); // Check something that doesn't have a tracked symbol
+            validator.ValidateTag("If", x => x.Should().BeNull());
+            validator.ValidateTag("Else", x => x.Should().BeNull());
+            validator.ValidateTag("End", x => x.Should().BeNull());
+        }
+
+        [DataTestMethod]
+        [DataRow("TypeOf Arg Is Object")]
+        [DataRow("TypeOf Arg Is Exception")]
+        [DataRow("Not Not TypeOf Arg Is Object")]
+        [DataRow("Not Not TypeOf Arg Is Exception")]
+        public void Branching_LearnsObjectConstraint_IsType_VB(string expression)
+        {
+            var validator = CreateIfElseEndValidatorVB(expression, OperationKind.IsType);
+            validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("Else", x => x.Should().BeNull("it could be null or any other type"));
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x == null)
+                .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
+        }
+
+        [DataTestMethod]
+        [DataRow("TypeOf Arg IsNot Object")]
+        [DataRow("TypeOf Arg IsNot Exception")]
+        [DataRow("Not TypeOf Arg Is Object")]
+        [DataRow("Not TypeOf Arg Is Exception")]
+        public void Branching_LearnsObjectConstraint_IsType_Negated_VB(string expression)
+        {
+            var validator = CreateIfElseEndValidatorVB(expression, OperationKind.IsType);
+            validator.ValidateTag("If", x => x.Should().BeNull("it could be null or any other type"));
+            validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x == null)
+                .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
+        }
+
+        [DataTestMethod]
         [DataRow("arg is null")]
         [DataRow("!!(arg is null)")]
         [DataRow("arg is not not null")]
