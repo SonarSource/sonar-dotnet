@@ -54,17 +54,16 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
         {
             return pattern.WrappedOperation.Kind switch
             {
-                OperationKindEx.ConstantPattern when
-                    As(IConstantPatternOperationWrapper.FromOperation) is var constant
-                    && state[constant.Value]?.HasConstraint(ObjectConstraint.Null) is true => BoolConstraint.From(valueConstraint == ObjectConstraint.Null),
-                OperationKindEx.RecursivePattern when As(IRecursivePatternOperationWrapper.FromOperation) is var recursive => BoolConstraintFromRecursivePattern(valueConstraint, recursive),
-                OperationKindEx.DeclarationPattern when As(IDeclarationPatternOperationWrapper.FromOperation) is var declaration => BoolConstraintFromDeclarationPattern(valueConstraint, declaration),
+                OperationKindEx.ConstantPattern when state[As(IConstantPatternOperationWrapper.FromOperation).Value]?.HasConstraint(ObjectConstraint.Null) is true =>
+                    BoolConstraint.From(valueConstraint == ObjectConstraint.Null),
+                OperationKindEx.RecursivePattern => BoolConstraintFromRecursivePattern(valueConstraint, As(IRecursivePatternOperationWrapper.FromOperation)),
+                OperationKindEx.DeclarationPattern => BoolConstraintFromDeclarationPattern(valueConstraint, As(IDeclarationPatternOperationWrapper.FromOperation)),
                 OperationKindEx.TypePattern when
                     As(ITypePatternOperationWrapper.FromOperation) is var type
                     && type.InputType.DerivesOrImplements(type.NarrowedType) => BoolConstraint.From(valueConstraint == ObjectConstraint.NotNull),
-                OperationKindEx.NegatedPattern when As(INegatedPatternOperationWrapper.FromOperation) is var negated => BoolConstraintFromPattern(state, valueConstraint, negated.Pattern)?.Opposite,
+                OperationKindEx.NegatedPattern => BoolConstraintFromPattern(state, valueConstraint, As(INegatedPatternOperationWrapper.FromOperation).Pattern)?.Opposite,
                 OperationKindEx.DiscardPattern => BoolConstraint.True,
-                OperationKindEx.BinaryPattern when As(IBinaryPatternOperationWrapper.FromOperation) is var binary => BoolConstraintFromBinaryPattern(state, valueConstraint, binary),
+                OperationKindEx.BinaryPattern => BoolConstraintFromBinaryPattern(state, valueConstraint, As(IBinaryPatternOperationWrapper.FromOperation)),
                 _ => null,
             };
 
