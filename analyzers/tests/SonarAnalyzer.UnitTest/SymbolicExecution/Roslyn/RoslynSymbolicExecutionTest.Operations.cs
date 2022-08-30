@@ -423,6 +423,38 @@ Tag(""StringConst"", stringConst);";
         }
 
         [TestMethod]
+        public void Literal_Default_OtherLiterals()
+        {
+            const string code = @"
+var c = 'c';
+var b = true;
+var i = 1;
+var u = 1u;
+var l = 1l;
+var h = 0xFF;
+var d = 1.0;
+var f = 1.0f;
+Tag(""C"", c);
+Tag(""B"", b);
+Tag(""I"", i);
+Tag(""U"", u);
+Tag(""L"", l);
+Tag(""H"", h);
+Tag(""D"", d);
+Tag(""F"", f);
+";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("C", x => x.Should().BeNull());
+            validator.ValidateTag("B", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+            validator.ValidateTag("I", x => x.Should().BeNull());
+            validator.ValidateTag("U", x => x.Should().BeNull());
+            validator.ValidateTag("L", x => x.Should().BeNull());
+            validator.ValidateTag("H", x => x.Should().BeNull());
+            validator.ValidateTag("D", x => x.Should().BeNull());
+            validator.ValidateTag("F", x => x.Should().BeNull());
+        }
+
+        [TestMethod]
         public void InstanceReference_SetsNotNull_CS()
         {
             const string code = @"
