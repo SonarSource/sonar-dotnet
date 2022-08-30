@@ -410,6 +410,19 @@ Tag(""IntegerFromByte"", i);";
         }
 
         [TestMethod]
+        public void Literal_Default_StringLiteral()
+        {
+            const string code = @"
+var stringLocal = ""someText"";
+const string stringConst = ""someText"";
+Tag(""StringLocal"", stringLocal);
+Tag(""StringConst"", stringConst);";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("StringLocal", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("StringConst", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        }
+
+        [TestMethod]
         public void InstanceReference_SetsNotNull_CS()
         {
             const string code = @"
