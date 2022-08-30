@@ -387,7 +387,7 @@ Tag(""End"", arg);";
         [DataRow("objectUnknown is not not Exception", OperationKindEx.TypePattern, null)]
         [DataRow("objectNull is not not _", OperationKindEx.DiscardPattern, true)]
         [DataRow("objectNotNull is not not _", OperationKindEx.DiscardPattern, true)]
-        [DataRow("objectUnknown is not not _", OperationKindEx.DiscardPattern, null)] // FN. Some patterns always match
+        [DataRow("objectUnknown is not not _", OperationKindEx.DiscardPattern, null)] // Some patterns always match
         public void NegateTypeDiscardPatternsSetBoolConstraint(string isPattern, OperationKind expectedOperation, bool? expectedBoolConstraint) =>
             ValidateSetBoolConstraint(isPattern, expectedOperation, expectedBoolConstraint);
 
