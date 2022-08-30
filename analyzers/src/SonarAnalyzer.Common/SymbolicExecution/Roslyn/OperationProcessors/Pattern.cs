@@ -97,8 +97,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                 .Select(x => IPropertySubpatternOperationWrapper.FromOperation(x).Pattern)
                 .Concat(recursivePattern.DeconstructionSubpatterns.Select(x => IPatternOperationWrapper.FromOperation(x)))
                 .All(x => x is { WrappedOperation.Kind: OperationKindEx.DiscardPattern }
-                    || (x.WrappedOperation.Kind == OperationKindEx.DeclarationPattern
-                        && IDeclarationPatternOperationWrapper.FromOperation(x.WrappedOperation).MatchesNull));
+                    || (x.WrappedOperation.Kind == OperationKindEx.DeclarationPattern && IDeclarationPatternOperationWrapper.FromOperation(x.WrappedOperation).MatchesNull));
 
         private static BoolConstraint BoolConstraintFromBinaryPattern(ProgramState state, ObjectConstraint valueConstraint, IBinaryPatternOperationWrapper binaryPattern)
         {
@@ -111,17 +110,21 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                 _ => null,
             };
 
-            static BoolConstraint AndCombine(SymbolicConstraint left, SymbolicConstraint right)
+            BoolConstraint AndCombine()
             {
                 if (left == BoolConstraint.True && right == BoolConstraint.True)
                 {
-                    return BoolConstraint.From(true);
+                    return BoolConstraint.True;
                 }
                 else if (left == BoolConstraint.False || right == BoolConstraint.False)
                 {
                     return BoolConstraint.From(false);
                 }
-                return null;
+                else
+                {
+                    return null;
+                }
+                
             }
 
             static BoolConstraint OrCombine(SymbolicConstraint left, SymbolicConstraint right)

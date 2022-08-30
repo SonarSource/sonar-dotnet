@@ -309,8 +309,8 @@ Tag(""End"", arg);";
         [DataRow("nullableBoolTrue", "false", false)]
         [DataRow("nullableBoolFalse", "true", false)]
         [DataRow("nullableBoolFalse", "false", true)]
-        [DataRow("nullableBoolNull", "true", null)]  // FN. Should be false.
-        [DataRow("nullableBoolNull", "false", null)] // FN. Should be false.
+        [DataRow("nullableBoolNull", "true", null)]  // Should be false.
+        [DataRow("nullableBoolNull", "false", null)] // Should be false.
         [DataRow("nullableBoolUnknown", "true", null)]
         [DataRow("nullableBoolUnknown", "false", null)]
         public void ConstantPatternSetBoolConstraint(string variableName, string isPattern, bool? expectedBoolConstraint)
@@ -492,7 +492,7 @@ var exceptionNotNull = new Exception();
                                                       string variableName,
                                                       string isPattern,
                                                       OperationKind expectedOperation,
-                                                      bool? expectedBoolConstraint)
+                                                      bool? expectedBoolConstraint) =>
             => ValidateSetBoolConstraint(additionalTypes: string.Empty, variableDeclarations, variableName, isPattern, expectedOperation, expectedBoolConstraint);
 
         private static void ValidateSetBoolConstraint(string additionalTypes,
@@ -517,7 +517,7 @@ public void Main()
             {
                 if (expectedBoolConstraint is bool expected)
                 {
-                    x.Should().NotBeNull("we expect an constraint on the symbolValue");
+                    x.Should().NotBeNull("we expect {expectedBoolConstraint} on the result");
                     x.HasConstraint(BoolConstraint.From(expected)).Should().BeTrue("we should have learned that result is {0}", expected);
                 }
                 else
