@@ -394,6 +394,14 @@ Act.Second(); // Noncompliant
             n = 2;
         n = 4; // Compliant
     }
+
+    public override bool Equals(object obj)
+    {
+        if (obj is null) return false; // probably irrelevant, just pasting as is
+        return obj is Other other && Equals(other); // Compliant
+    }
+
+    public bool Equals(Other other) { return other != null; }
 }
 class DoesNotCrash
 {

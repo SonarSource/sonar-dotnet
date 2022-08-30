@@ -35,6 +35,7 @@ public sealed class MultilineBlocksWithoutBrace : SonarDiagnosticAnalyzer
 {
     private const string DiagnosticId = "S2681";
     private const string MessageFormat = "This line will not be executed {0}; only the first line of this {2}-line block will be. The rest will execute {1}.";
+    private const int IndentSize = 4;
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
@@ -97,10 +98,10 @@ public sealed class MultilineBlocksWithoutBrace : SonarDiagnosticAnalyzer
     {
         if (SecondStatement(context.Node, first) is { } second && IsNotEmpty(first) && IsNotEmpty(second))
         {
-            var firstPosition = ReferencePosition(first);
+            var firstPosition = ProxyStartPosition(first);
             var secondPosition = StartPosition(second);
 
-            if (secondPosition.Character > firstPosition.Character - 4)
+            if (secondPosition.Character > firstPosition.Character - IndentSize)
             {
                 var lineSpan = context.Node.SyntaxTree.GetText().Lines[secondPosition.Line].Span;
                 var location = Location.Create(context.Node.SyntaxTree, TextSpan.FromBounds(second.SpanStart, lineSpan.End));
@@ -114,13 +115,20 @@ public sealed class MultilineBlocksWithoutBrace : SonarDiagnosticAnalyzer
     private static bool IsNotEmpty(SyntaxNode node) =>
         node is not EmptyStatementSyntax;
 
-    private static LinePosition ReferencePosition(SyntaxNode node)
+    private static LinePosition ProxyStartPosition(SyntaxNode node)
     {
         var line = StartPosition(node).Line;
         return node.AncestorsAndSelf()
             .Where(x => StartPosition(x).Line == line)
-            .Select(x => x.GetLocation().GetLineSpan().StartLinePosition)
+            .Select(x => Proxy(x, x != node))
             .Last();
+
+        static LinePosition Proxy(SyntaxNode node, bool isAncestor)
+        {
+            var position = StartPosition(node);
+            // If based on an ancestor, increase the indentation size.
+            return isAncestor ? new LinePosition(position.Line, position.Character + IndentSize) : position;
+        }
     }
 
     private static LinePosition StartPosition(SyntaxNode node) =>
