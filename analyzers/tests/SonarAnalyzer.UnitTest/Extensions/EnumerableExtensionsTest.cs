@@ -89,7 +89,8 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [TestMethod]
         public void JoinAndMixedClasses()
         {
-            var collection = new Exception[] {
+            var collection = new Exception[]
+            {
                 new IndexOutOfRangeException("IndexOutOfRangeMessage"),
                 new InvalidOperationException("OperationMessage"),
                 null,
