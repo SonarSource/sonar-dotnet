@@ -47,13 +47,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
             CreateCS(methodBody, additionalParameters, null, additionalChecks);
 
         public static SETestContext CreateCS(string methodBody, string additionalParameters, string localFunctionName, params SymbolicCheck[] additionalChecks) =>
-            new(ClassCodeCS(methodBody, additionalParameters, null), AnalyzerLanguage.CSharp, additionalChecks, localFunctionName);
+            new(ClassCodeCS(methodBody, additionalParameters), AnalyzerLanguage.CSharp, additionalChecks, localFunctionName);
 
         public static SETestContext CreateCSLambda(string methodBody, string lambdaFragment, params SymbolicCheck[] additionalChecks) =>
-            new(ClassCodeCS(methodBody, null, null), AnalyzerLanguage.CSharp, additionalChecks, null, lambdaFragment);
-
-        public static SETestContext CreateCSWithAddtitionalTypes(string methodBody, string additionalTypes, params SymbolicCheck[] additionalChecks) =>
-            new(ClassCodeCS(methodBody, null, additionalTypes), AnalyzerLanguage.CSharp, additionalChecks, null, null);
+            new(ClassCodeCS(methodBody, null), AnalyzerLanguage.CSharp, additionalChecks, null, lambdaFragment);
 
         public static SETestContext CreateCSMethod(string method, params SymbolicCheck[] additionalChecks) =>
             new($@"
@@ -64,6 +61,7 @@ public class Sample
     {method}
 
     private void Tag(string name, object arg) {{ }}
+    private T Unknown<T>() => default;
 }}", AnalyzerLanguage.CSharp, additionalChecks);
 
         public static SETestContext CreateVB(string methodBody, params SymbolicCheck[] additionalChecks) =>
@@ -87,12 +85,10 @@ End Class";
             return new(code, AnalyzerLanguage.VisualBasic, additionalChecks);
         }
 
-        private static string ClassCodeCS(string methodBody, string additionalParameters, string additionalTypes) =>
+        private static string ClassCodeCS(string methodBody, string additionalParameters) =>
             $@"
 using System;
 using System.Collections.Generic;
-
-{additionalTypes}
 
 public unsafe class Sample
 {{

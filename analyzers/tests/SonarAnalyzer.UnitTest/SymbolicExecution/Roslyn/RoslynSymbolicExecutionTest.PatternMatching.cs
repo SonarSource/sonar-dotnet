@@ -503,11 +503,15 @@ var exceptionNotNull = new Exception();
                                                       bool? expectedBoolConstraint)
         {
             var code = @$"
-{variableDeclarations}
+{additionalTypes}
+public void Main()
+{{
+    {variableDeclarations}
 
-var result = {variableName} is {isPattern};
-Tag(""Result"", result);";
-            var validator = SETestContext.CreateCSWithAddtitionalTypes(code, additionalTypes).Validator;
+    var result = {variableName} is {isPattern};
+    Tag(""Result"", result);
+}}";
+            var validator = SETestContext.CreateCSMethod(code).Validator;
             validator.ValidateContainsOperation(expectedOperation);
             validator.ValidateTag("Result", x =>
             {
