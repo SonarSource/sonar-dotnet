@@ -105,12 +105,12 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
             var right = BoolConstraintFromPattern(state, valueConstraint, binaryPattern.RightPattern);
             return binaryPattern.OperatorKind switch
             {
-                BinaryOperatorKind.And => AndCombine(left, right),
-                BinaryOperatorKind.Or => OrCombine(left, right),
+                BinaryOperatorKind.And => CombineAnd(),
+                BinaryOperatorKind.Or => CombineOr(),
                 _ => null,
             };
 
-            BoolConstraint AndCombine()
+            BoolConstraint CombineAnd()
             {
                 if (left == BoolConstraint.True && right == BoolConstraint.True)
                 {
@@ -124,10 +124,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                 {
                     return null;
                 }
-                
             }
 
-            static BoolConstraint OrCombine(SymbolicConstraint left, SymbolicConstraint right)
+            BoolConstraint CombineOr()
             {
                 if (left == BoolConstraint.True || right == BoolConstraint.True)
                 {
@@ -137,7 +136,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                 {
                     return BoolConstraint.From(false);
                 }
-                return null;
+                else
+                {
+                    return null;
+                }
             }
         }
 
