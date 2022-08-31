@@ -578,5 +578,29 @@ Tag(""End"", s);";
             validator.TagValues("Else").Should().BeEmpty();
             validator.ValidateTag("End", x => x.HasConstraint(ObjectConstraint.Null));
         }
+
+        [TestMethod]
+        public void Branching_IsNullOrEmpty_VisitsBothBranchesIfNotNull()
+        {
+            const string code = @"
+string s = ""some text"";
+if (string.IsNullOrEmpty(s))
+{
+    Tag(""If"", s);
+}
+else
+{
+    Tag(""Else"", s);
+}
+Tag(""End"", s);";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.TagValues("If").Should().HaveCount(2)
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
+        }
     }
 }
