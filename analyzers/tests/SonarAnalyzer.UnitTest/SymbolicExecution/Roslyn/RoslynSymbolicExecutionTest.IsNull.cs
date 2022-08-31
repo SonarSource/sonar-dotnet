@@ -85,9 +85,9 @@ Tag(""UnknownToNotNull"", unknownToNotNull);";
         public void IsNull_Coalesce_UnknownToUnknown()
         {
             const string code = @"
-var unknownToUnknown = arg ?? arg;
+var unknownToUnknown = arg1 ?? arg2;
 Tag(""UnknownToUnknown"", unknownToUnknown);";
-            var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+            var validator = SETestContext.CreateCS(code, ", object arg1, object arg2").Validator;
             validator.ValidateContainsOperation(OperationKind.IsNull);
             validator.TagValues("UnknownToUnknown").Should().HaveCount(1)
                 .And.ContainSingle(x => x == null);
@@ -138,8 +138,8 @@ Tag(""Arg"", arg);";
             var validator = SETestContext.CreateCS(code, ", object arg").Validator;
             validator.ValidateContainsOperation(OperationKind.IsNull);
             validator.TagValues("Arg").Should().HaveCount(2)
-                .And.ContainSingle(x => x == null)
-                .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.Null));
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull))
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null));
         }
 
         [TestMethod]
@@ -152,20 +152,20 @@ Tag(""Arg"", arg);";
             var validator = SETestContext.CreateCS(code, ", object arg").Validator;
             validator.ValidateContainsOperation(OperationKind.IsNull);
             validator.TagValues("Arg").Should().HaveCount(2)
-                .And.ContainSingle(x => x == null)
-                .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
+                .And.OnlyContain(x => x.HasConstraint(ObjectConstraint.NotNull));
         }
 
         [TestMethod]
         public void IsNull_CoalesceAssignment_UnknownToUnknown()
         {
             const string code = @"
-arg ??= arg;
-Tag(""Arg"", arg);";
-            var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+arg1 ??= arg2;
+Tag(""Arg"", arg1);";
+            var validator = SETestContext.CreateCS(code, ", object arg1, object arg2").Validator;
             validator.ValidateContainsOperation(OperationKind.IsNull);
-            validator.TagValues("Arg").Should().HaveCount(1)
-                .And.ContainSingle(x => x == null);
+            validator.TagValues("Arg").Should().HaveCount(2)
+                .And.ContainSingle(x => x == null)
+                .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
         }
 
         [TestMethod]
@@ -202,6 +202,7 @@ Tag(""End"", arg);";
             validator.ValidateContainsOperation(OperationKind.IsNull);
             validator.ValidateTagOrder(
                 "WasNotNull",
+                "End",
                 "End");
         }
     }

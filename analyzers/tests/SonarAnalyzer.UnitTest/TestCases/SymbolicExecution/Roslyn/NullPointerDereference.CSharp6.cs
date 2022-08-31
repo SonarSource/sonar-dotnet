@@ -198,7 +198,6 @@ namespace Tests.Diagnostics
         }
     }
 
-
     public enum MyEnum
     {
         ONE,
