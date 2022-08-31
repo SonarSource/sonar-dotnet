@@ -39,7 +39,13 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
         {
             if (invocation is
                 {
-                    TargetMethod: { Name: nameof(string.IsNullOrEmpty), Parameters: { Length: 1 } parameters },
+                    TargetMethod:
+                    {
+                        IsStatic: true,
+                        ContainingType: { SpecialType: SpecialType.System_String },
+                        Name: nameof(string.IsNullOrEmpty) or nameof(string.IsNullOrWhiteSpace),
+                        Parameters: { Length: 1 } parameters
+                    },
                     Arguments: { Length: 1 } arguments,
                 }
                 && parameters[0] is { Name: "value", Type: { SpecialType: SpecialType.System_String } }
