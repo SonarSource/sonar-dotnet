@@ -45,104 +45,104 @@
             object nullObject = null;
             notNullObject ??= nullObject.ToString(); // Compliant, never visited
         }
+    }
 
-        public class NullablePrimitiveType
+    public class NullablePrimitiveType
+    {
+        public void NullablePrimitiveType_FN()
         {
-            public void NullablePrimitiveType_FN()
+            int? i1 = null;
+            i1 = i1 ?? i1.GetHashCode(); // FN - nullable primitive type not supported
+        }
+    }
+
+    public class SwitchExpressions
+    {
+        public void Nullable_In_Arm_Noncompliant(string s)
+        {
+            var result = s switch
             {
-                int? i1 = null;
-                i1 = i1 ?? i1.GetHashCode(); // FN - nullable primitive type not supported
-            }
+                null => s.ToString(), // Noncompliant
+                _ => s.ToString()
+            };
         }
 
-        public class SwitchExpressions
+        public void AlwaysNull_Noncompliant(int val)
         {
-            public void Nullable_In_Arm_Noncompliant(string s)
+            string result = val switch
             {
-                var result = s switch
-                {
-                    null => s.ToString(), // Noncompliant
-                    _ => s.ToString()
-                };
-            }
-
-            public void AlwaysNull_Noncompliant(int val)
-            {
-                string result = val switch
-                {
-                    1 => null,
-                    2 => null,
-                    _ => null
-                };
-                result.ToString(); // Noncompliant
-            }
-
-            public void MaybeNull_Noncompliant(int val)
-            {
-                string result = val switch
-                {
-                    1 => "1",
-                    2 => "Not 1",
-                    _ => null
-                };
-                result.ToString(); // Noncompliant
-            }
-
-            public void AlwaysNonNull(int val)
-            {
-                string result = val switch
-                {
-                    1 => "1",
-                    2 => "2",
-                    _ => "Neither 1 or 2"
-                };
-                result.ToString();
-            }
-
-            public void Nullable_In_Arm(string s)
-            {
-                var result = s switch
-                {
-                    var x when x != null => s.ToString(),
-                    _ => s.ToString() // FN Switch expressions are not constrained (See #2949)
-                };
-            }
+                1 => null,
+                2 => null,
+                _ => null
+            };
+            result.ToString(); // Noncompliant
         }
 
-        public class DefaultLiteral
+        public void MaybeNull_Noncompliant(int val)
         {
-            void NoncompliantDefaultLiteral()
+            string result = val switch
             {
-                object obj = default;
-                obj.ToString(); // Noncompliant
-            }
-
-            void CompliantDefaultLiteral()
-            {
-                int i = default;
-                i.ToString();
-            }
+                1 => "1",
+                2 => "Not 1",
+                _ => null
+            };
+            result.ToString(); // Noncompliant
         }
 
-        public interface IWithDefaultMembers
+        public void AlwaysNonNull(int val)
         {
-            string NoncompliantDefaultInterfaceMethod(string obj) =>
-                obj != null ? null : obj.ToLower(); // Noncompliant
-
-            string CompliantDefaultInterfaceMethod(string obj) =>
-                obj == null ? null : obj.ToLower();
+            string result = val switch
+            {
+                1 => "1",
+                2 => "2",
+                _ => "Neither 1 or 2"
+            };
+            result.ToString();
         }
 
-        public class LocalStaticFunctions
+        public void Nullable_In_Arm(string s)
         {
-            public void Method()
+            var result = s switch
             {
-                string LocalFunction(string obj) =>
-                    obj != null ? null : obj.ToLower(); //  Compliant - FN: local functions are not supported by the CFG
+                var x when x != null => s.ToString(),
+                _ => s.ToString() // FN Switch expressions are not constrained (See #2949)
+            };
+        }
+    }
 
-                static string LocalStaticFunction(string obj) =>
-                    obj != null ? null : obj.ToLower(); //  Compliant - FN: local functions are not supported by the CFG
-            }
+    public class DefaultLiteral
+    {
+        void NoncompliantDefaultLiteral()
+        {
+            object obj = default;
+            obj.ToString(); // Noncompliant
+        }
+
+        void CompliantDefaultLiteral()
+        {
+            int i = default;
+            i.ToString();
+        }
+    }
+
+    public interface IWithDefaultMembers
+    {
+        string NoncompliantDefaultInterfaceMethod(string obj) =>
+            obj != null ? null : obj.ToLower(); // Noncompliant
+
+        string CompliantDefaultInterfaceMethod(string obj) =>
+            obj == null ? null : obj.ToLower();
+    }
+
+    public class LocalStaticFunctions
+    {
+        public void Method()
+        {
+            string LocalFunction(string obj) =>
+                obj != null ? null : obj.ToLower(); //  Compliant - FN: local functions are not supported by the CFG
+
+            static string LocalStaticFunction(string obj) =>
+                obj != null ? null : obj.ToLower(); //  Compliant - FN: local functions are not supported by the CFG
         }
     }
 }
