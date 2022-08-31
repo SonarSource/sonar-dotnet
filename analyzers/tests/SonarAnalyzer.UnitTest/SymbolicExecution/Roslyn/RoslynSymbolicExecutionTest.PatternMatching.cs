@@ -345,7 +345,7 @@ Tag(""End"", arg);";
         [DataRow("objectUnknown is object o", null)]
         [DataRow("objectNull is int i", false)]
         [DataRow("objectNotNull is int i", null)]
-        [DataRow("integer is object o", null)]  // Should be "true" because of boxing
+        [DataRow("integer is object o", true)]
         public void DeclarationPatternSetBoolConstraint(string isPattern, bool? expectedBoolConstraint) =>
             ValidateSetBoolConstraint(isPattern, OperationKindEx.DeclarationPattern, expectedBoolConstraint);
 

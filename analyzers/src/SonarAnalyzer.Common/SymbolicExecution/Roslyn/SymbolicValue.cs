@@ -28,9 +28,12 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
     public sealed record SymbolicValue
     {
+        // Reuse instances to save memory. This "True" has the same semantic meaning and any other symbolic value with BoolConstraint.True constraint
         public static readonly SymbolicValue This = new SymbolicValue().WithConstraint(ObjectConstraint.NotNull);
         public static readonly SymbolicValue Null = new SymbolicValue().WithConstraint(ObjectConstraint.Null);
         public static readonly SymbolicValue NotNull = new SymbolicValue().WithConstraint(ObjectConstraint.NotNull);
+        public static readonly SymbolicValue True = new SymbolicValue().WithConstraint(BoolConstraint.True);
+        public static readonly SymbolicValue False = new SymbolicValue().WithConstraint(BoolConstraint.False);
 
         // SymbolicValue can have only one constraint instance of specific type at a time
         private ImmutableDictionary<Type, SymbolicConstraint> Constraints { get; init; } = ImmutableDictionary<Type, SymbolicConstraint>.Empty;

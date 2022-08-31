@@ -21,6 +21,7 @@
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
 {
@@ -28,30 +29,27 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
     {
         protected override ProgramState PreProcessSimple(SymbolicContext context) =>
             context.Operation.Instance.ConstantValue.HasValue
-            && ConstraintFromValue(context.Operation.Instance.ConstantValue.Value) is { } constraint
-                ? context.SetOperationConstraint(constraint)
+            && ConstraintFromConstantValue(context.Operation) is { } value
+                ? context.State.SetOperationValue(context.Operation, value)
                 : context.State;
 
         public static SymbolicConstraint ConstraintFromType(ITypeSymbol type) =>
-            ConstraintFromValue(DefaultValue(type));
+            type.Is(KnownType.System_Boolean) ? BoolConstraint.False : null;
 
-        public static SymbolicConstraint ConstraintFromValue(object value) =>
-            value switch
-            {
-                // Update DefaultValue when adding new types
-                true => BoolConstraint.True,
-                false => BoolConstraint.False,
-                null => ObjectConstraint.Null,
-                string => ObjectConstraint.NotNull,
-                _ => null
-            };
+        public static SymbolicValue ConstraintFromConstantValue(IOperationWrapperSonar operation) =>
+            operation.Instance.ConstantValue.HasValue
+                ? operation.Instance.ConstantValue.Value switch
+                    {
+                        // Update DefaultValue when adding new types
+                        true => SymbolicValue.True,
+                        false => SymbolicValue.False,
+                        null when (operation.Instance.Type ?? ConvertedType(operation.Parent)) is { IsReferenceType: true } => SymbolicValue.Null,
+                        string => SymbolicValue.NotNull,
+                        _ => null
+                    }
+                : null;
 
-        private static object DefaultValue(ITypeSymbol type) =>
-            type switch
-            {
-                _ when type.Is(KnownType.System_Boolean) => false,
-                _ when type.IsReferenceType => ObjectConstraint.Null,
-                _ => null
-            };
+        private static ITypeSymbol ConvertedType(IOperation operation) =>
+            operation.Kind == OperationKindEx.Conversion ? IConversionOperationWrapper.FromOperation(operation).Type : null;
     }
 }
