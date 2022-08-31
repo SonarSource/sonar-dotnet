@@ -469,9 +469,9 @@ Tag(""End"", arg);";
                     x.Should().NotBeNull("we expect {expectedBoolConstraint} on the result");
                     x.HasConstraint(BoolConstraint.From(expected)).Should().BeTrue("we should have learned that result is {0}", expected);
                 }
-                else if (x != null)
+                else
                 {
-                    x.HasConstraint<BoolConstraint>().Should().BeFalse("we should not learn about the state of result");
+                    x.Should().BeNull("we should not learn about the state of result");
                 }
             });
         }
