@@ -36,7 +36,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
             context.Operation.Instance.ConstantValue switch
             {
                 { HasValue: true, Value: null } when (type ?? ConvertedType(context.Operation.Parent)) is { IsReferenceType: true } => context.SetOperationConstraint(ObjectConstraint.Null),
-                { HasValue: true, Value: string } => context.SetOperationConstraint(ObjectConstraint.NotNull),
+                { HasValue: true, Value: string } => SymbolicValue.NotNull,
                 _ => context.State,
             };
 
