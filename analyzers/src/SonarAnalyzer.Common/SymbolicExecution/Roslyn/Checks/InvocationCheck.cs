@@ -34,7 +34,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
 
         private ProgramState[] PreProcessInvocation(ProgramState state, IInvocationOperationWrapper invocation)
         {
-            if (ArgumentIsNullOrEmpty(invocation) is { } symbol)
+            if (ArgumentOfIsNullOrEmpty(invocation) is { } symbol)
             {
                 if (state[symbol] is { } symbolicValue && symbolicValue.HasConstraint(ObjectConstraint.Null))
                 {
@@ -56,7 +56,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
                 state.SetOperationConstraint(invocation.WrappedOperation, boolConstraint);
         }
 
-        private static ISymbol ArgumentIsNullOrEmpty(IInvocationOperationWrapper invocation) =>
+        private static ISymbol ArgumentOfIsNullOrEmpty(IInvocationOperationWrapper invocation) =>
             invocation is
             {
                 TargetMethod:
