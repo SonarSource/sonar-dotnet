@@ -19,7 +19,9 @@
  */
 
 using System;
+using System.Linq;
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn.Checks;
 using StyleCop.Analyzers.Lightup;
@@ -29,11 +31,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
     internal static class Pattern
     {
         public static ProgramState Process(SymbolicContext context, IIsPatternOperationWrapper isPattern) =>
-            context.State[isPattern.Value] is { } value
-            && isPattern.Pattern.WrappedOperation.Kind == OperationKindEx.ConstantPattern
-            && ConstantCheck.ConstraintFromValue(IConstantPatternOperationWrapper.FromOperation(isPattern.Pattern.WrappedOperation).Value.ConstantValue.Value) is BoolConstraint boolPattern
-            && PatternBoolConstraint(value, boolPattern) is { } newConstraint
-                ? context.SetOperationConstraint(newConstraint)
+            (BoolContraintFromConstant(context.State, isPattern) ?? BoolConstraintFromPattern(context.State, isPattern)) is { } constraint
+                ? context.SetOperationConstraint(constraint)
                 : context.State;
 
         public static ProgramState Process(SymbolicContext context, IRecursivePatternOperationWrapper recursive) =>
@@ -78,11 +77,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
             return null;
         }
 
-        private static BoolConstraint PatternBoolConstraint(SymbolicValue value, BoolConstraint pattern) =>
-            value.HasConstraint<BoolConstraint>()
-                ? BoolConstraint.From(value.HasConstraint(pattern))
-                : null; // We cannot take conclusive decision
-
         private static ProgramState ProcessDeclaration(SymbolicContext context, ISymbol declaredSymbol, bool setNotNull)
         {
             if (declaredSymbol == null)
@@ -97,6 +91,119 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                 return setNotNull
                     ? state.SetSymbolConstraint(declaredSymbol, ObjectConstraint.NotNull)
                     : state;
+            }
+        }
+
+        private static BoolConstraint BoolContraintFromConstant(ProgramState state, IIsPatternOperationWrapper isPattern) =>
+            state[isPattern.Value] is { } value
+            && isPattern.Pattern.WrappedOperation.Kind == OperationKindEx.ConstantPattern
+            && ConstantCheck.ConstraintFromValue(IConstantPatternOperationWrapper.FromOperation(isPattern.Pattern.WrappedOperation).Value.ConstantValue.Value) is BoolConstraint boolPattern
+            && PatternBoolConstraint(value, boolPattern) is { } newConstraint
+                ? newConstraint
+                : null;
+
+        private static BoolConstraint PatternBoolConstraint(SymbolicValue value, BoolConstraint pattern) =>
+            value.HasConstraint<BoolConstraint>()
+                ? BoolConstraint.From(value.HasConstraint(pattern))
+                : null; // We cannot take conclusive decision
+
+        private static SymbolicConstraint BoolConstraintFromPattern(ProgramState state, IIsPatternOperationWrapper isPattern) =>
+            state[isPattern.Value] is { } value
+            && value.Constraint<ObjectConstraint>() is { } valueConstraint
+            && BoolConstraintFromPattern(state, valueConstraint, isPattern.Pattern) is { } newConstraint
+                ? newConstraint
+                : null;
+
+        private static SymbolicConstraint BoolConstraintFromPattern(ProgramState state, ObjectConstraint valueConstraint, IPatternOperationWrapper pattern)
+        {
+            return pattern.WrappedOperation.Kind switch
+            {
+                OperationKindEx.ConstantPattern when state[As(IConstantPatternOperationWrapper.FromOperation).Value]?.HasConstraint(ObjectConstraint.Null) is true =>
+                    BoolConstraint.From(valueConstraint == ObjectConstraint.Null),
+                OperationKindEx.RecursivePattern => BoolConstraintFromRecursivePattern(valueConstraint, As(IRecursivePatternOperationWrapper.FromOperation)),
+                OperationKindEx.DeclarationPattern => BoolConstraintFromDeclarationPattern(valueConstraint, As(IDeclarationPatternOperationWrapper.FromOperation)),
+                OperationKindEx.TypePattern when
+                    As(ITypePatternOperationWrapper.FromOperation) is var type
+                    && type.InputType.DerivesOrImplements(type.NarrowedType) => BoolConstraint.From(valueConstraint == ObjectConstraint.NotNull),
+                OperationKindEx.NegatedPattern => BoolConstraintFromPattern(state, valueConstraint, As(INegatedPatternOperationWrapper.FromOperation).Pattern)?.Opposite,
+                OperationKindEx.DiscardPattern => BoolConstraint.True,
+                OperationKindEx.BinaryPattern => BoolConstraintFromBinaryPattern(state, valueConstraint, As(IBinaryPatternOperationWrapper.FromOperation)),
+                _ => null,
+            };
+
+            T As<T>(Func<IOperation, T> fromOperation) =>
+                 fromOperation(pattern.WrappedOperation);
+        }
+
+        private static BoolConstraint BoolConstraintFromDeclarationPattern(ObjectConstraint valueConstraint, IDeclarationPatternOperationWrapper declaration) =>
+            declaration switch
+            {
+                { MatchesNull: true } => BoolConstraint.True,
+                _ when valueConstraint == ObjectConstraint.Null => BoolConstraint.False,
+                _ when declaration.InputType.DerivesOrImplements(declaration.NarrowedType) => BoolConstraint.From(valueConstraint == ObjectConstraint.NotNull),
+                _ => null,
+            };
+
+        private static BoolConstraint BoolConstraintFromRecursivePattern(ObjectConstraint valueConstraint, IRecursivePatternOperationWrapper recursive) =>
+            recursive switch
+            {
+                _ when valueConstraint == ObjectConstraint.Null => BoolConstraint.False,
+                {
+                    PropertySubpatterns.Length: 0,
+                    DeconstructionSubpatterns.Length: 0,
+                } => BoolConstraint.True,
+                _ when SubPatternsAlwaysMatch(recursive) => BoolConstraint.True,
+                _ => null,
+            };
+
+        private static bool SubPatternsAlwaysMatch(IRecursivePatternOperationWrapper recursivePattern) =>
+            recursivePattern.PropertySubpatterns
+                .Select(x => IPropertySubpatternOperationWrapper.FromOperation(x).Pattern)
+                .Concat(recursivePattern.DeconstructionSubpatterns.Select(x => IPatternOperationWrapper.FromOperation(x)))
+                .All(x => x is { WrappedOperation.Kind: OperationKindEx.DiscardPattern }
+                    || (x.WrappedOperation.Kind == OperationKindEx.DeclarationPattern && IDeclarationPatternOperationWrapper.FromOperation(x.WrappedOperation).MatchesNull));
+
+        private static BoolConstraint BoolConstraintFromBinaryPattern(ProgramState state, ObjectConstraint valueConstraint, IBinaryPatternOperationWrapper binaryPattern)
+        {
+            var left = BoolConstraintFromPattern(state, valueConstraint, binaryPattern.LeftPattern);
+            var right = BoolConstraintFromPattern(state, valueConstraint, binaryPattern.RightPattern);
+            return binaryPattern.OperatorKind switch
+            {
+                BinaryOperatorKind.And => CombineAnd(),
+                BinaryOperatorKind.Or => CombineOr(),
+                _ => null,
+            };
+
+            BoolConstraint CombineAnd()
+            {
+                if (left == BoolConstraint.True && right == BoolConstraint.True)
+                {
+                    return BoolConstraint.True;
+                }
+                else if (left == BoolConstraint.False || right == BoolConstraint.False)
+                {
+                    return BoolConstraint.False;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+
+            BoolConstraint CombineOr()
+            {
+                if (left == BoolConstraint.True || right == BoolConstraint.True)
+                {
+                    return BoolConstraint.True;
+                }
+                else if (left == BoolConstraint.False && right == BoolConstraint.False)
+                {
+                    return BoolConstraint.False;
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
     }

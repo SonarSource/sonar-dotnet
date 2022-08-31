@@ -61,6 +61,7 @@ public class Sample
     {method}
 
     private void Tag(string name, object arg) {{ }}
+    private T Unknown<T>() => default;
 }}", AnalyzerLanguage.CSharp, additionalChecks);
 
         public static SETestContext CreateVB(string methodBody, params SymbolicCheck[] additionalChecks) =>
@@ -114,6 +115,7 @@ public unsafe class Sample
     public NotImplementedException CreateException() => new NotImplementedException();
 
     private void Tag(string name, object arg = null) {{ }}
+    private T Unknown<T>() => default;
 }}
 
 public class Person : PersonBase

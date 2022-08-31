@@ -62,11 +62,11 @@ public class Sample
         }
         else if (arg is not not null)
         {
-            arg.ToString();     // Noncompliant
+            arg.ToString();     // Compliant the if branch covers null so arg is NotNull
         }
         else if (!(arg is not null))
         {
-            arg.ToString();     // Noncompliant
+            arg.ToString();     // Compliant the if branch covers null so arg is NotNull
         }
         else
         {
@@ -75,6 +75,14 @@ public class Sample
                 o.ToString();   // Compliant
             }
             o.ToString();       // Noncompliant
+        }
+        if (arg is not not null)
+        {
+            arg.ToString();     // Non-compliant FIXME arg is null here
+        }
+        if (!(arg is not null))
+        {
+            arg.ToString();     // Non-compliant FIXME arg is null here
         }
 
         if (arg is false)
@@ -116,7 +124,7 @@ public class Sample
             string and not null => arg,
             _ => ""
         };
-        res.ToString();     // Noncompliant FP FIXME
+        res.ToString();     // Compliant
 
         res = arg switch
         {
