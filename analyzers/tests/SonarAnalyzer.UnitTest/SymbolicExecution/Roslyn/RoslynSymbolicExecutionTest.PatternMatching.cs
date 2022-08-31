@@ -131,8 +131,10 @@ if (arg is { })
 Tag(""End"", arg);";
             var validator = SETestContext.CreateCS(code, ", object arg").Validator;
             validator.ValidateContainsOperation(OperationKind.RecursivePattern);
-            validator.ValidateTag("ArgNotNull", x => x.Should().BeNull());  // ToDo: Should learn that it is not null too
-            validator.TagValues("End").Should().HaveCount(1).And.OnlyContain(x => x == null);
+            validator.ValidateTag("ArgNotNull", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
         }
 
         [TestMethod]
@@ -148,8 +150,10 @@ Tag(""End"", arg);";
             var validator = SETestContext.CreateCS(code, ", object arg").Validator;
             validator.ValidateContainsOperation(OperationKind.RecursivePattern);
             validator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-            validator.ValidateTag("ArgNotNull", x => x.Should().BeNull());  // ToDo: MMF-2563 should have NotNull instead
-            validator.TagValues("End").Should().HaveCount(2).And.OnlyContain(x => x == null);       // 2x because value has different states
+            validator.ValidateTag("ArgNotNull", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
         }
 
         [TestMethod]
@@ -168,8 +172,10 @@ Tag(""End"", arg);";
             validator.ValidateTag("Value", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());
             validator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.ValidateTag("ArgNotNull", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());
-            validator.ValidateTag("ArgNotNull", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeFalse());     // ToDo: MMF-2563 should BeTrue() instead
-            validator.TagValues("End").Should().HaveCount(2).And.OnlyContain(x => x != null && x.HasConstraint(TestConstraint.First));  // 2x because value has different states
+            validator.ValidateTag("ArgNotNull", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && x.HasConstraint(ObjectConstraint.Null))
+                .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && x.HasConstraint(ObjectConstraint.NotNull));
         }
 
         [TestMethod]
@@ -286,7 +292,9 @@ Tag(""End"", arg);";
             validator.ValidateTag("B", x => x.Should().BeNull());
             validator.ValidateTag("C", x => x.Should().BeNull());
             validator.ValidateTag("D", x => x.Should().BeNull());
-            validator.ValidateTag("End", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && x.HasConstraint(ObjectConstraint.Null))
+                .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && x.HasConstraint(ObjectConstraint.NotNull));
         }
 
         [DataTestMethod]
@@ -404,7 +412,6 @@ Tag(""End"", arg);";
         [DataRow("stringNull is { Length: > 10 } and { Length: < 100 }", false)]
         [DataRow("stringNotNull is { Length: > 10 } and { Length: < 100 }", null)]
         [DataRow("stringUnknown is { Length: > 10 } and { Length: < 100 }", null)]
-
         [DataRow("objectNull is null or not { }", true)]
         [DataRow("objectNotNull is null or not { }", false)]
         [DataRow("objectUnknown is null or not { }", null)]
