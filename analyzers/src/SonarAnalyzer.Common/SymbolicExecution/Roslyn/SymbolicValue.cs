@@ -46,6 +46,11 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 ? this with { Constraints = Constraints.Remove(constraint.GetType()) }
                 : this;
 
+        public SymbolicValue WithoutConstraint<T>() where T : SymbolicConstraint =>
+            HasConstraint<T>()
+                ? this with { Constraints = Constraints.Remove(typeof(T)) }
+                : this;
+
         public bool HasConstraint<T>() where T : SymbolicConstraint =>
             Constraints.ContainsKey(typeof(T));
 

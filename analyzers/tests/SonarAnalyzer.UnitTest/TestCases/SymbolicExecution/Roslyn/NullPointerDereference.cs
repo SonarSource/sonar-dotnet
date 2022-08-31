@@ -370,38 +370,42 @@ namespace Tests.Diagnostics
         private readonly object _foo7 = new object();
         private static object _foo8;
         private const object NullConst = null;
+        private const object NullConstString = null;
+        private const string NotNullConst = "Lorem ipsum";
         private readonly object NullReadOnly = null;
 
         void DoNotLearnFromReadonly()
         {
-            NullReadOnly.ToString(); // Compliant. TODO: SLVS-1140
+            NullReadOnly.ToString(); // Compliant, we don't detect reassignments in constructor(s)
         }
 
         void DoLearnFromConstants()
         {
-            NullConst.ToString(); // FIXME Non-compliant
-//          ********* FIXME
+            NotNullConst.ToString();    // Compliant
+            NullConstString.ToString(); // Noncompliant
+            NullConst.ToString();       // Noncompliant
+//          ^^^^^^^^^
         }
 
         void DoLearnFromAnyConstant1()
         {
-            NullConst.ToString(); // FIXME Non-compliant
+            NullConst.ToString();       // Noncompliant
         }
         void DoLearnFromAnyConstant2()
         {
-            NullPointerDereferenceWithFields.NullConst.ToString(); // FIXME Non-compliant
+            NullPointerDereferenceWithFields.NullConst.ToString(); // Noncompliant
         }
         void DoLearnFromAnyConstant3()
         {
-            Tests.Diagnostics.NullPointerDereferenceWithFields.NullConst.ToString(); // FIXME Non-compliant
+            Tests.Diagnostics.NullPointerDereferenceWithFields.NullConst.ToString(); // Noncompliant
         }
         void DoLearnFromAnyConstant4()
         {
-            X.NullConst.ToString(); // FIXME Non-compliant
+            X.NullConst.ToString(); // Noncompliant
         }
         void DoLearnFromAnyConstant5()
         {
-            B.Whatever.ToString(); // FIXME Non-compliant
+            B.Whatever.ToString(); // Noncompliant
         }
 
         void DumbestTestOnFoo1()

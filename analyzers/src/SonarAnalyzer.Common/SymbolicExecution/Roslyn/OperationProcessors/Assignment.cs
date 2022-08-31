@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.Helpers;
+using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
@@ -27,6 +29,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
         public static ProgramState Process(SymbolicContext context, ISimpleAssignmentOperationWrapper assignment)
         {
             var rightSide = context.State[assignment.Value];
+            if (rightSide is not null && assignment.Target.Type.IsStruct()) // ToDo: This is a workaround. MMF-2401 should do this in a proper way.
+            {
+                rightSide = rightSide.WithoutConstraint<ObjectConstraint>();
+            }
             var newState = context.State
                 .SetOperationValue(assignment.Target, rightSide)
                 .SetOperationValue(assignment.WrappedOperation, rightSide);
