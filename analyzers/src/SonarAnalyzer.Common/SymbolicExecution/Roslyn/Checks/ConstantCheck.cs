@@ -27,7 +27,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
     internal class ConstantCheck : SymbolicCheck
     {
         protected override ProgramState PreProcessSimple(SymbolicContext context) =>
-            ConstraintFromValue(context.Operation.Instance.ConstantValue.Value) is { } constraint
+            context.Operation.Instance.ConstantValue.HasValue
+            && ConstraintFromValue(context.Operation.Instance.ConstantValue.Value) is { } constraint
                 ? context.SetOperationConstraint(constraint)
                 : context.State;
 
@@ -40,10 +41,17 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
                 // Update DefaultValue when adding new types
                 true => BoolConstraint.True,
                 false => BoolConstraint.False,
+                null => ObjectConstraint.Null,
+                string => ObjectConstraint.NotNull,
                 _ => null
             };
 
         private static object DefaultValue(ITypeSymbol type) =>
-            type.Is(KnownType.System_Boolean) ? false : null;
+            type switch
+            {
+                _ when type.Is(KnownType.System_Boolean) => false,
+                _ when type.IsReferenceType => ObjectConstraint.Null,
+                _ => null
+            };
     }
 }

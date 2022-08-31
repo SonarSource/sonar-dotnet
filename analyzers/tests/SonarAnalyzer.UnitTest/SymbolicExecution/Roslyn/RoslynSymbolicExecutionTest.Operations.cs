@@ -50,6 +50,31 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         }
 
         [TestMethod]
+        public void SimpleAssignment_ToLocalVariable_FromLocalConst()
+        {
+            var validator = SETestContext.CreateCS(@"const string a = null; var b = a; Tag(""b"", b);").Validator;
+            validator.ValidateTag("b", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void SimpleAssignment_ToLocalVariable_FromClassConst()
+        {
+            const string code = @"
+private const string isNull = null;
+private const string isNotNull = ""some text"";
+public void Method()
+{
+    var value = isNull;
+    Tag(""IsNull"", value);
+    value = isNotNull;
+    Tag(""IsNotNull"", value);
+}";
+            var validator = SETestContext.CreateCSMethod(code).Validator;
+            validator.ValidateTag("IsNull", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("IsNotNull", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        }
+
+        [TestMethod]
         public void SimpleAssignment_ToLocalVariable_FromTrackedSymbol_Chained()
         {
             var validator = SETestContext.CreateCS(@"bool a = true, b, c; c = b = a; Tag(""c"", c);", new LiteralDummyTestCheck()).Validator;
