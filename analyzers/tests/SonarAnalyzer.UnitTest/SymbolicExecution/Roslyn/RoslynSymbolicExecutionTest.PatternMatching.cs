@@ -345,7 +345,7 @@ Tag(""End"", arg);";
         [DataRow("objectUnknown is object o", null)]
         [DataRow("objectNull is int i", false)]
         [DataRow("objectNotNull is int i", null)]
-        [DataRow("integer is object o", true)]
+        [DataRow("integer is object o", null)]  // Should be "true" because of boxing
         public void DeclarationPatternSetBoolConstraint(string isPattern, bool? expectedBoolConstraint) =>
             ValidateSetBoolConstraint(isPattern, OperationKindEx.DeclarationPattern, expectedBoolConstraint);
 
@@ -461,7 +461,7 @@ public class Deconstructable
             {
                 if (expectedBoolConstraint is bool expected)
                 {
-                    x.Should().NotBeNull("we expect {expectedBoolConstraint} on the result");
+                    x.Should().NotBeNull($"we expect {expectedBoolConstraint} on the result");
                     x.HasConstraint(BoolConstraint.From(expected)).Should().BeTrue("we should have learned that result is {0}", expected);
                 }
                 else
