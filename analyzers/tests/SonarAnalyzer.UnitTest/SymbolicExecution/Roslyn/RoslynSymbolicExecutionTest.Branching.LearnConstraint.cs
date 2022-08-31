@@ -456,6 +456,20 @@ Tag(""End"", arg);";
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
         }
 
+        [TestMethod]
+        public void Branching_LearnsObjectConstraint_IsNull()
+        {
+            var code = @"
+arg?.ToString();
+Tag(""End"", arg);";
+            var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+            validator.ValidateContainsOperation(OperationKind.IsNull);
+            validator.Validate("Invocation: .ToString()", x => x.State.SymbolsWith(ObjectConstraint.NotNull).Should().ContainSingle());
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
+        }
+
         private static ValidatorTestCheck CreateIfElseEndValidatorCS(string expression, OperationKind expectedOperation)
         {
             var code = @$"
