@@ -45,8 +45,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
             };
 
         private static ITypeSymbol ConvertedType(IOperation operation) =>
-                    IConversionOperationWrapper.IsInstance(operation)
-                        ? IConversionOperationWrapper.FromOperation(operation).Type
-                        : null;
+            IConversionOperationWrapper.IsInstance(operation)
+                ? IConversionOperationWrapper.FromOperation(operation).Type
+                : null;
     }
 }
