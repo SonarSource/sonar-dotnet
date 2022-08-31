@@ -27,13 +27,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
     internal class InvocationCheck : SymbolicCheck
     {
         public override ProgramState[] PreProcess(SymbolicContext context) =>
-            context.Operation.Instance.Kind switch
-            {
-                OperationKindEx.Invocation => PreProcessInvocation(context.State, IInvocationOperationWrapper.FromOperation(context.Operation.Instance)),
-                _ => null,
-            } is { } newState
-                ? newState
-                : base.PreProcess(context);
+            context.Operation.Instance.Kind == OperationKindEx.Invocation
+                && PreProcessInvocation(context.State, IInvocationOperationWrapper.FromOperation(context.Operation.Instance)) is { } newState
+                    ? newState
+                    : base.PreProcess(context);
 
         private ProgramState[] PreProcessInvocation(ProgramState state, IInvocationOperationWrapper invocation)
         {
@@ -53,11 +50,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
                 };
             }
 
-            return null;
+            return default;
 
             ProgramState SetOperationConstraint(BoolConstraint boolConstraint) =>
                 state.SetOperationConstraint(invocation.WrappedOperation, boolConstraint);
-
         }
 
         private static ISymbol ArgumentIsNullOrEmpty(IInvocationOperationWrapper invocation) =>
