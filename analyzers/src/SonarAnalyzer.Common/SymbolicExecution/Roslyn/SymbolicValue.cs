@@ -28,8 +28,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
     public sealed record SymbolicValue
     {
-        public static readonly SymbolicValue Null = new SymbolicValue().WithConstraint(ObjectConstraint.Null);
         public static readonly SymbolicValue This = new SymbolicValue().WithConstraint(ObjectConstraint.NotNull);
+        public static readonly SymbolicValue Null = new SymbolicValue().WithConstraint(ObjectConstraint.Null);
+        public static readonly SymbolicValue NotNull = new SymbolicValue().WithConstraint(ObjectConstraint.NotNull);
 
         // SymbolicValue can have only one constraint instance of specific type at a time
         private ImmutableDictionary<Type, SymbolicConstraint> Constraints { get; init; } = ImmutableDictionary<Type, SymbolicConstraint>.Empty;
