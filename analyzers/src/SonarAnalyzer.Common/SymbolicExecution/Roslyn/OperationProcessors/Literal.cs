@@ -19,7 +19,6 @@
  */
 
 using Microsoft.CodeAnalysis;
-using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
@@ -33,16 +32,21 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
             Process(context, defaultValue.Type);
 
         private static ProgramState Process(SymbolicContext context, ITypeSymbol type) =>
-            context.Operation.Instance.ConstantValue switch
+            SymbolicValueFromConstant(context.Operation, type) is { } symbolicValue
+                ? context.State.SetOperationValue(context.Operation, symbolicValue)
+                : context.State;
+
+        private static SymbolicValue SymbolicValueFromConstant(IOperationWrapperSonar operation, ITypeSymbol type) =>
+            operation.Instance.ConstantValue switch
             {
-                { HasValue: true, Value: null } when (type ?? ConvertedType(context.Operation.Parent)) is { IsReferenceType: true } => context.SetOperationConstraint(ObjectConstraint.Null),
+                { HasValue: true, Value: null } when (type ?? ConvertedType(operation.Parent)) is { IsReferenceType: true } => SymbolicValue.Null,
                 { HasValue: true, Value: string } => SymbolicValue.NotNull,
-                _ => context.State,
+                _ => null,
             };
 
         private static ITypeSymbol ConvertedType(IOperation operation) =>
-            IConversionOperationWrapper.IsInstance(operation)
-                ? IConversionOperationWrapper.FromOperation(operation).Type
-                : null;
+                    IConversionOperationWrapper.IsInstance(operation)
+                        ? IConversionOperationWrapper.FromOperation(operation).Type
+                        : null;
     }
 }
