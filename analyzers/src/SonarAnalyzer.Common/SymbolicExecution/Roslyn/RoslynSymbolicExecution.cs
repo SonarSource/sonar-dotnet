@@ -302,7 +302,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                     OperationKindEx.IsPattern => Pattern.LearnBranchingConstraint(state, As(IIsPatternOperationWrapper.FromOperation), useOpposite),
                     OperationKindEx.IsType => IsType.LearnBranchingConstraint(state, As(IIsTypeOperationWrapper.FromOperation), useOpposite),
                     OperationKindEx.Unary when operation.ToUnary() is { OperatorKind: UnaryOperatorKind.Not } unary => LearnBranchingConstraintsFromOperation(state, unary.Operand, !useOpposite),
-                    OperationKindEx.Invocation => Invocation.LearnBranchingConstraint(state, As(IInvocationOperationWrapper.FromOperation), useOpposite),
                     _ => state
                 };
 
