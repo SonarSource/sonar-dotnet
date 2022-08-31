@@ -303,7 +303,7 @@ namespace Tests.Diagnostics
         {
             if (string.IsNullOrEmpty(s1))
             {
-                s1.ToString(); // FIXME Non-compliant
+                s1.ToString(); // Noncompliant
             }
             else
             {
@@ -340,7 +340,7 @@ namespace Tests.Diagnostics
 
         void StringEmpty6(string path)
         {
-            var s = string.IsNullOrEmpty(path) ? path.Split('/') : new string[] { }; // FIXME Non-compliant
+            var s = string.IsNullOrEmpty(path) ? path.Split('/') : new string[] { }; // Noncompliant
         }
 
         void StringEmpty7(string path)
