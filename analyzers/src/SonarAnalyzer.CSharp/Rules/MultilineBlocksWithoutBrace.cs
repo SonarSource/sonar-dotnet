@@ -119,14 +119,9 @@ public sealed class MultilineBlocksWithoutBrace : SonarDiagnosticAnalyzer
     {
         var line = StartPosition(node).Line;
         var firstOnLine = node.AncestorsAndSelf().Last(x => StartPosition(x).Line == line);
-        return Proxy(firstOnLine, firstOnLine != node);
-
-        static LinePosition Proxy(SyntaxNode node, bool isAncestor)
-        {
-            var position = StartPosition(node);
-            // If based on an ancestor, increase the indentation size.
-            return isAncestor ? new LinePosition(position.Line, position.Character + IndentSize) : position;
-        }
+        var position = StartPosition(firstOnLine);
+        // If based on an ancestor, increase the indentation size.
+        return firstOnLine != node ? new LinePosition(position.Line, position.Character + IndentSize) : position;
     }
 
     private static LinePosition StartPosition(SyntaxNode node) =>
