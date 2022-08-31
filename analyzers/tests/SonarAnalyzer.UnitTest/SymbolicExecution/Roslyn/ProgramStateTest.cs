@@ -183,8 +183,9 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void ToString_WithSymbols()
         {
-            var assignment = TestHelper.CompileCfgBodyCS("var a = true;").Blocks[1].Operations[0];
+            var assignment = TestHelper.CompileCfgBodyCS("var a = arg;", "bool arg").Blocks[1].Operations[0];
             var variableSymbol = assignment.Children.First().TrackedSymbol();
+            var parameterSymbol = assignment.Children.Last().TrackedSymbol();
             var sut = ProgramState.Empty.SetSymbolValue(variableSymbol, null);
             sut.ToString().Should().BeIgnoringLineEndings(
 @"Empty
@@ -197,11 +198,12 @@ a: No constraints
 ");
 
             var valueWithConstraint = new SymbolicValue().WithConstraint(TestConstraint.Second);
-            sut = sut.SetSymbolValue(variableSymbol.ContainingSymbol, valueWithConstraint);
+            sut = sut.SetSymbolValue(variableSymbol.ContainingSymbol, valueWithConstraint).SetSymbolValue(parameterSymbol, valueWithConstraint);
             sut.ToString().Should().BeIgnoringLineEndings(
 @"Symbols:
 a: No constraints
-Sample.Main(): Second
+arg: Second
+Main: Second
 ");
         }
 
@@ -278,7 +280,7 @@ Exception: Unknown
 @"Exception: Unknown
 Symbols:
 a: No constraints
-Sample.Main(): First
+Main: First
 Operations:
 LocalReferenceOperation / VariableDeclaratorSyntax: a = true: First
 SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true: No constraints

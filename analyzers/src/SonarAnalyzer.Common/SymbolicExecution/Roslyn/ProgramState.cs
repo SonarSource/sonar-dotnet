@@ -83,7 +83,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             this with { CaptureOperation = CaptureOperation.SetItem(capture, operation) };
 
         public ProgramState SetException(ExceptionState exception) =>
-            this with { Exceptions =  ImmutableStack<ExceptionState>.Empty.Push(exception) };
+            this with { Exceptions = ImmutableStack<ExceptionState>.Empty.Push(exception) };
 
         public ProgramState PushException(ExceptionState exception) =>
             this with { Exceptions = Exceptions.Push(exception) };
