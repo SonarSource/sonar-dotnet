@@ -32,11 +32,25 @@ namespace Tests.Diagnostics
         }
 
         // https://github.com/SonarSource/sonar-dotnet/issues/1324
-        public void FlasePositive(object o)
+        public void Repro_1324(object o)
         {
             try
             {
                 var a = o?.ToString();
+            }
+            catch (InvalidOperationException) when (o != null)
+            {
+                var b = o.ToString(); // Compliant, o is checked for null in this branch
+            }
+            catch (ApplicationException) when (o == null)
+            {
+                var b = o.ToString(); // Unreachable, o? cannot throw ApplicationException
+            }
+
+            try
+            {
+                var a = o?.ToString();
+                CanThrow();
             }
             catch (InvalidOperationException) when (o != null)
             {
@@ -62,14 +76,16 @@ namespace Tests.Diagnostics
             }
         }
 
-    public void Compliant(List<int> list)
-    {
-      var row = list?.Count;
-      if (row != null)
-      {
-        var type = list.ToArray();
-      }
-    }
+        public void Compliant(List<int> list)
+        {
+            var row = list?.Count;
+            if (row != null)
+            {
+                var type = list.ToArray();  // Noncompliant FP, nullability is inferred from result relation
+            }
+        }
+
+        private void CanThrow() { }
 
     public class A
     {
@@ -81,8 +97,8 @@ namespace Tests.Diagnostics
       var row = list?.Count;
       if (a.booleanVal = (row != null))
       {
-        var type = list.ToArray();
-      }
+        var type = list.ToArray();  // Noncompliant FP, nullability is inferred from result relation
+            }
     }
 
     public void NonCompliant(List<int> list)
@@ -90,7 +106,7 @@ namespace Tests.Diagnostics
       var row = list?.Count;
       if (row == null)
       {
-        var type = list.ToArray(); // FIXME Non-compliant
+        var type = list.ToArray(); // Noncompliant
       }
     }
 
@@ -99,7 +115,7 @@ namespace Tests.Diagnostics
       var row = list?.Count;
       if (a.booleanVal = (row == null))
       {
-        var type = list.ToArray(); // FIXME Non-compliant
+        var type = list.ToArray(); // Noncompliant
       }
     }
 
@@ -108,7 +124,7 @@ namespace Tests.Diagnostics
       switch (o?.GetHashCode())
       {
         case 1:
-          o.ToString();
+          o.ToString(); // Noncompliant FP, nullability is inferred from result relation
           break;
         default:
           break;
@@ -138,14 +154,14 @@ namespace Tests.Diagnostics
       switch (obj?.Color)
       {
         case null:
-          Console.ForegroundColor = obj.Color; // FIXME Non-compliant
+          Console.ForegroundColor = obj.Color; // Noncompliant
           break;
         case ConsoleColor.Red:
-          Console.ForegroundColor = obj.Color; //compliant
-          break;
+          Console.ForegroundColor = obj.Color; // Noncompliant FP, nullability is inferred from result relation
+                    break;
         default:
-          Console.WriteLine($"Color {obj.Color} is not supported."); //compliant
-          break;
+          Console.WriteLine($"Color {obj.Color} is not supported."); // Noncompliant FP, nullability is inferred from result relation
+                    break;
       }
     }
 
@@ -227,15 +243,15 @@ namespace Tests.Diagnostics
             switch (valueHolder?.MyEnum)
             {
                 case MyEnum.ONE:
-                    return valueHolder.Value;
+                    return valueHolder.Value;   // Noncompliant FP, nullability is inferred from result relation
                 case MyEnum.TWO:
                 case MyEnum.THREE:
-                    return valueHolder.Value;
+                    return valueHolder.Value;   // Noncompliant FP, nullability is inferred from result relation
                 case MyEnum.FOUR:
-                    return valueHolder.Value;
+                    return valueHolder.Value;   // Noncompliant FP, nullability is inferred from result relation
                 case MyEnum.FIVE:
                 case null:
-                    return valueHolder.Value; // FIXME Non-compliant Ok
+                    return valueHolder.Value;   // Noncompliant
                 default:
                     return string.Empty;
             }

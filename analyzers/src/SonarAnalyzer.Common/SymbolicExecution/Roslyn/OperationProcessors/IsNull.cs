@@ -30,5 +30,11 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
             && value.HasConstraint<ObjectConstraint>()
                 ? context.SetOperationConstraint(BoolConstraint.From(value.HasConstraint(ObjectConstraint.Null)))
                 : context.State;
+
+        public static ProgramState LearnBranchingConstraint(ProgramState state, IIsNullOperationWrapper isNull, bool useOpposite) =>
+            state.ResolveCapture(isNull.Operand).TrackedSymbol() is { } testedSymbol
+                // Can't use ObjectConstraint.ApplyOpposite() because here, we are sure that it is either Null or NotNull
+                ? state.SetSymbolConstraint(testedSymbol, useOpposite ? ObjectConstraint.NotNull : ObjectConstraint.Null)
+                : state;
     }
 }

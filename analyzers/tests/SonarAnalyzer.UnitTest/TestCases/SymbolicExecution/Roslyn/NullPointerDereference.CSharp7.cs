@@ -205,7 +205,7 @@ namespace Tests.Diagnostics
         {
             if (exception?.Data is null)
             {
-                if (exception.InnerException?.Data is IDictionary innerexceptiondata) // FIXME Non-compliant
+                if (exception.InnerException?.Data is IDictionary innerexceptiondata) // Noncompliant
                 {
 
                 }
@@ -270,7 +270,7 @@ namespace Tests.Diagnostics
             return -1;
         }
 
-        return dict.Count; // FIXME Non-compliant FP
+        return dict.Count; // Noncompliant FP
     }
   }
 }

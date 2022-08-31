@@ -992,7 +992,7 @@ namespace Repro_3395
                 // Do something
             }
 
-            return test.Count; // FIXME Non-compliant FP
+            return test.Count; // Noncompliant FP
         }
 
         public static int NoIssueReported()
@@ -1014,7 +1014,7 @@ namespace Repro_3395
                 // Do something
             }
 
-            return something.SomeProperty; // FIXME Non-compliant
+            return something.SomeProperty; // Noncompliant
         }
 
         public static Something GetSomething()
@@ -1061,7 +1061,7 @@ namespace Repro_3395
                     continue;
                 }
 
-                var _ = providerCourse.Items.Where(items => items == "item1"); // FIXME Non-compliant FP
+                var _ = providerCourse.Items.Where(items => items == "item1"); // Noncompliant FP
             }
         }
 

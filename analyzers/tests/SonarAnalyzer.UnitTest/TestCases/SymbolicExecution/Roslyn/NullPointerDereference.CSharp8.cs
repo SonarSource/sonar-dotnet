@@ -52,7 +52,7 @@
         public void NullablePrimitiveType_FN()
         {
             int? i1 = null;
-            i1 = i1 ?? i1.GetHashCode(); // FN - nullable primitive type not supported
+            i1 = i1 ?? i1.GetHashCode(); // Noncompliant
         }
     }
 
