@@ -359,12 +359,12 @@ Tag(""End"", arg);";
         [DataRow("objectUnknown is not null", OperationKindEx.NegatedPattern, null)]
         [DataRow("objectUnknown is not { }", OperationKindEx.NegatedPattern, null)]
         [DataRow("objectUnknown is not not null", OperationKindEx.NegatedPattern, null)]
-        [DataRow("nullableBoolTrue is not true", OperationKindEx.NegatedPattern, null)]     // FN. Should be false
-        [DataRow("nullableBoolTrue is not false", OperationKindEx.NegatedPattern, null)]    // FN. Should be true
-        [DataRow("nullableBoolFalse is not true", OperationKindEx.NegatedPattern, null)]    // FN. Should be true
-        [DataRow("nullableBoolFalse is not false", OperationKindEx.NegatedPattern, null)]   // FN. Should be false
-        [DataRow("nullableBoolNull is not true", OperationKindEx.NegatedPattern, null)]     // FN. Should be true
-        [DataRow("nullableBoolNull is not false", OperationKindEx.NegatedPattern, null)]    // FN. Should be true
+        [DataRow("nullableBoolTrue is not true", OperationKindEx.NegatedPattern, null)]     // Should be false
+        [DataRow("nullableBoolTrue is not false", OperationKindEx.NegatedPattern, null)]    // Should be true
+        [DataRow("nullableBoolFalse is not true", OperationKindEx.NegatedPattern, null)]    // Should be true
+        [DataRow("nullableBoolFalse is not false", OperationKindEx.NegatedPattern, null)]   // Should be false
+        [DataRow("nullableBoolNull is not true", OperationKindEx.NegatedPattern, null)]     // Should be true
+        [DataRow("nullableBoolNull is not false", OperationKindEx.NegatedPattern, null)]    // Should be true
         [DataRow("nullableBoolUnknown is not true", OperationKindEx.NegatedPattern, null)]
         [DataRow("nullableBoolUnknown is not false", OperationKindEx.NegatedPattern, null)]
         [DataRow("objectNull is not object", OperationKindEx.TypePattern, true)]
@@ -427,39 +427,34 @@ Tag(""End"", arg);";
         private static void ValidateSetBoolConstraint(string isPattern, OperationKind expectedOperation, bool? expectedBoolConstraint)
         {
             var code = @$"
-    public void Main()
-    {{
-        var objectNotNull = new object();
-        var objectNull = (object)null;
-        var objectUnknown = Unknown<object>();
-        var exceptionNotNull = new Exception();
-        var exceptionNull = (Exception)null;
-        var exceptionUnknown = Unknown<Exception>();
-        var nullableBoolTrue = (bool?)true;
-        var nullableBoolFalse = (bool?)false;
-        var nullableBoolNull = (bool?)null;
-        var nullableBoolUnknown = Unknown<bool?>();
-        var stringNotNull = new string('c', 1);  // Make sure, we learn 's is not null'
-        var stringNull = (string)null;
-        var stringUnknown = Unknown<string>();
-        var integer = new int();
-        var deconstructableNull = (Deconstructable)null;
-        var deconstructableNotNull = new Deconstructable();
-        var deconstructableUnknown = Unknown<Deconstructable>();
+public void Main()
+{{
+    var objectNotNull = new object();
+    var objectNull = (object)null;
+    var objectUnknown = Unknown<object>();
+    var exceptionNotNull = new Exception();
+    var exceptionNull = (Exception)null;
+    var exceptionUnknown = Unknown<Exception>();
+    var nullableBoolTrue = (bool?)true;
+    var nullableBoolFalse = (bool?)false;
+    var nullableBoolNull = (bool?)null;
+    var nullableBoolUnknown = Unknown<bool?>();
+    var stringNotNull = new string('c', 1);  // Make sure, we learn 's is not null'
+    var stringNull = (string)null;
+    var stringUnknown = Unknown<string>();
+    var integer = new int();
+    var deconstructableNull = (Deconstructable)null;
+    var deconstructableNotNull = new Deconstructable();
+    var deconstructableUnknown = Unknown<Deconstructable>();
 
-        var result = {isPattern};
-        Tag(""Result"", result);
-    }}
+    var result = {isPattern};
+    Tag(""Result"", result);
+}}
 
-    public class Deconstructable
-    {{
-        public void Deconstruct(out int A, out int B)
-        {{
-            A = 1;
-            B = 2;
-        }}
-    }}
-";
+public class Deconstructable
+{{
+    public void Deconstruct(out int A, out int B) {{ A = 1; B = 2; }}
+}}";
             var validator = SETestContext.CreateCSMethod(code).Validator;
             validator.ValidateContainsOperation(expectedOperation);
             validator.ValidateTag("Result", x =>
