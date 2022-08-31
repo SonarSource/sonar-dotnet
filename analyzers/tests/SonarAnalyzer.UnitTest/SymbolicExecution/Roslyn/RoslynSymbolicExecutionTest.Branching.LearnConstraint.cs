@@ -433,6 +433,59 @@ if (value = boolParameter)
                 .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
         }
 
+        [DataTestMethod]
+        [DataRow("arg is { }")]
+        [DataRow("arg is not not { }")]
+        [DataRow("!!(arg is { })")]
+        public void Branching_LearnsObjectConstraint_RecursivePattern_ElseIsNull(string expression)
+        {
+            var validator = CreateIfElseEndValidatorCS(expression, OperationKind.RecursivePattern);
+            validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
+        }
+
+        [DataTestMethod]
+        [DataRow("arg is string { Length: 0 }")]
+        [DataRow("arg is string { Length: var length }")]
+        public void Branching_LearnsObjectConstraint_RecursivePattern_ElseIsUnknown(string expression)
+        {
+            var validator = CreateIfElseEndValidatorCS(expression, OperationKind.RecursivePattern);
+            validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("Else", x => x.Should().BeNull("it could be null or any other type"));
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x == null)
+                .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
+        }
+
+        [DataTestMethod]
+        [DataRow("!(arg is { })")]
+        [DataRow("arg is not { }")]
+        public void Branching_LearnsObjectConstraint_RecursivePattern_Negated_IfIsNotNull(string expression)
+        {
+            var validator = CreateIfElseEndValidatorCS(expression, OperationKind.RecursivePattern);
+            validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
+        }
+
+        [DataTestMethod]
+        [DataRow("arg is not string { Length: var length }")]
+        [DataRow("arg is not string { Length: 0 }")]
+        public void Branching_LearnsObjectConstraint_RecursivePattern_Negated_IfIsUnknown(string expression)
+        {
+            var validator = CreateIfElseEndValidatorCS(expression, OperationKind.RecursivePattern);
+            validator.ValidateTag("If", x => x.Should().BeNull("it could be null or any other type"));
+            validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x == null)
+                .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
+        }
+
         [TestMethod]
         public void Branching_LearnsObjectConstraint_FlowCapture()
         {

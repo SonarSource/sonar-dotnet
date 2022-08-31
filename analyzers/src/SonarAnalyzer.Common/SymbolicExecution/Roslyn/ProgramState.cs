@@ -146,7 +146,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             Exceptions.IsEmpty ? null : Exceptions.JoinStr(string.Empty, x => $"Exception: {x}{Environment.NewLine}");
 
         private string SerializeSymbols() =>
-            Serialize(SymbolValue, "Symbols", x => x.ToString(), x => x.ToString());
+            Serialize(SymbolValue, "Symbols", x => x.Name, x => x.ToString());
 
         private string SerializeOperations() =>
             Serialize(OperationValue, "Operations", x => x.Serialize(), x => x.ToString());
