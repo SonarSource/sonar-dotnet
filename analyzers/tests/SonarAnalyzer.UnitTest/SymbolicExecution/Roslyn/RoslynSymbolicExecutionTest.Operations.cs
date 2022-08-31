@@ -422,36 +422,34 @@ Tag(""StringConst"", stringConst);";
             validator.ValidateTag("StringConst", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
         }
 
-        [TestMethod]
-        public void Literal_Default_OtherLiterals()
+        [DataTestMethod]
+        [DataRow("true")]
+        [DataRow("false")]
+        public void Literal_Default_BoolLiterals(string literal)
         {
-            const string code = @"
-var c = 'c';
-var b = true;
-var i = 1;
-var u = 1u;
-var l = 1l;
-var h = 0xFF;
-var d = 1.0;
-var f = 1.0f;
-Tag(""C"", c);
-Tag(""B"", b);
-Tag(""I"", i);
-Tag(""U"", u);
-Tag(""L"", l);
-Tag(""H"", h);
-Tag(""D"", d);
-Tag(""F"", f);
-";
+            var expected = bool.Parse(literal);
+            var code = @$"
+var value = {literal};
+Tag(""Value"", value);";
             var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("C", x => x.Should().BeNull());
-            validator.ValidateTag("B", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
-            validator.ValidateTag("I", x => x.Should().BeNull());
-            validator.ValidateTag("U", x => x.Should().BeNull());
-            validator.ValidateTag("L", x => x.Should().BeNull());
-            validator.ValidateTag("H", x => x.Should().BeNull());
-            validator.ValidateTag("D", x => x.Should().BeNull());
-            validator.ValidateTag("F", x => x.Should().BeNull());
+            validator.ValidateTag("Value", x => x.HasConstraint(BoolConstraint.From(expected)));
+        }
+
+        [DataTestMethod]
+        [DataRow("'c'")]
+        [DataRow("1")]
+        [DataRow("1u")]
+        [DataRow("1l")]
+        [DataRow("0xFF")]
+        [DataRow("1.0")]
+        [DataRow("1.0f")]
+        public void Literal_Default_OtherLiterals(string literal)
+        {
+            var code = @$"
+var value = {literal};
+Tag(""Value"", value);";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("Value", x => x.Should().BeNull());
         }
 
         [TestMethod]
