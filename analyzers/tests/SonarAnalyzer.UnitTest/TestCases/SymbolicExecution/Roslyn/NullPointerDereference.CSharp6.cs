@@ -87,100 +87,100 @@ namespace Tests.Diagnostics
 
         private void CanThrow() { }
 
-    public class A
-    {
-      public bool booleanVal { get; set; }
-    }
+        public class A
+        {
+            public bool booleanVal { get; set; }
+        }
 
-    public void Compliant1(List<int> list, A a)
-    {
-      var row = list?.Count;
-      if (a.booleanVal = (row != null))
-      {
-        var type = list.ToArray();  // Noncompliant FP, nullability is inferred from result relation
+        public void Compliant1(List<int> list, A a)
+        {
+            var row = list?.Count;
+            if (a.booleanVal = (row != null))
+            {
+                var type = list.ToArray();  // Noncompliant FP, nullability is inferred from result relation
             }
-    }
+        }
 
-    public void NonCompliant(List<int> list)
-    {
-      var row = list?.Count;
-      if (row == null)
-      {
-        var type = list.ToArray(); // Noncompliant
-      }
-    }
+        public void NonCompliant(List<int> list)
+        {
+            var row = list?.Count;
+            if (row == null)
+            {
+                var type = list.ToArray(); // Noncompliant
+            }
+        }
 
-    public void NonCompliant1(List<int> list, A a)
-    {
-      var row = list?.Count;
-      if (a.booleanVal = (row == null))
-      {
-        var type = list.ToArray(); // Noncompliant
-      }
-    }
+        public void NonCompliant1(List<int> list, A a)
+        {
+            var row = list?.Count;
+            if (a.booleanVal = (row == null))
+            {
+                var type = list.ToArray(); // Noncompliant
+            }
+        }
 
-    void Compliant2(object o)
-    {
-      switch (o?.GetHashCode())
-      {
-        case 1:
-          o.ToString(); // Noncompliant FP, nullability is inferred from result relation
-          break;
-        default:
-          break;
-      }
-    }
-
-    void NonCompliant2()
-    {
-      object o = null;
-      switch (o?.GetHashCode())
-      {
-        case null:
-          o.ToString(); // Noncompliant
-          break;
-        default:
-          break;
-      }
-    }
-  }
-
-  public class ReproForIssue2338
-  {
-    public ConsoleColor Color { get; set; }
-
-    public void Method1(ReproForIssue2338 obj)
-    {
-      switch (obj?.Color)
-      {
-        case null:
-          Console.ForegroundColor = obj.Color; // Noncompliant
-          break;
-        case ConsoleColor.Red:
-          Console.ForegroundColor = obj.Color; // Noncompliant FP, nullability is inferred from result relation
+        void Compliant2(object o)
+        {
+            switch (o?.GetHashCode())
+            {
+                case 1:
+                    o.ToString(); // Noncompliant FP, nullability is inferred from result relation
                     break;
-        default:
-          Console.WriteLine($"Color {obj.Color} is not supported."); // Noncompliant FP, nullability is inferred from result relation
+                default:
                     break;
-      }
+            }
+        }
+
+        void NonCompliant2()
+        {
+            object o = null;
+            switch (o?.GetHashCode())
+            {
+                case null:
+                    o.ToString(); // Noncompliant
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
-    public void Method2(ReproForIssue2338 obj)
+    public class ReproForIssue2338
     {
-      obj = null;
-      switch (obj?.Color)
-      {
-        case ConsoleColor.Red:
-          Console.ForegroundColor = obj.Color;  // FIXME was compliant before
-//                                  ^^^    {{'obj' is null on at least one execution path.}}
-          break;
-        default:
-          Console.WriteLine($"Color {obj.Color} is not supported."); // Noncompliant
-//                                   ^^^    {{'obj' is null on at least one execution path.}}
-          break;
-      }
+        public ConsoleColor Color { get; set; }
+
+        public void Method1(ReproForIssue2338 obj)
+        {
+            switch (obj?.Color)
+            {
+                case null:
+                    Console.ForegroundColor = obj.Color; // Noncompliant
+                    break;
+                case ConsoleColor.Red:
+                    Console.ForegroundColor = obj.Color; // Noncompliant FP, nullability is inferred from result relation
+                    break;
+                default:
+                    Console.WriteLine($"Color {obj.Color} is not supported."); // Noncompliant FP, nullability is inferred from result relation
+                    break;
+            }
+        }
+
+        public void Method2(ReproForIssue2338 obj)
+        {
+            obj = null;
+            switch (obj?.Color)
+            {
+                case ConsoleColor.Red:
+                    Console.ForegroundColor = obj.Color;  // Noncompliant FIXME was compliant before
+//                                            ^^^    {{'obj' is null on at least one execution path.}}
+                    break;
+                default:
+                    Console.WriteLine($"Color {obj.Color} is not supported."); // Noncompliant
+//                                             ^^^    {{'obj' is null on at least one execution path.}}
+                    break;
+            }
+        }
     }
-  }
 
     public class ReproFor2593
     {
