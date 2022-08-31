@@ -37,9 +37,13 @@
 
         public void NullCoalescenceAssignment_NotNull()
         {
-            string name1 = "";
-            string name2 = null;
-            name1 ??= name2.ToString(); // Noncompliant FIXME (was compliant before) Ok - name1 is not null
+            string notNullString = "";
+            string nullString = null;
+            notNullString ??= nullString.ToString(); // Compliant, never visited
+
+            object notNullObject = new object();
+            object nullObject = null;
+            notNullObject ??= nullObject.ToString(); // Compliant, never visited
         }
     }
 

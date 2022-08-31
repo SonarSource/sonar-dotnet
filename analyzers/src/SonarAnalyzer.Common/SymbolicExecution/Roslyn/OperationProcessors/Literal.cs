@@ -19,6 +19,7 @@
  */
 
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
@@ -32,10 +33,21 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
             Process(context, defaultValue.Type);
 
         private static ProgramState Process(SymbolicContext context, ITypeSymbol type) =>
+            (NullValue(context, type) ?? NotNullValue(context, type)) is { } value
+                ? context.State.SetOperationValue(context.Operation, value)
+                : context.State;
+
+        private static SymbolicValue NullValue(SymbolicContext context, ITypeSymbol type) =>
             context.Operation.Instance.ConstantValue is { HasValue: true, Value: null }
             && (type ?? ConvertedType(context.Operation.Parent)) is { IsReferenceType: true }
-                ? context.State.SetOperationValue(context.Operation, SymbolicValue.Null)
-                : context.State;
+                ? SymbolicValue.Null
+                : null;
+
+        private static SymbolicValue NotNullValue(SymbolicContext context, ITypeSymbol type) =>
+            context.Operation.Instance.ConstantValue is { HasValue: true }
+            && (type ?? ConvertedType(context.Operation.Parent)).Is(KnownType.System_String)
+                ? SymbolicValue.NotNull
+                : null;
 
         private static ITypeSymbol ConvertedType(IOperation operation) =>
             IConversionOperationWrapper.IsInstance(operation)
