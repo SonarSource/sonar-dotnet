@@ -52,7 +52,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
                 .ForCondition(allConstraints => allConstraints.Contains(constraint))
                 .FailWith("Expected {context:symbolicValue} to have constraint {0}{reason}, but symbolicValue has {1} constraints.",
                     _ => constraint,
-                    x => x);
+                    x => x.OrderBy(x => x.ToString()));
             var matchedConstrainted = Subject.AllConstraints.First(x => x == constraint);
             return new(this, matchedConstrainted);
         }
@@ -71,7 +71,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
                 .ForCondition(allConstraints => allConstraints.Count == 1)
                 .FailWith("Expected {context:symbolicValue} to have only constraint {0}{reason}, but symbolicValue has {1} constraints.",
                     _ => constraint,
-                    x => x)
+                    x => x.OrderBy(x => x.ToString()))
                 .Then
                 .ForCondition(allConstraints => allConstraints[0] == constraint)
                 .FailWith("Expected {context:symbolicValue} to have constraint {0}{reason}, but symbolicValue has {1} constraint.",
@@ -86,7 +86,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
             Execute.Assertion
                 .BecauseOf(because, becauseArgs)
                 .ForCondition(Subject == null || Subject.AllConstraints.All(x => x == null))
-                .FailWith("Expected {context:symbolicValue} to have no constraints{reason}, but {0} constraints were found.", Subject?.AllConstraints);
+                .FailWith("Expected {context:symbolicValue} to have no constraints{reason}, but {0} constraints were found.", Subject?.AllConstraints.OrderBy(x => x.ToString()));
             return new(this);
         }
 
@@ -101,7 +101,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
                 .FailWith("Expected {context:symbolicValue} to have constraints {0}{reason}, but constraints {1} are missing. Actual constraints {2}.",
                     _ => constraints,
                     x => x,
-                    _ => Subject.AllConstraints);
+                    _ => Subject.AllConstraints.OrderBy(x => x.ToString()));
             return new(this);
         }
 
@@ -120,20 +120,20 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
                 .FailWith("Expected {context:symbolicValue} to only have constraints {0}{reason}, but constraints {1} are missing. Actual constraints {2}.",
                     _ => constraints,
                     missingAndAdditional => missingAndAdditional.missingConstraints,
-                    _ => Subject.AllConstraints)
+                    _ => Subject.AllConstraints.OrderBy(x => x.ToString()))
                 .Then
                 .ForCondition(missingAndAdditional => missingAndAdditional is { missingConstraints.Count: > 0 } or { addionalConstraints.Count: 0 })
                 .FailWith("Expected {context:symbolicValue} to only have constraints {0}{reason}, but {1} additional constraints are present. Actual constraints {2}.",
                     _ => constraints,
                     missingAndAdditional => missingAndAdditional.addionalConstraints,
-                    _ => Subject.AllConstraints)
+                    _ => Subject.AllConstraints.OrderBy(x => x.ToString()))
                 .Then
                 .ForCondition(missingAndAdditional => missingAndAdditional is { missingConstraints.Count: 0, addionalConstraints.Count: 0 })
                 .FailWith("Expected {context:symbolicValue} to have constraints {0}{reason}, but constraints {1} are missing and additional constraints {2} are present. Actual constraints {3}.",
                     _ => constraints,
                     missingAndAdditional => missingAndAdditional.missingConstraints,
                     missingAndAdditional => missingAndAdditional.addionalConstraints,
-                    _ => Subject.AllConstraints);
+                    _ => Subject.AllConstraints.OrderBy(x => x.ToString()));
             return new(this);
         }
 
