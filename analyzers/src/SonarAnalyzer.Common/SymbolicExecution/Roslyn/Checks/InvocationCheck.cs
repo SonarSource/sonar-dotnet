@@ -41,7 +41,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
             {
                 if (state[symbol] is { } symbolicValue && symbolicValue.HasConstraint(ObjectConstraint.Null))
                 {
-                    // IsNullOrEmpty will always return "true". For the opposite case, we can not tell for sure
+                    // IsNullOrEmpty will always return "true". For the NotNull case, we can not tell for sure (string could be empty)
                     return new[] { SetOperationConstraint(BoolConstraint.True) };
                 }
 
