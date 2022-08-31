@@ -535,5 +535,26 @@ Tag(""End"");";
                 "Else",
                 "End");
         }
+
+        [TestMethod]
+        public void Branching_IsNullOrEmpty_SetsNotNullWhenFalse()
+        {
+            const string code = @"
+if (string.IsNullOrEmpty(arg))
+{
+    Tag(""If"", arg);
+}
+else
+{
+    Tag(""Else"", arg);
+}
+Tag(""End"", arg);";
+            var validator = SETestContext.CreateCS(code, ", string arg").Validator;
+            validator.ValidateTag("If", x => x.Should().BeNull());
+            validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x == null)
+                .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
+        }
     }
 }
