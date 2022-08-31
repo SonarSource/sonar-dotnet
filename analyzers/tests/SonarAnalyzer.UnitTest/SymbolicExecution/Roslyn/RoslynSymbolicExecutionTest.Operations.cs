@@ -410,6 +410,49 @@ Tag(""IntegerFromByte"", i);";
         }
 
         [TestMethod]
+        public void Literal_Default_StringLiteral()
+        {
+            const string code = @"
+var stringLocal = ""someText"";
+const string stringConst = ""someText"";
+Tag(""StringLocal"", stringLocal);
+Tag(""StringConst"", stringConst);";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("StringLocal", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("StringConst", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        }
+
+        [DataTestMethod]
+        [DataRow("true")]
+        [DataRow("false")]
+        public void Literal_Default_BoolLiterals(string literal)
+        {
+            var expected = bool.Parse(literal);
+            var code = @$"
+var value = {literal};
+Tag(""Value"", value);";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("Value", x => x.HasConstraint(BoolConstraint.From(expected)));
+        }
+
+        [DataTestMethod]
+        [DataRow("'c'")]
+        [DataRow("1")]
+        [DataRow("1u")]
+        [DataRow("1l")]
+        [DataRow("0xFF")]
+        [DataRow("1.0")]
+        [DataRow("1.0f")]
+        public void Literal_Default_OtherLiterals(string literal)
+        {
+            var code = @$"
+var value = {literal};
+Tag(""Value"", value);";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("Value", x => x.Should().BeNull());
+        }
+
+        [TestMethod]
         public void InstanceReference_SetsNotNull_CS()
         {
             const string code = @"
