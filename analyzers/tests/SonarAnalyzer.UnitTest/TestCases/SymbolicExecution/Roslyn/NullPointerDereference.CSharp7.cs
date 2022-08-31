@@ -62,7 +62,7 @@ namespace Tests.Diagnostics
             {
                 if (o == null)
                 {
-                    o.ToString(); // Noncompliant, False Positive
+                    o.ToString(); // Compliant
                 }
             }
         }
@@ -73,7 +73,7 @@ namespace Tests.Diagnostics
             {
                 if (o == null)
                 {
-                    o.ToString(); // Noncompliant, False Positive FIXME: pattern matching
+                    o.ToString(); // Compliant
                 }
             }
         }
@@ -123,7 +123,7 @@ namespace Tests.Diagnostics
                     // We don't set constraints on the switch expression
                     if (o == null)
                     {
-                        o.ToString(); // Noncompliant, False Positive, FIXME: Pattern matching
+                        o.ToString(); // Compliant
                     }
                     break;
 

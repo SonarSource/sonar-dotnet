@@ -519,6 +519,48 @@ if (value = boolParameter)
                 .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
         }
 
+        [DataTestMethod]
+        [DataRow("arg is object o")]
+        [DataRow("arg is string s")]
+        [DataRow("arg is not not object o")]
+        [DataRow("arg is not not string s")]
+        [DataRow("!(arg is not object o)")]
+        public void Branching_LearnsObjectConstraint_DeclarationPattern(string expression)
+        {
+            var validator = CreateIfElseEndValidatorCS(expression, OperationKind.DeclarationPattern);
+            validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("Else", x => x.Should().BeNull("it could be null or any other type"));
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x == null)
+                .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
+        }
+
+        [DataTestMethod]
+        [DataRow("arg is var o")]
+        [DataRow("arg is int i")]
+        public void Branching_LearnsObjectConstraint_DeclarationPattern_NoConstraints(string expression)
+        {
+            var validator = CreateIfElseEndValidatorCS(expression, OperationKind.DeclarationPattern);
+            validator.ValidateTag("If", x => x.Should().BeNull());
+            validator.ValidateTag("Else", x => x.Should().BeNull());
+            validator.ValidateTag("End", x => x.Should().BeNull());
+        }
+
+        [DataTestMethod]
+        [DataRow("arg is not object o")]
+        [DataRow("arg is not string s")]
+        [DataRow("!(arg is object o)")]
+        [DataRow("!(arg is string s)")]
+        public void Branching_LearnsObjectConstraint_DeclarationPattern_Negated(string expression)
+        {
+            var validator = CreateIfElseEndValidatorCS(expression, OperationKind.DeclarationPattern);
+            validator.ValidateTag("If", x => x.Should().BeNull("it could be null or any other type"));
+            validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x == null)
+                .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
+        }
+
         [TestMethod]
         public void Branching_LearnsObjectConstraint_FlowCapture()
         {
