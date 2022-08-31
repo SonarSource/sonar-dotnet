@@ -536,18 +536,19 @@ Tag(""End"");";
                 "End");
         }
 
-        [TestMethod]
-        public void Branching_IsNullOrEmpty_SetsNullConstraintsInBranches()
+        [DataTestMethod]
+        [DynamicData(nameof(StringIsNullOrEmptyMethods))]
+        public void Branching_IsNullOrEmpty_SetsNullConstraintsInBranches(string methodName)
         {
-            const string code = @"
-if (string.IsNullOrEmpty(s))
-{
+            var code = $@"
+if (string.{methodName}(s))
+{{
     Tag(""If"", s);
-}
+}}
 else
-{
+{{
     Tag(""Else"", s);
-}
+}}
 Tag(""End"", s);";
             var validator = SETestContext.CreateCS(code, ", string s").Validator;
             validator.TagValues("If").Should().HaveCount(2)
@@ -559,19 +560,20 @@ Tag(""End"", s);";
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
         }
 
-        [TestMethod]
-        public void Branching_IsNullOrEmpty_VisitsTrueBranchIfNull()
+        [DataTestMethod]
+        [DynamicData(nameof(StringIsNullOrEmptyMethods))]
+        public void Branching_IsNullOrEmpty_VisitsTrueBranchIfNull(string methodName)
         {
-            const string code = @"
+            var code = $@"
 string s = null;
-if (string.IsNullOrEmpty(s))
-{
+if (string.{methodName}(s))
+{{
     Tag(""If"", s);
-}
+}}
 else
-{
+{{
     Tag(""Else"", s);
-}
+}}
 Tag(""End"", s);";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.Null));
@@ -579,19 +581,20 @@ Tag(""End"", s);";
             validator.ValidateTag("End", x => x.HasConstraint(ObjectConstraint.Null));
         }
 
-        [TestMethod]
-        public void Branching_IsNullOrEmpty_VisitsBothBranchesIfNotNull()
+        [DataTestMethod]
+        [DynamicData(nameof(StringIsNullOrEmptyMethods))]
+        public void Branching_IsNullOrEmpty_VisitsBothBranchesIfNotNull(string methodName)
         {
-            const string code = @"
+            var code = @$"
 string s = ""some text"";
-if (string.IsNullOrEmpty(s))
-{
+if (string.{methodName}(s))
+{{
     Tag(""If"", s);
-}
+}}
 else
-{
+{{
     Tag(""Else"", s);
-}
+}}
 Tag(""End"", s);";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.TagValues("If").Should().HaveCount(2)
@@ -601,6 +604,15 @@ Tag(""End"", s);";
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
+        }
+
+        private static IEnumerable<object[]> StringIsNullOrEmptyMethods
+        {
+            get
+            {
+                yield return new object[] { nameof(string.IsNullOrEmpty) };
+                yield return new object[] { nameof(string.IsNullOrWhiteSpace) };
+            }
         }
     }
 }
