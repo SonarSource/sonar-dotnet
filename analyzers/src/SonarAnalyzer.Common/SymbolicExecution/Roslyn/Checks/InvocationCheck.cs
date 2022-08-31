@@ -37,29 +37,44 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
 
         private ProgramState[] PreProcessInvocation(ProgramState state, IInvocationOperationWrapper invocation)
         {
-            if (invocation is
-                {
-                    TargetMethod:
-                    {
-                        IsStatic: true,
-                        ContainingType: { SpecialType: SpecialType.System_String },
-                        Name: nameof(string.IsNullOrEmpty) or nameof(string.IsNullOrWhiteSpace),
-                        Parameters: { Length: 1 } parameters
-                    },
-                    Arguments: { Length: 1 } arguments,
-                }
-                && parameters[0] is { Name: "value", Type: { SpecialType: SpecialType.System_String } }
-                && arguments[0].TrackedSymbol() is { } symbol)
+            if (ArgumentIsNullOrEmpty(invocation) is { } symbol)
             {
+                if (state[symbol] is { } symbolicValue && symbolicValue.HasConstraint(ObjectConstraint.Null))
+                {
+                    // IsNullOrEmpty will always return "true". For the opposite case, we can not tell for sure
+                    return new[] { SetOperationConstraint(BoolConstraint.True) };
+                }
+
                 return new[]
                 {
-                    state.SetOperationConstraint(invocation.WrappedOperation, BoolConstraint.True).SetSymbolConstraint(symbol, ObjectConstraint.Null),
-                    state.SetOperationConstraint(invocation.WrappedOperation, BoolConstraint.True).SetSymbolConstraint(symbol, ObjectConstraint.NotNull),
-                    state.SetOperationConstraint(invocation.WrappedOperation, BoolConstraint.False).SetSymbolConstraint(symbol, ObjectConstraint.NotNull),
+                    SetOperationConstraint(BoolConstraint.True).SetSymbolConstraint(symbol, ObjectConstraint.Null),
+                    SetOperationConstraint(BoolConstraint.True).SetSymbolConstraint(symbol, ObjectConstraint.NotNull),
+                    SetOperationConstraint(BoolConstraint.False).SetSymbolConstraint(symbol, ObjectConstraint.NotNull),
                 };
             }
 
             return null;
+
+            ProgramState SetOperationConstraint(BoolConstraint boolConstraint) =>
+                state.SetOperationConstraint(invocation.WrappedOperation, boolConstraint);
+
         }
+
+        private static ISymbol ArgumentIsNullOrEmpty(IInvocationOperationWrapper invocation) =>
+            invocation is
+            {
+                TargetMethod:
+                {
+                    IsStatic: true,
+                    ContainingType.SpecialType: SpecialType.System_String,
+                    Name: nameof(string.IsNullOrEmpty) or nameof(string.IsNullOrWhiteSpace),
+                    Parameters: { Length: 1 } parameters
+                },
+                Arguments: { Length: 1 } arguments,
+            }
+            && parameters[0] is { Name: "value", Type.SpecialType: SpecialType.System_String }
+            && arguments[0].TrackedSymbol() is { } symbol
+                ? symbol
+                : null;
     }
 }
