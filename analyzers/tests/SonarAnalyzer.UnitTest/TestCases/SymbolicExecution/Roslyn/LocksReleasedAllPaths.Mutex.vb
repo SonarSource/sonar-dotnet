@@ -56,11 +56,11 @@ Namespace Mutex_Type
             End If
 
             Dim m = New Mutex(False)
-            Dim mIsAcquired = m.WaitOne(200, True) ' Noncompliant
+            Dim mIsAcquired = m.WaitOne(200, True)
             If mIsAcquired Then
                 ' here it should be released
             Else
-                m.ReleaseMutex() ' this Is a programming Error
+                m.ReleaseMutex() ' this Is a programming Error, not detected by this rule
             End If
 
             Dim paramMutexIsAcquired = ParamMutex.WaitOne(400, False) ' Noncompliant
@@ -188,8 +188,8 @@ Namespace Mutex_Type
         End Sub
 
         Public Sub ReleasedThenAcquired(ParamMutex As Mutex)
-            If Cond Then ParamMutex.ReleaseMutex()
             ParamMutex.WaitOne() ' Noncompliant
+            If Cond Then ParamMutex.ReleaseMutex()
         End Sub
 
         Public Sub CompliantComplex(MutexName As String, ShouldAcquire As Boolean)

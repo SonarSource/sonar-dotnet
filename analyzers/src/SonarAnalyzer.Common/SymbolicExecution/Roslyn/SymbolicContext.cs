@@ -44,7 +44,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public SymbolicContext WithState(ProgramState newState) =>
             State == newState ? this : new(Operation, newState);
 
-        public bool HasConstraint(SymbolicConstraint constraint, IOperation operation) =>
+        public bool HasConstraint(IOperation operation, SymbolicConstraint constraint) =>
             State[operation]?.HasConstraint(constraint) is true;
+
+        public bool HasConstraint(ISymbol symbol, SymbolicConstraint constraint) =>
+            State[symbol]?.HasConstraint(constraint) is true;
     }
 }

@@ -68,14 +68,14 @@ namespace Mutex_Type
             }
 
             var m = new Mutex(false);
-            var mIsAcquired = m.WaitOne(200, true); // Noncompliant
+            var mIsAcquired = m.WaitOne(200, true);
             if (mIsAcquired)
             {
                 // here it should be released
             }
             else
             {
-                m.ReleaseMutex(); // this is a programming error
+                m.ReleaseMutex(); // this is a programming error, but not subject of this rule
             }
 
             var paramMutexIsAcquired = paramMutex.WaitOne(400, false); // Noncompliant
@@ -253,7 +253,7 @@ namespace Mutex_Type
             {
                 paramMutex.ReleaseMutex();
             }
-            paramMutex.WaitOne(); // Noncompliant
+            paramMutex.WaitOne(); // Compliant, source of FPs
         }
 
         public void CompliantComplex(string mutexName, bool shouldAcquire)

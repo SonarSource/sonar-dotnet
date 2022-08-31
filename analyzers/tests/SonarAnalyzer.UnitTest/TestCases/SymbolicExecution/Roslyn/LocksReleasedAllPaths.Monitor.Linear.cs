@@ -7,7 +7,6 @@ namespace Monitor_Linear
 {
     class Program
     {
-        private readonly static object staticObj = new object();
         private object obj = new object();
         private object other = new object();
 
@@ -132,63 +131,6 @@ namespace Monitor_Linear
             a();
         }
 
-        public void Method13(string arg)
-        {
-            Monitor.Exit(obj);
-            Console.WriteLine(arg.Length);
-            Monitor.Enter(obj); // Noncompliant {{Unlock this lock along all executions paths of this method.}}
-        }
-
-        public void FieldReference_WithThis(string arg)
-        {
-            Monitor.Exit(this.obj);
-            Console.WriteLine(arg.Length);
-            Monitor.Enter(this.obj); // Noncompliant {{Unlock this lock along all executions paths of this method.}}
-        }
-
-        public void FieldReference_WithThis_Mixed1(string arg)
-        {
-            Monitor.Exit(obj);
-            Console.WriteLine(arg.Length);
-            Monitor.Enter(this.obj); // Noncompliant {{Unlock this lock along all executions paths of this method.}}
-        }
-
-        public void FieldReference_WithThis_Mixed2(string arg)
-        {
-            Monitor.Exit(this.obj);
-            Console.WriteLine(arg.Length);
-            Monitor.Enter(obj); // Noncompliant {{Unlock this lock along all executions paths of this method.}}
-        }
-
-        public void StaticFieldReference(string arg)
-        {
-            Monitor.Exit(staticObj);
-            Console.WriteLine(arg.Length);
-            Monitor.Enter(staticObj); // Noncompliant {{Unlock this lock along all executions paths of this method.}}
-        }
-
-        public void StaticFieldReference_Class(string arg)
-        {
-            Monitor.Exit(Program.staticObj);
-            Console.WriteLine(arg.Length);
-            Monitor.Enter(Program.staticObj); // Noncompliant {{Unlock this lock along all executions paths of this method.}}
-        }
-
-        public void Method13_LocalVar(string arg)
-        {
-            var l = new object();
-
-            Monitor.Exit(l);
-            Console.WriteLine(arg.Length);
-            Monitor.Enter(l); // Noncompliant {{Unlock this lock along all executions paths of this method.}}
-        }
-
-        public void Method13_Parameter(object arg)
-        {
-            Monitor.Exit(arg);
-            Monitor.Enter(arg); // Noncompliant
-        }
-
         public void Method14(string arg)
         {
             Monitor.Exit(obj);
@@ -270,7 +212,7 @@ namespace Monitor_Linear
             }
             finally
             {
-                Monitor.Enter(obj); // Noncompliant FP
+                Monitor.Enter(obj); // Compliant, source of FPs on Peach
             }
         }
 

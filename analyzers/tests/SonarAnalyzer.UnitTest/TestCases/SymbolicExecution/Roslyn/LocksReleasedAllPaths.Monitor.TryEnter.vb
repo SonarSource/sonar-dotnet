@@ -8,8 +8,7 @@ Namespace Monitor_TryEnter
         Private Obj As New Object()
 
         Public Sub Method1()
-            If Monitor.TryEnter(Obj) Then ' Noncompliant
-            Else
+            If Monitor.TryEnter(Obj) AndAlso Condition Then ' Noncompliant
                 Monitor.Exit(Obj)
             End If
         End Sub
@@ -22,8 +21,7 @@ Namespace Monitor_TryEnter
         End Sub
 
         Public Sub Method3()
-            If Monitor.TryEnter(Obj, 42) Then ' Noncompliant
-            Else
+            If Monitor.TryEnter(Obj, 42) AndAlso Condition Then ' Noncompliant
                 Monitor.Exit(Obj)
             End If
         End Sub
@@ -35,8 +33,7 @@ Namespace Monitor_TryEnter
         End Sub
 
         Public Sub Method5()
-            If Monitor.TryEnter(Obj, New TimeSpan(42)) Then ' Noncompliant
-            Else
+            If Monitor.TryEnter(Obj, New TimeSpan(42)) AndAlso Condition Then ' Noncompliant
                 Monitor.Exit(Obj)
             End If
         End Sub
@@ -49,8 +46,7 @@ Namespace Monitor_TryEnter
 
         Public Sub Method7()
             Dim IsAcquired As Boolean = Monitor.TryEnter(Obj, 42) ' Noncompliant
-            If IsAcquired Then
-            Else
+            If IsAcquired AndAlso Condition Then
                 Monitor.Exit(Obj)
             End If
         End Sub
@@ -66,15 +62,15 @@ Namespace Monitor_TryEnter
         End Sub
 
         Public Sub Method10()
-            Monitor.Exit(Obj)
             Monitor.TryEnter(Obj) ' Noncompliant {{Unlock this lock along all executions paths of this method.}}
+            If Condition Then Monitor.Exit(Obj)
         End Sub
 
         Public Sub Method12()
             Select Case Monitor.TryEnter(Obj) ' Noncompliant
                 Case False
-                    Monitor.Exit(Obj)
                 Case Else
+                    If Condition Then Monitor.Exit(Obj)
             End Select
         End Sub
 

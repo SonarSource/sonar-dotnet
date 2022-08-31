@@ -101,15 +101,15 @@ Namespace ReaderWriterLock_Type
 
         Public Sub WrongOrder()
             rwLock.ReleaseReaderLock()
-            rwLock.AcquireReaderLock(1) ' Noncompliant
+            rwLock.AcquireReaderLock(1) ' Compliant, source Of FPs On Peach
 
             Dim a As New ReaderWriterLock()
             a.ReleaseLock()
-            a.AcquireWriterLock(1) ' Noncompliant
+            a.AcquireWriterLock(1)
 
             Dim b As New ReaderWriterLock()
             b.ReleaseWriterLock()
-            b.AcquireWriterLock(1) ' Noncompliant
+            b.AcquireWriterLock(1)
         End Sub
 
         Public Sub IsReaderLockHeld()

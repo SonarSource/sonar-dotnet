@@ -1,4 +1,5 @@
-﻿Imports System.Threading
+﻿Imports System
+Imports System.Threading
 
 Namespace Monitor_Conditions
 
@@ -7,6 +8,7 @@ Namespace Monitor_Conditions
         Public PublicObject As New Object()
         Private Obj As New Object()
         Private Other As New Object()
+        Private Shared ReadOnly StaticObj As New Object()
 
         Private Condition As Boolean
 
@@ -224,10 +226,52 @@ Namespace Monitor_Conditions
 
         Public Sub Lambda()
             Dim l = Function(value)
-                Monitor.Enter(Obj) ' Noncompliant
-                If value = 42 Then Monitor.Exit(Obj)
-                Return value
-            End Function
+                        Monitor.Enter(Obj) ' Noncompliant
+                        If value = 42 Then Monitor.Exit(Obj)
+                        Return value
+                    End Function
         End Sub
+
+        Public Sub Method13(Arg As String)
+            Monitor.Enter(Obj) ' Noncompliant {{Unlock this lock along all executions paths of this method.}}
+            If Condition Then Monitor.Exit(Obj)
+        End Sub
+
+        Public Sub FieldReference_WithThis(Arg As String)
+            Monitor.Enter(Me.Obj) ' Noncompliant {{Unlock this lock along all executions paths of this method.}}
+            If Condition Then Monitor.Exit(Me.Obj)
+        End Sub
+
+        Public Sub FieldReference_WithThis_Mixed1(Arg As String)
+            Monitor.Enter(Me.Obj) ' Noncompliant {{Unlock this lock along all executions paths of this method.}}
+            If Condition Then Monitor.Exit(Obj)
+        End Sub
+
+        Public Sub FieldReference_WithThis_Mixed2(Arg As String)
+            Monitor.Enter(Obj) ' Noncompliant {{Unlock this lock along all executions paths of this method.}}
+            If Condition Then Monitor.Exit(Me.Obj)
+        End Sub
+
+        Public Sub StaticFieldReference(Arg As String)
+            Monitor.Enter(StaticObj) ' Noncompliant {{Unlock this lock along all executions paths of this method.}}
+            If Condition Then Monitor.Exit(StaticObj)
+        End Sub
+
+        Public Sub StaticFieldReference_Class(Arg As String)
+            Monitor.Enter(Program.StaticObj) ' Noncompliant {{Unlock this lock along all executions paths of this method.}}
+            If Condition Then Monitor.Exit(Program.StaticObj)
+        End Sub
+
+        Public Sub Method13_LocalVar(Arg As String)
+            Dim l As New Object()
+            Monitor.Enter(l) ' Noncompliant {{Unlock this lock along all executions paths of this method.}}
+            If Condition Then Monitor.Exit(l)
+        End Sub
+
+        Public Sub Method13_Parameter(Arg As Object)
+            Monitor.Enter(Arg) ' Noncompliant
+            If Condition Then Monitor.Exit(Arg)
+        End Sub
+
     End Class
 End Namespace

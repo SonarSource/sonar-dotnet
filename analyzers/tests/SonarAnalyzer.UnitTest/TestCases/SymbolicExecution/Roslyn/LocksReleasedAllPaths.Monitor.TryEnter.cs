@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading;
 
 namespace Monitor_TryEnter
@@ -6,10 +7,11 @@ namespace Monitor_TryEnter
     class Program
     {
         private object obj = new object();
+        private bool condition;
 
-        public void Method1()
+        public void TryEnter_ExitedInElse()
         {
-            if (Monitor.TryEnter(obj)) // Noncompliant
+            if (Monitor.TryEnter(obj)) // Compliant, never exited in this method
             {
             }
             else
@@ -18,7 +20,18 @@ namespace Monitor_TryEnter
             }
         }
 
-        public void Method2()
+        public void TryEnter_ExitedInIf()
+        {
+            if (Monitor.TryEnter(obj)) // Noncompliant
+            {
+                if (condition)
+                {
+                    Monitor.Exit(obj);
+                }
+            }
+        }
+
+        public void TryEnter_Compliant()
         {
             if (Monitor.TryEnter(obj))
             {
@@ -29,18 +42,18 @@ namespace Monitor_TryEnter
             }
         }
 
-        public void Method3()
+        public void TryEnter_WithInt()
         {
             if (Monitor.TryEnter(obj, 42)) // Noncompliant
             {
-            }
-            else
-            {
-                Monitor.Exit(obj);
+                if (condition)
+                {
+                    Monitor.Exit(obj);
+                }
             }
         }
 
-        public void Method4(bool condition)
+        public void TryEnter_WithRefIsAcquired(bool condition)
         {
             bool isAcquired = false;
             Monitor.TryEnter(obj, 42, ref isAcquired); // Noncompliant
@@ -50,14 +63,14 @@ namespace Monitor_TryEnter
             }
         }
 
-        public void Method5()
+        public void TryEnter_WithTimeSpan()
         {
             if (Monitor.TryEnter(obj, new TimeSpan(42))) // Noncompliant
             {
-            }
-            else
-            {
-                Monitor.Exit(obj);
+                if (condition)
+                {
+                    Monitor.Exit(obj);
+                }
             }
         }
 
@@ -71,9 +84,9 @@ namespace Monitor_TryEnter
             }
         }
 
-        public void Method7()
+        public void TryEnter_WithVariable_Compliant()
         {
-            bool isAcquired = Monitor.TryEnter(obj, 42); // Noncompliant
+            bool isAcquired = Monitor.TryEnter(obj, 42); // Compliant, never exited in this method
 
             if (isAcquired)
             {
@@ -81,6 +94,19 @@ namespace Monitor_TryEnter
             else
             {
                 Monitor.Exit(obj);
+            }
+        }
+
+        public void TryEnter_WithVariable_Noncompliant()
+        {
+            bool isAcquired = Monitor.TryEnter(obj, 42); // Noncompliant
+
+            if (isAcquired)
+            {
+                if (condition)
+                {
+                    Monitor.Exit(obj);
+                }
             }
         }
 
@@ -102,8 +128,9 @@ namespace Monitor_TryEnter
 
         public void Method10()
         {
-            Monitor.Exit(obj);
             Monitor.TryEnter(obj); // Noncompliant {{Unlock this lock along all executions paths of this method.}}
+            if(condition)
+                Monitor.Exit(obj);
         }
 
         public void Method11()
@@ -118,14 +145,30 @@ namespace Monitor_TryEnter
             }
         }
 
-        public void Method12()
+        public void TryEnter_Switch_Compliant()
         {
-            switch (Monitor.TryEnter(obj)) // Noncompliant
+            switch (Monitor.TryEnter(obj)) // Compliant, never exited in this method
             {
                 case false:
                     Monitor.Exit(obj);
                     break;
                 default:
+                    break;
+            }
+        }
+
+        public void TryEnter_Switch_Noncompliant()
+        {
+            switch (Monitor.TryEnter(obj)) // Noncompliant
+            {
+                case false:
+                    break;
+                default:
+                    if (condition)
+                    {
+                        Monitor.Exit(obj);
+
+                    }
                     break;
             }
         }

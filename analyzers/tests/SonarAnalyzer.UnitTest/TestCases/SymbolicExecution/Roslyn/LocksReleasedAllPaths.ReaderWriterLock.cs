@@ -171,15 +171,15 @@ namespace ReaderWriterLock_Type
         public void WrongOrder()
         {
             readerWriterLock.ReleaseReaderLock();
-            readerWriterLock.AcquireReaderLock(1); // Noncompliant
+            readerWriterLock.AcquireReaderLock(1);  // Compliant, source of FPs on Peach
 
             var a = new ReaderWriterLock();
             a.ReleaseLock();
-            a.AcquireWriterLock(1); // Noncompliant
+            a.AcquireWriterLock(1);
 
             var b = new ReaderWriterLock();
             b.ReleaseWriterLock();
-            b.AcquireWriterLock(1); // Noncompliant
+            b.AcquireWriterLock(1);
         }
 
         public void IsReaderLockHeld()

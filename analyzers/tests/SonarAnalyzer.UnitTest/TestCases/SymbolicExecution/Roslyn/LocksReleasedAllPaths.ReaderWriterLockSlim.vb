@@ -23,47 +23,40 @@ Namespace ReaderWriterLockSlim_Type
         End Sub
 
         Public Sub Method4()
-            If rwLockSlim.TryEnterReadLock(42) Then ' Noncompliant
-            Else
+            If rwLockSlim.TryEnterReadLock(42) AndAlso Condition Then ' Noncompliant
                 rwLockSlim.ExitReadLock()
             End If
         End Sub
 
         Public Sub Method5()
-            If rwLockSlim.TryEnterReadLock(New TimeSpan(42)) Then ' Noncompliant
-            Else
+            If rwLockSlim.TryEnterReadLock(New TimeSpan(42)) AndAlso Condition Then ' Noncompliant
                 rwLockSlim.ExitReadLock()
             End If
         End Sub
 
         Public Sub Method6()
-            If rwLockSlim.TryEnterWriteLock(42) Then ' Noncompliant
-            Else
+            If rwLockSlim.TryEnterWriteLock(42) AndAlso Condition Then ' Noncompliant
                 rwLockSlim.ExitWriteLock()
             End If
         End Sub
 
         Public Sub Method7()
-            If rwLockSlim.TryEnterWriteLock(New TimeSpan(42)) Then ' Noncompliant
-            Else
+            If rwLockSlim.TryEnterWriteLock(New TimeSpan(42)) AndAlso Condition Then ' Noncompliant
                 rwLockSlim.ExitWriteLock()
             End If
         End Sub
 
         Public Sub Method8()
-            If rwLockSlim.TryEnterUpgradeableReadLock(42) Then ' Noncompliant
-            Else
+            If rwLockSlim.TryEnterUpgradeableReadLock(42) AndAlso Condition Then ' Noncompliant
                 rwLockSlim.ExitReadLock()
             End If
         End Sub
 
         Public Sub Method9()
-            If rwLockSlim.TryEnterUpgradeableReadLock(New TimeSpan(42)) Then ' Noncompliant
-            Else
+            If rwLockSlim.TryEnterUpgradeableReadLock(New TimeSpan(42)) AndAlso Condition Then ' Noncompliant
                 rwLockSlim.ExitReadLock()
             End If
         End Sub
-
 
         Public Sub Method10()
             Try
@@ -107,27 +100,27 @@ Namespace ReaderWriterLockSlim_Type
 
         Public Sub WrongOrder()
             rwLockSlim.ExitReadLock()
-            rwLockSlim.EnterReadLock()  ' Noncompliant
+            rwLockSlim.EnterReadLock()  ' Compliant, source of FPs on Peach
 
             Dim a = New ReaderWriterLockSlim()
             a.ExitWriteLock()
-            a.EnterWriteLock()          ' Noncompliant
+            a.EnterWriteLock()
 
             Dim b = New ReaderWriterLockSlim()
             b.ExitUpgradeableReadLock()
-            b.TryEnterReadLock(1)       ' Noncompliant
+            b.TryEnterReadLock(1)
 
             Dim c = New ReaderWriterLockSlim()
             c.ExitReadLock()
-            c.TryEnterWriteLock(1)      ' Noncompliant
+            c.TryEnterWriteLock(1)
 
             Dim d = New ReaderWriterLockSlim()
             d.ExitReadLock()
-            d.EnterUpgradeableReadLock()        ' Noncompliant
+            d.EnterUpgradeableReadLock()
 
             Dim e = New ReaderWriterLockSlim()
             e.ExitReadLock()
-            e.TryEnterUpgradeableReadLock(1)    ' Noncompliant
+            e.TryEnterUpgradeableReadLock(1)
         End Sub
 
         Public Sub Method14()

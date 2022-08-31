@@ -35,12 +35,20 @@ namespace ReaderWriterLockSlim_Type
             }
         }
 
-        public void Method4()
+        public void TryEnterReadLock_Compliant()
         {
-            if (readerWriterLockSlim.TryEnterReadLock(42)) // Noncompliant
+            if (readerWriterLockSlim.TryEnterReadLock(42)) // Compliant, never released in this method
             {
             }
             else
+            {
+                readerWriterLockSlim.ExitReadLock();
+            }
+        }
+
+        public void TryEnterReadLock_Noncompliant()
+        {
+            if (readerWriterLockSlim.TryEnterReadLock(42) && condition) // Noncompliant
             {
                 readerWriterLockSlim.ExitReadLock();
             }
@@ -48,10 +56,7 @@ namespace ReaderWriterLockSlim_Type
 
         public void Method5()
         {
-            if (readerWriterLockSlim.TryEnterReadLock(new TimeSpan(42))) // Noncompliant
-            {
-            }
-            else
+            if (readerWriterLockSlim.TryEnterReadLock(new TimeSpan(42)) && condition) // Noncompliant
             {
                 readerWriterLockSlim.ExitReadLock();
             }
@@ -59,10 +64,7 @@ namespace ReaderWriterLockSlim_Type
 
         public void Method6()
         {
-            if (readerWriterLockSlim.TryEnterWriteLock(42)) // Noncompliant
-            {
-            }
-            else
+            if (readerWriterLockSlim.TryEnterWriteLock(42) && condition) // Noncompliant
             {
                 readerWriterLockSlim.ExitWriteLock();
             }
@@ -70,10 +72,7 @@ namespace ReaderWriterLockSlim_Type
 
         public void Method7()
         {
-            if (readerWriterLockSlim.TryEnterWriteLock(new TimeSpan(42))) // Noncompliant
-            {
-            }
-            else
+            if (readerWriterLockSlim.TryEnterWriteLock(new TimeSpan(42)) && condition) // Noncompliant
             {
                 readerWriterLockSlim.ExitWriteLock();
             }
@@ -81,10 +80,7 @@ namespace ReaderWriterLockSlim_Type
 
         public void Method8()
         {
-            if (readerWriterLockSlim.TryEnterUpgradeableReadLock(42)) // Noncompliant
-            {
-            }
-            else
+            if (readerWriterLockSlim.TryEnterUpgradeableReadLock(42) && condition) // Noncompliant
             {
                 readerWriterLockSlim.ExitReadLock();
             }
@@ -92,10 +88,7 @@ namespace ReaderWriterLockSlim_Type
 
         public void Method9()
         {
-            if (readerWriterLockSlim.TryEnterUpgradeableReadLock(new TimeSpan(42))) // Noncompliant
-            {
-            }
-            else
+            if (readerWriterLockSlim.TryEnterUpgradeableReadLock(new TimeSpan(42)) && condition) // Noncompliant
             {
                 readerWriterLockSlim.ExitReadLock();
             }
@@ -169,27 +162,27 @@ namespace ReaderWriterLockSlim_Type
         public void WrongOrder()
         {
             readerWriterLockSlim.ExitReadLock();
-            readerWriterLockSlim.EnterReadLock(); // Noncompliant
+            readerWriterLockSlim.EnterReadLock(); // Compliant
 
             var a = new ReaderWriterLockSlim();
             a.ExitWriteLock();
-            a.EnterWriteLock(); // Noncompliant
+            a.EnterWriteLock();
 
             var b = new ReaderWriterLockSlim();
             b.ExitUpgradeableReadLock();
-            b.TryEnterReadLock(1); // Noncompliant
+            b.TryEnterReadLock(1);
 
             var c = new ReaderWriterLockSlim();
             c.ExitReadLock();
-            c.TryEnterWriteLock(1); // Noncompliant
+            c.TryEnterWriteLock(1);
 
             var d = new ReaderWriterLockSlim();
             d.ExitReadLock();
-            d.EnterUpgradeableReadLock(); // Noncompliant
+            d.EnterUpgradeableReadLock();
 
             var e = new ReaderWriterLockSlim();
             e.ExitReadLock();
-            e.TryEnterUpgradeableReadLock(1); // Noncompliant
+            e.TryEnterUpgradeableReadLock(1);
         }
 
         public void Method14()
