@@ -153,7 +153,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             if (originalOperation.IsAnyKind(OperationKindEx.MethodBody, OperationKindEx.Block, OperationKindEx.ConstructorBody))
             {
                 var syntax = originalOperation.Syntax.IsKind(SyntaxKindEx.ArrowExpressionClause) ? originalOperation.Syntax.Parent : originalOperation.Syntax;
-                return new IOperationWrapperSonar(originalOperation).SemanticModel.GetDeclaredSymbol(syntax);
+                return originalOperation.ToSonar().SemanticModel.GetDeclaredSymbol(syntax);
             }
             else
             {

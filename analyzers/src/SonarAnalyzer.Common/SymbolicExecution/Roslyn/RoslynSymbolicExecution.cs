@@ -57,7 +57,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             }
             this.checks = new(new[] { new ConstantCheck() }.Concat(checks).ToArray());
             this.cancel = cancel;
-            exceptionCandidate = new(new IOperationWrapperSonar(cfg.OriginalOperation).SemanticModel.Compilation);
+            exceptionCandidate = new(cfg.OriginalOperation.ToSonar().SemanticModel.Compilation);
             lva = new(cfg, cancel);
             logger.Log(cfg);
         }
@@ -158,7 +158,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             if (branch.Source.BranchValue is { } branchValue && branch.Source.ConditionalSuccessor is not null) // This branching was conditional
             {
                 state = LearnBranchingConstraints(branch, state, branchValue);
-                state = checks.ConditionEvaluated(new(new IOperationWrapperSonar(branchValue), state));
+                state = checks.ConditionEvaluated(new(branchValue.ToSonar(), state));
                 if (state is null)
                 {
                     return null;

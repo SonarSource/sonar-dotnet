@@ -23,6 +23,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Extensions;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Helpers
@@ -117,7 +118,7 @@ namespace SonarAnalyzer.Helpers
 
             public StackItem(IOperation operation)
             {
-                this.operation = new IOperationWrapperSonar(operation);
+                this.operation = operation.ToSonar();
                 children = this.operation.Children.GetEnumerator();
             }
 
