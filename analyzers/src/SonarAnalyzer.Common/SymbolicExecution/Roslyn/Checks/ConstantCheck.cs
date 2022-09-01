@@ -37,17 +37,15 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
             type.Is(KnownType.System_Boolean) ? BoolConstraint.False : null;
 
         private static SymbolicValue ConstraintFromConstantValue(IOperationWrapperSonar operation) =>
-            operation.Instance.ConstantValue.HasValue
-                ? operation.Instance.ConstantValue.Value switch
-                    {
-                        // Update DefaultValue when adding new types
-                        true => SymbolicValue.True,
-                        false => SymbolicValue.False,
-                        null when (operation.Instance.Type ?? ConvertedType(operation.Parent)) is { IsReferenceType: true } => SymbolicValue.Null,
-                        string => SymbolicValue.NotNull,
-                        _ => null
-                    }
-                : null;
+            operation.Instance.ConstantValue.Value switch
+            {
+                // Update DefaultValue when adding new types
+                true => SymbolicValue.True,
+                false => SymbolicValue.False,
+                null when (operation.Instance.Type ?? ConvertedType(operation.Parent)) is { IsReferenceType: true } => SymbolicValue.Null,
+                string => SymbolicValue.NotNull,
+                _ => null
+            };
 
         private static ITypeSymbol ConvertedType(IOperation operation) =>
             operation.Kind == OperationKindEx.Conversion ? IConversionOperationWrapper.FromOperation(operation).Type : null;
