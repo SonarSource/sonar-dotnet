@@ -36,7 +36,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
         public static SymbolicConstraint ConstraintFromType(ITypeSymbol type) =>
             type.Is(KnownType.System_Boolean) ? BoolConstraint.False : null;
 
-        public static SymbolicValue ConstraintFromConstantValue(IOperationWrapperSonar operation) =>
+        private static SymbolicValue ConstraintFromConstantValue(IOperationWrapperSonar operation) =>
             operation.Instance.ConstantValue.HasValue
                 ? operation.Instance.ConstantValue.Value switch
                     {
