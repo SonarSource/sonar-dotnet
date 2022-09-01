@@ -134,5 +134,67 @@ End Module";
             validator.ValidateTag("AfterStatic", x => x.Should().BeNull("Static method can execute from null instances."));
             validator.ValidateTag("AfterExtension", x => x.Should().BeNull("Extensions can run on null instances."));
         }
+
+        [DataTestMethod]
+        [DataRow("DoSomething();")]
+        [DataRow("this.DoSomething();")]
+        [DataRow("(this).DoSomething();")]
+        [DataRow("(((this))).DoSomething();")]
+        public void InstanceMethodCallClearsFieldOnThis(string invocation)
+        {
+            var code = $@"
+public class Sample
+{{
+    object field1 = null;
+    object field2 = null;
+
+    void CallToMethodsShouldResetFieldConstraints()
+    {{
+        field1 = new object();
+        field2 = new object();
+        {invocation}
+        Tag(""Field1"", field1);
+        Tag(""Field2"", field2);
+    }}
+
+    private void DoSomething() {{ }}
+    private static void Tag(string name, object arg) {{ }}
+}}";
+            var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
+            validator.ValidateContainsOperation(OperationKind.Invocation);
+            validator.ValidateTag("Field1", x => x.Should().BeNull());
+            validator.ValidateTag("Field2", x => x.Should().BeNull());
+        }
+
+        [DataTestMethod]
+        [DataRow("otherInstance.DoSomething();")]
+        [DataRow("(otherInstance).DoSomething();")]
+        [DataRow("(true ? this : otherInstance).DoSomething();")]
+        public void InstanceMethodCallClearsFieldOnThisOnly(string invocation)
+        {
+            var code = $@"
+public class Sample
+{{
+    object field1 = null;
+    object field2 = null;
+
+    void CallToMethodsShouldResetFieldConstraints()
+    {{
+        field1 = new object();
+        field2 = new object();
+        var otherInstance = new Sample();
+        {invocation}
+        Tag(""Field1"", field1);
+        Tag(""Field2"", field2);
+    }}
+
+    private void DoSomething() {{ }}
+    private static void Tag(string name, object arg) {{ }}
+}}";
+            var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
+            validator.ValidateContainsOperation(OperationKind.Invocation);
+            validator.ValidateTag("Field1", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("Field2", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        }
     }
 }
