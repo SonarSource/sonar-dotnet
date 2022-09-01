@@ -40,11 +40,11 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
 
         public static ProgramState Process(SymbolicContext context, IFieldReferenceOperationWrapper fieldReference)
         {
-            var state = context.State[fieldReference.Field] is { } value
+            var state = fieldReference.WrappedOperation.TrackedSymbol() is { } fieldSymbol && context.State[fieldSymbol] is { } value
                 ? context.State.SetOperationValue(context.Operation, value)
                 : context.State;
-            return fieldReference.Instance.TrackedSymbol() is { } symbol
-                ? state.SetSymbolConstraint(symbol, ObjectConstraint.NotNull)
+            return fieldReference.Instance.TrackedSymbol() is { } instanceSymbol
+                ? state.SetSymbolConstraint(instanceSymbol, ObjectConstraint.NotNull)
                 : state;
         }
 

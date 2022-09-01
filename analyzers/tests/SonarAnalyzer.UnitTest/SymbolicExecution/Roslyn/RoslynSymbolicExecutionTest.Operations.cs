@@ -620,6 +620,19 @@ Sample UntrackedSymbol() => this;";
         }
 
         [TestMethod]
+        public void FieldReference_DoesNotMixInstances()
+        {
+            const string code = @"
+this.fieldException = new NotImplementedException();
+var argException = arg.fieldException;  // Should not propagate constraint from this.fieldException
+Tag(""This"", fieldException);
+Tag(""Arg"", argException);";
+            var validator = SETestContext.CreateCS(code, ", Sample arg").Validator;
+            validator.ValidateTag("This", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("Arg", x => x.Should().BeNull());
+        }
+
+        [TestMethod]
         public void PropertyReference_Read_SetsNotNull()
         {
             const string code = @"

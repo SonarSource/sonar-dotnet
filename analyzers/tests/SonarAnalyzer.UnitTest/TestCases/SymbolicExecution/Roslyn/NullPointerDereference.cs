@@ -492,13 +492,12 @@ namespace Tests.Diagnostics
         void OtherInstanceFieldAccess2()
         {
             _foo1 = null;
-            (new NullPointerDereferenceWithFields())._foo1.ToString(); // Noncompliant. _foo1 is null here
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            (new NullPointerDereferenceWithFields())._foo1.ToString(); // Compliant, while _foo1 is null here, we would need to inspect the constructor to recognize that
         }
         void OtherInstanceFieldAccess3()
         {
             _foo1 = new object();
-            (new NullPointerDereferenceWithFields())._foo1.ToString(); // FIXME. OtherInstanceFieldAccess2 and OtherInstanceFieldAccess3 should behave the same.
+            (new NullPointerDereferenceWithFields())._foo1.ToString(); // Compliant, while _foo1 is null here, we would need to inspect the constructor to recognize that
         }
 
         void ParenthesizedAccess1()
