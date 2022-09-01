@@ -18,6 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Immutable;
+using System.Linq;
+using Microsoft.CodeAnalysis;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
 
@@ -29,8 +32,21 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
             !invocation.TargetMethod.IsStatic               // Also applies to C# extensions
             && !invocation.TargetMethod.IsExtensionMethod   // VB extensions in modules are not marked as static
             && invocation.Instance.TrackedSymbol() is { } symbol
-                ? context.SetSymbolConstraint(symbol, ObjectConstraint.NotNull)
+                ? SetSymbolConstraintsForInstance(context, symbol)
                 : context.State;
+
+        private static ProgramState SetSymbolConstraintsForInstance(SymbolicContext context, ISymbol symbol)
+        {
+            var newState = context.SetSymbolConstraint(symbol, ObjectConstraint.NotNull);
+            var fields = symbol is ITypeSymbol typeSymbol
+                ? typeSymbol.GetMembers().OfType<IFieldSymbol>()
+                : ImmutableArray<IFieldSymbol>.Empty;
+            foreach (var field in fields)
+            {
+                newState = newState.SetSymbolValue(field, null);
+            }
+            return newState;
+        }
 
         public static ProgramState Process(SymbolicContext context, IArgumentOperationWrapper argument) =>
             argument.Parameter is not null      // __arglist is not assigned to a parameter
