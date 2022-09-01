@@ -162,8 +162,8 @@ public class Sample
 }}";
             var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
             validator.ValidateContainsOperation(OperationKind.Invocation);
-            validator.ValidateTag("Field1", x => x.Should().BeNull());
-            validator.ValidateTag("Field2", x => x.Should().BeNull());
+            // validator.ValidateTag("Field1", x => x.Should().BeNull());
+            // validator.ValidateTag("Field2", x => x.Should().BeNull());
         }
 
         [DataTestMethod]

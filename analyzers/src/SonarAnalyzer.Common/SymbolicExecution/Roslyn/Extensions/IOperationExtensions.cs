@@ -34,7 +34,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 OperationKindEx.FieldReference when IFieldReferenceOperationWrapper.FromOperation(operation) is var fieldReference && IsStaticOrThis(fieldReference) => fieldReference.Field,
                 OperationKindEx.LocalReference => ILocalReferenceOperationWrapper.FromOperation(operation).Local,
                 OperationKindEx.ParameterReference => IParameterReferenceOperationWrapper.FromOperation(operation).Parameter,
-                OperationKindEx.InstanceReference => IInstanceReferenceOperationWrapper.FromOperation(operation).Type,
                 _ => null
             };
 
