@@ -5,7 +5,7 @@
 "message":  "This line will not be executed conditionally; only the first line of this 2-line block will be. The rest will execute unconditionally.",
 "location":  [
 {
-"uri":  "D:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\akka.net\src\core\Akka\IO\InetAddressDnsResolver.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\InetAddressDnsResolver.cs",
 "region":  {
 "startLine":  63,
 "startColumn":  26,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "D:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\akka.net\src\core\Akka\IO\InetAddressDnsResolver.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\InetAddressDnsResolver.cs",
 "region":  {
 "startLine":  62,
 "startColumn":  77,
