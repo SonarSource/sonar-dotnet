@@ -1057,11 +1057,22 @@ namespace Repro_3395
             {
                 if (!providerCourse?.Items?.Any() ?? true)
                 {
+                    continue;
+                }
+
+                _ = providerCourse.Items; // Noncompliant FP
+            }
+
+            foreach (var providerCourse in providerCourses)
+            {
+                if (!providerCourse?.Items?.Any() ?? true)
+                {
                     Console.WriteLine("FAIL");
                     continue;
                 }
 
-                var _ = providerCourse.Items.Where(items => items == "item1"); // Noncompliant FP
+                _ = providerCourse.Items.Where(items => items == "item1"); // Noncompliant FP
+                //  ^^^^^^^^^^^^^^
             }
         }
 
