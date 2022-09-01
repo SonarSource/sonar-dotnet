@@ -19,9 +19,7 @@
  */
 
 using Microsoft.CodeAnalysis.Operations;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.SymbolicExecution.Constraints;
-using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 using StyleCop.Analyzers.Lightup;
 
@@ -145,32 +143,30 @@ public void Method()
         {
             var validator = SETestContext.CreateCS(@"int a = 42; byte b = (byte)a; var c = (byte)field; Tag(""b"", b); Tag(""c"", c);", new LiteralDummyTestCheck()).Validator;
             validator.ValidateOrder(
-                "LocalReference: a = 42 (Implicit)",
-                "Literal: 42",
-                "SimpleAssignment: a = 42 (Implicit)",
-                "LocalReference: b = (byte)a (Implicit)",
-                "LocalReference: a",
-                "Conversion: (byte)a",
-                "SimpleAssignment: b = (byte)a (Implicit)",
-                "LocalReference: c = (byte)field (Implicit)",
-                "InstanceReference: field (Implicit)",
-                "FieldReference: field",
-                "Conversion: (byte)field",
-                "SimpleAssignment: c = (byte)field (Implicit)",
-                "InstanceReference: Tag (Implicit)",
+                @"LocalReference: a = 42 (Implicit)",
+                @"Literal: 42",
+                @"SimpleAssignment: a = 42 (Implicit)",
+                @"LocalReference: b = (byte)a (Implicit)",
+                @"LocalReference: a",
+                @"Conversion: (byte)a",
+                @"SimpleAssignment: b = (byte)a (Implicit)",
+                @"LocalReference: c = (byte)field (Implicit)",
+                @"InstanceReference: field (Implicit)",
+                @"FieldReference: field",
+                @"Conversion: (byte)field",
+                @"SimpleAssignment: c = (byte)field (Implicit)",
                 @"Literal: ""b""",
                 @"Argument: ""b""",
-                "LocalReference: b",
-                "Conversion: b (Implicit)",
-                "Argument: b",
+                @"LocalReference: b",
+                @"Conversion: b (Implicit)",
+                @"Argument: b",
                 @"Invocation: Tag(""b"", b)",
                 @"ExpressionStatement: Tag(""b"", b);",
-                "InstanceReference: Tag (Implicit)",
                 @"Literal: ""c""",
                 @"Argument: ""c""",
-                "LocalReference: c",
-                "Conversion: c (Implicit)",
-                "Argument: c",
+                @"LocalReference: c",
+                @"Conversion: c (Implicit)",
+                @"Argument: c",
                 @"Invocation: Tag(""c"", c)",
                 @"ExpressionStatement: Tag(""c"", c);");
             validator.ValidateTag("b", x => x.HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
@@ -182,16 +178,15 @@ public void Method()
         {
             var validator = SETestContext.CreateCS(@"byte b = 42; Tag(""b"", b);", new LiteralDummyTestCheck()).Validator;
             validator.ValidateOrder(
-                "LocalReference: b = 42 (Implicit)",
-                "Literal: 42",
-                "Conversion: 42 (Implicit)",
-                "SimpleAssignment: b = 42 (Implicit)",
-                "InstanceReference: Tag (Implicit)",
+                @"LocalReference: b = 42 (Implicit)",
+                @"Literal: 42",
+                @"Conversion: 42 (Implicit)",
+                @"SimpleAssignment: b = 42 (Implicit)",
                 @"Literal: ""b""",
                 @"Argument: ""b""",
-                "LocalReference: b",
-                "Conversion: b (Implicit)",
-                "Argument: b",
+                @"LocalReference: b",
+                @"Conversion: b (Implicit)",
+                @"Argument: b",
                 @"Invocation: Tag(""b"", b)",
                 @"ExpressionStatement: Tag(""b"", b);");
             validator.ValidateTag("b", x => x.HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
