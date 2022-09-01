@@ -147,14 +147,20 @@ public class Sample
 {{
     object field1 = null;
     object field2 = null;
+    static object staticField1 = null;
+    static object staticField2 = null;
 
     void CallToMethodsShouldResetFieldConstraints()
     {{
         field1 = new object();
         field2 = new object();
+        staticField1 = new object();
+        staticField2 = new object();
         {invocation}
         Tag(""Field1"", field1);
         Tag(""Field2"", field2);
+        Tag(""StaticField1"", staticField1);
+        Tag(""StaticField2"", staticField2);
     }}
 
     private void DoSomething() {{ }}
@@ -162,8 +168,10 @@ public class Sample
 }}";
             var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
             validator.ValidateContainsOperation(OperationKind.Invocation);
-            validator.ValidateTag("Field1", x => x.Should().BeNull());
-            validator.ValidateTag("Field2", x => x.Should().BeNull());
+            validator.ValidateTag("Field1", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("Field2", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("StaticField1", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("StaticField2", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
         }
 
         [DataTestMethod]
@@ -177,15 +185,21 @@ public class Sample
 {{
     object field1 = null;
     object field2 = null;
+    static object staticField1 = null;
+    static object staticField2 = null;
 
     void CallToMethodsShouldResetFieldConstraints()
     {{
         field1 = new object();
         field2 = new object();
+        staticField1 = new object();
+        staticField2 = new object();
         var otherInstance = new Sample();
         {invocation}
         Tag(""Field1"", field1);
         Tag(""Field2"", field2);
+        Tag(""StaticField1"", staticField1);
+        Tag(""StaticField2"", staticField2);
     }}
 
     private void DoSomething() {{ }}
@@ -195,6 +209,8 @@ public class Sample
             validator.ValidateContainsOperation(OperationKind.Invocation);
             validator.ValidateTag("Field1", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.ValidateTag("Field2", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("StaticField1", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("StaticField2", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
         }
     }
 }
