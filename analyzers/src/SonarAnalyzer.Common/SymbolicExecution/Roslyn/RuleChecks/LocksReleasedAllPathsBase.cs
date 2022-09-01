@@ -202,7 +202,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
 
         private ProgramState RemoveLock(SymbolicContext context, ISymbol symbol)
         {
-            if (symbol == null)
+            if (symbol == null || !context.HasConstraint(symbol, LockConstraint.Held))
             {
                 return context.State;
             }

@@ -37,7 +37,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
                 OperationKindEx.ArrayElementReference => context.Operation.Instance.ToArrayElementReference().ArrayReference,
                 _ => null,
             };
-            if (reference != null && context.HasConstraint(ObjectConstraint.Null, reference))
+            if (reference != null && context.HasConstraint(reference, ObjectConstraint.Null))
             {
                 ReportIssue(reference, reference.Syntax.ToString());
             }

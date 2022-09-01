@@ -5,6 +5,7 @@ namespace Monitor_Conditions
 {
     class Program
     {
+        private readonly static object staticObj = new object();
         private object obj = new object();
         private object other = new object();
 
@@ -438,5 +439,117 @@ namespace Monitor_Conditions
                 }
             }
         }
+
+        public void FieldReference_Standalone(string arg)
+        {
+            Monitor.Enter(obj); // Noncompliant {{Unlock this lock along all executions paths of this method.}}
+            if(condition)
+                Monitor.Exit(obj);
+        }
+
+        public void FieldReference_WithThis(string arg)
+        {
+            Monitor.Enter(this.obj); // Noncompliant {{Unlock this lock along all executions paths of this method.}}
+            if(condition)
+                Monitor.Exit(this.obj);
+        }
+
+        public void FieldReference_WithThis_Mixed1(string arg)
+        {
+            Monitor.Enter(this.obj); // Noncompliant {{Unlock this lock along all executions paths of this method.}}
+            if(condition)
+                Monitor.Exit(obj);
+        }
+
+        public void FieldReference_WithThis_Mixed2(string arg)
+        {
+            Monitor.Enter(obj); // Noncompliant {{Unlock this lock along all executions paths of this method.}}
+            if (condition)
+                Monitor.Exit(this.obj);
+        }
+
+        public void StaticFieldReference(string arg)
+        {
+            Monitor.Enter(staticObj); // Noncompliant {{Unlock this lock along all executions paths of this method.}}
+            if (condition)
+                Monitor.Exit(staticObj);
+        }
+
+        public void StaticFieldReference_Class(string arg)
+        {
+            Monitor.Enter(Program.staticObj); // Noncompliant {{Unlock this lock along all executions paths of this method.}}
+            if (condition)
+                Monitor.Exit(Program.staticObj);
+        }
+
+        public void LocalVariable(string arg)
+        {
+            var l = new object();
+
+            Monitor.Enter(l); // Noncompliant {{Unlock this lock along all executions paths of this method.}}
+            if (condition)
+                Monitor.Exit(l);
+        }
+
+        public void Parameter(object arg)
+        {
+            Monitor.Enter(arg); // Noncompliant
+            if (condition)
+                Monitor.Exit(arg);
+        }
+
+        public void FirstReleasedThanAcquired_ConditionalEnter()
+        {
+            Monitor.Exit(obj);
+            try
+            {
+                Console.WriteLine();
+            }
+            finally
+            {
+                if (condition)
+                {
+                    Monitor.Enter(obj); // Not supported by this rule
+                }
+            }
+        }
+
+        public void FirstReleasedThanAcquired_ConditionalExit()
+        {
+            if (condition)
+            {
+                Monitor.Exit(obj);
+            }
+            try
+            {
+                Console.WriteLine();
+            }
+            finally
+            {
+                if (condition)
+                {
+                    Monitor.Enter(obj); // Compliant, even when the exit is weirdly conditional. Not in scope of this rule.
+                }
+            }
+        }
+
+        public void FirstReleasedThanAcquired_Complex()
+        {
+            Monitor.Exit(obj);
+            try
+            {
+                Console.WriteLine();
+                Monitor.Enter(obj);     // Noncompliant
+                Console.WriteLine();
+            }
+            finally
+            {
+                if (condition)
+                {
+                    Monitor.Exit(obj);
+                }
+            }
+        }
+
     }
 }

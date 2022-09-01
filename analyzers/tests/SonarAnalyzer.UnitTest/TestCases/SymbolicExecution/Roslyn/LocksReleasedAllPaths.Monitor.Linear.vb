@@ -6,7 +6,6 @@ Namespace Monitor_Linear
     Class Program
 
         Public PublicObject As New Object()
-        Private Shared ReadOnly StaticObj As New Object()
         Private Obj As New Object()
         Private Other As New Object()
 
@@ -93,54 +92,6 @@ Namespace Monitor_Linear
             Monitor.Enter(Obj) ' Compliant
             Dim A As Action = Sub() Monitor.Exit(Obj)
             A()
-        End Sub
-
-        Public Sub Method13(Arg As String)
-            Monitor.Exit(Obj)
-            Console.WriteLine(Arg.Length)
-            Monitor.Enter(Obj) ' Noncompliant {{Unlock this lock along all executions paths of this method.}}
-        End Sub
-
-        Public Sub FieldReference_WithThis(Arg As String)
-            Monitor.Exit(Me.Obj)
-            Console.WriteLine(Arg.Length)
-            Monitor.Enter(Me.Obj) ' Noncompliant {{Unlock this lock along all executions paths of this method.}}
-        End Sub
-
-        Public Sub FieldReference_WithThis_Mixed1(Arg As String)
-            Monitor.Exit(Obj)
-            Console.WriteLine(Arg.Length)
-            Monitor.Enter(Me.Obj) ' Noncompliant {{Unlock this lock along all executions paths of this method.}}
-        End Sub
-
-        Public Sub FieldReference_WithThis_Mixed2(Arg As String)
-            Monitor.Exit(Me.Obj)
-            Console.WriteLine(Arg.Length)
-            Monitor.Enter(Obj) ' Noncompliant {{Unlock this lock along all executions paths of this method.}}
-        End Sub
-
-        Public Sub StaticFieldReference(Arg As String)
-            Monitor.Exit(StaticObj)
-            Console.WriteLine(Arg.Length)
-            Monitor.Enter(StaticObj) ' Noncompliant {{Unlock this lock along all executions paths of this method.}}
-        End Sub
-
-        Public Sub StaticFieldReference_Class(Arg As String)
-            Monitor.Exit(Program.StaticObj)
-            Console.WriteLine(Arg.Length)
-            Monitor.Enter(Program.StaticObj) ' Noncompliant {{Unlock this lock along all executions paths of this method.}}
-        End Sub
-
-        Public Sub Method13_LocalVar(Arg As String)
-            Dim l As New Object()
-            Monitor.Exit(l)
-            Console.WriteLine(Arg.Length)
-            Monitor.Enter(l) ' Noncompliant {{Unlock this lock along all executions paths of this method.}}
-        End Sub
-
-        Public Sub Method13_Parameter(Arg As Object)
-            Monitor.Exit(Arg)
-            Monitor.Enter(Arg) ' Noncompliant
         End Sub
 
         Public Sub Method14(Arg As String)
