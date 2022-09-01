@@ -100,7 +100,7 @@ public sealed class MultilineBlocksWithoutBrace : SonarDiagnosticAnalyzer
         if (IsNotEmpty(first)
             && SecondStatement(context.Node, first) is { } second
             && IsNotEmpty(second)
-            && InsufficientIndenting(first, second))
+            && MisleadingtIndenting(first, second))
         {
             var secondLine = StartPosition(second).Line;
             var lineSpan = context.Node.SyntaxTree.GetText().Lines[secondLine].Span;
@@ -114,7 +114,7 @@ public sealed class MultilineBlocksWithoutBrace : SonarDiagnosticAnalyzer
     private static bool IsNotEmpty(SyntaxNode node) =>
         node is not EmptyStatementSyntax;
 
-    private static bool InsufficientIndenting(SyntaxNode first, SyntaxNode second)
+    private static bool MisleadingtIndenting(SyntaxNode first, SyntaxNode second)
     {
         var firstPosition = StartPosition(first);
         var secondPosition = StartPosition(second);
