@@ -334,6 +334,8 @@ if (value = boolParameter)
         [DataRow("!(arg is null)")]
         [DataRow("!!!(arg is null)")]
         [DataRow("arg is not null")]
+        [DataRow("arg is 42")]
+        [DataRow("arg is System.ConsoleKey.Enter")]    // Enum
         public void Branching_LearnsObjectConstraint_ConstantPattern_Null_Negated(string expression)
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.ConstantPattern);
@@ -386,11 +388,10 @@ if (value = boolParameter)
         }
 
         [DataTestMethod]
-        [DataRow("arg is 42")]
-        [DataRow("arg is System.ConsoleKey.Enter")]    // Enum
-        public void Branching_LearnsObjectConstraint_ConstantPattern_ValueTypes(string expression)
+        [DataRow("arg is 42", "int")]
+        public void Branching_LearnsObjectConstraint_ConstantPattern_ValueTypes_InputIsNotReferenceType(string expression, string argType)
         {
-            var validator = CreateIfElseEndValidatorCS(expression, OperationKind.ConstantPattern);
+            var validator = CreateIfElseEndValidatorCS(expression, OperationKind.ConstantPattern, argType);
             validator.ValidateTag("If", x => x.Should().BeNull());
             validator.ValidateTag("Else", x => x.Should().BeNull());
             validator.ValidateTag("End", x => x.Should().BeNull());
@@ -521,13 +522,14 @@ if (value = boolParameter)
 
         [DataTestMethod]
         [DataRow("arg is object o")]
+        [DataRow("arg is object o", "string")]
         [DataRow("arg is string s")]
         [DataRow("arg is not not object o")]
         [DataRow("arg is not not string s")]
         [DataRow("!(arg is not object o)")]
-        public void Branching_LearnsObjectConstraint_DeclarationPattern(string expression)
+        public void Branching_LearnsObjectConstraint_DeclarationPattern(string expression, string argType = "object")
         {
-            var validator = CreateIfElseEndValidatorCS(expression, OperationKind.DeclarationPattern);
+            var validator = CreateIfElseEndValidatorCS(expression, OperationKind.DeclarationPattern, argType);
             validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.ValidateTag("Else", x => x.Should().BeNull("it could be null or any other type"));
             validator.TagValues("End").Should().HaveCount(2)
@@ -538,9 +540,10 @@ if (value = boolParameter)
         [DataTestMethod]
         [DataRow("arg is var o")]
         [DataRow("arg is int i")]
-        public void Branching_LearnsObjectConstraint_DeclarationPattern_NoConstraints(string expression)
+        [DataRow("arg is object o", "int")]
+        public void Branching_LearnsObjectConstraint_DeclarationPattern_NoConstraints(string expression, string argType = "object")
         {
-            var validator = CreateIfElseEndValidatorCS(expression, OperationKind.DeclarationPattern);
+            var validator = CreateIfElseEndValidatorCS(expression, OperationKind.DeclarationPattern, argType);
             validator.ValidateTag("If", x => x.Should().BeNull());
             validator.ValidateTag("Else", x => x.Should().BeNull());
             validator.ValidateTag("End", x => x.Should().BeNull());
