@@ -120,6 +120,7 @@ public sealed class MultilineBlocksWithoutBrace : SonarDiagnosticAnalyzer
         var secondPosition = StartPosition(second);
         var ancestor = first.AncestorsAndSelf().Select(x => StartPosition(x)).Last(x => x.Line == firstPosition.Line);
 
+        // If the first node is not at the same line as its parent
         return firstPosition.Character == ancestor.Character
             ? secondPosition.Character >= firstPosition.Character
             : secondPosition.Character > ancestor.Character;
