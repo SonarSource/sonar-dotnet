@@ -20,13 +20,12 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.UnitTest.Rules;
+
+[TestClass]
+public class MultilineBlocksWithoutBraceTest
 {
-    [TestClass]
-    public class MultilineBlocksWithoutBraceTest
-    {
-        [TestMethod]
-        public void MultilineBlocksWithoutBrace() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\MultilineBlocksWithoutBrace.cs", new MultilineBlocksWithoutBrace());
-    }
+    [TestMethod]
+    public void MultilineBlocksWithoutBrace() =>
+        new VerifierBuilder<MultilineBlocksWithoutBrace>().AddPaths("MultilineBlocksWithoutBrace.cs").Verify();
 }
