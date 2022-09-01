@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -96,32 +97,32 @@ public sealed class MultilineBlocksWithoutBrace : SonarDiagnosticAnalyzer
 
     private static void CheckStatement(SyntaxNodeAnalysisContext context, StatementSyntax first, string executed, string execute)
     {
-        if (SecondStatement(context.Node, first) is { } second && IsNotEmpty(first) && IsNotEmpty(second))
+        if (IsNotEmpty(first)
+            && SecondStatement(context.Node, first) is { } second
+            && IsNotEmpty(second)
+            && InsufficientIndenting(first, second))
         {
-            var firstPosition = ProxyStartPosition(first);
-            var secondPosition = StartPosition(second);
-
-            if (secondPosition.Character > firstPosition.Character - IndentSize)
-            {
-                var lineSpan = context.Node.SyntaxTree.GetText().Lines[secondPosition.Line].Span;
-                var location = Location.Create(context.Node.SyntaxTree, TextSpan.FromBounds(second.SpanStart, lineSpan.End));
-                var blockSize = secondPosition.Line - StartPosition(first).Line + 1;
-                var additional = new[] { first.GetLocation() };
-                context.ReportIssue(Rule.CreateDiagnostic(context.Compilation, location, additional, executed, execute, blockSize));
-            }
+            var secondLine = StartPosition(second).Line;
+            var lineSpan = context.Node.SyntaxTree.GetText().Lines[secondLine].Span;
+            var location = Location.Create(context.Node.SyntaxTree, TextSpan.FromBounds(second.SpanStart, lineSpan.End));
+            var blockSize = secondLine - StartPosition(first).Line + 1;
+            var additional = new[] { first.GetLocation() };
+            context.ReportIssue(Rule.CreateDiagnostic(context.Compilation, location, additional, executed, execute, blockSize));
         }
     }
 
     private static bool IsNotEmpty(SyntaxNode node) =>
         node is not EmptyStatementSyntax;
 
-    private static LinePosition ProxyStartPosition(SyntaxNode node)
+    private static bool InsufficientIndenting(SyntaxNode first, SyntaxNode second)
     {
-        var line = StartPosition(node).Line;
-        var firstOnLine = node.AncestorsAndSelf().Last(x => StartPosition(x).Line == line);
-        var position = StartPosition(firstOnLine);
-        // If based on an ancestor, increase the indentation size.
-        return firstOnLine != node ? new LinePosition(position.Line, position.Character + IndentSize) : position;
+        var firstPosition = StartPosition(first);
+        var secondPosition = StartPosition(second);
+        var ancestor = first.AncestorsAndSelf().Select(x => StartPosition(x)).Last(x => x.Line == firstPosition.Line);
+
+        return firstPosition.Character == ancestor.Character
+            ? secondPosition.Character >= firstPosition.Character
+            : secondPosition.Character > ancestor.Character;
     }
 
     private static LinePosition StartPosition(SyntaxNode node) =>

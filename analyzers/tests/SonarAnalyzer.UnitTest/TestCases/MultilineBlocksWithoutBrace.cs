@@ -378,6 +378,20 @@ Act.Second(); // Noncompliant
         finally { }
     }
 
+    void LimitedIndentation(bool condition)
+    {
+        if (condition)
+          Act.First();
+
+        Act.Second();
+    }
+
+    void LimitedIndentationSameLine(bool condition)
+    {
+        if (condition) Act.First(); // Secondary
+         Act.Second(); // Noncompliant
+    }
+
     void IfElseWithAlternativeSpacing(bool condition)
     {
         var n = 0;
