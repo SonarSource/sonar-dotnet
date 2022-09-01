@@ -78,17 +78,14 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
             return null;
         }
 
-        private static ObjectConstraint ObjectConstraintFromRecursivePattern(IRecursivePatternOperationWrapper recursive, bool useOpposite)
-        {
-            if (useOpposite)
-            {
-                return RecursivePatternAlwaysMatchesAnyNotNull(recursive) ? ObjectConstraint.Null : null;
-            }
-            else
-            {
-                return ObjectConstraint.NotNull;
-            }
-        }
+        private static ObjectConstraint ObjectConstraintFromRecursivePattern(IRecursivePatternOperationWrapper recursive, bool useOpposite) =>
+            recursive.InputType.IsReferenceType
+                ? useOpposite switch
+                    {
+                        true => RecursivePatternAlwaysMatchesAnyNotNull(recursive) ? ObjectConstraint.Null : null,
+                        _ => ObjectConstraint.NotNull
+                    }
+                : null;
 
         private static ProgramState ProcessDeclaration(SymbolicContext context, ISymbol declaredSymbol, bool setNotNull)
         {
@@ -166,15 +163,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
             };
 
         private static bool RecursivePatternAlwaysMatchesAnyNotNull(IRecursivePatternOperationWrapper recursive) =>
-            recursive switch
-            {
-                {
-                    PropertySubpatterns.Length: 0,
-                    DeconstructionSubpatterns.Length: 0,
-                } => true,
-                _ when recursive.InputType.Equals(recursive.MatchedType) && SubPatternsAlwaysMatches(recursive) => true,
-                _ => false
-            };
+            recursive.InputType.DerivesOrImplements(recursive.MatchedType)
+            && (recursive is { PropertySubpatterns.Length: 0, DeconstructionSubpatterns.Length: 0 } || SubPatternsAlwaysMatches(recursive));
 
         private static bool SubPatternsAlwaysMatches(IRecursivePatternOperationWrapper recursivePattern) =>
             recursivePattern.PropertySubpatterns

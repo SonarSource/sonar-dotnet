@@ -346,11 +346,12 @@ if (value = boolParameter)
 
         [DataTestMethod]
         [DataRow("arg is true")]
+        [DataRow("arg is true", "bool")]
         [DataRow("!!(arg is true)")]
         [DataRow("arg is not not true")]
-        public void Branching_LearnsObjectConstraint_ConstantPattern_True(string expression)
+        public void Branching_LearnsObjectConstraint_ConstantPattern_True(string expression, string argType = "object")
         {
-            var validator = CreateIfElseEndValidatorCS(expression, OperationKind.ConstantPattern);
+            var validator = CreateIfElseEndValidatorCS(expression, OperationKind.ConstantPattern, argType);
             validator.ValidateTag("If", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
             validator.ValidateTag("Else", x => x.Should().BeNull("it could be False, null or any other type"));
             validator.TagValues("End").Should().HaveCount(2)
@@ -359,10 +360,11 @@ if (value = boolParameter)
         }
 
         [DataTestMethod]
-        [DataRow("arg is not true")]
-        public void Branching_LearnsObjectConstraint_ConstantPattern_True_Negated(string expression)
+        [DataRow("arg is not true", "object")]
+        [DataRow("arg is not true", "bool")]
+        public void Branching_LearnsObjectConstraint_ConstantPattern_True_Negated(string expression, string argType)
         {
-            var validator = CreateIfElseEndValidatorCS(expression, OperationKind.ConstantPattern);
+            var validator = CreateIfElseEndValidatorCS(expression, OperationKind.ConstantPattern, argType);
             validator.ValidateTag("If", x => x.Should().BeNull("it could be False, null or any other type"));
             validator.ValidateTag("Else", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
             validator.TagValues("End").Should().HaveCount(2)
@@ -435,11 +437,14 @@ if (value = boolParameter)
 
         [DataTestMethod]
         [DataRow("arg is { }")]
+        [DataRow("arg is { }", "TClass")]
+        [DataRow("arg is object { }")]
         [DataRow("arg is not not { }")]
         [DataRow("!!(arg is { })")]
-        public void Branching_LearnsObjectConstraint_RecursivePattern_ElseIsNull(string expression)
+        [DataRow("arg is (A: var a, B: _)", "Deconstructable")]
+        public void Branching_LearnsObjectConstraint_RecursivePattern_ElseIsNull(string expression, string argType = "object")
         {
-            var validator = CreateIfElseEndValidatorCS(expression, OperationKind.RecursivePattern);
+            var validator = CreateIfElseEndValidatorCS(expression, OperationKind.RecursivePattern, argType);
             validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
             validator.TagValues("End").Should().HaveCount(2)
@@ -448,6 +453,7 @@ if (value = boolParameter)
         }
 
         [DataTestMethod]
+        [DataRow("arg is string { }")]
         [DataRow("arg is string { Length: 0 }")]
         [DataRow("arg is string { Length: var length }")]
         public void Branching_LearnsObjectConstraint_RecursivePattern_ElseIsUnknown(string expression)
@@ -458,6 +464,19 @@ if (value = boolParameter)
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x == null)
                 .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
+        }
+
+        [DataTestMethod]
+        [DataRow("arg is { }", "int")]
+        [DataRow("arg is { }", "T")]
+        [DataRow("arg is { }", "TStruct")]
+        [DataRow("(arg, Unknown<object>()) is ({ }, { })", "object")]   // We don't support learning for tuples (yet). Should behave same as "arg is { }". Gets tricky when nesting (a, (b, c))
+        public void Branching_LearnsObjectConstraint_RecursivePattern_NoConstraint(string expression, string argType)
+        {
+            var validator = CreateIfElseEndValidatorCS(expression, OperationKind.RecursivePattern, argType);
+            validator.ValidateTag("If", x => x.Should().BeNull());
+            validator.ValidateTag("Else", x => x.Should().BeNull());
+            validator.ValidateTag("End", x => x.Should().BeNull());
         }
 
         [DataTestMethod]
@@ -523,21 +542,26 @@ Tag(""End"", arg);";
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
         }
 
-        private static ValidatorTestCheck CreateIfElseEndValidatorCS(string expression, OperationKind expectedOperation)
+        private static ValidatorTestCheck CreateIfElseEndValidatorCS(string expression, OperationKind expectedOperation, string argType = "object")
         {
             var code = @$"
-object isNull = null;
-var isObject = new object();
-if ({expression})
+public void Main<T, TClass, TStruct>({argType} arg)
+    where TClass : class
+    where TStruct : struct
 {{
-    Tag(""If"", arg);
-}}
-else
-{{
-    Tag(""Else"", arg);
-}}
-Tag(""End"", arg);";
-            var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+    object isNull = null;
+    var isObject = new object();
+    if ({expression})
+    {{
+        Tag(""If"", arg);
+    }}
+    else
+    {{
+        Tag(""Else"", arg);
+    }}
+    Tag(""End"", arg);
+}}";
+            var validator = SETestContext.CreateCSMethod(code).Validator;
             validator.ValidateContainsOperation(expectedOperation);
             return validator;
         }

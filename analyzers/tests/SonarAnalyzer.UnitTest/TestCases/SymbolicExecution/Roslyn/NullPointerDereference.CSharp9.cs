@@ -108,6 +108,10 @@ public class Sample
         {
             arg.ToString();     // Noncompliant
         }
+        else
+        {
+            arg.ToString();     // Compliant
+        }
     }
 
     public void PatternMatching_NotNotNull_Mixed(object arg)
@@ -115,6 +119,10 @@ public class Sample
         if (!(arg is not null))
         {
             arg.ToString();     // Noncompliant
+        }
+        else
+        {
+            arg.ToString();     // Compliant
         }
     }
 

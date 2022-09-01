@@ -62,6 +62,11 @@ public class Sample
 
     private void Tag(string name, object arg) {{ }}
     private T Unknown<T>() => default;
+}}
+
+public class Deconstructable
+{{
+    public void Deconstruct(out int A, out int B) {{ A = 1; B = 2; }}
 }}", AnalyzerLanguage.CSharp, additionalChecks);
 
         public static SETestContext CreateVB(string methodBody, params SymbolicCheck[] additionalChecks) =>
