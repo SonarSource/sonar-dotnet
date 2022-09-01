@@ -98,15 +98,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
         private static BoolConstraint BoolContraintFromConstant(ProgramState state, IIsPatternOperationWrapper isPattern) =>
             state[isPattern.Value] is { } value
             && isPattern.Pattern.WrappedOperation.Kind == OperationKindEx.ConstantPattern
-            && ConstantCheck.ConstraintFromConstantValue(IConstantPatternOperationWrapper.FromOperation(isPattern.Pattern.WrappedOperation).Value.ToSonar()) is { } constantValue
-            && constantValue.HasConstraint<BoolConstraint>()
-            && PatternBoolConstraint(value, constantValue.Constraint<BoolConstraint>()) is { } newConstraint
-                ? newConstraint
-                : null;
-
-        private static BoolConstraint PatternBoolConstraint(SymbolicValue value, BoolConstraint pattern) =>
-            value.HasConstraint<BoolConstraint>()
-                ? BoolConstraint.From(value.HasConstraint(pattern))
+            && value.Constraint<BoolConstraint>() is { } valueConstraint
+            && IConstantPatternOperationWrapper.FromOperation(isPattern.Pattern.WrappedOperation).Value.ConstantValue.Value is bool boolConstant
+                ? BoolConstraint.From(valueConstraint == BoolConstraint.From(boolConstant))
                 : null; // We cannot take conclusive decision
 
         private static SymbolicConstraint BoolConstraintFromPattern(ProgramState state, IIsPatternOperationWrapper isPattern) =>

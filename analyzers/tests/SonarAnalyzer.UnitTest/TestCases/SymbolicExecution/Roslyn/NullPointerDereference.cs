@@ -370,7 +370,7 @@ namespace Tests.Diagnostics
         private readonly object _foo7 = new object();
         private static object _foo8;
         private const object NullConst = null;
-        private const object NullConstString = null;
+        private const string NullConstString = null;
         private const string NotNullConst = "Lorem ipsum";
         private readonly object NullReadOnly = null;
 
