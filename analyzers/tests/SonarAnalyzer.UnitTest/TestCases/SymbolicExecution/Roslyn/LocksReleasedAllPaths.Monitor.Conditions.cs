@@ -497,5 +497,59 @@ namespace Monitor_Conditions
             if (condition)
                 Monitor.Exit(arg);
         }
+
+        public void FirstReleasedThanAcquired_ConditionalEnter()
+        {
+            Monitor.Exit(obj);
+            try
+            {
+                Console.WriteLine();
+            }
+            finally
+            {
+                if (condition)
+                {
+                    Monitor.Enter(obj); // Not supported by this rule
+                }
+            }
+        }
+
+        public void FirstReleasedThanAcquired_ConditionalExit()
+        {
+            if (condition)
+            {
+                Monitor.Exit(obj);
+            }
+            try
+            {
+                Console.WriteLine();
+            }
+            finally
+            {
+                if (condition)
+                {
+                    Monitor.Enter(obj); // Compliant, even when the exit is weirdly conditional. Not in scope of this rule.
+                }
+            }
+        }
+
+        public void FirstReleasedThanAcquired_Complex()
+        {
+            Monitor.Exit(obj);
+            try
+            {
+                Console.WriteLine();
+                Monitor.Enter(obj);     // Noncompliant
+                Console.WriteLine();
+            }
+            finally
+            {
+                if (condition)
+                {
+                    Monitor.Exit(obj);
+                }
+            }
+        }
+
     }
 }

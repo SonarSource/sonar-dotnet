@@ -11,7 +11,7 @@ namespace Monitor_TryEnter
 
         public void TryEnter_ExitedInElse()
         {
-            if (Monitor.TryEnter(obj)) // Compliant, never exited in this method
+            if (Monitor.TryEnter(obj)) // Compliant, never exited in this method. It's a programming error not covered by this rule.
             {
             }
             else
@@ -167,7 +167,6 @@ namespace Monitor_TryEnter
                     if (condition)
                     {
                         Monitor.Exit(obj);
-
                     }
                     break;
             }
