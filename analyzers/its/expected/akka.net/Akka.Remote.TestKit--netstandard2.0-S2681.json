@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S2681",
+"message":  "This line will not be executed conditionally; only the first line of this 2-line block will be. The rest will execute unconditionally.",
+"location":  [
+{
+"uri":  "D:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  17,
+"endLine":  59,
+"endColumn":  26
+}
+},
+{
+"uri":  "D:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  33,
+"endLine":  58,
+"endColumn":  104
+}
+}
+]
+}
+]
+}
