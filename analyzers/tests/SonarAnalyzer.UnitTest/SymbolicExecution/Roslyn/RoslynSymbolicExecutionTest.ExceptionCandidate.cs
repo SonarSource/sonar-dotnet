@@ -503,8 +503,8 @@ tag = ""AfterCatch"";";
         }
 
         [DataTestMethod]
-        [DataRow("this.Tag")]
-        [DataRow("Tag")]
+        [DataRow("this.ToString")]
+        [DataRow("ToString")]
         public void ExceptionCandidate_MethodReference_This(string method)
         {
             var code = $@"
