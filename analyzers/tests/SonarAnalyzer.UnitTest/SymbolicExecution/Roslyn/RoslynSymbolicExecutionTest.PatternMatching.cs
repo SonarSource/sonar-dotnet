@@ -131,8 +131,10 @@ if (arg is { })
 Tag(""End"", arg);";
             var validator = SETestContext.CreateCS(code, ", object arg").Validator;
             validator.ValidateContainsOperation(OperationKind.RecursivePattern);
-            validator.ValidateTag("ArgNotNull", x => x.Should().BeNull());  // ToDo: Should learn that it is not null too
-            validator.TagValues("End").Should().HaveCount(1).And.OnlyContain(x => x == null);
+            validator.ValidateTag("ArgNotNull", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
         }
 
         [TestMethod]
@@ -148,8 +150,10 @@ Tag(""End"", arg);";
             var validator = SETestContext.CreateCS(code, ", object arg").Validator;
             validator.ValidateContainsOperation(OperationKind.RecursivePattern);
             validator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-            validator.ValidateTag("ArgNotNull", x => x.Should().BeNull());  // ToDo: MMF-2563 should have NotNull instead
-            validator.TagValues("End").Should().HaveCount(2).And.OnlyContain(x => x == null);       // 2x because value has different states
+            validator.ValidateTag("ArgNotNull", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
         }
 
         [TestMethod]
@@ -168,8 +172,10 @@ Tag(""End"", arg);";
             validator.ValidateTag("Value", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());
             validator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.ValidateTag("ArgNotNull", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());
-            validator.ValidateTag("ArgNotNull", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeFalse());     // ToDo: MMF-2563 should BeTrue() instead
-            validator.TagValues("End").Should().HaveCount(2).And.OnlyContain(x => x != null && x.HasConstraint(TestConstraint.First));  // 2x because value has different states
+            validator.ValidateTag("ArgNotNull", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && x.HasConstraint(ObjectConstraint.Null))
+                .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && x.HasConstraint(ObjectConstraint.NotNull));
         }
 
         [TestMethod]
@@ -286,7 +292,9 @@ Tag(""End"", arg);";
             validator.ValidateTag("B", x => x.Should().BeNull());
             validator.ValidateTag("C", x => x.Should().BeNull());
             validator.ValidateTag("D", x => x.Should().BeNull());
-            validator.ValidateTag("End", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && x.HasConstraint(ObjectConstraint.Null))
+                .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && x.HasConstraint(ObjectConstraint.NotNull));
         }
 
         [DataTestMethod]
@@ -318,9 +326,15 @@ Tag(""End"", arg);";
 
         [DataTestMethod]
         [DataRow("objectNotNull is { }", true)]
+        [DataRow("objectNotNull is object { }", true)]
+        [DataRow("objectNotNull is string { }", null)]
         [DataRow("objectNull is { }", false)]
+        [DataRow("objectNull is object { }", false)]
         [DataRow("objectUnknown is { }", null)]
+        [DataRow("objectUnknown is object { }", null)]
+        [DataRow("objectUnknown is string { }", null)]
         [DataRow("stringNotNull is { }", true)]
+        [DataRow("stringNotNull is object { }", true)]
         [DataRow("stringNotNull is { Length: 0 }", null)]
         [DataRow("stringNull is { Length: 0 }", false)]
         [DataRow("stringNotNull is { Length: var length }", true)] // only deconstruction
@@ -345,6 +359,15 @@ Tag(""End"", arg);";
         [DataRow("objectUnknown is object o", null)]
         [DataRow("objectNull is int i", false)]
         [DataRow("objectNotNull is int i", null)]
+        [DataRow("exceptionNull is object { }", false)]
+        [DataRow("exceptionNull is Exception { }", false)]
+        [DataRow("exceptionNull is FormatException { }", false)]
+        [DataRow("exceptionNotNull is object { }", true)]
+        [DataRow("exceptionNotNull is Exception { }", true)]
+        [DataRow("exceptionNotNull is FormatException { }", null)]
+        [DataRow("exceptionUnknown is object { }", null)]
+        [DataRow("exceptionUnknown is Exception { }", null)]
+        [DataRow("exceptionUnknown is FormatException { }", null)]
         [DataRow("integer is object o", true)]
         public void DeclarationPatternSetBoolConstraint(string isPattern, bool? expectedBoolConstraint) =>
             ValidateSetBoolConstraint(isPattern, OperationKindEx.DeclarationPattern, expectedBoolConstraint);
@@ -352,12 +375,18 @@ Tag(""End"", arg);";
         [DataTestMethod]
         [DataRow("objectNull is not null", OperationKindEx.NegatedPattern, false)]
         [DataRow("objectNull is not { }", OperationKindEx.NegatedPattern, true)]
+        [DataRow("objectNull is not object { }", OperationKindEx.NegatedPattern, true)]
+        [DataRow("objectNull is not string { }", OperationKindEx.NegatedPattern, true)]
         [DataRow("objectNull is not not null", OperationKindEx.NegatedPattern, true)]
         [DataRow("objectNotNull is not null", OperationKindEx.NegatedPattern, true)]
         [DataRow("objectNotNull is not { }", OperationKindEx.NegatedPattern, false)]
+        [DataRow("objectNotNull is not object { }", OperationKindEx.NegatedPattern, false)]
+        [DataRow("objectNotNull is not string { }", OperationKindEx.NegatedPattern, null)]
         [DataRow("objectNotNull is not not null", OperationKindEx.NegatedPattern, false)]
         [DataRow("objectUnknown is not null", OperationKindEx.NegatedPattern, null)]
         [DataRow("objectUnknown is not { }", OperationKindEx.NegatedPattern, null)]
+        [DataRow("objectUnknown is not string { }", OperationKindEx.NegatedPattern, null)]
+        [DataRow("objectUnknown is not object { }", OperationKindEx.NegatedPattern, null)]
         [DataRow("objectUnknown is not not null", OperationKindEx.NegatedPattern, null)]
         [DataRow("nullableBoolTrue is not true", OperationKindEx.NegatedPattern, null)]     // Should be false
         [DataRow("nullableBoolTrue is not false", OperationKindEx.NegatedPattern, null)]    // Should be true
@@ -404,7 +433,6 @@ Tag(""End"", arg);";
         [DataRow("stringNull is { Length: > 10 } and { Length: < 100 }", false)]
         [DataRow("stringNotNull is { Length: > 10 } and { Length: < 100 }", null)]
         [DataRow("stringUnknown is { Length: > 10 } and { Length: < 100 }", null)]
-
         [DataRow("objectNull is null or not { }", true)]
         [DataRow("objectNotNull is null or not { }", false)]
         [DataRow("objectUnknown is null or not { }", null)]
@@ -449,11 +477,6 @@ public void Main()
 
     var result = {isPattern};
     Tag(""Result"", result);
-}}
-
-public class Deconstructable
-{{
-    public void Deconstruct(out int A, out int B) {{ A = 1; B = 2; }}
 }}";
             var validator = SETestContext.CreateCSMethod(code).Validator;
             validator.ValidateContainsOperation(expectedOperation);

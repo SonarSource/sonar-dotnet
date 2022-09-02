@@ -76,14 +76,6 @@ public class Sample
             }
             o.ToString();       // Noncompliant
         }
-        if (arg is not not null)
-        {
-            arg.ToString();     // Non-compliant FIXME arg is null here
-        }
-        if (!(arg is not null))
-        {
-            arg.ToString();     // Non-compliant FIXME arg is null here
-        }
 
         if (arg is false)
         {
@@ -107,6 +99,54 @@ public class Sample
             {
                 o.ToString();   // Noncompliant
             }
+        }
+    }
+
+    public void PatternMatching_NotNotNull(object arg)
+    {
+        if (arg is not not null)
+        {
+            arg.ToString();     // Noncompliant
+        }
+        else
+        {
+            arg.ToString();     // Compliant
+        }
+    }
+
+    public void PatternMatching_NotNotNull_Mixed(object arg)
+    {
+        if (!(arg is not null))
+        {
+            arg.ToString();     // Noncompliant
+        }
+        else
+        {
+            arg.ToString();     // Compliant
+        }
+    }
+
+    public void PatternMatching_Recursive(object arg)
+    {
+        if (arg is { })
+        {
+            arg.ToString();     // Compliant
+        }
+        else
+        {
+            arg.ToString();     // Noncompliant
+        }
+    }
+
+    public void PatternMatching_Recursive_Negated(object arg)
+    {
+        if (arg is not { })
+        {
+            arg.ToString();     // Noncompliant
+        }
+        else
+        {
+            arg.ToString();     // Compliant
         }
     }
 

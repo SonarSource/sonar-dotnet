@@ -52,6 +52,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
             {
                 OperationKindEx.ConstantPattern => ConstraintFromConstantPattern(state, As(IConstantPatternOperationWrapper.FromOperation), useOpposite),
                 OperationKindEx.NegatedPattern => LearnBranchingConstraint(state, As(INegatedPatternOperationWrapper.FromOperation).Pattern, !useOpposite),
+                OperationKindEx.RecursivePattern => ObjectConstraintFromRecursivePattern(As(IRecursivePatternOperationWrapper.FromOperation), useOpposite),
                 OperationKindEx.TypePattern => ObjectConstraint.NotNull.ApplyOpposite(useOpposite),
                 _ => null
             };
@@ -75,6 +76,15 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
             }
             return null;
         }
+
+        private static ObjectConstraint ObjectConstraintFromRecursivePattern(IRecursivePatternOperationWrapper recursive, bool useOpposite) =>
+            recursive.InputType.IsReferenceType
+                ? useOpposite switch
+                    {
+                        true => RecursivePatternAlwaysMatchesAnyNotNull(recursive) ? ObjectConstraint.Null : null,
+                        _ => ObjectConstraint.NotNull
+                    }
+                : null;
 
         private static ProgramState ProcessDeclaration(SymbolicContext context, ISymbol declaredSymbol, bool setNotNull)
         {
@@ -142,15 +152,15 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
             recursive switch
             {
                 _ when valueConstraint == ObjectConstraint.Null => BoolConstraint.False,
-                {
-                    PropertySubpatterns.Length: 0,
-                    DeconstructionSubpatterns.Length: 0,
-                } => BoolConstraint.True,
-                _ when SubPatternsAlwaysMatch(recursive) => BoolConstraint.True,
+                _ when RecursivePatternAlwaysMatchesAnyNotNull(recursive) => BoolConstraint.True,
                 _ => null,
             };
 
-        private static bool SubPatternsAlwaysMatch(IRecursivePatternOperationWrapper recursivePattern) =>
+        private static bool RecursivePatternAlwaysMatchesAnyNotNull(IRecursivePatternOperationWrapper recursive) =>
+            recursive.InputType.DerivesOrImplements(recursive.MatchedType)
+            && (recursive is { PropertySubpatterns.Length: 0, DeconstructionSubpatterns.Length: 0 } || SubPatternsAlwaysMatches(recursive));
+
+        private static bool SubPatternsAlwaysMatches(IRecursivePatternOperationWrapper recursivePattern) =>
             recursivePattern.PropertySubpatterns
                 .Select(x => IPropertySubpatternOperationWrapper.FromOperation(x).Pattern)
                 .Concat(recursivePattern.DeconstructionSubpatterns.Select(x => IPatternOperationWrapper.FromOperation(x)))
