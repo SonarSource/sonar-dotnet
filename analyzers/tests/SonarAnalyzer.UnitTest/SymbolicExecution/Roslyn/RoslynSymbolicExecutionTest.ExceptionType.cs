@@ -185,8 +185,7 @@ tag = ""AfterCatch"";";
             validator.TagStates("InCatch").Should().HaveCount(2)
                      .And.ContainSingle(x => HasExceptionOfType(x, "NotImplementedException"))
                      .And.ContainSingle(x => HasUnknownException(x));
-            validator.TagStates("AfterCatch").Should().HaveCount(1)
-                .And.Contain(x => HasNoException(x));
+            validator.TagStates("AfterCatch").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
         }
 
         [TestMethod]
