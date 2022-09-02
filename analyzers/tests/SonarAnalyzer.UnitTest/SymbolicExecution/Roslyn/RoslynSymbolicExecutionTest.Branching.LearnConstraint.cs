@@ -334,8 +334,6 @@ if (value = boolParameter)
         [DataRow("!(arg is null)")]
         [DataRow("!!!(arg is null)")]
         [DataRow("arg is not null")]
-        [DataRow("arg is 42")]
-        [DataRow("arg is System.ConsoleKey.Enter")]    // Enum
         public void Branching_LearnsObjectConstraint_ConstantPattern_Null_Negated(string expression)
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.ConstantPattern);
@@ -400,7 +398,9 @@ if (value = boolParameter)
         [DataTestMethod]
         [DataRow(@"arg is ""some text""")]
         [DataRow(@"arg is """"")]
-        public void Branching_LearnsObjectConstraint_ConstantPattern_Strings(string expression)
+        [DataRow("arg is 42")]
+        [DataRow("arg is System.ConsoleKey.Enter")]    // Enum
+        public void Branching_LearnsObjectConstraint_ConstantPattern_Literals(string expression)
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.ConstantPattern);
             validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
