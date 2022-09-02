@@ -140,7 +140,7 @@ End Module";
         [DataRow("this.DoSomething();")]
         [DataRow("(this).DoSomething();")]
         [DataRow("(((this))).DoSomething();")]
-        public void InstanceMethodCallClearsFieldOnThis(string invocation)
+        public void InstanceMethodCallNotClearsFieldOnThis(string invocation)
         {
             var code = $@"
 public class Sample
@@ -168,8 +168,8 @@ public class Sample
 }}";
             var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
             validator.ValidateContainsOperation(OperationKind.Invocation);
-            validator.ValidateTag("Field1", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-            validator.ValidateTag("Field2", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("Field1", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue()); // old rule cleared constraints
+            validator.ValidateTag("Field2", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue()); // old rule cleared constraints
             validator.ValidateTag("StaticField1", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.ValidateTag("StaticField2", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
         }
@@ -178,7 +178,7 @@ public class Sample
         [DataRow("otherInstance.DoSomething();")]
         [DataRow("(otherInstance).DoSomething();")]
         [DataRow("(true ? this : otherInstance).DoSomething();")]
-        public void InstanceMethodCallClearsFieldOnThisOnly(string invocation)
+        public void InstanceMethodCallDontClearFieldsOnOtherInstances(string invocation)
         {
             var code = $@"
 public class Sample
