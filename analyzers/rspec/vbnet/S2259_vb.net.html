@@ -1,0 +1,51 @@
+<p>A reference to <code>Nothing</code> should never be dereferenced/accessed. Doing so will cause a <code>NullReferenceException</code> to be thrown.
+At best, such an exception will cause abrupt program termination. At worst, it could expose debugging information that would be useful to an attacker,
+or it could allow an attacker to bypass security measures.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Public Sub Method()
+    Dim O As Object = Nothing
+    Console.WriteLine(O.ToString)   ' Noncompliant, always Nothing
+End Sub
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Public Sub Method()
+    Dim O As New Object
+    Console.WriteLine(O.ToString)
+End Sub
+</pre>
+<h2>Exceptions</h2>
+<p>Calls to extension methods are not reported because they can still operate on <code>Nothing</code> values.</p>
+<p>To create a custom null validation method declare an attribute with name <code>ValidatedNotNullAttribute</code> and mark the parameter that is
+validated for null in your method declaration with it:</p>
+<pre>
+Public NotInheritable Class ValidatedNotNullAttribute
+    Inherits Attribute
+
+End Class
+
+Public Module Guard
+
+    Public Sub CheckNotNull(Of T)(&lt;ValidatedNotNull&gt; Value As T, Name As String)
+        If Value Is Nothing Then Throw New ArgumentNullException(Name)
+    End Sub
+
+End Module
+
+Public Class Sample
+
+    Public Sub Log(Value As Object)
+        CheckNotNull(Value, NameOf(Value))
+        If Value Is Nothing Then
+            Console.WriteLine(Value.ToString)  ' Compliant, this code is not reachable
+        End If
+    End Sub
+
+End Class
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://cwe.mitre.org/data/definitions/476">MITRE, CWE-476</a> - NULL Pointer Dereference </li>
+</ul>
+
