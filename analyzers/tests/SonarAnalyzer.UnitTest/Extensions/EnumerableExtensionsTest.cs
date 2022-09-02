@@ -205,7 +205,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
             collection.JoinAnd().Should().Be(expected);
 
         [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
-        public class CultureDataTestMethod : DataTestMethodAttribute
+        public sealed class CultureDataTestMethod : DataTestMethodAttribute
         {
             public CultureDataTestMethod() =>
                 Culture = CultureInfo.InvariantCulture;
@@ -233,7 +233,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
             }
         }
 
-        [CultureDataTestMethod()]
+        [CultureDataTestMethod]
         [DataRow("", new object[0])] // Empty collection
         [DataRow("08/30/2022 12:29:11", "2022-08-30T12:29:11")]
         [DataRow("08/30/2022 12:29:11 and 12/24/2022 16:00:00", "2022-08-30T12:29:11", "2022-12-24T16:00:00")]
