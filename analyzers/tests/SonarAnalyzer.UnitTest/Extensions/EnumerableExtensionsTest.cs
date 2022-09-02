@@ -22,6 +22,7 @@
 
 using System.Globalization;
 using System.Threading;
+using SonarAnalyzer.UnitTest.Helpers;
 
 namespace SonarAnalyzer.UnitTest.Extensions
 {
@@ -203,35 +204,6 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [DataRow("1000", 1000)]
         public void JoinAndInts(string expected, params int[] collection) =>
             collection.JoinAnd().Should().Be(expected);
-
-        [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
-        public sealed class CultureDataTestMethod : DataTestMethodAttribute
-        {
-            public CultureDataTestMethod() =>
-                Culture = CultureInfo.InvariantCulture;
-
-            public CultureDataTestMethod(string culture) =>
-                Culture = new CultureInfo(culture);
-
-            public CultureInfo Culture { get; }
-
-            public override TestResult[] Execute(ITestMethod testMethod)
-            {
-                var oldLocale = Thread.CurrentThread.CurrentCulture;
-                var oldUiLocale = Thread.CurrentThread.CurrentUICulture;
-                try
-                {
-                    Thread.CurrentThread.CurrentCulture = Culture;
-                    Thread.CurrentThread.CurrentUICulture = Culture;
-                    return base.Execute(testMethod);
-                }
-                finally
-                {
-                    Thread.CurrentThread.CurrentCulture = oldLocale;
-                    Thread.CurrentThread.CurrentUICulture = oldUiLocale;
-                }
-            }
-        }
 
         [CultureDataTestMethod]
         [DataRow("", new object[0])] // Empty collection
