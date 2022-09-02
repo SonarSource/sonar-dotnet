@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
 
@@ -28,49 +28,33 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
     {
         public override ProgramState[] PreProcess(SymbolicContext context) =>
             context.Operation.Instance.Kind == OperationKindEx.Invocation
-            && PreProcessInvocation(context.State, IInvocationOperationWrapper.FromOperation(context.Operation.Instance)) is { } newState
+            && PreProcess(context, IInvocationOperationWrapper.FromOperation(context.Operation.Instance)) is { } newState
                 ? newState
                 : base.PreProcess(context);
 
-        private ProgramState[] PreProcessInvocation(ProgramState state, IInvocationOperationWrapper invocation)
-        {
-            if (ArgumentOfIsNullOrEmpty(invocation) is { } symbol)
+        private ProgramState[] PreProcess(SymbolicContext context, IInvocationOperationWrapper invocation) =>
+            invocation switch
             {
-                if (state[symbol] is { } symbolicValue && symbolicValue.HasConstraint(ObjectConstraint.Null))
                 {
-                    // IsNullOrEmpty will always return "true". For the NotNull case, we can not tell for sure (string could be empty)
-                    return new[] { SetOperationConstraint(BoolConstraint.True) };
-                }
-
-                return new[]
-                {
-                    SetOperationConstraint(BoolConstraint.True).SetSymbolConstraint(symbol, ObjectConstraint.Null),
-                    SetOperationConstraint(BoolConstraint.True).SetSymbolConstraint(symbol, ObjectConstraint.NotNull),
-                    SetOperationConstraint(BoolConstraint.False).SetSymbolConstraint(symbol, ObjectConstraint.NotNull),
-                };
-            }
-
-            return default;
-
-            ProgramState SetOperationConstraint(BoolConstraint boolConstraint) =>
-                state.SetOperationConstraint(invocation.WrappedOperation, boolConstraint);
-        }
-
-        private static ISymbol ArgumentOfIsNullOrEmpty(IInvocationOperationWrapper invocation) =>
-            invocation is
-            {
-                TargetMethod:
-                {
-                    IsStatic: true,
-                    ContainingType.SpecialType: SpecialType.System_String,
-                    Name: nameof(string.IsNullOrEmpty) or nameof(string.IsNullOrWhiteSpace),
-                    Parameters: { Length: 1 } parameters
-                },
-                Arguments: { Length: 1 } arguments,
-            }
-            && parameters[0] is { Name: "value", Type.SpecialType: SpecialType.System_String }
-            && arguments[0].TrackedSymbol() is { } symbol
-                ? symbol
-                : null;
+                    TargetMethod.IsStatic: true,
+                    Arguments: { Length: 1 } arguments
+                } when invocation.TargetMethod.IsAny(KnownType.System_String, nameof(string.IsNullOrEmpty), nameof(string.IsNullOrWhiteSpace))
+                    && arguments[0].TrackedSymbol() is { } argumentSymbol
+                    && context.State[argumentSymbol]?.Constraint<ObjectConstraint>() is var objectConstraint
+                        => objectConstraint switch
+                        {
+                            { Kind: ObjectConstraintKind.NotNull } => null, // The "normal" state handling reflects already what is going on.
+                            { Kind: ObjectConstraintKind.Null } =>
+                                // If the argument to IsNullOrEmpty is known to be null, the methods are known to return true.
+                                context.SetOperationConstraint(BoolConstraint.True),
+                            _ => new[] // Explode the known states, these methods can create.
+                            {
+                                context.SetOperationConstraint(BoolConstraint.True).SetSymbolConstraint(argumentSymbol, ObjectConstraint.Null),
+                                context.SetOperationConstraint(BoolConstraint.True).SetSymbolConstraint(argumentSymbol, ObjectConstraint.NotNull),
+                                context.SetOperationConstraint(BoolConstraint.False).SetSymbolConstraint(argumentSymbol, ObjectConstraint.NotNull),
+                            },
+                        },
+                _ => null,
+            };
     }
 }
