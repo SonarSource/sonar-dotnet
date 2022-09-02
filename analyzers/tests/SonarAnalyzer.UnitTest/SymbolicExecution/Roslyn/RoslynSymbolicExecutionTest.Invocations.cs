@@ -140,7 +140,7 @@ End Module";
         [DataRow("this.DoSomething();")]
         [DataRow("(this).DoSomething();")]
         [DataRow("(((this))).DoSomething();")]
-        public void InstanceMethodCallNotClearsFieldOnThis(string invocation)
+        public void Invocation_InstanceMethodCallDoesNotClearFieldOnThis(string invocation)
         {
             var code = $@"
 public class Sample
@@ -178,7 +178,7 @@ public class Sample
         [DataRow("otherInstance.DoSomething();")]
         [DataRow("(otherInstance).DoSomething();")]
         [DataRow("(true ? this : otherInstance).DoSomething();")]
-        public void InstanceMethodCallDontClearFieldsOnOtherInstances(string invocation)
+        public void Instance_InstanceMethodCallDoesNotClearFieldsOnOtherInstances(string invocation)
         {
             var code = $@"
 public class Sample
