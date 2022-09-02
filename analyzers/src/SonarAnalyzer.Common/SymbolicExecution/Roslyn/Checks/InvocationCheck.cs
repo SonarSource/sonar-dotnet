@@ -28,9 +28,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
     {
         public override ProgramState[] PreProcess(SymbolicContext context) =>
             context.Operation.Instance.Kind == OperationKindEx.Invocation
-                && PreProcessInvocation(context.State, IInvocationOperationWrapper.FromOperation(context.Operation.Instance)) is { } newState
-                    ? newState
-                    : base.PreProcess(context);
+            && PreProcessInvocation(context.State, IInvocationOperationWrapper.FromOperation(context.Operation.Instance)) is { } newState
+                ? newState
+                : base.PreProcess(context);
 
         private ProgramState[] PreProcessInvocation(ProgramState state, IInvocationOperationWrapper invocation)
         {
