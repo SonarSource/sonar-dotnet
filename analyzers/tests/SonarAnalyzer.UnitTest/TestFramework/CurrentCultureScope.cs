@@ -61,26 +61,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
         public override TestResult[] Execute(ITestMethod testMethod)
         {
-            TestResult[] result = null;
-            Exception exception = null;
-            var thread = new Thread(() =>
-                {
-                    try
-                    {
-                        result = base.Execute(testMethod);
-                    }
-                    catch (Exception ex)
-                    {
-                        exception = ex;
-                    }
-                })
-            {
-                CurrentCulture = Culture,
-                CurrentUICulture = Culture
-            };
-            thread.Start();
-            thread.Join();
-            return exception != null ? throw exception : result;
+            using var _ = new CurrentCultureScope(Culture);
+            return base.Execute(testMethod);
         }
     }
 }
