@@ -551,16 +551,16 @@ Tag(""End"");";
         public void Branching_IsNullOrEmpty_SetsNullConstraintsInBranches(string methodName)
         {
             var code = $@"
-if (string.{methodName}(s))
+if (string.{methodName}(arg))
 {{
-    Tag(""If"", s);
+    Tag(""If"", arg);
 }}
 else
 {{
-    Tag(""Else"", s);
+    Tag(""Else"", arg);
 }}
-Tag(""End"", s);";
-            var validator = SETestContext.CreateCS(code, ", string s").Validator;
+Tag(""End"", arg);";
+            var validator = SETestContext.CreateCS(code, ", string arg").Validator;
             validator.TagValues("If").Should().HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
@@ -596,7 +596,7 @@ Tag(""End"", s);";
         public void Branching_IsNullOrEmpty_VisitsBothBranchesIfNotNull(string methodName)
         {
             var code = @$"
-string s = ""some text"";
+string s = new string('c', 42);
 if (string.{methodName}(s))
 {{
     Tag(""If"", s);
@@ -607,13 +607,9 @@ else
 }}
 Tag(""End"", s);";
             var validator = SETestContext.CreateCS(code).Validator;
-            validator.TagValues("If").Should().HaveCount(2)
-                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
-                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-            validator.TagValues("End").Should().HaveCount(2)
-                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
-                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("End", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
         }
     }
 }
