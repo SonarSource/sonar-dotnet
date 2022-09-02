@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.CFG.Roslyn;
+using SonarAnalyzer.Extensions;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.CFG.Helpers
@@ -41,7 +42,7 @@ namespace SonarAnalyzer.CFG.Helpers
                 queue.Enqueue(operation);
                 while (queue.Any())
                 {
-                    var wrapper = new IOperationWrapperSonar(queue.Dequeue());
+                    var wrapper = queue.Dequeue().ToSonar();
                     if (TryFindOperation(wrapper, out result))
                     {
                         return true;

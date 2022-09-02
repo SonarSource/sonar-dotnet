@@ -23,7 +23,6 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
-using SonarAnalyzer.SymbolicExecution.Roslyn.Checks;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
@@ -97,14 +96,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
         private static BoolConstraint BoolContraintFromConstant(ProgramState state, IIsPatternOperationWrapper isPattern) =>
             state[isPattern.Value] is { } value
             && isPattern.Pattern.WrappedOperation.Kind == OperationKindEx.ConstantPattern
-            && ConstantCheck.ConstraintFromValue(IConstantPatternOperationWrapper.FromOperation(isPattern.Pattern.WrappedOperation).Value.ConstantValue.Value) is BoolConstraint boolPattern
-            && PatternBoolConstraint(value, boolPattern) is { } newConstraint
-                ? newConstraint
-                : null;
-
-        private static BoolConstraint PatternBoolConstraint(SymbolicValue value, BoolConstraint pattern) =>
-            value.HasConstraint<BoolConstraint>()
-                ? BoolConstraint.From(value.HasConstraint(pattern))
+            && value.Constraint<BoolConstraint>() is { } valueConstraint
+            && IConstantPatternOperationWrapper.FromOperation(isPattern.Pattern.WrappedOperation).Value.ConstantValue.Value is bool boolConstant
+                ? BoolConstraint.From(valueConstraint == BoolConstraint.From(boolConstant))
                 : null; // We cannot take conclusive decision
 
         private static SymbolicConstraint BoolConstraintFromPattern(ProgramState state, IIsPatternOperationWrapper isPattern) =>

@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
@@ -147,7 +148,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
                     && firstArgumentValue.HasConstraint(BoolConstraint.True)
                     && assignment.Target.TrackedSymbol() is { } symbol)
                 {
-                    lastSymbolLock[symbol] = new IOperationWrapperSonar(objectCreation.WrappedOperation);
+                    lastSymbolLock[symbol] = objectCreation.ToSonar();
                     return AddLock(context, objectCreation.WrappedOperation).Preserve(symbol);
                 }
             }

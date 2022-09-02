@@ -28,23 +28,29 @@ namespace SonarAnalyzer.Extensions
 {
     public static class IOperationExtensions
     {
+        public static IOperationWrapperSonar ToSonar(this IOperation operation) =>
+            new(operation);
+
+        public static IOperationWrapperSonar ToSonar(this IOperationWrapper operation) =>
+            new(operation.WrappedOperation);
+
         public static bool IsOutArgumentReference(this IOperation operation) =>
-            new IOperationWrapperSonar(operation) is var wrapped
+            operation.ToSonar() is var wrapped
             && IArgumentOperationWrapper.IsInstance(wrapped.Parent)
             && IArgumentOperationWrapper.FromOperation(wrapped.Parent).Parameter.RefKind == RefKind.Out;
 
         public static bool IsAssignmentTarget(this IOperationWrapper operation) =>
-            new IOperationWrapperSonar(operation.WrappedOperation).Parent is { } parent
+            operation.ToSonar().Parent is { } parent
             && ISimpleAssignmentOperationWrapper.IsInstance(parent)
             && ISimpleAssignmentOperationWrapper.FromOperation(parent).Target == operation.WrappedOperation;
 
         public static bool IsCompoundAssignmentTarget(this IOperationWrapper operation) =>
-            new IOperationWrapperSonar(operation.WrappedOperation).Parent is { } parent
+            operation.ToSonar().Parent is { } parent
             && ICompoundAssignmentOperationWrapper.IsInstance(parent)
             && ICompoundAssignmentOperationWrapper.FromOperation(parent).Target == operation.WrappedOperation;
 
         public static bool IsOutArgument(this IOperationWrapper operation) =>
-            new IOperationWrapperSonar(operation.WrappedOperation).Parent is { } parent
+            operation.ToSonar().Parent is { } parent
             && IArgumentOperationWrapper.IsInstance(parent)
             && IArgumentOperationWrapper.FromOperation(parent).Parameter.RefKind == RefKind.Out;
 
@@ -53,10 +59,10 @@ namespace SonarAnalyzer.Extensions
 
         public static IOperation RootOperation(this IOperation operation)
         {
-            var wrapper = new IOperationWrapperSonar(operation);
+            var wrapper = operation.ToSonar();
             while (wrapper.Parent != null)
             {
-                wrapper = new IOperationWrapperSonar(wrapper.Parent);
+                wrapper = wrapper.Parent.ToSonar();
             }
             return wrapper.Instance;
         }
@@ -86,7 +92,7 @@ namespace SonarAnalyzer.Extensions
                 yield return operation;
             }
             var stack = new Stack<IEnumerator<IOperation>>();
-            stack.Push(new IOperationWrapperSonar(operation).Children.GetEnumerator());
+            stack.Push(operation.ToSonar().Children.GetEnumerator());
             while (stack.Any())
             {
                 var iterator = stack.Pop();
@@ -99,7 +105,7 @@ namespace SonarAnalyzer.Extensions
                 if (iterator.Current is { } current)
                 {
                     yield return current;
-                    stack.Push(new IOperationWrapperSonar(current).Children.GetEnumerator());
+                    stack.Push(current.ToSonar().Children.GetEnumerator());
                 }
             }
         }

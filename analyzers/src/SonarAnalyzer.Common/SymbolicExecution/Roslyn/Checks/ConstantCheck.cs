@@ -21,29 +21,33 @@
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
 {
     internal class ConstantCheck : SymbolicCheck
     {
         protected override ProgramState PreProcessSimple(SymbolicContext context) =>
-            ConstraintFromValue(context.Operation.Instance.ConstantValue.Value) is { } constraint
-                ? context.SetOperationConstraint(constraint)
+            context.Operation.Instance.ConstantValue.HasValue
+            && ConstraintFromConstantValue(context.Operation) is { } value
+                ? context.State.SetOperationValue(context.Operation, value)
                 : context.State;
 
         public static SymbolicConstraint ConstraintFromType(ITypeSymbol type) =>
-            ConstraintFromValue(DefaultValue(type));
+            type.Is(KnownType.System_Boolean) ? BoolConstraint.False : null;
 
-        public static SymbolicConstraint ConstraintFromValue(object value) =>
-            value switch
+        private static SymbolicValue ConstraintFromConstantValue(IOperationWrapperSonar operation) =>
+            operation.Instance.ConstantValue.Value switch
             {
                 // Update DefaultValue when adding new types
-                true => BoolConstraint.True,
-                false => BoolConstraint.False,
+                true => SymbolicValue.True,
+                false => SymbolicValue.False,
+                null when (operation.Instance.Type ?? ConvertedType(operation.Parent)) is { IsReferenceType: true } => SymbolicValue.Null,
+                string => SymbolicValue.NotNull,
                 _ => null
             };
 
-        private static object DefaultValue(ITypeSymbol type) =>
-            type.Is(KnownType.System_Boolean) ? false : null;
+        private static ITypeSymbol ConvertedType(IOperation operation) =>
+            operation.Kind == OperationKindEx.Conversion ? IConversionOperationWrapper.FromOperation(operation).Type : null;
     }
 }

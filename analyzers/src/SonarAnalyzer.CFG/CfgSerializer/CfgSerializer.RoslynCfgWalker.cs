@@ -115,7 +115,7 @@ namespace SonarAnalyzer.CFG
 
             private static IEnumerable<string> SerializeOperation(int level, IOperation operation) =>
                 new[] { $"{level}# {operation.Serialize()}" }
-                .Concat(new IOperationWrapperSonar(operation).Children.SelectMany(x => SerializeOperation(level + 1, x)));
+                .Concat(operation.ToSonar().Children.SelectMany(x => SerializeOperation(level + 1, x)));
 
             private static string SerializeRegion(ControlFlowRegion region)
             {

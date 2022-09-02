@@ -461,7 +461,7 @@ public class Deconstructable
             {
                 if (expectedBoolConstraint is bool expected)
                 {
-                    x.Should().NotBeNull("we expect {expectedBoolConstraint} on the result");
+                    x.Should().NotBeNull($"we expect {expectedBoolConstraint} on the result");
                     x.HasConstraint(BoolConstraint.From(expected)).Should().BeTrue("we should have learned that result is {0}", expected);
                 }
                 else

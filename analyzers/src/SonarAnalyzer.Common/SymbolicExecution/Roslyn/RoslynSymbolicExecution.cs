@@ -57,7 +57,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             }
             this.checks = new(new[] { new ConstantCheck() }.Concat(checks).ToArray());
             this.cancel = cancel;
-            exceptionCandidate = new(new IOperationWrapperSonar(cfg.OriginalOperation).SemanticModel.Compilation);
+            exceptionCandidate = new(cfg.OriginalOperation.ToSonar().SemanticModel.Compilation);
             lva = new(cfg, cancel);
             logger.Log(cfg);
         }
@@ -158,7 +158,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             if (branch.Source.BranchValue is { } branchValue && branch.Source.ConditionalSuccessor is not null) // This branching was conditional
             {
                 state = LearnBranchingConstraints(branch, state, branchValue);
-                state = checks.ConditionEvaluated(new(new IOperationWrapperSonar(branchValue), state));
+                state = checks.ConditionEvaluated(new(branchValue.ToSonar(), state));
                 if (state is null)
                 {
                     return null;
@@ -246,7 +246,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 OperationKindEx.Binary => Binary.Process(context, As(IBinaryOperationWrapper.FromOperation)),
                 OperationKindEx.Conversion => Conversion.Process(context, As(IConversionOperationWrapper.FromOperation)),
                 OperationKindEx.DeclarationPattern => Pattern.Process(context, As(IDeclarationPatternOperationWrapper.FromOperation)),
-                OperationKindEx.DefaultValue => Literal.Process(context, As(IDefaultValueOperationWrapper.FromOperation)),
                 OperationKindEx.DelegateCreation => Creation.Process(context),
                 OperationKindEx.DynamicObjectCreation => Creation.Process(context),
                 OperationKindEx.EventReference => References.Process(context, As(IEventReferenceOperationWrapper.FromOperation)),
@@ -256,7 +255,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 OperationKindEx.Invocation => Invocation.Process(context, As(IInvocationOperationWrapper.FromOperation)),
                 OperationKindEx.IsNull => IsNull.Process(context, As(IIsNullOperationWrapper.FromOperation)),
                 OperationKindEx.IsPattern => Pattern.Process(context, As(IIsPatternOperationWrapper.FromOperation)),
-                OperationKindEx.Literal => Literal.Process(context, As(ILiteralOperationWrapper.FromOperation)),
                 OperationKindEx.LocalReference => References.Process(context, As(ILocalReferenceOperationWrapper.FromOperation)),
                 OperationKindEx.ObjectCreation => Creation.Process(context),
                 OperationKindEx.ParameterReference => References.Process(context, As(IParameterReferenceOperationWrapper.FromOperation)),

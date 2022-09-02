@@ -81,6 +81,17 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         }
 
         [TestMethod]
+        public void WithoutConstraint_RemovesType()
+        {
+            var sut = new SymbolicValue()
+                .WithConstraint(TestConstraint.First)
+                .WithConstraint(DummyConstraint.Dummy)
+                .WithoutConstraint<TestConstraint>();   // Act
+            sut.HasConstraint<TestConstraint>().Should().BeFalse();
+            sut.HasConstraint<DummyConstraint>().Should().BeTrue();
+        }
+
+        [TestMethod]
         public void HasConstraint_ByType()
         {
             var sut = new SymbolicValue();
