@@ -27,7 +27,6 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
 {
     public partial class RoslynSymbolicExecutionTest
     {
-
         private static IEnumerable<object[]> StringIsNullOrEmptyMethods
         {
             get
