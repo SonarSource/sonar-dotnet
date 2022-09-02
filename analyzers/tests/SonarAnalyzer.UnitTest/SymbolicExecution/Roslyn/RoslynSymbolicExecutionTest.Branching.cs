@@ -27,6 +27,16 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
 {
     public partial class RoslynSymbolicExecutionTest
     {
+
+        private static IEnumerable<object[]> StringIsNullOrEmptyMethods
+        {
+            get
+            {
+                yield return new object[] { nameof(string.IsNullOrEmpty) };
+                yield return new object[] { nameof(string.IsNullOrWhiteSpace) };
+            }
+        }
+
         [TestMethod]
         public void Branching_BlockProcessingOrder_CS()
         {
@@ -604,15 +614,6 @@ Tag(""End"", s);";
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
-        }
-
-        private static IEnumerable<object[]> StringIsNullOrEmptyMethods
-        {
-            get
-            {
-                yield return new object[] { nameof(string.IsNullOrEmpty) };
-                yield return new object[] { nameof(string.IsNullOrWhiteSpace) };
-            }
         }
     }
 }
