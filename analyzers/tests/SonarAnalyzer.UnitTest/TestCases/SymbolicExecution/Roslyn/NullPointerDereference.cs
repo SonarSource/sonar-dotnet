@@ -991,7 +991,7 @@ namespace Repro_3395
                 // Do something
             }
 
-            return test.Count; // FIXME Non-compliant FP
+            return test.Count; // Noncompliant FP
         }
 
         public static int NoIssueReported()
@@ -1013,7 +1013,7 @@ namespace Repro_3395
                 // Do something
             }
 
-            return something.SomeProperty; // FIXME Non-compliant
+            return something.SomeProperty; // Noncompliant
         }
 
         public static Something GetSomething()
@@ -1056,11 +1056,22 @@ namespace Repro_3395
             {
                 if (!providerCourse?.Items?.Any() ?? true)
                 {
+                    continue;
+                }
+
+                _ = providerCourse.Items; // Noncompliant FP
+            }
+
+            foreach (var providerCourse in providerCourses)
+            {
+                if (!providerCourse?.Items?.Any() ?? true)
+                {
                     Console.WriteLine("FAIL");
                     continue;
                 }
 
-                var _ = providerCourse.Items.Where(items => items == "item1"); // FIXME Non-compliant FP
+                _ = providerCourse.Items.Where(items => items == "item1"); // Noncompliant FP
+                //  ^^^^^^^^^^^^^^
             }
         }
 

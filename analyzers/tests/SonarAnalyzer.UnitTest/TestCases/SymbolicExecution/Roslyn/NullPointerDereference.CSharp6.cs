@@ -31,11 +31,25 @@ namespace Tests.Diagnostics
         }
 
         // https://github.com/SonarSource/sonar-dotnet/issues/1324
-        public void FlasePositive(object o)
+        public void Repro_1324(object o)
         {
             try
             {
                 var a = o?.ToString();
+            }
+            catch (InvalidOperationException) when (o != null)
+            {
+                var b = o.ToString(); // Compliant, o is checked for null in this branch
+            }
+            catch (ApplicationException) when (o == null)
+            {
+                var b = o.ToString(); // Unreachable, o? cannot throw ApplicationException
+            }
+
+            try
+            {
+                var a = o?.ToString();
+                CanThrow();
             }
             catch (InvalidOperationException) when (o != null)
             {
@@ -61,109 +75,111 @@ namespace Tests.Diagnostics
             }
         }
 
-    public void Compliant(List<int> list)
-    {
-      var row = list?.Count;
-      if (row != null)
-      {
-        var type = list.ToArray();
-      }
+        public void Compliant(List<int> list)
+        {
+            var row = list?.Count;
+            if (row != null)
+            {
+                var type = list.ToArray();  // Noncompliant FP, nullability is inferred from result relation
+            }
+        }
+
+        private void CanThrow() { }
+
+        public class A
+        {
+            public bool booleanVal { get; set; }
+        }
+
+        public void Compliant1(List<int> list, A a)
+        {
+            var row = list?.Count;
+            if (a.booleanVal = (row != null))
+            {
+                var type = list.ToArray();  // Noncompliant FP, nullability is inferred from result relation
+            }
+        }
+
+        public void NonCompliant(List<int> list)
+        {
+            var row = list?.Count;
+            if (row == null)
+            {
+                var type = list.ToArray(); // Noncompliant
+            }
+        }
+
+        public void NonCompliant1(List<int> list, A a)
+        {
+            var row = list?.Count;
+            if (a.booleanVal = (row == null))
+            {
+                var type = list.ToArray(); // Noncompliant
+            }
+        }
+
+        void Compliant2(object o)
+        {
+            switch (o?.GetHashCode())
+            {
+                case 1:
+                    o.ToString(); // Noncompliant FP, nullability is inferred from result relation
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        void NonCompliant2()
+        {
+            object o = null;
+            switch (o?.GetHashCode())
+            {
+                case null:
+                    o.ToString(); // Noncompliant
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
-    public class A
+    public class ReproForIssue2338
     {
-      public bool booleanVal { get; set; }
-    }
+        public ConsoleColor Color { get; set; }
 
-    public void Compliant1(List<int> list, A a)
-    {
-      var row = list?.Count;
-      if (a.booleanVal = (row != null))
-      {
-        var type = list.ToArray();
-      }
-    }
+        public void Method1(ReproForIssue2338 obj)
+        {
+            switch (obj?.Color)
+            {
+                case null:
+                    Console.ForegroundColor = obj.Color; // Noncompliant
+                    break;
+                case ConsoleColor.Red:
+                    Console.ForegroundColor = obj.Color; // Noncompliant FP, requires nullability support in captured flow operation
+                    break;
+                default:
+                    Console.WriteLine($"Color {obj.Color} is not supported."); // Noncompliant FP, requires nullability support in captured flow operation
+                    break;
+            }
+        }
 
-    public void NonCompliant(List<int> list)
-    {
-      var row = list?.Count;
-      if (row == null)
-      {
-        var type = list.ToArray(); // FIXME Non-compliant
-      }
+        public void Method2(ReproForIssue2338 obj)
+        {
+            obj = null;
+            switch (obj?.Color)
+            {
+                case ConsoleColor.Red:
+                    Console.ForegroundColor = obj.Color;  // Noncompliant FIXME was compliant before
+//                                            ^^^    {{'obj' is null on at least one execution path.}}
+                    break;
+                default:
+                    Console.WriteLine($"Color {obj.Color} is not supported."); // Noncompliant
+//                                             ^^^    {{'obj' is null on at least one execution path.}}
+                    break;
+            }
+        }
     }
-
-    public void NonCompliant1(List<int> list, A a)
-    {
-      var row = list?.Count;
-      if (a.booleanVal = (row == null))
-      {
-        var type = list.ToArray(); // FIXME Non-compliant
-      }
-    }
-
-    void Compliant2(object o)
-    {
-      switch (o?.GetHashCode())
-      {
-        case 1:
-          o.ToString();
-          break;
-        default:
-          break;
-      }
-    }
-
-    void NonCompliant2()
-    {
-      object o = null;
-      switch (o?.GetHashCode())
-      {
-        case null:
-          o.ToString(); // Noncompliant
-          break;
-        default:
-          break;
-      }
-    }
-  }
-
-  public class ReproForIssue2338
-  {
-    public ConsoleColor Color { get; set; }
-
-    public void Method1(ReproForIssue2338 obj)
-    {
-      switch (obj?.Color)
-      {
-        case null:
-          Console.ForegroundColor = obj.Color; // FIXME Non-compliant
-          break;
-        case ConsoleColor.Red:
-          Console.ForegroundColor = obj.Color; //compliant
-          break;
-        default:
-          Console.WriteLine($"Color {obj.Color} is not supported."); //compliant
-          break;
-      }
-    }
-
-    public void Method2(ReproForIssue2338 obj)
-    {
-      obj = null;
-      switch (obj?.Color)
-      {
-        case ConsoleColor.Red:
-          Console.ForegroundColor = obj.Color;  // FIXME was compliant before
-//                                  ^^^    {{'obj' is null on at least one execution path.}}
-          break;
-        default:
-          Console.WriteLine($"Color {obj.Color} is not supported."); // Noncompliant
-//                                   ^^^    {{'obj' is null on at least one execution path.}}
-          break;
-      }
-    }
-  }
 
     public class ReproFor2593
     {
@@ -180,7 +196,6 @@ namespace Tests.Diagnostics
             }
         }
     }
-
 
     public enum MyEnum
     {
@@ -226,15 +241,15 @@ namespace Tests.Diagnostics
             switch (valueHolder?.MyEnum)
             {
                 case MyEnum.ONE:
-                    return valueHolder.Value;
+                    return valueHolder.Value;   // Noncompliant FP, nullability is inferred from result relation
                 case MyEnum.TWO:
                 case MyEnum.THREE:
-                    return valueHolder.Value;
+                    return valueHolder.Value;   // Noncompliant FP, nullability is inferred from result relation
                 case MyEnum.FOUR:
-                    return valueHolder.Value;
+                    return valueHolder.Value;   // Noncompliant FP, nullability is inferred from result relation
                 case MyEnum.FIVE:
                 case null:
-                    return valueHolder.Value; // FIXME Non-compliant Ok
+                    return valueHolder.Value;   // Noncompliant
                 default:
                     return string.Empty;
             }
