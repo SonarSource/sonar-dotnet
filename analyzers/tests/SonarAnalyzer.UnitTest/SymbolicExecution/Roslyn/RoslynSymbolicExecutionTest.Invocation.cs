@@ -27,11 +27,9 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
     public partial class RoslynSymbolicExecutionTest
     {
         [TestMethod]
-        public void PreProcess_IsNullOrEmpty_ExplodesGraph_ValidateOrder()
+        public void Invocation_IsNullOrEmpty_ValidateOrder()
         {
-            const string code = @"var isNullOrEmpy = string.IsNullOrEmpty(arg);";
-
-            var validator = SETestContext.CreateCS(code, ", string arg").Validator;
+            var validator = SETestContext.CreateCS(@"var isNullOrEmpy = string.IsNullOrEmpty(arg);", ", string arg").Validator;
             validator.ValidateOrder(
 "LocalReference: isNullOrEmpy = string.IsNullOrEmpty(arg) (Implicit)",
 "ParameterReference: arg",
@@ -45,13 +43,12 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         }
 
         [TestMethod]
-        public void PreProcess_IsNullOrEmpty_Tags()
+        public void Invocation_IsNullOrEmpty_Tags()
         {
             const string code = @"
 var isNullOrEmpy = string.IsNullOrEmpty(arg);
 Tag(""IsNullOrEmpy"", isNullOrEmpy);
 Tag(""Arg"", arg);";
-
             var validator = SETestContext.CreateCS(code, ", string arg").Validator;
             validator.TagValues("IsNullOrEmpy").Should().Equal(
                 new SymbolicValue().WithConstraint(BoolConstraint.True),

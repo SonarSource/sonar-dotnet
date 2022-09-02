@@ -574,16 +574,16 @@ Tag(""End"", arg);";
         public void Branching_IsNullOrEmpty_VisitsTrueBranchIfNull(string methodName)
         {
             var code = $@"
-string s = null;
-if (string.{methodName}(s))
+string isNull = null;
+if (string.{methodName}(isNull))
 {{
-    Tag(""If"", s);
+    Tag(""If"", isNull);
 }}
 else
 {{
-    Tag(""Else"", s);
+    Tag(""Else"", isNull);
 }}
-Tag(""End"", s);";
+Tag(""End"", isNull);";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.Null));
             validator.TagValues("Else").Should().BeEmpty();
@@ -595,16 +595,16 @@ Tag(""End"", s);";
         public void Branching_IsNullOrEmpty_VisitsBothBranchesIfNotNull(string methodName)
         {
             var code = @$"
-string s = new string('c', 42);
-if (string.{methodName}(s))
+string notNull = new string('c', 42);
+if (string.{methodName}(notNull))
 {{
-    Tag(""If"", s);
+    Tag(""If"", notNull);
 }}
 else
 {{
-    Tag(""Else"", s);
+    Tag(""Else"", notNull);
 }}
-Tag(""End"", s);";
+Tag(""End"", notNull);";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
