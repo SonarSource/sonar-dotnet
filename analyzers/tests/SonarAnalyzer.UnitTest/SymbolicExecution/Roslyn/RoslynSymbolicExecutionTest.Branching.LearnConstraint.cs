@@ -439,6 +439,13 @@ if (value = boolParameter)
         [DataRow("arg is { }")]
         [DataRow("arg is { }", "TClass")]
         [DataRow("arg is object { }")]
+        [DataRow("arg is object { }")]
+        [DataRow("arg is Exception { }", "ArgumentException")]
+        [DataRow("arg is not not Exception { }", "ArgumentException")]
+        [DataRow("arg is ICloneable { }", "string")] // string implements ICloneable
+        [DataRow("arg is not not ICloneable { }", "string")]
+        [DataRow("arg is { Length: var length }", "string")]
+        [DataRow("arg is { Length: _ }", "string")]
         [DataRow("arg is not not { }")]
         [DataRow("!!(arg is { })")]
         [DataRow("arg is (A: var a, B: _)", "Deconstructable")]
@@ -454,11 +461,17 @@ if (value = boolParameter)
 
         [DataTestMethod]
         [DataRow("arg is string { }")]
+        [DataRow("arg is string { }", "TClass")]
         [DataRow("arg is string { Length: 0 }")]
         [DataRow("arg is string { Length: var length }")]
-        public void Branching_LearnsObjectConstraint_RecursivePattern_ElseIsUnknown(string expression)
+        [DataRow("arg is int { }")]
+        [DataRow("arg is T { }")]
+        [DataRow("arg is TClass { }")]  //
+        [DataRow("arg is TStruct { }")]
+        [DataRow("arg is DateTime { Ticks: 0 }")]
+        public void Branching_LearnsObjectConstraint_RecursivePattern_ElseIsUnknown(string expression, string argType = "object")
         {
-            var validator = CreateIfElseEndValidatorCS(expression, OperationKind.RecursivePattern);
+            var validator = CreateIfElseEndValidatorCS(expression, OperationKind.RecursivePattern, argType);
             validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.ValidateTag("Else", x => x.Should().BeNull("it could be null or any other type"));
             validator.TagValues("End").Should().HaveCount(2)
@@ -470,6 +483,7 @@ if (value = boolParameter)
         [DataRow("arg is { }", "int")]
         [DataRow("arg is { }", "T")]
         [DataRow("arg is { }", "TStruct")]
+        [DataRow("arg is string { }", "T")]     // Could have NotNull instead. T is not known to be reference type.
         [DataRow("(arg, Unknown<object>()) is ({ }, { })", "object")]   // We don't support learning for tuples (yet). Should behave same as "arg is { }". Gets tricky when nesting (a, (b, c))
         public void Branching_LearnsObjectConstraint_RecursivePattern_NoConstraint(string expression, string argType)
         {
