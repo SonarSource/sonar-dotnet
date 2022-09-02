@@ -311,6 +311,18 @@ namespace Tests.Diagnostics
             }
         }
 
+        public void StringIsNullOrWhiteSpace(string s1)
+        {
+            if (string.IsNullOrWhiteSpace(s1))
+            {
+                s1.ToString(); // Noncompliant
+            }
+            else
+            {
+                s1.ToString(); // Compliant
+            }
+        }
+
         public void StringEmpty1(string s1)
         {
             if (s1 == "" || s1 == null)
