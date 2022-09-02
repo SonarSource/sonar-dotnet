@@ -47,22 +47,4 @@ namespace SonarAnalyzer.UnitTest.Helpers
             thread.CurrentUICulture = oldUiCulture;
         }
     }
-
-    [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
-    public sealed class CultureDataTestMethodAttribute : DataTestMethodAttribute
-    {
-        public CultureDataTestMethodAttribute() =>
-            Culture = CultureInfo.InvariantCulture;
-
-        public CultureDataTestMethodAttribute(string culture) =>
-            Culture = new CultureInfo(culture);
-
-        public CultureInfo Culture { get; }
-
-        public override TestResult[] Execute(ITestMethod testMethod)
-        {
-            using var _ = new CurrentCultureScope(Culture);
-            return base.Execute(testMethod);
-        }
-    }
 }
