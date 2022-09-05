@@ -44,7 +44,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                 { Parameter.RefKind: not RefKind.None, Value: { } value } when value.TrackedSymbol() is { } symbol =>
                     // The argument is passed by some kind of reference, so we need to forget all we knew about it.
                     state.SetSymbolValue(symbol, null),
-                { Parameter: { } parameter } when parameter.GetAttributes() is { Length: > 0 } attributes =>
+                _ when argument.Parameter.GetAttributes() is { Length: > 0 } attributes =>
                     // Learn from parameter nullable annotations
                     ProcessArgumentAttributes(state, argument, attributes),
                 _ => null,
@@ -62,9 +62,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
             return null;
         }
 
-        // Copy of SonarAnalyzer.CSharp\SymbolicExecution\Sonar\InvocationVisitor.cs
         // Same as [NotNull] https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/attributes/nullable-analysis#postconditions-maybenull-and-notnull
         private static bool IsValidatedNotNullAttribute(AttributeData attribute) =>
-            "ValidatedNotNullAttribute".Equals(attribute.AttributeClass?.Name);
+            attribute.AttributeClass?.Name == "ValidatedNotNullAttribute";
     }
 }

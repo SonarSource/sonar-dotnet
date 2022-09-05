@@ -517,7 +517,6 @@ public class Sample
     private void NotNullInst([ValidatedNotNullAttribute] object value)
     {
         // Skip implementation to make sure, the attribute is driving the constraint
-        // _ = value ?? throw new ArgumentNullException();
     }
 
     private void NotNullInst([ValidatedNotNullAttribute] object value1, [ValidatedNotNullAttribute] object value2) { }
