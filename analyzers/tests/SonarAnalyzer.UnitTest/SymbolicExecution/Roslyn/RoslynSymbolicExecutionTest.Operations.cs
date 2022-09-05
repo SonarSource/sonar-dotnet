@@ -501,17 +501,21 @@ using System;
 
 public class Sample
 {
-    public void Main(object o1, object o2, object o3, object o4, object o5)
+    public void Main(object o1, object o2, object o3, object o4, object o5, object o6, object o7, object o8)
     {
         Guard.NotNullExt(o1);
         o2.NotNullExt();
         NotNullInst(o3);
         NotNullInst(o4, o5);
+        NotNullInst(value2: o6, value1: o7, value3: o8);  // value2 is not annotated
         Tag(""AfterGuard_o1"", o1);
         Tag(""AfterGuard_o2"", o2);
         Tag(""AfterGuard_o3"", o3);
         Tag(""AfterGuard_o4"", o4);
         Tag(""AfterGuard_o5"", o5);
+        Tag(""AfterGuard_o6"", o6);
+        Tag(""AfterGuard_o7"", o7);
+        Tag(""AfterGuard_o8"", o8);
     }
 
     private void NotNullInst([ValidatedNotNullAttribute] object value)
@@ -520,6 +524,7 @@ public class Sample
     }
 
     private void NotNullInst([ValidatedNotNullAttribute] object value1, [ValidatedNotNullAttribute] object value2) { }
+    private void NotNullInst<T1, T2, T3>([ValidatedNotNullAttribute] T1 value1, T2 value2, [ValidatedNotNullAttribute] T3 value3) { }
 
     private void Tag(string name, object arg) { }
 }
@@ -537,6 +542,9 @@ public static class Guard
             validator.ValidateTag("AfterGuard_o3", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.ValidateTag("AfterGuard_o4", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.ValidateTag("AfterGuard_o5", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("AfterGuard_o6", x => x.Should().BeNull()); // parameter is not annotated
+            validator.ValidateTag("AfterGuard_o7", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("AfterGuard_o8", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
         }
 
         [TestMethod]
