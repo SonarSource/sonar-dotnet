@@ -526,7 +526,7 @@ public class Sample
     private void NotNullInst([ValidatedNotNullAttribute] object value1, [ValidatedNotNullAttribute] object value2) { }
     private void NotNullInst<T1, T2, T3>([ValidatedNotNullAttribute] T1 value1, T2 value2, [ValidatedNotNullAttribute] T3 value3) { }
 
-    private void Tag(string name, object arg) { }
+    private static void Tag(string name, object arg) { }
 }
 
 public sealed class ValidatedNotNullAttribute : Attribute { }
