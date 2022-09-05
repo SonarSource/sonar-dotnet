@@ -79,7 +79,7 @@ Tag(""ExceptionAfterCheck"", exception);";
             {
                 new SymbolicValue().WithConstraint(ObjectConstraint.Null),
                 new SymbolicValue().WithConstraint(ObjectConstraint.NotNull)
-            }); // Should be 'new SymbolicValue().WithConstraint(ObjectConstraint.NotNull)'
+            });
         }
     }
 }
