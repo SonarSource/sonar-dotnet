@@ -524,6 +524,7 @@ if (value = boolParameter)
         [DataRow("arg is object o")]
         [DataRow("arg is object o", "string")]
         [DataRow("arg is string s")]
+        [DataRow("arg is int i")]
         [DataRow("arg is not not object o")]
         [DataRow("arg is not not string s")]
         [DataRow("!(arg is not object o)")]
@@ -539,7 +540,6 @@ if (value = boolParameter)
 
         [DataTestMethod]
         [DataRow("arg is var o")]
-        [DataRow("arg is int i")]
         [DataRow("arg is object o", "int")]
         public void Branching_LearnsObjectConstraint_DeclarationPattern_NoConstraints(string expression, string argType = "object")
         {

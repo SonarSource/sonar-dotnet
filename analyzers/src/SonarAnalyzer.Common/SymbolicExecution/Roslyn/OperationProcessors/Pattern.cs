@@ -89,7 +89,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
 
         private static SymbolicConstraint ConstraintFromDeclarationPattern(IDeclarationPatternOperationWrapper declaration, bool useOpposite) =>
             declaration.MatchesNull
-            || !declaration.MatchedType.IsReferenceType
             || !declaration.InputType.IsReferenceType
                 ? null
                 : ObjectConstraint.NotNull.ApplyOpposite(useOpposite);
