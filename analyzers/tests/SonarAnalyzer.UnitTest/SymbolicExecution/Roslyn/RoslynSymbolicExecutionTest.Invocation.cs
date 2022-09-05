@@ -34,12 +34,12 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
 "LocalReference: isNullOrEmpy = string.IsNullOrEmpty(arg) (Implicit)",
 "ParameterReference: arg",
 "Argument: arg",
-"Invocation: string.IsNullOrEmpty(arg)",
-"Invocation: string.IsNullOrEmpty(arg)",
-"Invocation: string.IsNullOrEmpty(arg)",
-"SimpleAssignment: isNullOrEmpy = string.IsNullOrEmpty(arg) (Implicit)",
-"SimpleAssignment: isNullOrEmpy = string.IsNullOrEmpty(arg) (Implicit)",
-"SimpleAssignment: isNullOrEmpy = string.IsNullOrEmpty(arg) (Implicit)");
+"Invocation: string.IsNullOrEmpty(arg)", // True/Null
+"Invocation: string.IsNullOrEmpty(arg)", // True/NotNull
+"Invocation: string.IsNullOrEmpty(arg)", // False/NotNull
+"SimpleAssignment: isNullOrEmpy = string.IsNullOrEmpty(arg) (Implicit)",  // True/Null
+"SimpleAssignment: isNullOrEmpy = string.IsNullOrEmpty(arg) (Implicit)",  // True/NotNull
+"SimpleAssignment: isNullOrEmpy = string.IsNullOrEmpty(arg) (Implicit)"); // False/NotNull
         }
 
         [TestMethod]
