@@ -21,7 +21,7 @@ Public Class Program
         Arg.ToString()  ' Compliant, we have no information about Arg
     End Sub
 
-    Public Sub Noninicialized()
+    Public Sub NonInitialized()
         Dim O As Object
         Console.WriteLine(O.ToString)   ' FIXME FN
     End Sub
