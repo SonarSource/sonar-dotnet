@@ -60,8 +60,8 @@ public class Sample
 {{
     {method}
 
-    private void Tag(string name, object arg) {{ }}
-    private T Unknown<T>() => default;
+    private static void Tag(string name, object arg) {{ }}
+    private static T Unknown<T>() => default;
 }}
 
 public class Deconstructable
@@ -83,7 +83,7 @@ Public Class Sample
         {methodBody}
     End Sub
 
-    Private Sub Tag(Name As String, Optional Arg As Object = Nothing)
+    Private Shared Sub Tag(Name As String, Optional Arg As Object = Nothing)
     End Sub
 
 End Class";
@@ -119,8 +119,9 @@ public unsafe class Sample
 
     public NotImplementedException CreateException() => new NotImplementedException();
 
-    private void Tag(string name, object arg = null) {{ }}
-    private T Unknown<T>() => default;
+    private void Tag(string name) {{ }}
+    private static void Tag(string name, object arg = null) {{ }}
+    private static T Unknown<T>() => default;
 }}
 
 public class Person : PersonBase
