@@ -59,5 +59,19 @@ Tag(""Arg"", arg);";
                 new SymbolicValue().WithConstraint(ObjectConstraint.NotNull),  // True/NotNull
                 new SymbolicValue().WithConstraint(ObjectConstraint.NotNull)); // False/NotNull
         }
+
+        [TestMethod]
+        public void Invocation_IsNullOrEmpty_NestedProperty()
+        {
+            const string code = @"
+if (!string.IsNullOrEmpty(exception?.Message))
+{
+    Tag(""ExceptionChecked"", exception);
+}
+Tag(""ExceptionAfterCheck"", exception);";
+            var validator = SETestContext.CreateCS(code, ", InvalidOperationException exception").Validator;
+            validator.TagValues("ExceptionChecked").Should().Equal(new SymbolicValue[] { null }); // Should be 'new SymbolicValue().WithConstraint(ObjectConstraint.NotNull)'
+            validator.TagValues("ExceptionAfterCheck").Should().Equal(new SymbolicValue[] { null });
+        }
     }
 }
