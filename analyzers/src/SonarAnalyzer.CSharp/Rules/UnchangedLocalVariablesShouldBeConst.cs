@@ -66,9 +66,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     localDeclaration.Declaration?.Variables
                         .Where(v => v is { Identifier: { } }
-                            && IsInitializedWithCompatibleConstant(v, c.SemanticModel, declaredType)
                             // constant string interpolation is only valid in C# 10 and above
                             && (c.SemanticModel.Compilation.IsAtLeastLanguageVersion(LanguageVersionEx.CSharp10) || !ContainsInterpolation(v))
+                            && IsInitializedWithCompatibleConstant(v, c.SemanticModel, declaredType)
                             && !HasMutableUsagesInMethod(c.SemanticModel, v))
                         .ToList()
                         .ForEach(x => Report(x, c));
