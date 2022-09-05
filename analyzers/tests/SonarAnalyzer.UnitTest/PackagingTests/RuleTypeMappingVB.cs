@@ -2183,7 +2183,7 @@ internal static class RuleTypeMappingVB
         // ["S2256"],
         ["S2257"] = "SECURITY_HOTSPOT",
         // ["S2258"],
-        // ["S2259"],
+        ["S2259"] = "BUG",
         // ["S2260"],
         // ["S2261"],
         // ["S2262"],

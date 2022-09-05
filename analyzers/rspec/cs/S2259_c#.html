@@ -3,16 +3,19 @@ best, such an exception will cause abrupt program termination. At worst, it coul
 it could allow an attacker to bypass security measures.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-object o = null;
-if (condition)
+public void Method()
 {
-  M1(o.ToString()); // Noncompliant, always null
+    object o = null;
+    Console.WriteLine(o.ToString()); // Noncompliant, always null
 }
-else
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public void Method()
 {
-  o = new object();
+    var o = new object();
+    Console.WriteLine(o.ToString());
 }
-M2(o.ToString());
 </pre>
 <h2>Exceptions</h2>
 <p>Calls to extension methods are not reported because they can still operate on <code>null</code> values.</p>

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2259",
+"message":  "'obj' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\GeneratedCode.VB\NotIgnored.vb",
+"region":  {
+"startLine":  8,
+"startColumn":  31,
+"endLine":  8,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'obj' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\GeneratedCode.VB\Region.vb",
+"region":  {
+"startLine":  6,
+"startColumn":  27,
+"endLine":  6,
+"endColumn":  30
+}
+}
+}
+]
+}
