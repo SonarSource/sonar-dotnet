@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2259",
+"message":  "'bReturn' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgErrorViewer.vb",
+"region":  {
+"startLine":  64,
+"startColumn":  65,
+"endLine":  64,
+"endColumn":  72
+}
+}
+}
+]
+}
