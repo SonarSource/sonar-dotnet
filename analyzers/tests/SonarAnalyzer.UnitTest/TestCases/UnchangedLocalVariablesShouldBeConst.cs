@@ -349,6 +349,16 @@ namespace Tests.Diagnostics
     }
 }
 
+class ShadowingTest
+{
+    private int Counter = 0;
+    public void Tests()
+    {
+        int Counter = 1; // Noncompliant
+        this.Counter++;
+    }
+}
+
 // https://github.com/SonarSource/sonar-dotnet/issues/4015
 public class Repro_4015
 {
