@@ -142,7 +142,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public override string ToString() =>
             Equals(Empty) ? "Empty" + Environment.NewLine : SerializeExceptions() + SerializeSymbols() + SerializeOperations() + SerializeCaptures();
 
-        public static implicit operator ProgramState[](ProgramState from) => new[] { from };
+        public static implicit operator ProgramState[](ProgramState from) =>
+            new[] { from };
 
         private string SerializeExceptions() =>
             Exceptions.IsEmpty ? null : Exceptions.JoinStr(string.Empty, x => $"Exception: {x}{Environment.NewLine}");
