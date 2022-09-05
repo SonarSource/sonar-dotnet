@@ -505,8 +505,8 @@ public class Sample
     {
         Guard.NotNullExt(o1);
         o2.NotNullExt();
-        GuardInst(o3);
-        GuardInst(o4, o5);
+        NotNullInst(o3);
+        NotNullInst(o4, o5);
         Tag(""AfterGuard_o1"", o1);
         Tag(""AfterGuard_o2"", o2);
         Tag(""AfterGuard_o3"", o3);
@@ -514,13 +514,13 @@ public class Sample
         Tag(""AfterGuard_o5"", o5);
     }
 
-    private void GuardInst([ValidatedNotNullAttribute] object value)
+    private void NotNullInst([ValidatedNotNullAttribute] object value)
     {
         // Skip implementation to make sure, the attribute is driving the constraint
         // _ = value ?? throw new ArgumentNullException();
     }
 
-    private void GuardInst([ValidatedNotNullAttribute] object value1, [ValidatedNotNullAttribute] object value2) { }
+    private void NotNullInst([ValidatedNotNullAttribute] object value1, [ValidatedNotNullAttribute] object value2) { }
 
     private void Tag(string name, object arg) { }
 }
