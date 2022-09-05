@@ -19,7 +19,9 @@
  */
 
 using Microsoft.CodeAnalysis.Operations;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.SymbolicExecution.Constraints;
+using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 using StyleCop.Analyzers.Lightup;
 
