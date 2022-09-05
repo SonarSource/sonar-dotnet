@@ -302,7 +302,7 @@ Captures:
         public void ProgramStateToArrayConversionHandlesNull()
         {
             ProgramState[] target = (ProgramState)null;
-            target.Should().NotBeNull().And.HaveCount(1).And.Equal(new[] { ProgramState.Empty });
+            target.Should().NotBeNull().And.HaveCount(0).And.BeOfType<ProgramState[]>();
         }
 
         private static ISymbol[] CreateSymbols()

@@ -144,7 +144,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         public static implicit operator ProgramState[](ProgramState from) =>
             from is null
-                ? ProgramState.Empty
+                ? Array.Empty<ProgramState>()
                 : new[] { from };
 
         private string SerializeExceptions() =>
