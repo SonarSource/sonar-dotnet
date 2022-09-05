@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
             new SonarRules.InitializationVectorShouldBeRandom(),
             new SonarRules.HashesShouldHaveUnpredictableSalt());
 
-        public SymbolicExecutionRunner() : this(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg) { }
+        public SymbolicExecutionRunner() : this(AnalyzerConfiguration.AlwaysEnabled) { }
 
         internal /* for testing */ SymbolicExecutionRunner(IAnalyzerConfiguration configuration) : base(configuration) { }
 
