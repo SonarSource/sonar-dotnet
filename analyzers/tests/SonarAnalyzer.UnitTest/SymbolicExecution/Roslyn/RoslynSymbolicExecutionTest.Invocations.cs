@@ -168,8 +168,8 @@ public class Sample
 }}";
             var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
             validator.ValidateContainsOperation(OperationKind.Invocation);
-            validator.ValidateTag("Field1", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue()); // old rule cleared constraints
-            validator.ValidateTag("Field2", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue()); // old rule cleared constraints
+            validator.ValidateTag("Field1", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("Field2", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.ValidateTag("StaticField1", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.ValidateTag("StaticField2", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
         }
