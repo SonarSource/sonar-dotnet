@@ -222,7 +222,7 @@ Main: Second
 SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true: No constraints
 ");
             var valueWithConstraint = new SymbolicValue().WithConstraint(TestConstraint.Second);
-            sut = sut.SetOperationValue(assignment.Children.First(), valueWithConstraint);
+            sut = sut.SetOperationValue(assignment.ChildOperations.First(), valueWithConstraint);
             sut.ToString().Should().BeIgnoringLineEndings(
 @"Operations:
 LocalReferenceOperation / VariableDeclaratorSyntax: a = true: Second
@@ -265,15 +265,15 @@ Exception: Unknown
         public void ToString_WithAll()
         {
             var assignment = TestHelper.CompileCfgBodyCS("var a = true;").Blocks[1].Operations[0];
-            var variableSymbol = assignment.Children.First().TrackedSymbol();
+            var variableSymbol = assignment.ChildOperations.First().TrackedSymbol();
             var valueWithConstraint = new SymbolicValue().WithConstraint(TestConstraint.First);
             var sut = ProgramState.Empty
                 .SetSymbolValue(variableSymbol, new())
                 .SetSymbolValue(variableSymbol.ContainingSymbol, valueWithConstraint)
                 .SetOperationValue(assignment, new())
-                .SetOperationValue(assignment.Children.First(), valueWithConstraint).Preserve(variableSymbol)
+                .SetOperationValue(assignment.ChildOperations.First(), valueWithConstraint).Preserve(variableSymbol)
                 .SetCapture(new CaptureId(0), assignment)
-                .SetCapture(new CaptureId(1), assignment.Children.First())
+                .SetCapture(new CaptureId(1), assignment.ChildOperations.First())
                 .PushException(ExceptionState.UnknownException);
 
             sut.ToString().Should().BeIgnoringLineEndings(
