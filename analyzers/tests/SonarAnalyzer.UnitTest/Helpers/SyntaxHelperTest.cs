@@ -98,19 +98,23 @@ End Class";
             toString.NameIs(null).Should().BeFalse();
         }
 
-        [TestMethod]
-        public void IsAssignmentToTuple_IsTrue()
+        [DataTestMethod]
+        [DataRow("($$a, b) = (42, 42);")]
+        [DataRow("(a, $$b) = (42, 42);")]
+        [DataRow("(a, (b, $$c)) = (42, (42, 42));")]
+        [DataRow("(a, (b, ($$c, d))) = (42, (42, (42, 42)));")]
+        public void IsAssignmentToTuple_IsTrue(string assignment)
         {
-            const string code = @"
+            var code = $@"
 public class Sample
-{
+{{
     public void Method()
-    {
-        int a, b;
-        (a, b) = (42, 42);
-    }
-}";
-            var argument = Parse_CS(code).OfType<CS.ArgumentSyntax>().First();
+    {{
+        int a, b, c, d;
+        {assignment}
+    }}
+}}";
+            var argument = GetTupleArgumentAtMarker(ref code);
             argument.IsInTupleAssignmentTarget().Should().BeTrue();
         }
 
@@ -174,12 +178,7 @@ public class C
     static int M(int a, int b) => 0;
     static int M((int a, int b) t) => 0;
 }}";
-            var nodePosition = code.IndexOf("$$");
-            code = code.Replace("$$", string.Empty);
-            var syntaxTree = Microsoft.CodeAnalysis.CSharp.CSharpSyntaxTree.ParseText(code);
-            syntaxTree.GetDiagnostics().Should().BeEmpty();
-            var nodeAtPosition = syntaxTree.GetRoot().FindNode(new TextSpan(nodePosition, 0), getInnermostNodeForTie: true);
-            var argument = nodeAtPosition?.AncestorsAndSelf().OfType<CS.ArgumentSyntax>().First();
+            var argument = GetTupleArgumentAtMarker(ref code);
             // Act
             var outerMostTuple = argument.OutermostTuple();
             // Assert
@@ -207,5 +206,17 @@ public class C
 
         private static SyntaxNode[] Parse_VB(string source) =>
             Microsoft.CodeAnalysis.VisualBasic.VisualBasicSyntaxTree.ParseText(source).GetRoot().DescendantNodes().ToArray();
+
+        private static CS.ArgumentSyntax GetTupleArgumentAtMarker(ref string code)
+        {
+            var nodePosition = code.IndexOf("$$");
+            code = code.Replace("$$", string.Empty);
+            var syntaxTree = Microsoft.CodeAnalysis.CSharp.CSharpSyntaxTree.ParseText(code);
+            syntaxTree.GetDiagnostics().Should().BeEmpty();
+            var nodeAtPosition = syntaxTree.GetRoot().FindNode(new TextSpan(nodePosition, 0), getInnermostNodeForTie: true);
+            var argument = nodeAtPosition?.AncestorsAndSelf().OfType<CS.ArgumentSyntax>().First();
+            return argument;
+        }
+
     }
 }
