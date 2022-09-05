@@ -20,16 +20,10 @@
 
 namespace SonarAnalyzer.SymbolicExecution.Constraints
 {
-    internal enum ObjectConstraintKind
-    {
-        Null,
-        NotNull,
-    }
-
     internal sealed class ObjectConstraint : SymbolicConstraint
     {
-        public static readonly ObjectConstraint Null = new(ObjectConstraintKind.Null);
-        public static readonly ObjectConstraint NotNull = new(ObjectConstraintKind.NotNull);
+        public static readonly ObjectConstraint Null = new();
+        public static readonly ObjectConstraint NotNull = new();
 
         public override SymbolicConstraint Opposite =>
             // x == null ? <Null> : <NotNull>
@@ -38,10 +32,5 @@ namespace SonarAnalyzer.SymbolicExecution.Constraints
 
         protected override string Name =>
             this == Null ? nameof(Null) : nameof(NotNull);
-
-        private ObjectConstraint(ObjectConstraintKind kind) =>
-            Kind = kind;
-
-        public ObjectConstraintKind Kind { get; }
     }
 }
