@@ -85,7 +85,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             var newCulture = (CultureInfo)Thread.CurrentThread.CurrentCulture.Clone();
             // decimal.TryParse() from the implementation might not recognize "1.2" under different culture
             newCulture.NumberFormat.NumberDecimalSeparator = ",";
-            using var _ = new CurrentCultureScope(newCulture);
+            using var scope = new CurrentCultureScope(newCulture);
             var rootFile = Path.Combine(rootDirectory, WebConfig);
             var filesToAnalyze = new List<string> { rootFile };
             foreach (var subFolder in subFolders)

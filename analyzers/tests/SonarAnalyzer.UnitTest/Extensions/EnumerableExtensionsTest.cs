@@ -212,7 +212,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [DataRow("08/30/2022 12:29:11, 12/24/2022 16:00:00, and 12/31/2022 00:00:00", "2022-08-30T12:29:11", "2022-12-24T16:00:00", "2022-12-31T00:00:00")]
         public void JoinAndDateTime(string expected, params string[] collection)
         {
-            using var _ = new CurrentCultureScope();
+            using var scope = new CurrentCultureScope();
             collection.Select(x => DateTime.Parse(x)).JoinAnd().Should().Be(expected);
         }
 
