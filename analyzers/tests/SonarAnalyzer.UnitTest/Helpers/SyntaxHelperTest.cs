@@ -217,6 +217,5 @@ public class C
             var argument = nodeAtPosition?.AncestorsAndSelf().OfType<CS.ArgumentSyntax>().First();
             return argument;
         }
-
     }
 }
