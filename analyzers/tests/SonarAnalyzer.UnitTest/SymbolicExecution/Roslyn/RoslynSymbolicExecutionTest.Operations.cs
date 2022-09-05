@@ -501,13 +501,14 @@ using System;
 
 public class Sample
 {
-    public void Main(object o1, object o2, object o3, object o4, object o5, object o6, object o7, object o8)
+    public void Main(object o1, object o2, object o3, object o4, object o5, object o6, object o7, object o8, string s1, string s2)
     {
         Guard.NotNullExt(o1);
         o2.NotNullExt();
         NotNullInst(o3);
         NotNullInst(o4, o5);
         NotNullInst(value2: o6, value1: o7, value3: o8);  // value2 is not annotated
+        NotNullRefOut(ref s1, out s2);
         Tag(""AfterGuard_o1"", o1);
         Tag(""AfterGuard_o2"", o2);
         Tag(""AfterGuard_o3"", o3);
@@ -516,6 +517,8 @@ public class Sample
         Tag(""AfterGuard_o6"", o6);
         Tag(""AfterGuard_o7"", o7);
         Tag(""AfterGuard_o8"", o8);
+        Tag(""AfterGuard_s1"", s1);
+        Tag(""AfterGuard_s2"", s2);
     }
 
     private void NotNullInst([ValidatedNotNullAttribute] object value)
@@ -525,6 +528,7 @@ public class Sample
 
     private void NotNullInst([ValidatedNotNullAttribute] object value1, [ValidatedNotNullAttribute] object value2) { }
     private void NotNullInst<T1, T2, T3>([ValidatedNotNullAttribute] T1 value1, T2 value2, [ValidatedNotNullAttribute] T3 value3) { }
+    private void NotNullRefOut<T1, T2>([ValidatedNotNullAttribute] ref T1 value1, [ValidatedNotNullAttribute] out T2 value2) { value1 = default; value2 = default; }
 
     private static void Tag(string name, object arg) { }
 }
@@ -545,6 +549,8 @@ public static class Guard
             validator.ValidateTag("AfterGuard_o6", x => x.Should().BeNull()); // parameter is not annotated
             validator.ValidateTag("AfterGuard_o7", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.ValidateTag("AfterGuard_o8", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("AfterGuard_s1", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("AfterGuard_s2", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
         }
 
         [TestMethod]

@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
@@ -37,30 +38,29 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
         public static ProgramState Process(SymbolicContext context, IArgumentOperationWrapper argument) =>
             ProcessArgument(context.State, argument) ?? context.State;
 
-        private static ProgramState ProcessArgument(ProgramState state, IArgumentOperationWrapper argument) =>
-            argument switch
-            {
-                { Parameter: null } => null, // __arglist is not assigned to a parameter
-                { Parameter.RefKind: not RefKind.None, Value: { } value } when value.TrackedSymbol() is { } symbol =>
-                    // The argument is passed by some kind of reference, so we need to forget all we knew about it.
-                    state.SetSymbolValue(symbol, null),
-                _ when argument.Parameter.GetAttributes() is { Length: > 0 } attributes =>
-                    // Learn from parameter nullable annotations
-                    ProcessArgumentAttributes(state, argument, attributes),
-                _ => null,
-            };
-
-        private static ProgramState ProcessArgumentAttributes(ProgramState state, IArgumentOperationWrapper argument, ImmutableArray<AttributeData> attributes)
+        private static ProgramState ProcessArgument(ProgramState state, IArgumentOperationWrapper argument)
         {
-            foreach (var attribute in attributes)
+            if (argument.Parameter is null)
             {
-                if (IsValidatedNotNullAttribute(attribute) && argument.Value.TrackedSymbol() is { } symbol)
-                {
-                    return state.SetSymbolConstraint(symbol, ObjectConstraint.NotNull);
-                }
+                return null; // __arglist is not assigned to a parameter
             }
-            return null;
+            if (argument is { Parameter.RefKind: not RefKind.None, Value: { } value }
+                && value.TrackedSymbol() is { } symbol)
+            {
+                // The argument is passed by some kind of reference, so we need to forget all we knew about it.
+                state = state.SetSymbolValue(symbol, null);
+            }
+            if (argument.Parameter.GetAttributes() is { Length: > 0 } attributes)
+            {
+                state = ProcessArgumentAttributes(state, argument, attributes);
+            }
+            return state;
         }
+
+        private static ProgramState ProcessArgumentAttributes(ProgramState state, IArgumentOperationWrapper argument, ImmutableArray<AttributeData> attributes) =>
+            attributes.Any(IsValidatedNotNullAttribute) && argument.Value.TrackedSymbol() is { } symbol
+                ? state.SetSymbolConstraint(symbol, ObjectConstraint.NotNull)
+                : state;
 
         // Same as [NotNull] https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/attributes/nullable-analysis#postconditions-maybenull-and-notnull
         private static bool IsValidatedNotNullAttribute(AttributeData attribute) =>
