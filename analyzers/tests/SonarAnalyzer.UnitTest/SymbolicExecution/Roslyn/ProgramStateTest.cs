@@ -184,8 +184,8 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         public void ToString_WithSymbols()
         {
             var assignment = TestHelper.CompileCfgBodyCS("var a = arg;", "bool arg").Blocks[1].Operations[0];
-            var variableSymbol = assignment.Children.First().TrackedSymbol();
-            var parameterSymbol = assignment.Children.Last().TrackedSymbol();
+            var variableSymbol = assignment.ChildOperations.First().TrackedSymbol();
+            var parameterSymbol = assignment.ChildOperations.Last().TrackedSymbol();
             var sut = ProgramState.Empty.SetSymbolValue(variableSymbol, null);
             sut.ToString().Should().BeIgnoringLineEndings(
 @"Empty

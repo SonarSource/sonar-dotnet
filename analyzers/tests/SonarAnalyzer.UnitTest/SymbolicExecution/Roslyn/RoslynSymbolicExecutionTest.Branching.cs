@@ -297,7 +297,7 @@ else
     Tag(""GetHashCode"", value);
 }";
             var postProcess = new PostProcessTestCheck(x =>
-                x.Operation.Instance is IInvocationOperation { TargetMethod: { Name: "ToString" } } invocation
+                x.Operation.Instance is IInvocationOperation { TargetMethod.Name: "ToString" } invocation
                     ? x.SetSymbolConstraint(invocation.Instance.TrackedSymbol(), TestConstraint.First)
                     : x.State);
             var validator = SETestContext.CreateCS(code, postProcess).Validator;
