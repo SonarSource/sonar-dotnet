@@ -22,6 +22,7 @@ using System.Globalization;
 using System.IO;
 using System.Threading;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.UnitTest.Helpers;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
@@ -81,11 +82,10 @@ namespace SonarAnalyzer.UnitTest.Rules
             List<Diagnostic> allDiagnostics;
             var compilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation();
             var languageVersion = compilation.LanguageVersionString();
-            var oldCulture = Thread.CurrentThread.CurrentCulture;
-            var newCulture = (CultureInfo)oldCulture.Clone();
+            var newCulture = (CultureInfo)Thread.CurrentThread.CurrentCulture.Clone();
             // decimal.TryParse() from the implementation might not recognize "1.2" under different culture
             newCulture.NumberFormat.NumberDecimalSeparator = ",";
-            Thread.CurrentThread.CurrentCulture = newCulture;
+            using var scope = new CurrentCultureScope(newCulture);
             var rootFile = Path.Combine(rootDirectory, WebConfig);
             var filesToAnalyze = new List<string> { rootFile };
             foreach (var subFolder in subFolders)
@@ -93,19 +93,11 @@ namespace SonarAnalyzer.UnitTest.Rules
                 filesToAnalyze.Add(Path.Combine(rootDirectory, subFolder, WebConfig));
             }
 
-            try
-            {
-                allDiagnostics = DiagnosticVerifier.GetDiagnosticsNoExceptions(
-                    compilation,
-                    new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
-                    CompilationErrorBehavior.Default,
-                    sonarProjectConfigPath: TestHelper.CreateSonarProjectConfig(rootDirectory, TestHelper.CreateFilesToAnalyze(rootDirectory, filesToAnalyze.ToArray()))).ToList();
-            }
-            finally
-            {
-                Thread.CurrentThread.CurrentCulture = oldCulture; // Restore, don't mess with other UTs using the same thread
-            }
-
+            allDiagnostics = DiagnosticVerifier.GetDiagnosticsNoExceptions(
+                compilation,
+                new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
+                CompilationErrorBehavior.Default,
+                sonarProjectConfigPath: TestHelper.CreateSonarProjectConfig(rootDirectory, TestHelper.CreateFilesToAnalyze(rootDirectory, filesToAnalyze.ToArray()))).ToList();
             allDiagnostics.Should().NotBeEmpty();
             var rootWebConfig = Path.Combine(rootDirectory, WebConfig);
             VerifyResults(rootWebConfig, allDiagnostics, languageVersion);

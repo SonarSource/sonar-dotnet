@@ -149,5 +149,24 @@ namespace SonarAnalyzer.Helpers
         /// </summary>
         public static string JoinNonEmpty(this IEnumerable<string> enumerable, string separator) =>
             string.Join(separator, enumerable.Where(x => !string.IsNullOrWhiteSpace(x)));
+
+        /// <summary>
+        /// Concatenates the members of <paramref name="values"/> using "and" as the last separator and using a
+        /// <see href="https://en.wikipedia.org/wiki/Serial_comma">serial comma</see>.
+        /// <list type="table">
+        /// <item><c>[a, b, c] => "a, b, and c"</c></item>
+        /// <item><c>[a, b] => "a and b"</c></item>
+        /// <item><c>[a] => "a"</c></item>
+        /// <item><c>[] or null => ""</c></item>
+        /// </list>
+        /// </summary>
+        public static string JoinAnd<T>(this IEnumerable<T> values) =>
+            values?.Select(x => x?.ToString()).Where(x => !string.IsNullOrWhiteSpace(x)).ToList() switch
+            {
+                { Count: > 2 } serial => $"{serial.Take(serial.Count - 1).JoinStr(", ")}, and {serial.Last()}",
+                { Count: 2 } pair => $"{pair[0]} and {pair[1]}",
+                { Count: 1 } single => single[0],
+                _ => string.Empty,
+            };
     }
 }

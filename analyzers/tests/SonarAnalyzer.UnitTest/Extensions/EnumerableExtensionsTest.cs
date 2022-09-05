@@ -20,7 +20,11 @@
 
 #pragma warning disable SA1122 // Use string.Empty for empty strings
 
-namespace SonarAnalyzer.UnitTest.Helpers
+using System.Globalization;
+using System.Threading;
+using SonarAnalyzer.UnitTest.Helpers;
+
+namespace SonarAnalyzer.UnitTest.Extensions
 {
     [TestClass]
     public class EnumerableExtensionsTest
@@ -147,7 +151,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void WhereNotNull_Class()
         {
-            var instance = new Object();
+            var instance = new object();
             Array.Empty<object>().WhereNotNull().Should().BeEmpty();
             new object[] { null, null, null }.WhereNotNull().Should().BeEmpty();
             new object[] { 1, "a", instance }.WhereNotNull().Should().BeEquivalentTo(new object[] { 1, "a", instance });
@@ -172,6 +176,58 @@ namespace SonarAnalyzer.UnitTest.Helpers
             {
                 this.count = count;
             }
+        }
+
+        [TestMethod]
+        public void JoinAndNull() =>
+            ((object[])null).JoinAnd().Should().Be(string.Empty);
+
+        [DataTestMethod]
+        [DataRow("", new object[0])] // empty collection
+        [DataRow("", null)]
+        [DataRow("", "")]
+        [DataRow("", "", "")]
+        [DataRow("", "", " ", "\t", null)]
+        [DataRow("a", "a")]
+        [DataRow("a and b", "a", "b")]
+        [DataRow("a and b", "a", null, "b")]
+        [DataRow("a, b, and c", "a", "b", "c")]
+        [DataRow("a, b, and c", "a", null, "b", "", "c")]
+        public void JoinAndStrings(string expected, params string[] collection) =>
+            collection.JoinAnd().Should().Be(expected);
+
+        [DataTestMethod]
+        [DataRow("", new object[0])] // Empty collection
+        [DataRow("0", 0)]
+        [DataRow("0 and 1", 0, 1)]
+        [DataRow("0, 1, and 2", 0, 1, 2)]
+        [DataRow("1000", 1000)]
+        public void JoinAndInts(string expected, params int[] collection) =>
+            collection.JoinAnd().Should().Be(expected);
+
+        [DataTestMethod]
+        [DataRow("", new object[0])] // Empty collection
+        [DataRow("08/30/2022 12:29:11", "2022-08-30T12:29:11")]
+        [DataRow("08/30/2022 12:29:11 and 12/24/2022 16:00:00", "2022-08-30T12:29:11", "2022-12-24T16:00:00")]
+        [DataRow("08/30/2022 12:29:11, 12/24/2022 16:00:00, and 12/31/2022 00:00:00", "2022-08-30T12:29:11", "2022-12-24T16:00:00", "2022-12-31T00:00:00")]
+        public void JoinAndDateTime(string expected, params string[] collection)
+        {
+            using var scope = new CurrentCultureScope();
+            collection.Select(x => DateTime.Parse(x)).JoinAnd().Should().Be(expected);
+        }
+
+        [TestMethod]
+        public void JoinAndMixedClasses()
+        {
+            var collection = new Exception[]
+            {
+                new IndexOutOfRangeException("IndexOutOfRangeMessage"),
+                new InvalidOperationException("OperationMessage"),
+                null,
+                new NotSupportedException("NotSupportedMessage"),
+            };
+            var result = collection.JoinAnd();
+            result.Should().Be("System.IndexOutOfRangeException: IndexOutOfRangeMessage, System.InvalidOperationException: OperationMessage, and System.NotSupportedException: NotSupportedMessage");
         }
     }
 }
