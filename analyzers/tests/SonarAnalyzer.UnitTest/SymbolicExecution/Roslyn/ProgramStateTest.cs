@@ -298,6 +298,13 @@ Captures:
             target.Should().NotBeNull().And.HaveCount(1).And.Equal(new[] { ProgramState.Empty });
         }
 
+        [TestMethod]
+        public void ProgramStateToArrayConversionHandlesNull()
+        {
+            ProgramState[] target = (ProgramState)null;
+            target.Should().NotBeNull().And.HaveCount(1).And.Equal(new[] { ProgramState.Empty });
+        }
+
         private static ISymbol[] CreateSymbols()
         {
             const string code = @"public class Sample { public void Main() { var variable = 0; } }";
