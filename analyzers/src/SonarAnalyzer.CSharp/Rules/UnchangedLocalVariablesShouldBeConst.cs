@@ -131,22 +131,15 @@ namespace SonarAnalyzer.Rules.CSharp
                 parentSyntax = parentSyntax.Parent;
             }
 
-            ISymbol variableSymbol = null;
-
-            return parentSyntax
-                .DescendantNodes()
-                .OfType<IdentifierNameSyntax>()
-                .Where(MatchesIdentifier)
-                .Any(x => IsMutatingUse(semanticModel, x));
+            var variableSymbol = semanticModel.GetDeclaredSymbol(variable);
+            return variableSymbol != null
+                && parentSyntax.DescendantNodes()
+                    .OfType<IdentifierNameSyntax>()
+                    .Where(x => variableSymbol.Equals(semanticModel.GetSymbolInfo(x).Symbol))
+                    .Any(x => IsMutatingUse(semanticModel, x));
 
             static bool IsMethodLike(SyntaxNode arg) =>
                 arg is BaseMethodDeclarationSyntax or IndexerDeclarationSyntax or AccessorDeclarationSyntax or LambdaExpressionSyntax or GlobalStatementSyntax;
-
-            bool MatchesIdentifier(IdentifierNameSyntax id)
-            {
-                variableSymbol ??= semanticModel.GetDeclaredSymbol(variable);
-                return (variableSymbol != null) && variableSymbol.Equals(semanticModel.GetSymbolInfo(id).Symbol);
-            }
         }
 
         private static bool IsMutatingUse(SemanticModel semanticModel, IdentifierNameSyntax identifier) =>
