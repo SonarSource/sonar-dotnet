@@ -70,8 +70,16 @@ if (!string.IsNullOrEmpty(exception?.Message))
 }
 Tag(""ExceptionAfterCheck"", exception);";
             var validator = SETestContext.CreateCS(code, ", InvalidOperationException exception").Validator;
-            validator.TagValues("ExceptionChecked").Should().Equal(new SymbolicValue[] { null }); // Should be 'new SymbolicValue().WithConstraint(ObjectConstraint.NotNull)'
-            validator.TagValues("ExceptionAfterCheck").Should().Equal(new SymbolicValue[] { null });
+            validator.TagValues("ExceptionChecked").Should().Equal(new[]
+            {
+                new SymbolicValue().WithConstraint(ObjectConstraint.Null),
+                new SymbolicValue().WithConstraint(ObjectConstraint.NotNull)
+            }); // Should be 'new SymbolicValue().WithConstraint(ObjectConstraint.NotNull)'
+            validator.TagValues("ExceptionAfterCheck").Should().Equal(new[]
+            {
+                new SymbolicValue().WithConstraint(ObjectConstraint.Null),
+                new SymbolicValue().WithConstraint(ObjectConstraint.NotNull)
+            }); // Should be 'new SymbolicValue().WithConstraint(ObjectConstraint.NotNull)'
         }
     }
 }
