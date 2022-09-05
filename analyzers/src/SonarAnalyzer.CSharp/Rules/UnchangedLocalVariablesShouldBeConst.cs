@@ -145,7 +145,7 @@ namespace SonarAnalyzer.Rules.CSharp
             bool MatchesIdentifier(IdentifierNameSyntax id)
             {
                 variableSymbol ??= semanticModel.GetDeclaredSymbol(variable);
-                return variableSymbol.Equals(semanticModel.GetSymbolInfo(id).Symbol);
+                return (variableSymbol != null) && variableSymbol.Equals(semanticModel.GetSymbolInfo(id).Symbol);
             }
         }
 
