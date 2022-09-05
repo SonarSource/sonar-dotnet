@@ -135,7 +135,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return variableSymbol != null
                 && parentSyntax.DescendantNodes()
                     .OfType<IdentifierNameSyntax>()
-                    .Where(x => variableSymbol.Equals(semanticModel.GetSymbolInfo(x).Symbol))
+                    .Where(x => x.GetName().Equals(variableSymbol.Name) && variableSymbol.Equals(semanticModel.GetSymbolInfo(x).Symbol))
                     .Any(x => IsMutatingUse(semanticModel, x));
 
             static bool IsMethodLike(SyntaxNode arg) =>
