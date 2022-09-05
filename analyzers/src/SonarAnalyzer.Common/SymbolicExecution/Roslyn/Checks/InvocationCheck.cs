@@ -32,12 +32,12 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
                 ? newState
                 : base.PreProcess(context);
 
-        private ProgramState[] PreProcess(SymbolicContext context, IInvocationOperationWrapper invocation) =>
+        private static ProgramState[] PreProcess(SymbolicContext context, IInvocationOperationWrapper invocation) =>
             invocation.TargetMethod.IsAny(KnownType.System_String, nameof(string.IsNullOrEmpty), nameof(string.IsNullOrWhiteSpace))
                 ? ProcessStringIsNullOrEmpty(context, invocation)
                 : null;
 
-        private ProgramState[] ProcessStringIsNullOrEmpty(SymbolicContext context, IInvocationOperationWrapper invocation) =>
+        private static ProgramState[] ProcessStringIsNullOrEmpty(SymbolicContext context, IInvocationOperationWrapper invocation) =>
             invocation.Arguments[0].TrackedSymbol() is { } argumentSymbol
                 ? context.State[argumentSymbol]?.Constraint<ObjectConstraint>() switch
                 {
