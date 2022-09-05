@@ -139,7 +139,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     .Any(x => IsMutatingUse(semanticModel, x));
 
             static bool IsMethodLike(SyntaxNode arg) =>
-                arg is BaseMethodDeclarationSyntax or IndexerDeclarationSyntax or AccessorDeclarationSyntax or LambdaExpressionSyntax or GlobalStatementSyntax;
+                arg is BaseMethodDeclarationSyntax or AccessorDeclarationSyntax or LambdaExpressionSyntax or GlobalStatementSyntax;
         }
 
         private static bool IsMutatingUse(SemanticModel semanticModel, IdentifierNameSyntax identifier) =>
