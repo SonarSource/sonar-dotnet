@@ -595,7 +595,7 @@ Tag(""End"", isNull);";
         public void Branching_IsNullOrEmpty_VisitsBothBranchesIfNotNull(string methodName)
         {
             var code = @$"
-string notNull = new string('c', 42);
+string notNull = ""Some NotNull text"";
 if (string.{methodName}(notNull))
 {{
     Tag(""If"", notNull);
