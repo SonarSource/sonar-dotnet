@@ -51,13 +51,13 @@ Tag(""IsNullOrEmpy"", isNullOrEmpy);
 Tag(""Arg"", arg);";
             var validator = SETestContext.CreateCS(code, ", string arg").Validator;
             validator.TagValues("IsNullOrEmpy").Should().Equal(
-                new SymbolicValue().WithConstraint(BoolConstraint.True),
-                new SymbolicValue().WithConstraint(BoolConstraint.True),
-                new SymbolicValue().WithConstraint(BoolConstraint.False));
+                new SymbolicValue().WithConstraint(BoolConstraint.True),       // True/Null
+                new SymbolicValue().WithConstraint(BoolConstraint.True),       // True/NotNull
+                new SymbolicValue().WithConstraint(BoolConstraint.False));     // False/NotNull
             validator.TagValues("Arg").Should().Equal(
-                new SymbolicValue().WithConstraint(ObjectConstraint.Null),
-                new SymbolicValue().WithConstraint(ObjectConstraint.NotNull),
-                new SymbolicValue().WithConstraint(ObjectConstraint.NotNull));
+                new SymbolicValue().WithConstraint(ObjectConstraint.Null),     // True/Null
+                new SymbolicValue().WithConstraint(ObjectConstraint.NotNull),  // True/NotNull
+                new SymbolicValue().WithConstraint(ObjectConstraint.NotNull)); // False/NotNull
         }
     }
 }
