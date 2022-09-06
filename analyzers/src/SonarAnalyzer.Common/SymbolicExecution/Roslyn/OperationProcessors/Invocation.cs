@@ -31,21 +31,21 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
         public static ProgramState Process(SymbolicContext context, IInvocationOperationWrapper invocation)
         {
             var state = context.State;
-            if (!(invocation.TargetMethod.IsStatic             // Also applies to C# extensions
-                || invocation.TargetMethod.IsExtensionMethod)) // VB extensions in modules are not marked as static
+            if (!invocation.TargetMethod.IsStatic             // Also applies to C# extensions
+                && !invocation.TargetMethod.IsExtensionMethod // VB extensions in modules are not marked as static
+                && invocation.Instance.TrackedSymbol() is { } symbol)
             {
-                if (invocation.Instance.TrackedSymbol() is { } symbol)
+                state = state.SetSymbolConstraint(symbol, ObjectConstraint.NotNull);
+            }
+            if (invocation.Instance.UnwrapConversion() is { Kind: OperationKindEx.InstanceReference }
+                || (invocation is { TargetMethod.IsExtensionMethod: true, Arguments: { Length: > 0 } arguments }
+                    && arguments[0] is { Kind: OperationKindEx.Argument }
+                    && IArgumentOperationWrapper.FromOperation(arguments[0]).Value.UnwrapConversion() is { Kind: OperationKindEx.InstanceReference }))
+            {
+                // Invocations on "this" removes IsNull constraint
+                foreach (var field in state.SymbolsWith(ObjectConstraint.Null).OfType<IFieldSymbol>().Where(x => !x.IsStatic))
                 {
-                    state = state.SetSymbolConstraint(symbol, ObjectConstraint.NotNull);
-                }
-                if (invocation.Instance is { Kind: OperationKindEx.InstanceReference } instance
-                    && IInstanceReferenceOperationWrapper.FromOperation(instance).Type is { } thisType)
-                {
-                    // Invocations on "this" reset constraints for fields
-                    foreach (var field in thisType.GetMembers().OfType<IFieldSymbol>().Where(x => !x.IsStatic))
-                    {
-                        state = state.SetSymbolValue(field, null);
-                    }
+                    state = state.SetSymbolValue(field, state[field].WithoutConstraint(ObjectConstraint.Null));
                 }
             }
             return state;

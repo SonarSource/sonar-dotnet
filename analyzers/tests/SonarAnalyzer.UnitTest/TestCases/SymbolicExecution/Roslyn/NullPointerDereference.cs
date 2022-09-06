@@ -595,7 +595,7 @@ namespace Tests.Diagnostics
             object o = null;
             _foo1 = o;
             (((this))).DoSomething();
-            _foo1.ToString(); // Noncompliant FIXME (was compliant before)
+            _foo1.ToString(); // Compliant
         }
 
         void CallToExtensionMethodsShouldResetFieldConstraints()
@@ -603,7 +603,7 @@ namespace Tests.Diagnostics
             object o = null;
             _foo1 = o;
             this.MyExtension();
-            _foo1.ToString(); // Noncompliant FIXME (was compliant before)
+            _foo1.ToString(); // Compliant
         }
 
         void CallToStaticMethodsShouldResetFieldConstraints()

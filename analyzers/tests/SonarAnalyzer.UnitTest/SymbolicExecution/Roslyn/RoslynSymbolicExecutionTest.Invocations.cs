@@ -136,47 +136,61 @@ End Module";
         }
 
         [DataTestMethod]
-        [DataRow("DoSomething();")]
-        [DataRow("this.DoSomething();")]
-        [DataRow("(this).DoSomething();")]
-        [DataRow("(((this))).DoSomething();")]
+        [DataRow("Initialize();")]
+        [DataRow("this.Initialize();")]
+        [DataRow("(this).Initialize();")]
+        [DataRow("(((this))).Initialize();")]
+        [DataRow("((IDisposable)this).Dispose();")]
+        [DataRow("this.SomeExtensionOnSample();")]
+        [DataRow("Extensions.SomeExtensionOnSample(this);")]
+        [DataRow("this.SomeExtensionOnSample();")]
+        [DataRow("Extensions.SomeExtensionOnObject(this);")]
         public void Invocation_InstanceMethodCallDoesClearFieldOnThis(string invocation)
         {
             var code = $@"
-public class Sample
+using System;
+namespace N
 {{
-    object field1 = null;
-    object field2 = null;
-    static object staticField1 = null;
-    static object staticField2 = null;
-
-    void CallToMethodsShouldResetFieldConstraints()
+    public class Sample: IDisposable
     {{
-        field1 = new object();
-        field2 = new object();
-        staticField1 = new object();
-        staticField2 = new object();
-        {invocation}
-        Tag(""Field1"", field1);
-        Tag(""Field2"", field2);
-        Tag(""StaticField1"", staticField1);
-        Tag(""StaticField2"", staticField2);
-    }}
+        object field1 = null;
+        object field2 = null;
+        static object staticField1 = null;
+        static object staticField2 = null;
 
-    private void DoSomething() {{ }}
-    private static void Tag(string name, object arg) {{ }}
+        void CallToMethodsShouldResetFieldConstraints()
+        {{
+            field1 = null;
+            field2 = null;
+            staticField1 = null;
+            staticField2 = null;
+            {invocation}
+            Tag(""Field1"", field1);
+            Tag(""Field2"", field2);
+            Tag(""StaticField1"", staticField1);
+            Tag(""StaticField2"", staticField2);
+        }}
+
+        private void Initialize() {{ }}
+        void IDisposable.Dispose() {{ }}
+        private static void Tag(string name, object arg) {{ }}
+    }}
+    public static class Extensions
+    {{
+        public static void SomeExtensionOnSample(this Sample sample) {{ }}
+        public static void SomeExtensionOnObject(this object obj) {{ }}
+    }}
 }}";
             var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
             validator.ValidateContainsOperation(OperationKind.Invocation);
-            validator.ValidateTag("Field1", x => x.Should().BeNull());
-            validator.ValidateTag("Field2", x => x.Should().BeNull());
-            validator.ValidateTag("StaticField1", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-            validator.ValidateTag("StaticField2", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("Field1", x => x.Constraint<ObjectConstraint>().Should().BeNull());
+            validator.ValidateTag("Field2", x => x.Constraint<ObjectConstraint>().Should().BeNull());
+            validator.ValidateTag("StaticField1", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("StaticField2", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
         }
 
         [DataTestMethod]
         [DataRow("this?.InstanceMethod();")]
-        [DataRow("((IDisposable)this).Dispose();")]
         [DataRow("StaticMethod();")]
         [DataRow("Sample.StaticMethod();")]
         [DataRow("var dummy = Property;")]
@@ -187,8 +201,7 @@ public class Sample
         public void Invocation_InstanceMethodCallDoesNotClearFieldForOtherAccess(string invocation)
         {
             var code = $@"
-using System;
-public class Sample: IDisposable
+public class Sample
 {{
     object field1 = null;
     object field2 = null;
@@ -197,10 +210,10 @@ public class Sample: IDisposable
 
     void OtherInvocationsShouldNotResetFieldConstraints()
     {{
-        field1 = new object();
-        field2 = new object();
-        staticField1 = new object();
-        staticField2 = new object();
+        field1 = null;
+        field2 = null;
+        staticField1 = null;
+        staticField2 = null;
         {invocation}
         Tag(""Field1"", field1);
         Tag(""Field2"", field2);
@@ -211,15 +224,14 @@ public class Sample: IDisposable
     private void InstanceMethod() {{ }}
     private static void StaticMethod() {{ }}
     private Sample Property {{ get; set; }}
-    void IDisposable.Dispose() {{ }}
     private static void Tag(string name, object arg) {{ }}
 }}";
             var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
             validator.ValidateContainsOperation(OperationKind.Invocation);
-            validator.ValidateTag("Field1", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-            validator.ValidateTag("Field2", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-            validator.ValidateTag("StaticField1", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-            validator.ValidateTag("StaticField2", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("Field1", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("Field2", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("StaticField1", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("StaticField2", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
         }
 
         [DataTestMethod]
