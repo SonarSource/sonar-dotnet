@@ -143,7 +143,7 @@ End Module";
         [DataRow("((IDisposable)this).Dispose();")]
         [DataRow("this.SomeExtensionOnSample();")]
         [DataRow("Extensions.SomeExtensionOnSample(this);")]
-        [DataRow("this.SomeExtensionOnSample();")]
+        [DataRow("this.SomeExtensionOnObject();")]
         [DataRow("Extensions.SomeExtensionOnObject(this);")]
         public void Invocation_InstanceMethodCallDoesClearFieldOnThis(string invocation)
         {
