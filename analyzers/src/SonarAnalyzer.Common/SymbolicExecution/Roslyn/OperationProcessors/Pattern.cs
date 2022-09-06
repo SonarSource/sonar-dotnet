@@ -50,9 +50,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
         {
             return pattern.WrappedOperation.Kind switch
             {
-                OperationKindEx.ConstantPattern => ConstraintFromConstantPattern(state, As(IConstantPatternOperationWrapper.FromOperation), useOpposite),
+                OperationKindEx.ConstantPattern => ConstraintFromConstantPattern(state, As(IConstantPatternOperationWrapper.FromOperation), useOpposite, pattern.InputType.IsReferenceType),
+                OperationKindEx.DeclarationPattern => ConstraintFromDeclarationPattern(As(IDeclarationPatternOperationWrapper.FromOperation), useOpposite),
                 OperationKindEx.NegatedPattern => LearnBranchingConstraint(state, As(INegatedPatternOperationWrapper.FromOperation).Pattern, !useOpposite),
-                OperationKindEx.RecursivePattern => ObjectConstraintFromRecursivePattern(As(IRecursivePatternOperationWrapper.FromOperation), useOpposite),
+                OperationKindEx.RecursivePattern => ConstraintFromRecursivePattern(As(IRecursivePatternOperationWrapper.FromOperation), useOpposite),
                 OperationKindEx.TypePattern => ObjectConstraint.NotNull.ApplyOpposite(useOpposite),
                 _ => null
             };
@@ -61,7 +62,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                 fromOperation(pattern.WrappedOperation);
         }
 
-        private static SymbolicConstraint ConstraintFromConstantPattern(ProgramState state, IConstantPatternOperationWrapper constant, bool useOpposite)
+        private static SymbolicConstraint ConstraintFromConstantPattern(ProgramState state, IConstantPatternOperationWrapper constant, bool useOpposite, bool isReferenceType)
         {
             if (state[constant.Value] is { } value)
             {
@@ -74,17 +75,33 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                     return objectConstraint.ApplyOpposite(useOpposite);
                 }
             }
-            return null;
+            return isReferenceType ? ObjectConstraint.NotNull.ApplyOpposite(useOpposite) : null;    // "obj is 42" => "obj" is NotNull and obj.ToString() is safe. We don't have this for bool.
         }
 
-        private static ObjectConstraint ObjectConstraintFromRecursivePattern(IRecursivePatternOperationWrapper recursive, bool useOpposite) =>
+        private static ObjectConstraint ConstraintFromRecursivePattern(IRecursivePatternOperationWrapper recursive, bool useOpposite) =>
             recursive.InputType.IsReferenceType
                 ? useOpposite switch
-                    {
-                        true => RecursivePatternAlwaysMatchesAnyNotNull(recursive) ? ObjectConstraint.Null : null,
-                        _ => ObjectConstraint.NotNull
-                    }
+                {
+                    true => RecursivePatternAlwaysMatchesAnyNotNull(recursive) ? ObjectConstraint.Null : null,
+                    _ => ObjectConstraint.NotNull
+                }
                 : null;
+
+        private static SymbolicConstraint ConstraintFromDeclarationPattern(IDeclarationPatternOperationWrapper declaration, bool useOpposite)
+        {
+            if (declaration.MatchesNull || !declaration.InputType.IsReferenceType)
+            {
+                return null;
+            }
+            else if (useOpposite && declaration.InputType.DerivesOrImplements(declaration.MatchedType)) // For "str is object o", we're sure that it's Null in "else" branch
+            {
+                return ObjectConstraint.Null;
+            }
+            else
+            {
+                return ObjectConstraint.NotNull.ApplyOpposite(useOpposite);
+            }
+        }
 
         private static ProgramState ProcessDeclaration(SymbolicContext context, ISymbol declaredSymbol, bool setNotNull)
         {
