@@ -140,7 +140,7 @@ End Module";
         [DataRow("this.DoSomething();")]
         [DataRow("(this).DoSomething();")]
         [DataRow("(((this))).DoSomething();")]
-        public void Invocation_InstanceMethodCallDoesNotClearFieldOnThis(string invocation)
+        public void Invocation_InstanceMethodCallDoesClearFieldOnThis(string invocation)
         {
             var code = $@"
 public class Sample
@@ -164,6 +164,54 @@ public class Sample
     }}
 
     private void DoSomething() {{ }}
+    private static void Tag(string name, object arg) {{ }}
+}}";
+            var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
+            validator.ValidateContainsOperation(OperationKind.Invocation);
+            validator.ValidateTag("Field1", x => x.Should().BeNull());
+            validator.ValidateTag("Field2", x => x.Should().BeNull());
+            validator.ValidateTag("StaticField1", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("StaticField2", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        }
+
+        [DataTestMethod]
+        [DataRow("this?.InstanceMethod();")]
+        [DataRow("((IDisposable)this).Dispose();")]
+        [DataRow("StaticMethod();")]
+        [DataRow("Sample.StaticMethod();")]
+        [DataRow("var dummy = Property;")]
+        [DataRow("var dummy = this.Property;")]
+        [DataRow("Property.InstanceMethod();")]
+        [DataRow("this.Property.InstanceMethod();")]
+        [DataRow("this.Property?.InstanceMethod();")]
+        public void Invocation_InstanceMethodCallDoesNotClearFieldForOtherAccess(string invocation)
+        {
+            var code = $@"
+using System;
+public class Sample: IDisposable
+{{
+    object field1 = null;
+    object field2 = null;
+    static object staticField1 = null;
+    static object staticField2 = null;
+
+    void OtherInvocationsShouldNotResetFieldConstraints()
+    {{
+        field1 = new object();
+        field2 = new object();
+        staticField1 = new object();
+        staticField2 = new object();
+        {invocation}
+        Tag(""Field1"", field1);
+        Tag(""Field2"", field2);
+        Tag(""StaticField1"", staticField1);
+        Tag(""StaticField2"", staticField2);
+    }}
+
+    private void InstanceMethod() {{ }}
+    private static void StaticMethod() {{ }}
+    private Sample Property {{ get; set; }}
+    void IDisposable.Dispose() {{ }}
     private static void Tag(string name, object arg) {{ }}
 }}";
             var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;

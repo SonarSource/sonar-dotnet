@@ -28,12 +28,28 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
 {
     internal static class Invocation
     {
-        public static ProgramState Process(SymbolicContext context, IInvocationOperationWrapper invocation) =>
-            !invocation.TargetMethod.IsStatic               // Also applies to C# extensions
-            && !invocation.TargetMethod.IsExtensionMethod   // VB extensions in modules are not marked as static
-            && invocation.Instance.TrackedSymbol() is { } symbol
-                ? context.SetSymbolConstraint(symbol, ObjectConstraint.NotNull)
-                : context.State;
+        public static ProgramState Process(SymbolicContext context, IInvocationOperationWrapper invocation)
+        {
+            var state = context.State;
+            if (!(invocation.TargetMethod.IsStatic             // Also applies to C# extensions
+                || invocation.TargetMethod.IsExtensionMethod)) // VB extensions in modules are not marked as static
+            {
+                if (invocation.Instance.TrackedSymbol() is { } symbol)
+                {
+                    state = state.SetSymbolConstraint(symbol, ObjectConstraint.NotNull);
+                }
+                if (invocation.Instance is { Kind: OperationKindEx.InstanceReference } instance
+                    && IInstanceReferenceOperationWrapper.FromOperation(instance).Type is { } thisType)
+                {
+                    // Invocations on "this" reset constraints for fields
+                    foreach (var field in thisType.GetMembers().OfType<IFieldSymbol>().Where(x => !x.IsStatic))
+                    {
+                        state = state.SetSymbolValue(field, null);
+                    }
+                }
+            }
+            return state;
+        }
 
         public static ProgramState Process(SymbolicContext context, IArgumentOperationWrapper argument) =>
             ProcessArgument(context.State, argument) ?? context.State;
