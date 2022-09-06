@@ -90,7 +90,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             Rule,
                             classDeclaration.Identifier.GetLocation(),
                             string.Join(" or ", implementedComparableInterfaces),
-                            string.Join(", ", membersToOverride)));
+                            membersToOverride.JoinAnd()));
                     }
                 },
                 SyntaxKind.ClassDeclaration,
