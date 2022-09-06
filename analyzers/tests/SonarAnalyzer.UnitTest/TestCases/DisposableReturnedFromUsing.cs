@@ -74,7 +74,7 @@ namespace Tests.Diagnostics
 
         public FileStream MethodMultipleNoncompliantVariables(string path)
         {
-            // Noncompliant@+1 {{Remove the 'using' statement; it will cause automatic disposal of 'fs1', 'fs2'.}}
+            // Noncompliant@+1 {{Remove the 'using' statement; it will cause automatic disposal of 'fs1' and 'fs2'.}}
             using FileStream fs1 = File.Create(path), fs2 = File.Create(path);
 
             if (path != null)
