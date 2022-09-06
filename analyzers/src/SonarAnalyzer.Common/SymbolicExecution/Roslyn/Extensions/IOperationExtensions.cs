@@ -84,7 +84,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             return operation;
         }
 
-
         private static T? As<T>(this IOperation operation, OperationKind kind, Func<IOperation, T> fromOperation) where T : struct =>
             operation.Kind == kind ? fromOperation(operation) : null;
     }
