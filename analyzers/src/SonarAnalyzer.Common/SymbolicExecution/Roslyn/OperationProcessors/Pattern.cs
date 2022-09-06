@@ -87,11 +87,21 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                 }
                 : null;
 
-        private static SymbolicConstraint ConstraintFromDeclarationPattern(IDeclarationPatternOperationWrapper declaration, bool useOpposite) =>
-            declaration.MatchesNull
-            || !declaration.InputType.IsReferenceType
-                ? null
-                : ObjectConstraint.NotNull.ApplyOpposite(useOpposite);
+        private static SymbolicConstraint ConstraintFromDeclarationPattern(IDeclarationPatternOperationWrapper declaration, bool useOpposite)
+        {
+            if (declaration.MatchesNull || !declaration.InputType.IsReferenceType)
+            {
+                return null;
+            }
+            else if (useOpposite && declaration.InputType.DerivesOrImplements(declaration.MatchedType)) // For "str is object o", we're sure that it's Null in "else" branch
+            {
+                return ObjectConstraint.Null;
+            }
+            else
+            {
+                return ObjectConstraint.NotNull.ApplyOpposite(useOpposite);
+            }
+        }
 
         private static ProgramState ProcessDeclaration(SymbolicContext context, ISymbol declaredSymbol, bool setNotNull)
         {
