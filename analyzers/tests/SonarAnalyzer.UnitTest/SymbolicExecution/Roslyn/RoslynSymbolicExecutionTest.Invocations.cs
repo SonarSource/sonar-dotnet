@@ -146,6 +146,9 @@ End Module";
         [DataRow("Extensions.SomeExtensionOnSample(this);")]
         [DataRow("this.SomeExtensionOnObject();")]
         [DataRow("Extensions.SomeExtensionOnObject(this);")]
+        [DataRow("Extensions.SomeExtensionOnObject((IDisposable)this);")]
+        [DataRow("Extensions.SomeExtensionOnObject((object)(IDisposable)this);")]
+        [DataRow("((object)(IDisposable)this).SomeExtensionOnObject();")]
         public void Invocation_InstanceMethodCallDoesClearFieldOnThis(string invocation)
         {
             var code = $@"
