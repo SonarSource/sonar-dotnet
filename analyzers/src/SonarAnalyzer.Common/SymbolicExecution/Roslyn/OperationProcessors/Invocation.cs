@@ -44,7 +44,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
             {
                 return null; // __arglist is not assigned to a parameter
             }
-            if (argument is { Parameter.RefKind: RefKind.Out or RefKind.Ref, Value: { } value } && value.TrackedSymbol() is { } symbol)
+            if (argument is { Parameter.RefKind: RefKind.Out or RefKind.Ref } && argument.Value.TrackedSymbol() is { } symbol)
             {
                 // Forget state for "out" or "ref" arguments
                 state = state.SetSymbolValue(symbol, null);
