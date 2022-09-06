@@ -86,11 +86,12 @@ namespace SonarAnalyzer.Rules.CSharp
                                                         .SelectMany(m => GetAssignmentsToFieldsIn(m, analysisContext.Compilation))
                                                         .Where(f => disposableFields.Contains(f));
 
-            return string.Join(", ", disposableFields.Where(IsOwnerSinceDeclaration)
-                                                     .Union(otherInitializationsOfFields)
-                                                     .Distinct()
-                                                     .Select(symbol => $"'{symbol.Name}'")
-                                                     .OrderBy(name => name));
+            return disposableFields.Where(IsOwnerSinceDeclaration)
+                                   .Union(otherInitializationsOfFields)
+                                   .Distinct()
+                                   .Select(symbol => $"'{symbol.Name}'")
+                                   .OrderBy(name => name)
+                                   .JoinAnd();
         }
 
         private static IEnumerable<IFieldSymbol> GetAssignmentsToFieldsIn(ISymbol m, Compilation compilation)
