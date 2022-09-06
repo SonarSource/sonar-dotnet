@@ -141,6 +141,7 @@ End Module";
         [DataRow("(this).Initialize();")]
         [DataRow("(((this))).Initialize();")]
         [DataRow("((IDisposable)this).Dispose();")]
+        [DataRow("((IDisposable)(object)this).Dispose();")]
         [DataRow("this.SomeExtensionOnSample();")]
         [DataRow("Extensions.SomeExtensionOnSample(this);")]
         [DataRow("this.SomeExtensionOnObject();")]
