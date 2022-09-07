@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-
-namespace Tests.Diagnostics
+﻿namespace Tests.Diagnostics
 {
     class Tests
     {
