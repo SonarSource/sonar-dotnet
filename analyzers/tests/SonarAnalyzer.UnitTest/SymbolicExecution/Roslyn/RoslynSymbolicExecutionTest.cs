@@ -274,8 +274,16 @@ Tag(""End"");";
         }
 
         [TestMethod]
-        public void Execute_LocalScopeRegion_AssignDefaultBoolConstraint() =>
-            SETestContext.CreateVB(@"Dim B As Boolean : Tag(""B"", B)").Validator.ValidateTag("B", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+        public void Execute_LocalScopeRegion_Boolean_AssignDefaultBoolConstraint() =>
+            SETestContext.CreateVB(@"Dim Value As Boolean : Tag(""Value"", Value)").Validator.ValidateTag("Value", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+
+        [TestMethod]
+        public void Execute_LocalScopeRegion_ReferenceType_AssignDefaultNullConstraint() =>
+            SETestContext.CreateVB(@"Dim Value As Exception : Tag(""Value"", Value)").Validator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+
+        [TestMethod]
+        public void Execute_LocalScopeRegion_Struct_NoAction() =>
+            SETestContext.CreateVB(@"Dim Value As Integer : Tag(""Value"", Value)").Validator.ValidateTag("Value", x => x.Should().BeNull());   // Will get NotNull in the future
 
         [TestMethod]
         public void Execute_FieldSymbolsAreNotRemovedByLva()

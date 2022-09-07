@@ -23,7 +23,7 @@ Public Class Program
 
     Public Sub NonInitialized()
         Dim O As Object
-        Console.WriteLine(O.ToString)   ' FIXME FN
+        Console.WriteLine(O.ToString)   ' Noncompliant
     End Sub
 
     Public Sub TestForEach()
