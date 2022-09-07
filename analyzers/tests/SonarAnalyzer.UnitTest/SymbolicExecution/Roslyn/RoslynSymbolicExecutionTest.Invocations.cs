@@ -311,7 +311,8 @@ public class Sample
     private static void Tag(string name, object arg) {{ }}
 }}";
             var check = new PostProcessTestCheck(x => x.Operation.Instance.Kind == OperationKindEx.SimpleAssignment
-                ? x.SetSymbolConstraint(IFieldReferenceOperationWrapper.FromOperation(ISimpleAssignmentOperationWrapper.FromOperation(x.Operation.Instance).Target).Member, TestConstraint.First)
+                && IFieldReferenceOperationWrapper.FromOperation(ISimpleAssignmentOperationWrapper.FromOperation(x.Operation.Instance).Target).Member is var field1
+                ? x.SetSymbolConstraint(field1, TestConstraint.First).SetSymbolConstraint(field1, TestConstraint.Second)
                 : x.State);
             var validator = new SETestContext(code, AnalyzerLanguage.CSharp, new SymbolicCheck[] { check }).Validator;
             validator.ValidateContainsOperation(OperationKind.Invocation);

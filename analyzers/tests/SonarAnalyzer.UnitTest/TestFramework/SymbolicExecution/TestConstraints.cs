@@ -45,4 +45,18 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 
         private DummyConstraint() { }
     }
+
+    internal class ConfigurableConstraint : SymbolicConstraint
+    {
+        public ConfigurableConstraint(SymbolicConstraint opposite, bool invalidateForFieldsOnInvocation, string name)
+        {
+            Opposite = opposite;
+            InvalidateForFieldsOnInvocation = invalidateForFieldsOnInvocation;
+            Name = name;
+        }
+
+        public override SymbolicConstraint Opposite { get; }
+        public override bool InvalidateForFieldsOnInvocation { get; }
+        protected override string Name { get; }
+    }
 }
