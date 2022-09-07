@@ -106,9 +106,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (returnedSymbols.Any())
             {
-                c.ReportIssue(Diagnostic.Create(rule, usingKeyword.GetLocation(),
-                    string.Join(", ",
-                        returnedSymbols.Select(s => $"'{s.Name}'").OrderBy(s => s))));
+                c.ReportIssue(Diagnostic.Create(rule, usingKeyword.GetLocation(), returnedSymbols.Select(s => $"'{s.Name}'").OrderBy(s => s).JoinAnd()));
             }
         }
 

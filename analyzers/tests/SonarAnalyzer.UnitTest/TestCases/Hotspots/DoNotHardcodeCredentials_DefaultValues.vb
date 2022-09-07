@@ -26,7 +26,7 @@ Namespace Tests.Diagnostics
             '   ^^^^^^^^^^^^^^^^^^^^^^^^^^
             Dim foo As String, passwd As String = "a" 'Noncompliant {{"passwd" detected here, make sure this is not a hard-coded credential.}}
             '                  ^^^^^^^^^^^^^^^^^^^^^^
-            Dim pwdPassword As String = "a"     'Noncompliant {{"pwd, password" detected here, make sure this is not a hard-coded credential.}}
+            Dim pwdPassword As String = "a"     'Noncompliant {{"pwd and password" detected here, make sure this is not a hard-coded credential.}}
             Dim foo2 As String = "Password=123" 'Noncompliant
             Dim bar As String
             bar = "Password=p" 'Noncompliant ^13#18

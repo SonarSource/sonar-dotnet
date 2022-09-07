@@ -68,7 +68,7 @@ namespace Tests.Diagnostics
     {
     }
 
-    public class ObserverVsOwner // Noncompliant {{Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on 'fs2', 'fs3'.}}
+    public class ObserverVsOwner // Noncompliant {{Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on 'fs2' and 'fs3'.}}
     {
         protected FileStream fs, fs2 = new FileStream("eee", FileMode.Open), fs3; // Only fs will be compliant
         public FileStream Stream

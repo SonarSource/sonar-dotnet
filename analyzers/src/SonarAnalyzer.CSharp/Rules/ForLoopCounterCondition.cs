@@ -61,14 +61,10 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var incrementedVariables = string.Join(",", incrementedSymbols
-                                                                .Select(s => $"'{s.Name}'")
-                                                                .OrderBy(s => s));
+                    var incrementedVariables = incrementedSymbols.Select(s => $"'{s.Name}'").OrderBy(s => s).JoinAnd();
                     if (conditionSymbols.Any())
                     {
-                        var conditionVariables = string.Join(",", conditionSymbols
-                                                                  .Select(s => $"'{s.Name}'")
-                                                                  .OrderBy(s => s));
+                        var conditionVariables = conditionSymbols.Select(s => $"'{s.Name}'").OrderBy(s => s).JoinAnd();
                         c.ReportIssue(Diagnostic.Create(Rule, forNode.Condition.GetLocation(),
                             string.Format(CultureInfo.InvariantCulture, MessageFormatNotEmpty, conditionVariables, incrementedVariables)));
                     }

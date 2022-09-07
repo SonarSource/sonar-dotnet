@@ -103,7 +103,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var serializableFields = GetSerializableFieldNames(typeSymbol).ToList();
                 if (serializableFields.Any())
                 {
-                    yield return new(typeDeclaration.Keyword.GetLocation(), $"Override 'GetObjectData(SerializationInfo, StreamingContext)' and serialize '{serializableFields.JoinStr(", ")}'.");
+                    yield return new(typeDeclaration.Keyword.GetLocation(), $"Override 'GetObjectData(SerializationInfo, StreamingContext)' and serialize '{serializableFields.JoinAnd()}'.");
                 }
             }
             else if (getObjectData.IsOverride && !IsCallingBase(getObjectData))

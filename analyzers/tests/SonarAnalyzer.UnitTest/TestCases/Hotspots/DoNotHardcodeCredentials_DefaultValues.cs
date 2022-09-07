@@ -28,7 +28,7 @@ namespace Tests.Diagnostics
             string foo, passwd = "a"; // Noncompliant {{"passwd" detected here, make sure this is not a hard-coded credential.}}
 //                      ^^^^^^^^^^^^
 
-            string pwdPassword = "a"; // Noncompliant {{"pwd, password" detected here, make sure this is not a hard-coded credential.}}
+            string pwdPassword = "a"; // Noncompliant {{"pwd and password" detected here, make sure this is not a hard-coded credential.}}
 
             string foo2 = @"Password=123"; // Noncompliant
             string multiline = // Noncompliant

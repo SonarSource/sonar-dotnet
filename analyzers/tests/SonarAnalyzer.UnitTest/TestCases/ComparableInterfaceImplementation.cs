@@ -217,7 +217,7 @@ namespace Tests.Diagnostics.ComparableInterfaceImplementation
         }
     }
 
-    public class MissingGreaterThan : IComparable // Noncompliant {{When implementing IComparable, you should also override <, >.}}
+    public class MissingGreaterThan : IComparable // Noncompliant {{When implementing IComparable, you should also override < and >.}}
 //               ^^^^^^^^^^^^^^^^^^
     {
         public string Name { get; set; }
@@ -274,7 +274,7 @@ namespace Tests.Diagnostics.ComparableInterfaceImplementation
         }
     }
 
-    public class MissingNotEqual : IComparable // Noncompliant {{When implementing IComparable, you should also override ==, !=.}}
+    public class MissingNotEqual : IComparable // Noncompliant {{When implementing IComparable, you should also override == and !=.}}
 //               ^^^^^^^^^^^^^^^
     {
         public string Name { get; set; }
@@ -455,7 +455,7 @@ namespace Tests.Diagnostics.ComparableInterfaceImplementation
         }
     }
 
-    public struct Struct : IComparable // Noncompliant {{When implementing IComparable, you should also override Equals, ==, !=, <, <=, >, >=.}}
+    public struct Struct : IComparable // Noncompliant {{When implementing IComparable, you should also override Equals, ==, !=, <, <=, >, and >=.}}
     {
         public int CompareTo(object obj)
         {
@@ -665,7 +665,7 @@ namespace Tests.Diagnostics.ComparableGenericInterfaceImplementation
         }
     }
 
-    public class MissingGreaterThan : IComparable<MissingGreaterThan> // Noncompliant {{When implementing IComparable<T>, you should also override <, >.}}
+    public class MissingGreaterThan : IComparable<MissingGreaterThan> // Noncompliant {{When implementing IComparable<T>, you should also override < and >.}}
 //               ^^^^^^^^^^^^^^^^^^
     {
         public string Name { get; set; }
@@ -722,7 +722,7 @@ namespace Tests.Diagnostics.ComparableGenericInterfaceImplementation
         }
     }
 
-    public class MissingNotEqual : IComparable<MissingNotEqual> // Noncompliant {{When implementing IComparable<T>, you should also override ==, !=.}}
+    public class MissingNotEqual : IComparable<MissingNotEqual> // Noncompliant {{When implementing IComparable<T>, you should also override == and !=.}}
 //               ^^^^^^^^^^^^^^^
     {
         public string Name { get; set; }
@@ -906,7 +906,7 @@ namespace Tests.Diagnostics.ComparableGenericInterfaceImplementation
 
 namespace Tests.Diagnostics.BothInterfacesImplementation
 {
-    public class NonCompliant : IComparable, IComparable<NonCompliant> // Noncompliant {{When implementing IComparable or IComparable<T>, you should also override Equals, ==, !=, <, <=, >, >=.}}
+    public class NonCompliant : IComparable, IComparable<NonCompliant> // Noncompliant {{When implementing IComparable or IComparable<T>, you should also override Equals, ==, !=, <, <=, >, and >=.}}
     {
         public string Name { get; set; }
 
