@@ -22,6 +22,7 @@ using SonarAnalyzer.Common;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
 {
@@ -254,10 +255,10 @@ public class Sample
 
     void CallToMethodsShouldResetFieldConstraints()
     {{
-        field1 = new object();
-        field2 = new object();
-        staticField1 = new object();
-        staticField2 = new object();
+        field1 = null;
+        field2 = null;
+        staticField1 = null;
+        staticField2 = null;
         var otherInstance = new Sample();
         {invocation}
         Tag(""Field1"", field1);
@@ -271,10 +272,84 @@ public class Sample
 }}";
             var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
             validator.ValidateContainsOperation(OperationKind.Invocation);
-            validator.ValidateTag("Field1", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-            validator.ValidateTag("Field2", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-            validator.ValidateTag("StaticField1", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-            validator.ValidateTag("StaticField2", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("Field1", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("Field2", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("StaticField1", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("StaticField2", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void Instance_InstanceMethodCallClearsFieldInConsistentManner()
+        {
+            var code = $@"
+public class Sample
+{{
+    object field1;
+
+    void CallToMethodsShouldResetFieldConstraints(object someValue)
+    {{
+        field1 = null;
+        Tag(""Init"", field1);
+        DoSomething();
+        Tag(""AfterInvocation"", field1);
+        if (field1 == null)
+        {{
+            Tag(""IfBefore"", field1);
+            DoSomething();
+            Tag(""IfAfter"", field1);
+        }}
+        else
+        {{
+            Tag(""ElseBefore"", field1);
+            DoSomething();
+            Tag(""ElseAfter"", field1);
+        }}
+        Tag(""AfterIfElse"", field1);
+    }}
+
+    private void DoSomething() {{ }}
+    private static void Tag(string name, object arg) {{ }}
+}}";
+            var check = new PostProcessTestCheck(x => x.Operation.Instance.Kind == OperationKindEx.SimpleAssignment
+                ? x.SetSymbolConstraint(IFieldReferenceOperationWrapper.FromOperation(ISimpleAssignmentOperationWrapper.FromOperation(x.Operation.Instance).Target).Member, TestConstraint.First)
+                : x.State);
+            var validator = new SETestContext(code, AnalyzerLanguage.CSharp, new SymbolicCheck[] { check }).Validator;
+            validator.ValidateContainsOperation(OperationKind.Invocation);
+            validator.ValidateTag("Init", x =>
+            {
+                x.HasConstraint(ObjectConstraint.Null).Should().BeTrue();
+                x.HasConstraint(TestConstraint.First).Should().BeTrue();
+            });
+            validator.ValidateTag("AfterInvocation", x =>
+            {
+                x.HasConstraint(ObjectConstraint.Null).Should().BeFalse();
+                x.HasConstraint(TestConstraint.First).Should().BeTrue();
+            });
+            validator.ValidateTag("IfBefore", x =>
+            {
+                x.HasConstraint(ObjectConstraint.Null).Should().BeTrue();
+                x.HasConstraint(TestConstraint.First).Should().BeTrue();
+            });
+            validator.ValidateTag("IfAfter", x =>
+            {
+                x.HasConstraint(ObjectConstraint.Null).Should().BeFalse();
+                x.HasConstraint(TestConstraint.First).Should().BeTrue();
+            });
+            validator.ValidateTag("ElseBefore", x =>
+            {
+                x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue();
+                x.HasConstraint(TestConstraint.First).Should().BeTrue();
+            });
+            validator.ValidateTag("ElseAfter", x =>
+            {
+                x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue();
+                x.HasConstraint(TestConstraint.First).Should().BeTrue();
+            });
+            validator.TagValues("AfterIfElse").Should().Equal(new SymbolicValue[]
+            {
+                new SymbolicValue().WithConstraint(TestConstraint.First),
+                new SymbolicValue().WithConstraint(TestConstraint.First).WithConstraint(ObjectConstraint.NotNull),
+            });
         }
     }
 }
