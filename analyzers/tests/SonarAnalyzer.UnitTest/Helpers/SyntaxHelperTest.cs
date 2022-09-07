@@ -103,7 +103,7 @@ End Class";
         [DataRow("(a, $$b) = (42, 42);")]
         [DataRow("(a, (b, $$c)) = (42, (42, 42));")]
         [DataRow("(a, (b, ($$c, d))) = (42, (42, (42, 42)));")]
-        public void IsAssignmentToTuple_IsTrue(string assignment)
+        public void IsInTupleAssignmentTarget_IsTrue(string assignment)
         {
             var code = $@"
 public class Sample
@@ -119,7 +119,7 @@ public class Sample
         }
 
         [TestMethod]
-        public void IsAssignmentToTuple_IsFalse()
+        public void IsInTupleAssignmentTarget_IsFalse()
         {
             const string code = @"
 public class Sample
