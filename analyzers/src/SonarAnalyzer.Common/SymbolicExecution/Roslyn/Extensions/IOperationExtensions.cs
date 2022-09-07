@@ -77,7 +77,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         public static IOperation UnwrapConversion(this IOperation operation)
         {
-            while (operation.Kind == OperationKindEx.Conversion)
+            while (operation?.Kind == OperationKindEx.Conversion)
             {
                 operation = IConversionOperationWrapper.FromOperation(operation).Operand;
             }
