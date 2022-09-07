@@ -81,5 +81,26 @@ Tag(""ExceptionAfterCheck"", exception);";
                 new SymbolicValue().WithConstraint(ObjectConstraint.NotNull)
             });
         }
+
+        [TestMethod]
+        public void Invocation_IsNullOrEmpty_TryFinally()
+        {
+            const string code = @"
+try
+{
+    if (string.IsNullOrEmpty(arg)) return;
+}
+finally
+{
+    Tag(""ArgInFinally"", arg);
+}";
+            var validator = SETestContext.CreateCS(code, ", string arg").Validator;
+            validator.TagValues("ArgInFinally").Should().Equal(new[]
+            {
+                null,
+                new SymbolicValue().WithConstraint(ObjectConstraint.Null),    // Wrong. IsNullOrEmpty does not throw and "arg" is known to be not null.
+                new SymbolicValue().WithConstraint(ObjectConstraint.NotNull)
+            });
+        }
     }
 }
