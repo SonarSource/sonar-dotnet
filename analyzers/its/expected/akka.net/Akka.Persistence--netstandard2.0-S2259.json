@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2259",
+"message":  "'timeout' is null on at least one execution path.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\PersistenceMessageSerializer.cs",
+"region":  {
+"startLine":  144,
+"startColumn":  17,
+"endLine":  144,
+"endColumn":  24
+}
+}
+}
+]
+}

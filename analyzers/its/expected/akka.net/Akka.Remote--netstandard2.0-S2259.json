@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2259",
+"message":  "'deadLetter' is null on at least one execution path.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"region":  {
+"startLine":  802,
+"startColumn":  58,
+"endLine":  802,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'socketException' is null on at least one execution path.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\TcpTransport.cs",
+"region":  {
+"startLine":  235,
+"startColumn":  56,
+"endLine":  235,
+"endColumn":  71
+}
+}
+}
+]
+}
