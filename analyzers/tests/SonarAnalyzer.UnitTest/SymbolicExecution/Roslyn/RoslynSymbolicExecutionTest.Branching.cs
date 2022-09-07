@@ -27,6 +27,15 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
 {
     public partial class RoslynSymbolicExecutionTest
     {
+        private static IEnumerable<object[]> StringIsNullOrEmptyMethods
+        {
+            get
+            {
+                yield return new object[] { nameof(string.IsNullOrEmpty) };
+                yield return new object[] { nameof(string.IsNullOrWhiteSpace) };
+            }
+        }
+
         [TestMethod]
         public void Branching_BlockProcessingOrder_CS()
         {
@@ -288,7 +297,7 @@ else
     Tag(""GetHashCode"", value);
 }";
             var postProcess = new PostProcessTestCheck(x =>
-                x.Operation.Instance is IInvocationOperation { TargetMethod: { Name: "ToString" } } invocation
+                x.Operation.Instance is IInvocationOperation { TargetMethod.Name: "ToString" } invocation
                     ? x.SetSymbolConstraint(invocation.Instance.TrackedSymbol(), TestConstraint.First)
                     : x.State);
             var validator = SETestContext.CreateCS(code, postProcess).Validator;
@@ -534,6 +543,72 @@ Tag(""End"");";
             SETestContext.CreateCS(code).Validator.ValidateTagOrder(
                 "Else",
                 "End");
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(StringIsNullOrEmptyMethods))]
+        public void Branching_IsNullOrEmpty_SetsNullConstraintsInBranches(string methodName)
+        {
+            var code = $@"
+if (string.{methodName}(arg))
+{{
+    Tag(""If"", arg);
+}}
+else
+{{
+    Tag(""Else"", arg);
+}}
+Tag(""End"", arg);";
+            var validator = SETestContext.CreateCS(code, ", string arg").Validator;
+            validator.TagValues("If").Should().HaveCount(2)
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(StringIsNullOrEmptyMethods))]
+        public void Branching_IsNullOrEmpty_VisitsTrueBranchIfNull(string methodName)
+        {
+            var code = $@"
+string isNull = null;
+if (string.{methodName}(isNull))
+{{
+    Tag(""If"", isNull);
+}}
+else
+{{
+    Tag(""Else"", isNull);
+}}
+Tag(""End"", isNull);";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.Null));
+            validator.TagValues("Else").Should().BeEmpty();
+            validator.ValidateTag("End", x => x.HasConstraint(ObjectConstraint.Null));
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(StringIsNullOrEmptyMethods))]
+        public void Branching_IsNullOrEmpty_VisitsBothBranchesIfNotNull(string methodName)
+        {
+            var code = @$"
+string notNull = ""Some NotNull text"";
+if (string.{methodName}(notNull))
+{{
+    Tag(""If"", notNull);
+}}
+else
+{{
+    Tag(""Else"", notNull);
+}}
+Tag(""End"", notNull);";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("End", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
         }
     }
 }

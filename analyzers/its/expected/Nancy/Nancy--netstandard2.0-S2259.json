@@ -2,19 +2,6 @@
 "issues":  [
 {
 "id":  "S2259",
-"message":  "'extension' is null on at least one execution path.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\DefaultRequestDispatcher.cs",
-"region":  {
-"startLine":  146,
-"startColumn":  73,
-"endLine":  146,
-"endColumn":  82
-}
-}
-},
-{
-"id":  "S2259",
 "message":  "'substitutionBool' is null on at least one execution path.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",

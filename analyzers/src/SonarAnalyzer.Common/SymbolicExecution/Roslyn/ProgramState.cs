@@ -131,7 +131,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 HashCode.EnumerableContentHash(Exceptions));
 
         public bool Equals(ProgramState other) =>
-            // VisitCount is not compared, two ProgramState are equal if their current state is equal. No matter was historical path led to it.
+            // VisitCount is not compared, two ProgramState are equal if their current state is equal. No matter what historical path led to it.
             other is not null
             && other.OperationValue.DictionaryEquals(OperationValue)
             && other.SymbolValue.DictionaryEquals(SymbolValue)

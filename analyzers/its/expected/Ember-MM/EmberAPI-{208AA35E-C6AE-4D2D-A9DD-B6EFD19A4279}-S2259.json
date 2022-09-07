@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S2259",
+"message":  "'movieName' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  161,
+"startColumn":  55,
+"endLine":  161,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'movieName' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  162,
+"startColumn":  60,
+"endLine":  162,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'movieName' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  164,
+"startColumn":  20,
+"endLine":  164,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'movieName' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  169,
+"startColumn":  20,
+"endLine":  169,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'TVEpName' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  227,
+"startColumn":  20,
+"endLine":  227,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'TVShowName' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  269,
+"startColumn":  20,
+"endLine":  269,
+"endColumn":  30
+}
+}
+}
+]
+}

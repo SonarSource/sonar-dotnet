@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2259",
+"message":  "'mediaPath' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  523,
+"startColumn":  25,
+"endLine":  523,
+"endColumn":  34
+}
+}
+}
+]
+}
