@@ -1,4 +1,7 @@
-﻿namespace Tests.Diagnostics.CSharp8
+﻿using System;
+using System.IO;
+
+namespace Tests.Diagnostics.CSharp8
 {
     public class NullCoalescenceAssignment
     {
@@ -20,6 +23,11 @@
         {
             string name = null;
             name = name ?? name.ToString(); // Noncompliant
+        }
+
+        public void NullCoalesce_Conversion(Exception arg)  // Classes doesn't make sense here. They just demonstrate the flow.
+        {
+            var value = arg as IDisposable ?? new FileStream(arg.Message, FileMode.Open);  // Noncompliant, if arg is null, it will throw
         }
 
         public void NullCoalescenceAssignment_Null()
