@@ -44,8 +44,7 @@ namespace SonarAnalyzer.Extensions
 
         // (arg, b) = something
         internal static bool IsInTupleAssignmentTarget(this ArgumentSyntax argument) =>
-            argument.Parent is { } tupleExpression
-            && TupleExpressionSyntaxWrapper.IsInstance(tupleExpression)
+            argument.OutermostTuple() is { SyntaxNode: { } tupleExpression }
             && tupleExpression.Parent is AssignmentExpressionSyntax assignment
             && assignment.Left == tupleExpression;
 

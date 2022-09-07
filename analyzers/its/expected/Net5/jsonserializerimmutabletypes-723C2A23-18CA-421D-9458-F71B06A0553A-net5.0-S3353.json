@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3353",
-"message":  "Add the 'const' modifier to 'json'.",
+"message":  "Add the 'const' modifier to 'json', and replace 'var' with 'string'.",
 "location":  {
 "uri":  "sources\Net5\Net5Samples\JsonSerializerImmutableTypes\Program.cs",
 "region":  {

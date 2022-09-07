@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3353",
-"message":  "Add the 'const' modifier to 'key'.",
+"message":  "Add the 'const' modifier to 'key', and replace 'var' with 'string'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S3353",
-"message":  "Add the 'const' modifier to 'cKey'.",
+"message":  "Add the 'const' modifier to 'cKey', and replace 'var' with 'string'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S3353",
-"message":  "Add the 'const' modifier to 'key'.",
+"message":  "Add the 'const' modifier to 'key', and replace 'var' with 'string'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
 "region":  {

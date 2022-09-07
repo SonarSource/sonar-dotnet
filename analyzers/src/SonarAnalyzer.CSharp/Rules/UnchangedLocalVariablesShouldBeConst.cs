@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -34,7 +35,8 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class UnchangedLocalVariablesShouldBeConst : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S3353";
-        private const string MessageFormat = "Add the 'const' modifier to '{0}'.";
+        private const string MessageFormat = "Add the 'const' modifier to '{0}'{1}."; // {1} is a placeholder for optional MessageFormatVarHint
+        private const string MessageFormatVarHint = ", and replace 'var' with '{0}'";
 
         private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
@@ -62,14 +64,14 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    localDeclaration?.Declaration?.Variables
-                        .Where(v => v?.Identifier != null)
-                        .Select(v => new { Syntax = v, Symbol = c.SemanticModel.GetDeclaredSymbol(v) })
-                        .Where(ss => ss.Symbol != null)
-                        .Where(ss => IsInitializedWithCompatibleConstant(ss.Syntax, c.SemanticModel, declaredType))
-                        .Where(ss => !HasMutableUsagesInMethod(ss.Syntax, ss.Symbol, c.SemanticModel))
+                    localDeclaration.Declaration?.Variables
+                        .Where(v => v is { Identifier: { } }
+                            // constant string interpolation is only valid in C# 10 and above
+                            && (c.SemanticModel.Compilation.IsAtLeastLanguageVersion(LanguageVersionEx.CSharp10) || !ContainsInterpolation(v))
+                            && IsInitializedWithCompatibleConstant(v, c.SemanticModel, declaredType)
+                            && !HasMutableUsagesInMethod(c.SemanticModel, v))
                         .ToList()
-                        .ForEach(ss => Report(ss.Syntax, c));
+                        .ForEach(x => Report(x, c));
                 },
                 SyntaxKind.LocalDeclarationStatement);
 
@@ -106,35 +108,17 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static bool IsInitializedWithCompatibleConstant(VariableDeclaratorSyntax variableDeclarator, SemanticModel semanticModel, DeclarationType declarationType)
-        {
-            var initializer = variableDeclarator?.Initializer?.Value;
-            if (initializer == null)
-            {
-                return false;
-            }
-            var constantValueContainer = semanticModel.GetConstantValue(initializer);
-            if (!constantValueContainer.HasValue)
-            {
-                return false;
-            }
+        private static bool IsInitializedWithCompatibleConstant(VariableDeclaratorSyntax variableDeclarator, SemanticModel semanticModel, DeclarationType declarationType) =>
+            variableDeclarator is { Initializer.Value: { } initializer }
+                && semanticModel.GetConstantValue(initializer) switch
+                {
+                    { HasValue: false } => false,
+                    { Value: string } => declarationType == DeclarationType.String,
+                    { Value: ValueType } => declarationType == DeclarationType.Value,
+                    _ => declarationType is DeclarationType.Reference or DeclarationType.String,
+                };
 
-            var constantValue = constantValueContainer.Value;
-            if (constantValue is string)
-            {
-                return declarationType == DeclarationType.String;
-            }
-            else if (constantValue is ValueType)
-            {
-                return declarationType == DeclarationType.Value;
-            }
-            else
-            {
-                return declarationType == DeclarationType.Reference || declarationType == DeclarationType.String;
-            }
-        }
-
-        private static bool HasMutableUsagesInMethod(VariableDeclaratorSyntax variable, ISymbol variableSymbol, SemanticModel semanticModel)
+        private static bool HasMutableUsagesInMethod(SemanticModel semanticModel, VariableDeclaratorSyntax variable)
         {
             var parentSyntax = variable.Ancestors().FirstOrDefault(IsMethodLike);
             if (parentSyntax == null)
@@ -147,31 +131,25 @@ namespace SonarAnalyzer.Rules.CSharp
                 parentSyntax = parentSyntax.Parent;
             }
 
-            return parentSyntax
-                .DescendantNodes()
-                .OfType<IdentifierNameSyntax>()
-                .Where(MatchesIdentifier)
-                .Any(x => IsMutatingUse(semanticModel, x));
+            var variableSymbol = semanticModel.GetDeclaredSymbol(variable);
+            return variableSymbol != null
+                && parentSyntax.DescendantNodes()
+                    .OfType<IdentifierNameSyntax>()
+                    .Where(x => x.GetName().Equals(variableSymbol.Name) && variableSymbol.Equals(semanticModel.GetSymbolInfo(x).Symbol))
+                    .Any(x => IsMutatingUse(semanticModel, x));
 
             static bool IsMethodLike(SyntaxNode arg) =>
-                arg is BaseMethodDeclarationSyntax
-                || arg is IndexerDeclarationSyntax
-                || arg is AccessorDeclarationSyntax
-                || arg is LambdaExpressionSyntax
-                || arg is GlobalStatementSyntax;
-
-            bool MatchesIdentifier(IdentifierNameSyntax id) =>
-                Equals(variableSymbol, semanticModel.GetSymbolInfo(id).Symbol);
+                arg is BaseMethodDeclarationSyntax or AccessorDeclarationSyntax or LambdaExpressionSyntax or GlobalStatementSyntax;
         }
 
         private static bool IsMutatingUse(SemanticModel semanticModel, IdentifierNameSyntax identifier) =>
             identifier.Parent switch
             {
-                AssignmentExpressionSyntax assignmentExpression => Equals(identifier, assignmentExpression?.Left),
+                AssignmentExpressionSyntax { Left: { } left } => identifier.Equals(left),
                 ArgumentSyntax argumentSyntax => argumentSyntax.IsInTupleAssignmentTarget() || !argumentSyntax.RefOrOutKeyword.IsKind(SyntaxKind.None),
-                PostfixUnaryExpressionSyntax _ => true,
-                PrefixUnaryExpressionSyntax _ => true,
-                _ => IsUsedAsLambdaExpression(semanticModel, identifier)
+                PostfixUnaryExpressionSyntax => true,
+                PrefixUnaryExpressionSyntax => true,
+                _ => IsUsedAsLambdaExpression(semanticModel, identifier),
             };
 
         private static bool IsUsedAsLambdaExpression(SemanticModel semanticModel, IdentifierNameSyntax identifier)
@@ -193,9 +171,19 @@ namespace SonarAnalyzer.Rules.CSharp
             return false;
         }
 
+        private static bool ContainsInterpolation(VariableDeclaratorSyntax declaratorSyntax) =>
+            declaratorSyntax is { Initializer.Value: { } initializer }
+                && initializer.DescendantNodesAndSelf().Any(x => x.IsKind(SyntaxKind.Interpolation));
+
         private static void Report(VariableDeclaratorSyntax declaratorSyntax, SyntaxNodeAnalysisContext c) =>
             c.ReportIssue(Diagnostic.Create(Rule,
                 declaratorSyntax.Identifier.GetLocation(),
-                declaratorSyntax.Identifier.ValueText));
+                declaratorSyntax.Identifier.ValueText,
+                AddionalMessageHints(c.SemanticModel, declaratorSyntax)));
+
+        private static string AddionalMessageHints(SemanticModel semanticModel, VariableDeclaratorSyntax declaratorSyntax) =>
+            declaratorSyntax is { Parent: VariableDeclarationSyntax { Type: { IsVar: true } typeSyntax } }
+                ? string.Format(MessageFormatVarHint, semanticModel.GetTypeInfo(typeSyntax).Type.ToMinimalDisplayString(semanticModel, typeSyntax.SpanStart))
+                : string.Empty;
     }
 }

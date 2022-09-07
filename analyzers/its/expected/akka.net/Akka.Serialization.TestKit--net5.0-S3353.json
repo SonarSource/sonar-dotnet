@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3353",
-"message":  "Add the 'const' modifier to 'message'.",
+"message":  "Add the 'const' modifier to 'message', and replace 'var' with 'decimal'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\AkkaSerializationSpec.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S3353",
-"message":  "Add the 'const' modifier to 'message'.",
+"message":  "Add the 'const' modifier to 'message', and replace 'var' with 'long'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\AkkaSerializationSpec.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S3353",
-"message":  "Add the 'const' modifier to 'message'.",
+"message":  "Add the 'const' modifier to 'message', and replace 'var' with 'double'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\AkkaSerializationSpec.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S3353",
-"message":  "Add the 'const' modifier to 'message'.",
+"message":  "Add the 'const' modifier to 'message', and replace 'var' with 'int'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\AkkaSerializationSpec.cs",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S3353",
-"message":  "Add the 'const' modifier to 'message'.",
+"message":  "Add the 'const' modifier to 'message', and replace 'var' with 'float'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\AkkaSerializationSpec.cs",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S3353",
-"message":  "Add the 'const' modifier to 'uri'.",
+"message":  "Add the 'const' modifier to 'uri', and replace 'var' with 'string'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\AkkaSerializationSpec.cs",
 "region":  {
@@ -80,7 +80,7 @@
 },
 {
 "id":  "S3353",
-"message":  "Add the 'const' modifier to 'uri'.",
+"message":  "Add the 'const' modifier to 'uri', and replace 'var' with 'string'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\AkkaSerializationSpec.cs",
 "region":  {

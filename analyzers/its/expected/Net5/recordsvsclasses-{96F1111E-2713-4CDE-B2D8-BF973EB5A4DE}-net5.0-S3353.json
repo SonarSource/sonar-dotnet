@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3353",
-"message":  "Add the 'const' modifier to 'user'.",
+"message":  "Add the 'const' modifier to 'user', and replace 'var' with 'string?'.",
 "location":  {
 "uri":  "sources\Net5\Net5Samples\RecordsVsClasses\Program.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S3353",
-"message":  "Add the 'const' modifier to 'password'.",
+"message":  "Add the 'const' modifier to 'password', and replace 'var' with 'string?'.",
 "location":  {
 "uri":  "sources\Net5\Net5Samples\RecordsVsClasses\Program.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S3353",
-"message":  "Add the 'const' modifier to 'rememberMe'.",
+"message":  "Add the 'const' modifier to 'rememberMe', and replace 'var' with 'bool'.",
 "location":  {
 "uri":  "sources\Net5\Net5Samples\RecordsVsClasses\Program.cs",
 "region":  {
