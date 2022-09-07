@@ -92,7 +92,7 @@ namespace Tests.Diagnostics
         void Test_Exception()
         {
             Exception exc = null;
-            throw exc; // FIXME Non-compliant
+            throw exc; // FN, was supported in the old engine. Throw is a branch in Roslyn CFG.
         }
 
         void Test_Exception_Ok()
@@ -193,7 +193,7 @@ namespace Tests.Diagnostics
             var b = a;
             if (a == null)
             {
-                var s = b.ToString(); // FIXME Non-compliant
+                var s = b.ToString(); // FN, was supported in the old engine. Requires relations from MMF-2563
             }
         }
 
@@ -267,7 +267,7 @@ namespace Tests.Diagnostics
             var t = i.GetType();
 
             i = null;
-            var t2 = i.GetType(); // FIXME Non-compliant
+            var t2 = i.GetType(); // FN, was supported in the old engine. Should be fixed by MMF-2401
         }
 
         static void MultiplePop()
@@ -1162,7 +1162,7 @@ public class Repro_5289
 
         if (a != null)
         {
-            B(a.Length); // FIXME Non-compliant FP, the unrelated "A(ref s)" call breaks constraint on "a" variable
+            B(a.Length);
         }
     }
 }
