@@ -785,7 +785,7 @@ public async System.Threading.Tasks.Task Main(System.Threading.Tasks.Task T)
             var validator = SETestContext.CreateCSMethod(code, addConstraint).Validator;
             validator.ValidateTag("Before", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
             validator.ValidateTag("Before", x => x.HasConstraint(LockConstraint.Held).Should().BeTrue());
-            validator.ValidateTag("After", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());  // FIXME: Should BeFalse() instead
+            validator.ValidateTag("After", x => x.HasConstraint(ObjectConstraint.Null).Should().BeFalse());
             validator.ValidateTag("After", x => x.HasConstraint(LockConstraint.Held).Should().BeTrue("this constraint should be preserved on fields"));
         }
     }
