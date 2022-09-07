@@ -886,25 +886,25 @@ namespace Tests.Diagnostics
     {
         public void StringIsNullOrEmpty_Invocation(object arg)
         {
-            if (string.IsNullOrEmpty(arg?.ToString())
+            if (string.IsNullOrEmpty(arg?.ToString()))
             {
                 arg.ToString(); // Noncompliant
             }
             else
             {
-                arg.ToString(); // Noncompliant FP FIXME
+                arg.ToString(); // Compliant
             }
         }
 
         public void StringIsNullOrEmpty_Property(Exception arg)
         {
-            if (string.IsNullOrEmpty(arg?.Message)
+            if (string.IsNullOrEmpty(arg?.Message))
             {
                 arg.ToString(); // Noncompliant
             }
             else
             {
-                arg.ToString(); // Noncompliant FP FIXME
+                arg.ToString(); // Compliant
             }
         }
 

@@ -641,9 +641,7 @@ Tag(""End"", arg);";
             validator.TagValues("If").Should().HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
-            validator.TagValues("Else").Should().HaveCount(2)
-                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))     // FIXME: This is wrong and should not be here
-                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
