@@ -47,9 +47,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                 {
                     var fieldSymbol = kvp.Key;
                     var symbolValue = kvp.Value;
-                    foreach (var constraint in symbolValue.AllConstraints().Where(x => x.InvalidateForFieldsOnInvocation))
+                    foreach (var constraint in symbolValue.AllConstraints().Where(x => x.InvalidateForFieldsOnInvocation).ToList())
                     {
-                        state = state.SetSymbolValue(fieldSymbol, symbolValue.WithoutConstraint(constraint));
+                        symbolValue = symbolValue.WithoutConstraint(constraint);
+                        state = state.SetSymbolValue(fieldSymbol, symbolValue);
                     }
                 }
             }

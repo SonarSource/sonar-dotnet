@@ -59,4 +59,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         public override bool InvalidateForFieldsOnInvocation { get; }
         protected override string Name { get; }
     }
+
+    internal class ConfigurableConstraint<TContraintDiscriminator> : ConfigurableConstraint
+    {
+        public ConfigurableConstraint(SymbolicConstraint opposite, bool invalidateForFieldsOnInvocation, string name)
+            : base(opposite, invalidateForFieldsOnInvocation, $"{name}: {typeof(TContraintDiscriminator).Name}") { }
+    }
 }

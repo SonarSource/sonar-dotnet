@@ -310,45 +310,53 @@ public class Sample
     private void DoSomething() {{ }}
     private static void Tag(string name, object arg) {{ }}
 }}";
+            var invalidateConstraint = new ConfigurableConstraint<int>(opposite: null, invalidateForFieldsOnInvocation: true, "Invalidate");
+            var dontInvalidateConstraint = new ConfigurableConstraint<bool>(opposite: null, invalidateForFieldsOnInvocation: false, "DontInvalidate");
             var check = new PostProcessTestCheck(x => x.Operation.Instance.Kind == OperationKindEx.SimpleAssignment
                 && IFieldReferenceOperationWrapper.FromOperation(ISimpleAssignmentOperationWrapper.FromOperation(x.Operation.Instance).Target).Member is var field1
-                ? x.SetSymbolConstraint(field1, TestConstraint.First).SetSymbolConstraint(field1, TestConstraint.Second)
+                ? x.SetSymbolConstraint(field1, invalidateConstraint).SetSymbolConstraint(field1, dontInvalidateConstraint)
                 : x.State);
             var validator = new SETestContext(code, AnalyzerLanguage.CSharp, new SymbolicCheck[] { check }).Validator;
             validator.ValidateContainsOperation(OperationKind.Invocation);
             validator.ValidateTag("Init", x =>
             {
                 x.HasConstraint(ObjectConstraint.Null).Should().BeTrue();
-                x.HasConstraint(TestConstraint.First).Should().BeTrue();
+                x.HasConstraint(invalidateConstraint).Should().BeTrue();
+                x.HasConstraint(dontInvalidateConstraint).Should().BeTrue();
             });
             validator.ValidateTag("AfterInvocation", x =>
             {
                 x.HasConstraint(ObjectConstraint.Null).Should().BeFalse();
-                x.HasConstraint(TestConstraint.First).Should().BeTrue();
+                x.HasConstraint(invalidateConstraint).Should().BeFalse();
+                x.HasConstraint(dontInvalidateConstraint).Should().BeTrue();
             });
             validator.ValidateTag("IfBefore", x =>
             {
                 x.HasConstraint(ObjectConstraint.Null).Should().BeTrue();
-                x.HasConstraint(TestConstraint.First).Should().BeTrue();
+                x.HasConstraint(invalidateConstraint).Should().BeFalse();
+                x.HasConstraint(dontInvalidateConstraint).Should().BeTrue();
             });
             validator.ValidateTag("IfAfter", x =>
             {
                 x.HasConstraint(ObjectConstraint.Null).Should().BeFalse();
-                x.HasConstraint(TestConstraint.First).Should().BeTrue();
+                x.HasConstraint(invalidateConstraint).Should().BeFalse();
+                x.HasConstraint(dontInvalidateConstraint).Should().BeTrue();
             });
             validator.ValidateTag("ElseBefore", x =>
             {
                 x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue();
-                x.HasConstraint(TestConstraint.First).Should().BeTrue();
+                x.HasConstraint(invalidateConstraint).Should().BeFalse();
+                x.HasConstraint(dontInvalidateConstraint).Should().BeTrue();
             });
             validator.ValidateTag("ElseAfter", x =>
             {
                 x.HasConstraint(ObjectConstraint.NotNull).Should().BeFalse();
-                x.HasConstraint(TestConstraint.First).Should().BeTrue();
+                x.HasConstraint(invalidateConstraint).Should().BeFalse();
+                x.HasConstraint(dontInvalidateConstraint).Should().BeTrue();
             });
             validator.TagValues("AfterIfElse").Should().Equal(new SymbolicValue[]
             {
-                new SymbolicValue().WithConstraint(TestConstraint.First),
+                new SymbolicValue().WithConstraint(dontInvalidateConstraint),
             });
         }
     }
