@@ -31,6 +31,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void UnchangedLocalVariablesShouldBeConst() =>
             verifier.AddPaths("UnchangedLocalVariablesShouldBeConst.cs").Verify();
 
+        [TestMethod]
+        public void UnchangedLocalVariablesShouldBeConst_CSharp7() =>
+            verifier.AddPaths("UnchangedLocalVariablesShouldBeConst.CSharp7.cs").WithOptions(ParseOptionsHelper.OnlyCSharp7).Verify();
+
 #if NET
 
         [TestMethod]
