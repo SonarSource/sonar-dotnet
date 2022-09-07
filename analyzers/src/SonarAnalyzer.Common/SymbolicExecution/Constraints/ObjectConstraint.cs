@@ -32,5 +32,7 @@ namespace SonarAnalyzer.SymbolicExecution.Constraints
 
         protected override string Name =>
             this == Null ? nameof(Null) : nameof(NotNull);
+
+        private ObjectConstraint() { }
     }
 }
