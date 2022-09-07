@@ -19,7 +19,9 @@
  */
 
 using Microsoft.CodeAnalysis.Operations;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.SymbolicExecution.Constraints;
+using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 using StyleCop.Analyzers.Lightup;
 
@@ -494,7 +496,67 @@ Tag(""This"", fromThis);";
         }
 
         [TestMethod]
-        public void FieldReference_Read_SetsNotNull()
+        public void Invocation_ValidatedNotNullAttribute_SetsNotNullOnArgumentsMarkedWithAttribute()
+        {
+            var code = @"
+using System;
+
+public class Sample
+{
+    public void Main(object o1, object o2, object o3, object o4, object o5, object o6, object o7, object o8, string s1, string s2)
+    {
+        Guard.NotNullExt(o1);
+        o2.NotNullExt();
+        NotNullInst(o3);
+        NotNullInst(o4, o5);
+        NotNullInst(value2: o6, value1: o7, value3: o8);  // value2 is not annotated
+        NotNullRefOut(ref s1, out s2);
+        Tag(""AfterGuard_o1"", o1);
+        Tag(""AfterGuard_o2"", o2);
+        Tag(""AfterGuard_o3"", o3);
+        Tag(""AfterGuard_o4"", o4);
+        Tag(""AfterGuard_o5"", o5);
+        Tag(""AfterGuard_o6"", o6);
+        Tag(""AfterGuard_o7"", o7);
+        Tag(""AfterGuard_o8"", o8);
+        Tag(""AfterGuard_s1"", s1);
+        Tag(""AfterGuard_s2"", s2);
+    }
+
+    private void NotNullInst([ValidatedNotNullAttribute] object value)
+    {
+        // Skip implementation to make sure, the attribute is driving the constraint
+    }
+
+    private void NotNullInst([ValidatedNotNullAttribute] object value1, [ValidatedNotNullAttribute] object value2) { }
+    private void NotNullInst<T1, T2, T3>([ValidatedNotNullAttribute] T1 value1, T2 value2, [ValidatedNotNullAttribute] T3 value3) { }
+    private void NotNullRefOut<T1, T2>([ValidatedNotNullAttribute] ref T1 value1, [ValidatedNotNullAttribute] out T2 value2) { value1 = default; value2 = default; }
+
+    private static void Tag(string name, object arg) { }
+}
+
+public sealed class ValidatedNotNullAttribute : Attribute { }
+
+public static class Guard
+{
+    public static void NotNullExt<T>([ValidatedNotNullAttribute] this T value) where T : class { }
+}
+";
+            var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
+            validator.ValidateTag("AfterGuard_o1", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("AfterGuard_o2", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("AfterGuard_o3", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("AfterGuard_o4", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("AfterGuard_o5", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("AfterGuard_o6", x => x.Should().BeNull()); // parameter is not annotated
+            validator.ValidateTag("AfterGuard_o7", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("AfterGuard_o8", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("AfterGuard_s1", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("AfterGuard_s2", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void Invocation_Read_SetsNotNull()
         {
             const string code = @"
 _ = StaticField;            // Do not fail, do nothing
