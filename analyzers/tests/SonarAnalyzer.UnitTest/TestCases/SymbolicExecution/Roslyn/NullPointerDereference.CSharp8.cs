@@ -25,9 +25,13 @@ namespace Tests.Diagnostics.CSharp8
             name = name ?? name.ToString(); // Noncompliant
         }
 
-        public void NullCoalesce_Conversion(Exception arg)  // Classes doesn't make sense here. They just demonstrate the flow.
+        public void NullCoalesce_Conversion_DownCast(ArgumentException arg)
         {
-            var value = arg as IDisposable ?? new FileStream(arg.Message, FileMode.Open);  // Noncompliant, if arg is null, it will throw
+            var value = arg as Exception ?? new Exception(arg.Message);     // Noncompliant, arg must be null on the right side
+        }
+        public void NullCoalesce_Conversion_UpCast(Exception arg)
+        {
+            var value = arg as ArgumentException ?? new ArgumentException(arg.Message);     // Noncompliant, arg can be null or another Exception type on the right side
         }
 
         public void NullCoalescenceAssignment_Null()
