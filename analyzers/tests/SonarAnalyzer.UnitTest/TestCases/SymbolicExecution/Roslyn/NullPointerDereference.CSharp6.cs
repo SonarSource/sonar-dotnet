@@ -170,7 +170,7 @@ namespace Tests.Diagnostics
             switch (obj?.Color)
             {
                 case ConsoleColor.Red:
-                    Console.ForegroundColor = obj.Color;  // Noncompliant FIXME was compliant before
+                    Console.ForegroundColor = obj.Color;  // Noncompliant FP, was compliant in the old engine. Should be fixed by MMF-2401
 //                                            ^^^    {{'obj' is null on at least one execution path.}}
                     break;
                 default:
