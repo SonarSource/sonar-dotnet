@@ -634,6 +634,21 @@ Tag(""End"", arg);";
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
         }
 
+        [TestMethod]
+        public void Branching_IsNullOperation()
+        {
+            var validator = CreateIfElseEndValidatorCS("string.IsNullOrEmpty(arg?.ToString())", OperationKind.IsNull);
+            validator.TagValues("If").Should().HaveCount(2)
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
+            validator.TagValues("Else").Should().HaveCount(2)
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))     // FIXME: This is wrong and should not be here
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
+        }
+
         private static ValidatorTestCheck CreateIfElseEndValidatorCS(string expression, OperationKind expectedOperation, string argType = "object")
         {
             var code = @$"
