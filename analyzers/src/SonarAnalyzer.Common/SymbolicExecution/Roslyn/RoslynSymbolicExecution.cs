@@ -148,7 +148,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         private ProgramState ProcessBranchState(ControlFlowBranch branch, ProgramState state)
         {
-            foreach (var local in branch.EnteringRegions.SelectMany(x => x.Locals))
+            foreach (var local in branch.EnteringRegions.SelectMany(x => x.Locals).Where(x => x.Language == LanguageNames.VisualBasic)) // This is needed as we don't support tuple deconstructions yet
             {
                 if (ConstantCheck.ConstraintFromType(local.Type) is { } constraint)
                 {

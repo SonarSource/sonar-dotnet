@@ -17,7 +17,7 @@ public class Sample
     {
         StringBuilder isNull, hasValue;
         (isNull, hasValue) = (null, new StringBuilder());
-        isNull.ToString();      // Noncompliant
-        hasValue.ToString();    // Noncompliant FP
+        isNull.ToString();      // FN
+        hasValue.ToString();
     }
 }
