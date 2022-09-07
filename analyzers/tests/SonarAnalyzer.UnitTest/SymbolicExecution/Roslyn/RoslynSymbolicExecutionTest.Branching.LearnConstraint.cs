@@ -635,13 +635,30 @@ Tag(""End"", arg);";
         }
 
         [TestMethod]
-        public void Branching_IsNullOperation()
+        public void Branching_IsNullOperation_WithIsNullOrEmpty()
         {
             var validator = CreateIfElseEndValidatorCS("string.IsNullOrEmpty(arg?.ToString())", OperationKind.IsNull);
             validator.TagValues("If").Should().HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
             validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
+        }
+
+        [DataTestMethod]
+        [DataRow("arg?.Length == 0")]
+        [DataRow("0 == arg?.Length")]
+        public void Branching_IsNullOperation_Equals(string expression)
+        {
+            var validator = CreateIfElseEndValidatorCS(expression, OperationKind.IsNull, "string");
+            validator.TagValues("If").Should().HaveCount(2)
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null)) // ToDo: MMF-2401 This should not be here
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
+            validator.TagValues("Else").Should().HaveCount(2)
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));

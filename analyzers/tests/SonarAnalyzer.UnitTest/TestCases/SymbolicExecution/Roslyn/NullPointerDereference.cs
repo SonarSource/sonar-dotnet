@@ -912,11 +912,11 @@ namespace Tests.Diagnostics
         {
             if (arg?.Length == 0)
             {
-                arg.ToString(); // Noncompliant
+                arg.ToString(); // Noncompliant FP related to nullable binary equals
             }
             else
             {
-                arg.ToString(); // Noncompliant FP FIXME
+                arg.ToString(); // Noncompliant
             }
         }
     }
