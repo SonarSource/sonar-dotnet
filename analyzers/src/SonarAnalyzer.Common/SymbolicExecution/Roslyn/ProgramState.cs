@@ -94,6 +94,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public IEnumerable<ISymbol> SymbolsWith(SymbolicConstraint constraint) =>
             SymbolValue.Where(x => x.Value != null && x.Value.HasConstraint(constraint)).Select(x => x.Key);
 
+        public IReadOnlyDictionary<ISymbol, SymbolicValue> SymbolValues() =>
+            SymbolValue;
+
         public ProgramState ResetOperations()
         {
             var captured = CaptureOperation.Values.ToHashSet(); // Preserve only captured

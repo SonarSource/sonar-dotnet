@@ -30,6 +30,8 @@ namespace SonarAnalyzer.SymbolicExecution.Constraints
             // x == "" ? <NotNull> : <unknown, could be Null or NotNull here>
             this == Null ? NotNull : null;
 
+        public override bool InvalidateForFieldsOnInvocation => true;
+
         protected override string Name =>
             this == Null ? nameof(Null) : nameof(NotNull);
 

@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using SonarAnalyzer.Helpers;
@@ -62,6 +63,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         public T Constraint<T>() where T : SymbolicConstraint =>
             Constraints.TryGetValue(typeof(T), out var value) ? (T)value : null;
+
+        public IEnumerable<SymbolicConstraint> AllConstraints() =>
+            Constraints.Values;
 
         public override int GetHashCode() =>
             HashCode.DictionaryContentHash(Constraints);

@@ -42,10 +42,15 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                     && arguments[0] is { Kind: OperationKindEx.Argument }
                     && IArgumentOperationWrapper.FromOperation(arguments[0]).Value.UnwrapConversion() is { Kind: OperationKindEx.InstanceReference }))
             {
-                // Invocations on "this" removes IsNull constraints on fields. We assume the fields initialized after a call.
-                foreach (var field in state.SymbolsWith(ObjectConstraint.Null).OfType<IFieldSymbol>().Where(x => !x.IsStatic))
+                // Invocations on "this" remove some constraints on fields. The reason is we assume the fields initialized after a call.
+                foreach (var kvp in state.SymbolValues().Where(x => x.Key is IFieldSymbol field && !field.IsStatic))
                 {
-                    state = state.SetSymbolValue(field, state[field].WithoutConstraint(ObjectConstraint.Null));
+                    var fieldSymbol = kvp.Key;
+                    var symbolValue = kvp.Value;
+                    foreach (var constraint in symbolValue.AllConstraints().Where(x => x.InvalidateForFieldsOnInvocation))
+                    {
+                        state = state.SetSymbolValue(fieldSymbol, symbolValue.WithoutConstraint(constraint));
+                    }
                 }
             }
             return state;

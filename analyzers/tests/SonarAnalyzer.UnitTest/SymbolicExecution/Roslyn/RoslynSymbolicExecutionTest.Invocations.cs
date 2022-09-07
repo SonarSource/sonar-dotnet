@@ -342,13 +342,12 @@ public class Sample
             });
             validator.ValidateTag("ElseAfter", x =>
             {
-                x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue();
+                x.HasConstraint(ObjectConstraint.NotNull).Should().BeFalse();
                 x.HasConstraint(TestConstraint.First).Should().BeTrue();
             });
             validator.TagValues("AfterIfElse").Should().Equal(new SymbolicValue[]
             {
                 new SymbolicValue().WithConstraint(TestConstraint.First),
-                new SymbolicValue().WithConstraint(TestConstraint.First).WithConstraint(ObjectConstraint.NotNull),
             });
         }
     }
