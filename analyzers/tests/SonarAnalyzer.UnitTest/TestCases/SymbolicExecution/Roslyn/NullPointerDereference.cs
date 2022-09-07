@@ -881,6 +881,45 @@ namespace Tests.Diagnostics
                 Console.WriteLine(someString.Length); // Noncompliant FP, this path is unreachable
         }
     }
+
+    public class Conditional
+    {
+        public void StringIsNullOrEmpty_Invocation(object arg)
+        {
+            if (string.IsNullOrEmpty(arg?.ToString()))
+            {
+                arg.ToString(); // Noncompliant
+            }
+            else
+            {
+                arg.ToString(); // Compliant
+            }
+        }
+
+        public void StringIsNullOrEmpty_Property(Exception arg)
+        {
+            if (string.IsNullOrEmpty(arg?.Message))
+            {
+                arg.ToString(); // Noncompliant
+            }
+            else
+            {
+                arg.ToString(); // Compliant
+            }
+        }
+
+        public void StringIsNullOrEmpty_Property2(string arg)
+        {
+            if (arg?.Length == 0)
+            {
+                arg.ToString(); // Noncompliant FP related to nullable binary equals
+            }
+            else
+            {
+                arg.ToString(); // Noncompliant
+            }
+        }
+    }
 }
 
 // https://github.com/SonarSource/sonar-dotnet/issues/3395

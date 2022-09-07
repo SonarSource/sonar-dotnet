@@ -70,11 +70,7 @@ if (!string.IsNullOrEmpty(exception?.Message))
 }
 Tag(""ExceptionAfterCheck"", exception);";
             var validator = SETestContext.CreateCS(code, ", InvalidOperationException exception").Validator;
-            validator.TagValues("ExceptionChecked").Should().Equal(new[]
-            {
-                new SymbolicValue().WithConstraint(ObjectConstraint.Null),   // Wrong. Exception is known to be not null here.
-                new SymbolicValue().WithConstraint(ObjectConstraint.NotNull)
-            });
+            validator.ValidateTag("ExceptionChecked", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.TagValues("ExceptionAfterCheck").Should().Equal(new[]
             {
                 new SymbolicValue().WithConstraint(ObjectConstraint.Null),
