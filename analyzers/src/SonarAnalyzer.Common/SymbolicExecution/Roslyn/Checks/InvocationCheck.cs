@@ -42,7 +42,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
                 ? context.State[argumentSymbol]?.Constraint<ObjectConstraint>() switch
                 {
                     ObjectConstraint constraint when constraint == ObjectConstraint.NotNull => null, // The "normal" state handling reflects already what is going on.
-                    ObjectConstraint constraint when constraint == ObjectConstraint.Null => context.SetOperationConstraint(BoolConstraint.True), // IsNullOrEmpty(arg) returns true if arg is null
+                    ObjectConstraint constraint when constraint == ObjectConstraint.Null => new[] { context.SetOperationConstraint(BoolConstraint.True) }, // IsNullOrEmpty() is true if arg is null
                     _ => new[] // Explode the known states, these methods can create.
                     {
                             context.SetOperationConstraint(BoolConstraint.True).SetSymbolConstraint(argumentSymbol, ObjectConstraint.Null),

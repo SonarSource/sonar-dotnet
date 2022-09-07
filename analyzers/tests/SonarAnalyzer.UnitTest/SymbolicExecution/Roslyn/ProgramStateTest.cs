@@ -290,21 +290,6 @@ Captures:
 ");
         }
 
-        [TestMethod]
-        public void ProgramStateToArrayEncapsulatesSingleElement()
-        {
-            var programState = ProgramState.Empty;
-            ProgramState[] target = programState;
-            target.Should().NotBeNull().And.HaveCount(1).And.Equal(new[] { ProgramState.Empty });
-        }
-
-        [TestMethod]
-        public void ProgramStateToArrayConversionHandlesNull()
-        {
-            ProgramState[] target = (ProgramState)null;
-            target.Should().BeEmpty();
-        }
-
         private static ISymbol[] CreateSymbols()
         {
             const string code = @"public class Sample { public void Main() { var variable = 0; } }";
