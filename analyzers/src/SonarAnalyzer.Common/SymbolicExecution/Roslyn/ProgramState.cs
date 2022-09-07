@@ -115,6 +115,22 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public ProgramState RemoveSymbols(Func<ISymbol, bool> remove) =>
             this with { SymbolValue = SymbolValue.Where(kv => PreservedSymbols.Contains(kv.Key) || !remove(kv.Key)).ToImmutableDictionary() };
 
+        public ProgramState ResetFieldConstraints()
+        {
+            var state = this;
+            foreach (var kvp in SymbolValue.Where(x => x.Key is IFieldSymbol field && !field.IsStatic))
+            {
+                var fieldSymbol = kvp.Key;
+                var symbolValue = kvp.Value;
+                foreach (var constraint in symbolValue.AllConstraints().Where(x => x.InvalidateForFieldsOnInvocation).ToList())
+                {
+                    symbolValue = symbolValue.WithoutConstraint(constraint);
+                    state = state.SetSymbolValue(fieldSymbol, symbolValue);
+                }
+            }
+            return state;
+        }
+
         public ProgramState AddVisit(int programPointHash) =>
             this with { VisitCount = VisitCount.SetItem(programPointHash, GetVisitCount(programPointHash) + 1) };
 
