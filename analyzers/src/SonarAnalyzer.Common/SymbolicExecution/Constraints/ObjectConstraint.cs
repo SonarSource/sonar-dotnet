@@ -32,7 +32,8 @@ namespace SonarAnalyzer.SymbolicExecution.Constraints
             // x == "" ? <NotNull> : <unknown, could be Null or NotNull here>
             this == Null ? NotNull : null;
 
-        public override bool PreserveOnFieldReset(IFieldSymbol field) => field.IsStatic;
+        public override bool PreserveOnFieldReset(IFieldSymbol field) =>
+            field.IsStatic;
 
         protected override string Name =>
             this == Null ? nameof(Null) : nameof(NotNull);
