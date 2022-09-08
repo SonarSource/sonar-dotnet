@@ -21,7 +21,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Data;
 using System.Linq;
 using System.Text;
 using Microsoft.CodeAnalysis;
@@ -95,9 +94,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public IEnumerable<ISymbol> SymbolsWith(SymbolicConstraint constraint) =>
             SymbolValue.Where(x => x.Value != null && x.Value.HasConstraint(constraint)).Select(x => x.Key);
 
-        public IReadOnlyDictionary<ISymbol, SymbolicValue> SymbolValues() =>
-            SymbolValue;
-
         public ProgramState ResetOperations()
         {
             var captured = CaptureOperation.Values.ToHashSet(); // Preserve only captured
@@ -121,13 +117,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             var state = this;
             foreach (var kvp in SymbolValue)
             {
-                if (kvp is { Key: IFieldSymbol fieldSymbol, Value: { } symbolValue })
+                if (kvp is { Key: IFieldSymbol fieldSymbol, Value: { } symbolValue }
+                    && symbolValue.AllConstraints().Where(x => !x.PreserveOnFieldReset(fieldSymbol)).ToArray() is { Length: > 0 } resetConstraints)
                 {
-                    var resetConstraints = symbolValue.AllConstraints().Where(x => !x.PreserveOnFieldReset(fieldSymbol)).ToArray();
-                    if (resetConstraints.Length > 0)
-                    {
-                        state = state.SetSymbolValue(fieldSymbol, symbolValue.WithoutConstraint(resetConstraints));
-                    }
+                    state = state.SetSymbolValue(fieldSymbol, symbolValue.WithoutConstraint(resetConstraints));
                 }
             }
             return state;
