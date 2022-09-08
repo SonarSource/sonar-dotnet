@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Data;
 using System.Linq;
 using System.Text;
 using Microsoft.CodeAnalysis;
@@ -122,23 +123,14 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             {
                 if (kvp is { Key: IFieldSymbol fieldSymbol, Value: { } symbolValue })
                 {
-                    var resetConstraints = symbolValue.AllConstraints().Where(x => !x.PreserveOnFieldReset(fieldSymbol)).ToList();
-                    if (resetConstraints.Count > 0)
+                    var resetConstraints = symbolValue.AllConstraints().Where(x => !x.PreserveOnFieldReset(fieldSymbol)).ToArray();
+                    if (resetConstraints.Length > 0)
                     {
-                        state = state.SetSymbolValue(fieldSymbol, ResetConstraints(symbolValue, resetConstraints));
+                        state = state.SetSymbolValue(fieldSymbol, symbolValue.WithoutConstraint(resetConstraints));
                     }
                 }
             }
             return state;
-
-            static SymbolicValue ResetConstraints(SymbolicValue symbolValue, List<SymbolicConstraint> resetConstraints)
-            {
-                foreach (var constraint in resetConstraints)
-                {
-                    symbolValue = symbolValue.WithoutConstraint(constraint);
-                }
-                return symbolValue;
-            }
         }
 
         public ProgramState AddVisit(int programPointHash) =>
