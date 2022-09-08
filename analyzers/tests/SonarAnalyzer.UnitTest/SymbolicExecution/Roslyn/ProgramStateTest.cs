@@ -292,46 +292,16 @@ Captures:
         }
 
         [TestMethod]
-        public void ResetFieldConstraints_NotPreservesField()
-        {
-            var alwaysReset = PreserveOnFieldResetConstraint.AlwaysReset;
-            var field = GetFieldSymbol("object field;");
-            var sut = ProgramState.Empty;
-            sut = sut.SetSymbolValue(field, new SymbolicValue().WithConstraint(alwaysReset));
-            var symbolValue = sut[field];
-            symbolValue.HasConstraint(alwaysReset).Should().BeTrue();
-            sut = sut.ResetFieldConstraints();
-            symbolValue = sut[field];
-            symbolValue.HasConstraint(alwaysReset).Should().BeFalse();
-        }
+        public void ResetFieldConstraints_NotPreservesField() =>
+            ResetFieldConstraintTests(PreserveOnFieldResetConstraint.AlwaysReset, shouldBePreserved: false);
 
         [TestMethod]
-        public void ResetFieldConstraints_PreservesField()
-        {
-            var alwaysPreserve = PreserveOnFieldResetConstraint.AlwaysPreserve;
-            var field = GetFieldSymbol("object field;");
-            var sut = ProgramState.Empty;
-            sut = sut.SetSymbolValue(field, new SymbolicValue().WithConstraint(alwaysPreserve));
-            var symbolValue = sut[field];
-            symbolValue.HasConstraint(alwaysPreserve).Should().BeTrue();
-            sut = sut.ResetFieldConstraints();
-            symbolValue = sut[field];
-            symbolValue.HasConstraint(alwaysPreserve).Should().BeTrue();
-        }
+        public void ResetFieldConstraints_PreservesField() =>
+            ResetFieldConstraintTests(PreserveOnFieldResetConstraint.AlwaysPreserve, shouldBePreserved: true);
 
         [TestMethod]
-        public void ResetFieldConstraints_Default()
-        {
-            var defaultConstraint = PreserveOnFieldResetConstraint.Default;
-            var field = GetFieldSymbol("object field;");
-            var sut = ProgramState.Empty;
-            sut = sut.SetSymbolValue(field, new SymbolicValue().WithConstraint(defaultConstraint));
-            var symbolValue = sut[field];
-            symbolValue.HasConstraint(defaultConstraint).Should().BeTrue();
-            sut = sut.ResetFieldConstraints();
-            symbolValue = sut[field];
-            symbolValue.HasConstraint(defaultConstraint).Should().BeFalse();
-        }
+        public void ResetFieldConstraints_Default() =>
+            ResetFieldConstraintTests(PreserveOnFieldResetConstraint.Default, shouldBePreserved: false);
 
         [TestMethod]
         public void ResetFieldConstraints_ResetFieldsAsDefined()
@@ -362,6 +332,18 @@ Captures:
             var compiler = new SnippetCompiler($@"class C {{ {fieldDefinition} }}");
             var fieldSymbol = compiler.SemanticModel.GetDeclaredSymbol(compiler.GetNodes<VariableDeclaratorSyntax>().Single());
             return (IFieldSymbol)fieldSymbol;
+        }
+
+        private static void ResetFieldConstraintTests(PreserveOnFieldResetConstraint constraint, bool shouldBePreserved)
+        {
+            var field = GetFieldSymbol("object field;");
+            var sut = ProgramState.Empty;
+            sut = sut.SetSymbolValue(field, new SymbolicValue().WithConstraint(constraint));
+            var symbolValue = sut[field];
+            symbolValue.HasConstraint(constraint).Should().BeTrue();
+            sut = sut.ResetFieldConstraints();
+            symbolValue = sut[field];
+            symbolValue.HasConstraint(constraint).Should().Be(shouldBePreserved);
         }
 
         private static ISymbol[] CreateSymbols()
