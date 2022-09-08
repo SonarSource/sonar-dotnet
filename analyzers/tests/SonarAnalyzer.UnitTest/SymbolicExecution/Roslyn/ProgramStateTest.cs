@@ -320,6 +320,20 @@ Captures:
         }
 
         [TestMethod]
+        public void ResetFieldConstraints_Default()
+        {
+            var defaultConstraint = PreserveOnFieldResetConstraint.Default;
+            var field = GetFieldSymbol("object field;");
+            var sut = ProgramState.Empty;
+            sut = sut.SetSymbolValue(field, new SymbolicValue().WithConstraint(defaultConstraint));
+            var symbolValue = sut[field];
+            symbolValue.HasConstraint(defaultConstraint).Should().BeTrue();
+            sut = sut.ResetFieldConstraints();
+            symbolValue = sut[field];
+            symbolValue.HasConstraint(defaultConstraint).Should().BeFalse();
+        }
+
+        [TestMethod]
         public void ResetFieldConstraints_ResetFieldsAsDefined()
         {
             var instanceField = GetFieldSymbol("object field;");

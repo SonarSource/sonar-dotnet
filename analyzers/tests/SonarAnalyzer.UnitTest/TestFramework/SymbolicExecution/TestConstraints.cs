@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Runtime.CompilerServices;
 using SonarAnalyzer.SymbolicExecution;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
@@ -50,6 +49,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
     internal class PreserveOnFieldResetConstraint : SymbolicConstraint
     {
         private readonly Func<IFieldSymbol, bool> preserveOnFieldReset;
+        public static readonly PreserveOnFieldResetConstraint Default = new PreserveOnFieldResetConstraint(nameof(Default), null);
         public static readonly PreserveOnFieldResetConstraint AlwaysPreserve = new PreserveOnFieldResetConstraint(nameof(AlwaysPreserve), _ => true);
         public static readonly PreserveOnFieldResetConstraint AlwaysReset = new PreserveOnFieldResetConstraint(nameof(AlwaysReset), _ => false);
 
@@ -63,7 +63,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         }
 
         public override bool PreserveOnFieldReset(IFieldSymbol field) =>
-            preserveOnFieldReset(field);
+            (preserveOnFieldReset ?? base.PreserveOnFieldReset)(field);
 
         public static PreserveOnFieldResetConstraint DistingushConstraint<TDiscriminator>(Func<IFieldSymbol, bool> preserveOnFieldReset) =>
             new DistingushableConstraint<TDiscriminator>(preserveOnFieldReset);
