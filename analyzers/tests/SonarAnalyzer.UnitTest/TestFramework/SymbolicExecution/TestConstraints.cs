@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Runtime.CompilerServices;
 using SonarAnalyzer.SymbolicExecution;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
@@ -46,23 +47,30 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         private DummyConstraint() { }
     }
 
-    internal class ConfigurableConstraint : SymbolicConstraint
+    internal class PreserveOnFieldResetConstraint : SymbolicConstraint
     {
-        public ConfigurableConstraint(SymbolicConstraint opposite, bool invalidateForFieldsOnInvocation, string name)
+        private readonly Func<IFieldSymbol, bool> preserveOnFieldReset;
+        public static readonly PreserveOnFieldResetConstraint AlwaysPreserve = new PreserveOnFieldResetConstraint(nameof(AlwaysPreserve), _ => true);
+        public static readonly PreserveOnFieldResetConstraint AlwaysReset = new PreserveOnFieldResetConstraint(nameof(AlwaysReset), _ => false);
+
+        public override SymbolicConstraint Opposite => null;
+        protected override string Name { get; }
+
+        public PreserveOnFieldResetConstraint(string name, Func<IFieldSymbol, bool> preserveOnFieldReset)
         {
-            Opposite = opposite;
-            InvalidateForFieldsOnInvocation = invalidateForFieldsOnInvocation;
             Name = name;
+            this.preserveOnFieldReset = preserveOnFieldReset;
         }
 
-        public override SymbolicConstraint Opposite { get; }
-        public override bool InvalidateForFieldsOnInvocation { get; }
-        protected override string Name { get; }
-    }
+        public override bool PreserveOnFieldReset(IFieldSymbol field) =>
+            preserveOnFieldReset(field);
 
-    internal class ConfigurableConstraint<TContraintDiscriminator> : ConfigurableConstraint
-    {
-        public ConfigurableConstraint(SymbolicConstraint opposite, bool invalidateForFieldsOnInvocation, string name)
-            : base(opposite, invalidateForFieldsOnInvocation, $"{name}: {typeof(TContraintDiscriminator).Name}") { }
+        public static PreserveOnFieldResetConstraint DistingushConstraint<TDiscriminator>(Func<IFieldSymbol, bool> preserveOnFieldReset) =>
+            new DistingushableConstraint<TDiscriminator>(preserveOnFieldReset);
+
+        private class DistingushableConstraint<TDiscriminator> : PreserveOnFieldResetConstraint
+        {
+            public DistingushableConstraint(Func<IFieldSymbol, bool> preserveOnFieldReset) : base(typeof(TDiscriminator).Name, preserveOnFieldReset) { }
+        }
     }
 }

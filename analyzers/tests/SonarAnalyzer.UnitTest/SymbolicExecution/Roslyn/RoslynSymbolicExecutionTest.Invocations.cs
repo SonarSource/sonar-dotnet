@@ -310,8 +310,8 @@ public class Sample
     private void DoSomething() {{ }}
     private static void Tag(string name, object arg) {{ }}
 }}";
-            var invalidateConstraint = new ConfigurableConstraint<int>(opposite: null, invalidateForFieldsOnInvocation: true, "Invalidate");
-            var dontInvalidateConstraint = new ConfigurableConstraint<bool>(opposite: null, invalidateForFieldsOnInvocation: false, "DontInvalidate");
+            var invalidateConstraint = PreserveOnFieldResetConstraint.DistingushConstraint<object>(preserveOnFieldReset: _ => false);
+            var dontInvalidateConstraint = PreserveOnFieldResetConstraint.DistingushConstraint<bool>(preserveOnFieldReset: _ => true);
             var check = new PostProcessTestCheck(x => x.Operation.Instance.Kind == OperationKindEx.SimpleAssignment
                 && IFieldReferenceOperationWrapper.FromOperation(ISimpleAssignmentOperationWrapper.FromOperation(x.Operation.Instance).Target).Member is var field1
                 ? x.SetSymbolConstraint(field1, invalidateConstraint).SetSymbolConstraint(field1, dontInvalidateConstraint)
