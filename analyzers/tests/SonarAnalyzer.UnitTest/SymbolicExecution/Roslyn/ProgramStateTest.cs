@@ -19,7 +19,6 @@
  */
 
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Moq;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.Helpers;
@@ -323,25 +322,19 @@ Captures:
         [TestMethod]
         public void ResetFieldConstraints_ResetFieldsAsDefined()
         {
-            var instanceField = new Mock<IFieldSymbol>();
-            instanceField.Setup(x => x.IsStatic).Returns(false);
-            instanceField.Setup(x => x.Equals(It.IsIn(instanceField.Object))).Returns(true);
-            instanceField.Setup(x => x.GetHashCode()).Returns(1);
-            var staticField = new Mock<IFieldSymbol>();
-            staticField.Setup(x => x.Equals(It.IsIn(staticField.Object))).Returns(true);
-            staticField.Setup(x => x.GetHashCode()).Returns(2);
-            staticField.Setup(x => x.IsStatic).Returns(true);
+            var instanceField = GetFieldSymbol("object field;");
+            var staticField = GetFieldSymbol("static object field;");
 
             var preserveInstance = PreserveOnFieldResetConstraint.DistingushConstraint<bool>(preserveOnFieldReset: x => !x.IsStatic);
             var preserveAll = PreserveOnFieldResetConstraint.DistingushConstraint<byte>(preserveOnFieldReset: _ => true);
             var preserveNone = PreserveOnFieldResetConstraint.DistingushConstraint<int>(preserveOnFieldReset: _ => false);
 
             var sut = ProgramState.Empty;
-            sut = sut.SetSymbolValue(instanceField.Object, new SymbolicValue().WithConstraint(preserveInstance).WithConstraint(preserveAll).WithConstraint(preserveNone))
-                     .SetSymbolValue(staticField.Object, new SymbolicValue().WithConstraint(preserveInstance).WithConstraint(preserveAll).WithConstraint(preserveNone));
+            sut = sut.SetSymbolValue(instanceField, new SymbolicValue().WithConstraint(preserveInstance).WithConstraint(preserveAll).WithConstraint(preserveNone))
+                     .SetSymbolValue(staticField, new SymbolicValue().WithConstraint(preserveInstance).WithConstraint(preserveAll).WithConstraint(preserveNone));
             sut = sut.ResetFieldConstraints();
-            var instanceFieldSymbolValue = sut[instanceField.Object];
-            var staticFieldSymbolValue = sut[staticField.Object];
+            var instanceFieldSymbolValue = sut[instanceField];
+            var staticFieldSymbolValue = sut[staticField];
             instanceFieldSymbolValue.HasConstraint(preserveInstance).Should().BeTrue(because: "preserveInstance should be preserved for instance fields");
             instanceFieldSymbolValue.HasConstraint(preserveAll).Should().BeTrue(because: "preserveAll should be preserved for instance fields");
             instanceFieldSymbolValue.HasConstraint(preserveNone).Should().BeFalse(because: "preserveNone should not be preserved for instance fields");
