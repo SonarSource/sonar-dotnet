@@ -36,5 +36,20 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             || invocation.TargetMethod.IsAny(KnownType.System_Threading_ReaderWriterLockSlim, "ExitReadLock", "ExitWriteLock", "ExitUpgradeableReadLock")
             || invocation.TargetMethod.Is(KnownType.System_Threading_Mutex, "ReleaseMutex")
             || invocation.TargetMethod.Is(KnownType.System_Threading_SpinLock, "Exit");
+
+        /// <summary>
+        /// Returns <see langword="true"/>, if the method is an instance method, or an extension method, where the <see langword="this"/> this argument is <see langword="this"/>.
+        /// <list type="table">
+        /// <item><c>this.InstanceMethod()</c></item>
+        /// <item><c>this.ExtensionMethod()</c></item>
+        /// <item><c>Extensions.ExtensionMethod(this)</c></item>
+        /// </list>
+        /// </summary>
+        public static bool IsReceiverThis(this IInvocationOperationWrapper invocation) =>
+            invocation.Instance.UnwrapConversion() is { Kind: OperationKindEx.InstanceReference }
+            || (invocation is { TargetMethod.IsExtensionMethod: true, Arguments: { Length: > 0 } arguments }
+                && arguments[0] is { Kind: OperationKindEx.Argument }
+                && IArgumentOperationWrapper.FromOperation(arguments[0]).Value.UnwrapConversion() is { Kind: OperationKindEx.InstanceReference });
+
     }
 }

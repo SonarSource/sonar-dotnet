@@ -37,10 +37,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
             {
                 state = state.SetSymbolConstraint(symbol, ObjectConstraint.NotNull);
             }
-            if (invocation.Instance.UnwrapConversion() is { Kind: OperationKindEx.InstanceReference }
-                || (invocation is { TargetMethod.IsExtensionMethod: true, Arguments: { Length: > 0 } arguments }
-                    && arguments[0] is { Kind: OperationKindEx.Argument }
-                    && IArgumentOperationWrapper.FromOperation(arguments[0]).Value.UnwrapConversion() is { Kind: OperationKindEx.InstanceReference }))
+            if (invocation.IsReceiverThis())
             {
                 state = state.ResetFieldConstraints();
             }
