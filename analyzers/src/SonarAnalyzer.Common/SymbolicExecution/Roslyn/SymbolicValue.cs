@@ -51,7 +51,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 : this;
 
         public SymbolicValue WithoutConstraint(params SymbolicConstraint[] constraint) =>
-                this with { Constraints = Constraints.RemoveRange(constraint.Select(x => GetType())) };
+                this with { Constraints = Constraints.RemoveRange(constraint.Select(x => x.GetType())) };
 
         public SymbolicValue WithoutConstraint<T>() where T : SymbolicConstraint =>
             HasConstraint<T>()
