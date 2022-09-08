@@ -38,7 +38,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             || invocation.TargetMethod.Is(KnownType.System_Threading_SpinLock, "Exit");
 
         /// <summary>
-        /// Returns <see langword="true"/>, if the method is an instance method, or an extension method, where the argument passed to the receiver parameter is <see langword="this"/>.
+        /// Returns <see langword="true"/>, if the method is an instance method, or an extension method, where the argument passed to the re    ceiver parameter is <see langword="this"/>.
         /// <list type="table">
         /// <item><c>this.InstanceMethod()</c></item>
         /// <item><c>this.ExtensionMethod()</c></item>
@@ -50,6 +50,5 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             || (invocation is { TargetMethod.IsExtensionMethod: true, Arguments: { Length: > 0 } arguments }
                 && arguments[0] is { Kind: OperationKindEx.Argument }
                 && IArgumentOperationWrapper.FromOperation(arguments[0]).Value.UnwrapConversion() is { Kind: OperationKindEx.InstanceReference });
-
     }
 }
