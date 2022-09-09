@@ -48,29 +48,30 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 
     internal class PreserveOnFieldResetConstraint : SymbolicConstraint
     {
-        private readonly Func<IFieldSymbol, bool> preserveOnFieldReset;
-        public static readonly PreserveOnFieldResetConstraint Default = new PreserveOnFieldResetConstraint(nameof(Default), null);
-        public static readonly PreserveOnFieldResetConstraint AlwaysPreserve = new PreserveOnFieldResetConstraint(nameof(AlwaysPreserve), _ => true);
-        public static readonly PreserveOnFieldResetConstraint AlwaysReset = new PreserveOnFieldResetConstraint(nameof(AlwaysReset), _ => false);
+        public static readonly PreserveOnFieldResetConstraint Default = new(nameof(Default), null);
+        public static readonly PreserveOnFieldResetConstraint AlwaysPreserve = new(nameof(AlwaysPreserve), true);
+        public static readonly PreserveOnFieldResetConstraint AlwaysReset = new(nameof(AlwaysReset), false);
+
+        private readonly bool? preserveOnFieldReset;
 
         public override SymbolicConstraint Opposite => null;
         protected override string Name { get; }
 
-        public PreserveOnFieldResetConstraint(string name, Func<IFieldSymbol, bool> preserveOnFieldReset)
+        public PreserveOnFieldResetConstraint(string name, bool? preserveOnFieldReset)
         {
             Name = name;
             this.preserveOnFieldReset = preserveOnFieldReset;
         }
 
-        public override bool PreserveOnFieldReset(IFieldSymbol field) =>
-            (preserveOnFieldReset ?? base.PreserveOnFieldReset)(field);
+        public override bool PreserveOnFieldReset =>
+            preserveOnFieldReset ?? base.PreserveOnFieldReset;
 
-        public static PreserveOnFieldResetConstraint DistingushConstraint<TDiscriminator>(Func<IFieldSymbol, bool> preserveOnFieldReset) =>
+        public static PreserveOnFieldResetConstraint DistingushConstraint<TDiscriminator>(bool preserveOnFieldReset) =>
             new DistingushableConstraint<TDiscriminator>(preserveOnFieldReset);
 
         private class DistingushableConstraint<TDiscriminator> : PreserveOnFieldResetConstraint
         {
-            public DistingushableConstraint(Func<IFieldSymbol, bool> preserveOnFieldReset) : base(typeof(TDiscriminator).Name, preserveOnFieldReset) { }
+            public DistingushableConstraint(bool preserveOnFieldReset) : base(typeof(TDiscriminator).Name, preserveOnFieldReset) { }
         }
     }
 }

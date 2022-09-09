@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
-
 namespace SonarAnalyzer.SymbolicExecution.Constraints
 {
     internal sealed class ObjectConstraint : SymbolicConstraint
@@ -31,9 +29,6 @@ namespace SonarAnalyzer.SymbolicExecution.Constraints
             // x == null ? <Null> : <NotNull>
             // x == "" ? <NotNull> : <unknown, could be Null or NotNull here>
             this == Null ? NotNull : null;
-
-        public override bool PreserveOnFieldReset(IFieldSymbol field) =>
-            field.IsStatic;
 
         protected override string Name =>
             this == Null ? nameof(Null) : nameof(NotNull);
