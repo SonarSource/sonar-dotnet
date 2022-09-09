@@ -164,14 +164,10 @@ public class Sample: IDisposable
     void Main()
     {{
         field1 = null;
-        field2 = null;
         staticField1 = null;
-        staticField2 = null;
         {invocation}
         Tag(""Field1"", field1);
-        Tag(""Field2"", field2);
         Tag(""StaticField1"", staticField1);
-        Tag(""StaticField2"", staticField2);
     }}
 
     private void Initialize() {{ }}
@@ -187,9 +183,7 @@ public static class Extensions
             var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
             validator.ValidateContainsOperation(OperationKind.Invocation);
             validator.ValidateTag("Field1", x => x.Constraint<ObjectConstraint>().Should().BeNull());
-            validator.ValidateTag("Field2", x => x.Constraint<ObjectConstraint>().Should().BeNull());
             validator.ValidateTag("StaticField1", x => x.Constraint<ObjectConstraint>().Should().BeNull());
-            validator.ValidateTag("StaticField2", x => x.Constraint<ObjectConstraint>().Should().BeNull());
         }
 
         [DataTestMethod]
@@ -207,21 +201,15 @@ public static class Extensions
 public class Sample
 {{
     object field1;
-    object field2;
     static object staticField1;
-    static object staticField2;
 
     void Main()
     {{
         field1 = null;
-        field2 = null;
         staticField1 = null;
-        staticField2 = null;
         {invocation}
         Tag(""Field1"", field1);
-        Tag(""Field2"", field2);
         Tag(""StaticField1"", staticField1);
-        Tag(""StaticField2"", staticField2);
     }}
 
     private void InstanceMethod() {{ }}
@@ -232,9 +220,7 @@ public class Sample
             var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
             validator.ValidateContainsOperation(OperationKind.Invocation);
             validator.ValidateTag("Field1", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-            validator.ValidateTag("Field2", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
             validator.ValidateTag("StaticField1", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-            validator.ValidateTag("StaticField2", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
         }
 
         [DataTestMethod]
@@ -247,22 +233,16 @@ public class Sample
 public class Sample
 {{
     object field1;
-    object field2;
     static object staticField1;
-    static object staticField2;
 
     void Main()
     {{
         field1 = null;
-        field2 = null;
         staticField1 = null;
-        staticField2 = null;
         var otherInstance = new Sample();
         {invocation}
         Tag(""Field1"", field1);
-        Tag(""Field2"", field2);
         Tag(""StaticField1"", staticField1);
-        Tag(""StaticField2"", staticField2);
     }}
 
     private void DoSomething() {{ }}
@@ -271,9 +251,7 @@ public class Sample
             var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
             validator.ValidateContainsOperation(OperationKind.Invocation);
             validator.ValidateTag("Field1", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-            validator.ValidateTag("Field2", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
             validator.ValidateTag("StaticField1", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-            validator.ValidateTag("StaticField2", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
         }
 
         [TestMethod]
