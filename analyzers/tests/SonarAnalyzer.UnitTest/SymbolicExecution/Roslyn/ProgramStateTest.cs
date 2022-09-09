@@ -306,8 +306,8 @@ Captures:
         [TestMethod]
         public void ResetFieldConstraints_ResetFieldsAsDefined()
         {
-            var instanceField = TestHelper.GetFieldSymbol("object field;");
-            var staticField = TestHelper.GetFieldSymbol("static object field;");
+            var instanceField = CreateFieldSymbol("object field;");
+            var staticField = CreateFieldSymbol("static object field;");
 
             var preserveAll = PreserveOnFieldResetConstraint.DistingushConstraint<byte>(preserveOnFieldReset: true);
             var preserveNone = PreserveOnFieldResetConstraint.DistingushConstraint<int>(preserveOnFieldReset: false);
@@ -324,9 +324,16 @@ Captures:
             staticFieldSymbolValue.HasConstraint(preserveNone).Should().BeFalse(because: "preserveNone should not be preserved for static fields");
         }
 
+        private static IFieldSymbol CreateFieldSymbol(string fieldDefinition)
+        {
+            var compiler = new SnippetCompiler($@"class C {{ {fieldDefinition} }}");
+            var fieldSymbol = compiler.SemanticModel.GetDeclaredSymbol(compiler.GetNodes<VariableDeclaratorSyntax>().Single());
+            return (IFieldSymbol)fieldSymbol;
+        }
+
         private static void ResetFieldConstraintTests(PreserveOnFieldResetConstraint constraint, bool expectIsPreserved)
         {
-            var field = TestHelper.GetFieldSymbol("object field;");
+            var field = CreateFieldSymbol("object field;");
             var sut = ProgramState.Empty;
             sut = sut.SetSymbolValue(field, new SymbolicValue().WithConstraint(constraint));
             var symbolValue = sut[field];

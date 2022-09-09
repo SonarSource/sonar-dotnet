@@ -185,13 +185,6 @@ End Class", AnalyzerLanguage.VisualBasic);
             return semanticModel.GetDeclaredSymbol(syntaxTree.GetMethod(name, skip));
         }
 
-        public static IFieldSymbol GetFieldSymbol(string fieldDefinition)
-        {
-            var compiler = new SnippetCompiler($@"class __C__ {{ {fieldDefinition} }}");
-            var fieldSymbol = compiler.SemanticModel.GetDeclaredSymbol(compiler.GetNodes<VariableDeclaratorSyntax>().Single());
-            return (IFieldSymbol)fieldSymbol;
-        }
-
         public static bool IsSecurityHotspot(DiagnosticDescriptor diagnostic)
         {
             var type = RuleTypeMappingCS.Rules.GetValueOrDefault(diagnostic.Id) ?? RuleTypeMappingVB.Rules.GetValueOrDefault(diagnostic.Id);
