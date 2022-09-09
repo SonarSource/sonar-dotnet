@@ -45,15 +45,4 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 
         private DummyConstraint() { }
     }
-
-    internal class PreserveOnFieldResetConstraint : SymbolicConstraint
-    {
-        public static readonly PreserveOnFieldResetConstraint Default = new();
-
-        public override SymbolicConstraint Opposite => null;
-        public override bool PreserveOnFieldReset { get; } = true;
-        protected override string Name { get; } = nameof(SymbolicConstraint.PreserveOnFieldReset);
-
-        private PreserveOnFieldResetConstraint() { }
-    }
 }

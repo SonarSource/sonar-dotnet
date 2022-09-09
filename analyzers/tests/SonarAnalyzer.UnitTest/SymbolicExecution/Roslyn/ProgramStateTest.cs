@@ -20,6 +20,8 @@
 
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Extensions;
+using SonarAnalyzer.SymbolicExecution;
+using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.Helpers;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
@@ -293,15 +295,11 @@ Captures:
 
         [TestMethod]
         public void ResetFieldConstraints_NotPreservesField() =>
-            ResetFieldConstraintTests(PreserveOnFieldResetConstraint.AlwaysReset, false);
+            ResetFieldConstraintTests(ObjectConstraint.Null, false);
 
         [TestMethod]
         public void ResetFieldConstraints_PreservesField() =>
-            ResetFieldConstraintTests(PreserveOnFieldResetConstraint.AlwaysPreserve, true);
-
-        [TestMethod]
-        public void ResetFieldConstraints_Default() =>
-            ResetFieldConstraintTests(PreserveOnFieldResetConstraint.Default, false);
+            ResetFieldConstraintTests(LockConstraint.Held, true);
 
         [TestMethod]
         public void ResetFieldConstraints_ResetFieldsAsDefined()
@@ -309,8 +307,8 @@ Captures:
             var instanceField = CreateFieldSymbol("object field;");
             var staticField = CreateFieldSymbol("static object field;");
 
-            var preserveAll = PreserveOnFieldResetConstraint.DistingushConstraint<byte>(preserveOnFieldReset: true);
-            var preserveNone = PreserveOnFieldResetConstraint.DistingushConstraint<int>(preserveOnFieldReset: false);
+            var preserveAll = LockConstraint.Held;
+            var preserveNone = ObjectConstraint.Null;
 
             var sut = ProgramState.Empty;
             sut = sut.SetSymbolValue(instanceField, new SymbolicValue().WithConstraint(preserveAll).WithConstraint(preserveNone))
@@ -331,7 +329,7 @@ Captures:
             return (IFieldSymbol)fieldSymbol;
         }
 
-        private static void ResetFieldConstraintTests(PreserveOnFieldResetConstraint constraint, bool expectIsPreserved)
+        private static void ResetFieldConstraintTests(SymbolicConstraint constraint, bool expectIsPreserved)
         {
             var field = CreateFieldSymbol("object field;");
             var sut = ProgramState.Empty;
