@@ -25,13 +25,14 @@ namespace Tests.Diagnostics.CSharp8
             name = name ?? name.ToString(); // Noncompliant
         }
 
-        public void NullCoalesce_Conversion_DownCast(ArgumentException arg)
+        public void NullCoalesce_Conversion_DownCast(AggregateException arg)
         {
             var value = arg as Exception ?? new Exception(arg.Message);     // Noncompliant, arg must be null on the right side
         }
+
         public void NullCoalesce_Conversion_UpCast(Exception arg)
         {
-            var value = arg as ArgumentException ?? new ArgumentException(arg.Message);     // Noncompliant, arg can be null or another Exception type on the right side
+            var value = arg as AggregateException ?? new AggregateException(arg.Message);     // Noncompliant, arg can be null or another Exception type on the right side
         }
 
         public void NullCoalescenceAssignment_Null()
