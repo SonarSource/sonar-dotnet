@@ -713,5 +713,21 @@ Tag(""AfterRemove"", remove);";
             validator.ValidateTag("AfterAdd", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.ValidateTag("AfterRemove", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
         }
+
+        [TestMethod]
+        public void ReDim_SetsNotNull()
+        {
+            const string code = @"
+Dim First(), Second(), Third(4242) As Object
+ReDim First(42), Second(1042), Third(4444)
+Tag(""First"", First)
+Tag(""Second"", Second)
+Tag(""Third"", Third)";
+            var validator = SETestContext.CreateVB(code).Validator;
+            validator.ValidateContainsOperation(OperationKind.ReDim);
+            validator.ValidateTag("First", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("Second", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("Third", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        }
     }
 }

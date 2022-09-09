@@ -260,6 +260,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 OperationKindEx.ParameterReference => References.Process(context, As(IParameterReferenceOperationWrapper.FromOperation)),
                 OperationKindEx.PropertyReference => References.Process(context, As(IPropertyReferenceOperationWrapper.FromOperation)),
                 OperationKindEx.RecursivePattern => Pattern.Process(context, As(IRecursivePatternOperationWrapper.FromOperation)),
+                OperationKindEx.ReDimClause => ReDim.Process(context, As(IReDimClauseOperationWrapper.FromOperation)),
                 OperationKindEx.SimpleAssignment => Assignment.Process(context, As(ISimpleAssignmentOperationWrapper.FromOperation)),
                 OperationKindEx.TypeParameterObjectCreation => Creation.Process(context),
                 _ => context.State
