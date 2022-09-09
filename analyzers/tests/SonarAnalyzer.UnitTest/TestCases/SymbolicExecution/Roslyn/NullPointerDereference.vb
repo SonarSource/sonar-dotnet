@@ -23,7 +23,7 @@ Public Class Program
 
     Public Sub NonInitialized()
         Dim O As Object
-        Console.WriteLine(O.ToString)   ' FIXME FN
+        Console.WriteLine(O.ToString)   ' Noncompliant
     End Sub
 
     Public Sub TestForEach()
@@ -48,6 +48,17 @@ Public Class Program
             Arg.ToString()    ' Compliant, unreachable
         End If
     End Sub
+
+    Public Function UninitializedArray_NoReDim() As Integer
+        Dim Arr As Byte()
+        Return Arr.Length ' Noncompliant
+    End Function
+
+    Public Function ReDimCompliant() As Integer
+        Dim Arr As Byte()
+        ReDim Arr(1024)
+        Return Arr.Length ' Compliant
+    End Function
 
 End Class
 

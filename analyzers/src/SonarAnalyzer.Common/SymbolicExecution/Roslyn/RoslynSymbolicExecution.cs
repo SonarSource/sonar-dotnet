@@ -148,12 +148,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         private ProgramState ProcessBranchState(ControlFlowBranch branch, ProgramState state)
         {
-            foreach (var local in branch.EnteringRegions.SelectMany(x => x.Locals))
+            if (cfg.OriginalOperation.Syntax.Language == LanguageNames.VisualBasic) // Avoid C# FPs as we don't support tuple deconstructions yet
             {
-                if (ConstantCheck.ConstraintFromType(local.Type) is { } constraint)
-                {
-                    state = state.SetSymbolConstraint(local, constraint);
-                }
+                state = InitLocals(branch, state);
             }
             if (branch.Source.BranchValue is { } branchValue && branch.Source.ConditionalSuccessor is not null) // This branching was conditional
             {
@@ -260,6 +257,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 OperationKindEx.ParameterReference => References.Process(context, As(IParameterReferenceOperationWrapper.FromOperation)),
                 OperationKindEx.PropertyReference => References.Process(context, As(IPropertyReferenceOperationWrapper.FromOperation)),
                 OperationKindEx.RecursivePattern => Pattern.Process(context, As(IRecursivePatternOperationWrapper.FromOperation)),
+                OperationKindEx.ReDimClause => ReDim.Process(context, As(IReDimClauseOperationWrapper.FromOperation)),
                 OperationKindEx.SimpleAssignment => Assignment.Process(context, As(ISimpleAssignmentOperationWrapper.FromOperation)),
                 OperationKindEx.TypeParameterObjectCreation => Creation.Process(context),
                 _ => context.State
@@ -307,6 +305,18 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
             T As<T>(Func<IOperation, T> fromOperation) =>
                 fromOperation(operation);
+        }
+
+        private static ProgramState InitLocals(ControlFlowBranch branch, ProgramState state)
+        {
+            foreach (var local in branch.EnteringRegions.SelectMany(x => x.Locals))
+            {
+                if (ConstantCheck.ConstraintFromType(local.Type) is { } constraint)
+                {
+                    state = state.SetSymbolConstraint(local, constraint);
+                }
+            }
+            return state;
         }
 
         private static bool IsReachable(ExplodedNode node, ControlFlowBranch branch) =>
