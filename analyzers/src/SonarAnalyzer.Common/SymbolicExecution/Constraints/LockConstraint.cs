@@ -28,6 +28,8 @@ namespace SonarAnalyzer.SymbolicExecution.Constraints
         public override SymbolicConstraint Opposite =>
             this == Held ? Released : Held;
 
+        public override bool PreserveOnFieldReset => true;
+
         protected override string Name =>
             this == Held ? nameof(Held) : nameof(Released);
 
