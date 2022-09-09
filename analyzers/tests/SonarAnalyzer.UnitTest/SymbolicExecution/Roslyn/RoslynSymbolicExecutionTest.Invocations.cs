@@ -165,9 +165,11 @@ public class Sample: IDisposable
     {{
         field1 = null;
         staticField1 = null;
+        Tag(""BeforeField1"", field1);
+        Tag(""BeforeStaticField1"", staticField1);
         {invocation}
-        Tag(""Field1"", field1);
-        Tag(""StaticField1"", staticField1);
+        Tag(""AfterField1"", field1);
+        Tag(""AfterStaticField1"", staticField1);
     }}
 
     private void Initialize() {{ }}
@@ -182,8 +184,10 @@ public static class Extensions
 }}";
             var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
             validator.ValidateContainsOperation(OperationKind.Invocation);
-            validator.ValidateTag("Field1", x => x.Constraint<ObjectConstraint>().Should().BeNull());
-            validator.ValidateTag("StaticField1", x => x.Constraint<ObjectConstraint>().Should().BeNull());
+            validator.ValidateTag("BeforeField1", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("BeforeStaticField1", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("AfterField1", x => x.Constraint<ObjectConstraint>().Should().BeNull());
+            validator.ValidateTag("AfterStaticField1", x => x.Constraint<ObjectConstraint>().Should().BeNull());
         }
 
         [DataTestMethod]
@@ -207,9 +211,11 @@ public class Sample
     {{
         field1 = null;
         staticField1 = null;
+        Tag(""BeforeField1"", field1);
+        Tag(""BeforeStaticField1"", staticField1);
         {invocation}
-        Tag(""Field1"", field1);
-        Tag(""StaticField1"", staticField1);
+        Tag(""AfterField1"", field1);
+        Tag(""AfterStaticField1"", staticField1);
     }}
 
     private void InstanceMethod() {{ }}
@@ -219,8 +225,10 @@ public class Sample
 }}";
             var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
             validator.ValidateContainsOperation(OperationKind.Invocation);
-            validator.ValidateTag("Field1", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-            validator.ValidateTag("StaticField1", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("BeforeField1", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("BeforeStaticField1", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("AfterField1", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("AfterStaticField1", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
         }
 
         [DataTestMethod]
@@ -265,9 +273,13 @@ public class Sample
     void Main(object someValue)
     {{
         field1 = null;
-        Tag(""Init"", field1);
+        Tag(""InitNull"", field1);
         DoSomething();
-        Tag(""AfterInvocation"", field1);
+        Tag(""AfterInvocationNull"", field1);
+        field1 = new object();
+        Tag(""InitNotNull"", field1);
+        DoSomething();
+        Tag(""AfterInvocationNotNull"", field1);
         if (field1 == null)
         {{
             Tag(""IfBefore"", field1);
@@ -294,13 +306,25 @@ public class Sample
                 : x.State);
             var validator = new SETestContext(code, AnalyzerLanguage.CSharp, new SymbolicCheck[] { check }).Validator;
             validator.ValidateContainsOperation(OperationKind.Invocation);
-            validator.ValidateTag("Init", x =>
+            validator.ValidateTag("InitNull", x =>
             {
                 x.HasConstraint(ObjectConstraint.Null).Should().BeTrue();
                 x.HasConstraint(invalidateConstraint).Should().BeTrue();
                 x.HasConstraint(dontInvalidateConstraint).Should().BeTrue();
             });
-            validator.ValidateTag("AfterInvocation", x =>
+            validator.ValidateTag("AfterInvocationNull", x =>
+            {
+                x.HasConstraint(ObjectConstraint.Null).Should().BeFalse();
+                x.HasConstraint(invalidateConstraint).Should().BeFalse();
+                x.HasConstraint(dontInvalidateConstraint).Should().BeTrue();
+            });
+            validator.ValidateTag("InitNotNull", x =>
+            {
+                x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue();
+                x.HasConstraint(invalidateConstraint).Should().BeTrue();
+                x.HasConstraint(dontInvalidateConstraint).Should().BeTrue();
+            });
+            validator.ValidateTag("AfterInvocationNotNull", x =>
             {
                 x.HasConstraint(ObjectConstraint.Null).Should().BeFalse();
                 x.HasConstraint(invalidateConstraint).Should().BeFalse();
