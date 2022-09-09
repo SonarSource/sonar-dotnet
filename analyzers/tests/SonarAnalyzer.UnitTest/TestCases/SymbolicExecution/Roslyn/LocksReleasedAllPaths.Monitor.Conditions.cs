@@ -550,6 +550,22 @@ namespace Monitor_Conditions
                 }
             }
         }
+    }
 
+    class LockOnField
+    {
+        private object lockObj = new object();
+
+        void M(bool condition)
+        {
+            Monitor.Enter(lockObj);    // Noncompliant
+            this.DoSomething();        // Some constraints get reset on instance invocation (see SymbolConstraint.PreserveOnFieldReset). Make sure, we are not in that boat.
+            if (condition)
+            {
+                Monitor.Exit(lockObj);
+            }
+        }
+
+        void DoSomething() { }
     }
 }
