@@ -40,12 +40,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         /// <summary>
         /// Returns <see langword="true"/>, if the method is an instance method, or an extension method, where the argument passed to the receiver parameter is <see langword="this"/>.
         /// <list type="table">
-        /// <item><c>this.InstanceMethod()</c></item>
-        /// <item><c>this.ExtensionMethod()</c></item>
-        /// <item><c>Extensions.ExtensionMethod(this)</c></item>
-        /// </list>
         /// </summary>
-        public static bool IsReceiverThis(this IInvocationOperationWrapper invocation) =>
+        public static bool HasThisReceiver(this IInvocationOperationWrapper invocation) =>
             invocation.Instance.UnwrapConversion() is { Kind: OperationKindEx.InstanceReference }
             || (invocation is { TargetMethod.IsExtensionMethod: true, Arguments: { Length: > 0 } arguments }
                 && arguments[0] is { Kind: OperationKindEx.Argument }

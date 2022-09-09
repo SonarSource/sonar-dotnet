@@ -37,7 +37,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
             {
                 state = state.SetSymbolConstraint(symbol, ObjectConstraint.NotNull);
             }
-            if (invocation.IsReceiverThis())
+            if (invocation.HasThisReceiver())
             {
                 state = state.ResetFieldConstraints();
             }
