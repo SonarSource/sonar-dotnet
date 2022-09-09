@@ -161,7 +161,7 @@ public class Sample: IDisposable
     static object staticField1;
     static object staticField2;
 
-    void CallToMethodsShouldResetFieldConstraints()
+    void Main()
     {{
         field1 = null;
         field2 = null;
@@ -211,7 +211,7 @@ public class Sample
     static object staticField1;
     static object staticField2;
 
-    void OtherInvocationsShouldNotResetFieldConstraints()
+    void Main()
     {{
         field1 = null;
         field2 = null;
@@ -251,7 +251,7 @@ public class Sample
     static object staticField1;
     static object staticField2;
 
-    void CallToMethodsShouldResetFieldConstraints()
+    void Main()
     {{
         field1 = null;
         field2 = null;
