@@ -284,7 +284,7 @@ public class Sample
 {{
     object field1;
 
-    void CallToMethodsShouldResetFieldConstraints(object someValue)
+    void Main(object someValue)
     {{
         field1 = null;
         Tag(""Init"", field1);
