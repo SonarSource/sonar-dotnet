@@ -719,15 +719,17 @@ Tag(""AfterRemove"", remove);";
         {
             const string code = @"
 Dim First(), Second(), Third(4242) As Object
-ReDim First(42), Second(1042), Third(4444)
+ReDim First(42), Second(1042), Third(4444), Arg.FieldArray(42)
 Tag(""First"", First)
 Tag(""Second"", Second)
-Tag(""Third"", Third)";
-            var validator = SETestContext.CreateVB(code).Validator;
+Tag(""Third"", Third)
+Tag(""NotTracked"", Arg.FieldArray)";
+            var validator = SETestContext.CreateVB(code, ", Arg As Sample").Validator;
             validator.ValidateContainsOperation(OperationKind.ReDim);
             validator.ValidateTag("First", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.ValidateTag("Second", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.ValidateTag("Third", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("NotTracked", x => x.Should().BeNull());
         }
     }
 }

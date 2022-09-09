@@ -78,6 +78,7 @@ public class Deconstructable
 Public Class Sample
 
     Private Readonly Property Condition As Boolean = Environment.ProcessorCount = 42    ' Something that cannot have constraint
+    Private FieldArray() As Integer
 
     Public Sub Main(BoolParameter As Boolean{additionalParameters})
         {methodBody}
