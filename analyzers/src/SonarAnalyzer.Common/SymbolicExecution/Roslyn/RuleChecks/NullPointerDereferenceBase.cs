@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
 
@@ -37,7 +38,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
                 OperationKindEx.ArrayElementReference => context.Operation.Instance.ToArrayElementReference().ArrayReference,
                 _ => null,
             };
-            if (reference != null && context.HasConstraint(reference, ObjectConstraint.Null))
+            if (reference != null && context.HasConstraint(reference, ObjectConstraint.Null) && !reference.Type.IsStruct()) // ToDo: IsStruct() is a workaround before MMF-2401
             {
                 ReportIssue(reference, reference.Syntax.ToString());
             }
