@@ -719,17 +719,46 @@ Tag(""AfterRemove"", remove);";
         {
             const string code = @"
 Dim First(), Second(), Third(4242) As Object
-ReDim First(42), Second(1042), Third(4444), Arg.FieldArray(42)
-Tag(""First"", First)
-Tag(""Second"", Second)
-Tag(""Third"", Third)
-Tag(""NotTracked"", Arg.FieldArray)";
+Dim Fourth As Object()
+Tag(""BeforeFirst"", First)
+Tag(""BeforeSecond"", Second)
+Tag(""BeforeThird"", Third)
+Tag(""BeforeFourth"", Fourth)
+ReDim First(42), Second(1042), Third(4444), Fourth(4), Arg.FieldArray(42)
+Tag(""AfterFirst"", First)
+Tag(""AfterSecond"", Second)
+Tag(""AfterThird"", Third)
+Tag(""AfterFourth"", Fourth)
+Tag(""AfterNotTracked"", Arg.FieldArray)";
             var validator = SETestContext.CreateVB(code, ", Arg As Sample").Validator;
             validator.ValidateContainsOperation(OperationKind.ReDim);
-            validator.ValidateTag("First", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-            validator.ValidateTag("Second", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-            validator.ValidateTag("Third", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-            validator.ValidateTag("NotTracked", x => x.Should().BeNull());
+            validator.ValidateTag("BeforeFirst", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("BeforeSecond", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("BeforeThird", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue("has size in declaration"));
+            validator.ValidateTag("BeforeFourth", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("AfterFirst", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("AfterSecond", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("AfterThird", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("AfterFourth", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("AfterNotTracked", x => x.Should().BeNull());
+        }
+
+        [TestMethod]
+        public void ReDimPreserve_SetsNotNull()
+        {
+            const string code = @"
+Dim First(), Second(10) As Object
+Tag(""BeforeFirst"", First)
+Tag(""BeforeSecond"", Second)
+ReDim Preserve First(42), Second(42)
+Tag(""AfterFirst"", First)
+Tag(""AfterSecond"", Second)";
+            var validator = SETestContext.CreateVB(code, ", Arg As Sample").Validator;
+            validator.ValidateContainsOperation(OperationKind.ReDim);
+            validator.ValidateTag("BeforeFirst", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("BeforeSecond", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue("has size in declaration"));
+            validator.ValidateTag("AfterFirst", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("AfterSecond", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
         }
     }
 }
