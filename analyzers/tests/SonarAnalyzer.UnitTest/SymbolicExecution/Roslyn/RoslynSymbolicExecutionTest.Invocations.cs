@@ -190,8 +190,8 @@ namespace N
             validator.ValidateContainsOperation(OperationKind.Invocation);
             validator.ValidateTag("Field1", x => x.Constraint<ObjectConstraint>().Should().BeNull());
             validator.ValidateTag("Field2", x => x.Constraint<ObjectConstraint>().Should().BeNull());
-            validator.ValidateTag("StaticField1", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-            validator.ValidateTag("StaticField2", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("StaticField1", x => x.Constraint<ObjectConstraint>().Should().BeNull());
+            validator.ValidateTag("StaticField2", x => x.Constraint<ObjectConstraint>().Should().BeNull());
         }
 
         [DataTestMethod]
