@@ -310,8 +310,8 @@ public class Sample
     private void DoSomething() {{ }}
     private static void Tag(string name, object arg) {{ }}
 }}";
-            var invalidateConstraint = PreserveOnFieldResetConstraint.DistingushConstraint<object>(preserveOnFieldReset: _ => false);
-            var dontInvalidateConstraint = PreserveOnFieldResetConstraint.DistingushConstraint<bool>(preserveOnFieldReset: _ => true);
+            var invalidateConstraint = PreserveOnFieldResetConstraint.DistingushConstraint<object>(preserveOnFieldReset: false);
+            var dontInvalidateConstraint = PreserveOnFieldResetConstraint.DistingushConstraint<bool>(preserveOnFieldReset: true);
             var check = new PostProcessTestCheck(x => x.Operation.Instance.Kind == OperationKindEx.SimpleAssignment
                 && IFieldReferenceOperationWrapper.FromOperation(ISimpleAssignmentOperationWrapper.FromOperation(x.Operation.Instance).Target).Member is var field1
                 ? x.SetSymbolConstraint(field1, invalidateConstraint).SetSymbolConstraint(field1, dontInvalidateConstraint)
