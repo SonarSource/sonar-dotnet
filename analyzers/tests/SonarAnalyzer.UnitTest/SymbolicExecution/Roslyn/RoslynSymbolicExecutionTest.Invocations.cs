@@ -156,10 +156,10 @@ End Module";
 using System;
 public class Sample: IDisposable
 {{
-    object field1 = null;
-    object field2 = null;
-    static object staticField1 = null;
-    static object staticField2 = null;
+    object field1;
+    object field2;
+    static object staticField1;
+    static object staticField2;
 
     void CallToMethodsShouldResetFieldConstraints()
     {{
@@ -206,10 +206,10 @@ public static class Extensions
             var code = $@"
 public class Sample
 {{
-    object field1 = null;
-    object field2 = null;
-    static object staticField1 = null;
-    static object staticField2 = null;
+    object field1;
+    object field2;
+    static object staticField1;
+    static object staticField2;
 
     void OtherInvocationsShouldNotResetFieldConstraints()
     {{
@@ -246,10 +246,10 @@ public class Sample
             var code = $@"
 public class Sample
 {{
-    object field1 = null;
-    object field2 = null;
-    static object staticField1 = null;
-    static object staticField2 = null;
+    object field1;
+    object field2;
+    static object staticField1;
+    static object staticField2;
 
     void CallToMethodsShouldResetFieldConstraints()
     {{
