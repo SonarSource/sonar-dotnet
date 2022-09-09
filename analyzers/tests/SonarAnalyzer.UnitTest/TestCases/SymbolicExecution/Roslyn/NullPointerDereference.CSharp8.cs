@@ -58,6 +58,17 @@ namespace Tests.Diagnostics.CSharp8
             object nullObject = null;
             notNullObject ??= nullObject.ToString(); // Compliant, never visited
         }
+
+        public object SupportConversionFromDefault {
+            get {
+                object o = null;
+                o.ToString();   // Noncompliant, just to make sure it is analyzed
+                return default; // This should not fail the engine
+            }
+            set { }
+        }
+
+        public object ArrowProperty => default;
     }
 
     public class Nullables
