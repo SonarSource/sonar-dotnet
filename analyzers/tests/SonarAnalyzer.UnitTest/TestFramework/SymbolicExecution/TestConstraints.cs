@@ -48,27 +48,12 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 
     internal class PreserveOnFieldResetConstraint : SymbolicConstraint
     {
-        public static readonly PreserveOnFieldResetConstraint Default = new(nameof(Default), null);
-        public static readonly PreserveOnFieldResetConstraint AlwaysPreserve = new(nameof(AlwaysPreserve), true);
-        public static readonly PreserveOnFieldResetConstraint AlwaysReset = new(nameof(AlwaysReset), false);
+        public static readonly PreserveOnFieldResetConstraint Default = new();
 
         public override SymbolicConstraint Opposite => null;
-        protected override string Name { get; }
+        public override bool PreserveOnFieldReset { get; } = true;
+        protected override string Name { get; } = nameof(SymbolicConstraint.PreserveOnFieldReset);
 
-        public PreserveOnFieldResetConstraint(string name, bool? preserveOnFieldReset)
-        {
-            Name = name;
-            PreserveOnFieldReset = preserveOnFieldReset ?? base.PreserveOnFieldReset;
-        }
-
-        public override bool PreserveOnFieldReset { get; }
-
-        public static PreserveOnFieldResetConstraint DistingushConstraint<TDiscriminator>(bool preserveOnFieldReset) =>
-            new DistingushableConstraint<TDiscriminator>(preserveOnFieldReset);
-
-        private class DistingushableConstraint<TDiscriminator> : PreserveOnFieldResetConstraint
-        {
-            public DistingushableConstraint(bool preserveOnFieldReset) : base(typeof(TDiscriminator).Name, preserveOnFieldReset) { }
-        }
+        private PreserveOnFieldResetConstraint() { }
     }
 }
