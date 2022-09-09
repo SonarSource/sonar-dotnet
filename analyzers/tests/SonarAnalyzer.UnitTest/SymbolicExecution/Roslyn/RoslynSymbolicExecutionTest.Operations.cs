@@ -475,6 +475,13 @@ Tag(""Value"", value);";
         }
 
         [TestMethod]
+        public void Literal_Default_InferredFromReturnType()
+        {
+            var validator = SETestContext.CreateCSMethod("public object Main() => default;").Validator;
+            validator.ValidateContainsOperation(OperationKind.DefaultValue);    // And do not fail
+        }
+
+        [TestMethod]
         public void InstanceReference_SetsNotNull_CS()
         {
             const string code = @"
