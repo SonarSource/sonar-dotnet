@@ -324,7 +324,7 @@ Captures:
             staticFieldSymbolValue.HasConstraint(preserveNone).Should().BeFalse(because: "preserveNone should not be preserved for static fields");
         }
 
-        private static void ResetFieldConstraintTests(PreserveOnFieldResetConstraint constraint, bool shouldBePreserved)
+        private static void ResetFieldConstraintTests(PreserveOnFieldResetConstraint constraint, bool expectIsPreserved)
         {
             var field = TestHelper.GetFieldSymbol("object field;");
             var sut = ProgramState.Empty;
@@ -333,7 +333,7 @@ Captures:
             symbolValue.HasConstraint(constraint).Should().BeTrue();
             sut = sut.ResetFieldConstraints();
             symbolValue = sut[field];
-            symbolValue.HasConstraint(constraint).Should().Be(shouldBePreserved);
+            symbolValue.HasConstraint(constraint).Should().Be(expectIsPreserved);
         }
 
         private static ISymbol[] CreateSymbols()
