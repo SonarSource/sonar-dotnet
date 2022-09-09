@@ -170,23 +170,5 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var sut = new SymbolicValue().WithConstraint(TestConstraint.First).WithConstraint(DummyConstraint.Dummy);
             sut.AllConstraints().Should().HaveCount(2).And.Contain(new SymbolicConstraint[] { TestConstraint.First, DummyConstraint.Dummy });
         }
-
-        [TestMethod]
-        public void AllConstraints_ContainsOneConstraintPerConstriantType()
-        {
-            var sut = new SymbolicValue()
-                .WithConstraint(TestConstraint.First)
-                .WithConstraint(TestConstraint.Second)
-                .WithConstraint(DummyConstraint.Dummy)
-                .WithConstraint(DummyConstraint.Dummy);
-            sut.AllConstraints().Should().HaveCount(2).And.Contain(new SymbolicConstraint[] { TestConstraint.Second, DummyConstraint.Dummy });
-        }
-
-        [TestMethod]
-        public void AllConstraints_DontContainsRemovedConstraint()
-        {
-            var sut = new SymbolicValue().WithConstraint(TestConstraint.First).WithoutConstraint(TestConstraint.First);
-            sut.AllConstraints().Should().BeEmpty();
-        }
     }
 }
