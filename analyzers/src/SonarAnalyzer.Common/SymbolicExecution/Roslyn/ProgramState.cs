@@ -115,12 +115,11 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public ProgramState ResetFieldConstraints()
         {
             var state = this;
-            foreach (var kvp in SymbolValue)
+            foreach (var kvp in SymbolValue.Where(x => x.Key is IFieldSymbol))
             {
-                if (kvp is { Key: IFieldSymbol fieldSymbol, Value: { } symbolValue }
-                    && symbolValue.AllConstraints().Where(x => !x.PreserveOnFieldReset).ToArray() is { Length: > 0 } resetConstraints)
+                if (kvp.Value.AllConstraints().Where(x => !x.PreserveOnFieldReset).ToArray() is { Length: > 0 } resetConstraints)
                 {
-                    state = state.SetSymbolValue(fieldSymbol, symbolValue.WithoutConstraint(resetConstraints));
+                    state = state.SetSymbolValue(kvp.Key, kvp.Value.WithoutConstraint(resetConstraints));
                 }
             }
             return state;
