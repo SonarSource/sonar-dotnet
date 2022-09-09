@@ -154,37 +154,35 @@ End Module";
         {
             var code = $@"
 using System;
-namespace N
+public class Sample: IDisposable
 {{
-    public class Sample: IDisposable
-    {{
-        object field1 = null;
-        object field2 = null;
-        static object staticField1 = null;
-        static object staticField2 = null;
+    object field1 = null;
+    object field2 = null;
+    static object staticField1 = null;
+    static object staticField2 = null;
 
-        void CallToMethodsShouldResetFieldConstraints()
-        {{
-            field1 = null;
-            field2 = null;
-            staticField1 = null;
-            staticField2 = null;
-            {invocation}
-            Tag(""Field1"", field1);
-            Tag(""Field2"", field2);
-            Tag(""StaticField1"", staticField1);
-            Tag(""StaticField2"", staticField2);
-        }}
-
-        private void Initialize() {{ }}
-        void IDisposable.Dispose() {{ }}
-        private static void Tag(string name, object arg) {{ }}
-    }}
-    public static class Extensions
+    void CallToMethodsShouldResetFieldConstraints()
     {{
-        public static void SomeExtensionOnSample(this Sample sample) {{ }}
-        public static void SomeExtensionOnObject(this object obj) {{ }}
+        field1 = null;
+        field2 = null;
+        staticField1 = null;
+        staticField2 = null;
+        {invocation}
+        Tag(""Field1"", field1);
+        Tag(""Field2"", field2);
+        Tag(""StaticField1"", staticField1);
+        Tag(""StaticField2"", staticField2);
     }}
+
+    private void Initialize() {{ }}
+    void IDisposable.Dispose() {{ }}
+    private static void Tag(string name, object arg) {{ }}
+}}
+
+public static class Extensions
+{{
+    public static void SomeExtensionOnSample(this Sample sample) {{ }}
+    public static void SomeExtensionOnObject(this object obj) {{ }}
 }}";
             var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
             validator.ValidateContainsOperation(OperationKind.Invocation);

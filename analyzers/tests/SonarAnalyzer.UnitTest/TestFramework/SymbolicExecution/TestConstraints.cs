@@ -52,19 +52,16 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         public static readonly PreserveOnFieldResetConstraint AlwaysPreserve = new(nameof(AlwaysPreserve), true);
         public static readonly PreserveOnFieldResetConstraint AlwaysReset = new(nameof(AlwaysReset), false);
 
-        private readonly bool? preserveOnFieldReset;
-
         public override SymbolicConstraint Opposite => null;
         protected override string Name { get; }
 
         public PreserveOnFieldResetConstraint(string name, bool? preserveOnFieldReset)
         {
             Name = name;
-            this.preserveOnFieldReset = preserveOnFieldReset;
+            PreserveOnFieldReset = preserveOnFieldReset ?? base.PreserveOnFieldReset;
         }
 
-        public override bool PreserveOnFieldReset =>
-            preserveOnFieldReset ?? base.PreserveOnFieldReset;
+        public override bool PreserveOnFieldReset { get; }
 
         public static PreserveOnFieldResetConstraint DistingushConstraint<TDiscriminator>(bool preserveOnFieldReset) =>
             new DistingushableConstraint<TDiscriminator>(preserveOnFieldReset);
