@@ -309,20 +309,17 @@ Captures:
             var instanceField = TestHelper.GetFieldSymbol("object field;");
             var staticField = TestHelper.GetFieldSymbol("static object field;");
 
-            var preserveInstance = PreserveOnFieldResetConstraint.DistingushConstraint<bool>(preserveOnFieldReset: x => !x.IsStatic);
-            var preserveAll = PreserveOnFieldResetConstraint.DistingushConstraint<byte>(preserveOnFieldReset: _ => true);
-            var preserveNone = PreserveOnFieldResetConstraint.DistingushConstraint<int>(preserveOnFieldReset: _ => false);
+            var preserveAll = PreserveOnFieldResetConstraint.DistingushConstraint<byte>(preserveOnFieldReset: true);
+            var preserveNone = PreserveOnFieldResetConstraint.DistingushConstraint<int>(preserveOnFieldReset: false);
 
             var sut = ProgramState.Empty;
-            sut = sut.SetSymbolValue(instanceField, new SymbolicValue().WithConstraint(preserveInstance).WithConstraint(preserveAll).WithConstraint(preserveNone))
-                     .SetSymbolValue(staticField, new SymbolicValue().WithConstraint(preserveInstance).WithConstraint(preserveAll).WithConstraint(preserveNone));
+            sut = sut.SetSymbolValue(instanceField, new SymbolicValue().WithConstraint(preserveAll).WithConstraint(preserveNone))
+                     .SetSymbolValue(staticField, new SymbolicValue().WithConstraint(preserveAll).WithConstraint(preserveNone));
             sut = sut.ResetFieldConstraints();
             var instanceFieldSymbolValue = sut[instanceField];
             var staticFieldSymbolValue = sut[staticField];
-            instanceFieldSymbolValue.HasConstraint(preserveInstance).Should().BeTrue(because: "preserveInstance should be preserved for instance fields");
             instanceFieldSymbolValue.HasConstraint(preserveAll).Should().BeTrue(because: "preserveAll should be preserved for instance fields");
             instanceFieldSymbolValue.HasConstraint(preserveNone).Should().BeFalse(because: "preserveNone should not be preserved for instance fields");
-            staticFieldSymbolValue.HasConstraint(preserveInstance).Should().BeFalse(because: "preserveInstance should not be preserved for static fields");
             staticFieldSymbolValue.HasConstraint(preserveAll).Should().BeTrue(because: "preserveAll should be preserved for static fields");
             staticFieldSymbolValue.HasConstraint(preserveNone).Should().BeFalse(because: "preserveNone should not be preserved for static fields");
         }
