@@ -264,7 +264,13 @@ namespace StyleCop.Analyzers.CodeGeneration
                     continue;
                 }
 
-                var propertyType = property.NeedsWrapper ? SyntaxFactory.IdentifierName(property.Type + "Wrapper") : property.AccessorResultType;
+                if (property.IsOverride)
+                {
+                    continue;
+                }
+
+                var propertyType = property.NeedsWrapper ? SyntaxFactory.IdentifierName(property.WrapperType) : property.AccessorResultType;
+                var propertyTypeWithNullable = property.NeedsWrapper ? SyntaxFactory.IdentifierName(property.WrapperTypeWithNullable) : property.AccessorResultType;
 
                 // ConstructorAccessor(this.WrappedOperation)
                 var evaluatedAccessor = SyntaxFactory.InvocationExpression(
@@ -295,7 +301,7 @@ namespace StyleCop.Analyzers.CodeGeneration
                 members = members.Add(SyntaxFactory.PropertyDeclaration(
                     attributeLists: default,
                     modifiers: SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword)),
-                    type: propertyType,
+                    type: propertyTypeWithNullable,
                     explicitInterfaceSpecifier: null,
                     identifier: SyntaxFactory.Identifier(property.Name),
                     accessorList: null,
@@ -321,7 +327,7 @@ namespace StyleCop.Analyzers.CodeGeneration
 
                     var propertyType = property.IsSkipped
                         ? SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.ObjectKeyword))
-                        : property.NeedsWrapper ? SyntaxFactory.IdentifierName(property.Type + "Wrapper") : property.AccessorResultType;
+                        : property.NeedsWrapper ? SyntaxFactory.IdentifierName(property.WrapperTypeWithNullable) : property.AccessorResultType;
 
                     // public IOperation Instance => ((IMemberReferenceOperationWrapper)this).Instance;
                     members = members.Add(SyntaxFactory.PropertyDeclaration(
@@ -569,6 +575,10 @@ namespace StyleCop.Analyzers.CodeGeneration
                     SyntaxFactory.CarriageReturnLineFeed,
                     SyntaxFactory.Comment("// Licensed under the MIT License. See LICENSE in the project root for license information."),
                     SyntaxFactory.CarriageReturnLineFeed,
+                    SyntaxFactory.CarriageReturnLineFeed,
+                    SyntaxFactory.Trivia(SyntaxFactory.NullableDirectiveTrivia(SyntaxFactory.Token(SyntaxKind.EnableKeyword), true)
+                        .WithNullableKeyword(SyntaxFactory.Token(SyntaxFactory.TriviaList(), SyntaxKind.NullableKeyword, SyntaxFactory.TriviaList(SyntaxFactory.Space)))),
+                    SyntaxFactory.CarriageReturnLineFeed,
                     SyntaxFactory.CarriageReturnLineFeed)
                 .WithTrailingTrivia(
                     SyntaxFactory.CarriageReturnLineFeed);
@@ -777,6 +787,10 @@ namespace StyleCop.Analyzers.CodeGeneration
                     SyntaxFactory.CarriageReturnLineFeed,
                     SyntaxFactory.Comment("// Licensed under the MIT License. See LICENSE in the project root for license information."),
                     SyntaxFactory.CarriageReturnLineFeed,
+                    SyntaxFactory.CarriageReturnLineFeed,
+                    SyntaxFactory.Trivia(SyntaxFactory.NullableDirectiveTrivia(SyntaxFactory.Token(SyntaxKind.EnableKeyword), true)
+                        .WithNullableKeyword(SyntaxFactory.Token(SyntaxFactory.TriviaList(), SyntaxKind.NullableKeyword, SyntaxFactory.TriviaList(SyntaxFactory.Space)))),
+                    SyntaxFactory.CarriageReturnLineFeed,
                     SyntaxFactory.CarriageReturnLineFeed)
                 .WithTrailingTrivia(
                     SyntaxFactory.CarriageReturnLineFeed);
@@ -829,6 +843,10 @@ namespace StyleCop.Analyzers.CodeGeneration
                     SyntaxFactory.Comment("// Copyright (c) Tunnel Vision Laboratories, LLC. All Rights Reserved."),
                     SyntaxFactory.CarriageReturnLineFeed,
                     SyntaxFactory.Comment("// Licensed under the MIT License. See LICENSE in the project root for license information."),
+                    SyntaxFactory.CarriageReturnLineFeed,
+                    SyntaxFactory.CarriageReturnLineFeed,
+                    SyntaxFactory.Trivia(SyntaxFactory.NullableDirectiveTrivia(SyntaxFactory.Token(SyntaxKind.EnableKeyword), true)
+                        .WithNullableKeyword(SyntaxFactory.Token(SyntaxFactory.TriviaList(), SyntaxKind.NullableKeyword, SyntaxFactory.TriviaList(SyntaxFactory.Space)))),
                     SyntaxFactory.CarriageReturnLineFeed,
                     SyntaxFactory.CarriageReturnLineFeed)
                 .WithTrailingTrivia(
@@ -1028,9 +1046,12 @@ namespace StyleCop.Analyzers.CodeGeneration
                 this.Name = node.Attribute("Name").Value;
                 this.AccessorName = this.Name + "Accessor";
                 this.Type = node.Attribute("Type").Value;
+                this.WrapperType = $"{(IsNullable(Type) ? Type.Substring(0, Type.Length - 1) : Type)}Wrapper";
+                this.WrapperTypeWithNullable = IsNullable(Type) ? $"{WrapperType}?" : WrapperType;
 
                 this.IsNew = node.Attribute("New")?.Value == "true";
                 this.IsPublicProperty = node.Attribute("Internal")?.Value != "true";
+                this.IsOverride = node.Attribute("Override")?.Value == "true";
 
                 this.IsSkipped = this.Type switch
                 {
@@ -1043,10 +1064,11 @@ namespace StyleCop.Analyzers.CodeGeneration
                     "InstanceReferenceKind" => true,
                     "LoopKind" => true,
                     "PlaceholderKind" => true,
+                    "InterpolatedStringArgumentPlaceholderKind" => true,
                     _ => !this.IsPublicProperty,
                 };
 
-                this.NeedsWrapper = IsAnyOperation(this.Type) && this.Type != "IOperation";
+                this.NeedsWrapper = IsAnyOperation(this.Type) && this.Type != $"IOperation{(IsNullable(this.Type) ? "?" : string.Empty)}";
                 this.IsDerivedOperationArray = IsAnyOperationArray(this.Type) && this.Type != "ImmutableArray<IOperation>";
 
                 if (this.IsDerivedOperationArray)
@@ -1071,11 +1093,17 @@ namespace StyleCop.Analyzers.CodeGeneration
 
             public bool IsSkipped { get; }
 
+            public bool IsOverride { get; }
+
             public string Name { get; }
 
             public string AccessorName { get; }
 
             public string Type { get; }
+
+            public string WrapperType { get; }
+
+            public string WrapperTypeWithNullable { get; }
 
             public bool NeedsWrapper { get; }
 
@@ -1083,9 +1111,12 @@ namespace StyleCop.Analyzers.CodeGeneration
 
             public TypeSyntax AccessorResultType { get; }
 
+            private static bool IsNullable(string type)
+                => type.EndsWith("?");
+
             private static bool IsAnyOperation(string type)
             {
-                return type.StartsWith("I") && type.EndsWith("Operation");
+                return type.StartsWith("I") && IsNullable(type) ? type.EndsWith("Operation?") : type.EndsWith("Operation");
             }
 
             private static bool IsAnyOperationArray(string type)
