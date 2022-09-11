@@ -7,6 +7,7 @@ namespace StyleCop.Analyzers.CodeGeneration
     using System.Globalization;
     using System.IO;
     using System.Text;
+    using System.Text.RegularExpressions;
     using System.Xml.Linq;
     using System.Xml.XPath;
     using Microsoft.CodeAnalysis.CSharp;
@@ -68,7 +69,8 @@ namespace StyleCop.Analyzers.CodeGeneration
                 .WithExpressionBody(ArrowExpressionClause(
                     InvocationExpression(MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, wrapperName, IdentifierName("FromOperation")))
                         .WithArgumentList(ArgumentList(SingletonSeparatedList(Argument(IdentifierName("operation")))))))
-                .WithSemicolonToken(Token(SyntaxKind.SemicolonToken));
+                .WithSemicolonToken(Token(SyntaxKind.SemicolonToken))
+                .WithLeadingTrivia(value.Summary);
 
             // public static bool TryAsLoop(this IOperation operation, out ILoopOperationWrapper wrapper)
             // {
@@ -100,7 +102,8 @@ namespace StyleCop.Analyzers.CodeGeneration
                         ReturnStatement(LiteralExpression(SyntaxKind.TrueLiteralExpression))))
                 .WithElse(ElseClause(Block(
                     ExpressionStatement(AssignmentExpression(SyntaxKind.SimpleAssignmentExpression, IdentifierName("wrapper"), LiteralExpression(SyntaxKind.DefaultLiteralExpression, Token(SyntaxKind.DefaultKeyword)))),
-                    ReturnStatement(LiteralExpression(SyntaxKind.FalseLiteralExpression))))))));
+                    ReturnStatement(LiteralExpression(SyntaxKind.FalseLiteralExpression))))))))
+                .WithLeadingTrivia(value.Summary);
             var extensionClass = ClassDeclaration($"{value.WrapperName}Extensions").WithModifiers(publicStatic)
                 .WithMembers(List(new MemberDeclarationSyntax[] { asMethod, tryAsMethod }));
 
@@ -622,7 +625,8 @@ namespace StyleCop.Analyzers.CodeGeneration
                 typeParameterList: null,
                 baseList: BaseList(SingletonSeparatedList<BaseTypeSyntax>(SimpleBaseType(IdentifierName("IOperationWrapper")))),
                 constraintClauses: default,
-                members: members);
+                members: members)
+                .WithLeadingTrivia(node.Summary);
             var wrapperNamespace = NamespaceDeclaration(
                 name: ParseName("StyleCop.Analyzers.Lightup"),
                 externs: default,
@@ -1071,6 +1075,12 @@ namespace StyleCop.Analyzers.CodeGeneration
                 this.BaseInterfaceName = node.Attribute("Base").Value;
                 this.IsAbstract = node.Name == "AbstractNode";
                 this.Properties = node.XPathSelectElements("Property").Select(property => new PropertyData(property)).ToImmutableArray();
+                var summary = node.Element("Comments")?.Element("summary")?.ToString();
+                if (!string.IsNullOrEmpty(summary))
+                {
+                    summary = Regex.Replace(summary, "^", "/// ", RegexOptions.Multiline);
+                    this.Summary = ParseLeadingTrivia($"{summary}\r\n");
+                }
             }
 
             public ImmutableArray<(string name, int value, string? extraDescription)> OperationKinds { get; }
@@ -1086,6 +1096,8 @@ namespace StyleCop.Analyzers.CodeGeneration
             public string BaseInterfaceName { get; }
 
             public bool IsAbstract { get; }
+
+            public SyntaxTriviaList Summary { get; }
 
             public ImmutableArray<PropertyData> Properties { get; }
 
