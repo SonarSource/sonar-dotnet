@@ -216,14 +216,14 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
 
         private static ISymbol ArgumentSymbol(IInvocationOperationWrapper invocation, int parameterIndex) =>
             invocation.TargetMethod.Parameters[parameterIndex].Name is var parameterName
-            && invocation.Arguments[parameterIndex].ToArgument() is var argument
+            && invocation.Arguments[parameterIndex].AsArgument() is var argument
             && argument.Parameter.Name == parameterName
                 ? argument.Value.TrackedSymbol()
-                : invocation.Arguments.SingleOrDefault(x => x.ToArgument().Parameter.Name == parameterName)?.ToArgument().Value.TrackedSymbol();
+                : invocation.Arguments.SingleOrDefault(x => x.AsArgument().Parameter.Name == parameterName)?.AsArgument().Value.TrackedSymbol();
 
         private static ISymbol FindLockSymbolWithConditionalReturnValue(SymbolicContext context)
         {
-            if (context.Operation.Instance.AsInvocation().Value is var invocation
+            if (context.Operation.Instance.TryAsInvocation(out var invocation)
                 && invocation.TargetMethod.ReturnType.Is(KnownType.System_Boolean))
             {
                 if (invocation.TargetMethod.IsAny(KnownType.System_Threading_Monitor, "TryEnter"))
@@ -244,14 +244,14 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
             ?? BoolRefParamFromInstance(context, KnownType.System_Threading_SpinLock, "Enter", "TryEnter");
 
         private static RefParamContext BoolRefParamFromArgument(SymbolicContext context, KnownType type, params string[] methodNames) =>
-            context.Operation.Instance.AsInvocation().Value is var invocation
+            context.Operation.Instance.TryAsInvocation(out var invocation)
             && InvocationBoolRefSymbol(invocation, type, methodNames) is { } refParameter
             && ArgumentSymbol(invocation, 0) is { } lockObject
                 ? new RefParamContext(context, lockObject, refParameter)
                 : null;
 
         private static RefParamContext BoolRefParamFromInstance(SymbolicContext context, KnownType type, params string[] methodNames) =>
-            context.Operation.Instance.AsInvocation().Value is var invocation
+            context.Operation.Instance.TryAsInvocation(out var invocation)
             && InvocationBoolRefSymbol(invocation, type, methodNames) is { } refParameter
             && invocation.Instance.TrackedSymbol() is { } lockObject
                 ? new RefParamContext(context, lockObject, refParameter)
