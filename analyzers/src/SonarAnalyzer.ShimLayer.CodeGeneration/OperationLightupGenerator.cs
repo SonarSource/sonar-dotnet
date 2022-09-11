@@ -338,7 +338,6 @@ namespace StyleCop.Analyzers.CodeGeneration
                 }
 
                 var propertyType = property.NeedsWrapper ? IdentifierName(property.WrapperType) : property.AccessorResultType;
-                var propertyTypeWithNullable = property.NeedsWrapper ? IdentifierName(property.WrapperTypeWithNullable) : property.AccessorResultType;
 
                 // ConstructorAccessor(this.WrappedOperation)
                 var evaluatedAccessor = InvocationExpression(
@@ -369,7 +368,7 @@ namespace StyleCop.Analyzers.CodeGeneration
                 members = members.Add(PropertyDeclaration(
                     attributeLists: default,
                     modifiers: TokenList(Token(SyntaxKind.PublicKeyword)),
-                    type: propertyTypeWithNullable,
+                    type: propertyType,
                     explicitInterfaceSpecifier: null,
                     identifier: Identifier(property.Name),
                     accessorList: null,
@@ -396,7 +395,7 @@ namespace StyleCop.Analyzers.CodeGeneration
 
                     var propertyType = property.IsSkipped
                         ? PredefinedType(Token(SyntaxKind.ObjectKeyword))
-                        : property.NeedsWrapper ? IdentifierName(property.WrapperTypeWithNullable) : property.AccessorResultType;
+                        : property.NeedsWrapper ? IdentifierName(property.WrapperType) : property.AccessorResultType;
 
                     // public IOperation Instance => ((IMemberReferenceOperationWrapper)this).Instance;
                     members = members.Add(PropertyDeclaration(
