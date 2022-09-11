@@ -12,6 +12,7 @@ namespace StyleCop.Analyzers.CodeGeneration
     using Microsoft.CodeAnalysis.CSharp;
     using Microsoft.CodeAnalysis.CSharp.Syntax;
     using Microsoft.CodeAnalysis.Text;
+    using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
     [Generator]
     internal sealed class OperationLightupGenerator : ISourceGenerator
@@ -45,34 +46,40 @@ namespace StyleCop.Analyzers.CodeGeneration
             foreach (var pair in documentData.Interfaces)
             {
                 this.GenerateOperationInterface(in context, pair.Value);
+                this.GenerateOperationInterfaceExtension(in context, pair.Value);
             }
 
             this.GenerateOperationWrapperHelper(in context, documentData.Interfaces.Values.ToImmutableArray());
             this.GenerateOperationKindEx(in context, documentData.Interfaces.Values.ToImmutableArray());
         }
 
+        private void GenerateOperationInterfaceExtension(in GeneratorExecutionContext context, InterfaceData value)
+        {
+
+        }
+
         private void GenerateOperationInterface(in GeneratorExecutionContext context, InterfaceData node)
         {
-            var members = SyntaxFactory.List<MemberDeclarationSyntax>();
+            var members = List<MemberDeclarationSyntax>();
 
             // internal const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IArgumentOperation";
-            members = members.Add(SyntaxFactory.FieldDeclaration(
+            members = members.Add(FieldDeclaration(
                 attributeLists: default,
-                modifiers: SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.ConstKeyword)),
-                declaration: SyntaxFactory.VariableDeclaration(
-                    type: SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.StringKeyword)),
-                    variables: SyntaxFactory.SingletonSeparatedList(SyntaxFactory.VariableDeclarator(
-                        identifier: SyntaxFactory.Identifier("WrappedTypeName"),
+                modifiers: TokenList(Token(SyntaxKind.PublicKeyword), Token(SyntaxKind.ConstKeyword)),
+                declaration: VariableDeclaration(
+                    type: PredefinedType(Token(SyntaxKind.StringKeyword)),
+                    variables: SingletonSeparatedList(VariableDeclarator(
+                        identifier: Identifier("WrappedTypeName"),
                         argumentList: null,
-                        initializer: SyntaxFactory.EqualsValueClause(SyntaxFactory.LiteralExpression(SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal($"Microsoft.CodeAnalysis.{node.Namespace}.{node.InterfaceName}"))))))));
+                        initializer: EqualsValueClause(LiteralExpression(SyntaxKind.StringLiteralExpression, Literal($"Microsoft.CodeAnalysis.{node.Namespace}.{node.InterfaceName}"))))))));
 
             // private static readonly Type WrappedType;
-            members = members.Add(SyntaxFactory.FieldDeclaration(
+            members = members.Add(FieldDeclaration(
                 attributeLists: default,
-                modifiers: SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PrivateKeyword), SyntaxFactory.Token(SyntaxKind.StaticKeyword), SyntaxFactory.Token(SyntaxKind.ReadOnlyKeyword)),
-                declaration: SyntaxFactory.VariableDeclaration(
-                    type: SyntaxFactory.IdentifierName("Type"),
-                    variables: SyntaxFactory.SingletonSeparatedList(SyntaxFactory.VariableDeclarator("WrappedType")))));
+                modifiers: TokenList(Token(SyntaxKind.PrivateKeyword), Token(SyntaxKind.StaticKeyword), Token(SyntaxKind.ReadOnlyKeyword)),
+                declaration: VariableDeclaration(
+                    type: IdentifierName("Type"),
+                    variables: SingletonSeparatedList(VariableDeclarator("WrappedType")))));
 
             foreach (var property in node.Properties)
             {
@@ -82,40 +89,40 @@ namespace StyleCop.Analyzers.CodeGeneration
                 }
 
                 // private static readonly Func<IOperation, IMethodSymbol> ConstructorAccessor;
-                members = members.Add(SyntaxFactory.FieldDeclaration(
+                members = members.Add(FieldDeclaration(
                     attributeLists: default,
-                    modifiers: SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PrivateKeyword), SyntaxFactory.Token(SyntaxKind.StaticKeyword), SyntaxFactory.Token(SyntaxKind.ReadOnlyKeyword)),
-                    declaration: SyntaxFactory.VariableDeclaration(
-                        type: SyntaxFactory.GenericName(
-                            identifier: SyntaxFactory.Identifier("Func"),
-                            typeArgumentList: SyntaxFactory.TypeArgumentList(SyntaxFactory.SeparatedList(
+                    modifiers: TokenList(Token(SyntaxKind.PrivateKeyword), Token(SyntaxKind.StaticKeyword), Token(SyntaxKind.ReadOnlyKeyword)),
+                    declaration: VariableDeclaration(
+                        type: GenericName(
+                            identifier: Identifier("Func"),
+                            typeArgumentList: TypeArgumentList(SeparatedList(
                                 new[]
                                 {
-                                    SyntaxFactory.IdentifierName("IOperation"),
+                                    IdentifierName("IOperation"),
                                     property.AccessorResultType,
                                 }))),
-                        variables: SyntaxFactory.SingletonSeparatedList(SyntaxFactory.VariableDeclarator(property.AccessorName)))));
+                        variables: SingletonSeparatedList(VariableDeclarator(property.AccessorName)))));
             }
 
             // private readonly IOperation operation;
-            members = members.Add(SyntaxFactory.FieldDeclaration(
+            members = members.Add(FieldDeclaration(
                 attributeLists: default,
-                modifiers: SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PrivateKeyword), SyntaxFactory.Token(SyntaxKind.ReadOnlyKeyword)),
-                declaration: SyntaxFactory.VariableDeclaration(
-                    type: SyntaxFactory.IdentifierName("IOperation"),
-                    variables: SyntaxFactory.SingletonSeparatedList(SyntaxFactory.VariableDeclarator("operation")))));
+                modifiers: TokenList(Token(SyntaxKind.PrivateKeyword), Token(SyntaxKind.ReadOnlyKeyword)),
+                declaration: VariableDeclaration(
+                    type: IdentifierName("IOperation"),
+                    variables: SingletonSeparatedList(VariableDeclarator("operation")))));
 
-            var staticCtorStatements = SyntaxFactory.SingletonList<StatementSyntax>(
-                SyntaxFactory.ExpressionStatement(SyntaxFactory.AssignmentExpression(
+            var staticCtorStatements = SingletonList<StatementSyntax>(
+                ExpressionStatement(AssignmentExpression(
                     SyntaxKind.SimpleAssignmentExpression,
-                    left: SyntaxFactory.IdentifierName("WrappedType"),
-                    right: SyntaxFactory.InvocationExpression(
-                        expression: SyntaxFactory.MemberAccessExpression(
+                    left: IdentifierName("WrappedType"),
+                    right: InvocationExpression(
+                        expression: MemberAccessExpression(
                             SyntaxKind.SimpleMemberAccessExpression,
-                            expression: SyntaxFactory.IdentifierName("OperationWrapperHelper"),
-                            name: SyntaxFactory.IdentifierName("GetWrappedType")),
-                        argumentList: SyntaxFactory.ArgumentList(SyntaxFactory.SingletonSeparatedList(SyntaxFactory.Argument(
-                            SyntaxFactory.TypeOfExpression(SyntaxFactory.IdentifierName(node.WrapperName)))))))));
+                            expression: IdentifierName("OperationWrapperHelper"),
+                            name: IdentifierName("GetWrappedType")),
+                        argumentList: ArgumentList(SingletonSeparatedList(Argument(
+                            TypeOfExpression(IdentifierName(node.WrapperName)))))))));
 
             foreach (var property in node.Properties)
             {
@@ -128,39 +135,39 @@ namespace StyleCop.Analyzers.CodeGeneration
                 if (property.IsDerivedOperationArray)
                 {
                     // CreateOperationListPropertyAccessor<IOperation>
-                    helperName = SyntaxFactory.GenericName(
-                        identifier: SyntaxFactory.Identifier("CreateOperationListPropertyAccessor"),
-                        typeArgumentList: SyntaxFactory.TypeArgumentList(SyntaxFactory.SingletonSeparatedList<TypeSyntax>(SyntaxFactory.IdentifierName("IOperation"))));
+                    helperName = GenericName(
+                        identifier: Identifier("CreateOperationListPropertyAccessor"),
+                        typeArgumentList: TypeArgumentList(SingletonSeparatedList<TypeSyntax>(IdentifierName("IOperation"))));
                 }
                 else
                 {
                     // CreateOperationPropertyAccessor<IOperation, IMethodSymbol>
-                    helperName = SyntaxFactory.GenericName(
-                        identifier: SyntaxFactory.Identifier("CreateOperationPropertyAccessor"),
-                        typeArgumentList: SyntaxFactory.TypeArgumentList(SyntaxFactory.SeparatedList(
+                    helperName = GenericName(
+                        identifier: Identifier("CreateOperationPropertyAccessor"),
+                        typeArgumentList: TypeArgumentList(SeparatedList(
                             new[]
                             {
-                                SyntaxFactory.IdentifierName("IOperation"),
+                                IdentifierName("IOperation"),
                                 property.AccessorResultType,
                             })));
                 }
 
                 // ConstructorAccessor = LightupHelpers.CreateOperationPropertyAccessor<IOperation, IMethodSymbol>(WrappedType, nameof(Constructor));
-                staticCtorStatements = staticCtorStatements.Add(SyntaxFactory.ExpressionStatement(SyntaxFactory.AssignmentExpression(
+                staticCtorStatements = staticCtorStatements.Add(ExpressionStatement(AssignmentExpression(
                     SyntaxKind.SimpleAssignmentExpression,
-                    left: SyntaxFactory.IdentifierName(property.AccessorName),
-                    right: SyntaxFactory.InvocationExpression(
-                        expression: SyntaxFactory.MemberAccessExpression(
+                    left: IdentifierName(property.AccessorName),
+                    right: InvocationExpression(
+                        expression: MemberAccessExpression(
                             SyntaxKind.SimpleMemberAccessExpression,
-                            expression: SyntaxFactory.IdentifierName("LightupHelpers"),
+                            expression: IdentifierName("LightupHelpers"),
                             name: helperName),
-                        argumentList: SyntaxFactory.ArgumentList(SyntaxFactory.SeparatedList(
+                        argumentList: ArgumentList(SeparatedList(
                             new[]
                             {
-                                SyntaxFactory.Argument(SyntaxFactory.IdentifierName("WrappedType")),
-                                SyntaxFactory.Argument(SyntaxFactory.InvocationExpression(
-                                    expression: SyntaxFactory.IdentifierName("nameof"),
-                                    argumentList: SyntaxFactory.ArgumentList(SyntaxFactory.SingletonSeparatedList(SyntaxFactory.Argument(SyntaxFactory.IdentifierName(property.Name)))))),
+                                Argument(IdentifierName("WrappedType")),
+                                Argument(InvocationExpression(
+                                    expression: IdentifierName("nameof"),
+                                    argumentList: ArgumentList(SingletonSeparatedList(Argument(IdentifierName(property.Name)))))),
                             }))))));
             }
 
@@ -168,72 +175,72 @@ namespace StyleCop.Analyzers.CodeGeneration
             // {
             //     WrappedType = OperationWrapperHelper.GetWrappedType(typeof(IObjectCreationOperationWrapper));
             // }
-            members = members.Add(SyntaxFactory.ConstructorDeclaration(
+            members = members.Add(ConstructorDeclaration(
                 attributeLists: default,
-                modifiers: SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.StaticKeyword)),
-                identifier: SyntaxFactory.Identifier(node.WrapperName),
-                parameterList: SyntaxFactory.ParameterList(),
+                modifiers: TokenList(Token(SyntaxKind.StaticKeyword)),
+                identifier: Identifier(node.WrapperName),
+                parameterList: ParameterList(),
                 initializer: null,
-                body: SyntaxFactory.Block(staticCtorStatements),
+                body: Block(staticCtorStatements),
                 expressionBody: null));
 
             // private IArgumentOperationWrapper(IOperation operation)
             // {
             //     this.operation = operation;
             // }
-            members = members.Add(SyntaxFactory.ConstructorDeclaration(
+            members = members.Add(ConstructorDeclaration(
                 attributeLists: default,
-                modifiers: SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PrivateKeyword)),
-                identifier: SyntaxFactory.Identifier(node.WrapperName),
-                parameterList: SyntaxFactory.ParameterList(SyntaxFactory.SingletonSeparatedList(SyntaxFactory.Parameter(
+                modifiers: TokenList(Token(SyntaxKind.PrivateKeyword)),
+                identifier: Identifier(node.WrapperName),
+                parameterList: ParameterList(SingletonSeparatedList(Parameter(
                     attributeLists: default,
                     modifiers: default,
-                    type: SyntaxFactory.IdentifierName("IOperation"),
-                    identifier: SyntaxFactory.Identifier("operation"),
+                    type: IdentifierName("IOperation"),
+                    identifier: Identifier("operation"),
                     @default: null))),
                 initializer: null,
-                body: SyntaxFactory.Block(
-                    SyntaxFactory.ExpressionStatement(SyntaxFactory.AssignmentExpression(
+                body: Block(
+                    ExpressionStatement(AssignmentExpression(
                         SyntaxKind.SimpleAssignmentExpression,
-                        left: SyntaxFactory.MemberAccessExpression(
+                        left: MemberAccessExpression(
                             SyntaxKind.SimpleMemberAccessExpression,
-                            expression: SyntaxFactory.ThisExpression(),
-                            name: SyntaxFactory.IdentifierName("operation")),
-                        right: SyntaxFactory.IdentifierName("operation")))),
+                            expression: ThisExpression(),
+                            name: IdentifierName("operation")),
+                        right: IdentifierName("operation")))),
                 expressionBody: null));
 
             // public IOperation WrappedOperation => this.operation;
-            members = members.Add(SyntaxFactory.PropertyDeclaration(
+            members = members.Add(PropertyDeclaration(
                 attributeLists: default,
-                modifiers: SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword)),
-                type: SyntaxFactory.IdentifierName("IOperation"),
+                modifiers: TokenList(Token(SyntaxKind.PublicKeyword)),
+                type: IdentifierName("IOperation"),
                 explicitInterfaceSpecifier: null,
-                identifier: SyntaxFactory.Identifier("WrappedOperation"),
+                identifier: Identifier("WrappedOperation"),
                 accessorList: null,
-                expressionBody: SyntaxFactory.ArrowExpressionClause(SyntaxFactory.MemberAccessExpression(
+                expressionBody: ArrowExpressionClause(MemberAccessExpression(
                     SyntaxKind.SimpleMemberAccessExpression,
-                    expression: SyntaxFactory.ThisExpression(),
-                    name: SyntaxFactory.IdentifierName("operation"))),
+                    expression: ThisExpression(),
+                    name: IdentifierName("operation"))),
                 initializer: null,
-                semicolonToken: SyntaxFactory.Token(SyntaxKind.SemicolonToken)));
+                semicolonToken: Token(SyntaxKind.SemicolonToken)));
 
             // public ITypeSymbol Type => this.WrappedOperation.Type;
-            members = members.Add(SyntaxFactory.PropertyDeclaration(
+            members = members.Add(PropertyDeclaration(
                 attributeLists: default,
-                modifiers: SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword)),
-                type: SyntaxFactory.IdentifierName("ITypeSymbol"),
+                modifiers: TokenList(Token(SyntaxKind.PublicKeyword)),
+                type: IdentifierName("ITypeSymbol"),
                 explicitInterfaceSpecifier: null,
-                identifier: SyntaxFactory.Identifier("Type"),
+                identifier: Identifier("Type"),
                 accessorList: null,
-                expressionBody: SyntaxFactory.ArrowExpressionClause(SyntaxFactory.MemberAccessExpression(
+                expressionBody: ArrowExpressionClause(MemberAccessExpression(
                     SyntaxKind.SimpleMemberAccessExpression,
-                    expression: SyntaxFactory.MemberAccessExpression(
+                    expression: MemberAccessExpression(
                         SyntaxKind.SimpleMemberAccessExpression,
-                        expression: SyntaxFactory.ThisExpression(),
-                        name: SyntaxFactory.IdentifierName("WrappedOperation")),
-                    name: SyntaxFactory.IdentifierName("Type"))),
+                        expression: ThisExpression(),
+                        name: IdentifierName("WrappedOperation")),
+                    name: IdentifierName("Type"))),
                 initializer: null,
-                semicolonToken: SyntaxFactory.Token(SyntaxKind.SemicolonToken)));
+                semicolonToken: Token(SyntaxKind.SemicolonToken)));
 
             foreach (var property in node.Properties)
             {
@@ -243,22 +250,22 @@ namespace StyleCop.Analyzers.CodeGeneration
                     if (property.IsPublicProperty)
                     {
                         // public object Constructor => throw new NotImplementedException("Property 'Type.Property' has unsupported type 'Type'");
-                        members = members.Add(SyntaxFactory.PropertyDeclaration(
+                        members = members.Add(PropertyDeclaration(
                             attributeLists: default,
-                            modifiers: SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword)),
-                            type: SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.ObjectKeyword)),
+                            modifiers: TokenList(Token(SyntaxKind.PublicKeyword)),
+                            type: PredefinedType(Token(SyntaxKind.ObjectKeyword)),
                             explicitInterfaceSpecifier: null,
-                            identifier: SyntaxFactory.Identifier(property.Name),
+                            identifier: Identifier(property.Name),
                             accessorList: null,
-                            expressionBody: SyntaxFactory.ArrowExpressionClause(SyntaxFactory.ThrowExpression(SyntaxFactory.ObjectCreationExpression(
-                                type: SyntaxFactory.IdentifierName(nameof(NotImplementedException)),
-                                argumentList: SyntaxFactory.ArgumentList(SyntaxFactory.SingletonSeparatedList(SyntaxFactory.Argument(
-                                    SyntaxFactory.LiteralExpression(
+                            expressionBody: ArrowExpressionClause(ThrowExpression(ObjectCreationExpression(
+                                type: IdentifierName(nameof(NotImplementedException)),
+                                argumentList: ArgumentList(SingletonSeparatedList(Argument(
+                                    LiteralExpression(
                                         SyntaxKind.StringLiteralExpression,
-                                        SyntaxFactory.Literal($"Property '{node.InterfaceName}.{property.Name}' has unsupported type '{property.Type}'"))))),
+                                        Literal($"Property '{node.InterfaceName}.{property.Name}' has unsupported type '{property.Type}'"))))),
                                 initializer: null))),
                             initializer: null,
-                            semicolonToken: SyntaxFactory.Token(SyntaxKind.SemicolonToken)));
+                            semicolonToken: Token(SyntaxKind.SemicolonToken)));
                     }
 
                     continue;
@@ -269,28 +276,28 @@ namespace StyleCop.Analyzers.CodeGeneration
                     continue;
                 }
 
-                var propertyType = property.NeedsWrapper ? SyntaxFactory.IdentifierName(property.WrapperType) : property.AccessorResultType;
-                var propertyTypeWithNullable = property.NeedsWrapper ? SyntaxFactory.IdentifierName(property.WrapperTypeWithNullable) : property.AccessorResultType;
+                var propertyType = property.NeedsWrapper ? IdentifierName(property.WrapperType) : property.AccessorResultType;
+                var propertyTypeWithNullable = property.NeedsWrapper ? IdentifierName(property.WrapperTypeWithNullable) : property.AccessorResultType;
 
                 // ConstructorAccessor(this.WrappedOperation)
-                var evaluatedAccessor = SyntaxFactory.InvocationExpression(
-                    expression: SyntaxFactory.IdentifierName(property.AccessorName),
-                    argumentList: SyntaxFactory.ArgumentList(SyntaxFactory.SingletonSeparatedList(SyntaxFactory.Argument(
-                        expression: SyntaxFactory.MemberAccessExpression(
+                var evaluatedAccessor = InvocationExpression(
+                    expression: IdentifierName(property.AccessorName),
+                    argumentList: ArgumentList(SingletonSeparatedList(Argument(
+                        expression: MemberAccessExpression(
                             SyntaxKind.SimpleMemberAccessExpression,
-                            expression: SyntaxFactory.ThisExpression(),
-                            name: SyntaxFactory.IdentifierName("WrappedOperation"))))));
+                            expression: ThisExpression(),
+                            name: IdentifierName("WrappedOperation"))))));
 
                 ExpressionSyntax convertedResult;
                 if (property.NeedsWrapper)
                 {
                     // IObjectOrCollectionInitializerOperationWrapper.FromOperation(...)
-                    convertedResult = SyntaxFactory.InvocationExpression(
-                        expression: SyntaxFactory.MemberAccessExpression(
+                    convertedResult = InvocationExpression(
+                        expression: MemberAccessExpression(
                             SyntaxKind.SimpleMemberAccessExpression,
                             expression: propertyType,
-                            name: SyntaxFactory.IdentifierName("FromOperation")),
-                        argumentList: SyntaxFactory.ArgumentList(SyntaxFactory.SingletonSeparatedList(SyntaxFactory.Argument(evaluatedAccessor))));
+                            name: IdentifierName("FromOperation")),
+                        argumentList: ArgumentList(SingletonSeparatedList(Argument(evaluatedAccessor))));
                 }
                 else
                 {
@@ -298,16 +305,16 @@ namespace StyleCop.Analyzers.CodeGeneration
                 }
 
                 // public IMethodSymbol Constructor => ConstructorAccessor(this.WrappedOperation);
-                members = members.Add(SyntaxFactory.PropertyDeclaration(
+                members = members.Add(PropertyDeclaration(
                     attributeLists: default,
-                    modifiers: SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword)),
+                    modifiers: TokenList(Token(SyntaxKind.PublicKeyword)),
                     type: propertyTypeWithNullable,
                     explicitInterfaceSpecifier: null,
-                    identifier: SyntaxFactory.Identifier(property.Name),
+                    identifier: Identifier(property.Name),
                     accessorList: null,
-                    expressionBody: SyntaxFactory.ArrowExpressionClause(convertedResult),
+                    expressionBody: ArrowExpressionClause(convertedResult),
                     initializer: null,
-                    semicolonToken: SyntaxFactory.Token(SyntaxKind.SemicolonToken)));
+                    semicolonToken: Token(SyntaxKind.SemicolonToken)));
             }
 
             if (node.BaseInterface is { } baseDefinition)
@@ -326,77 +333,77 @@ namespace StyleCop.Analyzers.CodeGeneration
                     }
 
                     var propertyType = property.IsSkipped
-                        ? SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.ObjectKeyword))
-                        : property.NeedsWrapper ? SyntaxFactory.IdentifierName(property.WrapperTypeWithNullable) : property.AccessorResultType;
+                        ? PredefinedType(Token(SyntaxKind.ObjectKeyword))
+                        : property.NeedsWrapper ? IdentifierName(property.WrapperTypeWithNullable) : property.AccessorResultType;
 
                     // public IOperation Instance => ((IMemberReferenceOperationWrapper)this).Instance;
-                    members = members.Add(SyntaxFactory.PropertyDeclaration(
+                    members = members.Add(PropertyDeclaration(
                         attributeLists: default,
-                        modifiers: SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword)),
+                        modifiers: TokenList(Token(SyntaxKind.PublicKeyword)),
                         type: propertyType,
                         explicitInterfaceSpecifier: null,
-                        identifier: SyntaxFactory.Identifier(property.Name),
+                        identifier: Identifier(property.Name),
                         accessorList: null,
-                        expressionBody: SyntaxFactory.ArrowExpressionClause(SyntaxFactory.MemberAccessExpression(
+                        expressionBody: ArrowExpressionClause(MemberAccessExpression(
                             SyntaxKind.SimpleMemberAccessExpression,
-                            expression: SyntaxFactory.ParenthesizedExpression(SyntaxFactory.CastExpression(
-                                type: SyntaxFactory.IdentifierName(baseDefinition.WrapperName),
-                                expression: SyntaxFactory.ThisExpression())),
-                            name: SyntaxFactory.IdentifierName(property.Name))),
+                            expression: ParenthesizedExpression(CastExpression(
+                                type: IdentifierName(baseDefinition.WrapperName),
+                                expression: ThisExpression())),
+                            name: IdentifierName(property.Name))),
                         initializer: null,
-                        semicolonToken: SyntaxFactory.Token(SyntaxKind.SemicolonToken)));
+                        semicolonToken: Token(SyntaxKind.SemicolonToken)));
                 }
 
                 // public static explicit operator IFieldReferenceOperationWrapper(IMemberReferenceOperationWrapper wrapper)
                 //     => FromOperation(wrapper.WrappedOperation);
-                members = members.Add(SyntaxFactory.ConversionOperatorDeclaration(
+                members = members.Add(ConversionOperatorDeclaration(
                     attributeLists: default,
-                    modifiers: SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.StaticKeyword)),
-                    implicitOrExplicitKeyword: SyntaxFactory.Token(SyntaxKind.ExplicitKeyword),
-                    operatorKeyword: SyntaxFactory.Token(SyntaxKind.OperatorKeyword),
-                    type: SyntaxFactory.IdentifierName(node.WrapperName),
-                    parameterList: SyntaxFactory.ParameterList(SyntaxFactory.SingletonSeparatedList(SyntaxFactory.Parameter(
+                    modifiers: TokenList(Token(SyntaxKind.PublicKeyword), Token(SyntaxKind.StaticKeyword)),
+                    implicitOrExplicitKeyword: Token(SyntaxKind.ExplicitKeyword),
+                    operatorKeyword: Token(SyntaxKind.OperatorKeyword),
+                    type: IdentifierName(node.WrapperName),
+                    parameterList: ParameterList(SingletonSeparatedList(Parameter(
                         attributeLists: default,
                         modifiers: default,
-                        type: SyntaxFactory.IdentifierName(baseDefinition.WrapperName),
-                        identifier: SyntaxFactory.Identifier("wrapper"),
+                        type: IdentifierName(baseDefinition.WrapperName),
+                        identifier: Identifier("wrapper"),
                         @default: null))),
                     body: null,
-                    expressionBody: SyntaxFactory.ArrowExpressionClause(SyntaxFactory.InvocationExpression(
-                        expression: SyntaxFactory.IdentifierName("FromOperation"),
-                        argumentList: SyntaxFactory.ArgumentList(SyntaxFactory.SingletonSeparatedList(SyntaxFactory.Argument(
-                            SyntaxFactory.MemberAccessExpression(
+                    expressionBody: ArrowExpressionClause(InvocationExpression(
+                        expression: IdentifierName("FromOperation"),
+                        argumentList: ArgumentList(SingletonSeparatedList(Argument(
+                            MemberAccessExpression(
                                 SyntaxKind.SimpleMemberAccessExpression,
-                                expression: SyntaxFactory.IdentifierName("wrapper"),
-                                name: SyntaxFactory.IdentifierName("WrappedOperation"))))))),
-                    semicolonToken: SyntaxFactory.Token(SyntaxKind.SemicolonToken)));
+                                expression: IdentifierName("wrapper"),
+                                name: IdentifierName("WrappedOperation"))))))),
+                    semicolonToken: Token(SyntaxKind.SemicolonToken)));
 
                 // public static implicit operator IMemberReferenceOperationWrapper(IFieldReferenceOperationWrapper wrapper)
                 //     => IMemberReferenceOperationWrapper.FromUpcast(wrapper.WrappedOperation);
-                members = members.Add(SyntaxFactory.ConversionOperatorDeclaration(
+                members = members.Add(ConversionOperatorDeclaration(
                     attributeLists: default,
-                    modifiers: SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.StaticKeyword)),
-                    implicitOrExplicitKeyword: SyntaxFactory.Token(SyntaxKind.ImplicitKeyword),
-                    operatorKeyword: SyntaxFactory.Token(SyntaxKind.OperatorKeyword),
-                    type: SyntaxFactory.IdentifierName(baseDefinition.WrapperName),
-                    parameterList: SyntaxFactory.ParameterList(SyntaxFactory.SingletonSeparatedList(SyntaxFactory.Parameter(
+                    modifiers: TokenList(Token(SyntaxKind.PublicKeyword), Token(SyntaxKind.StaticKeyword)),
+                    implicitOrExplicitKeyword: Token(SyntaxKind.ImplicitKeyword),
+                    operatorKeyword: Token(SyntaxKind.OperatorKeyword),
+                    type: IdentifierName(baseDefinition.WrapperName),
+                    parameterList: ParameterList(SingletonSeparatedList(Parameter(
                         attributeLists: default,
                         modifiers: default,
-                        type: SyntaxFactory.IdentifierName(node.WrapperName),
-                        identifier: SyntaxFactory.Identifier("wrapper"),
+                        type: IdentifierName(node.WrapperName),
+                        identifier: Identifier("wrapper"),
                         @default: null))),
                     body: null,
-                    expressionBody: SyntaxFactory.ArrowExpressionClause(SyntaxFactory.InvocationExpression(
-                        expression: SyntaxFactory.MemberAccessExpression(
+                    expressionBody: ArrowExpressionClause(InvocationExpression(
+                        expression: MemberAccessExpression(
                             SyntaxKind.SimpleMemberAccessExpression,
-                            expression: SyntaxFactory.IdentifierName(baseDefinition.WrapperName),
-                            name: SyntaxFactory.IdentifierName("FromUpcast")),
-                        argumentList: SyntaxFactory.ArgumentList(SyntaxFactory.SingletonSeparatedList(SyntaxFactory.Argument(
-                            SyntaxFactory.MemberAccessExpression(
+                            expression: IdentifierName(baseDefinition.WrapperName),
+                            name: IdentifierName("FromUpcast")),
+                        argumentList: ArgumentList(SingletonSeparatedList(Argument(
+                            MemberAccessExpression(
                                 SyntaxKind.SimpleMemberAccessExpression,
-                                expression: SyntaxFactory.IdentifierName("wrapper"),
-                                name: SyntaxFactory.IdentifierName("WrappedOperation"))))))),
-                    semicolonToken: SyntaxFactory.Token(SyntaxKind.SemicolonToken)));
+                                expression: IdentifierName("wrapper"),
+                                name: IdentifierName("WrappedOperation"))))))),
+                    semicolonToken: Token(SyntaxKind.SemicolonToken)));
             }
 
             // public static IArgumentOperationWrapper FromOperation(IOperation operation)
@@ -413,65 +420,65 @@ namespace StyleCop.Analyzers.CodeGeneration
             //
             //     return new IArgumentOperationWrapper(operation);
             // }
-            members = members.Add(SyntaxFactory.MethodDeclaration(
+            members = members.Add(MethodDeclaration(
                 attributeLists: default,
-                modifiers: SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.StaticKeyword)),
-                returnType: SyntaxFactory.IdentifierName(node.WrapperName),
+                modifiers: TokenList(Token(SyntaxKind.PublicKeyword), Token(SyntaxKind.StaticKeyword)),
+                returnType: IdentifierName(node.WrapperName),
                 explicitInterfaceSpecifier: null,
-                identifier: SyntaxFactory.Identifier("FromOperation"),
+                identifier: Identifier("FromOperation"),
                 typeParameterList: null,
-                parameterList: SyntaxFactory.ParameterList(SyntaxFactory.SingletonSeparatedList(SyntaxFactory.Parameter(
+                parameterList: ParameterList(SingletonSeparatedList(Parameter(
                     attributeLists: default,
                     modifiers: default,
-                    type: SyntaxFactory.IdentifierName("IOperation"),
-                    identifier: SyntaxFactory.Identifier("operation"),
+                    type: IdentifierName("IOperation"),
+                    identifier: Identifier("operation"),
                     @default: null))),
                 constraintClauses: default,
-                body: SyntaxFactory.Block(
-                    SyntaxFactory.IfStatement(
-                        condition: SyntaxFactory.BinaryExpression(
+                body: Block(
+                    IfStatement(
+                        condition: BinaryExpression(
                             SyntaxKind.EqualsExpression,
-                            left: SyntaxFactory.IdentifierName("operation"),
-                            right: SyntaxFactory.LiteralExpression(SyntaxKind.NullLiteralExpression)),
-                        statement: SyntaxFactory.Block(
-                            SyntaxFactory.ReturnStatement(SyntaxFactory.LiteralExpression(SyntaxKind.DefaultLiteralExpression)))),
-                    SyntaxFactory.IfStatement(
-                        condition: SyntaxFactory.PrefixUnaryExpression(
+                            left: IdentifierName("operation"),
+                            right: LiteralExpression(SyntaxKind.NullLiteralExpression)),
+                        statement: Block(
+                            ReturnStatement(LiteralExpression(SyntaxKind.DefaultLiteralExpression)))),
+                    IfStatement(
+                        condition: PrefixUnaryExpression(
                             SyntaxKind.LogicalNotExpression,
-                            operand: SyntaxFactory.InvocationExpression(
-                                expression: SyntaxFactory.IdentifierName("IsInstance"),
-                                argumentList: SyntaxFactory.ArgumentList(SyntaxFactory.SingletonSeparatedList(SyntaxFactory.Argument(SyntaxFactory.IdentifierName("operation")))))),
-                        statement: SyntaxFactory.Block(
-                            SyntaxFactory.ThrowStatement(SyntaxFactory.ObjectCreationExpression(
-                                type: SyntaxFactory.IdentifierName("InvalidCastException"),
-                                argumentList: SyntaxFactory.ArgumentList(SyntaxFactory.SingletonSeparatedList(SyntaxFactory.Argument(
-                                    SyntaxFactory.InterpolatedStringExpression(
-                                        SyntaxFactory.Token(SyntaxKind.InterpolatedStringStartToken),
-                                        SyntaxFactory.List(new InterpolatedStringContentSyntax[]
+                            operand: InvocationExpression(
+                                expression: IdentifierName("IsInstance"),
+                                argumentList: ArgumentList(SingletonSeparatedList(Argument(IdentifierName("operation")))))),
+                        statement: Block(
+                            ThrowStatement(ObjectCreationExpression(
+                                type: IdentifierName("InvalidCastException"),
+                                argumentList: ArgumentList(SingletonSeparatedList(Argument(
+                                    InterpolatedStringExpression(
+                                        Token(SyntaxKind.InterpolatedStringStartToken),
+                                        List(new InterpolatedStringContentSyntax[]
                                         {
-                                            SyntaxFactory.InterpolatedStringText(SyntaxFactory.Token(
+                                            InterpolatedStringText(Token(
                                                 leading: default,
                                                 SyntaxKind.InterpolatedStringTextToken,
                                                 "Cannot cast '",
                                                 "Cannot cast '",
                                                 trailing: default)),
-                                            SyntaxFactory.Interpolation(SyntaxFactory.MemberAccessExpression(
+                                            Interpolation(MemberAccessExpression(
                                                 SyntaxKind.SimpleMemberAccessExpression,
-                                                expression: SyntaxFactory.InvocationExpression(
-                                                    expression: SyntaxFactory.MemberAccessExpression(
+                                                expression: InvocationExpression(
+                                                    expression: MemberAccessExpression(
                                                         SyntaxKind.SimpleMemberAccessExpression,
-                                                        expression: SyntaxFactory.IdentifierName("operation"),
-                                                        name: SyntaxFactory.IdentifierName("GetType")),
-                                                    argumentList: SyntaxFactory.ArgumentList()),
-                                                name: SyntaxFactory.IdentifierName("FullName"))),
-                                            SyntaxFactory.InterpolatedStringText(SyntaxFactory.Token(
+                                                        expression: IdentifierName("operation"),
+                                                        name: IdentifierName("GetType")),
+                                                    argumentList: ArgumentList()),
+                                                name: IdentifierName("FullName"))),
+                                            InterpolatedStringText(Token(
                                                 leading: default,
                                                 SyntaxKind.InterpolatedStringTextToken,
                                                 "' to '",
                                                 "' to '",
                                                 trailing: default)),
-                                            SyntaxFactory.Interpolation(SyntaxFactory.IdentifierName("WrappedTypeName")),
-                                            SyntaxFactory.InterpolatedStringText(SyntaxFactory.Token(
+                                            Interpolation(IdentifierName("WrappedTypeName")),
+                                            InterpolatedStringText(Token(
                                                 leading: default,
                                                 SyntaxKind.InterpolatedStringTextToken,
                                                 "'",
@@ -479,9 +486,9 @@ namespace StyleCop.Analyzers.CodeGeneration
                                                 trailing: default)),
                                         }))))),
                                 initializer: null)))),
-                    SyntaxFactory.ReturnStatement(SyntaxFactory.ObjectCreationExpression(
-                        type: SyntaxFactory.IdentifierName(node.WrapperName),
-                        argumentList: SyntaxFactory.ArgumentList(SyntaxFactory.SingletonSeparatedList(SyntaxFactory.Argument(SyntaxFactory.IdentifierName("operation")))),
+                    ReturnStatement(ObjectCreationExpression(
+                        type: IdentifierName(node.WrapperName),
+                        argumentList: ArgumentList(SingletonSeparatedList(Argument(IdentifierName("operation")))),
                         initializer: null))),
                 expressionBody: null));
 
@@ -489,37 +496,37 @@ namespace StyleCop.Analyzers.CodeGeneration
             // {
             //     return operation != null && LightupHelpers.CanWrapOperation(operation, WrappedType);
             // }
-            members = members.Add(SyntaxFactory.MethodDeclaration(
+            members = members.Add(MethodDeclaration(
                 attributeLists: default,
-                modifiers: SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.StaticKeyword)),
-                returnType: SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.BoolKeyword)),
+                modifiers: TokenList(Token(SyntaxKind.PublicKeyword), Token(SyntaxKind.StaticKeyword)),
+                returnType: PredefinedType(Token(SyntaxKind.BoolKeyword)),
                 explicitInterfaceSpecifier: null,
-                identifier: SyntaxFactory.Identifier("IsInstance"),
+                identifier: Identifier("IsInstance"),
                 typeParameterList: null,
-                parameterList: SyntaxFactory.ParameterList(SyntaxFactory.SingletonSeparatedList(SyntaxFactory.Parameter(
+                parameterList: ParameterList(SingletonSeparatedList(Parameter(
                     attributeLists: default,
                     modifiers: default,
-                    type: SyntaxFactory.IdentifierName("IOperation"),
-                    identifier: SyntaxFactory.Identifier("operation"),
+                    type: IdentifierName("IOperation"),
+                    identifier: Identifier("operation"),
                     @default: null))),
                 constraintClauses: default,
-                body: SyntaxFactory.Block(
-                    SyntaxFactory.ReturnStatement(SyntaxFactory.BinaryExpression(
+                body: Block(
+                    ReturnStatement(BinaryExpression(
                         SyntaxKind.LogicalAndExpression,
-                        left: SyntaxFactory.BinaryExpression(
+                        left: BinaryExpression(
                             SyntaxKind.NotEqualsExpression,
-                            left: SyntaxFactory.IdentifierName("operation"),
-                            right: SyntaxFactory.LiteralExpression(SyntaxKind.NullLiteralExpression)),
-                        right: SyntaxFactory.InvocationExpression(
-                            expression: SyntaxFactory.MemberAccessExpression(
+                            left: IdentifierName("operation"),
+                            right: LiteralExpression(SyntaxKind.NullLiteralExpression)),
+                        right: InvocationExpression(
+                            expression: MemberAccessExpression(
                                 SyntaxKind.SimpleMemberAccessExpression,
-                                expression: SyntaxFactory.IdentifierName("LightupHelpers"),
-                                name: SyntaxFactory.IdentifierName("CanWrapOperation")),
-                            argumentList: SyntaxFactory.ArgumentList(SyntaxFactory.SeparatedList(
+                                expression: IdentifierName("LightupHelpers"),
+                                name: IdentifierName("CanWrapOperation")),
+                            argumentList: ArgumentList(SeparatedList(
                                 new[]
                                 {
-                                    SyntaxFactory.Argument(SyntaxFactory.IdentifierName("operation")),
-                                    SyntaxFactory.Argument(SyntaxFactory.IdentifierName("WrappedType")),
+                                    Argument(IdentifierName("operation")),
+                                    Argument(IdentifierName("WrappedType")),
                                 })))))),
                 expressionBody: null));
 
@@ -529,59 +536,59 @@ namespace StyleCop.Analyzers.CodeGeneration
                 // {
                 //     return new IMemberReferenceOperationWrapper(operation);
                 // }
-                members = members.Add(SyntaxFactory.MethodDeclaration(
+                members = members.Add(MethodDeclaration(
                     attributeLists: default,
-                    modifiers: SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.StaticKeyword)),
-                    returnType: SyntaxFactory.IdentifierName(node.WrapperName),
+                    modifiers: TokenList(Token(SyntaxKind.PublicKeyword), Token(SyntaxKind.StaticKeyword)),
+                    returnType: IdentifierName(node.WrapperName),
                     explicitInterfaceSpecifier: null,
-                    identifier: SyntaxFactory.Identifier("FromUpcast"),
+                    identifier: Identifier("FromUpcast"),
                     typeParameterList: null,
-                    parameterList: SyntaxFactory.ParameterList(SyntaxFactory.SingletonSeparatedList(SyntaxFactory.Parameter(
+                    parameterList: ParameterList(SingletonSeparatedList(Parameter(
                         attributeLists: default,
                         modifiers: default,
-                        type: SyntaxFactory.IdentifierName("IOperation"),
-                        identifier: SyntaxFactory.Identifier("operation"),
+                        type: IdentifierName("IOperation"),
+                        identifier: Identifier("operation"),
                         @default: null))),
                     constraintClauses: default,
-                    body: SyntaxFactory.Block(
-                        SyntaxFactory.ReturnStatement(SyntaxFactory.ObjectCreationExpression(
-                            type: SyntaxFactory.IdentifierName(node.WrapperName),
-                            argumentList: SyntaxFactory.ArgumentList(SyntaxFactory.SingletonSeparatedList(SyntaxFactory.Argument(SyntaxFactory.IdentifierName("operation")))),
+                    body: Block(
+                        ReturnStatement(ObjectCreationExpression(
+                            type: IdentifierName(node.WrapperName),
+                            argumentList: ArgumentList(SingletonSeparatedList(Argument(IdentifierName("operation")))),
                             initializer: null))),
                     expressionBody: null));
             }
 
-            var wrapperStruct = SyntaxFactory.StructDeclaration(
+            var wrapperStruct = StructDeclaration(
                 attributeLists: default,
-                modifiers: SyntaxTokenList.Create(SyntaxFactory.Token(SyntaxKind.PublicKeyword)).Add(SyntaxFactory.Token(SyntaxKind.ReadOnlyKeyword)),
-                identifier: SyntaxFactory.Identifier(node.WrapperName),
+                modifiers: SyntaxTokenList.Create(Token(SyntaxKind.PublicKeyword)).Add(Token(SyntaxKind.ReadOnlyKeyword)),
+                identifier: Identifier(node.WrapperName),
                 typeParameterList: null,
-                baseList: SyntaxFactory.BaseList(SyntaxFactory.SingletonSeparatedList<BaseTypeSyntax>(SyntaxFactory.SimpleBaseType(SyntaxFactory.IdentifierName("IOperationWrapper")))),
+                baseList: BaseList(SingletonSeparatedList<BaseTypeSyntax>(SimpleBaseType(IdentifierName("IOperationWrapper")))),
                 constraintClauses: default,
                 members: members);
-            var wrapperNamespace = SyntaxFactory.NamespaceDeclaration(
-                name: SyntaxFactory.ParseName("StyleCop.Analyzers.Lightup"),
+            var wrapperNamespace = NamespaceDeclaration(
+                name: ParseName("StyleCop.Analyzers.Lightup"),
                 externs: default,
-                usings: SyntaxFactory.List<UsingDirectiveSyntax>()
-                    .Add(SyntaxFactory.UsingDirective(SyntaxFactory.ParseName("System")))
-                    .Add(SyntaxFactory.UsingDirective(SyntaxFactory.ParseName("System.Collections.Immutable")))
-                    .Add(SyntaxFactory.UsingDirective(SyntaxFactory.ParseName("Microsoft.CodeAnalysis"))),
-                members: SyntaxFactory.SingletonList<MemberDeclarationSyntax>(wrapperStruct));
+                usings: List<UsingDirectiveSyntax>()
+                    .Add(UsingDirective(ParseName("System")))
+                    .Add(UsingDirective(ParseName("System.Collections.Immutable")))
+                    .Add(UsingDirective(ParseName("Microsoft.CodeAnalysis"))),
+                members: SingletonList<MemberDeclarationSyntax>(wrapperStruct));
 
             wrapperNamespace = wrapperNamespace
                 .NormalizeWhitespace()
                 .WithLeadingTrivia(
-                    SyntaxFactory.Comment("// Copyright (c) Tunnel Vision Laboratories, LLC. All Rights Reserved."),
-                    SyntaxFactory.CarriageReturnLineFeed,
-                    SyntaxFactory.Comment("// Licensed under the MIT License. See LICENSE in the project root for license information."),
-                    SyntaxFactory.CarriageReturnLineFeed,
-                    SyntaxFactory.CarriageReturnLineFeed,
-                    SyntaxFactory.Trivia(SyntaxFactory.NullableDirectiveTrivia(SyntaxFactory.Token(SyntaxKind.EnableKeyword), true)
-                        .WithNullableKeyword(SyntaxFactory.Token(SyntaxFactory.TriviaList(), SyntaxKind.NullableKeyword, SyntaxFactory.TriviaList(SyntaxFactory.Space)))),
-                    SyntaxFactory.CarriageReturnLineFeed,
-                    SyntaxFactory.CarriageReturnLineFeed)
+                    Comment("// Copyright (c) Tunnel Vision Laboratories, LLC. All Rights Reserved."),
+                    CarriageReturnLineFeed,
+                    Comment("// Licensed under the MIT License. See LICENSE in the project root for license information."),
+                    CarriageReturnLineFeed,
+                    CarriageReturnLineFeed,
+                    Trivia(NullableDirectiveTrivia(Token(SyntaxKind.EnableKeyword), true)
+                        .WithNullableKeyword(Token(TriviaList(), SyntaxKind.NullableKeyword, TriviaList(Space)))),
+                    CarriageReturnLineFeed,
+                    CarriageReturnLineFeed)
                 .WithTrailingTrivia(
-                    SyntaxFactory.CarriageReturnLineFeed);
+                    CarriageReturnLineFeed);
 
             context.AddSource(node.WrapperName + ".g.cs", SourceText.From(wrapperNamespace.ToFullString(), Encoding.UTF8));
         }
@@ -589,104 +596,104 @@ namespace StyleCop.Analyzers.CodeGeneration
         private void GenerateOperationWrapperHelper(in GeneratorExecutionContext context, ImmutableArray<InterfaceData> wrapperTypes)
         {
             // private static readonly ImmutableDictionary<Type, Type> WrappedTypes;
-            var wrappedTypes = SyntaxFactory.FieldDeclaration(
+            var wrappedTypes = FieldDeclaration(
                 attributeLists: default,
-                modifiers: SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PrivateKeyword), SyntaxFactory.Token(SyntaxKind.StaticKeyword), SyntaxFactory.Token(SyntaxKind.ReadOnlyKeyword)),
-                declaration: SyntaxFactory.VariableDeclaration(
-                    type: SyntaxFactory.GenericName(
-                        identifier: SyntaxFactory.Identifier("ImmutableDictionary"),
-                        typeArgumentList: SyntaxFactory.TypeArgumentList(
-                            SyntaxFactory.SeparatedList<TypeSyntax>(
+                modifiers: TokenList(Token(SyntaxKind.PrivateKeyword), Token(SyntaxKind.StaticKeyword), Token(SyntaxKind.ReadOnlyKeyword)),
+                declaration: VariableDeclaration(
+                    type: GenericName(
+                        identifier: Identifier("ImmutableDictionary"),
+                        typeArgumentList: TypeArgumentList(
+                            SeparatedList<TypeSyntax>(
                                 new[]
                                 {
-                                    SyntaxFactory.IdentifierName("Type"),
-                                    SyntaxFactory.IdentifierName("Type"),
+                                    IdentifierName("Type"),
+                                    IdentifierName("Type"),
                                 }))),
-                    variables: SyntaxFactory.SingletonSeparatedList(SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier("WrappedTypes")))));
+                    variables: SingletonSeparatedList(VariableDeclarator(Identifier("WrappedTypes")))));
 
             // var codeAnalysisAssembly = typeof(SyntaxNode).GetTypeInfo().Assembly;
             // var builder = ImmutableDictionary.CreateBuilder<Type, Type>();
-            var staticCtorStatements = SyntaxFactory.List<StatementSyntax>()
-                .Add(SyntaxFactory.LocalDeclarationStatement(SyntaxFactory.VariableDeclaration(
-                    type: SyntaxFactory.IdentifierName("var"),
-                    variables: SyntaxFactory.SingletonSeparatedList(SyntaxFactory.VariableDeclarator(
-                        identifier: SyntaxFactory.Identifier("codeAnalysisAssembly"),
+            var staticCtorStatements = List<StatementSyntax>()
+                .Add(LocalDeclarationStatement(VariableDeclaration(
+                    type: IdentifierName("var"),
+                    variables: SingletonSeparatedList(VariableDeclarator(
+                        identifier: Identifier("codeAnalysisAssembly"),
                         argumentList: null,
-                        initializer: SyntaxFactory.EqualsValueClause(
-                            SyntaxFactory.MemberAccessExpression(
+                        initializer: EqualsValueClause(
+                            MemberAccessExpression(
                                 SyntaxKind.SimpleMemberAccessExpression,
-                                expression: SyntaxFactory.InvocationExpression(
-                                    SyntaxFactory.MemberAccessExpression(
+                                expression: InvocationExpression(
+                                    MemberAccessExpression(
                                         SyntaxKind.SimpleMemberAccessExpression,
-                                        expression: SyntaxFactory.TypeOfExpression(SyntaxFactory.IdentifierName("SyntaxNode")),
-                                        name: SyntaxFactory.IdentifierName("GetTypeInfo"))),
-                                name: SyntaxFactory.IdentifierName("Assembly"))))))))
-                .Add(SyntaxFactory.LocalDeclarationStatement(SyntaxFactory.VariableDeclaration(
-                    type: SyntaxFactory.IdentifierName("var"),
-                    variables: SyntaxFactory.SingletonSeparatedList(SyntaxFactory.VariableDeclarator(
-                        identifier: SyntaxFactory.Identifier("builder"),
+                                        expression: TypeOfExpression(IdentifierName("SyntaxNode")),
+                                        name: IdentifierName("GetTypeInfo"))),
+                                name: IdentifierName("Assembly"))))))))
+                .Add(LocalDeclarationStatement(VariableDeclaration(
+                    type: IdentifierName("var"),
+                    variables: SingletonSeparatedList(VariableDeclarator(
+                        identifier: Identifier("builder"),
                         argumentList: null,
-                        initializer: SyntaxFactory.EqualsValueClause(
-                            SyntaxFactory.InvocationExpression(
-                                SyntaxFactory.MemberAccessExpression(
+                        initializer: EqualsValueClause(
+                            InvocationExpression(
+                                MemberAccessExpression(
                                     SyntaxKind.SimpleMemberAccessExpression,
-                                    expression: SyntaxFactory.IdentifierName("ImmutableDictionary"),
-                                    name: SyntaxFactory.GenericName(
-                                        identifier: SyntaxFactory.Identifier("CreateBuilder"),
-                                        typeArgumentList: SyntaxFactory.TypeArgumentList(
-                                            SyntaxFactory.SeparatedList<TypeSyntax>(
+                                    expression: IdentifierName("ImmutableDictionary"),
+                                    name: GenericName(
+                                        identifier: Identifier("CreateBuilder"),
+                                        typeArgumentList: TypeArgumentList(
+                                            SeparatedList<TypeSyntax>(
                                                 new[]
                                                 {
-                                                    SyntaxFactory.IdentifierName("Type"),
-                                                    SyntaxFactory.IdentifierName("Type"),
+                                                    IdentifierName("Type"),
+                                                    IdentifierName("Type"),
                                                 })))))))))));
 
             foreach (var node in wrapperTypes)
             {
                 // builder.Add(typeof(IArgumentOperationWrapper), codeAnalysisAssembly.GetType(IArgumentOperationWrapper.WrappedTypeName));
-                staticCtorStatements = staticCtorStatements.Add(SyntaxFactory.ExpressionStatement(
-                    SyntaxFactory.InvocationExpression(
-                        expression: SyntaxFactory.MemberAccessExpression(
+                staticCtorStatements = staticCtorStatements.Add(ExpressionStatement(
+                    InvocationExpression(
+                        expression: MemberAccessExpression(
                             SyntaxKind.SimpleMemberAccessExpression,
-                            expression: SyntaxFactory.IdentifierName("builder"),
-                            name: SyntaxFactory.IdentifierName("Add")),
-                        argumentList: SyntaxFactory.ArgumentList(
-                            SyntaxFactory.SeparatedList(
+                            expression: IdentifierName("builder"),
+                            name: IdentifierName("Add")),
+                        argumentList: ArgumentList(
+                            SeparatedList(
                                 new[]
                                 {
-                                    SyntaxFactory.Argument(SyntaxFactory.TypeOfExpression(SyntaxFactory.IdentifierName(node.WrapperName))),
-                                    SyntaxFactory.Argument(
-                                        SyntaxFactory.InvocationExpression(
-                                            expression: SyntaxFactory.MemberAccessExpression(
+                                    Argument(TypeOfExpression(IdentifierName(node.WrapperName))),
+                                    Argument(
+                                        InvocationExpression(
+                                            expression: MemberAccessExpression(
                                                 SyntaxKind.SimpleMemberAccessExpression,
-                                                expression: SyntaxFactory.IdentifierName("codeAnalysisAssembly"),
-                                                name: SyntaxFactory.IdentifierName("GetType")),
-                                            argumentList: SyntaxFactory.ArgumentList(SyntaxFactory.SingletonSeparatedList(SyntaxFactory.Argument(
-                                                SyntaxFactory.MemberAccessExpression(
+                                                expression: IdentifierName("codeAnalysisAssembly"),
+                                                name: IdentifierName("GetType")),
+                                            argumentList: ArgumentList(SingletonSeparatedList(Argument(
+                                                MemberAccessExpression(
                                                     SyntaxKind.SimpleMemberAccessExpression,
-                                                    expression: SyntaxFactory.IdentifierName(node.WrapperName),
-                                                    name: SyntaxFactory.IdentifierName("WrappedTypeName"))))))),
+                                                    expression: IdentifierName(node.WrapperName),
+                                                    name: IdentifierName("WrappedTypeName"))))))),
                                 })))));
             }
 
             // WrappedTypes = builder.ToImmutable();
-            staticCtorStatements = staticCtorStatements.Add(SyntaxFactory.ExpressionStatement(
-                SyntaxFactory.AssignmentExpression(
+            staticCtorStatements = staticCtorStatements.Add(ExpressionStatement(
+                AssignmentExpression(
                     SyntaxKind.SimpleAssignmentExpression,
-                    left: SyntaxFactory.IdentifierName("WrappedTypes"),
-                    right: SyntaxFactory.InvocationExpression(
-                        SyntaxFactory.MemberAccessExpression(
+                    left: IdentifierName("WrappedTypes"),
+                    right: InvocationExpression(
+                        MemberAccessExpression(
                             SyntaxKind.SimpleMemberAccessExpression,
-                            expression: SyntaxFactory.IdentifierName("builder"),
-                            name: SyntaxFactory.IdentifierName("ToImmutable"))))));
+                            expression: IdentifierName("builder"),
+                            name: IdentifierName("ToImmutable"))))));
 
-            var staticCtor = SyntaxFactory.ConstructorDeclaration(
+            var staticCtor = ConstructorDeclaration(
                 attributeLists: default,
-                modifiers: SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.StaticKeyword)),
-                identifier: SyntaxFactory.Identifier("OperationWrapperHelper"),
-                parameterList: SyntaxFactory.ParameterList(),
+                modifiers: TokenList(Token(SyntaxKind.StaticKeyword)),
+                identifier: Identifier("OperationWrapperHelper"),
+                parameterList: ParameterList(),
                 initializer: null,
-                body: SyntaxFactory.Block(staticCtorStatements),
+                body: Block(staticCtorStatements),
                 expressionBody: null);
 
             // /// <summary>
@@ -703,97 +710,97 @@ namespace StyleCop.Analyzers.CodeGeneration
             //
             //     return null;
             // }
-            var getWrappedType = SyntaxFactory.MethodDeclaration(
+            var getWrappedType = MethodDeclaration(
                 attributeLists: default,
-                modifiers: SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.StaticKeyword)),
-                returnType: SyntaxFactory.IdentifierName("Type"),
+                modifiers: TokenList(Token(SyntaxKind.PublicKeyword), Token(SyntaxKind.StaticKeyword)),
+                returnType: IdentifierName("Type"),
                 explicitInterfaceSpecifier: null,
-                identifier: SyntaxFactory.Identifier("GetWrappedType"),
+                identifier: Identifier("GetWrappedType"),
                 typeParameterList: null,
-                parameterList: SyntaxFactory.ParameterList(SyntaxFactory.SingletonSeparatedList(SyntaxFactory.Parameter(
+                parameterList: ParameterList(SingletonSeparatedList(Parameter(
                     attributeLists: default,
                     modifiers: default,
-                    type: SyntaxFactory.IdentifierName("Type"),
-                    identifier: SyntaxFactory.Identifier("wrapperType"),
+                    type: IdentifierName("Type"),
+                    identifier: Identifier("wrapperType"),
                     @default: null))),
                 constraintClauses: default,
-                body: SyntaxFactory.Block(
-                    SyntaxFactory.IfStatement(
-                        condition: SyntaxFactory.InvocationExpression(
-                            expression: SyntaxFactory.MemberAccessExpression(
+                body: Block(
+                    IfStatement(
+                        condition: InvocationExpression(
+                            expression: MemberAccessExpression(
                                 SyntaxKind.SimpleMemberAccessExpression,
-                                expression: SyntaxFactory.IdentifierName("WrappedTypes"),
-                                name: SyntaxFactory.IdentifierName("TryGetValue")),
-                            argumentList: SyntaxFactory.ArgumentList(SyntaxFactory.SeparatedList(
+                                expression: IdentifierName("WrappedTypes"),
+                                name: IdentifierName("TryGetValue")),
+                            argumentList: ArgumentList(SeparatedList(
                                 new[]
                                 {
-                                    SyntaxFactory.Argument(SyntaxFactory.IdentifierName("wrapperType")),
-                                    SyntaxFactory.Argument(
+                                    Argument(IdentifierName("wrapperType")),
+                                    Argument(
                                         nameColon: null,
-                                        refKindKeyword: SyntaxFactory.Token(SyntaxKind.OutKeyword),
-                                        expression: SyntaxFactory.DeclarationExpression(
-                                            type: SyntaxFactory.IdentifierName("Type"),
-                                            designation: SyntaxFactory.SingleVariableDesignation(SyntaxFactory.Identifier("wrappedType")))),
+                                        refKindKeyword: Token(SyntaxKind.OutKeyword),
+                                        expression: DeclarationExpression(
+                                            type: IdentifierName("Type"),
+                                            designation: SingleVariableDesignation(Identifier("wrappedType")))),
                                 }))),
-                        statement: SyntaxFactory.Block(
-                            SyntaxFactory.ReturnStatement(SyntaxFactory.IdentifierName("wrappedType")))),
-                    SyntaxFactory.ReturnStatement(SyntaxFactory.LiteralExpression(SyntaxKind.NullLiteralExpression))),
+                        statement: Block(
+                            ReturnStatement(IdentifierName("wrappedType")))),
+                    ReturnStatement(LiteralExpression(SyntaxKind.NullLiteralExpression))),
                 expressionBody: null);
 
-            getWrappedType = getWrappedType.WithLeadingTrivia(SyntaxFactory.TriviaList(
-                SyntaxFactory.Trivia(SyntaxFactory.DocumentationComment(
-                    SyntaxFactory.XmlText(" "),
-                    SyntaxFactory.XmlSummaryElement(
-                        SyntaxFactory.XmlNewLine(Environment.NewLine),
-                        SyntaxFactory.XmlText(" Gets the type that is wrapped by the given wrapper."),
-                        SyntaxFactory.XmlNewLine(Environment.NewLine),
-                        SyntaxFactory.XmlText(" ")),
-                    SyntaxFactory.XmlNewLine(Environment.NewLine),
-                    SyntaxFactory.XmlText(" "),
-                    SyntaxFactory.XmlParamElement(
+            getWrappedType = getWrappedType.WithLeadingTrivia(TriviaList(
+                Trivia(DocumentationComment(
+                    XmlText(" "),
+                    XmlSummaryElement(
+                        XmlNewLine(Environment.NewLine),
+                        XmlText(" Gets the type that is wrapped by the given wrapper."),
+                        XmlNewLine(Environment.NewLine),
+                        XmlText(" ")),
+                    XmlNewLine(Environment.NewLine),
+                    XmlText(" "),
+                    XmlParamElement(
                         "wrapperType",
-                        SyntaxFactory.XmlText("Type of the wrapper for which the wrapped type should be retrieved.")),
-                    SyntaxFactory.XmlNewLine(Environment.NewLine),
-                    SyntaxFactory.XmlText(" "),
-                    SyntaxFactory.XmlReturnsElement(
-                        SyntaxFactory.XmlText("The wrapped type, or null if there is no info.")),
-                    SyntaxFactory.XmlNewLine(Environment.NewLine).WithoutTrailingTrivia()))));
+                        XmlText("Type of the wrapper for which the wrapped type should be retrieved.")),
+                    XmlNewLine(Environment.NewLine),
+                    XmlText(" "),
+                    XmlReturnsElement(
+                        XmlText("The wrapped type, or null if there is no info.")),
+                    XmlNewLine(Environment.NewLine).WithoutTrailingTrivia()))));
 
-            var wrapperHelperClass = SyntaxFactory.ClassDeclaration(
+            var wrapperHelperClass = ClassDeclaration(
                 attributeLists: default,
-                modifiers: SyntaxTokenList.Create(SyntaxFactory.Token(SyntaxKind.PublicKeyword)).Add(SyntaxFactory.Token(SyntaxKind.StaticKeyword)),
-                identifier: SyntaxFactory.Identifier("OperationWrapperHelper"),
+                modifiers: SyntaxTokenList.Create(Token(SyntaxKind.PublicKeyword)).Add(Token(SyntaxKind.StaticKeyword)),
+                identifier: Identifier("OperationWrapperHelper"),
                 typeParameterList: null,
                 baseList: null,
                 constraintClauses: default,
-                members: SyntaxFactory.List<MemberDeclarationSyntax>()
+                members: List<MemberDeclarationSyntax>()
                     .Add(wrappedTypes)
                     .Add(staticCtor)
                     .Add(getWrappedType));
-            var wrapperNamespace = SyntaxFactory.NamespaceDeclaration(
-                name: SyntaxFactory.ParseName("StyleCop.Analyzers.Lightup"),
+            var wrapperNamespace = NamespaceDeclaration(
+                name: ParseName("StyleCop.Analyzers.Lightup"),
                 externs: default,
-                usings: SyntaxFactory.List<UsingDirectiveSyntax>()
-                    .Add(SyntaxFactory.UsingDirective(SyntaxFactory.ParseName("System")))
-                    .Add(SyntaxFactory.UsingDirective(SyntaxFactory.ParseName("System.Collections.Immutable")))
-                    .Add(SyntaxFactory.UsingDirective(SyntaxFactory.ParseName("System.Reflection")))
-                    .Add(SyntaxFactory.UsingDirective(SyntaxFactory.ParseName("Microsoft.CodeAnalysis"))),
-                members: SyntaxFactory.SingletonList<MemberDeclarationSyntax>(wrapperHelperClass));
+                usings: List<UsingDirectiveSyntax>()
+                    .Add(UsingDirective(ParseName("System")))
+                    .Add(UsingDirective(ParseName("System.Collections.Immutable")))
+                    .Add(UsingDirective(ParseName("System.Reflection")))
+                    .Add(UsingDirective(ParseName("Microsoft.CodeAnalysis"))),
+                members: SingletonList<MemberDeclarationSyntax>(wrapperHelperClass));
 
             wrapperNamespace = wrapperNamespace
                 .NormalizeWhitespace()
                 .WithLeadingTrivia(
-                    SyntaxFactory.Comment("// Copyright (c) Tunnel Vision Laboratories, LLC. All Rights Reserved."),
-                    SyntaxFactory.CarriageReturnLineFeed,
-                    SyntaxFactory.Comment("// Licensed under the MIT License. See LICENSE in the project root for license information."),
-                    SyntaxFactory.CarriageReturnLineFeed,
-                    SyntaxFactory.CarriageReturnLineFeed,
-                    SyntaxFactory.Trivia(SyntaxFactory.NullableDirectiveTrivia(SyntaxFactory.Token(SyntaxKind.EnableKeyword), true)
-                        .WithNullableKeyword(SyntaxFactory.Token(SyntaxFactory.TriviaList(), SyntaxKind.NullableKeyword, SyntaxFactory.TriviaList(SyntaxFactory.Space)))),
-                    SyntaxFactory.CarriageReturnLineFeed,
-                    SyntaxFactory.CarriageReturnLineFeed)
+                    Comment("// Copyright (c) Tunnel Vision Laboratories, LLC. All Rights Reserved."),
+                    CarriageReturnLineFeed,
+                    Comment("// Licensed under the MIT License. See LICENSE in the project root for license information."),
+                    CarriageReturnLineFeed,
+                    CarriageReturnLineFeed,
+                    Trivia(NullableDirectiveTrivia(Token(SyntaxKind.EnableKeyword), true)
+                        .WithNullableKeyword(Token(TriviaList(), SyntaxKind.NullableKeyword, TriviaList(Space)))),
+                    CarriageReturnLineFeed,
+                    CarriageReturnLineFeed)
                 .WithTrailingTrivia(
-                    SyntaxFactory.CarriageReturnLineFeed);
+                    CarriageReturnLineFeed);
 
             context.AddSource("OperationWrapperHelper.g.cs", SourceText.From(wrapperNamespace.ToFullString(), Encoding.UTF8));
         }
@@ -805,52 +812,52 @@ namespace StyleCop.Analyzers.CodeGeneration
                 .OrderBy(kind => kind.value)
                 .ToImmutableArray();
 
-            var members = SyntaxFactory.List<MemberDeclarationSyntax>();
+            var members = List<MemberDeclarationSyntax>();
             foreach (var operationKind in operationKinds)
             {
                 // public const OperationKind FieldReference = (OperationKind)26;
-                members = members.Add(SyntaxFactory.FieldDeclaration(
+                members = members.Add(FieldDeclaration(
                     attributeLists: default,
-                    modifiers: SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.ConstKeyword)),
-                    declaration: SyntaxFactory.VariableDeclaration(
-                        type: SyntaxFactory.IdentifierName("OperationKind"),
-                        variables: SyntaxFactory.SingletonSeparatedList(SyntaxFactory.VariableDeclarator(
-                            identifier: SyntaxFactory.Identifier(operationKind.name),
+                    modifiers: TokenList(Token(SyntaxKind.PublicKeyword), Token(SyntaxKind.ConstKeyword)),
+                    declaration: VariableDeclaration(
+                        type: IdentifierName("OperationKind"),
+                        variables: SingletonSeparatedList(VariableDeclarator(
+                            identifier: Identifier(operationKind.name),
                             argumentList: null,
-                            initializer: SyntaxFactory.EqualsValueClause(SyntaxFactory.CastExpression(
-                                type: SyntaxFactory.IdentifierName("OperationKind"),
-                                expression: SyntaxFactory.LiteralExpression(SyntaxKind.NumericLiteralExpression, SyntaxFactory.Literal($"0x{operationKind.value:x}", operationKind.value)))))))));
+                            initializer: EqualsValueClause(CastExpression(
+                                type: IdentifierName("OperationKind"),
+                                expression: LiteralExpression(SyntaxKind.NumericLiteralExpression, Literal($"0x{operationKind.value:x}", operationKind.value)))))))));
             }
 
-            var operationKindExClass = SyntaxFactory.ClassDeclaration(
+            var operationKindExClass = ClassDeclaration(
                 attributeLists: default,
-                modifiers: SyntaxTokenList.Create(SyntaxFactory.Token(SyntaxKind.PublicKeyword)).Add(SyntaxFactory.Token(SyntaxKind.StaticKeyword)),
-                identifier: SyntaxFactory.Identifier("OperationKindEx"),
+                modifiers: SyntaxTokenList.Create(Token(SyntaxKind.PublicKeyword)).Add(Token(SyntaxKind.StaticKeyword)),
+                identifier: Identifier("OperationKindEx"),
                 typeParameterList: null,
                 baseList: null,
                 constraintClauses: default,
                 members: members);
-            var wrapperNamespace = SyntaxFactory.NamespaceDeclaration(
-                name: SyntaxFactory.ParseName("StyleCop.Analyzers.Lightup"),
+            var wrapperNamespace = NamespaceDeclaration(
+                name: ParseName("StyleCop.Analyzers.Lightup"),
                 externs: default,
-                usings: SyntaxFactory.List<UsingDirectiveSyntax>()
-                    .Add(SyntaxFactory.UsingDirective(SyntaxFactory.ParseName("Microsoft.CodeAnalysis"))),
-                members: SyntaxFactory.SingletonList<MemberDeclarationSyntax>(operationKindExClass));
+                usings: List<UsingDirectiveSyntax>()
+                    .Add(UsingDirective(ParseName("Microsoft.CodeAnalysis"))),
+                members: SingletonList<MemberDeclarationSyntax>(operationKindExClass));
 
             wrapperNamespace = wrapperNamespace
                 .NormalizeWhitespace()
                 .WithLeadingTrivia(
-                    SyntaxFactory.Comment("// Copyright (c) Tunnel Vision Laboratories, LLC. All Rights Reserved."),
-                    SyntaxFactory.CarriageReturnLineFeed,
-                    SyntaxFactory.Comment("// Licensed under the MIT License. See LICENSE in the project root for license information."),
-                    SyntaxFactory.CarriageReturnLineFeed,
-                    SyntaxFactory.CarriageReturnLineFeed,
-                    SyntaxFactory.Trivia(SyntaxFactory.NullableDirectiveTrivia(SyntaxFactory.Token(SyntaxKind.EnableKeyword), true)
-                        .WithNullableKeyword(SyntaxFactory.Token(SyntaxFactory.TriviaList(), SyntaxKind.NullableKeyword, SyntaxFactory.TriviaList(SyntaxFactory.Space)))),
-                    SyntaxFactory.CarriageReturnLineFeed,
-                    SyntaxFactory.CarriageReturnLineFeed)
+                    Comment("// Copyright (c) Tunnel Vision Laboratories, LLC. All Rights Reserved."),
+                    CarriageReturnLineFeed,
+                    Comment("// Licensed under the MIT License. See LICENSE in the project root for license information."),
+                    CarriageReturnLineFeed,
+                    CarriageReturnLineFeed,
+                    Trivia(NullableDirectiveTrivia(Token(SyntaxKind.EnableKeyword), true)
+                        .WithNullableKeyword(Token(TriviaList(), SyntaxKind.NullableKeyword, TriviaList(Space)))),
+                    CarriageReturnLineFeed,
+                    CarriageReturnLineFeed)
                 .WithTrailingTrivia(
-                    SyntaxFactory.CarriageReturnLineFeed);
+                    CarriageReturnLineFeed);
 
             context.AddSource("OperationKindEx.g.cs", SourceText.From(wrapperNamespace.ToFullString(), Encoding.UTF8));
         }
@@ -1073,17 +1080,17 @@ namespace StyleCop.Analyzers.CodeGeneration
 
                 if (this.IsDerivedOperationArray)
                 {
-                    this.AccessorResultType = SyntaxFactory.GenericName(
-                        identifier: SyntaxFactory.Identifier("ImmutableArray"),
-                        typeArgumentList: SyntaxFactory.TypeArgumentList(SyntaxFactory.SingletonSeparatedList<TypeSyntax>(SyntaxFactory.IdentifierName("IOperation"))));
+                    this.AccessorResultType = GenericName(
+                        identifier: Identifier("ImmutableArray"),
+                        typeArgumentList: TypeArgumentList(SingletonSeparatedList<TypeSyntax>(IdentifierName("IOperation"))));
                 }
                 else if (IsAnyOperation(this.Type))
                 {
-                    this.AccessorResultType = SyntaxFactory.IdentifierName("IOperation");
+                    this.AccessorResultType = IdentifierName("IOperation");
                 }
                 else
                 {
-                    this.AccessorResultType = SyntaxFactory.ParseTypeName(this.Type);
+                    this.AccessorResultType = ParseTypeName(this.Type);
                 }
             }
 
