@@ -1131,7 +1131,6 @@ namespace StyleCop.Analyzers.CodeGeneration
                 this.AccessorName = this.Name + "Accessor";
                 this.Type = node.Attribute("Type").Value;
                 this.WrapperType = $"{(IsNullable(Type) ? Type.Substring(0, Type.Length - 1) : Type)}Wrapper";
-                this.WrapperTypeWithNullable = IsNullable(Type) ? $"{WrapperType}?" : WrapperType;
 
                 this.IsNew = node.Attribute("New")?.Value == "true";
                 this.IsPublicProperty = node.Attribute("Internal")?.Value != "true";
@@ -1188,8 +1187,6 @@ namespace StyleCop.Analyzers.CodeGeneration
             public string Type { get; }
 
             public string WrapperType { get; }
-
-            public string WrapperTypeWithNullable { get; }
 
             public bool NeedsWrapper { get; }
 
