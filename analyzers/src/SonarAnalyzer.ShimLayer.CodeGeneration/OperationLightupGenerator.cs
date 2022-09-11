@@ -325,7 +325,8 @@ namespace StyleCop.Analyzers.CodeGeneration
                                         Literal($"Property '{node.InterfaceName}.{property.Name}' has unsupported type '{property.Type}'"))))),
                                 initializer: null))),
                             initializer: null,
-                            semicolonToken: Token(SyntaxKind.SemicolonToken)));
+                            semicolonToken: Token(SyntaxKind.SemicolonToken))
+                            .WithLeadingTrivia(property.Summary));
                     }
 
                     continue;
@@ -374,7 +375,8 @@ namespace StyleCop.Analyzers.CodeGeneration
                     accessorList: null,
                     expressionBody: ArrowExpressionClause(convertedResult),
                     initializer: null,
-                    semicolonToken: Token(SyntaxKind.SemicolonToken)));
+                    semicolonToken: Token(SyntaxKind.SemicolonToken))
+                    .WithLeadingTrivia(property.Summary));
             }
 
             if (node.BaseInterface is { } baseDefinition)
@@ -411,7 +413,8 @@ namespace StyleCop.Analyzers.CodeGeneration
                                 expression: ThisExpression())),
                             name: IdentifierName(property.Name))),
                         initializer: null,
-                        semicolonToken: Token(SyntaxKind.SemicolonToken)));
+                        semicolonToken: Token(SyntaxKind.SemicolonToken))
+                        .WithLeadingTrivia(property.Summary));
                 }
 
                 // public static explicit operator IFieldReferenceOperationWrapper(IMemberReferenceOperationWrapper wrapper)
@@ -923,6 +926,17 @@ namespace StyleCop.Analyzers.CodeGeneration
             context.AddSource("OperationKindEx.g.cs", SourceText.From(wrapperNamespace.ToFullString(), Encoding.UTF8));
         }
 
+        private static SyntaxTriviaList ParseSummaryDocComment(XElement node)
+        {
+            var summary = node.Element("Comments")?.Element("summary")?.ToString();
+            if (!string.IsNullOrEmpty(summary))
+            {
+                summary = Regex.Replace(summary, "^", "/// ", RegexOptions.Multiline);
+                return ParseLeadingTrivia($"{summary}\r\n");
+            }
+            return SyntaxTriviaList.Empty;
+        }
+
         private sealed class DocumentData
         {
             public DocumentData(XDocument document)
@@ -1075,12 +1089,7 @@ namespace StyleCop.Analyzers.CodeGeneration
                 this.BaseInterfaceName = node.Attribute("Base").Value;
                 this.IsAbstract = node.Name == "AbstractNode";
                 this.Properties = node.XPathSelectElements("Property").Select(property => new PropertyData(property)).ToImmutableArray();
-                var summary = node.Element("Comments")?.Element("summary")?.ToString();
-                if (!string.IsNullOrEmpty(summary))
-                {
-                    summary = Regex.Replace(summary, "^", "/// ", RegexOptions.Multiline);
-                    this.Summary = ParseLeadingTrivia($"{summary}\r\n");
-                }
+                this.Summary = ParseSummaryDocComment(node);
             }
 
             public ImmutableArray<(string name, int value, string? extraDescription)> OperationKinds { get; }
@@ -1143,7 +1152,7 @@ namespace StyleCop.Analyzers.CodeGeneration
                     "InterpolatedStringArgumentPlaceholderKind" => true,
                     _ => !this.IsPublicProperty,
                 };
-
+                this.Summary = ParseSummaryDocComment(node);
                 this.NeedsWrapper = IsAnyOperation(this.Type) && this.Type != $"IOperation{(IsNullable(this.Type) ? "?" : string.Empty)}";
                 this.IsDerivedOperationArray = IsAnyOperationArray(this.Type) && this.Type != "ImmutableArray<IOperation>";
 
@@ -1172,6 +1181,8 @@ namespace StyleCop.Analyzers.CodeGeneration
             public bool IsOverride { get; }
 
             public string Name { get; }
+
+            public SyntaxTriviaList Summary { get; }
 
             public string AccessorName { get; }
 
