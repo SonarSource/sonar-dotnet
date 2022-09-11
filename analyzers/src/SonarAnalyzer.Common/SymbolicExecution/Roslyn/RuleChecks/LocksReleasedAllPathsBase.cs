@@ -118,13 +118,13 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
 
         public override ProgramState ConditionEvaluated(SymbolicContext context)
         {
-            if (context.Operation.Instance.AsPropertyReference() is { } property
+            if (context.Operation.Instance.TryAsPropertyReference(out var property)
                 && IsLockHeldProperties.Contains(property.Property.Name)
                 && ((IMemberReferenceOperationWrapper)property).IsOnReaderWriterLockOrSlim())
             {
                 return ProcessCondition(property.Instance.TrackedSymbol());
             }
-            else if (context.Operation.Instance.AsInvocation() is { } invocation && invocation.IsMonitorIsEntered())    // Same condition also needs to be in ExceptionCandidate
+            else if (context.Operation.Instance.TryAsInvocation(out var invocation) && invocation.IsMonitorIsEntered())    // Same condition also needs to be in ExceptionCandidate
             {
                 return ProcessCondition(ArgumentSymbol(invocation, 0));
             }
@@ -150,7 +150,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
 
         protected override ProgramState PostProcessSimple(SymbolicContext context)
         {
-            if (context.Operation.Instance.AsInvocation() is { } invocation)
+            if (context.Operation.Instance.AsObjectCreation() is { } objectCreation)
             {
                 // ToDo: we ignore the number of parameters for now.
                 if (invocation.TargetMethod.IsAny(KnownType.System_Threading_Monitor, "Enter", "TryEnter"))
@@ -216,7 +216,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
 
         private static ISymbol ArgumentSymbol(IInvocationOperationWrapper invocation, int parameterIndex) =>
             invocation.TargetMethod.Parameters[parameterIndex].Name is var parameterName
-            && invocation.Arguments[parameterIndex].AsArgument() is var argument
+            && invocation.Arguments[parameterIndex].TryAsArgument(out var argument)
             && argument.Parameter.Name == parameterName
                 ? argument.Value.TrackedSymbol()
                 : invocation.Arguments.SingleOrDefault(x => x.AsArgument().Parameter.Name == parameterName)?.AsArgument().Value.TrackedSymbol();
