@@ -55,7 +55,48 @@ namespace StyleCop.Analyzers.CodeGeneration
 
         private void GenerateOperationInterfaceExtension(in GeneratorExecutionContext context, InterfaceData value)
         {
+            var wrapperName = IdentifierName(value.WrapperName);
+            var methodName = value.InterfaceName.Substring(1);
+            methodName = methodName.Substring(0, methodName.Length - "Operation".Length);
+            var publicStatic = TokenList(Token(SyntaxKind.PublicKeyword), Token(SyntaxKind.StaticKeyword));
+            var asMethod = MethodDeclaration(wrapperName, Identifier($"As{methodName}"))
+                .WithModifiers(publicStatic)
+                .WithParameterList(ParameterList(SingletonSeparatedList(
+                    Parameter(Identifier("operation")).WithModifiers(TokenList(Token(SyntaxKind.ThisKeyword))).WithType(IdentifierName("IOperation")))))
+                .WithExpressionBody(ArrowExpressionClause(
+                    InvocationExpression(MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, wrapperName, IdentifierName("FromOperation")))
+                        .WithArgumentList(ArgumentList(SingletonSeparatedList(Argument(IdentifierName("operation")))))))
+                .WithSemicolonToken(Token(SyntaxKind.SemicolonToken));
+            var tryAsMethod = MethodDeclaration(PredefinedType(Token(SyntaxKind.BoolKeyword)), Identifier($"TryAs{methodName}"))
+                .WithModifiers(publicStatic)
+                .WithParameterList(ParameterList(SeparatedList(new[]
+                    {
+                        Parameter(Identifier("operation")).WithModifiers(TokenList(Token(SyntaxKind.ThisKeyword))).WithType(IdentifierName("IOperation")),
+                        Parameter(Identifier("wrapper")).WithModifiers(TokenList(Token(SyntaxKind.OutKeyword))).WithType(wrapperName)
+                    })))
+                .WithBody(Block(SingletonList(IfStatement(
+                    InvocationExpression(MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, wrapperName, IdentifierName("IsInstance")))
+                        .WithArgumentList(ArgumentList(SingletonSeparatedList(Argument(IdentifierName("operation"))))),
+                    Block(
+                        ExpressionStatement(AssignmentExpression(SyntaxKind.SimpleAssignmentExpression, IdentifierName("wrapper"),
+                            InvocationExpression(MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, wrapperName, IdentifierName("FromOperation")))
+                                .WithArgumentList(ArgumentList(SingletonSeparatedList(Argument(IdentifierName("operation"))))))),
+                        ReturnStatement(LiteralExpression(SyntaxKind.TrueLiteralExpression))))
+                .WithElse(ElseClause(Block(
+                    ExpressionStatement(AssignmentExpression(SyntaxKind.SimpleAssignmentExpression, IdentifierName("wrapper"), LiteralExpression(SyntaxKind.DefaultLiteralExpression, Token(SyntaxKind.DefaultKeyword)))),
+                    ReturnStatement(LiteralExpression(SyntaxKind.FalseLiteralExpression))))))));
+            var extensionClass = ClassDeclaration($"{value.WrapperName}Extensions").WithModifiers(publicStatic)
+                .WithMembers(List(new MemberDeclarationSyntax[] { asMethod, tryAsMethod }));
 
+            var wrapperNamespace = NamespaceDeclaration(
+                name: ParseName("StyleCop.Analyzers.Lightup"),
+                externs: default,
+                usings: List<UsingDirectiveSyntax>()
+                    .Add(UsingDirective(ParseName("System")))
+                    .Add(UsingDirective(ParseName("System.Collections.Immutable")))
+                    .Add(UsingDirective(ParseName("Microsoft.CodeAnalysis"))),
+                members: SingletonList<MemberDeclarationSyntax>(extensionClass));
+            context.AddSource($"{value.WrapperName}Extensions.g.cs", SourceText.From(wrapperNamespace.NormalizeWhitespace().ToFullString(), Encoding.UTF8));
         }
 
         private void GenerateOperationInterface(in GeneratorExecutionContext context, InterfaceData node)
