@@ -59,6 +59,8 @@ namespace StyleCop.Analyzers.CodeGeneration
             var methodName = value.InterfaceName.Substring(1);
             methodName = methodName.Substring(0, methodName.Length - "Operation".Length);
             var publicStatic = TokenList(Token(SyntaxKind.PublicKeyword), Token(SyntaxKind.StaticKeyword));
+
+            // public static ILoopOperationWrapper AsLoop(this IOperation operation) => ILoopOperationWrapper.FromOperation(operation);
             var asMethod = MethodDeclaration(wrapperName, Identifier($"As{methodName}"))
                 .WithModifiers(publicStatic)
                 .WithParameterList(ParameterList(SingletonSeparatedList(
@@ -67,6 +69,20 @@ namespace StyleCop.Analyzers.CodeGeneration
                     InvocationExpression(MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, wrapperName, IdentifierName("FromOperation")))
                         .WithArgumentList(ArgumentList(SingletonSeparatedList(Argument(IdentifierName("operation")))))))
                 .WithSemicolonToken(Token(SyntaxKind.SemicolonToken));
+
+            // public static bool TryAsLoop(this IOperation operation, out ILoopOperationWrapper wrapper)
+            // {
+            //     if (ILoopOperationWrapper.IsInstance(operation))
+            //     {
+            //         wrapper = ILoopOperationWrapper.FromOperation(operation);
+            //         return true;
+            //     }
+            //     else
+            //     {
+            //         wrapper = default;
+            //         return false;
+            //     }
+            // }
             var tryAsMethod = MethodDeclaration(PredefinedType(Token(SyntaxKind.BoolKeyword)), Identifier($"TryAs{methodName}"))
                 .WithModifiers(publicStatic)
                 .WithParameterList(ParameterList(SeparatedList(new[]
