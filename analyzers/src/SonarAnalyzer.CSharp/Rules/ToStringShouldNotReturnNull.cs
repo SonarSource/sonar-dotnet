@@ -26,7 +26,7 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class ToStringNoNull : ToStringShouldNotReturnNullBase<SyntaxKind>
+public sealed class ToStringShouldNotReturnNull : ToStringShouldNotReturnNullBase<SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 }

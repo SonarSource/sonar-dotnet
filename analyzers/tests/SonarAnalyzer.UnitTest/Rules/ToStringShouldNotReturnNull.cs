@@ -24,27 +24,27 @@ using VB = SonarAnalyzer.Rules.VisualBasic;
 namespace SonarAnalyzer.UnitTest.Rules;
 
 [TestClass]
-public class ToStringNoNullTest
+public class ToStringShouldNotReturnNullTest
 {
-    private readonly VerifierBuilder csBuilder = new VerifierBuilder<CS.ToStringNoNull>();
-    private readonly VerifierBuilder vsBuilder = new VerifierBuilder<VB.ToStringShouldNotReturnNull>();
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ToStringShouldNotReturnNull>();
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.ToStringShouldNotReturnNull>();
 
     [TestMethod]
     public void ToStringShouldNotReturnNull_CS() =>
-        csBuilder.AddPaths("ToStringNoNull.cs").Verify();
+        builderCS.AddPaths("ToStringShouldNotReturnNull.cs").Verify();
 
 #if NET
     [TestMethod]
     public void ToStringShouldNotReturnNull_CSharp9() =>
-        csBuilder
+        builderCS
         .WithOptions(ParseOptionsHelper.FromCSharp9)
         .WithTopLevelStatements()
-        .AddPaths("ToStringNoNull.CSharp9.cs")
+        .AddPaths("ToStringShouldNotReturnNull.CSharp9.cs")
         .Verify();
 #endif
 
     [TestMethod]
     public void ToStringShouldNotReturnNull_VB() =>
-        vsBuilder.AddPaths("ToStringShouldNotReturnNull.vb").Verify();
+        builderVB.AddPaths("ToStringShouldNotReturnNull.vb").Verify();
 
 }
