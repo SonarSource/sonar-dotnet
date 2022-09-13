@@ -30,12 +30,12 @@ public class ToStringNoNullTest
     private readonly VerifierBuilder vsBuilder = new VerifierBuilder<VB.ToStringShouldNotReturnNull>();
 
     [TestMethod]
-    public void ToStringNoNull_CS() =>
+    public void ToStringShouldNotReturnNull_CS() =>
         csBuilder.AddPaths("ToStringNoNull.cs").Verify();
 
 #if NET
     [TestMethod]
-    public void ToStringNoNull_CSharp9() =>
+    public void ToStringShouldNotReturnNull_CSharp9() =>
         csBuilder
         .WithOptions(ParseOptionsHelper.FromCSharp9)
         .WithTopLevelStatements()
