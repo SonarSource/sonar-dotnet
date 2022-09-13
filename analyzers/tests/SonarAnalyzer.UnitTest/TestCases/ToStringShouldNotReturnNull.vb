@@ -47,7 +47,7 @@ Namespace Compliant
         Public Overrides Function ToString() As String
             Dim lambda As Func(Of String) =
                 Function() As String
-                    Return Nothing ' Noncompliant - FP
+                    Return Nothing ' Compliant
                 End Function
 
             Return String.Empty

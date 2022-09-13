@@ -31,6 +31,8 @@ public abstract class ToStringShouldNotReturnNullBase<TSyntaxKind> : SonarDiagno
 
     protected override string MessageFormat => "Return an empty string instead.";
 
+    protected abstract bool NotLocalOrLambda(SyntaxNode node);
+
     protected ToStringShouldNotReturnNullBase() : base(DiagnosticId) { }
 
     protected sealed override void Initialize(SonarAnalysisContext context) =>
@@ -50,6 +52,7 @@ public abstract class ToStringShouldNotReturnNullBase<TSyntaxKind> : SonarDiagno
 
     private bool WithinToString(SyntaxNode node) =>
         node.Ancestors()
-        .Select(x => Language.Syntax.NodeIdentifier(x)?.ValueText)
-        .Any(x => nameof(ToString).Equals(x, Language.NameComparison));
+          .TakeWhile(NotLocalOrLambda)
+          .Select(x => Language.Syntax.NodeIdentifier(x)?.ValueText)
+          .Any(x => nameof(ToString).Equals(x, Language.NameComparison));
 }

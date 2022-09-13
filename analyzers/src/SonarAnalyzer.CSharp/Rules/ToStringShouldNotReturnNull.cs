@@ -22,6 +22,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp;
 
@@ -29,4 +30,7 @@ namespace SonarAnalyzer.Rules.CSharp;
 public sealed class ToStringShouldNotReturnNull : ToStringShouldNotReturnNullBase<SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
+    protected override bool NotLocalOrLambda(SyntaxNode node) =>
+        !node.IsAnyKind(SyntaxKind.ParenthesizedLambdaExpression, SyntaxKindEx.LocalFunctionStatement);
 }

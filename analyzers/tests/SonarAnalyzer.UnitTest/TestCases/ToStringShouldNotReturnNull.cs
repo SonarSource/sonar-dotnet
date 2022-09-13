@@ -89,6 +89,7 @@ class Noncompliant
             return Condition.When() ? null : ""; // Compliant - FN
         }
     }
+
     struct StructReturnsNull
     {
         public override string ToString()

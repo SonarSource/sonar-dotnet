@@ -20,7 +20,7 @@ namespace Compliant
 
             static string Local()
             {
-                return null; // Noncompliant - FP
+                return null; // Compliant
             }
         }
     }
@@ -29,7 +29,7 @@ namespace Compliant
     {
         public override string ToString()
         {
-            Func<string> lambda = () => { return null; }; // Noncompliant - FP
+            Func<string> lambda = () => { return null; }; // Compliant
 
             return string.Empty;
         }
@@ -45,7 +45,7 @@ namespace Compliant
     }
 }
 
-class Noncompliant
+namespace Noncompliant
 {
     record RecordReturnsNull
     {
