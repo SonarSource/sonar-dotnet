@@ -2,52 +2,57 @@
 
 string ToString() { return null; } // Compliant, this is fine since it's not a ToString override
 
-record RecordToStringNoNull
+public static class Condition
 {
-    public override string ToString()
+    public static bool When()
     {
-        if (DateTime.Now.Hour > 5)
-        {
-            return null; // Noncompliant
-        }
-        else
-        {
-            // ...
-        }
-
-        return null; // Noncompliant {{Return empty string instead.}}
+        return true;
     }
 }
 
-record RecordToStringNoNullCompliant
+namespace Compliant
 {
-    public override string ToString()
+    class LocalFunctionReturnsNull
     {
-        if (DateTime.Now.Hour > 5)
+        public override string ToString()
         {
             return string.Empty;
+
+            static string Local()
+            {
+                return null; // Noncompliant - FP
+            }
         }
-        else
+    }
+
+    class LambdaReturnsNull
+    {
+        public override string ToString()
         {
-            // ...
+            Func<string> lambda = () => { return null; }; // Noncompliant - FP
+
+            return string.Empty;
         }
+    }
 
-        return "";
+    record RecordReturnsStringEmpty
+    {
+        public override string ToString()
+        {
+            if (Condition.When()) { return string.Empty; }
+            return string.Empty;
+        }
     }
 }
 
-struct StructToStringNotNull
+class Noncompliant
 {
-    public override string ToString()
+    record RecordReturnsNull
     {
-        return null; // Noncompliant
-    }
-}
-
-struct StructToStringNotNullCompliant
-{
-    public override string ToString()
-    {
-        return string.Empty;
+        public override string ToString()
+        {
+            if (Condition.When()) { return null; } // Noncompliant
+            return null; // Noncompliant
+        }
     }
 }

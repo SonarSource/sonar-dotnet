@@ -1,32 +1,96 @@
-﻿Public Class Noncompliant
-    Private ReadOnly collection As List(Of Integer)
+﻿Imports System
 
-    Public Overrides Function ToString() As String
-        If collection.Count = 0 Then
-            Return Nothing ' Noncompliant
-'           ^^^^^^^^^^^^^^
-        Else
-            ' ..
-        End If
-
-        Return Nothing ' Noncompliant {{Return empty string instead.}}
+Class Condition
+    Shared Function [When]() As Boolean
+        Return True
     End Function
 End Class
 
-Public Class Compliant
-    Private ReadOnly collection As List(Of Integer)
+Namespace Compliant
+    Class OtherMethodReturnsNothingString
+        Function Returns() As String
+            Return Nothing
+        End Function
+    End Class
 
-    Public Function AnyOther() As String
-        Return Nothing
-    End Function
+    Class ReturnsSomeString
+        Public Overrides Function ToString() As String
+            If Condition.[When]() Then
+                Return "Hello, world!"
+            End If
 
-    Public Overrides Function ToString() As String
-        If collection.Count = 0 Then
+            Return "Hello, world!"
+        End Function
+    End Class
+
+    Class ReturnsEmptyString
+        Public Overrides Function ToString() As String
+            If Condition.[When]() Then
+                Return ""
+            End If
+
+            Return ""
+        End Function
+    End Class
+
+    Class ReturnsStringEmpty
+        Public Overrides Function ToString() As String
+            If Condition.[When]() Then
+                Return String.Empty
+            End If
+
             Return String.Empty
-        Else
-            ' ..
-        End If
+        End Function
+    End Class
 
-        Return ""
-    End Function
-End Class
+    Class LambdaReturnsNothing
+        Public Overrides Function ToString() As String
+            Dim lambda As Func(Of String) =
+                Function() As String
+                    Return Nothing ' Noncompliant - FP
+                End Function
+
+            Return String.Empty
+        End Function
+    End Class
+
+    Structure StructReturnsStringEmpty
+        Public Overrides Function ToString() As String
+            If Condition.[When]() Then
+                Return String.Empty
+            End If
+
+            Return String.Empty
+        End Function
+    End Structure
+End Namespace
+
+Namespace Noncompliant
+    Public Class ReturnsNothing
+        Public Overrides Function ToString() As String
+            If Condition.[When]() Then
+                Return Nothing ' Noncompliant
+            '   ^^^^^^^^^^^^^^
+            End If
+
+            Return Nothing ' Noncompliant {{Return an empty string instead.}}
+        End Function
+    End Class
+
+    Public Class ReturnsNothingViaTenary
+        Public Overrides Function ToString() As String
+            Return If(Condition.[When](), Nothing, "")  ' Compliant - FN
+        End Function
+    End Class
+
+    Structure StructReturnsNothing
+        Public Overrides Function ToString() As String
+            If Condition.[When]() Then
+                Return Nothing ' Noncompliant
+            End If
+
+            Return Nothing ' Noncompliant
+        End Function
+    End Structure
+
+End Namespace

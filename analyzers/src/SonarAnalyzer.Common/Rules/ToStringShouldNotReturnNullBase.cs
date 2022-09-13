@@ -29,7 +29,7 @@ public abstract class ToStringShouldNotReturnNullBase<TSyntaxKind> : SonarDiagno
 {
     private const string DiagnosticId = "S2225";
 
-    protected override string MessageFormat => "Return empty string instead.";
+    protected override string MessageFormat => "Return an empty string instead.";
 
     protected ToStringShouldNotReturnNullBase() : base(DiagnosticId) { }
 
