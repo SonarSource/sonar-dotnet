@@ -68,6 +68,7 @@ public class C {
         [DataRow("parameter!.ToString();", true)]
         [DataRow("array!.ToString();", true)]
         [DataRow("array[0]!.ToString();", false)]
+        [DataRow("((int?)local)!.ToString();", true)]
         [DataRow("((int?)null)!.ToString();", false)]
         [DataRow("((int?)null + 3)!.ToString();", false)]
         public void NullForgivingOperatorSetsNotNullConstraintsOnOperationsAndSymbols(string expressionStatement, bool expectedHasSymbol)

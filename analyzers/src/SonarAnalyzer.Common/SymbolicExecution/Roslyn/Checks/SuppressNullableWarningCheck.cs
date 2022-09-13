@@ -26,7 +26,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
 {
     internal class SuppressNullableWarningCheck : SymbolicCheck
     {
-        protected override ProgramState PreProcessSimple(SymbolicContext context)
+        protected override ProgramState PostProcessSimple(SymbolicContext context)
         {
             var node = context.Operation.Instance.Syntax;
             if (node is { Language: LanguageNames.CSharp })
