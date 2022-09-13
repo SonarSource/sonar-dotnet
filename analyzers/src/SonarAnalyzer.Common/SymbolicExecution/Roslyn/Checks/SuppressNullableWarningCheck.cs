@@ -48,13 +48,11 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
 
         private static SyntaxNode WalkUpParentheses(SyntaxNode node)
         {
-            if (node is { Language: LanguageNames.CSharp })
+            while (node is { RawKind: (int)Microsoft.CodeAnalysis.CSharp.SyntaxKind.ParenthesizedExpression })
             {
-                while (node is { RawKind: (int)Microsoft.CodeAnalysis.CSharp.SyntaxKind.ParenthesizedExpression })
-                {
-                    node = node.Parent;
-                }
+                node = node.Parent;
             }
+
             return node;
         }
     }
