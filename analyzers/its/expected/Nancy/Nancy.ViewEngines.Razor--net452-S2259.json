@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2259",
+"message":  "'modelType' is null on at least one execution path.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\CSharp\NancyCSharpRazorCodeParser.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  58,
+"endLine":  49,
+"endColumn":  67
+}
+}
+}
+]
+}
