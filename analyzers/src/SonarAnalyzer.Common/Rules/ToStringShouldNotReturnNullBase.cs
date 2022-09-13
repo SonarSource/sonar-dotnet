@@ -20,6 +20,7 @@
 
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules;
@@ -35,17 +36,19 @@ public abstract class ToStringShouldNotReturnNullBase<TSyntaxKind> : SonarDiagno
 
     protected ToStringShouldNotReturnNullBase() : base(DiagnosticId) { }
 
-    protected sealed override void Initialize(SonarAnalysisContext context) =>
+    protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterSyntaxNodeActionInNonGenerated(
             Language.GeneratedCodeRecognizer,
-            c =>
-            {
-                if (WithinToString(c.Node) && ReturnsNull(c.Node))
-                {
-                    c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
-                }
-            },
+            c => ToStringReturnsNull(c, c.Node),
             Language.SyntaxKind.ReturnStatement);
+
+    protected void ToStringReturnsNull(SyntaxNodeAnalysisContext context, SyntaxNode node)
+    {
+        if (node is { } &&  WithinToString(node) && ReturnsNull(node))
+        {
+            context.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
+        }
+    }
 
     private bool ReturnsNull(SyntaxNode node) =>
         Language.Syntax.IsNullLiteral(Language.Syntax.NodeExpression(node));

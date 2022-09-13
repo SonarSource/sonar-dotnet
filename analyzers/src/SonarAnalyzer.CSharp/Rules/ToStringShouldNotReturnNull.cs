@@ -20,6 +20,7 @@
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
@@ -30,6 +31,16 @@ namespace SonarAnalyzer.Rules.CSharp;
 public sealed class ToStringShouldNotReturnNull : ToStringShouldNotReturnNullBase<SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
+    protected override void Initialize(SonarAnalysisContext context)
+    {
+        base.Initialize(context);
+
+        context.RegisterSyntaxNodeActionInNonGenerated(
+            Language.GeneratedCodeRecognizer,
+            c => ToStringReturnsNull(c, ((MethodDeclarationSyntax)c.Node).ExpressionBody),
+            SyntaxKind.MethodDeclaration);
+    }
 
     protected override bool NotLocalOrLambda(SyntaxNode node) =>
         !node.IsAnyKind(SyntaxKind.ParenthesizedLambdaExpression, SyntaxKindEx.LocalFunctionStatement);

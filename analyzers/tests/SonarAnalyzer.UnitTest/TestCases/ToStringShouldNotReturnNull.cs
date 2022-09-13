@@ -79,7 +79,12 @@ class Noncompliant
 
     public class ReturnsNullViaExpressionBody
     {
-        public override string ToString() => null;
+        public override string ToString() => null; // Noncompliant
+    }
+
+    public class ReturnsNullViaTenaryExpressionBody
+    {
+        public override string ToString() => Condition.When() ? null : string.Empty; // Compliant - FN
     }
 
     public class ReturnsNullViaTenary
