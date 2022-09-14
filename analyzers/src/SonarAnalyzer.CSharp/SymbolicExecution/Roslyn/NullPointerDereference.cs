@@ -32,6 +32,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp
 
         protected override DiagnosticDescriptor Rule => S2259;
 
+        protected override bool IsSupressed(SyntaxNode node) =>
+            node.Parent.WalkUpParentheses() is { RawKind: (int)SyntaxKindEx.SuppressNullableWarningExpression };
+
         public override bool ShouldExecute()
         {
             var walker = new SyntaxKindWalker();
@@ -60,7 +63,5 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp
             }
         }
 
-        protected override bool IsSupressed(SyntaxNode node) =>
-            node.Parent.WalkUpParentheses() is { RawKind: (int)SyntaxKindEx.SuppressNullableWarningExpression };
     }
 }

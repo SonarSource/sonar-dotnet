@@ -1,7 +1,6 @@
 ﻿#nullable enable
 
 using System;
-using System.IO;
 
 namespace Tests.Diagnostics.CSharp8
 {
@@ -71,7 +70,7 @@ namespace Tests.Diagnostics.CSharp8
 
         public void Expression(bool condition)
         {
-            (condition ? new object(): null)!.ToString();  // Compliant
+            (condition ? new object() : null)!.ToString();  // Compliant
         }
 
         public void Parenthesis(bool condition)
