@@ -95,7 +95,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             NuGetMetadataReference.NLog(Constants.NuGetLatestVersion);
 
         private static IEnumerable<MetadataReference> SeriLogReferences =>
-            NuGetMetadataReference.SerilogPackages(Constants.NuGetLatestVersion);
+            NuGetMetadataReference.SerilogPackages("2.11.0", "4.1.0");
 
 #if NET
         private static IEnumerable<MetadataReference> AspNetCore2LoggingReferences =>
