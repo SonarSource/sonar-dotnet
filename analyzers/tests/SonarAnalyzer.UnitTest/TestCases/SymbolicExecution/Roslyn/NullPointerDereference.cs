@@ -376,7 +376,7 @@ namespace Tests.Diagnostics
         void BinaryOrRight(int arg)
         {
             object o = null;
-            if (arg == 0 || o == null)
+            if (arg == 0 | o == null)
             {
                 o.ToString();   // Noncompliant
             }
