@@ -711,6 +711,18 @@ namespace Tests.Diagnostics
             a();
         }
 
+        void ActionInvocation(bool condition)
+        {
+            Action a = null;
+            a(); // FN
+
+            Func<object> f = null;
+            f(); // FN
+
+            Action notNull = () => { };
+            (condition ? a : notNull)();  // FN
+        }
+
         void Assert1()
         {
             System.Diagnostics.Debug.Assert(_foo1 != null);

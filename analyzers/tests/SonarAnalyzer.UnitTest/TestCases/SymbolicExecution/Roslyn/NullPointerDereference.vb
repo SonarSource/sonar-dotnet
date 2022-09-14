@@ -1,4 +1,5 @@
 ﻿Imports System
+Imports System.Threading.Tasks
 
 Public Class Program
 
@@ -68,6 +69,11 @@ Public Class Program
             O.ToString()   ' Compliant
         End If
     End Sub
+
+    Public Async Function TestAwait() As Task
+        Dim T As Task
+        Await T         ' Noncompliant
+    End Function
 
 End Class
 

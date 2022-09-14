@@ -19,6 +19,8 @@
  */
 
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp
 {
@@ -30,6 +32,32 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp
 
         protected override DiagnosticDescriptor Rule => S2259;
 
-        public override bool ShouldExecute() => true;    // ToDo: Implement rule-specific logic
+        public override bool ShouldExecute()
+        {
+            var walker = new SyntaxKindWalker();
+            walker.SafeVisit(Node);
+            return walker.Result;
+        }
+
+        private sealed class SyntaxKindWalker : SafeCSharpSyntaxWalker
+        {
+            public bool Result { get; private set; }
+
+            public override void Visit(SyntaxNode node)
+            {
+                if (node.IsAnyKind(
+                    SyntaxKind.AwaitExpression,
+                    SyntaxKind.ElementAccessExpression,
+                    SyntaxKind.ForEachStatement,
+                    SyntaxKind.SimpleMemberAccessExpression))
+                {
+                    Result = true;
+                }
+                else if (!Result)   // We can stop visiting once we know the answer
+                {
+                    base.Visit(node);
+                }
+            }
+        }
     }
 }
