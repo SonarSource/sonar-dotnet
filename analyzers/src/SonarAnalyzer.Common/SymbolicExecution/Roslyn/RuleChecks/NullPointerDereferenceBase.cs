@@ -29,7 +29,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
     {
         internal const string DiagnosticId = "S2259";
 
-        protected virtual bool IsSupressed(SyntaxNode node) => true;
+        protected virtual bool IsSupressed(SyntaxNode node) => false;
 
         protected override ProgramState PreProcessSimple(SymbolicContext context)
         {
