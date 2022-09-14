@@ -766,7 +766,7 @@ namespace Tests.Diagnostics
             string s = null;
             x = s;
             await t; // awaiting clears the constraints
-            x.ToString(); // Noncompliant FIXME (was compliant before)
+            x.ToString(); // Compliant
             s.ToString(); // Noncompliant
         }
     }

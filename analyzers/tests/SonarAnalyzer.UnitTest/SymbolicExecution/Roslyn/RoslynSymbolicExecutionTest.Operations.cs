@@ -767,5 +767,26 @@ Tag(""AfterSecond"", Second)";
             validator.ValidateTag("AfterFirst", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.ValidateTag("AfterSecond", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
         }
+
+        [TestMethod]
+        public void Await_ForgetsFieldStates()
+        {
+            const string code = @"
+private object field;
+
+public async System.Threading.Tasks.Task Main(System.Threading.Tasks.Task T)
+{
+    field = null;
+    Tag(""Before"", field);
+    await T;
+    Tag(""After"", field);
+}";
+            var addConstraint = new PostProcessTestCheck(OperationKind.Literal, x => x.SetOperationConstraint(LockConstraint.Held));    // Persisted constraint
+            var validator = SETestContext.CreateCSMethod(code, addConstraint).Validator;
+            validator.ValidateTag("Before", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("Before", x => x.HasConstraint(LockConstraint.Held).Should().BeTrue());
+            validator.ValidateTag("After", x => x.HasConstraint(ObjectConstraint.Null).Should().BeFalse());
+            validator.ValidateTag("After", x => x.HasConstraint(LockConstraint.Held).Should().BeTrue("this constraint should be preserved on fields"));
+        }
     }
 }
