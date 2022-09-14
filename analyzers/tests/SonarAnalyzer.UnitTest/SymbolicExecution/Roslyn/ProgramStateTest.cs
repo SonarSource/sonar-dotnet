@@ -316,10 +316,10 @@ Captures:
             sut = sut.ResetFieldConstraints();
             var instanceFieldSymbolValue = sut[instanceField];
             var staticFieldSymbolValue = sut[staticField];
-            instanceFieldSymbolValue.HasConstraint(preserveAll).Should().BeTrue(because: "preserveAll should be preserved for instance fields");
-            instanceFieldSymbolValue.HasConstraint(preserveNone).Should().BeFalse(because: "preserveNone should not be preserved for instance fields");
-            staticFieldSymbolValue.HasConstraint(preserveAll).Should().BeTrue(because: "preserveAll should be preserved for static fields");
-            staticFieldSymbolValue.HasConstraint(preserveNone).Should().BeFalse(because: "preserveNone should not be preserved for static fields");
+            instanceFieldSymbolValue.HasConstraint(preserveAll).Should().BeTrue();
+            instanceFieldSymbolValue.HasConstraint(preserveNone).Should().BeFalse();
+            staticFieldSymbolValue.HasConstraint(preserveAll).Should().BeTrue();
+            staticFieldSymbolValue.HasConstraint(preserveNone).Should().BeFalse();
         }
 
         private static IFieldSymbol CreateFieldSymbol(string fieldDefinition)
