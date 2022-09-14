@@ -152,6 +152,26 @@ if (false & isFalse)
 else
     Tag(""False & False"");
 
+if (isFalse & arg)
+    Tag(""isFalse & arg True Unreachable"");
+else
+    Tag(""isFalse & arg False"");
+
+if (arg & isFalse)
+    Tag(""arg & isFalse True Unreachable"");
+else
+    Tag(""arg & isFalse False"");
+
+if (isTrue & arg)
+    Tag(""isTrue & arg True"");
+else
+    Tag(""isTrue & arg False"");
+
+if (arg & isTrue)
+    Tag(""arg & isTrue True"");
+else
+    Tag(""arg & isTrue False"");
+
 if (isTrue && true)
     Tag(""True && True"");
 else
@@ -161,7 +181,18 @@ if (isFalse && true)
     Tag(""False && True Unreachable"");
 else
     Tag(""False && True"");";
-            SETestContext.CreateCS(code).Validator.ValidateTagOrder("True & True", "False & True", "False & False", "True && True", "False && True");
+            SETestContext.CreateCS(code, ", bool arg").Validator.ValidateTagOrder(
+                "True & True",
+                "False & True",
+                "False & False",
+                "isFalse & arg False",
+                "arg & isFalse False",
+                "isTrue & arg True",
+                "isTrue & arg False",
+                "arg & isTrue True",
+                "arg & isTrue False",
+                "True && True",
+                "False && True");
         }
 
         [TestMethod]

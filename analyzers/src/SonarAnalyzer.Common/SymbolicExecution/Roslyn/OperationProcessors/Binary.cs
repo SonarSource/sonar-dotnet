@@ -72,9 +72,12 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
             }
             else if (left is null || right is null)
             {
-                return kind == BinaryOperatorKind.Or && (left ?? right).HasConstraint(BoolConstraint.True)
-                    ? BoolConstraint.True
-                    : null;
+                return kind switch
+                {
+                    BinaryOperatorKind.Or when (left ?? right).HasConstraint(BoolConstraint.True) => BoolConstraint.True,
+                    BinaryOperatorKind.And when (left ?? right).HasConstraint(BoolConstraint.False) => BoolConstraint.False,
+                    _ => null
+                };
             }
             else if (left.HasConstraint<BoolConstraint>() && right.HasConstraint<BoolConstraint>())
             {

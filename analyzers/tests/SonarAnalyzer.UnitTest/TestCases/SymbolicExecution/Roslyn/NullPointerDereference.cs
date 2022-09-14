@@ -369,7 +369,7 @@ namespace Tests.Diagnostics
             }
             else
             {
-                o.ToString();   // Compliant
+                o.ToString();   // Compliant, unreachable
             }
         }
 
@@ -382,7 +382,7 @@ namespace Tests.Diagnostics
             }
             else
             {
-                o.ToString();   // Compliant
+                o.ToString();   // Compliant, unreachable
             }
         }
 
@@ -395,7 +395,7 @@ namespace Tests.Diagnostics
             }
             else
             {
-                o.ToString();   // Compliant
+                o.ToString();   // Compliant, unreachable
             }
         }
 
@@ -408,7 +408,63 @@ namespace Tests.Diagnostics
             }
             else
             {
-                o.ToString();   // Compliant
+                o.ToString();   // Compliant, unreachable
+            }
+        }
+
+        void BinaryAndLeft(int arg)
+        {
+            object o = null;
+            var isFalse = false;
+            if (isFalse & arg == 0)
+            {
+                o.ToString();   // Compliant, unreachable
+            }
+            else
+            {
+                o.ToString();   // Noncompliant
+            }
+        }
+
+        void BinaryAndRight(int arg)
+        {
+            object o = null;
+            var isFalse = false;
+            if (arg == 0 & isFalse)
+            {
+                o.ToString();   // Compliant, unreachable
+            }
+            else
+            {
+                o.ToString();   // Noncompliant
+            }
+        }
+
+        void ShortCircuitAndLeft(int arg)
+        {
+            object o = null;
+            var isFalse = false;
+            if (isFalse && arg == 0)
+            {
+                o.ToString();   // Compliant, unreachable
+            }
+            else
+            {
+                o.ToString();   // Noncompliant
+            }
+        }
+
+        void ShortCircuitAndRight(int arg)
+        {
+            object o = null;
+            var isFalse = false;
+            if (arg == 0 && isFalse)
+            {
+                o.ToString();   // Compliant, unreachable
+            }
+            else
+            {
+                o.ToString();   // Noncompliant
             }
         }
     }
