@@ -240,45 +240,35 @@ Tag(""StaticField"", StaticObjectField);
         public void Instance_InstanceMethodCallClearsFieldInConsistentManner()
         {
             var code = $@"
-public class Sample
+ObjectField = null;
+Tag(""InitNull"", ObjectField);
+InstanceMethod();
+Tag(""AfterInvocationNull"", ObjectField);
+ObjectField = new object();
+Tag(""InitNotNull"", ObjectField);
+InstanceMethod();
+Tag(""AfterInvocationNotNull"", ObjectField);
+if (ObjectField == null)
 {{
-    object field1;
-
-    void Main(object someValue)
-    {{
-        field1 = null;
-        Tag(""InitNull"", field1);
-        DoSomething();
-        Tag(""AfterInvocationNull"", field1);
-        field1 = new object();
-        Tag(""InitNotNull"", field1);
-        DoSomething();
-        Tag(""AfterInvocationNotNull"", field1);
-        if (field1 == null)
-        {{
-            Tag(""IfBefore"", field1);
-            DoSomething();
-            Tag(""IfAfter"", field1);
-        }}
-        else
-        {{
-            Tag(""ElseBefore"", field1);
-            DoSomething();
-            Tag(""ElseAfter"", field1);
-        }}
-        Tag(""AfterIfElse"", field1);
-    }}
-
-    private void DoSomething() {{ }}
-    private static void Tag(string name, object arg) {{ }}
-}}";
+    Tag(""IfBefore"", ObjectField);
+    InstanceMethod();
+    Tag(""IfAfter"", ObjectField);
+}}
+else
+{{
+    Tag(""ElseBefore"", ObjectField);
+    InstanceMethod();
+    Tag(""ElseAfter"", ObjectField);
+}}
+Tag(""AfterIfElse"", ObjectField);
+";
             var invalidateConstraint = DummyConstraint.Dummy;
             var dontInvalidateConstraint = LockConstraint.Held;
             var check = new PostProcessTestCheck(x => x.Operation.Instance.Kind == OperationKindEx.SimpleAssignment
                 && IFieldReferenceOperationWrapper.FromOperation(ISimpleAssignmentOperationWrapper.FromOperation(x.Operation.Instance).Target).Member is var field1
                 ? x.SetSymbolConstraint(field1, invalidateConstraint).SetSymbolConstraint(field1, dontInvalidateConstraint)
                 : x.State);
-            var validator = new SETestContext(code, AnalyzerLanguage.CSharp, new SymbolicCheck[] { check }).Validator;
+            var validator = SETestContext.CreateCS(code, check).Validator;
             validator.ValidateContainsOperation(OperationKind.Invocation);
             validator.ValidateTag("InitNull", x =>
             {
