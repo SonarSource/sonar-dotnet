@@ -40,7 +40,7 @@ namespace Monitor_TryCatch
 
         public void Method4(bool condition)
         {
-            Monitor.Enter(obj); // FN, we don't run for methods with throw until MMF-2393
+            Monitor.Enter(obj); // Noncompliant
 
             if (condition)
             {
