@@ -133,7 +133,10 @@ namespace SonarAnalyzer.Rules
             }
 
             public object CreateSonarFallback(IAnalyzerConfiguration configuration) =>
-                configuration.ForceSonarCfg && createSonarFallbackInstance is not null ? createSonarFallbackInstance() : null;
+                createSonarFallbackInstance is not null
+                && (configuration.ForceSonarCfg || !ControlFlowGraph.IsAvailable)
+                    ? createSonarFallbackInstance()
+                    : null;
         }
 
         protected sealed class RuleFactory<TCheck> : RuleFactory
