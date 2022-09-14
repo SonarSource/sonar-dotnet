@@ -46,5 +46,4 @@ public class ToStringShouldNotReturnNullTest
     [TestMethod]
     public void ToStringShouldNotReturnNull_VB() =>
         builderVB.AddPaths("ToStringShouldNotReturnNull.vb").Verify();
-
 }
