@@ -30,6 +30,8 @@ namespace SonarAnalyzer.Helpers.Facade
 {
     internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
     {
+        public override SyntaxNodeAbstractionFactory<SyntaxKind> As { get; } = new SyntaxNodeAbstractionFactory();
+
         public override bool IsNullLiteral(SyntaxNode node) => node.IsNothingLiteral();
 
         public override SyntaxKind Kind(SyntaxNode node) => node.Kind();

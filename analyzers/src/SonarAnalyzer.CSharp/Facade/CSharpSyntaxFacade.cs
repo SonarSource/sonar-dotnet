@@ -31,6 +31,8 @@ namespace SonarAnalyzer.Helpers.Facade
 {
     internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
     {
+        public override SyntaxNodeAbstractionFactory<SyntaxKind> As { get; } = new SyntaxNodeAbstractionFactory();
+
         public override SyntaxKind Kind(SyntaxNode node) => node.Kind();
 
         public override ComparisonKind ComparisonKind(SyntaxNode node) =>

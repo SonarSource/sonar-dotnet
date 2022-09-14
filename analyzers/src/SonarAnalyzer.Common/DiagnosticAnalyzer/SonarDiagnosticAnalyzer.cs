@@ -22,6 +22,7 @@ using System;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Helpers.Facade;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -43,15 +44,8 @@ namespace SonarAnalyzer.Helpers
         }
 
         protected static bool IsConcurrentExecutionEnabled()
-        {
-            var value = Environment.GetEnvironmentVariable(EnableConcurrentExecutionVariable);
-
-            if (value != null && bool.TryParse(value, out var result))
-            {
-                return result;
-            }
-            return true;
-        }
+            => Environment.GetEnvironmentVariable(EnableConcurrentExecutionVariable) is { } value
+            && bool.TryParse(value, out var result) ? result : true;
     }
 
     public abstract class SonarDiagnosticAnalyzer<TSyntaxKind> : SonarDiagnosticAnalyzer
@@ -59,6 +53,7 @@ namespace SonarAnalyzer.Helpers
     {
         protected abstract string MessageFormat { get; }
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
+        protected SyntaxFacade<TSyntaxKind> Syntax => Language.Syntax;
         protected DiagnosticDescriptor Rule { get; }
         public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 

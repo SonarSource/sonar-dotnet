@@ -28,6 +28,8 @@ namespace SonarAnalyzer.Helpers.Facade
     public abstract class SyntaxFacade<TSyntaxKind>
         where TSyntaxKind : struct
     {
+        public abstract SyntaxNodeAbstractionFactory<TSyntaxKind> As { get; }
+
         public abstract TSyntaxKind Kind(SyntaxNode node);
         public abstract ComparisonKind ComparisonKind(SyntaxNode node);
 
