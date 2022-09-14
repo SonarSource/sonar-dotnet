@@ -39,6 +39,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         // SymbolicValue can have only one constraint instance of specific type at a time
         private ImmutableDictionary<Type, SymbolicConstraint> Constraints { get; init; } = ImmutableDictionary<Type, SymbolicConstraint>.Empty;
 
+        public IEnumerable<SymbolicConstraint> AllConstraints =>
+            Constraints.Values;
+
         public override string ToString() =>
             SerializeConstraints();
 
@@ -63,9 +66,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         public T Constraint<T>() where T : SymbolicConstraint =>
             Constraints.TryGetValue(typeof(T), out var value) ? (T)value : null;
-
-        public IEnumerable<SymbolicConstraint> AllConstraints() =>
-            Constraints.Values;
 
         public override int GetHashCode() =>
             HashCode.DictionaryContentHash(Constraints);
