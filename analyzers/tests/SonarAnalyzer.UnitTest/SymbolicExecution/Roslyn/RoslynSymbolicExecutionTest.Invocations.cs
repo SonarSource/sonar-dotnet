@@ -265,8 +265,8 @@ Tag(""AfterIfElse"", ObjectField);
             var invalidateConstraint = DummyConstraint.Dummy;
             var dontInvalidateConstraint = LockConstraint.Held;
             var check = new PostProcessTestCheck(x => x.Operation.Instance.Kind == OperationKindEx.SimpleAssignment
-                && IFieldReferenceOperationWrapper.FromOperation(ISimpleAssignmentOperationWrapper.FromOperation(x.Operation.Instance).Target).Member is var field1
-                ? x.SetSymbolConstraint(field1, invalidateConstraint).SetSymbolConstraint(field1, dontInvalidateConstraint)
+                && IFieldReferenceOperationWrapper.FromOperation(ISimpleAssignmentOperationWrapper.FromOperation(x.Operation.Instance).Target).Member is var field
+                ? x.SetSymbolConstraint(field, invalidateConstraint).SetSymbolConstraint(field, dontInvalidateConstraint)
                 : x.State);
             var validator = SETestContext.CreateCS(code, check).Validator;
             validator.ValidateContainsOperation(OperationKind.Invocation);
