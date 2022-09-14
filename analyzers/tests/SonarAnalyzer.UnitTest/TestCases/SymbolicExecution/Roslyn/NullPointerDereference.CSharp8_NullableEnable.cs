@@ -16,6 +16,7 @@ namespace Tests.Diagnostics.CSharp8
             o.ToString();                        // Noncompliant
             o = null;
             o!.ToString();                       // Compliant
+            o.ToString();                        // Compliant
         }
 
         public void Parameter(object? p)
