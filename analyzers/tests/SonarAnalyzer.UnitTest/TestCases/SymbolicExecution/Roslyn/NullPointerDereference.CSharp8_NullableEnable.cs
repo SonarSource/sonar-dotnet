@@ -67,6 +67,7 @@ namespace Tests.Diagnostics.CSharp8
         {
             object? o = null;
             ((int?)o)!.ToString();               // Compliant
+            o.ToString();                        // Compliant We learn from the invocation that o is not null. Any conversions are transparent to this.
         }
 
         public void Expression(bool condition)
@@ -76,7 +77,9 @@ namespace Tests.Diagnostics.CSharp8
 
         public void Parenthesis(bool condition)
         {
-            (((condition ? new object() : null))!).ToString();  // Compliant
+            object? o = null;
+            (((condition ? o : null))!).ToString();  // Compliant
+            o.ToString();                            // Noncompliant The ! only suppresses the warning on the expression, but is not applied to any inner variables.
         }
     }
 }
