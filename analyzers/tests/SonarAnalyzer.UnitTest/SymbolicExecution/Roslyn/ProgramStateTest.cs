@@ -18,7 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Extensions;
+using SonarAnalyzer.SymbolicExecution;
+using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.Helpers;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
@@ -288,6 +291,54 @@ Captures:
 #0: SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true
 #1: LocalReferenceOperation / VariableDeclaratorSyntax: a = true
 ");
+        }
+
+        [TestMethod]
+        public void ResetFieldConstraints_NotPreservesField() =>
+            ResetFieldConstraintTests(ObjectConstraint.Null, false);
+
+        [TestMethod]
+        public void ResetFieldConstraints_PreservesField() =>
+            ResetFieldConstraintTests(LockConstraint.Held, true);
+
+        [TestMethod]
+        public void ResetFieldConstraints_ResetFieldsAsDefined()
+        {
+            var instanceField = CreateFieldSymbol("object field;");
+            var staticField = CreateFieldSymbol("static object field;");
+
+            var preserveAll = LockConstraint.Held;
+            var preserveNone = ObjectConstraint.Null;
+
+            var sut = ProgramState.Empty;
+            sut = sut.SetSymbolValue(instanceField, new SymbolicValue().WithConstraint(preserveAll).WithConstraint(preserveNone))
+                     .SetSymbolValue(staticField, new SymbolicValue().WithConstraint(preserveAll).WithConstraint(preserveNone));
+            sut = sut.ResetFieldConstraints();
+            var instanceFieldSymbolValue = sut[instanceField];
+            var staticFieldSymbolValue = sut[staticField];
+            instanceFieldSymbolValue.HasConstraint(preserveAll).Should().BeTrue();
+            instanceFieldSymbolValue.HasConstraint(preserveNone).Should().BeFalse();
+            staticFieldSymbolValue.HasConstraint(preserveAll).Should().BeTrue();
+            staticFieldSymbolValue.HasConstraint(preserveNone).Should().BeFalse();
+        }
+
+        private static IFieldSymbol CreateFieldSymbol(string fieldDefinition)
+        {
+            var compiler = new SnippetCompiler($@"class C {{ {fieldDefinition} }}");
+            var fieldSymbol = compiler.SemanticModel.GetDeclaredSymbol(compiler.GetNodes<VariableDeclaratorSyntax>().Single());
+            return (IFieldSymbol)fieldSymbol;
+        }
+
+        private static void ResetFieldConstraintTests(SymbolicConstraint constraint, bool expectIsPreserved)
+        {
+            var field = CreateFieldSymbol("object field;");
+            var sut = ProgramState.Empty;
+            sut = sut.SetSymbolValue(field, new SymbolicValue().WithConstraint(constraint));
+            var symbolValue = sut[field];
+            symbolValue.HasConstraint(constraint).Should().BeTrue();
+            sut = sut.ResetFieldConstraints();
+            symbolValue = sut[field];
+            symbolValue.HasConstraint(constraint).Should().Be(expectIsPreserved);
         }
 
         private static ISymbol[] CreateSymbols()

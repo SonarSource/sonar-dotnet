@@ -24,6 +24,7 @@ namespace SonarAnalyzer.SymbolicExecution
     {
         public abstract SymbolicConstraint Opposite { get; }
         protected abstract string Name { get; }
+        public virtual bool PreserveOnFieldReset => false;
 
         public sealed override string ToString() => Name;
 

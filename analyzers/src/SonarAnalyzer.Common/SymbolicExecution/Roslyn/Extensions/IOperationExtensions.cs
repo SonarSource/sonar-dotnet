@@ -75,6 +75,15 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             reference.Instance == null // static fields
             || reference.Instance.IsAnyKind(OperationKindEx.InstanceReference);
 
+        public static IOperation UnwrapConversion(this IOperation operation)
+        {
+            while (operation?.Kind == OperationKindEx.Conversion)
+            {
+                operation = IConversionOperationWrapper.FromOperation(operation).Operand;
+            }
+            return operation;
+        }
+
         private static T? As<T>(this IOperation operation, OperationKind kind, Func<IOperation, T> fromOperation) where T : struct =>
             operation.Kind == kind ? fromOperation(operation) : null;
     }

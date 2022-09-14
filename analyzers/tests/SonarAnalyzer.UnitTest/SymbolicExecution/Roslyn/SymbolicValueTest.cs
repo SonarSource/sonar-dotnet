@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
@@ -157,6 +158,17 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             basicSingle.Equals("different type").Should().BeFalse();
             basicSingle.Equals((object)null).Should().BeFalse();
             basicSingle.Equals((SymbolicValue)null).Should().BeFalse();     // Explicit cast to ensure correct overload
+        }
+
+        [TestMethod]
+        public void AllConstraints_Empty() =>
+            new SymbolicValue().AllConstraints.Should().BeEmpty();
+
+        [TestMethod]
+        public void AllConstraints_ResturnsConstraints()
+        {
+            var sut = new SymbolicValue().WithConstraint(TestConstraint.First).WithConstraint(DummyConstraint.Dummy);
+            sut.AllConstraints.Should().HaveCount(2).And.Contain(new SymbolicConstraint[] { TestConstraint.First, DummyConstraint.Dummy });
         }
     }
 }

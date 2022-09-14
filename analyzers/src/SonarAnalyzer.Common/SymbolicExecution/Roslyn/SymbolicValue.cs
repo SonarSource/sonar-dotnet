@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using SonarAnalyzer.Helpers;
@@ -37,6 +38,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         // SymbolicValue can have only one constraint instance of specific type at a time
         private ImmutableDictionary<Type, SymbolicConstraint> Constraints { get; init; } = ImmutableDictionary<Type, SymbolicConstraint>.Empty;
+
+        public IEnumerable<SymbolicConstraint> AllConstraints =>
+            Constraints.Values;
 
         public override string ToString() =>
             SerializeConstraints();
