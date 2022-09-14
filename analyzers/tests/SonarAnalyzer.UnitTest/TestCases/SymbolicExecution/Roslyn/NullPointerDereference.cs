@@ -360,10 +360,49 @@ namespace Tests.Diagnostics
             var s = string.IsNullOrEmpty(path) ? new string[] { } : path.Split('/');
         }
 
-        void BinaryOr(int i)
+        void BinaryOrLeft(int arg)
         {
             object o = null;
-            if (o==null | i == 0)
+            if (o == null | arg == 0)
+            {
+                o.ToString();   // Noncompliant
+            }
+            else
+            {
+                o.ToString();   // Compliant
+            }
+        }
+
+        void BinaryOrRight(int arg)
+        {
+            object o = null;
+            if (arg == 0 || o == null)
+            {
+                o.ToString();   // Noncompliant
+            }
+            else
+            {
+                o.ToString();   // Compliant
+            }
+        }
+
+        void ShortCircuitOrLeft(int arg)
+        {
+            object o = null;
+            if (o == null || arg == 0)
+            {
+                o.ToString();   // Noncompliant
+            }
+            else
+            {
+                o.ToString();   // Compliant
+            }
+        }
+
+        void ShortCircuitOrRight(int arg)
+        {
+            object o = null;
+            if (arg == 0 || o == null)
             {
                 o.ToString();   // Noncompliant
             }

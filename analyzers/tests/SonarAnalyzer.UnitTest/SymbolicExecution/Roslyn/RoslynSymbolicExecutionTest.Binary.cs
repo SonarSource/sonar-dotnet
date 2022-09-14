@@ -187,7 +187,7 @@ else
     Tag(""False | False"");
 
 if (isTrue | arg)
-    Tag(""isTrue | arg True "");
+    Tag(""isTrue | arg True"");
 else
     Tag(""isTrue | arg False Unreachable"");
 
@@ -219,7 +219,7 @@ else
                 "True | True",
                 "False | True",
                 "False | False",
-                "isTrue | arg True ",
+                "isTrue | arg True",
                 "arg | isTrue True",
                 "isFalse | arg True",
                 "isFalse | arg False",
