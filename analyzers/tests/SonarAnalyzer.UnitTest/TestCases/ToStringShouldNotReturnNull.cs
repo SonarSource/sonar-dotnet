@@ -77,6 +77,18 @@ class Noncompliant
         }
     }
 
+    public class ReturnsNullConditionaly
+    {
+        public override string ToString()
+        {
+            if (Condition.When())
+            {
+                return null; // Noncompliant
+            }
+            return "not-null";
+        }
+    }
+
     public class ReturnsNullViaExpressionBody
     {
         public override string ToString() => null; // Noncompliant

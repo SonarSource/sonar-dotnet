@@ -66,6 +66,7 @@ Namespace Compliant
 End Namespace
 
 Namespace Noncompliant
+
     Public Class ReturnsNothing
         Public Overrides Function ToString() As String
             If Condition.[When]() Then
@@ -74,6 +75,17 @@ Namespace Noncompliant
             End If
 
             Return Nothing ' Noncompliant {{Return an empty string instead.}}
+        End Function
+    End Class
+
+    Public Class ReturnsNothingConditionaly
+    {
+       Public Overrides Function ToString() As String
+            If Condition.[When]() Then
+                Return Nothing ' Noncompliant
+            End If
+
+            Return "not-null"
         End Function
     End Class
 
