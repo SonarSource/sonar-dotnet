@@ -30,7 +30,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
     {
         protected SonarAnalysisContext SonarContext { get; private set; }
         protected SyntaxNode Node => context.Node;
-        protected SemanticModel SemanticModel => context.SemanticModel;
 
         private readonly HashSet<Location> reportedDiagnostics = new();
         private SyntaxNodeAnalysisContext context;
