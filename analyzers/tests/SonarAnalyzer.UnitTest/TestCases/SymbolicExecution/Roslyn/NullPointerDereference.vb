@@ -60,6 +60,15 @@ Public Class Program
         Return Arr.Length ' Compliant
     End Function
 
+    Public Sub BitOr(Arg As Integer)
+        Dim O As Object
+        If O Is Nothing Or Arg = 0 Then
+            O.ToString()   ' Noncompliant
+        Else
+            O.ToString()   ' Compliant
+        End If
+    End Sub
+
 End Class
 
 Public NotInheritable Class ValidatedNotNullAttribute
