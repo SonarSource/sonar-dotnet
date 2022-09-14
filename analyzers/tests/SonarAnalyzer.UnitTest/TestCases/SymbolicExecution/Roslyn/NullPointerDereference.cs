@@ -467,6 +467,20 @@ namespace Tests.Diagnostics
                 o.ToString();   // Noncompliant
             }
         }
+
+        void ShortCircuit()
+        {
+            object o = null;
+            var isFalse = false;
+            if (isFalse && o.ToString() == null)    // Compliant, unreachable
+            {
+                o.ToString();    // Compliant, unreachable
+            }
+            else
+            {
+                o.ToString();   // Noncompliant
+            }
+        }
     }
 
     class A

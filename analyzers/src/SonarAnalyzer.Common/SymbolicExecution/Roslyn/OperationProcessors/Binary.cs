@@ -74,8 +74,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
             {
                 return kind switch
                 {
-                    BinaryOperatorKind.Or when (left ?? right).HasConstraint(BoolConstraint.True) => BoolConstraint.True,
-                    BinaryOperatorKind.And when (left ?? right).HasConstraint(BoolConstraint.False) => BoolConstraint.False,
+                    BinaryOperatorKind.Or or BinaryOperatorKind.ConditionalOr when (left ?? right).HasConstraint(BoolConstraint.True) => BoolConstraint.True,
+                    BinaryOperatorKind.And or BinaryOperatorKind.ConditionalAnd when (left ?? right).HasConstraint(BoolConstraint.False) => BoolConstraint.False,
                     _ => null
                 };
             }
