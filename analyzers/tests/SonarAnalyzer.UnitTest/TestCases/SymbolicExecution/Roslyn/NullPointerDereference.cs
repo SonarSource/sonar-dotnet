@@ -481,6 +481,20 @@ namespace Tests.Diagnostics
                 o.ToString();   // Noncompliant
             }
         }
+
+        void ShortCircuit_Reachable()
+        {
+            object o = null;
+            var isTrue = true;
+            if (isTrue && o.ToString() == null)    // Noncompliant
+            {
+                o.ToString();   // Compliant, we've learned that o cannot be null on this path from calling o.ToString();
+            }
+            else
+            {
+                o.ToString();   // Compliant for the same reason
+            }
+        }
     }
 
     class A
