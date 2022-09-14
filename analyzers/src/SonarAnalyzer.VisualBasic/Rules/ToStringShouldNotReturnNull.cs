@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.VisualBasic;
@@ -33,10 +34,9 @@ public sealed class ToStringShouldNotReturnNull : ToStringShouldNotReturnNullBas
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
     protected override IEnumerable<SyntaxNode> Conditionals(SyntaxNode node) =>
-        // TODO: TenaryConditionalExpression not in this version?
-        /* node is TernaryConditionalExpression conditional
+        node is TernaryConditionalExpressionSyntax conditional
         ? new SyntaxNode[] { conditional.WhenTrue, conditional.WhenFalse }
-        : */ Array.Empty<SyntaxNode>();
+        : Array.Empty<SyntaxNode>();
     protected override bool NotLocalOrLambda(SyntaxNode node) =>
         !node.IsKind(SyntaxKind.MultiLineFunctionLambdaExpression);
 }

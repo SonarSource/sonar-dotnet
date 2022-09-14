@@ -79,7 +79,7 @@ Namespace Noncompliant
 
     Public Class ReturnsNothingViaTernary
         Public Overrides Function ToString() As String
-            Return If(Condition.[When](), Nothing, "")  ' Compliant - FN
+            Return If(Condition.[When](), Nothing, "")  ' Noncompliant
         End Function
     End Class
 
