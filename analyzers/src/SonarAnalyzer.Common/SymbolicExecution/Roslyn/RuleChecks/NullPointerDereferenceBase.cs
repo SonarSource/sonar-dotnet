@@ -28,6 +28,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
     {
         internal const string DiagnosticId = "S2259";
 
+        protected virtual bool IsSupressed() => true;
+
         protected override ProgramState PreProcessSimple(SymbolicContext context)
         {
             var reference = context.Operation.Instance.Kind switch
@@ -38,7 +40,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
                 OperationKindEx.ArrayElementReference => context.Operation.Instance.ToArrayElementReference().ArrayReference,
                 _ => null,
             };
-            if (reference != null && context.HasConstraint(reference, ObjectConstraint.Null) && !reference.Type.IsStruct()) // ToDo: IsStruct() is a workaround before MMF-2401
+            if (reference != null && context.HasConstraint(reference, ObjectConstraint.Null) && !reference.Type.IsStruct() && !IsSupressed()) // ToDo: IsStruct() is a workaround before MMF-2401
             {
                 ReportIssue(reference, reference.Syntax.ToString());
             }

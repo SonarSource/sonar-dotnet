@@ -59,5 +59,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp
                 }
             }
         }
+
+        protected override bool IsSupressed() =>
+            Node.Parent.WalkUpParentheses() is { RawKind: (int)SyntaxKindEx.SuppressNullableWarningExpression };
     }
 }
