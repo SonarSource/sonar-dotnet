@@ -98,11 +98,14 @@ using System.Collections.Generic;
 
 public unsafe class Sample
 {{
+    public object ObjectField;
     public static int StaticField;
+    public static object StaticObjectField;
     public static int StaticProperty {{ get; set; }}
     public static event EventHandler StaticEvent;
     public event EventHandler Event;
     public int Property {{ get; set; }}
+    public Sample SampleProperty {{ get; set; }}
     public NotImplementedException PropertyException {{ get; set; }}
     public int this[int index] {{get => 42; set {{ }} }}
     private int field;
@@ -119,6 +122,8 @@ public unsafe class Sample
     }}
 
     public NotImplementedException CreateException() => new NotImplementedException();
+    public void InstanceMethod() {{ }}
+    public static void StaticMethod() {{ }}
 
     private void Tag(string name) {{ }}
     private static void Tag(string name, object arg = null) {{ }}

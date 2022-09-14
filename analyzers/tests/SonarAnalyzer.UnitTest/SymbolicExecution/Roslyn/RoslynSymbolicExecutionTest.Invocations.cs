@@ -156,20 +156,18 @@ End Module";
 using System;
 public class Sample: IDisposable
 {{
-    object field1;
-    object field2;
-    static object staticField1;
-    static object staticField2;
+    object field;
+    static object staticField;
 
     void Main()
     {{
-        field1 = null;
-        staticField1 = null;
-        Tag(""BeforeField1"", field1);
-        Tag(""BeforeStaticField1"", staticField1);
+        field = null;
+        staticField = null;
+        Tag(""BeforeField"", field);
+        Tag(""BeforeStaticField"", staticField);
         {invocation}
-        Tag(""AfterField1"", field1);
-        Tag(""AfterStaticField1"", staticField1);
+        Tag(""AfterField"", field);
+        Tag(""AfterStaticField"", staticField);
     }}
 
     private void Initialize() {{ }}
@@ -184,10 +182,10 @@ public static class Extensions
 }}";
             var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
             validator.ValidateContainsOperation(OperationKind.Invocation);
-            validator.ValidateTag("BeforeField1", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-            validator.ValidateTag("BeforeStaticField1", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-            validator.ValidateTag("AfterField1", x => x.Constraint<ObjectConstraint>().Should().BeNull());
-            validator.ValidateTag("AfterStaticField1", x => x.Constraint<ObjectConstraint>().Should().BeNull());
+            validator.ValidateTag("BeforeField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("BeforeStaticField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("AfterField", x => x.Constraint<ObjectConstraint>().Should().BeNull());
+            validator.ValidateTag("AfterStaticField", x => x.Constraint<ObjectConstraint>().Should().BeNull());
         }
 
         [DataTestMethod]
@@ -196,70 +194,46 @@ public static class Extensions
         [DataRow("Sample.StaticMethod();")]
         [DataRow("var dummy = Property;")]
         [DataRow("var dummy = this.Property;")]
-        [DataRow("Property.InstanceMethod();")]
-        [DataRow("this.Property.InstanceMethod();")]
-        [DataRow("this.Property?.InstanceMethod();")]
+        [DataRow("SampleProperty.InstanceMethod();")]
+        [DataRow("this.SampleProperty.InstanceMethod();")]
+        [DataRow("this.SampleProperty?.InstanceMethod();")]
         public void Invocation_InstanceMethodCallDoesNotClearFieldForOtherAccess(string invocation)
         {
             var code = $@"
-public class Sample
-{{
-    object field1;
-    static object staticField1;
-
-    void Main()
-    {{
-        field1 = null;
-        staticField1 = null;
-        Tag(""BeforeField1"", field1);
-        Tag(""BeforeStaticField1"", staticField1);
-        {invocation}
-        Tag(""AfterField1"", field1);
-        Tag(""AfterStaticField1"", staticField1);
-    }}
-
-    private void InstanceMethod() {{ }}
-    private static void StaticMethod() {{ }}
-    private Sample Property {{ get; set; }}
-    private static void Tag(string name, object arg) {{ }}
-}}";
-            var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
+ObjectField = null;
+StaticObjectField = null;
+Tag(""BeforeField"", ObjectField);
+Tag(""BeforeStaticField"", StaticObjectField);
+{invocation}
+Tag(""AfterField"", ObjectField);
+Tag(""AfterStaticField"", StaticObjectField);
+";
+            var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateContainsOperation(OperationKind.Invocation);
-            validator.ValidateTag("BeforeField1", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-            validator.ValidateTag("BeforeStaticField1", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-            validator.ValidateTag("AfterField1", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-            validator.ValidateTag("AfterStaticField1", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("BeforeField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("BeforeStaticField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("AfterField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("AfterStaticField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
         }
 
         [DataTestMethod]
-        [DataRow("otherInstance.DoSomething();")]
-        [DataRow("(otherInstance).DoSomething();")]
-        [DataRow("(true ? this : otherInstance).DoSomething();")]
+        [DataRow("otherInstance.InstanceMethod();")]
+        [DataRow("(otherInstance).InstanceMethod();")]
+        [DataRow("(true ? this : otherInstance).InstanceMethod();")]
         public void Instance_InstanceMethodCallDoesNotClearFieldsOnOtherInstances(string invocation)
         {
             var code = $@"
-public class Sample
-{{
-    object field1;
-    static object staticField1;
-
-    void Main()
-    {{
-        field1 = null;
-        staticField1 = null;
-        var otherInstance = new Sample();
-        {invocation}
-        Tag(""Field1"", field1);
-        Tag(""StaticField1"", staticField1);
-    }}
-
-    private void DoSomething() {{ }}
-    private static void Tag(string name, object arg) {{ }}
-}}";
-            var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
+ObjectField = null;
+StaticObjectField = null;
+var otherInstance = new Sample();
+{invocation}
+Tag(""Field"", ObjectField);
+Tag(""StaticField"", StaticObjectField);
+";
+            var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateContainsOperation(OperationKind.Invocation);
-            validator.ValidateTag("Field1", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-            validator.ValidateTag("StaticField1", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("Field", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("StaticField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
         }
 
         [TestMethod]
