@@ -134,7 +134,7 @@ namespace SonarAnalyzer.Rules
 
             public object CreateSonarFallback(IAnalyzerConfiguration configuration) =>
                 createSonarFallbackInstance is not null
-                && (configuration.ForceSonarCfg || !ControlFlowGraph.IsAvailable)
+                && (configuration.ForceSonarCfg || !ControlFlowGraph.IsAvailable)   // ControlFlowGraph.IsAvailable is not unit testable. There's a "Roslyn.1.3.1" .NET IT to test it.
                     ? createSonarFallbackInstance()
                     : null;
         }

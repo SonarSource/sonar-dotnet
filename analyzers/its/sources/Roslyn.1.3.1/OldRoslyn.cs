@@ -41,11 +41,5 @@ namespace Roslyn
                 return null;
             }
         }
-
-
-        public object Scaffolding()
-        {
-            return field;   // Avoid S1450 in this file
-        }
     }
 }

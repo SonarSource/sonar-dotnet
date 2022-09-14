@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'arg' before using it.",
+"location":  {
+"uri":  "sources\Roslyn.1.3.1\OldRoslyn.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  24,
+"endLine":  37,
+"endColumn":  27
+}
+}
+}
+]
+}
