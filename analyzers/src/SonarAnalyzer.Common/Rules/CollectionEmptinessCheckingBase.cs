@@ -36,16 +36,15 @@ namespace SonarAnalyzer.Rules
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer,
                 c =>
                 {
-                    var binaryLeft = Language.Syntax.BinaryExpressionLeft(c.Node);
-                    var binaryRight = Language.Syntax.BinaryExpressionRight(c.Node);
+                    var binary = Syntax.As.BinaryExpression(c.Node);
 
-                    if (Language.ExpressionNumericConverter.TryGetConstantIntValue(binaryLeft, out var left))
+                    if (Language.ExpressionNumericConverter.TryGetConstantIntValue(binary.Left, out var left))
                     {
-                        CheckExpression(c, binaryRight, left, Language.Syntax.ComparisonKind(c.Node).Mirror());
+                        CheckExpression(c, binary.Right, left, binary.ComparisonKind.Mirror());
                     }
-                    else if (Language.ExpressionNumericConverter.TryGetConstantIntValue(binaryRight, out var right))
+                    else if (Language.ExpressionNumericConverter.TryGetConstantIntValue(binary.Right, out var right))
                     {
-                        CheckExpression(c, binaryLeft, right, Language.Syntax.ComparisonKind(c.Node));
+                        CheckExpression(c, binary.Left, right, binary.ComparisonKind);
                     }
                 },
                 Language.SyntaxKind.ComparisonKinds);
