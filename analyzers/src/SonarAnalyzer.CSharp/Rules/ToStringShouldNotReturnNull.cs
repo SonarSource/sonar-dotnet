@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
+using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -41,6 +43,11 @@ public sealed class ToStringShouldNotReturnNull : ToStringShouldNotReturnNullBas
             c => ToStringReturnsNull(c, ((MethodDeclarationSyntax)c.Node).ExpressionBody),
             SyntaxKind.MethodDeclaration);
     }
+
+    protected override IEnumerable<SyntaxNode> Conditionals(SyntaxNode expression) =>
+        expression is ConditionalExpressionSyntax conditional
+        ? new SyntaxNode[] { conditional.WhenTrue, conditional.WhenFalse }
+        : Array.Empty<SyntaxNode>();
 
     protected override bool NotLocalOrLambda(SyntaxNode node) =>
         !node.IsAnyKind(SyntaxKind.ParenthesizedLambdaExpression, SyntaxKindEx.LocalFunctionStatement);

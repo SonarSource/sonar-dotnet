@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
+using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -30,6 +32,11 @@ public sealed class ToStringShouldNotReturnNull : ToStringShouldNotReturnNullBas
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
+    protected override IEnumerable<SyntaxNode> Conditionals(SyntaxNode node) =>
+        // TODO: TenaryConditionalExpression not in this version?
+        /* node is TernaryConditionalExpression conditional
+        ? new SyntaxNode[] { conditional.WhenTrue, conditional.WhenFalse }
+        : */ Array.Empty<SyntaxNode>();
     protected override bool NotLocalOrLambda(SyntaxNode node) =>
         !node.IsKind(SyntaxKind.MultiLineFunctionLambdaExpression);
 }

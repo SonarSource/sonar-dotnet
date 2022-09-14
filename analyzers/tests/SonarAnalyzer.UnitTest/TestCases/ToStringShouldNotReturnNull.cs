@@ -82,16 +82,16 @@ class Noncompliant
         public override string ToString() => null; // Noncompliant
     }
 
-    public class ReturnsNullViaTenaryExpressionBody
+    public class ReturnsNullViaTernaryExpressionBody
     {
-        public override string ToString() => Condition.When() ? null : string.Empty; // Compliant - FN
+        public override string ToString() => Condition.When() ? null : string.Empty; // Noncompliant
     }
 
-    public class ReturnsNullViaTenary
+    public class ReturnsNullViaTernary
     {
         public override string ToString()
         {
-            return Condition.When() ? null : ""; // Compliant - FN
+            return Condition.When() ? null : ""; // Noncompliant
         }
     }
 

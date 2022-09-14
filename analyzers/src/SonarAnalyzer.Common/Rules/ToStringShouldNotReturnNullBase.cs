@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -34,6 +35,8 @@ public abstract class ToStringShouldNotReturnNullBase<TSyntaxKind> : SonarDiagno
 
     protected abstract bool NotLocalOrLambda(SyntaxNode node);
 
+    protected abstract IEnumerable<SyntaxNode> Conditionals(SyntaxNode expression);
+
     protected ToStringShouldNotReturnNullBase() : base(DiagnosticId) { }
 
     protected override void Initialize(SonarAnalysisContext context) =>
@@ -44,14 +47,18 @@ public abstract class ToStringShouldNotReturnNullBase<TSyntaxKind> : SonarDiagno
 
     protected void ToStringReturnsNull(SyntaxNodeAnalysisContext context, SyntaxNode node)
     {
-        if (node is { } &&  WithinToString(node) && ReturnsNull(node))
+        if (node is { } && ReturnsNull(node) && WithinToString(node))
         {
             context.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
         }
     }
 
-    private bool ReturnsNull(SyntaxNode node) =>
-        Language.Syntax.IsNullLiteral(Language.Syntax.NodeExpression(node));
+    private bool ReturnsNull(SyntaxNode node)
+    {
+        var expression = Language.Syntax.NodeExpression(node);
+        return Language.Syntax.IsNullLiteral(expression)
+            || Conditionals(expression).Any(x => Language.Syntax.IsNullLiteral(x));
+    }
 
     private bool WithinToString(SyntaxNode node) =>
         node.Ancestors()
