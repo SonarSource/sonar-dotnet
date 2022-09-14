@@ -60,7 +60,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp
             }
         }
 
-        protected override bool IsSupressed() =>
-            Node.Parent.WalkUpParentheses() is { RawKind: (int)SyntaxKindEx.SuppressNullableWarningExpression };
+        protected override bool IsSupressed(SyntaxNode node) =>
+            node.Parent.WalkUpParentheses() is { RawKind: (int)SyntaxKindEx.SuppressNullableWarningExpression };
     }
 }
