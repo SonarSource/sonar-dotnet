@@ -90,6 +90,10 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
 
         [TestMethod]
+        public void NullPointerDereference_Roslyn_CSharp8_Nullable() =>
+            roslynCS.AddPaths("NullPointerDereference.CSharp8.Nullable.cs").WithOptions(ParseOptionsHelper.FromCSharp8).WithConcurrentAnalysis(false).Verify();
+
+        [TestMethod]
         public void NullPointerDereference_Sonar_CSharp9() =>
             sonar.AddPaths("NullPointerDereference.CSharp9.cs").WithTopLevelStatements().Verify();
 

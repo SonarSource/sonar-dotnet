@@ -20,7 +20,9 @@
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp
 {
@@ -31,6 +33,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp
         internal static readonly DiagnosticDescriptor S2259 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         protected override DiagnosticDescriptor Rule => S2259;
+
+        protected override bool IsSupressed(SyntaxNode node) =>
+            node.Parent.WalkUpParentheses() is { RawKind: (int)SyntaxKindEx.SuppressNullableWarningExpression };
 
         public override bool ShouldExecute()
         {

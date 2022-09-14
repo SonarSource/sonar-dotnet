@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
@@ -27,6 +28,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
     public abstract class NullPointerDereferenceBase : SymbolicRuleCheck
     {
         internal const string DiagnosticId = "S2259";
+
+        protected virtual bool IsSupressed(SyntaxNode node) => false;
 
         protected override ProgramState PreProcessSimple(SymbolicContext context)
         {
@@ -38,7 +41,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
                 OperationKindEx.ArrayElementReference => context.Operation.Instance.ToArrayElementReference().ArrayReference,
                 _ => null,
             };
-            if (reference != null && context.HasConstraint(reference, ObjectConstraint.Null) && !reference.Type.IsStruct()) // ToDo: IsStruct() is a workaround before MMF-2401
+            if (reference != null
+                && context.HasConstraint(reference, ObjectConstraint.Null)
+                && !reference.Type.IsStruct() // ToDo: IsStruct() is a workaround before MMF-2401
+                && !IsSupressed(reference.Syntax))
             {
                 ReportIssue(reference, reference.Syntax.ToString());
             }
