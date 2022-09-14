@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2259",
+"message":  "'field' is null on at least one execution path.",
+"location":  {
+"uri":  "sources\Roslyn.1.3.1\OldRoslyn.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  19,
+"endLine":  16,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'asserted' is null on at least one execution path.",
+"location":  {
+"uri":  "sources\Roslyn.1.3.1\OldRoslyn.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  20,
+"endLine":  23,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'arg' is null on at least one execution path.",
+"location":  {
+"uri":  "sources\Roslyn.1.3.1\OldRoslyn.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  24,
+"endLine":  37,
+"endColumn":  27
+}
+}
+}
+]
+}

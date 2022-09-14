@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'DebugAssert' a static method.",
+"location":  {
+"uri":  "sources\Roslyn.1.3.1\OldRoslyn.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  23,
+"endLine":  19,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'TryCatch' a static method.",
+"location":  {
+"uri":  "sources\Roslyn.1.3.1\OldRoslyn.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  23,
+"endLine":  26,
+"endColumn":  31
+}
+}
+}
+]
+}
