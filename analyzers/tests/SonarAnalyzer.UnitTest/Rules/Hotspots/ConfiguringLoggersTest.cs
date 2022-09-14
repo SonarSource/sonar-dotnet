@@ -95,7 +95,9 @@ namespace SonarAnalyzer.UnitTest.Rules
             NuGetMetadataReference.NLog(Constants.NuGetLatestVersion);
 
         private static IEnumerable<MetadataReference> SeriLogReferences =>
-            NuGetMetadataReference.SerilogPackages("2.11.0", "4.1.0");
+            Enumerable.Empty<MetadataReference>()
+                .Concat(NuGetMetadataReference.Serilog("2.11.0"))
+                .Concat(NuGetMetadataReference.SerilogSinksConsole("4.1.0"));
 
 #if NET
         private static IEnumerable<MetadataReference> AspNetCore2LoggingReferences =>
@@ -107,7 +109,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Concat(NuGetMetadataReference.MicrosoftExtensionsConfigurationAbstractions(Constants.DotNetCore220Version))
                 .Concat(NuGetMetadataReference.MicrosoftExtensionsOptions(Constants.DotNetCore220Version))
                 .Concat(NuGetMetadataReference.MicrosoftExtensionsLoggingPackages(Constants.DotNetCore220Version))
-                .Concat(new[] {CoreMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions});
+                .Concat(new[] { CoreMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions });
 
         private static IEnumerable<MetadataReference> AspNetCoreLoggingReferences(string version) =>
             new[]
