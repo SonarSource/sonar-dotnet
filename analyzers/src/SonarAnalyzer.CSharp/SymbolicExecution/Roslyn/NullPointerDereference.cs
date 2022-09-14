@@ -62,6 +62,5 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp
                 }
             }
         }
-
     }
 }
