@@ -627,7 +627,7 @@ namespace Tests.Diagnostics
             a();
         }
 
-        void ActionInvocation()
+        void ActionInvocation(bool condition)
         {
             Action a = null;
             a(); // FN
@@ -636,7 +636,7 @@ namespace Tests.Diagnostics
             f(); // FN
 
             Action notNull = () => { };
-            (condition ? a : notNull)();  // Noncompliant
+            (condition ? a : notNull)();  // FN
         }
 
         void Assert1()
