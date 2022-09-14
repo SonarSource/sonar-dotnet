@@ -359,6 +359,19 @@ namespace Tests.Diagnostics
         {
             var s = string.IsNullOrEmpty(path) ? new string[] { } : path.Split('/');
         }
+
+        void BinaryOr(int i)
+        {
+            object o = null;
+            if (o==null | i == 0)
+            {
+                o.ToString();   // Noncompliant
+            }
+            else
+            {
+                o.ToString();   // Compliant
+            }
+        }
     }
 
     class A
