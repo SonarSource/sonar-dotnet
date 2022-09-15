@@ -62,5 +62,26 @@ public class C
                     typeInfo.Nullability.FlowState
                 }, options => options.ComparingEnumsByName());
         }
+
+        [TestMethod]
+        public void NullabilityInfoIsMissingIfNullableDisabled()
+        {
+            var code = @"
+#nullable disable
+public class C
+{
+    public void M()
+    {
+        object? o = null;
+        o.ToString();
+    }
+}
+";
+            var (tree, semanticModel) = TestHelper.CompileCS(code);
+            var identifier = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().First(); // o in o.ToString()
+            var typeInfo = semanticModel.GetTypeInfo(identifier);
+            typeInfo.ConvertedNullability().Should().Be(new NullabilityInfo(NullableAnnotation.None, NullableFlowState.None));
+            typeInfo.Nullability().Should().Be(new NullabilityInfo(NullableAnnotation.None, NullableFlowState.None));
+        }
     }
 }
