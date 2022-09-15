@@ -107,14 +107,7 @@ public class CSharpSonarRulesDefinitionTest {
     assertThat(rule.type()).isEqualTo(RuleType.VULNERABILITY);
     assertThat(rule.securityStandards()).containsExactlyInAnyOrder(
       "cwe:326",
-      "owaspAsvs-4.0:2.8.3",
       "owaspAsvs-4.0:6.2.3",
-      "owaspAsvs-4.0:6.2.4",
-      "owaspAsvs-4.0:6.2.5",
-      "owaspAsvs-4.0:6.2.6",
-      "owaspAsvs-4.0:6.2.7",
-      "owaspAsvs-4.0:9.1.2",
-      "owaspAsvs-4.0:9.1.3",
       "owaspTop10-2021:a2",
       "owaspTop10:a3",
       "owaspTop10:a6");
