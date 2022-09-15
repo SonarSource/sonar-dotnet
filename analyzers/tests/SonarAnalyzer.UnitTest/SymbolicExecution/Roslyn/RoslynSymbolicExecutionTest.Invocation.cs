@@ -396,5 +396,22 @@ finally
                 new SymbolicValue().WithConstraint(ObjectConstraint.NotNull)
             });
         }
+
+        [TestMethod]
+        public void Instance_InstanceMethodCallClearsField()
+        {
+            var code = $@"
+if (this.ObjectField == null)
+{{
+    this.InstanceMethod(StaticObjectField == null ? 1 : 0);
+}}
+Tag(""After"", this.ObjectField);
+";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.TagValues("After").Should().BeEquivalentTo(
+                new SymbolicValue().WithConstraint(ObjectConstraint.Null),  // Unexpected null
+                new SymbolicValue().WithConstraint(ObjectConstraint.Null),  // Unexpected null
+                new SymbolicValue().WithConstraint(ObjectConstraint.NotNull));
+        }
     }
 }
