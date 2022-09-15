@@ -83,5 +83,28 @@ public class C
             typeInfo.ConvertedNullability().Should().Be(new NullabilityInfo(NullableAnnotation.None, NullableFlowState.None));
             typeInfo.Nullability().Should().Be(new NullabilityInfo(NullableAnnotation.None, NullableFlowState.None));
         }
+
+        [TestMethod]
+        public void NullabilityInfoRecognizesDebugAssert()
+        {
+            var code = @"
+#nullable enable
+using System.Diagnostics;
+public class C
+{
+    public void M()
+    {
+        object? o = null;
+        Debug.Assert(o != null);
+        o.ToString();
+    }
+}
+";
+            var (tree, semanticModel) = TestHelper.CompileCS(code);
+            var identifier = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(x => x.NameIs("o")).Skip(1).First(); // o in o.ToString()
+            var typeInfo = semanticModel.GetTypeInfo(identifier);
+            typeInfo.ConvertedNullability().Should().Be(new NullabilityInfo(NullableAnnotation.NotAnnotated, NullableFlowState.NotNull));
+            typeInfo.Nullability().Should().Be(new NullabilityInfo(NullableAnnotation.NotAnnotated, NullableFlowState.NotNull));
+        }
     }
 }
