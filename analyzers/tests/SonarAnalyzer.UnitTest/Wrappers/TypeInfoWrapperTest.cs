@@ -10,7 +10,7 @@ namespace SonarAnalyzer.UnitTest.Wrappers
     public class TypeInfoWrapperTest
     {
         [TestMethod]
-        public void MyTestMethod()
+        public void NullabilityInfoFromShimEqualsOriginal()
         {
             var code = @"
 #nullable enable
@@ -24,10 +24,23 @@ public class C
 }
 ";
             var (tree, semanticModel) = TestHelper.CompileCS(code);
-            var identifier = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().First();
+            var identifier = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().First(); // o in o.ToString()
             var typeInfo = semanticModel.GetTypeInfo(identifier);
             var convertedNullability = typeInfo.ConvertedNullability();
-            convertedNullability.Should().Be(new NullabilityInfo(NullableAnnotation.Annotated, NullableFlowState.MaybeNull));
+            convertedNullability.Should().Be(new NullabilityInfo(NullableAnnotation.Annotated, NullableFlowState.MaybeNull))
+                .And.BeEquivalentTo(new
+                {
+                    typeInfo.ConvertedNullability.Annotation,
+                    typeInfo.ConvertedNullability.FlowState
+                }, options => options.ComparingEnumsByName());
+
+            var nullability = typeInfo.Nullability();
+            nullability.Should().Be(new NullabilityInfo(NullableAnnotation.Annotated, NullableFlowState.MaybeNull))
+                .And.BeEquivalentTo(new
+                {
+                    typeInfo.Nullability.Annotation,
+                    typeInfo.Nullability.FlowState
+                }, options => options.ComparingEnumsByName());
         }
     }
 }
