@@ -33,11 +33,13 @@ namespace StyleCop.Analyzers.Lightup
             }
 
             var nullabilityInfoRuntimeType = property.PropertyType;
-            var typeInfoParameter = Parameter(typeof(TypeInfo));
+            var typeInfoParameter = Parameter(typeof(TypeInfo), "typeInfo");
 
             var intermediateResult = Variable(nullabilityInfoRuntimeType); // local variable which holds the Roslyn NullabilityInfo
             Type nullableAnnotationType = typeof(NullableAnnotation), nullableFlowStateType = typeof(NullableFlowState);
 
+            // intermediateResult = typeInfo.{propertyName};
+            // return new NullabilityInfo((Lightup.NullableAnnotation)intermediateResult.Annotation, (Lightup.NullableFlowState)intermediateResult.FlowState);
             var body = Block(variables: new[] { intermediateResult },
                 Assign(intermediateResult, Property(typeInfoParameter, propertyName)),
                 New(typeof(NullabilityInfo).GetConstructor(new[] { nullableAnnotationType, nullableFlowStateType }),
