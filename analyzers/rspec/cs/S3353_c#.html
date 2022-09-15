@@ -4,7 +4,7 @@ and it’s not supposed to be". <code>const</code> should be used in these situa
 <pre>
 public bool Seek(int[] input)
 {
-  int target = 32;  // Noncompliant
+  var target = 32;  // Noncompliant
   foreach (int i in input)
   {
     if (i == target)
@@ -13,6 +13,16 @@ public bool Seek(int[] input)
     }
   }
   return false;
+}
+</pre>
+<p>or</p>
+<pre>
+public class Sample
+{
+  public void Method()
+  {
+    var context = $"{nameof(Sample)}.{nameof(Method)}";  // Noncompliant (C# 10 and above only)
+  }
 }
 </pre>
 <h2>Compliant Solution</h2>
@@ -28,6 +38,16 @@ public bool Seek(int[] input)
     }
   }
   return false;
+}
+</pre>
+<p>or</p>
+<pre>
+public class Sample
+{
+  public void Method()
+  {
+    const string context = $"{nameof(Sample)}.{nameof(Method)}";
+  }
 }
 </pre>
 
