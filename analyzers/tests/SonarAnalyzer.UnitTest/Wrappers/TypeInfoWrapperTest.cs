@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Diagnostics;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using StyleCop.Analyzers.Lightup;
 using NullabilityInfo = StyleCop.Analyzers.Lightup.NullabilityInfo;
@@ -105,8 +106,14 @@ public class C
             var (tree, semanticModel) = TestHelper.CompileCS(code);
             var identifier = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Last(x => x.NameIs("o")); // o in o.ToString()
             var typeInfo = semanticModel.GetTypeInfo(identifier);
-            typeInfo.ConvertedNullability().Should().Be(new NullabilityInfo(NullableAnnotation.NotAnnotated, NullableFlowState.NotNull));
-            typeInfo.Nullability().Should().Be(new NullabilityInfo(NullableAnnotation.NotAnnotated, NullableFlowState.NotNull));
+            var expected =
+#if NET
+                new NullabilityInfo(NullableAnnotation.NotAnnotated, NullableFlowState.NotNull);
+#else
+                new NullabilityInfo(NullableAnnotation.Annotated, NullableFlowState.MaybeNull);
+#endif
+            typeInfo.ConvertedNullability().Should().Be(expected);
+            typeInfo.Nullability().Should().Be(expected);
         }
     }
 }
