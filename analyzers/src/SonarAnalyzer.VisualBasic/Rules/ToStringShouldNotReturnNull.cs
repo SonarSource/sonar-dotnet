@@ -37,6 +37,7 @@ public sealed class ToStringShouldNotReturnNull : ToStringShouldNotReturnNullBas
         node is TernaryConditionalExpressionSyntax conditional
         ? new SyntaxNode[] { conditional.WhenTrue, conditional.WhenFalse }
         : Array.Empty<SyntaxNode>();
-    protected override bool NotLocalOrLambda(SyntaxNode node) =>
+
+        protected override bool NotLocalOrLambda(SyntaxNode node) =>
         !node.IsKind(SyntaxKind.MultiLineFunctionLambdaExpression);
 }
