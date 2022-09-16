@@ -27,7 +27,7 @@ using NullableFlowState = StyleCop.Analyzers.Lightup.NullableFlowState;
 namespace SonarAnalyzer.UnitTest.Wrappers
 {
     [TestClass]
-    public class TypeInfoWrapperTest
+    public class TypeInfoExtensionsTest
     {
         [TestMethod]
         public void NullabilityInfoFromShimEqualsOriginal()
