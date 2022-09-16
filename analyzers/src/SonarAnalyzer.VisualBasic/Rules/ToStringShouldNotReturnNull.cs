@@ -33,11 +33,13 @@ public sealed class ToStringShouldNotReturnNull : ToStringShouldNotReturnNullBas
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
+    protected override SyntaxKind MethodKind => SyntaxKind.FunctionBlock;
+
     protected override IEnumerable<SyntaxNode> Conditionals(SyntaxNode node) =>
         node is TernaryConditionalExpressionSyntax conditional
         ? new SyntaxNode[] { conditional.WhenTrue, conditional.WhenFalse }
         : Array.Empty<SyntaxNode>();
 
-        protected override bool NotLocalOrLambda(SyntaxNode node) =>
-        !node.IsKind(SyntaxKind.MultiLineFunctionLambdaExpression);
+    protected override bool IsLocalOrLambda(SyntaxNode node) =>
+        node.IsKind(SyntaxKind.MultiLineFunctionLambdaExpression);
 }

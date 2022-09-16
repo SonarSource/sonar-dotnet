@@ -63,6 +63,15 @@ Namespace Compliant
             Return String.Empty
         End Function
     End Structure
+	
+	Class ToString
+	
+		Public Function SomeMethod() As String
+            Return Nothing 'Compliant
+        End Function
+	
+	End Class
+
 End Namespace
 
 Namespace Noncompliant
@@ -79,7 +88,7 @@ Namespace Noncompliant
     End Class
 
     Public Class ReturnsNothingConditionaly
-    {
+    
        Public Overrides Function ToString() As String
             If Condition.[When]() Then
                 Return Nothing ' Noncompliant

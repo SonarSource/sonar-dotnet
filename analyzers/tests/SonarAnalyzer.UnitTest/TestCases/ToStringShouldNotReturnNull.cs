@@ -60,6 +60,14 @@ namespace Compliant
             return string.Empty;
         }
     }
+
+    class ToString
+    {
+        public string SomeMethod()
+        {
+            return null; // Compliant
+        }
+    }
 }
 
 class Noncompliant

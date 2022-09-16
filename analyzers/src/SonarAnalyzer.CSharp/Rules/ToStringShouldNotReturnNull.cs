@@ -34,6 +34,8 @@ public sealed class ToStringShouldNotReturnNull : ToStringShouldNotReturnNullBas
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
+    protected override SyntaxKind MethodKind => SyntaxKind.MethodDeclaration;
+
     protected override void Initialize(SonarAnalysisContext context)
     {
         base.Initialize(context);
@@ -48,6 +50,6 @@ public sealed class ToStringShouldNotReturnNull : ToStringShouldNotReturnNullBas
             ? new SyntaxNode[] { conditional.WhenTrue, conditional.WhenFalse }
             : Array.Empty<SyntaxNode>();
 
-    protected override bool NotLocalOrLambda(SyntaxNode node) =>
-        !node.IsAnyKind(SyntaxKind.ParenthesizedLambdaExpression, SyntaxKindEx.LocalFunctionStatement);
+    protected override bool IsLocalOrLambda(SyntaxNode node) =>
+        node.IsAnyKind(SyntaxKind.ParenthesizedLambdaExpression, SyntaxKindEx.LocalFunctionStatement);
 }
