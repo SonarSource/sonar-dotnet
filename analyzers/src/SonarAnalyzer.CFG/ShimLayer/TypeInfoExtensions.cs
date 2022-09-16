@@ -6,6 +6,7 @@ namespace StyleCop.Analyzers.Lightup
     using System;
     using Microsoft.CodeAnalysis;
     using static System.Linq.Expressions.Expression;
+
     public static class TypeInfoExtensions
     {
         private static readonly Func<TypeInfo, NullabilityInfo> ConvertedNullabilityAccessor;
@@ -29,14 +30,12 @@ namespace StyleCop.Analyzers.Lightup
             var property = typeInfoType.GetProperty(propertyName);
             if (property == null)
             {
-                return _ => default;
+                return static _ => default;
             }
 
-            var nullabilityInfoRuntimeType = property.PropertyType;
-            var typeInfoParameter = Parameter(typeof(TypeInfo), "typeInfo");
-
-            var intermediateResult = Variable(nullabilityInfoRuntimeType); // local variable which holds the Roslyn NullabilityInfo
             Type nullableAnnotationType = typeof(NullableAnnotation), nullableFlowStateType = typeof(NullableFlowState);
+            var typeInfoParameter = Parameter(typeof(TypeInfo), "typeInfo");
+            var intermediateResult = Variable(property.PropertyType); // local variable which holds the Roslyn NullabilityInfo
 
             // intermediateResult = typeInfo.{propertyName};
             // return new NullabilityInfo((Lightup.NullableAnnotation)intermediateResult.Annotation, (Lightup.NullableFlowState)intermediateResult.FlowState);
