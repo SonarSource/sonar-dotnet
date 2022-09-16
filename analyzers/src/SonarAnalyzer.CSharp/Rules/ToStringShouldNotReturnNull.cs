@@ -45,8 +45,8 @@ public sealed class ToStringShouldNotReturnNull : ToStringShouldNotReturnNullBas
 
     protected override IEnumerable<SyntaxNode> Conditionals(SyntaxNode expression) =>
         expression is ConditionalExpressionSyntax conditional
-        ? new SyntaxNode[] { conditional.WhenTrue, conditional.WhenFalse }
-        : Array.Empty<SyntaxNode>();
+            ? new SyntaxNode[] { conditional.WhenTrue, conditional.WhenFalse }
+            : Array.Empty<SyntaxNode>();
 
     protected override bool NotLocalOrLambda(SyntaxNode node) =>
         !node.IsAnyKind(SyntaxKind.ParenthesizedLambdaExpression, SyntaxKindEx.LocalFunctionStatement);
