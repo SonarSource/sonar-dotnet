@@ -9,14 +9,8 @@ namespace StyleCop.Analyzers.Lightup
 
     public static class TypeInfoExtensions
     {
-        private static readonly Func<TypeInfo, NullabilityInfo> ConvertedNullabilityAccessor;
-        private static readonly Func<TypeInfo, NullabilityInfo> NullabilityAccessor;
-
-        static TypeInfoExtensions()
-        {
-            ConvertedNullabilityAccessor = CreateNullabilityAccessor(nameof(ConvertedNullability));
-            NullabilityAccessor = CreateNullabilityAccessor(nameof(Nullability));
-        }
+        private static readonly Func<TypeInfo, NullabilityInfo> ConvertedNullabilityAccessor = CreateNullabilityAccessor(nameof(ConvertedNullability));
+        private static readonly Func<TypeInfo, NullabilityInfo> NullabilityAccessor = CreateNullabilityAccessor(nameof(Nullability));
 
         public static NullabilityInfo ConvertedNullability(this TypeInfo typeInfo) =>
             ConvertedNullabilityAccessor(typeInfo);
@@ -38,7 +32,7 @@ namespace StyleCop.Analyzers.Lightup
             var intermediateResult = Variable(property.PropertyType); // local variable which holds the Roslyn NullabilityInfo
 
             // intermediateResult = typeInfo.{propertyName};
-            // return new NullabilityInfo((Lightup.NullableAnnotation)intermediateResult.Annotation, (Lightup.NullableFlowState)intermediateResult.FlowState);
+            // return new Lightup.NullabilityInfo((Lightup.NullableAnnotation)intermediateResult.Annotation, (Lightup.NullableFlowState)intermediateResult.FlowState);
             var body = Block(variables: new[] { intermediateResult },
                 Assign(intermediateResult, Property(typeInfoParameter, propertyName)),
                 New(typeof(NullabilityInfo).GetConstructor(new[] { nullableAnnotationType, nullableFlowStateType }),
