@@ -33,7 +33,7 @@ public abstract class ToStringShouldNotReturnNullBase<TSyntaxKind> : SonarDiagno
 
     protected override string MessageFormat => "Return an empty string instead.";
 
-    protected abstract bool NotLocalOrLambda(SyntaxNode node);
+    protected abstract bool IsLocalOrLambda(SyntaxNode node);
 
     protected abstract IEnumerable<SyntaxNode> Conditionals(SyntaxNode expression);
 
