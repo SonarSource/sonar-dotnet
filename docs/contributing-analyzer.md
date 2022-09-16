@@ -97,14 +97,6 @@ You can visualize the differences using:
 1. `cd actual`
 1. `git diff --cached`
 
-
-#### Semi-automated differences review
-If you run the project `ReviewDiffs` in debug mode, it will print in the output windows all places where a difference has been found. From there you can easily navigate between differences (double-click, F4...).
-
-*Disclaimer*: This program is still very new and the paint is still very wet. It may not work in all situations, but it's easy to update it ??.
-
-*PS*: This program outputs message in a way that is compatible with the [VsColorOutput](https://marketplace.visualstudio.com/items?itemName=MikeWard-AnnArbor.VSColorOutput) extension, so that errors are colored in red, and differences are colored like warnings.
-
 ### Debug an analysis started from the command line / Java ITs
 
 If you want to debug the analysis of a project, you can add a [`Debugger.Launch()`](https://docs.microsoft.com/en-us/dotnet/api/system.diagnostics.debugger.launch?view=net-6.0) breakpoint in the class you want to debug. Rebuild `SonarAnalyzer.sln` and link the analyzer debug binaries to the project you want to debug the analysis for.
