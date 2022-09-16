@@ -505,7 +505,7 @@ Tag(""This"", fromThis);";
         [DataTestMethod]
         [DataRow("[ValidatedNotNullAttribute]")]
         [DataRow("[NotNullAttribute]")]
-        public void Invocation_ValidatedNotNullAttribute_SetsNotNullOnArgumentsMarkedWithAttribute(string notNullAttribute)
+        public void Invocation_NotNullAttribute_SetsNotNullOnArgumentsMarkedWithAttribute(string notNullAttribute)
         {
             var code = $@"
 using System;
@@ -565,6 +565,32 @@ public static class Guard
             validator.ValidateTag("AfterGuard_o8", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.ValidateTag("AfterGuard_s1", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.ValidateTag("AfterGuard_s2", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        }
+
+        [DataTestMethod]
+        [DataRow("ValidatedNotNullAttribute")]
+        [DataRow("ValidatedNotNull")]
+        [DataRow("NotNullAttribute")]
+        [DataRow("NotNull")]
+        public void Invocation_NotNullAttributeVariations(string attributeName)
+        {
+            var code = $@"
+public void Main(object o)
+{{
+    Tag(""Before"", o);
+    NotNullInst(o);
+    Tag(""After"", o);
+}}
+
+private void NotNullInst([{attributeName}] object value)
+{{
+    // Skip implementation to make sure, the attribute is driving the constraint
+}}
+public sealed class {attributeName} : Attribute {{ }}
+";
+            var validator = SETestContext.CreateCSMethod(code).Validator;
+            validator.ValidateTag("Before", x => x.Should().BeNull());
+            validator.ValidateTag("After", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
         }
 
         [TestMethod]

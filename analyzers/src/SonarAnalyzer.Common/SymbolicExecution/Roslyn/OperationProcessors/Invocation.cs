@@ -181,6 +181,10 @@ internal sealed class Invocation : MultiProcessor<IInvocationOperationWrapper>
         // https://docs.microsoft.com/dotnet/csharp/language-reference/attributes/nullable-analysis#postconditions-maybenull-and-notnull
         // https://www.jetbrains.com/help/resharper/Reference__Code_Annotation_Attributes.html#NotNullAttribute
         private static bool IsNotNullAttribute(AttributeData attribute) =>
-            attribute.AttributeClass?.Name is "ValidatedNotNullAttribute" or "NotNullAttribute";
+            attribute.AttributeClass?.Name
+                is "ValidatedNotNullAttribute"
+                or "ValidatedNotNull"
+                or "NotNullAttribute"
+                or "NotNull";
     }
 }
