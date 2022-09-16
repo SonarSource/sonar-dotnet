@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Diagnostics;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using StyleCop.Analyzers.Lightup;
 using NullabilityInfo = StyleCop.Analyzers.Lightup.NullabilityInfo;
@@ -47,13 +46,6 @@ public class C
             var (tree, semanticModel) = TestHelper.CompileCS(code);
             var identifier = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Last(x => x.NameIs("o")); // o in o.ToString()
             var typeInfo = semanticModel.GetTypeInfo(identifier);
-            var convertedNullability = typeInfo.ConvertedNullability();
-            convertedNullability.Should().Be(new NullabilityInfo(NullableAnnotation.Annotated, NullableFlowState.MaybeNull))
-                .And.BeEquivalentTo(new
-                {
-                    typeInfo.ConvertedNullability.Annotation,
-                    typeInfo.ConvertedNullability.FlowState
-                }, options => options.ComparingEnumsByName());
 
             var nullability = typeInfo.Nullability();
             nullability.Should().Be(new NullabilityInfo(NullableAnnotation.Annotated, NullableFlowState.MaybeNull))
@@ -61,6 +53,53 @@ public class C
                 {
                     typeInfo.Nullability.Annotation,
                     typeInfo.Nullability.FlowState
+                }, options => options.ComparingEnumsByName());
+
+            var convertedNullability = typeInfo.ConvertedNullability();
+            convertedNullability.Should().Be(new NullabilityInfo(NullableAnnotation.Annotated, NullableFlowState.MaybeNull))
+                .And.BeEquivalentTo(new
+                {
+                    typeInfo.ConvertedNullability.Annotation,
+                    typeInfo.ConvertedNullability.FlowState
+                }, options => options.ComparingEnumsByName());
+        }
+
+        [TestMethod]
+        public void NullabilityInfoFromShimEqualsOriginalConvertedNullabilityDiffersNullability()
+        {
+            var code = @"
+#nullable enable
+
+public class B { }
+
+public class C {
+    public void M() {
+        C c = new C();
+        M(c);
+    }
+
+    public void M(B? d) { }
+
+    public static implicit operator B?(C c) => null;
+}";
+            var (tree, semanticModel) = TestHelper.CompileCS(code);
+            var identifier = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Last(x => x.NameIs("c")); // c in M(c)
+            var typeInfo = semanticModel.GetTypeInfo(identifier);
+
+            var nullability = typeInfo.Nullability();
+            nullability.Should().Be(new NullabilityInfo(NullableAnnotation.NotAnnotated, NullableFlowState.NotNull))
+                .And.BeEquivalentTo(new
+                {
+                    typeInfo.Nullability.Annotation,
+                    typeInfo.Nullability.FlowState
+                }, options => options.ComparingEnumsByName());
+
+            var convertedNullability = typeInfo.ConvertedNullability();
+            convertedNullability.Should().Be(new NullabilityInfo(NullableAnnotation.Annotated, NullableFlowState.MaybeNull))
+                .And.BeEquivalentTo(new
+                {
+                    typeInfo.ConvertedNullability.Annotation,
+                    typeInfo.ConvertedNullability.FlowState
                 }, options => options.ComparingEnumsByName());
         }
 
