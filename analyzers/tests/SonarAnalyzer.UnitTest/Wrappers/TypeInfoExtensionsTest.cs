@@ -120,8 +120,8 @@ public class C
             var (tree, semanticModel) = TestHelper.CompileCS(code);
             var identifier = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Last(x => x.NameIs("o")); // o in o.ToString()
             var typeInfo = semanticModel.GetTypeInfo(identifier);
-            typeInfo.ConvertedNullability().Should().Be(new NullabilityInfo(NullableAnnotation.None, NullableFlowState.None));
             typeInfo.Nullability().Should().Be(new NullabilityInfo(NullableAnnotation.None, NullableFlowState.None));
+            typeInfo.ConvertedNullability().Should().Be(new NullabilityInfo(NullableAnnotation.None, NullableFlowState.None));
         }
 
         [DataTestMethod]
@@ -151,8 +151,8 @@ public class C
 #else
                 new NullabilityInfo(NullableAnnotation.Annotated, NullableFlowState.MaybeNull);
 #endif
-            typeInfo.ConvertedNullability().Should().Be(expected);
             typeInfo.Nullability().Should().Be(expected);
+            typeInfo.ConvertedNullability().Should().Be(expected);
         }
     }
 }
