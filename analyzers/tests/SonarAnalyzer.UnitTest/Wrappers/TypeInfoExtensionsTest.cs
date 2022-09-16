@@ -78,7 +78,7 @@ public class C {
         M(c);
     }
 
-    public void M(B? d) { }
+    public void M(B? b) { }
 
     public static implicit operator B?(C c) => null;
 }";
