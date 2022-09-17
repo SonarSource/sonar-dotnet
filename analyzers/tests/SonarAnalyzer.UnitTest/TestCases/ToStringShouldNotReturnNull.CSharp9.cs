@@ -31,9 +31,11 @@ namespace Compliant
         {
             Func<string> expression = () => { return null; }; // Compliant
             Func<string> statment = () => null; // Compliant
-
+            var simple = Simple(s => null); // Compliant
             return string.Empty;
         }
+
+        string Simple(Func<string> exp) => exp();
     }
 
     record RecordReturnsStringEmpty
