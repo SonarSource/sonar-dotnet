@@ -51,5 +51,5 @@ public sealed class ToStringShouldNotReturnNull : ToStringShouldNotReturnNullBas
             : Array.Empty<SyntaxNode>();
 
     protected override bool IsLocalOrLambda(SyntaxNode node) =>
-        node.IsAnyKind(SyntaxKind.ParenthesizedLambdaExpression, SyntaxKindEx.LocalFunctionStatement);
+        node.IsAnyKind(SyntaxKind.ParenthesizedLambdaExpression, SyntaxKind.SimpleLambdaExpression, SyntaxKindEx.LocalFunctionStatement);
 }
