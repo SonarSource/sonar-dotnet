@@ -30,7 +30,7 @@ namespace Compliant
         public override string ToString()
         {
             Func<string> expression = () => { return null; }; // Compliant
-            Func<string> statment = () => null; //Compliant
+            Func<string> statment = () => null; // Compliant
 
             return string.Empty;
         }
