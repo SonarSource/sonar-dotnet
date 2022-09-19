@@ -20,8 +20,7 @@ namespace StyleCop.Analyzers.Lightup
 
         private static Func<TypeInfo, NullabilityInfo> CreateNullabilityAccessor(string propertyName)
         {
-            var typeInfoType = typeof(TypeInfo);
-            var property = typeInfoType.GetProperty(propertyName);
+            var property = typeof(TypeInfo).GetProperty(propertyName);
             if (property == null)
             {
                 return static _ => default;
