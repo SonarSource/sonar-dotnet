@@ -122,7 +122,7 @@ public unsafe class Sample
     }}
 
     public NotImplementedException CreateException() => new NotImplementedException();
-    public void InstanceMethod() {{ }}
+    public void InstanceMethod(object parameter = null) {{ }}
     public static void StaticMethod() {{ }}
 
     private void Tag(string name) {{ }}

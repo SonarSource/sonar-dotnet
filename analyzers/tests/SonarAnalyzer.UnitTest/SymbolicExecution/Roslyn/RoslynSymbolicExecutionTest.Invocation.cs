@@ -325,6 +325,23 @@ Tag(""AfterIfElse"", ObjectField);
         }
 
         [TestMethod]
+        public void Instance_InstanceMethodCallClearsField()
+        {
+            var code = $@"
+if (this.ObjectField == null)
+{{
+    this.InstanceMethod(StaticObjectField == null ? 1 : 0);
+}}
+Tag(""After"", this.ObjectField);
+";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.TagValues("After").Should().BeEquivalentTo(
+                new SymbolicValue().WithConstraint(ObjectConstraint.Null), // Unexpected. this.InstanceMethod happens after the ternary and should clear any constraints on this.ObjectField
+                new SymbolicValue().WithConstraint(ObjectConstraint.Null),
+                new SymbolicValue().WithConstraint(ObjectConstraint.NotNull));
+        }
+
+        [TestMethod]
         public void Invocation_IsNullOrEmpty_ValidateOrder()
         {
             var validator = SETestContext.CreateCS(@"var isNullOrEmpy = string.IsNullOrEmpty(arg);", ", string arg").Validator;

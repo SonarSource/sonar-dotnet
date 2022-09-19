@@ -746,6 +746,13 @@ namespace Tests.Diagnostics
             _foo1.ToString(); // Compliant
         }
 
+        void CallToMethodsShouldResetFieldConstraintsWithTernaryInArgument(bool condition)
+        {
+            _foo1 = null;
+            this.DoSomething(condition ? 1 : 2);
+            _foo1.ToString(); // Noncompliant FP. call to "DoSomething" should reset _foo1
+        }
+
         void CallToExtensionMethodsShouldResetFieldConstraints()
         {
             object o = null;
@@ -787,7 +794,7 @@ namespace Tests.Diagnostics
             var name = nameof(o.ToString);
         }
 
-        void DoSomething() { }
+        void DoSomething(object o = null) { }
 
         void TestNameOf(int a)
         {
