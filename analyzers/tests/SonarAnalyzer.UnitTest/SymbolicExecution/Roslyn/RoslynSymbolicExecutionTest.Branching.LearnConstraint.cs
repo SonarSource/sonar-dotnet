@@ -664,14 +664,33 @@ Tag(""End"", arg);";
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
         }
 
-        [TestMethod]
-        public void Branching_NullableValueType()
+        [DataTestMethod]
+        [DataRow("arg > 3")]
+        [DataRow("arg < 3")]
+        [DataRow("arg == 3")]
+        [DataRow("arg >= 3")]
+        [DataRow("arg <= 3")]
+        public void Branching_NullableValueType_NotNullWhenTrue(string expression)
         {
-            var validator = CreateIfElseEndValidatorCS("arg > 3", OperationKind.IsNull, "int?");
+            var validator = CreateIfElseEndValidatorCS(expression, OperationKind.IsNull, "int?");
             validator.TagValues("If").Should().HaveCount(1)
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
             validator.TagValues("Else").Should().HaveCount(1)
                 .And.ContainSingle(x => x == null);
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x == null)
+                .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
+        }
+
+        [DataTestMethod]
+        [DataRow("arg != 3")]
+        public void Branching_NullableValueType_NotNullWhenFalse(string expression)
+        {
+            var validator = CreateIfElseEndValidatorCS(expression, OperationKind.IsNull, "int?");
+            validator.TagValues("If").Should().HaveCount(1)
+                .And.ContainSingle(x => x == null);
+            validator.TagValues("Else").Should().HaveCount(1)
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x == null)
                 .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
