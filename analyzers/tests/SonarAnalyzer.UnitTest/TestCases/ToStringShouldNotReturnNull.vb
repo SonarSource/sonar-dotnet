@@ -71,6 +71,14 @@ Namespace Compliant
         End Function
 	
 	End Class
+	
+	Class BinaryConditionalExpressionNotSupported
+	
+		Public Function SomeMethod() As String
+            Return If(Nothing, Nothing) ' Not supported, doesn't make sense
+        End Function
+	
+	End Class
 
 End Namespace
 
