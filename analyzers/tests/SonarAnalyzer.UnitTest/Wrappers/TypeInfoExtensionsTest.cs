@@ -53,7 +53,7 @@ public class C
                 {
                     typeInfo.Nullability.Annotation,
                     typeInfo.Nullability.FlowState
-                }, options => options.ComparingEnumsByName());
+                }, options => options.ComparingEnumsByValue());
 
             var convertedNullability = typeInfo.ConvertedNullability();
             convertedNullability.Should().Be(new NullabilityInfo(NullableAnnotation.Annotated, NullableFlowState.MaybeNull))
@@ -61,7 +61,7 @@ public class C
                 {
                     typeInfo.ConvertedNullability.Annotation,
                     typeInfo.ConvertedNullability.FlowState
-                }, options => options.ComparingEnumsByName());
+                }, options => options.ComparingEnumsByValue());
         }
 
         [TestMethod]
@@ -92,7 +92,7 @@ public class C {
                 {
                     typeInfo.Nullability.Annotation,
                     typeInfo.Nullability.FlowState
-                }, options => options.ComparingEnumsByName());
+                }, options => options.ComparingEnumsByValue());
 
             var convertedNullability = typeInfo.ConvertedNullability();
             convertedNullability.Should().Be(new NullabilityInfo(NullableAnnotation.Annotated, NullableFlowState.MaybeNull))
@@ -100,7 +100,7 @@ public class C {
                 {
                     typeInfo.ConvertedNullability.Annotation,
                     typeInfo.ConvertedNullability.FlowState
-                }, options => options.ComparingEnumsByName());
+                }, options => options.ComparingEnumsByValue());
         }
 
         [TestMethod]
