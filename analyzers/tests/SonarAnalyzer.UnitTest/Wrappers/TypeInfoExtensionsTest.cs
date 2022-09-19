@@ -47,8 +47,8 @@ public class C
             var identifier = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Last(x => x.NameIs("o")); // o in o.ToString()
             var typeInfo = semanticModel.GetTypeInfo(identifier);
 
-            var nullability = typeInfo.Nullability();
-            nullability.Should().Be(new NullabilityInfo(NullableAnnotation.Annotated, NullableFlowState.MaybeNull))
+            var nullabilityShim = typeInfo.Nullability();
+            nullabilityShim.Should().Be(new NullabilityInfo(NullableAnnotation.Annotated, NullableFlowState.MaybeNull))
                 .And.BeEquivalentTo(new
                 {
                     typeInfo.Nullability.Annotation,
@@ -86,8 +86,8 @@ public class C {
             var identifier = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Last(x => x.NameIs("c")); // c in M(c)
             var typeInfo = semanticModel.GetTypeInfo(identifier);
 
-            var nullability = typeInfo.Nullability();
-            nullability.Should().Be(new NullabilityInfo(NullableAnnotation.NotAnnotated, NullableFlowState.NotNull))
+            var nullabilityShim = typeInfo.Nullability();
+            nullabilityShim.Should().Be(new NullabilityInfo(NullableAnnotation.NotAnnotated, NullableFlowState.NotNull))
                 .And.BeEquivalentTo(new
                 {
                     typeInfo.Nullability.Annotation,
@@ -158,11 +158,11 @@ public class C
         [DataTestMethod]
         [DataRow(typeof(NullableAnnotation), typeof(Microsoft.CodeAnalysis.NullableAnnotation))]
         [DataRow(typeof(NullableFlowState), typeof(Microsoft.CodeAnalysis.NullableFlowState))]
-        public void NullableEnumsAreIdentical(Type ours, Type theirs)
+        public void NullableEnumsAreIdentical(Type fromShim, Type fromRoslyn)
         {
-            ours.GetEnumNames().Should().Equal(theirs.GetEnumNames());
-            var enumValues = ours.GetEnumValues().Cast<byte>();
-            enumValues.Should().SatisfyRespectively(enumValues.Select(x => new Action<byte>(y => ours.GetEnumName(y).Should().Be(theirs.GetEnumName(y)))),
+            fromShim.GetEnumNames().Should().Equal(fromRoslyn.GetEnumNames());
+            var enumValues = fromShim.GetEnumValues().Cast<byte>();
+            enumValues.Should().SatisfyRespectively(enumValues.Select(x => new Action<byte>(y => fromShim.GetEnumName(y).Should().Be(fromRoslyn.GetEnumName(y)))),
                 "the member values should be assigned to the same member names");
         }
     }
