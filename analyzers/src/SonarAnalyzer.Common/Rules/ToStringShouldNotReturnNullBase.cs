@@ -55,11 +55,15 @@ public abstract class ToStringShouldNotReturnNullBase<TSyntaxKind> : SonarDiagno
         }
     }
 
-    private bool ReturnsNull(SyntaxNode node)
+    private bool ReturnsNull(SyntaxNode node) =>
+        Language.Syntax.IsNullLiteral(node)
+        || ExpresssionReturnsNull(node);
+
+    private bool ExpresssionReturnsNull(SyntaxNode node)
     {
         var expression = Language.Syntax.NodeExpression(node);
         return Language.Syntax.IsNullLiteral(expression)
-            || Conditionals(expression).Any(Language.Syntax.IsNullLiteral);
+            || Conditionals(expression).Any(x => ReturnsNull(x));
     }
 
     private bool WithinToString(SyntaxNode node) =>

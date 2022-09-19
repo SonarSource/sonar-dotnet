@@ -88,9 +88,10 @@ namespace SonarAnalyzer.Helpers.Facade
             {
                 ArrowExpressionClauseSyntax x => x.Expression,
                 AttributeArgumentSyntax x => x.Expression,
+                InterpolationSyntax x => x.Expression,
                 InvocationExpressionSyntax x => x.Expression,
                 LockStatementSyntax x => x.Expression,
-                InterpolationSyntax x => x.Expression,
+                ParenthesizedExpressionSyntax x => x.Expression,
                 ReturnStatementSyntax x => x.Expression,
                 null => null,
                 _ => throw InvalidOperation(node, nameof(NodeExpression))

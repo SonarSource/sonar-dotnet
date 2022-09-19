@@ -115,6 +115,14 @@ class Noncompliant
         }
     }
 
+    public class ReturnsNullViaNestedTenary
+    {
+        public override string ToString() => // Noncompliant
+            Condition.When()
+             ? (Condition.When() ? null : "something") 
+             : (Condition.When() ? "something" : null);
+    }
+
     struct StructReturnsNull
     {
         public override string ToString()
