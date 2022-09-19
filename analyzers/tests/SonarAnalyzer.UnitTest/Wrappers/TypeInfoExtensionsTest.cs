@@ -154,5 +154,16 @@ public class C
             typeInfo.Nullability().Should().Be(expected);
             typeInfo.ConvertedNullability().Should().Be(expected);
         }
+
+        [DataTestMethod]
+        [DataRow(typeof(NullableAnnotation), typeof(Microsoft.CodeAnalysis.NullableAnnotation))]
+        [DataRow(typeof(NullableFlowState), typeof(Microsoft.CodeAnalysis.NullableFlowState))]
+        public void NullableEnumsAreIdentical(Type ours, Type theirs)
+        {
+            ours.GetEnumNames().Should().Equal(theirs.GetEnumNames());
+            var enumValues = ours.GetEnumValues().Cast<byte>();
+            enumValues.Should().SatisfyRespectively(enumValues.Select(x => new Action<byte>(y => ours.GetEnumName(y).Should().Be(theirs.GetEnumName(y)))),
+                "the member values should be assigned to the same member names");
+        }
     }
 }

@@ -3,7 +3,7 @@
 
 namespace StyleCop.Analyzers.Lightup
 {
-    public enum NullableAnnotation
+    public enum NullableAnnotation : byte
     {
         /// <summary>
         /// The expression has not been analyzed, or the syntax is not an expression (such as a statement).

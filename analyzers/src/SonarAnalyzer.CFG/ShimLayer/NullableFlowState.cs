@@ -3,7 +3,7 @@
 
 namespace StyleCop.Analyzers.Lightup
 {
-    public enum NullableFlowState
+    public enum NullableFlowState : byte
     {
         /// <summary>
         /// Syntax is not an expression, or was not analyzed.
