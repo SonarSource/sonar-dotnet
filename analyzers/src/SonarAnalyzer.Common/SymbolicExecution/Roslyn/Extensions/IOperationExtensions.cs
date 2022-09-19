@@ -42,7 +42,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             operation?.Kind switch
             {
                 OperationKindEx.FlowCaptureReference => state.ResolveCapture(operation) is { } capture && capture != operation ? capture.ResolveTrackedSymbol(state) : null,
-                OperationKindEx.PropertyReference => ResolveTrackedSymbol(IPropertyReferenceOperationWrapper.FromOperation(operation).Instance, state),
+                OperationKindEx.PropertyReference => IPropertyReferenceOperationWrapper.FromOperation(operation).Instance.ResolveTrackedSymbol(state),
                 OperationKindEx.Conversion => IConversionOperationWrapper.FromOperation(operation).Operand.ResolveTrackedSymbol(state),
                 _ => TrackedSymbol(operation),
             };
