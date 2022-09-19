@@ -108,6 +108,11 @@ namespace SonarAnalyzer.Helpers
             && namedType.TypeArguments.Length == 1
             && namedType.TypeArguments[0].Is(KnownType.System_Boolean);
 
+        public static bool IsNullableValueType(this ITypeSymbol type) =>
+            type is INamedTypeSymbol namedType
+            && namedType.OriginalDefinition.Is(KnownType.System_Nullable_T)
+            && namedType.TypeArguments.Length == 1;
+
         public static bool Implements(this ITypeSymbol typeSymbol, KnownType type) =>
             typeSymbol is { }
             && typeSymbol.AllInterfaces.Any(symbol => symbol.ConstructedFrom.Is(type));

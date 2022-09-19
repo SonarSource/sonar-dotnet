@@ -18,8 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
+using System.Threading;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Extensions;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
 
@@ -32,10 +35,31 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                 ? context.SetOperationConstraint(newConstraint)
                 : context.State;
 
-        public static ProgramState LearnBranchingConstraint(ProgramState state, IBinaryOperationWrapper binary, bool useOpposite) =>
-            binary.OperatorKind.IsAnyEquality()
+        public static ProgramState LearnBranchingConstraint(ProgramState state, IBinaryOperationWrapper binary, bool useOpposite)
+        {
+            state = binary.OperatorKind.IsAnyEquality()
                 ? LearnBranchingConstraint<ObjectConstraint>(state, binary, useOpposite) ?? LearnBranchingConstraint<BoolConstraint>(state, binary, useOpposite) ?? state
                 : state;
+            state = LearnNullableValueTypeConstraint(state, binary, useOpposite);
+            return state;
+        }
+
+        private static ProgramState LearnNullableValueTypeConstraint(ProgramState state, IBinaryOperationWrapper binary, bool useOpposite)
+        {
+            var nullableOperation = BranchPredicate(binary, (side, opposite) => side.Type.IsNullableValueType() && opposite.Type.IsValueType);
+            if (nullableOperation is not null && nullableOperation.TrackedSymbol() is { } symbol && !useOpposite)
+            {
+                state = state.SetSymbolConstraint(symbol, ObjectConstraint.NotNull);
+            }
+            return state;
+        }
+
+        private static IOperation BranchPredicate(IBinaryOperationWrapper binary, Func<IOperation, IOperation, bool> predicate) =>
+            predicate(binary.LeftOperand, binary.RightOperand)
+                ? binary.LeftOperand
+                : predicate(binary.RightOperand, binary.LeftOperand)
+                    ? binary.RightOperand
+                    : null;
 
         private static ProgramState LearnBranchingConstraint<T>(ProgramState state, IBinaryOperationWrapper binary, bool useOpposite)
             where T : SymbolicConstraint

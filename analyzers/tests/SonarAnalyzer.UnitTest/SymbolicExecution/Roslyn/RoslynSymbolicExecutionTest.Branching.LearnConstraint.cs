@@ -669,11 +669,12 @@ Tag(""End"", arg);";
         {
             var validator = CreateIfElseEndValidatorCS("arg > 3", OperationKind.IsNull, "int?");
             validator.TagValues("If").Should().HaveCount(1)
-                .And.ContainSingle(x => x == null); // ToDo: should find ObjectConstraint.NotNull
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
             validator.TagValues("Else").Should().HaveCount(1)
                 .And.ContainSingle(x => x == null);
-            validator.TagValues("End").Should().HaveCount(1)
-                .And.ContainSingle(x => x == null);
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x == null)
+                .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
         }
 
         private static ValidatorTestCheck CreateIfElseEndValidatorCS(string expression, OperationKind expectedOperation, string argType = "object")
