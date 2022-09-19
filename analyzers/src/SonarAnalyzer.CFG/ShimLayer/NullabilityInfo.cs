@@ -5,12 +5,6 @@ namespace StyleCop.Analyzers.Lightup
 {
     public readonly record struct NullabilityInfo
     {
-        public NullabilityInfo(NullableAnnotation annotation, NullableFlowState flowState)
-        {
-            Annotation = annotation;
-            FlowState = flowState;
-        }
-
         /// <summary>
         /// The nullable annotation of the expression represented by the syntax node. This represents
         /// the nullability of expressions that can be assigned to this expression, if this expression
@@ -24,5 +18,11 @@ namespace StyleCop.Analyzers.Lightup
         /// this expression can be used as an rvalue.
         /// </summary>
         public NullableFlowState FlowState { get; }
+
+        public NullabilityInfo(NullableAnnotation annotation, NullableFlowState flowState)
+        {
+            Annotation = annotation;
+            FlowState = flowState;
+        }
     }
 }
