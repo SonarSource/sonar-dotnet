@@ -38,6 +38,15 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 _ => null
             };
 
+        internal static ISymbol ResolveTrackedSymbol(this IOperation operation, ProgramState state) =>
+            operation?.Kind switch
+            {
+                OperationKindEx.FlowCaptureReference => state.ResolveCapture(operation) is { } capture && capture != operation ? capture.ResolveTrackedSymbol(state) : null,
+                OperationKindEx.PropertyReference => ResolveTrackedSymbol(IPropertyReferenceOperationWrapper.FromOperation(operation).Instance, state),
+                OperationKindEx.Conversion => IConversionOperationWrapper.FromOperation(operation).Operand.ResolveTrackedSymbol(state),
+                _ => TrackedSymbol(operation),
+            };
+
         internal static IInvocationOperationWrapper? AsInvocation(this IOperation operation) =>
             operation.As(OperationKindEx.Invocation, IInvocationOperationWrapper.FromOperation);
 
