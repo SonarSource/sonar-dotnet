@@ -35,7 +35,7 @@ namespace Compliant
             return string.Empty;
         }
 
-        string Simple(Func<string> exp) => exp();
+        string Simple(Func<string, string> exp) => exp(null);
     }
 
     record RecordReturnsStringEmpty
