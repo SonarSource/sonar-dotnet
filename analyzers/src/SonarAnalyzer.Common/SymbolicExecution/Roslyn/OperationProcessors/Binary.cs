@@ -45,7 +45,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
 
         private static ProgramState LearnNullableValueTypeConstraint(ProgramState state, IBinaryOperationWrapper binary, bool useOpposite)
         {
-            var nullableOperation = BranchPredicate(binary, (side, opposite) => side.Type.IsNullableValueType() && opposite.Type.IsValueType);
+            var nullableOperation = BranchPredicate(binary, static (side, opposite) => side.Type.IsNullableValueType() is true && opposite.Type?.IsValueType is true);
             if (nullableOperation is not null && nullableOperation.ResolveTrackedSymbol(state) is { } symbol)
             {
                 var notNull = binary.OperatorKind.IsNotEquals() ? useOpposite : !useOpposite;
