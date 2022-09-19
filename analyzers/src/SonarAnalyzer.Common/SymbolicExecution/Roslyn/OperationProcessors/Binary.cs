@@ -19,7 +19,6 @@
  */
 
 using System;
-using System.Threading;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
