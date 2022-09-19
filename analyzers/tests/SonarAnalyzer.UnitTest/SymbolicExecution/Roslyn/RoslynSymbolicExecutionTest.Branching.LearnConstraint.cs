@@ -664,6 +664,18 @@ Tag(""End"", arg);";
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
         }
 
+        [TestMethod]
+        public void Branching_NullableValueType()
+        {
+            var validator = CreateIfElseEndValidatorCS("arg > 3", OperationKind.IsNull, "int?");
+            validator.TagValues("If").Should().HaveCount(1)
+                .And.ContainSingle(x => x == null); // ToDo: should find ObjectConstraint.NotNull
+            validator.TagValues("Else").Should().HaveCount(1)
+                .And.ContainSingle(x => x == null);
+            validator.TagValues("End").Should().HaveCount(1)
+                .And.ContainSingle(x => x == null);
+        }
+
         private static ValidatorTestCheck CreateIfElseEndValidatorCS(string expression, OperationKind expectedOperation, string argType = "object")
         {
             var code = @$"
