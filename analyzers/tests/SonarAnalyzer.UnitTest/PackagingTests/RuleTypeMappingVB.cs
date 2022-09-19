@@ -2149,7 +2149,7 @@ internal static class RuleTypeMappingVB
         ["S2222"] = "BUG",
         // ["S2223"],
         // ["S2224"],
-        // ["S2225"],
+        ["S2225"] = "BUG",
         // ["S2226"],
         // ["S2227"],
         // ["S2228"],
