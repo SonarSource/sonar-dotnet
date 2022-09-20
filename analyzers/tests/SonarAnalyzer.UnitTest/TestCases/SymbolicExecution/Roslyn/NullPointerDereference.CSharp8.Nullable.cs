@@ -94,8 +94,9 @@ namespace Tests.Diagnostics.CSharp8
             o.ToString();  // Compliant. Debug.Assert is annotated in .NetStandard with Debug.Assert([DoesNotReturnIf(false)]bool condition)
         }
 
-        public void NotNullWhenFalse(string? s)
+        public void NotNullWhenFalse()
         {
+            string? s = null;
             if (!IsNullOrEmpty(s))
             {
                 s.ToString();  // Compliant
