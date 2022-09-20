@@ -95,4 +95,13 @@ internal sealed class Invocation : MultiProcessor<IInvocationOperationWrapper>
                 : state;
         }
     }
+
+    private static ProgramState ProcessThrowHelper(ProgramState state, IInvocationOperationWrapper invocation)
+    {
+        if (KnownMethods.IsDebugFail(invocation.TargetMethod))
+        {
+            return ProgramState.Empty;
+        }
+        return state;
+    }
 }

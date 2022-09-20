@@ -507,7 +507,7 @@ Tag(""After"", o);
 ";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateTag("Before", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-            validator.ValidateTag("After", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("After", x => x.Should().BeNull());
             validator.ValidateOrder(
                 "LocalReference: o = null (Implicit)",
                 "Literal: null",
