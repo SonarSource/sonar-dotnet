@@ -423,9 +423,7 @@ finally
 
         [TestMethod]
         public void Invocation_DebugAssert_LearnsNotNull_AndAlso() =>
-            DebugAssertValues("arg != null && condition").Should().HaveCount(2)
-                .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.Null))    // FIXME: Should not be here
-                .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
+            DebugAssertValues("arg != null && condition").Should().HaveCount(1).And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
 
         [TestMethod]
         public void Invocation_DebugAssert_LearnsNotNull_OrElse() =>
@@ -445,7 +443,7 @@ finally
         public void Invocation_DebugAssert_LearnsBoolConstraint_Negated() =>
             DebugAssertValues("!arg", "bool").Should().HaveCount(1).And.ContainSingle(x => x == null); // FIXME: .HasConstraint(BoolConstraint.False));
 
-        private SymbolicValue[] DebugAssertValues(string expression, string argType = "object")
+        private static SymbolicValue[] DebugAssertValues(string expression, string argType = "object")
         {
             var code = $@"
 Debug.Assert({expression});
