@@ -413,5 +413,44 @@ finally
                 new SymbolicValue().WithConstraint(ObjectConstraint.NotNull)
             });
         }
+
+        [DataTestMethod]
+        [DataRow("arg != null")]
+        [DataRow("arg is not null")]
+        [DataRow("arg is { }")]
+        public void Invocation_DebugAssert_LearnsNotNull_Simple(string expression) =>
+            DebugAssertValues(expression).Should().HaveCount(1).And.ContainSingle(x => x == null); // FIXME: .HasConstraint(ObjectConstraint.NotNull));
+
+        [TestMethod]
+        public void Invocation_DebugAssert_LearnsNotNull_AndAlso() =>
+            DebugAssertValues("arg != null && condition").Should().HaveCount(2)
+                .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.Null))    // FIXME: Should not be here
+                .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
+
+        [TestMethod]
+        public void Invocation_DebugAssert_LearnsNotNull_OrElse() =>
+            DebugAssertValues("arg != null || condition").Should().HaveCount(2)
+                .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.Null))
+                .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
+
+        [TestMethod]
+        public void Invocation_DebugAssert_LearnsBoolConstraint_Simple() =>
+            DebugAssertValues("arg", "bool").Should().HaveCount(1).And.ContainSingle(x => x == null); // FIXME: .HasConstraint(BoolConstraint.True));
+
+        [TestMethod]
+        public void Invocation_DebugAssert_LearnsBoolConstraint_Binary() =>
+            DebugAssertValues("arg == true", "bool").Should().HaveCount(1).And.ContainSingle(x => x == null); // FIXME: .HasConstraint(BoolConstraint.True));
+
+        [TestMethod]
+        public void Invocation_DebugAssert_LearnsBoolConstraint_Negated() =>
+            DebugAssertValues("!arg", "bool").Should().HaveCount(1).And.ContainSingle(x => x == null); // FIXME: .HasConstraint(BoolConstraint.False));
+
+        private SymbolicValue[] DebugAssertValues(string expression, string argType = "object")
+        {
+            var code = $@"
+Debug.Assert({expression});
+Tag(""Arg"", arg);";
+            return SETestContext.CreateCS(code, $", {argType} arg, bool condition").Validator.TagValues("Arg");
+        }
     }
 }
