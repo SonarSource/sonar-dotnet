@@ -288,9 +288,9 @@ namespace Tests.Diagnostics
         public void Assert1(object o1)
         {
             System.Diagnostics.Debug.Assert(o1 != null);
-            o1.ToString(); // Compliant
+            o1.ToString(); // Noncompliant FP
             System.Diagnostics.Debug.Assert(o1 == null);
-            o1.ToString(); // Compliant
+            o1.ToString(); // Compliant, because we already know that _foo1 is not null from o1.ToString()
         }
 
         public void Assert2(object o1)
@@ -732,9 +732,9 @@ namespace Tests.Diagnostics
         void Assert1()
         {
             System.Diagnostics.Debug.Assert(_foo1 != null);
-            _foo1.ToString(); // Compliant
+            _foo1.ToString(); // Noncompliant FP
             System.Diagnostics.Debug.Assert(_foo1 == null);
-            _foo1.ToString(); // Compliant
+            _foo1.ToString(); // Compliant, because we already know that _foo1 is not null from _foo1.ToString()
         }
 
         void CallToExtensionMethodsShouldNotRaise()
