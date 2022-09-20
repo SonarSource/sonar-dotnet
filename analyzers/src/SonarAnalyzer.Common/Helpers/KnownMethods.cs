@@ -158,6 +158,11 @@ namespace SonarAnalyzer.Helpers
             && methodSymbol.Name == nameof(Debug.Assert)
             && methodSymbol.ContainingType.Is(KnownType.System_Diagnostics_Debug);
 
+        public static bool IsDebugFail(this IMethodSymbol methodSymbol) =>
+            methodSymbol != null
+            && methodSymbol.Name == nameof(Debug.Fail)
+            && methodSymbol.ContainingType.Is(KnownType.System_Diagnostics_Debug);
+
         public static bool IsDiagnosticDebugMethod(this IMethodSymbol methodSymbol) =>
             methodSymbol != null && methodSymbol.ContainingType.Is(KnownType.System_Diagnostics_Debug);
 
