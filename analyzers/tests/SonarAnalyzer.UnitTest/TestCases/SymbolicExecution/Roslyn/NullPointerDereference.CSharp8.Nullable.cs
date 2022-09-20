@@ -1,6 +1,8 @@
 ﻿#nullable enable
 
 using System;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Tests.Diagnostics.CSharp8
 {
@@ -81,5 +83,26 @@ namespace Tests.Diagnostics.CSharp8
             (((condition ? o : null))!).ToString();  // Compliant
             o.ToString();                            // Noncompliant The ! only suppresses the warning on the expression, but is not applied to any inner variables.
         }
+    }
+
+    public class NullableAnnotations
+    {
+        public void DebugAssert()
+        {
+            object? o = null;
+            Debug.Assert(o != null);
+            o.ToString();  // Compliant. Debug.Assert is annotated in .NetStandard with Debug.Assert([DoesNotReturnIf(false)]bool condition)
+        }
+
+        public void NotNullWhenFalse(string? s)
+        {
+            if (!IsNullOrEmpty(s))
+            {
+                s.ToString();  // Compliant
+            }
+        }
+
+        private static bool IsNullOrEmpty([NotNullWhen(false)] string? s)
+            => string.IsNullOrEmpty(s);
     }
 }
