@@ -1094,7 +1094,7 @@ namespace Tests.Diagnostics
         {
             if (string.IsNullOrEmpty(arg?.ToString()))
             {
-                arg.ToString(); // Noncompliant
+                arg.ToString(); // Non-compliant Suppressed #6117
             }
             else
             {
@@ -1106,7 +1106,7 @@ namespace Tests.Diagnostics
         {
             if (string.IsNullOrEmpty(arg?.Message))
             {
-                arg.ToString(); // Noncompliant
+                arg.ToString(); // Non-compliant Suppressed #6117
             }
             else
             {
@@ -1118,11 +1118,11 @@ namespace Tests.Diagnostics
         {
             if (arg?.Length == 0)
             {
-                arg.ToString(); // Noncompliant FP related to nullable binary equals
+                arg.ToString(); // Non-compliant Suppressed #6117 FP related to nullable binary equals
             }
             else
             {
-                arg.ToString(); // Noncompliant
+                arg.ToString(); // Non-compliant Suppressed #6117
             }
         }
     }
@@ -1274,7 +1274,7 @@ namespace Repro_3395
                 // Do something
             }
 
-            return something.SomeProperty; // Noncompliant
+            return something.SomeProperty; // Non-compliant Suppressed #6117
         }
 
         public static Something GetSomething()
