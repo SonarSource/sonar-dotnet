@@ -495,5 +495,40 @@ Debug.Assert({expression});
 Tag(""Arg"", arg);";
             return SETestContext.CreateCS(code, $", {argType} arg, bool condition").Validator.TagValues("Arg");
         }
+
+        [TestMethod]
+        public void Invocation_ThrowHelper_DebugFail()
+        {
+            const string code = @"
+object o = null;
+Tag(""Before"", o);
+System.Diagnostics.Debug.Fail(""Fail"");
+Tag(""After"", o);
+";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("Before", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("After", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateOrder(
+                "LocalReference: o = null (Implicit)",
+                "Literal: null",
+                "Conversion: null (Implicit)",
+                "SimpleAssignment: o = null (Implicit)",
+                @"Literal: ""Before""",
+                @"Argument: ""Before""",
+                "LocalReference: o",
+                "Argument: o",
+                @"Invocation: Tag(""Before"", o)",
+                @"ExpressionStatement: Tag(""Before"", o);",
+                @"Literal: ""Fail""",
+                @"Argument: ""Fail""",
+                @"Invocation: System.Diagnostics.Debug.Fail(""Fail"")",
+                @"ExpressionStatement: System.Diagnostics.Debug.Fail(""Fail"");",
+                @"Literal: ""After""",
+                @"Argument: ""After""",
+                "LocalReference: o",
+                "Argument: o",
+                @"Invocation: Tag(""After"", o)",
+                @"ExpressionStatement: Tag(""After"", o);");
+        }
     }
 }
