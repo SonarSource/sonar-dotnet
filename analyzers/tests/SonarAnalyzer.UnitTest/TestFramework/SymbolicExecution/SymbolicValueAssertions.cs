@@ -140,7 +140,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
                 .BecauseOf(because, becauseArgs)
                 .ForCondition(Subject.IsSameOrEqualTo(expected))
                 .FailWith("Expected {context:object} to be {0}{reason}, but found {1}.", expected, Subject);
-            return new AndConstraint<SymbolicValueAssertions>(this);
+            return new(this);
         }
 
         private GivenSelector<List<SymbolicConstraint>> HaveConstraintsCommonAssertions(IEnumerable<SymbolicConstraint> expected, string because, object[] becauseArgs) =>
