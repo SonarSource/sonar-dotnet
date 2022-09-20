@@ -244,7 +244,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 OperationKindEx.ArrayElementReference => References.Process(context, As(IArrayElementReferenceOperationWrapper.FromOperation)),
                 OperationKindEx.AnonymousObjectCreation => Creation.Process(context),
                 OperationKindEx.Await => context.State.ResetFieldConstraints(),
-                OperationKindEx.Binary => Binary.Process(context, As(IBinaryOperationWrapper.FromOperation)),
                 OperationKindEx.Conversion => Conversion.Process(context, As(IConversionOperationWrapper.FromOperation)),
                 OperationKindEx.DeclarationPattern => Pattern.Process(context, As(IDeclarationPatternOperationWrapper.FromOperation)),
                 OperationKindEx.DelegateCreation => Creation.Process(context),
@@ -264,6 +263,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 OperationKindEx.ReDimClause => ReDim.Process(context, As(IReDimClauseOperationWrapper.FromOperation)),
                 OperationKindEx.SimpleAssignment => Assignment.Process(context, As(ISimpleAssignmentOperationWrapper.FromOperation)),
                 OperationKindEx.TypeParameterObjectCreation => Creation.Process(context),
+                OperationKindEx.Unary => Unary.Process(context, As(IUnaryOperationWrapper.FromOperation)),
                 _ => context.State
             };
             context = context.WithState(state);
@@ -271,6 +271,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             // Operations that can return multiple states
             var states = context.Operation.Instance.Kind switch
             {
+                OperationKindEx.Binary => Binary.Process(context, As(IBinaryOperationWrapper.FromOperation)),
                 _ => new[] { context.State }
             };
             return states.Select(x => context.WithState(x));
@@ -306,12 +307,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 ? state.SetSymbolConstraint(symbol, BoolConstraint.From(!useOpposite))
                 : operation.Kind switch
                 {
-                    OperationKindEx.Binary => Binary.LearnBranchingConstraint(state, As(IBinaryOperationWrapper.FromOperation), useOpposite),
                     OperationKindEx.Conversion => LearnBranchingConstraintsFromOperation(state, As(IConversionOperationWrapper.FromOperation).Operand, useOpposite),
                     OperationKindEx.IsNull => IsNull.LearnBranchingConstraint(state, As(IIsNullOperationWrapper.FromOperation), useOpposite),
                     OperationKindEx.IsPattern => Pattern.LearnBranchingConstraint(state, As(IIsPatternOperationWrapper.FromOperation), useOpposite),
                     OperationKindEx.IsType => IsType.LearnBranchingConstraint(state, As(IIsTypeOperationWrapper.FromOperation), useOpposite),
-                    OperationKindEx.Unary when operation.ToUnary() is { OperatorKind: UnaryOperatorKind.Not } unary => LearnBranchingConstraintsFromOperation(state, unary.Operand, !useOpposite),
                     _ => state
                 };
 

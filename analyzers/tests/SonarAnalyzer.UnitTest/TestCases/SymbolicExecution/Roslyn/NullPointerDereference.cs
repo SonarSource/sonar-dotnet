@@ -296,7 +296,13 @@ namespace Tests.Diagnostics
         public void Assert2(object o1)
         {
             System.Diagnostics.Debug.Assert(o1 == null);
-            o1.ToString(); // Compliant, we don't learn on Assert
+            o1.ToString(); // Noncompliant FP
+        }
+
+        public void LearnFromArguments(object o)
+        {
+            LearnFromArguments(o == null);
+            o.ToString(); // Noncompliant
         }
 
         public void StringEmpty(string s1)

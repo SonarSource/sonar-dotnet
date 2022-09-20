@@ -27,12 +27,27 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
 {
     internal static class Binary
     {
-        public static ProgramState Process(SymbolicContext context, IBinaryOperationWrapper binary) =>
-            BinaryConstraint(binary.OperatorKind, context.State[binary.LeftOperand], context.State[binary.RightOperand]) is { } newConstraint
-                ? context.SetOperationConstraint(newConstraint)
-                : context.State;
+        public static ProgramState[] Process(SymbolicContext context, IBinaryOperationWrapper binary)
+        {
+            if (BinaryConstraint(binary.OperatorKind, context.State[binary.LeftOperand], context.State[binary.RightOperand]) is { } newConstraint)
+            {
+                return new[] { context.SetOperationConstraint(newConstraint) };   // We already know the answer from existing constraints
+            }
+            else
+            {
+                var positive = LearnBranchingConstraint(context.State, binary, false);
+                var negative = LearnBranchingConstraint(context.State, binary, true);
+                return positive == context.State && negative == context.State
+                    ? new[] { context.State }   // We can't learn anything, just move on
+                    : new[]
+                    {
+                        positive.SetOperationConstraint(context.Operation, BoolConstraint.True),
+                        negative.SetOperationConstraint(context.Operation, BoolConstraint.False)
+                    };
+            }
+        }
 
-        public static ProgramState LearnBranchingConstraint(ProgramState state, IBinaryOperationWrapper binary, bool useOpposite) =>
+        private static ProgramState LearnBranchingConstraint(ProgramState state, IBinaryOperationWrapper binary, bool useOpposite) =>
             binary.OperatorKind.IsAnyEquality()
                 ? LearnBranchingConstraint<ObjectConstraint>(state, binary, useOpposite) ?? LearnBranchingConstraint<BoolConstraint>(state, binary, useOpposite) ?? state
                 : state;
