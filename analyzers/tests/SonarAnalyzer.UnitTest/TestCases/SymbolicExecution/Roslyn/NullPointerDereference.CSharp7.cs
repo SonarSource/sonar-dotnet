@@ -181,7 +181,7 @@ namespace Tests.Diagnostics
         void NonCompliant1()
         {
             Exception exception = null;
-            if (exception.Data is IDictionary data) // Noncompliant
+            if (exception.Data is IDictionary data) // Non-compliant Suppressed #6117
             {
                 if (exception.InnerException?.Data is IDictionary innerexceptiondata)
                 {
@@ -205,7 +205,7 @@ namespace Tests.Diagnostics
         {
             if (exception?.Data is null)
             {
-                if (exception.InnerException?.Data is IDictionary innerexceptiondata) // Noncompliant
+                if (exception.InnerException?.Data is IDictionary innerexceptiondata) // Non-compliant Suppressed #6117
                 {
 
                 }
@@ -270,7 +270,7 @@ namespace Tests.Diagnostics
             return -1;
         }
 
-        return dict.Count; // Noncompliant FP
-    }
+        return dict.Count; // Non-compliant Suppressed #6117 FP
+        }
   }
 }
