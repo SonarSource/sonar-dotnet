@@ -419,7 +419,7 @@ finally
         [DataRow("arg is not null")]
         [DataRow("arg is { }")]
         public void Invocation_DebugAssert_LearnsNotNull_Simple(string expression) =>
-            DebugAssertValues(expression).Should().HaveCount(1).And.ContainSingle(x => x == null); // FIXME: .HasConstraint(ObjectConstraint.NotNull));
+            DebugAssertValues(expression).Should().HaveCount(1).And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
 
         [TestMethod]
         public void Invocation_DebugAssert_LearnsNotNull_AndAlso() =>
@@ -437,7 +437,7 @@ finally
 
         [TestMethod]
         public void Invocation_DebugAssert_LearnsBoolConstraint_Binary() =>
-            DebugAssertValues("arg == true", "bool").Should().HaveCount(1).And.ContainSingle(x => x == null); // FIXME: .HasConstraint(BoolConstraint.True));
+            DebugAssertValues("arg == true", "bool").Should().HaveCount(1).And.ContainSingle(x => x.HasConstraint(BoolConstraint.True));
 
         [TestMethod]
         public void Invocation_DebugAssert_LearnsBoolConstraint_Negated() =>
