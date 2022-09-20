@@ -54,26 +54,13 @@
 },
 {
 "id":  "S1301",
-"message":  "Replace this 'switch' expression with a ternary conditional operator to increase readability.",
-"location":  {
-"uri":  "sources\Net5\Net5\S4201.cs",
-"region":  {
-"startLine":  29,
-"startColumn":  24,
-"endLine":  29,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S1301",
 "message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
 "location":  {
 "uri":  "sources\Net5\Net5\S4201.cs",
 "region":  {
-"startLine":  34,
+"startLine":  29,
 "startColumn":  13,
-"endLine":  34,
+"endLine":  29,
 "endColumn":  19
 }
 }

@@ -26,11 +26,6 @@ namespace Net5
 
             // Compliant
             var r5 = apple != null && apple is not { Taste: "Sweet", Color: "Red" };
-            var r6 = m switch
-            {
-                string s2 and null => r1, // rule ConditionEvaluatesToConstant should raise here
-                _ => r2
-            };
             switch (n)
             {
                 case not null or Apple:
@@ -39,7 +34,7 @@ namespace Net5
                     break;
             }
 
-            return r1 && r2 && r3 && r4 && r5 && r6;
+            return r1 && r2 && r3 && r4 && r5;
         }
     }
 }
