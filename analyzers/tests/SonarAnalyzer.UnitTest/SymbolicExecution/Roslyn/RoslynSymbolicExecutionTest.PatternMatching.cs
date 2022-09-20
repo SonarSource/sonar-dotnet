@@ -305,28 +305,32 @@ Tag(""End"", arg);";
         [DataRow("objectNotNull is null", false)]
         [DataRow("objectNotNull is 1", null)]
         [DataRow(@"objectNotNull is """"", null)]
-        [DataRow("objectNotNull is true", null)]
-        [DataRow("objectNotNull is false", null)]
         [DataRow("objectNull is null", true)]
-        [DataRow("objectNull is 1", null)]
-        [DataRow(@"objectNull is """"", null)]
-        [DataRow("objectNull is true", null)]
-        [DataRow("objectNull is false", null)]
-        [DataRow("objectUnknown is null", null)]
-        [DataRow("objectUnknown is 1", null)]
-        [DataRow(@"objectUnknown is """"", null)]
-        [DataRow("objectUnknown is true", null)]
-        [DataRow("objectUnknown is false", null)]
         [DataRow("nullableBoolTrue is true", true)]
         [DataRow("nullableBoolTrue is false", false)]
         [DataRow("nullableBoolFalse is true", false)]
         [DataRow("nullableBoolFalse is false", true)]
-        [DataRow("nullableBoolNull is true", null)]  // Should be false.
-        [DataRow("nullableBoolNull is false", null)] // Should be false.
-        [DataRow("nullableBoolUnknown is true", null)]
-        [DataRow("nullableBoolUnknown is false", null)]
-        public void ConstantPatternSetBoolConstraint(string isPattern, bool? expectedBoolConstraint) =>
+        public void ConstantPatternSetBoolConstraint_SingleState(string isPattern, bool? expectedBoolConstraint) =>
             ValidateSetBoolConstraint(isPattern, OperationKindEx.ConstantPattern, expectedBoolConstraint);
+
+        [DataTestMethod]
+        [DataRow("objectNotNull", "is true", "NotNull, True", "NotNull")]
+        [DataRow("objectNotNull", "is false", "False, NotNull", "NotNull")]
+        [DataRow("objectNull", "is 1", "NotNull", "Null")]          // Should recognize that objectNull doesn't match instead
+        [DataRow("objectNull", @"is """"", "NotNull", "Null")]      // Should recognize that objectNull doesn't match instead
+        [DataRow("objectNull", "is true", "Null, True", "Null")]    // Should recognize that objectNull doesn't match instead
+        [DataRow("objectNull", "is false", "False, Null", "Null")]  // Should recognize that objectNull doesn't match instead
+        [DataRow("objectUnknown", "is null", "Null", "NotNull")]
+        [DataRow("objectUnknown", "is 1", "NotNull", null)]
+        [DataRow("objectUnknown", @"is """"", "NotNull", null)]
+        [DataRow("objectUnknown", "is true", "True", null)]
+        [DataRow("objectUnknown", "is false", "False", null)]
+        [DataRow("nullableBoolNull", "is true", "True", null)]      // Should recognize that nullableBoolNull doesn't match instead
+        [DataRow("nullableBoolNull", "is false", "False", null)]    // Should recognize that nullableBoolNull doesn't match instead
+        [DataRow("nullableBoolUnknown", "is true", "True", null)]
+        [DataRow("nullableBoolUnknown", "is false", "False", null)]
+        public void ConstantPatternSetBoolConstraint_TwoStates(string testedSymbol, string isPattern, string expectedForTrue, string expectedForFalse) =>
+            ValidateSetBoolConstraint_TwoStates(testedSymbol, isPattern, OperationKindEx.ConstantPattern, expectedForTrue, expectedForFalse);
 
         [DataTestMethod]
         [DataRow("objectNotNull is { }", true)]
@@ -334,25 +338,32 @@ Tag(""End"", arg);";
         [DataRow("objectNotNull is string { }", null)]
         [DataRow("objectNull is { }", false)]
         [DataRow("objectNull is object { }", false)]
-        [DataRow("objectUnknown is { }", null)]
-        [DataRow("objectUnknown is object { }", null)]
-        [DataRow("objectUnknown is string { }", null)]
         [DataRow("stringNotNull is { }", true)]
         [DataRow("stringNotNull is object { }", true)]
         [DataRow("stringNotNull is { Length: 0 }", null)]
         [DataRow("stringNull is { Length: 0 }", false)]
         [DataRow("stringNotNull is { Length: var length }", true)] // only deconstruction
-        public void RecursivePatternPropertySubPatternSetBoolConstraint(string isPattern, bool? expectedBoolConstraint) =>
+        public void RecursivePatternPropertySubPatternSetBoolConstraint_SingleState(string isPattern, bool? expectedBoolConstraint) =>
             ValidateSetBoolConstraint(isPattern, OperationKindEx.RecursivePattern, expectedBoolConstraint);
+
+        [DataTestMethod]
+        [DataRow("objectUnknown", "is { }", "Null")]
+        [DataRow("objectUnknown", "is object { }", "Null")]
+        [DataRow("objectUnknown", "is string { }", null)]
+        public void RecursivePatternPropertySubPatternSetBoolConstraint_TwoStates(string testedSymbol, string isPattern, string expectedForFalse) =>
+            ValidateSetBoolConstraint_TwoStates(testedSymbol, isPattern, OperationKindEx.RecursivePattern, "NotNull", expectedForFalse);
 
         [DataTestMethod]
         [DataRow("deconstructableNotNull is (A: 1, B: 2)", null)]
         [DataRow("deconstructableNotNull is (A: var a, B: _)", true)]
         [DataRow("deconstructableNull is (A: 1, B: 2)", false)]
         [DataRow("deconstructableNull is (A: var a, B: _)", false)]
-        [DataRow("deconstructableUnknown is (A: var a, B: _)", null)]
-        public void RecursivePatternDeconstructionSubpatternSetBoolConstraint(string isPattern, bool? expectedBoolConstraint) =>
+        public void RecursivePatternDeconstructionSubpatternSetBoolConstraint_SingleState(string isPattern, bool? expectedBoolConstraint) =>
             ValidateSetBoolConstraint(isPattern, OperationKindEx.RecursivePattern, expectedBoolConstraint);
+
+        [TestMethod]
+        public void RecursivePatternDeconstructionSubpatternSetBoolConstraint_TwoStates() =>
+            ValidateSetBoolConstraint_TwoStates("deconstructableUnknown", "is (A: var a, B: _)", OperationKindEx.RecursivePattern, "NotNull", "Null");
 
         [DataTestMethod]
         [DataRow("objectNull is var a", true)]
@@ -360,7 +371,6 @@ Tag(""End"", arg);";
         [DataRow("objectUnknown is var a", null)] // Should be "true". Some patterns always match.
         [DataRow("objectNull is object o", false)]
         [DataRow("objectNotNull is object o", true)]
-        [DataRow("objectUnknown is object o", null)]
         [DataRow("objectNull is int i", false)]
         [DataRow("objectNotNull is int i", null)]
         [DataRow("exceptionNull is object { }", false)]
@@ -369,12 +379,17 @@ Tag(""End"", arg);";
         [DataRow("exceptionNotNull is object { }", true)]
         [DataRow("exceptionNotNull is Exception { }", true)]
         [DataRow("exceptionNotNull is FormatException { }", null)]
-        [DataRow("exceptionUnknown is object { }", null)]
-        [DataRow("exceptionUnknown is Exception { }", null)]
-        [DataRow("exceptionUnknown is FormatException { }", null)]
         [DataRow("integer is object o", true)]
-        public void DeclarationPatternSetBoolConstraint(string isPattern, bool? expectedBoolConstraint) =>
+        public void DeclarationPatternSetBoolConstraint_SingleState(string isPattern, bool? expectedBoolConstraint) =>
             ValidateSetBoolConstraint(isPattern, OperationKindEx.DeclarationPattern, expectedBoolConstraint);
+
+        [DataTestMethod]
+        [DataRow("objectUnknown", "is object o", "NotNull", "Null")]
+        [DataRow("exceptionUnknown", "is object { }", "NotNull", "Null")]
+        [DataRow("exceptionUnknown", "is Exception { }", "NotNull", "Null")]
+        [DataRow("exceptionUnknown", "is FormatException { }", "NotNull", null)]
+        public void DeclarationPatternSetBoolConstraint_TwoStates(string testedSymbol, string isPattern, string expectedForTrue, string expectedForFalse) =>
+            ValidateSetBoolConstraint_TwoStates(testedSymbol, isPattern, OperationKindEx.DeclarationPattern, expectedForTrue, expectedForFalse);
 
         [DataTestMethod]
         [DataRow("objectNull is not null", OperationKindEx.NegatedPattern, false)]
@@ -387,42 +402,46 @@ Tag(""End"", arg);";
         [DataRow("objectNotNull is not object { }", OperationKindEx.NegatedPattern, false)]
         [DataRow("objectNotNull is not string { }", OperationKindEx.NegatedPattern, null)]
         [DataRow("objectNotNull is not not null", OperationKindEx.NegatedPattern, false)]
-        [DataRow("objectUnknown is not null", OperationKindEx.NegatedPattern, null)]
-        [DataRow("objectUnknown is not { }", OperationKindEx.NegatedPattern, null)]
-        [DataRow("objectUnknown is not string { }", OperationKindEx.NegatedPattern, null)]
-        [DataRow("objectUnknown is not object { }", OperationKindEx.NegatedPattern, null)]
-        [DataRow("objectUnknown is not not null", OperationKindEx.NegatedPattern, null)]
         [DataRow("nullableBoolTrue is not true", OperationKindEx.NegatedPattern, null)]     // Should be false
-        [DataRow("nullableBoolTrue is not false", OperationKindEx.NegatedPattern, null)]    // Should be true
-        [DataRow("nullableBoolFalse is not true", OperationKindEx.NegatedPattern, null)]    // Should be true
         [DataRow("nullableBoolFalse is not false", OperationKindEx.NegatedPattern, null)]   // Should be false
-        [DataRow("nullableBoolNull is not true", OperationKindEx.NegatedPattern, null)]     // Should be true
-        [DataRow("nullableBoolNull is not false", OperationKindEx.NegatedPattern, null)]    // Should be true
-        [DataRow("nullableBoolUnknown is not true", OperationKindEx.NegatedPattern, null)]
-        [DataRow("nullableBoolUnknown is not false", OperationKindEx.NegatedPattern, null)]
         [DataRow("objectNull is not object", OperationKindEx.TypePattern, true)]
         [DataRow("objectNull is not not object", OperationKindEx.TypePattern, false)]
         [DataRow("objectNotNull is not object", OperationKindEx.TypePattern, false)]
         [DataRow("objectNotNull is not not object", OperationKindEx.TypePattern, true)]
-        [DataRow("objectUnknown is not object", OperationKindEx.TypePattern, null)]
-        [DataRow("objectUnknown is not not object", OperationKindEx.TypePattern, null)]
         [DataRow("exceptionNull is not object", OperationKindEx.TypePattern, true)]
         [DataRow("exceptionNull is not not object", OperationKindEx.TypePattern, false)]
         [DataRow("exceptionNotNull is not object", OperationKindEx.TypePattern, false)]
         [DataRow("exceptionNotNull is not not object", OperationKindEx.TypePattern, true)]
-        [DataRow("exceptionUnknown is not object", OperationKindEx.TypePattern, null)]
-        [DataRow("exceptionUnknown is not not object", OperationKindEx.TypePattern, null)]
-        [DataRow("objectNull is not Exception", OperationKindEx.TypePattern, null)]
-        [DataRow("objectNull is not not Exception", OperationKindEx.TypePattern, null)]
         [DataRow("objectNotNull is not Exception", OperationKindEx.TypePattern, null)]
         [DataRow("objectNotNull is not not Exception", OperationKindEx.TypePattern, null)]
-        [DataRow("objectUnknown is not Exception", OperationKindEx.TypePattern, null)]
-        [DataRow("objectUnknown is not not Exception", OperationKindEx.TypePattern, null)]
         [DataRow("objectNull is not not _", OperationKindEx.DiscardPattern, true)]
         [DataRow("objectNotNull is not not _", OperationKindEx.DiscardPattern, true)]
         [DataRow("objectUnknown is not not _", OperationKindEx.DiscardPattern, null)] // Some patterns always match
-        public void NegateTypeDiscardPatternsSetBoolConstraint(string isPattern, OperationKind expectedOperation, bool? expectedBoolConstraint) =>
+        public void NegateTypeDiscardPatternsSetBoolConstraint_SingleState(string isPattern, OperationKind expectedOperation, bool? expectedBoolConstraint) =>
             ValidateSetBoolConstraint(isPattern, expectedOperation, expectedBoolConstraint);
+
+        [DataTestMethod]
+        [DataRow("objectUnknown", "is not null", OperationKindEx.NegatedPattern, "NotNull", "Null")]
+        [DataRow("objectUnknown", "is not { }", OperationKindEx.NegatedPattern, "Null", "NotNull")]
+        [DataRow("objectUnknown", "is not string { }", OperationKindEx.NegatedPattern, null, "NotNull")]
+        [DataRow("objectUnknown", "is not object { }", OperationKindEx.NegatedPattern, "Null", "NotNull")]
+        [DataRow("objectUnknown", "is not not null", OperationKindEx.NegatedPattern, "Null", "NotNull")]
+        [DataRow("nullableBoolTrue", "is not false", OperationKindEx.NegatedPattern, "True", "False")]
+        [DataRow("nullableBoolFalse", "is not true", OperationKindEx.NegatedPattern, "False", "True")]
+        [DataRow("nullableBoolNull", "is not true", OperationKindEx.NegatedPattern, null, "True")]
+        [DataRow("nullableBoolNull", "is not false", OperationKindEx.NegatedPattern, null, "False")]
+        [DataRow("nullableBoolUnknown", "is not true", OperationKindEx.NegatedPattern, null, "True")]
+        [DataRow("nullableBoolUnknown", "is not false", OperationKindEx.NegatedPattern, null, "False")]
+        [DataRow("objectUnknown", "is not object", OperationKindEx.TypePattern, null, "NotNull")]
+        [DataRow("objectUnknown", "is not not object", OperationKindEx.TypePattern, "NotNull", null)]
+        [DataRow("exceptionUnknown", "is not object", OperationKindEx.TypePattern, null, "NotNull")]
+        [DataRow("exceptionUnknown", "is not not object", OperationKindEx.TypePattern, "NotNull", null)]
+        [DataRow("objectNull", "is not Exception", OperationKindEx.TypePattern, "Null", "NotNull")]
+        [DataRow("objectNull", "is not not Exception", OperationKindEx.TypePattern, "NotNull", "Null")]
+        [DataRow("objectUnknown", "is not Exception", OperationKindEx.TypePattern, null, "NotNull")]
+        [DataRow("objectUnknown", "is not not Exception", OperationKindEx.TypePattern, "NotNull", null)]
+        public void NegateTypeDiscardPatternsSetBoolConstraint_TwoStates(string testedSymbol, string isPattern, OperationKind expectedOperation, string expectedForTrue, string expectedForFalse) =>
+            ValidateSetBoolConstraint_TwoStates(testedSymbol, isPattern, expectedOperation, expectedForTrue, expectedForFalse);
 
         [DataTestMethod]
         [DataRow("objectNull is null and not { }", true)]
@@ -458,6 +477,54 @@ Tag(""End"", arg);";
 
         private static void ValidateSetBoolConstraint(string isPattern, OperationKind expectedOperation, bool? expectedBoolConstraint)
         {
+            var validator = CreateSetBoolConstraintValidator(isPattern);
+            validator.ValidateContainsOperation(expectedOperation);
+            validator.ValidateTag("Result", x =>
+            {
+                if (expectedBoolConstraint is bool expected)
+                {
+                    x.Should().NotBeNull($"we expect {expectedBoolConstraint} on the result");
+                    x.HasConstraint(BoolConstraint.From(expected)).Should().BeTrue("we should have learned that result is {0}", expected);
+                }
+                else
+                {
+                    x.Should().BeNull("we should not learn about the state of result");
+                }
+            });
+        }
+
+        private static void ValidateSetBoolConstraint_TwoStates(string testedSymbolName, string isPattern, OperationKind expectedOperation, string expectedForTrue, string expectedForFalse)
+        {
+            var validator = CreateSetBoolConstraintValidator($"{testedSymbolName} {isPattern}");
+            validator.ValidateContainsOperation(expectedOperation);
+            validator.TagValues("Result").Should().HaveCount(2)
+                .And.ContainSingle(x => x.HasConstraint(BoolConstraint.True))
+                .And.ContainSingle(x => x.HasConstraint(BoolConstraint.False));
+            var states = validator.TagStates("Result");
+            var result = validator.Symbol("result");
+            var testedSymbol = validator.Symbol(testedSymbolName);
+            var whenTrue = states.Single(state => state[result].HasConstraint(BoolConstraint.True));
+            var whenFalse = states.Single(state => state[result].HasConstraint(BoolConstraint.False));
+            if (expectedForTrue is null)
+            {
+                whenTrue[testedSymbol].Should().BeNull("we should not learn about the tested symbol");
+            }
+            else
+            {
+                whenTrue[testedSymbol].AllConstraints.Select(x => x.ToString()).OrderBy(x => x).JoinStr(", ").Should().Be(expectedForTrue);
+            }
+            if (expectedForFalse is null)
+            {
+                whenFalse[testedSymbol].Should().BeNull("we should not learn about the tested symbol");
+            }
+            else
+            {
+                whenFalse[testedSymbol].AllConstraints.Select(x => x.ToString()).OrderBy(x => x).JoinStr(", ").Should().Be(expectedForFalse);
+            }
+        }
+
+        private static ValidatorTestCheck CreateSetBoolConstraintValidator(string isPattern)
+        {
             var code = @$"
 public void Main()
 {{
@@ -482,20 +549,7 @@ public void Main()
     var result = {isPattern};
     Tag(""Result"", result);
 }}";
-            var validator = SETestContext.CreateCSMethod(code).Validator;
-            validator.ValidateContainsOperation(expectedOperation);
-            validator.ValidateTag("Result", x =>
-            {
-                if (expectedBoolConstraint is bool expected)
-                {
-                    x.Should().NotBeNull($"we expect {expectedBoolConstraint} on the result");
-                    x.HasConstraint(BoolConstraint.From(expected)).Should().BeTrue("we should have learned that result is {0}", expected);
-                }
-                else
-                {
-                    x.Should().BeNull("we should not learn about the state of result");
-                }
-            });
+            return SETestContext.CreateCSMethod(code).Validator;
         }
     }
 }

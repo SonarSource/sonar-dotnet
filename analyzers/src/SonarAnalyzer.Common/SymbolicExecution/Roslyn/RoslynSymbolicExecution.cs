@@ -254,7 +254,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 OperationKindEx.InstanceReference => References.ProcessThis(context),
                 OperationKindEx.Invocation => Invocation.Process(context, As(IInvocationOperationWrapper.FromOperation)),
                 OperationKindEx.IsNull => IsNull.Process(context, As(IIsNullOperationWrapper.FromOperation)),
-                OperationKindEx.IsPattern => Pattern.Process(context, As(IIsPatternOperationWrapper.FromOperation)),
                 OperationKindEx.LocalReference => References.Process(context, As(ILocalReferenceOperationWrapper.FromOperation)),
                 OperationKindEx.ObjectCreation => Creation.Process(context),
                 OperationKindEx.ParameterReference => References.Process(context, As(IParameterReferenceOperationWrapper.FromOperation)),
@@ -272,6 +271,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             var states = context.Operation.Instance.Kind switch
             {
                 OperationKindEx.Binary => Binary.Process(context, As(IBinaryOperationWrapper.FromOperation)),
+                OperationKindEx.IsPattern => Pattern.Process(context, As(IIsPatternOperationWrapper.FromOperation)),
                 _ => new[] { context.State }
             };
             return states.Select(x => context.WithState(x));
@@ -309,7 +309,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 {
                     OperationKindEx.Conversion => LearnBranchingConstraintsFromOperation(state, As(IConversionOperationWrapper.FromOperation).Operand, useOpposite),
                     OperationKindEx.IsNull => IsNull.LearnBranchingConstraint(state, As(IIsNullOperationWrapper.FromOperation), useOpposite),
-                    OperationKindEx.IsPattern => Pattern.LearnBranchingConstraint(state, As(IIsPatternOperationWrapper.FromOperation), useOpposite),
                     OperationKindEx.IsType => IsType.LearnBranchingConstraint(state, As(IIsTypeOperationWrapper.FromOperation), useOpposite),
                     _ => state
                 };

@@ -180,13 +180,8 @@ bool second = first;
 if(boolParameter)
     boolParameter.ToString();
 Tag(""AfterLastUse"");";
-            ISymbol firstSymbol = null;
-            var postProcess = new PostProcessTestCheck(x =>
-            {
-                firstSymbol ??= x.Operation.Instance.TrackedSymbol() is { Name: "first" } symbol ? symbol : null;
-                return x.State;
-            });
-            var validator = SETestContext.CreateCS(code, postProcess).Validator;
+            var validator = SETestContext.CreateCS(code).Validator;
+            var firstSymbol = validator.Symbol("first");
             validator.TagStates("BeforeLastUse").Should().HaveCount(2).And.OnlyContain(x => x[firstSymbol] != null);
             validator.TagStates("AfterLastUse").Should().HaveCount(2).And.OnlyContain(x => x[firstSymbol] == null); // Once emtpy and once with the learned boolParameter true
         }
