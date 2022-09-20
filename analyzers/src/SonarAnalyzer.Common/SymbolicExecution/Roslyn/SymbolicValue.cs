@@ -22,7 +22,6 @@ using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
-    [DebuggerDisplay($"{{{nameof(SerializeConstraints)}(),nq}}")]
     public sealed record SymbolicValue
     {
         // Reuse instances to save memory. This "True" has the same semantic meaning and any other symbolic value with BoolConstraint.True constraint
