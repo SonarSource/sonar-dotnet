@@ -28,47 +28,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
     public class SymbolicValueAssertionsTest
     {
         [TestMethod]
-        public void SymbolicValue_HaveConstraint_Pass()
-        {
-            var sv = new SymbolicValue().WithConstraint(BoolConstraint.True);
-            sv.Invoking(x => x.Should().HaveConstraint(BoolConstraint.True)).Should().NotThrow();
-        }
-
-        [TestMethod]
-        public void SymbolicValue_HaveConstraint_WrongConstraint()
-        {
-            var sv = new SymbolicValue().WithConstraint(BoolConstraint.True);
-            sv.Invoking(x => x.Should().HaveConstraint(BoolConstraint.False, because: "{0} say so", "I")).Should()
-                .Throw<AssertFailedException>()
-                .WithMessage(@"Expected symbolicValue to have constraint False because I say so, but SymbolicValue has {True} constraints.");
-        }
-
-        [TestMethod]
-        public void SymbolicValue_HaveConstraint_MultipleConstraints()
-        {
-            var sv = new SymbolicValue().WithConstraint(BoolConstraint.True).WithConstraint(ObjectConstraint.Null);
-            sv.Invoking(x => x.Should().HaveConstraint(BoolConstraint.True)).Should().NotThrow();
-        }
-
-        [TestMethod]
-        public void SymbolicValue_HaveConstraint_NoConstraint()
-        {
-            var sv = new SymbolicValue();
-            sv.Invoking(x => x.Should().HaveConstraint(BoolConstraint.True)).Should()
-                .Throw<AssertFailedException>()
-                .WithMessage("Expected symbolicValue to have constraint True, but SymbolicValue has no constraints.");
-        }
-
-        [TestMethod]
-        public void SymbolicValue_HaveConstraint_OnNull()
-        {
-            SymbolicValue sv = null;
-            sv.Invoking(x => x.Should().HaveConstraint(BoolConstraint.True)).Should()
-                .Throw<AssertFailedException>()
-                .WithMessage("The symbolicValue is null and can not have constraint True.");
-        }
-
-        [TestMethod]
         public void SymbolicValue_HaveOnlyConstraint_Pass()
         {
             var sv = new SymbolicValue().WithConstraint(BoolConstraint.True);
@@ -132,58 +91,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             sv.Invoking(x => x.Should().HaveNoConstraints()).Should().
                 Throw<AssertFailedException>()
                 .WithMessage(@"Expected symbolicValue to have no constraints, but {True} constraints were found.");
-        }
-
-        [TestMethod]
-        public void SymbolicValue_HaveConstraints_OnNull()
-        {
-            SymbolicValue sv = null;
-            sv.Invoking(x => x.Should().HaveConstraints(BoolConstraint.True)).Should()
-                .Throw<AssertFailedException>()
-                .WithMessage(@"The symbolicValue is null and can not have constraints {True}.");
-        }
-
-        [TestMethod]
-        public void SymbolicValue_HaveConstraints_EmptyConstraints()
-        {
-            var sv = new SymbolicValue();
-            sv.Invoking(x => x.Should().HaveConstraints(new[] { BoolConstraint.True }, because: "{0} says so", "I")).Should()
-                .Throw<AssertFailedException>()
-                .WithMessage(@"Expected symbolicValue to have constraints {True} because I says so, but SymbolicValue has no constraints.");
-        }
-
-        [TestMethod]
-        public void SymbolicValue_HaveConstraints_Empty()
-        {
-            SymbolicValue sv = null;
-            sv.Invoking(x => x.Should().HaveConstraints()).Should()
-                .Throw<AssertFailedException>()
-                .WithMessage(@"Expected constraints is empty. Use HaveNoConstraints() instead.");
-        }
-
-        [TestMethod]
-        public void SymbolicValue_HaveConstraints_OneMissing()
-        {
-            var sv = new SymbolicValue().WithConstraint(BoolConstraint.True);
-            sv.Invoking(x => x.Should().HaveConstraints(BoolConstraint.True, ObjectConstraint.NotNull)).Should()
-                .Throw<AssertFailedException>()
-                .WithMessage(@"Expected symbolicValue to have constraints {True, NotNull}, but constraints {NotNull} are missing. Actual constraints {True}.");
-        }
-
-        [TestMethod]
-        public void SymbolicValue_HaveConstraints_OneAdditional()
-        {
-            var sv = new SymbolicValue().WithConstraint(BoolConstraint.True).WithConstraint(ObjectConstraint.NotNull);
-            sv.Invoking(x => x.Should().HaveConstraints(BoolConstraint.True)).Should().NotThrow();
-        }
-
-        [TestMethod]
-        public void SymbolicValue_HaveConstraints_MatchSome()
-        {
-            var sv = new SymbolicValue().WithConstraint(BoolConstraint.True).WithConstraint(ObjectConstraint.NotNull);
-            sv.Invoking(x => x.Should().HaveConstraints(BoolConstraint.True, ObjectConstraint.Null)).Should()
-                .Throw<AssertFailedException>()
-                .WithMessage(@"Expected symbolicValue to have constraints {True, Null}, but constraints {Null} are missing. Actual constraints {NotNull, True}.");
         }
 
         [TestMethod]
