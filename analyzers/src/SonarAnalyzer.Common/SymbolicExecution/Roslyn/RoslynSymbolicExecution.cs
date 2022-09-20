@@ -180,14 +180,16 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         {
             foreach (var preProcessed in checks.PreProcess(new(node.Operation, node.State)))
             {
-                var processed = preProcessed.WithState(ProcessOperation(preProcessed));
-                foreach (var postProcessed in checks.PostProcess(processed))
+                foreach (var processed in ProcessOperation(preProcessed))
                 {
-                    // When operation doesn't have a parent it is the outer statement. We need to reset operation states:
-                    // * We don't need to preserve the inner subexpression intermediate states after the outer statement.
-                    // * We don't want ProgramState to contain the path-history data, because we want to avoid exploring the same state twice.
-                    // When the operation is a BranchValue, we need to preserve it to evaluate branching. The state will be reset after branching.
-                    yield return node.CreateNext(node.Operation.Parent is null && node.Block.BranchValue != node.Operation.Instance ? postProcessed.State.ResetOperations() : postProcessed.State);
+                    foreach (var postProcessed in checks.PostProcess(processed))
+                    {
+                        // When operation doesn't have a parent it is the outer statement. We need to reset operation states:
+                        // * We don't need to preserve the inner subexpression intermediate states after the outer statement.
+                        // * We don't want ProgramState to contain the path-history data, because we want to avoid exploring the same state twice.
+                        // When the operation is a BranchValue, we need to preserve it to evaluate branching. The state will be reset after branching.
+                        yield return node.CreateNext(node.Operation.Parent is null && node.Block.BranchValue != node.Operation.Instance ? postProcessed.State.ResetOperations() : postProcessed.State);
+                    }
                 }
             }
 
@@ -232,9 +234,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 _ => null
             };
 
-        private static ProgramState ProcessOperation(SymbolicContext context)
+        private static IEnumerable<SymbolicContext> ProcessOperation(SymbolicContext context)
         {
-            return context.Operation.Instance.Kind switch
+            // Operations that return single state
+            var state = context.Operation.Instance.Kind switch
             {
                 OperationKindEx.Argument => Invocation.Process(context, As(IArgumentOperationWrapper.FromOperation)),
                 OperationKindEx.ArrayCreation => Creation.Process(context),
@@ -263,6 +266,14 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 OperationKindEx.TypeParameterObjectCreation => Creation.Process(context),
                 _ => context.State
             };
+            context = context.WithState(state);
+
+            // Operations that can return multiple states
+            var states = context.Operation.Instance.Kind switch
+            {
+                _ => new[] { context.State }
+            };
+            return states.Select(x => context.WithState(x));
 
             T As<T>(Func<IOperation, T> fromOperation) =>
                 fromOperation(context.Operation.Instance);
