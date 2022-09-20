@@ -47,10 +47,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
                 .Then
                 .Given(() => Subject.AllConstraints.ToList())
                 .ForCondition(allConstraints => allConstraints.Count != 0)
-                .FailWith("Expected {context:symbolicValue} to have constraint {0}{reason}, but symbolicValue has no constraints.", constraint)
+                .FailWith("Expected {context:symbolicValue} to have constraint {0}{reason}, but SymbolicValue has no constraints.", constraint)
                 .Then
                 .ForCondition(allConstraints => allConstraints.Contains(constraint))
-                .FailWith("Expected {context:symbolicValue} to have constraint {0}{reason}, but symbolicValue has {1} constraints.",
+                .FailWith("Expected {context:symbolicValue} to have constraint {0}{reason}, but SymbolicValue has {1} constraints.",
                     _ => constraint,
                     x => x.OrderBy(x => x.ToString()));
             var matchedConstrainted = Subject.AllConstraints.First(x => x == constraint);
@@ -66,15 +66,15 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
                 .Then
                 .Given(() => Subject.AllConstraints.ToList())
                 .ForCondition(allConstraints => allConstraints.Count > 0)
-                .FailWith("Expected {context:symbolicValue} to have constraint {0}{reason}, but symbolicValue has no constraints.", constraint)
+                .FailWith("Expected {context:symbolicValue} to have constraint {0}{reason}, but SymbolicValue has no constraints.", constraint)
                 .Then
                 .ForCondition(allConstraints => allConstraints.Count == 1)
-                .FailWith("Expected {context:symbolicValue} to have only constraint {0}{reason}, but symbolicValue has {1} constraints.",
+                .FailWith("Expected {context:symbolicValue} to have only constraint {0}{reason}, but SymbolicValue has {1} constraints.",
                     _ => constraint,
                     x => x.OrderBy(x => x.ToString()))
                 .Then
                 .ForCondition(allConstraints => allConstraints[0] == constraint)
-                .FailWith("Expected {context:symbolicValue} to have constraint {0}{reason}, but symbolicValue has {1} constraint.",
+                .FailWith("Expected {context:symbolicValue} to have constraint {0}{reason}, but SymbolicValue has {1} constraint.",
                     _ => constraint,
                     allConstraints => allConstraints[0]);
             var matchedConstrainted = Subject.AllConstraints.First(x => x == constraint);
@@ -158,7 +158,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
                 .Then
                 .Given(() => Subject.AllConstraints.ToList())
                 .ForCondition(allConstraints => allConstraints.Count != 0)
-                .FailWith("Expected {context:symbolicValue} to have constraints {0}{reason}, but symbolicValue has no constraints.", constraints)
+                .FailWith("Expected {context:symbolicValue} to have constraints {0}{reason}, but SymbolicValue has no constraints.", constraints)
                 .Then;
     }
 }
