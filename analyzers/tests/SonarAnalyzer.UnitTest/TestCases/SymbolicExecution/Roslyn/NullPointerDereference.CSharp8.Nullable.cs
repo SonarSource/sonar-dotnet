@@ -103,7 +103,7 @@ namespace Tests.Diagnostics.CSharp8
             }
         }
 
-        private static bool IsNullOrEmpty([NotNullWhen(false)] string? s)
+        private static bool CustomNotNullAssertion([NotNullWhen(false)] string? s)
             => string.IsNullOrEmpty(s);
     }
 }

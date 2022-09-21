@@ -45,7 +45,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
                 && context.HasConstraint(reference, ObjectConstraint.Null)
                 && !reference.Type.IsStruct() // ToDo: IsStruct() is a workaround before MMF-2401
                 && !IsSupressed(reference.Syntax)
-                && SemanticModel.GetTypeInfo(reference.Syntax).Nullability().FlowState is not NullableFlowState.NotNull)
+                && SemanticModel.GetTypeInfo(reference.Syntax).Nullability().FlowState != NullableFlowState.NotNull)
             {
                 ReportIssue(reference, reference.Syntax.ToString());
             }
