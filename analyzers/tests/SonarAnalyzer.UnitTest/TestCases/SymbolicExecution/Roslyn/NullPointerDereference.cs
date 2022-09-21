@@ -305,6 +305,31 @@ namespace Tests.Diagnostics
             o.ToString(); // Noncompliant
         }
 
+        public void DebugFail()
+        {
+            object o = null;
+            System.Diagnostics.Debug.Fail("Fail");
+            o.ToString(); // Compliant, unreachable
+        }
+
+        public void DebugFail_TryCatchFinally()
+        {
+            object o = null;
+            try
+            {
+                System.Diagnostics.Debug.Fail("Fail");
+                o.ToString(); // Compliant, unreachable
+            }
+            catch
+            {
+                o.ToString(); // Noncompliant
+            }
+            finally
+            {
+                o.ToString(); // Noncompliant
+            }
+        }
+
         public void StringEmpty(string s1)
         {
             if (string.IsNullOrEmpty(s1))
