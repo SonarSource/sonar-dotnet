@@ -369,6 +369,20 @@ namespace Tests.Diagnostics
             }
         }
 
+        public void EnvironmentExit()
+        {
+            object o = null;
+            Environment.Exit(-1);
+            o.ToString(); // Compliant, unreachable
+        }
+
+        public void EnvironmentFailFast()
+        {
+            object o = null;
+            Environment.FailFast("Fail");
+            o.ToString(); // Compliant, unreachable
+        }
+
         public void StringEmpty(string s1)
         {
             if (string.IsNullOrEmpty(s1))
