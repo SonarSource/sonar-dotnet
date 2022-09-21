@@ -829,7 +829,7 @@ f()();
             };
 
         [TestMethod]
-        public void Invocation_ThrowHelper_DebugFail_ConstinueWithEmptyState()
+        public void Invocation_ThrowHelper_DebugFail_ContinueWithEmptyState()
         {
             const string code = @"
 object o = null;
