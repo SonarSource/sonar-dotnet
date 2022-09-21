@@ -285,12 +285,12 @@ namespace Tests.Diagnostics
             public string MyProperty { get; set; }
         }
 
-        public void Assert1(object o1)
+        public void Assert1(object o)
         {
-            System.Diagnostics.Debug.Assert(o1 != null);
-            o1.ToString(); // Noncompliant FP
-            System.Diagnostics.Debug.Assert(o1 == null);
-            o1.ToString(); // Compliant, because we already know that _foo1 is not null from o1.ToString()
+            System.Diagnostics.Debug.Assert(o != null);
+            o.ToString(); // Noncompliant FP
+            System.Diagnostics.Debug.Assert(o == null);
+            o.ToString(); // Compliant, because we already know that o is not null from o.ToString()
         }
 
         public void Assert2(object o1)
