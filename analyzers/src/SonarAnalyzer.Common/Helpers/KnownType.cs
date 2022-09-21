@@ -38,6 +38,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Azure_Storage_Files_DataLake_DataLakeServiceClient = new("Azure.Storage.Files.DataLake.DataLakeServiceClient");
         internal static readonly KnownType Azure_ResourceManager_ArmClient = new("Azure.ResourceManager.ArmClient");
         internal static readonly KnownType FluentAssertions_Execution_AssertionScope = new("FluentAssertions.Execution.AssertionScope");
+        internal static readonly KnownType JetBrains_Annotations_TerminatesProgramAttribute = new("JetBrains.Annotations.TerminatesProgramAttribute");
         internal static readonly KnownType JWT_Builder_JwtBuilder = new("JWT.Builder.JwtBuilder");
         internal static readonly KnownType JWT_IJwtDecoder = new("JWT.IJwtDecoder");
         internal static readonly KnownType JWT_JwtDecoderExtensions = new("JWT.JwtDecoderExtensions");
@@ -245,6 +246,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_DateTimeOffset = new("System.DateTimeOffset");
         internal static readonly KnownType System_Decimal = new("System.Decimal");
         internal static readonly KnownType System_Delegate = new("System.Delegate");
+        internal static readonly KnownType System_Diagnostics_CodeAnalysis_DoesNotReturnAttribute = new("System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute");
         internal static readonly KnownType System_Diagnostics_CodeAnalysis_ExcludeFromCodeCoverageAttribute = new("System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute");
         internal static readonly KnownType System_Diagnostics_CodeAnalysis_SuppressMessageAttribute = new("System.Diagnostics.CodeAnalysis.SuppressMessageAttribute");
         internal static readonly KnownType System_Diagnostics_ConditionalAttribute = new("System.Diagnostics.ConditionalAttribute");

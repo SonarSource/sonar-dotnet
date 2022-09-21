@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Runtime.Serialization;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
@@ -561,7 +559,55 @@ Tag(""End"");
             validator.ValidateExecutionCompleted();
         }
 
-        public static IEnumerable<object[]> ThrowHelperCalls
+        [DataTestMethod]
+        [DataRow("System.Diagnostics.CodeAnalysis.DoesNotReturn")]
+        [DataRow("JetBrains.Annotations.TerminatesProgram")]
+        public void Invocation_ThrowHelper_Attributes(string throwHelperAttribute)
+        {
+            var code = $@"
+using System;
+using System.Diagnostics;
+
+public class Sample
+{{
+    public void Test()
+    {{
+        Tag(""Before"");
+        ThrowHelper();
+        Tag(""Unreachable"");
+    }}
+
+    [{throwHelperAttribute}]
+    public void ThrowHelper()
+    {{
+        // No implementation. The attribute should drive the analysis.
+    }}
+
+    static void Tag(string name) {{ }}
+}}
+
+namespace JetBrains.Annotations
+{{
+    [Obsolete(""Use [ContractAnnotation('=> halt')] instead"")]
+    [AttributeUsage(AttributeTargets.Method)]
+    public sealed class TerminatesProgramAttribute : Attribute {{ }}
+}}
+";
+#if NETFRAMEWORK
+            code += @"
+namespace System.Diagnostics.CodeAnalysis
+{
+    public sealed class DoesNotReturnAttribute : Attribute { }
+}
+";
+#endif
+            var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
+            validator.ValidateTagOrder("Before");
+            validator.ValidateExitReachCount(0);
+            validator.ValidateExecutionCompleted();
+        }
+
+        private static IEnumerable<object[]> ThrowHelperCalls
         {
             get
             {

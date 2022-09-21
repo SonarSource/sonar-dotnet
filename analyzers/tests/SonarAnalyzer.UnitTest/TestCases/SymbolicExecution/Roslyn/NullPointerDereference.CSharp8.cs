@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 
 namespace Tests.Diagnostics.CSharp8
 {
@@ -169,4 +168,32 @@ namespace Tests.Diagnostics.CSharp8
                 obj != null ? null : obj.ToLower(); //  Compliant - FN: local functions are not supported by the CFG
         }
     }
+
+    public class ThrowHelper
+    {
+        public void DoesNotReturnIsRespectedOutsideNullableContext()
+        {
+            object o = null;
+            DoesNotReturn();
+            o.ToString(); // Compliant. Unreachable
+        }
+
+        public void TerminatesProgramIsRespected()
+        {
+            object o = null;
+            TerminatesProgram();
+            o.ToString(); // Compliant. Unreachable
+        }
+
+        [System.Diagnostics.CodeAnalysis.DoesNotReturn]
+        public void DoesNotReturn() { }
+
+        [JetBrains.Annotations.TerminatesProgram]
+        public void TerminatesProgram() { }
+    }
+}
+
+namespace JetBrains.Annotations
+{
+    public sealed class TerminatesProgramAttribute : Attribute { }
 }
