@@ -426,10 +426,10 @@ Tag(""End"", arg);";
         [DataRow("objectUnknown", "is not string { }", OperationKindEx.NegatedPattern, null, "NotNull")]
         [DataRow("objectUnknown", "is not object { }", OperationKindEx.NegatedPattern, "Null", "NotNull")]
         [DataRow("objectUnknown", "is not not null", OperationKindEx.NegatedPattern, "Null", "NotNull")]
-        [DataRow("nullableBoolTrue", "is not false", OperationKindEx.NegatedPattern, "True", "False")]
-        [DataRow("nullableBoolFalse", "is not true", OperationKindEx.NegatedPattern, "False", "True")]
-        [DataRow("nullableBoolNull", "is not true", OperationKindEx.NegatedPattern, null, "True")]
-        [DataRow("nullableBoolNull", "is not false", OperationKindEx.NegatedPattern, null, "False")]
+        [DataRow("nullableBoolTrue", "is not false", OperationKindEx.NegatedPattern, "True", "False")]  // Should generate only single state with "true" result instead
+        [DataRow("nullableBoolFalse", "is not true", OperationKindEx.NegatedPattern, "False", "True")]  // Should generate only single state with "true" result instead
+        [DataRow("nullableBoolNull", "is not true", OperationKindEx.NegatedPattern, null, "True")]      // Should generate only single state with "true" result instead
+        [DataRow("nullableBoolNull", "is not false", OperationKindEx.NegatedPattern, null, "False")]    // Should generate only single state with "true" result instead
         [DataRow("nullableBoolUnknown", "is not true", OperationKindEx.NegatedPattern, null, "True")]
         [DataRow("nullableBoolUnknown", "is not false", OperationKindEx.NegatedPattern, null, "False")]
         [DataRow("objectUnknown", "is not object", OperationKindEx.TypePattern, null, "NotNull")]
@@ -500,26 +500,23 @@ Tag(""End"", arg);";
             validator.TagValues("Result").Should().HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(BoolConstraint.True))
                 .And.ContainSingle(x => x.HasConstraint(BoolConstraint.False));
-            var states = validator.TagStates("Result");
-            var result = validator.Symbol("result");
-            var testedSymbol = validator.Symbol(testedSymbolName);
-            var whenTrue = states.Single(state => state[result].HasConstraint(BoolConstraint.True));
-            var whenFalse = states.Single(state => state[result].HasConstraint(BoolConstraint.False));
-            if (expectedForTrue is null)
+            AssertSymbol(BoolConstraint.True, expectedForTrue);
+            AssertSymbol(BoolConstraint.False, expectedForFalse);
+
+            void AssertSymbol(BoolConstraint branchConstraint, string expected)
             {
-                whenTrue[testedSymbol].Should().BeNull("we should not learn about the tested symbol");
-            }
-            else
-            {
-                whenTrue[testedSymbol].AllConstraints.Select(x => x.ToString()).OrderBy(x => x).JoinStr(", ").Should().Be(expectedForTrue);
-            }
-            if (expectedForFalse is null)
-            {
-                whenFalse[testedSymbol].Should().BeNull("we should not learn about the tested symbol");
-            }
-            else
-            {
-                whenFalse[testedSymbol].AllConstraints.Select(x => x.ToString()).OrderBy(x => x).JoinStr(", ").Should().Be(expectedForFalse);
+                var result = validator.Symbol("result");
+                var testedSymbol = validator.Symbol(testedSymbolName);
+                var state = validator.TagStates("Result").Single(x => x[result].HasConstraint(branchConstraint));
+                if (expected is null)
+                {
+                    state[testedSymbol].Should().BeNull("we should not learn about the tested symbol in {0} branch", branchConstraint);
+                }
+                else
+                {
+                    var testedSymbolConstraints = state[testedSymbol].AllConstraints.Select(x => x.ToString()).OrderBy(x => x).JoinStr(", "); // Rename for better assertion message
+                    testedSymbolConstraints.Should().Be(expected, "we are in {0} branch", branchConstraint);
+                }
             }
         }
 
