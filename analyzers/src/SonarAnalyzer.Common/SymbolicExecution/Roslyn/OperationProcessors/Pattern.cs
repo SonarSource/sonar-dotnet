@@ -29,10 +29,25 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
 {
     internal static class Pattern
     {
-        public static ProgramState Process(SymbolicContext context, IIsPatternOperationWrapper isPattern) =>
-            (BoolContraintFromConstant(context.State, isPattern) ?? BoolConstraintFromPattern(context.State, isPattern)) is { } constraint
-                ? context.SetOperationConstraint(constraint)
-                : context.State;
+        public static ProgramState[] Process(SymbolicContext context, IIsPatternOperationWrapper isPattern)
+        {
+            if ((BoolContraintFromConstant(context.State, isPattern) ?? BoolConstraintFromPattern(context.State, isPattern)) is { } constraint)
+            {
+                return new[] { context.SetOperationConstraint(constraint) };       // We already know the answer from existing constraints
+            }
+            else
+            {
+                var positive = LearnBranchingConstraint(context.State, isPattern, false);
+                var negative = LearnBranchingConstraint(context.State, isPattern, true);
+                return positive == context.State && negative == context.State
+                    ? new[] { context.State }   // We can't learn anything, just move on
+                    : new[]
+                    {
+                        positive.SetOperationConstraint(context.Operation, BoolConstraint.True),
+                        negative.SetOperationConstraint(context.Operation, BoolConstraint.False)
+                    };
+            }
+        }
 
         public static ProgramState Process(SymbolicContext context, IRecursivePatternOperationWrapper recursive) =>
             ProcessDeclaration(context, recursive.DeclaredSymbol, true);
@@ -40,7 +55,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
         public static ProgramState Process(SymbolicContext context, IDeclarationPatternOperationWrapper declaration) =>
             ProcessDeclaration(context, declaration.DeclaredSymbol, !declaration.MatchesNull);  // "... is var ..." should not set NotNull
 
-        public static ProgramState LearnBranchingConstraint(ProgramState state, IIsPatternOperationWrapper isPattern, bool useOpposite) =>
+        private static ProgramState LearnBranchingConstraint(ProgramState state, IIsPatternOperationWrapper isPattern, bool useOpposite) =>
             state.ResolveCapture(isPattern.Value).TrackedSymbol() is { } testedSymbol
             && LearnBranchingConstraint(state, isPattern.Pattern, useOpposite) is { } constraint
                 ? state.SetSymbolConstraint(testedSymbol, constraint)

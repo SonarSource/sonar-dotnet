@@ -38,6 +38,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         private readonly ControlFlowGraph cfg;
         private readonly List<SymbolicContext> postProcessed = new();
         private readonly List<(string Name, SymbolicContext Context)> tags = new();
+        private readonly Dictionary<string, ISymbol> symbols = new();
         private int executionCompletedCount;
 
         public List<ProgramState> ExitStates { get; } = new();
@@ -50,6 +51,12 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 
         public override void ExecutionCompleted() =>
             executionCompletedCount++;
+
+        public ISymbol Symbol(string name)
+        {
+            symbols.Should().ContainKey(name, "asserted symbol '{0}' should be in the compilation", name);
+            return symbols[name];
+        }
 
         public void ValidateOrder(params string[] expected) =>
             postProcessed.Select(x => TestHelper.Serialize(x.Operation)).Should().OnlyContainInOrder(expected);
@@ -101,6 +108,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
             {
                 (invocation.TargetMethod.IsStatic || invocation.Arguments.Length == 1).Should().BeTrue("Tag method should be static to not infer with object states.");
                 AddTagName(invocation.Arguments.First().Value.ConstantValue, context);
+            }
+            if (context.Operation.Instance.TrackedSymbol() is { } symbol)
+            {
+                symbols[symbol.Name] = symbol;
             }
             return context.State;
         }

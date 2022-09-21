@@ -178,6 +178,14 @@ public class Sample
         o.ToString();       // Noncompliant
     }
 
+    public void LearnFromPatternMatchingEverywhere(object arg)
+    {
+        Something(arg is null);
+        arg.ToString(); // Noncompliant
+
+        void Something(bool b) { }
+    }
+
     public void StaticLambda()
     {
         Func<string> a = static () =>
