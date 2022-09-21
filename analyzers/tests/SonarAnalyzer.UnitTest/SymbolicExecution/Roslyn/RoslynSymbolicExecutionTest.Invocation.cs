@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
@@ -829,6 +830,7 @@ f()();
             };
 
         [TestMethod]
+        [Ignore("Show alternative operation order for processing.")]
         public void Invocation_ThrowHelper_DebugFail_ContinueWithEmptyState()
         {
             const string code = @"
