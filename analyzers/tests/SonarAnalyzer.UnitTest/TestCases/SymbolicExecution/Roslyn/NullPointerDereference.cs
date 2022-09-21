@@ -1084,7 +1084,7 @@ namespace Tests.Diagnostics
             if (!someString?.Contains("a") ?? true)
                 someString.ToString();  // Noncompliant, it's null or doesn't contain 'a'
             else
-                someString.ToString();  // Compliant, this path is unreachable
+                someString.ToString();  // Compliant, someString is not null and contains 'a'
         }
     }
 
@@ -1094,7 +1094,7 @@ namespace Tests.Diagnostics
         {
             if (string.IsNullOrEmpty(arg?.ToString()))
             {
-                arg.ToString(); // Non-compliant Suppressed #6117
+                arg.ToString(); // FN Suppressed #6117
             }
             else
             {
@@ -1106,7 +1106,7 @@ namespace Tests.Diagnostics
         {
             if (string.IsNullOrEmpty(arg?.Message))
             {
-                arg.ToString(); // Non-compliant Suppressed #6117
+                arg.ToString(); // FN Suppressed #6117
             }
             else
             {
@@ -1118,11 +1118,11 @@ namespace Tests.Diagnostics
         {
             if (arg?.Length == 0)
             {
-                arg.ToString(); // Non-compliant Suppressed #6117 FP related to nullable binary equals
+                arg.ToString(); // Compliant Suppressed #6117 related to nullable binary equals
             }
             else
             {
-                arg.ToString(); // Non-compliant Suppressed #6117
+                arg.ToString(); // FN Suppressed #6117
             }
         }
     }
@@ -1274,7 +1274,7 @@ namespace Repro_3395
                 // Do something
             }
 
-            return something.SomeProperty; // Non-compliant Suppressed #6117
+            return something.SomeProperty; // FN Suppressed #6117
         }
 
         public static Something GetSomething()
