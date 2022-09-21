@@ -15,23 +15,23 @@ namespace Tests.Diagnostics.CSharp8
         {
             string name = null;
             name = name ?? null;
-            name.ToString(); // Non-compliant Suppressed #6117 {{'name' is null on at least one execution path.}}
+            name.ToString(); // FN Suppressed #6117 {{'name' is null on at least one execution path.}}
         }
 
         public void NullCoalescenceOperator_Null_Noncompliant2()
         {
             string name = null;
-            name = name ?? name.ToString(); // Non-compliant Suppressed #6117
+            name = name ?? name.ToString(); // FN Suppressed #6117
         }
 
         public void NullCoalesce_Conversion_DownCast(AggregateException arg)
         {
-            var value = arg as Exception ?? new Exception(arg.Message);     // Non-compliant Suppressed #6117, arg must be null on the right side
+            var value = arg as Exception ?? new Exception(arg.Message);     // FN Suppressed #6117, arg must be null on the right side
         }
 
         public void NullCoalesce_Conversion_UpCast(Exception arg)
         {
-            var value = arg as AggregateException ?? new AggregateException(arg.Message);     // Non-compliant Suppressed #6117, arg can be null or another Exception type on the right side
+            var value = arg as AggregateException ?? new AggregateException(arg.Message);     // FN Suppressed #6117, arg can be null or another Exception type on the right side
         }
 
         public void NullCoalescenceAssignment_Null()
