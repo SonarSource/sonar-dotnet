@@ -253,7 +253,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 OperationKindEx.FlowCapture => FlowCapture.Process(context, As(IFlowCaptureOperationWrapper.FromOperation)),
                 OperationKindEx.InstanceReference => References.ProcessThis(context),
                 OperationKindEx.Invocation => Invocation.Process(context, As(IInvocationOperationWrapper.FromOperation)),
-                OperationKindEx.IsNull => IsNull.Process(context, As(IIsNullOperationWrapper.FromOperation)),
                 OperationKindEx.LocalReference => References.Process(context, As(ILocalReferenceOperationWrapper.FromOperation)),
                 OperationKindEx.ObjectCreation => Creation.Process(context),
                 OperationKindEx.ParameterReference => References.Process(context, As(IParameterReferenceOperationWrapper.FromOperation)),
@@ -271,6 +270,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             var states = context.Operation.Instance.Kind switch
             {
                 OperationKindEx.Binary => Binary.Process(context, As(IBinaryOperationWrapper.FromOperation)),
+                OperationKindEx.IsNull => IsNull.Process(context, As(IIsNullOperationWrapper.FromOperation)),
                 OperationKindEx.IsPattern => Pattern.Process(context, As(IIsPatternOperationWrapper.FromOperation)),
                 _ => new[] { context.State }
             };
@@ -308,7 +308,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 : operation.Kind switch
                 {
                     OperationKindEx.Conversion => LearnBranchingConstraintsFromOperation(state, As(IConversionOperationWrapper.FromOperation).Operand, useOpposite),
-                    OperationKindEx.IsNull => IsNull.LearnBranchingConstraint(state, As(IIsNullOperationWrapper.FromOperation), useOpposite),
                     OperationKindEx.IsType => IsType.LearnBranchingConstraint(state, As(IIsTypeOperationWrapper.FromOperation), useOpposite),
                     _ => state
                 };

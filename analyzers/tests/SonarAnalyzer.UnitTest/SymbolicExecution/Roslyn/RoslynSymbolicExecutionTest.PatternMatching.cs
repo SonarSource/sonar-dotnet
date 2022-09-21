@@ -507,14 +507,14 @@ Tag(""End"", arg);";
             {
                 var result = validator.Symbol("result");
                 var testedSymbol = validator.Symbol(testedSymbolName);
-                var state = validator.TagStates("Result").Single(x => x[result].HasConstraint(branchConstraint));
+                var testedSymbolicValue = validator.TagStates("Result").Should().ContainSingle(x => x[result].HasConstraint(branchConstraint)).Which[testedSymbol];
                 if (expected is null)
                 {
-                    state[testedSymbol].Should().BeNull("we should not learn about the tested symbol in {0} branch", branchConstraint);
+                    testedSymbolicValue.Should().BeNull("we should not learn about the tested symbol in {0} branch", branchConstraint);
                 }
                 else
                 {
-                    var testedSymbolConstraints = state[testedSymbol].AllConstraints.Select(x => x.ToString()).OrderBy(x => x).JoinStr(", "); // Rename for better assertion message
+                    var testedSymbolConstraints = testedSymbolicValue.AllConstraints.Select(x => x.ToString()).OrderBy(x => x).JoinStr(", "); // Rename for better assertion message
                     testedSymbolConstraints.Should().Be(expected, "we are in {0} branch", branchConstraint);
                 }
             }
