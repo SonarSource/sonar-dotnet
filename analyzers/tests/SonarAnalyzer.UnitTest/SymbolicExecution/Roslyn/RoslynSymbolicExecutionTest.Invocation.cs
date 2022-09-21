@@ -829,7 +829,7 @@ f()();
             };
 
         [TestMethod]
-        public void Invocation_ThrowHelper_DebugFail()
+        public void Invocation_ThrowHelper_DebugFail_ConstinueWithEmptyState()
         {
             const string code = @"
 object o = null;
@@ -861,6 +861,33 @@ Tag(""After"", o);
                 "Argument: o",
                 @"Invocation: Tag(""After"", o)",
                 @"ExpressionStatement: Tag(""After"", o);");
+        }
+
+        [TestMethod]
+        public void Invocation_ThrowHelper_DebugFail_StopProcessing()
+        {
+            const string code = @"
+object o = null;
+Tag(""Before"", o);
+System.Diagnostics.Debug.Fail(""Fail"");
+Tag(""After"", o);
+";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("Before", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.TagStates("After").Should().BeEmpty();
+            validator.ValidateOrder(
+                "LocalReference: o = null (Implicit)",
+                "Literal: null",
+                "Conversion: null (Implicit)",
+                "SimpleAssignment: o = null (Implicit)",
+                @"Literal: ""Before""",
+                @"Argument: ""Before""",
+                "LocalReference: o",
+                "Argument: o",
+                @"Invocation: Tag(""Before"", o)",
+                @"ExpressionStatement: Tag(""Before"", o);",
+                @"Literal: ""Fail""",
+                @"Argument: ""Fail""");
         }
     }
 }
