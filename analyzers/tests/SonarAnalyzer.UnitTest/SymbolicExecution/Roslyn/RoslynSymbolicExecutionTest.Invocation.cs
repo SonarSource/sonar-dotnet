@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Runtime.Serialization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.SymbolicExecution.Constraints;
@@ -833,63 +834,70 @@ f()();
         [Ignore("Show alternative operation order for processing.")]
         public void Invocation_ThrowHelper_DebugFail_ContinueWithEmptyState()
         {
-            const string code = @"
-object o = null;
-Tag(""Before"", o);
-System.Diagnostics.Debug.Fail(""Fail"");
-Tag(""After"", o);
+            var code = $@"
+Tag(""Before"");
+{throwHelperCall}
+Tag(""Unreachable"");
 ";
             var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("Before", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-            validator.ValidateTag("After", x => x.Should().BeNull());
-            validator.ValidateOrder(
-                "LocalReference: o = null (Implicit)",
-                "Literal: null",
-                "Conversion: null (Implicit)",
-                "SimpleAssignment: o = null (Implicit)",
-                @"Literal: ""Before""",
-                @"Argument: ""Before""",
-                "LocalReference: o",
-                "Argument: o",
-                @"Invocation: Tag(""Before"", o)",
-                @"ExpressionStatement: Tag(""Before"", o);",
-                @"Literal: ""Fail""",
-                @"Argument: ""Fail""",
-                @"Invocation: System.Diagnostics.Debug.Fail(""Fail"")",
-                @"ExpressionStatement: System.Diagnostics.Debug.Fail(""Fail"");",
-                @"Literal: ""After""",
-                @"Argument: ""After""",
-                "LocalReference: o",
-                "Argument: o",
-                @"Invocation: Tag(""After"", o)",
-                @"ExpressionStatement: Tag(""After"", o);");
+            validator.ValidateTagOrder("Before");
+            validator.ValidateExitReachCount(0);
+            validator.ValidateExecutionCompleted();
         }
 
-        [TestMethod]
-        public void Invocation_ThrowHelper_DebugFail_StopProcessing()
+        [DataTestMethod]
+        [DynamicData(nameof(ThrowHelperCalls))]
+        public void Invocation_ThrowHelper_OnlyInBranch(string throwHelperCall)
         {
-            const string code = @"
-object o = null;
-Tag(""Before"", o);
-System.Diagnostics.Debug.Fail(""Fail"");
-Tag(""After"", o);
+            var code = @$"
+if (condition)
+{{
+    Tag(""Before"");
+    {throwHelperCall}
+    Tag(""Unreachable"");
+}}
+Tag(""End"");
 ";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("Before", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-            validator.TagStates("After").Should().BeEmpty();
-            validator.ValidateOrder(
-                "LocalReference: o = null (Implicit)",
-                "Literal: null",
-                "Conversion: null (Implicit)",
-                "SimpleAssignment: o = null (Implicit)",
-                @"Literal: ""Before""",
-                @"Argument: ""Before""",
-                "LocalReference: o",
-                "Argument: o",
-                @"Invocation: Tag(""Before"", o)",
-                @"ExpressionStatement: Tag(""Before"", o);",
-                @"Literal: ""Fail""",
-                @"Argument: ""Fail""");
+            var validator = SETestContext.CreateCS(code, ", bool condition").Validator;
+            validator.ValidateTagOrder("Before", "End");
+            validator.ValidateExitReachCount(1);
+            validator.ValidateExecutionCompleted();
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(ThrowHelperCalls))]
+        public void Invocation_ThrowHelper_TryCatchFinally(string throwHelperCall)
+        {
+            var code = @$"
+try
+{{
+    {throwHelperCall}
+    Tag(""Unreachable"");
+}}
+catch
+{{
+    Tag(""Catch"");
+}}
+finally
+{{
+    Tag(""Finally"");
+}}
+Tag(""End"");
+";
+            var validator = SETestContext.CreateCS(code, ", bool condition").Validator;
+            validator.ValidateTagOrder("Catch", "Finally", "Finally", "End");
+            validator.ValidateExitReachCount(2);
+            validator.ValidateExecutionCompleted();
+        }
+
+        public static IEnumerable<object[]> ThrowHelperCalls
+        {
+            get
+            {
+                yield return new object[] { @"System.Diagnostics.Debug.Fail(""Fail"");" };
+                yield return new object[] { @"Environment.FailFast(""Fail"");" };
+                yield return new object[] { @"Environment.Exit(-1);" };
+            }
         }
     }
 }
