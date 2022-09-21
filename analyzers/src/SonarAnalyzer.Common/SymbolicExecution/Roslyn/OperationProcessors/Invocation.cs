@@ -20,7 +20,6 @@
 
 using System.Diagnostics;
 using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
 
@@ -103,5 +102,15 @@ internal sealed class Invocation : MultiProcessor<IInvocationOperationWrapper>
             return ProgramState.Empty;
         }
         return state;
+    }
+
+        private static ProgramState ProcessArgumentAttributes(ProgramState state, IArgumentOperationWrapper argument, ImmutableArray<AttributeData> attributes) =>
+            attributes.Any(IsValidatedNotNullAttribute) && argument.Value.TrackedSymbol() is { } symbol
+                ? state.SetSymbolConstraint(symbol, ObjectConstraint.NotNull)
+                : state;
+
+        // Same as [NotNull] https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/attributes/nullable-analysis#postconditions-maybenull-and-notnull
+        private static bool IsValidatedNotNullAttribute(AttributeData attribute) =>
+            attribute.AttributeClass?.Name == "ValidatedNotNullAttribute";
     }
 }
