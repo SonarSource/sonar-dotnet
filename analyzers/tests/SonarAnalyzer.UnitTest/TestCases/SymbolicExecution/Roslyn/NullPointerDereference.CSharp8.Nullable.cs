@@ -97,7 +97,7 @@ namespace Tests.Diagnostics.CSharp8
         public void NotNullWhenFalse()
         {
             string? s = null;
-            if (!IsNullOrEmpty(s))
+            if (!CustomNotNullAssertion(s))
             {
                 s.ToString();  // Compliant
             }
