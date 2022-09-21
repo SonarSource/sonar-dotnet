@@ -54,7 +54,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 
         public ISymbol Symbol(string name)
         {
-            symbols.ContainsKey(name).Should().BeTrue("asserted symbols should be in the compilation. Missing symbol: " + name);
+            symbols.Should().ContainKey(name, "asserted symbols should be in the compilation. Missing symbol: " + name);
             return symbols[name];
         }
 
