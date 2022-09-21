@@ -66,7 +66,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp
                     case SyntaxKind.CoalesceExpression:
                     case SyntaxKind.ConditionalAccessExpression:
                         Result = false;
-                        break;
+                        return;
                 }
 
                 base.Visit(node);
