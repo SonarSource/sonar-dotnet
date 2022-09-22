@@ -288,7 +288,7 @@ namespace Tests.Diagnostics
         public void Assert1(object o)
         {
             System.Diagnostics.Debug.Assert(o != null);
-            o.ToString(); // Noncompliant FP
+            o.ToString(); // Compliant
             System.Diagnostics.Debug.Assert(o == null);
             o.ToString(); // Compliant, because we already know that o is not null from o.ToString()
         }
@@ -732,7 +732,7 @@ namespace Tests.Diagnostics
         void Assert1()
         {
             System.Diagnostics.Debug.Assert(_foo1 != null);
-            _foo1.ToString(); // Noncompliant FP
+            _foo1.ToString(); // Compliant
             System.Diagnostics.Debug.Assert(_foo1 == null);
             _foo1.ToString(); // Compliant, because we already know that _foo1 is not null from _foo1.ToString()
         }
