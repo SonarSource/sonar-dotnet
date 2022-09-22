@@ -18,15 +18,17 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
 using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
+namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
+
+internal class Conversion : SimpleProcessor<IConversionOperationWrapper>
 {
-    internal static class Conversion
-    {
-        public static ProgramState Process(SymbolicContext context, IConversionOperationWrapper conversion) =>
-            context.State[conversion.Operand] is { } value
-                ? context.State.SetOperationValue(context.Operation, value)
-                : context.State;
-    }
+    protected override System.Func<IOperation, IConversionOperationWrapper> Convert => IConversionOperationWrapper.FromOperation;
+
+    protected override ProgramState Process(SymbolicContext context, IConversionOperationWrapper conversion) =>
+        context.State[conversion.Operand] is { } value
+            ? context.State.SetOperationValue(context.Operation, value)
+            : context.State;
 }

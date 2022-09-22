@@ -18,23 +18,20 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
-internal class Assignment : SimpleProcessor<ISimpleAssignmentOperationWrapper>
+internal interface ISimpleProcessor
 {
-    protected override System.Func<IOperation, ISimpleAssignmentOperationWrapper> Convert => ISimpleAssignmentOperationWrapper.FromOperation;
+    public ProgramState Process(SymbolicContext context);
+}
 
-    protected override ProgramState Process(SymbolicContext context, ISimpleAssignmentOperationWrapper assignment)
-    {
-        var rightSide = context.State[assignment.Value];
-        var newState = context.State
-            .SetOperationValue(assignment.Target, rightSide)
-            .SetOperationValue(assignment.WrappedOperation, rightSide);
-        return newState.ResolveCapture(assignment.Target).TrackedSymbol() is { } symbol
-            ? newState.SetSymbolValue(symbol, rightSide)
-            : newState;
-    }
+internal abstract class SimpleProcessor<T> : Processor<T>, ISimpleProcessor
+    where T : IOperationWrapper
+{
+    protected abstract ProgramState Process(SymbolicContext context, T operation);
+
+    public ProgramState Process(SymbolicContext context) =>
+        Process(context, Convert(context.Operation.Instance));
 }

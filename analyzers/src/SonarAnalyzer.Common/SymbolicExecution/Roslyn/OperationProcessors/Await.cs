@@ -18,16 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.SymbolicExecution.Constraints;
-using StyleCop.Analyzers.Lightup;
+namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
-namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
+internal class Await : ISimpleProcessor
 {
-    internal static class ReDim
-    {
-        public static ProgramState Process(SymbolicContext context, IReDimClauseOperationWrapper reDim) =>
-            reDim.Operand.TrackedSymbol() is { } symbol
-                ? context.SetSymbolConstraint(symbol, ObjectConstraint.NotNull)
-                : context.State;
-    }
+    public ProgramState Process(SymbolicContext context) =>
+        context.State.ResetFieldConstraints();
 }

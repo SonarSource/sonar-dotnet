@@ -18,23 +18,29 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
-internal class Assignment : SimpleProcessor<ISimpleAssignmentOperationWrapper>
+internal class RecursivePattern : SimpleProcessor<IRecursivePatternOperationWrapper>
 {
-    protected override System.Func<IOperation, ISimpleAssignmentOperationWrapper> Convert => ISimpleAssignmentOperationWrapper.FromOperation;
+    protected override Func<IOperation, IRecursivePatternOperationWrapper> Convert => IRecursivePatternOperationWrapper.FromOperation;
 
-    protected override ProgramState Process(SymbolicContext context, ISimpleAssignmentOperationWrapper assignment)
+    protected override ProgramState Process(SymbolicContext context, IRecursivePatternOperationWrapper recursive)
     {
-        var rightSide = context.State[assignment.Value];
-        var newState = context.State
-            .SetOperationValue(assignment.Target, rightSide)
-            .SetOperationValue(assignment.WrappedOperation, rightSide);
-        return newState.ResolveCapture(assignment.Target).TrackedSymbol() is { } symbol
-            ? newState.SetSymbolValue(symbol, rightSide)
-            : newState;
+        if (recursive.DeclaredSymbol == null)
+        {
+            return context.State;
+        }
+        else
+        {
+            var state = context.Operation.Parent.AsIsPattern() is { } parentIsPattern && parentIsPattern.Value.TrackedSymbol() is { } sourceSymbol
+                ? context.State.SetSymbolValue(recursive.DeclaredSymbol, context.State[sourceSymbol])
+                : context.State;
+            return state.SetSymbolConstraint(recursive.DeclaredSymbol, ObjectConstraint.NotNull);
+        }
     }
 }

@@ -29,7 +29,6 @@ using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn.Checks;
-using SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
@@ -180,7 +179,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         {
             foreach (var preProcessed in checks.PreProcess(new(node.Operation, node.State)))
             {
-                foreach (var processed in ProcessOperation(preProcessed))
+                foreach (var processed in OperationDispatcher.Process(preProcessed))
                 {
                     foreach (var postProcessed in checks.PostProcess(processed))
                     {
@@ -233,45 +232,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 ControlFlowBranchSemantics.StructuredExceptionHandling when node.FinallyPoint is null => node.State.Exception,  // Exiting 'finally' with exception
                 _ => null
             };
-
-        private static IEnumerable<SymbolicContext> ProcessOperation(SymbolicContext context)
-        {
-            // Operations that return single state
-            var state = context.Operation.Instance.Kind switch
-            {
-                OperationKindEx.Argument => Invocation.Process(context, As(IArgumentOperationWrapper.FromOperation)),
-                OperationKindEx.ArrayCreation => Creation.Process(context),
-                OperationKindEx.ArrayElementReference => References.Process(context, As(IArrayElementReferenceOperationWrapper.FromOperation)),
-                OperationKindEx.AnonymousObjectCreation => Creation.Process(context),
-                OperationKindEx.Await => context.State.ResetFieldConstraints(),
-                OperationKindEx.Conversion => Conversion.Process(context, As(IConversionOperationWrapper.FromOperation)),
-                OperationKindEx.DeclarationPattern => Pattern.Process(context, As(IDeclarationPatternOperationWrapper.FromOperation)),
-                OperationKindEx.DelegateCreation => Creation.Process(context),
-                OperationKindEx.DynamicObjectCreation => Creation.Process(context),
-                OperationKindEx.EventReference => References.Process(context, As(IEventReferenceOperationWrapper.FromOperation)),
-                OperationKindEx.FieldReference => References.Process(context, As(IFieldReferenceOperationWrapper.FromOperation)),
-                OperationKindEx.FlowCapture => FlowCapture.Process(context, As(IFlowCaptureOperationWrapper.FromOperation)),
-                OperationKindEx.InstanceReference => References.ProcessThis(context),
-                OperationKindEx.Invocation => Invocation.Process(context, As(IInvocationOperationWrapper.FromOperation)),
-                OperationKindEx.LocalReference => References.Process(context, As(ILocalReferenceOperationWrapper.FromOperation)),
-                OperationKindEx.ObjectCreation => Creation.Process(context),
-                OperationKindEx.ParameterReference => References.Process(context, As(IParameterReferenceOperationWrapper.FromOperation)),
-                OperationKindEx.PropertyReference => References.Process(context, As(IPropertyReferenceOperationWrapper.FromOperation)),
-                OperationKindEx.RecursivePattern => Pattern.Process(context, As(IRecursivePatternOperationWrapper.FromOperation)),
-                OperationKindEx.ReDimClause => ReDim.Process(context, As(IReDimClauseOperationWrapper.FromOperation)),
-                OperationKindEx.SimpleAssignment => Assignment.Process(context, As(ISimpleAssignmentOperationWrapper.FromOperation)),
-                OperationKindEx.TypeParameterObjectCreation => Creation.Process(context),
-                OperationKindEx.Unary => Unary.Process(context, As(IUnaryOperationWrapper.FromOperation)),
-                _ => context.State
-            };
-            context = context.WithState(state);
-
-            // Operations that can return multiple states
-            return OperationDispatcher.Process(context).Select(x => context.WithState(x));
-
-            T As<T>(Func<IOperation, T> fromOperation) =>
-                fromOperation(context.Operation.Instance);
-        }
 
         private static ExceptionState ThrowExceptionType(IOperation operation) =>
             operation.Kind switch

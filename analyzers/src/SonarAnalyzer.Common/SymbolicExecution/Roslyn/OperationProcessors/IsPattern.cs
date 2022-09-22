@@ -27,15 +27,9 @@ using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
-internal class Pattern : BranchingProcessor<IIsPatternOperationWrapper>
+internal class IsPattern : BranchingProcessor<IIsPatternOperationWrapper>
 {
     protected override Func<IOperation, IIsPatternOperationWrapper> Convert => IIsPatternOperationWrapper.FromOperation;
-
-    public static ProgramState Process(SymbolicContext context, IRecursivePatternOperationWrapper recursive) =>
-        ProcessDeclaration(context, recursive.DeclaredSymbol, true);
-
-    public static ProgramState Process(SymbolicContext context, IDeclarationPatternOperationWrapper declaration) =>
-        ProcessDeclaration(context, declaration.DeclaredSymbol, !declaration.MatchesNull);  // "... is var ..." should not set NotNull
 
     protected override SymbolicConstraint BoolConstraintFromOperation(SymbolicContext context, IIsPatternOperationWrapper operation) =>
         BoolContraintFromConstant(context.State, operation) ?? BoolConstraintFromPattern(context.State, operation);
@@ -100,23 +94,6 @@ internal class Pattern : BranchingProcessor<IIsPatternOperationWrapper>
         else
         {
             return ObjectConstraint.NotNull.ApplyOpposite(falseBranch);
-        }
-    }
-
-    private static ProgramState ProcessDeclaration(SymbolicContext context, ISymbol declaredSymbol, bool setNotNull)
-    {
-        if (declaredSymbol == null)
-        {
-            return context.State;
-        }
-        else
-        {
-            var state = context.Operation.Parent.AsIsPattern() is { } parentIsPattern && parentIsPattern.Value.TrackedSymbol() is { } sourceSymbol
-                ? context.State.SetSymbolValue(declaredSymbol, context.State[sourceSymbol])  // ToDo: MMF-2563 should define relation between tested and declared symbol
-                : context.State;
-            return setNotNull
-                ? state.SetSymbolConstraint(declaredSymbol, ObjectConstraint.NotNull)
-                : state;
         }
     }
 

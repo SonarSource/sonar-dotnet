@@ -18,24 +18,18 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
-internal static class OperationDispatcher
+internal class ReDimClause : SimpleProcessor<IReDimClauseOperationWrapper>
 {
-    private static readonly Dictionary<OperationKind, IBranchingProcessor> Branching = new()
-    {
-        {OperationKindEx.Binary, new Binary() },
-        { OperationKindEx.IsNull , new IsNull() },
-        { OperationKindEx.IsPattern , new Pattern() },
-        { OperationKindEx.IsType, new IsType() },
-    };
+    protected override System.Func<IOperation, IReDimClauseOperationWrapper> Convert => IReDimClauseOperationWrapper.FromOperation;
 
-    public static ProgramState[] Process(SymbolicContext context) =>
-        Branching.TryGetValue(context.Operation.Instance.Kind, out var processor)
-            ? processor.Process(context)
-            : new[] { context.State };
+    protected override ProgramState Process(SymbolicContext context, IReDimClauseOperationWrapper reDimClause) =>
+        reDimClause.Operand.TrackedSymbol() is { } symbol
+            ? context.SetSymbolConstraint(symbol, ObjectConstraint.NotNull)
+            : context.State;
 }

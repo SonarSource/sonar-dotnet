@@ -25,17 +25,24 @@ using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
-internal class Unary : SimpleProcessor<IUnaryOperationWrapper>
+internal class DeclarationPattern : SimpleProcessor<IDeclarationPatternOperationWrapper>
 {
-    protected override Func<IOperation, IUnaryOperationWrapper> Convert => IUnaryOperationWrapper.FromOperation;
+    protected override Func<IOperation, IDeclarationPatternOperationWrapper> Convert => IDeclarationPatternOperationWrapper.FromOperation;
 
-    protected override ProgramState Process(SymbolicContext context, IUnaryOperationWrapper unary) =>
-        unary.OperatorKind == UnaryOperatorKind.Not
-            ? ProcessNot(context.State, unary)
-            : context.State;
-
-    private static ProgramState ProcessNot(ProgramState state, IUnaryOperationWrapper unary) =>
-        state[unary.Operand] is { } value && value.Constraint<BoolConstraint>() is { } boolConstraint
-            ? state.SetOperationConstraint(unary.WrappedOperation, boolConstraint.Opposite)
-            : state;
+    protected override ProgramState Process(SymbolicContext context, IDeclarationPatternOperationWrapper declaration)
+    {
+        if (declaration.DeclaredSymbol == null)
+        {
+            return context.State;
+        }
+        else
+        {
+            var state = context.Operation.Parent.AsIsPattern() is { } parentIsPattern && parentIsPattern.Value.TrackedSymbol() is { } sourceSymbol
+                ? context.State.SetSymbolValue(declaration.DeclaredSymbol, context.State[sourceSymbol])  // ToDo: MMF-2563 should define relation between tested and declared symbol
+                : context.State;
+            return declaration.MatchesNull
+                ? state     // "... is var ..." should not set NotNull
+                : state.SetSymbolConstraint(declaration.DeclaredSymbol, ObjectConstraint.NotNull);
+        }
+    }
 }
