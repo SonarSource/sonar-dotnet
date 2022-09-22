@@ -27,49 +27,32 @@ using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
 {
-    internal static class Pattern
+    internal class Pattern : BranchingProcessor<IIsPatternOperationWrapper>
     {
-        public static ProgramState[] Process(SymbolicContext context, IIsPatternOperationWrapper isPattern)
-        {
-            if ((BoolContraintFromConstant(context.State, isPattern) ?? BoolConstraintFromPattern(context.State, isPattern)) is { } constraint)
-            {
-                return new[] { context.SetOperationConstraint(constraint) };       // We already know the answer from existing constraints
-            }
-            else
-            {
-                var positive = LearnBranchingConstraint(context.State, isPattern, false);
-                var negative = LearnBranchingConstraint(context.State, isPattern, true);
-                return positive == context.State && negative == context.State
-                    ? new[] { context.State }   // We can't learn anything, just move on
-                    : new[]
-                    {
-                        positive.SetOperationConstraint(context.Operation, BoolConstraint.True),
-                        negative.SetOperationConstraint(context.Operation, BoolConstraint.False)
-                    };
-            }
-        }
-
         public static ProgramState Process(SymbolicContext context, IRecursivePatternOperationWrapper recursive) =>
             ProcessDeclaration(context, recursive.DeclaredSymbol, true);
 
         public static ProgramState Process(SymbolicContext context, IDeclarationPatternOperationWrapper declaration) =>
             ProcessDeclaration(context, declaration.DeclaredSymbol, !declaration.MatchesNull);  // "... is var ..." should not set NotNull
 
-        private static ProgramState LearnBranchingConstraint(ProgramState state, IIsPatternOperationWrapper isPattern, bool useOpposite) =>
-            state.ResolveCapture(isPattern.Value).TrackedSymbol() is { } testedSymbol
-            && LearnBranchingConstraint(state, isPattern.Pattern, useOpposite) is { } constraint
+        protected override SymbolicConstraint BoolConstraintFromOperation(SymbolicContext context, IIsPatternOperationWrapper operation) =>
+            BoolContraintFromConstant(context.State, operation) ?? BoolConstraintFromPattern(context.State, operation);
+
+        protected override ProgramState LearnBranchingConstraint(ProgramState state, IIsPatternOperationWrapper operation, bool falseBranch) =>
+            state.ResolveCapture(operation.Value).TrackedSymbol() is { } testedSymbol
+            && LearnBranchingConstraint(state, operation.Pattern, falseBranch) is { } constraint
                 ? state.SetSymbolConstraint(testedSymbol, constraint)
                 : state;
 
-        private static SymbolicConstraint LearnBranchingConstraint(ProgramState state, IPatternOperationWrapper pattern, bool useOpposite)
+        private static SymbolicConstraint LearnBranchingConstraint(ProgramState state, IPatternOperationWrapper pattern, bool falseBranch)
         {
             return pattern.WrappedOperation.Kind switch
             {
-                OperationKindEx.ConstantPattern => ConstraintFromConstantPattern(state, As(IConstantPatternOperationWrapper.FromOperation), useOpposite, pattern.InputType.IsReferenceType),
-                OperationKindEx.DeclarationPattern => ConstraintFromDeclarationPattern(As(IDeclarationPatternOperationWrapper.FromOperation), useOpposite),
-                OperationKindEx.NegatedPattern => LearnBranchingConstraint(state, As(INegatedPatternOperationWrapper.FromOperation).Pattern, !useOpposite),
-                OperationKindEx.RecursivePattern => ConstraintFromRecursivePattern(As(IRecursivePatternOperationWrapper.FromOperation), useOpposite),
-                OperationKindEx.TypePattern => ObjectConstraint.NotNull.ApplyOpposite(useOpposite),
+                OperationKindEx.ConstantPattern => ConstraintFromConstantPattern(state, As(IConstantPatternOperationWrapper.FromOperation), falseBranch, pattern.InputType.IsReferenceType),
+                OperationKindEx.DeclarationPattern => ConstraintFromDeclarationPattern(As(IDeclarationPatternOperationWrapper.FromOperation), falseBranch),
+                OperationKindEx.NegatedPattern => LearnBranchingConstraint(state, As(INegatedPatternOperationWrapper.FromOperation).Pattern, !falseBranch),
+                OperationKindEx.RecursivePattern => ConstraintFromRecursivePattern(As(IRecursivePatternOperationWrapper.FromOperation), falseBranch),
+                OperationKindEx.TypePattern => ObjectConstraint.NotNull.ApplyOpposite(falseBranch),
                 _ => null
             };
 
@@ -77,44 +60,44 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
                 fromOperation(pattern.WrappedOperation);
         }
 
-        private static SymbolicConstraint ConstraintFromConstantPattern(ProgramState state, IConstantPatternOperationWrapper constant, bool useOpposite, bool isReferenceType)
+        private static SymbolicConstraint ConstraintFromConstantPattern(ProgramState state, IConstantPatternOperationWrapper constant, bool falseBranch, bool isReferenceType)
         {
             if (state[constant.Value] is { } value)
             {
-                if (value.Constraint<BoolConstraint>() is { } boolConstraint && !useOpposite)   // Cannot use opposite on booleans. If it is not "true", it could be null, false or any other type
+                if (value.Constraint<BoolConstraint>() is { } boolConstraint && !falseBranch)   // Cannot use opposite on booleans. If it is not "true", it could be null, false or any other type
                 {
                     return boolConstraint;
                 }
                 else if (value.Constraint<ObjectConstraint>() is { } objectConstraint)
                 {
-                    return objectConstraint.ApplyOpposite(useOpposite);
+                    return objectConstraint.ApplyOpposite(falseBranch);
                 }
             }
-            return isReferenceType ? ObjectConstraint.NotNull.ApplyOpposite(useOpposite) : null;    // "obj is 42" => "obj" is NotNull and obj.ToString() is safe. We don't have this for bool.
+            return isReferenceType ? ObjectConstraint.NotNull.ApplyOpposite(falseBranch) : null;    // "obj is 42" => "obj" is NotNull and obj.ToString() is safe. We don't have this for bool.
         }
 
-        private static ObjectConstraint ConstraintFromRecursivePattern(IRecursivePatternOperationWrapper recursive, bool useOpposite) =>
+        private static ObjectConstraint ConstraintFromRecursivePattern(IRecursivePatternOperationWrapper recursive, bool falseBranch) =>
             recursive.InputType.IsReferenceType
-                ? useOpposite switch
+                ? falseBranch switch
                 {
                     true => RecursivePatternAlwaysMatchesAnyNotNull(recursive) ? ObjectConstraint.Null : null,
                     _ => ObjectConstraint.NotNull
                 }
                 : null;
 
-        private static SymbolicConstraint ConstraintFromDeclarationPattern(IDeclarationPatternOperationWrapper declaration, bool useOpposite)
+        private static SymbolicConstraint ConstraintFromDeclarationPattern(IDeclarationPatternOperationWrapper declaration, bool falseBranch)
         {
             if (declaration.MatchesNull || !declaration.InputType.IsReferenceType)
             {
                 return null;
             }
-            else if (useOpposite && declaration.InputType.DerivesOrImplements(declaration.MatchedType)) // For "str is object o", we're sure that it's Null in "else" branch
+            else if (falseBranch && declaration.InputType.DerivesOrImplements(declaration.MatchedType)) // For "str is object o", we're sure that it's Null in "else" branch
             {
                 return ObjectConstraint.Null;
             }
             else
             {
-                return ObjectConstraint.NotNull.ApplyOpposite(useOpposite);
+                return ObjectConstraint.NotNull.ApplyOpposite(falseBranch);
             }
         }
 

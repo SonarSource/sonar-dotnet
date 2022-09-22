@@ -25,41 +25,24 @@ using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
 {
-    internal static class Binary
+    internal class Binary : BranchingProcessor<IBinaryOperationWrapper>
     {
-        public static ProgramState[] Process(SymbolicContext context, IBinaryOperationWrapper binary)
-        {
-            if (BinaryConstraint(binary.OperatorKind, context.State[binary.LeftOperand], context.State[binary.RightOperand]) is { } newConstraint)
-            {
-                return new[] { context.SetOperationConstraint(newConstraint) };   // We already know the answer from existing constraints
-            }
-            else
-            {
-                var positive = LearnBranchingConstraint(context.State, binary, false);
-                var negative = LearnBranchingConstraint(context.State, binary, true);
-                return positive == context.State && negative == context.State
-                    ? new[] { context.State }   // We can't learn anything, just move on
-                    : new[]
-                    {
-                        positive.SetOperationConstraint(context.Operation, BoolConstraint.True),
-                        negative.SetOperationConstraint(context.Operation, BoolConstraint.False)
-                    };
-            }
-        }
+        protected override SymbolicConstraint BoolConstraintFromOperation(SymbolicContext context, IBinaryOperationWrapper operation) =>
+            BinaryConstraint(operation.OperatorKind, context.State[operation.LeftOperand], context.State[operation.RightOperand]);
 
-        private static ProgramState LearnBranchingConstraint(ProgramState state, IBinaryOperationWrapper binary, bool useOpposite) =>
-            binary.OperatorKind.IsAnyEquality()
-                ? LearnBranchingConstraint<ObjectConstraint>(state, binary, useOpposite) ?? LearnBranchingConstraint<BoolConstraint>(state, binary, useOpposite) ?? state
+        protected override ProgramState LearnBranchingConstraint(ProgramState state, IBinaryOperationWrapper operation, bool falseBranch) =>
+            operation.OperatorKind.IsAnyEquality()
+                ? LearnBranchingConstraint<ObjectConstraint>(state, operation, falseBranch) ?? LearnBranchingConstraint<BoolConstraint>(state, operation, falseBranch) ?? state
                 : state;
 
-        private static ProgramState LearnBranchingConstraint<T>(ProgramState state, IBinaryOperationWrapper binary, bool useOpposite)
+        private static ProgramState LearnBranchingConstraint<T>(ProgramState state, IBinaryOperationWrapper binary, bool falseBranch)
             where T : SymbolicConstraint
         {
             // We can fall through ?? because "constraint" and "testedSymbol" are exclusive. Symbols with the constraint will be recognized as "constraint" side.
             if ((OperandConstraint(binary.LeftOperand) ?? OperandConstraint(binary.RightOperand)) is { } constraint
                 && (OperandSymbolWithoutConstraint(binary.LeftOperand) ?? OperandSymbolWithoutConstraint(binary.RightOperand)) is { } testedSymbol)
             {
-                constraint = constraint.ApplyOpposite(useOpposite ^ binary.OperatorKind.IsNotEquals());
+                constraint = constraint.ApplyOpposite(falseBranch ^ binary.OperatorKind.IsNotEquals());
                 return constraint is null ? null : state.SetSymbolConstraint(testedSymbol, constraint);
             }
             else

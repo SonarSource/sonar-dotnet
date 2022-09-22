@@ -23,32 +23,17 @@ using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
 {
-    internal static class IsNull
+    internal class IsNull : BranchingProcessor<IIsNullOperationWrapper>
     {
-        public static ProgramState[] Process(SymbolicContext context, IIsNullOperationWrapper isNull)
-        {
-            if (context.State[isNull.Operand] is { } value && value.HasConstraint<ObjectConstraint>())
-            {
-                return new[] { context.SetOperationConstraint(BoolConstraint.From(value.HasConstraint(ObjectConstraint.Null))) };
-            }
-            else
-            {
-                var positive = LearnBranchingConstraint(context.State, isNull, false);
-                var negative = LearnBranchingConstraint(context.State, isNull, true);
-                return positive == context.State && negative == context.State
-                    ? new[] { context.State }   // We can't learn anything, just move on
-                    : new[]
-                    {
-                        positive.SetOperationConstraint(context.Operation, BoolConstraint.True),
-                        negative.SetOperationConstraint(context.Operation, BoolConstraint.False)
-                    };
-            }
-        }
+        protected override SymbolicConstraint BoolConstraintFromOperation(SymbolicContext context, IIsNullOperationWrapper operation) =>
+            context.State[operation.Operand] is { } value && value.HasConstraint<ObjectConstraint>()
+                ? BoolConstraint.From(value.HasConstraint(ObjectConstraint.Null))
+                : null;
 
-        private static ProgramState LearnBranchingConstraint(ProgramState state, IIsNullOperationWrapper isNull, bool useOpposite) =>
-            state.ResolveCapture(isNull.Operand).TrackedSymbol() is { } testedSymbol
+        protected override ProgramState LearnBranchingConstraint(ProgramState state, IIsNullOperationWrapper operation, bool falseBranch) =>
+            state.ResolveCapture(operation.Operand).TrackedSymbol() is { } testedSymbol
                 // Can't use ObjectConstraint.ApplyOpposite() because here, we are sure that it is either Null or NotNull
-                ? state.SetSymbolConstraint(testedSymbol, useOpposite ? ObjectConstraint.NotNull : ObjectConstraint.Null)
+                ? state.SetSymbolConstraint(testedSymbol, falseBranch ? ObjectConstraint.NotNull : ObjectConstraint.Null)
                 : state;
     }
 }

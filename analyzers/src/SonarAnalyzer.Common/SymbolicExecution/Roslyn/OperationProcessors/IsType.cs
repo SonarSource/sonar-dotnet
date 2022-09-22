@@ -23,24 +23,14 @@ using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
-internal static class IsType
+internal class IsType : BranchingProcessor<IIsTypeOperationWrapper>
 {
-    public static ProgramState[] Process(SymbolicContext context, IIsTypeOperationWrapper isType)
-    {
-        var positive = LearnBranchingConstraint(context.State, isType, false);
-        var negative = LearnBranchingConstraint(context.State, isType, true);
-        return positive == context.State && negative == context.State
-            ? new[] { context.State }   // We can't learn anything, just move on
-            : new[]
-            {
-                positive.SetOperationConstraint(context.Operation, BoolConstraint.True),
-                negative.SetOperationConstraint(context.Operation, BoolConstraint.False)
-            };
-    }
+    protected override SymbolicConstraint BoolConstraintFromOperation(SymbolicContext context, IIsTypeOperationWrapper operation) =>
+        null;
 
-    private static ProgramState LearnBranchingConstraint(ProgramState state, IIsTypeOperationWrapper isType, bool useOpposite) =>
-        isType.ValueOperand.TrackedSymbol() is { } testedSymbol
-        && ObjectConstraint.NotNull.ApplyOpposite(useOpposite ^ isType.IsNegated) is { } constraint
+    protected override ProgramState LearnBranchingConstraint(ProgramState state, IIsTypeOperationWrapper operation, bool falseBranch) =>
+        operation.ValueOperand.TrackedSymbol() is { } testedSymbol
+        && ObjectConstraint.NotNull.ApplyOpposite(falseBranch ^ operation.IsNegated) is { } constraint
             ? state.SetSymbolConstraint(testedSymbol, constraint)
             : state;
 }
