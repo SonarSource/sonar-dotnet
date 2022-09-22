@@ -19,6 +19,9 @@
  */
 
 using Microsoft.CodeAnalysis;
+using System.Collections;
+using SonarAnalyzer.Helpers;
+using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
@@ -33,3 +36,68 @@ internal sealed class Conversion : SimpleProcessor<IConversionOperationWrapper>
             ? context.State.SetOperationValue(context.Operation, value)
             : context.State;
 }
+
+    internal static class Conversion
+    {
+        public static ProgramState[] Process(SymbolicContext context, IConversionOperationWrapper conversion)
+        {
+            var operandSymbolValue = context.State[conversion.Operand];
+            var state = operandSymbolValue is { }
+                ? context.State.SetOperationValue(context.Operation, operandSymbolValue)
+                : context.State;
+            return Process(state, conversion, operandSymbolValue);
+        }
+
+        private static ProgramState[] Process(ProgramState state, IConversionOperationWrapper conversion, SymbolicValue operandSymbolValue)
+        {
+            if (conversion.Type.IsValueType || conversion.Type.IsUnconstraintGeneric() || conversion.Operand.Type.IsUnconstraintGeneric())
+            {
+                return new[] { state };
+            }
+            var operandConstraint = operandSymbolValue?.Constraint<ObjectConstraint>();
+            var operandSymbol = conversion.Operand.TrackedSymbol();
+            var targetCanBeNull = conversion.Operand.Type is { IsReferenceType: true };
+            return operandConstraint switch
+            {
+                { } when operandConstraint == ObjectConstraint.Null => new[] { ProcessNull() },
+                { } when operandConstraint == ObjectConstraint.NotNull => new[] { ProcessNotNull() },
+                _ when targetCanBeNull && conversion.Type is { } targetType && conversion.Operand.Type is { } sourceType && sourceType.DerivesOrImplements(targetType) => new[] { state },
+                _ => targetCanBeNull
+                    ? new[] { ProcessNotNull(), ProcessNull() }
+                    : new[] { ProcessNotNull() },
+            };
+
+            ProgramState ProcessNull()
+            {
+                var @null = state.SetOperationConstraint(conversion.WrappedOperation, ObjectConstraint.Null);
+                if (operandSymbol is { })
+                {
+                    if (conversion.IsTryCast)
+                    {
+                        var isUpCast = conversion.Operand.Type.DerivesOrImplements(conversion.Type);
+                        if (isUpCast)
+                        {
+                            @null = @null.SetSymbolConstraint(operandSymbol, ObjectConstraint.Null);
+                        }
+                    }
+                    else
+                    {
+                        @null = @null.SetSymbolConstraint(operandSymbol, ObjectConstraint.Null);
+                    }
+                }
+
+                return @null;
+            }
+
+            ProgramState ProcessNotNull()
+            {
+                var notNull = state.SetOperationConstraint(conversion.WrappedOperation, ObjectConstraint.NotNull);
+                if (operandSymbol is { } && conversion.Operand.Type?.IsReferenceType is true)
+                {
+                    notNull = notNull.SetSymbolConstraint(operandSymbol, ObjectConstraint.NotNull);
+                }
+
+                return notNull;
+            }
+        }
+    }

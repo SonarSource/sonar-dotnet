@@ -40,6 +40,9 @@ namespace SonarAnalyzer.Helpers
         public static bool IsClassOrStruct(this ITypeSymbol self) =>
             self.IsStruct() || self.IsClass();
 
+        public static bool IsUnconstraintGeneric(this ITypeSymbol self) =>
+            self is { IsValueType: false, IsReferenceType: false };
+
         public static bool Is(this ITypeSymbol self, TypeKind typeKind) =>
             self is { } && self.TypeKind == typeKind;
 
@@ -137,6 +140,10 @@ namespace SonarAnalyzer.Helpers
 
         public static bool DerivesFrom(this ITypeSymbol typeSymbol, ITypeSymbol type)
         {
+            if (type?.SpecialType == SpecialType.System_Object)
+            {
+                return true;
+            }
             var currentType = typeSymbol;
             while (currentType != null)
             {

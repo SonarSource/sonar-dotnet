@@ -333,16 +333,16 @@ Tag(""End"", arg);";
             ValidateSetBoolConstraint_TwoStates(testedSymbol, isPattern, OperationKindEx.ConstantPattern, expectedForTrue, expectedForFalse);
 
         [DataTestMethod]
-        [DataRow("objectNotNull is { }", true)]
-        [DataRow("objectNotNull is object { }", true)]
+        //[DataRow("objectNotNull is { }", true)]
+        //[DataRow("objectNotNull is object { }", true)]
         [DataRow("objectNotNull is string { }", null)]
-        [DataRow("objectNull is { }", false)]
-        [DataRow("objectNull is object { }", false)]
-        [DataRow("stringNotNull is { }", true)]
-        [DataRow("stringNotNull is object { }", true)]
-        [DataRow("stringNotNull is { Length: 0 }", null)]
-        [DataRow("stringNull is { Length: 0 }", false)]
-        [DataRow("stringNotNull is { Length: var length }", true)] // only deconstruction
+        //[DataRow("objectNull is { }", false)]
+        //[DataRow("objectNull is object { }", false)]
+        //[DataRow("stringNotNull is { }", true)]
+        //[DataRow("stringNotNull is object { }", true)]
+        //[DataRow("stringNotNull is { Length: 0 }", null)]
+        //[DataRow("stringNull is { Length: 0 }", false)]
+        //[DataRow("stringNotNull is { Length: var length }", true)] // only deconstruction
         public void RecursivePatternPropertySubPatternSetBoolConstraint_SingleState(string isPattern, bool? expectedBoolConstraint) =>
             ValidateSetBoolConstraint(isPattern, OperationKindEx.RecursivePattern, expectedBoolConstraint);
 
