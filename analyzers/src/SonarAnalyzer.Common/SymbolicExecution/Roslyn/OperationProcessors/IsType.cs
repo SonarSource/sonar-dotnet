@@ -25,7 +25,20 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
 internal static class IsType
 {
-    public static ProgramState LearnBranchingConstraint(ProgramState state, IIsTypeOperationWrapper isType, bool useOpposite) =>
+    public static ProgramState[] Process(SymbolicContext context, IIsTypeOperationWrapper isType)
+    {
+        var positive = LearnBranchingConstraint(context.State, isType, false);
+        var negative = LearnBranchingConstraint(context.State, isType, true);
+        return positive == context.State && negative == context.State
+            ? new[] { context.State }   // We can't learn anything, just move on
+            : new[]
+            {
+                positive.SetOperationConstraint(context.Operation, BoolConstraint.True),
+                negative.SetOperationConstraint(context.Operation, BoolConstraint.False)
+            };
+    }
+
+    private static ProgramState LearnBranchingConstraint(ProgramState state, IIsTypeOperationWrapper isType, bool useOpposite) =>
         isType.ValueOperand.TrackedSymbol() is { } testedSymbol
         && ObjectConstraint.NotNull.ApplyOpposite(useOpposite ^ isType.IsNegated) is { } constraint
             ? state.SetSymbolConstraint(testedSymbol, constraint)

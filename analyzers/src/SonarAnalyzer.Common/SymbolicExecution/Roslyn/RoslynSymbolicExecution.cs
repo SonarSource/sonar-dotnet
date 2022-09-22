@@ -272,6 +272,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 OperationKindEx.Binary => Binary.Process(context, As(IBinaryOperationWrapper.FromOperation)),
                 OperationKindEx.IsNull => IsNull.Process(context, As(IIsNullOperationWrapper.FromOperation)),
                 OperationKindEx.IsPattern => Pattern.Process(context, As(IIsPatternOperationWrapper.FromOperation)),
+                OperationKindEx.IsType => IsType.Process(context, As(IIsTypeOperationWrapper.FromOperation)),
                 _ => new[] { context.State }
             };
             return states.Select(x => context.WithState(x));
@@ -308,7 +309,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 : operation.Kind switch
                 {
                     OperationKindEx.Conversion => LearnBranchingConstraintsFromOperation(state, As(IConversionOperationWrapper.FromOperation).Operand, useOpposite),
-                    OperationKindEx.IsType => IsType.LearnBranchingConstraint(state, As(IIsTypeOperationWrapper.FromOperation), useOpposite),
                     _ => state
                 };
 
