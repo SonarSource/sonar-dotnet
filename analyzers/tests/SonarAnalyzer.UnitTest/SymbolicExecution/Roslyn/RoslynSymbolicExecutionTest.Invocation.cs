@@ -433,15 +433,17 @@ finally
 
         [TestMethod]
         public void Invocation_DebugAssert_LearnsBoolConstraint_Simple() =>
-            DebugAssertValues("arg", "bool").Should().HaveCount(1).And.ContainSingle(x => x == null); // FIXME: .HasConstraint(BoolConstraint.True));
+            DebugAssertValues("arg", "bool").Should().HaveCount(1).And.ContainSingle(x => x.HasConstraint(BoolConstraint.True));
 
         [TestMethod]
         public void Invocation_DebugAssert_LearnsBoolConstraint_Binary() =>
             DebugAssertValues("arg == true", "bool").Should().HaveCount(1).And.ContainSingle(x => x.HasConstraint(BoolConstraint.True));
 
-        [TestMethod]
-        public void Invocation_DebugAssert_LearnsBoolConstraint_Negated() =>
-            DebugAssertValues("!arg", "bool").Should().HaveCount(1).And.ContainSingle(x => x == null); // FIXME: .HasConstraint(BoolConstraint.False));
+        [DataTestMethod]
+        [DataRow("!arg")]
+        [DataRow("!!!arg")]
+        public void Invocation_DebugAssert_LearnsBoolConstraint_Negated(string expression) =>
+            DebugAssertValues(expression, "bool").Should().HaveCount(1).And.ContainSingle(x => x.HasConstraint(BoolConstraint.False));
 
         private static SymbolicValue[] DebugAssertValues(string expression, string argType = "object")
         {
