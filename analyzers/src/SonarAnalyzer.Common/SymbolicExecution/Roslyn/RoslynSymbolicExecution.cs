@@ -154,7 +154,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             }
             if (branch.Source.BranchValue is { } branchValue && branch.Source.ConditionalSuccessor is not null) // This branching was conditional
             {
-                state = LearnBranchingConstraints(branch, state, branchValue);
+                state = SetBranchingConstraints(branch, state, branchValue);
                 state = checks.ConditionEvaluated(new(branchValue.ToSonar(), state));
                 if (state is null)
                 {
@@ -295,25 +295,11 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 _ => null
             };
 
-        private static ProgramState LearnBranchingConstraints(ControlFlowBranch branch, ProgramState state, IOperation branchValue)
+        private static ProgramState SetBranchingConstraints(ControlFlowBranch branch, ProgramState state, IOperation branchValue)
         {
-            var trueBranch = (branch.Source.ConditionKind == ControlFlowConditionKind.WhenTrue) == branch.IsConditionalSuccessor;
-            state = state.SetOperationConstraint(branchValue, BoolConstraint.From(trueBranch));
-            return LearnBranchingConstraintsFromOperation(state, branchValue, !trueBranch);
-        }
-
-        private static ProgramState LearnBranchingConstraintsFromOperation(ProgramState state, IOperation operation, bool useOpposite)
-        {
-            return operation.TrackedSymbol() is { } symbol
-                ? state.SetSymbolConstraint(symbol, BoolConstraint.From(!useOpposite))
-                : operation.Kind switch
-                {
-                    OperationKindEx.Conversion => LearnBranchingConstraintsFromOperation(state, As(IConversionOperationWrapper.FromOperation).Operand, useOpposite),
-                    _ => state
-                };
-
-            T As<T>(Func<IOperation, T> fromOperation) =>
-                fromOperation(operation);
+            var constraint = BoolConstraint.From((branch.Source.ConditionKind == ControlFlowConditionKind.WhenTrue) == branch.IsConditionalSuccessor);
+            state = state.SetOperationConstraint(branchValue, constraint);
+            return branchValue.TrackedSymbol() is { } symbol ? state.SetSymbolConstraint(symbol, constraint) : state;
         }
 
         private static ProgramState InitLocals(ControlFlowBranch branch, ProgramState state)
