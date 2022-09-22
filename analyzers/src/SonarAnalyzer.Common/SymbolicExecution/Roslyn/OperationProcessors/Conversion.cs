@@ -20,6 +20,7 @@
 
 using Microsoft.CodeAnalysis;
 using System.Collections;
+using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
@@ -59,45 +60,44 @@ internal sealed class Conversion : SimpleProcessor<IConversionOperationWrapper>
             var targetCanBeNull = conversion.Operand.Type is { IsReferenceType: true };
             return operandConstraint switch
             {
-                { } when operandConstraint == ObjectConstraint.Null => new[] { ProcessNull() },
-                { } when operandConstraint == ObjectConstraint.NotNull => new[] { ProcessNotNull() },
-                _ when targetCanBeNull && conversion.Type is { } targetType && conversion.Operand.Type is { } sourceType && sourceType.DerivesOrImplements(targetType) => new[] { state },
-                _ => targetCanBeNull
-                    ? new[] { ProcessNotNull(), ProcessNull() }
-                    : new[] { ProcessNotNull() },
+                { } when operandConstraint == ObjectConstraint.Null => new[] { ProcessNull(state, conversion, operandSymbol) },
+                { } when operandConstraint == ObjectConstraint.NotNull => new[] { ProcessNotNull(state, conversion, operandSymbol) },
+                //_ when targetCanBeNull && conversion.Type is { } targetType && conversion.Operand.Type is { } sourceType && sourceType.DerivesOrImplements(targetType) => new[] { state },
+                _ when !targetCanBeNull => new[] { state },
+                _ => new[] { ProcessNotNull(state, conversion, operandSymbol), ProcessNull(state, conversion, operandSymbol) },
             };
+        }
 
-            ProgramState ProcessNull()
+        private static ProgramState ProcessNotNull(ProgramState state, IConversionOperationWrapper conversion, ISymbol operandSymbol)
+        {
+            var notNull = state.SetOperationConstraint(conversion.WrappedOperation, ObjectConstraint.NotNull);
+            if (operandSymbol is { } && conversion.Operand.Type?.IsReferenceType is true)
             {
-                var @null = state.SetOperationConstraint(conversion.WrappedOperation, ObjectConstraint.Null);
-                if (operandSymbol is { })
+                notNull = notNull.SetSymbolConstraint(operandSymbol, ObjectConstraint.NotNull);
+            }
+
+            return notNull;
+        }
+
+        private static ProgramState ProcessNull(ProgramState state, IConversionOperationWrapper conversion, ISymbol operandSymbol)
+        {
+            var @null = state.SetOperationConstraint(conversion.WrappedOperation, ObjectConstraint.Null);
+            if (operandSymbol is { })
+            {
+                if (conversion.IsTryCast)
                 {
-                    if (conversion.IsTryCast)
-                    {
-                        var isUpCast = conversion.Operand.Type.DerivesOrImplements(conversion.Type);
-                        if (isUpCast)
-                        {
-                            @null = @null.SetSymbolConstraint(operandSymbol, ObjectConstraint.Null);
-                        }
-                    }
-                    else
+                    var isUpCast = conversion.Operand.Type.DerivesOrImplements(conversion.Type);
+                    if (isUpCast)
                     {
                         @null = @null.SetSymbolConstraint(operandSymbol, ObjectConstraint.Null);
                     }
                 }
-
-                return @null;
-            }
-
-            ProgramState ProcessNotNull()
-            {
-                var notNull = state.SetOperationConstraint(conversion.WrappedOperation, ObjectConstraint.NotNull);
-                if (operandSymbol is { } && conversion.Operand.Type?.IsReferenceType is true)
+                else
                 {
-                    notNull = notNull.SetSymbolConstraint(operandSymbol, ObjectConstraint.NotNull);
+                    @null = @null.SetSymbolConstraint(operandSymbol, ObjectConstraint.Null);
                 }
-
-                return notNull;
             }
+
+            return @null;
         }
     }

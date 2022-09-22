@@ -60,7 +60,7 @@ public class Sample
 {{
     {method}
 
-    private static void Tag(string name, object arg) {{ }}
+    private static void Tag<T>(string name, T arg) {{ }}
     private static T Unknown<T>() => default;
 }}
 
@@ -84,7 +84,7 @@ Public Class Sample
         {methodBody}
     End Sub
 
-    Private Shared Sub Tag(Name As String, Optional Arg As Object = Nothing)
+    Private Shared Sub Tag(Of T)(Name As String, Optional Arg As T = Nothing)
     End Sub
 
 End Class";
@@ -128,7 +128,7 @@ public unsafe class Sample
     public static void StaticMethod() {{ }}
 
     private void Tag(string name) {{ }}
-    private static void Tag(string name, object arg = null) {{ }}
+    private static void Tag<T>(string name, T arg = default) {{ }}
     private static T Unknown<T>() => default;
 }}
 

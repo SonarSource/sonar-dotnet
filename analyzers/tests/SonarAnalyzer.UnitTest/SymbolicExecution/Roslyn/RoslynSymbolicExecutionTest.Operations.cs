@@ -160,14 +160,12 @@ public void Method()
                 @"Literal: ""b""",
                 @"Argument: ""b""",
                 "LocalReference: b",
-                "Conversion: b (Implicit)",
                 "Argument: b",
                 @"Invocation: Tag(""b"", b)",
                 @"ExpressionStatement: Tag(""b"", b);",
                 @"Literal: ""c""",
                 @"Argument: ""c""",
                 "LocalReference: c",
-                "Conversion: c (Implicit)",
                 "Argument: c",
                 @"Invocation: Tag(""c"", c)",
                 @"ExpressionStatement: Tag(""c"", c);");
@@ -187,7 +185,6 @@ public void Method()
                 @"Literal: ""b""",
                 @"Argument: ""b""",
                 "LocalReference: b",
-                "Conversion: b (Implicit)",
                 "Argument: b",
                 @"Invocation: Tag(""b"", b)",
                 @"ExpressionStatement: Tag(""b"", b);");

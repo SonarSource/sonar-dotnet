@@ -67,7 +67,7 @@ public class Sample
     }
 
     private void InstanceMethod() { }
-    private static void Tag(string name, object arg) { }
+    private static void Tag<T>(string name, T arg) { }
     private Sample UntrackedSymbol() => this;
 }
 
@@ -114,7 +114,7 @@ Public Class Sample
     Private Shared Sub StaticMethod()
     End Sub
 
-    Private Shared Sub Tag(Name As String, Arg As Object)
+    Private Shared Sub Tag(Of T)(Name As String, Arg As T)
     End Sub
 
 End Class

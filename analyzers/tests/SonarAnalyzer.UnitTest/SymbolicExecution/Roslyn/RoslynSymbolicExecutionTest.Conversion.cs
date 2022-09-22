@@ -84,8 +84,13 @@ Tag(""End"");
             validator.TagStates("End").Should().SatisfyRespectively(
                 x =>
                 {
-                    x[result].Should().BeNull();
-                    x[exception].Should().BeNull();
+                    x[result].HasConstraint(ObjectConstraint.NotNull).Should().BeTrue();
+                    x[exception].HasConstraint(ObjectConstraint.NotNull).Should().BeTrue();
+                },
+                x =>
+                {
+                    x[result].HasConstraint(ObjectConstraint.Null).Should().BeTrue();
+                    x[exception].HasConstraint(ObjectConstraint.Null).Should().BeTrue();
                 });
         }
     }
