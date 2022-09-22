@@ -20,21 +20,12 @@
 
 using System;
 using Microsoft.CodeAnalysis;
-using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
-internal class IsType : BranchingProcessor<IIsTypeOperationWrapper>
+internal abstract class Processor<T>
+    where T : IOperationWrapper
 {
-    protected override Func<IOperation, IIsTypeOperationWrapper> Convert => IIsTypeOperationWrapper.FromOperation;
-
-    protected override SymbolicConstraint BoolConstraintFromOperation(SymbolicContext context, IIsTypeOperationWrapper operation) =>
-        null;
-
-    protected override ProgramState LearnBranchingConstraint(ProgramState state, IIsTypeOperationWrapper operation, bool falseBranch) =>
-        operation.ValueOperand.TrackedSymbol() is { } testedSymbol
-        && ObjectConstraint.NotNull.ApplyOpposite(falseBranch ^ operation.IsNegated) is { } constraint
-            ? state.SetSymbolConstraint(testedSymbol, constraint)
-            : state;
+    protected abstract Func<IOperation, T> Convert { get; }
 }

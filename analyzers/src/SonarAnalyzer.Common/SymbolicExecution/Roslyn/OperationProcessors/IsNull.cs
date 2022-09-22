@@ -18,22 +18,25 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
+using System;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
-{
-    internal class IsNull : BranchingProcessor<IIsNullOperationWrapper>
-    {
-        protected override SymbolicConstraint BoolConstraintFromOperation(SymbolicContext context, IIsNullOperationWrapper operation) =>
-            context.State[operation.Operand] is { } value && value.HasConstraint<ObjectConstraint>()
-                ? BoolConstraint.From(value.HasConstraint(ObjectConstraint.Null))
-                : null;
+namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
-        protected override ProgramState LearnBranchingConstraint(ProgramState state, IIsNullOperationWrapper operation, bool falseBranch) =>
-            state.ResolveCapture(operation.Operand).TrackedSymbol() is { } testedSymbol
-                // Can't use ObjectConstraint.ApplyOpposite() because here, we are sure that it is either Null or NotNull
-                ? state.SetSymbolConstraint(testedSymbol, falseBranch ? ObjectConstraint.NotNull : ObjectConstraint.Null)
-                : state;
-    }
+internal class IsNull : BranchingProcessor<IIsNullOperationWrapper>
+{
+    protected override Func<IOperation, IIsNullOperationWrapper> Convert => IIsNullOperationWrapper.FromOperation;
+
+    protected override SymbolicConstraint BoolConstraintFromOperation(SymbolicContext context, IIsNullOperationWrapper operation) =>
+        context.State[operation.Operand] is { } value && value.HasConstraint<ObjectConstraint>()
+            ? BoolConstraint.From(value.HasConstraint(ObjectConstraint.Null))
+            : null;
+
+    protected override ProgramState LearnBranchingConstraint(ProgramState state, IIsNullOperationWrapper operation, bool falseBranch) =>
+        state.ResolveCapture(operation.Operand).TrackedSymbol() is { } testedSymbol
+            // Can't use ObjectConstraint.ApplyOpposite() because here, we are sure that it is either Null or NotNull
+            ? state.SetSymbolConstraint(testedSymbol, falseBranch ? ObjectConstraint.NotNull : ObjectConstraint.Null)
+            : state;
 }

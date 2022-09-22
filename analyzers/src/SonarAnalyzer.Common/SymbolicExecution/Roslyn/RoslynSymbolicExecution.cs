@@ -267,15 +267,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             context = context.WithState(state);
 
             // Operations that can return multiple states
-            var states = context.Operation.Instance.Kind switch
-            {
-                OperationKindEx.Binary => Binary.Process(context, As(IBinaryOperationWrapper.FromOperation)),
-                OperationKindEx.IsNull => IsNull.Process(context, As(IIsNullOperationWrapper.FromOperation)),
-                OperationKindEx.IsPattern => Pattern.Process(context, As(IIsPatternOperationWrapper.FromOperation)),
-                OperationKindEx.IsType => IsType.Process(context, As(IIsTypeOperationWrapper.FromOperation)),
-                _ => new[] { context.State }
-            };
-            return states.Select(x => context.WithState(x));
+            return OperationDispatcher.Process(context).Select(x => context.WithState(x));
 
             T As<T>(Func<IOperation, T> fromOperation) =>
                 fromOperation(context.Operation.Instance);

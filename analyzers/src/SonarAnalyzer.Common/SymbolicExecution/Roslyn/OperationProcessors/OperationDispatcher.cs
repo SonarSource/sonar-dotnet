@@ -18,23 +18,24 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
+using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
-using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
-internal class IsType : BranchingProcessor<IIsTypeOperationWrapper>
+internal static class OperationDispatcher
 {
-    protected override Func<IOperation, IIsTypeOperationWrapper> Convert => IIsTypeOperationWrapper.FromOperation;
+    private static readonly Dictionary<OperationKind, IBranchingProcessor> Branching = new()
+    {
+        {OperationKindEx.Binary, new Binary() },
+        { OperationKindEx.IsNull , new IsNull() },
+        { OperationKindEx.IsPattern , new Pattern() },
+        { OperationKindEx.IsType, new IsType() },
+    };
 
-    protected override SymbolicConstraint BoolConstraintFromOperation(SymbolicContext context, IIsTypeOperationWrapper operation) =>
-        null;
-
-    protected override ProgramState LearnBranchingConstraint(ProgramState state, IIsTypeOperationWrapper operation, bool falseBranch) =>
-        operation.ValueOperand.TrackedSymbol() is { } testedSymbol
-        && ObjectConstraint.NotNull.ApplyOpposite(falseBranch ^ operation.IsNegated) is { } constraint
-            ? state.SetSymbolConstraint(testedSymbol, constraint)
-            : state;
+    public static ProgramState[] Process(SymbolicContext context) =>
+        Branching.TryGetValue(context.Operation.Instance.Kind, out var processor)
+            ? processor.Process(context)
+            : new[] { context.State };
 }
