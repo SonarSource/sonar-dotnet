@@ -28,7 +28,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
 internal class Argument : SimpleProcessor<IArgumentOperationWrapper>
 {
-    protected override System.Func<IOperation, IArgumentOperationWrapper> Convert => IArgumentOperationWrapper.FromOperation;
+    protected override IArgumentOperationWrapper Convert(IOperation operation) =>
+        IArgumentOperationWrapper.FromOperation(operation);
 
     protected override ProgramState Process(SymbolicContext context, IArgumentOperationWrapper argument) =>
         ProcessArgument(context.State, argument) ?? context.State;

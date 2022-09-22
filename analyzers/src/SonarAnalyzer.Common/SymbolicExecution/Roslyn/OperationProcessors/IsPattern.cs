@@ -29,7 +29,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
 internal class IsPattern : BranchingProcessor<IIsPatternOperationWrapper>
 {
-    protected override Func<IOperation, IIsPatternOperationWrapper> Convert => IIsPatternOperationWrapper.FromOperation;
+    protected override IIsPatternOperationWrapper Convert(IOperation operation) =>
+        IIsPatternOperationWrapper.FromOperation(operation);
 
     protected override SymbolicConstraint BoolConstraintFromOperation(SymbolicContext context, IIsPatternOperationWrapper operation) =>
         BoolContraintFromConstant(context.State, operation) ?? BoolConstraintFromPattern(context.State, operation);

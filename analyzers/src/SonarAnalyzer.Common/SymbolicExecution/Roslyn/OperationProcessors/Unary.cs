@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
@@ -27,7 +26,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
 internal class Unary : SimpleProcessor<IUnaryOperationWrapper>
 {
-    protected override Func<IOperation, IUnaryOperationWrapper> Convert => IUnaryOperationWrapper.FromOperation;
+    protected override IUnaryOperationWrapper Convert(IOperation operation) =>
+        IUnaryOperationWrapper.FromOperation(operation);
 
     protected override ProgramState Process(SymbolicContext context, IUnaryOperationWrapper unary) =>
         unary.OperatorKind == UnaryOperatorKind.Not

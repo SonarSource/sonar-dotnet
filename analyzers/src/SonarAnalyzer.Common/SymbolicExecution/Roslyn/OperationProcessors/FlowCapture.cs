@@ -25,7 +25,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
 internal class FlowCapture : SimpleProcessor<IFlowCaptureOperationWrapper>
 {
-    protected override System.Func<IOperation, IFlowCaptureOperationWrapper> Convert => IFlowCaptureOperationWrapper.FromOperation;
+    protected override IFlowCaptureOperationWrapper Convert(IOperation operation) =>
+        IFlowCaptureOperationWrapper.FromOperation(operation);
 
     protected override ProgramState Process(SymbolicContext context, IFlowCaptureOperationWrapper capture) =>
         context.State.SetCapture(capture.Id, context.State.ResolveCapture(capture.Value));  // Capture can transitively reference another IFlowCaptureReference

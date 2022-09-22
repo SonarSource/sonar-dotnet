@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.SymbolicExecution.Constraints;
@@ -28,7 +27,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
 internal class Binary : BranchingProcessor<IBinaryOperationWrapper>
 {
-    protected override Func<IOperation, IBinaryOperationWrapper> Convert => IBinaryOperationWrapper.FromOperation;
+    protected override IBinaryOperationWrapper Convert(IOperation operation) =>
+        IBinaryOperationWrapper.FromOperation(operation);
 
     protected override SymbolicConstraint BoolConstraintFromOperation(SymbolicContext context, IBinaryOperationWrapper operation) =>
         BinaryConstraint(operation.OperatorKind, context.State[operation.LeftOperand], context.State[operation.RightOperand]);

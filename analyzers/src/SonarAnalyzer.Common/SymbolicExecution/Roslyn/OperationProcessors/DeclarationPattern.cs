@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
@@ -27,7 +26,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
 internal class DeclarationPattern : SimpleProcessor<IDeclarationPatternOperationWrapper>
 {
-    protected override Func<IOperation, IDeclarationPatternOperationWrapper> Convert => IDeclarationPatternOperationWrapper.FromOperation;
+    protected override IDeclarationPatternOperationWrapper Convert(IOperation operation) =>
+        IDeclarationPatternOperationWrapper.FromOperation(operation);
 
     protected override ProgramState Process(SymbolicContext context, IDeclarationPatternOperationWrapper declaration)
     {

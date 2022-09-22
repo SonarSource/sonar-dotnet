@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
@@ -27,7 +26,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
 internal class RecursivePattern : SimpleProcessor<IRecursivePatternOperationWrapper>
 {
-    protected override Func<IOperation, IRecursivePatternOperationWrapper> Convert => IRecursivePatternOperationWrapper.FromOperation;
+    protected override IRecursivePatternOperationWrapper Convert(IOperation operation) =>
+        IRecursivePatternOperationWrapper.FromOperation(operation);
 
     protected override ProgramState Process(SymbolicContext context, IRecursivePatternOperationWrapper recursive)
     {

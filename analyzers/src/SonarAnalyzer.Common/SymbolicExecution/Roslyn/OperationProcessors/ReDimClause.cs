@@ -26,7 +26,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
 internal class ReDimClause : SimpleProcessor<IReDimClauseOperationWrapper>
 {
-    protected override System.Func<IOperation, IReDimClauseOperationWrapper> Convert => IReDimClauseOperationWrapper.FromOperation;
+    protected override IReDimClauseOperationWrapper Convert(IOperation operation) =>
+        IReDimClauseOperationWrapper.FromOperation(operation);
 
     protected override ProgramState Process(SymbolicContext context, IReDimClauseOperationWrapper reDimClause) =>
         reDimClause.Operand.TrackedSymbol() is { } symbol

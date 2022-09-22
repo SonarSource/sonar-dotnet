@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
@@ -27,7 +26,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
 internal class IsType : BranchingProcessor<IIsTypeOperationWrapper>
 {
-    protected override Func<IOperation, IIsTypeOperationWrapper> Convert => IIsTypeOperationWrapper.FromOperation;
+    protected override IIsTypeOperationWrapper Convert(IOperation operation) =>
+        IIsTypeOperationWrapper.FromOperation(operation);
 
     protected override SymbolicConstraint BoolConstraintFromOperation(SymbolicContext context, IIsTypeOperationWrapper operation) =>
         null;

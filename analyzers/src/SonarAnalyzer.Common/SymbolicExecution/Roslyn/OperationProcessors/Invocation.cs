@@ -26,7 +26,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
 internal class Invocation : SimpleProcessor<IInvocationOperationWrapper>
 {
-    protected override System.Func<IOperation, IInvocationOperationWrapper> Convert => IInvocationOperationWrapper.FromOperation;
+    protected override IInvocationOperationWrapper Convert(IOperation operation) =>
+        IInvocationOperationWrapper.FromOperation(operation);
 
     protected override ProgramState Process(SymbolicContext context, IInvocationOperationWrapper invocation)
     {

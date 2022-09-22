@@ -32,7 +32,8 @@ internal class InstanceReference : ISimpleProcessor
 
 internal class LocalReference : SimpleProcessor<ILocalReferenceOperationWrapper>
 {
-    protected override System.Func<IOperation, ILocalReferenceOperationWrapper> Convert => ILocalReferenceOperationWrapper.FromOperation;
+    protected override ILocalReferenceOperationWrapper Convert(IOperation operation) =>
+        ILocalReferenceOperationWrapper.FromOperation(operation);
 
     protected override ProgramState Process(SymbolicContext context, ILocalReferenceOperationWrapper localReference) =>
         context.State[localReference.Local] is { } value
@@ -42,7 +43,8 @@ internal class LocalReference : SimpleProcessor<ILocalReferenceOperationWrapper>
 
 internal class ParameterReference : SimpleProcessor<IParameterReferenceOperationWrapper>
 {
-    protected override System.Func<IOperation, IParameterReferenceOperationWrapper> Convert => IParameterReferenceOperationWrapper.FromOperation;
+    protected override IParameterReferenceOperationWrapper Convert(IOperation operation) =>
+        IParameterReferenceOperationWrapper.FromOperation(operation);
 
     protected override ProgramState Process(SymbolicContext context, IParameterReferenceOperationWrapper parameterReference) =>
         context.State[parameterReference.Parameter] is { } value
@@ -52,7 +54,8 @@ internal class ParameterReference : SimpleProcessor<IParameterReferenceOperation
 
 internal class FieldReference : SimpleProcessor<IFieldReferenceOperationWrapper>
 {
-    protected override System.Func<IOperation, IFieldReferenceOperationWrapper> Convert => IFieldReferenceOperationWrapper.FromOperation;
+    protected override IFieldReferenceOperationWrapper Convert(IOperation operation) =>
+        IFieldReferenceOperationWrapper.FromOperation(operation);
 
     protected override ProgramState Process(SymbolicContext context, IFieldReferenceOperationWrapper fieldReference)
     {
@@ -67,7 +70,8 @@ internal class FieldReference : SimpleProcessor<IFieldReferenceOperationWrapper>
 
 internal class PropertyReference : SimpleProcessor<IPropertyReferenceOperationWrapper>
 {
-    protected override System.Func<IOperation, IPropertyReferenceOperationWrapper> Convert => IPropertyReferenceOperationWrapper.FromOperation;
+    protected override IPropertyReferenceOperationWrapper Convert(IOperation operation) =>
+        IPropertyReferenceOperationWrapper.FromOperation(operation);
 
     protected override ProgramState Process(SymbolicContext context, IPropertyReferenceOperationWrapper propertyReference) =>
         propertyReference.Instance.TrackedSymbol() is { } symbol
@@ -77,7 +81,8 @@ internal class PropertyReference : SimpleProcessor<IPropertyReferenceOperationWr
 
 internal class ArrayElementReference : SimpleProcessor<IArrayElementReferenceOperationWrapper>
 {
-    protected override System.Func<IOperation, IArrayElementReferenceOperationWrapper> Convert => IArrayElementReferenceOperationWrapper.FromOperation;
+    protected override IArrayElementReferenceOperationWrapper Convert(IOperation operation) =>
+        IArrayElementReferenceOperationWrapper.FromOperation(operation);
 
     protected override ProgramState Process(SymbolicContext context, IArrayElementReferenceOperationWrapper arrayElementReference) =>
         arrayElementReference.ArrayReference.TrackedSymbol() is { } symbol
@@ -87,7 +92,8 @@ internal class ArrayElementReference : SimpleProcessor<IArrayElementReferenceOpe
 
 internal class EventReference : SimpleProcessor<IEventReferenceOperationWrapper>
 {
-    protected override System.Func<IOperation, IEventReferenceOperationWrapper> Convert => IEventReferenceOperationWrapper.FromOperation;
+    protected override IEventReferenceOperationWrapper Convert(IOperation operation) =>
+        IEventReferenceOperationWrapper.FromOperation(operation);
 
     protected override ProgramState Process(SymbolicContext context, IEventReferenceOperationWrapper eventReference) =>
         eventReference.Instance.TrackedSymbol() is { } symbol
