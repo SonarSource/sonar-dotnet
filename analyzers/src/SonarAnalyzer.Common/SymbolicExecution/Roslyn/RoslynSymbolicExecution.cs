@@ -297,11 +297,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         private static ProgramState SetBranchingConstraints(ControlFlowBranch branch, ProgramState state, IOperation branchValue)
         {
-            var trueBranch = (branch.Source.ConditionKind == ControlFlowConditionKind.WhenTrue) == branch.IsConditionalSuccessor;
-            state = state.SetOperationConstraint(branchValue, BoolConstraint.From(trueBranch));
-            return branchValue.TrackedSymbol() is { } symbol
-                ? state.SetSymbolConstraint(symbol, BoolConstraint.From(trueBranch))
-                : state;
+            var constraint = BoolConstraint.From((branch.Source.ConditionKind == ControlFlowConditionKind.WhenTrue) == branch.IsConditionalSuccessor);
+            state = state.SetOperationConstraint(branchValue, constraint);
+            return branchValue.TrackedSymbol() is { } symbol ? state.SetSymbolConstraint(symbol, constraint) : state;
         }
 
         private static ProgramState InitLocals(ControlFlowBranch branch, ProgramState state)
