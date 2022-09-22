@@ -38,7 +38,6 @@ internal class LocalReference : SimpleProcessor<ILocalReferenceOperationWrapper>
         context.State[localReference.Local] is { } value
             ? context.State.SetOperationValue(context.Operation, value)
             : context.State;
-
 }
 
 internal class ParameterReference : SimpleProcessor<IParameterReferenceOperationWrapper>

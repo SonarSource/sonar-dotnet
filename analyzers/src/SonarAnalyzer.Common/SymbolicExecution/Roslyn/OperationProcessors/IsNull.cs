@@ -18,8 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
 using System;
+using Microsoft.CodeAnalysis;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
 
