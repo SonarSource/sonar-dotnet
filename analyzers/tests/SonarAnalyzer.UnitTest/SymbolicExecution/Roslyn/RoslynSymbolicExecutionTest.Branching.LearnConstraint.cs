@@ -466,8 +466,8 @@ if (value = boolParameter)
 
         [DataTestMethod]
         [DataRow("arg is string { }")]
-        [DataRow("arg is string { Length: 0 }")]
         [DataRow("arg is string { }", "TClass")]
+        [DataRow("arg is string { Length: 0 }")]
         [DataRow("arg is string { Length: var length }")]
         [DataRow("arg is int { }")]
         [DataRow("arg is T { }")]
@@ -544,9 +544,9 @@ if (value = boolParameter)
         [DataTestMethod]
         [DataRow("arg is object o")]
         [DataRow("arg is object o", "string")]
+        [DataRow("arg is object o", "TClass")]
         [DataRow("arg is not not object o")]
         [DataRow("!(arg is not object o)")]
-        [DataRow("arg is object o", "TClass")]
         public void Branching_LearnsObjectConstraint_DeclarationPattern_ElseIsNull(string expression, string argType = "object")
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.DeclarationPattern, argType);
