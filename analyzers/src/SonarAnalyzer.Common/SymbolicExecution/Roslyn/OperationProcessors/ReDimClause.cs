@@ -24,18 +24,13 @@ using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
-internal class Unary : SimpleProcessor<IUnaryOperationWrapper>
+internal class ReDimClause : SimpleProcessor<IReDimClauseOperationWrapper>
 {
-    protected override IUnaryOperationWrapper Convert(IOperation operation) =>
-        IUnaryOperationWrapper.FromOperation(operation);
+    protected override IReDimClauseOperationWrapper Convert(IOperation operation) =>
+        IReDimClauseOperationWrapper.FromOperation(operation);
 
-    protected override ProgramState Process(SymbolicContext context, IUnaryOperationWrapper unary) =>
-        unary.OperatorKind == UnaryOperatorKind.Not
-            ? ProcessNot(context.State, unary)
+    protected override ProgramState Process(SymbolicContext context, IReDimClauseOperationWrapper reDimClause) =>
+        reDimClause.Operand.TrackedSymbol() is { } symbol
+            ? context.SetSymbolConstraint(symbol, ObjectConstraint.NotNull)
             : context.State;
-
-    private static ProgramState ProcessNot(ProgramState state, IUnaryOperationWrapper unary) =>
-        state[unary.Operand] is { } value && value.Constraint<BoolConstraint>() is { } boolConstraint
-            ? state.SetOperationConstraint(unary.WrappedOperation, boolConstraint.Opposite)
-            : state;
 }

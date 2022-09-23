@@ -20,11 +20,10 @@
 
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
-namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
+namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
+
+internal class Creation : ISimpleProcessor
 {
-    internal static class Creation
-    {
-        public static ProgramState Process(SymbolicContext context) =>
-            context.SetOperationConstraint(ObjectConstraint.NotNull);
-    }
+    public ProgramState Process(SymbolicContext context) =>
+        context.SetOperationConstraint(ObjectConstraint.NotNull);
 }

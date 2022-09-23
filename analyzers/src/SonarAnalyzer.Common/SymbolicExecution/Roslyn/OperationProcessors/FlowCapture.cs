@@ -18,13 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
 using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
+namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
+
+internal class FlowCapture : SimpleProcessor<IFlowCaptureOperationWrapper>
 {
-    internal static class FlowCapture
-    {
-        public static ProgramState Process(SymbolicContext context, IFlowCaptureOperationWrapper capture) =>
-            context.State.SetCapture(capture.Id, context.State.ResolveCapture(capture.Value));  // Capture can transitively reference another IFlowCaptureReference
-    }
+    protected override IFlowCaptureOperationWrapper Convert(IOperation operation) =>
+        IFlowCaptureOperationWrapper.FromOperation(operation);
+
+    protected override ProgramState Process(SymbolicContext context, IFlowCaptureOperationWrapper capture) =>
+        context.State.SetCapture(capture.Id, context.State.ResolveCapture(capture.Value));  // Capture can transitively reference another IFlowCaptureReference
 }

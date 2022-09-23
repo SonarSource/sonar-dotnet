@@ -18,49 +18,85 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
+namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
+
+internal class InstanceReference : ISimpleProcessor
 {
-    internal static class References
+    public ProgramState Process(SymbolicContext context) =>
+        context.State.SetOperationValue(context.Operation, SymbolicValue.This);     // Implicit and Explicit
+}
+
+internal class LocalReference : SimpleProcessor<ILocalReferenceOperationWrapper>
+{
+    protected override ILocalReferenceOperationWrapper Convert(IOperation operation) =>
+        ILocalReferenceOperationWrapper.FromOperation(operation);
+
+    protected override ProgramState Process(SymbolicContext context, ILocalReferenceOperationWrapper localReference) =>
+        context.State[localReference.Local] is { } value
+            ? context.State.SetOperationValue(context.Operation, value)
+            : context.State;
+}
+
+internal class ParameterReference : SimpleProcessor<IParameterReferenceOperationWrapper>
+{
+    protected override IParameterReferenceOperationWrapper Convert(IOperation operation) =>
+        IParameterReferenceOperationWrapper.FromOperation(operation);
+
+    protected override ProgramState Process(SymbolicContext context, IParameterReferenceOperationWrapper parameterReference) =>
+        context.State[parameterReference.Parameter] is { } value
+            ? context.State.SetOperationValue(context.Operation, value)
+            : context.State;
+}
+
+internal class FieldReference : SimpleProcessor<IFieldReferenceOperationWrapper>
+{
+    protected override IFieldReferenceOperationWrapper Convert(IOperation operation) =>
+        IFieldReferenceOperationWrapper.FromOperation(operation);
+
+    protected override ProgramState Process(SymbolicContext context, IFieldReferenceOperationWrapper fieldReference)
     {
-        public static ProgramState ProcessThis(SymbolicContext context) =>
-            context.State.SetOperationValue(context.Operation, SymbolicValue.This);     // Implicit and Explicit
-
-        public static ProgramState Process(SymbolicContext context, ILocalReferenceOperationWrapper localReference) =>
-            context.State[localReference.Local] is { } value
-                ? context.State.SetOperationValue(context.Operation, value)
-                : context.State;
-
-        public static ProgramState Process(SymbolicContext context, IParameterReferenceOperationWrapper parameterReference) =>
-            context.State[parameterReference.Parameter] is { } value
-                ? context.State.SetOperationValue(context.Operation, value)
-                : context.State;
-
-        public static ProgramState Process(SymbolicContext context, IFieldReferenceOperationWrapper fieldReference)
-        {
-            var state = fieldReference.WrappedOperation.TrackedSymbol() is { } fieldSymbol && context.State[fieldSymbol] is { } value
-                ? context.State.SetOperationValue(context.Operation, value)
-                : context.State;
-            return fieldReference.Instance.TrackedSymbol() is { } instanceSymbol
-                ? state.SetSymbolConstraint(instanceSymbol, ObjectConstraint.NotNull)
-                : state;
-        }
-
-        public static ProgramState Process(SymbolicContext context, IPropertyReferenceOperationWrapper propertyReference) =>
-            propertyReference.Instance.TrackedSymbol() is { } symbol
-                ? context.SetSymbolConstraint(symbol, ObjectConstraint.NotNull)
-                : context.State;
-
-        public static ProgramState Process(SymbolicContext context, IArrayElementReferenceOperationWrapper arrayElementReference) =>
-            arrayElementReference.ArrayReference.TrackedSymbol() is { } symbol
-                ? context.SetSymbolConstraint(symbol, ObjectConstraint.NotNull)
-                : context.State;
-
-        public static ProgramState Process(SymbolicContext context, IEventReferenceOperationWrapper eventReference) =>
-            eventReference.Instance.TrackedSymbol() is { } symbol
-                ? context.SetSymbolConstraint(symbol, ObjectConstraint.NotNull)
-                : context.State;
+        var state = fieldReference.WrappedOperation.TrackedSymbol() is { } fieldSymbol && context.State[fieldSymbol] is { } value
+            ? context.State.SetOperationValue(context.Operation, value)
+            : context.State;
+        return fieldReference.Instance.TrackedSymbol() is { } instanceSymbol
+            ? state.SetSymbolConstraint(instanceSymbol, ObjectConstraint.NotNull)
+            : state;
     }
+}
+
+internal class PropertyReference : SimpleProcessor<IPropertyReferenceOperationWrapper>
+{
+    protected override IPropertyReferenceOperationWrapper Convert(IOperation operation) =>
+        IPropertyReferenceOperationWrapper.FromOperation(operation);
+
+    protected override ProgramState Process(SymbolicContext context, IPropertyReferenceOperationWrapper propertyReference) =>
+        propertyReference.Instance.TrackedSymbol() is { } symbol
+            ? context.SetSymbolConstraint(symbol, ObjectConstraint.NotNull)
+            : context.State;
+}
+
+internal class ArrayElementReference : SimpleProcessor<IArrayElementReferenceOperationWrapper>
+{
+    protected override IArrayElementReferenceOperationWrapper Convert(IOperation operation) =>
+        IArrayElementReferenceOperationWrapper.FromOperation(operation);
+
+    protected override ProgramState Process(SymbolicContext context, IArrayElementReferenceOperationWrapper arrayElementReference) =>
+        arrayElementReference.ArrayReference.TrackedSymbol() is { } symbol
+            ? context.SetSymbolConstraint(symbol, ObjectConstraint.NotNull)
+            : context.State;
+}
+
+internal class EventReference : SimpleProcessor<IEventReferenceOperationWrapper>
+{
+    protected override IEventReferenceOperationWrapper Convert(IOperation operation) =>
+        IEventReferenceOperationWrapper.FromOperation(operation);
+
+    protected override ProgramState Process(SymbolicContext context, IEventReferenceOperationWrapper eventReference) =>
+        eventReference.Instance.TrackedSymbol() is { } symbol
+            ? context.SetSymbolConstraint(symbol, ObjectConstraint.NotNull)
+            : context.State;
 }

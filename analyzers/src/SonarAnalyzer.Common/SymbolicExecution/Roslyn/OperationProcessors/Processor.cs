@@ -19,23 +19,12 @@
  */
 
 using Microsoft.CodeAnalysis;
-using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
-internal class Unary : SimpleProcessor<IUnaryOperationWrapper>
+internal abstract class Processor<T>
+    where T : IOperationWrapper
 {
-    protected override IUnaryOperationWrapper Convert(IOperation operation) =>
-        IUnaryOperationWrapper.FromOperation(operation);
-
-    protected override ProgramState Process(SymbolicContext context, IUnaryOperationWrapper unary) =>
-        unary.OperatorKind == UnaryOperatorKind.Not
-            ? ProcessNot(context.State, unary)
-            : context.State;
-
-    private static ProgramState ProcessNot(ProgramState state, IUnaryOperationWrapper unary) =>
-        state[unary.Operand] is { } value && value.Constraint<BoolConstraint>() is { } boolConstraint
-            ? state.SetOperationConstraint(unary.WrappedOperation, boolConstraint.Opposite)
-            : state;
+    protected abstract T Convert(IOperation operation);
 }

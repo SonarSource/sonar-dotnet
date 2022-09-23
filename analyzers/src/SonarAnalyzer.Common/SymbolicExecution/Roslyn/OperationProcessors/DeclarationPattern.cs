@@ -24,24 +24,25 @@ using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
-internal class Invocation : SimpleProcessor<IInvocationOperationWrapper>
+internal class DeclarationPattern : SimpleProcessor<IDeclarationPatternOperationWrapper>
 {
-    protected override IInvocationOperationWrapper Convert(IOperation operation) =>
-        IInvocationOperationWrapper.FromOperation(operation);
+    protected override IDeclarationPatternOperationWrapper Convert(IOperation operation) =>
+        IDeclarationPatternOperationWrapper.FromOperation(operation);
 
-    protected override ProgramState Process(SymbolicContext context, IInvocationOperationWrapper invocation)
+    protected override ProgramState Process(SymbolicContext context, IDeclarationPatternOperationWrapper declaration)
     {
-        var state = context.State;
-        if (!invocation.TargetMethod.IsStatic             // Also applies to C# extensions
-            && !invocation.TargetMethod.IsExtensionMethod // VB extensions in modules are not marked as static
-            && invocation.Instance.TrackedSymbol() is { } symbol)
+        if (declaration.DeclaredSymbol == null)
         {
-            state = state.SetSymbolConstraint(symbol, ObjectConstraint.NotNull);
+            return context.State;
         }
-        if (invocation.HasThisReceiver())
+        else
         {
-            state = state.ResetFieldConstraints();
+            var state = context.Operation.Parent.AsIsPattern() is { } parentIsPattern && parentIsPattern.Value.TrackedSymbol() is { } sourceSymbol
+                ? context.State.SetSymbolValue(declaration.DeclaredSymbol, context.State[sourceSymbol])  // ToDo: MMF-2563 should define relation between tested and declared symbol
+                : context.State;
+            return declaration.MatchesNull
+                ? state     // "... is var ..." should not set NotNull
+                : state.SetSymbolConstraint(declaration.DeclaredSymbol, ObjectConstraint.NotNull);
         }
-        return state;
     }
 }

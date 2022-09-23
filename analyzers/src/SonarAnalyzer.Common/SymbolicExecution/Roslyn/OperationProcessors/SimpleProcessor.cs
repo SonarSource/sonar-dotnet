@@ -18,24 +18,20 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
-using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
-internal class Unary : SimpleProcessor<IUnaryOperationWrapper>
+internal interface ISimpleProcessor
 {
-    protected override IUnaryOperationWrapper Convert(IOperation operation) =>
-        IUnaryOperationWrapper.FromOperation(operation);
+    public ProgramState Process(SymbolicContext context);
+}
 
-    protected override ProgramState Process(SymbolicContext context, IUnaryOperationWrapper unary) =>
-        unary.OperatorKind == UnaryOperatorKind.Not
-            ? ProcessNot(context.State, unary)
-            : context.State;
+internal abstract class SimpleProcessor<T> : Processor<T>, ISimpleProcessor
+    where T : IOperationWrapper
+{
+    protected abstract ProgramState Process(SymbolicContext context, T operation);
 
-    private static ProgramState ProcessNot(ProgramState state, IUnaryOperationWrapper unary) =>
-        state[unary.Operand] is { } value && value.Constraint<BoolConstraint>() is { } boolConstraint
-            ? state.SetOperationConstraint(unary.WrappedOperation, boolConstraint.Opposite)
-            : state;
+    public ProgramState Process(SymbolicContext context) =>
+        Process(context, Convert(context.Operation.Instance));
 }
