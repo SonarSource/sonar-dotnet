@@ -18,23 +18,25 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
-using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
-internal sealed class IsType : BranchingProcessor<IIsTypeOperationWrapper>
+internal interface IMultiProcessor
 {
-    protected override IIsTypeOperationWrapper Convert(IOperation operation) =>
-        IIsTypeOperationWrapper.FromOperation(operation);
+    public ProgramState[] Process(SymbolicContext context);
+}
 
-    protected override SymbolicConstraint BoolConstraintFromOperation(SymbolicContext context, IIsTypeOperationWrapper operation) =>
-        null;
+/// <summary>
+/// Base class for operation processors - used when operation returns multiple ProgramStates.
+/// See <see cref="SimpleProcessor{T}"/> if you need to return a single ProgramStates.
+/// See <see cref="BranchingProcessor{T}"/> if you need to take a branching decision.
+/// </summary>
+internal abstract class MultiProcessor<T> : Processor<T>, IMultiProcessor
+    where T : IOperationWrapper
+{
+    protected abstract ProgramState[] Process(SymbolicContext context, T operation);
 
-    protected override ProgramState LearnBranchingConstraint(ProgramState state, IIsTypeOperationWrapper operation, bool falseBranch) =>
-        operation.ValueOperand.TrackedSymbol() is { } testedSymbol
-        && ObjectConstraint.NotNull.ApplyOpposite(falseBranch ^ operation.IsNegated) is { } constraint
-            ? state.SetSymbolConstraint(testedSymbol, constraint)
-            : state;
+    public ProgramState[] Process(SymbolicContext context) =>
+        Process(context, Convert(context.Operation.Instance));
 }

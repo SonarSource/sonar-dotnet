@@ -24,7 +24,7 @@ using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
-internal class RecursivePattern : SimpleProcessor<IRecursivePatternOperationWrapper>
+internal sealed class RecursivePattern : SimpleProcessor<IRecursivePatternOperationWrapper>
 {
     protected override IRecursivePatternOperationWrapper Convert(IOperation operation) =>
         IRecursivePatternOperationWrapper.FromOperation(operation);

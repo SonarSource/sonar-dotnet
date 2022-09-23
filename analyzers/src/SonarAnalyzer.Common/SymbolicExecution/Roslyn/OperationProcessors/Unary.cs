@@ -24,7 +24,7 @@ using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
-internal class Unary : SimpleProcessor<IUnaryOperationWrapper>
+internal sealed class Unary : SimpleProcessor<IUnaryOperationWrapper>
 {
     protected override IUnaryOperationWrapper Convert(IOperation operation) =>
         IUnaryOperationWrapper.FromOperation(operation);

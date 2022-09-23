@@ -19,17 +19,18 @@
  */
 
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
-internal class Invocation : SimpleProcessor<IInvocationOperationWrapper>
+internal sealed class Invocation : MultiProcessor<IInvocationOperationWrapper>
 {
     protected override IInvocationOperationWrapper Convert(IOperation operation) =>
         IInvocationOperationWrapper.FromOperation(operation);
 
-    protected override ProgramState Process(SymbolicContext context, IInvocationOperationWrapper invocation)
+    protected override ProgramState[] Process(SymbolicContext context, IInvocationOperationWrapper invocation)
     {
         var state = context.State;
         if (!invocation.TargetMethod.IsStatic             // Also applies to C# extensions
@@ -42,6 +43,22 @@ internal class Invocation : SimpleProcessor<IInvocationOperationWrapper>
         {
             state = state.ResetFieldConstraints();
         }
-        return state;
+        return invocation.TargetMethod.IsAny(KnownType.System_String, nameof(string.IsNullOrEmpty), nameof(string.IsNullOrWhiteSpace))
+            ? ProcessStringIsNullOrEmpty(context, invocation)
+            : new[] { state };
     }
+
+    private static ProgramState[] ProcessStringIsNullOrEmpty(SymbolicContext context, IInvocationOperationWrapper invocation) =>
+        context.State[invocation.Arguments[0].ToArgument().Value]?.Constraint<ObjectConstraint>() switch
+        {
+            ObjectConstraint constraint when constraint == ObjectConstraint.NotNull => new[] { context.State },    // The "normal" state handling reflects already what is going on.
+            ObjectConstraint constraint when constraint == ObjectConstraint.Null => new[] { context.SetOperationConstraint(BoolConstraint.True) }, // IsNullOrEmpty(arg) returns true if arg is null
+            _ when invocation.Arguments[0].TrackedSymbol() is { } argumentSymbol => new[]       // Explode the known states, these methods can create.
+            {
+                        context.SetOperationConstraint(BoolConstraint.True).SetSymbolConstraint(argumentSymbol, ObjectConstraint.Null),
+                        context.SetOperationConstraint(BoolConstraint.True).SetSymbolConstraint(argumentSymbol, ObjectConstraint.NotNull),
+                        context.SetOperationConstraint(BoolConstraint.False).SetSymbolConstraint(argumentSymbol, ObjectConstraint.NotNull),
+            },
+            _ => new[] { context.State }
+        };
 }

@@ -23,21 +23,18 @@ using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
-internal interface IBranchingProcessor
-{
-    public ProgramState[] Process(SymbolicContext context);
-}
-
-internal abstract class BranchingProcessor<T> : Processor<T>, IBranchingProcessor
+/// <summary>
+/// Base class for operation processors - used when operation takes a branching decision.
+/// See <see cref="SimpleProcessor{T}"/> if you need to return a single ProgramStates.
+/// See <see cref="BranchingProcessor{T}"/> if you just need to return multiple ProgramStates.
+/// </summary>
+internal abstract class BranchingProcessor<T> : MultiProcessor<T>
     where T : IOperationWrapper
 {
     protected abstract SymbolicConstraint BoolConstraintFromOperation(SymbolicContext context, T operation);
     protected abstract ProgramState LearnBranchingConstraint(ProgramState state, T operation, bool falseBranch);
 
-    public ProgramState[] Process(SymbolicContext context) =>
-        Process(context, Convert(context.Operation.Instance));
-
-    public ProgramState[] Process(SymbolicContext context, T operation)
+    protected override ProgramState[] Process(SymbolicContext context, T operation)
     {
         if (BoolConstraintFromOperation(context, operation) is { } constraint)
         {

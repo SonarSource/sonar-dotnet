@@ -23,7 +23,7 @@ using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
-internal class FlowCapture : SimpleProcessor<IFlowCaptureOperationWrapper>
+internal sealed class FlowCapture : SimpleProcessor<IFlowCaptureOperationWrapper>
 {
     protected override IFlowCaptureOperationWrapper Convert(IOperation operation) =>
         IFlowCaptureOperationWrapper.FromOperation(operation);

@@ -24,13 +24,13 @@ using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
-internal class InstanceReference : ISimpleProcessor
+internal sealed class InstanceReference : ISimpleProcessor
 {
     public ProgramState Process(SymbolicContext context) =>
         context.State.SetOperationValue(context.Operation, SymbolicValue.This);     // Implicit and Explicit
 }
 
-internal class LocalReference : SimpleProcessor<ILocalReferenceOperationWrapper>
+internal sealed class LocalReference : SimpleProcessor<ILocalReferenceOperationWrapper>
 {
     protected override ILocalReferenceOperationWrapper Convert(IOperation operation) =>
         ILocalReferenceOperationWrapper.FromOperation(operation);
@@ -41,7 +41,7 @@ internal class LocalReference : SimpleProcessor<ILocalReferenceOperationWrapper>
             : context.State;
 }
 
-internal class ParameterReference : SimpleProcessor<IParameterReferenceOperationWrapper>
+internal sealed class ParameterReference : SimpleProcessor<IParameterReferenceOperationWrapper>
 {
     protected override IParameterReferenceOperationWrapper Convert(IOperation operation) =>
         IParameterReferenceOperationWrapper.FromOperation(operation);
@@ -52,7 +52,7 @@ internal class ParameterReference : SimpleProcessor<IParameterReferenceOperation
             : context.State;
 }
 
-internal class FieldReference : SimpleProcessor<IFieldReferenceOperationWrapper>
+internal sealed class FieldReference : SimpleProcessor<IFieldReferenceOperationWrapper>
 {
     protected override IFieldReferenceOperationWrapper Convert(IOperation operation) =>
         IFieldReferenceOperationWrapper.FromOperation(operation);
@@ -68,7 +68,7 @@ internal class FieldReference : SimpleProcessor<IFieldReferenceOperationWrapper>
     }
 }
 
-internal class PropertyReference : SimpleProcessor<IPropertyReferenceOperationWrapper>
+internal sealed class PropertyReference : SimpleProcessor<IPropertyReferenceOperationWrapper>
 {
     protected override IPropertyReferenceOperationWrapper Convert(IOperation operation) =>
         IPropertyReferenceOperationWrapper.FromOperation(operation);
@@ -79,7 +79,7 @@ internal class PropertyReference : SimpleProcessor<IPropertyReferenceOperationWr
             : context.State;
 }
 
-internal class ArrayElementReference : SimpleProcessor<IArrayElementReferenceOperationWrapper>
+internal sealed class ArrayElementReference : SimpleProcessor<IArrayElementReferenceOperationWrapper>
 {
     protected override IArrayElementReferenceOperationWrapper Convert(IOperation operation) =>
         IArrayElementReferenceOperationWrapper.FromOperation(operation);
@@ -90,7 +90,7 @@ internal class ArrayElementReference : SimpleProcessor<IArrayElementReferenceOpe
             : context.State;
 }
 
-internal class EventReference : SimpleProcessor<IEventReferenceOperationWrapper>
+internal sealed class EventReference : SimpleProcessor<IEventReferenceOperationWrapper>
 {
     protected override IEventReferenceOperationWrapper Convert(IOperation operation) =>
         IEventReferenceOperationWrapper.FromOperation(operation);

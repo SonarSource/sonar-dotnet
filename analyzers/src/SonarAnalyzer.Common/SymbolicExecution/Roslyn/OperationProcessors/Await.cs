@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
-internal class Await : ISimpleProcessor
+internal sealed class Await : ISimpleProcessor
 {
     public ProgramState Process(SymbolicContext context) =>
         context.State.ResetFieldConstraints();

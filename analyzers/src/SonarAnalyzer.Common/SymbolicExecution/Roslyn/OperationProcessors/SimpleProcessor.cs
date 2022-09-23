@@ -27,6 +27,10 @@ internal interface ISimpleProcessor
     public ProgramState Process(SymbolicContext context);
 }
 
+/// <summary>
+/// Base class for operation processors - used when operation returns only a single ProgramState.
+/// See <see cref="MultiProcessor{T}"/> or <see cref="BranchingProcessor{T}"/> if you need to return multiple ProgramStates.
+/// </summary>
 internal abstract class SimpleProcessor<T> : Processor<T>, ISimpleProcessor
     where T : IOperationWrapper
 {
