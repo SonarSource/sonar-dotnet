@@ -754,6 +754,16 @@ namespace OtherNamespace
     public sealed class TerminatesProgramAttribute : Attribute {{ }}
     public sealed class DoesNotReturnAttribute : Attribute {{ }}
 }}
+namespace OtherNamespace.WithAttributeSuffix
+{{
+    public sealed class TerminatesProgramAttribute : Attribute {{ }}
+    public sealed class DoesNotReturnAttribute : Attribute {{ }}
+}}
+namespace OtherNamespace.WithoutAttributeSuffix
+{{
+    public sealed class TerminatesProgram : Attribute {{ }}
+    public sealed class DoesNotReturn : Attribute {{ }}
+}}
 ";
 #if NETFRAMEWORK
             code += @"
