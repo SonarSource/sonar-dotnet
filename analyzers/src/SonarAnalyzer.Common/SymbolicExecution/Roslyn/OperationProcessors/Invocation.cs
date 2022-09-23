@@ -19,6 +19,7 @@
  */
 
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
 
@@ -42,6 +43,22 @@ internal class Invocation : MultiProcessor<IInvocationOperationWrapper>
         {
             state = state.ResetFieldConstraints();
         }
-        return new[] { state };
+        return invocation.TargetMethod.IsAny(KnownType.System_String, nameof(string.IsNullOrEmpty), nameof(string.IsNullOrWhiteSpace))
+            ? ProcessStringIsNullOrEmpty(context, invocation)
+            : new[] { state };
     }
+
+    private static ProgramState[] ProcessStringIsNullOrEmpty(SymbolicContext context, IInvocationOperationWrapper invocation) =>
+        context.State[invocation.Arguments[0].ToArgument().Value]?.Constraint<ObjectConstraint>() switch
+        {
+            ObjectConstraint constraint when constraint == ObjectConstraint.NotNull => new[] { context.State },    // The "normal" state handling reflects already what is going on.
+            ObjectConstraint constraint when constraint == ObjectConstraint.Null => new[] { context.SetOperationConstraint(BoolConstraint.True) }, // IsNullOrEmpty(arg) returns true if arg is null
+            _ when invocation.Arguments[0].TrackedSymbol() is { } argumentSymbol => new[]       // Explode the known states, these methods can create.
+            {
+                        context.SetOperationConstraint(BoolConstraint.True).SetSymbolConstraint(argumentSymbol, ObjectConstraint.Null),
+                        context.SetOperationConstraint(BoolConstraint.True).SetSymbolConstraint(argumentSymbol, ObjectConstraint.NotNull),
+                        context.SetOperationConstraint(BoolConstraint.False).SetSymbolConstraint(argumentSymbol, ObjectConstraint.NotNull),
+            },
+            _ => new[] { context.State }
+        };
 }
