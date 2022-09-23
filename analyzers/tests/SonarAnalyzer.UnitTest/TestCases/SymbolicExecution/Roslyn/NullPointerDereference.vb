@@ -1,4 +1,5 @@
 ﻿Imports System
+Imports System.Text.RegularExpressions
 Imports System.Threading.Tasks
 
 Public Class Program
@@ -74,6 +75,11 @@ Public Class Program
         Dim T As Task
         Await T         ' Noncompliant
     End Function
+
+    Public Sub Linq(Items() As Object)
+        Dim Result = From Item In Items Where Item IsNot Nothing
+        If Result.Count > 0 Then Result(0).ToString()   ' Noncompliant FP
+    End Sub
 
 End Class
 
