@@ -561,7 +561,11 @@ Tag(""End"");
 
         [DataTestMethod]
         [DataRow("System.Diagnostics.CodeAnalysis.DoesNotReturn")]
+        [DataRow("OtherNamespace.WithAttributeSuffix.DoesNotReturn")]
+        [DataRow("OtherNamespace.WithoutAttributeSuffix.DoesNotReturn")]
         [DataRow("JetBrains.Annotations.TerminatesProgram")]
+        [DataRow("OtherNamespace.WithAttributeSuffix.TerminatesProgram")]
+        [DataRow("OtherNamespace.WithoutAttributeSuffix.TerminatesProgram")]
         public void Invocation_ThrowHelper_Attributes(string throwHelperAttribute)
         {
             var code = $@"
@@ -590,6 +594,16 @@ namespace JetBrains.Annotations
 {{
     public sealed class TerminatesProgramAttribute : Attribute {{ }}
 }}
+namespace OtherNamespace.WithAttributeSuffix
+{{
+    public sealed class TerminatesProgramAttribute : Attribute {{ }}
+    public sealed class DoesNotReturnAttribute : Attribute {{ }}
+}}
+namespace OtherNamespace.WithoutAttributeSuffix
+{{
+    public sealed class TerminatesProgram : Attribute {{ }}
+    public sealed class DoesNotReturn : Attribute {{ }}
+}}
 ";
 #if NETFRAMEWORK
             code += @"
@@ -602,6 +616,44 @@ namespace System.Diagnostics.CodeAnalysis
             var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
             validator.ValidateTagOrder("Before");
             validator.ValidateExitReachCount(0);
+            validator.ValidateExecutionCompleted();
+        }
+
+        [DataTestMethod]
+        [DataRow("DoesTerminatesProgramAttribute")]
+        [DataRow("TerminatesMyProgramAttribute")]
+        [DataRow("TerminatesProgramAttributeS")]
+        [DataRow("DoesNotReturnEver")]
+        [DataRow("ItDoesNotReturn")]
+        public void Invocation_ThrowHelper_OtherAttributes(string attributeName)
+        {
+            var code = $@"
+using System;
+using System.Diagnostics;
+
+public class Sample
+{{
+    public void Test()
+    {{
+        Tag(""Before"");
+        ThrowHelper();
+        Tag(""After"");
+    }}
+
+    [{attributeName}]
+    public void ThrowHelper()
+    {{
+        // No implementation. The attribute should drive the analysis.
+    }}
+
+    static void Tag(string name) {{ }}
+}}
+
+public sealed class {attributeName}: Attribute {{ }}
+";
+            var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
+            validator.ValidateTagOrder("Before", "After");
+            validator.ValidateExitReachCount(1);
             validator.ValidateExecutionCompleted();
         }
 
