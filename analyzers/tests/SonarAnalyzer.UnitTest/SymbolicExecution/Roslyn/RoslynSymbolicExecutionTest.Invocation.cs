@@ -418,16 +418,13 @@ finally
         [DataRow("arg.Append(arg)")]
         [DataRow("arg.AsEnumerable()")]
         [DataRow("arg.Cast<string>()")]
-        [DataRow("arg.Chunk(42)")]
         [DataRow("arg.Concat(arg)")]
         [DataRow("arg.Distinct()")]
-        [DataRow("arg.DistinctBy(x => x)")]
         [DataRow("Enumerable.Empty<string>()")]
         [DataRow("arg.Except(arg)")]
         [DataRow("arg.GroupBy(x => x);")]
         [DataRow("arg.GroupJoin(arg, x => x, x => x, (x, lst) => x);")]
         [DataRow("arg.Intersect(arg);")]
-        [DataRow("arg.IntersectBy(arg, x => x);")]
         [DataRow("arg.Join(arg, x => x, x => x, (x, lst) => x);")]
         [DataRow("arg.OfType<string>();")]
         [DataRow("arg.OrderBy(x => x);")]
@@ -448,9 +445,14 @@ finally
         [DataRow("arg.ToList();")]
         [DataRow("arg.ToLookup(x => x);")]
         [DataRow("arg.Union(arg);")]
-        [DataRow("arg.UnionBy(arg, x => x);")]
         [DataRow("arg.Where(x => x is not null);")]
-        [DataRow("arg.Zip(arg);")]
+        [DataRow("arg.Zip(arg, (x, y) => x);")]
+#if NET
+        [DataRow("arg.Chunk(42)")]
+        [DataRow("arg.DistinctBy(x => x)")]
+        [DataRow("arg.IntersectBy(arg, x => x);")]
+        [DataRow("arg.UnionBy(arg, x => x);")]
+#endif
         public void Invocation_LinqEnumerable_NotNull(string expression)
         {
             var code = $@"
