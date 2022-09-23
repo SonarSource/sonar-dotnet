@@ -19,7 +19,6 @@
  */
 
 using System;
-using System.Diagnostics;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 
@@ -30,18 +29,23 @@ namespace SonarAnalyzer.Extensions
         public static bool HasName(this AttributeData attribute, string name)
         {
             const StringComparison comparision = StringComparison.OrdinalIgnoreCase;
-
-            Debug.Assert(name != null && !name.EndsWith("attribute", comparision), "The class name should be without the Attribute suffix.");
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new ArgumentException($"'{nameof(name)}' cannot be null or whitespace.", nameof(name));
+            }
+            if (name.EndsWith("attribute", comparision))
+            {
+                throw new ArgumentException($"The class name '{name}' should not have the Attribute suffix.", nameof(name));
+            }
 
             return attribute is { AttributeClass.Name: { } attributeClassName }
                 && attributeClassName.StartsWith(name, comparision)
                 && (attributeClassName.Equals($"{name}Attribute", comparision) || attributeClassName.Equals(name, comparision));
         }
 
-        public static bool HasAnyName(this AttributeData attribute, string name, string name2)
-            => attribute.HasName(name) || attribute.HasName(name2);
-
-        public static bool HasAnyName(this AttributeData attribute, string name, string name2, params string[] otherNames)
-            => attribute.HasAnyName(name, name2) || otherNames.Any(x => attribute.HasName(x));
+        public static bool HasAnyName(this AttributeData attribute, params string[] otherNames) =>
+            otherNames.Length == 0
+                ? throw new ArgumentException("Provide at least one attribute name.", nameof(otherNames))
+                : otherNames.Any(x => attribute.HasName(x));
     }
 }
