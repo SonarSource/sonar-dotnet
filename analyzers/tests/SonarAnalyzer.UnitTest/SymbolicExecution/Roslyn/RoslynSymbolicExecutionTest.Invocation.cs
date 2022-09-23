@@ -588,8 +588,6 @@ public class Sample
 
 namespace JetBrains.Annotations
 {{
-    [Obsolete(""Use [ContractAnnotation('=> halt')] instead"")]
-    [AttributeUsage(AttributeTargets.Method)]
     public sealed class TerminatesProgramAttribute : Attribute {{ }}
 }}
 ";
@@ -607,14 +605,12 @@ namespace System.Diagnostics.CodeAnalysis
             validator.ValidateExecutionCompleted();
         }
 
-        private static IEnumerable<object[]> ThrowHelperCalls
-        {
-            get
+        private static IEnumerable<object[]> ThrowHelperCalls =>
+            new object[][]
             {
-                yield return new object[] { @"System.Diagnostics.Debug.Fail(""Fail"");" };
-                yield return new object[] { @"Environment.FailFast(""Fail"");" };
-                yield return new object[] { @"Environment.Exit(-1);" };
-            }
-        }
+                new[] { @"System.Diagnostics.Debug.Fail(""Fail"");" },
+                new[] { @"Environment.FailFast(""Fail"");" },
+                new[] { @"Environment.Exit(-1);" },
+            };
     }
 }
