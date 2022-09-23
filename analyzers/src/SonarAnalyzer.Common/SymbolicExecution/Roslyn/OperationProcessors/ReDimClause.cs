@@ -24,7 +24,7 @@ using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
-internal class ReDimClause : SimpleProcessor<IReDimClauseOperationWrapper>
+internal sealed class ReDimClause : SimpleProcessor<IReDimClauseOperationWrapper>
 {
     protected override IReDimClauseOperationWrapper Convert(IOperation operation) =>
         IReDimClauseOperationWrapper.FromOperation(operation);

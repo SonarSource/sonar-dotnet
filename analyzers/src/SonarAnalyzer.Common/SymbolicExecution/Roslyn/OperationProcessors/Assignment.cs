@@ -23,7 +23,7 @@ using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
-internal class Assignment : SimpleProcessor<ISimpleAssignmentOperationWrapper>
+internal sealed class Assignment : SimpleProcessor<ISimpleAssignmentOperationWrapper>
 {
     protected override ISimpleAssignmentOperationWrapper Convert(IOperation operation) =>
         ISimpleAssignmentOperationWrapper.FromOperation(operation);

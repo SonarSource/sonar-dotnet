@@ -22,7 +22,7 @@ using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
-internal class Creation : ISimpleProcessor
+internal sealed class Creation : ISimpleProcessor
 {
     public ProgramState Process(SymbolicContext context) =>
         context.SetOperationConstraint(ObjectConstraint.NotNull);

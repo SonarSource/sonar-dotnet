@@ -27,7 +27,7 @@ using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
-internal class IsPattern : BranchingProcessor<IIsPatternOperationWrapper>
+internal sealed class IsPattern : BranchingProcessor<IIsPatternOperationWrapper>
 {
     protected override IIsPatternOperationWrapper Convert(IOperation operation) =>
         IIsPatternOperationWrapper.FromOperation(operation);

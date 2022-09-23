@@ -24,7 +24,7 @@ using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
-internal class DeclarationPattern : SimpleProcessor<IDeclarationPatternOperationWrapper>
+internal sealed class DeclarationPattern : SimpleProcessor<IDeclarationPatternOperationWrapper>
 {
     protected override IDeclarationPatternOperationWrapper Convert(IOperation operation) =>
         IDeclarationPatternOperationWrapper.FromOperation(operation);

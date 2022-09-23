@@ -25,7 +25,7 @@ using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
-internal class Invocation : MultiProcessor<IInvocationOperationWrapper>
+internal sealed class Invocation : MultiProcessor<IInvocationOperationWrapper>
 {
     protected override IInvocationOperationWrapper Convert(IOperation operation) =>
         IInvocationOperationWrapper.FromOperation(operation);
