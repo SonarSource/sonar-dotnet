@@ -1,0 +1,134 @@
+{
+"issues":  [
+{
+"id":  "S2259",
+"message":  "'vresFlag' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"region":  {
+"startLine":  327,
+"startColumn":  112,
+"endLine":  327,
+"endColumn":  120
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'vresFlag' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"region":  {
+"startLine":  331,
+"startColumn":  116,
+"endLine":  331,
+"endColumn":  124
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'vsourceFlag' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"region":  {
+"startLine":  339,
+"startColumn":  115,
+"endLine":  339,
+"endColumn":  126
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'vsourceFlag' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"region":  {
+"startLine":  343,
+"startColumn":  119,
+"endLine":  343,
+"endColumn":  130
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'vcodecFlag' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"region":  {
+"startLine":  351,
+"startColumn":  113,
+"endLine":  351,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'vcodecFlag' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"region":  {
+"startLine":  355,
+"startColumn":  117,
+"endLine":  355,
+"endColumn":  127
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'acodecFlag' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"region":  {
+"startLine":  363,
+"startColumn":  113,
+"endLine":  363,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'acodecFlag' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"region":  {
+"startLine":  367,
+"startColumn":  117,
+"endLine":  367,
+"endColumn":  127
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'achanFlag' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"region":  {
+"startLine":  375,
+"startColumn":  113,
+"endLine":  375,
+"endColumn":  122
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'achanFlag' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"region":  {
+"startLine":  379,
+"startColumn":  117,
+"endLine":  379,
+"endColumn":  126
+}
+}
+}
+]
+}
