@@ -415,6 +415,28 @@ finally
         }
 
         [DataTestMethod]
+        public void Invocation_LinqEnumerable_NotNull(string method)
+        {
+            var code = $@"
+var value = arg.{method}();
+Tag(""Value"", value);";
+            var validator = SETestContext.CreateCS(code, ", IEnumerable<object> arg").Validator;
+            //FIXME: Assert
+        }
+
+        [DataTestMethod]
+        public void Invocation_LinqEnumerable_NullOrNotNull(string method)
+        {
+
+        }
+
+        [DataTestMethod]    // Just a few examples to demonstrate that we don't set it for all
+        public void Invocation_LinqEnumerable_Unknown(string method, string itemType)
+        {
+
+        }
+
+        [DataTestMethod]
         [DataRow("arg != null")]
         [DataRow("arg is not null")]
         [DataRow("arg is { }")]
