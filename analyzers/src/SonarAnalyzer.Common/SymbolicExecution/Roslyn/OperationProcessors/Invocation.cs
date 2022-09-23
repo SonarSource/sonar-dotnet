@@ -73,10 +73,8 @@ internal sealed class Invocation : MultiProcessor<IInvocationOperationWrapper>
             case "IntersectBy":
             case nameof(Enumerable.Join):
             case nameof(Enumerable.OfType):
-            case "Order":
             case nameof(Enumerable.OrderBy):
             case nameof(Enumerable.OrderByDescending):
-            case "OrderDescending":
             case "Prepend":
             case nameof(Enumerable.Repeat):
             case nameof(Enumerable.Reverse):
