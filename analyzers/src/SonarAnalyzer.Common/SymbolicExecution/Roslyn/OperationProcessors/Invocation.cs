@@ -96,7 +96,7 @@ internal sealed class Invocation : MultiProcessor<IInvocationOperationWrapper>
             case nameof(Enumerable.Zip):
                 return new[] { context.SetOperationConstraint(ObjectConstraint.NotNull) };
 
-            case nameof(Enumerable.ElementAtOrDefault):
+            // ElementAtOrDefault is intentionally not supported. It's causing many FPs
             case nameof(Enumerable.FirstOrDefault):
             case nameof(Enumerable.LastOrDefault):
             case nameof(Enumerable.SingleOrDefault):

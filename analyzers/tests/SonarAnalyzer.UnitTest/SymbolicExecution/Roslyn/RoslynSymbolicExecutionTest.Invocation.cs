@@ -463,7 +463,6 @@ Tag(""Value"", value);";
         }
 
         [DataTestMethod]
-        [DataRow("ElementAtOrDefault(42);")]
         [DataRow("FirstOrDefault();")]
         [DataRow("LastOrDefault();")]
         [DataRow("SingleOrDefault();")]
@@ -486,12 +485,26 @@ Tag(""Value"", value);";
         [DataRow("int", "FirstOrDefault();")]
         [DataRow("int", "LastOrDefault();")]
         [DataRow("int", "SingleOrDefault();")]
+        [DataRow("object", "ElementAtOrDefault(42);")]
         public void Invocation_LinqEnumerable_Unknown(string itemType, string expression)
         {
             var code = $@"
 var value = arg.{expression};
 Tag(""Value"", value);";
             var validator = SETestContext.CreateCS(code, $", IEnumerable<{itemType}> arg").Validator;
+            validator.ValidateTag("Value", x => x.Should().BeNull());
+        }
+
+        [TestMethod]
+        public void Invocation_Linq_VB()
+        {
+            const string code = @"
+Dim Query = From Item In Items Where Item IsNot Nothing
+If Query.Count <> 0 Then
+    Dim Value = Query(0)
+    Tag(""Value"", Value)
+End If";
+            var validator = SETestContext.CreateVB(code, ", Items() As Object").Validator;
             validator.ValidateTag("Value", x => x.Should().BeNull());
         }
 

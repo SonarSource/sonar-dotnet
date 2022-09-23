@@ -78,7 +78,7 @@ Public Class Program
 
     Public Sub Linq(Items() As Object)
         Dim Result = From Item In Items Where Item IsNot Nothing
-        If Result.Count > 0 Then Result(0).ToString()   ' Noncompliant FP
+        If Result.Count > 0 Then Result(0).ToString()   ' Compliant
     End Sub
 
 End Class
