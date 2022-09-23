@@ -28,9 +28,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn;
 
 internal static class OperationDispatcher
 {
-    private static readonly Dictionary<OperationKind, IBranchingProcessor> Branching = new()
+    private static readonly Dictionary<OperationKind, IMultiProcessor> Branching = new()
     {
         { OperationKindEx.Binary, new Binary() },
+        { OperationKindEx.Invocation, new Invocation() },
         { OperationKindEx.IsNull, new IsNull() },
         { OperationKindEx.IsPattern, new IsPattern() },
         { OperationKindEx.IsType, new IsType() }
@@ -51,7 +52,6 @@ internal static class OperationDispatcher
         { OperationKindEx.FieldReference, new FieldReference() },
         { OperationKindEx.FlowCapture, new FlowCapture() },
         { OperationKindEx.InstanceReference, new InstanceReference() },
-        { OperationKindEx.Invocation, new Invocation() },
         { OperationKindEx.LocalReference, new LocalReference() },
         { OperationKindEx.ObjectCreation, new Creation() },
         { OperationKindEx.ParameterReference, new ParameterReference() },

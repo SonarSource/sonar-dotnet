@@ -18,30 +18,25 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
-using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
-internal class Invocation : MultiProcessor<IInvocationOperationWrapper>
+internal interface IMultiProcessor
 {
-    protected override IInvocationOperationWrapper Convert(IOperation operation) =>
-        IInvocationOperationWrapper.FromOperation(operation);
+    public ProgramState[] Process(SymbolicContext context);
+}
 
-    protected override ProgramState[] Process(SymbolicContext context, IInvocationOperationWrapper invocation)
-    {
-        var state = context.State;
-        if (!invocation.TargetMethod.IsStatic             // Also applies to C# extensions
-            && !invocation.TargetMethod.IsExtensionMethod // VB extensions in modules are not marked as static
-            && invocation.Instance.TrackedSymbol() is { } symbol)
-        {
-            state = state.SetSymbolConstraint(symbol, ObjectConstraint.NotNull);
-        }
-        if (invocation.HasThisReceiver())
-        {
-            state = state.ResetFieldConstraints();
-        }
-        return new[] { state };
-    }
+/// <summary>
+/// Base class for operation processors - used when operation returns multiple ProgramStates.
+/// See <see cref="SimpleProcessor{T}"/> if you need to return a single ProgramStates.
+/// See <see cref="BranchingProcessor{T}"/> if you need to take a branching decision.
+/// </summary>
+internal abstract class MultiProcessor<T> : Processor<T>, IMultiProcessor
+    where T : IOperationWrapper
+{
+    protected abstract ProgramState[] Process(SymbolicContext context, T operation);
+
+    public ProgramState[] Process(SymbolicContext context) =>
+        Process(context, Convert(context.Operation.Instance));
 }
