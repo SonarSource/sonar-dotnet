@@ -33,6 +33,9 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [DataRow(true, "Test", "TEST")]
         [DataRow(true, "TestAttribute", "Test")]
         [DataRow(true, "TestAttribute", "test")]
+        [DataRow(false, "TestAttribute", "testAttr")]
+        [DataRow(false, "TestAttribute", "TestAttr")]
+        [DataRow(false, "TestAttribute", "TestAttributes")]
         [DataRow(false, "TestAttribute", "TestTest")]
         [DataRow(false, "Test", "PrefixTest")]
         [DataRow(false, "Test", "TestSuffix")]
@@ -46,6 +49,8 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [DataRow("Attribute")]
         [DataRow("   Attribute")]
         [DataRow("SomeAttribute")]
+        [DataRow("TestAttribute")]
+        [DataRow("TestAttributeAttribute")]
         public void HasNameThrows(string testName) =>
             new Action(() => AttributeDataWithName("Test").HasName(testName)).Should().Throw<Exception>();
 
