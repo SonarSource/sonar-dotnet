@@ -21,6 +21,7 @@
 using System;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Extensions
 {
@@ -31,5 +32,49 @@ namespace SonarAnalyzer.Extensions
 
         public static bool HasAnyName(this AttributeData attribute, params string[] names) =>
             names.Any(x => attribute.HasName(x));
+
+        public static bool TryGetAttributeValue<T>(this AttributeData attribute, string namedArgument, out T value)
+        {
+            value = default;
+            return attribute.NamedArguments.IndexOf(x => x.Key.Equals(namedArgument, StringComparison.OrdinalIgnoreCase)) is var index and >= 0
+                && attribute.NamedArguments[index].Value is var constant
+                && ConvertConstant(constant, out value);
+        }
+
+        public static bool TryGetAttributeValue<T>(this AttributeData attribute, Func<IMethodSymbol, IParameterSymbol> constructorParameter, out T value)
+        {
+            value = default;
+            return constructorParameter(attribute.AttributeConstructor) is { } parameter
+                && attribute.AttributeConstructor.Parameters.IndexOf(parameter) is var index and >= 0
+                && attribute.ConstructorArguments[index] is var constant
+                && ConvertConstant(constant, out value);
+        }
+
+        private static bool ConvertConstant<T>(TypedConstant constant, out T value)
+        {
+            value = default;
+            if (constant.IsNull)
+            {
+                return true;
+            }
+            if (constant.Value is T result)
+            {
+                value = result;
+                return true;
+            }
+            if (constant.Value is IConvertible)
+            {
+                try
+                {
+                    value = (T)Convert.ChangeType(constant.Value, typeof(T));
+                }
+                catch
+                {
+                    return false;
+                }
+                return true;
+            }
+            return false;
+        }
     }
 }
