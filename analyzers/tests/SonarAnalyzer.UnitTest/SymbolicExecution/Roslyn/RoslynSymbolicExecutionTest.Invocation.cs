@@ -445,7 +445,6 @@ finally
         [DataRow("arg.OrderBy(x => x).ThenByDescending(x => x);")]
         [DataRow("arg.ToArray();")]
         [DataRow("arg.ToDictionary(x => x);")]
-        [DataRow("arg.ToHashSet();")]
         [DataRow("arg.ToList();")]
         [DataRow("arg.ToLookup(x => x);")]
         [DataRow("arg.Union(arg);")]
@@ -455,9 +454,9 @@ finally
         [DataRow("arg.Chunk(42)")]
         [DataRow("arg.DistinctBy(x => x)")]
         [DataRow("arg.IntersectBy(arg, x => x);")]
-        [DataRow("arg.SkipLast();")]
+        [DataRow("arg.SkipLast(42);")]
         [DataRow("arg.UnionBy(arg, x => x);")]
-        [DataRow("arg.TakeLast();")]
+        [DataRow("arg.TakeLast(42);")]
 #endif
         public void Invocation_LinqEnumerableAndQueryable_NotNull(string expression)
         {
@@ -475,7 +474,7 @@ Tag(""Value"", value);";
         [DataRow("FirstOrDefault();")]
         [DataRow("LastOrDefault();")]
         [DataRow("SingleOrDefault();")]
-        public void Invocation_LinqEnumerable_NullOrNotNull(string expression)
+        public void Invocation_LinqEnumerableAndQueryable_NullOrNotNull(string expression)
         {
             var code = $@"
 var value = arg.{expression};
