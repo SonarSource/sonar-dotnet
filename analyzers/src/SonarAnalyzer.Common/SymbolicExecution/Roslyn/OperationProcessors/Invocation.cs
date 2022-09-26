@@ -61,19 +61,106 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
         };
     }
 
-    private static ProgramState[] ProcessStringIsNullOrEmpty(SymbolicContext context, IInvocationOperationWrapper invocation) =>
-        context.State[invocation.Arguments[0].ToArgument().Value]?.Constraint<ObjectConstraint>() switch
+    private static ProgramState[] ProcessLinqEnumerableAndQueryable(SymbolicContext context, IInvocationOperationWrapper invocation)
+    {
+        switch (invocation.TargetMethod.Name)
         {
-            ObjectConstraint constraint when constraint == ObjectConstraint.NotNull => new[] { context.State },    // The "normal" state handling reflects already what is going on.
-            ObjectConstraint constraint when constraint == ObjectConstraint.Null => new[] { context.SetOperationConstraint(BoolConstraint.True) }, // IsNullOrEmpty(arg) returns true if arg is null
-            _ when invocation.Arguments[0].TrackedSymbol() is { } argumentSymbol => new[]       // Explode the known states, these methods can create.
+            case "Append":
+            case nameof(Enumerable.AsEnumerable):
+            case nameof(Queryable.AsQueryable):
+            case nameof(Enumerable.Cast):
+            case "Chunk":
+            case nameof(Enumerable.Concat):
+            case nameof(Enumerable.DefaultIfEmpty):
+            case nameof(Enumerable.Distinct):
+            case "DistinctBy":
+            case nameof(Enumerable.Empty):
+            case nameof(Enumerable.Except):
+            case "ExceptBy":
+            case nameof(Enumerable.GroupBy):
+            case nameof(Enumerable.GroupJoin):
+            case nameof(Enumerable.Intersect):
+            case "IntersectBy":
+            case nameof(Enumerable.Join):
+            case nameof(Enumerable.OfType):
+            case nameof(Enumerable.OrderBy):
+            case nameof(Enumerable.OrderByDescending):
+            case "Prepend":
+            case nameof(Enumerable.Range):
+            case nameof(Enumerable.Repeat):
+            case nameof(Enumerable.Reverse):
+            case nameof(Enumerable.Select):
+            case nameof(Enumerable.SelectMany):
+            case nameof(Enumerable.Skip):
+            case "SkipLast":
+            case nameof(Enumerable.SkipWhile):
+            case nameof(Enumerable.Take):
+            case "TakeLast":
+            case nameof(Enumerable.TakeWhile):
+            case nameof(Enumerable.ThenBy):
+            case nameof(Enumerable.ThenByDescending):
+            case nameof(Enumerable.ToArray):
+            case nameof(Enumerable.ToDictionary):
+            case "ToHashSet":
+            case nameof(Enumerable.ToList):
+            case nameof(Enumerable.ToLookup):
+            case nameof(Enumerable.Union):
+            case "UnionBy":
+            case nameof(Enumerable.Where):
+            case nameof(Enumerable.Zip):
+                return new[] { context.SetOperationConstraint(ObjectConstraint.NotNull) };
+
+            // ElementAtOrDefault is intentionally not supported. It's causing many FPs
+            case nameof(Enumerable.FirstOrDefault):
+            case nameof(Enumerable.LastOrDefault):
+            case nameof(Enumerable.SingleOrDefault):
+                return invocation.TargetMethod.ReturnType.IsReferenceType
+                    ? new[]
+                    {
+                        context.SetOperationConstraint(ObjectConstraint.Null),
+                        context.SetOperationConstraint(ObjectConstraint.NotNull),
+                    }
+                    : new[] { context.State };
+
+            default:
+                return new[] { context.State };
+        }
+    }
+
+    private static ProgramState[] ProcessIsNotNullWhen(ProgramState state, IInvocationOperationWrapper invocation)
+    {
+        if (invocation.TargetMethod.IsAny(KnownType.System_String, nameof(string.IsNullOrEmpty), nameof(string.IsNullOrWhiteSpace)))
+        {
+            return ProcessIsNotNullWhen(state, invocation.WrappedOperation, invocation.Arguments[0].ToArgument(), false);
+        }
+        foreach (var argument in invocation.Arguments.Select(x => x.ToArgument()))
+        {
+            if (argument.Parameter?.GetAttributes().FirstOrDefault(x => x.HasAnyName("NotNullWhen")) is { } attribute // TODO: "MaybeNullWhen"
+                && attribute.TryGetAttributeValue<bool>("returnValue", out var returnValue))
             {
-                        context.SetOperationConstraint(BoolConstraint.True).SetSymbolConstraint(argumentSymbol, ObjectConstraint.Null),
-                        context.SetOperationConstraint(BoolConstraint.True).SetSymbolConstraint(argumentSymbol, ObjectConstraint.NotNull),
-                        context.SetOperationConstraint(BoolConstraint.False).SetSymbolConstraint(argumentSymbol, ObjectConstraint.NotNull),
+                return ProcessIsNotNullWhen(state, invocation.WrappedOperation, argument, returnValue);
+            }
+        }
+        return new[] { state };
+    }
+
+    private static ProgramState[] ProcessIsNotNullWhen(ProgramState state, IOperation invocation, IArgumentOperationWrapper argument, bool when)
+    {
+        var whenBoolConstraint = BoolConstraint.From(when);
+        return state[argument.Value]?.Constraint<ObjectConstraint>() switch
+        {
+            ObjectConstraint constraint when constraint == ObjectConstraint.NotNull => new[] { state },    // The "normal" state handling reflects already what is going on.
+            // IsNullOrEmpty([NotNullWhen(false)] arg) returns true if arg is null
+            ObjectConstraint constraint when constraint == ObjectConstraint.Null => new[] { state.SetOperationConstraint(invocation, whenBoolConstraint.Opposite) },
+            _ when argument.WrappedOperation.TrackedSymbol() is { } argumentSymbol => new[]       // Explode the known states, these methods can create.
+            {
+                state.SetOperationConstraint(invocation, whenBoolConstraint.Opposite).SetSymbolConstraint(argumentSymbol, ObjectConstraint.Null),
+                state.SetOperationConstraint(invocation, whenBoolConstraint.Opposite).SetSymbolConstraint(argumentSymbol, ObjectConstraint.NotNull),
+                state.SetOperationConstraint(invocation, whenBoolConstraint).SetSymbolConstraint(argumentSymbol, ObjectConstraint.NotNull),
             },
-            _ => new[] { context.State }
+            _ => new[] { state }
         };
+    }
 
     private ProgramState[] ProcessDebugAssert(SymbolicContext context, IInvocationOperationWrapper invocation)
     {

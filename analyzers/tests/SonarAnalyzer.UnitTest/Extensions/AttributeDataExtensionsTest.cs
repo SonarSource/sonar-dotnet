@@ -119,6 +119,8 @@ namespace SonarAnalyzer.UnitTest.Extensions
                 { "SomeNumberString", "42" },
                 { "SomeNull", null },
             });
+            string.IsNullOrEmpty("");
+            new Dictionary<string, string>().TryGetValue("", out var _);
             var tryGetAttributeValue = typeof(AttributeDataExtensions).GetMethod(nameof(AttributeDataExtensions.TryGetAttributeValue)).MakeGenericMethod(valueType);
             var arguments = new object[] { attributeData, valueName, null };
             var actualSuccess = tryGetAttributeValue.Invoke(null, arguments); // actualSuccess = attributeData.TryGetAttributeValue<valueType>(valueName, out var actualResult)

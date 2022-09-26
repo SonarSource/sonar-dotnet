@@ -414,6 +414,72 @@ finally
             });
         }
 
+#if NET
+
+        [TestMethod]
+        public void Invocation_TryParse_Null()
+        {
+            const string code = @"
+string byteString = null;
+var success = byte.TryParse(byteString, out var result);
+Tag(""ByteString"", byteString);
+Tag(""Success"", success);
+Tag(""Result"", result);
+";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("ByteString", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("Success", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+            validator.ValidateTag("Result", x => x.Should().BeNull());
+        }
+
+        [TestMethod]
+        public void Invocation_TryParse_NotNull()
+        {
+            const string code = @"
+string byteString = ""42"";
+var success = byte.TryParse(byteString, out var result);
+Tag(""ByteString"", byteString);
+Tag(""Success"", success);
+Tag(""Result"", result);
+";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("ByteString", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("Success", x => x.Should().BeNull());
+            validator.ValidateTag("Result", x => x.Should().BeNull());
+        }
+
+        [TestMethod]
+        public void Invocation_TryParse_Unknown()
+        {
+            const string code = @"
+string byteString = Unknown<string>();
+var success = byte.TryParse(byteString, out var result);
+Tag(""End"");
+";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.TagStates("End").Should().SatisfyRespectively(
+                x =>
+                {
+                    x[validator.Symbol("byteString")].Should().BeEquivalentTo(new SymbolicValue().WithConstraint(ObjectConstraint.Null));
+                    x[validator.Symbol("success")].Should().BeEquivalentTo(new SymbolicValue().WithConstraint(BoolConstraint.False));
+                    x[validator.Symbol("result")].Should().BeNull();
+                },
+                x =>
+                {
+                    x[validator.Symbol("byteString")].Should().BeEquivalentTo(new SymbolicValue().WithConstraint(ObjectConstraint.NotNull));
+                    x[validator.Symbol("success")].Should().BeEquivalentTo(new SymbolicValue().WithConstraint(BoolConstraint.False));
+                    x[validator.Symbol("result")].Should().BeNull();
+                },
+                x =>
+                {
+                    x[validator.Symbol("byteString")].Should().BeEquivalentTo(new SymbolicValue().WithConstraint(ObjectConstraint.NotNull));
+                    x[validator.Symbol("success")].Should().BeEquivalentTo(new SymbolicValue().WithConstraint(BoolConstraint.True));
+                    x[validator.Symbol("result")].Should().BeNull();
+                });
+        }
+
+#endif
+
         [DataTestMethod]
         [DataRow("arg.Append(arg)")]
         [DataRow("arg.AsEnumerable()")]
