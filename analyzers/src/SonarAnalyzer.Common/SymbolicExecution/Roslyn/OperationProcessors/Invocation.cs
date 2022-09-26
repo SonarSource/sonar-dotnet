@@ -36,7 +36,7 @@ internal sealed class Invocation : MultiProcessor<IInvocationOperationWrapper>
 
     protected override ProgramState[] Process(SymbolicContext context, IInvocationOperationWrapper invocation)
     {
-        if (IsThrowHelper(invocation))
+        if (IsThrowHelper(invocation.TargetMethod))
         {
             return Array.Empty<ProgramState>();
         }

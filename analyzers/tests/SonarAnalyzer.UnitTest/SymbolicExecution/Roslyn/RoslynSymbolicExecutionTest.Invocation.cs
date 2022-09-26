@@ -318,7 +318,7 @@ Tag(""AfterIfElse"", ObjectField);
                 x.HasConstraint(invalidateConstraint).Should().BeFalse();
                 x.HasConstraint(dontInvalidateConstraint).Should().BeTrue();
             });
-            validator.TagValues("AfterIfElse").Should().Equal(new SymbolicValue[]
+            validator.TagValues("AfterIfElse").Should().Equal(new[]
             {
                 new SymbolicValue().WithConstraint(dontInvalidateConstraint),
             });
@@ -561,10 +561,14 @@ Tag(""End"");
 
         [DataTestMethod]
         [DataRow("System.Diagnostics.CodeAnalysis.DoesNotReturn")]
+        [DataRow("System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute")]
         [DataRow("OtherNamespace.WithAttributeSuffix.DoesNotReturn")]
+        [DataRow("OtherNamespace.WithAttributeSuffix.DoesNotReturnAttribute")]
         [DataRow("OtherNamespace.WithoutAttributeSuffix.DoesNotReturn")]
         [DataRow("JetBrains.Annotations.TerminatesProgram")]
+        [DataRow("JetBrains.Annotations.TerminatesProgramAttribute")]
         [DataRow("OtherNamespace.WithAttributeSuffix.TerminatesProgram")]
+        [DataRow("OtherNamespace.WithAttributeSuffix.TerminatesProgramAttribute")]
         [DataRow("OtherNamespace.WithoutAttributeSuffix.TerminatesProgram")]
         public void Invocation_ThrowHelper_Attributes(string throwHelperAttribute)
         {
@@ -653,6 +657,19 @@ public sealed class {attributeName}: Attribute {{ }}
 ";
             var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
             validator.ValidateTagOrder("Before", "After");
+            validator.ValidateExitReachCount(1);
+            validator.ValidateExecutionCompleted();
+        }
+
+        [TestMethod]
+        public void Invocation_TargetMethodIsDelegateInvoke()
+        {
+            var code = @"
+Func<Action> f = () => new Action(()=> { });
+f()();
+";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateContainsOperation(OperationKindEx.Invocation);
             validator.ValidateExitReachCount(1);
             validator.ValidateExecutionCompleted();
         }

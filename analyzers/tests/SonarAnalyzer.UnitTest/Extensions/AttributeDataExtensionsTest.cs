@@ -80,11 +80,11 @@ namespace SonarAnalyzer.UnitTest.Extensions
 
         private static AttributeData AttributeDataWithName(string attributeClassName)
         {
-            var namedTypeMock = new Mock<INamedTypeSymbol>();
-            namedTypeMock.Setup(x => x.Name).Returns(attributeClassName);
-            var attributeDataMock = new Mock<AttributeData>();
-            attributeDataMock.Protected().Setup<INamedTypeSymbol>("CommonAttributeClass").Returns(namedTypeMock.Object);
-            return attributeDataMock.Object;
+            var namedType = new Mock<INamedTypeSymbol>();
+            namedType.Setup(x => x.Name).Returns(attributeClassName);
+            var attributeData = new Mock<AttributeData>();
+            attributeData.Protected().Setup<INamedTypeSymbol>("CommonAttributeClass").Returns(namedType.Object);
+            return attributeData.Object;
         }
     }
 }
