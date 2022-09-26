@@ -43,9 +43,12 @@ internal sealed class Invocation : MultiProcessor<IInvocationOperationWrapper>
         {
             state = state.ResetFieldConstraints();
         }
-        return invocation.TargetMethod.IsAny(KnownType.System_String, nameof(string.IsNullOrEmpty), nameof(string.IsNullOrWhiteSpace))
-            ? ProcessStringIsNullOrEmpty(context, invocation)
-            : new[] { state };
+        return invocation switch
+        {
+            _ when invocation.TargetMethod.IsAny(KnownType.System_String, nameof(string.IsNullOrEmpty), nameof(string.IsNullOrWhiteSpace)) => ProcessStringIsNullOrEmpty(context, invocation),
+            _ when invocation.TargetMethod.Is(KnownType.System_Diagnostics_Debug, nameof(System.Diagnostics.Debug.Assert)) => ProcessDebugAssert(context, invocation),
+            _ => new[] { state }
+        };
     }
 
     private static ProgramState[] ProcessStringIsNullOrEmpty(SymbolicContext context, IInvocationOperationWrapper invocation) =>
@@ -61,4 +64,25 @@ internal sealed class Invocation : MultiProcessor<IInvocationOperationWrapper>
             },
             _ => new[] { context.State }
         };
+
+    private ProgramState[] ProcessDebugAssert(SymbolicContext context, IInvocationOperationWrapper invocation) =>
+        invocation.Arguments[0].ToArgument().Value is var argumentValue
+        && context.State[argumentValue] is { } value
+        && value.HasConstraint(BoolConstraint.False)
+            ? EmptyStates
+            : new[] { ProcessDebugAssertBoolSymbol(context.State, argumentValue, false) };
+
+    private ProgramState ProcessDebugAssertBoolSymbol(ProgramState state, IOperation operation, bool isNegated)
+    {
+        if (operation.Kind == OperationKindEx.Unary && IUnaryOperationWrapper.FromOperation(operation) is { OperatorKind: UnaryOperatorKind.Not } unaryNot)
+        {
+            return ProcessDebugAssertBoolSymbol(state, unaryNot.Operand, !isNegated);
+        }
+        else
+        {
+            return operation.TrackedSymbol() is { } symbol
+                ? state.SetSymbolConstraint(symbol, BoolConstraint.From(!isNegated))
+                : state;
+        }
+    }
 }
