@@ -18,8 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Diagnostics;
+using System.Linq;
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Extensions;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
 
@@ -32,6 +36,10 @@ internal sealed class Invocation : MultiProcessor<IInvocationOperationWrapper>
 
     protected override ProgramState[] Process(SymbolicContext context, IInvocationOperationWrapper invocation)
     {
+        if (IsThrowHelper(invocation))
+        {
+            return Array.Empty<ProgramState>();
+        }
         var state = context.State;
         if (!invocation.TargetMethod.IsStatic             // Also applies to C# extensions
             && !invocation.TargetMethod.IsExtensionMethod // VB extensions in modules are not marked as static
@@ -95,16 +103,15 @@ internal sealed class Invocation : MultiProcessor<IInvocationOperationWrapper>
         }
     }
 
-    private static ProgramState ProcessThrowHelper(ProgramState state, IInvocationOperationWrapper invocation)
-    {
-        if (KnownMethods.IsDebugFail(invocation.TargetMethod))
-        {
-            return ProgramState.Empty;
-        }
-        return state;
-    }
+    private static bool IsThrowHelper(IInvocationOperationWrapper invocation) =>
+        invocation.TargetMethod is { } method
+        && (method.Is(KnownType.System_Diagnostics_Debug, nameof(Debug.Fail))
+            || method.IsAny(KnownType.System_Environment, nameof(Environment.FailFast), nameof(Environment.Exit))
+            || method.GetAttributes().Any(x => x.HasAnyName(
+                "DoesNotReturn",        // https://learn.microsoft.com/dotnet/api/system.diagnostics.codeanalysis.doesnotreturnattribute
+                "TerminatesProgram"))); // https://www.jetbrains.com/help/resharper/Reference__Code_Annotation_Attributes.html#TerminatesProgramAttribute
 
-        private static ProgramState ProcessArgumentAttributes(ProgramState state, IArgumentOperationWrapper argument, ImmutableArray<AttributeData> attributes) =>
+    private static ProgramState ProcessArgumentAttributes(ProgramState state, IArgumentOperationWrapper argument, ImmutableArray<AttributeData> attributes) =>
             attributes.Any(IsValidatedNotNullAttribute) && argument.Value.TrackedSymbol() is { } symbol
                 ? state.SetSymbolConstraint(symbol, ObjectConstraint.NotNull)
                 : state;
