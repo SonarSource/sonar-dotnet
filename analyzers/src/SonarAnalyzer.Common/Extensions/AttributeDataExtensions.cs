@@ -39,6 +39,6 @@ namespace SonarAnalyzer.Extensions
         }
 
         public static bool HasAnyName(this AttributeData attribute, params string[] names) =>
-                : otherNames.Any(x => attribute.HasName(x));
+            names.Any(x => attribute.HasName(x));
     }
 }

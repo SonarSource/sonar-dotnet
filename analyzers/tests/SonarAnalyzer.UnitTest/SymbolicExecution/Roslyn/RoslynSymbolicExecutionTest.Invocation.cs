@@ -570,6 +570,9 @@ Tag(""End"");
         [DataRow("OtherNamespace.WithAttributeSuffix.TerminatesProgram")]
         [DataRow("OtherNamespace.WithAttributeSuffix.TerminatesProgramAttribute")]
         [DataRow("OtherNamespace.WithoutAttributeSuffix.TerminatesProgram")]
+        [DataRow("OtherNamespace.DifferentCasing.Terminatesprogram")]
+        [DataRow("OtherNamespace.DifferentCasing.TerminatesprogramAttribute")]
+        [DataRow("OtherNamespace.DifferentCasing.DoesnotReturn")]
         public void Invocation_ThrowHelper_Attributes(string throwHelperAttribute)
         {
             var code = $@"
@@ -607,6 +610,11 @@ namespace OtherNamespace.WithoutAttributeSuffix
 {{
     public sealed class TerminatesProgram : Attribute {{ }}
     public sealed class DoesNotReturn : Attribute {{ }}
+}}
+namespace OtherNamespace.DifferentCasing
+{{
+    public sealed class TerminatesprogramAttribute : Attribute {{ }}
+    public sealed class DoesnotReturn : Attribute {{ }}
 }}
 ";
 #if NETFRAMEWORK
