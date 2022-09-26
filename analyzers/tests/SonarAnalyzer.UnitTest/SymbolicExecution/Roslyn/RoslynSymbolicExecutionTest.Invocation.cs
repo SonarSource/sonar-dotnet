@@ -420,58 +420,108 @@ finally
         public void Invocation_TryParse_Null()
         {
             const string code = @"
+this.ObjectField = null;
 string byteString = null;
-var success = byte.TryParse(byteString, out var result);
+var success = byte.TryParse(byteString, out var result); // bool TryParse([NotNullWhen(true)] string? s, out byte result)
 Tag(""ByteString"", byteString);
 Tag(""Success"", success);
 Tag(""Result"", result);
+Tag(""ObjectField"", ObjectField);
 ";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateTag("ByteString", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
             validator.ValidateTag("Success", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
             validator.ValidateTag("Result", x => x.Should().BeNull());
+            validator.ValidateTag("ObjectField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
         }
 
         [TestMethod]
         public void Invocation_TryParse_NotNull()
         {
             const string code = @"
+this.ObjectField = null;
 string byteString = ""42"";
-var success = byte.TryParse(byteString, out var result);
+var success = byte.TryParse(byteString, out var result); // bool TryParse([NotNullWhen(true)] string? s, out byte result)
 Tag(""ByteString"", byteString);
 Tag(""Success"", success);
 Tag(""Result"", result);
+Tag(""ObjectField"", ObjectField);
 ";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateTag("ByteString", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.ValidateTag("Success", x => x.Should().BeNull());
             validator.ValidateTag("Result", x => x.Should().BeNull());
+            validator.ValidateTag("ObjectField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
         }
 
         [TestMethod]
         public void Invocation_TryParse_Unknown()
         {
             const string code = @"
+this.ObjectField = null;
 string byteString = Unknown<string>();
 var success = byte.TryParse(byteString, out var result);
-Tag(""End"");
+Tag(""End"", null);
 ";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.TagStates("End").Should().SatisfyRespectively(
                 x =>
                 {
+                    x[validator.Symbol("ObjectField")].Should().BeEquivalentTo(new SymbolicValue().WithConstraint(ObjectConstraint.Null));
                     x[validator.Symbol("byteString")].Should().BeEquivalentTo(new SymbolicValue().WithConstraint(ObjectConstraint.Null));
                     x[validator.Symbol("success")].Should().BeEquivalentTo(new SymbolicValue().WithConstraint(BoolConstraint.False));
                     x[validator.Symbol("result")].Should().BeNull();
                 },
                 x =>
                 {
+                    x[validator.Symbol("ObjectField")].Should().BeEquivalentTo(new SymbolicValue().WithConstraint(ObjectConstraint.Null));
                     x[validator.Symbol("byteString")].Should().BeEquivalentTo(new SymbolicValue().WithConstraint(ObjectConstraint.NotNull));
                     x[validator.Symbol("success")].Should().BeEquivalentTo(new SymbolicValue().WithConstraint(BoolConstraint.False));
                     x[validator.Symbol("result")].Should().BeNull();
                 },
                 x =>
                 {
+                    x[validator.Symbol("ObjectField")].Should().BeEquivalentTo(new SymbolicValue().WithConstraint(ObjectConstraint.Null));
+                    x[validator.Symbol("byteString")].Should().BeEquivalentTo(new SymbolicValue().WithConstraint(ObjectConstraint.NotNull));
+                    x[validator.Symbol("success")].Should().BeEquivalentTo(new SymbolicValue().WithConstraint(BoolConstraint.True));
+                    x[validator.Symbol("result")].Should().BeNull();
+                });
+        }
+
+        [TestMethod]
+        public void Invocation_TryParse_Unknown_InstanceMethodResetsFieldConstraints()
+        {
+            const string code = @"
+private object ObjectField;
+
+public void Test()
+{
+    this.ObjectField = null;
+    string byteString = Unknown<string>();
+    var success = TryParse(byteString, out var result);
+    Tag(""End"", null);
+}
+public bool TryParse([System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string s, out object o) { o = null; return true; }
+";
+            var validator = SETestContext.CreateCSMethod(code).Validator;
+            validator.TagStates("End").Should().SatisfyRespectively(
+                x =>
+                {
+                    x[validator.Symbol("ObjectField")].Should().BeEquivalentTo(new SymbolicValue());
+                    x[validator.Symbol("byteString")].Should().BeEquivalentTo(new SymbolicValue().WithConstraint(ObjectConstraint.Null));
+                    x[validator.Symbol("success")].Should().BeEquivalentTo(new SymbolicValue().WithConstraint(BoolConstraint.False));
+                    x[validator.Symbol("result")].Should().BeNull();
+                },
+                x =>
+                {
+                    x[validator.Symbol("ObjectField")].Should().BeEquivalentTo(new SymbolicValue());
+                    x[validator.Symbol("byteString")].Should().BeEquivalentTo(new SymbolicValue().WithConstraint(ObjectConstraint.NotNull));
+                    x[validator.Symbol("success")].Should().BeEquivalentTo(new SymbolicValue().WithConstraint(BoolConstraint.False));
+                    x[validator.Symbol("result")].Should().BeNull();
+                },
+                x =>
+                {
+                    x[validator.Symbol("ObjectField")].Should().BeEquivalentTo(new SymbolicValue());
                     x[validator.Symbol("byteString")].Should().BeEquivalentTo(new SymbolicValue().WithConstraint(ObjectConstraint.NotNull));
                     x[validator.Symbol("success")].Should().BeEquivalentTo(new SymbolicValue().WithConstraint(BoolConstraint.True));
                     x[validator.Symbol("result")].Should().BeNull();
