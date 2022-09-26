@@ -44,8 +44,6 @@ namespace SonarAnalyzer.UnitTest.Extensions
 
         [DataTestMethod]
         [DataRow(null)]
-        [DataRow("")]
-        [DataRow("   ")]
         [DataRow("Attribute")]
         [DataRow("   Attribute")]
         [DataRow("SomeAttribute")]
@@ -67,15 +65,13 @@ namespace SonarAnalyzer.UnitTest.Extensions
             AttributeDataWithName(attributeClassName).HasAnyName(testNames).Should().Be(expected);
 
         [DataTestMethod]
-        [DataRow]
         [DataRow(null)]
-        [DataRow("")]
-        [DataRow("   ")]
-        [DataRow("Attribute")]
-        [DataRow("   Attribute")]
-        [DataRow("FailAttribute")]
-        [DataRow("Some", "Other", "FailAttribute")]
-        public void HasAnyNameThrows(params string[] testNames) =>
+        [DataRow(new[] { (string)null })]
+        [DataRow(new[] { "Attribute" })]
+        [DataRow(new[] { "   Attribute" })]
+        [DataRow(new[] { "FailAttribute" })]
+        [DataRow(new[] { "Some", "Other", "FailAttribute" })]
+        public void HasAnyNameThrows(string[] testNames) =>
             new Action(() => AttributeDataWithName("Test").HasAnyName(testNames)).Should().Throw<Exception>();
 
         private static AttributeData AttributeDataWithName(string attributeClassName)
