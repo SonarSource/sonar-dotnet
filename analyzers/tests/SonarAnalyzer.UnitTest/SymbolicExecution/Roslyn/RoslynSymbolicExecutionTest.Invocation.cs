@@ -535,13 +535,17 @@ Tag(""Result"", Result)";
             validator.ValidateTag("Result", x => x.HasConstraint(BoolConstraint.From(expected)).Should().BeTrue());
         }
 
-        [TestMethod]
-        public void Invocation_InformationIsNothing_UnknownSymbol()
+        [DataTestMethod]
+        [DataRow("Object")]
+        [DataRow("Exception")]
+        [DataRow("Integer")]    // This should always return only "false". Dim Value As Integer = Nothing
+        [DataRow("Integer?")]
+        public void Invocation_InformationIsNothing_UnknownSymbol(string type)
         {
             const string code = @"
 Dim Result As Boolean = IsNothing(Arg)
 Tag(""Result"", Result)";
-            var validator = SETestContext.CreateVB(code, ", Arg As Object").Validator;
+            var validator = SETestContext.CreateVB(code, $", Arg As {type}").Validator;
             var argSymbol = validator.Symbol("Arg");
             var resultSymbol = validator.Symbol("Result");
             validator.TagStates("Result").Should().HaveCount(2)
