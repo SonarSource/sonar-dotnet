@@ -173,7 +173,7 @@ namespace Tests.Diagnostics
                     Console.ForegroundColor = obj.Color;  // Compliant Suppressed #6117, was compliant in the old engine. Should be fixed by MMF-2401
                     break;
                 default:
-                    Console.WriteLine($"Color {obj.Color} is not supported."); // Non-compliant Suppressed #6117
+                    Console.WriteLine($"Color {obj.Color} is not supported."); // FN Suppressed #6117
                     break;
             }
         }
