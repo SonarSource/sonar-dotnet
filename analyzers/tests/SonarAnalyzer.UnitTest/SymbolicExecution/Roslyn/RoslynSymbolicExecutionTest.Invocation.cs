@@ -523,6 +523,43 @@ End If";
         }
 
         [DataTestMethod]
+        [DataRow("Nothing", true)]
+        [DataRow("New Object()", false)]
+        public void Invocation_InformationIsNothing_KnownSymbol(string value, bool expected)
+        {
+            var code = $@"
+Dim Value As Object = {value}
+Dim Result As Boolean = IsNothing(Value)
+Tag(""Result"", Result)";
+            var validator = SETestContext.CreateVB(code).Validator;
+            validator.ValidateTag("Result", x => x.HasConstraint(BoolConstraint.From(expected)).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void Invocation_InformationIsNothing_UnknownSymbol()
+        {
+            const string code = @"
+Dim Result As Boolean = IsNothing(Arg)
+Tag(""Result"", Result)";
+            var validator = SETestContext.CreateVB(code, ", Arg As Object").Validator;
+            var argSymbol = validator.Symbol("Arg");
+            var resultSymbol = validator.Symbol("Result");
+            validator.TagStates("Result").Should().HaveCount(2)
+                .And.ContainSingle(x => x[argSymbol].HasConstraint(ObjectConstraint.Null) && x[resultSymbol].HasConstraint(BoolConstraint.True))
+                .And.ContainSingle(x => x[argSymbol].HasConstraint(ObjectConstraint.NotNull) && x[resultSymbol].HasConstraint(BoolConstraint.False));
+        }
+
+        [TestMethod]
+        public void Invocation_InformationIsNothing_NoTrackedSymbol()
+        {
+            var code = $@"
+Dim Result As Boolean = IsNothing(Arg.ToString())
+Tag(""Result"", Result)";
+            var validator = SETestContext.CreateVB(code, ", Arg As Object").Validator;
+            validator.ValidateTag("Result", x => x.Should().BeNull());
+        }
+
+        [DataTestMethod]
         [DataRow("arg != null")]
         [DataRow("arg is not null")]
         [DataRow("arg is { }")]

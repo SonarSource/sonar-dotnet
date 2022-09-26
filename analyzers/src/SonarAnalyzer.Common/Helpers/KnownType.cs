@@ -101,6 +101,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Microsoft_Extensions_Logging_LoggerExtensions = new("Microsoft.Extensions.Logging.LoggerExtensions");
         internal static readonly KnownType Microsoft_Extensions_Primitives_StringValues = new("Microsoft.Extensions.Primitives.StringValues");
         internal static readonly KnownType Microsoft_Net_Http_Headers_HeaderNames = new("Microsoft.Net.Http.Headers.HeaderNames");
+        internal static readonly KnownType Microsoft_VisualBasic_Information = new("Microsoft.VisualBasic.Information");
         internal static readonly KnownType Microsoft_VisualBasic_Interaction = new("Microsoft.VisualBasic.Interaction");
         internal static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_Assert = new("Microsoft.VisualStudio.TestTools.UnitTesting.Assert");
         internal static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_AssertFailedException = new("Microsoft.VisualStudio.TestTools.UnitTesting.AssertFailedException");

@@ -53,6 +53,7 @@ internal sealed class Invocation : MultiProcessor<IInvocationOperationWrapper>
         }
         return invocation switch
         {
+            _ when invocation.TargetMethod.Is(KnownType.Microsoft_VisualBasic_Information, "IsNothing") => ProcessInformationIsNothing(context, invocation),
             _ when invocation.TargetMethod.Is(KnownType.System_Diagnostics_Debug, nameof(Debug.Assert)) => ProcessDebugAssert(context, invocation),
             _ when invocation.TargetMethod.ContainingType.IsAny(KnownType.System_Linq_Enumerable, KnownType.System_Linq_Queryable) => ProcessLinqEnumerableAndQueryable(context, invocation),
             _ when invocation.TargetMethod.IsAny(KnownType.System_String, nameof(string.IsNullOrEmpty), nameof(string.IsNullOrWhiteSpace)) => ProcessStringIsNullOrEmpty(context, invocation),
@@ -176,4 +177,17 @@ internal sealed class Invocation : MultiProcessor<IInvocationOperationWrapper>
         || method.GetAttributes().Any(x => x.HasAnyName(
                                                 "DoesNotReturnAttribute",       // https://learn.microsoft.com/dotnet/api/system.diagnostics.codeanalysis.doesnotreturnattribute
                                                 "TerminatesProgramAttribute")); // https://www.jetbrains.com/help/resharper/Reference__Code_Annotation_Attributes.html#TerminatesProgramAttribute
+
+    private static ProgramState[] ProcessInformationIsNothing(SymbolicContext context, IInvocationOperationWrapper invocation) =>
+        context.State[invocation.Arguments[0].ToArgument().Value]?.Constraint<ObjectConstraint>() switch
+        {
+            ObjectConstraint constraint when constraint == ObjectConstraint.Null => new[] { context.SetOperationConstraint(BoolConstraint.True) },
+            ObjectConstraint constraint when constraint == ObjectConstraint.NotNull => new[] { context.SetOperationConstraint(BoolConstraint.False) },
+            _ when invocation.Arguments[0].TrackedSymbol() is { } argumentSymbol => new[]
+            {
+                        context.SetOperationConstraint(BoolConstraint.True).SetSymbolConstraint(argumentSymbol, ObjectConstraint.Null),
+                        context.SetOperationConstraint(BoolConstraint.False).SetSymbolConstraint(argumentSymbol, ObjectConstraint.NotNull),
+            },
+            _ => new[] { context.State }
+        };
 }
