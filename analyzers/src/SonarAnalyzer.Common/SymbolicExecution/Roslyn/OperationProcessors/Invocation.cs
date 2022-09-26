@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Diagnostics;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
@@ -46,7 +47,7 @@ internal sealed class Invocation : MultiProcessor<IInvocationOperationWrapper>
         return invocation switch
         {
             _ when invocation.TargetMethod.IsAny(KnownType.System_String, nameof(string.IsNullOrEmpty), nameof(string.IsNullOrWhiteSpace)) => ProcessStringIsNullOrEmpty(context, invocation),
-            _ when invocation.TargetMethod.Is(KnownType.System_Diagnostics_Debug, nameof(System.Diagnostics.Debug.Assert)) => ProcessDebugAssert(context, invocation),
+            _ when invocation.TargetMethod.Is(KnownType.System_Diagnostics_Debug, nameof(Debug.Assert)) => ProcessDebugAssert(context, invocation),
             _ => new[] { state }
         };
     }
@@ -65,12 +66,21 @@ internal sealed class Invocation : MultiProcessor<IInvocationOperationWrapper>
             _ => new[] { context.State }
         };
 
-    private ProgramState[] ProcessDebugAssert(SymbolicContext context, IInvocationOperationWrapper invocation) =>
-        invocation.Arguments[0].ToArgument().Value is var argumentValue
-        && context.State[argumentValue] is { } value
-        && value.HasConstraint(BoolConstraint.False)
-            ? EmptyStates
-            : new[] { ProcessDebugAssertBoolSymbol(context.State, argumentValue, false) };
+    private ProgramState[] ProcessDebugAssert(SymbolicContext context, IInvocationOperationWrapper invocation)
+    {
+        if (invocation.Arguments.IsEmpty)   // Defensive: User-defined useless method
+        {
+            return new[] { context.State };
+        }
+        else
+        {
+            return invocation.Arguments[0].ToArgument().Value is var argumentValue
+                && context.State[argumentValue] is { } value
+                && value.HasConstraint(BoolConstraint.False)
+                    ? EmptyStates
+                    : new[] { ProcessDebugAssertBoolSymbol(context.State, argumentValue, false) };
+        }
+    }
 
     private ProgramState ProcessDebugAssertBoolSymbol(ProgramState state, IOperation operation, bool isNegated)
     {

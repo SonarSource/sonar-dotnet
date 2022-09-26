@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Security.AccessControl;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
@@ -426,6 +427,18 @@ finally
             DebugAssertValues("arg != null && condition").Should().HaveCount(1).And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
 
         [TestMethod]
+        public void Invocation_DebugAssert_LearnsNotNullForAll_AndAlso()
+        {
+            var code = $@"
+Debug.Assert(arg1 != null && arg2 != null);
+Tag(""Arg1"", arg1);
+Tag(""Arg2"", arg2);";
+            var validator = SETestContext.CreateCS(code, $", object arg1, object arg2").Validator;
+            validator.ValidateTag("Arg1", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("Arg2", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        }
+
+        [TestMethod]
         public void Invocation_DebugAssert_LearnsNotNull_OrElse() =>
             DebugAssertValues("arg != null || condition").Should().HaveCount(2)
                 .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.Null))
@@ -439,11 +452,42 @@ finally
         public void Invocation_DebugAssert_LearnsBoolConstraint_Binary() =>
             DebugAssertValues("arg == true", "bool").Should().HaveCount(1).And.ContainSingle(x => x.HasConstraint(BoolConstraint.True));
 
+        [TestMethod]
+        public void Invocation_DebugAssert_LearnsBoolConstraint_AlwaysEnds() =>
+            DebugAssertValues("false", "bool").Should().BeEmpty();
+
         [DataTestMethod]
         [DataRow("!arg")]
         [DataRow("!!!arg")]
         public void Invocation_DebugAssert_LearnsBoolConstraint_Negated(string expression) =>
             DebugAssertValues(expression, "bool").Should().HaveCount(1).And.ContainSingle(x => x.HasConstraint(BoolConstraint.False));
+
+        [TestMethod]
+        public void Invocation_DebugAssert_CustomNoParameters_DoesNotFail()
+        {
+            const string code = @"
+using System.Diagnostics;
+
+public class Sample
+{
+    public void Main()
+    {
+        Debug.Assert();
+        Tag(""End"");
+    }
+
+    private static void Tag(string name) { }
+}
+
+namespace System.Diagnostics
+{
+    public static class Debug
+    {
+        public static void Assert() { }
+    }
+}";
+            new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator.ValidateTagOrder("End");
+        }
 
         private static SymbolicValue[] DebugAssertValues(string expression, string argType = "object")
         {
