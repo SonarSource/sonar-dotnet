@@ -48,21 +48,23 @@ internal sealed class Invocation : MultiProcessor<IInvocationOperationWrapper>
         return invocation switch
         {
             _ when invocation.TargetMethod.Is(KnownType.System_Diagnostics_Debug, nameof(Debug.Assert)) => ProcessDebugAssert(context, invocation),
-            _ when invocation.TargetMethod.ContainingType.Is(KnownType.System_Linq_Enumerable) => ProcessLinqEnumerable(context, invocation),
+            _ when invocation.TargetMethod.ContainingType.IsAny(KnownType.System_Linq_Enumerable, KnownType.System_Linq_Queryable) => ProcessLinqEnumerableAndQueryable(context, invocation),
             _ when invocation.TargetMethod.IsAny(KnownType.System_String, nameof(string.IsNullOrEmpty), nameof(string.IsNullOrWhiteSpace)) => ProcessStringIsNullOrEmpty(context, invocation),
             _ => new[] { state }
         };
     }
 
-    private static ProgramState[] ProcessLinqEnumerable(SymbolicContext context, IInvocationOperationWrapper invocation)
+    private static ProgramState[] ProcessLinqEnumerableAndQueryable(SymbolicContext context, IInvocationOperationWrapper invocation)
     {
         switch (invocation.TargetMethod.Name)
         {
             case "Append":
             case nameof(Enumerable.AsEnumerable):
+            case nameof(Queryable.AsQueryable):
             case nameof(Enumerable.Cast):
             case "Chunk":
             case nameof(Enumerable.Concat):
+            case nameof(Enumerable.DefaultIfEmpty):
             case nameof(Enumerable.Distinct):
             case "DistinctBy":
             case nameof(Enumerable.Empty):
@@ -76,13 +78,16 @@ internal sealed class Invocation : MultiProcessor<IInvocationOperationWrapper>
             case nameof(Enumerable.OrderBy):
             case nameof(Enumerable.OrderByDescending):
             case "Prepend":
+            case nameof(Enumerable.Range):
             case nameof(Enumerable.Repeat):
             case nameof(Enumerable.Reverse):
             case nameof(Enumerable.Select):
             case nameof(Enumerable.SelectMany):
             case nameof(Enumerable.Skip):
+            case "SkipLast":
             case nameof(Enumerable.SkipWhile):
             case nameof(Enumerable.Take):
+            case "TakeLast":
             case nameof(Enumerable.TakeWhile):
             case nameof(Enumerable.ThenBy):
             case nameof(Enumerable.ThenByDescending):

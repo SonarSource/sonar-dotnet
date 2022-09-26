@@ -417,8 +417,10 @@ finally
         [DataTestMethod]
         [DataRow("arg.Append(arg)")]
         [DataRow("arg.AsEnumerable()")]
+        [DataRow("arg.AsQueryable()")]
         [DataRow("arg.Cast<string>()")]
         [DataRow("arg.Concat(arg)")]
+        [DataRow("arg.DefaultIfEmpty()")]   // Returns collection with a single default item in it in case the the source enumerable is empty
         [DataRow("arg.Distinct()")]
         [DataRow("Enumerable.Empty<string>()")]
         [DataRow("arg.Except(arg)")]
@@ -430,36 +432,43 @@ finally
         [DataRow("arg.OrderBy(x => x);")]
         [DataRow("arg.OrderByDescending(x => x);")]
         [DataRow("arg.Prepend(null);")]
+        [DataRow("arg.Range(42, 42);")]
         [DataRow("Enumerable.Repeat(42, 42);")]
         [DataRow("arg.Reverse();")]
         [DataRow("arg.Select(x => x);")]
         [DataRow("arg.SelectMany(x => new[] { x });")]
         [DataRow("arg.Skip(42);")]
-        [DataRow("arg.SkipWhile(x => x is null);")]
+        [DataRow("arg.SkipWhile(x => x == null);")]
         [DataRow("arg.Take(42);")]
-        [DataRow("arg.TakeWhile(x => x is not null);")]
+        [DataRow("arg.TakeWhile(x => x != null);")]
         [DataRow("arg.OrderBy(x => x).ThenBy(x => x);")]
         [DataRow("arg.OrderBy(x => x).ThenByDescending(x => x);")]
         [DataRow("arg.ToArray();")]
         [DataRow("arg.ToDictionary(x => x);")]
+        [DataRow("arg.ToHashSet();")]
         [DataRow("arg.ToList();")]
         [DataRow("arg.ToLookup(x => x);")]
         [DataRow("arg.Union(arg);")]
-        [DataRow("arg.Where(x => x is not null);")]
+        [DataRow("arg.Where(x => x != null);")]
         [DataRow("arg.Zip(arg, (x, y) => x);")]
 #if NET
         [DataRow("arg.Chunk(42)")]
         [DataRow("arg.DistinctBy(x => x)")]
         [DataRow("arg.IntersectBy(arg, x => x);")]
+        [DataRow("arg.SkipLast();")]
         [DataRow("arg.UnionBy(arg, x => x);")]
+        [DataRow("arg.TakeLast();")]
 #endif
-        public void Invocation_LinqEnumerable_NotNull(string expression)
+        public void Invocation_LinqEnumerableAndQueryable_NotNull(string expression)
         {
             var code = $@"
 var value = {expression};
 Tag(""Value"", value);";
-            var validator = SETestContext.CreateCS(code, ", IEnumerable<object> arg").Validator;
-            validator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            var enumerableValidator = SETestContext.CreateCS(code, ", IEnumerable<object> arg").Validator;
+            enumerableValidator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+
+            var queryableValidator = SETestContext.CreateCS(code, ", IQueryable<object> arg").Validator;
+            queryableValidator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
         }
 
         [DataTestMethod]
@@ -471,8 +480,13 @@ Tag(""Value"", value);";
             var code = $@"
 var value = arg.{expression};
 Tag(""Value"", value);";
-            var validator = SETestContext.CreateCS(code, $", IEnumerable<object> arg").Validator;
-            validator.TagValues("Value").Should().HaveCount(2)
+            var enumerableValidator = SETestContext.CreateCS(code, $", IEnumerable<object> arg").Validator;
+            enumerableValidator.TagValues("Value").Should().HaveCount(2)
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
+
+            var queryableValidator = SETestContext.CreateCS(code, $", IQueryable<object> arg").Validator;
+            queryableValidator.TagValues("Value").Should().HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
         }

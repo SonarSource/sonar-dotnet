@@ -54,8 +54,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly ISet<MemberDescriptor> whitelistMethods = new HashSet<MemberDescriptor>
         {
             new MemberDescriptor(KnownType.System_Activator, "CreateInstance"),
-            new MemberDescriptor(KnownType.Sytem_Resources_ResourceManager, "GetObject"),
-            new MemberDescriptor(KnownType.Sytem_Resources_ResourceManager, "GetString"),
+            new MemberDescriptor(KnownType.System_Resources_ResourceManager, "GetObject"),
+            new MemberDescriptor(KnownType.System_Resources_ResourceManager, "GetString"),
         };
 
         private static readonly ISet<MemberDescriptor> blacklistMethods = new HashSet<MemberDescriptor>
