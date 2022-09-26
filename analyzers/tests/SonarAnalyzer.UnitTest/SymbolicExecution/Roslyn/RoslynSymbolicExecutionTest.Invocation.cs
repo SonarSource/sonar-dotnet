@@ -625,7 +625,7 @@ namespace System.Diagnostics.CodeAnalysis
         [DataRow("TerminatesProgramAttributeS")]
         [DataRow("DoesNotReturnEver")]
         [DataRow("ItDoesNotReturn")]
-        public void Invocation_ThrowHelper_OtherAttributes(string attributeName)
+        public void Invocation_ThrowHelper_OtherAttributes_NotSupported(string attributeName)
         {
             var code = $@"
 using System;
