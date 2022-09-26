@@ -149,9 +149,11 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
         var whenBoolConstraint = BoolConstraint.From(when);
         return state[argument.Value]?.Constraint<ObjectConstraint>() switch
         {
-            ObjectConstraint constraint when constraint == ObjectConstraint.NotNull => new[] { state },    // The "normal" state handling reflects already what is going on.
+            // The "normal" state handling reflects already what is going on.
+            ObjectConstraint constraint when constraint == ObjectConstraint.NotNull && argument.Parameter.RefKind == RefKind.None => new[] { state },
             // IsNullOrEmpty([NotNullWhen(false)] arg) returns true if arg is null
-            ObjectConstraint constraint when constraint == ObjectConstraint.Null => new[] { state.SetOperationConstraint(invocation, whenBoolConstraint.Opposite) },
+            ObjectConstraint constraint when constraint == ObjectConstraint.Null && argument.Parameter.RefKind == RefKind.None =>
+                new[] { state.SetOperationConstraint(invocation, whenBoolConstraint.Opposite) },
             _ when argument.WrappedOperation.TrackedSymbol() is { } argumentSymbol => new[]       // Explode the known states, these methods can create.
             {
                 state.SetOperationConstraint(invocation, whenBoolConstraint.Opposite).SetSymbolConstraint(argumentSymbol, ObjectConstraint.Null),
