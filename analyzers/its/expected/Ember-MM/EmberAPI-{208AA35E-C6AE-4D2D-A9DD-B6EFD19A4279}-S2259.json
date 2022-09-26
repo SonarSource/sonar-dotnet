@@ -2,6 +2,19 @@
 "issues":  [
 {
 "id":  "S2259",
+"message":  "'_mediaDBConn' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  280,
+"startColumn":  61,
+"endLine":  280,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S2259",
 "message":  "'movieName' is Nothing on at least one execution path.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
@@ -75,162 +88,6 @@
 "startColumn":  20,
 "endLine":  269,
 "endColumn":  30
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'vresFlag' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
-"region":  {
-"startLine":  120,
-"startColumn":  34,
-"endLine":  120,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'vresFlag' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
-"region":  {
-"startLine":  124,
-"startColumn":  38,
-"endLine":  124,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'vsourceFlag' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
-"region":  {
-"startLine":  133,
-"startColumn":  34,
-"endLine":  133,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'vsourceFlag' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
-"region":  {
-"startLine":  137,
-"startColumn":  38,
-"endLine":  137,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'vcodecFlag' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
-"region":  {
-"startLine":  145,
-"startColumn":  34,
-"endLine":  145,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'vcodecFlag' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
-"region":  {
-"startLine":  149,
-"startColumn":  38,
-"endLine":  149,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'acodecFlag' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
-"region":  {
-"startLine":  158,
-"startColumn":  60,
-"endLine":  158,
-"endColumn":  70
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'acodecFlag' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
-"region":  {
-"startLine":  160,
-"startColumn":  38,
-"endLine":  160,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'acodecFlag' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
-"region":  {
-"startLine":  166,
-"startColumn":  64,
-"endLine":  166,
-"endColumn":  74
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'acodecFlag' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
-"region":  {
-"startLine":  168,
-"startColumn":  42,
-"endLine":  168,
-"endColumn":  52
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'achanFlag' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
-"region":  {
-"startLine":  181,
-"startColumn":  34,
-"endLine":  181,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'achanFlag' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
-"region":  {
-"startLine":  185,
-"startColumn":  38,
-"endLine":  185,
-"endColumn":  47
 }
 }
 }
