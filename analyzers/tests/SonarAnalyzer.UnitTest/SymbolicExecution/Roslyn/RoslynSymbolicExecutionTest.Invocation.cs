@@ -445,7 +445,6 @@ finally
         [DataRow("arg.OrderBy(x => x).ThenByDescending(x => x);")]
         [DataRow("arg.ToArray();")]
         [DataRow("arg.ToDictionary(x => x);")]
-        [DataRow("arg.ToHashSet();")]
         [DataRow("arg.ToList();")]
         [DataRow("arg.ToLookup(x => x);")]
         [DataRow("arg.Union(arg);")]
