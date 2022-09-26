@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Reflection;
 using Moq;
 using Moq.Protected;
 using SonarAnalyzer.Extensions;
@@ -62,6 +63,85 @@ namespace SonarAnalyzer.UnitTest.Extensions
         public void HasAnyNameThrowsForNull() =>
             new Action(() => AttributeDataWithName("TestAttribute").HasAnyName(null)).Should().Throw<Exception>();
 
+        [DataTestMethod]
+        [DataRow("SomeBool", typeof(bool), true, true)]
+        [DataRow("someBool", typeof(bool), true, true)]
+        [DataRow("somebool", typeof(bool), true, true)]
+        [DataRow("SOMEBOOL", typeof(bool), true, true)]
+        [DataRow("SomeInt", typeof(int), true, 1_234_567)]
+        [DataRow("SomeByte", typeof(byte), true, (byte)24)]
+        [DataRow("SomeByte", typeof(int), true, 24)]
+        [DataRow("SomeString", typeof(string), true, "Text")]
+        [DataRow("SomeNull", typeof(string), true, null)]
+        [DataRow("Missing", typeof(string), false, null)]
+        [DataRow("SomeString", typeof(int), false, 0)]
+        [DataRow("SomeNumberString", typeof(int), true, 42)]
+        public void TryGetAttributeValue_NamedArguments(string valueName, Type valueType, bool expectedSucess, object expectedResult)
+        {
+            var attributeData = AttributeDataWithArguments(namedArguments: new Dictionary<string, object>
+            {
+                { "SomeBool", true },
+                { "SomeInt", 1_234_567 },
+                { "SomeByte", (byte)24 },
+                { "SomeString", "Text" },
+                { "SomeNumberString", "42" },
+                { "SomeNull", null },
+            });
+            var tryGetAttributeValue = typeof(AttributeDataExtensions).GetMethod(nameof(AttributeDataExtensions.TryGetAttributeValue)).MakeGenericMethod(valueType);
+            var arguments = new object[] { attributeData, valueName, null };
+            var actualSuccess = tryGetAttributeValue.Invoke(null, arguments); // actualSuccess = attributeData.TryGetAttributeValue<valueType>(valueName, out var actualResult)
+            var actualResult = arguments[2];
+            actualSuccess.Should().Be(expectedSucess);
+            actualResult.Should().Be(expectedResult);
+        }
+
+        [DataTestMethod]
+        [DataRow("SomeBool", typeof(bool), true, true)]
+        [DataRow("someBool", typeof(bool), true, true)]
+        [DataRow("somebool", typeof(bool), true, true)]
+        [DataRow("SOMEBOOL", typeof(bool), true, true)]
+        [DataRow("SomeInt", typeof(int), true, 1_234_567)]
+        [DataRow("SomeByte", typeof(byte), true, (byte)24)]
+        [DataRow("SomeByte", typeof(int), true, 24)]
+        [DataRow("SomeString", typeof(string), true, "Text")]
+        [DataRow("SomeNull", typeof(string), true, null)]
+        [DataRow("Missing", typeof(string), false, null)]
+        [DataRow("SomeString", typeof(int), false, 0)]
+        [DataRow("SomeNumberString", typeof(int), true, 42)]
+        public void TryGetAttributeValue_ConstructorArguments(string valueName, Type valueType, bool expectedSucess, object expectedResult)
+        {
+            var attributeData = AttributeDataWithArguments(constructorArguments: new Dictionary<string, object>
+            {
+                { "SomeBool", true },
+                { "SomeInt", 1_234_567 },
+                { "SomeByte", (byte)24 },
+                { "SomeString", "Text" },
+                { "SomeNumberString", "42" },
+                { "SomeNull", null },
+            });
+            var tryGetAttributeValue = typeof(AttributeDataExtensions).GetMethod(nameof(AttributeDataExtensions.TryGetAttributeValue)).MakeGenericMethod(valueType);
+            var arguments = new object[] { attributeData, valueName, null };
+            var actualSuccess = tryGetAttributeValue.Invoke(null, arguments); // actualSuccess = attributeData.TryGetAttributeValue<valueType>(valueName, out var actualResult)
+            var actualResult = arguments[2];
+            actualSuccess.Should().Be(expectedSucess);
+            actualResult.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        public void TryGetAttributeValue_ConstructorArgumentAndNamedArgumentNamedTheSame()
+        {
+            var attributeData = AttributeDataWithArguments(namedArguments: new Dictionary<string, object>
+            {
+                { "Result", true },
+            }, constructorArguments: new Dictionary<string, object>
+            {
+                { "Result", false },
+            });
+            var actualSuccess = attributeData.TryGetAttributeValue("Result", out bool actualValue);
+            actualSuccess.Should().BeTrue();
+            actualValue.Should().BeTrue();
+        }
+
         private static AttributeData AttributeDataWithName(string attributeClassName)
         {
             var namedType = new Mock<INamedTypeSymbol>();
@@ -69,6 +149,31 @@ namespace SonarAnalyzer.UnitTest.Extensions
             var attributeData = new Mock<AttributeData>();
             attributeData.Protected().Setup<INamedTypeSymbol>("CommonAttributeClass").Returns(namedType.Object);
             return attributeData.Object;
+        }
+
+        private static AttributeData AttributeDataWithArguments(IDictionary<string, object> namedArguments = null, IDictionary<string, object> constructorArguments = null)
+        {
+            var typedConstConstructor = typeof(TypedConstant).GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance).Single(x => x.GetParameters().Length == 3);
+            var namedArgumentsFake = namedArguments?.Select(x => new KeyValuePair<string, TypedConstant>(x.Key, CreateTypedConstant(x.Value))).ToImmutableArray()
+                ?? ImmutableArray.Create<KeyValuePair<string, TypedConstant>>();
+            var constructorArgumentsFake = constructorArguments?.Select(x => CreateTypedConstant(x.Value)).ToImmutableArray() ?? ImmutableArray.Create<TypedConstant>();
+            var constructorParamatersFake = constructorArguments?.Select(x =>
+            {
+                var parameterMock = new Mock<IParameterSymbol>();
+                parameterMock.Setup(x => x.Name).Returns(x.Key);
+                return parameterMock.Object;
+            }).ToImmutableArray() ?? ImmutableArray.Create<IParameterSymbol>();
+            var constructorMock = new Mock<IMethodSymbol>();
+            constructorMock.Setup(x => x.Parameters).Returns(constructorParamatersFake);
+            var attributeDataMock = new Mock<AttributeData>();
+            attributeDataMock.Protected().Setup<ImmutableArray<KeyValuePair<string, TypedConstant>>>("CommonNamedArguments").Returns(namedArgumentsFake);
+            attributeDataMock.Protected().Setup<ImmutableArray<TypedConstant>>("CommonConstructorArguments").Returns(constructorArgumentsFake);
+            attributeDataMock.Protected().Setup<IMethodSymbol>("CommonAttributeConstructor").Returns(constructorMock.Object);
+
+            return attributeDataMock.Object;
+
+            TypedConstant CreateTypedConstant(object value) =>
+                (TypedConstant)typedConstConstructor.Invoke(new object[] { null, TypedConstantKind.Primitive, value });
         }
     }
 }

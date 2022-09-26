@@ -33,48 +33,46 @@ namespace SonarAnalyzer.Extensions
         public static bool HasAnyName(this AttributeData attribute, params string[] names) =>
             names.Any(x => attribute.HasName(x));
 
-        public static bool TryGetAttributeValue<T>(this AttributeData attribute, string namedArgument, out T value)
+        public static bool TryGetAttributeValue<T>(this AttributeData attribute, string valueName, out T value)
         {
             value = default;
-            return attribute.NamedArguments.IndexOf(x => x.Key.Equals(namedArgument, StringComparison.OrdinalIgnoreCase)) is var index and >= 0
-                && attribute.NamedArguments[index].Value is var constant
-                && ConvertConstant(constant, out value);
-        }
-
-        public static bool TryGetAttributeValue<T>(this AttributeData attribute, Func<IMethodSymbol, IParameterSymbol> constructorParameter, out T value)
-        {
-            value = default;
-            return constructorParameter(attribute.AttributeConstructor) is { } parameter
-                && attribute.AttributeConstructor.Parameters.IndexOf(parameter) is var index and >= 0
-                && attribute.ConstructorArguments[index] is var constant
-                && ConvertConstant(constant, out value);
-        }
-
-        private static bool ConvertConstant<T>(TypedConstant constant, out T value)
-        {
-            value = default;
-            if (constant.IsNull)
+            // named arguments take precedence over constructor arguments of the same name. For [Attr(valueName: false, valueName = true)] "true" is returned.
+            if (attribute.NamedArguments.IndexOf(x => x.Key.Equals(valueName, StringComparison.OrdinalIgnoreCase)) is var namedAgumentIndex and >= 0)
             {
-                return true;
+                return ConvertConstant(attribute.NamedArguments[namedAgumentIndex].Value, out value);
             }
-            if (constant.Value is T result)
+            if (attribute.AttributeConstructor.Parameters.IndexOf(x => x.Name.Equals(valueName, StringComparison.OrdinalIgnoreCase)) is var constructorParameterIndex and >= 0)
             {
-                value = result;
-                return true;
-            }
-            if (constant.Value is IConvertible)
-            {
-                try
-                {
-                    value = (T)Convert.ChangeType(constant.Value, typeof(T));
-                }
-                catch
-                {
-                    return false;
-                }
-                return true;
+                return ConvertConstant(attribute.ConstructorArguments[constructorParameterIndex], out value);
             }
             return false;
+
+            static bool ConvertConstant(TypedConstant constant, out T value)
+            {
+                value = default;
+                if (constant.IsNull)
+                {
+                    return true;
+                }
+                if (constant.Value is T result)
+                {
+                    value = result;
+                    return true;
+                }
+                if (constant.Value is IConvertible)
+                {
+                    try
+                    {
+                        value = (T)Convert.ChangeType(constant.Value, typeof(T));
+                    }
+                    catch (Exception ex) when (ex is FormatException or OverflowException)
+                    {
+                        return false;
+                    }
+                    return true;
+                }
+                return false;
+            }
         }
     }
 }
