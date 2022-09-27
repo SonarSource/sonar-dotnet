@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 
@@ -209,11 +208,11 @@ Tag(""End"", lastEx);
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateTagOrder("End", "BeforeReturn", "InCatch", "End", "BeforeReturn");
             validator.TagValues("BeforeReturn").Should().SatisfyRespectively(
-                x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue(), // InstanceMethod did not throw
-                x => x.Should().BeNull());                                     // InstanceMethod did throw, was caught, and flow continues
+                x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue(),     // InstanceMethod did not throw
+                x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue()); // InstanceMethod did throw, was caught, and flow continues
             validator.TagValues("End").Should().SatisfyRespectively(
-                x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue(), // Loop was never entered
-                x => x.Should().BeNull());                                     // InstanceMethod did throw and was caught
+                x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue(),     // Loop was never entered
+                x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue()); // InstanceMethod did throw and was caught
         }
 
         [TestMethod]
@@ -241,9 +240,9 @@ Tag(""End"", lastEx);
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateTagOrder("BeforeReturn", "InCatch", "End", "BeforeReturn", "InCatch");
             validator.TagValues("BeforeReturn").Should().SatisfyRespectively(
-                x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue(), // InstanceMethod did not throw
-                x => x.Should().BeNull());                                     // InstanceMethod did throw, was caught, and flow continues
-            validator.ValidateTag("End", x => x.Should().BeNull());            // InstanceMethod did throw and was caught
+                x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue(),                              // InstanceMethod did not throw
+                x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());                          // InstanceMethod did throw, was caught, and flow continues
+            validator.ValidateTag("End", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue()); // InstanceMethod did throw and was caught
         }
     }
 }
