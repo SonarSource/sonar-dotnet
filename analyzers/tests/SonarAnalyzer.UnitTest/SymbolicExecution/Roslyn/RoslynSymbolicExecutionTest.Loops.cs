@@ -215,5 +215,35 @@ Tag(""End"", lastEx);
                 x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue(), // Loop was never entered
                 x => x.Should().BeNull());                                     // InstanceMethod did throw and was caught
         }
+
+        [TestMethod]
+        public void DoWhileLoopWithTryCatchAndNullFlows()
+        {
+            var code = @"
+Exception lastEx = null;
+do
+{
+    try
+    {
+        InstanceMethod(); // May throw
+        Tag(""BeforeReturn"", lastEx);
+        return;
+    }
+    catch (InvalidOperationException e)
+    {
+        lastEx = e;
+        Tag(""InCatch"", lastEx);
+    }
+} while(boolParameter);
+
+Tag(""End"", lastEx);
+";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder("BeforeReturn", "InCatch", "End", "BeforeReturn", "InCatch");
+            validator.TagValues("BeforeReturn").Should().SatisfyRespectively(
+                x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue(), // InstanceMethod did not throw
+                x => x.Should().BeNull());                                     // InstanceMethod did throw, was caught, and flow continues
+            validator.ValidateTag("End", x => x.Should().BeNull());            // InstanceMethod did throw and was caught
+        }
     }
 }
