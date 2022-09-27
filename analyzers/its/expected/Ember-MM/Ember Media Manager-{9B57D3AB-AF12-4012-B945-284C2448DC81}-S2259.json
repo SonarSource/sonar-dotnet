@@ -12,6 +12,110 @@
 "endColumn":  72
 }
 }
+},
+{
+"id":  "S2259",
+"message":  "'Me.tLangList.FirstOrDefault(Function(l) l.ShortLang = Master.eSettings.TVDBLanguage)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  836,
+"startColumn":  36,
+"endLine":  836,
+"endColumn":  120
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'tSetPan' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2620,
+"startColumn":  13,
+"endLine":  2620,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'oSetPan' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2631,
+"startColumn":  60,
+"endLine":  2631,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'oSetPan' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2635,
+"startColumn":  60,
+"endLine":  2635,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'Me.SettingsPanels.FirstOrDefault(Function(p) p.Name = tvSettings.SelectedNode.Name)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  4315,
+"startColumn":  24,
+"endLine":  4315,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'Me.tLangList.FirstOrDefault(Function(l) l.ShortLang = Master.eSettings.TVDBLanguage)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgWizard.vb",
+"region":  {
+"startLine":  175,
+"startColumn":  27,
+"endLine":  175,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'tLangList.FirstOrDefault(Function(l) l.LongLang = Me.cbTVLanguage.Text)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgWizard.vb",
+"region":  {
+"startLine":  371,
+"startColumn":  26,
+"endLine":  371,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'Me.tLangList.FirstOrDefault(Function(l) l.ShortLang = Master.eSettings.TVDBLanguage)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgWizard.vb",
+"region":  {
+"startLine":  444,
+"startColumn":  27,
+"endLine":  444,
+"endColumn":  111
+}
+}
 }
 ]
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.IO;
+using System.Linq;
 
 namespace Tests.Diagnostics
 {
@@ -2880,6 +2881,19 @@ public class ReproWithNullableValueTypes
         if (value1 == null || value2 == null || value1 != value2) // Noncompliant FP
         {
             Console.WriteLine("test");
+        }
+    }
+}
+
+// Inspired by https://github.com/SonarSource/sonar-dotnet/issues/4784
+public class Repro_4784
+{
+    public void ReportOnConditional(object[] arg)
+    {
+        var list = arg.ToList();    // NotNull
+        var ret = list?.Count;      // FN, conditional access always evaluates the same
+        if (list?.Count == 0)       // FN, the ? part should be detected
+        {
         }
     }
 }

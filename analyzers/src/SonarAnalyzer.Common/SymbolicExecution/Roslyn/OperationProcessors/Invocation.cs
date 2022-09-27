@@ -19,6 +19,7 @@
  */
 
 using System.Diagnostics;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
@@ -46,10 +47,77 @@ internal sealed class Invocation : MultiProcessor<IInvocationOperationWrapper>
         }
         return invocation switch
         {
-            _ when invocation.TargetMethod.IsAny(KnownType.System_String, nameof(string.IsNullOrEmpty), nameof(string.IsNullOrWhiteSpace)) => ProcessStringIsNullOrEmpty(context, invocation),
             _ when invocation.TargetMethod.Is(KnownType.System_Diagnostics_Debug, nameof(Debug.Assert)) => ProcessDebugAssert(context, invocation),
+            _ when invocation.TargetMethod.ContainingType.IsAny(KnownType.System_Linq_Enumerable, KnownType.System_Linq_Queryable) => ProcessLinqEnumerableAndQueryable(context, invocation),
+            _ when invocation.TargetMethod.IsAny(KnownType.System_String, nameof(string.IsNullOrEmpty), nameof(string.IsNullOrWhiteSpace)) => ProcessStringIsNullOrEmpty(context, invocation),
             _ => new[] { state }
         };
+    }
+
+    private static ProgramState[] ProcessLinqEnumerableAndQueryable(SymbolicContext context, IInvocationOperationWrapper invocation)
+    {
+        switch (invocation.TargetMethod.Name)
+        {
+            case "Append":
+            case nameof(Enumerable.AsEnumerable):
+            case nameof(Queryable.AsQueryable):
+            case nameof(Enumerable.Cast):
+            case "Chunk":
+            case nameof(Enumerable.Concat):
+            case nameof(Enumerable.DefaultIfEmpty):
+            case nameof(Enumerable.Distinct):
+            case "DistinctBy":
+            case nameof(Enumerable.Empty):
+            case nameof(Enumerable.Except):
+            case "ExceptBy":
+            case nameof(Enumerable.GroupBy):
+            case nameof(Enumerable.GroupJoin):
+            case nameof(Enumerable.Intersect):
+            case "IntersectBy":
+            case nameof(Enumerable.Join):
+            case nameof(Enumerable.OfType):
+            case nameof(Enumerable.OrderBy):
+            case nameof(Enumerable.OrderByDescending):
+            case "Prepend":
+            case nameof(Enumerable.Range):
+            case nameof(Enumerable.Repeat):
+            case nameof(Enumerable.Reverse):
+            case nameof(Enumerable.Select):
+            case nameof(Enumerable.SelectMany):
+            case nameof(Enumerable.Skip):
+            case "SkipLast":
+            case nameof(Enumerable.SkipWhile):
+            case nameof(Enumerable.Take):
+            case "TakeLast":
+            case nameof(Enumerable.TakeWhile):
+            case nameof(Enumerable.ThenBy):
+            case nameof(Enumerable.ThenByDescending):
+            case nameof(Enumerable.ToArray):
+            case nameof(Enumerable.ToDictionary):
+            case "ToHashSet":
+            case nameof(Enumerable.ToList):
+            case nameof(Enumerable.ToLookup):
+            case nameof(Enumerable.Union):
+            case "UnionBy":
+            case nameof(Enumerable.Where):
+            case nameof(Enumerable.Zip):
+                return new[] { context.SetOperationConstraint(ObjectConstraint.NotNull) };
+
+            // ElementAtOrDefault is intentionally not supported. It's causing many FPs
+            case nameof(Enumerable.FirstOrDefault):
+            case nameof(Enumerable.LastOrDefault):
+            case nameof(Enumerable.SingleOrDefault):
+                return invocation.TargetMethod.ReturnType.IsReferenceType
+                    ? new[]
+                    {
+                        context.SetOperationConstraint(ObjectConstraint.Null),
+                        context.SetOperationConstraint(ObjectConstraint.NotNull),
+                    }
+                    : new[] { context.State };
+
+            default:
+                return new[] { context.State };
+        }
     }
 
     private static ProgramState[] ProcessStringIsNullOrEmpty(SymbolicContext context, IInvocationOperationWrapper invocation) =>

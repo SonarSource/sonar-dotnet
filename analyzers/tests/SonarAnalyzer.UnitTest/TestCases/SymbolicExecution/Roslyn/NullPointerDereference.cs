@@ -1019,13 +1019,19 @@ namespace Tests.Diagnostics
         string DoSomething(IEnumerable<object> list)
         {
             var item = list.FirstOrDefault();
-            return item.ToString(); // False Negative, item could be null here
+            return item.ToString(); // Noncompliant
         }
 
         string DoSomethingArg(IEnumerable<object> list)
         {
             var item = list.SingleOrDefault(x => x != null);
-            return item.ToString(); // False Negative, item could be null here
+            return item.ToString(); // Noncompliant
+        }
+
+        string ValueTyped(IEnumerable<int> list)
+        {
+            var item = list.SingleOrDefault(x => x != 0);
+            return item.ToString(); // Compliant, cannot be null
         }
     }
 
@@ -1207,7 +1213,7 @@ namespace Repro_3395
                 // Do something
             }
 
-            return test.Count; // Noncompliant FP
+            return test.Count; // Compliant
         }
 
         public static int NoIssueReported()

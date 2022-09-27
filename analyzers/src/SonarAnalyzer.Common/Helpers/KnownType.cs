@@ -305,6 +305,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Linq_Enumerable = new("System.Linq.Enumerable");
         internal static readonly KnownType System_Linq_Expressions_Expression_T = new("System.Linq.Expressions.Expression", "TDelegate");
         internal static readonly KnownType System_Linq_ImmutableArrayExtensions = new("System.Linq.ImmutableArrayExtensions");
+        internal static readonly KnownType System_Linq_Queryable = new("System.Linq.Queryable");
         internal static readonly KnownType System_MarshalByRefObject = new("System.MarshalByRefObject");
         internal static readonly KnownType System_MTAThreadAttribute = new("System.MTAThreadAttribute");
         internal static readonly KnownType System_Net_FtpWebRequest = new("System.Net.FtpWebRequest");
@@ -528,7 +529,7 @@ namespace SonarAnalyzer.Helpers
                 System_Threading_Tasks_Task,
                 System_Threading_Tasks_Task_T,
                 System_Threading_Tasks_ValueTask_TResult);
-        internal static readonly KnownType Sytem_Resources_ResourceManager = new("System.Resources.ResourceManager");
+        internal static readonly KnownType System_Resources_ResourceManager = new("System.Resources.ResourceManager");
         internal static readonly KnownType UnityEditor_AssetModificationProcessor = new("UnityEditor.AssetModificationProcessor");
         internal static readonly KnownType UnityEditor_AssetPostprocessor = new("UnityEditor.AssetPostprocessor");
         internal static readonly KnownType UnityEngine_MonoBehaviour = new("UnityEngine.MonoBehaviour");

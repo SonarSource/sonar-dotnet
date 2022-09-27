@@ -75,6 +75,11 @@ Public Class Program
         Await T         ' Noncompliant
     End Function
 
+    Public Sub Linq(Items() As Object)
+        Dim Result = From Item In Items Where Item IsNot Nothing
+        If Result.Count > 0 Then Result(0).ToString()   ' Compliant
+    End Sub
+
 End Class
 
 Public NotInheritable Class ValidatedNotNullAttribute
