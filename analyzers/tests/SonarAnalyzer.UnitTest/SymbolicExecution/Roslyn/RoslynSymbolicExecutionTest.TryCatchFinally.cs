@@ -918,6 +918,26 @@ finally
             SETestContext.CreateCSLambda(code, "// Lambda marker").Validator.ValidateTagOrder("Before", "CanThrow", "After");
         }
 
+        [TestMethod]
+        public void ExceptionVariableIsNotNull()
+        {
+            const string code = @"
+try
+{
+    InstanceMethod();
+}
+catch(InvalidOperationException ex) when (Tag(""InFilter"", ex))
+{
+    Tag(""InCatch"", ex);
+}
+
+static bool Tag<T>(string name, T value) => true;
+";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("InFilter", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("InCatch", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        }
+
         private static bool HasNoException(ProgramState state) =>
             state.Exception == null;
 
