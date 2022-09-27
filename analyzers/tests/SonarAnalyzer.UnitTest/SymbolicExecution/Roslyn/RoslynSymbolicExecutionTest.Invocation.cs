@@ -413,5 +413,87 @@ finally
                 new SymbolicValue().WithConstraint(ObjectConstraint.NotNull)
             });
         }
+
+        [DataTestMethod]
+        [DataRow("arg != null")]
+        [DataRow("arg is not null")]
+        [DataRow("arg is { }")]
+        public void Invocation_DebugAssert_LearnsNotNull_Simple(string expression) =>
+            DebugAssertValues(expression).Should().HaveCount(1).And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
+
+        [TestMethod]
+        public void Invocation_DebugAssert_LearnsNotNull_AndAlso() =>
+            DebugAssertValues("arg != null && condition").Should().HaveCount(1).And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
+
+        [TestMethod]
+        public void Invocation_DebugAssert_LearnsNotNullForAll_AndAlso()
+        {
+            var code = $@"
+Debug.Assert(arg1 != null && arg2 != null);
+Tag(""Arg1"", arg1);
+Tag(""Arg2"", arg2);";
+            var validator = SETestContext.CreateCS(code, $", object arg1, object arg2").Validator;
+            validator.ValidateTag("Arg1", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("Arg2", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void Invocation_DebugAssert_LearnsNotNull_OrElse() =>
+            DebugAssertValues("arg != null || condition").Should().HaveCount(2)
+                .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.Null))
+                .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
+
+        [TestMethod]
+        public void Invocation_DebugAssert_LearnsBoolConstraint_Simple() =>
+            DebugAssertValues("arg", "bool").Should().HaveCount(1).And.ContainSingle(x => x.HasConstraint(BoolConstraint.True));
+
+        [TestMethod]
+        public void Invocation_DebugAssert_LearnsBoolConstraint_Binary() =>
+            DebugAssertValues("arg == true", "bool").Should().HaveCount(1).And.ContainSingle(x => x.HasConstraint(BoolConstraint.True));
+
+        [TestMethod]
+        public void Invocation_DebugAssert_LearnsBoolConstraint_AlwaysEnds() =>
+            DebugAssertValues("false", "bool").Should().BeEmpty();
+
+        [DataTestMethod]
+        [DataRow("!arg")]
+        [DataRow("!!!arg")]
+        public void Invocation_DebugAssert_LearnsBoolConstraint_Negated(string expression) =>
+            DebugAssertValues(expression, "bool").Should().HaveCount(1).And.ContainSingle(x => x.HasConstraint(BoolConstraint.False));
+
+        [TestMethod]
+        public void Invocation_DebugAssert_CustomNoParameters_DoesNotFail()
+        {
+            const string code = @"
+using System.Diagnostics;
+
+public class Sample
+{
+    public void Main()
+    {
+        Debug.Assert();
+        Tag(""End"");
+    }
+
+    private static void Tag(string name) { }
+}
+
+namespace System.Diagnostics
+{
+    public static class Debug
+    {
+        public static void Assert() { }
+    }
+}";
+            new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator.ValidateTagOrder("End");
+        }
+
+        private static SymbolicValue[] DebugAssertValues(string expression, string argType = "object")
+        {
+            var code = $@"
+Debug.Assert({expression});
+Tag(""Arg"", arg);";
+            return SETestContext.CreateCS(code, $", {argType} arg, bool condition").Validator.TagValues("Arg");
+        }
     }
 }

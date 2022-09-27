@@ -27,6 +27,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
     /// </summary>
     public class SymbolicCheck
     {
+        /// <summary>
+        /// Stop processing this branch of the exploded graph. There will be no follow up states.
+        /// </summary>
         protected static readonly ProgramState[] EmptyStates =  Array.Empty<ProgramState>();
 
         protected SymbolicCheck() { } // Avoid abstract class, fixes S1694
