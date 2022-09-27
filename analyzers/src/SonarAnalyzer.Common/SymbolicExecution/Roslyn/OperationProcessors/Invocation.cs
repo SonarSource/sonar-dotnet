@@ -56,8 +56,7 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
             _ when invocation.TargetMethod.Is(KnownType.Microsoft_VisualBasic_Information, "IsNothing") => ProcessInformationIsNothing(context, invocation),
             _ when invocation.TargetMethod.Is(KnownType.System_Diagnostics_Debug, nameof(Debug.Assert)) => ProcessDebugAssert(context, invocation),
             _ when invocation.TargetMethod.ContainingType.IsAny(KnownType.System_Linq_Enumerable, KnownType.System_Linq_Queryable) => ProcessLinqEnumerableAndQueryable(context, invocation),
-            _ when invocation.TargetMethod.IsAny(KnownType.System_String, nameof(string.IsNullOrEmpty), nameof(string.IsNullOrWhiteSpace)) => ProcessStringIsNullOrEmpty(context, invocation),
-            _ => new[] { state }
+            _ => ProcessIsNotNullWhen(state, invocation),
         };
     }
 
@@ -135,7 +134,7 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
         }
         foreach (var argument in invocation.Arguments.Select(x => x.ToArgument()))
         {
-            if (argument.Parameter?.GetAttributes().FirstOrDefault(x => x.HasAnyName("NotNullWhen")) is { } attribute // TODO: "MaybeNullWhen"
+            if (argument.Parameter?.GetAttributes().FirstOrDefault(x => x.HasAnyName("NotNullWhenAttribute")) is { } attribute // TODO: "MaybeNullWhen"
                 && attribute.TryGetAttributeValue<bool>("returnValue", out var returnValue))
             {
                 return ProcessIsNotNullWhen(state, invocation.WrappedOperation, argument, returnValue);
