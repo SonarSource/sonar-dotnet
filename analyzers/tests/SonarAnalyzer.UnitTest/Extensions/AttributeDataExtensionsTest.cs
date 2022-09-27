@@ -29,10 +29,13 @@ namespace SonarAnalyzer.UnitTest.Extensions
     {
         [DataTestMethod]
         [DataRow(true, "Test", "Test")]
-        [DataRow(true, "Test", "test")]
-        [DataRow(true, "Test", "TEST")]
-        [DataRow(true, "TestAttribute", "Test")]
-        [DataRow(true, "TestAttribute", "test")]
+        [DataRow(true, "TestAttribute", "TestAttribute")]
+        [DataRow(false, "TestAttribute", null)]
+        [DataRow(false, "Test", "test")]
+        [DataRow(false, "Test", "TEST")]
+        [DataRow(false, "TestAttribute", "Test")]
+        [DataRow(false, "TestAttribute", "testAttribute")]
+        [DataRow(false, "TestAttribute", "test")]
         [DataRow(false, "TestAttribute", "testAttr")]
         [DataRow(false, "TestAttribute", "TestAttr")]
         [DataRow(false, "TestAttribute", "TestAttributes")]
@@ -43,36 +46,21 @@ namespace SonarAnalyzer.UnitTest.Extensions
             AttributeDataWithName(attributeClassName).HasName(testName).Should().Be(expected);
 
         [DataTestMethod]
-        [DataRow(null)]
-        [DataRow("Attribute")]
-        [DataRow("   Attribute")]
-        [DataRow("SomeAttribute")]
-        [DataRow("TestAttribute")]
-        [DataRow("TestAttributeAttribute")]
-        public void HasNameThrows(string testName) =>
-            new Action(() => AttributeDataWithName("Test").HasName(testName)).Should().Throw<Exception>();
-
-        [DataTestMethod]
         [DataRow(true, "Test", "Test", "Test")]
-        [DataRow(true, "Test", "test", "other")]
-        [DataRow(true, "Test", "other", "test")]
-        [DataRow(true, "TestAttribute", "test", "other")]
+        [DataRow(true, "TestAttribute", "TestAttribute", "TestAttribute")]
+        [DataRow(false, "Test", "test", "other")]
+        [DataRow(false, "Test", "other", "test")]
+        [DataRow(false, "TestAttribute", "test", "other")]
         [DataRow(false, "TestAttribute", "other", "other")]
-        [DataRow(false, "TestAttribute", "other1", "other2", "other3")]
-        [DataRow(true, "TestAttribute", "other1", "other2", "other3", "Test")]
-        [DataRow(true, "TestAttribute", "Test", "test", "SomeAttribute")]
+        [DataRow(false, "TestAttribute", "other1", "other2", "Test")]
+        [DataRow(true, "TestAttribute", "other1", "other2", "other3", "TestAttribute")]
+        [DataRow(false, "TestAttribute", "Test", "test", "SomeAttribute")]
         public void HasAnyName(bool expected, string attributeClassName, params string[] testNames) =>
             AttributeDataWithName(attributeClassName).HasAnyName(testNames).Should().Be(expected);
 
-        [DataTestMethod]
-        [DataRow(null)]
-        [DataRow(new[] { (string)null })]
-        [DataRow(new[] { "Attribute" })]
-        [DataRow(new[] { "   Attribute" })]
-        [DataRow(new[] { "FailAttribute" })]
-        [DataRow(new[] { "Some", "Other", "FailAttribute" })]
-        public void HasAnyNameThrows(string[] testNames) =>
-            new Action(() => AttributeDataWithName("Test").HasAnyName(testNames)).Should().Throw<Exception>();
+        [TestMethod]
+        public void HasAnyNameThrowsForNull() =>
+            new Action(() => AttributeDataWithName("TestAttribute").HasAnyName(null)).Should().Throw<Exception>();
 
         private static AttributeData AttributeDataWithName(string attributeClassName)
         {

@@ -103,13 +103,12 @@ internal sealed class Invocation : MultiProcessor<IInvocationOperationWrapper>
         }
     }
 
-    private static bool IsThrowHelper(IInvocationOperationWrapper invocation) =>
-        invocation.TargetMethod is { } method
-        && (method.Is(KnownType.System_Diagnostics_Debug, nameof(Debug.Fail))
-            || method.IsAny(KnownType.System_Environment, nameof(Environment.FailFast), nameof(Environment.Exit))
-            || method.GetAttributes().Any(x => x.HasAnyName(
-                "DoesNotReturn",        // https://learn.microsoft.com/dotnet/api/system.diagnostics.codeanalysis.doesnotreturnattribute
-                "TerminatesProgram"))); // https://www.jetbrains.com/help/resharper/Reference__Code_Annotation_Attributes.html#TerminatesProgramAttribute
+    private static bool IsThrowHelper(IMethodSymbol method) =>
+        method.Is(KnownType.System_Diagnostics_Debug, nameof(Debug.Fail))
+        || method.IsAny(KnownType.System_Environment, nameof(Environment.FailFast), nameof(Environment.Exit))
+        || method.GetAttributes().Any(x => x.HasAnyName(
+                                                "DoesNotReturnAttribute",       // https://learn.microsoft.com/dotnet/api/system.diagnostics.codeanalysis.doesnotreturnattribute
+                                                "TerminatesProgramAttribute")); // https://www.jetbrains.com/help/resharper/Reference__Code_Annotation_Attributes.html#TerminatesProgramAttribute
 
     private static ProgramState ProcessArgumentAttributes(ProgramState state, IArgumentOperationWrapper argument, ImmutableArray<AttributeData> attributes) =>
             attributes.Any(IsValidatedNotNullAttribute) && argument.Value.TrackedSymbol() is { } symbol

@@ -562,17 +562,12 @@ Tag(""End"");
         [DataTestMethod]
         [DataRow("System.Diagnostics.CodeAnalysis.DoesNotReturn")]
         [DataRow("System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute")]
-        [DataRow("OtherNamespace.WithAttributeSuffix.DoesNotReturn")]
-        [DataRow("OtherNamespace.WithAttributeSuffix.DoesNotReturnAttribute")]
-        [DataRow("OtherNamespace.WithoutAttributeSuffix.DoesNotReturn")]
+        [DataRow("OtherNamespace.DoesNotReturn")]
+        [DataRow("OtherNamespace.DoesNotReturnAttribute")]
         [DataRow("JetBrains.Annotations.TerminatesProgram")]
         [DataRow("JetBrains.Annotations.TerminatesProgramAttribute")]
-        [DataRow("OtherNamespace.WithAttributeSuffix.TerminatesProgram")]
-        [DataRow("OtherNamespace.WithAttributeSuffix.TerminatesProgramAttribute")]
-        [DataRow("OtherNamespace.WithoutAttributeSuffix.TerminatesProgram")]
-        [DataRow("OtherNamespace.DifferentCasing.Terminatesprogram")]
-        [DataRow("OtherNamespace.DifferentCasing.TerminatesprogramAttribute")]
-        [DataRow("OtherNamespace.DifferentCasing.DoesnotReturn")]
+        [DataRow("OtherNamespace.TerminatesProgram")]
+        [DataRow("OtherNamespace.TerminatesProgramAttribute")]
         public void Invocation_ThrowHelper_Attributes(string throwHelperAttribute)
         {
             var code = $@"
@@ -601,20 +596,10 @@ namespace JetBrains.Annotations
 {{
     public sealed class TerminatesProgramAttribute : Attribute {{ }}
 }}
-namespace OtherNamespace.WithAttributeSuffix
+namespace OtherNamespace
 {{
     public sealed class TerminatesProgramAttribute : Attribute {{ }}
     public sealed class DoesNotReturnAttribute : Attribute {{ }}
-}}
-namespace OtherNamespace.WithoutAttributeSuffix
-{{
-    public sealed class TerminatesProgram : Attribute {{ }}
-    public sealed class DoesNotReturn : Attribute {{ }}
-}}
-namespace OtherNamespace.DifferentCasing
-{{
-    public sealed class TerminatesprogramAttribute : Attribute {{ }}
-    public sealed class DoesnotReturn : Attribute {{ }}
 }}
 ";
 #if NETFRAMEWORK
