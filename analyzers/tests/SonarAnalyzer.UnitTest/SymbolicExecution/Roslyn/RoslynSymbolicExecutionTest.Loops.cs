@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 
@@ -86,8 +87,8 @@ Tag(""End"", value);";
             var validator = SETestContext.CreateCS(code, ", int[] items", new AddConstraintOnInvocationCheck(), new PreserveTestCheck("condition"), new PreserveTestCheck("value")).Validator;
             validator.ValidateExitReachCount(4);
             var states = validator.TagStates("End");
-            var condition = states.SelectMany(x => x.SymbolsWith(BoolConstraint.False)).First();    // "False" is never set for "value"
-            var value = states.SelectMany(x => x.SymbolsWith(TestConstraint.First)).First();        // "First" is never set for "condition"
+            var condition = validator.Symbol("condition");
+            var value = validator.Symbol("value");
             states.Should().HaveCount(4)
                 .And.ContainSingle(x => x[condition].HasConstraint(BoolConstraint.True) && x[value].HasConstraint(TestConstraint.First) && !x[value].HasConstraint(BoolConstraint.True))
                 .And.ContainSingle(x => x[condition].HasConstraint(BoolConstraint.True) && x[value].HasConstraint(TestConstraint.First) && x[value].HasConstraint(BoolConstraint.True))
@@ -181,6 +182,38 @@ var condition = false;
 }}
 Tag(""End"");";
             SETestContext.CreateCS(code).Validator.ValidateTagOrder("End");
+        }
+
+        [TestMethod]
+        public void ForLoopWithTryCatchAndNullFlows()
+        {
+            var code = @"
+Exception lastEx = null;
+for (int i = 0; i < 10; i++)
+{
+    try
+    {
+        InstanceMethod(); // May throw
+        Tag(""BeforeReturn"", lastEx);
+        return;
+    }
+    catch (InvalidOperationException e)
+    {
+        lastEx = e;
+        Tag(""InCatch"", lastEx);
+    }
+}
+
+Tag(""End"", lastEx);
+";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder("End", "BeforeReturn", "InCatch", "End", "BeforeReturn");
+            validator.TagValues("BeforeReturn").Should().SatisfyRespectively(
+                x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue(), // InstanceMethod did not throw
+                x => x.Should().BeNull());                                     // InstanceMethod did throw, was caught, and flow continues
+            validator.TagValues("End").Should().SatisfyRespectively(
+                x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue(), // Loop was never entered
+                x => x.Should().BeNull());                                     // InstanceMethod did throw and was caught
         }
     }
 }
