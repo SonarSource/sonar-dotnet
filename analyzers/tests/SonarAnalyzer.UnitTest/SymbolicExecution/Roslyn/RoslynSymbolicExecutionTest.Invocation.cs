@@ -445,6 +445,7 @@ finally
         [DataRow("arg.OrderBy(x => x).ThenByDescending(x => x);")]
         [DataRow("arg.ToArray();")]
         [DataRow("arg.ToDictionary(x => x);")]
+        [DataRow("arg.ToHashSet();")]
         [DataRow("arg.ToList();")]
         [DataRow("arg.ToLookup(x => x);")]
         [DataRow("arg.Union(arg);")]
@@ -453,6 +454,7 @@ finally
 #if NET
         [DataRow("arg.Chunk(42)")]
         [DataRow("arg.DistinctBy(x => x)")]
+        [DataRow("arg.ExceptBy(arg, x => x)")]
         [DataRow("arg.IntersectBy(arg, x => x);")]
         [DataRow("arg.SkipLast(42);")]
         [DataRow("arg.UnionBy(arg, x => x);")]

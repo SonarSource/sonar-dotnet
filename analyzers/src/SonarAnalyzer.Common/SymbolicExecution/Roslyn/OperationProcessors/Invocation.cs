@@ -69,6 +69,7 @@ internal sealed class Invocation : MultiProcessor<IInvocationOperationWrapper>
             case "DistinctBy":
             case nameof(Enumerable.Empty):
             case nameof(Enumerable.Except):
+            case "ExceptBy":
             case nameof(Enumerable.GroupBy):
             case nameof(Enumerable.GroupJoin):
             case nameof(Enumerable.Intersect):
@@ -93,6 +94,7 @@ internal sealed class Invocation : MultiProcessor<IInvocationOperationWrapper>
             case nameof(Enumerable.ThenByDescending):
             case nameof(Enumerable.ToArray):
             case nameof(Enumerable.ToDictionary):
+            case "ToHashSet":
             case nameof(Enumerable.ToList):
             case nameof(Enumerable.ToLookup):
             case nameof(Enumerable.Union):
