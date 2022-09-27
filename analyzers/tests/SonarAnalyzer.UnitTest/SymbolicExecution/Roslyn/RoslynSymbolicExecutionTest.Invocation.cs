@@ -318,7 +318,7 @@ Tag(""AfterIfElse"", ObjectField);
                 x.HasConstraint(invalidateConstraint).Should().BeFalse();
                 x.HasConstraint(dontInvalidateConstraint).Should().BeTrue();
             });
-            validator.TagValues("AfterIfElse").Should().Equal(new SymbolicValue[]
+            validator.TagValues("AfterIfElse").Should().Equal(new[]
             {
                 new SymbolicValue().WithConstraint(dontInvalidateConstraint),
             });
@@ -604,5 +604,181 @@ Debug.Assert({expression});
 Tag(""Arg"", arg);";
             return SETestContext.CreateCS(code, $", {argType} arg, bool condition").Validator.TagValues("Arg");
         }
+
+        [DataTestMethod]
+        [DynamicData(nameof(ThrowHelperCalls))]
+        public void Invocation_ThrowHelper_StopProcessing(string throwHelperCall)
+        {
+            var code = $@"
+Tag(""Before"");
+{throwHelperCall}
+Tag(""Unreachable"");
+";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder("Before");
+            validator.ValidateExitReachCount(0);
+            validator.ValidateExecutionCompleted();
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(ThrowHelperCalls))]
+        public void Invocation_ThrowHelper_OnlyInBranch(string throwHelperCall)
+        {
+            var code = @$"
+if (condition)
+{{
+    Tag(""Before"");
+    {throwHelperCall}
+    Tag(""Unreachable"");
+}}
+Tag(""End"");
+";
+            var validator = SETestContext.CreateCS(code, ", bool condition").Validator;
+            validator.ValidateTagOrder("Before", "End");
+            validator.ValidateExitReachCount(1);
+            validator.ValidateExecutionCompleted();
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(ThrowHelperCalls))]
+        public void Invocation_ThrowHelper_TryCatchFinally(string throwHelperCall)
+        {
+            var code = @$"
+try
+{{
+    {throwHelperCall}
+    Tag(""Unreachable"");
+}}
+catch
+{{
+    Tag(""Catch"");
+}}
+finally
+{{
+    Tag(""Finally"");
+}}
+Tag(""End"");
+";
+            var validator = SETestContext.CreateCS(code, ", bool condition").Validator;
+            validator.ValidateTagOrder("Catch", "Finally", "Finally", "End");
+            validator.ValidateExitReachCount(2);
+            validator.ValidateExecutionCompleted();
+        }
+
+        [DataTestMethod]
+        [DataRow("System.Diagnostics.CodeAnalysis.DoesNotReturn")]
+        [DataRow("System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute")]
+        [DataRow("OtherNamespace.DoesNotReturn")]
+        [DataRow("OtherNamespace.DoesNotReturnAttribute")]
+        [DataRow("JetBrains.Annotations.TerminatesProgram")]
+        [DataRow("JetBrains.Annotations.TerminatesProgramAttribute")]
+        [DataRow("OtherNamespace.TerminatesProgram")]
+        [DataRow("OtherNamespace.TerminatesProgramAttribute")]
+        public void Invocation_ThrowHelper_Attributes(string throwHelperAttribute)
+        {
+            var code = $@"
+using System;
+using System.Diagnostics;
+
+public class Sample
+{{
+    public void Test()
+    {{
+        Tag(""Before"");
+        ThrowHelper();
+        Tag(""Unreachable"");
+    }}
+
+    [{throwHelperAttribute}]
+    public void ThrowHelper()
+    {{
+        // No implementation. The attribute should drive the analysis.
+    }}
+
+    static void Tag(string name) {{ }}
+}}
+
+namespace JetBrains.Annotations
+{{
+    public sealed class TerminatesProgramAttribute : Attribute {{ }}
+}}
+namespace OtherNamespace
+{{
+    public sealed class TerminatesProgramAttribute : Attribute {{ }}
+    public sealed class DoesNotReturnAttribute : Attribute {{ }}
+}}
+";
+#if NETFRAMEWORK
+            code += @"
+namespace System.Diagnostics.CodeAnalysis
+{
+    public sealed class DoesNotReturnAttribute : Attribute { }
+}
+";
+#endif
+            var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
+            validator.ValidateTagOrder("Before");
+            validator.ValidateExitReachCount(0);
+            validator.ValidateExecutionCompleted();
+        }
+
+        [DataTestMethod]
+        [DataRow("DoesTerminatesProgramAttribute")]
+        [DataRow("TerminatesMyProgramAttribute")]
+        [DataRow("TerminatesProgramAttributeS")]
+        [DataRow("DoesNotReturnEver")]
+        [DataRow("ItDoesNotReturn")]
+        public void Invocation_ThrowHelper_OtherAttributes_NotSupported(string attributeName)
+        {
+            var code = $@"
+using System;
+using System.Diagnostics;
+
+public class Sample
+{{
+    public void Test()
+    {{
+        Tag(""Before"");
+        ThrowHelper();
+        Tag(""After"");
+    }}
+
+    [{attributeName}]
+    public void ThrowHelper()
+    {{
+        // No implementation. The attribute should drive the analysis.
+    }}
+
+    static void Tag(string name) {{ }}
+}}
+
+public sealed class {attributeName}: Attribute {{ }}
+";
+            var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
+            validator.ValidateTagOrder("Before", "After");
+            validator.ValidateExitReachCount(1);
+            validator.ValidateExecutionCompleted();
+        }
+
+        [TestMethod]
+        public void Invocation_TargetMethodIsDelegateInvoke()
+        {
+            var code = @"
+Func<Action> f = () => new Action(()=> { });
+f()();
+";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateContainsOperation(OperationKindEx.Invocation);
+            validator.ValidateExitReachCount(1);
+            validator.ValidateExecutionCompleted();
+        }
+
+        private static IEnumerable<object[]> ThrowHelperCalls =>
+            new object[][]
+            {
+                new[] { @"System.Diagnostics.Debug.Fail(""Fail"");" },
+                new[] { @"Environment.FailFast(""Fail"");" },
+                new[] { @"Environment.Exit(-1);" },
+            };
     }
 }
