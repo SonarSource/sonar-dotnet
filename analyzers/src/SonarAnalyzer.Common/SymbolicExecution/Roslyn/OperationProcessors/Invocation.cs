@@ -38,7 +38,7 @@ internal sealed class Invocation : MultiProcessor<IInvocationOperationWrapper>
     {
         if (IsThrowHelper(invocation.TargetMethod))
         {
-            return Array.Empty<ProgramState>();
+            return EmptyStates;
         }
         var state = context.State;
         if (!invocation.TargetMethod.IsStatic             // Also applies to C# extensions
@@ -109,14 +109,4 @@ internal sealed class Invocation : MultiProcessor<IInvocationOperationWrapper>
         || method.GetAttributes().Any(x => x.HasAnyName(
                                                 "DoesNotReturnAttribute",       // https://learn.microsoft.com/dotnet/api/system.diagnostics.codeanalysis.doesnotreturnattribute
                                                 "TerminatesProgramAttribute")); // https://www.jetbrains.com/help/resharper/Reference__Code_Annotation_Attributes.html#TerminatesProgramAttribute
-
-    private static ProgramState ProcessArgumentAttributes(ProgramState state, IArgumentOperationWrapper argument, ImmutableArray<AttributeData> attributes) =>
-            attributes.Any(IsValidatedNotNullAttribute) && argument.Value.TrackedSymbol() is { } symbol
-                ? state.SetSymbolConstraint(symbol, ObjectConstraint.NotNull)
-                : state;
-
-        // Same as [NotNull] https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/attributes/nullable-analysis#postconditions-maybenull-and-notnull
-        private static bool IsValidatedNotNullAttribute(AttributeData attribute) =>
-            attribute.AttributeClass?.Name == "ValidatedNotNullAttribute";
-    }
 }

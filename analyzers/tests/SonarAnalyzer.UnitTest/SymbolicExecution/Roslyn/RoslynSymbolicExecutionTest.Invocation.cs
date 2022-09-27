@@ -496,9 +496,6 @@ Tag(""Arg"", arg);";
             return SETestContext.CreateCS(code, $", {argType} arg, bool condition").Validator.TagValues("Arg");
         }
 
-        [TestMethod]
-        [Ignore("Show alternative operation order for processing.")]
-        public void Invocation_ThrowHelper_DebugFail_ContinueWithEmptyState()
         [DataTestMethod]
         [DynamicData(nameof(ThrowHelperCalls))]
         public void Invocation_ThrowHelper_StopProcessing(string throwHelperCall)
