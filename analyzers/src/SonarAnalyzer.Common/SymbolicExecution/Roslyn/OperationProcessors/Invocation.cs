@@ -176,15 +176,4 @@ internal sealed class Invocation : MultiProcessor<IInvocationOperationWrapper>
         || method.GetAttributes().Any(x => x.HasAnyName(
                                                 "DoesNotReturnAttribute",       // https://learn.microsoft.com/dotnet/api/system.diagnostics.codeanalysis.doesnotreturnattribute
                                                 "TerminatesProgramAttribute")); // https://www.jetbrains.com/help/resharper/Reference__Code_Annotation_Attributes.html#TerminatesProgramAttribute
-
-        // https://docs.microsoft.com/dotnet/api/microsoft.validatednotnullattribute
-        // https://docs.microsoft.com/dotnet/csharp/language-reference/attributes/nullable-analysis#postconditions-maybenull-and-notnull
-        // https://www.jetbrains.com/help/resharper/Reference__Code_Annotation_Attributes.html#NotNullAttribute
-        private static bool IsNotNullAttribute(AttributeData attribute) =>
-            attribute.AttributeClass?.Name
-                is "ValidatedNotNullAttribute"
-                or "ValidatedNotNull"
-                or "NotNullAttribute"
-                or "NotNull";
-    }
 }
