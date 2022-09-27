@@ -26,12 +26,8 @@ namespace SonarAnalyzer.Extensions
 {
     public static class AttributeDataExtensions
     {
-        public static bool HasName(this AttributeData attribute, string name)
-        {
-            const StringComparison comparision = StringComparison.Ordinal;
-            return attribute is { AttributeClass.Name: { } attributeClassName }
-                && attributeClassName.Equals(name, comparision);
-        }
+        public static bool HasName(this AttributeData attribute, string name) =>
+            attribute is { AttributeClass.Name: { } attributeClassName } && attributeClassName.Equals(name, StringComparison.Ordinal);
 
         public static bool HasAnyName(this AttributeData attribute, params string[] names) =>
             names.Any(x => attribute.HasName(x));
