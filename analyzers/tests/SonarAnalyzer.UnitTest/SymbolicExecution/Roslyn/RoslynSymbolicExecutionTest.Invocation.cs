@@ -523,13 +523,14 @@ End If";
         }
 
         [DataTestMethod]
-        [DataRow("Nothing", true)]
-        [DataRow("New Object()", false)]
-        public void Invocation_InformationIsNothing_KnownSymbol(string value, bool expected)
+        [DataRow("Object = Nothing", true)]
+        [DataRow("Object = New Object()", false)]
+        [DataRow("Integer = Nothing", false)]   // While it can be assigned Nothing, value 0 is stored. And that is not null
+        public void Invocation_InformationIsNothing_KnownSymbol(string declarationSuffix, bool expected)
         {
             var code = $@"
-Dim Value As Object = {value}
-Dim Result As Boolean = IsNothing(Value)
+Dim Value As {declarationSuffix}
+Dim Result As Boolean = IsNothing(CType(DirectCast(Value, Object), Object)) ' Some conversions in the way to detect the value type
 Tag(""Result"", Result)";
             var validator = SETestContext.CreateVB(code).Validator;
             validator.ValidateTag("Result", x => x.HasConstraint(BoolConstraint.From(expected)).Should().BeTrue());
@@ -538,7 +539,6 @@ Tag(""Result"", Result)";
         [DataTestMethod]
         [DataRow("Object")]
         [DataRow("Exception")]
-        [DataRow("Integer")]    // This should always return only "false". Dim Value As Integer = Nothing
         [DataRow("Integer?")]
         public void Invocation_InformationIsNothing_UnknownSymbol(string type)
         {
@@ -557,7 +557,7 @@ Tag(""Result"", Result)";
         public void Invocation_InformationIsNothing_NoTrackedSymbol()
         {
             var code = $@"
-Dim Result As Boolean = IsNothing(Arg.ToString())
+Dim Result As Boolean = IsNothing("""" & Arg.ToString())
 Tag(""Result"", Result)";
             var validator = SETestContext.CreateVB(code, ", Arg As Object").Validator;
             validator.ValidateTag("Result", x => x.Should().BeNull());
