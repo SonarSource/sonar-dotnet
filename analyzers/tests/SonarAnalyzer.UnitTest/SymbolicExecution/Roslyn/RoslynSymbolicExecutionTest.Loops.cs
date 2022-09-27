@@ -209,7 +209,7 @@ Tag(""End"", lastEx);
             validator.ValidateTagOrder("End", "BeforeReturn", "InCatch", "End", "BeforeReturn");
             validator.TagValues("BeforeReturn").Should().SatisfyRespectively(
                 x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue(),     // InstanceMethod did not throw
-                x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue()); // InstanceMethod did throw, was caught, and flow continues
+                x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue()); // InstanceMethod did throw, was caught, and flow continued
             validator.TagValues("End").Should().SatisfyRespectively(
                 x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue(),     // Loop was never entered
                 x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue()); // InstanceMethod did throw and was caught
@@ -241,7 +241,7 @@ Tag(""End"", lastEx);
             validator.ValidateTagOrder("BeforeReturn", "InCatch", "End", "BeforeReturn", "InCatch");
             validator.TagValues("BeforeReturn").Should().SatisfyRespectively(
                 x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue(),                              // InstanceMethod did not throw
-                x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());                          // InstanceMethod did throw, was caught, and flow continues
+                x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());                          // InstanceMethod did throw, was caught, and flow continued
             validator.ValidateTag("End", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue()); // InstanceMethod did throw and was caught
         }
     }
