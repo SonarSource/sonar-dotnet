@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 
@@ -27,7 +26,7 @@ namespace SonarAnalyzer.Extensions
     public static class AttributeDataExtensions
     {
         public static bool HasName(this AttributeData attribute, string name) =>
-            attribute is { AttributeClass.Name: { } attributeClassName } && attributeClassName.Equals(name, StringComparison.Ordinal);
+            attribute is { AttributeClass.Name: { } attributeClassName } && attributeClassName == name;
 
         public static bool HasAnyName(this AttributeData attribute, params string[] names) =>
             names.Any(x => attribute.HasName(x));
