@@ -432,7 +432,7 @@ finally
         [DataRow("arg.OrderBy(x => x);")]
         [DataRow("arg.OrderByDescending(x => x);")]
         [DataRow("arg.Prepend(null);")]
-        [DataRow("arg.Range(42, 42);")]
+        [DataRow("Enumerable.Range(42, 42);")]
         [DataRow("Enumerable.Repeat(42, 42);")]
         [DataRow("arg.Reverse();")]
         [DataRow("arg.Select(x => x);")]
