@@ -373,7 +373,7 @@ catch
 }
 tag = ""AfterCatch"";";
             var validator = SETestContext.CreateCS(code, ", IEnumerable<string> collection").Validator;
-            validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "InCatch", "AfterCatch", "InCatch", "InCatch", "InCatch", "AfterCatch");
+            validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch", "InCatch", "InCatch", "AfterCatch");
 
             // IForEachLoopOperation is not generated. It doesn't seem to be used.
 
@@ -381,9 +381,9 @@ tag = ""AfterCatch"";";
             // - IEnumerable<>.GetEnumerator()
             // - System.Collections.IEnumerator.MoveNext()
             // - System.IDisposable.Dispose()
-            validator.TagStates("InCatch").Should().HaveCount(5)
+            validator.TagStates("InCatch").Should().HaveCount(3)
                 .And.Contain(x => HasExceptionOfType(x, "NullReferenceException"))
-                .And.Subject.Where(HasUnknownException).Should().HaveCount(4);
+                .And.Subject.Where(HasUnknownException).Should().HaveCount(2);
             validator.ExitStates.Should().HaveCount(2).And.OnlyContain(x => HasNoException(x));
         }
 

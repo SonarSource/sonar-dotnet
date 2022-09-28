@@ -62,10 +62,10 @@ Tag(""End"", value);";
             // - IEnumerable<>.GetEnumerator()
             // - System.Collections.IEnumerator.MoveNext()
             // - System.IDisposable.Dispose()
-            validator.ValidateExitReachCount(12); // foreach produces implicit TryFinally region where it can throw and changes the flow.
-                                                  // The finally contains a TryCast from IEnumerable to IDisposable, which also branches.
-            var firstNotNull = new SonarAnalyzer.SymbolicExecution.Roslyn.SymbolicValue().WithConstraint(TestConstraint.First).WithConstraint(ObjectConstraint.NotNull);
-            validator.TagValues("End").Should().HaveCount(4).And.Equal(null, null, firstNotNull, firstNotNull);    // These Exception flows do not reach the Tag("End") line
+            validator.ValidateExitReachCount(6);                // foreach produces implicit TryFinally region where it can throw and changes the flow
+            validator.TagValues("End").Should().HaveCount(2)    // These Exception flows do not reach the Tag("End") line
+                .And.ContainSingle(x => x == null)
+                .And.ContainSingle(x => x != null && x.HasConstraint(TestConstraint.First) && !x.HasConstraint(BoolConstraint.True));
         }
 
         [TestMethod]
