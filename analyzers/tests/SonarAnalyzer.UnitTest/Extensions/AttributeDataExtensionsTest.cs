@@ -167,14 +167,14 @@ namespace SonarAnalyzer.UnitTest.Extensions
             var namedArgumentsFake = namedArguments?.Select(x => new KeyValuePair<string, TypedConstant>(x.Key, CreateTypedConstant(x.Value))).ToImmutableArray()
                 ?? ImmutableArray.Create<KeyValuePair<string, TypedConstant>>();
             var constructorArgumentsFake = constructorArguments?.Select(x => CreateTypedConstant(x.Value)).ToImmutableArray() ?? ImmutableArray.Create<TypedConstant>();
-            var constructorParamatersFake = constructorArguments?.Select(x =>
+            var constructorParametersFake = constructorArguments?.Select(x =>
             {
                 var parameterMock = new Mock<IParameterSymbol>();
                 parameterMock.Setup(x => x.Name).Returns(x.Key);
                 return parameterMock.Object;
             }).ToImmutableArray() ?? ImmutableArray.Create<IParameterSymbol>();
             var constructorMock = new Mock<IMethodSymbol>();
-            constructorMock.Setup(x => x.Parameters).Returns(constructorParamatersFake);
+            constructorMock.Setup(x => x.Parameters).Returns(constructorParametersFake);
             var attributeDataMock = new Mock<AttributeData>();
             attributeDataMock.Protected().Setup<ImmutableArray<KeyValuePair<string, TypedConstant>>>("CommonNamedArguments").Returns(namedArgumentsFake);
             attributeDataMock.Protected().Setup<ImmutableArray<TypedConstant>>("CommonConstructorArguments").Returns(constructorArgumentsFake);
