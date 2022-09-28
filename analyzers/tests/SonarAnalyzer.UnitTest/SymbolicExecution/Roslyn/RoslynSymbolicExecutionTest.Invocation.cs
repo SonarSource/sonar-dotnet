@@ -870,16 +870,6 @@ namespace OtherNamespace
     public sealed class TerminatesProgramAttribute : Attribute {{ }}
     public sealed class DoesNotReturnAttribute : Attribute {{ }}
 }}
-namespace OtherNamespace.WithAttributeSuffix
-{{
-    public sealed class TerminatesProgramAttribute : Attribute {{ }}
-    public sealed class DoesNotReturnAttribute : Attribute {{ }}
-}}
-namespace OtherNamespace.WithoutAttributeSuffix
-{{
-    public sealed class TerminatesProgram : Attribute {{ }}
-    public sealed class DoesNotReturn : Attribute {{ }}
-}}
 ";
 #if NETFRAMEWORK
             code += @"
@@ -946,14 +936,12 @@ f()();
             validator.ValidateExecutionCompleted();
         }
 
-        public static IEnumerable<object[]> ThrowHelperCalls
-        {
-            get
+        private static IEnumerable<object[]> ThrowHelperCalls =>
+            new object[][]
             {
-                yield return new object[] { @"System.Diagnostics.Debug.Fail(""Fail"");" };
-                yield return new object[] { @"Environment.FailFast(""Fail"");" };
-                yield return new object[] { @"Environment.Exit(-1);" };
-            }
-        }
+                new[] { @"System.Diagnostics.Debug.Fail(""Fail"");" },
+                new[] { @"Environment.FailFast(""Fail"");" },
+                new[] { @"Environment.Exit(-1);" },
+            };
     }
 }
