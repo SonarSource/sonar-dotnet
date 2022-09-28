@@ -41,23 +41,31 @@ internal sealed class Conversion : MultiProcessor<IConversionOperationWrapper>
 
     private static ProgramState[] Process(ProgramState state, IConversionOperationWrapper conversion, SymbolicValue operandSymbolValue)
     {
-        if (conversion.Type.IsValueType || conversion.Type.IsUnconstraintGeneric() || conversion.Operand.Type.IsUnconstraintGeneric())
-        {
-            return new[] { state };
-        }
         var operandConstraint = operandSymbolValue?.Constraint<ObjectConstraint>();
         var operandSymbol = conversion.Operand.TrackedSymbol();
         var targetCanBeNull = conversion.Operand.Type is { IsReferenceType: true };
         return true switch
         {
             _ when IsBoxingConversion(conversion) => ProcessBoxing(state, conversion),
+            _ when IsUnboxingConversion(conversion) => ProcessUnboxing(state, operandSymbol),
             _ => new[] { state },
         };
     }
 
-    private static ProgramState[] ProcessBoxing(ProgramState state, IConversionOperationWrapper conversion) =>
-        new[] { state.SetOperationConstraint(conversion.WrappedOperation, ObjectConstraint.NotNull) };
+    private static bool IsUnboxingConversion(IConversionOperationWrapper conversion) =>
+        conversion is { Type.IsValueType: true, Operand.Type.IsReferenceType: true };
+
+    private static ProgramState[] ProcessUnboxing(ProgramState state, ISymbol operandSymbol) =>
+        operandSymbol == null
+            ? new[] { state }
+            : new[] { state.SetSymbolConstraint(operandSymbol, ObjectConstraint.NotNull) };
 
     private static bool IsBoxingConversion(IConversionOperationWrapper conversion) =>
         conversion is { Type.IsReferenceType: true, Operand.Type.IsValueType: true };
+
+    private static ProgramState[] ProcessBoxing(ProgramState state, IConversionOperationWrapper conversion) =>
+        conversion.Operand.Type.IsNullable()
+        ? new[] { state }
+        : new[] { state.SetOperationConstraint(conversion.WrappedOperation, ObjectConstraint.NotNull) };
+
 }

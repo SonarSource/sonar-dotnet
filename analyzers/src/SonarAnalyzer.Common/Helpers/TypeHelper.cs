@@ -105,6 +105,11 @@ namespace SonarAnalyzer.Helpers
 
         #endregion TypeName
 
+        public static bool IsNullable(this ITypeSymbol type) =>
+            type is INamedTypeSymbol namedType
+            && namedType.OriginalDefinition.Is(KnownType.System_Nullable_T)
+            && namedType.TypeArguments.Length == 1;
+
         public static bool IsNullableBoolean(this ITypeSymbol type) =>
             type is INamedTypeSymbol namedType
             && namedType.OriginalDefinition.Is(KnownType.System_Nullable_T)
