@@ -25,6 +25,23 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
 {
     public partial class RoslynSymbolicExecutionTest
     {
+        [DataTestMethod]
+        [DataRow("42", "(object)value")]
+        [DataRow("42", "(IComparable)value")]
+        [DataRow("DateTime.Now", "(IComparable)value")]
+        public void Conversion_Boxing(string declaration, string boxingConvertion)
+        {
+            var code = @$"
+var value = {declaration};
+var result = {boxingConvertion};
+Tag(""Value"", value);
+Tag(""Result"", result);
+";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("Value", x => x.Should().BeNull());
+            validator.ValidateTag("Result", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        }
+
         [TestMethod]
         public void Conversion_Cast_DownCast()
         {

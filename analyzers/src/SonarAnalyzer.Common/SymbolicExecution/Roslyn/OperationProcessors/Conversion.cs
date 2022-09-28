@@ -48,46 +48,16 @@ internal sealed class Conversion : MultiProcessor<IConversionOperationWrapper>
         var operandConstraint = operandSymbolValue?.Constraint<ObjectConstraint>();
         var operandSymbol = conversion.Operand.TrackedSymbol();
         var targetCanBeNull = conversion.Operand.Type is { IsReferenceType: true };
-        return operandConstraint switch
+        return true switch
         {
-            { } when operandConstraint == ObjectConstraint.Null => new[] { ProcessNull(state, conversion, operandSymbol) },
-            { } when operandConstraint == ObjectConstraint.NotNull => new[] { ProcessNotNull(state, conversion, operandSymbol) },
-            //_ when targetCanBeNull && conversion.Type is { } targetType && conversion.Operand.Type is { } sourceType && sourceType.DerivesOrImplements(targetType) => new[] { state },
-            _ when !targetCanBeNull => new[] { state },
-            _ => new[] { ProcessNotNull(state, conversion, operandSymbol), ProcessNull(state, conversion, operandSymbol) },
+            _ when IsBoxingConversion(conversion) => ProcessBoxing(state, conversion),
+            _ => new[] { state },
         };
     }
 
-    private static ProgramState ProcessNotNull(ProgramState state, IConversionOperationWrapper conversion, ISymbol operandSymbol)
-    {
-        var notNull = state.SetOperationConstraint(conversion.WrappedOperation, ObjectConstraint.NotNull);
-        if (operandSymbol is { } && conversion.Operand.Type?.IsReferenceType is true)
-        {
-            notNull = notNull.SetSymbolConstraint(operandSymbol, ObjectConstraint.NotNull);
-        }
+    private static ProgramState[] ProcessBoxing(ProgramState state, IConversionOperationWrapper conversion) =>
+        new[] { state.SetOperationConstraint(conversion.WrappedOperation, ObjectConstraint.NotNull) };
 
-        return notNull;
-    }
-
-    private static ProgramState ProcessNull(ProgramState state, IConversionOperationWrapper conversion, ISymbol operandSymbol)
-    {
-        var @null = state.SetOperationConstraint(conversion.WrappedOperation, ObjectConstraint.Null);
-        if (operandSymbol is { })
-        {
-            if (conversion.IsTryCast)
-            {
-                var isUpCast = conversion.Operand.Type.DerivesOrImplements(conversion.Type);
-                if (isUpCast)
-                {
-                    @null = @null.SetSymbolConstraint(operandSymbol, ObjectConstraint.Null);
-                }
-            }
-            else
-            {
-                @null = @null.SetSymbolConstraint(operandSymbol, ObjectConstraint.Null);
-            }
-        }
-
-        return @null;
-    }
+    private static bool IsBoxingConversion(IConversionOperationWrapper conversion) =>
+        conversion is { Type.IsReferenceType: true, Operand.Type.IsValueType: true };
 }

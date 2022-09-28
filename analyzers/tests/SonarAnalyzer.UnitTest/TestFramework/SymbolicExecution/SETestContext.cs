@@ -84,7 +84,10 @@ Public Class Sample
         {methodBody}
     End Sub
 
-    Private Shared Sub Tag(Of T)(Name As String, Optional Arg As T = Nothing)
+    Private Shared Sub Tag(Name As String)
+    End Sub
+
+    Private Shared Sub Tag(Of T)(Name As String, Arg As T)
     End Sub
 
 End Class";
