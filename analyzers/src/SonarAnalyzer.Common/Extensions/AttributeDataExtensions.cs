@@ -35,19 +35,19 @@ namespace SonarAnalyzer.Extensions
 
         public static bool TryGetAttributeValue<T>(this AttributeData attribute, string valueName, out T value)
         {
-            value = default;
             // named arguments take precedence over constructor arguments of the same name. For [Attr(valueName: false, valueName = true)] "true" is returned.
             if (attribute.NamedArguments.IndexOf(x => x.Key.Equals(valueName, StringComparison.OrdinalIgnoreCase)) is var namedAgumentIndex and >= 0)
             {
-                return ConvertConstant(attribute.NamedArguments[namedAgumentIndex].Value, out value);
+                return TryConvertConstant(attribute.NamedArguments[namedAgumentIndex].Value, out value);
             }
             if (attribute.AttributeConstructor.Parameters.IndexOf(x => x.Name.Equals(valueName, StringComparison.OrdinalIgnoreCase)) is var constructorParameterIndex and >= 0)
             {
-                return ConvertConstant(attribute.ConstructorArguments[constructorParameterIndex], out value);
+                return TryConvertConstant(attribute.ConstructorArguments[constructorParameterIndex], out value);
             }
+            value = default;
             return false;
 
-            static bool ConvertConstant(TypedConstant constant, out T value)
+            static bool TryConvertConstant(TypedConstant constant, out T value)
             {
                 value = default;
                 if (constant.IsNull)
@@ -64,12 +64,12 @@ namespace SonarAnalyzer.Extensions
                     try
                     {
                         value = (T)Convert.ChangeType(constant.Value, typeof(T));
+                        return true;
                     }
                     catch (Exception ex) when (ex is FormatException or OverflowException)
                     {
                         return false;
                     }
-                    return true;
                 }
                 return false;
             }
