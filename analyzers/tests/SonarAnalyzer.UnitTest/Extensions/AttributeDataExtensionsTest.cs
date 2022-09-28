@@ -69,6 +69,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [DataRow("somebool", typeof(bool), true, true)]
         [DataRow("SOMEBOOL", typeof(bool), true, true)]
         [DataRow("SomeInt", typeof(int), true, 1_234_567)]
+        [DataRow("SomeInt", typeof(byte), false, (byte)0)]
         [DataRow("SomeByte", typeof(byte), true, (byte)24)]
         [DataRow("SomeByte", typeof(int), true, 24)]
         [DataRow("SomeString", typeof(string), true, "Text")]
@@ -76,9 +77,9 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [DataRow("Missing", typeof(string), false, null)]
         [DataRow("SomeString", typeof(int), false, 0)]
         [DataRow("SomeNumberString", typeof(int), true, 42)]
-        public void TryGetAttributeValue_NamedArguments(string valueName, Type valueType, bool expectedSucess, object expectedResult)
+        public void TryGetAttributeValue_Arguments(string valueName, Type valueType, bool expectedSucess, object expectedResult)
         {
-            var attributeData = AttributeDataWithArguments(namedArguments: new Dictionary<string, object>
+            var arguments = new Dictionary<string, object>
             {
                 { "SomeBool", true },
                 { "SomeInt", 1_234_567 },
@@ -86,47 +87,33 @@ namespace SonarAnalyzer.UnitTest.Extensions
                 { "SomeString", "Text" },
                 { "SomeNumberString", "42" },
                 { "SomeNull", null },
-            });
-            var tryGetAttributeValue = typeof(AttributeDataExtensions).GetMethod(nameof(AttributeDataExtensions.TryGetAttributeValue)).MakeGenericMethod(valueType);
-            var arguments = new object[] { attributeData, valueName, null };
-            var actualSuccess = tryGetAttributeValue.Invoke(null, arguments); // actualSuccess = attributeData.TryGetAttributeValue<valueType>(valueName, out var actualResult)
-            var actualResult = arguments[2];
-            actualSuccess.Should().Be(expectedSucess);
-            actualResult.Should().Be(expectedResult);
-        }
+            };
+            TryGetAttributeValue_Arguments(valueName, valueType, expectedSucess, expectedResult, namedArguments: arguments);       // [Attr(SomeBool = true)]
+            TryGetAttributeValue_Arguments(valueName, valueType, expectedSucess, expectedResult, constructorArguments: arguments); // [Attr(SomeBool: true)]
 
-        [DataTestMethod]
-        [DataRow("SomeBool", typeof(bool), true, true)]
-        [DataRow("someBool", typeof(bool), true, true)]
-        [DataRow("somebool", typeof(bool), true, true)]
-        [DataRow("SOMEBOOL", typeof(bool), true, true)]
-        [DataRow("SomeInt", typeof(int), true, 1_234_567)]
-        [DataRow("SomeByte", typeof(byte), true, (byte)24)]
-        [DataRow("SomeByte", typeof(int), true, 24)]
-        [DataRow("SomeString", typeof(string), true, "Text")]
-        [DataRow("SomeNull", typeof(string), true, null)]
-        [DataRow("Missing", typeof(string), false, null)]
-        [DataRow("SomeString", typeof(int), false, 0)]
-        [DataRow("SomeNumberString", typeof(int), true, 42)]
-        public void TryGetAttributeValue_ConstructorArguments(string valueName, Type valueType, bool expectedSucess, object expectedResult)
-        {
-            var attributeData = AttributeDataWithArguments(constructorArguments: new Dictionary<string, object>
+            static void TryGetAttributeValue_Arguments(string valueName,
+                                                               Type valueType,
+                                                               bool expectedSucess,
+                                                               object expectedResult,
+                                                               IDictionary<string, object> namedArguments = null,
+                                                               IDictionary<string, object> constructorArguments = null)
             {
-                { "SomeBool", true },
-                { "SomeInt", 1_234_567 },
-                { "SomeByte", (byte)24 },
-                { "SomeString", "Text" },
-                { "SomeNumberString", "42" },
-                { "SomeNull", null },
-            });
-            string.IsNullOrEmpty("");
-            new Dictionary<string, string>().TryGetValue("", out var _);
-            var tryGetAttributeValue = typeof(AttributeDataExtensions).GetMethod(nameof(AttributeDataExtensions.TryGetAttributeValue)).MakeGenericMethod(valueType);
-            var arguments = new object[] { attributeData, valueName, null };
-            var actualSuccess = tryGetAttributeValue.Invoke(null, arguments); // actualSuccess = attributeData.TryGetAttributeValue<valueType>(valueName, out var actualResult)
-            var actualResult = arguments[2];
-            actualSuccess.Should().Be(expectedSucess);
-            actualResult.Should().Be(expectedResult);
+                var attributeData = AttributeDataWithArguments(namedArguments, constructorArguments);
+                var tryGetAttributeValue = typeof(AttributeDataExtensions).GetMethod(nameof(AttributeDataExtensions.TryGetAttributeValue)).MakeGenericMethod(valueType);
+                var arguments = new object[] { attributeData, valueName, null };
+                var actualSuccess = tryGetAttributeValue.Invoke(null, arguments); // actualSuccess = attributeData.TryGetAttributeValue<valueType>(valueName, out valueType actualResult)
+                var actualResult = arguments[2]; // the out parameter value
+                actualSuccess.Should().Be(expectedSucess);
+                if (expectedResult == null)
+                {
+                    actualResult.Should().BeNull();
+                }
+                else
+                {
+                    actualResult.Should().BeOfType(expectedResult.GetType());
+                    actualResult.Should().Be(expectedResult);
+                }
+            }
         }
 
         [TestMethod]
@@ -141,7 +128,16 @@ namespace SonarAnalyzer.UnitTest.Extensions
             });
             var actualSuccess = attributeData.TryGetAttributeValue("Result", out bool actualValue);
             actualSuccess.Should().BeTrue();
-            actualValue.Should().BeTrue();
+            actualValue.Should().BeTrue(); // Named argument takes precedence
+        }
+
+        [TestMethod]
+        public void TryGetAttributeValue_DateTimeConversion()
+        {
+            var attributeData = AttributeDataWithArguments(namedArguments: new Dictionary<string, object> { { "Result", "2022-12-24" } });
+            var actualSuccess = attributeData.TryGetAttributeValue("Result", out DateTime actualValue);
+            actualSuccess.Should().BeTrue();
+            actualValue.Should().Be(new DateTime(2022, 12, 24));
         }
 
         private static AttributeData AttributeDataWithName(string attributeClassName)
