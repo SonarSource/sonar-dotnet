@@ -88,15 +88,15 @@ namespace SonarAnalyzer.UnitTest.Extensions
                 { "SomeNumberString", "42" },
                 { "SomeNull", null },
             };
-            TryGetAttributeValue_Arguments(valueName, valueType, expectedSucess, expectedResult, namedArguments: arguments);       // [Attr(SomeBool = true)]
-            TryGetAttributeValue_Arguments(valueName, valueType, expectedSucess, expectedResult, constructorArguments: arguments); // [Attr(SomeBool: true)]
+            TryGetAttributeValue_Arguments(valueName, valueType, expectedSucess, expectedResult, namedArguments: arguments);       // [Attr(SomeBool = true, SomeInt = 1_234_567, ..)]
+            TryGetAttributeValue_Arguments(valueName, valueType, expectedSucess, expectedResult, constructorArguments: arguments); // [Attr(SomeBool: true, SomeInt: 1_234_567, ..)]
 
             static void TryGetAttributeValue_Arguments(string valueName,
-                                                               Type valueType,
-                                                               bool expectedSucess,
-                                                               object expectedResult,
-                                                               IDictionary<string, object> namedArguments = null,
-                                                               IDictionary<string, object> constructorArguments = null)
+                                                       Type valueType,
+                                                       bool expectedSucess,
+                                                       object expectedResult,
+                                                       IDictionary<string, object> namedArguments = null,
+                                                       IDictionary<string, object> constructorArguments = null)
             {
                 var attributeData = AttributeDataWithArguments(namedArguments, constructorArguments);
                 var tryGetAttributeValue = typeof(AttributeDataExtensions).GetMethod(nameof(AttributeDataExtensions.TryGetAttributeValue)).MakeGenericMethod(valueType);
@@ -110,7 +110,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
                 }
                 else
                 {
-                    actualResult.Should().BeOfType(expectedResult.GetType());
+                    actualResult.Should().BeOfType(expectedResult.GetType()).And.BeOfType(valueType);
                     actualResult.Should().Be(expectedResult);
                 }
             }
@@ -138,6 +138,18 @@ namespace SonarAnalyzer.UnitTest.Extensions
             var actualSuccess = attributeData.TryGetAttributeValue("Result", out DateTime actualValue);
             actualSuccess.Should().BeTrue();
             actualValue.Should().Be(new DateTime(2022, 12, 24));
+        }
+
+        [DataTestMethod]
+        [DataRow("SomeText", typeof(string))]
+        [DataRow(42, typeof(int))]
+        public void TryGetAttributeValue_ObjectConversion(object value, Type expectedType)
+        {
+            var attributeData = AttributeDataWithArguments(namedArguments: new Dictionary<string, object> { { "Result", value } });
+            var actualSuccess = attributeData.TryGetAttributeValue("Result", out object actualValue);
+            actualSuccess.Should().BeTrue();
+            actualValue.Should().BeOfType(expectedType);
+            actualValue.Should().Be(value);
         }
 
         private static AttributeData AttributeDataWithName(string attributeClassName)
