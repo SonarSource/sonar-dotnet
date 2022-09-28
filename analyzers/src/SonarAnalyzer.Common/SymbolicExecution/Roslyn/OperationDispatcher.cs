@@ -46,6 +46,7 @@ internal static class OperationDispatcher
         { OperationKindEx.Await, new Await() },
         { OperationKindEx.Conversion, new Conversion() },
         { OperationKindEx.DeclarationPattern, new DeclarationPattern() },
+        { OperationKindEx.DefaultValue, new DefaultValue() },
         { OperationKindEx.DelegateCreation, new Creation() },
         { OperationKindEx.DynamicObjectCreation, new Creation() },
         { OperationKindEx.EventReference, new EventReference() },

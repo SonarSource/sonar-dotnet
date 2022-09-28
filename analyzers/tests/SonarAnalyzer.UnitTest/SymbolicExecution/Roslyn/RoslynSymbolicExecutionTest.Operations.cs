@@ -341,20 +341,25 @@ public void Main<T>() where T : new()
 Tag(""BeforeObjNull"", argObjNull);
 Tag(""BeforeObjDefault"", argObjDefault);
 Tag(""BeforeInt"", argInt);
+Tag(""BeforeNullableInt"", argNullableInt);
 argObjNull = null;
 argObjDefault = default;
 argInt = default;
+argNullableInt = default;
 Tag(""AfterObjNull"", argObjNull);
 Tag(""AfterObjDefault"", argObjDefault);
-Tag(""AfterInt"", argInt);";
-            var validator = SETestContext.CreateCS(code, ", object argObjNull, object argObjDefault, int argInt").Validator;
+Tag(""AfterInt"", argInt);
+Tag(""AfterNullableInt"", argNullableInt);";
+            var validator = SETestContext.CreateCS(code, ", object argObjNull, object argObjDefault, int argInt, int? argNullableInt").Validator;
             validator.ValidateContainsOperation(OperationKind.Literal);
             validator.ValidateTag("BeforeObjNull", x => x.Should().BeNull());
             validator.ValidateTag("BeforeObjDefault", x => x.Should().BeNull());
             validator.ValidateTag("BeforeInt", x => x.Should().BeNull());
+            validator.ValidateTag("BeforeNullableInt", x => x.Should().BeNull());
             validator.ValidateTag("AfterObjNull", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
             validator.ValidateTag("AfterObjDefault", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
             validator.ValidateTag("AfterInt", x => x.Should().BeNull());
+            validator.ValidateTag("AfterNullableInt", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
         }
 
         [TestMethod]
@@ -793,6 +798,22 @@ public async System.Threading.Tasks.Task Main(System.Threading.Tasks.Task T)
             validator.ValidateTag("Before", x => x.HasConstraint(LockConstraint.Held).Should().BeTrue());
             validator.ValidateTag("After", x => x.HasConstraint(ObjectConstraint.Null).Should().BeFalse());
             validator.ValidateTag("After", x => x.HasConstraint(LockConstraint.Held).Should().BeTrue("this constraint should be preserved on fields"));
+        }
+
+        [DataTestMethod]
+        [DataRow("bool", "true", "False")]
+        [DataRow("bool", "false", "True")]
+        [DataRow("bool?", "default", "Null")]
+        [DataRow("bool?", "null", null)]    // FIXME: Should behave same as default
+        public void Unary_Not_SupportsBoolAndNull(string type, string defaultValue, string expectedConstraints)
+        {
+            var code = $@"
+{type} value = {defaultValue};
+value = !value;
+Tag(""Value"", value);";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateContainsOperation(OperationKind.Unary);
+            validator.ValidateTag("Value", x => x.AllConstraints.Select(x => x.ToString()).OrderBy(x => x).JoinStr(", ").Should().Be(expectedConstraints));
         }
     }
 }
