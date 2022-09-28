@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -117,16 +118,26 @@ namespace SonarAnalyzer.Helpers
             && namedType.TypeArguments[0].Is(KnownType.System_Boolean);
 
         public static bool Implements(this ITypeSymbol typeSymbol, KnownType type) =>
-            typeSymbol is { }
-            && typeSymbol.AllInterfaces.Any(symbol => symbol.ConstructedFrom.Is(type));
+            typeSymbol.AllInterfaces().Any(symbol => symbol.ConstructedFrom.Is(type));
 
         private static bool Implements(this ITypeSymbol typeSymbol, ISymbol type) =>
-            typeSymbol is { }
-            && typeSymbol.AllInterfaces.Any(symbol => symbol.ConstructedFrom.Equals(type));
+            typeSymbol.AllInterfaces().Any(symbol => symbol.ConstructedFrom.Equals(type));
 
         public static bool ImplementsAny(this ITypeSymbol typeSymbol, ImmutableArray<KnownType> types) =>
-            typeSymbol is { }
-            && typeSymbol.AllInterfaces.Any(symbol => symbol.ConstructedFrom.IsAny(types));
+            typeSymbol.AllInterfaces().Any(symbol => symbol.ConstructedFrom.IsAny(types));
+
+        /// <summary>
+        /// Returns all interfaces of the type including constrained interfaces of type parameters.
+        /// </summary>
+        public static IEnumerable<INamedTypeSymbol> AllInterfaces(this ITypeSymbol typeSymbol)
+            => typeSymbol switch
+            {
+                ITypeParameterSymbol typeParameter =>
+                    typeParameter.ConstraintTypes.OfType<INamedTypeSymbol>().Where(x => x.TypeKind == TypeKind.Interface)
+                    .Union(typeParameter.ConstraintTypes.SelectMany(x => x.AllInterfaces)),
+                { } x => x.AllInterfaces,
+                _ => Enumerable.Empty<INamedTypeSymbol>(),
+            };
 
         public static bool DerivesFrom(this ITypeSymbol typeSymbol, KnownType type)
         {

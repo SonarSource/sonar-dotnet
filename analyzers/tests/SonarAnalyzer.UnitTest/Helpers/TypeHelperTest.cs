@@ -69,6 +69,48 @@ namespace SonarAnalyzer.UnitTest.Helpers
         }
 
         [TestMethod]
+        public void Type_DerivesOrImplements()
+        {
+            var snippet = new SnippetCompiler(@"
+using System.Collections.Generic;
+
+public interface IBase { }
+public interface IDerived: IBase { }
+public interface IOther { }
+public class C<T>: List<T>, IOther { }
+
+public class D<T> where T: C<T>, IDerived { }
+");
+            var typeParameter = snippet.SyntaxTree.GetRoot().ChildNodes().OfType<ClassDeclarationSyntax>().Last().TypeParameterList.Parameters[0];
+            var symbol = (ITypeSymbol)snippet.SemanticModel.GetDeclaredSymbol(typeParameter); // T in D<T>
+            var allInterfacesNames = symbol.AllInterfaces().Select(x => x.ToDisplayString()).ToList();
+            allInterfacesNames.Should().Equal(
+                "IDerived",
+                "System.Collections.Generic.IList<T>",
+                "System.Collections.Generic.ICollection<T>",
+                "System.Collections.IList",
+                "System.Collections.ICollection",
+                "System.Collections.Generic.IReadOnlyList<T>",
+                "System.Collections.Generic.IReadOnlyCollection<T>",
+                "System.Collections.Generic.IEnumerable<T>",
+                "System.Collections.IEnumerable",
+                "IOther",
+                "IBase");
+        }
+
+        [TestMethod]
+        public void Type_DerivesOrImplements_RecursiveDefinition()
+        {
+            var snippet = new SnippetCompiler(@"
+public interface I<T> where T: I<T> { }
+");
+            var typeParameter = snippet.SyntaxTree.GetRoot().ChildNodes().OfType<InterfaceDeclarationSyntax>().Last().TypeParameterList.Parameters[0];
+            var symbol = (ITypeSymbol)snippet.SemanticModel.GetDeclaredSymbol(typeParameter); // T in I<T>
+            var allInterfacesNames = symbol.AllInterfaces().Select(x => x.ToDisplayString()).ToList();
+            allInterfacesNames.Should().Equal("I<T>");
+        }
+
+        [TestMethod]
         public void Type_Is()
         {
             var baseKnownType = new KnownType("NS.Base");

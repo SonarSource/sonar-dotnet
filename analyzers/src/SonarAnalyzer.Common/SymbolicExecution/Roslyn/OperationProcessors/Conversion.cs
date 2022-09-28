@@ -33,9 +33,18 @@ internal sealed class Conversion : MultiProcessor<IConversionOperationWrapper>
     protected override ProgramState[] Process(SymbolicContext context, IConversionOperationWrapper conversion)
     {
         var state = context.State[conversion.Operand] is { } operandOperationValue
-            ? context.State.SetOperationValue(context.Operation, operandOperationValue)
+            ? CopyConstraints(context, conversion, operandOperationValue)
             : context.State;
         return Process(state, conversion);
+    }
+
+    private static ProgramState CopyConstraints(SymbolicContext context, IConversionOperationWrapper conversion, SymbolicValue operandOperationValue)
+    {
+        if (conversion.Type.IsValueType)
+        {
+            operandOperationValue = operandOperationValue.WithoutConstraint<ObjectConstraint>();
+        }
+        return context.State.SetOperationValue(context.Operation, operandOperationValue);
     }
 
     private static ProgramState[] Process(ProgramState state, IConversionOperationWrapper conversion)
@@ -61,10 +70,16 @@ internal sealed class Conversion : MultiProcessor<IConversionOperationWrapper>
         conversion is { Type.IsReferenceType: true, Operand.Type.IsValueType: true };
 
     private static ProgramState[] ProcessBoxing(ProgramState state, IConversionOperationWrapper conversion) =>
-        conversion.Operand.Type.IsNullable() // ((object)someNullableInt) might be null or not null
-        || conversion.Type.Kind == SymbolKind.TypeParameter // (42 as TClass) might be null or not null
-           // TStruct value; (value as IComparable) might be null, but (value as object) is never
-        || (conversion.Operand.Type.Kind == SymbolKind.TypeParameter && conversion.IsTryCast && !conversion.Type.Is(KnownType.System_Object))
-            ? new[] { state }
-            : new[] { state.SetOperationConstraint(conversion.WrappedOperation, ObjectConstraint.NotNull) };
+        // ((object)someNullableInt) might be null or not null
+        !conversion.Operand.Type.IsNullable()
+        // (42 as T) where T: class might be null or not null
+        && conversion.Type.Kind != SymbolKind.TypeParameter
+        // TStruct value where TStruct: IComparable
+        // (value as object),
+        // (value as IComparable), and
+        // (ISomething)value are never null, but
+        // (value as ISomething) might be null or not
+        && (conversion.Operand.Type.Kind != SymbolKind.TypeParameter || !conversion.IsTryCast || conversion.Operand.Type.DerivesOrImplements(conversion.Type))
+            ? new[] { state.SetOperationConstraint(conversion.WrappedOperation, ObjectConstraint.NotNull) }
+            : new[] { state };
 }
