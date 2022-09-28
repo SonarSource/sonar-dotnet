@@ -19,85 +19,75 @@
  */
 
 using Microsoft.CodeAnalysis;
-using System.Collections;
-using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
-internal sealed class Conversion : SimpleProcessor<IConversionOperationWrapper>
+internal sealed class Conversion : MultiProcessor<IConversionOperationWrapper>
 {
     protected override IConversionOperationWrapper Convert(IOperation operation) =>
         IConversionOperationWrapper.FromOperation(operation);
 
-    protected override ProgramState Process(SymbolicContext context, IConversionOperationWrapper conversion) =>
-        context.State[conversion.Operand] is { } value
-            ? context.State.SetOperationValue(context.Operation, value)
-            : context.State;
-}
-
-    internal static class Conversion
+    protected override ProgramState[] Process(SymbolicContext context, IConversionOperationWrapper conversion)
     {
-        public static ProgramState[] Process(SymbolicContext context, IConversionOperationWrapper conversion)
+        var operandSymbolValue = context.State[conversion.Operand];
+        var state = operandSymbolValue is { }
+            ? context.State.SetOperationValue(context.Operation, operandSymbolValue)
+            : context.State;
+        return Process(state, conversion, operandSymbolValue);
+    }
+
+    private static ProgramState[] Process(ProgramState state, IConversionOperationWrapper conversion, SymbolicValue operandSymbolValue)
+    {
+        if (conversion.Type.IsValueType || conversion.Type.IsUnconstraintGeneric() || conversion.Operand.Type.IsUnconstraintGeneric())
         {
-            var operandSymbolValue = context.State[conversion.Operand];
-            var state = operandSymbolValue is { }
-                ? context.State.SetOperationValue(context.Operation, operandSymbolValue)
-                : context.State;
-            return Process(state, conversion, operandSymbolValue);
+            return new[] { state };
+        }
+        var operandConstraint = operandSymbolValue?.Constraint<ObjectConstraint>();
+        var operandSymbol = conversion.Operand.TrackedSymbol();
+        var targetCanBeNull = conversion.Operand.Type is { IsReferenceType: true };
+        return operandConstraint switch
+        {
+            { } when operandConstraint == ObjectConstraint.Null => new[] { ProcessNull(state, conversion, operandSymbol) },
+            { } when operandConstraint == ObjectConstraint.NotNull => new[] { ProcessNotNull(state, conversion, operandSymbol) },
+            //_ when targetCanBeNull && conversion.Type is { } targetType && conversion.Operand.Type is { } sourceType && sourceType.DerivesOrImplements(targetType) => new[] { state },
+            _ when !targetCanBeNull => new[] { state },
+            _ => new[] { ProcessNotNull(state, conversion, operandSymbol), ProcessNull(state, conversion, operandSymbol) },
+        };
+    }
+
+    private static ProgramState ProcessNotNull(ProgramState state, IConversionOperationWrapper conversion, ISymbol operandSymbol)
+    {
+        var notNull = state.SetOperationConstraint(conversion.WrappedOperation, ObjectConstraint.NotNull);
+        if (operandSymbol is { } && conversion.Operand.Type?.IsReferenceType is true)
+        {
+            notNull = notNull.SetSymbolConstraint(operandSymbol, ObjectConstraint.NotNull);
         }
 
-        private static ProgramState[] Process(ProgramState state, IConversionOperationWrapper conversion, SymbolicValue operandSymbolValue)
-        {
-            if (conversion.Type.IsValueType || conversion.Type.IsUnconstraintGeneric() || conversion.Operand.Type.IsUnconstraintGeneric())
-            {
-                return new[] { state };
-            }
-            var operandConstraint = operandSymbolValue?.Constraint<ObjectConstraint>();
-            var operandSymbol = conversion.Operand.TrackedSymbol();
-            var targetCanBeNull = conversion.Operand.Type is { IsReferenceType: true };
-            return operandConstraint switch
-            {
-                { } when operandConstraint == ObjectConstraint.Null => new[] { ProcessNull(state, conversion, operandSymbol) },
-                { } when operandConstraint == ObjectConstraint.NotNull => new[] { ProcessNotNull(state, conversion, operandSymbol) },
-                //_ when targetCanBeNull && conversion.Type is { } targetType && conversion.Operand.Type is { } sourceType && sourceType.DerivesOrImplements(targetType) => new[] { state },
-                _ when !targetCanBeNull => new[] { state },
-                _ => new[] { ProcessNotNull(state, conversion, operandSymbol), ProcessNull(state, conversion, operandSymbol) },
-            };
-        }
+        return notNull;
+    }
 
-        private static ProgramState ProcessNotNull(ProgramState state, IConversionOperationWrapper conversion, ISymbol operandSymbol)
+    private static ProgramState ProcessNull(ProgramState state, IConversionOperationWrapper conversion, ISymbol operandSymbol)
+    {
+        var @null = state.SetOperationConstraint(conversion.WrappedOperation, ObjectConstraint.Null);
+        if (operandSymbol is { })
         {
-            var notNull = state.SetOperationConstraint(conversion.WrappedOperation, ObjectConstraint.NotNull);
-            if (operandSymbol is { } && conversion.Operand.Type?.IsReferenceType is true)
+            if (conversion.IsTryCast)
             {
-                notNull = notNull.SetSymbolConstraint(operandSymbol, ObjectConstraint.NotNull);
-            }
-
-            return notNull;
-        }
-
-        private static ProgramState ProcessNull(ProgramState state, IConversionOperationWrapper conversion, ISymbol operandSymbol)
-        {
-            var @null = state.SetOperationConstraint(conversion.WrappedOperation, ObjectConstraint.Null);
-            if (operandSymbol is { })
-            {
-                if (conversion.IsTryCast)
-                {
-                    var isUpCast = conversion.Operand.Type.DerivesOrImplements(conversion.Type);
-                    if (isUpCast)
-                    {
-                        @null = @null.SetSymbolConstraint(operandSymbol, ObjectConstraint.Null);
-                    }
-                }
-                else
+                var isUpCast = conversion.Operand.Type.DerivesOrImplements(conversion.Type);
+                if (isUpCast)
                 {
                     @null = @null.SetSymbolConstraint(operandSymbol, ObjectConstraint.Null);
                 }
             }
-
-            return @null;
+            else
+            {
+                @null = @null.SetSymbolConstraint(operandSymbol, ObjectConstraint.Null);
+            }
         }
+
+        return @null;
     }
+}
