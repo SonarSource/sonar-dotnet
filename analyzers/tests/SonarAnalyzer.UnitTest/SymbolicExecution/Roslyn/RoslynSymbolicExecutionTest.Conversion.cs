@@ -29,10 +29,10 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [DataTestMethod]
         [DataRow("42", "(object)value")]
         [DataRow("42", "(IComparable)value")]
-        [DataRow("42", "value as IComparable")]
+        [DataRow("42", "value as IComparable")] // we don't need to care about "42 as IEnumerable" because error CS0039 is raised
         [DataRow("DateTime.Now", "(IComparable)value")]
-        [DataRow("default(TStruct)", "value as IComparable")]
         [DataRow("Unknown<TStruct>()", "(IComparable)value")]
+        [DataRow("Unknown<TStruct>()", "value as object")]
         public void Conversion_Boxing(string declaration, string boxing)
         {
             var code = @$"
@@ -48,6 +48,7 @@ Tag(""Result"", result);
 
         [TestMethod]
         [DataRow("42", "value as TClass")]
+        [DataRow("Unknown<TStruct>()", "value as IComparable")]
         [DataRow("Unknown<int?>()", "value as IComparable")]
         [DataRow("Unknown<int?>()", "(object)value")]
         public void Conversion_Boxing_NotApplicable(string declaration, string boxing)
@@ -104,9 +105,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-public class Sample<T, TClass, TStruct, TInterface>
+public class Sample<T, TClass, TStruct, TStructComparable>
     where TClass: class
     where TStruct: struct
+    where TStructComparable: struct, IComparable
 {{
     public void Main()
     {{

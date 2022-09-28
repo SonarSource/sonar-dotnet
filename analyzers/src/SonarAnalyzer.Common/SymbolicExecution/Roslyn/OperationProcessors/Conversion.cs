@@ -63,6 +63,8 @@ internal sealed class Conversion : MultiProcessor<IConversionOperationWrapper>
     private static ProgramState[] ProcessBoxing(ProgramState state, IConversionOperationWrapper conversion) =>
         conversion.Operand.Type.IsNullable() // ((object)someNullableInt) might be null or not null
         || conversion.Type.Kind == SymbolKind.TypeParameter // (42 as TClass) might be null or not null
+           // TStruct value; (value as IComparable) might be null, but (value as object) is never
+        || (conversion.Operand.Type.Kind == SymbolKind.TypeParameter && conversion.IsTryCast && !conversion.Type.Is(KnownType.System_Object))
             ? new[] { state }
             : new[] { state.SetOperationConstraint(conversion.WrappedOperation, ObjectConstraint.NotNull) };
 }
