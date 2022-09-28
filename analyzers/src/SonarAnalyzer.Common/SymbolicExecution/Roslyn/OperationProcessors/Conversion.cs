@@ -32,18 +32,15 @@ internal sealed class Conversion : MultiProcessor<IConversionOperationWrapper>
 
     protected override ProgramState[] Process(SymbolicContext context, IConversionOperationWrapper conversion)
     {
-        var operandSymbolValue = context.State[conversion.Operand];
-        var state = operandSymbolValue is { }
-            ? context.State.SetOperationValue(context.Operation, operandSymbolValue)
+        var state = context.State[conversion.Operand] is { } operandOperationValue
+            ? context.State.SetOperationValue(context.Operation, operandOperationValue)
             : context.State;
-        return Process(state, conversion, operandSymbolValue);
+        return Process(state, conversion);
     }
 
-    private static ProgramState[] Process(ProgramState state, IConversionOperationWrapper conversion, SymbolicValue operandSymbolValue)
+    private static ProgramState[] Process(ProgramState state, IConversionOperationWrapper conversion)
     {
-        var operandConstraint = operandSymbolValue?.Constraint<ObjectConstraint>();
         var operandSymbol = conversion.Operand.TrackedSymbol();
-        var targetCanBeNull = conversion.Operand.Type is { IsReferenceType: true };
         return true switch
         {
             _ when IsBoxingConversion(conversion) => ProcessBoxing(state, conversion),
@@ -64,8 +61,8 @@ internal sealed class Conversion : MultiProcessor<IConversionOperationWrapper>
         conversion is { Type.IsReferenceType: true, Operand.Type.IsValueType: true };
 
     private static ProgramState[] ProcessBoxing(ProgramState state, IConversionOperationWrapper conversion) =>
-        conversion.Operand.Type.IsNullable()
-        ? new[] { state }
-        : new[] { state.SetOperationConstraint(conversion.WrappedOperation, ObjectConstraint.NotNull) };
-
+        conversion.Operand.Type.IsNullable() // ((object)someNullableInt) might be null or not null
+        || conversion.Type.Kind == SymbolKind.TypeParameter // (42 as TClass) might be null or not null
+            ? new[] { state }
+            : new[] { state.SetOperationConstraint(conversion.WrappedOperation, ObjectConstraint.NotNull) };
 }

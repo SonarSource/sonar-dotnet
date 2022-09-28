@@ -47,9 +47,10 @@ Tag(""Result"", result);
         }
 
         [TestMethod]
+        [DataRow("42", "value as TClass")]
         [DataRow("Unknown<int?>()", "value as IComparable")]
         [DataRow("Unknown<int?>()", "(object)value")]
-        public void Conversion_Boxing_Nullable(string declaration, string boxing)
+        public void Conversion_Boxing_NotApplicable(string declaration, string boxing)
         {
             var code = @$"
 var value = {declaration};
@@ -82,6 +83,7 @@ Tag(""Result"", result);
 
         [DataTestMethod]
         [DataRow("int?", "(int)value")]
+        [DataRow("int", "(int?)null")]
         public void Conversion_Unboxing_Nullable(string type, string unboxing)
         {
             var code = @$"
@@ -96,7 +98,7 @@ Tag(""Result"", result);
         }
 
         private static SETestContext ConversionValidatorCS(string methodBody) =>
-            new SETestContext($@"
+            new($@"
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
