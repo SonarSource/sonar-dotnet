@@ -60,6 +60,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
                 _ => null
             };
 
+        // FIXME: Use the extension from #6136 before merging
         private static bool CanBeNull(ITypeSymbol type) =>
             type is not null
             && (type.IsReferenceType || type.OriginalDefinition.Is(KnownType.System_Nullable_T));
