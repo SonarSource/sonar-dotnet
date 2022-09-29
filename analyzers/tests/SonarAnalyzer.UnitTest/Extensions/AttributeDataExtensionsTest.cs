@@ -95,8 +95,8 @@ namespace SonarAnalyzer.UnitTest.Extensions
                                                        Type valueType,
                                                        bool expectedSucess,
                                                        object expectedResult,
-                                                       IDictionary<string, object> namedArguments = null,
-                                                       IDictionary<string, object> constructorArguments = null)
+                                                       Dictionary<string, object> namedArguments = null,
+                                                       Dictionary<string, object> constructorArguments = null)
             {
                 var attributeData = AttributeDataWithArguments(namedArguments, constructorArguments);
                 var tryGetAttributeValue = typeof(AttributeDataExtensions).GetMethod(nameof(AttributeDataExtensions.TryGetAttributeValue)).MakeGenericMethod(valueType);
@@ -119,13 +119,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [TestMethod]
         public void TryGetAttributeValue_ConstructorArgumentAndNamedArgumentNamedTheSame()
         {
-            var attributeData = AttributeDataWithArguments(namedArguments: new Dictionary<string, object>
-            {
-                { "Result", true },
-            }, constructorArguments: new Dictionary<string, object>
-            {
-                { "Result", false },
-            });
+            var attributeData = AttributeDataWithArguments(namedArguments: new() { { "Result", true } }, constructorArguments: new() { { "Result", false } });
             var actualSuccess = attributeData.TryGetAttributeValue("Result", out bool actualValue);
             actualSuccess.Should().BeTrue();
             actualValue.Should().BeTrue(); // Named argument takes precedence
@@ -134,7 +128,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [TestMethod]
         public void TryGetAttributeValue_DateTimeConversion()
         {
-            var attributeData = AttributeDataWithArguments(namedArguments: new Dictionary<string, object> { { "Result", "2022-12-24" } });
+            var attributeData = AttributeDataWithArguments(namedArguments: new() { { "Result", "2022-12-24" } });
             var actualSuccess = attributeData.TryGetAttributeValue("Result", out DateTime actualValue);
             actualSuccess.Should().BeTrue();
             actualValue.Should().Be(new DateTime(2022, 12, 24));
@@ -145,7 +139,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [DataRow(42, typeof(int))]
         public void TryGetAttributeValue_ObjectConversion(object value, Type expectedType)
         {
-            var attributeData = AttributeDataWithArguments(namedArguments: new Dictionary<string, object> { { "Result", value } });
+            var attributeData = AttributeDataWithArguments(namedArguments: new() { { "Result", value } });
             var actualSuccess = attributeData.TryGetAttributeValue("Result", out object actualValue);
             actualSuccess.Should().BeTrue();
             actualValue.Should().BeOfType(expectedType);
@@ -161,7 +155,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
             return attributeData.Object;
         }
 
-        private static AttributeData AttributeDataWithArguments(IDictionary<string, object> namedArguments = null, IDictionary<string, object> constructorArguments = null)
+        private static AttributeData AttributeDataWithArguments(Dictionary<string, object> namedArguments = null, Dictionary<string, object> constructorArguments = null)
         {
             var typedConstConstructor = typeof(TypedConstant).GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance).Single(x => x.GetParameters().Length == 3);
             var namedArgumentsFake = namedArguments?.Select(x => new KeyValuePair<string, TypedConstant>(x.Key, CreateTypedConstant(x.Value))).ToImmutableArray()
