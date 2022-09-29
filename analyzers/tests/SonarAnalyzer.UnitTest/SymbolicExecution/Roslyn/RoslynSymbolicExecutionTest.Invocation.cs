@@ -1008,6 +1008,94 @@ private static bool Equals(object a, object b, object c) => false;";
             validator.ValidateTag("MoreArgs", x => x.Should().BeNull());
         }
 
+        [DataTestMethod]
+        [DataRow("null", "false")]
+        [DataRow("new object()", "true")]
+        public void Invocation_DoesNotReturnIf_Continues(string value, string stopsIf)
+        {
+            var code = $@"
+public void Main()
+{{
+    Tag(""Begin"");
+    object value = {value};
+    CustomValidator(""Irrelevant"", value == null);
+    Tag(""End"");
+}}
+
+public void CustomValidator(object irrelevant, [System.Diagnostics.CodeAnalysis.DoesNotReturnIf({stopsIf})] bool condition) {{ }}";
+            var validator = SETestContext.CreateCSMethod(code).Validator;
+            validator.ValidateTagOrder("Begin", "End");
+            validator.ValidateExitReachCount(1);
+            validator.ValidateExecutionCompleted();
+        }
+
+        [DataTestMethod]
+        [DataRow("null", "true")]
+        [DataRow("new object()", "false")]
+        public void Invocation_DoesNotReturnIf_Stops(string value, string stopsIf)
+        {
+            var code = $@"
+public void Main()
+{{
+    Tag(""Begin"");
+    object value = {value};
+    CustomValidator(""Irrelevant"", value == null);
+    Tag(""Unreachable"");
+}}
+
+public void CustomValidator(object irrelevant, [System.Diagnostics.CodeAnalysis.DoesNotReturnIf({stopsIf})] bool condition) {{ }}";
+            var validator = SETestContext.CreateCSMethod(code).Validator;
+            validator.ValidateTagOrder("Begin");
+            validator.ValidateExitReachCount(0);
+            validator.ValidateExecutionCompleted();
+        }
+
+        [DataTestMethod]
+        [DataRow("true", "false")]
+        [DataRow("!false", "false")]
+        [DataRow("false", "true")]
+        [DataRow("!true", "true")]
+        public void Invocation_DoesNotReturnIf_BoolSymbol_Continues(string value, string stopsIf)
+        {
+            var code = $@"
+public void Main()
+{{
+    Tag(""Begin"");
+    var value = {value};
+    CustomValidator(""Irrelevant"", value);
+    Tag(""End"");
+}}
+
+public void CustomValidator(object irrelevant, [System.Diagnostics.CodeAnalysis.DoesNotReturnIf({stopsIf})] bool condition) {{ }}";
+            var validator = SETestContext.CreateCSMethod(code).Validator;
+            validator.ValidateTagOrder("Begin", "End");
+            validator.ValidateExitReachCount(1);
+            validator.ValidateExecutionCompleted();
+        }
+
+        [DataTestMethod]
+        [DataRow("true", "true")]
+        [DataRow("!!true", "true")]
+        [DataRow("false", "false")]
+        [DataRow("!!false", "false")]
+        public void Invocation_DoesNotReturnIf_BoolSymbol_Stops(string value, string stopsIf)
+        {
+            var code = $@"
+public void Main()
+{{
+    Tag(""Begin"");
+    var value = {value};
+    CustomValidator(""Irrelevant"", value);
+    Tag(""Unreachable"");
+}}
+
+public void CustomValidator(object irrelevant, [System.Diagnostics.CodeAnalysis.DoesNotReturnIf({stopsIf})] bool condition) {{ }}";
+            var validator = SETestContext.CreateCSMethod(code).Validator;
+            validator.ValidateTagOrder("Begin");
+            validator.ValidateExitReachCount(0);
+            validator.ValidateExecutionCompleted();
+        }
+
         private static IEnumerable<object[]> ThrowHelperCalls =>
             new object[][]
             {

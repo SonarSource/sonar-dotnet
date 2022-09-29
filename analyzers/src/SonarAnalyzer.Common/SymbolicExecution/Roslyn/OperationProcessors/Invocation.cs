@@ -75,10 +75,10 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
                     return ProcessIsNotNullWhen(state, invocation.WrappedOperation, argument, returnValue, false);
                 }
                 else if(attributes.FirstOrDefault(x => x.HasName("DoesNotReturnIfAttribute")) is { } doesNotReturnIfAttribute
-                    && doesNotReturnIfAttribute.TryGetAttributeValue<bool>("condition", out var condition))
+                    && doesNotReturnIfAttribute.TryGetAttributeValue<bool>("parameterValue", out var parameterValue))
                 {
                     // FIXME: Rebase conflict, do not return but loop instead
-                    return ProcessDoesNotReturnIf(state, argument, condition);
+                    return ProcessDoesNotReturnIf(state, argument, parameterValue);
                 }
             }
         }

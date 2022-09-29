@@ -1502,7 +1502,7 @@ namespace DoesNotReturnIf
 {
     public sealed class DoesNotReturnIfAttribute : Attribute
     {
-        public DoesNotReturnIfAttribute(bool condition) { }
+        public DoesNotReturnIfAttribute(bool parameterValue) { }
     }
 
     public class Sample
