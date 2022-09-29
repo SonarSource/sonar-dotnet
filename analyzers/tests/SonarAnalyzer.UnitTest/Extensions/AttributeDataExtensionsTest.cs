@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Reflection;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Moq;
 using Moq.Protected;
@@ -64,21 +63,8 @@ namespace SonarAnalyzer.UnitTest.Extensions
         public void HasAnyNameThrowsForNull() =>
             new Action(() => AttributeDataWithName("TestAttribute").HasAnyName(null)).Should().Throw<Exception>();
 
-        [DataTestMethod]
-        [DataRow("SomeBool", typeof(bool), true, true)]
-        [DataRow("someBool", typeof(bool), true, true)]
-        [DataRow("somebool", typeof(bool), true, true)]
-        [DataRow("SOMEBOOL", typeof(bool), true, true)]
-        [DataRow("SomeInt", typeof(int), true, 1_234_567)]
-        [DataRow("SomeInt", typeof(byte), false, (byte)0)]
-        [DataRow("SomeByte", typeof(byte), true, (byte)24)]
-        [DataRow("SomeByte", typeof(int), true, 24)]
-        [DataRow("SomeString", typeof(string), true, "Text")]
-        [DataRow("SomeNull", typeof(string), true, null)]
-        [DataRow("Missing", typeof(string), false, null)]
-        [DataRow("SomeString", typeof(int), false, 0)]
-        [DataRow("SomeNumberString", typeof(int), true, 42)]
-        public void TryGetAttributeValue_Arguments(string valueName, Type valueType, bool expectedSucess, object expectedResult)
+        [TestMethod]
+        public void TryGetAttributeValue_Arguments()
         {
             var arguments = new Dictionary<string, object>
             {
@@ -89,31 +75,33 @@ namespace SonarAnalyzer.UnitTest.Extensions
                 { "SomeNumberString", "42" },
                 { "SomeNull", null },
             };
-            TryGetAttributeValue_Arguments(valueName, valueType, expectedSucess, expectedResult, namedArguments: arguments);       // [Attr(SomeBool = true, SomeInt = 1_234_567, ..)]
-            TryGetAttributeValue_Arguments(valueName, valueType, expectedSucess, expectedResult, constructorArguments: arguments); // [Attr(SomeBool: true, SomeInt: 1_234_567, ..)]
+            var named = AttributeDataWithArguments(namedArguments: arguments);
+            var constructor = AttributeDataWithArguments(constructorArguments: arguments);
+            AssertTryGetAttributeValue<bool>("SomeBool", true, true);
+            AssertTryGetAttributeValue<bool>("someBool", true, true);
+            AssertTryGetAttributeValue<bool>("somebool", true, true);
+            AssertTryGetAttributeValue<bool>("SOMEBOOL", true, true);
+            AssertTryGetAttributeValue<int>("SomeInt", true, 1_234_567);
+            AssertTryGetAttributeValue<byte>("SomeInt", false, 0); // SomeInt is too big
+            AssertTryGetAttributeValue<byte>("SomeByte", true, 24);
+            AssertTryGetAttributeValue<int>("SomeByte", true, 24);
+            AssertTryGetAttributeValue<string>("SomeString", true, "Text");
+            AssertTryGetAttributeValue<object>("SomeNull", true, null);
+            AssertTryGetAttributeValue<object>("Missing", false, null);
+            AssertTryGetAttributeValue<string>("Missing", false, null);
+            AssertTryGetAttributeValue<int>("Missing", false, 0);
+            AssertTryGetAttributeValue<int>("SomeString", false, 0);
+            AssertTryGetAttributeValue<int>("SomeNumberString", true, 42);
 
-            static void TryGetAttributeValue_Arguments(string valueName,
-                                                       Type valueType,
-                                                       bool expectedSucess,
-                                                       object expectedResult,
-                                                       Dictionary<string, object> namedArguments = null,
-                                                       Dictionary<string, object> constructorArguments = null)
+            void AssertTryGetAttributeValue<T>(string valueName, bool expectedSuccess, T expectedValue)
             {
-                var attributeData = AttributeDataWithArguments(namedArguments, constructorArguments);
-                var tryGetAttributeValue = typeof(AttributeDataExtensions).GetMethod(nameof(AttributeDataExtensions.TryGetAttributeValue)).MakeGenericMethod(valueType);
-                var arguments = new object[] { attributeData, valueName, null };
-                var actualSuccess = tryGetAttributeValue.Invoke(null, arguments); // actualSuccess = attributeData.TryGetAttributeValue<valueType>(valueName, out valueType actualResult)
-                var actualResult = arguments[2]; // the out parameter value
-                actualSuccess.Should().Be(expectedSucess);
-                if (expectedResult == null)
-                {
-                    actualResult.Should().BeNull();
-                }
-                else
-                {
-                    actualResult.Should().BeOfType(expectedResult.GetType()).And.BeOfType(valueType);
-                    actualResult.Should().Be(expectedResult);
-                }
+                var success = named.TryGetAttributeValue<T>(valueName, out T result);
+                success.Should().Be(expectedSuccess);
+                result.Should().Be(expectedValue);
+
+                success = constructor.TryGetAttributeValue<T>(valueName, out result);
+                success.Should().Be(expectedSuccess);
+                result.Should().Be(expectedValue);
             }
         }
 
