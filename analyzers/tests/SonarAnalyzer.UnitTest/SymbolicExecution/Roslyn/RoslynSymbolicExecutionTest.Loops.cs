@@ -184,38 +184,6 @@ Tag(""End"");";
         }
 
         [TestMethod]
-        public void ForLoopWithTryCatchAndNullFlows()
-        {
-            var code = @"
-Exception lastEx = null;
-for (int i = 0; i < 10; i++)
-{
-    try
-    {
-        InstanceMethod(); // May throw
-        Tag(""BeforeReturn"", lastEx);
-        return;
-    }
-    catch (InvalidOperationException e)
-    {
-        lastEx = e;
-        Tag(""InCatch"", lastEx);
-    }
-}
-
-Tag(""End"", lastEx);
-";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTagOrder("End", "BeforeReturn", "InCatch", "End", "BeforeReturn");
-            validator.TagValues("BeforeReturn").Should().SatisfyRespectively(
-                x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue(),     // InstanceMethod did not throw
-                x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue()); // InstanceMethod did throw, was caught, and flow continued
-            validator.TagValues("End").Should().SatisfyRespectively(
-                x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue(),     // Loop was never entered
-                x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue()); // InstanceMethod did throw and was caught
-        }
-
-        [TestMethod]
         public void DoWhileLoopWithTryCatchAndNullFlows()
         {
             var code = @"

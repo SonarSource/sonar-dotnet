@@ -1402,6 +1402,27 @@ public class Repro_GridChecks
     }
 }
 
+public class Repo_890
+{
+    public void M()
+    {
+        Exception lastEx = null;
+        for (int i = 0; i < 10; i++)
+        {
+            try
+            {
+                ToString(); // May throw
+                return;
+            }
+            catch (InvalidOperationException e)
+            {
+                lastEx = e;
+            }
+        }
+        lastEx.ToString(); // Noncompliant FP. The loop is always entered and so lastEx is never null here.
+    }
+}
+
 namespace ValidatedNotNullAttributeTest
 {
     public sealed class ValidatedNotNullAttribute : Attribute { }
