@@ -226,12 +226,25 @@ namespace Tests.Diagnostics
             if (leftName == null)
             {
                 // rightName is not null
-                if (rightName.EndsWith("foo")) // Compliant Suppressed #6117
+                if (rightName.EndsWith("foo")) // Compliant
                     return 1;
                 return 0;
             }
 
             return 0;
+        }
+
+        public void EqualsNull(object arg)
+        {
+            string value = arg?.ToString();
+            if (string.Equals(value, null))
+            {
+                value.ToString();   // Noncompliant
+            }
+            else
+            {
+                value.ToString();   // Compliant
+            }
         }
 
         public string Foo(ValueHolder valueHolder)
