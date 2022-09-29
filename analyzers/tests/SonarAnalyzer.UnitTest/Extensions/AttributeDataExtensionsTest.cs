@@ -173,14 +173,13 @@ public class MyAttribute: Attribute
     {namedArguments.Select(x => $@"public {TypeName(x.Value)} {x.Key} {{ get; set; }}").JoinStr("\r\n")}
 }}
 
-[MyAttribute({constructorArguments.Select(x => Quote(x.Value)).JoinStr(", ")}{separator}{namedArguments.Select(x => $"{x.Key}={Quote(x.Value)}").JoinStr(", ")})]
+[My({constructorArguments.Select(x => Quote(x.Value)).JoinStr(", ")}{separator}{namedArguments.Select(x => $"{x.Key}={Quote(x.Value)}").JoinStr(", ")})]
 public class Dummy {{ }}
 ";
             var snippet = new SnippetCompiler(code);
-            var s = snippet.SyntaxTree.GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>().Last();
-            var symbol = (INamedTypeSymbol)snippet.SemanticModel.GetDeclaredSymbol(s);
-            var attribute = symbol.GetAttributes().First();
-            return attribute;
+            var classDeclaration = snippet.SyntaxTree.GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>().Last();
+            var symbol = (INamedTypeSymbol)snippet.SemanticModel.GetDeclaredSymbol(classDeclaration);
+            return symbol.GetAttributes().First();
 
             static string TypeName(object value) =>
                 value switch
