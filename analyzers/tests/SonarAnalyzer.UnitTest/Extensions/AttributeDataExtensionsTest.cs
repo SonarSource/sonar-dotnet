@@ -19,6 +19,7 @@
  */
 
 using System.Reflection;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Moq;
 using Moq.Protected;
 using SonarAnalyzer.Extensions;
@@ -157,27 +158,45 @@ namespace SonarAnalyzer.UnitTest.Extensions
 
         private static AttributeData AttributeDataWithArguments(Dictionary<string, object> namedArguments = null, Dictionary<string, object> constructorArguments = null)
         {
-            var typedConstConstructor = typeof(TypedConstant).GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance).Single(x => x.GetParameters().Length == 3);
-            var namedArgumentsFake = namedArguments?.Select(x => new KeyValuePair<string, TypedConstant>(x.Key, CreateTypedConstant(x.Value))).ToImmutableArray()
-                ?? ImmutableArray.Create<KeyValuePair<string, TypedConstant>>();
-            var constructorArgumentsFake = constructorArguments?.Select(x => CreateTypedConstant(x.Value)).ToImmutableArray() ?? ImmutableArray.Create<TypedConstant>();
-            var constructorParametersFake = constructorArguments?.Select(x =>
-            {
-                var parameterMock = new Mock<IParameterSymbol>();
-                parameterMock.Setup(x => x.Name).Returns(x.Key);
-                return parameterMock.Object;
-            }).ToImmutableArray() ?? ImmutableArray.Create<IParameterSymbol>();
-            var constructorMock = new Mock<IMethodSymbol>();
-            constructorMock.Setup(x => x.Parameters).Returns(constructorParametersFake);
-            var attributeDataMock = new Mock<AttributeData>();
-            attributeDataMock.Protected().Setup<ImmutableArray<KeyValuePair<string, TypedConstant>>>("CommonNamedArguments").Returns(namedArgumentsFake);
-            attributeDataMock.Protected().Setup<ImmutableArray<TypedConstant>>("CommonConstructorArguments").Returns(constructorArgumentsFake);
-            attributeDataMock.Protected().Setup<IMethodSymbol>("CommonAttributeConstructor").Returns(constructorMock.Object);
+            namedArguments ??= new();
+            constructorArguments ??= new();
+            var separator = (constructorArguments.Any() && namedArguments.Any()) ? ", " : string.Empty;
+            var code = $@"
+using System;
 
-            return attributeDataMock.Object;
+public class MyAttribute: Attribute
+{{
+    public MyAttribute({constructorArguments.Select(x => $"{TypeName(x.Value)} {x.Key}").JoinStr(", ")})
+    {{
+    }}
 
-            TypedConstant CreateTypedConstant(object value) =>
-                (TypedConstant)typedConstConstructor.Invoke(new object[] { null, TypedConstantKind.Primitive, value });
+    {namedArguments.Select(x => $@"public {TypeName(x.Value)} {x.Key} {{ get; set; }}").JoinStr("\r\n")}
+}}
+
+[MyAttribute({constructorArguments.Select(x => Quote(x.Value)).JoinStr(", ")}{separator}{namedArguments.Select(x => $"{x.Key}={Quote(x.Value)}").JoinStr(", ")})]
+public class Dummy {{ }}
+";
+            var snippet = new SnippetCompiler(code);
+            var s = snippet.SyntaxTree.GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>().Last();
+            var symbol = (INamedTypeSymbol)snippet.SemanticModel.GetDeclaredSymbol(s);
+            var attribute = symbol.GetAttributes().First();
+            return attribute;
+
+            static string TypeName(object value) =>
+                value switch
+                {
+                    null => "object",
+                    var x => x.GetType().FullName,
+                };
+
+            static string Quote(object value) =>
+                value switch
+                {
+                    string s => @$"""{s}""",
+                    bool b => b ? "true" : "false",
+                    null => "null",
+                    var v => v.ToString(),
+                };
         }
     }
 }
