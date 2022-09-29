@@ -1497,3 +1497,73 @@ namespace ValidatedNotNullAttributeTest
         }
     }
 }
+
+namespace DoesNotReturnIf
+{
+    public sealed class DoesNotReturnIfAttribute : Attribute
+    {
+        public DoesNotReturnIfAttribute(bool condition) { }
+    }
+
+    public class Sample
+    {
+        private object notImportant;
+
+        public void ForTrue(object arg)
+        {
+            var canBeNull = arg?.ToString();
+            FailsWhenTrue(notImportant, canBeNull == null, notImportant);
+            canBeNull.ToString();    // Noncompliant FP
+        }
+
+        public void ForTrueAny(object arg1, object arg2, bool condition)
+        {
+            var canBeNull1 = arg1?.ToString();
+            var canBeNull2 = arg2?.ToString();
+            object isNull = null;
+            FailsWhenTrueAny(canBeNull1 == null, condition);
+            canBeNull1.ToString();  // Noncompliant FP
+            if (condition)
+            {
+                isNull.ToString();  // Noncompliant FP, Unreachable
+            }
+            else
+            {
+                isNull.ToString();  // Noncompliant
+            }
+            FailsWhenTrueAny(condition, canBeNull2 == null);
+            canBeNull2.ToString();  // Noncompliant FP
+        }
+
+        public void ForFalse(object arg)
+        {
+            var canBeNull = arg?.ToString();
+            FailsWhenFalse(notImportant, canBeNull != null, notImportant);
+            canBeNull.ToString();    // Noncompliant FP
+        }
+
+        public void ForFalseAny(object arg1, object arg2, bool condition)
+        {
+            var canBeNull1 = arg1?.ToString();
+            var canBeNull2 = arg2?.ToString();
+            object isNull = null;
+            FailsWhenFalseAny(canBeNull1 != null, condition);
+            canBeNull1.ToString();  // Noncompliant FP
+            if (condition)
+            {
+                isNull.ToString();  // Noncompliant
+            }
+            else
+            {
+                isNull.ToString();  // Noncompliant FP, Unreachable
+            }
+            FailsWhenFalseAny(condition, canBeNull2 != null);
+            canBeNull2.ToString();  // Noncompliant FP
+        }
+
+        public void FailsWhenTrue(object before, [DoesNotReturnIf(true)] bool condition, object after) { }
+        public void FailsWhenFalse(object before, [DoesNotReturnIf(false)] bool condition, object after) { }
+        public void FailsWhenTrueAny([DoesNotReturnIf(true)] bool condition1, [DoesNotReturnIf(true)] bool condition2) { }
+        public void FailsWhenFalseAny([DoesNotReturnIf(false)] bool condition1, [DoesNotReturnIf(false)] bool condition2) { }
+    }
+}
