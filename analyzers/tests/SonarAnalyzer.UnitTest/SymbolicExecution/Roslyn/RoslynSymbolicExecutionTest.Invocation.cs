@@ -464,23 +464,23 @@ Tag(""End"", null);";
             validator.TagStates("End").Should().SatisfyRespectively(
                 x =>
                 {
-                    x[validator.Symbol("ObjectField")].Should().BeEquivalentTo(new SymbolicValue().WithConstraint(ObjectConstraint.Null));
-                    x[validator.Symbol("byteString")].Should().BeEquivalentTo(new SymbolicValue().WithConstraint(ObjectConstraint.Null));
-                    x[validator.Symbol("success")].Should().BeEquivalentTo(new SymbolicValue().WithConstraint(BoolConstraint.False));
+                    x[validator.Symbol("ObjectField")].HasConstraint(ObjectConstraint.Null).Should().BeTrue();
+                    x[validator.Symbol("byteString")].HasConstraint(ObjectConstraint.Null).Should().BeTrue();
+                    x[validator.Symbol("success")].HasConstraint(BoolConstraint.False).Should().BeTrue();
                     x[validator.Symbol("result")].Should().BeNull();
                 },
                 x =>
                 {
-                    x[validator.Symbol("ObjectField")].Should().BeEquivalentTo(new SymbolicValue().WithConstraint(ObjectConstraint.Null));
-                    x[validator.Symbol("byteString")].Should().BeEquivalentTo(new SymbolicValue().WithConstraint(ObjectConstraint.NotNull));
-                    x[validator.Symbol("success")].Should().BeEquivalentTo(new SymbolicValue().WithConstraint(BoolConstraint.False));
+                    x[validator.Symbol("ObjectField")].HasConstraint(ObjectConstraint.Null).Should().BeTrue();
+                    x[validator.Symbol("byteString")].HasConstraint(ObjectConstraint.NotNull).Should().BeTrue();
+                    x[validator.Symbol("success")].HasConstraint(BoolConstraint.False).Should().BeTrue();
                     x[validator.Symbol("result")].Should().BeNull();
                 },
                 x =>
                 {
-                    x[validator.Symbol("ObjectField")].Should().BeEquivalentTo(new SymbolicValue().WithConstraint(ObjectConstraint.Null));
-                    x[validator.Symbol("byteString")].Should().BeEquivalentTo(new SymbolicValue().WithConstraint(ObjectConstraint.NotNull));
-                    x[validator.Symbol("success")].Should().BeEquivalentTo(new SymbolicValue().WithConstraint(BoolConstraint.True));
+                    x[validator.Symbol("ObjectField")].HasConstraint(ObjectConstraint.Null).Should().BeTrue();
+                    x[validator.Symbol("byteString")].HasConstraint(ObjectConstraint.NotNull).Should().BeTrue();
+                    x[validator.Symbol("success")].HasConstraint(BoolConstraint.True).Should().BeTrue();
                     x[validator.Symbol("result")].Should().BeNull();
                 });
         }
@@ -503,23 +503,23 @@ public bool TryParse([System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)
             validator.TagStates("End").Should().SatisfyRespectively(
                 x =>
                 {
-                    x[validator.Symbol("ObjectField")].Should().BeEquivalentTo(new SymbolicValue());
-                    x[validator.Symbol("byteString")].Should().BeEquivalentTo(new SymbolicValue().WithConstraint(ObjectConstraint.Null));
-                    x[validator.Symbol("success")].Should().BeEquivalentTo(new SymbolicValue().WithConstraint(BoolConstraint.False));
+                    x[validator.Symbol("ObjectField")].HasConstraint<ObjectConstraint>().Should().BeFalse();
+                    x[validator.Symbol("byteString")].HasConstraint(ObjectConstraint.Null).Should().BeTrue();
+                    x[validator.Symbol("success")].HasConstraint(BoolConstraint.False).Should().BeTrue();
                     x[validator.Symbol("result")].Should().BeNull();
                 },
                 x =>
                 {
-                    x[validator.Symbol("ObjectField")].Should().BeEquivalentTo(new SymbolicValue());
-                    x[validator.Symbol("byteString")].Should().BeEquivalentTo(new SymbolicValue().WithConstraint(ObjectConstraint.NotNull));
-                    x[validator.Symbol("success")].Should().BeEquivalentTo(new SymbolicValue().WithConstraint(BoolConstraint.False));
+                    x[validator.Symbol("ObjectField")].HasConstraint<ObjectConstraint>().Should().BeFalse();
+                    x[validator.Symbol("byteString")].HasConstraint(ObjectConstraint.NotNull).Should().BeTrue();
+                    x[validator.Symbol("success")].HasConstraint(BoolConstraint.False).Should().BeTrue();
                     x[validator.Symbol("result")].Should().BeNull();
                 },
                 x =>
                 {
-                    x[validator.Symbol("ObjectField")].Should().BeEquivalentTo(new SymbolicValue());
-                    x[validator.Symbol("byteString")].Should().BeEquivalentTo(new SymbolicValue().WithConstraint(ObjectConstraint.NotNull));
-                    x[validator.Symbol("success")].Should().BeEquivalentTo(new SymbolicValue().WithConstraint(BoolConstraint.True));
+                    x[validator.Symbol("ObjectField")].HasConstraint<ObjectConstraint>().Should().BeFalse();
+                    x[validator.Symbol("byteString")].HasConstraint(ObjectConstraint.NotNull).Should().BeTrue();
+                    x[validator.Symbol("success")].HasConstraint(BoolConstraint.True).Should().BeTrue();
                     x[validator.Symbol("result")].Should().BeNull();
                 });
         }
