@@ -135,7 +135,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
                     return programState;
                 }
 
-                if ((symbol.GetSymbolType().IsNullable() && !IsGetTypeCall(memberAccess))
+                if ((symbol.GetSymbolType().IsNullableValueType() && !IsGetTypeCall(memberAccess))
                     || semanticModel.IsExtensionMethod(memberAccess))
                 {
                     return programState;
@@ -176,7 +176,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
             }
 
             private static ProgramState SetNotNullConstraintOnSymbol(ISymbol symbol, ProgramState programState) =>
-                programState == null || symbol == null || symbol.GetSymbolType().IsNullable()
+                programState == null || symbol == null || symbol.GetSymbolType().IsNullableValueType()
                     ? programState
                     : symbol.SetConstraint(ObjectConstraint.NotNull, programState);
 
