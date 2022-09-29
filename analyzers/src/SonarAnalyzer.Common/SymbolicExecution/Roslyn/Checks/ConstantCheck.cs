@@ -55,15 +55,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
                 // Update DefaultValue when adding new types
                 true => SymbolicValue.True,
                 false => SymbolicValue.False,
-                null when CanBeNull(operation.Instance.Type ?? ConvertedType(operation.Parent)) => SymbolicValue.Null,  // ToDo: MMF-2401, this will need to be reviewed
+                null when (operation.Instance.Type ?? ConvertedType(operation.Parent)).CanBeNull() => SymbolicValue.Null,  // ToDo: MMF-2401, this will need to be reviewed
                 string => SymbolicValue.NotNull,
                 _ => null
             };
-
-        // FIXME: Use the extension from #6136 before merging
-        private static bool CanBeNull(ITypeSymbol type) =>
-            type is not null
-            && (type.IsReferenceType || type.OriginalDefinition.Is(KnownType.System_Nullable_T));
 
         private static ITypeSymbol ConvertedType(IOperation operation) =>
             // Some version of Roslyn can send null here with "return default;". It's not reproducible by UTs, as we have "Type" set in that case.
