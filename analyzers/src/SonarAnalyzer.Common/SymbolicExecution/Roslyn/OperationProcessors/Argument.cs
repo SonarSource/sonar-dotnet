@@ -21,6 +21,7 @@
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
 
@@ -52,11 +53,13 @@ internal sealed class Argument : SimpleProcessor<IArgumentOperationWrapper>
     }
 
     private static ProgramState ProcessArgumentAttributes(ProgramState state, IArgumentOperationWrapper argument, ImmutableArray<AttributeData> attributes) =>
-        attributes.Any(IsValidatedNotNullAttribute) && argument.Value.TrackedSymbol() is { } symbol
+        attributes.Any(IsNotNullAttribute) && argument.Value.TrackedSymbol() is { } symbol
             ? state.SetSymbolConstraint(symbol, ObjectConstraint.NotNull)
             : state;
 
-    // Same as [NotNull] https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/attributes/nullable-analysis#postconditions-maybenull-and-notnull
-    private static bool IsValidatedNotNullAttribute(AttributeData attribute) =>
-        attribute.AttributeClass?.Name == "ValidatedNotNullAttribute";
+    // https://docs.microsoft.com/dotnet/api/microsoft.validatednotnullattribute
+    // https://docs.microsoft.com/dotnet/csharp/language-reference/attributes/nullable-analysis#postconditions-maybenull-and-notnull
+    // https://www.jetbrains.com/help/resharper/Reference__Code_Annotation_Attributes.html#NotNullAttribute
+    private static bool IsNotNullAttribute(AttributeData attribute) =>
+        attribute.HasAnyName("ValidatedNotNullAttribute", "NotNullAttribute");
 }

@@ -502,16 +502,20 @@ Tag(""This"", fromThis);";
             validator.ValidateTag("This", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
         }
 
-        [TestMethod]
-        public void Invocation_ValidatedNotNullAttribute_SetsNotNullOnArgumentsMarkedWithAttribute()
+        [DataTestMethod]
+        [DataRow("[ValidatedNotNull]")]
+        [DataRow("[ValidatedNotNullAttribute]")]
+        [DataRow("[NotNull]")]
+        [DataRow("[NotNullAttribute]")]
+        public void Invocation_NotNullAttribute_SetsNotNullOnArgumentsMarkedWithAttribute(string notNullAttribute)
         {
-            var code = @"
+            var code = $@"
 using System;
 
 public class Sample
-{
+{{
     public void Main(object o1, object o2, object o3, object o4, object o5, object o6, object o7, object o8, string s1, string s2)
-    {
+    {{
         Guard.NotNullExt(o1);
         o2.NotNullExt();
         NotNullInst(o3);
@@ -528,26 +532,28 @@ public class Sample
         Tag(""AfterGuard_o8"", o8);
         Tag(""AfterGuard_s1"", s1);
         Tag(""AfterGuard_s2"", s2);
-    }
+    }}
 
-    private void NotNullInst([ValidatedNotNullAttribute] object value)
-    {
+    private void NotNullInst({notNullAttribute} object value)
+    {{
         // Skip implementation to make sure, the attribute is driving the constraint
-    }
+    }}
 
-    private void NotNullInst([ValidatedNotNullAttribute] object value1, [ValidatedNotNullAttribute] object value2) { }
-    private void NotNullInst<T1, T2, T3>([ValidatedNotNullAttribute] T1 value1, T2 value2, [ValidatedNotNullAttribute] T3 value3) { }
-    private void NotNullRefOut<T1, T2>([ValidatedNotNullAttribute] ref T1 value1, [ValidatedNotNullAttribute] out T2 value2) { value1 = default; value2 = default; }
+    private void NotNullInst({notNullAttribute} object value1, {notNullAttribute} object value2) {{ }}
+    private void NotNullInst<T1, T2, T3>({notNullAttribute} T1 value1, T2 value2, {notNullAttribute} T3 value3) {{ }}
+    private void NotNullRefOut<T1, T2>({notNullAttribute} ref T1 value1, {notNullAttribute} out T2 value2) {{ value1 = default; value2 = default; }}
 
-    private static void Tag(string name, object arg) { }
-}
+    private static void Tag(string name, object arg) {{ }}
+}}
 
-public sealed class ValidatedNotNullAttribute : Attribute { }
+public sealed class ValidatedNotNullAttribute : Attribute {{ }}
+
+public sealed class NotNullAttribute : Attribute {{ }}
 
 public static class Guard
-{
-    public static void NotNullExt<T>([ValidatedNotNullAttribute] this T value) where T : class { }
-}
+{{
+    public static void NotNullExt<T>({notNullAttribute} this T value) where T : class {{ }}
+}}
 ";
             var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
             validator.ValidateTag("AfterGuard_o1", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
