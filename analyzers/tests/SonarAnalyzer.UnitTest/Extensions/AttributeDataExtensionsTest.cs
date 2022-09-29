@@ -93,15 +93,15 @@ namespace SonarAnalyzer.UnitTest.Extensions
             AssertTryGetAttributeValue<int>("SomeString", false, 0);
             AssertTryGetAttributeValue<int>("SomeNumberString", true, 42);
 
-            void AssertTryGetAttributeValue<T>(string valueName, bool expectedSuccess, T expectedValue)
+            void AssertTryGetAttributeValue<T>(string valueName, bool expectedSuccess, T expectedResult)
             {
                 var success = named.TryGetAttributeValue<T>(valueName, out T result);
                 success.Should().Be(expectedSuccess);
-                result.Should().Be(expectedValue);
+                result.Should().Be(expectedResult);
 
                 success = constructor.TryGetAttributeValue<T>(valueName, out result);
                 success.Should().Be(expectedSuccess);
-                result.Should().Be(expectedValue);
+                result.Should().Be(expectedResult);
             }
         }
 
