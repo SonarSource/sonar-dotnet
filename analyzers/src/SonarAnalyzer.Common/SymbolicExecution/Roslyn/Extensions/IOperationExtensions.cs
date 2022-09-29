@@ -20,7 +20,6 @@
 
 using System;
 using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Extensions;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
