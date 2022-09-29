@@ -55,10 +55,14 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
                 // Update DefaultValue when adding new types
                 true => SymbolicValue.True,
                 false => SymbolicValue.False,
-                null when (operation.Instance.Type ?? ConvertedType(operation.Parent)) is { IsReferenceType: true } => SymbolicValue.Null,
+                null when CanBeNull(operation.Instance.Type ?? ConvertedType(operation.Parent)) => SymbolicValue.Null,
                 string => SymbolicValue.NotNull,
                 _ => null
             };
+
+        private static bool CanBeNull(ITypeSymbol type) =>
+            type is not null
+            && (type.IsReferenceType || type.OriginalDefinition.Is(KnownType.System_Nullable_T));
 
         private static ITypeSymbol ConvertedType(IOperation operation) =>
             // Some version of Roslyn can send null here with "return default;". It's not reproducible by UTs, as we have "Type" set in that case.

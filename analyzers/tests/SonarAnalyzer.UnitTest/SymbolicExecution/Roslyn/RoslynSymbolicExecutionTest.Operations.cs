@@ -804,7 +804,9 @@ public async System.Threading.Tasks.Task Main(System.Threading.Tasks.Task T)
         [DataRow("bool", "true", "False")]
         [DataRow("bool", "false", "True")]
         [DataRow("bool?", "default", "Null")]
-        [DataRow("bool?", "null", null)]    // FIXME: Should behave same as default
+        [DataRow("bool?", "null", "Null")]
+        [DataRow("int?", "default", "Null")]
+        [DataRow("int?", "null", "Null")]
         public void Unary_Not_SupportsBoolAndNull(string type, string defaultValue, string expectedConstraints)
         {
             var code = $@"

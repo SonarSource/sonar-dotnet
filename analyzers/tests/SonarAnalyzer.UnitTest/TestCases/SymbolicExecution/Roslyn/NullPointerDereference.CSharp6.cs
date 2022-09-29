@@ -156,10 +156,10 @@ namespace Tests.Diagnostics
                     Console.ForegroundColor = obj.Color; // Noncompliant
                     break;
                 case ConsoleColor.Red:
-                    Console.ForegroundColor = obj.Color; // Noncompliant FP, requires nullability support in captured flow operation
+                    Console.ForegroundColor = obj.Color;
                     break;
                 default:
-                    Console.WriteLine($"Color {obj.Color} is not supported."); // Noncompliant FP, requires nullability support in captured flow operation
+                    Console.WriteLine($"Color {obj.Color} is not supported.");
                     break;
             }
         }
