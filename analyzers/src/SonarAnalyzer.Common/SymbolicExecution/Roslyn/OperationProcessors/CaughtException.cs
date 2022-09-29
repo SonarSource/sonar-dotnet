@@ -18,17 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
-using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer
-{
+namespace SonarAnalyzer;
+
 internal sealed class CaughtException : ISimpleProcessor
 {
     public ProgramState Process(SymbolicContext context) =>
         context.SetOperationConstraint(ObjectConstraint.NotNull);
-}
 }
