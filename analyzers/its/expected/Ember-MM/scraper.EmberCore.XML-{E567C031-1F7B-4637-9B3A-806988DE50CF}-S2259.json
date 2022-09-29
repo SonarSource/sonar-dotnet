@@ -2,40 +2,40 @@
 "issues":  [
 {
 "id":  "S2259",
-"message":  "'s' is Nothing on at least one execution path.",
+"message":  "'obj' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\PersonInfo.vb",
 "region":  {
-"startLine":  598,
-"startColumn":  52,
-"endLine":  598,
-"endColumn":  53
+"startLine":  256,
+"startColumn":  67,
+"endLine":  256,
+"endColumn":  70
 }
 }
 },
 {
 "id":  "S2259",
-"message":  "'s' is Nothing on at least one execution path.",
+"message":  "'obj' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\Thumbnail.vb",
 "region":  {
-"startLine":  635,
-"startColumn":  35,
-"endLine":  635,
-"endColumn":  36
+"startLine":  184,
+"startColumn":  67,
+"endLine":  184,
+"endColumn":  70
 }
 }
 },
 {
 "id":  "S2259",
-"message":  "'s' is Nothing on at least one execution path.",
+"message":  "'results' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
 "region":  {
-"startLine":  703,
-"startColumn":  39,
-"endLine":  703,
-"endColumn":  40
+"startLine":  593,
+"startColumn":  54,
+"endLine":  593,
+"endColumn":  61
 }
 }
 }

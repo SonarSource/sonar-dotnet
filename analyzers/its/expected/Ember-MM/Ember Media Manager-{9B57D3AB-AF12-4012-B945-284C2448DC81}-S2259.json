@@ -28,45 +28,6 @@
 },
 {
 "id":  "S2259",
-"message":  "'tSetPan' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
-"region":  {
-"startLine":  2620,
-"startColumn":  13,
-"endLine":  2620,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'oSetPan' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
-"region":  {
-"startLine":  2631,
-"startColumn":  60,
-"endLine":  2631,
-"endColumn":  67
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'oSetPan' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
-"region":  {
-"startLine":  2635,
-"startColumn":  60,
-"endLine":  2635,
-"endColumn":  67
-}
-}
-},
-{
-"id":  "S2259",
 "message":  "'Me.SettingsPanels.FirstOrDefault(Function(p) p.Name = tvSettings.SelectedNode.Name)' is Nothing on at least one execution path.",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",

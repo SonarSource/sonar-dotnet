@@ -2,40 +2,40 @@
 "issues":  [
 {
 "id":  "S2259",
-"message":  "'tmpEp' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
-"region":  {
-"startLine":  442,
-"startColumn":  52,
-"endLine":  442,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'tmpEp' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
-"region":  {
-"startLine":  477,
-"startColumn":  44,
-"endLine":  477,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'tSer' is Nothing on at least one execution path.",
+"message":  "'sResults' is Nothing on at least one execution path.",
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVDBSearchResults.vb",
 "region":  {
-"startLine":  97,
-"startColumn":  63,
-"endLine":  97,
-"endColumn":  67
+"startLine":  336,
+"startColumn":  24,
+"endLine":  336,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'sResults' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVDBSearchResults.vb",
+"region":  {
+"startLine":  347,
+"startColumn":  28,
+"endLine":  347,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'sResults' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVDBSearchResults.vb",
+"region":  {
+"startLine":  358,
+"startColumn":  54,
+"endLine":  358,
+"endColumn":  62
 }
 }
 },
@@ -49,71 +49,6 @@
 "startColumn":  54,
 "endLine":  358,
 "endColumn":  145
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'tSP' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
-"region":  {
-"startLine":  84,
-"startColumn":  69,
-"endLine":  84,
-"endColumn":  72
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'tSPg' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
-"region":  {
-"startLine":  94,
-"startColumn":  73,
-"endLine":  94,
-"endColumn":  77
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'tSPg' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
-"region":  {
-"startLine":  112,
-"startColumn":  69,
-"endLine":  112,
-"endColumn":  73
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'tSP' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
-"region":  {
-"startLine":  121,
-"startColumn":  73,
-"endLine":  121,
-"endColumn":  76
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'tSF' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
-"region":  {
-"startLine":  143,
-"startColumn":  49,
-"endLine":  143,
-"endColumn":  52
 }
 }
 },
@@ -192,32 +127,6 @@
 "startColumn":  50,
 "endLine":  1060,
 "endColumn":  136
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'tFanart' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
-"region":  {
-"startLine":  1151,
-"startColumn":  77,
-"endLine":  1151,
-"endColumn":  84
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'tPoster' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
-"region":  {
-"startLine":  1165,
-"startColumn":  77,
-"endLine":  1165,
-"endColumn":  84
 }
 }
 }

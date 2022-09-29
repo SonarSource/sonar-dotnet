@@ -445,7 +445,6 @@ finally
         [DataRow("arg.OrderBy(x => x).ThenByDescending(x => x);")]
         [DataRow("arg.ToArray();")]
         [DataRow("arg.ToDictionary(x => x);")]
-        [DataRow("arg.ToHashSet();")]
         [DataRow("arg.ToList();")]
         [DataRow("arg.ToLookup(x => x);")]
         [DataRow("arg.Union(arg);")]
@@ -521,6 +520,54 @@ If Query.Count <> 0 Then
 End If";
             var validator = SETestContext.CreateVB(code, ", Items() As Object").Validator;
             validator.ValidateTag("Value", x => x.Should().BeNull());
+        }
+
+        [DataTestMethod]
+        [DataRow("Object = Nothing", true)]
+        [DataRow("Object = New Object()", false)]
+        [DataRow("Integer = Nothing", false)]   // While it can be assigned Nothing, value 0 is stored. And that is not null
+        [DataRow("TStruct = Nothing", false)]
+        [DataRow("T = Nothing", false)]
+        public void Invocation_InformationIsNothing_KnownSymbol(string declarationSuffix, bool expected)
+        {
+            var code = $@"
+Public Sub Main(Of T, TStruct As Structure)()
+    Dim Value As {declarationSuffix}
+    Dim Result As Boolean = IsNothing(CType(DirectCast(Value, Object), Object)) ' Some conversions in the way to detect the value type
+    Tag(""Result"", Result)
+End Sub";
+            var validator = SETestContext.CreateVBMethod(code).Validator;
+            validator.ValidateTag("Result", x => x.HasConstraint(BoolConstraint.From(expected)).Should().BeTrue());
+        }
+
+        [DataTestMethod]
+        [DataRow("Object")]
+        [DataRow("Exception")]
+        [DataRow("Integer?")]
+        [DataRow("TClass")]
+        public void Invocation_InformationIsNothing_UnknownSymbol(string type)
+        {
+            var code = @$"
+Public Sub Main(Of TClass As Class)(Arg As {type})
+    Dim Result As Boolean = IsNothing(Arg)
+    Tag(""Result"", Result)
+End Sub";
+            var validator = SETestContext.CreateVBMethod(code).Validator;
+            var argSymbol = validator.Symbol("Arg");
+            var resultSymbol = validator.Symbol("Result");
+            validator.TagStates("Result").Should().HaveCount(2)
+                .And.ContainSingle(x => x[argSymbol].HasConstraint(ObjectConstraint.Null) && x[resultSymbol].HasConstraint(BoolConstraint.True))
+                .And.ContainSingle(x => x[argSymbol].HasConstraint(ObjectConstraint.NotNull) && x[resultSymbol].HasConstraint(BoolConstraint.False));
+        }
+
+        [TestMethod]
+        public void Invocation_InformationIsNothing_NoTrackedSymbol()
+        {
+            var code = $@"
+Dim Result As Boolean = IsNothing("""" & Arg.ToString())
+Tag(""Result"", Result)";
+            var validator = SETestContext.CreateVB(code, ", Arg As Object").Validator;
+            validator.ValidateTag("Result", x => x.Should().BeNull());
         }
 
         [DataTestMethod]

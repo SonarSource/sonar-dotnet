@@ -91,6 +91,17 @@ End Class";
             return new(code, AnalyzerLanguage.VisualBasic, additionalChecks);
         }
 
+        public static SETestContext CreateVBMethod(string method, params SymbolicCheck[] additionalChecks) =>
+            new($@"
+Public Class Sample
+
+    {method}
+
+    Private Shared Sub Tag(Name As String, Optional Arg As Object = Nothing)
+    End Sub
+
+End Class", AnalyzerLanguage.VisualBasic, additionalChecks);
+
         private static string ClassCodeCS(string methodBody, string additionalParameters) =>
             $@"
 using System;

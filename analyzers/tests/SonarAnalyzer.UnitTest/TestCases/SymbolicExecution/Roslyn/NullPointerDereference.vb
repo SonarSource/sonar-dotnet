@@ -1,5 +1,6 @@
 ﻿Imports System
 Imports System.Threading.Tasks
+Imports Microsoft.VisualBasic.Information
 
 Public Class Program
 
@@ -78,6 +79,20 @@ Public Class Program
     Public Sub Linq(Items() As Object)
         Dim Result = From Item In Items Where Item IsNot Nothing
         If Result.Count > 0 Then Result(0).ToString()   ' Compliant
+    End Sub
+
+    Public Sub IsNothing_Known()
+        Dim O As Object
+        If IsNothing(O) Then
+            O.ToString()    ' Noncompliant
+        Else
+            O.ToString()    ' Compliant
+        End If
+    End Sub
+
+    Public Sub IsNothing_Unknown(Arg As Object)
+        Dim B As Boolean = IsNothing(Arg)   ' Learn possible null
+        Arg.ToString()  ' Noncompliant
     End Sub
 
 End Class
