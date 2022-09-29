@@ -183,7 +183,7 @@ internal sealed class Invocation : MultiProcessor<IInvocationOperationWrapper>
         {
             ObjectConstraint constraint when constraint == ObjectConstraint.Null => new[] { context.SetOperationConstraint(BoolConstraint.True) },
             ObjectConstraint constraint when constraint == ObjectConstraint.NotNull => new[] { context.SetOperationConstraint(BoolConstraint.False) },
-            _ when ConversionOperandType(invocation.Arguments[0].ToArgument().Value) is { } type && !CanBeNull(type) => new[] { context.SetOperationConstraint(BoolConstraint.False) },
+            _ when invocation.Arguments[0].ToArgument().Value.UnwrapConversion().Type is { } type && !type.CanBeNull() => new[] { context.SetOperationConstraint(BoolConstraint.False) },
             _ when invocation.Arguments[0].TrackedSymbol() is { } argumentSymbol => new[]
             {
                         context.SetOperationConstraint(BoolConstraint.True).SetSymbolConstraint(argumentSymbol, ObjectConstraint.Null),
@@ -191,12 +191,4 @@ internal sealed class Invocation : MultiProcessor<IInvocationOperationWrapper>
             },
             _ => new[] { context.State }
         };
-
-    private static ITypeSymbol ConversionOperandType(IOperation operation) =>
-        operation.Kind == OperationKindEx.Conversion
-            ? ConversionOperandType(IConversionOperationWrapper.FromOperation(operation).Operand)
-            : operation.Type;
-
-    private static bool CanBeNull(ITypeSymbol type) =>
-        type.IsReferenceType || type.OriginalDefinition.Is(KnownType.System_Nullable_T);
 }

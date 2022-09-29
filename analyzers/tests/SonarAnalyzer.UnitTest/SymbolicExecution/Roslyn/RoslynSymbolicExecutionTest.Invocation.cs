@@ -526,13 +526,17 @@ End If";
         [DataRow("Object = Nothing", true)]
         [DataRow("Object = New Object()", false)]
         [DataRow("Integer = Nothing", false)]   // While it can be assigned Nothing, value 0 is stored. And that is not null
+        [DataRow("TStruct = Nothing", false)]
+        [DataRow("T = Nothing", false)]
         public void Invocation_InformationIsNothing_KnownSymbol(string declarationSuffix, bool expected)
         {
             var code = $@"
-Dim Value As {declarationSuffix}
-Dim Result As Boolean = IsNothing(CType(DirectCast(Value, Object), Object)) ' Some conversions in the way to detect the value type
-Tag(""Result"", Result)";
-            var validator = SETestContext.CreateVB(code).Validator;
+Public Sub Main(Of T, TStruct As Structure)()
+    Dim Value As {declarationSuffix}
+    Dim Result As Boolean = IsNothing(CType(DirectCast(Value, Object), Object)) ' Some conversions in the way to detect the value type
+    Tag(""Result"", Result)
+End Sub";
+            var validator = SETestContext.CreateVBMethod(code).Validator;
             validator.ValidateTag("Result", x => x.HasConstraint(BoolConstraint.From(expected)).Should().BeTrue());
         }
 
@@ -540,12 +544,15 @@ Tag(""Result"", Result)";
         [DataRow("Object")]
         [DataRow("Exception")]
         [DataRow("Integer?")]
+        [DataRow("TClass")]
         public void Invocation_InformationIsNothing_UnknownSymbol(string type)
         {
-            const string code = @"
-Dim Result As Boolean = IsNothing(Arg)
-Tag(""Result"", Result)";
-            var validator = SETestContext.CreateVB(code, $", Arg As {type}").Validator;
+            var code = @$"
+Public Sub Main(Of TClass As Class)(Arg As {type})
+    Dim Result As Boolean = IsNothing(Arg)
+    Tag(""Result"", Result)
+End Sub";
+            var validator = SETestContext.CreateVBMethod(code).Validator;
             var argSymbol = validator.Symbol("Arg");
             var resultSymbol = validator.Symbol("Result");
             validator.TagStates("Result").Should().HaveCount(2)
