@@ -919,7 +919,7 @@ finally
         }
 
         [TestMethod]
-        public void ExceptionVariableIsNotNull()
+        public void Catch_ExceptionVariableIsNotNull()
         {
             const string code = @"
 try
@@ -931,8 +931,7 @@ catch(InvalidOperationException ex) when (Tag(""InFilter"", ex))
     Tag(""InCatch"", ex);
 }
 
-static bool Tag<T>(string name, T value) => true;
-";
+static bool Tag<T>(string name, T value) => true;";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateTag("InFilter", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.ValidateTag("InCatch", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());

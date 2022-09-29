@@ -26,12 +26,9 @@ using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer
 {
-    internal sealed class CaughtException : SimpleProcessor<ICaughtExceptionOperationWrapper>
-    {
-        protected override ICaughtExceptionOperationWrapper Convert(IOperation operation) =>
-            ICaughtExceptionOperationWrapper.FromOperation(operation);
-
-        protected override ProgramState Process(SymbolicContext context, ICaughtExceptionOperationWrapper operation) =>
-            context.SetOperationConstraint(ObjectConstraint.NotNull);
-    }
+internal sealed class CaughtException : ISimpleProcessor
+{
+    public ProgramState Process(SymbolicContext context) =>
+        context.SetOperationConstraint(ObjectConstraint.NotNull);
+}
 }
