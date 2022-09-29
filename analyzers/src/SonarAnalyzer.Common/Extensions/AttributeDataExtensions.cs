@@ -40,37 +40,43 @@ namespace SonarAnalyzer.Extensions
             {
                 return TryConvertConstant(attribute.NamedArguments[namedAgumentIndex].Value, out value);
             }
-            if (attribute.AttributeConstructor.Parameters.IndexOf(x => x.Name.Equals(valueName, StringComparison.OrdinalIgnoreCase)) is var constructorParameterIndex and >= 0)
+            else if (attribute.AttributeConstructor.Parameters.IndexOf(x => x.Name.Equals(valueName, StringComparison.OrdinalIgnoreCase)) is var constructorParameterIndex and >= 0)
             {
                 return TryConvertConstant(attribute.ConstructorArguments[constructorParameterIndex], out value);
             }
-            value = default;
-            return false;
-
-            static bool TryConvertConstant(TypedConstant constant, out T value)
+            else
             {
                 value = default;
-                if (constant.IsNull)
+                return false;
+            }
+        }
+
+        private static bool TryConvertConstant<T>(TypedConstant constant, out T value)
+        {
+            value = default;
+            if (constant.IsNull)
+            {
+                return true;
+            }
+            else if (constant.Value is T result)
+            {
+                value = result;
+                return true;
+            }
+            else if (constant.Value is IConvertible)
+            {
+                try
                 {
+                    value = (T)Convert.ChangeType(constant.Value, typeof(T));
                     return true;
                 }
-                if (constant.Value is T result)
+                catch
                 {
-                    value = result;
-                    return true;
+                    return false;
                 }
-                if (constant.Value is IConvertible)
-                {
-                    try
-                    {
-                        value = (T)Convert.ChangeType(constant.Value, typeof(T));
-                        return true;
-                    }
-                    catch (Exception ex) when (ex is FormatException or OverflowException)
-                    {
-                        return false;
-                    }
-                }
+            }
+            else
+            {
                 return false;
             }
         }
