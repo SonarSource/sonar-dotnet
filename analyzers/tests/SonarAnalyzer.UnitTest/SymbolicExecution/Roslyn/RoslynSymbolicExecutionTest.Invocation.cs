@@ -417,7 +417,7 @@ finally
 #if NET
 
         [TestMethod]
-        public void Invocation_TryParse_Null()
+        public void Invocation_NotNullWhen_Null()
         {
             const string code = @"
 this.ObjectField = null;
@@ -426,8 +426,7 @@ var success = byte.TryParse(byteString, out var result); // bool TryParse([NotNu
 Tag(""ByteString"", byteString);
 Tag(""Success"", success);
 Tag(""Result"", result);
-Tag(""ObjectField"", ObjectField);
-";
+Tag(""ObjectField"", ObjectField);";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateTag("ByteString", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
             validator.ValidateTag("Success", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
@@ -436,7 +435,7 @@ Tag(""ObjectField"", ObjectField);
         }
 
         [TestMethod]
-        public void Invocation_TryParse_NotNull()
+        public void Invocation_NotNullWhen_NotNull()
         {
             const string code = @"
 this.ObjectField = null;
@@ -445,8 +444,7 @@ var success = byte.TryParse(byteString, out var result); // bool TryParse([NotNu
 Tag(""ByteString"", byteString);
 Tag(""Success"", success);
 Tag(""Result"", result);
-Tag(""ObjectField"", ObjectField);
-";
+Tag(""ObjectField"", ObjectField);";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateTag("ByteString", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.ValidateTag("Success", x => x.Should().BeNull());
@@ -455,14 +453,13 @@ Tag(""ObjectField"", ObjectField);
         }
 
         [TestMethod]
-        public void Invocation_TryParse_Unknown()
+        public void Invocation_NotNullWhen_Unknown()
         {
             const string code = @"
 this.ObjectField = null;
 string byteString = Unknown<string>();
 var success = byte.TryParse(byteString, out var result);
-Tag(""End"", null);
-";
+Tag(""End"", null);";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.TagStates("End").Should().SatisfyRespectively(
                 x =>
@@ -489,7 +486,7 @@ Tag(""End"", null);
         }
 
         [TestMethod]
-        public void Invocation_TryParse_Unknown_InstanceMethodResetsFieldConstraints()
+        public void Invocation_NotNullWhen_Unknown_InstanceMethodResetsFieldConstraints()
         {
             const string code = @"
 private object ObjectField;
@@ -501,8 +498,7 @@ public void Test()
     var success = TryParse(byteString, out var result);
     Tag(""End"", null);
 }
-public bool TryParse([System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string s, out object o) { o = null; return true; }
-";
+public bool TryParse([System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string s, out object o) { o = null; return true; }";
             var validator = SETestContext.CreateCSMethod(code).Validator;
             validator.TagStates("End").Should().SatisfyRespectively(
                 x =>
