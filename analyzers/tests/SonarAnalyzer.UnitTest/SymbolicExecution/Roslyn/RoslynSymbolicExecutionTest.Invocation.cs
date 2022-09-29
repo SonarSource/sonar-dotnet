@@ -342,6 +342,95 @@ Tag(""After"", this.ObjectField);
         }
 
         [TestMethod]
+        public void Invocation_StaticMethodCallClearsField()
+        {
+            var code = @"
+public class Sample: Base
+{
+    public static object _C1;
+    public static object _C2;
+
+    public static void SampleMethod()
+    {
+        Base._A = null;
+        Other._B = null;
+        Sample._C1 = null;
+        Sample._C2 = null;
+        Tagger.Tag(""Start_Base_A"", _A);
+        Tagger.Tag(""Start_Other_B"", Other._B);
+        Tagger.Tag(""Start_C1"", _C1);
+        Tagger.Tag(""Start_C2"", _C2);
+
+        SampleMethod();
+        Tagger.Tag(""SampleMethod_Base_A"", _A);
+        Tagger.Tag(""SampleMethod_Other_B"", Other._B);
+        Tagger.Tag(""SampleMethod_C1"", _C1);
+        Tagger.Tag(""SampleMethod_C2"", _C2);
+
+        Base._A = null;
+        Other._B = null;
+        Sample._C1 = null;
+        Sample._C2 = null;
+        Other.OtherMethod();
+        Tagger.Tag(""OtherMethod_Base_A"", _A);
+        Tagger.Tag(""OtherMethod_Other_B"", Other._B);
+        Tagger.Tag(""OtherMethod_C1"", _C1);
+        Tagger.Tag(""OtherMethod_C2"", _C2);
+
+        Base._A = null;
+        Other._B = null;
+        Sample._C1 = null;
+        Sample._C2 = null;
+        BaseMethod();
+        Tagger.Tag(""BaseMethod_Base_A"", _A);
+        Tagger.Tag(""BaseMethod_Other_B"", Other._B);
+        Tagger.Tag(""BaseMethod_C1"", _C1);
+        Tagger.Tag(""BaseMethod_C2"", _C2);
+    }
+}
+
+public static class Tagger
+{
+    public static void Tag<T>(string name, T value) { }
+}
+
+public class Base
+{
+    protected static object _A;
+    public static void BaseMethod() { }
+}
+public class Other
+{
+    public static object _B;
+    public static void OtherMethod() { }
+}
+";
+            var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
+            validator.ValidateTag("Start_Base_A", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("Start_Other_B", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("Start_C1", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("Start_C2", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+
+            // SampleMethod() resets own field and base class fields, but not other class fields
+            validator.ValidateTag("SampleMethod_Base_A", x => x.HasConstraint(ObjectConstraint.Null).Should().BeFalse());
+            validator.ValidateTag("SampleMethod_Other_B", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("SampleMethod_C1", x => x.HasConstraint(ObjectConstraint.Null).Should().BeFalse());
+            validator.ValidateTag("SampleMethod_C2", x => x.HasConstraint(ObjectConstraint.Null).Should().BeFalse());
+
+            // OtherMethod() resets only its own constraints
+            validator.ValidateTag("OtherMethod_Base_A", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("OtherMethod_Other_B", x => x.HasConstraint(ObjectConstraint.Null).Should().BeFalse());
+            validator.ValidateTag("OtherMethod_C1", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("OtherMethod_C2", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+
+            // BaseMethod() called from Sample only resets Base field
+            validator.ValidateTag("BaseMethod_Base_A", x => x.HasConstraint(ObjectConstraint.Null).Should().BeFalse());
+            validator.ValidateTag("BaseMethod_Other_B", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("BaseMethod_C1", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("BaseMethod_C2", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+        }
+
+        [TestMethod]
         public void Invocation_IsNullOrEmpty_ValidateOrder()
         {
             var validator = SETestContext.CreateCS(@"var isNullOrEmpy = string.IsNullOrEmpty(arg);", ", string arg").Validator;

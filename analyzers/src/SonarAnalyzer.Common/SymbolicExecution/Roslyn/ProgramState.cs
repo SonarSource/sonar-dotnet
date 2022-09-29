@@ -113,22 +113,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             this with { SymbolValue = SymbolValue.Where(kv => PreservedSymbols.Contains(kv.Key) || !remove(kv.Key)).ToImmutableDictionary() };
 
         public ProgramState ResetFieldConstraints()
-        {
-            var state = this;
-            foreach (var kvp in SymbolValue.Where(x => x.Key is IFieldSymbol))
-            {
-                var symbolValue = kvp.Value;
-                if (symbolValue.AllConstraints.Where(x => !x.PreserveOnFieldReset).ToArray() is { Length: > 0 } resetConstraints)
-                {
-                    foreach (var constraint in resetConstraints)
-                    {
-                        symbolValue = symbolValue.WithoutConstraint(constraint);
-                    }
-                    state = state.SetSymbolValue(kvp.Key, symbolValue);
-                }
-            }
-            return state;
-        }
+            => ResetFieldConstraints(field => true);
+
+        public ProgramState ResetStaticFieldConstraints(INamedTypeSymbol containingType)
+            => ResetFieldConstraints(field => field.IsStatic && containingType.DerivesFrom(field.ContainingType));
 
         public ProgramState AddVisit(int programPointHash) =>
             this with { VisitCount = VisitCount.SetItem(programPointHash, GetVisitCount(programPointHash) + 1) };
@@ -188,6 +176,24 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 }
                 return sb.ToString();
             }
+        }
+
+        private ProgramState ResetFieldConstraints(Func<IFieldSymbol, bool> predicate)
+        {
+            var state = this;
+            foreach (var kvp in SymbolValue.Where(x => x.Key is IFieldSymbol field && predicate(field)))
+            {
+                var symbolValue = kvp.Value;
+                if (symbolValue.AllConstraints.Where(x => !x.PreserveOnFieldReset).ToArray() is { Length: > 0 } resetConstraints)
+                {
+                    foreach (var constraint in resetConstraints)
+                    {
+                        symbolValue = symbolValue.WithoutConstraint(constraint);
+                    }
+                    state = state.SetSymbolValue(kvp.Key, symbolValue);
+                }
+            }
+            return state;
         }
     }
 }

@@ -806,12 +806,21 @@ namespace Tests.Diagnostics
             _foo1.ToString(); // Compliant
         }
 
-        void CallToStaticMethodsShouldResetFieldConstraints()
+        void CallToStaticMethodsShouldNotResetFieldConstraints()
         {
             object o = null;
             _foo1 = o;
             Console.WriteLine(); // This particular method has no side effects
             _foo1.ToString(); // Noncompliant
+            o.ToString(); // Noncompliant, local variable constraints are not cleared
+        }
+
+        static void CallToStaticMethodsShouldResetFieldConstraintsOfContainingClass()
+        {
+            object o = null;
+            NullPointerDereferenceWithFields._foo8 = o;
+            NullPointerDereferenceWithFields.CallToStaticMethodsShouldResetFieldConstraintsOfContainingClass();
+            NullPointerDereferenceWithFields._foo8.ToString(); // Compliant. State is reset after calls of the same containg class
             o.ToString(); // Noncompliant, local variable constraints are not cleared
         }
 

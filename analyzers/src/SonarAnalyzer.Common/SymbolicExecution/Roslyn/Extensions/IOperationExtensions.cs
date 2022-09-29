@@ -73,7 +73,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         public static bool IsStaticOrThis(this IMemberReferenceOperationWrapper reference) =>
             reference.Instance == null // static fields
-            || reference.Instance.IsAnyKind(OperationKindEx.InstanceReference);
+            || reference.Instance.Kind == OperationKindEx.InstanceReference;
 
         public static IOperation UnwrapConversion(this IOperation operation)
         {
