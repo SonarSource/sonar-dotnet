@@ -107,7 +107,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
             else if (context.Operation.Instance is IInvocationOperation invocation && invocation.TargetMethod.Name == "Tag")
             {
                 (invocation.TargetMethod.IsStatic || invocation.Arguments.Length == 1).Should().BeTrue("Tag method should be static to not infer with object states.");
-                AddTagName(invocation.Arguments.First().Value.ConstantValue, context);
+                AddTagName(invocation.Arguments.First(x => x.Parameter.Name.Equals("name", StringComparison.OrdinalIgnoreCase)).Value.ConstantValue, context);
             }
             if (context.Operation.Instance.TrackedSymbol() is { } symbol)
             {

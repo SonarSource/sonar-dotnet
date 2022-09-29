@@ -201,8 +201,8 @@ Tag(""End"", arg);";
             var validator = SETestContext.CreateCS(code, ", Sample arg").Validator;
             validator.ValidateContainsOperation(OperationKind.IsNull);
             validator.ValidateTagOrder(
-                "WasNotNull",
                 "End",
+                "WasNotNull",
                 "End");
         }
     }

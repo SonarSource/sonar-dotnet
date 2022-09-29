@@ -154,6 +154,7 @@ End Module";
         {
             var code = $@"
 using System;
+using static Extensions;
 public class Sample: IDisposable
 {{
     object field;
@@ -172,13 +173,13 @@ public class Sample: IDisposable
 
     private void Initialize() {{ }}
     void IDisposable.Dispose() {{ }}
-    private static void Tag(string name, object arg) {{ }}
 }}
 
 public static class Extensions
 {{
     public static void SomeExtensionOnSample(this Sample sample) {{ }}
     public static void SomeExtensionOnObject(this object obj) {{ }}
+    public static void Tag(string name, object arg) {{ }}
 }}";
             var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
             validator.ValidateContainsOperation(OperationKind.Invocation);
@@ -190,8 +191,6 @@ public static class Extensions
 
         [DataTestMethod]
         [DataRow("this?.InstanceMethod();")]
-        [DataRow("StaticMethod();")]
-        [DataRow("Sample.StaticMethod();")]
         [DataRow("var dummy = Property;")]
         [DataRow("var dummy = this.Property;")]
         [DataRow("SampleProperty.InstanceMethod();")]
@@ -214,6 +213,28 @@ Tag(""AfterStaticField"", StaticObjectField);
             validator.ValidateTag("BeforeStaticField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
             validator.ValidateTag("AfterField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
             validator.ValidateTag("AfterStaticField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+        }
+
+        [DataTestMethod]
+        [DataRow("StaticMethod();")]
+        [DataRow("Sample.StaticMethod();")]
+        public void Invocation_StaticMethodCallDoesNotClearFieldForOtherAccess(string invocation)
+        {
+            var code = $@"
+ObjectField = null;
+StaticObjectField = null;
+Tag(""BeforeField"", ObjectField);
+Tag(""BeforeStaticField"", StaticObjectField);
+{invocation}
+Tag(""AfterField"", ObjectField);
+Tag(""AfterStaticField"", StaticObjectField);
+";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateContainsOperation(OperationKind.Invocation);
+            validator.ValidateTag("BeforeField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("BeforeStaticField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("AfterField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("AfterStaticField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeFalse());
         }
 
         [DataTestMethod]

@@ -109,6 +109,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
+using static Tagger;
+
 public unsafe class Sample
 {{
     public object ObjectField;
@@ -137,10 +139,6 @@ public unsafe class Sample
     public NotImplementedException CreateException() => new NotImplementedException();
     public void InstanceMethod(object parameter = null) {{ }}
     public static void StaticMethod() {{ }}
-
-    private void Tag(string name) {{ }}
-    private static void Tag(string name, object arg = null) {{ }}
-    private static T Unknown<T>() => default;
 }}
 
 public class Person : PersonBase
@@ -154,6 +152,14 @@ public class Person : PersonBase
 
 public class PersonBase
 {{
-}}";
+}}
+
+public static class Tagger
+{{
+    public static void Tag(string name, object arg = null) {{ }}
+    public static void Tag(this object o, string name) {{ }}
+    public static T Unknown<T>() => default;
+}}
+";
     }
 }
