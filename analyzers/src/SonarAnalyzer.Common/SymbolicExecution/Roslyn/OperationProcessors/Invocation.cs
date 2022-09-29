@@ -132,7 +132,7 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
     {
         foreach (var argument in invocation.Arguments.Select(x => x.ToArgument())) // TODO: support attributes on more than one argument
         {
-            if (argument.Parameter?.GetAttributes().FirstOrDefault(x => x.HasName("NotNullWhenAttribute")) is { } attribute // TODO: "MaybeNullWhen"
+            if (argument.Parameter?.GetAttributes().FirstOrDefault(x => x.HasName("NotNullWhenAttribute")) is { } attribute
                 && attribute.TryGetAttributeValue<bool>("returnValue", out var returnValue))
             {
                 return ProcessIsNotNullWhen(state, invocation.WrappedOperation, argument, returnValue);
