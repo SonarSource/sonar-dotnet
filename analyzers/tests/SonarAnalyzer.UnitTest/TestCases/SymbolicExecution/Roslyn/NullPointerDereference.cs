@@ -903,6 +903,21 @@ namespace Tests.Diagnostics
                 a.ToString(); // Noncompliant - only one issue should be reported
             }
         }
+
+        void TryCatch5()
+        {
+            try
+            {
+                bool.Parse("No");
+            }
+            catch(Exception ex)
+            {
+                if (ex == null)
+                {
+                    ex.ToString(); // Unreachable. Any caught exception is never null
+                }
+            }
+        }
     }
 
     static class Extensions
