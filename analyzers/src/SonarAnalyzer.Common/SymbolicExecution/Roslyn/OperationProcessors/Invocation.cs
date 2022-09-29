@@ -67,10 +67,19 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
     {
         foreach (var argument in invocation.Arguments.Select(x => x.ToArgument())) // TODO: support attributes on more than one argument
         {
-            if (argument.Parameter?.GetAttributes().FirstOrDefault(x => x.HasName("NotNullWhenAttribute")) is { } attribute
-                && attribute.TryGetAttributeValue<bool>("returnValue", out var returnValue))
+            if (argument.Parameter?.GetAttributes() is { } attributes)
             {
-                return ProcessIsNotNullWhen(state, invocation.WrappedOperation, argument, returnValue, false);
+                if (attributes.FirstOrDefault(x => x.HasName("NotNullWhenAttribute")) is { } notNullWhenAttribute
+                    && notNullWhenAttribute.TryGetAttributeValue<bool>("returnValue", out var returnValue))
+                {
+                    return ProcessIsNotNullWhen(state, invocation.WrappedOperation, argument, returnValue, false);
+                }
+                else if(attributes.FirstOrDefault(x => x.HasName("DoesNotReturnIfAttribute")) is { } doesNotReturnIfAttribute
+                    && doesNotReturnIfAttribute.TryGetAttributeValue<bool>("condition", out var condition))
+                {
+                    // FIXME: Rebase conflict, do not return but loop instead
+                    return ProcessDoesNotReturnIf(state, argument, condition);
+                }
             }
         }
         return new[] { state };
@@ -105,7 +114,12 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
                     };
     }
 
-    private ProgramState[] ProcessDebugAssert(SymbolicContext context, IInvocationOperationWrapper invocation)
+    private static ProgramState[] ProcessDoesNotReturnIf(ProgramState state, IArgumentOperationWrapper argument, bool when) =>
+        state[argument.Value] is { } argumentValue && argumentValue.HasConstraint(BoolConstraint.From(when))
+            ? EmptyStates
+            : new[] { ProcessAssertedBoolSymbol(state, argument.Value, !when) };
+
+    private static ProgramState[] ProcessDebugAssert(SymbolicContext context, IInvocationOperationWrapper invocation)
     {
         if (invocation.Arguments.IsEmpty)   // Defensive: User-defined useless method
         {
@@ -117,15 +131,15 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
                 && context.State[argumentValue] is { } value
                 && value.HasConstraint(BoolConstraint.False)
                     ? EmptyStates
-                    : new[] { ProcessDebugAssertBoolSymbol(context.State, argumentValue, false) };
+                    : new[] { ProcessAssertedBoolSymbol(context.State, argumentValue, false) };
         }
     }
 
-    private ProgramState ProcessDebugAssertBoolSymbol(ProgramState state, IOperation operation, bool isNegated)
+    private static ProgramState ProcessAssertedBoolSymbol(ProgramState state, IOperation operation, bool isNegated)
     {
         if (operation.Kind == OperationKindEx.Unary && IUnaryOperationWrapper.FromOperation(operation) is { OperatorKind: UnaryOperatorKind.Not } unaryNot)
         {
-            return ProcessDebugAssertBoolSymbol(state, unaryNot.Operand, !isNegated);
+            return ProcessAssertedBoolSymbol(state, unaryNot.Operand, !isNegated);
         }
         else
         {

@@ -1513,24 +1513,15 @@ namespace DoesNotReturnIf
         {
             var canBeNull = arg?.ToString();
             FailsWhenTrue(notImportant, canBeNull == null, notImportant);
-            canBeNull.ToString();    // Noncompliant FP
+            canBeNull.ToString();    // Compliant
         }
 
         public void ForTrueAny(object arg1, object arg2, bool condition)
         {
             var canBeNull1 = arg1?.ToString();
             var canBeNull2 = arg2?.ToString();
-            object isNull = null;
             FailsWhenTrueAny(canBeNull1 == null, condition);
-            canBeNull1.ToString();  // Noncompliant FP
-            if (condition)
-            {
-                isNull.ToString();  // Noncompliant FP, Unreachable
-            }
-            else
-            {
-                isNull.ToString();  // Noncompliant
-            }
+            canBeNull1.ToString();  // Compliant
             FailsWhenTrueAny(condition, canBeNull2 == null);
             canBeNull2.ToString();  // Noncompliant FP
         }
@@ -1539,26 +1530,49 @@ namespace DoesNotReturnIf
         {
             var canBeNull = arg?.ToString();
             FailsWhenFalse(notImportant, canBeNull != null, notImportant);
-            canBeNull.ToString();    // Noncompliant FP
+            canBeNull.ToString();    // Compliant
         }
 
         public void ForFalseAny(object arg1, object arg2, bool condition)
         {
             var canBeNull1 = arg1?.ToString();
             var canBeNull2 = arg2?.ToString();
-            object isNull = null;
             FailsWhenFalseAny(canBeNull1 != null, condition);
-            canBeNull1.ToString();  // Noncompliant FP
-            if (condition)
-            {
-                isNull.ToString();  // Noncompliant
-            }
-            else
-            {
-                isNull.ToString();  // Noncompliant FP, Unreachable
-            }
+            canBeNull1.ToString();  // Compliant
             FailsWhenFalseAny(condition, canBeNull2 != null);
             canBeNull2.ToString();  // Noncompliant FP
+        }
+
+        public void BoolSymbols_TrueTrue()
+        {
+            var isTrue = true;
+            object isNull = null;
+            FailsWhenTrue(notImportant, isTrue, notImportant);
+            isNull.ToString();  // Compliant, unreachable
+        }
+
+        public void BoolSymbols_TrueFalse()
+        {
+            var isTrue = true;
+            object isNull = null;
+            FailsWhenFalse(notImportant, isTrue, notImportant);
+            isNull.ToString();  // Noncompliant
+        }
+
+        public void BoolSymbols_FalseTrue()
+        {
+            var isFalse = false;
+            object isNull = null;
+            FailsWhenTrue(notImportant, isFalse, notImportant);
+            isNull.ToString();  // Noncompliant
+        }
+
+        public void BoolSymbols_FalseFalse()
+        {
+            var isFalse = false;
+            object isNull = null;
+            FailsWhenFalse(notImportant, isFalse, notImportant);
+            isNull.ToString();  // Compliant, unreachable
         }
 
         public void FailsWhenTrue(object before, [DoesNotReturnIf(true)] bool condition, object after) { }
