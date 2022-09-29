@@ -1082,9 +1082,9 @@ namespace Tests.Diagnostics
             string someString = null;
 
             if (!someString?.Contains("a") ?? true)
-                Console.WriteLine("It's null or doesn't contain 'a'");
+                someString.ToString();  // Noncompliant, it's null or doesn't contain 'a'
             else
-                Console.WriteLine(someString.Length); // Noncompliant FP, this path is unreachable
+                someString.ToString();  // Compliant, this path is unreachable
         }
     }
 
@@ -1320,7 +1320,7 @@ namespace Repro_3395
                     continue;
                 }
 
-                _ = providerCourse.Items; // Noncompliant FP
+                _ = providerCourse.Items; // Compliant
             }
 
             foreach (var providerCourse in providerCourses)
@@ -1331,8 +1331,7 @@ namespace Repro_3395
                     continue;
                 }
 
-                _ = providerCourse.Items.Where(items => items == "item1"); // Noncompliant FP
-                //  ^^^^^^^^^^^^^^
+                _ = providerCourse.Items.Where(items => items == "item1"); // Compliant
             }
         }
 

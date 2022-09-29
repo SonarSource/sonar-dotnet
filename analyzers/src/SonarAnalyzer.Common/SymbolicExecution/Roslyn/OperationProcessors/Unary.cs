@@ -30,12 +30,23 @@ internal sealed class Unary : SimpleProcessor<IUnaryOperationWrapper>
         IUnaryOperationWrapper.FromOperation(operation);
 
     protected override ProgramState Process(SymbolicContext context, IUnaryOperationWrapper unary) =>
-        unary.OperatorKind == UnaryOperatorKind.Not
-            ? ProcessNot(context.State, unary)
+        unary.OperatorKind == UnaryOperatorKind.Not && context.State[unary.Operand] is { } operandValue
+            ? ProcessNot(context.State, unary, operandValue)
             : context.State;
 
-    private static ProgramState ProcessNot(ProgramState state, IUnaryOperationWrapper unary) =>
-        state[unary.Operand] is { } value && value.Constraint<BoolConstraint>() is { } boolConstraint
-            ? state.SetOperationConstraint(unary.WrappedOperation, boolConstraint.Opposite)
-            : state;
+    private static ProgramState ProcessNot(ProgramState state, IUnaryOperationWrapper unary, SymbolicValue operandValue)
+    {
+        if (operandValue.Constraint<BoolConstraint>() is { } boolConstraint)
+        {
+            return state.SetOperationConstraint(unary.WrappedOperation, boolConstraint.Opposite);
+        }
+        else if (operandValue.HasConstraint(ObjectConstraint.Null))
+        {
+            return state.SetOperationConstraint(unary.WrappedOperation, ObjectConstraint.Null);
+        }
+        else
+        {
+            return state;
+        }
+    }
 }

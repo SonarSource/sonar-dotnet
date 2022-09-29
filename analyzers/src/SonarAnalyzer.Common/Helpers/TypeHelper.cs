@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Helpers
             self.IsStruct() || self.IsClass();
 
         public static bool Is(this ITypeSymbol self, TypeKind typeKind) =>
-            self is { } && self.TypeKind == typeKind;
+            self?.TypeKind == typeKind;
 
         public static bool IsNullableValueType(this ITypeSymbol self) =>
             self.IsStruct() && self.OriginalDefinition.Is(KnownType.System_Nullable_T);

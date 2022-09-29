@@ -318,15 +318,15 @@ Tag(""End"", arg);";
         [DataRow("objectNotNull", "is false", "False, NotNull", "NotNull")]
         [DataRow("objectNull", "is 1", "NotNull", "Null")]          // Should recognize that objectNull doesn't match instead
         [DataRow("objectNull", @"is """"", "NotNull", "Null")]      // Should recognize that objectNull doesn't match instead
-        [DataRow("objectNull", "is true", "Null, True", "Null")]    // Should recognize that objectNull doesn't match instead
-        [DataRow("objectNull", "is false", "False, Null", "Null")]  // Should recognize that objectNull doesn't match instead
+        [DataRow("objectNull", "is true", "Null, True", "Null")]    // Should recognize that objectNull doesn't match instead, should not have BoolConstraint and Null at the same time
+        [DataRow("objectNull", "is false", "False, Null", "Null")]  // Should recognize that objectNull doesn't match instead, should not have BoolConstraint and Null at the same time
         [DataRow("objectUnknown", "is null", "Null", "NotNull")]
         [DataRow("objectUnknown", "is 1", "NotNull", null)]
         [DataRow("objectUnknown", @"is """"", "NotNull", null)]
         [DataRow("objectUnknown", "is true", "True", null)]
         [DataRow("objectUnknown", "is false", "False", null)]
-        [DataRow("nullableBoolNull", "is true", "True", null)]      // Should recognize that nullableBoolNull doesn't match instead
-        [DataRow("nullableBoolNull", "is false", "False", null)]    // Should recognize that nullableBoolNull doesn't match instead
+        [DataRow("nullableBoolNull", "is true", "Null, True", "Null")]    // Should recognize that nullableBoolNull doesn't match instead, should not have BoolConstraint and Null at the same time
+        [DataRow("nullableBoolNull", "is false", "False, Null", "Null")]  // Should recognize that nullableBoolNull doesn't match instead, should not have BoolConstraint and Null at the same time
         [DataRow("nullableBoolUnknown", "is true", "True", null)]
         [DataRow("nullableBoolUnknown", "is false", "False", null)]
         public void ConstantPatternSetBoolConstraint_TwoStates(string testedSymbol, string isPattern, string expectedForTrue, string expectedForFalse) =>
@@ -426,10 +426,10 @@ Tag(""End"", arg);";
         [DataRow("objectUnknown", "is not string { }", OperationKindEx.NegatedPattern, null, "NotNull")]
         [DataRow("objectUnknown", "is not object { }", OperationKindEx.NegatedPattern, "Null", "NotNull")]
         [DataRow("objectUnknown", "is not not null", OperationKindEx.NegatedPattern, "Null", "NotNull")]
-        [DataRow("nullableBoolTrue", "is not false", OperationKindEx.NegatedPattern, "True", "False")]  // Should generate only single state with "true" result instead
-        [DataRow("nullableBoolFalse", "is not true", OperationKindEx.NegatedPattern, "False", "True")]  // Should generate only single state with "true" result instead
-        [DataRow("nullableBoolNull", "is not true", OperationKindEx.NegatedPattern, null, "True")]      // Should generate only single state with "true" result instead
-        [DataRow("nullableBoolNull", "is not false", OperationKindEx.NegatedPattern, null, "False")]    // Should generate only single state with "true" result instead
+        [DataRow("nullableBoolTrue", "is not false", OperationKindEx.NegatedPattern, "True", "False")]          // Should generate only single state with "true" result instead
+        [DataRow("nullableBoolFalse", "is not true", OperationKindEx.NegatedPattern, "False", "True")]          // Should generate only single state with "true" result instead
+        [DataRow("nullableBoolNull", "is not true", OperationKindEx.NegatedPattern, "Null", "Null, True")]      // Should generate only single state with "true" result instead
+        [DataRow("nullableBoolNull", "is not false", OperationKindEx.NegatedPattern, "Null", "False, Null")]    // Should generate only single state with "true" result instead
         [DataRow("nullableBoolUnknown", "is not true", OperationKindEx.NegatedPattern, null, "True")]
         [DataRow("nullableBoolUnknown", "is not false", OperationKindEx.NegatedPattern, null, "False")]
         [DataRow("objectUnknown", "is not object", OperationKindEx.TypePattern, null, "NotNull")]

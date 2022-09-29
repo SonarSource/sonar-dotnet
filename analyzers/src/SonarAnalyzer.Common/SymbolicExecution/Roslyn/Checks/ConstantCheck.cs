@@ -55,7 +55,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
                 // Update DefaultValue when adding new types
                 true => SymbolicValue.True,
                 false => SymbolicValue.False,
-                null when (operation.Instance.Type ?? ConvertedType(operation.Parent)) is { IsReferenceType: true } => SymbolicValue.Null,
+                null when (operation.Instance.Type ?? ConvertedType(operation.Parent)).CanBeNull() => SymbolicValue.Null,  // ToDo: MMF-2401, this will need to be reviewed
                 string => SymbolicValue.NotNull,
                 _ => null
             };
