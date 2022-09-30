@@ -239,7 +239,7 @@ namespace Tests.Diagnostics
             string value = arg?.ToString();
             if (string.Equals(value, null))
             {
-                value.ToString();   // Noncompliant
+                value.ToString();   // FN Suppressed #6117
             }
             else
             {
