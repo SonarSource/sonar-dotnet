@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Linq;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
@@ -26,69 +27,75 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
 internal sealed partial class Invocation
 {
+    private static readonly HashSet<string> EnumerableAndQueryableReturningNotNull = new()
+    {
+        "Append",
+        nameof(Enumerable.AsEnumerable),
+        nameof(Queryable.AsQueryable),
+        nameof(Enumerable.Cast),
+        "Chunk",
+        nameof(Enumerable.Concat),
+        nameof(Enumerable.DefaultIfEmpty),
+        nameof(Enumerable.Distinct),
+        "DistinctBy",
+        nameof(Enumerable.Empty),
+        nameof(Enumerable.Except),
+        "ExceptBy",
+        nameof(Enumerable.GroupBy),
+        nameof(Enumerable.GroupJoin),
+        nameof(Enumerable.Intersect),
+        "IntersectBy",
+        nameof(Enumerable.Join),
+        nameof(Enumerable.OfType),
+        nameof(Enumerable.OrderBy),
+        nameof(Enumerable.OrderByDescending),
+        "Prepend",
+        nameof(Enumerable.Range),
+        nameof(Enumerable.Repeat),
+        nameof(Enumerable.Reverse),
+        nameof(Enumerable.Select),
+        nameof(Enumerable.SelectMany),
+        nameof(Enumerable.Skip),
+        "SkipLast",
+        nameof(Enumerable.SkipWhile),
+        nameof(Enumerable.Take),
+        "TakeLast",
+        nameof(Enumerable.TakeWhile),
+        nameof(Enumerable.ThenBy),
+        nameof(Enumerable.ThenByDescending),
+        nameof(Enumerable.ToArray),
+        nameof(Enumerable.ToDictionary),
+        "ToHashSet",
+        nameof(Enumerable.ToList),
+        nameof(Enumerable.ToLookup),
+        nameof(Enumerable.Union),
+        "UnionBy",
+        nameof(Enumerable.Where),
+        nameof(Enumerable.Zip),
+    };
+
     private static ProgramState[] ProcessLinqEnumerableAndQueryable(SymbolicContext context, IInvocationOperationWrapper invocation)
     {
-        switch (invocation.TargetMethod.Name)
+        var name = invocation.TargetMethod.Name;
+        if (EnumerableAndQueryableReturningNotNull.Contains(name))
         {
-            case "Append":
-            case nameof(Enumerable.AsEnumerable):
-            case nameof(Queryable.AsQueryable):
-            case nameof(Enumerable.Cast):
-            case "Chunk":
-            case nameof(Enumerable.Concat):
-            case nameof(Enumerable.DefaultIfEmpty):
-            case nameof(Enumerable.Distinct):
-            case "DistinctBy":
-            case nameof(Enumerable.Empty):
-            case nameof(Enumerable.Except):
-            case "ExceptBy":
-            case nameof(Enumerable.GroupBy):
-            case nameof(Enumerable.GroupJoin):
-            case nameof(Enumerable.Intersect):
-            case "IntersectBy":
-            case nameof(Enumerable.Join):
-            case nameof(Enumerable.OfType):
-            case nameof(Enumerable.OrderBy):
-            case nameof(Enumerable.OrderByDescending):
-            case "Prepend":
-            case nameof(Enumerable.Range):
-            case nameof(Enumerable.Repeat):
-            case nameof(Enumerable.Reverse):
-            case nameof(Enumerable.Select):
-            case nameof(Enumerable.SelectMany):
-            case nameof(Enumerable.Skip):
-            case "SkipLast":
-            case nameof(Enumerable.SkipWhile):
-            case nameof(Enumerable.Take):
-            case "TakeLast":
-            case nameof(Enumerable.TakeWhile):
-            case nameof(Enumerable.ThenBy):
-            case nameof(Enumerable.ThenByDescending):
-            case nameof(Enumerable.ToArray):
-            case nameof(Enumerable.ToDictionary):
-            case "ToHashSet":
-            case nameof(Enumerable.ToList):
-            case nameof(Enumerable.ToLookup):
-            case nameof(Enumerable.Union):
-            case "UnionBy":
-            case nameof(Enumerable.Where):
-            case nameof(Enumerable.Zip):
-                return new[] { context.SetOperationConstraint(ObjectConstraint.NotNull) };
-
-            // ElementAtOrDefault is intentionally not supported. It's causing many FPs
-            case nameof(Enumerable.FirstOrDefault):
-            case nameof(Enumerable.LastOrDefault):
-            case nameof(Enumerable.SingleOrDefault):
-                return invocation.TargetMethod.ReturnType.IsReferenceType
-                    ? new[]
-                    {
-                        context.SetOperationConstraint(ObjectConstraint.Null),
-                        context.SetOperationConstraint(ObjectConstraint.NotNull),
-                    }
-                    : new[] { context.State };
-
-            default:
-                return new[] { context.State };
+            return new[] { context.SetOperationConstraint(ObjectConstraint.NotNull) };
+        }
+        else if (name == nameof(Enumerable.FirstOrDefault)   // ElementAtOrDefault is intentionally not supported. It's causing many FPs
+            || name == nameof(Enumerable.LastOrDefault)
+            || name == nameof(Enumerable.SingleOrDefault))
+        {
+            return invocation.TargetMethod.ReturnType.IsReferenceType
+                ? new[]
+                {
+                    context.SetOperationConstraint(ObjectConstraint.Null),
+                    context.SetOperationConstraint(ObjectConstraint.NotNull),
+                }
+                : new[] { context.State };
+        }
+        else
+        {
+            return new[] { context.State };
         }
     }
 }
