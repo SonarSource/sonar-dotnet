@@ -262,14 +262,13 @@ ObjectField = null;
 StaticObjectField = null;
 var otherInstance = new Sample();
 (boolParameter ? this : otherInstance).InstanceMethod();
-Tag(""End"");
+Tag(""End"", null);
 ";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateContainsOperation(OperationKind.Invocation);
             var field = validator.Symbol("ObjectField");
             var staticField = validator.Symbol("StaticObjectField");
             validator.TagStates("End").Should().SatisfyRespectively(
-                // Unexpected: One of the two branches should not reset the field.
                 x =>
                 {
                     x[field].AllConstraints.Should().BeEmpty();
@@ -277,8 +276,8 @@ Tag(""End"");
                 },
                 x =>
                 {
-                    x[field].AllConstraints.Should().BeEmpty();
-                    x[staticField].AllConstraints.Should().BeEmpty();
+                    x[field].HasConstraint(ObjectConstraint.Null).Should().BeTrue();
+                    x[staticField].HasConstraint(ObjectConstraint.Null).Should().BeTrue();
                 });
         }
 
