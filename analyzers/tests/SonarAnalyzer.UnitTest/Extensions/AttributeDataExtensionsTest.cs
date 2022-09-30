@@ -126,12 +126,16 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [DataTestMethod]
         [DataRow("SomeText", typeof(string))]
         [DataRow(42, typeof(int))]
+        [DataRow(null, null)]
         public void TryGetAttributeValue_ObjectConversion(object value, Type expectedType)
         {
             var attributeData = AttributeDataWithArguments(namedArguments: new() { { "Result", value } });
             var actualSuccess = attributeData.TryGetAttributeValue("Result", out object actualValue);
             actualSuccess.Should().BeTrue();
-            actualValue.Should().BeOfType(expectedType);
+            if (expectedType != null)
+            {
+                actualValue.Should().BeOfType(expectedType);
+            }
             actualValue.Should().Be(value);
         }
 
