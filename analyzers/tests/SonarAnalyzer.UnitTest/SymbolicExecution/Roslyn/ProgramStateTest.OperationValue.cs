@@ -159,11 +159,11 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
 
         [TestMethod]
         public void SetOperationValue_NullOperation_Throws() =>
-            ProgramState.Empty.Invoking(x => x.SetOperationValue((IOperation)null, new())).Should().Throw<NullReferenceException>();
+            ProgramState.Empty.Invoking(x => x.SetOperationValue((IOperation)null, new())).Should().Throw<ArgumentNullException>();
 
         [TestMethod]
         public void SetOperationValue_WithWrapper_NullOperation_Throws() =>
-            ProgramState.Empty.Invoking(x => x.SetOperationValue((IOperationWrapperSonar)null, new())).Should().Throw<NullReferenceException>();
+            ProgramState.Empty.Invoking(x => x.SetOperationValue((IOperationWrapperSonar)null, new())).Should().Throw<ArgumentNullException>();
 
         [TestMethod]
         public void SetOperationValue_OnCaptureReference_SetsValueToCapturedOperation()
