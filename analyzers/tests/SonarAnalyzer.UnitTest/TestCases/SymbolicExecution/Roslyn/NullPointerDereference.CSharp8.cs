@@ -231,6 +231,24 @@ namespace Tests.Diagnostics.CSharp8
                 boolString.ToString(); // Noncompliant. [NotNullWhen(true)] suggests that parsing may have failed because boolString was null
             }
         }
+
+        public void CustomTryUpper(string text)
+        {
+            if (TryToUpper(text, out var result))
+            {
+                text.ToString(); // Compliant
+            }
+            else
+            {
+                text.ToString(); // Noncompliant.
+            }
+        }
+
+        private static bool TryToUpper([System.Diagnostics.CodeAnalysis.NotNullWhen(true)] string someValue, out string result)
+        {
+            result = someValue?.ToUpper();
+            return !string.IsNullOrEmpty(someValue);
+        }
     }
 }
 
