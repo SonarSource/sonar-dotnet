@@ -269,6 +269,7 @@ Tag(""End"");
             var field = validator.Symbol("ObjectField");
             var staticField = validator.Symbol("StaticObjectField");
             validator.TagStates("End").Should().SatisfyRespectively(
+                // Unexpected: One of the two branches should not reset the field.
                 x =>
                 {
                     x[field].AllConstraints.Should().BeEmpty();
