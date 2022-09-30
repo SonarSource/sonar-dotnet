@@ -255,8 +255,8 @@ Tag(""StaticField"", StaticObjectField);
         }
 
         [DataTestMethod]
-        [DataRow("(boolParameter ? this : otherInstance).InstanceMethod();")]
-        [DataRow("(boolParameter ? this : otherInstance).ExtensionMethod();")] // invocation with flow-capture and conversion on the receiver
+        [DataRow("(condition ? this : otherInstance).InstanceMethod();")]
+        [DataRow("(condition ? this : otherInstance).ExtensionMethod();")] // invocation with flow-capture and conversion on the receiver
         public void Instance_InstanceMethodCallClearsFields_Ternary(string instanceCall)
         {
             var code = $@"
@@ -265,7 +265,7 @@ public class Sample
     private object ObjectField;
     private static object StaticObjectField;
 
-    public void Test(bool boolParameter)
+    public void Test(bool condition)
     {{
         ObjectField = null;
         StaticObjectField = null;
@@ -286,14 +286,19 @@ public static class Extensions
             validator.ValidateContainsOperation(OperationKind.Invocation);
             var field = validator.Symbol("ObjectField");
             var staticField = validator.Symbol("StaticObjectField");
+            var condition = validator.Symbol("condition");
             validator.TagStates("End").Should().SatisfyRespectively(
                 x =>
                 {
+                    // this case
+                    x[condition].Should().BeNull(); // Should have BoolConstraint.True
                     x[field].AllConstraints.Should().BeEmpty();
                     x[staticField].AllConstraints.Should().BeEmpty();
                 },
                 x =>
                 {
+                    // otherInstance case
+                    x[condition].Should().BeNull();  // Should have BoolConstraint.False
                     x[field].HasConstraint(ObjectConstraint.Null).Should().BeTrue();
                     x[staticField].HasConstraint(ObjectConstraint.Null).Should().BeTrue();
                 });
