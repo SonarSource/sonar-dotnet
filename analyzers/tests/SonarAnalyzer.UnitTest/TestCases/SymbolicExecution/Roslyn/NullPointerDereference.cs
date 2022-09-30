@@ -1518,8 +1518,8 @@ namespace DoesNotReturnIf
 
         public void ForTrueAny(object arg1, object arg2, bool condition)
         {
-            var canBeNull1 = arg1?.ToString();
-            var canBeNull2 = arg2?.ToString();
+            var canBeNull1 = arg1 == null ? null : arg1.ToString();
+            var canBeNull2 = arg2 == null ? null : arg2.ToString();
             FailsWhenTrueAny(canBeNull1 == null, condition);
             canBeNull1.ToString();  // Compliant
             FailsWhenTrueAny(condition, canBeNull2 == null);
@@ -1535,8 +1535,8 @@ namespace DoesNotReturnIf
 
         public void ForFalseAny(object arg1, object arg2, bool condition)
         {
-            var canBeNull1 = arg1?.ToString();
-            var canBeNull2 = arg2?.ToString();
+            var canBeNull1 = arg1 == null ? null : arg1.ToString();
+            var canBeNull2 = arg2 == null ? null : arg2.ToString();
             FailsWhenFalseAny(canBeNull1 != null, condition);
             canBeNull1.ToString();  // Compliant
             FailsWhenFalseAny(condition, canBeNull2 != null);

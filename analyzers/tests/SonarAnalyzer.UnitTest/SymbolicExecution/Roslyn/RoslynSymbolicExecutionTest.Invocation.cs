@@ -918,6 +918,8 @@ f()();
             validator.ValidateExecutionCompleted();
         }
 
+#if NET
+
         [DataTestMethod]
         [DataRow("null", "null", true, "Null", "Null")]
         [DataRow("null", "new object()", false, "Null", "NotNull")]
@@ -1095,6 +1097,8 @@ public void CustomValidator(object irrelevant, [System.Diagnostics.CodeAnalysis.
             validator.ValidateExitReachCount(0);
             validator.ValidateExecutionCompleted();
         }
+
+#endif
 
         private static IEnumerable<object[]> ThrowHelperCalls =>
             new object[][]
