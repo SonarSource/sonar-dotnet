@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -59,30 +60,45 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
             _ when invocation.TargetMethod.Name == nameof(object.Equals) => ProcessEquals(context, invocation),
             _ when invocation.TargetMethod.IsAny(KnownType.System_String, nameof(string.IsNullOrEmpty), nameof(string.IsNullOrWhiteSpace)) =>
                 ProcessIsNotNullWhen(state, invocation.WrappedOperation, invocation.Arguments[0].ToArgument(), false, true),
-            _ => ProcessIsNotNullWhen(state, invocation),
+            _ => ProcessArgumentAttributes(state, invocation),
         };
     }
 
-    private static ProgramState[] ProcessIsNotNullWhen(ProgramState state, IInvocationOperationWrapper invocation)
+    private static ProgramState[] ProcessArgumentAttributes(ProgramState state, IInvocationOperationWrapper invocation)
     {
-        foreach (var argument in invocation.Arguments.Select(x => x.ToArgument())) // TODO: support attributes on more than one argument
+        IReadOnlyCollection<ProgramState> states = new[] { state };
+        foreach (var argument in invocation.Arguments.Select(x => x.ToArgument()).Where(x => x.Parameter is not null))
         {
-            if (argument.Parameter?.GetAttributes() is { } attributes)
+            foreach (var attribute in argument.Parameter.GetAttributes())
             {
-                if (attributes.FirstOrDefault(x => x.HasName("NotNullWhenAttribute")) is { } notNullWhenAttribute
-                    && notNullWhenAttribute.TryGetAttributeValue<bool>("returnValue", out var returnValue))
-                {
-                    return ProcessIsNotNullWhen(state, invocation.WrappedOperation, argument, returnValue, false);
-                }
-                else if(attributes.FirstOrDefault(x => x.HasName("DoesNotReturnIfAttribute")) is { } doesNotReturnIfAttribute
-                    && doesNotReturnIfAttribute.TryGetAttributeValue<bool>("parameterValue", out var parameterValue))
-                {
-                    // FIXME: Rebase conflict, do not return but loop instead
-                    return ProcessDoesNotReturnIf(state, argument, parameterValue);
-                }
+                states = ProcessArgumentAttribute(states, invocation, argument, attribute);
             }
         }
-        return new[] { state };
+        return states.ToArray();
+    }
+
+    private static IReadOnlyCollection<ProgramState> ProcessArgumentAttribute(IEnumerable<ProgramState> states,
+                                                                              IInvocationOperationWrapper invocation,
+                                                                              IArgumentOperationWrapper argument,
+                                                                              AttributeData attribute)
+    {
+        var ret = new List<ProgramState>();
+        foreach (var state in states)
+        {
+            if (attribute.HasName("NotNullWhenAttribute") && attribute.TryGetAttributeValue<bool>("returnValue", out var returnValue))
+            {
+                ret.AddRange(ProcessIsNotNullWhen(state, invocation.WrappedOperation, argument, returnValue, false));
+            }
+            else if (attribute.HasName("DoesNotReturnIfAttribute") && attribute.TryGetAttributeValue<bool>("parameterValue", out var parameterValue))
+            {
+                ret.AddRange(ProcessDoesNotReturnIf(state, argument, parameterValue));
+            }
+            else
+            {
+                ret.Add(state);
+            }
+        }
+        return ret;
     }
 
     private static ProgramState[] ProcessIsNotNullWhen(ProgramState state, IOperation invocation, IArgumentOperationWrapper argument, bool when, bool learnNull)
