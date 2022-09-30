@@ -162,19 +162,14 @@ public class MyAttribute: Attribute
 }}
 
 [My({constructorArguments.Select(x => Quote(x.Value)).JoinStr(", ")}{separator}{namedArguments.Select(x => $"{x.Key}={Quote(x.Value)}").JoinStr(", ")})]
-public class Dummy {{ }}
-";
+public class Dummy {{ }}";
             var snippet = new SnippetCompiler(code);
             var classDeclaration = snippet.SyntaxTree.GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>().Last();
             var symbol = (INamedTypeSymbol)snippet.SemanticModel.GetDeclaredSymbol(classDeclaration);
             return symbol.GetAttributes().First();
 
             static string TypeName(object value) =>
-                value switch
-                {
-                    null => "object",
-                    var x => x.GetType().FullName,
-                };
+                value == null ? "object" : value.GetType().FullName;
 
             static string Quote(object value) =>
                 value switch
