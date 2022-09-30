@@ -390,7 +390,7 @@ Tag(""After"", this.ObjectField);
         {
             var code = $@"
 this.ObjectField = null;
-this.InstanceMethod(true ? 1 : 0);
+this.InstanceMethod(boolParameter ? 1 : 0);
 Tag(""After"", this.ObjectField);
 ";
             var validator = SETestContext.CreateCS(code).Validator;
