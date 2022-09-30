@@ -41,27 +41,35 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp
         {
             var walker = new SyntaxKindWalker();
             walker.SafeVisit(Node);
-            return walker.Result;
+            return walker.Result ?? false;
         }
 
         private sealed class SyntaxKindWalker : SafeCSharpSyntaxWalker
         {
-            public bool Result { get; private set; }
+            public bool? Result { get; private set; }
 
             public override void Visit(SyntaxNode node)
             {
-                if (node.IsAnyKind(
-                    SyntaxKind.AwaitExpression,
-                    SyntaxKind.ElementAccessExpression,
-                    SyntaxKind.ForEachStatement,
-                    SyntaxKind.SimpleMemberAccessExpression))
+                if (Result is false)
                 {
-                    Result = true;
+                    return;
                 }
-                else if (!Result)   // We can stop visiting once we know the answer
+
+                switch (node.Kind())
                 {
-                    base.Visit(node);
+                    case SyntaxKind.AwaitExpression:
+                    case SyntaxKind.ElementAccessExpression:
+                    case SyntaxKind.ForEachStatement:
+                    case SyntaxKind.SimpleMemberAccessExpression:
+                        Result = true;
+                        break;
+                    case SyntaxKind.CoalesceExpression:
+                    case SyntaxKind.ConditionalAccessExpression:
+                        Result = false;
+                        return;
                 }
+
+                base.Visit(node);
             }
         }
     }

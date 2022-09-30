@@ -108,11 +108,14 @@ namespace Tests.Diagnostics
         void Patterns_In_Loops_With_Discard(object o, object[] items)
         {
             // The following should not throw exceptions
-            while (o is string _) { }
+            while (o is string _)
+            { }
 
-            do { } while (o is string _);
+            do
+            { } while (o is string _);
 
-            for (int i = 0; i < items.Length && items[i] is string _; i++) { }
+            for (int i = 0; i < items.Length && items[i] is string _; i++)
+            { }
         }
 
         void Switch_Pattern_Source(object o)
@@ -181,7 +184,7 @@ namespace Tests.Diagnostics
         void NonCompliant1()
         {
             Exception exception = null;
-            if (exception.Data is IDictionary data) // Noncompliant
+            if (exception.Data is IDictionary data) // FN Suppressed #6117
             {
                 if (exception.InnerException?.Data is IDictionary innerexceptiondata)
                 {
@@ -205,72 +208,72 @@ namespace Tests.Diagnostics
         {
             if (exception?.Data is null)
             {
-                if (exception.InnerException?.Data is IDictionary innerexceptiondata) // Noncompliant
+                if (exception.InnerException?.Data is IDictionary innerexceptiondata) // FN Suppressed #6117
                 {
 
                 }
             }
         }
 
-    public void Method1(object obj)
-    {
-      switch (obj)
-      {
-        case string s1:
-          break;
-        default:
-          return;
-      }
-      var s = obj.ToString();
-    }
-
-    public void Method2(object obj)
-    {
-      switch (obj)
-      {
-        case null:
-          break;
-        default:
-          return;
-      }
-      var s1 = obj.ToString(); // Noncompliant
-    }
-
-    public void Method3(object obj)
-    {
-      obj = null;
-      switch (obj)
-      {
-        case string s1:
-          return;
-        default:
-          break;
-      }
-      var s = obj.ToString(); // Noncompliant
-    }
-
-    public void Method4(object obj)
-    {
-      obj = null;
-      switch (obj)
-      {
-        case null:
-          return;
-        default:
-          break;
-      }
-      var s = obj.ToString();
-    }
-
-    // https://github.com/SonarSource/sonar-dotnet/issues/2528
-    public int Repro_2528(Dictionary<string, string> dict)
-    {
-        if ((dict?.Count ?? 0) == 0)
+        public void Method1(object obj)
         {
-            return -1;
+            switch (obj)
+            {
+                case string s1:
+                    break;
+                default:
+                    return;
+            }
+            var s = obj.ToString();
         }
 
-        return dict.Count; // Noncompliant FP
+        public void Method2(object obj)
+        {
+            switch (obj)
+            {
+                case null:
+                    break;
+                default:
+                    return;
+            }
+            var s1 = obj.ToString(); // Noncompliant
+        }
+
+        public void Method3(object obj)
+        {
+            obj = null;
+            switch (obj)
+            {
+                case string s1:
+                    return;
+                default:
+                    break;
+            }
+            var s = obj.ToString(); // Noncompliant
+        }
+
+        public void Method4(object obj)
+        {
+            obj = null;
+            switch (obj)
+            {
+                case null:
+                    return;
+                default:
+                    break;
+            }
+            var s = obj.ToString();
+        }
+
+        // https://github.com/SonarSource/sonar-dotnet/issues/2528
+        public int Repro_2528(Dictionary<string, string> dict)
+        {
+            if ((dict?.Count ?? 0) == 0)
+            {
+                return -1;
+            }
+
+            return dict.Count; // Compliant Suppressed #6117
+        }
     }
-  }
 }
