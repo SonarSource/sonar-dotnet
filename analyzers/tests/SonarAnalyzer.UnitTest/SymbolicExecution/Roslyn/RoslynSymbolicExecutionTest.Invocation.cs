@@ -190,6 +190,8 @@ public static class Extensions
         }
 
         [DataTestMethod]
+        [DataRow("StaticMethod();")]
+        [DataRow("Sample.StaticMethod();")]
         [DataRow("this?.InstanceMethod();")]
         [DataRow("var dummy = Property;")]
         [DataRow("var dummy = this.Property;")]
@@ -233,6 +235,25 @@ Tag(""StaticField"", StaticObjectField);
             validator.ValidateContainsOperation(OperationKind.Invocation);
             validator.ValidateTag("Field", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
             validator.ValidateTag("StaticField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+        }
+
+        [DataTestMethod]
+        [DataRow("(true ? this : otherInstance).InstanceMethod();")]
+        [DataRow("this?.InstanceMethod();")]
+        public void Instance_InstanceMethodCallClearsFields(string invocation)
+        {
+            var code = $@"
+ObjectField = null;
+StaticObjectField = null;
+var otherInstance = new Sample();
+{invocation}
+Tag(""Field"", ObjectField);
+Tag(""StaticField"", StaticObjectField);
+";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateContainsOperation(OperationKind.Invocation);
+            validator.ValidateTag("Field", x => x.HasConstraint<ObjectConstraint>().Should().BeFalse());
+            validator.ValidateTag("StaticField", x => x.HasConstraint<ObjectConstraint>().Should().BeFalse());
         }
 
         [TestMethod]
