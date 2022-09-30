@@ -237,16 +237,14 @@ Tag(""StaticField"", StaticObjectField);
             validator.ValidateTag("StaticField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
         }
 
-        [DataTestMethod]
-        [DataRow("(true ? this : otherInstance).InstanceMethod();")]
-        [DataRow("this?.InstanceMethod();")]
-        public void Instance_InstanceMethodCallClearsFields(string invocation)
+        [TestMethod]
+        public void Instance_InstanceMethodCallClearsFields_ConditionalAccess()
         {
             var code = $@"
 ObjectField = null;
 StaticObjectField = null;
 var otherInstance = new Sample();
-{invocation}
+this?.InstanceMethod();
 Tag(""Field"", ObjectField);
 Tag(""StaticField"", StaticObjectField);
 ";
@@ -254,6 +252,33 @@ Tag(""StaticField"", StaticObjectField);
             validator.ValidateContainsOperation(OperationKind.Invocation);
             validator.ValidateTag("Field", x => x.HasConstraint<ObjectConstraint>().Should().BeFalse());
             validator.ValidateTag("StaticField", x => x.HasConstraint<ObjectConstraint>().Should().BeFalse());
+        }
+
+        [TestMethod]
+        public void Instance_InstanceMethodCallClearsFields_Ternary()
+        {
+            var code = $@"
+ObjectField = null;
+StaticObjectField = null;
+var otherInstance = new Sample();
+(boolParameter ? this : otherInstance).InstanceMethod();
+Tag(""End"");
+";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateContainsOperation(OperationKind.Invocation);
+            var field = validator.Symbol("ObjectField");
+            var staticField = validator.Symbol("StaticObjectField");
+            validator.TagStates("End").Should().SatisfyRespectively(
+                x =>
+                {
+                    x[field].AllConstraints.Should().BeEmpty();
+                    x[staticField].AllConstraints.Should().BeEmpty();
+                },
+                x =>
+                {
+                    x[field].AllConstraints.Should().BeEmpty();
+                    x[staticField].AllConstraints.Should().BeEmpty();
+                });
         }
 
         [TestMethod]
