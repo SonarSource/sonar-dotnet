@@ -1402,6 +1402,7 @@ public class Repro_GridChecks
     }
 }
 
+// https://github.com/SonarSource/sonar-dotnet/issues/890
 public class Repo_890
 {
     public void M()
