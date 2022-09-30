@@ -903,6 +903,21 @@ namespace Tests.Diagnostics
                 a.ToString(); // Noncompliant - only one issue should be reported
             }
         }
+
+        void TryCatch5()
+        {
+            try
+            {
+                bool.Parse("No");
+            }
+            catch(Exception ex)
+            {
+                if (ex == null)
+                {
+                    ex.ToString(); // Unreachable. Any caught exception is never null
+                }
+            }
+        }
     }
 
     static class Extensions
@@ -1387,27 +1402,62 @@ public class Repro_GridChecks
     }
 }
 
+// https://github.com/SonarSource/sonar-dotnet/issues/890
+public class Repo_890
+{
+    public void M()
+    {
+        Exception lastEx = null;
+        for (int i = 0; i < 10; i++)
+        {
+            try
+            {
+                ToString(); // May throw
+                return;
+            }
+            catch (InvalidOperationException e)
+            {
+                lastEx = e;
+            }
+        }
+        lastEx.ToString(); // Noncompliant FP. The loop is always entered and so lastEx is never null here.
+    }
+}
+
 namespace ValidatedNotNullAttributeTest
 {
     public sealed class ValidatedNotNullAttribute : Attribute { }
+    public sealed class NotNullAttribute : Attribute { }
 
     public static class Guard
     {
-        public static void NotNull<T>([ValidatedNotNullAttribute] this T value, string name) where T : class
+        public static void ValidatedNotNull<T>([ValidatedNotNullAttribute] this T value, string name) where T : class
         {
             if (value == null)
                 throw new ArgumentNullException(name);
         }
+
+        public static void NotNull([NotNull] object value) { }
     }
 
     public static class Utils
     {
         public static string ToUpper(string value)
         {
-            Guard.NotNull(value, nameof(value));
+            Guard.ValidatedNotNull(value, nameof(value));
             if (value != null)
             {
-                return value.ToUpper(); // Compliant
+                return value.ToUpper(); // Compliant Unreachable
+            }
+            return value.ToUpper(); // Compliant
+        }
+
+        public static string NotNullTest(string value)
+        {
+            Guard.NotNull(value);
+            if (value != null)
+            {
+                return value.ToUpper(); // Compliant Unreachable
             }
             return value.ToUpper(); // Compliant
         }

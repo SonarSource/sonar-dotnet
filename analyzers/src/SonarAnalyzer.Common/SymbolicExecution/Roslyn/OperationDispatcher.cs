@@ -44,6 +44,7 @@ internal static class OperationDispatcher
         { OperationKindEx.ArrayElementReference, new ArrayElementReference() },
         { OperationKindEx.AnonymousObjectCreation, new Creation() },
         { OperationKindEx.Await, new Await() },
+        { OperationKindEx.CaughtException, new CaughtException() },
         { OperationKindEx.Conversion, new Conversion() },
         { OperationKindEx.DeclarationPattern, new DeclarationPattern() },
         { OperationKindEx.DefaultValue, new DefaultValue() },

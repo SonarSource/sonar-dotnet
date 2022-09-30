@@ -86,8 +86,8 @@ Tag(""End"", value);";
             var validator = SETestContext.CreateCS(code, ", int[] items", new AddConstraintOnInvocationCheck(), new PreserveTestCheck("condition"), new PreserveTestCheck("value")).Validator;
             validator.ValidateExitReachCount(4);
             var states = validator.TagStates("End");
-            var condition = states.SelectMany(x => x.SymbolsWith(BoolConstraint.False)).First();    // "False" is never set for "value"
-            var value = states.SelectMany(x => x.SymbolsWith(TestConstraint.First)).First();        // "First" is never set for "condition"
+            var condition = validator.Symbol("condition");
+            var value = validator.Symbol("value");
             states.Should().HaveCount(4)
                 .And.ContainSingle(x => x[condition].HasConstraint(BoolConstraint.True) && x[value].HasConstraint(TestConstraint.First) && !x[value].HasConstraint(BoolConstraint.True))
                 .And.ContainSingle(x => x[condition].HasConstraint(BoolConstraint.True) && x[value].HasConstraint(TestConstraint.First) && x[value].HasConstraint(BoolConstraint.True))
@@ -181,6 +181,36 @@ var condition = false;
 }}
 Tag(""End"");";
             SETestContext.CreateCS(code).Validator.ValidateTagOrder("End");
+        }
+
+        [TestMethod]
+        public void DoWhileLoopWithTryCatchAndNullFlows()
+        {
+            var code = @"
+Exception lastEx = null;
+do
+{
+    try
+    {
+        InstanceMethod(); // May throw
+        Tag(""BeforeReturn"", lastEx);
+        return;
+    }
+    catch (InvalidOperationException e)
+    {
+        lastEx = e;
+        Tag(""InCatch"", lastEx);
+    }
+} while(boolParameter);
+
+Tag(""End"", lastEx);
+";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder("BeforeReturn", "InCatch", "End", "BeforeReturn", "InCatch");
+            validator.TagValues("BeforeReturn").Should().SatisfyRespectively(
+                x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue(),                              // InstanceMethod did not throw
+                x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());                          // InstanceMethod did throw, was caught, and flow continued
+            validator.ValidateTag("End", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue()); // InstanceMethod did throw and was caught
         }
     }
 }
