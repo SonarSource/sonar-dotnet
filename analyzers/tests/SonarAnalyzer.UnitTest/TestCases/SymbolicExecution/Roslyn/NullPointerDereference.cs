@@ -829,7 +829,7 @@ namespace Tests.Diagnostics
         {
             _foo1 = null;
             this.DoSomething(condition ? 1 : 2);
-            _foo1.ToString(); // Noncompliant FP. call to "DoSomething" should reset _foo1
+            _foo1.ToString(); // Compliant
         }
 
         void CallToExtensionMethodsShouldResetFieldConstraints()
