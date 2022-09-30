@@ -104,16 +104,26 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
     private static ProgramState[] ProcessIsNotNullWhen(ProgramState state, IOperation invocation, IArgumentOperationWrapper argument, bool when, bool learnNull)
     {
         var whenBoolConstraint = BoolConstraint.From(when);
-        return state[argument.Value]?.Constraint<ObjectConstraint>() switch
-        {
-            ObjectConstraint constraint when constraint == ObjectConstraint.NotNull && argument.Parameter.RefKind == RefKind.None =>
-                new[] { state },                                                                 // The "normal" state handling reflects already what is going on.
-            ObjectConstraint constraint when constraint == ObjectConstraint.Null && argument.Parameter.RefKind == RefKind.None =>
-                new[] { state.SetOperationConstraint(invocation, whenBoolConstraint.Opposite) }, // IsNullOrEmpty([NotNullWhen(false)] arg) returns true if arg is null
-            _ when argument.WrappedOperation.TrackedSymbol() is { } argumentSymbol =>
-                ExplodeStates(argumentSymbol),
-            _ => new[] { state }
-        };
+        return state[invocation]?.Constraint<BoolConstraint>() is { } existingBoolConstraint
+            ? DefineConstraintsFromKnownResult()
+            : DefineAllConstraints();
+
+        ProgramState[] DefineConstraintsFromKnownResult() =>
+            existingBoolConstraint.Equals(when) && argument.WrappedOperation.TrackedSymbol() is { } argumentSymbol
+                ? new[] { state.SetSymbolConstraint(argumentSymbol, ObjectConstraint.NotNull) }
+                : new[] { state };
+
+        ProgramState[] DefineAllConstraints() =>
+            state[argument.Value]?.Constraint<ObjectConstraint>() switch
+            {
+                ObjectConstraint constraint when constraint == ObjectConstraint.NotNull && argument.Parameter.RefKind == RefKind.None =>
+                    new[] { state },                                                                 // The "normal" state handling reflects already what is going on.
+                ObjectConstraint constraint when constraint == ObjectConstraint.Null && argument.Parameter.RefKind == RefKind.None =>
+                    new[] { state.SetOperationConstraint(invocation, whenBoolConstraint.Opposite) }, // IsNullOrEmpty([NotNullWhen(false)] arg) returns true if arg is null
+                _ when argument.WrappedOperation.TrackedSymbol() is { } argumentSymbol =>
+                    ExplodeStates(argumentSymbol),
+                _ => new[] { state }
+            };
 
         ProgramState[] ExplodeStates(ISymbol argumentSymbol) =>
             learnNull
