@@ -44,6 +44,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             state.ResolveCapture(invocation.Instance.UnwrapConversion()) is { Kind: OperationKindEx.InstanceReference }
             || (invocation is { TargetMethod.IsExtensionMethod: true, Arguments: { Length: > 0 } arguments }
                 && arguments[0] is { Kind: OperationKindEx.Argument } thisArgument
-                && IArgumentOperationWrapper.FromOperation(state.ResolveCapture(thisArgument.UnwrapConversion())).Value.UnwrapConversion() is { Kind: OperationKindEx.InstanceReference });
+                && state.ResolveCapture(IArgumentOperationWrapper.FromOperation(thisArgument).Value.UnwrapConversion()) is { Kind: OperationKindEx.InstanceReference });
     }
 }

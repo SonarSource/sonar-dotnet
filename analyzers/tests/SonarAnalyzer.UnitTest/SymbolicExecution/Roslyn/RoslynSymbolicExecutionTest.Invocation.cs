@@ -254,17 +254,35 @@ Tag(""StaticField"", StaticObjectField);
             validator.ValidateTag("StaticField", x => x.HasConstraint<ObjectConstraint>().Should().BeFalse());
         }
 
-        [TestMethod]
-        public void Instance_InstanceMethodCallClearsFields_Ternary()
+        [DataTestMethod]
+        [DataRow("(boolParameter ? this : otherInstance).ExtensionMethod();")]
+        [DataRow("(boolParameter ? this : otherInstance).InstanceMethod();")]
+        public void Instance_InstanceMethodCallClearsFields_Ternary(string instanceCall)
         {
             var code = $@"
-ObjectField = null;
-StaticObjectField = null;
-var otherInstance = new Sample();
-(boolParameter ? this : otherInstance).InstanceMethod();
-Tag(""End"", null);
+public class Sample
+{{
+    private object ObjectField;
+    private static object StaticObjectField;
+
+    public void Test(bool boolParameter)
+    {{
+        ObjectField = null;
+        StaticObjectField = null;
+        var otherInstance = new Sample();
+        {instanceCall}
+        Extensions.Tag(""End"");
+    }}
+
+    public void InstanceMethod() {{ }}
+}}
+public static class Extensions
+{{
+    public static void ExtensionMethod(this object o) {{ }}
+    public static void Tag(string name) {{ }}
+}}
 ";
-            var validator = SETestContext.CreateCS(code).Validator;
+            var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
             validator.ValidateContainsOperation(OperationKind.Invocation);
             var field = validator.Symbol("ObjectField");
             var staticField = validator.Symbol("StaticObjectField");
