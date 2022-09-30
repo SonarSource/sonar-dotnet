@@ -335,9 +335,20 @@ Tag(""After"", this.ObjectField);
 ";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.TagValues("After").Should().BeEquivalentTo(
-                new SymbolicValue().WithConstraint(ObjectConstraint.Null), // Unexpected. this.InstanceMethod happens after the ternary and should clear any constraints on this.ObjectField
-                new SymbolicValue().WithConstraint(ObjectConstraint.Null),
-                new SymbolicValue().WithConstraint(ObjectConstraint.NotNull));
+                new SymbolicValue().WithConstraint(ObjectConstraint.NotNull),
+                new SymbolicValue());
+        }
+
+        [TestMethod]
+        public void Instance_InstanceMethodCallClearsFieldWithBranchInArgument()
+        {
+            var code = $@"
+this.ObjectField = null;
+this.InstanceMethod(true ? 1 : 0);
+Tag(""After"", this.ObjectField);
+";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("After", x => x.AllConstraints.Should().BeEmpty());
         }
 
         [TestMethod]

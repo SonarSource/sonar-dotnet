@@ -115,7 +115,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             this with { CaptureOperation = CaptureOperation.Remove(capture) };
 
         public IOperation ResolveCapture(IOperation operation) =>
-            operation.Kind == OperationKindEx.FlowCaptureReference
+            operation?.Kind == OperationKindEx.FlowCaptureReference
             && this[IFlowCaptureReferenceOperationWrapper.FromOperation(operation).Id] is { } captured
                 ? captured
                 : operation;
