@@ -49,7 +49,7 @@ public abstract class ToStringShouldNotReturnNullBase<TSyntaxKind> : SonarDiagno
 
     protected void ToStringReturnsNull(SyntaxNodeAnalysisContext context, SyntaxNode node)
     {
-        if (node is not null && ReturnsNull(node) && WithinToString(node))
+        if (node is not null && ReturnsNull(Language.Syntax.NodeExpression(node)) && WithinToString(node))
         {
             context.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
         }
@@ -57,14 +57,7 @@ public abstract class ToStringShouldNotReturnNullBase<TSyntaxKind> : SonarDiagno
 
     private bool ReturnsNull(SyntaxNode node) =>
         Language.Syntax.IsNullLiteral(node)
-        || ExpresssionReturnsNull(node);
-
-    private bool ExpresssionReturnsNull(SyntaxNode node)
-    {
-        var expression = Language.Syntax.NodeExpression(node);
-        return Language.Syntax.IsNullLiteral(expression)
-            || Conditionals(expression).Any(ReturnsNull);
-    }
+        || Conditionals(node).Any(ReturnsNull);
 
     private bool WithinToString(SyntaxNode node) =>
         node.Ancestors()

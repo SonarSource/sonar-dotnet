@@ -111,6 +111,16 @@ Namespace Noncompliant
             Return If(Condition.[When](), Nothing, "")  ' Noncompliant
         End Function
     End Class
+	
+	Public Class ReturnsNullViaNestedTenary
+    
+         Public Overrides Function ToString() As String
+            Return If(Condition.When(), ' Noncompliant
+				If(Condition.When(), Nothing , "something"),
+				If(Condition.When(), "something", Nothing))
+		End Function
+			 
+    End Class
 
     Structure StructReturnsNothing
         Public Overrides Function ToString() As String
