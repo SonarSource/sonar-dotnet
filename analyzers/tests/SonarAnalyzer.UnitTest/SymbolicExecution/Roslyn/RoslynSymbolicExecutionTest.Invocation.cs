@@ -936,6 +936,8 @@ f()();
         [DataRow("null", "null", true, "Null", "Null")]
         [DataRow("null", "new object()", false, "Null", "NotNull")]
         [DataRow("new object()", "null", false, "NotNull", "Null")]
+        [DataRow("new int?()", "null", false, "NotNull", "Null")]   // Should be "true" and "Null" because new int()? is still null
+        [DataRow("new int?(42)", "null", false, "NotNull", "Null")]
         public void Invocation_Equals_LearnResult(string left, string right, bool? expectedResult, string expectedConstraintsLeft, string expectedConstraintsRight)
         {
             var code = $@"
@@ -956,6 +958,7 @@ Tag(""Right"", right);";
         [DataRow("new object()", "Unknown<object>()")]
         [DataRow("Unknown<object>()", "new object()")]
         [DataRow("Unknown<object>()", "Unknown<object>()")]
+        [DataRow("new int?()", "5")]
         public void Invocation_Equals_DoesNotLearnResult(string left, string right)
         {
             var code = $@"
