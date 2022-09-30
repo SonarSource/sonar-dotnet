@@ -87,6 +87,8 @@ namespace SonarAnalyzer.UnitTest.Extensions
             AssertTryGetAttributeValue<int>("SomeByte", true, 24);
             AssertTryGetAttributeValue<string>("SomeString", true, "Text");
             AssertTryGetAttributeValue<object>("SomeNull", true, null);
+            AssertTryGetAttributeValue<string>("SomeNull", true, null);
+            AssertTryGetAttributeValue<int>("SomeNull", true, 0);
             AssertTryGetAttributeValue<object>("Missing", false, null);
             AssertTryGetAttributeValue<string>("Missing", false, null);
             AssertTryGetAttributeValue<int>("Missing", false, 0);
