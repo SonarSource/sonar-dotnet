@@ -56,6 +56,7 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
             _ when invocation.TargetMethod.Is(KnownType.Microsoft_VisualBasic_Information, "IsNothing") => ProcessInformationIsNothing(context, invocation),
             _ when invocation.TargetMethod.Is(KnownType.System_Diagnostics_Debug, nameof(Debug.Assert)) => ProcessDebugAssert(context, invocation),
             _ when invocation.TargetMethod.ContainingType.IsAny(KnownType.System_Linq_Enumerable, KnownType.System_Linq_Queryable) => ProcessLinqEnumerableAndQueryable(context, invocation),
+            _ when invocation.TargetMethod.Name == nameof(object.Equals) => ProcessEquals(context, invocation),
             _ when invocation.TargetMethod.IsAny(KnownType.System_String, nameof(string.IsNullOrEmpty), nameof(string.IsNullOrWhiteSpace)) =>
                 ProcessIsNotNullWhen(state, invocation.WrappedOperation, invocation.Arguments[0].ToArgument(), false),
             _ => ProcessIsNotNullWhen(state, invocation),
@@ -123,6 +124,35 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
                 ? state.SetSymbolConstraint(symbol, BoolConstraint.From(!isNegated))
                 : state;
         }
+    }
+
+    private static ProgramState[] ProcessEquals(SymbolicContext context, IInvocationOperationWrapper invocation)
+    {
+        if (invocation.TargetMethod.IsStatic && invocation.Arguments.Length == 2
+            && invocation.Arguments[0].ToArgument().Value is var leftOperation
+            && invocation.Arguments[1].ToArgument().Value is var rightOperation
+            && context.State[leftOperation]?.Constraint<ObjectConstraint>() is var leftConstraint
+            && context.State[rightOperation]?.Constraint<ObjectConstraint>() is var rightConstraint
+            && (leftConstraint == ObjectConstraint.Null || rightConstraint == ObjectConstraint.Null))
+        {
+            if (leftConstraint == ObjectConstraint.Null && rightConstraint == ObjectConstraint.Null)
+            {
+                return new[] { context.SetOperationConstraint(BoolConstraint.True) };
+            }
+            else if (leftConstraint is not null && rightConstraint is not null)
+            {
+                return new[] { context.SetOperationConstraint(BoolConstraint.False) };
+            }
+            else if ((leftConstraint == ObjectConstraint.Null ? rightOperation : leftOperation).TrackedSymbol() is { } symbol)
+            {
+                return new[]
+                {
+                    context.SetOperationConstraint(BoolConstraint.True).SetSymbolConstraint(symbol, ObjectConstraint.Null),
+                    context.SetOperationConstraint(BoolConstraint.False).SetSymbolConstraint(symbol, ObjectConstraint.NotNull)
+                };
+            }
+        }
+        return new[] { context.State };
     }
 
     private static bool IsThrowHelper(IMethodSymbol method) =>

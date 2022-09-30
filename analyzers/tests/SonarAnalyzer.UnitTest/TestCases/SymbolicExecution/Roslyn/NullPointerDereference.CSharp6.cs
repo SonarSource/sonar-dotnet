@@ -226,12 +226,46 @@ namespace Tests.Diagnostics
             if (leftName == null)
             {
                 // rightName is not null
-                if (rightName.EndsWith("foo")) // Compliant Suppressed #6117
+                if (rightName.EndsWith("foo")) // Compliant
                     return 1;
                 return 0;
             }
 
             return 0;
+        }
+
+        public int Compare_NoIsNullOperation(ValueHolder left, ValueHolder right)
+        {
+            string leftName = left == null ? null : left.Value;
+            string rightName = right == null ? null : right.Value;
+
+            if (string.Equals(leftName, rightName))
+                // this will return if both are NULL or if they have equal non-null values
+                return 0;
+
+            // at this point, leftName can be NULL if rightName is not NULL
+            if (leftName == null)
+            {
+                // rightName is not null
+                if (rightName.EndsWith("foo")) // Compliant
+                    return 1;
+                return 0;
+            }
+
+            return 0;
+        }
+
+        public void EqualsNull(object arg)
+        {
+            string value = arg == null ? null : arg.ToString();
+            if (string.Equals(value, null))
+            {
+                value.ToString();   // Noncompliant
+            }
+            else
+            {
+                value.ToString();   // Compliant
+            }
         }
 
         public string Foo(ValueHolder valueHolder)
