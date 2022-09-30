@@ -22,7 +22,6 @@ using SonarAnalyzer.Extensions;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Sonar;
-using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
 using SonarAnalyzer.UnitTest.CFG.Sonar;
 
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar
@@ -30,8 +29,9 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar
     [TestClass]
     public class SonarProgramStateTest
     {
-        private class FakeConstraint : SymbolicConstraint
+        private sealed class FakeConstraint : SymbolicConstraint
         {
+            public FakeConstraint() : base((ConstraintKind)(-1)) { }
             public override SymbolicConstraint Opposite => null;
             protected override string Name => throw new System.NotImplementedException();
         }

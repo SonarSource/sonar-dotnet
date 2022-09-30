@@ -22,15 +22,31 @@ namespace SonarAnalyzer.SymbolicExecution.Constraints
 {
     public enum ConstraintKind
     {
-        BoolTrue,
         BoolFalse,
+        BoolTrue,
         ByteArrayConstant,
         ByteArrayModified,
-        Collection
-        Collection
+        CollectionEmpty,
+        CollectionNotEmpty,
+        DisposableDisposed,
+        DisposableNotDisposed,
+        InitializationVectorInitialized,
+        InitializationVectorNotInitialized,
         LockHeld,
         LockReleased,
+        NullableHasValue,
+        NullableNoValue,
         ObjectNull,
         ObjectNotNull,
+        SaltSizeSafe,
+        SaltSizeShort,
+        SerializationSafe,
+        SerializationUnsafe,
+        StringConstraintEmpty,
+        StringConstraintFullNotWhiteSpace,
+        StringConstraintFullOrNull,
+        StringConstraintFull,
+        StringConstraintNotWhiteSpace,
+        StringConstraintWhiteSpace,
     }
 }

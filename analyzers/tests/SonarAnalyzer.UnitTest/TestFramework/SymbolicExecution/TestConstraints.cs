@@ -19,6 +19,7 @@
  */
 
 using SonarAnalyzer.SymbolicExecution;
+using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 {
@@ -32,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 
         protected override string Name { get; }
 
-        private TestConstraint(string name) =>
+        private TestConstraint(string name) : base((ConstraintKind)(-1)) =>
             Name = name;
     }
 
@@ -40,9 +41,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
     {
         public static readonly DummyConstraint Dummy = new();
 
-        public override SymbolicConstraint Opposite => throw new System.NotImplementedException();
+        public override SymbolicConstraint Opposite => throw new NotImplementedException();
         protected override string Name { get; } = "Dummy";
 
-        private DummyConstraint() { }
+        private DummyConstraint() : base((ConstraintKind)(-1)) { }
     }
 }

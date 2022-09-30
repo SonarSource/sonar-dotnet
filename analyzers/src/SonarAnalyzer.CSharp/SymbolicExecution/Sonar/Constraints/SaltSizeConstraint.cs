@@ -18,12 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.SymbolicExecution.Constraints;
+
 namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
 {
     internal class SaltSizeConstraint : SymbolicConstraint
     {
-        public static readonly SaltSizeConstraint Short = new();
-        public static readonly SaltSizeConstraint Safe = new();
+        public static readonly SaltSizeConstraint Short = new(ConstraintKind.SaltSizeShort);
+        public static readonly SaltSizeConstraint Safe = new(ConstraintKind.SaltSizeSafe);
 
         public override SymbolicConstraint Opposite =>
             this == Safe ? Short : Safe;
@@ -31,6 +33,6 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
         protected override string Name =>
             this == Safe ? nameof(Safe) : nameof(Short);
 
-        private SaltSizeConstraint() { }
+        private SaltSizeConstraint(ConstraintKind kind) : base(kind) { }
     }
 }
