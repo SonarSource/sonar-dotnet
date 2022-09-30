@@ -1082,7 +1082,7 @@ namespace Tests.Diagnostics
             string someString = null;
 
             if (!someString?.Contains("a") ?? true)
-                someString.ToString();  // Noncompliant, it's null or doesn't contain 'a'
+                someString.ToString();  // FN Suppressed #6117, it's null or doesn't contain 'a'
             else
                 someString.ToString();  // Compliant, someString is not null and contains 'a'
         }
