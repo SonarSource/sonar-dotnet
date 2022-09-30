@@ -33,6 +33,6 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
         protected override string Name =>
             this == Initialized ? nameof(Initialized) : nameof(NotInitialized);
 
-        private InitializationVectorConstraint(ConstraintKind kind):base(kind) { }
+        private InitializationVectorConstraint(ConstraintKind kind) : base(kind) { }
     }
 }
