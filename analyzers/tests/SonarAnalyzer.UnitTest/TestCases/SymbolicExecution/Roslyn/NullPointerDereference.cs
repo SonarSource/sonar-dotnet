@@ -1426,24 +1426,37 @@ public class Repo_890
 namespace ValidatedNotNullAttributeTest
 {
     public sealed class ValidatedNotNullAttribute : Attribute { }
+    public sealed class NotNullAttribute : Attribute { }
 
     public static class Guard
     {
-        public static void NotNull<T>([ValidatedNotNullAttribute] this T value, string name) where T : class
+        public static void ValidatedNotNull<T>([ValidatedNotNullAttribute] this T value, string name) where T : class
         {
             if (value == null)
                 throw new ArgumentNullException(name);
         }
+
+        public static void NotNull([NotNull] object value) { }
     }
 
     public static class Utils
     {
         public static string ToUpper(string value)
         {
-            Guard.NotNull(value, nameof(value));
+            Guard.ValidatedNotNull(value, nameof(value));
             if (value != null)
             {
-                return value.ToUpper(); // Compliant
+                return value.ToUpper(); // Compliant Unreachable
+            }
+            return value.ToUpper(); // Compliant
+        }
+
+        public static string NotNullTest(string value)
+        {
+            Guard.NotNull(value);
+            if (value != null)
+            {
+                return value.ToUpper(); // Compliant Unreachable
             }
             return value.ToUpper(); // Compliant
         }
