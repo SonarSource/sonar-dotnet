@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Moq;
 using Moq.Protected;
 using SonarAnalyzer.Extensions;
@@ -62,6 +63,84 @@ namespace SonarAnalyzer.UnitTest.Extensions
         public void HasAnyNameThrowsForNull() =>
             new Action(() => AttributeDataWithName("TestAttribute").HasAnyName(null)).Should().Throw<Exception>();
 
+        [TestMethod]
+        public void TryGetAttributeValue_Arguments()
+        {
+            var arguments = new Dictionary<string, object>
+            {
+                { "SomeBool", true },
+                { "SomeInt", 1_234_567 },
+                { "SomeByte", (byte)24 },
+                { "SomeString", "Text" },
+                { "SomeNumberString", "42" },
+                { "SomeNull", null },
+            };
+            var named = AttributeDataWithArguments(namedArguments: arguments);
+            var constructor = AttributeDataWithArguments(constructorArguments: arguments);
+            AssertTryGetAttributeValue<bool>("SomeBool", true, true);
+            AssertTryGetAttributeValue<bool>("someBool", true, true);
+            AssertTryGetAttributeValue<bool>("somebool", true, true);
+            AssertTryGetAttributeValue<bool>("SOMEBOOL", true, true);
+            AssertTryGetAttributeValue<int>("SomeInt", true, 1_234_567);
+            AssertTryGetAttributeValue<byte>("SomeInt", false, 0); // SomeInt is too big
+            AssertTryGetAttributeValue<byte>("SomeByte", true, 24);
+            AssertTryGetAttributeValue<int>("SomeByte", true, 24);
+            AssertTryGetAttributeValue<string>("SomeString", true, "Text");
+            AssertTryGetAttributeValue<object>("SomeNull", true, null);
+            AssertTryGetAttributeValue<string>("SomeNull", true, null);
+            AssertTryGetAttributeValue<int>("SomeNull", true, 0);
+            AssertTryGetAttributeValue<object>("Missing", false, null);
+            AssertTryGetAttributeValue<string>("Missing", false, null);
+            AssertTryGetAttributeValue<int>("Missing", false, 0);
+            AssertTryGetAttributeValue<int>("SomeString", false, 0);
+            AssertTryGetAttributeValue<int>("SomeNumberString", true, 42);
+
+            void AssertTryGetAttributeValue<T>(string valueName, bool expectedSuccess, T expectedResult)
+            {
+                var success = named.TryGetAttributeValue<T>(valueName, out T result);
+                success.Should().Be(expectedSuccess);
+                result.Should().Be(expectedResult);
+
+                success = constructor.TryGetAttributeValue<T>(valueName, out result);
+                success.Should().Be(expectedSuccess);
+                result.Should().Be(expectedResult);
+            }
+        }
+
+        [TestMethod]
+        public void TryGetAttributeValue_ConstructorArgumentAndNamedArgumentNamedTheSame()
+        {
+            var attributeData = AttributeDataWithArguments(namedArguments: new() { { "Result", true } }, constructorArguments: new() { { "Result", false } });
+            var actualSuccess = attributeData.TryGetAttributeValue("Result", out bool actualValue);
+            actualSuccess.Should().BeTrue();
+            actualValue.Should().BeTrue(); // Named argument takes precedence
+        }
+
+        [TestMethod]
+        public void TryGetAttributeValue_DateTimeConversion()
+        {
+            var attributeData = AttributeDataWithArguments(namedArguments: new() { { "Result", "2022-12-24" } });
+            var actualSuccess = attributeData.TryGetAttributeValue("Result", out DateTime actualValue);
+            actualSuccess.Should().BeTrue();
+            actualValue.Should().Be(new DateTime(2022, 12, 24));
+        }
+
+        [DataTestMethod]
+        [DataRow("SomeText", typeof(string))]
+        [DataRow(42, typeof(int))]
+        [DataRow(null, null)]
+        public void TryGetAttributeValue_ObjectConversion(object value, Type expectedType)
+        {
+            var attributeData = AttributeDataWithArguments(namedArguments: new() { { "Result", value } });
+            var actualSuccess = attributeData.TryGetAttributeValue("Result", out object actualValue);
+            actualSuccess.Should().BeTrue();
+            if (expectedType != null)
+            {
+                actualValue.Should().BeOfType(expectedType);
+            }
+            actualValue.Should().Be(value);
+        }
+
         private static AttributeData AttributeDataWithName(string attributeClassName)
         {
             var namedType = new Mock<INamedTypeSymbol>();
@@ -69,6 +148,43 @@ namespace SonarAnalyzer.UnitTest.Extensions
             var attributeData = new Mock<AttributeData>();
             attributeData.Protected().Setup<INamedTypeSymbol>("CommonAttributeClass").Returns(namedType.Object);
             return attributeData.Object;
+        }
+
+        private static AttributeData AttributeDataWithArguments(Dictionary<string, object> namedArguments = null, Dictionary<string, object> constructorArguments = null)
+        {
+            namedArguments ??= new();
+            constructorArguments ??= new();
+            var separator = (constructorArguments.Any() && namedArguments.Any()) ? ", " : string.Empty;
+            var code = $@"
+using System;
+
+public class MyAttribute: Attribute
+{{
+    public MyAttribute({constructorArguments.Select(x => $"{TypeName(x.Value)} {x.Key}").JoinStr(", ")})
+    {{
+    }}
+
+    {namedArguments.Select(x => $@"public {TypeName(x.Value)} {x.Key} {{ get; set; }}").JoinStr("\r\n")}
+}}
+
+[My({constructorArguments.Select(x => Quote(x.Value)).JoinStr(", ")}{separator}{namedArguments.Select(x => $"{x.Key}={Quote(x.Value)}").JoinStr(", ")})]
+public class Dummy {{ }}";
+            var snippet = new SnippetCompiler(code);
+            var classDeclaration = snippet.SyntaxTree.GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>().Last();
+            var symbol = (INamedTypeSymbol)snippet.SemanticModel.GetDeclaredSymbol(classDeclaration);
+            return symbol.GetAttributes().First();
+
+            static string TypeName(object value) =>
+                value == null ? "object" : value.GetType().FullName;
+
+            static string Quote(object value) =>
+                value switch
+                {
+                    string s => @$"""{s}""",
+                    bool b => b ? "true" : "false",
+                    null => "null",
+                    var v => v.ToString(),
+                };
         }
     }
 }

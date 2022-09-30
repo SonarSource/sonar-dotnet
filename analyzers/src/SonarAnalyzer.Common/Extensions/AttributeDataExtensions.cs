@@ -18,8 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Extensions
 {
@@ -30,5 +32,53 @@ namespace SonarAnalyzer.Extensions
 
         public static bool HasAnyName(this AttributeData attribute, params string[] names) =>
             names.Any(x => attribute.HasName(x));
+
+        public static bool TryGetAttributeValue<T>(this AttributeData attribute, string valueName, out T value)
+        {
+            // named arguments take precedence over constructor arguments of the same name. For [Attr(valueName: false, valueName = true)] "true" is returned.
+            if (attribute.NamedArguments.IndexOf(x => x.Key.Equals(valueName, StringComparison.OrdinalIgnoreCase)) is var namedAgumentIndex and >= 0)
+            {
+                return TryConvertConstant(attribute.NamedArguments[namedAgumentIndex].Value, out value);
+            }
+            else if (attribute.AttributeConstructor.Parameters.IndexOf(x => x.Name.Equals(valueName, StringComparison.OrdinalIgnoreCase)) is var constructorParameterIndex and >= 0)
+            {
+                return TryConvertConstant(attribute.ConstructorArguments[constructorParameterIndex], out value);
+            }
+            else
+            {
+                value = default;
+                return false;
+            }
+        }
+
+        private static bool TryConvertConstant<T>(TypedConstant constant, out T value)
+        {
+            value = default;
+            if (constant.IsNull)
+            {
+                return true;
+            }
+            else if (constant.Value is T result)
+            {
+                value = result;
+                return true;
+            }
+            else if (constant.Value is IConvertible)
+            {
+                try
+                {
+                    value = (T)Convert.ChangeType(constant.Value, typeof(T));
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
