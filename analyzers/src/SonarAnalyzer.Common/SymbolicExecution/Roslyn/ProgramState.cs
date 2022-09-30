@@ -74,9 +74,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 : SetOperationValue(operation.Instance, value);
 
         public ProgramState SetOperationValue(IOperation operation, SymbolicValue value) =>
-            operation == null
-                ? throw new ArgumentNullException(nameof(operation))
-                : value == null
+            (operation ?? throw new ArgumentNullException(nameof(operation))) is var _
+                && value == null
                     ? this with { OperationValue = OperationValue.Remove(ResolveCapture(operation)) }
                     : this with { OperationValue = OperationValue.SetItem(ResolveCapture(operation), value) };
 
