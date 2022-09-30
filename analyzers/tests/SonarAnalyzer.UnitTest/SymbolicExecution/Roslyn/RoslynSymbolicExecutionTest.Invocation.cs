@@ -255,8 +255,8 @@ Tag(""StaticField"", StaticObjectField);
         }
 
         [DataTestMethod]
-        [DataRow("(boolParameter ? this : otherInstance).ExtensionMethod();")]
         [DataRow("(boolParameter ? this : otherInstance).InstanceMethod();")]
+        [DataRow("(boolParameter ? this : otherInstance).ExtensionMethod();")] // invocation with flow-capture and conversion on the receiver
         public void Instance_InstanceMethodCallClearsFields_Ternary(string instanceCall)
         {
             var code = $@"
