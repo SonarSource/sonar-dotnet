@@ -1,6 +1,6 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2015-2023 SonarSource SA
+ * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -20,23 +20,17 @@
 
 namespace SonarAnalyzer.SymbolicExecution.Constraints
 {
-    public sealed class BoolConstraint : SymbolicConstraint
+    public enum ConstraintKind
     {
-        public static readonly BoolConstraint True = new(ConstraintKind.BoolTrue);
-        public static readonly BoolConstraint False = new(ConstraintKind.BoolFalse);
-
-        public override SymbolicConstraint Opposite =>
-            this == True ? False : True;
-
-        protected override string Name =>
-            this == True ? nameof(True) : nameof(False);
-
-        private BoolConstraint(ConstraintKind kind) : base(kind) { }
-
-        public static BoolConstraint From(bool value) =>
-            value ? True : False;
-
-        public bool Equals(bool value) =>
-            this == From(value);
+        BoolTrue,
+        BoolFalse,
+        ByteArrayConstant,
+        ByteArrayModified,
+        Collection
+        Collection
+        LockHeld,
+        LockReleased,
+        ObjectNull,
+        ObjectNotNull,
     }
 }

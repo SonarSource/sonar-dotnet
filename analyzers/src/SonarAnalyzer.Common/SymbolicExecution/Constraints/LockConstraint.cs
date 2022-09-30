@@ -22,8 +22,8 @@ namespace SonarAnalyzer.SymbolicExecution.Constraints
 {
     public sealed class LockConstraint : SymbolicConstraint
     {
-        public static readonly LockConstraint Held = new();
-        public static readonly LockConstraint Released = new();
+        public static readonly LockConstraint Held = new(ConstraintKind.LockHeld);
+        public static readonly LockConstraint Released = new(ConstraintKind.LockReleased);
 
         public override SymbolicConstraint Opposite =>
             this == Held ? Released : Held;
@@ -33,6 +33,6 @@ namespace SonarAnalyzer.SymbolicExecution.Constraints
         protected override string Name =>
             this == Held ? nameof(Held) : nameof(Released);
 
-        private LockConstraint() { }
+        private LockConstraint(ConstraintKind kind) : base(kind) { }
     }
 }
