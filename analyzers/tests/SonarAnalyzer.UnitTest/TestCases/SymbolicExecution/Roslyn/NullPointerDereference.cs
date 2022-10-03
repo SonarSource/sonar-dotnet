@@ -551,7 +551,7 @@ namespace Tests.Diagnostics
             }
             else
             {
-                type.ToString();    // Compliant
+                type.ToString();    // Compliant, unreachable for .NET, no annotation under .NET Fx
             }
         }
     }
