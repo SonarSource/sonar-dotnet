@@ -366,13 +366,13 @@ Tag(""IsNullOrEmpy"", isNullOrEmpy);
 Tag(""Arg"", arg);";
             var validator = SETestContext.CreateCS(code, ", string arg").Validator;
             validator.TagValues("IsNullOrEmpy").Should().Equal(
+                new SymbolicValue().WithConstraint(BoolConstraint.False),      // False/NotNull
                 new SymbolicValue().WithConstraint(BoolConstraint.True),       // True/Null
-                new SymbolicValue().WithConstraint(BoolConstraint.True),       // True/NotNull
-                new SymbolicValue().WithConstraint(BoolConstraint.False));     // False/NotNull
+                new SymbolicValue().WithConstraint(BoolConstraint.True));      // True/NotNull
             validator.TagValues("Arg").Should().Equal(
+                new SymbolicValue().WithConstraint(ObjectConstraint.NotNull),  // False/NotNull
                 new SymbolicValue().WithConstraint(ObjectConstraint.Null),     // True/Null
-                new SymbolicValue().WithConstraint(ObjectConstraint.NotNull),  // True/NotNull
-                new SymbolicValue().WithConstraint(ObjectConstraint.NotNull)); // False/NotNull
+                new SymbolicValue().WithConstraint(ObjectConstraint.NotNull)); // True/NotNull
         }
 
         [TestMethod]
@@ -409,8 +409,8 @@ finally
             validator.TagValues("ArgInFinally").Should().Equal(new[]
             {
                 null,
-                new SymbolicValue().WithConstraint(ObjectConstraint.Null),    // Wrong. IsNullOrEmpty does not throw and "arg" is known to be not null.
-                new SymbolicValue().WithConstraint(ObjectConstraint.NotNull)
+                new SymbolicValue().WithConstraint(ObjectConstraint.NotNull),
+                new SymbolicValue().WithConstraint(ObjectConstraint.Null)   // Wrong. IsNullOrEmpty does not throw and "arg" is known to be not null.
             });
         }
 
@@ -465,15 +465,15 @@ Tag(""End"", null);";
                 x =>
                 {
                     x[validator.Symbol("ObjectField")].HasConstraint(ObjectConstraint.Null).Should().BeTrue();
-                    x[validator.Symbol("byteString")].Should().BeNull();
-                    x[validator.Symbol("success")].HasConstraint(BoolConstraint.False).Should().BeTrue();
+                    x[validator.Symbol("byteString")].HasConstraint(ObjectConstraint.NotNull).Should().BeTrue();
+                    x[validator.Symbol("success")].HasConstraint(BoolConstraint.True).Should().BeTrue();
                     x[validator.Symbol("result")].Should().BeNull();
                 },
                 x =>
                 {
                     x[validator.Symbol("ObjectField")].HasConstraint(ObjectConstraint.Null).Should().BeTrue();
-                    x[validator.Symbol("byteString")].HasConstraint(ObjectConstraint.NotNull).Should().BeTrue();
-                    x[validator.Symbol("success")].HasConstraint(BoolConstraint.True).Should().BeTrue();
+                    x[validator.Symbol("byteString")].Should().BeNull();
+                    x[validator.Symbol("success")].HasConstraint(BoolConstraint.False).Should().BeTrue();
                     x[validator.Symbol("result")].Should().BeNull();
                 });
         }
@@ -497,15 +497,15 @@ public bool TryParse([System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)
                 x =>
                 {
                     x[validator.Symbol("ObjectField")].HasConstraint<ObjectConstraint>().Should().BeFalse();
-                    x[validator.Symbol("byteString")].Should().BeNull();
-                    x[validator.Symbol("success")].HasConstraint(BoolConstraint.False).Should().BeTrue();
+                    x[validator.Symbol("byteString")].HasConstraint(ObjectConstraint.NotNull).Should().BeTrue();
+                    x[validator.Symbol("success")].HasConstraint(BoolConstraint.True).Should().BeTrue();
                     x[validator.Symbol("result")].Should().BeNull();
                 },
                 x =>
                 {
                     x[validator.Symbol("ObjectField")].HasConstraint<ObjectConstraint>().Should().BeFalse();
-                    x[validator.Symbol("byteString")].HasConstraint(ObjectConstraint.NotNull).Should().BeTrue();
-                    x[validator.Symbol("success")].HasConstraint(BoolConstraint.True).Should().BeTrue();
+                    x[validator.Symbol("byteString")].Should().BeNull();
+                    x[validator.Symbol("success")].HasConstraint(BoolConstraint.False).Should().BeTrue();
                     x[validator.Symbol("result")].Should().BeNull();
                 });
         }
