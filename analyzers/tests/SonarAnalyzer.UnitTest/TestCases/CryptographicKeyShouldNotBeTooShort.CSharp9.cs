@@ -72,6 +72,6 @@ record TestRecord
         ec2.GenerateKey(ECCurve.NamedCurves.brainpoolP160t1); // Noncompliant {{Use a key length of at least 224 bits for EC cipher algorithm.}}
 
         ECDsaOpenSsl ec3 = new();
-        ec3.GenerateKey(ECCurve.NamedCurves.brainpoolP192t1); // Noncompliant {{Use a key length of at least 224 bits for EC cipher algorithm.}}
+        ec3.GenerateKey(ECCurve.NamedCurves.brainpoolP192t1); // FN, See: https://github.com/SonarSource/sonar-dotnet/issues/6164
     }
 }

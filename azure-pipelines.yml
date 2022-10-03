@@ -17,7 +17,7 @@ variables:
   - group: sonarsource-build-variables
   # To make sure we don`t use MsBuild 17.
   - name: MsBuildPath
-    value: 'C:\Program Files\Microsoft Visual Studio\2022\Community\Msbuild\Current\Bin\msbuild.exe'
+    value: 'C:\Program Files\Microsoft Visual Studio\2022\Preview\Msbuild\Current\Bin\msbuild.exe'
   - name: isReleaseBranch
     value: ${{ or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), startsWith(variables['Build.SourceBranch'], 'refs/heads/branch-')) }}
   - name: vsVersion
@@ -161,10 +161,10 @@ stages:
             FrameworkMoniker: 'net48'
             CoverageArtifactName: 'DotnetCoverageNet48'
             TestResultsArtifactName: 'DotnetTestResultsNet48'
-          Net60:
-            FrameworkMoniker: 'net6.0'
-            CoverageArtifactName: 'DotnetCoverageNet6'
-            TestResultsArtifactName: 'DotnetTestResultsNet6'
+          Net70:
+            FrameworkMoniker: 'net7.0'
+            CoverageArtifactName: 'DotnetCoverageNet7'
+            TestResultsArtifactName: 'DotnetTestResultsNet7'
 
       steps:
       - task: DownloadPipelineArtifact@2
@@ -283,7 +283,7 @@ stages:
       - task: DownloadPipelineArtifact@2
         displayName: 'Download coverage reports'
         inputs:
-          artifact: DotnetCoverageNet6
+          artifact: DotnetCoverageNet7
           targetPath: 'coverage'
 
       - task: DownloadPipelineArtifact@2
@@ -295,7 +295,7 @@ stages:
       - task: DownloadPipelineArtifact@2
         displayName: 'Download test results'
         inputs:
-          artifact: DotnetTestResultsNet6
+          artifact: DotnetTestResultsNet7
           targetPath: 'TestResults'
 
       - powershell: |
@@ -314,7 +314,7 @@ stages:
           }
 
           Update-Coverage-BasePaths 'coverage\coverage.net48.xml'
-          Update-Coverage-BasePaths 'coverage\coverage.net6.0.xml'
+          Update-Coverage-BasePaths 'coverage\coverage.net7.0.xml'
         displayName: Fix coverage paths
 
       - task: SonarCloudAnalyze@1

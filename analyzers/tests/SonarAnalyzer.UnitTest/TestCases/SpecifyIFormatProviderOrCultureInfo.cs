@@ -82,9 +82,6 @@ namespace Tests.Diagnostics
             "".StartsWith(""); // FN, overload with CultureInfo has 3 parameters and is difficult to tell if is the proper overload
 
             Convert.ToInt32("123"); // Noncompliant
-            int result;
-            int.TryParse("123", out result); // FN, TryParse(string, NumberStyles, IFormatProvider, out result) is difficult to tell if is real overload
-
             object number = 1.23;
             Convert.ToInt32(number); // Noncompliant, there is ToInt32(object, IFormatProvider)
 

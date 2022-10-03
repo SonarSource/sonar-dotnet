@@ -23,6 +23,8 @@ namespace SonarAnalyzer.UnitTest
     internal static class Constants
     {
         public const string NuGetLatestVersion = "LATEST";
+        public const string DotNet7Preview = "7.0.0-rc.1.22426.10";
+        public const string DotNet7PreviewAzureAppServices = "7.0.0-rc.1.22427.2";
         public const string DotNetCore220Version = "2.2.0";
         public const string WindowsLineEnding = "\r\n";
         public const string UnixLineEnding = "\n";
