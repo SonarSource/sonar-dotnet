@@ -551,7 +551,7 @@ namespace Tests.Diagnostics
             }
             else
             {
-                type.ToString();    // Noncompliant FP
+                type.ToString();    // Compliant
             }
         }
     }

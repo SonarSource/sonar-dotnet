@@ -58,7 +58,7 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
             _ when invocation.TargetMethod.ContainingType.IsAny(KnownType.System_Linq_Enumerable, KnownType.System_Linq_Queryable) => ProcessLinqEnumerableAndQueryable(context, invocation),
             _ when invocation.TargetMethod.Name == nameof(object.Equals) => ProcessEquals(context, invocation),
             _ when invocation.TargetMethod.IsAny(KnownType.System_String, nameof(string.IsNullOrEmpty), nameof(string.IsNullOrWhiteSpace)) =>
-                ProcessIsNotNullWhen(state, invocation.WrappedOperation, invocation.Arguments[0].ToArgument(), false),
+                ProcessIsNotNullWhen(state, invocation.WrappedOperation, invocation.Arguments[0].ToArgument(), false, true),
             _ => ProcessIsNotNullWhen(state, invocation),
         };
     }
@@ -70,13 +70,13 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
             if (argument.Parameter?.GetAttributes().FirstOrDefault(x => x.HasName("NotNullWhenAttribute")) is { } attribute
                 && attribute.TryGetAttributeValue<bool>("returnValue", out var returnValue))
             {
-                return ProcessIsNotNullWhen(state, invocation.WrappedOperation, argument, returnValue);
+                return ProcessIsNotNullWhen(state, invocation.WrappedOperation, argument, returnValue, false);
             }
         }
         return new[] { state };
     }
 
-    private static ProgramState[] ProcessIsNotNullWhen(ProgramState state, IOperation invocation, IArgumentOperationWrapper argument, bool when)
+    private static ProgramState[] ProcessIsNotNullWhen(ProgramState state, IOperation invocation, IArgumentOperationWrapper argument, bool when, bool learnNull)
     {
         var whenBoolConstraint = BoolConstraint.From(when);
         return state[argument.Value]?.Constraint<ObjectConstraint>() switch
@@ -86,14 +86,23 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
             ObjectConstraint constraint when constraint == ObjectConstraint.Null && argument.Parameter.RefKind == RefKind.None =>
                 new[] { state.SetOperationConstraint(invocation, whenBoolConstraint.Opposite) }, // IsNullOrEmpty([NotNullWhen(false)] arg) returns true if arg is null
             _ when argument.WrappedOperation.TrackedSymbol() is { } argumentSymbol =>
-                new[]                                                                            // Explode the known states, these methods can create.
-                {
-                    state.SetOperationConstraint(invocation, whenBoolConstraint.Opposite).SetSymbolConstraint(argumentSymbol, ObjectConstraint.Null),
-                    state.SetOperationConstraint(invocation, whenBoolConstraint.Opposite).SetSymbolConstraint(argumentSymbol, ObjectConstraint.NotNull),
-                    state.SetOperationConstraint(invocation, whenBoolConstraint).SetSymbolConstraint(argumentSymbol, ObjectConstraint.NotNull),
-                },
+                ExplodeStates(argumentSymbol),
             _ => new[] { state }
         };
+
+        ProgramState[] ExplodeStates(ISymbol argumentSymbol) =>
+            learnNull
+                ? new[]
+                    {
+                        state.SetOperationConstraint(invocation, whenBoolConstraint).SetSymbolConstraint(argumentSymbol, ObjectConstraint.NotNull),
+                        state.SetOperationConstraint(invocation, whenBoolConstraint.Opposite).SetSymbolConstraint(argumentSymbol, ObjectConstraint.Null),
+                        state.SetOperationConstraint(invocation, whenBoolConstraint.Opposite).SetSymbolConstraint(argumentSymbol, ObjectConstraint.NotNull),
+                    }
+                : new[]
+                    {
+                        state.SetOperationConstraint(invocation, whenBoolConstraint).SetSymbolConstraint(argumentSymbol, ObjectConstraint.NotNull),
+                        state.SetOperationConstraint(invocation, whenBoolConstraint.Opposite),
+                    };
     }
 
     private ProgramState[] ProcessDebugAssert(SymbolicContext context, IInvocationOperationWrapper invocation)
