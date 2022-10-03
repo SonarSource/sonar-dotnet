@@ -7,6 +7,7 @@
     "constantCost": "1h"
   },
   "tags": [
+    "azure",
     "bad-practice"
   ],
   "defaultSeverity": "Major",

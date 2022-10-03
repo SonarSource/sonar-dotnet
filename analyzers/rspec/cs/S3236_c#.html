@@ -1,6 +1,7 @@
-<p>Caller information attributes: <code>CallerFilePathAttribute</code> and <code>CallerLineNumberAttribute</code> provide a way to get information
-about the caller of a method through optional parameters. But the arguments for these optional parameters are only generated if they are not
-explicitly defined in the call. Thus, specifying the argument values defeats the purpose of the attributes.</p>
+<p>Caller information attributes: <code>CallerFilePathAttribute</code>, <code>CallerLineNumberAttribute</code>, and
+<code>CallerArgumentExpressionAttribute</code> provide a way to get information about the caller of a method through optional parameters. But the
+arguments for these optional parameters are only generated if they are not explicitly defined in the call. Thus, specifying the argument values
+defeats the purpose of the attributes.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 void TraceMessage(string message,
