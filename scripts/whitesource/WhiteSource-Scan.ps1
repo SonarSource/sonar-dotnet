@@ -3,12 +3,12 @@ function Get-Version {
     return $versionPropsXml.Project.PropertyGroup.MilestoneVersion
 }
 
-# WhiteSource agent needs the following environment variables:
+# Mend agent needs the following environment variables:
 # - WS_APIKEY
 # - WS_PRODUCTNAME
 # - WS_PROJECTNAME
 
 $env:WS_PROJECTNAME = "$env:WS_PRODUCTNAME $(Get-Version)"
 
-Write-Host "Running the WhiteSource unified agent for $env:WS_PROJECTNAME..."
-& "$env:JAVA\bin\java.exe" -jar $env:WHITESOURCE_AGENT_PATH -c "$PSScriptRoot\wss-unified-agent.config" -scanComment "buildNumber:$env:BUILD_NUMBER;gitSha:$env:GIT_SHA"
+Write-Host "Running the Mend unified agent for $env:WS_PROJECTNAME..."
+& "$env:JAVA\bin\java.exe" -jar $env:MEND_AGENT_PATH -c "$PSScriptRoot\wss-unified-agent.config" -scanComment "buildNumber:$env:BUILD_NUMBER;gitSha:$env:GIT_SHA"
