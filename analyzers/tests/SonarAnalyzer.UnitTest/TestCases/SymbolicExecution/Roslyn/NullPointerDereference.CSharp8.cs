@@ -228,7 +228,7 @@ namespace Tests.Diagnostics.CSharp8
             }
             else
             {
-                boolString.ToString(); // Noncompliant. [NotNullWhen(true)] suggests that parsing may have failed because boolString was null
+                boolString.ToString(); // Compliant, it could be null
             }
         }
 
@@ -240,7 +240,7 @@ namespace Tests.Diagnostics.CSharp8
             }
             else
             {
-                text.ToString(); // Noncompliant.
+                text.ToString(); // Compliant
             }
         }
 

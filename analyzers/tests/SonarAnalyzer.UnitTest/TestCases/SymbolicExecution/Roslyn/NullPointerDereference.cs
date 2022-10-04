@@ -540,6 +540,20 @@ namespace Tests.Diagnostics
                 o.ToString();   // Compliant for the same reason
             }
         }
+
+        public void Type_IsAssignableFrom()
+        {
+            var other = typeof(object);
+            var type = typeof(NullPointerDereference);
+            if (other.IsAssignableFrom(type))
+            {
+                type.ToString();
+            }
+            else
+            {
+                type.ToString();    // Compliant
+            }
+        }
     }
 
     class A
