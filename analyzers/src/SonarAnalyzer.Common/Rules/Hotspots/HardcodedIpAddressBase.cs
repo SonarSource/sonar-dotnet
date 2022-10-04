@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules
         };
 
         // https://datatracker.ietf.org/doc/html/rfc3849
-        private readonly byte[] interNetwork6DocumentationRanges =
+        private readonly byte[] interNetwork6DocumentationRange =
         {
             // 2001:db8
             0x20, 0x01, 0x0d, 0xb8
@@ -124,7 +124,7 @@ namespace SonarAnalyzer.Rules
                     && interNetworkDocumentationRanges.Any(range => parts.Take(range.Length).SequenceEqual(range)) => true,
                 { AddressFamily: AddressFamily.InterNetworkV6 } when
                     address.GetAddressBytes() is { } parts
-                    && parts.Take(interNetwork6DocumentationRanges.Length).SequenceEqual(interNetwork6DocumentationRanges) => true,
+                    && parts.Take(interNetwork6DocumentationRange.Length).SequenceEqual(interNetwork6DocumentationRange) => true,
                 _ => false,
             };
 

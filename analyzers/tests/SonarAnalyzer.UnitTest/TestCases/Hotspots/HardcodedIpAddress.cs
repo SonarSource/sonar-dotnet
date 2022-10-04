@@ -33,8 +33,10 @@ namespace Tests.Diagnostics
             ip = "127.0.0.1"; // Compliant, this is an exception in the rule (see: https://github.com/SonarSource/sonar-dotnet/issues/1540)
             ip = "    127.0.0.0    "; // Compliant
             ip = @"    ""127.0.0.0""    "; // Compliant
-            ip = "2001:db8:1234:ffff:ffff:ffff:ffff:ffff"; // Compliant. Is a documentation IP.
+            ip = "2001:db8:1234:ffff:ffff:ffff:ffff:ffff";  // Compliant. Is a documentation IP.
+            ip = "2002:db8:1234:ffff:ffff:ffff:ffff:ffff";  // Noncompliant
             ip = "2001:abcd:1234:ffff:ffff:ffff:ffff:ffff"; // Noncompliant
+            ip = "2002:db8::ff00:42:8329";                  // Noncompliant
             ip = "::/0"; // Compliant, not recognized as IPv6 address
             ip = "::"; // Compliant, this is an exception in the rule
             ip = "2"; // Compliant, should not be recognized as 0.0.0.2
@@ -77,6 +79,11 @@ namespace Tests.Diagnostics
             string nonRoutableAddressV6_2 = "0:0:0:0:0:0:0:0"; //Compliant
             string nonRoutableAddressV6_3 = "0::0"; //Compliant
             string nonRoutableAddressV6_4 = "0000:0000:0000:0000:0000:0000:0000:0000"; //Compliant
+
+            // IPV6 documentation range
+            string documentationRangeV6_1 = "2001:0db8:0000:0000:0000:ff00:0042:8329";
+            string documentationRangeV6_2 = "2001:db8:0:0:0:ff00:42:8329";
+            string documentationRangeV6_3 = "2001:db8::ff00:42:8329";
 
             // IPV6 invalid form
             string invalidIPv6 = "1::2::3"; //Compliant
