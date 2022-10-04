@@ -133,7 +133,5 @@ namespace SonarAnalyzer.Rules
         private bool IsIgnoredVariableName(SyntaxNode node) =>
             GetAssignedVariableName(node) is { } variableName
             && ignoredVariableNames.Any(x => variableName.IndexOf(x, StringComparison.InvariantCultureIgnoreCase) >= 0);
-
-
     }
 }
