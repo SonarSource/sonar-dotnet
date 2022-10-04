@@ -57,8 +57,7 @@ namespace SonarAnalyzer.Rules
         // https://datatracker.ietf.org/doc/html/rfc3849
         private readonly byte[] interNetwork6DocumentationRange =
         {
-            // 2001:db8
-            0x20, 0x01, 0x0d, 0xb8
+            0x20, 0x01, 0x0d, 0xb8       // 2001:0DB8::/32
         };
 
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
