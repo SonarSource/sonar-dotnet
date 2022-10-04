@@ -49,9 +49,9 @@ namespace SonarAnalyzer.Rules
         // https://datatracker.ietf.org/doc/html/rfc5737
         private readonly byte[][] interNetworkDocumentationRanges =
         {
-            new byte[] { 192, 0, 2 },
-            new byte[] { 198, 51, 100 },
-            new byte[] { 203, 0, 113 },
+            new byte[] { 192, 0, 2 },    // TEST-NET-1 192.0.2.0/24
+            new byte[] { 198, 51, 100 }, // TEST-NET-2 198.51.100.0/24
+            new byte[] { 203, 0, 113 },  // TEST-NET-3 203.0.113.0/24
         };
 
         // https://datatracker.ietf.org/doc/html/rfc3849

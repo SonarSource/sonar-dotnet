@@ -33,7 +33,8 @@ namespace Tests.Diagnostics
             ip = "127.0.0.1"; // Compliant, this is an exception in the rule (see: https://github.com/SonarSource/sonar-dotnet/issues/1540)
             ip = "    127.0.0.0    "; // Compliant
             ip = @"    ""127.0.0.0""    "; // Compliant
-            ip = "2001:db8:1234:ffff:ffff:ffff:ffff:ffff"; // Noncompliant
+            ip = "2001:db8:1234:ffff:ffff:ffff:ffff:ffff"; // Compliant. Is a documentation IP.
+            ip = "2001:abcd:1234:ffff:ffff:ffff:ffff:ffff"; // Noncompliant
             ip = "::/0"; // Compliant, not recognized as IPv6 address
             ip = "::"; // Compliant, this is an exception in the rule
             ip = "2"; // Compliant, should not be recognized as 0.0.0.2
@@ -43,6 +44,7 @@ namespace Tests.Diagnostics
             ip = "1623:0000:0000:0000:0000:0000:0000:0001"; // Noncompliant
 
             new Version("127.0.0.0"); // Compliant
+            new Version("192.168.0.1"); // Compliant
             new AnyAssemblyClass("127.0.0.0"); // Compliant
 
             WriteAssemblyInfo("ProjectWithDependenciesWithContent",
@@ -55,8 +57,11 @@ namespace Tests.Diagnostics
             string loopbackAddress1 = "127.0.0.1"; //Compliant
             string loopbackAddress2 = "127.2.3.4"; //Compliant
             string nonRoutableAddress = "0.0.0.0"; //Compliant
+            string documentationRange1 = "192.0.2.111"; //Compliant
+            string documentationRange2 = "198.51.100.111"; //Compliant
+            string documentationRange3 = "203.0.113.111"; //Compliant
             string notAnIp1 = "0.0.0.1234"; //Compliant
-            string country_oid = "2.5.6.2"; //Compliant 
+            string country_oid = "2.5.6.2"; //Compliant
             string subschema_oid = "2.5.20.1";
             string not_considered_as_an_oid = "2.59.6.2"; // Noncompliant
 //                                            ^^^^^^^^^^

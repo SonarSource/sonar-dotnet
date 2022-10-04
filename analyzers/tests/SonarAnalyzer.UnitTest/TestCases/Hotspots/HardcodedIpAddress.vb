@@ -18,7 +18,9 @@ Namespace Tests.Diagnostics
             ip = "127.0.0.1" ' Compliant, exception from the rule
             ip = "    127.0.0.0    " ' Compliant
             ip = "    ""127.0.0.0""    " ' Compliant
-            ip = "2001:db8:1234:ffff:ffff:ffff:ffff:ffff" ' Noncompliant
+            ip = "2001:db8:1234:ffff:ffff:ffff:ffff:ffff"  ' Compliant. Is a documentation IP.
+            ip = "2001:0db8:1234:ffff:ffff:ffff:ffff:ffff"  ' Compliant. Is a documentation IP.
+            ip = "2001:abcd:1234:ffff:ffff:ffff:ffff:ffff" ' Noncompliant
             ip = "::/0"  ' Compliant, not an IPv6 address
             ip = "::" ' Compliant, exception from the rule
             ip = "2" ' Compliant
