@@ -1516,6 +1516,15 @@ namespace DoesNotReturnIf
             canBeNull.ToString();    // Compliant
         }
 
+        public void ForTrueFromUnknown(object arg)
+        {
+            FailsWhenTrue(notImportant, arg == null, notImportant);
+            if (arg == null)
+            {
+                arg.ToString();    // Compliant, unreachable
+            }
+        }
+
         public void ForTrueAny(object arg1, object arg2, bool condition)
         {
             var canBeNull1 = arg1 == null ? null : arg1.ToString();
@@ -1524,6 +1533,10 @@ namespace DoesNotReturnIf
             canBeNull1.ToString();  // Compliant
             FailsWhenTrueAny(condition, canBeNull2 == null);
             canBeNull2.ToString();  // Compliant
+            if (arg1 == null)
+            {
+                arg1.ToString();    // Compliant
+            }
         }
 
         public void ForTrueAny(object arg1, object arg2)
@@ -1593,7 +1606,7 @@ namespace DoesNotReturnIf
             isNull.ToString();  // Compliant, unreachable
         }
 
-        public void FailsWhenTrue(object before, [DoesNotReturnIf(true)] bool condition, object after) { }
+        public void FailsWhenTrue([CLSCompliant(false)] object before, [DoesNotReturnIf(true), CLSCompliant(false)] bool condition, object after) { }
         public void FailsWhenFalse(object before, [DoesNotReturnIf(false)] bool condition, object after) { }
         public void FailsWhenTrueAny([DoesNotReturnIf(true)] bool condition1, [DoesNotReturnIf(true)] bool condition2) { }
         public void FailsWhenFalseAny([DoesNotReturnIf(false)] bool condition1, [DoesNotReturnIf(false)] bool condition2) { }

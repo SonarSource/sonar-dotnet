@@ -44,7 +44,7 @@ using System.Diagnostics;
 
 public class Sample
 {{
-    public void Test()
+    public void Main()
     {{
         Tag(""Before"");
         ThrowHelper();
@@ -96,7 +96,7 @@ using System.Diagnostics;
 
 public class Sample
 {{
-    public void Test()
+    public void Main()
     {{
         Tag(""Before"");
         ThrowHelper();
@@ -196,7 +196,7 @@ Tag(""End"", null);";
             const string code = @"
 private object ObjectField;
 
-public void Test()
+public void Main()
 {
     this.ObjectField = null;
     string byteString = Unknown<string>();
@@ -228,6 +228,71 @@ public bool TryParse([System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)
                     x[validator.Symbol("success")].HasConstraint(BoolConstraint.True).Should().BeTrue();
                     x[validator.Symbol("result")].Should().BeNull();
                 });
+        }
+
+        [TestMethod]
+        public void Invocation_NotNullWhen_TwoParametersWithAttribute_Unknown()
+        {
+            const string code = @"
+public void Main()
+{
+    var first = Unknown<object>();
+    var second = Unknown<object>();
+    if(CustomValidator(first, second))
+    {
+        Tag(""First"", first);
+        Tag(""Second"", second);
+    }
+}
+
+public bool CustomValidator([System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object first, [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object second) => true;";
+            var validator = SETestContext.CreateCSMethod(code).Validator;
+            validator.ValidateTag("First", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("Second", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void Invocation_NotNullWhen_TwoParametersWithAttribute_ContradictingValues()
+        {
+            const string code = @"
+public void Main()
+{
+    var first = Unknown<object>();
+    object second = null;
+    if(CustomValidator(first, second))
+    {
+        Tag(""First"", first);
+        Tag(""Second"", second);
+    }
+}
+
+public bool CustomValidator([System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object first, [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object second) => true;";
+            var validator = SETestContext.CreateCSMethod(code).Validator;
+            validator.ValidateTag("First", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());   // This path should be unreachable instead
+            validator.ValidateTag("Second", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void Invocation_NotNullWhen_TwoParametersWithAttribute_UntrackedSymbol()
+        {
+            const string code = @"
+private object field;
+
+public void Main(Sample untracked)
+{
+    var first = Unknown<object>();
+    untracked.field = null;
+    if(CustomValidator(first, untracked.field))
+    {
+        Tag(""First"", first);
+        Tag(""Second"", untracked.field);
+    }
+}
+
+public bool CustomValidator([System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object first, [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object second) => true;";
+            var validator = SETestContext.CreateCSMethod(code).Validator;
+            validator.ValidateTag("First", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("Second", x => x.Should().BeNull());  // We didn't learn anything. And we continued
         }
 
         [DataTestMethod]
