@@ -218,7 +218,7 @@ Tag(""AfterStaticField"", StaticObjectField);
         [DataTestMethod]
         [DataRow("StaticMethod();")]
         [DataRow("Sample.StaticMethod();")]
-        public void Invocation_StaticMethodCallDoesNotClearFieldForOtherAccess(string invocation)
+        public void Invocation_StaticMethodCall_DoesNotClearInstanceFields(string invocation)
         {
             var code = $@"
 ObjectField = null;
@@ -363,7 +363,7 @@ Tag(""After"", this.ObjectField);
         }
 
         [TestMethod]
-        public void Invocation_StaticMethodCallClearsField()
+        public void Invocation_StaticMethodCall_ClearsField()
         {
             var code = @"
 public class Sample: Base
@@ -424,8 +424,7 @@ public class Other
 {
     public static object _B;
     public static void OtherMethod() { }
-}
-";
+}";
             var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
             validator.ValidateTag("Start_Base_A", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
             validator.ValidateTag("Start_Other_B", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
