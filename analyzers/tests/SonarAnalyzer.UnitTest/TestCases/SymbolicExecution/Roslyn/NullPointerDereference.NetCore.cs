@@ -15,6 +15,28 @@ class NullPointerDereference
     }
 }
 
+public interface IWithDefaultMembers
+{
+    string NoncompliantDefaultInterfaceMethod(string obj) =>
+        obj != null ? null : obj.ToLower(); // Noncompliant
+
+    string CompliantDefaultInterfaceMethod(string obj) =>
+        obj == null ? null : obj.ToLower();
+}
+
+public class ThrowHelper
+{
+    public void DoesNotReturnIsRespectedOutsideNullableContext()
+    {
+        object o = null;
+        DoesNotReturn();
+        o.ToString(); // Compliant. Unreachable
+    }
+
+    [System.Diagnostics.CodeAnalysis.DoesNotReturn]
+    public void DoesNotReturn() { }
+}
+
 public class NotNullWhenTests
 {
     public void TryParseNull()

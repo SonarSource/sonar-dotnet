@@ -111,7 +111,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void NullPointerDereference_Roslyn_CS_NetCore() =>
-            roslynCS.AddPaths("NullPointerDereference.NetCore.cs").Verify();
+            roslynCS.AddPaths("NullPointerDereference.NetCore.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #else
 
