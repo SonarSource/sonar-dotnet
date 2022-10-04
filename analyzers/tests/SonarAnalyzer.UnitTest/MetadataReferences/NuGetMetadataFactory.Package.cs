@@ -84,7 +84,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
 
             private static async Task<FindPackageByIdResource> GetNuGetRepository()
             {
-                var nugetOrgUrl = Settings.LoadSpecificSettings(NugetConfigFolderRelativePath, "nuget.config")
+                var nugetOrgUrl = Settings.LoadSpecificSettings(NugetConfigFolderPath, "nuget.config")
                                           .GetSection("packageSources").Items.OfType<AddItem>()
                                           .Single(x => x.Key == "nuget.org").Value;
                 var repository = Repository.Factory.GetCoreV3(nugetOrgUrl);
