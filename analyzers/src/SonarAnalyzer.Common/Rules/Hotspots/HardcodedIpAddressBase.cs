@@ -46,6 +46,22 @@ namespace SonarAnalyzer.Rules
             "ASSEMBLY",
         };
 
+        // https://datatracker.ietf.org/doc/html/rfc5737
+        private readonly byte[][] interNetworkDocumentationRanges =
+        {
+            new byte[] { 192, 0, 2 },
+            new byte[] { 198, 51, 100 },
+            new byte[] { 203, 0, 113 },
+        };
+
+        // https://datatracker.ietf.org/doc/html/rfc5737
+        private readonly byte[] interNetwork6DocumentationRanges =
+        {
+        // 2001:db8
+            32, 1, 13, 184
+        //  20 01  0d   b8
+        };
+
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
         protected abstract string GetAssignedVariableName(SyntaxNode stringLiteral);
@@ -71,6 +87,7 @@ namespace SonarAnalyzer.Rules
             && IsRoutableNonLoopbackIPAddress(literalValue, out var address)
             && (address.AddressFamily != AddressFamily.InterNetwork
                 || literalValue.Count(x => x == '.') == IPv4AddressParts - 1)
+            && !IsInDocumentationBlock(address)
             && !IsIgnoredVariableName(node)
             && !HasAttributes(node);
 
@@ -100,11 +117,25 @@ namespace SonarAnalyzer.Rules
             && !IPAddress.IsLoopback(ipAddress)
             && !ipAddress.GetAddressBytes().All(x => x == 0); // Nonroutable 0.0.0.0 or 0::0
 
+        private bool IsInDocumentationBlock(IPAddress address) =>
+            address switch
+            {
+                { AddressFamily: AddressFamily.InterNetwork } when
+                    address.GetAddressBytes() is { } parts
+                    && interNetworkDocumentationRanges.Any(range => parts.Take(range.Length).SequenceEqual(range)) => true,
+                { AddressFamily: AddressFamily.InterNetworkV6 } when
+                    address.GetAddressBytes() is { } parts
+                    && parts.Take(interNetwork6DocumentationRanges.Length).SequenceEqual(interNetwork6DocumentationRanges) => true,
+                _ => false,
+            };
+
         private static bool IsObjectIdentifier(string literalValue) =>
             literalValue.StartsWith(OIDPrefix);   // Looks like OID
 
         private bool IsIgnoredVariableName(SyntaxNode node) =>
             GetAssignedVariableName(node) is { } variableName
             && ignoredVariableNames.Any(x => variableName.IndexOf(x, StringComparison.InvariantCultureIgnoreCase) >= 0);
+
+
     }
 }
