@@ -1,4 +1,5 @@
-﻿Imports System.Text.RegularExpressions
+﻿Imports System.ComponentModel.DataAnnotations
+Imports System.Text.RegularExpressions
 
 Class Compliant
 
@@ -29,6 +30,13 @@ Class Compliant
         Dim replace = Regex.Replace("some input", "some pattern", "some replacement", RegexOptions.None, TimeSpan.FromSeconds(1)) ' Complaint
         Dim split = Regex.Split("some input", "some pattern", RegexOptions.None, TimeSpan.FromSeconds(1)) ' Compliant
     End Sub
+
+    <RegularExpression("[0-9]+")> ' Compliant, Default timeout is 2000 ms.
+    Public Property AttributeWithoutTimeout As String
+
+    <RegularExpression("[0-9]+", MatchTimeoutInMilliseconds:=200)> ' Compliant
+    Public Property AttributeWithTimeout As String
+
 End Class
 
 Class Noncompliant

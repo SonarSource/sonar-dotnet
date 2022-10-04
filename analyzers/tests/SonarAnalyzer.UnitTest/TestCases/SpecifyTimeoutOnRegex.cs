@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 
 class Compliant
@@ -44,6 +45,12 @@ class Compliant
     {
         var match = NoSystem.Regex.IsMatch("some input", "some pattern"); // Compliant
     }
+
+    [RegularExpression("[0-9]+")] // Compliant, Default timeout is 2000 ms.
+    public string AttributeWithoutTimeout { get; set; }
+
+    [RegularExpression("[0-9]+", MatchTimeoutInMilliseconds = 200)] // Compliant
+    public string AttributeWithTimeout { get; set; }
 }
 
 class Noncompliant
