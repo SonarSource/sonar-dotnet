@@ -10,7 +10,7 @@ class NullPointerDereference
         }
         else
         {
-            type.ToString();    // Noncompliant, could be unassignable because it was null
+            type.ToString();    // FN? It could have been null in theory
         }
     }
 }
@@ -73,7 +73,7 @@ public class NotNullWhenTests
         }
         else
         {
-            boolString.ToString(); // Noncompliant. [NotNullWhen(true)] suggests that parsing may have failed because boolString was null
+            boolString.ToString(); // FN? [NotNullWhen(true)] suggests that parsing may have failed because boolString was null
         }
     }
 
@@ -85,7 +85,7 @@ public class NotNullWhenTests
         }
         else
         {
-            text.ToString(); // Noncompliant.
+            text.ToString(); // FN? [NotNullWhen(true)] suggests that parsing may have failed because text was null
         }
     }
 
