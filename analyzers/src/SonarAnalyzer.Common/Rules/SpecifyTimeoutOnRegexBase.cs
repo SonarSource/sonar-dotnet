@@ -28,7 +28,7 @@ namespace SonarAnalyzer.Rules;
 public abstract class SpecifyTimeoutOnRegexBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
 {
-    private const string DiagnosticId = "S4581"; // TODO
+    private const string DiagnosticId = "S6444";
 
     // NonBacktracking was added in .NET 7
     // See: https://docs.microsoft.com/en-us/dotnet/api/system.text.regularexpressions.regexoptions?view=net-7.0
