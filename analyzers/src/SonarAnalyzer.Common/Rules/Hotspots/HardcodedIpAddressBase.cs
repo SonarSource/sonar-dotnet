@@ -54,12 +54,11 @@ namespace SonarAnalyzer.Rules
             new byte[] { 203, 0, 113 },
         };
 
-        // https://datatracker.ietf.org/doc/html/rfc5737
+        // https://datatracker.ietf.org/doc/html/rfc3849
         private readonly byte[] interNetwork6DocumentationRanges =
         {
-        // 2001:db8
-            32, 1, 13, 184
-        //  20 01  0d   b8
+            // 2001:db8
+            0x20, 0x01, 0x0d, 0xb8
         };
 
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
