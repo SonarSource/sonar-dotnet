@@ -551,7 +551,20 @@ namespace Tests.Diagnostics
             }
             else
             {
-                type.ToString();    // Compliant, unreachable for .NET, no annotation under .NET Fx
+                type.ToString();    // Compliant, type was not null
+            }
+        }
+
+        public void Type_IsAssignableFrom(Type type)
+        {
+            var other = typeof(object);
+            if (other.IsAssignableFrom(type))
+            {
+                type.ToString();
+            }
+            else
+            {
+                type.ToString();    // Compliant, unreachable for .NET due to NotNullWhen(true), no annotation under .NET Fx
             }
         }
 
