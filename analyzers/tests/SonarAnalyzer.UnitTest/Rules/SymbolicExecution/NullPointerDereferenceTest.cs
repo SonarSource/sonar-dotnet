@@ -83,15 +83,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void NullPointerDereference_Sonar_CSharp8() =>
             sonar.AddPaths("NullPointerDereference.CSharp8.cs").AddReferences(MetadataReferenceFacade.NETStandard21).WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
-#if NET
-
         [TestMethod]
         public void NullPointerDereference_Roslyn_CSharp8() =>
-            roslynCS.AddPaths("NullPointerDereference.CSharp8.cs")
-            .AddReferences(MetadataReferenceFacade.NETStandard21)
-            .WithOptions(ParseOptionsHelper.FromCSharp8)
-            .WithConcurrentAnalysis(false)
-            .Verify();
+            roslynCS.AddPaths("NullPointerDereference.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+
+#if NET
 
         [TestMethod]
         public void NullPointerDereference_Roslyn_CSharp8_Nullable() =>

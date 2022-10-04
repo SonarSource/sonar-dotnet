@@ -554,6 +554,13 @@ namespace Tests.Diagnostics
                 type.ToString();    // Compliant, unreachable for .NET, no annotation under .NET Fx
             }
         }
+
+        public void TypeOf()
+        {
+            Type type = null;
+            type = typeof(object);
+            type.ToString(); // Compliant
+        }
     }
 
     class A
