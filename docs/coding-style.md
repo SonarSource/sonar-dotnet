@@ -115,13 +115,13 @@ Variable name `sut` (System Under Test) is recommended in unit tests that really
   * when it helps to understand overall structure of the method,
   * especially when each branch ends with a `return` statement.
 * Explicit `else` is not used after input validation.
-* Each compiler directive outside method body (namely `#if`/`#endif`) should be preceded and followed by an empty line.
 * For multiple conditions before the core method logic:
   * chain conditions in the same `if` statement together with positive logic for best readability (i.e. `if (first && second) { DoSomething(); }`) 
   * when chained conditions cannot be used, use early returns
   * otherwise, use nested conditions
 * Use positive logic.
 * Use `is {}` and `is not null` as null-checks (instead of `!= null`).
+* Each compiler directive outside method body (namely `#if`/`#endif`) should be preceded and followed by an empty line.
 
 ## Comments
 
