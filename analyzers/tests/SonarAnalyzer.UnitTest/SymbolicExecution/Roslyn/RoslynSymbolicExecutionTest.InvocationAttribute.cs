@@ -70,7 +70,7 @@ namespace OtherNamespace
     public sealed class DoesNotReturnAttribute : Attribute {{ }}
 }}";
 #if NETFRAMEWORK
-        code += @"
+            code += @"
 namespace System.Diagnostics.CodeAnalysis
 {
     public sealed class DoesNotReturnAttribute : Attribute { }

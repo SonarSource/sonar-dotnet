@@ -1547,6 +1547,11 @@ namespace DoesNotReturnIf
             FailsWhenTrueAny(canBeNull1 == null, canBeNull2 == null);
             canBeNull1.ToString();  // Compliant
             canBeNull2.ToString();  // Compliant
+            if (arg1 == null || arg2 == null)
+            {
+                arg1.ToString();    // Compliant, unreachable
+                arg2.ToString();
+            }
         }
 
         public void ForFalse(object arg)
@@ -1564,6 +1569,11 @@ namespace DoesNotReturnIf
             canBeNull1.ToString();  // Compliant
             FailsWhenFalseAny(condition, canBeNull2 != null);
             canBeNull2.ToString();  // Compliant
+            if (arg1 == null || arg2 == null)
+            {
+                arg1.ToString();    // Compliant, unreachable
+                arg2.ToString();
+            }
         }
 
         public void ForFalseAny(object arg1, object arg2)
@@ -1573,6 +1583,11 @@ namespace DoesNotReturnIf
             FailsWhenFalseAny(canBeNull1 != null, canBeNull2 != null);
             canBeNull1.ToString();  // Compliant
             canBeNull2.ToString();  // Compliant
+            if (arg1 == null || arg2 == null)
+            {
+                arg1.ToString();    // Compliant, unreachable
+                arg2.ToString();
+            }
         }
 
         public void BoolSymbols_TrueTrue()
