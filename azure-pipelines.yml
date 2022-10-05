@@ -330,7 +330,7 @@ stages:
         condition: eq(variables.isReleaseBranch, 'True')
         env:
           WS_PRODUCTNAME: '$(MEND_PRODUCTNAME)'
-          WS_APIKEY: '$(WHITESOURCE_APIKEY)'  # FIXME: Rename before merging. Asked REs to duplicate the secret.
+          WS_APIKEY: '$(MEND_APIKEY)'
           BUILD_NUMBER: '$(Build.BuildId)'
           GIT_SHA: '$(Build.SourceVersion)'
 
