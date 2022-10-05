@@ -61,6 +61,8 @@ namespace Tests.Diagnostics
             string loopbackAddress3 = "::ffff:127.0.0.1"; //Compliant https://www.rfc-editor.org/rfc/rfc4291.html#section-2.5.5.2
             string loopbackAddress4 = "::ffff:127.2.3.4";
             string loopbackAddress5 = "::1";              //Compliant https://www.rfc-editor.org/rfc/rfc4291.html#section-2.5.3
+            string loopbackAddress6 = "64:ff9b::127.2.3.4"; // Noncompliant Translated IP4 not supported https://www.rfc-editor.org/rfc/rfc6052.html
+            string loopbackAddress7 = "::ffff:0:127.2.3.4"; // Noncompliant Translated IP4 not supported https://www.rfc-editor.org/rfc/rfc2765.html
             string nonRoutableAddress = "0.0.0.0";
             string documentationRange1 = "192.0.2.111";
             string documentationRange2 = "198.51.100.111";
