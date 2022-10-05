@@ -116,16 +116,19 @@ namespace SonarAnalyzer.Rules
             && !ipAddress.GetAddressBytes().All(x => x == 0); // Nonroutable 0.0.0.0 or 0::0
 
         private bool IsInDocumentationBlock(IPAddress address) =>
-            address switch
+            address.AddressFamily switch
             {
-                { AddressFamily: AddressFamily.InterNetwork } when
-                    address.GetAddressBytes() is { } parts
-                    && interNetworkDocumentationRanges.Any(range => parts.Take(range.Length).SequenceEqual(range)) => true,
-                { AddressFamily: AddressFamily.InterNetworkV6 } when
-                    address.GetAddressBytes() is { } parts
-                    && parts.Take(interNetwork6DocumentationRange.Length).SequenceEqual(interNetwork6DocumentationRange) => true,
+                AddressFamily.InterNetwork =>
+                    address.GetAddressBytes() is var ip
+                    && interNetworkDocumentationRanges.Any(range => SequenceStartsWith(ip, range)),
+                AddressFamily.InterNetworkV6 =>
+                    address.GetAddressBytes() is var ip
+                    && SequenceStartsWith(ip, interNetwork6DocumentationRange),
                 _ => false,
             };
+
+        private static bool SequenceStartsWith(byte[] sequence, byte[] startsWith) =>
+            sequence.Take(startsWith.Length).SequenceEqual(startsWith);
 
         private static bool IsObjectIdentifier(string literalValue) =>
             literalValue.StartsWith(OIDPrefix);   // Looks like OID
