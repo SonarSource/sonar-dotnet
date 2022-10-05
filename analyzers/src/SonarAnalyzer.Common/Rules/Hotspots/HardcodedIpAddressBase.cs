@@ -110,6 +110,7 @@ namespace SonarAnalyzer.Rules
         private static bool IsRoutableNonLoopbackIPAddress(string literalValue, out IPAddress ipAddress) =>
             IPAddress.TryParse(literalValue, out ipAddress)
             && !IPAddress.IsLoopback(ipAddress)
+            && !(ipAddress.IsIPv4MappedToIPv6 && IPAddress.IsLoopback(ipAddress.MapToIPv4()))
             && !ipAddress.GetAddressBytes().All(x => x == 0); // Nonroutable 0.0.0.0 or 0::0
 
         private bool IsInDocumentationBlock(IPAddress address)
