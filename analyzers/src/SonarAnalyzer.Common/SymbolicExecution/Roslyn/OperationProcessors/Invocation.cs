@@ -66,7 +66,7 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
 
     private static ProgramState[] ProcessArgumentAttributes(ProgramState state, IInvocationOperationWrapper invocation)
     {
-        IReadOnlyCollection<ProgramState> states = new[] { state };
+        var states = new[] { state };
         foreach (var argument in invocation.Arguments.Select(x => x.ToArgument()).Where(x => x.Parameter is not null))
         {
             foreach (var attribute in argument.Parameter.GetAttributes())
@@ -74,31 +74,26 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
                 states = ProcessArgumentAttribute(states, invocation, argument, attribute);
             }
         }
-        return states.ToArray();
+        return states;
     }
 
-    private static IReadOnlyCollection<ProgramState> ProcessArgumentAttribute(IEnumerable<ProgramState> states,
-                                                                              IInvocationOperationWrapper invocation,
-                                                                              IArgumentOperationWrapper argument,
-                                                                              AttributeData attribute)
+    private static ProgramState[] ProcessArgumentAttribute(ProgramState[] states, IInvocationOperationWrapper invocation, IArgumentOperationWrapper argument, AttributeData attribute)
     {
-        var ret = new List<ProgramState>();
-        foreach (var state in states)
+        if (AttributeValue("NotNullWhenAttribute", "returnValue") is { } notNullWhenValue)
         {
-            if (attribute.HasName("NotNullWhenAttribute") && attribute.TryGetAttributeValue<bool>("returnValue", out var returnValue))
-            {
-                ret.AddRange(ProcessIsNotNullWhen(state, invocation.WrappedOperation, argument, returnValue, false));
-            }
-            else if (attribute.HasName("DoesNotReturnIfAttribute") && attribute.TryGetAttributeValue<bool>("parameterValue", out var parameterValue))
-            {
-                ret.AddRange(ProcessDoesNotReturnIf(state, argument, parameterValue));
-            }
-            else
-            {
-                ret.Add(state);
-            }
+            return states.SelectMany(x => ProcessIsNotNullWhen(x, invocation.WrappedOperation, argument, notNullWhenValue, false)).ToArray();
         }
-        return ret;
+        else if (AttributeValue("DoesNotReturnIfAttribute", "parameterValue") is { } doesNotReturnIfValue)
+        {
+            return states.SelectMany(x => ProcessDoesNotReturnIf(x, argument, doesNotReturnIfValue)).ToArray();
+        }
+        else
+        {
+            return states;
+        }
+
+        bool? AttributeValue(string attributeName, string valueName) =>
+            attribute.HasName(attributeName) && attribute.TryGetAttributeValue<bool>(valueName, out var value) ? value : null;
     }
 
     private static ProgramState[] ProcessIsNotNullWhen(ProgramState state, IOperation invocation, IArgumentOperationWrapper argument, bool when, bool learnNull)
@@ -108,6 +103,7 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
             ? DefineConstraintsFromKnownResult()
             : DefineAllConstraints();
 
+        // There's a lot of room for improvement here to properly support cases with more than one attribute like TimeOnly.TryParseExact
         ProgramState[] DefineConstraintsFromKnownResult() =>
             existingBoolConstraint.Equals(when) && argument.WrappedOperation.TrackedSymbol() is { } argumentSymbol
                 ? new[] { state.SetSymbolConstraint(argumentSymbol, ObjectConstraint.NotNull) }

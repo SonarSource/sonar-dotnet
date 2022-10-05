@@ -333,8 +333,7 @@ public void CustomValidator(object irrelevant, [System.Diagnostics.CodeAnalysis.
 public void Main()
 {{
     Tag(""Begin"");
-    var value = {value};
-    CustomValidator(""Irrelevant"", value);
+    CustomValidator(""Irrelevant"", {value});
     Tag(""End"");
 }}
 
@@ -356,8 +355,7 @@ public void CustomValidator(object irrelevant, [System.Diagnostics.CodeAnalysis.
 public void Main()
 {{
     Tag(""Begin"");
-    var value = {value};
-    CustomValidator(""Irrelevant"", value);
+    CustomValidator(""Irrelevant"", {value});
     Tag(""Unreachable"");
 }}
 

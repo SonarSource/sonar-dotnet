@@ -1533,9 +1533,10 @@ namespace DoesNotReturnIf
             canBeNull1.ToString();  // Compliant
             FailsWhenTrueAny(condition, canBeNull2 == null);
             canBeNull2.ToString();  // Compliant
-            if (arg1 == null)
+            if (arg1 == null || arg2 == null)
             {
-                arg1.ToString();    // Compliant
+                arg1.ToString();    // Compliant, unreachable
+                arg2.ToString();
             }
         }
 
