@@ -150,10 +150,11 @@ End Module";
         [DataRow("Extensions.SomeExtensionOnObject((IDisposable)this);")]
         [DataRow("Extensions.SomeExtensionOnObject((object)(IDisposable)this);")]
         [DataRow("((object)(IDisposable)this).SomeExtensionOnObject();")]
-        public void Invocation_InstanceMethodCallDoesClearFieldOnThis(string invocation)
+        public void Invocation_InstanceMethodCall_DoesClearFieldOnThis(string invocation)
         {
             var code = $@"
 using System;
+using static Extensions;
 public class Sample: IDisposable
 {{
     object field;
@@ -172,13 +173,13 @@ public class Sample: IDisposable
 
     private void Initialize() {{ }}
     void IDisposable.Dispose() {{ }}
-    private static void Tag(string name, object arg) {{ }}
 }}
 
 public static class Extensions
 {{
     public static void SomeExtensionOnSample(this Sample sample) {{ }}
     public static void SomeExtensionOnObject(this object obj) {{ }}
+    public static void Tag(string name, object arg) {{ }}
 }}";
             var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
             validator.ValidateContainsOperation(OperationKind.Invocation);
@@ -190,14 +191,12 @@ public static class Extensions
 
         [DataTestMethod]
         [DataRow("this?.InstanceMethod();")]
-        [DataRow("StaticMethod();")]
-        [DataRow("Sample.StaticMethod();")]
         [DataRow("var dummy = Property;")]
         [DataRow("var dummy = this.Property;")]
         [DataRow("SampleProperty.InstanceMethod();")]
         [DataRow("this.SampleProperty.InstanceMethod();")]
         [DataRow("this.SampleProperty?.InstanceMethod();")]
-        public void Invocation_InstanceMethodCallDoesNotClearFieldForOtherAccess(string invocation)
+        public void Invocation_InstanceMethodCall_DoesNotClearFieldForOtherAccess(string invocation)
         {
             var code = $@"
 ObjectField = null;
@@ -220,7 +219,7 @@ Tag(""AfterStaticField"", StaticObjectField);
         [DataRow("otherInstance.InstanceMethod();")]
         [DataRow("(otherInstance).InstanceMethod();")]
         [DataRow("(true ? this : otherInstance).InstanceMethod();")]
-        public void Instance_InstanceMethodCallDoesNotClearFieldsOnOtherInstances(string invocation)
+        public void Instance_InstanceMethodCall_DoesNotClearFieldsOnOtherInstances(string invocation)
         {
             var code = $@"
 ObjectField = null;
@@ -237,7 +236,7 @@ Tag(""StaticField"", StaticObjectField);
         }
 
         [TestMethod]
-        public void Instance_InstanceMethodCallClearsFieldInConsistentManner()
+        public void Instance_InstanceMethodCall_ClearsFieldInConsistentManner()
         {
             var code = $@"
 ObjectField = null;
@@ -325,7 +324,7 @@ Tag(""AfterIfElse"", ObjectField);
         }
 
         [TestMethod]
-        public void Instance_InstanceMethodCallClearsField()
+        public void Instance_InstanceMethodCall_ClearsField()
         {
             var code = $@"
 if (this.ObjectField == null)
@@ -339,6 +338,116 @@ Tag(""After"", this.ObjectField);
                 new SymbolicValue().WithConstraint(ObjectConstraint.Null), // Unexpected. this.InstanceMethod happens after the ternary and should clear any constraints on this.ObjectField
                 new SymbolicValue().WithConstraint(ObjectConstraint.Null),
                 new SymbolicValue().WithConstraint(ObjectConstraint.NotNull));
+        }
+
+        [TestMethod]
+        public void Invocation_StaticMethodCall_ClearsField()
+        {
+            var code = @"
+public class Sample: Base
+{
+    public static object SampleField1;
+    public static object SampleField2;
+
+    public static void SampleMethod()
+    {
+        Base.BaseField = null;
+        Other.OtherField = null;
+        Sample.SampleField1 = null;
+        Sample.SampleField2 = null;
+        Tagger.Tag(""Start_Base_BaseField"", BaseField);
+        Tagger.Tag(""Start_Other_OtherField"", Other.OtherField);
+        Tagger.Tag(""Start_Sample_SampleField1"", SampleField1);
+        Tagger.Tag(""Start_Sample_SampleField2"", SampleField2);
+
+        SampleMethod();
+        Tagger.Tag(""SampleMethod_Base_BaseField"", BaseField);
+        Tagger.Tag(""SampleMethod_Other_OtherField"", Other.OtherField);
+        Tagger.Tag(""SampleMethod_Sample_SampleField1"", SampleField1);
+        Tagger.Tag(""SampleMethod_Sample_SampleField2"", SampleField2);
+
+        Base.BaseField = null;
+        Other.OtherField = null;
+        Sample.SampleField1 = null;
+        Sample.SampleField2 = null;
+        Other.OtherMethod();
+        Tagger.Tag(""OtherMethod_Base_BaseField"", BaseField);
+        Tagger.Tag(""OtherMethod_Other_OtherField"", Other.OtherField);
+        Tagger.Tag(""OtherMethod_Sample_SampleField1"", SampleField1);
+        Tagger.Tag(""OtherMethod_Sample_SampleField2"", SampleField2);
+
+        Base.BaseField = null;
+        Other.OtherField = null;
+        Sample.SampleField1 = null;
+        Sample.SampleField2 = null;
+        BaseMethod();
+        Tagger.Tag(""BaseMethod_Base_BaseField"", BaseField);
+        Tagger.Tag(""BaseMethod_Other_OtherField"", Other.OtherField);
+        Tagger.Tag(""BaseMethod_Sample_SampleField1"", SampleField1);
+        Tagger.Tag(""BaseMethod_Sample_SampleField2"", SampleField2);
+    }
+}
+
+public static class Tagger
+{
+    public static void Tag<T>(string name, T value) { }
+}
+
+public class Base
+{
+    protected static object BaseField;
+    public static void BaseMethod() { }
+}
+public class Other
+{
+    public static object OtherField;
+    public static void OtherMethod() { }
+}";
+            var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
+            validator.ValidateTag("Start_Base_BaseField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("Start_Other_OtherField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("Start_Sample_SampleField1", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("Start_Sample_SampleField2", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+
+            // SampleMethod() resets own field and base class fields, but not other class fields
+            validator.ValidateTag("SampleMethod_Base_BaseField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeFalse());
+            validator.ValidateTag("SampleMethod_Other_OtherField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("SampleMethod_Sample_SampleField1", x => x.HasConstraint(ObjectConstraint.Null).Should().BeFalse());
+            validator.ValidateTag("SampleMethod_Sample_SampleField2", x => x.HasConstraint(ObjectConstraint.Null).Should().BeFalse());
+
+            // OtherMethod() resets only its own constraints
+            validator.ValidateTag("OtherMethod_Base_BaseField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("OtherMethod_Other_OtherField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeFalse());
+            validator.ValidateTag("OtherMethod_Sample_SampleField1", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("OtherMethod_Sample_SampleField2", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+
+            // BaseMethod() called from Sample only resets Base field
+            validator.ValidateTag("BaseMethod_Base_BaseField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeFalse());
+            validator.ValidateTag("BaseMethod_Other_OtherField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("BaseMethod_Sample_SampleField1", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("BaseMethod_Sample_SampleField2", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+        }
+
+        [DataTestMethod]
+        [DataRow("StaticMethod();")]
+        [DataRow("Sample.StaticMethod();")]
+        public void Invocation_StaticMethodCall_DoesNotClearInstanceFields(string invocation)
+        {
+            var code = $@"
+ObjectField = null;
+StaticObjectField = null;
+Tag(""BeforeField"", ObjectField);
+Tag(""BeforeStaticField"", StaticObjectField);
+{invocation}
+Tag(""AfterField"", ObjectField);
+Tag(""AfterStaticField"", StaticObjectField);
+";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateContainsOperation(OperationKind.Invocation);
+            validator.ValidateTag("BeforeField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("BeforeStaticField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("AfterField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("AfterStaticField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeFalse());
         }
 
         [TestMethod]

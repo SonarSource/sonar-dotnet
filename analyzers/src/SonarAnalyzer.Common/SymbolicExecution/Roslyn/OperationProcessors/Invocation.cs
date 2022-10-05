@@ -51,6 +51,10 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
         {
             state = state.ResetFieldConstraints();
         }
+        if (invocation.TargetMethod.IsStatic)
+        {
+            state = state.ResetStaticFieldConstraints(invocation.TargetMethod.ContainingType);
+        }
         return invocation switch
         {
             _ when invocation.TargetMethod.Is(KnownType.Microsoft_VisualBasic_Information, "IsNothing") => ProcessInformationIsNothing(context, invocation),

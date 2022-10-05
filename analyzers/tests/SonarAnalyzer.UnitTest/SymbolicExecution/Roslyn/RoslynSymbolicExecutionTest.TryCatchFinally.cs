@@ -501,9 +501,8 @@ Tag(""End"");";
                 "AfterInnerTry",
                 "InOuterCatch",
                 "InMiddleFinally",
-                "End",
-                "AfterMiddleTry");
-
+                "AfterMiddleTry",
+                "End");
             ValidateHasOnlyNoExceptionAndUnknownException(validator, "InInnerFinally");
             validator.TagStates("AfterInnerTry").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
             ValidateHasOnlyNoExceptionAndUnknownException(validator, "InMiddleFinally");
@@ -686,10 +685,10 @@ tag = ""End"";";
             validator.ValidateTagOrder(
                 "BeforeOuterTry",
                 "BeforeInnerTry",
-                "InInnerTry",
                 "InOuterCatch",
-                "AfterInnerTry",
+                "InInnerTry",
                 "End",
+                "AfterInnerTry",
                 "InInnerCatch");
             validator.TagStates("InInnerCatch").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
             validator.TagStates("AfterInnerTry").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
