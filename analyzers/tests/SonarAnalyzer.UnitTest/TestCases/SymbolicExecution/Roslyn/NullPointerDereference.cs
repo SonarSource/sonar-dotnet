@@ -551,8 +551,28 @@ namespace Tests.Diagnostics
             }
             else
             {
-                type.ToString();    // Compliant
+                type.ToString();    // Compliant, type was not null
             }
+        }
+
+        public void Type_IsAssignableFrom(Type type)
+        {
+            var other = typeof(object);
+            if (other.IsAssignableFrom(type))
+            {
+                type.ToString();
+            }
+            else
+            {
+                type.ToString();    // Compliant, .NET Fx doesn't have NotNullWhen(true) annotation, we don't learn Null from the .NET version
+            }
+        }
+
+        public void TypeOf()
+        {
+            Type type = null;
+            type = typeof(object);
+            type.ToString(); // Compliant
         }
     }
 

@@ -83,15 +83,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void NullPointerDereference_Sonar_CSharp8() =>
             sonar.AddPaths("NullPointerDereference.CSharp8.cs").AddReferences(MetadataReferenceFacade.NETStandard21).WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
-#if NET
-
         [TestMethod]
         public void NullPointerDereference_Roslyn_CSharp8() =>
-            roslynCS.AddPaths("NullPointerDereference.CSharp8.cs")
-            .AddReferences(MetadataReferenceFacade.NETStandard21)
-            .WithOptions(ParseOptionsHelper.FromCSharp8)
-            .WithConcurrentAnalysis(false)
-            .Verify();
+            roslynCS.AddPaths("NullPointerDereference.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+
+#if NET
 
         [TestMethod]
         public void NullPointerDereference_Roslyn_CSharp8_Nullable() =>
@@ -112,6 +108,16 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void NullPointerDereference_Roslyn_CSharp10() =>
             roslynCS.AddPaths("NullPointerDereference.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+
+        [TestMethod]
+        public void NullPointerDereference_Roslyn_CS_NetCore() =>
+            roslynCS.AddPaths("NullPointerDereference.NetCore.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+
+#else
+
+        [TestMethod]
+        public void NullPointerDereference_Roslyn_CS_NetFx() =>
+            roslynCS.AddPaths("NullPointerDereference.NetFx.cs").Verify();
 
 #endif
     }

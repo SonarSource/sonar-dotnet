@@ -148,15 +148,6 @@ namespace Tests.Diagnostics.CSharp8
         }
     }
 
-    public interface IWithDefaultMembers
-    {
-        string NoncompliantDefaultInterfaceMethod(string obj) =>
-            obj != null ? null : obj.ToLower(); // Noncompliant
-
-        string CompliantDefaultInterfaceMethod(string obj) =>
-            obj == null ? null : obj.ToLower();
-    }
-
     public class LocalStaticFunctions
     {
         public void Method()
@@ -185,71 +176,14 @@ namespace Tests.Diagnostics.CSharp8
             o.ToString(); // Compliant. Unreachable
         }
 
-        [System.Diagnostics.CodeAnalysis.DoesNotReturn]
+        [DoesNotReturn] // Custom attribute
         public void DoesNotReturn() { }
 
         [JetBrains.Annotations.TerminatesProgram]
         public void TerminatesProgram() { }
     }
 
-    public class NotNullWhenTests
-    {
-        public void TryParseNull()
-        {
-            string boolString = null;
-            if (bool.TryParse(boolString, out var result)) // public static bool TryParse([NotNullWhen(true)] string? value, out bool result)
-            {
-                boolString.ToString(); // Compliant We know that boolString is not null here
-            }
-            else
-            {
-                boolString.ToString(); // Noncompliant
-            }
-        }
-
-        public void TryParseNotNull()
-        {
-            string boolString = "something";
-            if (bool.TryParse(boolString, out var result))
-            {
-                boolString.ToString(); // Compliant
-            }
-            else
-            {
-                boolString.ToString(); // Compliant
-            }
-        }
-
-        public void TryParseUnknown(string boolString)
-        {
-            if (bool.TryParse(boolString, out var result))
-            {
-                boolString.ToString(); // Compliant
-            }
-            else
-            {
-                boolString.ToString(); // Compliant, it could be null
-            }
-        }
-
-        public void CustomTryUpper(string text)
-        {
-            if (TryToUpper(text, out var result))
-            {
-                text.ToString(); // Compliant
-            }
-            else
-            {
-                text.ToString(); // Compliant
-            }
-        }
-
-        private static bool TryToUpper([System.Diagnostics.CodeAnalysis.NotNullWhen(true)] string someValue, out string result)
-        {
-            result = someValue?.ToUpper();
-            return !string.IsNullOrEmpty(someValue);
-        }
-    }
+    public sealed class DoesNotReturnAttribute : Attribute { }
 }
 
 namespace JetBrains.Annotations

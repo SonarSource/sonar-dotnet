@@ -800,6 +800,14 @@ public async System.Threading.Tasks.Task Main(System.Threading.Tasks.Task T)
             validator.ValidateTag("After", x => x.HasConstraint(LockConstraint.Held).Should().BeTrue("this constraint should be preserved on fields"));
         }
 
+        [TestMethod]
+        public void TypeOf_SetsNotNull()
+        {
+            var validator = SETestContext.CreateCS(@"var value = typeof(object); Tag(""Value"", value);").Validator;
+            validator.ValidateContainsOperation(OperationKind.TypeOf);
+            validator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        }
+
         [DataTestMethod]
         [DataRow("bool", "true", "False")]
         [DataRow("bool", "false", "True")]

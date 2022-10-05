@@ -19,12 +19,10 @@
  */
 
 using SonarAnalyzer.SymbolicExecution.Constraints;
-using SonarAnalyzer.SymbolicExecution.Roslyn;
-using SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
-namespace SonarAnalyzer;
+namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
-internal sealed class CaughtException : ISimpleProcessor
+internal sealed class NotNullOperation : ISimpleProcessor
 {
     public ProgramState Process(SymbolicContext context) =>
         context.SetOperationConstraint(ObjectConstraint.NotNull);
