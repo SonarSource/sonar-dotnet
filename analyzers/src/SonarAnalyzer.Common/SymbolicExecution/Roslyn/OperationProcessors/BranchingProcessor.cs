@@ -38,14 +38,14 @@ internal abstract class BranchingProcessor<T> : MultiProcessor<T>
     {
         if (BoolConstraintFromOperation(context, operation) is { } constraint)
         {
-            return new[] { context.SetOperationConstraint(constraint) };   // We already know the answer from existing constraints
+            return context.SetOperationConstraint(constraint).ToArray();    // We already know the answer from existing constraints
         }
         else
         {
             var positive = LearnBranchingConstraint(context.State, operation, false);
             var negative = LearnBranchingConstraint(context.State, operation, true);
             return positive == context.State && negative == context.State
-                ? new[] { context.State }   // We can't learn anything, just move on
+                ? context.State.ToArray()   // We can't learn anything, just move on
                 : new[]
                 {
                     positive.SetOperationConstraint(context.Operation, BoolConstraint.True),

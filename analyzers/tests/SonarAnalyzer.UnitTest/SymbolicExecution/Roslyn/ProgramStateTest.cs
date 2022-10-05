@@ -322,6 +322,19 @@ Captures:
             staticFieldSymbolValue.HasConstraint(preserveNone).Should().BeFalse();
         }
 
+        [TestMethod]
+        public void ToArray_ReturnsArrayWithSingleItem()
+        {
+            var nonEmpty = ProgramState.Empty.PushException(ExceptionState.UnknownException);
+            nonEmpty.ToArray().Should().HaveCount(1).And.Contain(nonEmpty);
+
+            ProgramState.Empty.ToArray().Should().HaveCount(1).And.Contain(ProgramState.Empty);
+        }
+
+        [TestMethod]
+        public void ToArray_ReusesInstance() =>
+            ProgramState.Empty.ToArray().Should().BeSameAs(ProgramState.Empty.ToArray());
+
         private static IFieldSymbol CreateFieldSymbol(string fieldDefinition)
         {
             var compiler = new SnippetCompiler($@"class C {{ {fieldDefinition} }}");
