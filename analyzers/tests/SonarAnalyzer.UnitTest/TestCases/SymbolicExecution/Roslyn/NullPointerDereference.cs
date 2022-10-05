@@ -564,7 +564,7 @@ namespace Tests.Diagnostics
             }
             else
             {
-                type.ToString();    // Compliant, unreachable for .NET due to NotNullWhen(true), no annotation under .NET Fx
+                type.ToString();    // Compliant, .NET Fx doesn't have NotNullWhen(true) annotation, we don't learn Null from the .NET version
             }
         }
 
