@@ -78,6 +78,12 @@ namespace SonarAnalyzer.Rules
                 new(KnownType.Dapper_SqlMapper, "QueryFirstAsync"),
                 new(KnownType.Dapper_SqlMapper, "QueryFirstOrDefault"),
                 new(KnownType.Dapper_SqlMapper, "QueryFirstOrDefaultAsync"),
+                new(KnownType.Dapper_SqlMapper, "QueryMultiple"),
+                new(KnownType.Dapper_SqlMapper, "QueryMultipleAsync"),
+                new(KnownType.Dapper_SqlMapper, "QuerySingle"),
+                new(KnownType.Dapper_SqlMapper, "QuerySingleAsync"),
+                new(KnownType.Dapper_SqlMapper, "QuerySingleOrDefault"),
+                new(KnownType.Dapper_SqlMapper, "QuerySingleOrDefaultAsync"),
             };
 
         private readonly MemberDescriptor[] invocationsForFirstArgument =

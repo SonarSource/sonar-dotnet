@@ -36,13 +36,13 @@ namespace Tests.Diagnostics
         public void NonCompliant_Concat_QueryFirst(string query, string param)
         {
             con.QueryFirst("Select Name From Person Where Id=@Id", new { Id = param }); // Compliant
-            con.QueryFirst(query + param);                                             // Noncompliant
-            con.QueryFirst(typeof(object), query + param);                             // Noncompliant
-            SqlMapper.QueryFirst(con, query + param);                                  // Noncompliant
-            SqlMapper.QueryFirst(con, typeof(object), query + param);                  // FN. The string argument is in the third position for this overload invoked in the unreduced form
-            con.QueryFirst("", query + param);                                         // Compliant. The tracked strings are passed to the "param" object parameter
-            con.QueryFirst(query + param, new { Id = 1 });                             // Noncompliant
-            con.QueryFirst<DapperTest>(query + param, new { Id = 1 });                 // Noncompliant
+            con.QueryFirst(query + param);                                              // Noncompliant
+            con.QueryFirst(typeof(object), query + param);                              // Noncompliant
+            SqlMapper.QueryFirst(con, query + param);                                   // Noncompliant
+            SqlMapper.QueryFirst(con, typeof(object), query + param);                   // FN. The string argument is in the third position for this overload invoked in the unreduced form
+            con.QueryFirst("", query + param);                                          // Compliant. The tracked strings are passed to the "param" object parameter
+            con.QueryFirst(query + param, new { Id = 1 });                              // Noncompliant
+            con.QueryFirst<DapperTest>(query + param, new { Id = 1 });                  // Noncompliant
         }
 
         public async Task NonCompliant_Concat_QueryFirstAsync(string query, string param)
@@ -60,13 +60,13 @@ namespace Tests.Diagnostics
         public void NonCompliant_Concat_QueryFirstOrDefault(string query, string param)
         {
             con.QueryFirstOrDefault("Select Name From Person Where Id=@Id", new { Id = param }); // Compliant
-            con.QueryFirstOrDefault(query + param);                                             // Noncompliant
-            con.QueryFirstOrDefault(typeof(object), query + param);                             // Noncompliant
-            SqlMapper.QueryFirstOrDefault(con, query + param);                                  // Noncompliant
-            SqlMapper.QueryFirstOrDefault(con, typeof(object), query + param);                  // FN. The string argument is in the third position for this overload invoked in the unreduced form
-            con.QueryFirstOrDefault("", query + param);                                         // Compliant. The tracked strings are passed to the "param" object parameter
-            con.QueryFirstOrDefault(query + param, new { Id = 1 });                             // Noncompliant
-            con.QueryFirstOrDefault<DapperTest>(query + param, new { Id = 1 });                 // Noncompliant
+            con.QueryFirstOrDefault(query + param);                                              // Noncompliant
+            con.QueryFirstOrDefault(typeof(object), query + param);                              // Noncompliant
+            SqlMapper.QueryFirstOrDefault(con, query + param);                                   // Noncompliant
+            SqlMapper.QueryFirstOrDefault(con, typeof(object), query + param);                   // FN. The string argument is in the third position for this overload invoked in the unreduced form
+            con.QueryFirstOrDefault("", query + param);                                          // Compliant. The tracked strings are passed to the "param" object parameter
+            con.QueryFirstOrDefault(query + param, new { Id = 1 });                              // Noncompliant
+            con.QueryFirstOrDefault<DapperTest>(query + param, new { Id = 1 });                  // Noncompliant
         }
 
         public async Task NonCompliant_Concat_QueryFirstOrDefaultAsync(string query, string param)
@@ -79,6 +79,72 @@ namespace Tests.Diagnostics
             await con.QueryFirstOrDefaultAsync("", query + param);                                          // Compliant. The tracked strings are passed to the "param" object parameter
             await con.QueryFirstOrDefaultAsync(query + param, new { Id = 1 });                              // Noncompliant
             await con.QueryFirstOrDefaultAsync<DapperTest>(query + param, new { Id = 1 });                  // Noncompliant
+        }
+
+        public void NonCompliant_Concat_QuerySingle(string query, string param)
+        {
+            con.QuerySingle("Select Name From Person Where Id=@Id", new { Id = param }); // Compliant
+            con.QuerySingle(query + param);                                              // Noncompliant
+            con.QuerySingle(typeof(object), query + param);                              // Noncompliant
+            SqlMapper.QuerySingle(con, query + param);                                   // Noncompliant
+            SqlMapper.QuerySingle(con, typeof(object), query + param);                   // FN. The string argument is in the third position for this overload invoked in the unreduced form
+            con.QuerySingle("", query + param);                                          // Compliant. The tracked strings are passed to the "param" object parameter
+            con.QuerySingle(query + param, new { Id = 1 });                              // Noncompliant
+            con.QuerySingle<DapperTest>(query + param, new { Id = 1 });                  // Noncompliant
+        }
+
+        public async Task NonCompliant_Concat_QuerySingleAsync(string query, string param)
+        {
+            await con.QuerySingleAsync("Select Name From Person Where Id=@Id", new { Id = param }); // Compliant
+            await con.QuerySingleAsync(query + param);                                              // Noncompliant
+            await con.QuerySingleAsync(typeof(object), query + param);                              // Noncompliant
+            await SqlMapper.QuerySingleAsync(con, query + param);                                   // Noncompliant
+            await SqlMapper.QuerySingleAsync(con, typeof(object), query + param);                   // FN. The string argument is in the third position for this overload invoked in the unreduced form
+            await con.QuerySingleAsync("", query + param);                                          // Compliant. The tracked strings are passed to the "param" object parameter
+            await con.QuerySingleAsync(query + param, new { Id = 1 });                              // Noncompliant
+            await con.QuerySingleAsync<DapperTest>(query + param, new { Id = 1 });                  // Noncompliant
+        }
+
+        public void NonCompliant_Concat_QuerySingleOrDefault(string query, string param)
+        {
+            con.QuerySingleOrDefault("Select Name From Person Where Id=@Id", new { Id = param }); // Compliant
+            con.QuerySingleOrDefault(query + param);                                              // Noncompliant
+            con.QuerySingleOrDefault(typeof(object), query + param);                              // Noncompliant
+            SqlMapper.QuerySingleOrDefault(con, query + param);                                   // Noncompliant
+            SqlMapper.QuerySingleOrDefault(con, typeof(object), query + param);                   // FN. The string argument is in the third position for this overload invoked in the unreduced form
+            con.QuerySingleOrDefault("", query + param);                                          // Compliant. The tracked strings are passed to the "param" object parameter
+            con.QuerySingleOrDefault(query + param, new { Id = 1 });                              // Noncompliant
+            con.QuerySingleOrDefault<DapperTest>(query + param, new { Id = 1 });                  // Noncompliant
+        }
+
+        public async Task NonCompliant_Concat_QuerySingleOrDefaultAsync(string query, string param)
+        {
+            await con.QuerySingleOrDefaultAsync("Select Name From Person Where Id=@Id", new { Id = param }); // Compliant
+            await con.QuerySingleOrDefaultAsync(query + param);                                              // Noncompliant
+            await con.QuerySingleOrDefaultAsync(typeof(object), query + param);                              // Noncompliant
+            await SqlMapper.QuerySingleOrDefaultAsync(con, query + param);                                   // Noncompliant
+            await SqlMapper.QuerySingleOrDefaultAsync(con, typeof(object), query + param);                   // FN. The string argument is in the third position for this overload invoked in the unreduced form
+            await con.QuerySingleOrDefaultAsync("", query + param);                                          // Compliant. The tracked strings are passed to the "param" object parameter
+            await con.QuerySingleOrDefaultAsync(query + param, new { Id = 1 });                              // Noncompliant
+            await con.QuerySingleOrDefaultAsync<DapperTest>(query + param, new { Id = 1 });                  // Noncompliant
+        }
+
+        public void NonCompliant_Concat_QueryMultiple(string query, string param)
+        {
+            con.QueryMultiple("Select Name From Person Where Id=@Id", new { Id = param }); // Compliant
+            con.QueryMultiple(query + param);                                              // Noncompliant
+            SqlMapper.QueryMultiple(con, query + param);                                   // Noncompliant
+            con.QueryMultiple("", query + param);                                          // Compliant. The tracked strings are passed to the "param" object parameter
+            con.QueryMultiple(query + param, new { Id = 1 });                              // Noncompliant
+        }
+
+        public async Task NonCompliant_Concat_QueryMultipleAsync(string query, string param)
+        {
+            await con.QueryMultipleAsync("Select Name From Person Where Id=@Id", new { Id = param }); // Compliant
+            await con.QueryMultipleAsync(query + param);                                              // Noncompliant
+            await SqlMapper.QueryMultipleAsync(con, query + param);                                   // Noncompliant
+            await con.QueryMultipleAsync("", query + param);                                          // Compliant. The tracked strings are passed to the "param" object parameter
+            await con.QueryMultipleAsync(query + param, new { Id = 1 });                              // Noncompliant
         }
     }
 }
