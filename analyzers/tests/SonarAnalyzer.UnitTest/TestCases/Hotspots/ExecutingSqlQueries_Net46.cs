@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Data.Common;
 using System.Data.SqlClient;
 using System.Data.Odbc;
 using System.Data.OracleClient;
@@ -309,6 +310,18 @@ namespace Tests.Diagnostics
             string y;
             y = sensitiveQuery;                                                                         // Secondary [5] {{SQL query is assigned to y.}} ^13#1
             command.CommandText = y;                                                                    // Noncompliant [5]
+        }
+
+        public void DbCommand_CommandText(string param)
+        {
+            var command = DbProviderFactories.GetFactory("someProvider").CreateCommand();
+            command.CommandText = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param);    // Noncompliant
+        }
+
+        public void IDbCommand_CommandText(string param)
+        {
+            IDbCommand command = DbProviderFactories.GetFactory("someProvider").CreateCommand();
+            command.CommandText = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param);    // Noncompliant
         }
     }
 }
