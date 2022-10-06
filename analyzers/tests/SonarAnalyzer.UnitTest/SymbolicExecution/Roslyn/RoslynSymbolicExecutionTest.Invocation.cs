@@ -241,7 +241,7 @@ Tag(""StaticField"", StaticObjectField);
         [DataTestMethod]
         [DataRow("(condition ? this : otherInstance).InstanceMethod();")]
         [DataRow("(condition ? this : otherInstance).ExtensionMethod();")] // invocation with flow-capture and conversion on the receiver
-        public void Instance_InstanceMethodCallClearsFields_Ternary(string instanceCall)
+        public void Instance_InstanceMethodCall_ClearsFields_Ternary(string instanceCall)
         {
             var code = $@"
 public class Sample
@@ -393,7 +393,7 @@ Tag(""After"", this.ObjectField);
         }
 
         [TestMethod]
-        public void Instance_InstanceMethodCallClearsFieldWithBranchInArgument()
+        public void Instance_InstanceMethodCall_ClearsFieldWithBranchInArgument()
         {
             var code = $@"
 this.ObjectField = null;
