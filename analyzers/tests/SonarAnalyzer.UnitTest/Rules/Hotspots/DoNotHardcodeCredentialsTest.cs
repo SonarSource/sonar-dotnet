@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.IO;
 using SonarAnalyzer.Common;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
@@ -59,6 +60,10 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Verify();
 
         [TestMethod]
+        public void DoNotHardcodeCredentials_CS_WebConfig() =>
+            DoNotHardcodeCredentials_WebConfig(AnalyzerLanguage.CSharp, new CS.DoNotHardcodeCredentials());
+
+        [TestMethod]
         public void DoNotHardcodeCredentials_VB_DefaultValues() =>
             builderVB.AddPaths("DoNotHardcodeCredentials.DefaultValues.vb").Verify();
 
@@ -73,6 +78,10 @@ namespace SonarAnalyzer.UnitTest.Rules
             CreateVerifierVB(@"KODE ,,,, FaCaL-FaIrE,x\*+?|}{][)(^$.# ")
                 .AddPaths("DoNotHardcodeCredentials.CustomValues.vb")
                 .Verify();
+
+        [TestMethod]
+        public void DoNotHardcodeCredentials_VB_WebConfig() =>
+            DoNotHardcodeCredentials_WebConfig(AnalyzerLanguage.VisualBasic, new VB.DoNotHardcodeCredentials());
 
         [TestMethod]
         public void DoNotHardcodeCredentials_ConfiguredCredentialsAreRead()
@@ -100,5 +109,20 @@ namespace SonarAnalyzer.UnitTest.Rules
                                                         : new VB.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = credentialWords })
                 .WithBasePath("Hotspots")
                 .AddReferences(AdditionalReferences);
+
+        private static void DoNotHardcodeCredentials_WebConfig(AnalyzerLanguage language, DiagnosticAnalyzer analyzer)
+        {
+            var root = @"TestCases\WebConfig\DoNotHardcodeCredentials";
+            var webConfigPaths = Directory.GetFiles(root, "web.config", SearchOption.AllDirectories);
+            webConfigPaths.Should().HaveCount(3);
+            var compilation = CreateCompilation(language);
+            foreach (var webConfigPath in webConfigPaths)
+            {
+                DiagnosticVerifier.VerifyExternalFile(compilation, analyzer, webConfigPath, TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)));
+            }
+        }
+
+        private static Compilation CreateCompilation(AnalyzerLanguage language) =>
+            SolutionBuilder.Create().AddProject(language).GetCompilation();
     }
 }

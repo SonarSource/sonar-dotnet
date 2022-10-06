@@ -7,7 +7,7 @@ namespace Tests.Diagnostics
 {
     class Program
     {
-        public const string DBConnectionString = "Server=localhost; Database=Test; User=SA; Password=Secret123";    // Noncompliant
+        public const string DBConnectionString = "Server=localhost; Database=Test; User=SA; Password=Secret123";    // Noncompliant {{"password" detected here, make sure this is not a hard-coded credential.}}
         public const string EditPasswordPageUrlToken = "{Account.EditPassword.PageUrl}"; // Compliant
 
         private const string secretConst = "constantValue";
