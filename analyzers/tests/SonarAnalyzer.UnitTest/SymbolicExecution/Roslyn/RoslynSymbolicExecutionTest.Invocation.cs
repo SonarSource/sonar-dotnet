@@ -191,9 +191,6 @@ public static class Extensions
         }
 
         [DataTestMethod]
-        [DataRow("StaticMethod();")]
-        [DataRow("Sample.StaticMethod();")]
-        [DataRow("this?.InstanceMethod();")]
         [DataRow("var dummy = Property;")]
         [DataRow("var dummy = this.Property;")]
         [DataRow("SampleProperty.InstanceMethod();")]
@@ -220,7 +217,6 @@ Tag(""AfterStaticField"", StaticObjectField);";
         [DataTestMethod]
         [DataRow("otherInstance.InstanceMethod();")]
         [DataRow("(otherInstance).InstanceMethod();")]
-        [DataRow("(true ? this : otherInstance).InstanceMethod();")]
         public void Instance_InstanceMethodCall_DoesNotClearFieldsOnOtherInstances(string invocation)
         {
             var code = $@"
@@ -975,18 +971,6 @@ private static bool Equals(object a, object b, object c) => false;";
             validator.ValidateTag("InstanceTwo", x => x.Should().BeNull());
             validator.ValidateTag("NoArgs", x => x.Should().BeNull());
             validator.ValidateTag("MoreArgs", x => x.Should().BeNull());
-        }
-
-        [TestMethod]
-        public void Invocation_TargetMethodIsDelegateInvoke()
-        {
-            var code = @"
-Func<Action> f = () => new Action(()=> { });
-f()();";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateContainsOperation(OperationKindEx.Invocation);
-            validator.ValidateExitReachCount(1);
-            validator.ValidateExecutionCompleted();
         }
 
         private static IEnumerable<object[]> ThrowHelperCalls =>
