@@ -119,6 +119,5 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .AddReferences(MetadataReferenceFacade.SystemData)
                 .AddReferences(NuGetMetadataReference.Dapper())
                 .Verify();
-
     }
 }
