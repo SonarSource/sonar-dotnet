@@ -37,18 +37,18 @@ internal sealed class IsPattern : BranchingProcessor<IIsPatternOperationWrapper>
 
     protected override ProgramState LearnBranchingConstraint(ProgramState state, IIsPatternOperationWrapper operation, bool falseBranch) =>
         state.ResolveCapture(operation.Value).TrackedSymbol() is { } testedSymbol
-        && LearnBranchingConstraint(state, operation.Pattern, falseBranch, state[testedSymbol]) is { } constraint
+        && LearnBranchingConstraint(state, operation.Pattern, falseBranch, state[testedSymbol]?.HasConstraint<ObjectConstraint>() is true) is { } constraint
             ? state.SetSymbolConstraint(testedSymbol, constraint)
             : state;
 
-    private static SymbolicConstraint LearnBranchingConstraint(ProgramState state, IPatternOperationWrapper pattern, bool falseBranch, SymbolicValue existingValue)
+    private static SymbolicConstraint LearnBranchingConstraint(ProgramState state, IPatternOperationWrapper pattern, bool falseBranch, bool hasObjectConstraint)
     {
         return pattern.WrappedOperation.Kind switch
         {
             OperationKindEx.ConstantPattern => ConstraintFromConstantPattern(state, As(IConstantPatternOperationWrapper.FromOperation), falseBranch, pattern.InputType.IsReferenceType),
-            OperationKindEx.DeclarationPattern => ConstraintFromDeclarationPattern(As(IDeclarationPatternOperationWrapper.FromOperation), falseBranch, existingValue),
-            OperationKindEx.NegatedPattern => LearnBranchingConstraint(state, As(INegatedPatternOperationWrapper.FromOperation).Pattern, !falseBranch, existingValue),
-            OperationKindEx.RecursivePattern => ConstraintFromRecursivePattern(As(IRecursivePatternOperationWrapper.FromOperation), falseBranch, existingValue),
+            OperationKindEx.DeclarationPattern => ConstraintFromDeclarationPattern(As(IDeclarationPatternOperationWrapper.FromOperation), falseBranch, hasObjectConstraint),
+            OperationKindEx.NegatedPattern => LearnBranchingConstraint(state, As(INegatedPatternOperationWrapper.FromOperation).Pattern, !falseBranch, hasObjectConstraint),
+            OperationKindEx.RecursivePattern => ConstraintFromRecursivePattern(As(IRecursivePatternOperationWrapper.FromOperation), falseBranch, hasObjectConstraint),
             OperationKindEx.TypePattern => ObjectConstraint.NotNull.ApplyOpposite(falseBranch),
             _ => null
         };
@@ -73,9 +73,9 @@ internal sealed class IsPattern : BranchingProcessor<IIsPatternOperationWrapper>
         return isReferenceType ? ObjectConstraint.NotNull.ApplyOpposite(falseBranch) : null;    // "obj is 42" => "obj" is NotNull and obj.ToString() is safe. We don't have this for bool.
     }
 
-    private static ObjectConstraint ConstraintFromRecursivePattern(IRecursivePatternOperationWrapper recursive, bool falseBranch, SymbolicValue existingValue)
+    private static ObjectConstraint ConstraintFromRecursivePattern(IRecursivePatternOperationWrapper recursive, bool falseBranch, bool hasObjectConstraint)
     {
-        if ((existingValue?.HasConstraint<ObjectConstraint>() ?? false) || !recursive.InputType.IsReferenceType)
+        if (hasObjectConstraint || !recursive.InputType.IsReferenceType)
         {
             return null;    // Don't learn if we can't, or we already know the answer
         }
@@ -89,9 +89,9 @@ internal sealed class IsPattern : BranchingProcessor<IIsPatternOperationWrapper>
         }
     }
 
-    private static SymbolicConstraint ConstraintFromDeclarationPattern(IDeclarationPatternOperationWrapper declaration, bool falseBranch, SymbolicValue existingValue)
+    private static SymbolicConstraint ConstraintFromDeclarationPattern(IDeclarationPatternOperationWrapper declaration, bool falseBranch, bool hasObjectConstraint)
     {
-        if (declaration.MatchesNull || !declaration.InputType.IsReferenceType || (existingValue?.HasConstraint<ObjectConstraint>() ?? false))
+        if (declaration.MatchesNull || !declaration.InputType.IsReferenceType || hasObjectConstraint)
         {
             return null;    // Don't learn if we can't, or we already know the answer
         }
