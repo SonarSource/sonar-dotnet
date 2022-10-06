@@ -146,5 +146,59 @@ namespace Tests.Diagnostics
             await con.QueryMultipleAsync("", query + param);                                          // Compliant. The tracked strings are passed to the "param" object parameter
             await con.QueryMultipleAsync(query + param, new { Id = 1 });                              // Noncompliant
         }
+
+        public void NonCompliant_Concat_Execute(string query, string param)
+        {
+            con.Execute("Insert Into Person Values (Id=@Id)", new { Id = param }); // Compliant
+            con.Execute(query + param);                                            // Noncompliant
+            con.Execute("", query + param);                                        // Compliant. The tracked strings are passed to the "param" object parameter
+            con.Execute(query + param, new { Id = 1 });                            // Noncompliant
+            SqlMapper.Execute(con, query + param);                                 // Noncompliant
+        }
+
+        public async Task NonCompliant_Concat_ExecuteAsync(string query, string param)
+        {
+            await con.ExecuteAsync("Insert Into Person Values (Id=@Id)", new { Id = param }); // Compliant
+            await con.ExecuteAsync(query + param);                                            // Noncompliant
+            await con.ExecuteAsync("", query + param);                                        // Compliant. The tracked strings are passed to the "param" object parameter
+            await con.ExecuteAsync(query + param, new { Id = 1 });                            // Noncompliant
+            await SqlMapper.ExecuteAsync(con, query + param);                                 // Noncompliant
+        }
+
+        public void NonCompliant_Concat_ExecuteReader(string query, string param)
+        {
+            con.ExecuteReader("Insert Into Person Values (Id=@Id)", new { Id = param }); // Compliant
+            con.ExecuteReader(query + param);                                            // Noncompliant
+            con.ExecuteReader("", query + param);                                        // Compliant. The tracked strings are passed to the "param" object parameter
+            con.ExecuteReader(query + param, new { Id = 1 });                            // Noncompliant
+            SqlMapper.ExecuteReader(con, query + param);                                 // Noncompliant
+        }
+
+        public async Task NonCompliant_Concat_ExecuteReaderAsync(string query, string param)
+        {
+            await con.ExecuteReaderAsync("Insert Into Person Values (Id=@Id)", new { Id = param }); // Compliant
+            await con.ExecuteReaderAsync(query + param);                                            // Noncompliant
+            await con.ExecuteReaderAsync("", query + param);                                        // Compliant. The tracked strings are passed to the "param" object parameter
+            await con.ExecuteReaderAsync(query + param, new { Id = 1 });                            // Noncompliant
+            await SqlMapper.ExecuteReaderAsync(con, query + param);                                 // Noncompliant
+        }
+
+        public void NonCompliant_Concat_ExecuteScalar(string query, string param)
+        {
+            con.ExecuteScalar("Insert Into Person Values (Id=@Id)", new { Id = param }); // Compliant
+            con.ExecuteScalar(query + param);                                            // Noncompliant
+            con.ExecuteScalar("", query + param);                                        // Compliant. The tracked strings are passed to the "param" object parameter
+            con.ExecuteScalar(query + param, new { Id = 1 });                            // Noncompliant
+            SqlMapper.ExecuteScalar(con, query + param);                                 // Noncompliant
+        }
+
+        public async Task NonCompliant_Concat_ExecuteScalarAsync(string query, string param)
+        {
+            await con.ExecuteScalarAsync("Insert Into Person Values (Id=@Id)", new { Id = param }); // Compliant
+            await con.ExecuteScalarAsync(query + param);                                            // Noncompliant
+            await con.ExecuteScalarAsync("", query + param);                                        // Compliant. The tracked strings are passed to the "param" object parameter
+            await con.ExecuteScalarAsync(query + param, new { Id = 1 });                            // Noncompliant
+            await SqlMapper.ExecuteScalarAsync(con, query + param);                                 // Noncompliant
+        }
     }
 }
