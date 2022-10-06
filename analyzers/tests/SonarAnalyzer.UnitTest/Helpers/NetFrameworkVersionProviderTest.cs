@@ -19,6 +19,7 @@
  */
 
 using System.IO;
+using SonarAnalyzer.UnitTest.Common;
 
 namespace SonarAnalyzer.UnitTest.Helpers
 {
@@ -121,7 +122,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         private static string CreateMockPath(string mockName)
         {
             var assembly = typeof(NetFrameworkVersionProviderTest).Assembly;
-            return Path.Combine(Path.GetDirectoryName(assembly.Location), "../../../../FrameworkMocks/lib/", mockName);
+            return Path.Combine(Path.GetDirectoryName(assembly.Location), PathResolver.RelativePathToTestProjectRoot, "../FrameworkMocks/lib/", mockName);
         }
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>

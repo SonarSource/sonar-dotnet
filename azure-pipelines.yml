@@ -174,27 +174,22 @@ stages:
           targetPath: 'analyzers\tests\SonarAnalyzer.UnitTest\bin'
 
       - powershell: |
-          . .\scripts\utils.ps1
-
-          CreateFolder("coverage")
-          CreateFolder("TestResults")
-
-          & OpenCover.Console.exe -target:"dotnet.exe" -targetargs:"test analyzers\tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\$(FrameworkMoniker)\SonarAnalyzer.UnitTest.dll -l trx -l console;verbosity=detailed" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.VisualBasic]*" -output:coverage/$(FrameworkMoniker).xml -safemode:off -excludebyattribute:*.ExcludeFromCodeCoverageAttribute
-          Test-ExitCode "ERROR: Unit tests for $(FrameworkMoniker) FAILED."
+          cd analyzers
+          & dotnet test -f $(FrameworkMoniker) -c $(BuildConfiguration) -l trx /p:AltCover=true,AltCoverForce=true,AltCoverVisibleBranches=true,AltCoverAssemblyFilter='Moq|Humanizer|AltCover',AltCoverReport=coverage/coverage.xml
         displayName: '.Net UTs'
 
       - task: PublishPipelineArtifact@1
         condition: always()
         displayName: 'Save coverage files'
         inputs:
-          path: 'coverage'
+          path: 'analyzers/tests/SonarAnalyzer.UnitTest/coverage'
           artifact: $(CoverageArtifactName)
 
       - task: PublishPipelineArtifact@1
         condition: always()
         displayName: 'Save test results files'
         inputs:
-          path: 'TestResults'
+          path: 'analyzers/tests/SonarAnalyzer.UnitTest/TestResults'
           artifact: $(TestResultsArtifactName)
 
       - task: PublishTestResults@2
@@ -318,8 +313,8 @@ stages:
             (Get-Content -path $path -Raw) -replace $pattern,$localPath | Set-Content $path
           }
 
-          Update-Coverage-BasePaths 'coverage\net48.xml'
-          Update-Coverage-BasePaths 'coverage\net6.0.xml'
+          Update-Coverage-BasePaths 'coverage\coverage.net48.xml'
+          Update-Coverage-BasePaths 'coverage\coverage.net6.0.xml'
         displayName: Fix coverage paths
 
       - task: SonarCloudAnalyze@1

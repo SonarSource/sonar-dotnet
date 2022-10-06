@@ -29,6 +29,8 @@ namespace SonarAnalyzer.UnitTest.Extensions
         public void GivenSyntaxNodeWithReasonableDepth_SafeVisit_ReturnsTrue() =>
             new Walker().SafeVisit(SyntaxFactory.ParseSyntaxTree("void Method() { }").GetRoot()).Should().BeTrue();
 
+#if NET
+
         [TestMethod]
         public void GivenSyntaxNodeWithHighDepth_SafeVisit_ReturnsFalse()
         {
@@ -50,6 +52,8 @@ namespace SonarAnalyzer.UnitTest.Extensions
 
             new Walker().SafeVisit(method).Should().BeFalse();
         }
+
+#endif
 
         private class Walker : SafeCSharpSyntaxWalker { }
     }

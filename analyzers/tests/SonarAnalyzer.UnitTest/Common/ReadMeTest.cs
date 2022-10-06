@@ -23,6 +23,7 @@
 using System.IO;
 using System.Text.RegularExpressions;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.UnitTest.Common;
 
 namespace SonarAnalyzer.UnitTest.Common;
 
@@ -35,7 +36,7 @@ public class ReadMeTest
 
     [TestInitialize]
     public void Init() =>
-       readMe = File.ReadAllText(Path.Combine(TestContext.DeploymentDirectory, @".\..\..\..\..\..\..\README.md"));
+       readMe = File.ReadAllText(Path.Combine(TestContext.DeploymentDirectory, PathResolver.RelativePathToTestProjectRoot, @"..\..\..\README.md"));
 
     [TestMethod]
     public void HasCorrectRuleCount_CS() =>

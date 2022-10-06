@@ -18,34 +18,22 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.VisualBasic;
+using System.IO;
 
-namespace SonarAnalyzer.UnitTest.Extensions
+namespace SonarAnalyzer.UnitTest.Common
 {
-    [TestClass]
-    public class SafeVisualBasicSyntaxWalkerTest
+    public static class PathResolver
     {
-        [TestMethod]
-        public void GivenSyntaxNodeWithReasonableDepth_SafeVisit_ReturnsTrue() =>
-            new Walker().SafeVisit(SyntaxFactory.ParseSyntaxTree("Public Function Main(Arg as Boolean) As Boolean").GetRoot()).Should().BeTrue();
+        public static readonly string RelativePathToTestProjectRoot = @"..\..\..\";
 
-#if NET
-
-        [TestMethod]
-        public void GivenSyntaxNodeWithHighDepth_SafeVisit_ReturnsFalse()
+        static PathResolver()
         {
-            var code = $@"
-Public Class Sample
-    Public Function Main(Arg as Boolean) As Boolean
-        Return Arg {Enumerable.Repeat("AndAlso Arg", 7000).JoinStr(" ")}
-    End Function
-End Class";
-
-            new Walker().SafeVisit(VisualBasicSyntaxTree.ParseText(code).GetCompilationUnitRoot()).Should().BeFalse();
+            // The AltCover tool has a limitation. It has to be invoked without a parameter for the project/solution path.
+            // Due to this we have to call it from the analyzers folder and the working directory is different when running in CI context.
+            if (!File.Exists(Path.Combine(RelativePathToTestProjectRoot, "nuget.config")))
+            {
+                RelativePathToTestProjectRoot = @"..\..\..\..\";
+            }
         }
-
-#endif
-
-        private class Walker : SafeVisualBasicSyntaxWalker { }
     }
 }
