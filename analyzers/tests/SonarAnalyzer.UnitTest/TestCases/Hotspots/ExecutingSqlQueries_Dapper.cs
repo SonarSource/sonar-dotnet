@@ -201,7 +201,7 @@ namespace Tests.Diagnostics
             await SqlMapper.ExecuteScalarAsync(con, query + param);                                 // Noncompliant
         }
 
-        public void CommandDefinition_Constrcutir(string query, string param)
+        public void CommandDefinition_Constructor(string query, string param)
         {
             new CommandDefinition("Insert Into Person Values (Id=@Id)", new { Id = param }); // Compliant
             new CommandDefinition(query + param);                                            // Noncompliant
