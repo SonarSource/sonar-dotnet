@@ -64,19 +64,20 @@ namespace SonarAnalyzer.Rules
             {
                 new(KnownType.Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions, "ExecuteSqlCommandAsync"),
                 new(KnownType.Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions, "ExecuteSqlCommand"),
-                new(KnownType.Microsoft_EntityFrameworkCore_RelationalQueryableExtensions, "FromSql")
+                new(KnownType.Microsoft_EntityFrameworkCore_RelationalQueryableExtensions, "FromSql"),
             };
 
         private readonly MemberDescriptor[] invocationsForFirstTwoArgumentsAfterV2 =
             {
                 new(KnownType.Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions, "ExecuteSqlRaw"),
                 new(KnownType.Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions, "ExecuteSqlRawAsync"),
-                new(KnownType.Microsoft_EntityFrameworkCore_RelationalQueryableExtensions, "FromSqlRaw")
+                new(KnownType.Microsoft_EntityFrameworkCore_RelationalQueryableExtensions, "FromSqlRaw"),
+                new(KnownType.Dapper_SqlMapper, "Query"),
             };
 
         private readonly MemberDescriptor[] invocationsForFirstArgument =
             {
-                new(KnownType.System_Data_Sqlite_SqliteCommand, "Execute")
+                new(KnownType.System_Data_Sqlite_SqliteCommand, "Execute"),
             };
 
         private readonly MemberDescriptor[] invocationsForSecondArgument =
@@ -92,7 +93,7 @@ namespace SonarAnalyzer.Rules
                 new(KnownType.MySql_Data_MySqlClient_MySqlHelper, "ExecuteScalar"),
                 new(KnownType.MySql_Data_MySqlClient_MySqlHelper, "ExecuteScalarAsync"),
                 new(KnownType.MySql_Data_MySqlClient_MySqlHelper, "UpdateDataSet"),
-                new(KnownType.MySql_Data_MySqlClient_MySqlHelper, "UpdateDataSetAsync")
+                new(KnownType.MySql_Data_MySqlClient_MySqlHelper, "UpdateDataSetAsync"),
             };
 
         private readonly MemberDescriptor[] properties =
