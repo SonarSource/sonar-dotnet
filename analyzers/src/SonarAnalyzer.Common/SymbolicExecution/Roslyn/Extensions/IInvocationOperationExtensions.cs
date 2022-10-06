@@ -42,8 +42,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         /// </summary>
         public static bool HasThisReceiver(this IInvocationOperationWrapper invocation, ProgramState state) =>
             state.ResolveCapture(invocation.Instance.UnwrapConversion()) is { Kind: OperationKindEx.InstanceReference }
-            || (invocation is { TargetMethod.IsExtensionMethod: true, Arguments: { Length: > 0 } arguments }
-                && arguments[0] is { Kind: OperationKindEx.Argument } thisArgument
-                && state.ResolveCapture(IArgumentOperationWrapper.FromOperation(thisArgument).Value.UnwrapConversion()) is { Kind: OperationKindEx.InstanceReference });
+            || (invocation.TargetMethod.IsExtensionMethod
+                && !invocation.Arguments.IsEmpty
+                && state.ResolveCapture(invocation.Arguments[0].ToArgument().Value.UnwrapConversion()).Kind == OperationKindEx.InstanceReference);
     }
 }
