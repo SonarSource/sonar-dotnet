@@ -49,32 +49,22 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override IEnumerable<string> GetParameterNames(BaseMethodDeclarationSyntax method)
         {
             var paramGroups = method.ParameterList?.Parameters.GroupBy(p => p.Identifier.ValueText);
-            if (paramGroups == null || paramGroups.Any(g => g.Count() != 1))
-            {
-                return Enumerable.Empty<string>();
-            }
-            return paramGroups.Select(g => g.First().Identifier.ValueText);
+            return paramGroups == null || paramGroups.Any(g => g.Count() != 1)
+                ? Enumerable.Empty<string>()
+                : paramGroups.Select(g => g.First().Identifier.ValueText);
         }
 
         protected override bool LeastLanguageVersionMatches(SyntaxNodeAnalysisContext context) =>
             context.Compilation.IsAtLeastLanguageVersion(LanguageVersion.CSharp6);
 
-        protected override bool IsArgumentExceptionCallingNameOf(SyntaxNode node, IEnumerable<string> arguments)
-        {
-            var throwNode = (ThrowStatementSyntax)node;
-            if (throwNode.Expression is ObjectCreationExpressionSyntax objectCreation)
-            {
-                var exceptionType = objectCreation.Type.ToString();
-                return ArgumentExceptionNameOfPosition(exceptionType) is var idx
-                    && objectCreation.ArgumentList?.Arguments is { } creationArguments
-                    && creationArguments.Count >= idx + 1
-                    && creationArguments[idx].Expression is InvocationExpressionSyntax invocation
-                    && invocation.Expression.ToString() == "nameof"
-                    && invocation.ArgumentList.Arguments.Count == 1
-                    && arguments.Contains(invocation.ArgumentList.Arguments[0].Expression.ToString());
-            }
-
-            return false;
-        }
+        protected override bool IsArgumentExceptionCallingNameOf(SyntaxNode node, IEnumerable<string> arguments) =>
+            ((ThrowStatementSyntax)node).Expression is ObjectCreationExpressionSyntax objectCreation
+            && ArgumentExceptionNameOfPosition(objectCreation.Type.ToString()) is var idx
+            && objectCreation.ArgumentList?.Arguments is { } creationArguments
+            && creationArguments.Count >= idx + 1
+            && creationArguments[idx].Expression is InvocationExpressionSyntax invocation
+            && invocation.Expression.ToString() == "nameof"
+            && invocation.ArgumentList.Arguments.Count == 1
+            && arguments.Contains(invocation.ArgumentList.Arguments[0].Expression.ToString());
     }
 }
