@@ -20,7 +20,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -81,7 +80,7 @@ namespace SonarAnalyzer.Rules
                 return;
             }
 
-            var methodSyntax = context.Node is TMethodSyntax node ? node : context.Node.AncestorsAndSelf().OfType<TMethodSyntax>().FirstOrDefault();
+            var methodSyntax = context.Node is TMethodSyntax node ? node : context.Node.AncestorsAndSelf().OfType<TMethodSyntax>().First();
             var parameterNames = GetParameterNames(methodSyntax);
             // either no parameters, or duplicated parameters
             if (!parameterNames.Any())
