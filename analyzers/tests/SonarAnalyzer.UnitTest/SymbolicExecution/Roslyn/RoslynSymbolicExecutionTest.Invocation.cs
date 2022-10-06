@@ -498,8 +498,7 @@ Tag(""BeforeField"", ObjectField);
 Tag(""BeforeStaticField"", StaticObjectField);
 {invocation}
 Tag(""AfterField"", ObjectField);
-Tag(""AfterStaticField"", StaticObjectField);
-";
+Tag(""AfterStaticField"", StaticObjectField);";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateContainsOperation(OperationKind.Invocation);
             validator.ValidateTag("BeforeField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
@@ -881,8 +880,7 @@ Tag(""End"");";
         {
             var code = @"
 Func<Action> f = () => new Action(()=> { });
-f()();
-";
+f()();";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateContainsOperation(OperationKindEx.Invocation);
             validator.ValidateExitReachCount(1);
