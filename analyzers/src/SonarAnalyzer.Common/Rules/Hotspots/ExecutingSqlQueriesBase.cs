@@ -73,6 +73,9 @@ namespace SonarAnalyzer.Rules
                 new(KnownType.Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions, "ExecuteSqlRawAsync"),
                 new(KnownType.Microsoft_EntityFrameworkCore_RelationalQueryableExtensions, "FromSqlRaw"),
                 new(KnownType.Dapper_SqlMapper, "Query"),
+                new(KnownType.Dapper_SqlMapper, "QueryAsync"),
+                new(KnownType.Dapper_SqlMapper, "QueryFirst"),
+                new(KnownType.Dapper_SqlMapper, "QueryFirstAsync"),
             };
 
         private readonly MemberDescriptor[] invocationsForFirstArgument =
