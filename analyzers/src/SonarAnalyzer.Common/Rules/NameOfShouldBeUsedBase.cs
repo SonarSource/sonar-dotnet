@@ -20,7 +20,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -33,21 +32,16 @@ namespace SonarAnalyzer.Rules
         where TSyntaxKind : struct
         where TThrowSyntax : SyntaxNode
     {
-        internal const string DiagnosticId = "S2302";
-        // when the parameter name is inside a bigger string, we want to avoid common English words like
-        // "a", "then", "he", "of", "have" etc, to avoid false positives
+        private const string DiagnosticId = "S2302";
+        // when the parameter name is inside a bigger string, we want to avoid common English words like "a", "then", "he", "of", "have" etc, to avoid false positives
         private const int MinStringLength = 5;
         private readonly char[] separators = { ' ', '.', ',', ';', '!', '?' };
 
-        // Is string literal or interpolated string
+        protected abstract IEnumerable<string> GetParameterNames(TMethodSyntax method); // Handle parameters with the same name (in the IDE it can happen)
         protected abstract bool IsStringLiteral(SyntaxToken t);
-
-        // handle parameters with the same name (in the IDE it can happen) - get groups of parameters
-        protected abstract IEnumerable<string> GetParameterNames(TMethodSyntax method);
-
         protected abstract bool LeastLanguageVersionMatches(SyntaxNodeAnalysisContext context);
-
         protected abstract bool IsArgumentExceptionCallingNameOf(SyntaxNode node, IEnumerable<string> arguments);
+        protected abstract TMethodSyntax MethodSyntax(SyntaxNode node);
 
         protected override string MessageFormat => "Replace the string '{0}' with 'nameof({0})'.";
 
@@ -70,8 +64,10 @@ namespace SonarAnalyzer.Rules
             {
                 return 1;
             }
-
-            return int.MaxValue - 1;
+            else
+            {
+                return int.MaxValue - 1;
+            }
         }
 
         private void ReportIssues(SyntaxNodeAnalysisContext context)
@@ -81,7 +77,7 @@ namespace SonarAnalyzer.Rules
                 return;
             }
 
-            var methodSyntax = context.Node is TMethodSyntax node ? node : context.Node.AncestorsAndSelf().OfType<TMethodSyntax>().FirstOrDefault();
+            var methodSyntax = MethodSyntax(context.Node);
             var parameterNames = GetParameterNames(methodSyntax);
             // either no parameters, or duplicated parameters
             if (!parameterNames.Any())
@@ -96,14 +92,9 @@ namespace SonarAnalyzer.Rules
                 .SelectMany(th => th.DescendantTokens())
                 .Where(IsStringLiteral);
 
-            var stringTokenAndParameterPairs = GetStringTokenAndParamNamePairs(stringTokensInsideThrowExpressions, parameterNames);
-
-            foreach (var stringTokenAndParam in stringTokenAndParameterPairs)
+            foreach (var stringTokenAndParam in GetStringTokenAndParamNamePairs(stringTokensInsideThrowExpressions, parameterNames))
             {
-                context.ReportIssue(Diagnostic.Create(
-                    descriptor: Rule,
-                    location: stringTokenAndParam.Key.GetLocation(),
-                    messageArgs: stringTokenAndParam.Value));
+                context.ReportIssue(Diagnostic.Create(Rule, stringTokenAndParam.Key.GetLocation(), stringTokenAndParam.Value));
             }
         }
 
@@ -127,12 +118,9 @@ namespace SonarAnalyzer.Rules
                         result.Add(stringToken, parameterName);
                     }
                     else if (parameterName.Length > MinStringLength
-                        // we are looking at the words inside the string, so there can be multiple parameters matching inside the token
-                        // stop after the first one is found
+                        // we are looking at the words inside the string, so there can be multiple parameters matching inside the token stop after the first one is found
                         && !result.ContainsKey(stringToken)
-                        && stringTokenText
-                            .Split(separators, StringSplitOptions.RemoveEmptyEntries)
-                            .Any(word => word.Equals(parameterName, Language.NameComparison)))
+                        && stringTokenText.Split(separators, StringSplitOptions.RemoveEmptyEntries).Any(word => word.Equals(parameterName, Language.NameComparison)))
                     {
                         result.Add(stringToken, parameterName);
                     }

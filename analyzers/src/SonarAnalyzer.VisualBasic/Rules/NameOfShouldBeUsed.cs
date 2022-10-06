@@ -39,36 +39,29 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        protected override bool IsStringLiteral(SyntaxToken t) => t.IsAnyKind(StringTokenTypes);
+        protected override MethodBlockBaseSyntax MethodSyntax(SyntaxNode node) =>
+            node.AncestorsAndSelf().OfType<MethodBlockBaseSyntax>().FirstOrDefault();
+
+        protected override bool IsStringLiteral(SyntaxToken t) =>
+            t.IsAnyKind(StringTokenTypes);
 
         protected override IEnumerable<string> GetParameterNames(MethodBlockBaseSyntax method)
         {
-            var paramGroups = method?.BlockStatement.ParameterList?.Parameters.GroupBy(p => p.Identifier.Identifier.ValueText);
-            if (paramGroups == null || paramGroups.Any(g => g.Count() != 1))
-            {
-                return Enumerable.Empty<string>();
-            }
-
-            return paramGroups.Select(g => g.First().Identifier.Identifier.ValueText);
+            var paramGroups = method?.BlockStatement.ParameterList?.Parameters.GroupBy(x => x.Identifier.Identifier.ValueText);
+            return paramGroups == null || paramGroups.Any(x => x.Count() != 1)
+                ? Enumerable.Empty<string>()
+                : paramGroups.Select(x => x.First().Identifier.Identifier.ValueText);
         }
 
         protected override bool LeastLanguageVersionMatches(SyntaxNodeAnalysisContext context) =>
             context.Compilation.IsAtLeastLanguageVersion(LanguageVersion.VisualBasic14);
 
-        protected override bool IsArgumentExceptionCallingNameOf(SyntaxNode node, IEnumerable<string> arguments)
-        {
-            var throwNode = (ThrowStatementSyntax)node;
-            if (throwNode.Expression is ObjectCreationExpressionSyntax objectCreation)
-            {
-                var exceptionType = objectCreation.Type.ToString();
-                return ArgumentExceptionNameOfPosition(exceptionType) is var idx
-                    && objectCreation.ArgumentList?.Arguments is { } creationArguments
-                    && creationArguments.Count >= idx + 1
-                    && creationArguments[idx].GetExpression() is NameOfExpressionSyntax nameOfExpression
-                    && arguments.Contains(nameOfExpression.Argument.ToString());
-            }
-
-            return false;
-        }
+        protected override bool IsArgumentExceptionCallingNameOf(SyntaxNode node, IEnumerable<string> arguments) =>
+            ((ThrowStatementSyntax)node).Expression is ObjectCreationExpressionSyntax objectCreation
+            && ArgumentExceptionNameOfPosition(objectCreation.Type.ToString()) is var idx
+            && objectCreation.ArgumentList?.Arguments is { } creationArguments
+            && creationArguments.Count >= idx + 1
+            && creationArguments[idx].GetExpression() is NameOfExpressionSyntax nameOfExpression
+            && arguments.Contains(nameOfExpression.Argument.ToString());
     }
 }
