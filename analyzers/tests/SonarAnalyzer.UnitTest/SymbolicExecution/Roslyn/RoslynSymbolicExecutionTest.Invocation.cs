@@ -139,6 +139,7 @@ End Module";
         [DataTestMethod]
         [DataRow("Initialize();")]
         [DataRow("this.Initialize();")]
+        [DataRow("this?.Initialize();")]
         [DataRow("(this).Initialize();")]
         [DataRow("(((this))).Initialize();")]
         [DataRow("((IDisposable)this).Dispose();")]
@@ -235,23 +236,6 @@ Tag(""StaticField"", StaticObjectField);
             validator.ValidateContainsOperation(OperationKind.Invocation);
             validator.ValidateTag("Field", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
             validator.ValidateTag("StaticField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-        }
-
-        [TestMethod]
-        public void Instance_InstanceMethodCallClearsFields_ConditionalAccess()
-        {
-            var code = $@"
-ObjectField = null;
-StaticObjectField = null;
-var otherInstance = new Sample();
-this?.InstanceMethod();
-Tag(""Field"", ObjectField);
-Tag(""StaticField"", StaticObjectField);
-";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateContainsOperation(OperationKind.Invocation);
-            validator.ValidateTag("Field", x => x.HasConstraint<ObjectConstraint>().Should().BeFalse());
-            validator.ValidateTag("StaticField", x => x.HasConstraint<ObjectConstraint>().Should().BeFalse());
         }
 
         [DataTestMethod]
