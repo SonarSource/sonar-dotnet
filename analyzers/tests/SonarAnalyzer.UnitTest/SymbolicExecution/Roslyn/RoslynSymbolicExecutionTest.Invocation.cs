@@ -265,20 +265,20 @@ public static class Extensions
 }}";
             var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
             validator.ValidateContainsOperation(OperationKind.Invocation);
+            validator.ValidateContainsOperation(OperationKind.FlowCapture);
+            validator.ValidateContainsOperation(OperationKind.FlowCaptureReference);
             var field = validator.Symbol("ObjectField");
             var staticField = validator.Symbol("StaticObjectField");
             var condition = validator.Symbol("condition");
             validator.TagStates("End").Should().SatisfyRespectively(
-                x =>
+                x => // Branch for "this"
                 {
-                    // this case
                     x[condition].Should().BeNull(); // Should have BoolConstraint.True
                     x[field].AllConstraints.Should().BeEmpty();
                     x[staticField].AllConstraints.Should().BeEmpty();
                 },
-                x =>
+                x => // Branch for "otherInstance"
                 {
-                    // otherInstance case
                     x[condition].Should().BeNull();  // Should have BoolConstraint.False
                     x[field].HasConstraint(ObjectConstraint.Null).Should().BeTrue();
                     x[staticField].HasConstraint(ObjectConstraint.Null).Should().BeTrue();
