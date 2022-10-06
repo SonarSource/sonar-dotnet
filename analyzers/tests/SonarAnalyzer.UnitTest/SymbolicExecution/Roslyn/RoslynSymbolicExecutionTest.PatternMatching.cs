@@ -199,6 +199,23 @@ Tag(""End"", arg);";
         }
 
         [TestMethod]
+        public void ResursivePattern_ExistingConstraint_DoesNothing()
+        {
+            const string code = @"
+object value = arg switch
+{
+    null => null,
+    { } when Condition => null, // Should not create arg=Null
+    _ => Tag(""Arg"", arg)
+};
+
+static object Tag(string name, object value) => null;";
+            var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+            validator.ValidateContainsOperation(OperationKind.RecursivePattern);
+            validator.ValidateTag("Arg", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue()); // Should not have Null in any case
+        }
+
+        [TestMethod]
         public void DeclarationPattern_SetsNotNull_NoPreviousConstraint()
         {
             const string code = @"
@@ -299,6 +316,23 @@ Tag(""End"", arg);";
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && x.HasConstraint(ObjectConstraint.Null))
                 .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && x.HasConstraint(ObjectConstraint.NotNull));
+        }
+
+        [TestMethod]
+        public void DeclarationPattern_ExistingConstraint_DoesNothing()
+        {
+            const string code = @"
+object value = arg switch
+{
+    null => null,
+    Exception ex when Condition => null, // Should not create arg=Null
+    _ => Tag(""Arg"", arg)
+};
+
+static object Tag(string name, object value) => null;";
+            var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+            validator.ValidateContainsOperation(OperationKind.DeclarationPattern);
+            validator.ValidateTag("Arg", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue()); // Should not have Null in any case
         }
 
         [DataTestMethod]

@@ -137,7 +137,7 @@ namespace Tests.Diagnostics.CSharp8
             {
                 null => throw new ArgumentNullException(nameof(arg)),
                 { } when IsInstance(arg) => "42",
-                _ => throw new InvalidOperationException("Unexpected type: " + arg.GetType().Name)  // Noncompliant FP
+                _ => throw new InvalidOperationException("Unexpected type: " + arg.GetType().Name)  // Compliant, arg cannot be null here
             };
 
         private static bool IsInstance(object arg) => false;
