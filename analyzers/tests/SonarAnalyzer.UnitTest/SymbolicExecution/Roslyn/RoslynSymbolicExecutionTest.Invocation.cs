@@ -826,8 +826,7 @@ Tag(""Arg"", arg);";
             var code = $@"
 Tag(""Before"");
 {throwHelperCall}
-Tag(""Unreachable"");
-";
+Tag(""Unreachable"");";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateTagOrder("Before");
             validator.ValidateExitReachCount(0);
@@ -845,8 +844,7 @@ if (condition)
     {throwHelperCall}
     Tag(""Unreachable"");
 }}
-Tag(""End"");
-";
+Tag(""End"");";
             var validator = SETestContext.CreateCS(code, ", bool condition").Validator;
             validator.ValidateTagOrder("Before", "End");
             validator.ValidateExitReachCount(1);
@@ -871,8 +869,7 @@ finally
 {{
     Tag(""Finally"");
 }}
-Tag(""End"");
-";
+Tag(""End"");";
             var validator = SETestContext.CreateCS(code, ", bool condition").Validator;
             validator.ValidateTagOrder("Catch", "Finally", "Finally", "End");
             validator.ValidateExitReachCount(2);
@@ -980,6 +977,18 @@ private static bool Equals(object a, object b, object c) => false;";
             validator.ValidateTag("InstanceTwo", x => x.Should().BeNull());
             validator.ValidateTag("NoArgs", x => x.Should().BeNull());
             validator.ValidateTag("MoreArgs", x => x.Should().BeNull());
+        }
+
+        [TestMethod]
+        public void Invocation_TargetMethodIsDelegateInvoke()
+        {
+            var code = @"
+Func<Action> f = () => new Action(()=> { });
+f()();";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateContainsOperation(OperationKindEx.Invocation);
+            validator.ValidateExitReachCount(1);
+            validator.ValidateExecutionCompleted();
         }
 
         private static IEnumerable<object[]> ThrowHelperCalls =>
