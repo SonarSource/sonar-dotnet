@@ -41,13 +41,13 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         /// Override this if you need to return multiple states.
         /// </summary>
         public virtual ProgramState[] PreProcess(SymbolicContext context) =>
-            PreProcessSimple(context) is { } newState ? new[] { newState } : EmptyStates;
+            PreProcessSimple(context) is { } newState ? newState.ToArray() : EmptyStates;
 
         /// <summary>
         /// Override this if you need to return multiple states.
         /// </summary>
         public virtual ProgramState[] PostProcess(SymbolicContext context) =>
-            PostProcessSimple(context) is { } newState ? new[] { newState } : EmptyStates;
+            PostProcessSimple(context) is { } newState ? newState.ToArray() : EmptyStates;
 
         /// <summary>
         /// Method is invoked for each execution flow that reaches exit block. Once for each unique state after LVA cleanup.

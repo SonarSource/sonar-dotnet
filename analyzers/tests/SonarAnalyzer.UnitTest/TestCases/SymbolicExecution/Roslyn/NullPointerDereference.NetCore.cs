@@ -94,4 +94,20 @@ public class NotNullWhenTests
         result = someValue?.ToUpper();
         return !string.IsNullOrEmpty(someValue);
     }
+
+    public void TwoParameterTest(string first, string second)
+    {
+        if (TwoNotNullWhen(first, second))
+        {
+            first.ToString();   // Compliant
+            second.ToString();  // Compliant
+        }
+        else
+        {
+            first.ToString();   // Compliant, we don't learn Null constraint from NotNullWhenAttribute
+            second.ToString();  // Compliant, we don't know value of this
+        }
+    }
+
+    private static bool TwoNotNullWhen([System.Diagnostics.CodeAnalysis.NotNullWhen(true)] string first, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)] string second) => true;
 }

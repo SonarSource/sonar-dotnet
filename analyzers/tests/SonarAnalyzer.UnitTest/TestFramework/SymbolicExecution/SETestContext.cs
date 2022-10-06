@@ -60,6 +60,7 @@ public class Sample
 {{
     {method}
 
+    private static void Tag(string name) {{ }}
     private static void Tag(string name, object arg) {{ }}
     private static T Unknown<T>() => default;
 }}

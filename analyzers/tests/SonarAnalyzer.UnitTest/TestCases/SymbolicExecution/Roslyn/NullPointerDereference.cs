@@ -1506,3 +1506,134 @@ namespace ValidatedNotNullAttributeTest
         }
     }
 }
+
+namespace DoesNotReturnIf
+{
+    public sealed class DoesNotReturnIfAttribute : Attribute
+    {
+        public DoesNotReturnIfAttribute(bool parameterValue) { }
+    }
+
+    public class Sample
+    {
+        private object notImportant;
+
+        public void ForTrue(object arg)
+        {
+            var canBeNull = arg?.ToString();
+            FailsWhenTrue(notImportant, canBeNull == null, notImportant);
+            canBeNull.ToString();    // Compliant
+        }
+
+        public void ForTrueFromUnknown(object arg)
+        {
+            FailsWhenTrue(notImportant, arg == null, notImportant);
+            if (arg == null)
+            {
+                arg.ToString();    // Compliant, unreachable
+            }
+        }
+
+        public void ForTrueAny(object arg1, object arg2, bool condition)
+        {
+            var canBeNull1 = arg1 == null ? null : arg1.ToString();
+            var canBeNull2 = arg2 == null ? null : arg2.ToString();
+            FailsWhenTrueAny(canBeNull1 == null, condition);
+            canBeNull1.ToString();  // Compliant
+            FailsWhenTrueAny(condition, canBeNull2 == null);
+            canBeNull2.ToString();  // Compliant
+            if (arg1 == null || arg2 == null)
+            {
+                arg1.ToString();    // Compliant, unreachable
+                arg2.ToString();
+            }
+        }
+
+        public void ForTrueAny(object arg1, object arg2)
+        {
+            var canBeNull1 = arg1 == null ? null : arg1.ToString();
+            var canBeNull2 = arg2 == null ? null : arg2.ToString();
+            FailsWhenTrueAny(canBeNull1 == null, canBeNull2 == null);
+            canBeNull1.ToString();  // Compliant
+            canBeNull2.ToString();  // Compliant
+            if (arg1 == null || arg2 == null)
+            {
+                arg1.ToString();    // Compliant, unreachable
+                arg2.ToString();
+            }
+        }
+
+        public void ForFalse(object arg)
+        {
+            var canBeNull = arg?.ToString();
+            FailsWhenFalse(notImportant, canBeNull != null, notImportant);
+            canBeNull.ToString();    // Compliant
+        }
+
+        public void ForFalseAny(object arg1, object arg2, bool condition)
+        {
+            var canBeNull1 = arg1 == null ? null : arg1.ToString();
+            var canBeNull2 = arg2 == null ? null : arg2.ToString();
+            FailsWhenFalseAny(canBeNull1 != null, condition);
+            canBeNull1.ToString();  // Compliant
+            FailsWhenFalseAny(condition, canBeNull2 != null);
+            canBeNull2.ToString();  // Compliant
+            if (arg1 == null || arg2 == null)
+            {
+                arg1.ToString();    // Compliant, unreachable
+                arg2.ToString();
+            }
+        }
+
+        public void ForFalseAny(object arg1, object arg2)
+        {
+            var canBeNull1 = arg1 == null ? null : arg1.ToString();
+            var canBeNull2 = arg2 == null ? null : arg2.ToString();
+            FailsWhenFalseAny(canBeNull1 != null, canBeNull2 != null);
+            canBeNull1.ToString();  // Compliant
+            canBeNull2.ToString();  // Compliant
+            if (arg1 == null || arg2 == null)
+            {
+                arg1.ToString();    // Compliant, unreachable
+                arg2.ToString();
+            }
+        }
+
+        public void BoolSymbols_TrueTrue()
+        {
+            var isTrue = true;
+            object isNull = null;
+            FailsWhenTrue(notImportant, isTrue, notImportant);
+            isNull.ToString();  // Compliant, unreachable
+        }
+
+        public void BoolSymbols_TrueFalse()
+        {
+            var isTrue = true;
+            object isNull = null;
+            FailsWhenFalse(notImportant, isTrue, notImportant);
+            isNull.ToString();  // Noncompliant
+        }
+
+        public void BoolSymbols_FalseTrue()
+        {
+            var isFalse = false;
+            object isNull = null;
+            FailsWhenTrue(notImportant, isFalse, notImportant);
+            isNull.ToString();  // Noncompliant
+        }
+
+        public void BoolSymbols_FalseFalse()
+        {
+            var isFalse = false;
+            object isNull = null;
+            FailsWhenFalse(notImportant, isFalse, notImportant);
+            isNull.ToString();  // Compliant, unreachable
+        }
+
+        public void FailsWhenTrue([CLSCompliant(false)] object before, [DoesNotReturnIf(true), CLSCompliant(false)] bool condition, object after) { }
+        public void FailsWhenFalse(object before, [DoesNotReturnIf(false)] bool condition, object after) { }
+        public void FailsWhenTrueAny([DoesNotReturnIf(true)] bool condition1, [DoesNotReturnIf(true)] bool condition2) { }
+        public void FailsWhenFalseAny([DoesNotReturnIf(false)] bool condition1, [DoesNotReturnIf(false)] bool condition2) { }
+    }
+}

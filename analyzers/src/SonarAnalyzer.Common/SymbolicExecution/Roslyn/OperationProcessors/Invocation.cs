@@ -63,36 +63,66 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
             _ when invocation.TargetMethod.Name == nameof(object.Equals) => ProcessEquals(context, invocation),
             _ when invocation.TargetMethod.IsAny(KnownType.System_String, nameof(string.IsNullOrEmpty), nameof(string.IsNullOrWhiteSpace)) =>
                 ProcessIsNotNullWhen(state, invocation.WrappedOperation, invocation.Arguments[0].ToArgument(), false, true),
-            _ => ProcessIsNotNullWhen(state, invocation),
+            _ => ProcessArgumentAttributes(state, invocation),
         };
     }
 
-    private static ProgramState[] ProcessIsNotNullWhen(ProgramState state, IInvocationOperationWrapper invocation)
+    private static ProgramState[] ProcessArgumentAttributes(ProgramState state, IInvocationOperationWrapper invocation)
     {
-        foreach (var argument in invocation.Arguments.Select(x => x.ToArgument())) // TODO: support attributes on more than one argument
+        var states = state.ToArray();
+        foreach (var argument in invocation.Arguments.Select(x => x.ToArgument()).Where(x => x.Parameter is not null))
         {
-            if (argument.Parameter?.GetAttributes().FirstOrDefault(x => x.HasName("NotNullWhenAttribute")) is { } attribute
-                && attribute.TryGetAttributeValue<bool>("returnValue", out var returnValue))
+            foreach (var attribute in argument.Parameter.GetAttributes())
             {
-                return ProcessIsNotNullWhen(state, invocation.WrappedOperation, argument, returnValue, false);
+                states = ProcessArgumentAttribute(states, invocation, argument, attribute);
             }
         }
-        return new[] { state };
+        return states;
+    }
+
+    private static ProgramState[] ProcessArgumentAttribute(ProgramState[] states, IInvocationOperationWrapper invocation, IArgumentOperationWrapper argument, AttributeData attribute)
+    {
+        if (AttributeValue("NotNullWhenAttribute", "returnValue") is { } notNullWhenValue)
+        {
+            return states.SelectMany(x => ProcessIsNotNullWhen(x, invocation.WrappedOperation, argument, notNullWhenValue, false)).ToArray();
+        }
+        else if (AttributeValue("DoesNotReturnIfAttribute", "parameterValue") is { } doesNotReturnIfValue)
+        {
+            return states.SelectMany(x => ProcessDoesNotReturnIf(x, argument, doesNotReturnIfValue)).ToArray();
+        }
+        else
+        {
+            return states;
+        }
+
+        bool? AttributeValue(string attributeName, string valueName) =>
+            attribute.HasName(attributeName) && attribute.TryGetAttributeValue<bool>(valueName, out var value) ? value : null;
     }
 
     private static ProgramState[] ProcessIsNotNullWhen(ProgramState state, IOperation invocation, IArgumentOperationWrapper argument, bool when, bool learnNull)
     {
         var whenBoolConstraint = BoolConstraint.From(when);
-        return state[argument.Value]?.Constraint<ObjectConstraint>() switch
-        {
-            ObjectConstraint constraint when constraint == ObjectConstraint.NotNull && argument.Parameter.RefKind == RefKind.None =>
-                new[] { state },                                                                 // The "normal" state handling reflects already what is going on.
-            ObjectConstraint constraint when constraint == ObjectConstraint.Null && argument.Parameter.RefKind == RefKind.None =>
-                new[] { state.SetOperationConstraint(invocation, whenBoolConstraint.Opposite) }, // IsNullOrEmpty([NotNullWhen(false)] arg) returns true if arg is null
-            _ when argument.WrappedOperation.TrackedSymbol() is { } argumentSymbol =>
-                ExplodeStates(argumentSymbol),
-            _ => new[] { state }
-        };
+        return state[invocation]?.Constraint<BoolConstraint>() is { } existingBoolConstraint
+            ? DefineConstraintsFromKnownResult().ToArray()
+            : DefineAllConstraints();
+
+        // There's a lot of room for improvement here to properly support cases with more than one attribute like TimeOnly.TryParseExact
+        ProgramState DefineConstraintsFromKnownResult() =>
+            existingBoolConstraint.Equals(when) && argument.WrappedOperation.TrackedSymbol() is { } argumentSymbol
+                ? state.SetSymbolConstraint(argumentSymbol, ObjectConstraint.NotNull)
+                : state;
+
+        ProgramState[] DefineAllConstraints() =>
+            state[argument.Value]?.Constraint<ObjectConstraint>() switch
+            {
+                ObjectConstraint constraint when constraint == ObjectConstraint.NotNull && argument.Parameter.RefKind == RefKind.None =>
+                    state.ToArray(),                                                                 // The "normal" state handling reflects already what is going on.
+                ObjectConstraint constraint when constraint == ObjectConstraint.Null && argument.Parameter.RefKind == RefKind.None =>
+                    state.SetOperationConstraint(invocation, whenBoolConstraint.Opposite).ToArray(), // IsNullOrEmpty([NotNullWhen(false)] arg) returns true if arg is null
+                _ when argument.WrappedOperation.TrackedSymbol() is { } argumentSymbol =>
+                    ExplodeStates(argumentSymbol),
+                _ => state.ToArray()
+            };
 
         ProgramState[] ExplodeStates(ISymbol argumentSymbol) =>
             learnNull
@@ -109,11 +139,16 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
                     };
     }
 
-    private ProgramState[] ProcessDebugAssert(SymbolicContext context, IInvocationOperationWrapper invocation)
+    private static ProgramState[] ProcessDoesNotReturnIf(ProgramState state, IArgumentOperationWrapper argument, bool when) =>
+        state[argument.Value] is { } argumentValue && argumentValue.HasConstraint(BoolConstraint.From(when))
+            ? EmptyStates
+            : ProcessAssertedBoolSymbol(state, argument.Value, !when).ToArray();
+
+    private static ProgramState[] ProcessDebugAssert(SymbolicContext context, IInvocationOperationWrapper invocation)
     {
         if (invocation.Arguments.IsEmpty)   // Defensive: User-defined useless method
         {
-            return new[] { context.State };
+            return context.State.ToArray();
         }
         else
         {
@@ -121,15 +156,15 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
                 && context.State[argumentValue] is { } value
                 && value.HasConstraint(BoolConstraint.False)
                     ? EmptyStates
-                    : new[] { ProcessDebugAssertBoolSymbol(context.State, argumentValue, false) };
+                    : ProcessAssertedBoolSymbol(context.State, argumentValue, false).ToArray();
         }
     }
 
-    private ProgramState ProcessDebugAssertBoolSymbol(ProgramState state, IOperation operation, bool isNegated)
+    private static ProgramState ProcessAssertedBoolSymbol(ProgramState state, IOperation operation, bool isNegated)
     {
         if (operation.Kind == OperationKindEx.Unary && IUnaryOperationWrapper.FromOperation(operation) is { OperatorKind: UnaryOperatorKind.Not } unaryNot)
         {
-            return ProcessDebugAssertBoolSymbol(state, unaryNot.Operand, !isNegated);
+            return ProcessAssertedBoolSymbol(state, unaryNot.Operand, !isNegated);
         }
         else
         {
@@ -150,11 +185,11 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
         {
             if (leftConstraint == ObjectConstraint.Null && rightConstraint == ObjectConstraint.Null)
             {
-                return new[] { context.SetOperationConstraint(BoolConstraint.True) };
+                return context.SetOperationConstraint(BoolConstraint.True).ToArray();
             }
             else if (leftConstraint is not null && rightConstraint is not null)
             {
-                return new[] { context.SetOperationConstraint(BoolConstraint.False) };
+                return context.SetOperationConstraint(BoolConstraint.False).ToArray();
             }
             else if ((leftConstraint == ObjectConstraint.Null ? rightOperation : leftOperation).TrackedSymbol() is { } symbol)
             {
@@ -165,7 +200,7 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
                 };
             }
         }
-        return new[] { context.State };
+        return context.State.ToArray();
     }
 
     private static bool IsThrowHelper(IMethodSymbol method) =>
@@ -178,14 +213,14 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
     private static ProgramState[] ProcessInformationIsNothing(SymbolicContext context, IInvocationOperationWrapper invocation) =>
         context.State[invocation.Arguments[0].ToArgument().Value]?.Constraint<ObjectConstraint>() switch
         {
-            ObjectConstraint constraint when constraint == ObjectConstraint.Null => new[] { context.SetOperationConstraint(BoolConstraint.True) },
-            ObjectConstraint constraint when constraint == ObjectConstraint.NotNull => new[] { context.SetOperationConstraint(BoolConstraint.False) },
-            _ when invocation.Arguments[0].ToArgument().Value.UnwrapConversion().Type is { } type && !type.CanBeNull() => new[] { context.SetOperationConstraint(BoolConstraint.False) },
+            ObjectConstraint constraint when constraint == ObjectConstraint.Null => context.SetOperationConstraint(BoolConstraint.True).ToArray(),
+            ObjectConstraint constraint when constraint == ObjectConstraint.NotNull => context.SetOperationConstraint(BoolConstraint.False).ToArray(),
+            _ when invocation.Arguments[0].ToArgument().Value.UnwrapConversion().Type is { } type && !type.CanBeNull() => context.SetOperationConstraint(BoolConstraint.False).ToArray(),
             _ when invocation.Arguments[0].TrackedSymbol() is { } argumentSymbol => new[]
             {
                         context.SetOperationConstraint(BoolConstraint.True).SetSymbolConstraint(argumentSymbol, ObjectConstraint.Null),
                         context.SetOperationConstraint(BoolConstraint.False).SetSymbolConstraint(argumentSymbol, ObjectConstraint.NotNull),
             },
-            _ => new[] { context.State }
+            _ => context.State.ToArray()
         };
 }

@@ -79,7 +79,7 @@ internal sealed partial class Invocation
         var name = invocation.TargetMethod.Name;
         if (EnumerableAndQueryableReturningNotNull.Contains(name))
         {
-            return new[] { context.SetOperationConstraint(ObjectConstraint.NotNull) };
+            return context.SetOperationConstraint(ObjectConstraint.NotNull).ToArray();
         }
         else if (name == nameof(Enumerable.FirstOrDefault)   // ElementAtOrDefault is intentionally not supported. It's causing many FPs
             || name == nameof(Enumerable.LastOrDefault)
@@ -91,11 +91,11 @@ internal sealed partial class Invocation
                     context.SetOperationConstraint(ObjectConstraint.Null),
                     context.SetOperationConstraint(ObjectConstraint.NotNull),
                 }
-                : new[] { context.State };
+                : context.State.ToArray();
         }
         else
         {
-            return new[] { context.State };
+            return context.State.ToArray();
         }
     }
 }

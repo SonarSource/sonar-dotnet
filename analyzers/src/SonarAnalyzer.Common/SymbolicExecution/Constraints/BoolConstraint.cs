@@ -35,5 +35,8 @@ namespace SonarAnalyzer.SymbolicExecution.Constraints
 
         public static BoolConstraint From(bool value) =>
             value ? True : False;
+
+        public bool Equals(bool value) =>
+            this == From(value);
     }
 }

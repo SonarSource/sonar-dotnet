@@ -33,6 +33,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
     public sealed record ProgramState : IEquatable<ProgramState>
     {
         public static readonly ProgramState Empty = new();
+        private ProgramState[] toArray;
 
         private ImmutableDictionary<IOperation, SymbolicValue> OperationValue { get; init; }     // Current SymbolicValue result of a given operation
         private ImmutableDictionary<ISymbol, SymbolicValue> SymbolValue { get; init; }
@@ -55,6 +56,16 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             CaptureOperation = ImmutableDictionary<CaptureId, IOperation>.Empty;
             PreservedSymbols = ImmutableHashSet<ISymbol>.Empty;
             Exceptions = ImmutableStack<ExceptionState>.Empty;
+        }
+
+        protected ProgramState(ProgramState original)   // Custom record override constructor to reset "toArray"
+        {
+            OperationValue = original.OperationValue;
+            SymbolValue = original.SymbolValue;
+            VisitCount = original.VisitCount;
+            CaptureOperation = original.CaptureOperation;
+            PreservedSymbols = original.PreservedSymbols;
+            Exceptions = original.Exceptions;
         }
 
         public ProgramState SetOperationValue(IOperationWrapperSonar operation, SymbolicValue value) =>
@@ -144,6 +155,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             && other.CaptureOperation.DictionaryEquals(CaptureOperation)
             && other.PreservedSymbols.SetEquals(PreservedSymbols)
             && other.Exceptions.SequenceEqual(Exceptions);
+
+        public ProgramState[] ToArray() =>
+            toArray ??= new[] { this };
 
         public override string ToString() =>
             Equals(Empty) ? "Empty" + Environment.NewLine : SerializeExceptions() + SerializeSymbols() + SerializeOperations() + SerializeCaptures();
