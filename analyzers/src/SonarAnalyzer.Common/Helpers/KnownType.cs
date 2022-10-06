@@ -38,6 +38,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Azure_Storage_Files_DataLake_DataLakeServiceClient = new("Azure.Storage.Files.DataLake.DataLakeServiceClient");
         internal static readonly KnownType Azure_ResourceManager_ArmClient = new("Azure.ResourceManager.ArmClient");
         internal static readonly KnownType Dapper_SqlMapper = new("Dapper.SqlMapper");
+        internal static readonly KnownType Dapper_CommandDefinition = new("Dapper.CommandDefinition");
         internal static readonly KnownType FluentAssertions_Execution_AssertionScope = new("FluentAssertions.Execution.AssertionScope");
         internal static readonly KnownType JWT_Builder_JwtBuilder = new("JWT.Builder.JwtBuilder");
         internal static readonly KnownType JWT_IJwtDecoder = new("JWT.IJwtDecoder");

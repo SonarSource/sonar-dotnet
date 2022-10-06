@@ -9,7 +9,7 @@ namespace Tests.Diagnostics
     {
         private IDbConnection con = null;
 
-        public void NonCompliant_Concat_Query(string query, string param)
+        public void SqlMapper_Query(string query, string param)
         {
             con.Query("Select Name From Person Where Id=@Id", new { Id = param}); // Compliant
             con.Query(query + param);                                             // Noncompliant
@@ -21,7 +21,7 @@ namespace Tests.Diagnostics
             con.Query<DapperTest>(query + param, new { Id = 1 });                 // Noncompliant
         }
 
-        public async Task NonCompliant_Concat_QueryAsync(string query, string param)
+        public async Task SqlMapper_QueryAsync(string query, string param)
         {
             await con.QueryAsync("Select Name From Person Where Id=@Id", new { Id = param }); // Compliant
             await con.QueryAsync(query + param);                                              // Noncompliant
@@ -33,7 +33,7 @@ namespace Tests.Diagnostics
             await con.QueryAsync<DapperTest>(query + param, new { Id = 1 });                  // Noncompliant
         }
 
-        public void NonCompliant_Concat_QueryFirst(string query, string param)
+        public void SqlMapper_QueryFirst(string query, string param)
         {
             con.QueryFirst("Select Name From Person Where Id=@Id", new { Id = param }); // Compliant
             con.QueryFirst(query + param);                                              // Noncompliant
@@ -45,7 +45,7 @@ namespace Tests.Diagnostics
             con.QueryFirst<DapperTest>(query + param, new { Id = 1 });                  // Noncompliant
         }
 
-        public async Task NonCompliant_Concat_QueryFirstAsync(string query, string param)
+        public async Task SqlMapper_QueryFirstAsync(string query, string param)
         {
             await con.QueryFirstAsync("Select Name From Person Where Id=@Id", new { Id = param }); // Compliant
             await con.QueryFirstAsync(query + param);                                              // Noncompliant
@@ -57,7 +57,7 @@ namespace Tests.Diagnostics
             await con.QueryFirstAsync<DapperTest>(query + param, new { Id = 1 });                  // Noncompliant
         }
 
-        public void NonCompliant_Concat_QueryFirstOrDefault(string query, string param)
+        public void SqlMapper_QueryFirstOrDefault(string query, string param)
         {
             con.QueryFirstOrDefault("Select Name From Person Where Id=@Id", new { Id = param }); // Compliant
             con.QueryFirstOrDefault(query + param);                                              // Noncompliant
@@ -69,7 +69,7 @@ namespace Tests.Diagnostics
             con.QueryFirstOrDefault<DapperTest>(query + param, new { Id = 1 });                  // Noncompliant
         }
 
-        public async Task NonCompliant_Concat_QueryFirstOrDefaultAsync(string query, string param)
+        public async Task SqlMapper_QueryFirstOrDefaultAsync(string query, string param)
         {
             await con.QueryFirstOrDefaultAsync("Select Name From Person Where Id=@Id", new { Id = param }); // Compliant
             await con.QueryFirstOrDefaultAsync(query + param);                                              // Noncompliant
@@ -81,7 +81,7 @@ namespace Tests.Diagnostics
             await con.QueryFirstOrDefaultAsync<DapperTest>(query + param, new { Id = 1 });                  // Noncompliant
         }
 
-        public void NonCompliant_Concat_QuerySingle(string query, string param)
+        public void SqlMapper_QuerySingle(string query, string param)
         {
             con.QuerySingle("Select Name From Person Where Id=@Id", new { Id = param }); // Compliant
             con.QuerySingle(query + param);                                              // Noncompliant
@@ -93,7 +93,7 @@ namespace Tests.Diagnostics
             con.QuerySingle<DapperTest>(query + param, new { Id = 1 });                  // Noncompliant
         }
 
-        public async Task NonCompliant_Concat_QuerySingleAsync(string query, string param)
+        public async Task SqlMapper_QuerySingleAsync(string query, string param)
         {
             await con.QuerySingleAsync("Select Name From Person Where Id=@Id", new { Id = param }); // Compliant
             await con.QuerySingleAsync(query + param);                                              // Noncompliant
@@ -105,7 +105,7 @@ namespace Tests.Diagnostics
             await con.QuerySingleAsync<DapperTest>(query + param, new { Id = 1 });                  // Noncompliant
         }
 
-        public void NonCompliant_Concat_QuerySingleOrDefault(string query, string param)
+        public void SqlMapper_QuerySingleOrDefault(string query, string param)
         {
             con.QuerySingleOrDefault("Select Name From Person Where Id=@Id", new { Id = param }); // Compliant
             con.QuerySingleOrDefault(query + param);                                              // Noncompliant
@@ -117,7 +117,7 @@ namespace Tests.Diagnostics
             con.QuerySingleOrDefault<DapperTest>(query + param, new { Id = 1 });                  // Noncompliant
         }
 
-        public async Task NonCompliant_Concat_QuerySingleOrDefaultAsync(string query, string param)
+        public async Task SqlMapper_QuerySingleOrDefaultAsync(string query, string param)
         {
             await con.QuerySingleOrDefaultAsync("Select Name From Person Where Id=@Id", new { Id = param }); // Compliant
             await con.QuerySingleOrDefaultAsync(query + param);                                              // Noncompliant
@@ -129,7 +129,7 @@ namespace Tests.Diagnostics
             await con.QuerySingleOrDefaultAsync<DapperTest>(query + param, new { Id = 1 });                  // Noncompliant
         }
 
-        public void NonCompliant_Concat_QueryMultiple(string query, string param)
+        public void SqlMapper_QueryMultiple(string query, string param)
         {
             con.QueryMultiple("Select Name From Person Where Id=@Id", new { Id = param }); // Compliant
             con.QueryMultiple(query + param);                                              // Noncompliant
@@ -138,7 +138,7 @@ namespace Tests.Diagnostics
             con.QueryMultiple(query + param, new { Id = 1 });                              // Noncompliant
         }
 
-        public async Task NonCompliant_Concat_QueryMultipleAsync(string query, string param)
+        public async Task SqlMapper_QueryMultipleAsync(string query, string param)
         {
             await con.QueryMultipleAsync("Select Name From Person Where Id=@Id", new { Id = param }); // Compliant
             await con.QueryMultipleAsync(query + param);                                              // Noncompliant
@@ -147,7 +147,7 @@ namespace Tests.Diagnostics
             await con.QueryMultipleAsync(query + param, new { Id = 1 });                              // Noncompliant
         }
 
-        public void NonCompliant_Concat_Execute(string query, string param)
+        public void SqlMapper_Execute(string query, string param)
         {
             con.Execute("Insert Into Person Values (Id=@Id)", new { Id = param }); // Compliant
             con.Execute(query + param);                                            // Noncompliant
@@ -156,7 +156,7 @@ namespace Tests.Diagnostics
             SqlMapper.Execute(con, query + param);                                 // Noncompliant
         }
 
-        public async Task NonCompliant_Concat_ExecuteAsync(string query, string param)
+        public async Task SqlMapper_ExecuteAsync(string query, string param)
         {
             await con.ExecuteAsync("Insert Into Person Values (Id=@Id)", new { Id = param }); // Compliant
             await con.ExecuteAsync(query + param);                                            // Noncompliant
@@ -165,7 +165,7 @@ namespace Tests.Diagnostics
             await SqlMapper.ExecuteAsync(con, query + param);                                 // Noncompliant
         }
 
-        public void NonCompliant_Concat_ExecuteReader(string query, string param)
+        public void SqlMapper_ExecuteReader(string query, string param)
         {
             con.ExecuteReader("Insert Into Person Values (Id=@Id)", new { Id = param }); // Compliant
             con.ExecuteReader(query + param);                                            // Noncompliant
@@ -174,7 +174,7 @@ namespace Tests.Diagnostics
             SqlMapper.ExecuteReader(con, query + param);                                 // Noncompliant
         }
 
-        public async Task NonCompliant_Concat_ExecuteReaderAsync(string query, string param)
+        public async Task SqlMapper_ExecuteReaderAsync(string query, string param)
         {
             await con.ExecuteReaderAsync("Insert Into Person Values (Id=@Id)", new { Id = param }); // Compliant
             await con.ExecuteReaderAsync(query + param);                                            // Noncompliant
@@ -183,7 +183,7 @@ namespace Tests.Diagnostics
             await SqlMapper.ExecuteReaderAsync(con, query + param);                                 // Noncompliant
         }
 
-        public void NonCompliant_Concat_ExecuteScalar(string query, string param)
+        public void SqlMapper_ExecuteScalar(string query, string param)
         {
             con.ExecuteScalar("Insert Into Person Values (Id=@Id)", new { Id = param }); // Compliant
             con.ExecuteScalar(query + param);                                            // Noncompliant
@@ -192,13 +192,20 @@ namespace Tests.Diagnostics
             SqlMapper.ExecuteScalar(con, query + param);                                 // Noncompliant
         }
 
-        public async Task NonCompliant_Concat_ExecuteScalarAsync(string query, string param)
+        public async Task SqlMapper_ExecuteScalarAsync(string query, string param)
         {
             await con.ExecuteScalarAsync("Insert Into Person Values (Id=@Id)", new { Id = param }); // Compliant
             await con.ExecuteScalarAsync(query + param);                                            // Noncompliant
             await con.ExecuteScalarAsync("", query + param);                                        // Compliant. The tracked strings are passed to the "param" object parameter
             await con.ExecuteScalarAsync(query + param, new { Id = 1 });                            // Noncompliant
             await SqlMapper.ExecuteScalarAsync(con, query + param);                                 // Noncompliant
+        }
+
+        public void CommandDefinition_Constrcutir(string query, string param)
+        {
+            new CommandDefinition("Insert Into Person Values (Id=@Id)", new { Id = param }); // Compliant
+            new CommandDefinition(query + param);                                            // Noncompliant
+            new CommandDefinition(query + param, new { Id = 1 });                            // Noncompliant
         }
     }
 }
