@@ -112,5 +112,13 @@ namespace SonarAnalyzer.UnitTest.Rules
                       .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCore(entityFrameworkVersion))
                       .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCoreRelational(entityFrameworkVersion));
 #endif
+        [TestMethod]
+        public void ExecutingSqlQueries_CS_Dapper() =>
+            builderCS
+                .AddPaths("ExecutingSqlQueries_Dapper.cs")
+                .AddReferences(MetadataReferenceFacade.SystemData)
+                .AddReferences(NuGetMetadataReference.Dapper())
+                .Verify();
+
     }
 }
