@@ -38,15 +38,13 @@ namespace SonarAnalyzer.Rules
         private const int MinStringLength = 5;
         private readonly char[] separators = { ' ', '.', ',', ';', '!', '?' };
 
-        // Is string literal or interpolated string
         protected abstract bool IsStringLiteral(SyntaxToken t);
 
-        // handle parameters with the same name (in the IDE it can happen) - get groups of parameters
+        // Handle parameters with the same name (in the IDE it can happen) - get groups of parameters
         protected abstract IEnumerable<string> GetParameterNames(TMethodSyntax method);
-
         protected abstract bool LeastLanguageVersionMatches(SyntaxNodeAnalysisContext context);
-
         protected abstract bool IsArgumentExceptionCallingNameOf(SyntaxNode node, IEnumerable<string> arguments);
+        protected abstract TMethodSyntax MethodSyntax(SyntaxNode node);
 
         protected override string MessageFormat => "Replace the string '{0}' with 'nameof({0})'.";
 
@@ -80,7 +78,7 @@ namespace SonarAnalyzer.Rules
                 return;
             }
 
-            var methodSyntax = context.Node is TMethodSyntax node ? node : context.Node.AncestorsAndSelf().OfType<TMethodSyntax>().First();
+            var methodSyntax = MethodSyntax(context.Node);
             var parameterNames = GetParameterNames(methodSyntax);
             // either no parameters, or duplicated parameters
             if (!parameterNames.Any())

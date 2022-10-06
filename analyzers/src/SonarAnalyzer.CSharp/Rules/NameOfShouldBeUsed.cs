@@ -40,7 +40,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        protected override bool IsStringLiteral(SyntaxToken t) => t.IsAnyKind(StringTokenTypes);
+        protected override BaseMethodDeclarationSyntax MethodSyntax(SyntaxNode node) =>
+             (BaseMethodDeclarationSyntax)node;
+
+        protected override bool IsStringLiteral(SyntaxToken t) =>
+            t.IsAnyKind(StringTokenTypes);
 
         protected override IEnumerable<string> GetParameterNames(BaseMethodDeclarationSyntax method)
         {

@@ -39,7 +39,11 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        protected override bool IsStringLiteral(SyntaxToken t) => t.IsAnyKind(StringTokenTypes);
+        protected override MethodBlockBaseSyntax MethodSyntax(SyntaxNode node) =>
+            node.AncestorsAndSelf().OfType<MethodBlockBaseSyntax>().FirstOrDefault();
+
+        protected override bool IsStringLiteral(SyntaxToken t) =>
+            t.IsAnyKind(StringTokenTypes);
 
         protected override IEnumerable<string> GetParameterNames(MethodBlockBaseSyntax method)
         {
