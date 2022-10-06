@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Helpers.Trackers
         protected abstract bool IsIdentifierWithinMemberAccess(SyntaxNode expression);
 
         public Condition MatchProperty(params MemberDescriptor[] properties) =>
-            context => MemberDescriptor.MatchesAny(context.PropertyName, context.PropertySymbol, false, Language.NameComparison, properties);
+            MatchProperty(false, properties);
 
         public Condition MatchProperty(bool checkOverridenProperties, params MemberDescriptor[] properties) =>
             context => MemberDescriptor.MatchesAny(context.PropertyName, context.PropertySymbol, checkOverridenProperties, Language.NameComparison, properties);
