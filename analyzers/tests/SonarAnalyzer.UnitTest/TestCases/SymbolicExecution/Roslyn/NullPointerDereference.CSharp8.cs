@@ -131,6 +131,17 @@ namespace Tests.Diagnostics.CSharp8
                 _ => s.ToString() // FN Switch expressions are not constrained (See #2949)
             };
         }
+
+        public string NullCheck(object arg) =>
+            arg switch
+            {
+                null => throw new ArgumentNullException(nameof(arg)),
+                { } when IsInstance(arg) => "42",
+                _ => throw new InvalidOperationException("Unexpected type: " + arg.GetType().Name)  // Noncompliant FP
+            };
+
+        private static bool IsInstance(object arg) => false;
+
     }
 
     public class DefaultLiteral
