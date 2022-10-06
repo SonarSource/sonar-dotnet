@@ -69,10 +69,13 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         }
 
         public ProgramState SetOperationValue(IOperationWrapperSonar operation, SymbolicValue value) =>
-            SetOperationValue(operation.Instance, value);
+            operation == null
+                ? throw new ArgumentNullException(nameof(operation))
+                : SetOperationValue(operation.Instance, value);
 
         public ProgramState SetOperationValue(IOperation operation, SymbolicValue value) =>
-            value == null
+            (operation ?? throw new ArgumentNullException(nameof(operation))) is var _
+            && value == null
                 ? this with { OperationValue = OperationValue.Remove(ResolveCapture(operation)) }
                 : this with { OperationValue = OperationValue.SetItem(ResolveCapture(operation), value) };
 
@@ -115,7 +118,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             this with { CaptureOperation = CaptureOperation.Remove(capture) };
 
         public IOperation ResolveCapture(IOperation operation) =>
-            operation.Kind == OperationKindEx.FlowCaptureReference
+            operation?.Kind == OperationKindEx.FlowCaptureReference
             && this[IFlowCaptureReferenceOperationWrapper.FromOperation(operation).Id] is { } captured
                 ? captured
                 : operation;

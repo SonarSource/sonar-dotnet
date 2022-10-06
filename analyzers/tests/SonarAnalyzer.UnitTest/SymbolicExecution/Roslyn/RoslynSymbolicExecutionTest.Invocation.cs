@@ -139,6 +139,7 @@ End Module";
         [DataTestMethod]
         [DataRow("Initialize();")]
         [DataRow("this.Initialize();")]
+        [DataRow("this?.Initialize();")]
         [DataRow("(this).Initialize();")]
         [DataRow("(((this))).Initialize();")]
         [DataRow("((IDisposable)this).Dispose();")]
@@ -190,7 +191,6 @@ public static class Extensions
         }
 
         [DataTestMethod]
-        [DataRow("this?.InstanceMethod();")]
         [DataRow("var dummy = Property;")]
         [DataRow("var dummy = this.Property;")]
         [DataRow("SampleProperty.InstanceMethod();")]
@@ -205,8 +205,7 @@ Tag(""BeforeField"", ObjectField);
 Tag(""BeforeStaticField"", StaticObjectField);
 {invocation}
 Tag(""AfterField"", ObjectField);
-Tag(""AfterStaticField"", StaticObjectField);
-";
+Tag(""AfterStaticField"", StaticObjectField);";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateContainsOperation(OperationKind.Invocation);
             validator.ValidateTag("BeforeField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
@@ -218,7 +217,6 @@ Tag(""AfterStaticField"", StaticObjectField);
         [DataTestMethod]
         [DataRow("otherInstance.InstanceMethod();")]
         [DataRow("(otherInstance).InstanceMethod();")]
-        [DataRow("(true ? this : otherInstance).InstanceMethod();")]
         public void Instance_InstanceMethodCall_DoesNotClearFieldsOnOtherInstances(string invocation)
         {
             var code = $@"
@@ -227,12 +225,60 @@ StaticObjectField = null;
 var otherInstance = new Sample();
 {invocation}
 Tag(""Field"", ObjectField);
-Tag(""StaticField"", StaticObjectField);
-";
+Tag(""StaticField"", StaticObjectField);";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateContainsOperation(OperationKind.Invocation);
             validator.ValidateTag("Field", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
             validator.ValidateTag("StaticField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+        }
+
+        [DataTestMethod]
+        [DataRow("(condition ? this : otherInstance).InstanceMethod();")]
+        [DataRow("(condition ? this : otherInstance).ExtensionMethod();")] // invocation with flow-capture and conversion on the receiver
+        public void Instance_InstanceMethodCall_ClearsFields_Ternary(string instanceCall)
+        {
+            var code = $@"
+public class Sample
+{{
+    private object ObjectField;
+    private static object StaticObjectField;
+
+    public void Test(bool condition)
+    {{
+        ObjectField = null;
+        StaticObjectField = null;
+        var otherInstance = new Sample();
+        {instanceCall}
+        Extensions.Tag(""End"");
+    }}
+
+    public void InstanceMethod() {{ }}
+}}
+public static class Extensions
+{{
+    public static void ExtensionMethod(this object o) {{ }}
+    public static void Tag(string name) {{ }}
+}}";
+            var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
+            validator.ValidateContainsOperation(OperationKind.Invocation);
+            validator.ValidateContainsOperation(OperationKind.FlowCapture);
+            validator.ValidateContainsOperation(OperationKind.FlowCaptureReference);
+            var field = validator.Symbol("ObjectField");
+            var staticField = validator.Symbol("StaticObjectField");
+            var condition = validator.Symbol("condition");
+            validator.TagStates("End").Should().SatisfyRespectively(
+                x => // Branch for "this"
+                {
+                    x[condition].Should().BeNull(); // Should have BoolConstraint.True
+                    x[field].AllConstraints.Should().BeEmpty();
+                    x[staticField].AllConstraints.Should().BeEmpty();
+                },
+                x => // Branch for "otherInstance"
+                {
+                    x[condition].Should().BeNull();  // Should have BoolConstraint.False
+                    x[field].HasConstraint(ObjectConstraint.Null).Should().BeTrue();
+                    x[staticField].HasConstraint(ObjectConstraint.Null).Should().BeTrue();
+                });
         }
 
         [TestMethod]
@@ -259,8 +305,7 @@ else
     InstanceMethod();
     Tag(""ElseAfter"", ObjectField);
 }}
-Tag(""AfterIfElse"", ObjectField);
-";
+Tag(""AfterIfElse"", ObjectField);";
             var invalidateConstraint = DummyConstraint.Dummy;
             var dontInvalidateConstraint = LockConstraint.Held;
             var check = new PostProcessTestCheck(x => x.Operation.Instance.Kind == OperationKindEx.SimpleAssignment
@@ -331,13 +376,22 @@ if (this.ObjectField == null)
 {{
     this.InstanceMethod(StaticObjectField == null ? 1 : 0);
 }}
-Tag(""After"", this.ObjectField);
-";
+Tag(""After"", this.ObjectField);";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.TagValues("After").Should().BeEquivalentTo(
-                new SymbolicValue().WithConstraint(ObjectConstraint.Null), // Unexpected. this.InstanceMethod happens after the ternary and should clear any constraints on this.ObjectField
-                new SymbolicValue().WithConstraint(ObjectConstraint.Null),
-                new SymbolicValue().WithConstraint(ObjectConstraint.NotNull));
+                new SymbolicValue().WithConstraint(ObjectConstraint.NotNull),
+                new SymbolicValue());
+        }
+
+        [TestMethod]
+        public void Instance_InstanceMethodCall_ClearsFieldWithBranchInArgument()
+        {
+            var code = $@"
+this.ObjectField = null;
+this.InstanceMethod(boolParameter ? 1 : 0);
+Tag(""After"", this.ObjectField);";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("After", x => x.AllConstraints.Should().BeEmpty());
         }
 
         [TestMethod]
@@ -440,8 +494,7 @@ Tag(""BeforeField"", ObjectField);
 Tag(""BeforeStaticField"", StaticObjectField);
 {invocation}
 Tag(""AfterField"", ObjectField);
-Tag(""AfterStaticField"", StaticObjectField);
-";
+Tag(""AfterStaticField"", StaticObjectField);";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateContainsOperation(OperationKind.Invocation);
             validator.ValidateTag("BeforeField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
@@ -768,8 +821,7 @@ Tag(""Arg"", arg);";
             var code = $@"
 Tag(""Before"");
 {throwHelperCall}
-Tag(""Unreachable"");
-";
+Tag(""Unreachable"");";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateTagOrder("Before");
             validator.ValidateExitReachCount(0);
@@ -787,8 +839,7 @@ if (condition)
     {throwHelperCall}
     Tag(""Unreachable"");
 }}
-Tag(""End"");
-";
+Tag(""End"");";
             var validator = SETestContext.CreateCS(code, ", bool condition").Validator;
             validator.ValidateTagOrder("Before", "End");
             validator.ValidateExitReachCount(1);
@@ -813,8 +864,7 @@ finally
 {{
     Tag(""Finally"");
 }}
-Tag(""End"");
-";
+Tag(""End"");";
             var validator = SETestContext.CreateCS(code, ", bool condition").Validator;
             validator.ValidateTagOrder("Catch", "Finally", "Finally", "End");
             validator.ValidateExitReachCount(2);
@@ -826,8 +876,7 @@ Tag(""End"");
         {
             var code = @"
 Func<Action> f = () => new Action(()=> { });
-f()();
-";
+f()();";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateContainsOperation(OperationKindEx.Invocation);
             validator.ValidateExitReachCount(1);

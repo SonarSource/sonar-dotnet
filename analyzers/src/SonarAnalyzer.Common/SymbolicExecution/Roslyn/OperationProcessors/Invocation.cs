@@ -47,7 +47,7 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
         {
             state = state.SetSymbolConstraint(symbol, ObjectConstraint.NotNull);
         }
-        if (invocation.HasThisReceiver())
+        if (invocation.HasThisReceiver(state))
         {
             state = state.ResetFieldConstraints();
         }
