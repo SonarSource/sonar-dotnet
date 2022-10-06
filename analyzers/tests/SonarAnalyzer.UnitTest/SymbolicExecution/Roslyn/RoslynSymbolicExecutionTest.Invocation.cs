@@ -208,8 +208,7 @@ Tag(""BeforeField"", ObjectField);
 Tag(""BeforeStaticField"", StaticObjectField);
 {invocation}
 Tag(""AfterField"", ObjectField);
-Tag(""AfterStaticField"", StaticObjectField);
-";
+Tag(""AfterStaticField"", StaticObjectField);";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateContainsOperation(OperationKind.Invocation);
             validator.ValidateTag("BeforeField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
@@ -230,8 +229,7 @@ StaticObjectField = null;
 var otherInstance = new Sample();
 {invocation}
 Tag(""Field"", ObjectField);
-Tag(""StaticField"", StaticObjectField);
-";
+Tag(""StaticField"", StaticObjectField);";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateContainsOperation(OperationKind.Invocation);
             validator.ValidateTag("Field", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
@@ -264,8 +262,7 @@ public static class Extensions
 {{
     public static void ExtensionMethod(this object o) {{ }}
     public static void Tag(string name) {{ }}
-}}
-";
+}}";
             var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
             validator.ValidateContainsOperation(OperationKind.Invocation);
             var field = validator.Symbol("ObjectField");
@@ -312,8 +309,7 @@ else
     InstanceMethod();
     Tag(""ElseAfter"", ObjectField);
 }}
-Tag(""AfterIfElse"", ObjectField);
-";
+Tag(""AfterIfElse"", ObjectField);";
             var invalidateConstraint = DummyConstraint.Dummy;
             var dontInvalidateConstraint = LockConstraint.Held;
             var check = new PostProcessTestCheck(x => x.Operation.Instance.Kind == OperationKindEx.SimpleAssignment
@@ -384,8 +380,7 @@ if (this.ObjectField == null)
 {{
     this.InstanceMethod(StaticObjectField == null ? 1 : 0);
 }}
-Tag(""After"", this.ObjectField);
-";
+Tag(""After"", this.ObjectField);";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.TagValues("After").Should().BeEquivalentTo(
                 new SymbolicValue().WithConstraint(ObjectConstraint.NotNull),
@@ -398,8 +393,7 @@ Tag(""After"", this.ObjectField);
             var code = $@"
 this.ObjectField = null;
 this.InstanceMethod(boolParameter ? 1 : 0);
-Tag(""After"", this.ObjectField);
-";
+Tag(""After"", this.ObjectField);";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateTag("After", x => x.AllConstraints.Should().BeEmpty());
         }
