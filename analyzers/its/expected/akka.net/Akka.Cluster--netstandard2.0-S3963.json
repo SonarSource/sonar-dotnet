@@ -7,9 +7,9 @@
 "uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
 "region":  {
 "startLine":  66,
-"startColumn":  9,
-"endLine":  81,
-"endColumn":  10
+"startColumn":  16,
+"endLine":  66,
+"endColumn":  23
 }
 }
 }

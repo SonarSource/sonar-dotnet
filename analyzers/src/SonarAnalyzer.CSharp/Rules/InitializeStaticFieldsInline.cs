@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class InitializeStaticFieldsInline : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3963";
+        private const string DiagnosticId = "S3963";
         private const string MessageFormat = "Initialize all 'static fields' inline and remove the 'static constructor'.";
 
         private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         if ((hasIfOrSwitch && assignedFieldCount <= 1)
                             || (!hasIfOrSwitch && assignedFieldCount > 0))
                         {
-                            c.ReportIssue(Diagnostic.Create(Rule, constructor.GetLocation()));
+                            c.ReportIssue(Diagnostic.Create(Rule, constructor.Identifier.GetLocation()));
                         }
                     }
                 },
