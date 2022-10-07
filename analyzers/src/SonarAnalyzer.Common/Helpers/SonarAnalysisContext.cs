@@ -140,7 +140,7 @@ namespace SonarAnalyzer.Helpers
             where TLanguageKindEnum : struct =>
             RegisterContextAction(x => context.RegisterSyntaxNodeAction(x, syntaxKinds), action, c => c.GetSyntaxTree(), c => c.Compilation, c => c.Options);
 
-        internal IEnumerable<string> GetWebConfig(CompilationAnalysisContext c)
+        internal IEnumerable<string> WebConfigFiles(CompilationAnalysisContext c)
         {
             return ProjectConfiguration(c.Options).FilesToAnalyze.FindFiles(WebConfigRegex).Where(ShouldProcess);
 

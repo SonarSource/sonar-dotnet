@@ -21,8 +21,10 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Xml.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
@@ -98,12 +100,35 @@ namespace SonarAnalyzer.Rules
                pa.MatchProperty(new MemberDescriptor(KnownType.System_Net_NetworkCredential, "Password")));
 
             InitializeActions(context);
+            context.Context.RegisterCompilationAction(c => CheckWebConfig(context.Context, c));
         }
 
         protected bool IsEnabled(AnalyzerOptions options)
         {
             configuration.Initialize(options);
             return configuration.IsEnabled(DiagnosticId);
+        }
+
+        private void CheckWebConfig(SonarAnalysisContext context, CompilationAnalysisContext c)
+        {
+            foreach (var path in context.WebConfigFiles(c))
+            {
+                if (XmlHelper.ParseXDocument(File.ReadAllText(path)) is { } doc)
+                {
+                    CheckWebConfig(c, path, doc.Descendants().Attributes());
+                }
+            }
+        }
+
+        private void CheckWebConfig(CompilationAnalysisContext c, string path, IEnumerable<XAttribute> attributes)
+        {
+            foreach (var attribute in attributes)
+            {
+                if (attribute.Value.ToLower().Contains("password") && attribute.CreateLocation(path) is { } location)
+                {
+                    c.ReportIssue(Diagnostic.Create(rule, location, string.Format(MessageFormatCredential, "password")));   // FIXME: Vyresit dynamicky
+                }
+            }
         }
 
         protected abstract class CredentialWordsFinderBase<TSyntaxNode>

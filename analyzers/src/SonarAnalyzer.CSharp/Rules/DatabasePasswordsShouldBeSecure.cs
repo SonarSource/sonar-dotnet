@@ -80,7 +80,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private void CheckWebConfig(SonarAnalysisContext context, CompilationAnalysisContext c)
         {
-            foreach (var fullPath in context.GetWebConfig(c))
+            foreach (var fullPath in context.WebConfigFiles(c))
             {
                 var webConfig = File.ReadAllText(fullPath);
                 if (webConfig.Contains("<connectionStrings>") && XmlHelper.ParseXDocument(webConfig) is { } doc)
