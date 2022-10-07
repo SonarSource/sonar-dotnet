@@ -20,36 +20,22 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace SonarAnalyzer.Helpers
 {
     public class ParameterLoadingAnalysisContext
     {
-        private readonly SonarAnalysisContext context;
+        private readonly List<Action<CompilationStartAnalysisContext>> compilationStartActions = new();
 
-        private readonly ICollection<Action<CompilationStartAnalysisContext>> compilationStartActions =
-            new List<Action<CompilationStartAnalysisContext>>();
+        internal SonarAnalysisContext Context { get; }
+        internal IEnumerable<Action<CompilationStartAnalysisContext>> CompilationStartActions => compilationStartActions;
 
-        internal IEnumerable<Action<CompilationStartAnalysisContext>> CompilationStartActions => this.compilationStartActions;
+        internal ParameterLoadingAnalysisContext(SonarAnalysisContext context) =>
+            Context = context;
 
-        internal ParameterLoadingAnalysisContext(SonarAnalysisContext context)
-        {
-            this.context = context;
-        }
-
-        internal SonarAnalysisContext GetInnerContext() => context;
-
-        internal void RegisterCompilationStartAction(Action<CompilationStartAnalysisContext> action)
-        {
+        internal void RegisterCompilationStartAction(Action<CompilationStartAnalysisContext> action) =>
             // only collect compilation start actions and call them later
-            this.compilationStartActions.Add(action);
-        }
-
-        internal void RegisterSyntaxNodeAction<TLanguageKindEnum>(Action<SyntaxNodeAnalysisContext> action, ImmutableArray<TLanguageKindEnum> syntaxKinds) where TLanguageKindEnum : struct
-        {
-            this.context.RegisterSyntaxNodeAction(action, syntaxKinds);
-        }
+            compilationStartActions.Add(action);
     }
 }

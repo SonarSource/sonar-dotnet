@@ -47,9 +47,9 @@ namespace SonarAnalyzer.Helpers
                                                                                      GeneratedCodeRecognizer generatedCodeRecognizer,
                                                                                      Action<SyntaxNodeAnalysisContext> action,
                                                                                      params TLanguageKindEnum[] syntaxKinds) where TLanguageKindEnum : struct =>
-            context.RegisterSyntaxNodeAction(c =>
+            context.Context.RegisterSyntaxNodeAction(c =>
                 {
-                    if (ShouldAnalyze(context.GetInnerContext(), generatedCodeRecognizer, c.GetSyntaxTree(), c.Compilation, c.Options))
+                    if (ShouldAnalyze(context.Context, generatedCodeRecognizer, c.GetSyntaxTree(), c.Compilation, c.Options))
                     {
                         action(c);
                     }
@@ -83,7 +83,7 @@ namespace SonarAnalyzer.Helpers
             context.RegisterCompilationStartAction(csac =>
                 csac.RegisterSyntaxTreeAction(c =>
                     {
-                        if (ShouldAnalyze(context.GetInnerContext(), generatedCodeRecognizer, c.GetSyntaxTree(), csac.Compilation, c.Options))
+                        if (ShouldAnalyze(context.Context, generatedCodeRecognizer, c.GetSyntaxTree(), csac.Compilation, c.Options))
                         {
                             action(c);
                         }

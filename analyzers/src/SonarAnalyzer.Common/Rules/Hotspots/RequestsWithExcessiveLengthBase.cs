@@ -85,7 +85,7 @@ namespace SonarAnalyzer.Rules
 
                     c.RegisterCompilationEndAction(cc => ReportOnCollectedAttributes(cc, attributesOverTheLimit));
                 });
-            context.GetInnerContext().RegisterCompilationAction(c => CheckWebConfig(context.GetInnerContext(), c));
+            context.Context.RegisterCompilationAction(c => CheckWebConfig(context.Context, c));
         }
 
         protected bool IsRequestFormLimits(string attributeName) =>

@@ -22,6 +22,8 @@ namespace SonarAnalyzer.Helpers
 {
     public abstract class ParameterLoadingDiagnosticAnalyzer : SonarDiagnosticAnalyzer
     {
+        protected abstract void Initialize(ParameterLoadingAnalysisContext context);
+
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
             var analysisContext = new ParameterLoadingAnalysisContext(context);
@@ -37,7 +39,5 @@ namespace SonarAnalyzer.Helpers
                     }
                 });
         }
-
-        protected abstract void Initialize(ParameterLoadingAnalysisContext context);
     }
 }
