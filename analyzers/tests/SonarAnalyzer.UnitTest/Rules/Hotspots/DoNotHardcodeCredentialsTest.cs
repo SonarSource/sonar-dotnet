@@ -61,7 +61,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void DoNotHardcodeCredentials_CS_WebConfig() =>
-            DoNotHardcodeCredentials_WebConfig(AnalyzerLanguage.CSharp, new CS.DoNotHardcodeCredentials());
+            DoNotHardcodeCredentials_ExternalFiles(AnalyzerLanguage.CSharp, new CS.DoNotHardcodeCredentials(), "WebConfig", "*.config");
+
+        [TestMethod]
+        public void DoNotHardcodeCredentials_CS_AppSettings() =>
+            DoNotHardcodeCredentials_ExternalFiles(AnalyzerLanguage.CSharp, new CS.DoNotHardcodeCredentials(), "AppSettings", "*.json");
 
         [TestMethod]
         public void DoNotHardcodeCredentials_VB_DefaultValues() =>
@@ -81,7 +85,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void DoNotHardcodeCredentials_VB_WebConfig() =>
-            DoNotHardcodeCredentials_WebConfig(AnalyzerLanguage.VisualBasic, new VB.DoNotHardcodeCredentials());
+            DoNotHardcodeCredentials_ExternalFiles(AnalyzerLanguage.VisualBasic, new VB.DoNotHardcodeCredentials(), "WebConfig", "*.config");
+
+        [TestMethod]
+        public void DoNotHardcodeCredentials_VB_AppSettings() =>
+            DoNotHardcodeCredentials_ExternalFiles(AnalyzerLanguage.VisualBasic, new VB.DoNotHardcodeCredentials(), "AppSettings", "*.json");
 
         [TestMethod]
         public void DoNotHardcodeCredentials_ConfiguredCredentialsAreRead()
@@ -110,15 +118,15 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithBasePath("Hotspots")
                 .AddReferences(AdditionalReferences);
 
-        private static void DoNotHardcodeCredentials_WebConfig(AnalyzerLanguage language, DiagnosticAnalyzer analyzer)
+        private static void DoNotHardcodeCredentials_ExternalFiles(AnalyzerLanguage language, DiagnosticAnalyzer analyzer, string testDirectory, string pattern)
         {
-            var root = @"TestCases\WebConfig\DoNotHardcodeCredentials";
-            var webConfigPaths = Directory.GetFiles(root, "*.config", SearchOption.AllDirectories);
-            webConfigPaths.Should().HaveCount(6);
+            var root = @$"TestCases\{testDirectory}\DoNotHardcodeCredentials";
+            var paths = Directory.GetFiles(root, pattern, SearchOption.AllDirectories);
+            paths.Should().NotBeEmpty();
             var compilation = CreateCompilation(language);
-            foreach (var webConfigPath in webConfigPaths)
+            foreach (var path in paths)
             {
-                DiagnosticVerifier.VerifyExternalFile(compilation, analyzer, webConfigPath, TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)));
+                DiagnosticVerifier.VerifyExternalFile(compilation, analyzer, path, TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, path)));
             }
         }
 
