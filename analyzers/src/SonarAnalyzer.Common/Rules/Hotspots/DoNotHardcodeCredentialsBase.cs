@@ -125,18 +125,25 @@ namespace SonarAnalyzer.Rules
             {
                 if (XmlHelper.ParseXDocument(File.ReadAllText(path)) is { } doc)
                 {
-                    CheckWebConfig(c, path, doc.Descendants().Attributes());
+                    CheckWebConfig(c, path, doc.Descendants());
                 }
             }
         }
 
-        private void CheckWebConfig(CompilationAnalysisContext c, string path, IEnumerable<XAttribute> attributes)
+        private void CheckWebConfig(CompilationAnalysisContext c, string path, IEnumerable<XElement> elements)
         {
-            foreach (var attribute in attributes)
+            foreach (var element in elements)
             {
-                if (IssueMessage(attribute.Name.LocalName, attribute.Value) is { } message && attribute.CreateLocation(path) is { } location)
+                if (!element.HasElements && IssueMessage(element.Name.LocalName, element.Value) is { } elementMessage && element.CreateLocation(path) is { } elementLocation)
                 {
-                    c.ReportIssue(Diagnostic.Create(rule, location, message));
+                    c.ReportIssue(Diagnostic.Create(rule, elementLocation, elementMessage));
+                }
+                foreach (var attribute in element.Attributes())
+                {
+                    if (IssueMessage(attribute.Name.LocalName, attribute.Value) is { } attributeMessage && attribute.CreateLocation(path) is { } attributeLocation)
+                    {
+                        c.ReportIssue(Diagnostic.Create(rule, attributeLocation, attributeMessage));
+                    }
                 }
             }
         }

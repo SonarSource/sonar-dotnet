@@ -46,19 +46,27 @@ namespace SonarAnalyzer.Helpers
                 ? attribute
                 : null;
 
-        public static Location CreateLocation(this XAttribute attribute, string path)
+        public static Location CreateLocation(this XAttribute attribute, string path) =>
+            CreateLocation(attribute, path, attribute.Name);
+
+        public static Location CreateLocation(this XElement element, string path) =>
+            CreateLocation(element, path, element.Name);
+
+        private static Location CreateLocation(IXmlLineInfo startPos, string path, XName name)
         {
             // IXmlLineInfo is 1-based, whereas Roslyn is zero-based
-            var startPos = (IXmlLineInfo)attribute;
             if (startPos.HasLineInfo())
             {
                 // LoadOptions.PreserveWhitespace doesn't preserve whitespace inside nodes and attributes => there's no easy way to find full length of a XAttribute.
-                var length = attribute.Name.ToString().Length;
+                var length = name.ToString().Length;
                 var start = new LinePosition(startPos.LineNumber - 1, startPos.LinePosition - 1);
                 var end = new LinePosition(startPos.LineNumber - 1, startPos.LinePosition - 1 + length);
                 return Location.Create(path, new TextSpan(start.Line, length), new LinePositionSpan(start, end));
             }
-            return null;
+            else
+            {
+                return null;
+            }
         }
     }
 }
