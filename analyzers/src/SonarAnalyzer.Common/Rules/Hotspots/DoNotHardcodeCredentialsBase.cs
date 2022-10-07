@@ -45,9 +45,12 @@ namespace SonarAnalyzer.Rules
 
         private readonly IAnalyzerConfiguration configuration;
         private readonly DiagnosticDescriptor rule;
+        private readonly Regex validCredentialPattern = new(@"^\?|:\w+|\{\d+[^}]*\}|""|'$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private readonly Regex uriUserInfoPattern;
         private string credentialWords;
         private IEnumerable<string> splitCredentialWords;
         private Regex passwordValuePattern;
+
 
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract void InitializeActions(ParameterLoadingAnalysisContext context);
@@ -73,6 +76,13 @@ namespace SonarAnalyzer.Rules
 
         protected DoNotHardcodeCredentialsBase(IAnalyzerConfiguration configuration)
         {
+            const string Rfc3986_Unreserved = "-._~";  // Numbers and letters are embedded in regex itself without escaping
+            const string Rfc3986_Pct = "%";
+            const string Rfc3986_SubDelims = "!$&'()*+,;=";
+            const string UriPasswordSpecialCharacters = Rfc3986_Unreserved + Rfc3986_Pct + Rfc3986_SubDelims;
+            // See https://tools.ietf.org/html/rfc3986 Userinfo can contain groups: unreserved | pct-encoded | sub-delims
+            var uriUserInfoPart = @"[\w\d" + Regex.Escape(UriPasswordSpecialCharacters) + "]+";
+            uriUserInfoPattern = new Regex(@"\w+:\/\/(?<Login>" + uriUserInfoPart + "):(?<Password>" + uriUserInfoPart + ")@", RegexOptions.Compiled);
             this.configuration = configuration;
             rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
             CredentialWords = DefaultCredentialWords;   // Property will initialize multiple state variables
@@ -124,36 +134,81 @@ namespace SonarAnalyzer.Rules
         {
             foreach (var attribute in attributes)
             {
-                if (attribute.Value.ToLower().Contains("password") && attribute.CreateLocation(path) is { } location)
+                if (IssueMessage(attribute.Name.LocalName, attribute.Value) is { } message && attribute.CreateLocation(path) is { } location)
                 {
-                    c.ReportIssue(Diagnostic.Create(rule, location, string.Format(MessageFormatCredential, "password")));   // FIXME: Vyresit dynamicky
+                    c.ReportIssue(Diagnostic.Create(rule, location, message));
                 }
             }
+        }
+
+        private string IssueMessage(string variableName, string variableValue)
+        {
+            var bannedWords = FindCredentialWords(variableName, variableValue);
+            if (bannedWords.Any())
+            {
+                return string.Format(MessageFormatCredential, bannedWords.JoinAnd());
+            }
+            else if (ContainsUriUserInfo(variableValue))
+            {
+                return MessageUriUserInfo;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private IEnumerable<string> FindCredentialWords(string variableName, string variableValue)
+        {
+            var credentialWordsFound = variableName
+                .SplitCamelCaseToWords()
+                .Intersect(splitCredentialWords)
+                .ToHashSet(StringComparer.OrdinalIgnoreCase);
+
+            if (credentialWordsFound.Any(x => variableValue.IndexOf(x, StringComparison.InvariantCultureIgnoreCase) >= 0))
+            {
+                // See https://github.com/SonarSource/sonar-dotnet/issues/2868
+                return Enumerable.Empty<string>();
+            }
+
+            var match = passwordValuePattern.Match(variableValue);
+            if (match.Success && !IsValidCredential(match.Groups["suffix"].Value))
+            {
+                credentialWordsFound.Add(match.Groups["credential"].Value);
+            }
+
+            // Rule was initially implemented with everything lower (which is wrong) so we have to force lower
+            // before reporting to avoid new issues to appear on SQ/SC.
+            return credentialWordsFound.Select(x => x.ToLowerInvariant());
+        }
+
+        private bool IsValidCredential(string suffix)
+        {
+            var candidateCredential = suffix.Split(CredentialSeparator).First().Trim();
+            return string.IsNullOrWhiteSpace(candidateCredential) || validCredentialPattern.IsMatch(candidateCredential);
+        }
+
+        private bool ContainsUriUserInfo(string variableValue)
+        {
+            var match = uriUserInfoPattern.Match(variableValue);
+            return match.Success
+                && match.Groups["Password"].Value is { } password
+                && !string.Equals(match.Groups["Login"].Value, password, StringComparison.OrdinalIgnoreCase)
+                && password != CredentialSeparator.ToString()
+                && !validCredentialPattern.IsMatch(password);
         }
 
         protected abstract class CredentialWordsFinderBase<TSyntaxNode>
              where TSyntaxNode : SyntaxNode
         {
-            private readonly Regex validCredentialPattern = new(@"^\?|:\w+|\{\d+[^}]*\}|""|'$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            private readonly Regex uriUserInfoPattern;
             private readonly DoNotHardcodeCredentialsBase<TSyntaxKind> analyzer;
 
             protected abstract bool ShouldHandle(TSyntaxNode syntaxNode, SemanticModel semanticModel);
             protected abstract string GetVariableName(TSyntaxNode syntaxNode);
             protected abstract string GetAssignedValue(TSyntaxNode syntaxNode, SemanticModel semanticModel);
 
-            protected CredentialWordsFinderBase(DoNotHardcodeCredentialsBase<TSyntaxKind> analyzer)
-            {
-                // See https://tools.ietf.org/html/rfc3986 Userinfo can contain groups: unreserved | pct-encoded | sub-delims
-                const string Rfc3986_Unreserved = "-._~";  // Numbers and letters are embeded in regex itself without escaping
-                const string Rfc3986_Pct = "%";
-                const string Rfc3986_SubDelims = "!$&'()*+,;=";
-                const string UriPasswordSpecialCharacters = Rfc3986_Unreserved + Rfc3986_Pct + Rfc3986_SubDelims;
-                var uriUserInfoPart = @"[\w\d" + Regex.Escape(UriPasswordSpecialCharacters) + "]+";
-
+            protected CredentialWordsFinderBase(DoNotHardcodeCredentialsBase<TSyntaxKind> analyzer) =>
                 this.analyzer = analyzer;
-                uriUserInfoPattern = new Regex(@"\w+:\/\/(?<Login>" + uriUserInfoPart + "):(?<Password>" + uriUserInfoPart + ")@", RegexOptions.Compiled);
-            }
 
             public Action<SyntaxNodeAnalysisContext> AnalysisAction() =>
                 context =>
@@ -161,59 +216,12 @@ namespace SonarAnalyzer.Rules
                     var declarator = (TSyntaxNode)context.Node;
                     if (ShouldHandle(declarator, context.SemanticModel)
                         && GetAssignedValue(declarator, context.SemanticModel) is { } variableValue
-                        && !string.IsNullOrWhiteSpace(variableValue))
+                        && !string.IsNullOrWhiteSpace(variableValue)
+                        && analyzer.IssueMessage(GetVariableName(declarator), variableValue) is { } message)
                     {
-                        var bannedWords = FindCredentialWords(GetVariableName(declarator), variableValue);
-                        if (bannedWords.Any())
-                        {
-                            context.ReportIssue(Diagnostic.Create(analyzer.rule, declarator.GetLocation(), string.Format(MessageFormatCredential, bannedWords.JoinAnd())));
-                        }
-                        else if (ContainsUriUserInfo(variableValue))
-                        {
-                            context.ReportIssue(Diagnostic.Create(analyzer.rule, declarator.GetLocation(), MessageUriUserInfo));
-                        }
+                        context.ReportIssue(Diagnostic.Create(analyzer.rule, declarator.GetLocation(), message));
                     }
                 };
-
-            private IEnumerable<string> FindCredentialWords(string variableName, string variableValue)
-            {
-                var credentialWordsFound = variableName
-                    .SplitCamelCaseToWords()
-                    .Intersect(analyzer.splitCredentialWords)
-                    .ToHashSet(StringComparer.OrdinalIgnoreCase);
-
-                if (credentialWordsFound.Any(x => variableValue.IndexOf(x, StringComparison.InvariantCultureIgnoreCase) >= 0))
-                {
-                    // See https://github.com/SonarSource/sonar-dotnet/issues/2868
-                    return Enumerable.Empty<string>();
-                }
-
-                var match = analyzer.passwordValuePattern.Match(variableValue);
-                if (match.Success && !IsValidCredential(match.Groups["suffix"].Value))
-                {
-                    credentialWordsFound.Add(match.Groups["credential"].Value);
-                }
-
-                // Rule was initially implemented with everything lower (which is wrong) so we have to force lower
-                // before reporting to avoid new issues to appear on SQ/SC.
-                return credentialWordsFound.Select(x => x.ToLowerInvariant());
-            }
-
-            private bool IsValidCredential(string suffix)
-            {
-                var candidateCredential = suffix.Split(CredentialSeparator).First().Trim();
-                return string.IsNullOrWhiteSpace(candidateCredential) || validCredentialPattern.IsMatch(candidateCredential);
-            }
-
-            private bool ContainsUriUserInfo(string variableValue)
-            {
-                var match = uriUserInfoPattern.Match(variableValue);
-                return match.Success
-                    && match.Groups["Password"].Value is { } password
-                    && !string.Equals(match.Groups["Login"].Value, password, StringComparison.OrdinalIgnoreCase)
-                    && password != CredentialSeparator.ToString()
-                    && !validCredentialPattern.IsMatch(password);
-            }
         }
     }
 }
