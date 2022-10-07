@@ -54,10 +54,10 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
 
         static NuGetMetadataFactory()
         {
-            NugetConfigFolderPath = Path.GetFullPath(PathResolver.RelativePathToTestProjectRoot);
+            NugetConfigFolderPath = Path.GetFullPath(Paths.RelativePathToTestProjectRoot);
             LogMessage($"Using nuget.config from {NugetConfigFolderPath}");
 
-            PackagesFolder = Environment.GetEnvironmentVariable("NUGET_PACKAGES") ?? Path.GetFullPath(Path.Combine(PathResolver.RelativePathToTestProjectRoot, @"..\..\", "packages"));
+            PackagesFolder = Environment.GetEnvironmentVariable("NUGET_PACKAGES") ?? Path.GetFullPath(Path.Combine(Paths.RelativePathToTestProjectRoot, @"..\..\", "packages"));
             LogMessage($"Using packages from {PackagesFolder}");
         }
 

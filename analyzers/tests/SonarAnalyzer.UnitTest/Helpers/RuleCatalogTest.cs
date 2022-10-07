@@ -95,7 +95,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
         private static void ValidateDescription(string id, string assertedSourceFragment, string expectedDescription)
         {
-            var rspecDirectory = Path.GetFullPath(Path.Combine(typeof(RuleCatalogTest).Assembly.Location, PathResolver.RelativePathToTestProjectRoot, "..", "..", "..", "rspec", "cs"));   // analyzers/rspec/cs
+            var rspecDirectory = Path.GetFullPath(Path.Combine(typeof(RuleCatalogTest).Assembly.Location, Paths.RelativePathToTestProjectRoot, "..", "..", "..", "rspec", "cs"));   // analyzers/rspec/cs
             var html = File.ReadAllText(Path.Combine(rspecDirectory, $"{id}_c#.html")).Replace("\r\n", "\n");
             html.Should().Contain(assertedSourceFragment, "we need to make sure that the assertion below has expected data fragment as an input");
             RuleCatalogCS.Rules[id].Description.Should().Contain(expectedDescription);

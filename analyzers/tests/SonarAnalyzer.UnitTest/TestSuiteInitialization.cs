@@ -18,8 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.IO;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.VisualBasic;
+using SonarAnalyzer.UnitTest.Common;
 using SonarAnalyzer.UnitTest.Helpers;
 
 namespace SonarAnalyzer.UnitTest
@@ -38,6 +40,14 @@ namespace SonarAnalyzer.UnitTest
 
             var vbVersions = ParseOptionsHelper.Default(LanguageNames.VisualBasic).Cast<VisualBasicParseOptions>().Select(x => x.LanguageVersion.ToDisplayString());
             Console.WriteLine(@"VB.Net versions used for analysis: " + string.Join(", ", vbVersions));
+
+            // The AltCover tool has a limitation. It has to be invoked without a parameter for the project/solution path.
+            // Due to this we have to call it from the analyzers folder and the working directory is different when running in CI context.
+            if (!File.Exists(Path.Combine(Paths.RelativePathToTestProjectRoot, "nuget.config")))
+            {
+                Paths.UpdateRelativePathToTestProjectRoot(@"..\..\..\..\");
+            }
+            Console.WriteLine(@"Test project root: " + Path.GetFullPath(Paths.RelativePathToTestProjectRoot));
         }
     }
 }
