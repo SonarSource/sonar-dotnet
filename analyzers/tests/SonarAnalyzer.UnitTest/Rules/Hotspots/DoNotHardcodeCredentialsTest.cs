@@ -114,7 +114,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             var root = @"TestCases\WebConfig\DoNotHardcodeCredentials";
             var webConfigPaths = Directory.GetFiles(root, "*.config", SearchOption.AllDirectories);
-            webConfigPaths.Should().HaveCount(5);
+            webConfigPaths.Should().HaveCount(6);
             var compilation = CreateCompilation(language);
             foreach (var webConfigPath in webConfigPaths)
             {
