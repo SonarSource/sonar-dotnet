@@ -155,15 +155,15 @@ namespace WebPoc
         }
 
         [TestMethod]
-        public void ArgumentAtIndexIsConstant_VB()
+        public void ArgumentAtIndexIsStringConstant_VB()
         {
             var context = CreateContext<VBSyntax.InvocationExpressionSyntax>(TestInputVB, "MyMethod", AnalyzerLanguage.VisualBasic);
             var tracker = new VisualBasicInvocationTracker();
             tracker.ArgumentAtIndexIsStringConstant(0)(context).Should().BeFalse();
             tracker.ArgumentAtIndexIsStringConstant(1)(context).Should().BeTrue();
-            tracker.ArgumentAtIndexIsStringConstant(2)(context).Should().BeTrue();
-            tracker.ArgumentAtIndexIsStringConstant(3)(context).Should().BeTrue();
-            tracker.ArgumentAtIndexIsStringConstant(4)(context).Should().BeTrue();
+            tracker.ArgumentAtIndexIsStringConstant(2)(context).Should().BeFalse();
+            tracker.ArgumentAtIndexIsStringConstant(3)(context).Should().BeFalse();
+            tracker.ArgumentAtIndexIsStringConstant(4)(context).Should().BeFalse();
             tracker.ArgumentAtIndexIsStringConstant(5)(context).Should().BeFalse();
             tracker.ArgumentAtIndexIsStringConstant(42)(context).Should().BeFalse();
 
