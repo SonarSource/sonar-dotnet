@@ -87,7 +87,9 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static References MicrosoftExtensionsHttp(string packageVersion = Constants.NuGetLatestVersion) => Create("Microsoft.Extensions.Http", packageVersion);
         public static References MicrosoftExtensionsLoggingPackages(string packageVersion) =>
             Create("Microsoft.Extensions.Logging", packageVersion)
-            .Concat(Create("Microsoft.Extensions.Logging.AzureAppServices", packageVersion))
+            .Concat(Create("Microsoft.Extensions.Logging.AzureAppServices", packageVersion == Constants.DotNet7Preview
+                                                                                ? Constants.DotNet7PreviewAzureAppServices // Work around for .Net 7 preview since AzureAppServices has a slightly different version.
+                                                                                : packageVersion))
             .Concat(Create("Microsoft.Extensions.Logging.Abstractions", packageVersion))
             .Concat(Create("Microsoft.Extensions.Logging.Console", packageVersion))
             .Concat(Create("Microsoft.Extensions.Logging.Debug", packageVersion))

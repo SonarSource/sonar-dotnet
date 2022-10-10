@@ -167,7 +167,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
 #else
             new[]
             {
-                CoreMetadataReference.SystemSecurityCryptographyAlgorithms,
+                CoreMetadataReference.SystemSecurityCryptography,
                 CoreMetadataReference.SystemSecurityCryptographyX509Certificates,
                 CoreMetadataReference.SystemSecurityCryptographyCsp,
                 CoreMetadataReference.SystemSecurityCryptographyCng,

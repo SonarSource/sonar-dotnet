@@ -32,7 +32,16 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     ParseOptionsHelper.FromCSharp8,
                                     GetAdditionalReferences());
 
-#if NET
+#if NETFRAMEWORK
+
+        [TestMethod]
+        public void CryptographicKeyShouldNotBeTooShort_NetFramework() =>
+            OldVerifier.VerifyAnalyzer(@"TestCases\CryptographicKeyShouldNotBeTooShort.BeforeNet7.cs",
+                                    new CryptographicKeyShouldNotBeTooShort(),
+                                    ParseOptionsHelper.FromCSharp8,
+                                    GetAdditionalReferences());
+#else
+
         [TestMethod]
         public void CryptographicKeyShouldNotBeTooShort_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CryptographicKeyShouldNotBeTooShort.CSharp9.cs",
@@ -42,7 +51,9 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
             MetadataReferenceFacade.SystemSecurityCryptography
+#if NETFRAMEWORK
                 .Concat(NuGetMetadataReference.SystemSecurityCryptographyOpenSsl())
+#endif
                 .Concat(NuGetMetadataReference.BouncyCastle());
     }
 }

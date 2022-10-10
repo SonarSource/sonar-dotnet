@@ -226,9 +226,6 @@ namespace Tests.Diagnostics
 
             var ec2 = new ECDsaCng();
             ec2.GenerateKey(ECCurve.NamedCurves.brainpoolP160t1); // Noncompliant {{Use a key length of at least 224 bits for EC cipher algorithm.}}
-
-            var ec3 = new ECDsaOpenSsl();
-            ec3.GenerateKey(ECCurve.NamedCurves.brainpoolP192t1); // Noncompliant {{Use a key length of at least 224 bits for EC cipher algorithm.}}
         }
 
         public void CompliantCreate()
