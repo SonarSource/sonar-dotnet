@@ -312,15 +312,13 @@ namespace Tests.Diagnostics
             command.CommandText = y;                                                                    // Noncompliant [5]
         }
 
-        public void DbCommand_CommandText(string param)
+        public void DbCommand_CommandText(DbCommand command, string param)
         {
-            var command = DbProviderFactories.GetFactory("someProvider").CreateCommand();
             command.CommandText = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param);    // Noncompliant
         }
 
-        public void IDbCommand_CommandText(string param)
+        public void IDbCommand_CommandText(IDbCommand command, string param)
         {
-            IDbCommand command = DbProviderFactories.GetFactory("someProvider").CreateCommand();
             command.CommandText = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param);    // Noncompliant
         }
     }
