@@ -126,7 +126,6 @@ namespace SonarAnalyzer.Rules
                 sequence.Take(startsWith.Length).SequenceEqual(startsWith);
         }
 
-
         private static bool IsObjectIdentifier(string literalValue) =>
             literalValue.StartsWith(OIDPrefix);   // Looks like OID
 
