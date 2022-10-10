@@ -20,13 +20,13 @@ namespace Tests.Diagnostics
             await database.ExecuteSqlCommandAsync(TransactionalBehavior.EnsureTransaction, query + x); // Noncompliant
         }
 
-        public async Task DbSetMethods(DbSet set, string query, int x)
+        public void DbSetMethods(DbSet set, string query, int x)
         {
             set.SqlQuery(query + x);    // Noncompliant {{Make sure using a dynamically formatted SQL query is safe here.}}
             set.SqlQuery(query + x, x); // Noncompliant
         }
 
-        public async Task DbSetMethods(DbSet<Program> set, string query, int x)
+        public void DbSetMethods(DbSet<Program> set, string query, int x)
         {
             set.SqlQuery(query + x);    // Noncompliant {{Make sure using a dynamically formatted SQL query is safe here.}}
             set.SqlQuery(query + x, x); // Noncompliant
