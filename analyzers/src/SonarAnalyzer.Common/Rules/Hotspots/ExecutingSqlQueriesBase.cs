@@ -97,13 +97,7 @@ namespace SonarAnalyzer.Rules
 
         private readonly MemberDescriptor[] properties =
             {
-                new(KnownType.System_Data_Odbc_OdbcCommand, "CommandText"),
-                new(KnownType.System_Data_OracleClient_OracleCommand, "CommandText"),
-                new(KnownType.System_Data_SqlClient_SqlCommand, "CommandText"),
-                new(KnownType.System_Data_Sqlite_SqliteCommand, "CommandText"),
-                new(KnownType.System_Data_SqlServerCe_SqlCeCommand, "CommandText"),
-                new(KnownType.Microsoft_Data_Sqlite_SqliteCommand, "CommandText"),
-                new(KnownType.MySql_Data_MySqlClient_MySqlCommand, "CommandText")
+                new(KnownType.System_Data_IDbCommand, "CommandText"),
             };
 
         protected abstract TExpressionSyntax GetArgumentAtIndex(InvocationContext context, int index);
@@ -133,7 +127,7 @@ namespace SonarAnalyzer.Rules
 
             var pa = Language.Tracker.PropertyAccess;
             pa.Track(input,
-                pa.MatchProperty(properties),
+                pa.MatchProperty(true, properties),
                 pa.MatchSetter(),
                 c => IsTracked(GetSetValue(c), c),
                 pa.ExceptWhen(pa.AssignedValueIsConstant()));
