@@ -111,7 +111,9 @@ namespace SonarAnalyzer.UnitTest.Rules
             Enumerable.Empty<MetadataReference>()
                       .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCore(entityFrameworkVersion))
                       .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCoreRelational(entityFrameworkVersion));
+
 #endif
+
         [TestMethod]
         public void ExecutingSqlQueries_CS_Dapper() =>
             builderCS
