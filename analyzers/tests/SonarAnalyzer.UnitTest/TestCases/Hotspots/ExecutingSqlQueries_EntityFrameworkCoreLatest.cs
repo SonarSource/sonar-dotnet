@@ -90,7 +90,7 @@ namespace Tests.Diagnostics
         public void Foo(BloggingContext context, string query)
         {
             var a = context.Blogs.FromSqlRaw($"{query}"); // Noncompliant
-            var b = context.Blogs.FromSqlInterpolated($"{query}"); // Compliant, FN See: https://github.com/SonarSource/sonar-dotnet/issues/5636
+            var b = context.Blogs.FromSqlInterpolated($"{query}"); // Compliant, FromSqlInterpolated is safe https://learn.microsoft.com/ef/core/querying/sql-queries#passing-parameters
         }
     }
 
