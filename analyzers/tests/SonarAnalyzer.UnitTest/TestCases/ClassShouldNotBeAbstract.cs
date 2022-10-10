@@ -108,6 +108,6 @@ namespace Tests.Diagnostics
                                                          // Error@-1 [CS0246]
     {
         public string Content3 { get; }
-        public override int Content1 { get { return 1; } } // Error [CS0115]
+        public override int Content1 { get { return 1; } }
     }
 }

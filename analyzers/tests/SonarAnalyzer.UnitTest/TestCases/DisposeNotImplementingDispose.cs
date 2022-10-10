@@ -86,7 +86,7 @@ namespace Tests.Diagnostics
 
     public class GarbageDisposalException2 : SomeUnknownType // Error [CS0246] - unknown type
     {
-        protected override void Dispose(bool disposing) // Error [CS0115] - no method to override
+        protected override void Dispose(bool disposing)
         {
             //...
         }
