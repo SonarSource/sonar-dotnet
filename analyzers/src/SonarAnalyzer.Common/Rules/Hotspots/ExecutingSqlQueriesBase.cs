@@ -127,7 +127,7 @@ namespace SonarAnalyzer.Rules
 
             var pa = Language.Tracker.PropertyAccess;
             pa.Track(input,
-                pa.MatchProperty(checkOverridenProperties: true, properties),
+                pa.MatchProperty(true, properties),
                 pa.MatchSetter(),
                 c => IsTracked(GetSetValue(c), c),
                 pa.ExceptWhen(pa.AssignedValueIsConstant()));
