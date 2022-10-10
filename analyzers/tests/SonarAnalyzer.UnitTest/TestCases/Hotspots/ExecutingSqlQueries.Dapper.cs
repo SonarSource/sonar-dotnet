@@ -189,6 +189,7 @@ namespace Tests.Diagnostics
             con.ExecuteScalar(query + param);                                            // Noncompliant
             con.ExecuteScalar("", query + param);                                        // Compliant. The tracked strings are passed to the "param" object parameter
             con.ExecuteScalar(query + param, new { Id = 1 });                            // Noncompliant
+            con.ExecuteScalar<DapperTest>(query + param);                                // Noncompliant
             SqlMapper.ExecuteScalar(con, query + param);                                 // Noncompliant
         }
 
@@ -198,6 +199,7 @@ namespace Tests.Diagnostics
             await con.ExecuteScalarAsync(query + param);                                            // Noncompliant
             await con.ExecuteScalarAsync("", query + param);                                        // Compliant. The tracked strings are passed to the "param" object parameter
             await con.ExecuteScalarAsync(query + param, new { Id = 1 });                            // Noncompliant
+            await con.ExecuteScalarAsync<DapperTest>(query + param);                                // Noncompliant
             await SqlMapper.ExecuteScalarAsync(con, query + param);                                 // Noncompliant
         }
 
