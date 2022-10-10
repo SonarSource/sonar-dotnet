@@ -46,19 +46,16 @@ namespace SonarAnalyzer.Rules
             "ASSEMBLY",
         };
 
-        // https://datatracker.ietf.org/doc/html/rfc5737
+        // https://datatracker.ietf.org/doc/html/rfc5737#section-3
         private readonly byte[][] interNetworkDocumentationRanges =
         {
-            new byte[] { 192, 0, 2 },    // TEST-NET-1 192.0.2.0/24
-            new byte[] { 198, 51, 100 }, // TEST-NET-2 198.51.100.0/24
-            new byte[] { 203, 0, 113 },  // TEST-NET-3 203.0.113.0/24
+            new byte[] { 192, 0, 2 },
+            new byte[] { 198, 51, 100 },
+            new byte[] { 203, 0, 113 }
         };
 
-        // https://datatracker.ietf.org/doc/html/rfc3849
-        private readonly byte[] interNetwork6DocumentationRange =
-        {
-            0x20, 0x01, 0x0d, 0xb8       // 2001:0DB8::/32
-        };
+        // https://datatracker.ietf.org/doc/html/rfc3849#section-2
+        private readonly byte[] interNetwork6DocumentationRange = { 0x20, 0x01, 0x0d, 0xb8 }; // 2001:0DB8::/32
 
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
