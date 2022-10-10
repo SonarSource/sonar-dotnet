@@ -45,12 +45,11 @@ namespace SonarAnalyzer.Rules
 
         private readonly IAnalyzerConfiguration configuration;
         private readonly DiagnosticDescriptor rule;
-        private readonly Regex validCredentialPattern = new(@"^\?|:\w+|\{\d+[^}]*\}|""|'$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private readonly Regex validCredentialPattern = new(@"^(\?|:\w+|\{\d+[^}]*\}|""|')$", RegexOptions.IgnoreCase);
         private readonly Regex uriUserInfoPattern;
         private string credentialWords;
         private IEnumerable<string> splitCredentialWords;
         private Regex passwordValuePattern;
-
 
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract void InitializeActions(ParameterLoadingAnalysisContext context);
@@ -184,8 +183,7 @@ namespace SonarAnalyzer.Rules
                 credentialWordsFound.Add(match.Groups["credential"].Value);
             }
 
-            // Rule was initially implemented with everything lower (which is wrong) so we have to force lower
-            // before reporting to avoid new issues to appear on SQ/SC.
+            // Rule was initially implemented with everything lower (which is wrong) so we have to force lower before reporting to avoid new issues to appear on SQ/SC.
             return credentialWordsFound.Select(x => x.ToLowerInvariant());
         }
 

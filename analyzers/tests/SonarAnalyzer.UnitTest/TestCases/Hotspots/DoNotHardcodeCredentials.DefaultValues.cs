@@ -84,8 +84,11 @@ namespace Tests.Diagnostics
 
         public void Constants()
         {
-            const string ConnectionString = "Server=localhost; Database=Test; User=SA; Password=Secret123";    // Noncompliant
-            const string ConnectionStringWithSpaces = "Server=localhost; Database=Test; User=SA; Password   =   Secret123";    // Noncompliant
+            const string ConnectionString = "Server=localhost; Database=Test; User=SA; Password=Secret123";                     // Noncompliant
+            const string ConnectionStringWithSpaces = "Server=localhost; Database=Test; User=SA; Password   =   Secret123";     // Noncompliant
+            const string inTheMiddle = "Server=localhost; Database=Test; User=SA; Password=Secret123; Application Name=Sonar";  // Noncompliant
+            const string withSemicolon = @"Server=localhost; Database=Test; User=SA; Password=""Secret;'123""";                 // Noncompliant
+            const string withApostroph = @"Server=localhost; Database=Test; User=SA; Password='Secret""123";                    // Noncompliant
             const string Password = "Secret123";  // Noncompliant
 
             const string LoginName = "Admin";
@@ -113,8 +116,8 @@ namespace Tests.Diagnostics
             a = "Server = localhost; Database = Test; User = SA; Password = " + secretVariableMethod;       // Compliant, not initialized to constant
             a = "Server = localhost; Database = Test; User = SA; Password = " + arg;                        // Compliant, not initialized to constant
 
-            const string passwordPrefixConst = "Password = ";       // Compliant by it's name
-            var passwordPrefixVariable = "Password = ";             // Compliant by it's name
+            const string passwordPrefixConst = "Password = ";       // Compliant by its name
+            var passwordPrefixVariable = "Password = ";             // Compliant by its name
             a = "Server = localhost;" + " Database = Test; User = SA; Password = " + secretConst;                   // Noncompliant
             a = "Server = localhost;" + " Database = Test; User = SA; Pa" + "ssword = " + secretConst;              // FN, we don't track all concatenations to avoid duplications
             a = "Server = localhost;" + " Database = Test; User = SA; " + passwordPrefixConst + secretConst;        // Noncompliant
@@ -386,7 +389,7 @@ Phone: +0000000";
             this.password = "foo"; // False Negative
             Configuration.Password = "foo"; // False Negative
             this.password = Configuration.Password = "foo"; // False Negative
-            string query1 = "password=':crazy;secret';user=xxx"; // False Negative - passwords enclosed in '' are not covered
+            string query1 = "password=':crazy;secret';user=xxx"; // Noncompliant
         }
 
         class Configuration
