@@ -475,6 +475,30 @@ Tag(""End"", arg);";
         public void AndOrPatternsSetBoolConstraint(string isPattern, bool? expectedBoolConstraint) =>
             ValidateSetBoolConstraint(isPattern, OperationKindEx.BinaryPattern, expectedBoolConstraint);
 
+        [DataTestMethod]
+        [DataRow("{ }", OperationKind.RecursivePattern)]
+        [DataRow("Exception ex ", OperationKind.DeclarationPattern)]
+        [DataRow("Exception", OperationKind.TypePattern)]
+        [DataRow("42", OperationKind.ConstantPattern)]
+        [DataRow("not 42", OperationKind.NegatedPattern)]
+        [DataRow("_", OperationKind.Discard)]
+        [DataRow("var _", OperationKind.Discard)]
+        public void Pattern_ExistingConstraint_DoesNothing(string pattern, OperationKind expectedOperation)
+        {
+            var code = @$"
+object value = arg switch
+{{
+    null => null,
+    {pattern} when Condition => null, // Should not create arg=Null
+    _ => Tag(""Arg"", arg)
+}};
+
+static object Tag(string name, object value) => null;";
+            var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+            validator.ValidateContainsOperation(expectedOperation);
+            validator.ValidateTag("Arg", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue()); // Should not have Null in any case
+        }
+
         private static void ValidateSetBoolConstraint(string isPattern, OperationKind expectedOperation, bool? expectedBoolConstraint)
         {
             var validator = CreateSetBoolConstraintValidator(isPattern);
