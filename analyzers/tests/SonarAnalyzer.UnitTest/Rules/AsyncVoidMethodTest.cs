@@ -40,25 +40,25 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Verify();
 
         [TestMethod]
-        public void AsyncVoidMethod_CSharpPreview() =>
-            builder.AddPaths("AsyncVoidMethod.CSharpPreview.cs")
-                .WithLanguageVersion(Microsoft.CodeAnalysis.CSharp.LanguageVersion.Preview)
-                .Verify();
-
-        [TestMethod]
         public void AsyncVoidMethod_CSharp10() =>
             builder.AddPaths("AsyncVoidMethod.CSharp10.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
                 .AddReferences(NuGetMetadataReference.MicrosoftVisualStudioQualityToolsUnitTestFramework)
                 .Verify();
 
+        [TestMethod]
+        public void AsyncVoidMethod_CSharp11() =>
+            builder.AddPaths("AsyncVoidMethod.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
         [DataTestMethod]
         [DataRow("1.1.11")]
         [DataRow(Constants.NuGetLatestVersion)]
-        public void AsyncVoidMethod_MsTestV2_CSharpPreview(string testFwkVersion) =>
-            builder.AddPaths("AsyncVoidMethod_MsTestV2_CSharp.Preview.cs")
+        public void AsyncVoidMethod_MsTestV2_CSharp11(string testFwkVersion) =>
+            builder.AddPaths("AsyncVoidMethod_MsTestV2_CSharp11.cs")
                 // The first version of the framework is not compatible with Net 6 so we need to test only v2 with preview features
-                .WithLanguageVersion(Microsoft.CodeAnalysis.CSharp.LanguageVersion.Preview)
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
                 .AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion))
                 .WithConcurrentAnalysis(false)
                 .Verify();

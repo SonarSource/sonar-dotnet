@@ -25,29 +25,39 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class RedundantParenthesesObjectCreationTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<RedundantParenthesesObjectsCreation>();
+
         [TestMethod]
         public void RedundantParenthesesObjectCreation() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\RedundantParenthesesObjectCreation.cs", new RedundantParenthesesObjectsCreation());
+            builder.AddPaths("RedundantParenthesesObjectCreation.cs")
+                .Verify();
 
 #if NET
         [TestMethod]
         public void RedundantParenthesesObjectCreation_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RedundantParenthesesObjectCreation.CSharp9.cs", new RedundantParenthesesObjectsCreation());
+            builder.AddPaths("RedundantParenthesesObjectCreation.CSharp9.cs")
+                .WithTopLevelStatements()
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
 
         [TestMethod]
         public void RedundantParenthesesObjectCreation_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\RedundantParenthesesObjectCreation.CSharp10.cs", new RedundantParenthesesObjectsCreation());
+            builder.AddPaths("RedundantParenthesesObjectCreation.CSharp10.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .Verify();
 
         [TestMethod]
-        public void RedundantParenthesesObjectCreation_CSharpPreview() =>
-            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\RedundantParenthesesObjectCreation.CSharp.Preview.cs", new RedundantParenthesesObjectsCreation());
+        public void RedundantParenthesesObjectCreation_CSharp11() =>
+            builder.AddPaths("RedundantParenthesesObjectCreation.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
 #endif
 
         [TestMethod]
         public void RedundantParenthesesObjectCreation_CodeFix() =>
-            OldVerifier.VerifyCodeFix<RedundantParenthesesCodeFix>(
-                @"TestCases\RedundantParenthesesObjectCreation.cs",
-                @"TestCases\RedundantParenthesesObjectCreation.Fixed.cs",
-                new RedundantParenthesesObjectsCreation());
+            builder.AddPaths("RedundantParenthesesObjectCreation.cs")
+                .WithCodeFix<RedundantParenthesesCodeFix>()
+                .WithCodeFixedPaths("RedundantParenthesesObjectCreation.Fixed.cs")
+                .VerifyCodeFix();
     }
 }

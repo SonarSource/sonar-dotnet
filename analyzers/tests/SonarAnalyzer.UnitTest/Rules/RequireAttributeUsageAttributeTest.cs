@@ -25,14 +25,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class RequireAttributeUsageAttributeTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<RequireAttributeUsageAttribute>();
+
         [TestMethod]
         public void RequireAttributeUsageAttribute() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\RequireAttributeUsageAttribute.cs", new RequireAttributeUsageAttribute());
+            builder.AddPaths("RequireAttributeUsageAttribute.cs")
+                .Verify();
 
 #if NET
+
         [TestMethod]
-        public void RequireAttributeUsageAttribute_CSharpPreview() =>
-            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\RequireAttributeUsageAttribute.CSharp.Preview.cs", new RequireAttributeUsageAttribute());
+        public void RequireAttributeUsageAttribute_CSharp11() =>
+            builder.AddPaths(@"RequireAttributeUsageAttribute.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
 #endif
     }
 }

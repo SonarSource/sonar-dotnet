@@ -28,26 +28,28 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DisablingCsrfProtectionTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new DisablingCsrfProtection(AnalyzerConfiguration.AlwaysEnabled));
+
         [TestMethod]
         public void DisablingCSRFProtection_CS() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(
-                @"TestCases\Hotspots\DisablingCSRFProtection.cs",
-                new DisablingCsrfProtection(AnalyzerConfiguration.AlwaysEnabled),
-                AdditionalReferences());
+            builder.AddPaths("DisablingCSRFProtection.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .AddReferences(AdditionalReferences())
+                .Verify();
 
         [TestMethod]
         public void DisablingCSRFProtection_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(
-                @"TestCases\Hotspots\DisablingCSRFProtection.CSharp10.cs",
-                new DisablingCsrfProtection(AnalyzerConfiguration.AlwaysEnabled),
-                AdditionalReferences());
+            builder.AddPaths("DisablingCSRFProtection.CSharp10.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .AddReferences(AdditionalReferences())
+                .Verify();
 
         [TestMethod]
-        public void DisablingCSRFProtection_CSharpPreview() =>
-            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(
-                @"TestCases\Hotspots\DisablingCSRFProtection.CSharp.Preview.cs",
-                new DisablingCsrfProtection(AnalyzerConfiguration.AlwaysEnabled),
-                AdditionalReferences());
+        public void DisablingCSRFProtection_CSharp11() =>
+            builder.AddPaths("DisablingCSRFProtection.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .AddReferences(AdditionalReferences())
+                .Verify();
 
         internal static IEnumerable<MetadataReference> AdditionalReferences() =>
             new[]

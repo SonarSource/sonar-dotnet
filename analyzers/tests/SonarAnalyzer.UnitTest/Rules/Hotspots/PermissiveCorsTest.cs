@@ -47,10 +47,10 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Verify();
 
         [TestMethod]
-        public void PermissiveCors_CSharpPreview() =>
+        public void PermissiveCors_CSharp11() =>
             builder
-                .AddPaths("PermissiveCors.CSharp.Preview.cs")
-                .WithLanguageVersion(LanguageVersion.Preview)
+                .AddPaths("PermissiveCors.CSharp11.cs")
+                .WithLanguageVersion(LanguageVersion.CSharp11)
                 .Verify();
 
         internal static IEnumerable<MetadataReference> AdditionalReferences =>

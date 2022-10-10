@@ -49,9 +49,9 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Verify();
 
         [TestMethod]
-        public void ImplementSerializationMethodsCorrectly_CS_CSharpPreview() =>
-            builderCS.AddPaths("ImplementSerializationMethodsCorrectly.CSharp.Preview.cs")
-                .WithOptions(ParseOptionsHelper.CSharpPreview)
+        public void ImplementSerializationMethodsCorrectly_CS_CSharp11() =>
+            builderCS.AddPaths("ImplementSerializationMethodsCorrectly.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
                 .Verify();
 
 #endif
