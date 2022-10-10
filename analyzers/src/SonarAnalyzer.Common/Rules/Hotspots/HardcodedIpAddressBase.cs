@@ -112,20 +112,20 @@ namespace SonarAnalyzer.Rules
             && !IPAddress.IsLoopback(ipAddress)
             && !ipAddress.GetAddressBytes().All(x => x == 0); // Nonroutable 0.0.0.0 or 0::0
 
-        private bool IsInDocumentationBlock(IPAddress address) =>
-            address.AddressFamily switch
+        private bool IsInDocumentationBlock(IPAddress address)
+        {
+            var ip = address.GetAddressBytes();
+            return address.AddressFamily switch
             {
-                AddressFamily.InterNetwork =>
-                    address.GetAddressBytes() is var ip
-                    && interNetworkDocumentationRanges.Any(range => SequenceStartsWith(ip, range)),
-                AddressFamily.InterNetworkV6 =>
-                    address.GetAddressBytes() is var ip
-                    && SequenceStartsWith(ip, interNetwork6DocumentationRange),
+                AddressFamily.InterNetwork => interNetworkDocumentationRanges.Any(x => SequenceStartsWith(ip, x)),
+                AddressFamily.InterNetworkV6 => SequenceStartsWith(ip, interNetwork6DocumentationRange),
                 _ => false,
             };
 
-        private static bool SequenceStartsWith(byte[] sequence, byte[] startsWith) =>
-            sequence.Take(startsWith.Length).SequenceEqual(startsWith);
+            static bool SequenceStartsWith(byte[] sequence, byte[] startsWith) =>
+                sequence.Take(startsWith.Length).SequenceEqual(startsWith);
+        }
+
 
         private static bool IsObjectIdentifier(string literalValue) =>
             literalValue.StartsWith(OIDPrefix);   // Looks like OID
