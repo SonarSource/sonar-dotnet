@@ -78,7 +78,7 @@ namespace SonarAnalyzer.Rules
 
         protected sealed override void Initialize(ParameterLoadingAnalysisContext context)
         {
-            var input = new TrackerInput(context.GetInnerContext(), configuration, rule);
+            var input = new TrackerInput(context.Context, configuration, rule);
 
             var oc = Language.Tracker.ObjectCreation;
             oc.Track(input, new object[] { MessageHardcodedPassword },
