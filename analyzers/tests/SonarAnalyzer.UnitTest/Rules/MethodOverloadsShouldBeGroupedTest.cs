@@ -43,8 +43,9 @@ namespace SonarAnalyzer.UnitTest.Rules
             builderCS.AddPaths("MethodOverloadsShouldBeGrouped.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
         [TestMethod]
-        public void MethodOverloadsShouldBeGrouped_CS_CSharpPreview() =>
-            builderCS.AddPaths("MethodOverloadsShouldBeGrouped.CSharpPreview.cs").WithOptions(ParseOptionsHelper.CSharpPreview).Verify();
+        public void MethodOverloadsShouldBeGrouped_CS_CSharp11() =>
+            builderCS.AddPaths("MethodOverloadsShouldBeGrouped.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+
 #endif
 
         [TestMethod]

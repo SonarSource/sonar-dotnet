@@ -44,8 +44,8 @@ namespace SonarAnalyzer.UnitTest.Rules
             builderCS.AddPaths("OptionalParameter.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
         [TestMethod]
-        public void OptionalParameter_CSharpPreview() =>
-            builderCS.AddPaths("OptionalParameter.CSharpPreview.cs").WithOptions(ParseOptionsHelper.CSharpPreview).Verify();
+        public void OptionalParameter_CSharp11() =>
+            builderCS.AddPaths("OptionalParameter.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
 
 #endif
 

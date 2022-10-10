@@ -25,20 +25,23 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class TrackNotImplementedExceptionTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<TrackNotImplementedException>();
+
         [TestMethod]
         public void TrackNotImplementedException() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\TrackNotImplementedException.cs",
-                new TrackNotImplementedException(),
-                ParseOptionsHelper.FromCSharp8,
-                MetadataReferenceFacade.NETStandard21);
+            builder.AddPaths("TrackNotImplementedException.cs")
+                .AddReferences(MetadataReferenceFacade.NETStandard21)
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
 
 #if NET
+
         [TestMethod]
-        public void TrackNotImplementedException_CSharpPreview() =>
-            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(
-                @"TestCases\TrackNotImplementedException.CSharpPreview.cs",
-                new TrackNotImplementedException());
+        public void TrackNotImplementedException_CSharp11() =>
+            builder.AddPaths("TrackNotImplementedException.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
 #endif
 
     }

@@ -76,12 +76,14 @@ namespace SonarAnalyzer.UnitTest.Rules
             builder.AddPaths("MethodShouldBeNamedAccordingToSynchronicity.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).AddReferences(MetadataReferenceFacade.NETStandard21).Verify();
 
 #if NET
+
         [TestMethod]
-        public void MethodShouldBeNamedAccordingToSynchronicity_CSharpPreview() =>
-            builder.AddPaths("MethodShouldBeNamedAccordingToSynchronicity.CSharpPreview.cs")
-                .WithOptions(ParseOptionsHelper.CSharpPreview)
+        public void MethodShouldBeNamedAccordingToSynchronicity_CSharp11() =>
+            builder.AddPaths("MethodShouldBeNamedAccordingToSynchronicity.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
                 .AddReferences(NuGetMetadataReference.MicrosoftAspNetSignalRCore())
                 .Verify();
+
 #endif
     }
 }

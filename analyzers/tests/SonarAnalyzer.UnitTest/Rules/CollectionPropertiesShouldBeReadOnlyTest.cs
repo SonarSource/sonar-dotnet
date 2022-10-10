@@ -25,27 +25,28 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class CollectionPropertiesShouldBeReadOnlyTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<CollectionPropertiesShouldBeReadOnly>().AddReferences(MetadataReferenceFacade.SystemRuntimeSerialization);
+
         [TestMethod]
         public void CollectionPropertiesShouldBeReadOnly() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\CollectionPropertiesShouldBeReadOnly.cs",
-                new CollectionPropertiesShouldBeReadOnly(),
-                MetadataReferenceFacade.SystemRuntimeSerialization);
+            builder.AddPaths("CollectionPropertiesShouldBeReadOnly.cs")
+                .Verify();
 
 #if NET
-        [TestMethod]
-        public void CollectionPropertiesShouldBeReadOnly_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(
-                @"TestCases\CollectionPropertiesShouldBeReadOnly.CSharp9.cs",
-                new CollectionPropertiesShouldBeReadOnly(),
-                MetadataReferenceFacade.SystemRuntimeSerialization);
 
         [TestMethod]
-        public void CollectionPropertiesShouldBeReadOnly_CSharpPreview() =>
-            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(
-                @"TestCases\CollectionPropertiesShouldBeReadOnly.CSharpPreview.cs",
-                new CollectionPropertiesShouldBeReadOnly(),
-                MetadataReferenceFacade.SystemRuntimeSerialization);
+        public void CollectionPropertiesShouldBeReadOnly_CSharp9() =>
+            builder.AddPaths("CollectionPropertiesShouldBeReadOnly.CSharp9.cs")
+                .WithTopLevelStatements()
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
+
+        [TestMethod]
+        public void CollectionPropertiesShouldBeReadOnly_CSharp11() =>
+            builder.AddPaths("CollectionPropertiesShouldBeReadOnly.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
 #endif
     }
 }

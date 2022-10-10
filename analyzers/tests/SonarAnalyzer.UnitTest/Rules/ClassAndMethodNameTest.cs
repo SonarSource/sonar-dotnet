@@ -75,8 +75,8 @@ namespace SonarAnalyzer.UnitTest.Rules
             builderCS.AddPaths("ClassAndMethodName.MethodName.CSharp9.cs").AddTestReference().WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
         [TestMethod]
-        public void ClassAndMethodName_MethodName_CSharpPreview() =>
-            builderCS.AddPaths("ClassAndMethodName.MethodName.CSharpPreview.cs").WithOptions(ParseOptionsHelper.CSharpPreview).Verify();
+        public void ClassAndMethodName_MethodName_CSharp11() =>
+            builderCS.AddPaths("ClassAndMethodName.MethodName.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
 
 #endif
 

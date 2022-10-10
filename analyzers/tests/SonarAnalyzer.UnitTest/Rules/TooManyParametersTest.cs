@@ -26,32 +26,44 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class TooManyParametersTest
     {
+        private readonly VerifierBuilder builderCSMax3 = new VerifierBuilder().AddAnalyzer(() => new CS.TooManyParameters { Maximum = 3 });
+        private readonly VerifierBuilder builderVBMax3 = new VerifierBuilder().AddAnalyzer(() => new VB.TooManyParameters { Maximum = 3 });
+
         [TestMethod]
         public void TooManyParameters_CS_CustomValues() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\TooManyParameters_CustomValues.cs", new CS.TooManyParameters { Maximum = 3 }, ParseOptionsHelper.FromCSharp8);
+            builderCSMax3.AddPaths("TooManyParameters_CustomValues.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
 
 #if NET
 
         [TestMethod]
         public void TooManyParameters_CS_CustomValues_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\TooManyParameters_CustomValues.CSharp9.cs", new CS.TooManyParameters { Maximum = 3 });
+             builderCSMax3.AddPaths("TooManyParameters_CustomValues.CSharp9.cs")
+                .WithTopLevelStatements()
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
 
         [TestMethod]
-        public void TooManyParameters_CS_CustomValues_CSharpPreview() =>
-            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\TooManyParameters_CustomValues.CSharpPreview.cs", new CS.TooManyParameters { Maximum = 3 });
+        public void TooManyParameters_CS_CustomValues_CSharp11() =>
+            builderCSMax3.AddPaths("TooManyParameters_CustomValues.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
 
 #endif
 
         [TestMethod]
         public void TooManyParameters_VB_CustomValues() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\TooManyParameters_CustomValues.vb", new VB.TooManyParameters { Maximum = 3 });
+            builderVBMax3.AddPaths("TooManyParameters_CustomValues.vb").Verify();
 
         [TestMethod]
         public void TooManyParameters_CS_DefaultValues() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\TooManyParameters_DefaultValues.cs", new CS.TooManyParameters(), ParseOptionsHelper.FromCSharp8);
+            new VerifierBuilder<CS.TooManyParameters>().AddPaths("TooManyParameters_DefaultValues.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
 
         [TestMethod]
         public void TooManyParameters_VB_DefaultValues() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\TooManyParameters_DefaultValues.vb", new VB.TooManyParameters());
+            new VerifierBuilder<VB.TooManyParameters>().AddPaths("TooManyParameters_DefaultValues.vb").Verify();
     }
 }

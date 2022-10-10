@@ -42,8 +42,8 @@ namespace SonarAnalyzer.UnitTest.Rules
             builder.AddPaths("TypeMemberVisibility.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
         [TestMethod]
-        public void TypeMemberVisibility_CSharpPreview() =>
-            builder.AddPaths("TypeMemberVisibility.CSharpPreview.cs").WithOptions(ParseOptionsHelper.CSharpPreview).Verify();
+        public void TypeMemberVisibility_CSharp11() =>
+            builder.AddPaths("TypeMemberVisibility.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
 
 #endif
 

@@ -129,16 +129,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .Verify();
 
         [Obsolete("Use VerifierBuilder instead.")]
-        public static void VerifyAnalyzerCSharpPreviewLibrary(string path, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
-            new VerifierBuilder()
-                .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
-                .AddPaths(RemoveTestCasesPrefix(path))
-                .WithConcurrentAnalysis(false)
-                .WithOptions(ParseOptionsHelper.CSharpPreview)
-                .Verify();
-
-        [Obsolete("Use VerifierBuilder instead.")]
         public static void VerifyNonConcurrentAnalyzer(string path,
                                                        DiagnosticAnalyzer diagnosticAnalyzer,
                                                        ImmutableArray<ParseOptions> options = default,

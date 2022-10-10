@@ -38,8 +38,8 @@ namespace SonarAnalyzer.UnitTest.Rules
             builder.AddPaths("MethodShouldNotOnlyReturnConstant.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
         [TestMethod]
-        public void MethodShouldNotOnlyReturnConstant_CSharpPreview() =>
-            builder.AddPaths("MethodShouldNotOnlyReturnConstant.CSharpPreview.cs").WithOptions(ParseOptionsHelper.CSharpPreview).Verify();
+        public void MethodShouldNotOnlyReturnConstant_CSharp11() =>
+            builder.AddPaths("MethodShouldNotOnlyReturnConstant.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
 
 #endif
 

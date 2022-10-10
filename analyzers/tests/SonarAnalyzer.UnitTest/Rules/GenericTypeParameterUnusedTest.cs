@@ -42,8 +42,8 @@ namespace SonarAnalyzer.UnitTest.Rules
             builder.AddPaths("GenericTypeParameterUnused.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
         [TestMethod]
-        public void GenericTypeParameterUnused_CSharpPreview() =>
-            builder.AddPaths("GenericTypeParameterUnused.CSharpPreview.cs").WithOptions(ParseOptionsHelper.CSharpPreview).Verify();
+        public void GenericTypeParameterUnused_CSharp11() =>
+            builder.AddPaths("GenericTypeParameterUnused.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
 
 #endif
 

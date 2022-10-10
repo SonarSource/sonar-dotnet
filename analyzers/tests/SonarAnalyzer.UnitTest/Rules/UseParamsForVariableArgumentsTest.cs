@@ -25,14 +25,22 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class UseParamsForVariableArgumentsTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<UseParamsForVariableArguments>();
+
         [TestMethod]
         public void UseParamsForVariableArguments() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\UseParamsForVariableArguments.cs", new UseParamsForVariableArguments());
+            builder.AddPaths("UseParamsForVariableArguments.cs")
+                .Verify();
 
 #if NET
+
         [TestMethod]
-        public void UseParamsForVariableArguments_CSharpPreview() =>
-            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\UseParamsForVariableArguments.CSharpPreview.cs", new UseParamsForVariableArguments());
+        public void UseParamsForVariableArguments_CSharp11() =>
+            builder.AddPaths("UseParamsForVariableArguments.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
 #endif
+
     }
 }

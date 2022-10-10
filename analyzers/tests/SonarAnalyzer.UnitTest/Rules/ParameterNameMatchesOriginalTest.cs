@@ -26,26 +26,34 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ParameterNameMatchesOriginalTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ParameterNameMatchesOriginal>();
+        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.ParameterNameMatchesOriginal>();
+
         [TestMethod]
         public void ParameterNameMatchesOriginal_CS() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\ParameterNameMatchesOriginal.cs",
-                new CS.ParameterNameMatchesOriginal(),
-                ParseOptionsHelper.FromCSharp8,
-                MetadataReferenceFacade.NETStandard21);
+            builderCS.AddPaths("ParameterNameMatchesOriginal.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .AddReferences(MetadataReferenceFacade.NETStandard21)
+                .Verify();
 
 #if NET
-        [TestMethod]
-        public void ParameterNameMatchesOriginal_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ParameterNameMatchesOriginal.CSharp9.cs", new CS.ParameterNameMatchesOriginal());
 
         [TestMethod]
-        public void ParameterNameMatchesOriginal_CSharpPreview() =>
-            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\ParameterNameMatchesOriginal.CSharpPreview.cs", new CS.ParameterNameMatchesOriginal());
+        public void ParameterNameMatchesOriginal_CSharp9() =>
+            builderCS.AddPaths("ParameterNameMatchesOriginal.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
+
+        [TestMethod]
+        public void ParameterNameMatchesOriginal_CSharp11() =>
+            builderCS.AddPaths("ParameterNameMatchesOriginal.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
 #endif
 
         [TestMethod]
         public void ParameterNameMatchesOriginal_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ParameterNameMatchesOriginal.vb", new VB.ParameterNameMatchesOriginal());
+            builderVB.AddPaths("ParameterNameMatchesOriginal.vb").Verify();
     }
 }

@@ -42,8 +42,8 @@ namespace SonarAnalyzer.UnitTest.Rules
             builder.AddPaths("CallerInformationParametersShouldBeLast.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
         [TestMethod]
-        public void CallerInformationParametersShouldBeLast_CSharpPreview() =>
-            builder.AddPaths("CallerInformationParametersShouldBeLast.CSharpPreview.cs").WithOptions(ParseOptionsHelper.CSharpPreview).Verify();
+        public void CallerInformationParametersShouldBeLast_CSharp11() =>
+            builder.AddPaths("CallerInformationParametersShouldBeLast.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
 
 #endif
 
