@@ -495,7 +495,7 @@ object value = arg switch
 
 static object Tag(string name, object value) => null;";
             var validator = SETestContext.CreateCS(code, ", object arg").Validator;
-            validator.ValidateContainsOperation(OperationKind.TypePattern);
+            validator.ValidateContainsOperation(expectedOperation);
             validator.ValidateTag("Arg", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue()); // Should not have Null in any case
         }
 
