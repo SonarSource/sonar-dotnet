@@ -21,6 +21,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Json.Parsing;
 
@@ -72,8 +73,25 @@ namespace SonarAnalyzer.Json
             }
         }
 
-        public static JsonNode FromString(string json) =>
-            new SyntaxAnalyzer(json).Parse();
+        public static JsonNode FromString(string json)
+        {
+            try
+            {
+                return new SyntaxAnalyzer(json).Parse();
+            }
+            catch (JsonException)
+            {
+                return null;    // Malformed Json
+            }
+        }
+
+        public Location ToLocation(string path)
+        {
+            var length = Value.ToString().Length;
+            var start = new LinePosition(Start.Line, Start.Character + 1);
+            var end = new LinePosition(End.Line, End.Character - 1);
+            return Location.Create(path, new TextSpan(start.Line, length), new LinePositionSpan(start, end));
+        }
 
         public void UpdateEnd(LinePosition end) =>
             End = NotInitializedEnd()
@@ -108,7 +126,7 @@ namespace SonarAnalyzer.Json
             GetEnumerator();
 
         private InvalidOperationException InvalidKind() =>
-            new InvalidOperationException($"Operation is not valid. Json kind is {Kind}");
+            new($"Operation is not valid. Json kind is {Kind}");
 
         private bool NotInitializedEnd() =>
             End == LinePosition.Zero;

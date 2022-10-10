@@ -29,6 +29,8 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Json;
+using SonarAnalyzer.Json.Parsing;
 
 namespace SonarAnalyzer.Rules
 {
@@ -110,6 +112,7 @@ namespace SonarAnalyzer.Rules
 
             InitializeActions(context);
             context.Context.RegisterCompilationAction(c => CheckWebConfig(context.Context, c));
+            context.Context.RegisterCompilationAction(c => CheckAppSettings(context.Context, c));
         }
 
         protected bool IsEnabled(AnalyzerOptions options)
@@ -143,6 +146,65 @@ namespace SonarAnalyzer.Rules
                     {
                         c.ReportIssue(Diagnostic.Create(rule, attributeLocation, attributeMessage));
                     }
+                }
+            }
+        }
+
+        private void CheckAppSettings(SonarAnalysisContext context, CompilationAnalysisContext c)
+        {
+            foreach (var path in context.AppSettingsFiles(c))
+            {
+                if (JsonNode.FromString(File.ReadAllText(path)) is { } json)
+                {
+                    CheckAppSettings(c, path, json);
+                }
+            }
+        }
+
+        private void CheckAppSettings(CompilationAnalysisContext c, string path, JsonNode json)
+        {
+            var queue = new Queue<JsonNode>();
+            queue.Enqueue(json);
+            while (queue.Any())
+            {
+                var node = queue.Dequeue();
+                switch (node.Kind)
+                {
+                    case Kind.Object:
+                        foreach (var key in node.Keys)
+                        {
+                            ProcessKeyValue(key, node[key]);
+                        }
+                        break;
+                    case Kind.List:
+                        foreach (var item in node)
+                        {
+                            queue.Enqueue(item);
+                        }
+                        break;
+                    case Kind.Value:
+                        CheckKeyValue(null, node);
+                        break;
+                }
+            }
+
+            void ProcessKeyValue(string key, JsonNode value)
+            {
+                if (value.Kind == Kind.Value)
+                {
+                    CheckKeyValue(key, value);
+                }
+                else
+                {
+                    queue.Enqueue(value);
+                }
+            }
+
+            void CheckKeyValue(string key, JsonNode value)
+            {
+                if (value.Value is string str && IssueMessage(key, str) is { } valueMessage)
+                {
+                    c.ReportIssue(Diagnostic.Create(rule, value.ToLocation(path), valueMessage));
                 }
             }
         }

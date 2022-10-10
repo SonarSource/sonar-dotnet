@@ -92,7 +92,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private void CheckAppSettings(SonarAnalysisContext context, CompilationAnalysisContext c)
         {
-            foreach (var fullPath in context.GetAppSettings(c))
+            foreach (var fullPath in context.AppSettingsFiles(c))
             {
                 CheckAppSettingJson(c, fullPath);
             }
@@ -101,16 +101,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private void CheckAppSettingJson(CompilationAnalysisContext c, string fullPath)
         {
             var appSettings = File.ReadAllText(fullPath);
-            if (appSettings.Contains("\"ConnectionStrings\""))
+            if (appSettings.Contains("\"ConnectionStrings\"") && JsonNode.FromString(appSettings) is { } json)
             {
-                try
-                {
-                    ReportEmptyPassword(JsonNode.FromString(appSettings), fullPath, c);
-                }
-                catch (JsonException)
-                {
-                    // Happens when JSON file is malformed
-                }
+                ReportEmptyPassword(json, fullPath, c);
             }
         }
 
@@ -136,18 +129,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     if (connectionStrings[key] is { Kind: Kind.Value, Value: string value } connectionStringNode && IsVulnerable(value))
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, CreateLocation(connectionStringNode, appSettingsPath)));
+                        c.ReportIssue(Diagnostic.Create(Rule, connectionStringNode.ToLocation(appSettingsPath)));
                     }
                 }
             }
-        }
-
-        private static Location CreateLocation(JsonNode node, string path)
-        {
-            var length = node.Value.ToString().Length;
-            var start = new LinePosition(node.Start.Line, node.Start.Character + 1);
-            var end = new LinePosition(node.End.Line, node.End.Character - 1);
-            return Location.Create(path, new TextSpan(start.Line, length), new LinePositionSpan(start, end));
         }
 
         private static TrackerBase<SyntaxKind, InvocationContext>.Condition HasEmptyPasswordArgument() =>
