@@ -30,13 +30,11 @@ namespace SonarAnalyzer.UnitTest.Common;
 [TestClass]
 public class ReadMeTest
 {
-    public TestContext TestContext { get; set; }
-
     private string readMe;
 
     [TestInitialize]
     public void Init() =>
-       readMe = File.ReadAllText(Path.Combine(TestContext.DeploymentDirectory, Paths.TestProjectRoot, @"..\..\..\README.md"));
+       readMe = File.ReadAllText(Path.Combine(Paths.TestProjectRoot, @"..\..\..\README.md"));
 
     [TestMethod]
     public void HasCorrectRuleCount_CS() =>

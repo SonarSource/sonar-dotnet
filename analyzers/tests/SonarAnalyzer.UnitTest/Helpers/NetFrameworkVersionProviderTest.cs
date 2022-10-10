@@ -119,11 +119,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 .GetCompilation();
         }
 
-        private static string CreateMockPath(string mockName)
-        {
-            var assembly = typeof(NetFrameworkVersionProviderTest).Assembly;
-            return Path.Combine(Path.GetDirectoryName(assembly.Location), Paths.TestProjectRoot, "../FrameworkMocks/lib/", mockName);
-        }
+        private static string CreateMockPath(string mockName) =>
+            Path.Combine(Paths.TestProjectRoot, "../FrameworkMocks/lib/", mockName);
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
             MetadataReferenceFacade.MsCorLib.Concat(MetadataReferenceFacade.SystemComponentModelComposition);
