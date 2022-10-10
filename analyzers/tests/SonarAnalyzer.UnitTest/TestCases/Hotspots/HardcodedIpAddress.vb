@@ -38,6 +38,10 @@ Namespace Tests.Diagnostics
             Dim loopbackAddress1 As String = "127.0.0.1"
             Dim loopbackAddress2 As String = "127.2.3.4"
             Dim nonRoutableAddress As String = "0.0.0.0"
+            Dim documentationRange1 = "192.0.2.111"
+            Dim documentationRange2 = "198.51.100.111"
+            Dim documentationRange3 = "203.0.113.111"
+
             Dim notAnIp1 As String = "0.0.0.1234"
             Dim country_oid As String = "2.5.6.2"
             Dim subschema_oid As String = "2.5.20.1"
