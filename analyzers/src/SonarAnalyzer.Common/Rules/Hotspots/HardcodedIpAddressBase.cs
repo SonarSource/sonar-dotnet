@@ -46,6 +46,17 @@ namespace SonarAnalyzer.Rules
             "ASSEMBLY",
         };
 
+        // https://datatracker.ietf.org/doc/html/rfc5737#section-3
+        private readonly byte[][] interNetworkDocumentationRanges =
+        {
+            new byte[] { 192, 0, 2 },
+            new byte[] { 198, 51, 100 },
+            new byte[] { 203, 0, 113 }
+        };
+
+        // https://datatracker.ietf.org/doc/html/rfc3849#section-2
+        private readonly byte[] interNetwork6DocumentationRange = { 0x20, 0x01, 0x0d, 0xb8 }; // 2001:0DB8::/32
+
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
         protected abstract string GetAssignedVariableName(SyntaxNode stringLiteral);
@@ -71,6 +82,7 @@ namespace SonarAnalyzer.Rules
             && IsRoutableNonLoopbackIPAddress(literalValue, out var address)
             && (address.AddressFamily != AddressFamily.InterNetwork
                 || literalValue.Count(x => x == '.') == IPv4AddressParts - 1)
+            && !IsInDocumentationBlock(address)
             && !IsIgnoredVariableName(node)
             && !HasAttributes(node);
 
@@ -99,6 +111,20 @@ namespace SonarAnalyzer.Rules
             IPAddress.TryParse(literalValue, out ipAddress)
             && !IPAddress.IsLoopback(ipAddress)
             && !ipAddress.GetAddressBytes().All(x => x == 0); // Nonroutable 0.0.0.0 or 0::0
+
+        private bool IsInDocumentationBlock(IPAddress address)
+        {
+            var ip = address.GetAddressBytes();
+            return address.AddressFamily switch
+            {
+                AddressFamily.InterNetwork => interNetworkDocumentationRanges.Any(x => SequenceStartsWith(ip, x)),
+                AddressFamily.InterNetworkV6 => SequenceStartsWith(ip, interNetwork6DocumentationRange),
+                _ => false,
+            };
+
+            static bool SequenceStartsWith(byte[] sequence, byte[] startsWith) =>
+                sequence.Take(startsWith.Length).SequenceEqual(startsWith);
+        }
 
         private static bool IsObjectIdentifier(string literalValue) =>
             literalValue.StartsWith(OIDPrefix);   // Looks like OID

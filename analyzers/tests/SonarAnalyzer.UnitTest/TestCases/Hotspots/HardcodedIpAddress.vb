@@ -12,53 +12,59 @@ Namespace Tests.Diagnostics
         End Sub
 
         Public Sub Foo()
-            Dim ip As String = "192.168.0.1" ' Noncompliant {{Make sure using this hardcoded IP address '192.168.0.1' is safe here.}}
+            Dim ip As String = "192.168.0.1"                ' Noncompliant {{Make sure using this hardcoded IP address '192.168.0.1' is safe here.}}
             '                  ^^^^^^^^^^^^^
-            ip = "300.0.0.0" ' Compliant, invalid IP
-            ip = "127.0.0.1" ' Compliant, exception from the rule
-            ip = "    127.0.0.0    " ' Compliant
-            ip = "    ""127.0.0.0""    " ' Compliant
-            ip = "2001:db8:1234:ffff:ffff:ffff:ffff:ffff" ' Noncompliant
-            ip = "::/0"  ' Compliant, not an IPv6 address
-            ip = "::" ' Compliant, exception from the rule
-            ip = "2" ' Compliant
-            ip = "::2" ' Noncompliant
-            ip = "0:0:0:0:0:0:0:2" ' Noncompliant
-            ip = "0:0::0:2" ' Noncompliant
-            ip = "1623:0000:0000:0000:0000:0000:0000:0001" ' Noncompliant
+            ip = "300.0.0.0"                                ' Compliant, invalid IP
+            ip = "127.0.0.1"                                ' Compliant, exception from the rule
+            ip = "    127.0.0.0    "
+            ip = "    ""127.0.0.0""    "
+            ip = "2001:db8:1234:ffff:ffff:ffff:ffff:ffff"   ' Compliant. Is a documentation IP.
+            ip = "2001:0db8:1234:ffff:ffff:ffff:ffff:ffff"  ' Compliant. Is a documentation IP.
+            ip = "2001:abcd:1234:ffff:ffff:ffff:ffff:ffff"  ' Noncompliant
+            ip = "::/0"                                     ' Compliant, not an IPv6 address
+            ip = "::"                                       ' Compliant, exception from the rule
+            ip = "2"
+            ip = "::2"                                      ' Noncompliant
+            ip = "0:0:0:0:0:0:0:2"                          ' Noncompliant
+            ip = "0:0::0:2"                                 ' Noncompliant
+            ip = "1623:0000:0000:0000:0000:0000:0000:0001"  ' Noncompliant
 
-            Dim v = New Version("127.0.0.0") ' Compliant
-            Dim c = New AnyAssemblyClass("127.0.0.0") ' Compliant
+            Dim v = New Version("127.0.0.0")
+            Dim c = New AnyAssemblyClass("127.0.0.0")
             WriteAssemblyInfo("ProjectWithDependenciesWithContent", _
-                "1.2.0.0", "Thomas", "Project with content", "Title of Package") ' Compliant
+                "1.2.0.0", "Thomas", "Project with content", "Title of Package")
 
-            Dim broadcastAddress As String = "255.255.255.255" ' Compliant
-            Dim loopbackAddress1 As String = "127.0.0.1" ' Compliant
-            Dim loopbackAddress2 As String = "127.2.3.4" ' Compliant
-            Dim nonRoutableAddress As String = "0.0.0.0" ' Compliant
-            Dim notAnIp1 As String = "0.0.0.1234" ' Compliant
-            Dim country_oid As String = "2.5.6.2" ' Compliant
-            Dim subschema_oid As String = "2.5.20.1" ' Compliant
+            Dim broadcastAddress As String = "255.255.255.255"
+            Dim loopbackAddress1 As String = "127.0.0.1"
+            Dim loopbackAddress2 As String = "127.2.3.4"
+            Dim nonRoutableAddress As String = "0.0.0.0"
+            Dim documentationRange1 = "192.0.2.111"
+            Dim documentationRange2 = "198.51.100.111"
+            Dim documentationRange3 = "203.0.113.111"
+
+            Dim notAnIp1 As String = "0.0.0.1234"
+            Dim country_oid As String = "2.5.6.2"
+            Dim subschema_oid As String = "2.5.20.1"
             Dim not_considered_as_an_oid As String = "2.59.6.2" ' Noncompliant
             '                                        ^^^^^^^^^^
 
             ' IPV6 loopback
-            Dim loopbackAddressV6_1 As String = "::1" ' Compliant
-            Dim loopbackAddressV6_2 As String = "0:0:0:0:0:0:0:1" ' Compliant
-            Dim loopbackAddressV6_3 As String = "0:0::0:1" ' Compliant
-            Dim loopbackAddressV6_4 As String = "0000:0000:0000:0000:0000:0000:0000:0001" ' Compliant
+            Dim loopbackAddressV6_1 As String = "::1"
+            Dim loopbackAddressV6_2 As String = "0:0:0:0:0:0:0:1"
+            Dim loopbackAddressV6_3 As String = "0:0::0:1"
+            Dim loopbackAddressV6_4 As String = "0000:0000:0000:0000:0000:0000:0000:0001"
 
             ' IPV6 non routable
-            Dim nonRoutableAddressV6_1 As String = "::" ' Compliant
-            Dim nonRoutableAddressV6_2 As String = "0:0:0:0:0:0:0:0" ' Compliant
-            Dim nonRoutableAddressV6_3 As String = "0::0" ' Compliant
-            Dim nonRoutableAddressV6_4 As String = "0000:0000:0000:0000:0000:0000:0000:0000" ' Compliant
+            Dim nonRoutableAddressV6_1 As String = "::"
+            Dim nonRoutableAddressV6_2 As String = "0:0:0:0:0:0:0:0"
+            Dim nonRoutableAddressV6_3 As String = "0::0"
+            Dim nonRoutableAddressV6_4 As String = "0000:0000:0000:0000:0000:0000:0000:0000"
 
             ' IPV6 invalid form
-            Dim invalidIPv6 As String = "1::2::3" ' Compliant
-            invalidIPv6 = "20015555:db8:1234:ffff:ffff:ffff:ffff:ffff" ' Compliant
-            invalidIPv6 = "2001:db8:1234:ffff:ffff:ffff:ffff:ffff:1623:2316" ' Compliant
-            invalidIPv6 = ":::4" ' Compliant
+            Dim invalidIPv6 As String = "1::2::3"
+            invalidIPv6 = "20015555:db8:1234:ffff:ffff:ffff:ffff:ffff"
+            invalidIPv6 = "2001:db8:1234:ffff:ffff:ffff:ffff:ffff:1623:2316"
+            invalidIPv6 = ":::4"
         End Sub
 
         Public Sub StringInterpolation(ByVal unknownPart As String, ByVal knownPart As String)
@@ -67,12 +73,12 @@ Namespace Tests.Diagnostics
             Dim part3 As String = "0"
             Dim part4 As String = "1"
             knownPart = "255"
-            Dim ip1 As String = $"{part1}.{part2}.{part3}.{part4}"    ' Noncompliant
+            Dim ip1 As String = $"{part1}.{part2}.{part3}.{part4}"                           ' Noncompliant
             Dim nonIp As String = $"{part1}:{part2}"
-            Dim ip2 As String = $"{part1}.{part2}.{part3}.{knownPart}"  ' Noncompliant
+            Dim ip2 As String = $"{part1}.{part2}.{part3}.{knownPart}"                       ' Noncompliant
             Dim ip3 As String = $"{part1}.{part2}.{part3}.{unknownPart}"
             Dim nestedConstInterpolation As String = $"{$"{part1}.{part2}"}.{part3}.{part4}" ' Noncompliant
-            Dim nestedInterpolation As String = $"{$"{part1}.{knownPart}"}.{part3}.{part4}"    ' Noncompliant
+            Dim nestedInterpolation As String = $"{$"{part1}.{knownPart}"}.{part3}.{part4}"  ' Noncompliant
         End Sub
 
     End Class
