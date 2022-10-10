@@ -21,19 +21,19 @@ Namespace Tests.Diagnostics
         Private Sub InitializerSetsNotAllowedValue()
             Dim aesManaged = New AesManaged() With {.Mode = CipherMode.CBC} ' Noncompliant
 '                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-            aesManaged = New AesManaged() With {.Mode = CipherMode.CFB} ' Noncompliant 
-            aesManaged = New AesManaged() With {.Mode = CipherMode.CTS} ' Noncompliant 
-            aesManaged = New AesManaged() With {.Mode = CipherMode.ECB} ' Noncompliant 
-            aesManaged = New AesManaged() With {.Mode = CipherMode.OFB} ' Noncompliant 
+            aesManaged = New AesManaged() With {.Mode = CipherMode.CFB} ' Noncompliant
+            aesManaged = New AesManaged() With {.Mode = CipherMode.CTS} ' Noncompliant
+            aesManaged = New AesManaged() With {.Mode = CipherMode.ECB} ' Noncompliant
+            aesManaged = New AesManaged() With {.Mode = CipherMode.OFB} ' Noncompliant
         End Sub
 
         Private Sub PropertySetsNotAllowedValue()
-            Dim c = New AesManaged() ' Noncompliant 
-            c.Mode = CipherMode.CBC ' Noncompliant 
-            c.Mode = CipherMode.CFB ' Noncompliant 
-            c.Mode = CipherMode.CTS ' Noncompliant 
-            c.Mode = CipherMode.ECB ' Noncompliant 
-            c.Mode = CipherMode.OFB ' Noncompliant 
+            Dim c = New AesManaged() ' Noncompliant
+            c.Mode = CipherMode.CBC ' Noncompliant
+            c.Mode = CipherMode.CFB ' Noncompliant
+            c.Mode = CipherMode.CTS ' Noncompliant
+            c.Mode = CipherMode.ECB ' Noncompliant
+            c.Mode = CipherMode.OFB ' Noncompliant
         End Sub
 
         Private Sub PropertySetsAllowedValue(ByVal foo As Boolean)
@@ -51,25 +51,13 @@ Namespace Tests.Diagnostics
             rsaProvider.Encrypt(data, System.Security.Cryptography.RSAEncryptionPadding.OaepSHA1)
             rsaProvider.Encrypt(data, RSAEncryptionPadding.OaepSHA256)
             rsaProvider.Encrypt(padding:=padding, data:=data)
-
-            Dim bytesWritten = Nothing
-            rsaProvider.TryEncrypt(data, Nothing, RSAEncryptionPadding.OaepSHA256, bytesWritten)
-
-            genericRSA.Encrypt(data, RSAEncryptionPadding.OaepSHA256)
-            genericRSA.TryEncrypt(data, Nothing, RSAEncryptionPadding.OaepSHA256, bytesWritten)
         End Sub
 
         Private Sub InvocationSetsNotAllowedValue(ByVal data As Byte(), ByVal genericRSA As RSA)
-            rsaProvider.Encrypt(data, False) ' Noncompliant 
-            rsaProvider.Encrypt(fOAEP:=False, rgb:=data) ' Noncompliant 
-            rsaProvider.Encrypt(data, System.Security.Cryptography.RSAEncryptionPadding.Pkcs1) ' Noncompliant 
-            rsaProvider.Encrypt(data, RSAEncryptionPadding.Pkcs1) ' Noncompliant 
-
-            Dim bytesWritten = Nothing
-            rsaProvider.TryEncrypt(data, Nothing, RSAEncryptionPadding.Pkcs1, bytesWritten) ' Noncompliant
-
-            genericRSA.Encrypt(data, RSAEncryptionPadding.Pkcs1) ' Noncompliant
-            genericRSA.TryEncrypt(data, Nothing, RSAEncryptionPadding.Pkcs1, bytesWritten) ' Noncompliant
+            rsaProvider.Encrypt(data, False) ' Noncompliant
+            rsaProvider.Encrypt(fOAEP:=False, rgb:=data) ' Noncompliant
+            rsaProvider.Encrypt(data, System.Security.Cryptography.RSAEncryptionPadding.Pkcs1) ' Noncompliant
+            rsaProvider.Encrypt(data, RSAEncryptionPadding.Pkcs1) ' Noncompliant
         End Sub
     End Class
 End Namespace

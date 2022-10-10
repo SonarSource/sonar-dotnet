@@ -26,29 +26,46 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class EncryptionAlgorithmsShouldBeSecureTest
     {
+        private readonly VerifierBuilder<CS.EncryptionAlgorithmsShouldBeSecure> builderCS = new();
+        private readonly VerifierBuilder<VB.EncryptionAlgorithmsShouldBeSecure> builderVB = new();
+
         [TestMethod]
         public void EncryptionAlgorithmsShouldBeSecure_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure.cs",
-                new CS.EncryptionAlgorithmsShouldBeSecure(),
-                GetAdditionalReferences());
+            builderCS.AddPaths(@"EncryptionAlgorithmsShouldBeSecure.cs").AddReferences(GetAdditionalReferences()).Verify();
 
         [TestMethod]
         public void EncryptionAlgorithmsShouldBeSecure_CS_NetStandard21() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure_NetStandard21.cs",
-                new CS.EncryptionAlgorithmsShouldBeSecure(),
-                MetadataReferenceFacade.NETStandard21.Concat(GetAdditionalReferences()));
+            builderCS.AddPaths(@"EncryptionAlgorithmsShouldBeSecure_NetStandard21.cs").AddReferences(MetadataReferenceFacade.NETStandard21.Concat(GetAdditionalReferences())).Verify();
 
         [TestMethod]
         public void EncryptionAlgorithmsShouldBeSecure_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure.vb",
-                new VB.EncryptionAlgorithmsShouldBeSecure(),
-                GetAdditionalReferences());
+            builderVB.AddPaths(@"EncryptionAlgorithmsShouldBeSecure.vb").AddReferences(GetAdditionalReferences()).Verify();
 
         [TestMethod]
         public void EncryptionAlgorithmsShouldBeSecure_VB_NetStandard21() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure_NetStandard21.vb",
-                new VB.EncryptionAlgorithmsShouldBeSecure(),
-                MetadataReferenceFacade.NETStandard21.Concat(GetAdditionalReferences()));
+            builderVB.AddPaths(@"EncryptionAlgorithmsShouldBeSecure_NetStandard21.vb")
+                     .AddReferences(MetadataReferenceFacade.NETStandard21.Concat(GetAdditionalReferences()))
+                     .Verify();
+
+#if NET
+
+        [TestMethod]
+        public void EncryptionAlgorithmsShouldBeSecure_VB_NetStandard21_Net7() =>
+            builderVB.AddPaths(@"EncryptionAlgorithmsShouldBeSecure_NetStandard21.Net7.vb")
+                .WithOptions(ParseOptionsHelper.VisualBasicLatest)
+                .AddReferences(MetadataReferenceFacade.NETStandard21.Concat(GetAdditionalReferences()))
+                .Verify();
+
+#else
+
+        [TestMethod]
+        public void EncryptionAlgorithmsShouldBeSecure_VB_NetStandard21_Net48() =>
+            builderVB.AddPaths(@"EncryptionAlgorithmsShouldBeSecure_NetStandard21.Net48.vb")
+                     .WithOptions(ParseOptionsHelper.VisualBasicLatest)
+                     .AddReferences(MetadataReferenceFacade.NETStandard21.Concat(GetAdditionalReferences()))
+                     .Verify();
+
+#endif
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
             MetadataReferenceFacade.SystemSecurityCryptography;
