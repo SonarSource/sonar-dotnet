@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
 
         static GeneratedResourcesTest()
         {
-            RspecFolderPath = Path.GetFullPath(Path.Combine(Paths.RelativePathToTestProjectRoot, @"..\..\rspec\"));
+            RspecFolderPath = Path.GetFullPath(Path.Combine(Paths.TestProjectRoot, @"..\..\rspec\"));
             Console.WriteLine($"Using rspec from {RspecFolderPath}");
         }
 

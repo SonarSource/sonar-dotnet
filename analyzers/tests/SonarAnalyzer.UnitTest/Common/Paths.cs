@@ -18,13 +18,24 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.IO;
+
 namespace SonarAnalyzer.UnitTest.Common
 {
     public static class Paths
     {
-        public static string RelativePathToTestProjectRoot { get; private set; } = @"..\..\..\";
+        public static string TestProjectRoot { get; }
 
-        public static void UpdateRelativePathToTestProjectRoot(string relativePathToTestProjectRoot) =>
-            RelativePathToTestProjectRoot = relativePathToTestProjectRoot;
+        static Paths()
+        {
+            // The AltCover tool has a limitation. It has to be invoked without a parameter for the project/solution path.
+            // Due to this we have to call it from the analyzers folder and the working directory is different when running in CI context.
+            var testProjectRoot = File.Exists(Path.Combine(@"..\..\..\", "nuget.config"))
+                                      ? @"..\..\..\"
+                                      : @"..\..\..\..\";
+
+            TestProjectRoot = Path.GetFullPath(testProjectRoot);
+            Console.WriteLine(@"Test project root: " + TestProjectRoot);
+        }
     }
 }

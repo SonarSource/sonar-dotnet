@@ -36,7 +36,7 @@ public class ReadMeTest
 
     [TestInitialize]
     public void Init() =>
-       readMe = File.ReadAllText(Path.Combine(TestContext.DeploymentDirectory, Paths.RelativePathToTestProjectRoot, @"..\..\..\README.md"));
+       readMe = File.ReadAllText(Path.Combine(TestContext.DeploymentDirectory, Paths.TestProjectRoot, @"..\..\..\README.md"));
 
     [TestMethod]
     public void HasCorrectRuleCount_CS() =>
