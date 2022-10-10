@@ -142,16 +142,16 @@ namespace WebPoc
         }
 
         [TestMethod]
-        public void ArgumentAtIndexIsConstant_CS()
+        public void ArgumentAtIndexIsStringConstant_CS()
         {
             var context = CreateContext<CSharpSyntax.InvocationExpressionSyntax>(TestInputCS, "MyMethod", AnalyzerLanguage.CSharp);
             var tracker = new CSharpInvocationTracker();
-            tracker.ArgumentAtIndexIsConstant(0)(context).Should().BeFalse();
-            tracker.ArgumentAtIndexIsConstant(1)(context).Should().BeTrue();
-            tracker.ArgumentAtIndexIsConstant(2)(context).Should().BeTrue();
-            tracker.ArgumentAtIndexIsConstant(3)(context).Should().BeTrue();
-            tracker.ArgumentAtIndexIsConstant(4)(context).Should().BeFalse();
-            tracker.ArgumentAtIndexIsConstant(42)(context).Should().BeFalse();
+            tracker.ArgumentAtIndexIsStringConstant(0)(context).Should().BeFalse();
+            tracker.ArgumentAtIndexIsStringConstant(1)(context).Should().BeTrue();
+            tracker.ArgumentAtIndexIsStringConstant(2)(context).Should().BeFalse();
+            tracker.ArgumentAtIndexIsStringConstant(3)(context).Should().BeFalse();
+            tracker.ArgumentAtIndexIsStringConstant(4)(context).Should().BeFalse();
+            tracker.ArgumentAtIndexIsStringConstant(42)(context).Should().BeFalse();
         }
 
         [TestMethod]
@@ -159,16 +159,16 @@ namespace WebPoc
         {
             var context = CreateContext<VBSyntax.InvocationExpressionSyntax>(TestInputVB, "MyMethod", AnalyzerLanguage.VisualBasic);
             var tracker = new VisualBasicInvocationTracker();
-            tracker.ArgumentAtIndexIsConstant(0)(context).Should().BeFalse();
-            tracker.ArgumentAtIndexIsConstant(1)(context).Should().BeTrue();
-            tracker.ArgumentAtIndexIsConstant(2)(context).Should().BeTrue();
-            tracker.ArgumentAtIndexIsConstant(3)(context).Should().BeTrue();
-            tracker.ArgumentAtIndexIsConstant(4)(context).Should().BeTrue();
-            tracker.ArgumentAtIndexIsConstant(5)(context).Should().BeFalse();
-            tracker.ArgumentAtIndexIsConstant(42)(context).Should().BeFalse();
+            tracker.ArgumentAtIndexIsStringConstant(0)(context).Should().BeFalse();
+            tracker.ArgumentAtIndexIsStringConstant(1)(context).Should().BeTrue();
+            tracker.ArgumentAtIndexIsStringConstant(2)(context).Should().BeTrue();
+            tracker.ArgumentAtIndexIsStringConstant(3)(context).Should().BeTrue();
+            tracker.ArgumentAtIndexIsStringConstant(4)(context).Should().BeTrue();
+            tracker.ArgumentAtIndexIsStringConstant(5)(context).Should().BeFalse();
+            tracker.ArgumentAtIndexIsStringConstant(42)(context).Should().BeFalse();
 
             context = CreateContext<VBSyntax.InvocationExpressionSyntax>(TestInputVB, "NoArgs", AnalyzerLanguage.VisualBasic, 1);
-            tracker.ArgumentAtIndexIsConstant(0)(context).Should().BeFalse();
+            tracker.ArgumentAtIndexIsStringConstant(0)(context).Should().BeFalse();
         }
 
         [TestMethod]

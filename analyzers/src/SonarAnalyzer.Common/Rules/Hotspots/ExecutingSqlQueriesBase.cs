@@ -90,12 +90,17 @@ namespace SonarAnalyzer.Rules
                 new(KnownType.Dapper_SqlMapper, "QuerySingle"),
                 new(KnownType.Dapper_SqlMapper, "QuerySingleAsync"),
                 new(KnownType.Dapper_SqlMapper, "QuerySingleOrDefault"),
-                new(KnownType.Dapper_SqlMapper, "QuerySingleOrDefaultAsync")
+                new(KnownType.Dapper_SqlMapper, "QuerySingleOrDefaultAsync"),
+                new(KnownType.System_Data_Entity_Database, "SqlQuery"),
+                new(KnownType.System_Data_Entity_Database, "ExecuteSqlCommand"),
+                new(KnownType.System_Data_Entity_Database, "ExecuteSqlCommandAsync"),
             };
 
         private readonly MemberDescriptor[] invocationsForFirstArgument =
             {
-                new(KnownType.System_Data_Sqlite_SqliteCommand, "Execute")
+                new(KnownType.System_Data_Sqlite_SqliteCommand, "Execute"),
+                new(KnownType.System_Data_Entity_DbSet, "SqlQuery"),
+                new(KnownType.System_Data_Entity_DbSet_TEntity, "SqlQuery"),
             };
 
         private readonly MemberDescriptor[] invocationsForSecondArgument =
@@ -134,12 +139,12 @@ namespace SonarAnalyzer.Rules
             inv.Track(input,
                 inv.MatchMethod(invocationsForFirstTwoArguments),
                 inv.And(MethodHasRawSqlQueryParameter(), inv.Or(ArgumentAtIndexIsTracked(0), ArgumentAtIndexIsTracked(1))),
-                inv.ExceptWhen(inv.ArgumentAtIndexIsConstant(0)));
+                inv.ExceptWhen(inv.ArgumentAtIndexIsStringConstant(0)));
 
             inv.Track(input,
                 inv.MatchMethod(invocationsForFirstTwoArgumentsAfterV2),
                 inv.Or(ArgumentAtIndexIsTracked(0), ArgumentAtIndexIsTracked(1)),
-                inv.ExceptWhen(inv.ArgumentAtIndexIsConstant(0)));
+                inv.ExceptWhen(inv.ArgumentAtIndexIsStringConstant(0)));
 
             TrackInvocations(input, invocationsForFirstArgument, FirstArgumentIndex);
             TrackInvocations(input, invocationsForSecondArgument, SecondArgumentIndex);
@@ -193,7 +198,7 @@ namespace SonarAnalyzer.Rules
             t.Track(input,
                 t.MatchMethod(invocationsDescriptors),
                 ArgumentAtIndexIsTracked(argumentIndex),
-                t.ExceptWhen(t.ArgumentAtIndexIsConstant(argumentIndex)));
+                t.ExceptWhen(t.ArgumentAtIndexIsStringConstant(argumentIndex)));
         }
 
         private TrackerBase<TSyntaxKind, InvocationContext>.Condition MethodHasRawSqlQueryParameter() =>

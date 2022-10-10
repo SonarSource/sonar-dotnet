@@ -234,6 +234,9 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Data_Common_CommandTrees_DbExpression = new("System.Data.Common.CommandTrees.DbExpression");
         internal static readonly KnownType System_Data_DataSet = new("System.Data.DataSet");
         internal static readonly KnownType System_Data_DataTable = new("System.Data.DataTable");
+        internal static readonly KnownType System_Data_Entity_Database = new("System.Data.Entity.Database");
+        internal static readonly KnownType System_Data_Entity_DbSet = new("System.Data.Entity.DbSet");
+        internal static readonly KnownType System_Data_Entity_DbSet_TEntity = new("System.Data.Entity.DbSet", "TEntity");
         internal static readonly KnownType System_Data_IDbCommand = new("System.Data.IDbCommand");
         internal static readonly KnownType System_Data_Odbc_OdbcCommand = new("System.Data.Odbc.OdbcCommand");
         internal static readonly KnownType System_Data_Odbc_OdbcDataAdapter = new("System.Data.Odbc.OdbcDataAdapter");
