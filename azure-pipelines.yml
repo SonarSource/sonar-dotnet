@@ -325,12 +325,12 @@ stages:
         inputs:
           pollingTimeoutSec: '300'
 
-      - powershell: .\scripts\whitesource\WhiteSource-Scan.ps1
-        displayName: "WhiteSource scan"
+      - powershell: .\scripts\Mend\Mend-Scan.ps1
+        displayName: "Mend scan"
         condition: eq(variables.isReleaseBranch, 'True')
         env:
-          WS_PRODUCTNAME: '$(WHITESOURCE_PRODUCTNAME)'
-          WS_APIKEY: '$(WHITESOURCE_APIKEY)'
+          WS_PRODUCTNAME: '$(MEND_PRODUCTNAME)'
+          WS_APIKEY: '$(MEND_APIKEY)'
           BUILD_NUMBER: '$(Build.BuildId)'
           GIT_SHA: '$(Build.SourceVersion)'
 
