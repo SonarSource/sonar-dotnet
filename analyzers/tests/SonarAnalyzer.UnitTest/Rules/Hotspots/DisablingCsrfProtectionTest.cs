@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         private readonly VerifierBuilder builder = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new DisablingCsrfProtection(AnalyzerConfiguration.AlwaysEnabled));
 
         [TestMethod]
-        public void DisablingCSRFProtection_CS() =>
+        public void DisablingCSRFProtection_CSharp9() =>
             builder.AddPaths("DisablingCSRFProtection.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp9)
                 .AddReferences(AdditionalReferences())

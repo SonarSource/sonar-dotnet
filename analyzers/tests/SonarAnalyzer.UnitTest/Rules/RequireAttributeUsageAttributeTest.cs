@@ -29,8 +29,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RequireAttributeUsageAttribute() =>
-            builder.AddPaths("RequireAttributeUsageAttribute.cs")
-                .Verify();
+            builder.AddPaths("RequireAttributeUsageAttribute.cs").Verify();
 
 #if NET
 

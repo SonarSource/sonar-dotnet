@@ -57,7 +57,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(Constants.NuGetLatestVersion)]
         public void AsyncVoidMethod_MsTestV2_CSharp11(string testFwkVersion) =>
             builder.AddPaths("AsyncVoidMethod_MsTestV2_CSharp11.cs")
-                // The first version of the framework is not compatible with Net 6 so we need to test only v2 with preview features
+                // The first version of the framework is not compatible with Net 7 so we need to test only v2 with C#11 features
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
                 .AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion))
                 .WithConcurrentAnalysis(false)
