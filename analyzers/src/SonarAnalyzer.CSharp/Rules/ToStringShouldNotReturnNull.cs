@@ -47,13 +47,8 @@ public sealed class ToStringShouldNotReturnNull : ToStringShouldNotReturnNullBas
 
     protected override IEnumerable<SyntaxNode> Conditionals(SyntaxNode expression) =>
         expression is ConditionalExpressionSyntax conditional
-        ? new SyntaxNode[] { conditional.WhenTrue.RemoveParentheses(), conditional.WhenFalse.RemoveParentheses() }
+        ? new SyntaxNode[] { conditional.WhenTrue, conditional.WhenFalse }
         : Array.Empty<SyntaxNode>();
-
-    private static SyntaxNode Deparenthesize(ExpressionSyntax expression) =>
-        expression is ParenthesizedExpressionSyntax parenthesized
-        ? parenthesized.Expression
-        : expression;
 
     protected override bool IsLocalOrLambda(SyntaxNode node) =>
         node.IsAnyKind(SyntaxKind.ParenthesizedLambdaExpression, SyntaxKind.SimpleLambdaExpression, SyntaxKindEx.LocalFunctionStatement);

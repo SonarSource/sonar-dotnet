@@ -57,7 +57,7 @@ public abstract class ToStringShouldNotReturnNullBase<TSyntaxKind> : SonarDiagno
 
     private bool ReturnsNull(SyntaxNode node) =>
         Language.Syntax.IsNullLiteral(node)
-        || Conditionals(node).Any(ReturnsNull);
+        || Conditionals(node).Select(Language.Syntax.RemoveParentheses).Any(ReturnsNull);
 
     private bool WithinToString(SyntaxNode node) =>
         node.Ancestors()
