@@ -42,8 +42,8 @@ namespace SonarAnalyzer.UnitTest.Rules
             builder.AddPaths("MethodOverloadOptionalParameter.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
         [TestMethod]
-        public void MethodOverloadOptionalParameter_CSharpPreview() =>
-            builder.AddPaths("MethodOverloadOptionalParameter.CSharpPreview.cs").WithOptions(ParseOptionsHelper.CSharpPreview).Verify();
+        public void MethodOverloadOptionalParameter_CSharp11() =>
+            builder.AddPaths("MethodOverloadOptionalParameter.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
 
 #endif
 

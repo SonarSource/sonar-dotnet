@@ -38,8 +38,8 @@ namespace SonarAnalyzer.UnitTest.Rules
             builder.AddPaths("DoNotUseOutRefParameters.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
         [TestMethod]
-        public void DoNotUseOutRefParameters_CSharpPreview() =>
-            builder.AddPaths("DoNotUseOutRefParameters.CSharpPreview.cs").WithOptions(ParseOptionsHelper.CSharpPreview).Verify();
+        public void DoNotUseOutRefParameters_CSharp11() =>
+            builder.AddPaths("DoNotUseOutRefParameters.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
 
 #endif
 

@@ -25,38 +25,45 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class MethodOverrideChangedDefaultValueTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<MethodOverrideChangedDefaultValue>();
+
         [TestMethod]
         public void MethodOverrideChangedDefaultValue() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\MethodOverrideChangedDefaultValue.cs",
-                new MethodOverrideChangedDefaultValue(),
-                ParseOptionsHelper.FromCSharp8,
-                MetadataReferenceFacade.NETStandard21);
+            builder.AddPaths("MethodOverrideChangedDefaultValue.cs")
+                .AddReferences(MetadataReferenceFacade.NETStandard21)
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
 
 #if NET
+
         [TestMethod]
         public void MethodOverrideChangedDefaultValue_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodOverrideChangedDefaultValue.CSharp9.cs", new MethodOverrideChangedDefaultValue());
+            builder.AddPaths("MethodOverrideChangedDefaultValue.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
 
         [TestMethod]
-        public void MethodOverrideChangedDefaultValue_CSharpPreview() =>
-            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\MethodOverrideChangedDefaultValue.CSharpPreview.cs", new MethodOverrideChangedDefaultValue());
+        public void MethodOverrideChangedDefaultValue_CSharp11() =>
+            builder.AddPaths("MethodOverrideChangedDefaultValue.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
 
         [TestMethod]
-        public void MethodOverrideChangedDefaultValue_CSharpPreview_CodeFix() =>
-            OldVerifier.VerifyCodeFix<MethodOverrideChangedDefaultValueCodeFix>(
-                @"TestCases\MethodOverrideChangedDefaultValue.CSharpPreview.cs",
-                @"TestCases\MethodOverrideChangedDefaultValue.CSharpPreview.Fixed.cs",
-                new MethodOverrideChangedDefaultValue(),
-                ParseOptionsHelper.CSharpPreview);
+        public void MethodOverrideChangedDefaultValue_CSharp11_CodeFix() =>
+            builder.AddPaths("MethodOverrideChangedDefaultValue.CSharp11.cs")
+                .WithCodeFix<MethodOverrideChangedDefaultValueCodeFix>()
+                .WithCodeFixedPaths("MethodOverrideChangedDefaultValue.CSharp11.Fixed.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .VerifyCodeFix();
+
 #endif
 
         [TestMethod]
         public void MethodOverrideChangedDefaultValue_CodeFix() =>
-            OldVerifier.VerifyCodeFix<MethodOverrideChangedDefaultValueCodeFix>(
-                @"TestCases\MethodOverrideChangedDefaultValue.cs",
-                @"TestCases\MethodOverrideChangedDefaultValue.Fixed.cs",
-                @"TestCases\MethodOverrideChangedDefaultValue.Fixed.Batch.cs",
-                new MethodOverrideChangedDefaultValue(),
-                ParseOptionsHelper.FromCSharp8);
+            builder.AddPaths("MethodOverrideChangedDefaultValue.cs")
+                .WithCodeFix<MethodOverrideChangedDefaultValueCodeFix>()
+                .WithCodeFixedPaths("MethodOverrideChangedDefaultValue.Fixed.cs", "MethodOverrideChangedDefaultValue.Fixed.Batch.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .VerifyCodeFix();
     }
 }

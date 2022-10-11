@@ -185,8 +185,8 @@ namespace EntityFrameworkMigrations
             builder.AddPaths("UnusedPrivateMember.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
         [TestMethod]
-        public void UnusedPrivateMember_FromCSharpPreview() =>
-            builder.AddPaths("UnusedPrivateMember.CSharpPreview.cs").WithOptions(ParseOptionsHelper.CSharpPreview).Verify();
+        public void UnusedPrivateMember_FromCSharp11() =>
+            builder.AddPaths("UnusedPrivateMember.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
 
 #endif
 

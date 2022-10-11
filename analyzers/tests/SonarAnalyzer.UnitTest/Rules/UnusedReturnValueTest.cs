@@ -46,8 +46,8 @@ namespace SonarAnalyzer.UnitTest.Rules
             builder.AddPaths("UnusedReturnValue.CSharp10.cs").WithTopLevelStatements().WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
         [TestMethod]
-        public void UnusedReturnValue_CSharpPreview() =>
-            builder.AddPaths("UnusedReturnValue.CSharpPreview.cs").WithOptions(ParseOptionsHelper.CSharpPreview).Verify();
+        public void UnusedReturnValue_CSharp11() =>
+            builder.AddPaths("UnusedReturnValue.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
 
 #endif
 

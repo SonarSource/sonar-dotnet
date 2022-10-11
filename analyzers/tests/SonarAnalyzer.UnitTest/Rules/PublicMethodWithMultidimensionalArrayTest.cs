@@ -26,18 +26,27 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class PublicMethodWithMultidimensionalArrayTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.PublicMethodWithMultidimensionalArray>();
+        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.PublicMethodWithMultidimensionalArray>();
+
         [TestMethod]
         public void PublicMethodWithMultidimensionalArray_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\PublicMethodWithMultidimensionalArray.cs", new CS.PublicMethodWithMultidimensionalArray());
+            builderCS.AddPaths("PublicMethodWithMultidimensionalArray.cs")
+                .Verify();
 
 #if NET
+
         [TestMethod]
-        public void PublicMethodWithMultidimensionalArray_CSharpPreview() =>
-            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\PublicMethodWithMultidimensionalArray.CSharpPreview.cs", new CS.PublicMethodWithMultidimensionalArray());
+        public void PublicMethodWithMultidimensionalArray_CSharp11() =>
+            builderCS.AddPaths("PublicMethodWithMultidimensionalArray.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
 #endif
 
         [TestMethod]
         public void PublicMethodWithMultidimensionalArray_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\PublicMethodWithMultidimensionalArray.vb", new VB.PublicMethodWithMultidimensionalArray());
+            builderVB.AddPaths("PublicMethodWithMultidimensionalArray.vb")
+                .Verify();
     }
 }

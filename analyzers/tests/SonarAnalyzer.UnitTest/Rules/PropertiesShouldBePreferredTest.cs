@@ -42,8 +42,8 @@ namespace SonarAnalyzer.UnitTest.Rules
             builder.AddPaths("PropertiesShouldBePreferred.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
         [TestMethod]
-        public void PropertiesShouldBePreferred_CSharpPreview() =>
-            builder.AddPaths("PropertiesShouldBePreferred.CSharpPreview.cs").WithOptions(ParseOptionsHelper.CSharpPreview).Verify();
+        public void PropertiesShouldBePreferred_CSharp11() =>
+            builder.AddPaths("PropertiesShouldBePreferred.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
 
 #endif
 

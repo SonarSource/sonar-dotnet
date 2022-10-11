@@ -25,18 +25,28 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class UseGenericEventHandlerInstancesTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<UseGenericEventHandlerInstances>();
+
         [TestMethod]
         public void UseGenericEventHandlerInstances() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\UseGenericEventHandlerInstances.cs", new UseGenericEventHandlerInstances());
+            builder.AddPaths("UseGenericEventHandlerInstances.cs")
+                .Verify();
 
 #if NET
-        [TestMethod]
-        public void UseGenericEventHandlerInstances_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\UseGenericEventHandlerInstances.CSharp9.cs", new UseGenericEventHandlerInstances());
 
         [TestMethod]
-        public void UseGenericEventHandlerInstances_CSharpPreview() =>
-            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\UseGenericEventHandlerInstances.CSharpPreview.cs", new UseGenericEventHandlerInstances());
+        public void UseGenericEventHandlerInstances_CSharp9() =>
+            builder.AddPaths("UseGenericEventHandlerInstances.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
+
+        [TestMethod]
+        public void UseGenericEventHandlerInstances_CSharp11() =>
+            builder.AddPaths("UseGenericEventHandlerInstances.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
 #endif
+
     }
 }

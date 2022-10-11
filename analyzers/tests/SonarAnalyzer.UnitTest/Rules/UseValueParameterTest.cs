@@ -25,27 +25,37 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class UseValueParameterTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<UseValueParameter>();
+
         [TestMethod]
         public void UseValueParameter() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\UseValueParameter.cs", new UseValueParameter());
+            builder.AddPaths("UseValueParameter.cs").Verify();
 
 #if NET
-        [TestMethod]
-        public void UseValueParameter_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\UseValueParameter.CSharp9.cs", new UseValueParameter());
 
         [TestMethod]
-        public void UseValueParameter_CSharpPreview() =>
-            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\UseValueParameter.CSharpPreview.cs", new UseValueParameter());
+        public void UseValueParameter_CSharp9() =>
+            builder.AddPaths("UseValueParameter.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
+
+        [TestMethod]
+        public void UseValueParameter_CSharp11() =>
+            builder.AddPaths("UseValueParameter.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
 #endif
 
         [TestMethod]
         public void UseValueParameter_InvalidCode() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builder.AddSnippet(@"
 public int Foo
 {
     get => field;
     set => // Noncompliant
-}", new UseValueParameter(), CompilationErrorBehavior.Ignore);
+}")
+                .WithErrorBehavior(CompilationErrorBehavior.Ignore)
+                .Verify();
     }
 }

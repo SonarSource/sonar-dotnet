@@ -25,18 +25,28 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class UninvokedEventDeclarationTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<UninvokedEventDeclaration>();
+
         [TestMethod]
         public void UninvokedEventDeclaration() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\UninvokedEventDeclaration.cs", new UninvokedEventDeclaration());
+            builder.AddPaths("UninvokedEventDeclaration.cs")
+                .Verify();
 
 #if NET
-        [TestMethod]
-        public void UninvokedEventDeclaration_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\UninvokedEventDeclaration.CSharp9.cs", new UninvokedEventDeclaration());
 
         [TestMethod]
-        public void UninvokedEventDeclaration_CSharpPreview() =>
-            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\UninvokedEventDeclaration.CSharpPreview.cs", new UninvokedEventDeclaration());
+        public void UninvokedEventDeclaration_CSharp9() =>
+            builder.AddPaths("UninvokedEventDeclaration.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
+
+        [TestMethod]
+        public void UninvokedEventDeclaration_CSharp11() =>
+            builder.AddPaths("UninvokedEventDeclaration.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
 #endif
+
     }
 }
