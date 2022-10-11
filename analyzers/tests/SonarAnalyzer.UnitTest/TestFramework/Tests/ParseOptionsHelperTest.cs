@@ -49,7 +49,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
                     CS.LanguageVersion.CSharp7_3,
                     CS.LanguageVersion.CSharp8,
                     CS.LanguageVersion.CSharp9,
-                    CS.LanguageVersion.CSharp10);
+                    CS.LanguageVersion.CSharp10,
+                    CS.LanguageVersion.CSharp11);
 
                 vbVersions.Should().BeEquivalentTo(
                     VB.LanguageVersion.VisualBasic12,
