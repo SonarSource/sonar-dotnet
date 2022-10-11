@@ -60,11 +60,11 @@ namespace SonarAnalyzer.UnitTest.Rules
             builderCS.AddPaths(@"RequestsWithExcessiveLength.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
         [TestMethod]
-        public void RequestsWithExcessiveLength_CsharpPreview() =>
+        public void RequestsWithExcessiveLength_Csharp11() =>
             builderCS
-                .AddPaths(@"RequestsWithExcessiveLength.CSharp.Preview.cs")
+                .AddPaths(@"RequestsWithExcessiveLength.CSharp11.cs")
                 .WithConcurrentAnalysis(false)
-                .WithOptions(ParseOptionsHelper.CSharpPreview).Verify();
+                .WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
 #endif
 
         [TestMethod]

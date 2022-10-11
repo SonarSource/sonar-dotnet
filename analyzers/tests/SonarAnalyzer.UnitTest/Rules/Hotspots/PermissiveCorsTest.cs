@@ -31,26 +31,25 @@ namespace SonarAnalyzer.UnitTest.Rules
             .AddAnalyzer(() => new PermissiveCors(AnalyzerConfiguration.AlwaysEnabled))
             .WithBasePath(@"Hotspots\")
             .AddReferences(AdditionalReferences);
+
 #if NET
+
         [TestMethod]
-        public void PermissiveCors_CS() =>
-            builder
-                .AddPaths("PermissiveCors.Net.cs")
+        public void PermissiveCors_CSharp9() =>
+            builder.AddPaths("PermissiveCors.Net.cs")
                 .WithLanguageVersion(LanguageVersion.CSharp9)
                 .Verify();
 
         [TestMethod]
         public void PermissiveCors_CSharp10() =>
-            builder
-                .AddPaths("PermissiveCors.CSharp10.cs")
+            builder.AddPaths("PermissiveCors.CSharp10.cs")
                 .WithLanguageVersion(LanguageVersion.CSharp10)
                 .Verify();
 
         [TestMethod]
-        public void PermissiveCors_CSharpPreview() =>
-            builder
-                .AddPaths("PermissiveCors.CSharp.Preview.cs")
-                .WithLanguageVersion(LanguageVersion.Preview)
+        public void PermissiveCors_CSharp11() =>
+            builder.AddPaths("PermissiveCors.CSharp11.cs")
+                .WithLanguageVersion(LanguageVersion.CSharp11)
                 .Verify();
 
         internal static IEnumerable<MetadataReference> AdditionalReferences =>
@@ -67,7 +66,9 @@ namespace SonarAnalyzer.UnitTest.Rules
                 CoreMetadataReference.MicrosoftExtensionsPrimitives,
                 CoreMetadataReference.MicrosoftNetHttpHeadersHeaderNames
             };
+
 #else
+
         [TestMethod]
         public void PermissiveCors_AspNet_WebApi() =>
             builder
@@ -82,6 +83,8 @@ namespace SonarAnalyzer.UnitTest.Rules
                                   .Concat(NuGetMetadataReference.MicrosoftNetWebApiCore(Constants.NuGetLatestVersion))
                                   .Concat(FrameworkMetadataReference.SystemWeb)
                                   .Concat(FrameworkMetadataReference.SystemNetHttp);
+
 #endif
+
     }
 }
