@@ -121,5 +121,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .AddReferences(MetadataReferenceFacade.SystemData)
                 .AddReferences(NuGetMetadataReference.Dapper())
                 .Verify();
+
+        [TestMethod]
+        public void ExecutingSqlQueries_PetaPoco_CS() =>
+            builderCS
+                .AddPaths(@"ExecutingSqlQueries.PetaPoco.cs")
+                .AddReferences(NuGetMetadataReference.PetaPocoCompiled(Constants.NuGetLatestVersion))
+                .Verify();
     }
 }
