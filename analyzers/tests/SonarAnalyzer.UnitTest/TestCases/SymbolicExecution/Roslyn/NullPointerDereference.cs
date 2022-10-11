@@ -1637,3 +1637,24 @@ namespace DoesNotReturnIf
         public void FailsWhenFalseAny([DoesNotReturnIf(false)] bool condition1, [DoesNotReturnIf(false)] bool condition2) { }
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/6176
+public class Repro_6176
+{
+    public void ExpressionArguments(object arg)
+    {
+        Select(x => x.FirstOrDefault().ToString());         // Noncompliant FP, should be Compliant - custom expression processor, like Entity Framework, can propagate the "null" without executing the actual code
+        Select(() => arg == null ? arg.ToString() : null);  // Noncompliant FP, should be Compliant, we don't analyze arguments of expression
+    }
+
+    public void DelegateArguments(object arg)
+    {
+        Invoke(x => x.FirstOrDefault().ToString());         // Noncompliant
+        Invoke(() => arg == null ? arg.ToString() : null);  // Noncompliant
+    }
+
+    private void Select(System.Linq.Expressions.Expression<Func<IEnumerable<object>, object>> expression) { }
+    private void Select(System.Linq.Expressions.Expression<Func<object>> expression) { }
+    private void Invoke(Func<IEnumerable<object>, object> expression) { }
+    private void Invoke(Func<object> expression) { }
+}
