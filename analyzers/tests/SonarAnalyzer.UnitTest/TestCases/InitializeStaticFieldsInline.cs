@@ -15,6 +15,7 @@ namespace Tests.Diagnostics
         static string s;
 
         static Program() // Noncompliant
+//             ^^^^^^^
         {
             i = 3;
             ResourceManager sm = new ResourceManager("strings", Assembly.GetExecutingAssembly());
