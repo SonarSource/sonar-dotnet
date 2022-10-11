@@ -141,9 +141,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ExecutingSqlQueries_NHibernate_CS()
         {
             builderCS
-                .AddPaths(@"ExecutingSqlQueries.NHibernate.cs")
+                .AddPaths("ExecutingSqlQueries.NHibernate.cs")
                 .AddReferences(NuGetMetadataReference.NHibernate(Constants.NuGetLatestVersion))
                 .Verify();
-        }
     }
 }
