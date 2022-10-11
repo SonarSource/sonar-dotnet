@@ -87,6 +87,7 @@ namespace SonarAnalyzer.Helpers.Facade
                 InterpolationSyntax x => x.Expression,
                 InvocationExpressionSyntax x => x.Expression,
                 SyncLockStatementSyntax x => x.Expression,
+                ParenthesizedExpressionSyntax x => x.Expression,
                 ReturnStatementSyntax x => x.Expression,
                 null => null,
                 _ => throw InvalidOperation(node, nameof(NodeExpression)),
