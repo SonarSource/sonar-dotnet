@@ -25,6 +25,8 @@ namespace SonarAnalyzer.UnitTest.Common
     public static class Paths
     {
         public static string TestProjectRoot { get; }
+        public static string AnalyzersRoot { get; }
+        public static string Rspec { get; }
 
         static Paths()
         {
@@ -35,7 +37,13 @@ namespace SonarAnalyzer.UnitTest.Common
                                       : @"..\..\..\..\";
 
             TestProjectRoot = Path.GetFullPath(testProjectRoot);
-            Console.WriteLine(@"Test project root: " + TestProjectRoot);
+            Console.WriteLine("Test project root: " + TestProjectRoot);
+
+            AnalyzersRoot = Path.GetFullPath(Path.Combine(TestProjectRoot, "..", ".."));
+            Console.WriteLine("Analyzers root: " + AnalyzersRoot);
+
+            Rspec = Path.Combine(AnalyzersRoot, "rspec");
+            Console.WriteLine("Rspec folder " + Rspec);
         }
     }
 }
