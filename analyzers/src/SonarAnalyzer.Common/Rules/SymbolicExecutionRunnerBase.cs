@@ -83,7 +83,8 @@ namespace SonarAnalyzer.Rules
         }
 
         protected static bool IsInLinqExpression(SyntaxNodeAnalysisContext context) =>
-            context.SemanticModel.GetOperation(context.Node) is { } operation
+            ControlFlowGraph.IsAvailable    // GetOperation fails in ITs otherwise
+            && context.SemanticModel.GetOperation(context.Node) is { } operation
             && new IOperationWrapperSonar(operation).Parent is { Kind: OperationKindEx.Conversion } parentOperation
             && parentOperation.ToConversion().Type.DerivesFrom(KnownType.System_Linq_Expressions_Expression);
 
