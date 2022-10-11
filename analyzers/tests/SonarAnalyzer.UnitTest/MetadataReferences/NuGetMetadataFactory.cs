@@ -25,7 +25,6 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
 {
     public static partial class NuGetMetadataFactory
     {
-        private static readonly string NugetConfigFolderPath;
         // We use the global nuget cache for storing our packages if the NUGET_PACKAGES environment variable is defined.
         // This is especially helpful on the build agents where the packages are precached
         // (since we don't need to spawn a new process for calling the nuget.exe to install or copy them from global cache)
@@ -54,10 +53,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
 
         static NuGetMetadataFactory()
         {
-            NugetConfigFolderPath = Path.GetFullPath(PathResolver.RelativePathToTestProjectRoot);
-            LogMessage($"Using nuget.config from {NugetConfigFolderPath}");
-
-            PackagesFolder = Environment.GetEnvironmentVariable("NUGET_PACKAGES") ?? Path.GetFullPath(Path.Combine(PathResolver.RelativePathToTestProjectRoot, @"..\..\", "packages"));
+            PackagesFolder = Environment.GetEnvironmentVariable("NUGET_PACKAGES") ?? Path.Combine(Paths.AnalyzersRoot, "packages");
             LogMessage($"Using packages from {PackagesFolder}");
         }
 

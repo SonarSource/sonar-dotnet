@@ -28,18 +28,10 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
     [TestClass]
     public class GeneratedResourcesTest
     {
-        private static readonly string RspecFolderPath;
-
-        static GeneratedResourcesTest()
-        {
-            RspecFolderPath = Path.GetFullPath(Path.Combine(PathResolver.RelativePathToTestProjectRoot, @"..\..\rspec\"));
-            Console.WriteLine($"Using rspec from {RspecFolderPath}");
-        }
-
         [TestMethod]
         public void AnalyzersHaveCorrespondingResource_CSharp()
         {
-            var rulesFromResources = SortedRulesFromResources(RspecFolderPath + "cs"); // Unique list
+            var rulesFromResources = SortedRulesFromResources(Path.Combine(Paths.Rspec, "cs")); // Unique list
             var rulesFromTypes = SortedRulesFromTypes(AnalyzerLanguage.CSharp).Distinct().ToArray(); // Same ruleId can be in multiple classes (see InvalidCastToInterface)
             rulesFromResources.Should().Equal(rulesFromTypes);
         }
@@ -47,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
         [TestMethod]
         public void AnalyzersHaveCorrespondingResource_VisualBasic()
         {
-            var rulesFromResources = SortedRulesFromResources(RspecFolderPath + "vbnet"); // Unique list
+            var rulesFromResources = SortedRulesFromResources(Path.Combine(Paths.Rspec, "vbnet")); // Unique list
             var rulesFromTypes = SortedRulesFromTypes(AnalyzerLanguage.VisualBasic).Distinct().ToArray(); // Same ruleId can be in multiple classes (see InvalidCastToInterface)
             rulesFromResources.Should().Equal(rulesFromTypes);
         }

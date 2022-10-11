@@ -26,6 +26,7 @@ using NuGet.Packaging;
 using NuGet.Protocol;
 using NuGet.Protocol.Core.Types;
 using NuGet.Versioning;
+using SonarAnalyzer.UnitTest.Common;
 
 namespace SonarAnalyzer.UnitTest.MetadataReferences
 {
@@ -84,7 +85,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
 
             private static async Task<FindPackageByIdResource> GetNuGetRepository()
             {
-                var nugetOrgUrl = Settings.LoadSpecificSettings(NugetConfigFolderPath, "nuget.config")
+                var nugetOrgUrl = Settings.LoadSpecificSettings(Paths.TestProjectRoot, "nuget.config")
                                           .GetSection("packageSources").Items.OfType<AddItem>()
                                           .Single(x => x.Key == "nuget.org").Value;
                 var repository = Repository.Factory.GetCoreV3(nugetOrgUrl);
