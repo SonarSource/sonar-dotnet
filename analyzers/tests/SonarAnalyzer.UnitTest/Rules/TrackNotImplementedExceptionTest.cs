@@ -28,7 +28,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         private readonly VerifierBuilder builder = new VerifierBuilder<TrackNotImplementedException>();
 
         [TestMethod]
-        public void TrackNotImplementedException() =>
+        public void TrackNotImplementedException_CSharp8() =>
             builder.AddPaths("TrackNotImplementedException.cs")
                 .AddReferences(MetadataReferenceFacade.NETStandard21)
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
