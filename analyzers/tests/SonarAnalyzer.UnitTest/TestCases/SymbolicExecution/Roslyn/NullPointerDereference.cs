@@ -1643,8 +1643,11 @@ public class Repro_6176
 {
     public void ExpressionArguments(object arg)
     {
-        Select(x => x.FirstOrDefault().ToString());         // Noncompliant FP, should be Compliant - custom expression processor, like Entity Framework, can propagate the "null" without executing the actual code
-        Select(() => arg == null ? arg.ToString() : null);  // Noncompliant FP, should be Compliant, we don't analyze arguments of expression
+        Select(x => x.FirstOrDefault().ToString());         // Compliant - custom expression processor, like Entity Framework, can propagate the "null" without executing the actual code
+        Select(() => arg == null ? arg.ToString() : null);  // Compliant, we don't analyze arguments of expression
+
+        System.Linq.Expressions.Expression<Func<IEnumerable<object>, object>> expr;
+        expr = x => x.FirstOrDefault().ToString();          // Compliant as well
     }
 
     public void DelegateArguments(object arg)

@@ -289,8 +289,12 @@ End Sub");
             VerifyClassMainCS(@"
 public void Main()
 {
-    WithExpression(() => 1 + 1);    // Noncompliant FIXME: Should be Compliant, SBinary is not triggered, because this method is not analyzed
+    WithExpression(() => 1 + 1);    // Compliant, SBinary is not triggered, because this method is not analyzed
     WithFunc(() => 1 + 1);          // Noncompliant {{Message for SBinary}} To be sure binary rule triggers
+
+        System.Linq.Expressions.Expression<Func<object[], object>> expr;
+        // Noncompliant@+1 {{Message for SMain}} This is scaffolding issue from the assignment to 'expr'
+        expr = x => x.FirstOrDefault().ToString();      // Compliant
 }
 
 private void WithExpression(System.Linq.Expressions.Expression<Func<int>> arg) { }
@@ -300,8 +304,12 @@ private void WithFunc(Func<int> arg) { }");
         public void Analyze_DoNotRunWhenInsideLinqExpression_VB() =>
             VerifyClassMainVB(@"
 Public Sub Main()
-    WithExpression(Function() 1 + 1)    ' Noncompliant FIXME: Should be Compliant, SBinary is not triggered, because this method is not analyzed
+    WithExpression(Function() 1 + 1)    ' Should be Compliant, SBinary is not triggered, because this method is not analyzed
     WithFunc(Function() 1 + 1)          ' Noncompliant {{Message for SBinary}} To be sure binary rule triggers
+
+    Dim Expr As Linq.Expressions.Expression(Of Func(Of Integer))
+    ' Noncompliant@+1 {{Message for SMain}} This is scaffolding issue from the assignment to 'Expr'
+    Expr = Function() 1 + 1
 End Sub
 
 Private Sub WithExpression(Arg As Linq.Expressions.Expression(Of Func(Of Integer)))

@@ -29,6 +29,7 @@ using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules
 {
@@ -80,6 +81,11 @@ namespace SonarAnalyzer.Rules
                 }
             }
         }
+
+        protected static bool IsInLinqExpression(SyntaxNodeAnalysisContext context) =>
+            context.SemanticModel.GetOperation(context.Node) is { } operation
+            && new IOperationWrapperSonar(operation).Parent is { Kind: OperationKindEx.Conversion } parentOperation
+            && parentOperation.ToConversion().Type.DerivesFrom(KnownType.System_Linq_Expressions_Expression);
 
         private void AnalyzeRoslyn(SonarAnalysisContext sonarContext, SyntaxNodeAnalysisContext nodeContext, bool isTestProject, bool isScannerRun, SyntaxNode body, ISymbol symbol)
         {
