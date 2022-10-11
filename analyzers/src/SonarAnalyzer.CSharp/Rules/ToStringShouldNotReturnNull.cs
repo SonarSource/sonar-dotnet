@@ -47,7 +47,7 @@ public sealed class ToStringShouldNotReturnNull : ToStringShouldNotReturnNullBas
 
     protected override IEnumerable<SyntaxNode> Conditionals(SyntaxNode expression) =>
         expression is ConditionalExpressionSyntax conditional
-        ? new SyntaxNode[] { Deparenthesize(conditional.WhenTrue), Deparenthesize(conditional.WhenFalse) }
+        ? new SyntaxNode[] { conditional.WhenTrue.RemoveParentheses(), conditional.WhenFalse.RemoveParentheses() }
         : Array.Empty<SyntaxNode>();
 
     private static SyntaxNode Deparenthesize(ExpressionSyntax expression) =>
