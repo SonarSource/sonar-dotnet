@@ -62,6 +62,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
 
         private static ITypeSymbol ConvertedType(IOperation operation) =>
             // Some version of Roslyn can send null here with "return default;". It's not reproducible by UTs, as we have "Type" set in that case.
-            operation?.Kind == OperationKindEx.Conversion ? IConversionOperationWrapper.FromOperation(operation).Type : null;
+            operation?.Kind == OperationKindEx.Conversion ? operation.ToConversion().Type : null;
     }
 }
