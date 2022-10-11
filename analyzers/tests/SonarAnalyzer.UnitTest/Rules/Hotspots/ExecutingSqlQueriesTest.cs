@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
@@ -135,5 +136,14 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .AddReferences(MetadataReferenceFacade.SystemData)
                 .AddReferences(NuGetMetadataReference.ServiceStackOrmLite(Constants.NuGetLatestVersion))
                 .Verify();
+
+        [TestMethod]
+        public void ExecutingSqlQueries_NHibernate_CS()
+        {
+            builderCS
+                .AddPaths(@"ExecutingSqlQueries.NHibernate.cs")
+                .AddReferences(NuGetMetadataReference.NHibernate(Constants.NuGetLatestVersion))
+                .Verify();
+        }
     }
 }
