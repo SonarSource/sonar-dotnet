@@ -139,9 +139,11 @@ namespace SonarAnalyzer.Rules
                 new(KnownType.NHibernate_Impl_SessionImpl, "Delete"),
                 new(KnownType.NHibernate_Impl_SessionImpl, "DeleteAsync"),
                 new(KnownType.NHibernate_Impl_SessionImpl, "GetNamedQuery"),
+                new(KnownType.NHibernate_Impl_SessionImpl, "GetNamedSQLQuery"),
                 new(KnownType.NHibernate_Impl_AbstractSessionImpl, "CreateQuery"),
                 new(KnownType.NHibernate_Impl_AbstractSessionImpl, "CreateSQLQuery"),
                 new(KnownType.NHibernate_Impl_AbstractSessionImpl, "GetNamedQuery"),
+                new(KnownType.NHibernate_Impl_AbstractSessionImpl, "GetNamedSQLQuery"),
             };
 
         private readonly MemberDescriptor[] invocationsForSecondArgument =

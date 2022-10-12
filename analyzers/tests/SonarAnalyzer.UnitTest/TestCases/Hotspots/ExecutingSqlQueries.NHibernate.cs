@@ -48,6 +48,24 @@ namespace Tests.Diagnostics
 
             session.GetNamedQuery(query);                                                                   // Compliant
             session.GetNamedQuery(query + param);                                                           // Noncompliant
+
+            session.GetNamedSQLQuery(query);                                                                // Compliant
+            session.GetNamedSQLQuery(query + param);                                                        // Noncompliant
+        }
+
+        public async Task AbstractSessionImplMethods(AbstractSessionImpl session, string query, string param)
+        {
+            session.CreateQuery(query);                                                                     // Compliant
+            session.CreateQuery(query + param);                                                             // Noncompliant
+
+            session.CreateSQLQuery(query);                                                                  // Compliant
+            session.CreateSQLQuery(query + param);                                                          // Noncompliant
+
+            session.GetNamedQuery(query);                                                                   // Compliant
+            session.GetNamedQuery(query + param);                                                           // Noncompliant
+
+            session.GetNamedSQLQuery(query);                                                                // Compliant
+            session.GetNamedSQLQuery(query + param);                                                        // Noncompliant
         }
     }
 }
