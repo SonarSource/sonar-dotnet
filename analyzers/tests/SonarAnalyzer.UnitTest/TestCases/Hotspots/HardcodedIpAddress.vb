@@ -35,13 +35,17 @@ Namespace Tests.Diagnostics
                 "1.2.0.0", "Thomas", "Project with content", "Title of Package")
 
             Dim broadcastAddress As String = "255.255.255.255"
-            Dim loopbackAddress1 As String = "127.0.0.1"
-            Dim loopbackAddress2 As String = "127.2.3.4"
+            Dim loopbackAddress1 = "127.0.0.1"
+            Dim loopbackAddress2 = "127.2.3.4"
+            Dim loopbackAddress3 = "::ffff:127.0.0.1"    ' Compliant Mapped IP4 https://www.rfc-editor.org/rfc/rfc4291.html#section-2.5.5.2
+            Dim loopbackAddress4 = "::ffff:127.2.3.4"
+            Dim loopbackAddress5 = "::1"                 ' Compliant IP6 loopback https://www.rfc-editor.org/rfc/rfc4291.html#section-2.5.3
+            Dim loopbackAddress6 = "64:ff9b::127.2.3.4"  ' Noncompliant Translated IP4 not supported https://www.rfc-editor.org/rfc/rfc6052.html
+            Dim loopbackAddress7 = "::ffff:0:127.2.3.4"  ' Noncompliant Translated IP4 not supported https://www.rfc-editor.org/rfc/rfc2765.html
             Dim nonRoutableAddress As String = "0.0.0.0"
             Dim documentationRange1 = "192.0.2.111"
             Dim documentationRange2 = "198.51.100.111"
             Dim documentationRange3 = "203.0.113.111"
-
             Dim notAnIp1 As String = "0.0.0.1234"
             Dim country_oid As String = "2.5.6.2"
             Dim subschema_oid As String = "2.5.20.1"
