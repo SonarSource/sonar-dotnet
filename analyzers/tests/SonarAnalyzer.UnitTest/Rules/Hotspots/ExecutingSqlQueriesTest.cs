@@ -125,7 +125,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void ExecutingSqlQueries_CS_EF6() =>
             builderCS.AddPaths("ExecutingSqlQueries.EF6.cs")
-                .AddReferences(NuGetMetadataReference.EntityFramework(Constants.NuGetLatestVersion))
+                .AddReferences(NuGetMetadataReference.EntityFramework())
                 .Verify();
     }
 }
