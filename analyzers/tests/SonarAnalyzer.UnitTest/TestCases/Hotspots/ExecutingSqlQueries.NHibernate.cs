@@ -13,6 +13,9 @@ namespace Tests.Diagnostics
             session.CreateFilter(null, query);                                                              // Compliant
             session.CreateFilter(null, query + param);                                                      // Noncompliant
 
+            await session.CreateFilterAsync(null, query);                                                   // Compliant
+            await session.CreateFilterAsync(null, query + param);                                           // Noncompliant
+
             session.CreateQuery(query);                                                                     // Compliant
             session.CreateQuery(query + param);                                                             // Noncompliant
 
@@ -33,6 +36,9 @@ namespace Tests.Diagnostics
         {
             session.CreateFilter(null, query);                                                              // Compliant
             session.CreateFilter(null, query + param);                                                      // Noncompliant
+
+            await session.CreateFilterAsync(null, query);                                                   // Compliant
+            await session.CreateFilterAsync(null, query + param);                                           // Noncompliant
 
             session.CreateQuery(query);                                                                     // Compliant
             session.CreateQuery(query + param);                                                             // Noncompliant
