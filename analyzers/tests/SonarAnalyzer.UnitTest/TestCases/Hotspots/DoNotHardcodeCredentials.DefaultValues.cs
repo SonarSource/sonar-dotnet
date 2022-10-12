@@ -284,9 +284,10 @@ namespace Tests.Diagnostics
         public void UriWithUserInfo(string pwd, string domain)
         {
             string n1 = "scheme://user:azerty123@domain.com"; // Noncompliant {{Review this hard-coded URI, which may contain a credential.}}
-            string n2 = "scheme://user:With%20%3F%20Encoded@domain.com";              // Noncompliant
-            string n3 = "scheme://user:With!$&'()*+,;=OtherCharacters@domain.com";    // Noncompliant
-            string n4 = "scheme://user:azerty123@" + domain;  // Noncompliant
+            string n2 = "scheme://user:With%20%3F%20Encoded@domain.com";            // Noncompliant
+            string n3 = "scheme://user:With!$&'()*+,;=OtherCharacters@domain.com";  // Noncompliant
+            string n4 = "scheme://user:Pa$$word:With:Colons@domain.com";            // Noncompliant
+            string n5 = "scheme://user:azerty123@" + domain;                        // Noncompliant
 
             string c1 = "scheme://user:" + pwd + "@domain.com";
             string c2 = "scheme://user:@domain.com";
