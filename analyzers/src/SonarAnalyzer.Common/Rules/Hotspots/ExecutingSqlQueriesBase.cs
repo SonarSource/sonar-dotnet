@@ -92,6 +92,7 @@ namespace SonarAnalyzer.Rules
                 new(KnownType.Dapper_SqlMapper, "QuerySingleOrDefault"),
                 new(KnownType.Dapper_SqlMapper, "QuerySingleOrDefaultAsync"),
                 new(KnownType.PetaPoco_IQuery, "Query"),
+                new(KnownType.PetaPoco_IQuery, "Fetch"),
             };
 
         private readonly MemberDescriptor[] invocationsForFirstArgument =
