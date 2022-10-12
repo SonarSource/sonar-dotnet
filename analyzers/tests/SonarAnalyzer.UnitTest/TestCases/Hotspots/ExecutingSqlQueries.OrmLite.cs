@@ -17,6 +17,10 @@ class Program
         await dbConn.SelectAsync<Entity>(query + param);                                                      // Noncompliant
         await dbConn.SelectAsync<Entity>(typeof(Program), query + param, new { a = 1 });                      // Noncompliant
         await OrmLiteReadApiAsync.SelectAsync<Entity>(dbConn, typeof(Program), query + param, new { a = 1 }); // FN. string argument is in the thrid position if this overload is called in the unreduced form.
+
+        dbConn.SelectLazy<Entity>(query);                         // Compliant
+        dbConn.SelectLazy<Entity>(query + param);                 // Noncompliant
+        OrmLiteReadApi.SelectLazy<Entity>(dbConn, query + param); // Noncompliant
     }
 }
 
