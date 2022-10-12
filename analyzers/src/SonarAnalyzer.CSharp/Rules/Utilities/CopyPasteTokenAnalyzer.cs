@@ -23,6 +23,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -40,7 +41,13 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return "$num";
             }
-            else if (token.IsAnyKind(SyntaxKind.StringLiteralToken, SyntaxKind.InterpolatedStringTextToken))
+            else if (token.IsAnyKind(SyntaxKind.StringLiteralToken,
+                                     SyntaxKind.InterpolatedStringTextToken,
+                                     SyntaxKindEx.SingleLineRawStringLiteralToken,
+                                     SyntaxKindEx.MultiLineRawStringLiteralToken,
+                                     SyntaxKindEx.Utf8StringLiteralToken,
+                                     SyntaxKindEx.Utf8SingleLineRawStringLiteralToken,
+                                     SyntaxKindEx.Utf8MultiLineRawStringLiteralToken))
             {
                 return "$str";
             }

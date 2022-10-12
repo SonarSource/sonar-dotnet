@@ -17,6 +17,11 @@ namespace StyleCop.Analyzers.Lightup
         public const SyntaxKind AnnotationsKeyword = (SyntaxKind)8489;
         public const SyntaxKind VarKeyword = (SyntaxKind)8490;
         public const SyntaxKind UnderscoreToken = (SyntaxKind)8491;
+        public const SyntaxKind SingleLineRawStringLiteralToken = (SyntaxKind)8518;
+        public const SyntaxKind MultiLineRawStringLiteralToken = (SyntaxKind)8519;
+        public const SyntaxKind Utf8StringLiteralToken = (SyntaxKind)8520;
+        public const SyntaxKind Utf8SingleLineRawStringLiteralToken = (SyntaxKind)8521;
+        public const SyntaxKind Utf8MultiLineRawStringLiteralToken = (SyntaxKind)8522;
         public const SyntaxKind ConflictMarkerTrivia = (SyntaxKind)8564;
         public const SyntaxKind IsPatternExpression = (SyntaxKind)8657;
         public const SyntaxKind RangeExpression = (SyntaxKind)8658;
@@ -69,5 +74,8 @@ namespace StyleCop.Analyzers.Lightup
         public const SyntaxKind PrimaryConstructorBaseType = (SyntaxKind)9065;
         public const SyntaxKind FunctionPointerUnmanagedCallingConventionList = (SyntaxKind)9066;
         public const SyntaxKind RecordStructDeclaration = (SyntaxKind)9068;
+        public const SyntaxKind InterpolatedSingleLineRawStringStartToken = (SyntaxKind)9072;
+        public const SyntaxKind InterpolatedMultiLineRawStringStartToken = (SyntaxKind)9073;
+        public const SyntaxKind InterpolatedRawStringEndToken = (SyntaxKind)9074;
     }
 }

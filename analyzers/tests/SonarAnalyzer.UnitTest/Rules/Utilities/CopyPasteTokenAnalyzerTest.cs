@@ -44,6 +44,20 @@ namespace SonarAnalyzer.UnitTest.Rules
                 info.Count(x => x.TokenValue == "$char").Should().Be(2);
             });
 
+#if NET
+
+        [TestMethod]
+        public void Verify_Unique_CSharp11() =>
+            Verify("Unique.Csharp11.cs", info =>
+            {
+                info.Should().HaveCount(155);
+                info.Count(x => x.TokenValue == "$str").Should().Be(16);
+                info.Count(x => x.TokenValue == "$num").Should().Be(1);
+                info.Count(x => x.TokenValue == "$char").Should().Be(2);
+            });
+
+#endif
+
         [TestMethod]
         public void Verify_Unique_VB() =>
             Verify("Unique.vb", info =>

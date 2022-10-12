@@ -23,6 +23,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -57,10 +58,18 @@ namespace SonarAnalyzer.Rules.CSharp
                 token.IsAnyKind(
                     SyntaxKind.StringLiteralToken,
                     SyntaxKind.CharacterLiteralToken,
+                    SyntaxKindEx.SingleLineRawStringLiteralToken,
+                    SyntaxKindEx.MultiLineRawStringLiteralToken,
+                    SyntaxKindEx.Utf8StringLiteralToken,
+                    SyntaxKindEx.Utf8SingleLineRawStringLiteralToken,
+                    SyntaxKindEx.Utf8MultiLineRawStringLiteralToken,
                     SyntaxKind.InterpolatedStringStartToken,
                     SyntaxKind.InterpolatedVerbatimStringStartToken,
+                    SyntaxKindEx.InterpolatedSingleLineRawStringStartToken,
+                    SyntaxKindEx.InterpolatedMultiLineRawStringStartToken,
                     SyntaxKind.InterpolatedStringTextToken,
-                    SyntaxKind.InterpolatedStringEndToken);
+                    SyntaxKind.InterpolatedStringEndToken,
+                    SyntaxKindEx.InterpolatedRawStringEndToken);
 
             protected override bool IsDocComment(SyntaxTrivia trivia) =>
                 trivia.IsAnyKind(SyntaxKind.SingleLineDocumentationCommentTrivia, SyntaxKind.MultiLineDocumentationCommentTrivia);
