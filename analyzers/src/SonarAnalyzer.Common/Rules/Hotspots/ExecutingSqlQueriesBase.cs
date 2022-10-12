@@ -128,7 +128,8 @@ namespace SonarAnalyzer.Rules
             {
                 new(KnownType.System_Data_Sqlite_SqliteCommand, "Execute"),
                 new(KnownType.System_Data_Entity_DbSet, "SqlQuery"),
-                new(KnownType.System_Data_Entity_DbSet_TEntity, "SqlQuery")
+                new(KnownType.System_Data_Entity_DbSet_TEntity, "SqlQuery"),
+                new(KnownType.NHibernate_ISession, "CreateQuery")
             };
 
         private readonly MemberDescriptor[] invocationsForSecondArgument =
