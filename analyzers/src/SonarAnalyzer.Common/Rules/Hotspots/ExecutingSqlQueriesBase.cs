@@ -90,7 +90,8 @@ namespace SonarAnalyzer.Rules
                 new(KnownType.Dapper_SqlMapper, "QuerySingle"),
                 new(KnownType.Dapper_SqlMapper, "QuerySingleAsync"),
                 new(KnownType.Dapper_SqlMapper, "QuerySingleOrDefault"),
-                new(KnownType.Dapper_SqlMapper, "QuerySingleOrDefaultAsync")
+                new(KnownType.Dapper_SqlMapper, "QuerySingleOrDefaultAsync"),
+                new(KnownType.PetaPoco_IQuery, "Query"),
             };
 
         private readonly MemberDescriptor[] invocationsForFirstArgument =
@@ -98,6 +99,8 @@ namespace SonarAnalyzer.Rules
                 new(KnownType.System_Data_Sqlite_SqliteCommand, "Execute"),
                 new(KnownType.PetaPoco_IExecute, "Execute"),
                 new(KnownType.PetaPoco_IExecute, "ExecuteScalar"),
+                new(KnownType.PetaPoco_IDatabase, "Execute"),
+                new(KnownType.PetaPoco_IDatabase, "ExecuteScalar"),
             };
 
         private readonly MemberDescriptor[] invocationsForSecondArgument =

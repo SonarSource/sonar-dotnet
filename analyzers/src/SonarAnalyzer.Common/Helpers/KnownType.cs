@@ -151,6 +151,8 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Org_BouncyCastle_Crypto_Generators_DsaParametersGenerator = new("Org.BouncyCastle.Crypto.Generators.DsaParametersGenerator");
         internal static readonly KnownType Org_BouncyCastle_Crypto_Parameters_RsaKeyGenerationParameters = new("Org.BouncyCastle.Crypto.Parameters.RsaKeyGenerationParameters");
         internal static readonly KnownType PetaPoco_IExecute = new("PetaPoco.IExecute");
+        internal static readonly KnownType PetaPoco_IDatabase = new("PetaPoco.IDatabase");
+        internal static readonly KnownType PetaPoco_IQuery = new("PetaPoco.IQuery");
         internal static readonly KnownType Serilog_LoggerConfiguration = new("Serilog.LoggerConfiguration");
         internal static readonly KnownType System_Action = new("System.Action");
         internal static readonly KnownType System_Action_T = new("System.Action", "T");
