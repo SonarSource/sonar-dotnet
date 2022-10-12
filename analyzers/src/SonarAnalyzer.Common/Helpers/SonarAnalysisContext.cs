@@ -46,6 +46,7 @@ namespace SonarAnalyzer.Helpers
 
         private const string SonarProjectConfigFileName = "SonarProjectConfig.xml";
         private static readonly Regex WebConfigRegex = new Regex(@"[\\\/]web\.([^\\\/]+\.)?config$", RegexOptions.IgnoreCase);
+        private static readonly Regex AppSettingsRegex = new Regex(@"[\\\/]appsettings\.([^\\\/]+\.)?json$", RegexOptions.IgnoreCase);
 
         private static readonly SourceTextValueProvider<bool> ShouldAnalyzeGeneratedCS = CreateAnalyzeGeneratedProvider(LanguageNames.CSharp);
         private static readonly SourceTextValueProvider<bool> ShouldAnalyzeGeneratedVB = CreateAnalyzeGeneratedProvider(LanguageNames.VisualBasic);
@@ -147,8 +148,12 @@ namespace SonarAnalyzer.Helpers
             static bool ShouldProcess(string path) => !Path.GetFileName(path).Equals("web.debug.config", StringComparison.OrdinalIgnoreCase);
         }
 
-        internal IEnumerable<string> GetAppSettings(CompilationAnalysisContext c) =>
-            ProjectConfiguration(c.Options).FilesToAnalyze.FindFiles("appsettings.json");
+        internal IEnumerable<string> AppSettingsFiles(CompilationAnalysisContext c)
+        {
+            return ProjectConfiguration(c.Options).FilesToAnalyze.FindFiles(AppSettingsRegex).Where(ShouldProcess);
+
+            static bool ShouldProcess(string path) => !Path.GetFileName(path).Equals("appsettings.development.json", StringComparison.OrdinalIgnoreCase);
+        }
 
         /// <summary>
         /// Reads configuration from SonarProjectConfig.xml file and caches the result for scope of this analysis.
