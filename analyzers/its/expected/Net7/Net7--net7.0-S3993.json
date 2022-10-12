@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3993",
+"message":  "Specify AttributeUsage on 'GenericAttribute'.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\GenericAttributes.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  22,
+"endLine":  5,
+"endColumn":  38
+}
+}
+}
+]
+}

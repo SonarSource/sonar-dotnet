@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3400",
+"message":  "Remove this method and declare a constant for this value.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\FileScopeAccess.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  20,
+"endLine":  10,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3400",
+"message":  "Remove this method and declare a constant for this value.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\GenericAttributes.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  23,
+"endLine":  8,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3400",
+"message":  "Remove this method and declare a constant for this value.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\GenericAttributes.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  27,
+"endLine":  13,
+"endColumn":  33
+}
+}
+}
+]
+}

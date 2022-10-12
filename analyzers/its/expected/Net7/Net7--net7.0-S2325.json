@@ -1,0 +1,134 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'Method' a static method.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\CheckedAndUncheckedUserDefinedOperators.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  21,
+"endLine":  5,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Work' a static method.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\FileScopeAccess.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  20,
+"endLine":  10,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Method' a static method.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\ListPatterns.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  21,
+"endLine":  5,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Method' a static method.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\NewlinesInStringInterpolations.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  21,
+"endLine":  5,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Method' a static method.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\NumericIntPtrAndUIntPtr.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  21,
+"endLine":  5,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Method' a static method.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\RawStringLiterals.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  23,
+"endLine":  5,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Method' a static method.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\RelaxedShiftOperator.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  21,
+"endLine":  8,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Method' a static method.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\StaticVirtualMembersInInterfaces.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  21,
+"endLine":  24,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Method' a static method.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\UnsignedRightShiftOperator.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  21,
+"endLine":  5,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Method' a static method.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\UTF8StringLiterals.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  21,
+"endLine":  5,
+"endColumn":  27
+}
+}
+}
+]
+}

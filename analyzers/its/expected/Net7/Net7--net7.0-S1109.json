@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1109",
+"message":  "Move this closing curly brace to the next line.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\NewlinesInStringInterpolations.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  14,
+"endLine":  14,
+"endColumn":  15
+}
+}
+}
+]
+}

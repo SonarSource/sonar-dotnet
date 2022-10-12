@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'RepeatSequence'.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\StaticVirtualMembersInInterfaces.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  21,
+"endLine":  8,
+"endColumn":  35
+}
+}
+}
+]
+}

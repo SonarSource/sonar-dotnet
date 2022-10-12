@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S101",
+"message":  "Rename class 'UTF8StringLiterals' to match pascal case naming rules, consider using 'Utf8StringLiterals'.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\UTF8StringLiterals.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  20,
+"endLine":  3,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'lowercasename' to match pascal case naming rules, consider using 'Lowercasename'.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\WarningWave7.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  22,
+"endLine":  5,
+"endColumn":  35
+}
+}
+}
+]
+}

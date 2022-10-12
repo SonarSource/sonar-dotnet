@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3253",
+"message":  "Remove this redundant constructor.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\StaticVirtualMembersInInterfaces.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  9,
+"endLine":  14,
+"endColumn":  36
+}
+}
+}
+]
+}
