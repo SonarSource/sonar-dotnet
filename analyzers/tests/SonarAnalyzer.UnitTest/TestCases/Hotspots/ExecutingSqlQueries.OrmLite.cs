@@ -25,6 +25,10 @@ class Program
         dbConn.SelectNonDefaults(query, new Entity { Age = 42 });                         // Compliant
         dbConn.SelectNonDefaults(query + param, new Entity { Age = 42 });                 // Noncompliant
         OrmLiteReadApi.SelectNonDefaults(dbConn, query + param, new Entity { Age = 42 }); // Noncompliant
+
+        await dbConn.SelectNonDefaultsAsync(query, new Entity { Age = 42 });                         // Compliant
+        await dbConn.SelectNonDefaultsAsync(query + param, new Entity { Age = 42 });                 // Noncompliant
+        await OrmLiteReadApiAsync.SelectNonDefaultsAsync(dbConn, query + param, new Entity { Age = 42 }); // Noncompliant
     }
 }
 
