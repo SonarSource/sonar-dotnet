@@ -21,7 +21,14 @@ class Program
         dbConn.SelectLazy<Entity>(query);                         // Compliant
         dbConn.SelectLazy<Entity>(query + param);                 // Noncompliant
         OrmLiteReadApi.SelectLazy<Entity>(dbConn, query + param); // Noncompliant
+
+        dbConn.SelectNonDefaults(query, new Entity { Age = 42 });                         // Compliant
+        dbConn.SelectNonDefaults(query + param, new Entity { Age = 42 });                 // Noncompliant
+        OrmLiteReadApi.SelectNonDefaults(dbConn, query + param, new Entity { Age = 42 }); // Noncompliant
     }
 }
 
-class Entity { }
+class Entity
+{
+    public int Age { get; set; }
+}
