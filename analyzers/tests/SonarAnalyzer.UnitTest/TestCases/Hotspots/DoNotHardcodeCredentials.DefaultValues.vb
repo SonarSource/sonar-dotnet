@@ -364,7 +364,7 @@ Phone: +0000000"
             Me.password = "foo" ' False Negative
             Configuration.Password = "foo" ' False Negative
             Me.password = Configuration.Password = "foo" ' False Negative
-            Dim query1 As String = "password=':crazy;secret';user=xxx" ' False Negative - passwords enclosed in '' are not covered
+            Dim query1 As String = "password=':crazy;secret';user=xxx" ' Noncompliant
         End Sub
 
         Class Configuration
