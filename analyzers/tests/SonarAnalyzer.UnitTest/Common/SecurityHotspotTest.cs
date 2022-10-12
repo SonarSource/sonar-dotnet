@@ -72,11 +72,11 @@ namespace SonarAnalyzer.UnitTest.Common
                 "DoNotHardcodeCredentials" => "DoNotHardcodeCredentials.DefaultValues",
                 "DeliveringDebugFeaturesInProduction" => "DeliveringDebugFeaturesInProduction.NetCore2",
 #if NETFRAMEWORK
-                "ExecutingSqlQueries" => "ExecutingSqlQueries_Net46",
+                "ExecutingSqlQueries" => "ExecutingSqlQueries.Net46",
                 "UsingCookies" => "UsingCookies_Net46",
                 "LooseFilePermissions" => "LooseFilePermissions.Windows",
 #else
-                "ExecutingSqlQueries" => "ExecutingSqlQueries_EntityFrameworkCoreLatest",
+                "ExecutingSqlQueries" => "ExecutingSqlQueries.EntityFrameworkCoreLatest",
                 "UsingCookies" => "UsingCookies_NetCore",
                 "LooseFilePermissions" => "LooseFilePermissions.Unix",
                 "PermissiveCors" => "PermissiveCors.Net",

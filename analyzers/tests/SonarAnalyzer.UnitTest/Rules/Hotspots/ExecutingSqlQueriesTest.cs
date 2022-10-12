@@ -35,14 +35,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void ExecutingSqlQueries_CS_Net46() =>
             builderCS
-                .AddPaths(@"ExecutingSqlQueries_Net46.cs")
+                .AddPaths(@"ExecutingSqlQueries.Net46.cs")
                 .AddReferences(GetReferencesNet46(Constants.NuGetLatestVersion))
                 .Verify();
 
         [TestMethod]
         public void ExecutingSqlQueries_VB_Net46() =>
             builderVB
-                .AddPaths(@"ExecutingSqlQueries_Net46.vb")
+                .AddPaths(@"ExecutingSqlQueries.Net46.vb")
                 .WithOptions(ParseOptionsHelper.FromVisualBasic15)
                 .AddReferences(GetReferencesNet46(Constants.NuGetLatestVersion))
                 .Verify();
@@ -61,7 +61,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void ExecutingSqlQueries_CS_EntityFrameworkCore2() =>
             builderCS
-                .AddPaths(@"ExecutingSqlQueries_EntityFrameworkCore2.cs")
+                .AddPaths(@"ExecutingSqlQueries.EntityFrameworkCore2.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .AddReferences(GetReferencesEntityFrameworkNetCore("2.2.6").Concat(NuGetMetadataReference.SystemComponentModelTypeConverter()))
                 .Verify();
@@ -69,7 +69,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void ExecutingSqlQueries_CS_EntityFrameworkCoreLatest() =>
             builderCS
-                .AddPaths(@"ExecutingSqlQueries_EntityFrameworkCoreLatest.cs")
+                .AddPaths(@"ExecutingSqlQueries.EntityFrameworkCoreLatest.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .AddReferences(GetReferencesEntityFrameworkNetCore(Constants.NuGetLatestVersion))
                 .Verify();
@@ -94,7 +94,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void ExecutingSqlQueries_VB_EntityFrameworkCore2() =>
             builderVB
-                .AddPaths(@"ExecutingSqlQueries_EntityFrameworkCore2.vb")
+                .AddPaths(@"ExecutingSqlQueries.EntityFrameworkCore2.vb")
                 .WithOptions(ParseOptionsHelper.FromVisualBasic15)
                 .AddReferences(GetReferencesEntityFrameworkNetCore(Constants.DotNetCore220Version))
                 .Verify();
@@ -102,7 +102,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void ExecutingSqlQueries_VB_EntityFrameworkCoreLatest() =>
             builderVB
-                .AddPaths(@"ExecutingSqlQueries_EntityFrameworkCoreLatest.vb")
+                .AddPaths(@"ExecutingSqlQueries.EntityFrameworkCoreLatest.vb")
                 .WithOptions(ParseOptionsHelper.FromVisualBasic15)
                 .AddReferences(GetReferencesEntityFrameworkNetCore(Constants.NuGetLatestVersion))
                 .Verify();
@@ -111,6 +111,15 @@ namespace SonarAnalyzer.UnitTest.Rules
             Enumerable.Empty<MetadataReference>()
                       .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCore(entityFrameworkVersion))
                       .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCoreRelational(entityFrameworkVersion));
+
 #endif
+
+        [TestMethod]
+        public void ExecutingSqlQueries_CS_Dapper() =>
+            builderCS
+                .AddPaths("ExecutingSqlQueries.Dapper.cs")
+                .AddReferences(MetadataReferenceFacade.SystemData)
+                .AddReferences(NuGetMetadataReference.Dapper())
+                .Verify();
     }
 }

@@ -52,7 +52,8 @@ namespace SonarAnalyzer.Rules
                 KnownType.MySql_Data_MySqlClient_MySqlDataAdapter,
                 KnownType.MySql_Data_MySqlClient_MySqlScript,
                 KnownType.Microsoft_Data_Sqlite_SqliteCommand,
-                KnownType.Microsoft_EntityFrameworkCore_RawSqlString
+                KnownType.Microsoft_EntityFrameworkCore_RawSqlString,
+                KnownType.Dapper_CommandDefinition
             };
 
         private readonly KnownType[] constructorsForSecondArgument =
@@ -71,7 +72,25 @@ namespace SonarAnalyzer.Rules
             {
                 new(KnownType.Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions, "ExecuteSqlRaw"),
                 new(KnownType.Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions, "ExecuteSqlRawAsync"),
-                new(KnownType.Microsoft_EntityFrameworkCore_RelationalQueryableExtensions, "FromSqlRaw")
+                new(KnownType.Microsoft_EntityFrameworkCore_RelationalQueryableExtensions, "FromSqlRaw"),
+                new(KnownType.Dapper_SqlMapper, "Execute"),
+                new(KnownType.Dapper_SqlMapper, "ExecuteAsync"),
+                new(KnownType.Dapper_SqlMapper, "ExecuteReader"),
+                new(KnownType.Dapper_SqlMapper, "ExecuteReaderAsync"),
+                new(KnownType.Dapper_SqlMapper, "ExecuteScalar"),
+                new(KnownType.Dapper_SqlMapper, "ExecuteScalarAsync"),
+                new(KnownType.Dapper_SqlMapper, "Query"),
+                new(KnownType.Dapper_SqlMapper, "QueryAsync"),
+                new(KnownType.Dapper_SqlMapper, "QueryFirst"),
+                new(KnownType.Dapper_SqlMapper, "QueryFirstAsync"),
+                new(KnownType.Dapper_SqlMapper, "QueryFirstOrDefault"),
+                new(KnownType.Dapper_SqlMapper, "QueryFirstOrDefaultAsync"),
+                new(KnownType.Dapper_SqlMapper, "QueryMultiple"),
+                new(KnownType.Dapper_SqlMapper, "QueryMultipleAsync"),
+                new(KnownType.Dapper_SqlMapper, "QuerySingle"),
+                new(KnownType.Dapper_SqlMapper, "QuerySingleAsync"),
+                new(KnownType.Dapper_SqlMapper, "QuerySingleOrDefault"),
+                new(KnownType.Dapper_SqlMapper, "QuerySingleOrDefaultAsync")
             };
 
         private readonly MemberDescriptor[] invocationsForFirstArgument =
