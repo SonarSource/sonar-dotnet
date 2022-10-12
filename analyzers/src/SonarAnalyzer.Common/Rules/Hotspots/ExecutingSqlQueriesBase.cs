@@ -93,7 +93,8 @@ namespace SonarAnalyzer.Rules
                 new(KnownType.Dapper_SqlMapper, "QuerySingleOrDefaultAsync"),
                 new(KnownType.System_Data_Entity_Database, "SqlQuery"),
                 new(KnownType.System_Data_Entity_Database, "ExecuteSqlCommand"),
-                new(KnownType.System_Data_Entity_Database, "ExecuteSqlCommandAsync")
+                new(KnownType.System_Data_Entity_Database, "ExecuteSqlCommandAsync"),
+                new(KnownType.ServiceStack_OrmLite_OrmLiteReadApi, "Select")
             };
 
         private readonly MemberDescriptor[] invocationsForFirstArgument =
