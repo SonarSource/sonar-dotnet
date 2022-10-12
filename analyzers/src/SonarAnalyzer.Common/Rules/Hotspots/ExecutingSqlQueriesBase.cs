@@ -100,6 +100,7 @@ namespace SonarAnalyzer.Rules
                 new(KnownType.ServiceStack_OrmLite_OrmLiteReadApi, "SelectNonDefaults"),
                 new(KnownType.ServiceStack_OrmLite_OrmLiteReadApiAsync, "SelectNonDefaultsAsync"),
                 new(KnownType.ServiceStack_OrmLite_OrmLiteReadApi, "Single"),
+                new(KnownType.ServiceStack_OrmLite_OrmLiteReadApiAsync, "SingleAsync"),
             };
 
         private readonly MemberDescriptor[] invocationsForFirstArgument =

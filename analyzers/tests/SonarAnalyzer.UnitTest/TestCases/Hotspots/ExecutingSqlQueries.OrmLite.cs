@@ -33,6 +33,10 @@ class Program
         dbConn.Single<Entity>(query);                                           // Compliant
         dbConn.Single<Entity>(query + param);                                   // Noncompliant
         OrmLiteReadApi.Single<Entity>(dbConn, query + param, new { Age = 42 }); // Noncompliant
+
+        await dbConn.SingleAsync<Entity>(query);                                                // Compliant
+        await dbConn.SingleAsync<Entity>(query + param);                                        // Noncompliant
+        await OrmLiteReadApiAsync.SingleAsync<Entity>(dbConn, query + param, new { Age = 42 }); // Noncompliant
     }
 }
 
