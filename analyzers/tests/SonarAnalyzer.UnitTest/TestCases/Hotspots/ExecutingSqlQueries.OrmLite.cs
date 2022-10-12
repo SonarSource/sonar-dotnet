@@ -37,6 +37,50 @@ class Program
         await dbConn.SingleAsync<Entity>(query);                                                // Compliant
         await dbConn.SingleAsync<Entity>(query + param);                                        // Noncompliant
         await OrmLiteReadApiAsync.SingleAsync<Entity>(dbConn, query + param, new { Age = 42 }); // Noncompliant
+
+        dbConn.Scalar<Entity>(query);                                           // Compliant
+        dbConn.Scalar<Entity>(query + param);                                   // Noncompliant
+        OrmLiteReadApi.Scalar<Entity>(dbConn, query + param, new { Age = 42 }); // Noncompliant
+
+        dbConn.Column<Entity>(query);                                           // Compliant
+        dbConn.Column<Entity>(query + param);                                   // Noncompliant
+        OrmLiteReadApi.Column<Entity>(dbConn, query + param, new { Age = 42 }); // Noncompliant
+
+        dbConn.ColumnLazy<Entity>(query);                                           // Compliant
+        dbConn.ColumnLazy<Entity>(query + param);                                   // Noncompliant
+        OrmLiteReadApi.ColumnLazy<Entity>(dbConn, query + param, new { Age = 42 }); // Noncompliant
+
+        dbConn.ColumnDistinct<Entity>(query);                                           // Compliant
+        dbConn.ColumnDistinct<Entity>(query + param);                                   // Noncompliant
+        OrmLiteReadApi.ColumnDistinct<Entity>(dbConn, query + param, new { Age = 42 }); // Noncompliant
+
+        dbConn.Lookup<string, Entity>(query);                                           // Compliant
+        dbConn.Lookup<string, Entity>(query + param);                                   // Noncompliant
+        OrmLiteReadApi.Lookup<string, Entity>(dbConn, query + param, new { Age = 42 }); // Noncompliant
+
+        dbConn.Dictionary<string, Entity>(query);                                           // Compliant
+        dbConn.Dictionary<string, Entity>(query + param);                                   // Noncompliant
+        OrmLiteReadApi.Dictionary<string, Entity>(dbConn, query + param, new { Age = 42 }); // Noncompliant
+
+        dbConn.Exists<Entity>(query);                                           // Compliant
+        dbConn.Exists<Entity>(query + param);                                   // Noncompliant
+        OrmLiteReadApi.Exists<Entity>(dbConn, query + param, new { Age = 42 }); // Noncompliant
+
+        dbConn.SqlList<Entity>(query);                                           // Compliant
+        dbConn.SqlList<Entity>(query + param);                                   // Noncompliant
+        OrmLiteReadApi.SqlList<Entity>(dbConn, query + param, new { Age = 42 }); // Noncompliant
+
+        dbConn.SqlColumn<Entity>(query);                                           // Compliant
+        dbConn.SqlColumn<Entity>(query + param);                                   // Noncompliant
+        OrmLiteReadApi.SqlColumn<Entity>(dbConn, query + param, new { Age = 42 }); // Noncompliant
+
+        dbConn.SqlScalar<Entity>(query);                                           // Compliant
+        dbConn.SqlScalar<Entity>(query + param);                                   // Noncompliant
+        OrmLiteReadApi.SqlScalar<Entity>(dbConn, query + param, new { Age = 42 }); // Noncompliant
+
+        dbConn.ExecuteNonQuery(query);                                           // Compliant
+        dbConn.ExecuteNonQuery(query + param);                                   // Noncompliant
+        OrmLiteReadApi.ExecuteNonQuery(dbConn, query + param, new { Age = 42 }); // Noncompliant
     }
 }
 

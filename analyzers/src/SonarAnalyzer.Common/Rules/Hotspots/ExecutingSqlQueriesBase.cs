@@ -101,6 +101,17 @@ namespace SonarAnalyzer.Rules
                 new(KnownType.ServiceStack_OrmLite_OrmLiteReadApiAsync, "SelectNonDefaultsAsync"),
                 new(KnownType.ServiceStack_OrmLite_OrmLiteReadApi, "Single"),
                 new(KnownType.ServiceStack_OrmLite_OrmLiteReadApiAsync, "SingleAsync"),
+                new(KnownType.ServiceStack_OrmLite_OrmLiteReadApi, "Scalar"),
+                new(KnownType.ServiceStack_OrmLite_OrmLiteReadApi, "Column"),
+                new(KnownType.ServiceStack_OrmLite_OrmLiteReadApi, "ColumnLazy"),
+                new(KnownType.ServiceStack_OrmLite_OrmLiteReadApi, "ColumnDistinct"),
+                new(KnownType.ServiceStack_OrmLite_OrmLiteReadApi, "Lookup"),
+                new(KnownType.ServiceStack_OrmLite_OrmLiteReadApi, "Dictionary"),
+                new(KnownType.ServiceStack_OrmLite_OrmLiteReadApi, "Exists"),
+                new(KnownType.ServiceStack_OrmLite_OrmLiteReadApi, "SqlList"),
+                new(KnownType.ServiceStack_OrmLite_OrmLiteReadApi, "SqlColumn"),
+                new(KnownType.ServiceStack_OrmLite_OrmLiteReadApi, "SqlScalar"),
+                new(KnownType.ServiceStack_OrmLite_OrmLiteReadApi, "ExecuteNonQuery"),
             };
 
         private readonly MemberDescriptor[] invocationsForFirstArgument =
