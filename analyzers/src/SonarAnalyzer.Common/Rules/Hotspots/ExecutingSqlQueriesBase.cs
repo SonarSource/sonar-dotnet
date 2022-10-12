@@ -95,7 +95,9 @@ namespace SonarAnalyzer.Rules
 
         private readonly MemberDescriptor[] invocationsForFirstArgument =
             {
-                new(KnownType.System_Data_Sqlite_SqliteCommand, "Execute")
+                new(KnownType.System_Data_Sqlite_SqliteCommand, "Execute"),
+                new(KnownType.PetaPoco_IExecute, "Execute"),
+                new(KnownType.PetaPoco_IExecute, "ExecuteScalar"),
             };
 
         private readonly MemberDescriptor[] invocationsForSecondArgument =
