@@ -80,11 +80,15 @@ namespace SonarAnalyzer.Rules
             const string Rfc3986_SubDelims = "!$&'()*+,;=";
             const string UriPasswordSpecialCharacters = Rfc3986_Unreserved + Rfc3986_Pct + Rfc3986_SubDelims;
             // See https://tools.ietf.org/html/rfc3986 Userinfo can contain groups: unreserved | pct-encoded | sub-delims
-            var uriUserInfoPart = @"[\w\d" + Regex.Escape(UriPasswordSpecialCharacters) + "]+";
-            uriUserInfoPattern = new Regex(@"\w+:\/\/(?<Login>" + uriUserInfoPart + "):(?<Password>" + uriUserInfoPart + ")@", RegexOptions.Compiled);
+            var loginGroup = CreateUserInfoGroup("Login", null);
+            var passwordGroup = CreateUserInfoGroup("Password", ":");   // Additional ":" to capture passwords containing it
+            uriUserInfoPattern = new Regex(@$"\w+:\/\/{loginGroup}:{passwordGroup}@", RegexOptions.Compiled);
             this.configuration = configuration;
             rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
             CredentialWords = DefaultCredentialWords;   // Property will initialize multiple state variables
+
+            static string CreateUserInfoGroup(string name, string additionalCharacterss) =>
+                $@"(?<{name}>[\w\d{Regex.Escape(UriPasswordSpecialCharacters)}{additionalCharacterss}]+)";
         }
 
         protected sealed override void Initialize(ParameterLoadingAnalysisContext context)
