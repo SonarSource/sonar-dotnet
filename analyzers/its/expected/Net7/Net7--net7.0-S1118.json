@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1118",
+"message":  "Add a 'protected' constructor or the 'static' keyword to the class declaration.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\ExtendedNameofScope.cs",
+"region":  {
+"startLine":  4,
+"startColumn":  20,
+"endLine":  4,
+"endColumn":  39
+}
+}
+}
+]
+}

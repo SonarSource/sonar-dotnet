@@ -5,6 +5,84 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
+"uri":  "sources\Net7\Net7\features\AutoDefaultStruct.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  20,
+"endLine":  3,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\AutoDefaultStruct.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  9,
+"endLine":  5,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\AutoDefaultStruct.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  13,
+"endLine":  7,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\AutoDefaultStruct.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  13,
+"endLine":  12,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\AutoDefaultStruct.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  13,
+"endLine":  18,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\AutoDefaultStruct.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  13,
+"endLine":  23,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\AutoDefaultStruct.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  13,
+"endLine":  25,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\AutoDefaultStruct.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  9,
+"endLine":  30,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
 "uri":  "sources\Net7\Net7\features\CheckedAndUncheckedUserDefinedOperators.cs",
 "region":  {
 "startLine":  3,
@@ -19,6 +97,30 @@
 "startLine":  5,
 "startColumn":  9,
 "endLine":  5,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\Net7\Net7\features\ExtendedNameofScope.cs",
+"region":  {
+"startLine":  4,
+"startColumn":  20,
+"endLine":  4,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\ExtendedNameofScope.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  9,
+"endLine":  7,
 "endColumn":  15
 }
 }
@@ -138,6 +240,30 @@
 },
 {
 "uri":  "sources\Net7\Net7\features\NumericIntPtrAndUIntPtr.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  9,
+"endLine":  5,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\Net7\Net7\features\PatternMatchSpanOrReadOnlySpanOnAConstantString.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  20,
+"endLine":  3,
+"endColumn":  67
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\PatternMatchSpanOrReadOnlySpanOnAConstantString.cs",
 "region":  {
 "startLine":  5,
 "startColumn":  9,

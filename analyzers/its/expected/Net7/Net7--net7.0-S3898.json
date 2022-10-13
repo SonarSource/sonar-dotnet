@@ -2,6 +2,19 @@
 "issues":  [
 {
 "id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Measurement'.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\AutoDefaultStruct.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  32,
+"endLine":  5,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'RepeatSequence'.",
 "location":  {
 "uri":  "sources\Net7\Net7\features\StaticVirtualMembersInInterfaces.cs",

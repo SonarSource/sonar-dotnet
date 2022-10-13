@@ -69,6 +69,19 @@
 "id":  "S2325",
 "message":  "Make 'Method' a static method.",
 "location":  {
+"uri":  "sources\Net7\Net7\features\PatternMatchSpanOrReadOnlySpanOnAConstantString.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  21,
+"endLine":  5,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Method' a static method.",
+"location":  {
 "uri":  "sources\Net7\Net7\features\RawStringLiterals.cs",
 "region":  {
 "startLine":  5,

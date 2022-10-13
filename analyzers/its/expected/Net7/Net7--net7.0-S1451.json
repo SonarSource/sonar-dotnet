@@ -4,7 +4,33 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
+"uri":  "sources\Net7\Net7\features\AutoDefaultStruct.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
 "uri":  "sources\Net7\Net7\features\CheckedAndUncheckedUserDefinedOperators.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\ExtendedNameofScope.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -70,6 +96,19 @@
 "message":  "Add or update the header of this file.",
 "location":  {
 "uri":  "sources\Net7\Net7\features\NumericIntPtrAndUIntPtr.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\PatternMatchSpanOrReadOnlySpanOnAConstantString.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
