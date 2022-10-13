@@ -476,6 +476,9 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Windows_Forms_Application = new("System.Windows.Forms.Application");
         internal static readonly KnownType System_Windows_Forms_IContainerControl = new("System.Windows.Forms.IContainerControl");
         internal static readonly KnownType System_Windows_Markup_ConstructorArgumentAttribute = new("System.Windows.Markup.ConstructorArgumentAttribute");
+        internal static readonly KnownType System_Windows_Markup_XmlnsPrefixAttribute = new("System.Windows.Markup.XmlnsPrefixAttribute");
+        internal static readonly KnownType System_Windows_Markup_XmlnsDefinitionAttribute = new("System.Windows.Markup.XmlnsDefinitionAttribute");
+        internal static readonly KnownType System_Windows_Markup_XmlnsCompatibleWithAttribute = new("System.Windows.Markup.XmlnsCompatibleWithAttribute");
         internal static readonly KnownType System_Xml_Serialization_XmlElementAttribute = new("System.Xml.Serialization.XmlElementAttribute");
         internal static readonly KnownType System_Xml_XmlDocument = new("System.Xml.XmlDocument");
         internal static readonly KnownType System_Xml_XmlDataDocument = new("System.Xml.XmlDataDocument");

@@ -3,7 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Mail;
+using System.Windows.Markup;
 using System.Xml.Serialization;
+
+[assembly: XmlnsPrefix("http://schemas.catelproject.com", "catel")]
+[assembly: XmlnsDefinition("http://schemas.catelproject.com", "Catel.MVVM")]
+[assembly: XmlnsCompatibleWith("http://www.adatum.com/2003/controls", "http://www.adatum.com/2005/controls")]
 
 namespace Tests.Diagnostics
 {

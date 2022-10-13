@@ -33,6 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             builder.AddPaths(@"Hotspots\ClearTextProtocolsAreSensitive.cs")
                 .AddReferences(AdditionalReferences)
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .WithConcurrentAnalysis(false)
                 .Verify();
 
 #if NET
@@ -56,6 +57,9 @@ namespace SonarAnalyzer.UnitTest.Rules
 #endif
 
         internal static IEnumerable<MetadataReference> AdditionalReferences =>
-            MetadataReferenceFacade.SystemNetHttp.Concat(MetadataReferenceFacade.SystemComponentModelPrimitives).Concat(MetadataReferenceFacade.SystemXml);
+            MetadataReferenceFacade.SystemNetHttp
+            .Concat(MetadataReferenceFacade.SystemComponentModelPrimitives)
+            .Concat(MetadataReferenceFacade.SystemXml)
+            .Concat(MetadataReferenceFacade.SystemXaml);
     }
 }
