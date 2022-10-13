@@ -53,6 +53,13 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
                 .Verify();
 
+        [TestMethod]
+        public void ClearTextProtocolsAreSensitive_CSharp11() =>
+            builder.AddPaths(@"Hotspots\ClearTextProtocolsAreSensitive.CSharp11.cs")
+                .WithTopLevelStatements()
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
 #endif
 
         internal static IEnumerable<MetadataReference> AdditionalReferences =>

@@ -26,12 +26,27 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DoNotOverwriteCollectionElementsTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder().AddAnalyzer(() => new CS.DoNotOverwriteCollectionElements());
+        private readonly VerifierBuilder builderVB = new VerifierBuilder().AddAnalyzer(() => new VB.DoNotOverwriteCollectionElements());
+
         [TestMethod]
         public void DoNotOverwriteCollectionElements_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotOverwriteCollectionElements.cs", new CS.DoNotOverwriteCollectionElements());
+            builderCS.AddPaths("DoNotOverwriteCollectionElements.cs")
+                .Verify();
 
         [TestMethod]
         public void DoNotOverwriteCollectionElements_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotOverwriteCollectionElements.vb", new VB.DoNotOverwriteCollectionElements());
+            builderVB.AddPaths("DoNotOverwriteCollectionElements.vb")
+                .Verify();
+
+#if NET
+
+        [TestMethod]
+        public void DoNotOverwriteCollectionElements_CSharp11() =>
+            builderCS.AddPaths("DoNotOverwriteCollectionElements.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
+#endif
     }
 }

@@ -32,7 +32,8 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void PubliclyWritableDirectories_CS() =>
-            builderCS.AddPaths(@"Hotspots\PubliclyWritableDirectories.cs").Verify();
+            builderCS.AddPaths(@"Hotspots\PubliclyWritableDirectories.cs")
+                .Verify();
 
 #if NET
 
@@ -42,10 +43,17 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
                 .Verify();
 
+        [TestMethod]
+        public void PubliclyWritableDirectories_CSharp11() =>
+            builderCS.AddPaths(@"Hotspots\PubliclyWritableDirectories.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
 #endif
 
         [TestMethod]
         public void PubliclyWritableDirectories_VB() =>
-            builderVB.AddPaths(@"Hotspots\PubliclyWritableDirectories.vb").Verify();
+            builderVB.AddPaths(@"Hotspots\PubliclyWritableDirectories.vb")
+                .Verify();
     }
 }

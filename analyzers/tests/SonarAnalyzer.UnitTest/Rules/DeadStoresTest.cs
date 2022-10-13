@@ -36,21 +36,36 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void DeadStores_SonarCfg() =>
-            sonarCfg.AddPaths("DeadStores.SonarCfg.cs").Verify();
+            sonarCfg.AddPaths("DeadStores.SonarCfg.cs")
+                .Verify();
 
         [TestMethod]
         public void DeadStores_RoslynCfg() =>
-            roslynCfg.AddPaths("DeadStores.RoslynCfg.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+            roslynCfg.AddPaths("DeadStores.RoslynCfg.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
 
 #if NET
 
         [TestMethod]
         public void DeadStores_CSharp9() =>
-            roslynCfg.AddPaths("DeadStores.CSharp9.cs").WithTopLevelStatements().Verify();
+            roslynCfg.AddPaths("DeadStores.CSharp9.cs")
+                .WithTopLevelStatements()
+                .Verify();
 
         [TestMethod]
         public void DeadStores_CSharp10() =>
-            roslynCfg.AddPaths("DeadStores.CSharp10.cs").WithTopLevelStatements().WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            roslynCfg.AddPaths("DeadStores.CSharp10.cs")
+                .WithTopLevelStatements()
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .Verify();
+
+        [TestMethod]
+        public void DeadStores_CSharp11() =>
+            roslynCfg.AddPaths("DeadStores.CSharp11.cs")
+                .WithTopLevelStatements()
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
 
 #endif
 

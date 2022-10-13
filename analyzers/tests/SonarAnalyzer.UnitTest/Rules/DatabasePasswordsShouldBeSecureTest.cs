@@ -40,6 +40,15 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .AddReferences(GetReferences(entityFrameworkCoreVersion, oracleVersion))
                 .Verify();
 
+        [DataTestMethod]
+        [DataRow("3.1.11", "3.19.80")]
+        [DataRow("5.0.2", "5.21.1")]
+        public void DatabasePasswordsShouldBeSecure_CSharp11_CS(string entityFrameworkCoreVersion, string oracleVersion) =>
+            builder.AddPaths("DatabasePasswordsShouldBeSecure.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .AddReferences(GetReferences(entityFrameworkCoreVersion, oracleVersion))
+                .Verify();
+
         [TestMethod]
         public void DatabasePasswordsShouldBeSecure_Net5_CS() =>
             builder.AddPaths("DatabasePasswordsShouldBeSecure.Net5.cs")

@@ -42,6 +42,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
                 .Verify();
 
+        [TestMethod]
+        public void HardcodedIpAddress_CSharp11() =>
+            builderCS.AddPaths(@"Hotspots\HardcodedIpAddress.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
 #endif
 
         [TestMethod]

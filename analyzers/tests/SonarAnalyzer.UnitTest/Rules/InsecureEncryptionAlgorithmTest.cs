@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Security.AccessControl;
+using SonarAnalyzer.Common;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
@@ -26,27 +28,52 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class InsecureEncryptionAlgorithmTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.InsecureEncryptionAlgorithm>();
+        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.InsecureEncryptionAlgorithm>();
+
         [TestMethod]
         public void InsecureEncryptionAlgorithm_MainProject_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\InsecureEncryptionAlgorithm.cs", new CS.InsecureEncryptionAlgorithm(), GetAdditionalReferences());
+            builderCS.AddPaths("InsecureEncryptionAlgorithm.cs")
+                .AddReferences(GetAdditionalReferences())
+                .Verify();
 
         [TestMethod]
         public void InsecureEncryptionAlgorithm_DoesNotRaiseIssuesForTestProject_CS() =>
-            OldVerifier.VerifyNoIssueReportedInTest(@"TestCases\InsecureEncryptionAlgorithm.cs", new CS.InsecureEncryptionAlgorithm(), GetAdditionalReferences());
+            builderCS.AddPaths("InsecureEncryptionAlgorithm.cs")
+                .AddTestReference()
+                .AddReferences(GetAdditionalReferences())
+                .VerifyNoIssueReported();
 
 #if NET
         [TestMethod]
         public void InsecureEncryptionAlgorithm_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\InsecureEncryptionAlgorithm.CSharp9.cs", new CS.InsecureEncryptionAlgorithm(), GetAdditionalReferences());
+            builderCS.AddPaths("InsecureEncryptionAlgorithm.CSharp9.cs")
+                .WithTopLevelStatements()
+                .AddReferences(GetAdditionalReferences())
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
 
         [TestMethod]
         public void InsecureEncryptionAlgorithm_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\InsecureEncryptionAlgorithm.CSharp10.cs", new CS.InsecureEncryptionAlgorithm(), GetAdditionalReferences());
+            builderCS.AddPaths("InsecureEncryptionAlgorithm.CSharp10.cs")
+                .AddReferences(GetAdditionalReferences())
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .Verify();
+
+        [TestMethod]
+        public void InsecureEncryptionAlgorithm_CSharp11() =>
+            builderCS.AddPaths("InsecureEncryptionAlgorithm.CSharp11.cs")
+                .WithTopLevelStatements()
+                .AddReferences(GetAdditionalReferences())
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
 #endif
 
         [TestMethod]
         public void InsecureEncryptionAlgorithm_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\InsecureEncryptionAlgorithm.vb", new VB.InsecureEncryptionAlgorithm(), GetAdditionalReferences());
+            builderVB.AddPaths("InsecureEncryptionAlgorithm.vb")
+                .AddReferences(GetAdditionalReferences())
+                .Verify();
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
             MetadataReferenceFacade.SystemSecurityCryptography.Concat(NuGetMetadataReference.BouncyCastle());
