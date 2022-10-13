@@ -269,19 +269,19 @@ namespace SonarAnalyzer.Extensions
         }
 
         // This is a refactored version of internal Roslyn SyntaxNodeExtensions.IsInExpressionTree
-        public static bool IsInExpressionTree(this SyntaxNode node, SemanticModel semanticModel)
+        public static bool IsInExpressionTree(this SyntaxNode node, SemanticModel model)
         {
             return node.AncestorsAndSelf().Any(x => IsExpressionLambda(x) || IsExpressionSelectOrOrder(x) || IsExpressionQuery(x));
 
             bool IsExpressionLambda(SyntaxNode node) =>
-                node is LambdaExpressionSyntax && semanticModel.GetTypeInfo(node).ConvertedType.DerivesFrom(KnownType.System_Linq_Expressions_Expression);
+                node is LambdaExpressionSyntax && model.GetTypeInfo(node).ConvertedType.DerivesFrom(KnownType.System_Linq_Expressions_Expression);
 
             bool IsExpressionSelectOrOrder(SyntaxNode node) =>
-                node is SelectOrGroupClauseSyntax or OrderingSyntax && TakesExpressionTree(semanticModel.GetSymbolInfo(node));
+                node is SelectOrGroupClauseSyntax or OrderingSyntax && TakesExpressionTree(model.GetSymbolInfo(node));
 
             bool IsExpressionQuery(SyntaxNode node) =>
                 node is QueryClauseSyntax queryClause
-                && semanticModel.GetQueryClauseInfo(queryClause) is var info
+                && model.GetQueryClauseInfo(queryClause) is var info
                 && (TakesExpressionTree(info.CastInfo) || TakesExpressionTree(info.OperationInfo));
 
             static bool TakesExpressionTree(SymbolInfo info)

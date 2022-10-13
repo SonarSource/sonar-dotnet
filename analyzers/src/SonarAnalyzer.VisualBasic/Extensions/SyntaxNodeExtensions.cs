@@ -64,15 +64,15 @@ namespace SonarAnalyzer.Extensions
             FindConstantValue(node, semanticModel) as string;
 
         // This is a refactored version of internal Roslyn SyntaxNodeExtensions.IsInExpressionTree
-        public static bool IsInExpressionTree(this SyntaxNode node, SemanticModel semanticModel)
+        public static bool IsInExpressionTree(this SyntaxNode node, SemanticModel model)
         {
             return node.AncestorsAndSelf().Any(x => IsExpressionLambda(x) || IsExpressionQuery(x));
 
             bool IsExpressionLambda(SyntaxNode node) =>
-                node is LambdaExpressionSyntax && semanticModel.GetTypeInfo(node).ConvertedType.DerivesFrom(KnownType.System_Linq_Expressions_Expression);
+                node is LambdaExpressionSyntax && model.GetTypeInfo(node).ConvertedType.DerivesFrom(KnownType.System_Linq_Expressions_Expression);
 
             bool IsExpressionQuery(SyntaxNode node) =>
-                node is OrderingSyntax or QueryClauseSyntax or FunctionAggregationSyntax or ExpressionRangeVariableSyntax && TakesExpressionTree(semanticModel.GetSymbolInfo(node));
+                node is OrderingSyntax or QueryClauseSyntax or FunctionAggregationSyntax or ExpressionRangeVariableSyntax && TakesExpressionTree(model.GetSymbolInfo(node));
 
             static bool TakesExpressionTree(SymbolInfo info)
             {

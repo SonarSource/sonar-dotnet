@@ -82,12 +82,6 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        protected static bool IsInLinqExpression(SyntaxNodeAnalysisContext context) =>
-            ControlFlowGraph.IsAvailable    // GetOperation fails in ITs otherwise
-            && context.SemanticModel.GetOperation(context.Node) is { } operation
-            && new IOperationWrapperSonar(operation).Parent is { Kind: OperationKindEx.Conversion } parentOperation
-            && parentOperation.ToConversion().Type.DerivesFrom(KnownType.System_Linq_Expressions_Expression);
-
         private void AnalyzeRoslyn(SonarAnalysisContext sonarContext, SyntaxNodeAnalysisContext nodeContext, bool isTestProject, bool isScannerRun, SyntaxNode body, ISymbol symbol)
         {
             var checks = AllRules
