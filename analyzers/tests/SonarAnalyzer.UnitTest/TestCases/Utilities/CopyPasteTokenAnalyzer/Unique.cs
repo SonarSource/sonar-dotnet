@@ -7,7 +7,7 @@
     public void Aaa()
     {
         var x = 42;
-        var interpolatedWithWhitespaceToken = $"This literal should be $str but the whitespace between interpolation will not: {x} {x}";
+        var interpolatedWithWhitespace = $"This literal will be $str and there will be another $str between the interpolations: {x} {x}";
         var interpolatedVerbatim = $@"Interpolated Verbatim";
         var verbatim = @"Verbatim";
     }
