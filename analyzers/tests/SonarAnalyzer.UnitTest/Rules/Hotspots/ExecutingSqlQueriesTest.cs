@@ -135,5 +135,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .AddReferences(MetadataReferenceFacade.SystemData)
                 .AddReferences(NuGetMetadataReference.ServiceStackOrmLite(Constants.NuGetLatestVersion))
                 .Verify();
+
+        [TestMethod]
+        public void ExecutingSqlQueries_NHibernate_CS() =>
+            builderCS
+                .AddPaths("ExecutingSqlQueries.NHibernate.cs")
+                .AddReferences(NuGetMetadataReference.NHibernate(Constants.NuGetLatestVersion))
+                .Verify();
     }
 }

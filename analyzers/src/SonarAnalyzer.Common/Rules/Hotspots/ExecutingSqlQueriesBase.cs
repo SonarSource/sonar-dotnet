@@ -121,14 +121,23 @@ namespace SonarAnalyzer.Rules
                 new(KnownType.ServiceStack_OrmLite_OrmLiteReadApiAsync, "SqlListAsync"),
                 new(KnownType.ServiceStack_OrmLite_OrmLiteReadApiAsync, "SqlColumnAsync"),
                 new(KnownType.ServiceStack_OrmLite_OrmLiteReadApiAsync, "SqlScalarAsync"),
-                new(KnownType.ServiceStack_OrmLite_OrmLiteReadApiAsync, "ExecuteNonQueryAsync"),
+                new(KnownType.ServiceStack_OrmLite_OrmLiteReadApiAsync, "ExecuteNonQueryAsync")
             };
 
         private readonly MemberDescriptor[] invocationsForFirstArgument =
             {
                 new(KnownType.System_Data_Sqlite_SqliteCommand, "Execute"),
                 new(KnownType.System_Data_Entity_DbSet, "SqlQuery"),
-                new(KnownType.System_Data_Entity_DbSet_TEntity, "SqlQuery")
+                new(KnownType.System_Data_Entity_DbSet_TEntity, "SqlQuery"),
+                new(KnownType.NHibernate_ISession, "CreateQuery"),
+                new(KnownType.NHibernate_ISession, "CreateSQLQuery"),
+                new(KnownType.NHibernate_ISession, "Delete"),
+                new(KnownType.NHibernate_ISession, "DeleteAsync"),
+                new(KnownType.NHibernate_ISession, "GetNamedQuery"),
+                new(KnownType.NHibernate_Impl_AbstractSessionImpl, "CreateQuery"),
+                new(KnownType.NHibernate_Impl_AbstractSessionImpl, "CreateSQLQuery"),
+                new(KnownType.NHibernate_Impl_AbstractSessionImpl, "GetNamedQuery"),
+                new(KnownType.NHibernate_Impl_AbstractSessionImpl, "GetNamedSQLQuery")
             };
 
         private readonly MemberDescriptor[] invocationsForSecondArgument =
@@ -144,12 +153,14 @@ namespace SonarAnalyzer.Rules
                 new(KnownType.MySql_Data_MySqlClient_MySqlHelper, "ExecuteScalar"),
                 new(KnownType.MySql_Data_MySqlClient_MySqlHelper, "ExecuteScalarAsync"),
                 new(KnownType.MySql_Data_MySqlClient_MySqlHelper, "UpdateDataSet"),
-                new(KnownType.MySql_Data_MySqlClient_MySqlHelper, "UpdateDataSetAsync")
+                new(KnownType.MySql_Data_MySqlClient_MySqlHelper, "UpdateDataSetAsync"),
+                new(KnownType.NHibernate_ISession, "CreateFilter"),
+                new(KnownType.NHibernate_ISession, "CreateFilterAsync")
             };
 
         private readonly MemberDescriptor[] properties =
             {
-                new(KnownType.System_Data_IDbCommand, "CommandText"),
+                new(KnownType.System_Data_IDbCommand, "CommandText")
             };
 
         protected abstract TExpressionSyntax GetArgumentAtIndex(InvocationContext context, int index);
