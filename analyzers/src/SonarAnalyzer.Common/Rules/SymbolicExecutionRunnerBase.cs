@@ -29,7 +29,6 @@ using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
-using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules
 {
