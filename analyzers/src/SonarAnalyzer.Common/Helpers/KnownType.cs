@@ -131,7 +131,6 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType NFluent_FluentCheckException = new("NFluent.FluentCheckException");
         internal static readonly KnownType NFluent_Kernel_FluentCheckException = new("NFluent.Kernel.FluentCheckException");
         internal static readonly KnownType NHibernate_ISession = new("NHibernate.ISession");
-        internal static readonly KnownType NHibernate_Impl_SessionImpl = new("NHibernate.Impl.SessionImpl");
         internal static readonly KnownType NHibernate_Impl_AbstractSessionImpl = new("NHibernate.Impl.AbstractSessionImpl");
         internal static readonly KnownType NLog_LogManager = new("NLog.LogManager");
         internal static readonly KnownType NUnit_Framework_Assert = new("NUnit.Framework.Assert");
