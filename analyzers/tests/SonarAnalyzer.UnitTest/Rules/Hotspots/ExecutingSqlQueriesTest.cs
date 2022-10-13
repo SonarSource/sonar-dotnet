@@ -127,5 +127,13 @@ namespace SonarAnalyzer.UnitTest.Rules
             builderCS.AddPaths("ExecutingSqlQueries.EF6.cs")
                 .AddReferences(NuGetMetadataReference.EntityFramework())
                 .Verify();
+
+        [TestMethod]
+        public void ExecutingSqlQueries_OrmLite_CS() =>
+            builderCS
+                .AddPaths(@"ExecutingSqlQueries.OrmLite.cs")
+                .AddReferences(MetadataReferenceFacade.SystemData)
+                .AddReferences(NuGetMetadataReference.ServiceStackOrmLite(Constants.NuGetLatestVersion))
+                .Verify();
     }
 }
