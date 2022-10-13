@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
 using Microsoft.CodeAnalysis;
@@ -265,6 +266,29 @@ namespace SonarAnalyzer.Extensions
                 tupleExpression.Arguments.Count == expectedPathPosition.TupleLength
                     ? (SyntaxNode)tupleExpression.Arguments[expectedPathPosition.Index].Expression
                     : null;
+        }
+
+        // This is a refactored version of internal Roslyn SyntaxNodeExtensions.IsInExpressionTree
+        public static bool IsInExpressionTree(this SyntaxNode node, SemanticModel semanticModel)
+        {
+            return node.AncestorsAndSelf().Any(x => IsExpressionLambda(x) || IsExpressionSelectOrOrder(x) || IsExpressionQuery(x));
+
+            bool IsExpressionLambda(SyntaxNode node) =>
+                node is LambdaExpressionSyntax && semanticModel.GetTypeInfo(node).ConvertedType.DerivesFrom(KnownType.System_Linq_Expressions_Expression);
+
+            bool IsExpressionSelectOrOrder(SyntaxNode node) =>
+                node is SelectOrGroupClauseSyntax or OrderingSyntax && TakesExpressionTree(semanticModel.GetSymbolInfo(node));
+
+            bool IsExpressionQuery(SyntaxNode node) =>
+                node is QueryClauseSyntax queryClause
+                && semanticModel.GetQueryClauseInfo(queryClause) is var info
+                && (TakesExpressionTree(info.CastInfo) || TakesExpressionTree(info.OperationInfo));
+
+            static bool TakesExpressionTree(SymbolInfo info)
+            {
+                var symbols = info.Symbol is null ? info.CandidateSymbols : ImmutableArray.Create(info.Symbol);
+                return symbols.Any(x => x is IMethodSymbol method && method.Parameters.Length > 0 && method.Parameters[0].Type.DerivesFrom(KnownType.System_Linq_Expressions_Expression));
+            }
         }
 
         private static string GetUnknownType(SyntaxKind kind) =>

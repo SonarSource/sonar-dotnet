@@ -1658,8 +1658,7 @@ public class Repro_6176
 
     public void Nested(object arg)
     {
-        // To fix this, we'd need to bump referenced Roslyn version or shim SyntaxNodeExtensions.IsInExpressionTree for C# and VB, and replace SymbolicExecutionRunnerBase.IsInLinqExpression with that
-        Select(() => Invoke(x => x.FirstOrDefault().ToString()));   // Noncompliant FP - inner expression is nested in outer one
+        Select(() => Invoke(x => x.FirstOrDefault().ToString()));   // Compliant, it's invoked lambda inside an expression tree
     }
 
     private void Select(System.Linq.Expressions.Expression<Func<IEnumerable<object>, object>> expression) { }

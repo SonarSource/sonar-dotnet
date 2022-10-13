@@ -30,4 +30,7 @@ public static class SyntaxNodeAnalysisContextExtensions
         context.Node is CompilationUnitSyntax compilationUnitSyntax
         && compilationUnitSyntax.IsTopLevelMain()
         && context.ContainingSymbol.IsGlobalNamespace(); // Needed to avoid the duplicate calls from Roslyn 4.0.0
+
+    public static bool IsInExpressionTree(this SyntaxNodeAnalysisContext context) =>
+        context.Node.IsInExpressionTree(context.SemanticModel);
 }
