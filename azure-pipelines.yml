@@ -18,6 +18,10 @@ variables:
   # To make sure we don`t use MsBuild 17.
   - name: MsBuildPath
     value: 'C:\Program Files\Microsoft Visual Studio\2022\Preview\Msbuild\Current\Bin\msbuild.exe'
+  - name: UnitTestProjectPath
+    value: 'analyzers\tests\SonarAnalyzer.UnitTest\'
+  - name: UnitTestResultsPath
+    value: '$(UnitTestProjectPath)\TestResults'
   - name: isReleaseBranch
     value: ${{ or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), startsWith(variables['Build.SourceBranch'], 'refs/heads/branch-')) }}
   - name: vsVersion
@@ -132,7 +136,7 @@ stages:
       - task: PublishPipelineArtifact@1
         displayName: 'Publish analyzer test binaries as pipeline artifact'
         inputs:
-          path: analyzers\tests\SonarAnalyzer.UnitTest\bin
+          path: '$(UnitTestProjectPath)\bin'
           artifact: TestBinaries
 
       - task: PublishPipelineArtifact@1
@@ -171,7 +175,7 @@ stages:
         displayName: 'Download binaries to test'
         inputs:
           artifact: TestBinaries
-          targetPath: 'analyzers\tests\SonarAnalyzer.UnitTest\bin'
+          targetPath: '$(UnitTestProjectPath)\bin'
 
       - powershell: |
           cd analyzers
@@ -182,14 +186,14 @@ stages:
         condition: always()
         displayName: 'Save coverage files'
         inputs:
-          path: 'analyzers/tests/SonarAnalyzer.UnitTest/coverage'
+          path: '$(UnitTestProjectPath)\coverage'
           artifact: $(CoverageArtifactName)
 
       - task: PublishPipelineArtifact@1
         condition: always()
         displayName: 'Save test results files'
         inputs:
-          path: 'analyzers/tests/SonarAnalyzer.UnitTest/TestResults'
+          path: '$(UnitTestResultsPath)'
           artifact: $(TestResultsArtifactName)
 
       - task: PublishTestResults@2
@@ -198,7 +202,7 @@ stages:
         inputs:
           testRunner: VSTest
           testResultsFiles: '*.trx'
-          searchFolder: 'analyzers/tests/SonarAnalyzer.UnitTest/TestResults'
+          searchFolder: '$(UnitTestResultsPath)'
           testRunTitle: '$(Agent.JobName)'
 
     - job: dotNetAnalysis
