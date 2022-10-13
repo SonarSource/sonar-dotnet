@@ -216,7 +216,7 @@ namespace SonarAnalyzer.Rules.CSharp
             node switch
             {
                 AttributeArgumentSyntax attributeArgument when attributeArgument.NameEquals is { } nameEquals && TokenContainsNamespace(nameEquals.Name.Identifier) => true,
-                AttributeArgumentSyntax { Parent.Parent: AttributeSyntax attribute } when IsAttributeWithNamespaceParameter(model, attribute) => true,
+                AttributeArgumentSyntax { Parent.Parent: AttributeSyntax attribute } => IsAttributeWithNamespaceParameter(model, attribute),
                 EqualsValueClauseSyntax equalsValueClause =>
                     (equalsValueClause.Parent is VariableDeclaratorSyntax variableDeclarator && TokenContainsNamespace(variableDeclarator.Identifier))
                     || (equalsValueClause.Parent is ParameterSyntax parameter && TokenContainsNamespace(parameter.Identifier)),
