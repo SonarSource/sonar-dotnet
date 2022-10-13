@@ -22,6 +22,8 @@
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
     <!-- Class WindowsFormsMetadataReference needs this FrameworkReference to generate metadata references for Windows Forms related test cases. -->
     <FrameworkReference Include="Microsoft.WindowsDesktop.App.WindowsForms" />
+    <!-- Class WpfMetadataReference needs this FrameworkReference to generate metadata references for WPF related test cases. -->
+    <FrameworkReference Include="Microsoft.WindowsDesktop.App.WPF" />
   </ItemGroup>
 
   <ItemGroup>
