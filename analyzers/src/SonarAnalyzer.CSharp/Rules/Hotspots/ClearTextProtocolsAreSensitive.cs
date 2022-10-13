@@ -216,7 +216,7 @@ namespace SonarAnalyzer.Rules.CSharp
             node switch
             {
                 AttributeArgumentSyntax attributeArgument when attributeArgument.NameEquals is { } nameEquals && TokenContainsNamespace(nameEquals.Name.Identifier) => true,
-                AttributeArgumentSyntax { Parent: AttributeArgumentListSyntax { Parent: AttributeSyntax attribute } } attributeArgument when IsKnownNamespaceAttribute(model, attribute) => true,
+                AttributeArgumentSyntax { Parent.Parent: AttributeSyntax attribute } when IsAttributeWithNamespaceParameter(model, attribute) => true,
                 EqualsValueClauseSyntax equalsValueClause =>
                     (equalsValueClause.Parent is VariableDeclaratorSyntax variableDeclarator && TokenContainsNamespace(variableDeclarator.Identifier))
                     || (equalsValueClause.Parent is ParameterSyntax parameter && TokenContainsNamespace(parameter.Identifier)),
@@ -225,7 +225,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 _ => false
             };
 
-        private static bool IsKnownNamespaceAttribute(SemanticModel model, AttributeSyntax attribute) =>
+        private static bool IsAttributeWithNamespaceParameter(SemanticModel model, AttributeSyntax attribute) =>
             model.GetSymbolInfo(attribute).Symbol is IMethodSymbol { ContainingType: { } attributeSymbol } && AttributesWithNamespaceParameter.Any(x => x.Matches(attributeSymbol));
 
         private static bool TokenContainsNamespace(SyntaxToken token) =>
