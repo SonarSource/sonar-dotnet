@@ -7,7 +7,7 @@ namespace Tests.Diagnostics
     {
         public void Examples()
         {
-            tmp = Environment.GetEnvironmentVariable("""TMPDIR"""); // Noncompliant 
+            var tmp = Environment.GetEnvironmentVariable("""TMPDIR"""); // Noncompliant 
         }
     }
 }
