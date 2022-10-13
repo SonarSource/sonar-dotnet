@@ -31,10 +31,10 @@ namespace SonarAnalyzer.Helpers.Trackers
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
         protected override SyntaxKind[] TrackedSyntaxKinds { get; } = { SyntaxKind.InvocationExpression };
 
-        public override Condition ArgumentAtIndexIsConstant(int index) =>
+        public override Condition ArgumentAtIndexIsStringConstant(int index) =>
             context => ((InvocationExpressionSyntax)context.Node).ArgumentList is { } argumentList
                        && argumentList.Arguments.Count > index
-                       && argumentList.Arguments[index].GetExpression().HasConstantValue(context.SemanticModel);
+                       && argumentList.Arguments[index].GetExpression().FindStringConstant(context.SemanticModel) is not null;
 
         public override Condition ArgumentAtIndexIsAny(int index, params string[] values) =>
             context => ((InvocationExpressionSyntax)context.Node).ArgumentList is { } argumentList
