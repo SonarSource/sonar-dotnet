@@ -37,7 +37,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void EmptyNamespace_CSharp10() =>
             builder.AddPaths("EmptyNamespace.CSharp10.Empty.cs", "EmptyNamespace.CSharp10.NotEmpty.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .WithConcurrentAnalysis(false)
                 .Verify();
 
         [TestMethod]
@@ -45,7 +44,6 @@ namespace SonarAnalyzer.UnitTest.Rules
             builder.AddPaths("EmptyNamespace.CSharp10.Empty.cs")
                 .WithCodeFix<EmptyNamespaceCodeFix>()
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .WithAutogenerateConcurrentFiles(false)
                 .WithCodeFixedPaths("EmptyNamespace.CSharp10.Fixed.cs")
                 .VerifyCodeFix();
 

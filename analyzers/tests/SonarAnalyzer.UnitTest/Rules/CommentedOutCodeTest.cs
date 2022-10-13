@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void CommentedOutCode_Nonconcurrent() =>
-            builder.AddPaths("CommentedOutCode_Nonconcurrent.cs").WithConcurrentAnalysis(false).Verify();
+            builder.AddPaths("CommentedOutCode_Nonconcurrent.cs").Verify();
 
         [TestMethod]
         public void CommentedOutCode() =>
@@ -39,7 +39,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void CommentedOutCode_NoDocumentation() =>
             builder.AddPaths("CommentedOutCode.cs")
-                .WithConcurrentAnalysis(false)
                 .WithOptions(ImmutableArray.Create<ParseOptions>(new CSharpParseOptions(documentationMode: DocumentationMode.None)))
                 .Verify();
     }

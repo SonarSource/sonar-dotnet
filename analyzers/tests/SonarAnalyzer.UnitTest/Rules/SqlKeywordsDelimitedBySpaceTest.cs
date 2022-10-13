@@ -51,14 +51,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void SqlKeywordsDelimitedBySpace_CSharp10_GlobalUsings() =>
             builder.AddPaths("SqlKeywordsDelimitedBySpace.CSharp10.GlobalUsing.cs", "SqlKeywordsDelimitedBySpace.CSharp10.GlobalUsingConsumer.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .WithConcurrentAnalysis(false)
                 .Verify();
 
         [TestMethod]
         public void SqlKeywordsDelimitedBySpace_CSharp10_FileScopesNamespace() =>
             builder.AddPaths("SqlKeywordsDelimitedBySpace.CSharp10.FileScopedNamespaceDeclaration.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .WithConcurrentAnalysis(false)
                 .Verify();
 
         [TestMethod]

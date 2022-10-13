@@ -226,21 +226,24 @@ Line: 3, Type: primary, Id: ''
         [TestMethod]
         public void Verify_AutogenerateConcurrentFiles()
         {
-            var builder = WithSnippetCS("// Noncompliant - FN");
+            var builder = WithSnippetCS(
+@"namespace N1 {
+    // Noncompliant - FN
+}");
             // Concurrent analysis by-default automatically generates concurrent files - File.Concurrent.cs
             builder.Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage(
     @"CSharp7: Issue(s) expected but not raised in file(s):
 File: File.cs
-Line: 1, Type: primary, Id: ''
+Line: 2, Type: primary, Id: ''
 
 File: File.Concurrent.cs
-Line: 1, Type: primary, Id: ''
+Line: 2, Type: primary, Id: ''
 ");
             // When AutogenerateConcurrentFiles is turned off, only the provided snippet is analyzed
             builder.WithAutogenerateConcurrentFiles(false).Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage(
     @"CSharp7: Issue(s) expected but not raised in file(s):
 File: File.cs
-Line: 1, Type: primary, Id: ''
+Line: 2, Type: primary, Id: ''
 ");
         }
 
