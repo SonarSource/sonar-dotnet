@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 c =>
                 {
                     var declaration = (LambdaExpressionSyntax)c.Node;
-                    if (c.SemanticModel.GetSymbolInfo(declaration).Symbol is { } symbol && !IsInLinqExpression(c))
+                    if (c.SemanticModel.GetSymbolInfo(declaration).Symbol is { } symbol && !c.IsInExpressionTree())
                     {
                         Analyze(context, c, declaration, symbol);
                     }

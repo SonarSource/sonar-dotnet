@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Immutable;
+using System.Linq;
 using System.Threading;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -60,6 +62,24 @@ namespace SonarAnalyzer.Extensions
 
         public static string FindStringConstant(this SyntaxNode node, SemanticModel semanticModel) =>
             FindConstantValue(node, semanticModel) as string;
+
+        // This is a refactored version of internal Roslyn SyntaxNodeExtensions.IsInExpressionTree
+        public static bool IsInExpressionTree(this SyntaxNode node, SemanticModel semanticModel)
+        {
+            return node.AncestorsAndSelf().Any(x => IsExpressionLambda(x) || IsExpressionQuery(x));
+
+            bool IsExpressionLambda(SyntaxNode node) =>
+                node is LambdaExpressionSyntax && semanticModel.GetTypeInfo(node).ConvertedType.DerivesFrom(KnownType.System_Linq_Expressions_Expression);
+
+            bool IsExpressionQuery(SyntaxNode node) =>
+                node is OrderingSyntax or QueryClauseSyntax or FunctionAggregationSyntax or ExpressionRangeVariableSyntax && TakesExpressionTree(semanticModel.GetSymbolInfo(node));
+
+            static bool TakesExpressionTree(SymbolInfo info)
+            {
+                var symbols = info.Symbol is null ? info.CandidateSymbols : ImmutableArray.Create(info.Symbol);
+                return symbols.Any(x => x is IMethodSymbol method && method.Parameters.Length > 0 && method.Parameters[0].Type.DerivesFrom(KnownType.System_Linq_Expressions_Expression));
+            }
+        }
 
         private sealed class ControlFlowGraphCache : ControlFlowGraphCacheBase
         {
