@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\Net7\Net7\Program.cs",
+"region":  {
+"startLine":  2,
+"startColumn":  19,
+"endLine":  2,
+"endColumn":  34
+}
+}
+}
+]
+}

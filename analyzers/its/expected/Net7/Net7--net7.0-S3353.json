@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'a'.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\CheckedAndUncheckedUserDefinedOperators.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  17,
+"endLine":  7,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'b'.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\CheckedAndUncheckedUserDefinedOperators.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  17,
+"endLine":  8,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'X'.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\NewlinesInStringInterpolations.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  17,
+"endLine":  16,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'Y'.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\NewlinesInStringInterpolations.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  17,
+"endLine":  17,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'longMessage'.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\RawStringLiterals.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  20,
+"endLine":  7,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'x'.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\UnsignedRightShiftOperator.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  17,
+"endLine":  7,
+"endColumn":  18
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\GenericAttributes.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  34,
+"endLine":  7,
+"endColumn":  36
+}
+}
+}
+]
+}

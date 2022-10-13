@@ -1,0 +1,121 @@
+{
+"issues":  [
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'd'.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\CheckedAndUncheckedUserDefinedOperators.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  21,
+"endLine":  13,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'message'.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\NewlinesInStringInterpolations.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  20,
+"endLine":  7,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'pointMessage'.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\NewlinesInStringInterpolations.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  17,
+"endLine":  19,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'x'.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\NumericIntPtrAndUIntPtr.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  20,
+"endLine":  10,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'y'.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\NumericIntPtrAndUIntPtr.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  21,
+"endLine":  11,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'longMessage'.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\RawStringLiterals.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  20,
+"endLine":  7,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'AuthWithTrailingSpace'.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\UTF8StringLiterals.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  32,
+"endLine":  7,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'AuthStringLiteral'.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\UTF8StringLiterals.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  32,
+"endLine":  8,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'AuthStringLiteralAsByteArray'.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\UTF8StringLiterals.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  20,
+"endLine":  9,
+"endColumn":  48
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2479",
+"message":  "Replace the control character at position 3 by its escape sequence '\n'.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\RawStringLiterals.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  34,
+"endLine":  14,
+"endColumn":  8
+}
+}
+}
+]
+}

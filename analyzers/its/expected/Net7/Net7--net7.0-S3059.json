@@ -1,0 +1,601 @@
+{
+"issues":  [
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\Net7\Net7\features\AutoDefaultStruct.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  20,
+"endLine":  3,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\AutoDefaultStruct.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  9,
+"endLine":  5,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\AutoDefaultStruct.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  13,
+"endLine":  7,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\AutoDefaultStruct.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  13,
+"endLine":  12,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\AutoDefaultStruct.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  13,
+"endLine":  18,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\AutoDefaultStruct.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  13,
+"endLine":  23,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\AutoDefaultStruct.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  13,
+"endLine":  25,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\AutoDefaultStruct.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  9,
+"endLine":  30,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\Net7\Net7\features\CheckedAndUncheckedUserDefinedOperators.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  20,
+"endLine":  3,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\CheckedAndUncheckedUserDefinedOperators.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  9,
+"endLine":  5,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\Net7\Net7\features\ExtendedNameofScope.cs",
+"region":  {
+"startLine":  4,
+"startColumn":  20,
+"endLine":  4,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\ExtendedNameofScope.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  9,
+"endLine":  7,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\Net7\Net7\features\GenericAttributes.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  20,
+"endLine":  3,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\GenericAttributes.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  9,
+"endLine":  5,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\GenericAttributes.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  9,
+"endLine":  8,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\GenericAttributes.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  9,
+"endLine":  10,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\GenericAttributes.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  13,
+"endLine":  13,
+"endColumn":  19
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\Net7\Net7\features\ListPatterns.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  20,
+"endLine":  3,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\ListPatterns.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  9,
+"endLine":  5,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\Net7\Net7\features\NewlinesInStringInterpolations.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  20,
+"endLine":  3,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\NewlinesInStringInterpolations.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  9,
+"endLine":  5,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\Net7\Net7\features\NumericIntPtrAndUIntPtr.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  20,
+"endLine":  3,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\NumericIntPtrAndUIntPtr.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  9,
+"endLine":  5,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\Net7\Net7\features\PatternMatchSpanOrReadOnlySpanOnAConstantString.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  20,
+"endLine":  3,
+"endColumn":  67
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\PatternMatchSpanOrReadOnlySpanOnAConstantString.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  9,
+"endLine":  5,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\Net7\Net7\features\RawStringLiterals.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  20,
+"endLine":  3,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\RawStringLiterals.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  9,
+"endLine":  5,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\Net7\Net7\features\RefFieldsAndRefScopedVariables.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  20,
+"endLine":  3,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\RefFieldsAndRefScopedVariables.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  9,
+"endLine":  5,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\RefFieldsAndRefScopedVariables.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  13,
+"endLine":  7,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\RefFieldsAndRefScopedVariables.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  13,
+"endLine":  8,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\RefFieldsAndRefScopedVariables.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  13,
+"endLine":  9,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\RefFieldsAndRefScopedVariables.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  9,
+"endLine":  13,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\RefFieldsAndRefScopedVariables.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  13,
+"endLine":  15,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\RefFieldsAndRefScopedVariables.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  13,
+"endLine":  21,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\RefFieldsAndRefScopedVariables.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  13,
+"endLine":  23,
+"endColumn":  19
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\Net7\Net7\features\RelaxedShiftOperator.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  20,
+"endLine":  3,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\RelaxedShiftOperator.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  9,
+"endLine":  8,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\Net7\Net7\features\RequiredMembers.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  20,
+"endLine":  5,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\RequiredMembers.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  9,
+"endLine":  7,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\RequiredMembers.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  13,
+"endLine":  9,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\RequiredMembers.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  13,
+"endLine":  12,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\RequiredMembers.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  13,
+"endLine":  14,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\RequiredMembers.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  9,
+"endLine":  17,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\Net7\Net7\features\StaticVirtualMembersInInterfaces.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  20,
+"endLine":  22,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\StaticVirtualMembersInInterfaces.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  9,
+"endLine":  24,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\Net7\Net7\features\StaticVirtualMembersInInterfaces.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  21,
+"endLine":  8,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\StaticVirtualMembersInInterfaces.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  9,
+"endLine":  12,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\StaticVirtualMembersInInterfaces.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  9,
+"endLine":  14,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\Net7\Net7\features\UnsignedRightShiftOperator.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  20,
+"endLine":  3,
+"endColumn":  46
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\UnsignedRightShiftOperator.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  9,
+"endLine":  5,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\Net7\Net7\features\UTF8StringLiterals.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  20,
+"endLine":  3,
+"endColumn":  38
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\UTF8StringLiterals.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  9,
+"endLine":  5,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\Net7\Net7\features\WarningWave7.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  20,
+"endLine":  3,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\WarningWave7.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  9,
+"endLine":  5,
+"endColumn":  15
+}
+}
+]
+}
+]
+}

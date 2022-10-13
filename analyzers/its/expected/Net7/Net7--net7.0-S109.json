@@ -1,0 +1,316 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '42' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\FileScopeAccess.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  30,
+"endLine":  10,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\ListPatterns.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  42,
+"endLine":  12,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\ListPatterns.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  45,
+"endLine":  12,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\ListPatterns.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  43,
+"endLine":  13,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\ListPatterns.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  46,
+"endLine":  13,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\ListPatterns.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  42,
+"endLine":  14,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\ListPatterns.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  45,
+"endLine":  14,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\ListPatterns.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  42,
+"endLine":  17,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\ListPatterns.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  46,
+"endLine":  18,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\ListPatterns.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  46,
+"endLine":  20,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\ListPatterns.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  46,
+"endLine":  21,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\ListPatterns.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  45,
+"endLine":  23,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\ListPatterns.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  45,
+"endLine":  24,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\StaticVirtualMembersInInterfaces.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  33,
+"endLine":  28,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '11' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\UnsignedRightShiftOperator.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  47,
+"endLine":  8,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\UnsignedRightShiftOperator.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  60,
+"endLine":  8,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\UnsignedRightShiftOperator.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  106,
+"endLine":  8,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '11' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\UnsignedRightShiftOperator.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  47,
+"endLine":  11,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\UnsignedRightShiftOperator.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  60,
+"endLine":  11,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\UnsignedRightShiftOperator.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  106,
+"endLine":  11,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '11' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\UnsignedRightShiftOperator.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  47,
+"endLine":  14,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\UnsignedRightShiftOperator.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  60,
+"endLine":  14,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\UnsignedRightShiftOperator.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  114,
+"endLine":  14,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\UnsignedRightShiftOperator.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  123,
+"endLine":  14,
+"endColumn":  125
+}
+}
+}
+]
+}
