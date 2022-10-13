@@ -284,6 +284,5 @@ namespace SonarAnalyzer.Rules
                 }
             }
         }
-
     }
 }

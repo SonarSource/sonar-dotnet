@@ -24,7 +24,7 @@ namespace SonarAnalyzer.Json
 {
     public abstract class JsonWalker
     {
-        public void Visit(JsonNode node)
+        public virtual void Visit(JsonNode node)
         {
             switch (node.Kind)
             {

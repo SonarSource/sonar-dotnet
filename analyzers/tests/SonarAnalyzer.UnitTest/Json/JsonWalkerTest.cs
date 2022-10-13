@@ -20,46 +20,57 @@
 
 using SonarAnalyzer.Json;
 
-namespace SonarAnalyzer.UnitTest.Common
+namespace SonarAnalyzer.UnitTest.Common;
+
+[TestClass]
+public class JsonWalkerTest
 {
-    [TestClass]
-    public class JsonWalkerTest
+    [TestMethod]
+    public void VisitsAllNodes()
     {
-        [TestMethod]
-        public void VisitsAllNodes()
-        {
-            const string json = @"
+        const string json = @"
 {
     ""OuterKey"": ""OuterValue"",
     ""OuterBool"": true,
+    ""OuterNull"": null,
     ""NestedArray"": [
         ""Array1"",
-        ""Array2"",
+        [""Array2-Nested1"", null, ""Array2-Nested2"", { ""InnerKey"": ""Array2-NestedObject"" }],
         ""Array3""
     ]
 }";
-            var sut = new JsonWalkerCollector();
-            sut.Visit(JsonNode.FromString(json));
-            sut.VisitedKeys.Should().BeEquivalentTo("OuterKey", "OuterBool", "NestedArray");
-            sut.VisitedValues.Should().BeEquivalentTo("OuterValue", true, "Array1", "Array2", "Array3");
+        var sut = new JsonWalkerCollector();
+        sut.Visit(JsonNode.FromString(json));
+        sut.VisitedKeys.Should().BeEquivalentTo("OuterKey", "OuterBool", "OuterNull", "NestedArray", "InnerKey");
+        sut.VisitedValues.Should().BeEquivalentTo("OuterValue", true, null, "Array1", "Array2-Nested1", null, "Array2-Nested2", "Array2-NestedObject", "Array3");
+    }
+
+    [DataTestMethod]
+    [DataRow("[]")]
+    [DataRow("{}")]
+    public void VisitsAtomicJson_VisitsEmpty(string json)
+    {
+        var sut = new JsonWalkerCollector();
+        sut.Visit(JsonNode.FromString(json));
+        sut.VisitedKeys.Should().BeEmpty();
+        sut.VisitedValues.Should().BeEmpty();
+    }
+
+    private class JsonWalkerCollector : JsonWalker
+    {
+        public readonly List<string> VisitedKeys = new();
+        public readonly List<object> VisitedValues = new();
+
+        protected override void VisitObject(string key, JsonNode value)
+        {
+            VisitedKeys.Add(key);
+            base.VisitObject(key, value);
         }
 
-        private class JsonWalkerCollector : JsonWalker
+        protected override void VisitValue(JsonNode node)
         {
-            public readonly List<string> VisitedKeys = new();
-            public readonly List<object> VisitedValues = new();
-
-            protected override void VisitObject(string key, JsonNode value)
-            {
-                VisitedKeys.Add(key);
-                base.VisitObject(key, value);
-            }
-
-            protected override void VisitValue(JsonNode node)
-            {
-                VisitedValues.Add(node.Value);
-                base.VisitValue(node);
-            }
+            VisitedValues.Add(node.Value);
+            base.VisitValue(node);
         }
     }
 }
