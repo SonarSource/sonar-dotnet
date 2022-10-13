@@ -26,7 +26,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
 {
     internal static class WpfMetadataReference
     {
-        internal static MetadataReference SystemXaml { get; } = Create(typeof(System.Xaml.AmbientPropertyValue));
+        internal static MetadataReference SystemXaml { get; } = Create(typeof(System.Xaml.XamlReader));
     }
 }
 
