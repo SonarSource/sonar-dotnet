@@ -198,7 +198,7 @@ stages:
         inputs:
           testRunner: VSTest
           testResultsFiles: '*.trx'
-          searchFolder: 'TestResults'
+          searchFolder: 'analyzers/tests/SonarAnalyzer.UnitTest/TestResults'
           testRunTitle: '$(Agent.JobName)'
 
     - job: dotNetAnalysis
