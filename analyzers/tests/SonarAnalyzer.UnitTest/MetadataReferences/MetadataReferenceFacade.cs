@@ -230,7 +230,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             {
                 CoreMetadataReference.SystemXmlReaderWriter,
                 CoreMetadataReference.SystemPrivateXml,
-                WpfMetadataReference.SystemWindowsMarkup,
+                WpfMetadataReference.SystemXaml,
             };
 #endif
 
