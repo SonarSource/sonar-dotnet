@@ -314,6 +314,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_IO_TextWriter = new("System.IO.TextWriter");
         internal static readonly KnownType System_Lazy = new("System.Lazy", "T");
         internal static readonly KnownType System_Linq_Enumerable = new("System.Linq.Enumerable");
+        internal static readonly KnownType System_Linq_Expressions_Expression = new("System.Linq.Expressions.Expression");
         internal static readonly KnownType System_Linq_Expressions_Expression_T = new("System.Linq.Expressions.Expression", "TDelegate");
         internal static readonly KnownType System_Linq_ImmutableArrayExtensions = new("System.Linq.ImmutableArrayExtensions");
         internal static readonly KnownType System_Linq_Queryable = new("System.Linq.Queryable");

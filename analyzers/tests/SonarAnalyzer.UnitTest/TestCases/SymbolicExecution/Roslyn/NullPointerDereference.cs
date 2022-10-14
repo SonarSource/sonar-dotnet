@@ -1637,3 +1637,32 @@ namespace DoesNotReturnIf
         public void FailsWhenFalseAny([DoesNotReturnIf(false)] bool condition1, [DoesNotReturnIf(false)] bool condition2) { }
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/6176
+public class Repro_6176
+{
+    public void ExpressionArguments(object arg)
+    {
+        WithExpression(x => x.FirstOrDefault().ToString());         // Compliant - custom expression processor, like Entity Framework, can propagate the "null" without executing the actual code
+        WithExpression(() => arg == null ? arg.ToString() : null);  // Compliant, we don't analyze arguments of expression
+
+        System.Linq.Expressions.Expression<Func<IEnumerable<object>, object>> expr;
+        expr = x => x.FirstOrDefault().ToString();          // Compliant as well
+    }
+
+    public void DelegateArguments(object arg)
+    {
+        WithDelegate(x => x.FirstOrDefault().ToString());         // Noncompliant
+        WithDelegate(() => arg == null ? arg.ToString() : null);  // Noncompliant
+    }
+
+    public void Nested(object arg)
+    {
+        WithExpression(() => WithDelegate(x => x.FirstOrDefault().ToString()));   // Compliant, it's invoked lambda inside an expression tree
+    }
+
+    private void WithExpression(System.Linq.Expressions.Expression<Func<IEnumerable<object>, object>> expression) { }
+    private void WithExpression(System.Linq.Expressions.Expression<Func<object>> expression) { }
+    private object WithDelegate(Func<IEnumerable<object>, object> expression) => null;
+    private void WithDelegate(Func<object> expression) { }
+}

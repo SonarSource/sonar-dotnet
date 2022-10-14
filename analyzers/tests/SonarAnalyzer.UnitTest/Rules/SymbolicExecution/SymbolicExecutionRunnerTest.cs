@@ -285,6 +285,40 @@ End Sub");
                 null);
 
         [TestMethod]
+        public void Analyze_DoNotRunWhenInsideLinqExpression_CS() =>
+            VerifyClassMainCS(@"
+public void Main()
+{
+    WithExpression(() => 1 + 1);    // Compliant, SBinary is not triggered, because this method is not analyzed
+    WithFunc(() => 1 + 1);          // Noncompliant {{Message for SBinary}} To be sure binary rule triggers
+
+        System.Linq.Expressions.Expression<Func<object[], object>> expr;
+        // Noncompliant@+1 {{Message for SMain}} This is scaffolding issue from the assignment to 'expr'
+        expr = x => x.FirstOrDefault().ToString();      // Compliant
+}
+
+private void WithExpression(System.Linq.Expressions.Expression<Func<int>> arg) { }
+private void WithFunc(Func<int> arg) { }");
+
+        [TestMethod]
+        public void Analyze_DoNotRunWhenInsideLinqExpression_VB() =>
+            VerifyClassMainVB(@"
+Public Sub Main()
+    WithExpression(Function() 1 + 1)    ' Should be Compliant, SBinary is not triggered, because this method is not analyzed
+    WithFunc(Function() 1 + 1)          ' Noncompliant {{Message for SBinary}} To be sure binary rule triggers
+
+    Dim Expr As Linq.Expressions.Expression(Of Func(Of Integer))
+    ' Noncompliant@+1 {{Message for SMain}} This is scaffolding issue from the assignment to 'Expr'
+    Expr = Function() 1 + 1
+End Sub
+
+Private Sub WithExpression(Arg As Linq.Expressions.Expression(Of Func(Of Integer)))
+End Sub
+
+Private Sub WithFunc(Arg As Func(Of Integer))
+End Sub");
+
+        [TestMethod]
         public void Enabled_MainProject() =>
             Verify(@"string s = null;   // Noncompliant    {{Message for SAll}}
                                         // Noncompliant@-1 {{Message for SMain}}",
@@ -406,8 +440,8 @@ public class Sample
 
         private static void Verify(string body, ProjectType projectType, string sonarProjectConfigPath, params DiagnosticDescriptor[] onlyRules)
         {
-            var code =
-$@"
+            var code = $@"
+using System;
 using System.Threading;
 public class Sample
 {{
@@ -428,7 +462,7 @@ public class Sample
 {{
     {members}
 }}";
-            VerifyCode<TestSERunnerCS>(code, ProjectType.Product, ParseOptionsHelper.FromCSharp9, null, MainScopeAssignmentRuleCheck.SMain);
+            VerifyCode<TestSERunnerCS>(code, ProjectType.Product, ParseOptionsHelper.FromCSharp9, null, MainScopeAssignmentRuleCheck.SMain, BinaryRuleCheck.SBinary);
         }
 
         private static void VerifyClassMainVB(string members)

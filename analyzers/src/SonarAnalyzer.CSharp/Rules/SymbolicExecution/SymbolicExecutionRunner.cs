@@ -96,7 +96,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var declaration = (AnonymousFunctionExpressionSyntax)c.Node;
-                    if (c.SemanticModel.GetSymbolInfo(declaration).Symbol is { } symbol)
+                    if (c.SemanticModel.GetSymbolInfo(declaration).Symbol is { } symbol && !c.IsInExpressionTree())
                     {
                         Analyze(context, c, declaration.Body, symbol);
                     }

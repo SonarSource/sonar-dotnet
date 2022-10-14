@@ -578,6 +578,47 @@ public class C
             }
         }
 
+        [TestMethod]
+        public void IsInExpressionTree_CS()
+        {
+            const string code = @"
+using System.Linq;
+public class Sample
+{
+    public void Main(int[] arr)
+    {
+            var withNormalLambda = arr.Where(xNormal => xNormal == 42).OrderBy((xNormal) => xNormal).Select(xNormal => xNormal.ToString());
+            var withNormal = from xNormal in arr where xNormal == 42 orderby xNormal select xNormal.ToString();
+
+            var withExpressionLambda = arr.AsQueryable().Where(xExpres => xExpres == 42).OrderBy((xExpres) => xExpres).Select(xExpres => xExpres.ToString());
+            var withExpression = from xExpres in arr.AsQueryable() where xExpres == 42 orderby xExpres select xExpres.ToString();
+    }
+}";
+            var (tree, model) = TestHelper.CompileCS(code);
+            var allIdentifiers = tree.GetRoot().DescendantNodes().OfType<CS.IdentifierNameSyntax>().ToArray();
+            allIdentifiers.Where(x => x.Identifier.ValueText == "xNormal").Should().HaveCount(6).And.OnlyContain(x => !SyntaxNodeExtensionsCS.IsInExpressionTree(x, model));
+            allIdentifiers.Where(x => x.Identifier.ValueText == "xExpres").Should().HaveCount(6).And.OnlyContain(x => SyntaxNodeExtensionsCS.IsInExpressionTree(x, model));
+        }
+
+        [TestMethod]
+        public void IsInExpressionTree_VB()
+        {
+            const string code = @"
+Public Class Sample
+    Public Sub Main(Arr() As Integer)
+        Dim WithNormalLambda = Arr.Where(Function(xNormal) xNormal = 42).OrderBy(Function(xNormal) xNormal).Select(Function(xNormal) xNormal.ToString())
+        Dim WithNormal = From xNormal In Arr Where xNormal = 42 Order By xNormal Select Result = xNormal.ToString()
+
+        Dim WithExpressionLambda = Arr.AsQueryable().Where(Function(xExpres) xExpres = 42).OrderBy(Function(xExpres) xExpres).Select(Function(xExpres) xExpres.ToString())
+        Dim WithExpression = From xExpres In Arr.AsQueryable() Where xExpres = 42 Order By xExpres Select Result = xExpres.ToString()
+    End Sub
+End Class";
+            var (tree, model) = TestHelper.CompileVB(code);
+            var allIdentifiers = tree.GetRoot().DescendantNodes().OfType<VB.IdentifierNameSyntax>().ToArray();
+            allIdentifiers.Where(x => x.Identifier.ValueText == "xNormal").Should().HaveCount(6).And.OnlyContain(x => !SyntaxNodeExtensionsVB.IsInExpressionTree(x, model));
+            allIdentifiers.Where(x => x.Identifier.ValueText == "xExpres").Should().HaveCount(6).And.OnlyContain(x => SyntaxNodeExtensionsVB.IsInExpressionTree(x, model));
+        }
+
         private static SyntaxToken GetFirstTokenOfKind(SyntaxTree syntaxTree, SyntaxKind kind) =>
             syntaxTree.GetRoot().DescendantTokens().First(token => token.IsKind(kind));
     }

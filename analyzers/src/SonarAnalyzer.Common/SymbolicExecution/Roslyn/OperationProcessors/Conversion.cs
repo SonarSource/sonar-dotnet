@@ -26,7 +26,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 internal sealed class Conversion : SimpleProcessor<IConversionOperationWrapper>
 {
     protected override IConversionOperationWrapper Convert(IOperation operation) =>
-        IConversionOperationWrapper.FromOperation(operation);
+        operation.ToConversion();
 
     protected override ProgramState Process(SymbolicContext context, IConversionOperationWrapper conversion) =>
         context.State[conversion.Operand] is { } value

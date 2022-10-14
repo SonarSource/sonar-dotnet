@@ -57,7 +57,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 return null;
             }
 
-            var conversion = IConversionOperationWrapper.FromOperation(operation.Instance);
+            var conversion = operation.Instance.ToConversion();
             return conversion.Operand.Type.DerivesOrImplements(conversion.Type)
                        ? null
                        : new ExceptionState(typeCatalog.SystemInvalidCastException);

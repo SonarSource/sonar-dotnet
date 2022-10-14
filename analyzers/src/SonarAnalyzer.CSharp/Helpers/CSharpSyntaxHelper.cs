@@ -247,43 +247,6 @@ namespace SonarAnalyzer.Helpers
         public static Location FindIdentifierLocation(this BaseMethodDeclarationSyntax methodDeclaration) =>
             GetIdentifierOrDefault(methodDeclaration)?.GetLocation();
 
-        /// <summary>
-        /// Determines whether the node is being used as part of an expression tree
-        /// i.e. whether it is part of lambda being assigned to System.Linq.Expressions.Expression[TDelegate].
-        /// This could be a local declaration, an assignment, a field, or a property.
-        /// </summary>
-        public static bool IsInExpressionTree(this SyntaxNode node, SemanticModel semanticModel)
-        {
-            // Possible ancestors:
-            // * VariableDeclarationSyntax (for local variable or field),
-            // * PropertyDeclarationSyntax,
-            // * SimpleAssigmentExpression
-            foreach (var n in node.Ancestors())
-            {
-                switch (n.Kind())
-                {
-                    case SyntaxKind.FromClause:
-                    case SyntaxKind.LetClause:
-                    case SyntaxKind.JoinClause:
-                    case SyntaxKind.JoinIntoClause:
-                    case SyntaxKind.WhereClause:
-                    case SyntaxKind.OrderByClause:
-                    case SyntaxKind.SelectClause:
-                    case SyntaxKind.GroupClause:
-                        // For those clauses, we don't know how to differentiate an expression tree from a delegate,
-                        // so we assume we are in the (more restricted) expression tree
-                        return true;
-                    case SyntaxKind.SimpleLambdaExpression:
-                    case SyntaxKind.ParenthesizedLambdaExpression:
-                        return semanticModel.GetTypeInfo(n).ConvertedType?.OriginalDefinition.Is(KnownType.System_Linq_Expressions_Expression_T)
-                            ?? false;
-                    default:
-                        continue;
-                }
-            }
-            return false;
-        }
-
         public static bool HasDefaultLabel(this SwitchStatementSyntax node) =>
             GetDefaultLabelSectionIndex(node) >= 0;
 

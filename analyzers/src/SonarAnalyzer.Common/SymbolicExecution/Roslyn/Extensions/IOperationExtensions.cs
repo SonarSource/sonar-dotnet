@@ -29,7 +29,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         internal static ISymbol TrackedSymbol(this IOperation operation) =>
             operation?.Kind switch
             {
-                OperationKindEx.Conversion => TrackedSymbol(IConversionOperationWrapper.FromOperation(operation).Operand),
+                OperationKindEx.Conversion => TrackedSymbol(operation.ToConversion().Operand),
                 OperationKindEx.FieldReference when IFieldReferenceOperationWrapper.FromOperation(operation) is var fieldReference && IsStaticOrThis(fieldReference) => fieldReference.Field,
                 OperationKindEx.LocalReference => ILocalReferenceOperationWrapper.FromOperation(operation).Local,
                 OperationKindEx.ParameterReference => IParameterReferenceOperationWrapper.FromOperation(operation).Parameter,
@@ -61,6 +61,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         internal static IArrayElementReferenceOperationWrapper ToArrayElementReference(this IOperation operation) =>
             IArrayElementReferenceOperationWrapper.FromOperation(operation);
 
+        internal static IConversionOperationWrapper ToConversion(this IOperation operation) =>
+            IConversionOperationWrapper.FromOperation(operation);
+
         internal static IInvocationOperationWrapper ToInvocation(this IOperation operation) =>
             IInvocationOperationWrapper.FromOperation(operation);
 
@@ -78,7 +81,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         {
             while (operation?.Kind == OperationKindEx.Conversion)
             {
-                operation = IConversionOperationWrapper.FromOperation(operation).Operand;
+                operation = operation.ToConversion().Operand;
             }
             return operation;
         }

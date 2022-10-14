@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -45,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     // Can't use optional arguments in expression trees (CS0584), so skip those
-                    if (c.Node.IsInExpressionTree(c.SemanticModel))
+                    if (c.IsInExpressionTree())
                     {
                         return;
                     }
