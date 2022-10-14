@@ -46,6 +46,23 @@ namespace SonarAnalyzer.UnitTest.Rules
                 info.Should().ContainSingle(x => x.TokenType == TokenType.NumericLiteral);
             });
 
+#if NET
+
+        [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
+        public void Verify_MainTokens_CSSharp11(ProjectType projectType) =>
+            Verify("Tokens.Csharp11.cs", projectType, info =>
+            {
+                info.Should().HaveCount(41);
+                info.Where(x => x.TokenType == TokenType.Keyword).Should().HaveCount(25);
+                info.Where(x => x.TokenType == TokenType.StringLiteral).Should().HaveCount(14);
+                info.Should().ContainSingle(x => x.TokenType == TokenType.TypeName);
+                info.Should().ContainSingle(x => x.TokenType == TokenType.NumericLiteral);
+            });
+
+#endif
+
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
