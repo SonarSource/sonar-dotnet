@@ -168,8 +168,11 @@ namespace SonarAnalyzer.Rules
 
         private string IssueMessage(string variableName, string variableValue)
         {
-            var bannedWords = FindCredentialWords(variableName, variableValue);
-            if (bannedWords.Any())
+            if (string.IsNullOrWhiteSpace(variableValue))
+            {
+                return null;
+            }
+            else if (FindCredentialWords(variableName, variableValue) is var bannedWords && bannedWords.Any())
             {
                 return string.Format(MessageFormatCredential, bannedWords.JoinAnd());
             }
@@ -240,7 +243,6 @@ namespace SonarAnalyzer.Rules
                     var declarator = (TSyntaxNode)context.Node;
                     if (ShouldHandle(declarator, context.SemanticModel)
                         && GetAssignedValue(declarator, context.SemanticModel) is { } variableValue
-                        && !string.IsNullOrWhiteSpace(variableValue)
                         && analyzer.IssueMessage(GetVariableName(declarator), variableValue) is { } message)
                     {
                         context.ReportIssue(Diagnostic.Create(analyzer.rule, declarator.GetLocation(), message));
