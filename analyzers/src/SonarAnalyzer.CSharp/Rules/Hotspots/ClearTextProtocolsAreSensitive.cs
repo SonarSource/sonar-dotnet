@@ -106,8 +106,8 @@ namespace SonarAnalyzer.Rules.CSharp
             const string allSubdomainsPattern = @"([^/?#]+\.)?";
             var domainsList = LocalhostAddresses
                 .Concat(CommonlyUsedXmlDomains)
-                    .Select(Regex.Escape)
-                    .Concat(CommonlyUsedExampleDomains.Select(x => allSubdomainsPattern + Regex.Escape(x)));
+                .Select(Regex.Escape)
+                .Concat(CommonlyUsedExampleDomains.Select(x => allSubdomainsPattern + Regex.Escape(x)));
             var validServerPattern = domainsList.JoinStr("|");
 
             httpRegex = CompileRegex(@$"^http:\/\/(?!{validServerPattern}).");
