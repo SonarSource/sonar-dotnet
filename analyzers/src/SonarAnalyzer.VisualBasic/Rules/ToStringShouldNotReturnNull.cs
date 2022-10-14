@@ -35,8 +35,8 @@ public sealed class ToStringShouldNotReturnNull : ToStringShouldNotReturnNullBas
 
     protected override SyntaxKind MethodKind => SyntaxKind.FunctionBlock;
 
-    protected override IEnumerable<SyntaxNode> Conditionals(SyntaxNode node) =>
-        node is TernaryConditionalExpressionSyntax conditional
+    protected override IEnumerable<SyntaxNode> Conditionals(SyntaxNode expression) =>
+        expression is TernaryConditionalExpressionSyntax conditional
             ? new SyntaxNode[] { conditional.WhenTrue, conditional.WhenFalse }
             : Array.Empty<SyntaxNode>();
 
