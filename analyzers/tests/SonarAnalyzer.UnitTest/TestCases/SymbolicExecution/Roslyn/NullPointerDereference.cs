@@ -1672,7 +1672,7 @@ public class Peach_Sharex_Project
     public void TwoVariables(object[] argArray)
     {
         object item;
-        if(argArray != null && argArray.Length > 1)
+        if (argArray != null && argArray.Length > 1)
         {
             item = argArray[0];
         }
@@ -1680,7 +1680,7 @@ public class Peach_Sharex_Project
         {
             item = null;
         }
-        if(item != null)
+        if (item != null)
         {
             argArray.ToString();    // Compliant
         }
@@ -1688,7 +1688,7 @@ public class Peach_Sharex_Project
 
     public void StringIsNullOrEmpty(string value)
     {
-        if(value == null)
+        if (value == null)
         {
             value = "";
         }
