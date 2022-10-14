@@ -1666,3 +1666,40 @@ public class Repro_6176
     private object WithDelegate(Func<IEnumerable<object>, object> expression) => null;
     private void WithDelegate(Func<object> expression) { }
 }
+
+public class Peach_Sharex_Project
+{
+    public void TwoVariables(object[] argArray)
+    {
+        object item;
+        if(argArray != null && argArray.Length > 1)
+        {
+            item = argArray[0];
+        }
+        else
+        {
+            item = null;
+        }
+        if(item != null)
+        {
+            argArray.ToString();    // Compliant
+        }
+    }
+
+    public void StringIsNullOrEmpty(string value)
+    {
+        if(value == null)
+        {
+            value = "";
+        }
+        var isEmpty = string.IsNullOrEmpty(value);
+        if (isEmpty)
+        {
+            value.ToString();   // Compliant
+        }
+        else
+        {
+            value.ToString();   // Compliant
+        }
+    }
+}
