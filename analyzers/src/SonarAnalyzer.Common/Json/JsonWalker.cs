@@ -22,8 +22,10 @@ using SonarAnalyzer.Json.Parsing;
 
 namespace SonarAnalyzer.Json
 {
-    public abstract class JsonWalker
+    public class JsonWalker
     {
+        protected JsonWalker() { }
+
         public virtual void Visit(JsonNode node)
         {
             switch (node.Kind)
