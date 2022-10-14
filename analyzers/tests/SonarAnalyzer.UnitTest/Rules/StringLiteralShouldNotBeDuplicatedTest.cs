@@ -30,8 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void StringLiteralShouldNotBeDuplicated_CS() =>
-            builderCS.AddPaths("StringLiteralShouldNotBeDuplicated.cs")
-                .Verify();
+            builderCS.AddPaths("StringLiteralShouldNotBeDuplicated.cs").Verify();
 
 #if NET
         [TestMethod]

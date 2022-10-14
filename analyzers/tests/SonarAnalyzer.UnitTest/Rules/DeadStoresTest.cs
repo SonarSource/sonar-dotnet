@@ -36,8 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void DeadStores_SonarCfg() =>
-            sonarCfg.AddPaths("DeadStores.SonarCfg.cs")
-                .Verify();
+            sonarCfg.AddPaths("DeadStores.SonarCfg.cs").Verify();
 
         [TestMethod]
         public void DeadStores_RoslynCfg() =>

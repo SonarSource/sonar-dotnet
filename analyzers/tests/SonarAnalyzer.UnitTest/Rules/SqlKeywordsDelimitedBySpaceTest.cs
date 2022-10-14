@@ -29,15 +29,21 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void SqlKeywordsDelimitedBySpace() =>
-            builder.AddPaths("SqlKeywordsDelimitedBySpace.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+            builder.AddPaths("SqlKeywordsDelimitedBySpace.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
 
         [TestMethod]
         public void SqlKeywordsDelimitedBySpace_UsingInsideNamespace() =>
-            builder.AddPaths("SqlKeywordsDelimitedBySpace_InsideNamespace.cs").WithConcurrentAnalysis(false).Verify();
+            builder.AddPaths("SqlKeywordsDelimitedBySpace_InsideNamespace.cs")
+                .WithConcurrentAnalysis(false)
+                .Verify();
 
         [TestMethod]
         public void SqlKeywordsDelimitedBySpace_DefaultNamespace() =>
-            builder.AddPaths("SqlKeywordsDelimitedBySpace_DefaultNamespace.cs").AddTestReference().VerifyNoIssueReported();
+            builder.AddPaths("SqlKeywordsDelimitedBySpace_DefaultNamespace.cs")
+                .AddTestReference()
+                .VerifyNoIssueReported();
 
 #if NET
 
@@ -59,6 +65,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void SqlKeywordsDelimitedBySpace_CSharp10() =>
             builder.AddPaths("SqlKeywordsDelimitedBySpace.CSharp10.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .Verify();
+
+        [TestMethod]
+        public void SqlKeywordsDelimitedBySpace_CSharp11() =>
+            builder.AddPaths("SqlKeywordsDelimitedBySpace.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
                 .Verify();
 
 #endif

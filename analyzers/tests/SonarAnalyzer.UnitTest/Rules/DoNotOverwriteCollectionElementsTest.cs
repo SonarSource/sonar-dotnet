@@ -31,13 +31,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void DoNotOverwriteCollectionElements_CS() =>
-            builderCS.AddPaths("DoNotOverwriteCollectionElements.cs")
-                .Verify();
+            builderCS.AddPaths("DoNotOverwriteCollectionElements.cs").Verify();
 
         [TestMethod]
         public void DoNotOverwriteCollectionElements_VB() =>
-            builderVB.AddPaths("DoNotOverwriteCollectionElements.vb")
-                .Verify();
+            builderVB.AddPaths("DoNotOverwriteCollectionElements.vb").Verify();
 
 #if NET
 

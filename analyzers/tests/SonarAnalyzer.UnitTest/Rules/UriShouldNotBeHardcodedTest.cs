@@ -34,6 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             builderCS.AddPaths("UriShouldNotBeHardcoded.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void UriShouldNotBeHardcoded_CSharp11()
         {
@@ -42,9 +43,11 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
                 .Verify();
         }
+
 #endif
 
 #if NETFRAMEWORK // HttpContext is available only when targeting .Net Framework
+
         [DataTestMethod]
         [DataRow("3.0.20105.1")]
         [DataRow(Constants.NuGetLatestVersion)]
@@ -53,6 +56,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .AddPaths("UriShouldNotBeHardcoded.AspNet.cs")
                 .AddReferences(MetadataReferenceFacade.SystemWeb.Concat(NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion)))
                 .Verify();
+
 #endif
 
         [DataTestMethod]

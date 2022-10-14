@@ -32,8 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void PubliclyWritableDirectories_CS() =>
-            builderCS.AddPaths(@"Hotspots\PubliclyWritableDirectories.cs")
-                .Verify();
+            builderCS.AddPaths(@"Hotspots\PubliclyWritableDirectories.cs").Verify();
 
 #if NET
 
@@ -53,7 +52,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void PubliclyWritableDirectories_VB() =>
-            builderVB.AddPaths(@"Hotspots\PubliclyWritableDirectories.vb")
-                .Verify();
+            builderVB.AddPaths(@"Hotspots\PubliclyWritableDirectories.vb").Verify();
     }
 }

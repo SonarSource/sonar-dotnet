@@ -28,7 +28,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         private readonly VerifierBuilder builder = new VerifierBuilder<ControlCharacterInString>();
 
         [TestMethod]
-        public void ControlCharacterInString() =>
+        public void ControlCharacterInString_CSharp8() =>
             builder.AddPaths("ControlCharacterInString.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .Verify();

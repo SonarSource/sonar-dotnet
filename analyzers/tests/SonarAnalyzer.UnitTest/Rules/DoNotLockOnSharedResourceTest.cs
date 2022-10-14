@@ -31,13 +31,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void DoNotLockOnSharedResource_CS() =>
-            builderCS.AddPaths("DoNotLockOnSharedResource.cs")
-                .Verify();
+            builderCS.AddPaths("DoNotLockOnSharedResource.cs").Verify();
 
         [TestMethod]
         public void DoNotLockOnSharedResource_VB() =>
-            builderVB.AddPaths("DoNotLockOnSharedResource.vb")
-                .Verify();
+            builderVB.AddPaths("DoNotLockOnSharedResource.vb").Verify();
 
 #if NET
 

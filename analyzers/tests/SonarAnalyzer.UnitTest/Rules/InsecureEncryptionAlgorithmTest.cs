@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Security.AccessControl;
-using SonarAnalyzer.Common;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
@@ -45,6 +43,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .VerifyNoIssueReported();
 
 #if NET
+
         [TestMethod]
         public void InsecureEncryptionAlgorithm_CSharp9() =>
             builderCS.AddPaths("InsecureEncryptionAlgorithm.CSharp9.cs")
@@ -67,6 +66,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .AddReferences(GetAdditionalReferences())
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
                 .Verify();
+
 #endif
 
         [TestMethod]
