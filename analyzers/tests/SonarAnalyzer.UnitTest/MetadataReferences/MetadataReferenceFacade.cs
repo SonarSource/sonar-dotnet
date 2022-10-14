@@ -229,8 +229,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             new[]
             {
                 CoreMetadataReference.SystemXmlReaderWriter,
-                CoreMetadataReference.SystemPrivateXml,
-                WpfMetadataReference.SystemXaml,
+                CoreMetadataReference.SystemPrivateXml
             };
 #endif
 
