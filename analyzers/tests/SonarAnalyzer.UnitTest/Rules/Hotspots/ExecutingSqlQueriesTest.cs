@@ -92,6 +92,15 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Verify();
 
         [TestMethod]
+        public void ExecutingSqlQueries_CSharp11() =>
+            builderCS
+                .AddPaths(@"ExecutingSqlQueries.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .WithTopLevelStatements()
+                .AddReferences(GetReferencesEntityFrameworkNetCore(Constants.DotNetCore220Version).Concat(NuGetMetadataReference.MicrosoftDataSqliteCore()))
+                .Verify();
+
+        [TestMethod]
         public void ExecutingSqlQueries_VB_EntityFrameworkCore2() =>
             builderVB
                 .AddPaths(@"ExecutingSqlQueries.EntityFrameworkCore2.vb")

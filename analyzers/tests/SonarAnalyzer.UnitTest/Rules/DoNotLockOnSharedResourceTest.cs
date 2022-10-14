@@ -26,14 +26,25 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DoNotLockOnSharedResourceTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.DoNotLockOnSharedResource>();
+        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.DoNotLockOnSharedResource>();
+
         [TestMethod]
         public void DoNotLockOnSharedResource_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotLockOnSharedResource.cs",
-                new CS.DoNotLockOnSharedResource());
+            builderCS.AddPaths("DoNotLockOnSharedResource.cs").Verify();
 
         [TestMethod]
         public void DoNotLockOnSharedResource_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotLockOnSharedResource.vb",
-                new VB.DoNotLockOnSharedResource());
+            builderVB.AddPaths("DoNotLockOnSharedResource.vb").Verify();
+
+#if NET
+
+        [TestMethod]
+        public void DoNotLockOnSharedResource_CSharp11() =>
+            builderCS.AddPaths("DoNotLockOnSharedResource.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
+#endif
     }
 }
