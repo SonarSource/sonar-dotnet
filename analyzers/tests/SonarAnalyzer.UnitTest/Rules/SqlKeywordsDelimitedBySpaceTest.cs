@@ -28,7 +28,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         private readonly VerifierBuilder builder = new VerifierBuilder<SqlKeywordsDelimitedBySpace>().AddReferences(NuGetMetadataReference.SystemDataSqlClient());
 
         [TestMethod]
-        public void SqlKeywordsDelimitedBySpace() =>
+        public void SqlKeywordsDelimitedBySpace_Csharp8() =>
             builder.AddPaths("SqlKeywordsDelimitedBySpace.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .Verify();
