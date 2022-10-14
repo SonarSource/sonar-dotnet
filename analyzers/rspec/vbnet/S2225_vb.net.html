@@ -1,0 +1,19 @@
+<p>Calling <code>ToString()</code> on an object should always return a string. Returning <code>Nothing</code> instead contravenes the method’s
+implicit contract.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Public Overrides Function ToString() As String
+    Return Nothing
+End Function
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Public Overrides Function ToString() As String
+    Return ""
+End Function
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://cwe.mitre.org/data/definitions/476">MITRE, CWE-476</a> - NULL Pointer Dereference </li>
+</ul>
+

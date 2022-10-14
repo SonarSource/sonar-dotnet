@@ -1,0 +1,22 @@
+{
+  "title": "\"ToString()\" method should not return Nothing",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "cwe"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-2225",
+  "sqKey": "S2225",
+  "scope": "Main",
+  "securityStandards": {
+    "CWE": [
+      476
+    ]
+  },
+  "quickfix": "unknown"
+}
