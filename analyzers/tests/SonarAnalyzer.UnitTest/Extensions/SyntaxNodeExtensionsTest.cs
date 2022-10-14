@@ -587,17 +587,17 @@ public class Sample
 {
     public void Main(int[] arr)
     {
-            var withNormalLambda = arr.Where(xNormal => xNormal == 42).OrderBy((xNormal) => xNormal).Select(xNormal => xNormal);
-            var withNormal = from xNormal in arr where xNormal == 42 orderby xNormal select xNormal;
+            var withNormalLambda = arr.Where(xNormal => xNormal == 42).OrderBy((xNormal) => xNormal).Select(xNormal => xNormal.ToString());
+            var withNormal = from xNormal in arr where xNormal == 42 orderby xNormal select xNormal.ToString();
 
-            var withExpressionLambda = arr.AsQueryable().Where(xExpres => xExpres == 42).OrderBy((xExpres) => xExpres).Select(xExpres => xExpres);
-            var withExpression = from xExpres in arr.AsQueryable() where xExpres == 42 orderby xExpres select xExpres;
+            var withExpressionLambda = arr.AsQueryable().Where(xExpres => xExpres == 42).OrderBy((xExpres) => xExpres).Select(xExpres => xExpres.ToString());
+            var withExpression = from xExpres in arr.AsQueryable() where xExpres == 42 orderby xExpres select xExpres.ToString();
     }
 }";
             var (tree, model) = TestHelper.CompileCS(code);
-            var allIdentifiers = tree.GetRoot().DescendantNodes().OfType<CS.IdentifierNameSyntax>().Where(x => x.Parent is not CS.SelectClauseSyntax).ToArray(); // SelectClause doesn't resolve symbol
-            allIdentifiers.Where(x => x.Identifier.ValueText == "xNormal").Should().HaveCount(5).And.OnlyContain(x => !SyntaxNodeExtensionsCS.IsInExpressionTree(x, model));
-            allIdentifiers.Where(x => x.Identifier.ValueText == "xExpres").Should().HaveCount(5).And.OnlyContain(x => SyntaxNodeExtensionsCS.IsInExpressionTree(x, model));
+            var allIdentifiers = tree.GetRoot().DescendantNodes().OfType<CS.IdentifierNameSyntax>().ToArray();
+            allIdentifiers.Where(x => x.Identifier.ValueText == "xNormal").Should().HaveCount(6).And.OnlyContain(x => !SyntaxNodeExtensionsCS.IsInExpressionTree(x, model));
+            allIdentifiers.Where(x => x.Identifier.ValueText == "xExpres").Should().HaveCount(6).And.OnlyContain(x => SyntaxNodeExtensionsCS.IsInExpressionTree(x, model));
         }
 
         [TestMethod]
@@ -606,11 +606,11 @@ public class Sample
             const string code = @"
 Public Class Sample
     Public Sub Main(Arr() As Integer)
-        Dim WithNormalLambda = Arr.Where(Function(xNormal) xNormal = 42).OrderBy(Function(xNormal) xNormal).Select(Function(xNormal) xNormal)
-        Dim WithNormal = From xNormal In Arr Where xNormal = 42 Order By xNormal Select xNormal
+        Dim WithNormalLambda = Arr.Where(Function(xNormal) xNormal = 42).OrderBy(Function(xNormal) xNormal).Select(Function(xNormal) xNormal.ToString())
+        Dim WithNormal = From xNormal In Arr Where xNormal = 42 Order By xNormal Select Result = xNormal.ToString()
 
-        Dim WithExpressionLambda = Arr.AsQueryable().Where(Function(xExpres) xExpres = 42).OrderBy(Function(xExpres) xExpres).Select(Function(xExpres) xExpres)
-        Dim WithExpression = From xExpres In Arr.AsQueryable() Where xExpres = 42 Order By xExpres Select xExpres
+        Dim WithExpressionLambda = Arr.AsQueryable().Where(Function(xExpres) xExpres = 42).OrderBy(Function(xExpres) xExpres).Select(Function(xExpres) xExpres.ToString())
+        Dim WithExpression = From xExpres In Arr.AsQueryable() Where xExpres = 42 Order By xExpres Select Result = xExpres.ToString()
     End Sub
 End Class";
             var (tree, model) = TestHelper.CompileVB(code);
