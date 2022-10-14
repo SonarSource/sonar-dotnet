@@ -160,55 +160,8 @@ namespace SonarAnalyzer.Rules
             {
                 if (JsonNode.FromString(File.ReadAllText(path)) is { } json)
                 {
-                    CheckAppSettings(c, path, json);
-                }
-            }
-        }
-
-        private void CheckAppSettings(CompilationAnalysisContext c, string path, JsonNode json)
-        {
-            var queue = new Queue<JsonNode>();
-            queue.Enqueue(json);
-            while (queue.Any())
-            {
-                var node = queue.Dequeue();
-                switch (node.Kind)
-                {
-                    case Kind.Object:
-                        foreach (var key in node.Keys)
-                        {
-                            ProcessKeyValue(key, node[key]);
-                        }
-                        break;
-                    case Kind.List:
-                        foreach (var item in node)
-                        {
-                            queue.Enqueue(item);
-                        }
-                        break;
-                    case Kind.Value:
-                        CheckKeyValue(null, node);
-                        break;
-                }
-            }
-
-            void ProcessKeyValue(string key, JsonNode value)
-            {
-                if (value.Kind == Kind.Value)
-                {
-                    CheckKeyValue(key, value);
-                }
-                else
-                {
-                    queue.Enqueue(value);
-                }
-            }
-
-            void CheckKeyValue(string key, JsonNode value)
-            {
-                if (value.Value is string str && IssueMessage(key, str) is { } valueMessage)
-                {
-                    c.ReportIssue(Diagnostic.Create(rule, value.ToLocation(path), valueMessage));
+                    var walker = new CredentialWordsJsonWalker(this, c, path);
+                    walker.Visit(json);
                 }
             }
         }
@@ -293,6 +246,43 @@ namespace SonarAnalyzer.Rules
                         context.ReportIssue(Diagnostic.Create(analyzer.rule, declarator.GetLocation(), message));
                     }
                 };
+        }
+
+        private sealed class CredentialWordsJsonWalker : JsonWalker
+        {
+            private readonly DoNotHardcodeCredentialsBase<TSyntaxKind> analyzer;
+            private readonly CompilationAnalysisContext context;
+            private readonly string path;
+
+            public CredentialWordsJsonWalker(DoNotHardcodeCredentialsBase<TSyntaxKind> analyzer, CompilationAnalysisContext context, string path)
+            {
+                this.analyzer = analyzer;
+                this.context = context;
+                this.path = path;
+            }
+
+            protected override void VisitObject(string key, JsonNode value)
+            {
+                if (value.Kind == Kind.Value)
+                {
+                    CheckKeyValue(key, value);
+                }
+                else
+                {
+                    base.VisitObject(key, value);
+                }
+            }
+
+            protected override void VisitValue(JsonNode node) =>
+                CheckKeyValue(null, node);
+
+            private void CheckKeyValue(string key, JsonNode value)
+            {
+                if (value.Value is string str && analyzer.IssueMessage(key, str) is { } valueMessage)
+                {
+                    context.ReportIssue(Diagnostic.Create(analyzer.rule, value.ToLocation(path), valueMessage));
+                }
+            }
         }
     }
 }
