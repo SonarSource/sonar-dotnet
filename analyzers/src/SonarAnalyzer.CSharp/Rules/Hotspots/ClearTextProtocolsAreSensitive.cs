@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor DefaultRule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
         private static readonly DiagnosticDescriptor EnableSslRule = DescriptorFactory.Create(DiagnosticId, EnableSslMessage);
 
-        private readonly Dictionary<string, string> recommendedProtocols = new()
+        private static readonly Dictionary<string, string> RecommendedProtocols = new()
         {
             {"telnet", "ssh"},
             {"ftp", "sftp, scp or ftps"},
@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {"clear-text SMTP", "SMTP over SSL/TLS or SMTP with STARTTLS" }
         };
 
-        private readonly string[] commonlyUsedXmlDomains =
+        private static readonly string[] CommonlyUsedXmlDomains =
         {
             "www.w3.org",
             "xml.apache.org",
@@ -76,8 +76,14 @@ namespace SonarAnalyzer.Rules.CSharp
             "json-schema.org"
         };
 
-        private readonly string[] commonlyUsedExampleDomains = {"example.com", "example.org", "test.com"};
-        private readonly string[] localhostAddresses = {"localhost", "127.0.0.1", "::1"};
+        private static readonly string[] CommonlyUsedExampleDomains = { "example.com", "example.org", "test.com" };
+        private static readonly string[] LocalhostAddresses = { "localhost", "127.0.0.1", "::1" };
+        private static readonly KnownType[] AttributesWithNamespaceParameter = new[]
+        {
+            KnownType.System_Windows_Markup_XmlnsPrefixAttribute,
+            KnownType.System_Windows_Markup_XmlnsDefinitionAttribute,
+            KnownType.System_Windows_Markup_XmlnsCompatibleWithAttribute,
+        };
 
         private readonly CSharpObjectInitializationTracker objectInitializationTracker =
             new(constantValue => constantValue is bool value && value,
@@ -98,10 +104,10 @@ namespace SonarAnalyzer.Rules.CSharp
         public ClearTextProtocolsAreSensitive(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration)
         {
             const string allSubdomainsPattern = @"([^/?#]+\.)?";
-            var domainsList = localhostAddresses
-                .Concat(commonlyUsedXmlDomains)
-                    .Select(Regex.Escape)
-                    .Concat(commonlyUsedExampleDomains.Select(x => allSubdomainsPattern + Regex.Escape(x)));
+            var domainsList = LocalhostAddresses
+                .Concat(CommonlyUsedXmlDomains)
+                .Select(Regex.Escape)
+                .Concat(CommonlyUsedExampleDomains.Select(x => allSubdomainsPattern + Regex.Escape(x)));
             var validServerPattern = domainsList.JoinStr("|");
 
             httpRegex = CompileRegex(@$"^http:\/\/(?!{validServerPattern}).");
@@ -135,7 +141,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             else if (telnetRegexForIdentifier.IsMatch(objectCreation.TypeAsString(context.SemanticModel)))
             {
-                context.ReportIssue(Diagnostic.Create(DefaultRule, objectCreation.Expression.GetLocation(), TelnetKey, recommendedProtocols[TelnetKey]));
+                context.ReportIssue(Diagnostic.Create(DefaultRule, objectCreation.Expression.GetLocation(), TelnetKey, RecommendedProtocols[TelnetKey]));
             }
         }
 
@@ -144,7 +150,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var invocation = (InvocationExpressionSyntax)context.Node;
             if (telnetRegexForIdentifier.IsMatch(invocation.Expression.ToString()))
             {
-                context.ReportIssue(Diagnostic.Create(DefaultRule, invocation.GetLocation(), TelnetKey, recommendedProtocols[TelnetKey]));
+                context.ReportIssue(Diagnostic.Create(DefaultRule, invocation.GetLocation(), TelnetKey, RecommendedProtocols[TelnetKey]));
             }
         }
 
@@ -162,9 +168,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private void VisitStringExpressions(SyntaxNodeAnalysisContext c)
         {
-            if (GetUnsafeProtocol(c.Node, c.SemanticModel) is {} unsafeProtocol)
+            if (GetUnsafeProtocol(c.Node, c.SemanticModel) is { } unsafeProtocol)
             {
-                c.ReportIssue(Diagnostic.Create(DefaultRule, c.Node.GetLocation(), unsafeProtocol, recommendedProtocols[unsafeProtocol]));
+                c.ReportIssue(Diagnostic.Create(DefaultRule, c.Node.GetLocation(), unsafeProtocol, RecommendedProtocols[unsafeProtocol]));
             }
         }
 
@@ -175,7 +181,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private string GetUnsafeProtocol(SyntaxNode node, SemanticModel semanticModel)
         {
             var text = GetText(node, semanticModel);
-            if (httpRegex.IsMatch(text) && !IsNamespace(node.Parent))
+            if (httpRegex.IsMatch(text) && !IsNamespace(semanticModel, node.Parent))
             {
                 return "http";
             }
@@ -206,11 +212,11 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static bool IsNamespace(SyntaxNode node) =>
+        private static bool IsNamespace(SemanticModel model, SyntaxNode node) =>
             node switch
             {
-                AttributeArgumentSyntax attributeArgument =>
-                    attributeArgument.NameEquals is { } nameEquals && TokenContainsNamespace(nameEquals.Name.Identifier),
+                AttributeArgumentSyntax attributeArgument when attributeArgument.NameEquals is { } nameEquals && TokenContainsNamespace(nameEquals.Name.Identifier) => true,
+                AttributeArgumentSyntax { Parent.Parent: AttributeSyntax attribute } => IsAttributeWithNamespaceParameter(model, attribute),
                 EqualsValueClauseSyntax equalsValueClause =>
                     (equalsValueClause.Parent is VariableDeclaratorSyntax variableDeclarator && TokenContainsNamespace(variableDeclarator.Identifier))
                     || (equalsValueClause.Parent is ParameterSyntax parameter && TokenContainsNamespace(parameter.Identifier)),
@@ -218,6 +224,9 @@ namespace SonarAnalyzer.Rules.CSharp
                     assignmentExpression.Left.RemoveParentheses() is IdentifierNameSyntax identifierName && TokenContainsNamespace(identifierName.Identifier),
                 _ => false
             };
+
+        private static bool IsAttributeWithNamespaceParameter(SemanticModel model, AttributeSyntax attribute) =>
+            model.GetSymbolInfo(attribute).Symbol is IMethodSymbol { ContainingType: { } attributeSymbol } && AttributesWithNamespaceParameter.Any(x => x.Matches(attributeSymbol));
 
         private static bool TokenContainsNamespace(SyntaxToken token) =>
             token.Text.IndexOf("Namespace", StringComparison.OrdinalIgnoreCase) != -1;

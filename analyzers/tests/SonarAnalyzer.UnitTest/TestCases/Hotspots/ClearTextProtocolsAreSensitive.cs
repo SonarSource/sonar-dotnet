@@ -3,7 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Mail;
+using System.Windows.Markup;
 using System.Xml.Serialization;
+
+[assembly: XmlnsPrefix("http://schemas.catelproject.com", "catel")]
+[assembly: XmlnsDefinition("http://schemas.catelproject.com", "Catel.MVVM")]
+[assembly: XmlnsCompatibleWith("http://www.adatum.com/2003/controls", "http://www.adatum.com/2005/controls")]
 
 namespace Tests.Diagnostics
 {
@@ -333,4 +338,21 @@ namespace ClassNames
     public class TelNet { }
     public class Telnetwork { }
     public class HotelNetwork { }
+}
+
+// Attribute fakes. This can be removed once the WPF framework and System.Xaml can be referenced
+namespace System.Windows.Markup
+{
+    public sealed class XmlnsPrefixAttribute : Attribute
+    {
+        public XmlnsPrefixAttribute(string ns1, string ns2) { }
+    }
+    public sealed class XmlnsDefinitionAttribute : Attribute
+    {
+        public XmlnsDefinitionAttribute(string ns1, string ns2) { }
+    }
+    public sealed class XmlnsCompatibleWithAttribute : Attribute
+    {
+        public XmlnsCompatibleWithAttribute(string ns1, string ns2) { }
+    }
 }

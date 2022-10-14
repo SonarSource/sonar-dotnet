@@ -49,6 +49,7 @@ namespace SonarAnalyzer.UnitTest.Common
                         .AddAnalyzer(() => analyzer)
                         .WithOptions(parseOptions)
                         .AddReferences(GetAdditionalReferences(analyzerName, Constants.NuGetLatestVersion))
+                        .WithConcurrentAnalysis(analyzerName is not nameof(ClearTextProtocolsAreSensitive))
                         .VerifyNoIssueReported();
                 }
             }

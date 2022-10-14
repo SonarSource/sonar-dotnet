@@ -33,6 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             builder.AddPaths(@"Hotspots\ClearTextProtocolsAreSensitive.cs")
                 .AddReferences(AdditionalReferences)
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .WithConcurrentAnalysis(false)
                 .Verify();
 
 #if NET
