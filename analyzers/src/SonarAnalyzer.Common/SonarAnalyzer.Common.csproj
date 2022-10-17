@@ -45,6 +45,13 @@
     <ProjectReference Include="..\SonarAnalyzer.CFG\SonarAnalyzer.CFG.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Using Include="SonarAnalyzer.Common" />
+    <Using Include="SonarAnalyzer.Extensions" />
+    <Using Include="SonarAnalyzer.Helpers" />
+    <Using Include="StyleCop.Analyzers.Lightup" />
+  </ItemGroup>
+
   <!-- Generate protobuf classes, supports windows and linux execution -->
   <Target Name="GenerateProtobufClasses" BeforeTargets="CoreCompile" Outputs="./Protobuf/AnalyzerReport.cs" Inputs="./Protobuf/AnalyzerReport.proto">
     <Message Importance="high" Text="Generating protobuf classes..." />

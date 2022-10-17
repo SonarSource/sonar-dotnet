@@ -59,6 +59,6 @@ namespace SonarAnalyzer.Common
             diagnostic.AdditionalLocations.Count <= index
                     ? throw new ArgumentOutOfRangeException(nameof(index))
                     : new SecondaryLocation(diagnostic.AdditionalLocations[index],
-                                            diagnostic.Properties.GetValueOrDefault(index.ToString()));
+                                            ((IDictionary<string, string>)diagnostic.Properties).GetValueOrDefault(index.ToString()));
     }
 }

@@ -51,7 +51,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues
                 return TrySetConstraint(optionalConstraint, programState);
             }
 
-            var oldConstraint = programState.Constraints.GetValueOrDefault(this)?.GetConstraintOrDefault<NullableConstraint>();
+            var oldConstraint = ((IDictionary<SymbolicValue, SymbolicValueConstraints>)programState.Constraints).GetValueOrDefault(this)?.GetConstraintOrDefault<NullableConstraint>();
             if (constraint is NullableConstraint)
             {
                 if (oldConstraint == null)
