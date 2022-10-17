@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             listener = Trace.Listeners.OfType<DefaultTraceListener>().FirstOrDefault();
             if (listener != null)
             {
-                listener.AssertUiEnabled = false;
+                Trace.Listeners.Remove(listener);
             }
         }
 
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         {
             if (listener != null)
             {
-                listener.AssertUiEnabled = true;
+                Trace.Listeners.Add(listener);
             }
         }
     }
