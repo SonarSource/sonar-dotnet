@@ -1,6 +1,5 @@
 ﻿namespace Net7.features
 {
-    [Obsolete(nameof(LogMessage))]
     internal class ExtendedNameofScope
     {
         [Obsolete(nameof(message))]
@@ -8,5 +7,9 @@
         {
             Console.WriteLine(message.Length);
         }
+
+        [Obsolete(nameof(TParameter))]
+        public static int DoWork<TParameter>(TParameter parameter) =>
+            parameter.GetHashCode();
     }
 }
