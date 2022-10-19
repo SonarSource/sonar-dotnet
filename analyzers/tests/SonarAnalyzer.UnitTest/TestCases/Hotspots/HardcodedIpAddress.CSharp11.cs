@@ -7,7 +7,12 @@ namespace Tests.Diagnostics
     {
         public HardcodedIpAddress(string unknownPart, string knownPart)
         {
-            string ip = """192.168.0.1"""; // Noncompliant {{Make sure using this hardcoded IP address '192.168.0.1' is safe here.}}
+            string ip1 = """192.168.0.1"""; // Noncompliant {{Make sure using this hardcoded IP address '192.168.0.1' is safe here.}}
+            var ip2 = "192.168.0.1"u8; // FN
+            var ip3 = """192.168.0.1"""u8; // FN
+            var ip4 = """
+                192.168.0.1
+                """u8; // FN
         }
     }
 }
