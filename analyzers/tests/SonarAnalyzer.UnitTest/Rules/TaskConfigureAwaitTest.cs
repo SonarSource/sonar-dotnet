@@ -27,17 +27,19 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class TaskConfigureAwaitTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<TaskConfigureAwait>();
+
 #if NETFRAMEWORK
 
         [TestMethod]
         public void TaskConfigureAwait_NetFx() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\TaskConfigureAwait.NetFx.cs", new TaskConfigureAwait());
+            builder.AddPaths("TaskConfigureAwait.NetFx.cs").Verify();
 
 #else
 
         [TestMethod]
         public void TaskConfigureAwait_NetCore() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\TaskConfigureAwait.NetCore.cs", new TaskConfigureAwait());
+            builder.AddPaths("TaskConfigureAwait.NetCore.cs").Verify();
 
 #endif
 

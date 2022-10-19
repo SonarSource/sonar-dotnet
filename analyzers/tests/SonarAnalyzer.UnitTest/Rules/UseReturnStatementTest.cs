@@ -27,6 +27,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void UseReturnStatement() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\UseReturnStatement.vb", new UseReturnStatement());
+            new VerifierBuilder<UseReturnStatement>().AddPaths("UseReturnStatement.vb").Verify();
     }
 }

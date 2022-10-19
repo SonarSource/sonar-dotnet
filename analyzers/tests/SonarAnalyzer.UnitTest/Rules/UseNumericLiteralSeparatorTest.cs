@@ -25,23 +25,30 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class UseNumericLiteralSeparatorTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<UseNumericLiteralSeparator>();
+
         [TestMethod]
         public void UseNumericLiteralSeparator_BeforeCSharp7() =>
-            OldVerifier.VerifyNoIssueReported(@"TestCases\UseNumericLiteralSeparator.cs",
-                                           new UseNumericLiteralSeparator(),
-                                           ParseOptionsHelper.BeforeCSharp7,
-                                           CompilationErrorBehavior.Ignore);
+            builder.AddPaths("UseNumericLiteralSeparator.cs")
+                .WithErrorBehavior(CompilationErrorBehavior.Ignore)
+                .WithOptions(ParseOptionsHelper.BeforeCSharp7)
+                .VerifyNoIssueReported();
 
         [TestMethod]
         public void UseNumericLiteralSeparator_FromCSharp7() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\UseNumericLiteralSeparator.cs",
-                                    new UseNumericLiteralSeparator(),
-                                    ParseOptionsHelper.FromCSharp7);
+            builder.AddPaths("UseNumericLiteralSeparator.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp7)
+                .Verify();
 
 #if NET
+
         [TestMethod]
         public void UseNumericLiteralSeparator_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UseNumericLiteralSeparator.CSharp9.cs", new UseNumericLiteralSeparator());
+            builder.AddPaths("UseNumericLiteralSeparator.CSharp9.cs")
+                .WithTopLevelStatements()
+                .Verify();
+
 #endif
+
     }
 }

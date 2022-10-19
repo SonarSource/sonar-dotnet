@@ -25,14 +25,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class UseCurlyBracesTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<UriShouldNotBeHardcoded>();
+
         [TestMethod]
         public void UseCurlyBraces() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\UseCurlyBraces.cs", new UseCurlyBraces());
+            builder.AddPaths("UseCurlyBraces.cs").Verify();
 
         [TestMethod]
         public void UseCurlyBraces_FromCSharp7() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\UseCurlyBraces.CSharp7.cs",
-                new UseCurlyBraces(),
-                ParseOptionsHelper.FromCSharp7);
+            builder.AddPaths("UseCurlyBraces.CSharp7.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp7)
+                .Verify();
     }
 }

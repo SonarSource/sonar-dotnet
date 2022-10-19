@@ -34,13 +34,15 @@ public class ToStringShouldNotReturnNullTest
         builderCS.AddPaths("ToStringShouldNotReturnNull.cs").Verify();
 
 #if NET
+
     [TestMethod]
     public void ToStringShouldNotReturnNull_CSharp9() =>
         builderCS
-        .WithOptions(ParseOptionsHelper.FromCSharp9)
-        .WithTopLevelStatements()
-        .AddPaths("ToStringShouldNotReturnNull.CSharp9.cs")
-        .Verify();
+            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .WithTopLevelStatements()
+            .AddPaths("ToStringShouldNotReturnNull.CSharp9.cs")
+            .Verify();
+
 #endif
 
     [TestMethod]

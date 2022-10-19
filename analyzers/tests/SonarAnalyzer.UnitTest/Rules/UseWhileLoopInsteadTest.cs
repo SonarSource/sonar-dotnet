@@ -27,6 +27,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void UseWhileLoopInstead() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\UseWhileLoopInstead.cs", new UseWhileLoopInstead());
+            new VerifierBuilder<UseWhileLoopInstead>().AddPaths("UseWhileLoopInstead.cs").Verify();
     }
 }

@@ -49,5 +49,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Verify();
 
 #endif
+
     }
 }

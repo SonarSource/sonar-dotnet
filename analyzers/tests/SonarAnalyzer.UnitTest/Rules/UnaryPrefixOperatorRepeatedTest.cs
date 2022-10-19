@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.Rules.CSharp;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
@@ -26,25 +27,32 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class UnaryPrefixOperatorRepeatedTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.UnaryPrefixOperatorRepeated>();
+        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.UnaryPrefixOperatorRepeated>();
+
         [TestMethod]
         public void UnaryPrefixOperatorRepeated() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\UnaryPrefixOperatorRepeated.cs", new CS.UnaryPrefixOperatorRepeated());
+            builderCS.AddPaths("UnaryPrefixOperatorRepeated.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void UnaryPrefixOperatorRepeated_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnaryPrefixOperatorRepeated.CSharp9.cs", new CS.UnaryPrefixOperatorRepeated());
+            builderCS.AddPaths("UnaryPrefixOperatorRepeated.CSharp9.cs")
+                .WithTopLevelStatements()
+                .Verify();
+
 #endif
 
         [TestMethod]
         public void UnaryPrefixOperatorRepeated_CodeFix() =>
-            OldVerifier.VerifyCodeFix<CS.UnaryPrefixOperatorRepeatedCodeFix>(
-                @"TestCases\UnaryPrefixOperatorRepeated.cs",
-                @"TestCases\UnaryPrefixOperatorRepeated.Fixed.cs",
-                new CS.UnaryPrefixOperatorRepeated());
+            builderCS.WithCodeFix<UnaryPrefixOperatorRepeatedCodeFix>()
+                .AddPaths("UnaryPrefixOperatorRepeated.cs")
+                .WithCodeFixedPaths("UnaryPrefixOperatorRepeated.Fixed.cs")
+                .VerifyCodeFix();
 
         [TestMethod]
         public void UnaryPrefixOperatorRepeated_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\UnaryPrefixOperatorRepeated.vb", new VB.UnaryPrefixOperatorRepeated());
+            builderVB.AddPaths("UnaryPrefixOperatorRepeated.vb").Verify();
     }
 }

@@ -26,41 +26,47 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class UseShortCircuitingOperatorTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.UseShortCircuitingOperator>();
+        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.UseShortCircuitingOperator>();
+
         [TestMethod]
         public void UseShortCircuitingOperators_VisualBasic() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\UseShortCircuitingOperator.vb", new VB.UseShortCircuitingOperator());
+            builderVB.AddPaths("UseShortCircuitingOperator.vb").Verify();
 
         [TestMethod]
         public void UseShortCircuitingOperators_VisualBasic_CodeFix() =>
-            OldVerifier.VerifyCodeFix<VB.UseShortCircuitingOperatorCodeFix>(
-                @"TestCases\UseShortCircuitingOperator.vb",
-                @"TestCases\UseShortCircuitingOperator.Fixed.vb",
-                new VB.UseShortCircuitingOperator());
+            builderVB.WithCodeFix<VB.UseShortCircuitingOperatorCodeFix>()
+                .AddPaths("UseShortCircuitingOperator.vb")
+                .WithCodeFixedPaths("UseShortCircuitingOperator.Fixed.vb")
+                .VerifyCodeFix();
 
         [TestMethod]
         public void UseShortCircuitingOperators_CSharp() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\UseShortCircuitingOperator.cs", new CS.UseShortCircuitingOperator());
+            builderCS.AddPaths("UseShortCircuitingOperator.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void UseShortCircuitingOperators_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UseShortCircuitingOperator.CSharp9.cs",
-                                                      new CS.UseShortCircuitingOperator());
+            builderCS.AddPaths("UseShortCircuitingOperator.CSharp9.cs")
+                .WithTopLevelStatements()
+                .Verify();
 
         [TestMethod]
         public void UseShortCircuitingOperators_CSharp9_CodeFix() =>
-            OldVerifier.VerifyCodeFix<CS.UseShortCircuitingOperatorCodeFix>(
-                @"TestCases\UseShortCircuitingOperator.CSharp9.cs",
-                @"TestCases\UseShortCircuitingOperator.CSharp9.Fixed.cs",
-                new CS.UseShortCircuitingOperator(),
-                ParseOptionsHelper.FromCSharp9);
+            builderCS.WithCodeFix<CS.UseShortCircuitingOperatorCodeFix>()
+                .AddPaths("UseShortCircuitingOperator.CSharp9.cs")
+                .WithCodeFixedPaths("UseShortCircuitingOperator.CSharp9.Fixed.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .VerifyCodeFix();
+
 #endif
 
         [TestMethod]
         public void UseShortCircuitingOperators_CSharp_CodeFix() =>
-            OldVerifier.VerifyCodeFix<CS.UseShortCircuitingOperatorCodeFix>(
-                @"TestCases\UseShortCircuitingOperator.cs",
-                @"TestCases\UseShortCircuitingOperator.Fixed.cs",
-                new CS.UseShortCircuitingOperator());
+            builderCS.WithCodeFix<CS.UseShortCircuitingOperatorCodeFix>()
+                .AddPaths("UseShortCircuitingOperator.cs")
+                .WithCodeFixedPaths("UseShortCircuitingOperator.Fixed.cs")
+                .VerifyCodeFix();
     }
 }

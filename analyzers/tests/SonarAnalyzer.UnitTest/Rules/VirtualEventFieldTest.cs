@@ -25,29 +25,35 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class VirtualEventFieldTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<VirtualEventField>();
+
         [TestMethod]
         public void VirtualEventField() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\VirtualEventField.cs", new VirtualEventField());
+            builder.AddPaths("VirtualEventField.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void VirtualEventField_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\VirtualEventField.CSharp9.cs", new VirtualEventField());
+            builder.AddPaths("VirtualEventField.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
 
         [TestMethod]
         public void VirtualEventField_CSharp9_CodeFix() =>
-            OldVerifier.VerifyCodeFix<VirtualEventFieldCodeFix>(
-                @"TestCases\VirtualEventField.CSharp9.cs",
-                @"TestCases\VirtualEventField.CSharp9.Fixed.cs",
-                new VirtualEventField(),
-                ParseOptionsHelper.FromCSharp9);
+            builder.WithCodeFix<VirtualEventFieldCodeFix>()
+                .AddPaths("VirtualEventField.CSharp9.cs")
+                .WithCodeFixedPaths("VirtualEventField.CSharp9.Fixed.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .VerifyCodeFix();
+
 #endif
 
         [TestMethod]
         public void VirtualEventField_CodeFix() =>
-            OldVerifier.VerifyCodeFix<VirtualEventFieldCodeFix>(
-                @"TestCases\VirtualEventField.cs",
-                @"TestCases\VirtualEventField.Fixed.cs",
-                new VirtualEventField());
+            builder.WithCodeFix<VirtualEventFieldCodeFix>()
+                .AddPaths("VirtualEventField.cs")
+                .WithCodeFixedPaths("VirtualEventField.Fixed.cs")
+                .VerifyCodeFix();
     }
 }

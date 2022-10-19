@@ -25,13 +25,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ThreadStaticWithInitializerTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<ThreadStaticWithInitializer>();
+
         [TestMethod]
         public void ThreadStaticWithInitializer() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ThreadStaticWithInitializer.cs", new ThreadStaticWithInitializer());
+            builder.AddPaths("ThreadStaticWithInitializer.cs").Verify();
+
 #if NET
+
         [TestMethod]
         public void ThreadStaticWithInitializer_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ThreadStaticWithInitializer.CSharp9.cs", new ThreadStaticWithInitializer());
+            builder.AddPaths("ThreadStaticWithInitializer.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
+
 #endif
+
     }
 }

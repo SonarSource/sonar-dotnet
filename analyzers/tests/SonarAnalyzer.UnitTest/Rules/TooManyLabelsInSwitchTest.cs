@@ -27,14 +27,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class TooManyLabelsInSwitchTest
     {
         [TestMethod]
-        public void TooManyLabelsInSwitch() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\TooManyLabelsInSwitch.cs",
-                new CS.TooManyLabelsInSwitch { Maximum = 2 },
-                ParseOptionsHelper.FromCSharp8);
+        public void TooManyLabelsInSwitch_CSharp8() =>
+            new VerifierBuilder().AddAnalyzer(() => new CS.TooManyLabelsInSwitch() { Maximum = 2 })
+                .AddPaths("TooManyLabelsInSwitch.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
 
         [TestMethod]
         public void TooManyLabelsInSwitch_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\TooManyLabelsInSwitch.vb",
-                new VB.TooManyLabelsInSwitch { Maximum = 2 });
+            new VerifierBuilder().AddAnalyzer(() => new VB.TooManyLabelsInSwitch() { Maximum = 2 })
+                .AddPaths("TooManyLabelsInSwitch.vb")
+                .Verify();
     }
 }

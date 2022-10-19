@@ -55,6 +55,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Verify();
 
 #if NET
+
         [DataTestMethod]
         public void TestClassShouldHaveTestMethod_CSharp9() =>
             builder
@@ -64,5 +65,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .AddReferences(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion))
                 .Verify();
 #endif
+
     }
 }
