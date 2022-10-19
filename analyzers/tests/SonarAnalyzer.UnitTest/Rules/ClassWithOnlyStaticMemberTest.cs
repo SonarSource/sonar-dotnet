@@ -25,14 +25,27 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ClassWithOnlyStaticMemberTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<ClassWithOnlyStaticMember>();
+
         [TestMethod]
         public void ClassWithOnlyStaticMember() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ClassWithOnlyStaticMember.cs", new ClassWithOnlyStaticMember());
+            builder.AddPaths("ClassWithOnlyStaticMember.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void ClassWithOnlyStaticMember_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ClassWithOnlyStaticMember.CSharp9.cs", new ClassWithOnlyStaticMember());
+            builder.AddPaths("ClassWithOnlyStaticMember.CSharp9.cs")
+                .WithTopLevelStatements()
+                .Verify();
+
+        [TestMethod]
+        public void ClassWithOnlyStaticMember_CSharp11() =>
+            builder.AddPaths("ClassWithOnlyStaticMember.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
 #endif
+
     }
 }

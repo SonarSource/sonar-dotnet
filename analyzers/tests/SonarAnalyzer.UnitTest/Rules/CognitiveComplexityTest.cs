@@ -33,29 +33,37 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void CognitiveComplexity_CS() =>
-            builderCS.AddPaths(@"CognitiveComplexity.cs")
+            builderCS.AddPaths("CognitiveComplexity.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .Verify();
 
         [TestMethod]
         public void CognitiveComplexity_CS_LocalFunctions() =>
-        builderCS.AddPaths(@"CognitiveComplexity.LocalFunctions.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp8)
-            .Verify();
+            builderCS.AddPaths("CognitiveComplexity.LocalFunctions.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
 
 #if NET
+
         [TestMethod]
         public void CognitiveComplexity_CS_CSharp9() =>
-            builderCS.AddPaths(@"CognitiveComplexity.CSharp9.cs")
+            builderCS.AddPaths("CognitiveComplexity.CSharp9.cs")
                 .WithTopLevelStatements()
                 .Verify();
 
         [TestMethod]
         public void CognitiveComplexity_CS_CSharp10() =>
-            builderCS.AddPaths(@"CognitiveComplexity.CSharp10.cs")
+            builderCS.AddPaths("CognitiveComplexity.CSharp10.cs")
                 .WithLanguageVersion(LanguageVersion.CSharp10)
                 .WithConcurrentAnalysis(false)
                 .Verify();
+
+        [TestMethod]
+        public void CognitiveComplexity_CS_CSharp11() =>
+            builderCS.AddPaths("CognitiveComplexity.CSharp11.cs")
+                .WithLanguageVersion(LanguageVersion.CSharp11)
+                .Verify();
+
 #endif
 
         [TestMethod]

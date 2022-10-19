@@ -128,4 +128,15 @@ namespace Tests.Diagnostics
     {
         public static int Answer() => 42;
     }
+
+    public class TestClass // Noncompliant {{Add a 'protected' constructor or the 'static' keyword to the class declaration.}}
+    {
+        public static void SomeMethod() { }
+        public static string Prop { get; set; }
+    }
+
+    public class AnotherTestClass : TestClass // FN
+    {
+
+    }
 }

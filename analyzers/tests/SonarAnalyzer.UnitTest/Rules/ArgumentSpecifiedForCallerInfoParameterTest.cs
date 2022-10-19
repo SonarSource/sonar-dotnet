@@ -35,7 +35,15 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void ArgumentSpecifiedForCallerInfoParameter_CSharp10() =>
-            builder.AddPaths("ArgumentSpecifiedForCallerInfoParameter.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            builder.AddPaths("ArgumentSpecifiedForCallerInfoParameter.CSharp10.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .Verify();
+
+        [TestMethod]
+        public void ArgumentSpecifiedForCallerInfoParameter_CSharp11() =>
+            builder.AddPaths("ArgumentSpecifiedForCallerInfoParameter.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
 
 #endif
 
