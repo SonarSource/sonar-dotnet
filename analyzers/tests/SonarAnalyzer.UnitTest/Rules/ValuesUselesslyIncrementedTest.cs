@@ -32,6 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             builder.AddPaths("ValuesUselesslyIncremented.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void ValuesUselesslyIncremented_CSharp9() =>
             builder.AddPaths("ValuesUselesslyIncremented.CSharp9.cs").WithTopLevelStatements().Verify();
@@ -39,6 +40,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void ValuesUselesslyIncremented_CSharp10() =>
             builder.AddPaths("ValuesUselesslyIncremented.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+
 #endif
+
     }
 }

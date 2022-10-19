@@ -25,19 +25,27 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ThisShouldNotBeExposedFromConstructorsTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<ThisShouldNotBeExposedFromConstructors>();
+
         [TestMethod]
         public void ThisShouldNotBeExposedFromConstructors() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ThisShouldNotBeExposedFromConstructors.cs", new ThisShouldNotBeExposedFromConstructors());
+            builder.AddPaths("ThisShouldNotBeExposedFromConstructors.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void ThisShouldNotBeExposedFromConstructors_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ThisShouldNotBeExposedFromConstructors.CSharp9.cs", new ThisShouldNotBeExposedFromConstructors());
+            builder.AddPaths("ThisShouldNotBeExposedFromConstructors.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
 
         [TestMethod]
         public void ThisShouldNotBeExposedFromConstructors_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\ThisShouldNotBeExposedFromConstructors.CSharp10.cs", new ThisShouldNotBeExposedFromConstructors());
+            builder.AddPaths("ThisShouldNotBeExposedFromConstructors.CSharp10.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .Verify();
 
 #endif
+
     }
 }

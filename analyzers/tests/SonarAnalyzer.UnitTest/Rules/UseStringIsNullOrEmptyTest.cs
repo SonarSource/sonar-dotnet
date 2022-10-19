@@ -27,6 +27,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void UseStringNullOrEmpty() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\UseStringIsNullOrEmpty.cs", new UseStringIsNullOrEmpty());
+            new VerifierBuilder<UseStringIsNullOrEmpty>().AddPaths("UseStringIsNullOrEmpty.cs").Verify();
     }
 }

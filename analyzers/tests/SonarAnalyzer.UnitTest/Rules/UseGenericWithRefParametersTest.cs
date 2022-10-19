@@ -25,16 +25,19 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class UseGenericWithRefParametersTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<UseGenericWithRefParameters>();
+
         [TestMethod]
         public void UseGenericWithRefParameters() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\UseGenericWithRefParameters.cs",
-                new UseGenericWithRefParameters());
+            builder.AddPaths("UseGenericWithRefParameters.cs").Verify();
 
         [TestMethod]
         public void UseGenericWithRefParameters_InvalidCode() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builder.AddSnippet(@"
 public void (ref object o1)
 {
-}", new UseGenericWithRefParameters(), CompilationErrorBehavior.Ignore);
+}")
+                .WithErrorBehavior(CompilationErrorBehavior.Ignore)
+                .Verify();
     }
 }

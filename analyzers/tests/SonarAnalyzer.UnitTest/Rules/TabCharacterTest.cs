@@ -27,10 +27,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class TabCharacterTest
     {
         [TestMethod]
-        public void TabCharacter()
-        {
-            OldVerifier.VerifyAnalyzer(@"TestCases\TabCharacter.cs", new CS.TabCharacter());
-            OldVerifier.VerifyAnalyzer(@"TestCases\TabCharacter.vb", new VB.TabCharacter());
-        }
+        public void TabCharacter_CS() =>
+            new VerifierBuilder<CS.TabCharacter>().AddPaths("TabCharacter.cs").Verify();
+
+        [TestMethod]
+        public void TabCharacter_VB() =>
+            new VerifierBuilder<VB.TabCharacter>().AddPaths("TabCharacter.vb").Verify();
     }
 }

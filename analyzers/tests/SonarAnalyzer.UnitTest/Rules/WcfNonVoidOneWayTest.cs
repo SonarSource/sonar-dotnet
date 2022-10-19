@@ -28,14 +28,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void WcfNonVoidOneWay_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\WcfNonVoidOneWay.cs",
-                new CS.WcfNonVoidOneWay(),
-                MetadataReferenceFacade.SystemServiceModel);
+            new VerifierBuilder<CS.WcfNonVoidOneWay>().AddPaths("WcfNonVoidOneWay.cs")
+                .AddReferences(MetadataReferenceFacade.SystemServiceModel)
+                .Verify();
 
         [TestMethod]
         public void WcfNonVoidOneWay_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\WcfNonVoidOneWay.vb",
-                new VB.WcfNonVoidOneWay(),
-                MetadataReferenceFacade.SystemServiceModel);
+            new VerifierBuilder<VB.WcfNonVoidOneWay>().AddPaths("WcfNonVoidOneWay.vb")
+                .AddReferences(MetadataReferenceFacade.SystemServiceModel)
+                .Verify();
     }
 }

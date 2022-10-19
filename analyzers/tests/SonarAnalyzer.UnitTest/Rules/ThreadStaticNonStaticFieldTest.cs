@@ -25,32 +25,41 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ThreadStaticNonStaticFieldTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<ThreadStaticNonStaticField>();
+
         [TestMethod]
         public void ThreadStaticNonStaticField() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ThreadStaticNonStaticField.cs", new ThreadStaticNonStaticField());
+            builder.AddPaths("ThreadStaticNonStaticField.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void ThreadStaticNonStaticField_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ThreadStaticNonStaticField.CSharp9.cs", new ThreadStaticNonStaticField());
+            builder.AddPaths("ThreadStaticNonStaticField.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
 
         [TestMethod]
         public void ThreadStaticNonStaticField_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\ThreadStaticNonStaticField.CSharp10.cs", new ThreadStaticNonStaticField());
+            builder.AddPaths("ThreadStaticNonStaticField.CSharp10.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .Verify();
 
         [TestMethod]
         public void ThreadStaticNonStaticField_CodeFix_CSharp10() =>
-            OldVerifier.VerifyCodeFix<ThreadStaticNonStaticFieldCodeFix>(
-                @"TestCases\ThreadStaticNonStaticField.CSharp10.cs",
-                @"TestCases\ThreadStaticNonStaticField.CSharp10.Fixed.cs",
-                new ThreadStaticNonStaticField());
+            builder.WithCodeFix<ThreadStaticNonStaticFieldCodeFix>()
+                .AddPaths("ThreadStaticNonStaticField.CSharp10.cs")
+                .WithCodeFixedPaths("ThreadStaticNonStaticField.CSharp10.Fixed.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .VerifyCodeFix();
+
 #endif
 
         [TestMethod]
         public void ThreadStaticNonStaticField_CodeFix() =>
-            OldVerifier.VerifyCodeFix<ThreadStaticNonStaticFieldCodeFix>(
-                @"TestCases\ThreadStaticNonStaticField.cs",
-                @"TestCases\ThreadStaticNonStaticField.Fixed.cs",
-                new ThreadStaticNonStaticField());
+            builder.WithCodeFix<ThreadStaticNonStaticFieldCodeFix>()
+                .AddPaths("ThreadStaticNonStaticField.cs")
+                .WithCodeFixedPaths("ThreadStaticNonStaticField.Fixed.cs")
+                .VerifyCodeFix();
     }
 }

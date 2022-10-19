@@ -27,14 +27,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class UnconditionalJumpStatementTest
     {
         [TestMethod]
-        public void UnconditionalJumpStatement_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\UnconditionalJumpStatement.cs",
-                new CS.UnconditionalJumpStatement(),
-                ParseOptionsHelper.FromCSharp8);
+        public void UnconditionalJumpStatement_CSharp8() =>
+            new VerifierBuilder<CS.UnconditionalJumpStatement>().AddPaths("UnconditionalJumpStatement.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
 
         [TestMethod]
         public void UnconditionalJumpStatement_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\UnconditionalJumpStatement.vb",
-                new VB.UnconditionalJumpStatement());
+            new VerifierBuilder<VB.UnconditionalJumpStatement>().AddPaths("UnconditionalJumpStatement.vb").Verify();
     }
 }

@@ -27,6 +27,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void TryStatementsWithIdenticalCatchShouldBeMerged() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\TryStatementsWithIdenticalCatchShouldBeMerged.cs", new TryStatementsWithIdenticalCatchShouldBeMerged());
+            new VerifierBuilder<TryStatementsWithIdenticalCatchShouldBeMerged>().AddPaths("TryStatementsWithIdenticalCatchShouldBeMerged.cs").Verify();
     }
 }
