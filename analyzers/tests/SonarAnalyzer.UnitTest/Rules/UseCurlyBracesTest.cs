@@ -25,7 +25,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class UseCurlyBracesTest
     {
-        private readonly VerifierBuilder builder = new VerifierBuilder<UriShouldNotBeHardcoded>();
+        private readonly VerifierBuilder builder = new VerifierBuilder<UseCurlyBraces>();
 
         [TestMethod]
         public void UseCurlyBraces() =>
