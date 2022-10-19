@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         && IsDisposeMethodCalled(methodSymbol, c.SemanticModel, languageVersion)
                         && IsDisposableClassOrStruct(invocationTarget.ContainingType, languageVersion)
                         && !IsCalledInsideDispose(invocation, c.SemanticModel)
-                        && c.SemanticModel.GetDeclaredSymbol(invocation.GetTopMostContainingMethod())?.ContainingSymbol == invocationTarget.ContainingType)
+                        && (c.SemanticModel.GetDeclaredSymbol(invocation.GetTopMostContainingMethod())?.ContainingSymbol?.Equals(invocationTarget.ContainingType) ?? true) is true)
                     {
                         c.ReportIssue(Diagnostic.Create(Rule, name.GetLocation()));
                     }
@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.InvocationExpression);
         }
 
-        private bool InvocationTargetAndName(InvocationExpressionSyntax invocation, out ExpressionSyntax target, out ExpressionSyntax name)
+        private static bool InvocationTargetAndName(InvocationExpressionSyntax invocation, out ExpressionSyntax target, out ExpressionSyntax name)
         {
             switch (invocation.Expression)
             {

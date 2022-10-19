@@ -387,7 +387,6 @@ namespace SonarAnalyzer.Extensions
             // the root. For example, if we have `a?.b` and we're on the `.b`, this will give `a?.b`.  Similarly with
             // `a?.b?.c` if we're on either `.b` or `.c` this will result in `a?.b?.c` (i.e. the root of this CAE
             // sequence).
-
             var current = node.GetParentConditionalAccessExpression();
             while (current.IsParentKind(SyntaxKind.ConditionalAccessExpression, out ConditionalAccessExpressionSyntax conditional) &&
                 conditional.WhenNotNull == current)
