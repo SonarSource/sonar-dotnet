@@ -24,5 +24,16 @@ public class TestClass
 
         Task.Run(SomeClass.StaticVirtualMembersInInterfaces).GetAwaiter().GetResult(); // Compliant
     }
-}
 
+    [Obsolete(nameof(Thread.Sleep))] // Compliant
+    public async Task ExtendedScopeNameOfInAttribute_ThreadSleep()
+    {
+        await Task.Delay(42);
+    }
+
+    [Obsolete(nameof(Task<object>.Result))] // Compliant
+    public async Task ExtendedScopeNameOfInAttribute_TaskResult()
+    {
+        await Task.Delay(42);
+    }
+}
