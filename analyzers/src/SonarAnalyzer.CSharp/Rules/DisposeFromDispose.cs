@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;
                     var languageVersion = c.Compilation.GetLanguageVersion();
-                    if (invocation.Expression is MemberAccessExpressionSyntax { Expression: { } fieldCandidate, Name: { } name }
+                    if (InvocationTargetAndName(invocation, out var fieldCandidate, out var name)
                         && c.SemanticModel.GetSymbolInfo(fieldCandidate).Symbol is IFieldSymbol invocationTarget
                         && invocationTarget.IsNonStaticNonPublicDisposableField(languageVersion)
                         && c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
@@ -53,6 +53,25 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 },
                 SyntaxKind.InvocationExpression);
+        }
+
+        private bool InvocationTargetAndName(InvocationExpressionSyntax invocation, out ExpressionSyntax target, out ExpressionSyntax name)
+        {
+            switch (invocation.Expression)
+            {
+                case MemberAccessExpressionSyntax memberAccess:
+                    name = memberAccess.Name;
+                    target = memberAccess.Expression;
+                    return true;
+                case MemberBindingExpressionSyntax memberBinding:
+                    name = memberBinding.Name;
+                    target = memberBinding.GetParentConditionalAccessExpression().Expression;
+                    return true;
+                default:
+                    target = null;
+                    name = null;
+                    return false;
+            }
         }
 
         /// <summary>

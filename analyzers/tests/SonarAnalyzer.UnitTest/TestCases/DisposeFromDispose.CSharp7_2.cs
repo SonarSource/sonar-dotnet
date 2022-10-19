@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq.Expressions;
 
 namespace Tests.Diagnostics
 {
@@ -64,6 +65,39 @@ namespace Tests.Diagnostics
             }
 
             public void Dispose() { }
+        }
+
+        public void Dispose() { }
+    }
+
+    public class Conditional: IDisposable
+    {
+        private Stream fs;
+
+        private void MemberBinding()
+        {
+            fs?.Dispose();                       // Noncompliant
+        }
+
+        private void ThisMemberBinding()
+        {
+            this.fs?.Dispose();                  // Noncompliant
+        }
+
+        private void ThisAndMemberBinding()
+        {
+            this?.fs?.Dispose();                 // Noncompliant
+        }
+
+        private void Ternary()
+        {
+            (fs == null ? null : fs)?.Dispose(); // Compliant
+        }
+
+        private void InvocationWithoutName()
+        {
+            Func<Action> f = () => () => { };
+            f()();                               // Compliant
         }
 
         public void Dispose() { }

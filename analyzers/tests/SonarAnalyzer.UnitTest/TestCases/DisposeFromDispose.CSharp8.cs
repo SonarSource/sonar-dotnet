@@ -344,4 +344,26 @@ namespace Tests.Diagnostics
         }
     }
 
+    public class NullSupression: IDisposable
+    {
+        private Stream fs;
+
+        private void NullSupressionOperator()
+        {
+            fs!.Dispose();  // Noncompliant
+        }
+
+        private void NullSupressionAndNullCoalescing()
+        {
+            fs!?.Dispose(); // Noncompliant
+        }
+
+        private void ThisNullSupressionAndNullCoalescing()
+        {
+            this!.fs?.Dispose(); // Noncompliant
+        }
+
+        public void Dispose() { }
+
+    }
 }
