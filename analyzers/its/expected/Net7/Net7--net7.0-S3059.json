@@ -109,18 +109,27 @@
 {
 "uri":  "sources\Net7\Net7\features\ExtendedNameofScope.cs",
 "region":  {
-"startLine":  4,
+"startLine":  3,
 "startColumn":  20,
-"endLine":  4,
+"endLine":  3,
 "endColumn":  39
 }
 },
 {
 "uri":  "sources\Net7\Net7\features\ExtendedNameofScope.cs",
 "region":  {
-"startLine":  7,
+"startLine":  6,
 "startColumn":  9,
-"endLine":  7,
+"endLine":  6,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Net7\Net7\features\ExtendedNameofScope.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  9,
+"endLine":  12,
 "endColumn":  15
 }
 }
