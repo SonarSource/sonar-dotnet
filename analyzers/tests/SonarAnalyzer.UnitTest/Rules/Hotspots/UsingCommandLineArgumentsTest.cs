@@ -27,15 +27,19 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class UsingCommandLineArgumentsTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new CS.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled));
+        private readonly VerifierBuilder builderVB = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new VB.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled));
+
         [TestMethod]
         public void UsingCommandLineArguments_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingCommandLineArguments.cs",
-                                    new CS.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled));
+            builderCS.AddPaths("UsingCommandLineArguments.cs")
+                .Verify();
 
         [TestMethod]
         public void UsingCommandLineArguments_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\Hotspots\UsingCommandLineArguments.CSharp9.cs",
-                                                      new CS.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled));
+            builderCS.AddPaths("UsingCommandLineArguments.CSharp9.cs")
+                .WithTopLevelStatements()
+                .Verify();
 
         [TestMethod]
         public void UsingCommandLineArguments_CS_Partial()
@@ -59,8 +63,8 @@ partial class Program1
 
         [TestMethod]
         public void UsingCommandLineArguments_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingCommandLineArguments.vb",
-                                    new VB.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled));
+            builderVB.AddPaths("UsingCommandLineArguments.vb")
+                .Verify();
 
         [TestMethod]
         public void UsingCommandLineArguments_VB_Partial()

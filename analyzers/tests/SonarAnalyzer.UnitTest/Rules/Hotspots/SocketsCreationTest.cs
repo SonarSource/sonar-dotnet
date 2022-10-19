@@ -29,17 +29,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void SocketsCreation_CS() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\Hotspots\SocketsCreation.cs",
-                new CS.SocketsCreation(AnalyzerConfiguration.AlwaysEnabled),
-                GetAdditionalReferences());
+            new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new CS.SocketsCreation(AnalyzerConfiguration.AlwaysEnabled))
+                .AddPaths("SocketsCreation.cs")
+                .AddReferences(GetAdditionalReferences())
+                .Verify();
 
         [TestMethod]
         public void SocketsCreation_VB() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\Hotspots\SocketsCreation.vb",
-                new VB.SocketsCreation(AnalyzerConfiguration.AlwaysEnabled),
-                GetAdditionalReferences());
+            new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new VB.SocketsCreation(AnalyzerConfiguration.AlwaysEnabled))
+                .AddPaths("SocketsCreation.vb")
+                .AddReferences(GetAdditionalReferences())
+                .Verify();
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
             MetadataReferenceFacade.SystemNetSockets.Concat(MetadataReferenceFacade.SystemNetPrimitives);

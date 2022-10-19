@@ -29,15 +29,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ExpandingArchives_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\ExpandingArchives.cs",
-                                    new CS.ExpandingArchives(AnalyzerConfiguration.AlwaysEnabled),
-                                    AdditionalReferences);
+            new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new CS.ExpandingArchives(AnalyzerConfiguration.AlwaysEnabled))
+                .AddPaths("ExpandingArchives.cs")
+                .AddReferences(AdditionalReferences)
+                .Verify();
 
         [TestMethod]
         public void ExpandingArchives_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\ExpandingArchives.vb",
-                                    new VB.ExpandingArchives(AnalyzerConfiguration.AlwaysEnabled),
-                                    AdditionalReferences);
+            new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new VB.ExpandingArchives(AnalyzerConfiguration.AlwaysEnabled))
+            .AddPaths("ExpandingArchives.vb")
+            .AddReferences(AdditionalReferences)
+            .Verify();
 
         internal static IEnumerable<MetadataReference> AdditionalReferences =>
             MetadataReferenceFacade.SystemIoCompression;

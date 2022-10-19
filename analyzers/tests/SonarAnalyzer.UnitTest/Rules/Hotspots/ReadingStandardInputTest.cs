@@ -27,18 +27,25 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ReadingStandardInputTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new CS.ReadingStandardInput(AnalyzerConfiguration.AlwaysEnabled));
+        private readonly VerifierBuilder builderVB = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new VB.ReadingStandardInput(AnalyzerConfiguration.AlwaysEnabled));
+
         [TestMethod]
         public void ReadingStandardInput_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\ReadingStandardInput.cs", new CS.ReadingStandardInput(AnalyzerConfiguration.AlwaysEnabled));
+            builderCS.AddPaths("ReadingStandardInput.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void ReadingStandardInput_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\Hotspots\ReadingStandardInput.CSharp9.cs", new CS.ReadingStandardInput(AnalyzerConfiguration.AlwaysEnabled));
+            builderCS.AddPaths("ReadingStandardInput.CSharp9.cs")
+                .WithTopLevelStatements()
+                .Verify();
+
 #endif
 
         [TestMethod]
         public void ReadingStandardInput_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\ReadingStandardInput.vb", new VB.ReadingStandardInput(AnalyzerConfiguration.AlwaysEnabled));
+            builderVB.AddPaths("ReadingStandardInput.vb").Verify();
     }
 }

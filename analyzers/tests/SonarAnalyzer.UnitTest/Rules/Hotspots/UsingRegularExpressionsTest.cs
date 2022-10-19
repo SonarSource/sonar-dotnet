@@ -27,27 +27,37 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class UsingRegularExpressionsTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new CS.UsingRegularExpressions(AnalyzerConfiguration.AlwaysEnabled));
+        private readonly VerifierBuilder builderVB = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new VB.UsingRegularExpressions(AnalyzerConfiguration.AlwaysEnabled));
+
         [TestMethod]
         public void UsingRegularExpressions_CS() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\Hotspots\UsingRegularExpressions.cs",
-                new CS.UsingRegularExpressions(AnalyzerConfiguration.AlwaysEnabled),
-                MetadataReferenceFacade.RegularExpressions);
+            builderCS.AddPaths("UsingRegularExpressions.cs")
+                .AddReferences(MetadataReferenceFacade.RegularExpressions)
+                .Verify();
 
 #if NET
+
         [TestMethod]
         public void UsingRegularExpressions_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(
-                @"TestCases\Hotspots\UsingRegularExpressions.CSharp10.cs",
-                new CS.UsingRegularExpressions(AnalyzerConfiguration.AlwaysEnabled),
-                MetadataReferenceFacade.RegularExpressions);
+            builderCS.AddPaths("UsingRegularExpressions.CSharp10.cs")
+                .AddReferences(MetadataReferenceFacade.RegularExpressions)
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .Verify();
+
+        [TestMethod]
+        public void UsingRegularExpressions_CSharp11() =>
+            builderCS.AddPaths("UsingRegularExpressions.CSharp11.cs")
+                .AddReferences(MetadataReferenceFacade.RegularExpressions)
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
 #endif
 
         [TestMethod]
         public void UsingRegularExpressions_VB() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\Hotspots\UsingRegularExpressions.vb",
-                new VB.UsingRegularExpressions(AnalyzerConfiguration.AlwaysEnabled),
-                MetadataReferenceFacade.RegularExpressions);
+            builderVB.AddPaths("UsingRegularExpressions.vb")
+                .AddReferences(MetadataReferenceFacade.RegularExpressions)
+                .Verify();
     }
 }

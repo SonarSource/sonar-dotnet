@@ -30,6 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class CookieShouldBeHttpOnlyTest
     {
+
 #if NETFRAMEWORK
 
         private const string WebConfig = "Web.config";
@@ -78,6 +79,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 
 #else
+
         [TestMethod]
         public void CookiesShouldBeHttpOnly_NetCore() =>
             builder.AddPaths("CookieShouldBeHttpOnly_NetCore.cs")
@@ -103,6 +105,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences_NetCore() =>
             NuGetMetadataReference.MicrosoftAspNetCoreHttpFeatures(Constants.NuGetLatestVersion);
+
 #endif
 
         internal static IEnumerable<MetadataReference> AdditionalReferences =>

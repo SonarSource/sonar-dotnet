@@ -19,7 +19,7 @@
  */
 
 using SonarAnalyzer.Common;
-using SonarAnalyzer.Rules.CSharp;
+using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules.Hotspots
@@ -27,36 +27,45 @@ namespace SonarAnalyzer.UnitTest.Rules.Hotspots
     [TestClass]
     public class LooseFilePermissionsTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new CS.LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled));
+        private readonly VerifierBuilder builderVB = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new VB.LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled));
+
         [TestMethod]
         public void LooseFilePermissions_Windows_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\LooseFilePermissions.Windows.cs", new LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled));
+            builderCS.AddPaths("LooseFilePermissions.Windows.cs").Verify();
 
         [TestMethod]
         public void LooseFilePermissions_Windows_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\LooseFilePermissions.Windows.vb", new VB.LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled));
+            builderVB.AddPaths("LooseFilePermissions.Windows.vb").Verify();
 
 #if NET
+
         [TestMethod]
         public void LooseFilePermissions_Windows_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\Hotspots\LooseFilePermissions.Windows.CSharp9.cs", new LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled));
+            builderCS.AddPaths("LooseFilePermissions.Windows.CSharp9.cs")
+                .WithTopLevelStatements()
+                .Verify();
 
         [TestMethod]
         public void LooseFilePermissions_Windows_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\Hotspots\LooseFilePermissions.Windows.CSharp10.cs", new LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled));
+            builderCS.AddPaths("LooseFilePermissions.Windows.CSharp10.cs")
+                .WithTopLevelStatements()
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .Verify();
 
         [TestMethod]
         public void LooseFilePermissions_Unix_CS() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\Hotspots\LooseFilePermissions.Unix.cs",
-                new LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled),
-                NuGetMetadataReference.MonoPosixNetStandard());
+            builderCS.AddPaths("LooseFilePermissions.Unix.cs")
+                .AddReferences(NuGetMetadataReference.MonoPosixNetStandard())
+                .Verify();
 
         [TestMethod]
         public void LooseFilePermissions_Unix_VB() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\Hotspots\LooseFilePermissions.Unix.vb",
-                new VB.LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled),
-                NuGetMetadataReference.MonoPosixNetStandard());
+            builderVB.AddPaths("LooseFilePermissions.Unix.vb")
+                .AddReferences(NuGetMetadataReference.MonoPosixNetStandard())
+                .Verify();
+
 #endif
+
     }
 }
