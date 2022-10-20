@@ -32,6 +32,5 @@ namespace SonarAnalyzer.UnitTest.Rules
             builder.AddPaths("ConstructorOverridableCall.cs")
                 .WithConcurrentAnalysis(false)
                 .Verify();
-
     }
 }
