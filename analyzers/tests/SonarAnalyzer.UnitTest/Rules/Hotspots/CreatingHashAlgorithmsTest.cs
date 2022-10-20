@@ -64,6 +64,17 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #endif
 
+#if NET
+
+        [TestMethod]
+        public void CreatingHashAlgorithms_CSharp11() =>
+            builderCS.AddPaths("CreatingHashAlgorithms.CSharp11.cs")
+                .AddReferences(GetAdditionalReferences())
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
+#endif
+
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
             MetadataReferenceFacade.SystemSecurityCryptography;
     }

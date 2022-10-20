@@ -45,6 +45,13 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
                 .Verify();
 
+        [TestMethod]
+        public void CommandPath_CSharp11() =>
+            builderCS.AddPaths("CommandPath.CSharp11.cs")
+                .AddReferences(MetadataReferenceFacade.SystemDiagnosticsProcess)
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
 #endif
 
         [TestMethod]
