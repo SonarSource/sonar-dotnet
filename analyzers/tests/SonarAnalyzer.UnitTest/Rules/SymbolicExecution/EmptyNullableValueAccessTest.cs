@@ -54,5 +54,12 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #endif
 
+        [TestMethod]
+        public void EmptyNullableValueAccess_CSharp11() =>
+            sonarVerifier
+                .AddPaths("EmptyNullableValueAccess.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
     }
 }
+
