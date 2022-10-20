@@ -37,9 +37,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void ExpandingArchives_VB() =>
             new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new VB.ExpandingArchives(AnalyzerConfiguration.AlwaysEnabled))
-            .AddPaths("ExpandingArchives.vb")
-            .AddReferences(AdditionalReferences)
-            .Verify();
+                .AddPaths("ExpandingArchives.vb")
+                .AddReferences(AdditionalReferences)
+                .Verify();
 
         internal static IEnumerable<MetadataReference> AdditionalReferences =>
             MetadataReferenceFacade.SystemIoCompression;
