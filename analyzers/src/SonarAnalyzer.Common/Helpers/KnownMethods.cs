@@ -97,9 +97,6 @@ namespace SonarAnalyzer.Helpers
                 && methodSymbol.Parameters.Length == 0;
         }
 
-        public static IMethodSymbol IDisposableDispose(this Compilation compilation) =>
-            compilation.GetTypeByMetadataName("System.IDisposable")?.GetMembers(nameof(IDisposable.Dispose)).FirstOrDefault() as IMethodSymbol;
-
         public static bool IsIAsyncDisposableDisposeAsync(this IMethodSymbol methodSymbol)
         {
             const string explicitNameAsync = "System.IAsyncDisposable.DisposeAsync";

@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool FieldDisposedInDispose(SemanticModel model, IFieldSymbol invocationTarget)
         {
             if (invocationTarget.ContainingSymbol is ITypeSymbol container
-                && container.FindImplementationForInterfaceMember(model.Compilation.IDisposableDispose()) is IMethodSymbol dispose
+                && container.FindImplementationForInterfaceMember(IDisposableDisposeMethodSymbol(model)) is IMethodSymbol dispose
                 && FieldIsDisposedIn(model, invocationTarget, dispose))
             {
                 return true;
@@ -66,10 +66,19 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool FieldIsDisposedIn(SemanticModel model, IFieldSymbol invocationTarget, IMethodSymbol dispose) =>
             dispose.DeclaringSyntaxReferences
-            .SelectMany(x => x.GetSyntax().DescendantNodesAndSelf().OfType<InvocationExpressionSyntax>())
+            .SelectMany(x => x.GetSyntax().DescendantNodesAndSelf(x =>
+                !x.IsAnyKind(
+                    SyntaxKindEx.LocalFunctionStatement,
+                    SyntaxKind.ParenthesizedLambdaExpression,
+                    SyntaxKind.SimpleLambdaExpression,
+                    SyntaxKind.AnonymousMethodExpression))
+            .OfType<InvocationExpressionSyntax>())
             .Any(x => InvocationTargetAndName(x, out var target, out var name)
                 && name.NameIs(DisposeMethodName)
-                && (model.GetSymbolInfo(target).Symbol?.Equals(invocationTarget) ?? false));
+                && model.GetSymbolInfo(target).Symbol is IFieldSymbol field
+                && field.Equals(invocationTarget)
+                && model.GetSymbolInfo(x).Symbol is IMethodSymbol invokedDispose
+                && invokedDispose.Equals(field.Type.FindImplementationForInterfaceMember(IDisposableDisposeMethodSymbol(model))));
 
         private static bool FieldDeclaredInType(SemanticModel model, InvocationExpressionSyntax invocation, IFieldSymbol invocationTarget) =>
             model.GetDeclaredSymbol(invocation.GetTopMostContainingMethod())?.ContainingSymbol?.Equals(invocationTarget.ContainingType) ?? true;
@@ -116,6 +125,9 @@ namespace SonarAnalyzer.Rules.CSharp
             && semanticModel.Compilation.SpecialTypeMethod(SpecialType.System_IDisposable, DisposeMethodName) is { } disposeMethodSignature
             && (methodSymbol.Equals(methodSymbol.ContainingType.FindImplementationForInterfaceMember(disposeMethodSignature))
                 || methodSymbol.ContainingType.IsDisposableRefStruct(languageVersion));
+
+        private static IMethodSymbol IDisposableDisposeMethodSymbol(SemanticModel model)
+            => model.Compilation.GetTypeMethod(SpecialType.System_IDisposable, DisposeMethodName);
 
         private static bool IsMethodMatchingDisposeMethodName(IMethodSymbol enclosingMethodSymbol) =>
             enclosingMethodSymbol.Name == DisposeMethodName

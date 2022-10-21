@@ -116,11 +116,36 @@ namespace Tests.Diagnostics
         public void Dispose() { }
     }
 
-    public class DisposedInDisposed: IDisposable
+    public class DisposedInDispose: IDisposable
+    {
+        Stream fs;
+
+        public void Cleanup() => fs.Dispose(); // Compliant. fs is also disposed in Dispose
+        public void Dispose() => fs.Dispose();
+    }
+
+    public class DisposedInImplicitDispose : IDisposable
     {
         Stream fs;
 
         public void Cleanup() => fs.Dispose();
-        public void Dispose() => fs.Dispose();
+        void IDisposable.Dispose() => fs.Dispose();
+    }
+
+    public class OtherDisposedInDispose : IDisposable
+    {
+        Stream fs1;
+        Stream fs2;
+
+        public void Cleanup() => fs1.Dispose(); // Noncompliant
+        public void Dispose() => fs2.Dispose();
+    }
+
+    public class NotIDisposeDisposeInDispose : IDisposable
+    {
+        NotIDisposeDisposeInDispose d;
+        public void Dispose(bool someParam) { }   // other overload
+        public void Cleanup() => d.Dispose();     // Noncompliant
+        public void Dispose() => d.Dispose(true);
     }
 }

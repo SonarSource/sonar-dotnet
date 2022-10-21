@@ -69,8 +69,6 @@ namespace Tests.Diagnostics
             {
                 this.fs.Dispose(); //Noncompliant
             });
-
-            this.fs.Dispose();
         }
     }
     public class Class : IDisposable
