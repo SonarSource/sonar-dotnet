@@ -70,6 +70,19 @@ namespace Tests.Diagnostics
         public void Dispose() { }
     }
 
+    public class BaseClass : IDisposable
+    {
+        protected Stream stream;
+
+        public void Dispose() { }
+
+    }
+
+    public class Derived : BaseClass, IDisposable
+    {
+        public void Cleanup() => stream.Dispose(); // Compliant
+    }
+
     public class Conditional: IDisposable
     {
         private Stream fs;
