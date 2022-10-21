@@ -27,28 +27,28 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class CommandPathTest
     {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new CS.CommandPath(AnalyzerConfiguration.AlwaysEnabled));
-        private readonly VerifierBuilder builderVB = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new VB.CommandPath(AnalyzerConfiguration.AlwaysEnabled));
+        private readonly VerifierBuilder builderCS = new VerifierBuilder().WithBasePath("Hotspots")
+            .AddReferences(MetadataReferenceFacade.SystemDiagnosticsProcess)
+            .AddAnalyzer(() => new CS.CommandPath(AnalyzerConfiguration.AlwaysEnabled));
+        private readonly VerifierBuilder builderVB = new VerifierBuilder().WithBasePath("Hotspots")
+            .AddReferences(MetadataReferenceFacade.SystemDiagnosticsProcess)
+            .AddAnalyzer(() => new VB.CommandPath(AnalyzerConfiguration.AlwaysEnabled));
 
         [TestMethod]
         public void CommandPath_CS() =>
-            builderCS.AddPaths("CommandPath.cs")
-                .AddReferences(MetadataReferenceFacade.SystemDiagnosticsProcess)
-                .Verify();
+            builderCS.AddPaths("CommandPath.cs").Verify();
 
 #if NET
 
         [TestMethod]
         public void CommandPath_CSharp10() =>
             builderCS.AddPaths("CommandPath.CSharp10.cs")
-                .AddReferences(MetadataReferenceFacade.SystemDiagnosticsProcess)
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
                 .Verify();
 
         [TestMethod]
         public void CommandPath_CSharp11() =>
             builderCS.AddPaths("CommandPath.CSharp11.cs")
-                .AddReferences(MetadataReferenceFacade.SystemDiagnosticsProcess)
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
                 .Verify();
 
@@ -56,8 +56,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void CommandPath_VB() =>
-            builderVB.AddPaths("CommandPath.vb")
-                .AddReferences(MetadataReferenceFacade.SystemDiagnosticsProcess)
-                .Verify();
+            builderVB.AddPaths("CommandPath.vb").Verify();
     }
 }
