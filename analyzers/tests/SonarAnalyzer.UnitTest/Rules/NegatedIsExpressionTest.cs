@@ -25,15 +25,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class NegatedIsExpressionTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<NegatedIsExpression>();
+
         [TestMethod]
         public void NegatedIsExpression() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\NegatedIsExpression.vb", new NegatedIsExpression());
+            builder.AddPaths("NegatedIsExpression.vb").Verify();
 
         [TestMethod]
         public void NegatedIsExpression_CodeFix() =>
-            OldVerifier.VerifyCodeFix<NegatedIsExpressionCodeFix>(
-                @"TestCases\NegatedIsExpression.vb",
-                @"TestCases\NegatedIsExpression.Fixed.vb",
-                new NegatedIsExpression());
+            builder.WithCodeFix<NegatedIsExpressionCodeFix>()
+                .AddPaths("NegatedIsExpression.vb")
+                .WithCodeFixedPaths("NegatedIsExpression.Fixed.vb")
+                .VerifyCodeFix();
     }
 }

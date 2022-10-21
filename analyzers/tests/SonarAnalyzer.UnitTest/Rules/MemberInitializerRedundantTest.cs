@@ -26,50 +26,58 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class MemberInitializerRedundantTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<MemberInitializerRedundant>();
+        private readonly VerifierBuilder builderSonarCfg = new VerifierBuilder().AddAnalyzer(() => new MemberInitializerRedundant(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg));
+
         [TestMethod]
         public void MemberInitializerRedundant_RoslynCfg() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\MemberInitializerRedundant.cs", new MemberInitializerRedundant(), ParseOptionsHelper.FromCSharp8);
+            builder.AddPaths(@"MemberInitializerRedundant.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
         [TestMethod]
         public void MemberInitializerRedundant_RoslynCfg_FlowCaptureOperationNotSupported() =>
-            OldVerifier.VerifyNoIssueReported(@"TestCases\MemberInitializerRedundant.RoslynCfg.FlowCaptureBug.cs", new MemberInitializerRedundant(), ParseOptionsHelper.FromCSharp8);
+            builder.AddPaths(@"MemberInitializerRedundant.RoslynCfg.FlowCaptureBug.cs").WithOptions(ParseOptionsHelper.FromCSharp8).VerifyNoIssueReported();
 
         [TestMethod]
         public void MemberInitializerRedundant_SonarCfg() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\MemberInitializerRedundant.cs", new MemberInitializerRedundant(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg), ParseOptionsHelper.FromCSharp8);
+            builderSonarCfg.AddPaths(@"MemberInitializerRedundant.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
         [TestMethod]
         public void MemberInitializerRedundant_CodeFix() =>
-            OldVerifier.VerifyCodeFix<MemberInitializedToDefaultCodeFix>(
-                @"TestCases\MemberInitializerRedundant.cs",
-                @"TestCases\MemberInitializerRedundant.Fixed.cs",
-                new MemberInitializerRedundant());
+            builder
+                .WithCodeFix<MemberInitializedToDefaultCodeFix>()
+                .AddPaths("MemberInitializerRedundant.cs")
+                .WithCodeFixedPaths("MemberInitializerRedundant.Fixed.cs")
+                .VerifyCodeFix();
 
 #if NET
+
         [TestMethod]
         public void MemberInitializerRedundant_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MemberInitializerRedundant.CSharp9.cs", new MemberInitializerRedundant());
+            builder.AddPaths("MemberInitializerRedundant.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
         [TestMethod]
         public void MemberInitializerRedundant_CSharp9_CodeFix() =>
-            OldVerifier.VerifyCodeFix<MemberInitializedToDefaultCodeFix>(
-                @"TestCases\MemberInitializerRedundant.CSharp9.cs",
-                @"TestCases\MemberInitializerRedundant.CSharp9.Fixed.cs",
-                new MemberInitializerRedundant(),
-                ParseOptionsHelper.FromCSharp9);
+            builder
+                .WithCodeFix<MemberInitializedToDefaultCodeFix>()
+                .AddPaths("MemberInitializerRedundant.CSharp9.cs")
+                .WithCodeFixedPaths("MemberInitializerRedundant.CSharp9.Fixed.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .VerifyCodeFix();
 
         [TestMethod]
         public void MemberInitializerRedundant_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\MemberInitializerRedundant.CSharp10.cs", new MemberInitializerRedundant());
+            builder.AddPaths("MemberInitializerRedundant.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
         [TestMethod]
         public void MemberInitializerRedundant_CSharp10_CodeFix() =>
-            OldVerifier.VerifyCodeFix<MemberInitializedToDefaultCodeFix>(
-                @"TestCases\MemberInitializerRedundant.CSharp10.cs",
-                @"TestCases\MemberInitializerRedundant.CSharp10.Fixed.cs",
-                new MemberInitializerRedundant(),
-                ParseOptionsHelper.FromCSharp10);
+            builder
+                .WithCodeFix<MemberInitializedToDefaultCodeFix>()
+                .AddPaths("MemberInitializerRedundant.CSharp10.cs")
+                .WithCodeFixedPaths("MemberInitializerRedundant.CSharp10.Fixed.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .VerifyCodeFix();
 
 #endif
+
     }
 }

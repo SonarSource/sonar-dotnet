@@ -25,14 +25,19 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class NestedCodeBlockTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<NestedCodeBlock>();
+
         [TestMethod]
         public void NestedCodeBlock() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\NestedCodeBlock.cs", new NestedCodeBlock());
+            builder.AddPaths("NestedCodeBlock.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void NestedCodeBlock_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\NestedCodeBlock.CSharp9.cs", new NestedCodeBlock());
+            builder.AddPaths("NestedCodeBlock.CSharp9.cs").WithTopLevelStatements().Verify();
+
 #endif
+
     }
 }

@@ -25,21 +25,25 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class OptionalRefOutParameterTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<OptionalRefOutParameter>();
+
         [TestMethod]
         public void OptionalRefOutParameter() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\OptionalRefOutParameter.cs", new OptionalRefOutParameter());
+            builder.AddPaths("OptionalRefOutParameter.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void OptionalRefOutParameter_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\OptionalRefOutParameter.CSharp9.cs", new OptionalRefOutParameter());
+            builder.AddPaths("OptionalRefOutParameter.CSharp9.cs").WithTopLevelStatements().Verify();
+
 #endif
 
         [TestMethod]
         public void OptionalRefOutParameter_CodeFix() =>
-            OldVerifier.VerifyCodeFix<OptionalRefOutParameterCodeFix>(
-                @"TestCases\OptionalRefOutParameter.cs",
-                @"TestCases\OptionalRefOutParameter.Fixed.cs",
-                new OptionalRefOutParameter());
+            builder.WithCodeFix<OptionalRefOutParameterCodeFix>()
+                .AddPaths("OptionalRefOutParameter.cs")
+                .WithCodeFixedPaths("OptionalRefOutParameter.Fixed.cs")
+                .VerifyCodeFix();
     }
 }

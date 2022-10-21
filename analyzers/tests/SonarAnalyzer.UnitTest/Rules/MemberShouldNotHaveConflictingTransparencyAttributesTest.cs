@@ -25,18 +25,23 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class MemberShouldNotHaveConflictingTransparencyAttributesTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<MemberShouldNotHaveConflictingTransparencyAttributes>();
+
         [TestMethod]
         public void MemberShouldNotHaveConflictingTransparencyAttributes() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\MemberShouldNotHaveConflictingTransparencyAttributes.cs", new MemberShouldNotHaveConflictingTransparencyAttributes());
+            builder.AddPaths("MemberShouldNotHaveConflictingTransparencyAttributes.cs").Verify();
 
         [TestMethod]
         public void MemberShouldNotHaveConflictingTransparencyAttributes_AssemblyLevel() =>
-            OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\MemberShouldNotHaveConflictingTransparencyAttributes_AssemblyLevel.cs", new MemberShouldNotHaveConflictingTransparencyAttributes());
+            builder.AddPaths("MemberShouldNotHaveConflictingTransparencyAttributes_AssemblyLevel.cs").WithConcurrentAnalysis(false).Verify();
 
 #if NET
+
         [TestMethod]
         public void MemberShouldNotHaveConflictingTransparencyAttributes_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\MemberShouldNotHaveConflictingTransparencyAttributes.CSharp10.cs", new MemberShouldNotHaveConflictingTransparencyAttributes());
+            builder.AddPaths("MemberShouldNotHaveConflictingTransparencyAttributes.CSharp10.cs").WithConcurrentAnalysis(false).WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+
 #endif
+
     }
 }

@@ -25,17 +25,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class NonFlagsEnumInBitwiseOperationTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<NonFlagsEnumInBitwiseOperation>();
+
         [TestMethod]
         public void NonFlagsEnumInBitwiseOperation() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\NonFlagsEnumInBitwiseOperation.cs",
-                                    new NonFlagsEnumInBitwiseOperation(),
-                                    MetadataReferenceFacade.SystemComponentModelPrimitives);
+            builder.AddPaths("NonFlagsEnumInBitwiseOperation.cs").AddReferences(MetadataReferenceFacade.SystemComponentModelPrimitives).Verify();
 
         [TestMethod]
         public void NonFlagsEnumInBitwiseOperation_CodeFix() =>
-            OldVerifier.VerifyCodeFix<NonFlagsEnumInBitwiseOperationCodeFix>(
-                @"TestCases\NonFlagsEnumInBitwiseOperation.cs",
-                @"TestCases\NonFlagsEnumInBitwiseOperation.Fixed.cs",
-                new NonFlagsEnumInBitwiseOperation());
+            builder.WithCodeFix<NonFlagsEnumInBitwiseOperationCodeFix>()
+                .AddPaths("NonFlagsEnumInBitwiseOperation.cs")
+                .WithCodeFixedPaths("NonFlagsEnumInBitwiseOperation.Fixed.cs")
+                .VerifyCodeFix();
     }
 }

@@ -27,6 +27,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void RequireAttributeUsageAttribute() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\RequireAttributeUsageAttribute.cs", new RequireAttributeUsageAttribute());
+            new VerifierBuilder<RequireAttributeUsageAttribute>().AddPaths(@"RequireAttributeUsageAttribute.cs").Verify();
     }
 }

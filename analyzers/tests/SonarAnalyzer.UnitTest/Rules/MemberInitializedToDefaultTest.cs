@@ -25,21 +25,26 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class MemberInitializedToDefaultTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<MemberInitializedToDefault>();
+
         [TestMethod]
         public void MemberInitializedToDefault() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\MemberInitializedToDefault.cs", new MemberInitializedToDefault());
+            builder.AddPaths(@"MemberInitializedToDefault.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void MemberInitializedToDefault_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MemberInitializedToDefault.CSharp9.cs", new MemberInitializedToDefault());
+            builder.AddPaths(@"MemberInitializedToDefault.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+
 #endif
 
         [TestMethod]
         public void MemberInitializedToDefault_CodeFix() =>
-            OldVerifier.VerifyCodeFix<MemberInitializedToDefaultCodeFix>(
-                @"TestCases\MemberInitializedToDefault.cs",
-                @"TestCases\MemberInitializedToDefault.Fixed.cs",
-                new MemberInitializedToDefault());
+            builder
+                .WithCodeFix<MemberInitializedToDefaultCodeFix>()
+                .AddPaths("MemberInitializedToDefault.cs")
+                .WithCodeFixedPaths("MemberInitializedToDefault.Fixed.cs")
+                .VerifyCodeFix();
     }
 }

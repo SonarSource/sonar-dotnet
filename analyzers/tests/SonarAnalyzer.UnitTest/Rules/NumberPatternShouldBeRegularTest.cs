@@ -25,21 +25,22 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class NumberPatternShouldBeRegularTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<NumberPatternShouldBeRegular>();
+
         [TestMethod]
         public void NumberPatternShouldBeRegular_BeforeCSharp7() =>
-            OldVerifier.VerifyNoIssueReported(@"TestCases\NumberPatternShouldBeRegular.cs",
-                                           new NumberPatternShouldBeRegular(),
-                                           ParseOptionsHelper.BeforeCSharp7,
-                                           CompilationErrorBehavior.Ignore);
+            builder.AddPaths("NumberPatternShouldBeRegular.cs").WithOptions(ParseOptionsHelper.BeforeCSharp7).WithErrorBehavior(CompilationErrorBehavior.Ignore).VerifyNoIssueReported();
 
         [TestMethod]
         public void NumberPatternShouldBeRegular_FromCSharp7() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\NumberPatternShouldBeRegular.cs", new NumberPatternShouldBeRegular(), ParseOptionsHelper.FromCSharp7);
+            builder.AddPaths("NumberPatternShouldBeRegular.cs").WithOptions(ParseOptionsHelper.FromCSharp7).Verify();
 
 #if NET
+
         [TestMethod]
         public void NumberPatternShouldBeRegular_FromCSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\NumberPatternShouldBeRegular.CSharp9.cs", new NumberPatternShouldBeRegular());
+            builder.AddPaths("NumberPatternShouldBeRegular.CSharp9.cs").WithTopLevelStatements().Verify();
+
 #endif
 
         [DataTestMethod]

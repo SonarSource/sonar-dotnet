@@ -25,24 +25,24 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class MethodOverrideAddsParamsTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<MethodOverrideAddsParams>();
+
         [TestMethod]
         public void MethodOverrideAddsParams() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\MethodOverrideAddsParams.cs",
-                new MethodOverrideAddsParams(),
-                ParseOptionsHelper.FromCSharp8,
-                MetadataReferenceFacade.NETStandard21);
+            builder.AddPaths("MethodOverrideAddsParams.cs").WithOptions(ParseOptionsHelper.FromCSharp8).AddReferences(MetadataReferenceFacade.NETStandard21).Verify();
 
 #if NET
         [TestMethod]
         public void MethodOverrideAddsParams_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodOverrideAddsParams.CSharp9.cs", new MethodOverrideAddsParams());
+            builder.AddPaths("MethodOverrideAddsParams.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 #endif
 
         [TestMethod]
         public void MethodOverrideAddsParams_CodeFix() =>
-            OldVerifier.VerifyCodeFix<MethodOverrideAddsParamsCodeFix>(
-                @"TestCases\MethodOverrideAddsParams.cs",
-                @"TestCases\MethodOverrideAddsParams.Fixed.cs",
-                new MethodOverrideAddsParams());
+            builder
+                .WithCodeFix<MethodOverrideAddsParamsCodeFix>()
+                .AddPaths("MethodOverrideAddsParams.cs")
+                .WithCodeFixedPaths("MethodOverrideAddsParams.Fixed.cs")
+                .VerifyCodeFix();
     }
 }

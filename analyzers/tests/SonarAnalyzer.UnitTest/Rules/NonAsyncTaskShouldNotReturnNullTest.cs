@@ -28,13 +28,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void NonAsyncTaskShouldNotReturnNull_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\NonAsyncTaskShouldNotReturnNull.cs",
-                new CS.NonAsyncTaskShouldNotReturnNull(),
-                ParseOptionsHelper.FromCSharp8);
+            new VerifierBuilder<CS.NonAsyncTaskShouldNotReturnNull>().AddPaths("NonAsyncTaskShouldNotReturnNull.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
         [TestMethod]
         public void NonAsyncTaskShouldNotReturnNull_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\NonAsyncTaskShouldNotReturnNull.vb",
-                new VB.NonAsyncTaskShouldNotReturnNull());
+            new VerifierBuilder<VB.NonAsyncTaskShouldNotReturnNull>().AddPaths("NonAsyncTaskShouldNotReturnNull.vb").Verify();
     }
 }

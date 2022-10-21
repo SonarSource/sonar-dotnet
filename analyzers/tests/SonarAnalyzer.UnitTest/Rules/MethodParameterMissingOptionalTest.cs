@@ -25,21 +25,26 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class MethodParameterMissingOptionalTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<MethodParameterMissingOptional>();
+
         [TestMethod]
         public void MethodParameterMissingOptional() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\MethodParameterMissingOptional.cs", new MethodParameterMissingOptional());
+            builder.AddPaths("MethodParameterMissingOptional.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void MethodParameterMissingOptional_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\MethodParameterMissingOptional.CSharp9.cs", new MethodParameterMissingOptional());
+            builder.AddPaths("MethodParameterMissingOptional.CSharp9.cs").WithTopLevelStatements().Verify();
+
 #endif
 
         [TestMethod]
         public void MethodParameterMissingOptional_CodeFix() =>
-            OldVerifier.VerifyCodeFix<MethodParameterMissingOptionalCodeFix>(
-                @"TestCases\MethodParameterMissingOptional.cs",
-                @"TestCases\MethodParameterMissingOptional.Fixed.cs",
-                new MethodParameterMissingOptional());
+            builder
+                .WithCodeFix<MethodParameterMissingOptionalCodeFix>()
+                .AddPaths("MethodParameterMissingOptional.cs")
+                .WithCodeFixedPaths("MethodParameterMissingOptional.Fixed.cs")
+                .VerifyCodeFix();
     }
 }

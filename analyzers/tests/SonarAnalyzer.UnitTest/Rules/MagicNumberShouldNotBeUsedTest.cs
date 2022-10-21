@@ -27,6 +27,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void MagicNumberShouldNotBeUsed() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\MagicNumberShouldNotBeUsed.cs", new MagicNumberShouldNotBeUsed());
+            new VerifierBuilder<MagicNumberShouldNotBeUsed>().AddPaths(@"MagicNumberShouldNotBeUsed.cs").Verify();
     }
 }

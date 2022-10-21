@@ -26,28 +26,31 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class MultipleVariableDeclarationTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.MultipleVariableDeclaration>();
+        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.MultipleVariableDeclaration>();
+
         [TestMethod]
         public void MultipleVariableDeclaration_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\MultipleVariableDeclaration.cs", new CS.MultipleVariableDeclaration());
+            builderCS.AddPaths("MultipleVariableDeclaration.cs").Verify();
 
         [TestMethod]
         public void MultipleVariableDeclaration_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\MultipleVariableDeclaration.vb", new VB.MultipleVariableDeclaration());
+            builderVB.AddPaths("MultipleVariableDeclaration.vb").Verify();
 
         [TestMethod]
         public void MultipleVariableDeclaration_CodeFix_CS() =>
-            OldVerifier.VerifyCodeFix<CS.MultipleVariableDeclarationCodeFix>(
-                @"TestCases\MultipleVariableDeclaration.cs",
-                @"TestCases\MultipleVariableDeclaration.Fixed.cs",
-                new CS.MultipleVariableDeclaration(),
-                SonarAnalyzer.Rules.Common.MultipleVariableDeclarationCodeFixBase.Title);
+            builderCS.WithCodeFix<CS.MultipleVariableDeclarationCodeFix>()
+                .AddPaths("MultipleVariableDeclaration.cs")
+                .WithCodeFixedPaths("MultipleVariableDeclaration.Fixed.cs")
+                .WithCodeFixTitle(SonarAnalyzer.Rules.Common.MultipleVariableDeclarationCodeFixBase.Title)
+                .VerifyCodeFix();
 
         [TestMethod]
         public void MultipleVariableDeclaration_CodeFix_VB() =>
-            OldVerifier.VerifyCodeFix<VB.MultipleVariableDeclarationCodeFix>(
-                @"TestCases\MultipleVariableDeclaration.vb",
-                @"TestCases\MultipleVariableDeclaration.Fixed.vb",
-                new VB.MultipleVariableDeclaration(),
-                SonarAnalyzer.Rules.Common.MultipleVariableDeclarationCodeFixBase.Title);
+            builderVB.WithCodeFix<VB.MultipleVariableDeclarationCodeFix>()
+                .AddPaths("MultipleVariableDeclaration.vb")
+                .WithCodeFixedPaths("MultipleVariableDeclaration.Fixed.vb")
+                .WithCodeFixTitle(SonarAnalyzer.Rules.Common.MultipleVariableDeclarationCodeFixBase.Title)
+                .VerifyCodeFix();
     }
 }
