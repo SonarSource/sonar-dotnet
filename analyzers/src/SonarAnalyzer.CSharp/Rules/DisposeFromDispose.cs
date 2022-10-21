@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.InvocationExpression);
         }
 
-        private static bool InvocationTargetAndName(InvocationExpressionSyntax invocation, out ExpressionSyntax target, out ExpressionSyntax name)
+        private static bool InvocationTargetAndName(InvocationExpressionSyntax invocation, out ExpressionSyntax target, out SimpleNameSyntax name)
         {
             switch (invocation.Expression)
             {
