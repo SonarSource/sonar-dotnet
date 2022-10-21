@@ -204,7 +204,11 @@ Note that it is not possible to have multiple precise/column locations on a sing
 
 ### Compilation Errors
 
-Will mark the line as the location of a compilation error. The error code can also be specified if needed, as well as some comments for readability.
+Will mark the line as the location of a compilation error. 
+
+This is useful to test a code snippet that cannot be compiled, as it is usually the case inside an IDE/Editor.
+
+To increase readability, the error code as well as some comments can be specified. These are ignored by the verification process.
 
 ```csharp
     string x = 2; // Error 
