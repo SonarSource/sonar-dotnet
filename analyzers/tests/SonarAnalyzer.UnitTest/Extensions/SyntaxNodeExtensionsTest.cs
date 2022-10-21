@@ -626,6 +626,7 @@ End Class";
         [DataRow("A?.$$M()?.B", "A?.M()?.B", "A")]
         [DataRow("A[0]?.M()?.$$B", ".M()?.B", ".M()")]
         [DataRow("A[0]?.M().B?.$$C", ".M().B?.C", ".M().B")]
+        [DataRow("A[0]?.$$M().B?.C", "A[0]?.M().B?.C", "A[0]")]
         [DataRow("A?.$$B.C", "A?.B.C", "A")]
         [DataRow("A?.$$B?.C", "A?.B?.C", "A")]
         public void GetParentConditionalAccessExpression(string expression, string parent, string parentExpression)
@@ -649,7 +650,7 @@ public class X
             code = code.Replace("$$", string.Empty);
             var (tree, _) = TestHelper.CompileCS(code);
             var node = tree.GetRoot().FindNode(new TextSpan(position, 0));
-            var parentConditional= SyntaxNodeExtensionsCS.GetParentConditionalAccessExpression(node);
+            var parentConditional = SyntaxNodeExtensionsCS.GetParentConditionalAccessExpression(node);
             parentConditional.ToString().Should().Be(parent);
             parentConditional.Expression.ToString().Should().Be(parentExpression);
         }
