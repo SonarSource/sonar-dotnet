@@ -211,7 +211,7 @@ stages:
         clean: all
       # This job runs the .Net code analysis and uploads to SonarCloud the test results and coverage reports generated
       # in previous jobs.
-      condition: always()
+      condition: eq(dependencies.runUnitTestsDotNet.result, 'Succeeded')
       dependsOn:
       - runUnitTestsDotNet
       steps:
