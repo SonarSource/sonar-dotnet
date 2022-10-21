@@ -53,7 +53,7 @@ In general, it is best to run commands from the Visual Studio Developer Command 
 
 You can run the Unit Tests via the Test Explorer of Visual Studio or using `.\scripts\build\dev-build.ps1 -test`
 
-If you want to specify custom expected issues or errors in a testcase, please consult the [IssueLocationCollector ](issue-location-collector.md) documentation.
+To understand how the Unit Test Infrastructure works, click [here](unit-test-infrastructure.md).
 
 ### Integration Tests
 
