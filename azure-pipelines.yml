@@ -183,21 +183,18 @@ stages:
         displayName: '.Net UTs'
 
       - task: PublishPipelineArtifact@1
-        condition: always()
         displayName: 'Save coverage files'
         inputs:
           path: '$(UnitTestProjectPath)\coverage'
           artifact: $(CoverageArtifactName)
 
       - task: PublishPipelineArtifact@1
-        condition: always()
         displayName: 'Save test results files'
         inputs:
           path: '$(UnitTestResultsPath)'
           artifact: $(TestResultsArtifactName)
 
       - task: PublishTestResults@2
-        condition: always()
         displayName: 'Publish test results'
         inputs:
           testRunner: VSTest
