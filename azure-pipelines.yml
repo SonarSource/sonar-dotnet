@@ -13,7 +13,7 @@ trigger:
 pool: '.Net Bubble - GCP'
 
 variables:
-  - group: sonar-dotnet-variables-tmp
+  - group: sonar-dotnet-variables
   - group: sonarsource-build-variables
   # To make sure we don`t use MsBuild 17.
   - name: MsBuildPath
