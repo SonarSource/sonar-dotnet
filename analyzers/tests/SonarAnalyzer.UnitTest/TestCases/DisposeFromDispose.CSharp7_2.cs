@@ -94,25 +94,33 @@ namespace Tests.Diagnostics
 
         private void ThisMemberBinding()
         {
-            this.fs?.Dispose();                  // Noncompliant
+            this.fs?.Dispose();                        // Noncompliant
         }
 
         private void ThisAndMemberBinding()
         {
-            this?.fs?.Dispose();                 // Noncompliant
+            this?.fs?.Dispose();                       // Noncompliant
         }
 
         private void Ternary()
         {
-            (fs == null ? null : fs)?.Dispose(); // Compliant
+            (fs == null ? null : fs)?.Dispose();       // Compliant
         }
 
         private void InvocationWithoutName()
         {
-            Func<Action> f = () => () => { };
-            f()();                               // Compliant
+            Func<Action> f = () => () => fs.Dispose(); // Noncompliant
+            f()();                                     // Compliant
         }
 
         public void Dispose() { }
+    }
+
+    public class DisposedInDisposed: IDisposable
+    {
+        Stream fs;
+
+        public void Cleanup() => fs.Dispose();
+        public void Dispose() => fs.Dispose();
     }
 }

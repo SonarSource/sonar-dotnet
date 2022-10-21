@@ -33,27 +33,46 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterNodeAction(
-                c =>
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterNodeAction(c =>
+            {
+                var invocation = (InvocationExpressionSyntax)c.Node;
+                var languageVersion = c.Compilation.GetLanguageVersion();
+                if (InvocationTargetAndName(invocation, out var fieldCandidate, out var name)
+                    && c.SemanticModel.GetSymbolInfo(fieldCandidate).Symbol is IFieldSymbol invocationTarget
+                    && invocationTarget.IsNonStaticNonPublicDisposableField(languageVersion)
+                    && c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
+                    && IsDisposeMethodCalled(methodSymbol, c.SemanticModel, languageVersion)
+                    && IsDisposableClassOrStruct(invocationTarget.ContainingType, languageVersion)
+                    && !IsCalledInsideDispose(invocation, c.SemanticModel)
+                    && FieldDeclaredInType(c.SemanticModel, invocation, invocationTarget)
+                    && !FieldDisposedInDispose(c.SemanticModel, invocationTarget))
                 {
-                    var invocation = (InvocationExpressionSyntax)c.Node;
-                    var languageVersion = c.Compilation.GetLanguageVersion();
-                    if (InvocationTargetAndName(invocation, out var fieldCandidate, out var name)
-                        && c.SemanticModel.GetSymbolInfo(fieldCandidate).Symbol is IFieldSymbol invocationTarget
-                        && invocationTarget.IsNonStaticNonPublicDisposableField(languageVersion)
-                        && c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
-                        && IsDisposeMethodCalled(methodSymbol, c.SemanticModel, languageVersion)
-                        && IsDisposableClassOrStruct(invocationTarget.ContainingType, languageVersion)
-                        && !IsCalledInsideDispose(invocation, c.SemanticModel)
-                        && (c.SemanticModel.GetDeclaredSymbol(invocation.GetTopMostContainingMethod())?.ContainingSymbol?.Equals(invocationTarget.ContainingType) ?? true) is true)
-                    {
-                        c.ReportIssue(Diagnostic.Create(Rule, name.GetLocation()));
-                    }
-                },
-                SyntaxKind.InvocationExpression);
+                    c.ReportIssue(Diagnostic.Create(Rule, name.GetLocation()));
+                }
+            },
+            SyntaxKind.InvocationExpression);
+
+        private static bool FieldDisposedInDispose(SemanticModel model, IFieldSymbol invocationTarget)
+        {
+            if (invocationTarget.ContainingSymbol is ITypeSymbol container
+                && container.FindImplementationForInterfaceMember(model.Compilation.IDisposableDispose()) is IMethodSymbol dispose
+                && FieldIsDisposedIn(model, invocationTarget, dispose))
+            {
+                return true;
+            }
+            return false;
         }
+
+        private static bool FieldIsDisposedIn(SemanticModel model, IFieldSymbol invocationTarget, IMethodSymbol dispose) =>
+            dispose.DeclaringSyntaxReferences
+            .SelectMany(x => x.GetSyntax().DescendantNodesAndSelf().OfType<InvocationExpressionSyntax>())
+            .Any(x => InvocationTargetAndName(x, out var target, out var name)
+                && name.NameIs(DisposeMethodName)
+                && (model.GetSymbolInfo(target).Symbol?.Equals(invocationTarget) ?? false));
+
+        private static bool FieldDeclaredInType(SemanticModel model, InvocationExpressionSyntax invocation, IFieldSymbol invocationTarget) =>
+            model.GetDeclaredSymbol(invocation.GetTopMostContainingMethod())?.ContainingSymbol?.Equals(invocationTarget.ContainingType) ?? true;
 
         private static bool InvocationTargetAndName(InvocationExpressionSyntax invocation, out ExpressionSyntax target, out SimpleNameSyntax name)
         {
