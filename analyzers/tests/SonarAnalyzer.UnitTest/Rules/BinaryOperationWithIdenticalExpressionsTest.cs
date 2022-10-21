@@ -26,26 +26,39 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class BinaryOperationWithIdenticalExpressionsTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.BinaryOperationWithIdenticalExpressions>();
+        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.BinaryOperationWithIdenticalExpressions>();
+
         [TestMethod]
         public void BinaryOperationWithIdenticalExpressions_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\BinaryOperationWithIdenticalExpressions.cs",
-                new CS.BinaryOperationWithIdenticalExpressions());
+            builderCS.AddPaths("BinaryOperationWithIdenticalExpressions.cs").Verify();
 
         [TestMethod]
         public void BinaryOperationWithIdenticalExpressions_TestProject_CS() =>
-            OldVerifier.VerifyNoIssueReported(@"TestCases\BinaryOperationWithIdenticalExpressions.cs",
-                new CS.BinaryOperationWithIdenticalExpressions(),
-                TestHelper.ProjectTypeReference(SonarAnalyzer.Helpers.ProjectType.Test));
+            builderCS.AddPaths("BinaryOperationWithIdenticalExpressions.cs")
+                .AddReferences(TestHelper.ProjectTypeReference(ProjectType.Test))
+                .VerifyNoIssueReported();
 
         [TestMethod]
         public void BinaryOperationWithIdenticalExpressions_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\BinaryOperationWithIdenticalExpressions.vb",
-                new VB.BinaryOperationWithIdenticalExpressions());
+            builderVB.AddPaths("BinaryOperationWithIdenticalExpressions.vb").Verify();
 
         [TestMethod]
         public void BinaryOperationWithIdenticalExpressions_TestProject_VB() =>
-            OldVerifier.VerifyNoIssueReported(@"TestCases\BinaryOperationWithIdenticalExpressions.vb",
-                new VB.BinaryOperationWithIdenticalExpressions(),
-                TestHelper.ProjectTypeReference(SonarAnalyzer.Helpers.ProjectType.Test));
+            builderVB.AddPaths("BinaryOperationWithIdenticalExpressions.vb")
+                .AddReferences(TestHelper.ProjectTypeReference(ProjectType.Test))
+                .VerifyNoIssueReported();
+
+#if NET
+
+        [TestMethod]
+        public void BinaryOperationWithIdenticalExpressions_CSharp11() =>
+            builderCS.AddPaths("BinaryOperationWithIdenticalExpressions.CSharp11.cs")
+                .WithTopLevelStatements()
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
+#endif
+
     }
 }

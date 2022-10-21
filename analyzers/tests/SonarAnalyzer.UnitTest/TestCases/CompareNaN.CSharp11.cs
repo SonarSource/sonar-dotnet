@@ -18,16 +18,3 @@ class CompareNaN
         }
     }
 }
-
-public interface ISomeInterface
-{
-    static virtual void StaticVirtualMembersInInterfaces()
-    {
-        var a = double.NaN;
-
-        if (a == double.NaN) // Noncompliant {{Use double.IsNaN() instead.}}
-        {
-            Console.WriteLine("a is not a number");
-        }
-    }
-}

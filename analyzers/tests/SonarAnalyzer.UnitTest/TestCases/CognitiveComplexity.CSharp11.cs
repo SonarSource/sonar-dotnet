@@ -12,15 +12,6 @@ class MethodsComplexity
             Console.WriteLine("Test");
         }
     }
-
-    void ReadOnlySpanPatternMatching(ReadOnlySpan<char> s) // Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
-    {
-        if (s is "SK")
- //     ^^ Secondary {{+1}}
-        {
-            Console.WriteLine(s.ToString());
-        }
-    }
 }
 
 public interface IStaticVirtualMembersInInterfaces

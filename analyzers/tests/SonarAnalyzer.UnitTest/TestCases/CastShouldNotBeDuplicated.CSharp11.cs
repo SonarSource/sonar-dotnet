@@ -10,11 +10,3 @@ void ListPattern()
         var ff1 = (double)something;            // FN
     }
 }
-
-void ReadOnlySpanPatternMatching(ReadOnlySpan<char> s)
-{
-    if ((ReadOnlySpan<char>)s is "SK")          // FN
-    {
-        Console.WriteLine(s.ToString());
-    }
-}

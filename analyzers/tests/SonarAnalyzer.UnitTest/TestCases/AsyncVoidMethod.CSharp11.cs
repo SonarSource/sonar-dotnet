@@ -5,6 +5,11 @@ namespace Net6Poc
     public interface ISomeInterface
     {
         static abstract void SomeMethod1();
+
+        static virtual async void SomeVirtualMethod() // FN
+        {
+            return;
+        }
     }
 
     public class SomeClass: ISomeInterface
