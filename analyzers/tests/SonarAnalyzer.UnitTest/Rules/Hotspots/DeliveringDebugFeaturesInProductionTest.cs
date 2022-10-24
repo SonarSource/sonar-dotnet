@@ -27,38 +27,37 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DeliveringDebugFeaturesInProductionTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new CS.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled));
+        private readonly VerifierBuilder builderVB = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new VB.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled));
+
         [TestMethod]
         public void DeliveringDebugFeaturesInProduction_NetCore2_CS() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore2.cs",
-                new CS.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
-                AdditionalReferencesForAspNetCore2);
+            builderCS.AddPaths("DeliveringDebugFeaturesInProduction.NetCore2.cs")
+                .AddReferences(AdditionalReferencesForAspNetCore2)
+                .Verify();
 
         [TestMethod]
         public void DeliveringDebugFeaturesInProduction_NetCore2_VB() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore2.vb",
-                new VB.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
-                AdditionalReferencesForAspNetCore2);
+            builderVB.AddPaths("DeliveringDebugFeaturesInProduction.NetCore2.vb")
+                .AddReferences(AdditionalReferencesForAspNetCore2)
+                .Verify();
 
 #if NET
 
         [TestMethod]
         public void DeliveringDebugFeaturesInProduction_NetCore3_CS() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore3.cs",
-                new CS.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
-                AdditionalReferencesForAspNetCore3AndLater);
+            builderCS.AddPaths("DeliveringDebugFeaturesInProduction.NetCore3.cs")
+                .AddReferences(AdditionalReferencesForAspNetCore3AndLater)
+                .Verify();
 
         [TestMethod]
         public void DeliveringDebugFeaturesInProduction_NetCore3_VB() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore3.vb",
-                new VB.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
-                AdditionalReferencesForAspNetCore3AndLater);
+            builderVB.AddPaths("DeliveringDebugFeaturesInProduction.NetCore3.vb")
+                .AddReferences(AdditionalReferencesForAspNetCore3AndLater)
+                .Verify();
 
         private static IEnumerable<MetadataReference> AdditionalReferencesForAspNetCore3AndLater =>
-            new []
+            new[]
             {
                 AspNetCoreMetadataReference.MicrosoftAspNetCoreDiagnostics,
                 AspNetCoreMetadataReference.MicrosoftAspNetCoreHostingAbstractions,

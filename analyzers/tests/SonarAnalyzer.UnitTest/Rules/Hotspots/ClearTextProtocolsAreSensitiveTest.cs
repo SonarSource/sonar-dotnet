@@ -26,11 +26,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ClearTextProtocolsAreSensitiveTest
     {
-        private readonly VerifierBuilder builder = new VerifierBuilder().AddAnalyzer(() => new ClearTextProtocolsAreSensitive(AnalyzerConfiguration.AlwaysEnabled));
+        private readonly VerifierBuilder builder = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new ClearTextProtocolsAreSensitive(AnalyzerConfiguration.AlwaysEnabled));
 
         [TestMethod]
         public void ClearTextProtocolsAreSensitive() =>
-            builder.AddPaths(@"Hotspots\ClearTextProtocolsAreSensitive.cs")
+            builder.AddPaths("ClearTextProtocolsAreSensitive.cs")
                 .AddReferences(AdditionalReferences)
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .WithConcurrentAnalysis(false)
@@ -40,7 +40,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void ClearTextProtocolsAreSensitive_CSharp9() =>
-            builder.AddPaths(@"Hotspots\ClearTextProtocolsAreSensitive.CSharp9.cs")
+            builder.AddPaths("ClearTextProtocolsAreSensitive.CSharp9.cs")
                 .WithTopLevelStatements()
                 .AddReferences(AdditionalReferences)
                 .WithOptions(ParseOptionsHelper.FromCSharp9)
@@ -48,7 +48,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void ClearTextProtocolsAreSensitive_CSharp10() =>
-            builder.AddPaths(@"Hotspots\ClearTextProtocolsAreSensitive.CSharp10.cs")
+            builder.AddPaths("ClearTextProtocolsAreSensitive.CSharp10.cs")
                 .WithTopLevelStatements()
                 .AddReferences(AdditionalReferences)
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
@@ -56,7 +56,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void ClearTextProtocolsAreSensitive_CSharp11() =>
-            builder.AddPaths(@"Hotspots\ClearTextProtocolsAreSensitive.CSharp11.cs")
+            builder.AddPaths("ClearTextProtocolsAreSensitive.CSharp11.cs")
                 .WithTopLevelStatements()
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
                 .Verify();

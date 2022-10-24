@@ -30,6 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class CookieShouldBeSecureTest
     {
+
 #if NETFRAMEWORK
 
         private const string WebConfig = "Web.config";

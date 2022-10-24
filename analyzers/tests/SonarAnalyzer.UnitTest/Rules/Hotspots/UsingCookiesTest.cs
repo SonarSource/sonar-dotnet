@@ -37,6 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             .WithBasePath(@"Hotspots\");
 
 #if NETFRAMEWORK // HttpCookie is available only when targeting .Net Framework
+
         [TestMethod]
         public void UsingCookies_CS_Net46() =>
             builderCS
@@ -55,6 +56,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             FrameworkMetadataReference.SystemWeb;
 
 #else
+
         [TestMethod]
         public void UsingCookies_CS_NetCore() =>
             builderCS
@@ -88,6 +90,8 @@ namespace SonarAnalyzer.UnitTest.Rules
             NuGetMetadataReference.MicrosoftAspNetCoreHttpAbstractions(packageVersion)
                 .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpFeatures(packageVersion))
                 .Concat(NuGetMetadataReference.MicrosoftExtensionsPrimitives(packageVersion));
+
 #endif
+
     }
 }

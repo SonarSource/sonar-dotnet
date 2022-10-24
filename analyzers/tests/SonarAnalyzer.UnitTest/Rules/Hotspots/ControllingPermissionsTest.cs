@@ -29,24 +29,25 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ControllingPermissionsTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new CS.ControllingPermissions(AnalyzerConfiguration.AlwaysEnabled));
+        private readonly VerifierBuilder builderVB = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new VB.ControllingPermissions(AnalyzerConfiguration.AlwaysEnabled));
+
+        [TestMethod]
+        public void ControllingPermissions_CS() =>
+            builderCS.AddPaths("ControllingPermissions.cs")
+                .AddReferences(AdditionalReferences)
+                .Verify();
+
+        [TestMethod]
+        public void ControllingPermissions_VB() =>
+            builderVB.AddPaths("ControllingPermissions.vb")
+                .AddReferences(AdditionalReferences)
+                .Verify();
+
         internal static readonly IEnumerable<MetadataReference> AdditionalReferences =
             Enumerable.Empty<MetadataReference>()
                 .Concat(FrameworkMetadataReference.SystemIdentityModel)
                 .Concat(FrameworkMetadataReference.SystemWeb);
-
-        [TestMethod]
-        public void ControllingPermissions_CS() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\Hotspots\ControllingPermissions.cs",
-                new CS.ControllingPermissions(AnalyzerConfiguration.AlwaysEnabled),
-                AdditionalReferences);
-
-        [TestMethod]
-        public void ControllingPermissions_VB() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\Hotspots\ControllingPermissions.vb",
-                new VB.ControllingPermissions(AnalyzerConfiguration.AlwaysEnabled),
-                AdditionalReferences);
     }
 }
 

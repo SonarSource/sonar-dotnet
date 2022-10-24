@@ -27,62 +27,62 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ConfiguringLoggersTest
     {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder().AddAnalyzer(() => new CS.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled));
-        private readonly VerifierBuilder builderVB = new VerifierBuilder().AddAnalyzer(() => new VB.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled));
+        private readonly VerifierBuilder builderCS = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new CS.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled));
+        private readonly VerifierBuilder builderVB = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new VB.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled));
 
         [TestMethod]
         public void ConfiguringLoggers_Log4Net_CS() =>
-            builderCS.AddPaths(@"Hotspots\ConfiguringLoggers_Log4Net.cs")
+            builderCS.AddPaths("ConfiguringLoggers_Log4Net.cs")
                 .AddReferences(Log4NetReferences)
                 .Verify();
 
         [TestMethod]
         public void ConfiguringLoggers_Log4Net_VB() =>
-            builderVB.AddPaths(@"Hotspots\ConfiguringLoggers_Log4Net.vb")
+            builderVB.AddPaths("ConfiguringLoggers_Log4Net.vb")
                 .AddReferences(Log4NetReferences)
                 .Verify();
 
         [TestMethod]
         public void ConfiguringLoggers_NLog_CS() =>
-            builderCS.AddPaths(@"Hotspots\ConfiguringLoggers_NLog.cs")
+            builderCS.AddPaths("ConfiguringLoggers_NLog.cs")
                 .AddReferences(NLogReferences)
                 .Verify();
 
         [TestMethod]
         public void ConfiguringLoggers_NLog_VB() =>
-            builderVB.AddPaths(@"Hotspots\ConfiguringLoggers_NLog.vb")
+            builderVB.AddPaths("ConfiguringLoggers_NLog.vb")
                 .AddReferences(NLogReferences)
                 .Verify();
 
         [TestMethod]
         public void ConfiguringLoggers_Serilog_CS() =>
-            builderCS.AddPaths(@"Hotspots\ConfiguringLoggers_Serilog.cs")
+            builderCS.AddPaths("ConfiguringLoggers_Serilog.cs")
                 .AddReferences(SeriLogReferences)
                 .Verify();
 
         [TestMethod]
         public void ConfiguringLoggers_Serilog_VB() =>
-            builderVB.AddPaths(@"Hotspots\ConfiguringLoggers_Serilog.vb")
+            builderVB.AddPaths("ConfiguringLoggers_Serilog.vb")
                 .AddReferences(SeriLogReferences)
                 .Verify();
 
 #if NET
         [TestMethod]
         public void ConfiguringLoggers_AspNetCore2_CS() =>
-            builderCS.AddPaths(@"Hotspots\ConfiguringLoggers_AspNetCore.cs")
+            builderCS.AddPaths("ConfiguringLoggers_AspNetCore.cs")
                 .AddReferences(AspNetCore2LoggingReferences)
                 .WithConcurrentAnalysis(false)
                 .Verify();
 
         [TestMethod]
         public void ConfiguringLoggers_AspNetCoreLatest_CS() =>
-            builderCS.AddPaths(@"Hotspots\ConfiguringLoggers_AspNetCore6.cs")
+            builderCS.AddPaths("ConfiguringLoggers_AspNetCore6.cs")
                 .AddReferences(AspNetCoreLoggingReferences(Constants.DotNet7Preview))
                 .Verify();
 
         [TestMethod]
         public void ConfiguringLoggers_AspNetCore_VB() =>
-            builderVB.AddPaths(@"Hotspots\ConfiguringLoggers_AspNetCore.vb")
+            builderVB.AddPaths("ConfiguringLoggers_AspNetCore.vb")
                 .AddReferences(AspNetCore2LoggingReferences)
                 .Verify();
 #endif
@@ -128,5 +128,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Concat(NuGetMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions(version));
 
 #endif
+
     }
 }

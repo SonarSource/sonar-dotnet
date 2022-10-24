@@ -27,17 +27,31 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class EncryptingDataTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder().AddAnalyzer(() => new CS.EncryptingData(AnalyzerConfiguration.AlwaysEnabled));
+        private readonly VerifierBuilder builderVB = new VerifierBuilder().AddAnalyzer(() => new VB.EncryptingData(AnalyzerConfiguration.AlwaysEnabled));
+
         [TestMethod]
         public void EncryptingData_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\EncryptingData.cs",
-                new CS.EncryptingData(AnalyzerConfiguration.AlwaysEnabled),
-                GetAdditionalReferences());
+            builderCS.AddPaths(@"Hotspots\EncryptingData.cs")
+                .AddReferences(GetAdditionalReferences())
+                .Verify();
 
         [TestMethod]
         public void EncryptingData_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\EncryptingData.vb",
-                new VB.EncryptingData(AnalyzerConfiguration.AlwaysEnabled),
-                GetAdditionalReferences());
+            builderVB.AddPaths(@"Hotspots\EncryptingData.vb")
+                .AddReferences(GetAdditionalReferences())
+                .Verify();
+
+#if NET
+
+        [TestMethod]
+        public void EncryptingData_CSharp11() =>
+            builderCS.AddPaths(@"Hotspots\EncryptingData.CSharp11.cs")
+                .AddReferences(GetAdditionalReferences())
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
+#endif
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
             MetadataReferenceFacade.SystemSecurityCryptography;
