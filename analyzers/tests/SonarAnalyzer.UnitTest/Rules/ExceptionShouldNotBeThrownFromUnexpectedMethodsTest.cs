@@ -25,7 +25,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ExceptionShouldNotBeThrownFromUnexpectedMethodsTest
     {
-        VerifierBuilder builder = new VerifierBuilder<ExceptionShouldNotBeThrownFromUnexpectedMethods>();
+        private readonly VerifierBuilder builder = new VerifierBuilder<ExceptionShouldNotBeThrownFromUnexpectedMethods>();
 
         [TestMethod]
         public void ExceptionShouldNotBeThrownFromUnexpectedMethods() =>
