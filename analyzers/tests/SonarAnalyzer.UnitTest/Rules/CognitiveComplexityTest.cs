@@ -54,14 +54,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void CognitiveComplexity_CS_CSharp10() =>
             builderCS.AddPaths("CognitiveComplexity.CSharp10.cs")
-                .WithLanguageVersion(LanguageVersion.CSharp10)
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
                 .WithConcurrentAnalysis(false)
                 .Verify();
 
         [TestMethod]
         public void CognitiveComplexity_CS_CSharp11() =>
             builderCS.AddPaths("CognitiveComplexity.CSharp11.cs")
-                .WithLanguageVersion(LanguageVersion.CSharp11)
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
                 .Verify();
 
 #endif

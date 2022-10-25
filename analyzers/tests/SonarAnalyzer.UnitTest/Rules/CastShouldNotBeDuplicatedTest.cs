@@ -48,7 +48,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void CastShouldNotBeDuplicated_CSharp11() =>
             builder.AddPaths("CastShouldNotBeDuplicated.CSharp11.cs")
-                .WithTopLevelStatements()
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
                 .Verify();
 

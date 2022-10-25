@@ -27,5 +27,3 @@ namespace Tests.Diagnostics
         }
     }
 }
-
-

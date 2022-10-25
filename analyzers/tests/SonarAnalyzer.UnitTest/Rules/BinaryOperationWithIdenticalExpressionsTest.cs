@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void BinaryOperationWithIdenticalExpressions_TestProject_CS() =>
             builderCS.AddPaths("BinaryOperationWithIdenticalExpressions.cs")
-                .AddReferences(TestHelper.ProjectTypeReference(ProjectType.Test))
+                .AddTestReference()
                 .VerifyNoIssueReported();
 
         [TestMethod]
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void BinaryOperationWithIdenticalExpressions_TestProject_VB() =>
             builderVB.AddPaths("BinaryOperationWithIdenticalExpressions.vb")
-                .AddReferences(TestHelper.ProjectTypeReference(ProjectType.Test))
+                .AddTestReference()
                 .VerifyNoIssueReported();
 
 #if NET
@@ -54,7 +54,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void BinaryOperationWithIdenticalExpressions_CSharp11() =>
             builderCS.AddPaths("BinaryOperationWithIdenticalExpressions.CSharp11.cs")
-                .WithTopLevelStatements()
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
                 .Verify();
 

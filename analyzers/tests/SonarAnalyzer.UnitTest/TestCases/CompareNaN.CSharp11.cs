@@ -11,10 +11,5 @@ class CompareNaN
         {
             Console.WriteLine("Test1");
         }
-
-        if (numbers is [1, double.NaN, 3]) // FN
-        {
-            Console.WriteLine("Test2");
-        }
     }
 }

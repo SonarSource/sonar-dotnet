@@ -8,6 +8,7 @@ namespace Tests.Diagnostics
         public const string RawStringLiteralsCompliant = """test""";
 
         public const string InterpolatedStringNonCompliant = $"""test{RawStringLiteralsNonCompliant}"""; // FN
+        public const string InterpolatedStringNonCompliant2 = $"""test{RawStringLiteralsCompliant}"""; // Noncompliant
         public const string InterpolatedStringCompliant = $"""test{RawStringLiteralsCompliant}""";
 
         void Utf8StringLiterals()

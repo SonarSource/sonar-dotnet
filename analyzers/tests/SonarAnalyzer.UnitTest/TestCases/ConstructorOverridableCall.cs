@@ -80,7 +80,7 @@ namespace Tests.Diagnostics
 
         public override void DoSomething()
         {
-            base.DoSomething();
+            Console.WriteLine($"{Name} is null at this point");
         }
     }
 }
