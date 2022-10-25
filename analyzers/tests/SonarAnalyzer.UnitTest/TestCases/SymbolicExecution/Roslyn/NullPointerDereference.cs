@@ -1703,3 +1703,33 @@ public class Peach_Sharex_Project
         }
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/6241
+public class Repro_6241<T>
+{
+    public void WithGenericValue()
+    {
+        HashSet<T> value = null;
+        if (value is null)
+        {
+            value.ToString(); // FN
+        }
+        else
+        {
+            value.ToString(); // Noncompliant FP
+        }
+    }
+
+    public void WithNormalValue(List<object> inputs)
+    {
+        HashSet<object> value = null;
+        if (value is null)
+        {
+            value.ToString(); // Noncompliant
+        }
+        else
+        {
+            value.ToString(); // Compliant
+        }
+    }
+}
