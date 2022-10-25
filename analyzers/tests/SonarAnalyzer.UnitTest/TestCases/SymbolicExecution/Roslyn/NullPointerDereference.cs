@@ -1712,11 +1712,11 @@ public class Repro_6241<T>
         HashSet<T> value = null;
         if (value is null)
         {
-            value.ToString(); // FN
+            value.ToString();   // FN
         }
         else
         {
-            value.ToString(); // Noncompliant FP
+            value.ToString();   // Noncompliant FP
         }
     }
 
@@ -1725,11 +1725,11 @@ public class Repro_6241<T>
         HashSet<object> value = null;
         if (value is null)
         {
-            value.ToString(); // Noncompliant
+            value.ToString();   // Noncompliant
         }
         else
         {
-            value.ToString(); // Compliant
+            value.ToString();   // Compliant
         }
     }
 }
