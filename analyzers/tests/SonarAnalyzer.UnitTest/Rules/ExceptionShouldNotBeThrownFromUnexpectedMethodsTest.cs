@@ -25,16 +25,28 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ExceptionShouldNotBeThrownFromUnexpectedMethodsTest
     {
+        VerifierBuilder builder = new VerifierBuilder<ExceptionShouldNotBeThrownFromUnexpectedMethods>();
+
         [TestMethod]
         public void ExceptionShouldNotBeThrownFromUnexpectedMethods() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ExceptionShouldNotBeThrownFromUnexpectedMethods.cs",
-                                    new ExceptionShouldNotBeThrownFromUnexpectedMethods(),
-                                    ParseOptionsHelper.FromCSharp8);
- #if NET
+            builder.AddPaths("ExceptionShouldNotBeThrownFromUnexpectedMethods.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
+
+#if NET
+
         [TestMethod]
         public void ExceptionShouldNotBeThrownFromUnexpectedMethods_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ExceptionShouldNotBeThrownFromUnexpectedMethods.CSharp9.cs",
-                                                      new ExceptionShouldNotBeThrownFromUnexpectedMethods());
+            builder.AddPaths("ExceptionShouldNotBeThrownFromUnexpectedMethods.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
+
+        [TestMethod]
+        public void ExceptionShouldNotBeThrownFromUnexpectedMethods_CSharp11() =>
+            builder.AddPaths("ExceptionShouldNotBeThrownFromUnexpectedMethods.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
 #endif
 
     }

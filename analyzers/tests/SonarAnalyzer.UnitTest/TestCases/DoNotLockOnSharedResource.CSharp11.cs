@@ -5,13 +5,11 @@ namespace Tests.Diagnostics
 {
     public class LockOnThisOrType
     {
-        public void MyLockingMethod()
+        public void RawStringLiterals()
         {
             lock ("""foo""") // Noncompliant
             {
             }
         }
-
-        object lockObj = new object();
     }
 }

@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -25,32 +26,47 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class EmptyStatementTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<EmptyStatement>();
+        private readonly VerifierBuilder codeFix = new VerifierBuilder<EmptyStatement>().WithCodeFix<EmptyStatementCodeFix>();
+
         [TestMethod]
         public void EmptyStatement() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\EmptyStatement.cs", new EmptyStatement());
+            builder.AddPaths("EmptyStatement.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void EmptyStatement_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EmptyStatement.CSharp9.cs", new EmptyStatement());
+            builder.AddPaths("EmptyStatement.CSharp9.cs")
+                .WithTopLevelStatements()
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
+
+        [TestMethod]
+        public void EmptyStatement_CSharp11() =>
+            builder.AddPaths("EmptyStatement.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
 #endif
 
         [TestMethod]
         public void EmptyStatement_CodeFix() =>
-            OldVerifier.VerifyCodeFix<EmptyStatementCodeFix>(
-                @"TestCases\EmptyStatement.cs",
-                @"TestCases\EmptyStatement.Fixed.cs",
-                new EmptyStatement());
+            codeFix.AddPaths("EmptyStatement.cs")
+                .WithLanguageVersion(LanguageVersion.CSharp8)
+                .WithCodeFixedPaths("EmptyStatement.Fixed.cs")
+                .VerifyCodeFix();
 
 #if NET
+
         [TestMethod]
         public void EmptyStatement_CodeFix_CSharp9() =>
-            OldVerifier.VerifyCodeFix<EmptyStatementCodeFix>(
-                @"TestCases\EmptyStatement.CSharp9.cs",
-                @"TestCases\EmptyStatement.CSharp9.Fixed.cs",
-                new EmptyStatement(),
-                ParseOptionsHelper.FromCSharp9,
-                OutputKind.ConsoleApplication);
+            codeFix.AddPaths("EmptyStatement.CSharp9.cs")
+                .WithLanguageVersion(LanguageVersion.CSharp9)
+                .WithCodeFixedPaths("EmptyStatement.CSharp9.Fixed.cs")
+                .VerifyCodeFix();
+
 #endif
+
     }
 }
