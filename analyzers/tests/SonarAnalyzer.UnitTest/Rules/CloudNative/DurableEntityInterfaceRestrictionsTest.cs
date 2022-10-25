@@ -32,5 +32,16 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void DurableEntityInterfaceRestrictions_CS() =>
             builder.AddPaths("DurableEntityInterfaceRestrictions.cs").Verify();
+
+#if NET
+
+        [TestMethod]
+        public void DurableEntityInterfaceRestrictions_CSharp11() =>
+            builder.AddPaths("DurableEntityInterfaceRestrictions.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
+#endif
+
     }
 }

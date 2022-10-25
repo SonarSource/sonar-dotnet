@@ -25,8 +25,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class CompareNaNTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<CompareNaN>();
+
         [TestMethod]
         public void CompareNaN() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\CompareNaN.cs", new CompareNaN());
+            builder.AddPaths("CompareNaN.cs").Verify();
+
+#if NET
+
+        [TestMethod]
+        public void CompareNaN_CSharp11() =>
+            builder.AddPaths("CompareNaN.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
+#endif
+
     }
 }

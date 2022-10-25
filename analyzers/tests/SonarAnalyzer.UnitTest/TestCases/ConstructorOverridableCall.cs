@@ -55,4 +55,32 @@ namespace Tests.Diagnostics
             Console.WriteLine(this.foo.Length);
         }
     }
+
+    public class Class1
+    {
+        public virtual void DoSomething() { }
+    }
+
+    public class Class2 : Class1
+    {
+        public Class2()
+        {
+            DoSomething(); // FN
+        }
+    }
+
+    public class Class3 : Class2
+    {
+        public string Name { get; set; }
+
+        public Class3(string name)
+        {
+            Name = name;
+        }
+
+        public override void DoSomething()
+        {
+            Console.WriteLine($"{Name} is null at this point");
+        }
+    }
 }

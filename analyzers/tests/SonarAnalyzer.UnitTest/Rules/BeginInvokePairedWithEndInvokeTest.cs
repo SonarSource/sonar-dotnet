@@ -37,11 +37,21 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void BeginInvokePairedWithEndInvoke_CSharp9() =>
-            builderCS.AddPaths("BeginInvokePairedWithEndInvoke.CSharp9.Part1.cs", "BeginInvokePairedWithEndInvoke.CSharp9.Part2.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+            builderCS.AddPaths("BeginInvokePairedWithEndInvoke.CSharp9.Part1.cs", "BeginInvokePairedWithEndInvoke.CSharp9.Part2.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
 
         [TestMethod]
         public void BeginInvokePairedWithEndInvoke_CSharp10() =>
-            builderCS.AddPaths("BeginInvokePairedWithEndInvoke.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            builderCS.AddPaths("BeginInvokePairedWithEndInvoke.CSharp10.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .Verify();
+
+        [TestMethod]
+        public void BeginInvokePairedWithEndInvoke_CSharp11() =>
+            builderCS.AddPaths("BeginInvokePairedWithEndInvoke.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
 
 #endif
 
