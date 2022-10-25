@@ -11,6 +11,7 @@ namespace Tests.Diagnostics
         {
             static abstract void Method();
         }
+
         private class Class1 : MyInterface // Noncompliant {{Remove the unused private class 'Class1'.}}
         {
             public static void Method() { var x = 42; }

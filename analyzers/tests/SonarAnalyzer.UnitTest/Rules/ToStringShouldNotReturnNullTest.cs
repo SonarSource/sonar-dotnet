@@ -43,6 +43,13 @@ public class ToStringShouldNotReturnNullTest
             .AddPaths("ToStringShouldNotReturnNull.CSharp9.cs")
             .Verify();
 
+    [TestMethod]
+    public void ToStringShouldNotReturnNull_CSharp11() =>
+        builderCS
+            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .AddPaths("ToStringShouldNotReturnNull.CSharp11.cs")
+            .Verify();
+
 #endif
 
     [TestMethod]
