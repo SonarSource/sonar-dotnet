@@ -26,26 +26,31 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ConditionalStructureSameConditionTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ConditionalStructureSameCondition>();
+
         [TestMethod]
         public void ConditionalStructureSameCondition_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ConditionalStructureSameCondition.cs",
-                new CS.ConditionalStructureSameCondition());
+            builderCS.AddPaths("ConditionalStructureSameCondition.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void ConditionalStructureSameCondition_CS_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ConditionalStructureSameCondition.CSharp9.cs",
-                new CS.ConditionalStructureSameCondition());
+            builderCS.AddPaths("ConditionalStructureSameCondition.CSharp9.cs")
+                .WithTopLevelStatements()
+                .Verify();
 
         [TestMethod]
         public void ConditionalStructureSameCondition_CS_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\ConditionalStructureSameCondition.CSharp10.cs",
-                new CS.ConditionalStructureSameCondition());
+            builderCS.AddPaths("ConditionalStructureSameCondition.CSharp10.cs")
+                .WithTopLevelStatements()
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .Verify();
+
 #endif
 
         [TestMethod]
         public void ConditionalStructureSameCondition_VisualBasic() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ConditionalStructureSameCondition.vb",
-                new VB.ConditionalStructureSameCondition());
+            new VerifierBuilder<VB.ConditionalStructureSameCondition>().AddPaths("ConditionalStructureSameCondition.vb").Verify();
     }
 }

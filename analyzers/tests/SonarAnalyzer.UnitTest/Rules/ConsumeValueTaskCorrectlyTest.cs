@@ -27,12 +27,8 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ConsumeValueTaskCorrectly() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ConsumeValueTaskCorrectly.cs",
-                                    new ConsumeValueTaskCorrectly(),
-                                    GetReferences());
-
-        private static IEnumerable<MetadataReference> GetReferences() =>
-            Enumerable.Empty<MetadataReference>()
-                .Concat(MetadataReferenceFacade.SystemThreadingTasks);
+            new VerifierBuilder<ConsumeValueTaskCorrectly>().AddPaths("ConsumeValueTaskCorrectly.cs")
+                .AddReferences(MetadataReferenceFacade.SystemThreadingTasks)
+                .Verify();
     }
 }

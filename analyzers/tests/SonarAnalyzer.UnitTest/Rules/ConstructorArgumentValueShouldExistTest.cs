@@ -30,23 +30,31 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ConstructorArgumentValueShouldExistTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ConstructorArgumentValueShouldExist>();
+
 #if NET
+
         [TestMethod]
         public void ConstructorArgumentValueShouldExist_CS_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ConstructorArgumentValueShouldExist.CSharp9.cs",
-                new CS.ConstructorArgumentValueShouldExist());
+            builderCS.AddPaths("ConstructorArgumentValueShouldExist.CSharp9.cs")
+                .WithTopLevelStatements()
+                .Verify();
+
 #else
+
         [TestMethod]
         public void ConstructorArgumentValueShouldExist_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ConstructorArgumentValueShouldExist.cs",
-                new CS.ConstructorArgumentValueShouldExist(),
-                MetadataReferenceFacade.SystemXaml);
+            builderCS.AddPaths("ConstructorArgumentValueShouldExist.cs")
+                .AddReferences(MetadataReferenceFacade.SystemXaml)
+                .Verify();
 
         [TestMethod]
         public void ConstructorArgumentValueShouldExist_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ConstructorArgumentValueShouldExist.vb",
-                new VB.ConstructorArgumentValueShouldExist(),
-                MetadataReferenceFacade.SystemXaml);
+            new VerifierBuilder<VB.ConstructorArgumentValueShouldExist>().AddPaths("ConstructorArgumentValueShouldExist.vb")
+                .AddReferences(MetadataReferenceFacade.SystemXaml)
+                .Verify();
+
 #endif
+
     }
 }

@@ -25,15 +25,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ArrayDesignatorOnVariableTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<ArrayDesignatorOnVariable>().AddPaths("ArrayDesignatorOnVariable.vb");
+
         [TestMethod]
         public void ArrayDesignatorOnVariable() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ArrayDesignatorOnVariable.vb", new ArrayDesignatorOnVariable());
+            builder.Verify();
 
         [TestMethod]
         public void ArrayDesignatorOnVariable_CodeFix() =>
-            OldVerifier.VerifyCodeFix<ArrayDesignatorOnVariableCodeFix>(
-                @"TestCases\ArrayDesignatorOnVariable.vb",
-                @"TestCases\ArrayDesignatorOnVariable.Fixed.vb",
-                new ArrayDesignatorOnVariable());
+            builder.WithCodeFix<ArrayDesignatorOnVariableCodeFix>()
+                .WithCodeFixedPaths("ArrayDesignatorOnVariable.Fixed.vb")
+                .VerifyCodeFix();
     }
 }

@@ -25,14 +25,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class AsyncAwaitIdentifierTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<AsyncAwaitIdentifier>();
+
         [TestMethod]
         public void AsyncAwaitIdentifier() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\AsyncAwaitIdentifier.cs", new AsyncAwaitIdentifier());
+            builder.AddPaths("AsyncAwaitIdentifier.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void AsyncAwaitIdentifier_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\AsyncAwaitIdentifier.CSharp9.cs", new AsyncAwaitIdentifier());
+            builder.AddPaths("AsyncAwaitIdentifier.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
+
 #endif
+
     }
 }

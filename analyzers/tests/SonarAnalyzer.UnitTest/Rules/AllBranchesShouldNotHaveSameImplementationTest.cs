@@ -26,25 +26,26 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class AllBranchesShouldNotHaveSameImplementationTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.AllBranchesShouldNotHaveSameImplementation>();
+
         [TestMethod]
-        public void AllBranchesShouldNotHaveSameImplementation_CS() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\AllBranchesShouldNotHaveSameImplementation.cs",
-                new CS.AllBranchesShouldNotHaveSameImplementation(),
-                ParseOptionsHelper.FromCSharp8);
+        public void AllBranchesShouldNotHaveSameImplementation_CSharp8() =>
+            builderCS.AddPaths("AllBranchesShouldNotHaveSameImplementation.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
 
 #if NET
+
         [TestMethod]
         public void AllBranchesShouldNotHaveSameImplementation_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(
-                @"TestCases\AllBranchesShouldNotHaveSameImplementation.CSharp9.cs",
-                new CS.AllBranchesShouldNotHaveSameImplementation());
+            builderCS.AddPaths("AllBranchesShouldNotHaveSameImplementation.CSharp9.cs")
+                .WithTopLevelStatements()
+                .Verify();
+
 #endif
 
         [TestMethod]
         public void AllBranchesShouldNotHaveSameImplementation_VB() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\AllBranchesShouldNotHaveSameImplementation.vb",
-                new VB.AllBranchesShouldNotHaveSameImplementation());
+            new VerifierBuilder<VB.AllBranchesShouldNotHaveSameImplementation>().AddPaths("AllBranchesShouldNotHaveSameImplementation.vb").Verify();
     }
 }

@@ -25,14 +25,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ClassWithEqualityShouldImplementIEquatableTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<ClassWithEqualityShouldImplementIEquatable>();
+
         [TestMethod]
         public void ClassWithEqualityShouldImplementIEquatable() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ClassWithEqualityShouldImplementIEquatable.cs", new ClassWithEqualityShouldImplementIEquatable());
+            builder.AddPaths("ClassWithEqualityShouldImplementIEquatable.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void ClassWithEqualityShouldImplementIEquatable_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ClassWithEqualityShouldImplementIEquatable.CSharp9.cs", new ClassWithEqualityShouldImplementIEquatable());
+            builder.AddPaths("ClassWithEqualityShouldImplementIEquatable.CSharp9.cs")
+                .WithTopLevelStatements()
+                .Verify();
+
 #endif
+
     }
 }

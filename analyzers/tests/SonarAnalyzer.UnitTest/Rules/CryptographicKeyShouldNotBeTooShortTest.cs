@@ -25,35 +25,44 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class CryptographicKeyShouldNotBeTooShortTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<CryptographicKeyShouldNotBeTooShort>();
+
         [TestMethod]
         public void CryptographicKeyShouldNotBeTooShort() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\CryptographicKeyShouldNotBeTooShort.cs",
-                                    new CryptographicKeyShouldNotBeTooShort(),
-                                    ParseOptionsHelper.FromCSharp8,
-                                    GetAdditionalReferences());
+            builder.AddPaths("CryptographicKeyShouldNotBeTooShort.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .AddReferences(GetAdditionalReferences())
+                .Verify();
 
 #if NETFRAMEWORK
 
         [TestMethod]
         public void CryptographicKeyShouldNotBeTooShort_NetFramework() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\CryptographicKeyShouldNotBeTooShort.BeforeNet7.cs",
-                                    new CryptographicKeyShouldNotBeTooShort(),
-                                    ParseOptionsHelper.FromCSharp8,
-                                    GetAdditionalReferences());
+            builder.AddPaths("CryptographicKeyShouldNotBeTooShort.BeforeNet7.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .AddReferences(GetAdditionalReferences())
+                .Verify();
+
 #else
 
         [TestMethod]
         public void CryptographicKeyShouldNotBeTooShort_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CryptographicKeyShouldNotBeTooShort.CSharp9.cs",
-                                                      new CryptographicKeyShouldNotBeTooShort(),
-                                                      GetAdditionalReferences());
+            builder.AddPaths("CryptographicKeyShouldNotBeTooShort.CSharp9.cs")
+                .WithTopLevelStatements()
+                .AddReferences(GetAdditionalReferences())
+                .Verify();
+
 #endif
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
             MetadataReferenceFacade.SystemSecurityCryptography
+
 #if NETFRAMEWORK
+
                 .Concat(NuGetMetadataReference.SystemSecurityCryptographyOpenSsl())
+
 #endif
+
                 .Concat(NuGetMetadataReference.BouncyCastle());
     }
 }

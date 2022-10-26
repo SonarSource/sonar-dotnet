@@ -25,18 +25,27 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class AbstractTypesShouldNotHaveConstructorsTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<AbstractTypesShouldNotHaveConstructors>();
+
         [TestMethod]
         public void AbstractTypesShouldNotHaveConstructors() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\AbstractTypesShouldNotHaveConstructors.cs", new AbstractTypesShouldNotHaveConstructors());
+            builder.AddPaths("AbstractTypesShouldNotHaveConstructors.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void AbstractTypesShouldNotHaveConstructors_Records() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\AbstractTypesShouldNotHaveConstructors.Records.cs", new AbstractTypesShouldNotHaveConstructors());
+            builder.AddPaths("AbstractTypesShouldNotHaveConstructors.Records.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
 
         [TestMethod]
         public void AbstractTypesShouldNotHaveConstructors_TopLevelStatements() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\AbstractTypesShouldNotHaveConstructors.TopLevelStatements.cs", new AbstractTypesShouldNotHaveConstructors());
+            builder.AddPaths("AbstractTypesShouldNotHaveConstructors.TopLevelStatements.cs")
+                .WithTopLevelStatements()
+                .Verify();
+
 #endif
+
     }
 }

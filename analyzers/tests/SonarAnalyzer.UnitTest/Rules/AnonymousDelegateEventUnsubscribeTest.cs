@@ -25,14 +25,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class AnonymousDelegateEventUnsubscribeTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<AnonymousDelegateEventUnsubscribe>();
+
         [TestMethod]
         public void AnonymousDelegateEventUnsubscribe() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\AnonymousDelegateEventUnsubscribe.cs", new AnonymousDelegateEventUnsubscribe());
+            builder.AddPaths("AnonymousDelegateEventUnsubscribe.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void AnonymousDelegateEventUnsubscribe_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\AnonymousDelegateEventUnsubscribe.CSharp9.cs", new AnonymousDelegateEventUnsubscribe());
+            builder.AddPaths("AnonymousDelegateEventUnsubscribe.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
+
 #endif
+
     }
 }

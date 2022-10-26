@@ -25,14 +25,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ClassShouldNotBeAbstractTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<ClassShouldNotBeAbstract>();
+
         [TestMethod]
         public void ClassShouldNotBeAbstract() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ClassShouldNotBeAbstract.cs", new ClassShouldNotBeAbstract());
+            builder.AddPaths("ClassShouldNotBeAbstract.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void ClassShouldNotBeAbstract_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ClassShouldNotBeAbstract.CSharp9.cs", new ClassShouldNotBeAbstract());
+            builder.AddPaths("ClassShouldNotBeAbstract.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
+
 #endif
+
     }
 }

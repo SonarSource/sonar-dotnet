@@ -26,18 +26,24 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ClassNotInstantiatableTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ClassNotInstantiatable>();
+
         [TestMethod]
         public void ClassNotInstantiatable_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ClassNotInstantiatable.cs", new CS.ClassNotInstantiatable());
+            builderCS.AddPaths("ClassNotInstantiatable.cs").Verify();
 
 #if NET
+
         [TestMethod]
-        public void ClassNotInstantiatable_CS_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ClassNotInstantiatable.CSharp9.cs", new CS.ClassNotInstantiatable());
+        public void ClassNotInstantiatable_CSharp9() =>
+            builderCS.AddPaths("ClassNotInstantiatable.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
+
 #endif
 
         [TestMethod]
         public void ClassNotInstantiatable_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ClassNotInstantiatable.vb", new VB.ClassNotInstantiatable());
+            new VerifierBuilder<VB.ClassNotInstantiatable>().AddPaths("ClassNotInstantiatable.vb").Verify();
     }
 }
