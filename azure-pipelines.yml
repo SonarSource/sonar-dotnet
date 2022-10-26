@@ -195,6 +195,7 @@ stages:
           artifact: $(TestResultsArtifactName)
 
       - task: PublishTestResults@2
+        condition: always()
         displayName: 'Publish test results'
         inputs:
           testRunner: VSTest
