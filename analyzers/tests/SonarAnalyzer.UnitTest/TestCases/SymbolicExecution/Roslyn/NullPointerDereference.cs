@@ -1720,7 +1720,7 @@ public class Repro_6241<T>
         }
     }
 
-    public void WithNormalValue(List<object> inputs)
+    public void WithNormalValue()
     {
         HashSet<object> value = null;
         if (value is null)
