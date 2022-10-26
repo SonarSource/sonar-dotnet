@@ -25,8 +25,19 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class UseConstantsWhereAppropriateTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<UseConstantsWhereAppropriate>();
+
         [TestMethod]
         public void UseConstantsWhereAppropriate() =>
-             new VerifierBuilder<UseConstantsWhereAppropriate>().AddPaths("UseConstantsWhereAppropriate.cs").Verify();
+             builder.AddPaths("UseConstantsWhereAppropriate.cs").Verify();
+
+#if NET
+
+        [TestMethod]
+        public void UseConstantsWhereAppropriate_CSharp11() =>
+             builder.AddPaths("UseConstantsWhereAppropriate.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+
+#endif
+
     }
 }
