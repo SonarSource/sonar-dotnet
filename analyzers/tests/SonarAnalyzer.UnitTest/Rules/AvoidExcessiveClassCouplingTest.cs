@@ -424,6 +424,7 @@ public class Types // Compliant, pointers are not counted
         [TestMethod]
         public void AvoidExcessiveClassCoupling_CSharp11() =>
             withThreshold1.AddPaths("AvoidExcessiveClassCoupling.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+
 #endif
 
     }
