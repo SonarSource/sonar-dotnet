@@ -32,6 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             builder.AddPaths("ObsoleteAttributesNeedExplanation.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void ObsoleteAttributesNeedExplanation_CSharp9() =>
             builder.AddPaths("ObsoleteAttributesNeedExplanation.CSharp9.cs").WithTopLevelStatements().Verify();
@@ -41,5 +42,6 @@ namespace SonarAnalyzer.UnitTest.Rules
             builder.AddPaths("ObsoleteAttributesNeedExplanation.CSharp10.cs").WithConcurrentAnalysis(false).WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
 #endif
+
     }
 }

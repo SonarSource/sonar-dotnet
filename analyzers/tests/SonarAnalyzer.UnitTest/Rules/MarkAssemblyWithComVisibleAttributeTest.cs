@@ -40,16 +40,15 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void MarkAssemblyWithComVisibleAttributeNoncompliant_CS()
         {
-            Action action = () => builderCS.AddPaths(@"MarkAssemblyWithComVisibleAttributeNoncompliant.cs").Verify();
+            var action = () => builderCS.AddPaths(@"MarkAssemblyWithComVisibleAttributeNoncompliant.cs").Verify();
             action.Should().Throw<UnexpectedDiagnosticException>().WithMessage("*Provide a 'ComVisible' attribute for assembly 'project0'.*");
         }
 
         [TestMethod]
         public void MarkAssemblyWithComVisibleAttributeNoncompliant_VB()
         {
-            Action action = () => builderVB.AddPaths(@"MarkAssemblyWithComVisibleAttributeNoncompliant.vb").Verify();
+            var action = () => builderVB.AddPaths(@"MarkAssemblyWithComVisibleAttributeNoncompliant.vb").Verify();
             action.Should().Throw<UnexpectedDiagnosticException>().WithMessage("*Provide a 'ComVisible' attribute for assembly 'project0'.*");
         }
-
     }
 }
