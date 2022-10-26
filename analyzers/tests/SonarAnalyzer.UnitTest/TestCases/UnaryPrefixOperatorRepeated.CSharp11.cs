@@ -9,7 +9,6 @@ public class Noncompliant
     }
 }
 
-
 public class WeirdOperatorOverride : IBitwiseOperators<WeirdOperatorOverride, WeirdOperatorOverride, WeirdOperatorOverride>
 {
     public static WeirdOperatorOverride operator ~(WeirdOperatorOverride value) => throw new NotImplementedException();
