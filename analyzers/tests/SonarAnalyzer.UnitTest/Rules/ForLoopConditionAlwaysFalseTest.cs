@@ -25,15 +25,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ForLoopConditionAlwaysFalseTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<ForLoopConditionAlwaysFalse>();
+
         [TestMethod]
         public void ForLoopConditionAlwaysFalse() =>
-            new VerifierBuilder<ForLoopConditionAlwaysFalse>().AddPaths("ForLoopConditionAlwaysFalse.cs").Verify();
+            builder.AddPaths("ForLoopConditionAlwaysFalse.cs").Verify();
 
 #if NET
 
         [TestMethod]
         public void ForLoopConditionAlwaysFalse_CSharp9() =>
-            new VerifierBuilder<ForLoopConditionAlwaysFalse>().AddPaths("ForLoopConditionAlwaysFalse.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+            builder.AddPaths("ForLoopConditionAlwaysFalse.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+
+        [TestMethod]
+        public void ForLoopConditionAlwaysFalse_CSharp11() =>
+            builder.AddPaths("ForLoopConditionAlwaysFalse.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
 
 #endif
 
