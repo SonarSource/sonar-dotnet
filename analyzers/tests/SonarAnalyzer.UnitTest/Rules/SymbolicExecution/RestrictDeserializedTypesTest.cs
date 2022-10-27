@@ -27,58 +27,60 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class RestrictDeserializedTypesTest
     {
-        private static readonly DiagnosticDescriptor[] OnlyDiagnostics = new[] { RestrictDeserializedTypes.S5773 };
+        private readonly VerifierBuilder sonar = new VerifierBuilder<SymbolicExecutionRunner>().WithBasePath(@"SymbolicExecution\Sonar")
+            .AddReferences(AdditionalReferences())
+            .WithOnlyDiagnostics(RestrictDeserializedTypes.S5773);
 
 #if NETFRAMEWORK // These serializers are available only when targeting .Net Framework
+
         [TestMethod]
-        public void RestrictDeserializedTypesFormatters()
+        public void RestrictDeserializedTypesFormatters_CSharp8()
         {
             using var _ = new AssertIgnoreScope(); // EnsureStackState fails an assertion in this test file
-            OldVerifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\RestrictDeserializedTypes.cs",
-                new SymbolicExecutionRunner(),
-                ParseOptionsHelper.FromCSharp8,
-                AdditionalReferencesNetFx(),
-                onlyDiagnostics: OnlyDiagnostics);
+            sonar.AddPaths("RestrictDeserializedTypes.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
         }
 
         [TestMethod]
-        public void RestrictDeserializedTypes_DoesNotRaiseIssuesForTestProject() =>
-            OldVerifier.VerifyNoIssueReportedInTest(@"TestCases\SymbolicExecution\Sonar\RestrictDeserializedTypes.cs",
-                new SymbolicExecutionRunner(),
-                ParseOptionsHelper.FromCSharp8,
-                AdditionalReferencesNetFx(),
-                onlyDiagnostics: OnlyDiagnostics);
+        public void RestrictDeserializedTypes_DoesNotRaiseIssuesForTestProject_CSharp8() =>
+            sonar.AddPaths("RestrictDeserializedTypes.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .AddTestReference()
+                .VerifyNoIssueReported();
 
         [TestMethod]
-        public void RestrictDeserializedTypesJavaScriptSerializer() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\RestrictDeserializedTypes.JavaScriptSerializer.cs",
-                new SymbolicExecutionRunner(),
-                ParseOptionsHelper.FromCSharp8,
-                AdditionalReferencesNetFx(),
-                onlyDiagnostics: OnlyDiagnostics);
+        public void RestrictDeserializedTypesJavaScriptSerializer_CSharp8() =>
+            sonar.AddPaths("RestrictDeserializedTypes.JavaScriptSerializer.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
 
         [TestMethod]
-        public void RestrictDeserializedTypesLosFormatter() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\RestrictDeserializedTypes.LosFormatter.cs",
-                new SymbolicExecutionRunner(),
-                ParseOptionsHelper.FromCSharp8,
-                AdditionalReferencesNetFx(),
-                onlyDiagnostics: OnlyDiagnostics);
+        public void RestrictDeserializedTypesLosFormatter_CSharp8() =>
+            sonar.AddPaths("RestrictDeserializedTypes.LosFormatter.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
 
-        private static IEnumerable<MetadataReference> AdditionalReferencesNetFx() =>
+        private static IEnumerable<MetadataReference> AdditionalReferences() =>
             FrameworkMetadataReference.SystemRuntimeSerialization
             .Union(FrameworkMetadataReference.SystemRuntimeSerializationFormattersSoap)
             .Union(FrameworkMetadataReference.SystemWeb)
             .Union(FrameworkMetadataReference.SystemWebExtensions);
+
 #endif
 
 #if NET
+
         [TestMethod]
         public void RestrictDeserializedTypesFormatters_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SymbolicExecution\Sonar\RestrictDeserializedTypes.CSharp9.cs",
-                new SymbolicExecutionRunner(),
-                new[] { MetadataReferences.CoreMetadataReference.SystemRuntimeSerializationFormatters },
-                onlyDiagnostics: OnlyDiagnostics);
+            sonar.AddPaths("RestrictDeserializedTypes.CSharp9.cs")
+                .WithTopLevelStatements()
+                .Verify();
+
+        private static IEnumerable<MetadataReference> AdditionalReferences() =>
+            new[] { MetadataReferences.CoreMetadataReference.SystemRuntimeSerializationFormatters };
+
 #endif
+
     }
 }

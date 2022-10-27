@@ -26,57 +26,52 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ConditionEvaluatesToConstantTest
     {
-        private static readonly DiagnosticDescriptor[] OnlyDiagnostics = new[] { ConditionEvaluatesToConstant.S2583, ConditionEvaluatesToConstant.S2589 };
+        private readonly VerifierBuilder sonar = new VerifierBuilder<SymbolicExecutionRunner>().WithBasePath(@"SymbolicExecution\Sonar")
+            .WithOnlyDiagnostics(new[] { ConditionEvaluatesToConstant.S2583, ConditionEvaluatesToConstant.S2589 });
 
-        [TestMethod]
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void ConditionEvaluatesToConstant_CS(ProjectType projectType) =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\SymbolicExecution\Sonar\ConditionEvaluatesToConstant.cs",
-                new SymbolicExecutionRunner(),
-                NuGetMetadataReference.MicrosoftExtensionsPrimitives("3.1.7").Concat(TestHelper.ProjectTypeReference(projectType)),
-                onlyDiagnostics: OnlyDiagnostics);
+            sonar.AddPaths("ConditionEvaluatesToConstant.cs")
+                .AddReferences(NuGetMetadataReference.MicrosoftExtensionsPrimitives("3.1.7").Concat(TestHelper.ProjectTypeReference(projectType)))
+                .Verify();
 
         [TestMethod]
         public void ConditionEvaluatesToConstant_FromCSharp7() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\SymbolicExecution\Sonar\ConditionEvaluatesToConstant.CSharp7.cs",
-                new SymbolicExecutionRunner(),
-                ParseOptionsHelper.FromCSharp7,
-                onlyDiagnostics: OnlyDiagnostics);
+            sonar.AddPaths("ConditionEvaluatesToConstant.CSharp7.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp7)
+                .Verify();
 
         [TestMethod]
         public void ConditionEvaluatesToConstant_FromCSharp8() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\SymbolicExecution\Sonar\ConditionEvaluatesToConstant.CSharp8.cs",
-                new SymbolicExecutionRunner(),
-                ParseOptionsHelper.FromCSharp8,
-                MetadataReferenceFacade.NETStandard21,
-                onlyDiagnostics: OnlyDiagnostics);
+            sonar.AddPaths("ConditionEvaluatesToConstant.CSharp8.cs")
+                .AddReferences(MetadataReferenceFacade.NETStandard21)
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
 
 #if NET
+
         [TestMethod]
         public void ConditionEvaluatesToConstant_FromCSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(
-                @"TestCases\SymbolicExecution\Sonar\ConditionEvaluatesToConstant.CSharp9.cs",
-                new SymbolicExecutionRunner(),
-                onlyDiagnostics: OnlyDiagnostics);
+            sonar.AddPaths("ConditionEvaluatesToConstant.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
 
         [TestMethod]
         public void ConditionEvaluatesToConstant_FromCSharp9_TopLevelStatements() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(
-                @"TestCases\SymbolicExecution\Sonar\ConditionEvaluatesToConstant.CSharp9.TopLevelStatements.cs",
-                new SymbolicExecutionRunner(),
-                onlyDiagnostics: OnlyDiagnostics);
+            sonar.AddPaths("ConditionEvaluatesToConstant.CSharp9.TopLevelStatements.cs")
+                .WithTopLevelStatements()
+                .Verify();
 
         [TestMethod]
         public void ConditionEvaluatesToConstant_FromCSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(
-                @"TestCases\SymbolicExecution\Sonar\ConditionEvaluatesToConstant.CSharp10.cs",
-                new SymbolicExecutionRunner(),
-                onlyDiagnostics: OnlyDiagnostics);
+            sonar.AddPaths("ConditionEvaluatesToConstant.CSharp10.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .WithConcurrentAnalysis(false)
+                .Verify();
+
 #endif
+
     }
 }

@@ -26,33 +26,33 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class EmptyNullableValueAccessTest
     {
-        private static readonly DiagnosticDescriptor[] OnlyDiagnostics = new[] { EmptyNullableValueAccess.S3655 };
+        private readonly VerifierBuilder sonar = new VerifierBuilder<SymbolicExecutionRunner>().WithBasePath(@"SymbolicExecution\Sonar")
+            .WithOnlyDiagnostics(new[] { EmptyNullableValueAccess.S3655 });
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        public void EmptyNullableValueAccess_CS(ProjectType projectType) =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\SymbolicExecution\Sonar\EmptyNullableValueAccess.cs",
-                new SymbolicExecutionRunner(),
-                ParseOptionsHelper.FromCSharp8,
-                TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21),
-                onlyDiagnostics: OnlyDiagnostics);
+        public void EmptyNullableValueAccess_CSharp8(ProjectType projectType) =>
+            sonar.AddPaths("EmptyNullableValueAccess.cs")
+                .AddReferences(TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21))
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
 
 #if NET
+
         [TestMethod]
         public void EmptyNullableValueAccess_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(
-                @"TestCases\SymbolicExecution\Sonar\EmptyNullableValueAccess.CSharp9.cs",
-                new SymbolicExecutionRunner(),
-                onlyDiagnostics: OnlyDiagnostics);
+            sonar.AddPaths("EmptyNullableValueAccess.CSharp9.cs")
+                .WithTopLevelStatements()
+                .Verify();
 
         [TestMethod]
         public void EmptyNullableValueAccess_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(
-                @"TestCases\SymbolicExecution\Sonar\EmptyNullableValueAccess.CSharp10.cs",
-                new SymbolicExecutionRunner(),
-                onlyDiagnostics: OnlyDiagnostics);
+            sonar.AddPaths("EmptyNullableValueAccess.CSharp10.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .Verify();
+
 #endif
+
     }
 }

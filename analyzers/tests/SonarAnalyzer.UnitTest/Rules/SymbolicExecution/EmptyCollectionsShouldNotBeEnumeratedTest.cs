@@ -26,7 +26,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class EmptyCollectionsShouldNotBeEnumeratedTest
     {
-        private static readonly VerifierBuilder Builder = new VerifierBuilder<SymbolicExecutionRunner>()
+        private readonly VerifierBuilder sonar = new VerifierBuilder<SymbolicExecutionRunner>()
             .WithOnlyDiagnostics(EmptyCollectionsShouldNotBeEnumerated.S4158)
             .WithBasePath(@"SymbolicExecution\Sonar")
             .WithConcurrentAnalysis(false);
@@ -35,8 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void EmptyCollectionsShouldNotBeEnumerated_CS(ProjectType projectType) =>
-            Builder
-                .AddReferences(TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21))
+            sonar.AddReferences(TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21))
                 .AddPaths("EmptyCollectionsShouldNotBeEnumerated.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .Verify();
@@ -45,12 +44,13 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void EmptyCollectionsShouldNotBeEnumerated_CSharp9() =>
-            Builder.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp9.cs").WithTopLevelStatements().Verify();
+            sonar.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp9.cs").WithTopLevelStatements().Verify();
 
         [TestMethod]
         public void EmptyCollectionsShouldNotBeEnumerated_CSharp10() =>
-            Builder.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            sonar.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
 #endif
+
     }
 }
