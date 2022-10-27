@@ -107,4 +107,22 @@ namespace Tests.Diagnostics.Repro_6245
             Name = name;
         }
     }
+
+    public sealed class ClassC2 : Class1
+    {
+        public ClassC2()
+        {
+            DoSomething(); // Compliant
+        }
+
+        public override void DoSomething() { }
+    }
+
+    public sealed class ClassD2 : Class1
+    {
+        public ClassD2()
+        {
+            DoSomething(); // Compliant
+        }
+    }
 }
