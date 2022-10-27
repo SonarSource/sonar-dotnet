@@ -62,4 +62,3 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Verify();
     }
 }
-
