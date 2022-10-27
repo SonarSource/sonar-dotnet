@@ -26,15 +26,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class CatchRethrowTest
     {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.CatchRethrow>().AddPaths("CatchRethrow.cs");
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.CatchRethrow>();
 
         [TestMethod]
         public void CatchRethrow() =>
-            builderCS.Verify();
+            builderCS.AddPaths("CatchRethrow.cs").Verify();
 
         [TestMethod]
         public void CatchRethrow_CodeFix() =>
-            builderCS.WithCodeFix<CS.CatchRethrowCodeFix>()
+            builderCS.AddPaths("CatchRethrow.cs")
+                .WithCodeFix<CS.CatchRethrowCodeFix>()
                 .WithCodeFixedPaths("CatchRethrow.Fixed.cs")
                 .VerifyCodeFix();
 

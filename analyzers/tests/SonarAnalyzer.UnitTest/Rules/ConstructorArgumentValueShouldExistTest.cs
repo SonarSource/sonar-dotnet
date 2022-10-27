@@ -37,7 +37,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void ConstructorArgumentValueShouldExist_CS_CSharp9() =>
             builderCS.AddPaths("ConstructorArgumentValueShouldExist.CSharp9.cs")
-                .WithTopLevelStatements()
+                .WithConcurrentAnalysis(false)
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
                 .Verify();
 
 #else

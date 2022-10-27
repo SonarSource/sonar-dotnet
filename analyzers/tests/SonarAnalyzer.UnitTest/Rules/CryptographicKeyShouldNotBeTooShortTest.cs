@@ -25,13 +25,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class CryptographicKeyShouldNotBeTooShortTest
     {
-        private readonly VerifierBuilder builder = new VerifierBuilder<CryptographicKeyShouldNotBeTooShort>();
+        private readonly VerifierBuilder builder = new VerifierBuilder<CryptographicKeyShouldNotBeTooShort>().AddReferences(GetAdditionalReferences());
 
         [TestMethod]
         public void CryptographicKeyShouldNotBeTooShort() =>
             builder.AddPaths("CryptographicKeyShouldNotBeTooShort.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
-                .AddReferences(GetAdditionalReferences())
                 .Verify();
 
 #if NETFRAMEWORK
@@ -40,7 +39,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CryptographicKeyShouldNotBeTooShort_NetFramework() =>
             builder.AddPaths("CryptographicKeyShouldNotBeTooShort.BeforeNet7.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
-                .AddReferences(GetAdditionalReferences())
                 .Verify();
 
 #else
@@ -49,7 +47,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CryptographicKeyShouldNotBeTooShort_CSharp9() =>
             builder.AddPaths("CryptographicKeyShouldNotBeTooShort.CSharp9.cs")
                 .WithTopLevelStatements()
-                .AddReferences(GetAdditionalReferences())
                 .Verify();
 
 #endif
