@@ -25,14 +25,23 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ReturnValueIgnoredTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<ReturnValueIgnored>();
+
         [TestMethod]
         public void ReturnValueIgnored() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ReturnValueIgnored.cs", new ReturnValueIgnored());
+            builder.AddPaths("ReturnValueIgnored.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void ReturnValueIgnored_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ReturnValueIgnored.CSharp9.cs", new ReturnValueIgnored());
+            builder.AddPaths("ReturnValueIgnored.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).WithTopLevelStatements().Verify();
+
+        [TestMethod]
+        public void ReturnValueIgnored_CSharp11() =>
+            builder.AddPaths("ReturnValueIgnored.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).WithTopLevelStatements().Verify();
+
 #endif
+
     }
 }
