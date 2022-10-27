@@ -35,15 +35,15 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void DontMixIncrementOrDecrementWithOtherOperators_CSharp9() =>
-            builder.AddPaths("DontMixIncrementOrDecrementWithOtherOperators.CSharp9.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
-                .Verify();
+            builder.AddPaths("DontMixIncrementOrDecrementWithOtherOperators.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
         [TestMethod]
         public void DontMixIncrementOrDecrementWithOtherOperators_CSharp10() =>
-            builder.AddPaths("DontMixIncrementOrDecrementWithOtherOperators.CSharp10.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .Verify();
+            builder.AddPaths("DontMixIncrementOrDecrementWithOtherOperators.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+
+        [TestMethod]
+        public void DontMixIncrementOrDecrementWithOtherOperators_CSharp11() =>
+            builder.AddPaths("DontMixIncrementOrDecrementWithOtherOperators.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
 
 #endif
 
