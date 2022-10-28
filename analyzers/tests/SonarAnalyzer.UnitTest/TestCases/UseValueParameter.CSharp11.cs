@@ -6,7 +6,7 @@ namespace Tests.Diagnostics
     {
         static abstract int Foo1 { get; set; }
 
-        static abstract event EventHandler Bar3;
+        static abstract event EventHandler Bar4;
     }
 
     public class Foo : IFoo
@@ -23,7 +23,19 @@ namespace Tests.Diagnostics
             set { } // Noncompliant
         }
 
-        public static event EventHandler Bar3
+        public static float[] Bar3
+        {
+            get { return null; }
+            set
+            {
+                if (value is [1, .., 42])
+                {
+
+                }
+            }
+        }
+
+        public static event EventHandler Bar4
         {
             add { } // Compliant because interface implementation
             remove { } // Compliant because interface implementation

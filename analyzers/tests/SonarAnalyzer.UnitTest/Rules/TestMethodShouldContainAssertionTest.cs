@@ -183,6 +183,13 @@ public class Foo
                 .WithOptions(ParseOptionsHelper.FromCSharp9)
                 .Verify();
 
+        [TestMethod]
+        public void TestMethodShouldContainAssertion_CSharp11() =>
+            builder.AddPaths("TestMethodShouldContainAssertion.CSharp11.cs")
+                .AddReferences(NuGetMetadataReference.MSTestTestFrameworkV1)
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
 #endif
 
         internal static VerifierBuilder WithTestReferences(IEnumerable<MetadataReference> testFrameworkReference,

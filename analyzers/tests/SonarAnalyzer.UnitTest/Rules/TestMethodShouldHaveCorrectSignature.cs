@@ -78,6 +78,13 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithOptions(ParseOptionsHelper.FromCSharp9)
                 .Verify();
 
+        [TestMethod]
+        public void TestMethodShouldHaveCorrectSignature_CSharp11() =>
+            builder.AddPaths("TestMethodShouldHaveCorrectSignature.CSharp11.cs")
+                .AddReferences(NuGetMetadataReference.MSTestTestFrameworkV1)
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
 #endif
 
     }

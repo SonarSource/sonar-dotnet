@@ -47,6 +47,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithOptions(ParseOptionsHelper.FromCSharp9)
                 .VerifyCodeFix();
 
+        [TestMethod]
+        public void VirtualEventField_CSharp11() =>
+            builder.AddPaths("VirtualEventField.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
 #endif
 
         [TestMethod]

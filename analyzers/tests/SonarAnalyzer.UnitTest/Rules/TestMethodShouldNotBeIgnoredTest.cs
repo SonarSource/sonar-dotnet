@@ -75,6 +75,13 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithOptions(ParseOptionsHelper.FromCSharp9)
                 .Verify();
 
+        [TestMethod]
+        public void TestMethodShouldNotBeIgnored_CSharp11() =>
+            builder.AddPaths("TestMethodShouldNotBeIgnored.CSharp11.cs")
+                .AddReferences(NuGetMetadataReference.MSTestTestFramework(Constants.NuGetLatestVersion))
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
 #endif
 
     }

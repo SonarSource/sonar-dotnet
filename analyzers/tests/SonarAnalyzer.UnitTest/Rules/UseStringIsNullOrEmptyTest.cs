@@ -25,8 +25,27 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class UseStringIsNullOrEmptyTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<UseStringIsNullOrEmpty>();
+
         [TestMethod]
         public void UseStringNullOrEmpty() =>
-            new VerifierBuilder<UseStringIsNullOrEmpty>().AddPaths("UseStringIsNullOrEmpty.cs").Verify();
+            builder.AddPaths("UseStringIsNullOrEmpty.cs").Verify();
+
+#if NET
+
+        [TestMethod]
+        public void UseStringNullOrEmpty_CSharp10() =>
+            builder.AddPaths("UseStringIsNullOrEmpty.CSharp10.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .Verify();
+
+        [TestMethod]
+        public void UseStringNullOrEmpty_CSharp11() =>
+            builder.AddPaths("UseStringIsNullOrEmpty.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
+#endif
+
     }
 }

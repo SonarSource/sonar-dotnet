@@ -42,6 +42,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithTopLevelStatements()
                 .Verify();
 
+        [TestMethod]
+        public void UnaryPrefixOperatorRepeated_CSharp11() =>
+            builderCS.AddPaths("UnaryPrefixOperatorRepeated.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
 #endif
 
         [TestMethod]
