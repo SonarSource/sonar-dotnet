@@ -22,5 +22,24 @@ namespace Tests.TestCases
 
             { }
         }
+
+        public void SpanMatch(Span<char> span, ReadOnlySpan<char> readonlySpan)
+        {
+            var a = span is """
+
+                            """; // Compliant
+
+            var b = readonlySpan is """
+
+                                    """; // Compliant
+        }
+
+        public bool ListPattern(string[] uris) =>
+            uris is ["""
+
+                     """,
+                     """
+
+                     """]; // Compliant
     }
 }

@@ -36,13 +36,10 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
 
         [TestMethod]
-        public void UriShouldNotBeHardcoded_CSharp11()
-        {
+        public void UriShouldNotBeHardcoded_CSharp11() =>
             builderCS.AddPaths("UriShouldNotBeHardcoded.CSharp11.cs")
-                .WithTopLevelStatements()
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
                 .Verify();
-        }
 
 #endif
 

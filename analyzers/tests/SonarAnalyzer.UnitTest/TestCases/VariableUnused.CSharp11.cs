@@ -1,10 +1,12 @@
 ﻿public class SomeClass
 {
-    private byte[] somefield;
-
-    public void SomeMethod(byte[] byteArray)
+    public void SomeMethod(object[] byteArray)
     {
-        if (byteArray is [1, 2, 3] someField) // FN
+        if (byteArray is [1, 2, 3] unusedVar) // FN
+        {
+        }
+
+        if (byteArray is [SomeClass unusdeVar2, 42]) // FN
         {
         }
     }
