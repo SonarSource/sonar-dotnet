@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Markup;
 
-var x = 1;
 public class MyExtension3 : MarkupExtension
 {
     public MyExtension3(object value1) { Value1 = value1; }

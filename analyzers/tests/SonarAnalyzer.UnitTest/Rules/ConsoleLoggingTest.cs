@@ -25,16 +25,22 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ConsoleLoggingTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<ConsoleLogging>();
+
         [TestMethod]
         public void ConsoleLogging() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ConsoleLogging.cs", new ConsoleLogging());
+            builder.AddPaths("ConsoleLogging.cs").Verify();
 
         [TestMethod]
         public void ConsoleLogging_ConditionalDirectives1() =>
-            OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\ConsoleLogging_Conditionals1.cs", new ConsoleLogging());
+            builder.AddPaths("ConsoleLogging_Conditionals1.cs")
+                .WithConcurrentAnalysis(false)
+                .Verify();
 
         [TestMethod]
         public void ConsoleLogging_ConditionalDirectives2() =>
-            OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\ConsoleLogging_Conditionals2.cs", new ConsoleLogging());
+            builder.AddPaths("ConsoleLogging_Conditionals2.cs")
+                .WithConcurrentAnalysis(false)
+                .Verify();
     }
 }

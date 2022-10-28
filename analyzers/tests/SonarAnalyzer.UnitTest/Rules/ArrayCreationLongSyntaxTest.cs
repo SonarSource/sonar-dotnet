@@ -25,14 +25,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ArrayCreationLongSyntaxTest
     {
-        private readonly VerifierBuilder builder = new VerifierBuilder<ArrayCreationLongSyntax>().AddPaths("ArrayCreationLongSyntax.vb");
+        private readonly VerifierBuilder builder = new VerifierBuilder<ArrayCreationLongSyntax>();
 
         [TestMethod]
         public void ArrayCreationLongSyntax() =>
-            builder.Verify();
+            builder.AddPaths("ArrayCreationLongSyntax.vb").Verify();
 
         [TestMethod]
         public void ArrayCreationLongSyntax_CodeFix() =>
-            builder.WithCodeFix<ArrayCreationLongSyntaxCodeFix>().WithCodeFixedPaths("ArrayCreationLongSyntax.Fixed.vb").VerifyCodeFix();
+            builder.AddPaths("ArrayCreationLongSyntax.vb").WithCodeFix<ArrayCreationLongSyntaxCodeFix>().WithCodeFixedPaths("ArrayCreationLongSyntax.Fixed.vb").VerifyCodeFix();
     }
 }

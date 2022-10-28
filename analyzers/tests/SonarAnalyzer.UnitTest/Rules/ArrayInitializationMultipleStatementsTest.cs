@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using VB = SonarAnalyzer.Rules.VisualBasic;
+using SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -27,6 +27,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ArrayInitializationMultipleStatements() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ArrayInitializationMultipleStatements.vb", new VB.ArrayInitializationMultipleStatements());
+            new VerifierBuilder<ArrayInitializationMultipleStatements>().AddPaths("ArrayInitializationMultipleStatements.vb").Verify();
     }
 }

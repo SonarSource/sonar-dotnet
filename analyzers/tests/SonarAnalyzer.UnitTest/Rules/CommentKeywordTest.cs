@@ -26,28 +26,39 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class CommentKeywordTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.CommentKeyword>();
+        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.CommentKeyword>();
+
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void CommentTodo_CS(ProjectType projectType) =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\CommentTodo.cs", new CS.CommentKeyword(), TestHelper.ProjectTypeReference(projectType));
+            builderCS.AddPaths("CommentTodo.cs")
+                .AddReferences(TestHelper.ProjectTypeReference(projectType))
+                .Verify();
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void CommentFixme_CS(ProjectType projectType) =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\CommentFixme.cs", new CS.CommentKeyword(), TestHelper.ProjectTypeReference(projectType));
+            builderCS.AddPaths("CommentFixme.cs")
+                .AddReferences(TestHelper.ProjectTypeReference(projectType))
+                .Verify();
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void CommentTodo_VB(ProjectType projectType) =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\CommentTodo.vb", new VB.CommentKeyword(), TestHelper.ProjectTypeReference(projectType));
+            builderVB.AddPaths("CommentTodo.vb")
+                .AddReferences(TestHelper.ProjectTypeReference(projectType))
+                .Verify();
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void CommentFixme_VB(ProjectType projectType) =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\CommentFixme.vb", new VB.CommentKeyword(), TestHelper.ProjectTypeReference(projectType));
+            builderVB.AddPaths("CommentFixme.vb")
+                .AddReferences(TestHelper.ProjectTypeReference(projectType))
+                .Verify();
     }
 }

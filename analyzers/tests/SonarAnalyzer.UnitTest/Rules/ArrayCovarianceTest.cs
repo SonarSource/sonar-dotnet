@@ -25,14 +25,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ArrayCovarianceTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<ArrayCovariance>();
+
         [TestMethod]
         public void ArrayCovariance() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ArrayCovariance.cs", new ArrayCovariance());
+            builder.AddPaths("ArrayCovariance.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void ArrayCovariance_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ArrayCovariance.CSharp9.cs", new ArrayCovariance());
+            builder.AddPaths("ArrayCovariance.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
+
 #endif
+
     }
 }

@@ -25,12 +25,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class CatchEmptyTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<CatchEmpty>();
+
         [TestMethod]
         public void CatchEmpty() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\CatchEmpty.cs", new CatchEmpty());
+            builder.AddPaths("CatchEmpty.cs").Verify();
 
         [TestMethod]
         public void CatchEmpty_InTest() =>
-            OldVerifier.VerifyNoIssueReportedInTest(@"TestCases\CatchEmpty.cs", new CatchEmpty());
+            builder.AddPaths("CatchEmpty.cs").AddTestReference().VerifyNoIssueReported();
     }
 }

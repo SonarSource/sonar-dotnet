@@ -26,20 +26,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class BooleanCheckInvertedTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.BooleanCheckInverted>();
+
         [TestMethod]
         public void BooleanCheckInverted_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\BooleanCheckInverted.cs", new CS.BooleanCheckInverted());
+            builderCS.AddPaths("BooleanCheckInverted.cs").Verify();
 
         [TestMethod]
         public void BooleanCheckInverted_CS_CodeFix() =>
-            OldVerifier.VerifyCodeFix<CS.BooleanCheckInvertedCodeFix>(
-                @"TestCases\BooleanCheckInverted.cs",
-                @"TestCases\BooleanCheckInverted.Fixed.cs",
-                @"TestCases\BooleanCheckInverted.Fixed.Batch.cs",
-                new CS.BooleanCheckInverted());
+            builderCS.AddPaths("BooleanCheckInverted.cs")
+                .WithCodeFix<CS.BooleanCheckInvertedCodeFix>()
+                .WithCodeFixedPaths("BooleanCheckInverted.Fixed.cs", "BooleanCheckInverted.Fixed.Batch.cs")
+                .VerifyCodeFix();
 
         [TestMethod]
         public void BooleanCheckInverted_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\BooleanCheckInverted.vb", new VB.BooleanCheckInverted());
+            new VerifierBuilder<VB.BooleanCheckInverted>().AddPaths("BooleanCheckInverted.vb").Verify();
     }
 }
