@@ -26,17 +26,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DoNotLockWeakIdentityObjectsTest
     {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.DoNotLockWeakIdentityObjects>();
-        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.DoNotLockWeakIdentityObjects>();
+        private readonly VerifierBuilder builder = new VerifierBuilder<CS.DoNotLockWeakIdentityObjects>();
+
         [TestMethod]
         public void DoNotLockWeakIdentityObjects_CS() =>
-            builderCS.AddPaths("DoNotLockWeakIdentityObjects.cs").Verify();
+            builder.AddPaths("DoNotLockWeakIdentityObjects.cs").Verify();
 
 #if NET
 
         [TestMethod]
         public void DoNotLockWeakIdentityObjects_CSharp11() =>
-            builderCS.AddPaths("DoNotLockWeakIdentityObjects.CSharp11.cs")
+            builder.AddPaths("DoNotLockWeakIdentityObjects.CSharp11.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
                 .Verify();
 
@@ -44,6 +44,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void DoNotLockWeakIdentityObjects_VB() =>
-            builderVB.AddPaths("DoNotLockWeakIdentityObjects.vb").Verify();
+            new VerifierBuilder<VB.DoNotLockWeakIdentityObjects>().AddPaths("DoNotLockWeakIdentityObjects.vb").Verify();
     }
 }
