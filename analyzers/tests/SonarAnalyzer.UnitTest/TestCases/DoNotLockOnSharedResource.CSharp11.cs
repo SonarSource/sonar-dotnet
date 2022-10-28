@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Tests.Diagnostics
 {
@@ -7,9 +6,7 @@ namespace Tests.Diagnostics
     {
         public void RawStringLiterals()
         {
-            lock ("""foo""") // Noncompliant
-            {
-            }
+            lock ("""foo""") { }// Noncompliant
         }
     }
 }

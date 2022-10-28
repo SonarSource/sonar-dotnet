@@ -25,14 +25,27 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DotNotOverloadOperatorEqualTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<DotNotOverloadOperatorEqual>();
+
         [TestMethod]
         public void DotNotOverloadOperatorEqual() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DotNotOverloadOperatorEqual.cs", new DotNotOverloadOperatorEqual());
+            builder.AddPaths("DotNotOverloadOperatorEqual.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void DotNotOverloadOperatorEqual_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DotNotOverloadOperatorEqual.CSharp9.cs", new DotNotOverloadOperatorEqual());
+            builder.AddPaths("DotNotOverloadOperatorEqual.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
+
+        [TestMethod]
+        public void DotNotOverloadOperatorEqual_CSharp11() =>
+            builder.AddPaths("DotNotOverloadOperatorEqual.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
 #endif
+
     }
 }

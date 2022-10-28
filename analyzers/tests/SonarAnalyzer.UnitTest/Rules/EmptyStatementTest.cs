@@ -39,7 +39,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void EmptyStatement_CSharp9() =>
             builder.AddPaths("EmptyStatement.CSharp9.cs")
                 .WithTopLevelStatements()
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
                 .Verify();
 
         [TestMethod]
@@ -53,7 +52,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void EmptyStatement_CodeFix() =>
             codeFix.AddPaths("EmptyStatement.cs")
-                .WithLanguageVersion(LanguageVersion.CSharp8)
                 .WithCodeFixedPaths("EmptyStatement.Fixed.cs")
                 .VerifyCodeFix();
 
@@ -62,7 +60,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void EmptyStatement_CodeFix_CSharp9() =>
             codeFix.AddPaths("EmptyStatement.CSharp9.cs")
-                .WithLanguageVersion(LanguageVersion.CSharp9)
+                .WithTopLevelStatements()
                 .WithCodeFixedPaths("EmptyStatement.CSharp9.Fixed.cs")
                 .VerifyCodeFix();
 

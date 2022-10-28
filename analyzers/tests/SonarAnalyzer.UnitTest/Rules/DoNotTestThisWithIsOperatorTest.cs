@@ -25,18 +25,33 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DoNotTestThisWithIsOperatorTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<DoNotTestThisWithIsOperator>();
+
         [TestMethod]
         public void DoNotTestThisWithIsOperator() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotTestThisWithIsOperator.cs", new DoNotTestThisWithIsOperator());
+            builder.AddPaths("DoNotTestThisWithIsOperator.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void DoNotTestThisWithIsOperator_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DoNotTestThisWithIsOperator.CSharp9.cs", new DoNotTestThisWithIsOperator());
+            builder.AddPaths("DoNotTestThisWithIsOperator.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
 
         [TestMethod]
         public void DoNotTestThisWithIsOperator_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\DoNotTestThisWithIsOperator.CSharp10.cs", new DoNotTestThisWithIsOperator());
+            builder.AddPaths("DoNotTestThisWithIsOperator.CSharp10.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .Verify();
+
+        [TestMethod]
+        public void DoNotTestThisWithIsOperator_CSharp11() =>
+            builder.AddPaths("DoNotTestThisWithIsOperator.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
 #endif
+
     }
 }

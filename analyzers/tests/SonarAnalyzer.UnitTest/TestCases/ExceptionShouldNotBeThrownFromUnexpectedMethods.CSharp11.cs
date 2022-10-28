@@ -2,17 +2,23 @@
 
 namespace Tests.Diagnostics
 {
-    interface IMyInterface : IDisposable
+    interface IMyInterface
     {
-        static event EventHandler OnSomeArrow
+        static virtual event EventHandler VirtualEvent
         {
             add => throw new Exception(); // Noncompliant
             remove => throw new InvalidOperationException(); // Compliant - allowed exception
         }
+
+        static abstract event EventHandler AbstractEvent;
     }
 
     class MyClass : IMyInterface
     {
-        public void Dispose() => throw new Exception(); // Noncompliant
+        public static event EventHandler AbstractEvent
+        {
+            add => throw new Exception(); // Noncompliant
+            remove => throw new InvalidOperationException(); // Compliant - allowed exception
+        }
     }
 }

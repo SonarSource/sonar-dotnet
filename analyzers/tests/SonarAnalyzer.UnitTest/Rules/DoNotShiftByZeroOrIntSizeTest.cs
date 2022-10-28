@@ -37,7 +37,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotShiftByZeroOrIntSize_CSharp9() =>
             builder.AddPaths("DoNotShiftByZeroOrIntSize.CSharp9.cs")
                 .WithTopLevelStatements()
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
                 .Verify();
 
         [TestMethod]
@@ -49,7 +48,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void DoNotShiftByZeroOrIntSize_CSharp11() =>
             builder.AddPaths("DoNotShiftByZeroOrIntSize.CSharp11.cs")
-                .WithTopLevelStatements()
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
                 .Verify();
 
