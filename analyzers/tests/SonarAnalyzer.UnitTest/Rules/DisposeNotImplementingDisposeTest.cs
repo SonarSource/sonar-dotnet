@@ -35,11 +35,21 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void DisposeNotImplementingDispose_CSharp9() =>
-            builder.AddPaths("DisposeNotImplementingDispose.CSharp9.Part1.cs", "DisposeNotImplementingDispose.CSharp9.Part2.cs").WithTopLevelStatements().Verify();
+            builder.AddPaths("DisposeNotImplementingDispose.CSharp9.Part1.cs", "DisposeNotImplementingDispose.CSharp9.Part2.cs")
+                .WithTopLevelStatements()
+                .Verify();
 
         [TestMethod]
         public void DisposeNotImplementingDispose_CSharp10() =>
-            builder.AddPaths("DisposeNotImplementingDispose.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            builder.AddPaths("DisposeNotImplementingDispose.CSharp10.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .Verify();
+
+        [TestMethod]
+        public void DisposeNotImplementingDispose_CSharp11() =>
+            builder.AddPaths("DisposeNotImplementingDispose.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
 
 #endif
 

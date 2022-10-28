@@ -31,17 +31,30 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void EmptyMethod() =>
-            builderCS.AddPaths("EmptyMethod.cs").WithOptions(ParseOptionsHelper.FromCSharp8).AddReferences(MetadataReferenceFacade.NETStandard21).Verify();
+            builderCS.AddPaths("EmptyMethod.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .AddReferences(MetadataReferenceFacade.NETStandard21)
+                .Verify();
 
 #if NET
 
         [TestMethod]
-        public void EmptyMethod_CSharp10() =>
-            builderCS.AddPaths("EmptyMethod.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+        public void EmptyMethod_CSharp9() =>
+            builderCS.AddPaths("EmptyMethod.CSharp9.cs")
+                .WithTopLevelStatements()
+                .Verify();
 
         [TestMethod]
-        public void EmptyMethod_CSharp9() =>
-            builderCS.AddPaths("EmptyMethod.CSharp9.cs").WithTopLevelStatements().Verify();
+        public void EmptyMethod_CSharp10() =>
+            builderCS.AddPaths("EmptyMethod.CSharp10.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .Verify();
+
+        [TestMethod]
+        public void EmptyMethod_CSharp11() =>
+            builderCS.AddPaths("EmptyMethod.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
 
 #endif
 

@@ -25,18 +25,33 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DoNotShiftByZeroOrIntSizeTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<DoNotShiftByZeroOrIntSize>();
+
         [TestMethod]
         public void DoNotShiftByZeroOrIntSize() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotShiftByZeroOrIntSize.cs", new DoNotShiftByZeroOrIntSize());
+            builder.AddPaths("DoNotShiftByZeroOrIntSize.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void DoNotShiftByZeroOrIntSize_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotShiftByZeroOrIntSize.CSharp9.cs", new DoNotShiftByZeroOrIntSize());
+            builder.AddPaths("DoNotShiftByZeroOrIntSize.CSharp9.cs")
+                .WithTopLevelStatements()
+                .Verify();
 
         [TestMethod]
         public void DoNotShiftByZeroOrIntSize_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\DoNotShiftByZeroOrIntSize.CSharp10.cs", new DoNotShiftByZeroOrIntSize());
+            builder.AddPaths("DoNotShiftByZeroOrIntSize.CSharp10.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .Verify();
+
+        [TestMethod]
+        public void DoNotShiftByZeroOrIntSize_CSharp11() =>
+            builder.AddPaths("DoNotShiftByZeroOrIntSize.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
 #endif
+
     }
 }

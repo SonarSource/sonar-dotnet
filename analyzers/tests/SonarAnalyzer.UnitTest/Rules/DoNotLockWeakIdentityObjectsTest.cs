@@ -26,12 +26,24 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DoNotLockWeakIdentityObjectsTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<CS.DoNotLockWeakIdentityObjects>();
+
         [TestMethod]
         public void DoNotLockWeakIdentityObjects_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotLockWeakIdentityObjects.cs", new CS.DoNotLockWeakIdentityObjects());
+            builder.AddPaths("DoNotLockWeakIdentityObjects.cs").Verify();
+
+#if NET
+
+        [TestMethod]
+        public void DoNotLockWeakIdentityObjects_CSharp11() =>
+            builder.AddPaths("DoNotLockWeakIdentityObjects.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
+#endif
 
         [TestMethod]
         public void DoNotLockWeakIdentityObjects_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotLockWeakIdentityObjects.vb", new VB.DoNotLockWeakIdentityObjects());
+            new VerifierBuilder<VB.DoNotLockWeakIdentityObjects>().AddPaths("DoNotLockWeakIdentityObjects.vb").Verify();
     }
 }

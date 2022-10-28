@@ -25,16 +25,27 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class EventHandlerDelegateShouldHaveProperArgumentsTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<EventHandlerDelegateShouldHaveProperArguments>();
+
         [TestMethod]
         public void EventHandlerDelegateShouldHaveProperArguments() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\EventHandlerDelegateShouldHaveProperArguments.cs",
-                new EventHandlerDelegateShouldHaveProperArguments());
+            builder.AddPaths("EventHandlerDelegateShouldHaveProperArguments.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void EventHandlerDelegateShouldHaveProperArguments_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\EventHandlerDelegateShouldHaveProperArguments.CSharp9.cs",
-                new EventHandlerDelegateShouldHaveProperArguments());
+            builder.AddPaths("EventHandlerDelegateShouldHaveProperArguments.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
+
+        [TestMethod]
+        public void EventHandlerDelegateShouldHaveProperArguments_CSharp11() =>
+            builder.AddPaths("EventHandlerDelegateShouldHaveProperArguments.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
 #endif
+
     }
 }
