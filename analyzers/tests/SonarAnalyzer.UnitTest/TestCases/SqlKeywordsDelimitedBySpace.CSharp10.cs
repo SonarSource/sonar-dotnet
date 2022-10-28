@@ -53,4 +53,17 @@ namespace Tests.Diagnostics
             (x, var y) = (x, "TRUNCATE" + "TABLE HumanResources.JobCandidate;"); // Noncompliant
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/6126
+    public class Repro_6249
+    {
+        string SomeColumn { get; set; }
+
+        public void Method()
+        {
+            const string sql = "UPDATE [some_table]" +          // FN
+                $"SET [some_column] = @{nameof(SomeColumn)}," +
+                $" [other_column] = @{nameof(SomeColumn)}";     // Noncompliant FP
+        }
+    }
 }
