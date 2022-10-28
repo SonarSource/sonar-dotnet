@@ -26,7 +26,8 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class BypassingAccessibilityTest
     {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.BypassingAccessibility>();
+        private readonly VerifierBuilder  builderCS = new VerifierBuilder<CS.BypassingAccessibility>();
+        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.BypassingAccessibility>();
 
         [TestMethod]
         public void BypassingAccessibility_CS() =>
@@ -36,14 +37,16 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void BypassingAccessibility_CSharp9() =>
-            builderCS.AddPaths("BypassingAccessibility.CSharp9.cs")
-                .WithTopLevelStatements()
-                .Verify();
+            builderCS.AddPaths("BypassingAccessibility.CSharp9.cs").WithTopLevelStatements().Verify();
+
+        [TestMethod]
+        public void BypassingAccessibility_CSharp11() =>
+            builderCS.AddPaths("BypassingAccessibility.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
 
 #endif
 
         [TestMethod]
         public void BypassingAccessibility_VB() =>
-            new VerifierBuilder<VB.BypassingAccessibility>().AddPaths("BypassingAccessibility.vb").Verify();
+            builderVB.AddPaths("BypassingAccessibility.vb").Verify();
     }
 }
