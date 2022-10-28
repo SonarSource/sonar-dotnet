@@ -27,6 +27,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void OnErrorStatement() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\OnErrorStatement.vb", new OnErrorStatement());
+            new VerifierBuilder<OnErrorStatement>().AddPaths("OnErrorStatement.vb").Verify();
     }
 }

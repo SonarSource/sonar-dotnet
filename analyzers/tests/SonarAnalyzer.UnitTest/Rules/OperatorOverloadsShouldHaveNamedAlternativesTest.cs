@@ -25,14 +25,19 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class OperatorOverloadsShouldHaveNamedAlternativesTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<OperatorOverloadsShouldHaveNamedAlternatives>();
+
         [TestMethod]
         public void OperatorOverloadsShouldHaveNamedAlternatives() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\OperatorOverloadsShouldHaveNamedAlternatives.cs", new OperatorOverloadsShouldHaveNamedAlternatives());
+            builder.AddPaths("OperatorOverloadsShouldHaveNamedAlternatives.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void OperatorOverloadsShouldHaveNamedAlternatives_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\OperatorOverloadsShouldHaveNamedAlternatives.CSharp9.cs", new OperatorOverloadsShouldHaveNamedAlternatives());
+            builder.AddPaths("OperatorOverloadsShouldHaveNamedAlternatives.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+
 #endif
+
     }
 }

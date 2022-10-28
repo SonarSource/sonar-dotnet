@@ -26,62 +26,59 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class MarkWindowsFormsMainWithStaThreadTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.MarkWindowsFormsMainWithStaThread>().WithConcurrentAnalysis(false);
+        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.MarkWindowsFormsMainWithStaThread>().WithConcurrentAnalysis(false);
+
         [TestMethod]
         public void MarkWindowsFormsMainWithStaThread_CS() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\MarkWindowsFormsMainWithStaThread.cs",
-                new CS.MarkWindowsFormsMainWithStaThread(),
-                default,
-                CompilationErrorBehavior.Ignore,
-                OutputKind.WindowsApplication,
-                MetadataReferenceFacade.SystemWindowsForms);
+            builderCS
+                .AddPaths(@"MarkWindowsFormsMainWithStaThread.cs")
+                .WithErrorBehavior(CompilationErrorBehavior.Ignore)
+                .WithOutputKind(OutputKind.WindowsApplication)
+                .AddReferences(MetadataReferenceFacade.SystemWindowsForms)
+                .Verify();
 
         [TestMethod]
         public void MarkWindowsFormsMainWithStaThread_VB() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\MarkWindowsFormsMainWithStaThread.vb",
-                new VB.MarkWindowsFormsMainWithStaThread(),
-                default,
-                CompilationErrorBehavior.Ignore,
-                OutputKind.WindowsApplication,
-                MetadataReferenceFacade.SystemWindowsForms);
+            builderVB
+                .AddPaths(@"MarkWindowsFormsMainWithStaThread.vb")
+                .WithErrorBehavior(CompilationErrorBehavior.Ignore)
+                .WithOutputKind(OutputKind.WindowsApplication)
+                .AddReferences(MetadataReferenceFacade.SystemWindowsForms)
+                .Verify();
 
         [TestMethod]
         public void MarkWindowsFormsMainWithStaThread_ClassLibrary_CS() =>
-            OldVerifier.VerifyNoIssueReported(
-                @"TestCases\MarkWindowsFormsMainWithStaThread.cs",
-                new CS.MarkWindowsFormsMainWithStaThread(),
-                default,
-                CompilationErrorBehavior.Ignore,
-                OutputKind.DynamicallyLinkedLibrary,
-                MetadataReferenceFacade.SystemWindowsForms);
+            builderCS
+                .AddPaths(@"MarkWindowsFormsMainWithStaThread.cs")
+                .WithErrorBehavior(CompilationErrorBehavior.Ignore)
+                .WithOutputKind(OutputKind.DynamicallyLinkedLibrary)
+                .AddReferences(MetadataReferenceFacade.SystemWindowsForms)
+                .VerifyNoIssueReported();
 
         [TestMethod]
         public void MarkWindowsFormsMainWithStaThread_ClassLibrary_VB() =>
-            OldVerifier.VerifyNoIssueReported(
-                @"TestCases\MarkWindowsFormsMainWithStaThread.vb",
-                new VB.MarkWindowsFormsMainWithStaThread(),
-                default,
-                CompilationErrorBehavior.Ignore,
-                OutputKind.DynamicallyLinkedLibrary,
-                MetadataReferenceFacade.SystemWindowsForms);
+            builderVB
+                .AddPaths(@"MarkWindowsFormsMainWithStaThread.vb")
+                .WithErrorBehavior(CompilationErrorBehavior.Ignore)
+                .WithOutputKind(OutputKind.DynamicallyLinkedLibrary)
+                .AddReferences(MetadataReferenceFacade.SystemWindowsForms)
+                .VerifyNoIssueReported();
 
         [TestMethod]
         public void MarkWindowsFormsMainWithStaThread_CS_NoWindowsForms() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\MarkWindowsFormsMainWithStaThread_NoWindowsForms.cs",
-                new CS.MarkWindowsFormsMainWithStaThread(),
-                default,
-                CompilationErrorBehavior.Ignore,
-                OutputKind.WindowsApplication);
+            builderCS
+                .AddPaths(@"MarkWindowsFormsMainWithStaThread_NoWindowsForms.cs")
+                .WithErrorBehavior(CompilationErrorBehavior.Ignore)
+                .WithOutputKind(OutputKind.WindowsApplication)
+                .Verify();
 
         [TestMethod]
         public void MarkWindowsFormsMainWithStaThread_VB_NoWindowsForms() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\MarkWindowsFormsMainWithStaThread_NoWindowsForms.vb",
-                new VB.MarkWindowsFormsMainWithStaThread(),
-                default,
-                CompilationErrorBehavior.Ignore,
-                OutputKind.WindowsApplication);
+            builderVB
+                .AddPaths(@"MarkWindowsFormsMainWithStaThread_NoWindowsForms.vb")
+                .WithErrorBehavior(CompilationErrorBehavior.Ignore)
+                .WithOutputKind(OutputKind.WindowsApplication)
+                .Verify();
     }
 }

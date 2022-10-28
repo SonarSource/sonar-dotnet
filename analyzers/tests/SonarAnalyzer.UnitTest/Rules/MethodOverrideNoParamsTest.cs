@@ -25,21 +25,25 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class MethodOverrideNoParamsTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<MethodOverrideNoParams>();
+
         [TestMethod]
         public void MethodOverrideNoParams() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\MethodOverrideNoParams.cs", new MethodOverrideNoParams());
+            builder.AddPaths("MethodOverrideNoParams.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void MethodOverrideNoParams_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodOverrideNoParams.CSharp9.cs", new MethodOverrideNoParams());
+            builder.AddPaths("MethodOverrideNoParams.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+
 #endif
 
         [TestMethod]
         public void MethodOverrideNoParams_CodeFix() =>
-            OldVerifier.VerifyCodeFix<MethodOverrideNoParamsCodeFix>(
-                @"TestCases\MethodOverrideNoParams.cs",
-                @"TestCases\MethodOverrideNoParams.Fixed.cs",
-                new MethodOverrideNoParams());
+            builder.WithCodeFix<MethodOverrideNoParamsCodeFix>()
+                .AddPaths("MethodOverrideNoParams.cs")
+                .WithCodeFixedPaths("MethodOverrideNoParams.Fixed.cs")
+                .VerifyCodeFix();
     }
 }

@@ -26,27 +26,28 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class MarkAssemblyWithClsCompliantAttributeTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.MarkAssemblyWithClsCompliantAttribute>().WithConcurrentAnalysis(false);
+        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.MarkAssemblyWithClsCompliantAttribute>().WithConcurrentAnalysis(false);
+
         [TestMethod]
         public void MarkAssemblyWithClsCompliantAttribute_CS() =>
-            OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithClsCompliantAttribute.cs",
-                new CS.MarkAssemblyWithClsCompliantAttribute());
+            builderCS.AddPaths(@"MarkAssemblyWithClsCompliantAttribute.cs").Verify();
 
         [TestMethod]
         public void MarkAssemblyWithClsCompliantAttribute_VB() =>
-            OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithClsCompliantAttribute.vb",
-                new VB.MarkAssemblyWithClsCompliantAttribute());
+            builderVB.AddPaths(@"MarkAssemblyWithClsCompliantAttribute.vb").Verify();
 
         [TestMethod]
         public void MarkAssemblyWithClsCompliantAttributeNoncompliant_CS()
         {
-            Action action = () => OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithClsCompliantAttributeNoncompliant.cs", new CS.MarkAssemblyWithClsCompliantAttribute());
+            Action action = () => builderCS.AddPaths(@"MarkAssemblyWithClsCompliantAttributeNoncompliant.cs").Verify();
             action.Should().Throw<UnexpectedDiagnosticException>().WithMessage("*Provide a 'CLSCompliant' attribute for assembly 'project0'.*");
         }
 
         [TestMethod]
         public void MarkAssemblyWithClsCompliantAttributeNoncompliant_VB()
         {
-            Action action = () => OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithClsCompliantAttributeNoncompliant.vb", new VB.MarkAssemblyWithClsCompliantAttribute());
+            Action action = () => builderVB.AddPaths(@"MarkAssemblyWithClsCompliantAttributeNoncompliant.vb").Verify();
             action.Should().Throw<UnexpectedDiagnosticException>().WithMessage("*Provide a 'CLSCompliant' attribute for assembly 'project0'.*");
         }
     }

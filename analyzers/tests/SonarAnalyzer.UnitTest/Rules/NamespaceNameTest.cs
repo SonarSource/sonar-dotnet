@@ -27,6 +27,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void NamespaceName() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\NamespaceName.vb", new NamespaceName());
+            new VerifierBuilder<NamespaceName>().AddPaths("NamespaceName.vb").Verify();
     }
 }

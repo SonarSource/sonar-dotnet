@@ -26,29 +26,29 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class MarkAssemblyWithComVisibleAttributeTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.MarkAssemblyWithComVisibleAttribute>().WithConcurrentAnalysis(false);
+        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.MarkAssemblyWithComVisibleAttribute>().WithConcurrentAnalysis(false);
+
         [TestMethod]
         public void MarkAssemblyWithComVisibleAttribute_CS() =>
-            OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithComVisibleAttribute.cs",
-                new CS.MarkAssemblyWithComVisibleAttribute());
+            builderCS.AddPaths(@"MarkAssemblyWithComVisibleAttribute.cs").Verify();
 
         [TestMethod]
         public void MarkAssemblyWithComVisibleAttribute_VB() =>
-            OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithComVisibleAttribute.vb",
-                new VB.MarkAssemblyWithComVisibleAttribute());
+            builderVB.AddPaths(@"MarkAssemblyWithComVisibleAttribute.vb").Verify();
 
         [TestMethod]
         public void MarkAssemblyWithComVisibleAttributeNoncompliant_CS()
         {
-            Action action = () => OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithComVisibleAttributeNoncompliant.cs", new CS.MarkAssemblyWithComVisibleAttribute());
+            var action = () => builderCS.AddPaths(@"MarkAssemblyWithComVisibleAttributeNoncompliant.cs").Verify();
             action.Should().Throw<UnexpectedDiagnosticException>().WithMessage("*Provide a 'ComVisible' attribute for assembly 'project0'.*");
         }
 
         [TestMethod]
         public void MarkAssemblyWithComVisibleAttributeNoncompliant_VB()
         {
-            Action action = () => OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithComVisibleAttributeNoncompliant.vb", new VB.MarkAssemblyWithComVisibleAttribute());
+            var action = () => builderVB.AddPaths(@"MarkAssemblyWithComVisibleAttributeNoncompliant.vb").Verify();
             action.Should().Throw<UnexpectedDiagnosticException>().WithMessage("*Provide a 'ComVisible' attribute for assembly 'project0'.*");
         }
-
     }
 }

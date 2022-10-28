@@ -25,19 +25,23 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ObsoleteAttributesNeedExplanationTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<ObsoleteAttributesNeedExplanation>();
+
         [TestMethod]
         public void ObsoleteAttributesNeedExplanation() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ObsoleteAttributesNeedExplanation.cs", new ObsoleteAttributesNeedExplanation());
+            builder.AddPaths("ObsoleteAttributesNeedExplanation.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void ObsoleteAttributesNeedExplanation_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ObsoleteAttributesNeedExplanation.CSharp9.cs", new ObsoleteAttributesNeedExplanation());
+            builder.AddPaths("ObsoleteAttributesNeedExplanation.CSharp9.cs").WithTopLevelStatements().Verify();
 
         [TestMethod]
         public void ObsoleteAttributesNeedExplanation_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\ObsoleteAttributesNeedExplanation.CSharp10.cs", new ObsoleteAttributesNeedExplanation());
+            builder.AddPaths("ObsoleteAttributesNeedExplanation.CSharp10.cs").WithConcurrentAnalysis(false).WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
 #endif
+
     }
 }

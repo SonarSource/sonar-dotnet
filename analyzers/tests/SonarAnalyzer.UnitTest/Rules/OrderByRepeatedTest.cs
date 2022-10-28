@@ -25,15 +25,18 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class OrderByRepeatedTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<OrderByRepeated>();
+
         [TestMethod]
         public void OrderByRepeated() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\OrderByRepeated.cs", new OrderByRepeated());
+            builder.AddPaths("OrderByRepeated.cs").Verify();
 
         [TestMethod]
         public void OrderByRepeated_CodeFix() =>
-            OldVerifier.VerifyCodeFix<OrderByRepeatedCodeFix>(
-                @"TestCases\OrderByRepeated.cs",
-                @"TestCases\OrderByRepeated.Fixed.cs",
-                new OrderByRepeated());
+            builder
+                .WithCodeFix<OrderByRepeatedCodeFix>()
+                .AddPaths("OrderByRepeated.cs")
+                .WithCodeFixedPaths("OrderByRepeated.Fixed.cs")
+                .VerifyCodeFix();
     }
 }
