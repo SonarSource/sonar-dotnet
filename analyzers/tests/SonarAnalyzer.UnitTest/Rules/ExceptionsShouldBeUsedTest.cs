@@ -27,6 +27,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ExceptionsShouldBeUsed() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ExceptionsShouldBeUsed.cs", new ExceptionsShouldBeUsed());
+            new VerifierBuilder<ExceptionsShouldBeUsed>().AddPaths("ExceptionsShouldBeUsed.cs").Verify();
     }
 }

@@ -25,14 +25,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DefaultSectionShouldBeFirstOrLastTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<DefaultSectionShouldBeFirstOrLast>();
+
         [TestMethod]
         public void DefaultSectionShouldBeFirstOrLast() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DefaultSectionShouldBeFirstOrLast.cs", new DefaultSectionShouldBeFirstOrLast());
+            builder.AddPaths("DefaultSectionShouldBeFirstOrLast.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void DefaultSectionShouldBeFirstOrLast_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DefaultSectionShouldBeFirstOrLast.CSharp9.cs", new DefaultSectionShouldBeFirstOrLast());
+            builder.AddPaths("DefaultSectionShouldBeFirstOrLast.CSharp9.cs")
+                .WithTopLevelStatements()
+                .Verify();
+
 #endif
+
     }
 }

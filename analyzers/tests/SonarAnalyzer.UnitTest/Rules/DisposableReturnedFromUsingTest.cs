@@ -25,13 +25,23 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DisposableReturnedFromUsingTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<DisposableReturnedFromUsing>();
+
         [TestMethod]
-        public void DisposableReturnedFromUsing() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DisposableReturnedFromUsing.cs", new DisposableReturnedFromUsing(), ParseOptionsHelper.FromCSharp8);
+        public void DisposableReturnedFromUsing_CSharp8() =>
+            builder.AddPaths("DisposableReturnedFromUsing.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
+
 #if NET
+
         [TestMethod]
         public void DisposableReturnedFromUsing_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DisposableReturnedFromUsing.CSharp9.cs", new DisposableReturnedFromUsing());
+            builder.AddPaths("DisposableReturnedFromUsing.CSharp9.cs")
+                .WithTopLevelStatements()
+                .Verify();
+
 #endif
+
     }
 }

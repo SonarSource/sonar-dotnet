@@ -26,14 +26,22 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class EmptyNestedBlockTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.EmptyNestedBlock>();
+
         [TestMethod]
         public void EmptyNestedBlock_CS() =>
-            new VerifierBuilder<CS.EmptyNestedBlock>().AddPaths("EmptyNestedBlock.cs", "EmptyNestedBlock2.cs").WithAutogenerateConcurrentFiles(false).Verify();
+            builderCS.AddPaths("EmptyNestedBlock.cs", "EmptyNestedBlock2.cs")
+                .WithAutogenerateConcurrentFiles(false)
+                .Verify();
 
 #if NET
+
         [TestMethod]
         public void EmptyNestedBlock_CSharp10() =>
-            new VerifierBuilder<CS.EmptyNestedBlock>().AddPaths("EmptyNestedBlock.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            builderCS.AddPaths("EmptyNestedBlock.CSharp10.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .Verify();
+
 #endif
 
         [TestMethod]

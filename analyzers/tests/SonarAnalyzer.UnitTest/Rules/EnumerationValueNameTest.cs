@@ -27,6 +27,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void EnumerationValueName() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\EnumerationValueName.vb", new EnumerationValueName());
+            new VerifierBuilder<EnumerationValueName>().AddPaths("EnumerationValueName.vb").Verify();
     }
 }

@@ -35,9 +35,11 @@ namespace SonarAnalyzer.UnitTest.Rules
             OldVerifier.VerifyAnalyzer(@"TestCases\DoNotExposeListT.CSharp8.cs", new DoNotExposeListT(), ParseOptionsHelper.FromCSharp8);
 
 #if NET
+
         [TestMethod]
         public void DoNotExposeListT_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotExposeListT.CSharp9.cs", new DoNotExposeListT());
+
 #endif
 
         [TestMethod]

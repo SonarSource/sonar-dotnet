@@ -25,15 +25,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ExceptionRethrowTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<ExceptionRethrow>();
+
         [TestMethod]
         public void ExceptionRethrow() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ExceptionRethrow.cs", new ExceptionRethrow());
+            builder.AddPaths("ExceptionRethrow.cs").Verify();
 
         [TestMethod]
         public void ExceptionRethrow_CodeFix() =>
-            OldVerifier.VerifyCodeFix<ExceptionRethrowCodeFix>(
-                @"TestCases\ExceptionRethrow.cs",
-                @"TestCases\ExceptionRethrow.Fixed.cs",
-                new ExceptionRethrow());
+            builder.AddPaths("ExceptionRethrow.cs")
+                .WithCodeFix<ExceptionRethrowCodeFix>()
+                .WithCodeFixedPaths("ExceptionRethrow.Fixed.cs")
+                .VerifyCodeFix();
     }
 }

@@ -28,10 +28,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void EnumNameHasEnumSuffix_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\EnumNameHasEnumSuffix.cs", new CS.EnumNameHasEnumSuffix());
+            new VerifierBuilder<CS.EnumNameHasEnumSuffix>().AddPaths("EnumNameHasEnumSuffix.cs").Verify();
 
         [TestMethod]
         public void EnumNameHasEnumSuffix_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\EnumNameHasEnumSuffix.vb", new VB.EnumNameHasEnumSuffix());
+            new VerifierBuilder<VB.EnumNameHasEnumSuffix>().AddPaths("EnumNameHasEnumSuffix.vb").Verify();
     }
 }

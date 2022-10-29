@@ -25,18 +25,26 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DontMixIncrementOrDecrementWithOtherOperatorsTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<DontMixIncrementOrDecrementWithOtherOperators>();
+
         [TestMethod]
         public void DontMixIncrementOrDecrementWithOtherOperators() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DontMixIncrementOrDecrementWithOtherOperators.cs", new DontMixIncrementOrDecrementWithOtherOperators());
+            builder.AddPaths("DontMixIncrementOrDecrementWithOtherOperators.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void DontMixIncrementOrDecrementWithOtherOperators_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DontMixIncrementOrDecrementWithOtherOperators.CSharp9.cs", new DontMixIncrementOrDecrementWithOtherOperators());
+            builder.AddPaths("DontMixIncrementOrDecrementWithOtherOperators.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
 
         [TestMethod]
         public void DontMixIncrementOrDecrementWithOtherOperators_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\DontMixIncrementOrDecrementWithOtherOperators.CSharp10.cs", new DontMixIncrementOrDecrementWithOtherOperators());
+            builder.AddPaths("DontMixIncrementOrDecrementWithOtherOperators.CSharp10.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .Verify();
+
 #endif
 
     }

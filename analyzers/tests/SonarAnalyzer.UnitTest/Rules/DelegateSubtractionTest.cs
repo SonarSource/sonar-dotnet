@@ -25,14 +25,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DelegateSubtractionTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<DelegateSubtraction>();
+
         [TestMethod]
         public void DelegateSubtraction() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DelegateSubtraction.cs", new DelegateSubtraction());
+            builder.AddPaths("DelegateSubtraction.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void DelegateSubtraction_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DelegateSubtraction.CSharp9.cs", new DelegateSubtraction());
+            builder.AddPaths("DelegateSubtraction.CSharp9.cs")
+                .WithTopLevelStatements()
+                .Verify();
+
 #endif
+
     }
 }

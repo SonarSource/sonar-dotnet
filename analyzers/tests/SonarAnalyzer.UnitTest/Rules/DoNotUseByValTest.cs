@@ -25,15 +25,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DoNotUseByValTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<DoNotUseByVal>();
+
         [TestMethod]
         public void DoNotUseByVal() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotUseByVal.vb", new DoNotUseByVal());
+            builder.AddPaths("DoNotUseByVal.vb").Verify();
 
         [TestMethod]
         public void DoNotUseByValCodeFix() =>
-            OldVerifier.VerifyCodeFix<DoNotUseByValCodeFix>(
-                @"TestCases\DoNotUseByVal.vb",
-                @"TestCases\DoNotUseByVal.Fixed.vb",
-                new DoNotUseByVal());
+            builder.AddPaths("DoNotUseByVal.vb")
+                .WithCodeFix<DoNotUseByValCodeFix>()
+                .WithCodeFixedPaths("DoNotUseByVal.Fixed.vb")
+                .VerifyCodeFix();
     }
 }

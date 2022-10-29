@@ -27,6 +27,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void EqualityOnFloatingPoint() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\EqualityOnFloatingPoint.cs", new EqualityOnFloatingPoint());
+            new VerifierBuilder<EqualityOnFloatingPoint>().AddPaths("EqualityOnFloatingPoint.cs").Verify();
     }
 }

@@ -25,15 +25,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DoNotUseIIfTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<DoNotUseIIf>();
+
         [TestMethod]
         public void DoNotUseIif() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotUseIif.vb", new DoNotUseIIf());
+            builder.AddPaths("DoNotUseIif.vb").Verify();
 
         [TestMethod]
         public void DoNotUseIif_CodeFix() =>
-            OldVerifier.VerifyCodeFix<DoNotUseIIfCodeFix>(
-                @"TestCases\DoNotUseIif.vb",
-                @"TestCases\DoNotUseIif.Fixed.vb",
-                new DoNotUseIIf());
+            builder.AddPaths("DoNotUseIif.vb")
+                .WithCodeFix<DoNotUseIIfCodeFix>()
+                .WithCodeFixedPaths("DoNotUseIif.Fixed.vb")
+                .VerifyCodeFix();
     }
 }

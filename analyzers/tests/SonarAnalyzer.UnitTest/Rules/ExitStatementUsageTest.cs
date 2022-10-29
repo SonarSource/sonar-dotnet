@@ -27,6 +27,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ExitStatementUsage() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ExitStatementUsage.vb", new ExitStatementUsage());
+            new VerifierBuilder<ExitStatementUsage>().AddPaths("ExitStatementUsage.vb").Verify();
     }
 }

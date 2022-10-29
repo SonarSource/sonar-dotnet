@@ -25,14 +25,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class EqualityOnModulusTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<EqualityOnModulus>();
+
         [TestMethod]
         public void EqualityOnModulus() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\EqualityOnModulus.cs", new EqualityOnModulus());
+            builder.AddPaths("EqualityOnModulus.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void EqualityOnModulus_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EqualityOnModulus.CSharp9.cs", new EqualityOnModulus());
+            builder.AddPaths("EqualityOnModulus.CSharp9.cs")
+                .WithTopLevelStatements()
+                .Verify();
+
 #endif
+
     }
 }
