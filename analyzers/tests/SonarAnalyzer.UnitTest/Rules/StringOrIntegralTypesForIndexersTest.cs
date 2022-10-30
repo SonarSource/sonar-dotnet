@@ -25,18 +25,24 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class StringOrIntegralTypesForIndexersTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<StringOrIntegralTypesForIndexers>();
+
         [TestMethod]
-        public void StringOrIntegralTypesForIndexers() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\StringOrIntegralTypesForIndexers.cs",
-                new StringOrIntegralTypesForIndexers(),
-                ParseOptionsHelper.FromCSharp8,
-                MetadataReferenceFacade.NETStandard21);
+        public void StringOrIntegralTypesForIndexers_CSharp8() =>
+            builder.AddPaths("StringOrIntegralTypesForIndexers.cs")
+                .AddReferences(MetadataReferenceFacade.NETStandard21)
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
 
 #if NET
+
         [TestMethod]
         public void StringOrIntegralTypesForIndexers_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\StringOrIntegralTypesForIndexers.CSharp9.cs", new StringOrIntegralTypesForIndexers());
+            builder.AddPaths("StringOrIntegralTypesForIndexers.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
+
 #endif
+
     }
 }

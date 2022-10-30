@@ -27,7 +27,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class ShouldImplementExportedInterfacesTest
     {
         private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ShouldImplementExportedInterfaces>().AddReferences(MetadataReferenceFacade.SystemComponentModelComposition);
-        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.ShouldImplementExportedInterfaces>().AddReferences(MetadataReferenceFacade.SystemComponentModelComposition);
 
         [TestMethod]
         public void ShouldImplementExportedInterfaces_CS() =>
@@ -47,7 +46,10 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void ShouldImplementExportedInterfaces_VB() =>
-            builderVB.AddPaths("ShouldImplementExportedInterfaces.vb").Verify();
+            new VerifierBuilder<VB.ShouldImplementExportedInterfaces>()
+                .AddReferences(MetadataReferenceFacade.SystemComponentModelComposition)
+                .AddPaths("ShouldImplementExportedInterfaces.vb")
+                .Verify();
 
         [TestMethod]
         public void ShouldImplementExportedInterfaces_Partial() =>

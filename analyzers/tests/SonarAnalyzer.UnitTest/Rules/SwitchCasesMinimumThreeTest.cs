@@ -27,12 +27,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class SwitchCasesMinimumThreeTest
     {
         [TestMethod]
-        public void SwitchCasesMinimumThree_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\SwitchCasesMinimumThree.cs", new CS.SwitchCasesMinimumThree(), ParseOptionsHelper.FromCSharp8);
+        public void SwitchCasesMinimumThree_CSharp8() =>
+            new VerifierBuilder<CS.SwitchCasesMinimumThree>().AddPaths("SwitchCasesMinimumThree.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
 
         [TestMethod]
         public void SwitchCasesMinimumThree_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\SwitchCasesMinimumThree.vb",
-                new VB.SwitchCasesMinimumThree());
+            new VerifierBuilder<VB.SwitchCasesMinimumThree>().AddPaths("SwitchCasesMinimumThree.vb").Verify();
     }
 }

@@ -26,22 +26,30 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class PublicConstantFieldTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.PublicConstantField>();
+
         [TestMethod]
         public void PublicConstantField_CSharp() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\PublicConstantField.cs", new CS.PublicConstantField());
+            builderCS.AddPaths("PublicConstantField.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void PublicConstantField_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PublicConstantField.CSharp9.cs", new CS.PublicConstantField());
+            builderCS.AddPaths("PublicConstantField.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
 
         [TestMethod]
         public void PublicConstantField_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\PublicConstantField.CSharp10.cs", new CS.PublicConstantField());
+            builderCS.AddPaths("PublicConstantField.CSharp10.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .Verify();
+
 #endif
 
         [TestMethod]
         public void PublicConstantField_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\PublicConstantField.vb", new VB.PublicConstantField());
+            new VerifierBuilder<VB.PublicConstantField>().AddPaths("PublicConstantField.vb").Verify();
     }
 }

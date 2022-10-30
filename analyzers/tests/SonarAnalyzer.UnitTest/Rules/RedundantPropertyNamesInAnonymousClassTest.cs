@@ -25,15 +25,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class RedundantPropertyNamesInAnonymousClassTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<RedundantPropertyNamesInAnonymousClass>();
+
         [TestMethod]
         public void RedundantPropertyNamesInAnonymousClass() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\RedundantPropertyNamesInAnonymousClass.cs", new RedundantPropertyNamesInAnonymousClass());
+            builder.AddPaths("RedundantPropertyNamesInAnonymousClass.cs").Verify();
 
         [TestMethod]
         public void RedundantPropertyNamesInAnonymousClass_CodeFix() =>
-            OldVerifier.VerifyCodeFix<RedundantPropertyNamesInAnonymousClassCodeFix>(
-                @"TestCases\RedundantPropertyNamesInAnonymousClass.cs",
-                @"TestCases\RedundantPropertyNamesInAnonymousClass.Fixed.cs",
-                new RedundantPropertyNamesInAnonymousClass());
+            builder.AddPaths("RedundantPropertyNamesInAnonymousClass.cs")
+                .WithCodeFix<RedundantPropertyNamesInAnonymousClassCodeFix>()
+                .WithCodeFixedPaths("RedundantPropertyNamesInAnonymousClass.Fixed.cs")
+                .VerifyCodeFix();
     }
 }

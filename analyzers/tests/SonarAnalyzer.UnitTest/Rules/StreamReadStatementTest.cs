@@ -32,9 +32,12 @@ namespace SonarAnalyzer.UnitTest.Rules
             builder.AddPaths("StreamReadStatement.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void StreamReadStatement_CSharp10() =>
             builder.AddPaths("StreamReadStatement.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+
 #endif
+
     }
 }

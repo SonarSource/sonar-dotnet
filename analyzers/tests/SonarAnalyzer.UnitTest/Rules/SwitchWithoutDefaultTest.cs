@@ -27,10 +27,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class StringConcatenationInLoopSwitchWithoutDefaultTest
     {
         [TestMethod]
-        public void SwitchWithoutDefault()
-        {
-            OldVerifier.VerifyAnalyzer(@"TestCases\SwitchWithoutDefault.cs", new CS.SwitchWithoutDefault());
-            OldVerifier.VerifyAnalyzer(@"TestCases\SwitchWithoutDefault.vb", new VB.SwitchWithoutDefault());
-        }
+        public void SwitchWithoutDefault_CS() =>
+            new VerifierBuilder<CS.SwitchWithoutDefault>().AddPaths("SwitchWithoutDefault.cs").Verify();
+
+        [TestMethod]
+        public void SwitchWithoutDefault_VB() =>
+            new VerifierBuilder<VB.SwitchWithoutDefault>().AddPaths("SwitchWithoutDefault.vb").Verify();
     }
 }

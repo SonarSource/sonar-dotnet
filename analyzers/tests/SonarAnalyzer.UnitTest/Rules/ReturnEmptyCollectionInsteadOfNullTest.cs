@@ -25,16 +25,23 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ReturnEmptyCollectionInsteadOfNullTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<ReturnEmptyCollectionInsteadOfNull>();
+
         [TestMethod]
         public void ReturnEmptyCollectionInsteadOfNull() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ReturnEmptyCollectionInsteadOfNull.cs",
-                                    new ReturnEmptyCollectionInsteadOfNull(),
-                                    MetadataReferenceFacade.SystemXml);
+            builder.AddPaths("ReturnEmptyCollectionInsteadOfNull.cs")
+                .AddReferences(MetadataReferenceFacade.SystemXml)
+                .Verify();
 
 #if NET
+
         [TestMethod]
         public void ReturnEmptyCollectionInsteadOfNull_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ReturnEmptyCollectionInsteadOfNull.CSharp9.cs", new ReturnEmptyCollectionInsteadOfNull());
+            builder.AddPaths("ReturnEmptyCollectionInsteadOfNull.CSharp9.cs")
+                .WithTopLevelStatements()
+                .Verify();
+
 #endif
+
     }
 }

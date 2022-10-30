@@ -26,18 +26,24 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class PropertyWriteOnlyTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.PropertyWriteOnly>();
+
         [TestMethod]
         public void PropertyWriteOnly_CSharp() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\PropertyWriteOnly.cs", new CS.PropertyWriteOnly());
+            builderCS.AddPaths("PropertyWriteOnly.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void PropertyWriteOnly_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PropertyWriteOnly.CSharp9.cs", new CS.PropertyWriteOnly());
+            builderCS.AddPaths("PropertyWriteOnly.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
+
 #endif
 
         [TestMethod]
         public void PropertyWriteOnly_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\PropertyWriteOnly.vb", new VB.PropertyWriteOnly());
+            new VerifierBuilder<VB.PropertyWriteOnly>().AddPaths("PropertyWriteOnly.vb").Verify();
     }
 }

@@ -33,6 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             builderCS.AddPaths("StringLiteralShouldNotBeDuplicated.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void StringLiteralShouldNotBeDuplicated_CSharp9() =>
             builderCS.AddPaths("StringLiteralShouldNotBeDuplicated.CSharp9.cs")
@@ -57,6 +58,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             builderCS.AddPaths("StringLiteralShouldNotBeDuplicated.CSharp11.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
                 .Verify();
+
 #endif
 
         [TestMethod]

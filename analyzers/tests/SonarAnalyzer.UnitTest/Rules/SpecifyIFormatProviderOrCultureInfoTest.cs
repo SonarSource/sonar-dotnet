@@ -25,15 +25,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class SpecifyIFormatProviderOrCultureInfoTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<SpecifyIFormatProviderOrCultureInfo>();
+
         [TestMethod]
         public void SpecifyIFormatProviderOrCultureInfo() =>
-            new VerifierBuilder<SpecifyIFormatProviderOrCultureInfo>().AddPaths("SpecifyIFormatProviderOrCultureInfo.cs").Verify();
+            builder.AddPaths("SpecifyIFormatProviderOrCultureInfo.cs").Verify();
 
 #if NET
 
         [TestMethod]
         public void SpecifyIFormatProviderOrCultureInfo_CSharp11() =>
-            new VerifierBuilder<SpecifyIFormatProviderOrCultureInfo>().AddPaths("SpecifyIFormatProviderOrCultureInfo.CSharp11.cs").Verify();
+            builder.AddPaths("SpecifyIFormatProviderOrCultureInfo.CSharp11.cs").Verify();
 
 #endif
 

@@ -25,16 +25,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class StringConcatenationWithPlusTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<StringConcatenationWithPlus>().AddReferences(MetadataReferenceFacade.SystemXml.Concat(MetadataReferenceFacade.SystemXmlLinq));
+
         [TestMethod]
         public void StringConcatenationWithPlus() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\StringConcatenationWithPlus.vb", new StringConcatenationWithPlus(), MetadataReferenceFacade.SystemXml.Concat(MetadataReferenceFacade.SystemXmlLinq));
+            builder.AddPaths("StringConcatenationWithPlus.vb").Verify();
 
         [TestMethod]
         public void StringConcatenationWithPlus_CodeFix() =>
-            OldVerifier.VerifyCodeFix<StringConcatenationWithPlusCodeFix>(
-                @"TestCases\StringConcatenationWithPlus.vb",
-                @"TestCases\StringConcatenationWithPlus.Fixed.vb",
-                new StringConcatenationWithPlus(),
-                additionalReferences: MetadataReferenceFacade.SystemXml.Concat(MetadataReferenceFacade.SystemXmlLinq));
+            builder.AddPaths("StringConcatenationWithPlus.vb")
+                .WithCodeFix<StringConcatenationWithPlusCodeFix>()
+                .WithCodeFixedPaths("StringConcatenationWithPlus.Fixed.vb")
+                .VerifyCodeFix();
     }
 }

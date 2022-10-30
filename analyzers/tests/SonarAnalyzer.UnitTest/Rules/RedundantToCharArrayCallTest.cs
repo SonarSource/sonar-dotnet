@@ -25,15 +25,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class RedundantToCharArrayCallTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<RedundantToCharArrayCall>();
+
         [TestMethod]
         public void RedundantToCharArrayCall() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\RedundantToCharArrayCall.cs", new RedundantToCharArrayCall());
+            builder.AddPaths("RedundantToCharArrayCall.cs").Verify();
 
         [TestMethod]
         public void RedundantToCharArrayCall_CodeFix() =>
-            OldVerifier.VerifyCodeFix<RedundantToCharArrayCallCodeFix>(
-                @"TestCases\RedundantToCharArrayCall.cs",
-                @"TestCases\RedundantToCharArrayCall.Fixed.cs",
-                new RedundantToCharArrayCall());
+            builder.AddPaths("RedundantToCharArrayCall.cs")
+                .WithCodeFix<RedundantToCharArrayCallCodeFix>()
+                .WithCodeFixedPaths("RedundantToCharArrayCall.Fixed.cs")
+                .VerifyCodeFix();
     }
 }

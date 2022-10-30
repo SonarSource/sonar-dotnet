@@ -25,25 +25,33 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class RedundantToStringCallTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<RedundantToStringCall>();
+
         [TestMethod]
         public void RedundantToStringCall() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\RedundantToStringCall.cs", new RedundantToStringCall());
+            builder.AddPaths("RedundantToStringCall.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void RedundantToStringCall_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\RedundantToStringCall.CSharp9.cs", new RedundantToStringCall());
+            builder.AddPaths("RedundantToStringCall.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
 
         [TestMethod]
         public void RedundantToStringCall_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\RedundantToStringCall.CSharp10.cs", new RedundantToStringCall());
+            builder.AddPaths("RedundantToStringCall.CSharp10.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .Verify();
+
 #endif
 
         [TestMethod]
         public void RedundantToStringCall_CodeFix() =>
-            OldVerifier.VerifyCodeFix<RedundantToStringCallCodeFix>(
-                @"TestCases\RedundantToStringCall.cs",
-                @"TestCases\RedundantToStringCall.Fixed.cs",
-                new RedundantToStringCall());
+            builder.AddPaths("RedundantToStringCall.cs")
+                .WithCodeFix<RedundantToStringCallCodeFix>()
+                .WithCodeFixedPaths("RedundantToStringCall.Fixed.cs")
+                .VerifyCodeFix();
     }
 }

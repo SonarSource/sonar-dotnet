@@ -27,6 +27,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ParameterValidationInYieldShouldBeWrapped() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ParameterValidationInYieldShouldBeWrapped.cs", new ParameterValidationInYieldShouldBeWrapped());
+            new VerifierBuilder<ParameterValidationInYieldShouldBeWrapped>().AddPaths("ParameterValidationInYieldShouldBeWrapped.cs").Verify();
     }
 }

@@ -28,10 +28,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void PropertyGetterWithThrowCSharp() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\PropertyGetterWithThrow.cs", new CS.PropertyGetterWithThrow());
+            new VerifierBuilder<CS.PropertyGetterWithThrow>().AddPaths("PropertyGetterWithThrow.cs").Verify();
 
         [TestMethod]
         public void PropertyGetterWithThrowVBNet() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\PropertyGetterWithThrow.vb", new VB.PropertyGetterWithThrow());
+            new VerifierBuilder<VB.PropertyGetterWithThrow>().AddPaths("PropertyGetterWithThrow.vb").Verify();
     }
 }

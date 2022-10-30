@@ -27,6 +27,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void PrivateConstantFieldName() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\PrivateConstantFieldName.vb", new PrivateConstantFieldName());
+            new VerifierBuilder<PrivateConstantFieldName>().AddPaths("PrivateConstantFieldName.vb").Verify();
     }
 }

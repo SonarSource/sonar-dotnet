@@ -27,6 +27,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void PreferJaggedArraysOverMultidimensional() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\PreferJaggedArraysOverMultidimensional.cs", new PreferJaggedArraysOverMultidimensional());
+            new VerifierBuilder<PreferJaggedArraysOverMultidimensional>().AddPaths("PreferJaggedArraysOverMultidimensional.cs").Verify();
     }
 }

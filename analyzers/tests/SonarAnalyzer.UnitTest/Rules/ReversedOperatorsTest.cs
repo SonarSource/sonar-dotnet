@@ -26,18 +26,24 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ReversedOperatorsTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ReversedOperators>();
+
         [TestMethod]
         public void ReversedOperators_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ReversedOperators.cs", new CS.ReversedOperators());
+            builderCS.AddPaths("ReversedOperators.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void ReversedOperators_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ReversedOperators.CSharp9.cs", new CS.ReversedOperators());
+            builderCS.AddPaths("ReversedOperators.CSharp9.cs")
+                .WithTopLevelStatements()
+                .Verify();
+
 #endif
 
         [TestMethod]
         public void ReversedOperators_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ReversedOperators.vb", new VB.ReversedOperators());
+            new VerifierBuilder<VB.ReversedOperators>().AddPaths("ReversedOperators.vb").Verify();
     }
 }

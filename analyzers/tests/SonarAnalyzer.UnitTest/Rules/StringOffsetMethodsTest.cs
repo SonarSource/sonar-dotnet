@@ -27,6 +27,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void StringOffsetMethods() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\StringOffsetMethods.cs", new StringOffsetMethods());
+            new VerifierBuilder<StringOffsetMethods>().AddPaths("StringOffsetMethods.cs").Verify();
     }
 }
