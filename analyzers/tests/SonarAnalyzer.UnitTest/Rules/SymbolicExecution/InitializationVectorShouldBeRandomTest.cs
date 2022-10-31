@@ -26,19 +26,19 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class InitializationVectorShouldBeRandomTest
     {
-        private readonly VerifierBuilder sonar = new VerifierBuilder<SymbolicExecutionRunner>().WithBasePath(@"SymbolicExecution\Sonar")
-            .WithOnlyDiagnostics(new[] { InitializationVectorShouldBeRandom.S3329 })
+        private readonly VerifierBuilder sonarVerifier = new VerifierBuilder<SymbolicExecutionRunner>().WithBasePath(@"SymbolicExecution\Sonar")
+            .WithOnlyDiagnostics(InitializationVectorShouldBeRandom.S3329)
             .AddReferences(MetadataReferenceFacade.SystemSecurityCryptography);
 
         [TestMethod]
         public void InitializationVectorShouldBeRandom_CSharp8() =>
-            sonar.AddPaths("InitializationVectorShouldBeRandom.cs")
+            sonarVerifier.AddPaths("InitializationVectorShouldBeRandom.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .Verify();
 
         [TestMethod]
         public void InitializationVectorShouldBeRandom_DoesNotRaiseIssuesForTestProject() =>
-            sonar.AddPaths("InitializationVectorShouldBeRandom.cs")
+            sonarVerifier.AddPaths("InitializationVectorShouldBeRandom.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .AddTestReference()
                 .VerifyNoIssueReported();
@@ -47,13 +47,13 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void InitializationVectorShouldBeRandom_CSharp9() =>
-            sonar.AddPaths("InitializationVectorShouldBeRandom.CSharp9.cs")
+            sonarVerifier.AddPaths("InitializationVectorShouldBeRandom.CSharp9.cs")
                 .WithTopLevelStatements()
                 .Verify();
 
         [TestMethod]
         public void InitializationVectorShouldBeRandom_CSharp10() =>
-            sonar.AddPaths("InitializationVectorShouldBeRandom.CSharp10.cs")
+            sonarVerifier.AddPaths("InitializationVectorShouldBeRandom.CSharp10.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
                 .Verify();
 

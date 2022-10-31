@@ -26,14 +26,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class PublicMethodArgumentsShouldBeCheckedForNullTest
     {
-        private readonly VerifierBuilder sonar = new VerifierBuilder<SymbolicExecutionRunner>().WithBasePath(@"SymbolicExecution\Sonar")
+        private readonly VerifierBuilder sonarVerifier = new VerifierBuilder<SymbolicExecutionRunner>().WithBasePath(@"SymbolicExecution\Sonar")
             .WithOnlyDiagnostics(PublicMethodArgumentsShouldBeCheckedForNull.S3900);
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void PublicMethodArgumentsShouldBeCheckedForNull_CS(ProjectType projectType) =>
-            sonar.AddReferences(TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21))
+            sonarVerifier.AddReferences(TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21))
                 .AddPaths("PublicMethodArgumentsShouldBeCheckedForNull.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .Verify();
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void PublicMethodArgumentsShouldBeCheckedForNull_CSharp9() =>
-            sonar.AddPaths("PublicMethodArgumentsShouldBeCheckedForNull.CSharp9.cs")
+            sonarVerifier.AddPaths("PublicMethodArgumentsShouldBeCheckedForNull.CSharp9.cs")
                 .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(Constants.NuGetLatestVersion))
                 .WithOptions(ParseOptionsHelper.FromCSharp9)
                 .Verify();

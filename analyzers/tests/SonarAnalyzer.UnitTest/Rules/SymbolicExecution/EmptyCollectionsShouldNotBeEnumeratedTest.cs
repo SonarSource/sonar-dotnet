@@ -26,7 +26,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class EmptyCollectionsShouldNotBeEnumeratedTest
     {
-        private readonly VerifierBuilder sonar = new VerifierBuilder<SymbolicExecutionRunner>()
+        private readonly VerifierBuilder sonarVerifier = new VerifierBuilder<SymbolicExecutionRunner>()
             .WithOnlyDiagnostics(EmptyCollectionsShouldNotBeEnumerated.S4158)
             .WithBasePath(@"SymbolicExecution\Sonar")
             .WithConcurrentAnalysis(false);
@@ -34,8 +34,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        public void EmptyCollectionsShouldNotBeEnumerated_CS(ProjectType projectType) =>
-            sonar.AddReferences(TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21))
+        public void EmptyCollectionsShouldNotBeEnumerated_CSharp8(ProjectType projectType) =>
+            sonarVerifier.AddReferences(TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21))
                 .AddPaths("EmptyCollectionsShouldNotBeEnumerated.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .Verify();
@@ -44,11 +44,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void EmptyCollectionsShouldNotBeEnumerated_CSharp9() =>
-            sonar.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp9.cs").WithTopLevelStatements().Verify();
+            sonarVerifier.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp9.cs").WithTopLevelStatements().Verify();
 
         [TestMethod]
         public void EmptyCollectionsShouldNotBeEnumerated_CSharp10() =>
-            sonar.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            sonarVerifier.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
 #endif
 

@@ -26,14 +26,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class EmptyNullableValueAccessTest
     {
-        private readonly VerifierBuilder sonar = new VerifierBuilder<SymbolicExecutionRunner>().WithBasePath(@"SymbolicExecution\Sonar")
-            .WithOnlyDiagnostics(new[] { EmptyNullableValueAccess.S3655 });
+        private readonly VerifierBuilder sonarVerifier = new VerifierBuilder<SymbolicExecutionRunner>().WithBasePath(@"SymbolicExecution\Sonar")
+            .WithOnlyDiagnostics(EmptyNullableValueAccess.S3655);
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void EmptyNullableValueAccess_CSharp8(ProjectType projectType) =>
-            sonar.AddPaths("EmptyNullableValueAccess.cs")
+            sonarVerifier.AddPaths("EmptyNullableValueAccess.cs")
                 .AddReferences(TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21))
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .Verify();
@@ -42,13 +42,13 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void EmptyNullableValueAccess_CSharp9() =>
-            sonar.AddPaths("EmptyNullableValueAccess.CSharp9.cs")
+            sonarVerifier.AddPaths("EmptyNullableValueAccess.CSharp9.cs")
                 .WithTopLevelStatements()
                 .Verify();
 
         [TestMethod]
         public void EmptyNullableValueAccess_CSharp10() =>
-            sonar.AddPaths("EmptyNullableValueAccess.CSharp10.cs")
+            sonarVerifier.AddPaths("EmptyNullableValueAccess.CSharp10.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
                 .Verify();
 
