@@ -89,7 +89,6 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         internal static MetadataReference SystemXmlXDocument { get; } = CreateReference("System.Xml.XDocument.dll");
         internal static MetadataReference SystemXmlLinq { get; } = CreateReference("System.Xml.Linq.dll");
         internal static MetadataReference SystemWeb { get; } = CreateReference("System.Web.dll");
-
     }
 }
 #endif
