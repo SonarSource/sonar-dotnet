@@ -4,6 +4,7 @@ public class BindingFlagsImposter
 {
     public int NonPublic;
 }
+
 public class Derived
 {
     [Obsolete(nameof(BindingFlags.NonPublic))] // Compliant
@@ -12,4 +13,3 @@ public class Derived
         var a = System.Reflection.BindingFlags.NonPublic; // Noncompliant
     }
 }
-

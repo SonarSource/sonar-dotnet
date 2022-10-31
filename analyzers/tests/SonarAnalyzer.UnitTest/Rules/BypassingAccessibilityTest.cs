@@ -26,7 +26,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class BypassingAccessibilityTest
     {
-        private readonly VerifierBuilder  builderCS = new VerifierBuilder<CS.BypassingAccessibility>();
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.BypassingAccessibility>();
         private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.BypassingAccessibility>();
 
         [TestMethod]
