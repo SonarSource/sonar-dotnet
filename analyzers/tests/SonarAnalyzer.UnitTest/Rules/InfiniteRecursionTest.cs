@@ -26,20 +26,34 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class InfiniteRecursionTest
     {
+        private readonly VerifierBuilder sonarCfg = new VerifierBuilder()
+            .AddAnalyzer(() => new InfiniteRecursion(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg))
+            .AddReferences(MetadataReferenceFacade.NETStandard21);
+
+        private readonly VerifierBuilder roslynCfg = new VerifierBuilder<InfiniteRecursion>()
+            .AddReferences(MetadataReferenceFacade.NETStandard21);
+
         [TestMethod]
         public void InfiniteRecursion_SonarCfg() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\InfiniteRecursion.SonarCfg.cs",
-                new InfiniteRecursion(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg),
-                ParseOptionsHelper.OnlyCSharp7,
-                MetadataReferenceFacade.NETStandard21);
+            sonarCfg.AddPaths("InfiniteRecursion.SonarCfg.cs")
+                .WithOptions(ParseOptionsHelper.OnlyCSharp7)
+                .Verify();
 
         [TestMethod]
         public void InfiniteRecursion_RoslynCfg() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\InfiniteRecursion.RoslynCfg.cs",
-                new InfiniteRecursion(),
-                ParseOptionsHelper.FromCSharp8,
-                MetadataReferenceFacade.NETStandard21);
+            roslynCfg.AddPaths("InfiniteRecursion.RoslynCfg.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
+
+#if NET
+
+        [TestMethod]
+        public void InfiniteRecursion_CSharp11() =>
+            roslynCfg.AddPaths("InfiniteRecursion.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
+#endif
+
     }
 }

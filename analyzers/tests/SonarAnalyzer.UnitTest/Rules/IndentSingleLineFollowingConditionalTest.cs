@@ -25,14 +25,27 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class IndentSingleLineFollowingConditionalTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<IndentSingleLineFollowingConditional>();
+
         [TestMethod]
         public void IndentSingleLineFollowingConditional() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\IndentSingleLineFollowingConditional.cs", new IndentSingleLineFollowingConditional());
+            builder.AddPaths("IndentSingleLineFollowingConditional.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void IndentSingleLineFollowingConditional_FromCSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\IndentSingleLineFollowingConditional.CSharp9.cs", new IndentSingleLineFollowingConditional());
+            builder.AddPaths("IndentSingleLineFollowingConditional.CSharp9.cs")
+                .WithTopLevelStatements()
+                .Verify();
+
+        [TestMethod]
+        public void IndentSingleLineFollowingConditional_FromCSharp11() =>
+            builder.AddPaths("IndentSingleLineFollowingConditional.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
 #endif
+
     }
 }

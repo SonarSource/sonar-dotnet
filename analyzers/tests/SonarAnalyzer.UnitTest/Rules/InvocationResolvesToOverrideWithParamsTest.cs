@@ -25,10 +25,23 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class InvocationResolvesToOverrideWithParamsTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<InvocationResolvesToOverrideWithParams>();
+
         [TestMethod]
         public void InvocationResolvesToOverrideWithParams() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\InvocationResolvesToOverrideWithParams.cs",
-                                    new InvocationResolvesToOverrideWithParams(),
-                                    ParseOptionsHelper.FromCSharp8);
+            builder.AddPaths("InvocationResolvesToOverrideWithParams.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
+
+#if NET
+
+        [TestMethod]
+        public void InvocationResolvesToOverrideWithParams_CSharp11() =>
+            builder.AddPaths("InvocationResolvesToOverrideWithParams.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
+#endif
+
     }
 }

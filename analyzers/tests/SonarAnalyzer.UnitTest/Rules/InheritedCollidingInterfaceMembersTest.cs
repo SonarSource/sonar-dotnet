@@ -25,15 +25,28 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class InheritedCollidingInterfaceMembersTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<InheritedCollidingInterfaceMembers>();
+
         [TestMethod]
         public void InheritedCollidingInterfaceMembers() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\InheritedCollidingInterfaceMembers.cs", new InheritedCollidingInterfaceMembers());
+            builder.AddPaths("InheritedCollidingInterfaceMembers.cs").Verify();
 
         [TestMethod]
         public void InheritedCollidingInterfaceMembers_CSharp8() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\InheritedCollidingInterfaceMembers.AfterCSharp8.cs",
-                                    new InheritedCollidingInterfaceMembers(),
-                                    ParseOptionsHelper.FromCSharp8,
-                                    MetadataReferenceFacade.NETStandard21);
+            builder.AddPaths("InheritedCollidingInterfaceMembers.CSharp8.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .AddReferences(MetadataReferenceFacade.NETStandard21)
+                .Verify();
+
+#if NET
+
+        [TestMethod]
+        public void InheritedCollidingInterfaceMembers_CSharp11() =>
+            builder.AddPaths("InheritedCollidingInterfaceMembers.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
+#endif
+
     }
 }

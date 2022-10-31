@@ -41,7 +41,7 @@ namespace Testcases
         }
 
         void MethodArgumentChecks()
-        {
+{
             MethodAcceptingDecimal(intPtr1 / intPtr2); // Noncompliant
             MethodAcceptingDecimal(uIntPtr1 / uIntPtr2); // Noncompliant
 
@@ -52,7 +52,7 @@ namespace Testcases
         }
 
         void FuncReturnChecks()
-        {
+    {
             decimalFunc = () => intPtr1 / intPtr2; // Noncompliant
             decimalFunc = () => uIntPtr1 / uIntPtr2; // Noncompliant
 
@@ -67,6 +67,14 @@ namespace Testcases
 
             return (decimal)intPtr1 / intPtr2; // Compliant
             return (decimal)uIntPtr1 / uIntPtr2; // Compliant
+        }
+    }
+
+    interface IMyInterface
+    {
+        static virtual void StaticVirtualMethod()
+        {
+            decimal dec = 3 / 2; // Noncompliant
         }
     }
 }
