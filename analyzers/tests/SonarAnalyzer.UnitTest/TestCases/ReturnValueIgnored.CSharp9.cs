@@ -21,13 +21,13 @@ nuint nu = 2;
 IntPtr intPtr = IntPtr.Zero;
 UIntPtr uintPtr = UIntPtr.Zero;
 
-intPtr.ToInt64(); // Compliant, FN, IntPtr not considered an immutable type by the rule
-uintPtr.ToUInt64(); // Compliant, FN, UIntPtr not considered an immutable type by the rule
+intPtr.ToInt64(); // Compliant, FN, pure function
+uintPtr.ToUInt64(); // Compliant, FN, pure function
 
 unsafe
 {
-    intPtr.ToPointer(); // Compliant, FN, IntPtr not considered an immutable type by the rule
-    uintPtr.ToPointer(); // Compliant, FN, UIntPtr not considered an immutable type by the rule
+    intPtr.ToPointer(); // Compliant, FN, pure function
+    uintPtr.ToPointer(); // Compliant, FN, pure function
 
     i.ToString(); // Noncompliant
 }
