@@ -25,8 +25,19 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class MagicNumberShouldNotBeUsedTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<MagicNumberShouldNotBeUsed>();
+
         [TestMethod]
         public void MagicNumberShouldNotBeUsed() =>
-            new VerifierBuilder<MagicNumberShouldNotBeUsed>().AddPaths(@"MagicNumberShouldNotBeUsed.cs").Verify();
+            builder.AddPaths("MagicNumberShouldNotBeUsed.cs").Verify();
+
+#if NET
+
+        [TestMethod]
+        public void MagicNumberShouldNotBeUsed_CSharp11() =>
+            builder.AddPaths("MagicNumberShouldNotBeUsed.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).WithTopLevelStatements().Verify();
+
+#endif
+
     }
 }
