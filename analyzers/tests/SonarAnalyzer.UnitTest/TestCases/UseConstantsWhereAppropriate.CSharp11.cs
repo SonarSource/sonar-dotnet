@@ -9,10 +9,10 @@ namespace Tests.Diagnostics
         static readonly nint nint1; // Compliant
         static readonly nuint nuint1; // Compliant
 
-        static readonly IntPtr intPtr2 = 42; // Compliant
-        static readonly IntPtr uIntPtr2 = 42; // Compliant
-        static readonly IntPtr nint2 = 42; // Compliant
-        static readonly IntPtr nuint2 = 42; // Compliant
+        static readonly IntPtr intPtr2 = 42; // Compliant, FN, should be const
+        static readonly UIntPtr uIntPtr2 = 42; // Compliant, FN, should be const
+        static readonly nint nint2 = 42; // Compliant, FN, should be const
+        static readonly nuint nuint2 = 42; // Compliant, FN, should be const
 
         static readonly bool x = true; // Noncompliant
     }

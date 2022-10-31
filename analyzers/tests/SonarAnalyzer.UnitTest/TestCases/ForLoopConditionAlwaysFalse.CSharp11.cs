@@ -9,8 +9,8 @@ namespace Tests.Diagnostics
             for (IntPtr i = 9; i >= 5;) { } // Compliant
             for (UIntPtr i = 9; i >= 5;) { } // Compliant
 
-            for (IntPtr a = 0, b = 1; b < 1;) { } // Noncompliant
-            for (UIntPtr a = 0, b = 1; b < 1;) { } // Noncompliant
+            for (IntPtr b = 1; b < 1;) { } // Noncompliant
+            for (UIntPtr b = 1; b < 1;) { } // Noncompliant
         }
     }
 }

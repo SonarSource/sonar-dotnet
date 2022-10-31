@@ -16,12 +16,12 @@ uintPtr.ToUInt64(); // Compliant, FN, UIntPtr not considered an immutable type b
 
 unsafe
 {
-    n.ToPointer(); // Compliant, FN, nint/IntPtr not considered an immutable type by the rule
-    intPtr.ToPointer(); // Compliant, FN, IntPtr not considered an immutable type by the rule
+    n.ToPointer(); // Compliant, FN, pure function
+    intPtr.ToPointer(); // Compliant, FN, pure function
 
 
-    nu.ToPointer(); // Compliant, FN, nuint/UIntPtr not considered an immutable type by the rule
-    uintPtr.ToPointer(); // Compliant, FN, UIntPtr not considered an immutable type by the rule
+    nu.ToPointer(); // Compliant, FN, pure function
+    uintPtr.ToPointer(); // Compliant, FN, pure function
 
     x.ToString(); // Noncompliant
 }
