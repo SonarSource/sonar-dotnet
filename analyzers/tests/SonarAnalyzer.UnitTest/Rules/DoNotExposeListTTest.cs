@@ -25,26 +25,33 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DoNotExposeListTTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<DoNotExposeListT>();
+
         [TestMethod]
         public void DoNotExposeListT() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotExposeListT.cs", new DoNotExposeListT(),
-                MetadataReferences.MetadataReferenceFacade.SystemXml);
+            builder.AddPaths("DoNotExposeListT.cs")
+                .AddReferences(MetadataReferenceFacade.SystemXml)
+                .Verify();
 
         [TestMethod]
         public void DoNotExposeListT_CSharp8() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotExposeListT.CSharp8.cs", new DoNotExposeListT(), ParseOptionsHelper.FromCSharp8);
+            builder.AddPaths("DoNotExposeListT.CSharp8.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
 
 #if NET
 
         [TestMethod]
         public void DoNotExposeListT_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotExposeListT.CSharp9.cs", new DoNotExposeListT());
+            builder.AddPaths("DoNotExposeListT.CSharp9.cs")
+                .WithTopLevelStatements()
+                .Verify();
 
 #endif
 
         [TestMethod]
         public void DoNotExposeListT_InvalidCode() =>
-            OldVerifier.VerifyCSharpAnalyzer(
+            builder.AddSnippet(
                 @"
 public class InvalidCode
 {
@@ -55,8 +62,8 @@ public class InvalidCode
     public List<InvalidType> Method() => null;
 
     public InvalidType Method2() => null;
-}",
-                new DoNotExposeListT(),
-                CompilationErrorBehavior.Ignore);
+}")
+                .WithErrorBehavior(CompilationErrorBehavior.Ignore)
+                .Verify();
     }
 }

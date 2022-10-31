@@ -25,15 +25,19 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DoNotCatchNullReferenceExceptionTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<DoNotCatchNullReferenceException>();
+
         [TestMethod]
         public void DoNotCatchNullReferenceException() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotCatchNullReferenceException.cs", new DoNotCatchNullReferenceException());
+            builder.AddPaths("DoNotCatchNullReferenceException.cs").Verify();
 
 #if NET
 
         [TestMethod]
         public void DoNotCatchNullReferenceException_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotCatchNullReferenceException.CSharp9.cs", new DoNotCatchNullReferenceException());
+            builder.AddPaths("DoNotCatchNullReferenceException.CSharp9.cs")
+                .WithTopLevelStatements()
+                .Verify();
 
 #endif
 
