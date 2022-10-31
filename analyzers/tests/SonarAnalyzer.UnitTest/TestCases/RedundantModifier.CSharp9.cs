@@ -132,7 +132,7 @@ public record Foo
             x += int.MaxValue;
         }
 
-        checked // Noncompliant, FP, nint/nuint is not considered an integral number type
+        checked // Noncompliant, FP, nuint/UIntPtr is not a member of KnownType.IntegralNumbers.
         {
             nint x = 42;
             nuint y = 42;
