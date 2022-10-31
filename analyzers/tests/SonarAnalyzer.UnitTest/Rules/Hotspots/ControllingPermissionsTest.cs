@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#if NETFRAMEWORK // IdentityModel is not available on .Net Core
-
 using SonarAnalyzer.Common;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
@@ -31,6 +29,8 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builderCS = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new CS.ControllingPermissions(AnalyzerConfiguration.AlwaysEnabled));
         private readonly VerifierBuilder builderVB = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new VB.ControllingPermissions(AnalyzerConfiguration.AlwaysEnabled));
+
+#if NETFRAMEWORK // IdentityModel is not available on .Net Core
 
         [TestMethod]
         public void ControllingPermissions_CS() =>
@@ -48,7 +48,27 @@ namespace SonarAnalyzer.UnitTest.Rules
             Enumerable.Empty<MetadataReference>()
                 .Concat(FrameworkMetadataReference.SystemIdentityModel)
                 .Concat(FrameworkMetadataReference.SystemWeb);
-    }
-}
+
+#else
+
+        [TestMethod]
+        public void ControllingPermissions_CSharp11() =>
+            builderCS
+                .AddPaths("ControllingPermissions.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .WithTopLevelStatements()
+                .AddReferences(AdditionalReferencesForAspNetCore)
+                .Verify();
+
+        private static IEnumerable<MetadataReference> AdditionalReferencesForAspNetCore =>
+            new[]
+            {
+                AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpAbstractions,
+                AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpFeatures,
+                CoreMetadataReference.SystemSecurityClaims,
+            };
 
 #endif
+
+    }
+}

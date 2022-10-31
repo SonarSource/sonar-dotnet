@@ -75,6 +75,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         internal static MetadataReference SystemRuntimeSerializationFormatters { get; } = CreateReference("System.Runtime.Serialization.Formatters.dll");
         internal static MetadataReference SystemRuntimeSerializationPrimitives { get; } = CreateReference("System.Runtime.Serialization.Primitives.dll");
         internal static MetadataReference SystemSecurityAccessControl { get; } = CreateReference("System.Security.AccessControl.dll");
+        internal static MetadataReference SystemSecurityClaims { get; } = CreateReference("System.Security.Claims.dll");
         internal static MetadataReference SystemSecurityCryptography { get; } = CreateReference("System.Security.Cryptography.dll");
         internal static MetadataReference SystemSecurityCryptographyX509Certificates { get; } = CreateReference("System.Security.Cryptography.X509Certificates.dll");
         internal static MetadataReference SystemSecurityCryptographyCsp { get; } = CreateReference("System.Security.Cryptography.Csp.dll");
@@ -88,6 +89,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         internal static MetadataReference SystemXmlXDocument { get; } = CreateReference("System.Xml.XDocument.dll");
         internal static MetadataReference SystemXmlLinq { get; } = CreateReference("System.Xml.Linq.dll");
         internal static MetadataReference SystemWeb { get; } = CreateReference("System.Web.dll");
+
     }
 }
 #endif
