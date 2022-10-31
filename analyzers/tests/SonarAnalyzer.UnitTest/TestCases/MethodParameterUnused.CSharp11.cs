@@ -17,13 +17,13 @@ namespace SomeNamespace
         }
 
         [Obsolete(nameof(argument))]
-        private void Argument_UsedInAttributeByNameOf(string argument) // Compliant, methods with attributes are ignored.
+        private void Argument_UsedInAttributeByNameOf(string argument) // Compliant, methods with attributes are ignored
         {
             var x = 42;
         }
 
         [Obsolete(nameof(TArgument))]
-        private void Argument_UsedInGenericAttributeByNameOf<TArgument>(TArgument argument) // Compliant, methods with attributes are ignored.
+        private void Argument_UsedInGenericAttributeByNameOf<TArgument>(TArgument argument) // Compliant, methods with attributes are ignored
         {
             var x = 42;
         }
