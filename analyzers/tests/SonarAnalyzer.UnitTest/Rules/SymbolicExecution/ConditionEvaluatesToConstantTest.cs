@@ -26,26 +26,26 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ConditionEvaluatesToConstantTest
     {
-        private readonly VerifierBuilder sonarVerifier = new VerifierBuilder<SymbolicExecutionRunner>().WithBasePath(@"SymbolicExecution\Sonar")
+        private readonly VerifierBuilder sonar = new VerifierBuilder<SymbolicExecutionRunner>().WithBasePath(@"SymbolicExecution\Sonar")
             .WithOnlyDiagnostics(ConditionEvaluatesToConstant.S2583, ConditionEvaluatesToConstant.S2589);
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void ConditionEvaluatesToConstant_CS(ProjectType projectType) =>
-            sonarVerifier.AddPaths("ConditionEvaluatesToConstant.cs")
+            sonar.AddPaths("ConditionEvaluatesToConstant.cs")
                 .AddReferences(NuGetMetadataReference.MicrosoftExtensionsPrimitives("3.1.7").Concat(TestHelper.ProjectTypeReference(projectType)))
                 .Verify();
 
         [TestMethod]
         public void ConditionEvaluatesToConstant_FromCSharp7() =>
-            sonarVerifier.AddPaths("ConditionEvaluatesToConstant.CSharp7.cs")
+            sonar.AddPaths("ConditionEvaluatesToConstant.CSharp7.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp7)
                 .Verify();
 
         [TestMethod]
         public void ConditionEvaluatesToConstant_FromCSharp8() =>
-            sonarVerifier.AddPaths("ConditionEvaluatesToConstant.CSharp8.cs")
+            sonar.AddPaths("ConditionEvaluatesToConstant.CSharp8.cs")
                 .AddReferences(MetadataReferenceFacade.NETStandard21)
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .Verify();
@@ -54,19 +54,19 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void ConditionEvaluatesToConstant_FromCSharp9() =>
-            sonarVerifier.AddPaths("ConditionEvaluatesToConstant.CSharp9.cs")
+            sonar.AddPaths("ConditionEvaluatesToConstant.CSharp9.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp9)
                 .Verify();
 
         [TestMethod]
         public void ConditionEvaluatesToConstant_FromCSharp9_TopLevelStatements() =>
-            sonarVerifier.AddPaths("ConditionEvaluatesToConstant.CSharp9.TopLevelStatements.cs")
+            sonar.AddPaths("ConditionEvaluatesToConstant.CSharp9.TopLevelStatements.cs")
                 .WithTopLevelStatements()
                 .Verify();
 
         [TestMethod]
         public void ConditionEvaluatesToConstant_FromCSharp10() =>
-            sonarVerifier.AddPaths("ConditionEvaluatesToConstant.CSharp10.cs")
+            sonar.AddPaths("ConditionEvaluatesToConstant.CSharp10.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
                 .WithConcurrentAnalysis(false)
                 .Verify();

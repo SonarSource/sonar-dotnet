@@ -26,19 +26,19 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class InitializationVectorShouldBeRandomTest
     {
-        private readonly VerifierBuilder sonarVerifier = new VerifierBuilder<SymbolicExecutionRunner>().WithBasePath(@"SymbolicExecution\Sonar")
+        private readonly VerifierBuilder sonar = new VerifierBuilder<SymbolicExecutionRunner>().WithBasePath(@"SymbolicExecution\Sonar")
             .WithOnlyDiagnostics(InitializationVectorShouldBeRandom.S3329)
             .AddReferences(MetadataReferenceFacade.SystemSecurityCryptography);
 
         [TestMethod]
         public void InitializationVectorShouldBeRandom_CSharp8() =>
-            sonarVerifier.AddPaths("InitializationVectorShouldBeRandom.cs")
+            sonar.AddPaths("InitializationVectorShouldBeRandom.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .Verify();
 
         [TestMethod]
         public void InitializationVectorShouldBeRandom_DoesNotRaiseIssuesForTestProject() =>
-            sonarVerifier.AddPaths("InitializationVectorShouldBeRandom.cs")
+            sonar.AddPaths("InitializationVectorShouldBeRandom.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .AddTestReference()
                 .VerifyNoIssueReported();
@@ -47,13 +47,13 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void InitializationVectorShouldBeRandom_CSharp9() =>
-            sonarVerifier.AddPaths("InitializationVectorShouldBeRandom.CSharp9.cs")
+            sonar.AddPaths("InitializationVectorShouldBeRandom.CSharp9.cs")
                 .WithTopLevelStatements()
                 .Verify();
 
         [TestMethod]
         public void InitializationVectorShouldBeRandom_CSharp10() =>
-            sonarVerifier.AddPaths("InitializationVectorShouldBeRandom.CSharp10.cs")
+            sonar.AddPaths("InitializationVectorShouldBeRandom.CSharp10.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
                 .Verify();
 
