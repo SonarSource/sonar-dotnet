@@ -36,7 +36,6 @@ public sealed class MultilineBlocksWithoutBrace : SonarDiagnosticAnalyzer
 {
     private const string DiagnosticId = "S2681";
     private const string MessageFormat = "This line will not be executed {0}; only the first line of this {2}-line block will be. The rest will execute {1}.";
-    private const int IndentSize = 4;
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);

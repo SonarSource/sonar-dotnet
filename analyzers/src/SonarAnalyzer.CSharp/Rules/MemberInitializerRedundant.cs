@@ -227,8 +227,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private class DeclarationTuple<TSymbol>
             where TSymbol : ISymbol
         {
-            public EqualsValueClauseSyntax Initializer { get; set; }
-            public TSymbol Symbol { get; set; }
+            public EqualsValueClauseSyntax Initializer { get; }
+            public TSymbol Symbol { get; }
 
             public DeclarationTuple(EqualsValueClauseSyntax initializer, TSymbol symbol)
             {

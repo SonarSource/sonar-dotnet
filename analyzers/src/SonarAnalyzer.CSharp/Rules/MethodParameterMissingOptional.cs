@@ -34,13 +34,11 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3450";
         private const string MessageFormat = "Add the 'Optional' attribute to this parameter.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
@@ -50,26 +48,20 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var attributes = AttributeSyntaxSymbolMapping.GetAttributesForParameter(parameter, c.SemanticModel)
-                        .ToList();
+                    var attributes = AttributeSyntaxSymbolMapping.GetAttributesForParameter(parameter, c.SemanticModel).ToList();
 
-                    var defaultParameterValueAttribute = attributes
-                        .FirstOrDefault(a => a.Symbol.IsInType(KnownType.System_Runtime_InteropServices_DefaultParameterValueAttribute));
-
+                    var defaultParameterValueAttribute = attributes.FirstOrDefault(a => a.Symbol.IsInType(KnownType.System_Runtime_InteropServices_DefaultParameterValueAttribute));
                     if (defaultParameterValueAttribute == null)
                     {
                         return;
                     }
 
-                    var optionalAttribute = attributes
-                        .FirstOrDefault(a => a.Symbol.IsInType(KnownType.System_Runtime_InteropServices_OptionalAttribute));
-
+                    var optionalAttribute = attributes.FirstOrDefault(a => a.Symbol.IsInType(KnownType.System_Runtime_InteropServices_OptionalAttribute));
                     if (optionalAttribute == null)
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, defaultParameterValueAttribute.SyntaxNode.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(Rule, defaultParameterValueAttribute.SyntaxNode.GetLocation()));
                     }
                 },
                 SyntaxKind.Parameter);
-        }
     }
 }

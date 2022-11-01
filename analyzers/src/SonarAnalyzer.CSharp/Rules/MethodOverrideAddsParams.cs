@@ -34,22 +34,19 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3600";
         private const string MessageFormat = "'params' should be removed from this override.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
                     var method = (MethodDeclarationSyntax)c.Node;
                     var methodSymbol = c.SemanticModel.GetDeclaredSymbol(method);
 
-                    if (methodSymbol == null ||
-                        !methodSymbol.IsOverride ||
-                        methodSymbol.OverriddenMethod == null)
+                    if (methodSymbol is not { IsOverride: true }
+                        || methodSymbol.OverriddenMethod == null)
                     {
                         return;
                     }
@@ -60,23 +57,16 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var paramsKeyword = lastParameter.Modifiers.FirstOrDefault(
-                        modifier => modifier.IsKind(SyntaxKind.ParamsKeyword));
-
-                    if (paramsKeyword != default(SyntaxToken) &&
-                        IsNotSemanticallyParams(lastParameter, c.SemanticModel))
+                    var paramsKeyword = lastParameter.Modifiers.FirstOrDefault(modifier => modifier.IsKind(SyntaxKind.ParamsKeyword));
+                    if (paramsKeyword != default
+                        && IsNotSemanticallyParams(lastParameter, c.SemanticModel))
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, paramsKeyword.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(Rule, paramsKeyword.GetLocation()));
                     }
                 },
                 SyntaxKind.MethodDeclaration);
-        }
 
-        private static bool IsNotSemanticallyParams(ParameterSyntax parameter, SemanticModel semanticModel)
-        {
-            var parameterSymbol = semanticModel.GetDeclaredSymbol(parameter);
-            return parameterSymbol != null &&
-                !parameterSymbol.IsParams;
-        }
+        private static bool IsNotSemanticallyParams(ParameterSyntax parameter, SemanticModel semanticModel) =>
+            semanticModel.GetDeclaredSymbol(parameter) is { IsParams: false };
     }
 }

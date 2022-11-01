@@ -41,6 +41,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void MemberShadowsOuterStaticMember_CSharp10() =>
             builder.AddPaths("MemberShadowsOuterStaticMember.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
+        [TestMethod]
+        public void MemberShadowsOuterStaticMember_CSharp11() =>
+            builder.AddPaths("MemberShadowsOuterStaticMember.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+
 #endif
 
     }

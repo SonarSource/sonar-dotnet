@@ -33,14 +33,14 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class NonFlagsEnumInBitwiseOperation : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3265";
+
         private const string MessageFormat = "{0}";
-        internal const string MessageRemove = "Remove this bitwise operation; the enum '{0}' is not marked with 'Flags' attribute.";
-        internal const string MessageChangeOrRemove = "Mark enum '{0}' with 'Flags' attribute or remove this bitwise operation.";
+        private const string MessageRemove = "Remove this bitwise operation; the enum '{0}' is not marked with 'Flags' attribute.";
+        private const string MessageChangeOrRemove = "Mark enum '{0}' with 'Flags' attribute or remove this bitwise operation.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -60,26 +60,21 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckExpressionWithOperator<T>(Func<T, SyntaxToken> operatorSelector, SyntaxNodeAnalysisContext context)
             where T : SyntaxNode
         {
-            if (!(context.SemanticModel.GetSymbolInfo(context.Node).Symbol is IMethodSymbol operation) ||
-                operation.MethodKind != MethodKind.BuiltinOperator ||
-                operation.ReturnType == null ||
-                operation.ReturnType.TypeKind != TypeKind.Enum)
+            if (context.SemanticModel.GetSymbolInfo(context.Node).Symbol is not IMethodSymbol { MethodKind: MethodKind.BuiltinOperator, ReturnType.TypeKind: TypeKind.Enum } operation
+                || operation.ReturnType.HasAttribute(KnownType.System_FlagsAttribute))
             {
                 return;
             }
 
-            if (!operation.ReturnType.HasAttribute(KnownType.System_FlagsAttribute))
-            {
-                var friendlyTypeName = operation.ReturnType.ToMinimalDisplayString(context.SemanticModel, context.Node.SpanStart);
-                var messageFormat = operation.ReturnType.DeclaringSyntaxReferences.Any()
-                    ? MessageChangeOrRemove
-                    : MessageRemove;
+            var friendlyTypeName = operation.ReturnType.ToMinimalDisplayString(context.SemanticModel, context.Node.SpanStart);
+            var messageFormat = operation.ReturnType.DeclaringSyntaxReferences.Any()
+                ? MessageChangeOrRemove
+                : MessageRemove;
 
-                var message = string.Format(messageFormat, friendlyTypeName);
+            var message = string.Format(messageFormat, friendlyTypeName);
 
-                var op = operatorSelector((T)context.Node);
-                context.ReportIssue(Diagnostic.Create(rule, op.GetLocation(), message));
-            }
+            var op = operatorSelector((T)context.Node);
+            context.ReportIssue(Diagnostic.Create(Rule, op.GetLocation(), message));
         }
     }
 }

@@ -37,6 +37,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void MethodOverrideNoParams_CSharp9() =>
             builder.AddPaths("MethodOverrideNoParams.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
+        [TestMethod]
+        public void MethodOverrideNoParams_CSharp11() =>
+            builder.AddPaths("MethodOverrideNoParams.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+
 #endif
 
         [TestMethod]

@@ -58,17 +58,17 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     foreach (var innerMember in members)
                     {
-                        var outterMembersOfSameName = selfAndOuterNamedTypes.SelectMany(x => x.GetMembers(innerMember.Name)).ToList();
+                        var outerMembersOfSameName = selfAndOuterNamedTypes.SelectMany(x => x.GetMembers(innerMember.Name)).ToList();
                         switch (innerMember)
                         {
                             case IPropertySymbol:
                             case IFieldSymbol:
                             case IEventSymbol:
                             case IMethodSymbol { MethodKind: MethodKind.DeclareMethod or MethodKind.Ordinary }:
-                                CheckMember(c, outterMembersOfSameName, innerMember);
+                                CheckMember(c, outerMembersOfSameName, innerMember);
                                 break;
                             case INamedTypeSymbol namedType:
-                                CheckNamedType(c, outterMembersOfSameName, namedType);
+                                CheckNamedType(c, outerMembersOfSameName, namedType);
                                 break;
                         }
                     }
