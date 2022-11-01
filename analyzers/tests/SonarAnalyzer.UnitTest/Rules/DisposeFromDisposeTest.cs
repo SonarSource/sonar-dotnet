@@ -42,14 +42,19 @@ namespace SonarAnalyzer.UnitTest.Rules
             builder.AddPaths("DisposeFromDispose.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
+
         [TestMethod]
         public void DisposeFromDispose_CSharp9() =>
             builder.AddPaths("DisposeFromDispose.CSharp9.Part1.cs", "DisposeFromDispose.CSharp9.Part2.cs").WithTopLevelStatements().Verify();
-#endif
 
         [TestMethod]
         public void DisposeFromDispose_CSharp10() =>
-            builder.AddPaths("DisposeFromDispose.CSharp10.cs").WithTopLevelStatements().WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            builder.AddPaths("DisposeFromDispose.CSharp10.cs")
+                .WithTopLevelStatements()
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .Verify();
+
+#endif
 
     }
 }

@@ -25,16 +25,22 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DoNotWriteToStandardOutputTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<DoNotWriteToStandardOutput>();
+
         [TestMethod]
         public void DoNotWriteToStandardOutput() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ConsoleLogging.cs", new DoNotWriteToStandardOutput());
+            builder.AddPaths("ConsoleLogging.cs").Verify();
 
         [TestMethod]
         public void DoNotWriteToStandardOutput_ConditionalDirectives1() =>
-            OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\ConsoleLogging_Conditionals1.cs", new DoNotWriteToStandardOutput());
+            builder.AddPaths("ConsoleLogging_Conditionals1.cs")
+                .WithConcurrentAnalysis(false)
+                .Verify();
 
         [TestMethod]
         public void DoNotWriteToStandardOutput_ConditionalDirectives2() =>
-            OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\ConsoleLogging_Conditionals2.cs", new DoNotWriteToStandardOutput());
+            builder.AddPaths("ConsoleLogging_Conditionals2.cs")
+                .WithConcurrentAnalysis(false)
+                .Verify();
     }
 }

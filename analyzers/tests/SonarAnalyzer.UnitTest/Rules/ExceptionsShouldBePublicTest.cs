@@ -27,6 +27,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ExceptionsShouldBePublic() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ExceptionsShouldBePublic.cs", new ExceptionsShouldBePublic());
+            new VerifierBuilder<ExceptionsShouldBePublic>().AddPaths("ExceptionsShouldBePublic.cs").Verify();
     }
 }

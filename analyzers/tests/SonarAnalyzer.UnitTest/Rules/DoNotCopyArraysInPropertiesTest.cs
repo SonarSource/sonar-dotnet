@@ -25,14 +25,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DoNotCopyArraysInPropertiesTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<DoNotCopyArraysInProperties>();
+
         [TestMethod]
         public void DoNotCopyArraysInProperties() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotCopyArraysInProperties.cs", new DoNotCopyArraysInProperties());
+            builder.AddPaths("DoNotCopyArraysInProperties.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void DoNotCopyArraysInProperties_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DoNotCopyArraysInProperties.CSharp9.cs", new DoNotCopyArraysInProperties());
+            builder.AddPaths("DoNotCopyArraysInProperties.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
+
 #endif
+
     }
 }

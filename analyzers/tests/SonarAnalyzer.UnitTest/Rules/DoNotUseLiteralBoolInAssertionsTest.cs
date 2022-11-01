@@ -25,28 +25,30 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DoNotUseLiteralBoolInAssertionsTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<DoNotUseLiteralBoolInAssertions>();
+
         [DataTestMethod]
         [DataRow("1.1.11")]
         [DataRow(Constants.NuGetLatestVersion)]
         public void DoNotUseLiteralBoolInAssertions_MsTest(string testFwkVersion) =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotUseLiteralBoolInAssertions.MsTest.cs",
-                                    new DoNotUseLiteralBoolInAssertions(),
-                                    NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
+            builder.AddPaths("DoNotUseLiteralBoolInAssertions.MsTest.cs")
+                .AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion))
+                .Verify();
 
         [DataTestMethod]
         [DataRow("2.5.7.10213")]
         [DataRow(Constants.NuGetLatestVersion)]
         public void DoNotUseLiteralBoolInAssertions_NUnit(string testFwkVersion) =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotUseLiteralBoolInAssertions.NUnit.cs",
-                                    new DoNotUseLiteralBoolInAssertions(),
-                                    NuGetMetadataReference.NUnit(testFwkVersion));
+            builder.AddPaths("DoNotUseLiteralBoolInAssertions.NUnit.cs")
+                .AddReferences(NuGetMetadataReference.NUnit(testFwkVersion))
+                .Verify();
 
         [DataTestMethod]
         [DataRow("2.0.0")]
         [DataRow(Constants.NuGetLatestVersion)]
         public void DoNotUseLiteralBoolInAssertions_Xunit(string testFwkVersion) =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotUseLiteralBoolInAssertions.Xunit.cs",
-                                    new DoNotUseLiteralBoolInAssertions(),
-                                    NuGetMetadataReference.XunitFramework(testFwkVersion));
+            builder.AddPaths("DoNotUseLiteralBoolInAssertions.Xunit.cs")
+                .AddReferences(NuGetMetadataReference.XunitFramework(testFwkVersion))
+                .Verify();
     }
 }

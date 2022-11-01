@@ -26,31 +26,27 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DoNotInstantiateSharedClassesTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.DoNotInstantiateSharedClasses>().AddReferences(MetadataReferenceFacade.SystemComponentModelComposition);
+        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.DoNotInstantiateSharedClasses>().AddReferences(MetadataReferenceFacade.SystemComponentModelComposition);
+
         [TestMethod]
         public void DoNotInstantiateSharedClasses_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotInstantiateSharedClasses.cs",
-                new CS.DoNotInstantiateSharedClasses(),
-                GetAdditionalReferences());
+            builderCS.AddPaths("DoNotInstantiateSharedClasses.cs").Verify();
 
         [TestMethod]
         public void DoNotInstantiateSharedClasses_CS_InTest() =>
-            OldVerifier.VerifyNoIssueReportedInTest(@"TestCases\DoNotInstantiateSharedClasses.cs",
-                new CS.DoNotInstantiateSharedClasses(),
-                GetAdditionalReferences());
+            builderCS.AddPaths("DoNotInstantiateSharedClasses.cs")
+                .AddTestReference()
+                .VerifyNoIssueReported();
 
         [TestMethod]
         public void DoNotInstantiateSharedClasses_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotInstantiateSharedClasses.vb",
-                new VB.DoNotInstantiateSharedClasses(),
-                GetAdditionalReferences());
+            builderVB.AddPaths("DoNotInstantiateSharedClasses.vb").Verify();
 
         [TestMethod]
         public void DoNotInstantiateSharedClasses_VB_InTest() =>
-            OldVerifier.VerifyNoIssueReportedInTest(@"TestCases\DoNotInstantiateSharedClasses.vb",
-                new VB.DoNotInstantiateSharedClasses(),
-                GetAdditionalReferences());
-
-        private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
-            MetadataReferenceFacade.SystemComponentModelComposition;
+            builderVB.AddPaths("DoNotInstantiateSharedClasses.vb")
+                .AddTestReference()
+                .VerifyNoIssueReported();
     }
 }

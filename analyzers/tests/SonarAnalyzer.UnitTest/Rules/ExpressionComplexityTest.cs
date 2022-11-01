@@ -26,27 +26,33 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ExpressionComplexityTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder().AddAnalyzer(() => new CS.ExpressionComplexity { Maximum = 3 });
+
         [TestMethod]
-        public void ExpressionComplexity_CSharp() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ExpressionComplexity.cs",
-                new CS.ExpressionComplexity { Maximum = 3},
-                ParseOptionsHelper.FromCSharp8);
+        public void ExpressionComplexity_CSharp8() =>
+            builderCS.AddPaths("ExpressionComplexity.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
 
 #if NET
+
         [TestMethod]
         public void ExpressionComplexity_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ExpressionComplexity.CSharp9.cs",
-                new CS.ExpressionComplexity { Maximum = 3});
+            builderCS.AddPaths("ExpressionComplexity.CSharp9.cs")
+                .WithTopLevelStatements()
+                .Verify();
 
         [TestMethod]
         public void ExpressionComplexity_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\ExpressionComplexity.CSharp10.cs",
-                new CS.ExpressionComplexity { Maximum = 3});
+            builderCS.AddPaths("ExpressionComplexity.CSharp10.cs")
+                .WithTopLevelStatements()
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .Verify();
+
 #endif
 
         [TestMethod]
         public void ExpressionComplexity_VisualBasic() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ExpressionComplexity.vb",
-                new VB.ExpressionComplexity { Maximum = 3 });
+            new VerifierBuilder().AddAnalyzer(() => new VB.ExpressionComplexity { Maximum = 3 }).AddPaths("ExpressionComplexity.vb").Verify();
     }
 }

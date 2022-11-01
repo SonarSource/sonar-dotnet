@@ -26,18 +26,24 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DoNotThrowFromDestructorsTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.DoNotThrowFromDestructors>();
+
         [TestMethod]
         public void DoNotThrowFromDestructors_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotThrowFromDestructors.cs", new CS.DoNotThrowFromDestructors());
+            builderCS.AddPaths("DoNotThrowFromDestructors.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void DoNotThrowFromDestructors_CS_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DoNotThrowFromDestructors.CSharp9.cs", new CS.DoNotThrowFromDestructors());
+            builderCS.AddPaths("DoNotThrowFromDestructors.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
+
 #endif
 
         [TestMethod]
         public void DoNotThrowFromDestructors_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotThrowFromDestructors.vb", new VB.DoNotThrowFromDestructors());
+            new VerifierBuilder<VB.DoNotThrowFromDestructors>().AddPaths("DoNotThrowFromDestructors.vb").Verify();
     }
 }

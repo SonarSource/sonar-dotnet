@@ -26,8 +26,8 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DoNotOverwriteCollectionElementsTest
     {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder().AddAnalyzer(() => new CS.DoNotOverwriteCollectionElements());
-        private readonly VerifierBuilder builderVB = new VerifierBuilder().AddAnalyzer(() => new VB.DoNotOverwriteCollectionElements());
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.DoNotOverwriteCollectionElements>();
+        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.DoNotOverwriteCollectionElements>();
 
         [TestMethod]
         public void DoNotOverwriteCollectionElements_CS() =>

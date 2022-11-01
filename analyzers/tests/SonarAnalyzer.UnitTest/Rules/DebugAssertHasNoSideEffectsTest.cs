@@ -25,14 +25,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DebugAssertHasNoSideEffectsTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<DebugAssertHasNoSideEffects>();
+
         [TestMethod]
         public void DebugAssertHasNoSideEffects() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DebugAssertHasNoSideEffects.cs", new DebugAssertHasNoSideEffects());
+            builder.AddPaths("DebugAssertHasNoSideEffects.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void DebugAssertHasNoSideEffects_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DebugAssertHasNoSideEffects.CSharp9.cs", new DebugAssertHasNoSideEffects());
+            builder.AddPaths("DebugAssertHasNoSideEffects.CSharp9.cs")
+                .WithTopLevelStatements()
+                .Verify();
+
 #endif
+
     }
 }
