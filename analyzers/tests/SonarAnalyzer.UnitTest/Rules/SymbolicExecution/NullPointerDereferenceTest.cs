@@ -29,7 +29,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class NullPointerDereferenceTest
     {
-        private readonly VerifierBuilder sonarVerifier = new VerifierBuilder()
+        private readonly VerifierBuilder sonar = new VerifierBuilder()
             .AddAnalyzer(() => new CS.SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg))
             .WithBasePath(@"SymbolicExecution\Sonar")
             .WithOnlyDiagnostics(ChecksCS.NullPointerDereference.S2259);
@@ -45,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void NullPointerDereference_Sonar_CS() =>
-            sonarVerifier.AddPaths("NullPointerDereference.cs").WithConcurrentAnalysis(false).Verify();
+            sonar.AddPaths("NullPointerDereference.cs").WithConcurrentAnalysis(false).Verify();
 
         [TestMethod]
         public void NullPointerDereference_Roslyn_CS() =>
@@ -57,7 +57,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void NullPointerDereference_Sonar_DoesNotRaiseIssuesForTestProject() =>
-            sonarVerifier.AddTestReference().AddPaths("NullPointerDereference.cs").WithConcurrentAnalysis(false).VerifyNoIssueReported();
+            sonar.AddTestReference().AddPaths("NullPointerDereference.cs").WithConcurrentAnalysis(false).VerifyNoIssueReported();
 
         [TestMethod]
         public void NullPointerDereference_Roslyn_DoesNotRaiseIssuesForTestProject() =>
@@ -65,7 +65,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void NullPointerDereference_Sonar_CSharp6() =>
-            sonarVerifier.AddPaths("NullPointerDereference.CSharp6.cs").WithOptions(ParseOptionsHelper.FromCSharp6).Verify();
+            sonar.AddPaths("NullPointerDereference.CSharp6.cs").WithOptions(ParseOptionsHelper.FromCSharp6).Verify();
 
         [TestMethod]
         public void NullPointerDereference_Roslyn_CSharp6() =>
@@ -73,7 +73,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void NullPointerDereference_Sonar_CSharp7() =>
-            sonarVerifier.AddPaths("NullPointerDereference.CSharp7.cs").WithOptions(ParseOptionsHelper.FromCSharp7).Verify();
+            sonar.AddPaths("NullPointerDereference.CSharp7.cs").WithOptions(ParseOptionsHelper.FromCSharp7).Verify();
 
         [TestMethod]
         public void NullPointerDereference_Roslyn_CSharp7() =>
@@ -81,7 +81,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void NullPointerDereference_Sonar_CSharp8() =>
-            sonarVerifier.AddPaths("NullPointerDereference.CSharp8.cs").AddReferences(MetadataReferenceFacade.NETStandard21).WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+            sonar.AddPaths("NullPointerDereference.CSharp8.cs").AddReferences(MetadataReferenceFacade.NETStandard21).WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
         [TestMethod]
         public void NullPointerDereference_Roslyn_CSharp8() =>
@@ -95,7 +95,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void NullPointerDereference_Sonar_CSharp9() =>
-            sonarVerifier.AddPaths("NullPointerDereference.CSharp9.cs").WithTopLevelStatements().Verify();
+            sonar.AddPaths("NullPointerDereference.CSharp9.cs").WithTopLevelStatements().Verify();
 
         [TestMethod]
         public void NullPointerDereference_Roslyn_CSharp9() =>
@@ -103,7 +103,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void NullPointerDereference_Sonar_CSharp10() =>
-            sonarVerifier.AddPaths("NullPointerDereference.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            sonar.AddPaths("NullPointerDereference.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
         [TestMethod]
         public void NullPointerDereference_Roslyn_CSharp10() =>
@@ -117,7 +117,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void NullPointerDereference_Sonar_CSharp11() =>
-            sonarVerifier.AddPaths("NullPointerDereference.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+            sonar.AddPaths("NullPointerDereference.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
 
         [TestMethod]
         public void NullPointerDereference_Roslyn_CSharp11() =>
