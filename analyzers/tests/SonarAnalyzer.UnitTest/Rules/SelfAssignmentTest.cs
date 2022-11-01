@@ -29,7 +29,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.SelfAssignment>();
 
         [TestMethod]
-        public void SelfAssignment_CSharp() =>
+        public void SelfAssignment_CSharp8() =>
             builderCS.AddPaths("SelfAssignment.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
@@ -41,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 #endif
 
         [TestMethod]
-        public void SelfAssignment_VisualBasic() =>
+        public void SelfAssignment_VB() =>
             new VerifierBuilder<VB.SelfAssignment>().AddPaths("SelfAssignment.vb").Verify();
     }
 }

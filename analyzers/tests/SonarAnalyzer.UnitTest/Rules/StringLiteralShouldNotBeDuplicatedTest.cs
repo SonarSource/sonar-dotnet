@@ -43,7 +43,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void StringLiteralShouldNotBeDuplicated_TopLevelStatements() =>
             builderCS.AddPaths("StringLiteralShouldNotBeDuplicated.TopLevelStatements.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
                 .WithTopLevelStatements()
                 .Verify();
 

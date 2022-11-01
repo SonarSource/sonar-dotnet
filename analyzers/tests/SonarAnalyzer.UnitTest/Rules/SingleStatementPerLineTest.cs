@@ -29,7 +29,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.SingleStatementPerLine>();
 
         [TestMethod]
-        public void SingleStatementPerLine_CSharp() =>
+        public void SingleStatementPerLine_CS() =>
             builderCS.AddPaths("SingleStatementPerLine.cs").Verify();
 
 #if NET
@@ -43,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 #endif
 
         [TestMethod]
-        public void SingleStatementPerLine_VisualBasic() =>
+        public void SingleStatementPerLine_VB() =>
             new VerifierBuilder<VB.SingleStatementPerLine>().AddPaths("SingleStatementPerLine.vb", "SingleStatementPerLine2.vb").WithAutogenerateConcurrentFiles(false).Verify();
     }
 }

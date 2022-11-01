@@ -27,11 +27,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class PropertyGetterWithThrowTest
     {
         [TestMethod]
-        public void PropertyGetterWithThrowCSharp() =>
+        public void PropertyGetterWithThrow_CS() =>
             new VerifierBuilder<CS.PropertyGetterWithThrow>().AddPaths("PropertyGetterWithThrow.cs").Verify();
 
         [TestMethod]
-        public void PropertyGetterWithThrowVBNet() =>
+        public void PropertyGetterWithThrow_VB() =>
             new VerifierBuilder<VB.PropertyGetterWithThrow>().AddPaths("PropertyGetterWithThrow.vb").Verify();
     }
 }
