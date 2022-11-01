@@ -93,5 +93,11 @@ public class Sample
 
 #endif
 
+        [TestMethod]
+        public void MethodParameterUnused_CSharp11_CS() =>
+                 roslynCS
+                    .AddPaths("MethodParameterUnused.CSharp11.cs")
+                    .WithOptions(ParseOptionsHelper.FromCSharp11)
+                    .Verify();
     }
 }

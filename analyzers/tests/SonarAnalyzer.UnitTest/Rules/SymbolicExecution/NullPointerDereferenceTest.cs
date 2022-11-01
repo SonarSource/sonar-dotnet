@@ -116,6 +116,14 @@ namespace SonarAnalyzer.UnitTest.Rules
 #else
 
         [TestMethod]
+        public void NullPointerDereference_Sonar_CSharp11() =>
+            sonarVerifier.AddPaths("NullPointerDereference.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+
+        [TestMethod]
+        public void NullPointerDereference_Roslyn_CSharp11() =>
+            roslynCS.AddPaths("NullPointerDereference.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+
+        [TestMethod]
         public void NullPointerDereference_Roslyn_CS_NetFx() =>
             roslynCS.AddPaths("NullPointerDereference.NetFx.cs").Verify();
 

@@ -5,6 +5,11 @@ namespace Tests.Diagnostics
 {
     class Program
     {
+        [Obsolete(nameof(Console.In))] // Noncompliant, FP, this just gets resolved to "In"
+        public void TestingNameOfInAttribute()
+        {
+        }
+
         public void Method()
         {
             string value;
