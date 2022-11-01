@@ -28,43 +28,36 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class HashesShouldHaveUnpredictableSaltTest
     {
-        private static readonly DiagnosticDescriptor[] OnlyDiagnostics = new[] { HashesShouldHaveUnpredictableSalt.S2053 };
+        private readonly VerifierBuilder sonarVerifier = new VerifierBuilder<SymbolicExecutionRunner>().WithBasePath(@"SymbolicExecution\Sonar")
+            .WithOnlyDiagnostics(HashesShouldHaveUnpredictableSalt.S2053)
+            .AddReferences(MetadataReferenceFacade.SystemSecurityCryptography);
 
         [TestMethod]
-        public void HashesShouldHaveUnpredictableSalt_CS() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\SymbolicExecution\Sonar\HashesShouldHaveUnpredictableSalt.cs",
-                new SymbolicExecutionRunner(),
-                ParseOptionsHelper.FromCSharp8,
-                MetadataReferenceFacade.SystemSecurityCryptography,
-                onlyDiagnostics: OnlyDiagnostics);
+        public void HashesShouldHaveUnpredictableSalt_CSharp8() =>
+            sonarVerifier.AddPaths("HashesShouldHaveUnpredictableSalt.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
 
         [TestMethod]
         public void HashesShouldHaveUnpredictableSalt_DoesNotRaiseIssuesForTestProject() =>
-            OldVerifier.VerifyNoIssueReportedInTest(
-                @"TestCases\SymbolicExecution\Sonar\HashesShouldHaveUnpredictableSalt.cs",
-                new SymbolicExecutionRunner(),
-                ParseOptionsHelper.FromCSharp8,
-                MetadataReferenceFacade.SystemSecurityCryptography,
-                onlyDiagnostics: OnlyDiagnostics);
+            sonarVerifier.AddPaths("HashesShouldHaveUnpredictableSalt.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .AddTestReference()
+                .VerifyNoIssueReported();
 
 #if NET
 
         [TestMethod]
         public void HashesShouldHaveUnpredictableSalt_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(
-                @"TestCases\SymbolicExecution\Sonar\HashesShouldHaveUnpredictableSalt.CSharp9.cs",
-                new SymbolicExecutionRunner(),
-                MetadataReferenceFacade.SystemSecurityCryptography,
-                onlyDiagnostics: OnlyDiagnostics);
+            sonarVerifier.AddPaths("HashesShouldHaveUnpredictableSalt.CSharp9.cs")
+                .WithTopLevelStatements()
+                .Verify();
 
         [TestMethod]
         public void HashesShouldHaveUnpredictableSalt_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(
-                @"TestCases\SymbolicExecution\Sonar\HashesShouldHaveUnpredictableSalt.CSharp10.cs",
-                new SymbolicExecutionRunner(),
-                MetadataReferenceFacade.SystemSecurityCryptography,
-                onlyDiagnostics: OnlyDiagnostics);
+            sonarVerifier.AddPaths("HashesShouldHaveUnpredictableSalt.CSharp10.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .Verify();
 
 #endif
 
