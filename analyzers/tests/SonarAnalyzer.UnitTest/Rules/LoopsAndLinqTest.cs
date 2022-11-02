@@ -45,7 +45,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void LoopsAndLinq_CSharp11() =>
             builder.AddPaths("LoopsAndLinq.CSharp11.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .WithConcurrentAnalysis(false)
                 .Verify();
 
 #endif

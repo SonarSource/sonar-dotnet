@@ -50,6 +50,10 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
                 .VerifyCodeFix();
 
+        [TestMethod]
+        public void GenericReadonlyFieldPropertyAssignment_CSharp11() =>
+             builder.AddPaths("GenericReadonlyFieldPropertyAssignment.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+
 #endif
 
         [TestMethod]

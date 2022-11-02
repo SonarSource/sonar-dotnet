@@ -31,6 +31,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void FieldShouldBeReadonly() =>
             builder.AddPaths("FieldShouldBeReadonly.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
+        [TestMethod]
+        public void FieldShouldBeReadonly_CodeFix() =>
+            builder.AddPaths("FieldShouldBeReadonly.cs")
+                .WithCodeFix<FieldShouldBeReadonlyCodeFix>()
+                .WithCodeFixedPaths("FieldShouldBeReadonly.Fixed.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .VerifyCodeFix();
+
 #if NET
 
         [TestMethod]

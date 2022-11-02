@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Numerics;
 
 namespace Tests.Diagnostics
 {
@@ -9,5 +10,10 @@ namespace Tests.Diagnostics
             num *= T.Pow<T>(num, exponent - 1);
             return num;  // this is never reached
         }
+    }
+
+    public class Addition : IAdditionOperators<Addition, Addition, Addition>
+    {
+        public static Addition operator +(Addition left, Addition right) => left + right; // FN
     }
 }
