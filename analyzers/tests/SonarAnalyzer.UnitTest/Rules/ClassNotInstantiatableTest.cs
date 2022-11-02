@@ -40,6 +40,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithOptions(ParseOptionsHelper.FromCSharp9)
                 .Verify();
 
+        [TestMethod]
+        public void ClassNotInstantiatable_CSharp11() =>
+            builderCS.AddPaths("ClassNotInstantiatable.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
 #endif
 
         [TestMethod]
