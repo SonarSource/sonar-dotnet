@@ -56,7 +56,7 @@ namespace Tests.Diagnostics
         private UIntPtr uIntPtr; // Primitives don't count
 
         private class NestedClass // Compliant 
-        {
+    {
             private IFoo nestedIFoo; // +1
 
             private nint nativeInt; // Primitives don't count 
@@ -70,6 +70,7 @@ namespace Tests.Diagnostics
 
         private class NestedEmptyClass // Compliant
         {
+            public Stream stream = new FileStream("", FileMode.Open);
         }
     }
 }
