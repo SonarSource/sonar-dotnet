@@ -57,14 +57,3 @@ class Person
         setter = i => { somefield >>>= i; };
     }
 }
-
-class Person
-{
-    int somefield = 42; // Noncompliant FP (it is part of an UnsignedRightShiftAssignmentExpression)
-    private readonly Action<int> setter;
-
-    Person(int birthYear)
-    {
-        setter = i => { somefield >>>= i; };
-    }
-}
