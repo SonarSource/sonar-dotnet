@@ -50,6 +50,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void EmptyCollectionsShouldNotBeEnumerated_CSharp10() =>
             sonarVerifier.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
+        [TestMethod]
+        public void EmptyCollectionsShouldNotBeEnumerated_CSharp11() =>
+            sonarVerifier.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+
 #endif
 
     }

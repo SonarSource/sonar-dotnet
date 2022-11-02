@@ -47,6 +47,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithOptions(ParseOptionsHelper.FromCSharp9)
                 .Verify();
 
+        [TestMethod]
+        public void PublicMethodArgumentsShouldBeCheckedForNull_CSharp11() =>
+            sonarVerifier.AddPaths("PublicMethodArgumentsShouldBeCheckedForNull.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
 #endif
 
     }

@@ -74,6 +74,14 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #endif
 
+#if NET
+
+        [TestMethod]
+        public void LocksReleasedAllPaths_CSharp11() =>
+            builderCS.AddPaths("LocksReleasedAllPaths.Monitor.Conditions.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+
+#endif
+
         private static VerifierBuilder CreateVerifier(Func<DiagnosticAnalyzer> createConfiguredAnalyzer, DiagnosticDescriptor onlyDiagnostics) =>
             new VerifierBuilder()
             .AddAnalyzer(createConfiguredAnalyzer)
