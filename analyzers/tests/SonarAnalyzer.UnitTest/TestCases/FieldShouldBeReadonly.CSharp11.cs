@@ -45,16 +45,16 @@ record PointerTypes
 
     private void Method_RefArgument(ref nint v) { }
     private void Method_OutArgument(out nuint v) { v = 42; }
+}
 
-    class Person
+class Person
+{
+    int somefield = 42; // Noncompliant FP (it is part of an UnsignedRightShiftAssignmentExpression)
+    private readonly Action<int> setter;
+
+    Person(int birthYear)
     {
-        int somefield = 42; // Noncompliant FP (it is part of an UnsignedRightShiftAssignmentExpression)
-        private readonly Action<int> setter;
-
-        Person(int birthYear)
-        {
-            setter = i => { somefield >>>= i; };
-        }
+        setter = i => { somefield >>>= i; };
     }
 }
 
