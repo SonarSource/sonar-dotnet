@@ -48,6 +48,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithAutogenerateConcurrentFiles(false)
                 .Verify();
 
+        [TestMethod]
+        public void AvoidExcessiveInheritance_DefaultValues_FileScopedTypes() =>
+            defaultBuilder.AddPaths("AvoidExcessiveInheritance_DefaultValues.FileScopedTypes.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
 #endif
 
         [TestMethod]
