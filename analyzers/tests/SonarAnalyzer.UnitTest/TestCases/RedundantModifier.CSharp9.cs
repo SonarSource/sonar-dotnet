@@ -131,6 +131,15 @@ public record Foo
             var x = 10;
             x += int.MaxValue;
         }
+
+        checked // Noncompliant, FP, nuint/UIntPtr is not a member of KnownType.IntegralNumbers.
+        {
+            nint x = 42;
+            nuint y = 42;
+
+            x += 42;
+            y += 42;
+        }
     }
 }
 

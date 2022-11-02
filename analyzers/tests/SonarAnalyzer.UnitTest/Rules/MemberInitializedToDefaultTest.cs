@@ -29,13 +29,17 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void MemberInitializedToDefault() =>
-            builder.AddPaths(@"MemberInitializedToDefault.cs").Verify();
+            builder.AddPaths("MemberInitializedToDefault.cs").Verify();
 
 #if NET
 
         [TestMethod]
         public void MemberInitializedToDefault_CSharp9() =>
-            builder.AddPaths(@"MemberInitializedToDefault.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+            builder.AddPaths("MemberInitializedToDefault.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+
+        [TestMethod]
+        public void MemberInitializedToDefault_CSharp11() =>
+            builder.AddPaths("MemberInitializedToDefault.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
 
 #endif
 

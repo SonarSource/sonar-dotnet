@@ -64,6 +64,18 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
                 .VerifyCodeFix();
 
+        [TestMethod]
+        public void RedundantModifier_CSharp11() =>
+            builder.AddPaths("RedundantModifier.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+
+        [TestMethod]
+        public void RedundantModifier_CodeFix_CSharp11() =>
+            builder.AddPaths("RedundantModifier.CSharp11.cs")
+                .WithCodeFix<RedundantModifierCodeFix>()
+                .WithCodeFixedPaths("RedundantModifier.CSharp11.Fixed.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .VerifyCodeFix();
+
 #endif
 
     }

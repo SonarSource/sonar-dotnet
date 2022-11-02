@@ -33,6 +33,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void SecurityPInvokeMethodShouldNotBeCalled_CS() =>
             builderCS.AddPaths("SecurityPInvokeMethodShouldNotBeCalled.cs").Verify();
 
+#if NET
+
+        [TestMethod]
+        public void SecurityPInvokeMethodShouldNotBeCalled_CSharp11() =>
+            builderCS.AddPaths("SecurityPInvokeMethodShouldNotBeCalled.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+
+#endif
+
         [TestMethod]
         public void SecurityPInvokeMethodShouldNotBeCalled_VB() =>
             builderVB.AddPaths("SecurityPInvokeMethodShouldNotBeCalled.vb").Verify();

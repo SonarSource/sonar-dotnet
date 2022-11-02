@@ -126,6 +126,14 @@ public record Foo
             var x = 10;
             x += int.MaxValue;
         }
+
+        {
+            nint x = 42;
+            nuint y = 42;
+
+            x += 42;
+            y += 42;
+        }
     }
 }
 

@@ -25,22 +25,30 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class FieldShouldBeReadonlyTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<FieldShouldBeReadonly>();
+
         [TestMethod]
         public void FieldShouldBeReadonly() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\FieldShouldBeReadonly.cs", new FieldShouldBeReadonly(), ParseOptionsHelper.FromCSharp8);
+            builder.AddPaths("FieldShouldBeReadonly.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
+
         [TestMethod]
         public void FieldShouldBeReadonly_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\FieldShouldBeReadonly.CSharp9.cs", new FieldShouldBeReadonly());
+            builder.AddPaths("FieldShouldBeReadonly.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+
+        [TestMethod]
+        public void FieldShouldBeReadonly_CSharp11() =>
+            builder.AddPaths("FieldShouldBeReadonly.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+
 #endif
 
         [TestMethod]
         public void FieldShouldBeReadonly_CodeFix() =>
-            OldVerifier.VerifyCodeFix<FieldShouldBeReadonlyCodeFix>(
-                @"TestCases\FieldShouldBeReadonly.cs",
-                @"TestCases\FieldShouldBeReadonly.Fixed.cs",
-                new FieldShouldBeReadonly(),
-                ParseOptionsHelper.FromCSharp8);
+            builder.WithOptions(ParseOptionsHelper.FromCSharp8)
+                .AddPaths("FieldShouldBeReadonly.cs")
+                .WithCodeFixedPaths("FieldShouldBeReadonly.Fixed.cs")
+                .WithCodeFix<FieldShouldBeReadonlyCodeFix>()
+                .VerifyCodeFix();
     }
 }
