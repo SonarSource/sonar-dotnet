@@ -14,6 +14,8 @@ namespace Tests.Diagnostics
 
             static abstract void Abstract([Optional] [DefaultValue(4)] int i, int j = 5); // Noncompliant
 
+            static abstract void Abstract2([Optional] [DefaultParameterValue(4)] int i, int j = 5); // Compliant
+
             static virtual void DoStuff3([Optional][DefaultParameterValue(4)]int i, int j = 5)
             {
                 Console.WriteLine(i);
