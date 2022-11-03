@@ -29,8 +29,8 @@ public class ExceptionsShouldBePublicTest
     [TestMethod]
     public void ExceptionsShouldBePublic_CS() =>
         new VerifierBuilder<CS.ExceptionsShouldBePublic>()
-        .AddPaths("ExceptionsShouldBePublic.cs")
-        .Verify();
+            .AddPaths("ExceptionsShouldBePublic.cs")
+            .Verify();
 
     [TestMethod]
     public void ExceptionsShouldBePublic_VB() =>
