@@ -183,14 +183,12 @@ stages:
         displayName: '.Net UTs'
 
       - task: PublishPipelineArtifact@1
-        condition: always()
         displayName: 'Save coverage files'
         inputs:
           path: '$(UnitTestProjectPath)\coverage'
           artifact: $(CoverageArtifactName)
 
       - task: PublishPipelineArtifact@1
-        condition: always()
         displayName: 'Save test results files'
         inputs:
           path: '$(UnitTestResultsPath)'
@@ -211,7 +209,7 @@ stages:
         clean: all
       # This job runs the .Net code analysis and uploads to SonarCloud the test results and coverage reports generated
       # in previous jobs.
-      condition: always()
+      condition: eq(dependencies.runUnitTestsDotNet.result, 'Succeeded')
       dependsOn:
       - runUnitTestsDotNet
       steps:
