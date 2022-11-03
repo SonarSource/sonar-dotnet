@@ -28,6 +28,13 @@ public abstract class ExceptionsShouldBePublicBase<TSyntaxKind> : SonarDiagnosti
 {
     private const string DiagnosticId = "S3871";
 
+    private static readonly KnownType[] BaseTypes = new[]
+    {
+        KnownType.System_Exception,
+        KnownType.System_ApplicationException,
+        KnownType.System_SystemException
+    };
+
     protected ExceptionsShouldBePublicBase() : base(DiagnosticId) { }
 
     protected override void Initialize(SonarAnalysisContext context) =>
@@ -36,18 +43,11 @@ public abstract class ExceptionsShouldBePublicBase<TSyntaxKind> : SonarDiagnosti
             c =>
             {
                 if (c.SemanticModel.GetDeclaredSymbol(c.Node) is INamedTypeSymbol classSymbol
-                && classSymbol.GetEffectiveAccessibility() != Accessibility.Public
-                && classSymbol.BaseType.IsAny(BaseTypes))
+                    && classSymbol.GetEffectiveAccessibility() != Accessibility.Public
+                    && classSymbol.BaseType.IsAny(BaseTypes))
                 {
                     c.ReportIssue(Diagnostic.Create(Rule, Language.Syntax.NodeIdentifier(c.Node).Value.GetLocation()));
                 }
             },
             Language.SyntaxKind.ClassAndRecordDeclaration);
-
-    private static readonly KnownType[] BaseTypes = new[]
-    {
-        KnownType.System_Exception,
-        KnownType.System_ApplicationException,
-        KnownType.System_SystemException
-    };
 }

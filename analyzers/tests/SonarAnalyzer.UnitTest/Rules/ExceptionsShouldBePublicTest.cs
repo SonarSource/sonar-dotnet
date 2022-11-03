@@ -35,7 +35,6 @@ public class ExceptionsShouldBePublicTest
     [TestMethod]
     public void ExceptionsShouldBePublic_VB() =>
         new VerifierBuilder<VB.ExceptionsShouldBePublic>()
-        .AddPaths("ExceptionsShouldBePublic.vb")
-        .WithConcurrentAnalysis(false)
-        .Verify();
+            .AddPaths("ExceptionsShouldBePublic.vb")
+            .Verify();
 }
