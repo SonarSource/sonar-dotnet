@@ -192,6 +192,8 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
             Classes(AnalyzerLanguage.CSharp, "record MyPositionalRecord(int Prop) {}").Should().Be(1);
             Classes(AnalyzerLanguage.CSharp, "record struct MyRecordStruct {}").Should().Be(1);
             Classes(AnalyzerLanguage.CSharp, "record struct MyPositionalRecordStruct(int Prop) {}").Should().Be(1);
+            Classes(AnalyzerLanguage.CSharp, "file class FileScopedClass {}").Should().Be(1);
+            Classes(AnalyzerLanguage.CSharp, "file record FileScopedRecord {}").Should().Be(1);
 #endif
             Classes(AnalyzerLanguage.CSharp, "struct Sample {}").Should().Be(1);
             Classes(AnalyzerLanguage.CSharp, "enum MyEnum {}").Should().Be(0);
