@@ -19,3 +19,29 @@ public class Foo
         }
     }
 }
+
+// file-scoped types cannot use accessibility modifiers and cannot be nested.
+
+file partial class PartialFoo { } // Noncompliant
+
+file partial class PartialFooBar { } // Noncompliant
+
+file partial class PartialFileClass { }
+file partial class PartialFileClass { }
+
+
+file unsafe class UnsafeClass
+{
+    int* pointer;
+}
+
+file unsafe class UnsafeClass2 // Noncompliant
+//   ^^^^^^
+{
+    int num;
+}
+
+file unsafe interface MyInterface
+{
+    unsafe int* Method(); // Noncompliant
+}

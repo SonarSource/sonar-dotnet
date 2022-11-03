@@ -66,7 +66,9 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantModifier_CSharp11() =>
-            builder.AddPaths("RedundantModifier.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+            builder.AddPaths("RedundantModifier.CSharp11.cs", "RedundantModifier.CSharp11.Partial.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .Verify();
 
         [TestMethod]
         public void RedundantModifier_CodeFix_CSharp11() =>
