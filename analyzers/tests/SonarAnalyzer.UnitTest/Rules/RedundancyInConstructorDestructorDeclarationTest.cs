@@ -25,60 +25,67 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class RedundancyInConstructorDestructorDeclarationTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<RedundancyInConstructorDestructorDeclaration>();
+        private readonly VerifierBuilder codeFixBuilderRemoveBaseCall = new VerifierBuilder<RedundancyInConstructorDestructorDeclaration>()
+            .WithCodeFix<RedundancyInConstructorDestructorDeclarationCodeFix>()
+            .WithCodeFixTitle(RedundancyInConstructorDestructorDeclarationCodeFix.TitleRemoveBaseCall);
+        private readonly VerifierBuilder codeFixBuilderRemoveConstructor = new VerifierBuilder<RedundancyInConstructorDestructorDeclaration>()
+            .WithCodeFix<RedundancyInConstructorDestructorDeclarationCodeFix>()
+            .WithCodeFixTitle(RedundancyInConstructorDestructorDeclarationCodeFix.TitleRemoveConstructor);
+
         [TestMethod]
         public void RedundancyInConstructorDestructorDeclaration() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\RedundancyInConstructorDestructorDeclaration.cs", new RedundancyInConstructorDestructorDeclaration());
+            builder.AddPaths("RedundancyInConstructorDestructorDeclaration.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void RedundancyInConstructorDestructorDeclaration_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\RedundancyInConstructorDestructorDeclaration.CSharp9.cs", new RedundancyInConstructorDestructorDeclaration());
+            builder.AddPaths("RedundancyInConstructorDestructorDeclaration.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
 
         [TestMethod]
         public void RedundancyInConstructorDestructorDeclaration_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\RedundancyInConstructorDestructorDeclaration.CSharp10.cs", new RedundancyInConstructorDestructorDeclaration());
+            builder.AddPaths("RedundancyInConstructorDestructorDeclaration.CSharp10.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .Verify();
 
         [TestMethod]
         public void RedundancyInConstructorDestructorDeclaration_CodeFix_CSharp9() =>
-            OldVerifier.VerifyCodeFix<RedundancyInConstructorDestructorDeclarationCodeFix>(
-                @"TestCases\RedundancyInConstructorDestructorDeclaration.CSharp9.cs",
-                @"TestCases\RedundancyInConstructorDestructorDeclaration.CSharp9.Fixed.cs",
-                new RedundancyInConstructorDestructorDeclaration(),
-                RedundancyInConstructorDestructorDeclarationCodeFix.TitleRemoveBaseCall,
-                ParseOptionsHelper.FromCSharp9);
+            codeFixBuilderRemoveBaseCall.AddPaths("RedundancyInConstructorDestructorDeclaration.CSharp9.cs")
+                .WithCodeFixedPaths("RedundancyInConstructorDestructorDeclaration.CSharp9.Fixed.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .VerifyCodeFix();
 
         [TestMethod]
         public void RedundancyInConstructorDestructorDeclaration_CodeFix_CSharp10() =>
-            OldVerifier.VerifyCodeFix<RedundancyInConstructorDestructorDeclarationCodeFix>(
-                @"TestCases\RedundancyInConstructorDestructorDeclaration.CSharp10.cs",
-                @"TestCases\RedundancyInConstructorDestructorDeclaration.CSharp10.Fixed.cs",
-                new RedundancyInConstructorDestructorDeclaration(),
-                RedundancyInConstructorDestructorDeclarationCodeFix.TitleRemoveConstructor,
-                ParseOptionsHelper.FromCSharp10);
+            codeFixBuilderRemoveConstructor.AddPaths("RedundancyInConstructorDestructorDeclaration.CSharp10.cs")
+                .WithCodeFixedPaths("RedundancyInConstructorDestructorDeclaration.CSharp10.Fixed.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .VerifyCodeFix();
+
 #endif
 
         [TestMethod]
         public void RedundancyInConstructorDestructorDeclaration_CodeFix_BaseCall() =>
-            OldVerifier.VerifyCodeFix<RedundancyInConstructorDestructorDeclarationCodeFix>(
-                @"TestCases\RedundancyInConstructorDestructorDeclaration.cs",
-                @"TestCases\RedundancyInConstructorDestructorDeclaration.BaseCall.Fixed.cs",
-                new RedundancyInConstructorDestructorDeclaration(),
-                RedundancyInConstructorDestructorDeclarationCodeFix.TitleRemoveBaseCall);
+            codeFixBuilderRemoveBaseCall.AddPaths("RedundancyInConstructorDestructorDeclaration.cs")
+                .WithCodeFixedPaths("RedundancyInConstructorDestructorDeclaration.BaseCall.Fixed.cs")
+                .VerifyCodeFix();
 
         [TestMethod]
         public void RedundancyInConstructorDestructorDeclaration_CodeFix_Constructor() =>
-            OldVerifier.VerifyCodeFix<RedundancyInConstructorDestructorDeclarationCodeFix>(
-                @"TestCases\RedundancyInConstructorDestructorDeclaration.cs",
-                @"TestCases\RedundancyInConstructorDestructorDeclaration.Constructor.Fixed.cs",
-                new RedundancyInConstructorDestructorDeclaration(),
-                RedundancyInConstructorDestructorDeclarationCodeFix.TitleRemoveConstructor);
+            codeFixBuilderRemoveConstructor.AddPaths("RedundancyInConstructorDestructorDeclaration.cs")
+                .WithCodeFixedPaths("RedundancyInConstructorDestructorDeclaration.Constructor.Fixed.cs")
+                .VerifyCodeFix();
 
         [TestMethod]
         public void RedundancyInConstructorDestructorDeclaration_CodeFix_Destructor() =>
-            OldVerifier.VerifyCodeFix<RedundancyInConstructorDestructorDeclarationCodeFix>(
-                @"TestCases\RedundancyInConstructorDestructorDeclaration.cs",
-                @"TestCases\RedundancyInConstructorDestructorDeclaration.Destructor.Fixed.cs",
-                new RedundancyInConstructorDestructorDeclaration(),
-                RedundancyInConstructorDestructorDeclarationCodeFix.TitleRemoveDestructor);
+            new VerifierBuilder<RedundancyInConstructorDestructorDeclaration>()
+                .WithCodeFix<RedundancyInConstructorDestructorDeclarationCodeFix>()
+                .AddPaths("RedundancyInConstructorDestructorDeclaration.cs")
+                .WithCodeFixedPaths("RedundancyInConstructorDestructorDeclaration.Destructor.Fixed.cs")
+                .WithCodeFixTitle(RedundancyInConstructorDestructorDeclarationCodeFix.TitleRemoveDestructor)
+                .VerifyCodeFix();
     }
 }

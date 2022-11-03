@@ -26,18 +26,24 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class SingleStatementPerLineTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.SingleStatementPerLine>();
+
         [TestMethod]
-        public void SingleStatementPerLine_CSharp() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\SingleStatementPerLine.cs", new CS.SingleStatementPerLine());
+        public void SingleStatementPerLine_CS() =>
+            builderCS.AddPaths("SingleStatementPerLine.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void SingleStatementPerLine_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SingleStatementPerLine.CSharp9.cs", new CS.SingleStatementPerLine());
+            builderCS.AddPaths("SingleStatementPerLine.CSharp9.cs")
+                .WithTopLevelStatements()
+                .Verify();
+
 #endif
 
         [TestMethod]
-        public void SingleStatementPerLine_VisualBasic() =>
+        public void SingleStatementPerLine_VB() =>
             new VerifierBuilder<VB.SingleStatementPerLine>().AddPaths("SingleStatementPerLine.vb", "SingleStatementPerLine2.vb").WithAutogenerateConcurrentFiles(false).Verify();
     }
 }

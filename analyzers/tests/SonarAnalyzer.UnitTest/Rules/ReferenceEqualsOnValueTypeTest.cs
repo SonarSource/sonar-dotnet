@@ -27,6 +27,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ReferenceEqualsOnValueType() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ReferenceEqualsOnValueType.cs", new ReferenceEqualsOnValueType());
+            new VerifierBuilder<ReferenceEqualsOnValueType>().AddPaths("ReferenceEqualsOnValueType.cs").Verify();
     }
 }

@@ -25,14 +25,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class PInvokesShouldNotBeVisibleTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<PInvokesShouldNotBeVisible>();
+
         [TestMethod]
         public void PInvokesShouldNotBeVisible() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\PInvokesShouldNotBeVisible.cs", new PInvokesShouldNotBeVisible());
+            builder.AddPaths("PInvokesShouldNotBeVisible.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void PInvokesShouldNotBeVisible_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PInvokesShouldNotBeVisible.CSharp9.cs", new PInvokesShouldNotBeVisible());
+            builder.AddPaths("PInvokesShouldNotBeVisible.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
+
 #endif
+
     }
 }

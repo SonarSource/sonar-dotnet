@@ -25,17 +25,24 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class RedundantJumpStatementTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<RedundantJumpStatement>();
+
         [TestMethod]
-        public void RedundantJumpStatement() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\RedundantJumpStatement.cs",
-                                    new RedundantJumpStatement(),
-                                    ParseOptionsHelper.FromCSharp8,
-                                    MetadataReferenceFacade.NETStandard21);
+        public void RedundantJumpStatement_CSharp8() =>
+            builder.AddPaths("RedundantJumpStatement.cs")
+                .AddReferences(MetadataReferenceFacade.NETStandard21)
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
 
 #if NET
+
         [TestMethod]
         public void RedundantJumpStatement_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RedundantJumpStatement.CSharp9.cs", new RedundantJumpStatement());
+            builder.AddPaths("RedundantJumpStatement.CSharp9.cs")
+                .WithTopLevelStatements()
+                .Verify();
+
 #endif
+
     }
 }

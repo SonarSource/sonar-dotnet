@@ -27,6 +27,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void PrivateSharedReadonlyFieldName() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\PrivateSharedReadonlyFieldName.vb", new PrivateSharedReadonlyFieldName());
+            new VerifierBuilder<PrivateSharedReadonlyFieldName>().AddPaths("PrivateSharedReadonlyFieldName.vb").Verify();
     }
 }

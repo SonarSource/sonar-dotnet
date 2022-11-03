@@ -25,21 +25,27 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class SwitchCaseFallsThroughToDefaultTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<SwitchCaseFallsThroughToDefault>();
+
         [TestMethod]
         public void SwitchCaseFallsThroughToDefault() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\SwitchCaseFallsThroughToDefault.cs", new SwitchCaseFallsThroughToDefault());
+            builder.AddPaths("SwitchCaseFallsThroughToDefault.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void SwitchCaseFallsThroughToDefault_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SwitchCaseFallsThroughToDefault.CSharp9.cs", new SwitchCaseFallsThroughToDefault());
+            builder.AddPaths("SwitchCaseFallsThroughToDefault.CSharp9.cs")
+                .WithTopLevelStatements()
+                .Verify();
+
 #endif
 
         [TestMethod]
         public void SwitchCaseFallsThroughToDefault_CodeFix() =>
-            OldVerifier.VerifyCodeFix<SwitchCaseFallsThroughToDefaultCodeFix>(
-                @"TestCases\SwitchCaseFallsThroughToDefault.cs",
-                @"TestCases\SwitchCaseFallsThroughToDefault.Fixed.cs",
-                new SwitchCaseFallsThroughToDefault());
+            builder.AddPaths("SwitchCaseFallsThroughToDefault.cs")
+                .WithCodeFix<SwitchCaseFallsThroughToDefaultCodeFix>()
+                .WithCodeFixedPaths("SwitchCaseFallsThroughToDefault.Fixed.cs")
+                .VerifyCodeFix();
     }
 }

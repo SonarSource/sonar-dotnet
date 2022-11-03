@@ -27,6 +27,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ParameterName() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ParameterName.vb", new ParameterName());
+            new VerifierBuilder<ParameterName>().AddPaths("ParameterName.vb").Verify();
     }
 }

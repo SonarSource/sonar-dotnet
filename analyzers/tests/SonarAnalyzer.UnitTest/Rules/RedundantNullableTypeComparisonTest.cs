@@ -27,6 +27,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void RedundantNullableTypeComparison() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\RedundantNullableTypeComparison.cs", new RedundantNullableTypeComparison());
+            new VerifierBuilder<RedundantNullableTypeComparison>().AddPaths("RedundantNullableTypeComparison.cs").Verify();
     }
 }

@@ -27,6 +27,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void StringOperationWithoutCulture() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\StringOperationWithoutCulture.cs", new StringOperationWithoutCulture());
+            new VerifierBuilder<StringOperationWithoutCulture>().AddPaths("StringOperationWithoutCulture.cs").Verify();
     }
 }

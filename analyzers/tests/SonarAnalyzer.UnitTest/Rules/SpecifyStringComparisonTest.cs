@@ -27,6 +27,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void SpecifyStringComparison() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\SpecifyStringComparison.cs", new SpecifyStringComparison());
+            new VerifierBuilder<SpecifyStringComparison>().AddPaths("SpecifyStringComparison.cs").Verify();
     }
 }

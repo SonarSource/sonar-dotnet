@@ -27,13 +27,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class SwitchShouldNotBeNestedTest
     {
         [TestMethod]
-        public void SwitchShouldNotBeNested_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\SwitchShouldNotBeNested.cs",
-                new CS.SwitchShouldNotBeNested(),
-                ParseOptionsHelper.FromCSharp8);
+        public void SwitchShouldNotBeNested_CSharp8() =>
+            new VerifierBuilder<CS.SwitchShouldNotBeNested>().AddPaths("SwitchShouldNotBeNested.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
 
         [TestMethod]
-        public void SwitchShouldNotBeNested_VB() => OldVerifier.VerifyAnalyzer(@"TestCases\SwitchShouldNotBeNested.vb",
-                new VB.SwitchShouldNotBeNested());
+        public void SwitchShouldNotBeNested_VB() =>
+            new VerifierBuilder<VB.SwitchShouldNotBeNested>().AddPaths("SwitchShouldNotBeNested.vb").Verify();
     }
 }

@@ -27,6 +27,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ParameterValidationInAsyncShouldBeWrapped() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ParameterValidationInAsyncShouldBeWrapped.cs", new ParameterValidationInAsyncShouldBeWrapped());
+            new VerifierBuilder<ParameterValidationInAsyncShouldBeWrapped>().AddPaths("ParameterValidationInAsyncShouldBeWrapped.cs").Verify();
     }
 }

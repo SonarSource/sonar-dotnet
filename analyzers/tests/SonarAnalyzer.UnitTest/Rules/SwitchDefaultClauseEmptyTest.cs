@@ -25,15 +25,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class SwitchDefaultClauseEmptyTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<SwitchDefaultClauseEmpty>();
+
         [TestMethod]
         public void SwitchDefaultClauseEmpty() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\SwitchDefaultClauseEmpty.cs", new SwitchDefaultClauseEmpty());
+            builder.AddPaths("SwitchDefaultClauseEmpty.cs").Verify();
 
         [TestMethod]
         public void SwitchDefaultClauseEmpty_CodeFix() =>
-            OldVerifier.VerifyCodeFix<SwitchDefaultClauseEmptyCodeFix>(
-                @"TestCases\SwitchDefaultClauseEmpty.cs",
-                @"TestCases\SwitchDefaultClauseEmpty.Fixed.cs",
-                new SwitchDefaultClauseEmpty());
+            builder.AddPaths("SwitchDefaultClauseEmpty.cs")
+                .WithCodeFix<SwitchDefaultClauseEmptyCodeFix>()
+                .WithCodeFixedPaths("SwitchDefaultClauseEmpty.Fixed.cs")
+                .VerifyCodeFix();
     }
 }

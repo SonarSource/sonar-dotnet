@@ -25,36 +25,40 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class RedundantArgumentTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<RedundantArgument>();
+        private readonly VerifierBuilder codeFixBuilder = new VerifierBuilder<RedundantArgument>().WithCodeFix<RedundantArgumentCodeFix>();
+
         [TestMethod]
-        public void RedundantArgument() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\RedundantArgument.cs",
-                new RedundantArgument(),
-                ParseOptionsHelper.FromCSharp8,
-                MetadataReferenceFacade.NETStandard21);
+        public void RedundantArgument_CSharp8() =>
+            builder.AddPaths("RedundantArgument.cs")
+                .AddReferences(MetadataReferenceFacade.NETStandard21)
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
 
 #if NET
+
         [TestMethod]
         public void RedundantArgument_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RedundantArgument.CSharp9.cs", new RedundantArgument());
+            builder.AddPaths("RedundantArgument.CSharp9.cs")
+                .WithTopLevelStatements()
+                .Verify();
+
 #endif
 
         [TestMethod]
         public void RedundantArgument_CodeFix_No_Named_Arguments() =>
-            OldVerifier.VerifyCodeFix<RedundantArgumentCodeFix>(
-                @"TestCases\RedundantArgument.cs",
-                @"TestCases\RedundantArgument.NoNamed.Fixed.cs",
-                new RedundantArgument(),
-                RedundantArgumentCodeFix.TitleRemove,
-                ParseOptionsHelper.FromCSharp8);
+            codeFixBuilder.AddPaths("RedundantArgument.cs")
+                .WithCodeFixedPaths("RedundantArgument.NoNamed.Fixed.cs")
+                .WithCodeFixTitle(RedundantArgumentCodeFix.TitleRemove)
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .VerifyCodeFix();
 
         [TestMethod]
         public void RedundantArgument_CodeFix_Named_Arguments() =>
-            OldVerifier.VerifyCodeFix<RedundantArgumentCodeFix>(
-                @"TestCases\RedundantArgument.cs",
-                @"TestCases\RedundantArgument.Named.Fixed.cs",
-                new RedundantArgument(),
-                RedundantArgumentCodeFix.TitleRemoveWithNameAdditions,
-                ParseOptionsHelper.FromCSharp8);
+            codeFixBuilder.AddPaths("RedundantArgument.cs")
+                .WithCodeFixedPaths("RedundantArgument.Named.Fixed.cs")
+                .WithCodeFixTitle(RedundantArgumentCodeFix.TitleRemoveWithNameAdditions)
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .VerifyCodeFix();
     }
 }

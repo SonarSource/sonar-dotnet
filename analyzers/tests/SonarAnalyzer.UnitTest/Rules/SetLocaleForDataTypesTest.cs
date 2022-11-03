@@ -25,12 +25,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class SetLocaleForDataTypesTest
     {
-        private readonly VerifierBuilder builder = new VerifierBuilder<SetLocaleForDataTypes>();
+        private readonly VerifierBuilder builder = new VerifierBuilder<SetLocaleForDataTypes>().AddReferences(MetadataReferenceFacade.SystemData);
 
         [TestMethod]
         public void SetLocaleForDataTypes() =>
             builder.AddPaths("SetLocaleForDataTypes.cs")
-                .AddReferences(MetadataReferenceFacade.SystemData)
                 .Verify();
 
 #if NET
@@ -39,7 +38,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void SetLocaleForDataTypes_CSharp9() =>
             builder.AddPaths("SetLocaleForDataTypes.CSharp9.cs")
                 .WithTopLevelStatements()
-                .AddReferences(MetadataReferenceFacade.SystemData)
                 .WithOptions(ParseOptionsHelper.FromCSharp9)
                 .Verify();
 
@@ -47,10 +45,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void SetLocaleForDataTypes_CSharp10() =>
             builder.AddPaths("SetLocaleForDataTypes.CSharp10.cs")
                 .WithTopLevelStatements()
-                .AddReferences(MetadataReferenceFacade.SystemData)
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
                 .Verify();
 
 #endif
+
     }
 }

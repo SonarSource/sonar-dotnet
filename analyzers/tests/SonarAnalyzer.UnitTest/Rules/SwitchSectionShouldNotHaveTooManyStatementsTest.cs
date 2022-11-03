@@ -28,23 +28,23 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void SwitchSectionShouldNotHaveTooManyStatements_DefaultValue_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\SwitchSectionShouldNotHaveTooManyStatements_DefaultValue.cs",
-                new CS.SwitchSectionShouldNotHaveTooManyStatements());
+            new VerifierBuilder<CS.SwitchSectionShouldNotHaveTooManyStatements>().AddPaths("SwitchSectionShouldNotHaveTooManyStatements_DefaultValue.cs").Verify();
 
         [TestMethod]
-        public void SwitchSectionShouldNotHaveTooManyStatements_CustomValue_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\SwitchSectionShouldNotHaveTooManyStatements_CustomValue.cs",
-                new CS.SwitchSectionShouldNotHaveTooManyStatements { Threshold = 1 },
-                ParseOptionsHelper.FromCSharp8);
+        public void SwitchSectionShouldNotHaveTooManyStatements_CustomValue_CSharp8() =>
+            new VerifierBuilder().AddAnalyzer(() => new CS.SwitchSectionShouldNotHaveTooManyStatements { Threshold = 1 })
+                .AddPaths("SwitchSectionShouldNotHaveTooManyStatements_CustomValue.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
 
         [TestMethod]
         public void SwitchSectionShouldNotHaveTooManyStatements_DefaultValue_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\SwitchSectionShouldNotHaveTooManyStatements_DefaultValue.vb",
-                new VB.SwitchSectionShouldNotHaveTooManyStatements());
+            new VerifierBuilder<VB.SwitchSectionShouldNotHaveTooManyStatements>().AddPaths("SwitchSectionShouldNotHaveTooManyStatements_DefaultValue.vb").Verify();
 
         [TestMethod]
         public void SwitchSectionShouldNotHaveTooManyStatements_CustomValue_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\SwitchSectionShouldNotHaveTooManyStatements_CustomValue.vb",
-                new VB.SwitchSectionShouldNotHaveTooManyStatements() { Threshold = 1 });
+            new VerifierBuilder().AddAnalyzer(() => new VB.SwitchSectionShouldNotHaveTooManyStatements { Threshold = 1 })
+                .AddPaths("SwitchSectionShouldNotHaveTooManyStatements_CustomValue.vb")
+                .Verify();
     }
 }

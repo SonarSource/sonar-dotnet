@@ -25,18 +25,27 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class PropertyToAutoPropertyTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<PropertyToAutoProperty>();
+
         [TestMethod]
         public void PropertyToAutoProperty() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\PropertyToAutoProperty.cs", new PropertyToAutoProperty());
+            builder.AddPaths("PropertyToAutoProperty.cs").Verify();
 
         [TestMethod]
         public void PropertyToAutoProperty_FromCSharp7() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\PropertyToAutoProperty.CSharp7.cs", new PropertyToAutoProperty(), ParseOptionsHelper.FromCSharp7);
+            builder.AddPaths("PropertyToAutoProperty.CSharp7.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp7)
+                .Verify();
 
 #if NET
+
         [TestMethod]
         public void PropertyToAutoProperty_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PropertyToAutoProperty.CSharp9.cs", new PropertyToAutoProperty());
+            builder.AddPaths("PropertyToAutoProperty.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
+
 #endif
+
     }
 }

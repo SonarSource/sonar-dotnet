@@ -26,32 +26,39 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class SillyBitwiseOperationTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.SillyBitwiseOperation>();
+        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.SillyBitwiseOperation>();
+
         [TestMethod]
         public void SillyBitwiseOperation_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\SillyBitwiseOperation.cs", new CS.SillyBitwiseOperation());
+            builderCS.AddPaths("SillyBitwiseOperation.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void SillyBitwiseOperation_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SillyBitwiseOperation.CSharp9.cs", new CS.SillyBitwiseOperation());
+            builderCS.AddPaths("SillyBitwiseOperation.CSharp9.cs")
+                .WithTopLevelStatements()
+                .Verify();
+
 #endif
 
         [TestMethod]
         public void SillyBitwiseOperation_CS_CodeFix() =>
-            OldVerifier.VerifyCodeFix<CS.SillyBitwiseOperationCodeFix>(
-                @"TestCases\SillyBitwiseOperation.cs",
-                @"TestCases\SillyBitwiseOperation.Fixed.cs",
-                new CS.SillyBitwiseOperation());
+            builderCS.AddPaths("SillyBitwiseOperation.cs")
+                .WithCodeFix<CS.SillyBitwiseOperationCodeFix>()
+                .WithCodeFixedPaths("SillyBitwiseOperation.Fixed.cs")
+                .VerifyCodeFix();
 
         [TestMethod]
         public void SillyBitwiseOperation_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\SillyBitwiseOperation.vb", new VB.SillyBitwiseOperation());
+            builderVB.AddPaths("SillyBitwiseOperation.vb").Verify();
 
         [TestMethod]
         public void SillyBitwiseOperation_VB_CodeFix() =>
-            OldVerifier.VerifyCodeFix<VB.SillyBitwiseOperationCodeFix>(
-                @"TestCases\SillyBitwiseOperation.vb",
-                @"TestCases\SillyBitwiseOperation.Fixed.vb",
-                new VB.SillyBitwiseOperation());
+            builderVB.AddPaths("SillyBitwiseOperation.vb")
+                .WithCodeFix<VB.SillyBitwiseOperationCodeFix>()
+                .WithCodeFixedPaths("SillyBitwiseOperation.Fixed.vb")
+                .VerifyCodeFix();
     }
 }

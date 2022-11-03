@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void PointersShouldBePrivate() =>
             builder.AddPaths("PointersShouldBePrivate.cs").Verify();
 
-#if NET // Function pointers are supported only by .Net 5 runtime
+#if NET
 
         [TestMethod]
         public void PointersShouldBePrivate_CSharp9() =>

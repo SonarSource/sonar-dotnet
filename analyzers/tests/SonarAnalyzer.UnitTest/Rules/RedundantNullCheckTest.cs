@@ -26,50 +26,53 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class RedundantNullCheckTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.RedundantNullCheck>();
+        private readonly VerifierBuilder codeFixbuilderCS = new VerifierBuilder<CS.RedundantNullCheck>().WithCodeFix<CS.RedundantNullCheckCodeFix>();
+
         [TestMethod]
         public void RedundantNullCheck_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\RedundantNullCheck.cs", new CS.RedundantNullCheck());
-
-#if NET
-        [TestMethod]
-        public void RedundantNullCheck_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RedundantNullCheck.CSharp9.cs", new CS.RedundantNullCheck());
-
-        [TestMethod]
-        public void RedundantNullCheck_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\RedundantNullCheck.CSharp10.cs", new CS.RedundantNullCheck());
-#endif
+            builderCS.AddPaths("RedundantNullCheck.cs").Verify();
 
         [TestMethod]
         public void RedundantNullCheck_CS_CodeFix() =>
-            OldVerifier.VerifyCodeFix<CS.RedundantNullCheckCodeFix>(
-                @"TestCases\RedundantNullCheck.cs",
-                @"TestCases\RedundantNullCheck.Fixed.cs",
-                @"TestCases\RedundantNullCheck.Fixed.Batch.cs",
-                new CS.RedundantNullCheck());
+            codeFixbuilderCS.AddPaths("RedundantNullCheck.cs")
+                .WithCodeFixedPaths("RedundantNullCheck.Fixed.cs", "RedundantNullCheck.Fixed.Batch.cs")
+                .VerifyCodeFix();
 
 #if NET
+
+        [TestMethod]
+        public void RedundantNullCheck_CSharp9() =>
+            builderCS.AddPaths("RedundantNullCheck.CSharp9.cs")
+                .WithTopLevelStatements()
+                .Verify();
+
+        [TestMethod]
+        public void RedundantNullCheck_CSharp10() =>
+            builderCS.AddPaths("RedundantNullCheck.CSharp10.cs")
+                .WithTopLevelStatements()
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .Verify();
+
         [TestMethod]
         public void RedundantNullCheck_CSharp9_CodeFix() =>
-            OldVerifier.VerifyCodeFix<CS.RedundantNullCheckCodeFix>(
-                @"TestCases\RedundantNullCheck.CSharp9.cs",
-                @"TestCases\RedundantNullCheck.CSharp9.Fixed.cs",
-                new CS.RedundantNullCheck(),
-                ParseOptionsHelper.FromCSharp9,
-                OutputKind.ConsoleApplication);
+            codeFixbuilderCS.AddPaths("RedundantNullCheck.CSharp9.cs")
+                .WithCodeFixedPaths("RedundantNullCheck.CSharp9.Fixed.cs")
+                .WithTopLevelStatements()
+                .VerifyCodeFix();
 
         [TestMethod]
         public void RedundantNullCheck_CSharp10_CodeFix() =>
-            OldVerifier.VerifyCodeFix<CS.RedundantNullCheckCodeFix>(
-                @"TestCases\RedundantNullCheck.CSharp10.cs",
-                @"TestCases\RedundantNullCheck.CSharp10.Fixed.cs",
-                new CS.RedundantNullCheck(),
-                ParseOptionsHelper.FromCSharp10,
-                OutputKind.ConsoleApplication);
+            codeFixbuilderCS.AddPaths("RedundantNullCheck.CSharp10.cs")
+                .WithCodeFixedPaths("RedundantNullCheck.CSharp10.Fixed.cs")
+                .WithTopLevelStatements()
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .VerifyCodeFix();
+
 #endif
 
         [TestMethod]
         public void RedundantNullCheck_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\RedundantNullCheck.vb", new VB.RedundantNullCheck());
+            new VerifierBuilder<VB.RedundantNullCheck>().AddPaths("RedundantNullCheck.vb").Verify();
     }
 }

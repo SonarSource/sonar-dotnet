@@ -25,14 +25,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class StaticSealedClassProtectedMembersTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<StaticSealedClassProtectedMembers>();
+
         [TestMethod]
         public void StaticSealedClassProtectedMembers() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\StaticSealedClassProtectedMembers.cs", new StaticSealedClassProtectedMembers());
+            builder.AddPaths("StaticSealedClassProtectedMembers.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void StaticSealedClassProtectedMembers_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\StaticSealedClassProtectedMembers.CSharp9.cs", new StaticSealedClassProtectedMembers());
+            builder.AddPaths("StaticSealedClassProtectedMembers.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
+
 #endif
+
     }
 }

@@ -25,20 +25,26 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class StringFormatValidatorTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<StringFormatValidator>();
+
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void StringFormatRuntimeExceptionFreeValidator(ProjectType projectType) =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\StringFormatRuntimeExceptionFreeValidator.cs", new StringFormatValidator(), TestHelper.ProjectTypeReference(projectType));
+            builder.AddPaths("StringFormatRuntimeExceptionFreeValidator.cs")
+                .AddReferences(TestHelper.ProjectTypeReference(projectType))
+                .Verify();
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void StringFormatTypoFreeValidator(ProjectType projectType) =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\StringFormatTypoFreeValidator.cs", new StringFormatValidator(), TestHelper.ProjectTypeReference(projectType));
+            builder.AddPaths("StringFormatTypoFreeValidator.cs")
+                .AddReferences(TestHelper.ProjectTypeReference(projectType))
+                .Verify();
 
         [TestMethod]
         public void StringFormatEdgeCasesValidator() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\StringFormatEdgeCasesValidator.cs", new StringFormatValidator());
+            builder.AddPaths("StringFormatEdgeCasesValidator.cs").Verify();
     }
 }

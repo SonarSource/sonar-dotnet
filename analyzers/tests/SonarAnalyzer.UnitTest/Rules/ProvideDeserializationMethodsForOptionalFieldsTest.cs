@@ -26,18 +26,24 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ProvideDeserializationMethodsForOptionalFieldsTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ProvideDeserializationMethodsForOptionalFields>();
+
         [TestMethod]
         public void ProvideDeserializationMethodsForOptionalFields_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ProvideDeserializationMethodsForOptionalFields.cs", new CS.ProvideDeserializationMethodsForOptionalFields());
+            builderCS.AddPaths("ProvideDeserializationMethodsForOptionalFields.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void ProvideDeserializationMethodsForOptionalFields_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ProvideDeserializationMethodsForOptionalFields.CSharp9.cs", new CS.ProvideDeserializationMethodsForOptionalFields());
+            builderCS.AddPaths("ProvideDeserializationMethodsForOptionalFields.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
+
 #endif
 
         [TestMethod]
         public void ProvideDeserializationMethodsForOptionalFields_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ProvideDeserializationMethodsForOptionalFields.vb", new VB.ProvideDeserializationMethodsForOptionalFields());
+            new VerifierBuilder<VB.ProvideDeserializationMethodsForOptionalFields>().AddPaths("ProvideDeserializationMethodsForOptionalFields.vb").Verify();
     }
 }

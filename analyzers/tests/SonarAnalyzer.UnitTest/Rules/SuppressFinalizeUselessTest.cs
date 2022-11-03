@@ -25,21 +25,27 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class SuppressFinalizeUselessTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<SuppressFinalizeUseless>();
+
         [TestMethod]
         public void SuppressFinalizeUseless() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\SuppressFinalizeUseless.cs", new SuppressFinalizeUseless());
+            builder.AddPaths("SuppressFinalizeUseless.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void SuppressFinalizeUseless_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SuppressFinalizeUseless.CSharp9.cs", new SuppressFinalizeUseless());
+            builder.AddPaths("SuppressFinalizeUseless.CSharp9.cs")
+                .WithTopLevelStatements()
+                .Verify();
+
 #endif
 
         [TestMethod]
         public void SuppressFinalizeUseless_CodeFix() =>
-            OldVerifier.VerifyCodeFix<SuppressFinalizeUselessCodeFix>(
-                @"TestCases\SuppressFinalizeUseless.cs",
-                @"TestCases\SuppressFinalizeUseless.Fixed.cs",
-                new SuppressFinalizeUseless());
+            builder.AddPaths("SuppressFinalizeUseless.cs")
+                .WithCodeFix<SuppressFinalizeUselessCodeFix>()
+                .WithCodeFixedPaths("SuppressFinalizeUseless.Fixed.cs")
+                .VerifyCodeFix();
     }
 }
