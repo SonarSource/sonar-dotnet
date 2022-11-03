@@ -21,7 +21,6 @@
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
@@ -32,7 +31,7 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.CSharp;
 
 [ExportCodeFixProvider(LanguageNames.CSharp)]
-public sealed class UnchangedLocalVariablesShouldBeConstFix : SonarCodeFix
+public sealed class UnchangedLocalVariablesShouldBeConstCodeFix : SonarCodeFix
 {
     private const string Title = "Convert to constant.";
 
@@ -41,22 +40,25 @@ public sealed class UnchangedLocalVariablesShouldBeConstFix : SonarCodeFix
 
     protected override async Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
     {
-        var oldNode = VariableDeclaration(root, context);
-        var declaration = oldNode.Type.IsVar
-            ? WithExplictType(oldNode, await context.Document.GetSemanticModelAsync())
-            : oldNode;
-        var newNode = root.ReplaceNode(oldNode, ConstantDeclaration(declaration));
+        if (VariableDeclaration(root, context) is { } oldNode)
+        {
+            var declaration = oldNode.Type.IsVar
+                ? WithExplictType(oldNode, await context.Document.GetSemanticModelAsync().ConfigureAwait(false))
+                : oldNode;
+            var newNode = root.ReplaceNode(oldNode, ConstantDeclaration(declaration));
 
-        context.RegisterCodeFix(
-            CodeAction.Create(
-            Title,
-            token => Task.FromResult(context.Document.WithSyntaxRoot(newNode))),
-            context.Diagnostics);
+            context.RegisterCodeFix(
+                CodeAction.Create(
+                Title,
+                token => Task.FromResult(context.Document.WithSyntaxRoot(newNode))),
+                context.Diagnostics);
+        }
     }
-    private static VariableDeclarationSyntax VariableDeclaration(SyntaxNode root, CodeFixContext context) =>
-        (VariableDeclarationSyntax)root.FindNode(context.Diagnostics.First().Location.SourceSpan).Parent;
 
-    private LocalDeclarationStatementSyntax ConstantDeclaration(VariableDeclarationSyntax declaration)
+    private static VariableDeclarationSyntax VariableDeclaration(SyntaxNode root, CodeFixContext context) =>
+        root.FindNode(context.Diagnostics.First().Location.SourceSpan)?.Parent as VariableDeclarationSyntax;
+
+    private static LocalDeclarationStatementSyntax ConstantDeclaration(VariableDeclarationSyntax declaration)
     {
         var prefix = SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.ConstKeyword));
         return SyntaxFactory.LocalDeclarationStatement(prefix, declaration);

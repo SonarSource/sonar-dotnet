@@ -1,3 +1,5 @@
+using System;
+
 ﻿enum Colors { Red, Blue, Green };
 
 class ToReplace
@@ -5,6 +7,7 @@ class ToReplace
     void Alias()
     {
         string str = "str";              // Noncompliant
+        bool b = false;                  // Noncompliant
         char ch = 'c';                   // Noncompliant
         byte bits = 8;                   // Noncompliant
         sbyte sbits = 8;                 // Noncompliant
@@ -13,11 +16,12 @@ class ToReplace
         int int32 = 32;                  // Noncompliant
         uint uint32 = 32;                // Noncompliant
         long int64 = 64;                 // Noncompliant
-        long longVal = 1;                // Noncompliant
         ulong ulongVal = 1;              // Noncompliant
         float single = 32;               // Noncompliant
         double floating = 64;            // Noncompliant
         decimal dec = 128;               // Noncompliant
+        int i1 = 1,                      // Noncompliant
+            i2 = 2;                      // Noncompliant
         Colors enumeration = Colors.Red; // Noncompliant
     }
 
@@ -26,6 +30,7 @@ class ToReplace
         var refType = "str";          // Noncompliant
         var valueType = 42;           // Noncompliant
         var enumeration = Colors.Red; // Noncompliant;
+        var attributeTarget = System.AttributeTargets.All; // Noncompliant;
     }
 
     void Full()
