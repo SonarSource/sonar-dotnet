@@ -128,5 +128,6 @@ namespace SonarAnalyzer.UnitTest.Rules
             roslynCS.AddPaths("NullPointerDereference.NetFx.cs").Verify();
 
 #endif
+
     }
 }

@@ -21,4 +21,12 @@ namespace Tests.Diagnostics
             }
         }
     }
+
+    public interface ISomeInterface
+    {
+        public static virtual void NotCompliantCases(object o, Exception e)
+        {
+            o.ToString(); // Noncompliant {{Refactor this method to add validation of parameter 'o' before using it.}}
+        }
+    }
 }
