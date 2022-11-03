@@ -46,6 +46,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithTopLevelStatements()
                 .Verify();
 
+        [TestMethod]
+        public void PureAttributeOnVoidMethod_CSharp11() =>
+            builderCS.AddPaths("PureAttributeOnVoidMethod.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
 #endif
 
         [TestMethod]

@@ -6,6 +6,11 @@
         {
             var x = "";
 
+            if (x == "")
+            {
+                x = "";
+            }
+
             x = null;
 
             if (x != null) // Compliant FN

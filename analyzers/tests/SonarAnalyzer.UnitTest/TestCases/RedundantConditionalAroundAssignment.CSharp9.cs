@@ -80,12 +80,12 @@ if ((x,y) is (1,2))   // Compliant FN
 
 SomeClass someClass = new SomeClass() { SomeField = 42 };
 
-if (someClass.SomeField == 42) // FN
+if (someClass.SomeField != 42) // Noncompliant
 {
     someClass.SomeField = 42;
 }
 
-if (someClass is { SomeField: 42 }) // FN
+if (someClass is { SomeField: not 42 }) // FN
 {
     someClass.SomeField = 42;
 }

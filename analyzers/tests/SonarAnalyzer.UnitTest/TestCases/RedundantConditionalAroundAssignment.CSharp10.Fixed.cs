@@ -4,17 +4,14 @@ y = 5;
 
 SomeClass someClass = new SomeClass() { SomeField1 = new SomeOtherClass() { SomeField2 = 42 } };
 
-if (someClass.SomeField1.SomeField2 == 42) // FN
+someClass.SomeField1.SomeField2 = 42;
+
+if (someClass is { SomeField1: { SomeField2: not 42 } }) // FN
 {
     someClass.SomeField1.SomeField2 = 42;
 }
 
-if (someClass is { SomeField1: { SomeField2: 42 } }) // FN
-{
-    someClass.SomeField1.SomeField2 = 42;
-}
-
-if (someClass is { SomeField1.SomeField2: 42 }) // FN
+if (someClass is { SomeField1.SomeField2: not 42 }) // FN
 {
     someClass.SomeField1.SomeField2 = 42;
 }

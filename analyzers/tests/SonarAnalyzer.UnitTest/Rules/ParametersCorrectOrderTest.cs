@@ -30,8 +30,16 @@ namespace SonarAnalyzer.UnitTest.Rules
         private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.ParametersCorrectOrder>();
 
         [TestMethod]
-        public void ParametersCorrectOrder_CS() =>
+        public void ParametersCorrectOrder_CSharp8() =>
             builderCS.AddPaths("ParametersCorrectOrder.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+
+#if NET
+
+        [TestMethod]
+        public void ParametersCorrectOrder_CSharp11() =>
+            builderCS.AddPaths("ParametersCorrectOrder.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+
+#endif
 
         [TestMethod]
         public void ParametersCorrectOrder_InvalidCode_CS() =>

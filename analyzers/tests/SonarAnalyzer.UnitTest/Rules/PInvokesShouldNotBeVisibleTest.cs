@@ -39,6 +39,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithOptions(ParseOptionsHelper.FromCSharp9)
                 .Verify();
 
+        [TestMethod]
+        public void PInvokesShouldNotBeVisible_CSharp11() =>
+            builder.AddPaths("PInvokesShouldNotBeVisible.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
 #endif
 
     }

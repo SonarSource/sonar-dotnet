@@ -62,6 +62,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithTopLevelStatements()
                 .VerifyCodeFix();
 
+        [TestMethod]
+        public void RedundantConditionalAroundAssignment_CSharp11() =>
+             builder.AddPaths("RedundantConditionalAroundAssignment.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
 #endif
 
         [TestMethod]

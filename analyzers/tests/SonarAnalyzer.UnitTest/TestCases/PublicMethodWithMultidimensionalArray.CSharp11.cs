@@ -2,18 +2,15 @@
 {
     public interface IFace
     {
-        void Method2(int[,] a); //Noncompliant
-//           ^^^^^^^
+        static virtual void Method1(int[,] a) { } //Noncompliant
+
+        static abstract void Method2(int[,] a); //Noncompliant
     }
 
-    public class PublicMethodWithMultidimensionalArray :  IFace
+    public class PublicMethodWithMultidimensionalArray : IFace
     {
-        public void Method1(int[][] a) //Noncompliant
-        {
-        }
+        public static void Method1(int[,] a) { } // Compliant
 
-        public void Method2(int[,] a) //Compliant, implements interface
-        {
-        }
+        public static void Method2(int[,] a) { } // Compliant
     }
 }

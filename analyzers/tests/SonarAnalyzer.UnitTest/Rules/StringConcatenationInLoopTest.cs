@@ -26,9 +26,20 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class StringConcatenationInLoopTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.StringConcatenationInLoop>();
+
         [TestMethod]
         public void StringConcatenationInLoop_CS() =>
-            new VerifierBuilder<CS.StringConcatenationInLoop>().AddPaths(@"StringConcatenationInLoop.cs").Verify();
+            builderCS.AddPaths(@"StringConcatenationInLoop.cs").Verify();
+
+#if NET
+
+        [TestMethod]
+        public void StringConcatenationInLoop_CSharp11() =>
+            builderCS.AddPaths(@"StringConcatenationInLoop.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+
+#endif
 
         [TestMethod]
         public void StringConcatenationInLoop_VB() =>

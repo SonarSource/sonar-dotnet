@@ -40,6 +40,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithTopLevelStatements()
                 .Verify();
 
+        [TestMethod]
+        public void ShiftDynamicNotInteger_CSharp11() =>
+            builderCS.AddPaths("ShiftDynamicNotInteger.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
 #endif
 
         [TestMethod]
