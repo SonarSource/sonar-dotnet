@@ -126,7 +126,7 @@ Public Class Repro_6271
 
     Public Function TestDataContains(Text As String) As Boolean
         Static Data As String = LoadTestData()
-        Return Data.Contains(Text)  ' Noncompliant FP
+        Return Data.Contains(Text)  ' Compliant
     End Function
 
     Private Shared Function LoadTestData() As String
