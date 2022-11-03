@@ -13,7 +13,7 @@ namespace Tests.Diagnostics
 
     public class ZeroNonPrimitiveDependencies // Compliant
     {
-        private nint nativeInt; // Primitives don't count 
+        private nint nativeInt; // Primitives don't count
         private nuint nativeUint; // Primitives don't count
 
         private IntPtr intPtr; // Primitives don't count
@@ -29,7 +29,7 @@ namespace Tests.Diagnostics
     {
         private Foo foo; // +1
 
-        private nint nativeInt; // Primitives don't count 
+        private nint nativeInt; // Primitives don't count
         private nuint nativeUint; // Primitives don't count
 
         private IntPtr intPtr; // Primitives don't count
@@ -49,28 +49,41 @@ namespace Tests.Diagnostics
         private Foo foo; // +1
         private MyStruct myStruct; // +1
 
-        private nint nativeInt; // Primitives don't count 
+        private nint nativeInt; // Primitives don't count
         private nuint nativeUint; // Primitives don't count
 
         private IntPtr intPtr; // Primitives don't count
         private UIntPtr uIntPtr; // Primitives don't count
 
-        private class NestedClass // Compliant 
-    {
+        private class NestedClass // Compliant
+        {
             private IFoo nestedIFoo; // +1
 
-            private nint nativeInt; // Primitives don't count 
+            private nint nativeInt; // Primitives don't count
             private nuint nativeUint; // Primitives don't count
 
             private IntPtr intPtr; // Primitives don't count
             private UIntPtr uIntPtr; // Primitives don't count
 
-            private void DoWork(IFoo iFoo) { } // Already counted in private field 
+            private void DoWork(IFoo iFoo) { } // Already counted in private field
         }
 
         private class NestedEmptyClass // Compliant
         {
-            public Stream stream = new FileStream("", FileMode.Open);
         }
+    }
+
+    // file-scoped types
+
+    file interface IFooFile { }
+    file class FooFileBase : IFooFile { }
+    file class FooFileClass1 : FooFileBase { }
+
+    file class FooSecond // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other types from 3 to the maximum authorized 1 or less.}}
+//             ^^^^^^^^^
+    {
+        private FooFileClass1 field2 = new FooFileClass1(); // +1
+        private FooFileBase field3 = null; // +1
+        private static FooBase Property1 { get; } // +1
     }
 }
