@@ -40,11 +40,12 @@ public sealed class UnchangedLocalVariablesShouldBeConstCodeFix : SonarCodeFix
 
     protected override async Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
     {
-        if (VariableDeclaration(root, context) is { } oldNode)
+        if (VariableDeclaration(root, context) is { } variable
+            && variable.Parent is LocalDeclarationStatementSyntax oldNode)
         {
-            var declaration = oldNode.Type.IsVar
-                ? WithExplictType(oldNode, await context.Document.GetSemanticModelAsync().ConfigureAwait(false))
-                : oldNode;
+            var declaration = variable.Type.IsVar
+                ? WithExplictType(variable, await context.Document.GetSemanticModelAsync().ConfigureAwait(false))
+                : variable;
             var newNode = root.ReplaceNode(oldNode, ConstantDeclaration(declaration));
 
             context.RegisterCodeFix(
@@ -66,7 +67,7 @@ public sealed class UnchangedLocalVariablesShouldBeConstCodeFix : SonarCodeFix
 
     private static VariableDeclarationSyntax WithExplictType(VariableDeclarationSyntax declaration, SemanticModel semanticModel)
     {
-        var type = SyntaxFactory.IdentifierName(semanticModel.GetTypeInfo(declaration.Type).Type.ToDisplayString());
+        var type = SyntaxFactory.IdentifierName(semanticModel.GetTypeInfo(declaration.Type).Type.ToMinimalDisplayString(semanticModel, declaration.GetLocation().SourceSpan.Start));
         return declaration.ReplaceNode(declaration.Type, type);
     }
 }
