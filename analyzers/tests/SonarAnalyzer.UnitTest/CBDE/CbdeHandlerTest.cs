@@ -29,26 +29,31 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class CbdeHandlerTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder().AddAnalyzer(() => CbdeHandlerRule.MakeUnitTestInstance(null, null));
+
         [TestMethod]
         public void CbdeHandler_CS()
         {
             using var scope = new EnvironmentVariableScope(false) { InternalLogCBDE = true };
-            OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\CbdeHandler.cs", CbdeHandlerRule.MakeUnitTestInstance(null, null));
+            builder.AddPaths("CbdeHandler.cs").WithConcurrentAnalysis(false).Verify();
         }
+
 #if NET
+
         [TestMethod]
         public void CbdeHandler_CSharp9()
         {
             using var scope = new EnvironmentVariableScope(false) { InternalLogCBDE = true };
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CbdeHandler.CSharp9.cs", CbdeHandlerRule.MakeUnitTestInstance(null, null));
+            builder.AddPaths("CbdeHandler.CSharp9.cs").WithTopLevelStatements().Verify();
         }
 
         [TestMethod]
         public void CbdeHandler_CSharp10()
         {
             using var scope = new EnvironmentVariableScope(false) { InternalLogCBDE = true };
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\CbdeHandler.CSharp10.cs", CbdeHandlerRule.MakeUnitTestInstance(null, null));
+            builder.AddPaths("CbdeHandler.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
         }
+
 #endif
 
         [TestMethod]
@@ -66,7 +71,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                     Assert.IsTrue(workingSet.Success);
                     var peak = workingSet.Groups[1].Value;
                     Assert.IsTrue(int.TryParse(peak, out int peakValue));
-                    Assert.AreNotEqual(peakValue, 0); // We had enough time to at least use some memory
+                    Assert.AreNotEqual(0, peakValue); // We had enough time to at least use some memory
                 }));
             Assert.IsTrue(cbdeExecuted);
         }
