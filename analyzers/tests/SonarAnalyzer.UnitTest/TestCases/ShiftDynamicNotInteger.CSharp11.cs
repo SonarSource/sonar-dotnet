@@ -20,8 +20,8 @@ namespace Tests.Diagnostics
             int? y = 5;
             y >>>= null; // FN
 
-            x = d >>> d; // okay
-            x = d >>> new MyClass(); // okay
+            x = d >>> d; // Compliant
+            x = d >>> new MyClass(); // Compliant
 
             x = d >>> new MyUnknownClass(); // Compliant // Error [CS0246] - unknown type
         }
