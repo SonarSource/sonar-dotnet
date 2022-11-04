@@ -28,7 +28,7 @@ class ToReplace
 
         int mixed_0 = DateTime.Now.Day, // Compliant
             mixed_1 = 1,                // Fixed
-            mixed_2 = 2;                // Compliant
+            mixed_2;                    // Compliant
     }
 
     void Var()
