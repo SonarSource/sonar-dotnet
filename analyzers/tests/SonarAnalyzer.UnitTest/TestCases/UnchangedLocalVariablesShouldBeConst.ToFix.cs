@@ -14,7 +14,7 @@ class ToReplace
         int int32 = 32;       // Noncompliant
         uint uint32 = 32;     // Noncompliant
         long int64 = 64;      // Noncompliant
-        ulong ulongVal = 64;   // Noncompliant
+        ulong ulongVal = 64;  // Noncompliant
         float single = 32;    // Noncompliant
         double floating = 64; // Noncompliant
         decimal dec = 128;    // Noncompliant
