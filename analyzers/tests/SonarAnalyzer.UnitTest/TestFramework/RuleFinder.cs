@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             {
                 typeof(SonarAnalyzer.Rules.CSharp.FlagsEnumZeroMember),
                 typeof(SonarAnalyzer.Rules.VisualBasic.FlagsEnumZeroMember),
-                typeof(SonarAnalyzer.Rules.Common.FlagsEnumZeroMemberBase<int>)
+                typeof(FlagsEnumZeroMemberBase<int>)
             }
                 .SelectMany(x => x.Assembly.GetExportedTypes())
                 .ToArray();

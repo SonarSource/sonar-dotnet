@@ -24,7 +24,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.Common
+namespace SonarAnalyzer.Rules
 {
     public abstract class StringConcatenationInLoopBase : SonarDiagnosticAnalyzer
     {

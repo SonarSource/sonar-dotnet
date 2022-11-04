@@ -23,7 +23,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.Common
+namespace SonarAnalyzer.Rules
 {
     public abstract class SwitchWithoutDefaultBase : SonarDiagnosticAnalyzer
     {

@@ -18,19 +18,17 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Rules.Common;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
-    using System.Collections.Generic;
-    using System.Collections.Immutable;
-    using Helpers;
-    using Microsoft.CodeAnalysis.VisualBasic;
-    using Microsoft.CodeAnalysis.VisualBasic.Syntax;
-
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     public sealed class MultipleVariableDeclaration : MultipleVariableDeclarationBase<SyntaxKind,
         FieldDeclarationSyntax, LocalDeclarationStatementSyntax>

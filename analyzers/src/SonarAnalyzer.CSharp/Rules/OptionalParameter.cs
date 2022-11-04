@@ -26,7 +26,6 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.Rules.Common;
 
 namespace SonarAnalyzer.Rules.CSharp
 {

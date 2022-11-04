@@ -23,7 +23,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.Common
+namespace SonarAnalyzer.Rules
 {
     public abstract class WcfNonVoidOneWayBase<TMethodSyntax, TLanguageKind> : SonarDiagnosticAnalyzer
         where TMethodSyntax : SyntaxNode

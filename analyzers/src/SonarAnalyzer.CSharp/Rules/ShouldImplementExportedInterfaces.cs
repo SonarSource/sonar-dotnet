@@ -23,7 +23,6 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.Rules.Common;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
