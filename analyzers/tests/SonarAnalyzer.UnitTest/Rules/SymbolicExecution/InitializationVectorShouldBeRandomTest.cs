@@ -57,6 +57,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
                 .Verify();
 
+        [TestMethod]
+        public void InitializationVectorShouldBeRandom_CSharp11() =>
+            sonarVerifier.AddPaths("InitializationVectorShouldBeRandom.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
 #endif
 
     }

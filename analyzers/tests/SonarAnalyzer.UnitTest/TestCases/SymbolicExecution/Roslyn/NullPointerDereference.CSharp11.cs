@@ -14,5 +14,13 @@ namespace SonarAnalyzer.UnitTest.TestCases.SymbolicExecution.Roslyn
             string nullArgument = null;
             nullArgument.Trim(); // Noncompliant
         }
+
+        public void ListPattern(object[] objects)
+        {
+            if (objects is [null, null, null])
+            {
+                objects[1].GetHashCode(); // FN
+            }
+        }
     }
 }
