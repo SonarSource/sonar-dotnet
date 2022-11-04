@@ -1,0 +1,14 @@
+name: Create Milestone
+
+on:
+  milestone:
+    types: ["created"]
+
+jobs:
+  CreateRspecIssue_job:
+    name: Create RSPEC Issue
+    runs-on: ubuntu-latest
+    steps:
+      - uses: sonarsource/gh-action-lt-backlog/CreateRspecIssue@v1
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
