@@ -79,7 +79,7 @@ internal class InternalContainer // Compliant
     }
 }
 
-internal class LastException : MiddleException { } // FN
+internal class LastException : MiddleException { }
 public class MiddleException : FirstException { }
 public class FirstException : Exception { }
 
