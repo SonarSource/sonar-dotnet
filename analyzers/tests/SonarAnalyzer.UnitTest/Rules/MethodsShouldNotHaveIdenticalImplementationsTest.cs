@@ -44,6 +44,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void MethodsShouldNotHaveIdenticalImplementations_CSharp10() =>
             builderCS.AddPaths("MethodsShouldNotHaveIdenticalImplementations.CSharp10.cs").WithLanguageVersion(LanguageVersion.CSharp10).Verify();
 
+        [TestMethod]
+        public void MethodsShouldNotHaveIdenticalImplementations_CSharp11() =>
+            builderCS.AddPaths("MethodsShouldNotHaveIdenticalImplementations.CSharp11.cs").WithLanguageVersion(LanguageVersion.CSharp11).Verify();
+
 #endif
 
         [TestMethod]

@@ -30,15 +30,14 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class NestedCodeBlock : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S1199";
+        private const string DiagnosticId = "S1199";
         private const string MessageFormat = "Extract this nested code block into a separate method.";
 
         private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var block = (BlockSyntax)c.Node;
@@ -48,6 +47,5 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 },
                 SyntaxKind.Block);
-        }
     }
 }

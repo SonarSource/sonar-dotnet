@@ -34,34 +34,30 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3447";
         private const string MessageFormat = "Remove the 'Optional' attribute, it cannot be used with '{0}'.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
                     var parameter = (ParameterSyntax)c.Node;
-                    if (!parameter.AttributeLists.Any() ||
-                        !parameter.Modifiers.Any(m => m.IsKind(SyntaxKind.RefKeyword) || m.IsKind(SyntaxKind.OutKeyword)))
+                    if (!parameter.AttributeLists.Any()
+                        || !parameter.Modifiers.Any(m => m.IsKind(SyntaxKind.RefKeyword) || m.IsKind(SyntaxKind.OutKeyword)))
                     {
                         return;
                     }
 
                     var optionalAttribute = AttributeSyntaxSymbolMapping.GetAttributesForParameter(parameter, c.SemanticModel)
-                        .FirstOrDefault(a =>
-                            a.Symbol.IsInType(KnownType.System_Runtime_InteropServices_OptionalAttribute));
+                        .FirstOrDefault(a => a.Symbol.IsInType(KnownType.System_Runtime_InteropServices_OptionalAttribute));
 
                     if (optionalAttribute != null)
                     {
                         var refKind = parameter.Modifiers.Any(SyntaxKind.OutKeyword) ? "out" : "ref";
-                        c.ReportIssue(Diagnostic.Create(rule, optionalAttribute.SyntaxNode.GetLocation(), refKind));
+                        c.ReportIssue(Diagnostic.Create(Rule, optionalAttribute.SyntaxNode.GetLocation(), refKind));
                     }
                 },
                 SyntaxKind.Parameter);
-        }
     }
 }

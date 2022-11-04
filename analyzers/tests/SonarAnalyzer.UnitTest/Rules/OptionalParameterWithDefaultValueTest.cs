@@ -31,6 +31,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void OptionalParameterWithDefaultValue() =>
             builder.AddPaths("OptionalParameterWithDefaultValue.cs").Verify();
 
+#if NET
+
+        [TestMethod]
+        public void OptionalParameterWithDefaultValue_CSharp11() =>
+            builder.AddPaths("OptionalParameterWithDefaultValue.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+
+#endif
+
         [TestMethod]
         public void OptionalParameterWithDefaultValue_CodeFix() =>
             builder.WithCodeFix<OptionalParameterWithDefaultValueCodeFix>()

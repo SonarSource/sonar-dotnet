@@ -32,14 +32,13 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class NativeMethodsShouldBeWrapped : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S4200";
+        private const string DiagnosticId = "S4200";
         private const string MessageFormat = "{0}";
         private const string MakeThisMethodPrivateMessage = "Make this native method private and provide a wrapper.";
         private const string MakeThisWrapperLessTrivialMessage = "Make this wrapper for native method '{0}' less trivial.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -50,13 +49,11 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void ReportPublicExternalMethods(SymbolAnalysisContext c)
         {
             var methodSymbol = (IMethodSymbol)c.Symbol;
-
-            if (methodSymbol.IsExtern &&
-                methodSymbol.IsPubliclyAccessible() &&
-                methodSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is MethodDeclarationSyntax methodDeclaration)
+            if (methodSymbol.IsExtern
+                && methodSymbol.IsPubliclyAccessible()
+                && methodSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is MethodDeclarationSyntax methodDeclaration)
             {
-                c.ReportIssue(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation(),
-                    MakeThisMethodPrivateMessage));
+                c.ReportIssue(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation(), MakeThisMethodPrivateMessage));
             }
         }
 
@@ -71,15 +68,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var descendants = GetBodyDescendants(methodDeclaration);
 
-            if (HasAtLeastTwo(descendants.OfType<StatementSyntax>()) ||
-                HasAtLeastTwo(descendants.OfType<InvocationExpressionSyntax>()))
+            if (HasAtLeastTwo(descendants.OfType<StatementSyntax>())
+                || HasAtLeastTwo(descendants.OfType<InvocationExpressionSyntax>()))
             {
                 return;
             }
 
             var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
-            if (methodSymbol == null ||
-                methodSymbol.IsExtern && methodDeclaration.ParameterList == null)
+            if (methodSymbol == null
+                || (methodSymbol.IsExtern && methodDeclaration.ParameterList == null))
             {
                 return;
             }
@@ -95,16 +92,15 @@ namespace SonarAnalyzer.Rules.CSharp
                 .ForEach(Report);
 
             void Report(IMethodSymbol externMethod) =>
-                c.ReportIssue(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation(),
-                  string.Format(MakeThisWrapperLessTrivialMessage, externMethod.Name)));
+                c.ReportIssue(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation(), string.Format(MakeThisWrapperLessTrivialMessage, externMethod.Name)));
 
             bool ParametersMatchContainingMethodDeclaration(InvocationExpressionSyntax invocation) =>
                 invocation.ArgumentList.Arguments.All(IsDeclaredParameterOrLiteral);
 
             bool IsDeclaredParameterOrLiteral(ArgumentSyntax a) =>
-                a.Expression is LiteralExpressionSyntax ||
-                a.Expression is IdentifierNameSyntax i
-                    && methodDeclaration.ParameterList.Parameters.Any(p => p.Identifier.Text == i.Identifier.Text);
+                a.Expression is LiteralExpressionSyntax
+                || (a.Expression is IdentifierNameSyntax i
+                    && methodDeclaration.ParameterList.Parameters.Any(p => p.Identifier.Text == i.Identifier.Text));
         }
 
         private static ISet<IMethodSymbol> GetExternalMethods(IMethodSymbol methodSymbol) =>

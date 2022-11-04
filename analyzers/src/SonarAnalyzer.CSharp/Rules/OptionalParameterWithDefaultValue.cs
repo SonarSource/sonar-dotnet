@@ -34,13 +34,11 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3451";
         private const string MessageFormat = "Use '[DefaultParameterValue]' instead.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
@@ -58,22 +56,18 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var hasDefaultParameterValue = attributes.Any(attr =>
-                        attr.Symbol.IsInType(KnownType.System_Runtime_InteropServices_DefaultParameterValueAttribute));
+                    var hasDefaultParameterValue = attributes.Any(attr => attr.Symbol.IsInType(KnownType.System_Runtime_InteropServices_DefaultParameterValueAttribute));
                     if (hasDefaultParameterValue)
                     {
                         return;
                     }
 
-                    var defaultValueAttribute = attributes
-                        .FirstOrDefault(a => a.Symbol.IsInType(KnownType.System_ComponentModel_DefaultValueAttribute));
-
+                    var defaultValueAttribute = attributes.FirstOrDefault(a => a.Symbol.IsInType(KnownType.System_ComponentModel_DefaultValueAttribute));
                     if (defaultValueAttribute != null)
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, defaultValueAttribute.SyntaxNode.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(Rule, defaultValueAttribute.SyntaxNode.GetLocation()));
                     }
                 },
                 SyntaxKind.Parameter);
-        }
     }
 }

@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Rules
         where TSyntaxKind : struct
         where TMethodSyntax : SyntaxNode
     {
-        protected const string DiagnosticId = "S4210";
+        private const string DiagnosticId = "S4210";
         private const string AddStaThreadMessage = "Add the 'STAThread' attribute to this entry point.";
         private const string ChangeMtaThreadToStaThreadMessage = "Change the 'MTAThread' attribute of this entry point to 'STAThread'.";
 
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, Action, SyntaxKinds);
 
-        protected void Action(SyntaxNodeAnalysisContext c)
+        private void Action(SyntaxNodeAnalysisContext c)
         {
             var methodDeclaration = (TMethodSyntax)c.Node;
 

@@ -18,6 +18,8 @@ interface B
 
     static abstract void DoSomething(int a); // Secondary {{Non-adjacent overload}}
 //                       ^^^^^^^^^^^
+
+    static virtual void DoSomething(double a, double b) { }
 }
 
 class SomeClass : A, B
