@@ -25,12 +25,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class GenericTypeParameterInOutTest
     {
-        [TestMethod]
-        public void GenericTypeParameterInOut() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\GenericTypeParameterInOut.cs", new GenericTypeParameterInOut());
+        private readonly VerifierBuilder builder = new VerifierBuilder<GenericTypeParameterInOut>();
 
         [TestMethod]
-        public void GenericTypeParameterInOut_FromCSharp7() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\GenericTypeParameterInOut.CSharp7.cs", new GenericTypeParameterInOut(), ParseOptionsHelper.FromCSharp7);
+        public void GenericTypeParameterInOut() =>
+            builder.AddPaths("GenericTypeParameterInOut.cs").Verify();
+
+        [TestMethod]
+        public void GenericTypeParameterInOut_CSharp7() =>
+            builder.AddPaths("GenericTypeParameterInOut.CSharp7.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp7)
+                .Verify();
     }
 }

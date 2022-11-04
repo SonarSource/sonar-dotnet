@@ -25,21 +25,29 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class FinalizerShouldNotBeEmptyTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<FinalizerShouldNotBeEmpty>();
+
         [TestMethod]
         public void FinalizerShouldNotBeEmpty() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\FinalizerShouldNotBeEmpty.cs", new FinalizerShouldNotBeEmpty());
+            builder.AddPaths("FinalizerShouldNotBeEmpty.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void FinalizerShouldNotBeEmpty_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\FinalizerShouldNotBeEmpty.CSharp9.cs", new FinalizerShouldNotBeEmpty());
+            builder.AddPaths("FinalizerShouldNotBeEmpty.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
+
 #endif
 
         [TestMethod]
         public void FinalizerShouldNotBeEmpty_InvalidCode() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"class Program4
+            builder.AddSnippet(@"class Program4
     {
         ~Program4() =>
-    }", new FinalizerShouldNotBeEmpty(), CompilationErrorBehavior.Ignore);
+    }")
+                .WithErrorBehavior(CompilationErrorBehavior.Ignore)
+                .Verify();
     }
 }

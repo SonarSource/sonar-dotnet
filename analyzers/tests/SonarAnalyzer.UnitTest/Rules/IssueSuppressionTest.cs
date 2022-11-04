@@ -32,6 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             builder.AddPaths("IssueSuppression.cs", "IssueSuppression2.cs").WithAutogenerateConcurrentFiles(false).Verify();
 
 #if NET
+
         [TestMethod]
         public void IssueSuppression_CSharp9() =>
             builder.AddPaths("IssueSuppression.CSharp9.cs").WithTopLevelStatements().Verify();
@@ -39,6 +40,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void IssueSuppression_CSharp10() =>
             builder.AddPaths("IssueSuppression.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+
 #endif
+
     }
 }

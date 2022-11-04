@@ -25,14 +25,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class FieldsShouldBeEncapsulatedInPropertiesTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<FieldsShouldBeEncapsulatedInProperties>();
+
         [TestMethod]
         public void FieldsShouldBeEncapsulatedInProperties() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\FieldsShouldBeEncapsulatedInProperties.cs", new FieldsShouldBeEncapsulatedInProperties());
+            builder.AddPaths("FieldsShouldBeEncapsulatedInProperties.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void FieldsShouldBeEncapsulatedInProperties_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\FieldsShouldBeEncapsulatedInProperties.CSharp9.cs", new FieldsShouldBeEncapsulatedInProperties());
+            builder.AddPaths("FieldsShouldBeEncapsulatedInProperties.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
+
 #endif
+
     }
 }

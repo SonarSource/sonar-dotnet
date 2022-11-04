@@ -27,6 +27,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void FrameworkTypeNaming() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\FrameworkTypeNaming.cs", new FrameworkTypeNaming());
+            new VerifierBuilder<FrameworkTypeNaming>().AddPaths("FrameworkTypeNaming.cs").Verify();
     }
 }

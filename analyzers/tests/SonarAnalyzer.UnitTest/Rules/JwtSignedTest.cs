@@ -26,26 +26,42 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class JwtSignedTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.JwtSigned>();
+        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.JwtSigned>();
+
         [TestMethod]
         public void JwtSigned_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\JwtSigned.cs", new CS.JwtSigned(), NuGetMetadataReference.JWT("6.1.0"));
+            builderCS.AddPaths("JwtSigned.cs")
+                .AddReferences(NuGetMetadataReference.JWT("6.1.0"))
+                .Verify();
 
         [TestMethod]
         public void JwtSigned_JWTDecoderExtensions_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\JwtSigned.Extensions.cs", new CS.JwtSigned(), NuGetMetadataReference.JWT("7.3.1"));
+            builderCS.AddPaths("JwtSigned.Extensions.cs")
+                .AddReferences(NuGetMetadataReference.JWT("7.3.1"))
+                .Verify();
 
 #if NET
+
         [TestMethod]
         public void JwtSigned_CS_FromCSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\JwtSigned.CSharp9.cs", new CS.JwtSigned(), NuGetMetadataReference.JWT("6.1.0"));
+            builderCS.AddPaths("JwtSigned.CSharp9.cs")
+                .WithTopLevelStatements()
+                .AddReferences(NuGetMetadataReference.JWT("6.1.0"))
+                .Verify();
+
 #endif
 
         [TestMethod]
         public void JwtSigned_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\JwtSigned.vb", new VB.JwtSigned(), NuGetMetadataReference.JWT("6.1.0"));
+            builderVB.AddPaths("JwtSigned.vb")
+                .AddReferences(NuGetMetadataReference.JWT("6.1.0"))
+                .Verify();
 
         [TestMethod]
         public void JwtSigned_JWTDecoderExtensions_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\JwtSigned.Extensions.vb", new VB.JwtSigned(), NuGetMetadataReference.JWT("7.3.1"));
+            builderVB.AddPaths("JwtSigned.Extensions.vb")
+                .AddReferences(NuGetMetadataReference.JWT("7.3.1"))
+                .Verify();
     }
 }

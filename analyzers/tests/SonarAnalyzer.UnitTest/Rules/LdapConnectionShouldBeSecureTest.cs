@@ -51,6 +51,8 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
                 .AddReferences(MetadataReferenceFacade.SystemDirectoryServices)
                 .Verify();
+
 #endif
+
     }
 }

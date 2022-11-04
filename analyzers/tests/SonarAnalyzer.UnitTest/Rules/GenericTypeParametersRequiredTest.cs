@@ -27,6 +27,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void GenericTypeParametersRequired() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\GenericTypeParametersRequired.cs", new GenericTypeParametersRequired());
+            new VerifierBuilder<GenericTypeParametersRequired>().AddPaths("GenericTypeParametersRequired.cs").Verify();
     }
 }

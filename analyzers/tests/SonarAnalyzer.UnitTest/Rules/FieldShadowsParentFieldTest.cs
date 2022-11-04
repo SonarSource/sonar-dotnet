@@ -26,42 +26,59 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class FieldShadowsParentFieldTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.FieldShadowsParentField>();
+        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.FieldShadowsParentField>();
+
         [TestMethod]
         public void FieldShadowsParentField_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\FieldShadowsParentField.cs", new CS.FieldShadowsParentField());
+            builderCS.AddPaths("FieldShadowsParentField.cs").Verify();
 
         [TestMethod]
         public void FieldShadowsParentField_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\FieldShadowsParentField.vb", new VB.FieldShadowsParentField());
+            builderVB.AddPaths("FieldShadowsParentField.vb").Verify();
 
         [TestMethod]
         public void FieldShadowsParentField_DoesNotRaiseIssuesForTestProject_CS() =>
-            OldVerifier.VerifyNoIssueReportedInTest(@"TestCases\FieldShadowsParentField.cs", new CS.FieldShadowsParentField());
+            builderCS.AddPaths("FieldShadowsParentField.cs")
+                .AddTestReference()
+                .VerifyNoIssueReported();
 
         [TestMethod]
         public void FieldShadowsParentField_DoesNotRaiseIssuesForTestProject_VB() =>
-            OldVerifier.VerifyNoIssueReportedInTest(@"TestCases\FieldShadowsParentField.vb", new VB.FieldShadowsParentField());
+            builderVB.AddPaths("FieldShadowsParentField.vb")
+                .AddTestReference()
+                .VerifyNoIssueReported();
 
 #if NET
+
         [TestMethod]
         public void FieldShadowsParentField_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\FieldShadowsParentField.CSharp9.cs", new CS.FieldShadowsParentField());
+            builderCS.AddPaths("FieldShadowsParentField.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
 
         [TestMethod]
         public void FieldsShouldNotDifferByCapitalization_CShar9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\FieldsShouldNotDifferByCapitalization.CSharp9.cs", new CS.FieldShadowsParentField());
+            builderCS.AddPaths("FieldsShouldNotDifferByCapitalization.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
+
 #endif
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void FieldsShouldNotDifferByCapitalization_CS(ProjectType projectType) =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\FieldsShouldNotDifferByCapitalization.cs", new CS.FieldShadowsParentField(), TestHelper.ProjectTypeReference(projectType));
+            builderCS.AddPaths("FieldsShouldNotDifferByCapitalization.cs")
+                .AddReferences(TestHelper.ProjectTypeReference(projectType))
+                .Verify();
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void FieldsShouldNotDifferByCapitalization_VB(ProjectType projectType) =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\FieldsShouldNotDifferByCapitalization.vb", new VB.FieldShadowsParentField(), TestHelper.ProjectTypeReference(projectType));
+            builderVB.AddPaths("FieldsShouldNotDifferByCapitalization.vb")
+                .AddReferences(TestHelper.ProjectTypeReference(projectType))
+                .Verify();
     }
 }

@@ -28,10 +28,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void IndexOfCheckAgainstZero_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\IndexOfCheckAgainstZero.cs", new CS.IndexOfCheckAgainstZero());
+            new VerifierBuilder<CS.IndexOfCheckAgainstZero>().AddPaths("IndexOfCheckAgainstZero.cs").Verify();
 
         [TestMethod]
         public void IndexOfCheckAgainstZero_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\IndexOfCheckAgainstZero.vb", new VB.IndexOfCheckAgainstZero());
+            new VerifierBuilder<VB.IndexOfCheckAgainstZero>().AddPaths("IndexOfCheckAgainstZero.vb").Verify();
     }
 }

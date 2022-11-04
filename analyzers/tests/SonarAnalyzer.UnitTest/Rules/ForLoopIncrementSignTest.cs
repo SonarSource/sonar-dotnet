@@ -27,6 +27,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ForLoopIncrementSign() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ForLoopIncrementSign.cs", new ForLoopIncrementSign());
+            new VerifierBuilder<ForLoopIncrementSign>().AddPaths("ForLoopIncrementSign.cs").Verify();
     }
 }
