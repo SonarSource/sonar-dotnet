@@ -1,7 +1,9 @@
-﻿public interface IMath
+﻿using System.Threading.Tasks;
+
+public interface IMath
 {
-    public static virtual string GetValue()
+    public static virtual Task<object> GetValue()
     {
-        return null;
+        return null; // Noncompliant
     }
 }
