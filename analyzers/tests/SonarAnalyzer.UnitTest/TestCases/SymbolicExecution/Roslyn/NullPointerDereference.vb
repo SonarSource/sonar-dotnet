@@ -120,3 +120,17 @@ Public Class Sample
     End Sub
 
 End Class
+
+' https://github.com/SonarSource/sonar-dotnet/issues/6271
+Public Class Repro_6271
+
+    Public Function TestDataContains(Text As String) As Boolean
+        Static Data As String = LoadTestData()
+        Return Data.Contains(Text)  ' Compliant
+    End Function
+
+    Private Shared Function LoadTestData() As String
+        Return "Lorem ipsum"
+    End Function
+
+End Class

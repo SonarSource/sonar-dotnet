@@ -61,6 +61,7 @@ internal static class OperationDispatcher
         { OperationKindEx.RecursivePattern, new RecursivePattern() },
         { OperationKindEx.ReDimClause, new ReDimClause() },
         { OperationKindEx.SimpleAssignment, new Assignment() },
+        { OperationKindEx.StaticLocalInitializationSemaphore, new StaticLocalInitializationSemaphore() },
         { OperationKindEx.TypeOf, new NotNullOperation() },
         { OperationKindEx.TypeParameterObjectCreation, new NotNullOperation() },
         { OperationKindEx.Unary, new Unary() }
