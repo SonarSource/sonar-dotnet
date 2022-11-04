@@ -9,19 +9,9 @@ namespace Tests.Diagnostics
 
     }
 
-    file abstract class Animal //Noncompliant {{Convert this 'abstract' class to an interface.}}
+    file abstract class Animal2 //Compliant
     {
-        protected abstract void move();
-        protected abstract void feed();
-
-    }
-
-    file class SomeBaseClass { }
-
-    file abstract class Animal2 : SomeBaseClass //Compliant
-    {
-        protected abstract void move();
-        protected abstract void feed();
-
+        protected abstract void Move();
+        string Foo() => "FOO";
     }
 }
