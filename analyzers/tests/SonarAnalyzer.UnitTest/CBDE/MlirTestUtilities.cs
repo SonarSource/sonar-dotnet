@@ -40,7 +40,7 @@ namespace SonarAnalyzer.UnitTest.CBDE
 
         public static string ValidateCodeGeneration(string code, string testName, bool withLoc)
         {
-            var locPath = withLoc ? ".loc" : "";
+            var locPath = withLoc ? ".loc" : string.Empty;
             var path = Path.Combine(Path.GetTempPath(), $"csharp.{testName}{locPath}.mlir");
             using (var writer = new StreamWriter(path))
             {

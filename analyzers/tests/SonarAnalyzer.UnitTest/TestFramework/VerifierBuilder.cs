@@ -24,6 +24,13 @@ using VB = Microsoft.CodeAnalysis.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
+    public enum CompilationErrorBehavior
+    {
+        FailTest,
+        Ignore,
+        Default = FailTest
+    }
+
     /// <summary>
     /// Immutable builder that holds all parameters for rule verification.
     /// </summary>
