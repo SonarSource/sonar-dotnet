@@ -8,5 +8,15 @@ namespace Tests.Diagnostics
         {
             lock ("""foo""") { }// Noncompliant
         }
+
+        void NewlinesInStringInterpolation()
+        {
+            string s = "test";
+            lock ($"{s
+                .ToUpper()
+                }")
+            { }
+            // Noncompliant@-4
+        }
     }
 }
