@@ -20,6 +20,7 @@
 
 using System.Collections.Immutable;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
@@ -27,6 +28,7 @@ using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Helpers;
+using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace SonarAnalyzer.Rules.CSharp;
 
@@ -38,22 +40,36 @@ public sealed class UnchangedLocalVariablesShouldBeConstCodeFix : SonarCodeFix
     public override ImmutableArray<string> FixableDiagnosticIds =>
         ImmutableArray.Create(UnchangedLocalVariablesShouldBeConst.DiagnosticId);
 
-    protected override async Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+    protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
     {
         if (VariableDeclaration(root, context) is { } variable
-            && variable.Parent is LocalDeclarationStatementSyntax oldNode)
+            && variable.Parent is LocalDeclarationStatementSyntax oldNode
+            && variable.Variables.Count == 1) // It is not guaranteed that all should be const.
         {
-            var declaration = variable.Type.IsVar
-                ? WithExplictType(variable, await context.Document.GetSemanticModelAsync().ConfigureAwait(false))
-                : variable;
-            var newNode = root.ReplaceNode(oldNode, ConstantDeclaration(declaration));
-
             context.RegisterCodeFix(
                 CodeAction.Create(
                 Title,
-                token => Task.FromResult(context.Document.WithSyntaxRoot(newNode))),
+                token => ChangeDocument(context.Document, root, variable, oldNode, token)),
                 context.Diagnostics);
         }
+
+        return Task.CompletedTask;
+    }
+
+    public static async Task<Document> ChangeDocument(
+        Document document,
+        SyntaxNode root,
+        VariableDeclarationSyntax variable,
+        LocalDeclarationStatementSyntax oldNode,
+        CancellationToken token)
+    {
+        var declaration = variable.Type.IsVar
+               ? WithExplictType(variable, await document.GetSemanticModelAsync(token).ConfigureAwait(false))
+               : variable;
+
+        var newNode = root.ReplaceNode(oldNode, ConstantDeclaration(declaration));
+
+        return document.WithSyntaxRoot(newNode);
     }
 
     private static VariableDeclarationSyntax VariableDeclaration(SyntaxNode root, CodeFixContext context) =>
@@ -61,13 +77,13 @@ public sealed class UnchangedLocalVariablesShouldBeConstCodeFix : SonarCodeFix
 
     private static LocalDeclarationStatementSyntax ConstantDeclaration(VariableDeclarationSyntax declaration)
     {
-        var prefix = SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.ConstKeyword));
-        return SyntaxFactory.LocalDeclarationStatement(prefix, declaration);
+        var prefix = TokenList(Token(SyntaxKind.ConstKeyword));
+        return LocalDeclarationStatement(prefix, declaration);
     }
 
     private static VariableDeclarationSyntax WithExplictType(VariableDeclarationSyntax declaration, SemanticModel semanticModel)
     {
-        var type = SyntaxFactory.IdentifierName(semanticModel.GetTypeInfo(declaration.Type).Type.ToMinimalDisplayString(semanticModel, declaration.GetLocation().SourceSpan.Start));
+        var type = IdentifierName(semanticModel.GetTypeInfo(declaration.Type).Type.ToMinimalDisplayString(semanticModel, declaration.GetLocation().SourceSpan.Start));
         return declaration.ReplaceNode(declaration.Type, type);
     }
 }

@@ -14,13 +14,21 @@ class ToReplace
         int int32 = 32;       // Noncompliant
         uint uint32 = 32;     // Noncompliant
         long int64 = 64;      // Noncompliant
-        ulong ulongVal = 1;   // Noncompliant
+        ulong ulongVal = 64;   // Noncompliant
         float single = 32;    // Noncompliant
         double floating = 64; // Noncompliant
         decimal dec = 128;    // Noncompliant
-        int i1 = 1,           // Noncompliant
-            i2 = 2;           // Noncompliant
         ConsoleColor enumeration = ConsoleColor.Red; // Noncompliant
+    }
+
+    void Multiple()
+    {
+        int int32_0 = 0,           // Noncompliant
+            int32_1 = 1;           // Noncompliant
+
+        int mixed_0 = DateTime.Now.Day, // Compliant
+            mixed_1 = 1,                // Noncompliant
+            mixed_2 = 2;                // Compliant
     }
 
     void Var()
