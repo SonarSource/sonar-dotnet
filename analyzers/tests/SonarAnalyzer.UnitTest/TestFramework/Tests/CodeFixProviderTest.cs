@@ -26,13 +26,17 @@ using Microsoft.CodeAnalysis.CSharp;
 namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 {
     [TestClass]
-    public class OldVerifierTest
+    public class CodeFixProviderTest
     {
         [TestMethod]
         public void VerifyCodeFix_WithDuplicateIssues()
         {
-            const string filename = @"TestCases\VerifyCodeFix.Empty.cs";
-            Action a = () => { OldVerifier.VerifyCodeFix<TestDuplicateLocationRuleCodeFix>(filename, filename, new TestDuplicateLocationRule()); };
+            const string filename = "VerifyCodeFix.Empty.cs";
+            var verifier = new VerifierBuilder<TestDuplicateLocationRule>()
+                .WithCodeFix<TestDuplicateLocationRuleCodeFix>()
+                .AddPaths(filename)
+                .WithCodeFixedPaths(filename);
+            Action a = () => verifier.VerifyCodeFix();
             a.Should().NotThrow();
         }
 
