@@ -42,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             builderCS.WithCodeFix<CS.MultipleVariableDeclarationCodeFix>()
                 .AddPaths("MultipleVariableDeclaration.cs")
                 .WithCodeFixedPaths("MultipleVariableDeclaration.Fixed.cs")
-                .WithCodeFixTitle(SonarAnalyzer.Rules.Common.MultipleVariableDeclarationCodeFixBase.Title)
+                .WithCodeFixTitle(SonarAnalyzer.Rules.MultipleVariableDeclarationCodeFixBase.Title)
                 .VerifyCodeFix();
 
         [TestMethod]
@@ -50,7 +50,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             builderVB.WithCodeFix<VB.MultipleVariableDeclarationCodeFix>()
                 .AddPaths("MultipleVariableDeclaration.vb")
                 .WithCodeFixedPaths("MultipleVariableDeclaration.Fixed.vb")
-                .WithCodeFixTitle(SonarAnalyzer.Rules.Common.MultipleVariableDeclarationCodeFixBase.Title)
+                .WithCodeFixTitle(SonarAnalyzer.Rules.MultipleVariableDeclarationCodeFixBase.Title)
                 .VerifyCodeFix();
     }
 }

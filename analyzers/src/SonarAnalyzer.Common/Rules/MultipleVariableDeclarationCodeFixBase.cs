@@ -26,7 +26,7 @@ using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.Common
+namespace SonarAnalyzer.Rules
 {
     public abstract class MultipleVariableDeclarationCodeFixBase : SonarCodeFix
     {

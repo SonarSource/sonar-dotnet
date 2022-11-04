@@ -25,7 +25,7 @@ using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.Common
+namespace SonarAnalyzer.Rules
 {
     public abstract class SingleStatementPerLineBase : SonarDiagnosticAnalyzer
     {

@@ -21,7 +21,7 @@
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.Common
+namespace SonarAnalyzer.Rules
 {
     public abstract class PropertyWriteOnlyBase<TSyntaxKind, TPropertyDeclaration> : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct

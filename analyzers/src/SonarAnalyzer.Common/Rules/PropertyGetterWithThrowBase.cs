@@ -22,7 +22,7 @@ using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.Common
+namespace SonarAnalyzer.Rules
 {
     public abstract class PropertyGetterWithThrowBase : SonarDiagnosticAnalyzer
     {
