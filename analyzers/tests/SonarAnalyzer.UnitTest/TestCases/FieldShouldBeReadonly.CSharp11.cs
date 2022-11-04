@@ -28,12 +28,12 @@ record PointerTypes
 
 
     private void AssignValue()
-        {
-        _nint4 = 42;
+    {
+    _nint4 = 42;
 
-        _nint5++;
-        _nuint5--;
-        }
+    _nint5++;
+    _nuint5--;
+    }
 
     private UIntPtr Get_UIntPtr => _nuint4;
 
