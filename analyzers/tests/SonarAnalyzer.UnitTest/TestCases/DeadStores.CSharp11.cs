@@ -1,9 +1,14 @@
 ﻿using System;
 
-
 string x = "";   // FN
 x = """Test2"""; // FN
 Foo(x);
+
+void UnsignedShiftRightAssignment()
+{
+    int i = 0;
+    i >>>= 5; // Noncompliant
+}
 
 void RawStringLiterals(string param)
 {

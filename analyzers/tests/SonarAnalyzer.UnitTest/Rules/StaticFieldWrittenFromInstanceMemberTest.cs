@@ -66,6 +66,7 @@ public class Bar
         }
 
 #if NET
+
         [TestMethod]
         public void StaticFieldWrittenFromInstanceMember_CSharp9() =>
             builder.AddPaths(@"StaticFieldWrittenFromInstanceMember.CSharp9.cs").WithTopLevelStatements().Verify();
@@ -73,6 +74,11 @@ public class Bar
         [TestMethod]
         public void StaticFieldWrittenFromInstanceMember_CSharp10() =>
             builder.AddPaths(@"StaticFieldWrittenFromInstanceMember.CSharp10.cs").WithTopLevelStatements().WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+
+        [TestMethod]
+        public void StaticFieldWrittenFromInstanceMember_CSharp11() =>
+            builder.AddPaths(@"StaticFieldWrittenFromInstanceMember.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+
 #endif
 
         private static CSharpCompilation CreateCompilation(SyntaxTree tree, string name) =>

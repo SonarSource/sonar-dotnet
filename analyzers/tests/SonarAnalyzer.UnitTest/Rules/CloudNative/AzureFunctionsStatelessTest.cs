@@ -28,7 +28,16 @@ namespace SonarAnalyzer.UnitTest.Rules
         private readonly VerifierBuilder builder = new VerifierBuilder<AzureFunctionsStateless>().WithBasePath("CloudNative").AddReferences(NuGetMetadataReference.MicrosoftNetSdkFunctions());
 
         [TestMethod]
-        public void AzureFunctionsStateless_CS() =>
+        public void AzureFunctionsStateless_CSharp8() =>
             builder.AddPaths("AzureFunctionsStateless.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+
+#if NET
+
+        [TestMethod]
+        public void AzureFunctionsStateless_CSharp11() =>
+            builder.AddPaths("AzureFunctionsStateless.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+
+#endif
+
     }
 }
