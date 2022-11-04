@@ -26,9 +26,19 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class NonAsyncTaskShouldNotReturnNullTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<CS.NonAsyncTaskShouldNotReturnNull>();
+
         [TestMethod]
-        public void NonAsyncTaskShouldNotReturnNull_CS() =>
-            new VerifierBuilder<CS.NonAsyncTaskShouldNotReturnNull>().AddPaths("NonAsyncTaskShouldNotReturnNull.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+        public void NonAsyncTaskShouldNotReturnNull_CSharp8() =>
+            builder.AddPaths("NonAsyncTaskShouldNotReturnNull.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+
+#if NET
+
+        [TestMethod]
+        public void NonAsyncTaskShouldNotReturnNull_CSharp11() =>
+            builder.AddPaths("NonAsyncTaskShouldNotReturnNull.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+
+#endif
 
         [TestMethod]
         public void NonAsyncTaskShouldNotReturnNull_VB() =>

@@ -17,6 +17,6 @@ namespace Tests.Diagnostics
             Console.WriteLine(i);
         }
 
-        public static void Write(int i, int j, int x = 5) { } // Compliant - FN
+        public static void Write(int i, int j, int x = 5) { } // Fixed
     }
 }
