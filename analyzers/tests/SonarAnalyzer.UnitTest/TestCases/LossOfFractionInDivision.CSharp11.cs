@@ -69,5 +69,13 @@ namespace Testcases
             return (decimal)uIntPtr1 / uIntPtr2; // Compliant
         }
     }
+
+    interface IMyInterface
+    {
+        static virtual void StaticVirtualMethod()
+        {
+            decimal dec = 3 / 2; // Noncompliant
+        }
+    }
 }
 

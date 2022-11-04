@@ -11,4 +11,13 @@ namespace Net6Poc.ImplementSerializationMethodsCorrectly
     }
 
     public class GenericAttribute<T> : Attribute { }
+
+    interface IMyInterface
+    {
+        [OnSerializing]
+        static virtual void OnSerializingStaticVirtual(StreamingContext context) { } // Noncompliant FP
+
+        [OnSerializing]
+        static abstract void OnSerializingStaticAbstract(StreamingContext context); // Noncompliant FP
+    }
 }

@@ -25,12 +25,29 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class LoopsAndLinqTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<LoopsAndLinq>();
+
         [TestMethod]
         public void LoopsAndLinq_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\LoopsAndLinq.cs", new LoopsAndLinq(), MetadataReferenceFacade.SystemData);
+            builder.AddPaths("LoopsAndLinq.cs")
+                .AddReferences(MetadataReferenceFacade.SystemData)
+                .Verify();
 
         [TestMethod]
         public void LoopsAndLinq_CSharp8() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\LoopsAndLinq.CSharp8.cs", new LoopsAndLinq(), ParseOptionsHelper.FromCSharp8);
+            builder.AddPaths("LoopsAndLinq.CSharp8.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
+
+#if NET
+
+        [TestMethod]
+        public void LoopsAndLinq_CSharp11() =>
+            builder.AddPaths("LoopsAndLinq.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
+#endif
+
     }
 }
