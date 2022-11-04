@@ -23,7 +23,7 @@ namespace Tests.Diagnostics
             x = d >>> d; // okay
             x = d >>> new MyClass(); // okay
 
-            x = d >>> new MyUnknownClass(); // okay // Error [CS0246] - unknown type
+            x = d >>> new MyUnknownClass(); // Compliant // Error [CS0246] - unknown type
         }
     }
 }

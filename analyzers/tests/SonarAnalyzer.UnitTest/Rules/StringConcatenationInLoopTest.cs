@@ -30,19 +30,19 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void StringConcatenationInLoop_CS() =>
-            builderCS.AddPaths(@"StringConcatenationInLoop.cs").Verify();
+            builderCS.AddPaths("StringConcatenationInLoop.cs").Verify();
 
 #if NET
 
         [TestMethod]
         public void StringConcatenationInLoop_CSharp11() =>
-            builderCS.AddPaths(@"StringConcatenationInLoop.CSharp11.cs")
+            builderCS.AddPaths("StringConcatenationInLoop.CSharp11.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
 
 #endif
 
         [TestMethod]
         public void StringConcatenationInLoop_VB() =>
-            new VerifierBuilder<VB.StringConcatenationInLoop>().AddPaths(@"StringConcatenationInLoop.vb").Verify();
+            new VerifierBuilder<VB.StringConcatenationInLoop>().AddPaths("StringConcatenationInLoop.vb").Verify();
     }
 }
