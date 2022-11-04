@@ -46,5 +46,28 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void StringFormatEdgeCasesValidator() =>
             builder.AddPaths("StringFormatEdgeCasesValidator.cs").Verify();
+
+#if NET
+
+        [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
+        public void StringFormatRuntimeExceptionFreeValidator_CSharp11(ProjectType projectType) =>
+            builder.AddPaths("StringFormatRuntimeExceptionFreeValidator.CSharp11.cs")
+                .AddReferences(TestHelper.ProjectTypeReference(projectType))
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
+        [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
+        public void StringFormatTypoFreeValidator_CSharp11(ProjectType projectType) =>
+            builder.AddPaths("StringFormatTypoFreeValidator.CSharp11.cs")
+                .AddReferences(TestHelper.ProjectTypeReference(projectType))
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
+#endif
+
     }
 }

@@ -25,8 +25,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ParameterValidationInAsyncShouldBeWrappedTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<ParameterValidationInAsyncShouldBeWrapped>();
+
         [TestMethod]
         public void ParameterValidationInAsyncShouldBeWrapped() =>
-            new VerifierBuilder<ParameterValidationInAsyncShouldBeWrapped>().AddPaths("ParameterValidationInAsyncShouldBeWrapped.cs").Verify();
+            builder.AddPaths("ParameterValidationInAsyncShouldBeWrapped.cs").Verify();
+
+#if NET
+
+        [TestMethod]
+        public void ParameterValidationInAsyncShouldBeWrapped_CSharp11() =>
+            builder.AddPaths("ParameterValidationInAsyncShouldBeWrapped.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
+#endif
+
     }
 }

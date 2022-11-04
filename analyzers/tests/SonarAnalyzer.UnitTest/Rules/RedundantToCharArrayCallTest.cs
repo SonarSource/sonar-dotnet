@@ -31,6 +31,16 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void RedundantToCharArrayCall() =>
             builder.AddPaths("RedundantToCharArrayCall.cs").Verify();
 
+#if NET
+
+        [TestMethod]
+        public void RedundantToCharArrayCall_CSharp11() =>
+            builder.AddPaths("RedundantToCharArrayCall.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
+#endif
+
         [TestMethod]
         public void RedundantToCharArrayCall_CodeFix() =>
             builder.AddPaths("RedundantToCharArrayCall.cs")

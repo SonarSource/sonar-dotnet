@@ -55,6 +55,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Verify();
 
         [TestMethod]
+        public void RedundantNullCheck_CSharp11() =>
+            builderCS.AddPaths("RedundantNullCheck.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
+        [TestMethod]
         public void RedundantNullCheck_CSharp9_CodeFix() =>
             codeFixbuilderCS.AddPaths("RedundantNullCheck.CSharp9.cs")
                 .WithCodeFixedPaths("RedundantNullCheck.CSharp9.Fixed.cs")

@@ -6,6 +6,11 @@
         {
             var x = "";
 
+            if (x == "")
+            {
+                x = "";
+            }
+
             if (x != null) // Noncompliant
 //              ^^^^^^^^^
             {

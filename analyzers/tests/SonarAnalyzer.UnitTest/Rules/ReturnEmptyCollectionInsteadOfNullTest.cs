@@ -41,6 +41,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithTopLevelStatements()
                 .Verify();
 
+        [TestMethod]
+        public void ReturnEmptyCollectionInsteadOfNull_CSharp11() =>
+            builder.AddPaths("ReturnEmptyCollectionInsteadOfNull.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
 #endif
 
     }

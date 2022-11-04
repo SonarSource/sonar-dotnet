@@ -21,10 +21,10 @@ namespace Tests.Diagnostics
             x = d >> null; // Noncompliant
             x <<= new object(); // Noncompliant {{Remove this erroneous shift, it will fail because 'object' can't be implicitly converted to 'int'.}}
 
-            x = d << d; // okay
-            x = d >> new MyClass(); // okay
+            x = d << d; // Compliant
+            x = d >> new MyClass(); // Compliant
 
-            x = d >> new MyUnknownClass(); // okay // Error [CS0246] - unknown type
+            x = d >> new MyUnknownClass(); // Compliant // Error [CS0246] - unknown type
         }
     }
 }
