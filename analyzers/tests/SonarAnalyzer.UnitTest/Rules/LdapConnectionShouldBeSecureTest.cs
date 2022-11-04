@@ -45,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Verify();
 
         [TestMethod]
-        public void LdapConnectionsShouldBeSecureCSharp10() =>
+        public void LdapConnectionsShouldBeSecure_CSharp10() =>
             builder.AddPaths("LdapConnectionShouldBeSecure.CSharp10.cs")
                 .WithTopLevelStatements()
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
