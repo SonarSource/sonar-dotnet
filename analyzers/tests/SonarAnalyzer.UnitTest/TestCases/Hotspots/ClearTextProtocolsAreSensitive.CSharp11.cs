@@ -1,15 +1,32 @@
 ﻿using System;
 
-const string protocol1 = """http://""";
-const string protocol2 = """https://""";
-const string address = """foo.com""";
-const string noncompliant = $"""{protocol1}{address}"""; // Noncompliant
-const string compliant = $"""{protocol2}{address}""";
+void RawStringLiterals()
+{
+    const string protocol1 = """http://""";
+    const string protocol2 = """https://""";
+    const string address = """foo.com""";
+    const string noncompliant = $"""{protocol1}{address}"""; // Noncompliant
+    const string compliant = $"""{protocol2}{address}""";
 
-const string a = """http://foo.com"""; // Noncompliant {{Using http protocol is insecure. Use https instead.}}
+    const string a = """http://foo.com"""; // Noncompliant {{Using http protocol is insecure. Use https instead.}}
+}
 
-var b = "http://foo.com"u8; // FN
-var c = """http://foo.com"""u8; // FN
-var d = """
+void Utf8StringLiterals()
+{
+    var b = "http://foo.com"u8; // FN
+    var c = """http://foo.com"""u8; // FN
+    var d = """
     http://foo.com
     """u8; // FN
+}
+
+void NewlinesInStringInterpolation()
+{
+    const string protocol1 = "http://";
+    const string protocol2 = "https://";
+    const string address = "foo.com";
+    const string noncompliant = $"{protocol1 + // Noncompliant
+        address}";
+    const string compliant = $"{protocol2 +
+        address}";
+}

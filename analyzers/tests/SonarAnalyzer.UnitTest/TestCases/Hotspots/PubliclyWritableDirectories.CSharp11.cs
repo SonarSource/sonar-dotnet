@@ -5,9 +5,17 @@ namespace Tests.Diagnostics
 {
     public class Program
     {
-        public void Examples()
+        void RawStringLiterals()
         {
             var tmp = Environment.GetEnvironmentVariable("""TMPDIR"""); // Noncompliant 
+        }
+
+        void NewlinesInStringInterpolation(string firstPartOfPath, string secondPartOfPath)
+        {
+            string dir = $"/tmp/{firstPartOfPath + // Noncompliant
+                secondPartOfPath}";
+            string dirRawString = $$"""/tmp/{{firstPartOfPath + // Noncompliant
+                            secondPartOfPath}}""";
         }
     }
 }

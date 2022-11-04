@@ -18,5 +18,22 @@ namespace Tests.Diagnostics
             ReadOnlySpan<byte> Utf8NonCompliant = "test"u8; // FN
             ReadOnlySpan<byte> Uft8NonCompliant2 = """test"""u8; // FN
         }
+
+        void NewlinesInStringInterpolation()
+        { 
+            string NewlinesInterpolatedStringNonCompliant = $"test{RawStringLiteralsNonCompliant + // FN
+                RawStringLiteralsNonCompliant}";
+            string NewlinesInterpolatedStringNonCompliant2 = $"test{RawStringLiteralsCompliant + // Noncompliant
+                RawStringLiteralsCompliant}";
+            string NewlinesInterpolatedStringCompliant = $"test{RawStringLiteralsCompliant +
+                RawStringLiteralsCompliant}";
+
+            string NewlinesInterpolatedStringRawNonCompliant = $$"""test{{RawStringLiteralsNonCompliant + // FN
+                RawStringLiteralsNonCompliant}}""";
+            string NewlinesInterpolatedStringRawNonCompliant2 = $$"""test{{RawStringLiteralsCompliant + // Noncompliant
+                RawStringLiteralsCompliant}}""";
+            string NewlinesInterpolatedStringRawCompliant = $$"""test{{RawStringLiteralsCompliant +
+                RawStringLiteralsCompliant}}""";
+        }
     }
 }
