@@ -26,18 +26,24 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class InsecureTemporaryFilesCreationTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.InsecureTemporaryFilesCreation>();
+
         [TestMethod]
         public void InsecureTemporaryFilesCreation_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\InsecureTemporaryFilesCreation.cs", new CS.InsecureTemporaryFilesCreation());
+            builderCS.AddPaths("InsecureTemporaryFilesCreation.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void InsecureTemporaryFilesCreation_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\InsecureTemporaryFilesCreation.CSharp9.cs", new CS.InsecureTemporaryFilesCreation());
+            builderCS.AddPaths("InsecureTemporaryFilesCreation.CSharp9.cs")
+                .WithTopLevelStatements()
+                .Verify();
+
 #endif
 
         [TestMethod]
         public void InsecureTemporaryFilesCreation_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\InsecureTemporaryFilesCreation.vb", new VB.InsecureTemporaryFilesCreation());
+            new VerifierBuilder<VB.InsecureTemporaryFilesCreation>().AddPaths("InsecureTemporaryFilesCreation.vb").Verify();
     }
 }

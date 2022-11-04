@@ -28,10 +28,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void GotoStatement_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\GotoStatement.cs", new CS.GotoStatement());
+            new VerifierBuilder<CS.GotoStatement>().AddPaths("GotoStatement.cs").Verify();
 
         [TestMethod]
         public void GotoStatement_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\GotoStatement.vb", new VB.GotoStatement());
+            new VerifierBuilder<VB.GotoStatement>().AddPaths("GotoStatement.vb").Verify();
     }
 }

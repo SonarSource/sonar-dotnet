@@ -25,18 +25,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class GetHashCodeEqualsOverrideTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<GetHashCodeEqualsOverride>().AddReferences(MetadataReferenceFacade.SystemComponentModelPrimitives);
+
         [TestMethod]
         public void GetHashCodeEqualsOverride() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\GetHashCodeEqualsOverride.cs",
-                                    new GetHashCodeEqualsOverride(),
-                                    MetadataReferenceFacade.SystemComponentModelPrimitives);
+            builder.AddPaths("GetHashCodeEqualsOverride.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void GetHashCodeEqualsOverride_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\GetHashCodeEqualsOverride.CSharp9.cs",
-                                                      new GetHashCodeEqualsOverride(),
-                                                      MetadataReferenceFacade.SystemComponentModelPrimitives);
+            builder.AddPaths("GetHashCodeEqualsOverride.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
+
 #endif
+
     }
 }

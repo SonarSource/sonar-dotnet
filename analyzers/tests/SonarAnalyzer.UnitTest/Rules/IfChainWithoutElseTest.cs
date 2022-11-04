@@ -28,10 +28,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void IfChainWithoutElse_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\IfChainWithoutElse.cs", new CS.IfChainWithoutElse());
+            new VerifierBuilder<CS.IfChainWithoutElse>().AddPaths("IfChainWithoutElse.cs").Verify();
 
         [TestMethod]
         public void IfChainWithoutElse_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\IfChainWithoutElse.vb", new VB.IfChainWithoutElse());
+            new VerifierBuilder<VB.IfChainWithoutElse>().AddPaths("IfChainWithoutElse.vb").Verify();
     }
 }

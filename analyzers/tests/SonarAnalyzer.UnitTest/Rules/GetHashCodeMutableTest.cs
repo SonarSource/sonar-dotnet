@@ -25,32 +25,40 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class GetHashCodeMutableTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<GetHashCodeMutable>();
+
         [TestMethod]
         public void GetHashCodeMutable() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\GetHashCodeMutable.cs", new GetHashCodeMutable());
+            builder.AddPaths("GetHashCodeMutable.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void GetHashCodeMutable_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\GetHashCodeMutable.CSharp9.cs", new GetHashCodeMutable());
+            builder.AddPaths("GetHashCodeMutable.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
+
 #endif
 
         [TestMethod]
         public void GetHashCodeMutable_CodeFix() =>
-            OldVerifier.VerifyCodeFix<GetHashCodeMutableCodeFix>(
-                @"TestCases\GetHashCodeMutable.cs",
-                @"TestCases\GetHashCodeMutable.Fixed.cs",
-                new GetHashCodeMutable());
+            builder.WithCodeFix<GetHashCodeMutableCodeFix>()
+                .AddPaths("GetHashCodeMutable.cs")
+                .WithCodeFixedPaths("GetHashCodeMutable.Fixed.cs")
+                .VerifyCodeFix();
 
         [TestMethod]
         public void GetHashCodeMutable_InvalidCode() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"class
+            builder.AddSnippet(@"class
 {
     int i;
     public override int GetHashCode()
     {
         return i; // we don't report on this
     }
-}", new GetHashCodeMutable(), CompilationErrorBehavior.Ignore);
+}")
+                .WithErrorBehavior(CompilationErrorBehavior.Ignore)
+                .Verify();
     }
 }

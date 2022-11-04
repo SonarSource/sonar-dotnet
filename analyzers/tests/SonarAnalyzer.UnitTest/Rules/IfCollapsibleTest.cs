@@ -28,10 +28,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void IfCollapsible_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\IfCollapsible.cs", new CS.IfCollapsible());
+            new VerifierBuilder<CS.IfCollapsible>().AddPaths("IfCollapsible.cs").Verify();
 
         [TestMethod]
         public void IfCollapsible_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\IfCollapsible.vb", new VB.IfCollapsible());
+            new VerifierBuilder<VB.IfCollapsible>().AddPaths("IfCollapsible.vb").Verify();
     }
 }

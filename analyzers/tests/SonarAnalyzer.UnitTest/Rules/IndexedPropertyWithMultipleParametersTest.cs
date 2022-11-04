@@ -27,6 +27,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void IndexedPropertyWithMultipleParameters() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\IndexedPropertyWithMultipleParameters.vb", new IndexedPropertyWithMultipleParameters());
+            new VerifierBuilder<IndexedPropertyWithMultipleParameters>().AddPaths("IndexedPropertyWithMultipleParameters.vb").Verify();
     }
 }

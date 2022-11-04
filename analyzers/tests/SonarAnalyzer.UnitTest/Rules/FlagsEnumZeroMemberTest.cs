@@ -28,10 +28,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void FlagsEnumZeroMember_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\FlagsEnumZeroMember.cs", new CS.FlagsEnumZeroMember());
+            new VerifierBuilder<CS.FlagsEnumZeroMember>().AddPaths("FlagsEnumZeroMember.cs").Verify();
 
         [TestMethod]
         public void FlagsEnumZeroMember_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\FlagsEnumZeroMember.vb", new VB.FlagsEnumZeroMember());
+            new VerifierBuilder<VB.FlagsEnumZeroMember>().AddPaths("FlagsEnumZeroMember.vb").Verify();
     }
 }

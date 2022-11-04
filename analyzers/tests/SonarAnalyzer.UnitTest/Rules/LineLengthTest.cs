@@ -27,13 +27,15 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class LineLengthTest
     {
         [TestMethod]
-        public void LineLength()
-        {
-            var diagnosticCs = new CS.LineLength { Maximum = 127 };
-            OldVerifier.VerifyAnalyzer(@"TestCases\LineLength.cs", diagnosticCs);
+        public void LineLength_CS() =>
+            new VerifierBuilder().AddAnalyzer(() => new CS.LineLength { Maximum = 127 })
+                .AddPaths("LineLength.cs")
+                .Verify();
 
-            var diagnosticVb = new VB.LineLength { Maximum = 127 };
-            OldVerifier.VerifyAnalyzer(@"TestCases\LineLength.vb", diagnosticVb);
-        }
+        [TestMethod]
+        public void LineLength_VB() =>
+            new VerifierBuilder().AddAnalyzer(() => new VB.LineLength { Maximum = 127 })
+                .AddPaths("LineLength.vb")
+                .Verify();
     }
 }

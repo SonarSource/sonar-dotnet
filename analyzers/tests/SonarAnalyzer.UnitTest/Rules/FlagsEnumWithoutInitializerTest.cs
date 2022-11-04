@@ -28,10 +28,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void FlagsEnumWithoutInitializer_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\FlagsEnumWithoutInitializer.cs", new CS.FlagsEnumWithoutInitializer());
+            new VerifierBuilder<CS.FlagsEnumWithoutInitializer>().AddPaths("FlagsEnumWithoutInitializer.cs").Verify();
 
         [TestMethod]
         public void FlagsEnumWithoutInitializer_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\FlagsEnumWithoutInitializer.vb", new VB.FlagsEnumWithoutInitializer());
+            new VerifierBuilder<VB.FlagsEnumWithoutInitializer>().AddPaths("FlagsEnumWithoutInitializer.vb").Verify();
     }
 }

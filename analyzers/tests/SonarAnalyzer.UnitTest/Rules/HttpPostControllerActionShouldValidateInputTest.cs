@@ -29,8 +29,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("3.0.20105.1")]
         [DataRow(Constants.NuGetLatestVersion)]
         public void HttpPostControllerActionShouldValidateInput(string aspNetMvcVersion) =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\HttpPostControllerActionShouldValidateInput.cs",
-                                    new HttpPostControllerActionShouldValidateInput(),
-                                    NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion));
+            new VerifierBuilder<HttpPostControllerActionShouldValidateInput>()
+                .AddPaths("HttpPostControllerActionShouldValidateInput.cs")
+                .AddReferences(NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion))
+                .Verify();
     }
 }

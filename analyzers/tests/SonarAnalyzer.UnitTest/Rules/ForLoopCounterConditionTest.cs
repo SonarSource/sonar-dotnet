@@ -27,6 +27,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ForLoopCounterCondition() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ForLoopCounterCondition.cs", new ForLoopCounterCondition());
+            new VerifierBuilder<ForLoopCounterCondition>().AddPaths("ForLoopCounterCondition.cs").Verify();
     }
 }
