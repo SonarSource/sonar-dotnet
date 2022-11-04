@@ -98,4 +98,20 @@ void InterpolatedRawStringLiterals(string param)
     Foo(y);
 }
 
+void NewlinesInStringInterpolation(string param)
+{
+    string aux = "Test";
+    param = $"{aux
+        .ToUpper()}"; // Noncompliant@-1
+    param = $"{aux
+        .ToUpper()}";
+    Foo(param);
+
+    string empty = "";
+    string x = $"{empty +
+        empty}"; // Noncompliant@-1 FP (string is still empty, should be compliant)
+    x = "Test";
+    Foo(x);
+}
+
 static void Foo(object x){ }
