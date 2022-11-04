@@ -26,8 +26,8 @@ void NewlinesInStringInterpolation(string someInput)
 {
     const string test1 = "test1";
     const string test2 = "test2";
-    string noncompliant = $"Server = localhost; Database = Test; User = SA; Password ={test1 // Noncompliant
-        + test2}";
-    string noncompliantRawString = $$"""Server = localhost; Database = Test; User = SA; Password ={{test1 // Noncompliant
-        + test2}}""";
+    string noncompliant = $"Server = localhost; Database = Test; User = SA; Password ={test1
+        + test2}"; // Noncompliant@-1
+    string noncompliantRawString = $$"""Server = localhost; Database = Test; User = SA; Password ={{test1
+        + test2}}"""; // Noncompliant@-1
 }

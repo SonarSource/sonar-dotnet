@@ -21,17 +21,17 @@ namespace Tests.Diagnostics
 
         void NewlinesInStringInterpolation()
         { 
-            string NewlinesInterpolatedStringNonCompliant = $"test{RawStringLiteralsNonCompliant + // FN
-                RawStringLiteralsNonCompliant}";
-            string NewlinesInterpolatedStringNonCompliant2 = $"test{RawStringLiteralsCompliant + // Noncompliant
-                RawStringLiteralsCompliant}";
+            string NewlinesInterpolatedStringNonCompliant = $"test{RawStringLiteralsNonCompliant +
+                RawStringLiteralsNonCompliant}"; // FN
+            string NewlinesInterpolatedStringNonCompliant2 = $"test{RawStringLiteralsCompliant +
+                RawStringLiteralsCompliant}"; // Noncompliant@-1
             string NewlinesInterpolatedStringCompliant = $"test{RawStringLiteralsCompliant +
                 RawStringLiteralsCompliant}";
 
-            string NewlinesInterpolatedStringRawNonCompliant = $$"""test{{RawStringLiteralsNonCompliant + // FN
-                RawStringLiteralsNonCompliant}}""";
-            string NewlinesInterpolatedStringRawNonCompliant2 = $$"""test{{RawStringLiteralsCompliant + // Noncompliant
-                RawStringLiteralsCompliant}}""";
+            string NewlinesInterpolatedStringRawNonCompliant = $$"""test{{RawStringLiteralsNonCompliant +
+                RawStringLiteralsNonCompliant}}"""; // FN
+            string NewlinesInterpolatedStringRawNonCompliant2 = $$"""test{{RawStringLiteralsCompliant +
+                RawStringLiteralsCompliant}}"""; // Noncompliant@-1
             string NewlinesInterpolatedStringRawCompliant = $$"""test{{RawStringLiteralsCompliant +
                 RawStringLiteralsCompliant}}""";
         }

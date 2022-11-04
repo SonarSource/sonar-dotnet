@@ -103,8 +103,6 @@ void NewlinesInStringInterpolation(string param)
     string aux = "Test";
     param = $"{aux
         .ToUpper()}"; // Noncompliant@-1
-    param = $$"""{{aux
-        .ToLower()}}"""; // Noncompliant@-1
     param = $"{aux
         .ToUpper()}";
     Foo(param);

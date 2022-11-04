@@ -17,8 +17,8 @@
                 [0]};Database=myDataBase;User Id=myUsername;Password="); // Noncompliant@-1 {{Use a secure password when connecting to this database.}}
             optionsBuilder.UseSqlServer($"Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password={test
                 [1]}"); // Compliant
-            optionsBuilder.UseSqlServer($$"""Server={{test // FN
-                [0]}};Database=myDataBase;User Id=myUsername;Password=""");
+            optionsBuilder.UseSqlServer($$"""Server={{test
+                [0]}};Database=myDataBase;User Id=myUsername;Password="""); // FN
             optionsBuilder.UseSqlServer($$"""Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password={{test
                 [1]}}"""); // Compliant
         }
