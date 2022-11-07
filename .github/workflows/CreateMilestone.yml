@@ -12,3 +12,4 @@ jobs:
       - uses: sonarsource/gh-action-lt-backlog/CreateRspecIssue@v1
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
+          column-id: 4971951
