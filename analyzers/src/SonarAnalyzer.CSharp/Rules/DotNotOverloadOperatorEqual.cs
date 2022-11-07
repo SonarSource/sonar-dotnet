@@ -38,7 +38,8 @@ namespace SonarAnalyzer.Rules.CSharp
             ImmutableArray.Create(
                 KnownType.System_IComparable,
                 KnownType.System_IComparable_T,
-                KnownType.System_IEquatable_T);
+                KnownType.System_IEquatable_T,
+                KnownType.System_Numerics_IEqualityOperators);
 
         private static readonly DiagnosticDescriptor Rule =
             DescriptorFactory.Create(DiagnosticId, MessageFormat);
