@@ -57,7 +57,8 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.OrAssignmentExpression,
             SyntaxKind.LeftShiftAssignmentExpression,
             SyntaxKind.RightShiftAssignmentExpression,
-            SyntaxKindEx.CoalesceAssignmentExpression
+            SyntaxKindEx.CoalesceAssignmentExpression,
+            SyntaxKindEx.UnsignedRightShiftAssignmentExpression
         };
 
         private static readonly ISet<SyntaxKind> PrefixUnaryKinds = new HashSet<SyntaxKind>

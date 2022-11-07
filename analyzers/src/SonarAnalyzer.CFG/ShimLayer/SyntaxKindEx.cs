@@ -27,6 +27,7 @@ namespace StyleCop.Analyzers.Lightup
         public const SyntaxKind RangeExpression = (SyntaxKind)8658;
         public const SyntaxKind ImplicitObjectCreationExpression = (SyntaxKind)8659;
         public const SyntaxKind CoalesceAssignmentExpression = (SyntaxKind)8725;
+        public const SyntaxKind UnsignedRightShiftAssignmentExpression = (SyntaxKind)8726;
         public const SyntaxKind IndexExpression = (SyntaxKind)8741;
         public const SyntaxKind DefaultLiteralExpression = (SyntaxKind)8755;
         public const SyntaxKind LocalFunctionStatement = (SyntaxKind)8830;
