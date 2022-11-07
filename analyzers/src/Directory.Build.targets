@@ -7,18 +7,6 @@
     <BinariesFolder>$(MSBuildThisFileDirectory)\..\packaging\binaries\</BinariesFolder>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Using Include="System" />
-    <Using Include="System.Collections.Generic" />
-    <Using Include="System.Collections.Immutable" />
-    <Using Include="System.Diagnostics" />
-    <Using Include="System.Linq" />
-    <Using Include="System.Threading" />
-    <Using Include="System.Threading.Tasks" />
-    <Using Include="Microsoft.CodeAnalysis" />
-    <Using Include="Microsoft.CodeAnalysis.Diagnostics" />
-  </ItemGroup>
-
   <Target Name="CleanBinaries" AfterTargets="Clean">
     <RemoveDir Directories="$(BinariesFolder)" />
   </Target>
