@@ -31,25 +31,22 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class DotNotOverloadOperatorEqual : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3875";
+        private const string DiagnosticId = "S3875";
         private const string MessageFormat = "Remove this overload of 'operator =='.";
 
         private static readonly ImmutableArray<KnownType> InterfacesRelyingOnOperatorEqualOverload =
             ImmutableArray.Create(
                 KnownType.System_IComparable,
                 KnownType.System_IComparable_T,
-                KnownType.System_IEquatable_T
-            );
+                KnownType.System_IEquatable_T);
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(CheckForIssue, SyntaxKind.OperatorDeclaration);
-        }
 
         private void CheckForIssue(SyntaxNodeAnalysisContext analysisContext)
         {
@@ -65,7 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            if (!(declaration.Parent is ClassDeclarationSyntax classDeclaration))
+            if (declaration.Parent is not ClassDeclarationSyntax classDeclaration)
             {
                 return;
             }
@@ -73,21 +70,22 @@ namespace SonarAnalyzer.Rules.CSharp
             var hasAdditionOrSubstractionOverload =
                 classDeclaration.ChildNodes()
                                 .OfType<OperatorDeclarationSyntax>()
-                                .Any(op => op.OperatorToken.IsKind(SyntaxKind.PlusToken) ||
-                                           op.OperatorToken.IsKind(SyntaxKind.MinusToken));
+                                .Any(op => op.OperatorToken.IsKind(SyntaxKind.PlusToken)
+                                           || op.OperatorToken.IsKind(SyntaxKind.MinusToken));
+
             if (hasAdditionOrSubstractionOverload)
             {
                 return;
             }
 
             var namedTypeSymbol = analysisContext.SemanticModel.GetDeclaredSymbol(classDeclaration);
-            if (namedTypeSymbol == null ||
-                namedTypeSymbol.ImplementsAny(InterfacesRelyingOnOperatorEqualOverload))
+            if (namedTypeSymbol == null
+                || namedTypeSymbol.ImplementsAny(InterfacesRelyingOnOperatorEqualOverload))
             {
                 return;
             }
 
-            analysisContext.ReportIssue(Diagnostic.Create(rule, declaration.OperatorToken.GetLocation()));
+            analysisContext.ReportIssue(Diagnostic.Create(Rule, declaration.OperatorToken.GetLocation()));
         }
     }
 }
