@@ -41,6 +41,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void AssignmentInsideSubExpression_CSharp10() =>
             builder.AddPaths("AssignmentInsideSubExpression.CSharp10.cs").WithTopLevelStatements().WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
+        [TestMethod]
+        public void AssignmentInsideSubExpression_CSharp11() =>
+            builder.AddPaths("AssignmentInsideSubExpression.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+
 #endif
 
     }

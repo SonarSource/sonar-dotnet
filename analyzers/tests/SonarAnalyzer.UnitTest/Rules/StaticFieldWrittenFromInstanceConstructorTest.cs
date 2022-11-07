@@ -41,6 +41,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void StaticFieldWrittenFromInstanceConstructor_CSharp10() =>
             builder.AddPaths("StaticFieldWrittenFromInstanceConstructor.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
+        [TestMethod]
+        public void StaticFieldWrittenFromInstanceConstructor_CSharp11() =>
+            builder.AddPaths("StaticFieldWrittenFromInstanceConstructor.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+
 #endif
 
     }
