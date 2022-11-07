@@ -113,7 +113,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             private readonly ISet<IFieldSymbol> assignedAsReadonly;
             private readonly ISet<IFieldSymbol> excludedFields;
-            private readonly List<FieldTuple> allFields = new ();
+            private readonly List<FieldTuple> allFields = new();
 
             public IEnumerable<FieldTuple> NonCompliantFields
             {
@@ -268,7 +268,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 private static ExpressionSyntax GetTopMemberAccessIfNested(ExpressionSyntax expression, bool isNestedMemberAccess = false)
                 {
                     // If expression is (this.a.b).c, we need to return this.a
-
                     var noParens = expression.RemoveParentheses();
 
                     if (noParens is NameSyntax)
