@@ -24,6 +24,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -52,4 +53,10 @@ public sealed class ToStringShouldNotReturnNull : ToStringShouldNotReturnNullBas
 
     protected override bool IsLocalOrLambda(SyntaxNode node) =>
         node.IsAnyKind(SyntaxKind.ParenthesizedLambdaExpression, SyntaxKind.SimpleLambdaExpression, SyntaxKindEx.LocalFunctionStatement);
+
+    protected override bool IsStatic(SyntaxNode node)
+    {
+        var methodDeclaration = (MethodDeclarationSyntax)node;
+        return methodDeclaration.IsStatic();
+    }
 }

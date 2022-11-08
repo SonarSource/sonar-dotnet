@@ -2,7 +2,16 @@
 {
     static virtual string ToString()
     {
-        return null; // Noncompliant FP
+        if (true)
+        {
+            return null; // Compliant
+        }
+        else
+        {
+            return string.Empty;
+        }
+
+        return null; // Compliant
     }
 }
 
@@ -11,10 +20,10 @@ public interface SomeOtherInterface
     static abstract string ToString();
 }
 
-public class SomeClass: SomeOtherInterface
+public class SomeClass : SomeOtherInterface
 {
     public static string ToString()
     {
-        return null; // Noncompliant FP
+        return null; // Compliant
     }
 }
