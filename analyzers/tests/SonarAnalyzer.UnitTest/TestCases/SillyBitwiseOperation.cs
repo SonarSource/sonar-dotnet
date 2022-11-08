@@ -69,6 +69,18 @@ namespace Tests.Diagnostics
             result = bitMask | + + +zero;  // FN - Unary Operator is not supported
         }
 
+        public void AfterALoop()
+        {
+            var length = 0x80;
+            var bytesRequired = 0;
+            while (length > 0)
+            {
+                length >>= 8;
+                bytesRequired++;
+            }
+            _ = bytesRequired | 0x80; // Noncompliant, FP See: https://github.com/SonarSource/sonar-dotnet/issues/6326
+        }
+
         private static long returnLong()
         {
             return 1L;

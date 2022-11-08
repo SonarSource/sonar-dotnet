@@ -64,6 +64,18 @@ namespace Tests.Diagnostics
             result = bitMask | + + +zero;  // FN - Unary Operator is not supported
         }
 
+        public void AfterALoop()
+        {
+            var length = 0x80;
+            var bytesRequired = 0;
+            while (length > 0)
+            {
+                length >>= 8;
+                bytesRequired++;
+            }
+            _ = 0x80; // Fixed
+        }
+
         private static long returnLong()
         {
             return 1L;
