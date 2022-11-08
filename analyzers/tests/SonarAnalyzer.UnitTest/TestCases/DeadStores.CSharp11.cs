@@ -83,14 +83,14 @@ void InterpolatedRawStringLiterals(string param)
         """;      // Noncompliant@-3
 
     string empty = "";
-    string x = $"""{empty}"""; // Noncompliant FP (string is still empty, should be compliant)
+    string x = $"""{empty}"""; // Noncompliant  string interpolation values are intentionally not evaluated
     x = $"""{empty}Test""";
     Foo(x);
 
     string emptyMultiline = """
 
         """;
-    string q = $"""{emptyMultiline}"""; // Noncompliant FP (string is still empty, should be compliant)
+    string q = $"""{emptyMultiline}"""; // Noncompliant  string interpolation values are intentionally not evaluated
     q = $"""{emptyMultiline}Test""";
     Foo(q);
 
@@ -114,9 +114,20 @@ void NewlinesInStringInterpolation(string param)
 
     string empty = "";
     string x = $"{empty +
-        empty}"; // Noncompliant@-1 FP (string is still empty, should be compliant)
+        empty}"; // Noncompliant@-1 string interpolation values are intentionally not evaluated
     x = "Test";
     Foo(x);
+}
+
+void IgnoredValues()
+{
+    string emptyMultilineRawStringLiteral = $$"""
+
+        """; // Compliant
+    emptyMultilineRawStringLiteral = "other";
+
+    // Variables should be used in order the rule to trigger
+    Console.WriteLine("", emptyMultilineRawStringLiteral);
 }
 
 static void Foo(object x){ }

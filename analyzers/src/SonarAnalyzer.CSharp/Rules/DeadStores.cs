@@ -189,6 +189,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 private bool IsAllowedStringInitialization(ExpressionSyntax expression) =>
                     (expression.IsKind(SyntaxKind.StringLiteralExpression) && AllowedStringValues.Contains(((LiteralExpressionSyntax)expression).Token.ValueText))
+                    || (expression.IsKind(SyntaxKind.InterpolatedStringExpression) && ((InterpolatedStringExpressionSyntax)expression).Contents.Count == 0)
                     || expression.IsStringEmpty(SemanticModel);
             }
         }
