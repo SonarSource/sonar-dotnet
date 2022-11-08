@@ -15,9 +15,9 @@ namespace Net6Poc.ImplementSerializationMethodsCorrectly
     interface IMyInterface
     {
         [OnSerializing]
-        static virtual void OnSerializingStaticVirtual(StreamingContext context) { } // Noncompliant FP
+        static virtual void OnSerializingStaticVirtual(StreamingContext context) { } // Noncompliant
 
         [OnSerializing]
-        static abstract void OnSerializingStaticAbstract(StreamingContext context); // Noncompliant FP
+        static abstract void OnSerializingStaticAbstract(StreamingContext context); // Noncompliant
     }
 }
