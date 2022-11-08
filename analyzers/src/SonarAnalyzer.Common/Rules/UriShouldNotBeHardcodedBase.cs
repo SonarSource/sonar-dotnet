@@ -91,8 +91,8 @@ namespace SonarAnalyzer.Rules
                 c =>
                 {
                     var stringLiteral = (TLiteralExpressionSyntax)c.Node;
-                    if (UriRegex.IsMatch(GetLiteralText(stringLiteral)) &&
-                        IsInCheckedContext(stringLiteral, c.SemanticModel))
+                    if (UriRegex.IsMatch(GetLiteralText(stringLiteral))
+                        && IsInCheckedContext(stringLiteral, c.SemanticModel))
                     {
                         c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], stringLiteral.GetLocation(), AbsoluteUriMessage));
                     }
@@ -109,15 +109,13 @@ namespace SonarAnalyzer.Rules
                     var leftNode = GetLeftNode(addExpression);
                     if (IsPathDelimiter(leftNode) && isInCheckedContext.Value)
                     {
-                        c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], leftNode.GetLocation(),
-                            PathDelimiterMessage));
+                        c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], leftNode.GetLocation(), PathDelimiterMessage));
                     }
 
                     var rightNode = GetRightNode(addExpression);
                     if (IsPathDelimiter(rightNode) && isInCheckedContext.Value)
                     {
-                        c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], rightNode.GetLocation(),
-                            PathDelimiterMessage));
+                        c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], rightNode.GetLocation(), PathDelimiterMessage));
                     }
                 },
                 StringConcatenateExpressions);
@@ -129,22 +127,22 @@ namespace SonarAnalyzer.Rules
             if (argument != null)
             {
                 var argumentIndex = GetArgumentIndex(argument);
-                if (argumentIndex == null ||
-                    argumentIndex < 0)
+                if (argumentIndex is null or < 0)
                 {
                     return false;
                 }
 
-                var constructorOrMethod = argument.Ancestors()
-                    .FirstOrDefault(IsInvocationOrObjectCreation);
+                var constructorOrMethod = argument.Ancestors().FirstOrDefault(IsInvocationOrObjectCreation);
                 var methodSymbol = constructorOrMethod != null
                     ? model.GetSymbolInfo(constructorOrMethod).Symbol as IMethodSymbol
                     : null;
 
-                return methodSymbol != null &&
-                    argumentIndex.Value < methodSymbol.Parameters.Length
-                    && methodSymbol.Parameters[argumentIndex.Value].Name.SplitCamelCaseToWords()
-                        .Any(name => CheckedVariableNames.Contains(name));
+                return methodSymbol != null
+                       && argumentIndex.Value < methodSymbol.Parameters.Length
+                       && methodSymbol.Parameters[argumentIndex.Value]
+                                      .Name
+                                      .SplitCamelCaseToWords()
+                                      .Any(name => CheckedVariableNames.Contains(name));
             }
 
             var variableDeclarator = expression.FirstAncestorOrSelf<TVariableDeclaratorSyntax>();
@@ -154,10 +152,8 @@ namespace SonarAnalyzer.Rules
                         .Any(name => CheckedVariableNames.Contains(name));
         }
 
-        private bool IsPathDelimiter(TExpressionSyntax expression)
-        {
-            var text = GetLiteralText(expression as TLiteralExpressionSyntax);
-            return text != null && PathDelimiterRegex.IsMatch(text);
-        }
+        private bool IsPathDelimiter(TExpressionSyntax expression) =>
+            GetLiteralText(expression as TLiteralExpressionSyntax) is { } text
+            && PathDelimiterRegex.IsMatch(text);
     }
 }
