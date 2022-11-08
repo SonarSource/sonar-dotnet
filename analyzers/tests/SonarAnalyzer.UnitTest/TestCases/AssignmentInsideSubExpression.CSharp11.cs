@@ -12,7 +12,7 @@ namespace Tests.Diagnostics
         {
             int i = 0;
 
-            foo(i >>>= 1); // FN
+            foo(i >>>= 1); // Noncompliant
         }
     }
 }
