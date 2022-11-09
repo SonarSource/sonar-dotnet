@@ -18,4 +18,4 @@ jobs:
       - uses: sonarsource/gh-action-lt-backlog/CreateCardForStandalonePR@v1
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
-          column-id: 4971952
+          column-id: 4971952  # Kanban "In Progress" column
