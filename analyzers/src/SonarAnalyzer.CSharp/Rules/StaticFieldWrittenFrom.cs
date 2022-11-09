@@ -72,7 +72,8 @@ namespace SonarAnalyzer.Rules
                         SyntaxKind.OrAssignmentExpression,
                         SyntaxKind.LeftShiftAssignmentExpression,
                         SyntaxKind.RightShiftAssignmentExpression,
-                        SyntaxKindEx.CoalesceAssignmentExpression);
+                        SyntaxKindEx.CoalesceAssignmentExpression,
+                        SyntaxKindEx.UnsignedRightShiftAssignmentExpression);
 
                     cbc.RegisterSyntaxNodeAction(c =>
                         {
