@@ -1,0 +1,31 @@
+<p>The point of having custom exception types is to convey more information than is available in standard types. But custom exception types must be
+<code>Public</code> for that to work.</p>
+<p>If a method throws a non-public exception, the best you can do on the caller’s side is to <code>Catch</code> the closest <code>Public</code> base
+of the class. However, you lose all the information that the new exception type carries.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Friend Class MyException    ' Noncompliant
+    Inherits Exception
+
+    ' ...
+
+End Class
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Public Class MyException    ' Noncompliant
+    Inherits Exception
+
+    ' ...
+
+End Class
+</pre>
+<h2>Exceptions</h2>
+<p>This rule ignores Exception types that are not derived directly from <code>System.Exception</code>, <code>System.SystemException</code>, or
+<code>System.ApplicationException</code>.</p>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://owasp.org/www-project-top-ten/2017/A10_2017-Insufficient_Logging%2526Monitoring">OWASP Top 10 2017 Category A10</a> -
+  Insufficient Logging &amp; Monitoring </li>
+</ul>
+
