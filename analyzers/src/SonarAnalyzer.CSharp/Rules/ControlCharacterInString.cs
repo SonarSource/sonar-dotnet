@@ -102,7 +102,9 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c => CheckControlCharacter(c, ((LiteralExpressionSyntax)c.Node).Token.Text, 0),
-                SyntaxKind.StringLiteralExpression);
+                SyntaxKind.StringLiteralExpression,
+                SyntaxKindEx.Utf8StringLiteralExpression,
+                SyntaxKindEx.Utf8SingleLineRawStringLiteralToken);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c => CheckControlCharacter(c, ((InterpolatedStringTextSyntax)c.Node).TextToken.Text, 1),
