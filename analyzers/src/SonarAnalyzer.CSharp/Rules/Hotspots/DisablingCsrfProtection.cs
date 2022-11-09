@@ -61,14 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckIgnoreAntiforgeryTokenAttribute(SyntaxNodeAnalysisContext c)
         {
-            var shouldReport = c.Node switch
-            {
-                AttributeSyntax attributeSyntax => attributeSyntax.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_IgnoreAntiforgeryTokenAttribute, c.SemanticModel),
-                ObjectCreationExpressionSyntax objectCreation => objectCreation.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_IgnoreAntiforgeryTokenAttribute, c.SemanticModel),
-                _ => c.Node.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_IgnoreAntiforgeryTokenAttribute, c.SemanticModel)
-            };
-
-            if (shouldReport)
+            if (c.SemanticModel.GetTypeInfo(c.Node).Type.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_IgnoreAntiforgeryTokenAttribute))
             {
                 ReportDiagnostic(c);
             }
