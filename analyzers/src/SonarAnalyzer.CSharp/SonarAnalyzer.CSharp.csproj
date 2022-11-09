@@ -32,6 +32,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Using Include="Microsoft.CodeAnalysis.CSharp" />
+    <Using Include="Microsoft.CodeAnalysis.CSharp.Syntax" />
+    <Using Include="SonarAnalyzer.Common" />
+    <Using Include="SonarAnalyzer.Extensions" />
+    <Using Include="SonarAnalyzer.Helpers" />
+    <Using Include="SonarAnalyzer.Wrappers" />
+    <Using Include="StyleCop.Analyzers.Lightup" />
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Include="$(dotnet_symbolic_execution_windows)" />
 
     <Content Include="$(dotnet_symbolic_execution_windows)">

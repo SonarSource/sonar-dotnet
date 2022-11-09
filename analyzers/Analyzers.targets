@@ -15,6 +15,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Using Include="System" />
+    <Using Include="System.Collections.Generic" />
+    <Using Include="System.Collections.Immutable" />
+    <Using Include="System.Diagnostics" />
+    <Using Include="System.Linq" />
+    <Using Include="System.Threading" />
+    <Using Include="System.Threading.Tasks" />
+    <Using Include="Microsoft.CodeAnalysis" />
+    <Using Include="Microsoft.CodeAnalysis.Diagnostics" />
+  </ItemGroup>
+
+  <ItemGroup>
     <AdditionalFiles Include="$(MSBuildThisFileDirectory)\.sonarlint\sonaranalyzer-dotnet\CSharp\SonarLint.xml" Link="Properties\SonarLint.xml" />
     <Compile Include="$(MSBuildThisFileDirectory)\src\AssemblyInfo.Shared.cs" Link="Properties\AssemblyInfo.Shared.cs" />
   </ItemGroup>
