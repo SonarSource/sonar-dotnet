@@ -6,7 +6,7 @@ public interface IVirtualMethods
     virtual static string Prop { get; set; }
 }
 
-public class VirtualMethods : IVirtualMethods // FN
+public class VirtualMethods : IVirtualMethods // Compliant, classes that implement interfaces cannot be static
 {
 
 }
@@ -16,7 +16,7 @@ public interface IAbstractMethods
     static abstract bool StaticVirtualMembersInInterfaces();
 }
 
-public class AbstractMethods : IAbstractMethods // FN
+public class AbstractMethods : IAbstractMethods // Compliant, classes that implement interfaces cannot be static
 {
     public static bool StaticVirtualMembersInInterfaces() => true;
 }
