@@ -8,6 +8,7 @@
     <owners>SonarSource</owners>
     <license type="expression">LGPL-3.0-only</license>
     <projectUrl>https://www.sonarlint.org/visualstudio/</projectUrl>
+    <repository type="git" url="https://github.com/SonarSource/sonar-dotnet" />
     <icon>images\sonarsource_64.png</icon>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <summary>Roslyn analyzers that spot Bugs, Vulnerabilities and Code Smells in your code. For an even better overall experience, you can use SonarLint for Visual Studio, which is a free extension that can be used standalone or with SonarQube and/or SonarCloud.</summary>

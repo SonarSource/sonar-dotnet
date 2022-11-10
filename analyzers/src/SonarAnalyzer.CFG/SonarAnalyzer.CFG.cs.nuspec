@@ -7,6 +7,7 @@
     <authors>SonarSource</authors>
     <owners>SonarSource</owners>
     <license type="expression">LGPL-3.0-only</license>
+    <repository type="git" url="https://github.com/SonarSource/sonar-dotnet" />
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>CFG library for SonarSource C# plugins</description>
     <language>en-US</language>
