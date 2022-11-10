@@ -54,6 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
             CSharpSyntaxHelper.BuildQualifiedNameSyntax("System", "Data", "Odbc"),
             CSharpSyntaxHelper.BuildQualifiedNameSyntax("System", "Data", "OracleClient"),
             CSharpSyntaxHelper.BuildQualifiedNameSyntax("Microsoft", "Data", "Sqlite"),
+            CSharpSyntaxHelper.BuildQualifiedNameSyntax("Microsoft", "Data", "SqlClient"),
             SyntaxFactory.IdentifierName("Dapper"),
             SyntaxFactory.IdentifierName("NHibernate"),
             SyntaxFactory.IdentifierName("PetaPoco")
