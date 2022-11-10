@@ -182,6 +182,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 AddPatternType(binaryPattern.Left, targetTypes);
                 AddPatternType(binaryPattern.Right, targetTypes);
             }
+            else if (ListPatternSyntaxWrapper.IsInstance(pattern) && (ListPatternSyntaxWrapper)pattern is { } listPattern)
+            {
+                foreach (var subpattern in listPattern.Patterns)
+                {
+                    AddPatternType(subpattern, targetTypes);
+                }
+            }
             else
             {
                 AddPatternType(pattern, targetTypes);
