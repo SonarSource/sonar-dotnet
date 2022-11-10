@@ -7,7 +7,7 @@ namespace Tests.Diagnostics
         public const string RawStringLiteralsNonCompliant = """test"""; // Noncompliant
         public const string RawStringLiteralsCompliant = """test""";
 
-        public const string InterpolatedStringNonCompliant = $"""test{RawStringLiteralsNonCompliant}"""; // FN
+        public const string InterpolatedStringNonCompliant = $"""test{RawStringLiteralsNonCompliant}"""; // Compliant, interpolated text is not considered
         public const string InterpolatedStringNonCompliant2 = $"""test{RawStringLiteralsCompliant}"""; // Noncompliant
         public const string InterpolatedStringCompliant = $"""test{RawStringLiteralsCompliant}""";
 
@@ -19,21 +19,19 @@ namespace Tests.Diagnostics
             ReadOnlySpan<byte> Uft8NonCompliant2 = """test"""u8; // Noncompliant
 
             var x = "hello";
-
-
         }
 
         void NewlinesInStringInterpolation()
         { 
             string NewlinesInterpolatedStringNonCompliant = $"test{RawStringLiteralsNonCompliant +
-                RawStringLiteralsNonCompliant}"; // FN
+                RawStringLiteralsNonCompliant}"; // Compliant, interpolated text is not considered
             string NewlinesInterpolatedStringNonCompliant2 = $"test{RawStringLiteralsCompliant +
                 RawStringLiteralsCompliant}"; // Noncompliant@-1
             string NewlinesInterpolatedStringCompliant = $"test{RawStringLiteralsCompliant +
                 RawStringLiteralsCompliant}";
 
             string NewlinesInterpolatedStringRawNonCompliant = $$"""test{{RawStringLiteralsNonCompliant +
-                RawStringLiteralsNonCompliant}}"""; // FN
+                RawStringLiteralsNonCompliant}}"""; // Compliant, interpolated text is not considered
             string NewlinesInterpolatedStringRawNonCompliant2 = $$"""test{{RawStringLiteralsCompliant +
                 RawStringLiteralsCompliant}}"""; // Noncompliant@-1
             string NewlinesInterpolatedStringRawCompliant = $$"""test{{RawStringLiteralsCompliant +

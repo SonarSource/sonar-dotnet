@@ -34,10 +34,10 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S2479";
         private const string MessageFormat = "Replace the control character at position {0} by its escape sequence '{1}'.";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         private static readonly IDictionary<char, string> EscapedControlCharacters = new Dictionary<char, string>()
         {
@@ -122,7 +122,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (EscapedControlCharacters.TryGetValue(text[charPos], out var escapeSequence))
                 {
-                    c.ReportIssue(Diagnostic.Create(rule, c.Node.GetLocation(), displayPosIncrement + charPos,
+                    c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation(), displayPosIncrement + charPos,
                         escapeSequence));
                     return;
                 }
