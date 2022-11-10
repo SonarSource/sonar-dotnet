@@ -17,8 +17,6 @@ namespace Tests.Diagnostics
             ReadOnlySpan<byte> Utf8Compliant2 = """test"""u8;
             ReadOnlySpan<byte> Utf8NonCompliant = "test"u8; // Noncompliant
             ReadOnlySpan<byte> Uft8NonCompliant2 = """test"""u8; // Noncompliant
-
-            var x = "hello";
         }
 
         void NewlinesInStringInterpolation()
