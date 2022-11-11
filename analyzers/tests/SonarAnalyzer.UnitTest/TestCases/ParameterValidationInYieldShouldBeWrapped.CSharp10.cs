@@ -12,16 +12,6 @@ namespace Tests.Diagnostics
             yield return something;
         }
 
-        public static IEnumerable<int> GetSomething(string value) // FN - this is an edge case that might be worth handling later on
-        {
-            yield return 42;
-
-            if (value == null)
-            {
-                ArgumentNullException.ThrowIfNull(value); // FN sec
-            }
-        }
-
         public static IEnumerable<int> YieldBreak(int a) // FN
         {
             if (a < 0)
@@ -45,31 +35,6 @@ namespace Tests.Diagnostics
         private static IEnumerable<string> FooIterator(string something)
         {
             yield return something;
-        }
-
-        public static IEnumerable<string> WithLocalFunction(string something) // Compliant - usage of local function
-        {
-            ArgumentNullException.ThrowIfNull(something);
-
-            return Iterator(something);
-
-            IEnumerable<string> Iterator(string s)
-            {
-                yield return s;
-            }
-        }
-
-        public static IEnumerable<int> WithFunc(string foo)
-        {
-            Func<string, string> func =
-                f =>
-                {
-                    ArgumentNullException.ThrowIfNull(f);
-
-                    return f + f;
-                };
-
-            yield return foo.Length;
         }
     }
 }
