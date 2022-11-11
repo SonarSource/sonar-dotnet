@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        private static ImmutableDictionary<KnownType, int> mapKnownTypesToIntegerBitSize
+        private static readonly ImmutableDictionary<KnownType, int> MapKnownTypesToIntegerBitSize
             = new Dictionary<KnownType, int>
             {
                 [KnownType.System_Int64] = 64,
@@ -60,10 +60,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 [KnownType.System_SByte] = 32
             }.ToImmutableDictionary();
 
-        private enum Shift { Left, Right };
-
-        protected override void Initialize(SonarAnalysisContext context)
+        private enum Shift
         {
+            Left,
+            Right
+        }
+
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
@@ -97,17 +100,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.MethodDeclaration,
                 SyntaxKind.PropertyDeclaration);
-        }
 
-        private static bool ContainsShiftExpressionWithinTwoLines(HashSet<int> linesWithShiftOperations,
-            int lineNumber)
-        {
-            return linesWithShiftOperations.Contains(lineNumber - 2) ||
-                   linesWithShiftOperations.Contains(lineNumber - 1) ||
-                   linesWithShiftOperations.Contains(lineNumber)     ||
-                   linesWithShiftOperations.Contains(lineNumber + 1) ||
-                   linesWithShiftOperations.Contains(lineNumber + 2);
-        }
+        private static bool ContainsShiftExpressionWithinTwoLines(HashSet<int> linesWithShiftOperations, int lineNumber) =>
+                      linesWithShiftOperations.Contains(lineNumber - 2)
+                   || linesWithShiftOperations.Contains(lineNumber - 1)
+                   || linesWithShiftOperations.Contains(lineNumber)
+                   || linesWithShiftOperations.Contains(lineNumber + 1)
+                   || linesWithShiftOperations.Contains(lineNumber + 2);
 
         private static Tuple<Shift, ExpressionSyntax> GetRhsArgumentOfShiftNode(SyntaxNode node)
         {
@@ -168,17 +167,15 @@ namespace SonarAnalyzer.Rules.CSharp
                 return new ShiftInstance(node);
             }
 
-            var issueDescription = FindProblemDescription(variableBitLength, shiftByCount, tuple.Item1, out bool isLiteralZero);
+            var issueDescription = FindProblemDescription(variableBitLength, shiftByCount, tuple.Item1, out var isLiteralZero);
             return issueDescription == null ? new ShiftInstance(node) : new ShiftInstance(issueDescription, isLiteralZero, node);
         }
 
-        private static int FindTypeSizeOrDefault(ITypeSymbol typeSymbol)
-        {
-            return mapKnownTypesToIntegerBitSize
+        private static int FindTypeSizeOrDefault(ITypeSymbol typeSymbol) =>
+            MapKnownTypesToIntegerBitSize
                 .Where(kv => typeSymbol.Is(kv.Key))
                 .Select(kv => kv.Value)
                 .FirstOrDefault();
-        }
 
         private static string FindProblemDescription(int typeSizeInBits, int shiftBy, Shift shiftDirection, out bool isLiteralZero)
         {
@@ -218,7 +215,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return string.Format(MessageFormat_UseLargerTypeOrPromote, shiftSuggestion);
         }
 
-        private class ShiftInstance
+        private sealed class ShiftInstance
         {
             public Diagnostic Diagnostic { get; }
             public bool IsLiteralZero { get; }
