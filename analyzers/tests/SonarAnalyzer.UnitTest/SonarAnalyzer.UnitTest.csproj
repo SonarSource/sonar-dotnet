@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="altcover" Version="8.3.839" />
+    <PackageReference Include="altcover" Version="8.4.840" />
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
     <PackageReference Include="FluentAssertions.Analyzers" Version="0.17.2">
       <PrivateAssets>all</PrivateAssets>
@@ -42,7 +42,7 @@
       <!-- This package is a dependency of Microsoft.CodeAnalysis.CSharp.Workspaces. It is safe to use since it's compatible with .Net Portable runtime -->
       <NoWarn>NU1701</NoWarn>
     </PackageReference>
-    <PackageReference Include="NuGet.Protocol" Version="6.3.1" />
+    <PackageReference Include="NuGet.Protocol" Version="6.4.0" />
     <!--  Manually upgrade since the version transitively linked (4.0.1) is marked as vulnerable by Mend. -->
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
     <!--  Manually upgrade since the version transitively linked (4.0.1) is marked as vulnerable by Mend. -->
