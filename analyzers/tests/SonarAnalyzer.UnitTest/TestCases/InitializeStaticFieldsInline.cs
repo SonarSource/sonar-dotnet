@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.IO;
+using System.Reflection;
 using System.Resources;
 using System.Globalization;
 
@@ -157,6 +158,17 @@ namespace Tests.Diagnostics
                     Key = "Key B";
                     Value = "Value B";
                     break;
+            }
+        }
+    }
+
+    public static class TestUtil
+    {
+        static TestUtil() // Noncompliant - FP, there are no static fields, see: https://github.com/SonarSource/sonar-dotnet/issues/6343
+        {
+            if (!Directory.Exists(""))
+            {
+                Directory.CreateDirectory("");
             }
         }
     }
