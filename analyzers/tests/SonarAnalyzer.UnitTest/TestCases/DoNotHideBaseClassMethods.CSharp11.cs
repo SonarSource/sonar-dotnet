@@ -9,6 +9,6 @@ namespace MyLibrary
 
     class IMyClass : IMyInterface
     {
-        static string SomeMethod(string s1, object s2) => "With object"; // FN
+        static string SomeMethod(string s1, object s2) => "With object"; // Compliant
     }
 }
