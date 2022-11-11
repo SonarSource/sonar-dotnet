@@ -18,12 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Helpers;
-
 namespace SonarAnalyzer.Rules
 {
     public abstract class MultipleVariableDeclarationBase : SonarDiagnosticAnalyzer
@@ -34,11 +28,10 @@ namespace SonarAnalyzer.Rules
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
     }
 
-    public abstract class MultipleVariableDeclarationBase<TLanguageKindEnum,
-        TFieldDeclarationSyntax, TLocalDeclarationSyntax> : MultipleVariableDeclarationBase
+    public abstract class MultipleVariableDeclarationBase<TLanguageKindEnum, TFieldDeclarationSyntax, TLocalDeclarationSyntax> : MultipleVariableDeclarationBase
         where TLanguageKindEnum : struct
-        where TFieldDeclarationSyntax: SyntaxNode
-        where TLocalDeclarationSyntax: SyntaxNode
+        where TFieldDeclarationSyntax : SyntaxNode
+        where TLocalDeclarationSyntax : SyntaxNode
     {
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
@@ -77,7 +70,7 @@ namespace SonarAnalyzer.Rules
 
         protected abstract IEnumerable<SyntaxToken> GetIdentifiers(TFieldDeclarationSyntax node);
 
-        public abstract TLanguageKindEnum LocalDeclarationKind { get; }
-        public abstract TLanguageKindEnum FieldDeclarationKind { get; }
+        protected abstract TLanguageKindEnum LocalDeclarationKind { get; }
+        protected abstract TLanguageKindEnum FieldDeclarationKind { get; }
     }
 }

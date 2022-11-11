@@ -38,8 +38,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        public override SyntaxKind FieldDeclarationKind => SyntaxKind.FieldDeclaration;
-        public override SyntaxKind LocalDeclarationKind => SyntaxKind.LocalDeclarationStatement;
+        protected override SyntaxKind FieldDeclarationKind => SyntaxKind.FieldDeclaration;
+        protected override SyntaxKind LocalDeclarationKind => SyntaxKind.LocalDeclarationStatement;
 
         protected override IEnumerable<SyntaxToken> GetIdentifiers(FieldDeclarationSyntax node) =>
             node.Declarators.SelectMany(d => d.Names.Select(n => n.Identifier));

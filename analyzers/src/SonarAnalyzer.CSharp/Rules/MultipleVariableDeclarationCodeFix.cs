@@ -18,12 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeFixes;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -32,54 +27,38 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected override SyntaxNode CalculateNewRoot(SyntaxNode root, SyntaxNode node)
         {
-            if (!(node is VariableDeclaratorSyntax declarator))
+            if (node is not VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax declaration })
             {
                 return root;
             }
 
-            if (!(declarator.Parent is VariableDeclarationSyntax declaration))
-            {
-                return root;
-            }
-
-            var newDeclarations = declaration.Variables.Select(variable =>
-                SyntaxFactory.VariableDeclaration(
-                    declaration.Type.WithoutTrailingTrivia(),
-                    SyntaxFactory.SeparatedList(new[] { variable.WithLeadingTrivia(GetLeadingTriviaFor(variable)) })));
+            var newDeclarations = declaration.Variables.Select(variable => CreateNewDeclaration(variable, declaration));
 
             IEnumerable<SyntaxNode> newNodes;
 
-            if (!(declaration.Parent is FieldDeclarationSyntax fieldDeclaration))
+            if (declaration.Parent is not FieldDeclarationSyntax fieldDeclaration)
             {
-                if (!(declaration.Parent is LocalDeclarationStatementSyntax localDeclaration))
+                if (declaration.Parent is not LocalDeclarationStatementSyntax localDeclaration)
                 {
                     return root;
                 }
 
-                newNodes = newDeclarations
-                    .Select(decl =>
-                        SyntaxFactory.LocalDeclarationStatement(
-                            localDeclaration.Modifiers,
-                            decl));
+                newNodes = newDeclarations.Select(decl => SyntaxFactory.LocalDeclarationStatement(localDeclaration.Modifiers, decl));
             }
             else
             {
-                newNodes = newDeclarations
-                    .Select(decl =>
-                        SyntaxFactory.FieldDeclaration(
-                            fieldDeclaration.AttributeLists,
-                            fieldDeclaration.Modifiers,
-                            decl));
+                newNodes = newDeclarations.Select(decl => SyntaxFactory.FieldDeclaration(fieldDeclaration.AttributeLists, fieldDeclaration.Modifiers, decl));
             }
 
             return root.ReplaceNode(declaration.Parent, newNodes);
         }
 
-        private static IEnumerable<SyntaxTrivia> GetLeadingTriviaFor(VariableDeclaratorSyntax variable)
-        {
-            var previousToken = variable.GetFirstToken().GetPreviousToken();
-            return previousToken.TrailingTrivia
-                .Concat(variable.GetLeadingTrivia());
-        }
+        private static VariableDeclarationSyntax CreateNewDeclaration(VariableDeclaratorSyntax variable, VariableDeclarationSyntax declaration) =>
+            SyntaxFactory.VariableDeclaration(
+                declaration.Type.WithoutTrailingTrivia(),
+                SyntaxFactory.SeparatedList(new[] { variable.WithLeadingTrivia(GetLeadingTriviaFor(variable)) }));
+
+        private static IEnumerable<SyntaxTrivia> GetLeadingTriviaFor(VariableDeclaratorSyntax variable) =>
+            variable.GetFirstToken().GetPreviousToken().TrailingTrivia.Concat(variable.GetLeadingTrivia());
     }
 }

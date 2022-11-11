@@ -18,13 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
-using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
@@ -32,13 +27,7 @@ namespace SonarAnalyzer.Rules
     {
         internal const string Title = "Separate declarations";
 
-        public sealed override ImmutableArray<string> FixableDiagnosticIds
-        {
-            get
-            {
-                return ImmutableArray.Create(MultipleVariableDeclarationBase.DiagnosticId);
-            }
-        }
+        public sealed override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(MultipleVariableDeclarationBase.DiagnosticId);
 
         protected sealed override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
