@@ -13,16 +13,6 @@ namespace Tests.Diagnostics
             await Task.Delay(1);
             return something + "foo";
         }
-
-        // See https://github.com/SonarSource/sonar-dotnet/issues/2665
-        public async void OnSomeEvent(object sender, EventArgs args) // Compliant
-        {
-            ArgumentNullException.ThrowIfNull(sender);
-
-            await Task.Yield();
-        }
-
-        public void Foo(object sender, EventArgs args) { }
     }
 
     public class ValidCases
