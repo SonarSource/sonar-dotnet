@@ -99,29 +99,13 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsInInitializerExpression(ExpressionSyntax expression) =>
             expression.Parent.IsAnyKind(SyntaxKindEx.WithInitializerExpression, SyntaxKind.ObjectInitializerExpression);
 
-        private static bool IsCompliantAssignmentInsideExpression(AssignmentExpressionSyntax assignment, ExpressionSyntax topParenthesizedExpression)
-        {
-            var expressionParent = topParenthesizedExpression.Parent.FirstAncestorOrSelf<ExpressionSyntax>();
-            if (expressionParent == null)
-            {
-                // not inside an expression
-                return true;
-            }
-
-            if (IsCompliantCoalesceExpression(expressionParent, assignment))
-            {
-                return true;
-            }
-
-            if (RelationalExpressionKinds.Contains(expressionParent.Kind())
+        private static bool IsCompliantAssignmentInsideExpression(AssignmentExpressionSyntax assignment, ExpressionSyntax topParenthesizedExpression) =>
+            topParenthesizedExpression.Parent.FirstAncestorOrSelf<ExpressionSyntax>() is not { } expressionParent
+            || IsCompliantCoalesceExpression(expressionParent, assignment)
+            || (RelationalExpressionKinds.Contains(expressionParent.Kind())
                 && IsInStatementCondition(expressionParent))
-            {
-                return true;
-            }
-
-            return !IsInInitializerExpression(expressionParent)
-                   && AllowedParentExpressionKinds.Contains(expressionParent.Kind());
-        }
+            || (!IsInInitializerExpression(expressionParent)
+                && AllowedParentExpressionKinds.Contains(expressionParent.Kind()));
 
         private static bool IsCompliantCoalesceExpression(ExpressionSyntax parentExpression, AssignmentExpressionSyntax assignment) =>
             assignment.IsKind(SyntaxKind.SimpleAssignmentExpression)
@@ -174,8 +158,9 @@ namespace SonarAnalyzer.Rules.CSharp
                    || IsInStatementCondition<DoStatementSyntax>(expressionOrParenthesizedParent, expression, s => s?.Condition);
         }
 
-        private static bool IsInStatementCondition<T>(ExpressionSyntax expressionParent, ExpressionSyntax originalExpression,
-            Func<T, ExpressionSyntax> conditionSelector) where T : SyntaxNode
+        private static bool IsInStatementCondition<T>(ExpressionSyntax expressionParent,
+                                                      ExpressionSyntax originalExpression,
+                                                      Func<T, ExpressionSyntax> conditionSelector) where T : SyntaxNode
         {
             var statement = expressionParent.Parent.FirstAncestorOrSelf<T>();
             var condition = conditionSelector(statement);
