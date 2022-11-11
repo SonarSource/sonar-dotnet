@@ -6,7 +6,7 @@ namespace Net6Poc
     {
         static abstract void SomeMethod1();
 
-        static virtual async void SomeVirtualMethod() // FN
+        static virtual async void SomeVirtualMethod() // Compliant (virtual member)
         {
             return;
         }
