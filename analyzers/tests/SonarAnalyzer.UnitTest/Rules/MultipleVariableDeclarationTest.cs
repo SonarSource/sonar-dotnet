@@ -38,6 +38,14 @@ namespace SonarAnalyzer.UnitTest.Rules
             builderVB.AddPaths("MultipleVariableDeclaration.vb").Verify();
 
         [TestMethod]
+        public void MultipleVariableDeclaration_CodeFix_CS_WrongIndentation() =>
+            builderCS.WithCodeFix<CS.MultipleVariableDeclarationCodeFix>()
+                     .AddPaths("MultipleVariableDeclaration.WrongIndentation.cs")
+                     .WithCodeFixedPaths("MultipleVariableDeclaration.WrongIndentation.Fixed.cs")
+                     .WithCodeFixTitle(SonarAnalyzer.Rules.MultipleVariableDeclarationCodeFixBase.Title)
+                     .VerifyCodeFix();
+
+        [TestMethod]
         public void MultipleVariableDeclaration_CodeFix_CS() =>
             builderCS.WithCodeFix<CS.MultipleVariableDeclarationCodeFix>()
                 .AddPaths("MultipleVariableDeclaration.cs")
