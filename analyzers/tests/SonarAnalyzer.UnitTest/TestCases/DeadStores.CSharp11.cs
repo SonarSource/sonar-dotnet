@@ -126,8 +126,8 @@ void IgnoredValues()
         """; // Compliant
     emptyMultilineRawStringLiteral = "other";
 
-    // Variables should be used in order the rule to trigger
-    Console.WriteLine("", emptyMultilineRawStringLiteral);
+    Foo(emptyMultilineRawStringLiteral);
 }
 
+// This method is used because the variables should be used in order for the rule to trigger.
 static void Foo(object x){ }
