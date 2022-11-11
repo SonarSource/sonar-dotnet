@@ -23,25 +23,25 @@ using SonarAnalyzer.Rules.CSharp;
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
-    public class DotNotOverloadOperatorEqualTest
+    public class DoNotOverloadOperatorEqualTest
     {
-        private readonly VerifierBuilder builder = new VerifierBuilder<DotNotOverloadOperatorEqual>();
+        private readonly VerifierBuilder builder = new VerifierBuilder<DoNotOverloadOperatorEqual>();
 
         [TestMethod]
-        public void DotNotOverloadOperatorEqual() =>
-            builder.AddPaths("DotNotOverloadOperatorEqual.cs").Verify();
+        public void DoNotOverloadOperatorEqual() =>
+            builder.AddPaths("DoNotOverloadOperatorEqual.cs").Verify();
 
 #if NET
 
         [TestMethod]
-        public void DotNotOverloadOperatorEqual_CSharp9() =>
-            builder.AddPaths("DotNotOverloadOperatorEqual.CSharp9.cs")
+        public void DoNotOverloadOperatorEqual_CSharp9() =>
+            builder.AddPaths("DoNotOverloadOperatorEqual.CSharp9.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp9)
                 .Verify();
 
         [TestMethod]
-        public void DotNotOverloadOperatorEqual_CSharp11() =>
-            builder.AddPaths("DotNotOverloadOperatorEqual.CSharp11.cs")
+        public void DoNotOverloadOperatorEqual_CSharp11() =>
+            builder.AddPaths("DoNotOverloadOperatorEqual.CSharp11.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
                 .Verify();
 

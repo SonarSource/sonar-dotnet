@@ -29,7 +29,7 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class DotNotOverloadOperatorEqual : SonarDiagnosticAnalyzer
+    public sealed class DoNotOverloadOperatorEqual : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S3875";
         private const string MessageFormat = "Remove this overload of 'operator =='.";
