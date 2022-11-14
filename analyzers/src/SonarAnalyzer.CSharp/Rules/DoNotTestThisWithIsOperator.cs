@@ -86,8 +86,9 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static IList<SecondaryLocation> CollectSecondaryLocations(SwitchStatementSyntax switchStatement) =>
-            switchStatement.Sections.SelectMany(
-                s => s.Labels.Where(label => ContainsTypeCheckInPattern(label) || ContainsTypeCheckInCaseSwitchLabel(label))
+            switchStatement.Sections
+                .SelectMany(section => section.Labels
+                    .Where(label => ContainsTypeCheckInPattern(label) || ContainsTypeCheckInCaseSwitchLabel(label))
                     .Select(label => new SecondaryLocation(TypeMatchLocation(label), string.Empty)))
                 .ToList();
 
