@@ -34,14 +34,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
             }
 
             IEnumerable<SyntaxNode> newNodes;
-
             if (declarator.Parent is not FieldDeclarationSyntax fieldDeclaration)
             {
                 if (declarator.Parent is not LocalDeclarationStatementSyntax localDeclaration)
                 {
                     return root;
                 }
-
                 newNodes = localDeclaration.Declarators.SelectMany(decl =>
                     GetConvertedDeclarators(decl).Select(newDecl => SyntaxFactory.LocalDeclarationStatement(localDeclaration.Modifiers, SyntaxFactory.SeparatedList(new[] { newDecl }))));
             }

@@ -35,14 +35,12 @@ namespace SonarAnalyzer.Rules.CSharp
             var newDeclarations = declaration.Variables.Select(variable => CreateNewDeclaration(variable, declaration));
 
             IEnumerable<SyntaxNode> newNodes;
-
             if (declaration.Parent is not FieldDeclarationSyntax fieldDeclaration)
             {
                 if (declaration.Parent is not LocalDeclarationStatementSyntax localDeclaration)
                 {
                     return root;
                 }
-
                 newNodes = newDeclarations.Select(decl => SyntaxFactory.LocalDeclarationStatement(localDeclaration.Modifiers, decl));
             }
             else
