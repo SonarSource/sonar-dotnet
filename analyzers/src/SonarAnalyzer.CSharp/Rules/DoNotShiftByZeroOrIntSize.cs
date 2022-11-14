@@ -35,10 +35,10 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class DoNotShiftByZeroOrIntSize : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S2183";
-        private const string MessageFormat_UseLargerTypeOrPromote = "Either promote shift target to a larger integer type or shift by {0} instead.";
-        private const string MessageFormat_ShiftTooLarge = "Correct this shift; shift by {0} instead.";
-        private const string MessageFormat_RightShiftTooLarge = "Correct this shift; '{0}' is larger than the type size.";
-        private const string MessageFormat_UselessShift = "Remove this useless shift by {0}.";
+        private const string MessageFormatUseLargerTypeOrPromote = "Either promote shift target to a larger integer type or shift by {0} instead.";
+        private const string MessageFormatShiftTooLarge = "Correct this shift; shift by {0} instead.";
+        private const string MessageFormatRightShiftTooLarge = "Correct this shift; '{0}' is larger than the type size.";
+        private const string MessageFormatUselessShift = "Remove this useless shift by {0}.";
 
         private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, "{0}");
 
@@ -182,7 +182,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (shiftBy == 0)
             {
                 isLiteralZero = true;
-                return string.Format(MessageFormat_UselessShift, 0);
+                return string.Format(MessageFormatUselessShift, 0);
             }
 
             isLiteralZero = false;
@@ -194,7 +194,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (shiftDirection == Shift.Right)
             {
-                return string.Format(MessageFormat_RightShiftTooLarge, shiftBy);
+                return string.Format(MessageFormatRightShiftTooLarge, shiftBy);
             }
 
             var shiftSuggestion = shiftBy % typeSizeInBits;
@@ -202,17 +202,17 @@ namespace SonarAnalyzer.Rules.CSharp
             if (typeSizeInBits == 64)
             {
                 return shiftSuggestion == 0
-                    ? string.Format(MessageFormat_UselessShift, shiftBy)
-                    : string.Format(MessageFormat_ShiftTooLarge, shiftSuggestion);
+                    ? string.Format(MessageFormatUselessShift, shiftBy)
+                    : string.Format(MessageFormatShiftTooLarge, shiftSuggestion);
             }
 
             if (shiftSuggestion == 0)
             {
-                return string.Format(MessageFormat_UseLargerTypeOrPromote,
+                return string.Format(MessageFormatUseLargerTypeOrPromote,
                     "less than " + typeSizeInBits);
             }
 
-            return string.Format(MessageFormat_UseLargerTypeOrPromote, shiftSuggestion);
+            return string.Format(MessageFormatUseLargerTypeOrPromote, shiftSuggestion);
         }
 
         private sealed class ShiftInstance
