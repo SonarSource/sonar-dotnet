@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.Semantics;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
@@ -116,12 +117,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return new Tuple<Shift, ExpressionSyntax>(Shift.Left, binaryExpression.Right);
             }
 
-            if (binaryExpression?.OperatorToken.IsKind(SyntaxKind.GreaterThanGreaterThanToken) ?? false)
-            {
-                return new Tuple<Shift, ExpressionSyntax>(Shift.Right, binaryExpression.Right);
-            }
-
-            if (binaryExpression?.OperatorToken.IsKind(SyntaxKindEx.GreaterThanGreaterThanGreaterThanToken) ?? false)
+            if (binaryExpression?.OperatorToken.IsAnyKind(SyntaxKind.GreaterThanGreaterThanToken, SyntaxKindEx.GreaterThanGreaterThanGreaterThanToken) ?? false)
             {
                 return new Tuple<Shift, ExpressionSyntax>(Shift.Right, binaryExpression.Right);
             }
@@ -132,12 +128,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return new Tuple<Shift, ExpressionSyntax>(Shift.Left, assignmentExpession.Right);
             }
 
-            if (assignmentExpession?.OperatorToken.IsKind(SyntaxKind.GreaterThanGreaterThanEqualsToken) ?? false)
-            {
-                return new Tuple<Shift, ExpressionSyntax>(Shift.Right, assignmentExpession.Right);
-            }
-
-            if (assignmentExpession?.OperatorToken.IsKind(SyntaxKindEx.GreaterThanGreaterThanGreaterThanEqualsToken) ?? false)
+            if (assignmentExpession?.OperatorToken.IsAnyKind(SyntaxKind.GreaterThanGreaterThanEqualsToken, SyntaxKindEx.GreaterThanGreaterThanGreaterThanEqualsToken) ?? false)
             {
                 return new Tuple<Shift, ExpressionSyntax>(Shift.Right, assignmentExpession.Right);
             }
