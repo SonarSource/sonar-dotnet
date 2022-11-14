@@ -48,8 +48,14 @@ namespace Tests.Diagnostics
             var intPlusOne = +1; // Compliant
             intPlusOne = 42;
 
+            var emptyStringLiteral = ""; // Compliant
+            emptyStringLiteral = "other";
+
+            var emptyInterpolatedStringLiteral = $""; // Compliant
+            emptyInterpolatedStringLiteral = "other";
+
             // Variables should be used in order the rule to trigger
-            Console.WriteLine("", stringEmpty, stringNull, boolFalse, boolTrue,
+            Console.WriteLine("", emptyStringLiteral, emptyInterpolatedStringLiteral, stringEmpty, stringNull, boolFalse, boolTrue,
                 objectNull, intZero, intOne, intMinusOne, intPlusOne);
         }
 
