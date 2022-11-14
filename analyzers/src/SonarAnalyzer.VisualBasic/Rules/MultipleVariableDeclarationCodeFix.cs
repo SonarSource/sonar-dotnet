@@ -18,14 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Formatting;
-using Microsoft.CodeAnalysis.VisualBasic;
-using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
@@ -34,39 +28,27 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         protected override SyntaxNode CalculateNewRoot(SyntaxNode root, SyntaxNode node)
         {
-            if (!(node is ModifiedIdentifierSyntax identifier))
-            {
-                return root;
-            }
-
-            if (!(identifier.Parent is VariableDeclaratorSyntax declarator))
+            if (node is not ModifiedIdentifierSyntax { Parent: VariableDeclaratorSyntax declarator })
             {
                 return root;
             }
 
             IEnumerable<SyntaxNode> newNodes;
 
-            if (!(declarator.Parent is FieldDeclarationSyntax fieldDeclaration))
+            if (declarator.Parent is not FieldDeclarationSyntax fieldDeclaration)
             {
-                if (!(declarator.Parent is LocalDeclarationStatementSyntax localDeclaration))
+                if (declarator.Parent is not LocalDeclarationStatementSyntax localDeclaration)
                 {
                     return root;
                 }
 
                 newNodes = localDeclaration.Declarators.SelectMany(decl =>
-                    GetConvertedDeclarators(decl).Select(newDecl =>
-                        SyntaxFactory.LocalDeclarationStatement(
-                            localDeclaration.Modifiers,
-                            SyntaxFactory.SeparatedList(new[] { newDecl }))));
+                    GetConvertedDeclarators(decl).Select(newDecl => SyntaxFactory.LocalDeclarationStatement(localDeclaration.Modifiers, SyntaxFactory.SeparatedList(new[] { newDecl }))));
             }
             else
             {
                 newNodes = fieldDeclaration.Declarators.SelectMany(decl =>
-                    GetConvertedDeclarators(decl).Select(newDecl =>
-                        SyntaxFactory.FieldDeclaration(
-                            fieldDeclaration.AttributeLists,
-                            fieldDeclaration.Modifiers,
-                            SyntaxFactory.SeparatedList(new[] { newDecl }))));
+                    GetConvertedDeclarators(decl).Select(newDecl => SyntaxFactory.FieldDeclaration(fieldDeclaration.AttributeLists, fieldDeclaration.Modifiers, SyntaxFactory.SeparatedList(new[] { newDecl }))));
             }
 
             return root.ReplaceNode(declarator.Parent, newNodes);
@@ -74,13 +56,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         private static IEnumerable<VariableDeclaratorSyntax> GetConvertedDeclarators(VariableDeclaratorSyntax declarator)
         {
-            var declarators = declarator.Names.Select(n =>
-                SyntaxFactory.VariableDeclarator(
-                    SyntaxFactory.SeparatedList(new[] { n }),
-                    declarator.AsClause,
-                    null))
-                    .ToList();
-
+            var declarators = declarator.Names.Select(n => SyntaxFactory.VariableDeclarator(SyntaxFactory.SeparatedList(new[] { n }), declarator.AsClause, null)).ToList();
             if (declarator.Initializer != null)
             {
                 var last = declarators.Last();
@@ -88,9 +64,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 declarators[declarators.Count - 1] = last;
             }
 
-            return declarators.Select(d =>
-                d.WithTrailingTrivia(SyntaxFactory.EndOfLineTrivia(Environment.NewLine))
-                    .WithAdditionalAnnotations(Formatter.Annotation));
+            return declarators.Select(d => d.WithTrailingTrivia(SyntaxFactory.EndOfLineTrivia(Environment.NewLine)).WithAdditionalAnnotations(Formatter.Annotation));
         }
     }
 }
