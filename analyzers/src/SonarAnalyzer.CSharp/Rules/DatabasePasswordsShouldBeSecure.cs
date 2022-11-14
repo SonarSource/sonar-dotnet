@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly Regex Sanitizers = new(@"((integrated[_\s]security)|(trusted[_\s]connection))=(sspi|yes|true)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
-        private readonly MemberDescriptor[] trackedInvocations =
+        private static readonly MemberDescriptor[] TrackedInvocations =
         {
             new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_DbContextOptionsBuilder, "UseSqlServer"),
             new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_SqlServerDbContextOptionsExtensions, "UseSqlServer"),
@@ -60,7 +60,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(TrackerInput input)
         {
             var inv = Language.Tracker.Invocation;
-            inv.Track(input, inv.MatchMethod(trackedInvocations), HasEmptyPasswordArgument());
+            inv.Track(input, inv.MatchMethod(TrackedInvocations), HasEmptyPasswordArgument());
         }
 
         protected override void Initialize(SonarAnalysisContext context)
