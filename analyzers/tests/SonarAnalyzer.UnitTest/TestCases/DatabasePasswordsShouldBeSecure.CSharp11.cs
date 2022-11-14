@@ -13,12 +13,16 @@
             optionsBuilder.UseSqlServer("""Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password="""); // Noncompliant {{Use a secure password when connecting to this database.}}
 
             string[] test = new string[] { "FirstTest", "SecondTest" };
+
+            optionsBuilder.UseSqlServer($"""Server={test[0]};Database=myDataBase;User Id=myUsername;Password="""); // Noncompliant
+
             optionsBuilder.UseSqlServer($"Server={test
                 [0]};Database=myDataBase;User Id=myUsername;Password="); // Noncompliant@-1 {{Use a secure password when connecting to this database.}}
             optionsBuilder.UseSqlServer($"Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password={test
                 [1]}"); // Compliant
+
             optionsBuilder.UseSqlServer($$"""Server={{test
-                [0]}};Database=myDataBase;User Id=myUsername;Password="""); // FN
+                [0]}};Database=myDataBase;User Id=myUsername;Password="""); // Noncompliant@-1
             optionsBuilder.UseSqlServer($$"""Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password={{test
                 [1]}}"""); // Compliant
         }

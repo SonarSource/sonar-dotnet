@@ -20,17 +20,9 @@
 
 using System;
 using System.IO;
-using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using System.Xml.XPath;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.Text;
-using SonarAnalyzer.Common;
-using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Json;
 using SonarAnalyzer.Json.Parsing;
 
@@ -42,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S2115";
         private const string MessageFormat = "Use a secure password when connecting to this database.";
 
-        private static readonly Regex Sanitizers = new Regex(@"((integrated[_\s]security)|(trusted[_\s]connection))=(sspi|yes|true)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private static readonly Regex Sanitizers = new(@"((integrated[_\s]security)|(trusted[_\s]connection))=(sspi|yes|true)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         private readonly MemberDescriptor[] trackedInvocations =
         {
@@ -153,7 +145,10 @@ namespace SonarAnalyzer.Rules.CSharp
         private static ArgumentSyntax ConnectionStringArgument(SeparatedSyntaxList<ArgumentSyntax> argumentList) =>
             // Where(cond).First() is more efficient than First(cond)
             argumentList.Where(a => a.NameColon?.Name.Identifier.ValueText == "connectionString").FirstOrDefault()
-                ?? argumentList.Where(a => a.Expression.IsAnyKind(SyntaxKind.StringLiteralExpression, SyntaxKind.InterpolatedStringExpression, SyntaxKind.AddExpression)).FirstOrDefault()
+                ?? argumentList.Where(a => a.Expression.IsAnyKind(
+                    SyntaxKind.StringLiteralExpression,
+                    SyntaxKind.InterpolatedStringExpression,
+                    SyntaxKind.AddExpression)).FirstOrDefault()
                 ?? argumentList.FirstOrDefault();
 
         // For both interpolated strings and concatenation chain, it's easier to search in the string representation of the tree, rather than doing string searches for each individual
@@ -169,7 +164,9 @@ namespace SonarAnalyzer.Rules.CSharp
             || connectionString.Contains("Password=;")
             // this is an edge case, for a string interpolation or concatenation the toString() will contain the ending "
             // we prefer to keep it like this for the simplicity of the implementation
-            || connectionString.EndsWith("Password=\"");
+            || connectionString.EndsWith("Password=\"")
+            // raw string literals
+            || connectionString.EndsWith("Password=\"\"\"");
 
         private static bool HasSanitizers(string connectionString) =>
             Sanitizers.IsMatch(connectionString);
