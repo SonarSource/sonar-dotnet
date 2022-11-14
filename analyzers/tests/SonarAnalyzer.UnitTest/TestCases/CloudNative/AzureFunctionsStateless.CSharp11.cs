@@ -10,7 +10,7 @@ public static class AzureFunctionsStatic
     [FunctionName("Sample")]
     public static void SideEffects()
     {
-        WithArg(Field >>>= 1);        // FN
+        WithArg(Field >>>= 1); // Noncompliant
     }
 
     private static void WithArg(int value) { }
