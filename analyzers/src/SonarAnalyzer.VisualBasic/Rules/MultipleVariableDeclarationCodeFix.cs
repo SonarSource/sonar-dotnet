@@ -26,35 +26,34 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [ExportCodeFixProvider(LanguageNames.VisualBasic)]
     public sealed class MultipleVariableDeclarationCodeFix : MultipleVariableDeclarationCodeFixBase
     {
-        protected override SyntaxNode CalculateNewRoot(SyntaxNode root, SyntaxNode node)
-        {
-            if (node is not ModifiedIdentifierSyntax { Parent: VariableDeclaratorSyntax declarator })
-            {
-                return root;
-            }
+        protected override SyntaxNode CalculateNewRoot(SyntaxNode root, SyntaxNode node) =>
+            node is ModifiedIdentifierSyntax { Parent: VariableDeclaratorSyntax declarator }
+                ? root.ReplaceNode(declarator.Parent, CreateNewNodes(declarator))
+                : root;
 
-            IEnumerable<SyntaxNode> newNodes;
-            if (declarator.Parent is not FieldDeclarationSyntax fieldDeclaration)
+        private static IEnumerable<SyntaxNode> CreateNewNodes(VariableDeclaratorSyntax declarator) =>
+            declarator.Parent switch
             {
-                if (declarator.Parent is not LocalDeclarationStatementSyntax localDeclaration)
-                {
-                    return root;
-                }
-                newNodes = localDeclaration.Declarators.SelectMany(decl =>
-                    GetConvertedDeclarators(decl).Select(newDecl => SyntaxFactory.LocalDeclarationStatement(localDeclaration.Modifiers, SyntaxFactory.SeparatedList(new[] { newDecl }))));
-            }
-            else
-            {
-                newNodes = fieldDeclaration.Declarators.SelectMany(decl =>
-                    GetConvertedDeclarators(decl).Select(newDecl => SyntaxFactory.FieldDeclaration(fieldDeclaration.AttributeLists, fieldDeclaration.Modifiers, SyntaxFactory.SeparatedList(new[] { newDecl }))));
-            }
+                FieldDeclarationSyntax fieldDeclaration => CreateNewNodes(fieldDeclaration),
+                LocalDeclarationStatementSyntax localDeclaration => CreateNewNodes(localDeclaration),
+                _ => Enumerable.Empty<SyntaxNode>()
+            };
 
-            return root.ReplaceNode(declarator.Parent, newNodes);
-        }
+        private static IEnumerable<SyntaxNode> CreateNewNodes(FieldDeclarationSyntax declaration) =>
+            declaration.Declarators.SelectMany(x => GetConvertedDeclarators(x).Select(declarator => CreateFieldDeclarationSyntax(declaration, declarator)));
+
+        private static IEnumerable<SyntaxNode> CreateNewNodes(LocalDeclarationStatementSyntax declaration) =>
+            declaration.Declarators.SelectMany(x => GetConvertedDeclarators(x).Select(declarator => CreateLocalDeclarationStatementSyntax(declaration, declarator)));
+
+        private static FieldDeclarationSyntax CreateFieldDeclarationSyntax(FieldDeclarationSyntax declaration, VariableDeclaratorSyntax declarator) =>
+            SyntaxFactory.FieldDeclaration(declaration.AttributeLists, declaration.Modifiers, SyntaxFactory.SeparatedList(new[] { declarator }));
+
+        private static LocalDeclarationStatementSyntax CreateLocalDeclarationStatementSyntax(LocalDeclarationStatementSyntax declaration, VariableDeclaratorSyntax declarator) =>
+            SyntaxFactory.LocalDeclarationStatement(declaration.Modifiers, SyntaxFactory.SeparatedList(new[] { declarator }));
 
         private static IEnumerable<VariableDeclaratorSyntax> GetConvertedDeclarators(VariableDeclaratorSyntax declarator)
         {
-            var declarators = declarator.Names.Select(n => SyntaxFactory.VariableDeclarator(SyntaxFactory.SeparatedList(new[] { n }), declarator.AsClause, null)).ToList();
+            var declarators = declarator.Names.Select(x => SyntaxFactory.VariableDeclarator(SyntaxFactory.SeparatedList(new[] { x }), declarator.AsClause, null)).ToList();
             if (declarator.Initializer != null)
             {
                 var last = declarators.Last();
@@ -62,7 +61,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 declarators[declarators.Count - 1] = last;
             }
 
-            return declarators.Select(d => d.WithTrailingTrivia(SyntaxFactory.EndOfLineTrivia(Environment.NewLine)).WithAdditionalAnnotations(Formatter.Annotation));
+            return declarators.Select(x => x.WithTrailingTrivia(SyntaxFactory.EndOfLineTrivia(Environment.NewLine)).WithAdditionalAnnotations(Formatter.Annotation));
         }
     }
 }

@@ -25,30 +25,20 @@ namespace SonarAnalyzer.Rules.CSharp
     [ExportCodeFixProvider(LanguageNames.CSharp)]
     public class MultipleVariableDeclarationCodeFix : MultipleVariableDeclarationCodeFixBase
     {
-        protected override SyntaxNode CalculateNewRoot(SyntaxNode root, SyntaxNode node)
+        protected override SyntaxNode CalculateNewRoot(SyntaxNode root, SyntaxNode node) =>
+            node is VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax declaration }
+                ? root.ReplaceNode(declaration.Parent, CreateNewNodes(declaration))
+                : root;
+
+        private static IEnumerable<SyntaxNode> CreateNewNodes(VariableDeclarationSyntax declaration)
         {
-            if (node is not VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax declaration })
-            {
-                return root;
-            }
-
-            var newDeclarations = declaration.Variables.Select(variable => CreateNewDeclaration(variable, declaration));
-
-            IEnumerable<SyntaxNode> newNodes;
-            if (declaration.Parent is not FieldDeclarationSyntax fieldDeclaration)
-            {
-                if (declaration.Parent is not LocalDeclarationStatementSyntax localDeclaration)
+            var newDeclarations = declaration.Variables.Select(x => CreateNewDeclaration(x, declaration));
+            return declaration.Parent switch
                 {
-                    return root;
-                }
-                newNodes = newDeclarations.Select(decl => SyntaxFactory.LocalDeclarationStatement(localDeclaration.Modifiers, decl));
-            }
-            else
-            {
-                newNodes = newDeclarations.Select(decl => SyntaxFactory.FieldDeclaration(fieldDeclaration.AttributeLists, fieldDeclaration.Modifiers, decl));
-            }
-
-            return root.ReplaceNode(declaration.Parent, newNodes);
+                    FieldDeclarationSyntax fieldDeclaration => newDeclarations.Select(x => SyntaxFactory.FieldDeclaration(fieldDeclaration.AttributeLists, fieldDeclaration.Modifiers, x)),
+                    LocalDeclarationStatementSyntax localDeclaration => newDeclarations.Select(x => SyntaxFactory.LocalDeclarationStatement(localDeclaration.Modifiers, x)),
+                    _ => Enumerable.Empty<SyntaxNode>()
+                };
         }
 
         private static VariableDeclarationSyntax CreateNewDeclaration(VariableDeclaratorSyntax variable, VariableDeclarationSyntax declaration) =>
