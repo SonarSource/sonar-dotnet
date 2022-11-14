@@ -40,10 +40,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void MultipleVariableDeclaration_CodeFix_CS_WrongIndentation() =>
             builderCS.WithCodeFix<CS.MultipleVariableDeclarationCodeFix>()
-                     .AddPaths("MultipleVariableDeclaration.WrongIndentation.cs")
-                     .WithCodeFixedPaths("MultipleVariableDeclaration.WrongIndentation.Fixed.cs")
-                     .WithCodeFixTitle(SonarAnalyzer.Rules.MultipleVariableDeclarationCodeFixBase.Title)
-                     .VerifyCodeFix();
+                .AddPaths("MultipleVariableDeclaration.WrongIndentation.cs")
+                .WithCodeFixedPaths("MultipleVariableDeclaration.WrongIndentation.Fixed.cs")
+                .WithCodeFixTitle(SonarAnalyzer.Rules.MultipleVariableDeclarationCodeFixBase.Title)
+                .VerifyCodeFix();
 
         [TestMethod]
         public void MultipleVariableDeclaration_CodeFix_CS() =>
