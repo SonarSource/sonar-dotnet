@@ -121,6 +121,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 return new Tuple<Shift, ExpressionSyntax>(Shift.Right, binaryExpression.Right);
             }
 
+            if (binaryExpression?.OperatorToken.IsKind(SyntaxKindEx.GreaterThanGreaterThanGreaterThanToken) ?? false)
+            {
+                return new Tuple<Shift, ExpressionSyntax>(Shift.Right, binaryExpression.Right);
+            }
+
             var assignmentExpession = node as AssignmentExpressionSyntax;
             if (assignmentExpession?.OperatorToken.IsKind(SyntaxKind.LessThanLessThanEqualsToken) ?? false)
             {
@@ -128,6 +133,11 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             if (assignmentExpession?.OperatorToken.IsKind(SyntaxKind.GreaterThanGreaterThanEqualsToken) ?? false)
+            {
+                return new Tuple<Shift, ExpressionSyntax>(Shift.Right, assignmentExpession.Right);
+            }
+
+            if (assignmentExpession?.OperatorToken.IsKind(SyntaxKindEx.GreaterThanGreaterThanGreaterThanEqualsToken) ?? false)
             {
                 return new Tuple<Shift, ExpressionSyntax>(Shift.Right, assignmentExpession.Right);
             }
