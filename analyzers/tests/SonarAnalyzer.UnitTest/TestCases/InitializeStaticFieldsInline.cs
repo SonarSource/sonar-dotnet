@@ -164,7 +164,8 @@ namespace Tests.Diagnostics
 
     public static class TestUtil
     {
-        static TestUtil() // Noncompliant - FP, there are no static fields, see: https://github.com/SonarSource/sonar-dotnet/issues/6343
+        // https://github.com/SonarSource/sonar-dotnet/issues/6343
+        static TestUtil() // Noncompliant - FP, there are no static fields
         {
             if (!Directory.Exists(""))
             {
