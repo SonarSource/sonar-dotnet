@@ -20,41 +20,38 @@
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class MultipleVariableDeclarationBase : SonarDiagnosticAnalyzer
+    public struct MultipleVariableDeclarationConstants
     {
         internal const string DiagnosticId = "S1659";
-        protected const string MessageFormat = "Declare '{0}' in a separate statement.";
-
-        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
     }
 
-    public abstract class MultipleVariableDeclarationBase<TLanguageKindEnum, TFieldDeclarationSyntax, TLocalDeclarationSyntax> : MultipleVariableDeclarationBase
-        where TLanguageKindEnum : struct
-        where TFieldDeclarationSyntax : SyntaxNode
-        where TLocalDeclarationSyntax : SyntaxNode
+    public abstract class MultipleVariableDeclarationBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+        where TSyntaxKind : struct
     {
+        protected override string MessageFormat => "Declare '{0}' in a separate statement.";
+
+        protected MultipleVariableDeclarationBase() : base(MultipleVariableDeclarationConstants.DiagnosticId) { }
+
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-                GeneratedCodeRecognizer,
+                Language.GeneratedCodeRecognizer,
                 c =>
                 {
-                    var local = (TLocalDeclarationSyntax)c.Node;
-                    CheckAndReportVariables(GetIdentifiers(local).ToList(), c, SupportedDiagnostics[0]);
+                    CheckAndReportVariables(Language.Syntax.LocalDeclarationIdentifiers(c.Node), c, SupportedDiagnostics[0]);
                 },
-                LocalDeclarationKind);
+                Language.SyntaxKind.LocalDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                GeneratedCodeRecognizer,
+                Language.GeneratedCodeRecognizer,
                 c =>
                 {
-                    var field = (TFieldDeclarationSyntax)c.Node;
-                    CheckAndReportVariables(GetIdentifiers(field).ToList(), c, SupportedDiagnostics[0]);
+                    CheckAndReportVariables(Language.Syntax.FieldDeclarationIdentifiers(c.Node), c, SupportedDiagnostics[0]);
                 },
-                FieldDeclarationKind);
+                Language.SyntaxKind.FieldDeclaration);
         }
 
-        private static void CheckAndReportVariables(IList<SyntaxToken> variables, SyntaxNodeAnalysisContext context, DiagnosticDescriptor rule)
+        private static void CheckAndReportVariables(ICollection<SyntaxToken> variables, SyntaxNodeAnalysisContext context, DiagnosticDescriptor rule)
         {
             if (variables.Count <= 1)
             {
@@ -65,12 +62,5 @@ namespace SonarAnalyzer.Rules
                 context.ReportIssue(Diagnostic.Create(rule, variable.GetLocation(), variable.ValueText));
             }
         }
-
-        protected abstract IEnumerable<SyntaxToken> GetIdentifiers(TLocalDeclarationSyntax node);
-
-        protected abstract IEnumerable<SyntaxToken> GetIdentifiers(TFieldDeclarationSyntax node);
-
-        protected abstract TLanguageKindEnum LocalDeclarationKind { get; }
-        protected abstract TLanguageKindEnum FieldDeclarationKind { get; }
     }
 }

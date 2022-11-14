@@ -18,15 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.Extensions;
-using StyleCop.Analyzers.Lightup;
-
 namespace SonarAnalyzer.Helpers.Facade
 {
     internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
@@ -82,6 +73,12 @@ namespace SonarAnalyzer.Helpers.Facade
 
         public override SyntaxToken? InvocationIdentifier(SyntaxNode invocation) =>
             invocation == null ? null : Cast<InvocationExpressionSyntax>(invocation).GetMethodCallIdentifier();
+
+        public override ImmutableArray<SyntaxToken> LocalDeclarationIdentifiers(SyntaxNode node) =>
+            Cast<LocalDeclarationStatementSyntax>(node).Declaration.Variables.Select(v => v.Identifier).ToImmutableArray();
+
+        public override ImmutableArray<SyntaxToken> FieldDeclarationIdentifiers(SyntaxNode node) =>
+            Cast<FieldDeclarationSyntax>(node).Declaration.Variables.Select(v => v.Identifier).ToImmutableArray();
 
         public override SyntaxNode NodeExpression(SyntaxNode node) =>
             node switch

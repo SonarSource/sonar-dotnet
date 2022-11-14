@@ -18,11 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using Microsoft.CodeAnalysis;
-
 namespace SonarAnalyzer.Helpers.Facade
 {
     public abstract class SyntaxFacade<TSyntaxKind>
@@ -44,6 +39,8 @@ namespace SonarAnalyzer.Helpers.Facade
         public abstract SyntaxNode BinaryExpressionRight(SyntaxNode binaryExpression);
         public abstract IEnumerable<SyntaxNode> EnumMembers(SyntaxNode @enum);
         public abstract SyntaxToken? InvocationIdentifier(SyntaxNode invocation);
+        public abstract ImmutableArray<SyntaxToken> LocalDeclarationIdentifiers(SyntaxNode node);
+        public abstract ImmutableArray<SyntaxToken> FieldDeclarationIdentifiers(SyntaxNode node);
         public abstract SyntaxNode NodeExpression(SyntaxNode node);
         public abstract SyntaxToken? NodeIdentifier(SyntaxNode node);
         public abstract SyntaxNode RemoveConditionalAccess(SyntaxNode node);

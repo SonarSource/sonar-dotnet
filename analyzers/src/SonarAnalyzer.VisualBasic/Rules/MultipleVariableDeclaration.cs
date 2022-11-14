@@ -18,35 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.VisualBasic;
-using Microsoft.CodeAnalysis.VisualBasic.Syntax;
-using SonarAnalyzer.Helpers;
-
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class MultipleVariableDeclaration : MultipleVariableDeclarationBase<SyntaxKind,
-        FieldDeclarationSyntax, LocalDeclarationStatementSyntax>
+    public sealed class MultipleVariableDeclaration : MultipleVariableDeclarationBase<SyntaxKind>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        protected override SyntaxKind FieldDeclarationKind => SyntaxKind.FieldDeclaration;
-        protected override SyntaxKind LocalDeclarationKind => SyntaxKind.LocalDeclarationStatement;
-
-        protected override IEnumerable<SyntaxToken> GetIdentifiers(FieldDeclarationSyntax node) =>
-            node.Declarators.SelectMany(d => d.Names.Select(n => n.Identifier));
-
-        protected override IEnumerable<SyntaxToken> GetIdentifiers(LocalDeclarationStatementSyntax node) =>
-            node.Declarators.SelectMany(d => d.Names.Select(n => n.Identifier));
-
-        protected sealed override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
+        protected override ILanguageFacade<SyntaxKind> Language { get; } = VisualBasicFacade.Instance;
     }
 }

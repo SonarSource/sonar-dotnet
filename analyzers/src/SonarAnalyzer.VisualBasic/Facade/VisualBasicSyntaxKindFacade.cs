@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.VisualBasic;
-
 namespace SonarAnalyzer.Helpers.Facade;
 
 internal sealed class VisualBasicSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind>
@@ -44,6 +42,7 @@ internal sealed class VisualBasicSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind
     public SyntaxKind IdentifierToken => SyntaxKind.IdentifierToken;
     public SyntaxKind InvocationExpression => SyntaxKind.InvocationExpression;
     public SyntaxKind InterpolatedStringExpression => SyntaxKind.InterpolatedStringExpression;
+    public SyntaxKind LocalDeclaration => SyntaxKind.LocalDeclarationStatement;
     public SyntaxKind[] MethodDeclarations => new[] { SyntaxKind.FunctionStatement, SyntaxKind.SubStatement };
     public SyntaxKind[] ObjectCreationExpressions => new[] { SyntaxKind.ObjectCreationExpression };
     public SyntaxKind Parameter => SyntaxKind.Parameter;

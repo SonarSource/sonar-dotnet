@@ -49,6 +49,7 @@ internal sealed class CSharpSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind>
     public SyntaxKind IdentifierToken => SyntaxKind.IdentifierToken;
     public SyntaxKind InvocationExpression => SyntaxKind.InvocationExpression;
     public SyntaxKind InterpolatedStringExpression => SyntaxKind.InterpolatedStringExpression;
+    public SyntaxKind LocalDeclaration => SyntaxKind.LocalDeclarationStatement;
     public SyntaxKind[] MethodDeclarations => new[] { SyntaxKind.MethodDeclaration };
     public SyntaxKind[] ObjectCreationExpressions => new[] { SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression };
     public SyntaxKind Parameter => SyntaxKind.Parameter;

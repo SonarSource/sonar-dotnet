@@ -21,21 +21,8 @@
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class MultipleVariableDeclaration : MultipleVariableDeclarationBase<SyntaxKind, FieldDeclarationSyntax, LocalDeclarationStatementSyntax>
+    public sealed class MultipleVariableDeclaration : MultipleVariableDeclarationBase<SyntaxKind>
     {
-        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
-
-        protected override SyntaxKind FieldDeclarationKind => SyntaxKind.FieldDeclaration;
-        protected override SyntaxKind LocalDeclarationKind => SyntaxKind.LocalDeclarationStatement;
-
-        protected override IEnumerable<SyntaxToken> GetIdentifiers(FieldDeclarationSyntax node) =>
-            node.Declaration.Variables.Select(v => v.Identifier);
-
-        protected override IEnumerable<SyntaxToken> GetIdentifiers(LocalDeclarationStatementSyntax node) =>
-            node.Declaration.Variables.Select(v => v.Identifier);
-
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
+        protected override ILanguageFacade<SyntaxKind> Language { get; } = CSharpFacade.Instance;
     }
 }
