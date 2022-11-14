@@ -4,36 +4,37 @@ namespace Tests.Diagnostics
 {
     class Program
     {
-        public const string RawStringLiteralsNonCompliant = """test"""; // Noncompliant
-        public const string RawStringLiteralsCompliant = """test""";
+        public const string RawCompliant = """test"""; // Compliant
+        public const string RawCompliantWithSpecialCharacter = """test"""; // Compliant, raw string
 
-        public const string InterpolatedStringNonCompliant = $"""test{RawStringLiteralsNonCompliant}"""; // Compliant, interpolated text is not considered
-        public const string InterpolatedStringNonCompliant2 = $"""test{RawStringLiteralsCompliant}"""; // Noncompliant
-        public const string InterpolatedStringCompliant = $"""test{RawStringLiteralsCompliant}""";
+        public const string RawCompliantWithInterpolation = $"""test{RawCompliantWithSpecialCharacter}"""; // Compliant, raw string
+        public const string RawCompliantWithInterpolationAndSpecialCharacter = $"""test{RawCompliant}"""; // Compliant, raw string
 
         void Utf8StringLiterals()
         {
-            ReadOnlySpan<byte> Utf8Compliant = "test"u8;
-            ReadOnlySpan<byte> Utf8Compliant2 = """test"""u8;
-            ReadOnlySpan<byte> Utf8NonCompliant = "test"u8; // Noncompliant
-            ReadOnlySpan<byte> Uft8NonCompliant2 = """test"""u8; // Noncompliant
+            ReadOnlySpan<byte> Utf8Compliant = "test"u8; // Compliant
+            ReadOnlySpan<byte> Utf8CompliantRaw = """test"""u8; // Compliant
+            ReadOnlySpan<byte> Utf8CompliantRawWithSpecialCharacter = """test"""u8; // Compliant, raw string
+            ReadOnlySpan<byte> Utf8CompliantWithSpecialCharacter = @"test"u8; // Compliant, raw string
+
+            ReadOnlySpan<byte> Utf8Noncompliant = "test"u8; // Noncompliant
         }
 
         void NewlinesInStringInterpolation()
-        { 
-            string NewlinesInterpolatedStringNonCompliant = $"test{RawStringLiteralsNonCompliant +
-                RawStringLiteralsNonCompliant}"; // Compliant, interpolated text is not considered
-            string NewlinesInterpolatedStringNonCompliant2 = $"test{RawStringLiteralsCompliant +
-                RawStringLiteralsCompliant}"; // Noncompliant@-1
-            string NewlinesInterpolatedStringCompliant = $"test{RawStringLiteralsCompliant +
-                RawStringLiteralsCompliant}";
+        {
+            string NewlinesInterpolatedStringNonCompliant = $"test{RawCompliantWithSpecialCharacter +
+                RawCompliantWithSpecialCharacter}"; // Compliant, interpolated text is not considered
+            string NewlinesInterpolatedStringNonCompliant2 = $"test{RawCompliant +
+                RawCompliant}"; // Noncompliant@-1
+            string NewlinesInterpolatedStringCompliant = $"test{RawCompliant +
+                RawCompliant}";
 
-            string NewlinesInterpolatedStringRawNonCompliant = $$"""test{{RawStringLiteralsNonCompliant +
-                RawStringLiteralsNonCompliant}}"""; // Compliant, interpolated text is not considered
-            string NewlinesInterpolatedStringRawNonCompliant2 = $$"""test{{RawStringLiteralsCompliant +
-                RawStringLiteralsCompliant}}"""; // Noncompliant@-1
-            string NewlinesInterpolatedStringRawCompliant = $$"""test{{RawStringLiteralsCompliant +
-                RawStringLiteralsCompliant}}""";
+            string NewlinesInterpolatedStringRawNonCompliant = $$"""test{{RawCompliantWithSpecialCharacter +
+                RawCompliantWithSpecialCharacter}}"""; // Compliant, raw string
+            string NewlinesInterpolatedStringRawNonCompliant2 = $$"""test{{RawCompliant +
+                RawCompliant}}"""; // Compliant@-1, raw string
+            string NewlinesInterpolatedStringRawCompliant = $$"""test{{RawCompliant +
+                RawCompliant}}"""; // Compliant, raw string
         }
     }
 }

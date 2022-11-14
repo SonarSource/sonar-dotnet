@@ -113,7 +113,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckControlCharacter(SyntaxNodeAnalysisContext c, string text, int displayPosIncrement)
         {
-            if (IsSimpleVerbatimString(c.Node) || IsInterpolatedVerbatimString(c.Node.Parent))
+            if (IsInescapableString(c.Node) || IsInescepableInterpolatedString(c.Node.Parent) || IsInescapableUtf8String(c.Node))
             {
                 return;
             }
@@ -122,17 +122,24 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (EscapedControlCharacters.TryGetValue(text[charPos], out var escapeSequence))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation(), displayPosIncrement + charPos,
-                        escapeSequence));
+                    c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation(), displayPosIncrement + charPos, escapeSequence));
                     return;
                 }
             }
         }
 
-        private static bool IsSimpleVerbatimString(SyntaxNode syntaxNode) =>
-            syntaxNode.GetFirstToken().IsVerbatimStringLiteral();
+        private static bool IsInescapableString(SyntaxNode syntaxNode) =>
+            syntaxNode.GetFirstToken() is var token
+            && (token.IsVerbatimStringLiteral()
+                || token.IsAnyKind(SyntaxKindEx.SingleLineRawStringLiteralToken, SyntaxKindEx.MultiLineRawStringLiteralToken));
 
-        private static bool IsInterpolatedVerbatimString(SyntaxNode syntaxNode) =>
-            syntaxNode.GetFirstToken().IsKind(SyntaxKind.InterpolatedVerbatimStringStartToken);
+        private static bool IsInescepableInterpolatedString(SyntaxNode syntaxNode) =>
+            syntaxNode.GetFirstToken().IsAnyKind(
+                SyntaxKind.InterpolatedVerbatimStringStartToken,
+                SyntaxKindEx.InterpolatedSingleLineRawStringStartToken,
+                SyntaxKindEx.InterpolatedMultiLineRawStringStartToken);
+
+        private static bool IsInescapableUtf8String(SyntaxNode syntaxNode) =>
+            syntaxNode.GetFirstToken().IsAnyKind(SyntaxKindEx.Utf8SingleLineRawStringLiteralToken, SyntaxKindEx.Utf8MultiLineRawStringLiteralToken);
     }
 }
