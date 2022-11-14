@@ -82,15 +82,11 @@ namespace SonarAnalyzer.Rules.CSharp
                         // Serializable classes are ignored because the serialized fields
                         // cannot be readonly. [Nonserialized] fields could be readonly,
                         // but all fields with attribute are ignored in the ReadonlyFieldCollector.
-                        || declaredSymbol.HasAttribute(KnownType.System_SerializableAttribute))
-                    {
-                        return;
-                    }
-
-                    if (declaredSymbol.DeclaringSyntaxReferences.Length > 1)
-                    {
+                        || declaredSymbol.HasAttribute(KnownType.System_SerializableAttribute)
                         // Partial classes are not processed.
                         // See https://github.com/dotnet/roslyn/issues/3748
+                        || declaredSymbol.DeclaringSyntaxReferences.Length > 1)
+                    {
                         return;
                     }
 
@@ -110,7 +106,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SymbolKind.NamedType);
 
-        private class ReadonlyFieldCollector
+        private sealed class ReadonlyFieldCollector
         {
             private readonly ISet<IFieldSymbol> assignedAsReadonly;
             private readonly ISet<IFieldSymbol> excludedFields;
@@ -147,7 +143,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     || (fieldTuple.Symbol.Type.IsStruct() && fieldTuple.Symbol.Type.SpecialType == SpecialType.None);
             }
 
-            private class PartialTypeDeclarationProcessor
+            private sealed class PartialTypeDeclarationProcessor
             {
                 private readonly TypeDeclarationTuple partialTypeDeclaration;
                 private readonly ReadonlyFieldCollector readonlyFieldCollector;

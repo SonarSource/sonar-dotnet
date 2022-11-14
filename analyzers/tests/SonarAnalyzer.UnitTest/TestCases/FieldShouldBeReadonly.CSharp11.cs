@@ -26,7 +26,6 @@ record PointerTypes
         _nuint = nuint1;
     }
 
-
     private void AssignValue()
     {
         _nint4 = 42;
