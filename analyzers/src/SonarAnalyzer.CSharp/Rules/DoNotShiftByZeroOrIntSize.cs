@@ -40,9 +40,6 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormatRightShiftTooLarge = "Correct this shift; '{0}' is larger than the type size.";
         private const string MessageFormatUselessShift = "Remove this useless shift by {0}.";
 
-        private const int OneLineShift = 1;
-        private const int TwoLineShift = 2;
-
         private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, "{0}");
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
@@ -105,11 +102,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.PropertyDeclaration);
 
         private static bool ContainsShiftExpressionWithinTwoLines(HashSet<int> linesWithShiftOperations, int lineNumber) =>
-                      linesWithShiftOperations.Contains(lineNumber - TwoLineShift)
-                   || linesWithShiftOperations.Contains(lineNumber - OneLineShift)
-                   || linesWithShiftOperations.Contains(lineNumber)
-                   || linesWithShiftOperations.Contains(lineNumber + OneLineShift)
-                   || linesWithShiftOperations.Contains(lineNumber + TwoLineShift);
+            linesWithShiftOperations.Contains(lineNumber - 2)
+            || linesWithShiftOperations.Contains(lineNumber - 1)
+            || linesWithShiftOperations.Contains(lineNumber)
+            || linesWithShiftOperations.Contains(lineNumber + 1)
+            || linesWithShiftOperations.Contains(lineNumber + 2);
 
         private static Tuple<Shift, ExpressionSyntax> GetRhsArgumentOfShiftNode(SyntaxNode node)
         {
