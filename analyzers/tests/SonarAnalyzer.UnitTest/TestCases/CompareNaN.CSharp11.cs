@@ -5,11 +5,11 @@ class CompareNaN
 {
     void ListPattern()
     {
-        object[] numbers = { 1, 2, double.NaN };
+        var baseCase = 2 == double.NaN; // Noncompliant
 
-        if (numbers is [1, 2, double.NaN]) // FN
-        {
-            Console.WriteLine("Test1");
-        }
+        var isPattern2 = 42D is not double.NaN; // Compliant, IsPattern is excluded 
+
+        double[] numbers = new double[] { 1, double.NaN };
+        var listPattern1 = numbers  is [not double.NaN, double.NaN]; // Compliant, IsPattern is excluded 
     }
 }

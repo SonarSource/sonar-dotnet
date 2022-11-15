@@ -1997,7 +1997,18 @@
       <Kind Name="UnderscoreToken"/>
     </Field>
   </Node>
-  <Node Name="DeclarationPatternSyntax" Base="PatternSyntax">
+  <Node Name="ListPatternSyntax" Base="PatternSyntax">
+        <Kind Name="ListPattern" />
+        <Field Name="Designation" Type="VariableDesignationSyntax" Optional="true"/>
+        <Field Name="OpenParenToken" Type="SyntaxToken">
+            <Kind Name="OpenParenToken"/>
+        </Field>
+        <Field Name="Patterns" Type="SeparatedSyntaxList&lt;PatternSyntax&gt;"/>
+        <Field Name="CloseParenToken" Type="SyntaxToken">
+            <Kind Name="CloseParenToken"/>
+        </Field>
+    </Node>
+    <Node Name="DeclarationPatternSyntax" Base="PatternSyntax">
     <Kind Name="DeclarationPattern" />
     <Field Name="Type" Type="TypeSyntax"/>
     <Field Name="Designation" Type="VariableDesignationSyntax">
