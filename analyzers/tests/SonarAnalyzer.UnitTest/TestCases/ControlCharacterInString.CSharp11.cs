@@ -25,19 +25,32 @@ namespace Tests.Diagnostics
 
         void NewlinesInStringInterpolation()
         {
-            string NewlinesInterpolatedStringNonCompliant = $"test{RawCompliantWithSpecialCharacter +
-                RawCompliantWithSpecialCharacter}"; // Compliant, interpolated text is not considered
-            string NewlinesInterpolatedStringNonCompliant2 = $"test{RawCompliant +
-                RawCompliant}"; // Noncompliant@-1
-            string NewlinesInterpolatedStringCompliant = $"test{RawCompliant +
-                RawCompliant}";
+            var compliant = "test"; // Compliant
+            var nonCompliant = "test"; // Noncompliant
 
-            string NewlinesInterpolatedStringRawNonCompliant = $$"""test{{RawCompliantWithSpecialCharacter +
-                RawCompliantWithSpecialCharacter}}"""; // Compliant, raw string
-            string NewlinesInterpolatedStringRawNonCompliant2 = $$"""test{{RawCompliant +
-                RawCompliant}}"""; // Compliant@-1, raw string
-            string NewlinesInterpolatedStringRawCompliant = $$"""test{{RawCompliant +
-                RawCompliant}}"""; // Compliant, raw string
+            var baseCase = $"test{
+                compliant
+                }"; // Compliant
+
+            var interpolatedTextHasControlCharacter = $"test{
+                nonCompliant
+                }"; // Compliant, interpolated text ignored
+
+            var normalTextHasControlCharacter = $"test{
+                nonCompliant
+                }"; // Noncompliant@-2
+
+            var verbatimWithControlCharacter = @$"test{
+                nonCompliant
+                }"; // Compliant, verbatim
+
+            var rawWithControlCharacter = $"""test{
+                nonCompliant
+                }"""; // Compliant, raw
+
+            var rawVerbatimWithControlCharacter = @$"""test{
+                nonCompliant
+                }"""; // Compliant, raw+verbatims
         }
     }
 }
