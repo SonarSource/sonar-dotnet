@@ -138,8 +138,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool TryGetConstantValue(ExpressionSyntax expression, out int value)
         {
             value = 0;
-            return expression?.RemoveParentheses() is LiteralExpressionSyntax literalExpression &&
-                int.TryParse(literalExpression?.Token.ValueText, out value);
+            return expression?.RemoveParentheses() is LiteralExpressionSyntax literalExpression
+                && int.TryParse(literalExpression?.Token.ValueText, out value);
         }
 
         private static ShiftInstance FindShiftInstance(SyntaxNode node, SemanticModel semanticModel)
@@ -150,19 +150,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 return null;
             }
 
-            if (!TryGetConstantValue(tuple.Item2, out var shiftByCount))
-            {
-                return new ShiftInstance(node);
-            }
-
             var typeSymbol = semanticModel.GetTypeInfo(node).ConvertedType;
-            if (typeSymbol == null)
-            {
-                return new ShiftInstance(node);
-            }
-
             var variableBitLength = FindTypeSizeOrDefault(typeSymbol);
-            if (variableBitLength == 0)
+            if (!TryGetConstantValue(tuple.Item2, out var shiftByCount)
+                || typeSymbol == null
+                || variableBitLength == 0)
             {
                 return new ShiftInstance(node);
             }
@@ -221,11 +213,9 @@ namespace SonarAnalyzer.Rules.CSharp
             public bool IsLiteralZero { get; }
             public int Line { get; }
 
-            public ShiftInstance(SyntaxNode node)
-            {
+            public ShiftInstance(SyntaxNode node) =>
                 Line = node.GetLineNumberToReport();
-            }
-
+            
             public ShiftInstance(string description, bool isLieralZero, SyntaxNode node)
                 : this(node)
             {
