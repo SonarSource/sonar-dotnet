@@ -59,7 +59,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.OrAssignmentExpression,
                 SyntaxKind.LeftShiftAssignmentExpression,
                 SyntaxKind.RightShiftAssignmentExpression,
-                SyntaxKindEx.CoalesceAssignmentExpression);
+                SyntaxKindEx.CoalesceAssignmentExpression,
+                SyntaxKindEx.GreaterThanGreaterThanGreaterThanEqualsToken);
 
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {

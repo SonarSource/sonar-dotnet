@@ -18,7 +18,7 @@ namespace Tests.TestCases
 
         public void MovePointVertically(int newX)
         {
-            point.X >>>= 4; // FN
+            point.X >>>= 4; // Noncompliant
         }
     }
 }
