@@ -26,7 +26,6 @@ record PointerTypes
         _nuint = nuint1;
     }
 
-
     private void AssignValue()
     {
         _nint4 = 42;
@@ -49,7 +48,7 @@ record PointerTypes
 
 class Person
 {
-    int somefield = 42; // Noncompliant FP (it is part of an UnsignedRightShiftAssignmentExpression)
+    int somefield = 42; // Compliant
     private readonly Action<int> setter;
 
     Person(int birthYear)
