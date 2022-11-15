@@ -131,4 +131,12 @@ class Noncompliant
             return null; // Noncompliant
         }
     }
+
+    public class SomeClass
+    {
+        public static string ToString()
+        {
+            return null; // Compliant
+        }
+    }
 }
