@@ -13,11 +13,14 @@ namespace Tests.Diagnostics
         void Utf8StringLiterals()
         {
             ReadOnlySpan<byte> Utf8Compliant = "test"u8; // Compliant
-            ReadOnlySpan<byte> Utf8CompliantRaw = """test"""u8; // Compliant
-            ReadOnlySpan<byte> Utf8CompliantRawWithSpecialCharacter = """test"""u8; // Compliant, raw string
-            ReadOnlySpan<byte> Utf8CompliantWithSpecialCharacter = @"test"u8; // Compliant, raw string
-
             ReadOnlySpan<byte> Utf8Noncompliant = "test"u8; // Noncompliant
+            ReadOnlySpan<byte> Utf8VerbatimCompliant = @"test"u8; // Compliant, verbatim utf-8 string
+
+            ReadOnlySpan<byte> Utf8CompliantRaw = """test"""u8; // Compliant, raw string
+            ReadOnlySpan<byte> Utf8CompliantRawWithSpecialCharacter = """test"""u8; // Compliant, raw string
+
+            ReadOnlySpan<byte> Utf8CompliantVerbatimRaw = @"""test"""u8; // Compliant, raw+verbatim string
+            ReadOnlySpan<byte> Utf8CompliantVerbatimRawWithSpecialCharacter = @"""test"""u8; // Compliant, raw+verbatim string
         }
 
         void NewlinesInStringInterpolation()
