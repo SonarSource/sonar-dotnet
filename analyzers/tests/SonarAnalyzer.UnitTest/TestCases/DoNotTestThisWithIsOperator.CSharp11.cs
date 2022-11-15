@@ -7,7 +7,7 @@ namespace Tests.Diagnostics
     {
         public void SomeMethod()
         {
-            var a = this is [1, 2, 3]; // FN
+            var a = this is [1, 2, 3]; // Noncompliant
         }
     }
 }

@@ -98,11 +98,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 .ToList();
 
         private static bool ContainsTypeCheckInCaseSwitchLabel(SwitchLabelSyntax switchLabel) =>
-              switchLabel is CaseSwitchLabelSyntax caseSwitchLabel && caseSwitchLabel.Value.IsKind(SyntaxKind.IdentifierName);
+            switchLabel is CaseSwitchLabelSyntax caseSwitchLabel && caseSwitchLabel.Value.IsKind(SyntaxKind.IdentifierName);
 
         private static bool ContainsTypeCheckInPattern(SyntaxNode syntaxNode) =>
             syntaxNode.DescendantNodesAndSelf()
-                .Any(x => x.IsAnyKind(SyntaxKindEx.ConstantPattern, SyntaxKindEx.DeclarationPattern, SyntaxKindEx.RecursivePattern) && IsTypeCheckOnThis(x));
+                .Any(x => x.IsAnyKind(SyntaxKindEx.ConstantPattern, SyntaxKindEx.DeclarationPattern, SyntaxKindEx.RecursivePattern, SyntaxKindEx.ListPattern) && IsTypeCheckOnThis(x));
 
         private static bool IsTypeCheckOnThis(SyntaxNode pattern)
         {
@@ -117,6 +117,10 @@ namespace SonarAnalyzer.Rules.CSharp
             else if (RecursivePatternSyntaxWrapper.IsInstance(pattern))
             {
                 return ((RecursivePatternSyntaxWrapper)pattern).Type != null && IsNotInSubPattern(pattern);
+            }
+            else if (ListPatternSyntaxWrapper.IsInstance(pattern))
+            {
+                return IsNotInSubPattern(pattern);
             }
             else
             {
