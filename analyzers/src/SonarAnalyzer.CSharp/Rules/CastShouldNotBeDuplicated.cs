@@ -117,11 +117,11 @@ namespace SonarAnalyzer.Rules.CSharp
             return typeExpressionSymbol == null
                 ? new List<Location>()
                 : parentStatement
-                .DescendantNodes()
-                .OfType<CastExpressionSyntax>()
-                .Where(x => x.Type.WithoutTrivia().IsEquivalentTo(castType.WithoutTrivia())
-                            && IsCastOnSameSymbol(x))
-                .Select(x => x.GetLocation()).ToList();
+                    .DescendantNodes()
+                    .OfType<CastExpressionSyntax>()
+                    .Where(x => x.Type.WithoutTrivia().IsEquivalentTo(castType.WithoutTrivia())
+                                && IsCastOnSameSymbol(x))
+                    .Select(x => x.GetLocation()).ToList();
 
             bool IsCastOnSameSymbol(CastExpressionSyntax castExpression) =>
                 Equals(analysisContext.SemanticModel.GetSymbolInfo(castExpression.Expression).Symbol, typeExpressionSymbol);
@@ -170,14 +170,14 @@ namespace SonarAnalyzer.Rules.CSharp
         private static IEnumerable<TypeSyntax> GetTypesFromPattern(SyntaxNode pattern)
         {
             var targetTypes = new HashSet<TypeSyntax>();
-            if (RecursivePatternSyntaxWrapper.IsInstance(pattern) && ((RecursivePatternSyntaxWrapper)pattern is { PositionalPatternClause: { SyntaxNode: { } } } recursivePattern))
+            if (RecursivePatternSyntaxWrapper.IsInstance(pattern) && ((RecursivePatternSyntaxWrapper)pattern is { PositionalPatternClause.SyntaxNode: { } } recursivePattern))
             {
                 foreach (var subpattern in recursivePattern.PositionalPatternClause.Subpatterns)
                 {
                     AddPatternType(subpattern.Pattern, targetTypes);
                 }
             }
-            else if (BinaryPatternSyntaxWrapper.IsInstance(pattern) && (BinaryPatternSyntaxWrapper)pattern is {} binaryPattern)
+            else if (BinaryPatternSyntaxWrapper.IsInstance(pattern) && (BinaryPatternSyntaxWrapper)pattern is { } binaryPattern)
             {
                 AddPatternType(binaryPattern.Left, targetTypes);
                 AddPatternType(binaryPattern.Right, targetTypes);

@@ -2025,12 +2025,12 @@
   <Node Name="ListPatternSyntax" Base="PatternSyntax">
     <Kind Name="ListPattern" />
     <Field Name="Designation" Type="VariableDesignationSyntax" Optional="true"/>
-    <Field Name="OpenParenToken" Type="SyntaxToken">
-      <Kind Name="OpenParenToken"/>
+    <Field Name="OpenBracketToken" Type="SyntaxToken">
+      <Kind Name="OpenBracketToken"/>
     </Field>
     <Field Name="Patterns" Type="SeparatedSyntaxList&lt;PatternSyntax&gt;"/>
-    <Field Name="CloseParenToken" Type="SyntaxToken">
-      <Kind Name="CloseParenToken"/>
+    <Field Name="CloseBracketToken" Type="SyntaxToken">
+      <Kind Name="CloseBracketToken"/>
     </Field>
   </Node>
   <Node Name="PositionalPatternClauseSyntax" Base="CSharpSyntaxNode">

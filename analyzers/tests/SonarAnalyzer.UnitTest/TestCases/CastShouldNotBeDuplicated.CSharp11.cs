@@ -22,6 +22,21 @@ class MyClass
         {
             var ff3 = (object[])anotherNumber; // FN it will probably require a rule redesign
         }
+
+        var anotherFruit = new Fruit();
+        switch (numbers) // Noncompliant, switch statement
+        {
+            case [(Fruit) anotherFruit, 2, 3]: // Secondary
+                return;
+            default:
+                break;
+        }
+
+        var res = Fruit fruit switch // Noncompliant, switch expression
+        {
+            [Fruit fruit, 2, 3] => 1, // Secondary
+            _ => 42
+        };
     }
 }
 
