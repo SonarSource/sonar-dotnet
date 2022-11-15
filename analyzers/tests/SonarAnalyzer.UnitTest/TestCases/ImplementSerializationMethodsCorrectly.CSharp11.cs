@@ -15,9 +15,9 @@ namespace Net6Poc.ImplementSerializationMethodsCorrectly
     interface IMyInterface
     {
         [OnSerializing]
-        static virtual void OnSerializingStaticVirtual(StreamingContext context) { } // Noncompliant FP
+        static virtual void OnSerializingStaticVirtual(StreamingContext context) { } // Noncompliant, interfaces might need special treatment based on https://github.com/SonarSource/sonar-dotnet/issues/6331
 
         [OnSerializing]
-        static abstract void OnSerializingStaticAbstract(StreamingContext context); // Noncompliant FP
+        static abstract void OnSerializingStaticAbstract(StreamingContext context); // Noncompliant, interfaces might need special treatment based on https://github.com/SonarSource/sonar-dotnet/issues/6331
     }
 }
