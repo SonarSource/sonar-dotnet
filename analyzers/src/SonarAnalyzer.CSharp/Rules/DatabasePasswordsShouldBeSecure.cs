@@ -52,10 +52,10 @@ namespace SonarAnalyzer.Rules.CSharp
             new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_NpgsqlDbContextOptionsBuilderExtensions, "UseNpgsql"),
         };
 
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
         public DatabasePasswordsShouldBeSecure()
             : base(AnalyzerConfiguration.AlwaysEnabled, DiagnosticId, MessageFormat) { }
-
-        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
         protected override void Initialize(TrackerInput input)
         {
