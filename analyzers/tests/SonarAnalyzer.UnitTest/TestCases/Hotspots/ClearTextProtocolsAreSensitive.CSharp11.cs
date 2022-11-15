@@ -13,11 +13,11 @@ void RawStringLiterals()
 
 void Utf8StringLiterals()
 {
-    var b = "http://foo.com"u8; // FN
-    var c = """http://foo.com"""u8; // FN
+    var b = "http://foo.com"u8; // Noncompliant
+    var c = """http://foo.com"""u8; // Noncompliant
     var d = """
     http://foo.com
-    """u8; // FN
+    """u8; // Noncompliant@-2
 }
 
 void NewlinesInStringInterpolation()

@@ -104,10 +104,12 @@ namespace SonarAnalyzer.Rules.CSharp
         public ClearTextProtocolsAreSensitive(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration)
         {
             const string allSubdomainsPattern = @"([^/?#]+\.)?";
+
             var domainsList = LocalhostAddresses
                 .Concat(CommonlyUsedXmlDomains)
                 .Select(Regex.Escape)
                 .Concat(CommonlyUsedExampleDomains.Select(x => allSubdomainsPattern + Regex.Escape(x)));
+
             var validServerPattern = domainsList.JoinStr("|");
 
             httpRegex = CompileRegex(@$"^http:\/\/(?!{validServerPattern}).");
@@ -125,7 +127,12 @@ namespace SonarAnalyzer.Rules.CSharp
                     return;
                 }
 
-                context.RegisterSyntaxNodeActionInNonGenerated(VisitStringExpressions, SyntaxKind.StringLiteralExpression, SyntaxKind.InterpolatedStringExpression);
+                context.RegisterSyntaxNodeActionInNonGenerated(
+                    VisitStringExpressions,
+                    SyntaxKind.StringLiteralExpression,
+                    SyntaxKind.InterpolatedStringExpression,
+                    SyntaxKindEx.Utf8StringLiteralExpression);
+
                 context.RegisterSyntaxNodeActionInNonGenerated(VisitObjectCreation, SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
                 context.RegisterSyntaxNodeActionInNonGenerated(VisitInvocationExpression, SyntaxKind.InvocationExpression);
                 context.RegisterSyntaxNodeActionInNonGenerated(VisitAssignments, SyntaxKind.SimpleAssignmentExpression);
