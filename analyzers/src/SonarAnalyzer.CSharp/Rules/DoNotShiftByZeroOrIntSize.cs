@@ -150,11 +150,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 return null;
             }
 
-            var typeSymbol = semanticModel.GetTypeInfo(node).ConvertedType;
-            var variableBitLength = FindTypeSizeOrDefault(typeSymbol);
             if (!TryGetConstantValue(tuple.Item2, out var shiftByCount)
-                || typeSymbol == null
-                || variableBitLength == 0)
+                || semanticModel.GetTypeInfo(node).ConvertedType is not { } typeSymbol
+                || (FindTypeSizeOrDefault(typeSymbol) is var variableBitLength && variableBitLength == 0))
             {
                 return new ShiftInstance(node);
             }
