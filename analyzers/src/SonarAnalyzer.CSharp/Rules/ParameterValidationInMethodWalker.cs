@@ -44,33 +44,27 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public IEnumerable<Location> ArgumentExceptionLocations => argumentExceptionLocations;
 
-        public ParameterValidationInMethodWalker(SemanticModel semanticModel)
-        {
-            this.semanticModel = semanticModel;
-        }
+        public ParameterValidationInMethodWalker(SemanticModel semanticModel) => this.semanticModel = semanticModel;
 
         public override void Visit(SyntaxNode node)
         {
-            if (this.keepWalking &&
-                !node.IsAnyKind(SubMethodEquivalents))  // Don't explore deeper if this node is equivalent to a method declaration
+            if (keepWalking
+                && !node.IsAnyKind(SubMethodEquivalents))  // Don't explore deeper if this node is equivalent to a method declaration
             {
                 base.Visit(node);
             }
         }
 
-        public override void VisitAwaitExpression(AwaitExpressionSyntax node)
-        {
-            this.keepWalking = false;
-        }
+        public override void VisitAwaitExpression(AwaitExpressionSyntax node) => keepWalking = false;
 
         public override void VisitThrowStatement(ThrowStatementSyntax node)
         {
             // When throw is like `throw new XXX` where XXX derives from ArgumentException, save location
-            if (node.Expression is ObjectCreationExpressionSyntax oces &&
-                this.semanticModel.GetSymbolInfo(oces.Type).Symbol?.OriginalDefinition is ITypeSymbol typeSymbol &&
-                typeSymbol.DerivesFrom(KnownType.System_ArgumentException))
+            if (node.Expression is ObjectCreationExpressionSyntax oces
+                && semanticModel.GetSymbolInfo(oces.Type).Symbol?.OriginalDefinition is ITypeSymbol typeSymbol
+                && typeSymbol.DerivesFrom(KnownType.System_ArgumentException))
             {
-                this.argumentExceptionLocations.Add(oces.GetLocation());
+                argumentExceptionLocations.Add(oces.GetLocation());
             }
 
             base.VisitThrowStatement(node);
