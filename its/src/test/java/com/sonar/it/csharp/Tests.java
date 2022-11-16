@@ -76,6 +76,7 @@ public class Tests {
 
   @ClassRule
   public static final Orchestrator ORCHESTRATOR = Orchestrator.builderEnv()
+    .useDefaultAdminCredentialsForBuilds(true)
     .setSonarVersion(TestUtils.replaceLtsVersion(System.getProperty("sonar.runtimeVersion", "DEV")))
     .addPlugin(TestUtils.getPluginLocation("sonar-csharp-plugin")) // Do not add VB.NET here, use shared project instead
     .setEdition(Edition.DEVELOPER)
@@ -102,7 +103,8 @@ public class Tests {
     TestUtils.deleteLocalCache();
   }
 
-  static BuildResult analyzeProjectWithSubProject(TemporaryFolder temp, String projectName, String subProjectName, @Nullable String profileKey, String... keyValues) throws IOException {
+  static BuildResult analyzeProjectWithSubProject(TemporaryFolder temp, String projectName, String subProjectName, @Nullable String profileKey, String... keyValues)
+    throws IOException {
     Path projectDir = Tests.projectDir(temp, projectName);
 
     ScannerForMSBuild beginStep = TestUtils.createBeginStep(projectName, projectDir, subProjectName)
