@@ -84,44 +84,24 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static IList<SecondaryLocation> CollectSecondaryLocations(SwitchStatementSyntax switchStatement)
-        {
-            var secondaryLocations = new List<SecondaryLocation>();
-            foreach (var section in switchStatement.Sections)
-            {
-                foreach (var label in section.Labels)
-                {
-                    if (ContainsTypeCheckInPattern(label)
-                        || ContainsTypeCheckInCaseSwitchLabel(label))
-                    {
-                        secondaryLocations.Add(new SecondaryLocation(TypeMatchLocation(label), string.Empty));
-                    }
-                }
-            }
+        private static IList<SecondaryLocation> CollectSecondaryLocations(SwitchStatementSyntax switchStatement) =>
+            switchStatement.Sections
+                .SelectMany(section => section.Labels
+                    .Where(label => ContainsTypeCheckInPattern(label) || ContainsTypeCheckInCaseSwitchLabel(label))
+                    .Select(label => new SecondaryLocation(TypeMatchLocation(label), string.Empty)))
+                .ToList();
 
-            return secondaryLocations;
-        }
-
-        private static IList<SecondaryLocation> CollectSecondaryLocations(SwitchExpressionSyntaxWrapper switchExpression)
-        {
-            var secondaryLocations = new List<SecondaryLocation>();
-            foreach (var arm in switchExpression.Arms)
-            {
-                if (ContainsTypeCheckInPattern(arm.Pattern.SyntaxNode))
-                {
-                    secondaryLocations.Add(new SecondaryLocation(arm.Pattern.SyntaxNode.GetLocation(), string.Empty));
-                }
-            }
-
-            return secondaryLocations;
-        }
+        private static IList<SecondaryLocation> CollectSecondaryLocations(SwitchExpressionSyntaxWrapper switchExpression) =>
+            switchExpression.Arms.Where(arm => ContainsTypeCheckInPattern(arm.Pattern.SyntaxNode))
+                .Select(arm => new SecondaryLocation(arm.Pattern.SyntaxNode.GetLocation(), string.Empty))
+                .ToList();
 
         private static bool ContainsTypeCheckInCaseSwitchLabel(SwitchLabelSyntax switchLabel) =>
-              switchLabel is CaseSwitchLabelSyntax caseSwitchLabel && caseSwitchLabel.Value.IsKind(SyntaxKind.IdentifierName);
+            switchLabel is CaseSwitchLabelSyntax caseSwitchLabel && caseSwitchLabel.Value.IsKind(SyntaxKind.IdentifierName);
 
         private static bool ContainsTypeCheckInPattern(SyntaxNode syntaxNode) =>
             syntaxNode.DescendantNodesAndSelf()
-                      .Any(x => x.IsAnyKind(SyntaxKindEx.ConstantPattern, SyntaxKindEx.DeclarationPattern, SyntaxKindEx.RecursivePattern) && IsTypeCheckOnThis(x));
+                .Any(x => x.IsAnyKind(SyntaxKindEx.ConstantPattern, SyntaxKindEx.DeclarationPattern, SyntaxKindEx.RecursivePattern, SyntaxKindEx.ListPattern) && IsTypeCheckOnThis(x));
 
         private static bool IsTypeCheckOnThis(SyntaxNode pattern)
         {
@@ -136,6 +116,10 @@ namespace SonarAnalyzer.Rules.CSharp
             else if (RecursivePatternSyntaxWrapper.IsInstance(pattern))
             {
                 return ((RecursivePatternSyntaxWrapper)pattern).Type != null && IsNotInSubPattern(pattern);
+            }
+            else if (ListPatternSyntaxWrapper.IsInstance(pattern))
+            {
+                return IsNotInSubPattern(pattern);
             }
             else
             {
