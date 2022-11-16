@@ -2022,6 +2022,17 @@
       <Kind Name="DiscardDesignation"/>
     </Field>
   </Node>
+  <Node Name="ListPatternSyntax" Base="PatternSyntax">
+    <Kind Name="ListPattern" />
+    <Field Name="Designation" Type="VariableDesignationSyntax" Optional="true"/>
+    <Field Name="OpenBracketToken" Type="SyntaxToken">
+      <Kind Name="OpenBracketToken"/>
+    </Field>
+    <Field Name="Patterns" Type="SeparatedSyntaxList&lt;PatternSyntax&gt;"/>
+    <Field Name="CloseBracketToken" Type="SyntaxToken">
+      <Kind Name="CloseBracketToken"/>
+    </Field>
+  </Node>
   <Node Name="PositionalPatternClauseSyntax" Base="CSharpSyntaxNode">
     <Kind Name="PositionalPatternClause"/>
     <Field Name="OpenParenToken" Type="SyntaxToken">

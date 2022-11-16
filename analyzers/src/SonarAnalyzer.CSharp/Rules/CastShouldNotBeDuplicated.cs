@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CasePatternSwitchLabel(SyntaxNodeAnalysisContext analysisContext)
         {
             var casePatternSwitch = (CasePatternSwitchLabelSyntaxWrapper)analysisContext.Node;
-            if (!(casePatternSwitch.SyntaxNode.GetFirstNonParenthesizedParent().GetFirstNonParenthesizedParent() is SwitchStatementSyntax parentSwitchStatement))
+            if (casePatternSwitch.SyntaxNode.GetFirstNonParenthesizedParent().GetFirstNonParenthesizedParent() is not SwitchStatementSyntax parentSwitchStatement)
             {
                 return;
             }
@@ -85,7 +85,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void IsPatternExpression(SyntaxNodeAnalysisContext analysisContext)
         {
             var isPatternExpression = (IsPatternExpressionSyntaxWrapper)analysisContext.Node;
-            if (!(isPatternExpression.SyntaxNode.GetFirstNonParenthesizedParent() is IfStatementSyntax parentIfStatement))
+            if (isPatternExpression.SyntaxNode.GetFirstNonParenthesizedParent() is not IfStatementSyntax parentIfStatement)
             {
                 return;
             }
@@ -99,9 +99,9 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var isExpression = (BinaryExpressionSyntax)analysisContext.Node;
 
-            if (!(isExpression.Right is TypeSyntax castType)
-                || !(isExpression.GetFirstNonParenthesizedParent() is IfStatementSyntax parentIfStatement)
-                || !(analysisContext.SemanticModel.GetSymbolInfo(castType).Symbol is INamedTypeSymbol castTypeSymbol)
+            if (isExpression.Right is not TypeSyntax castType
+                || isExpression.GetFirstNonParenthesizedParent() is not IfStatementSyntax parentIfStatement
+                || analysisContext.SemanticModel.GetSymbolInfo(castType).Symbol is not INamedTypeSymbol castTypeSymbol
                 || castTypeSymbol.TypeKind == TypeKind.Struct)
             {
                 return;
@@ -114,17 +114,14 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var typeExpressionSymbol = analysisContext.SemanticModel.GetSymbolInfo(typedVariable).Symbol
                                        ?? analysisContext.SemanticModel.GetDeclaredSymbol(typedVariable);
-            if (typeExpressionSymbol == null)
-            {
-                return new List<Location>();
-            }
-
-            return parentStatement
-                .DescendantNodes()
-                .OfType<CastExpressionSyntax>()
-                .Where(x => x.Type.WithoutTrivia().IsEquivalentTo(castType.WithoutTrivia())
-                            && IsCastOnSameSymbol(x))
-                .Select(x => x.GetLocation()).ToList();
+            return typeExpressionSymbol == null
+                ? new List<Location>()
+                : parentStatement
+                    .DescendantNodes()
+                    .OfType<CastExpressionSyntax>()
+                    .Where(x => x.Type.WithoutTrivia().IsEquivalentTo(castType.WithoutTrivia())
+                                && IsCastOnSameSymbol(x))
+                    .Select(x => x.GetLocation()).ToList();
 
             bool IsCastOnSameSymbol(CastExpressionSyntax castExpression) =>
                 Equals(analysisContext.SemanticModel.GetSymbolInfo(castExpression.Expression).Symbol, typeExpressionSymbol);
@@ -149,7 +146,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         rightPartsToCheck.Add(declarationPattern.Designation.SyntaxNode, new Tuple<TypeSyntax, Location>(declarationPattern.Type, subPattern.GetLocation()));
                     }
-                    else if ((RecursivePatternSyntaxWrapper)subPattern is {Designation: {SyntaxNode: { }}, Type: { }} recursivePattern)
+                    else if ((RecursivePatternSyntaxWrapper)subPattern is { Designation.SyntaxNode: { }, Type: { }} recursivePattern)
                     {
                         rightPartsToCheck.Add(recursivePattern.Designation.SyntaxNode, new Tuple<TypeSyntax, Location>(recursivePattern.Type, subPattern.GetLocation()));
                     }
@@ -173,17 +170,24 @@ namespace SonarAnalyzer.Rules.CSharp
         private static IEnumerable<TypeSyntax> GetTypesFromPattern(SyntaxNode pattern)
         {
             var targetTypes = new HashSet<TypeSyntax>();
-            if (RecursivePatternSyntaxWrapper.IsInstance(pattern) && ((RecursivePatternSyntaxWrapper)pattern is {PositionalPatternClause: {SyntaxNode: {}}} recursivePattern))
+            if (RecursivePatternSyntaxWrapper.IsInstance(pattern) && ((RecursivePatternSyntaxWrapper)pattern is { PositionalPatternClause.SyntaxNode: { } } recursivePattern))
             {
                 foreach (var subpattern in recursivePattern.PositionalPatternClause.Subpatterns)
                 {
                     AddPatternType(subpattern.Pattern, targetTypes);
                 }
             }
-            else if (BinaryPatternSyntaxWrapper.IsInstance(pattern) && (BinaryPatternSyntaxWrapper)pattern is {} binaryPattern)
+            else if (BinaryPatternSyntaxWrapper.IsInstance(pattern) && (BinaryPatternSyntaxWrapper)pattern is { } binaryPattern)
             {
                 AddPatternType(binaryPattern.Left, targetTypes);
                 AddPatternType(binaryPattern.Right, targetTypes);
+            }
+            else if (ListPatternSyntaxWrapper.IsInstance(pattern) && (ListPatternSyntaxWrapper)pattern is { } listPattern)
+            {
+                foreach (var subpattern in listPattern.Patterns)
+                {
+                    AddPatternType(subpattern, targetTypes);
+                }
             }
             else
             {
