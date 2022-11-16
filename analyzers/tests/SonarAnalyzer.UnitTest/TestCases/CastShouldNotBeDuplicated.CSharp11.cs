@@ -26,3 +26,33 @@ class MyClass
 }
 
 class Fruit { }
+
+class SomeClass
+{
+    private object obj;
+
+    public void SwitchStatement(object[] array)
+    {
+        switch (array)
+        {
+            case [Fruit m, 2]: // Secondary
+//                ^^^^^^^
+                obj = (Fruit)m; // Noncompliant
+//                    ^^^^^^^^
+                break;
+            default:
+                obj = null;
+                break;
+        }
+    }
+
+    public void SwitchExpression(object[] array) =>
+        obj = array switch 
+        {
+            [Fruit m, 2, 2] => // Secondary
+//           ^^^^^^^
+                (Fruit)m, // Noncompliant
+//              ^^^^^^^^
+            _ => null
+        };
+}
