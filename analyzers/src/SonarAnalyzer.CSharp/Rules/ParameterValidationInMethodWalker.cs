@@ -60,7 +60,8 @@ namespace SonarAnalyzer.Rules.CSharp
         public override void VisitThrowStatement(ThrowStatementSyntax node)
         {
             // When throw is like `throw new XXX` where XXX derives from ArgumentException, save location
-            if (semanticModel.GetTypeInfo(node.Expression) is TypeInfo typeInfo
+            if (node.Expression != null
+                && semanticModel.GetTypeInfo(node.Expression) is TypeInfo typeInfo
                 && typeInfo.Type.DerivesFrom(KnownType.System_ArgumentException))
             {
                 argumentExceptionLocations.Add(node.Expression.GetLocation());
