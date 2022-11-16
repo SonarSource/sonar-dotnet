@@ -18,9 +18,6 @@ namespace Tests.Diagnostics
 
             ReadOnlySpan<byte> Utf8CompliantRaw = """test"""u8; // Compliant, raw string
             ReadOnlySpan<byte> Utf8CompliantRawWithSpecialCharacter = """test"""u8; // Compliant, raw string
-
-            ReadOnlySpan<byte> Utf8CompliantVerbatimRaw = @"""test"""u8; // Compliant, raw+verbatim string
-            ReadOnlySpan<byte> Utf8CompliantVerbatimRawWithSpecialCharacter = @"""test"""u8; // Compliant, raw+verbatim string
         }
 
         void NewlinesInStringInterpolation()
@@ -47,10 +44,6 @@ namespace Tests.Diagnostics
             var rawWithControlCharacter = $"""test{
                 nonCompliant
                 }"""; // Compliant, raw
-
-            var rawVerbatimWithControlCharacter = @$"""test{
-                nonCompliant
-                }"""; // Compliant, raw+verbatims
         }
     }
 }
