@@ -215,7 +215,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public ShiftInstance(SyntaxNode node) =>
                 Line = node.GetLineNumberToReport();
-            
+
             public ShiftInstance(string description, bool isLieralZero, SyntaxNode node)
                 : this(node)
             {
