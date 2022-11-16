@@ -46,8 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
@@ -56,9 +55,9 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (TryGetFloatingPointType(binaryExpressionSyntax.Left, c.SemanticModel, out var floatingPointType)
                         || TryGetFloatingPointType(binaryExpressionSyntax.Right, c.SemanticModel, out floatingPointType))
                     {
-                        var messageFormat = c.Node.Kind() is SyntaxKind.EqualsExpression or SyntaxKind.NotEqualsExpression
-                        ? MessageFormatEquality
-                        : MessageFormatComparison;
+                        var messageFormat = c.Node.IsAnyKind(SyntaxKind.EqualsExpression, SyntaxKind.NotEqualsExpression)
+                            ? MessageFormatEquality
+                            : MessageFormatComparison;
 
                         c.ReportIssue(
                             Diagnostic.Create(Rule,
@@ -72,7 +71,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.LessThanOrEqualExpression,
                 SyntaxKind.EqualsExpression,
                 SyntaxKind.NotEqualsExpression);
-        }
 
         private static bool TryGetFloatingPointType(SyntaxNode expression, SemanticModel semanticModel, out KnownType floatingPointType)
         {

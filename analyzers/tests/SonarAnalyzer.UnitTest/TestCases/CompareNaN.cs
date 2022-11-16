@@ -32,6 +32,8 @@ namespace Tests.Diagnostics
 
             var lessOrEqualThan = number <= double.NaN; // Noncompliant
             var lessOrEqualThan2 = double.NaN <= number; // Noncompliant
+
+            var isPattern = 42D is double.NaN; // Compliant, IsPattern is excluded, works as expected
         }
 
         void TestFloat()
@@ -71,6 +73,8 @@ namespace Tests.Diagnostics
 
             var lessOrEqualThan = number <= float.NaN; // Noncompliant
             var lessOrEqualThan2 = float.NaN <= number; // Noncompliant
+
+            var isPattern = 42F is float.NaN; // Compliant, IsPattern is excluded, works as expected
         }
     }
 }
