@@ -49,6 +49,7 @@ public class Tests {
 
   @ClassRule
   public static final Orchestrator ORCHESTRATOR = Orchestrator.builderEnv()
+    .useDefaultAdminCredentialsForBuilds(true)
     .setSonarVersion(TestUtils.replaceLtsVersion(System.getProperty("sonar.runtimeVersion", "DEV")))
     .addPlugin(TestUtils.getPluginLocation("sonar-csharp-plugin"))
     .addPlugin(TestUtils.getPluginLocation("sonar-vbnet-plugin"))
