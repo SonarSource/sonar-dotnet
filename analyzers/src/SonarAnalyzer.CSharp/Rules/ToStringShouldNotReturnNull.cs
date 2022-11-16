@@ -53,10 +53,4 @@ public sealed class ToStringShouldNotReturnNull : ToStringShouldNotReturnNullBas
 
     protected override bool IsLocalOrLambda(SyntaxNode node) =>
         node.IsAnyKind(SyntaxKind.ParenthesizedLambdaExpression, SyntaxKind.SimpleLambdaExpression, SyntaxKindEx.LocalFunctionStatement);
-
-    protected override bool IsStatic(SyntaxNode node)
-    {
-        var methodDeclaration = (MethodDeclarationSyntax)node;
-        return methodDeclaration.IsStatic();
-    }
 }

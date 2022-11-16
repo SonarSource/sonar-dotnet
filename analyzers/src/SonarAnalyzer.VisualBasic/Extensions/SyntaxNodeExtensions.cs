@@ -21,6 +21,7 @@
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
+using System.Xml.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
@@ -80,6 +81,9 @@ namespace SonarAnalyzer.Extensions
                 return symbols.Any(x => x is IMethodSymbol method && method.Parameters.Length > 0 && method.Parameters[0].Type.DerivesFrom(KnownType.System_Linq_Expressions_Expression));
             }
         }
+
+        public static bool IsShared(this SyntaxNode node) =>
+            node.DescendantTokens().Any(x => x.Kind() == SyntaxKind.SharedKeyword);
 
         private sealed class ControlFlowGraphCache : ControlFlowGraphCacheBase
         {

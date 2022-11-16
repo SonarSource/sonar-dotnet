@@ -37,8 +37,6 @@ public abstract class ToStringShouldNotReturnNullBase<TSyntaxKind> : SonarDiagno
 
     protected abstract bool IsLocalOrLambda(SyntaxNode node);
 
-    protected abstract bool IsStatic(SyntaxNode node);
-
     protected abstract IEnumerable<SyntaxNode> Conditionals(SyntaxNode expression);
 
     protected ToStringShouldNotReturnNullBase() : base(DiagnosticId) { }
@@ -67,4 +65,7 @@ public abstract class ToStringShouldNotReturnNullBase<TSyntaxKind> : SonarDiagno
             .Any(x => Language.Syntax.IsKind(x, MethodKind)
                 && nameof(ToString).Equals(Language.Syntax.NodeIdentifier(x)?.ValueText, Language.NameComparison)
                 && !IsStatic(x));
+
+    private bool IsStatic(SyntaxNode node) =>
+        Language.Syntax.IsStatic(node);
 }

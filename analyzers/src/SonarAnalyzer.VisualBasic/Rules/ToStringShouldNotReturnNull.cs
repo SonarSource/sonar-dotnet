@@ -42,6 +42,4 @@ public sealed class ToStringShouldNotReturnNull : ToStringShouldNotReturnNullBas
 
     protected override bool IsLocalOrLambda(SyntaxNode node) =>
         node.IsKind(SyntaxKind.MultiLineFunctionLambdaExpression);
-
-    protected override bool IsStatic(SyntaxNode node) => false;
 }
