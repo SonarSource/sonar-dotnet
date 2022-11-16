@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules
                 Language.GeneratedCodeRecognizer,
                 c =>
                 {
-                    CheckAndReportVariables(Language.Syntax.LocalDeclarationIdentifiers(c.Node), c, SupportedDiagnostics[0]);
+                    CheckAndReportVariables(Language.Syntax.LocalDeclarationIdentifiers(c.Node), c, Rule);
                 },
                 Language.SyntaxKind.LocalDeclaration);
 
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules
                 Language.GeneratedCodeRecognizer,
                 c =>
                 {
-                    CheckAndReportVariables(Language.Syntax.FieldDeclarationIdentifiers(c.Node), c, SupportedDiagnostics[0]);
+                    CheckAndReportVariables(Language.Syntax.FieldDeclarationIdentifiers(c.Node), c, Rule);
                 },
                 Language.SyntaxKind.FieldDeclaration);
         }

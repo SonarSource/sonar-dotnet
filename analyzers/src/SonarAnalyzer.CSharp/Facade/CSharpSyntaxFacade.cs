@@ -75,10 +75,10 @@ namespace SonarAnalyzer.Helpers.Facade
             invocation == null ? null : Cast<InvocationExpressionSyntax>(invocation).GetMethodCallIdentifier();
 
         public override ImmutableArray<SyntaxToken> LocalDeclarationIdentifiers(SyntaxNode node) =>
-            Cast<LocalDeclarationStatementSyntax>(node).Declaration.Variables.Select(v => v.Identifier).ToImmutableArray();
+            Cast<LocalDeclarationStatementSyntax>(node).Declaration.Variables.Select(x => x.Identifier).ToImmutableArray();
 
         public override ImmutableArray<SyntaxToken> FieldDeclarationIdentifiers(SyntaxNode node) =>
-            Cast<FieldDeclarationSyntax>(node).Declaration.Variables.Select(v => v.Identifier).ToImmutableArray();
+            Cast<FieldDeclarationSyntax>(node).Declaration.Variables.Select(x => x.Identifier).ToImmutableArray();
 
         public override SyntaxNode NodeExpression(SyntaxNode node) =>
             node switch

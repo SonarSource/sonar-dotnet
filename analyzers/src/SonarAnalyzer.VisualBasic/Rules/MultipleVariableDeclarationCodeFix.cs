@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             {
                 FieldDeclarationSyntax fieldDeclaration => CreateNewNodes(fieldDeclaration),
                 LocalDeclarationStatementSyntax localDeclaration => CreateNewNodes(localDeclaration),
-                _ => Enumerable.Empty<SyntaxNode>()
+                _ => new[] { declarator.Parent }
             };
 
         private static IEnumerable<SyntaxNode> CreateNewNodes(FieldDeclarationSyntax declaration) =>

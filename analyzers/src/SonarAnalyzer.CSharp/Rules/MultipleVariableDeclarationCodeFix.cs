@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     FieldDeclarationSyntax fieldDeclaration => newDeclarations.Select(x => SyntaxFactory.FieldDeclaration(fieldDeclaration.AttributeLists, fieldDeclaration.Modifiers, x)),
                     LocalDeclarationStatementSyntax localDeclaration => newDeclarations.Select(x => SyntaxFactory.LocalDeclarationStatement(localDeclaration.Modifiers, x)),
-                    _ => Enumerable.Empty<SyntaxNode>()
+                    _ => new[] { declaration.Parent }
                 };
         }
 
