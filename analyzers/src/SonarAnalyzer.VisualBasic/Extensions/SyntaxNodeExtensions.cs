@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Extensions
 
         public static bool IsPartOfBinaryNegationOrCondition(this SyntaxNode node)
         {
-            if (!(node.Parent is MemberAccessExpressionSyntax))
+            if (node.Parent is not MemberAccessExpressionSyntax)
             {
                 return false;
             }
