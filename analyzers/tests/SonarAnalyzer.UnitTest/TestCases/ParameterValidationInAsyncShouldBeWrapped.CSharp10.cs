@@ -6,9 +6,10 @@ namespace Tests.Diagnostics
 {
     public class InvalidCases
     {
-        public static async Task<string> FooAsync(string something) // FN
+        public static async Task<string> FooAsync(string something) // Noncompliant
         {
-            ArgumentNullException.ThrowIfNull(something); // FN sec
+            ArgumentNullException.ThrowIfNull(something);
+//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary
 
             await Task.Delay(1);
             return something + "foo";

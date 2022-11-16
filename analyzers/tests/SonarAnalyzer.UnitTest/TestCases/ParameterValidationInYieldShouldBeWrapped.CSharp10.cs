@@ -5,16 +5,18 @@ namespace Tests.Diagnostics
 {
     public static class InvalidCases
     {
-        public static IEnumerable<string> YieldReturn(string something) // FN
+        public static IEnumerable<string> YieldReturn(string something) // Noncompliant
         {
-            ArgumentNullException.ThrowIfNull(something); // FN sec
+            ArgumentNullException.ThrowIfNull(something);
+//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary
 
             yield return something;
         }
 
-        public static IEnumerable<int> YieldBreak(int a) // FN
+        public static IEnumerable<int> YieldBreak(string something) // Noncompliant
         {
-            ArgumentNullException.ThrowIfNull(something); // FN sec
+            ArgumentNullException.ThrowIfNull(something);
+//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary
 
             yield break;
         }

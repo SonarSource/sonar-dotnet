@@ -75,5 +75,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
             base.VisitThrowStatement(node);
         }
+
+        public override void VisitInvocationExpression(InvocationExpressionSyntax node)
+        {
+            if (node.IsMemberAccessOnKnownType("ThrowIfNull", KnownType.System_ArgumentNullException, semanticModel))
+            {
+                argumentExceptionLocations.Add(node.GetLocation());
+            }
+            base.VisitInvocationExpression(node);
+        }
     }
 }
