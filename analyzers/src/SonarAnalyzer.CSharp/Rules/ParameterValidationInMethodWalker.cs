@@ -66,8 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 argumentExceptionLocations.Add(oces.GetLocation());
             }
-
-            base.VisitThrowStatement(node);
+            // there is no need to visit children
         }
 
         public override void VisitInvocationExpression(InvocationExpressionSyntax node)
@@ -76,7 +75,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 argumentExceptionLocations.Add(node.GetLocation());
             }
-            base.VisitInvocationExpression(node);
+            // there is no need to visit children
         }
     }
 }
