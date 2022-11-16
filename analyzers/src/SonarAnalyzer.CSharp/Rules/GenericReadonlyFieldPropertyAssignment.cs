@@ -60,7 +60,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.LeftShiftAssignmentExpression,
                 SyntaxKind.RightShiftAssignmentExpression,
                 SyntaxKindEx.CoalesceAssignmentExpression,
-                SyntaxKindEx.GreaterThanGreaterThanGreaterThanEqualsToken);
+                SyntaxKindEx.UnsignedRightShiftAssignmentExpression);
 
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {

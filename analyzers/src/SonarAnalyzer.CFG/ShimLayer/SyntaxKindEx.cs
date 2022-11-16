@@ -9,7 +9,6 @@ namespace StyleCop.Analyzers.Lightup
     {
         public const SyntaxKind DotDotToken = (SyntaxKind)8222;
         public const SyntaxKind QuestionQuestionEqualsToken = (SyntaxKind)8284;
-        public const SyntaxKind GreaterThanGreaterThanGreaterThanEqualsToken = (SyntaxKind)8287;
         public const SyntaxKind ManagedKeyword = (SyntaxKind)8445;
         public const SyntaxKind UnmanagedKeyword = (SyntaxKind)8446;
         public const SyntaxKind NullableKeyword = (SyntaxKind)8486;
