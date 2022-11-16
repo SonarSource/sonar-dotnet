@@ -20,6 +20,13 @@ namespace Tests.Diagnostics
 
             yield break;
         }
+
+        public static IEnumerable<int> ThrowExpression(string something) // FN
+        {
+            _ = something ?? throw new ArgumentNullException();
+
+            yield break;
+        }
     }
 
     public static class ValidCases

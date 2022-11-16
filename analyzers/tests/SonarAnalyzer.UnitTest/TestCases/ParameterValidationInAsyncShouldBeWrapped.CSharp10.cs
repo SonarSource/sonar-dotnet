@@ -14,6 +14,14 @@ namespace Tests.Diagnostics
             await Task.Delay(1);
             return something + "foo";
         }
+
+        public static async Task<string> ThrowExpressionAsync(string something) // FN
+        {
+            _ = something ?? throw new ArgumentNullException();
+
+            await Task.Delay(1);
+            return something + "foo";
+        }
     }
 
     public class ValidCases
