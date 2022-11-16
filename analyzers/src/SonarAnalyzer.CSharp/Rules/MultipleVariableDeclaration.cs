@@ -18,11 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.CSharp;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class MultipleVariableDeclaration : MultipleVariableDeclarationBase<SyntaxKind>
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class MultipleVariableDeclaration : MultipleVariableDeclarationBase<SyntaxKind>
-    {
-        protected override ILanguageFacade<SyntaxKind> Language { get; } = CSharpFacade.Instance;
-    }
+    protected override ILanguageFacade<SyntaxKind> Language { get; } = CSharpFacade.Instance;
 }

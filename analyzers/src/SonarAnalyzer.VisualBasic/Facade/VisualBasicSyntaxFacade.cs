@@ -18,108 +18,107 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers.Facade
+namespace SonarAnalyzer.Helpers.Facade;
+
+internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
 {
-    internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
+    public override bool IsNullLiteral(SyntaxNode node) => node.IsNothingLiteral();
+
+    public override SyntaxKind Kind(SyntaxNode node) => node.Kind();
+
+    public override ComparisonKind ComparisonKind(SyntaxNode node) =>
+        node.Kind() switch
+        {
+            SyntaxKind.EqualsExpression => Helpers.ComparisonKind.Equals,
+            SyntaxKind.NotEqualsExpression => Helpers.ComparisonKind.NotEquals,
+            SyntaxKind.LessThanExpression => Helpers.ComparisonKind.LessThan,
+            SyntaxKind.LessThanOrEqualExpression => Helpers.ComparisonKind.LessThanOrEqual,
+            SyntaxKind.GreaterThanExpression => Helpers.ComparisonKind.GreaterThan,
+            SyntaxKind.GreaterThanOrEqualExpression => Helpers.ComparisonKind.GreaterThanOrEqual,
+            _ => Helpers.ComparisonKind.None,
+        };
+
+    public override bool IsKind(SyntaxNode node, SyntaxKind kind) => node.IsKind(kind);
+
+    public override bool IsKind(SyntaxToken token, SyntaxKind kind) => token.IsKind(kind);
+
+    public override bool IsAnyKind(SyntaxNode node, ISet<SyntaxKind> syntaxKinds) => node.IsAnyKind(syntaxKinds);
+
+    public override bool IsAnyKind(SyntaxNode node, params SyntaxKind[] syntaxKinds) => node.IsAnyKind(syntaxKinds);
+
+    public override IEnumerable<SyntaxNode> ArgumentExpressions(SyntaxNode node) =>
+        node switch
+        {
+            ObjectCreationExpressionSyntax creation => creation.ArgumentList?.Arguments.Select(x => x.GetExpression()) ?? Enumerable.Empty<SyntaxNode>(),
+            null => Enumerable.Empty<SyntaxNode>(),
+            _ => throw InvalidOperation(node, nameof(ArgumentExpressions))
+        };
+
+    public override ImmutableArray<SyntaxNode> AssignmentTargets(SyntaxNode assignment) =>
+        ImmutableArray.Create<SyntaxNode>(Cast<AssignmentStatementSyntax>(assignment).Left);
+
+    public override SyntaxNode AssignmentRight(SyntaxNode assignment) =>
+        Cast<AssignmentStatementSyntax>(assignment).Right;
+
+    public override SyntaxNode BinaryExpressionLeft(SyntaxNode binaryExpression) =>
+        Cast<BinaryExpressionSyntax>(binaryExpression).Left;
+
+    public override SyntaxNode BinaryExpressionRight(SyntaxNode binaryExpression) =>
+        Cast<BinaryExpressionSyntax>(binaryExpression).Right;
+
+    public override IEnumerable<SyntaxNode> EnumMembers(SyntaxNode @enum) =>
+        @enum == null ? Enumerable.Empty<SyntaxNode>() : Cast<EnumStatementSyntax>(@enum).Parent.ChildNodes().OfType<EnumMemberDeclarationSyntax>();
+
+    public override SyntaxToken? InvocationIdentifier(SyntaxNode invocation) =>
+        invocation == null ? null : Cast<InvocationExpressionSyntax>(invocation).GetMethodCallIdentifier();
+
+    public override ImmutableArray<SyntaxToken> LocalDeclarationIdentifiers(SyntaxNode node) =>
+        Cast<LocalDeclarationStatementSyntax>(node).Declarators.SelectMany(d => d.Names.Select(n => n.Identifier)).ToImmutableArray();
+
+    public override ImmutableArray<SyntaxToken> FieldDeclarationIdentifiers(SyntaxNode node) =>
+        Cast<FieldDeclarationSyntax>(node).Declarators.SelectMany(d => d.Names.Select(n => n.Identifier)).ToImmutableArray();
+
+    public override SyntaxNode NodeExpression(SyntaxNode node) =>
+        node switch
+        {
+            ArgumentSyntax x => x.GetExpression(),
+            InterpolationSyntax x => x.Expression,
+            InvocationExpressionSyntax x => x.Expression,
+            SyncLockStatementSyntax x => x.Expression,
+            ReturnStatementSyntax x => x.Expression,
+            null => null,
+            _ => throw InvalidOperation(node, nameof(NodeExpression)),
+        };
+
+    public override SyntaxToken? NodeIdentifier(SyntaxNode node) =>
+        node.GetIdentifier();
+
+    public override string NodeStringTextValue(SyntaxNode node, SemanticModel semanticModel)
     {
-        public override bool IsNullLiteral(SyntaxNode node) => node.IsNothingLiteral();
-
-        public override SyntaxKind Kind(SyntaxNode node) => node.Kind();
-
-        public override ComparisonKind ComparisonKind(SyntaxNode node) =>
-           node.Kind() switch
-           {
-               SyntaxKind.EqualsExpression => Helpers.ComparisonKind.Equals,
-               SyntaxKind.NotEqualsExpression => Helpers.ComparisonKind.NotEquals,
-               SyntaxKind.LessThanExpression => Helpers.ComparisonKind.LessThan,
-               SyntaxKind.LessThanOrEqualExpression => Helpers.ComparisonKind.LessThanOrEqual,
-               SyntaxKind.GreaterThanExpression => Helpers.ComparisonKind.GreaterThan,
-               SyntaxKind.GreaterThanOrEqualExpression => Helpers.ComparisonKind.GreaterThanOrEqual,
-               _ => Helpers.ComparisonKind.None,
-           };
-
-        public override bool IsKind(SyntaxNode node, SyntaxKind kind) => node.IsKind(kind);
-
-        public override bool IsKind(SyntaxToken token, SyntaxKind kind) => token.IsKind(kind);
-
-        public override bool IsAnyKind(SyntaxNode node, ISet<SyntaxKind> syntaxKinds) => node.IsAnyKind(syntaxKinds);
-
-        public override bool IsAnyKind(SyntaxNode node, params SyntaxKind[] syntaxKinds) => node.IsAnyKind(syntaxKinds);
-
-        public override IEnumerable<SyntaxNode> ArgumentExpressions(SyntaxNode node) =>
-            node switch
-            {
-                ObjectCreationExpressionSyntax creation => creation.ArgumentList?.Arguments.Select(x => x.GetExpression()) ?? Enumerable.Empty<SyntaxNode>(),
-                null => Enumerable.Empty<SyntaxNode>(),
-                _ => throw InvalidOperation(node, nameof(ArgumentExpressions))
-            };
-
-        public override ImmutableArray<SyntaxNode> AssignmentTargets(SyntaxNode assignment) =>
-            ImmutableArray.Create<SyntaxNode>(Cast<AssignmentStatementSyntax>(assignment).Left);
-
-        public override SyntaxNode AssignmentRight(SyntaxNode assignment) =>
-            Cast<AssignmentStatementSyntax>(assignment).Right;
-
-        public override SyntaxNode BinaryExpressionLeft(SyntaxNode binaryExpression) =>
-            Cast<BinaryExpressionSyntax>(binaryExpression).Left;
-
-        public override SyntaxNode BinaryExpressionRight(SyntaxNode binaryExpression) =>
-            Cast<BinaryExpressionSyntax>(binaryExpression).Right;
-
-        public override IEnumerable<SyntaxNode> EnumMembers(SyntaxNode @enum) =>
-            @enum == null ? Enumerable.Empty<SyntaxNode>() : Cast<EnumStatementSyntax>(@enum).Parent.ChildNodes().OfType<EnumMemberDeclarationSyntax>();
-
-        public override SyntaxToken? InvocationIdentifier(SyntaxNode invocation) =>
-            invocation == null ? null : Cast<InvocationExpressionSyntax>(invocation).GetMethodCallIdentifier();
-
-        public override ImmutableArray<SyntaxToken> LocalDeclarationIdentifiers(SyntaxNode node) =>
-            Cast<LocalDeclarationStatementSyntax>(node).Declarators.SelectMany(d => d.Names.Select(n => n.Identifier)).ToImmutableArray();
-
-        public override ImmutableArray<SyntaxToken> FieldDeclarationIdentifiers(SyntaxNode node) =>
-            Cast<FieldDeclarationSyntax>(node).Declarators.SelectMany(d => d.Names.Select(n => n.Identifier)).ToImmutableArray();
-
-        public override SyntaxNode NodeExpression(SyntaxNode node) =>
-            node switch
-            {
-                ArgumentSyntax x => x.GetExpression(),
-                InterpolationSyntax x => x.Expression,
-                InvocationExpressionSyntax x => x.Expression,
-                SyncLockStatementSyntax x => x.Expression,
-                ReturnStatementSyntax x => x.Expression,
-                null => null,
-                _ => throw InvalidOperation(node, nameof(NodeExpression)),
-            };
-
-        public override SyntaxToken? NodeIdentifier(SyntaxNode node) =>
-            node.GetIdentifier();
-
-        public override string NodeStringTextValue(SyntaxNode node, SemanticModel semanticModel)
+        if (node is InterpolatedStringExpressionSyntax interpolatedStringExpression)
         {
-            if (node is InterpolatedStringExpressionSyntax interpolatedStringExpression)
-            {
-                interpolatedStringExpression.TryGetGetInterpolatedTextValue(semanticModel, out var interpolatedValue);
-                return interpolatedValue ?? interpolatedStringExpression.GetContentsText();
-            }
-            else
-            {
-                return node is LiteralExpressionSyntax literalExpression ? literalExpression.Token.ValueText : string.Empty;
-            }
+            interpolatedStringExpression.TryGetGetInterpolatedTextValue(semanticModel, out var interpolatedValue);
+            return interpolatedValue ?? interpolatedStringExpression.GetContentsText();
         }
-
-        public override SyntaxNode RemoveConditionalAccess(SyntaxNode node)
+        else
         {
-            var whenNotNull = node.RemoveParentheses();
-            while (whenNotNull is ConditionalAccessExpressionSyntax conditionalAccess)
-            {
-                whenNotNull = conditionalAccess.WhenNotNull.RemoveParentheses();
-            }
-            return whenNotNull;
+            return node is LiteralExpressionSyntax literalExpression ? literalExpression.Token.ValueText : string.Empty;
         }
-
-        public override SyntaxNode RemoveParentheses(SyntaxNode node) =>
-            node.RemoveParentheses();
-
-        public override bool TryGetGetInterpolatedTextValue(SyntaxNode node, SemanticModel semanticModel, out string interpolatedValue) =>
-            Cast<InterpolatedStringExpressionSyntax>(node).TryGetGetInterpolatedTextValue(semanticModel, out interpolatedValue);
     }
+
+    public override SyntaxNode RemoveConditionalAccess(SyntaxNode node)
+    {
+        var whenNotNull = node.RemoveParentheses();
+        while (whenNotNull is ConditionalAccessExpressionSyntax conditionalAccess)
+        {
+            whenNotNull = conditionalAccess.WhenNotNull.RemoveParentheses();
+        }
+        return whenNotNull;
+    }
+
+    public override SyntaxNode RemoveParentheses(SyntaxNode node) =>
+        node.RemoveParentheses();
+
+    public override bool TryGetGetInterpolatedTextValue(SyntaxNode node, SemanticModel semanticModel, out string interpolatedValue) =>
+        Cast<InterpolatedStringExpressionSyntax>(node).TryGetGetInterpolatedTextValue(semanticModel, out interpolatedValue);
 }

@@ -20,33 +20,32 @@
 
 using Microsoft.CodeAnalysis.CodeFixes;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.CSharp;
+
+[ExportCodeFixProvider(LanguageNames.CSharp)]
+public class MultipleVariableDeclarationCodeFix : MultipleVariableDeclarationCodeFixBase
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp)]
-    public class MultipleVariableDeclarationCodeFix : MultipleVariableDeclarationCodeFixBase
+    protected override SyntaxNode CalculateNewRoot(SyntaxNode root, SyntaxNode node) =>
+        node is VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax declaration }
+            ? root.ReplaceNode(declaration.Parent, CreateNewNodes(declaration))
+            : root;
+
+    private static IEnumerable<SyntaxNode> CreateNewNodes(VariableDeclarationSyntax declaration)
     {
-        protected override SyntaxNode CalculateNewRoot(SyntaxNode root, SyntaxNode node) =>
-            node is VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax declaration }
-                ? root.ReplaceNode(declaration.Parent, CreateNewNodes(declaration))
-                : root;
-
-        private static IEnumerable<SyntaxNode> CreateNewNodes(VariableDeclarationSyntax declaration)
-        {
-            var newDeclarations = declaration.Variables.Select(x => CreateNewDeclaration(x, declaration));
-            return declaration.Parent switch
-                {
-                    FieldDeclarationSyntax fieldDeclaration => newDeclarations.Select(x => SyntaxFactory.FieldDeclaration(fieldDeclaration.AttributeLists, fieldDeclaration.Modifiers, x)),
-                    LocalDeclarationStatementSyntax localDeclaration => newDeclarations.Select(x => SyntaxFactory.LocalDeclarationStatement(localDeclaration.Modifiers, x)),
-                    _ => new[] { declaration.Parent }
-                };
-        }
-
-        private static VariableDeclarationSyntax CreateNewDeclaration(VariableDeclaratorSyntax variable, VariableDeclarationSyntax declaration) =>
-            SyntaxFactory.VariableDeclaration(
-                declaration.Type.WithoutTrailingTrivia(),
-                SyntaxFactory.SeparatedList(new[] { variable.WithLeadingTrivia(GetLeadingTriviaFor(variable)) }));
-
-        private static IEnumerable<SyntaxTrivia> GetLeadingTriviaFor(VariableDeclaratorSyntax variable) =>
-            variable.GetFirstToken().GetPreviousToken().TrailingTrivia.Concat(variable.GetLeadingTrivia());
+        var newDeclarations = declaration.Variables.Select(x => CreateNewDeclaration(x, declaration));
+        return declaration.Parent switch
+               {
+                   FieldDeclarationSyntax fieldDeclaration => newDeclarations.Select(x => SyntaxFactory.FieldDeclaration(fieldDeclaration.AttributeLists, fieldDeclaration.Modifiers, x)),
+                   LocalDeclarationStatementSyntax localDeclaration => newDeclarations.Select(x => SyntaxFactory.LocalDeclarationStatement(localDeclaration.Modifiers, x)),
+                   _ => new[] { declaration.Parent }
+               };
     }
+
+    private static VariableDeclarationSyntax CreateNewDeclaration(VariableDeclaratorSyntax variable, VariableDeclarationSyntax declaration) =>
+        SyntaxFactory.VariableDeclaration(
+            declaration.Type.WithoutTrailingTrivia(),
+            SyntaxFactory.SeparatedList(new[] { variable.WithLeadingTrivia(GetLeadingTriviaFor(variable)) }));
+
+    private static IEnumerable<SyntaxTrivia> GetLeadingTriviaFor(VariableDeclaratorSyntax variable) =>
+        variable.GetFirstToken().GetPreviousToken().TrailingTrivia.Concat(variable.GetLeadingTrivia());
 }

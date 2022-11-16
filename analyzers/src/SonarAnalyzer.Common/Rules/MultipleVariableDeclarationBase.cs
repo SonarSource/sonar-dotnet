@@ -18,49 +18,48 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules
+namespace SonarAnalyzer.Rules;
+
+public static class MultipleVariableDeclarationConstants
 {
-    public static class MultipleVariableDeclarationConstants
+    internal const string DiagnosticId = "S1659";
+}
+
+public abstract class MultipleVariableDeclarationBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+    where TSyntaxKind : struct
+{
+    protected override string MessageFormat => "Declare '{0}' in a separate statement.";
+
+    protected MultipleVariableDeclarationBase() : base(MultipleVariableDeclarationConstants.DiagnosticId) { }
+
+    protected sealed override void Initialize(SonarAnalysisContext context)
     {
-        internal const string DiagnosticId = "S1659";
+        context.RegisterSyntaxNodeActionInNonGenerated(
+            Language.GeneratedCodeRecognizer,
+            c =>
+            {
+                CheckAndReportVariables(Language.Syntax.LocalDeclarationIdentifiers(c.Node), c, Rule);
+            },
+            Language.SyntaxKind.LocalDeclaration);
+
+        context.RegisterSyntaxNodeActionInNonGenerated(
+            Language.GeneratedCodeRecognizer,
+            c =>
+            {
+                CheckAndReportVariables(Language.Syntax.FieldDeclarationIdentifiers(c.Node), c, Rule);
+            },
+            Language.SyntaxKind.FieldDeclaration);
     }
 
-    public abstract class MultipleVariableDeclarationBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
-        where TSyntaxKind : struct
+    private static void CheckAndReportVariables(ICollection<SyntaxToken> variables, SyntaxNodeAnalysisContext context, DiagnosticDescriptor rule)
     {
-        protected override string MessageFormat => "Declare '{0}' in a separate statement.";
-
-        protected MultipleVariableDeclarationBase() : base(MultipleVariableDeclarationConstants.DiagnosticId) { }
-
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        if (variables.Count <= 1)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                Language.GeneratedCodeRecognizer,
-                c =>
-                {
-                    CheckAndReportVariables(Language.Syntax.LocalDeclarationIdentifiers(c.Node), c, Rule);
-                },
-                Language.SyntaxKind.LocalDeclaration);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                Language.GeneratedCodeRecognizer,
-                c =>
-                {
-                    CheckAndReportVariables(Language.Syntax.FieldDeclarationIdentifiers(c.Node), c, Rule);
-                },
-                Language.SyntaxKind.FieldDeclaration);
+            return;
         }
-
-        private static void CheckAndReportVariables(ICollection<SyntaxToken> variables, SyntaxNodeAnalysisContext context, DiagnosticDescriptor rule)
+        foreach (var variable in variables.Skip(1))
         {
-            if (variables.Count <= 1)
-            {
-                return;
-            }
-            foreach (var variable in variables.Skip(1))
-            {
-                context.ReportIssue(Diagnostic.Create(rule, variable.GetLocation(), variable.ValueText));
-            }
+            context.ReportIssue(Diagnostic.Create(rule, variable.GetLocation(), variable.ValueText));
         }
     }
 }

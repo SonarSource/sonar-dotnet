@@ -18,11 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.VisualBasic
+namespace SonarAnalyzer.Rules.VisualBasic;
+
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class MultipleVariableDeclaration : MultipleVariableDeclarationBase<SyntaxKind>
 {
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class MultipleVariableDeclaration : MultipleVariableDeclarationBase<SyntaxKind>
-    {
-        protected override ILanguageFacade<SyntaxKind> Language { get; } = VisualBasicFacade.Instance;
-    }
+    protected override ILanguageFacade<SyntaxKind> Language { get; } = VisualBasicFacade.Instance;
 }
