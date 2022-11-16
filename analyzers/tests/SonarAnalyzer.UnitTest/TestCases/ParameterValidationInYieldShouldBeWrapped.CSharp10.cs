@@ -5,7 +5,7 @@ namespace Tests.Diagnostics
 {
     public static class InvalidCases
     {
-        public static IEnumerable<string> Foo(string something) // FN
+        public static IEnumerable<string> YieldReturn(string something) // FN
         {
             ArgumentNullException.ThrowIfNull(something); // FN sec
 
@@ -14,10 +14,7 @@ namespace Tests.Diagnostics
 
         public static IEnumerable<int> YieldBreak(int a) // FN
         {
-            if (a < 0)
-            {
-                ArgumentNullException.ThrowIfNull(a); // FN sec
-            }
+            ArgumentNullException.ThrowIfNull(something); // FN sec
 
             yield break;
         }

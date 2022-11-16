@@ -5,8 +5,8 @@ namespace Tests.Diagnostics
 {
     public static class InvalidCases
     {
-        public static IEnumerable<string> Foo(string something) // Noncompliant {{Split this method into two, one handling parameters check and the other handling the iterator.}}
-//                                        ^^^
+        public static IEnumerable<string> YieldReturn(string something) // Noncompliant {{Split this method into two, one handling parameters check and the other handling the iterator.}}
+//                                        ^^^^^^^^^^^
         {
             if (something == null) { throw new ArgumentNullException(nameof(something)); }
 //                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary
