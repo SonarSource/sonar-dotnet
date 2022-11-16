@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.Rules
 {
-    public struct MultipleVariableDeclarationConstants
+    public static class MultipleVariableDeclarationConstants
     {
         internal const string DiagnosticId = "S1659";
     }
