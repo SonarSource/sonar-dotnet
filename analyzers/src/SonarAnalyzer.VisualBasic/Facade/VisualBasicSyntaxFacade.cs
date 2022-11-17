@@ -123,5 +123,5 @@ internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
         Cast<InterpolatedStringExpressionSyntax>(node).TryGetGetInterpolatedTextValue(semanticModel, out interpolatedValue);
 
     public override bool IsStatic(SyntaxNode node) =>
-            Cast<MethodBlockSyntax>(node).IsShared();
+        Cast<MethodBlockSyntax>(node).IsShared();
 }
