@@ -18,34 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Rules.CSharp
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class MultipleVariableDeclaration : MultipleVariableDeclarationBase<SyntaxKind>
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class MultipleVariableDeclaration : MultipleVariableDeclarationBase<SyntaxKind,
-        FieldDeclarationSyntax, LocalDeclarationStatementSyntax>
-    {
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        public override SyntaxKind FieldDeclarationKind => SyntaxKind.FieldDeclaration;
-        public override SyntaxKind LocalDeclarationKind => SyntaxKind.LocalDeclarationStatement;
-
-        protected override IEnumerable<SyntaxToken> GetIdentifiers(FieldDeclarationSyntax node) =>
-            node.Declaration.Variables.Select(v => v.Identifier);
-
-        protected override IEnumerable<SyntaxToken> GetIdentifiers(LocalDeclarationStatementSyntax node) =>
-            node.Declaration.Variables.Select(v => v.Identifier);
-
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
-    }
+    protected override ILanguageFacade<SyntaxKind> Language { get; } = CSharpFacade.Instance;
 }

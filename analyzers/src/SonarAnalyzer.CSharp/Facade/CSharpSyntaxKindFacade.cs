@@ -18,9 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CSharp;
-using StyleCop.Analyzers.Lightup;
-
 namespace SonarAnalyzer.Helpers.Facade;
 
 internal sealed class CSharpSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind>
@@ -49,6 +46,7 @@ internal sealed class CSharpSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind>
     public SyntaxKind IdentifierToken => SyntaxKind.IdentifierToken;
     public SyntaxKind InvocationExpression => SyntaxKind.InvocationExpression;
     public SyntaxKind InterpolatedStringExpression => SyntaxKind.InterpolatedStringExpression;
+    public SyntaxKind LocalDeclaration => SyntaxKind.LocalDeclarationStatement;
     public SyntaxKind[] MethodDeclarations => new[] { SyntaxKind.MethodDeclaration };
     public SyntaxKind[] ObjectCreationExpressions => new[] { SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression };
     public SyntaxKind Parameter => SyntaxKind.Parameter;

@@ -18,66 +18,48 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.Rules;
 
-namespace SonarAnalyzer.Rules
+public static class MultipleVariableDeclarationConstants
 {
-    public abstract class MultipleVariableDeclarationBase : SonarDiagnosticAnalyzer
-    {
-        internal const string DiagnosticId = "S1659";
-        protected const string MessageFormat = "Declare '{0}' in a separate statement.";
+    internal const string DiagnosticId = "S1659";
+}
 
-        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
+public abstract class MultipleVariableDeclarationBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+    where TSyntaxKind : struct
+{
+    protected override string MessageFormat => "Declare '{0}' in a separate statement.";
+
+    protected MultipleVariableDeclarationBase() : base(MultipleVariableDeclarationConstants.DiagnosticId) { }
+
+    protected sealed override void Initialize(SonarAnalysisContext context)
+    {
+        context.RegisterSyntaxNodeActionInNonGenerated(
+            Language.GeneratedCodeRecognizer,
+            c =>
+            {
+                CheckAndReportVariables(Language.Syntax.LocalDeclarationIdentifiers(c.Node), c, Rule);
+            },
+            Language.SyntaxKind.LocalDeclaration);
+
+        context.RegisterSyntaxNodeActionInNonGenerated(
+            Language.GeneratedCodeRecognizer,
+            c =>
+            {
+                CheckAndReportVariables(Language.Syntax.FieldDeclarationIdentifiers(c.Node), c, Rule);
+            },
+            Language.SyntaxKind.FieldDeclaration);
     }
 
-    public abstract class MultipleVariableDeclarationBase<TLanguageKindEnum,
-        TFieldDeclarationSyntax, TLocalDeclarationSyntax> : MultipleVariableDeclarationBase
-        where TLanguageKindEnum : struct
-        where TFieldDeclarationSyntax: SyntaxNode
-        where TLocalDeclarationSyntax: SyntaxNode
+    private static void CheckAndReportVariables(ICollection<SyntaxToken> variables, SyntaxNodeAnalysisContext context, DiagnosticDescriptor rule)
     {
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        if (variables.Count <= 1)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                GeneratedCodeRecognizer,
-                c =>
-                {
-                    var local = (TLocalDeclarationSyntax)c.Node;
-                    CheckAndReportVariables(GetIdentifiers(local).ToList(), c, SupportedDiagnostics[0]);
-                },
-                LocalDeclarationKind);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                GeneratedCodeRecognizer,
-                c =>
-                {
-                    var field = (TFieldDeclarationSyntax)c.Node;
-                    CheckAndReportVariables(GetIdentifiers(field).ToList(), c, SupportedDiagnostics[0]);
-                },
-                FieldDeclarationKind);
+            return;
         }
-
-        private static void CheckAndReportVariables(IList<SyntaxToken> variables, SyntaxNodeAnalysisContext context, DiagnosticDescriptor rule)
+        foreach (var variable in variables.Skip(1))
         {
-            if (variables.Count <= 1)
-            {
-                return;
-            }
-            foreach (var variable in variables.Skip(1))
-            {
-                context.ReportIssue(Diagnostic.Create(rule, variable.GetLocation(), variable.ValueText));
-            }
+            context.ReportIssue(Diagnostic.Create(rule, variable.GetLocation(), variable.ValueText));
         }
-
-        protected abstract IEnumerable<SyntaxToken> GetIdentifiers(TLocalDeclarationSyntax node);
-
-        protected abstract IEnumerable<SyntaxToken> GetIdentifiers(TFieldDeclarationSyntax node);
-
-        public abstract TLanguageKindEnum LocalDeclarationKind { get; }
-        public abstract TLanguageKindEnum FieldDeclarationKind { get; }
     }
 }

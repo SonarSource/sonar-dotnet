@@ -21,36 +21,43 @@
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.UnitTest.Rules;
+
+[TestClass]
+public class MultipleVariableDeclarationTest
 {
-    [TestClass]
-    public class MultipleVariableDeclarationTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.MultipleVariableDeclaration>();
-        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.MultipleVariableDeclaration>();
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.MultipleVariableDeclaration>();
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.MultipleVariableDeclaration>();
 
-        [TestMethod]
-        public void MultipleVariableDeclaration_CS() =>
-            builderCS.AddPaths("MultipleVariableDeclaration.cs").Verify();
+    [TestMethod]
+    public void MultipleVariableDeclaration_CS() =>
+        builderCS.AddPaths("MultipleVariableDeclaration.cs").Verify();
 
-        [TestMethod]
-        public void MultipleVariableDeclaration_VB() =>
-            builderVB.AddPaths("MultipleVariableDeclaration.vb").Verify();
+    [TestMethod]
+    public void MultipleVariableDeclaration_VB() =>
+        builderVB.AddPaths("MultipleVariableDeclaration.vb").Verify();
 
-        [TestMethod]
-        public void MultipleVariableDeclaration_CodeFix_CS() =>
-            builderCS.WithCodeFix<CS.MultipleVariableDeclarationCodeFix>()
-                .AddPaths("MultipleVariableDeclaration.cs")
-                .WithCodeFixedPaths("MultipleVariableDeclaration.Fixed.cs")
-                .WithCodeFixTitle(SonarAnalyzer.Rules.MultipleVariableDeclarationCodeFixBase.Title)
-                .VerifyCodeFix();
+    [TestMethod]
+    public void MultipleVariableDeclaration_CodeFix_CS_WrongIndentation() =>
+        builderCS.WithCodeFix<CS.MultipleVariableDeclarationCodeFix>()
+                 .AddPaths("MultipleVariableDeclaration.WrongIndentation.cs")
+                 .WithCodeFixedPaths("MultipleVariableDeclaration.WrongIndentation.Fixed.cs")
+                 .WithCodeFixTitle(SonarAnalyzer.Rules.MultipleVariableDeclarationCodeFixBase.Title)
+                 .VerifyCodeFix();
 
-        [TestMethod]
-        public void MultipleVariableDeclaration_CodeFix_VB() =>
-            builderVB.WithCodeFix<VB.MultipleVariableDeclarationCodeFix>()
-                .AddPaths("MultipleVariableDeclaration.vb")
-                .WithCodeFixedPaths("MultipleVariableDeclaration.Fixed.vb")
-                .WithCodeFixTitle(SonarAnalyzer.Rules.MultipleVariableDeclarationCodeFixBase.Title)
-                .VerifyCodeFix();
-    }
+    [TestMethod]
+    public void MultipleVariableDeclaration_CodeFix_CS() =>
+        builderCS.WithCodeFix<CS.MultipleVariableDeclarationCodeFix>()
+                 .AddPaths("MultipleVariableDeclaration.cs")
+                 .WithCodeFixedPaths("MultipleVariableDeclaration.Fixed.cs")
+                 .WithCodeFixTitle(SonarAnalyzer.Rules.MultipleVariableDeclarationCodeFixBase.Title)
+                 .VerifyCodeFix();
+
+    [TestMethod]
+    public void MultipleVariableDeclaration_CodeFix_VB() =>
+        builderVB.WithCodeFix<VB.MultipleVariableDeclarationCodeFix>()
+                 .AddPaths("MultipleVariableDeclaration.vb")
+                 .WithCodeFixedPaths("MultipleVariableDeclaration.Fixed.vb")
+                 .WithCodeFixTitle(SonarAnalyzer.Rules.MultipleVariableDeclarationCodeFixBase.Title)
+                 .VerifyCodeFix();
 }

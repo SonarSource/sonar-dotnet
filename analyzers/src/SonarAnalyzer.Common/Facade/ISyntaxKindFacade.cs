@@ -35,6 +35,7 @@ public interface ISyntaxKindFacade<out TSyntaxKind>
     abstract TSyntaxKind IdentifierToken { get; }
     abstract TSyntaxKind InvocationExpression { get; }
     abstract TSyntaxKind InterpolatedStringExpression { get; }
+    abstract TSyntaxKind LocalDeclaration { get; }
     abstract TSyntaxKind[] MethodDeclarations { get; }
     abstract TSyntaxKind[] ObjectCreationExpressions { get; }
     abstract TSyntaxKind Parameter { get; }

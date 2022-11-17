@@ -18,48 +18,36 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
-using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules
+namespace SonarAnalyzer.Rules;
+
+public abstract class MultipleVariableDeclarationCodeFixBase : SonarCodeFix
 {
-    public abstract class MultipleVariableDeclarationCodeFixBase : SonarCodeFix
+    internal const string Title = "Separate declarations";
+
+    public sealed override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(MultipleVariableDeclarationConstants.DiagnosticId);
+
+    protected sealed override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
     {
-        internal const string Title = "Separate declarations";
+        var diagnostic = context.Diagnostics.First();
+        var diagnosticSpan = diagnostic.Location.SourceSpan;
+        var node = root.FindNode(diagnosticSpan, getInnermostNodeForTie: true);
 
-        public sealed override ImmutableArray<string> FixableDiagnosticIds
-        {
-            get
-            {
-                return ImmutableArray.Create(MultipleVariableDeclarationBase.DiagnosticId);
-            }
-        }
+        context.RegisterCodeFix(
+            CodeAction.Create(
+                Title,
+                c =>
+                {
+                    var newRoot = CalculateNewRoot(root, node);
+                    return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+                },
+                Title),
+            context.Diagnostics);
 
-        protected sealed override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
-        {
-            var diagnostic = context.Diagnostics.First();
-            var diagnosticSpan = diagnostic.Location.SourceSpan;
-            var node = root.FindNode(diagnosticSpan, getInnermostNodeForTie: true);
-
-            context.RegisterCodeFix(
-                CodeAction.Create(
-                    Title,
-                    c =>
-                    {
-                        var newRoot = CalculateNewRoot(root, node);
-                        return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-                    },
-                    Title),
-                context.Diagnostics);
-
-            return Task.CompletedTask;
-        }
-
-        protected abstract SyntaxNode CalculateNewRoot(SyntaxNode root, SyntaxNode node);
+        return Task.CompletedTask;
     }
+
+    protected abstract SyntaxNode CalculateNewRoot(SyntaxNode root, SyntaxNode node);
 }
