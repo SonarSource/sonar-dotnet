@@ -81,9 +81,6 @@ namespace SonarAnalyzer.Extensions
             }
         }
 
-        public static bool IsShared(this SyntaxNode node) =>
-            node.DescendantTokens().Any(x => x.Kind() == SyntaxKind.SharedKeyword);
-
         private sealed class ControlFlowGraphCache : ControlFlowGraphCacheBase
         {
             protected override bool IsLocalFunction(SyntaxNode node) =>

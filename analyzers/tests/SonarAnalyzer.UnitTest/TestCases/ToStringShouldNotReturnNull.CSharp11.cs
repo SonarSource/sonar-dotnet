@@ -2,15 +2,6 @@
 {
     static virtual string ToString()
     {
-        if (true)
-        {
-            return null; // Compliant
-        }
-        else
-        {
-            return string.Empty;
-        }
-
         return null; // Compliant
     }
 }

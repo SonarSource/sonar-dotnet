@@ -64,8 +64,5 @@ public abstract class ToStringShouldNotReturnNullBase<TSyntaxKind> : SonarDiagno
             .TakeWhile(x => !IsLocalOrLambda(x))
             .Any(x => Language.Syntax.IsKind(x, MethodKind)
                 && nameof(ToString).Equals(Language.Syntax.NodeIdentifier(x)?.ValueText, Language.NameComparison)
-                && !IsStatic(x));
-
-    private bool IsStatic(SyntaxNode node) =>
-        Language.Syntax.IsStatic(node);
+                && !Language.Syntax.IsStatic(x));
 }
