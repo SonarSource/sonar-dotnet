@@ -18,17 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
-using System.Collections.Immutable;
 using System.Text.RegularExpressions;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Extensions;
-using SonarAnalyzer.Helpers;
-using SonarAnalyzer.Wrappers;
-using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -41,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private const int MinimalCommonKeyLength = 2048;
         private const int MinimalEllipticCurveKeyLength = 224;
-        private readonly Regex namedEllipticCurve = new Regex("^(secp|sect|prime|c2tnb|c2pnb|brainpoolP|B-|K-|P-)(?<KeyLength>\\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private readonly Regex namedEllipticCurve = new("^(secp|sect|prime|c2tnb|c2pnb|brainpoolP|B-|K-|P-)(?<KeyLength>\\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         private static readonly ImmutableArray<KnownType> BouncyCastleCurveClasses =
             ImmutableArray.Create(
@@ -71,10 +61,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;
-                    var methodName = GetMethodName(invocation);
                     var containingType = new Lazy<ITypeSymbol>(() => c.SemanticModel.GetSymbolInfo(invocation).Symbol?.ContainingType);
 
-                    switch (methodName)
+                    switch (GetMethodName(invocation))
                     {
                         case "Create":
                             CheckAlgorithmCreation(containingType.Value, invocation, c);
@@ -110,8 +99,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var assignment = (AssignmentExpressionSyntax)c.Node;
-                    var propertyName = GetPropertyName(assignment.Left);
-                    if (propertyName == "KeySize"
+                    if (GetPropertyName(assignment.Left) == "KeySize"
                         && assignment.Left is MemberAccessExpressionSyntax memberAccess
                         && memberAccess.Expression != null
                         && c.SemanticModel.GetTypeInfo(memberAccess.Expression).Type is ITypeSymbol containingType)
@@ -142,7 +130,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (containingType.IsAny(SystemSecurityCryptographyDsaRsa) && IsInvalidCommonKeyLength(firstParam, c))
             {
-                c.ReportIssue(Diagnostic.Create(Rule, invocation.GetLocation(), MinimalCommonKeyLength, CipherName(containingType), ""));
+                c.ReportIssue(Diagnostic.Create(Rule, invocation.GetLocation(), MinimalCommonKeyLength, CipherName(containingType), string.Empty));
             }
             else
             {
@@ -183,7 +171,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var match = namedEllipticCurve.Match(curveName);
             if (match.Success && int.TryParse(match.Groups["KeyLength"].Value, out var keyLength) && keyLength < MinimalEllipticCurveKeyLength)
             {
-                c.ReportIssue(Diagnostic.Create(Rule, syntaxElement.GetLocation(), MinimalEllipticCurveKeyLength, "EC", ""));
+                c.ReportIssue(Diagnostic.Create(Rule, syntaxElement.GetLocation(), MinimalEllipticCurveKeyLength, "EC", string.Empty));
             }
         }
 
@@ -192,9 +180,9 @@ namespace SonarAnalyzer.Rules.CSharp
             // DSACryptoServiceProvider is always noncompliant as it has a max key size of 1024
             // RSACryptoServiceProvider() and RSACryptoServiceProvider(System.Security.Cryptography.CspParameters) constructors are noncompliants as they have a default key size of 1024
             if (containingType.Is(KnownType.System_Security_Cryptography_DSACryptoServiceProvider)
-                || (containingType.Is(KnownType.System_Security_Cryptography_RSACryptoServiceProvider) && HasDefaultSize(objectCreation.ArgumentList.Arguments, c)))
+                || (containingType.Is(KnownType.System_Security_Cryptography_RSACryptoServiceProvider) && HasDefaultSize(objectCreation.ArgumentList, c)))
             {
-                c.ReportIssue(Diagnostic.Create(Rule, objectCreation.Expression.GetLocation(), MinimalCommonKeyLength, CipherName(containingType), ""));
+                c.ReportIssue(Diagnostic.Create(Rule, objectCreation.Expression.GetLocation(), MinimalCommonKeyLength, CipherName(containingType), string.Empty));
             }
             else
             {
@@ -203,15 +191,18 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static bool HasDefaultSize(SeparatedSyntaxList<ArgumentSyntax> arguments, SyntaxNodeAnalysisContext c) =>
-            arguments.Count == 0
-            || (arguments.Count == 1 && c.SemanticModel.GetTypeInfo(arguments[0].Expression).Type is ITypeSymbol type && type.Is(KnownType.System_Security_Cryptography_CspParameters));
+        private static bool HasDefaultSize(ArgumentListSyntax argumentList, SyntaxNodeAnalysisContext c) =>
+            argumentList == null
+            || argumentList.Arguments.Count == 0
+            || (argumentList.Arguments.Count == 1
+                && c.SemanticModel.GetTypeInfo(argumentList.Arguments[0].Expression).Type is ITypeSymbol type
+                && type.Is(KnownType.System_Security_Cryptography_CspParameters));
 
         private static void CheckGenericDsaRsaCryptographyAlgorithms(ITypeSymbol containingType, SyntaxNode syntaxElement, SyntaxNode keyLengthSyntax, SyntaxNodeAnalysisContext c)
         {
             if (containingType.DerivesFromAny(SystemSecurityCryptographyDsaRsa) && keyLengthSyntax != null && IsInvalidCommonKeyLength(keyLengthSyntax, c))
             {
-                c.ReportIssue(Diagnostic.Create(Rule, syntaxElement.GetLocation(), MinimalCommonKeyLength, CipherName(containingType), ""));
+                c.ReportIssue(Diagnostic.Create(Rule, syntaxElement.GetLocation(), MinimalCommonKeyLength, CipherName(containingType), string.Empty));
             }
         }
 
@@ -223,7 +214,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 && IsInvalidCommonKeyLength(firstParam, c))
             {
                 var cipherAlgorithmName = containingType.Is(KnownType.Org_BouncyCastle_Crypto_Generators_DHParametersGenerator) ? "DH" : "DSA";
-                c.ReportIssue(Diagnostic.Create(Rule, invocation.GetLocation(), MinimalCommonKeyLength, cipherAlgorithmName, ""));
+                c.ReportIssue(Diagnostic.Create(Rule, invocation.GetLocation(), MinimalCommonKeyLength, cipherAlgorithmName, string.Empty));
             }
         }
 
@@ -233,7 +224,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 && containingType.Is(KnownType.Org_BouncyCastle_Crypto_Parameters_RsaKeyGenerationParameters)
                 && IsInvalidCommonKeyLength(keyLengthParam, c))
             {
-                c.ReportIssue(Diagnostic.Create(Rule, objectCreation.Expression.GetLocation(), MinimalCommonKeyLength, "RSA", ""));
+                c.ReportIssue(Diagnostic.Create(Rule, objectCreation.Expression.GetLocation(), MinimalCommonKeyLength, "RSA", string.Empty));
             }
         }
 
