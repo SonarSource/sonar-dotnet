@@ -33,22 +33,15 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class CompareNaN : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S2688";
-        private const string MessageFormat = "Use {0}.IsNaN() instead.";
+        private const string MessageFormat = "{0}";
+        private const string MessageFormatEquality = "Use {0}.IsNaN() instead.";
+        private const string MessageFormatComparison = "Do not compare a number with {0}.NaN.";
 
         private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
         private static readonly Dictionary<KnownType, string> KnownTypeAliasMap = new()
         {
-            { KnownType.System_Byte, "byte" },
-            { KnownType.System_Char, "byte" },
             { KnownType.System_Double, "double" },
-            { KnownType.System_Int16, "short" },
-            { KnownType.System_Int32, "int" },
-            { KnownType.System_Int64, "long" },
-            { KnownType.System_SByte, "sbyte" },
             { KnownType.System_Single, "float" },
-            { KnownType.System_UInt16, "ushort" },
-            { KnownType.System_UInt32, "uint" },
-            { KnownType.System_UInt64, "ulong" },
         };
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
@@ -62,7 +55,14 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (TryGetFloatingPointType(binaryExpressionSyntax.Left, c.SemanticModel, out var floatingPointType)
                         || TryGetFloatingPointType(binaryExpressionSyntax.Right, c.SemanticModel, out floatingPointType))
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, binaryExpressionSyntax.GetLocation(), KnownTypeAliasMap[floatingPointType]));
+                        var messageFormat = c.Node.IsAnyKind(SyntaxKind.EqualsExpression, SyntaxKind.NotEqualsExpression)
+                            ? MessageFormatEquality
+                            : MessageFormatComparison;
+
+                        c.ReportIssue(
+                            Diagnostic.Create(Rule,
+                            binaryExpressionSyntax.GetLocation(),
+                            string.Format(messageFormat, KnownTypeAliasMap[floatingPointType])));
                     }
                 },
                 SyntaxKind.GreaterThanExpression,
@@ -72,11 +72,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.EqualsExpression,
                 SyntaxKind.NotEqualsExpression);
 
-        private static bool TryGetFloatingPointType(ExpressionSyntax expression, SemanticModel semanticModel, out KnownType floatingPointType)
+        private static bool TryGetFloatingPointType(SyntaxNode expression, SemanticModel semanticModel, out KnownType floatingPointType)
         {
             floatingPointType = null;
 
-            if (!(expression is MemberAccessExpressionSyntax memberAccess))
+            if (expression is not MemberAccessExpressionSyntax memberAccess)
             {
                 return false;
             }
