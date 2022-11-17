@@ -18,9 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Common;
-using SonarAnalyzer.Helpers;
-
 namespace SonarAnalyzer.Rules
 {
     public abstract class UsingCommandLineArgumentsBase<TSyntaxKind> : TrackerHotspotDiagnosticAnalyzer<TSyntaxKind>
