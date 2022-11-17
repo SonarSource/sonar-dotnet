@@ -21,7 +21,7 @@ namespace Tests.Diagnostics
             yield break;
         }
 
-        public static IEnumerable<int> ThrowExpression(string something) // FN
+        public static IEnumerable<int> ThrowExpression(string something) // FN #6369
         {
             _ = something ?? throw new ArgumentNullException();
 

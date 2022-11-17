@@ -44,7 +44,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public IEnumerable<Location> ArgumentExceptionLocations => argumentExceptionLocations;
 
-        public ParameterValidationInMethodWalker(SemanticModel semanticModel) => this.semanticModel = semanticModel;
+        public ParameterValidationInMethodWalker(SemanticModel semanticModel) =>
+            this.semanticModel = semanticModel;
 
         public override void Visit(SyntaxNode node)
         {
@@ -55,7 +56,8 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        public override void VisitAwaitExpression(AwaitExpressionSyntax node) => keepWalking = false;
+        public override void VisitAwaitExpression(AwaitExpressionSyntax node) =>
+            keepWalking = false;
 
         public override void VisitThrowStatement(ThrowStatementSyntax node)
         {
@@ -75,7 +77,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 argumentExceptionLocations.Add(node.GetLocation());
             }
-            // there is no need to visit children
+            // "ThrowIfNull" returns void so it cannot be an argument. We can stop.
         }
     }
 }

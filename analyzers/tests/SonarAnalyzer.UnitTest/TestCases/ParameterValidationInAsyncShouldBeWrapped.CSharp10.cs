@@ -15,7 +15,7 @@ namespace Tests.Diagnostics
             return something + "foo";
         }
 
-        public static async Task<string> ThrowExpressionAsync(string something) // FN
+        public static async Task<string> ThrowExpressionAsync(string something) // FN #6369
         {
             _ = something ?? throw new ArgumentNullException();
 
