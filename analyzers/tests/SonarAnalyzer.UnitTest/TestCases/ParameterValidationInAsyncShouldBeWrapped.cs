@@ -16,6 +16,29 @@ namespace Tests.Diagnostics
             return something + "foo";
         }
 
+        public static async Task<string> IndirectUsageAsync(string something) // Noncompliant
+        {
+            var exception = new ArgumentNullException(nameof(something));
+            if (something == null)
+                throw exception; // Secondary
+            await Task.Delay(1);
+            return something + "foo";
+        }
+
+        public static async Task<string> IndirectUsageWithMethodCallAsync(string something) // Noncompliant
+        {
+            if (something == null)
+                throw GetArgumentExpression(nameof(something));
+//                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary
+            await Task.Delay(1);
+            return something + "foo";
+        }
+
+        private static ArgumentNullException GetArgumentExpression(string name)
+        {
+            return new ArgumentNullException(name);
+        }
+
         // See https://github.com/SonarSource/sonar-dotnet/issues/2665
         public async void OnSomeEvent(object sender, EventArgs args) // Compliant
         {

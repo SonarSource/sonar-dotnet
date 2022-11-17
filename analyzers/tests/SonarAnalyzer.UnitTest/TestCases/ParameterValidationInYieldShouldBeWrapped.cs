@@ -5,8 +5,8 @@ namespace Tests.Diagnostics
 {
     public static class InvalidCases
     {
-        public static IEnumerable<string> Foo(string something) // Noncompliant {{Split this method into two, one handling parameters check and the other handling the iterator.}}
-//                                        ^^^
+        public static IEnumerable<string> YieldReturn(string something) // Noncompliant {{Split this method into two, one handling parameters check and the other handling the iterator.}}
+//                                        ^^^^^^^^^^^
         {
             if (something == null) { throw new ArgumentNullException(nameof(something)); }
 //                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary
@@ -32,6 +32,27 @@ namespace Tests.Diagnostics
             }
 
             yield break;
+        }
+
+        public static IEnumerable<string> IndirectUsageAsync(string something) // Noncompliant
+        {
+            var exception = new ArgumentNullException(nameof(something));
+            if (something == null)
+                throw exception; // Secondary
+            yield return something;
+        }
+
+        public static IEnumerable<string> IndirectUsageWithMethodCallAsync(string something) // Noncompliant
+        {
+            if (something == null)
+                throw GetArgumentExpression(nameof(something));
+//                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary
+            yield return something;
+        }
+
+        private static ArgumentNullException GetArgumentExpression(string name)
+        {
+            return new ArgumentNullException(name);
         }
     }
 

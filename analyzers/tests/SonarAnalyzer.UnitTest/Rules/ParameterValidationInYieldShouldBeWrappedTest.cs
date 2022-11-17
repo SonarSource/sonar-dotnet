@@ -34,6 +34,12 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
 
         [TestMethod]
+        public void ParameterValidationInYieldShouldBeWrapped_CSharp10() =>
+            builder.AddPaths("ParameterValidationInYieldShouldBeWrapped.CSharp10.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .Verify();
+
+        [TestMethod]
         public void ParameterValidationInYieldShouldBeWrapped_CSharp11() =>
             builder.AddPaths("ParameterValidationInYieldShouldBeWrapped.CSharp11.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
