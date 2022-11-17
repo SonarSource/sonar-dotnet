@@ -138,8 +138,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool TryGetConstantValue(ExpressionSyntax expression, out int value)
         {
             value = 0;
-            return expression?.RemoveParentheses() is LiteralExpressionSyntax literalExpression
-                && int.TryParse(literalExpression?.Token.ValueText, out value);
+            return expression.RemoveParentheses() is LiteralExpressionSyntax literalExpression
+                && int.TryParse(literalExpression.Token.ValueText, out value);
         }
 
         private static ShiftInstance FindShiftInstance(SyntaxNode node, SemanticModel semanticModel)
