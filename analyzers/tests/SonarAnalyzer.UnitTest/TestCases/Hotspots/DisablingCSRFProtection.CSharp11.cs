@@ -7,10 +7,10 @@ namespace Net6Poc.DisablingCSRFProtection
 {
     internal class TestCases
     {
-        [GenericIgnoreAntiforgeryToken<int>] // FN
+        [GenericIgnoreAntiforgeryToken<int>] // Noncompliant
         public void A() { }
 
-        [NonGenericAttribute] // FN
+        [NonGenericAttribute] // Noncompliant
         public void B() { }
 
         public void C() { }

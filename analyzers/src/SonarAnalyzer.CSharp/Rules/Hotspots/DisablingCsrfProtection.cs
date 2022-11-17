@@ -21,10 +21,8 @@
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
-using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -61,14 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckIgnoreAntiforgeryTokenAttribute(SyntaxNodeAnalysisContext c)
         {
-            var shouldReport = c.Node switch
-            {
-                AttributeSyntax attributeSyntax => attributeSyntax.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_IgnoreAntiforgeryTokenAttribute, c.SemanticModel),
-                ObjectCreationExpressionSyntax objectCreation => objectCreation.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_IgnoreAntiforgeryTokenAttribute, c.SemanticModel),
-                _ => c.Node.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_IgnoreAntiforgeryTokenAttribute, c.SemanticModel)
-            };
-
-            if (shouldReport)
+            if (c.SemanticModel.GetTypeInfo(c.Node).Type.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_IgnoreAntiforgeryTokenAttribute))
             {
                 ReportDiagnostic(c);
             }
