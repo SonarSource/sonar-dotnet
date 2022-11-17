@@ -31,15 +31,15 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class ControlCharacterInString : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S2479";
+        private const string DiagnosticId = "S2479";
         private const string MessageFormat = "Replace the control character at position {0} by its escape sequence '{1}'.";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-        private static readonly IDictionary<char, string> EscapedControlCharacters = new Dictionary<char, string>()
+        private static readonly IDictionary<char, string> EscapedControlCharacters = new Dictionary<char, string>
         {
             {'\u0000', "\\0"},
             {'\u0001', "\\u0001"},
@@ -102,7 +102,8 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c => CheckControlCharacter(c, ((LiteralExpressionSyntax)c.Node).Token.Text, 0),
-                SyntaxKind.StringLiteralExpression);
+                SyntaxKind.StringLiteralExpression,
+                SyntaxKindEx.Utf8StringLiteralExpression);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c => CheckControlCharacter(c, ((InterpolatedStringTextSyntax)c.Node).TextToken.Text, 1),
@@ -111,7 +112,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckControlCharacter(SyntaxNodeAnalysisContext c, string text, int displayPosIncrement)
         {
-            if (IsSimpleVerbatimString(c.Node) || IsInterpolatedVerbatimString(c.Node.Parent))
+            if (IsInescapableString(c.Node) || IsInescepableInterpolatedString(c.Node.Parent) || IsInescapableUtf8String(c.Node))
             {
                 return;
             }
@@ -120,17 +121,24 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (EscapedControlCharacters.TryGetValue(text[charPos], out var escapeSequence))
                 {
-                    c.ReportIssue(Diagnostic.Create(rule, c.Node.GetLocation(), displayPosIncrement + charPos,
-                        escapeSequence));
+                    c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation(), displayPosIncrement + charPos, escapeSequence));
                     return;
                 }
             }
         }
 
-        private static bool IsSimpleVerbatimString(SyntaxNode syntaxNode) =>
-            syntaxNode.GetFirstToken().IsVerbatimStringLiteral();
+        private static bool IsInescapableString(SyntaxNode syntaxNode) =>
+            syntaxNode.GetFirstToken() is var token
+            && (token.IsVerbatimStringLiteral()
+                || token.IsAnyKind(SyntaxKindEx.SingleLineRawStringLiteralToken, SyntaxKindEx.MultiLineRawStringLiteralToken));
 
-        private static bool IsInterpolatedVerbatimString(SyntaxNode syntaxNode) =>
-            syntaxNode.GetFirstToken().IsKind(SyntaxKind.InterpolatedVerbatimStringStartToken);
+        private static bool IsInescepableInterpolatedString(SyntaxNode syntaxNode) =>
+            syntaxNode.GetFirstToken().IsAnyKind(
+                SyntaxKind.InterpolatedVerbatimStringStartToken,
+                SyntaxKindEx.InterpolatedSingleLineRawStringStartToken,
+                SyntaxKindEx.InterpolatedMultiLineRawStringStartToken);
+
+        private static bool IsInescapableUtf8String(SyntaxNode syntaxNode) =>
+            syntaxNode.GetFirstToken().IsAnyKind(SyntaxKindEx.Utf8SingleLineRawStringLiteralToken, SyntaxKindEx.Utf8MultiLineRawStringLiteralToken);
     }
 }

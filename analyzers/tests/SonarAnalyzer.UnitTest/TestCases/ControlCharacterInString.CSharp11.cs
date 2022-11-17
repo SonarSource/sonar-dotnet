@@ -4,36 +4,46 @@ namespace Tests.Diagnostics
 {
     class Program
     {
-        public const string RawStringLiteralsNonCompliant = """test"""; // Noncompliant
-        public const string RawStringLiteralsCompliant = """test""";
+        public const string RawCompliant = """test"""; // Compliant
+        public const string RawCompliantWithSpecialCharacter = """test"""; // Compliant, raw string
 
-        public const string InterpolatedStringNonCompliant = $"""test{RawStringLiteralsNonCompliant}"""; // FN
-        public const string InterpolatedStringNonCompliant2 = $"""test{RawStringLiteralsCompliant}"""; // Noncompliant
-        public const string InterpolatedStringCompliant = $"""test{RawStringLiteralsCompliant}""";
+        public const string RawCompliantWithInterpolation = $"""test{RawCompliantWithSpecialCharacter}"""; // Compliant, raw string
+        public const string RawCompliantWithInterpolationAndSpecialCharacter = $"""test{RawCompliant}"""; // Compliant, raw string
 
         void Utf8StringLiterals()
         {
-            ReadOnlySpan<byte> Utf8Compliant = "test"u8;
-            ReadOnlySpan<byte> Utf8Compliant2 = """test"""u8;
-            ReadOnlySpan<byte> Utf8NonCompliant = "test"u8; // FN
-            ReadOnlySpan<byte> Uft8NonCompliant2 = """test"""u8; // FN
+            ReadOnlySpan<byte> Utf8Compliant = "test"u8; // Compliant
+            ReadOnlySpan<byte> Utf8Noncompliant = "test"u8; // Noncompliant
+            ReadOnlySpan<byte> Utf8VerbatimCompliant = @"test"u8; // Compliant, verbatim utf-8 string
+
+            ReadOnlySpan<byte> Utf8CompliantRaw = """test"""u8; // Compliant, raw string
+            ReadOnlySpan<byte> Utf8CompliantRawWithSpecialCharacter = """test"""u8; // Compliant, raw string
         }
 
         void NewlinesInStringInterpolation()
-        { 
-            string NewlinesInterpolatedStringNonCompliant = $"test{RawStringLiteralsNonCompliant +
-                RawStringLiteralsNonCompliant}"; // FN
-            string NewlinesInterpolatedStringNonCompliant2 = $"test{RawStringLiteralsCompliant +
-                RawStringLiteralsCompliant}"; // Noncompliant@-1
-            string NewlinesInterpolatedStringCompliant = $"test{RawStringLiteralsCompliant +
-                RawStringLiteralsCompliant}";
+        {
+            var compliant = "test"; // Compliant
+            var nonCompliant = "test"; // Noncompliant
 
-            string NewlinesInterpolatedStringRawNonCompliant = $$"""test{{RawStringLiteralsNonCompliant +
-                RawStringLiteralsNonCompliant}}"""; // FN
-            string NewlinesInterpolatedStringRawNonCompliant2 = $$"""test{{RawStringLiteralsCompliant +
-                RawStringLiteralsCompliant}}"""; // Noncompliant@-1
-            string NewlinesInterpolatedStringRawCompliant = $$"""test{{RawStringLiteralsCompliant +
-                RawStringLiteralsCompliant}}""";
+            var baseCase = $"test{
+                compliant
+                }"; // Compliant
+
+            var interpolatedTextHasControlCharacter = $"test{
+                nonCompliant
+                }"; // Compliant, interpolated text ignored
+
+            var normalTextHasControlCharacter = $"test{
+                nonCompliant
+                }"; // Noncompliant@-2
+
+            var verbatimWithControlCharacter = @$"test{
+                nonCompliant
+                }"; // Compliant, verbatim
+
+            var rawWithControlCharacter = $"""test{
+                nonCompliant
+                }"""; // Compliant, raw
         }
     }
 }
