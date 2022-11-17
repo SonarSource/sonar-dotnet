@@ -35,16 +35,16 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class DoNotShiftByZeroOrIntSize : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S2183";
-        private const string MessageFormat_UseLargerTypeOrPromote = "Either promote shift target to a larger integer type or shift by {0} instead.";
-        private const string MessageFormat_ShiftTooLarge = "Correct this shift; shift by {0} instead.";
-        private const string MessageFormat_RightShiftTooLarge = "Correct this shift; '{0}' is larger than the type size.";
-        private const string MessageFormat_UselessShift = "Remove this useless shift by {0}.";
+        private const string MessageFormatUseLargerTypeOrPromote = "Either promote shift target to a larger integer type or shift by {0} instead.";
+        private const string MessageFormatShiftTooLarge = "Correct this shift; shift by {0} instead.";
+        private const string MessageFormatRightShiftTooLarge = "Correct this shift; '{0}' is larger than the type size.";
+        private const string MessageFormatUselessShift = "Remove this useless shift by {0}.";
 
         private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, "{0}");
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        private static ImmutableDictionary<KnownType, int> mapKnownTypesToIntegerBitSize
+        private static readonly ImmutableDictionary<KnownType, int> MapKnownTypesToIntegerBitSize
             = new Dictionary<KnownType, int>
             {
                 [KnownType.System_Int64] = 64,
@@ -60,10 +60,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 [KnownType.System_SByte] = 32
             }.ToImmutableDictionary();
 
-        private enum Shift { Left, Right };
-
-        protected override void Initialize(SonarAnalysisContext context)
+        private enum Shift
         {
+            Left,
+            Right
+        }
+
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
@@ -97,17 +100,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.MethodDeclaration,
                 SyntaxKind.PropertyDeclaration);
-        }
 
-        private static bool ContainsShiftExpressionWithinTwoLines(HashSet<int> linesWithShiftOperations,
-            int lineNumber)
-        {
-            return linesWithShiftOperations.Contains(lineNumber - 2) ||
-                   linesWithShiftOperations.Contains(lineNumber - 1) ||
-                   linesWithShiftOperations.Contains(lineNumber)     ||
-                   linesWithShiftOperations.Contains(lineNumber + 1) ||
-                   linesWithShiftOperations.Contains(lineNumber + 2);
-        }
+        private static bool ContainsShiftExpressionWithinTwoLines(HashSet<int> linesWithShiftOperations, int lineNumber) =>
+            linesWithShiftOperations.Contains(lineNumber - 2)
+            || linesWithShiftOperations.Contains(lineNumber - 1)
+            || linesWithShiftOperations.Contains(lineNumber)
+            || linesWithShiftOperations.Contains(lineNumber + 1)
+            || linesWithShiftOperations.Contains(lineNumber + 2);
 
         private static Tuple<Shift, ExpressionSyntax> GetRhsArgumentOfShiftNode(SyntaxNode node)
         {
@@ -117,7 +116,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return new Tuple<Shift, ExpressionSyntax>(Shift.Left, binaryExpression.Right);
             }
 
-            if (binaryExpression?.OperatorToken.IsKind(SyntaxKind.GreaterThanGreaterThanToken) ?? false)
+            if (binaryExpression?.OperatorToken.IsAnyKind(SyntaxKind.GreaterThanGreaterThanToken, SyntaxKindEx.GreaterThanGreaterThanGreaterThanToken) ?? false)
             {
                 return new Tuple<Shift, ExpressionSyntax>(Shift.Right, binaryExpression.Right);
             }
@@ -128,7 +127,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return new Tuple<Shift, ExpressionSyntax>(Shift.Left, assignmentExpession.Right);
             }
 
-            if (assignmentExpession?.OperatorToken.IsKind(SyntaxKind.GreaterThanGreaterThanEqualsToken) ?? false)
+            if (assignmentExpession?.OperatorToken.IsAnyKind(SyntaxKind.GreaterThanGreaterThanEqualsToken, SyntaxKindEx.GreaterThanGreaterThanGreaterThanEqualsToken) ?? false)
             {
                 return new Tuple<Shift, ExpressionSyntax>(Shift.Right, assignmentExpession.Right);
             }
@@ -139,8 +138,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool TryGetConstantValue(ExpressionSyntax expression, out int value)
         {
             value = 0;
-            return expression?.RemoveParentheses() is LiteralExpressionSyntax literalExpression &&
-                int.TryParse(literalExpression?.Token.ValueText, out value);
+            return expression.RemoveParentheses() is LiteralExpressionSyntax literalExpression
+                && int.TryParse(literalExpression.Token.ValueText, out value);
         }
 
         private static ShiftInstance FindShiftInstance(SyntaxNode node, SemanticModel semanticModel)
@@ -151,41 +150,29 @@ namespace SonarAnalyzer.Rules.CSharp
                 return null;
             }
 
-            if (!TryGetConstantValue(tuple.Item2, out var shiftByCount))
+            if (!TryGetConstantValue(tuple.Item2, out var shiftByCount)
+                || semanticModel.GetTypeInfo(node).ConvertedType is not { } typeSymbol
+                || (FindTypeSizeOrDefault(typeSymbol) is var variableBitLength && variableBitLength == 0))
             {
                 return new ShiftInstance(node);
             }
 
-            var typeSymbol = semanticModel.GetTypeInfo(node).ConvertedType;
-            if (typeSymbol == null)
-            {
-                return new ShiftInstance(node);
-            }
-
-            var variableBitLength = FindTypeSizeOrDefault(typeSymbol);
-            if (variableBitLength == 0)
-            {
-                return new ShiftInstance(node);
-            }
-
-            var issueDescription = FindProblemDescription(variableBitLength, shiftByCount, tuple.Item1, out bool isLiteralZero);
+            var issueDescription = FindProblemDescription(variableBitLength, shiftByCount, tuple.Item1, out var isLiteralZero);
             return issueDescription == null ? new ShiftInstance(node) : new ShiftInstance(issueDescription, isLiteralZero, node);
         }
 
-        private static int FindTypeSizeOrDefault(ITypeSymbol typeSymbol)
-        {
-            return mapKnownTypesToIntegerBitSize
+        private static int FindTypeSizeOrDefault(ITypeSymbol typeSymbol) =>
+            MapKnownTypesToIntegerBitSize
                 .Where(kv => typeSymbol.Is(kv.Key))
                 .Select(kv => kv.Value)
                 .FirstOrDefault();
-        }
 
         private static string FindProblemDescription(int typeSizeInBits, int shiftBy, Shift shiftDirection, out bool isLiteralZero)
         {
             if (shiftBy == 0)
             {
                 isLiteralZero = true;
-                return string.Format(MessageFormat_UselessShift, 0);
+                return string.Format(MessageFormatUselessShift, 0);
             }
 
             isLiteralZero = false;
@@ -197,7 +184,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (shiftDirection == Shift.Right)
             {
-                return string.Format(MessageFormat_RightShiftTooLarge, shiftBy);
+                return string.Format(MessageFormatRightShiftTooLarge, shiftBy);
             }
 
             var shiftSuggestion = shiftBy % typeSizeInBits;
@@ -205,29 +192,27 @@ namespace SonarAnalyzer.Rules.CSharp
             if (typeSizeInBits == 64)
             {
                 return shiftSuggestion == 0
-                    ? string.Format(MessageFormat_UselessShift, shiftBy)
-                    : string.Format(MessageFormat_ShiftTooLarge, shiftSuggestion);
+                    ? string.Format(MessageFormatUselessShift, shiftBy)
+                    : string.Format(MessageFormatShiftTooLarge, shiftSuggestion);
             }
 
             if (shiftSuggestion == 0)
             {
-                return string.Format(MessageFormat_UseLargerTypeOrPromote,
+                return string.Format(MessageFormatUseLargerTypeOrPromote,
                     "less than " + typeSizeInBits);
             }
 
-            return string.Format(MessageFormat_UseLargerTypeOrPromote, shiftSuggestion);
+            return string.Format(MessageFormatUseLargerTypeOrPromote, shiftSuggestion);
         }
 
-        private class ShiftInstance
+        private sealed class ShiftInstance
         {
             public Diagnostic Diagnostic { get; }
             public bool IsLiteralZero { get; }
             public int Line { get; }
 
-            public ShiftInstance(SyntaxNode node)
-            {
+            public ShiftInstance(SyntaxNode node) =>
                 Line = node.GetLineNumberToReport();
-            }
 
             public ShiftInstance(string description, bool isLieralZero, SyntaxNode node)
                 : this(node)

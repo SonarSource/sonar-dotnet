@@ -28,6 +28,7 @@ namespace Tests.Diagnostics
 
             ul <<= 0;
             ul <<= 1025; // Noncompliant {{Correct this shift; shift by 1 instead.}}
+            ul <<= "I am not an integer"; // Error [CS0019]
 
             b <<= 16;
             b <<= 17;
