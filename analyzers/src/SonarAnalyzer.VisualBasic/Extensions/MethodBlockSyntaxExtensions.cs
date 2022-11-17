@@ -27,5 +27,5 @@ namespace SonarAnalyzer.Extensions;
 public static class MethodBlockSyntaxExtensions
 {
     public static bool IsShared(this MethodBlockSyntax methodBlock) =>
-        methodBlock.SubOrFunctionStatement.Modifiers.Any(x => x.Kind() == SyntaxKind.SharedKeyword);
+        methodBlock.SubOrFunctionStatement.Modifiers.Any(SyntaxKind.SharedKeyword);
 }
