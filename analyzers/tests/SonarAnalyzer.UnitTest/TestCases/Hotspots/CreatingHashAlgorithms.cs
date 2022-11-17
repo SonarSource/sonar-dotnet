@@ -62,6 +62,14 @@ namespace Tests.Diagnostics
             var md5Var = (HashAlgorithm)CryptoConfig.CreateFromName(algoName); // Noncompliant
             algoName = "SHA256Managed";
             var SHA256ManagedVar = (HashAlgorithm)CryptoConfig.CreateFromName(algoName);
+
+            const string part1 = "System.Security.Cryptography";
+            const string part2 = "SHA1";
+            using var SHA1HashAlgorithmInterpolation = HashAlgorithm.Create($"{part1}.{part2}"); // Noncompliant
+
+            string part3 = "System.Security.Cryptography";
+            string part4 = "SHA1";
+            using var SHA1HashAlgorithmInterpolation2 = HashAlgorithm.Create($"{part3}.{part4}"); // FN (at the moment we validate only constant string)
         }
     }
 }
