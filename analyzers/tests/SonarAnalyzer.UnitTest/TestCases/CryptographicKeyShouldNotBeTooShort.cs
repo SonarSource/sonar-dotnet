@@ -37,6 +37,9 @@ namespace Tests.Diagnostics
             new RSACryptoServiceProvider(1024, new CspParameters()); // Noncompliant
             new RSACryptoServiceProvider(invalidKeySizeConst); // Noncompliant
             new RSACryptoServiceProvider(localInvalidSize); // Noncompliant
+
+            // https://github.com/SonarSource/sonar-dotnet/issues/6341
+            new RSACryptoServiceProvider { PersistKeyInCsp = false }; // Noncompliant
         }
     }
 

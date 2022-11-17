@@ -192,7 +192,7 @@ namespace SonarAnalyzer.Rules.CSharp
             // DSACryptoServiceProvider is always noncompliant as it has a max key size of 1024
             // RSACryptoServiceProvider() and RSACryptoServiceProvider(System.Security.Cryptography.CspParameters) constructors are noncompliants as they have a default key size of 1024
             if (containingType.Is(KnownType.System_Security_Cryptography_DSACryptoServiceProvider)
-                || (containingType.Is(KnownType.System_Security_Cryptography_RSACryptoServiceProvider) && HasDefaultSize(objectCreation.ArgumentList.Arguments, c)))
+                || (containingType.Is(KnownType.System_Security_Cryptography_RSACryptoServiceProvider) && HasDefaultSize(objectCreation.ArgumentList, c)))
             {
                 c.ReportIssue(Diagnostic.Create(Rule, objectCreation.Expression.GetLocation(), MinimalCommonKeyLength, CipherName(containingType), ""));
             }
@@ -203,9 +203,12 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static bool HasDefaultSize(SeparatedSyntaxList<ArgumentSyntax> arguments, SyntaxNodeAnalysisContext c) =>
-            arguments.Count == 0
-            || (arguments.Count == 1 && c.SemanticModel.GetTypeInfo(arguments[0].Expression).Type is ITypeSymbol type && type.Is(KnownType.System_Security_Cryptography_CspParameters));
+        private static bool HasDefaultSize(ArgumentListSyntax argumentList, SyntaxNodeAnalysisContext c) =>
+            argumentList == null
+            || argumentList.Arguments.Count == 0
+            || (argumentList.Arguments.Count == 1
+                && c.SemanticModel.GetTypeInfo(argumentList.Arguments[0].Expression).Type is ITypeSymbol type
+                && type.Is(KnownType.System_Security_Cryptography_CspParameters));
 
         private static void CheckGenericDsaRsaCryptographyAlgorithms(ITypeSymbol containingType, SyntaxNode syntaxElement, SyntaxNode keyLengthSyntax, SyntaxNodeAnalysisContext c)
         {
