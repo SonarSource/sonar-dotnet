@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 namespace SonarAnalyzer.SymbolicExecution.Sonar.Relationships
 {
     public abstract class NotEqualsRelationship : BinaryRelationship, IEquatable<NotEqualsRelationship>

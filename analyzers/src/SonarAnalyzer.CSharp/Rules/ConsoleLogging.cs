@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 namespace SonarAnalyzer.Rules.CSharp
 {
     [Obsolete("This rule is superseded by S106.")]
