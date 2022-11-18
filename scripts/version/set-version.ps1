@@ -18,8 +18,7 @@ $ErrorActionPreference = "Stop"
 function Set-VersionForJava() {
     Write-Header "Updating version in Java files"
 
-    mvn org.codehaus.mojo:versions-maven-plugin:2.2:set "-DnewVersion=${fixedVersion}-SNAPSHOT" `
-        -DgenerateBackupPoms=false -B -e
+    mvn org.codehaus.mojo:versions-maven-plugin:2.2:set "-DnewVersion=${fixedVersion}-SNAPSHOT" -DgenerateBackupPoms=false -B -e -P its
     Test-ExitCode "ERROR: Maven set version FAILED."
 }
 
