@@ -83,7 +83,7 @@ Namespace Compliant
     Class ToStringSharedMethod
 
         Public Shared Function ToString() As String
-            Return String.Empty
+            Return Nothing
         End Function
 
     End Class
