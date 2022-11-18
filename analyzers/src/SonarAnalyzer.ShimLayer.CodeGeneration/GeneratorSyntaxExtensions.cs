@@ -3,8 +3,6 @@
 
 namespace StyleCop.Analyzers.CodeGeneration
 {
-    using System;
-    using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.CSharp;
 
     internal static class GeneratorSyntaxExtensions

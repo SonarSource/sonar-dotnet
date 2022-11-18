@@ -18,18 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using Microsoft.CodeAnalysis;
 using SonarAnalyzer.CFG.LiveVariableAnalysis;
 using SonarAnalyzer.CFG.Roslyn;
-using SonarAnalyzer.Extensions;
-using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn.Checks;
-using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {

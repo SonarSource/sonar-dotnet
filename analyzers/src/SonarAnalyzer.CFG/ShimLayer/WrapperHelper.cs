@@ -3,10 +3,7 @@
 
 namespace StyleCop.Analyzers.Lightup
 {
-    using System;
-    using System.Collections.Immutable;
     using System.Reflection;
-    using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.CSharp;
 
     public static class WrapperHelper

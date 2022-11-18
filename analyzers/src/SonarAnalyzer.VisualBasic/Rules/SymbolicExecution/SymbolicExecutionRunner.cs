@@ -18,16 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
-using System.Threading;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.VisualBasic;
-using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.CFG.Roslyn;
-using SonarAnalyzer.Common;
-using SonarAnalyzer.Extensions;
-using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.VisualBasic;
 
 namespace SonarAnalyzer.Rules.VisualBasic

@@ -3,8 +3,6 @@
 
 namespace StyleCop.Analyzers.Lightup
 {
-    using System;
-    using Microsoft.CodeAnalysis.Diagnostics;
 
     public static class AnalyzerOptionsExtensions
     {

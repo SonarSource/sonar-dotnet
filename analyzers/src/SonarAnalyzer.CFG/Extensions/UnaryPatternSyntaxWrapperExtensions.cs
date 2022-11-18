@@ -20,7 +20,6 @@
 
 using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.CFG.Helpers;
-using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Extensions
 {

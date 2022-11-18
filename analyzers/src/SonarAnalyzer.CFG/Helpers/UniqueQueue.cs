@@ -19,7 +19,6 @@
  */
 
 using System.Collections;
-using System.Collections.Generic;
 
 namespace SonarAnalyzer.CFG.Helpers
 {

@@ -18,10 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Protobuf;
 
 namespace SonarAnalyzer.Rules

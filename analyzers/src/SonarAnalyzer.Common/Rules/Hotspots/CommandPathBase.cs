@@ -19,8 +19,6 @@
  */
 
 using System.Text.RegularExpressions;
-using SonarAnalyzer.Common;
-using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {

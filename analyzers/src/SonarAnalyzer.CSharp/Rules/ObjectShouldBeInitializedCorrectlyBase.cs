@@ -19,17 +19,8 @@
  */
 
 using System.IO;
-using System.Linq;
 using System.Xml.XPath;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
-using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Helpers.Trackers;
-using SonarAnalyzer.Wrappers;
-using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules
 {
