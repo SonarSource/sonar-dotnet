@@ -18,14 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Helpers;
-
-#if CS
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-#else
-using Microsoft.CodeAnalysis.VisualBasic.Syntax;
-#endif
-
 namespace SonarAnalyzer.Extensions
 {
     internal static partial class SyntaxNodeExtensions
