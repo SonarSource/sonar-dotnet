@@ -7,7 +7,7 @@ namespace Net6Poc.DisablingCSRFProtection
 {
     internal class TestCases
     {
-        [GenericIgnoreAntiforgeryToken<int>] // FN - for performance reasons attribute inheritance is not supported
+        [GenericIgnoreAntiforgeryToken<int>] // FN - for performance reasons inheritance is not supported
         public void A() { }
 
         public void B() { }
