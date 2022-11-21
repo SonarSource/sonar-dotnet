@@ -248,6 +248,7 @@ public class TestUtils {
   private static WsClient newWsClient(Orchestrator orch) {
     return WsClientFactories.getDefault().newClient(HttpConnector.newBuilder()
       .url(orch.getServer().getUrl())
+      .token(orch.getDefaultAdminToken())
       .build());
   }
 
