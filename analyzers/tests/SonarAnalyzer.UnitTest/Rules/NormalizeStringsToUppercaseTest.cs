@@ -29,5 +29,16 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void NormalizeStringsToUppercase() =>
             new VerifierBuilder<NormalizeStringsToUppercase>().AddPaths("NormalizeStringsToUppercase.cs")
                 .Verify();
+
+#if NET
+
+        [TestMethod]
+        public void NormalizeStringsToUppercase_CSharp11() =>
+            new VerifierBuilder<NormalizeStringsToUppercase>().AddPaths("NormalizeStringsToUppercase.CSharp11.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .Verify();
+
+#endif
+
     }
 }
