@@ -25,8 +25,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class BreakOutsideSwitchTest
     {
+        private readonly VerifierBuilder verifier = new VerifierBuilder<BreakOutsideSwitch>();
+
         [TestMethod]
         public void BreakOutsideSwitch() =>
-            new VerifierBuilder<BreakOutsideSwitch>().AddPaths("BreakOutsideSwitch.cs").Verify();
+            verifier.AddPaths("BreakOutsideSwitch.cs").Verify();
+
+        [TestMethod]
+        public void BreakOutsideSwitch_CSharp7() =>
+            verifier.AddPaths("BreakOutsideSwitch.CSharp7.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp7)
+                .Verify();
     }
 }

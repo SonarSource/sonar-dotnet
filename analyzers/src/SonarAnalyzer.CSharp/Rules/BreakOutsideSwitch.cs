@@ -61,19 +61,15 @@ namespace SonarAnalyzer.Rules.CSharp
             return ancestor != null && ancestor.IsKind(SyntaxKind.SwitchStatement);
         }
 
-        private static IEnumerable<SyntaxKind> LoopOrSwitch
-        {
-            get
-            {
-                return new[]
+        private static IEnumerable<SyntaxKind> LoopOrSwitch =>
+            new[]
                 {
                     SyntaxKind.SwitchStatement,
                     SyntaxKind.WhileStatement,
                     SyntaxKind.DoStatement,
                     SyntaxKind.ForStatement,
-                    SyntaxKind.ForEachStatement
+                    SyntaxKind.ForEachStatement,
+                    SyntaxKindEx.ForEachVariableStatement
                 };
-            }
-        }
     }
 }
