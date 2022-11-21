@@ -11,7 +11,7 @@ namespace TestCases
         public static void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews(options => options.Filters.Add(new IgnoreAntiforgeryTokenAttribute())); // Noncompliant
-            services.AddControllersWithViews(options => options.Filters.Add(new IATA())); // Noncompliant
+            services.AddControllersWithViews(options => options.Filters.Add(new IATA())); // FN - for performance reasons type alias is not supported
             services.AddControllersWithViews(options => options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()));
             services.AddControllersWithViews(options => options.Filters.Add(new ValidateAntiForgeryTokenAttribute()));
             services.AddControllers(options => options.Filters.Add(new IgnoreAntiforgeryTokenAttribute())); // Noncompliant
@@ -51,4 +51,13 @@ namespace TestCases
         [HttpPost, AutoValidateAntiforgeryToken]
         public IActionResult ChangeEmail_AttributesOnTheSameLine_Compliant(string model) => View(path);
     }
+
+    internal class Inheritance 
+    {
+        [DerivedAttribute] // FN - for performance reasons inheritance is not supported
+        public void B() { }
+    }
+    public class DerivedAttribute : IgnoreAntiforgeryTokenAttribute { }
+
+
 }
