@@ -7,15 +7,11 @@ namespace Net6Poc.DisablingCSRFProtection
 {
     internal class TestCases
     {
-        [GenericIgnoreAntiforgeryToken<int>] // FN
+        [GenericIgnoreAntiforgeryToken<int>] // FN - for performance reasons attribute inheritance is not supported
         public void A() { }
 
-        [NonGenericAttribute] // FN
         public void B() { }
-
-        public void C() { }
     }
-    public class NonGenericAttribute : IgnoreAntiforgeryTokenAttribute { }
 
     public class GenericIgnoreAntiforgeryToken<T> : IgnoreAntiforgeryTokenAttribute { }
 }

@@ -51,4 +51,13 @@ namespace TestCases
         [HttpPost, AutoValidateAntiforgeryToken]
         public IActionResult ChangeEmail_AttributesOnTheSameLine_Compliant(string model) => View(path);
     }
+
+    internal class Inheritance 
+    {
+        [DerivedAttribute] // FN - for performance reasons attribute inheritance is not supported
+        public void B() { }
+    }
+    public class DerivedAttribute : IgnoreAntiforgeryTokenAttribute { }
+
+
 }
