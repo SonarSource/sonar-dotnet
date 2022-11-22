@@ -1,6 +1,6 @@
 ﻿using System;
 
-record IntPointers 
+record IntPointers
 {
     public const IntPtr myConst = 0;  // Compliant
     public static IntPtr staticField = 0; // Noncompliant
@@ -29,4 +29,15 @@ record IntPointers
 
     public IntPtr Property5 { get; set; } = 0 * 20 - 0; // FN - Expression is not evaluated
     public UIntPtr Property6 { get; set; } = 0 * 20 - 0; // FN - Expression is not evaluated
+}
+
+public readonly struct FooStruct
+{
+    public FooStruct() { }
+
+    public int Value { get; init; } // Compliant
+    public bool BoolValue { get; init; } // Compliant
+
+    public int ValueDefault { get; init; } = 0; // Noncompliant
+    public bool BoolValueDefault { get; init; } = false; // Noncompliant
 }
