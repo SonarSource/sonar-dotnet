@@ -35,3 +35,5 @@ public record R<T>
         Action<List<int>> x = static x => { };
     }
 }
+
+public record R2(List<int> Property);  // FN #6416
