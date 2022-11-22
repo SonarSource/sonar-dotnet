@@ -50,7 +50,7 @@ namespace Tests.Diagnostics
             Response.Headers.Append(HeaderNames.AccessControlAllowOrigin, "*, https://trustedwebsite.com"); // FN
             Response.Headers.Append(HeaderNames.AccessControlAllowOrigin, $"{Star}, https://trustedwebsite.com"); // FN
 
-            Response.Headers.Append(HeaderNames.AccessControlAllowOrigin, $"{Star}"); // FN
+            Response.Headers.Append(HeaderNames.AccessControlAllowOrigin, $"{Star}"); // Noncompliant
             Response.Headers.Append(HeaderNames.AccessControlAllowOrigin, $"{NonConstStar}"); // FN
         }
     }

@@ -119,6 +119,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsFirstArgumentAccessControlAllowOrigin(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
             invocation.ArgumentList.Arguments.First().Expression switch
             {
+                InterpolatedStringExpressionSyntax interpolation => interpolation.FindStringConstant(semanticModel) == AccessControlAllowOriginHeader,
                 LiteralExpressionSyntax literal => literal.Token.ValueText == AccessControlAllowOriginHeader,
                 MemberAccessExpressionSyntax memberAccess => IsAccessControlAllowOriginProperty(memberAccess, semanticModel),
                 _ => false
@@ -134,6 +135,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsStar(ExpressionSyntax expressionSyntax, SemanticModel semanticModel) =>
             expressionSyntax switch
             {
+                InterpolatedStringExpressionSyntax interpolation => interpolation.FindStringConstant(semanticModel) == StarConstant,
                 LiteralExpressionSyntax literal => ContainsStar(semanticModel.GetConstantValue(literal)),
                 IdentifierNameSyntax identifier => ContainsStar(semanticModel.GetConstantValue(identifier)),
                 ImplicitArrayCreationExpressionSyntax arrayCreation => ContainsStar(arrayCreation.Initializer.Expressions, semanticModel),

@@ -18,7 +18,7 @@ namespace Net6Poc.PermissiveCors
 
             const string part3 = "Access-Control";
             const string part4 = "Allow-Origin";
-            Response.Headers.Add($$"""{{part3}}-{{part4}}""", "*"); // FN
+            Response.Headers.Add($$"""{{part3}}-{{part4}}""", "*"); // Noncompliant
         }
     }
 
