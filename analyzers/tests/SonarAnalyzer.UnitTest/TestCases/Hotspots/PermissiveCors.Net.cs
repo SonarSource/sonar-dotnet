@@ -51,7 +51,7 @@ namespace Tests.Diagnostics
             Response.Headers.Append(HeaderNames.AccessControlAllowOrigin, $"{Star}, https://trustedwebsite.com"); // FN
 
             Response.Headers.Append(HeaderNames.AccessControlAllowOrigin, $"{Star}"); // Noncompliant
-            Response.Headers.Append(HeaderNames.AccessControlAllowOrigin, $"{NonConstStar}"); // FN
+            Response.Headers.Append(HeaderNames.AccessControlAllowOrigin, $"{NonConstStar}"); // FN (at the moment we validate only constant string)
         }
     }
 

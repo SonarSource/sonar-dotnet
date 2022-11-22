@@ -14,7 +14,7 @@ namespace Net6Poc.PermissiveCors
             string part2 = "Allow-Origin";
             // The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given origin.
             Response.Headers.Add("""Access-Control-Allow-Origin""", """*"""); // Noncompliant
-            Response.Headers.Add($$"""{{part1}}-{{part2}}""", "*"); // FN
+            Response.Headers.Add($$"""{{part1}}-{{part2}}""", "*"); // FN (at the moment we validate only constant string)
 
             const string part3 = "Access-Control";
             const string part4 = "Allow-Origin";
