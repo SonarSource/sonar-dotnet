@@ -67,12 +67,17 @@ namespace SonarAnalyzer.Rules.CSharp
                 _ => null
             };
 
-        private static bool CanIfStatementBeMoved(IfStatementSyntax ifStatementSyntax) =>
-            ifStatementSyntax.Else == null
-            && ifStatementSyntax.Condition is InvocationExpressionSyntax invocationExpressionSyntax
-            && !invocationExpressionSyntax.DescendantNodes()
-                                          .OfType<ArgumentSyntax>()
-                                          .Any(argument => argument.RefOrOutKeyword.IsAnyKind(SyntaxKind.OutKeyword, SyntaxKind.RefKeyword));
+        private static bool CanIfStatementBeMoved(IfStatementSyntax ifStatementSyntax)
+        {
+            return ifStatementSyntax.Else == null && (ConditionIsPattern() || ConditionValidInvocation());
+
+            bool ConditionIsPattern() => IsPatternExpressionSyntaxWrapper.IsInstance(ifStatementSyntax.Condition);
+
+            bool ConditionValidInvocation() => ifStatementSyntax.Condition is InvocationExpressionSyntax invocationExpressionSyntax
+                && !invocationExpressionSyntax.DescendantNodes()
+                                              .OfType<ArgumentSyntax>()
+                                              .Any(argument => argument.RefOrOutKeyword.IsAnyKind(SyntaxKind.OutKeyword, SyntaxKind.RefKeyword));
+        }
 
         /// <remarks>
         /// There are multiple scenarios where the code can be simplified using LINQ.
