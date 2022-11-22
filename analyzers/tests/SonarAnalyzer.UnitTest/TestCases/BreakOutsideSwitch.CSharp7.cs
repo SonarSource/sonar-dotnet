@@ -4,9 +4,14 @@
     {
         public BreakOutsideSwitch(int n)
         {
-            foreach (var (a, b) in new (int, int)[0])
+            switch (true)
             {
-                break; // Noncompliant
+                case true:
+                    foreach (var (a, b) in new (int, int)[0])
+                    {
+                        break; // Noncompliant
+                    }
+                    break;
             }
         }
     }
