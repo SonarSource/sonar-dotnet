@@ -28,16 +28,27 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class NameOfShouldBeUsedTest
     {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.NameOfShouldBeUsed>().AddPaths("NameOfShouldBeUsed.cs");
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.NameOfShouldBeUsed>();
         private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.NameOfShouldBeUsed>().AddPaths("NameOfShouldBeUsed.vb");
 
         [TestMethod]
-        public void NameOfShouldBeUsed_FromCSharp6() =>
-            builderCS.WithOptions(ParseOptionsHelper.FromCSharp6).Verify();
+        public void NameOfShouldBeUsed_CSharp6() =>
+            builderCS.WithOptions(ParseOptionsHelper.FromCSharp6).AddPaths("NameOfShouldBeUsed.cs").Verify();
 
         [TestMethod]
         public void NameOfShouldBeUsed_CSharp5() =>
-            builderCS.WithLanguageVersion(RoslynCS.LanguageVersion.CSharp5).WithErrorBehavior(CompilationErrorBehavior.Ignore).VerifyNoIssueReported();
+            builderCS.WithLanguageVersion(RoslynCS.LanguageVersion.CSharp5)
+            .AddPaths("NameOfShouldBeUsed.cs")
+            .WithErrorBehavior(CompilationErrorBehavior.Ignore)
+            .VerifyNoIssueReported();
+
+#if NET
+
+        [TestMethod]
+        public void NameOfShouldBeUsed_CSharp11() =>
+            builderCS.WithOptions(ParseOptionsHelper.FromCSharp11).AddPaths("NameOfShouldBeUsed.CSharp11.cs").Verify();
+
+#endif
 
         [TestMethod]
         public void NameOfShouldBeUsed_FromVB14() =>
