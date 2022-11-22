@@ -309,5 +309,16 @@ namespace Tests.Diagnostics
 
             public int GetX() => X;
         }
+
+        void IsPattern(List<int> list)
+        {
+            foreach (var item in list) // Noncompliant
+            {
+                if (item is 42) // Secondary
+                {
+                    Console.WriteLine("The meaning of Life.");
+                }
+            }
+        }
     }
 }
