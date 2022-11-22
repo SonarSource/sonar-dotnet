@@ -12,7 +12,7 @@ namespace Tests.Diagnostics
         public static abstract string StaticAbstractMethod(string value);
     }
 
-    public interface IAbstractMethodCommon : IAbstractMethodFirst, IAbstractMethodSecond { } // FN
+    public interface IAbstractMethodCommon : IAbstractMethodFirst, IAbstractMethodSecond { } // Compliant: static methods are not inherited
 
     public interface IVirtualMethodFirst
     {
@@ -24,5 +24,5 @@ namespace Tests.Diagnostics
         public static virtual string StaticVirtualMethod(string value) => value;
     }
 
-    public interface IVirtualMethodCommon : IVirtualMethodFirst, IVirtualMethodSecond { } // FN
+    public interface IVirtualMethodCommon : IVirtualMethodFirst, IVirtualMethodSecond { } // Compliant: static methods are not inherited
 }
