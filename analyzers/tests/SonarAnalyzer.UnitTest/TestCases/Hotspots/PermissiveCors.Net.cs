@@ -14,6 +14,7 @@ namespace Tests.Diagnostics
     public class CorsEnabledManualAddedHeadersController : Controller
     {
         private const string Star = "*";
+        private string NonConstStar = "*";
 
         [HttpGet]
         public void Index(string header, string headerValue)
@@ -48,6 +49,9 @@ namespace Tests.Diagnostics
             Response.Headers.Append(HeaderNames.AccessControlAllowOrigin, new SV("*")); // FN - for performance reasons type alias is not supported
             Response.Headers.Append(HeaderNames.AccessControlAllowOrigin, "*, https://trustedwebsite.com"); // FN
             Response.Headers.Append(HeaderNames.AccessControlAllowOrigin, $"{Star}, https://trustedwebsite.com"); // FN
+
+            Response.Headers.Append(HeaderNames.AccessControlAllowOrigin, $"{Star}"); // FN
+            Response.Headers.Append(HeaderNames.AccessControlAllowOrigin, $"{NonConstStar}"); // FN
         }
     }
 
