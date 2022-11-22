@@ -15,7 +15,7 @@ namespace Tests.Diagnostics
                 {
                     > 0 => "FOO",
                     _ => "Bar",
-                }} ".ToUpper(); // Noncompliant {{Define the locale to be used in this string operation.}}
+                }}".ToUpper(); // Noncompliant {{Define the locale to be used in this string operation.}}
         }
     }
 }

@@ -25,18 +25,14 @@ public class FooLessThanFiveCharacters
 
 public class FooNonCompliantStringInterpolation
 {
-    static string GetName() => "Bar";
+    public string NameOne = $"{"BarBar" // Noncompliant {{Define a constant instead of using this literal 'BarBar' 4 times.}}
+        }";
 
-    public string NameOne = $"{
-        GetName()
-        }"; // FN - {{Define a constant instead of using this literal '""Bar""' 4 times.}}
+    public string NameTwo = $"{"BarBar" // Secondary
+        }";
 
-    public string NameTwo = $"{
-        GetName()
-        }"; // FN
+    public static string NameThree = "BarBar"; // Secondary
 
-    public static string NameThree = "Bar"; // FN
-
-    public static readonly string NameReadonly = $"{GetName()}"; // FN
+    public static readonly string NameReadonly = $"{"BarBar"}"; // Secondary
 
 }
