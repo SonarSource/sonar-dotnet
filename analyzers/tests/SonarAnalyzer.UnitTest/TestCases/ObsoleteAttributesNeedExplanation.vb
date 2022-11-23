@@ -1,4 +1,3 @@
-﻿Imports System
 
 
     <Obsolete> Class Noncompliant ' Noncompliant {{Add an explanation.}}
