@@ -2,7 +2,7 @@
 
 
     <Obsolete> Class Noncompliant ' Noncompliant {{Add an explanation.}}
-'   ~~~~~~~~~~
+'   ^^^^^^^^^^
         <Obsolete> ' Noncompliant 
         Enum [Enum]
             foo
