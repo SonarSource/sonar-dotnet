@@ -29,7 +29,7 @@ namespace Tests.Diagnostics
             "CA1024:UsePropertiesWhereAppropriate",                                 // Secondary
             "CA1024:UsePropertiesWhereAppropriate" };                               // Secondary
     }
-    
+
     [DebuggerDisplay("12345", Name = "12345", TargetTypeName = "12345")] // Compliant - in attribute -> ignored
     public class Class1
     {

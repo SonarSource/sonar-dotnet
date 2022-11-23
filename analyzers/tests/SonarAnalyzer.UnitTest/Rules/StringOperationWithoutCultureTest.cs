@@ -25,8 +25,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class StringOperationWithoutCultureTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<StringOperationWithoutCulture>();
+
         [TestMethod]
         public void StringOperationWithoutCulture() =>
-            new VerifierBuilder<StringOperationWithoutCulture>().AddPaths("StringOperationWithoutCulture.cs").Verify();
+            builder.AddPaths("StringOperationWithoutCulture.cs").Verify();
+
+#if NET
+
+        [TestMethod]
+        public void StringOperationWithoutCulture_CSharp11() =>
+            builder.AddPaths("StringOperationWithoutCulture.CSharp11.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .Verify();
+
+#endif
+
     }
 }
