@@ -1,6 +1,5 @@
 ﻿Imports System
 
-Namespace S1123.ObsoleteAttributesNeedExplanation
 
     <Obsolete> Class Noncompliant ' Noncompliant {{Add an explanation.}}
 '   ~~~~~~~~~~
