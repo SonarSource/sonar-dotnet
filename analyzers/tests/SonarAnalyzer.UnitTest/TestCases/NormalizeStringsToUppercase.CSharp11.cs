@@ -21,7 +21,6 @@ namespace Tests.Diagnostics
                 _ => "Zero",
             }}".ToLowerInvariant(); // Noncompliant
 
-
             var rawStringLiteral = """
                 This is a long message.
                 It has several lines.

@@ -7,25 +7,20 @@ class FooBar
 
     public void Method()
     {
-        string foo = "foo";
-        string bar = "bar";
-
         Property1 = """
-    This is a long message.
-    It has several lines.
-        Some are indented
-                more than others.
-    """; // Noncompliant @-5
+            This is a long message.
+            It has several lines.
+                Some are indented
+                        more than others.
+            """; // Noncompliant @-5
 
-        LocalFunctionWithAttribute("""
-    This is a long message.
-    It has several lines.
-        Some are indented
-                more than others..
-    """); // Noncompliant @-5
+        LocalFunction("""
+            This is a long message.
+            It has several lines.
+                Some are indented
+                        more than others..
+            """); // Noncompliant @-5
 
-        void LocalFunctionWithAttribute([Localizable(true)] string param1)
-        {
-        }
+        void LocalFunction([Localizable(true)] string param1) { }
     }
 }
