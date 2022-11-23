@@ -21,4 +21,14 @@ namespace Tests.Diagnostics
         static abstract void SetRef(ref I3874 obj); // Noncompliant
         static abstract void SetOut(out I3874 obj); // Noncompliant
     }
+
+    public interface DefaultInterfaceImplementations
+    {
+        private void PrivateRefInst(ref int i) { }    // Compliant because not public
+        private static void PrivateRef(ref int i) { } // Compliant because not public
+        void RefInst(ref int i) { }                   // Noncompliant
+        void OutInst(out int i) { i = 1; }            // Noncompliant
+        static void Ref(ref int i) { }                // Noncompliant
+        static void Out(out int i) { i = 1; }         // Noncompliant
+    }
 }
