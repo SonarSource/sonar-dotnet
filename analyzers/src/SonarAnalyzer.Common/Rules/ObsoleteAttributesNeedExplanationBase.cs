@@ -18,10 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Linq;
-using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Helpers;
-
 namespace SonarAnalyzer.Rules;
 
 public abstract class ObsoleteAttributesNeedExplanationBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
@@ -33,7 +29,7 @@ public abstract class ObsoleteAttributesNeedExplanationBase<TSyntaxKind> : Sonar
 
     protected ObsoleteAttributesNeedExplanationBase() : base(DiagnosticId) { }
 
-    protected sealed override void Initialize(SonarAnalysisContext context) => 
+    protected sealed override void Initialize(SonarAnalysisContext context) =>
         context.RegisterSyntaxNodeActionInNonGenerated(
             Language.GeneratedCodeRecognizer,
             c =>
