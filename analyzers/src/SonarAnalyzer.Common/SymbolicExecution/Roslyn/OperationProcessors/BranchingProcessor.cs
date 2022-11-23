@@ -19,7 +19,6 @@
  */
 
 using SonarAnalyzer.SymbolicExecution.Constraints;
-using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 

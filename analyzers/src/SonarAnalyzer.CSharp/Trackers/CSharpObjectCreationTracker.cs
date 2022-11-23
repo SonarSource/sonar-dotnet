@@ -18,11 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.Extensions;
-using SonarAnalyzer.Wrappers;
-
 namespace SonarAnalyzer.Helpers.Trackers
 {
     public class CSharpObjectCreationTracker : ObjectCreationTracker<SyntaxKind>

@@ -3,7 +3,6 @@
 
 namespace StyleCop.Analyzers.Lightup
 {
-    using System;
     using Microsoft.CodeAnalysis.CSharp.Syntax;
 
     public static class StackAllocArrayCreationExpressionSyntaxExtensions

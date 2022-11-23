@@ -18,19 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Extensions;
-using SonarAnalyzer.Helpers;
-
-// Note: this rule only covers the indentation of the first line after a conditional.
-// Rule 2681 covers the misleading indentation of other lines of multiline blocks (https://jira.sonarsource.com/browse/RSPEC-2681)
-
 namespace SonarAnalyzer.Rules.CSharp
 {
+    // Note: this rule only covers the indentation of the first line after a conditional.
+    // Rule 2681 covers the misleading indentation of other lines of multiline blocks (https://jira.sonarsource.com/browse/RSPEC-2681)
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class IndentSingleLineFollowingConditional : SonarDiagnosticAnalyzer
     {

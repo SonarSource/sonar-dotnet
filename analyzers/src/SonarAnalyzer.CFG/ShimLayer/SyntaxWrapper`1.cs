@@ -3,11 +3,8 @@
 
 namespace StyleCop.Analyzers.Lightup
 {
-    using System;
-    using System.Linq;
     using System.Linq.Expressions;
     using System.Reflection;
-    using Microsoft.CodeAnalysis;
 
     public abstract class SyntaxWrapper<TNode>
     {

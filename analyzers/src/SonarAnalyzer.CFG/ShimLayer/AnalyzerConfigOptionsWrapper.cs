@@ -3,7 +3,6 @@
 
 namespace StyleCop.Analyzers.Lightup
 {
-    using System;
 
     public readonly struct AnalyzerConfigOptionsWrapper
     {

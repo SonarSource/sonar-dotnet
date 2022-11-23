@@ -18,10 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.Helpers;
-
 namespace SonarAnalyzer.Rules.CSharp
 {
     public abstract class DoNotCallMethodsCSharpBase : DoNotCallMethodsBase<SyntaxKind, InvocationExpressionSyntax>

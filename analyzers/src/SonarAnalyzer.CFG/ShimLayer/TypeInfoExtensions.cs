@@ -3,8 +3,6 @@
 
 namespace StyleCop.Analyzers.Lightup
 {
-    using System;
-    using Microsoft.CodeAnalysis;
     using static System.Linq.Expressions.Expression;
 
     public static class TypeInfoExtensions

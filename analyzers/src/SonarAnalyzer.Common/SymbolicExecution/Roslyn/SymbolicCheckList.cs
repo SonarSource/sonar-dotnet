@@ -18,9 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
-using System.Linq;
-
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
     public class SymbolicCheckList

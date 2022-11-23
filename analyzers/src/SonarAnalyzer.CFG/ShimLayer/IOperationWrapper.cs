@@ -5,7 +5,6 @@
 
 namespace StyleCop.Analyzers.Lightup
 {
-    using Microsoft.CodeAnalysis;
 
     public interface IOperationWrapper
     {

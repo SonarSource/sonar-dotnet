@@ -18,17 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.CFG.LiveVariableAnalysis;
 using SonarAnalyzer.CFG.Sonar;
-using SonarAnalyzer.Extensions;
-using SonarAnalyzer.Helpers;
-using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
 {

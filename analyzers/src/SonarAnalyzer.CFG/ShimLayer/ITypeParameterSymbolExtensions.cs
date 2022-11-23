@@ -3,8 +3,6 @@
 
 namespace StyleCop.Analyzers.Lightup
 {
-    using System;
-    using Microsoft.CodeAnalysis;
 
     public static class ITypeParameterSymbolExtensions
     {

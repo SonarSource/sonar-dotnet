@@ -18,12 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Linq;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.VisualBasic;
-using Microsoft.CodeAnalysis.VisualBasic.Syntax;
-using SonarAnalyzer.Extensions;
-
 namespace SonarAnalyzer.Helpers.Trackers
 {
     public class VisualBasicPropertyAccessTracker : PropertyAccessTracker<SyntaxKind>

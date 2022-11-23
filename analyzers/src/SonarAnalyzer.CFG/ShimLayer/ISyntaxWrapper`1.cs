@@ -3,7 +3,6 @@
 
 namespace StyleCop.Analyzers.Lightup
 {
-    using Microsoft.CodeAnalysis;
 
     /// <summary>
     /// Represents a light-up wrapper for a type derived from a known back syntax kind <typeparamref name="T"/>.

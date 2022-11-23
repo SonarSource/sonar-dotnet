@@ -19,7 +19,6 @@
  */
 
 using System.Text.RegularExpressions;
-using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Helpers
 {

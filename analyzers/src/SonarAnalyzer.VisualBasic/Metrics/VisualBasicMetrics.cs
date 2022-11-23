@@ -18,16 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.VisualBasic;
-using Microsoft.CodeAnalysis.VisualBasic.Syntax;
-using SonarAnalyzer.Common;
-using SonarAnalyzer.Helpers;
-
 namespace SonarAnalyzer.Metrics.VisualBasic
 {
     public sealed class VisualBasicMetrics : MetricsBase

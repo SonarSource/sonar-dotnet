@@ -18,13 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using Microsoft.CodeAnalysis;
 using SonarAnalyzer.CFG.Roslyn;
-using SonarAnalyzer.Extensions;
-using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.CFG
 {

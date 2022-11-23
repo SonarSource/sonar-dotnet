@@ -18,12 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Extensions;
-using SonarAnalyzer.Helpers;
-
 namespace SonarAnalyzer.Rules
 {
     public abstract class ShiftDynamicNotIntegerBase<TExpressionSyntax> : SonarDiagnosticAnalyzer

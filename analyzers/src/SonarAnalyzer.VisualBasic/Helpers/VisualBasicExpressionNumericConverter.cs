@@ -18,11 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.VisualBasic;
-using Microsoft.CodeAnalysis.VisualBasic.Syntax;
-
 namespace SonarAnalyzer.Helpers
 {
     internal class VisualBasicExpressionNumericConverter : ExpressionNumericConverterBase<LiteralExpressionSyntax, UnaryExpressionSyntax>
