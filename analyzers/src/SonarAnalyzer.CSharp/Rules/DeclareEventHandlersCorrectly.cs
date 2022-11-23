@@ -18,14 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
-using System.Linq;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Helpers;
-
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -65,12 +57,23 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static bool IsCorrectEventHandlerSignature(IMethodSymbol methodSymbol) =>
-            methodSymbol.ReturnsVoid
-            && methodSymbol.Parameters.Length == DelegateEventHandlerArgCount
-            && methodSymbol.Parameters[SenderArgumentPosition].Name == "sender"
-            && methodSymbol.Parameters[SenderArgumentPosition].Type.Is(KnownType.System_Object)
-            && methodSymbol.Parameters[EventArgsPosition].Name == "e"
-            && IsDerivedFromEventArgs(methodSymbol.Parameters[1].Type);
+            methodSymbol is
+            {
+                ReturnsVoid: true,
+                Parameters: { Length: DelegateEventHandlerArgCount } parameters,
+            }
+            && parameters[SenderArgumentPosition] is
+            {
+                Name: "sender",
+                Type: { } senderType,
+            }
+            && senderType.Is(KnownType.System_Object)
+            && parameters[EventArgsPosition] is
+            {
+                Name: "e",
+                Type: { } eventArgsType,
+            }
+            && IsDerivedFromEventArgs(eventArgsType);
 
         private static bool IsDerivedFromEventArgs(ITypeSymbol type) =>
             type.DerivesFrom(KnownType.System_EventArgs)
