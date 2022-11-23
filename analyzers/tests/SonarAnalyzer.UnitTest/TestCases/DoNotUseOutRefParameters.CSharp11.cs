@@ -24,9 +24,11 @@ namespace Tests.Diagnostics
 
     public interface DefaultInterfaceImplementations
     {
-        void SetRefInst(ref int i) { }           // Noncompliant
-        void SetOutInst(out int i) { i = 1; }    // Noncompliant
-        static void SetRef(ref int i) { }        // Noncompliant
-        static void SetOut(out int i) { i = 1; } // Noncompliant
+        private void PrivateRefInst(ref int i) { }    // Compliant because not public
+        private static void PrivateRef(ref int i) { } // Compliant because not public
+        void RefInst(ref int i) { }                   // Noncompliant
+        void OutInst(out int i) { i = 1; }            // Noncompliant
+        static void Ref(ref int i) { }                // Noncompliant
+        static void Out(out int i) { i = 1; }         // Noncompliant
     }
 }
