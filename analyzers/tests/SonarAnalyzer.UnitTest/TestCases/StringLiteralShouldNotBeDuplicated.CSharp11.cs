@@ -28,7 +28,8 @@ public class FooNonCompliantStringInterpolation
     public string NameOne = $"{"BarBar" // Noncompliant {{Define a constant instead of using this literal 'BarBar' 4 times.}}
         }";
 
-    public string NameTwo = $"{"BarBar" // Secondary
+    public string NameTwo = $"{
+            "BarBar" // Secondary
         }";
 
     public static string NameThree = "BarBar"; // Secondary
