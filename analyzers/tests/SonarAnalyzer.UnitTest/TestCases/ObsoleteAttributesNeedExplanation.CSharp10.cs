@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Net6Poc.ObsoleteAttributesNeedExplanation;
-
 internal class TestCases
 {
     public void Bar(IEnumerable<int> collection)
@@ -16,7 +14,7 @@ internal class TestCases
 
         Action x = true
                        ? ([Obsolete] () => { }) // Noncompliant
-                       :[Obsolete] () => { }; // Noncompliant
+                       : [Obsolete] () => { }; // Noncompliant
 
         Call([Obsolete("something")] (x) => { });
     }

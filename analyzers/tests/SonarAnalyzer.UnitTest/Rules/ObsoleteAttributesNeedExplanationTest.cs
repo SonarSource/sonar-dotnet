@@ -21,38 +21,37 @@
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.UnitTest.Rules
-{
-    [TestClass]
-    public class ObsoleteAttributesNeedExplanationTest
-    {
-        private readonly VerifierBuilder csBuilder = new VerifierBuilder<CS.ObsoleteAttributesNeedExplanation>();
-        private readonly VerifierBuilder vbBuilder = new VerifierBuilder<VB.ObsoleteAttributesNeedExplanation>();
+namespace SonarAnalyzer.UnitTest.Rules;
 
-        [TestMethod]
-        public void ObsoleteAttributesNeedExplanation_CS() =>
-           csBuilder.AddPaths("ObsoleteAttributesNeedExplanation.cs").Verify();
+[TestClass]
+public class ObsoleteAttributesNeedExplanationTest
+{
+    private readonly VerifierBuilder csBuilder = new VerifierBuilder<CS.ObsoleteAttributesNeedExplanation>();
+    private readonly VerifierBuilder vbBuilder = new VerifierBuilder<VB.ObsoleteAttributesNeedExplanation>();
+
+    [TestMethod]
+    public void ObsoleteAttributesNeedExplanation_CS() =>
+       csBuilder.AddPaths("ObsoleteAttributesNeedExplanation.cs").Verify();
 
 #if NET
-        [TestMethod]
-        public void ObsoleteAttributesNeedExplanation_CSharp9() =>
-            csBuilder
-            .WithOptions(ParseOptionsHelper.FromCSharp9)
-            .WithTopLevelStatements()
-            .AddPaths("ObsoleteAttributesNeedExplanation.CSharp9.cs")
-            .Verify();
+    [TestMethod]
+    public void ObsoleteAttributesNeedExplanation_CSharp9() =>
+        csBuilder
+        .WithOptions(ParseOptionsHelper.FromCSharp9)
+        .WithTopLevelStatements()
+        .AddPaths("ObsoleteAttributesNeedExplanation.CSharp9.cs")
+        .Verify();
 
-        [TestMethod]
-        public void ObsoleteAttributesNeedExplanation_CSharp10() =>
-            csBuilder
-            .WithOptions(ParseOptionsHelper.FromCSharp10)
-            .WithConcurrentAnalysis(false)
-            .AddPaths("ObsoleteAttributesNeedExplanation.CSharp10.cs")
-            .Verify();
+    [TestMethod]
+    public void ObsoleteAttributesNeedExplanation_CSharp10() =>
+        csBuilder
+        .WithOptions(ParseOptionsHelper.FromCSharp10)
+        .WithConcurrentAnalysis(false)
+        .AddPaths("ObsoleteAttributesNeedExplanation.CSharp10.cs")
+        .Verify();
 #endif
 
-        [TestMethod]
-        public void ObsoleteAttributesNeedExplanation_VB() =>
-            vbBuilder.AddPaths("ObsoleteAttributesNeedExplanation.vb").Verify();
-    }
+    [TestMethod]
+    public void ObsoleteAttributesNeedExplanation_VB() =>
+        vbBuilder.AddPaths("ObsoleteAttributesNeedExplanation.vb").Verify();
 }
