@@ -33,8 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S2228";
         private const string MessageFormat = "Remove this logging statement.";
 
-        private static readonly DiagnosticDescriptor rule =
+        protected override DiagnosticDescriptor Rule =>
             DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
     }
 }
