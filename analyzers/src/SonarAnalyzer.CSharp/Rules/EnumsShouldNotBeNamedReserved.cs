@@ -18,35 +18,29 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.CSharp;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class EnumsShouldNotBeNamedReserved : SonarDiagnosticAnalyzer
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class EnumsShouldNotBeNamedReserved : SonarDiagnosticAnalyzer
-    {
-        internal const string DiagnosticId = "S4016";
-        private const string MessageFormat = "Remove or rename this enum member.";
+    internal const string DiagnosticId = "S4016";
+    private const string MessageFormat = "Remove or rename this enum member.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+    private static readonly DiagnosticDescriptor Rule =
+        DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+    protected override void Initialize(SonarAnalysisContext context)
+        => context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            {
+                if (c.Node is EnumMemberDeclarationSyntax enumMemberDeclaration
+                    && enumMemberDeclaration.Identifier.ValueText
+                        .SplitCamelCaseToWords()
+                        .Any(w => w == "RESERVED"))
                 {
-
-                    if (c.Node is EnumMemberDeclarationSyntax enumMemberDeclaration &&
-                        enumMemberDeclaration
-                            .Identifier
-                            .ValueText
-                            .SplitCamelCaseToWords()
-                            .Any(w => w == "RESERVED"))
-                    {
-                        c.ReportIssue(Diagnostic.Create(rule, enumMemberDeclaration.GetLocation()));
-                    }
-                },
-                SyntaxKind.EnumMemberDeclaration);
-        }
-    }
+                    c.ReportIssue(Diagnostic.Create(Rule, enumMemberDeclaration.GetLocation()));
+                }
+            },
+            SyntaxKind.EnumMemberDeclaration);
 }
