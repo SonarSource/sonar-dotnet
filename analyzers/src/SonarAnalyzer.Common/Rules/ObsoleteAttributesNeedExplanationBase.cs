@@ -33,8 +33,8 @@ public abstract class ObsoleteAttributesNeedExplanationBase<TSyntaxKind> : Sonar
 
     protected ObsoleteAttributesNeedExplanationBase() : base(DiagnosticId) { }
 
-    protected sealed override void Initialize(SonarAnalysisContext context)
-        => context.RegisterSyntaxNodeActionInNonGenerated(
+    protected sealed override void Initialize(SonarAnalysisContext context) => 
+        context.RegisterSyntaxNodeActionInNonGenerated(
             Language.GeneratedCodeRecognizer,
             c =>
             {
