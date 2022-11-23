@@ -37,6 +37,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void OperatorsShouldBeOverloadedConsistently_CSharp9() =>
             builder.AddPaths("OperatorsShouldBeOverloadedConsistently.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
+        [TestMethod]
+        public void OperatorsShouldBeOverloadedConsistently_CSharp11() =>
+            builder.AddPaths("OperatorsShouldBeOverloadedConsistently.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+
 #endif
 
     }
