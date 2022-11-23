@@ -4,15 +4,13 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.sonarsource.parent</groupId>
-    <artifactId>parent</artifactId>
-    <version>60.0.52</version>
-    <relativePath/>
+    <groupId>org.sonarsource.dotnet</groupId>
+    <artifactId>sonar-dotnet</artifactId>
+    <version>8.50-SNAPSHOT</version>
   </parent>
 
   <groupId>com.sonarsource.it</groupId>
   <artifactId>it-dotnet-plugin</artifactId>
-  <version>1.0-SNAPSHOT</version>
 
   <name>SonarSource :: C# :: ITs :: Plugin</name>
   <inceptionYear>2011</inceptionYear>
@@ -24,7 +22,6 @@
   <properties>
     <scannerMsbuild.version>5.8.0.52797</scannerMsbuild.version>
     <surefire.argLine>-server</surefire.argLine>
-    <maven.compiler.release>8</maven.compiler.release>
   </properties>
 
   <dependencies>
