@@ -37,6 +37,21 @@ y = x switch
     false => 0
 };
 
+_ = new Exception() is ArgumentException // Noncompliant FP #6429
+{
+    Message: "A" or "B" or "C",
+    ParamName: "D" or "E" or "F",
+};
+
+_ = new Exception() is ArgumentException // Noncompliant FP #6429
+{
+    Message: "A" or "B" or "C",
+    InnerException:
+    {
+        Message: "D" or "E" or "F",
+    }
+};
+
 try
 {
 }
