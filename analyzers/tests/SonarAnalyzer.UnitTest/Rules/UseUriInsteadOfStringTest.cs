@@ -43,6 +43,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void UseUriInsteadOfString_CSharp10() =>
             builder.AddPaths("UseUriInsteadOfString.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
+        [TestMethod]
+        public void UseUriInsteadOfString_CSharp11() =>
+            builder.AddPaths("UseUriInsteadOfString.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+
 #endif
 
         [TestMethod]
