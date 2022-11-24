@@ -10,6 +10,9 @@ public class EqualityOnFloatingPoint
     bool NFloatEqual(NFloat first, NFloat second)
         => first == second; // FN
 
-    bool AreEqual<T>(IFloatingPointIeee754<T> first, IFloatingPointIeee754<T> second) where T : IFloatingPointIeee754<T>
+    bool IsEpsilon<T>(T value) where T : IFloatingPointIeee754<T>
+        => value == T.Epsilon; // FN
+
+    bool AreEqual<T>(T first, T second) where T : IFloatingPointIeee754<T>
         => first == second; // FN
 }
