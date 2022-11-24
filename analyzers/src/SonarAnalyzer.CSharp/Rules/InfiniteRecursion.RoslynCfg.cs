@@ -20,7 +20,6 @@
 
 using SonarAnalyzer.CFG.Roslyn;
 using CfgAllPathValidator = SonarAnalyzer.CFG.Roslyn.CfgAllPathValidator;
-using System.Linq;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
