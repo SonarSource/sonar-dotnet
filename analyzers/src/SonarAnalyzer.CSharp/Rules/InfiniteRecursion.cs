@@ -65,6 +65,14 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 },
                 SyntaxKind.PropertyDeclaration);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
+                {
+                    var operatorSyn = (OperatorDeclarationSyntax)c.Node;
+                    CheckForNoExitMethod(c, (CSharpSyntaxNode)operatorSyn.Body ?? operatorSyn.ExpressionBody, operatorSyn.OperatorToken);
+                },
+                SyntaxKind.OperatorDeclaration);
         }
 
         private void CheckForNoExitMethod(SyntaxNodeAnalysisContext c, CSharpSyntaxNode body, SyntaxToken identifier)
@@ -86,7 +94,7 @@ namespace SonarAnalyzer.Rules.CSharp
                    && declaringSymbol.Equals(assignedSymbol);
         }
 
-        private class RecursionContext<TControlFlowGraph>
+        private sealed class RecursionContext<TControlFlowGraph>
         {
             private readonly string messageArg;
             private readonly SyntaxNodeAnalysisContext analysisContext;
