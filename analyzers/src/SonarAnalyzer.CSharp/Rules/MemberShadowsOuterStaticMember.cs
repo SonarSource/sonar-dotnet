@@ -43,12 +43,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var innerClassSymbol = (INamedTypeSymbol)c.Symbol;
                     var containerClassSymbol = innerClassSymbol.ContainingType;
-                    if (!innerClassSymbol.IsClassOrStruct() || !containerClassSymbol.IsClassOrStruct())
-                    {
-                        return;
-                    }
 
-                    var members = innerClassSymbol.GetMembers().Where(x => !x.IsImplicitlyDeclared).ToList();
+                    var members = innerClassSymbol.GetMembers().Where(x => !x.IsImplicitlyDeclared && !IsStaticAndVirtualOrAbstract(x)).ToList();
                     if (!members.Any())
                     {
                         return;
@@ -59,6 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     foreach (var innerMember in members)
                     {
                         var outerMembersOfSameName = selfAndOuterNamedTypes.SelectMany(x => x.GetMembers(innerMember.Name)).ToList();
+
                         switch (innerMember)
                         {
                             case IPropertySymbol:
@@ -77,7 +74,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckNamedType(SymbolAnalysisContext context, IReadOnlyList<ISymbol> outterMembersOfSameName, INamedTypeSymbol namedType)
         {
-            if (outterMembersOfSameName.Any(x => x is INamedTypeSymbol { TypeKind: TypeKind.Class or TypeKind.Struct or TypeKind.Delegate or TypeKind.Enum }))
+            if (outterMembersOfSameName.Any(x => x is INamedTypeSymbol { TypeKind: TypeKind.Class or TypeKind.Struct or TypeKind.Delegate or TypeKind.Enum or TypeKind.Interface }))
             {
                 foreach (var identifier in namedType.DeclaringReferenceIdentifiers())
                 {
@@ -88,7 +85,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckMember(SymbolAnalysisContext context, IReadOnlyList<ISymbol> outterMembersOfSameName, ISymbol member)
         {
-            if (outterMembersOfSameName.Any(x => x.IsStatic || x is IFieldSymbol { IsConst: true })
+            if (outterMembersOfSameName.Any(x => (x.IsStatic && !x.IsAbstract && !x.IsVirtual) || x is IFieldSymbol { IsConst: true })
                 && member.FirstDeclaringReferenceIdentifier() is { } identifier
                 && identifier.GetLocation() is { Kind: LocationKind.SourceFile } location)
             {
@@ -100,12 +97,15 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var namedTypes = new List<INamedTypeSymbol>();
             var current = symbol;
-            while (current.IsClassOrStruct())
+            while (current is not null)
             {
                 namedTypes.Add(current);
                 current = current.ContainingType;
             }
             return namedTypes;
         }
+
+        private bool IsStaticAndVirtualOrAbstract(ISymbol symbol)
+            => symbol.IsStatic && (symbol.IsVirtual || symbol.IsAbstract);
     }
 }
