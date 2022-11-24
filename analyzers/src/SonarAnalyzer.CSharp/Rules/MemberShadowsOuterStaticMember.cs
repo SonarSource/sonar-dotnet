@@ -44,6 +44,16 @@ namespace SonarAnalyzer.Rules.CSharp
                     var innerClassSymbol = (INamedTypeSymbol)c.Symbol;
                     var containerClassSymbol = innerClassSymbol.ContainingType;
 
+                    if (!innerClassSymbol.IsClassOrStruct() && !innerClassSymbol.IsInterface())
+                    {
+                        return;
+                    }
+
+                    if (!containerClassSymbol.IsClassOrStruct() && !containerClassSymbol.IsInterface())
+                    {
+                        return;
+                    }
+
                     var members = innerClassSymbol.GetMembers().Where(x => !x.IsImplicitlyDeclared && !IsStaticAndVirtualOrAbstract(x)).ToList();
                     if (!members.Any())
                     {
