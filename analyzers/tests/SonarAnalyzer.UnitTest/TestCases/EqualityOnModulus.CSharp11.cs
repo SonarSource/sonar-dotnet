@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Numerics;
 
 nint nInt = 2;
 nuint nUInt = 3;
@@ -24,4 +25,7 @@ result = nUInt % 2 != 42; // Compliant
 
 result = uIntPtr % 2 == 42; // Compliant
 result = uIntPtr % 2 != 42; // Compliant
+
+bool ModulusOperator<TSelf>(TSelf parameter) where TSelf : IModulusOperators<TSelf, int, int>
+    => parameter % 2 == 42; // Noncompliant {{The result of this modulus operation may not be positive.}}
 
