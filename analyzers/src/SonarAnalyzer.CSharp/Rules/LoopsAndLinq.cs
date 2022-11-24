@@ -74,9 +74,9 @@ namespace SonarAnalyzer.Rules.CSharp
             bool ConditionIsPattern() => IsPatternExpressionSyntaxWrapper.IsInstance(ifStatementSyntax.Condition);
 
             bool ConditionValidInvocation() => ifStatementSyntax.Condition is InvocationExpressionSyntax invocationExpressionSyntax
-                && !invocationExpressionSyntax.DescendantNodes()
-                                              .OfType<ArgumentSyntax>()
-                                              .Any(argument => argument.RefOrOutKeyword.IsAnyKind(SyntaxKind.OutKeyword, SyntaxKind.RefKeyword));
+                                               && !invocationExpressionSyntax.DescendantNodes()
+                                               .OfType<ArgumentSyntax>()
+                                               .Any(argument => argument.RefOrOutKeyword.IsAnyKind(SyntaxKind.OutKeyword, SyntaxKind.RefKeyword));
         }
 
         /// <remarks>
@@ -140,7 +140,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 !(memberAccess.Parent is AssignmentExpressionSyntax assignment && assignment.Left == memberAccess);
         }
 
-        private class UsageStats
+        private sealed class UsageStats
         {
             public int Count { get; set; }
 
