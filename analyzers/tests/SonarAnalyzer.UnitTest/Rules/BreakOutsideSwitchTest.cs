@@ -30,11 +30,5 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void BreakOutsideSwitch() =>
             verifier.AddPaths("BreakOutsideSwitch.cs").Verify();
-
-        [TestMethod]
-        public void BreakOutsideSwitch_CSharp7() =>
-            verifier.AddPaths("BreakOutsideSwitch.CSharp7.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp7)
-                .Verify();
     }
 }
