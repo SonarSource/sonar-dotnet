@@ -69,8 +69,8 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var operatorSyn = (OperatorDeclarationSyntax)c.Node;
-                    CheckForNoExitMethod(c, (CSharpSyntaxNode)operatorSyn.Body ?? operatorSyn.ExpressionBody, operatorSyn.OperatorToken);
+                    var @operator = (OperatorDeclarationSyntax)c.Node;
+                    CheckForNoExitMethod(c, (CSharpSyntaxNode)@operator.Body ?? @operator.ExpressionBody, @operator.OperatorToken);
                 },
                 SyntaxKind.OperatorDeclaration);
         }
