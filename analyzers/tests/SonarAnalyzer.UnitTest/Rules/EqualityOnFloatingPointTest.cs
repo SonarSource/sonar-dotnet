@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void EqualityOnFloatingPoint() =>
             builder.AddPaths("EqualityOnFloatingPoint.cs").Verify();
 
-#if NET7_0_OR_GREATER
+#if NET
 
         [TestMethod]
         public void EqualityOnFloatingPoint_CSharp11() =>
