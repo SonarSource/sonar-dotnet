@@ -178,21 +178,3 @@ public class OuterClassWithConstMember
     }
 }
 
-public interface OuterTypes
-{
-    public class SomeClass { }
-    public interface SomeInterface { }
-
-    public class SomeWeirdClass { }
-    public interface SomeWeirdInterface { }
-
-    public interface InnerTypes
-    {
-        public class SomeClass { } // Noncompliant
-        public interface SomeInterface { } // Noncompliant
-
-        public interface SomeWeirdClass { } // Noncompliant
-        public class SomeWeirdInterface { } // Noncompliant
-    }
-}
-

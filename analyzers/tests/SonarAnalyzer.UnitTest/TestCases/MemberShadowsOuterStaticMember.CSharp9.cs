@@ -49,3 +49,23 @@ class OuterClass
         public static int InnerOnlyProperty { get; set; }
     }
 }
+
+public interface OuterTypes
+{
+    public class SomeClass { }
+    public interface SomeInterface { }
+    public struct SomeStruct { }
+    public enum SomeEnum { }
+
+    public delegate void SomeDelegate(int x);
+
+    public interface InnerTypes
+    {
+        public enum SomeClass { } // Noncompliant
+        public struct SomeInterface { } // Noncompliant
+        public class SomeStruct { } // Noncompliant
+        public enum SomeEnum { } // Noncompliant
+
+        public delegate void SomeDelegate(int x); // Noncompliant
+    }
+}
