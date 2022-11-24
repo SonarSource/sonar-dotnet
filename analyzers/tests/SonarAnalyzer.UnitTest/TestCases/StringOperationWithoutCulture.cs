@@ -32,7 +32,6 @@ namespace Tests.Diagnostics
             s = 1.8.ToString(); //Noncompliant
             s = 1.8m.ToString(); //Noncompliant
             s = 1.8f.ToString("d");
-            s = new DateTime().ToString(); //Noncompliant
             s = 1.8.ToString(CultureInfo.InstalledUICulture);
 
             i = "".CompareTo(""); // Noncompliant {{Use 'CompareOrdinal' or 'Compare' with the locale specified instead of 'CompareTo'.}}
@@ -55,7 +54,15 @@ namespace Tests.Diagnostics
             var withTQuery = primes.AsQueryable().Where(s => s.ToUpper().StartsWith("T"));
             var withoutT = from s in primes where !s.ToUpper().StartsWith("T") select s;    // Noncompliant
             var withoutTQuery = from s in primes.AsQueryable() where !s.ToUpper().StartsWith("T") select s;
+        }
 
+        void TestDateTimeTypes()
+        {
+            var s = string.Empty;
+            s = new DateTime().ToString(); // Noncompliant
+
+            // Repro for https://github.com/SonarSource/sonar-dotnet/issues/6439
+            s = new DateTimeOffset().ToString(); // FN
         }
     }
 }

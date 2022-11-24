@@ -34,6 +34,12 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
 
         [TestMethod]
+        public void StringOperationWithoutCulture_CSharp10() =>
+            builder.AddPaths("StringOperationWithoutCulture.CSharp10.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .Verify();
+
+        [TestMethod]
         public void StringOperationWithoutCulture_CSharp11() =>
             builder.AddPaths("StringOperationWithoutCulture.CSharp11.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp11)
