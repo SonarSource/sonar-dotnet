@@ -63,13 +63,6 @@ if ((x,y) is (1,2)) // FN (is expression not supported yet)
     y = 2;
 }
 
-string q = null;
-
-if (q is not null) // FN (is not expression not supported yet)
-{
-    q = null;
-}
-
 SomeClass someClass = new SomeClass() { SomeField = 42 };
 
 someClass.SomeField = 42;
@@ -120,5 +113,24 @@ public static class SwitchExpressionCases
             _ => throw new ArgumentException($"Cannot convert URI scheme '{uri.Scheme}' to a websocket scheme."),
         };
         return builder.Uri;
+    }
+}
+
+// Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/6447
+class Repro6447
+{
+    void MyMethod()
+    {
+        string x = null;
+
+        if (!(x is null)) // FN (is expression not supported yet)
+        {
+            x = null;
+        }
+
+        if (x is not null) // FN (is not expression not supported yet)
+        {
+            x = null;
+        }
     }
 }
