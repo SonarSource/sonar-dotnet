@@ -16,4 +16,15 @@ namespace Tests.Diagnostics
             public static object StaticObject = new object();
         }
     }
+
+    public class ThreadStaticWithInitializerDerivedAttribute
+    {
+        public class Foo
+        {
+            [DerivedAttribute]
+            public static object PerThreadObject = new object(); // FN for performance reasons we decided not to handle derived classes
+        }
+
+        public class DerivedAttribute : ThreadStaticAttribute { }
+    }
 }
