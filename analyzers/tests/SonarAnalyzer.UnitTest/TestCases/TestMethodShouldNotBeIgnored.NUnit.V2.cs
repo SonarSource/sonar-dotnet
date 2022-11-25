@@ -49,6 +49,19 @@ namespace Tests.Diagnostics
         {
         }
 
+        [TestCase("")]
+        [DerivedIgnoreAttribute()]
+//       ^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant
+        public void Foo7(string s)
+        {
+        }
+
+        [TestCase("")]
+        [DerivedIgnoreAttribute] // This test is ignored because 'blah blah'
+        public void Foo8(string s)
+        {
+        }
+
         [TestCaseSource("DivideCases")]
         [Ignore]
 //       ^^^^^^ Noncompliant
@@ -108,4 +121,6 @@ namespace Tests.Diagnostics
     public class IgnoredClass4
     {
     }
+
+    public class DerivedIgnoreAttribute : NUnit.Framework.IgnoreAttribute { }
 }

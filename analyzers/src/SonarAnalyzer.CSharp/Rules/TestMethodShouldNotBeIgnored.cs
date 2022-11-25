@@ -82,10 +82,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var attributeConstructor = symbolInfo.Symbol ?? symbolInfo.CandidateSymbols.FirstOrDefault();
 
-            return attributeConstructor != null && attributeConstructor.ContainingType.IsAny(UnitTestHelper.KnownIgnoreAttributes);
+            return attributeConstructor != null && attributeConstructor.ContainingType.DerivesFromAny(UnitTestHelper.KnownIgnoreAttributes);
         }
 
         private static bool IsTestOrTestClassAttribute(AttributeData a) =>
-            a.AttributeClass.IsAny(TrackedTestIdentifierAttributes);
+            a.AttributeClass.DerivesFromAny(TrackedTestIdentifierAttributes);
     }
 }

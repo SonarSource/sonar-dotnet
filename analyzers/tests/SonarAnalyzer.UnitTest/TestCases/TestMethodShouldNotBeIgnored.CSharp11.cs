@@ -6,13 +6,15 @@
     class TestSuite
     {
         [DerivedTestMethodAttribute<int>]
-        [Ignore] // FN
+        [Ignore]
+//       ^^^^^^ Noncompliant
         public void Foo1()
         {
         }
 
         [DerivedDataTestMethodAttribute<int>]
-        [Ignore] // FN
+        [Ignore]
+//       ^^^^^^ Noncompliant
         public void Foo2()
         {
         }
