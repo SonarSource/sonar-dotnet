@@ -14,6 +14,24 @@ namespace Tests.Diagnostics
                     Console.WriteLine("Pattern match successful");
                 }
             }
+
+            foreach (var array in list) // Compliant, do not raise on var pattern in ListPattern
+            {
+                if (array is [1, var x, var z]) 
+                {
+                    Console.WriteLine("Pattern match successful");
+                }
+
+            }
+
+            foreach (var array in list) // Compliant, do not raise on declaration statements in IsPattern
+            {
+                if (array is [1, ..] local)
+                {
+                    Console.WriteLine("Pattern match successful");
+                }
+
+            }
         }
     }
 }

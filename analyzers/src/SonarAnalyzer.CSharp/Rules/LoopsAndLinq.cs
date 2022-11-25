@@ -69,14 +69,18 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool CanIfStatementBeMoved(IfStatementSyntax ifStatementSyntax)
         {
-            return ifStatementSyntax.Else == null && (ConditionIsPattern() || ConditionValidInvocation());
+            return ifStatementSyntax.Else == null && (ConditionValidIsPattern() || ConditionValidInvocation());
 
-            bool ConditionIsPattern() => IsPatternExpressionSyntaxWrapper.IsInstance(ifStatementSyntax.Condition);
+            bool ConditionValidIsPattern() => IsPatternExpressionSyntaxWrapper.IsInstance(ifStatementSyntax.Condition)
+                                         && !ifStatementSyntax.Condition.DescendantNodes()
+                                                                        .Any(d => d.IsAnyKind(SyntaxKindEx.VarPattern,
+                                                                                              SyntaxKindEx.SingleVariableDesignation,
+                                                                                              SyntaxKindEx.ParenthesizedVariableDesignation));
 
             bool ConditionValidInvocation() => ifStatementSyntax.Condition is InvocationExpressionSyntax invocationExpressionSyntax
                                                && !invocationExpressionSyntax.DescendantNodes()
-                                               .OfType<ArgumentSyntax>()
-                                               .Any(argument => argument.RefOrOutKeyword.IsAnyKind(SyntaxKind.OutKeyword, SyntaxKind.RefKeyword));
+                                                                             .OfType<ArgumentSyntax>()
+                                                                             .Any(argument => argument.RefOrOutKeyword.IsAnyKind(SyntaxKind.OutKeyword, SyntaxKind.RefKeyword));
         }
 
         /// <remarks>
