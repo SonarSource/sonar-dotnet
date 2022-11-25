@@ -26,10 +26,10 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3456";
         private const string MessageFormat = "Remove this redundant 'ToCharArray' call.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+        private static readonly ImmutableHashSet<string> MethodNames = ImmutableHashSet.Create("ToArray", "ToCharArray");
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -40,13 +40,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if ((invocation.Parent is ElementAccessExpressionSyntax || invocation.Parent is ForEachStatementSyntax)
                         && invocation.Expression is MemberAccessExpressionSyntax memberAccess
-                        && memberAccess.Name.Identifier.ValueText == "ToCharArray"
+                        && MethodNames.Contains(memberAccess.Name.Identifier.ValueText)
                         && c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
-                        && methodSymbol.Name == "ToCharArray"
-                        && methodSymbol.IsInType(KnownType.System_String)
+                        && MethodNames.Contains(methodSymbol.Name)
+                        && (methodSymbol.IsInType(KnownType.System_String) || methodSymbol.IsInType(KnownType.System_ReadOnlySpan_T))
                         && methodSymbol.Parameters.Length == 0)
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, memberAccess.Name.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(Rule, memberAccess.Name.GetLocation()));
                     }
                 },
                 SyntaxKind.InvocationExpression);
