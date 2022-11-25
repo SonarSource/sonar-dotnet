@@ -3,28 +3,28 @@
 record IntPointers
 {
     public const IntPtr myConst = 0; // Compliant
-    public static IntPtr staticField = 0; // Noncompliant
+    public static IntPtr staticField; // Fixed
 
-    public IntPtr field1 = 0; // Noncompliant
+    public IntPtr field1; // Fixed
     public IntPtr field2 = 42; // Compliant
 
-    public UIntPtr field3 = 0; // Noncompliant
+    public UIntPtr field3; // Fixed
     public UIntPtr field4 = 42;// Compliant
 
-    public IntPtr field5 = IntPtr.Zero; // Noncompliant
-    public IntPtr field6 = 0x0000000000000000; // Noncompliant
-    public UIntPtr field7 = UIntPtr.Zero; // Noncompliant
-    public IntPtr field8 = new IntPtr(0); // Noncompliant
+    public IntPtr field5; // Fixed
+    public IntPtr field6; // Fixed
+    public UIntPtr field7; // Fixed
+    public IntPtr field8; // Fixed
     public IntPtr field9 = new IntPtr(staticField); // Compliant
 
-    public UIntPtr field10 = new UIntPtr(0); // Noncompliant
-    public UIntPtr field11 = new();  // Noncompliant
-    public UIntPtr field12 = new UIntPtr { }; // Noncompliant
+    public UIntPtr field10; // Fixed
+    public UIntPtr field11;  // Fixed
+    public UIntPtr field12; // Fixed
 
-    public IntPtr Property1 { get; set; } = 0; // Noncompliant
+    public IntPtr Property1 { get; set; } // Fixed
     public IntPtr Property2 { get; set; } = 42; // Compliant
 
-    public UIntPtr Property3 { get; init; } = 0; // Noncompliant
+    public UIntPtr Property3 { get; init; } // Fixed
     public UIntPtr Property4 { get; init; } = 42; // Compliant
 
     public IntPtr Property5 { get; set; } = 0 * 20 - 0; // FN - Expression is not evaluated
@@ -38,13 +38,13 @@ public readonly struct FooStruct
     public int Value { get; init; } // Compliant
     public bool BoolValue { get; init; } // Compliant
 
-    public int ValueDefault { get; init; } = 0; // Noncompliant
-    public bool BoolValueDefault { get; init; } = false; // Noncompliant
+    public int ValueDefault { get; init; } // Fixed
+    public bool BoolValueDefault { get; init; } // Fixed
 }
 
 public struct BarStruct
 {
-    public int someField = 0; // Noncompliant FP for C# 11 due to the auto-default-struct C# 11 feature https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-11#auto-default-struct
+    public int someField; // Fixed
     public BarStruct(int dummy) { }
 }
 
