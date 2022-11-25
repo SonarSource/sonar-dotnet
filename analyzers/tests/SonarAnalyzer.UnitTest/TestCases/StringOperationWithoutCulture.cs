@@ -58,11 +58,10 @@ namespace Tests.Diagnostics
 
         void TestDateTimeTypes()
         {
-            var s = string.Empty;
-            s = new DateTime().ToString(); // Noncompliant
+            var dateTime = new DateTime().ToString(); // Noncompliant
 
             // Repro for https://github.com/SonarSource/sonar-dotnet/issues/6439
-            s = new DateTimeOffset().ToString(); // FN
+            var dateTimeOffset = new DateTimeOffset().ToString(); // FN
         }
     }
 }
