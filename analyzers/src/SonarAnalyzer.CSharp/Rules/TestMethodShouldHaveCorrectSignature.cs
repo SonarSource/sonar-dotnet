@@ -120,8 +120,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static string GetFaultMessage(SyntaxNode methodNode, IMethodSymbol methodSymbol, bool publicOnly, bool allowGenerics, bool allowAsyncVoid = false) =>
             LocalFunctionStatementSyntaxWrapper.IsInstance(methodNode)
-            ? MakeMethodNotLocalFunction
-            : GetFaultMessage(methodSymbol, publicOnly, allowGenerics, allowAsyncVoid);
+                ? MakeMethodNotLocalFunction
+                : GetFaultMessage(methodSymbol, publicOnly, allowGenerics, allowAsyncVoid);
 
         private static string GetFaultMessage(IMethodSymbol methodSymbol, bool publicOnly, bool allowGenerics, bool allowAsyncVoid) =>
             GetFaultMessageParts(methodSymbol, publicOnly, allowGenerics, allowAsyncVoid).ToSentence();
