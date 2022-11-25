@@ -23,45 +23,35 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class ThreadStaticWithInitializer : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S2996";
+        private const string DiagnosticId = "S2996";
         private const string MessageFormat = "Remove this initialization of '{0}' or make it lazy.";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
                     var fieldDeclaration = (FieldDeclarationSyntax)c.Node;
 
-                    if (!fieldDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword) ||
-                        !HasThreadStaticAttribute(fieldDeclaration.AttributeLists, c.SemanticModel))
+                    if (!fieldDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword)
+                        || !HasThreadStaticAttribute(fieldDeclaration.AttributeLists, c.SemanticModel))
                     {
                         return;
                     }
 
-                    foreach (var variableDeclaratorSyntax in fieldDeclaration.Declaration.Variables
-                        .Where(variableDeclaratorSyntax => variableDeclaratorSyntax.Initializer != null))
+                    foreach (var variableDeclaratorSyntax in fieldDeclaration.Declaration.Variables.Where(variableDeclaratorSyntax => variableDeclaratorSyntax.Initializer != null))
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, variableDeclaratorSyntax.Initializer.GetLocation(),
+                        c.ReportIssue(Diagnostic.Create(Rule, variableDeclaratorSyntax.Initializer.GetLocation(),
                             variableDeclaratorSyntax.Identifier.ValueText));
                     }
                 },
                 SyntaxKind.FieldDeclaration);
-        }
-        private static bool HasThreadStaticAttribute(SyntaxList<AttributeListSyntax> attributeLists, SemanticModel semanticModel)
-        {
-            if (!attributeLists.Any())
-            {
-                return false;
-            }
-
-            return attributeLists.Any(attributeList =>
-                attributeList.Attributes.Any(attribute => semanticModel.GetTypeInfo(attribute).Type.Is(KnownType.System_ThreadStaticAttribute)));
-        }
+        private static bool HasThreadStaticAttribute(SyntaxList<AttributeListSyntax> attributeLists, SemanticModel semanticModel) =>
+            attributeLists.Any()
+            && attributeLists.Any(attributeList => attributeList.Attributes.Any(attribute => semanticModel.GetTypeInfo(attribute).Type.Is(KnownType.System_ThreadStaticAttribute)));
     }
 }
