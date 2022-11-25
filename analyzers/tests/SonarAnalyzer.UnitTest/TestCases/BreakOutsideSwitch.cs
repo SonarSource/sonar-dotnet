@@ -35,6 +35,13 @@ namespace Tests.Diagnostics
                     while (true);
 
                     break;
+                case 2:
+                    foreach (var (a, b) in new (int, int)[0])
+                    {
+                        break; // Noncompliant
+                    }
+
+                    break;
             }
 
             foreach (var e in new List<int>())
