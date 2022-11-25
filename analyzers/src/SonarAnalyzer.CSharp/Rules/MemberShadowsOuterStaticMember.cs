@@ -44,20 +44,15 @@ namespace SonarAnalyzer.Rules.CSharp
                     var innerClassSymbol = (INamedTypeSymbol)c.Symbol;
                     var containerClassSymbol = innerClassSymbol.ContainingType;
 
-                    if (!innerClassSymbol.IsClassOrStruct() && !innerClassSymbol.IsInterface())
-                    {
-                        return;
-                    }
-
-                    if (!containerClassSymbol.IsClassOrStruct() && !containerClassSymbol.IsInterface())
+                    if (!IsValidType(innerClassSymbol) || !IsValidType(containerClassSymbol))
                     {
                         return;
                     }
 
                     var members = innerClassSymbol
                                   .GetMembers()
-                                  .Where(x => !x.IsImplicitlyDeclared
-                                              && !(x.IsStatic && (x.IsVirtual || x.IsAbstract))).ToList();
+                                  .Where(x => !x.IsImplicitlyDeclared && !IsStaticAndVirtualOrAbstract(x))
+                                  .ToList();
 
                     if (!members.Any())
                     {
@@ -118,5 +113,11 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             return namedTypes;
         }
+
+        private static bool IsValidType(INamedTypeSymbol symbol)
+            => symbol.IsClassOrStruct() || symbol.IsInterface();
+
+        private static bool IsStaticAndVirtualOrAbstract(ISymbol symbol)
+            => symbol.IsStatic && (symbol.IsVirtual || symbol.IsAbstract);
     }
 }
