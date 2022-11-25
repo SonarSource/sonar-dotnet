@@ -52,6 +52,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.FieldDeclaration);
         private static bool HasThreadStaticAttribute(SyntaxList<AttributeListSyntax> attributeLists, SemanticModel semanticModel) =>
             attributeLists.Any()
-            && attributeLists.Any(attributeList => attributeList.Attributes.Any(attribute => semanticModel.GetTypeInfo(attribute).Type.Is(KnownType.System_ThreadStaticAttribute)));
+            && attributeLists.Any(attributeList => attributeList.Attributes.Any(attribute => attribute.IsKnownType(KnownType.System_ThreadStaticAttribute, semanticModel)));
     }
 }

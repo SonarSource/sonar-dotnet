@@ -14,6 +14,12 @@ namespace Tests.Diagnostics
             public static object _perThreadObject;
 
             public static object StaticObject = new object();
+
+            [System.ThreadStatic]
+            public static object PerThreadObject2 = new object(); // Noncompliant
+
+            [ThreadStaticAttribute]
+            public static object PerThreadObject3 = new object(); // Noncompliant
         }
     }
 
