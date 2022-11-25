@@ -57,17 +57,24 @@ int z = y switch
     not 5 => 5
 };
 
-if ((x,y) is (1,2))   // Compliant FN
+if ((x,y) is (1,2)) // FN (is expression not supported yet)
 {
     x = 1;
     y = 2;
+}
+
+string q = null;
+
+if (q is not null) // FN (is not expression not supported yet)
+{
+    q = null;
 }
 
 SomeClass someClass = new SomeClass() { SomeField = 42 };
 
 someClass.SomeField = 42;
 
-if (someClass is { SomeField: not 42 }) // FN
+if (someClass is { SomeField: not 42 }) // FN (is and is not expression not supported yet)
 {
     someClass.SomeField = 42;
 }

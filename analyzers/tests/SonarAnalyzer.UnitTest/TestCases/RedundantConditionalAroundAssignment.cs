@@ -17,6 +17,16 @@
                 x = null;
             }
 
+            if (!(x is null)) // FN (is expression not supported yet)
+            {
+                x = null;
+            }
+
+            if (x is null) // Compliant
+            {
+                x = null;
+            }
+
             if (x != null) // Compliant FN
                 x = null;
 

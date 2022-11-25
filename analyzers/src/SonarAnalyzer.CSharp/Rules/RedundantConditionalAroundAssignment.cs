@@ -60,7 +60,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            if (!(c.SemanticModel.GetSymbolInfo(assignment.Left).Symbol is IPropertySymbol))
+            if (c.SemanticModel.GetSymbolInfo(assignment.Left).Symbol is not IPropertySymbol)
             {
                 c.ReportIssue(Diagnostic.Create(Rule, condition.GetLocation()));
             }
@@ -70,7 +70,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var switchExpression = (SwitchExpressionSyntaxWrapper)c.Node;
 
-            if (!(switchExpression.SyntaxNode.GetFirstNonParenthesizedParent() is AssignmentExpressionSyntax))
+            if (switchExpression.SyntaxNode.GetFirstNonParenthesizedParent() is not AssignmentExpressionSyntax)
             {
                 return;
             }
@@ -100,7 +100,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var statement = ifStatement.Statement;
 
-            if (!(statement is BlockSyntax block) || block.Statements.Count != 1)
+            if (statement is not BlockSyntax block || block.Statements.Count != 1)
             {
                 assignment = null;
                 return false;
