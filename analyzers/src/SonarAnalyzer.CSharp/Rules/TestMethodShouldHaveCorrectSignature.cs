@@ -36,14 +36,14 @@ namespace SonarAnalyzer.Rules.CSharp
         /// </summary>
         private delegate string SignatureValidator(SyntaxNode methodNode, IMethodSymbol methodSymbol);
 
-        private static readonly SignatureValidator NullValidator = (node, symbol) => null;
+        private static readonly SignatureValidator NullValidator = (_, _) => null;
 
         // We currently support three test framework, each of which supports multiple test method attribute markers, and each of which
         // has differing constraints (public/private, generic/non-generic).
         // Rather than writing lots of conditional code, we're using a simple table-driven approach.
         // Currently we use the same validation method for all method types, but we could have a
         // different validation method for each type in future if necessary.
-        private static readonly Dictionary<KnownType, SignatureValidator> AttributeToConstraintsMap = new Dictionary<KnownType, SignatureValidator>
+        private static readonly Dictionary<KnownType, SignatureValidator> AttributeToConstraintsMap = new()
         {
             // MSTest
             {
@@ -114,17 +114,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 ? methodDeclaration.AttributeLists.Count > 0
                 : ((LocalFunctionStatementSyntaxWrapper)node).AttributeLists.Count > 0;
 
-        private static SignatureValidator GetValidator(IMethodSymbol method)
-        {
+        private static SignatureValidator GetValidator(IMethodSymbol method) =>
             // Find the first matching attribute type in the table
-            var attributeKnownType = method.FindFirstTestMethodType();
-            if (attributeKnownType == null)
-            {
-                return NullValidator;
-            }
-
-            return AttributeToConstraintsMap.GetValueOrDefault(attributeKnownType);
-        }
+            method.FindFirstTestMethodType() is { } attributeKnownType ? AttributeToConstraintsMap.GetValueOrDefault(attributeKnownType) : NullValidator;
 
         private static string GetFaultMessage(SyntaxNode methodNode, IMethodSymbol methodSymbol, bool publicOnly, bool allowGenerics, bool allowAsyncVoid = false) =>
             LocalFunctionStatementSyntaxWrapper.IsInstance(methodNode)
