@@ -8,10 +8,10 @@
         public void Method()
         {
             [DerivedTestMethodAttribute<int>]
-            void NestedTest() { } // FN
+            void NestedTest() { } // Noncompliant
 
             [DerivedDataTestMethodAttribute<int>]
-            void NestedDataTest() { } // FN
+            void NestedDataTest() { } // Noncompliant
         }
     }
 
