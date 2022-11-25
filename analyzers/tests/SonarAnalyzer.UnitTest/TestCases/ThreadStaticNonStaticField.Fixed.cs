@@ -15,4 +15,12 @@ namespace Tests.Diagnostics
 
         private int count4 = 0;
     }
+
+    public class ThreadStaticNonStaticFieldDerivedAttribute
+    {
+        [DerivedThreadStatic]  // // FN for performance reasons we decided not to handle derived classes
+        private int count1 = 0, count11 = 0;
+    }
+
+    public class DerivedThreadStaticAttribute : ThreadStaticAttribute { }
 }
