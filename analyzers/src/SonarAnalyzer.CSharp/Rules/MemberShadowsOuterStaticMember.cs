@@ -54,7 +54,11 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var members = innerClassSymbol.GetMembers().Where(x => !x.IsImplicitlyDeclared && !IsStaticAndVirtualOrAbstract(x)).ToList();
+                    var members = innerClassSymbol
+                                  .GetMembers()
+                                  .Where(x => !x.IsImplicitlyDeclared
+                                              && !(x.IsStatic && (x.IsVirtual || x.IsAbstract))).ToList();
+
                     if (!members.Any())
                     {
                         return;
@@ -114,8 +118,5 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             return namedTypes;
         }
-
-        private bool IsStaticAndVirtualOrAbstract(ISymbol symbol)
-            => symbol.IsStatic && (symbol.IsVirtual || symbol.IsAbstract);
     }
 }
