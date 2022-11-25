@@ -80,7 +80,7 @@ namespace SonarAnalyzer.Helpers
 
         /// <summary>
         /// Returns whether the class has an attribute that marks the class
-        /// as an MSTest or NUnit test class (xUnit doesn't have any such attributes)
+        /// as an MSTest or NUnit test class (xUnit doesn't have any such attributes).
         /// </summary>
         public static bool IsTestClass(this INamedTypeSymbol classSymbol) =>
             classSymbol.AnyAttributeDerivesFromAny(KnownTestClassAttributes);
@@ -100,9 +100,9 @@ namespace SonarAnalyzer.Helpers
 
         public static AttributeData FindXUnitTestAttribute(this IMethodSymbol method) =>
             method.GetAttributes().FirstOrDefault(a =>
-                    a.AttributeClass.Is(KnownType.Xunit_FactAttribute) ||
-                    a.AttributeClass.Is(KnownType.Xunit_TheoryAttribute) ||
-                    a.AttributeClass.Is(KnownType.LegacyXunit_TheoryAttribute));
+                a.AttributeClass.Is(KnownType.Xunit_FactAttribute)
+                || a.AttributeClass.Is(KnownType.Xunit_TheoryAttribute)
+                || a.AttributeClass.Is(KnownType.LegacyXunit_TheoryAttribute));
 
         /// <summary>
         /// Returns the <see cref="KnownType"/> that indicates the type of the test method or
