@@ -223,4 +223,15 @@ namespace Tests.Diagnostics
     {
 
     }
+
+    internal class TestCases
+    {
+        [DerivedAttribute(8_000_001)] // FN for performance reasons we decided not to handle derived classes
+        public void Bar() { }
+    }
+
+    public class DerivedAttribute : RequestSizeLimitAttribute
+    {
+        public DerivedAttribute(long bytes) : base(bytes) { }
+    }
 }
