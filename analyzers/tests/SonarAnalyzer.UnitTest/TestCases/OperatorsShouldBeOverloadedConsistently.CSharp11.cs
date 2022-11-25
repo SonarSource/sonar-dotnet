@@ -1,17 +1,13 @@
-﻿public class Foo : IOperator<Foo> // Compliant - the '+' operator comes IOperator interface
+﻿public class Foo : IEquality<Foo> // Noncompliant FP Repro for: https://github.com/SonarSource/sonar-dotnet/issues/6442
 {
-    public static object operator -(Foo a, Foo b) => new object();
-    public static object operator *(Foo a, Foo b) => new object();
-    public static object operator /(Foo a, Foo b) => new object();
-    public static object operator %(Foo a, Foo b) => new object();
-    public static object operator ==(Foo a, Foo b) => new object();
-    public static object operator !=(Foo a, Foo b) => new object();
+    public static Foo operator +(Foo a, Foo b) => new Foo();
 
     public override bool Equals(object obj) => false;
     public override int GetHashCode() => 0;
 }
 
-internal interface IOperator<T> where T : IOperator<T>
+public interface IEquality<TSelf> where TSelf : IEquality<TSelf>
 {
-    static virtual T operator +(T a, T b) => a;
+    static virtual bool operator ==(TSelf a, TSelf b) => true;
+    static virtual bool operator !=(TSelf a, TSelf b) => false;
 }

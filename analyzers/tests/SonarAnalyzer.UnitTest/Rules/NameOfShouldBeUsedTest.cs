@@ -29,16 +29,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class NameOfShouldBeUsedTest
     {
         private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.NameOfShouldBeUsed>();
-        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.NameOfShouldBeUsed>().AddPaths("NameOfShouldBeUsed.vb");
+        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.NameOfShouldBeUsed>();
 
         [TestMethod]
         public void NameOfShouldBeUsed_CSharp6() =>
-            builderCS.WithOptions(ParseOptionsHelper.FromCSharp6).AddPaths("NameOfShouldBeUsed.cs").Verify();
+            builderCS.AddPaths("NameOfShouldBeUsed.cs").WithOptions(ParseOptionsHelper.FromCSharp6).Verify();
 
         [TestMethod]
         public void NameOfShouldBeUsed_CSharp5() =>
-            builderCS.WithLanguageVersion(RoslynCS.LanguageVersion.CSharp5)
-            .AddPaths("NameOfShouldBeUsed.cs")
+            builderCS.AddPaths("NameOfShouldBeUsed.cs")
+            .WithLanguageVersion(RoslynCS.LanguageVersion.CSharp5)
             .WithErrorBehavior(CompilationErrorBehavior.Ignore)
             .VerifyNoIssueReported();
 
@@ -46,16 +46,19 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void NameOfShouldBeUsed_CSharp11() =>
-            builderCS.WithOptions(ParseOptionsHelper.FromCSharp11).AddPaths("NameOfShouldBeUsed.CSharp11.cs").Verify();
+            builderCS.AddPaths("NameOfShouldBeUsed.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
 
 #endif
 
         [TestMethod]
         public void NameOfShouldBeUsed_FromVB14() =>
-            builderVB.WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
+            builderVB.AddPaths("NameOfShouldBeUsed.vb").WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
 
         [TestMethod]
         public void NameOfShouldBeUsed_VB12() =>
-            builderVB.WithLanguageVersion(RoslynVB.LanguageVersion.VisualBasic12).WithErrorBehavior(CompilationErrorBehavior.Ignore).VerifyNoIssueReported();
+            builderVB.AddPaths("NameOfShouldBeUsed.vb")
+            .WithLanguageVersion(RoslynVB.LanguageVersion.VisualBasic12)
+            .WithErrorBehavior(CompilationErrorBehavior.Ignore)
+            .VerifyNoIssueReported();
     }
 }

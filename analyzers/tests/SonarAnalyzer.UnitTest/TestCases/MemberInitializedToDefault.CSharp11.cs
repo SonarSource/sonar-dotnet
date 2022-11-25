@@ -41,3 +41,18 @@ public readonly struct FooStruct
     public int ValueDefault { get; init; } = 0; // Noncompliant
     public bool BoolValueDefault { get; init; } = false; // Noncompliant
 }
+
+public struct BarStruct
+{
+    public int someField = 0; // Non compliant for C# 11 due to the auto-default-struct C# 11 feature
+                             // https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-11#auto-default-struct
+    public BarStruct(int dummy) { }
+}
+
+public struct S
+{
+    public int someField; // Compliant - does not raise a CS0171 issue anymore due to the auto-default-struct C# 11 feature
+                          // https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-11#auto-default-struct
+
+    public S(int dummy) { }
+}
