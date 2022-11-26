@@ -56,6 +56,6 @@ internal sealed class VisualBasicFacade : ILanguageFacade<SyntaxKind>
             null => null,
             ObjectCreationExpressionSyntax x => new VisualBasicMethodParameterLookup(x.ArgumentList, methodSymbol),
             InvocationExpressionSyntax x => new VisualBasicMethodParameterLookup(x, methodSymbol),
-            _ => throw new InvalidCastException($"{node.GetType()} does not contain an ArgumentList."),
+            _ => throw new ArgumentException($"{node.GetType()} does not contain an ArgumentList.", nameof(node)),
         };
 }

@@ -21,7 +21,7 @@ class Compliant
         var isMatch = regex.IsMatch("some input"); // Compliant
         var match = regex.Match("some input"); // Compliant
         var matches = regex.Matches("some input"); // Compliant
-        var replace = regex.Replace("some input", "some replacement"); // Complaint
+        var replace = regex.Replace("some input", "some replacement"); // Compliant
         var split = regex.Split("some input"); // Compliant
     }
 
@@ -30,7 +30,7 @@ class Compliant
         var isMatch = Regex.IsMatch("some input", "some pattern", RegexOptions.None, TimeSpan.FromSeconds(1)); // Compliant
         var match = Regex.Match("some input", "some pattern", RegexOptions.None, TimeSpan.FromSeconds(1)); // Compliant
         var matches = Regex.Matches("some input", "some pattern", RegexOptions.None, TimeSpan.FromSeconds(1)); // Compliant
-        var replace = Regex.Replace("some input", "some pattern", "some replacement", RegexOptions.None, TimeSpan.FromSeconds(1)); // Complaint
+        var replace = Regex.Replace("some input", "some pattern", "some replacement", RegexOptions.None, TimeSpan.FromSeconds(1)); // Compliant
         var split = Regex.Split("some input", "some pattern", RegexOptions.None, TimeSpan.FromSeconds(1)); // Compliant
     }
 
