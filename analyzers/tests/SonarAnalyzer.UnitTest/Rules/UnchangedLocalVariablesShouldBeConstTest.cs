@@ -68,7 +68,7 @@ public void (int arg)
 
     [TestMethod]
     public void UnchangedLocalVariablesShouldBeConst_Fix() =>
-        new VerifierBuilder<UnchangedLocalVariablesShouldBeConst>()
+        verifier
             .AddPaths("UnchangedLocalVariablesShouldBeConst.ToFix.cs")
             .WithCodeFixedPaths("UnchangedLocalVariablesShouldBeConst.Fixed.cs")
             .WithCodeFix<UnchangedLocalVariablesShouldBeConstCodeFix>()
