@@ -72,7 +72,7 @@ int z = y switch
     not 5 => 5
 };
 
-if ((x,y) is (1,2))   // Compliant FN
+if ((x,y) is (1,2)) // FN (is expression not supported yet)
 {
     x = 1;
     y = 2;
@@ -85,7 +85,7 @@ if (someClass.SomeField != 42) // Noncompliant
     someClass.SomeField = 42;
 }
 
-if (someClass is { SomeField: not 42 }) // FN
+if (someClass is { SomeField: not 42 }) // FN (is and is not expression not supported yet)
 {
     someClass.SomeField = 42;
 }
@@ -131,5 +131,19 @@ public static class SwitchExpressionCases
             _ => throw new ArgumentException($"Cannot convert URI scheme '{uri.Scheme}' to a websocket scheme."),
         };
         return builder.Uri;
+    }
+}
+
+// Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/6447
+class Repro6447
+{
+    void MyMethod()
+    {
+        string x = null;
+
+        if (x is not null) // FN (is not expression not supported yet)
+        {
+            x = null;
+        }
     }
 }

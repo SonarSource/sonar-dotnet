@@ -12,12 +12,12 @@ if (someClass.SomeField1.SomeField2 != 42) // Noncompliant
     someClass.SomeField1.SomeField2 = 42;
 }
 
-if (someClass is { SomeField1: { SomeField2: not 42 } }) // FN
+if (someClass is { SomeField1: { SomeField2: not 42 } }) // FN (is expression not supported yet)
 {
     someClass.SomeField1.SomeField2 = 42;
 }
 
-if (someClass is { SomeField1.SomeField2: not 42 }) // FN
+if (someClass is { SomeField1.SomeField2: not 42 }) // FN (is expression not supported yet)
 {
     someClass.SomeField1.SomeField2 = 42;
 }
