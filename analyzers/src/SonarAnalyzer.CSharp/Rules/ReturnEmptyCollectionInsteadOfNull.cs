@@ -18,42 +18,42 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.Extensions;
+
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class ReturnEmptyCollectionInsteadOfNull : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S1168";
+        private const string DiagnosticId = "S1168";
         private const string MessageFormat = "Return an empty collection instead of null.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        private static readonly ImmutableArray<KnownType> CollectionTypes =
-            ImmutableArray.Create(
-                KnownType.System_Collections_IEnumerable,
-                KnownType.System_Array
-            );
+        private static readonly ImmutableArray<KnownType> CollectionTypes = ImmutableArray.Create(
+            KnownType.System_Collections_IEnumerable,
+            KnownType.System_Array);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(ReportIfReturnsNull,
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(ReportIfReturnsNullOrDefault,
                 SyntaxKind.MethodDeclaration,
                 SyntaxKindEx.LocalFunctionStatement,
-                SyntaxKind.PropertyDeclaration);
-        }
+                SyntaxKind.PropertyDeclaration,
+                SyntaxKind.OperatorDeclaration);
 
-        private static void ReportIfReturnsNull(SyntaxNodeAnalysisContext context)
+        private static void ReportIfReturnsNullOrDefault(SyntaxNodeAnalysisContext context)
         {
             var expressionBody = GetExpressionBody(context.Node);
             if (expressionBody != null)
             {
-                var arrowedNullLiteral = GetNullLiteralOrDefault(expressionBody);
-                if (arrowedNullLiteral != null &&
-                    IsReturningCollection(context))
+                var nullOrDefaultLiterals = GetNullOrDefaultExpressions(expressionBody.Expression)
+                    .Select(statement => statement.GetLocation())
+                    .ToList();
+
+                if (nullOrDefaultLiterals.Count > 0 && IsReturningCollection(context))
                 {
-                    context.ReportIssue(Diagnostic.Create(rule, arrowedNullLiteral.GetLocation()));
+                    context.ReportIssue(Rule.CreateDiagnostic(context.Compilation, nullOrDefaultLiterals[0], additionalLocations: nullOrDefaultLiterals.Skip(1)));
                 }
 
                 return;
@@ -62,13 +62,13 @@ namespace SonarAnalyzer.Rules.CSharp
             var body = GetBody(context.Node);
             if (body != null)
             {
-                var returnNullStatements = GetReturnNullStatements(body)
+                var nullOrDefaultLiterals = GetReturnNullOrDefaultExpressions(body)
                     .Select(returnStatement => returnStatement.GetLocation())
                     .ToList();
-                if (returnNullStatements.Count > 0 &&
-                    IsReturningCollection(context))
+
+                if (nullOrDefaultLiterals.Count > 0 && IsReturningCollection(context))
                 {
-                    context.ReportIssue(rule.CreateDiagnostic(context.Compilation, returnNullStatements[0], additionalLocations: returnNullStatements.Skip(1)));
+                    context.ReportIssue(Rule.CreateDiagnostic(context.Compilation, nullOrDefaultLiterals[0], additionalLocations: nullOrDefaultLiterals.Skip(1)));
                 }
             }
         }
@@ -107,6 +107,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 case SyntaxKindEx.LocalFunctionStatement:
                     return ((LocalFunctionStatementSyntaxWrapper)node).ExpressionBody;
 
+                case SyntaxKind.OperatorDeclaration:
+                    return ((OperatorDeclarationSyntax)node).ExpressionBody;
                 default:
                     return null;
             }
@@ -127,27 +129,38 @@ namespace SonarAnalyzer.Rules.CSharp
                 case SyntaxKindEx.LocalFunctionStatement:
                     return ((LocalFunctionStatementSyntaxWrapper)node).Body;
 
+                case SyntaxKind.OperatorDeclaration:
+                    return ((OperatorDeclarationSyntax)node).Body;
+
                 default:
                     return null;
             }
         }
 
-        private static LiteralExpressionSyntax GetNullLiteralOrDefault(ArrowExpressionClauseSyntax expressionBody)
-        {
-            var innerExpression = expressionBody.Expression.RemoveParentheses();
-            return innerExpression.IsNullLiteral()
-                ? (LiteralExpressionSyntax)innerExpression
-                : null;
-        }
-
-        private static IEnumerable<ReturnStatementSyntax> GetReturnNullStatements(BlockSyntax methodBlock)
-        {
-            return methodBlock.DescendantNodes(n =>
+        private static IEnumerable<SyntaxNode> GetReturnNullOrDefaultExpressions(SyntaxNode methodBlock) =>
+            methodBlock.DescendantNodes(n =>
                     !n.IsAnyKind(SyntaxKindEx.LocalFunctionStatement,
                         SyntaxKind.SimpleLambdaExpression,
                         SyntaxKind.ParenthesizedLambdaExpression))
-                .OfType<ReturnStatementSyntax>()
-                .Where(returnStatement => returnStatement.Expression.RemoveParentheses().IsNullLiteral());
+                   .OfType<ReturnStatementSyntax>()
+                   .SelectMany(statement => GetNullOrDefaultExpressions(statement.Expression));
+
+        private static IEnumerable<SyntaxNode> GetNullOrDefaultExpressions(SyntaxNode node)
+        {
+            node = node.RemoveParentheses();
+
+            if (node.IsNullLiteral() || node.IsKind(SyntaxKindEx.DefaultLiteralExpression))
+            {
+                yield return node;
+            }
+
+            if (node is ConditionalExpressionSyntax c)
+            {
+                foreach (var descentant in c.DescendantNodes().SelectMany(GetNullOrDefaultExpressions).Distinct())
+                {
+                    yield return descentant;
+                }
+            }
         }
     }
 }

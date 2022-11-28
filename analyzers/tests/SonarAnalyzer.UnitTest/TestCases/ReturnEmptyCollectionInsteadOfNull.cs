@@ -17,7 +17,7 @@ namespace Tests.Diagnostics
             get
             {
                 return null; // Noncompliant
-//              ^^^^^^^^^^^^
+//                     ^^^^
             }
         }
 
@@ -42,7 +42,7 @@ namespace Tests.Diagnostics
             if (str == null)
             {
                 return null; // Noncompliant
-//              ^^^^^^^^^^^^
+//                     ^^^^
             }
 
             return str.ToCharArray();
