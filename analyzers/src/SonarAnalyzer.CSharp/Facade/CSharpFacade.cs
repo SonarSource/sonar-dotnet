@@ -51,14 +51,14 @@ internal sealed class CSharpFacade : ILanguageFacade<SyntaxKind>
     public object FindConstantValue(SemanticModel model, SyntaxNode node) =>
         node.FindConstantValue(model);
 
-    public IMethodParameterLookup MethodParameterLookup(SyntaxNode node, IMethodSymbol methodSymbol) =>
-        node switch
+    public IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, IMethodSymbol methodSymbol) =>
+        invocation switch
         {
             null => null,
             ObjectCreationExpressionSyntax x => new CSharpMethodParameterLookup(x.ArgumentList, methodSymbol),
             InvocationExpressionSyntax x => new CSharpMethodParameterLookup(x, methodSymbol),
-            _ when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(node) =>
-                new CSharpMethodParameterLookup(((ImplicitObjectCreationExpressionSyntaxWrapper)node).ArgumentList, methodSymbol),
-            _ => throw new ArgumentException($"{node.GetType()} does not contain an ArgumentList.", nameof(node)),
+            _ when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(invocation) =>
+                new CSharpMethodParameterLookup(((ImplicitObjectCreationExpressionSyntaxWrapper)invocation).ArgumentList, methodSymbol),
+            _ => throw new ArgumentException($"{invocation.GetType()} does not contain an ArgumentList.", nameof(invocation)),
         };
 }

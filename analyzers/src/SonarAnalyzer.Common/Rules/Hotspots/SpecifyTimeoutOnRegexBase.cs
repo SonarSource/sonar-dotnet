@@ -31,7 +31,7 @@ public abstract class SpecifyTimeoutOnRegexBase<TSyntaxKind> : HotspotDiagnostic
     // See: https://docs.microsoft.com/en-us/dotnet/api/system.text.regularexpressions.regexoptions?view=net-7.0
     private const int NonBacktracking = 1024;
 
-    private static readonly string[] MatchMethods =
+    private readonly string[] matchMethods =
     {
         nameof(Regex.IsMatch),
         nameof(Regex.Match),
@@ -107,5 +107,5 @@ public abstract class SpecifyTimeoutOnRegexBase<TSyntaxKind> : HotspotDiagnostic
         Language.Syntax.ArgumentExpressions(ctorNode).Count() < 3;
 
     private bool IsRegexMatchMethod(string name) =>
-        MatchMethods.Any(x => x.Equals(name, Language.NameComparison));
+        matchMethods.Any(x => x.Equals(name, Language.NameComparison));
 }

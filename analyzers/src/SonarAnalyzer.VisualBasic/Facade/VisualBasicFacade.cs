@@ -50,12 +50,12 @@ internal sealed class VisualBasicFacade : ILanguageFacade<SyntaxKind>
     public object FindConstantValue(SemanticModel model, SyntaxNode node) =>
         node.FindConstantValue(model);
 
-    public IMethodParameterLookup MethodParameterLookup(SyntaxNode node, IMethodSymbol methodSymbol) =>
-        node switch
+    public IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, IMethodSymbol methodSymbol) =>
+        invocation switch
         {
             null => null,
             ObjectCreationExpressionSyntax x => new VisualBasicMethodParameterLookup(x.ArgumentList, methodSymbol),
             InvocationExpressionSyntax x => new VisualBasicMethodParameterLookup(x, methodSymbol),
-            _ => throw new ArgumentException($"{node.GetType()} does not contain an ArgumentList.", nameof(node)),
+            _ => throw new ArgumentException($"{invocation.GetType()} does not contain an ArgumentList.", nameof(invocation)),
         };
 }
