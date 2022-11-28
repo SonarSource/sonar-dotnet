@@ -18,10 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.CSharp;
+namespace SonarAnalyzer.Rules.VisualBasic;
 
-[DiagnosticAnalyzer(LanguageNames.CSharp)]
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
 public sealed class SpecifyTimeoutOnRegex : SpecifyTimeoutOnRegexBase<SyntaxKind>
 {
-    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
+    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+
+    public SpecifyTimeoutOnRegex() : this(AnalyzerConfiguration.Hotspot) { }
+
+    internal /*for testing*/ SpecifyTimeoutOnRegex(IAnalyzerConfiguration config) : base(config) { }
 }

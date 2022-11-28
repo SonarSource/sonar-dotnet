@@ -22,7 +22,7 @@ using System.Text.RegularExpressions;
 
 namespace SonarAnalyzer.Rules;
 
-public abstract class SpecifyTimeoutOnRegexBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+public abstract class SpecifyTimeoutOnRegexBase<TSyntaxKind> : HotspotDiagnosticAnalyzer
         where TSyntaxKind : struct
 {
     private const string DiagnosticId = "S6444";
@@ -39,10 +39,16 @@ public abstract class SpecifyTimeoutOnRegexBase<TSyntaxKind> : SonarDiagnosticAn
         nameof(Regex.Replace),
         nameof(Regex.Split),
     };
+    protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
-    protected override string MessageFormat => "Pass a timeout to limit the execution time.";
+    protected virtual string MessageFormat => "Pass a timeout to limit the execution time.";
 
-    protected SpecifyTimeoutOnRegexBase() : base(DiagnosticId) { }
+    private DiagnosticDescriptor Rule =>
+        Language.CreateDescriptor(DiagnosticId, MessageFormat);
+
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+
+    protected SpecifyTimeoutOnRegexBase(IAnalyzerConfiguration config) : base(config) { }
 
     protected override void Initialize(SonarAnalysisContext context)
     {
@@ -50,6 +56,11 @@ public abstract class SpecifyTimeoutOnRegexBase<TSyntaxKind> : SonarDiagnosticAn
             Language.GeneratedCodeRecognizer,
             c =>
             {
+                if (!IsEnabled(c.Options))
+                {
+                    return;
+                }
+
                 if (IsCandidateCtor(c.Node)
                     && RegexMethodLacksTimeout(c.Node, c.SemanticModel))
                 {
@@ -62,6 +73,11 @@ public abstract class SpecifyTimeoutOnRegexBase<TSyntaxKind> : SonarDiagnosticAn
             Language.GeneratedCodeRecognizer,
             c =>
             {
+                if (!IsEnabled(c.Options))
+                {
+                    return;
+                }
+
                 if (IsRegexMatchMethod(Language.Syntax.NodeIdentifier(c.Node).GetValueOrDefault().Text)
                     && RegexMethodLacksTimeout(c.Node, c.SemanticModel))
                 {
