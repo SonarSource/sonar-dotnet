@@ -27,33 +27,35 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<RedundantToCharArrayCall>();
 
+        private readonly VerifierBuilder builderWithCodeFix =
+            new VerifierBuilder<RedundantToCharArrayCall>().WithCodeFix<RedundantToCharArrayCallCodeFix>();
+
         [TestMethod]
         public void RedundantToCharArrayCall() =>
             builder.AddPaths("RedundantToCharArrayCall.cs").Verify();
+
+        [TestMethod]
+        public void RedundantToCharArrayCall_CodeFix() =>
+            builderWithCodeFix
+                .AddPaths("RedundantToCharArrayCall.cs")
+                .WithCodeFixedPaths("RedundantToCharArrayCall.Fixed.cs")
+                .VerifyCodeFix();
 
 #if NET
 
         [TestMethod]
         public void RedundantToCharArrayCall_CSharp11() =>
-            builder.AddPaths("RedundantToCharArrayCall.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .Verify();
+            builder.AddPaths("RedundantToCharArrayCall.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
 
         [TestMethod]
         public void RedundantToCharArrayCall_CSharp11_CodeFix() =>
-            builder.AddPaths("RedundantToCharArrayCall.CSharp11.cs")
+            builderWithCodeFix
+                .AddPaths("RedundantToCharArrayCall.CSharp11.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .WithCodeFix<RedundantToCharArrayCallCodeFix>()
                 .WithCodeFixedPaths("RedundantToCharArrayCall.CSharp11.Fixed.cs")
                 .VerifyCodeFix();
 
 #endif
 
-        [TestMethod]
-        public void RedundantToCharArrayCall_CodeFix() =>
-            builder.AddPaths("RedundantToCharArrayCall.cs")
-                .WithCodeFix<RedundantToCharArrayCallCodeFix>()
-                .WithCodeFixedPaths("RedundantToCharArrayCall.Fixed.cs")
-                .VerifyCodeFix();
     }
 }

@@ -24,10 +24,9 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class RedundantToCharArrayCall : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3456";
-        private const string MessageFormat = "Remove this redundant 'ToCharArray' call.";
+        private const string MessageFormat = "Remove this redundant '{0}' call.";
 
         private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        private static readonly ImmutableHashSet<string> MethodNames = ImmutableHashSet.Create("ToArray", "ToCharArray");
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
@@ -35,19 +34,36 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var invocation = (InvocationExpressionSyntax)c.Node;
+                    var foundToCharArray = RaiseIfRedundantCall(c, "ToCharArray", KnownType.System_String);
 
-                    if ((invocation.Parent is ElementAccessExpressionSyntax || invocation.Parent is ForEachStatementSyntax)
-                        && invocation.Expression is MemberAccessExpressionSyntax memberAccess
-                        && MethodNames.Contains(memberAccess.Name.Identifier.ValueText)
-                        && c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
-                        && MethodNames.Contains(methodSymbol.Name)
-                        && (methodSymbol.IsInType(KnownType.System_String) || methodSymbol.IsInType(KnownType.System_ReadOnlySpan_T))
-                        && methodSymbol.Parameters.Length == 0)
+                    // short circuit the other case if already raised, since they can't happen at the same time.
+                    if (!foundToCharArray)
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, memberAccess.Name.GetLocation()));
+                        RaiseIfRedundantCall(c, "ToArray", KnownType.System_ReadOnlySpan_T);
                     }
                 },
                 SyntaxKind.InvocationExpression);
+
+        private static bool RaiseIfRedundantCall(
+            SyntaxNodeAnalysisContext context,
+            string targetMethodName,
+            KnownType targetKnownType)
+        {
+            var invocation = (InvocationExpressionSyntax)context.Node;
+
+            if ((invocation.Parent is ElementAccessExpressionSyntax || invocation.Parent is ForEachStatementSyntax)
+                && invocation.Expression is MemberAccessExpressionSyntax memberAccess
+                && memberAccess.Name.Identifier.ValueText == targetMethodName
+                && context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
+                && methodSymbol.Name == targetMethodName
+                && methodSymbol.IsInType(targetKnownType)
+                && methodSymbol.Parameters.Length == 0)
+            {
+                context.ReportIssue(Diagnostic.Create(Rule, memberAccess.Name.GetLocation(), targetMethodName));
+                return true;
+            }
+
+            return false;
+        }
     }
 }
