@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 record IntPointers
 {
@@ -48,9 +49,27 @@ public struct BarStruct
     public BarStruct(int dummy) { }
 }
 
-public struct S
+public struct FooBarStruct
 {
     public int someField; // Compliant - does not raise a CS0171 issue anymore due to the auto-default-struct C# 11 feature https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-11#auto-default-struct
+    public required int someRequiredField; // Compliant - does not raise a CS0171 and the compiler will default this to 0.
 
-    public S(int dummy) { }
+    public FooBarStruct(int dummy) { }
+}
+
+public class ClassWithRequiredProperties
+{
+    public required int RequiredProperty { get; init; }
+    public int AnotherProperty { get; set; }
+
+    public ClassWithRequiredProperties()
+    {
+        RequiredProperty = 0; // FN - the compiler will set this automatically to 0
+    }
+
+    [SetsRequiredMembers]
+    public ClassWithRequiredProperties(int prop)
+    {
+        RequiredProperty = prop;
+    }
 }
