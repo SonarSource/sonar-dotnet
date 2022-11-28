@@ -97,3 +97,33 @@ namespace Tests.Diagnostics.TestMethods
     {
     }
 }
+
+namespace DerivedAttributeTestCases
+{
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    [DerivedTestClassAttribute]
+    class TestSuite
+    {
+        [DerivedTestMethodAttribute]
+        [Ignore]
+//       ^^^^^^ Noncompliant
+        public void Foo1()
+        {
+        }
+
+        [DerivedDataTestMethodAttribute]
+        [Ignore]
+//       ^^^^^^ Noncompliant
+        public void Foo2()
+        {
+        }
+    }
+
+    public class DerivedTestClassAttribute : TestClassAttribute { }
+
+    public class DerivedTestMethodAttribute : TestMethodAttribute { }
+
+    public class DerivedDataTestMethodAttribute : DataTestMethodAttribute { }
+}
+
