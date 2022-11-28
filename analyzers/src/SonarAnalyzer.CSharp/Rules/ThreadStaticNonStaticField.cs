@@ -26,31 +26,22 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3005";
         private const string MessageFormat = "Remove the 'ThreadStatic' attribute from this definition.";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var fieldDeclaration = (FieldDeclarationSyntax)c.Node;
-                    if (fieldDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword))
+                    if ((FieldDeclarationSyntax)c.Node is var fieldDeclaration
+                        && !fieldDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword)
+                        && fieldDeclaration.AttributeLists.GetAttributes(KnownType.System_ThreadStaticAttribute, c.SemanticModel).FirstOrDefault() is { } threadStaticAttribute)
                     {
-                        return;
-                    }
-
-                    var threadStaticAttribute = fieldDeclaration.AttributeLists
-                        .GetAttributes(KnownType.System_ThreadStaticAttribute, c.SemanticModel)
-                        .FirstOrDefault();
-                    if (threadStaticAttribute != null)
-                    {
-                        c.ReportIssue(Diagnostic.Create(rule, threadStaticAttribute.Name.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(Rule, threadStaticAttribute.Name.GetLocation()));
                     }
                 },
                 SyntaxKind.FieldDeclaration);
-        }
     }
 }

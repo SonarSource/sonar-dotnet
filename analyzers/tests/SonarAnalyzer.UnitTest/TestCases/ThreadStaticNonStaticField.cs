@@ -16,5 +16,22 @@ namespace Tests.Diagnostics
         private static int count3 = 0;
 
         private int count4 = 0;
+
+        [ThreadStaticAttribute]  // Noncompliant
+        private int count5;
+
+        [System.ThreadStaticAttribute]  // Noncompliant
+        private int count6;
+
+        [System.ThreadStatic]  // Noncompliant
+        private int count7;
     }
+
+    public class ThreadStaticNonStaticFieldDerivedAttribute
+    {
+        [DerivedThreadStatic]  // FN for performance reasons we decided not to handle derived classes
+        private int count1 = 0, count11 = 0;
+    }
+
+    public class DerivedThreadStaticAttribute : ThreadStaticAttribute { }
 }
