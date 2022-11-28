@@ -147,7 +147,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             node = node.RemoveParentheses();
 
-            if (node.IsNullLiteral() || node.IsKind(SyntaxKindEx.DefaultLiteralExpression))
+            if (node.IsNullLiteral() || node.IsAnyKind(SyntaxKindEx.DefaultLiteralExpression, SyntaxKind.DefaultExpression))
             {
                 yield return node;
                 yield break;
