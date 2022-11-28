@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\Topics.cs",
+"region":  {
+"startLine":  291,
+"startColumn":  74,
+"endLine":  291,
+"endColumn":  139
+}
+}
+}
+]
+}
