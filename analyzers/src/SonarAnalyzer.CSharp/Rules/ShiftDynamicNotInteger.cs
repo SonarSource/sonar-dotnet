@@ -39,7 +39,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsDynamic(ExpressionSyntax expression, SemanticModel semanticModel) =>
             semanticModel.GetTypeInfo(expression).Type is { } type
-            && type != null
             && type.TypeKind == TypeKind.Dynamic;
 
         protected override void Initialize(SonarAnalysisContext context)
