@@ -15,6 +15,7 @@ namespace Tests.Diagnostics
     {
         public RedundantToStringCall()
         {
+            var calledOnStringLiteral = "IAmAStringLiteral".ToString(); // Noncompliant
             var s = "foo";
             var t = "fee fie foe " + s.ToString();  // Noncompliant {{There's no need to call 'ToString()' on a string.}}
 //                                    ^^^^^^^^^^^

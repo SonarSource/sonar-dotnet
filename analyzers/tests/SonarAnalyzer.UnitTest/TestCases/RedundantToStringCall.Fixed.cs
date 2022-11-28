@@ -15,6 +15,7 @@ namespace Tests.Diagnostics
     {
         public RedundantToStringCall()
         {
+            var calledOnStringLiteral = "IAmAStringLiteral"; // Fixed
             var s = "foo";
             var t = "fee fie foe " + s;  // Fixed
             t = "fee fie foe " + s.ToString(System.Globalization.CultureInfo.InvariantCulture);
