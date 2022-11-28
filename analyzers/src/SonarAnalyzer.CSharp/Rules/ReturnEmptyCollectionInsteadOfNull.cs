@@ -150,13 +150,19 @@ namespace SonarAnalyzer.Rules.CSharp
             if (node.IsNullLiteral() || node.IsKind(SyntaxKindEx.DefaultLiteralExpression))
             {
                 yield return node;
+                yield break;
             }
 
             if (node is ConditionalExpressionSyntax c)
             {
-                foreach (var descentant in c.DescendantNodes().SelectMany(GetNullOrDefaultExpressions).Distinct())
+                foreach (var innerNode in GetNullOrDefaultExpressions(c.WhenTrue))
                 {
-                    yield return descentant;
+                    yield return innerNode;
+                }
+
+                foreach (var innerNode in GetNullOrDefaultExpressions(c.WhenFalse))
+                {
+                    yield return innerNode;
                 }
             }
         }
