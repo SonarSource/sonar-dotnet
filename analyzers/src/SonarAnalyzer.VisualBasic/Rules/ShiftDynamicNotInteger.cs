@@ -23,20 +23,18 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     public sealed class ShiftDynamicNotInteger : ShiftDynamicNotIntegerBase<ExpressionSyntax>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
+        private static readonly DiagnosticDescriptor RuleVisualBasic = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(RuleVisualBasic);
 
-        protected override DiagnosticDescriptor Rule { get; } = rule;
+        protected override DiagnosticDescriptor Rule { get; } = RuleVisualBasic;
 
         protected override bool ShouldRaise(SemanticModel semanticModel, ExpressionSyntax left, ExpressionSyntax right) =>
-            IsObject(left, semanticModel) ||
-            !IsConvertibleToInt(right, semanticModel);
+            IsObject(left, semanticModel) || !IsConvertibleToInt(right, semanticModel);
 
         protected override bool CanBeConvertedTo(ExpressionSyntax expression, ITypeSymbol type, SemanticModel semanticModel) =>
-            expression.IsKind(SyntaxKind.NothingLiteralExpression) || // x >> Nothing will not throw, so ignore
-            semanticModel.GetTypeInfo(expression).Type.IsAny(KnownType.IntegralNumbers);
+            expression.IsKind(SyntaxKind.NothingLiteralExpression) // x >> Nothing will not throw, so ignore
+            || semanticModel.GetTypeInfo(expression).Type.IsAny(KnownType.IntegralNumbers);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -51,10 +49,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 SyntaxKind.RightShiftAssignmentStatement);
         }
 
-        private static bool IsObject(ExpressionSyntax expression, SemanticModel semanticModel)
-        {
-            var type = semanticModel.GetTypeInfo(expression).Type;
-            return type != null && type.Is(KnownType.System_Object);
-        }
+        private static bool IsObject(ExpressionSyntax expression, SemanticModel semanticModel) =>
+            semanticModel.GetTypeInfo(expression).Type is { } type
+            && type.Is(KnownType.System_Object);
     }
 }

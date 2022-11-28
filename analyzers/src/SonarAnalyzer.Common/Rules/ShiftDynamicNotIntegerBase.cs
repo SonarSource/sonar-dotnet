@@ -32,16 +32,17 @@ namespace SonarAnalyzer.Rules
 
         protected abstract bool ShouldRaise(SemanticModel semanticModel, TExpressionSyntax left, TExpressionSyntax right);
 
-        protected void CheckExpressionWithTwoParts<T>(SyntaxNodeAnalysisContext context, Func<T, TExpressionSyntax> getLeft,
-            Func<T, TExpressionSyntax> getRight)
-            where T : SyntaxNode
+        protected void CheckExpressionWithTwoParts<T>(SyntaxNodeAnalysisContext context,
+                                                      Func<T, TExpressionSyntax> getLeft,
+                                                      Func<T, TExpressionSyntax> getRight)
+                                                      where T : SyntaxNode
         {
             var expression = (T)context.Node;
             var left = getLeft(expression);
             var right = getRight(expression);
 
-            if (!IsErrorType(right, context.SemanticModel, out var typeOfRight) &&
-                ShouldRaise(context.SemanticModel, left, right))
+            if (!IsErrorType(right, context.SemanticModel, out var typeOfRight)
+                && ShouldRaise(context.SemanticModel, left, right))
             {
                 var typeInMessage = GetTypeNameForMessage(right, typeOfRight, context.SemanticModel);
 
@@ -50,29 +51,21 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        private static string GetTypeNameForMessage(SyntaxNode expression, ITypeSymbol typeOfRight, SemanticModel semanticModel)
-        {
-            var constValue = semanticModel.GetConstantValue(expression);
-            return constValue.HasValue && constValue.Value == null
-                ? "null"
-                : typeOfRight.ToMinimalDisplayString(semanticModel, expression.SpanStart);
-        }
+        private static string GetTypeNameForMessage(SyntaxNode expression, ITypeSymbol typeOfRight, SemanticModel semanticModel) =>
+            semanticModel.GetConstantValue(expression) is { } constValue
+            && constValue.HasValue
+            && constValue.Value == null
+            ? "null"
+            : typeOfRight.ToMinimalDisplayString(semanticModel, expression.SpanStart);
 
-        private bool IsErrorType(TExpressionSyntax expression, SemanticModel semanticModel, out ITypeSymbol type)
+        private static bool IsErrorType(TExpressionSyntax expression, SemanticModel semanticModel, out ITypeSymbol type)
         {
             type = semanticModel.GetTypeInfo(expression).Type;
             return type.Is(TypeKind.Error);
         }
 
-        protected bool IsConvertibleToInt(TExpressionSyntax expression, SemanticModel semanticModel)
-        {
-            var intType = semanticModel.Compilation.GetTypeByMetadataName(KnownType.System_Int32);
-            if (intType == null)
-            {
-                return false;
-            }
-
-            return CanBeConvertedTo(expression, intType, semanticModel);
-        }
+        protected bool IsConvertibleToInt(TExpressionSyntax expression, SemanticModel semanticModel) =>
+            semanticModel.Compilation.GetTypeByMetadataName(KnownType.System_Int32) is { } intType
+            && CanBeConvertedTo(expression, intType, semanticModel);
     }
 }

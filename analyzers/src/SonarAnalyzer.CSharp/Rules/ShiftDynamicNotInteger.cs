@@ -23,28 +23,24 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class ShiftDynamicNotInteger : ShiftDynamicNotIntegerBase<ExpressionSyntax>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
+        private static readonly DiagnosticDescriptor RuleCSharp = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(RuleCSharp);
 
-        protected override DiagnosticDescriptor Rule { get; } = rule;
+        protected override DiagnosticDescriptor Rule { get; } = RuleCSharp;
 
         protected override bool ShouldRaise(SemanticModel semanticModel, ExpressionSyntax left, ExpressionSyntax right) =>
-            IsDynamic(left, semanticModel) &&
-            !IsConvertibleToInt(right, semanticModel);
+            IsDynamic(left, semanticModel) && !IsConvertibleToInt(right, semanticModel);
 
-        protected override bool CanBeConvertedTo(ExpressionSyntax expression, ITypeSymbol type, SemanticModel semanticModel)
-        {
-            var conversion = semanticModel.ClassifyConversion(expression, type);
-            return conversion.Exists && (conversion.IsIdentity || conversion.IsImplicit);
-        }
+        protected override bool CanBeConvertedTo(ExpressionSyntax expression, ITypeSymbol type, SemanticModel semanticModel) =>
+            semanticModel.ClassifyConversion(expression, type) is { } conversion
+            && conversion.Exists
+            && (conversion.IsIdentity || conversion.IsImplicit);
 
-        private static bool IsDynamic(ExpressionSyntax expression, SemanticModel semanticModel)
-        {
-            var type = semanticModel.GetTypeInfo(expression).Type;
-            return type != null && type.TypeKind == TypeKind.Dynamic;
-        }
+        private static bool IsDynamic(ExpressionSyntax expression, SemanticModel semanticModel) =>
+            semanticModel.GetTypeInfo(expression).Type is { } type
+            && type != null
+            && type.TypeKind == TypeKind.Dynamic;
 
         protected override void Initialize(SonarAnalysisContext context)
         {
