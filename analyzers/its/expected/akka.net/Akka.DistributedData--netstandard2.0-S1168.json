@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1168",
+"message":  "Return an empty collection instead of null.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\GSet.cs",
+"region":  {
+"startLine":  204,
+"startColumn":  49,
+"endLine":  204,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S1168",
+"message":  "Return an empty collection instead of null.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"region":  {
+"startLine":  770,
+"startColumn":  33,
+"endLine":  770,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1168",
+"message":  "Return an empty collection instead of null.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"region":  {
+"startLine":  739,
+"startColumn":  29,
+"endLine":  739,
+"endColumn":  33
+}
+}
+}
+]
+}

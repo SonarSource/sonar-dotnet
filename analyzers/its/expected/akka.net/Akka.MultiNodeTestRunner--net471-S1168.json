@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S1168",
+"message":  "Return an empty collection instead of null.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Discovery.cs",
+"region":  {
+"startLine":  129,
+"startColumn":  29,
+"endLine":  129,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Discovery.cs",
+"region":  {
+"startLine":  131,
+"startColumn":  135,
+"endLine":  131,
+"endColumn":  139
+}
+}
+]
+}
+]
+}

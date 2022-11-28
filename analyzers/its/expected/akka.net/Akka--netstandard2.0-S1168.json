@@ -8,18 +8,18 @@
 "uri":  "sources\akka.net\src\core\Akka\Actor\Address.cs",
 "region":  {
 "startLine":  371,
-"startColumn":  34,
+"startColumn":  41,
 "endLine":  371,
-"endColumn":  46
+"endColumn":  45
 }
 },
 {
 "uri":  "sources\akka.net\src\core\Akka\Actor\Address.cs",
 "region":  {
 "startLine":  384,
-"startColumn":  17,
+"startColumn":  24,
 "endLine":  384,
-"endColumn":  29
+"endColumn":  28
 }
 }
 ]
@@ -31,9 +31,9 @@
 "uri":  "sources\akka.net\src\core\Akka\Dispatch\ActorTaskScheduler.cs",
 "region":  {
 "startLine":  52,
-"startColumn":  13,
+"startColumn":  20,
 "endLine":  52,
-"endColumn":  25
+"endColumn":  24
 }
 }
 },
@@ -57,9 +57,9 @@
 "uri":  "sources\akka.net\src\core\Akka\Serialization\ByteArraySerializer.cs",
 "region":  {
 "startLine":  44,
-"startColumn":  17,
+"startColumn":  24,
 "endLine":  44,
-"endColumn":  29
+"endColumn":  28
 }
 }
 }

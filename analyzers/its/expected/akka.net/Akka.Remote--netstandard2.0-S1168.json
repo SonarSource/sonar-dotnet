@@ -7,9 +7,9 @@
 "uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
 "region":  {
 "startLine":  240,
-"startColumn":  21,
+"startColumn":  28,
 "endLine":  240,
-"endColumn":  33
+"endColumn":  32
 }
 }
 }
