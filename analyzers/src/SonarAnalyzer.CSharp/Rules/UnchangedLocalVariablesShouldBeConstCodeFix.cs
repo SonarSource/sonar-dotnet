@@ -34,9 +34,11 @@ public sealed class UnchangedLocalVariablesShouldBeConstCodeFix : SonarCodeFix
 
     protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
     {
-        if (VariableDeclaration(root, context) is { } variable
-            && variable.Parent is LocalDeclarationStatementSyntax oldNode
-            && variable.Variables.Count == 1) // It is not guaranteed that all should be const.
+        if (VariableDeclaration(root, context) is 
+            {
+                Parent: LocalDeclarationStatementSyntax oldNode,
+                Variables.Count: 1, // It is not guaranteed that all should be const.
+            } variable) 
         {
             context.RegisterCodeFix(
                 CodeAction.Create(
