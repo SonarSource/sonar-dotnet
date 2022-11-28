@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Cors;
 
 namespace Net6Poc.PermissiveCors
@@ -23,5 +24,18 @@ namespace Net6Poc.PermissiveCors
         }
 
         private void Call(Action<int> action) => action(1);
+        
+        [ApiController]
+        [Route("[controller]")]
+        public class ConstantInterpolatedStringController : Controller
+        {
+            [HttpGet]
+            public void Index()
+            {
+                const string constAccessControl = "Access-Control";
+                const string constAllowOrigin = "Allow-Origin";
+                Response.Headers.Add($"{constAccessControl}-{constAllowOrigin}", "*"); // Noncompliant
+            }
+        }
     }
 }
