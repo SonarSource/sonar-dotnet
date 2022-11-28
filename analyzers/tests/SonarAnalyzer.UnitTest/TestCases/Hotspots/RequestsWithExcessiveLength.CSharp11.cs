@@ -10,7 +10,7 @@ internal class TestCases
     [RequestSizeLimit(8_000_001)] // Noncompliant
     public void Foo() { }
 
-    [GenericAttribute<int>(8_000_001)] // FN
+    [GenericAttribute<int>(8_000_001)] // FN for performance reasons we decided not to handle derived classes
     public void Bar() { }
 }
 
