@@ -20,40 +20,40 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.UnitTest.Rules;
+
+[TestClass]
+public class UnchangedLocalVariablesShouldBeConstTest
 {
-    [TestClass]
-    public class UnchangedLocalVariablesShouldBeConstTest
-    {
-        private readonly VerifierBuilder verifier = new VerifierBuilder<UnchangedLocalVariablesShouldBeConst>();
+    private readonly VerifierBuilder verifier = new VerifierBuilder<UnchangedLocalVariablesShouldBeConst>();
 
-        [TestMethod]
-        public void UnchangedLocalVariablesShouldBeConst() =>
-            verifier.AddPaths("UnchangedLocalVariablesShouldBeConst.cs").Verify();
+    [TestMethod]
+    public void UnchangedLocalVariablesShouldBeConst() =>
+        verifier.AddPaths("UnchangedLocalVariablesShouldBeConst.cs").Verify();
 
-        [TestMethod]
-        public void UnchangedLocalVariablesShouldBeConst_CSharp7() =>
-            verifier.AddPaths("UnchangedLocalVariablesShouldBeConst.CSharp7.cs").WithOptions(ParseOptionsHelper.OnlyCSharp7).Verify();
+    [TestMethod]
+    public void UnchangedLocalVariablesShouldBeConst_CSharp7() =>
+        verifier.AddPaths("UnchangedLocalVariablesShouldBeConst.CSharp7.cs").WithOptions(ParseOptionsHelper.OnlyCSharp7).Verify();
 
 #if NET
 
-        [TestMethod]
-        public void UnchangedLocalVariablesShouldBeConst_CSharp9() =>
-            verifier.AddPaths("UnchangedLocalVariablesShouldBeConst.CSharp9.cs").WithTopLevelStatements().Verify();
+    [TestMethod]
+    public void UnchangedLocalVariablesShouldBeConst_CSharp9() =>
+        verifier.AddPaths("UnchangedLocalVariablesShouldBeConst.CSharp9.cs").WithTopLevelStatements().Verify();
 
-        [TestMethod]
-        public void UnchangedLocalVariablesShouldBeConst_CSharp10() =>
-            verifier.AddPaths("UnchangedLocalVariablesShouldBeConst.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).WithTopLevelStatements().Verify();
+    [TestMethod]
+    public void UnchangedLocalVariablesShouldBeConst_CSharp10() =>
+        verifier.AddPaths("UnchangedLocalVariablesShouldBeConst.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).WithTopLevelStatements().Verify();
 
-        [TestMethod]
-        public void UnchangedLocalVariablesShouldBeConst_CSharp11() =>
-            verifier.AddPaths("UnchangedLocalVariablesShouldBeConst.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).WithTopLevelStatements().Verify();
+    [TestMethod]
+    public void UnchangedLocalVariablesShouldBeConst_CSharp11() =>
+        verifier.AddPaths("UnchangedLocalVariablesShouldBeConst.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).WithTopLevelStatements().Verify();
 
 #endif
 
-        [TestMethod]
-        public void UnchangedLocalVariablesShouldBeConst_InvalidCode() =>
-            verifier.AddSnippet(@"
+    [TestMethod]
+    public void UnchangedLocalVariablesShouldBeConst_InvalidCode() =>
+        verifier.AddSnippet(@"
 // invalid code
 public void Test_TypeThatCannotBeConst(int arg)
 {
@@ -65,5 +65,12 @@ public void (int arg)
 {
     int intVar = 1; // Noncompliant
 }").WithErrorBehavior(CompilationErrorBehavior.Ignore).Verify();
-    }
+
+    [TestMethod]
+    public void UnchangedLocalVariablesShouldBeConst_Fix() =>
+        verifier
+            .AddPaths("UnchangedLocalVariablesShouldBeConst.ToFix.cs")
+            .WithCodeFixedPaths("UnchangedLocalVariablesShouldBeConst.Fixed.cs")
+            .WithCodeFix<UnchangedLocalVariablesShouldBeConstCodeFix>()
+            .VerifyCodeFix();
 }
