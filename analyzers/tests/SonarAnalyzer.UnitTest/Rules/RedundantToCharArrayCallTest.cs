@@ -39,6 +39,14 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
                 .Verify();
 
+        [TestMethod]
+        public void RedundantToCharArrayCall_CSharp11_CodeFix() =>
+            builder.AddPaths("RedundantToCharArrayCall.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .WithCodeFix<RedundantToCharArrayCallCodeFix>()
+                .WithCodeFixedPaths("RedundantToCharArrayCall.CSharp11.Fixed.cs")
+                .VerifyCodeFix();
+
 #endif
 
         [TestMethod]
