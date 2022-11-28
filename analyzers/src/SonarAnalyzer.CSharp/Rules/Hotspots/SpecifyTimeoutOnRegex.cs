@@ -28,5 +28,4 @@ public sealed class SpecifyTimeoutOnRegex : SpecifyTimeoutOnRegexBase<SyntaxKind
     public SpecifyTimeoutOnRegex() : this(AnalyzerConfiguration.Hotspot) { }
 
     internal /*for testing*/ SpecifyTimeoutOnRegex(IAnalyzerConfiguration config) : base(config) { }
-
 }

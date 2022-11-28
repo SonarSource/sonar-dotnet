@@ -39,12 +39,12 @@ public abstract class SpecifyTimeoutOnRegexBase<TSyntaxKind> : HotspotDiagnostic
         nameof(Regex.Replace),
         nameof(Regex.Split),
     };
+
     protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
     protected virtual string MessageFormat => "Pass a timeout to limit the execution time.";
 
-    private DiagnosticDescriptor Rule =>
-        Language.CreateDescriptor(DiagnosticId, MessageFormat);
+    private DiagnosticDescriptor Rule => Language.CreateDescriptor(DiagnosticId, MessageFormat);
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
