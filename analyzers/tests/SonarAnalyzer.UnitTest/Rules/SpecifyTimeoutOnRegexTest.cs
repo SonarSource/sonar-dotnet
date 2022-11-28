@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.Common;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
@@ -26,11 +27,15 @@ namespace SonarAnalyzer.UnitTest.Rules;
 [TestClass]
 public class SpecifyTimeoutOnRegexTest
 {
-    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.SpecifyTimeoutOnRegex>()
+    private readonly VerifierBuilder builderCS = new VerifierBuilder()
+        .AddAnalyzer(() => new CS.SpecifyTimeoutOnRegex(AnalyzerConfiguration.AlwaysEnabled))
+        .WithBasePath("Hotspots")
         .AddReferences(MetadataReferenceFacade.RegularExpressions)
         .AddReferences(NuGetMetadataReference.SystemComponentModelAnnotations());
 
-    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.SpecifyTimeoutOnRegex>()
+    private readonly VerifierBuilder builderVB = new VerifierBuilder()
+        .AddAnalyzer(() => new VB.SpecifyTimeoutOnRegex(AnalyzerConfiguration.AlwaysEnabled))
+        .WithBasePath("Hotspots")
         .AddReferences(MetadataReferenceFacade.RegularExpressions)
         .AddReferences(NuGetMetadataReference.SystemComponentModelAnnotations());
 
