@@ -34,16 +34,16 @@ public sealed class UnchangedLocalVariablesShouldBeConstCodeFix : SonarCodeFix
 
     protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
     {
-        if (VariableDeclaration(root, context) is 
+        if (VariableDeclaration(root, context) is
             {
                 Parent: LocalDeclarationStatementSyntax oldNode,
                 Variables.Count: 1, // It is not guaranteed that all should be const.
-            } variable) 
+            } variable)
         {
             context.RegisterCodeFix(
                 CodeAction.Create(
                 Title,
-                token => ChangeDocument(context.Document, root, variable, oldNode, token)),
+                cancel => ChangeDocument(context.Document, root, variable, oldNode, cancel)),
                 context.Diagnostics);
         }
 
@@ -55,11 +55,11 @@ public sealed class UnchangedLocalVariablesShouldBeConstCodeFix : SonarCodeFix
         SyntaxNode root,
         VariableDeclarationSyntax variable,
         LocalDeclarationStatementSyntax oldNode,
-        CancellationToken token)
+        CancellationToken cancel)
     {
         var declaration = variable.Type.IsVar
-               ? WithExplictType(variable, await document.GetSemanticModelAsync(token).ConfigureAwait(false))
-               : variable;
+            ? WithExplictType(variable, await document.GetSemanticModelAsync(cancel).ConfigureAwait(false))
+            : variable;
 
         var newNode = root.ReplaceNode(oldNode, ConstantDeclaration(declaration));
 
@@ -77,7 +77,10 @@ public sealed class UnchangedLocalVariablesShouldBeConstCodeFix : SonarCodeFix
 
     private static VariableDeclarationSyntax WithExplictType(VariableDeclarationSyntax declaration, SemanticModel semanticModel)
     {
-        var type = IdentifierName(semanticModel.GetTypeInfo(declaration.Type).Type.ToMinimalDisplayString(semanticModel, declaration.GetLocation().SourceSpan.Start));
+        var typeSymbol = semanticModel.GetTypeInfo(declaration.Type).Type;
+        var type = typeSymbol is IErrorTypeSymbol
+            ? declaration.Type
+            : IdentifierName(typeSymbol.ToMinimalDisplayString(semanticModel, declaration.GetLocation().SourceSpan.Start));
         return declaration.ReplaceNode(declaration.Type, type);
     }
 }
