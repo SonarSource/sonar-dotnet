@@ -25,6 +25,12 @@ namespace Tests.Diagnostics
         public void Method8([CallerMemberName]string callerMemberName = null,
             [CallerFilePath]string callerFilePath = null, [CallerLineNumber]int callerLineNumber = 0) { }
 
+        public void Method9([System.Runtime.CompilerServices.CallerFilePath] string callerFilePath = "", string other = "") { } // Noncompliant
+
+        public void Method10([System.Runtime.CompilerServices.CallerFilePathAttribute] string callerFilePath = "", string other = "") { } // Noncompliant
+
+        public void Method11([CallerFilePathAttribute] string callerFilePath = "", string other = "") { } // Noncompliant
+
         public Program([CallerFilePath]string callerFilePath = "", string other = "") { } // Noncompliant
         public Program(int other, [CallerFilePath]string callerFilePath = "") { }
     }

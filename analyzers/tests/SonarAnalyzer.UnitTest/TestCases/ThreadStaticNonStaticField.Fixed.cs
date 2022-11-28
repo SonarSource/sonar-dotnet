@@ -14,6 +14,9 @@ namespace Tests.Diagnostics
         private static int count3 = 0;
 
         private int count4 = 0;
+        private int count5;
+        private int count6;
+        private int count7;
     }
 
     public class ThreadStaticNonStaticFieldDerivedAttribute

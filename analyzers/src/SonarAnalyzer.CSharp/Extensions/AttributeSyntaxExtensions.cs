@@ -24,12 +24,25 @@ internal static class AttributeSyntaxExtensions
 {
     private const int AttributeLength = 9;
 
+    public static bool IsKnownType(this AttributeSyntax attribute, ImmutableArray<KnownType> attributeKnownTypes, SemanticModel semanticModel)
+    {
+        for (var i = 0; i < attributeKnownTypes.Length; i++)
+        {
+            if (IsKnownType(attribute, attributeKnownTypes[i], semanticModel))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static bool IsKnownType(this AttributeSyntax attribute, KnownType knownType, SemanticModel semanticModel) =>
         attribute.Name.GetName().Contains(GetShortNameWithoutAttributeSuffix(knownType))
         && SymbolHelper.IsKnownType(attribute, knownType, semanticModel);
 
     private static string GetShortNameWithoutAttributeSuffix(KnownType knownType) =>
-        knownType.TypeName == nameof(Attribute) || !knownType.TypeName.EndsWith(nameof(Attribute))
+        knownType.TypeName == nameof(Attribute)
+        || !knownType.TypeName.EndsWith(nameof(Attribute))
             ? knownType.TypeName
             : knownType.TypeName.Remove(knownType.TypeName.Length - AttributeLength);
 }

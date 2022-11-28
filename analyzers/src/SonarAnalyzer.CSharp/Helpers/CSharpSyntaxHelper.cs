@@ -70,14 +70,6 @@ namespace SonarAnalyzer.Helpers
         public static SyntaxNode GetFirstNonParenthesizedParent(this SyntaxNode node) =>
             node.GetSelfOrTopParenthesizedExpression().Parent;
 
-        public static IEnumerable<AttributeSyntax> GetAttributes(this SyntaxList<AttributeListSyntax> attributeLists, KnownType attributeKnownType, SemanticModel semanticModel) =>
-            attributeLists.SelectMany(x => x.Attributes).Where(x => x.IsKnownType(attributeKnownType, semanticModel));
-
-        public static IEnumerable<AttributeSyntax> GetAttributes(this SyntaxList<AttributeListSyntax> attributeLists,
-            ImmutableArray<KnownType> attributeKnownTypes, SemanticModel semanticModel) =>
-            attributeLists.SelectMany(list => list.Attributes)
-                .Where(a => semanticModel.GetTypeInfo(a).Type.IsAny(attributeKnownTypes));
-
         public static bool IsOnThis(this ExpressionSyntax expression) =>
             IsOn(expression, SyntaxKind.ThisExpression);
 
