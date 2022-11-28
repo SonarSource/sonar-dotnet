@@ -21,7 +21,7 @@ namespace Tests.Diagnostics
 
     public class ThreadStaticNonStaticFieldDerivedAttribute
     {
-        [DerivedThreadStatic]  // // FN for performance reasons we decided not to handle derived classes
+        [DerivedThreadStatic]  // FN for performance reasons we decided not to handle derived classes
         private int count1 = 0, count11 = 0;
     }
 
