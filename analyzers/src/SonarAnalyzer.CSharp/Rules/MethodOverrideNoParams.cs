@@ -38,15 +38,11 @@ namespace SonarAnalyzer.Rules.CSharp
                     var method = (MethodDeclarationSyntax)c.Node;
                     var methodSymbol = c.SemanticModel.GetDeclaredSymbol(method);
 
-                    if (methodSymbol == null
-                        || !methodSymbol.IsOverride
-                        || methodSymbol.OverriddenMethod == null
-                        || !methodSymbol.OverriddenMethod.Parameters.Any(p => p.IsParams))
-                    {
-                        return;
-                    }
-
-                    if (!method.ParameterList.Parameters.Last().Modifiers.Any(SyntaxKind.ParamsKeyword))
+                    if (methodSymbol is not null
+                    && methodSymbol.IsOverride
+                    && methodSymbol.OverriddenMethod is not null
+                    && methodSymbol.OverriddenMethod.Parameters.Any(p => p.IsParams)
+                    && !method.ParameterList.Parameters.Last().Modifiers.Any(SyntaxKind.ParamsKeyword))
                     {
                         c.ReportIssue(Diagnostic.Create(Rule, method.ParameterList.Parameters.Last().GetLocation()));
                     }
