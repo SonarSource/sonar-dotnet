@@ -123,11 +123,6 @@ class Repro6447
     {
         string x = null;
 
-        if (!(x is null)) // FN (is expression not supported yet)
-        {
-            x = null;
-        }
-
         if (x is not null) // FN (is not expression not supported yet)
         {
             x = null;
