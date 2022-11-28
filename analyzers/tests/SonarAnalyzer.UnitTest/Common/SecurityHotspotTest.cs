@@ -109,6 +109,9 @@ namespace SonarAnalyzer.UnitTest.Common
                 nameof(ExpandingArchives) => ExpandingArchivesTest.AdditionalReferences,
                 nameof(RequestsWithExcessiveLength) => RequestsWithExcessiveLengthTest.GetAdditionalReferences(),
                 nameof(UsingRegularExpressions) => MetadataReferenceFacade.RegularExpressions,
+                nameof(SpecifyTimeoutOnRegex) => MetadataReferenceFacade.RegularExpressions
+                    .Concat(NuGetMetadataReference.SystemComponentModelAnnotations()),
+
 #if NET
                 nameof(DisablingCsrfProtection) => DisablingCsrfProtectionTest.AdditionalReferences(),
                 nameof(ExecutingSqlQueries) => ExecutingSqlQueriesTest.GetReferencesEntityFrameworkNetCore(version),
