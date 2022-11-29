@@ -32,7 +32,12 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var collector = new UnusedLocalsCollector();
 
-                cbc.RegisterSyntaxNodeAction(collector.CollectDeclarations, SyntaxKind.LocalDeclarationStatement, SyntaxKind.SimpleAssignmentExpression);
+                cbc.RegisterSyntaxNodeAction(collector.CollectDeclarations,
+                    SyntaxKind.LocalDeclarationStatement,
+                    SyntaxKind.SimpleAssignmentExpression,
+                    SyntaxKindEx.VarPattern,
+                    SyntaxKindEx.RecursivePattern,
+                    SyntaxKindEx.DeclarationPattern);
                 cbc.RegisterSyntaxNodeAction(collector.CollectUsages, SyntaxKind.IdentifierName);
                 cbc.RegisterCodeBlockEndAction(collector.GetReportUnusedVariablesAction(Rule));
             });
@@ -46,8 +51,14 @@ namespace SonarAnalyzer.Rules.CSharp
                         localDeclaration.Declaration.Variables,
                     AssignmentExpressionSyntax assignmentExpression =>
                         assignmentExpression.AssignmentTargets().Where(x => DeclarationExpressionSyntaxWrapper.IsInstance(x) || SingleVariableDesignationSyntaxWrapper.IsInstance(x)),
+                    { RawKind: (int)SyntaxKindEx.VarPattern } pattern when ((VarPatternSyntaxWrapper)pattern).Designation is { } designation => FromDesignation(designation),
+                    { RawKind: (int)SyntaxKindEx.RecursivePattern } pattern when ((RecursivePatternSyntaxWrapper)pattern).Designation is { } designation => FromDesignation(designation),
+                    { RawKind: (int)SyntaxKindEx.DeclarationPattern } pattern when ((DeclarationPatternSyntaxWrapper)pattern).Designation is { } designation => FromDesignation(designation),
                     _ => Enumerable.Empty<SyntaxNode>(),
                 };
         }
+
+        private static IEnumerable<SyntaxNode> FromDesignation(VariableDesignationSyntaxWrapper designation)
+            => designation.AllVariables().Select(v => v.SyntaxNode);
     }
 }
