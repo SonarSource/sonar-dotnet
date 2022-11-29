@@ -68,8 +68,7 @@ public class TestRequiredProperties
 
     public class ClassWithRequiredProperties
     {
-        public required int RequiredProperty { get; init; } = 0; // Noncompliant -  the required property is to be set on the caller's side anyways or by the
-                                                                 // constructor.
+        public required int RequiredProperty { get; init; } = 0; // Noncompliant -  the required property is to be set on the caller's side anyways or by the constructor.
         public int AnotherProperty { get; set; }
 
         [SetsRequiredMembers]

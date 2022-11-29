@@ -69,10 +69,9 @@ public class TestRequiredProperties
     public class ClassWithRequiredProperties
     {
         public required int RequiredProperty { get; init; } // Fixed
-                                                            // constructor.
         public int AnotherProperty { get; set; }
 
         [SetsRequiredMembers]
-        public ClassWithRequiredProperties() { }
+        public ClassWithRequiredProperties(){ }
     }
 }
