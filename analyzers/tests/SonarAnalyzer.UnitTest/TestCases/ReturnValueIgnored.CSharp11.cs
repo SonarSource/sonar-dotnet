@@ -8,20 +8,20 @@ nuint nu = 2;
 IntPtr intPtr = 2;
 UIntPtr uintPtr = 2;
 
-n.ToInt32(); // Compliant, FN, pure function
-nu.ToUInt32(); // Compliant, FN, pure function
+n.ToInt32(); // Noncompliant
+nu.ToUInt32(); // Noncompliant
 
-intPtr.ToInt64(); // Compliant, FN, pure function
-uintPtr.ToUInt64(); // Compliant, FN, pure function
+intPtr.ToInt64(); // Noncompliant
+uintPtr.ToUInt64(); // Noncompliant
 
 unsafe
 {
-    n.ToPointer(); // Compliant, FN, pure function
-    intPtr.ToPointer(); // Compliant, FN, pure function
+    n.ToPointer(); // Noncompliant
+    intPtr.ToPointer(); // Noncompliant
 
 
-    nu.ToPointer(); // Compliant, FN, pure function
-    uintPtr.ToPointer(); // Compliant, FN, pure function
+    nu.ToPointer(); // Noncompliant
+    uintPtr.ToPointer(); // Noncompliant
 
     x.ToString(); // Noncompliant
 }

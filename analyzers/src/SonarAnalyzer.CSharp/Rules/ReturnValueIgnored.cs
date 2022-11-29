@@ -103,6 +103,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.System_UInt16,
                 KnownType.System_UInt32,
                 KnownType.System_UInt64,
+                KnownType.System_IntPtr,
+                KnownType.System_UIntPtr,
                 KnownType.System_Char,
                 KnownType.System_Byte,
                 KnownType.System_SByte,

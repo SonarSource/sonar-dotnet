@@ -21,13 +21,13 @@ nuint nu = 2;
 IntPtr intPtr = IntPtr.Zero;
 UIntPtr uintPtr = UIntPtr.Zero;
 
-intPtr.ToInt64(); // Compliant, FN, pure function
-uintPtr.ToUInt64(); // Compliant, FN, pure function
+intPtr.ToInt64(); // Noncompliant
+uintPtr.ToUInt64(); // Noncompliant
 
 unsafe
 {
-    intPtr.ToPointer(); // Compliant, FN, pure function
-    uintPtr.ToPointer(); // Compliant, FN, pure function
+    intPtr.ToPointer(); // Noncompliant
+    uintPtr.ToPointer(); // Noncompliant
 
     i.ToString(); // Noncompliant
 }
