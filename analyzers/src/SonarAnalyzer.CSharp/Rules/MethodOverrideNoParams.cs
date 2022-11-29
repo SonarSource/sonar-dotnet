@@ -26,32 +26,27 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3262";
         private const string MessageFormat = "'params' should not be removed from an override.";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
                     var method = (MethodDeclarationSyntax)c.Node;
                     var methodSymbol = c.SemanticModel.GetDeclaredSymbol(method);
-                    if (methodSymbol == null ||
-                        !methodSymbol.IsOverride ||
-                        methodSymbol.OverriddenMethod == null ||
-                        !methodSymbol.OverriddenMethod.Parameters.Any(p => p.IsParams))
-                    {
-                        return;
-                    }
 
-                    if (!method.ParameterList.Parameters.Last().Modifiers.Any(SyntaxKind.ParamsKeyword))
+                    if (methodSymbol is not null
+                        && methodSymbol.IsOverride
+                        && methodSymbol.OverriddenMethod is not null
+                        && methodSymbol.OverriddenMethod.Parameters.Any(p => p.IsParams)
+                        && !method.ParameterList.Parameters.Last().Modifiers.Any(SyntaxKind.ParamsKeyword))
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, method.ParameterList.Parameters.Last().GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(Rule, method.ParameterList.Parameters.Last().GetLocation()));
                     }
                 },
                 SyntaxKind.MethodDeclaration);
-        }
     }
 }
