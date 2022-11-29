@@ -2,6 +2,19 @@
 "issues":  [
 {
 "id":  "S1481",
+"message":  "Remove the unused local variable 'discoveryComplete'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Discovery.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  48,
+"endLine":  59,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S1481",
 "message":  "Remove the unused local variable 'alternateIndex'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",

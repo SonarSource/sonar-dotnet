@@ -2,6 +2,45 @@
 "issues":  [
 {
 "id":  "S1481",
+"message":  "Remove the unused local variable 'f'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1536,
+"startColumn":  39,
+"endLine":  1536,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'quarantined'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  833,
+"startColumn":  38,
+"endLine":  833,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'p'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointRegistry.cs",
+"region":  {
+"startLine":  318,
+"startColumn":  47,
+"endLine":  318,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S1481",
 "message":  "Remove the unused local variable 'mailboxType'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
@@ -10,6 +49,175 @@
 "startColumn":  29,
 "endLine":  397,
 "endColumn":  40
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'p'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"region":  {
+"startLine":  146,
+"startColumn":  47,
+"endLine":  146,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'p'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"region":  {
+"startLine":  148,
+"startColumn":  47,
+"endLine":  148,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'h'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"region":  {
+"startLine":  233,
+"startColumn":  32,
+"endLine":  233,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'du'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  879,
+"startColumn":  49,
+"endLine":  879,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 't'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  881,
+"startColumn":  41,
+"endLine":  881,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 't'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  941,
+"startColumn":  41,
+"endLine":  941,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 't'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  980,
+"startColumn":  41,
+"endLine":  980,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 't'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  986,
+"startColumn":  41,
+"endLine":  986,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'h'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  1013,
+"startColumn":  48,
+"endLine":  1013,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'ht'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  1039,
+"startColumn":  41,
+"endLine":  1039,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'ht'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  1041,
+"startColumn":  41,
+"endLine":  1041,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'n'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  1173,
+"startColumn":  29,
+"endLine":  1173,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 's'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  1175,
+"startColumn":  31,
+"endLine":  1175,
+"endColumn":  32
 }
 }
 }

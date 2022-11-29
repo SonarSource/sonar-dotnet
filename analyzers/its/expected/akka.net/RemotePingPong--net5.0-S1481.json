@@ -12,6 +12,19 @@
 "endColumn":  31
 }
 }
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'a'.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\RemotePingPong\Program.cs",
+"region":  {
+"startLine":  238,
+"startColumn":  37,
+"endLine":  238,
+"endColumn":  38
+}
+}
 }
 ]
 }

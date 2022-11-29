@@ -2,6 +2,123 @@
 "issues":  [
 {
 "id":  "S1481",
+"message":  "Remove the unused local variable 'notFound'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DistributedData.cs",
+"region":  {
+"startLine":  142,
+"startColumn":  31,
+"endLine":  142,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'deleted'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DistributedData.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  34,
+"endLine":  143,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'failure'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DistributedData.cs",
+"region":  {
+"startLine":  144,
+"startColumn":  33,
+"endLine":  144,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'deleted'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DistributedData.cs",
+"region":  {
+"startLine":  180,
+"startColumn":  34,
+"endLine":  180,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'timeout'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DistributedData.cs",
+"region":  {
+"startLine":  183,
+"startColumn":  36,
+"endLine":  183,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'failure'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DistributedData.cs",
+"region":  {
+"startLine":  214,
+"startColumn":  47,
+"endLine":  214,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'deleted'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DistributedData.cs",
+"region":  {
+"startLine":  216,
+"startColumn":  34,
+"endLine":  216,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'c'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  568,
+"startColumn":  32,
+"endLine":  568,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'r'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  584,
+"startColumn":  45,
+"endLine":  584,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1481",
 "message":  "Remove the unused local variable 'value'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
@@ -10,6 +127,71 @@
 "startColumn":  39,
 "endLine":  1032,
 "endColumn":  44
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'gKey'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  1500,
+"startColumn":  34,
+"endLine":  1500,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'pKey'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  1505,
+"startColumn":  35,
+"endLine":  1505,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'flagKey'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  1510,
+"startColumn":  30,
+"endLine":  1510,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'write'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\WriteAggregator.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  31,
+"endLine":  68,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'write'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\WriteAggregator.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  33,
+"endLine":  73,
+"endColumn":  38
 }
 }
 }

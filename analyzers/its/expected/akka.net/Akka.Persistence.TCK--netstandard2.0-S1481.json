@@ -90,6 +90,19 @@
 "endColumn":  21
 }
 }
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'tp'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\TestSerializer.cs",
+"region":  {
+"startLine":  93,
+"startColumn":  34,
+"endLine":  93,
+"endColumn":  36
+}
+}
 }
 ]
 }
