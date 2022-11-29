@@ -1,6 +1,9 @@
-﻿<Obsolete> Class Noncompliant ' Noncompliant ^2#8 {{Add an explanation.}}
-    <Obsolete()> ' Noncompliant
-    Private Sub WithBrackets()
+﻿' Commented line for concurrent namespace
+
+<Obsolete>  ' Noncompliant^2#8 {{Add an explanation.}}
+Class Noncompliant
+    <Obsolete()> Private Sub WithBrackets() ' Noncompliant {{Add an explanation.}}
+'    ^^^^^^^^^^
     End Sub
 
     <System.Obsolete> ' Noncompliant
@@ -17,7 +20,7 @@
         Return 0
     End Function
 
-	<Obsolete, CLSCompliant(False)> Private Function Combined() As UInteger' Noncompliant
+    <Obsolete, CLSCompliant(False)> Private Function Combined() As UInteger ' Noncompliant
         Return 0
     End Function
 
