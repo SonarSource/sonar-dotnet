@@ -57,19 +57,22 @@ public struct FooBarStruct
     public FooBarStruct(int dummy) { }
 }
 
-public class ClassWithRequiredProperties
-{
-    public required int RequiredProperty { get; init; }
-    public int AnotherProperty { get; set; }
 
-    public ClassWithRequiredProperties()
+public class TestRequiredProperties
+{
+    void Method()
     {
-        RequiredProperty = 0; // FN - the compiler will set this automatically to 0
+        var classWithRequiredProperties = new ClassWithRequiredProperties() { RequiredProperty = 0 };
+        var classWithRequiredProperties_initWithConstructor = new ClassWithRequiredProperties();
     }
 
-    [SetsRequiredMembers]
-    public ClassWithRequiredProperties(int prop)
+    public class ClassWithRequiredProperties
     {
-        RequiredProperty = prop;
+        public required int RequiredProperty { get; init; } // Fixed
+                                                            // constructor.
+        public int AnotherProperty { get; set; }
+
+        [SetsRequiredMembers]
+        public ClassWithRequiredProperties() { }
     }
 }

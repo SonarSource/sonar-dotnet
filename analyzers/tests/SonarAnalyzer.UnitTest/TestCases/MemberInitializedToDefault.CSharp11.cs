@@ -57,8 +57,22 @@ public struct FooBarStruct
     public FooBarStruct(int dummy) { }
 }
 
-public class ClassWithRequiredProperties
+
+public class TestRequiredProperties
 {
-    public required int RequiredProperty { get; init; } = 0;
-    public int AnotherProperty { get; set; }
+    void Method()
+    {
+        var classWithRequiredProperties = new ClassWithRequiredProperties() { RequiredProperty = 0 };
+        var classWithRequiredProperties_initWithConstructor = new ClassWithRequiredProperties();
+    }
+
+    public class ClassWithRequiredProperties
+    {
+        public required int RequiredProperty { get; init; } = 0; // Noncompliant -  the required property is to be set on the caller's side anyways or by the
+                                                                 // constructor.
+        public int AnotherProperty { get; set; }
+
+        [SetsRequiredMembers]
+        public ClassWithRequiredProperties(){ }
+    }
 }
