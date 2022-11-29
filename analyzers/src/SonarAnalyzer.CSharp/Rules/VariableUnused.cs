@@ -48,8 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
             protected override IEnumerable<SyntaxNode> GetDeclaredVariables(SyntaxNode variableDeclaration) =>
                 variableDeclaration switch
                 {
-                    LocalDeclarationStatementSyntax localDeclaration when !localDeclaration.UsingKeyword().IsKind(SyntaxKind.UsingKeyword) =>
-                        localDeclaration.Declaration.Variables,
+                    LocalDeclarationStatementSyntax localDeclaration when !localDeclaration.UsingKeyword().IsKind(SyntaxKind.UsingKeyword) => localDeclaration.Declaration.Variables,
                     AssignmentExpressionSyntax assignmentExpression =>
                         assignmentExpression.AssignmentTargets().Where(x => DeclarationExpressionSyntaxWrapper.IsInstance(x) || SingleVariableDesignationSyntaxWrapper.IsInstance(x)),
                     { RawKind: (int)SyntaxKindEx.VarPattern } pattern when ((VarPatternSyntaxWrapper)pattern).Designation is { } designation => FromDesignation(designation),
@@ -58,9 +57,9 @@ namespace SonarAnalyzer.Rules.CSharp
                     { RawKind: (int)SyntaxKindEx.ListPattern } pattern when ((ListPatternSyntaxWrapper)pattern).Designation is { } designation => FromDesignation(designation),
                     _ => Enumerable.Empty<SyntaxNode>(),
                 };
-        }
 
-        private static IEnumerable<SyntaxNode> FromDesignation(VariableDesignationSyntaxWrapper designation)
-            => designation.AllVariables().Select(v => v.SyntaxNode);
+            private static IEnumerable<SyntaxNode> FromDesignation(VariableDesignationSyntaxWrapper designation)
+                => designation.AllVariables().Select(v => v.SyntaxNode);
+        }
     }
 }
