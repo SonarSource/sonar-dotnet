@@ -28,23 +28,23 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var foundToCharArray = RaiseIfRedundantCall(c, "ToCharArray", KnownType.System_String);
+                    var memberAccess = GetRedundantMemberAccess(c, "ToCharArray", KnownType.System_String)
+                        ?? GetRedundantMemberAccess(c, "ToArray", KnownType.System_ReadOnlySpan_T);
 
-                    // short circuit the other case if already raised, since they can't happen at the same time.
-                    if (!foundToCharArray)
+                    if (memberAccess is not null)
                     {
-                        RaiseIfRedundantCall(c, "ToArray", KnownType.System_ReadOnlySpan_T);
+                        c.ReportIssue(Diagnostic.Create(Rule, memberAccess.Name.GetLocation(), memberAccess.Name.Identifier.ValueText));
                     }
                 },
                 SyntaxKind.InvocationExpression);
 
-        private static bool RaiseIfRedundantCall(
+        private static MemberAccessExpressionSyntax GetRedundantMemberAccess(
             SyntaxNodeAnalysisContext context,
             string targetMethodName,
             KnownType targetKnownType)
@@ -53,17 +53,18 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if ((invocation.Parent is ElementAccessExpressionSyntax || invocation.Parent is ForEachStatementSyntax)
                 && invocation.Expression is MemberAccessExpressionSyntax memberAccess
-                && memberAccess.Name.Identifier.ValueText == targetMethodName
-                && context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
-                && methodSymbol.Name == targetMethodName
-                && methodSymbol.IsInType(targetKnownType)
-                && methodSymbol.Parameters.Length == 0)
+                && IsTargetMethod(memberAccess))
             {
-                context.ReportIssue(Diagnostic.Create(Rule, memberAccess.Name.GetLocation(), targetMethodName));
-                return true;
+                return memberAccess;
             }
 
-            return false;
+            return null;
+
+            bool IsTargetMethod(MemberAccessExpressionSyntax memberAccess) =>
+                memberAccess.Name.Identifier.ValueText == targetMethodName
+                && context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
+                && methodSymbol.IsInType(targetKnownType)
+                && methodSymbol.Parameters.Length == 0;
         }
     }
 }
