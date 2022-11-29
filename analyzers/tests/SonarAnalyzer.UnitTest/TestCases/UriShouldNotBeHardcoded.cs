@@ -40,6 +40,7 @@ namespace Tests.Diagnostics
             new Uri(new Uri("../stuff"), ("C:/test.txt")); // Noncompliant
             File.OpenRead(@"\\drive\foo.csv"); // Noncompliant
 
+            // The rule is not raising for non-english variable names:
             var unixChemin = "/my/other/folder"; // Compliant - we ignore unix paths by default
             var webChemin = "http://www.mywebsite.com"; // FN
             var windowsChemin = "c:\\blah\\blah\\blah.txt"; // FN
