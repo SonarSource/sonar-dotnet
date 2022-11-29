@@ -52,9 +52,7 @@ namespace SonarAnalyzer.Rules
         }
 
         private static string GetTypeNameForMessage(SyntaxNode expression, ITypeSymbol typeOfRight, SemanticModel semanticModel) =>
-            semanticModel.GetConstantValue(expression) is { } constValue
-            && constValue.HasValue
-            && constValue.Value == null
+            semanticModel.GetConstantValue(expression) is { HasValue: true, Value: null }
             ? "null"
             : typeOfRight.ToMinimalDisplayString(semanticModel, expression.SpanStart);
 

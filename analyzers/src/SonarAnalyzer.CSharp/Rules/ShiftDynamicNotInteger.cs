@@ -33,13 +33,11 @@ namespace SonarAnalyzer.Rules.CSharp
             IsDynamic(left, semanticModel) && !IsConvertibleToInt(right, semanticModel);
 
         protected override bool CanBeConvertedTo(ExpressionSyntax expression, ITypeSymbol type, SemanticModel semanticModel) =>
-            semanticModel.ClassifyConversion(expression, type) is { } conversion
-            && conversion.Exists
+            semanticModel.ClassifyConversion(expression, type) is { Exists: true } conversion
             && (conversion.IsIdentity || conversion.IsImplicit);
 
         private static bool IsDynamic(ExpressionSyntax expression, SemanticModel semanticModel) =>
-            semanticModel.GetTypeInfo(expression).Type is { } type
-            && type.TypeKind == TypeKind.Dynamic;
+            semanticModel.GetTypeInfo(expression).Type is { TypeKind: TypeKind.Dynamic };
 
         protected override void Initialize(SonarAnalysisContext context)
         {
