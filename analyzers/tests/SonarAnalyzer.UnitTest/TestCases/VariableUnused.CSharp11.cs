@@ -6,7 +6,7 @@
         {
         }
 
-        if (byteArray is [SomeClass unusdeVar2, 42]) // FN
+        if (byteArray is [SomeClass unusdeVar2, 42]) // Noncompliant
         {
         }
     }
