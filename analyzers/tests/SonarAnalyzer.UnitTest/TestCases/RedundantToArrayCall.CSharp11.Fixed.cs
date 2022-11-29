@@ -4,13 +4,13 @@ using System.Linq;
 
 namespace Tests.Diagnostics
 {
-    public class RedundantToCharArrayCall
+    public class RedundantToArrayCall
     {
         public void CreateNew2(int propertyValue)
         {
-            var c = "some string"u8.ToArray()[10];        // Noncompliant
+            var c = "some string"u8[10];        // Fixed
             c = "some string"u8.Slice(5, 4)[1];           // Compliant
-            foreach (var v in "some string"u8.ToArray())  // Noncompliant {{Remove this redundant 'ToArray' call.}}
+            foreach (var v in "some string"u8)  // Fixed
             {
                 // ...
             }

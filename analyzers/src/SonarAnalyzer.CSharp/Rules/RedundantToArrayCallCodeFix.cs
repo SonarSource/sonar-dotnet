@@ -24,14 +24,14 @@ using Microsoft.CodeAnalysis.CodeFixes;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [ExportCodeFixProvider(LanguageNames.CSharp)]
-    public sealed class RedundantToCharArrayCallCodeFix : SonarCodeFix
+    public sealed class RedundantToArrayCallCodeFix : SonarCodeFix
     {
         internal const string Title = "Remove redundant 'ToCharArray' call";
         public override ImmutableArray<string> FixableDiagnosticIds
         {
             get
             {
-                return ImmutableArray.Create(RedundantToCharArrayCall.DiagnosticId);
+                return ImmutableArray.Create(RedundantToArrayCall.DiagnosticId);
             }
         }
 

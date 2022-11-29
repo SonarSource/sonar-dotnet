@@ -23,36 +23,34 @@ using SonarAnalyzer.Rules.CSharp;
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
-    public class RedundantToCharArrayCallTest
+    public class RedundantToArrayCallTest
     {
-        private readonly VerifierBuilder builder = new VerifierBuilder<RedundantToCharArrayCall>();
-
-        private readonly VerifierBuilder builderWithCodeFix =
-            new VerifierBuilder<RedundantToCharArrayCall>().WithCodeFix<RedundantToCharArrayCallCodeFix>();
+        private readonly VerifierBuilder builder = new VerifierBuilder<RedundantToArrayCall>();
+        private readonly VerifierBuilder builderWithCodeFix = new VerifierBuilder<RedundantToArrayCall>().WithCodeFix<RedundantToArrayCallCodeFix>();
 
         [TestMethod]
-        public void RedundantToCharArrayCall() =>
-            builder.AddPaths("RedundantToCharArrayCall.cs").Verify();
+        public void RedundantToArrayCall() =>
+            builder.AddPaths("RedundantToArrayCall.cs").Verify();
 
         [TestMethod]
-        public void RedundantToCharArrayCall_CodeFix() =>
+        public void RedundantToArrayCall_CodeFix() =>
             builderWithCodeFix
-                .AddPaths("RedundantToCharArrayCall.cs")
-                .WithCodeFixedPaths("RedundantToCharArrayCall.Fixed.cs")
+                .AddPaths("RedundantToArrayCall.cs")
+                .WithCodeFixedPaths("RedundantToArrayCall.Fixed.cs")
                 .VerifyCodeFix();
 
 #if NET
 
         [TestMethod]
-        public void RedundantToCharArrayCall_CSharp11() =>
-            builder.AddPaths("RedundantToCharArrayCall.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+        public void RedundantToArrayCall_CSharp11() =>
+            builder.AddPaths("RedundantToArrayCall.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
 
         [TestMethod]
-        public void RedundantToCharArrayCall_CSharp11_CodeFix() =>
+        public void RedundantToArrayCall_CSharp11_CodeFix() =>
             builderWithCodeFix
-                .AddPaths("RedundantToCharArrayCall.CSharp11.cs")
+                .AddPaths("RedundantToArrayCall.CSharp11.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .WithCodeFixedPaths("RedundantToCharArrayCall.CSharp11.Fixed.cs")
+                .WithCodeFixedPaths("RedundantToArrayCall.CSharp11.Fixed.cs")
                 .VerifyCodeFix();
 
 #endif

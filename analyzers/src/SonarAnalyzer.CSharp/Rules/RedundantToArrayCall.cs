@@ -21,7 +21,7 @@
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class RedundantToCharArrayCall : SonarDiagnosticAnalyzer
+    public sealed class RedundantToArrayCall : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3456";
         private const string MessageFormat = "Remove this redundant '{0}' call.";
