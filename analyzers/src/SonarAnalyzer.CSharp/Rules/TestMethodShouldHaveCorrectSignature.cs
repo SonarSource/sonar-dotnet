@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
         /// </summary>
         private delegate string SignatureValidator(SyntaxNode methodNode, IMethodSymbol methodSymbol);
 
-        private static readonly SignatureValidator NullValidator = (_, _) => null;
+        private static readonly SignatureValidator NullValidator = (node, symbol) => null;
 
         // We currently support three test framework, each of which supports multiple test method attribute markers, and each of which
         // has differing constraints (public/private, generic/non-generic).
@@ -116,7 +116,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static SignatureValidator GetValidator(IMethodSymbol method) =>
             // Find the first matching attribute type in the table
-            method.FindFirstTestMethodType() is { } attributeKnownType ? AttributeToConstraintsMap.GetValueOrDefault(attributeKnownType) : NullValidator;
+            method.FindFirstTestMethodType() is { } attributeKnownType
+                ? AttributeToConstraintsMap.GetValueOrDefault(attributeKnownType)
+                : NullValidator;
 
         private static string GetFaultMessage(SyntaxNode methodNode, IMethodSymbol methodSymbol, bool publicOnly, bool allowGenerics, bool allowAsyncVoid = false) =>
             LocalFunctionStatementSyntaxWrapper.IsInstance(methodNode)
