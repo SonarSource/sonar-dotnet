@@ -8,7 +8,7 @@ record Rec
     public int foo;
     public int bar;
 
-    public void doSomething()
+    public void DoSomething()
     {
         int foo = 0; // Noncompliant
 //          ^^^
@@ -17,5 +17,23 @@ record Rec
         foreach (var bar in new[] { 1, 2 }) // Noncompliant
         {
         }
+    }
+
+    public void PropertyPattern()
+    {
+        _ = new ArgumentException() is
+        {
+            Message: { } bar, // Noncompliant
+        };
+    }
+
+    public void PositionalPattern()
+    {
+        _ = (1, 2) is (_, _) bar; // Noncompliant
+    }
+
+    public void VarPattern()
+    {
+        _ = 1 is var bar; // Noncompliant
     }
 }
