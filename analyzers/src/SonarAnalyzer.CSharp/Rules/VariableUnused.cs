@@ -54,6 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     { RawKind: (int)SyntaxKindEx.VarPattern } pattern when ((VarPatternSyntaxWrapper)pattern).Designation is { } designation => FromDesignation(designation),
                     { RawKind: (int)SyntaxKindEx.RecursivePattern } pattern when ((RecursivePatternSyntaxWrapper)pattern).Designation is { } designation => FromDesignation(designation),
                     { RawKind: (int)SyntaxKindEx.DeclarationPattern } pattern when ((DeclarationPatternSyntaxWrapper)pattern).Designation is { } designation => FromDesignation(designation),
+                    { RawKind: (int)SyntaxKindEx.ListPattern } pattern when ((ListPatternSyntaxWrapper)pattern).Designation is { } designation => FromDesignation(designation),
                     _ => Enumerable.Empty<SyntaxNode>(),
                 };
         }
