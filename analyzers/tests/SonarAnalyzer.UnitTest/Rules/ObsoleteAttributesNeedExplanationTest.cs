@@ -37,7 +37,6 @@ public class ObsoleteAttributesNeedExplanationTest
     [TestMethod]
     public void ObsoleteAttributesNeedExplanation_CSharp9() =>
         csBuilder
-        .WithOptions(ParseOptionsHelper.FromCSharp9)
         .WithTopLevelStatements()
         .AddPaths("ObsoleteAttributesNeedExplanation.CSharp9.cs")
         .Verify();
