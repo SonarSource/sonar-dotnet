@@ -26,8 +26,8 @@ namespace SonarAnalyzer.UnitTest.Rules;
 [TestClass]
 public class ObsoleteAttributesNeedExplanationTest
 {
-    private readonly VerifierBuilder csBuilder = new VerifierBuilder<CS.ObsoleteAttributesNeedExplanation>();
-    private readonly VerifierBuilder vbBuilder = new VerifierBuilder<VB.ObsoleteAttributesNeedExplanation>();
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ObsoleteAttributesNeedExplanation>();
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.ObsoleteAttributesNeedExplanation>();
 
     [TestMethod]
     public void ObsoleteAttributesNeedExplanation_CS() =>
