@@ -26,10 +26,9 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S2201";
         private const string MessageFormat = "Use the return value of method '{0}'.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -46,8 +45,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var lambda = (LambdaExpressionSyntax)c.Node;
 
-                    if (!(c.SemanticModel.GetSymbolInfo(lambda).Symbol is IMethodSymbol symbol) ||
-                        !symbol.ReturnsVoid)
+                    if (c.SemanticModel.GetSymbolInfo(lambda).Symbol is not IMethodSymbol symbol
+                        || !symbol.ReturnsVoid)
                     {
                         return;
                     }
@@ -61,21 +60,21 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckExpressionForPureMethod(SyntaxNodeAnalysisContext context, ExpressionSyntax expression)
         {
-            if (!(expression is InvocationExpressionSyntax invocation))
+            if (expression is not InvocationExpressionSyntax invocation)
             {
                 return;
             }
 
-            if (!(context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol invokedMethodSymbol) ||
-                invokedMethodSymbol.ReturnsVoid)
+            if (context.SemanticModel.GetSymbolInfo(invocation).Symbol is not IMethodSymbol invokedMethodSymbol
+                || invokedMethodSymbol.ReturnsVoid)
             {
                 return;
             }
 
-            if (invokedMethodSymbol.Parameters.All(p => p.RefKind == RefKind.None) &&
-                IsSideEffectFreeOrPure(invokedMethodSymbol))
+            if (invokedMethodSymbol.Parameters.All(p => p.RefKind == RefKind.None)
+                && IsSideEffectFreeOrPure(invokedMethodSymbol))
             {
-                context.ReportIssue(Diagnostic.Create(rule, expression.GetLocation(), invokedMethodSymbol.Name));
+                context.ReportIssue(Diagnostic.Create(Rule, expression.GetLocation(), invokedMethodSymbol.Name));
             }
         }
 
@@ -83,19 +82,17 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var constructedFrom = invokedMethodSymbol.ContainingType.ConstructedFrom;
 
-            return IsLinqMethod(invokedMethodSymbol) ||
-                HasOnlySideEffectFreeMethods(constructedFrom) ||
-                IsPureMethod(invokedMethodSymbol, constructedFrom);
+            return IsLinqMethod(invokedMethodSymbol)
+                || HasOnlySideEffectFreeMethods(constructedFrom)
+                || IsPureMethod(invokedMethodSymbol, constructedFrom);
         }
 
         private static bool IsPureMethod(IMethodSymbol invokedMethodSymbol, INamedTypeSymbol containingType) =>
-            invokedMethodSymbol.HasAttribute(KnownType.System_Diagnostics_Contracts_PureAttribute) ||
-            containingType.HasAttribute(KnownType.System_Diagnostics_Contracts_PureAttribute);
+            invokedMethodSymbol.HasAttribute(KnownType.System_Diagnostics_Contracts_PureAttribute)
+            || containingType.HasAttribute(KnownType.System_Diagnostics_Contracts_PureAttribute);
 
-        private static bool HasOnlySideEffectFreeMethods(INamedTypeSymbol containingType)
-        {
-            return containingType.IsAny(ImmutableKnownTypes);
-        }
+        private static bool HasOnlySideEffectFreeMethods(INamedTypeSymbol containingType) =>
+            containingType.IsAny(ImmutableKnownTypes);
 
         private static readonly ImmutableArray<KnownType> ImmutableKnownTypes =
             ImmutableArray.Create(
@@ -114,7 +111,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.System_Decimal,
                 KnownType.System_Boolean,
                 KnownType.System_String,
-
                 KnownType.System_Collections_Immutable_ImmutableArray,
                 KnownType.System_Collections_Immutable_ImmutableArray_T,
                 KnownType.System_Collections_Immutable_ImmutableDictionary,
@@ -130,13 +126,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.System_Collections_Immutable_ImmutableSortedSet,
                 KnownType.System_Collections_Immutable_ImmutableSortedSet_T,
                 KnownType.System_Collections_Immutable_ImmutableStack,
-                KnownType.System_Collections_Immutable_ImmutableStack_T
-            );
+                KnownType.System_Collections_Immutable_ImmutableStack_T);
 
-        private static bool IsLinqMethod(IMethodSymbol methodSymbol)
-        {
-            return methodSymbol.ContainingType.Is(KnownType.System_Linq_Enumerable) ||
-                methodSymbol.ContainingType.Is(KnownType.System_Linq_ImmutableArrayExtensions);
-        }
+        private static bool IsLinqMethod(IMethodSymbol methodSymbol) =>
+            methodSymbol.ContainingType.Is(KnownType.System_Linq_Enumerable)
+            || methodSymbol.ContainingType.Is(KnownType.System_Linq_ImmutableArrayExtensions);
     }
 }
