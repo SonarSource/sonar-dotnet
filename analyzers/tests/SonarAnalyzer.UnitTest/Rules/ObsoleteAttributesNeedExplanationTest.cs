@@ -36,17 +36,11 @@ public class ObsoleteAttributesNeedExplanationTest
 #if NET
     [TestMethod]
     public void ObsoleteAttributesNeedExplanation_CSharp9() =>
-        builderCS
-        .WithTopLevelStatements()
-        .AddPaths("ObsoleteAttributesNeedExplanation.CSharp9.cs")
-        .Verify();
+        builderCS.AddPaths("ObsoleteAttributesNeedExplanation.CSharp9.cs").WithTopLevelStatements().Verify();
 
     [TestMethod]
     public void ObsoleteAttributesNeedExplanation_CSharp10() =>
-        builderCS
-        .WithOptions(ParseOptionsHelper.FromCSharp10)
-        .AddPaths("ObsoleteAttributesNeedExplanation.CSharp10.cs")
-        .Verify();
+        builderCS.AddPaths("ObsoleteAttributesNeedExplanation.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 #endif
 
     [TestMethod]
