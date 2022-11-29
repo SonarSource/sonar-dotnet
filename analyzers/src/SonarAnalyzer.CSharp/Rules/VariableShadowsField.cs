@@ -55,6 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             context.RegisterSyntaxNodeActionInNonGenerated(c => ProcessVariableDesignation(c, ((DeclarationExpressionSyntaxWrapper)c.Node).Designation), SyntaxKindEx.DeclarationExpression);
             context.RegisterSyntaxNodeActionInNonGenerated(c => ProcessVariableDesignation(c, ((RecursivePatternSyntaxWrapper)c.Node).Designation), SyntaxKindEx.RecursivePattern);
+            context.RegisterSyntaxNodeActionInNonGenerated(c => ProcessVariableDesignation(c, ((VarPatternSyntaxWrapper)c.Node).Designation), SyntaxKindEx.VarPattern);
             context.RegisterSyntaxNodeActionInNonGenerated(c => ProcessVariableDesignation(c, ((DeclarationPatternSyntaxWrapper)c.Node).Designation), SyntaxKindEx.DeclarationPattern);
             context.RegisterSyntaxNodeActionInNonGenerated(c => ProcessVariableDesignation(c, ((ListPatternSyntaxWrapper)c.Node).Designation), SyntaxKindEx.ListPattern);
         }

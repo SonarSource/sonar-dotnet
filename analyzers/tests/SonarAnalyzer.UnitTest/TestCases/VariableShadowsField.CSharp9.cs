@@ -32,8 +32,8 @@ record Rec
         _ = (1, 2) is (_, _) bar; // Noncompliant
     }
 
-    public void PatternDesignation()
+    public void VarPattern()
     {
-        _ = (1, 2) is (var bar, _); // Noncompliant
+        _ = 1 is var bar; // Noncompliant
     }
 }
