@@ -31,26 +31,25 @@ public class ObsoleteAttributesNeedExplanationTest
 
     [TestMethod]
     public void ObsoleteAttributesNeedExplanation_CS() =>
-       csBuilder.AddPaths("ObsoleteAttributesNeedExplanation.cs").Verify();
+       builderCS.AddPaths("ObsoleteAttributesNeedExplanation.cs").Verify();
 
 #if NET
     [TestMethod]
     public void ObsoleteAttributesNeedExplanation_CSharp9() =>
-        csBuilder
+        builderCS
         .WithTopLevelStatements()
         .AddPaths("ObsoleteAttributesNeedExplanation.CSharp9.cs")
         .Verify();
 
     [TestMethod]
     public void ObsoleteAttributesNeedExplanation_CSharp10() =>
-        csBuilder
+        builderCS
         .WithOptions(ParseOptionsHelper.FromCSharp10)
-        .WithConcurrentAnalysis(false)
         .AddPaths("ObsoleteAttributesNeedExplanation.CSharp10.cs")
         .Verify();
 #endif
 
     [TestMethod]
     public void ObsoleteAttributesNeedExplanation_VB() =>
-        vbBuilder.AddPaths("ObsoleteAttributesNeedExplanation.vb").Verify();
+        builderVB.AddPaths("ObsoleteAttributesNeedExplanation.vb").Verify();
 }
