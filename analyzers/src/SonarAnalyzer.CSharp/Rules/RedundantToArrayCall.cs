@@ -44,10 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.InvocationExpression);
 
-        private static MemberAccessExpressionSyntax GetRedundantMemberAccess(
-            SyntaxNodeAnalysisContext context,
-            string targetMethodName,
-            KnownType targetKnownType)
+        private static MemberAccessExpressionSyntax GetRedundantMemberAccess(SyntaxNodeAnalysisContext context, string targetMethodName, KnownType targetKnownType)
         {
             var invocation = (InvocationExpressionSyntax)context.Node;
 
