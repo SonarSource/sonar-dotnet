@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void ReportIfReturnsNullOrDefault(SyntaxNodeAnalysisContext context)
         {
             var expressionBody = GetExpressionBody(context.Node);
-            if (expressionBody != null)
+            if (expressionBody is not null)
             {
                 var nullOrDefaultLiterals = GetNullOrDefaultExpressions(expressionBody.Expression)
                     .Select(statement => statement.GetLocation())
@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var body = GetBody(context.Node);
-            if (body != null)
+            if (body is not null)
             {
                 var nullOrDefaultLiterals = GetReturnNullOrDefaultExpressions(body)
                     .Select(returnStatement => returnStatement.GetLocation())
@@ -74,70 +74,41 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsReturningCollection(SyntaxNodeAnalysisContext context)
         {
             var symbol = context.SemanticModel.GetDeclaredSymbol(context.Node);
-
             var methodSymbol = (symbol as IPropertySymbol)?.GetMethod ?? symbol as IMethodSymbol;
 
-            return methodSymbol != null &&
-                !methodSymbol.ReturnType.Is(KnownType.System_String) &&
-                !methodSymbol.ReturnType.DerivesFrom(KnownType.System_Xml_XmlNode) &&
-                methodSymbol.ReturnType.DerivesOrImplementsAny(CollectionTypes);
+            return methodSymbol != null
+                && !methodSymbol.ReturnType.Is(KnownType.System_String)
+                && !methodSymbol.ReturnType.DerivesFrom(KnownType.System_Xml_XmlNode)
+                && methodSymbol.ReturnType.DerivesOrImplementsAny(CollectionTypes);
         }
 
-        private static ArrowExpressionClauseSyntax GetExpressionBody(SyntaxNode node)
-        {
-            switch (node.Kind())
+        private static ArrowExpressionClauseSyntax GetExpressionBody(SyntaxNode node) =>
+            node switch
             {
-                case SyntaxKind.MethodDeclaration:
-                    return ((MethodDeclarationSyntax)node).ExpressionBody;
+                MethodDeclarationSyntax method => method.ExpressionBody,
+                PropertyDeclarationSyntax property => property.ExpressionBody ?? GetGetAccessor(property)?.ExpressionBody(),
+                var _ when LocalFunctionStatementSyntaxWrapper.IsInstance(node) => ((LocalFunctionStatementSyntaxWrapper)node).ExpressionBody,
+                OperatorDeclarationSyntax @operator => @operator.ExpressionBody,
+                _ => null,
+            };
 
-                case SyntaxKind.PropertyDeclaration:
-                    var property = (PropertyDeclarationSyntax)node;
-
-                    if (property.ExpressionBody != null)
-                    {
-                        return property.ExpressionBody;
-                    }
-
-                    return property.AccessorList?.Accessors
-                        .FirstOrDefault(accessor => accessor.IsKind(SyntaxKind.GetAccessorDeclaration))
-                        ?.ExpressionBody();
-
-                case SyntaxKindEx.LocalFunctionStatement:
-                    return ((LocalFunctionStatementSyntaxWrapper)node).ExpressionBody;
-
-                case SyntaxKind.OperatorDeclaration:
-                    return ((OperatorDeclarationSyntax)node).ExpressionBody;
-                default:
-                    return null;
-            }
-        }
-
-        private static BlockSyntax GetBody(SyntaxNode node)
-        {
-            switch (node.Kind())
+        private static BlockSyntax GetBody(SyntaxNode node) =>
+            node switch
             {
-                case SyntaxKind.MethodDeclaration:
-                    return ((MethodDeclarationSyntax)node).Body;
+                MethodDeclarationSyntax method => method.Body,
+                PropertyDeclarationSyntax property => GetGetAccessor(property)?.Body,
+                var _ when LocalFunctionStatementSyntaxWrapper.IsInstance(node) => ((LocalFunctionStatementSyntaxWrapper)node).Body,
+                OperatorDeclarationSyntax @operator => @operator.Body,
+                _ => null,
+            };
 
-                case SyntaxKind.PropertyDeclaration:
-                    return ((PropertyDeclarationSyntax)node).AccessorList?.Accessors
-                        .FirstOrDefault(accessor => accessor.IsKind(SyntaxKind.GetAccessorDeclaration))
-                        ?.Body;
-
-                case SyntaxKindEx.LocalFunctionStatement:
-                    return ((LocalFunctionStatementSyntaxWrapper)node).Body;
-
-                case SyntaxKind.OperatorDeclaration:
-                    return ((OperatorDeclarationSyntax)node).Body;
-
-                default:
-                    return null;
-            }
-        }
+        private static AccessorDeclarationSyntax GetGetAccessor(PropertyDeclarationSyntax property) =>
+            property.AccessorList?.Accessors.FirstOrDefault(a => a.IsKind(SyntaxKind.GetAccessorDeclaration));
 
         private static IEnumerable<SyntaxNode> GetReturnNullOrDefaultExpressions(SyntaxNode methodBlock) =>
             methodBlock.DescendantNodes(n =>
-                    !n.IsAnyKind(SyntaxKindEx.LocalFunctionStatement,
+                    !n.IsAnyKind(
+                        SyntaxKindEx.LocalFunctionStatement,
                         SyntaxKind.SimpleLambdaExpression,
                         SyntaxKind.ParenthesizedLambdaExpression))
                    .OfType<ReturnStatementSyntax>()
