@@ -30,6 +30,16 @@ public class TestCases
                 || simpleString is @"\\my-network-drive/folder/file.txt";      // Noncompliant
     }
 
-    public bool ListPattern(string[] uris) =>
-        uris is ["""\\my-network-drive\folder\file.txt"""]; // FN
+    public void ListPattern(string[] uris)
+    {
+        bool pathFlag = uris is ["""\\my-network-drive\folder\file.txt"""]; // Noncompliant
+    }
+
+    public bool ReturnStement(string uri)
+    {
+        return uri is """\\my-network-drive\folder\file.txt"""; // Compliant (not raising for arrow expression body / return statement)
+    }
+
+    public bool ExpressionBody(string uri) =>
+        uri is """\\my-network-drive\folder\file.txt"""; // Compliant (not raising for arrow expression body / return statement)
 }
