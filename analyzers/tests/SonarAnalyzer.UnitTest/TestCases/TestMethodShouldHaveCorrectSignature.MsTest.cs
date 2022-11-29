@@ -101,3 +101,25 @@ namespace Tests.Diagnostics
         }
     }
 }
+
+namespace DerivedAttributeTestCases
+{
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    [DerivedTestClassAttribute]
+    class TestSuite
+    {
+        [DerivedTestMethodAttribute]
+        void NestedTest() { } // Noncompliant
+
+        [DerivedDataTestMethodAttribute]
+        void NestedDataTest() { } // Noncompliant
+    }
+
+    public class DerivedTestClassAttribute : TestClassAttribute { }
+
+    public class DerivedTestMethodAttribute : TestMethodAttribute { }
+
+    public class DerivedDataTestMethodAttribute : DataTestMethodAttribute { }
+}
+

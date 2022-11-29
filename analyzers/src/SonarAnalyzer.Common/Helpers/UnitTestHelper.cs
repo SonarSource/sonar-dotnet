@@ -35,9 +35,10 @@ namespace SonarAnalyzer.Helpers
                 KnownType.NUnit_Framework_ITestBuilderInterface);
 
         public static readonly ImmutableArray<KnownType> KnownTestMethodAttributesOfxUnit = ImmutableArray.Create(
-                KnownType.Xunit_FactAttribute,
                 KnownType.Xunit_TheoryAttribute,
-                KnownType.LegacyXunit_TheoryAttribute);
+                KnownType.LegacyXunit_TheoryAttribute,
+                // In order for the FindFirstTestMethodType to work, FactAttribute should go last as the Theory attribute derives from it.
+                KnownType.Xunit_FactAttribute);
 
         public static readonly ImmutableArray<KnownType> KnownExpectedExceptionAttributes = ImmutableArray.Create(
                 // Note: XUnit doesn't have a exception attribute
@@ -79,7 +80,7 @@ namespace SonarAnalyzer.Helpers
 
         /// <summary>
         /// Returns whether the class has an attribute that marks the class
-        /// as an MSTest or NUnit test class (xUnit doesn't have any such attributes)
+        /// as an MSTest or NUnit test class (xUnit doesn't have any such attributes).
         /// </summary>
         public static bool IsTestClass(this INamedTypeSymbol classSymbol) =>
             classSymbol.AnyAttributeDerivesFromAny(KnownTestClassAttributes);
@@ -99,9 +100,9 @@ namespace SonarAnalyzer.Helpers
 
         public static AttributeData FindXUnitTestAttribute(this IMethodSymbol method) =>
             method.GetAttributes().FirstOrDefault(a =>
-                    a.AttributeClass.Is(KnownType.Xunit_FactAttribute) ||
-                    a.AttributeClass.Is(KnownType.Xunit_TheoryAttribute) ||
-                    a.AttributeClass.Is(KnownType.LegacyXunit_TheoryAttribute));
+                a.AttributeClass.Is(KnownType.Xunit_FactAttribute)
+                || a.AttributeClass.Is(KnownType.Xunit_TheoryAttribute)
+                || a.AttributeClass.Is(KnownType.LegacyXunit_TheoryAttribute));
 
         /// <summary>
         /// Returns the <see cref="KnownType"/> that indicates the type of the test method or
@@ -112,14 +113,14 @@ namespace SonarAnalyzer.Helpers
         /// returned.</remarks>
         public static KnownType FindFirstTestMethodType(this IMethodSymbol method) =>
             KnownTestMethodAttributes.FirstOrDefault(known =>
-                    method.GetAttributes().Any(att => att.AttributeClass.Is(known)));
+                    method.GetAttributes().Any(att => att.AttributeClass.DerivesFrom(known)));
 
         private static bool IsAnyTestCaseAttributeWithExpectedResult(AttributeData a) =>
             IsTestAttributeWithExpectedResult(a)
             || a.AttributeClass.Is(KnownType.NUnit_Framework_TestCaseSourceAttribute);
 
         private static bool IsTestAttributeWithExpectedResult(AttributeData a) =>
-a.AttributeClass.IsAny(KnownType.NUnit_Framework_TestCaseAttribute, KnownType.NUnit_Framework_TestAttribute)
+            a.AttributeClass.IsAny(KnownType.NUnit_Framework_TestCaseAttribute, KnownType.NUnit_Framework_TestAttribute)
             && a.NamedArguments.Any(arg => arg.Key == "ExpectedResult");
     }
 }
