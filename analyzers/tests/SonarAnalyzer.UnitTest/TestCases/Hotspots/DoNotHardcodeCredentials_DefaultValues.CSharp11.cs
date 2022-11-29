@@ -15,11 +15,11 @@ void RawStringLiterals()
 
 void Utf8StringLiterals()
 {
-    var DBConnectionString1 = "Server=localhost; Database=Test; User=SA; Password=Secret123"u8; // FN
-    var DBConnectionString2 = """Server=localhost; Database=Test; User=SA; Password=Secret123"""u8; // FN
+    var DBConnectionString1 = "Server=localhost; Database=Test; User=SA; Password=Secret123"u8; // Noncompliant
+    var DBConnectionString2 = """Server=localhost; Database=Test; User=SA; Password=Secret123"""u8; // Noncompliant
     var DBConnectionString3 = """
         Server=localhost; Database=Test; User=SA; Password=Secret123
-        """u8; // FN
+        """u8; // Noncompliant@-2
 }
 
 void NewlinesInStringInterpolation(string someInput)

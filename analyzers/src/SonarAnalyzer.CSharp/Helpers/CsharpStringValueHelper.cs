@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+
 namespace SonarAnalyzer.Helpers
 {
     public class CsharpStringValueHelper : StringValueHelper<SyntaxKind, InterpolatedStringExpressionSyntax, LiteralExpressionSyntax>
@@ -29,5 +31,18 @@ namespace SonarAnalyzer.Helpers
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
         protected override SyntaxToken Token(LiteralExpressionSyntax literalExpression) => literalExpression.Token;
+
+        public override string GetStringValue(SyntaxNode node, SemanticModel semanticModel)
+        {
+            if (base.GetStringValue(node, semanticModel) is { } stringValue)
+            {
+                return stringValue;
+            }
+            else if (node.IsKind(SyntaxKindEx.Utf8StringLiteralExpression) && node is LiteralExpressionSyntax literal)
+            {
+                return Token(literal).ValueText;
+            }
+            return null;
+        }
     }
 }
