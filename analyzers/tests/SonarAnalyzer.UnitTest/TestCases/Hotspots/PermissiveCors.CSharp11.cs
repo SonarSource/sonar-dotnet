@@ -10,11 +10,23 @@ namespace Net6Poc.PermissiveCors
         [HttpGet]
         public void Index(string header, string headerValue)
         {
-            string part1 = "Access-Control";
-            string part2 = "Allow-Origin";
+            string accessControl = "Access-Control";
+            string allowOrigin = "Allow-Origin";
             // The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given origin.
             Response.Headers.Add("""Access-Control-Allow-Origin""", """*"""); // Noncompliant
-            Response.Headers.Add($$"""{{part1}}-{{part2}}""", "*"); // FN
+            Response.Headers.Add($$"""{{accessControl}}-{{allowOrigin}}""", "*"); // FN (at the moment we validate only constant string)
+
+            const string constAccessControl = "Access-Control";
+            const string constAllowOrigin = "Allow-Origin";
+            Response.Headers.Add($$"""{{constAccessControl}}-{{constAllowOrigin}}""", "*"); // Noncompliant
+
+            const string RawStar = """*""";
+            Response.Headers.Add("Access-Control-Allow-Origin", RawStar); // Noncompliant
+            Response.Headers.Add($"""{constAccessControl}-{constAllowOrigin}""", RawStar); // Noncompliant
+
+            const string constRawAccessControl = """Access-Control""";
+            const string constRawAllowOrigin = """Allow-Origin""";
+            Response.Headers.Add($"""{constRawAccessControl}-{constRawAllowOrigin}""", """*"""); // Noncompliant
         }
     }
 
