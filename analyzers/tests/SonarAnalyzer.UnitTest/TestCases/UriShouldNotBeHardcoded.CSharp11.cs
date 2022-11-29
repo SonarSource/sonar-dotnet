@@ -37,9 +37,9 @@ public class TestCases
 
     public bool ReturnStement(string uri)
     {
-        return uri is """\\my-network-drive\folder\file.txt"""; // Compliant (not raising for arrow expression body / return statement)
+        return uri is """\\my-network-drive\folder\file.txt"""; // Compliant (not raising for return statement)
     }
 
     public bool ExpressionBody(string uri) =>
-        uri is """\\my-network-drive\folder\file.txt"""; // Compliant (not raising for arrow expression body / return statement)
+        uri is """\\my-network-drive\folder\file.txt"""; // Compliant (not raising for arrow expression body)
 }
