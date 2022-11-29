@@ -26,4 +26,14 @@ record Rec
             Message: { } bar, // Noncompliant
         };
     }
+
+    public void PositionalPattern()
+    {
+        _ = (1, 2) is (_, _) bar; // Noncompliant
+    }
+
+    public void PatternDesignation()
+    {
+        _ = (1, 2) is (var bar, _); // Noncompliant
+    }
 }
