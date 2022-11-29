@@ -20,17 +20,19 @@
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class ShiftDynamicNotIntegerBase<TExpressionSyntax> : SonarDiagnosticAnalyzer
+    public abstract class ShiftDynamicNotIntegerBase<TSyntaxKind, TExpressionSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
+        where TSyntaxKind : struct
         where TExpressionSyntax : SyntaxNode
     {
         internal const string DiagnosticId = "S3449";
-        protected const string MessageFormat = "Remove this erroneous shift, it will fail because '{0}' can't be implicitly converted to 'int'.";
-
-        protected abstract DiagnosticDescriptor Rule { get; }
 
         protected abstract bool CanBeConvertedTo(TExpressionSyntax expression, ITypeSymbol type, SemanticModel semanticModel);
 
         protected abstract bool ShouldRaise(SemanticModel semanticModel, TExpressionSyntax left, TExpressionSyntax right);
+
+        protected override string MessageFormat => "Remove this erroneous shift, it will fail because '{0}' can't be implicitly converted to 'int'.";
+
+        protected ShiftDynamicNotIntegerBase() : base(DiagnosticId) { }
 
         protected void CheckExpressionWithTwoParts<T>(SyntaxNodeAnalysisContext context,
                                                       Func<T, TExpressionSyntax> getLeft,

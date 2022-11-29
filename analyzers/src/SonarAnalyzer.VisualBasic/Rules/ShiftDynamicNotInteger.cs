@@ -21,13 +21,9 @@
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class ShiftDynamicNotInteger : ShiftDynamicNotIntegerBase<ExpressionSyntax>
+    public sealed class ShiftDynamicNotInteger : ShiftDynamicNotIntegerBase<SyntaxKind, ExpressionSyntax>
     {
-        private static readonly DiagnosticDescriptor RuleVisualBasic = DescriptorFactory.Create(DiagnosticId, MessageFormat);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(RuleVisualBasic);
-
-        protected override DiagnosticDescriptor Rule { get; } = RuleVisualBasic;
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
         protected override bool ShouldRaise(SemanticModel semanticModel, ExpressionSyntax left, ExpressionSyntax right) =>
             IsObject(left, semanticModel) || !IsConvertibleToInt(right, semanticModel);

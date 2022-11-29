@@ -21,13 +21,9 @@
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class ShiftDynamicNotInteger : ShiftDynamicNotIntegerBase<ExpressionSyntax>
+    public sealed class ShiftDynamicNotInteger : ShiftDynamicNotIntegerBase<SyntaxKind, ExpressionSyntax>
     {
-        private static readonly DiagnosticDescriptor RuleCSharp = DescriptorFactory.Create(DiagnosticId, MessageFormat);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(RuleCSharp);
-
-        protected override DiagnosticDescriptor Rule { get; } = RuleCSharp;
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
         protected override bool ShouldRaise(SemanticModel semanticModel, ExpressionSyntax left, ExpressionSyntax right) =>
             IsDynamic(left, semanticModel) && !IsConvertibleToInt(right, semanticModel);
