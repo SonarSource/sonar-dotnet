@@ -1,104 +1,123 @@
 ﻿using System;
 
-namespace Tests.Diagnostics
+[Obsolete] // Noncompliant ^2#8 {{Add an explanation.}}
+class Noncompliant
 {
-    [Obsolete] // Noncompliant {{Add an explanation.}}
+    [Obsolete()] // Noncompliant
+    void WithBrackets() { }
+
+    [System.Obsolete] // Noncompliant
+    void FullyDeclaredNamespace() { }
+
+    [global::System.Obsolete] // Noncompliant
+    void GloballyDeclaredNamespace() { }
+
+    [Obsolete] // Noncompliant
+    [CLSCompliant(false)]
+    uint Multiple() { return 0; }
+
+    [Obsolete, CLSCompliant(false)]
 //   ^^^^^^^^
-    class Program
-    {
-        [Obsolete] // Noncompliant
-        enum Enum { foo, bar }
-
-        [Obsolete] // Noncompliant
-        Program() { }
-
-        [Obsolete] // Noncompliant
-        void Method() { }
-
-        [Obsolete] // Noncompliant
-        int Property { get; set; }
-
-        [Obsolete] // Noncompliant
-        int Field;
-
-        [Obsolete] // Noncompliant
-        event EventHandler Event;
-
-        [Obsolete] // Noncompliant
-        delegate void Delegate();
-    }
+    uint Combined() { return 0; }
 
     [Obsolete] // Noncompliant
-    interface IInterface
-    {
-        [Obsolete] // Noncompliant
-        void Method();
-    }
-
+    enum Enum { foo, bar }
 
     [Obsolete] // Noncompliant
-    struct ProgramStruct
-    {
-        [Obsolete] // Noncompliant
-        void Method() { }
-    }
+    Noncompliant() { }
 
+    [Obsolete] // Noncompliant
+    void Method() { }
+
+    [Obsolete] // Noncompliant
+    int Property { get; set; }
+
+    [Obsolete] // Noncompliant
+    int Field;
+
+    [Obsolete] // Noncompliant
+    event EventHandler Event;
+
+    [Obsolete] // Noncompliant
+    delegate void Delegate();
+}
+
+[Obsolete] // Noncompliant
+interface IInterface
+{
+    [Obsolete] // Noncompliant
+    void Method();
+}
+
+
+[Obsolete] // Noncompliant
+struct ProgramStruct
+{
+    [Obsolete] // Noncompliant
+    void Method() { }
+}
+
+[Obsolete("explanation")]
+class Compliant
+{
+    [Obsolete("explanation")]
+    enum Enum { foo, bar }
 
     [Obsolete("explanation")]
-    class Program_Explained
-    {
-        [Obsolete("explanation")]
-        enum Enum { foo, bar }
-
-        [Obsolete("explanation")]
-        Program_Explained() { }
-
-        [Obsolete("explanation")]
-        void Method() { }
-
-        [Obsolete("explanation")]
-        string Property { get; set; }
-
-        [Obsolete("explanation", true)]
-        int Field;
-
-        [Obsolete("explanation", false)]
-        event EventHandler Event;
-
-        [Obsolete("explanation")]
-        delegate void Delegate();
-    }
+    Compliant() { }
 
     [Obsolete("explanation")]
-    interface IInterface_Explained
-    {
-        [Obsolete("explanation")]
-        void Method();
-    }
-
+    void Method() { }
 
     [Obsolete("explanation")]
-    struct ProgramStruct_Explained
-    {
-        [Obsolete("explanation")]
-        void Method() { }
-    }
+    string Property { get; set; }
 
-    class Program_NoAttribs
-    {
-        [CLSCompliant(false)]
-        enum Enum { foo, bar }
+    [Obsolete("explanation", true)]
+    int Field;
 
-        Program_NoAttribs() { }
+    [Obsolete("explanation", false)]
+    event EventHandler Event;
 
-        void Method() { }
+    [Obsolete("explanation")]
+    delegate void Delegate();
+}
 
-        int Property { get; set; }
+[Obsolete("explanation")]
+interface IComplaintInterface
+{
+    [Obsolete("explanation")]
+    void Method();
+}
 
-        int Field;
+[Obsolete("explanation")]
+struct ComplaintStruct
+{
+    [Obsolete("explanation")]
+    void Method() { }
+}
 
-        event EventHandler Event;
+class NotApplicable
+{
+    [CLSCompliant(false)]
+    enum Enum { foo, bar }
 
-        delegate void Delegate();
-    }
+    NotApplicable() { }
+
+    void Method() { }
+
+    int Property { get; set; }
+
+    int Field;
+
+    event EventHandler Event;
+
+    delegate void Delegate();
+
+    [NotSystem.Obsolete]
+    void SameName() { }
+}
+
+namespace NotSystem
+{
+    public class ObsoleteAttribute : Attribute { }
 }

@@ -18,30 +18,32 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Rules.CSharp;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.UnitTest.Rules;
+
+[TestClass]
+public class ObsoleteAttributesNeedExplanationTest
 {
-    [TestClass]
-    public class ObsoleteAttributesNeedExplanationTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<ObsoleteAttributesNeedExplanation>();
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ObsoleteAttributesNeedExplanation>();
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.ObsoleteAttributesNeedExplanation>();
 
-        [TestMethod]
-        public void ObsoleteAttributesNeedExplanation() =>
-            builder.AddPaths("ObsoleteAttributesNeedExplanation.cs").Verify();
+    [TestMethod]
+    public void ObsoleteAttributesNeedExplanation_CS() =>
+       builderCS.AddPaths("ObsoleteAttributesNeedExplanation.cs").Verify();
 
 #if NET
+    [TestMethod]
+    public void ObsoleteAttributesNeedExplanation_CSharp9() =>
+        builderCS.AddPaths("ObsoleteAttributesNeedExplanation.CSharp9.cs").WithTopLevelStatements().Verify();
 
-        [TestMethod]
-        public void ObsoleteAttributesNeedExplanation_CSharp9() =>
-            builder.AddPaths("ObsoleteAttributesNeedExplanation.CSharp9.cs").WithTopLevelStatements().Verify();
-
-        [TestMethod]
-        public void ObsoleteAttributesNeedExplanation_CSharp10() =>
-            builder.AddPaths("ObsoleteAttributesNeedExplanation.CSharp10.cs").WithConcurrentAnalysis(false).WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
-
+    [TestMethod]
+    public void ObsoleteAttributesNeedExplanation_CSharp10() =>
+        builderCS.AddPaths("ObsoleteAttributesNeedExplanation.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 #endif
 
-    }
+    [TestMethod]
+    public void ObsoleteAttributesNeedExplanation_VB() =>
+        builderVB.AddPaths("ObsoleteAttributesNeedExplanation.vb").Verify();
 }
