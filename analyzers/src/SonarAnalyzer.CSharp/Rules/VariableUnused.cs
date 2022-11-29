@@ -37,7 +37,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     SyntaxKind.SimpleAssignmentExpression,
                     SyntaxKindEx.VarPattern,
                     SyntaxKindEx.RecursivePattern,
-                    SyntaxKindEx.DeclarationPattern);
+                    SyntaxKindEx.DeclarationPattern,
+                    SyntaxKindEx.ListPattern);
                 cbc.RegisterSyntaxNodeAction(collector.CollectUsages, SyntaxKind.IdentifierName);
                 cbc.RegisterCodeBlockEndAction(collector.GetReportUnusedVariablesAction(Rule));
             });
