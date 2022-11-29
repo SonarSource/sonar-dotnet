@@ -41,6 +41,23 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .AddPaths("TestMethodShouldNotBeIgnored.MsTest.cs")
                 .AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion)).Verify();
 
+        [TestMethod]
+        public void TestMethodShouldNotBeIgnored_MsTest_InvalidCases() =>
+            builder.AddSnippet("""
+                using Microsoft.VisualStudio.TestTools.UnitTesting;
+                namespace Tests.Diagnostics.TestMethods
+                {
+                    [ThisDoesNotExist]
+                    public class MsTestClass3
+                    {
+                    }
+
+                    [Ignore]
+                }
+                """)
+                .WithErrorBehavior(CompilationErrorBehavior.Ignore)    // IgnoreAttribute doesn't contain any reason param
+                .Verify();
+
         [DataTestMethod]
         [DataRow("2.5.7.10213")]
         [DataRow("2.7.0")]

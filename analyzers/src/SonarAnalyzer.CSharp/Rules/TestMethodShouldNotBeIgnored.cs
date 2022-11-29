@@ -44,13 +44,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     var attribute = (AttributeSyntax)c.Node;
                     if (HasReasonPhrase(attribute)
                         || HasTrailingComment(attribute)
-                        || !IsKnownIgnoreAttribute(attribute, c.SemanticModel))
-                    {
-                        return;
-                    }
-
-                    var attributeTarget = attribute.Parent?.Parent;
-                    if (attributeTarget == null)
+                        || !IsKnownIgnoreAttribute(attribute, c.SemanticModel)
+                        || attribute.Parent?.Parent is not { } attributeTarget)
                     {
                         return;
                     }
@@ -65,22 +60,18 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.Attribute);
 
-        private static IEnumerable<AttributeData> GetAllAttributes(SyntaxNode syntaxNode, SemanticModel semanticModel)
-        {
-            var testMethodOrClass = semanticModel.GetDeclaredSymbol(syntaxNode);
-
-            return testMethodOrClass == null
-                ? Enumerable.Empty<AttributeData>()
-                : testMethodOrClass.GetAttributes();
-        }
+        private static IEnumerable<AttributeData> GetAllAttributes(SyntaxNode syntaxNode, SemanticModel semanticModel) =>
+            semanticModel.GetDeclaredSymbol(syntaxNode) is { } testMethodOrClass
+                ? testMethodOrClass.GetAttributes()
+                : Enumerable.Empty<AttributeData>();
 
         private static bool HasReasonPhrase(AttributeSyntax ignoreAttributeSyntax) =>
             ignoreAttributeSyntax.ArgumentList?.Arguments.Count > 0; // Any ctor argument counts are reason phrase
 
         private static bool HasTrailingComment(SyntaxNode ignoreAttributeSyntax) =>
             ignoreAttributeSyntax.Parent
-                                 .GetTrailingTrivia()
-                                 .Any(SyntaxKind.SingleLineCommentTrivia);
+                .GetTrailingTrivia()
+                .Any(SyntaxKind.SingleLineCommentTrivia);
 
         private static bool IsWorkItemAttribute(AttributeData a) =>
             a.AttributeClass.Is(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_WorkItemAttribute);
@@ -91,10 +82,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var attributeConstructor = symbolInfo.Symbol ?? symbolInfo.CandidateSymbols.FirstOrDefault();
 
-            return attributeConstructor != null && attributeConstructor.ContainingType.IsAny(UnitTestHelper.KnownIgnoreAttributes);
+            return attributeConstructor != null && attributeConstructor.ContainingType.DerivesFromAny(UnitTestHelper.KnownIgnoreAttributes);
         }
 
         private static bool IsTestOrTestClassAttribute(AttributeData a) =>
-            a.AttributeClass.IsAny(TrackedTestIdentifierAttributes);
+            a.AttributeClass.DerivesFromAny(TrackedTestIdentifierAttributes);
     }
 }
