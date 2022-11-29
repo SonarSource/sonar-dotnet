@@ -59,17 +59,6 @@ public struct FooBarStruct
 
 public class ClassWithRequiredProperties
 {
-    public required int RequiredProperty { get; init; }
+    public required int RequiredProperty { get; init; } = 0;
     public int AnotherProperty { get; set; }
-
-    public ClassWithRequiredProperties()
-    {
-        RequiredProperty = 0; // FN - the compiler will set this automatically to 0
-    }
-
-    [SetsRequiredMembers]
-    public ClassWithRequiredProperties(int prop)
-    {
-        RequiredProperty = prop;
-    }
 }

@@ -26,11 +26,6 @@ namespace Tests.Diagnostics
                         _ => "Can't touch this",
                     }}");
             }
-            if (arg1 > 0)
-            {
-                const string arg1Name = """arg1""";
-                throw new ArgumentException("Message" ,$"{arg1Name}"); // FN
-            }
             else
             {
                 throw new Exception($$"""arg1"""); // Noncompliant
