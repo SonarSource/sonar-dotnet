@@ -75,11 +75,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
             protected override bool ShouldHandle(VariableDeclaratorSyntax syntaxNode, SemanticModel semanticModel) =>
                 syntaxNode.Initializer?.Value is LiteralExpressionSyntax literalExpression
-                && (literalExpression.IsKind(SyntaxKind.StringLiteralExpression) || literalExpression.IsKind(SyntaxKindEx.Utf8StringLiteralExpression))
+                && literalExpression.IsAnyKind(SyntaxKind.StringLiteralExpression, SyntaxKindEx.Utf8StringLiteralExpression)
                 && (syntaxNode.IsDeclarationKnownType(KnownType.System_String, semanticModel) || syntaxNode.IsDeclarationKnownType(KnownType.System_ReadOnlySpan_T, semanticModel));
 
         }
-
         private sealed class AssignmentExpressionBannedWordsFinder : CredentialWordsFinderBase<AssignmentExpressionSyntax>
         {
             public AssignmentExpressionBannedWordsFinder(DoNotHardcodeCredentials analyzer) : base(analyzer) { }
