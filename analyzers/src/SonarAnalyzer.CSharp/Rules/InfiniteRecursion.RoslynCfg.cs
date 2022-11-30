@@ -25,7 +25,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     public partial class InfiniteRecursion
     {
-        private class RoslynChecker : IChecker
+        private sealed class RoslynChecker : IChecker
         {
             public void CheckForNoExitProperty(SyntaxNodeAnalysisContext c, PropertyDeclarationSyntax property, IPropertySymbol propertySymbol)
             {
@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
 
-            private class RecursionSearcher : CfgAllPathValidator
+            private sealed class RecursionSearcher : CfgAllPathValidator
             {
                 private readonly RecursionContext<ControlFlowGraph> context;
                 private readonly bool isGetAccesor;
@@ -79,15 +79,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 protected override bool IsValid(BasicBlock block)
                 {
-                    foreach (var operation in block.OperationsAndBranchValue.ToReversedExecutionOrder())
+                    if (block.OperationsAndBranchValue.ToReversedExecutionOrder().FirstOrDefault(x => context.AnalyzedSymbol.Equals(MemberSymbol(x.Instance))) is { } operation)
                     {
-                        if (context.AnalyzedSymbol.Equals(MemberSymbol(operation.Instance)))
-                        {
-                            var isWrite = operation.Parent is { Kind: OperationKindEx.SimpleAssignment } parent
-                                          && ISimpleAssignmentOperationWrapper.FromOperation(parent).Target == operation.Instance;
-                            return isGetAccesor ^ isWrite;
-                        }
+                        var isWrite = operation.Parent is { Kind: OperationKindEx.SimpleAssignment } parent
+                                      && ISimpleAssignmentOperationWrapper.FromOperation(parent).Target == operation.Instance;
+                        return isGetAccesor ^ isWrite;
                     }
+
                     return false;
 
                     static ISymbol MemberSymbol(IOperation operation) =>
@@ -99,6 +97,18 @@ namespace SonarAnalyzer.Rules.CSharp
                             OperationKindEx.Invocation
                                 when IInvocationOperationWrapper.FromOperation(operation) is var invocation && (!invocation.IsVirtual || InstanceReferencesThis(invocation.Instance)) =>
                                 invocation.TargetMethod,
+                            OperationKindEx.Binary
+                                when IBinaryOperationWrapper.FromOperation(operation) is var binaryOperation =>
+                                binaryOperation.OperatorMethod,
+                            OperationKindEx.Decrement
+                                when IIncrementOrDecrementOperationWrapper.FromOperation(operation) is var decrementOperation =>
+                                decrementOperation.OperatorMethod,
+                            OperationKindEx.Increment
+                                when IIncrementOrDecrementOperationWrapper.FromOperation(operation) is var incrementOperation =>
+                                incrementOperation.OperatorMethod,
+                            OperationKindEx.Unary
+                                when IUnaryOperationWrapper.FromOperation(operation) is var unaryOperation =>
+                                unaryOperation.OperatorMethod,
                             _ => null
                         };
 
