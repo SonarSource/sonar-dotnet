@@ -15,7 +15,7 @@ namespace Tests.Diagnostics
                 // ...
             }
 
-            var x = "some string"u8.ToArray(); // Compliant
+            var arr = "some string"u8.ToArray(); // Compliant
         }
 
         public void ReadOnlySpans(int propertyValue)

@@ -6,7 +6,7 @@ namespace Tests.Diagnostics
 {
     public class RedundantToArrayCall
     {
-        public void CreateNew2(int propertyValue)
+        public void Utf8StringLiterals(int propertyValue)
         {
             var c = "some string"u8[10];        // Fixed
             c = "some string"u8.Slice(5, 4)[1];           // Compliant
@@ -26,10 +26,10 @@ namespace Tests.Diagnostics
 
                 var span = new ReadOnlySpan<byte>(pointer, 42);
 
-                var elementAccess = span.ToArray()[10];        // Fixed 
+                var elementAccess = span[10];        // Fixed
                 var sliced = span.Slice(5, 4)[1];           // Compliant
 
-                foreach (var v in span.ToArray())  // Fixed
+                foreach (var v in span)  // Fixed
                 {
                     // ...
                 }
