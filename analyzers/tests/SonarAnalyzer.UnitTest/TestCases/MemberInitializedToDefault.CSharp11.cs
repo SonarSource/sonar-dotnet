@@ -46,7 +46,11 @@ public readonly struct FooStruct
 public struct BarStruct
 {
     public int someField = 0; // Noncompliant Initializing this field is optional for C# 11 due to the auto-default-struct C# feature https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-11#auto-default-struct
+    public required int someRequiredField = 0; // Noncompliant -  the required property is to be set on the caller's side or by the constructor.
     public BarStruct(int dummy) { }
+
+    [SetsRequiredMembers]
+    public BarStruct() { } // this constructor will init all required members to their default values.
 }
 
 public struct FooBarStruct
@@ -56,7 +60,6 @@ public struct FooBarStruct
 
     public FooBarStruct(int dummy) { }
 }
-
 
 public class TestRequiredProperties
 {
@@ -72,6 +75,6 @@ public class TestRequiredProperties
         public int AnotherProperty { get; set; }
 
         [SetsRequiredMembers]
-        public ClassWithRequiredProperties(){ }
+        public ClassWithRequiredProperties() { }
     }
 }

@@ -46,7 +46,11 @@ public readonly struct FooStruct
 public struct BarStruct
 {
     public int someField; // Fixed
+    public required int someRequiredField; // Fixed
     public BarStruct(int dummy) { }
+
+    [SetsRequiredMembers]
+    public BarStruct() { } // this constructor will init all required members to their default values.
 }
 
 public struct FooBarStruct
@@ -56,7 +60,6 @@ public struct FooBarStruct
 
     public FooBarStruct(int dummy) { }
 }
-
 
 public class TestRequiredProperties
 {
@@ -72,6 +75,6 @@ public class TestRequiredProperties
         public int AnotherProperty { get; set; }
 
         [SetsRequiredMembers]
-        public ClassWithRequiredProperties(){ }
+        public ClassWithRequiredProperties() { }
     }
 }
