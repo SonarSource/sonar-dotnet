@@ -71,11 +71,11 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             return ifStatementSyntax.Else == null && (ConditionValidIsPattern() || ConditionValidInvocation());
 
-            bool ConditionValidIsPattern() => IsPatternExpressionSyntaxWrapper.IsInstance(ifStatementSyntax.Condition)
-                                         && !ifStatementSyntax.Condition.DescendantNodes()
-                                                                        .Any(d => d.IsAnyKind(SyntaxKindEx.VarPattern,
-                                                                                              SyntaxKindEx.SingleVariableDesignation,
-                                                                                              SyntaxKindEx.ParenthesizedVariableDesignation));
+            bool ConditionValidIsPattern() => (IsPatternExpressionSyntaxWrapper.IsInstance(ifStatementSyntax.Condition) || ifStatementSyntax.Condition.IsKind(SyntaxKind.IsExpression))
+                                              && !ifStatementSyntax.Condition.DescendantNodes()
+                                                                             .Any(d => d.IsAnyKind(SyntaxKindEx.VarPattern,
+                                                                                                   SyntaxKindEx.SingleVariableDesignation,
+                                                                                                   SyntaxKindEx.ParenthesizedVariableDesignation));
 
             bool ConditionValidInvocation() => ifStatementSyntax.Condition is InvocationExpressionSyntax invocationExpressionSyntax
                                                && !invocationExpressionSyntax.DescendantNodes()
