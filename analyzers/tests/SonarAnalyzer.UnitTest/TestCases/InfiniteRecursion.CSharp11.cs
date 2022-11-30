@@ -26,11 +26,13 @@ namespace Tests.Diagnostics
             return left == right;
         }
 
-        public static Comparison operator !=(Comparison left, Comparison right) => left != right; // Noncompliant
+        public static Comparison operator !=(Comparison left, Comparison right) => left == right; // Compliant (we do not support cross-method analysis)
 
-        public static Comparison operator <(Comparison left, Comparison right) => left < right; // Noncompliant
+        public static Comparison operator <(Comparison left, Comparison right) =>
+            left is null ? left < right : left; // Compliant
 
-        public static Comparison operator >(Comparison left, Comparison right) => left > right; // Noncompliant
+        public static Comparison operator >(Comparison left, Comparison right) =>
+            (left > right) is null ? left : right; // Noncompliant@-1
 
         public static Comparison operator <=(Comparison left, Comparison right) => left <= right; // Noncompliant
 
