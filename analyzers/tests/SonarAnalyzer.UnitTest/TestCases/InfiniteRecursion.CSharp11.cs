@@ -18,13 +18,23 @@ namespace Tests.Diagnostics
 //                                      ^
     }
 
-    public class Equality : IEqualityOperators<Equality, Equality, Equality>
+    public class Comparison : IComparisonOperators<Comparison, Comparison, Comparison>
     {
-        public static Equality operator ==(Equality left, Equality right) => left == right; // Noncompliant
-//                                      ^^
+        public static Comparison operator ==(Comparison? left, Comparison? right)
+//                                        ^^
+        {
+            return left == right;
+        }
 
-        public static Equality operator !=(Equality left, Equality right) => left != right; // Noncompliant
-//                                      ^^
+        public static Comparison operator !=(Comparison left, Comparison right) => left != right; // Noncompliant
+
+        public static Comparison operator <(Comparison left, Comparison right) => left < right; // Noncompliant
+
+        public static Comparison operator >(Comparison left, Comparison right) => left > right; // Noncompliant
+
+        public static Comparison operator <=(Comparison left, Comparison right) => left <= right; // Noncompliant
+
+        public static Comparison operator >=(Comparison left, Comparison right) => left >= right; // Noncompliant
     }
 
     public class Multiply : IMultiplyOperators<Multiply, Multiply, int>
@@ -53,5 +63,17 @@ namespace Tests.Diagnostics
     public class IncrementAfter : IIncrementOperators<IncrementAfter>
     {
         public static IncrementAfter operator ++(IncrementAfter val) => val++; // Noncompliant
+    }
+
+    public class BitWise : IBitwiseOperators<BitWise, BitWise, BitWise>
+    {
+        public static BitWise operator ~(BitWise value) => ~value; // Noncompliant
+//                                     ^
+
+        public static BitWise operator &(BitWise left, BitWise right) => left & right; // Noncompliant
+        
+        public static BitWise operator |(BitWise left, BitWise right) => left | right; // Noncompliant
+
+        public static BitWise operator ^(BitWise left, BitWise right) => left ^ right; // Noncompliant
     }
 }

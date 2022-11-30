@@ -58,6 +58,14 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
+                    var @operator = (OperatorDeclarationSyntax)c.Node;
+                    CheckForNoExitMethod(c, (CSharpSyntaxNode)@operator.Body ?? @operator.ExpressionBody, @operator.OperatorToken);
+                },
+                SyntaxKind.OperatorDeclaration);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
+                {
                     var property = (PropertyDeclarationSyntax)c.Node;
                     if (c.SemanticModel.GetDeclaredSymbol(property) is { } propertySymbol)
                     {
@@ -65,14 +73,6 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 },
                 SyntaxKind.PropertyDeclaration);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var @operator = (OperatorDeclarationSyntax)c.Node;
-                    CheckForNoExitMethod(c, (CSharpSyntaxNode)@operator.Body ?? @operator.ExpressionBody, @operator.OperatorToken);
-                },
-                SyntaxKind.OperatorDeclaration);
         }
 
         private void CheckForNoExitMethod(SyntaxNodeAnalysisContext c, CSharpSyntaxNode body, SyntaxToken identifier)

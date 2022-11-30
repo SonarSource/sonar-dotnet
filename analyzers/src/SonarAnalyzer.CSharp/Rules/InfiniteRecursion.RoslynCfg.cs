@@ -106,6 +106,9 @@ namespace SonarAnalyzer.Rules.CSharp
                             OperationKindEx.Increment
                                 when IIncrementOrDecrementOperationWrapper.FromOperation(operation) is var incrementOperation =>
                                 incrementOperation.OperatorMethod,
+                            OperationKindEx.Unary
+                                when IUnaryOperationWrapper.FromOperation(operation) is var bitwiseOperation =>
+                                bitwiseOperation.OperatorMethod,
                             _ => null
                         };
 
