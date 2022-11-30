@@ -14,4 +14,3 @@ namespace Tests.Diagnostics
         public object MyPropertyNull { get; set; } = null!; // Compliant
     }
 }
-
