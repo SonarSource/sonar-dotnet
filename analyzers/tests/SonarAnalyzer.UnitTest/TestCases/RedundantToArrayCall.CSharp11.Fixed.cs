@@ -6,7 +6,7 @@ namespace Tests.Diagnostics
 {
     public class RedundantToArrayCall
     {
-        public void Utf8StringLiterals(int propertyValue)
+        public void Utf8StringLiterals()
         {
             var c = "some string"u8[10];        // Fixed
             c = "some string"u8.Slice(5, 4)[1];           // Compliant

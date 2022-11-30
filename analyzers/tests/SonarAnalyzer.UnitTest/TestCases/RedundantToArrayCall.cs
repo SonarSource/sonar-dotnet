@@ -10,7 +10,7 @@ namespace Tests.Diagnostics
             return null;
         }
 
-        public void Literals(int propertyValue)
+        public void Literals()
         {
             var c = "some string".ToCharArray()[10]; // Noncompliant, the indexer already returns a char
 //                                ^^^^^^^^^^^

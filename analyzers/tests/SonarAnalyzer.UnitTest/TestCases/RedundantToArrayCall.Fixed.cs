@@ -10,7 +10,7 @@ namespace Tests.Diagnostics
             return null;
         }
 
-        public void Literals(int propertyValue)
+        public void Literals()
         {
             var c = "some string"[10]; // Fixed
             c = "some string".ToCharArray(5, 4)[1];
