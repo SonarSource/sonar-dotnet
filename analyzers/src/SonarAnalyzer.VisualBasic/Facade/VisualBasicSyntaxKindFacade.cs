@@ -50,6 +50,6 @@ internal sealed class VisualBasicSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind
     public SyntaxKind ReturnStatement => SyntaxKind.ReturnStatement;
     public SyntaxKind SimpleAssignment => SyntaxKind.SimpleAssignmentStatement;
     public SyntaxKind SimpleMemberAccessExpression => SyntaxKind.SimpleMemberAccessExpression;
-    public SyntaxKind StringLiteralExpression => SyntaxKind.StringLiteralExpression;
+    public SyntaxKind[] StringLiteralExpressions => new[] { SyntaxKind.StringLiteralExpression };
     public SyntaxKind[] TypeDeclaration => new[] { SyntaxKind.ClassBlock, SyntaxKind.StructureBlock, SyntaxKind.InterfaceBlock, SyntaxKind.EnumBlock };
 }
