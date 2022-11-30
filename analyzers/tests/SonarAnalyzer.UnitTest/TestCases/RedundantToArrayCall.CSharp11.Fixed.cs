@@ -18,14 +18,8 @@ namespace Tests.Diagnostics
             var arr = "some string"u8.ToArray(); // Compliant
         }
 
-        public void ReadOnlySpans(int propertyValue)
+        public void ReadOnlySpans(ReadOnlySpan<byte> span)
         {
-            unsafe
-            {
-                void* pointer = null;
-
-                var span = new ReadOnlySpan<byte>(pointer, 42);
-
                 var elementAccess = span[10];        // Fixed
                 var sliced = span.Slice(5, 4)[1];           // Compliant
 
@@ -35,7 +29,6 @@ namespace Tests.Diagnostics
                 }
 
                 var arr = span.ToArray(); // Compliant
-            }
         }
     }
 }
