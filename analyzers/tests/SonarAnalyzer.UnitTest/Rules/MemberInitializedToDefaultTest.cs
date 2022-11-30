@@ -32,6 +32,9 @@ namespace SonarAnalyzer.UnitTest.Rules
             builder.AddPaths("MemberInitializedToDefault.cs").Verify();
 
 #if NET
+        [TestMethod]
+        public void MemberInitializedToDefault_CSharp8() =>
+            builder.AddPaths("MemberInitializedToDefault.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
         [TestMethod]
         public void MemberInitializedToDefault_CSharp9() =>
