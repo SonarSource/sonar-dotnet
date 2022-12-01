@@ -1,28 +1,72 @@
-﻿using System;
-
-namespace Tests.Diagnostics
+﻿public interface IAbstractFirst
 {
-    public interface IAbstractMethodFirst
+    public static abstract string StaticAbstractMethod(string value);
+}
+
+public interface IAbstractSecond
+{
+    public static abstract string StaticAbstractMethod(string value);
+//                                ^^^^^^^^^^^^^^^^^^^^ Secondary
+}
+
+public interface IAbstractCommon : IAbstractFirst, IAbstractSecond { } // Noncompliant
+
+public class AbstractCommon : IAbstractCommon
+{
+    static string IAbstractFirst.StaticAbstractMethod(string value) => $"First: {value}";
+    static string IAbstractSecond.StaticAbstractMethod(string value) => $"Second: {value}";
+}
+
+public interface IVirtualFirst
+{
+    public static virtual string StaticVirtualMethod(string value) => value;
+}
+
+public interface IVirtualSecond
+{
+    public static virtual string StaticVirtualMethod(string value) => value;
+//                               ^^^^^^^^^^^^^^^^^^^ Secondary
+}
+
+public interface IVirtualCommon : IVirtualFirst, IVirtualSecond { }  // Noncompliant
+
+public class Foo
+{
+    public void ValidAbstractCall<TFirst, TSecond>()
+        where TFirst : IAbstractFirst
+        where TSecond : IAbstractSecond
     {
-        public static abstract string StaticAbstractMethod(string value);
+        TFirst.StaticAbstractMethod("First is called here");
+        TSecond.StaticAbstractMethod("Second is called here");
     }
 
-    public interface IAbstractMethodSecond
+    public void ValidVirtualCall<TFirst, TSecond>()
+        where TFirst : IVirtualFirst
+        where TSecond : IVirtualSecond
     {
-        public static abstract string StaticAbstractMethod(string value);
+        TFirst.StaticVirtualMethod("First is called here");
+        TSecond.StaticVirtualMethod("Second is called here");
     }
 
-    public interface IAbstractMethodCommon : IAbstractMethodFirst, IAbstractMethodSecond { } // Compliant: static methods are not inherited
-
-    public interface IVirtualMethodFirst
+    public void AmbiguousAbstractCall<TCommon>()
+        where TCommon : IAbstractCommon
     {
-        public static virtual string StaticVirtualMethod(string value) => value;
+        TCommon.StaticAbstractMethod("Which method am i supposed to resolve here?"); // Error [CS0121] The call is ambiguous between the following methods or properties: 'IAbstractFirst.StaticAbstractMethod(string)' and 'IAbstractSecond.StaticAbstractMethod(string)' 
     }
 
-    public interface IVirtualMethodSecond
+
+    public void AmbiguousVirtualCall<TCommon>()
+        where TCommon : IVirtualCommon
     {
-        public static virtual string StaticVirtualMethod(string value) => value;
+        TCommon.StaticVirtualMethod("Which method am i supposed to resolve here?"); // Error [CS0121] The call is ambiguous between the following methods or properties: 'IVirtualFirst.StaticVirtualMethod(string)' and 'IVirtualSecond.StaticVirtualMethod(string)' 
     }
 
-    public interface IVirtualMethodCommon : IVirtualMethodFirst, IVirtualMethodSecond { } // Compliant: static methods are not inherited
+    public void CallMethods()
+    {
+        ValidAbstractCall<AbstractCommon, AbstractCommon>();
+        AmbiguousAbstractCall<AbstractCommon>();
+
+        ValidVirtualCall<IVirtualFirst, IVirtualSecond>();
+        AmbiguousVirtualCall<IVirtualCommon>();
+    }
 }

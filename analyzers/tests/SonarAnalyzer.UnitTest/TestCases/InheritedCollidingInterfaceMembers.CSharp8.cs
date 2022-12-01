@@ -143,7 +143,7 @@ namespace Tests.Diagnostics
         }
     }
 
-    public interface IPrivateMethodCommon : IPrivateMethodFirst, IPrivateMethodSecond // compliant: the methods are not accessible on the derived classes or interfaces
+    public interface IPrivateMethodCommon : IPrivateMethodFirst, IPrivateMethodSecond // Compliant: the methods are not accessible on the derived classes or interfaces
     {
     }
 
@@ -180,12 +180,13 @@ namespace Tests.Diagnostics
     public interface IStaticMethodSecond
     {
         public static string Static(string value)
+//                           ^^^^^^ Secondary
         {
             return value;
         }
     }
 
-    public interface IStaticMethodDerived : IStaticMethodFirst, IStaticMethodSecond // compliant: static methods are not inherited
+    public interface IStaticMethodDerived : IStaticMethodFirst, IStaticMethodSecond // Noncompliant
     {
     }
 
