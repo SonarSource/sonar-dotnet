@@ -82,22 +82,20 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var notRedefinedMembersFromInterface = interfacesToCheck[i].GetMembers()
                     .OfType<IMethodSymbol>()
-                    .Where(method =>
-                        !method.IsStatic
-                        && method.DeclaredAccessibility != Accessibility.Private
-                        && !membersFromDerivedInterface.Any(redefinedMember => AreCollidingMethods(method, redefinedMember)));
+                    .Where(method => method.DeclaredAccessibility != Accessibility.Private
+                                     && !membersFromDerivedInterface.Any(redefinedMember => AreCollidingMethods(method, redefinedMember)));
 
-                foreach (var notRedefinedMemberFromInterface1 in notRedefinedMembersFromInterface)
+                foreach (var notRedefinedMemberFromInterface in notRedefinedMembersFromInterface)
                 {
                     for (var j = i + 1; j < interfacesToCheck.Length; j++)
                     {
-                        var collidingMembersFromInterface2 = interfacesToCheck[j]
-                            .GetMembers(notRedefinedMemberFromInterface1.Name)
+                        var collidingMembersFromInterface = interfacesToCheck[j]
+                            .GetMembers(notRedefinedMemberFromInterface.Name)
                             .OfType<IMethodSymbol>()
                             .Where(IsNotEventRemoveAccessor)
-                            .Where(methodSymbol2 => AreCollidingMethods(notRedefinedMemberFromInterface1, methodSymbol2));
+                            .Where(methodSymbol => AreCollidingMethods(notRedefinedMemberFromInterface, methodSymbol));
 
-                        foreach (var collidingMember in collidingMembersFromInterface2)
+                        foreach (var collidingMember in collidingMembersFromInterface)
                         {
                             yield return collidingMember;
                         }
@@ -106,10 +104,10 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static bool IsNotEventRemoveAccessor(IMethodSymbol methodSymbol2) =>
+        private static bool IsNotEventRemoveAccessor(IMethodSymbol methodSymbol) =>
             // we only want to report on events once, so we are not collecting the "remove" accessors,
             // and handle the "add" accessor reporting separately in <see cref="GetMemberDisplayName"/>
-            methodSymbol2.MethodKind != MethodKind.EventRemove;
+            methodSymbol.MethodKind != MethodKind.EventRemove;
 
         private static string GetIssueMessageText(IEnumerable<IMethodSymbol> collidingMembers, SemanticModel semanticModel, int spanStart)
         {
