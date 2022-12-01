@@ -59,6 +59,9 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
     public override ImmutableArray<SyntaxNode> AssignmentTargets(SyntaxNode assignment) =>
         Cast<AssignmentExpressionSyntax>(assignment).AssignmentTargets();
 
+    public override SyntaxNode AssignmentLeft(SyntaxNode assignment) =>
+        Cast<AssignmentExpressionSyntax>(assignment).Left;
+
     public override SyntaxNode AssignmentRight(SyntaxNode assignment) =>
         Cast<AssignmentExpressionSyntax>(assignment).Right;
 

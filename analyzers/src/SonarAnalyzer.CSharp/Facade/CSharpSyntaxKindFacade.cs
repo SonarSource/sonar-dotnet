@@ -64,4 +64,8 @@ internal sealed class CSharpSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind>
         SyntaxKindEx.RecordClassDeclaration,
         SyntaxKindEx.RecordStructDeclaration,
     };
+    public SyntaxKind LeftShiftExpression => SyntaxKind.LeftShiftExpression;
+    public SyntaxKind RightShiftExpression => SyntaxKind.RightShiftExpression;
+    public SyntaxKind LeftShiftAssignmentStatement => SyntaxKind.LeftShiftAssignmentExpression;
+    public SyntaxKind RightShiftAssignmentStatement => SyntaxKind.RightShiftAssignmentExpression;
 }

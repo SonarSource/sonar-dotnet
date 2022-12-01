@@ -21,31 +21,18 @@
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class ShiftDynamicNotInteger : ShiftDynamicNotIntegerBase<SyntaxKind, ExpressionSyntax>
+    public sealed class ShiftDynamicNotInteger : ShiftDynamicNotIntegerBase<SyntaxKind>
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        protected override bool ShouldRaise(SemanticModel semanticModel, ExpressionSyntax left, ExpressionSyntax right) =>
+        protected override bool ShouldRaise(SemanticModel semanticModel, SyntaxNode left, SyntaxNode right) =>
             IsDynamic(left, semanticModel) && !IsConvertibleToInt(right, semanticModel);
 
-        protected override bool CanBeConvertedTo(ExpressionSyntax expression, ITypeSymbol type, SemanticModel semanticModel) =>
-            semanticModel.ClassifyConversion(expression, type) is { Exists: true } conversion
+        protected override bool CanBeConvertedTo(SyntaxNode expression, ITypeSymbol type, SemanticModel semanticModel) =>
+            semanticModel.ClassifyConversion(expression as ExpressionSyntax, type) is { Exists: true } conversion
             && (conversion.IsIdentity || conversion.IsImplicit);
 
-        private static bool IsDynamic(ExpressionSyntax expression, SemanticModel semanticModel) =>
+        private static bool IsDynamic(SyntaxNode expression, SemanticModel semanticModel) =>
             semanticModel.GetTypeInfo(expression).Type is { TypeKind: TypeKind.Dynamic };
-
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckExpressionWithTwoParts<BinaryExpressionSyntax>(c, b => b.Left, b => b.Right),
-                SyntaxKind.LeftShiftExpression,
-                SyntaxKind.RightShiftExpression);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckExpressionWithTwoParts<AssignmentExpressionSyntax>(c, b => b.Left, b => b.Right),
-                SyntaxKind.LeftShiftAssignmentExpression,
-                SyntaxKind.RightShiftAssignmentExpression);
-        }
     }
 }

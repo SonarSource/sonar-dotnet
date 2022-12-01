@@ -57,6 +57,9 @@ internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
     public override ImmutableArray<SyntaxNode> AssignmentTargets(SyntaxNode assignment) =>
         ImmutableArray.Create<SyntaxNode>(Cast<AssignmentStatementSyntax>(assignment).Left);
 
+    public override SyntaxNode AssignmentLeft(SyntaxNode assignment) =>
+        Cast<AssignmentStatementSyntax>(assignment).Left;
+
     public override SyntaxNode AssignmentRight(SyntaxNode assignment) =>
         Cast<AssignmentStatementSyntax>(assignment).Right;
 
