@@ -17,22 +17,17 @@ public class TestCases
         var unixPath2 = """~/blah/blah/blah.txt"""; // Compliant
         var unixPath3 = """~\\blah\\blah\\blah.txt"""; // Compliant
         var windowsPathStartingWithVariable = """%AppData%\\Adobe""";
-
-        var webChemin = """http://www.mywebsite.com"""; // FN
-        var windowsChemin = """c:\\blah\\blah\\blah.txt"""; // FN
     }
 
     public void SpanMatch(Span<char> span, ReadOnlySpan<char> readonlySpan, string simpleString)
     {
-        var a = span is """\\my-network-drive\folder\file.txt"""               // FN
-                || readonlySpan is """\\my-network-drive\folder\file.txt"""    // FN
-                || simpleString is @"\\my-network-drive/folder/file.txt";      // FN
-
         var URI = span is """\\my-network-drive\folder\file.txt"""             // Noncompliant
                 || readonlySpan is """\\my-network-drive\folder\file.txt"""    // Noncompliant
                 || simpleString is @"\\my-network-drive/folder/file.txt";      // Noncompliant
     }
 
-    public bool ListPattern(string[] uris) =>
-        uris is ["""\\my-network-drive\folder\file.txt"""]; // FN
+    public void ListPattern(string[] uris)
+    {
+        bool pathFlag = uris is ["""\\my-network-drive\folder\file.txt"""]; // Noncompliant
+    }
 }
