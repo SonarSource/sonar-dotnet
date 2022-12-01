@@ -54,7 +54,7 @@ internal sealed class CSharpSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind>
     public SyntaxKind ReturnStatement => SyntaxKind.ReturnStatement;
     public SyntaxKind SimpleAssignment => SyntaxKind.SimpleAssignmentExpression;
     public SyntaxKind SimpleMemberAccessExpression => SyntaxKind.SimpleMemberAccessExpression;
-    public SyntaxKind StringLiteralExpression => SyntaxKind.StringLiteralExpression;
+    public SyntaxKind[] StringLiteralExpressions => new[] { SyntaxKind.StringLiteralExpression, SyntaxKindEx.Utf8StringLiteralExpression };
     public SyntaxKind[] TypeDeclaration => new[]
     {
         SyntaxKind.ClassDeclaration,

@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Helpers
         {
             if (node != null)
             {
-                if (Language.Syntax.IsKind(node, Language.SyntaxKind.StringLiteralExpression)
+                if (Language.Syntax.IsAnyKind(node, Language.SyntaxKind.StringLiteralExpressions)
                     && node is TLiteralExpressionSyntax literal)
                 {
                     return Token(literal).ValueText;

@@ -71,6 +71,9 @@ namespace SonarAnalyzer.Rules
 
         protected override void Initialize(SonarAnalysisContext context)
         {
+            var kinds = Language.SyntaxKind.StringLiteralExpressions.ToList();
+            kinds.Add(Language.SyntaxKind.InterpolatedStringExpression);
+
             context.RegisterSyntaxNodeActionInNonGenerated(
                 Language.GeneratedCodeRecognizer,
                 c =>
@@ -82,8 +85,7 @@ namespace SonarAnalyzer.Rules
                         c.ReportIssue(Diagnostic.Create(rule, c.Node.GetLocation()));
                     }
                 },
-                Language.SyntaxKind.StringLiteralExpression,
-                Language.SyntaxKind.InterpolatedStringExpression);
+                kinds.ToArray());
 
             context.RegisterSyntaxNodeActionInNonGenerated(
                 Language.GeneratedCodeRecognizer,
