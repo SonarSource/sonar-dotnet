@@ -74,33 +74,34 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static IEnumerable<IMethodSymbol> GetCollidingMembers(ITypeSymbol interfaceSymbol)
         {
-            var interfacesToCheck = interfaceSymbol.Interfaces;
+            var implementedInterfaces = interfaceSymbol.Interfaces;
 
             var membersFromDerivedInterface = interfaceSymbol.GetMembers().OfType<IMethodSymbol>().ToList();
 
-            for (var i = 0; i < interfacesToCheck.Length; i++)
+            for (var i = 0; i < implementedInterfaces.Length; i++)
             {
-                var notRedefinedMembersFromInterface = interfacesToCheck[i].GetMembers()
+                var notRedefinedMembersFromInterface = implementedInterfaces[i]
+                    .GetMembers()
                     .OfType<IMethodSymbol>()
                     .Where(method => method.DeclaredAccessibility != Accessibility.Private
                                      && !membersFromDerivedInterface.Any(redefinedMember => AreCollidingMethods(method, redefinedMember)));
 
-                foreach (var notRedefinedMemberFromInterface in notRedefinedMembersFromInterface)
-                {
-                    for (var j = i + 1; j < interfacesToCheck.Length; j++)
-                    {
-                        var collidingMembersFromInterface = interfacesToCheck[j]
-                            .GetMembers(notRedefinedMemberFromInterface.Name)
-                            .OfType<IMethodSymbol>()
-                            .Where(IsNotEventRemoveAccessor)
-                            .Where(methodSymbol => AreCollidingMethods(notRedefinedMemberFromInterface, methodSymbol));
+                var collidingMembers = notRedefinedMembersFromInterface.SelectMany(member => GetCollidingMembersForMember(member, implementedInterfaces.Skip(i + 1)));
 
-                        foreach (var collidingMember in collidingMembersFromInterface)
-                        {
-                            yield return collidingMember;
-                        }
-                    }
+                foreach (var collidingMember in collidingMembers)
+                {
+                    yield return collidingMember;
                 }
+
+                IEnumerable<IMethodSymbol> GetCollidingMembersForMember(IMethodSymbol member, IEnumerable<INamedTypeSymbol> interfaces) =>
+                    interfaces.SelectMany(i => GetCollidingMembersForMemberAndInterface(member, i));
+
+                IEnumerable<IMethodSymbol> GetCollidingMembersForMemberAndInterface(IMethodSymbol member, INamedTypeSymbol interfaceToCheck) =>
+                    interfaceToCheck
+                        .GetMembers(member.Name)
+                        .OfType<IMethodSymbol>()
+                        .Where(IsNotEventRemoveAccessor)
+                        .Where(methodSymbol => AreCollidingMethods(member, methodSymbol));
             }
         }
 
