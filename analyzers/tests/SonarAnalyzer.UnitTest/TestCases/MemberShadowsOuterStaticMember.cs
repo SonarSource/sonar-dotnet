@@ -109,4 +109,16 @@ namespace Tests.TestCases
             struct SomeEnum { }   // Noncompliant
         }
     }
+
+    public class SomeEnumContainer 
+    {
+        public enum SomeEnum
+        {
+            Value1, // Compliant
+            Value2, // Compliant
+        }
+
+        public static int Value1 = 42;
+        public const int Value2 = 43;
+    }
 }

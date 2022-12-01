@@ -1,22 +1,74 @@
-﻿public interface IMath<T>
+﻿public interface OuterInterface
 {
-    public static abstract T AbstractMethod(T t);
+    public static int StaticFoo1 => 42;
+    public static int StaticFoo2 => 42;
+    public static int StaticFoo3 => 42;
+    public static int StaticFoo4 => 42;
+    public static int StaticFoo5 => 42;
 
-    public static virtual T VirtualMethod(T t)
+    public static int StaticFoo6 => 42;
+    public static int StaticFoo7 => 42;
+
+    public static virtual int StaticVirtualFoo1 => 42;
+    public static abstract int StaticAbstractFoo1 { get; }
+    public const int ConstFoo1 = 42;
+
+    public abstract class InnerClass
     {
-        return t;
+        public int StaticFoo1 => 42; // Noncompliant
+        public const int StaticFoo2 = 42; // Noncompliant
+        public virtual int StaticFoo3 => 42; // Noncompliant
+        public abstract int StaticFoo4 { get; } // Noncompliant
+        public static int StaticFoo5 => 42; // Noncompliant
+
+        public int StaticVirtualFoo1 => 42; // Compliant, you cannot invoke Interface.Member for virtual members, only on type parameters
+        public int StaticAbstractFoo1 => 42; // Compliant, you cannot invoke Interface.Member for abstract members, only on type parameters
+
+        public int ConstFoo1 => 42; // Noncompliant
     }
 
-    public class Inner
+    public interface InnerInterface
     {
-        public T AbstractMethod(T t) // Compliant, FN
-        {
-            return t;
-        }
+        public int StaticFoo1 => 42; // Noncompliant
+        public const int StaticFoo2 = 42; // Noncompliant
+        public virtual int StaticFoo3 => 42; // Noncompliant
+        public abstract int StaticFoo4 { get; } // Noncompliant
+        public static int StaticFoo5 => 42; // Noncompliant
 
-        public T VirtualMethod(T t) // Compliant, FN
-        {
-            return t;
-        }
+        public static virtual int StaticFoo6 => 42; // Compliant, you cannot invoke Interface.Member for abstract/virtual members, only on type parameters 
+        public static abstract int StaticFoo7 { get; } // Compliant, you cannot invoke Interface.Member for abstract/virtual members, only on type parameters
+
+        public int StaticVirtualFoo1 => 42; // Compliant, you cannot invoke Interface.Member for virtual members, only on type parameters
+        public int StaticAbstractFoo1 => 42; // Compliant, you cannot invoke Interface.Member for abstract members, only on type parameters
+
+        public int ConstFoo1 => 42; // Noncompliant
+    }
+}
+
+public class OuterClass
+{
+    public static int StaticFoo1 => 42;
+    public static int StaticFoo2 => 42;
+    public static int StaticFoo3 => 42;
+    public static int StaticFoo4 => 42;
+    public static int StaticFoo5 => 42;
+
+    public static int StaticFoo6 => 42;
+    public static int StaticFoo7 => 42;
+
+    public const int ConstFoo1 = 42;
+
+    public interface InnerInterface
+    {
+        public int StaticFoo1 => 42; // Noncompliant
+        public const int StaticFoo2 = 42; // Noncompliant
+        public virtual int StaticFoo3 => 42; // Noncompliant
+        public abstract int StaticFoo4 { get; } // Noncompliant
+        public static int StaticFoo5 => 42; // Noncompliant
+
+        public static virtual int StaticFoo6 => 42; // Compliant, you cannot invoke Interface.Member for abstract/virtual members, only on type parameters 
+        public static abstract int StaticFoo7 { get; } // Compliant, you cannot invoke Interface.Member for abstract/virtual members, only on type parameters
+
+        public int ConstFoo1 => 42; // Noncompliant
     }
 }
