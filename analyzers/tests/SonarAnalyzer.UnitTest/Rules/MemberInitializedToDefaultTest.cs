@@ -31,6 +31,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void MemberInitializedToDefault() =>
             builder.AddPaths("MemberInitializedToDefault.cs").Verify();
 
+        [TestMethod]
+        public void MemberInitializedToDefault_CodeFix() =>
+            builder
+            .WithCodeFix<MemberInitializedToDefaultCodeFix>()
+            .AddPaths("MemberInitializedToDefault.cs")
+            .WithCodeFixedPaths("MemberInitializedToDefault.Fixed.cs")
+            .VerifyCodeFix();
+
 #if NET
 
         [TestMethod]
@@ -42,17 +50,23 @@ namespace SonarAnalyzer.UnitTest.Rules
             builder.AddPaths("MemberInitializedToDefault.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
         [TestMethod]
+        public void MemberInitializedToDefault_CSharp10() =>
+            builder.AddPaths("MemberInitializedToDefault.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+
+        [TestMethod]
         public void MemberInitializedToDefault_CSharp11() =>
             builder.AddPaths("MemberInitializedToDefault.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
 
+        [TestMethod]
+        public void MemberInitializedToDefault_CSharp11_CodeFix() =>
+            builder
+            .WithCodeFix<MemberInitializedToDefaultCodeFix>()
+            .AddPaths("MemberInitializedToDefault.CSharp11.cs")
+            .WithCodeFixedPaths("MemberInitializedToDefault.CSharp11.Fixed.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .VerifyCodeFix();
+
 #endif
 
-        [TestMethod]
-        public void MemberInitializedToDefault_CodeFix() =>
-            builder
-                .WithCodeFix<MemberInitializedToDefaultCodeFix>()
-                .AddPaths("MemberInitializedToDefault.cs")
-                .WithCodeFixedPaths("MemberInitializedToDefault.Fixed.cs")
-                .VerifyCodeFix();
     }
 }
