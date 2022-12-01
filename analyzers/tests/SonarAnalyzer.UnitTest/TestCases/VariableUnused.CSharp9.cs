@@ -16,7 +16,7 @@ void ParentMethod2() => Invoke(static (x, y) =>
 
 void Invoke(Action<int, int> action) => action(1, 2);
 
-void DelcarationPattern()
+void DeclarationPattern()
 {
     _ = new object() is object o; // Noncompliant
 }
@@ -36,7 +36,7 @@ void VarPattern()
     _ = new object() is var o; // Noncompliant
 }
 
-void ParenthezisedDesignation()
+void ParenthesizedDesignation()
 {
     _ = (1, 2) is var (bar, _); // Noncompliant
 }
