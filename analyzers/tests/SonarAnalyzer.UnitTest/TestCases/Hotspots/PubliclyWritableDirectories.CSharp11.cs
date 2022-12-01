@@ -18,11 +18,34 @@ namespace Tests.Diagnostics
                             secondPartOfPath}}""";
         }
 
-        void Utf8StringLiterals(string firstPartOfPath, string secondPartOfPath)
+        void Utf8StringLiterals()
         {
             var tmp = "%USERPROFILE%\\AppData\\Local\\Temp\\f"u8; // Noncompliant
-            tmp = "\u0025\u0055\u0053\u0045\u0052\u0050\u0052\u004f\u0046\u0049\u004c\u0045\u0025\u005c\u0041\u0070\u0070\u0044\u0061\u0074\u0061\u005c\u004c\u006f\u0063\u0061\u006c\u005c\u0054\u0065\u006d\u0070\u005c\u0066"u8; // Noncompliant
-            tmp = "%TEMP%\\f"u8; // Noncompliant
+            tmp = "%TEMP%\\f"u8;                // Noncompliant
+            tmp = "/tmp/"u8;                    // Noncompliant
+            tmp = "/tmp"u8;                     // Noncompliant
+            tmp = "/var/tmp/f"u8;               // Noncompliant
+            tmp = "/usr/tmp/f"u8;               // Noncompliant
+            tmp = "/dev/shm/f"u8;               // Noncompliant
+            tmp = "/dev/mqueue/f"u8;            // Noncompliant
+            tmp = "/run/lock/f"u8;              // Noncompliant
+            tmp = "/var/run/lock/f"u8;          // Noncompliant
+            tmp = "/Library/Caches/f"u8;        // Noncompliant
+            tmp = "/Users/Shared/f"u8;          // Noncompliant
+            tmp = "/private/tmp/f"u8;           // Noncompliant
+            tmp = "/private/var/tmp/"u8;        // Noncompliant
+            tmp = "C:\\Windows\\Temp\\f"u8;     // Noncompliant
+            tmp = "C:\\Temp\\f"u8;              // Noncompliant
+            tmp = "C:\\TEMP\\f"u8;              // Noncompliant
+            tmp = "C:\\TMP\\f"u8;               // Noncompliant
+            tmp = @"/tmp/f"u8;                  // Noncompliant
+            tmp = "D:\\Windows\\Temp\\f"u8;     // Noncompliant
+            tmp = "\\\\Server_Name\\Temp\\f"u8; // Noncompliant
+            tmp = "\\Windows\\Temp\\f"u8;       // Noncompliant
+            tmp = @"C:\Windows\Temp\f"u8;       // Noncompliant
+            tmp = @"D:\Windows\Temp\f"u8;       // Noncompliant
+            tmp = @"\\Windows\Temp\f"u8;        // Noncompliant
+            tmp = @"\Windows\Temp\f"u8;         // Noncompliant
         }
 
     }
