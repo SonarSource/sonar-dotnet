@@ -3,18 +3,19 @@ using System.Collections.Generic;
 
 namespace Tests.Diagnostics
 {
-    public class RedundantToCharArrayCall
+    public class RedundantToArrayCall
     {
         public char[] ToCharArray()
         {
             return null;
         }
 
-        public void CreateNew2(int propertyValue)
+        public void Literals()
         {
-            var c = "some string"[10]; // Fixed
+            var c = "some string".ToCharArray()[10]; // Noncompliant, the indexer already returns a char
+//                                ^^^^^^^^^^^
             c = "some string".ToCharArray(5, 4)[1];
-            foreach (var v in "some string") // Fixed
+            foreach (var v in "some string".ToCharArray()) // Noncompliant {{Remove this redundant 'ToCharArray' call.}}
             {
                 // ...
             }

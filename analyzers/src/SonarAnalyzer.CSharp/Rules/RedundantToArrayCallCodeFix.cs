@@ -24,16 +24,10 @@ using Microsoft.CodeAnalysis.CodeFixes;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [ExportCodeFixProvider(LanguageNames.CSharp)]
-    public sealed class RedundantToCharArrayCallCodeFix : SonarCodeFix
+    public sealed class RedundantToArrayCallCodeFix : SonarCodeFix
     {
-        internal const string Title = "Remove redundant 'ToCharArray' call";
-        public override ImmutableArray<string> FixableDiagnosticIds
-        {
-            get
-            {
-                return ImmutableArray.Create(RedundantToCharArrayCall.DiagnosticId);
-            }
-        }
+        private const string Title = "Remove redundant 'ToArray' call";
+        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(RedundantToArrayCall.DiagnosticId);
 
         protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
@@ -42,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var simpleNameSyntax = root.FindNode(diagnosticSpan) as SimpleNameSyntax;
             var memberAccessExpressionSyntax = simpleNameSyntax?.Parent as MemberAccessExpressionSyntax;
 
-            if (!(memberAccessExpressionSyntax?.Parent is InvocationExpressionSyntax invocationExpressionSyntax))
+            if (memberAccessExpressionSyntax?.Parent is not InvocationExpressionSyntax invocationExpressionSyntax)
             {
                 return Task.CompletedTask;
             }
