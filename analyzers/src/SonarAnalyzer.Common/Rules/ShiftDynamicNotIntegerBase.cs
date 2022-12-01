@@ -22,7 +22,7 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class ShiftDynamicNotIntegerBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind> where TSyntaxKind : struct
     {
-        internal const string DiagnosticId = "S3449";
+        private const string DiagnosticId = "S3449";
 
         protected abstract bool CanBeConvertedTo(SyntaxNode expression, ITypeSymbol type, SemanticModel semanticModel);
 
