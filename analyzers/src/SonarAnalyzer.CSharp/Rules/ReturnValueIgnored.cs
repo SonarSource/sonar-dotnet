@@ -60,18 +60,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckExpressionForPureMethod(SyntaxNodeAnalysisContext context, ExpressionSyntax expression)
         {
-            if (expression is not InvocationExpressionSyntax invocation)
-            {
-                return;
-            }
-
-            if (context.SemanticModel.GetSymbolInfo(invocation).Symbol is not IMethodSymbol invokedMethodSymbol
-                || invokedMethodSymbol.ReturnsVoid)
-            {
-                return;
-            }
-
-            if (invokedMethodSymbol.Parameters.All(p => p.RefKind == RefKind.None)
+            if (expression is InvocationExpressionSyntax invocation
+                && context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol invokedMethodSymbol
+                && !invokedMethodSymbol.ReturnsVoid
+                && invokedMethodSymbol.Parameters.All(p => p.RefKind == RefKind.None)
                 && IsSideEffectFreeOrPure(invokedMethodSymbol))
             {
                 context.ReportIssue(Diagnostic.Create(Rule, expression.GetLocation(), invokedMethodSymbol.Name));
