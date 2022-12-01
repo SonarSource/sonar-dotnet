@@ -67,6 +67,32 @@
 },
 {
 "id":  "S1481",
+"message":  "Remove the unused local variable 'unhandled'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\DeadLetterListener.cs",
+"region":  {
+"startLine":  192,
+"startColumn":  39,
+"endLine":  192,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'str'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\Logging.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  29,
+"endLine":  84,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1481",
 "message":  "Remove the unused local variable 'level'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Event\LoggingBus.cs",
@@ -88,6 +114,19 @@
 "startColumn":  21,
 "endLine":  188,
 "endColumn":  27
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'getRoutees'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\RouterActor.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  33,
+"endLine":  46,
+"endColumn":  43
 }
 }
 },

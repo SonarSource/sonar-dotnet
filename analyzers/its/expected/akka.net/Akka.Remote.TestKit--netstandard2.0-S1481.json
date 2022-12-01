@@ -2,6 +2,19 @@
 "issues":  [
 {
 "id":  "S1481",
+"message":  "Remove the unused local variable 'barrierEmpty'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"region":  {
+"startLine":  257,
+"startColumn":  67,
+"endLine":  257,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S1481",
 "message":  "Remove the unused local variable 'result'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",

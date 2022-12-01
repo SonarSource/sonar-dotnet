@@ -28,6 +28,19 @@
 },
 {
 "id":  "S1481",
+"message":  "Remove the unused local variable 'a'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\RemoteMessagingThroughputSpecBase.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  37,
+"endLine":  55,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1481",
 "message":  "Remove the unused local variable 'system2Address'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\RemoteMessagingThroughputSpecBase.cs",

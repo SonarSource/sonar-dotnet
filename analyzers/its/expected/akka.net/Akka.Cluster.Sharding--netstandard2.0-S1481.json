@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'failure'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\DDataShard.cs",
+"region":  {
+"startLine":  213,
+"startColumn":  33,
+"endLine":  213,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'o'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Serialization\ClusterShardingMessageSerializer.cs",
+"region":  {
+"startLine":  155,
+"startColumn":  42,
+"endLine":  155,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'o'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Serialization\ClusterShardingMessageSerializer.cs",
+"region":  {
+"startLine":  157,
+"startColumn":  42,
+"endLine":  157,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'msg'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardCoordinator.cs",
+"region":  {
+"startLine":  97,
+"startColumn":  55,
+"endLine":  97,
+"endColumn":  58
+}
+}
+}
+]
+}

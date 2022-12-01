@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'memberExpression'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"region":  {
+"startLine":  222,
+"startColumn":  52,
+"endLine":  222,
+"endColumn":  68
+}
+}
+}
+]
+}

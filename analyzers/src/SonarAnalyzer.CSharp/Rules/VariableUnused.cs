@@ -32,7 +32,13 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var collector = new UnusedLocalsCollector();
 
-                cbc.RegisterSyntaxNodeAction(collector.CollectDeclarations, SyntaxKind.LocalDeclarationStatement, SyntaxKind.SimpleAssignmentExpression);
+                cbc.RegisterSyntaxNodeAction(collector.CollectDeclarations,
+                    SyntaxKind.LocalDeclarationStatement,
+                    SyntaxKind.SimpleAssignmentExpression,
+                    SyntaxKindEx.VarPattern,
+                    SyntaxKindEx.RecursivePattern,
+                    SyntaxKindEx.DeclarationPattern,
+                    SyntaxKindEx.ListPattern);
                 cbc.RegisterSyntaxNodeAction(collector.CollectUsages, SyntaxKind.IdentifierName);
                 cbc.RegisterCodeBlockEndAction(collector.GetReportUnusedVariablesAction(Rule));
             });
@@ -42,12 +48,18 @@ namespace SonarAnalyzer.Rules.CSharp
             protected override IEnumerable<SyntaxNode> GetDeclaredVariables(SyntaxNode variableDeclaration) =>
                 variableDeclaration switch
                 {
-                    LocalDeclarationStatementSyntax localDeclaration when !localDeclaration.UsingKeyword().IsKind(SyntaxKind.UsingKeyword) =>
-                        localDeclaration.Declaration.Variables,
+                    LocalDeclarationStatementSyntax localDeclaration when !localDeclaration.UsingKeyword().IsKind(SyntaxKind.UsingKeyword) => localDeclaration.Declaration.Variables,
                     AssignmentExpressionSyntax assignmentExpression =>
                         assignmentExpression.AssignmentTargets().Where(x => DeclarationExpressionSyntaxWrapper.IsInstance(x) || SingleVariableDesignationSyntaxWrapper.IsInstance(x)),
+                    { RawKind: (int)SyntaxKindEx.VarPattern } pattern when ((VarPatternSyntaxWrapper)pattern).Designation is { } designation => Variables(designation),
+                    { RawKind: (int)SyntaxKindEx.RecursivePattern } pattern when ((RecursivePatternSyntaxWrapper)pattern).Designation is { } designation => Variables(designation),
+                    { RawKind: (int)SyntaxKindEx.DeclarationPattern } pattern when ((DeclarationPatternSyntaxWrapper)pattern).Designation is { } designation => Variables(designation),
+                    { RawKind: (int)SyntaxKindEx.ListPattern } pattern when ((ListPatternSyntaxWrapper)pattern).Designation is { } designation => Variables(designation),
                     _ => Enumerable.Empty<SyntaxNode>(),
                 };
+
+            private static IEnumerable<SyntaxNode> Variables(VariableDesignationSyntaxWrapper designation) =>
+                designation.AllVariables().Select(v => v.SyntaxNode);
         }
     }
 }

@@ -262,6 +262,19 @@
 },
 {
 "id":  "S1481",
+"message":  "Remove the unused local variable 'appleInside'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S4201.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  23,
+"endLine":  17,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1481",
 "message":  "Remove the unused local variable 'i'.",
 "location":  {
 "uri":  "sources\Net5\Net5\SkipLocalsInit.cs",
