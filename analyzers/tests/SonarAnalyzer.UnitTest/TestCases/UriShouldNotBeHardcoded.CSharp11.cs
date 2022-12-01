@@ -21,10 +21,6 @@ public class TestCases
 
     public void SpanMatch(Span<char> span, ReadOnlySpan<char> readonlySpan, string simpleString)
     {
-        var a = span is """\\my-network-drive\folder\file.txt"""               // Compliant (variable name 'a' not containing any checked strings)
-                || readonlySpan is """\\my-network-drive\folder\file.txt"""    // Compliant (variable name 'a' not containing any checked strings)
-                || simpleString is @"\\my-network-drive/folder/file.txt";      // Compliant (variable name 'a' not containing any checked strings)
-
         var URI = span is """\\my-network-drive\folder\file.txt"""             // Noncompliant
                 || readonlySpan is """\\my-network-drive\folder\file.txt"""    // Noncompliant
                 || simpleString is @"\\my-network-drive/folder/file.txt";      // Noncompliant
@@ -34,12 +30,4 @@ public class TestCases
     {
         bool pathFlag = uris is ["""\\my-network-drive\folder\file.txt"""]; // Noncompliant
     }
-
-    public bool ReturnStement(string uri)
-    {
-        return uri is """\\my-network-drive\folder\file.txt"""; // Compliant (not raising for return statement)
-    }
-
-    public bool ExpressionBody(string uri) =>
-        uri is """\\my-network-drive\folder\file.txt"""; // Compliant (not raising for arrow expression body)
 }

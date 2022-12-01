@@ -44,6 +44,16 @@ namespace Tests.Diagnostics
             var unixChemin = "/my/other/folder"; // Compliant - we ignore unix paths by default
             var webChemin = "http://www.mywebsite.com"; // FN
             var windowsChemin = "c:\\blah\\blah\\blah.txt"; // FN
+
+
+            // The rule only checks the string literals that are [arguments in methods/constructors] or [assignment]
+            bool ReturnStement(string uri)
+            {
+                return uri is "\\my-network-drive\folder\file.txt"; // FN
+            }
+
+            bool ExpressionBody(string uri) =>
+                uri is "\\my-network-drive\folder\file.txt"; // FN
         }
 
         void ValidCases(string s)
