@@ -21,40 +21,19 @@
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class ShiftDynamicNotInteger : ShiftDynamicNotIntegerBase<ExpressionSyntax>
+    public sealed class ShiftDynamicNotInteger : ShiftDynamicNotIntegerBase<SyntaxKind>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        protected override bool ShouldRaise(SemanticModel semanticModel, SyntaxNode left, SyntaxNode right) =>
+            IsObject(left, semanticModel) || !IsConvertibleToInt(right, semanticModel);
 
-        protected override DiagnosticDescriptor Rule { get; } = rule;
+        protected override bool CanBeConvertedTo(SyntaxNode expression, ITypeSymbol type, SemanticModel semanticModel) =>
+            expression.IsKind(SyntaxKind.NothingLiteralExpression) // x >> Nothing will not throw, so ignore
+            || semanticModel.GetTypeInfo(expression).Type.IsAny(KnownType.IntegralNumbers);
 
-        protected override bool ShouldRaise(SemanticModel semanticModel, ExpressionSyntax left, ExpressionSyntax right) =>
-            IsObject(left, semanticModel) ||
-            !IsConvertibleToInt(right, semanticModel);
-
-        protected override bool CanBeConvertedTo(ExpressionSyntax expression, ITypeSymbol type, SemanticModel semanticModel) =>
-            expression.IsKind(SyntaxKind.NothingLiteralExpression) || // x >> Nothing will not throw, so ignore
-            semanticModel.GetTypeInfo(expression).Type.IsAny(KnownType.IntegralNumbers);
-
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckExpressionWithTwoParts<BinaryExpressionSyntax>(c, b => b.Left, b => b.Right),
-                SyntaxKind.LeftShiftExpression,
-                SyntaxKind.RightShiftExpression);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckExpressionWithTwoParts<AssignmentStatementSyntax>(c, b => b.Left, b => b.Right),
-                SyntaxKind.LeftShiftAssignmentStatement,
-                SyntaxKind.RightShiftAssignmentStatement);
-        }
-
-        private static bool IsObject(ExpressionSyntax expression, SemanticModel semanticModel)
-        {
-            var type = semanticModel.GetTypeInfo(expression).Type;
-            return type != null && type.Is(KnownType.System_Object);
-        }
+        private static bool IsObject(SyntaxNode expression, SemanticModel semanticModel) =>
+            semanticModel.GetTypeInfo(expression).Type is { } type
+            && type.Is(KnownType.System_Object);
     }
 }

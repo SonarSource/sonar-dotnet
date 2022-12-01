@@ -34,6 +34,7 @@ public abstract class SyntaxFacade<TSyntaxKind>
 
     public abstract IEnumerable<SyntaxNode> ArgumentExpressions(SyntaxNode node);
     public abstract ImmutableArray<SyntaxNode> AssignmentTargets(SyntaxNode assignment);
+    public abstract SyntaxNode AssignmentLeft(SyntaxNode assignment);
     public abstract SyntaxNode AssignmentRight(SyntaxNode assignment);
     public abstract SyntaxNode BinaryExpressionLeft(SyntaxNode binaryExpression);
     public abstract SyntaxNode BinaryExpressionRight(SyntaxNode binaryExpression);

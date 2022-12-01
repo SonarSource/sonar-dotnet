@@ -52,4 +52,8 @@ internal sealed class VisualBasicSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind
     public SyntaxKind SimpleMemberAccessExpression => SyntaxKind.SimpleMemberAccessExpression;
     public SyntaxKind StringLiteralExpression => SyntaxKind.StringLiteralExpression;
     public SyntaxKind[] TypeDeclaration => new[] { SyntaxKind.ClassBlock, SyntaxKind.StructureBlock, SyntaxKind.InterfaceBlock, SyntaxKind.EnumBlock };
+    public SyntaxKind LeftShiftExpression => SyntaxKind.LeftShiftExpression;
+    public SyntaxKind RightShiftExpression => SyntaxKind.RightShiftExpression;
+    public SyntaxKind LeftShiftAssignmentStatement => SyntaxKind.LeftShiftAssignmentStatement;
+    public SyntaxKind RightShiftAssignmentStatement => SyntaxKind.RightShiftAssignmentStatement;
 }

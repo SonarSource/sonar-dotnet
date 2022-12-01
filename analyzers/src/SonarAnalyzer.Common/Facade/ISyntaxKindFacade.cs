@@ -45,4 +45,8 @@ public interface ISyntaxKindFacade<out TSyntaxKind>
     abstract TSyntaxKind SimpleMemberAccessExpression { get; }
     abstract TSyntaxKind StringLiteralExpression { get; }
     abstract TSyntaxKind[] TypeDeclaration { get; }
+    abstract TSyntaxKind LeftShiftExpression { get; }
+    abstract TSyntaxKind RightShiftExpression { get; }
+    abstract TSyntaxKind LeftShiftAssignmentStatement { get; }
+    abstract TSyntaxKind RightShiftAssignmentStatement { get; }
 }
