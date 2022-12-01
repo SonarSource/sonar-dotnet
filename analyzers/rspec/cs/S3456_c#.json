@@ -1,5 +1,5 @@
 {
-  "title": "\"string.ToCharArray()\" should not be called redundantly",
+  "title": "\"string.ToCharArray()\" and \"ReadOnlySpan\u003cT\u003e.ToArray()\" should not be called redundantly",
   "type": "BUG",
   "status": "ready",
   "remediation": {
