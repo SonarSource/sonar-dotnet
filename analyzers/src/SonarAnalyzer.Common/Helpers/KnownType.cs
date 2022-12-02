@@ -401,6 +401,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Security_Cryptography_DSACryptoServiceProvider = new("System.Security.Cryptography.DSACryptoServiceProvider");
         internal static readonly KnownType System_Security_Cryptography_ECDiffieHellman = new("System.Security.Cryptography.ECDiffieHellman");
         internal static readonly KnownType System_Security_Cryptography_ECDsa = new("System.Security.Cryptography.ECDsa");
+        internal static readonly KnownType System_Security_Cryptography_ECAlgorythm = new("System.Security.Cryptography.ECAlgorithm");
         internal static readonly KnownType System_Security_Cryptography_HashAlgorithm = new("System.Security.Cryptography.HashAlgorithm");
         internal static readonly KnownType System_Security_Cryptography_HMAC = new("System.Security.Cryptography.HMAC");
         internal static readonly KnownType System_Security_Cryptography_HMACMD5 = new("System.Security.Cryptography.HMACMD5");

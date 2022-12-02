@@ -49,7 +49,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly ImmutableArray<KnownType> SystemSecurityCryptographyCurveClasses =
             ImmutableArray.Create(
                 KnownType.System_Security_Cryptography_ECDiffieHellman,
-                KnownType.System_Security_Cryptography_ECDsa);
+                KnownType.System_Security_Cryptography_ECDsa,
+                KnownType.System_Security_Cryptography_ECAlgorythm);
 
         private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
