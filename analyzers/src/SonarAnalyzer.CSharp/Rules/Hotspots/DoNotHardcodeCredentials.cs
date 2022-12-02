@@ -77,8 +77,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 syntaxNode.Initializer?.Value is LiteralExpressionSyntax literalExpression
                 && literalExpression.IsAnyKind(SyntaxKind.StringLiteralExpression, SyntaxKindEx.Utf8StringLiteralExpression)
                 && (syntaxNode.IsDeclarationKnownType(KnownType.System_String, semanticModel) || syntaxNode.IsDeclarationKnownType(KnownType.System_ReadOnlySpan_T, semanticModel));
-
         }
+
         private sealed class AssignmentExpressionBannedWordsFinder : CredentialWordsFinderBase<AssignmentExpressionSyntax>
         {
             public AssignmentExpressionBannedWordsFinder(DoNotHardcodeCredentials analyzer) : base(analyzer) { }

@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Helpers
 
         protected abstract SyntaxToken Token(TLiteralExpressionSyntax literalExpression);
 
-        public virtual string GetStringValue(SyntaxNode node, SemanticModel semanticModel)
+        public string GetStringValue(SyntaxNode node, SemanticModel semanticModel)
         {
             if (node != null)
             {
