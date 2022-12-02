@@ -68,20 +68,25 @@ namespace SonarAnalyzer.Rules.CSharp
             public VariableDeclarationBannedWordsFinder(DoNotHardcodeCredentials analyzer) : base(analyzer) { }
 
             protected override string GetAssignedValue(VariableDeclaratorSyntax syntaxNode, SemanticModel semanticModel) =>
-                syntaxNode.DescendantNodes().FirstOrDefault(x => x is LiteralExpressionSyntax)?.GetStringValue(semanticModel);
+                FindStringLiteralInVariableDeclaration(syntaxNode)?.GetStringValue(semanticModel);
 
             protected override string GetVariableName(VariableDeclaratorSyntax syntaxNode) =>
                 syntaxNode.Identifier.ValueText;
 
-            protected override bool ShouldHandle(VariableDeclaratorSyntax syntaxNode, SemanticModel semanticModel)
-            {
-                var literalExpression = syntaxNode.DescendantNodes().FirstOrDefault(x => x is LiteralExpressionSyntax);
-                return literalExpression is LiteralExpressionSyntax
+            protected override bool ShouldHandle(VariableDeclaratorSyntax syntaxNode, SemanticModel semanticModel) =>
+                FindStringLiteralInVariableDeclaration(syntaxNode) is { } literalExpression
                 && literalExpression.IsAnyKind(SyntaxKind.StringLiteralExpression, SyntaxKindEx.Utf8StringLiteralExpression)
                 && (syntaxNode.IsDeclarationKnownType(KnownType.System_String, semanticModel)
                     || syntaxNode.IsDeclarationKnownType(KnownType.System_ReadOnlySpan_T, semanticModel)
                     || syntaxNode.IsDeclarationKnownType(KnownType.System_Byte_Array, semanticModel));
-            }
+
+            private static LiteralExpressionSyntax FindStringLiteralInVariableDeclaration(VariableDeclaratorSyntax syntaxNode) =>
+                syntaxNode.Initializer?.Value switch
+                {
+                    LiteralExpressionSyntax => (LiteralExpressionSyntax)syntaxNode.Initializer?.Value,
+                    InvocationExpressionSyntax => syntaxNode.Initializer?.Value.DescendantNodes().OfType<LiteralExpressionSyntax>().FirstOrDefault(),
+                    _ => null
+                };
         }
 
         private sealed class AssignmentExpressionBannedWordsFinder : CredentialWordsFinderBase<AssignmentExpressionSyntax>
