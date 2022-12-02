@@ -68,15 +68,20 @@ namespace SonarAnalyzer.Rules.CSharp
             public VariableDeclarationBannedWordsFinder(DoNotHardcodeCredentials analyzer) : base(analyzer) { }
 
             protected override string GetAssignedValue(VariableDeclaratorSyntax syntaxNode, SemanticModel semanticModel) =>
-                syntaxNode.Initializer?.Value.GetStringValue(semanticModel);
+                syntaxNode.DescendantNodes().FirstOrDefault(x => x is LiteralExpressionSyntax)?.GetStringValue(semanticModel);
 
             protected override string GetVariableName(VariableDeclaratorSyntax syntaxNode) =>
                 syntaxNode.Identifier.ValueText;
 
-            protected override bool ShouldHandle(VariableDeclaratorSyntax syntaxNode, SemanticModel semanticModel) =>
-                syntaxNode.Initializer?.Value is LiteralExpressionSyntax literalExpression
+            protected override bool ShouldHandle(VariableDeclaratorSyntax syntaxNode, SemanticModel semanticModel)
+            {
+                var literalExpression = syntaxNode.DescendantNodes().FirstOrDefault(x => x is LiteralExpressionSyntax);
+                return literalExpression is LiteralExpressionSyntax
                 && literalExpression.IsAnyKind(SyntaxKind.StringLiteralExpression, SyntaxKindEx.Utf8StringLiteralExpression)
-                && (syntaxNode.IsDeclarationKnownType(KnownType.System_String, semanticModel) || syntaxNode.IsDeclarationKnownType(KnownType.System_ReadOnlySpan_T, semanticModel));
+                && (syntaxNode.IsDeclarationKnownType(KnownType.System_String, semanticModel)
+                    || syntaxNode.IsDeclarationKnownType(KnownType.System_ReadOnlySpan_T, semanticModel)
+                    || syntaxNode.IsDeclarationKnownType(KnownType.System_Byte_Array, semanticModel));
+            }
         }
 
         private sealed class AssignmentExpressionBannedWordsFinder : CredentialWordsFinderBase<AssignmentExpressionSyntax>
