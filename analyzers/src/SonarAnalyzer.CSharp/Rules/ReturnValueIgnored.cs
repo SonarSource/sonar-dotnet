@@ -23,7 +23,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class ReturnValueIgnored : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S2201";
+        private const string DiagnosticId = "S2201";
         private const string MessageFormat = "Use the return value of method '{0}'.";
 
         private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
@@ -45,8 +45,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var lambda = (LambdaExpressionSyntax)c.Node;
 
-                    if (c.SemanticModel.GetSymbolInfo(lambda).Symbol is not IMethodSymbol symbol
-                        || !symbol.ReturnsVoid)
+                    if (c.SemanticModel.GetSymbolInfo(lambda).Symbol is not IMethodSymbol { ReturnsVoid: true } symbol)
                     {
                         return;
                     }
@@ -61,8 +60,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckExpressionForPureMethod(SyntaxNodeAnalysisContext context, ExpressionSyntax expression)
         {
             if (expression is InvocationExpressionSyntax invocation
-                && context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol invokedMethodSymbol
-                && !invokedMethodSymbol.ReturnsVoid
+                && context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol { ReturnsVoid: false } invokedMethodSymbol
                 && invokedMethodSymbol.Parameters.All(p => p.RefKind == RefKind.None)
                 && IsSideEffectFreeOrPure(invokedMethodSymbol))
             {
