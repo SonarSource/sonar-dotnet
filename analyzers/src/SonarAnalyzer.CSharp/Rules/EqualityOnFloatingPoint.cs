@@ -75,10 +75,8 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static string GetMessageEqualityPart(bool isEquality)
-        {
-            return isEquality ? "equality" : "inequality";
-        }
+        private static string GetMessageEqualityPart(bool isEquality) =>
+            isEquality ? "equality" : "inequality";
 
         private static void CheckEquality(SyntaxNodeAnalysisContext context)
         {
@@ -95,49 +93,27 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static BinaryExpressionSyntax TryGetBinaryExpression(ExpressionSyntax expression)
-        {
-            return expression.RemoveParentheses() as BinaryExpressionSyntax;
-        }
+        private static BinaryExpressionSyntax TryGetBinaryExpression(ExpressionSyntax expression) =>
+            expression.RemoveParentheses() as BinaryExpressionSyntax;
 
-        private static bool IsIndirectInequality(BinaryExpressionSyntax binaryExpression, BinaryExpressionSyntax right,
-            BinaryExpressionSyntax left, SyntaxNodeAnalysisContext context)
-        {
-            return binaryExpression.IsKind(SyntaxKind.LogicalOrExpression) &&
+        private static bool IsIndirectInequality(BinaryExpressionSyntax binaryExpression, BinaryExpressionSyntax right, BinaryExpressionSyntax left, SyntaxNodeAnalysisContext context) =>
+            binaryExpression.IsKind(SyntaxKind.LogicalOrExpression) &&
                    HasAppropriateOperatorsForInequality(right, left) &&
                    HasFloatingType(right.Right, right.Left, context.SemanticModel);
-        }
 
-        private static bool IsIndirectEquality(BinaryExpressionSyntax binaryExpression, BinaryExpressionSyntax right,
-            BinaryExpressionSyntax left, SyntaxNodeAnalysisContext context)
-        {
-            return binaryExpression.IsKind(SyntaxKind.LogicalAndExpression) &&
-                   HasAppropriateOperatorsForEquality(right, left) &&
-                   HasFloatingType(right.Right, right.Left, context.SemanticModel);
-        }
+        private static bool IsIndirectEquality(BinaryExpressionSyntax binaryExpression, BinaryExpressionSyntax right, BinaryExpressionSyntax left, SyntaxNodeAnalysisContext context) =>
+            binaryExpression.IsKind(SyntaxKind.LogicalAndExpression) && HasAppropriateOperatorsForEquality(right, left) && HasFloatingType(right.Right, right.Left, context.SemanticModel);
 
-        private static bool HasFloatingType(ExpressionSyntax right, ExpressionSyntax left, SemanticModel semanticModel)
-        {
-            return IsExpressionFloatingType(right, semanticModel) ||
-                IsExpressionFloatingType(left, semanticModel);
-        }
+        private static bool HasFloatingType(ExpressionSyntax right, ExpressionSyntax left, SemanticModel semanticModel) =>
+            IsExpressionFloatingType(right, semanticModel) || IsExpressionFloatingType(left, semanticModel);
 
-        private static bool IsExpressionFloatingType(ExpressionSyntax expression, SemanticModel semanticModel)
-        {
-            return semanticModel.GetTypeInfo(expression).Type.IsAny(KnownType.FloatingPointNumbers);
-        }
+        private static bool IsExpressionFloatingType(ExpressionSyntax expression, SemanticModel semanticModel) =>
+            semanticModel.GetTypeInfo(expression).Type.IsAny(KnownType.FloatingPointNumbers);
 
-        private static bool HasAppropriateOperatorsForEquality(BinaryExpressionSyntax right, BinaryExpressionSyntax left)
-        {
-            return new[] {right.OperatorToken.Kind(), left.OperatorToken.Kind()}
-                .Intersect(new[] {SyntaxKind.LessThanEqualsToken, SyntaxKind.GreaterThanEqualsToken})
-                .Count() == 2;
-        }
-        private static bool HasAppropriateOperatorsForInequality(BinaryExpressionSyntax right, BinaryExpressionSyntax left)
-        {
-            return new[] { right.OperatorToken.Kind(), left.OperatorToken.Kind() }
-                .Intersect(new[] { SyntaxKind.LessThanToken, SyntaxKind.GreaterThanToken })
-                .Count() == 2;
-        }
+        private static bool HasAppropriateOperatorsForEquality(BinaryExpressionSyntax right, BinaryExpressionSyntax left) =>
+            new[] { right.OperatorToken.Kind(), left.OperatorToken.Kind() }.Intersect(new[] { SyntaxKind.LessThanEqualsToken, SyntaxKind.GreaterThanEqualsToken }).Count() == 2;
+
+        private static bool HasAppropriateOperatorsForInequality(BinaryExpressionSyntax right, BinaryExpressionSyntax left) =>
+            new[] { right.OperatorToken.Kind(), left.OperatorToken.Kind() }.Intersect(new[] { SyntaxKind.LessThanToken, SyntaxKind.GreaterThanToken }).Count() == 2;
     }
 }
