@@ -14,6 +14,12 @@ public class EqualityOnFloatingPoint
     bool IsEpsilon<T>(T value) where T : IFloatingPointIeee754<T>
         => value == T.Epsilon; // Noncompliant
 
+    bool IsPi<T>(T value) where T : IFloatingPointIeee754<T>
+        => value <= T.Pi && ((value >= T.Pi)); // Noncompliant
+
+    bool IsNotE<T>(T value) where T : IFloatingPointIeee754<T>
+        => value > T.E || ((value < T.E)); // Noncompliant
+
     bool AreEqual<T>(T first, T second) where T : IFloatingPointIeee754<T>
         => first == second;    // Noncompliant
 
