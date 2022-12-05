@@ -221,7 +221,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckBouncyCastleKeyGenerationParameters(ITypeSymbol containingType, IObjectCreation objectCreation, SyntaxNodeAnalysisContext c)
         {
-            if (objectCreation.ArgumentList.Get(2) is { }  keyLengthParam
+            if (objectCreation.ArgumentList.Get(2) is { } keyLengthParam
                 && containingType.Is(KnownType.Org_BouncyCastle_Crypto_Parameters_RsaKeyGenerationParameters)
                 && IsInvalidCommonKeyLength(keyLengthParam, c))
             {
