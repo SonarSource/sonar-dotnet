@@ -16,4 +16,7 @@ public class EqualityOnFloatingPoint
 
     bool AreEqual<T>(T first, T second) where T : IFloatingPointIeee754<T>
         => first == second;    // Noncompliant
+
+    bool Equal<T>(T first, T second) where T : IBinaryFloatingPointIeee754<T>
+        => first == second;    // Noncompliant
 }
