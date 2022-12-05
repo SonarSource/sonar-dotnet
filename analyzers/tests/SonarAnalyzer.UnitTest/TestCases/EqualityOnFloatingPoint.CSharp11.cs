@@ -9,7 +9,7 @@ public class EqualityOnFloatingPoint
     //           ^^
 
     bool NFloatEqual(NFloat first, NFloat second)
-        => first == second;    // FN
+        => first == second;    // Noncompliant
 
     bool IsEpsilon<T>(T value) where T : IFloatingPointIeee754<T>
         => value == T.Epsilon; // FN

@@ -369,6 +369,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Runtime_InteropServices_HandleRef = new("System.Runtime.InteropServices.HandleRef");
         internal static readonly KnownType System_Runtime_InteropServices_InterfaceTypeAttribute = new("System.Runtime.InteropServices.InterfaceTypeAttribute");
         internal static readonly KnownType System_Runtime_InteropServices_LibraryImportAttribute = new("System.Runtime.InteropServices.LibraryImportAttribute");
+        internal static readonly KnownType System_Runtime_InteropServices_NFloat = new("System.Runtime.InteropServices.NFloat");
         internal static readonly KnownType System_Runtime_InteropServices_OptionalAttribute = new("System.Runtime.InteropServices.OptionalAttribute");
         internal static readonly KnownType System_Runtime_InteropServices_SafeHandle = new("System.Runtime.InteropServices.SafeHandle");
         internal static readonly KnownType System_Runtime_InteropServices_StructLayoutAttribute = new("System.Runtime.InteropServices.StructLayoutAttribute");
@@ -569,7 +570,8 @@ namespace SonarAnalyzer.Helpers
             ImmutableArray.Create(
                 System_Half,
                 System_Single,
-                System_Double);
+                System_Double,
+                System_Runtime_InteropServices_NFloat);
         internal static readonly ImmutableArray<KnownType> IntegralNumbers =
             ImmutableArray.Create(
                 System_Int16,
