@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -100,10 +101,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var assignment = (AssignmentExpressionSyntax)c.Node;
-                    if (GetPropertyName(assignment.Left) == "KeySize"
-                        && assignment.Left is MemberAccessExpressionSyntax memberAccess
-                        && memberAccess.Expression != null
-                        && c.SemanticModel.GetTypeInfo(memberAccess.Expression).Type is ITypeSymbol containingType)
+                    if (GetPropertyName(assignment.Left) == nameof(AsymmetricAlgorithm.KeySize)
+                        && assignment.Left is MemberAccessExpressionSyntax { Expression: { } expression }
+                        && c.SemanticModel.GetTypeInfo(expression).Type is ITypeSymbol containingType)
                     {
                         // Using the KeySize setter on DSACryptoServiceProvider/RSACryptoServiceProvider does not actually change the underlying key size
                         // https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.dsacryptoserviceprovider.keysize
