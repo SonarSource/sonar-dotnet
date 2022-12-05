@@ -112,9 +112,6 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        public static bool ShouldAnalyze(GeneratedCodeRecognizer generatedCodeRecognizer, SyntaxTree syntaxTree, Compilation c, AnalyzerOptions options) =>
-            PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(PropertiesHelper.GetSettings(options), c.Language) || !syntaxTree.IsGenerated(generatedCodeRecognizer, c);
-
         public static bool IsGenerated(this SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer, Compilation compilation)
         {
             if (tree == null)
@@ -125,13 +122,20 @@ namespace SonarAnalyzer.Helpers
             return cache.GetOrAdd(tree, x => generatedCodeRecognizer.IsGenerated(x));
         }
 
-        internal static bool ShouldAnalyze(SonarAnalysisContext context, GeneratedCodeRecognizer generatedCodeRecognizer, SyntaxTree syntaxTree, Compilation c, AnalyzerOptions options) =>
-            context.ShouldAnalyzeGenerated(c, options) || !syntaxTree.IsGenerated(generatedCodeRecognizer, c);
+        public static bool ShouldAnalyze(GeneratedCodeRecognizer generatedCodeRecognizer, SyntaxTree syntaxTree, Compilation compilation, AnalyzerOptions options) =>
+            SonarAnalysisContext.ShouldAnalyze(syntaxTree, compilation, options)
+            && (PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(PropertiesHelper.GetSettings(options), compilation.Language) || !syntaxTree.IsGenerated(generatedCodeRecognizer, compilation));
 
-        private static bool ShouldAnalyze(CompilationStartAnalysisContext context, GeneratedCodeRecognizer generatedCodeRecognizer, SyntaxTree syntaxTree, Compilation c, AnalyzerOptions options) =>
-            SonarAnalysisContext.ShouldAnalyzeGenerated(context, c, options) || !syntaxTree.IsGenerated(generatedCodeRecognizer, c);
+        public static bool ShouldAnalyze(SonarAnalysisContext context, GeneratedCodeRecognizer generatedCodeRecognizer, SyntaxTree syntaxTree, Compilation compilation, AnalyzerOptions options) =>
+            SonarAnalysisContext.ShouldAnalyze(syntaxTree, compilation, options)
+            && (context.ShouldAnalyzeGenerated(compilation, options) || !syntaxTree.IsGenerated(generatedCodeRecognizer, compilation));
 
-        private static bool ShouldAnalyze(CompilationAnalysisContext context, GeneratedCodeRecognizer generatedCodeRecognizer, SyntaxTree syntaxTree, Compilation c, AnalyzerOptions options) =>
-            SonarAnalysisContext.ShouldAnalyzeGenerated(context, c, options) || !syntaxTree.IsGenerated(generatedCodeRecognizer, c);
+        private static bool ShouldAnalyze(CompilationStartAnalysisContext context, GeneratedCodeRecognizer generatedCodeRecognizer, SyntaxTree syntaxTree, Compilation compilation, AnalyzerOptions options) =>
+            SonarAnalysisContext.ShouldAnalyze(syntaxTree, compilation, options)
+            && (SonarAnalysisContext.ShouldAnalyzeGenerated(context, compilation, options) || !syntaxTree.IsGenerated(generatedCodeRecognizer, compilation));
+
+        private static bool ShouldAnalyze(CompilationAnalysisContext context, GeneratedCodeRecognizer generatedCodeRecognizer, SyntaxTree syntaxTree, Compilation compilation, AnalyzerOptions options) =>
+            SonarAnalysisContext.ShouldAnalyze(syntaxTree, compilation, options)
+            && (SonarAnalysisContext.ShouldAnalyzeGenerated(context, compilation, options) || !syntaxTree.IsGenerated(generatedCodeRecognizer, compilation));
     }
 }
