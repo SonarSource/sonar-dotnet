@@ -12,8 +12,8 @@ public class EqualityOnFloatingPoint
         => first == second;    // Noncompliant
 
     bool IsEpsilon<T>(T value) where T : IFloatingPointIeee754<T>
-        => value == T.Epsilon; // FN
+        => value == T.Epsilon; // Noncompliant
 
     bool AreEqual<T>(T first, T second) where T : IFloatingPointIeee754<T>
-        => first == second;    // FN
+        => first == second;    // Noncompliant
 }

@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.Helpers;
+
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -93,7 +95,11 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static bool IsFloatingPointNumberType(ITypeSymbol type) =>
-            type.IsAny(KnownType.FloatingPointNumbers);
+            type.IsAny(KnownType.FloatingPointNumbers)
+            || (type.Is(KnownType.System_Numerics_IEqualityOperators_TSelf_TOther_TResult)
+                && type is INamedTypeSymbol { TypeArguments: { } typeArguments }
+                && typeArguments.OfType<ITypeParameterSymbol>().Any(typeParameter
+                    => typeParameter.ConstraintTypes.Any(constraint => constraint.DerivesOrImplements(KnownType.System_Numerics_IFloatingPointIeee754_TSelf))));
 
         private static BinaryExpressionSyntax TryGetBinaryExpression(ExpressionSyntax expression) =>
             expression.RemoveParentheses() as BinaryExpressionSyntax;

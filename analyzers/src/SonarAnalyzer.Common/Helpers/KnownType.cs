@@ -338,6 +338,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Nullable_T = new("System.Nullable", "T");
         internal static readonly KnownType System_NullReferenceException = new("System.NullReferenceException");
         internal static readonly KnownType System_Numerics_IEqualityOperators_TSelf_TOther_TResult = new("System.Numerics.IEqualityOperators", "TSelf", "TOther", "TResult");
+        internal static readonly KnownType System_Numerics_IFloatingPointIeee754_TSelf = new("System.Numerics.IFloatingPointIeee754", "TSelf");
         internal static readonly KnownType System_Object = new("System.Object");
         internal static readonly KnownType System_ObsoleteAttribute = new("System.ObsoleteAttribute");
         internal static readonly KnownType System_OutOfMemoryException = new("System.OutOfMemoryException");
