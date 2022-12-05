@@ -5,7 +5,8 @@ using System.Runtime.InteropServices;
 public class EqualityOnFloatingPoint
 {
     bool HalfEqual(Half first, Half second)
-        => first == second;    // FN
+        => first == second;    // Noncompliant {{Do not check floating point equality with exact values, use a range instead.}}
+    //           ^^
 
     bool NFloatEqual(NFloat first, NFloat second)
         => first == second;    // FN

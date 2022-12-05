@@ -289,6 +289,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Globalization_CompareOptions = new("System.Globalization.CompareOptions");
         internal static readonly KnownType System_Globalization_CultureInfo = new("System.Globalization.CultureInfo");
         internal static readonly KnownType System_Guid = new("System.Guid");
+        internal static readonly KnownType System_Half = new("System.Half");
         internal static readonly KnownType System_IAsyncDisposable = new("System.IAsyncDisposable");
         internal static readonly KnownType System_IComparable = new("System.IComparable");
         internal static readonly KnownType System_IComparable_T = new("System.IComparable", "T");
@@ -566,6 +567,7 @@ namespace SonarAnalyzer.Helpers
                 System_Runtime_CompilerServices_CallerMemberNameAttribute);
         internal static readonly ImmutableArray<KnownType> FloatingPointNumbers =
             ImmutableArray.Create(
+                System_Half,
                 System_Single,
                 System_Double);
         internal static readonly ImmutableArray<KnownType> IntegralNumbers =
