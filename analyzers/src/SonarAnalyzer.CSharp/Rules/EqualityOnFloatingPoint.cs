@@ -81,9 +81,8 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var equals = (BinaryExpressionSyntax)context.Node;
 
-            if (context.SemanticModel.GetSymbolInfo(equals).Symbol is IMethodSymbol equalitySymbol
-                && equalitySymbol.ContainingType != null
-                && IsFloatingPointNumberType(equalitySymbol.ContainingType)
+            if (context.SemanticModel.GetSymbolInfo(equals).Symbol is IMethodSymbol { ContainingType: { } container } equalitySymbol
+                && IsFloatingPointNumberType(container)
                 && EqualityOperators.Contains(equalitySymbol.Name))
             {
                 var messageEqualityPart = GetMessageEqualityPart(equals.IsKind(SyntaxKind.EqualsExpression));
