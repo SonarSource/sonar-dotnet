@@ -96,8 +96,8 @@ namespace SonarAnalyzer.Rules.CSharp
             || (type.Is(KnownType.System_Numerics_IEqualityOperators_TSelf_TOther_TResult) // The operator originates from a virtual static member
                 && type is INamedTypeSymbol { TypeArguments: { } typeArguments }
                 && typeArguments.OfType<ITypeParameterSymbol>().Any(IsFloatingPointNumberType))
-            || (type is ITypeParameterSymbol typeParameter
-                && typeParameter.ConstraintTypes.Any(constraint => constraint.DerivesOrImplements(KnownType.System_Numerics_IFloatingPointIeee754_TSelf)));
+            || (type is ITypeParameterSymbol { ConstraintTypes: { } constraintTypes }
+                && constraintTypes.Any(constraint => constraint.DerivesOrImplements(KnownType.System_Numerics_IFloatingPointIeee754_TSelf)));
 
         private static BinaryExpressionSyntax TryGetBinaryExpression(ExpressionSyntax expression) =>
             expression.RemoveParentheses() as BinaryExpressionSyntax;
