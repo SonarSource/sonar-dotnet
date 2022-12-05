@@ -64,9 +64,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var isEquality = IsIndirectEquality(binaryExpression, right, left, context.SemanticModel);
+            var isEquality = IsIndirectEquality(context.SemanticModel, binaryExpression, right, left);
 
-            if (isEquality || IsIndirectInequality(binaryExpression, right, left, context.SemanticModel))
+            if (isEquality || IsIndirectInequality(context.SemanticModel, binaryExpression, right, left))
             {
                 var messageEqualityPart = GetMessageEqualityPart(isEquality);
 
@@ -81,9 +81,9 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var equals = (BinaryExpressionSyntax)context.Node;
 
-            if (context.SemanticModel.GetSymbolInfo(equals).Symbol is IMethodSymbol { ContainingType: { } container } equalitySymbol
+            if (context.SemanticModel.GetSymbolInfo(equals).Symbol is IMethodSymbol { ContainingType: { } container, Name: { } equalitySymbolName }
                 && IsFloatingPointNumberType(container)
-                && EqualityOperators.Contains(equalitySymbol.Name))
+                && EqualityOperators.Contains(equalitySymbolName))
             {
                 var messageEqualityPart = GetMessageEqualityPart(equals.IsKind(SyntaxKind.EqualsExpression));
 
@@ -102,20 +102,20 @@ namespace SonarAnalyzer.Rules.CSharp
         private static BinaryExpressionSyntax TryGetBinaryExpression(ExpressionSyntax expression) =>
             expression.RemoveParentheses() as BinaryExpressionSyntax;
 
-        private static bool IsIndirectInequality(BinaryExpressionSyntax binaryExpression, BinaryExpressionSyntax right, BinaryExpressionSyntax left, SemanticModel semanticModel) =>
+        private static bool IsIndirectInequality(SemanticModel semanticModel, BinaryExpressionSyntax binaryExpression, BinaryExpressionSyntax right, BinaryExpressionSyntax left) =>
             binaryExpression.IsKind(SyntaxKind.LogicalOrExpression)
                 && HasAppropriateOperatorsForInequality(right, left)
-                && HasFloatingType(right.Right, right.Left, semanticModel);
+                && HasFloatingType(semanticModel, right.Right, right.Left);
 
-        private static bool IsIndirectEquality(BinaryExpressionSyntax binaryExpression, BinaryExpressionSyntax right, BinaryExpressionSyntax left, SemanticModel semanticModel) =>
+        private static bool IsIndirectEquality(SemanticModel semanticModel, BinaryExpressionSyntax binaryExpression, BinaryExpressionSyntax right, BinaryExpressionSyntax left) =>
             binaryExpression.IsKind(SyntaxKind.LogicalAndExpression)
                 && HasAppropriateOperatorsForEquality(right, left)
-                && HasFloatingType(right.Right, right.Left, semanticModel);
+                && HasFloatingType(semanticModel, right.Right, right.Left);
 
-        private static bool HasFloatingType(ExpressionSyntax right, ExpressionSyntax left, SemanticModel semanticModel) =>
-            IsExpressionFloatingType(right, semanticModel) || IsExpressionFloatingType(left, semanticModel);
+        private static bool HasFloatingType(SemanticModel semanticModel, ExpressionSyntax right, ExpressionSyntax left) =>
+            IsExpressionFloatingType(semanticModel, right) || IsExpressionFloatingType(semanticModel, left);
 
-        private static bool IsExpressionFloatingType(ExpressionSyntax expression, SemanticModel semanticModel) =>
+        private static bool IsExpressionFloatingType(SemanticModel semanticModel, ExpressionSyntax expression) =>
             IsFloatingPointNumberType(semanticModel.GetTypeInfo(expression).Type);
 
         private static bool HasAppropriateOperatorsForEquality(BinaryExpressionSyntax right, BinaryExpressionSyntax left) =>
