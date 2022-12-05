@@ -164,5 +164,28 @@ namespace Tests.Diagnostics
             });
             return null; // Noncompliant
         }
+
+        List<string> NoncompliantMethodWithSecondaryLocation(string str)
+        {
+            switch (str)
+            {
+                case "First":
+                    return null; // Noncompliant
+                case "Second":
+                    return new List<string> { };
+                default:
+                    return null; // Secondary
+            }
+        }
+    }
+}
+
+// Reproducer for #6494 https://github.com/SonarSource/sonar-dotnet/issues/6494
+namespace Issue_6494
+{
+    class MyClass
+    {
+        public IEnumerable<string> this[int i] => null; // FN
+        public static implicit operator List<int>(MyClass c) => null; // FN
     }
 }

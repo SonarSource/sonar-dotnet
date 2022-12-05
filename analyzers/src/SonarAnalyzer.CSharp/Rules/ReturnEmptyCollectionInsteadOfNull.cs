@@ -42,28 +42,25 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void ReportIfReturnsNullOrDefault(SyntaxNodeAnalysisContext context)
         {
-            var expressionBody = GetExpressionBody(context.Node);
-            if (expressionBody is not null)
+            if (GetExpressionBody(context.Node) is { } expressionBody)
             {
                 var nullOrDefaultLiterals = GetNullOrDefaultExpressions(expressionBody.Expression)
                     .Select(statement => statement.GetLocation())
                     .ToList();
 
-                if (nullOrDefaultLiterals.Count > 0 && IsReturningCollection(context))
-                {
-                    context.ReportIssue(Rule.CreateDiagnostic(context.Compilation, nullOrDefaultLiterals[0], additionalLocations: nullOrDefaultLiterals.Skip(1)));
-                }
-
-                return;
+                ReportIfAny(nullOrDefaultLiterals);
             }
-
-            var body = GetBody(context.Node);
-            if (body is not null)
+            else if (GetBody(context.Node) is { } body)
             {
                 var nullOrDefaultLiterals = GetReturnNullOrDefaultExpressions(body)
                     .Select(returnStatement => returnStatement.GetLocation())
                     .ToList();
 
+                ReportIfAny(nullOrDefaultLiterals);
+            }
+
+            void ReportIfAny(List<Location> nullOrDefaultLiterals)
+            {
                 if (nullOrDefaultLiterals.Count > 0 && IsReturningCollection(context))
                 {
                     context.ReportIssue(Rule.CreateDiagnostic(context.Compilation, nullOrDefaultLiterals[0], additionalLocations: nullOrDefaultLiterals.Skip(1)));
@@ -86,7 +83,7 @@ namespace SonarAnalyzer.Rules.CSharp
             node switch
             {
                 MethodDeclarationSyntax method => method.ExpressionBody,
-                PropertyDeclarationSyntax property => property.ExpressionBody ?? GetGetAccessor(property)?.ExpressionBody(),
+                PropertyDeclarationSyntax property => property.ExpressionBody ?? GetAccessor(property)?.ExpressionBody(),
                 var _ when LocalFunctionStatementSyntaxWrapper.IsInstance(node) => ((LocalFunctionStatementSyntaxWrapper)node).ExpressionBody,
                 OperatorDeclarationSyntax @operator => @operator.ExpressionBody,
                 _ => null,
@@ -95,14 +92,13 @@ namespace SonarAnalyzer.Rules.CSharp
         private static BlockSyntax GetBody(SyntaxNode node) =>
             node switch
             {
-                MethodDeclarationSyntax method => method.Body,
-                PropertyDeclarationSyntax property => GetGetAccessor(property)?.Body,
+                BaseMethodDeclarationSyntax method => method.Body,
+                PropertyDeclarationSyntax property => GetAccessor(property)?.Body,
                 var _ when LocalFunctionStatementSyntaxWrapper.IsInstance(node) => ((LocalFunctionStatementSyntaxWrapper)node).Body,
-                OperatorDeclarationSyntax @operator => @operator.Body,
                 _ => null,
             };
 
-        private static AccessorDeclarationSyntax GetGetAccessor(PropertyDeclarationSyntax property) =>
+        private static AccessorDeclarationSyntax GetAccessor(PropertyDeclarationSyntax property) =>
             property.AccessorList?.Accessors.FirstOrDefault(a => a.IsKind(SyntaxKind.GetAccessorDeclaration));
 
         private static IEnumerable<SyntaxNode> GetReturnNullOrDefaultExpressions(SyntaxNode methodBlock) =>
