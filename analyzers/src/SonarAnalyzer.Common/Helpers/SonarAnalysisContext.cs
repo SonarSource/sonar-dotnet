@@ -39,14 +39,13 @@ namespace SonarAnalyzer.Helpers
         public delegate bool TryGetValueDelegate<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value);
 
         private const string SonarProjectConfigFileName = "SonarProjectConfig.xml";
-        private static readonly Regex WebConfigRegex = new Regex(@"[\\\/]web\.([^\\\/]+\.)?config$", RegexOptions.IgnoreCase);
-        private static readonly Regex AppSettingsRegex = new Regex(@"[\\\/]appsettings\.([^\\\/]+\.)?json$", RegexOptions.IgnoreCase);
+        private static readonly Regex WebConfigRegex = new(@"[\\\/]web\.([^\\\/]+\.)?config$", RegexOptions.IgnoreCase);
+        private static readonly Regex AppSettingsRegex = new(@"[\\\/]appsettings\.([^\\\/]+\.)?json$", RegexOptions.IgnoreCase);
 
         private static readonly SourceTextValueProvider<bool> ShouldAnalyzeGeneratedCS = CreateAnalyzeGeneratedProvider(LanguageNames.CSharp);
         private static readonly SourceTextValueProvider<bool> ShouldAnalyzeGeneratedVB = CreateAnalyzeGeneratedProvider(LanguageNames.VisualBasic);
-        private static readonly Lazy<ProjectConfigReader> EmptyProjectConfig = new Lazy<ProjectConfigReader>(() => new ProjectConfigReader(null, null));
-        private static readonly SourceTextValueProvider<ProjectConfigReader> ProjectConfigProvider =
-            new SourceTextValueProvider<ProjectConfigReader>(x => new ProjectConfigReader(x, SonarProjectConfigFileName));
+        private static readonly Lazy<ProjectConfigReader> EmptyProjectConfig = new(() => new ProjectConfigReader(null, null));
+        private static readonly SourceTextValueProvider<ProjectConfigReader> ProjectConfigProvider = new(x => new ProjectConfigReader(x, SonarProjectConfigFileName));
 
         private readonly AnalysisContext context;
         private readonly IEnumerable<DiagnosticDescriptor> supportedDiagnostics;
@@ -183,8 +182,7 @@ namespace SonarAnalyzer.Helpers
                 : projectType == ProjectType.Test;  // Scanner >= 5.1 does authoritative decision that we follow
         }
 
-        private static SourceTextValueProvider<bool> CreateAnalyzeGeneratedProvider(string language) =>
-            new SourceTextValueProvider<bool>(x => PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(ParseXmlSettings(x), language));
+        private static SourceTextValueProvider<bool> CreateAnalyzeGeneratedProvider(string language) => new(x => PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(ParseXmlSettings(x), language));
 
         private static IEnumerable<XElement> ParseXmlSettings(SourceText sourceText)
         {
