@@ -83,7 +83,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (context.SemanticModel.GetSymbolInfo(equals).Symbol is IMethodSymbol equalitySymbol
                 && equalitySymbol.ContainingType != null
-                && equalitySymbol.ContainingType.IsAny(KnownType.FloatingPointNumbers)
+                && IsFloatingPointNumberType(equalitySymbol.ContainingType)
                 && EqualityOperators.Contains(equalitySymbol.Name))
             {
                 var messageEqualityPart = GetMessageEqualityPart(equals.IsKind(SyntaxKind.EqualsExpression));
@@ -91,6 +91,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 context.ReportIssue(Diagnostic.Create(rule, equals.OperatorToken.GetLocation(), messageEqualityPart));
             }
         }
+
+        private static bool IsFloatingPointNumberType(ITypeSymbol type) =>
+            type.IsAny(KnownType.FloatingPointNumbers);
 
         private static BinaryExpressionSyntax TryGetBinaryExpression(ExpressionSyntax expression) =>
             expression.RemoveParentheses() as BinaryExpressionSyntax;
@@ -109,7 +112,7 @@ namespace SonarAnalyzer.Rules.CSharp
             IsExpressionFloatingType(right, semanticModel) || IsExpressionFloatingType(left, semanticModel);
 
         private static bool IsExpressionFloatingType(ExpressionSyntax expression, SemanticModel semanticModel) =>
-            semanticModel.GetTypeInfo(expression).Type.IsAny(KnownType.FloatingPointNumbers);
+            IsFloatingPointNumberType(semanticModel.GetTypeInfo(expression).Type);
 
         private static bool HasAppropriateOperatorsForEquality(BinaryExpressionSyntax right, BinaryExpressionSyntax left) =>
             new[] { right.OperatorToken.Kind(), left.OperatorToken.Kind() }.Intersect(new[] { SyntaxKind.LessThanEqualsToken, SyntaxKind.GreaterThanEqualsToken }).Count() == 2;
