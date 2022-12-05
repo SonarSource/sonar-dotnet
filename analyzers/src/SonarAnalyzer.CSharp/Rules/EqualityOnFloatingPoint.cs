@@ -119,9 +119,11 @@ namespace SonarAnalyzer.Rules.CSharp
             IsFloatingPointNumberType(semanticModel.GetTypeInfo(expression).Type);
 
         private static bool HasAppropriateOperatorsForEquality(BinaryExpressionSyntax right, BinaryExpressionSyntax left) =>
-            new[] { right.OperatorToken.Kind(), left.OperatorToken.Kind() }.Intersect(new[] { SyntaxKind.LessThanEqualsToken, SyntaxKind.GreaterThanEqualsToken }).Count() == 2;
+            (right.OperatorToken.Kind() is SyntaxKind.LessThanEqualsToken && left.OperatorToken.Kind() is SyntaxKind.GreaterThanEqualsToken)
+            || (right.OperatorToken.Kind() is SyntaxKind.GreaterThanEqualsToken && left.OperatorToken.Kind() is SyntaxKind.LessThanEqualsToken);
 
         private static bool HasAppropriateOperatorsForInequality(BinaryExpressionSyntax right, BinaryExpressionSyntax left) =>
-            new[] { right.OperatorToken.Kind(), left.OperatorToken.Kind() }.Intersect(new[] { SyntaxKind.LessThanToken, SyntaxKind.GreaterThanToken }).Count() == 2;
+            (right.OperatorToken.Kind() is SyntaxKind.LessThanToken && left.OperatorToken.Kind() is SyntaxKind.GreaterThanToken)
+            || (right.OperatorToken.Kind() is SyntaxKind.GreaterThanToken && left.OperatorToken.Kind() is SyntaxKind.LessThanToken);
     }
 }
