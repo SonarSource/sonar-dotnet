@@ -64,42 +64,41 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static IEnumerable<IMethodSymbol> GetCollidingMembers(ITypeSymbol interfaceSymbol)
         {
-            var interfacesToCheck = interfaceSymbol.Interfaces;
+            var implementedInterfaces = interfaceSymbol.Interfaces;
 
             var membersFromDerivedInterface = interfaceSymbol.GetMembers().OfType<IMethodSymbol>().ToList();
 
-            for (var i = 0; i < interfacesToCheck.Length; i++)
+            for (var i = 0; i < implementedInterfaces.Length; i++)
             {
-                var notRedefinedMembersFromInterface = interfacesToCheck[i].GetMembers()
+                var notRedefinedMembersFromInterface = implementedInterfaces[i]
+                    .GetMembers()
                     .OfType<IMethodSymbol>()
-                    .Where(method =>
-                        !method.IsStatic &&
-                        method.DeclaredAccessibility != Accessibility.Private &&
-                        !membersFromDerivedInterface.Any(redefinedMember => AreCollidingMethods(method, redefinedMember)));
+                    .Where(method => method.DeclaredAccessibility != Accessibility.Private
+                                     && !membersFromDerivedInterface.Any(redefinedMember => AreCollidingMethods(method, redefinedMember)));
 
-                foreach (var notRedefinedMemberFromInterface1 in notRedefinedMembersFromInterface)
+                var collidingMembers = notRedefinedMembersFromInterface.SelectMany(member => GetCollidingMembersForMember(member, implementedInterfaces.Skip(i + 1)));
+
+                foreach (var collidingMember in collidingMembers)
                 {
-                    for (var j = i + 1; j < interfacesToCheck.Length; j++)
-                    {
-                        var collidingMembersFromInterface2 = interfacesToCheck[j]
-                            .GetMembers(notRedefinedMemberFromInterface1.Name)
-                            .OfType<IMethodSymbol>()
-                            .Where(IsNotEventRemoveAccessor)
-                            .Where(methodSymbol2 => AreCollidingMethods(notRedefinedMemberFromInterface1, methodSymbol2));
-
-                        foreach (var collidingMember in collidingMembersFromInterface2)
-                        {
-                            yield return collidingMember;
-                        }
-                    }
+                    yield return collidingMember;
                 }
+
+                IEnumerable<IMethodSymbol> GetCollidingMembersForMember(IMethodSymbol member, IEnumerable<INamedTypeSymbol> interfaces) =>
+                    interfaces.SelectMany(x => GetCollidingMembersForMemberAndInterface(member, x));
+
+                IEnumerable<IMethodSymbol> GetCollidingMembersForMemberAndInterface(IMethodSymbol member, INamedTypeSymbol interfaceToCheck) =>
+                    interfaceToCheck
+                        .GetMembers(member.Name)
+                        .OfType<IMethodSymbol>()
+                        .Where(IsNotEventRemoveAccessor)
+                        .Where(x => AreCollidingMethods(member, x));
             }
         }
 
-        private static bool IsNotEventRemoveAccessor(IMethodSymbol methodSymbol2) =>
+        private static bool IsNotEventRemoveAccessor(IMethodSymbol methodSymbol) =>
             // we only want to report on events once, so we are not collecting the "remove" accessors,
             // and handle the "add" accessor reporting separately in <see cref="GetMemberDisplayName"/>
-            methodSymbol2.MethodKind != MethodKind.EventRemove;
+            methodSymbol.MethodKind != MethodKind.EventRemove;
 
         private static string GetIssueMessageText(IEnumerable<IMethodSymbol> collidingMembers, SemanticModel semanticModel, int spanStart)
         {
@@ -145,10 +144,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool AreCollidingMethods(IMethodSymbol methodSymbol1, IMethodSymbol methodSymbol2)
         {
-            if (methodSymbol1.Name != methodSymbol2.Name ||
-                methodSymbol1.MethodKind != methodSymbol2.MethodKind ||
-                methodSymbol1.Parameters.Length != methodSymbol2.Parameters.Length ||
-                methodSymbol1.Arity != methodSymbol2.Arity)
+            if (methodSymbol1.Name != methodSymbol2.Name
+                || methodSymbol1.MethodKind != methodSymbol2.MethodKind
+                || methodSymbol1.Parameters.Length != methodSymbol2.Parameters.Length
+                || methodSymbol1.Arity != methodSymbol2.Arity)
             {
                 return false;
             }
@@ -158,8 +157,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 var param1 = methodSymbol1.Parameters[i];
                 var param2 = methodSymbol2.Parameters[i];
 
-                if (param1.RefKind != param2.RefKind ||
-                    !object.Equals(param1.Type, param2.Type))
+                if (param1.RefKind != param2.RefKind
+                    || !Equals(param1.Type, param2.Type))
                 {
                     return false;
                 }
