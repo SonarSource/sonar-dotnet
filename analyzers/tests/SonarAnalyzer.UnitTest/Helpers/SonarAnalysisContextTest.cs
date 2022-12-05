@@ -26,7 +26,7 @@ using SonarAnalyzer.UnitTest.Rules;
 namespace SonarAnalyzer.UnitTest.Helpers
 {
     [TestClass]
-    public class SonarAnalysisContextTest
+    public partial class SonarAnalysisContextTest
     {
         private const string MainTag = "MainSourceScope";
         private const string TestTag = "TestSourceScope";
