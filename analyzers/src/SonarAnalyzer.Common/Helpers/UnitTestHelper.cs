@@ -89,7 +89,9 @@ namespace SonarAnalyzer.Helpers
             method.AnyAttributeDerivesFromOrImplementsAny(KnownTestMethodAttributes);
 
         public static bool HasExpectedExceptionAttribute(this IMethodSymbol method) =>
-            method.GetAttributes().Any(a => a.AttributeClass.IsAny(KnownExpectedExceptionAttributes));
+            method.GetAttributes().Any(a =>
+                a.AttributeClass.IsAny(KnownExpectedExceptionAttributes)
+                || a.AttributeClass.DerivesFrom(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_ExpectedExceptionBaseAttribute));
 
         public static bool HasAssertionInAttribute(this IMethodSymbol method) =>
             !NoExpectedResultTestMethodReturnTypes.Any(method.ReturnType.Is)

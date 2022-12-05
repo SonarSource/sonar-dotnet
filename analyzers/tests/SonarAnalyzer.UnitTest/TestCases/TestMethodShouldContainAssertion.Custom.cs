@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace CustomTests
 {
     using TestFramework;
+    using TestFramework.Attributes;
 
     [TestClass]
     public class Program
@@ -47,6 +48,13 @@ namespace CustomTests
         [TestMethod]
         public void TestMethod7() => // Noncompliant, attribute must be on the method itself
             AttributedType.AttributeOnType();
+
+        [TestMethod]
+        [DerivedExpectedException]
+        public void TestMethod8() // Compliant
+        {
+            var x = 42;
+        }
     }
 }
 
@@ -82,4 +90,5 @@ namespace TestFramework.Attributes
 {
     public class AssertionMethodAttribute : Attribute { }
     public class NotAssertionMethodAttribute : Attribute { } // AssertionMethodAttribute doesn't count as an assertion method attribute
+    public class DerivedExpectedExceptionAttribute : ExpectedExceptionBaseAttribute { protected override void Verify(Exception exception) { } }
 }
