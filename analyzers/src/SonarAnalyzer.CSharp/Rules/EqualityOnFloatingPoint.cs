@@ -64,9 +64,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var isEquality = IsIndirectEquality(binaryExpression, right, left, context);
+            var isEquality = IsIndirectEquality(binaryExpression, right, left, context.SemanticModel);
 
-            if (isEquality || IsIndirectInequality(binaryExpression, right, left, context))
+            if (isEquality || IsIndirectInequality(binaryExpression, right, left, context.SemanticModel))
             {
                 var messageEqualityPart = GetMessageEqualityPart(isEquality);
 
@@ -103,12 +103,12 @@ namespace SonarAnalyzer.Rules.CSharp
         private static BinaryExpressionSyntax TryGetBinaryExpression(ExpressionSyntax expression) =>
             expression.RemoveParentheses() as BinaryExpressionSyntax;
 
-        private static bool IsIndirectInequality(BinaryExpressionSyntax binaryExpression, BinaryExpressionSyntax right, BinaryExpressionSyntax left, SyntaxNodeAnalysisContext context) =>
+        private static bool IsIndirectInequality(BinaryExpressionSyntax binaryExpression, BinaryExpressionSyntax right, BinaryExpressionSyntax left, SemanticModel semanticModel) =>
             binaryExpression.IsKind(SyntaxKind.LogicalOrExpression)
                 && HasAppropriateOperatorsForInequality(right, left)
-                && HasFloatingType(right.Right, right.Left, context.SemanticModel);
+                && HasFloatingType(right.Right, right.Left, semanticModel);
 
-        private static bool IsIndirectEquality(BinaryExpressionSyntax binaryExpression, BinaryExpressionSyntax right, BinaryExpressionSyntax left, SyntaxNodeAnalysisContext context) =>
+        private static bool IsIndirectEquality(BinaryExpressionSyntax binaryExpression, BinaryExpressionSyntax right, BinaryExpressionSyntax left, SemanticModel semanticModel) =>
             binaryExpression.IsKind(SyntaxKind.LogicalAndExpression)
                 && HasAppropriateOperatorsForEquality(right, left)
                 && HasFloatingType(right.Right, right.Left, context.SemanticModel);
