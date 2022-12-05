@@ -110,7 +110,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsIndirectEquality(BinaryExpressionSyntax binaryExpression, BinaryExpressionSyntax right, BinaryExpressionSyntax left, SemanticModel semanticModel) =>
             binaryExpression.IsKind(SyntaxKind.LogicalAndExpression)
                 && HasAppropriateOperatorsForEquality(right, left)
-                && HasFloatingType(right.Right, right.Left, context.SemanticModel);
+                && HasFloatingType(right.Right, right.Left, semanticModel);
 
         private static bool HasFloatingType(ExpressionSyntax right, ExpressionSyntax left, SemanticModel semanticModel) =>
             IsExpressionFloatingType(right, semanticModel) || IsExpressionFloatingType(left, semanticModel);
