@@ -96,7 +96,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsFloatingPointNumberType(ITypeSymbol type) =>
             type.IsAny(KnownType.FloatingPointNumbers)
-            || (type.Is(KnownType.System_Numerics_IEqualityOperators_TSelf_TOther_TResult)
+            || (type.Is(KnownType.System_Numerics_IEqualityOperators_TSelf_TOther_TResult) // The operator originates from a virtual static member
                 && type is INamedTypeSymbol { TypeArguments: { } typeArguments }
                 && typeArguments.OfType<ITypeParameterSymbol>().Any(typeParameter
                     => typeParameter.ConstraintTypes.Any(constraint => constraint.DerivesOrImplements(KnownType.System_Numerics_IFloatingPointIeee754_TSelf))));
