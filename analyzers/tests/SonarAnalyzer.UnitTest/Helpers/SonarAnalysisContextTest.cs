@@ -446,12 +446,12 @@ namespace SonarAnalyzer.UnitTest.Helpers
         }
 
         [TestMethod]
-        public void ShouldAnalyze_NoData() // E.g. first scan or using old scanner version
+        public void IsUnchanged_NoData() // E.g. first scan or using old scanner version
         {
             var compiler = new SnippetCompiler("class Data { }", TestHelper.ProjectTypeReference(ProjectType.Product));
             var sut = new SonarAnalysisContext(new DummyContext(), Enumerable.Empty<DiagnosticDescriptor>());
 
-            var result = sut.ShouldAnalyze(compiler.SyntaxTree, compiler.SemanticModel.Compilation, new AnalyzerOptions(ImmutableArray<AdditionalText>.Empty));
+            var result = sut.IsUnchanged(compiler.SyntaxTree, compiler.SemanticModel.Compilation, new AnalyzerOptions(ImmutableArray<AdditionalText>.Empty));
 
             result.Should().BeTrue();
         }

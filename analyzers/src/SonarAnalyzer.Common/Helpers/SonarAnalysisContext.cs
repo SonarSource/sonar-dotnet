@@ -101,8 +101,8 @@ namespace SonarAnalyzer.Helpers
                                          AnalyzerOptions options) =>
             ShouldAnalyzeGenerated(tryGetValue, compilation, options) || !syntaxTree.IsGenerated(generatedCodeRecognizer, compilation);
 
-        public bool ShouldAnalyze(SyntaxTree syntaxTree, Compilation compilation, AnalyzerOptions options) =>
-            !UnchangedFilesCache.GetValue(compilation, _ => CreateUnchangedFilesHashSet(options)).Contains(syntaxTree.FilePath);
+        public bool IsUnchanged(SyntaxTree syntaxTree, Compilation compilation, AnalyzerOptions options) =>
+            UnchangedFilesCache.GetValue(compilation, _ => CreateUnchangedFilesHashSet(options)).Contains(syntaxTree.FilePath);
 
         private ImmutableHashSet<string> CreateUnchangedFilesHashSet(AnalyzerOptions options) =>
             ImmutableHashSet.Create(StringComparer.OrdinalIgnoreCase, ProjectConfiguration(options).AnalysisConfig.UnchangedFiles());
