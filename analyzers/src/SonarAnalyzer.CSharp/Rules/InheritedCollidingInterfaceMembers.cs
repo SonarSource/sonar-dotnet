@@ -94,14 +94,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 IEnumerable<IMethodSymbol> GetCollidingMembersForMember(IMethodSymbol member, IEnumerable<INamedTypeSymbol> interfaces) =>
-                    interfaces.SelectMany(i => GetCollidingMembersForMemberAndInterface(member, i));
+                    interfaces.SelectMany(x => GetCollidingMembersForMemberAndInterface(member, x));
 
                 IEnumerable<IMethodSymbol> GetCollidingMembersForMemberAndInterface(IMethodSymbol member, INamedTypeSymbol interfaceToCheck) =>
                     interfaceToCheck
                         .GetMembers(member.Name)
                         .OfType<IMethodSymbol>()
                         .Where(IsNotEventRemoveAccessor)
-                        .Where(methodSymbol => AreCollidingMethods(member, methodSymbol));
+                        .Where(x => AreCollidingMethods(member, x));
             }
         }
 
