@@ -26,7 +26,7 @@ namespace SonarAnalyzer.Helpers
 {
     internal static class DiagnosticAnalyzerContextHelper
     {
-        private static readonly ConditionalWeakTable<Compilation, ConcurrentDictionary<SyntaxTree, bool>> Cache = new ConditionalWeakTable<Compilation, ConcurrentDictionary<SyntaxTree, bool>>();
+        private static readonly ConditionalWeakTable<Compilation, ConcurrentDictionary<SyntaxTree, bool>> GeneratedCodeCache = new();
 
         public static void RegisterSyntaxNodeActionInNonGenerated<TLanguageKindEnum>(this SonarAnalysisContext context,
                                                                                      GeneratedCodeRecognizer generatedCodeRecognizer,
@@ -125,7 +125,7 @@ namespace SonarAnalyzer.Helpers
             {
                 return false;
             }
-            var cache = Cache.GetOrCreateValue(compilation);    // This is locking if the compilation is not present in the Cache.
+            var cache = GeneratedCodeCache.GetOrCreateValue(compilation);
             return cache.GetOrAdd(tree, generatedCodeRecognizer.IsGenerated);
         }
     }
