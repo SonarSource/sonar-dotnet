@@ -19,6 +19,7 @@
  */
 
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using Microsoft.CodeAnalysis.Text;
@@ -46,6 +47,7 @@ namespace SonarAnalyzer.Helpers
         private static readonly SourceTextValueProvider<bool> ShouldAnalyzeGeneratedVB = CreateAnalyzeGeneratedProvider(LanguageNames.VisualBasic);
         private static readonly Lazy<ProjectConfigReader> EmptyProjectConfig = new(() => new ProjectConfigReader(null, null));
         private static readonly SourceTextValueProvider<ProjectConfigReader> ProjectConfigProvider = new(x => new ProjectConfigReader(x, SonarProjectConfigFileName));
+        private static readonly ConditionalWeakTable<Compilation, ImmutableHashSet<string>> UnchangedFilesCache = new();
 
         private readonly AnalysisContext context;
         private readonly IEnumerable<DiagnosticDescriptor> supportedDiagnostics;
@@ -98,6 +100,12 @@ namespace SonarAnalyzer.Helpers
                                          Compilation compilation,
                                          AnalyzerOptions options) =>
             ShouldAnalyzeGenerated(tryGetValue, compilation, options) || !syntaxTree.IsGenerated(generatedCodeRecognizer, compilation);
+
+        public bool ShouldAnalyze(SyntaxTree syntaxTree, Compilation compilation, AnalyzerOptions options) =>
+            !UnchangedFilesCache.GetValue(compilation, _ => CreateUnchangedFilesHashSet(options)).Contains(syntaxTree.FilePath);
+
+        private ImmutableHashSet<string> CreateUnchangedFilesHashSet(AnalyzerOptions options) =>
+            ImmutableHashSet.Create(StringComparer.OrdinalIgnoreCase, ProjectConfiguration(options).AnalysisConfig.UnchangedFiles());
 
         public bool IsScannerRun(AnalyzerOptions options) =>
             ProjectConfiguration(options).IsScannerRun;
