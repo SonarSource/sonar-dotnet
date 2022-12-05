@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RuleSet xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="SonarQube - SonarAnalyzer .Net C# QP for .NET Analyzers" Description="This rule set was automatically generated from SonarQube https://sonarcloud.io/profiles/show?key=AWT63_RpV-oLu4FdMlyI" ToolsVersion="14.0">
+<RuleSet xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="SonarQube - SonarAnalyzer .Net C# QP for .NET Analyzers" Description="This rule set was automatically generated from SonarQube https://sonarcloud.io/profiles/show?key=AYS9H5b7szY8h8f_RKYR" ToolsVersion="14.0">
   <Rules AnalyzerId="SonarAnalyzer.CSharp" RuleNamespace="SonarAnalyzer.CSharp">
     <Rule Id="S100" Action="Info" />
     <Rule Id="S1006" Action="Warning" />
