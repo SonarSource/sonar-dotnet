@@ -67,27 +67,27 @@
 },
 {
 "id":  "S1067",
-"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
 "region":  {
 "startLine":  82,
-"startColumn":  78,
+"startColumn":  16,
 "endLine":  83,
-"endColumn":  93
+"endColumn":  94
 }
 }
 },
 {
 "id":  "S1067",
-"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
 "region":  {
 "startLine":  115,
-"startColumn":  78,
+"startColumn":  16,
 "endLine":  116,
-"endColumn":  93
+"endColumn":  94
 }
 }
 },

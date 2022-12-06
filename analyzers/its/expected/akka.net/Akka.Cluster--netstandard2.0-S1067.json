@@ -33,7 +33,7 @@
 "uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
 "region":  {
 "startLine":  283,
-"startColumn":  43,
+"startColumn":  42,
 "endLine":  287,
 "endColumn":  77
 }
