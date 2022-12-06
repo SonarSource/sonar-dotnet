@@ -2,6 +2,19 @@
 "issues":  [
 {
 "id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  743,
+"startColumn":  28,
+"endLine":  744,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S1067",
 "message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
@@ -10,6 +23,32 @@
 "startColumn":  28,
 "endLine":  744,
 "endColumn":  80
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  135,
+"startColumn":  16,
+"endLine":  136,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  135,
+"startColumn":  16,
+"endLine":  136,
+"endColumn":  115
 }
 }
 },
@@ -36,6 +75,240 @@
 "startColumn":  30,
 "endLine":  64,
 "endColumn":  198
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"region":  {
+"startLine":  69,
+"startColumn":  16,
+"endLine":  70,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"region":  {
+"startLine":  69,
+"startColumn":  16,
+"endLine":  70,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"region":  {
+"startLine":  69,
+"startColumn":  16,
+"endLine":  70,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (7) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"region":  {
+"startLine":  69,
+"startColumn":  16,
+"endLine":  70,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (8) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"region":  {
+"startLine":  69,
+"startColumn":  16,
+"endLine":  70,
+"endColumn":  126
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (9) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"region":  {
+"startLine":  69,
+"startColumn":  16,
+"endLine":  71,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (10) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"region":  {
+"startLine":  69,
+"startColumn":  16,
+"endLine":  71,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (11) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"region":  {
+"startLine":  69,
+"startColumn":  16,
+"endLine":  71,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (12) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"region":  {
+"startLine":  69,
+"startColumn":  16,
+"endLine":  71,
+"endColumn":  110
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (13) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"region":  {
+"startLine":  69,
+"startColumn":  16,
+"endLine":  72,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (14) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"region":  {
+"startLine":  69,
+"startColumn":  16,
+"endLine":  72,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (15) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"region":  {
+"startLine":  69,
+"startColumn":  16,
+"endLine":  72,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (16) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"region":  {
+"startLine":  69,
+"startColumn":  16,
+"endLine":  72,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (17) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"region":  {
+"startLine":  69,
+"startColumn":  16,
+"endLine":  73,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (18) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"region":  {
+"startLine":  69,
+"startColumn":  16,
+"endLine":  73,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (19) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"region":  {
+"startLine":  69,
+"startColumn":  16,
+"endLine":  73,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (20) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"region":  {
+"startLine":  69,
+"startColumn":  16,
+"endLine":  73,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (21) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"region":  {
+"startLine":  69,
+"startColumn":  16,
+"endLine":  73,
+"endColumn":  127
 }
 }
 },
@@ -80,6 +353,32 @@
 },
 {
 "id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1438,
+"startColumn":  19,
+"endLine":  1438,
+"endColumn":  157
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1438,
+"startColumn":  19,
+"endLine":  1438,
+"endColumn":  190
+}
+}
+},
+{
+"id":  "S1067",
 "message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
@@ -88,6 +387,19 @@
 "startColumn":  19,
 "endLine":  1438,
 "endColumn":  217
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2944,
+"startColumn":  16,
+"endLine":  2944,
+"endColumn":  156
 }
 }
 },
@@ -106,6 +418,19 @@
 },
 {
 "id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3002,
+"startColumn":  12,
+"endLine":  3002,
+"endColumn":  143
+}
+}
+},
+{
+"id":  "S1067",
 "message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
@@ -114,6 +439,32 @@
 "startColumn":  12,
 "endLine":  3002,
 "endColumn":  177
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3129,
+"startColumn":  20,
+"endLine":  3130,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3129,
+"startColumn":  20,
+"endLine":  3130,
+"endColumn":  105
 }
 }
 },
@@ -132,6 +483,32 @@
 },
 {
 "id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3296,
+"startColumn":  16,
+"endLine":  3296,
+"endColumn":  158
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3296,
+"startColumn":  16,
+"endLine":  3296,
+"endColumn":  190
+}
+}
+},
+{
+"id":  "S1067",
 "message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
@@ -140,6 +517,32 @@
 "startColumn":  16,
 "endLine":  3296,
 "endColumn":  217
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3429,
+"startColumn":  20,
+"endLine":  3429,
+"endColumn":  162
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3429,
+"startColumn":  20,
+"endLine":  3429,
+"endColumn":  194
 }
 }
 },
@@ -158,6 +561,45 @@
 },
 {
 "id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3627,
+"startColumn":  16,
+"endLine":  3627,
+"endColumn":  159
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3627,
+"startColumn":  16,
+"endLine":  3627,
+"endColumn":  192
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3627,
+"startColumn":  16,
+"endLine":  3627,
+"endColumn":  224
+}
+}
+},
+{
+"id":  "S1067",
 "message":  "Reduce the number of conditional operators (7) used in the expression (maximum allowed 3).",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
@@ -166,6 +608,45 @@
 "startColumn":  16,
 "endLine":  3627,
 "endColumn":  251
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3753,
+"startColumn":  20,
+"endLine":  3753,
+"endColumn":  163
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3753,
+"startColumn":  20,
+"endLine":  3753,
+"endColumn":  196
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3753,
+"startColumn":  20,
+"endLine":  3753,
+"endColumn":  228
 }
 }
 },
@@ -184,6 +665,45 @@
 },
 {
 "id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3890,
+"startColumn":  16,
+"endLine":  3890,
+"endColumn":  159
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3890,
+"startColumn":  16,
+"endLine":  3890,
+"endColumn":  192
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3890,
+"startColumn":  16,
+"endLine":  3890,
+"endColumn":  224
+}
+}
+},
+{
+"id":  "S1067",
 "message":  "Reduce the number of conditional operators (7) used in the expression (maximum allowed 3).",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
@@ -197,6 +717,45 @@
 },
 {
 "id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4017,
+"startColumn":  20,
+"endLine":  4017,
+"endColumn":  163
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4017,
+"startColumn":  20,
+"endLine":  4017,
+"endColumn":  196
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4017,
+"startColumn":  20,
+"endLine":  4017,
+"endColumn":  228
+}
+}
+},
+{
+"id":  "S1067",
 "message":  "Reduce the number of conditional operators (7) used in the expression (maximum allowed 3).",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
@@ -205,6 +764,84 @@
 "startColumn":  20,
 "endLine":  4017,
 "endColumn":  255
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5242,
+"startColumn":  19,
+"endLine":  5243,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5242,
+"startColumn":  19,
+"endLine":  5243,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5242,
+"startColumn":  19,
+"endLine":  5244,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (7) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5242,
+"startColumn":  19,
+"endLine":  5244,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (8) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5242,
+"startColumn":  19,
+"endLine":  5244,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (9) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5242,
+"startColumn":  19,
+"endLine":  5245,
+"endColumn":  46
 }
 }
 },
@@ -228,9 +865,165 @@
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  6513,
-"startColumn":  28,
+"startColumn":  32,
 "endLine":  6517,
 "endColumn":  228
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (7) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6513,
+"startColumn":  33,
+"endLine":  6514,
+"endColumn":  177
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (10) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6513,
+"startColumn":  33,
+"endLine":  6515,
+"endColumn":  149
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (14) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6513,
+"startColumn":  33,
+"endLine":  6516,
+"endColumn":  180
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (19) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6513,
+"startColumn":  33,
+"endLine":  6517,
+"endColumn":  227
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6517,
+"startColumn":  33,
+"endLine":  6517,
+"endColumn":  227
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6517,
+"startColumn":  34,
+"endLine":  6517,
+"endColumn":  226
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6774,
+"startColumn":  12,
+"endLine":  6775,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6774,
+"startColumn":  12,
+"endLine":  6775,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6774,
+"startColumn":  12,
+"endLine":  6775,
+"endColumn":  149
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (7) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6774,
+"startColumn":  12,
+"endLine":  6776,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (8) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6774,
+"startColumn":  12,
+"endLine":  6776,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (9) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6774,
+"startColumn":  12,
+"endLine":  6776,
+"endColumn":  105
 }
 }
 },
@@ -249,6 +1042,84 @@
 },
 {
 "id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6798,
+"startColumn":  12,
+"endLine":  6799,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6798,
+"startColumn":  12,
+"endLine":  6799,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6798,
+"startColumn":  12,
+"endLine":  6799,
+"endColumn":  149
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (7) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6798,
+"startColumn":  12,
+"endLine":  6800,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (8) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6798,
+"startColumn":  12,
+"endLine":  6800,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (9) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6798,
+"startColumn":  12,
+"endLine":  6800,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S1067",
 "message":  "Reduce the number of conditional operators (10) used in the expression (maximum allowed 3).",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
@@ -262,6 +1133,58 @@
 },
 {
 "id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7480,
+"startColumn":  20,
+"endLine":  7480,
+"endColumn":  215
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7480,
+"startColumn":  20,
+"endLine":  7480,
+"endColumn":  254
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7480,
+"startColumn":  20,
+"endLine":  7480,
+"endColumn":  289
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (7) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7480,
+"startColumn":  20,
+"endLine":  7480,
+"endColumn":  327
+}
+}
+},
+{
+"id":  "S1067",
 "message":  "Reduce the number of conditional operators (8) used in the expression (maximum allowed 3).",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
@@ -270,6 +1193,71 @@
 "startColumn":  20,
 "endLine":  7480,
 "endColumn":  359
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7549,
+"startColumn":  20,
+"endLine":  7549,
+"endColumn":  180
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7549,
+"startColumn":  20,
+"endLine":  7549,
+"endColumn":  217
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7549,
+"startColumn":  20,
+"endLine":  7549,
+"endColumn":  256
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (7) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7549,
+"startColumn":  20,
+"endLine":  7549,
+"endColumn":  291
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (8) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7549,
+"startColumn":  20,
+"endLine":  7549,
+"endColumn":  329
 }
 }
 },
@@ -301,6 +1289,45 @@
 },
 {
 "id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7573,
+"startColumn":  20,
+"endLine":  7573,
+"endColumn":  185
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7573,
+"startColumn":  20,
+"endLine":  7573,
+"endColumn":  220
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7573,
+"startColumn":  20,
+"endLine":  7573,
+"endColumn":  258
+}
+}
+},
+{
+"id":  "S1067",
 "message":  "Reduce the number of conditional operators (7) used in the expression (maximum allowed 3).",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
@@ -309,6 +1336,45 @@
 "startColumn":  20,
 "endLine":  7573,
 "endColumn":  290
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7600,
+"startColumn":  20,
+"endLine":  7600,
+"endColumn":  185
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7600,
+"startColumn":  20,
+"endLine":  7600,
+"endColumn":  220
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7600,
+"startColumn":  20,
+"endLine":  7600,
+"endColumn":  258
 }
 }
 },
@@ -340,6 +1406,45 @@
 },
 {
 "id":  "S1067",
+"message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7638,
+"startColumn":  74,
+"endLine":  7638,
+"endColumn":  268
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7638,
+"startColumn":  75,
+"endLine":  7638,
+"endColumn":  267
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (13) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7646,
+"startColumn":  16,
+"endLine":  7648,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S1067",
 "message":  "Reduce the number of conditional operators (16) used in the expression (maximum allowed 3).",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
@@ -353,6 +1458,162 @@
 },
 {
 "id":  "S1067",
+"message":  "Reduce the number of conditional operators (13) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7646,
+"startColumn":  17,
+"endLine":  7648,
+"endColumn":  122
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (12) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7646,
+"startColumn":  44,
+"endLine":  7648,
+"endColumn":  122
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7646,
+"startColumn":  45,
+"endLine":  7647,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7646,
+"startColumn":  45,
+"endLine":  7647,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7646,
+"startColumn":  45,
+"endLine":  7647,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (7) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7646,
+"startColumn":  45,
+"endLine":  7647,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (8) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7646,
+"startColumn":  45,
+"endLine":  7648,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (9) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7646,
+"startColumn":  45,
+"endLine":  7648,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (10) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7646,
+"startColumn":  45,
+"endLine":  7648,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (11) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7646,
+"startColumn":  45,
+"endLine":  7648,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (12) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7646,
+"startColumn":  45,
+"endLine":  7648,
+"endColumn":  121
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (13) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7724,
+"startColumn":  20,
+"endLine":  7726,
+"endColumn":  127
+}
+}
+},
+{
+"id":  "S1067",
 "message":  "Reduce the number of conditional operators (16) used in the expression (maximum allowed 3).",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
@@ -361,6 +1622,149 @@
 "startColumn":  20,
 "endLine":  7727,
 "endColumn":  101
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (13) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7724,
+"startColumn":  21,
+"endLine":  7726,
+"endColumn":  126
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (12) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7724,
+"startColumn":  48,
+"endLine":  7726,
+"endColumn":  126
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7724,
+"startColumn":  49,
+"endLine":  7725,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7724,
+"startColumn":  49,
+"endLine":  7725,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7724,
+"startColumn":  49,
+"endLine":  7725,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (7) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7724,
+"startColumn":  49,
+"endLine":  7725,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (8) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7724,
+"startColumn":  49,
+"endLine":  7726,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (9) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7724,
+"startColumn":  49,
+"endLine":  7726,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (10) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7724,
+"startColumn":  49,
+"endLine":  7726,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (11) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7724,
+"startColumn":  49,
+"endLine":  7726,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (12) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7724,
+"startColumn":  49,
+"endLine":  7726,
+"endColumn":  125
 }
 }
 },

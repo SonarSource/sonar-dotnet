@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1067",
-"message":  "Reduce the number of conditional operators (39) used in the expression (maximum allowed 3).",
+"message":  "Reduce the number of conditional operators (19) used in the expression (maximum allowed 3).",
 "location":  {
 "uri":  "sources\Net5\Net5\Main.cs",
 "region":  {
@@ -20,7 +20,7 @@
 "uri":  "sources\Net5\Net5\S1067.cs",
 "region":  {
 "startLine":  8,
-"startColumn":  17,
+"startColumn":  22,
 "endLine":  8,
 "endColumn":  58
 }
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S1067",
-"message":  "Reduce the number of conditional operators (39) used in the expression (maximum allowed 3).",
+"message":  "Reduce the number of conditional operators (19) used in the expression (maximum allowed 3).",
 "location":  {
 "uri":  "sources\Net5\Net5\S3776.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S1067",
-"message":  "Reduce the number of conditional operators (39) used in the expression (maximum allowed 3).",
+"message":  "Reduce the number of conditional operators (19) used in the expression (maximum allowed 3).",
 "location":  {
 "uri":  "sources\Net5\Net5\S3776.cs",
 "region":  {
