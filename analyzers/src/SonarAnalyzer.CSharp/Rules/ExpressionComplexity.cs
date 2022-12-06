@@ -30,6 +30,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ParenthesizedExpression,
                 SyntaxKind.LogicalNotExpression,
                 SyntaxKindEx.ParenthesizedPattern,
+                SyntaxKindEx.NotPattern,
             };
 
         protected override SyntaxKind[] ComplexityIncreasingKinds { get; } =
@@ -55,6 +56,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 PrefixUnaryExpressionSyntax { RawKind: (int)SyntaxKind.LogicalNotExpression, Operand: { } operand } => new[] { operand },
                 { RawKind: (int)SyntaxKindEx.ParenthesizedPattern } parenthesized when (ParenthesizedPatternSyntaxWrapper)parenthesized is var parenthesizedWrapped =>
                     new[] { parenthesizedWrapped.Pattern.SyntaxNode },
+                { RawKind: (int)SyntaxKindEx.NotPattern } negated when (UnaryPatternSyntaxWrapper)negated is var negatedWrapper =>
+                    new[] { negatedWrapper.Pattern.SyntaxNode },
                 _ => Array.Empty<SyntaxNode>(),
             };
     }
