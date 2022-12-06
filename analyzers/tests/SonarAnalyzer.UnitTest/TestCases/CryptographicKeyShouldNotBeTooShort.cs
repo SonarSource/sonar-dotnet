@@ -30,7 +30,6 @@ namespace Tests.Diagnostics
             new RSACryptoServiceProvider(validKeySize);
             new RSACryptoServiceProvider(invalidKeySize); // Noncompliant
 
-
             const int localInvalidSize = 1024;
             new RSACryptoServiceProvider(1024); // Noncompliant {{Use a key length of at least 2048 bits for RSA cipher algorithm.}}
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
