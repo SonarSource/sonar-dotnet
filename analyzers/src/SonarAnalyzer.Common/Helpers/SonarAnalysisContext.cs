@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
@@ -39,13 +40,12 @@ namespace SonarAnalyzer.Helpers
     {
         public delegate bool TryGetValueDelegate<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value);
 
-        private const string SonarProjectConfigFileName = "SonarProjectConfig.xml";
+        public const string SonarProjectConfigFileName = "SonarProjectConfig.xml";
         private static readonly Regex WebConfigRegex = new(@"[\\\/]web\.([^\\\/]+\.)?config$", RegexOptions.IgnoreCase);
         private static readonly Regex AppSettingsRegex = new(@"[\\\/]appsettings\.([^\\\/]+\.)?json$", RegexOptions.IgnoreCase);
 
         private static readonly SourceTextValueProvider<bool> ShouldAnalyzeGeneratedCS = CreateAnalyzeGeneratedProvider(LanguageNames.CSharp);
         private static readonly SourceTextValueProvider<bool> ShouldAnalyzeGeneratedVB = CreateAnalyzeGeneratedProvider(LanguageNames.VisualBasic);
-        private static readonly Lazy<ProjectConfigReader> EmptyProjectConfig = new(() => new ProjectConfigReader(null, null));
         private static readonly SourceTextValueProvider<ProjectConfigReader> ProjectConfigProvider = new(x => new ProjectConfigReader(x, SonarProjectConfigFileName));
         private static readonly ConditionalWeakTable<Compilation, ImmutableHashSet<string>> UnchangedFilesCache = new();
 
@@ -94,12 +94,14 @@ namespace SonarAnalyzer.Helpers
         public bool ShouldAnalyzeGenerated(Compilation c, AnalyzerOptions options) =>
             ShouldAnalyzeGenerated(context.TryGetValue, c, options);
 
-        public static bool ShouldAnalyze(TryGetValueDelegate<bool> tryGetValue,
+        public static bool ShouldAnalyze(TryGetValueDelegate<bool> tryGetValueBool,
+                                         TryGetValueDelegate<ProjectConfigReader> tryGetValueProjectConfigReader,
                                          GeneratedCodeRecognizer generatedCodeRecognizer,
-                                         SyntaxTree syntaxTree,
+                                         SyntaxTree tree,
                                          Compilation compilation,
                                          AnalyzerOptions options) =>
-            ShouldAnalyzeGenerated(tryGetValue, compilation, options) || !syntaxTree.IsGenerated(generatedCodeRecognizer, compilation);
+            !IsUnchanged(tryGetValueProjectConfigReader, tree, compilation, options)
+            && (ShouldAnalyzeGenerated(tryGetValueBool, compilation, options) || !tree.IsGenerated(generatedCodeRecognizer, compilation));
 
         public bool IsScannerRun(AnalyzerOptions options) =>
             ProjectConfiguration(options).IsScannerRun;
@@ -180,7 +182,7 @@ namespace SonarAnalyzer.Helpers
         }
 
         private static ImmutableHashSet<string> CreateUnchangedFilesHashSet(TryGetValueDelegate<ProjectConfigReader> tryGetValue, AnalyzerOptions options) =>
-            ImmutableHashSet.Create(StringComparer.OrdinalIgnoreCase, ProjectConfiguration(tryGetValue, options).AnalysisConfig.UnchangedFiles());
+            ImmutableHashSet.Create(StringComparer.OrdinalIgnoreCase, ProjectConfiguration(tryGetValue, options).AnalysisConfig?.UnchangedFiles() ?? Array.Empty<string>());
 
         private static bool IsTestProject(TryGetValueDelegate<ProjectConfigReader> tryGetValue, Compilation compilation, AnalyzerOptions options)
         {
@@ -206,7 +208,7 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        private static ProjectConfigReader ProjectConfiguration(TryGetValueDelegate<ProjectConfigReader> tryGetValue, AnalyzerOptions options)
+        public static ProjectConfigReader ProjectConfiguration(TryGetValueDelegate<ProjectConfigReader> tryGetValue, AnalyzerOptions options)
         {
             if (options.AdditionalFiles.FirstOrDefault(IsSonarProjectConfig) is { } sonarProjectConfigXml)
             {
@@ -218,7 +220,7 @@ namespace SonarAnalyzer.Helpers
             }
             else
             {
-                return EmptyProjectConfig.Value;
+                return ProjectConfigReader.Empty;
             }
         }
 

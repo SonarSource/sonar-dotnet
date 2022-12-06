@@ -278,6 +278,49 @@ $@"namespace PartiallyGenerated
             result.Should().BeFalse();
         }
 
+        [TestMethod]
+        public void RegisterSyntaxNodeActionInNonGenerated_UnchangedFiles_DoNotExecute_SonarAnalysisContext()
+        {
+            Assert.Inconclusive();
+        }
+
+        [TestMethod]
+        public void RegisterSyntaxNodeActionInNonGenerated_UnchangedFiles_DoNotExecute_ParameterLoadingAnalysisContext()
+        {
+            Assert.Inconclusive();
+        }
+
+        [TestMethod]
+        public void RegisterSyntaxNodeActionInNonGenerated_UnchangedFiles_DoNotExecute_CompilationStartAnalysisContext()
+        {
+            Assert.Inconclusive();
+        }
+
+        [TestMethod]
+        public void RegisterSyntaxTreeActionInNonGenerated_UnchangedFiles_DoNotExecute_SonarAnalysisContext()
+        {
+            Assert.Inconclusive();
+        }
+
+        [TestMethod]
+        public void RegisterSyntaxTreeActionInNonGenerated_UnchangedFiles_DoNotExecute_ParameterLoadingAnalysisContext()
+        {
+            Assert.Inconclusive();
+        }
+
+        [TestMethod]
+        public void RegisterCodeBlockStartActionInNonGenerated_UnchangedFiles_DoNotExecute_SonarAnalysisContext()
+        {
+            Assert.Inconclusive();
+        }
+
+        [TestMethod]
+        public void ReportDiagnosticIfNonGenerated_UnchangedFiles_DoNotExecute_CompilationAnalysisContext()
+        {
+            Assert.Inconclusive();
+        }
+
+
         private static bool IsGenerated(string content, GeneratedCodeRecognizer generatedCodeRecognizer)
         {
             var compilation = SolutionBuilder
