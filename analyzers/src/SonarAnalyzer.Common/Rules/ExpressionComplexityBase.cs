@@ -49,6 +49,9 @@ namespace SonarAnalyzer.Rules
                 {
                     if (c.Node.Parent?.Kind() is TSyntaxKind kind && (ComplexityIncreasingKinds.Contains(kind) || TransparentKinds.Contains(kind)))
                     {
+                        // The parent of the expression is itself complexity increasing (e.g. &&) or transparent (e.g. parenthesis).
+                        // We are only interested in the expression roots so we only report once per expression tree. Therefore we ignore any inner children, e.g.:
+                        // a && b && c -> (Left: (Left: a, Right: b), Right: c) // We are only interested in the outer expression (the one with Right: c)
                         return;
                     }
                     var complexity = CalculateComplexity(c.Node);
