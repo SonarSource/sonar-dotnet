@@ -67,12 +67,21 @@ namespace SonarAnalyzer.Rules.CSharp
                 _ => null
             };
 
-        private static bool CanIfStatementBeMoved(IfStatementSyntax ifStatementSyntax) =>
-            ifStatementSyntax.Else == null
-            && ifStatementSyntax.Condition is InvocationExpressionSyntax invocationExpressionSyntax
-            && !invocationExpressionSyntax.DescendantNodes()
-                                          .OfType<ArgumentSyntax>()
-                                          .Any(argument => argument.RefOrOutKeyword.IsAnyKind(SyntaxKind.OutKeyword, SyntaxKind.RefKeyword));
+        private static bool CanIfStatementBeMoved(IfStatementSyntax ifStatementSyntax)
+        {
+            return ifStatementSyntax.Else == null && (ConditionValidIsPattern() || ConditionValidInvocation());
+
+            bool ConditionValidIsPattern() => ifStatementSyntax.Condition.IsAnyKind(SyntaxKind.IsExpression, SyntaxKindEx.IsPatternExpression)
+                                              && !ifStatementSyntax.Condition.DescendantNodes()
+                                                                             .Any(d => d.IsAnyKind(SyntaxKindEx.VarPattern,
+                                                                                                   SyntaxKindEx.SingleVariableDesignation,
+                                                                                                   SyntaxKindEx.ParenthesizedVariableDesignation));
+
+            bool ConditionValidInvocation() => ifStatementSyntax.Condition is InvocationExpressionSyntax invocationExpressionSyntax
+                                               && !invocationExpressionSyntax.DescendantNodes()
+                                                                             .OfType<ArgumentSyntax>()
+                                                                             .Any(argument => argument.RefOrOutKeyword.IsAnyKind(SyntaxKind.OutKeyword, SyntaxKind.RefKeyword));
+        }
 
         /// <remarks>
         /// There are multiple scenarios where the code can be simplified using LINQ.
@@ -135,7 +144,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 !(memberAccess.Parent is AssignmentExpressionSyntax assignment && assignment.Left == memberAccess);
         }
 
-        private class UsageStats
+        private sealed class UsageStats
         {
             public int Count { get; set; }
 

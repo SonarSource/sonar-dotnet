@@ -23,6 +23,30 @@
 }
 }
 ]
+},
+{
+"id":  "S3267",
+"message":  "Loops should be simplified with "LINQ" expressions",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"region":  {
+"startLine":  313,
+"startColumn":  31,
+"endLine":  313,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"region":  {
+"startLine":  315,
+"startColumn":  21,
+"endLine":  315,
+"endColumn":  48
+}
+}
+]
 }
 ]
 }
