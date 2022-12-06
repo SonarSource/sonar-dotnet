@@ -75,10 +75,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
             protected override bool ShouldHandle(VariableDeclaratorSyntax syntaxNode, SemanticModel semanticModel) =>
                 FindStringLiteralInVariableDeclaration(syntaxNode.Initializer?.Value) is { } literalExpression
-                && literalExpression.IsAnyKind(SyntaxKind.StringLiteralExpression, SyntaxKindEx.Utf8StringLiteralExpression)
                 && (syntaxNode.IsDeclarationKnownType(KnownType.System_String, semanticModel)
-                    || syntaxNode.IsDeclarationKnownType(KnownType.System_ReadOnlySpan_T, semanticModel)
-                    || syntaxNode.IsDeclarationKnownType(KnownType.System_Byte_Array, semanticModel)); // "utf8"u8.ToArray()
+                    || syntaxNode.IsDeclarationKnownType(KnownType.System_ReadOnlySpan_T, semanticModel) // "utf8"u8
+                    || syntaxNode.IsDeclarationKnownType(KnownType.System_Byte_Array, semanticModel));   // "utf8"u8.ToArray()
 
             private static LiteralExpressionSyntax FindStringLiteralInVariableDeclaration(ExpressionSyntax expression) =>
                 expression switch
