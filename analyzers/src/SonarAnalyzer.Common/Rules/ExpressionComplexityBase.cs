@@ -18,9 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis.CSharp;
+
 namespace SonarAnalyzer.Rules
 {
-    public abstract class ExpressionComplexityBase<TExpression> : ParameterLoadingDiagnosticAnalyzer
+    public abstract class ExpressionComplexityBase<TExpression, TSyntaxKind> : ParameterLoadingDiagnosticAnalyzer where TSyntaxKind : struct
         where TExpression : SyntaxNode
     {
         protected const string DiagnosticId = "S1067";
@@ -30,6 +32,9 @@ namespace SonarAnalyzer.Rules
         private readonly DiagnosticDescriptor rule;
 
         protected abstract ILanguageFacade Language { get; }
+        protected abstract TSyntaxKind[] ComplexityIncreasingKinds { get; }
+        protected abstract TSyntaxKind[] TransparentKinds { get; }
+        protected abstract SyntaxNode[] ExpressionChildren(SyntaxNode node);
         protected abstract bool IsComplexityIncreasingKind(SyntaxNode node);
         protected abstract bool IsCompoundExpression(SyntaxNode node);
         protected abstract bool IsPatternRoot(SyntaxNode node);
@@ -43,26 +48,36 @@ namespace SonarAnalyzer.Rules
             rule = Language.CreateDescriptor(DiagnosticId, MessageFormat, isEnabledByDefault: false);
 
         protected sealed override void Initialize(ParameterLoadingAnalysisContext context) =>
-            context.RegisterSyntaxTreeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
+            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
                 {
-                    var root = c.Tree.GetRoot();
-                    var rootExpressions = NoncompoundSubexpressions(root);
-                    var compoundExpressionsDescendants = root.DescendantNodes().Where(IsCompoundExpression).SelectMany(NoncompoundSubexpressions);
-
-                    foreach (var expression in rootExpressions.Concat(compoundExpressionsDescendants))
+                    if (c.Node.Parent?.Kind() is TSyntaxKind kind && (ComplexityIncreasingKinds.Contains(kind) || TransparentKinds.Contains(kind)))
                     {
-                        var complexity = expression.DescendantNodesAndSelf(x => !IsCompoundExpression(x)).Count(IsComplexityIncreasingKind);
-                        if (complexity > Maximum)
-                        {
-                            c.ReportIssue(Diagnostic.Create(rule, expression.GetLocation(), Maximum, complexity));
-                        }
+                        return;
                     }
-                });
+                    var complexity = CalculateComplexity(c.Node);
+                    if (complexity > Maximum)
+                    {
+                        c.ReportIssue(Diagnostic.Create(rule, c.Node.GetLocation(), Maximum, complexity));
+                    }
+                }, ComplexityIncreasingKinds.Concat(TransparentKinds).ToArray());
 
-        private IEnumerable<SyntaxNode> NoncompoundSubexpressions(SyntaxNode node) =>
-            node.DescendantNodes(x => !IsExpressionOrPatternRoot(x) || x == node).Where(x => IsExpressionOrPatternRoot(x) && !IsCompoundExpression(x));
+        private int CalculateComplexity(SyntaxNode node)
+        {
+            return CalculateComplexityRec(node, 0);
 
-        private bool IsExpressionOrPatternRoot(SyntaxNode node) =>
-            node is TExpression || IsPatternRoot(node);
+            int CalculateComplexityRec(SyntaxNode node, int currentComplexity)
+            {
+                if (IsComplexityIncreasingKind(node))
+                {
+                    currentComplexity++;
+                }
+                foreach (var child in ExpressionChildren(node))
+                {
+                    currentComplexity = CalculateComplexityRec(child, currentComplexity);
+                }
+
+                return currentComplexity;
+            }
+        }
     }
 }

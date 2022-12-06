@@ -21,9 +21,14 @@
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class ExpressionComplexity : ExpressionComplexityBase<ExpressionSyntax>
+    public sealed class ExpressionComplexity : ExpressionComplexityBase<ExpressionSyntax, SyntaxKind>
     {
         protected override ILanguageFacade Language { get; } = VisualBasicFacade.Instance;
+
+        protected override SyntaxKind[] TransparentKinds { get; } =
+            {
+                SyntaxKind.ParenthesizedExpression,
+            };
 
         private static readonly ISet<SyntaxKind> CompoundExpressionKinds = new HashSet<SyntaxKind>
         {
@@ -38,14 +43,14 @@ namespace SonarAnalyzer.Rules.VisualBasic
             SyntaxKind.InvocationExpression
         };
 
-        private static readonly ISet<SyntaxKind> ComplexityIncreasingKinds = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.AndExpression,
-            SyntaxKind.AndAlsoExpression,
-            SyntaxKind.OrExpression,
-            SyntaxKind.OrElseExpression,
-            SyntaxKind.ExclusiveOrExpression
-        };
+        protected override SyntaxKind[] ComplexityIncreasingKinds { get; } =
+            {
+                SyntaxKind.AndExpression,
+                SyntaxKind.AndAlsoExpression,
+                SyntaxKind.OrExpression,
+                SyntaxKind.OrElseExpression,
+                SyntaxKind.ExclusiveOrExpression
+            };
 
         protected override bool IsComplexityIncreasingKind(SyntaxNode node) =>
             ComplexityIncreasingKinds.Contains(node.Kind());
@@ -55,5 +60,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override bool IsPatternRoot(SyntaxNode node) =>
             false;
+        protected override SyntaxNode[] ExpressionChildren(SyntaxNode node) => throw new NotImplementedException();
     }
 }
