@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules
         protected sealed override void Initialize(ParameterLoadingAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
                 {
-                    if (NodeKind(c.Node.Parent) is TSyntaxKind kind && (ComplexityIncreasingKinds.Contains(kind) || TransparentKinds.Contains(kind)))
+                    if (NodeKind(c.Node.Parent) is TSyntaxKind parentKind && (ComplexityIncreasingKinds.Contains(parentKind) || TransparentKinds.Contains(parentKind)))
                     {
                         // The parent of the expression is itself complexity increasing (e.g. &&) or transparent (e.g. parenthesis).
                         // We are only interested in the expression roots so we only report once per expression tree. Therefore we ignore any inner children, e.g.:
@@ -60,7 +60,9 @@ namespace SonarAnalyzer.Rules
                 }, ComplexityIncreasingKinds.Concat(TransparentKinds).ToArray());
 
         private static TSyntaxKind? NodeKind(SyntaxNode node) =>
-            Enum.ToObject(typeof(TSyntaxKind), node.RawKind) is TSyntaxKind kind ? kind : null;
+            node == null
+                ? null
+                : Enum.ToObject(typeof(TSyntaxKind), node.RawKind) as TSyntaxKind?;
 
         private int CalculateComplexity(SyntaxNode node)
         {
