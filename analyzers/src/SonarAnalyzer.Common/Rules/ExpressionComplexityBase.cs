@@ -22,8 +22,8 @@ using Microsoft.CodeAnalysis.CSharp;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class ExpressionComplexityBase<TExpression, TSyntaxKind> : ParameterLoadingDiagnosticAnalyzer where TSyntaxKind : struct
-        where TExpression : SyntaxNode
+    public abstract class ExpressionComplexityBase<TSyntaxKind> : ParameterLoadingDiagnosticAnalyzer
+        where TSyntaxKind : struct, Enum
     {
         protected const string DiagnosticId = "S1067";
         private const string MessageFormat = "Reduce the number of conditional operators ({1}) used in the expression (maximum allowed {0}).";
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected ExpressionComplexityBase() =>
-            rule = Language.CreateDescriptor(DiagnosticId, MessageFormat, isEnabledByDefault: false);
+            rule ??= Language.CreateDescriptor(DiagnosticId, MessageFormat, isEnabledByDefault: false);
 
         protected sealed override void Initialize(ParameterLoadingAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>

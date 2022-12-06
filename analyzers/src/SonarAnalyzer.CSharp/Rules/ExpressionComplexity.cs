@@ -21,7 +21,7 @@
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class ExpressionComplexity : ExpressionComplexityBase<ExpressionSyntax, SyntaxKind>
+    public sealed class ExpressionComplexity : ExpressionComplexityBase<SyntaxKind>
     {
         protected override ILanguageFacade Language { get; } = CSharpFacade.Instance;
 
@@ -49,6 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 { RawKind: (int)SyntaxKindEx.AndPattern or (int)SyntaxKindEx.OrPattern } pattern when (BinaryPatternSyntaxWrapper)pattern is var patternWrapper =>
                     new[] { patternWrapper.Left.SyntaxNode, patternWrapper.Right.SyntaxNode },
                 AssignmentExpressionSyntax { RawKind: (int)SyntaxKindEx.CoalesceAssignmentExpression } assigment => new[] { assigment.Left, assigment.Right },
+
                 ParenthesizedExpressionSyntax parenthesized => new[] { parenthesized.Expression },
                 { RawKind: (int)SyntaxKindEx.ParenthesizedPattern } parenthesized when (ParenthesizedPatternSyntaxWrapper)parenthesized is var parenthesizedWrapped =>
                     new[] { parenthesizedWrapped.Pattern.SyntaxNode },

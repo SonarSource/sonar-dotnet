@@ -21,7 +21,7 @@
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class ExpressionComplexity : ExpressionComplexityBase<ExpressionSyntax, SyntaxKind>
+    public sealed class ExpressionComplexity : ExpressionComplexityBase<SyntaxKind>
     {
         protected override ILanguageFacade Language { get; } = VisualBasicFacade.Instance;
 
