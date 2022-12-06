@@ -15,7 +15,7 @@ void RawStringLiterals()
 
 void Utf8StringLiterals()
 {
-    string DBConnectionString0;  // Don't crash if initializer is not present.
+    ReadOnlySpan<byte> DBConnectionString0;  // Don't crash if initializer is not present.
     var DBConnectionString1 = "Server=localhost; Database=Test; User=SA; Password=Secret123"u8; // Noncompliant
     var DBConnectionString2 = """Server=localhost; Database=Test; User=SA; Password=Secret123"""u8; // Noncompliant
     var DBConnectionString3 = """
