@@ -28,6 +28,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override SyntaxKind[] TransparentKinds { get; } =
             {
                 SyntaxKind.ParenthesizedExpression,
+                SyntaxKind.NotExpression,
             };
 
         protected override SyntaxKind[] ComplexityIncreasingKinds { get; } =
@@ -42,12 +43,16 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override SyntaxNode[] ExpressionChildren(SyntaxNode node) =>
             node switch
             {
-                BinaryExpressionSyntax { RawKind: (int)SyntaxKind.AndExpression
+                BinaryExpressionSyntax
+                {
+                    RawKind: (int)SyntaxKind.AndExpression
                     or (int)SyntaxKind.AndAlsoExpression
                     or (int)SyntaxKind.OrExpression
                     or (int)SyntaxKind.OrElseExpression
-                    or (int)SyntaxKind.ExclusiveOrExpression } binary => new[] { binary.Left, binary.Right },
+                    or (int)SyntaxKind.ExclusiveOrExpression
+                } binary => new[] { binary.Left, binary.Right },
                 ParenthesizedExpressionSyntax parenthesized => new[] { parenthesized.Expression },
+                UnaryExpressionSyntax { RawKind: (int)SyntaxKind.NotExpression } unary => new[] { unary.Operand },
                 _ => Array.Empty<SyntaxNode>(),
             };
     }

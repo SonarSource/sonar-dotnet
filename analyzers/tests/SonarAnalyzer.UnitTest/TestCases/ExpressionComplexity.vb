@@ -43,6 +43,9 @@ Namespace NS
                 b OrElse b OrElse b OrElse b OrElse b Then ' Noncompliant@-1
                 b = True
             End If
+            If b OrElse b OrElse Not (b OrElse Not b OrElse b) Then ' Noncompliant {{Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).}}
+                b = True
+            End If
         End Sub
     End Class
 
