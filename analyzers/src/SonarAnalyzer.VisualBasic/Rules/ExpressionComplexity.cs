@@ -60,6 +60,16 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override bool IsPatternRoot(SyntaxNode node) =>
             false;
-        protected override SyntaxNode[] ExpressionChildren(SyntaxNode node) => throw new NotImplementedException();
+        protected override SyntaxNode[] ExpressionChildren(SyntaxNode node) =>
+            node switch
+            {
+                BinaryExpressionSyntax { RawKind: (int)SyntaxKind.AndExpression
+                    or (int)SyntaxKind.AndAlsoExpression
+                    or (int)SyntaxKind.OrExpression
+                    or (int)SyntaxKind.OrElseExpression
+                    or (int)SyntaxKind.ExclusiveOrExpression } binary => new[] { binary.Left, binary.Right },
+                ParenthesizedExpressionSyntax parenthesized => new[] { parenthesized.Expression },
+                _ => Array.Empty<SyntaxNode>(),
+            };
     }
 }
