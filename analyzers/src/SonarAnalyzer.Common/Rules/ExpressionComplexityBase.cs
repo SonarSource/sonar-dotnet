@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules
 
             int CalculateComplexityRec(SyntaxNode node, int currentComplexity)
             {
-                if (node.Kind() is TSyntaxKind kind && ComplexityIncreasingKinds.Contains(kind))
+                if (Enum.ToObject(typeof(TSyntaxKind), node.RawKind) is TSyntaxKind kind && ComplexityIncreasingKinds.Contains(kind))
                 {
                     currentComplexity++;
                 }
