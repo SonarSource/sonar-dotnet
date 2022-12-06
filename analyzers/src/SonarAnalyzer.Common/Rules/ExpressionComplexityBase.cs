@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CSharp;
-
 namespace SonarAnalyzer.Rules
 {
     public abstract class ExpressionComplexityBase<TSyntaxKind> : ParameterLoadingDiagnosticAnalyzer
@@ -47,7 +45,7 @@ namespace SonarAnalyzer.Rules
         protected sealed override void Initialize(ParameterLoadingAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
                 {
-                    if (c.Node.Parent?.Kind() is TSyntaxKind kind && (ComplexityIncreasingKinds.Contains(kind) || TransparentKinds.Contains(kind)))
+                    if (NodeKind(c.Node.Parent) is TSyntaxKind kind && (ComplexityIncreasingKinds.Contains(kind) || TransparentKinds.Contains(kind)))
                     {
                         // The parent of the expression is itself complexity increasing (e.g. &&) or transparent (e.g. parenthesis).
                         // We are only interested in the expression roots so we only report once per expression tree. Therefore we ignore any inner children, e.g.:
@@ -61,13 +59,16 @@ namespace SonarAnalyzer.Rules
                     }
                 }, ComplexityIncreasingKinds.Concat(TransparentKinds).ToArray());
 
+        private static TSyntaxKind? NodeKind(SyntaxNode node) =>
+            Enum.ToObject(typeof(TSyntaxKind), node.RawKind) is TSyntaxKind kind ? kind : null;
+
         private int CalculateComplexity(SyntaxNode node)
         {
             return CalculateComplexityRec(node, 0);
 
             int CalculateComplexityRec(SyntaxNode node, int currentComplexity)
             {
-                if (Enum.ToObject(typeof(TSyntaxKind), node.RawKind) is TSyntaxKind kind && ComplexityIncreasingKinds.Contains(kind))
+                if (NodeKind(node) is TSyntaxKind kind && ComplexityIncreasingKinds.Contains(kind))
                 {
                     currentComplexity++;
                 }

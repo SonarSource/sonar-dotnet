@@ -38,6 +38,11 @@ Namespace NS
                 .IsMale = True Or False Or True OrElse False Xor False, ' Noncompliant
                 .IsFemale = False Or True
             }
+
+            If b OrElse b OrElse b OrElse b OrElse _
+                b OrElse b OrElse b OrElse b OrElse b Then ' Noncompliant@-1
+                b = True
+            End If
         End Sub
     End Class
 
