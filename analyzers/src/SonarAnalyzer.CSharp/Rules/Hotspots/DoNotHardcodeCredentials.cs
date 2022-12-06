@@ -68,23 +68,29 @@ namespace SonarAnalyzer.Rules.CSharp
             public VariableDeclarationBannedWordsFinder(DoNotHardcodeCredentials analyzer) : base(analyzer) { }
 
             protected override string GetAssignedValue(VariableDeclaratorSyntax syntaxNode, SemanticModel semanticModel) =>
-                FindStringLiteralInVariableDeclaration(syntaxNode)?.GetStringValue(semanticModel);
+                FindStringLiteralInVariableDeclaration(syntaxNode.Initializer?.Value)?.GetStringValue(semanticModel);
 
             protected override string GetVariableName(VariableDeclaratorSyntax syntaxNode) =>
                 syntaxNode.Identifier.ValueText;
 
             protected override bool ShouldHandle(VariableDeclaratorSyntax syntaxNode, SemanticModel semanticModel) =>
-                FindStringLiteralInVariableDeclaration(syntaxNode) is { } literalExpression
+                FindStringLiteralInVariableDeclaration(syntaxNode.Initializer?.Value) is { } literalExpression
                 && literalExpression.IsAnyKind(SyntaxKind.StringLiteralExpression, SyntaxKindEx.Utf8StringLiteralExpression)
                 && (syntaxNode.IsDeclarationKnownType(KnownType.System_String, semanticModel)
                     || syntaxNode.IsDeclarationKnownType(KnownType.System_ReadOnlySpan_T, semanticModel)
-                    || syntaxNode.IsDeclarationKnownType(KnownType.System_Byte_Array, semanticModel));
+                    || syntaxNode.IsDeclarationKnownType(KnownType.System_Byte_Array, semanticModel)); // "utf8"u8.ToArray()
 
-            private static LiteralExpressionSyntax FindStringLiteralInVariableDeclaration(VariableDeclaratorSyntax syntaxNode) =>
-                syntaxNode.Initializer?.Value switch
+            private static LiteralExpressionSyntax FindStringLiteralInVariableDeclaration(ExpressionSyntax expression) =>
+                expression switch
                 {
-                    LiteralExpressionSyntax => (LiteralExpressionSyntax)syntaxNode.Initializer?.Value,
-                    InvocationExpressionSyntax => syntaxNode.Initializer?.Value.DescendantNodes().OfType<LiteralExpressionSyntax>().FirstOrDefault(),
+                    LiteralExpressionSyntax literal => literal,
+                    InvocationExpressionSyntax
+                    {
+                        Expression: MemberAccessExpressionSyntax
+                        {
+                            Expression: LiteralExpressionSyntax { RawKind: (int)SyntaxKindEx.Utf8StringLiteralExpression } literal
+                        }
+                    } invocation when invocation.NameIs("ToArray") => literal, // "utf8"u8.ToArray()
                     _ => null
                 };
         }
