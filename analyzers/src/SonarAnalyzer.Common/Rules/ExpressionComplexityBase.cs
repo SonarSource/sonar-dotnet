@@ -35,9 +35,6 @@ namespace SonarAnalyzer.Rules
         protected abstract TSyntaxKind[] ComplexityIncreasingKinds { get; }
         protected abstract TSyntaxKind[] TransparentKinds { get; }
         protected abstract SyntaxNode[] ExpressionChildren(SyntaxNode node);
-        protected abstract bool IsComplexityIncreasingKind(SyntaxNode node);
-        protected abstract bool IsCompoundExpression(SyntaxNode node);
-        protected abstract bool IsPatternRoot(SyntaxNode node);
 
         [RuleParameter("max", PropertyType.Integer, "Maximum number of allowed conditional operators in an expression", DefaultValueMaximum)]
         public int Maximum { get; set; } = DefaultValueMaximum;
@@ -67,7 +64,7 @@ namespace SonarAnalyzer.Rules
 
             int CalculateComplexityRec(SyntaxNode node, int currentComplexity)
             {
-                if (IsComplexityIncreasingKind(node))
+                if (node.Kind() is TSyntaxKind kind && ComplexityIncreasingKinds.Contains(kind))
                 {
                     currentComplexity++;
                 }

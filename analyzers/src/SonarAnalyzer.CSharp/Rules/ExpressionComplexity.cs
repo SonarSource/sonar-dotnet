@@ -54,14 +54,5 @@ namespace SonarAnalyzer.Rules.CSharp
                     new[] { parenthesizedWrapped.Pattern.SyntaxNode },
                 _ => Array.Empty<SyntaxNode>(),
             };
-
-        protected override bool IsComplexityIncreasingKind(SyntaxNode node) =>
-            ComplexityIncreasingKinds.Contains(node.Kind());
-
-        protected override bool IsCompoundExpression(SyntaxNode node) =>
-            false;
-
-        protected override bool IsPatternRoot(SyntaxNode node) =>
-            node.Parent.IsAnyKind(SyntaxKindEx.CasePatternSwitchLabel, SyntaxKindEx.SwitchExpressionArm);
     }
 }

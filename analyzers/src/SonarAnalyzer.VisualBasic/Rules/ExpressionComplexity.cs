@@ -30,19 +30,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 SyntaxKind.ParenthesizedExpression,
             };
 
-        private static readonly ISet<SyntaxKind> CompoundExpressionKinds = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.MultiLineFunctionLambdaExpression,
-            SyntaxKind.MultiLineSubLambdaExpression,
-            SyntaxKind.SingleLineFunctionLambdaExpression,
-            SyntaxKind.SingleLineSubLambdaExpression,
-
-            SyntaxKind.CollectionInitializer,
-            SyntaxKind.ObjectMemberInitializer,
-
-            SyntaxKind.InvocationExpression
-        };
-
         protected override SyntaxKind[] ComplexityIncreasingKinds { get; } =
             {
                 SyntaxKind.AndExpression,
@@ -52,14 +39,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 SyntaxKind.ExclusiveOrExpression
             };
 
-        protected override bool IsComplexityIncreasingKind(SyntaxNode node) =>
-            ComplexityIncreasingKinds.Contains(node.Kind());
-
-        protected override bool IsCompoundExpression(SyntaxNode node) =>
-            CompoundExpressionKinds.Contains(node.Kind());
-
-        protected override bool IsPatternRoot(SyntaxNode node) =>
-            false;
         protected override SyntaxNode[] ExpressionChildren(SyntaxNode node) =>
             node switch
             {
