@@ -16,6 +16,7 @@ namespace Tests.Diagnostics
             var c1 = true || false || true || false || false; // Noncompliant {{Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).}}
 
             var d1 = true && false && true && false && true && true; // Noncompliant
+            var d2 = true && !(false && true && false) && !true && true; // Noncompliant
 
             bool? v1 = null, v2 = null, v3 = null, v4 = null, v5 = null;
 

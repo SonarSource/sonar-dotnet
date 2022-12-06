@@ -28,6 +28,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override SyntaxKind[] TransparentKinds { get; } =
             {
                 SyntaxKind.ParenthesizedExpression,
+                SyntaxKind.LogicalNotExpression,
                 SyntaxKindEx.ParenthesizedPattern,
             };
 
@@ -50,7 +51,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     new[] { patternWrapper.Left.SyntaxNode, patternWrapper.Right.SyntaxNode },
                 AssignmentExpressionSyntax { RawKind: (int)SyntaxKindEx.CoalesceAssignmentExpression } assigment => new[] { assigment.Left, assigment.Right },
 
-                ParenthesizedExpressionSyntax parenthesized => new[] { parenthesized.Expression },
+                ParenthesizedExpressionSyntax { Expression: { } expression } => new[] { expression },
+                PrefixUnaryExpressionSyntax { RawKind: (int)SyntaxKind.LogicalNotExpression, Operand: { } operand } => new[] { operand },
                 { RawKind: (int)SyntaxKindEx.ParenthesizedPattern } parenthesized when (ParenthesizedPatternSyntaxWrapper)parenthesized is var parenthesizedWrapped =>
                     new[] { parenthesizedWrapped.Pattern.SyntaxNode },
                 _ => Array.Empty<SyntaxNode>(),
