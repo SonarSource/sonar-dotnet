@@ -34,6 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.ComplexElementInitializerExpression,
             SyntaxKind.ObjectInitializerExpression,
             SyntaxKind.InvocationExpression,
+            SyntaxKind.IsExpression,
             SyntaxKindEx.SwitchExpressionArm
         };
 

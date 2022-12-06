@@ -40,8 +40,8 @@ namespace Tests.Diagnostics
 
             var x = new Dictionary<string, bool>
             {
-                {"a", true && true && true && true && true }, // Noncompliant
-                { "b",  true && true && true && true }
+                { "a", true && true && true && true && true }, // Noncompliant
+                { "b", true && true && true && true }
             };
 
             var e2 = true | false | true | false;
