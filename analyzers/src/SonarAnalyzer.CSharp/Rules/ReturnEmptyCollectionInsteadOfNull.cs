@@ -82,10 +82,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private static ArrowExpressionClauseSyntax GetExpressionBody(SyntaxNode node) =>
             node switch
             {
-                MethodDeclarationSyntax method => method.ExpressionBody,
+                BaseMethodDeclarationSyntax method => method.ExpressionBody(),
                 PropertyDeclarationSyntax property => property.ExpressionBody ?? GetAccessor(property)?.ExpressionBody(),
                 var _ when LocalFunctionStatementSyntaxWrapper.IsInstance(node) => ((LocalFunctionStatementSyntaxWrapper)node).ExpressionBody,
-                OperatorDeclarationSyntax @operator => @operator.ExpressionBody,
                 _ => null,
             };
 
