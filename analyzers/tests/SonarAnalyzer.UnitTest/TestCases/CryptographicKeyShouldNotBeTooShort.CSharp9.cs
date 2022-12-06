@@ -73,5 +73,9 @@ record TestRecord
 
         ECDsaOpenSsl ec3 = new();
         ec3.GenerateKey(ECCurve.NamedCurves.brainpoolP192t1); // Noncompliant {{Use a key length of at least 224 bits for EC cipher algorithm.}}
+
+        ECDsaOpenSsl ec4 = new();
+        ec4?.GenerateKey(ECCurve.NamedCurves.brainpoolP192t1); // Noncompliant {{Use a key length of at least 224 bits for EC cipher algorithm.}}
+        ec4!.GenerateKey(ECCurve.NamedCurves.brainpoolP192t1); // Noncompliant {{Use a key length of at least 224 bits for EC cipher algorithm.}}
     }
 }
