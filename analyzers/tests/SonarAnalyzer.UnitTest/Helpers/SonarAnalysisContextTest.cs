@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         private const string TestTag = "TestSourceScope";
         private const string UtilityTag = "Utility";
 
-        private class TestSetup
+        private sealed class TestSetup
         {
             public string Path { get; }
             public DiagnosticAnalyzer Analyzer { get; }

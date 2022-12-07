@@ -125,15 +125,14 @@ public partial class SonarAnalysisContextTest
     {
         var additionalText = new Mock<AdditionalText>();
         additionalText.Setup(x => x.Path).Returns(path);
-        additionalText.Setup(x => x.GetText(System.Threading.CancellationToken.None)).Returns(sourceText);
+        additionalText.Setup(x => x.GetText(default)).Returns(sourceText);
         return additionalText;
     }
 
     private static Compilation GetDummyCompilation(AnalyzerLanguage language) =>
         TestHelper.Compile(string.Empty, false, language).Model.Compilation;
 
-    // We can't use Mock<SourceText> because SourceText is an abstract class
-    private class DummySourceText : SourceText
+    private sealed class DummySourceText : SourceText
     {
         private readonly string textToReturn;
 
