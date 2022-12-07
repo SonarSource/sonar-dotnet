@@ -26,13 +26,15 @@ namespace SonarAnalyzer.UnitTest.Helpers
     [TestClass]
     public class ProjectConfigReaderTest
     {
+        public TestContext TestContext { get; set; }
+
         [TestMethod]
         public void AllPropertiesAreSet()
         {
             var sut = CreateProjectConfigReader($"ResourceTests\\SonarProjectConfig\\Path_Windows\\SonarProjectConfig.xml");
 
             // this will fail if a new property is added to the class and no test case for it is added
-            foreach (var property in sut.GetType().GetProperties())
+            foreach (var property in sut.GetType().GetProperties().Where(x => x.Name != "AnalysisConfig"))
             {
                 var value = property.GetValue(sut)?.ToString();
                 value.Should().NotBeNullOrEmpty($"property '{property.Name}' should have value");
@@ -90,7 +92,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [DataRow("Invalid_Xml")]
         public void WhenInvalid_FilesToReturnPath_ThrowsException(string folder) =>
             Assert.ThrowsException<InvalidOperationException>(() => CreateProjectConfigReader($"ResourceTests\\SonarProjectConfig\\{folder}\\SonarProjectConfig.xml"))
-                .Message.Should().Be("File LogNameFor-SonarProjectConfig.xml could not be parsed.");
+                .Message.Should().Be("File 'LogNameFor-SonarProjectConfig.xml' could not be parsed.");
 
         [TestMethod]
         public void FilesToAnalyze_LoadsFileFromConfig()
@@ -104,7 +106,15 @@ namespace SonarAnalyzer.UnitTest.Helpers
             files.Should().BeEquivalentTo(new[] { @"C:\Projects/DummyProj/wEB.config", @"C:\Projects/DummyProj/Views\Web.confiG" });
         }
 
+        [TestMethod]
+        public void AnalysisConfig_LoadsConfigFromDisk()
+        {
+            var path = TestHelper.CreateSonarProjectConfig(TestContext, Array.Empty<string>());     // With AnalysisConfigPath that exists
+            var sut = CreateProjectConfigReader(path);
+            sut.AnalysisConfig.Should().NotBeNull();
+        }
+
         private static ProjectConfigReader CreateProjectConfigReader(string relativePath) =>
-            new (SourceText.From(File.ReadAllText(relativePath)), "LogNameFor-SonarProjectConfig.xml");
+            new(SourceText.From(File.ReadAllText(relativePath)), "LogNameFor-SonarProjectConfig.xml");
     }
 }

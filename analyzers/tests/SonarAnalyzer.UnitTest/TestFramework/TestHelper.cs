@@ -36,12 +36,6 @@ namespace SonarAnalyzer.UnitTest
 {
     internal static class TestHelper
     {
-        private const string ProjectConfigTemplate = @"
-<SonarProjectConfig xmlns=""http://www.sonarsource.com/msbuild/analyzer/2021/1"">
-    <{0}>{1}</{0}>
-    <OutPath>{2}</OutPath>
-</SonarProjectConfig>";
-
         public static (SyntaxTree Tree, SemanticModel Model) CompileIgnoreErrorsCS(string snippet, params MetadataReference[] additionalReferences) =>
             Compile(snippet, true, AnalyzerLanguage.CSharp, additionalReferences);
 
@@ -245,6 +239,28 @@ End Class", AnalyzerLanguage.VisualBasic);
             return path;
         }
 
+        public static string CreateAnalysisConfig(TestContext context, IEnumerable<string> unchangedFiles)
+        {
+            var unchangedFilesPath = WriteFile(context, "UnchangedFiles.txt", unchangedFiles.JoinStr(Environment.NewLine));
+            return CreateAnalysisConfig(context, "UnchangedFilesPath", unchangedFilesPath);
+        }
+
+        public static string CreateAnalysisConfig(TestContext context, string settingsId, string settingValue) =>
+            WriteFile(context, "SonarQubeAnalysisConfig.xml", $"""
+                <?xml version="1.0" encoding="utf-8"?>
+                <AnalysisConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sonarsource.com/msbuild/integration/2015/1">
+                    <AdditionalConfig>
+                        <ConfigSetting Id="{settingsId}" Value="{settingValue}" />
+                    </AdditionalConfig>
+                </AnalysisConfig>
+                """);
+
+        public static string CreateSonarProjectConfig(TestContext context, IEnumerable<string> unchangedFiles)
+        {
+            var analysisConfigPath = CreateAnalysisConfig(context, unchangedFiles);
+            return CreateSonarProjectConfig(Path.GetDirectoryName(analysisConfigPath), "AnalysisConfigPath", analysisConfigPath, true);
+        }
+
         public static string CreateSonarProjectConfig(string sonarProjectConfigDirectory, string filesToAnalyzePath) =>
             CreateSonarProjectConfig(sonarProjectConfigDirectory, "FilesToAnalyzePath", filesToAnalyzePath, true);
 
@@ -255,7 +271,13 @@ End Class", AnalyzerLanguage.VisualBasic);
         {
             var directory = Directory.CreateDirectory(directoryName).FullName;
             var sonarProjectConfigPath = Path.Combine(directory, "SonarProjectConfig.xml");
-            var projectConfigContent = string.Format(ProjectConfigTemplate, element, value, isScannerRun ? directory : null);
+            var outPath = isScannerRun ? directory : null;
+            var projectConfigContent = $"""
+                <SonarProjectConfig xmlns="http://www.sonarsource.com/msbuild/analyzer/2021/1">
+                    <{element}>{value}</{element}>
+                    <OutPath>{outPath}</OutPath>
+                </SonarProjectConfig>
+                """;
             File.WriteAllText(sonarProjectConfigPath, projectConfigContent);
             return sonarProjectConfigPath;
         }
