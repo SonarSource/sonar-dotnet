@@ -101,11 +101,8 @@ namespace SonarAnalyzer.Helpers
                                          AnalyzerOptions options) =>
             ShouldAnalyzeGenerated(tryGetValue, compilation, options) || !syntaxTree.IsGenerated(generatedCodeRecognizer, compilation);
 
-        public bool IsUnchanged(SyntaxTree syntaxTree, Compilation compilation, AnalyzerOptions options) =>
-            UnchangedFilesCache.GetValue(compilation, _ => CreateUnchangedFilesHashSet(options)).Contains(syntaxTree.FilePath);
-
-        private ImmutableHashSet<string> CreateUnchangedFilesHashSet(AnalyzerOptions options) =>
-            ImmutableHashSet.Create(StringComparer.OrdinalIgnoreCase, ProjectConfiguration(options).AnalysisConfig.UnchangedFiles());
+        public bool TryGetValue<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value) =>
+            context.TryGetValue(text, valueProvider, out value);
 
         public bool IsScannerRun(AnalyzerOptions options) =>
             ProjectConfiguration(options).IsScannerRun;
@@ -124,6 +121,9 @@ namespace SonarAnalyzer.Helpers
 
         public void RegisterSymbolAction(Action<SymbolAnalysisContext> action, params SymbolKind[] symbolKinds) =>
             RegisterContextAction(act => context.RegisterSymbolAction(act, symbolKinds), action, c => c.GetFirstSyntaxTree(), c => c.Compilation, c => c.Options);
+
+        public static bool IsUnchanged(TryGetValueDelegate<ProjectConfigReader> tryGetValue, SyntaxTree tree, Compilation compilation, AnalyzerOptions options) =>
+            UnchangedFilesCache.GetValue(compilation, _ => CreateUnchangedFilesHashSet(tryGetValue, options)).Contains(tree.FilePath);
 
         internal static bool IsRegisteredActionEnabled(IEnumerable<DiagnosticDescriptor> diagnostics, SyntaxTree tree) =>
             ShouldExecuteRegisteredAction == null || tree == null || ShouldExecuteRegisteredAction(diagnostics, tree);
@@ -182,6 +182,9 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
+        private static ImmutableHashSet<string> CreateUnchangedFilesHashSet(TryGetValueDelegate<ProjectConfigReader> tryGetValue, AnalyzerOptions options) =>
+            ImmutableHashSet.Create(StringComparer.OrdinalIgnoreCase, ProjectConfiguration(tryGetValue, options).AnalysisConfig.UnchangedFiles());
+
         private static bool IsTestProject(TryGetValueDelegate<ProjectConfigReader> tryGetValue, Compilation compilation, AnalyzerOptions options)
         {
             var projectType = ProjectConfiguration(tryGetValue, options).ProjectType;
@@ -190,7 +193,8 @@ namespace SonarAnalyzer.Helpers
                 : projectType == ProjectType.Test;  // Scanner >= 5.1 does authoritative decision that we follow
         }
 
-        private static SourceTextValueProvider<bool> CreateAnalyzeGeneratedProvider(string language) => new(x => PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(ParseXmlSettings(x), language));
+        private static SourceTextValueProvider<bool> CreateAnalyzeGeneratedProvider(string language) =>
+            new(x => PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(ParseXmlSettings(x), language));
 
         private static IEnumerable<XElement> ParseXmlSettings(SourceText sourceText)
         {

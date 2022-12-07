@@ -26,21 +26,28 @@ namespace SonarAnalyzer.Helpers;
 /// <summary>
 /// This class reads and encapsulates <see cref="AnalysisConfig"/>, exposing only the configuration our analyzers need.
 /// </summary>
-internal class AnalysisConfigReader
+public class AnalysisConfigReader
 {
     private readonly AnalysisConfig analysisConfig;
 
     public AnalysisConfigReader(string analysisConfigPath)
     {
-        try
+        if (string.IsNullOrEmpty(analysisConfigPath))
         {
-            var serializer = new XmlSerializer(typeof(AnalysisConfig));
-            using var stream = new FileStream(analysisConfigPath, FileMode.Open, FileAccess.Read);
-            analysisConfig = (AnalysisConfig)serializer.Deserialize(stream);
+            analysisConfig = new AnalysisConfig();
         }
-        catch (Exception e)
+        else
         {
-            throw new InvalidOperationException($"File '{analysisConfigPath}' could not be parsed.", e);
+            try
+            {
+                var serializer = new XmlSerializer(typeof(AnalysisConfig));
+                using var stream = new FileStream(analysisConfigPath, FileMode.Open, FileAccess.Read);
+                analysisConfig = (AnalysisConfig)serializer.Deserialize(stream);
+            }
+            catch (Exception e)
+            {
+                throw new InvalidOperationException($"File '{analysisConfigPath}' could not be parsed.", e);
+            }
         }
     }
 

@@ -448,12 +448,12 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void IsUnchanged_NoData() // E.g. first scan or using old scanner version
         {
-            var compiler = new SnippetCompiler("class Data { }", TestHelper.ProjectTypeReference(ProjectType.Product));
+            var compiler = new SnippetCompiler("class Data { }");
             var sut = new SonarAnalysisContext(new DummyContext(), Enumerable.Empty<DiagnosticDescriptor>());
 
-            var result = sut.IsUnchanged(compiler.SyntaxTree, compiler.SemanticModel.Compilation, new AnalyzerOptions(ImmutableArray<AdditionalText>.Empty));
+            var result = SonarAnalysisContext.IsUnchanged(sut.TryGetValue, compiler.SyntaxTree, compiler.SemanticModel.Compilation, new AnalyzerOptions(ImmutableArray<AdditionalText>.Empty));
 
-            result.Should().BeTrue();
+            result.Should().BeFalse();
         }
 
         internal class DummyContext : AnalysisContext

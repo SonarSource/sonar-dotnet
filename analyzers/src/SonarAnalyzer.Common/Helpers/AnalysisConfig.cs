@@ -32,5 +32,5 @@ namespace SonarAnalyzer.Helpers;
 [XmlRoot(Namespace = "http://www.sonarsource.com/msbuild/integration/2015/1")]
 public class AnalysisConfig
 {
-    public List<ConfigSetting> AdditionalConfig { get; set; }
+    public List<ConfigSetting> AdditionalConfig { get; set; } = new();
 }

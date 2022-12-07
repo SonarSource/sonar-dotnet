@@ -27,7 +27,7 @@ namespace SonarAnalyzer.Helpers
     /// <summary>
     /// This class reads and encapsulates <see cref="ProjectConfig"/>, exposing only the configuration our analyzers need.
     /// </summary>
-    internal class ProjectConfigReader
+    public class ProjectConfigReader
     {
         private readonly ProjectConfig projectConfig;
         private readonly Lazy<ProjectType> projectType;
