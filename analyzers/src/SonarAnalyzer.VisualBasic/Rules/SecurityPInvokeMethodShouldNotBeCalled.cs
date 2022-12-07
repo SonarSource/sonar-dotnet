@@ -25,7 +25,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        protected override bool IsImportFromInteropDll(ISymbol symbol, SemanticModel semanticModel) =>
+        protected override bool IsImportFromInteropDll(IMethodSymbol symbol, SemanticModel semanticModel) =>
             base.IsImportFromInteropDll(symbol, semanticModel)
             || (symbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is DeclareStatementSyntax declaration
                 && IsInterop(declaration.LibraryName?.GetStringValue(semanticModel)));
