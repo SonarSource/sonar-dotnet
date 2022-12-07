@@ -15,11 +15,16 @@ void RawStringLiterals()
 
 void Utf8StringLiterals()
 {
-    var DBConnectionString1 = "Server=localhost; Database=Test; User=SA; Password=Secret123"u8; // FN
-    var DBConnectionString2 = """Server=localhost; Database=Test; User=SA; Password=Secret123"""u8; // FN
+    ReadOnlySpan<byte> DBConnectionString0;  // Don't crash if initializer is not present.
+    var DBConnectionString1 = "Server=localhost; Database=Test; User=SA; Password=Secret123"u8; // Noncompliant
+    var DBConnectionString2 = """Server=localhost; Database=Test; User=SA; Password=Secret123"""u8; // Noncompliant
     var DBConnectionString3 = """
         Server=localhost; Database=Test; User=SA; Password=Secret123
-        """u8; // FN
+        """u8; // Noncompliant@-2
+    var DBConnectionString4 = "Server=localhost; Database=Test; User=SA; Password=Secret123"u8.ToArray(); // Noncompliant
+    var DBConnectionString5 = "Server=localhost; Database=Test; User=SA; Password=Secret123"u8.Slice(0);  // Compliant. Only "ToArray" is supported
+    var DBConnectionString6 = "Server=localhost; Database=Test; User=SA; \u0050assword=Secret123"u8; // Noncompliant \u0050 is letter 'P'
+
 }
 
 void NewlinesInStringInterpolation(string someInput)

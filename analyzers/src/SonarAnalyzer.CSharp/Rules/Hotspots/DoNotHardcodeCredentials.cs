@@ -68,15 +68,30 @@ namespace SonarAnalyzer.Rules.CSharp
             public VariableDeclarationBannedWordsFinder(DoNotHardcodeCredentials analyzer) : base(analyzer) { }
 
             protected override string GetAssignedValue(VariableDeclaratorSyntax syntaxNode, SemanticModel semanticModel) =>
-                syntaxNode.Initializer?.Value.GetStringValue(semanticModel);
+                FindStringLiteralInVariableDeclaration(syntaxNode.Initializer?.Value)?.GetStringValue(semanticModel);
 
             protected override string GetVariableName(VariableDeclaratorSyntax syntaxNode) =>
                 syntaxNode.Identifier.ValueText;
 
             protected override bool ShouldHandle(VariableDeclaratorSyntax syntaxNode, SemanticModel semanticModel) =>
-                syntaxNode.Initializer?.Value is LiteralExpressionSyntax literalExpression
-                && literalExpression.IsKind(SyntaxKind.StringLiteralExpression)
-                && syntaxNode.IsDeclarationKnownType(KnownType.System_String, semanticModel);
+                FindStringLiteralInVariableDeclaration(syntaxNode.Initializer?.Value) is { } literalExpression
+                && (syntaxNode.IsDeclarationKnownType(KnownType.System_String, semanticModel)
+                    || syntaxNode.IsDeclarationKnownType(KnownType.System_ReadOnlySpan_T, semanticModel) // "utf8"u8
+                    || syntaxNode.IsDeclarationKnownType(KnownType.System_Byte_Array, semanticModel));   // "utf8"u8.ToArray()
+
+            private static LiteralExpressionSyntax FindStringLiteralInVariableDeclaration(ExpressionSyntax expression) =>
+                expression switch
+                {
+                    LiteralExpressionSyntax literal => literal,
+                    InvocationExpressionSyntax
+                    {
+                        Expression: MemberAccessExpressionSyntax
+                        {
+                            Expression: LiteralExpressionSyntax { RawKind: (int)SyntaxKindEx.Utf8StringLiteralExpression } literal
+                        }
+                    } invocation when invocation.NameIs("ToArray") => literal, // "utf8"u8.ToArray()
+                    _ => null
+                };
         }
 
         private sealed class AssignmentExpressionBannedWordsFinder : CredentialWordsFinderBase<AssignmentExpressionSyntax>
