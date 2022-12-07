@@ -53,6 +53,10 @@ namespace Tests.Diagnostics
         public static void CoInitializeSecurity(int param) { } // Compliant non extern
         public extern void CoInitializeSecurity(string param); // Compliant non static
         public static extern int CoInitializeSecurity(int param1, string param2); // Compliant no DllImport
+        [DllImport(null)] // Error [CS0591]
+        public static extern int CoInitializeSecurity(int param1, string param2, string param3); // Compliant DllImport argument invalid
+        [DllImport("noOle32")]
+        public static extern int CoInitializeSecurity(int param1, string param2, string param3, string param4); // Compliant DllImport argument not "ole32"
 
         static void Main(string[] args)
         {
