@@ -7,9 +7,9 @@
 "uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
 "region":  {
 "startLine":  198,
-"startColumn":  17,
+"startColumn":  24,
 "endLine":  198,
-"endColumn":  29
+"endColumn":  28
 }
 }
 }

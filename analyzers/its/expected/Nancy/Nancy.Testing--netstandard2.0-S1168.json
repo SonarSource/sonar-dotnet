@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1168",
+"message":  "Return an empty collection instead of null.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"region":  {
+"startLine":  201,
+"startColumn":  44,
+"endLine":  201,
+"endColumn":  48
+}
+}
+}
+]
+}

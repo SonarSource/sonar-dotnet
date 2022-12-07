@@ -33,6 +33,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .AddReferences(MetadataReferenceFacade.SystemXml)
                 .Verify();
 
+        [TestMethod]
+        public void ReturnEmptyCollectionInsteadOfNull_CSharp8() =>
+            builder.AddPaths("ReturnEmptyCollectionInsteadOfNull.CSharp8.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
+
 #if NET
 
         [TestMethod]

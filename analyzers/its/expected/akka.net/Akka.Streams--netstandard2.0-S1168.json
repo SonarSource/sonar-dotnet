@@ -7,9 +7,9 @@
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
 "region":  {
 "startLine":  530,
-"startColumn":  13,
+"startColumn":  20,
 "endLine":  530,
-"endColumn":  25
+"endColumn":  24
 }
 }
 }

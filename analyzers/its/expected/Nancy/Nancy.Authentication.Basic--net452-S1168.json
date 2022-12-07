@@ -8,27 +8,36 @@
 "uri":  "sources\Nancy\src\Nancy.Authentication.Basic\BasicAuthentication.cs",
 "region":  {
 "startLine":  114,
-"startColumn":  17,
+"startColumn":  24,
 "endLine":  114,
-"endColumn":  29
+"endColumn":  28
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy.Authentication.Basic\BasicAuthentication.cs",
 "region":  {
 "startLine":  119,
-"startColumn":  17,
+"startColumn":  24,
 "endLine":  119,
-"endColumn":  29
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic\BasicAuthentication.cs",
+"region":  {
+"startLine":  127,
+"startColumn":  62,
+"endLine":  127,
+"endColumn":  66
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy.Authentication.Basic\BasicAuthentication.cs",
 "region":  {
 "startLine":  131,
-"startColumn":  17,
+"startColumn":  24,
 "endLine":  131,
-"endColumn":  29
+"endColumn":  28
 }
 }
 ]

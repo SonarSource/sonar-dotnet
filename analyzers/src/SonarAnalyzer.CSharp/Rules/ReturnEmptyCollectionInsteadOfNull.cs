@@ -23,52 +23,47 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class ReturnEmptyCollectionInsteadOfNull : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S1168";
+        private const string DiagnosticId = "S1168";
         private const string MessageFormat = "Return an empty collection instead of null.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        private static readonly ImmutableArray<KnownType> CollectionTypes =
-            ImmutableArray.Create(
-                KnownType.System_Collections_IEnumerable,
-                KnownType.System_Array
-            );
+        private static readonly ImmutableArray<KnownType> CollectionTypes = ImmutableArray.Create(
+            KnownType.System_Collections_IEnumerable,
+            KnownType.System_Array);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(ReportIfReturnsNull,
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(ReportIfReturnsNullOrDefault,
                 SyntaxKind.MethodDeclaration,
                 SyntaxKindEx.LocalFunctionStatement,
-                SyntaxKind.PropertyDeclaration);
-        }
+                SyntaxKind.PropertyDeclaration,
+                SyntaxKind.OperatorDeclaration);
 
-        private static void ReportIfReturnsNull(SyntaxNodeAnalysisContext context)
+        private static void ReportIfReturnsNullOrDefault(SyntaxNodeAnalysisContext context)
         {
-            var expressionBody = GetExpressionBody(context.Node);
-            if (expressionBody != null)
+            if (GetExpressionBody(context.Node) is { } expressionBody)
             {
-                var arrowedNullLiteral = GetNullLiteralOrDefault(expressionBody);
-                if (arrowedNullLiteral != null &&
-                    IsReturningCollection(context))
-                {
-                    context.ReportIssue(Diagnostic.Create(rule, arrowedNullLiteral.GetLocation()));
-                }
+                var nullOrDefaultLiterals = GetNullOrDefaultExpressions(expressionBody.Expression)
+                    .Select(statement => statement.GetLocation())
+                    .ToList();
 
-                return;
+                ReportIfAny(nullOrDefaultLiterals);
             }
-
-            var body = GetBody(context.Node);
-            if (body != null)
+            else if (GetBody(context.Node) is { } body)
             {
-                var returnNullStatements = GetReturnNullStatements(body)
+                var nullOrDefaultLiterals = GetReturnNullOrDefaultExpressions(body)
                     .Select(returnStatement => returnStatement.GetLocation())
                     .ToList();
-                if (returnNullStatements.Count > 0 &&
-                    IsReturningCollection(context))
+
+                ReportIfAny(nullOrDefaultLiterals);
+            }
+
+            void ReportIfAny(List<Location> nullOrDefaultLiterals)
+            {
+                if (nullOrDefaultLiterals.Count > 0 && IsReturningCollection(context))
                 {
-                    context.ReportIssue(rule.CreateDiagnostic(context.Compilation, returnNullStatements[0], additionalLocations: returnNullStatements.Skip(1)));
+                    context.ReportIssue(Rule.CreateDiagnostic(context.Compilation, nullOrDefaultLiterals[0], additionalLocations: nullOrDefaultLiterals.Skip(1)));
                 }
             }
         }
@@ -76,78 +71,66 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsReturningCollection(SyntaxNodeAnalysisContext context)
         {
             var symbol = context.SemanticModel.GetDeclaredSymbol(context.Node);
-
             var methodSymbol = (symbol as IPropertySymbol)?.GetMethod ?? symbol as IMethodSymbol;
 
-            return methodSymbol != null &&
-                !methodSymbol.ReturnType.Is(KnownType.System_String) &&
-                !methodSymbol.ReturnType.DerivesFrom(KnownType.System_Xml_XmlNode) &&
-                methodSymbol.ReturnType.DerivesOrImplementsAny(CollectionTypes);
+            return methodSymbol != null
+                && !methodSymbol.ReturnType.Is(KnownType.System_String)
+                && !methodSymbol.ReturnType.DerivesFrom(KnownType.System_Xml_XmlNode)
+                && methodSymbol.ReturnType.DerivesOrImplementsAny(CollectionTypes);
         }
 
-        private static ArrowExpressionClauseSyntax GetExpressionBody(SyntaxNode node)
-        {
-            switch (node.Kind())
+        private static ArrowExpressionClauseSyntax GetExpressionBody(SyntaxNode node) =>
+            node switch
             {
-                case SyntaxKind.MethodDeclaration:
-                    return ((MethodDeclarationSyntax)node).ExpressionBody;
+                BaseMethodDeclarationSyntax method => method.ExpressionBody(),
+                PropertyDeclarationSyntax property => property.ExpressionBody ?? GetAccessor(property)?.ExpressionBody(),
+                var _ when LocalFunctionStatementSyntaxWrapper.IsInstance(node) => ((LocalFunctionStatementSyntaxWrapper)node).ExpressionBody,
+                _ => null,
+            };
 
-                case SyntaxKind.PropertyDeclaration:
-                    var property = (PropertyDeclarationSyntax)node;
-
-                    if (property.ExpressionBody != null)
-                    {
-                        return property.ExpressionBody;
-                    }
-
-                    return property.AccessorList?.Accessors
-                        .FirstOrDefault(accessor => accessor.IsKind(SyntaxKind.GetAccessorDeclaration))
-                        ?.ExpressionBody();
-
-                case SyntaxKindEx.LocalFunctionStatement:
-                    return ((LocalFunctionStatementSyntaxWrapper)node).ExpressionBody;
-
-                default:
-                    return null;
-            }
-        }
-
-        private static BlockSyntax GetBody(SyntaxNode node)
-        {
-            switch (node.Kind())
+        private static BlockSyntax GetBody(SyntaxNode node) =>
+            node switch
             {
-                case SyntaxKind.MethodDeclaration:
-                    return ((MethodDeclarationSyntax)node).Body;
+                BaseMethodDeclarationSyntax method => method.Body,
+                PropertyDeclarationSyntax property => GetAccessor(property)?.Body,
+                var _ when LocalFunctionStatementSyntaxWrapper.IsInstance(node) => ((LocalFunctionStatementSyntaxWrapper)node).Body,
+                _ => null,
+            };
 
-                case SyntaxKind.PropertyDeclaration:
-                    return ((PropertyDeclarationSyntax)node).AccessorList?.Accessors
-                        .FirstOrDefault(accessor => accessor.IsKind(SyntaxKind.GetAccessorDeclaration))
-                        ?.Body;
+        private static AccessorDeclarationSyntax GetAccessor(PropertyDeclarationSyntax property) =>
+            property.AccessorList?.Accessors.FirstOrDefault(a => a.IsKind(SyntaxKind.GetAccessorDeclaration));
 
-                case SyntaxKindEx.LocalFunctionStatement:
-                    return ((LocalFunctionStatementSyntaxWrapper)node).Body;
-
-                default:
-                    return null;
-            }
-        }
-
-        private static LiteralExpressionSyntax GetNullLiteralOrDefault(ArrowExpressionClauseSyntax expressionBody)
-        {
-            var innerExpression = expressionBody.Expression.RemoveParentheses();
-            return innerExpression.IsNullLiteral()
-                ? (LiteralExpressionSyntax)innerExpression
-                : null;
-        }
-
-        private static IEnumerable<ReturnStatementSyntax> GetReturnNullStatements(BlockSyntax methodBlock)
-        {
-            return methodBlock.DescendantNodes(n =>
-                    !n.IsAnyKind(SyntaxKindEx.LocalFunctionStatement,
+        private static IEnumerable<SyntaxNode> GetReturnNullOrDefaultExpressions(SyntaxNode methodBlock) =>
+            methodBlock.DescendantNodes(n =>
+                    !n.IsAnyKind(
+                        SyntaxKindEx.LocalFunctionStatement,
                         SyntaxKind.SimpleLambdaExpression,
                         SyntaxKind.ParenthesizedLambdaExpression))
-                .OfType<ReturnStatementSyntax>()
-                .Where(returnStatement => returnStatement.Expression.RemoveParentheses().IsNullLiteral());
+                   .OfType<ReturnStatementSyntax>()
+                   .SelectMany(statement => GetNullOrDefaultExpressions(statement.Expression));
+
+        private static IEnumerable<SyntaxNode> GetNullOrDefaultExpressions(SyntaxNode node)
+        {
+            node = node.RemoveParentheses();
+
+            if (node.IsNullLiteral() || node.IsAnyKind(SyntaxKindEx.DefaultLiteralExpression, SyntaxKind.DefaultExpression))
+            {
+                yield return node;
+                yield break;
+            }
+
+            if (node is ConditionalExpressionSyntax c)
+            {
+                foreach (var innerNode in GetNullOrDefaultExpressions(c.WhenTrue))
+                {
+                    yield return innerNode;
+                }
+
+                foreach (var innerNode in GetNullOrDefaultExpressions(c.WhenFalse))
+                {
+                    yield return innerNode;
+                }
+            }
         }
     }
 }
