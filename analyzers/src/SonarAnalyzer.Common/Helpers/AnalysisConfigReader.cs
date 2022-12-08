@@ -32,22 +32,15 @@ public class AnalysisConfigReader
 
     public AnalysisConfigReader(string analysisConfigPath)
     {
-        if (string.IsNullOrEmpty(analysisConfigPath))
+        try
         {
-            analysisConfig = new AnalysisConfig();
+            var serializer = new XmlSerializer(typeof(AnalysisConfig));
+            using var stream = new FileStream(analysisConfigPath, FileMode.Open, FileAccess.Read);
+            analysisConfig = (AnalysisConfig)serializer.Deserialize(stream);
         }
-        else
+        catch (Exception e)
         {
-            try
-            {
-                var serializer = new XmlSerializer(typeof(AnalysisConfig));
-                using var stream = new FileStream(analysisConfigPath, FileMode.Open, FileAccess.Read);
-                analysisConfig = (AnalysisConfig)serializer.Deserialize(stream);
-            }
-            catch (Exception e)
-            {
-                throw new InvalidOperationException($"File '{analysisConfigPath}' could not be parsed.", e);
-            }
+            throw new InvalidOperationException($"File '{analysisConfigPath}' could not be parsed.", e);
         }
     }
 
