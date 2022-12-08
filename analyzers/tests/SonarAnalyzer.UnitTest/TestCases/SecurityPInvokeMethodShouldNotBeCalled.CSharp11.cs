@@ -89,7 +89,7 @@ namespace Tests.Diagnostics
     public unsafe partial class LibraryImportAttributeImports
     {
 
-        // CoSetProxyBlanket can not be converted to LibraryImport because of the [MarshalAs(UnmanagedType.IUnknown)] attribute: https://github.com/dotnet/runtime/blob/main/docs/design/libraries/LibraryImportGenerator/Compatibility.md
+        // CoSetProxyBlanket can not be converted to LibraryImport because of the [MarshalAs(UnmanagedType.IUnknown)] attribute: https://github.com/dotnet/runtime/blob/v7.0.0/docs/design/libraries/LibraryImportGenerator/Compatibility.md
 
         [LibraryImport("ole32")]
         [UnmanagedCallConv(CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvFastcall) })]
