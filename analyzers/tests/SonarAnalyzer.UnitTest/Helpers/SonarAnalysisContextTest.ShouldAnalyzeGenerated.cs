@@ -19,192 +19,138 @@
  */
 
 using System.Text;
-using System.Threading;
 using Microsoft.CodeAnalysis.Text;
 using Moq;
 using SonarAnalyzer.Common;
 
-namespace SonarAnalyzer.UnitTest.Helpers
+namespace SonarAnalyzer.UnitTest.Helpers;
+
+public partial class SonarAnalysisContextTest
 {
-    [TestClass]
-    public class SonarAnalysisContextTest_ShouldAnalyzeGenerated
+    [TestMethod]
+    public void ShouldAnalyzeGenerated_NoSonarLintFile_ReturnsFalse()
     {
-        [TestMethod]
-        public void NoSonarLintFile_ReturnsFalse()
+        var sonarLintXml = CreateSonarLintXml(true);
+        var options = CreateOptions(sonarLintXml, @"ResourceTests\Foo.xml");
+        var compilation = GetDummyCompilation(AnalyzerLanguage.CSharp);
+
+        CreateSut().ShouldAnalyzeGenerated(compilation, options).Should().BeFalse();
+        sonarLintXml.ToStringCallCount.Should().Be(0, "this file doesn't have 'SonarLint.xml' name");
+    }
+
+    [TestMethod]
+    public void ShouldAnalyzeGenerated_ResultIsCached()
+    {
+        var sonarLintXml = CreateSonarLintXml(true);
+        var additionalText = MockAdditionalText(sonarLintXml);
+        var options = new AnalyzerOptions(ImmutableArray.Create(additionalText.Object));
+        var compilation = GetDummyCompilation(AnalyzerLanguage.CSharp);
+        var sut = CreateSut();
+
+        // Call ShouldAnalyzeGenerated multiple times...
+        sut.ShouldAnalyzeGenerated(compilation, options).Should().BeTrue();
+        sut.ShouldAnalyzeGenerated(compilation, options).Should().BeTrue();
+        sut.ShouldAnalyzeGenerated(compilation, options).Should().BeTrue();
+
+        // GetText should be called every time ShouldAnalyzeGenerated is called...
+        additionalText.Verify(x => x.GetText(It.IsAny<CancellationToken>()), Times.Exactly(3));
+        sonarLintXml.ToStringCallCount.Should().Be(1); // ... but we should only try to read the file once
+    }
+
+    [TestMethod]
+    public void ShouldAnalyzeGenerated_InvalidXmlInSonarLintFile_ReturnsFalse()
+    {
+        var sonarLintXml = new DummySourceText("Not valid xml");
+        var options = CreateOptions(sonarLintXml);
+        var compilation = GetDummyCompilation(AnalyzerLanguage.CSharp);
+        var sut = CreateSut();
+
+        // 1. Read -> no error, false returned
+        sut.ShouldAnalyzeGenerated(compilation, options).Should().BeFalse();
+        sonarLintXml.ToStringCallCount.Should().Be(1); // should have attempted to read the file
+
+        // 2. Read again to check that the load error doesn't prevent caching from working
+        sut.ShouldAnalyzeGenerated(compilation, options).Should().BeFalse();
+        sonarLintXml.ToStringCallCount.Should().Be(1); // should not have attempted to read the file again
+    }
+
+    [TestMethod]
+    public void ShouldAnalyzeGenerated_CorrectSettingUsed_VB()
+    {
+        var sonarLintXml = CreateSonarLintXml(false);
+        var options = CreateOptions(sonarLintXml);
+        var compilationCS = GetDummyCompilation(AnalyzerLanguage.CSharp);
+        var compilationVB = GetDummyCompilation(AnalyzerLanguage.VisualBasic);
+        var sut = CreateSut();
+
+        sut.ShouldAnalyzeGenerated(compilationCS, options).Should().BeFalse();
+        sut.ShouldAnalyzeGenerated(compilationVB, options).Should().BeTrue();
+
+        sonarLintXml.ToStringCallCount.Should().Be(2, "file should be read once per language");
+
+        // Read again to check caching
+        sut.ShouldAnalyzeGenerated(compilationVB, options).Should().BeTrue();
+
+        sonarLintXml.ToStringCallCount.Should().Be(2, "file should not have been read again");
+    }
+
+    private static SonarAnalysisContext CreateSut() =>
+        new(Mock.Of<AnalysisContext>(), Enumerable.Empty<DiagnosticDescriptor>());
+
+    private static DummySourceText CreateSonarLintXml(bool analyzeGeneratedCSharp) =>
+        new($"""
+            <?xml version="1.0" encoding="UTF-8"?>
+            <AnalysisInput>
+                <Settings>
+                    <Setting>
+                        <Key>dummy</Key>
+                        <Value>false</Value>
+                    </Setting>
+                    <Setting>
+                        <Key>sonar.cs.analyzeGeneratedCode</Key>
+                        <Value>{analyzeGeneratedCSharp.ToString().ToLower()}</Value>
+                    </Setting>
+                    <Setting>
+                        <Key>sonar.vbnet.analyzeGeneratedCode</Key>
+                        <Value>true</Value>
+                    </Setting>
+                </Settings>
+            </AnalysisInput>
+            """);
+
+    private static AnalyzerOptions CreateOptions(SourceText sourceText, string path = @"ResourceTests\SonarLint.xml") =>
+        new(ImmutableArray.Create(MockAdditionalText(sourceText, path).Object));
+
+    private static Mock<AdditionalText> MockAdditionalText(SourceText sourceText, string path = @"ResourceTests\SonarLint.xml")
+    {
+        var additionalText = new Mock<AdditionalText>();
+        additionalText.Setup(x => x.Path).Returns(path);
+        additionalText.Setup(x => x.GetText(default)).Returns(sourceText);
+        return additionalText;
+    }
+
+    private static Compilation GetDummyCompilation(AnalyzerLanguage language) =>
+        TestHelper.Compile(string.Empty, false, language).Model.Compilation;
+
+    private sealed class DummySourceText : SourceText
+    {
+        private readonly string textToReturn;
+
+        public int ToStringCallCount { get; private set; }
+        public override char this[int position] => throw new NotImplementedException();
+        public override Encoding Encoding => throw new NotImplementedException();
+        public override int Length => throw new NotImplementedException();
+
+        public DummySourceText(string textToReturn) =>
+            this.textToReturn = textToReturn;
+
+        public override string ToString()
         {
-            // Arrange
-            var text = @"<?xml version='1.0' encoding='UTF-8'?>
-<AnalysisInput>
-  <Settings>
-    <Setting>
-      <Key>sonar.cs.analyzeGeneratedCode</Key>
-      <Value>true</Value>
-    </Setting>
-  </Settings>
-</AnalysisInput>
-";
-            var dummySourceText = new DummySourceText(text);
-            var additionalTextMock = CreateMockAdditionalText(dummySourceText, "ResourceTests\\Foo.xml");
-            var analyzerOptions = new AnalyzerOptions(ImmutableArray.Create(additionalTextMock.Object));
-
-            var analysisContext = new Mock<AnalysisContext>();
-            var compilation = GetDummyCompilation(AnalyzerLanguage.CSharp);
-
-            // Act
-            bool result = SonarAnalysisContext.ShouldAnalyzeGenerated(analysisContext.Object, compilation, analyzerOptions);
-
-            // Assert
-            result.Should().BeFalse();
-            dummySourceText.ToStringCallCount.Should().Be(0); // Not the right file so shouldn't ever try to read it
+            ToStringCallCount++;
+            return textToReturn;
         }
 
-        [TestMethod]
-        public void ResultIsCached()
-        {
-            // Arrange
-            var text = @"<?xml version='1.0' encoding='UTF-8'?>
-<AnalysisInput>
-  <Settings>
-    <Setting>
-      <Key>dummy</Key>
-      <Value>false</Value>
-    </Setting>
-    <Setting>
-      <Key>sonar.cs.analyzeGeneratedCode</Key>
-      <Value>true</Value>
-    </Setting>
-  </Settings>
-</AnalysisInput>
-";
-            var dummySourceText = new DummySourceText(text);
-            var additionalTextMock = CreateMockAdditionalText(dummySourceText, "ResourceTests\\SonarLint.xml");
-            var analyzerOptions = new AnalyzerOptions(ImmutableArray.Create(additionalTextMock.Object));
-
-            var analysisContext = new Mock<AnalysisContext>();
-            var compilation = GetDummyCompilation(AnalyzerLanguage.CSharp);
-
-            // Act - call ShouldAnalyzeGenerated multiple times...
-            bool result = SonarAnalysisContext.ShouldAnalyzeGenerated(analysisContext.Object, compilation, analyzerOptions);
-            result.Should().BeTrue();
-            result = SonarAnalysisContext.ShouldAnalyzeGenerated(analysisContext.Object, compilation, analyzerOptions);
-            result.Should().BeTrue();
-            result = SonarAnalysisContext.ShouldAnalyzeGenerated(analysisContext.Object, compilation, analyzerOptions);
-            result.Should().BeTrue();
-
-            // Assert
-            // GetText should be called every time ShouldAnalyzeGenerated is called...
-            additionalTextMock.Verify(x => x.GetText(It.IsAny<CancellationToken>()), Times.Exactly(3));
-            dummySourceText.ToStringCallCount.Should().Be(1); // ... but we should only try to read the file once
-        }
-
-        [TestMethod]
-        public void InvalidXmlInSonarLintFile_ReturnsFalse()
-        {
-            // Arrange
-            var dummySourceText = new DummySourceText("Not valid xml");
-            var additionalTextMock = CreateMockAdditionalText(dummySourceText, "ResourceTests\\SonarLint.xml");
-            var analyzerOptions = new AnalyzerOptions(ImmutableArray.Create(additionalTextMock.Object));
-
-            var analysisContext = new Mock<AnalysisContext>();
-            var compilation = GetDummyCompilation(AnalyzerLanguage.CSharp);
-
-            // 1. Read -> no error, false returned
-            bool result = SonarAnalysisContext.ShouldAnalyzeGenerated(analysisContext.Object, compilation, analyzerOptions);
-            result.Should().BeFalse();
-            dummySourceText.ToStringCallCount.Should().Be(1); // should have attempted to read the file
-
-            // 2. Read again to check that the load error doesn't prevent caching from working
-            result = SonarAnalysisContext.ShouldAnalyzeGenerated(analysisContext.Object, compilation, analyzerOptions);
-            result.Should().BeFalse();
-            dummySourceText.ToStringCallCount.Should().Be(1); // should not have attempted to read the file again
-        }
-
-        [TestMethod]
-        public void VB_CorrectSettingUsed()
-        {
-            // Arrange
-            var text = @"<?xml version='1.0' encoding='UTF-8'?>
-<AnalysisInput>
-  <Settings>
-    <Setting>
-      <Key>sonar.cs.analyzeGeneratedCode</Key>
-      <Value>false</Value>
-    </Setting>
-    <Setting>
-      <Key>sonar.vbnet.analyzeGeneratedCode</Key>
-      <Value>true</Value>
-    </Setting>
-  </Settings>
-</AnalysisInput>
-";
-
-            var dummySourceText = new DummySourceText(text);
-            var additionalTextMock = CreateMockAdditionalText(dummySourceText, "ResourceTests\\SonarLint.xml");
-            var analyzerOptions = new AnalyzerOptions(ImmutableArray.Create(additionalTextMock.Object));
-
-            var analysisContext = new Mock<AnalysisContext>();
-            var vbCompilation = GetDummyCompilation(AnalyzerLanguage.VisualBasic);
-            var cSharpCompilation = GetDummyCompilation(AnalyzerLanguage.CSharp);
-
-            // 1. Read both languages
-            bool vbResult = SonarAnalysisContext.ShouldAnalyzeGenerated(analysisContext.Object, vbCompilation, analyzerOptions);
-            bool csharpResult = SonarAnalysisContext.ShouldAnalyzeGenerated(analysisContext.Object, cSharpCompilation, analyzerOptions);
-
-            // Assert
-            vbResult.Should().BeTrue();
-            csharpResult.Should().BeFalse();
-            dummySourceText.ToStringCallCount.Should().Be(2); // file read once per language
-
-            // 2. Read again for VB to check VB caching
-            vbResult = SonarAnalysisContext.ShouldAnalyzeGenerated(analysisContext.Object, vbCompilation, analyzerOptions);
-
-            // Assert
-            vbResult.Should().BeTrue();
-            dummySourceText.ToStringCallCount.Should().Be(2); // file should not have been read again
-        }
-
-        private static Mock<AdditionalText> CreateMockAdditionalText(SourceText sourceText, string path)
-        {
-            var additionalTextMock = new Mock<AdditionalText>();
-            additionalTextMock.Setup(x => x.Path).Returns(path);
-            additionalTextMock.Setup(x => x.GetText(System.Threading.CancellationToken.None)).Returns(sourceText);
-            return additionalTextMock;
-        }
-
-        private static Compilation GetDummyCompilation(AnalyzerLanguage language) =>
-            TestHelper.Compile(string.Empty, false, language).Model.Compilation;
-
-        // We can't use Mock<SourceText> because SourceText is an abstract class
-        private class DummySourceText : SourceText
-        {
-            private readonly string textToReturn;
-            public int ToStringCallCount { get; private set; }
-
-            public DummySourceText(string textToReturn)
-            {
-                this.textToReturn = textToReturn;
-            }
-
-            public override string ToString()
-            {
-                ToStringCallCount++;
-                return textToReturn;
-            }
-
-            #region Abstract methods
-
-            public override char this[int position] => throw new System.NotImplementedException();
-
-            public override Encoding Encoding => throw new System.NotImplementedException();
-
-            public override int Length => throw new System.NotImplementedException();
-
-            public override void CopyTo(int sourceIndex, char[] destination, int destinationIndex, int count)
-            {
-                throw new System.NotImplementedException();
-            }
-
-            #endregion
-        }
+        public override void CopyTo(int sourceIndex, char[] destination, int destinationIndex, int count) =>
+            throw new NotImplementedException();
     }
 }

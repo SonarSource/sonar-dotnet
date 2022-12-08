@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Helpers
     /// </summary>
     public class SonarAnalysisContext
     {
-        private delegate bool TryGetValueDelegate<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value);
+        public delegate bool TryGetValueDelegate<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value);
 
         private const string SonarProjectConfigFileName = "SonarProjectConfig.xml";
         private static readonly Regex WebConfigRegex = new Regex(@"[\\\/]web\.([^\\\/]+\.)?config$", RegexOptions.IgnoreCase);
@@ -87,8 +87,18 @@ namespace SonarAnalyzer.Helpers
             this.context = context;
         }
 
+        public bool TryGetValue<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value) =>
+            context.TryGetValue(text, valueProvider, out value);
+
         public bool ShouldAnalyzeGenerated(Compilation c, AnalyzerOptions options) =>
-            ShouldAnalyzeGenerated(context, c, options);
+            ShouldAnalyzeGenerated(context.TryGetValue, c, options);
+
+        public static bool ShouldAnalyze(TryGetValueDelegate<bool> tryGetValue,
+                                         GeneratedCodeRecognizer generatedCodeRecognizer,
+                                         SyntaxTree syntaxTree,
+                                         Compilation compilation,
+                                         AnalyzerOptions options) =>
+            ShouldAnalyzeGenerated(tryGetValue, compilation, options) || !syntaxTree.IsGenerated(generatedCodeRecognizer, compilation);
 
         public bool IsScannerRun(AnalyzerOptions options) =>
             ProjectConfiguration(options).IsScannerRun;
@@ -101,15 +111,6 @@ namespace SonarAnalyzer.Helpers
 
         public static bool IsTestProject(CompilationAnalysisContext analysisContext) =>
             IsTestProject(analysisContext.TryGetValue, analysisContext.Compilation, analysisContext.Options);
-
-        public static bool ShouldAnalyzeGenerated(AnalysisContext analysisContext, Compilation c, AnalyzerOptions options) =>
-            ShouldAnalyzeGenerated(analysisContext.TryGetValue, c, options);
-
-        public static bool ShouldAnalyzeGenerated(CompilationAnalysisContext analysisContext, Compilation c, AnalyzerOptions options) =>
-            ShouldAnalyzeGenerated(analysisContext.TryGetValue, c, options);
-
-        public static bool ShouldAnalyzeGenerated(CompilationStartAnalysisContext analysisContext, Compilation c, AnalyzerOptions options) =>
-            ShouldAnalyzeGenerated(analysisContext.TryGetValue, c, options);
 
         public void RegisterCompilationStartAction(Action<CompilationStartAnalysisContext> action) =>
             RegisterContextAction(context.RegisterCompilationStartAction, action, c => c.GetFirstSyntaxTree(), c => c.Compilation, c => c.Options);

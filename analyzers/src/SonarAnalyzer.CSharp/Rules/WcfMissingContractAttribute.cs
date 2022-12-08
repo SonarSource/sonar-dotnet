@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.Helpers;
+
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -50,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var declarationSyntax = GetTypeDeclaration(namedType, c.Compilation, c.Options);
+                    var declarationSyntax = GetTypeDeclaration(context, namedType, c.Compilation, c.Options);
                     if (declarationSyntax == null)
                     {
                         return;
@@ -82,9 +84,9 @@ namespace SonarAnalyzer.Rules.CSharp
                      .OfType<IMethodSymbol>()
                      .Any(m => m.HasAttribute(KnownType.System_ServiceModel_OperationContractAttribute));
 
-        private static TypeDeclarationSyntax GetTypeDeclaration(ISymbol namedType, Compilation compilation, AnalyzerOptions options) =>
+        private static TypeDeclarationSyntax GetTypeDeclaration(SonarAnalysisContext context, ISymbol namedType, Compilation compilation, AnalyzerOptions options) =>
             namedType.DeclaringSyntaxReferences
-                     .Where(sr => sr.SyntaxTree.ShouldAnalyze(options, compilation))
+                     .Where(sr => sr.SyntaxTree.ShouldAnalyze(context, compilation, options))
                      .Select(sr => sr.GetSyntax() as TypeDeclarationSyntax)
                      .FirstOrDefault(s => s != null);
     }

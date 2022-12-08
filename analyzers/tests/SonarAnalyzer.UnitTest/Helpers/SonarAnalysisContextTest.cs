@@ -26,13 +26,13 @@ using SonarAnalyzer.UnitTest.Rules;
 namespace SonarAnalyzer.UnitTest.Helpers
 {
     [TestClass]
-    public class SonarAnalysisContextTest
+    public partial class SonarAnalysisContextTest
     {
         private const string MainTag = "MainSourceScope";
         private const string TestTag = "TestSourceScope";
         private const string UtilityTag = "Utility";
 
-        private class TestSetup
+        private sealed class TestSetup
         {
             public string Path { get; }
             public DiagnosticAnalyzer Analyzer { get; }
