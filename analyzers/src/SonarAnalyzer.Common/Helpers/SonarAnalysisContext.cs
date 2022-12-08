@@ -101,9 +101,6 @@ namespace SonarAnalyzer.Helpers
                                          AnalyzerOptions options) =>
             ShouldAnalyzeGenerated(tryGetValue, compilation, options) || !syntaxTree.IsGenerated(generatedCodeRecognizer, compilation);
 
-        public bool TryGetValue<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value) =>
-            context.TryGetValue(text, valueProvider, out value);
-
         public bool IsScannerRun(AnalyzerOptions options) =>
             ProjectConfiguration(options).IsScannerRun;
 
