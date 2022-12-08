@@ -218,16 +218,14 @@ End Class", AnalyzerLanguage.VisualBasic);
         public static string ToUnixLineEndings(this string value) =>
             value.Replace(Constants.WindowsLineEnding, Constants.UnixLineEnding);
 
-        public static string CreateFilesToAnalyze(string filesToAnalyzeDirectory, params string[] filesToAnalyze)
-        {
-            var filestoAnalyzePath = Path.Combine(filesToAnalyzeDirectory, "FilesToAnalyze.txt");
-            File.WriteAllLines(filestoAnalyzePath, filesToAnalyze);
-            return filestoAnalyzePath;
-        }
-
         public static string TestPath(TestContext context, string fileName)
         {
-            var path = Path.Combine(context.TestDir, context.FullyQualifiedTestClassName.Replace("SonarAnalyzer.UnitTest.", null), context.TestName, "TestCases", fileName);
+            var path = Path.Combine(context.TestDir, context.FullyQualifiedTestClassName.Replace("SonarAnalyzer.UnitTest.", null), context.TestName, fileName);
+            if (path.Length > 250)  // 260 can throw PathTooLongException
+            {
+                var directory = Path.Combine(context.TestDir, context.FullyQualifiedTestClassName.Replace("SonarAnalyzer.UnitTest.", null));
+                path = Path.Combine(directory, $"TooLongTestName.{Directory.GetDirectories(directory).Length}", fileName);
+            }
             Directory.CreateDirectory(Path.GetDirectoryName(path));
             return path;
         }
@@ -255,27 +253,32 @@ End Class", AnalyzerLanguage.VisualBasic);
                 </AnalysisConfig>
                 """);
 
+        public static string CreateSonarProjectConfigWithFilesToAnalyze(TestContext context, params string[] filesToAnalyze)
+        {
+            var filesToAnalyzePath = TestPath(context, "FilesToAnalyze.txt");
+            File.WriteAllLines(filesToAnalyzePath, filesToAnalyze);
+            return CreateSonarProjectConfig(context, "FilesToAnalyzePath", filesToAnalyzePath, true);
+        }
+
         public static string CreateSonarProjectConfig(TestContext context, IEnumerable<string> unchangedFiles)
         {
             var analysisConfigPath = CreateAnalysisConfig(context, unchangedFiles);
-            return CreateSonarProjectConfig(Path.GetDirectoryName(analysisConfigPath), "AnalysisConfigPath", analysisConfigPath, true);
+            return CreateSonarProjectConfig(context, "NotImporant", null, true, analysisConfigPath);
         }
 
-        public static string CreateSonarProjectConfig(string sonarProjectConfigDirectory, string filesToAnalyzePath) =>
-            CreateSonarProjectConfig(sonarProjectConfigDirectory, "FilesToAnalyzePath", filesToAnalyzePath, true);
+        public static string CreateSonarProjectConfig(TestContext context, ProjectType projectType, bool isScannerRun = true) =>
+            CreateSonarProjectConfig(context, "ProjectType", projectType.ToString(), isScannerRun);
 
-        public static string CreateSonarProjectConfig(string testMethodName, ProjectType projectType, bool isScannerRun = true) =>
-            CreateSonarProjectConfig(@"TestCases\" + testMethodName, "ProjectType", projectType.ToString(), isScannerRun);
-
-        private static string CreateSonarProjectConfig(string directoryName, string element, string value, bool isScannerRun)
+        private static string CreateSonarProjectConfig(TestContext context, string element, string value, bool isScannerRun, string analysisConfigPath = null)
         {
-            var directory = Directory.CreateDirectory(directoryName).FullName;
-            var sonarProjectConfigPath = Path.Combine(directory, "SonarProjectConfig.xml");
-            var outPath = isScannerRun ? directory : null;
+            var sonarProjectConfigPath = TestPath(context, "SonarProjectConfig.xml");
+            var outPath = isScannerRun ? Path.GetDirectoryName(sonarProjectConfigPath) : null;
+            analysisConfigPath ??= CreateAnalysisConfig(context, "NotImportant", null);
             var projectConfigContent = $"""
                 <SonarProjectConfig xmlns="http://www.sonarsource.com/msbuild/analyzer/2021/1">
-                    <{element}>{value}</{element}>
+                    <AnalysisConfigPath>{analysisConfigPath}</AnalysisConfigPath>
                     <OutPath>{outPath}</OutPath>
+                    <{element}>{value}</{element}>
                 </SonarProjectConfig>
                 """;
             File.WriteAllText(sonarProjectConfigPath, projectConfigContent);

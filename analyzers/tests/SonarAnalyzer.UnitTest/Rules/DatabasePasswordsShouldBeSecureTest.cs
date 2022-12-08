@@ -31,6 +31,8 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<DatabasePasswordsShouldBeSecure>();
 
+        public TestContext TestContext { get; set; }
+
         [DataTestMethod]
         [DataRow("3.1.11", "3.19.80")]
         [DataRow("5.0.2", "5.21.1")]
@@ -73,7 +75,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 CreateCompilation(),
                 new DatabasePasswordsShouldBeSecure(),
                 webConfigPath,
-                TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)));
+                TestHelper.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath));
         }
 
         [TestMethod]
@@ -86,7 +88,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 CreateCompilation(),
                 new DatabasePasswordsShouldBeSecure(),
                 webConfigPath,
-                TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath, externalConfigPath)));
+                TestHelper.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath, externalConfigPath));
         }
 
         [TestMethod]
@@ -100,7 +102,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 CreateCompilation(),
                 new DatabasePasswordsShouldBeSecure(),
                 corruptFilePath,
-                TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, corruptFilePath, nonExistingFilePath)));
+                TestHelper.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, corruptFilePath, nonExistingFilePath));
         }
 
         [DataTestMethod]
@@ -120,7 +122,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 CreateCompilation(),
                 new DatabasePasswordsShouldBeSecure(),
                 appSettingsPath,
-                TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, appSettingsPath)));
+                TestHelper.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, appSettingsPath));
         }
 
         [TestMethod]
@@ -134,7 +136,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 CreateCompilation(),
                 new DatabasePasswordsShouldBeSecure(),
                 corruptFilePath,
-                TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, corruptFilePath, nonExistingFilePath)));
+                TestHelper.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, corruptFilePath, nonExistingFilePath));
         }
 
         private static string GetWebConfigPath(string rootFolder) => Path.Combine(rootFolder, "Web.config");

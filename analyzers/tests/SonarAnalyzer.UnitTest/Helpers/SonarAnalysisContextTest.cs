@@ -32,6 +32,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
         private const string TestTag = "TestSourceScope";
         private const string UtilityTag = "Utility";
 
+        public TestContext TestContext { get; set; }
+
         private sealed class TestSetup
         {
             public string Path { get; }
@@ -123,7 +125,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void WhenProjectType_IsTest_RunRulesWithTestScope_SonarLint()
         {
-            var sonarProjectConfig = TestHelper.CreateSonarProjectConfig(nameof(WhenProjectType_IsTest_RunRulesWithTestScope_SonarLint), ProjectType.Test, false);
+            var sonarProjectConfig = TestHelper.CreateSonarProjectConfig(TestContext, ProjectType.Test, false);
             foreach (var testCase in testCases)
             {
                 var hasTestScope = testCase.Analyzer.SupportedDiagnostics.Any(d => d.CustomTags.Contains(DiagnosticDescriptorFactory.TestSourceScopeTag));
@@ -148,7 +150,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void WhenProjectType_IsTest_RunRulesWithTestScope_Scanner()
         {
-            var sonarProjectConfig = TestHelper.CreateSonarProjectConfig(nameof(WhenProjectType_IsTest_RunRulesWithTestScope_Scanner), ProjectType.Test);
+            var sonarProjectConfig = TestHelper.CreateSonarProjectConfig(TestContext, ProjectType.Test);
             foreach (var testCase in testCases)
             {
                 var hasProductScope = testCase.Analyzer.SupportedDiagnostics.Any(d => d.CustomTags.Contains(DiagnosticDescriptorFactory.MainSourceScopeTag));
@@ -173,7 +175,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void WhenProjectType_IsTest_RunRulesWithMainScope()
         {
-            var sonarProjectConfig = TestHelper.CreateSonarProjectConfig(nameof(WhenProjectType_IsTest_RunRulesWithMainScope), ProjectType.Product);
+            var sonarProjectConfig = TestHelper.CreateSonarProjectConfig(TestContext, ProjectType.Product);
             foreach (var testCase in testCases)
             {
                 var hasProductScope = testCase.Analyzer.SupportedDiagnostics.Any(d => d.CustomTags.Contains(DiagnosticDescriptorFactory.MainSourceScopeTag));
@@ -439,7 +441,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [DataRow(ProjectType.Test, true)]
         public void IsTestProject_WithConfigFile(ProjectType projectType, bool expectedResult)
         {
-            var configPath = TestHelper.CreateSonarProjectConfig(nameof(IsTestProject_WithConfigFile), projectType);
+            var configPath = TestHelper.CreateSonarProjectConfig(TestContext, projectType);
             var context = new CompilationAnalysisContext(null, TestHelper.CreateOptions(configPath), null, null, default);
 
             SonarAnalysisContext.IsTestProject(context).Should().Be(expectedResult);

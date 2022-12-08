@@ -39,6 +39,8 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         private readonly VerifierBuilder builder = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled));
 
+        public TestContext TestContext { get; set; }
+
         [TestMethod]
         public void CookiesShouldBeSecure_Nancy() =>
             builder.AddPaths("CookieShouldBeSecure_Nancy.cs")
@@ -62,7 +64,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
             builder.AddPaths("CookieShouldBeSecure_WithWebConfig.cs")
                 .AddReferences(MetadataReferenceFacade.SystemWeb)
-                .WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)))
+                .WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath))
                 .Verify();
         }
 
@@ -75,7 +77,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             var webConfigPath = Path.Combine(root, WebConfig);
             builder.AddPaths("CookieShouldBeSecure.cs")
                 .AddReferences(MetadataReferenceFacade.SystemWeb)
-                .WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)))
+                .WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath))
                 .Verify();
         }
 

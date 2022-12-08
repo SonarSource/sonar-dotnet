@@ -38,6 +38,8 @@ namespace SonarAnalyzer.UnitTest.Rules
                                                      .WithBasePath(@"Hotspots")
                                                      .AddReferences(GetAdditionalReferences());
 
+        public TestContext TestContext { get; set; }
+
         [TestMethod]
         public void RequestsWithExcessiveLength_CS() =>
             builderCS.AddPaths(@"RequestsWithExcessiveLength.cs").Verify();
@@ -102,7 +104,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 CreateCompilation(),
                 new CS.RequestsWithExcessiveLength(),
                 webConfigPath,
-                TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)));
+                TestHelper.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath));
         }
 
         [TestMethod]
@@ -116,7 +118,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 CreateCompilation(),
                 new CS.RequestsWithExcessiveLength(),
                 corruptFilePath,
-                TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, corruptFilePath, nonExistingFilePath)));
+                TestHelper.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, corruptFilePath, nonExistingFilePath));
         }
 
         private static string GetWebConfigPath(string rootFolder) => Path.Combine(rootFolder, "Web.config");

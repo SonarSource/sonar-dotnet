@@ -31,6 +31,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         private readonly VerifierBuilder builderCS = CreateVerifierCS();
         private readonly VerifierBuilder builderVB = CreateVerifierVB();
 
+        public TestContext TestContext { get; set; }
+
         [TestMethod]
         public void DoNotHardcodeCredentials_CS_DefaultValues() =>
             builderCS.AddPaths("DoNotHardcodeCredentials.DefaultValues.cs").Verify();
@@ -126,7 +128,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithBasePath("Hotspots")
                 .AddReferences(AdditionalReferences);
 
-        private static void DoNotHardcodeCredentials_ExternalFiles(AnalyzerLanguage language, DiagnosticAnalyzer analyzer, string testDirectory, string pattern)
+        private void DoNotHardcodeCredentials_ExternalFiles(AnalyzerLanguage language, DiagnosticAnalyzer analyzer, string testDirectory, string pattern)
         {
             var root = @$"TestCases\{testDirectory}\DoNotHardcodeCredentials";
             var paths = Directory.GetFiles(root, pattern, SearchOption.AllDirectories);
@@ -134,7 +136,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             var compilation = CreateCompilation(language);
             foreach (var path in paths)
             {
-                DiagnosticVerifier.VerifyExternalFile(compilation, analyzer, path, TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, path)));
+                DiagnosticVerifier.VerifyExternalFile(compilation, analyzer, path, TestHelper.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, path));
             }
         }
 

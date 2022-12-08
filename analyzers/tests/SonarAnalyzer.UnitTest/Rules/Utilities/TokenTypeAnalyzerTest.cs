@@ -33,6 +33,8 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private const string BasePath = @"Utilities\TokenTypeAnalyzer\";
 
+        public TestContext TestContext { get; set; }
+
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
@@ -131,7 +133,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 tokenInfo.Where(token => token.TokenType == TokenType.TypeName).Should().BeEmpty();
             });
 
-        private static void Verify(string fileName, ProjectType projectType, Action<IReadOnlyList<TokenTypeInfo.Types.TokenInfo>> verifyTokenInfo, [CallerMemberName] string testName = "")
+        private void Verify(string fileName, ProjectType projectType, Action<IReadOnlyList<TokenTypeInfo.Types.TokenInfo>> verifyTokenInfo, [CallerMemberName] string testName = "")
         {
             var testRoot = BasePath + testName;
             var language = AnalyzerLanguage.FromPath(fileName);
@@ -147,7 +149,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .AddPaths(fileName)
                 .WithBasePath(BasePath)
                 .WithOptions(ParseOptionsHelper.Latest(language))
-                .WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfig(testRoot, projectType))
+                .WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfig(TestContext, projectType))
                 .WithProtobufPath(@$"{testRoot}\token-type.pb")
                 .VerifyUtilityAnalyzer<TokenTypeInfo>(messages =>
                     {

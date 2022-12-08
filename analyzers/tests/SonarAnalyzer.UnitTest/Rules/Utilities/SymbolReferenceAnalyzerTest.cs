@@ -33,6 +33,8 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private const string BasePath = @"Utilities\SymbolReferenceAnalyzer\";
 
+        public TestContext TestContext { get; set; }
+
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
@@ -173,7 +175,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             // In TokenThreshold.cs there are 40009 tokens which is more than the current limit of 40000
             Verify("TokenThreshold.cs", ProjectType.Product, _ => { }, false);
 
-        private static void Verify(string fileName, ProjectType projectType, int expectedDeclarationCount, int assertedDeclarationLine, params int[] assertedDeclarationLineReferences) =>
+        private void Verify(string fileName, ProjectType projectType, int expectedDeclarationCount, int assertedDeclarationLine, params int[] assertedDeclarationLineReferences) =>
             Verify(fileName, projectType, references =>
                 {
                     references.Where(x => x.Declaration != null).Should().HaveCount(expectedDeclarationCount);
@@ -181,7 +183,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                     declarationReferences.Select(x => x.StartLine).Should().BeEquivalentTo(assertedDeclarationLineReferences);
                 });
 
-        private static void Verify(string fileName,
+        private void Verify(string fileName,
                                    ProjectType projectType,
                                    Action<IReadOnlyList<SymbolReferenceInfo.Types.SymbolReference>> verifyReference,
                                    bool isMessageExpected = true,
@@ -201,7 +203,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .AddPaths(fileName)
                 .WithBasePath(BasePath)
                 .WithOptions(ParseOptionsHelper.Latest(language))
-                .WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfig(testRoot, projectType))
+                .WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfig(TestContext, projectType))
                 .WithProtobufPath(@$"{testRoot}\symrefs.pb")
                 .VerifyUtilityAnalyzer<SymbolReferenceInfo>(messages =>
                     {
