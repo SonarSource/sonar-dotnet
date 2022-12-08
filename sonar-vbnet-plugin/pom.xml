@@ -16,10 +16,12 @@
   <description>Code Analyzer for VB.NET</description>
   <url>http://redirect.sonarsource.com/plugins/vbnet.html</url>
   <inceptionYear>2012</inceptionYear>
+
   <organization>
     <name>SonarSource</name>
     <url>http://www.sonarsource.com</url>
   </organization>
+
   <licenses>
     <license>
       <name>GNU LGPL 3</name>

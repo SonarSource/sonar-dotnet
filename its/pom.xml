@@ -11,9 +11,9 @@
 
   <groupId>com.sonarsource.it</groupId>
   <artifactId>it-dotnet-plugin</artifactId>
-
   <name>SonarSource :: C# :: ITs :: Plugin</name>
   <inceptionYear>2011</inceptionYear>
+
   <organization>
     <name>SonarSource</name>
     <url>http://www.sonarsource.com</url>

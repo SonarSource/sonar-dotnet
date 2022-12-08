@@ -16,10 +16,12 @@
   <description>Code Analyzer for C#</description>
   <url>http://redirect.sonarsource.com/plugins/csharp.html</url>
   <inceptionYear>2014</inceptionYear>
+
   <organization>
     <name>SonarSource</name>
     <url>http://www.sonarsource.com</url>
   </organization>
+
   <licenses>
     <license>
       <name>GNU LGPL 3</name>
