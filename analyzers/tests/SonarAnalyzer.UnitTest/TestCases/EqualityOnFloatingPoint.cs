@@ -30,6 +30,9 @@ namespace Tests.Diagnostics
             if (f <= 3.146 && ((f >= 3.146))) // Noncompliant indirect equality test
             {
             }
+            if (f <= 3.146 && 3.146 <= f) // FN. Equivalent to the case above but not detected
+            {
+            }
             var i = 3;
             if (i <= 3 && i >= 3)
             {
