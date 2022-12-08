@@ -19,6 +19,7 @@
  */
 
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using Microsoft.CodeAnalysis.Text;
@@ -39,14 +40,14 @@ namespace SonarAnalyzer.Helpers
         public delegate bool TryGetValueDelegate<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value);
 
         private const string SonarProjectConfigFileName = "SonarProjectConfig.xml";
-        private static readonly Regex WebConfigRegex = new Regex(@"[\\\/]web\.([^\\\/]+\.)?config$", RegexOptions.IgnoreCase);
-        private static readonly Regex AppSettingsRegex = new Regex(@"[\\\/]appsettings\.([^\\\/]+\.)?json$", RegexOptions.IgnoreCase);
+        private static readonly Regex WebConfigRegex = new(@"[\\\/]web\.([^\\\/]+\.)?config$", RegexOptions.IgnoreCase);
+        private static readonly Regex AppSettingsRegex = new(@"[\\\/]appsettings\.([^\\\/]+\.)?json$", RegexOptions.IgnoreCase);
 
         private static readonly SourceTextValueProvider<bool> ShouldAnalyzeGeneratedCS = CreateAnalyzeGeneratedProvider(LanguageNames.CSharp);
         private static readonly SourceTextValueProvider<bool> ShouldAnalyzeGeneratedVB = CreateAnalyzeGeneratedProvider(LanguageNames.VisualBasic);
-        private static readonly Lazy<ProjectConfigReader> EmptyProjectConfig = new Lazy<ProjectConfigReader>(() => new ProjectConfigReader(null, null));
-        private static readonly SourceTextValueProvider<ProjectConfigReader> ProjectConfigProvider =
-            new SourceTextValueProvider<ProjectConfigReader>(x => new ProjectConfigReader(x, SonarProjectConfigFileName));
+        private static readonly Lazy<ProjectConfigReader> EmptyProjectConfig = new(() => new ProjectConfigReader(null, null));
+        private static readonly SourceTextValueProvider<ProjectConfigReader> ProjectConfigProvider = new(x => new ProjectConfigReader(x, SonarProjectConfigFileName));
+        private static readonly ConditionalWeakTable<Compilation, ImmutableHashSet<string>> UnchangedFilesCache = new();
 
         private readonly AnalysisContext context;
         private readonly IEnumerable<DiagnosticDescriptor> supportedDiagnostics;
@@ -118,6 +119,9 @@ namespace SonarAnalyzer.Helpers
         public void RegisterSymbolAction(Action<SymbolAnalysisContext> action, params SymbolKind[] symbolKinds) =>
             RegisterContextAction(act => context.RegisterSymbolAction(act, symbolKinds), action, c => c.GetFirstSyntaxTree(), c => c.Compilation, c => c.Options);
 
+        public static bool IsUnchanged(TryGetValueDelegate<ProjectConfigReader> tryGetValue, SyntaxTree tree, Compilation compilation, AnalyzerOptions options) =>
+            UnchangedFilesCache.GetValue(compilation, _ => CreateUnchangedFilesHashSet(tryGetValue, options)).Contains(tree.FilePath);
+
         internal static bool IsRegisteredActionEnabled(IEnumerable<DiagnosticDescriptor> diagnostics, SyntaxTree tree) =>
             ShouldExecuteRegisteredAction == null || tree == null || ShouldExecuteRegisteredAction(diagnostics, tree);
 
@@ -175,6 +179,9 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
+        private static ImmutableHashSet<string> CreateUnchangedFilesHashSet(TryGetValueDelegate<ProjectConfigReader> tryGetValue, AnalyzerOptions options) =>
+            ImmutableHashSet.Create(StringComparer.OrdinalIgnoreCase, ProjectConfiguration(tryGetValue, options).AnalysisConfig.UnchangedFiles());
+
         private static bool IsTestProject(TryGetValueDelegate<ProjectConfigReader> tryGetValue, Compilation compilation, AnalyzerOptions options)
         {
             var projectType = ProjectConfiguration(tryGetValue, options).ProjectType;
@@ -184,7 +191,7 @@ namespace SonarAnalyzer.Helpers
         }
 
         private static SourceTextValueProvider<bool> CreateAnalyzeGeneratedProvider(string language) =>
-            new SourceTextValueProvider<bool>(x => PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(ParseXmlSettings(x), language));
+            new(x => PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(ParseXmlSettings(x), language));
 
         private static IEnumerable<XElement> ParseXmlSettings(SourceText sourceText)
         {

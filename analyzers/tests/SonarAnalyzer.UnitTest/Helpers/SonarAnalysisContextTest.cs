@@ -91,7 +91,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void WhenShouldAnalysisBeDisabledReturnsTrue_NoIssueReported()
         {
-            SonarAnalysisContext.ShouldExecuteRegisteredAction = (diags, tree) => false;
+            SonarAnalysisContext.ShouldExecuteRegisteredAction = (_, _) => false;
             try
             {
                 foreach (var testCase in testCases)
@@ -355,7 +355,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [DataRow(false, ProjectType.Product, TestTag, TestTag)]
         [DataRow(false, ProjectType.Test, MainTag)]
         [DataRow(false, ProjectType.Test, MainTag, MainTag)]
-        public void IsAnalysisScopeMatching_SingleDiagnostis_WithOneOrMoreScopes_SonarLint(bool expectedResult, ProjectType projectType, params string[] ruleTags)
+        public void IsAnalysisScopeMatching_SingleDiagnostic_WithOneOrMoreScopes_SonarLint(bool expectedResult, ProjectType projectType, params string[] ruleTags)
         {
             var compilation = new SnippetCompiler("// Nothing to see here").SemanticModel.Compilation;
             var diagnostic = TestHelper.CreateDescriptor("Sxxx", ruleTags);
@@ -377,7 +377,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [DataRow(false, ProjectType.Test, MainTag)]
         [DataRow(false, ProjectType.Test, MainTag, UtilityTag)]
         [DataRow(false, ProjectType.Test, MainTag, MainTag)]
-        public void IsAnalysisScopeMatching_SingleDiagnostis_WithOneOrMoreScopes_Scanner(bool expectedResult, ProjectType projectType, params string[] ruleTags)
+        public void IsAnalysisScopeMatching_SingleDiagnostic_WithOneOrMoreScopes_Scanner(bool expectedResult, ProjectType projectType, params string[] ruleTags)
         {
             var compilation = new SnippetCompiler("// Nothing to see here").SemanticModel.Compilation;
             var diagnostic = TestHelper.CreateDescriptor("Sxxx", ruleTags);
@@ -443,6 +443,17 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var context = new CompilationAnalysisContext(null, TestHelper.CreateOptions(configPath), null, null, default);
 
             SonarAnalysisContext.IsTestProject(context).Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        public void IsUnchanged_NoData() // E.g. first scan or using old scanner version
+        {
+            var compiler = new SnippetCompiler("class Data { }");
+            var sut = new SonarAnalysisContext(new DummyContext(), Enumerable.Empty<DiagnosticDescriptor>());
+
+            var result = SonarAnalysisContext.IsUnchanged(sut.TryGetValue, compiler.SyntaxTree, compiler.SemanticModel.Compilation, new AnalyzerOptions(ImmutableArray<AdditionalText>.Empty));
+
+            result.Should().BeFalse();
         }
 
         internal class DummyContext : AnalysisContext
