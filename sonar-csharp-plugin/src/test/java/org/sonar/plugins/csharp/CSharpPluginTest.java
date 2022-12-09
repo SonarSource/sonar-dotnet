@@ -33,8 +33,10 @@ import org.sonarsource.dotnet.shared.plugins.AnalysisWarningsSensor;
 import org.sonarsource.dotnet.shared.plugins.CodeCoverageProvider;
 import org.sonarsource.dotnet.shared.plugins.DotNetSensor;
 import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
+import org.sonarsource.dotnet.shared.plugins.FileCacheSensor;
 import org.sonarsource.dotnet.shared.plugins.FileTypeSensor;
 import org.sonarsource.dotnet.shared.plugins.GeneratedFileFilter;
+import org.sonarsource.dotnet.shared.plugins.HashProvider;
 import org.sonarsource.dotnet.shared.plugins.LogSensor;
 import org.sonarsource.dotnet.shared.plugins.ProjectTypeCollector;
 import org.sonarsource.dotnet.shared.plugins.PropertiesSensor;
@@ -57,7 +59,7 @@ public class CSharpPluginTest {
     Plugin.Context context = new Plugin.Context(sonarRuntime);
     new CSharpPlugin().define(context);
 
-    List extensions = context.getExtensions();
+    var extensions = context.getExtensions();
 
     Object[] expectedExtensions = new Object[] {
       AnalysisWarningsSensor.class,
@@ -69,8 +71,10 @@ public class CSharpPluginTest {
       CSharpSonarRulesDefinition.class,
       DotNetSensor.class,
       EncodingPerFile.class,
+      FileCacheSensor.class,
       FileTypeSensor.class,
       GeneratedFileFilter.class,
+      HashProvider.class,
       LogSensor.class,
       ProjectTypeCollector.class,
       PropertiesSensor.class,

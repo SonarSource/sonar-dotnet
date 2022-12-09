@@ -51,6 +51,7 @@ public class ScannerCliTest {
     assertThat(result.getLogsLines(l -> l.contains("WARN")))
       .containsExactlyInAnyOrder(
         "WARN: Your project contains C# files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html",
+        "WARN: Incremental PR analysis: Could not determine common base path, cache will not be computed. Consider setting 'sonar.projectBaseDir' property.",
         "WARN: Your project contains VB.NET files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html");
     // The HTML plugin works
     assertThat(TestUtils.getMeasureAsInt(ORCHESTRATOR, RAZOR_PAGES_PROJECT, "violations")).isEqualTo(2);
@@ -66,7 +67,9 @@ public class ScannerCliTest {
 
     assertThat(result.getLogsLines(l -> l.contains("WARN")))
       .containsExactlyInAnyOrder(
-        "WARN: Your project contains C# files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html");
+        "WARN: Your project contains C# files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html",
+        "WARN: Incremental PR analysis: Could not determine common base path, cache will not be computed. Consider setting 'sonar.projectBaseDir' property."
+      );
     // The HTML plugin works
     assertThat(TestUtils.getMeasureAsInt(ORCHESTRATOR, HTML_IN_MAIN_AND_CSHARP_IN_TEST_SUBFOLDERS, "violations")).isEqualTo(2);
     TestUtils.verifyNoGuiWarnings(ORCHESTRATOR, result);
@@ -81,7 +84,9 @@ public class ScannerCliTest {
 
     assertThat(result.getLogsLines(l -> l.contains("WARN")))
       .containsExactlyInAnyOrder(
-        "WARN: Your project contains C# files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html");
+        "WARN: Your project contains C# files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html",
+        "WARN: Incremental PR analysis: Could not determine common base path, cache will not be computed. Consider setting 'sonar.projectBaseDir' property."
+      );
     TestUtils.verifyNoGuiWarnings(ORCHESTRATOR, result);
   }
 
@@ -93,7 +98,10 @@ public class ScannerCliTest {
       .setProperty("sonar.cs.file.suffixes=", ".no_extension");
     BuildResult result = ORCHESTRATOR.executeBuild(scanner);
 
-    assertThat(result.getLogsLines(l -> l.contains("WARN"))).isEmpty();
+    assertThat(result.getLogsLines(l -> l.contains("WARN")))
+      .containsExactlyInAnyOrder(
+        "WARN: Incremental PR analysis: Could not determine common base path, cache will not be computed. Consider setting 'sonar.projectBaseDir' property."
+      );
     TestUtils.verifyNoGuiWarnings(ORCHESTRATOR, result);
   }
 

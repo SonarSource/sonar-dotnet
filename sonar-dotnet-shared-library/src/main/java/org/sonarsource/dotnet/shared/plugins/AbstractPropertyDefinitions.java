@@ -184,4 +184,12 @@ public abstract class AbstractPropertyDefinitions {
   public static String getVulnerabilityCategoriesProperty(String languageKey) {
     return PROP_PREFIX + languageKey + ".roslyn.vulnerabilityCategories";
   }
+
+  public static String getPullRequestCacheBasePath() {
+    return PROP_PREFIX + "pullrequest.cache.basepath";
+  }
+
+  public static String getPullRequestBase() {
+    return PROP_PREFIX + "pullrequest.base";
+  }
 }

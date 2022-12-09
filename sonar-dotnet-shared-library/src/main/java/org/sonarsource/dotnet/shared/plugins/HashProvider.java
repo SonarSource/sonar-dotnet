@@ -19,12 +19,15 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
+import org.sonar.api.scanner.ScannerSide;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+@ScannerSide
 public class HashProvider {
   public byte[] computeHash(Path filePath) throws NoSuchAlgorithmException, IOException {
     MessageDigest sha256 = MessageDigest.getInstance("SHA-256");
