@@ -18,10 +18,12 @@
   <description>Code Analyzers for .NET</description>
   <url>https://github.com/SonarSource/sonar-dotnet</url>
   <inceptionYear>2014</inceptionYear>
+
   <organization>
     <name>SonarSource</name>
     <url>http://www.sonarsource.com</url>
   </organization>
+
   <licenses>
     <license>
       <name>GNU LGPL 3</name>
@@ -60,6 +62,11 @@
     <sonar.api.impl.version>9.7.1.62043</sonar.api.impl.version>
     <jdk.min.version>11</jdk.min.version>
     <maven.compiler.release>${jdk.min.version}</maven.compiler.release>
+
+    <!-- Test dependencies -->
+    <logback.classic.version>1.4.5</logback.classic.version>
+    <junit.version>4.13.2</junit.version>
+    <assertj.core.version>3.23.1</assertj.core.version>
   </properties>
 
   <profiles>
