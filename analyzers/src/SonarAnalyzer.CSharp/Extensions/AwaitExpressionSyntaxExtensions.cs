@@ -35,6 +35,5 @@ namespace SonarAnalyzer.Extensions
                 } => configuredExpression,
                 var x => x,
             };
-
     }
 }
