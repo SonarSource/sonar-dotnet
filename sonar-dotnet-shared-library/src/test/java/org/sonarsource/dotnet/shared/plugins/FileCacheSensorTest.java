@@ -74,6 +74,7 @@ public class FileCacheSensorTest {
   @Test
   public void execute_whenPullRequestCacheBasePathIsNotConfigured_logsWarning() throws IOException {
     var context = SensorContextTester.create(temp.newFolder());
+    context.setCacheEnabled(true);
     var sut = new FileCacheSensor(new HashProvider());
 
     sut.execute(context);
@@ -83,8 +84,7 @@ public class FileCacheSensorTest {
 
   @Test
   public void execute_whenCacheIsDisabled_logsWarning() throws IOException {
-    var settings = new MapSettings().setProperty("sonar.pullrequest.cache.basepath", "C:/");
-    var context = SensorContextTester.create(temp.newFolder()).setSettings(settings);
+    var context = SensorContextTester.create(temp.newFolder());
     context.setCacheEnabled(false);
     var sensor = new FileCacheSensor(new HashProvider());
 

@@ -51,16 +51,16 @@ public class FileCacheSensor implements ProjectSensor {
       return;
     }
 
+    if (!context.isCacheEnabled()) {
+      LOG.info("Incremental PR analysis: Analysis cache is disabled.");
+      return;
+    }
+
     var basePath = configuration
       .get(AbstractPropertyDefinitions.getPullRequestCacheBasePath())
       .map(x -> Paths.get(x).toUri());
     if (basePath.isEmpty()) {
       LOG.warn("Incremental PR analysis: Could not determine common base path, cache will not be computed. Consider setting 'sonar.projectBaseDir' property.");
-      return;
-    }
-
-    if (!context.isCacheEnabled()) {
-      LOG.info("Incremental PR analysis: Analysis cache is disabled.");
       return;
     }
 
@@ -75,7 +75,6 @@ public class FileCacheSensor implements ProjectSensor {
         LOG.debug("Incremental PR analysis: Adding hash for '" + key + "' to the cache.");
         next.write(key, hashProvider.computeHash(Path.of(uri)));
       } catch (Exception exception) {
-
         LOG.warn("Incremental PR analysis: An error occurred while computing the hash for " + key, exception);
       }
     });
