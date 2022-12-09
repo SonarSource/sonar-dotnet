@@ -230,7 +230,7 @@ End Class", AnalyzerLanguage.VisualBasic);
             return path;
 
             int RootSubdirectoryCount() =>
-                Directory.Exists(root) ? Directory.GetDirectories(root).Length : 0
+                Directory.Exists(root) ? Directory.GetDirectories(root).Length : 0;
         }
 
         public static string WriteFile(TestContext context, string fileName, string content = null)
