@@ -30,25 +30,24 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @ScannerSide
-public class FileStatusCacheSensor implements ProjectSensor {
-  private static final Logger LOG = Loggers.get(FileStatusCacheSensor.class);
+public class FileCacheSensor implements ProjectSensor {
+  private static final Logger LOG = Loggers.get(FileCacheSensor.class);
   private final HashProvider hashProvider;
 
-  public FileStatusCacheSensor(HashProvider hashProvider) {
-
+  public FileCacheSensor(HashProvider hashProvider) {
     this.hashProvider = hashProvider;
   }
 
   @Override
   public void describe(SensorDescriptor descriptor) {
-    descriptor.name("File status cache sensor");
+    descriptor.name("File Hash Caching Sensor");
   }
 
   @Override
   public void execute(SensorContext context) {
     var configuration = context.config();
-    if (configuration.get(AbstractPropertyDefinitions.getPullRequestKey()).isPresent()) {
-      LOG.debug("Incremental PR analysis: Cache is not updated for pull requests.");
+    if (configuration.get(AbstractPropertyDefinitions.getPullRequestBase()).isPresent()) {
+      LOG.debug("Incremental PR analysis: Cache is not uploaded for pull requests.");
       return;
     }
 
@@ -56,16 +55,16 @@ public class FileStatusCacheSensor implements ProjectSensor {
       .get(AbstractPropertyDefinitions.getPullRequestCacheBasePath())
       .map(x -> Paths.get(x).toUri());
     if (basePath.isEmpty()) {
-      LOG.debug("Incremental PR analysis: Pull request cache base path is not configured. Skipping file status upload.");
+      LOG.warn("Incremental PR analysis: Could not determine common base path, cache will not be computed. Consider setting 'sonar.projectBaseDir' property.");
       return;
     }
 
     if (!context.isCacheEnabled()) {
-      LOG.debug("Incremental PR analysis: Analysis cache is disabled. Skipping file status upload for incremental PR analysis.");
+      LOG.info("Incremental PR analysis: Analysis cache is disabled.");
       return;
     }
 
-    LOG.debug("Incremental PR analysis: Preparing to upload file status.");
+    LOG.debug("Incremental PR analysis: Preparing to upload file hashes.");
     var fileSystem = context.fileSystem();
     fileSystem.inputFiles(fileSystem.predicates().all()).forEach(inputFile -> {
       // Normalize to unix style separators. The scanner should be able to read the files on both windows and unix.
@@ -73,9 +72,10 @@ public class FileStatusCacheSensor implements ProjectSensor {
       var key = basePath.get().relativize(uri).getPath().replace('\\','/');
       var next = context.nextCache();
       try {
-        LOG.debug("Incremental PR analysis: Adding " + key + " hash to cache.");
+        LOG.debug("Incremental PR analysis: Adding hash for '" + key + "' to the cache.");
         next.write(key, hashProvider.computeHash(Path.of(uri)));
       } catch (Exception exception) {
+
         LOG.warn("Incremental PR analysis: An error occurred while computing the hash for " + key, exception);
       }
     });

@@ -189,7 +189,7 @@ public abstract class AbstractPropertyDefinitions {
     return PROP_PREFIX + "pullrequest.cache.basepath";
   }
 
-  public static String getPullRequestKey() {
-    return PROP_PREFIX + "pullrequest.key";
+  public static String getPullRequestBase() {
+    return PROP_PREFIX + "pullrequest.base";
   }
 }

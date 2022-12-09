@@ -19,6 +19,7 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -41,7 +42,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class FileStatusCacheSensorTest {
+public class FileCacheSensorTest {
   @Rule
   public TemporaryFolder temp = new TemporaryFolder();
 
@@ -51,32 +52,33 @@ public class FileStatusCacheSensorTest {
   @Test
   public void should_describe() {
     var sensorDescriptor = new DefaultSensorDescriptor();
-    var sensor = new FileStatusCacheSensor(new HashProvider());
+    var sensor = new FileCacheSensor(new HashProvider());
     sensor.describe(sensorDescriptor);
 
-    assertThat(sensorDescriptor.name()).isEqualTo("File status cache sensor");
+    assertThat(sensorDescriptor.name()).isEqualTo("File Hash Caching Sensor");
     assertThat(sensorDescriptor.languages()).isEmpty();
   }
 
   @Test
-  public void execute_whenAnalyzingAPullRequest_logsMessage() throws IOException {
-    var settings = new MapSettings().setProperty("sonar.pullrequest.key", "42");
+  public void execute_whenAnalyzingPullRequest_logsMessage() throws IOException {
+    var settings = new MapSettings().setProperty("sonar.pullrequest.base", "42");
     var context = SensorContextTester.create(temp.newFolder()).setSettings(settings);
-    var sensor = new FileStatusCacheSensor(new HashProvider());
+    var sensor = new FileCacheSensor(new HashProvider());
 
     sensor.execute(context);
 
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("Incremental PR analysis: Cache is not updated for pull requests.");
+    assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("Incremental PR analysis: Cache is not uploaded for pull requests.");
   }
 
   @Test
   public void execute_whenPullRequestCacheBasePathIsNotConfigured_logsWarning() throws IOException {
     var context = SensorContextTester.create(temp.newFolder());
-    var sut = new FileStatusCacheSensor(new HashProvider());
+    var sut = new FileCacheSensor(new HashProvider());
 
     sut.execute(context);
 
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("Incremental PR analysis: Pull request cache base path is not configured. Skipping file status upload.");
+    assertThat(logTester.logs(LoggerLevel.WARN)).containsExactly("Incremental PR analysis: Could not determine common base path, cache will not be computed. Consider setting 'sonar.projectBaseDir' property.");
   }
 
   @Test
@@ -84,36 +86,37 @@ public class FileStatusCacheSensorTest {
     var settings = new MapSettings().setProperty("sonar.pullrequest.cache.basepath", "C:/");
     var context = SensorContextTester.create(temp.newFolder()).setSettings(settings);
     context.setCacheEnabled(false);
-    var sensor = new FileStatusCacheSensor(new HashProvider());
+    var sensor = new FileCacheSensor(new HashProvider());
 
     sensor.execute(context);
 
-    assertThat(logTester.logs()).containsExactly("Incremental PR analysis: Analysis cache is disabled. Skipping file status upload for incremental PR analysis.");
+    assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
+    assertThat(logTester.logs(LoggerLevel.INFO)).containsExactly("Incremental PR analysis: Analysis cache is disabled.");
   }
 
   @Test
   public void execute_whenCacheIsEnabled_itAddsTheFiles() throws IOException, NoSuchAlgorithmException {
     var hashProvider = mock(HashProvider.class);
-    when(hashProvider.computeHash(any())).thenReturn(new byte[0]);
+    when(hashProvider.computeHash(any())).thenReturn(new byte[] {42} );
     var context = CreateContextForCaching();
-    var sut = new FileStatusCacheSensor(hashProvider);
+    var sut = new FileCacheSensor(hashProvider);
 
     sut.execute(context);
 
     assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
     assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly(
-      "Incremental PR analysis: Preparing to upload file status.",
-      "Incremental PR analysis: Adding VB/Bar.vb hash to cache.",
-      "Incremental PR analysis: Adding CSharp/Foo.cs hash to cache."
+      "Incremental PR analysis: Preparing to upload file hashes.",
+      "Incremental PR analysis: Adding hash for 'VB/Bar.vb' to the cache.",
+      "Incremental PR analysis: Adding hash for 'CSharp/Foo.cs' to the cache."
     );
   }
 
   @Test
   public void execute_whenHashingFails_itLogsAnError() throws IOException, NoSuchAlgorithmException {
     var hashProvider = mock(HashProvider.class);
-    when(hashProvider.computeHash(any())).thenThrow(new IOException());
+    when(hashProvider.computeHash(any())).thenThrow(new IOException("exception message"));
     var context = CreateContextForCaching();
-    var sut = new FileStatusCacheSensor(hashProvider);
+    var sut = new FileCacheSensor(hashProvider);
 
     sut.execute(context);
 
@@ -122,9 +125,9 @@ public class FileStatusCacheSensorTest {
       "Incremental PR analysis: An error occurred while computing the hash for CSharp/Foo.cs"
     );
     assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly(
-      "Incremental PR analysis: Preparing to upload file status.",
-      "Incremental PR analysis: Adding VB/Bar.vb hash to cache.",
-      "Incremental PR analysis: Adding CSharp/Foo.cs hash to cache."
+      "Incremental PR analysis: Preparing to upload file hashes.",
+      "Incremental PR analysis: Adding hash for 'VB/Bar.vb' to the cache.",
+      "Incremental PR analysis: Adding hash for 'CSharp/Foo.cs' to the cache."
     );
   }
 
