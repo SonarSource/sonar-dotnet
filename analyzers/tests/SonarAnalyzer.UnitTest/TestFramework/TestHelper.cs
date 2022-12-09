@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.ComponentModel.Design.Serialization;
 using System.IO;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -220,12 +221,11 @@ End Class", AnalyzerLanguage.VisualBasic);
 
         public static string TestPath(TestContext context, string fileName)
         {
-            var path = Path.Combine(context.TestDir, context.FullyQualifiedTestClassName.Replace("SonarAnalyzer.UnitTest.", null), context.TestName, fileName);
-            if (path.Length > 250)  // 260 can throw PathTooLongException
-            {
-                var directory = Path.Combine(context.TestDir, context.FullyQualifiedTestClassName.Replace("SonarAnalyzer.UnitTest.", null));
-                path = Path.Combine(directory, $"TooLongTestName.{Directory.GetDirectories(directory).Length}", fileName);
-            }
+            var root = Path.Combine(context.TestDir, context.FullyQualifiedTestClassName.Replace("SonarAnalyzer.UnitTest.", null));
+            var directoryName = root.Length + context.TestName.Length + fileName.Length > 250   // 260 can throw PathTooLongException
+                ? $"TooLongTestName.{Directory.GetDirectories(root).Length}"
+                : context.TestName;
+            var path = Path.Combine(root, directoryName, fileName);
             Directory.CreateDirectory(Path.GetDirectoryName(path));
             return path;
         }
@@ -237,11 +237,8 @@ End Class", AnalyzerLanguage.VisualBasic);
             return path;
         }
 
-        public static string CreateAnalysisConfig(TestContext context, IEnumerable<string> unchangedFiles)
-        {
-            var unchangedFilesPath = WriteFile(context, "UnchangedFiles.txt", unchangedFiles.JoinStr(Environment.NewLine));
-            return CreateAnalysisConfig(context, "UnchangedFilesPath", unchangedFilesPath);
-        }
+        public static string CreateAnalysisConfig(TestContext context, IEnumerable<string> unchangedFiles) =>
+            CreateAnalysisConfig(context, "UnchangedFilesPath", WriteFile(context, "UnchangedFiles.txt", unchangedFiles.JoinStr(Environment.NewLine)));
 
         public static string CreateAnalysisConfig(TestContext context, string settingsId, string settingValue) =>
             WriteFile(context, "SonarQubeAnalysisConfig.xml", $"""
@@ -260,11 +257,8 @@ End Class", AnalyzerLanguage.VisualBasic);
             return CreateSonarProjectConfig(context, "FilesToAnalyzePath", filesToAnalyzePath, true);
         }
 
-        public static string CreateSonarProjectConfig(TestContext context, IEnumerable<string> unchangedFiles)
-        {
-            var analysisConfigPath = CreateAnalysisConfig(context, unchangedFiles);
-            return CreateSonarProjectConfig(context, "NotImporant", null, true, analysisConfigPath);
-        }
+        public static string CreateSonarProjectConfig(TestContext context, IEnumerable<string> unchangedFiles) =>
+            CreateSonarProjectConfig(context, "NotImportant", null, true, CreateAnalysisConfig(context, unchangedFiles));
 
         public static string CreateSonarProjectConfig(TestContext context, ProjectType projectType, bool isScannerRun = true) =>
             CreateSonarProjectConfig(context, "ProjectType", projectType.ToString(), isScannerRun);
