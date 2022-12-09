@@ -34,8 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         public void VerifyMetrics()
         {
-            const string testRoot = BasePath + nameof(VerifyMetrics);
-            CreateBuilder(testRoot, false)
+            CreateBuilder(BasePath + nameof(VerifyMetrics), false)
                 .WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                 .VerifyUtilityAnalyzer<MetricsInfo>(messages =>
                     {
@@ -55,11 +54,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 
         [TestMethod]
-        public void Verify_NotRunForTestProject()
-        {
-            const string testRoot = BasePath + nameof(Verify_NotRunForTestProject);
-            CreateBuilder(testRoot, true).VerifyUtilityAnalyzerProducesEmptyProtobuf();
-        }
+        public void Verify_NotRunForTestProject() =>
+            CreateBuilder(BasePath + nameof(Verify_NotRunForTestProject), true).VerifyUtilityAnalyzerProducesEmptyProtobuf();
 
         [DataTestMethod]
         [DataRow("AllMetrics.cs", true)]
