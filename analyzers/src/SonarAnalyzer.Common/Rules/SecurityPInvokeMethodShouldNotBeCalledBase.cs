@@ -43,9 +43,12 @@ namespace SonarAnalyzer.Rules
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, CheckForIssue, Language.SyntaxKind.InvocationExpression);
 
-        protected virtual bool IsImportFromInteropDll(ISymbol symbol, SemanticModel semanticModel) =>
-            symbol.GetAttributes(KnownType.System_Runtime_InteropServices_DllImportAttribute).FirstOrDefault() is AttributeData attributeData
-            && attributeData.ConstructorArguments.Any(x => x.Value is string stringValue && IsInterop(stringValue));
+        protected virtual bool IsImportFromInteropDll(IMethodSymbol symbol, SemanticModel semanticModel) =>
+            (symbol.IsExtern
+                ? symbol.GetAttributes(KnownType.System_Runtime_InteropServices_DllImportAttribute)
+                : symbol.GetAttributes(KnownType.System_Runtime_InteropServices_LibraryImportAttribute))
+                    .SelectMany(x => x.ConstructorArguments) // Both attributes have a single constructor which takes a single string "library" argument
+                    .Any(x => x.Value is string stringValue && IsInterop(stringValue));
 
         protected virtual string GetMethodName(ISymbol symbol, SemanticModel semanticModel) =>
             symbol.Name;
@@ -59,7 +62,6 @@ namespace SonarAnalyzer.Rules
             if (analysisContext.Node is TInvocationExpressionSyntax invocation
                 && Language.Syntax.NodeExpression(invocation) is { } directMethodCall
                 && MethodSymbolForInvalidInvocation(directMethodCall, analysisContext.SemanticModel) is IMethodSymbol methodSymbol
-                && methodSymbol.IsExtern
                 && methodSymbol.IsStatic
                 && IsImportFromInteropDll(methodSymbol, analysisContext.SemanticModel))
             {
