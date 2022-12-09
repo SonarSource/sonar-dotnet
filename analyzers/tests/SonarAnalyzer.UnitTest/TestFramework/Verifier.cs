@@ -122,11 +122,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             }
         }
 
-        public void VerifyUtilityAnalyzerProducesEmptyProtobuf()     // This should never has any arguments
+        public void VerifyUtilityAnalyzerProducesEmptyProtobuf()     // This should never have any arguments
         {
             foreach (var compilation in Compile(false))
             {
-                DiagnosticVerifier.Verify(compilation, analyzers.Single(), CompilationErrorBehavior.Default);
+                DiagnosticVerifier.Verify(compilation, analyzers.Single(), CompilationErrorBehavior.Default, builder.SonarProjectConfigPath);
                 new FileInfo(builder.ProtobufPath).Length.Should().Be(0, "protobuf file should be empty");
             }
         }
