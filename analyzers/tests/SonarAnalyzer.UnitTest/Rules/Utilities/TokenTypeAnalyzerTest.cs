@@ -173,7 +173,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                     });
         }
 
-        private VerifierBuilder CreateBuilder(UtilityAnalyzerBase analyzer, string fileName, AnalyzerLanguage language, string testRoot) =>
+        private static VerifierBuilder CreateBuilder(UtilityAnalyzerBase analyzer, string fileName, AnalyzerLanguage language, string testRoot) =>
             new VerifierBuilder()
                 .AddAnalyzer(() => analyzer)
                 .AddPaths(fileName)

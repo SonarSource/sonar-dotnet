@@ -35,14 +35,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void VerifyMetrics()
         {
             const string testRoot = BasePath + nameof(VerifyMetrics);
-
-            new VerifierBuilder()
-                .AddAnalyzer(() => new TestMetricsAnalyzer(testRoot, false))
-                .AddPaths("AllMetrics.cs")
-                .WithBasePath(BasePath)
-                .WithOptions(ParseOptionsHelper.CSharpLatest)
+            CreateBuilder(testRoot, false)
                 .WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfig(TestContext, ProjectType.Product))
-                .WithProtobufPath(@$"{testRoot}\metrics.pb")
                 .VerifyUtilityAnalyzer<MetricsInfo>(messages =>
                     {
                         messages.Should().HaveCount(1);
@@ -64,15 +58,33 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void Verify_NotRunForTestProject()
         {
             const string testRoot = BasePath + nameof(Verify_NotRunForTestProject);
+            CreateBuilder(testRoot, true).VerifyUtilityAnalyzerProducesEmptyProtobuf();
+        }
 
+        [DataTestMethod]
+        [DataRow("AllMetrics.cs", true)]
+        [DataRow("SomethingElse.cs", false)]
+        public void Verify_UnchangedFiles(string unchangedFileName, bool expectedProtobufIsEmpty)
+        {
+            var testRoot = BasePath + nameof(Verify_UnchangedFiles);
+            var builder = CreateBuilder(testRoot, false).WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfig(TestContext, new[] { BasePath + unchangedFileName }));
+            if (expectedProtobufIsEmpty)
+            {
+                builder.VerifyUtilityAnalyzerProducesEmptyProtobuf();
+            }
+            else
+            {
+                builder.VerifyUtilityAnalyzer<TokenTypeInfo>(x => x.Should().NotBeEmpty());
+            }
+        }
+
+        private static VerifierBuilder CreateBuilder(string testRoot, bool isTestProject) =>
             new VerifierBuilder()
-                .AddAnalyzer(() => new TestMetricsAnalyzer(testRoot, true))
+                .AddAnalyzer(() => new TestMetricsAnalyzer(testRoot, isTestProject))
                 .AddPaths("AllMetrics.cs")
                 .WithBasePath(BasePath)
                 .WithOptions(ParseOptionsHelper.CSharpLatest)
-                .WithProtobufPath(@$"{testRoot}\metrics.pb")
-                .VerifyUtilityAnalyzerProducesEmptyProtobuf();
-        }
+                .WithProtobufPath(@$"{testRoot}\metrics.pb");
 
         // We need to set protected properties and this class exists just to enable the analyzer without bothering with additional files with parameters
         private sealed class TestMetricsAnalyzer : MetricsAnalyzer
