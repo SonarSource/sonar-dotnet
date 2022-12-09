@@ -23,6 +23,8 @@ extern alias vbnet;
 
 using System.Reflection;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 using SonarAnalyzer.UnitTest.Helpers;
 
 using static SonarAnalyzer.UnitTest.TestHelper;
@@ -32,6 +34,8 @@ namespace SonarAnalyzer.UnitTest.Common
     [TestClass]
     public class RuleTest
     {
+        public TestContext TestContext { get; set; }
+
         [TestMethod]
         public void CodeFixes_Named_Properly()
         {
@@ -271,12 +275,64 @@ namespace SonarAnalyzer.UnitTest.Common
             }
         }
 
+        [DataTestMethod]
+        [DataRow(@"SymbolicExecution\Roslyn\NullPointerDereference.cs", true)]
+        [DataRow("SomeOtherFile.cs", false)]
+        public void UnchangedFiles_SymbolicExecutionRule(string unchangedFileName, bool expectEmptyResults)
+        {
+            var builder = new VerifierBuilder()
+                .AddAnalyzer(() => new SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabled))
+                .AddPaths(@"SymbolicExecution\Roslyn\NullPointerDereference.cs")
+                .WithOnlyDiagnostics(NullPointerDereference.S2259);
+            UnchangedFiles_Verify(builder, unchangedFileName, expectEmptyResults);
+        }
+
+        [DataTestMethod]
+        [DataRow("ClassNotInstantiatable.cs", true)]
+        [DataRow("SomeOtherFile.cs", false)]
+        public void UnchangedFiles_SymbolBasedRule(string unchangedFileName, bool expectEmptyResults)
+        {
+            var builder = new VerifierBuilder<ClassNotInstantiatable>().AddPaths("ClassNotInstantiatable.cs");
+            UnchangedFiles_Verify(builder, unchangedFileName, expectEmptyResults);
+        }
+
+        [DataTestMethod]
+        [DataRow("AbstractTypesShouldNotHaveConstructors.cs", true)]
+        [DataRow("SomeOtherFile.cs", false)]
+        public void UnchangedFiles_SyntaxNodesBasedRule(string unchangedFileName, bool expectEmptyResults)
+        {
+            var builder = new VerifierBuilder<AbstractTypesShouldNotHaveConstructors>().AddPaths("AbstractTypesShouldNotHaveConstructors.cs");
+            UnchangedFiles_Verify(builder, unchangedFileName, expectEmptyResults);
+        }
+
+        [DataTestMethod]
+        [DataRow("FileLines20.cs", true)]
+        [DataRow("SomeOtherFile.cs", false)]
+        public void UnchangedFiles_SyntaxTreeBasedRule(string unchangedFileName, bool expectEmptyResults)
+        {
+            var builder = new VerifierBuilder().AddAnalyzer(() => new FileLines { Maximum = 10 }).AddPaths("FileLines20.cs").WithAutogenerateConcurrentFiles(false);
+            UnchangedFiles_Verify(builder ,unchangedFileName, expectEmptyResults);
+        }
+
         [AssertionMethod]
         private static void AllRulesAreConfigurable(AnalyzerLanguage language)
         {
             foreach (var diagnostic in SupportedDiagnostics(language))
             {
                 diagnostic.CustomTags.Should().NotContain(WellKnownDiagnosticTags.NotConfigurable, diagnostic.Id + " should be configurable");
+            }
+        }
+
+        private void UnchangedFiles_Verify(VerifierBuilder builder, string unchangedFileName, bool expectEmptyResults)
+        {
+            builder = builder.WithConcurrentAnalysis(false).WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfig(TestContext, new[] { unchangedFileName }));
+            if (expectEmptyResults)
+            {
+                builder.VerifyNoIssueReported();
+            }
+            else
+            {
+                builder.Verify();
             }
         }
 
