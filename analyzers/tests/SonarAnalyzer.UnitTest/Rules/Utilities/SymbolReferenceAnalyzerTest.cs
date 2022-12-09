@@ -175,6 +175,24 @@ namespace SonarAnalyzer.UnitTest.Rules
             // In TokenThreshold.cs there are 40009 tokens which is more than the current limit of 40000
             Verify("TokenThreshold.cs", ProjectType.Product, _ => { }, false);
 
+        [DataTestMethod]
+        [DataRow("Method.cs", true)]
+        [DataRow("SomethingElse.cs", false)]
+        public void Verify_UnchangedFiles(string unchangedFileName, bool expectedProtobufIsEmpty)
+        {
+            var testRoot = BasePath + nameof(Verify_UnchangedFiles);
+            var builder = CreateBuilder(new TestSymbolReferenceAnalyzer_CS(testRoot, false), "Method.cs", AnalyzerLanguage.CSharp, testRoot)
+                .WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfig(TestContext, new[] { BasePath + unchangedFileName }));
+            if (expectedProtobufIsEmpty)
+            {
+                builder.VerifyUtilityAnalyzerProducesEmptyProtobuf();
+            }
+            else
+            {
+                builder.VerifyUtilityAnalyzer<SymbolReferenceInfo>(x => x.Should().NotBeEmpty());
+            }
+        }
+
         private void Verify(string fileName, ProjectType projectType, int expectedDeclarationCount, int assertedDeclarationLine, params int[] assertedDeclarationLineReferences) =>
             Verify(fileName, projectType, references =>
                 {
@@ -198,13 +216,8 @@ namespace SonarAnalyzer.UnitTest.Rules
                 _ => throw new UnexpectedLanguageException(language)
             };
 
-            new VerifierBuilder()
-                .AddAnalyzer(() => analyzer)
-                .AddPaths(fileName)
-                .WithBasePath(BasePath)
-                .WithOptions(ParseOptionsHelper.Latest(language))
+            CreateBuilder(analyzer, fileName, language, testRoot)
                 .WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfig(TestContext, projectType))
-                .WithProtobufPath(@$"{testRoot}\symrefs.pb")
                 .VerifyUtilityAnalyzer<SymbolReferenceInfo>(messages =>
                     {
                         messages.Should().HaveCount(isMessageExpected ? 1 : 0);
@@ -217,6 +230,14 @@ namespace SonarAnalyzer.UnitTest.Rules
                         }
                     });
         }
+
+        private VerifierBuilder CreateBuilder(UtilityAnalyzerBase analyzer, string fileName, AnalyzerLanguage language, string testRoot) =>
+            new VerifierBuilder()
+                .AddAnalyzer(() => analyzer)
+                .AddPaths(fileName)
+                .WithBasePath(BasePath)
+                .WithOptions(ParseOptionsHelper.Latest(language))
+                .WithProtobufPath(@$"{testRoot}\symrefs.pb");
 
         // We need to set protected properties and this class exists just to enable the analyzer without bothering with additional files with parameters
         private sealed class TestSymbolReferenceAnalyzer_CS : CS.SymbolReferenceAnalyzer
