@@ -40,7 +40,7 @@
 
     <ItemGroup>
       <!-- Remove all previously added analyzers, except built-in SourceGenerators -->
-      <Analyzer Remove="@(Analyzer)" Condition="'%(Filename.EndsWith(`Generator.dll`))' == 'false'"/>
+      <Analyzer Remove="@(Analyzer)" Condition="!$([System.Text.RegularExpressions.Regex]::IsMatch('%(Filename)', '(Generator|SourceGeneration)$'))"/>
       <!-- Add the SonarAnalyzer analyzer DLLs -->
       <Analyzer Include="$(BinariesFolder)\SonarAnalyzer*.dll" />
       <Analyzer Include="$(BinariesFolder)\Google.Protobuf.dll" />
