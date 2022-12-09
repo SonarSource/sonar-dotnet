@@ -19,9 +19,7 @@
  */
 
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.Text;
 using Moq;
-using Moq.Protected;
 using SonarAnalyzer.Common;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
@@ -34,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         private const string SnippetFileName = "snippet0.cs";
         private const string AnotherFileName = "Any other file name to make snippet0 considered as changed.cs";
 
-        private static DiagnosticDescriptor[] DummyMainDescriptor = new[] { TestHelper.CreateDescriptor("Sxxxx", DiagnosticDescriptorFactory.MainSourceScopeTag) };
+        private static readonly DiagnosticDescriptor[] DummyMainDescriptor = new[] { TestHelper.CreateDescriptor("Sxxxx", DiagnosticDescriptorFactory.MainSourceScopeTag) };
 
         public TestContext TestContext { get; set; }
 
@@ -448,7 +446,7 @@ $@"namespace PartiallyGenerated
                 throw new NotImplementedException();
         }
 
-        private class DummyCodeBlockStartAnalysisContext<TSyntaxKind> : CodeBlockStartAnalysisContext<TSyntaxKind> where TSyntaxKind: struct
+        private class DummyCodeBlockStartAnalysisContext<TSyntaxKind> : CodeBlockStartAnalysisContext<TSyntaxKind> where TSyntaxKind : struct
         {
             public DummyCodeBlockStartAnalysisContext(DummyAnalysisContext baseContext) : base(baseContext.Tree.GetRoot(), null, baseContext.Model, baseContext.Options, default) { }
 
