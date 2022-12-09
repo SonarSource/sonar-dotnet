@@ -34,6 +34,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         private const string AspNetMvcVersion = "5.2.7";
         private const string WebConfig = "Web.config";
 
+        public TestContext TestContext { get; set; }
+
         [TestMethod]
         public void DisablingRequestValidation_CS() =>
             new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled))
@@ -59,7 +61,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation(),
                 new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
                 webConfigPath,
-                TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)));
+                TestHelper.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath));
         }
 
         [TestMethod]
@@ -73,7 +75,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation(),
                 new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
                 corruptFilePath,
-                TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, corruptFilePath, nonExistingFilePath)));
+                TestHelper.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, corruptFilePath, nonExistingFilePath));
         }
 
         [DataTestMethod]
@@ -99,7 +101,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 compilation,
                 new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
                 CompilationErrorBehavior.Default,
-                sonarProjectConfigPath: TestHelper.CreateSonarProjectConfig(rootDirectory, TestHelper.CreateFilesToAnalyze(rootDirectory, filesToAnalyze.ToArray()))).ToList();
+                sonarProjectConfigPath: TestHelper.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, filesToAnalyze.ToArray())).ToList();
             allDiagnostics.Should().NotBeEmpty();
             var rootWebConfig = Path.Combine(rootDirectory, WebConfig);
             VerifyResults(rootWebConfig, allDiagnostics, languageVersion);
@@ -119,7 +121,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation(),
                 new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
                 webConfigPath,
-                TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)));
+                TestHelper.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath));
         }
 
         [DataTestMethod]
@@ -131,7 +133,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation(),
                 new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
                 configPath,
-                TestHelper.CreateSonarProjectConfig(Path.GetDirectoryName(configPath), TestHelper.CreateFilesToAnalyze(Path.GetDirectoryName(configPath), configPath)));
+                TestHelper.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, configPath));
 
         [TestMethod]
         public void DisablingRequestValidation_VB() =>
@@ -156,7 +158,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 SolutionBuilder.Create().AddProject(AnalyzerLanguage.VisualBasic).GetCompilation(),
                 new VB.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
                 webConfigPath,
-                TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)));
+                TestHelper.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath));
         }
 
         // Verifies the results for the given web.config file path.

@@ -29,6 +29,8 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private const string BasePath = @"Utilities\MetricsAnalyzer\";
 
+        public TestContext TestContext { get; set; }
+
         [DataTestMethod]
         public void VerifyMetrics()
         {
@@ -39,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .AddPaths("AllMetrics.cs")
                 .WithBasePath(BasePath)
                 .WithOptions(ParseOptionsHelper.CSharpLatest)
-                .WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfig(testRoot, ProjectType.Product))
+                .WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                 .WithProtobufPath(@$"{testRoot}\metrics.pb")
                 .VerifyUtilityAnalyzer<MetricsInfo>(messages =>
                     {

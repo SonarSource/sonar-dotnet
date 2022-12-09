@@ -522,6 +522,6 @@ End Class"" has a length of 151, differs near ""Not"" (index 47).");
             DummyVB.AddPaths(WriteFile("File.vb", code));
 
         private string WriteFile(string name, string content) =>
-            TestHelper.WriteFile(TestContext, name, content);
+            TestHelper.WriteFile(TestContext, $@"TestCases\{name}", content);
     }
 }

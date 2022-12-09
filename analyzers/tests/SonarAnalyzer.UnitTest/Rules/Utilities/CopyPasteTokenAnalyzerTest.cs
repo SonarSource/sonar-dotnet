@@ -34,6 +34,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         private const string BasePath = @"Utilities\CopyPasteTokenAnalyzer\";
         private readonly VerifierBuilder builder = new VerifierBuilder().WithBasePath(BasePath);
 
+        public TestContext TestContext { get; set; }
+
         [TestMethod]
         public void Verify_Unique_CS() =>
             Verify("Unique.cs", info =>
@@ -86,7 +88,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .AddAnalyzer(() => new TestCopyPasteTokenAnalyzer_CS(testRoot, false))
                 .AddPaths(fileName)
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfig(testRoot, ProjectType.Product))
+                .WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                 .WithProtobufPath(@$"{testRoot}\token-cpd.pb")
                 .VerifyUtilityAnalyzer<CopyPasteTokenInfo>(messages =>
                     {
@@ -132,7 +134,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .AddAnalyzer(() => analyzer)
                 .AddPaths(fileName)
                 .WithOptions(ParseOptionsHelper.Latest(language))
-                .WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfig(testRoot, ProjectType.Product))
+                .WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                 .WithProtobufPath(@$"{testRoot}\token-cpd.pb")
                 .VerifyUtilityAnalyzer<CopyPasteTokenInfo>(messages =>
                     {

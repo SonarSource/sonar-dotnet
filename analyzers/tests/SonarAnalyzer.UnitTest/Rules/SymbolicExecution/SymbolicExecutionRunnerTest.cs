@@ -31,6 +31,8 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class SymbolicExecutionRunnerTest
     {
+        public TestContext TestContext { get; set; }
+
         // This test is meant to run all the symbolic execution rules together and verify different scenarios.
         [TestMethod]
         public void VerifySymbolicExecutionRules_CS() =>
@@ -336,7 +338,7 @@ End Sub");
         public void Enabled_TestProject_ScannerRun() =>
             Verify(@"string s = null;   // Noncompliant {{Message for STest}}",
                 ProjectType.Test,
-                TestHelper.CreateSonarProjectConfig(nameof(Enabled_TestProject_ScannerRun), ProjectType.Test));
+                TestHelper.CreateSonarProjectConfig(TestContext, ProjectType.Test));
 
         [TestMethod]
         public void Analyze_DescriptorsWithSameType_ExecutesOnce()
