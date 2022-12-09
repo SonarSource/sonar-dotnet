@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29418.71
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntentionalFindings", "IntentionalFindings\IntentionalFindings.csproj", "{BE004510-D756-4215-AA83-E24DD37450EB}"
 EndProject
@@ -13,6 +13,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetFramework35", "NetFramework35\NetFramework35.csproj", "{965FCDD0-69E7-4635-80AF-DD135A94F477}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetFramework45", "NetFramework45\NetFramework45.csproj", "{304DB1D2-AF51-4CBB-B284-CEF20DE2B299}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net7", "Net7\Net7.csproj", "{F8FE7021-95DA-4902-A809-6561704207B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,6 +46,10 @@ Global
 		{304DB1D2-AF51-4CBB-B284-CEF20DE2B299}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{304DB1D2-AF51-4CBB-B284-CEF20DE2B299}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{304DB1D2-AF51-4CBB-B284-CEF20DE2B299}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8FE7021-95DA-4902-A809-6561704207B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8FE7021-95DA-4902-A809-6561704207B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8FE7021-95DA-4902-A809-6561704207B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8FE7021-95DA-4902-A809-6561704207B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
