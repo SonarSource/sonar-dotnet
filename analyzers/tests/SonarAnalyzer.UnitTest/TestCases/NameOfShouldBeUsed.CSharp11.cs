@@ -6,11 +6,14 @@ namespace Tests.Diagnostics
     {
         public void Method_With_RawStringLiterals(int arg1)
         {
-            // Repro for https://github.com/SonarSource/sonar-dotnet/issues/6441
             if (arg1 < 0)
-                throw new Exception("""arg1"""); // FN
-            else if (arg1 > 100)
-                throw new ArgumentException("""Bad parameter name""", """arg1"""); // FN
+                throw new Exception("""arg1"""); // Noncompliant
+            else if (arg1 < 100)
+                throw new ArgumentException("""Bad parameter name""", """arg1"""); // Noncompliant
+            else if (arg1 < 1000)
+                throw new ArgumentOutOfRangeException("""
+                    arg1
+                    """); // Noncompliant@-2
         }
 
 

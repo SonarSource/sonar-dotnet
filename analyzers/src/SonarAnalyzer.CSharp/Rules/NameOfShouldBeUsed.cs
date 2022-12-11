@@ -26,7 +26,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly HashSet<SyntaxKind> StringTokenTypes = new HashSet<SyntaxKind>
         {
             SyntaxKind.InterpolatedStringTextToken,
-            SyntaxKind.StringLiteralToken
+            SyntaxKind.StringLiteralToken,
+            SyntaxKindEx.SingleLineRawStringLiteralToken,
+            SyntaxKindEx.MultiLineRawStringLiteralToken
         };
 
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
