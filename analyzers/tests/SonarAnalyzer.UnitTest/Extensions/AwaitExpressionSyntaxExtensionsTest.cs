@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [DataRow("[|await await TaskOfTask().ConfigureAwait(false)|];", "await TaskOfTask().ConfigureAwait(false)")]
         [DataRow("await [|await TaskOfTask().ConfigureAwait(false)|];", "TaskOfTask()")]
         [DataRow("[|await (await TaskOfTask()).ConfigureAwait(false)|];", "(await TaskOfTask())")]
-        public void AwaitedExpressionWithoutConfigureAwait(string expression, string awaitedExpressionWithoutConfigureAwait)
+        public void AwaitedExpressionWithoutConfigureAwait(string expression, string expected)
         {
             var code = $$"""
                 using System.Threading.Tasks;
@@ -58,7 +58,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
             var root = CSharpSyntaxTree.ParseText(code).GetRoot();
             var node = root.FindNode(TextSpan.FromBounds(start, end)) as AwaitExpressionSyntax;
             var actual = node.AwaitedExpressionWithoutConfigureAwait();
-            actual.ToString().Should().Be(awaitedExpressionWithoutConfigureAwait);
+            actual.ToString().Should().Be(expected);
         }
     }
 }
