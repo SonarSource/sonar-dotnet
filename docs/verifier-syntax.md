@@ -55,19 +55,33 @@ Only one precise location or column location can be present at one time. Precise
 To declare that multiple issues are expected, each issue must be assigned an id. All secondary locations associated with an issue must have the same id. Note that it is not possible to have multiple precise/column locations on a single line.
 
 ```cs
-    var a = null; // Noncompliant [myId2]
+    var a = null;    // Noncompliant [myId2]
     if (myCondition) // Noncompliant [myId1, myId3]
     {
-      a = null; // Secondary [myId1, myId2]
+      a = null;      // Secondary [myId1, myId2]
     }
 ```
+
+### Compilation Errors
+
+Will mark the line as the location of a compilation error. This is useful to test a code snippet that cannot be compiled, as it is usually the case inside an IDE/Editor. To increase readability, the error code as well as some comments can be specified. These are ignored by the verification process.
+
+```csharp
+    string x = 2; // Error
+    string x = 2; // Error [CS0029]
+    string x = 2; // Error [CS0029] - cannot implicitly convert int to string
+```
+
+### Examples
 
 Note that most of the previous patterns can be used together when needed.
 
 ```cs
     private void MyMethod() // Noncompliant@+1 ^4#7 [MyIssueId] {{Remove this unused private method}}
 
-    private void MyMethod(int i2, int i2)
-//                        ^^^^^^             {{Message for issue 1}}
-//                                ^^^^^^ @-1 {{Message for issue 2}}
+    private void MyMethod(int i1, int i2) { }
+    //                    ^^^^^^             {{Message for issue 1}}
+    //                            ^^^^^^ @-1 {{Message for issue 2}}
 ```
+
+The code comment syntax logic is implementied by the `IssueLocationCollector` class.
