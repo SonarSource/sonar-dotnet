@@ -28,7 +28,7 @@ Must be used together with a main primary location to mark the expected line of 
 Using `@[+-][0-9]+` after a `Noncompliant` or `Secondary` comment will mark the expected location to be offset by the given number of lines.
 
 ```cs
- private void MyMethod() // Noncompliant@+2 - issue is actually expected 2 lines after this comment
+    private void MyMethod() // Noncompliant@+2 - issue is actually expected 2 lines after this comment
 ```
 
 ### Checking the issue message
