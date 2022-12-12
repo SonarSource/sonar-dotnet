@@ -311,7 +311,7 @@ namespace SonarAnalyzer.UnitTest.Common
         public void UnchangedFiles_SyntaxTreeBasedRule(string unchangedFileName, bool expectEmptyResults)
         {
             var builder = new VerifierBuilder().AddAnalyzer(() => new FileLines { Maximum = 10 }).AddPaths("FileLines20.cs").WithAutogenerateConcurrentFiles(false);
-            UnchangedFiles_Verify(builder ,unchangedFileName, expectEmptyResults);
+            UnchangedFiles_Verify(builder, unchangedFileName, expectEmptyResults);
         }
 
         [AssertionMethod]
