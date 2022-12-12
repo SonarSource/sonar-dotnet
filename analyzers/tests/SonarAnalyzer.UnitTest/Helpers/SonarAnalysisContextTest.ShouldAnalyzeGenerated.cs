@@ -32,7 +32,7 @@ public partial class SonarAnalysisContextTest
     {
         var sonarLintXml = CreateSonarLintXml(true);
         var options = CreateOptions(sonarLintXml, @"ResourceTests\Foo.xml");
-        var compilation = GetDummyCompilation(AnalyzerLanguage.CSharp);
+        var compilation = CreateDummyCompilation(AnalyzerLanguage.CSharp);
 
         CreateSut().ShouldAnalyzeGenerated(compilation, options).Should().BeFalse();
         sonarLintXml.ToStringCallCount.Should().Be(0, "this file doesn't have 'SonarLint.xml' name");
@@ -44,7 +44,7 @@ public partial class SonarAnalysisContextTest
         var sonarLintXml = CreateSonarLintXml(true);
         var additionalText = MockAdditionalText(sonarLintXml);
         var options = new AnalyzerOptions(ImmutableArray.Create(additionalText.Object));
-        var compilation = GetDummyCompilation(AnalyzerLanguage.CSharp);
+        var compilation = CreateDummyCompilation(AnalyzerLanguage.CSharp);
         var sut = CreateSut();
 
         // Call ShouldAnalyzeGenerated multiple times...
@@ -62,7 +62,7 @@ public partial class SonarAnalysisContextTest
     {
         var sonarLintXml = new DummySourceText("Not valid xml");
         var options = CreateOptions(sonarLintXml);
-        var compilation = GetDummyCompilation(AnalyzerLanguage.CSharp);
+        var compilation = CreateDummyCompilation(AnalyzerLanguage.CSharp);
         var sut = CreateSut();
 
         // 1. Read -> no error, false returned
@@ -79,8 +79,8 @@ public partial class SonarAnalysisContextTest
     {
         var sonarLintXml = CreateSonarLintXml(false);
         var options = CreateOptions(sonarLintXml);
-        var compilationCS = GetDummyCompilation(AnalyzerLanguage.CSharp);
-        var compilationVB = GetDummyCompilation(AnalyzerLanguage.VisualBasic);
+        var compilationCS = CreateDummyCompilation(AnalyzerLanguage.CSharp);
+        var compilationVB = CreateDummyCompilation(AnalyzerLanguage.VisualBasic);
         var sut = CreateSut();
 
         sut.ShouldAnalyzeGenerated(compilationCS, options).Should().BeFalse();
@@ -129,7 +129,7 @@ public partial class SonarAnalysisContextTest
         return additionalText;
     }
 
-    private static Compilation GetDummyCompilation(AnalyzerLanguage language) =>
+    private static Compilation CreateDummyCompilation(AnalyzerLanguage language) =>
         TestHelper.Compile(string.Empty, false, language).Model.Compilation;
 
     private sealed class DummySourceText : SourceText

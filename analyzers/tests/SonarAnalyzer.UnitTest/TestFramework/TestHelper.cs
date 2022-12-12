@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.ComponentModel.Design.Serialization;
 using System.IO;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -223,11 +222,14 @@ End Class", AnalyzerLanguage.VisualBasic);
         {
             var root = Path.Combine(context.TestDir, context.FullyQualifiedTestClassName.Replace("SonarAnalyzer.UnitTest.", null));
             var directoryName = root.Length + context.TestName.Length + fileName.Length > 250   // 260 can throw PathTooLongException
-                ? $"TooLongTestName.{Directory.GetDirectories(root).Length}"
+                ? $"TooLongTestName.{RootSubdirectoryCount()}"
                 : context.TestName;
             var path = Path.Combine(root, directoryName, fileName);
             Directory.CreateDirectory(Path.GetDirectoryName(path));
             return path;
+
+            int RootSubdirectoryCount() =>
+                Directory.Exists(root) ? Directory.GetDirectories(root).Length : 0;
         }
 
         public static string WriteFile(TestContext context, string fileName, string content = null)

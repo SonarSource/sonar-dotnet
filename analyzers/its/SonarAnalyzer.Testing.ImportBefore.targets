@@ -4,6 +4,7 @@
           BeforeTargets="CoreCompile">
     <PropertyGroup>
       <BinariesFolder>$(MSBuildStartupDirectory)\..\packaging\binaries</BinariesFolder>
+      <SonarAnalysisConfigPath>$(MSBuildStartupDirectory)\SonarQubeAnalysisConfig.xml</SonarAnalysisConfigPath>
       <SonarProjectOutputPath>$(MSBuildStartupDirectory)\output\$(PROJECT)\$(AssemblyName)</SonarProjectOutputPath>
       <SonarProjectConfigFilePath>$(SonarProjectOutputPath)\SonarProjectConfig.xml</SonarProjectConfigFilePath>
       <SonarFilesToAnalyzePath>$(SonarProjectOutputPath)\FilesToAnalyze.txt</SonarFilesToAnalyzePath>
@@ -18,7 +19,7 @@
     <ItemGroup>
       <SonarProjectConfigLine Include="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;" />
       <SonarProjectConfigLine Include="&lt;SonarProjectConfig xmlns=&quot;http://www.sonarsource.com/msbuild/analyzer/2021/1&quot;&gt;" />
-      <SonarProjectConfigLine Include="  &lt;AnalysisConfigPath&gt;&lt;/AnalysisConfigPath&gt;" />
+      <SonarProjectConfigLine Include="  &lt;AnalysisConfigPath&gt;$(SonarAnalysisConfigPath)&lt;/AnalysisConfigPath&gt;" />
       <SonarProjectConfigLine Include="  &lt;ProjectPath&gt;$(MSBuildProjectFullPath)&lt;/ProjectPath&gt;" />
       <SonarProjectConfigLine Include="  &lt;FilesToAnalyzePath&gt;$(SonarFilesToAnalyzePath)&lt;/FilesToAnalyzePath&gt;" />
       <SonarProjectConfigLine Include="  &lt;OutPath&gt;$(SonarProjectOutputPath)&lt;/OutPath&gt;" />
