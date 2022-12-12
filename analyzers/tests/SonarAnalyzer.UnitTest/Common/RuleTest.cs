@@ -314,6 +314,24 @@ namespace SonarAnalyzer.UnitTest.Common
             UnchangedFiles_Verify(builder, unchangedFileName, expectEmptyResults);
         }
 
+        [DataTestMethod]
+        [DataRow(@"Hotspots\LooseFilePermissions.Windows.cs", true)]
+        [DataRow("SomeOtherFile.cs", false)]
+        public void UnchangedFiles_CompilationStartBasedRule(string unchangedFileName, bool expectEmptyResults)
+        {
+            var builder = new VerifierBuilder().AddAnalyzer(() => new LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled)).AddPaths(@"Hotspots\LooseFilePermissions.Windows.cs");
+            UnchangedFiles_Verify(builder, unchangedFileName, expectEmptyResults);
+        }
+
+        [DataTestMethod]
+        [DataRow("UnusedPrivateMember.cs", true)]
+        [DataRow("SomeOtherFile.cs", false)]
+        public void UnchangedFiles_ReportDiagnosticIfNonGeneratedBasedRule(string unchangedFileName, bool expectEmptyResults)
+        {
+            var builder = new VerifierBuilder<UnusedPrivateMember>().AddPaths("UnusedPrivateMember.cs");
+            UnchangedFiles_Verify(builder, unchangedFileName, expectEmptyResults);
+        }
+
         [AssertionMethod]
         private static void AllRulesAreConfigurable(AnalyzerLanguage language)
         {
