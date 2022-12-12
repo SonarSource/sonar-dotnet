@@ -85,7 +85,7 @@ namespace SonarAnalyzer.Rules
         protected abstract string FileName { get; }
         protected abstract TMessage CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel);
 
-        protected virtual bool AnalyzeUnchangedFiles { get; } = false;
+        protected virtual bool AnalyzeUnchangedFiles => false;
 
         protected virtual IEnumerable<TMessage> CreateAnalysisMessages(CompilationAnalysisContext c) => Enumerable.Empty<TMessage>();
 
