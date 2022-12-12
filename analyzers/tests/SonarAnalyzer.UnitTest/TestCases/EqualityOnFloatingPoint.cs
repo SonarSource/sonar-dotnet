@@ -63,6 +63,12 @@ namespace Tests.Diagnostics
             if (3.146 > f || f > 3.146) // FN. Equivalent to the case above but not detected
             {
             }
+            if (f < 3.146 || f >= 3.146) // Compliant no indirect inequality test
+            {
+            }
+            if (3.146 > f || 3.146 <= f) // Compliant no indirect inequality test
+            {
+            }
 
             if (f <= 3.146 && true && f >= 3.146) // Not recognized
             {
