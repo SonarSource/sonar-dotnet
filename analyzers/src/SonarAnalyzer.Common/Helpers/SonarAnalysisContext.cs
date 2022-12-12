@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
@@ -40,7 +39,7 @@ namespace SonarAnalyzer.Helpers
     {
         public delegate bool TryGetValueDelegate<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value);
 
-        public const string SonarProjectConfigFileName = "SonarProjectConfig.xml";
+        internal const string SonarProjectConfigFileName = "SonarProjectConfig.xml";
         private static readonly Regex WebConfigRegex = new(@"[\\\/]web\.([^\\\/]+\.)?config$", RegexOptions.IgnoreCase);
         private static readonly Regex AppSettingsRegex = new(@"[\\\/]appsettings\.([^\\\/]+\.)?json$", RegexOptions.IgnoreCase);
 
@@ -95,12 +94,12 @@ namespace SonarAnalyzer.Helpers
             ShouldAnalyzeGenerated(context.TryGetValue, c, options);
 
         public static bool ShouldAnalyze(TryGetValueDelegate<bool> tryGetValueBool,
-                                         TryGetValueDelegate<ProjectConfigReader> tryGetValueProjectConfigReader,
+                                         TryGetValueDelegate<ProjectConfigReader> tryGetProjectConfigReader,
                                          GeneratedCodeRecognizer generatedCodeRecognizer,
                                          SyntaxTree tree,
                                          Compilation compilation,
                                          AnalyzerOptions options) =>
-            !IsUnchanged(tryGetValueProjectConfigReader, tree, compilation, options)
+            !IsUnchanged(tryGetProjectConfigReader, tree, compilation, options)
             && (ShouldAnalyzeGenerated(tryGetValueBool, compilation, options) || !tree.IsGenerated(generatedCodeRecognizer, compilation));
 
         public bool IsScannerRun(AnalyzerOptions options) =>
@@ -159,6 +158,22 @@ namespace SonarAnalyzer.Helpers
         internal ProjectConfigReader ProjectConfiguration(AnalyzerOptions options) =>
             ProjectConfiguration(context.TryGetValue, options);
 
+        internal static ProjectConfigReader ProjectConfiguration(TryGetValueDelegate<ProjectConfigReader> tryGetValue, AnalyzerOptions options)
+        {
+            if (options.AdditionalFiles.FirstOrDefault(IsSonarProjectConfig) is { } sonarProjectConfigXml)
+            {
+                return sonarProjectConfigXml.GetText() is { } sourceText
+                    // TryGetValue catches all exceptions from SourceTextValueProvider and returns false when thrown
+                    && tryGetValue(sourceText, ProjectConfigProvider, out var cachedProjectConfigReader)
+                    ? cachedProjectConfigReader
+                    : throw new InvalidOperationException($"File {Path.GetFileName(sonarProjectConfigXml.Path)} has been added as an AdditionalFile but could not be read and parsed.");
+            }
+            else
+            {
+                return ProjectConfigReader.Empty;
+            }
+        }
+
         internal static bool IsAnalysisScopeMatching(Compilation compilation, bool isTestProject, bool isScannerRun, IEnumerable<DiagnosticDescriptor> diagnostics)
         {
             // We don't know the project type without the compilation so let's run the rule
@@ -205,22 +220,6 @@ namespace SonarAnalyzer.Helpers
             {
                 // cannot log the exception, so ignore it
                 return Enumerable.Empty<XElement>();
-            }
-        }
-
-        public static ProjectConfigReader ProjectConfiguration(TryGetValueDelegate<ProjectConfigReader> tryGetValue, AnalyzerOptions options)
-        {
-            if (options.AdditionalFiles.FirstOrDefault(IsSonarProjectConfig) is { } sonarProjectConfigXml)
-            {
-                return sonarProjectConfigXml.GetText() is { } sourceText
-                    // TryGetValue catches all exceptions from SourceTextValueProvider and returns false when thrown
-                    && tryGetValue(sourceText, ProjectConfigProvider, out var cachedProjectConfigReader)
-                    ? cachedProjectConfigReader
-                    : throw new InvalidOperationException($"File {Path.GetFileName(sonarProjectConfigXml.Path)} has been added as an AdditionalFile but could not be read and parsed.");
-            }
-            else
-            {
-                return ProjectConfigReader.Empty;
             }
         }
 

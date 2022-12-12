@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         private const string SnippetFileName = "snippet0.cs";
         private const string AnotherFileName = "Any other file name to make snippet0 considered as changed.cs";
 
-        private static readonly DiagnosticDescriptor[] DummyMainDescriptor = new[] { TestHelper.CreateDescriptor("Sxxxx", DiagnosticDescriptorFactory.MainSourceScopeTag) };
+        private static readonly DiagnosticDescriptor[] DummyMainDescriptor = { TestHelper.CreateDescriptor("Sxxxx", DiagnosticDescriptorFactory.MainSourceScopeTag) };
 
         public TestContext TestContext { get; set; }
 
@@ -354,7 +354,7 @@ $@"namespace PartiallyGenerated
         {
             var context = new DummyAnalysisContext(TestContext, unchangedFileName);
             var wasReported = false;
-            var location = context.Tree.GetRoot(default).GetLocation();
+            var location = context.Tree.GetRoot().GetLocation();
             var symbol = Mock.Of<ISymbol>(x => x.Locations == ImmutableArray.Create(location));
             var sut = new SymbolAnalysisContext(symbol, context.Model.Compilation, context.Options, _ => wasReported = true, _ => true, default);
             sut.ReportDiagnosticIfNonGenerated(CSharpGeneratedCodeRecognizer.Instance, Mock.Of<Diagnostic>(x => x.Id == "Sxxx" && x.Location == location));

@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Helpers
     /// </summary>
     public class ProjectConfigReader
     {
-        public static readonly ProjectConfigReader Empty = new ProjectConfigReader(null, null);
+        public static readonly ProjectConfigReader Empty = new(null, null);
 
         private readonly ProjectConfig projectConfig;
         private readonly Lazy<ProjectType> projectType;

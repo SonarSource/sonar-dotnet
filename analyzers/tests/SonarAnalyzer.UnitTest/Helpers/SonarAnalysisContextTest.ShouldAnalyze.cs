@@ -29,7 +29,7 @@ public partial class SonarAnalysisContextTest
     {
         var options = new AnalyzerOptions(ImmutableArray<AdditionalText>.Empty);    // No SonarProjectConfig.xml
 
-        ShouldExecute(options).Should().BeTrue();
+        ShouldAnalyze(options).Should().BeTrue();
     }
 
     [TestMethod]
@@ -39,7 +39,7 @@ public partial class SonarAnalysisContextTest
         var additionalFile = new AnalyzerAdditionalFile(sonarProjectConfig);
         var options = new AnalyzerOptions(ImmutableArray.Create<AdditionalText>(additionalFile));
 
-        ShouldExecute(options).Should().BeTrue();
+        ShouldAnalyze(options).Should().BeTrue();
     }
 
     [TestMethod]
@@ -47,7 +47,7 @@ public partial class SonarAnalysisContextTest
     {
         var options = CreateOptions(Array.Empty<string>());
 
-        ShouldExecute(options).Should().BeTrue();
+        ShouldAnalyze(options).Should().BeTrue();
     }
 
     [TestMethod]
@@ -55,7 +55,7 @@ public partial class SonarAnalysisContextTest
     {
         var options = CreateOptions(new[] { "snippet0.cs" });
 
-        ShouldExecute(options).Should().BeFalse("File is known to be Unchanged in Incremental PR analysis");
+        ShouldAnalyze(options).Should().BeFalse("File is known to be Unchanged in Incremental PR analysis");
     }
 
     [TestMethod]
@@ -63,10 +63,10 @@ public partial class SonarAnalysisContextTest
     {
         var options = CreateOptions(new[] { "OtherFile.cs", "SomethingElse.cs" });
 
-        ShouldExecute(options).Should().BeTrue();
+        ShouldAnalyze(options).Should().BeTrue();
     }
 
-    private static bool ShouldExecute(AnalyzerOptions options)
+    private static bool ShouldAnalyze(AnalyzerOptions options)
     {
         var compilation = CreateDummyCompilation(AnalyzerLanguage.CSharp);
         var context = CreateSut();
