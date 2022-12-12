@@ -95,7 +95,7 @@ namespace SonarAnalyzer.Rules
         /// Iterates over the string tokens (either from simple strings or from interpolated strings)
         /// and returns pairs where
         /// - the key is the string SyntaxToken which contains the verbatim parameter name
-        /// - the value is the name of the parameter which is present in the string token
+        /// - the value is the name of the parameter which is present in the string token.
         /// </summary>
         private Dictionary<SyntaxToken, string> GetStringTokenAndParamNamePairs(IEnumerable<SyntaxToken> tokens, IEnumerable<string> parameterNames)
         {
