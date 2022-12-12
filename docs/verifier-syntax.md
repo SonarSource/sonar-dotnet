@@ -46,9 +46,7 @@ Only one precise location or column location can be present at one time. Precise
 ```cs
     private void MyMethod() // Noncompliant
 //  ^^^^^^^
-```
 
-```cs
     private void MyMethod() // Noncompliant ^4#7
 ```
 
