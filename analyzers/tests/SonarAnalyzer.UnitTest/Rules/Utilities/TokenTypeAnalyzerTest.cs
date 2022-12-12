@@ -138,9 +138,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("SomethingElse.cs", false)]
         public void Verify_UnchangedFiles(string unchangedFileName, bool expectedProtobufIsEmpty)
         {
-            var testRoot = BasePath + nameof(Verify_UnchangedFiles);
-            var builder = CreateBuilder(new TestTokenTypeAnalyzer_CS(testRoot, false), "Tokens.cs", AnalyzerLanguage.CSharp, testRoot)
-                .WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfig(TestContext, new[] { BasePath + unchangedFileName }));
+            var builder = CreateBuilder(ProjectType.Product, "Tokens.cs").WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfig(TestContext, new[] { BasePath + unchangedFileName }));
             if (expectedProtobufIsEmpty)
             {
                 builder.VerifyUtilityAnalyzerProducesEmptyProtobuf();
@@ -151,18 +149,8 @@ namespace SonarAnalyzer.UnitTest.Rules
             }
         }
 
-        private void Verify(string fileName, ProjectType projectType, Action<IReadOnlyList<TokenTypeInfo.Types.TokenInfo>> verifyTokenInfo, [CallerMemberName] string testName = "")
-        {
-            var testRoot = BasePath + testName;
-            var language = AnalyzerLanguage.FromPath(fileName);
-            UtilityAnalyzerBase analyzer = language.LanguageName switch
-            {
-                LanguageNames.CSharp => new TestTokenTypeAnalyzer_CS(testRoot, projectType == ProjectType.Test),
-                LanguageNames.VisualBasic => new TestTokenTypeAnalyzer_VB(testRoot, projectType == ProjectType.Test),
-                _ => throw new UnexpectedLanguageException(language)
-            };
-
-            CreateBuilder(analyzer, fileName, language, testRoot)
+        private void Verify(string fileName, ProjectType projectType, Action<IReadOnlyList<TokenTypeInfo.Types.TokenInfo>> verifyTokenInfo) =>
+            CreateBuilder(projectType, fileName)
                 .WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfig(TestContext, projectType))
                 .VerifyUtilityAnalyzer<TokenTypeInfo>(messages =>
                     {
@@ -171,15 +159,24 @@ namespace SonarAnalyzer.UnitTest.Rules
                         info.FilePath.Should().Be(Path.Combine(BasePath, fileName));
                         verifyTokenInfo(info.TokenInfo);
                     });
-        }
 
-        private static VerifierBuilder CreateBuilder(UtilityAnalyzerBase analyzer, string fileName, AnalyzerLanguage language, string testRoot) =>
-            new VerifierBuilder()
+        private VerifierBuilder CreateBuilder(ProjectType projectType, string fileName)
+        {
+            var testRoot = BasePath + TestContext.TestName;
+            var language = AnalyzerLanguage.FromPath(fileName);
+            UtilityAnalyzerBase analyzer = language.LanguageName switch
+            {
+                LanguageNames.CSharp => new TestTokenTypeAnalyzer_CS(testRoot, projectType == ProjectType.Test),
+                LanguageNames.VisualBasic => new TestTokenTypeAnalyzer_VB(testRoot, projectType == ProjectType.Test),
+                _ => throw new UnexpectedLanguageException(language)
+            };
+            return new VerifierBuilder()
                 .AddAnalyzer(() => analyzer)
                 .AddPaths(fileName)
                 .WithBasePath(BasePath)
                 .WithOptions(ParseOptionsHelper.Latest(language))
                 .WithProtobufPath(@$"{testRoot}\token-type.pb");
+        }
 
         // We need to set protected properties and this class exists just to enable the analyzer without bothering with additional files with parameters
         private sealed class TestTokenTypeAnalyzer_CS : CS.TokenTypeAnalyzer

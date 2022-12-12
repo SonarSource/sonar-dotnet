@@ -180,9 +180,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("SomethingElse.cs", false)]
         public void Verify_UnchangedFiles(string unchangedFileName, bool expectedProtobufIsEmpty)
         {
-            var testRoot = BasePath + nameof(Verify_UnchangedFiles);
-            var builder = CreateBuilder(new TestSymbolReferenceAnalyzer_CS(testRoot, false), "Method.cs", AnalyzerLanguage.CSharp, testRoot)
-                .WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfig(TestContext, new[] { BasePath + unchangedFileName }));
+            var builder = CreateBuilder(ProjectType.Product, "Method.cs").WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfig(TestContext, new[] { BasePath + unchangedFileName }));
             if (expectedProtobufIsEmpty)
             {
                 builder.VerifyUtilityAnalyzerProducesEmptyProtobuf();
@@ -204,19 +202,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         private void Verify(string fileName,
                                    ProjectType projectType,
                                    Action<IReadOnlyList<SymbolReferenceInfo.Types.SymbolReference>> verifyReference,
-                                   bool isMessageExpected = true,
-                                   [CallerMemberName] string testName = "")
-        {
-            var testRoot = BasePath + testName;
-            var language = AnalyzerLanguage.FromPath(fileName);
-            UtilityAnalyzerBase analyzer = language.LanguageName switch
-            {
-                LanguageNames.CSharp => new TestSymbolReferenceAnalyzer_CS(testRoot, projectType == ProjectType.Test),
-                LanguageNames.VisualBasic => new TestSymbolReferenceAnalyzer_VB(testRoot, projectType == ProjectType.Test),
-                _ => throw new UnexpectedLanguageException(language)
-            };
-
-            CreateBuilder(analyzer, fileName, language, testRoot)
+                                   bool isMessageExpected = true) =>
+            CreateBuilder(projectType, fileName)
                 .WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfig(TestContext, projectType))
                 .VerifyUtilityAnalyzer<SymbolReferenceInfo>(messages =>
                     {
@@ -229,15 +216,24 @@ namespace SonarAnalyzer.UnitTest.Rules
                             verifyReference(info.Reference);
                         }
                     });
-        }
 
-        private static VerifierBuilder CreateBuilder(UtilityAnalyzerBase analyzer, string fileName, AnalyzerLanguage language, string testRoot) =>
-            new VerifierBuilder()
+        private VerifierBuilder CreateBuilder(ProjectType projectType, string fileName)
+        {
+            var testRoot = BasePath + TestContext.TestName;
+            var language = AnalyzerLanguage.FromPath(fileName);
+            UtilityAnalyzerBase analyzer = language.LanguageName switch
+            {
+                LanguageNames.CSharp => new TestSymbolReferenceAnalyzer_CS(testRoot, projectType == ProjectType.Test),
+                LanguageNames.VisualBasic => new TestSymbolReferenceAnalyzer_VB(testRoot, projectType == ProjectType.Test),
+                _ => throw new UnexpectedLanguageException(language)
+            };
+            return new VerifierBuilder()
                 .AddAnalyzer(() => analyzer)
                 .AddPaths(fileName)
                 .WithBasePath(BasePath)
                 .WithOptions(ParseOptionsHelper.Latest(language))
                 .WithProtobufPath(@$"{testRoot}\symrefs.pb");
+        }
 
         // We need to set protected properties and this class exists just to enable the analyzer without bothering with additional files with parameters
         private sealed class TestSymbolReferenceAnalyzer_CS : CS.SymbolReferenceAnalyzer

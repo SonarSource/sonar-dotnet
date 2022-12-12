@@ -19,7 +19,10 @@
  */
 
 using System.Runtime.CompilerServices;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Protobuf;
+using SonarAnalyzer.Rules;
+using SonarAnalyzer.UnitTest.Common;
 using SonarAnalyzer.UnitTest.Helpers;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
@@ -57,24 +60,34 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verify(new[] { "Normal.vb", "GeneratedByName.generated.vb", "GeneratedByContent.vb" }, VerifyGenerated);
 
         [DataTestMethod]
-        [DataRow("GeneratedByName.generated.cs", 1)]    // ExtraEmptyFile.g.cs
-        [DataRow("SomethingElse.cs", 2)]                // ExtraEmptyFile.g.cs and GeneratedByName.generated.cs
+        [DataRow("GeneratedByName.generated.cs", 0)]
+        [DataRow("SomethingElse.cs", 1)]
         public void Verify_UnchangedFiles(string unchangedFileName, int expectedGeneratedFiles) =>
-            CreateBuilder(new[] { "GeneratedByName.generated.cs" }, BasePath + nameof(Verify_UnchangedFiles))
+            CreateBuilder("GeneratedByName.generated.cs")
                 .WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfig(TestContext, new[] { BasePath + unchangedFileName }))
-                .VerifyUtilityAnalyzer<LogInfo>(x => x.Where(info => info.Text.Contains("generated")).Should().HaveCount(expectedGeneratedFiles));
+                .VerifyUtilityAnalyzer<LogInfo>(x => x.Where(info => info.Text.Contains("generated")).Should().HaveCount(expectedGeneratedFiles + 1)); // +1 to ignore ExtraEmptyFile.g.cs
 
-        private void Verify(string[] paths, Action<IReadOnlyList<LogInfo>> verifyProtobuf, [CallerMemberName] string testName = "") =>
-            CreateBuilder(paths, BasePath + testName)
+        private void Verify(string[] paths, Action<IReadOnlyList<LogInfo>> verifyProtobuf) =>
+            CreateBuilder(paths)
                 .WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                 .VerifyUtilityAnalyzer(verifyProtobuf);
 
-        private static VerifierBuilder CreateBuilder(string[] paths, string testRoot) =>
-            new VerifierBuilder()
-                .AddAnalyzer(() => paths[0].EndsWith("cs") ? new TestLogAnalyzer_CS(testRoot) : new TestLogAnalyzer_VB(testRoot))
+        private VerifierBuilder CreateBuilder(params string[] paths)
+        {
+            var testRoot = BasePath + TestContext.TestName;
+            var language = AnalyzerLanguage.FromPath(paths.First());
+            UtilityAnalyzerBase analyzer = language.LanguageName switch
+            {
+                LanguageNames.CSharp => new TestLogAnalyzer_CS(testRoot),
+                LanguageNames.VisualBasic => new TestLogAnalyzer_VB(testRoot),
+                _ => throw new UnexpectedLanguageException(language)
+            };
+            return new VerifierBuilder()
+                .AddAnalyzer(() => analyzer)
                 .AddPaths(paths)
                 .WithBasePath(BasePath)
                 .WithProtobufPath(@$"{testRoot}\log.pb");
+        }
 
         private static void VerifyCompilationMessagesNonConcurrentRuleExecution(IReadOnlyList<LogInfo> messages) =>
             VerifyCompilationMessagesBase(messages, "disabled");
