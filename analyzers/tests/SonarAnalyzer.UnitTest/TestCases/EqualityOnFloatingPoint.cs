@@ -33,6 +33,9 @@ namespace Tests.Diagnostics
             if (f <= 3.146 && ((f >= 3.146))) // Noncompliant indirect equality test
             {
             }
+            if (3.146 >= f && 3.146 <= f) // Noncompliant indirect equality test
+            {
+            }
             if (f <= 3.146 && 3.146 <= f) // FN. Equivalent to the case above but not detected
             {
             }
@@ -46,6 +49,9 @@ namespace Tests.Diagnostics
             }
 
             if (f < 3.146 || f > 3.146) // Noncompliant indirect inequality test
+            {
+            }
+            if (3.146 > f || 3.146 < f) // Noncompliant indirect inequality test
             {
             }
 
