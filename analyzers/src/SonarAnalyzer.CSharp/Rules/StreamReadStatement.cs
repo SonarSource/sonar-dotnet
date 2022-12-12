@@ -29,7 +29,13 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Check the return value of the '{0}' call to see how many bytes were read.";
 
         private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        private static readonly ISet<string> ReadMethodNames = new HashSet<string> { nameof(Stream.Read), nameof(Stream.ReadAsync) };
+        private static readonly ISet<string> ReadMethodNames = new HashSet<string>
+            {
+                nameof(Stream.Read),
+                nameof(Stream.ReadAsync),
+                "ReadAtLeast", // Net7: https://learn.microsoft.com/dotnet/api/system.io.stream.readatleast#applies-to
+                "ReadAtLeastAsync",
+            };
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
