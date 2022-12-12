@@ -12,7 +12,7 @@ Will mark the current line as expecting the primary location of an issue.
     private void MyMethod() // Noncompliant
 ```
 
-### `Secondary` location comment.
+### `Secondary` location comment
 
 Must be used together with a main primary location to mark the expected line of a secondary location.
 
