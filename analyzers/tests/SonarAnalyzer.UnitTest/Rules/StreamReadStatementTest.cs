@@ -37,6 +37,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void StreamReadStatement_CSharp10() =>
             builder.AddPaths("StreamReadStatement.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
+        [TestMethod]
+        public void StreamReadStatement_CSharp11() =>
+            builder.AddPaths("StreamReadStatement.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+
 #endif
 
     }
