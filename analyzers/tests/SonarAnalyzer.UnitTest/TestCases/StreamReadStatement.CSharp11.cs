@@ -11,7 +11,7 @@ namespace Tests.Diagnostics
         {
             using var stream = File.Open(fileName, FileMode.Open);
             var result = new byte[stream.Length];
-            var i = stream.ReadAtLeast(result, (int)stream.Length);            // Compliant The result is assigned to a
+            var i = stream.ReadAtLeast(result, (int)stream.Length);            // Compliant The result is assigned to i
             stream.ReadAtLeast(result, (int)stream.Length);                    // Noncompliant {{Check the return value of the 'ReadAtLeast' call to see how many bytes were read.}}
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         }
