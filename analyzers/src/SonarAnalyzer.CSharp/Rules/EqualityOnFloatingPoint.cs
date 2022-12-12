@@ -123,11 +123,11 @@ namespace SonarAnalyzer.Rules.CSharp
             IsFloatingPointNumberType(semanticModel.GetTypeInfo(expression).Type);
 
         private static bool HasAppropriateOperatorsForEquality(BinaryExpressionSyntax left, BinaryExpressionSyntax right) =>
-            (right.OperatorToken.Kind() is SyntaxKind.LessThanEqualsToken && left.OperatorToken.Kind() is SyntaxKind.GreaterThanEqualsToken)
-            || (right.OperatorToken.Kind() is SyntaxKind.GreaterThanEqualsToken && left.OperatorToken.Kind() is SyntaxKind.LessThanEqualsToken);
+            (left.OperatorToken.Kind() is SyntaxKind.GreaterThanEqualsToken && right.OperatorToken.Kind() is SyntaxKind.LessThanEqualsToken)
+            || (left.OperatorToken.Kind() is SyntaxKind.LessThanEqualsToken && right.OperatorToken.Kind() is SyntaxKind.GreaterThanEqualsToken);
 
         private static bool HasAppropriateOperatorsForInequality(BinaryExpressionSyntax left, BinaryExpressionSyntax right) =>
-            (right.OperatorToken.Kind() is SyntaxKind.LessThanToken && left.OperatorToken.Kind() is SyntaxKind.GreaterThanToken)
-            || (right.OperatorToken.Kind() is SyntaxKind.GreaterThanToken && left.OperatorToken.Kind() is SyntaxKind.LessThanToken);
+            (left.OperatorToken.Kind() is SyntaxKind.GreaterThanToken && right.OperatorToken.Kind() is SyntaxKind.LessThanToken)
+            || (left.OperatorToken.Kind() is SyntaxKind.LessThanToken && right.OperatorToken.Kind() is SyntaxKind.GreaterThanToken);
     }
 }
