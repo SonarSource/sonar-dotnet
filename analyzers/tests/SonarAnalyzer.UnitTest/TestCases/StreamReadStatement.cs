@@ -120,7 +120,7 @@ namespace Tests.Diagnostics
             await (stream.ReadAsync(array, 0, (int)stream.Length)).ConfigureAwait(false); // Noncompliant
             await (stream.ReadAsync(array, 0, (int)stream.Length));                       // Noncompliant
             var res = await stream.ReadAsync(array, 0, (int)stream.Length);               // Compliant
-            var x = stream.ReadAsync(array, 0, (int)stream.Length).Result;                // Compliant - (false negative) should not be compliant
+            var x = stream.ReadAsync(array, 0, (int)stream.Length).Result;                // Compliant
         }
     }
 }
