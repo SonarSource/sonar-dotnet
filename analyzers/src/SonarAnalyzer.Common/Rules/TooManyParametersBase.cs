@@ -72,9 +72,13 @@ namespace SonarAnalyzer.Rules
                 return true;    // Not a declaration, such as Action
             }
 
-            if (declaredSymbol.IsExtern && declaredSymbol.IsStatic && declaredSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_DllImportAttribute))
+            if (declaredSymbol.IsStatic)
             {
-                return false;   // P/Invoke method is defined externally.
+                if ((declaredSymbol.IsExtern && declaredSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_DllImportAttribute))
+                    || declaredSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_LibraryImportAttribute))
+                {
+                    return false;   // P/Invoke method is defined externally.
+                }
             }
 
             return declaredSymbol.GetOverriddenMember() == null && declaredSymbol.GetInterfaceMember() == null;
