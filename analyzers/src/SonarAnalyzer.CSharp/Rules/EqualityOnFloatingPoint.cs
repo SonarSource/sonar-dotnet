@@ -91,11 +91,10 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        // All floating point types that suffer from equivalence problems. These are all .net floating point types except decimal.
-        // Reason: The Equals documentation for decimal does not have a "Precision in Comparisons" section as the other floating point types.
-        // Power 2 based types like double implement IFloatingPointIeee754 but power 10 based decimal not (implements IFloatingPoint).
-        // Ieee754 also allows power 10 based representations but uses another representation than the .Net decimal type.
-        // IFloatingPointIeee754 defines Epsilon which indicates problems with equivalence checking.
+        // Returns true for the floating point types that suffer from equivalence problems. All .NET floating point types have this problem except `decimal.`
+        // - Reason for excluding `decimal`: the documentation for the `decimal.Equals()` method does not have a "Precision in Comparisons" section as the other .NET floating point types.
+        // - Power-2-based types like `double` implement `IFloatingPointIeee754`, but power-10-based `decimal` implements `IFloatingPoint`.
+        // - `IFloatingPointIeee754` defines `Epsilon` which indicates problems with equivalence checking.
         private static bool IsFloatingPointNumberType(ITypeSymbol type) =>
             type.IsAny(KnownType.FloatingPointNumbers)
             || (type.Is(KnownType.System_Numerics_IEqualityOperators_TSelf_TOther_TResult) // The operator originates from a virtual static member
