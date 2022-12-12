@@ -93,14 +93,14 @@ namespace SonarAnalyzer.Helpers
         public bool ShouldAnalyzeGenerated(Compilation c, AnalyzerOptions options) =>
             ShouldAnalyzeGenerated(context.TryGetValue, c, options);
 
-        public static bool ShouldAnalyze(TryGetValueDelegate<bool> tryGetValueBool,
+        public static bool ShouldAnalyze(TryGetValueDelegate<bool> tryGetBool,
                                          TryGetValueDelegate<ProjectConfigReader> tryGetProjectConfigReader,
                                          GeneratedCodeRecognizer generatedCodeRecognizer,
                                          SyntaxTree tree,
                                          Compilation compilation,
                                          AnalyzerOptions options) =>
             !IsUnchanged(tryGetProjectConfigReader, tree, compilation, options)
-            && (ShouldAnalyzeGenerated(tryGetValueBool, compilation, options) || !tree.IsGenerated(generatedCodeRecognizer, compilation));
+            && (ShouldAnalyzeGenerated(tryGetBool, compilation, options) || !tree.IsGenerated(generatedCodeRecognizer, compilation));
 
         public bool IsScannerRun(AnalyzerOptions options) =>
             ProjectConfiguration(options).IsScannerRun;
