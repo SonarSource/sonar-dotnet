@@ -27,4 +27,7 @@ public sealed class SonarSyntaxNodeAnalysisContext : SonarAnalysisContextBase<Sy
     public override AnalyzerOptions Options => Context.Options;
 
     internal SonarSyntaxNodeAnalysisContext(SonarAnalysisContext analysisContext, SyntaxNodeAnalysisContext context) : base(analysisContext, context) { }
+
+    public void ReportIssue(Diagnostic diagnostic) =>
+        ReportIssue(new ReportingContext(Context, diagnostic));
 }

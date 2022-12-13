@@ -68,7 +68,7 @@ namespace SonarAnalyzer.Helpers
             ReportIssue(new ReportingContext(context, diagnostic), verifyScopeContext?.IsTestProject(context.SemanticModel.Compilation, context.Options),
                 verifyScopeContext?.IsScannerRun(context.Options));
 
-        private static void ReportIssue(ReportingContext reportingContext, bool? isTestProject, bool? isScannerRun)
+        private static void ReportIssue(ReportingContext reportingContext, bool? isTestProject, bool? isScannerRun) // FIXME: REMOVE
         {
             if (isTestProject.HasValue
                 && !SonarAnalysisContext.IsAnalysisScopeMatching(reportingContext.Compilation, isTestProject.Value, isScannerRun ?? true, new[] { reportingContext.Diagnostic.Descriptor }))

@@ -27,4 +27,7 @@ public sealed class SonarSymbolAnalysisContext : SonarAnalysisContextBase<Symbol
     public override AnalyzerOptions Options => Context.Options;
 
     internal SonarSymbolAnalysisContext(SonarAnalysisContext analysisContext, SymbolAnalysisContext context) : base(analysisContext, context) { }
+
+    public void ReportIssue(Diagnostic diagnostic) =>
+        ReportIssue(new ReportingContext(Context, diagnostic));
 }

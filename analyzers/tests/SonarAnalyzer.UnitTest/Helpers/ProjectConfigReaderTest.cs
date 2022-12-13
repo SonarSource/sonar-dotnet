@@ -92,7 +92,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [DataRow("Invalid_Xml")]
         public void WhenInvalid_FilesToReturnPath_ThrowsException(string folder) =>
             Assert.ThrowsException<InvalidOperationException>(() => CreateProjectConfigReader($"ResourceTests\\SonarProjectConfig\\{folder}\\SonarProjectConfig.xml"))
-                .Message.Should().Be("File 'LogNameFor-SonarProjectConfig.xml' could not be parsed.");
+                .Message.Should().Be("sonarProjectConfig could not be parsed.");
 
         [TestMethod]
         public void FilesToAnalyze_LoadsFileFromConfig()

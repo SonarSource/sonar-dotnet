@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules
                 SymbolKind.NamedType,
                 SymbolKind.Method);
 
-            context.RegisterCompilationAction(c => CheckWebConfig(context, c));
+            context.RegisterCompilationAction(CheckWebConfig);
         }
 
         private void CheckController(SymbolAnalysisContext c)
@@ -74,25 +74,25 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        private void CheckWebConfig(SonarAnalysisContext context, CompilationAnalysisContext c)
+        private void CheckWebConfig(SonarCompilationAnalysisContext c)
         {
             if (!IsEnabled(c.Options))
             {
                 return;
             }
 
-            foreach (var fullPath in context.WebConfigFiles(c))
+            foreach (var fullPath in c.WebConfigFiles())
             {
                 var webConfig = File.ReadAllText(fullPath);
                 if (webConfig.Contains("<system.web>") && XmlHelper.ParseXDocument(webConfig) is { } doc)
                 {
-                    ReportValidateRequest(doc, fullPath, c);
-                    ReportRequestValidationMode(doc, fullPath, c);
+                    ReportValidateRequest(c, doc, fullPath);
+                    ReportRequestValidationMode(c, doc, fullPath);
                 }
             }
         }
 
-        private void ReportValidateRequest(XDocument doc, string webConfigPath, CompilationAnalysisContext c)
+        private void ReportValidateRequest(SonarCompilationAnalysisContext c, XDocument doc, string webConfigPath)
         {
             foreach (var pages in doc.XPathSelectElements("configuration/system.web/pages"))
             {
@@ -104,7 +104,7 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        private void ReportRequestValidationMode(XDocument doc, string webConfigPath, CompilationAnalysisContext c)
+        private void ReportRequestValidationMode(SonarCompilationAnalysisContext c, XDocument doc, string webConfigPath)
         {
             foreach (var httpRuntime in doc.XPathSelectElements("configuration/system.web/httpRuntime"))
             {

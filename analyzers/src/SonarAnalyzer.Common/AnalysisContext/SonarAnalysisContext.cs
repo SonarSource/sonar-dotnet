@@ -64,6 +64,9 @@ public sealed partial /*FIXME: REMOVE partial */ class SonarAnalysisContext : So
     public override bool TryGetValue<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value) =>
         context.TryGetValue(text, valueProvider, out value);
 
+    internal void RegisterCompilationAction(Action<SonarCompilationAnalysisContext> action) =>
+        context.RegisterCompilationAction(c => Execute<SonarCompilationAnalysisContext, CompilationAnalysisContext>(new(this, c), action));
+
     private void Execute<TSonarContext, TRoslynContext>(TSonarContext context, Action<TSonarContext> action) where TSonarContext : SonarAnalysisContextBase<TRoslynContext>
     {
         // For each action registered on context we need to do some pre-processing before actually calling the rule.

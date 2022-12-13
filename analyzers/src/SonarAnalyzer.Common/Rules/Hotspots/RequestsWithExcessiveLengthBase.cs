@@ -77,7 +77,7 @@ namespace SonarAnalyzer.Rules
 
                     c.RegisterCompilationEndAction(cc => ReportOnCollectedAttributes(cc, attributesOverTheLimit));
                 });
-            context.Context.RegisterCompilationAction(c => CheckWebConfig(context.Context, c));
+            context.Context.RegisterCompilationAction(CheckWebConfig);
         }
 
         protected bool IsRequestFormLimits(string attributeName) =>
@@ -137,19 +137,19 @@ namespace SonarAnalyzer.Rules
             return SupportedDiagnostics.Any(d => analyzerConfiguration.IsEnabled(d.Id));
         }
 
-        private void CheckWebConfig(SonarAnalysisContext context, CompilationAnalysisContext c)
+        private void CheckWebConfig(SonarCompilationAnalysisContext c)
         {
-            foreach (var fullPath in context.WebConfigFiles(c))
+            foreach (var fullPath in c.WebConfigFiles())
             {
                 var webConfig = File.ReadAllText(fullPath);
                 if (webConfig.Contains("<system.web") && XmlHelper.ParseXDocument(webConfig) is { } doc)
                 {
-                    ReportRequestLengthViolation(doc, fullPath, c);
+                    ReportRequestLengthViolation(c, doc, fullPath);
                 }
             }
         }
 
-        private void ReportRequestLengthViolation(XDocument doc, string webConfigPath, CompilationAnalysisContext c)
+        private void ReportRequestLengthViolation(SonarCompilationAnalysisContext c, XDocument doc, string webConfigPath)
         {
             foreach (var httpRuntime in doc.XPathSelectElements("configuration/system.web/httpRuntime"))
             {
