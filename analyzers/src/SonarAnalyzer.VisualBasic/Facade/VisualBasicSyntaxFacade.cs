@@ -98,19 +98,6 @@ internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
     public override SyntaxToken? NodeIdentifier(SyntaxNode node) =>
         node.GetIdentifier();
 
-    public override string NodeStringTextValue(SyntaxNode node, SemanticModel semanticModel)
-    {
-        if (node is InterpolatedStringExpressionSyntax interpolatedStringExpression)
-        {
-            interpolatedStringExpression.TryGetGetInterpolatedTextValue(semanticModel, out var interpolatedValue);
-            return interpolatedValue ?? interpolatedStringExpression.GetContentsText();
-        }
-        else
-        {
-            return node is LiteralExpressionSyntax literalExpression ? literalExpression.Token.ValueText : string.Empty;
-        }
-    }
-
     public override SyntaxNode RemoveConditionalAccess(SyntaxNode node)
     {
         var whenNotNull = node.RemoveParentheses();
@@ -129,5 +116,5 @@ internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
 
     public override bool IsStatic(SyntaxNode node) => Cast<MethodBlockSyntax>(node).IsShared();
 
-    protected override SyntaxToken Token(SyntaxNode node) => node is LiteralExpressionSyntax literal ? literal.Token : default);
+    protected override SyntaxToken Token(SyntaxNode node) => node is LiteralExpressionSyntax literal ? literal.Token : default;
 }

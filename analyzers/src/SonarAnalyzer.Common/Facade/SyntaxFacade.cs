@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.Semantics;
-
 namespace SonarAnalyzer.Helpers.Facade;
 
 public abstract class SyntaxFacade<TSyntaxKind>
@@ -48,7 +46,6 @@ public abstract class SyntaxFacade<TSyntaxKind>
     public abstract SyntaxToken? NodeIdentifier(SyntaxNode node);
     public abstract SyntaxNode RemoveConditionalAccess(SyntaxNode node);
     public abstract SyntaxNode RemoveParentheses(SyntaxNode node);
-    public abstract string NodeStringTextValue(SyntaxNode node, SemanticModel semanticModel);
     public abstract bool TryGetGetInterpolatedTextValue(SyntaxNode node, SemanticModel semanticModel, out string interpolatedValue);
     public abstract bool IsStatic(SyntaxNode node);
     protected abstract SyntaxToken Token(SyntaxNode node);
