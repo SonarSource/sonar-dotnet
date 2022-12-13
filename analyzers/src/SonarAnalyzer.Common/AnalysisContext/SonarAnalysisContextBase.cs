@@ -18,32 +18,35 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.IO;
+using Microsoft.CodeAnalysis.Text;
+
 namespace SonarAnalyzer;
 
-public class SonarAnalysisContextBase
+public abstract class SonarAnalysisContextBase
 {
-    //protected void Register<TContext>(Action<Action<TContext>> registrationAction,
-    //                                  Action<TContext> registeredAction,
-    //                                  Func<TContext, SyntaxTree> getSyntaxTree,
-    //                                  Func<TContext, Compilation> getCompilation,
-    //                                  Func<TContext, AnalyzerOptions> getAnalyzerOptions) =>
-    //registrationAction(c =>
-    //{
-    //    // For each action registered on context we need to do some pre-processing before actually calling the rule.
-    //    // First, we need to ensure the rule does apply to the current scope (main vs test source).
-    //    // Second, we call an external delegate (set by SonarLint for VS) to ensure the rule should be run (usually
-    //    // the decision is made on based on whether the project contains the analyzer as NuGet).
-    //    var compilation = getCompilation(c);
-    //    var isTestProject = IsTestProject(compilation, getAnalyzerOptions(c));
+    private static readonly SourceTextValueProvider<ProjectConfigReader> ProjectConfigProvider = new(x => new ProjectConfigReader(x));
 
-    //    if (IsAnalysisScopeMatching(compilation, isTestProject, IsScannerRun(getAnalyzerOptions(c)), supportedDiagnostics)
-    //            && IsRegisteredActionEnabled(supportedDiagnostics, getSyntaxTree(c)))
-    //    {
-    //        registeredAction(c);
-    //    }
-    //});
+    public abstract bool TryGetValue<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value);
 
-
+    /// <summary>
+    /// Reads configuration from SonarProjectConfig.xml file and caches the result for scope of this analysis.
+    /// </summary>
+    protected ProjectConfigReader ProjectConfiguration(AnalyzerOptions options)
+    {
+        if (options.SonarProjectConfig() is { } sonarProjectConfig)
+        {
+            return sonarProjectConfig.GetText() is { } sourceText
+                // TryGetValue catches all exceptions from SourceTextValueProvider and returns false when exception is thrown
+                && TryGetValue(sourceText, ProjectConfigProvider, out var cachedProjectConfigReader)
+                ? cachedProjectConfigReader
+                : throw new InvalidOperationException($"File '{Path.GetFileName(sonarProjectConfig.Path)}' has been added as an AdditionalFile but could not be read and parsed.");
+        }
+        else
+        {
+            return ProjectConfigReader.Empty;
+        }
+    }
 }
 
 public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextBase
@@ -60,4 +63,7 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
         AnalysisContext = analysisContext ?? throw new ArgumentNullException(nameof(analysisContext));
         Context = context;
     }
+
+    public override bool TryGetValue<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value) =>
+        AnalysisContext.TryGetValue(text, valueProvider, out value);
 }

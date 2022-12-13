@@ -126,7 +126,7 @@ internal static class DiagnosticAnalyzerContextHelper
 
         bool CreateProjectConfigReader(SourceText text, SourceTextValueProvider<ProjectConfigReader> valueProvider, out ProjectConfigReader value)
         {
-            value = new ProjectConfigReader(text, SonarAnalysisContext.SonarProjectConfigFileName); // Recreating manually, SourceTextValueProvider doesn't have public API to use
+            value = new ProjectConfigReader(text); // Recreating manually, SourceTextValueProvider doesn't have public API to use
             return true;
         }
     }
