@@ -20,11 +20,11 @@
 
 namespace SonarAnalyzer;
 
-public sealed class SonarCompilationStartAnalysisContext : SonarAnalysisContextBase<CompilationStartAnalysisContext>
+public sealed class SonarCodeBlockStartAnalysisContext<TSyntaxKind> : SonarAnalysisContextBase<CodeBlockStartAnalysisContext<TSyntaxKind>> where TSyntaxKind : struct
 {
-    public override SyntaxTree Tree => Context.GetFirstSyntaxTree();
-    public override Compilation Compilation => Context.Compilation;
+    public override SyntaxTree Tree => Context.GetSyntaxTree();
+    public override Compilation Compilation => Context.SemanticModel.Compilation;
     public override AnalyzerOptions Options => Context.Options;
 
-    internal SonarCompilationStartAnalysisContext(SonarAnalysisContext analysisContext, CompilationStartAnalysisContext context) : base(analysisContext, context) { }
+    internal SonarCodeBlockStartAnalysisContext(SonarAnalysisContext analysisContext, CodeBlockStartAnalysisContext<TSyntaxKind> context) : base(analysisContext, context) { }
 }

@@ -105,29 +105,43 @@ public partial class SonarAnalysisContext
     public static bool IsTestProject(CompilationAnalysisContext analysisContext) =>
         IsTestProject(analysisContext.TryGetValue, analysisContext.Compilation, analysisContext.Options);
 
-    public void RegisterCompilationStartAction(Action<CompilationStartAnalysisContext> action) =>
-        RegisterContextAction(context.RegisterCompilationStartAction, action, c => c.GetFirstSyntaxTree(), c => c.Compilation, c => c.Options);
-
-    public void RegisterSymbolAction(Action<SymbolAnalysisContext> action, params SymbolKind[] symbolKinds) =>
-        RegisterContextAction(act => context.RegisterSymbolAction(act, symbolKinds), action, c => c.GetFirstSyntaxTree(), c => c.Compilation, c => c.Options);
-
     internal static bool IsRegisteredActionEnabled(IEnumerable<DiagnosticDescriptor> diagnostics, SyntaxTree tree) =>
         ShouldExecuteRegisteredAction == null || tree == null || ShouldExecuteRegisteredAction(diagnostics, tree);
 
-    internal void RegisterCodeBlockStartAction<TLanguageKindEnum>(Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action)
-        where TLanguageKindEnum : struct =>
-        RegisterContextAction(context.RegisterCodeBlockStartAction, action, c => c.GetSyntaxTree(), c => c.SemanticModel.Compilation, c => c.Options);
-
+    // FIXME: Use the other one
     internal void RegisterCompilationAction(Action<CompilationAnalysisContext> action) =>
-        RegisterContextAction(context.RegisterCompilationAction, action, c => c.GetFirstSyntaxTree(), c => c.Compilation, c => c.Options);
+        context.RegisterCompilationAction(c => Execute<SonarCompilationAnalysisContext, CompilationAnalysisContext>(new(this, c), x => action(x.Context)));
 
-    internal void RegisterSyntaxNodeAction<TLanguageKindEnum>(Action<SyntaxNodeAnalysisContext> action, ImmutableArray<TLanguageKindEnum> syntaxKinds)
-        where TLanguageKindEnum : struct =>
-        RegisterSyntaxNodeAction(action, syntaxKinds.ToArray());
+    //internal void RegisterCompilationAction(Action<SonarCompilationAnalysisContext> action) =>
+    //    context.RegisterCompilationAction(c => Execute<SonarCompilationAnalysisContext, CompilationAnalysisContext>(new(this, c), action));
 
-    internal void RegisterSyntaxNodeAction<TLanguageKindEnum>(Action<SyntaxNodeAnalysisContext> action, params TLanguageKindEnum[] syntaxKinds)
-        where TLanguageKindEnum : struct =>
-        RegisterContextAction(x => context.RegisterSyntaxNodeAction(x, syntaxKinds), action, c => c.GetSyntaxTree(), c => c.Compilation, c => c.Options);
+    // FIXME: Use the other one
+    public void RegisterCompilationStartAction(Action<CompilationStartAnalysisContext> action) =>
+        context.RegisterCompilationStartAction(c => Execute<SonarCompilationStartAnalysisContext, CompilationStartAnalysisContext>(new(this, c), x => action(x.Context)));
+
+    //public void RegisterCompilationStartAction(Action<SonarCompilationStartAnalysisContext> action) =>
+    //    context.RegisterCompilationStartAction(c => Execute<SonarCompilationStartAnalysisContext, CompilationStartAnalysisContext>(new(this, c), action));
+
+    // FIXME: Use the other one
+    public void RegisterSymbolAction(Action<SymbolAnalysisContext> action, params SymbolKind[] symbolKinds) =>
+        context.RegisterSymbolAction(c => Execute<SonarSymbolAnalysisContext, SymbolAnalysisContext>(new(this, c), x => action(x.Context)), symbolKinds);
+
+    //public void RegisterSymbolAction(Action<SonarSymbolAnalysisContext> action, params SymbolKind[] symbolKinds) =>
+    //    context.RegisterSymbolAction(c => Execute<SonarSymbolAnalysisContext, SymbolAnalysisContext>(new(this, c), action), symbolKinds);
+
+    // FIXME: Use the other one
+    internal void RegisterCodeBlockStartAction<TSyntaxKind>(Action<CodeBlockStartAnalysisContext<TSyntaxKind>> action) where TSyntaxKind : struct =>
+        context.RegisterCodeBlockStartAction<TSyntaxKind>(c => Execute<SonarCodeBlockStartAnalysisContext<TSyntaxKind>, CodeBlockStartAnalysisContext<TSyntaxKind>>(new(this, c), x => action(x.Context)));
+
+    //internal void RegisterCodeBlockStartAction<TSyntaxKind>(Action<SonarCodeBlockStartAnalysisContext<TSyntaxKind>> action) where TSyntaxKind : struct =>
+    //    context.RegisterCodeBlockStartAction<TSyntaxKind>(c => Execute<SonarCodeBlockStartAnalysisContext<TSyntaxKind>, CodeBlockStartAnalysisContext<TSyntaxKind>>(new(this, c), action));
+
+    // FIXME: Use the other one
+    internal void RegisterSyntaxNodeAction<TSyntaxKind>(Action<SyntaxNodeAnalysisContext> action, params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct =>
+        context.RegisterSyntaxNodeAction(c => Execute<SonarSyntaxNodeAnalysisContext, SyntaxNodeAnalysisContext>(new(this, c), x => action(x.Context)), syntaxKinds);
+
+    //internal void RegisterSyntaxNodeAction<TSyntaxKind>(Action<SonarSyntaxNodeAnalysisContext> action, params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct =>
+    //    context.RegisterSyntaxNodeAction(c => Execute<SonarSyntaxNodeAnalysisContext, SyntaxNodeAnalysisContext>(new(this, c), action), syntaxKinds);
 
     internal IEnumerable<string> WebConfigFiles(CompilationAnalysisContext c)
     {
@@ -221,27 +235,6 @@ public partial class SonarAnalysisContext
 
     private static SourceTextValueProvider<bool> ShouldAnalyzeGeneratedProvider(string language) =>
         language == LanguageNames.CSharp ? ShouldAnalyzeGeneratedCS : ShouldAnalyzeGeneratedVB;
-
-    private void RegisterContextAction<TContext>(Action<Action<TContext>> registrationAction,
-                                                 Action<TContext> registeredAction,
-                                                 Func<TContext, SyntaxTree> getSyntaxTree,
-                                                 Func<TContext, Compilation> getCompilation,
-                                                 Func<TContext, AnalyzerOptions> getAnalyzerOptions) =>
-        registrationAction(c =>
-            {
-                // For each action registered on context we need to do some pre-processing before actually calling the rule.
-                // First, we need to ensure the rule does apply to the current scope (main vs test source).
-                // Second, we call an external delegate (set by SonarLint for VS) to ensure the rule should be run (usually
-                // the decision is made on based on whether the project contains the analyzer as NuGet).
-                var compilation = getCompilation(c);
-                var isTestProject = IsTestProject(compilation, getAnalyzerOptions(c));
-
-                if (IsAnalysisScopeMatching(compilation, isTestProject, IsScannerRun(getAnalyzerOptions(c)), supportedDiagnostics)
-                    && IsRegisteredActionEnabled(supportedDiagnostics, getSyntaxTree(c)))
-                {
-                    registeredAction(c);
-                }
-            });
 
     private static bool IsSonarProjectConfig(AdditionalText additionalText) =>
         additionalText.Path != null

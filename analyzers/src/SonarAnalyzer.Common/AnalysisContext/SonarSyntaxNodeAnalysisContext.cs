@@ -20,14 +20,11 @@
 
 namespace SonarAnalyzer;
 
-public class SonarCompilationAnalysisContextBase<TContext> : SonarAnalysisContextBase
+public sealed class SonarSyntaxNodeAnalysisContext : SonarAnalysisContextBase<SyntaxNodeAnalysisContext>
 {
-    public SonarAnalysisContext AnalysisContext { get; }
-    public TContext Context { get; }
+    public override SyntaxTree Tree => Context.GetSyntaxTree();
+    public override Compilation Compilation => Context.Compilation;
+    public override AnalyzerOptions Options => Context.Options;
 
-    protected SonarCompilationAnalysisContextBase(SonarAnalysisContext analysisContext, TContext context)
-    {
-        AnalysisContext = analysisContext ?? throw new ArgumentNullException(nameof(analysisContext));
-        Context = context;
-    }
+    internal SonarSyntaxNodeAnalysisContext(SonarAnalysisContext analysisContext, SyntaxNodeAnalysisContext context) : base(analysisContext, context) { }
 }

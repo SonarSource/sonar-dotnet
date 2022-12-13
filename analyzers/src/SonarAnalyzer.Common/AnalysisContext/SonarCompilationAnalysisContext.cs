@@ -20,7 +20,11 @@
 
 namespace SonarAnalyzer;
 
-public sealed class SonarCompilationAnalysisContext : SonarCompilationAnalysisContextBase<CompilationAnalysisContext>
+public sealed class SonarCompilationAnalysisContext : SonarAnalysisContextBase<CompilationAnalysisContext>
 {
+    public override SyntaxTree Tree => Context.GetFirstSyntaxTree();
+    public override Compilation Compilation => Context.Compilation;
+    public override AnalyzerOptions Options => Context.Options;
+
     internal SonarCompilationAnalysisContext(SonarAnalysisContext analysisContext, CompilationAnalysisContext context) : base(analysisContext, context) { }
 }
