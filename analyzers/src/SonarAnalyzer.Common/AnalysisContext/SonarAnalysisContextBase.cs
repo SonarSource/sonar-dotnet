@@ -18,13 +18,35 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.IO;
 using Microsoft.CodeAnalysis.Text;
 
 namespace SonarAnalyzer;
 
 public abstract class SonarAnalysisContextBase
 {
+    private static readonly SourceTextValueProvider<ProjectConfigReader> ProjectConfigProvider = new(x => new ProjectConfigReader(x));
+
     public abstract bool TryGetValue<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value);
+
+    /// <summary>
+    /// Reads configuration from SonarProjectConfig.xml file and caches the result for scope of this analysis.
+    /// </summary>
+    protected ProjectConfigReader ProjectConfiguration(AnalyzerOptions options)
+    {
+        if (options.SonarProjectConfig() is { } sonarProjectConfig)
+        {
+            return sonarProjectConfig.GetText() is { } sourceText
+                // TryGetValue catches all exceptions from SourceTextValueProvider and returns false when exception is thrown
+                && TryGetValue(sourceText, ProjectConfigProvider, out var cachedProjectConfigReader)
+                ? cachedProjectConfigReader
+                : throw new InvalidOperationException($"File '{Path.GetFileName(sonarProjectConfig.Path)}' has been added as an AdditionalFile but could not be read and parsed.");
+        }
+        else
+        {
+            return ProjectConfigReader.Empty;
+        }
+    }
 }
 
 public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextBase

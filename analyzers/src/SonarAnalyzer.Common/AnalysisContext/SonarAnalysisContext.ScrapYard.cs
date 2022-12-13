@@ -37,46 +37,15 @@ namespace SonarAnalyzer;
 /// </summary>
 public partial class SonarAnalysisContext
 {
-    public delegate bool TryGetValueDelegate<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value);
+    public delegate bool TryGetValueDelegate<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value);     // FIXME: Done
 
-    internal const string SonarProjectConfigFileName = "SonarProjectConfig.xml";
     private static readonly Regex WebConfigRegex = new(@"[\\\/]web\.([^\\\/]+\.)?config$", RegexOptions.IgnoreCase);
     private static readonly Regex AppSettingsRegex = new(@"[\\\/]appsettings\.([^\\\/]+\.)?json$", RegexOptions.IgnoreCase);
 
     private static readonly SourceTextValueProvider<bool> ShouldAnalyzeGeneratedCS = CreateAnalyzeGeneratedProvider(LanguageNames.CSharp);
     private static readonly SourceTextValueProvider<bool> ShouldAnalyzeGeneratedVB = CreateAnalyzeGeneratedProvider(LanguageNames.VisualBasic);
-    private static readonly SourceTextValueProvider<ProjectConfigReader> ProjectConfigProvider = new(x => new ProjectConfigReader(x));
+    private static readonly SourceTextValueProvider<ProjectConfigReader> ProjectConfigProvider = new(x => new ProjectConfigReader(x));  // FIXME: Done
     private static readonly ConditionalWeakTable<Compilation, ImmutableHashSet<string>> UnchangedFilesCache = new();
-
-    /// <summary>
-    /// This delegate is called on all specific contexts, after the registration to the <see cref="AnalysisContext"/>, to
-    /// control whether or not the action should be executed.
-    /// </summary>
-    /// <remarks>
-    /// Currently this delegate is set by SonarLint (4.0+) when the project has the NuGet package installed to avoid
-    /// duplicated analysis and issues. When both the NuGet and the VSIX are available, NuGet will take precedence and VSIX
-    /// will be inhibited.
-    /// </remarks>
-    public static Func<IEnumerable<DiagnosticDescriptor>, SyntaxTree, bool> ShouldExecuteRegisteredAction { get; set; }
-
-    /// <summary>
-    /// This delegates control whether or not a diagnostic should be reported to Roslyn.
-    /// </summary>
-    /// <remarks>
-    /// Currently this delegate is set by SonarLint (older than v4.0) to provide a suppression mechanism (i.e. specific
-    /// issues turned off on the bound SonarQube).
-    /// </remarks>
-    public static Func<SyntaxTree, Diagnostic, bool> ShouldDiagnosticBeReported { get; set; }
-
-    /// <summary>
-    /// This delegate is used to supersede the default reporting action.
-    /// When this delegate is set, the delegate set for <see cref="ShouldDiagnosticBeReported"/> is ignored.
-    /// </summary>
-    /// <remarks>
-    /// Currently this delegate is set by SonarLint (4.0+) to control how the diagnostic should be reported to Roslyn
-    /// (including not being reported).
-    /// </remarks>
-    public static Action<IReportingContext> ReportDiagnostic { get; set; }
 
     public bool ShouldAnalyzeGenerated(Compilation c, AnalyzerOptions options) =>
         ShouldAnalyzeGenerated(analysisContext.TryGetValue, c, options);
@@ -157,10 +126,10 @@ public partial class SonarAnalysisContext
     /// <summary>
     /// Reads configuration from SonarProjectConfig.xml file and caches the result for scope of this analysis.
     /// </summary>
-    internal ProjectConfigReader ProjectConfiguration(AnalyzerOptions options) =>
+    internal ProjectConfigReader ProjectConfiguration(AnalyzerOptions options) =>   // FIXME: Done
         ProjectConfiguration(analysisContext.TryGetValue, options);
 
-    internal static ProjectConfigReader ProjectConfiguration(TryGetValueDelegate<ProjectConfigReader> tryGetValue, AnalyzerOptions options)
+    internal static ProjectConfigReader ProjectConfiguration(TryGetValueDelegate<ProjectConfigReader> tryGetValue, AnalyzerOptions options) // FIXME: Done
     {
         if (options.SonarProjectConfig() is { } sonarProjectConfigXml)
         {
