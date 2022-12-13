@@ -175,6 +175,22 @@ namespace SonarAnalyzer.UnitTest.Rules
             // In TokenThreshold.cs there are 40009 tokens which is more than the current limit of 40000
             Verify("TokenThreshold.cs", ProjectType.Product, _ => { }, false);
 
+        [DataTestMethod]
+        [DataRow("Method.cs", true)]
+        [DataRow("SomethingElse.cs", false)]
+        public void Verify_UnchangedFiles(string unchangedFileName, bool expectedProtobufIsEmpty)
+        {
+            var builder = CreateBuilder(ProjectType.Product, "Method.cs").WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfigWithUnchangedFiles(TestContext, BasePath + unchangedFileName));
+            if (expectedProtobufIsEmpty)
+            {
+                builder.VerifyUtilityAnalyzerProducesEmptyProtobuf();
+            }
+            else
+            {
+                builder.VerifyUtilityAnalyzer<SymbolReferenceInfo>(x => x.Should().NotBeEmpty());
+            }
+        }
+
         private void Verify(string fileName, ProjectType projectType, int expectedDeclarationCount, int assertedDeclarationLine, params int[] assertedDeclarationLineReferences) =>
             Verify(fileName, projectType, references =>
                 {
@@ -186,25 +202,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         private void Verify(string fileName,
                                    ProjectType projectType,
                                    Action<IReadOnlyList<SymbolReferenceInfo.Types.SymbolReference>> verifyReference,
-                                   bool isMessageExpected = true,
-                                   [CallerMemberName] string testName = "")
-        {
-            var testRoot = BasePath + testName;
-            var language = AnalyzerLanguage.FromPath(fileName);
-            UtilityAnalyzerBase analyzer = language.LanguageName switch
-            {
-                LanguageNames.CSharp => new TestSymbolReferenceAnalyzer_CS(testRoot, projectType == ProjectType.Test),
-                LanguageNames.VisualBasic => new TestSymbolReferenceAnalyzer_VB(testRoot, projectType == ProjectType.Test),
-                _ => throw new UnexpectedLanguageException(language)
-            };
-
-            new VerifierBuilder()
-                .AddAnalyzer(() => analyzer)
-                .AddPaths(fileName)
-                .WithBasePath(BasePath)
-                .WithOptions(ParseOptionsHelper.Latest(language))
+                                   bool isMessageExpected = true) =>
+            CreateBuilder(projectType, fileName)
                 .WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfig(TestContext, projectType))
-                .WithProtobufPath(@$"{testRoot}\symrefs.pb")
                 .VerifyUtilityAnalyzer<SymbolReferenceInfo>(messages =>
                     {
                         messages.Should().HaveCount(isMessageExpected ? 1 : 0);
@@ -216,6 +216,23 @@ namespace SonarAnalyzer.UnitTest.Rules
                             verifyReference(info.Reference);
                         }
                     });
+
+        private VerifierBuilder CreateBuilder(ProjectType projectType, string fileName)
+        {
+            var testRoot = BasePath + TestContext.TestName;
+            var language = AnalyzerLanguage.FromPath(fileName);
+            UtilityAnalyzerBase analyzer = language.LanguageName switch
+            {
+                LanguageNames.CSharp => new TestSymbolReferenceAnalyzer_CS(testRoot, projectType == ProjectType.Test),
+                LanguageNames.VisualBasic => new TestSymbolReferenceAnalyzer_VB(testRoot, projectType == ProjectType.Test),
+                _ => throw new UnexpectedLanguageException(language)
+            };
+            return new VerifierBuilder()
+                .AddAnalyzer(() => analyzer)
+                .AddPaths(fileName)
+                .WithBasePath(BasePath)
+                .WithOptions(ParseOptionsHelper.Latest(language))
+                .WithProtobufPath(@$"{testRoot}\symrefs.pb");
         }
 
         // We need to set protected properties and this class exists just to enable the analyzer without bothering with additional files with parameters

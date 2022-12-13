@@ -27,8 +27,6 @@ using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 using SonarAnalyzer.UnitTest.Helpers;
 
-using static SonarAnalyzer.UnitTest.TestHelper;
-
 namespace SonarAnalyzer.UnitTest.Common
 {
     [TestClass]
@@ -143,7 +141,7 @@ namespace SonarAnalyzer.UnitTest.Common
                 .Where(RuleFinder.IsParameterized)
                 .Select(type => (DiagnosticAnalyzer)Activator.CreateInstance(type))
                 .SelectMany(analyzer => analyzer.SupportedDiagnostics)
-                .Where(analyzer => !IsSecurityHotspot(analyzer))
+                .Where(analyzer => !TestHelper.IsSecurityHotspot(analyzer))
                 .ToList()
                 .ForEach(diagnostic => diagnostic.IsEnabledByDefault.Should().BeFalse());
 
@@ -165,7 +163,7 @@ namespace SonarAnalyzer.UnitTest.Common
             var descriptors = RuleFinder.RuleAnalyzerTypes.SelectMany(SupportedDiagnostics)
                 // Security hotspots are enabled by default, but they will report issues only
                 // when their ID is contained in SonarLint.xml
-                .Where(descriptor => !IsSecurityHotspot(descriptor));
+                .Where(descriptor => !TestHelper.IsSecurityHotspot(descriptor));
 
             foreach (var descriptor in descriptors)
             {
@@ -221,7 +219,7 @@ namespace SonarAnalyzer.UnitTest.Common
 
             foreach (var diagnostic in RuleFinder.RuleAnalyzerTypes.SelectMany(SupportedDiagnostics))
             {
-                if (IsSecurityHotspot(diagnostic))
+                if (TestHelper.IsSecurityHotspot(diagnostic))
                 {
                     // Security hotspots are enabled by default, but they will report issues only when their ID is contained in SonarLint.xml
                     // DiagnosticDescriptorFactory adds WellKnownDiagnosticTags.NotConfigurable to prevent rule supression and deactivation.
@@ -343,7 +341,7 @@ namespace SonarAnalyzer.UnitTest.Common
 
         private void UnchangedFiles_Verify(VerifierBuilder builder, string unchangedFileName, bool expectEmptyResults)
         {
-            builder = builder.WithConcurrentAnalysis(false).WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfig(TestContext, new[] { unchangedFileName }));
+            builder = builder.WithConcurrentAnalysis(false).WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfigWithUnchangedFiles(TestContext, unchangedFileName));
             if (expectEmptyResults)
             {
                 builder.VerifyNoIssueReported();

@@ -32,7 +32,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class CopyPasteTokenAnalyzerTest
     {
         private const string BasePath = @"Utilities\CopyPasteTokenAnalyzer\";
-        private readonly VerifierBuilder builder = new VerifierBuilder().WithBasePath(BasePath);
 
         public TestContext TestContext { get; set; }
 
@@ -79,26 +78,17 @@ namespace SonarAnalyzer.UnitTest.Rules
             });
 
         [TestMethod]
-        public void Verify_Duplicated_CS_GlobalUsings()
-        {
-            const string testRoot = BasePath + nameof(Verify_NotRunForTestProject_CS);
-            const string fileName = "Duplicated.CSharp10.cs";
-
-            builder
-                .AddAnalyzer(() => new TestCopyPasteTokenAnalyzer_CS(testRoot, false))
-                .AddPaths(fileName)
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
+        public void Verify_Duplicated_CS_GlobalUsings() =>
+            CreateBuilder(ProjectType.Product, "Duplicated.CSharp10.cs")
                 .WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfig(TestContext, ProjectType.Product))
-                .WithProtobufPath(@$"{testRoot}\token-cpd.pb")
                 .VerifyUtilityAnalyzer<CopyPasteTokenInfo>(messages =>
                     {
                         messages.Should().HaveCount(1);
                         var info = messages.Single();
-                        info.FilePath.Should().Be(Path.Combine(builder.BasePath, fileName));
+                        info.FilePath.Should().Be(Path.Combine(BasePath, "Duplicated.CSharp10.cs"));
                         info.TokenInfo.Should().HaveCount(39);
                         info.TokenInfo.Where(x => x.TokenValue == "$num").Should().HaveCount(2);
                     });
-        }
 
         [TestMethod]
         public void Verify_DuplicatedDifferentLiterals_CS() =>
@@ -109,40 +99,52 @@ namespace SonarAnalyzer.UnitTest.Rules
             });
 
         [TestMethod]
-        public void Verify_NotRunForTestProject_CS()
+        public void Verify_NotRunForTestProject_CS() =>
+            CreateBuilder(ProjectType.Test, "DuplicatedDifferentLiterals.cs").VerifyUtilityAnalyzerProducesEmptyProtobuf();
+
+        [DataTestMethod]
+        [DataRow("Unique.cs", true)]
+        [DataRow("SomethingElse.cs", false)]
+        public void Verify_UnchangedFiles(string unchangedFileName, bool expectedProtobufIsEmpty)
         {
-            const string testRoot = BasePath + nameof(Verify_NotRunForTestProject_CS);
-            builder
-                .AddAnalyzer(() => new TestCopyPasteTokenAnalyzer_CS(testRoot, true))
-                .AddPaths("DuplicatedDifferentLiterals.cs")
-                .WithProtobufPath(@$"{testRoot}\token-cpd.pb")
-                .VerifyUtilityAnalyzerProducesEmptyProtobuf();
+            var builder = CreateBuilder(ProjectType.Product, "Unique.cs").WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfigWithUnchangedFiles(TestContext, BasePath + unchangedFileName));
+            if (expectedProtobufIsEmpty)
+            {
+                builder.VerifyUtilityAnalyzerProducesEmptyProtobuf();
+            }
+            else
+            {
+                builder.VerifyUtilityAnalyzer<TokenTypeInfo>(x => x.Should().NotBeEmpty());
+            }
         }
 
-        private void Verify(string fileName, Action<IReadOnlyList<CopyPasteTokenInfo.Types.TokenInfo>> verifyTokenInfo, [CallerMemberName] string testName = "")
-        {
-            var testRoot = BasePath + testName;
-            var language = AnalyzerLanguage.FromPath(fileName);
-            UtilityAnalyzerBase analyzer = language.LanguageName switch
-            {
-                LanguageNames.CSharp => new TestCopyPasteTokenAnalyzer_CS(testRoot, false),
-                LanguageNames.VisualBasic => new TestCopyPasteTokenAnalyzer_VB(testRoot, false),
-                _ => throw new UnexpectedLanguageException(language)
-            };
-
-            builder
-                .AddAnalyzer(() => analyzer)
-                .AddPaths(fileName)
-                .WithOptions(ParseOptionsHelper.Latest(language))
+        private void Verify(string fileName, Action<IReadOnlyList<CopyPasteTokenInfo.Types.TokenInfo>> verifyTokenInfo) =>
+            CreateBuilder(ProjectType.Product, fileName)
                 .WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfig(TestContext, ProjectType.Product))
-                .WithProtobufPath(@$"{testRoot}\token-cpd.pb")
                 .VerifyUtilityAnalyzer<CopyPasteTokenInfo>(messages =>
                     {
                         messages.Should().HaveCount(1);
                         var info = messages.Single();
-                        info.FilePath.Should().Be(Path.Combine(builder.BasePath, fileName));
+                        info.FilePath.Should().Be(Path.Combine(BasePath, fileName));
                         verifyTokenInfo(info.TokenInfo);
                     });
+
+        private VerifierBuilder CreateBuilder(ProjectType projectType, string fileName)
+        {
+            var testRoot = BasePath + TestContext.TestName;
+            var language = AnalyzerLanguage.FromPath(fileName);
+            UtilityAnalyzerBase analyzer = language.LanguageName switch
+            {
+                LanguageNames.CSharp => new TestCopyPasteTokenAnalyzer_CS(testRoot, projectType == ProjectType.Test),
+                LanguageNames.VisualBasic => new TestCopyPasteTokenAnalyzer_VB(testRoot, projectType == ProjectType.Test),
+                _ => throw new UnexpectedLanguageException(language)
+            };
+            return new VerifierBuilder()
+                .AddAnalyzer(() => analyzer)
+                .AddPaths(fileName)
+                .WithBasePath(BasePath)
+                .WithOptions(ParseOptionsHelper.Latest(language))
+                .WithProtobufPath(@$"{testRoot}\token-cpd.pb");
         }
 
         // We need to set protected properties and this class exists just to enable the analyzer without bothering with additional files with parameters

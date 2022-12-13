@@ -98,11 +98,13 @@ namespace SonarAnalyzer.Rules
                         return;
                     }
 
+                    var treeMessages = c.Compilation.SyntaxTrees
+                        .Where(x => !SonarAnalysisContext.IsUnchanged(context.TryGetValue, x, c.Compilation, c.Options) && ShouldGenerateMetrics(x))
+                        .Select(x => CreateMessage(x, c.Compilation.GetSemanticModel(x)));
                     var messages = CreateAnalysisMessages(c)
-                        .Concat(c.Compilation.SyntaxTrees.Where(ShouldGenerateMetrics).Select(x => CreateMessage(x, c.Compilation.GetSemanticModel(x))))
+                        .Concat(treeMessages)
                         .WhereNotNull()
                         .ToArray();
-
                     lock (FileWriteLock)
                     {
                         Directory.CreateDirectory(OutPath);
