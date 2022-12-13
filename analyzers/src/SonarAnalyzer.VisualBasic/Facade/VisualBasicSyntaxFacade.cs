@@ -127,17 +127,7 @@ internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
     public override bool TryGetGetInterpolatedTextValue(SyntaxNode node, SemanticModel semanticModel, out string interpolatedValue) =>
         Cast<InterpolatedStringExpressionSyntax>(node).TryGetGetInterpolatedTextValue(semanticModel, out interpolatedValue);
 
-    public override bool IsStatic(SyntaxNode node) =>
-        Cast<MethodBlockSyntax>(node).IsShared();
-    protected override SyntaxToken Token(SyntaxNode node)
-    {
-        if (node is LiteralExpressionSyntax literal)
-        {
-            return literal.Token;
-        }
-        else
-        {
-            return node.GetFirstToken();
-        }
-    }
+    public override bool IsStatic(SyntaxNode node) => Cast<MethodBlockSyntax>(node).IsShared();
+
+    protected override SyntaxToken Token(SyntaxNode node) => node is LiteralExpressionSyntax literal ? literal.Token : default);
 }

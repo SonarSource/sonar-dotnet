@@ -26,15 +26,14 @@ public abstract class SyntaxFacade<TSyntaxKind>
     where TSyntaxKind : struct
 {
     protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
+
     public abstract TSyntaxKind Kind(SyntaxNode node);
     public abstract ComparisonKind ComparisonKind(SyntaxNode node);
-
     public abstract bool IsNullLiteral(SyntaxNode node);
     public abstract bool IsKind(SyntaxNode node, TSyntaxKind kind);
     public abstract bool IsKind(SyntaxToken token, TSyntaxKind kind);
     public abstract bool IsAnyKind(SyntaxNode node, ISet<TSyntaxKind> syntaxKinds);
     public abstract bool IsAnyKind(SyntaxNode node, params TSyntaxKind[] syntaxKinds);
-
     public abstract IEnumerable<SyntaxNode> ArgumentExpressions(SyntaxNode node);
     public abstract ImmutableArray<SyntaxNode> AssignmentTargets(SyntaxNode assignment);
     public abstract SyntaxNode AssignmentLeft(SyntaxNode assignment);
@@ -53,6 +52,7 @@ public abstract class SyntaxFacade<TSyntaxKind>
     public abstract bool TryGetGetInterpolatedTextValue(SyntaxNode node, SemanticModel semanticModel, out string interpolatedValue);
     public abstract bool IsStatic(SyntaxNode node);
     protected abstract SyntaxToken Token(SyntaxNode node);
+
     public string StringValue(SyntaxNode node, SemanticModel semanticModel)
     {
         if (node != null)
@@ -70,6 +70,7 @@ public abstract class SyntaxFacade<TSyntaxKind>
         }
         return null;
     }
+
     protected static T Cast<T>(SyntaxNode node) where T : SyntaxNode =>
         node as T ?? throw new InvalidCastException($"A {node.GetType().Name} node can not be cast to a {typeof(T).Name} node.");
 
