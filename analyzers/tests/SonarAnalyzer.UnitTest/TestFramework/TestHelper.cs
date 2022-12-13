@@ -259,7 +259,7 @@ End Class", AnalyzerLanguage.VisualBasic);
             return CreateSonarProjectConfig(context, "FilesToAnalyzePath", filesToAnalyzePath, true);
         }
 
-        public static string CreateSonarProjectConfig(TestContext context, IEnumerable<string> unchangedFiles) =>
+        public static string CreateSonarProjectConfigWithUnchangedFiles(TestContext context, params string[] unchangedFiles) =>
             CreateSonarProjectConfig(context, "NotImportant", null, true, CreateAnalysisConfig(context, unchangedFiles));
 
         public static string CreateSonarProjectConfig(TestContext context, ProjectType projectType, bool isScannerRun = true) =>

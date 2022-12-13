@@ -138,7 +138,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("SomethingElse.cs", false)]
         public void Verify_UnchangedFiles(string unchangedFileName, bool expectedProtobufIsEmpty)
         {
-            var builder = CreateBuilder(ProjectType.Product, "Tokens.cs").WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfig(TestContext, new[] { BasePath + unchangedFileName }));
+            var builder = CreateBuilder(ProjectType.Product, "Tokens.cs").WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfigWithUnchangedFiles(TestContext, BasePath + unchangedFileName));
             if (expectedProtobufIsEmpty)
             {
                 builder.VerifyUtilityAnalyzerProducesEmptyProtobuf();

@@ -76,7 +76,7 @@ public partial class SonarAnalysisContextTest
 
     private AnalyzerOptions CreateOptions(string[] unchangedFiles)
     {
-        var sonarProjectConfig = TestHelper.CreateSonarProjectConfig(TestContext, unchangedFiles);
+        var sonarProjectConfig = TestHelper.CreateSonarProjectConfigWithUnchangedFiles(TestContext, unchangedFiles);
         var additionalFile = new AnalyzerAdditionalFile(sonarProjectConfig);
         return new(ImmutableArray.Create<AdditionalText>(additionalFile));
     }

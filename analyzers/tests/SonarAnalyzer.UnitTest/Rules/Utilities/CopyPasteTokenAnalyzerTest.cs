@@ -78,8 +78,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             });
 
         [TestMethod]
-        public void Verify_Duplicated_CS_GlobalUsings()
-        {
+        public void Verify_Duplicated_CS_GlobalUsings() =>
             CreateBuilder(ProjectType.Product, "Duplicated.CSharp10.cs")
                 .WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                 .VerifyUtilityAnalyzer<CopyPasteTokenInfo>(messages =>
@@ -90,7 +89,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                         info.TokenInfo.Should().HaveCount(39);
                         info.TokenInfo.Where(x => x.TokenValue == "$num").Should().HaveCount(2);
                     });
-        }
 
         [TestMethod]
         public void Verify_DuplicatedDifferentLiterals_CS() =>
@@ -109,7 +107,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("SomethingElse.cs", false)]
         public void Verify_UnchangedFiles(string unchangedFileName, bool expectedProtobufIsEmpty)
         {
-            var builder = CreateBuilder(ProjectType.Product, "Unique.cs").WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfig(TestContext, new[] { BasePath + unchangedFileName }));
+            var builder = CreateBuilder(ProjectType.Product, "Unique.cs").WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfigWithUnchangedFiles(TestContext, BasePath + unchangedFileName));
             if (expectedProtobufIsEmpty)
             {
                 builder.VerifyUtilityAnalyzerProducesEmptyProtobuf();

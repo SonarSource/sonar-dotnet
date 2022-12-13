@@ -64,7 +64,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("SomethingElse.cs", 1)]
         public void Verify_UnchangedFiles(string unchangedFileName, int expectedGeneratedFiles) =>
             CreateBuilder("GeneratedByName.generated.cs")
-                .WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfig(TestContext, new[] { BasePath + unchangedFileName }))
+                .WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfigWithUnchangedFiles(TestContext, BasePath + unchangedFileName))
                 .VerifyUtilityAnalyzer<LogInfo>(x => x.Where(info => info.Text.Contains("generated")).Should().HaveCount(expectedGeneratedFiles + 1)); // +1 to ignore ExtraEmptyFile.g.cs
 
         private void Verify(string[] paths, Action<IReadOnlyList<LogInfo>> verifyProtobuf) =>
