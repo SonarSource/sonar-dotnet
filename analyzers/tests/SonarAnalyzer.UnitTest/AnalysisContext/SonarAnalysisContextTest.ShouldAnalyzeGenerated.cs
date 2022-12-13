@@ -23,7 +23,7 @@ using Microsoft.CodeAnalysis.Text;
 using Moq;
 using SonarAnalyzer.Common;
 
-namespace SonarAnalyzer.UnitTest.AnalysisContext;
+namespace SonarAnalyzer.UnitTest;
 
 public partial class SonarAnalysisContextTest
 {
