@@ -10,7 +10,7 @@ namespace CustomTests
     public class BaseTest
     {
         [AssertionMethod]
-        protected virtual void CustomAssertionMethod<T>(T t) { }
+        protected virtual void CustomAssertionMethod() { }
 
         [TestMethod]
         public void TestMethod1() // Noncompliant {{Add at least one assertion to this test case.}}
@@ -66,10 +66,10 @@ namespace CustomTests
         [TestMethod]
         public void Derived() // Noncompliant FP: The overridden method needs to be annotated because Roslyn does not respect AttributeUsage.Inherited in ISymbol.GetAttributes
         {
-            CustomAssertionMethod(new object());
+            CustomAssertionMethod();
         }
 
-        protected override void CustomAssertionMethod<T>(T t)
+        protected override void CustomAssertionMethod()
         {
         }
     }
