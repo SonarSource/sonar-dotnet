@@ -18,19 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer;
 
-public sealed class ParameterLoadingAnalysisContext : SonarAnalysisContextBase // FIXME: Refactor
+public class SonarCompilationAnalysisContextBase<TContext> : SonarAnalysisContextBase // FIXME: Unused
 {
-    private readonly List<Action<CompilationStartAnalysisContext>> compilationStartActions = new();
+    public SonarAnalysisContext AnalysisContext { get; }
+    public TContext Context { get; }
 
-    internal SonarAnalysisContext Context { get; }
-    internal IEnumerable<Action<CompilationStartAnalysisContext>> CompilationStartActions => compilationStartActions;
-
-    internal ParameterLoadingAnalysisContext(SonarAnalysisContext context) =>
+    protected SonarCompilationAnalysisContextBase(SonarAnalysisContext analysisContext, TContext context)
+    {
+        AnalysisContext = analysisContext ?? throw new ArgumentNullException(nameof(analysisContext));
         Context = context;
-
-    internal void RegisterCompilationStartAction(Action<CompilationStartAnalysisContext> action) =>
-        // only collect compilation start actions and call them later
-        compilationStartActions.Add(action);
+    }
 }
