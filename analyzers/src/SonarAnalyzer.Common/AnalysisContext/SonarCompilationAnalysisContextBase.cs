@@ -20,7 +20,14 @@
 
 namespace SonarAnalyzer;
 
-public sealed class SonarCompilationStartAnalysisContext : SonarCompilationAnalysisContextBase<CompilationStartAnalysisContext>
+public class SonarCompilationAnalysisContextBase<TContext> : SonarAnalysisContextBase
 {
-    internal SonarCompilationStartAnalysisContext(SonarAnalysisContext analysisContext, CompilationStartAnalysisContext context) : base(analysisContext, context) { }
+    public SonarAnalysisContext AnalysisContext { get; }
+    public TContext Context { get; }
+
+    protected SonarCompilationAnalysisContextBase(SonarAnalysisContext analysisContext, TContext context)
+    {
+        AnalysisContext = analysisContext ?? throw new ArgumentNullException(nameof(analysisContext));
+        Context = context;
+    }
 }

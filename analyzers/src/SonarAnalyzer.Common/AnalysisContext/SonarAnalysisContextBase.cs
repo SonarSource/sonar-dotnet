@@ -18,11 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.Text;
-
 namespace SonarAnalyzer;
 
-public abstract class SonarAnalysisContextBase
+public class SonarAnalysisContextBase
 {
-    protected abstract bool TryGetValue<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value);
+
 }

@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.Helpers;
 
-public class ParameterLoadingAnalysisContext
+public sealed class ParameterLoadingAnalysisContext : SonarAnalysisContextBase // FIXME: Refactor
 {
     private readonly List<Action<CompilationStartAnalysisContext>> compilationStartActions = new();
 

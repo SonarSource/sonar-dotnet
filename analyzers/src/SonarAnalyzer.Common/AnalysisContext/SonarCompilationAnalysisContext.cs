@@ -18,17 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.Text;
-
 namespace SonarAnalyzer;
 
-public class SonarCompilationAnalysisContext : SonarAnalysisContextBase
+public sealed class SonarCompilationAnalysisContext : SonarCompilationAnalysisContextBase<CompilationAnalysisContext>
 {
-    private readonly CompilationAnalysisContext context;
-
-    internal SonarCompilationAnalysisContext(CompilationAnalysisContext context) =>
-        this.context = context;
-
-    protected override bool TryGetValue<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value) =>
-        context.TryGetValue(text, valueProvider, out value);
+    internal SonarCompilationAnalysisContext(SonarAnalysisContext analysisContext, CompilationAnalysisContext context) : base(analysisContext, context) { }
 }
