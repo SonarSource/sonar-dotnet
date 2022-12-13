@@ -41,6 +41,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void NativeMethodsShouldBeWrapped_CSharp10() =>
             builder.AddPaths("NativeMethodsShouldBeWrapped.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
+        [TestMethod]
+        public void NativeMethodsShouldBeWrapped_CSharp11() =>
+            builder.AddPaths("NativeMethodsShouldBeWrapped.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
 #endif
 
         [TestMethod]
