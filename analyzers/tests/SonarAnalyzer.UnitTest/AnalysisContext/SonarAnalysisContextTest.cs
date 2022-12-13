@@ -23,7 +23,7 @@ using SonarAnalyzer.Common;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.Rules;
 
-namespace SonarAnalyzer.UnitTest.Helpers
+namespace SonarAnalyzer.UnitTest.AnalysisContext
 {
     [TestClass]
     public partial class SonarAnalysisContextTest
