@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules
             rule = DiagnosticDescriptorFactory.CreateUtility(diagnosticId, title);
 
         internal static TextRange GetTextRange(FileLinePositionSpan lineSpan) =>
-            new TextRange
+            new()
             {
                 StartLine = lineSpan.StartLinePosition.GetLineNumberToReport(),
                 EndLine = lineSpan.EndLinePosition.GetLineNumberToReport(),
@@ -50,10 +50,10 @@ namespace SonarAnalyzer.Rules
                 EndOffset = lineSpan.EndLinePosition.Character
             };
 
-        protected void ReadParameters(SonarAnalysisContext context, CompilationAnalysisContext c)
+        protected void ReadParameters(SonarCompilationAnalysisContext c)
         {
             var settings = PropertiesHelper.GetSettings(c.Options).ToList();
-            var outPath = context.ProjectConfiguration(c.Options).OutPath;
+            var outPath = c.ProjectConfiguration().OutPath;
             // For backward compatibility with S4MSB <= 5.0
             if (outPath == null && c.Options.ProjectOutFolderPath() is { } projectOutFolderAdditionalFile)
             {
@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Rules
                 AnalyzeGeneratedCode = PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(settings, c.Compilation.Language);
                 OutPath = Path.Combine(outPath, c.Compilation.Language == LanguageNames.CSharp ? "output-cs" : "output-vbnet");
                 IsAnalyzerEnabled = true;
-                IsTestProject = context.IsTestProject(c.Compilation, c.Options);
+                IsTestProject = c.IsTestProject();
             }
         }
     }
@@ -82,14 +82,14 @@ namespace SonarAnalyzer.Rules
 
         protected virtual bool AnalyzeUnchangedFiles => false;
 
-        protected virtual IEnumerable<TMessage> CreateAnalysisMessages(CompilationAnalysisContext c) => Enumerable.Empty<TMessage>();
+        protected virtual IEnumerable<TMessage> CreateAnalysisMessages(SonarCompilationAnalysisContext c) => Enumerable.Empty<TMessage>();
 
         protected UtilityAnalyzerBase(string diagnosticId, string title) : base(diagnosticId, title) { }
 
         protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterCompilationAction(c =>
                 {
-                    ReadParameters(context, c);
+                    ReadParameters(c);
                     if (!IsAnalyzerEnabled)
                     {
                         return;

@@ -136,7 +136,7 @@ namespace SonarAnalyzer.UnitTest.Rules.Utilities
                     _ => throw new InvalidOperationException($"Unexpected {nameof(language)}: {language}")
                 };
                 var c = new CompilationAnalysisContext(compilation, new AnalyzerOptions(additionalFiles), null, null, default);
-                ReadParameters(context, c);
+                ReadParameters(new(context, c));
             }
 
             protected override void Initialize(SonarAnalysisContext context) =>

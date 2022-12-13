@@ -19,6 +19,7 @@
  */
 
 using System.IO;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 
 namespace SonarAnalyzer;
@@ -66,4 +67,45 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
 
     public override bool TryGetValue<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value) =>
         AnalysisContext.TryGetValue(text, valueProvider, out value);
+
+    public ProjectConfigReader ProjectConfiguration() =>
+        ProjectConfiguration(Options);
+
+    public bool IsTestProject()
+    {
+        var projectType = ProjectConfiguration(Options).ProjectType;
+        return projectType == ProjectType.Unknown
+            ? Compilation.IsTest()              // SonarLint, NuGet or Scanner <= 5.0
+            : projectType == ProjectType.Test;  // Scanner >= 5.1 does authoritative decision that we follow
+    }
+
+    private protected void ReportIssue(ReportingContext reportingContext)
+    {
+        if (!SonarAnalysisContext.IsAnalysisScopeMatching(reportingContext.Compilation, IsTestProject(), ProjectConfiguration().IsScannerRun, new[] { reportingContext.Diagnostic.Descriptor }))
+        {
+            return;
+        }
+
+        if (reportingContext is { Compilation: { } compilation, Diagnostic.Location: { Kind: LocationKind.SourceFile, SourceTree: { } syntaxTree } }
+            && !compilation.ContainsSyntaxTree(syntaxTree))
+        {
+            Debug.Fail("Primary location should be part of the compilation. An AD0001 is raised if this is not the case.");
+            return;
+        }
+
+        // This is the current way SonarLint will handle how and what to report.
+        if (SonarAnalysisContext.ReportDiagnostic != null)
+        {
+            Debug.Assert(SonarAnalysisContext.ShouldDiagnosticBeReported == null, "Not expecting SonarLint to set both the old and the new delegates.");
+            SonarAnalysisContext.ReportDiagnostic(reportingContext);
+            return;
+        }
+
+        // Standalone NuGet, Scanner run and SonarLint < 4.0 used with latest NuGet
+        if (!VbcHelper.IsTriggeringVbcError(reportingContext.Diagnostic)
+            && (SonarAnalysisContext.ShouldDiagnosticBeReported?.Invoke(reportingContext.SyntaxTree, reportingContext.Diagnostic) ?? true))
+        {
+            reportingContext.ReportDiagnostic(reportingContext.Diagnostic);
+        }
+    }
 }

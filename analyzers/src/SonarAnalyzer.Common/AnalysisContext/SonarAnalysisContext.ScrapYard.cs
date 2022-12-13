@@ -39,9 +39,6 @@ public partial class SonarAnalysisContext
 {
     public delegate bool TryGetValueDelegate<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value);     // FIXME: Done
 
-    private static readonly Regex WebConfigRegex = new(@"[\\\/]web\.([^\\\/]+\.)?config$", RegexOptions.IgnoreCase);
-    private static readonly Regex AppSettingsRegex = new(@"[\\\/]appsettings\.([^\\\/]+\.)?json$", RegexOptions.IgnoreCase);
-
     private static readonly SourceTextValueProvider<bool> ShouldAnalyzeGeneratedCS = CreateAnalyzeGeneratedProvider(LanguageNames.CSharp);
     private static readonly SourceTextValueProvider<bool> ShouldAnalyzeGeneratedVB = CreateAnalyzeGeneratedProvider(LanguageNames.VisualBasic);
     private static readonly SourceTextValueProvider<ProjectConfigReader> ProjectConfigProvider = new(x => new ProjectConfigReader(x));  // FIXME: Done
@@ -75,13 +72,6 @@ public partial class SonarAnalysisContext
         ShouldExecuteRegisteredAction == null || tree == null || ShouldExecuteRegisteredAction(diagnostics, tree);
 
     // FIXME: Use the other one
-    internal void RegisterCompilationAction(Action<CompilationAnalysisContext> action) =>
-        context.RegisterCompilationAction(c => Execute<SonarCompilationAnalysisContext, CompilationAnalysisContext>(new(this, c), x => action(x.Context)));
-
-    //internal void RegisterCompilationAction(Action<SonarCompilationAnalysisContext> action) =>
-    //    context.RegisterCompilationAction(c => Execute<SonarCompilationAnalysisContext, CompilationAnalysisContext>(new(this, c), action));
-
-    // FIXME: Use the other one
     public void RegisterCompilationStartAction(Action<CompilationStartAnalysisContext> action) =>
         context.RegisterCompilationStartAction(c => Execute<SonarCompilationStartAnalysisContext, CompilationStartAnalysisContext>(new(this, c), x => action(x.Context)));
 
@@ -108,20 +98,6 @@ public partial class SonarAnalysisContext
 
     //internal void RegisterSyntaxNodeAction<TSyntaxKind>(Action<SonarSyntaxNodeAnalysisContext> action, params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct =>
     //    context.RegisterSyntaxNodeAction(c => Execute<SonarSyntaxNodeAnalysisContext, SyntaxNodeAnalysisContext>(new(this, c), action), syntaxKinds);
-
-    internal IEnumerable<string> WebConfigFiles(CompilationAnalysisContext c)
-    {
-        return ProjectConfiguration(c.Options).FilesToAnalyze.FindFiles(WebConfigRegex).Where(ShouldProcess);
-
-        static bool ShouldProcess(string path) => !Path.GetFileName(path).Equals("web.debug.config", StringComparison.OrdinalIgnoreCase);
-    }
-
-    internal IEnumerable<string> AppSettingsFiles(CompilationAnalysisContext c)
-    {
-        return ProjectConfiguration(c.Options).FilesToAnalyze.FindFiles(AppSettingsRegex).Where(ShouldProcess);
-
-        static bool ShouldProcess(string path) => !Path.GetFileName(path).Equals("appsettings.development.json", StringComparison.OrdinalIgnoreCase);
-    }
 
     /// <summary>
     /// Reads configuration from SonarProjectConfig.xml file and caches the result for scope of this analysis.
@@ -170,7 +146,7 @@ public partial class SonarAnalysisContext
     private static ImmutableHashSet<string> CreateUnchangedFilesHashSet(TryGetValueDelegate<ProjectConfigReader> tryGetValue, AnalyzerOptions options) =>
         ImmutableHashSet.Create(StringComparer.OrdinalIgnoreCase, ProjectConfiguration(tryGetValue, options).AnalysisConfig?.UnchangedFiles() ?? Array.Empty<string>());
 
-    private static bool IsTestProject(TryGetValueDelegate<ProjectConfigReader> tryGetValue, Compilation compilation, AnalyzerOptions options)
+    private static bool IsTestProject(TryGetValueDelegate<ProjectConfigReader> tryGetValue, Compilation compilation, AnalyzerOptions options)   // FIXME: Done
     {
         var projectType = ProjectConfiguration(tryGetValue, options).ProjectType;
         return projectType == ProjectType.Unknown
