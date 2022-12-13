@@ -115,4 +115,7 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
     public override bool IsStatic(SyntaxNode node) => Cast<BaseMethodDeclarationSyntax>(node).IsStatic();
 
     protected override SyntaxToken Token(SyntaxNode node) => node is LiteralExpressionSyntax literal ? literal.Token : default;
+
+    public override string InterpolatedTextGetContentsText(SyntaxNode node) =>
+        node is InterpolatedStringExpressionSyntax interpolatedExpression ? interpolatedExpression.GetContentsText() : null;
 }

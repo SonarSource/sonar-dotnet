@@ -88,11 +88,11 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
         [TestMethod]
         public void StringValue_UnexpectedType_CS() =>
-             cs.StringValue(CS.SyntaxFactory.ThrowStatement(), null).Should().BeEmpty();
+             cs.StringValue(CS.SyntaxFactory.ThrowStatement(), null).Should().BeNull();
 
         [TestMethod]
         public void StringValue_UnexpectedType_VB() =>
-            vb.StringValue(VB.SyntaxFactory.ThrowStatement(), null).Should().BeEmpty();
+            vb.StringValue(VB.SyntaxFactory.ThrowStatement(), null).Should().BeNull();
 
         [TestMethod]
         public void RemoveConditionalAccess_Null_CS() =>

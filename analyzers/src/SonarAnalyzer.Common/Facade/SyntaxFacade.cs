@@ -47,6 +47,7 @@ public abstract class SyntaxFacade<TSyntaxKind>
     public abstract SyntaxNode RemoveConditionalAccess(SyntaxNode node);
     public abstract SyntaxNode RemoveParentheses(SyntaxNode node);
     public abstract bool TryGetGetInterpolatedTextValue(SyntaxNode node, SemanticModel semanticModel, out string interpolatedValue);
+    public abstract string InterpolatedTextGetContentsText(SyntaxNode node);
     public abstract bool IsStatic(SyntaxNode node);
     protected abstract SyntaxToken Token(SyntaxNode node);
 
@@ -58,11 +59,10 @@ public abstract class SyntaxFacade<TSyntaxKind>
             {
                 return Token(node).ValueText;
             }
-            else if (Language.Syntax.IsKind(node, Language.SyntaxKind.InterpolatedStringExpression)
-                    && node is var interpolatedStringExpression
-                    && Language.Syntax.TryGetGetInterpolatedTextValue(interpolatedStringExpression, semanticModel, out var interpolatedValue))
+            else if (Language.Syntax.IsKind(node, Language.SyntaxKind.InterpolatedStringExpression))
             {
-                return interpolatedValue;
+                Language.Syntax.TryGetGetInterpolatedTextValue(node, semanticModel, out var interpolatedValue);
+                return interpolatedValue ?? InterpolatedTextGetContentsText(node);
             }
         }
         return null;
