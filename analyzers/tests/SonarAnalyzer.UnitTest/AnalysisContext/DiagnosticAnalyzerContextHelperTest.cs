@@ -24,7 +24,7 @@ using SonarAnalyzer.Common;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.UnitTest.Helpers
+namespace SonarAnalyzer.UnitTest.AnalysisContext
 {
     [TestClass]
     public class DiagnosticAnalyzerContextHelperTest

@@ -22,7 +22,7 @@ using System.Collections.Concurrent;
 using System.Runtime.CompilerServices;
 using Microsoft.CodeAnalysis.Text;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer
 {
     internal static class DiagnosticAnalyzerContextHelper
     {

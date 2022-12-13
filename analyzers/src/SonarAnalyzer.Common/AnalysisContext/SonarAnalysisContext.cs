@@ -25,7 +25,7 @@ using System.Xml.Linq;
 using Microsoft.CodeAnalysis.Text;
 using static SonarAnalyzer.Helpers.DiagnosticDescriptorFactory;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer
 {
     /// <summary>
     /// SonarC# and SonarVB specific context for initializing an analyzer. This type acts as a wrapper around Roslyn
