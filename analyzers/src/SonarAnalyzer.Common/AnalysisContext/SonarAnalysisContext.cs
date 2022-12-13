@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.Text;
-
 namespace SonarAnalyzer;
 
 public partial /*FIXME: REMOVE partial */ class SonarAnalysisContext : SonarAnalysisContextBase
@@ -29,8 +27,8 @@ public partial /*FIXME: REMOVE partial */ class SonarAnalysisContext : SonarAnal
 
     internal SonarAnalysisContext(AnalysisContext context, IEnumerable<DiagnosticDescriptor> supportedDiagnostics)
     {
+        this.context = context ?? throw new ArgumentNullException(nameof(context));
         this.supportedDiagnostics = supportedDiagnostics ?? throw new ArgumentNullException(nameof(supportedDiagnostics));
-        this.context = context;
     }
 
     public override bool TryGetValue<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value) =>
