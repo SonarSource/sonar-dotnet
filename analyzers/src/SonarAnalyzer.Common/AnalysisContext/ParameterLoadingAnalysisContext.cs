@@ -22,7 +22,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace SonarAnalyzer.Helpers;
 
-public sealed class ParameterLoadingAnalysisContext : SonarAnalysisContextBase
+public sealed class ParameterLoadingAnalysisContext : SonarAnalysisContextBase // FIXME: Refactor
 {
     private readonly List<Action<CompilationStartAnalysisContext>> compilationStartActions = new();
 
@@ -33,8 +33,7 @@ public sealed class ParameterLoadingAnalysisContext : SonarAnalysisContextBase
         Context = context;
 
     internal void RegisterCompilationStartAction(Action<CompilationStartAnalysisContext> action) =>
-        // only collect compilation start actions and call them later
-        compilationStartActions.Add(action);
+        compilationStartActions.Add(action);    // only collect compilation start actions and call them later
 
     public override bool TryGetValue<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value) =>
         Context.TryGetValue(text, valueProvider, out value);
