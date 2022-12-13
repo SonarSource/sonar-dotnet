@@ -42,6 +42,13 @@ namespace CustomTests
         }
 
         [TestMethod]
+        public void DerivedValidationMethod() // Compliant
+        {
+            var validator = new DerivedValidator();
+            validator.InstanceWithAttribute();
+        }
+
+        [TestMethod]
         public void TestMethod6() => // Compliant
             new Validator().InstanceWithAttributeAndArg(null);
 
@@ -79,6 +86,10 @@ namespace TestFramework
         public bool InstanceWithAttributeAndArg(object arg) => true;
     }
 
+    public class DerivedValidator: Validator
+    {
+    }
+
     [AssertionMethod] // Missused attribute
     public static class AttributedType
     {
@@ -88,7 +99,8 @@ namespace TestFramework
 
 namespace TestFramework.Attributes
 {
-    public class AssertionMethodAttribute : Attribute { }
+    [AttributeUsage(AttributeTargets.Method | /* for testing misplaced attributes */ AttributeTargets.Class, Inherited = true)]
+    public sealed class AssertionMethodAttribute : Attribute { }
     public class NotAssertionMethodAttribute : Attribute { } // AssertionMethodAttribute doesn't count as an assertion method attribute
     public class DerivedExpectedExceptionAttribute : ExpectedExceptionBaseAttribute { protected override void Verify(Exception exception) { } }
 }
