@@ -22,17 +22,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace SonarAnalyzer;
 
-public partial /*FIXME: REMOVE partial */ class SonarAnalysisContext : SonarAnalysisContextBase
+public abstract class SonarAnalysisContextBase
 {
-    private readonly AnalysisContext context;
-    private readonly IEnumerable<DiagnosticDescriptor> supportedDiagnostics;
-
-    internal SonarAnalysisContext(AnalysisContext context, IEnumerable<DiagnosticDescriptor> supportedDiagnostics)
-    {
-        this.supportedDiagnostics = supportedDiagnostics ?? throw new ArgumentNullException(nameof(supportedDiagnostics));
-        this.context = context;
-    }
-
-    protected override bool TryGetValue<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value) =>
-        context.TryGetValue(text, valueProvider, out value);
+    protected abstract bool TryGetValue<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value);
 }
