@@ -35,4 +35,17 @@ public partial /*FIXME: REMOVE partial */ class SonarAnalysisContext : SonarAnal
 
     public override bool TryGetValue<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value) =>
         context.TryGetValue(text, valueProvider, out value);
+
+    private void Execute<TSonarContext, TRoslynContext>(TSonarContext context, Action<TSonarContext> action) where TSonarContext : SonarAnalysisContextBase<TRoslynContext>
+    {
+        // For each action registered on context we need to do some pre-processing before actually calling the rule.
+        // First, we need to ensure the rule does apply to the current scope (main vs test source).
+        // Second, we call an external delegate (set by SonarLint for VS) to ensure the rule should be run (usually
+        // the decision is made on based on whether the project contains the analyzer as NuGet).
+        var isTestProject = IsTestProject(context.Compilation, context.Options);
+        if (IsAnalysisScopeMatching(context.Compilation, isTestProject, IsScannerRun(context.Options), supportedDiagnostics) && IsRegisteredActionEnabled(supportedDiagnostics, context.Tree))
+        {
+            action(context);
+        }
+    }
 }
