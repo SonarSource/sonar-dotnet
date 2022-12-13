@@ -282,8 +282,8 @@ namespace SonarAnalyzer.Helpers
         public static bool HasConstantValue(this ExpressionSyntax expression, SemanticModel semanticModel) =>
             expression.RemoveParentheses().IsAnyKind(LiteralSyntaxKinds) || expression.FindConstantValue(semanticModel) != null;
 
-        public static string GetStringValue(this SyntaxNode node, SemanticModel semanticModel) =>
-            CsharpStringValueHelper.Instance.GetStringValue(node, semanticModel);
+        public static string StringValue(this SyntaxNode node, SemanticModel semanticModel) =>
+            CSharpFacade.Instance.Syntax.StringValue(node, semanticModel);
 
         public static bool IsLeftSideOfAssignment(this ExpressionSyntax expression)
         {

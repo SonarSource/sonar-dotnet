@@ -18,10 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis.Semantics;
+
 namespace SonarAnalyzer.Helpers.Facade;
 
 internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
 {
+    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
     public override SyntaxKind Kind(SyntaxNode node) => node.Kind();
 
     public override ComparisonKind ComparisonKind(SyntaxNode node) =>
@@ -123,6 +127,16 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
     public override bool TryGetGetInterpolatedTextValue(SyntaxNode node, SemanticModel semanticModel, out string interpolatedValue) =>
         Cast<InterpolatedStringExpressionSyntax>(node).TryGetGetInterpolatedTextValue(semanticModel, out interpolatedValue);
 
-    public override bool IsStatic(SyntaxNode node) =>
-        Cast<BaseMethodDeclarationSyntax>(node).IsStatic();
+    public override bool IsStatic(SyntaxNode node) => Cast<BaseMethodDeclarationSyntax>(node).IsStatic();
+    protected override SyntaxToken Token(SyntaxNode node)
+    {
+        if (node is LiteralExpressionSyntax literal)
+        {
+            return literal.Token;
+        }
+        else
+        {
+            return node.GetLastToken();
+        }
+    }
 }

@@ -22,6 +22,8 @@ namespace SonarAnalyzer.Helpers.Facade;
 
 internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
 {
+    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+
     public override bool IsNullLiteral(SyntaxNode node) => node.IsNothingLiteral();
 
     public override SyntaxKind Kind(SyntaxNode node) => node.Kind();
@@ -127,4 +129,15 @@ internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
 
     public override bool IsStatic(SyntaxNode node) =>
         Cast<MethodBlockSyntax>(node).IsShared();
+    protected override SyntaxToken Token(SyntaxNode node)
+    {
+        if (node is LiteralExpressionSyntax literal)
+        {
+            return literal.Token;
+        }
+        else
+        {
+            return node.GetFirstToken();
+        }
+    }
 }
