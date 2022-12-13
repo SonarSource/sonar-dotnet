@@ -7,11 +7,14 @@ namespace CustomTests
     using TestFramework.Attributes;
 
     [TestClass]
-    public class Program
+    public class BaseTest
     {
+        [AssertionMethod]
+        protected virtual void CustomAssertionMethod<T>(T t) { }
+
         [TestMethod]
         public void TestMethod1() // Noncompliant {{Add at least one assertion to this test case.}}
-//                  ^^^^^^^^^^^
+        //          ^^^^^^^^^^^
         {
             var x = 42;
         }
@@ -42,13 +45,6 @@ namespace CustomTests
         }
 
         [TestMethod]
-        public void DerivedValidationMethod() // Compliant
-        {
-            var validator = new DerivedValidator();
-            validator.InstanceWithAttribute();
-        }
-
-        [TestMethod]
         public void TestMethod6() => // Compliant
             new Validator().InstanceWithAttributeAndArg(null);
 
@@ -61,6 +57,20 @@ namespace CustomTests
         public void TestMethod8() // Compliant
         {
             var x = 42;
+        }
+    }
+
+    [TestClass]
+    public class DerivedTest : BaseTest
+    {
+        [TestMethod]
+        public void Derived() // Noncompliant FP: The overridden method needs to be annotated because Roslyn does not respect AttributeUsage.Inherited in ISymbol.GetAttributes
+        {
+            CustomAssertionMethod(new object());
+        }
+
+        protected override void CustomAssertionMethod<T>(T t)
+        {
         }
     }
 }
@@ -86,10 +96,6 @@ namespace TestFramework
         public bool InstanceWithAttributeAndArg(object arg) => true;
     }
 
-    public class DerivedValidator: Validator
-    {
-    }
-
     [AssertionMethod] // Missused attribute
     public static class AttributedType
     {
@@ -99,7 +105,6 @@ namespace TestFramework
 
 namespace TestFramework.Attributes
 {
-    [AttributeUsage(AttributeTargets.Method | /* for testing misplaced attributes */ AttributeTargets.Class, Inherited = true)]
     public sealed class AssertionMethodAttribute : Attribute { }
     public class NotAssertionMethodAttribute : Attribute { } // AssertionMethodAttribute doesn't count as an assertion method attribute
     public class DerivedExpectedExceptionAttribute : ExpectedExceptionBaseAttribute { protected override void Verify(Exception exception) { } }
