@@ -94,7 +94,7 @@ namespace TestsFromDeprecatedS4214
     public class Program
     {
         [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
-        public static extern bool RemoveDirectory1(string name); // Noncompliant {{Make this 'P/Invoke' method private or internal.}}
+        public static extern bool RemoveDirectory1(string name); // Noncompliant {{Make this native method private and provide a wrapper.}}
         //                        ^^^^^^^^^^^^^^^^
 
         [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
