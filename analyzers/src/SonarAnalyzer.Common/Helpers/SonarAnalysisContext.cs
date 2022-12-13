@@ -39,13 +39,12 @@ namespace SonarAnalyzer.Helpers
     {
         public delegate bool TryGetValueDelegate<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value);
 
-        internal const string SonarProjectConfigFileName = "SonarProjectConfig.xml";
         private static readonly Regex WebConfigRegex = new(@"[\\\/]web\.([^\\\/]+\.)?config$", RegexOptions.IgnoreCase);
         private static readonly Regex AppSettingsRegex = new(@"[\\\/]appsettings\.([^\\\/]+\.)?json$", RegexOptions.IgnoreCase);
 
         private static readonly SourceTextValueProvider<bool> ShouldAnalyzeGeneratedCS = CreateAnalyzeGeneratedProvider(LanguageNames.CSharp);
         private static readonly SourceTextValueProvider<bool> ShouldAnalyzeGeneratedVB = CreateAnalyzeGeneratedProvider(LanguageNames.VisualBasic);
-        private static readonly SourceTextValueProvider<ProjectConfigReader> ProjectConfigProvider = new(x => new ProjectConfigReader(x, SonarProjectConfigFileName));
+        private static readonly SourceTextValueProvider<ProjectConfigReader> ProjectConfigProvider = new(x => new ProjectConfigReader(x));
         private static readonly ConditionalWeakTable<Compilation, ImmutableHashSet<string>> UnchangedFilesCache = new();
 
         private readonly AnalysisContext context;
@@ -160,7 +159,7 @@ namespace SonarAnalyzer.Helpers
 
         internal static ProjectConfigReader ProjectConfiguration(TryGetValueDelegate<ProjectConfigReader> tryGetValue, AnalyzerOptions options)
         {
-            if (options.AdditionalFiles.FirstOrDefault(IsSonarProjectConfig) is { } sonarProjectConfigXml)
+            if (options.SonarProjectConfig() is { } sonarProjectConfigXml)
             {
                 return sonarProjectConfigXml.GetText() is { } sourceText
                     // TryGetValue catches all exceptions from SourceTextValueProvider and returns false when thrown
@@ -224,7 +223,7 @@ namespace SonarAnalyzer.Helpers
         }
 
         private static bool ShouldAnalyzeGenerated(TryGetValueDelegate<bool> tryGetValue, Compilation c, AnalyzerOptions options) =>
-            options.AdditionalFiles.FirstOrDefault(f => ParameterLoader.IsSonarLintXml(f.Path)) is { } sonarLintXml
+            options.SonarLintXml() is { } sonarLintXml
             && tryGetValue(sonarLintXml.GetText(), ShouldAnalyzeGeneratedProvider(c.Language), out var shouldAnalyzeGenerated)
             && shouldAnalyzeGenerated;
 
@@ -251,9 +250,5 @@ namespace SonarAnalyzer.Helpers
                         registeredAction(c);
                     }
                 });
-
-        private static bool IsSonarProjectConfig(AdditionalText additionalText) =>
-            additionalText.Path != null
-            && ParameterLoader.ConfigurationFilePathMatchesExpected(additionalText.Path, SonarProjectConfigFileName);
     }
 }

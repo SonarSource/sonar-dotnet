@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Helpers
     /// </summary>
     public class ProjectConfigReader
     {
-        public static readonly ProjectConfigReader Empty = new(null, null);
+        public static readonly ProjectConfigReader Empty = new(null);
 
         private readonly ProjectConfig projectConfig;
         private readonly Lazy<ProjectType> projectType;
@@ -46,15 +46,15 @@ namespace SonarAnalyzer.Helpers
         public FilesToAnalyzeProvider FilesToAnalyze => filesToAnalyze.Value;
         public AnalysisConfigReader AnalysisConfig => analysisConfig.Value;
 
-        public ProjectConfigReader(SourceText sonarProjectConfig, string logFileName)
+        public ProjectConfigReader(SourceText sonarProjectConfig)
         {
-            projectConfig = sonarProjectConfig == null ? ProjectConfig.Empty : ReadContent(sonarProjectConfig, logFileName);
+            projectConfig = sonarProjectConfig == null ? ProjectConfig.Empty : ReadContent(sonarProjectConfig);
             projectType = new Lazy<ProjectType>(ParseProjectType);
             filesToAnalyze = new Lazy<FilesToAnalyzeProvider>(() => new FilesToAnalyzeProvider(FilesToAnalyzePath));
             analysisConfig = new(() => sonarProjectConfig == null ? null : new(AnalysisConfigPath));
         }
 
-        private static ProjectConfig ReadContent(SourceText sonarProjectConfig, string logFileName)
+        private static ProjectConfig ReadContent(SourceText sonarProjectConfig)
         {
             try
             {
@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Helpers
             }
             catch (Exception e)
             {
-                throw new InvalidOperationException($"File '{logFileName}' could not be parsed.", e);
+                throw new InvalidOperationException($"{nameof(sonarProjectConfig)} could not be parsed.", e);
             }
         }
 

@@ -87,7 +87,7 @@ namespace SonarAnalyzer.Common
 
             public void Initialize(AnalyzerOptions options)
             {
-                var currentSonarLintXmlFile = GetSonarLintXmlFile(options);
+                var currentSonarLintXmlFile = options.SonarLintXml();
                 if (isInitialized && loadedSonarLintXmlPath == currentSonarLintXmlFile?.Path)
                 {
                     return;
@@ -114,9 +114,6 @@ namespace SonarAnalyzer.Common
                     isInitialized = true;
                 }
             }
-
-            private static AdditionalText GetSonarLintXmlFile(AnalyzerOptions options) =>
-                options.AdditionalFiles.FirstOrDefault(f => ParameterLoader.IsSonarLintXml(f.Path));
         }
     }
 }
