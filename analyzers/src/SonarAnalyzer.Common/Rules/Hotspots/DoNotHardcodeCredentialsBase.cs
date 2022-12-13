@@ -107,8 +107,8 @@ namespace SonarAnalyzer.Rules
                pa.MatchProperty(new MemberDescriptor(KnownType.System_Net_NetworkCredential, "Password")));
 
             InitializeActions(context);
-            context.Context.RegisterCompilationAction(c => CheckWebConfig(context.Context, c));
-            context.Context.RegisterCompilationAction(c => CheckAppSettings(context.Context, c));
+            context.Context.RegisterCompilationAction(CheckWebConfig);
+            context.Context.RegisterCompilationAction(CheckAppSettings);
         }
 
         protected bool IsEnabled(AnalyzerOptions options)
@@ -117,9 +117,9 @@ namespace SonarAnalyzer.Rules
             return configuration.IsEnabled(DiagnosticId);
         }
 
-        private void CheckWebConfig(SonarAnalysisContext context, CompilationAnalysisContext c)
+        private void CheckWebConfig(SonarCompilationAnalysisContext c)
         {
-            foreach (var path in context.WebConfigFiles(c))
+            foreach (var path in c.WebConfigFiles())
             {
                 if (XmlHelper.ParseXDocument(File.ReadAllText(path)) is { } doc)
                 {
@@ -128,7 +128,7 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        private void CheckWebConfig(CompilationAnalysisContext c, string path, IEnumerable<XElement> elements)
+        private void CheckWebConfig(SonarCompilationAnalysisContext c, string path, IEnumerable<XElement> elements)
         {
             foreach (var element in elements)
             {
@@ -146,9 +146,9 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        private void CheckAppSettings(SonarAnalysisContext context, CompilationAnalysisContext c)
+        private void CheckAppSettings(SonarCompilationAnalysisContext c)
         {
-            foreach (var path in context.AppSettingsFiles(c))
+            foreach (var path in c.AppSettingsFiles())
             {
                 if (JsonNode.FromString(File.ReadAllText(path)) is { } json)
                 {
@@ -245,10 +245,10 @@ namespace SonarAnalyzer.Rules
         private sealed class CredentialWordsJsonWalker : JsonWalker
         {
             private readonly DoNotHardcodeCredentialsBase<TSyntaxKind> analyzer;
-            private readonly CompilationAnalysisContext context;
+            private readonly SonarCompilationAnalysisContext context;
             private readonly string path;
 
-            public CredentialWordsJsonWalker(DoNotHardcodeCredentialsBase<TSyntaxKind> analyzer, CompilationAnalysisContext context, string path)
+            public CredentialWordsJsonWalker(DoNotHardcodeCredentialsBase<TSyntaxKind> analyzer, SonarCompilationAnalysisContext context, string path)
             {
                 this.analyzer = analyzer;
                 this.context = context;
