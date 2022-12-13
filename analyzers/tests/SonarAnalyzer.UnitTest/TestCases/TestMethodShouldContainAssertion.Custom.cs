@@ -105,7 +105,7 @@ namespace TestFramework
 
 namespace TestFramework.Attributes
 {
-    public sealed class AssertionMethodAttribute : Attribute { }
+    public class AssertionMethodAttribute : Attribute { }
     public class NotAssertionMethodAttribute : Attribute { } // AssertionMethodAttribute doesn't count as an assertion method attribute
     public class DerivedExpectedExceptionAttribute : ExpectedExceptionBaseAttribute { protected override void Verify(Exception exception) { } }
 }
