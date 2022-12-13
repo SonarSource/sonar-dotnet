@@ -28,8 +28,6 @@ namespace SonarAnalyzer.Helpers
 {
     internal static class ParameterLoader
     {
-        private const string ParameterConfigurationFileName = "SonarLint.xml";
-
         /**
          * At each compilation, parse the configuration file and set the rule parameters on
          *
@@ -44,8 +42,7 @@ namespace SonarAnalyzer.Helpers
         internal static void SetParameterValues(ParameterLoadingDiagnosticAnalyzer parameteredAnalyzer,
             AnalyzerOptions options)
         {
-            var sonarLintXml = options.AdditionalFiles.FirstOrDefault(f => IsSonarLintXml(f.Path));
-
+            var sonarLintXml = options.SonarLintXml();
             if (sonarLintXml == null)
             {
                 return;
@@ -77,12 +74,6 @@ namespace SonarAnalyzer.Helpers
                 }
             }
         }
-
-        internal static bool IsSonarLintXml(string path) =>
-            ConfigurationFilePathMatchesExpected(path, ParameterConfigurationFileName);
-
-        internal static bool ConfigurationFilePathMatchesExpected(string path, string fileName) =>
-            Path.GetFileName(path).Equals(fileName, StringComparison.OrdinalIgnoreCase);
 
         private static ImmutableList<RuleParameterValues> ParseParameters(AdditionalText sonarLintXml)
         {

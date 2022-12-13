@@ -26,7 +26,7 @@ namespace SonarAnalyzer.Helpers
     {
         internal static IEnumerable<XElement> GetSettings(AnalyzerOptions options)
         {
-            var sonarLintAdditionalFile = options.AdditionalFiles.FirstOrDefault(f => ParameterLoader.IsSonarLintXml(f.Path));
+            var sonarLintAdditionalFile = options.SonarLintXml();
             if (sonarLintAdditionalFile == null)
             {
                 return Enumerable.Empty<XElement>();

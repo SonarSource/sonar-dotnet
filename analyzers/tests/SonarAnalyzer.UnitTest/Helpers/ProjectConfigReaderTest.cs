@@ -101,7 +101,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
 <SonarProjectConfig xmlns=""http://www.sonarsource.com/msbuild/analyzer/2021/1"">
     <FilesToAnalyzePath>ResourceTests\FilesToAnalyze\FilesToAnalyze.txt</FilesToAnalyzePath>
 </SonarProjectConfig>");
-            var files = new ProjectConfigReader(config, null).FilesToAnalyze.FindFiles("web.config", false);
+            var files = new ProjectConfigReader(config).FilesToAnalyze.FindFiles("web.config", false);
 
             files.Should().BeEquivalentTo(new[] { @"C:\Projects/DummyProj/wEB.config", @"C:\Projects/DummyProj/Views\Web.confiG" });
         }
@@ -115,6 +115,6 @@ namespace SonarAnalyzer.UnitTest.Helpers
         }
 
         private static ProjectConfigReader CreateProjectConfigReader(string relativePath) =>
-            new(SourceText.From(File.ReadAllText(relativePath)), "LogNameFor-SonarProjectConfig.xml");
+            new(SourceText.From(File.ReadAllText(relativePath)));
     }
 }
