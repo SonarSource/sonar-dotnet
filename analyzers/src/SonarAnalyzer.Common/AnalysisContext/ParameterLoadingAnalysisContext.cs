@@ -22,7 +22,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace SonarAnalyzer.Helpers;
 
-public sealed class ParameterLoadingAnalysisContext : SonarAnalysisContextBase
+public sealed class ParameterLoadingAnalysisContext : SonarAnalysisContextBase // FIXME: Refactor
 {
     private readonly List<Action<CompilationStartAnalysisContext>> compilationStartActions = new();
 
