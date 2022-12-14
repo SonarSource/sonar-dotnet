@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Helpers;
-
 namespace SonarAnalyzer.Rules
 {
     public abstract class ExpressionComplexityBase<TSyntaxKind> : ParameterLoadingDiagnosticAnalyzer
@@ -47,19 +45,19 @@ namespace SonarAnalyzer.Rules
         protected sealed override void Initialize(ParameterLoadingAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
                 {
-                    if (c.Node?.Parent.Kind<TSyntaxKind>() is { } parentKind && (ComplexityIncreasingKinds.Contains(parentKind) || TransparentKinds.Contains(parentKind)))
+                    if (IsRoot(c.Node))
                     {
-                        // The parent of the expression is itself complexity increasing (e.g. &&) or transparent (e.g. parenthesis).
-                        // We are only interested in the expression roots so we only report once per expression tree. Therefore we ignore any inner children, e.g.:
-                        // x && y && z -> (Left: (Left: x, Right: y), Right: z) // We are only interested in the outer expression (the one with Right: z)
-                        return;
-                    }
-                    var complexity = CalculateComplexity(c.Node);
-                    if (complexity > Maximum)
-                    {
-                        c.ReportIssue(Diagnostic.Create(rule, c.Node.GetLocation(), Maximum, complexity));
+                        var complexity = CalculateComplexity(c.Node);
+                        if (complexity > Maximum)
+                        {
+                            c.ReportIssue(Diagnostic.Create(rule, c.Node.GetLocation(), Maximum, complexity));
+                        }
                     }
                 }, ComplexityIncreasingKinds.Concat(TransparentKinds).ToArray());
+
+        private static bool IsRoot(SyntaxNode node) =>
+            node?.Parent == null
+            || (node.Parent.Kind<TSyntaxKind>() is var parentKind && !ComplexityIncreasingKinds.Contains(parentKind) && !TransparentKinds.Contains(parentKind));
 
         private int CalculateComplexity(SyntaxNode node)
         {
