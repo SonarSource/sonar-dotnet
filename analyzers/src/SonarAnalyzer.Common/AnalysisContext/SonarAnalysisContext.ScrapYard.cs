@@ -41,19 +41,9 @@ public partial class SonarAnalysisContext
     private static readonly SourceTextValueProvider<bool> ShouldAnalyzeGeneratedCS = CreateAnalyzeGeneratedProvider(LanguageNames.CSharp);
     private static readonly SourceTextValueProvider<bool> ShouldAnalyzeGeneratedVB = CreateAnalyzeGeneratedProvider(LanguageNames.VisualBasic);
     private static readonly SourceTextValueProvider<ProjectConfigReader> ProjectConfigProvider = new(x => new ProjectConfigReader(x));  // FIXME: Done
-    private static readonly ConditionalWeakTable<Compilation, ImmutableHashSet<string>> UnchangedFilesCache = new();                    // FIXME: Done
 
     public bool ShouldAnalyzeGenerated(Compilation c, AnalyzerOptions options) =>
         ShouldAnalyzeGenerated(context.TryGetValue, c, options);
-
-    public static bool ShouldAnalyze(TryGetValueDelegate<bool> tryGetBool,
-                                     TryGetValueDelegate<ProjectConfigReader> tryGetProjectConfigReader,
-                                     GeneratedCodeRecognizer generatedCodeRecognizer,
-                                     SyntaxTree tree,
-                                     Compilation compilation,
-                                     AnalyzerOptions options) =>
-        !IsUnchanged(tryGetProjectConfigReader, tree, compilation, options)
-        && (ShouldAnalyzeGenerated(tryGetBool, compilation, options) || !tree.IsGenerated(generatedCodeRecognizer, compilation));
 
     public bool IsScannerRun(AnalyzerOptions options) =>
         ProjectConfiguration(options).IsScannerRun;
@@ -110,12 +100,6 @@ public partial class SonarAnalysisContext
                 descriptor.CustomTags.Contains(tag);
         }
     }
-
-    public static bool IsUnchanged(TryGetValueDelegate<ProjectConfigReader> tryGetValue, SyntaxTree tree, Compilation compilation, AnalyzerOptions options) =>
-        UnchangedFilesCache.GetValue(compilation, _ => CreateUnchangedFilesHashSet(tryGetValue, options)).Contains(tree.FilePath);
-
-    private static ImmutableHashSet<string> CreateUnchangedFilesHashSet(TryGetValueDelegate<ProjectConfigReader> tryGetValue, AnalyzerOptions options) =>       // FIXME: Done
-        ImmutableHashSet.Create(StringComparer.OrdinalIgnoreCase, ProjectConfiguration(tryGetValue, options).AnalysisConfig?.UnchangedFiles() ?? Array.Empty<string>());
 
     private static bool IsTestProject(TryGetValueDelegate<ProjectConfigReader> tryGetValue, Compilation compilation, AnalyzerOptions options)   // FIXME: Done
     {
