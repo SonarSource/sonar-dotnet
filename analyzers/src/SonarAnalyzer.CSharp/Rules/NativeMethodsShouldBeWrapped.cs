@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSymbolAction(ReportPublicExternalMethods, SymbolKind.Method);
-            context.RegisterSyntaxNodeAction(ReportTrivialWrappers, SyntaxKind.MethodDeclaration);
+            context.RegisterSyntaxNodeActionInNonGenerated(ReportTrivialWrappers, SyntaxKind.MethodDeclaration);
         }
 
         private static void ReportPublicExternalMethods(SymbolAnalysisContext c)
