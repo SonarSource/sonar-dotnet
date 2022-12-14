@@ -26,17 +26,14 @@ namespace SonarAnalyzer.Helpers
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
-            var analysisContext = new ParameterLoadingAnalysisContext(context);
-            Initialize(analysisContext);
+            var parameterContext = new ParameterLoadingAnalysisContext(context);
+            Initialize(parameterContext);
 
             context.RegisterCompilationStartAction(
-                cac =>
+                c =>
                 {
-                    ParameterLoader.SetParameterValues(this, cac.Options);
-                    foreach (var compilationStartActions in analysisContext.CompilationStartActions)
-                    {
-                        compilationStartActions(cac);
-                    }
+                    ParameterLoader.SetParameterValues(this, c.Options);
+                    parameterContext.ExecutePostponedActions(c);
                 });
         }
     }
