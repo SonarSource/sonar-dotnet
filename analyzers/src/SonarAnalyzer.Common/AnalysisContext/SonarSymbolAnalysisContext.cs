@@ -25,9 +25,18 @@ public sealed class SonarSymbolAnalysisContext : SonarAnalysisContextBase<Symbol
     public override SyntaxTree Tree => Context.GetFirstSyntaxTree();
     public override Compilation Compilation => Context.Compilation;
     public override AnalyzerOptions Options => Context.Options;
+    public ISymbol Symbol => Context.Symbol;
 
     internal SonarSymbolAnalysisContext(SonarAnalysisContext analysisContext, SymbolAnalysisContext context) : base(analysisContext, context) { }
 
     public void ReportIssue(Diagnostic diagnostic) =>
         ReportIssue(new ReportingContext(Context, diagnostic));
+
+    public void ReportDiagnosticIfNonGenerated(GeneratedCodeRecognizer generatedCodeRecognizer, Diagnostic diagnostic)
+    {
+        if (ShouldAnalyze(generatedCodeRecognizer))
+        {
+            ReportIssue(diagnostic);
+        }
+    }
 }

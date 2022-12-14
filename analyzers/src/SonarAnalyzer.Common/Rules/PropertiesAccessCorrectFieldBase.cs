@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules
             ? invokedMethod
             : null;
 
-        private void CheckType(SymbolAnalysisContext context)
+        private void CheckType(SonarSymbolAnalysisContext context)
         {
             var symbol = (INamedTypeSymbol)context.Symbol;
             if (!symbol.TypeKind.Equals(TypeKind.Class)
@@ -86,11 +86,11 @@ namespace SonarAnalyzer.Rules
                 {
                     if (!data.IgnoreGetter)
                     {
-                        CheckExpectedFieldIsUsed(data.PropertySymbol.GetMethod, expectedField, data.ReadFields, context);
+                        CheckExpectedFieldIsUsed(context, data.PropertySymbol.GetMethod, expectedField, data.ReadFields);
                     }
                     if (!data.IgnoreSetter)
                     {
-                        CheckExpectedFieldIsUsed(data.PropertySymbol.SetMethod, expectedField, data.UpdatedFields, context);
+                        CheckExpectedFieldIsUsed(context, data.PropertySymbol.SetMethod, expectedField, data.UpdatedFields);
                     }
                 }
             }
@@ -113,7 +113,7 @@ namespace SonarAnalyzer.Rules
                   .OfType<IPropertySymbol>()
                   .Where(ImplementsExplicitGetterOrSetter);
 
-        private void CheckExpectedFieldIsUsed(IMethodSymbol methodSymbol, IFieldSymbol expectedField, ImmutableArray<FieldData> actualFields, SymbolAnalysisContext context)
+        private void CheckExpectedFieldIsUsed(SonarSymbolAnalysisContext context, IMethodSymbol methodSymbol, IFieldSymbol expectedField, ImmutableArray<FieldData> actualFields)
         {
             var expectedFieldIsUsed = actualFields.Any(a => a.Field.Equals(expectedField));
             if (!expectedFieldIsUsed || !actualFields.Any())
