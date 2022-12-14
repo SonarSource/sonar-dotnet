@@ -19,27 +19,33 @@
  */
 
 using System.Text;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 using Moq;
 using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.UnitTest;
 
-public partial class SonarAnalysisContextTest
+public partial class SonarAnalysisContextTest   // FIXME: Move UTs to ShouldAnalyze
 {
-    [TestMethod]
-    public void ShouldAnalyzeGenerated_NoSonarLintFile_ReturnsFalse()
+    private const string GeneratedFileName = "ExtraEmptyFile.g.";
+    private const string OtherFileName = "NormalFile.";
+
+    [DataTestMethod]
+    [DataRow(GeneratedFileName, false)]
+    [DataRow(OtherFileName, true)]
+    public void ShouldAnalyze_GeneratedFile_NoSonarLintXml(string fileName, bool expected)
     {
         var sonarLintXml = CreateSonarLintXml(true);
         var options = CreateOptions(sonarLintXml, @"ResourceTests\Foo.xml");
         var compilation = CreateDummyCompilation(AnalyzerLanguage.CSharp);
 
-        CreateSut().ShouldAnalyzeGenerated(compilation, options).Should().BeFalse();
+        CreateSut().ShouldAnalyze(CSharpGeneratedCodeRecognizer.Instance, compilation.SyntaxTrees.Single(x => x.FilePath.Contains(fileName)), compilation, options).Should().Be(expected);
         sonarLintXml.ToStringCallCount.Should().Be(0, "this file doesn't have 'SonarLint.xml' name");
     }
 
     [TestMethod]
-    public void ShouldAnalyzeGenerated_ResultIsCached()
+    public void ShouldAnalyze_GeneratedFile_ShouldAnalyzeGeneratedProvider_IsCached()
     {
         var sonarLintXml = CreateSonarLintXml(true);
         var additionalText = MockAdditionalText(sonarLintXml);
@@ -48,48 +54,68 @@ public partial class SonarAnalysisContextTest
         var sut = CreateSut();
 
         // Call ShouldAnalyzeGenerated multiple times...
-        sut.ShouldAnalyzeGenerated(compilation, options).Should().BeTrue();
-        sut.ShouldAnalyzeGenerated(compilation, options).Should().BeTrue();
-        sut.ShouldAnalyzeGenerated(compilation, options).Should().BeTrue();
+        sut.ShouldAnalyze(CSharpGeneratedCodeRecognizer.Instance, compilation.SyntaxTrees.Last(), compilation, options).Should().BeTrue();
+        sut.ShouldAnalyze(CSharpGeneratedCodeRecognizer.Instance, compilation.SyntaxTrees.Last(), compilation, options).Should().BeTrue();
+        sut.ShouldAnalyze(CSharpGeneratedCodeRecognizer.Instance, compilation.SyntaxTrees.Last(), compilation, options).Should().BeTrue();
 
         // GetText should be called every time ShouldAnalyzeGenerated is called...
         additionalText.Verify(x => x.GetText(It.IsAny<CancellationToken>()), Times.Exactly(3));
         sonarLintXml.ToStringCallCount.Should().Be(1); // ... but we should only try to read the file once
     }
 
-    [TestMethod]
-    public void ShouldAnalyzeGenerated_InvalidXmlInSonarLintFile_ReturnsFalse()
+    [DataTestMethod]
+    [DataRow(GeneratedFileName, false)]
+    [DataRow(OtherFileName, true)]
+    public void ShouldAnalyze_GeneratedFile_InvalidSonarLintXml(string fileName, bool expected)
     {
         var sonarLintXml = new DummySourceText("Not valid xml");
         var options = CreateOptions(sonarLintXml);
         var compilation = CreateDummyCompilation(AnalyzerLanguage.CSharp);
+        var tree = compilation.SyntaxTrees.Single(x => x.FilePath.Contains(fileName));
         var sut = CreateSut();
 
-        // 1. Read -> no error, false returned
-        sut.ShouldAnalyzeGenerated(compilation, options).Should().BeFalse();
+        // 1. Read -> no error
+        sut.ShouldAnalyze(CSharpGeneratedCodeRecognizer.Instance, tree, compilation, options).Should().Be(expected);
         sonarLintXml.ToStringCallCount.Should().Be(1); // should have attempted to read the file
 
         // 2. Read again to check that the load error doesn't prevent caching from working
-        sut.ShouldAnalyzeGenerated(compilation, options).Should().BeFalse();
+        sut.ShouldAnalyze(CSharpGeneratedCodeRecognizer.Instance, tree, compilation, options).Should().Be(expected);
         sonarLintXml.ToStringCallCount.Should().Be(1); // should not have attempted to read the file again
     }
 
-    [TestMethod]
-    public void ShouldAnalyzeGenerated_CorrectSettingUsed_VB()
+    [DataTestMethod]
+    [DataRow(GeneratedFileName)]
+    [DataRow(OtherFileName)]
+    public void ShouldAnalyze_GeneratedFile_AnalyzeGenerated_AnalyzeAllFiles(string fileName)
+    {
+        var sonarLintXml = CreateSonarLintXml(true);
+        var options = CreateOptions(sonarLintXml);
+        var compilation = CreateDummyCompilation(AnalyzerLanguage.CSharp);
+        var sut = CreateSut();
+
+        sut.ShouldAnalyze(CSharpGeneratedCodeRecognizer.Instance, compilation.SyntaxTrees.Single(x => x.FilePath.Contains(fileName)), compilation, options).Should().BeTrue();
+    }
+
+    [DataTestMethod]
+    [DataRow(GeneratedFileName, false)]
+    [DataRow(OtherFileName, true)]
+    public void ShouldAnalyze_CorrectSettingUsed_VB(string fileName, bool expectedCSharp)
     {
         var sonarLintXml = CreateSonarLintXml(false);
         var options = CreateOptions(sonarLintXml);
         var compilationCS = CreateDummyCompilation(AnalyzerLanguage.CSharp);
         var compilationVB = CreateDummyCompilation(AnalyzerLanguage.VisualBasic);
+        var treeCS = compilationCS.SyntaxTrees.Single(x => x.FilePath.Contains(fileName));
+        var treeVB = compilationVB.SyntaxTrees.Single(x => x.FilePath.Contains(fileName));
         var sut = CreateSut();
 
-        sut.ShouldAnalyzeGenerated(compilationCS, options).Should().BeFalse();
-        sut.ShouldAnalyzeGenerated(compilationVB, options).Should().BeTrue();
+        sut.ShouldAnalyze(CSharpGeneratedCodeRecognizer.Instance, treeCS, compilationCS, options).Should().Be(expectedCSharp);
+        sut.ShouldAnalyze(VisualBasicGeneratedCodeRecognizer.Instance, treeVB, compilationVB, options).Should().BeTrue();
 
         sonarLintXml.ToStringCallCount.Should().Be(2, "file should be read once per language");
 
         // Read again to check caching
-        sut.ShouldAnalyzeGenerated(compilationVB, options).Should().BeTrue();
+        sut.ShouldAnalyze(VisualBasicGeneratedCodeRecognizer.Instance, treeVB, compilationVB, options).Should().BeTrue();
 
         sonarLintXml.ToStringCallCount.Should().Be(2, "file should not have been read again");
     }
@@ -130,7 +156,7 @@ public partial class SonarAnalysisContextTest
     }
 
     private static Compilation CreateDummyCompilation(AnalyzerLanguage language) =>
-        TestHelper.Compile(string.Empty, false, language).Model.Compilation;
+        SolutionBuilder.Create().AddProject(language).AddSnippet(string.Empty, "NormalFile" + language.FileExtension).GetCompilation();
 
     private sealed class DummySourceText : SourceText
     {

@@ -19,8 +19,6 @@
  */
 
 using System.IO;
-using System.Runtime.CompilerServices;
-using System.Xml.Linq;
 using Microsoft.CodeAnalysis.Text;
 using static SonarAnalyzer.Helpers.DiagnosticDescriptorFactory;
 
@@ -38,12 +36,7 @@ public partial class SonarAnalysisContext
 {
     public delegate bool TryGetValueDelegate<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value);     // FIXME: Done
 
-    private static readonly SourceTextValueProvider<bool> ShouldAnalyzeGeneratedCS = CreateAnalyzeGeneratedProvider(LanguageNames.CSharp);
-    private static readonly SourceTextValueProvider<bool> ShouldAnalyzeGeneratedVB = CreateAnalyzeGeneratedProvider(LanguageNames.VisualBasic);
     private static readonly SourceTextValueProvider<ProjectConfigReader> ProjectConfigProvider = new(x => new ProjectConfigReader(x));  // FIXME: Done
-
-    public bool ShouldAnalyzeGenerated(Compilation c, AnalyzerOptions options) =>
-        ShouldAnalyzeGenerated(context.TryGetValue, c, options);
 
     public bool IsScannerRun(AnalyzerOptions options) =>
         ProjectConfiguration(options).IsScannerRun;
@@ -108,28 +101,4 @@ public partial class SonarAnalysisContext
             ? compilation.IsTest()              // SonarLint, NuGet or Scanner <= 5.0
             : projectType == ProjectType.Test;  // Scanner >= 5.1 does authoritative decision that we follow
     }
-
-    private static SourceTextValueProvider<bool> CreateAnalyzeGeneratedProvider(string language) => //FIXME: Done
-        new(x => PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(ParseXmlSettings(x), language));
-
-    private static IEnumerable<XElement> ParseXmlSettings(SourceText sourceText)    // FIXME: Done
-    {
-        try
-        {
-            return XDocument.Parse(sourceText.ToString()).Descendants("Setting");
-        }
-        catch
-        {
-            // cannot log the exception, so ignore it
-            return Enumerable.Empty<XElement>();
-        }
-    }
-
-    private static bool ShouldAnalyzeGenerated(TryGetValueDelegate<bool> tryGetValue, Compilation c, AnalyzerOptions options) =>    // FIXME: Done
-        options.SonarLintXml() is { } sonarLintXml
-        && tryGetValue(sonarLintXml.GetText(), ShouldAnalyzeGeneratedProvider(c.Language), out var shouldAnalyzeGenerated)
-        && shouldAnalyzeGenerated;
-
-    private static SourceTextValueProvider<bool> ShouldAnalyzeGeneratedProvider(string language) => // FIXME: Done
-        language == LanguageNames.CSharp ? ShouldAnalyzeGeneratedCS : ShouldAnalyzeGeneratedVB;
 }
