@@ -18,10 +18,29 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using static SonarAnalyzer.Helpers.DiagnosticDescriptorFactory;
+
 namespace SonarAnalyzer.Extensions;
 
 public static class DiagnosticDescriptorExtensions
 {
+    public static bool HasMatchingScope(this DiagnosticDescriptor descriptor, Compilation compilation, bool isTestProject, bool isScannerRun)
+    {
+        if (compilation is null)
+        {
+            return true;    // We don't know the project type without the compilation so let's run the rule
+        }
+        // MMF-2297: Test Code as 1st Class Citizen is not ready on server side yet.
+        // ScannerRun: Only utility rules and rules with TEST-ONLY scope are executed for test projects for now.
+        // SonarLint & Standalone NuGet: Respect the scope as before.
+        return isTestProject
+            ? ContainsTag(TestSourceScopeTag) && !(isScannerRun && ContainsTag(MainSourceScopeTag) && !ContainsTag(UtilityTag))
+            : ContainsTag(MainSourceScopeTag);
+
+        bool ContainsTag(string tag) =>
+            descriptor.CustomTags.Contains(tag);
+    }
+
     public static Diagnostic CreateDiagnostic(this DiagnosticDescriptor descriptor,
                                               Compilation compilation,
                                               Location location,
@@ -31,4 +50,6 @@ public static class DiagnosticDescriptorExtensions
 
     private static bool IsLocationValid(Location location, Compilation compilation) =>
         location.Kind != LocationKind.SourceFile || compilation.ContainsSyntaxTree(location.SourceTree);
+
+
 }
