@@ -20,8 +20,8 @@
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class ExpressionComplexityBase<TExpression> : ParameterLoadingDiagnosticAnalyzer
-        where TExpression : SyntaxNode
+    public abstract class ExpressionComplexityBase<TSyntaxKind> : ParameterLoadingDiagnosticAnalyzer
+        where TSyntaxKind : struct, Enum
     {
         protected const string DiagnosticId = "S1067";
         private const string MessageFormat = "Reduce the number of conditional operators ({1}) used in the expression (maximum allowed {0}).";
@@ -30,9 +30,9 @@ namespace SonarAnalyzer.Rules
         private readonly DiagnosticDescriptor rule;
 
         protected abstract ILanguageFacade Language { get; }
-        protected abstract bool IsComplexityIncreasingKind(SyntaxNode node);
-        protected abstract bool IsCompoundExpression(SyntaxNode node);
-        protected abstract bool IsPatternRoot(SyntaxNode node);
+        protected abstract TSyntaxKind[] ComplexityIncreasingKinds { get; }
+        protected abstract TSyntaxKind[] TransparentKinds { get; }
+        protected abstract SyntaxNode[] ExpressionChildren(SyntaxNode node);
 
         [RuleParameter("max", PropertyType.Integer, "Maximum number of allowed conditional operators in an expression", DefaultValueMaximum)]
         public int Maximum { get; set; } = DefaultValueMaximum;
@@ -43,26 +43,38 @@ namespace SonarAnalyzer.Rules
             rule = Language.CreateDescriptor(DiagnosticId, MessageFormat, isEnabledByDefault: false);
 
         protected sealed override void Initialize(ParameterLoadingAnalysisContext context) =>
-            context.RegisterSyntaxTreeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
+            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
                 {
-                    var root = c.Tree.GetRoot();
-                    var rootExpressions = NoncompoundSubexpressions(root);
-                    var compoundExpressionsDescendants = root.DescendantNodes().Where(IsCompoundExpression).SelectMany(NoncompoundSubexpressions);
-
-                    foreach (var expression in rootExpressions.Concat(compoundExpressionsDescendants))
+                    if (IsRoot(c.Node))
                     {
-                        var complexity = expression.DescendantNodesAndSelf(x => !IsCompoundExpression(x)).Count(IsComplexityIncreasingKind);
+                        var complexity = CalculateComplexity(c.Node);
                         if (complexity > Maximum)
                         {
-                            c.ReportIssue(Diagnostic.Create(rule, expression.GetLocation(), Maximum, complexity));
+                            c.ReportIssue(Diagnostic.Create(rule, c.Node.GetLocation(), Maximum, complexity));
                         }
                     }
-                });
+                }, ComplexityIncreasingKinds.Concat(TransparentKinds).ToArray());
 
-        private IEnumerable<SyntaxNode> NoncompoundSubexpressions(SyntaxNode node) =>
-            node.DescendantNodes(x => !IsExpressionOrPatternRoot(x) || x == node).Where(x => IsExpressionOrPatternRoot(x) && !IsCompoundExpression(x));
+        private bool IsRoot(SyntaxNode node) =>
+            node?.Parent == null
+            || (node.Parent.Kind<TSyntaxKind>() is var parentKind && !ComplexityIncreasingKinds.Contains(parentKind) && !TransparentKinds.Contains(parentKind));
 
-        private bool IsExpressionOrPatternRoot(SyntaxNode node) =>
-            node is TExpression || IsPatternRoot(node);
+        private int CalculateComplexity(SyntaxNode node)
+        {
+            var complexity = 0;
+            Stack<SyntaxNode> stack = new();
+
+            stack.Push(node);
+            while (stack.TryPop(out var current))
+            {
+                if (ComplexityIncreasingKinds.Contains(current.Kind<TSyntaxKind>()))
+                {
+                    complexity++;
+                }
+                stack.Push(ExpressionChildren(current));
+            }
+
+            return complexity;
+        }
     }
 }

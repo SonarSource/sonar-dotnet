@@ -13,9 +13,11 @@ namespace Tests.Diagnostics
             var b1 = false ? (true ? (false ? (true ? 1 : 0) : 0) : 0) : 1; // Noncompliant
 //                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-            var c1 = true || false || true || false || false; // Noncompliant {{Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).}}
+            var c1 = (!(true || false || true || false || false)); // Noncompliant {{Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).}}
+            //       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
             var d1 = true && false && true && false && true && true; // Noncompliant
+            var d2 = true && !(false && true && false) && !true && true; // Noncompliant
 
             bool? v1 = null, v2 = null, v3 = null, v4 = null, v5 = null;
 
@@ -40,8 +42,8 @@ namespace Tests.Diagnostics
 
             var x = new Dictionary<string, bool>
             {
-                {"a", true && true && true && true && true }, // Noncompliant
-                { "b",  true && true && true && true }
+                { "a", true && true && true && true && true }, // Noncompliant
+                { "b", true && true && true && true }
             };
 
             var e2 = true | false | true | false;

@@ -27,6 +27,8 @@ var y = x switch
     true and true and true and true and true and true => 1, // Noncompliant
     false => 2,
 };
+_ = x is true and not (false or false or false or false); // Noncompliant {{Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).}}
+//       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 y = x switch
 {
@@ -37,13 +39,13 @@ y = x switch
     false => 0
 };
 
-_ = new Exception() is ArgumentException // Noncompliant FP #6429
+_ = new Exception() is ArgumentException // Compliant
 {
     Message: "A" or "B" or "C",
     ParamName: "D" or "E" or "F",
 };
 
-_ = new Exception() is ArgumentException // Noncompliant FP #6429
+_ = new Exception() is ArgumentException // Compliant
 {
     Message: "A" or "B" or "C",
     InnerException:

@@ -21,39 +21,39 @@
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class ExpressionComplexity : ExpressionComplexityBase<ExpressionSyntax>
+    public sealed class ExpressionComplexity : ExpressionComplexityBase<SyntaxKind>
     {
         protected override ILanguageFacade Language { get; } = VisualBasicFacade.Instance;
 
-        private static readonly ISet<SyntaxKind> CompoundExpressionKinds = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.MultiLineFunctionLambdaExpression,
-            SyntaxKind.MultiLineSubLambdaExpression,
-            SyntaxKind.SingleLineFunctionLambdaExpression,
-            SyntaxKind.SingleLineSubLambdaExpression,
+        protected override SyntaxKind[] TransparentKinds { get; } =
+            {
+                SyntaxKind.ParenthesizedExpression,
+                SyntaxKind.NotExpression,
+            };
 
-            SyntaxKind.CollectionInitializer,
-            SyntaxKind.ObjectMemberInitializer,
+        protected override SyntaxKind[] ComplexityIncreasingKinds { get; } =
+            {
+                SyntaxKind.AndExpression,
+                SyntaxKind.AndAlsoExpression,
+                SyntaxKind.OrExpression,
+                SyntaxKind.OrElseExpression,
+                SyntaxKind.ExclusiveOrExpression
+            };
 
-            SyntaxKind.InvocationExpression
-        };
-
-        private static readonly ISet<SyntaxKind> ComplexityIncreasingKinds = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.AndExpression,
-            SyntaxKind.AndAlsoExpression,
-            SyntaxKind.OrExpression,
-            SyntaxKind.OrElseExpression,
-            SyntaxKind.ExclusiveOrExpression
-        };
-
-        protected override bool IsComplexityIncreasingKind(SyntaxNode node) =>
-            ComplexityIncreasingKinds.Contains(node.Kind());
-
-        protected override bool IsCompoundExpression(SyntaxNode node) =>
-            CompoundExpressionKinds.Contains(node.Kind());
-
-        protected override bool IsPatternRoot(SyntaxNode node) =>
-            false;
+        protected override SyntaxNode[] ExpressionChildren(SyntaxNode node) =>
+            node switch
+            {
+                BinaryExpressionSyntax
+                {
+                    RawKind: (int)SyntaxKind.AndExpression
+                    or (int)SyntaxKind.AndAlsoExpression
+                    or (int)SyntaxKind.OrExpression
+                    or (int)SyntaxKind.OrElseExpression
+                    or (int)SyntaxKind.ExclusiveOrExpression
+                } binary => new[] { binary.Left, binary.Right },
+                ParenthesizedExpressionSyntax parenthesized => new[] { parenthesized.Expression },
+                UnaryExpressionSyntax { RawKind: (int)SyntaxKind.NotExpression } unary => new[] { unary.Operand },
+                _ => Array.Empty<SyntaxNode>(),
+            };
     }
 }

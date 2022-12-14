@@ -21,39 +21,44 @@
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class ExpressionComplexity : ExpressionComplexityBase<ExpressionSyntax>
+    public sealed class ExpressionComplexity : ExpressionComplexityBase<SyntaxKind>
     {
         protected override ILanguageFacade Language { get; } = CSharpFacade.Instance;
 
-        private static readonly ISet<SyntaxKind> CompoundExpressionKinds = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.SimpleLambdaExpression,
-            SyntaxKind.AnonymousMethodExpression,
-            SyntaxKind.ArrayInitializerExpression,
-            SyntaxKind.CollectionInitializerExpression,
-            SyntaxKind.ComplexElementInitializerExpression,
-            SyntaxKind.ObjectInitializerExpression,
-            SyntaxKind.InvocationExpression,
-            SyntaxKindEx.SwitchExpressionArm
-        };
+        protected override SyntaxKind[] TransparentKinds { get; } =
+            {
+                SyntaxKind.ParenthesizedExpression,
+                SyntaxKind.LogicalNotExpression,
+                SyntaxKindEx.ParenthesizedPattern,
+                SyntaxKindEx.NotPattern,
+            };
 
-        private static readonly ISet<SyntaxKind> ComplexityIncreasingKinds = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.ConditionalExpression,
-            SyntaxKind.LogicalAndExpression,
-            SyntaxKind.LogicalOrExpression,
-            SyntaxKindEx.CoalesceAssignmentExpression,
-            SyntaxKindEx.AndPattern,
-            SyntaxKindEx.OrPattern
-        };
+        protected override SyntaxKind[] ComplexityIncreasingKinds { get; } =
+            {
+                SyntaxKind.ConditionalExpression,
+                SyntaxKind.LogicalAndExpression,
+                SyntaxKind.LogicalOrExpression,
+                SyntaxKindEx.CoalesceAssignmentExpression,
+                SyntaxKindEx.AndPattern,
+                SyntaxKindEx.OrPattern
+            };
 
-        protected override bool IsComplexityIncreasingKind(SyntaxNode node) =>
-            ComplexityIncreasingKinds.Contains(node.Kind());
+        protected override SyntaxNode[] ExpressionChildren(SyntaxNode node) =>
+            node switch
+            {
+                ConditionalExpressionSyntax conditional => new[] { conditional.WhenTrue, conditional.WhenFalse },
+                BinaryExpressionSyntax { RawKind: (int)SyntaxKind.LogicalAndExpression or (int)SyntaxKind.LogicalOrExpression } binary => new[] { binary.Left, binary.Right },
+                { RawKind: (int)SyntaxKindEx.AndPattern or (int)SyntaxKindEx.OrPattern } pattern when (BinaryPatternSyntaxWrapper)pattern is var patternWrapper =>
+                    new[] { patternWrapper.Left.SyntaxNode, patternWrapper.Right.SyntaxNode },
+                AssignmentExpressionSyntax { RawKind: (int)SyntaxKindEx.CoalesceAssignmentExpression } assigment => new[] { assigment.Left, assigment.Right },
 
-        protected override bool IsCompoundExpression(SyntaxNode node) =>
-            CompoundExpressionKinds.Contains(node.Kind());
-
-        protected override bool IsPatternRoot(SyntaxNode node) =>
-            node.Parent.IsAnyKind(SyntaxKindEx.CasePatternSwitchLabel, SyntaxKindEx.SwitchExpressionArm);
+                ParenthesizedExpressionSyntax { Expression: { } expression } => new[] { expression },
+                PrefixUnaryExpressionSyntax { RawKind: (int)SyntaxKind.LogicalNotExpression, Operand: { } operand } => new[] { operand },
+                { RawKind: (int)SyntaxKindEx.ParenthesizedPattern } parenthesized when (ParenthesizedPatternSyntaxWrapper)parenthesized is var parenthesizedWrapped =>
+                    new[] { parenthesizedWrapped.Pattern.SyntaxNode },
+                { RawKind: (int)SyntaxKindEx.NotPattern } negated when (UnaryPatternSyntaxWrapper)negated is var negatedWrapper =>
+                    new[] { negatedWrapper.Pattern.SyntaxNode },
+                _ => Array.Empty<SyntaxNode>(),
+            };
     }
 }
