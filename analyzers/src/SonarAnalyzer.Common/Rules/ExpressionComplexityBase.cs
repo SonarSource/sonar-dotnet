@@ -64,19 +64,37 @@ namespace SonarAnalyzer.Rules
             int complexity = 0;
             Stack<SyntaxNode> stack = new();
             stack.Push(node);
-            while (stack.Count > 0)
+            while (stack.TryPop(out var current))
             {
-                var current = stack.Pop();
                 if (current.Kind<TSyntaxKind>() is var kind && ComplexityIncreasingKinds.Contains(kind))
                 {
                     complexity++;
                 }
-                foreach (var child in ExpressionChildren(current))
-                {
-                    stack.Push(child);
-                }
+                stack.Push(ExpressionChildren(current));
             }
             return complexity;
+        }
+    }
+
+    public static class StackExtensions
+    {
+        public static bool TryPop<T>(this Stack<T> stack, out T result)
+        {
+            if (stack.Count > 0)
+            {
+                result = stack.Pop();
+                return true;
+            }
+            result = default;
+            return false;
+        }
+
+        public static void Push<T>(this Stack<T> stack, IEnumerable<T> items)
+        {
+            foreach (var item in items)
+            {
+                stack.Push(item);
+            }
         }
     }
 }
