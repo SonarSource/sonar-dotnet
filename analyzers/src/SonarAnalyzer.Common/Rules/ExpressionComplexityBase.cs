@@ -61,21 +61,24 @@ namespace SonarAnalyzer.Rules
 
         private int CalculateComplexity(SyntaxNode node)
         {
-            return CalculateComplexityRec(node, 0);
-
-            int CalculateComplexityRec(SyntaxNode node, int currentComplexity)
+            int complexity = 0;
+            Stack<SyntaxNode> stack = new();
+            stack.Push(node);
+            while (stack.Count > 0)
             {
-                if (node.Kind<TSyntaxKind>() is var kind && ComplexityIncreasingKinds.Contains(kind))
+                var current = stack.Pop();
+                if (current.Kind<TSyntaxKind>() is var kind && ComplexityIncreasingKinds.Contains(kind))
                 {
-                    currentComplexity++;
+                    complexity++;
                 }
-                foreach (var child in ExpressionChildren(node))
+                foreach (var child in ExpressionChildren(current))
                 {
-                    currentComplexity = CalculateComplexityRec(child, currentComplexity);
+                    stack.Push(child);
                 }
 
                 return currentComplexity;
             }
+            return complexity;
         }
     }
 }
