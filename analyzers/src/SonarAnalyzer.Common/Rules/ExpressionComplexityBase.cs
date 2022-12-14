@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules
                     }
                 }, ComplexityIncreasingKinds.Concat(TransparentKinds).ToArray());
 
-        private static bool IsRoot(SyntaxNode node) =>
+        private bool IsRoot(SyntaxNode node) =>
             node?.Parent == null
             || (node.Parent.Kind<TSyntaxKind>() is var parentKind && !ComplexityIncreasingKinds.Contains(parentKind) && !TransparentKinds.Contains(parentKind));
 
@@ -75,8 +75,6 @@ namespace SonarAnalyzer.Rules
                 {
                     stack.Push(child);
                 }
-
-                return currentComplexity;
             }
             return complexity;
         }
