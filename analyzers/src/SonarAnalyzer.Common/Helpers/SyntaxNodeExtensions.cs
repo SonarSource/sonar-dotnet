@@ -37,6 +37,6 @@ namespace SonarAnalyzer.Helpers
         public static TSyntaxKind Kind<TSyntaxKind>(this SyntaxNode node) where TSyntaxKind : struct, Enum
             => node == null
                 ? default
-                : (TSyntaxKind)(object)node.RawKind;
+                : (TSyntaxKind)Enum.ToObject(typeof(TSyntaxKind), node.RawKind);
     }
 }
