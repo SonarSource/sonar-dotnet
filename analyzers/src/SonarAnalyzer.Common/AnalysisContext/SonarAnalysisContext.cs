@@ -76,6 +76,9 @@ public sealed partial /*FIXME: REMOVE partial */ class SonarAnalysisContext : So
     internal void RegisterCodeBlockStartAction<TSyntaxKind>(Action<SonarCodeBlockStartAnalysisContext<TSyntaxKind>> action) where TSyntaxKind : struct =>
         context.RegisterCodeBlockStartAction<TSyntaxKind>(c => Execute<SonarCodeBlockStartAnalysisContext<TSyntaxKind>, CodeBlockStartAnalysisContext<TSyntaxKind>>(new(this, c), action));
 
+    public void RegisterSymbolAction(Action<SonarSymbolAnalysisContext> action, params SymbolKind[] symbolKinds) =>
+        context.RegisterSymbolAction(c => Execute<SonarSymbolAnalysisContext, SymbolAnalysisContext>(new(this, c), action), symbolKinds);
+
     private void Execute<TSonarContext, TRoslynContext>(TSonarContext context, Action<TSonarContext> action) where TSonarContext : SonarAnalysisContextBase<TRoslynContext>
     {
         // For each action registered on context we need to do some pre-processing before actually calling the rule.

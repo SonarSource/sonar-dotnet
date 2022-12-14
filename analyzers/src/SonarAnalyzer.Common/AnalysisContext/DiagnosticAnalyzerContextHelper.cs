@@ -97,37 +97,11 @@ internal static class DiagnosticAnalyzerContextHelper
                 }
             });
 
-    public static void ReportDiagnosticIfNonGenerated(this CompilationAnalysisContext context, GeneratedCodeRecognizer generatedCodeRecognizer, Diagnostic diagnostic)
+    public static void ReportDiagnosticIfNonGenerated(this CompilationAnalysisContext context, GeneratedCodeRecognizer generatedCodeRecognizer, Diagnostic diagnostic)  // FIXME: Move
     {
         if (SonarAnalysisContext.ShouldAnalyze(context.TryGetValue, context.TryGetValue, generatedCodeRecognizer, diagnostic.Location.SourceTree, context.Compilation, context.Options))
         {
             context.ReportIssue(diagnostic);
-        }
-    }
-
-    public static void ReportDiagnosticIfNonGenerated(this SymbolAnalysisContext context, GeneratedCodeRecognizer generatedCodeRecognizer, Diagnostic diagnostic)
-    {
-        if (SonarAnalysisContext.ShouldAnalyze(AnalyzeGeneratedNoCache, ProjectConfigReaderNoCache, generatedCodeRecognizer, diagnostic.Location.SourceTree, context.Compilation, context.Options))
-        {
-            context.ReportIssue(diagnostic);
-        }
-
-        bool AnalyzeGeneratedNoCache(SourceText text, SourceTextValueProvider<bool> valueProvider, out bool value)
-        {
-            value = PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(PropertiesHelper.GetSettings(context.Options), context.Compilation.Language);
-            return true;
-        }
-
-        bool ProjectConfigReaderNoCache(SourceText text, SourceTextValueProvider<ProjectConfigReader> valueProvider, out ProjectConfigReader value)
-        {
-            value = SonarAnalysisContext.ProjectConfiguration(CreateProjectConfigReader, context.Options);
-            return true;
-        }
-
-        bool CreateProjectConfigReader(SourceText text, SourceTextValueProvider<ProjectConfigReader> valueProvider, out ProjectConfigReader value)
-        {
-            value = new ProjectConfigReader(text); // Recreating manually, SourceTextValueProvider doesn't have public API to use
-            return true;
         }
     }
 
