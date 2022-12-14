@@ -33,6 +33,6 @@ public partial /*FIXME: REMOVE partial */ class SonarAnalysisContext : SonarAnal
         this.context = context;
     }
 
-    protected override bool TryGetValue<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value) =>
+    public override bool TryGetValue<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value) =>
         context.TryGetValue(text, valueProvider, out value);
 }

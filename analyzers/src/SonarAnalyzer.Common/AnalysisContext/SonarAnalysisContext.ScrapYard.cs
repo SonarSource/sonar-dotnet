@@ -45,7 +45,7 @@ public partial class SonarAnalysisContext
 
     private static readonly SourceTextValueProvider<bool> ShouldAnalyzeGeneratedCS = CreateAnalyzeGeneratedProvider(LanguageNames.CSharp);
     private static readonly SourceTextValueProvider<bool> ShouldAnalyzeGeneratedVB = CreateAnalyzeGeneratedProvider(LanguageNames.VisualBasic);
-    private static readonly SourceTextValueProvider<ProjectConfigReader> ProjectConfigProvider = new(x => new ProjectConfigReader(x, SonarProjectConfigFileName));
+    private static readonly SourceTextValueProvider<ProjectConfigReader> ProjectConfigProvider = new(x => new ProjectConfigReader(x));
     private static readonly ConditionalWeakTable<Compilation, ImmutableHashSet<string>> UnchangedFilesCache = new();
 
     /// <summary>
@@ -77,9 +77,6 @@ public partial class SonarAnalysisContext
     /// (including not being reported).
     /// </remarks>
     public static Action<IReportingContext> ReportDiagnostic { get; set; }
-
-    public bool TryGetValue<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value) =>
-        context.TryGetValue(text, valueProvider, out value);
 
     public bool ShouldAnalyzeGenerated(Compilation c, AnalyzerOptions options) =>
         ShouldAnalyzeGenerated(context.TryGetValue, c, options);
@@ -151,7 +148,7 @@ public partial class SonarAnalysisContext
 
     internal static ProjectConfigReader ProjectConfiguration(TryGetValueDelegate<ProjectConfigReader> tryGetValue, AnalyzerOptions options)
     {
-        if (options.AdditionalFiles.FirstOrDefault(IsSonarProjectConfig) is { } sonarProjectConfigXml)
+        if (options.SonarProjectConfig() is { } sonarProjectConfigXml)
         {
             return sonarProjectConfigXml.GetText() is { } sourceText
                 // TryGetValue catches all exceptions from SourceTextValueProvider and returns false when thrown
@@ -184,7 +181,7 @@ public partial class SonarAnalysisContext
         }
     }
 
-    private static bool IsUnchanged(TryGetValueDelegate<ProjectConfigReader> tryGetValue, SyntaxTree tree, Compilation compilation, AnalyzerOptions options) =>
+    public static bool IsUnchanged(TryGetValueDelegate<ProjectConfigReader> tryGetValue, SyntaxTree tree, Compilation compilation, AnalyzerOptions options) =>
         UnchangedFilesCache.GetValue(compilation, _ => CreateUnchangedFilesHashSet(tryGetValue, options)).Contains(tree.FilePath);
 
     private static ImmutableHashSet<string> CreateUnchangedFilesHashSet(TryGetValueDelegate<ProjectConfigReader> tryGetValue, AnalyzerOptions options) =>
@@ -215,7 +212,7 @@ public partial class SonarAnalysisContext
     }
 
     private static bool ShouldAnalyzeGenerated(TryGetValueDelegate<bool> tryGetValue, Compilation c, AnalyzerOptions options) =>
-        options.AdditionalFiles.FirstOrDefault(f => ParameterLoader.IsSonarLintXml(f.Path)) is { } sonarLintXml
+        options.SonarLintXml() is { } sonarLintXml
         && tryGetValue(sonarLintXml.GetText(), ShouldAnalyzeGeneratedProvider(c.Language), out var shouldAnalyzeGenerated)
         && shouldAnalyzeGenerated;
 
@@ -242,8 +239,4 @@ public partial class SonarAnalysisContext
                     registeredAction(c);
                 }
             });
-
-    private static bool IsSonarProjectConfig(AdditionalText additionalText) =>
-        additionalText.Path != null
-        && ParameterLoader.ConfigurationFilePathMatchesExpected(additionalText.Path, SonarProjectConfigFileName);
 }

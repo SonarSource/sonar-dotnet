@@ -24,5 +24,5 @@ namespace SonarAnalyzer;
 
 public abstract class SonarAnalysisContextBase
 {
-    protected abstract bool TryGetValue<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value);
+    public abstract bool TryGetValue<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value);
 }
