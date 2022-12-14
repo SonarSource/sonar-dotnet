@@ -32,6 +32,7 @@ namespace SonarAnalyzer.Rules
         protected abstract bool IsUsingDirective(SyntaxNode node);
 
         protected sealed override bool AnalyzeTestProjects => false;
+        protected sealed override bool AnalyzeUnchangedFiles => true;
         protected sealed override string FileName => "token-cpd.pb";
 
         protected CopyPasteTokenAnalyzerBase() : base(DiagnosticId, Title) { }

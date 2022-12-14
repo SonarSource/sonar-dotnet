@@ -103,20 +103,12 @@ namespace SonarAnalyzer.UnitTest.Rules
             CreateBuilder(ProjectType.Test, "DuplicatedDifferentLiterals.cs").VerifyUtilityAnalyzerProducesEmptyProtobuf();
 
         [DataTestMethod]
-        [DataRow("Unique.cs", true)]
-        [DataRow("SomethingElse.cs", false)]
-        public void Verify_UnchangedFiles(string unchangedFileName, bool expectedProtobufIsEmpty)
-        {
-            var builder = CreateBuilder(ProjectType.Product, "Unique.cs").WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfigWithUnchangedFiles(TestContext, BasePath + unchangedFileName));
-            if (expectedProtobufIsEmpty)
-            {
-                builder.VerifyUtilityAnalyzerProducesEmptyProtobuf();
-            }
-            else
-            {
-                builder.VerifyUtilityAnalyzer<TokenTypeInfo>(x => x.Should().NotBeEmpty());
-            }
-        }
+        [DataRow("Unique.cs")]
+        [DataRow("SomethingElse.cs")]
+        public void Verify_UnchangedFiles(string unchangedFileName) =>
+            CreateBuilder(ProjectType.Product, "Unique.cs")
+                .WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfigWithUnchangedFiles(TestContext, BasePath + unchangedFileName))
+                .VerifyUtilityAnalyzer<TokenTypeInfo>(x => x.Should().NotBeEmpty());
 
         private void Verify(string fileName, Action<IReadOnlyList<CopyPasteTokenInfo.Types.TokenInfo>> verifyTokenInfo) =>
             CreateBuilder(ProjectType.Product, fileName)

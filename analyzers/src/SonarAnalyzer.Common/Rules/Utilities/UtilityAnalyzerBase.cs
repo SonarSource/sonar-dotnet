@@ -85,6 +85,8 @@ namespace SonarAnalyzer.Rules
         protected abstract string FileName { get; }
         protected abstract TMessage CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel);
 
+        protected virtual bool AnalyzeUnchangedFiles => false;
+
         protected virtual IEnumerable<TMessage> CreateAnalysisMessages(CompilationAnalysisContext c) => Enumerable.Empty<TMessage>();
 
         protected UtilityAnalyzerBase(string diagnosticId, string title) : base(diagnosticId, title) { }
@@ -99,7 +101,7 @@ namespace SonarAnalyzer.Rules
                     }
 
                     var treeMessages = c.Compilation.SyntaxTrees
-                        .Where(x => !SonarAnalysisContext.IsUnchanged(context.TryGetValue, x, c.Compilation, c.Options) && ShouldGenerateMetrics(x))
+                        .Where(x => ShouldGenerateMetrics(c, x))
                         .Select(x => CreateMessage(x, c.Compilation.GetSemanticModel(x)));
                     var messages = CreateAnalysisMessages(c)
                         .Concat(treeMessages)
@@ -121,5 +123,9 @@ namespace SonarAnalyzer.Rules
             (AnalyzeTestProjects || !IsTestProject)
             && FileExtensionWhitelist.Contains(Path.GetExtension(tree.FilePath))
             && (AnalyzeGeneratedCode || !Language.GeneratedCodeRecognizer.IsGenerated(tree));
+
+        private bool ShouldGenerateMetrics(CompilationAnalysisContext context, SyntaxTree tree) =>
+            (AnalyzeUnchangedFiles || !SonarAnalysisContext.IsUnchanged(context.TryGetValue, tree, context.Compilation, context.Options))
+            && ShouldGenerateMetrics(tree);
     }
 }
