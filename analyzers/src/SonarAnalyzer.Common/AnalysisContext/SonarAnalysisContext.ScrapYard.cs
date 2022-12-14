@@ -50,9 +50,6 @@ public partial class SonarAnalysisContext
     public static bool IsTestProject(CompilationAnalysisContext analysisContext) =>
         IsTestProject(analysisContext.TryGetValue, analysisContext.Compilation, analysisContext.Options);
 
-    internal static bool IsRegisteredActionEnabled(IEnumerable<DiagnosticDescriptor> diagnostics, SyntaxTree tree) =>
-        ShouldExecuteRegisteredAction == null || tree == null || ShouldExecuteRegisteredAction(diagnostics, tree);
-
     /// <summary>
     /// Reads configuration from SonarProjectConfig.xml file and caches the result for scope of this analysis.
     /// </summary>
