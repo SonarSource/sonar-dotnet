@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer;
 
-public class SonarCompilationAnalysisContextBase<TContext> : SonarAnalysisContextBase // FIXME: Unused
+public abstract class SonarCompilationAnalysisContextBase<TContext> : SonarAnalysisContextBase // FIXME: Unused
 {
     public SonarAnalysisContext AnalysisContext { get; }
     public TContext Context { get; }
