@@ -53,7 +53,7 @@ public partial class SonarAnalysisContextTest
     [TestMethod]
     public void ShouldAnalyze_Scanner_UnchangedFiles_ContainsTreeFile()
     {
-        var options = CreateOptions(new[] { "snippet0.cs" });
+        var options = CreateOptions(new[] { OtherFileName + "cs" });
 
         ShouldAnalyze(options).Should().BeFalse("File is known to be Unchanged in Incremental PR analysis");
     }
@@ -61,7 +61,7 @@ public partial class SonarAnalysisContextTest
     [TestMethod]
     public void ShouldAnalyze_Scanner_UnchangedFiles_ContainsOtherFile()
     {
-        var options = CreateOptions(new[] { "OtherFile.cs", "SomethingElse.cs" });
+        var options = CreateOptions(new[] { "ThisIsNotInCompilation.cs", "SomethingElse.cs" });
 
         ShouldAnalyze(options).Should().BeTrue();
     }
@@ -69,7 +69,7 @@ public partial class SonarAnalysisContextTest
     private static bool ShouldAnalyze(AnalyzerOptions options)
     {
         var compilation = CreateDummyCompilation(AnalyzerLanguage.CSharp);
-        return CreateSut().ShouldAnalyze(CSharpGeneratedCodeRecognizer.Instance, compilation.SyntaxTrees.First(), compilation, options);
+        return CreateSut().ShouldAnalyze(CSharpGeneratedCodeRecognizer.Instance, compilation.SyntaxTrees.Single(x => x.FilePath.Contains(OtherFileName)), compilation, options);
     }
 
     private AnalyzerOptions CreateOptions(string[] unchangedFiles)
