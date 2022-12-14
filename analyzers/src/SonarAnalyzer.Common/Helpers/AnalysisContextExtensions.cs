@@ -68,23 +68,21 @@ namespace SonarAnalyzer.Helpers
             ReportIssue(new ReportingContext(context, diagnostic), verifyScopeContext?.IsTestProject(context.SemanticModel.Compilation, context.Options),
                 verifyScopeContext?.IsScannerRun(context.Options));
 
-        private static void ReportIssue(ReportingContext reportingContext, bool? isTestProject, bool? isScannerRun) // FIXME: REMOVE
+        private static void ReportIssue(ReportingContext reportingContext, bool? isTestProject, bool? isScannerRun) // FIXME: REMOVE, already migrated
         {
-            if (isTestProject.HasValue
-                && !SonarAnalysisContext.IsAnalysisScopeMatching(reportingContext.Compilation, isTestProject.Value, isScannerRun ?? true, new[] { reportingContext.Diagnostic.Descriptor }))
+            if (isTestProject.HasValue && !reportingContext.Diagnostic.Descriptor.HasMatchingScope(reportingContext.Compilation, isTestProject.Value, isScannerRun ?? true))
             {
                 return;
             }
 
-            if (reportingContext is { Compilation: { } compilation, Diagnostic.Location: { Kind: LocationKind.SourceFile, SourceTree: { } syntaxTree } }
-                && !compilation.ContainsSyntaxTree(syntaxTree))
+            if (reportingContext is { Compilation: { } compilation, Diagnostic.Location: { Kind: LocationKind.SourceFile, SourceTree: { } tree } } && !compilation.ContainsSyntaxTree(tree))
             {
                 Debug.Fail("Primary location should be part of the compilation. An AD0001 is raised if this is not the case.");
                 return;
             }
 
             // This is the current way SonarLint will handle how and what to report.
-            if (SonarAnalysisContext.ReportDiagnostic != null)
+            if (SonarAnalysisContext.ReportDiagnostic is not null)
             {
                 Debug.Assert(SonarAnalysisContext.ShouldDiagnosticBeReported == null, "Not expecting SonarLint to set both the old and the new delegates.");
                 SonarAnalysisContext.ReportDiagnostic(reportingContext);

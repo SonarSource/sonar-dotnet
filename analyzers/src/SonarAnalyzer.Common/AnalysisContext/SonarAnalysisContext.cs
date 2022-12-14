@@ -95,7 +95,7 @@ public sealed partial /*FIXME: REMOVE partial */ class SonarAnalysisContext : So
         // Second, we call an external delegate (set by SonarLint for VS) to ensure the rule should be run (usually
         // the decision is made on based on whether the project contains the analyzer as NuGet).
         var isTestProject = IsTestProject(context.Compilation, context.Options);
-        if (IsAnalysisScopeMatching(context.Compilation, isTestProject, IsScannerRun(context.Options), supportedDiagnostics) && LegacyIsRegisteredActionEnabled(supportedDiagnostics, context.Tree))
+        if (supportedDiagnostics.Any(x => x.HasMatchingScope(context.Compilation, isTestProject, IsScannerRun(context.Options))) && LegacyIsRegisteredActionEnabled(supportedDiagnostics, context.Tree))
         {
             action(context);
         }
