@@ -52,8 +52,5 @@ namespace SonarAnalyzer.Helpers
 
         public static void ReportDiagnosticIfNonGenerated(this SonarSymbolAnalysisContext context, Diagnostic diagnostic) =>
             context.ReportDiagnosticIfNonGenerated(CSharpGeneratedCodeRecognizer.Instance, diagnostic);
-
-        internal static bool ShouldAnalyze(this SyntaxTree tree, SonarAnalysisContext context, Compilation compilation, AnalyzerOptions options) =>
-            SonarAnalysisContext.ShouldAnalyze(context.TryGetValue, context.TryGetValue, CSharpGeneratedCodeRecognizer.Instance, tree, compilation, options);
     }
 }
