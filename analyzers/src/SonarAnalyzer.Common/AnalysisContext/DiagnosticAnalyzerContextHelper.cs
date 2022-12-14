@@ -28,15 +28,15 @@ internal static class DiagnosticAnalyzerContextHelper
 {
     private static readonly ConditionalWeakTable<Compilation, ConcurrentDictionary<SyntaxTree, bool>> GeneratedCodeCache = new();
 
-    public static void RegisterSyntaxNodeActionInNonGenerated<TLanguageKindEnum>(this SonarAnalysisContext context,
+    public static void RegisterSyntaxNodeActionInNonGenerated<TLanguageKindEnum>(this SonarAnalysisContext context, // FIXME: Move them
                                                                                  GeneratedCodeRecognizer generatedCodeRecognizer,
                                                                                  Action<SyntaxNodeAnalysisContext> action,
                                                                                  params TLanguageKindEnum[] syntaxKinds) where TLanguageKindEnum : struct =>
         context.RegisterSyntaxNodeAction(c =>
             {
-                if (SonarAnalysisContext.ShouldAnalyze(context.TryGetValue, context.TryGetValue, generatedCodeRecognizer, c.GetSyntaxTree(), c.Compilation, c.Options))
+                if (c.ShouldAnalyze(generatedCodeRecognizer))
                 {
-                    action(c);
+                    action(c.Context);
                 }
             }, syntaxKinds);
 
@@ -46,9 +46,9 @@ internal static class DiagnosticAnalyzerContextHelper
                                                                                  params TLanguageKindEnum[] syntaxKinds) where TLanguageKindEnum : struct =>
         context.Context.RegisterSyntaxNodeAction(c =>
             {
-                if (SonarAnalysisContext.ShouldAnalyze(context.Context.TryGetValue, context.Context.TryGetValue, generatedCodeRecognizer, c.GetSyntaxTree(), c.Compilation, c.Options))
+                if (c.ShouldAnalyze(generatedCodeRecognizer))
                 {
-                    action(c);
+                    action(c.Context);
                 }
             }, syntaxKinds);
 

@@ -67,6 +67,9 @@ public sealed partial /*FIXME: REMOVE partial */ class SonarAnalysisContext : So
     internal void RegisterCompilationAction(Action<SonarCompilationAnalysisContext> action) =>
         context.RegisterCompilationAction(c => Execute<SonarCompilationAnalysisContext, CompilationAnalysisContext>(new(this, c), action));
 
+    internal void RegisterSyntaxNodeAction<TSyntaxKind>(Action<SonarSyntaxNodeAnalysisContext> action, params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct =>
+        context.RegisterSyntaxNodeAction(c => Execute<SonarSyntaxNodeAnalysisContext, SyntaxNodeAnalysisContext>(new(this, c), action), syntaxKinds);
+
     private void Execute<TSonarContext, TRoslynContext>(TSonarContext context, Action<TSonarContext> action) where TSonarContext : SonarAnalysisContextBase<TRoslynContext>
     {
         // For each action registered on context we need to do some pre-processing before actually calling the rule.
