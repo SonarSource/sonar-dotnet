@@ -22,7 +22,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace SonarAnalyzer.Helpers;
 
-public sealed class ParameterLoadingAnalysisContext : SonarAnalysisContextBase // FIXME: Refactor: Use Sonar* prefix, change contract not to expose the collection, rename everything to "Postponed" to make it clear, add docs
+public sealed class ParameterLoadingAnalysisContext : SonarAnalysisContextBase
 {
     private readonly List<Action<SonarCompilationStartAnalysisContext>> postponedActions = new();
 
