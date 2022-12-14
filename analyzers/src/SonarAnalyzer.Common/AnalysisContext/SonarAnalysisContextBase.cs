@@ -121,20 +121,19 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
 
     private protected void ReportIssue(ReportingContext reportingContext)
     {
-        if (!SonarAnalysisContext.IsAnalysisScopeMatching(reportingContext.Compilation, IsTestProject(), ProjectConfiguration().IsScannerRun, new[] { reportingContext.Diagnostic.Descriptor }))
+        if (!reportingContext.Diagnostic.Descriptor.HasMatchingScope(reportingContext.Compilation, IsTestProject(), ProjectConfiguration().IsScannerRun))
         {
             return;
         }
 
-        if (reportingContext is { Compilation: { } compilation, Diagnostic.Location: { Kind: LocationKind.SourceFile, SourceTree: { } syntaxTree } }
-            && !compilation.ContainsSyntaxTree(syntaxTree))
+        if (reportingContext is { Compilation: { } compilation, Diagnostic.Location: { Kind: LocationKind.SourceFile, SourceTree: { } tree } } && !compilation.ContainsSyntaxTree(tree))
         {
             Debug.Fail("Primary location should be part of the compilation. An AD0001 is raised if this is not the case.");
             return;
         }
 
         // This is the current way SonarLint will handle how and what to report.
-        if (SonarAnalysisContext.ReportDiagnostic != null)
+        if (SonarAnalysisContext.ReportDiagnostic is not null)
         {
             Debug.Assert(SonarAnalysisContext.ShouldDiagnosticBeReported == null, "Not expecting SonarLint to set both the old and the new delegates.");
             SonarAnalysisContext.ReportDiagnostic(reportingContext);
