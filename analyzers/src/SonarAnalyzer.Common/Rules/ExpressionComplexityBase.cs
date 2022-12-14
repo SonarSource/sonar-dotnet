@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules
                     {
                         // The parent of the expression is itself complexity increasing (e.g. &&) or transparent (e.g. parenthesis).
                         // We are only interested in the expression roots so we only report once per expression tree. Therefore we ignore any inner children, e.g.:
-                        // a && b && c -> (Left: (Left: a, Right: b), Right: c) // We are only interested in the outer expression (the one with Right: c)
+                        // x && y && z -> (Left: (Left: x, Right: y), Right: z) // We are only interested in the outer expression (the one with Right: z)
                         return;
                     }
                     var complexity = CalculateComplexity(c.Node);
