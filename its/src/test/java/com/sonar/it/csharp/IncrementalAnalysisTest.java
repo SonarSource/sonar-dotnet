@@ -27,6 +27,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import org.sonarqube.ws.Duplications;
 import org.sonarqube.ws.Issues;
 
 import java.io.BufferedWriter;
@@ -58,7 +59,7 @@ public class IncrementalAnalysisTest {
     File withChangesPath = projectDir.resolve("IncrementalPRAnalysis\\WithChanges.cs").toFile();
     addIssue(withChangesPath);
 
-    BeginAndEndStepResults results = executeAnalysisForPRBranch(projectDir, "");
+    BeginAndEndStepResults results = executeAnalysisForPRBranch(PROJECT, projectDir, "");
     BuildResult beginStepResults = results.getBeginStepResult();
     BuildResult endStepResults = results.getEndStepResult();
 
@@ -77,12 +78,12 @@ public class IncrementalAnalysisTest {
     Tests.analyzeProject(temp, PROJECT, null, "sonar.branch.name", "base-branch");
     Path projectDir = Tests.projectDir(temp, PROJECT);
 
-    BeginAndEndStepResults results = executeAnalysisForPRBranch(projectDir, "");
+    BeginAndEndStepResults results = executeAnalysisForPRBranch(PROJECT, projectDir, "");
     BuildResult beginStepResults = results.getBeginStepResult();
     BuildResult endStepResults = results.getEndStepResult();
 
     assertTrue(endStepResults.isSuccess());
-    assertCacheIsUsed(beginStepResults);
+    assertCacheIsUsed(beginStepResults, PROJECT);
     assertThat(endStepResults.getLogs()).doesNotContain("Adding normal issue S1134");
     List<Issues.Issue> allIssues = TestUtils.getIssues(ORCHESTRATOR, PROJECT, "42");
     assertThat(allIssues).isEmpty();
@@ -99,12 +100,12 @@ public class IncrementalAnalysisTest {
     File fileToBeAddedPath = projectDir.resolve("IncrementalPRAnalysis\\AddedFile.cs").toFile();
     createFileWithIssue(fileToBeAddedPath);
 
-    BeginAndEndStepResults results = executeAnalysisForPRBranch(projectDir, "");
+    BeginAndEndStepResults results = executeAnalysisForPRBranch(PROJECT, projectDir, "");
     BuildResult beginStepResults = results.getBeginStepResult();
     BuildResult endStepResults = results.getEndStepResult();
 
     assertTrue(endStepResults.isSuccess());
-    assertCacheIsUsed(beginStepResults);
+    assertCacheIsUsed(beginStepResults, PROJECT);
     assertThat(endStepResults.getLogs()).doesNotContain("Adding normal issue S1134: " + unchanged1Path);
     assertThat(endStepResults.getLogs()).doesNotContain("Adding normal issue S1134: " + unchanged2Path);
     assertThat(endStepResults.getLogs()).contains("Adding normal issue S1134: " + withChangesPath);
@@ -124,12 +125,12 @@ public class IncrementalAnalysisTest {
     File withChangesPath = projectDir.resolve("IncrementalPRAnalysis\\WithChanges.cs").toFile();
     addIssue(withChangesPath);
 
-    BeginAndEndStepResults results = executeAnalysisForPRBranch(projectDir, PROJECT);
+    BeginAndEndStepResults results = executeAnalysisForPRBranch(PROJECT, projectDir, PROJECT);
     BuildResult beginStepResults = results.getBeginStepResult();
     BuildResult endStepResults = results.getEndStepResult();
 
     assertTrue(endStepResults.isSuccess());
-    assertCacheIsUsed(beginStepResults);
+    assertCacheIsUsed(beginStepResults, PROJECT);
     assertAllFilesWereAnalysed(endStepResults, projectDir);
     List<Issues.Issue> allIssues = TestUtils.getIssues(ORCHESTRATOR, PROJECT, "42");
     assertThat(allIssues).hasSize(3);
@@ -141,6 +142,24 @@ public class IncrementalAnalysisTest {
     assertThat(allIssues.get(2).getComponent()).isEqualTo("IncrementalPRAnalysis:WithChanges.cs");
   }
 
+  @Test
+  public void incrementalPrAnalysis_cacheAvailableDuplicationIntroduced_duplicationReportedForChangedFile() throws IOException {
+    String projectName = "IncrementalPRAnalysisDuplication";
+    Tests.analyzeProject(temp, projectName, null, "sonar.branch.name", "base-branch");
+    Path projectDir = Tests.projectDir(temp, projectName);
+    File duplicatedFile = projectDir.resolve("IncrementalPRAnalysisDuplication\\DuplicatedClassPart2.cs").toFile();
+    createDuplicate(duplicatedFile);
+
+    BeginAndEndStepResults results = executeAnalysisForPRBranch(projectName, projectDir, "");
+    BuildResult beginStepResults = results.getBeginStepResult();
+    BuildResult endStepResults = results.getEndStepResult();
+
+    assertTrue(endStepResults.isSuccess());
+    assertCacheIsUsed(beginStepResults, projectName);
+    List<Duplications.Duplication> duplications = TestUtils.getDuplication(ORCHESTRATOR, "IncrementalPRAnalysisDuplication:IncrementalPRAnalysisDuplication/DuplicatedClassPart2.cs", "42").getDuplicationsList();
+    assertThat(duplications).isNotEmpty();
+  }
+
   private static void assertAllFilesWereAnalysed(BuildResult endStepResults, Path projectDir) {
     File unchanged1Path = projectDir.resolve("IncrementalPRAnalysis\\Unchanged1.cs").toFile();
     File unchanged2Path = projectDir.resolve("IncrementalPRAnalysis\\Unchanged2.cs").toFile();
@@ -150,10 +169,10 @@ public class IncrementalAnalysisTest {
     assertThat(endStepResults.getLogs()).contains("Adding normal issue S1134: " + withChangesPath);
   }
 
-  private static void assertCacheIsUsed(BuildResult beginStepResults) {
+  private static void assertCacheIsUsed(BuildResult beginStepResults, String project) {
     assertThat(beginStepResults.getLogs()).contains("Processing analysis cache");
     assertThat(beginStepResults.getLogs()).contains("Processing pull request with base branch 'base-branch'.");
-    assertThat(beginStepResults.getLogs()).contains("Downloading cache. Project key: " + PROJECT + ", branch: base-branch.");
+    assertThat(beginStepResults.getLogs()).contains("Downloading cache. Project key: " + project + ", branch: base-branch.");
   }
 
   private void addIssue(File file) throws IOException {
@@ -163,23 +182,116 @@ public class IncrementalAnalysisTest {
   }
 
   private void createFileWithIssue(File file) throws IOException {
+    createFileWithContent(file,
+      "namespace IncrementalPRAnalysis\n" +
+        "{\n" +
+        "public class AddedFile\n" +
+        "{\n" +
+        "}\n" +
+        "}// FIXME: S1134");
+  }
+
+  private void createDuplicate(File file) throws IOException {
+    createFileWithContent(file,
+      "using System;\n" +
+        "\n" +
+        "namespace IncrementalPRAnalysisDuplication\n" +
+        "{\n" +
+        "    public class DuplicatedClassPart2\n" +
+        "    {\n" +
+        "        private string DuplicatedString = \"DuplicatedString.\";\n" +
+        "\n" +
+        "        private void SomeMethod(int a, int b)\n" +
+        "        {\n" +
+        "            var someString = \"This is some very high end sophisticated solution.\";\n" +
+        "            for (int i = 0; i < a; i++)\n" +
+        "            {\n" +
+        "                someString += b.ToString();\n" +
+        "            }\n" +
+        "\n" +
+        "            Console.WriteLine(\"I am wondering why I am writing this to the console at all?\", someString);\n" +
+        "        }\n" +
+        "\n" +
+        "        private void SomeMethod2(object o)\n" +
+        "        {\n" +
+        "            if (o == \"Have you ever seen such an important and complex codebase as this one?\")\n" +
+        "            {\n" +
+        "                throw new ArgumentException(\"Like did you really call this method with this argument? What is wrong with you?\");\n" +
+        "            }\n" +
+        "            else\n" +
+        "            {\n" +
+        "                SomeMethod(16, 23);\n" +
+        "            }\n" +
+        "        }\n" +
+        "\n" +
+        "        private void SomeMethod3(object o)\n" +
+        "        {\n" +
+        "            if (o == \"Have you ever seen such an important and complex codebase as this one?\")\n" +
+        "            {\n" +
+        "                throw new ArgumentException(\"Like did you really call this method with this argument? What is wrong with you?\");\n" +
+        "            }\n" +
+        "            else\n" +
+        "            {\n" +
+        "                SomeMethod(16, 23);\n" +
+        "            }\n" +
+        "        }\n" +
+        "        private void SomeMethod4(object o)\n" +
+        "        {\n" +
+        "            if (o == \"Have you ever seen such an important and complex codebase as this one?\")\n" +
+        "            {\n" +
+        "                throw new ArgumentException(\"Like did you really call this method with this argument? What is wrong with you?\");\n" +
+        "            }\n" +
+        "            else\n" +
+        "            {\n" +
+        "                SomeMethod(16, 23);\n" +
+        "            }\n" +
+        "        }\n" +
+        "\n" +
+        "        private void SomeMethod5(object o)\n" +
+        "        {\n" +
+        "            if (o == \"Have you ever seen such an important and complex codebase as this one?\")\n" +
+        "            {\n" +
+        "                throw new ArgumentException(\"Like did you really call this method with this argument? What is wrong with you?\");\n" +
+        "            }\n" +
+        "            else\n" +
+        "            {\n" +
+        "                SomeMethod(16, 23);\n" +
+        "            }\n" +
+        "        }\n" +
+        "\n" +
+        "        private void SomeMethod6(object o)\n" +
+        "        {\n" +
+        "            if (o == \"Have you ever seen such an important and complex codebase as this one?\")\n" +
+        "            {\n" +
+        "                throw new ArgumentException(\"Like did you really call this method with this argument? What is wrong with you?\");\n" +
+        "            }\n" +
+        "            else\n" +
+        "            {\n" +
+        "                SomeMethod(16, 23);\n" +
+        "            }\n" +
+        "        }\n" +
+        "\n" +
+        "        private class SomeInnerClass\n" +
+        "        {\n" +
+        "            public const int a = 1;\n" +
+        "        }\n" +
+        "    }\n" +
+        "}\n");
+  }
+
+  private void createFileWithContent(File file, String content) throws IOException {
     BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-    writer.write("namespace IncrementalPRAnalysis\n" +
-      "{\n" +
-      "public class AddedFile\n" +
-      "{\n" +
-      "}\n" +
-      "}// FIXME: S1134");
+    writer.write(content);
     writer.close();
   }
 
-  private BeginAndEndStepResults executeAnalysisForPRBranch(Path projectDir, String subProjectName) {
+  private BeginAndEndStepResults executeAnalysisForPRBranch(String project, Path projectDir, String subProjectName) {
     ScannerForMSBuild beginStep;
     if (subProjectName.isEmpty()){
-      beginStep = TestUtils.createBeginStep(PROJECT, projectDir);
+      beginStep = TestUtils.createBeginStep(project, projectDir);
     }
     else {
-      beginStep = TestUtils.createBeginStep(PROJECT, projectDir, subProjectName);
+      beginStep = TestUtils.createBeginStep(project, projectDir, subProjectName);
     }
 
     BuildResult beginStepResults = ORCHESTRATOR.executeBuild(beginStep

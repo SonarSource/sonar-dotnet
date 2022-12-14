@@ -197,6 +197,14 @@ public class TestUtils {
     return response;
   }
 
+  @CheckForNull
+  public static org.sonarqube.ws.Duplications.ShowResponse getDuplication(Orchestrator orch, String componentKey, String pullRequestKey) {
+    org.sonarqube.ws.Duplications.ShowResponse response = newWsClient(orch).duplications().show(new org.sonarqube.ws.client.duplications.ShowRequest()
+      .setKey(componentKey)
+      .setPullRequest(pullRequestKey));
+    return response;
+  }
+
   public static Components.Component getComponent(Orchestrator orch, String componentKey) {
     return newWsClient(orch).components().show(new ShowRequest().setComponent(componentKey)).getComponent();
   }
