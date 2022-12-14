@@ -26,8 +26,6 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class UtilityAnalyzerBase : SonarDiagnosticAnalyzer
     {
-        private const string ProjectOutFolderPathFileName = "ProjectOutFolderPath.txt";
-
         protected static readonly ISet<string> FileExtensionWhitelist = new HashSet<string> { ".cs", ".csx", ".vb" };
         private readonly DiagnosticDescriptor rule;
 
@@ -57,9 +55,9 @@ namespace SonarAnalyzer.Rules
             var settings = PropertiesHelper.GetSettings(c.Options).ToList();
             var outPath = context.ProjectConfiguration(c.Options).OutPath;
             // For backward compatibility with S4MSB <= 5.0
-            if (outPath == null && c.Options.AdditionalFiles.FirstOrDefault(IsProjectOutFolderPath) is { } projectOutFolderAdditionalFile)
+            if (outPath == null && c.Options.ProjectOutFolderPath() is { } projectOutFolderAdditionalFile)
             {
-                outPath = File.ReadAllLines(projectOutFolderAdditionalFile.Path).First();
+                outPath = projectOutFolderAdditionalFile.GetText().ToString();
             }
             if (settings.Any() && !string.IsNullOrEmpty(outPath))
             {
@@ -70,9 +68,6 @@ namespace SonarAnalyzer.Rules
                 IsTestProject = context.IsTestProject(c.Compilation, c.Options);
             }
         }
-
-        private static bool IsProjectOutFolderPath(AdditionalText file) =>
-            ParameterLoader.ConfigurationFilePathMatchesExpected(file.Path, ProjectOutFolderPathFileName);
     }
 
     public abstract class UtilityAnalyzerBase<TSyntaxKind, TMessage> : UtilityAnalyzerBase
