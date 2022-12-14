@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
@@ -52,8 +51,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
                 context.RegisterSyntaxNodeAction(c =>
                 {
                     // Duplicate issues from different analyzer versions, see https://github.com/SonarSource/sonar-dotnet/issues/1109
-                    c.ReportDiagnostic(Diagnostic.Create(this.rule, c.Node.GetLocation()));
-                    c.ReportDiagnostic(Diagnostic.Create(this.rule, c.Node.GetLocation()));
+                    c.ReportIssue(Diagnostic.Create(rule, c.Context.Node.GetLocation()));
+                    c.ReportIssue(Diagnostic.Create(rule, c.Context.Node.GetLocation()));
                 }, SyntaxKind.NamespaceDeclaration);
             }
         }

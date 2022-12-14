@@ -20,7 +20,6 @@
 
 using System.IO;
 using System.Runtime.CompilerServices;
-using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using Microsoft.CodeAnalysis.Text;
 using static SonarAnalyzer.Helpers.DiagnosticDescriptorFactory;
@@ -42,7 +41,7 @@ public partial class SonarAnalysisContext
     private static readonly SourceTextValueProvider<bool> ShouldAnalyzeGeneratedCS = CreateAnalyzeGeneratedProvider(LanguageNames.CSharp);
     private static readonly SourceTextValueProvider<bool> ShouldAnalyzeGeneratedVB = CreateAnalyzeGeneratedProvider(LanguageNames.VisualBasic);
     private static readonly SourceTextValueProvider<ProjectConfigReader> ProjectConfigProvider = new(x => new ProjectConfigReader(x));  // FIXME: Done
-    private static readonly ConditionalWeakTable<Compilation, ImmutableHashSet<string>> UnchangedFilesCache = new();
+    private static readonly ConditionalWeakTable<Compilation, ImmutableHashSet<string>> UnchangedFilesCache = new();                    // FIXME: Done
 
     public bool ShouldAnalyzeGenerated(Compilation c, AnalyzerOptions options) =>
         ShouldAnalyzeGenerated(context.TryGetValue, c, options);
@@ -92,13 +91,6 @@ public partial class SonarAnalysisContext
     //internal void RegisterCodeBlockStartAction<TSyntaxKind>(Action<SonarCodeBlockStartAnalysisContext<TSyntaxKind>> action) where TSyntaxKind : struct =>
     //    context.RegisterCodeBlockStartAction<TSyntaxKind>(c => Execute<SonarCodeBlockStartAnalysisContext<TSyntaxKind>, CodeBlockStartAnalysisContext<TSyntaxKind>>(new(this, c), action));
 
-    // FIXME: Use the other one
-    internal void RegisterSyntaxNodeAction<TSyntaxKind>(Action<SyntaxNodeAnalysisContext> action, params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct =>
-        context.RegisterSyntaxNodeAction(c => Execute<SonarSyntaxNodeAnalysisContext, SyntaxNodeAnalysisContext>(new(this, c), x => action(x.Context)), syntaxKinds);
-
-    //internal void RegisterSyntaxNodeAction<TSyntaxKind>(Action<SonarSyntaxNodeAnalysisContext> action, params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct =>
-    //    context.RegisterSyntaxNodeAction(c => Execute<SonarSyntaxNodeAnalysisContext, SyntaxNodeAnalysisContext>(new(this, c), action), syntaxKinds);
-
     /// <summary>
     /// Reads configuration from SonarProjectConfig.xml file and caches the result for scope of this analysis.
     /// </summary>
@@ -140,10 +132,10 @@ public partial class SonarAnalysisContext
         }
     }
 
-    private static bool IsUnchanged(TryGetValueDelegate<ProjectConfigReader> tryGetValue, SyntaxTree tree, Compilation compilation, AnalyzerOptions options) =>
+    private static bool IsUnchanged(TryGetValueDelegate<ProjectConfigReader> tryGetValue, SyntaxTree tree, Compilation compilation, AnalyzerOptions options) => // FIXME: Done
         UnchangedFilesCache.GetValue(compilation, _ => CreateUnchangedFilesHashSet(tryGetValue, options)).Contains(tree.FilePath);
 
-    private static ImmutableHashSet<string> CreateUnchangedFilesHashSet(TryGetValueDelegate<ProjectConfigReader> tryGetValue, AnalyzerOptions options) =>
+    private static ImmutableHashSet<string> CreateUnchangedFilesHashSet(TryGetValueDelegate<ProjectConfigReader> tryGetValue, AnalyzerOptions options) =>       // FIXME: Done
         ImmutableHashSet.Create(StringComparer.OrdinalIgnoreCase, ProjectConfiguration(tryGetValue, options).AnalysisConfig?.UnchangedFiles() ?? Array.Empty<string>());
 
     private static bool IsTestProject(TryGetValueDelegate<ProjectConfigReader> tryGetValue, Compilation compilation, AnalyzerOptions options)   // FIXME: Done
@@ -154,10 +146,10 @@ public partial class SonarAnalysisContext
             : projectType == ProjectType.Test;  // Scanner >= 5.1 does authoritative decision that we follow
     }
 
-    private static SourceTextValueProvider<bool> CreateAnalyzeGeneratedProvider(string language) =>
+    private static SourceTextValueProvider<bool> CreateAnalyzeGeneratedProvider(string language) => //FIXME: Done
         new(x => PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(ParseXmlSettings(x), language));
 
-    private static IEnumerable<XElement> ParseXmlSettings(SourceText sourceText)
+    private static IEnumerable<XElement> ParseXmlSettings(SourceText sourceText)    // FIXME: Done
     {
         try
         {
@@ -170,11 +162,11 @@ public partial class SonarAnalysisContext
         }
     }
 
-    private static bool ShouldAnalyzeGenerated(TryGetValueDelegate<bool> tryGetValue, Compilation c, AnalyzerOptions options) =>
+    private static bool ShouldAnalyzeGenerated(TryGetValueDelegate<bool> tryGetValue, Compilation c, AnalyzerOptions options) =>    // FIXME: Done
         options.SonarLintXml() is { } sonarLintXml
         && tryGetValue(sonarLintXml.GetText(), ShouldAnalyzeGeneratedProvider(c.Language), out var shouldAnalyzeGenerated)
         && shouldAnalyzeGenerated;
 
-    private static SourceTextValueProvider<bool> ShouldAnalyzeGeneratedProvider(string language) =>
+    private static SourceTextValueProvider<bool> ShouldAnalyzeGeneratedProvider(string language) => // FIXME: Done
         language == LanguageNames.CSharp ? ShouldAnalyzeGeneratedCS : ShouldAnalyzeGeneratedVB;
 }

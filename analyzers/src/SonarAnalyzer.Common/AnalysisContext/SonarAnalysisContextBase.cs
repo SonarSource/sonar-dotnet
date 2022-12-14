@@ -19,16 +19,24 @@
  */
 
 using System.IO;
-using Microsoft.CodeAnalysis;
+using System.Runtime.CompilerServices;
+using System.Xml.Linq;
 using Microsoft.CodeAnalysis.Text;
 
 namespace SonarAnalyzer;
 
 public abstract class SonarAnalysisContextBase
 {
+    private static readonly Lazy<SourceTextValueProvider<bool>> ShouldAnalyzeGeneratedCS = new(() => CreateAnalyzeGeneratedProvider(LanguageNames.CSharp));
+    private static readonly Lazy<SourceTextValueProvider<bool>> ShouldAnalyzeGeneratedVB = new(() => CreateAnalyzeGeneratedProvider(LanguageNames.VisualBasic));
     private static readonly SourceTextValueProvider<ProjectConfigReader> ProjectConfigProvider = new(x => new ProjectConfigReader(x));
+    private static readonly ConditionalWeakTable<Compilation, ImmutableHashSet<string>> UnchangedFilesCache = new();
 
     public abstract bool TryGetValue<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value);
+
+    public bool ShouldAnalyze(GeneratedCodeRecognizer generatedCodeRecognizer, SyntaxTree tree, Compilation compilation, AnalyzerOptions options) =>
+        !IsUnchanged(tree, compilation, options)
+        && (ShouldAnalyzeGenerated(compilation, options) || !tree.IsGenerated(generatedCodeRecognizer, compilation));
 
     /// <summary>
     /// Reads configuration from SonarProjectConfig.xml file and caches the result for scope of this analysis.
@@ -46,6 +54,35 @@ public abstract class SonarAnalysisContextBase
         else
         {
             return ProjectConfigReader.Empty;
+        }
+    }
+
+    private bool IsUnchanged(SyntaxTree tree, Compilation compilation, AnalyzerOptions options) =>
+        UnchangedFilesCache.GetValue(compilation, _ => CreateUnchangedFilesHashSet(options)).Contains(tree.FilePath);
+
+    private ImmutableHashSet<string> CreateUnchangedFilesHashSet(AnalyzerOptions options) =>
+        ImmutableHashSet.Create(StringComparer.OrdinalIgnoreCase, ProjectConfiguration(options).AnalysisConfig?.UnchangedFiles() ?? Array.Empty<string>());
+
+    private bool ShouldAnalyzeGenerated(Compilation compilation, AnalyzerOptions options) =>
+        options.SonarLintXml() is { } sonarLintXml
+        && TryGetValue(sonarLintXml.GetText(), ShouldAnalyzeGeneratedProvider(compilation.Language), out var shouldAnalyzeGenerated)
+        && shouldAnalyzeGenerated;
+
+    private static SourceTextValueProvider<bool> ShouldAnalyzeGeneratedProvider(string language) =>
+        language == LanguageNames.CSharp ? ShouldAnalyzeGeneratedCS.Value : ShouldAnalyzeGeneratedVB.Value;
+
+    private static SourceTextValueProvider<bool> CreateAnalyzeGeneratedProvider(string language) =>
+        new(x => PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(ParseXmlSettings(x), language));
+
+    private static IEnumerable<XElement> ParseXmlSettings(SourceText sourceText)    // FIXME: This should not be here
+    {
+        try
+        {
+            return XDocument.Parse(sourceText.ToString()).Descendants("Setting");
+        }
+        catch
+        {
+            return Enumerable.Empty<XElement>();    // Can not log the exception, so ignore it
         }
     }
 }
@@ -78,6 +115,9 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
             ? Compilation.IsTest()              // SonarLint, NuGet or Scanner <= 5.0
             : projectType == ProjectType.Test;  // Scanner >= 5.1 does authoritative decision that we follow
     }
+
+    public bool ShouldAnalyze(GeneratedCodeRecognizer generatedCodeRecognizer) =>
+        ShouldAnalyze(generatedCodeRecognizer, Tree, Compilation, Options);
 
     private protected void ReportIssue(ReportingContext reportingContext)
     {
