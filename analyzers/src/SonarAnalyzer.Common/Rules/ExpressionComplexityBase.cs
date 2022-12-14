@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules
 
         private int CalculateComplexity(SyntaxNode node)
         {
-            int complexity = 0;
+            var complexity = 0;
             Stack<SyntaxNode> stack = new();
             stack.Push(node);
             while (stack.TryPop(out var current))
