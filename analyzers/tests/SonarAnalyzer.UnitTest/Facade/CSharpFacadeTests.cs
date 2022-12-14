@@ -104,7 +104,7 @@ public class CSharpFacadeTests
         var methodDeclaration = root.DescendantNodes().OfType<MethodDeclarationSyntax>().First();
         var method = model.GetDeclaredSymbol(methodDeclaration);
         var actual = () => sut.MethodParameterLookup(methodDeclaration, method); // MethodDeclarationSyntax passed instead of invocation
-        actual.Should().Throw<ArgumentException>().WithMessage("Microsoft.CodeAnalysis.CSharp.Syntax.MethodDeclarationSyntax does not contain an ArgumentList. (Parameter 'invocation')");
+        actual.Should().Throw<ArgumentException>().Which.Message.Should().StartWith("Microsoft.CodeAnalysis.CSharp.Syntax.MethodDeclarationSyntax does not contain an ArgumentList.");
     }
 
     [TestMethod]
