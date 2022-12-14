@@ -73,31 +73,31 @@ public sealed class SonarAnalysisContext : SonarAnalysisContextBase
 
     // FIXME: Better names for these pairs
     public void RegisterCodeBlockStartAction<TSyntaxKind>(Action<SonarCodeBlockStartAnalysisContext<TSyntaxKind>> action) where TSyntaxKind : struct =>
-        analysisContext.RegisterCodeBlockStartAction<TSyntaxKind>(c => Execute<SonarCodeBlockStartAnalysisContext<TSyntaxKind>, CodeBlockStartAnalysisContext<TSyntaxKind>>(new(this, c), action));
+        context.RegisterCodeBlockStartAction<TSyntaxKind>(c => Execute<SonarCodeBlockStartAnalysisContext<TSyntaxKind>, CodeBlockStartAnalysisContext<TSyntaxKind>>(new(this, c), action));
 
     public void RegisterCodeBlockStartActionInNonGenerated<TSyntaxKind>(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarCodeBlockStartAnalysisContext<TSyntaxKind>> action)
         where TSyntaxKind : struct =>
         analysisContext.RegisterCodeBlockStartAction<TSyntaxKind>(c => Execute<SonarCodeBlockStartAnalysisContext<TSyntaxKind>, CodeBlockStartAnalysisContext<TSyntaxKind>>(new(this, c), action, generatedCodeRecognizer));    // FIXME: Rename generatedCodeRecognizer everywhere
 
     public void RegisterCompilationAction(Action<SonarCompilationAnalysisContext> action) =>
-        analysisContext.RegisterCompilationAction(c => Execute<SonarCompilationAnalysisContext, CompilationAnalysisContext>(new(this, c), action));
+        context.RegisterCompilationAction(c => Execute<SonarCompilationAnalysisContext, CompilationAnalysisContext>(new(this, c), action));
 
     public void RegisterCompilationStartAction(Action<SonarCompilationStartAnalysisContext> action) =>
-        analysisContext.RegisterCompilationStartAction(c => Execute<SonarCompilationStartAnalysisContext, CompilationStartAnalysisContext>(new(this, c), action));
+        context.RegisterCompilationStartAction(c => Execute<SonarCompilationStartAnalysisContext, CompilationStartAnalysisContext>(new(this, c), action));
 
     public void RegisterSymbolAction(Action<SonarSymbolAnalysisContext> action, params SymbolKind[] symbolKinds) =>
-        analysisContext.RegisterSymbolAction(c => Execute<SonarSymbolAnalysisContext, SymbolAnalysisContext>(new(this, c), action), symbolKinds);
+        context.RegisterSymbolAction(c => Execute<SonarSymbolAnalysisContext, SymbolAnalysisContext>(new(this, c), action), symbolKinds);
 
     // FIXME: Better names for these pairs
     public void RegisterSyntaxNodeAction<TSyntaxKind>(Action<SonarSyntaxNodeAnalysisContext> action, params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct =>
-        analysisContext.RegisterSyntaxNodeAction(c => Execute<SonarSyntaxNodeAnalysisContext, SyntaxNodeAnalysisContext>(new(this, c), action), syntaxKinds);
+        context.RegisterSyntaxNodeAction(c => Execute<SonarSyntaxNodeAnalysisContext, SyntaxNodeAnalysisContext>(new(this, c), action), syntaxKinds);
 
     public void RegisterSyntaxNodeActionInNonGenerated<TSyntaxKind>(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxNodeAnalysisContext> action, params TSyntaxKind[] syntaxKinds)
         where TSyntaxKind : struct =>
         analysisContext.RegisterSyntaxNodeAction(c => Execute<SonarSyntaxNodeAnalysisContext, SyntaxNodeAnalysisContext>(new(this, c), action, generatedCodeRecognizer), syntaxKinds);
 
     public void RegisterSyntaxTreeAction(Action<SonarSyntaxTreeAnalysisContext> action) =>
-        analysisContext.RegisterCompilationStartAction(WrapSyntaxTreeAction(action));
+        context.RegisterCompilationStartAction(WrapSyntaxTreeAction(action));
 
     public void RegisterSyntaxTreeActionInNonGenerated(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxTreeAnalysisContext> action) =>
         analysisContext.RegisterCompilationStartAction(WrapSyntaxTreeAction(action, generatedCodeRecognizer));
