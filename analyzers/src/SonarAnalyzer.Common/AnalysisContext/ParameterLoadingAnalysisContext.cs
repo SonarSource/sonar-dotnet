@@ -18,9 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis.Text;
+
 namespace SonarAnalyzer.Helpers;
 
-public sealed class ParameterLoadingAnalysisContext : SonarAnalysisContextBase // FIXME: Refactor
+public sealed class ParameterLoadingAnalysisContext : SonarAnalysisContextBase
 {
     private readonly List<Action<CompilationStartAnalysisContext>> compilationStartActions = new();
 
@@ -33,4 +35,7 @@ public sealed class ParameterLoadingAnalysisContext : SonarAnalysisContextBase /
     internal void RegisterCompilationStartAction(Action<CompilationStartAnalysisContext> action) =>
         // only collect compilation start actions and call them later
         compilationStartActions.Add(action);
+
+    public override bool TryGetValue<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value) =>
+        Context.TryGetValue(text, valueProvider, out value);
 }
