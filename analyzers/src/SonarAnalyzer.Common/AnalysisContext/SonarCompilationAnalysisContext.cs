@@ -37,6 +37,14 @@ public sealed class SonarCompilationAnalysisContext : SonarAnalysisContextBase<C
     public void ReportIssue(Diagnostic diagnostic) =>
         ReportIssue(new ReportingContext(Context, diagnostic));
 
+    public void ReportDiagnosticIfNonGenerated(GeneratedCodeRecognizer generatedCodeRecognizer, Diagnostic diagnostic)
+    {
+        if (ShouldAnalyze(generatedCodeRecognizer, diagnostic.Location.SourceTree, Compilation, Options))
+        {
+            ReportIssue(diagnostic);
+        }
+    }
+
     internal IEnumerable<string> WebConfigFiles()
     {
         return ProjectConfiguration().FilesToAnalyze.FindFiles(WebConfigRegex).Where(ShouldProcess);

@@ -25,17 +25,13 @@ namespace SonarAnalyzer.Rules
     {
         protected const string DiagnosticId = "S2612";
         protected const string Everyone = "Everyone";
-
         private const string MessageFormat = "Make sure this permission is safe.";
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
-
         protected readonly DiagnosticDescriptor Rule;
 
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
-
         protected abstract void VisitAssignments(SyntaxNodeAnalysisContext context);
-
         protected abstract void VisitInvocations(SyntaxNodeAnalysisContext context);
 
         protected LooseFilePermissionsBase(IAnalyzerConfiguration configuration) : base(configuration) =>
@@ -50,7 +46,6 @@ namespace SonarAnalyzer.Rules
                 }
 
                 c.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, VisitInvocations, Language.SyntaxKind.InvocationExpression);
-
                 c.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, VisitAssignments, Language.SyntaxKind.IdentifierName);
             });
 

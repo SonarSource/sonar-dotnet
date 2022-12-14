@@ -28,4 +28,7 @@ public sealed class SonarSyntaxTreeAnalysisContext : SonarAnalysisContextBase<Sy
 
     internal SonarSyntaxTreeAnalysisContext(SonarAnalysisContext analysisContext, SyntaxTreeAnalysisContext context, Compilation compilation) : base(analysisContext, context) =>
         Compilation = compilation;
+
+    public void ReportIssue(Diagnostic diagnostic) =>
+        ReportIssue(new ReportingContext(Context, diagnostic));
 }

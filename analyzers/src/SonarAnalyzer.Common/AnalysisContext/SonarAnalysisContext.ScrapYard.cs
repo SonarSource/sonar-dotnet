@@ -70,13 +70,6 @@ public partial class SonarAnalysisContext
     internal static bool IsRegisteredActionEnabled(IEnumerable<DiagnosticDescriptor> diagnostics, SyntaxTree tree) =>
         ShouldExecuteRegisteredAction == null || tree == null || ShouldExecuteRegisteredAction(diagnostics, tree);
 
-    // FIXME: Use the other one
-    public void RegisterCompilationStartAction(Action<CompilationStartAnalysisContext> action) =>
-        context.RegisterCompilationStartAction(c => Execute<SonarCompilationStartAnalysisContext, CompilationStartAnalysisContext>(new(this, c), x => action(x.Context)));
-
-    //public void RegisterCompilationStartAction(Action<SonarCompilationStartAnalysisContext> action) =>
-    //    context.RegisterCompilationStartAction(c => Execute<SonarCompilationStartAnalysisContext, CompilationStartAnalysisContext>(new(this, c), action));
-
     /// <summary>
     /// Reads configuration from SonarProjectConfig.xml file and caches the result for scope of this analysis.
     /// </summary>
