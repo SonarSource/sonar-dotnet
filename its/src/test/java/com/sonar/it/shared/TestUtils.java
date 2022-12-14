@@ -205,7 +205,7 @@ public class TestUtils {
     return newWsClient(orch).issues().search(new org.sonarqube.ws.client.issues.SearchRequest().setComponentKeys(Collections.singletonList(componentKey))).getIssuesList();
   }
 
-  public static List<Issues.Issue> getIssuesOnPR(Orchestrator orch, String componentKey, String pullRequestKey) {
+  public static List<Issues.Issue> getIssues(Orchestrator orch, String componentKey, String pullRequestKey) {
     return newWsClient(orch).issues().search(new org.sonarqube.ws.client.issues.SearchRequest().setComponentKeys(Collections.singletonList(componentKey)).setPullRequest(pullRequestKey)).getIssuesList();
   }
 

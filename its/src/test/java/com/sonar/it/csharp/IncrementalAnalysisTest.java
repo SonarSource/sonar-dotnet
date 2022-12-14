@@ -56,9 +56,9 @@ public class IncrementalAnalysisTest {
     Tests.analyzeProject(temp, PROJECT, null, "sonar.branch.name", "base-branch", "sonar.analysisCache.enabled", "false");
     Path projectDir = Tests.projectDir(temp, PROJECT);
     File withChangesPath = projectDir.resolve("IncrementalPRAnalysis\\WithChanges.cs").toFile();
-    addFixMeCommentToFile(withChangesPath);
+    addIssue(withChangesPath);
 
-    BeginAndEndStepResults results = ExecuteAnalysisForPRBranch(PROJECT, projectDir, "");
+    BeginAndEndStepResults results = executeAnalysisForPRBranch(projectDir, "");
     BuildResult beginStepResults = results.getBeginStepResult();
     BuildResult endStepResults = results.getEndStepResult();
 
@@ -67,7 +67,7 @@ public class IncrementalAnalysisTest {
     assertThat(beginStepResults.getLogs()).contains("Processing pull request with base branch 'base-branch'.");
     assertThat(beginStepResults.getLogs()).contains("Cache data is not available. Incremental PR analysis is disabled.");
     assertAllFilesWereAnalysed(endStepResults, projectDir);
-    List<Issues.Issue> allIssues = TestUtils.getIssuesOnPR(ORCHESTRATOR, PROJECT, "42");
+    List<Issues.Issue> allIssues = TestUtils.getIssues(ORCHESTRATOR, PROJECT, "42");
     assertThat(allIssues).hasSize(1);
     assertThat(allIssues.get(0).getRule()).isEqualTo("csharpsquid:S1134");
   }
@@ -77,15 +77,15 @@ public class IncrementalAnalysisTest {
     Tests.analyzeProject(temp, PROJECT, null, "sonar.branch.name", "base-branch");
     Path projectDir = Tests.projectDir(temp, PROJECT);
 
-    BeginAndEndStepResults results = ExecuteAnalysisForPRBranch(PROJECT, projectDir, "");
+    BeginAndEndStepResults results = executeAnalysisForPRBranch(projectDir, "");
     BuildResult beginStepResults = results.getBeginStepResult();
     BuildResult endStepResults = results.getEndStepResult();
 
     assertTrue(endStepResults.isSuccess());
     assertCacheIsUsed(beginStepResults);
     assertThat(endStepResults.getLogs()).doesNotContain("Adding normal issue S1134");
-    List<Issues.Issue> allIssues = TestUtils.getIssuesOnPR(ORCHESTRATOR, PROJECT, "42");
-    assertThat(allIssues).hasSize(0);
+    List<Issues.Issue> allIssues = TestUtils.getIssues(ORCHESTRATOR, PROJECT, "42");
+    assertThat(allIssues).isEmpty();
   }
 
   @Test
@@ -95,11 +95,11 @@ public class IncrementalAnalysisTest {
     File unchanged1Path = projectDir.resolve("IncrementalPRAnalysis\\Unchanged1.cs").toFile();
     File unchanged2Path = projectDir.resolve("IncrementalPRAnalysis\\Unchanged2.cs").toFile();
     File withChangesPath = projectDir.resolve("IncrementalPRAnalysis\\WithChanges.cs").toFile();
-    addFixMeCommentToFile(withChangesPath);
+    addIssue(withChangesPath);
     File fileToBeAddedPath = projectDir.resolve("IncrementalPRAnalysis\\AddedFile.cs").toFile();
-    addNewFileWithFixeMeComment(fileToBeAddedPath);
+    createFileWithIssue(fileToBeAddedPath);
 
-    BeginAndEndStepResults results = ExecuteAnalysisForPRBranch(PROJECT, projectDir, "");
+    BeginAndEndStepResults results = executeAnalysisForPRBranch(projectDir, "");
     BuildResult beginStepResults = results.getBeginStepResult();
     BuildResult endStepResults = results.getEndStepResult();
 
@@ -109,7 +109,7 @@ public class IncrementalAnalysisTest {
     assertThat(endStepResults.getLogs()).doesNotContain("Adding normal issue S1134: " + unchanged2Path);
     assertThat(endStepResults.getLogs()).contains("Adding normal issue S1134: " + withChangesPath);
     assertThat(endStepResults.getLogs()).contains("Adding normal issue S1134: " + fileToBeAddedPath);
-    List<Issues.Issue> allIssues = TestUtils.getIssuesOnPR(ORCHESTRATOR, PROJECT, "42");
+    List<Issues.Issue> allIssues = TestUtils.getIssues(ORCHESTRATOR, PROJECT, "42");
     assertThat(allIssues).hasSize(2);
     assertThat(allIssues.get(0).getRule()).isEqualTo("csharpsquid:S1134");
     assertThat(allIssues.get(0).getComponent()).isEqualTo("IncrementalPRAnalysis:IncrementalPRAnalysis/AddedFile.cs");
@@ -122,16 +122,16 @@ public class IncrementalAnalysisTest {
     Tests.analyzeProject(temp, PROJECT, null, "sonar.branch.name", "base-branch");
     Path projectDir = Tests.projectDir(temp, PROJECT);
     File withChangesPath = projectDir.resolve("IncrementalPRAnalysis\\WithChanges.cs").toFile();
-    addFixMeCommentToFile(withChangesPath);
+    addIssue(withChangesPath);
 
-    BeginAndEndStepResults results = ExecuteAnalysisForPRBranch(PROJECT, projectDir, PROJECT);
+    BeginAndEndStepResults results = executeAnalysisForPRBranch(projectDir, PROJECT);
     BuildResult beginStepResults = results.getBeginStepResult();
     BuildResult endStepResults = results.getEndStepResult();
 
     assertTrue(endStepResults.isSuccess());
     assertCacheIsUsed(beginStepResults);
     assertAllFilesWereAnalysed(endStepResults, projectDir);
-    List<Issues.Issue> allIssues = TestUtils.getIssuesOnPR(ORCHESTRATOR, PROJECT, "42");
+    List<Issues.Issue> allIssues = TestUtils.getIssues(ORCHESTRATOR, PROJECT, "42");
     assertThat(allIssues).hasSize(3);
     assertThat(allIssues.get(0).getRule()).isEqualTo("csharpsquid:S1134");
     assertThat(allIssues.get(0).getComponent()).isEqualTo("IncrementalPRAnalysis:Unchanged1.cs");
@@ -156,13 +156,13 @@ public class IncrementalAnalysisTest {
     assertThat(beginStepResults.getLogs()).contains("Downloading cache. Project key: " + PROJECT + ", branch: base-branch.");
   }
 
-  private void addFixMeCommentToFile(File file) throws IOException{
+  private void addIssue(File file) throws IOException {
     BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
     writer.append("// FIXME: S1134");
     writer.close();
   }
 
-  private void addNewFileWithFixeMeComment(File file) throws IOException{
+  private void createFileWithIssue(File file) throws IOException {
     BufferedWriter writer = new BufferedWriter(new FileWriter(file));
     writer.write("namespace IncrementalPRAnalysis\n" +
       "{\n" +
@@ -173,7 +173,7 @@ public class IncrementalAnalysisTest {
     writer.close();
   }
 
-  private BeginAndEndStepResults ExecuteAnalysisForPRBranch(String projectName, Path projectDir, String subProjectName) {
+  private BeginAndEndStepResults executeAnalysisForPRBranch(Path projectDir, String subProjectName) {
     ScannerForMSBuild beginStep;
     if (subProjectName.isEmpty()){
       beginStep = TestUtils.createBeginStep(PROJECT, projectDir);
@@ -193,11 +193,11 @@ public class IncrementalAnalysisTest {
     return new BeginAndEndStepResults(beginStepResults, endStepResults);
   }
 
-  private class BeginAndEndStepResults{
-    private BuildResult beginStepResult;
-    private BuildResult endStepResult;
+  private final class BeginAndEndStepResults {
+    private final BuildResult beginStepResult;
+    private final BuildResult endStepResult;
 
-    public BeginAndEndStepResults(BuildResult beginStepResult, BuildResult endStepResult){
+    public BeginAndEndStepResults(BuildResult beginStepResult, BuildResult endStepResult) {
       this.beginStepResult = beginStepResult;
       this.endStepResult = endStepResult;
     }
