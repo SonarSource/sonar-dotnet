@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules
             context.RegisterCompilationAction(CheckWebConfig);
         }
 
-        private void CheckController(SymbolAnalysisContext c)
+        private void CheckController(SonarSymbolAnalysisContext c)
         {
             if (!IsEnabled(c.Options))
             {

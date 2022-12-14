@@ -32,24 +32,24 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSymbolAction(
-                analysisContext =>
+                c =>
                 {
-                    var namedType = (INamedTypeSymbol)analysisContext.Symbol;
+                    var namedType = (INamedTypeSymbol)c.Symbol;
                     if (ShouldExclude(namedType))
                     {
                         return;
                     }
 
-                    var message = GetMessage(namedType, analysisContext);
+                    var message = GetMessage(c, namedType);
                     if (string.IsNullOrEmpty(message))
                     {
                         return;
                     }
 
-                    var typeDeclarations = new CSharpRemovableDeclarationCollector(namedType, analysisContext.Compilation).TypeDeclarations;
+                    var typeDeclarations = new CSharpRemovableDeclarationCollector(namedType, c.Compilation).TypeDeclarations;
                     foreach (var classDeclaration in typeDeclarations)
                     {
-                        analysisContext.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, classDeclaration.Node.Identifier.GetLocation(), message));
+                        c.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, classDeclaration.Node.Identifier.GetLocation(), message));
                     }
                 },
                 SymbolKind.NamedType);
@@ -59,11 +59,11 @@ namespace SonarAnalyzer.Rules.CSharp
             || typeSymbol.Implements(KnownType.System_IDisposable)
             || typeSymbol.Implements(KnownType.System_IAsyncDisposable);
 
-        private static string GetMessage(INamespaceOrTypeSymbol namedType, SymbolAnalysisContext analysisContext)
+        private static string GetMessage(SonarSymbolAnalysisContext context, INamespaceOrTypeSymbol namedType)
         {
             var disposableFields = namedType.GetMembers()
                                             .OfType<IFieldSymbol>()
-                                            .Where(fs => fs.IsNonStaticNonPublicDisposableField(analysisContext.Compilation.GetLanguageVersion()))
+                                            .Where(fs => fs.IsNonStaticNonPublicDisposableField(context.Compilation.GetLanguageVersion()))
                                             .ToHashSet();
 
             if (disposableFields.Count == 0)
@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var otherInitializationsOfFields = namedType.GetMembers()
                                                         .OfType<IMethodSymbol>()
-                                                        .SelectMany(m => GetAssignmentsToFieldsIn(m, analysisContext.Compilation))
+                                                        .SelectMany(m => GetAssignmentsToFieldsIn(m, context.Compilation))
                                                         .Where(f => disposableFields.Contains(f));
 
             return disposableFields.Where(IsOwnerSinceDeclaration)
