@@ -33,5 +33,10 @@ namespace SonarAnalyzer.Helpers
             var toString = node.ToString();
             return toString.Contains(a) || toString.Contains(b);
         }
+
+        public static TSyntaxKind Kind<TSyntaxKind>(this SyntaxNode node) where TSyntaxKind : struct, Enum
+            => node == null
+                ? default
+                : (TSyntaxKind)(object)node.RawKind;
     }
 }
