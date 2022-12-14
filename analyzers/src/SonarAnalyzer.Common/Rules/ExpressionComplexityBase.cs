@@ -75,26 +75,4 @@ namespace SonarAnalyzer.Rules
             return complexity;
         }
     }
-
-    public static class StackExtensions
-    {
-        public static bool TryPop<T>(this Stack<T> stack, out T result)
-        {
-            if (stack.Count > 0)
-            {
-                result = stack.Pop();
-                return true;
-            }
-            result = default;
-            return false;
-        }
-
-        public static void Push<T>(this Stack<T> stack, IEnumerable<T> items)
-        {
-            foreach (var item in items)
-            {
-                stack.Push(item);
-            }
-        }
-    }
 }
