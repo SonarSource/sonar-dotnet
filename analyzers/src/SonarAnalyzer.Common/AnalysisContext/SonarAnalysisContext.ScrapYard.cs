@@ -33,9 +33,9 @@ namespace SonarAnalyzer;
 /// </summary>
 public partial class SonarAnalysisContext
 {
-    public delegate bool TryGetValueDelegate<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value);     // FIXME: Done
+    public delegate bool TryGetValueDelegate<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value);     // FIXME: Done, to be deleted
 
-    private static readonly SourceTextValueProvider<ProjectConfigReader> ProjectConfigProvider = new(x => new ProjectConfigReader(x));  // FIXME: Done
+    private static readonly SourceTextValueProvider<ProjectConfigReader> ProjectConfigProvider = new(x => new ProjectConfigReader(x));      // FIXME: Done, to be deleted
 
     public bool IsScannerRun(AnalyzerOptions options) =>
         ProjectConfiguration(context.TryGetValue, options).IsScannerRun;
@@ -49,7 +49,7 @@ public partial class SonarAnalysisContext
     public static bool IsTestProject(CompilationAnalysisContext analysisContext) =>
         IsTestProject(analysisContext.TryGetValue, analysisContext.Compilation, analysisContext.Options);
 
-    internal static ProjectConfigReader ProjectConfiguration(TryGetValueDelegate<ProjectConfigReader> tryGetValue, AnalyzerOptions options) // FIXME: Done
+    private static ProjectConfigReader ProjectConfiguration(TryGetValueDelegate<ProjectConfigReader> tryGetValue, AnalyzerOptions options) // FIXME: Done, to be deleted
     {
         if (options.SonarProjectConfig() is { } sonarProjectConfigXml)
         {
@@ -65,7 +65,7 @@ public partial class SonarAnalysisContext
         }
     }
 
-    private static bool IsTestProject(TryGetValueDelegate<ProjectConfigReader> tryGetValue, Compilation compilation, AnalyzerOptions options)   // FIXME: Done
+    private static bool IsTestProject(TryGetValueDelegate<ProjectConfigReader> tryGetValue, Compilation compilation, AnalyzerOptions options)   // FIXME: Done, to be deleted
     {
         var projectType = ProjectConfiguration(tryGetValue, options).ProjectType;
         return projectType == ProjectType.Unknown
