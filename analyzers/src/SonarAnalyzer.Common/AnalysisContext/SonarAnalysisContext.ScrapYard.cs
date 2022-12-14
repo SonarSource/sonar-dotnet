@@ -84,13 +84,6 @@ public partial class SonarAnalysisContext
     //public void RegisterSymbolAction(Action<SonarSymbolAnalysisContext> action, params SymbolKind[] symbolKinds) =>
     //    context.RegisterSymbolAction(c => Execute<SonarSymbolAnalysisContext, SymbolAnalysisContext>(new(this, c), action), symbolKinds);
 
-    // FIXME: Use the other one
-    internal void RegisterCodeBlockStartAction<TSyntaxKind>(Action<CodeBlockStartAnalysisContext<TSyntaxKind>> action) where TSyntaxKind : struct =>
-        analysisContext.RegisterCodeBlockStartAction<TSyntaxKind>(c => Execute<SonarCodeBlockStartAnalysisContext<TSyntaxKind>, CodeBlockStartAnalysisContext<TSyntaxKind>>(new(this, c), x => action(x.Context)));
-
-    //internal void RegisterCodeBlockStartAction<TSyntaxKind>(Action<SonarCodeBlockStartAnalysisContext<TSyntaxKind>> action) where TSyntaxKind : struct =>
-    //    context.RegisterCodeBlockStartAction<TSyntaxKind>(c => Execute<SonarCodeBlockStartAnalysisContext<TSyntaxKind>, CodeBlockStartAnalysisContext<TSyntaxKind>>(new(this, c), action));
-
     /// <summary>
     /// Reads configuration from SonarProjectConfig.xml file and caches the result for scope of this analysis.
     /// </summary>
