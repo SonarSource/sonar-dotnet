@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Helpers
             return toString.Contains(a) || toString.Contains(b);
         }
 
-        public static TSyntaxKind Kind<TSyntaxKind>(this SyntaxNode node) where TSyntaxKind : struct, Enum
+        internal static TSyntaxKind Kind<TSyntaxKind>(this SyntaxNode node) where TSyntaxKind : struct, Enum // internal to not be confused with e.g. CSharp.SyntaxNode.Kind()
             => node == null
                 ? default
                 : (TSyntaxKind)Enum.ToObject(typeof(TSyntaxKind), node.RawKind);
