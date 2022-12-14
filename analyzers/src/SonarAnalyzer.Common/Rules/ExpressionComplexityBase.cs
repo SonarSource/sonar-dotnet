@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules
             stack.Push(node);
             while (stack.TryPop(out var current))
             {
-                if (current.Kind<TSyntaxKind>() is var kind && ComplexityIncreasingKinds.Contains(kind))
+                if (ComplexityIncreasingKinds.Contains(current.Kind<TSyntaxKind>()))
                 {
                     complexity++;
                 }
