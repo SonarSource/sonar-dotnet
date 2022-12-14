@@ -41,7 +41,7 @@ public abstract class SonarAnalysisContextBase
     /// <summary>
     /// Reads configuration from SonarProjectConfig.xml file and caches the result for scope of this analysis.
     /// </summary>
-    protected ProjectConfigReader ProjectConfiguration(AnalyzerOptions options)
+    public ProjectConfigReader ProjectConfiguration(AnalyzerOptions options)
     {
         if (options.SonarProjectConfig() is { } sonarProjectConfig)
         {

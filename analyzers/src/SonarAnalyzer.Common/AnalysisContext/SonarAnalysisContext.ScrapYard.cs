@@ -39,7 +39,7 @@ public partial class SonarAnalysisContext
     private static readonly SourceTextValueProvider<ProjectConfigReader> ProjectConfigProvider = new(x => new ProjectConfigReader(x));  // FIXME: Remove, it was migrated to the SonarAnalysisContextBase
 
     public bool IsScannerRun(AnalyzerOptions options) =>
-        ProjectConfiguration(options).IsScannerRun;
+        ProjectConfiguration(context.TryGetValue, options).IsScannerRun;
 
     public static bool IsScannerRun(CompilationAnalysisContext context) =>
         ProjectConfiguration(context.TryGetValue, context.Options).IsScannerRun;
@@ -49,12 +49,6 @@ public partial class SonarAnalysisContext
 
     public static bool IsTestProject(CompilationAnalysisContext analysisContext) =>
         IsTestProject(analysisContext.TryGetValue, analysisContext.Compilation, analysisContext.Options);
-
-    /// <summary>
-    /// Reads configuration from SonarProjectConfig.xml file and caches the result for scope of this analysis.
-    /// </summary>
-    internal ProjectConfigReader ProjectConfiguration(AnalyzerOptions options) =>   // FIXME: Remove, it was migrated to the SonarAnalysisContextBase
-        ProjectConfiguration(analysisContext.TryGetValue, options);
 
     internal static ProjectConfigReader ProjectConfiguration(TryGetValueDelegate<ProjectConfigReader> tryGetValue, AnalyzerOptions options) // FIXME: Remove, it was migrated to the SonarAnalysisContextBase
     {
