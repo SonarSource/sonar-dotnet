@@ -63,6 +63,7 @@ namespace SonarAnalyzer.Rules
         {
             var complexity = 0;
             Stack<SyntaxNode> stack = new();
+
             stack.Push(node);
             while (stack.TryPop(out var current))
             {
@@ -72,6 +73,7 @@ namespace SonarAnalyzer.Rules
                 }
                 stack.Push(ExpressionChildren(current));
             }
+
             return complexity;
         }
     }
