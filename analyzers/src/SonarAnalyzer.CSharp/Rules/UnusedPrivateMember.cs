@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     // or not.
                     var removableInternalTypes = new HashSet<ISymbol>();
 
-                    c.RegisterSymbolAction(x => NamedSymbolAction(new(context, x), removableInternalTypes), SymbolKind.NamedType);
+                    c.RegisterSymbolAction(x => NamedSymbolAction(x, removableInternalTypes), SymbolKind.NamedType);
                     c.RegisterCompilationEndAction(
                         cc =>
                         {
@@ -63,19 +63,15 @@ namespace SonarAnalyzer.Rules.CSharp
                                 return;
                             }
 
-                            var usageCollector = new CSharpSymbolUsageCollector(c.Compilation, removableInternalTypes.ToHashSet());
+                            var usageCollector = new CSharpSymbolUsageCollector(c.Compilation, removableInternalTypes);
                             foreach (var syntaxTree in c.Compilation.SyntaxTrees.Where(tree => !tree.IsGenerated(CSharpGeneratedCodeRecognizer.Instance, c.Compilation)))
                             {
                                 usageCollector.SafeVisit(syntaxTree.GetRoot());
                             }
-
-                            var diagnostics = DiagnosticsForUnusedPrivateMembers(
-                                usageCollector,
-                                removableInternalTypes.ToHashSet(),
-                                SyntaxConstants.Internal,
-                                new BidirectionalDictionary<ISymbol, SyntaxNode>());
-
-                            cc.ReportDiagnosticIfNonGenerated(diagnostics);
+                            foreach (var diagnostic in DiagnosticsForUnusedPrivateMembers(usageCollector, removableInternalTypes, SyntaxConstants.Internal, new()))
+                            {
+                                cc.ReportDiagnosticIfNonGenerated(diagnostic);
+                            }
                         });
                 });
 

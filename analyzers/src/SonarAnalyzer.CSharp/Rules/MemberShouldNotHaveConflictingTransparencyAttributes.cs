@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void ReportOnConflictingTransparencyAttributes(CompilationAnalysisContext compilationContext,
+        private static void ReportOnConflictingTransparencyAttributes(SonarCompilationAnalysisContext compilationContext,
                                                                       Dictionary<SyntaxNode, AttributeSyntax> nodesWithSecuritySafeCritical,
                                                                       Dictionary<SyntaxNode, AttributeSyntax> nodesWithSecurityCritical)
         {

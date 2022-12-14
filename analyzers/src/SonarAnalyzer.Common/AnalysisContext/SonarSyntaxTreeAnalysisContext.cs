@@ -20,23 +20,15 @@
 
 namespace SonarAnalyzer;
 
-public sealed class SonarSymbolAnalysisContext : SonarAnalysisContextBase<SymbolAnalysisContext>
+public sealed class SonarSyntaxTreeAnalysisContext : SonarAnalysisContextBase<SyntaxTreeAnalysisContext>
 {
-    public override SyntaxTree Tree => Context.GetFirstSyntaxTree();
-    public override Compilation Compilation => Context.Compilation;
+    public override SyntaxTree Tree => Context.Tree;
+    public override Compilation Compilation { get; }    // SyntaxTreeAnalysisContext doens't hold a Compilation reference
     public override AnalyzerOptions Options => Context.Options;
-    public ISymbol Symbol => Context.Symbol;
 
-    internal SonarSymbolAnalysisContext(SonarAnalysisContext analysisContext, SymbolAnalysisContext context) : base(analysisContext, context) { }
+    internal SonarSyntaxTreeAnalysisContext(SonarAnalysisContext analysisContext, SyntaxTreeAnalysisContext context, Compilation compilation) : base(analysisContext, context) =>
+        Compilation = compilation;
 
     public void ReportIssue(Diagnostic diagnostic) =>
         ReportIssue(new ReportingContext(Context, diagnostic));
-
-    public void ReportDiagnosticIfNonGenerated(GeneratedCodeRecognizer generatedCodeRecognizer, Diagnostic diagnostic)
-    {
-        if (ShouldAnalyze(generatedCodeRecognizer, diagnostic.Location.SourceTree, Compilation, Options))
-        {
-            ReportIssue(diagnostic);
-        }
-    }
 }

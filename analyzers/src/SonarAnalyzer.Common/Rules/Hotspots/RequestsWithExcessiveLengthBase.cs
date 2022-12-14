@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Rules
 
         protected override void Initialize(ParameterLoadingAnalysisContext context)
         {
-            context.RegisterCompilationStartAction(
+            context.RegisterPostponedAction(
                 c =>
                 {
                     var attributesOverTheLimit = new Dictionary<SyntaxNode, Attributes>();
@@ -116,7 +116,7 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        private void ReportOnCollectedAttributes(CompilationAnalysisContext context, IDictionary<SyntaxNode, Attributes> attributesOverTheLimit)
+        private void ReportOnCollectedAttributes(SonarCompilationAnalysisContext context, IDictionary<SyntaxNode, Attributes> attributesOverTheLimit)
         {
             foreach (var invalidAttributes in attributesOverTheLimit.Values)
             {

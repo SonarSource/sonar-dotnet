@@ -22,18 +22,31 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace SonarAnalyzer.Helpers;
 
-public sealed class ParameterLoadingAnalysisContext : SonarAnalysisContextBase // FIXME: Refactor
+public sealed class ParameterLoadingAnalysisContext : SonarAnalysisContextBase
 {
-    private readonly List<Action<CompilationStartAnalysisContext>> compilationStartActions = new();
+    private readonly List<Action<SonarCompilationStartAnalysisContext>> postponedActions = new();
 
-    internal SonarAnalysisContext Context { get; }
-    internal IEnumerable<Action<CompilationStartAnalysisContext>> CompilationStartActions => compilationStartActions;
+    public SonarAnalysisContext Context { get; }
 
     internal ParameterLoadingAnalysisContext(SonarAnalysisContext context) =>
         Context = context;
 
-    internal void RegisterCompilationStartAction(Action<CompilationStartAnalysisContext> action) =>
-        compilationStartActions.Add(action);    // only collect compilation start actions and call them later
+    /// <summary>
+    /// Register CompilationStart action that will be executed once rule parameters are set.
+    /// </summary>
+    public void RegisterPostponedAction(Action<SonarCompilationStartAnalysisContext> action) =>
+        postponedActions.Add(action);
+
+    /// <summary>
+    /// Execution of postponed registration actions. This should be called once all rule parameters are set.
+    /// </summary>
+    public void ExecutePostponedActions(SonarCompilationStartAnalysisContext context)
+    {
+        foreach (var action in postponedActions)
+        {
+            action(context);
+        }
+    }
 
     public override bool TryGetValue<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value) =>
         Context.TryGetValue(text, valueProvider, out value);
