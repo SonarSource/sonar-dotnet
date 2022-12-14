@@ -105,9 +105,9 @@ Variable name `sut` (System Under Test) is recommended in unit tests that really
             // Action
         }
     ```
-* When using arrow property or method, the arrow is always on the same line with the declaration. Regarding the body:
-  * Expression body of arrow property should be on the same line, as the property declaration. It should be on next line only when S103 is violated.
-  * Expression body of method should be on the same line only for trivial cases: literal or simple identifier. Member access, indexer, invocation and other complex structures should be on the next line.
+* When using an arrow property or an arrow method, the `=>` token must be on the same line as the declaration. Regarding the expression body:
+  * for properties: it should be on the same line, as the property declaration. It should be on the next line only when S103 is violated.
+  * for methods: it should be on the same line only for trivial cases: literal or simple identifier. Member access, indexer, invocation and other complex structures should be on the next line.
 
 ## Code structure
 
