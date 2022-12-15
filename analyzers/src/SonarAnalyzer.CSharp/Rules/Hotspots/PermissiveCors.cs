@@ -95,7 +95,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 tracker.MatchConstructor(KnownType.Microsoft_AspNetCore_Cors_Infrastructure_CorsPolicyBuilder),
                 c => ContainsStar(ObjectCreationFactory.Create(c.Node), c.SemanticModel));
 
-        private void VisitAttribute(SyntaxNodeAnalysisContext context)
+        private void VisitAttribute(SonarSyntaxNodeAnalysisContext context)
         {
             var attribute = (AttributeSyntax)context.Node;
             if (attribute.IsKnownType(KnownType.System_Web_Http_Cors_EnableCorsAttribute, context.SemanticModel)

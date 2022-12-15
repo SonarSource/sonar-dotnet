@@ -28,7 +28,7 @@ namespace SonarAnalyzer.Rules
 
         protected abstract ISet<TSyntaxKind> LoopStatements { get; }
 
-        protected abstract LoopWalkerBase<TStatementSyntax, TSyntaxKind> GetWalker(SyntaxNodeAnalysisContext context);
+        protected abstract LoopWalkerBase<TStatementSyntax, TSyntaxKind> GetWalker(SonarSyntaxNodeAnalysisContext context);
 
         protected override string MessageFormat => "Refactor the containing loop to do more than one iteration.";
 
@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Rules
         protected List<TStatementSyntax> UnconditionalContinues { get; } = new List<TStatementSyntax>();
         protected List<TStatementSyntax> UnconditionalTerminates { get; } = new List<TStatementSyntax>();
 
-        protected LoopWalkerBase(SyntaxNodeAnalysisContext context, ISet<TLanguageKindEnum> loopStatements)
+        protected LoopWalkerBase(SonarSyntaxNodeAnalysisContext context, ISet<TLanguageKindEnum> loopStatements)
         {
             rootExpression = context.Node;
             semanticModel = context.SemanticModel;

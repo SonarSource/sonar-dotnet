@@ -84,7 +84,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     ccc.RegisterSyntaxNodeActionInNonGenerated(VerifyXmlReaderInvocations, SyntaxKind.InvocationExpression);
                 });
 
-        private void VerifyXmlReaderInvocations(SyntaxNodeAnalysisContext context)
+        private void VerifyXmlReaderInvocations(SonarSyntaxNodeAnalysisContext context)
         {
             var invocation = (InvocationExpressionSyntax)context.Node;
             if (!invocation.IsMemberAccessOnKnownType("Create", KnownType.System_Xml_XmlReader, context.SemanticModel))
@@ -105,7 +105,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private void VerifyXPathDocumentConstructor(SyntaxNodeAnalysisContext context, IObjectCreation objectCreation)
+        private void VerifyXPathDocumentConstructor(SonarSyntaxNodeAnalysisContext context, IObjectCreation objectCreation)
         {
             if (!context.SemanticModel.GetTypeInfo(objectCreation.Expression).Type.Is(KnownType.System_Xml_XPath_XPathDocument)
                 // If a XmlReader is provided in the constructor, XPathDocument will be as safe as the received reader.
@@ -117,7 +117,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (!IsXPathDocumentSecureByDefault(versionProvider.GetDotNetFrameworkVersion(context.Compilation)))
             {
-                context.ReportDiagnostic(Diagnostic.Create(Rule, objectCreation.Expression.GetLocation()));
+                context.ReportIssue(Diagnostic.Create(Rule, objectCreation.Expression.GetLocation()));
             }
         }
 

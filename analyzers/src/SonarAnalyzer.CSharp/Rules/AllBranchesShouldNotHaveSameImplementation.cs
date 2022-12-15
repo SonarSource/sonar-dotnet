@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ElseClause);
         }
 
-        private static void Analyze(SyntaxNodeAnalysisContext context, SwitchExpressionSyntaxWrapper switchExpression)
+        private static void Analyze(SonarSyntaxNodeAnalysisContext context, SwitchExpressionSyntaxWrapper switchExpression)
         {
             var arms = switchExpression.Arms;
             if (arms.Count < 2)
@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (switchExpression.HasDiscardPattern() &&
                 arms.Skip(1).All(arm => SyntaxFactory.AreEquivalent(arm.Expression, firstArm.Expression)))
             {
-                context.ReportDiagnostic(Diagnostic.Create(rule, switchExpression.SwitchKeyword.GetLocation(), StatementsMessage));
+                context.ReportIssue(Diagnostic.Create(rule, switchExpression.SwitchKeyword.GetLocation(), StatementsMessage));
             }
         }
 

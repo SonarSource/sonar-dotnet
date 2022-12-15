@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules
         protected abstract bool AreEquivalent(SyntaxNode node1, SyntaxNode node2);
 
         // LogicalAnd (C#) / AndAlso (VB)
-        protected void CheckAndExpression(SyntaxNodeAnalysisContext context)
+        protected void CheckAndExpression(SonarSyntaxNodeAnalysisContext context)
         {
             var binaryExpression = (TBinaryExpression)context.Node;
             var binaryExpressionLeft = GetLeftNode(binaryExpression);
@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules
         }
 
         // LogicalOr (C#) / OrElse (VB)
-        protected void CheckOrExpression(SyntaxNodeAnalysisContext context)
+        protected void CheckOrExpression(SonarSyntaxNodeAnalysisContext context)
         {
             var binaryExpression = (TBinaryExpression)context.Node;
             var binaryExpressionLeft = GetLeftNode(binaryExpression);

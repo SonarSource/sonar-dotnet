@@ -25,6 +25,7 @@ public sealed class SonarSyntaxTreeAnalysisContext : SonarAnalysisContextBase<Sy
     public override SyntaxTree Tree => Context.Tree;
     public override Compilation Compilation { get; }    // SyntaxTreeAnalysisContext doesn't hold a Compilation reference
     public override AnalyzerOptions Options => Context.Options;
+    public override CancellationToken Cancel => Context.CancellationToken;
 
     internal SonarSyntaxTreeAnalysisContext(SonarAnalysisContext analysisContext, SyntaxTreeAnalysisContext context, Compilation compilation) : base(analysisContext, context) =>
         Compilation = compilation;

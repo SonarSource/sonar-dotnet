@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(VisitEquality, SyntaxKind.EqualsExpression, SyntaxKind.NotEqualsExpression);
 
-        private static void VisitEquality(SyntaxNodeAnalysisContext c)
+        private static void VisitEquality(SonarSyntaxNodeAnalysisContext c)
         {
             var equalsExpression = (BinaryExpressionSyntax)c.Node;
 

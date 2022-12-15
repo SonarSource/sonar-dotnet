@@ -72,13 +72,11 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(CheckExtensionMethodsOnIEnumerable, SyntaxKind.InvocationExpression);
-
             context.RegisterSyntaxNodeActionInNonGenerated(CheckToCollectionCalls, SyntaxKind.InvocationExpression);
-
             context.RegisterSyntaxNodeActionInNonGenerated(CheckCountCall, SyntaxKind.InvocationExpression);
         }
 
-        private static void CheckCountCall(SyntaxNodeAnalysisContext context)
+        private static void CheckCountCall(SonarSyntaxNodeAnalysisContext context)
         {
             const string CountName = "Count";
 
@@ -99,7 +97,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 semanticModel.GetTypeInfo(expression).Type.GetMembers(CountName).OfType<IPropertySymbol>().Any();
         }
 
-        private static void CheckToCollectionCalls(SyntaxNodeAnalysisContext context)
+        private static void CheckToCollectionCalls(SonarSyntaxNodeAnalysisContext context)
         {
             var outerInvocation = (InvocationExpressionSyntax)context.Node;
             if (!(context.SemanticModel.GetSymbolInfo(outerInvocation).Symbol is IMethodSymbol outerMethodSymbol) ||
@@ -171,7 +169,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 methodSymbol.ContainingType.ConstructedFrom.Is(KnownType.System_Collections_Generic_List_T));
         }
 
-        private static void CheckExtensionMethodsOnIEnumerable(SyntaxNodeAnalysisContext context)
+        private static void CheckExtensionMethodsOnIEnumerable(SonarSyntaxNodeAnalysisContext context)
         {
             var outerInvocation = (InvocationExpressionSyntax)context.Node;
             if (!(context.SemanticModel.GetSymbolInfo(outerInvocation).Symbol is IMethodSymbol outerMethodSymbol) ||
@@ -192,12 +190,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            if (CheckForSimplifiable(outerMethodSymbol, outerInvocation, innerMethodSymbol, innerInvocation, context))
+            if (CheckForSimplifiable(context, outerMethodSymbol, outerInvocation, innerMethodSymbol, innerInvocation))
             {
                 return;
             }
 
-            CheckForCastSimplification(outerMethodSymbol, outerInvocation, innerMethodSymbol, innerInvocation, context);
+            CheckForCastSimplification(context, outerMethodSymbol, outerInvocation, innerMethodSymbol, innerInvocation);
         }
 
         private static InvocationExpressionSyntax GetInnerInvocation(InvocationExpressionSyntax outerInvocation,
@@ -234,8 +232,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 : invocation.ArgumentList.Arguments.Skip(1).ToList();
         }
 
-        private static void CheckForCastSimplification(IMethodSymbol outerMethodSymbol, InvocationExpressionSyntax outerInvocation,
-            IMethodSymbol innerMethodSymbol, InvocationExpressionSyntax innerInvocation, SyntaxNodeAnalysisContext context)
+        private static void CheckForCastSimplification(SonarSyntaxNodeAnalysisContext context, IMethodSymbol outerMethodSymbol, InvocationExpressionSyntax outerInvocation,
+            IMethodSymbol innerMethodSymbol, InvocationExpressionSyntax innerInvocation)
         {
             if (MethodNamesForTypeCheckingWithSelect.Contains(outerMethodSymbol.Name) &&
                 innerMethodSymbol.Name == SelectMethodName &&
@@ -395,8 +393,8 @@ namespace SonarAnalyzer.Rules.CSharp
             return true;
         }
 
-        private static bool CheckForSimplifiable(IMethodSymbol outerMethodSymbol, InvocationExpressionSyntax outerInvocation,
-            IMethodSymbol innerMethodSymbol, InvocationExpressionSyntax innerInvocation, SyntaxNodeAnalysisContext context)
+        private static bool CheckForSimplifiable(SonarSyntaxNodeAnalysisContext context, IMethodSymbol outerMethodSymbol, InvocationExpressionSyntax outerInvocation,
+            IMethodSymbol innerMethodSymbol, InvocationExpressionSyntax innerInvocation)
         {
             if (MethodIsNotUsingPredicate(outerMethodSymbol, outerInvocation) &&
                 innerMethodSymbol.Name == WhereMethodName &&

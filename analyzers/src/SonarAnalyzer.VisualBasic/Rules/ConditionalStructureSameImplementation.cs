@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     if (ifStatement.ElseClause != null &&
                         VisualBasicEquivalenceChecker.AreEquivalent(ifStatement.ElseClause.Statements, ifStatement.Statements))
                     {
-                        ReportIssue(ifStatement.ElseClause.Statements, ifStatement.Statements, c, "branch");
+                        ReportIssue(c, ifStatement.ElseClause.Statements, ifStatement.Statements, "branch");
                     }
                 },
                 SyntaxKind.SingleLineIfStatement);
@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
                     for (var i = 1; i < statements.Count; i++)
                     {
-                        CheckStatementsAt(i, statements, c, "branch");
+                        CheckStatementsAt(c, statements, i, "branch");
                     }
                 },
                 SyntaxKind.MultiLineIfBlock);
@@ -74,14 +74,13 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     var statements = select.CaseBlocks.Select(b => b.Statements).ToList();
                     for (var i = 1; i < statements.Count; i++)
                     {
-                        CheckStatementsAt(i, statements, c, "case");
+                        CheckStatementsAt(c, statements, i, "case");
                     }
                 },
                 SyntaxKind.SelectBlock);
         }
 
-        private static void CheckStatementsAt(int currentIndex, List<SyntaxList<StatementSyntax>> statements,
-            SyntaxNodeAnalysisContext context, string constructType)
+        private static void CheckStatementsAt(SonarSyntaxNodeAnalysisContext context, List<SyntaxList<StatementSyntax>> statements, int currentIndex, string constructType)
         {
             var currentBlockStatements = statements[currentIndex];
             if (currentBlockStatements.Count(IsApprovedStatement) < 2)
@@ -93,14 +92,13 @@ namespace SonarAnalyzer.Rules.VisualBasic
             {
                 if (VisualBasicEquivalenceChecker.AreEquivalent(currentBlockStatements, statements[j]))
                 {
-                    ReportIssue(currentBlockStatements, statements[j], context, constructType);
+                    ReportIssue(context, currentBlockStatements, statements[j], constructType);
                     return;
                 }
             }
         }
 
-        private static void ReportIssue(SyntaxList<StatementSyntax> statementsToReport, SyntaxList<StatementSyntax> locationProvider,
-            SyntaxNodeAnalysisContext context, string constructType)
+        private static void ReportIssue(SonarSyntaxNodeAnalysisContext context, SyntaxList<StatementSyntax> statementsToReport, SyntaxList<StatementSyntax> locationProvider, string constructType)
         {
             var firstStatement = statementsToReport.FirstOrDefault();
             if (firstStatement == null)

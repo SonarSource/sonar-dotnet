@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var castExpression = (CastExpressionSyntax)c.Node;
                     var castedTo = c.SemanticModel.GetTypeInfo(castExpression.Type).Type;
                     var castedFrom = c.SemanticModel.GetTypeInfo(castExpression.Expression).Type;
-                    CheckForIssue(castedTo, castedFrom, c);
+                    CheckForIssue(c, castedTo, castedFrom);
                 },
                 SyntaxKind.CastExpression);
 
@@ -49,13 +49,12 @@ namespace SonarAnalyzer.Rules.CSharp
                     var castExpression = (BinaryExpressionSyntax)c.Node;
                     var castedTo = c.SemanticModel.GetTypeInfo(castExpression.Right).Type;
                     var castedFrom = c.SemanticModel.GetTypeInfo(castExpression.Left).Type;
-                    CheckForIssue(castedTo, castedFrom, c);
+                    CheckForIssue(c, castedTo, castedFrom);
                 },
                 SyntaxKind.AsExpression);
         }
 
-        public static void CheckForIssue(ITypeSymbol castedTo, ITypeSymbol castedFrom,
-            SyntaxNodeAnalysisContext context)
+        public static void CheckForIssue(SonarSyntaxNodeAnalysisContext context, ITypeSymbol castedTo, ITypeSymbol castedFrom)
         {
             if (!castedFrom.Is(TypeKind.Interface) ||
                 !castedFrom.DeclaringSyntaxReferences.Any() ||

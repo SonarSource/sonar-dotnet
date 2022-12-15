@@ -27,7 +27,7 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S3466";
         protected const string MessageFormat = "Pass the missing user-supplied parameter value{0} to this 'base' call.";
 
-        protected void ReportOptionalParameterNotPassedToBase(SyntaxNodeAnalysisContext c, TInvocationExpressionSyntax invocation)
+        protected void ReportOptionalParameterNotPassedToBase(SonarSyntaxNodeAnalysisContext c, TInvocationExpressionSyntax invocation)
         {
             if (!(c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol calledMethod))
             {

@@ -37,15 +37,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var binary = (BinaryExpressionSyntax)c.Node;
-                    CheckGetTypeAndTypeOfEquality(binary.Left, binary.Right, binary.GetLocation(), c);
-                    CheckGetTypeAndTypeOfEquality(binary.Right, binary.Left, binary.GetLocation(), c);
+                    CheckGetTypeAndTypeOfEquality(c, binary.Left, binary.Right, binary.GetLocation());
+                    CheckGetTypeAndTypeOfEquality(c, binary.Right, binary.Left, binary.GetLocation());
                 },
                 SyntaxKind.EqualsExpression,
                 SyntaxKind.NotEqualsExpression);
         }
 
-        private static void CheckGetTypeAndTypeOfEquality(ExpressionSyntax sideA, ExpressionSyntax sideB, Location location,
-            SyntaxNodeAnalysisContext context)
+        private static void CheckGetTypeAndTypeOfEquality(SonarSyntaxNodeAnalysisContext context, ExpressionSyntax sideA, ExpressionSyntax sideB, Location location)
         {
             if (!(sideA as InvocationExpressionSyntax).IsGetTypeCall(context.SemanticModel))
             {

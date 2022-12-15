@@ -82,7 +82,7 @@ namespace SonarAnalyzer.Helpers.Trackers
                        && containingType.TypeArguments[1].Is(KnownType.Microsoft_Extensions_Primitives_StringValues);
             };
 
-        protected override InvocationContext CreateContext(SyntaxNodeAnalysisContext context) =>
+        protected override InvocationContext CreateContext(SonarSyntaxNodeAnalysisContext context) =>
             Language.Syntax.NodeExpression(context.Node) is { } expression
             && ExpectedExpressionIdentifier(expression) is { } identifier
                 ? new InvocationContext(context, identifier.ValueText) : null;

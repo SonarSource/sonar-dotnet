@@ -31,8 +31,8 @@ namespace SonarAnalyzer.Rules
         protected readonly DiagnosticDescriptor Rule;
 
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
-        protected abstract void VisitAssignments(SyntaxNodeAnalysisContext context);
-        protected abstract void VisitInvocations(SyntaxNodeAnalysisContext context);
+        protected abstract void VisitAssignments(SonarSyntaxNodeAnalysisContext context);
+        protected abstract void VisitInvocations(SonarSyntaxNodeAnalysisContext context);
 
         protected LooseFilePermissionsBase(IAnalyzerConfiguration configuration) : base(configuration) =>
             Rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);

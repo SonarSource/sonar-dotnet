@@ -57,16 +57,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
                         var parameterSyntax = method.ParameterList.Parameters[i];
 
-                        ReportParameterIfNeeded(overridingParameter, overriddenParameter, parameterSyntax,
-                            isExplicitImplementation: methodSymbol.ExplicitInterfaceImplementations.Any(),
-                            context: c);
+                        ReportParameterIfNeeded(c, overridingParameter, overriddenParameter, parameterSyntax, methodSymbol.ExplicitInterfaceImplementations.Any());
                     }
                 },
                 SyntaxKind.MethodDeclaration);
         }
 
-        private static void ReportParameterIfNeeded(IParameterSymbol overridingParameter, IParameterSymbol overriddenParameter,
-            ParameterSyntax parameterSyntax, bool isExplicitImplementation, SyntaxNodeAnalysisContext context)
+        private static void ReportParameterIfNeeded(SonarSyntaxNodeAnalysisContext context, IParameterSymbol overridingParameter, IParameterSymbol overriddenParameter,
+            ParameterSyntax parameterSyntax, bool isExplicitImplementation)
         {
             if (isExplicitImplementation)
             {

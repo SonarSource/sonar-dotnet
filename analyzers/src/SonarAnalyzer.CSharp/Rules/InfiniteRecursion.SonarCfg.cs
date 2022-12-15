@@ -26,7 +26,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         public class SonarChecker : IChecker
         {
-            public void CheckForNoExitProperty(SyntaxNodeAnalysisContext c, PropertyDeclarationSyntax property, IPropertySymbol propertySymbol)
+            public void CheckForNoExitProperty(SonarSyntaxNodeAnalysisContext c, PropertyDeclarationSyntax property, IPropertySymbol propertySymbol)
             {
                 IControlFlowGraph cfg;
                 if (property.ExpressionBody?.Expression != null)
@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (CSharpControlFlowGraph.TryGet(property.ExpressionBody.Expression, c.SemanticModel, out cfg))
                     {
                         var walker = new RecursionSearcherForProperty(
-                            new RecursionContext<IControlFlowGraph>(cfg, propertySymbol, property.Identifier.GetLocation(), c, "property's recursion"),
+                            new RecursionContext<IControlFlowGraph>(c, cfg, propertySymbol, property.Identifier.GetLocation(), "property's recursion"),
                             isSetAccessor: false);
                         walker.CheckPaths();
                     }
@@ -51,27 +51,27 @@ namespace SonarAnalyzer.Rules.CSharp
                         if (CSharpControlFlowGraph.TryGet(bodyNode, c.SemanticModel, out cfg))
                         {
                             var walker = new RecursionSearcherForProperty(
-                                new RecursionContext<IControlFlowGraph>(cfg, propertySymbol, accessor.Keyword.GetLocation(), c, "property accessor's recursion"),
+                                new RecursionContext<IControlFlowGraph>(c, cfg, propertySymbol, accessor.Keyword.GetLocation(), "property accessor's recursion"),
                                 isSetAccessor: accessor.Keyword.IsKind(SyntaxKind.SetKeyword));
                             walker.CheckPaths();
 
-                            CheckInfiniteJumpLoop(bodyNode, cfg, "property accessor", c);
+                            CheckInfiniteJumpLoop(c, bodyNode, cfg, "property accessor");
                         }
                     }
                 }
             }
 
-            public void CheckForNoExitMethod(SyntaxNodeAnalysisContext c, CSharpSyntaxNode body, SyntaxToken identifier, IMethodSymbol symbol)
+            public void CheckForNoExitMethod(SonarSyntaxNodeAnalysisContext c, CSharpSyntaxNode body, SyntaxToken identifier, IMethodSymbol symbol)
             {
                 if (CSharpControlFlowGraph.TryGet(body, c.SemanticModel, out var cfg))
                 {
-                    var walker = new RecursionSearcherForMethod(new RecursionContext<IControlFlowGraph>(cfg, symbol, identifier.GetLocation(), c, "method's recursion"));
+                    var walker = new RecursionSearcherForMethod(new RecursionContext<IControlFlowGraph>(c, cfg, symbol, identifier.GetLocation(), "method's recursion"));
                     walker.CheckPaths();
-                    CheckInfiniteJumpLoop(body, cfg, "method", c);
+                    CheckInfiniteJumpLoop(c, body, cfg, "method");
                 }
             }
 
-            private static void CheckInfiniteJumpLoop(SyntaxNode body, IControlFlowGraph cfg, string declarationType, SyntaxNodeAnalysisContext analysisContext)
+            private static void CheckInfiniteJumpLoop(SonarSyntaxNodeAnalysisContext context, SyntaxNode body, IControlFlowGraph cfg, string declarationType)
             {
                 if (body == null)
                 {
@@ -109,7 +109,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var lastJumpLocation = reportOnOptions.Max(b => b.JumpNode.SpanStart);
                     var reportOn = reportOnOptions.First(b => b.JumpNode.SpanStart == lastJumpLocation);
 
-                    analysisContext.ReportIssue(Diagnostic.Create(Rule, reportOn.JumpNode.GetLocation(), declarationType));
+                    context.ReportIssue(Diagnostic.Create(Rule, reportOn.JumpNode.GetLocation(), declarationType));
                 }
             }
 

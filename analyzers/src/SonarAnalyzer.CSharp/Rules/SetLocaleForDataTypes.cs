@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     compilationStartContext.RegisterCompilationEndAction(c => ProcessCollectedSymbols(c, symbolsWhereTypeIsCreated, symbolsWhereLocaleIsSet));
                 });
 
-        private static void ProcessObjectCreations(SyntaxNodeAnalysisContext c, IDictionary<ISymbol, SyntaxNode> symbolsWhereTypeIsCreated)
+        private static void ProcessObjectCreations(SonarSyntaxNodeAnalysisContext c, IDictionary<ISymbol, SyntaxNode> symbolsWhereTypeIsCreated)
         {
             if (GetSymbolFromConstructorInvocation(c.Node, c.SemanticModel) is ITypeSymbol objectType
                 && objectType.IsAny(CheckedTypes)
@@ -71,7 +71,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void ProcessSimpleAssignments(SyntaxNodeAnalysisContext c, ISet<ISymbol> symbolsWhereLocaleIsSet)
+        private static void ProcessSimpleAssignments(SonarSyntaxNodeAnalysisContext c, ISet<ISymbol> symbolsWhereLocaleIsSet)
         {
             var assignmentExpression = (AssignmentExpressionSyntax)c.Node;
             var variableSymbols = assignmentExpression.AssignmentTargets()

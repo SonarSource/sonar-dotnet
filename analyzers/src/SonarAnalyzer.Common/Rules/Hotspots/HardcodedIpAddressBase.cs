@@ -79,7 +79,7 @@ namespace SonarAnalyzer.Rules
             && !IsIgnoredVariableName(node)
             && !HasAttributes(node);
 
-        private void CheckForHardcodedIpAddressesInStringLiteral(SyntaxNodeAnalysisContext context)
+        private void CheckForHardcodedIpAddressesInStringLiteral(SonarSyntaxNodeAnalysisContext context)
         {
             if (IsEnabled(context.Options)
                 && (TLiteralExpression)context.Node is var stringLiteral
@@ -90,7 +90,7 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        private void CheckForHardcodedIpAddressesInStringInterpolation(SyntaxNodeAnalysisContext context)
+        private void CheckForHardcodedIpAddressesInStringInterpolation(SonarSyntaxNodeAnalysisContext context)
         {
             if (IsEnabled(context.Options)
                 && Language.Syntax.TryGetGetInterpolatedTextValue(context.Node, context.SemanticModel, out var stringContent)

@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Rules.CSharp
             },
             SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
 
-        private static bool IsAssignedForReuse(SyntaxNodeAnalysisContext context) =>
+        private static bool IsAssignedForReuse(SonarSyntaxNodeAnalysisContext context) =>
             !IsInVariableDeclaration(context.Node)
             && (IsInFieldOrPropertyInitializer(context.Node) || IsAssignedToStaticFieldOrProperty(context));
 
@@ -75,11 +75,11 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsInFieldOrPropertyInitializer(SyntaxNode node) =>
             node.Ancestors().Any(x => x.IsAnyKind(SyntaxKind.FieldDeclaration, SyntaxKind.PropertyDeclaration));
 
-        private static bool IsAssignedToStaticFieldOrProperty(SyntaxNodeAnalysisContext context) =>
+        private static bool IsAssignedToStaticFieldOrProperty(SonarSyntaxNodeAnalysisContext context) =>
             context.Node.Parent.WalkUpParentheses() is AssignmentExpressionSyntax assignment
-                && context.SemanticModel.GetSymbolInfo(assignment.Left, context.CancellationToken).Symbol is { IsStatic: true, Kind: SymbolKind.Field or SymbolKind.Property };
+                && context.SemanticModel.GetSymbolInfo(assignment.Left, context.Cancel).Symbol is { IsStatic: true, Kind: SymbolKind.Field or SymbolKind.Property };
 
-        private static bool IsResuableClient(SyntaxNodeAnalysisContext context)
+        private static bool IsResuableClient(SonarSyntaxNodeAnalysisContext context)
         {
             var objectCreation = ObjectCreationFactory.Create(context.Node);
             return ReusableClients.Any(x => objectCreation.IsKnownType(x, context.SemanticModel));

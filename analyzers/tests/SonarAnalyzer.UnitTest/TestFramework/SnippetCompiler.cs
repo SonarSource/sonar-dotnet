@@ -21,6 +21,7 @@
 using System.Threading;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.VisualBasic;
+using Moq;
 using SonarAnalyzer.Common;
 using CSharpSyntax = Microsoft.CodeAnalysis.CSharp.Syntax;
 using VBSyntax = Microsoft.CodeAnalysis.VisualBasic.Syntax;
@@ -140,8 +141,12 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public INamedTypeSymbol GetTypeByMetadataName(string metadataName) =>
             SemanticModel.Compilation.GetTypeByMetadataName(metadataName);
 
-        public SyntaxNodeAnalysisContext CreateAnalysisContext(SyntaxNode node) =>
-            new SyntaxNodeAnalysisContext(node, SemanticModel, null, null, null, CancellationToken.None);
+        public SonarSyntaxNodeAnalysisContext CreateAnalysisContext(SyntaxNode node)
+        {
+            var analysisContext = new SonarAnalysisContext(Mock.Of<AnalysisContext>(), Enumerable.Empty<DiagnosticDescriptor>());
+            var nodeContext =  new SyntaxNodeAnalysisContext(node, SemanticModel, null, null, null, default);
+            return new(analysisContext, nodeContext);
+        }
 
         private static bool HasCompilationErrors(Compilation compilation) =>
             compilation.GetDiagnostics().Any(IsCompilationError);
@@ -159,3 +164,4 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         }
     }
 }
+

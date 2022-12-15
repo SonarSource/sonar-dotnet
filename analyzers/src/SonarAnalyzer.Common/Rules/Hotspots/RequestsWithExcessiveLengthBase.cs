@@ -88,7 +88,7 @@ namespace SonarAnalyzer.Rules
             attributeName.Equals(RequestSizeLimit, Language.NameComparison)
             || attributeName.Equals(RequestSizeLimitAttribute, Language.NameComparison);
 
-        private void CollectAttributesOverTheLimit(SyntaxNodeAnalysisContext context, IDictionary<SyntaxNode, Attributes> attributesOverTheLimit)
+        private void CollectAttributesOverTheLimit(SonarSyntaxNodeAnalysisContext context, IDictionary<SyntaxNode, Attributes> attributesOverTheLimit)
         {
             if (!IsEnabled(context.Options))
             {

@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Helpers.Trackers
         public Condition Or(Condition condition1, Condition condition2, Condition condition3) =>
             value => condition1(value) || condition2(value) || condition3(value);
 
-        protected override PropertyAccessContext CreateContext(SyntaxNodeAnalysisContext context)
+        protected override PropertyAccessContext CreateContext(SonarSyntaxNodeAnalysisContext context)
         {
             // We register for both MemberAccess and IdentifierName and we want to
             // avoid raising two times for the same identifier.

@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(CheckForIssue, SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
 
-        private static void CheckForIssue(SyntaxNodeAnalysisContext analysisContext)
+        private static void CheckForIssue(SonarSyntaxNodeAnalysisContext analysisContext)
         {
             var objectCreation = ObjectCreationFactory.Create(analysisContext.Node);
             var methodSymbol = objectCreation.MethodSymbol(analysisContext.SemanticModel);

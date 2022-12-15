@@ -102,7 +102,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.InterpolatedStringText);
         }
 
-        private static void CheckControlCharacter(SyntaxNodeAnalysisContext c, string text, int displayPosIncrement)
+        private static void CheckControlCharacter(SonarSyntaxNodeAnalysisContext c, string text, int displayPosIncrement)
         {
             if (IsInescapableString(c.Node) || IsInescepableInterpolatedString(c.Node.Parent) || IsInescapableUtf8String(c.Node))
             {

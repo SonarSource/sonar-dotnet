@@ -36,19 +36,19 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckExpressionWithOperator<BinaryExpressionSyntax>(b => b.OperatorToken, c),
+                c => CheckExpressionWithOperator<BinaryExpressionSyntax>(c, b => b.OperatorToken),
                 SyntaxKind.BitwiseOrExpression,
                 SyntaxKind.BitwiseAndExpression,
                 SyntaxKind.ExclusiveOrExpression);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckExpressionWithOperator<AssignmentExpressionSyntax>(a => a.OperatorToken, c),
+                c => CheckExpressionWithOperator<AssignmentExpressionSyntax>(c, a => a.OperatorToken),
                 SyntaxKind.AndAssignmentExpression,
                 SyntaxKind.OrAssignmentExpression,
                 SyntaxKind.ExclusiveOrAssignmentExpression);
         }
 
-        private static void CheckExpressionWithOperator<T>(Func<T, SyntaxToken> operatorSelector, SyntaxNodeAnalysisContext context)
+        private static void CheckExpressionWithOperator<T>(SonarSyntaxNodeAnalysisContext context, Func<T, SyntaxToken> operatorSelector)
             where T : SyntaxNode
         {
             if (context.SemanticModel.GetSymbolInfo(context.Node).Symbol is not IMethodSymbol { MethodKind: MethodKind.BuiltinOperator, ReturnType.TypeKind: TypeKind.Enum } operation
