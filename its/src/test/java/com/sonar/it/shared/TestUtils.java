@@ -58,6 +58,7 @@ import org.sonarqube.ws.client.WsClientFactories;
 import org.sonarqube.ws.client.ce.TaskRequest;
 import org.sonarqube.ws.client.components.ShowRequest;
 import org.sonarqube.ws.client.measures.ComponentRequest;
+import org.sonarqube.ws.Duplications.ShowResponse;
 
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -191,15 +192,15 @@ public class TestUtils {
   }
 
   @CheckForNull
-  public static org.sonarqube.ws.Duplications.ShowResponse getDuplication(Orchestrator orch, String componentKey) {
-    org.sonarqube.ws.Duplications.ShowResponse response = newWsClient(orch).duplications().show(new org.sonarqube.ws.client.duplications.ShowRequest()
+  public static ShowResponse getDuplication(Orchestrator orch, String componentKey) {
+    ShowResponse response = newWsClient(orch).duplications().show(new org.sonarqube.ws.client.duplications.ShowRequest()
       .setKey(componentKey));
     return response;
   }
 
   @CheckForNull
-  public static org.sonarqube.ws.Duplications.ShowResponse getDuplication(Orchestrator orch, String componentKey, String pullRequestKey) {
-    org.sonarqube.ws.Duplications.ShowResponse response = newWsClient(orch).duplications().show(new org.sonarqube.ws.client.duplications.ShowRequest()
+  public static ShowResponse getDuplication(Orchestrator orch, String componentKey, String pullRequestKey) {
+    ShowResponse response = newWsClient(orch).duplications().show(new org.sonarqube.ws.client.duplications.ShowRequest()
       .setKey(componentKey)
       .setPullRequest(pullRequestKey));
     return response;

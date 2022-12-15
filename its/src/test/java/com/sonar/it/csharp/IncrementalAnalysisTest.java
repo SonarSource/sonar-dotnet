@@ -31,8 +31,10 @@ import org.sonarqube.ws.Duplications;
 import org.sonarqube.ws.Issues;
 
 import java.io.BufferedWriter;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
@@ -147,8 +149,9 @@ public class IncrementalAnalysisTest {
     String projectName = "IncrementalPRAnalysisDuplication";
     Tests.analyzeProject(temp, projectName, null, "sonar.branch.name", "base-branch");
     Path projectDir = Tests.projectDir(temp, projectName);
-    File duplicatedFile = projectDir.resolve("IncrementalPRAnalysisDuplication\\DuplicatedClassPart2.cs").toFile();
-    createDuplicate(duplicatedFile);
+    File originalFile = projectDir.resolve("IncrementalPRAnalysisDuplication\\OriginalClass.cs").toFile();
+    File duplicatedFile = projectDir.resolve("IncrementalPRAnalysisDuplication\\CopyClass.cs").toFile();
+    createDuplicate(originalFile, duplicatedFile);
 
     BeginAndEndStepResults results = executeAnalysisForPRBranch(projectName, projectDir, "");
     BuildResult beginStepResults = results.getBeginStepResult();
@@ -156,7 +159,7 @@ public class IncrementalAnalysisTest {
 
     assertTrue(endStepResults.isSuccess());
     assertCacheIsUsed(beginStepResults, projectName);
-    List<Duplications.Duplication> duplications = TestUtils.getDuplication(ORCHESTRATOR, "IncrementalPRAnalysisDuplication:IncrementalPRAnalysisDuplication/DuplicatedClassPart2.cs", "42").getDuplicationsList();
+    List<Duplications.Duplication> duplications = TestUtils.getDuplication(ORCHESTRATOR, "IncrementalPRAnalysisDuplication:IncrementalPRAnalysisDuplication/CopyClass.cs", "42").getDuplicationsList();
     assertThat(duplications).isNotEmpty();
   }
 
@@ -191,92 +194,16 @@ public class IncrementalAnalysisTest {
         "}// FIXME: S1134");
   }
 
-  private void createDuplicate(File file) throws IOException {
-    createFileWithContent(file,
-      "using System;\n" +
-        "\n" +
-        "namespace IncrementalPRAnalysisDuplication\n" +
-        "{\n" +
-        "    public class DuplicatedClassPart2\n" +
-        "    {\n" +
-        "        private string DuplicatedString = \"DuplicatedString.\";\n" +
-        "\n" +
-        "        private void SomeMethod(int a, int b)\n" +
-        "        {\n" +
-        "            var someString = \"This is some very high end sophisticated solution.\";\n" +
-        "            for (int i = 0; i < a; i++)\n" +
-        "            {\n" +
-        "                someString += b.ToString();\n" +
-        "            }\n" +
-        "\n" +
-        "            Console.WriteLine(\"I am wondering why I am writing this to the console at all?\", someString);\n" +
-        "        }\n" +
-        "\n" +
-        "        private void SomeMethod2(object o)\n" +
-        "        {\n" +
-        "            if (o == \"Have you ever seen such an important and complex codebase as this one?\")\n" +
-        "            {\n" +
-        "                throw new ArgumentException(\"Like did you really call this method with this argument? What is wrong with you?\");\n" +
-        "            }\n" +
-        "            else\n" +
-        "            {\n" +
-        "                SomeMethod(16, 23);\n" +
-        "            }\n" +
-        "        }\n" +
-        "\n" +
-        "        private void SomeMethod3(object o)\n" +
-        "        {\n" +
-        "            if (o == \"Have you ever seen such an important and complex codebase as this one?\")\n" +
-        "            {\n" +
-        "                throw new ArgumentException(\"Like did you really call this method with this argument? What is wrong with you?\");\n" +
-        "            }\n" +
-        "            else\n" +
-        "            {\n" +
-        "                SomeMethod(16, 23);\n" +
-        "            }\n" +
-        "        }\n" +
-        "        private void SomeMethod4(object o)\n" +
-        "        {\n" +
-        "            if (o == \"Have you ever seen such an important and complex codebase as this one?\")\n" +
-        "            {\n" +
-        "                throw new ArgumentException(\"Like did you really call this method with this argument? What is wrong with you?\");\n" +
-        "            }\n" +
-        "            else\n" +
-        "            {\n" +
-        "                SomeMethod(16, 23);\n" +
-        "            }\n" +
-        "        }\n" +
-        "\n" +
-        "        private void SomeMethod5(object o)\n" +
-        "        {\n" +
-        "            if (o == \"Have you ever seen such an important and complex codebase as this one?\")\n" +
-        "            {\n" +
-        "                throw new ArgumentException(\"Like did you really call this method with this argument? What is wrong with you?\");\n" +
-        "            }\n" +
-        "            else\n" +
-        "            {\n" +
-        "                SomeMethod(16, 23);\n" +
-        "            }\n" +
-        "        }\n" +
-        "\n" +
-        "        private void SomeMethod6(object o)\n" +
-        "        {\n" +
-        "            if (o == \"Have you ever seen such an important and complex codebase as this one?\")\n" +
-        "            {\n" +
-        "                throw new ArgumentException(\"Like did you really call this method with this argument? What is wrong with you?\");\n" +
-        "            }\n" +
-        "            else\n" +
-        "            {\n" +
-        "                SomeMethod(16, 23);\n" +
-        "            }\n" +
-        "        }\n" +
-        "\n" +
-        "        private class SomeInnerClass\n" +
-        "        {\n" +
-        "            public const int a = 1;\n" +
-        "        }\n" +
-        "    }\n" +
-        "}\n");
+  private void createDuplicate(File oldFile, File newFile) throws IOException {
+    BufferedReader reader = new BufferedReader(new FileReader(oldFile));
+    String content = "";
+    String currentLine;
+    while ((currentLine = reader.readLine()) != null) {
+      content += currentLine + System.lineSeparator();
+    }
+    reader.close();
+    content = content.replace("OriginalClass", "CopyClass");
+    createFileWithContent(newFile, content);
   }
 
   private void createFileWithContent(File file, String content) throws IOException {
