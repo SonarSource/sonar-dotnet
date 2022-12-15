@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\WildcardPatterns.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  34,
+"endLine":  35,
+"endColumn":  106
+}
+}
+}
+]
+}

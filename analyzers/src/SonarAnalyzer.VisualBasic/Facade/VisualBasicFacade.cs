@@ -20,37 +20,42 @@
 
 using SonarAnalyzer.Helpers.Facade;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+internal sealed class VisualBasicFacade : ILanguageFacade<SyntaxKind>
 {
-    internal sealed class VisualBasicFacade : ILanguageFacade<SyntaxKind>
-    {
-        private static readonly Lazy<VisualBasicFacade> Singleton = new(() => new VisualBasicFacade());
-        private static readonly Lazy<AssignmentFinder> AssignmentFinderLazy = new(() => new VisualBasicAssignmentFinder());
-        private static readonly Lazy<IExpressionNumericConverter> ExpressionNumericConverterLazy = new(() => new VisualBasicExpressionNumericConverter());
-        private static readonly Lazy<SyntaxFacade<SyntaxKind>> SyntaxLazy = new(() => new VisualBasicSyntaxFacade());
-        private static readonly Lazy<ISyntaxKindFacade<SyntaxKind>> SyntaxKindLazy = new(() => new VisualBasicSyntaxKindFacade());
-        private static readonly Lazy<ITrackerFacade<SyntaxKind>> TrackerLazy = new(() => new VisualBasicTrackerFacade());
+    private static readonly Lazy<VisualBasicFacade> Singleton = new(() => new VisualBasicFacade());
+    private static readonly Lazy<AssignmentFinder> AssignmentFinderLazy = new(() => new VisualBasicAssignmentFinder());
+    private static readonly Lazy<IExpressionNumericConverter> ExpressionNumericConverterLazy = new(() => new VisualBasicExpressionNumericConverter());
+    private static readonly Lazy<SyntaxFacade<SyntaxKind>> SyntaxLazy = new(() => new VisualBasicSyntaxFacade());
+    private static readonly Lazy<ISyntaxKindFacade<SyntaxKind>> SyntaxKindLazy = new(() => new VisualBasicSyntaxKindFacade());
+    private static readonly Lazy<ITrackerFacade<SyntaxKind>> TrackerLazy = new(() => new VisualBasicTrackerFacade());
 
-        public AssignmentFinder AssignmentFinder => AssignmentFinderLazy.Value;
-        public StringComparison NameComparison => StringComparison.OrdinalIgnoreCase;
-        public StringComparer NameComparer => StringComparer.OrdinalIgnoreCase;
-        public GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
-        public IExpressionNumericConverter ExpressionNumericConverter => ExpressionNumericConverterLazy.Value;
-        public SyntaxFacade<SyntaxKind> Syntax => SyntaxLazy.Value;
-        public ISyntaxKindFacade<SyntaxKind> SyntaxKind => SyntaxKindLazy.Value;
-        public ITrackerFacade<SyntaxKind> Tracker => TrackerLazy.Value;
+    public AssignmentFinder AssignmentFinder => AssignmentFinderLazy.Value;
+    public StringComparison NameComparison => StringComparison.OrdinalIgnoreCase;
+    public StringComparer NameComparer => StringComparer.OrdinalIgnoreCase;
+    public GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
+    public IExpressionNumericConverter ExpressionNumericConverter => ExpressionNumericConverterLazy.Value;
+    public SyntaxFacade<SyntaxKind> Syntax => SyntaxLazy.Value;
+    public ISyntaxKindFacade<SyntaxKind> SyntaxKind => SyntaxKindLazy.Value;
+    public ITrackerFacade<SyntaxKind> Tracker => TrackerLazy.Value;
 
-        public static VisualBasicFacade Instance => Singleton.Value;
+    public static VisualBasicFacade Instance => Singleton.Value;
 
-        private VisualBasicFacade() { }
+    private VisualBasicFacade() { }
 
-        public DiagnosticDescriptor CreateDescriptor(string id, string messageFormat, bool? isEnabledByDefault = null, bool fadeOutCode = false) =>
-            DescriptorFactory.Create(id, messageFormat, isEnabledByDefault, fadeOutCode);
+    public DiagnosticDescriptor CreateDescriptor(string id, string messageFormat, bool? isEnabledByDefault = null, bool fadeOutCode = false) =>
+        DescriptorFactory.Create(id, messageFormat, isEnabledByDefault, fadeOutCode);
 
-        public object FindConstantValue(SemanticModel model, SyntaxNode node) =>
-            node.FindConstantValue(model);
+    public object FindConstantValue(SemanticModel model, SyntaxNode node) =>
+        node.FindConstantValue(model);
 
-        public IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, IMethodSymbol methodSymbol) =>
-            new VisualBasicMethodParameterLookup((InvocationExpressionSyntax)invocation, methodSymbol);
-    }
+    public IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, IMethodSymbol methodSymbol) =>
+        invocation switch
+        {
+            null => null,
+            ObjectCreationExpressionSyntax x => new VisualBasicMethodParameterLookup(x.ArgumentList, methodSymbol),
+            InvocationExpressionSyntax x => new VisualBasicMethodParameterLookup(x, methodSymbol),
+            _ => throw new ArgumentException($"{invocation.GetType()} does not contain an ArgumentList.", nameof(invocation)),
+        };
 }

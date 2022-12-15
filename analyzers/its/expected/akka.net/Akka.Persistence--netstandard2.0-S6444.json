@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\LocalSnapshotStore.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  55,
+"endLine":  30,
+"endColumn":  118
+}
+}
+}
+]
+}

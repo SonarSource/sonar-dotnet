@@ -450,6 +450,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_StringComparison = new("System.StringComparison");
         internal static readonly KnownType System_SystemException = new("System.SystemException");
         internal static readonly KnownType System_Text_RegularExpressions_Regex = new("System.Text.RegularExpressions.Regex");
+        internal static readonly KnownType System_Text_RegularExpressions_RegexOptions = new("System.Text.RegularExpressions.RegexOptions");
         internal static readonly KnownType System_Text_StringBuilder = new("System.Text.StringBuilder");
         internal static readonly KnownType System_Threading_Monitor = new("System.Threading.Monitor");
         internal static readonly KnownType System_Threading_Mutex = new("System.Threading.Mutex");
@@ -464,6 +465,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Threading_Thread = new("System.Threading.Thread");
         internal static readonly KnownType System_Threading_WaitHandle = new("System.Threading.WaitHandle");
         internal static readonly KnownType System_ThreadStaticAttribute = new("System.ThreadStaticAttribute");
+        internal static readonly KnownType System_TimeSpan = new("System.TimeSpan");
         internal static readonly KnownType System_Type = new("System.Type");
         internal static readonly KnownType System_UInt16 = new("System.UInt16");
         internal static readonly KnownType System_UInt32 = new("System.UInt32");

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  50,
+"endLine":  31,
+"endColumn":  98
+}
+}
+}
+]
+}

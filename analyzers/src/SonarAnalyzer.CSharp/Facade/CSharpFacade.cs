@@ -19,38 +19,46 @@
  */
 
 using SonarAnalyzer.Helpers.Facade;
+using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+internal sealed class CSharpFacade : ILanguageFacade<SyntaxKind>
 {
-    internal sealed class CSharpFacade : ILanguageFacade<SyntaxKind>
-    {
-        private static readonly Lazy<CSharpFacade> Singleton = new(() => new CSharpFacade());
-        private static readonly Lazy<AssignmentFinder> AssignmentFinderLazy = new(() => new CSharpAssignmentFinder());
-        private static readonly Lazy<IExpressionNumericConverter> ExpressionNumericConverterLazy = new(() => new CSharpExpressionNumericConverter());
-        private static readonly Lazy<SyntaxFacade<SyntaxKind>> SyntaxLazy = new(() => new CSharpSyntaxFacade());
-        private static readonly Lazy<ISyntaxKindFacade<SyntaxKind>> SyntaxKindLazy = new(() => new CSharpSyntaxKindFacade());
-        private static readonly Lazy<ITrackerFacade<SyntaxKind>> TrackerLazy = new(() => new CSharpTrackerFacade());
+    private static readonly Lazy<CSharpFacade> Singleton = new(() => new CSharpFacade());
+    private static readonly Lazy<AssignmentFinder> AssignmentFinderLazy = new(() => new CSharpAssignmentFinder());
+    private static readonly Lazy<IExpressionNumericConverter> ExpressionNumericConverterLazy = new(() => new CSharpExpressionNumericConverter());
+    private static readonly Lazy<SyntaxFacade<SyntaxKind>> SyntaxLazy = new(() => new CSharpSyntaxFacade());
+    private static readonly Lazy<ISyntaxKindFacade<SyntaxKind>> SyntaxKindLazy = new(() => new CSharpSyntaxKindFacade());
+    private static readonly Lazy<ITrackerFacade<SyntaxKind>> TrackerLazy = new(() => new CSharpTrackerFacade());
 
-        public AssignmentFinder AssignmentFinder => AssignmentFinderLazy.Value;
-        public StringComparison NameComparison => StringComparison.Ordinal;
-        public StringComparer NameComparer => StringComparer.Ordinal;
-        public GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
-        public IExpressionNumericConverter ExpressionNumericConverter => ExpressionNumericConverterLazy.Value;
-        public SyntaxFacade<SyntaxKind> Syntax => SyntaxLazy.Value;
-        public ISyntaxKindFacade<SyntaxKind> SyntaxKind => SyntaxKindLazy.Value;
-        public ITrackerFacade<SyntaxKind> Tracker => TrackerLazy.Value;
+    public AssignmentFinder AssignmentFinder => AssignmentFinderLazy.Value;
+    public StringComparison NameComparison => StringComparison.Ordinal;
+    public StringComparer NameComparer => StringComparer.Ordinal;
+    public GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
+    public IExpressionNumericConverter ExpressionNumericConverter => ExpressionNumericConverterLazy.Value;
+    public SyntaxFacade<SyntaxKind> Syntax => SyntaxLazy.Value;
+    public ISyntaxKindFacade<SyntaxKind> SyntaxKind => SyntaxKindLazy.Value;
+    public ITrackerFacade<SyntaxKind> Tracker => TrackerLazy.Value;
 
-        public static CSharpFacade Instance => Singleton.Value;
+    public static CSharpFacade Instance => Singleton.Value;
 
-        private CSharpFacade() { }
+    private CSharpFacade() { }
 
-        public DiagnosticDescriptor CreateDescriptor(string id, string messageFormat, bool? isEnabledByDefault = null, bool fadeOutCode = false) =>
-            DescriptorFactory.Create(id, messageFormat, isEnabledByDefault, fadeOutCode);
+    public DiagnosticDescriptor CreateDescriptor(string id, string messageFormat, bool? isEnabledByDefault = null, bool fadeOutCode = false) =>
+        DescriptorFactory.Create(id, messageFormat, isEnabledByDefault, fadeOutCode);
 
-        public object FindConstantValue(SemanticModel model, SyntaxNode node) =>
-            node.FindConstantValue(model);
+    public object FindConstantValue(SemanticModel model, SyntaxNode node) =>
+        node.FindConstantValue(model);
 
-        public IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, IMethodSymbol methodSymbol) =>
-            new CSharpMethodParameterLookup((InvocationExpressionSyntax)invocation, methodSymbol);
-    }
+    public IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, IMethodSymbol methodSymbol) =>
+        invocation switch
+        {
+            null => null,
+            ObjectCreationExpressionSyntax x => new CSharpMethodParameterLookup(x.ArgumentList, methodSymbol),
+            InvocationExpressionSyntax x => new CSharpMethodParameterLookup(x, methodSymbol),
+            _ when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(invocation) =>
+                new CSharpMethodParameterLookup(((ImplicitObjectCreationExpressionSyntaxWrapper)invocation).ArgumentList, methodSymbol),
+            _ => throw new ArgumentException($"{invocation.GetType()} does not contain an ArgumentList.", nameof(invocation)),
+        };
 }

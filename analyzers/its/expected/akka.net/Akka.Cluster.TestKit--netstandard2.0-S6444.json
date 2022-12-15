@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.TestKit\MultiNodeClusterSpec.cs",
+"region":  {
+"startLine":  193,
+"startColumn":  38,
+"endLine":  193,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.TestKit\MultiNodeClusterSpec.cs",
+"region":  {
+"startLine":  214,
+"startColumn":  35,
+"endLine":  214,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.TestKit\MultiNodeClusterSpec.cs",
+"region":  {
+"startLine":  221,
+"startColumn":  34,
+"endLine":  221,
+"endColumn":  73
+}
+}
+}
+]
+}

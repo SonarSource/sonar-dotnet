@@ -1,0 +1,60 @@
+<p>Not specifying a timeout for regular expressions can lead to a Denial-of-Service attack. Pass a timeout when using
+<code>System.Text.RegularExpressions</code> to process untrusted input because a malicious user might craft a value for which the evaluation lasts
+excessively long.</p>
+<h2>Ask Yourself Whether</h2>
+<ul>
+  <li> the input passed to the regular expression is untrusted. </li>
+  <li> the regular expression contains patterns vulnerable to <a href="https://www.regular-expressions.info/catastrophic.html">catastrophic
+  backtracking</a>. </li>
+</ul>
+<p>There is a risk if you answered yes to any of those questions.</p>
+<h2>Recommended Secure Coding Practices</h2>
+<ul>
+  <li> It is recommended to specify a <a
+  href="https://learn.microsoft.com/dotnet/standard/base-types/best-practices#use-time-out-values"><code>matchTimeout</code></a> when executing a
+  regular expression. </li>
+  <li> Make sure regular expressions are not vulnerable to Denial-of-Service attacks by reviewing the patterns. </li>
+  <li> Consider using a non-backtracking algorithm by specifying <a
+  href="https://learn.microsoft.com/dotnet/api/system.text.regularexpressions.regexoptions?view=net-7.0"><code>RegexOptions.NonBacktracking</code></a>. </li>
+</ul>
+<h2>Sensitive Code Example</h2>
+<pre>
+public void RegexPattern(string input)
+{
+    var emailPattern = new Regex(".+@.+", RegexOptions.None);
+    var isNumber = Regex.IsMatch(input, "[0-9]+");
+    var isLetterA = Regex.IsMatch(input, "(a+)+");
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public void RegexPattern(string input)
+{
+    var emailPattern = new Regex(".+@.+", RegexOptions.None, TimeSpan.FromMilliseconds(100));
+    var isNumber = Regex.IsMatch(input, "[0-9]+", RegexOptions.None, TimeSpan.FromMilliseconds(100));
+    var isLetterA = Regex.IsMatch(input, "(a+)+", RegexOptions.NonBacktracking); // .Net 7 and above
+    AppDomain.CurrentDomain.SetData("REGEX_DEFAULT_MATCH_TIMEOUT", TimeSpan.FromMilliseconds(100)); // process-wide setting
+}
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://owasp.org/www-project-top-ten/2017/A1_2017-Injection">OWASP Top 10 2017 Category A1</a> - Injection </li>
+  <li> <a href="https://cwe.mitre.org/data/definitions/400">MITRE, CWE-400</a> - Uncontrolled Resource Consumption </li>
+  <li> <a href="https://cwe.mitre.org/data/definitions/1333">MITRE, CWE-1333</a> - Inefficient Regular Expression Complexity </li>
+  <li> <a href="https://www.regular-expressions.info/catastrophic.html">regular-expressions.info</a> - Runaway Regular Expressions: Catastrophic
+  Backtracking </li>
+  <li> <a href="https://owasp.org/www-community/attacks/Regular_expression_Denial_of_Service_-_ReDoS">owasp.org</a> - Regular expression Denial of
+  Service - ReDoS </li>
+  <li> <a href="https://cwe.mitre.org/data/definitions/1333">MITRE, CWE-1333</a> - Inefficient Regular Expression Complexity </li>
+  <li> <a href="https://docs.microsoft.com/dotnet/standard/base-types/best-practices">docs.microsoft.com</a> - Best practices for regular expressions
+  in .NET </li>
+  <li> <a href="https://docs.microsoft.com/dotnet/standard/base-types/backtracking-in-regular-expressions">docs.microsoft.com</a> - Backtracking in
+  Regular Expressions </li>
+  <li> <a
+  href="https://devblogs.microsoft.com/dotnet/regular-expression-improvements-in-dotnet-7/#backtracking-and-regexoptions-nonbacktracking">devblogs.microsoft.com</a> - Regular Expression Improvements in .NET 7: Backtracking (and RegexOptions.NonBacktracking) </li>
+  <li> <a href="https://docs.microsoft.com/dotnet/api/system.text.regularexpressions.regex.matchtimeout">docs.microsoft.com</a> - Regex.MatchTimeout
+  Property </li>
+  <li> <a href="https://docs.microsoft.com/dotnet/api/system.text.regularexpressions.regexoptions?view=net-7.0">docs.microsoft.com</a> - RegexOptions
+  Enum (NonBacktracking option) </li>
+</ul>
+
