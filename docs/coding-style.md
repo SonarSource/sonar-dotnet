@@ -106,7 +106,7 @@ Variable name `sut` (System Under Test) is recommended in unit tests that really
         }
     ```
 * When using an arrow property or an arrow method, the `=>` token must be on the same line as the declaration. Regarding the expression body:
-  * for properties: it should be on the same line as the property declaration. It should be on the following line only when it is too long and would trigger [S103](https://sonarsource.github.io/rspec/#/rspec/S103/csharp).
+  * for properties: it should be on the same line as the property declaration. It should be on the following line only when it is too long and would trigger S103.
   * for methods: it should be on the same line only for trivial cases: literal or simple identifier. Member access, indexer, invocation, and other complex structures should be on the following line.
 
 ## Code structure
