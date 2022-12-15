@@ -25,8 +25,8 @@ import org.junit.rules.TemporaryFolder;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.SensorContext;
-import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.batch.sensor.cache.WriteCache;
+import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.resources.AbstractLanguage;
@@ -44,12 +44,23 @@ import static org.mockito.Mockito.when;
 
 public class AbstractFileCacheSensorTest {
   private static final String LANGUAGE_KEY = "language-key";
+  private static final String LANGUAGE_NAME = "Language Name";
 
   @Rule
   public TemporaryFolder temp = new TemporaryFolder();
 
   @Rule
   public LogTester logTester = new LogTester();
+
+  @Test
+  public void should_describe() {
+    var sensorDescriptor = new DefaultSensorDescriptor();
+    var sensor = new FileCacheSensor(new HashProvider());
+    sensor.describe(sensorDescriptor);
+
+    assertThat(sensorDescriptor.name()).isEqualTo("Language Name File Caching Sensor");
+    assertThat(sensorDescriptor.languages()).containsOnly(LANGUAGE_KEY);
+  }
 
   @Test
   public void execute_whenAnalyzingPullRequest_logsMessage() throws IOException {
@@ -143,15 +154,12 @@ public class AbstractFileCacheSensorTest {
     public FileCacheSensor(HashProvider hashProvider) {
       super(new Language(), hashProvider);
     }
-
-    @Override
-    public void describe(SensorDescriptor descriptor) { }
   }
 
   private static class Language extends AbstractLanguage {
 
     public Language() {
-      super(LANGUAGE_KEY);
+      super(LANGUAGE_KEY, LANGUAGE_NAME);
     }
 
     @Override

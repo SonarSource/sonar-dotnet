@@ -20,6 +20,7 @@
 package org.sonarsource.dotnet.shared.plugins;
 
 import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.resources.AbstractLanguage;
 import org.sonar.api.scanner.ScannerSide;
 import org.sonar.api.scanner.sensor.ProjectSensor;
@@ -38,6 +39,12 @@ public abstract class AbstractFileCacheSensor implements ProjectSensor {
   protected AbstractFileCacheSensor(AbstractLanguage language, HashProvider hashProvider) {
     this.language = language;
     this.hashProvider = hashProvider;
+  }
+
+  @Override
+  public void describe(SensorDescriptor descriptor) {
+    descriptor.name(language.getName() + " File Caching Sensor");
+    descriptor.onlyOnLanguage(language.getKey());
   }
 
   @Override

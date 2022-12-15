@@ -49,16 +49,6 @@ public class CSharpFileCacheSensorTest {
   public LogTester logTester = new LogTester();
 
   @Test
-  public void should_describe() {
-    var sensorDescriptor = new DefaultSensorDescriptor();
-    var sensor = new CSharpFileCacheSensor(null, new HashProvider());
-    sensor.describe(sensorDescriptor);
-
-    assertThat(sensorDescriptor.name()).isEqualTo("C# file caching sensor");
-    assertThat(sensorDescriptor.languages()).containsOnly("cs");
-  }
-
-  @Test
   public void execute_whenCacheIsEnabled_itAddsOnlyTheLanguageFiles() throws IOException, NoSuchAlgorithmException {
     var basePath = temp.newFolder();
     var settings = new MapSettings();

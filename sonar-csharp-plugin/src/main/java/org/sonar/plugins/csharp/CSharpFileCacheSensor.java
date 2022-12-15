@@ -19,18 +19,11 @@
  */
 package org.sonar.plugins.csharp;
 
-import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonarsource.dotnet.shared.plugins.AbstractFileCacheSensor;
 import org.sonarsource.dotnet.shared.plugins.HashProvider;
 
 public class CSharpFileCacheSensor extends AbstractFileCacheSensor {
   public CSharpFileCacheSensor(CSharp cSharp, HashProvider hashProvider) {
     super(cSharp, hashProvider);
-  }
-
-  @Override
-  public void describe(SensorDescriptor descriptor) {
-    descriptor.name("C# file caching sensor");
-    descriptor.onlyOnLanguage(CSharpPlugin.LANGUAGE_KEY);
   }
 }

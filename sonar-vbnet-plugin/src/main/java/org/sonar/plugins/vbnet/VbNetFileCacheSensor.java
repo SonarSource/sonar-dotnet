@@ -19,18 +19,11 @@
  */
 package org.sonar.plugins.vbnet;
 
-import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonarsource.dotnet.shared.plugins.AbstractFileCacheSensor;
 import org.sonarsource.dotnet.shared.plugins.HashProvider;
 
 public class VbNetFileCacheSensor extends AbstractFileCacheSensor {
   public VbNetFileCacheSensor(VbNet vbNet, HashProvider hashProvider) {
     super(vbNet, hashProvider);
-  }
-
-  @Override
-  public void describe(SensorDescriptor descriptor) {
-    descriptor.name("VbNet file caching sensor");
-    descriptor.onlyOnLanguage(VbNetPlugin.LANGUAGE_KEY);
   }
 }

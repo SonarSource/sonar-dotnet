@@ -25,7 +25,6 @@ import org.junit.rules.TemporaryFolder;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.cache.WriteCache;
-import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.utils.log.LogTester;
@@ -47,16 +46,6 @@ public class VbNetFileCacheSensorTest {
 
   @Rule
   public LogTester logTester = new LogTester();
-
-  @Test
-  public void should_describe() {
-    var sensorDescriptor = new DefaultSensorDescriptor();
-    var sensor = new VbNetFileCacheSensor(null, new HashProvider());
-    sensor.describe(sensorDescriptor);
-
-    assertThat(sensorDescriptor.name()).isEqualTo("VbNet file caching sensor");
-    assertThat(sensorDescriptor.languages()).containsOnly("vbnet");
-  }
 
   @Test
   public void execute_whenCacheIsEnabled_itAddsOnlyTheLanguageFiles() throws IOException, NoSuchAlgorithmException {
