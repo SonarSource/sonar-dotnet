@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.Helpers
 {
-    public abstract class ParameterLoadingDiagnosticAnalyzer : SonarDiagnosticAnalyzer
+    public abstract class ParameterLoadingDiagnosticAnalyzer : SonarDiagnosticAnalyzer  // FIXME: Rename To Sonar*
     {
         protected abstract void Initialize(ParameterLoadingAnalysisContext context);
 

@@ -92,10 +92,10 @@ public sealed partial /*FIXME: REMOVE partial */ class SonarAnalysisContext : So
     {
         // For each action registered on context we need to do some pre-processing before actually calling the rule.
         // First, we need to ensure the rule does apply to the current scope (main vs test source).
-        // Second, we call an external delegate (set by SonarLint for VS) to ensure the rule should be run (usually
+        // Second, we call an external delegate (set by legacy SonarLint for VS) to ensure the rule should be run (usually
         // the decision is made on based on whether the project contains the analyzer as NuGet).
-        var isTestProject = IsTestProject(context.Compilation, context.Options);
-        if (supportedDiagnostics.Any(x => x.HasMatchingScope(context.Compilation, isTestProject, IsScannerRun(context.Options))) && LegacyIsRegisteredActionEnabled(supportedDiagnostics, context.Tree))
+        if (supportedDiagnostics.Any(x => x.HasMatchingScope(context.Compilation, context.IsTestProject(), context.IsScannerRun()))
+            && LegacyIsRegisteredActionEnabled(supportedDiagnostics, context.Tree))
         {
             action(context);
         }
