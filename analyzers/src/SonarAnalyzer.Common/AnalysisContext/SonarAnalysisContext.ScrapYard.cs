@@ -40,14 +40,8 @@ public partial class SonarAnalysisContext
     public bool IsScannerRun(AnalyzerOptions options) =>                    // FIXME: Remove, it was migrated to the SonarAnalysisContextBase
         ProjectConfiguration(context.TryGetValue, options).IsScannerRun;
 
-    public static bool IsScannerRun(CompilationAnalysisContext context) =>  // FIXME: Remove, it was migrated to the SonarAnalysisContextBase
-        ProjectConfiguration(context.TryGetValue, context.Options).IsScannerRun;
-
     public bool IsTestProject(Compilation c, AnalyzerOptions options) =>    // FIXME: Remove, it was migrated to the SonarAnalysisContextBase
         IsTestProject(context.TryGetValue, c, options);
-
-    public static bool IsTestProject(CompilationAnalysisContext analysisContext) => // FIXME: Remove, it was migrated to the SonarAnalysisContextBase
-        IsTestProject(analysisContext.TryGetValue, analysisContext.Compilation, analysisContext.Options);
 
     private static ProjectConfigReader ProjectConfiguration(TryGetValueDelegate<ProjectConfigReader> tryGetValue, AnalyzerOptions options) // FIXME: Remove, it was migrated to the SonarAnalysisContextBase
     {
