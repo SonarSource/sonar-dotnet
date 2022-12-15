@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer;
 
-public sealed class SonarCodeBlockStartAnalysisContext<TSyntaxKind> : SonarAnalysisContextBase<CodeBlockStartAnalysisContext<TSyntaxKind>> where TSyntaxKind : struct
+public sealed class SonarCodeBlockAnalysisContext : SonarAnalysisContextBase<CodeBlockAnalysisContext>
 {
     public override SyntaxTree Tree => Context.GetSyntaxTree();
     public override Compilation Compilation => Context.SemanticModel.Compilation;
@@ -29,12 +29,8 @@ public sealed class SonarCodeBlockStartAnalysisContext<TSyntaxKind> : SonarAnaly
     public ISymbol OwningSymbol => Context.OwningSymbol;
     public SemanticModel SemanticModel => Context.SemanticModel;
 
-    internal SonarCodeBlockStartAnalysisContext(SonarAnalysisContext analysisContext, CodeBlockStartAnalysisContext<TSyntaxKind> context) : base(analysisContext, context) { }
+    internal SonarCodeBlockAnalysisContext(SonarAnalysisContext analysisContext, CodeBlockAnalysisContext context) : base(analysisContext, context) { }
 
-    public void RegisterSyntaxNodeAction(Action<SonarSyntaxNodeAnalysisContext> action, params TSyntaxKind[] symbolKinds) =>
-        Context.RegisterSyntaxNodeAction(x => action(new(AnalysisContext, x)), symbolKinds);
-
-    public void RegisterCodeBlockEndAction(Action<SonarCodeBlockAnalysisContext> action) =>
-        Context.RegisterCodeBlockEndAction(x => action(new(AnalysisContext, x)));
-
+    public void ReportIssue(Diagnostic diagnostic) =>
+        ReportIssue(new ReportingContext(Context, diagnostic));
 }

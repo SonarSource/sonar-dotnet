@@ -33,23 +33,22 @@ namespace SonarAnalyzer.Rules
 
             protected abstract IEnumerable<SyntaxNode> GetDeclaredVariables(TLocalDeclaration localDeclaration);
 
-            public void CollectDeclarations(SyntaxNodeAnalysisContext c) =>
+            public void CollectDeclarations(SonarSyntaxNodeAnalysisContext c) =>
                 declaredLocals.UnionWith(
                     GetDeclaredVariables((TLocalDeclaration)c.Node)
                         .Select(variable => c.SemanticModel.GetDeclaredSymbol(variable) ?? c.SemanticModel.GetSymbolInfo(variable).Symbol)
                         .WhereNotNull());
 
-            public void CollectUsages(SyntaxNodeAnalysisContext c) =>
+            public void CollectUsages(SonarSyntaxNodeAnalysisContext c) =>
                 usedLocals.UnionWith(GetUsedSymbols(c.Node, c.SemanticModel));
 
-            public Action<CodeBlockAnalysisContext> GetReportUnusedVariablesAction(DiagnosticDescriptor rule) =>
-                c =>
+            public void ReportUnusedVariables(SonarCodeBlockAnalysisContext c, DiagnosticDescriptor rule)
+            {
+                foreach (var unused in declaredLocals.Except(usedLocals))
                 {
-                    foreach (var unused in declaredLocals.Except(usedLocals))
-                    {
-                        c.ReportIssue(Diagnostic.Create(rule, unused.Locations.First(), unused.Name));
-                    }
-                };
+                    c.ReportIssue(Diagnostic.Create(rule, unused.Locations.First(), unused.Name));
+                }
+            }
         }
 
         internal static IEnumerable<ISymbol> GetUsedSymbols(SyntaxNode node, SemanticModel semanticModel)

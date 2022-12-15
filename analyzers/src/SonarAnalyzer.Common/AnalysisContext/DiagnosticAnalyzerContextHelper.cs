@@ -78,12 +78,12 @@ internal static class DiagnosticAnalyzerContextHelper   // FIXME: Rename and mov
 
     public static void RegisterCodeBlockStartActionInNonGenerated<TLanguageKindEnum>(this SonarAnalysisContext context,
                                                                                      GeneratedCodeRecognizer generatedCodeRecognizer,
-                                                                                     Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action) where TLanguageKindEnum : struct =>
+                                                                                     Action<SonarCodeBlockStartAnalysisContext<TLanguageKindEnum>> action) where TLanguageKindEnum : struct =>
         context.RegisterCodeBlockStartAction<TLanguageKindEnum>(c =>
             {
                 if (c.ShouldAnalyze(generatedCodeRecognizer))   // FIXME: Unify
                 {
-                    action(c.Context);
+                    action(c);
                 }
             });
 
