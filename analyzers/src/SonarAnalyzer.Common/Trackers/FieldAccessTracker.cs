@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Helpers.Trackers
         public Condition MatchField(params MemberDescriptor[] fields) =>
             context => MemberDescriptor.MatchesAny(context.FieldName, context.InvokedFieldSymbol, false, Language.NameComparison, fields);
 
-        protected override FieldAccessContext CreateContext(SyntaxNodeAnalysisContext context)
+        protected override FieldAccessContext CreateContext(SonarSyntaxNodeAnalysisContext context)
         {
             // We register for both MemberAccess and IdentifierName and we want to avoid raising two times for the same identifier.
             if (IsIdentifierWithinMemberAccess(context.Node))

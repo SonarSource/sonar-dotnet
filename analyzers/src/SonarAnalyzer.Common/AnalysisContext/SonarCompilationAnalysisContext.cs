@@ -31,6 +31,7 @@ public sealed class SonarCompilationAnalysisContext : SonarAnalysisContextBase<C
     public override SyntaxTree Tree => Context.GetFirstSyntaxTree();
     public override Compilation Compilation => Context.Compilation;
     public override AnalyzerOptions Options => Context.Options;
+    public override CancellationToken Cancel => Context.CancellationToken;
 
     internal SonarCompilationAnalysisContext(SonarAnalysisContext analysisContext, CompilationAnalysisContext context) : base(analysisContext, context) { }
 

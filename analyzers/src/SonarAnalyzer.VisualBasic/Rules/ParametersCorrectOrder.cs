@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 }, SyntaxKind.ObjectCreationExpression);
         }
 
-        private void AnalyzeArguments(SyntaxNodeAnalysisContext analysisContext, ArgumentListSyntax argumentList,
+        private void AnalyzeArguments(SonarSyntaxNodeAnalysisContext analysisContext, ArgumentListSyntax argumentList,
             Func<Location> getLocation)
         {
             if (argumentList == null)

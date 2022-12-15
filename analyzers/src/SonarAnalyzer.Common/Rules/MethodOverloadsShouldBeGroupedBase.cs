@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Rules
         protected abstract TSyntaxKind[] SyntaxKinds { get; }
 
         protected abstract IEnumerable<TMemberDeclarationSyntax> GetMemberDeclarations(SyntaxNode node);
-        protected abstract MemberInfo CreateMemberInfo(SyntaxNodeAnalysisContext c, TMemberDeclarationSyntax member);
+        protected abstract MemberInfo CreateMemberInfo(SonarSyntaxNodeAnalysisContext c, TMemberDeclarationSyntax member);
 
         protected override string MessageFormat => "All '{0}' method overloads should be adjacent.";
 
@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules
             },
             SyntaxKinds);
 
-        protected List<MemberInfo>[] GetMisplacedOverloads(SyntaxNodeAnalysisContext c, IEnumerable<TMemberDeclarationSyntax> members)
+        protected List<MemberInfo>[] GetMisplacedOverloads(SonarSyntaxNodeAnalysisContext c, IEnumerable<TMemberDeclarationSyntax> members)
         {
             var misplacedOverloads = new Dictionary<MemberInfo, List<MemberInfo>>();
             var membersGroupedByInterface = MembersGroupedByInterface(c, members);
@@ -104,7 +104,7 @@ namespace SonarAnalyzer.Rules
         /// Returned ImmutableArray of interfaces for each member is used to determine whether overloads of the same interface should be grouped by name.
         /// If all methods of the class implement single interface, we want the overloads to be placed together within interface group.
         /// </summary>
-        private static Dictionary<TMemberDeclarationSyntax, ImmutableArray<INamedTypeSymbol>> MembersGroupedByInterface(SyntaxNodeAnalysisContext c, IEnumerable<TMemberDeclarationSyntax> members)
+        private static Dictionary<TMemberDeclarationSyntax, ImmutableArray<INamedTypeSymbol>> MembersGroupedByInterface(SonarSyntaxNodeAnalysisContext c, IEnumerable<TMemberDeclarationSyntax> members)
         {
             var ret = new Dictionary<TMemberDeclarationSyntax, ImmutableArray<INamedTypeSymbol>>();
             ImmutableArray<INamedTypeSymbol> currentInterfaces, previousInterfaces = ImmutableArray<INamedTypeSymbol>.Empty;
@@ -163,7 +163,7 @@ namespace SonarAnalyzer.Rules
             public TMemberDeclarationSyntax Member { get; }
             public SyntaxToken NameSyntax { get; }
 
-            public MemberInfo(SyntaxNodeAnalysisContext context, TMemberDeclarationSyntax member, SyntaxToken nameSyntax, bool isStatic, bool isAbstract, bool isCaseSensitive)
+            public MemberInfo(SonarSyntaxNodeAnalysisContext context, TMemberDeclarationSyntax member, SyntaxToken nameSyntax, bool isStatic, bool isAbstract, bool isCaseSensitive)
             {
                 Member = member;
                 accessibility = context.SemanticModel.GetDeclaredSymbol(member)?.DeclaredAccessibility.ToString();

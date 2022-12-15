@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, AnalyzeInvocation, Language.SyntaxKind.InvocationExpression);
 
-        private void AnalyzeInvocation(SyntaxNodeAnalysisContext analysisContext)
+        private void AnalyzeInvocation(SonarSyntaxNodeAnalysisContext analysisContext)
         {
             if ((TInvocationExpressionSyntax)analysisContext.Node is var invocation
                 && Language.Syntax.InvocationIdentifier(invocation) is { } identifier

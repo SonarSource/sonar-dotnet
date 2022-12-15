@@ -31,19 +31,19 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
 
         public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(S1944);
 
-        public ISymbolicExecutionAnalysisContext CreateContext(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
-            new AnalysisContext(explodedGraph, context);
+        public ISymbolicExecutionAnalysisContext CreateContext(SonarSyntaxNodeAnalysisContext context, SonarExplodedGraph explodedGraph) =>
+            new AnalysisContext(context, explodedGraph);
 
         internal sealed class NullableCastCheck : ExplodedGraphCheck
         {
-            private readonly SyntaxNodeAnalysisContext context;
+            private readonly SonarSyntaxNodeAnalysisContext context;
 
             public NullableCastCheck(SonarExplodedGraph explodedGraph)
                 : base(explodedGraph)
             {
             }
 
-            public NullableCastCheck(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
+            public NullableCastCheck(SonarExplodedGraph explodedGraph, SonarSyntaxNodeAnalysisContext context)
                 : this(explodedGraph)
             {
                 this.context = context;
@@ -90,7 +90,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
         {
             public bool SupportsPartialResults => true;
 
-            public AnalysisContext(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
+            public AnalysisContext(SonarSyntaxNodeAnalysisContext context, SonarExplodedGraph explodedGraph) =>
                 explodedGraph.AddExplodedGraphCheck(new NullableCastCheck(explodedGraph, context));
 
             public void Dispose()

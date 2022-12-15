@@ -92,6 +92,7 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
     public abstract SyntaxTree Tree { get; }
     public abstract Compilation Compilation { get; }
     public abstract AnalyzerOptions Options { get; }
+    public abstract CancellationToken Cancel { get; }
 
     public SonarAnalysisContext AnalysisContext { get; }
     public TContext Context { get; }

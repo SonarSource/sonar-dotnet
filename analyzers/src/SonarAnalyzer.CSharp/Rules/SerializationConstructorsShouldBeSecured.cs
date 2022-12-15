@@ -34,11 +34,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(FindPossibleViolations,
-                SyntaxKind.ConstructorDeclaration);
+            context.RegisterSyntaxNodeActionInNonGenerated(FindPossibleViolations, SyntaxKind.ConstructorDeclaration);
         }
 
-        private void FindPossibleViolations(SyntaxNodeAnalysisContext c)
+        private void FindPossibleViolations(SonarSyntaxNodeAnalysisContext c)
         {
             var constructorSyntax = (ConstructorDeclarationSyntax)c.Node;
             var reportLocation = constructorSyntax?.Identifier.GetLocation();

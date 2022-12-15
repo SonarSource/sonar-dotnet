@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(CheckForLoopCondition, SyntaxKind.ForStatement);
         }
 
-        private void CheckForLoopCondition(SyntaxNodeAnalysisContext context)
+        private void CheckForLoopCondition(SonarSyntaxNodeAnalysisContext context)
         {
             var forLoop = (ForStatementSyntax)context.Node;
 
@@ -63,7 +63,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private void CheckLogicalNot(SyntaxNodeAnalysisContext context)
+        private void CheckLogicalNot(SonarSyntaxNodeAnalysisContext context)
         {
             var logicalNot = (PrefixUnaryExpressionSyntax)context.Node;
             var logicalNotOperand = logicalNot.Operand.RemoveParentheses();
@@ -76,7 +76,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 node.IsKind(SyntaxKind.TrueLiteralExpression) || node.IsKind(SyntaxKind.FalseLiteralExpression);
         }
 
-        private void CheckConditional(SyntaxNodeAnalysisContext context)
+        private void CheckConditional(SonarSyntaxNodeAnalysisContext context)
         {
             var conditional = (ConditionalExpressionSyntax)context.Node;
             var whenTrue = conditional.WhenTrue;

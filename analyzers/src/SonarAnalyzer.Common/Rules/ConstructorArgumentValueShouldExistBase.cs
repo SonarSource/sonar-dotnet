@@ -36,8 +36,7 @@ namespace SonarAnalyzer.Rules
                 : null;
         }
 
-        protected void CheckConstructorArgumentProperty(
-            SyntaxNodeAnalysisContext c, SyntaxNode propertyDeclaration, IPropertySymbol propertySymbol)
+        protected void CheckConstructorArgumentProperty(SonarSyntaxNodeAnalysisContext c, SyntaxNode propertyDeclaration, IPropertySymbol propertySymbol)
         {
             if (propertySymbol == null)
             {
@@ -58,6 +57,6 @@ namespace SonarAnalyzer.Rules
         }
 
         protected abstract IEnumerable<string> GetAllParentClassConstructorArgumentNames(SyntaxNode propertyDeclaration);
-        protected abstract void ReportIssue(SyntaxNodeAnalysisContext c, AttributeData constructorArgumentAttribute);
+        protected abstract void ReportIssue(SonarSyntaxNodeAnalysisContext c, AttributeData constructorArgumentAttribute);
     }
 }

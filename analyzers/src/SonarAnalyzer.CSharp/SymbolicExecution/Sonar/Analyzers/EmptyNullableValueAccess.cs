@@ -34,7 +34,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
 
         public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(S3655);
 
-        public ISymbolicExecutionAnalysisContext CreateContext(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
+        public ISymbolicExecutionAnalysisContext CreateContext(SonarSyntaxNodeAnalysisContext context, SonarExplodedGraph explodedGraph) =>
             new AnalysisContext(explodedGraph);
 
         private sealed class AnalysisContext : ISymbolicExecutionAnalysisContext

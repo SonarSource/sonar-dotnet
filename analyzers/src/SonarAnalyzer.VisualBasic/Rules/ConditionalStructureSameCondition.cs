@@ -37,12 +37,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
                     for (var i = 1; i < conditions.Length; i++)
                     {
-                        CheckConditionAt(i, conditions, c);
+                        CheckConditionAt(c, conditions, i);
                     }
                 },
                 SyntaxKind.MultiLineIfBlock);
 
-        private void CheckConditionAt(int currentIndex, ExpressionSyntax[] conditions, SyntaxNodeAnalysisContext context)
+        private void CheckConditionAt(SonarSyntaxNodeAnalysisContext context, ExpressionSyntax[] conditions, int currentIndex)
         {
             for (var i = 0; i < currentIndex; i++)
             {

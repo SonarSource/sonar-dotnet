@@ -32,13 +32,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(c => CheckInterfaceVariance((InterfaceDeclarationSyntax)c.Node, c), SyntaxKind.InterfaceDeclaration);
-            context.RegisterSyntaxNodeActionInNonGenerated(c => CheckDelegateVariance((DelegateDeclarationSyntax)c.Node, c), SyntaxKind.DelegateDeclaration);
+            context.RegisterSyntaxNodeActionInNonGenerated(c => CheckInterfaceVariance(c, (InterfaceDeclarationSyntax)c.Node), SyntaxKind.InterfaceDeclaration);
+            context.RegisterSyntaxNodeActionInNonGenerated(c => CheckDelegateVariance(c, (DelegateDeclarationSyntax)c.Node), SyntaxKind.DelegateDeclaration);
         }
 
         #region Top level
 
-        private static void CheckInterfaceVariance(InterfaceDeclarationSyntax declaration, SyntaxNodeAnalysisContext context)
+        private static void CheckInterfaceVariance(SonarSyntaxNodeAnalysisContext context, InterfaceDeclarationSyntax declaration)
         {
             var interfaceType = context.SemanticModel.GetDeclaredSymbol(declaration);
             if (interfaceType == null)
@@ -54,11 +54,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 if (canBeIn ^ canBeOut)
                 {
-                    ReportIssue(typeParameter, canBeIn ? VarianceKind.In : VarianceKind.Out, context);
+                    ReportIssue(context, typeParameter, canBeIn ? VarianceKind.In : VarianceKind.Out);
                 }
             }
         }
-        private static void CheckDelegateVariance(DelegateDeclarationSyntax declaration, SyntaxNodeAnalysisContext context)
+        private static void CheckDelegateVariance(SonarSyntaxNodeAnalysisContext context, DelegateDeclarationSyntax declaration)
         {
             var declaredSymbol = context.SemanticModel.GetDeclaredSymbol(declaration);
             if (declaredSymbol == null)
@@ -90,7 +90,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 if (canBeIn ^ canBeOut)
                 {
-                    ReportIssue(typeParameter, canBeIn ? VarianceKind.In : VarianceKind.Out, context);
+                    ReportIssue(context, typeParameter, canBeIn ? VarianceKind.In : VarianceKind.Out);
                 }
             }
         }
@@ -170,7 +170,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         #endregion
 
-        private static void ReportIssue(ITypeParameterSymbol typeParameter, VarianceKind variance, SyntaxNodeAnalysisContext context)
+        private static void ReportIssue(SonarSyntaxNodeAnalysisContext context, ITypeParameterSymbol typeParameter, VarianceKind variance)
         {
             if (!typeParameter.DeclaringSyntaxReferences.Any())
             {

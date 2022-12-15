@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                     else
                     {
-                        CheckIfCanBeSimplifiedUsingSelect(forEachStatementSyntax, c);
+                        CheckIfCanBeSimplifiedUsingSelect(c, forEachStatementSyntax);
                     }
                 },
                 SyntaxKind.ForEachStatement);
@@ -92,7 +92,7 @@ namespace SonarAnalyzer.Rules.CSharp
         ///  - the property is used more than once
         ///  - the property is the right side of a variable declaration.
         /// </remarks>
-        private static void CheckIfCanBeSimplifiedUsingSelect(ForEachStatementSyntax forEachStatementSyntax, SyntaxNodeAnalysisContext c)
+        private static void CheckIfCanBeSimplifiedUsingSelect(SonarSyntaxNodeAnalysisContext c, ForEachStatementSyntax forEachStatementSyntax)
         {
             var declaredSymbol = new Lazy<ILocalSymbol>(() => c.SemanticModel.GetDeclaredSymbol(forEachStatementSyntax));
             var expressionTypeIsOrImplementsIEnumerable = new Lazy<bool>(
