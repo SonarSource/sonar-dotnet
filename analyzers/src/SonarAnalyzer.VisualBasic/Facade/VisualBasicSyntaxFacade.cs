@@ -22,8 +22,6 @@ namespace SonarAnalyzer.Helpers.Facade;
 
 internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
 {
-    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
-
     public override bool IsNullLiteral(SyntaxNode node) => node.IsNothingLiteral();
 
     public override SyntaxKind Kind(SyntaxNode node) => node.Kind();
@@ -108,15 +106,27 @@ internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
         return whenNotNull;
     }
 
-    public override SyntaxNode RemoveParentheses(SyntaxNode node) =>
-        node.RemoveParentheses();
-
-    public override bool TryGetGetInterpolatedTextValue(SyntaxNode node, SemanticModel semanticModel, out string interpolatedValue) =>
-        Cast<InterpolatedStringExpressionSyntax>(node).TryGetGetInterpolatedTextValue(semanticModel, out interpolatedValue);
+    public override SyntaxNode RemoveParentheses(SyntaxNode node) => node.RemoveParentheses();
 
     public override bool IsStatic(SyntaxNode node) => Cast<MethodBlockSyntax>(node).IsShared();
 
-    protected override SyntaxToken Token(SyntaxNode node) => node is LiteralExpressionSyntax literal ? literal.Token : default;
-    public override string InterpolatedTextGetContentsText(SyntaxNode node) =>
-        node is InterpolatedStringExpressionSyntax interpolatedExpression ? interpolatedExpression.GetContentsText() : null;
+    public override string StringValue(SyntaxNode node, SemanticModel semanticModel)
+    {
+        if (node != null)
+        {
+            if (node.IsKind(SyntaxKind.StringLiteralExpression) && node is LiteralExpressionSyntax literal)
+            {
+                return literal.Token.ValueText;
+            }
+            else if (node is InterpolatedStringExpressionSyntax interpolatedExpression)
+            {
+                interpolatedExpression.TryGetGetInterpolatedTextValue(semanticModel, out var interpolatedValue);
+                return interpolatedValue ?? interpolatedExpression.GetContentsText() ?? null;
+            }
+        }
+        return null;
+    }
+
+    public override bool TryGetGetInterpolatedTextValue(SyntaxNode node, SemanticModel semanticModel, out string interpolatedValue) =>
+        Cast<InterpolatedStringExpressionSyntax>(node).TryGetGetInterpolatedTextValue(semanticModel, out interpolatedValue);
 }

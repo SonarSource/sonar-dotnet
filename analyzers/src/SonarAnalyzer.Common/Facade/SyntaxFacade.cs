@@ -23,8 +23,6 @@ namespace SonarAnalyzer.Helpers.Facade;
 public abstract class SyntaxFacade<TSyntaxKind>
     where TSyntaxKind : struct
 {
-    protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
-
     public abstract TSyntaxKind Kind(SyntaxNode node);
     public abstract ComparisonKind ComparisonKind(SyntaxNode node);
     public abstract bool IsNullLiteral(SyntaxNode node);
@@ -46,27 +44,9 @@ public abstract class SyntaxFacade<TSyntaxKind>
     public abstract SyntaxToken? NodeIdentifier(SyntaxNode node);
     public abstract SyntaxNode RemoveConditionalAccess(SyntaxNode node);
     public abstract SyntaxNode RemoveParentheses(SyntaxNode node);
+    public abstract string StringValue(SyntaxNode node, SemanticModel semanticModel);
     public abstract bool TryGetGetInterpolatedTextValue(SyntaxNode node, SemanticModel semanticModel, out string interpolatedValue);
-    public abstract string InterpolatedTextGetContentsText(SyntaxNode node);
     public abstract bool IsStatic(SyntaxNode node);
-    protected abstract SyntaxToken Token(SyntaxNode node);
-
-    public string StringValue(SyntaxNode node, SemanticModel semanticModel)
-    {
-        if (node != null)
-        {
-            if (Language.Syntax.IsAnyKind(node, Language.SyntaxKind.StringLiteralExpressions))
-            {
-                return Token(node).ValueText;
-            }
-            else if (Language.Syntax.IsKind(node, Language.SyntaxKind.InterpolatedStringExpression))
-            {
-                Language.Syntax.TryGetGetInterpolatedTextValue(node, semanticModel, out var interpolatedValue);
-                return interpolatedValue ?? InterpolatedTextGetContentsText(node);
-            }
-        }
-        return null;
-    }
 
     protected static T Cast<T>(SyntaxNode node) where T : SyntaxNode =>
         node as T ?? throw new InvalidCastException($"A {node.GetType().Name} node can not be cast to a {typeof(T).Name} node.");

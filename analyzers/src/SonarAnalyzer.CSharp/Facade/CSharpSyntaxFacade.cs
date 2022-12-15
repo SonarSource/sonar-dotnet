@@ -22,8 +22,6 @@ namespace SonarAnalyzer.Helpers.Facade;
 
 internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
 {
-    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
-
     public override SyntaxKind Kind(SyntaxNode node) => node.Kind();
 
     public override ComparisonKind ComparisonKind(SyntaxNode node) =>
@@ -106,16 +104,28 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
             ? expression.RemoveConditionalAccess()
             : node;
 
-    public override SyntaxNode RemoveParentheses(SyntaxNode node) =>
-        node.RemoveParentheses();
+    public override bool IsStatic(SyntaxNode node) => Cast<BaseMethodDeclarationSyntax>(node).IsStatic();
+
+    public override SyntaxNode RemoveParentheses(SyntaxNode node) => node.RemoveParentheses();
+
+    public override string StringValue(SyntaxNode node, SemanticModel semanticModel)
+    {
+        if (node != null)
+        {
+            if (node.IsAnyKind(SyntaxKind.StringLiteralExpression, SyntaxKindEx.Utf8StringLiteralExpression)
+                && node is LiteralExpressionSyntax literal)
+            {
+                return literal.Token.ValueText;
+            }
+            else if (node is InterpolatedStringExpressionSyntax interpolatedExpression)
+            {
+                interpolatedExpression.TryGetGetInterpolatedTextValue(semanticModel, out var interpolatedValue);
+                return interpolatedValue ?? interpolatedExpression.GetContentsText() ?? null;
+            }
+        }
+        return null;
+    }
 
     public override bool TryGetGetInterpolatedTextValue(SyntaxNode node, SemanticModel semanticModel, out string interpolatedValue) =>
         Cast<InterpolatedStringExpressionSyntax>(node).TryGetGetInterpolatedTextValue(semanticModel, out interpolatedValue);
-
-    public override bool IsStatic(SyntaxNode node) => Cast<BaseMethodDeclarationSyntax>(node).IsStatic();
-
-    protected override SyntaxToken Token(SyntaxNode node) => node is LiteralExpressionSyntax literal ? literal.Token : default;
-
-    public override string InterpolatedTextGetContentsText(SyntaxNode node) =>
-        node is InterpolatedStringExpressionSyntax interpolatedExpression ? interpolatedExpression.GetContentsText() : null;
 }
