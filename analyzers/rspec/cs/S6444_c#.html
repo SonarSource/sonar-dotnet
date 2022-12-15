@@ -19,16 +19,22 @@ excessively long.</p>
 </ul>
 <h2>Sensitive Code Example</h2>
 <pre>
-var emailPattern = new Regex(".+@.+", RegexOptions.None);
-var isNumber = Regex.IsMatch(input, "[0-9]+");
-var isLetterA = Regex.IsMatch(input, "(a+)+");
+public void RegexPattern(string input)
+{
+    var emailPattern = new Regex(".+@.+", RegexOptions.None);
+    var isNumber = Regex.IsMatch(input, "[0-9]+");
+    var isLetterA = Regex.IsMatch(input, "(a+)+");
+}
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-var emailPattern = new Regex(".+@.+", RegexOptions.None, TimeSpan.FromMilliseconds(100));
-var isNumber = Regex.IsMatch(input, "[0-9]+", RegexOptions.None, TimeSpan.FromMilliseconds(100));
-var isLetterA = Regex.IsMatch(input, "(a+)+", RegexOptions.NonBacktracking); // .Net 7 and above
-AppDomain.CurrentDomain.SetData("REGEX_DEFAULT_MATCH_TIMEOUT", TimeSpan.FromMilliseconds(100)); // process-wide setting
+public void RegexPattern(string input)
+{
+    var emailPattern = new Regex(".+@.+", RegexOptions.None, TimeSpan.FromMilliseconds(100));
+    var isNumber = Regex.IsMatch(input, "[0-9]+", RegexOptions.None, TimeSpan.FromMilliseconds(100));
+    var isLetterA = Regex.IsMatch(input, "(a+)+", RegexOptions.NonBacktracking); // .Net 7 and above
+    AppDomain.CurrentDomain.SetData("REGEX_DEFAULT_MATCH_TIMEOUT", TimeSpan.FromMilliseconds(100)); // process-wide setting
+}
 </pre>
 <h2>See</h2>
 <ul>

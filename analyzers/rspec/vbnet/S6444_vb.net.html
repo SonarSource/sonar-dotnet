@@ -19,16 +19,20 @@ excessively long.</p>
 </ul>
 <h2>Sensitive Code Example</h2>
 <pre>
-Dim emailPattern As New Regex(".+@.+", RegexOptions.None)
-Dim isNumber as Boolean = Regex.IsMatch(input, "[0-9]+")
-Dim isLetterA as Boolean = Regex.IsMatch(input, "(a+)+");
+Public Sub RegexPattern(Input As String)
+    Dim EmailPattern As New Regex(".+@.+", RegexOptions.None)
+    Dim IsNumber as Boolean = Regex.IsMatch(Input, "[0-9]+")
+    Dim IsLetterA as Boolean = Regex.IsMatch(Input, "(a+)+")
+End Sub
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Dim emailPattern As New Regex(".+@.+", RegexOptions.None, TimeSpan.FromMilliseconds(100))
-Dim isNumber as Boolean = Regex.IsMatch(input, "[0-9]+", RegexOptions.None, TimeSpan.FromMilliseconds(100))
-Dim isLetterA As Boolean = Regex.IsMatch(input, "(a+)+", RegexOptions.NonBacktracking) '.Net 7 And above
-AppDomain.CurrentDomain.SetData("REGEX_DEFAULT_MATCH_TIMEOUT", TimeSpan.FromMilliseconds(100)) 'process-wide setting
+Public Sub RegexPattern(Input As String)
+    Dim EmailPattern As New Regex(".+@.+", RegexOptions.None, TimeSpan.FromMilliseconds(100))
+    Dim IsNumber as Boolean = Regex.IsMatch(Input, "[0-9]+", RegexOptions.None, TimeSpan.FromMilliseconds(100))
+    Dim IsLetterA As Boolean = Regex.IsMatch(Input, "(a+)+", RegexOptions.NonBacktracking) '.Net 7 And above
+    AppDomain.CurrentDomain.SetData("REGEX_DEFAULT_MATCH_TIMEOUT", TimeSpan.FromMilliseconds(100)) 'process-wide setting
+End Sub
 </pre>
 <h2>See</h2>
 <ul>

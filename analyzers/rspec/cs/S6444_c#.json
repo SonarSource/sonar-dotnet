@@ -11,7 +11,7 @@
     "owasp-a1",
     "regex"
   ],
-  "defaultSeverity": "Minor",
+  "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-6444",
   "sqKey": "S6444",
   "scope": "Main",
@@ -24,5 +24,5 @@
       "A1"
     ]
   },
-  "quickfix": "unknown"
+  "quickfix": "targeted"
 }
