@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 });
 
-        private static void CheckTrivias(SyntaxTreeAnalysisContext context, IEnumerable<SyntaxTrivia> trivias)
+        private static void CheckTrivias(SonarSyntaxTreeAnalysisContext context, IEnumerable<SyntaxTrivia> trivias)
         {
             var shouldReport = true;
             foreach (var trivia in trivias)
@@ -68,7 +68,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckMultilineComment(SyntaxTreeAnalysisContext context, SyntaxTrivia trivia)
+        private static void CheckMultilineComment(SonarSyntaxTreeAnalysisContext context, SyntaxTrivia trivia)
         {
             var triviaLines = TriviaContent().Split(MetricsBase.LineTerminators, StringSplitOptions.None);
 

@@ -37,10 +37,10 @@ namespace SonarAnalyzer.Helpers
                                                                                params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct =>
             context.RegisterSyntaxNodeActionInNonGenerated(VisualBasicGeneratedCodeRecognizer.Instance, action, syntaxKinds);
 
-        public static void RegisterSyntaxTreeActionInNonGenerated(this SonarAnalysisContext context, Action<SyntaxTreeAnalysisContext> action) =>
+        public static void RegisterSyntaxTreeActionInNonGenerated(this SonarAnalysisContext context, Action<SonarSyntaxTreeAnalysisContext> action) =>
             context.RegisterSyntaxTreeActionInNonGenerated(VisualBasicGeneratedCodeRecognizer.Instance, action);
 
-        public static void RegisterSyntaxTreeActionInNonGenerated(this ParameterLoadingAnalysisContext context, Action<SyntaxTreeAnalysisContext> action) =>
+        public static void RegisterSyntaxTreeActionInNonGenerated(this ParameterLoadingAnalysisContext context, Action<SonarSyntaxTreeAnalysisContext> action) =>
             context.RegisterSyntaxTreeActionInNonGenerated(VisualBasicGeneratedCodeRecognizer.Instance, action);
 
         public static void RegisterCodeBlockStartActionInNonGenerated<TSyntaxKind>(this SonarAnalysisContext context, Action<CodeBlockStartAnalysisContext<TSyntaxKind>> action)

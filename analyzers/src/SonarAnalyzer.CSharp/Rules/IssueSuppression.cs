@@ -60,13 +60,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     foreach (var token in c.Tree.GetRoot().DescendantTokens())
                     {
-                        CheckTrivias(token.LeadingTrivia, c);
-                        CheckTrivias(token.TrailingTrivia, c);
+                        CheckTrivias(c, token.LeadingTrivia);
+                        CheckTrivias(c, token.TrailingTrivia);
                     }
                 });
         }
 
-        private static void CheckTrivias(SyntaxTriviaList triviaList, SyntaxTreeAnalysisContext c)
+        private static void CheckTrivias(SonarSyntaxTreeAnalysisContext c, SyntaxTriviaList triviaList)
         {
             var pragmaWarnings = triviaList
                 .Where(t => t.HasStructure)
