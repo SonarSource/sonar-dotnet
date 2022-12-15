@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Helpers
                                                                                      params TLanguageKindEnum[] syntaxKinds) where TLanguageKindEnum : struct =>
             context.RegisterSyntaxNodeAction(c =>
                 {
-                    if (SonarAnalysisContext.ShouldAnalyze(context.TryGetValue, context.TryGetValue, generatedCodeRecognizer, c.GetSyntaxTree(), c.Compilation, c.Options))
+                    if (SonarAnalysisContext.ShouldAnalyze(context.TryGetValue, generatedCodeRecognizer, c.GetSyntaxTree(), c.Compilation, c.Options))
                     {
                         action(c);
                     }
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Helpers
                                                                                      params TLanguageKindEnum[] syntaxKinds) where TLanguageKindEnum : struct =>
             context.Context.RegisterSyntaxNodeAction(c =>
                 {
-                    if (SonarAnalysisContext.ShouldAnalyze(context.Context.TryGetValue, context.Context.TryGetValue, generatedCodeRecognizer, c.GetSyntaxTree(), c.Compilation, c.Options))
+                    if (SonarAnalysisContext.ShouldAnalyze(context.Context.TryGetValue, generatedCodeRecognizer, c.GetSyntaxTree(), c.Compilation, c.Options))
                     {
                         action(c);
                     }
@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Helpers
                                                                                      params TLanguageKindEnum[] syntaxKinds) where TLanguageKindEnum : struct =>
             context.RegisterSyntaxNodeAction(c =>
                 {
-                    if (SonarAnalysisContext.ShouldAnalyze(context.TryGetValue, context.TryGetValue, generatedCodeRecognizer, c.GetSyntaxTree(), c.Compilation, c.Options))
+                    if (SonarAnalysisContext.ShouldAnalyze(context.TryGetValue, generatedCodeRecognizer, c.GetSyntaxTree(), c.Compilation, c.Options))
                     {
                         action(c);
                     }
@@ -68,7 +68,7 @@ namespace SonarAnalyzer.Helpers
             context.RegisterCompilationStartAction(csac =>
                 csac.RegisterSyntaxTreeAction(c =>
                     {
-                        if (SonarAnalysisContext.ShouldAnalyze(context.TryGetValue, context.TryGetValue, generatedCodeRecognizer, c.GetSyntaxTree(), csac.Compilation, c.Options))
+                        if (SonarAnalysisContext.ShouldAnalyze(context.TryGetValue, generatedCodeRecognizer, c.GetSyntaxTree(), csac.Compilation, c.Options))
                         {
                             action(c);
                         }
@@ -80,7 +80,7 @@ namespace SonarAnalyzer.Helpers
             context.RegisterCompilationStartAction(csac =>
                 csac.RegisterSyntaxTreeAction(c =>
                     {
-                        if (SonarAnalysisContext.ShouldAnalyze(context.Context.TryGetValue, context.Context.TryGetValue, generatedCodeRecognizer, c.GetSyntaxTree(), csac.Compilation, c.Options))
+                        if (SonarAnalysisContext.ShouldAnalyze(context.Context.TryGetValue, generatedCodeRecognizer, c.GetSyntaxTree(), csac.Compilation, c.Options))
                         {
                             action(c);
                         }
@@ -91,7 +91,7 @@ namespace SonarAnalyzer.Helpers
                                                                                          Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action) where TLanguageKindEnum : struct =>
             context.RegisterCodeBlockStartAction<TLanguageKindEnum>(c =>
                 {
-                    if (SonarAnalysisContext.ShouldAnalyze(context.TryGetValue, context.TryGetValue, generatedCodeRecognizer, c.GetSyntaxTree(), c.SemanticModel.Compilation, c.Options))
+                    if (SonarAnalysisContext.ShouldAnalyze(context.TryGetValue, generatedCodeRecognizer, c.GetSyntaxTree(), c.SemanticModel.Compilation, c.Options))
                     {
                         action(c);
                     }
@@ -99,7 +99,7 @@ namespace SonarAnalyzer.Helpers
 
         public static void ReportDiagnosticIfNonGenerated(this CompilationAnalysisContext context, GeneratedCodeRecognizer generatedCodeRecognizer, Diagnostic diagnostic)
         {
-            if (SonarAnalysisContext.ShouldAnalyze(context.TryGetValue, context.TryGetValue, generatedCodeRecognizer, diagnostic.Location.SourceTree, context.Compilation, context.Options))
+            if (SonarAnalysisContext.ShouldAnalyze(context.TryGetValue, generatedCodeRecognizer, diagnostic.Location.SourceTree, context.Compilation, context.Options))
             {
                 context.ReportIssue(diagnostic);
             }
@@ -107,7 +107,7 @@ namespace SonarAnalyzer.Helpers
 
         public static void ReportDiagnosticIfNonGenerated(this SymbolAnalysisContext context, GeneratedCodeRecognizer generatedCodeRecognizer, Diagnostic diagnostic)
         {
-            if (SonarAnalysisContext.ShouldAnalyze(AnalyzeGeneratedNoCache, ProjectConfigReaderNoCache, generatedCodeRecognizer, diagnostic.Location.SourceTree, context.Compilation, context.Options))
+            if (SonarAnalysisContext.ShouldAnalyze(AnalyzeGeneratedNoCache, generatedCodeRecognizer, diagnostic.Location.SourceTree, context.Compilation, context.Options))
             {
                 context.ReportIssue(diagnostic);
             }
@@ -115,18 +115,6 @@ namespace SonarAnalyzer.Helpers
             bool AnalyzeGeneratedNoCache(SourceText text, SourceTextValueProvider<bool> valueProvider, out bool value)
             {
                 value = PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(PropertiesHelper.GetSettings(context.Options), context.Compilation.Language);
-                return true;
-            }
-
-            bool ProjectConfigReaderNoCache(SourceText text, SourceTextValueProvider<ProjectConfigReader> valueProvider, out ProjectConfigReader value)
-            {
-                value = SonarAnalysisContext.ProjectConfiguration(CreateProjectConfigReader, context.Options);
-                return true;
-            }
-
-            bool CreateProjectConfigReader(SourceText text, SourceTextValueProvider<ProjectConfigReader> valueProvider, out ProjectConfigReader value)
-            {
-                value = new ProjectConfigReader(text); // Recreating manually, SourceTextValueProvider doesn't have public API to use
                 return true;
             }
         }

@@ -69,6 +69,6 @@ namespace SonarAnalyzer.Helpers
         }
 
         internal static bool ShouldAnalyze(this SyntaxTree tree, SonarAnalysisContext context, Compilation compilation, AnalyzerOptions options) =>
-            SonarAnalysisContext.ShouldAnalyze(context.TryGetValue, context.TryGetValue, CSharpGeneratedCodeRecognizer.Instance, tree, compilation, options);
+            SonarAnalysisContext.ShouldAnalyze(context.TryGetValue, CSharpGeneratedCodeRecognizer.Instance, tree, compilation, options);
     }
 }

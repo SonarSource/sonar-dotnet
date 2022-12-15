@@ -301,6 +301,18 @@ $@"namespace PartiallyGenerated
         [DataTestMethod]
         [DataRow(SnippetFileName, false)]
         [DataRow(AnotherFileName, true)]
+        public void RegisterSyntaxNodeActionInNonGenerated_UnchangedFiles_SonarAnalysisContext_GeneratedFile(string unchangedFileName, bool expected)
+        {
+            var context = new DummyAnalysisContext(TestContext, unchangedFileName);
+            var sut = new SonarAnalysisContext(context, DummyMainDescriptor);
+            sut.RegisterSyntaxNodeAction<SyntaxKind>(context.DelegateAction);
+
+            context.AssertDelegateInvoked(expected);
+        }
+
+        [DataTestMethod]
+        [DataRow(SnippetFileName, false)]
+        [DataRow(AnotherFileName, true)]
         public void RegisterSyntaxNodeActionInNonGenerated_UnchangedFiles_ParameterLoadingAnalysisContext(string unchangedFileName, bool expected)
         {
             var context = new DummyAnalysisContext(TestContext, unchangedFileName);
