@@ -322,7 +322,7 @@ public partial class SonarAnalysisContextTest
         sut.Invoking(x => x.ProjectConfiguration(options))
            .Should()
            .Throw<InvalidOperationException>()
-           .WithMessage("File SonarProjectConfig.xml has been added as an AdditionalFile but could not be read and parsed.");
+           .WithMessage("File 'SonarProjectConfig.xml' has been added as an AdditionalFile but could not be read and parsed.");
     }
 
     [TestMethod]
@@ -335,7 +335,7 @@ public partial class SonarAnalysisContextTest
         sut.Invoking(x => x.ProjectConfiguration(options))
            .Should()
            .Throw<InvalidOperationException>()
-           .WithMessage("File SonarProjectConfig.xml has been added as an AdditionalFile but could not be read and parsed.");
+           .WithMessage("File 'SonarProjectConfig.xml' has been added as an AdditionalFile but could not be read and parsed.");
     }
 
     [DataTestMethod]
