@@ -26,7 +26,6 @@ import org.sonarsource.dotnet.shared.plugins.CodeCoverageProvider;
 import org.sonarsource.dotnet.shared.plugins.DotNetPluginMetadata;
 import org.sonarsource.dotnet.shared.plugins.DotNetSensor;
 import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
-import org.sonarsource.dotnet.shared.plugins.FileCacheSensor;
 import org.sonarsource.dotnet.shared.plugins.FileTypeSensor;
 import org.sonarsource.dotnet.shared.plugins.GeneratedFileFilter;
 import org.sonarsource.dotnet.shared.plugins.HashProvider;
@@ -83,7 +82,7 @@ public class CSharpPlugin implements Plugin {
       // importers / exporters
       // Analysis warnings sensor is registered only here, without a language filter, to avoid pushing warnings multiple times.
       AnalysisWarningsSensor.class,
-      FileCacheSensor.class,
+      CSharpFileCacheSensor.class,
       ProtobufDataImporter.class,
       RoslynDataImporter.class,
       RoslynProfileExporter.class,

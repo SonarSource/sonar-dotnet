@@ -19,17 +19,17 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.batch.sensor.cache.WriteCache;
-import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.internal.MapSettings;
+import org.sonar.api.resources.AbstractLanguage;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
@@ -42,22 +42,14 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class FileCacheSensorTest {
+public class AbstractFileCacheSensorTest {
+  private static final String LANGUAGE_KEY = "language-key";
+
   @Rule
   public TemporaryFolder temp = new TemporaryFolder();
 
   @Rule
   public LogTester logTester = new LogTester();
-
-  @Test
-  public void should_describe() {
-    var sensorDescriptor = new DefaultSensorDescriptor();
-    var sensor = new FileCacheSensor(new HashProvider());
-    sensor.describe(sensorDescriptor);
-
-    assertThat(sensorDescriptor.name()).isEqualTo("File Hash Caching Sensor");
-    assertThat(sensorDescriptor.languages()).isEmpty();
-  }
 
   @Test
   public void execute_whenAnalyzingPullRequest_logsMessage() throws IOException {
@@ -141,9 +133,30 @@ public class FileCacheSensorTest {
     context.setCacheEnabled(true);
     context.setSettings(settings);
     context.setNextCache(mock(WriteCache.class));
-    context.fileSystem().add(new TestInputFileBuilder("foo", basePath, new File(basePath, "CSharp/Foo.cs")).setLanguage("cs").setType(InputFile.Type.MAIN).build());
-    context.fileSystem().add(new TestInputFileBuilder("bar", basePath, new File(basePath, "VB\\Bar.vb")).setLanguage("vbnet").setType(InputFile.Type.MAIN).build());
+    context.fileSystem().add(new TestInputFileBuilder("foo", basePath, new File(basePath, "CSharp/Foo.cs")).setLanguage(LANGUAGE_KEY).setType(InputFile.Type.MAIN).build());
+    context.fileSystem().add(new TestInputFileBuilder("bar", basePath, new File(basePath, "VB\\Bar.vb")).setLanguage(LANGUAGE_KEY).setType(InputFile.Type.MAIN).build());
 
     return context;
+  }
+
+  private static class FileCacheSensor extends AbstractFileCacheSensor {
+    public FileCacheSensor(HashProvider hashProvider) {
+      super(new Language(), hashProvider);
+    }
+
+    @Override
+    public void describe(SensorDescriptor descriptor) { }
+  }
+
+  private static class Language extends AbstractLanguage {
+
+    public Language() {
+      super(LANGUAGE_KEY);
+    }
+
+    @Override
+    public String[] getFileSuffixes() {
+      return new String[] {".cs", ".vb" };
+    }
   }
 }

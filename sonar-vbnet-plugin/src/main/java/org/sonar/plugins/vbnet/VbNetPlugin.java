@@ -66,6 +66,7 @@ public class VbNetPlugin implements Plugin {
       ReportPathCollector.class,
       // sensor
       DotNetSensor.class,
+      VbNetFileCacheSensor.class,
       // language-specific
       METADATA,
       VbNet.class,

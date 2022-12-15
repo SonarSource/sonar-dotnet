@@ -72,6 +72,7 @@ public class VbNetPluginTest {
       RoslynProfileExporter.class,
       SonarLintProfileExporter.class,
       VbNet.class,
+      VbNetFileCacheSensor.class,
       VbNetGlobalProtobufFileProcessor.class,
       VbNetLanguageConfiguration.class,
       VbNetModuleConfiguration.class,
