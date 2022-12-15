@@ -122,7 +122,7 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
     public bool ShouldAnalyze(GeneratedCodeRecognizer generatedCodeRecognizer) =>
         ShouldAnalyze(generatedCodeRecognizer, Tree, Compilation, Options);
 
-    private protected void ReportIssue(ReportingContext reportingContext)
+    private protected void ReportIssue(ReportingContext reportingContext)   // FIXME: Change design to make this public on one place
     {
         if (!reportingContext.Diagnostic.Descriptor.HasMatchingScope(reportingContext.Compilation, IsTestProject(), ProjectConfiguration().IsScannerRun))
         {
