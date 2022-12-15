@@ -57,10 +57,6 @@ namespace SonarAnalyzer.Helpers
             ReportIssue(new ReportingContext(context, diagnostic), null, null);
 
         /// <param name="verifyScopeContext">Provide value for this argument only if the class has more than one SupportedDiagnostics.</param>
-        public static void ReportIssue(this SymbolAnalysisContext context, Diagnostic diagnostic, SonarAnalysisContext verifyScopeContext = null) =>
-            ReportIssue(new ReportingContext(context, diagnostic), verifyScopeContext?.IsTestProject(context.Compilation, context.Options), verifyScopeContext?.IsScannerRun(context.Options));
-
-        /// <param name="verifyScopeContext">Provide value for this argument only if the class has more than one SupportedDiagnostics.</param>
         public static void ReportIssue(this CodeBlockAnalysisContext context, Diagnostic diagnostic, SonarAnalysisContext verifyScopeContext = null) =>
             ReportIssue(new ReportingContext(context, diagnostic), verifyScopeContext?.IsTestProject(context.SemanticModel.Compilation, context.Options),
                 verifyScopeContext?.IsScannerRun(context.Options));
