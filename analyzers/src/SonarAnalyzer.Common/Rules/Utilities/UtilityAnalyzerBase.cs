@@ -119,7 +119,7 @@ namespace SonarAnalyzer.Rules
             && FileExtensionWhitelist.Contains(Path.GetExtension(tree.FilePath))
             && (AnalyzeGeneratedCode || !Language.GeneratedCodeRecognizer.IsGenerated(tree));
 
-        private bool ShouldGenerateMetrics(CompilationAnalysisContext context, SyntaxTree tree) =>
+        private bool ShouldGenerateMetrics(SonarCompilationAnalysisContext context, SyntaxTree tree) =>
             (AnalyzeUnchangedFiles || !SonarAnalysisContext.IsUnchanged(context.TryGetValue, tree, context.Compilation, context.Options))
             && ShouldGenerateMetrics(tree);
     }
