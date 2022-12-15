@@ -108,9 +108,12 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
     public ProjectConfigReader ProjectConfiguration() =>
         ProjectConfiguration(Options);
 
+    public bool IsScannerRun() =>
+        ProjectConfiguration().IsScannerRun;
+
     public bool IsTestProject()
     {
-        var projectType = ProjectConfiguration(Options).ProjectType;
+        var projectType = ProjectConfiguration().ProjectType;
         return projectType == ProjectType.Unknown
             ? Compilation.IsTest()              // SonarLint, NuGet or Scanner <= 5.0
             : projectType == ProjectType.Test;  // Scanner >= 5.1 does authoritative decision that we follow

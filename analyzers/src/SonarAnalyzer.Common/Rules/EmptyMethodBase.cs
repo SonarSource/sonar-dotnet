@@ -35,8 +35,7 @@ namespace SonarAnalyzer.Rules
                 {
                     if (c.ShouldAnalyze(GeneratedCodeRecognizer))
                     {
-                        var isTestProject = context.IsTestProject(c.Compilation, c.Options);
-                        CheckMethod(c.Context, isTestProject);
+                        CheckMethod(c.Context, c.IsTestProject());
                     }
                 },
                 SyntaxKinds.ToArray());

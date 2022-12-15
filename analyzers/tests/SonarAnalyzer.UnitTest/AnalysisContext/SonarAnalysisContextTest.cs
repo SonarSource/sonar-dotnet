@@ -19,6 +19,7 @@
  */
 
 using System.IO;
+using Moq;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.Helpers;
@@ -337,15 +338,6 @@ public partial class SonarAnalysisContextTest
            .WithMessage("File SonarProjectConfig.xml has been added as an AdditionalFile but could not be read and parsed.");
     }
 
-    [TestMethod]
-    public void IsTestProject_Standalone_NoCompilation_IsFalse()
-    {
-        var options = new AnalyzerOptions(ImmutableArray<AdditionalText>.Empty);
-        var context = new SonarAnalysisContext(new DummyContext(), Enumerable.Empty<DiagnosticDescriptor>());
-
-        context.IsTestProject(null, options).Should().BeFalse();
-    }
-
     [DataTestMethod]
     [DataRow(ProjectType.Product, false)]
     [DataRow(ProjectType.Test, true)]
@@ -353,9 +345,11 @@ public partial class SonarAnalysisContextTest
     {
         var compilation = new SnippetCompiler("// Nothing to see here", TestHelper.ProjectTypeReference(projectType)).SemanticModel.Compilation;
         var options = new AnalyzerOptions(ImmutableArray<AdditionalText>.Empty);
-        var context = new SonarAnalysisContext(new DummyContext(), Enumerable.Empty<DiagnosticDescriptor>());
+        var analysisContext = new SonarAnalysisContext(new DummyContext(), Enumerable.Empty<DiagnosticDescriptor>());
+        var context = new CompilationAnalysisContext(compilation, options, null, null, default);
+        var sut = new SonarCompilationAnalysisContext(analysisContext, context);
 
-        context.IsTestProject(compilation, options).Should().Be(expectedResult);
+        sut.IsTestProject().Should().Be(expectedResult);
     }
 
     [DataTestMethod]
@@ -364,9 +358,11 @@ public partial class SonarAnalysisContextTest
     public void IsTestProject_WithConfigFile(ProjectType projectType, bool expectedResult)
     {
         var configPath = TestHelper.CreateSonarProjectConfig(TestContext, projectType);
+        var analysisContext = new SonarAnalysisContext(new DummyContext(), Enumerable.Empty<DiagnosticDescriptor>());
         var context = new CompilationAnalysisContext(null, TestHelper.CreateOptions(configPath), null, null, default);
+        var sut = new SonarCompilationAnalysisContext(analysisContext, context);
 
-        SonarAnalysisContext.IsTestProject(context).Should().Be(expectedResult);
+        sut.IsTestProject().Should().Be(expectedResult);
     }
 
     internal class DummyContext : AnalysisContext

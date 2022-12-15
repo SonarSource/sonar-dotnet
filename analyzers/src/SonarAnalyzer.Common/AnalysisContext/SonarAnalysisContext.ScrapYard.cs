@@ -33,20 +33,20 @@ namespace SonarAnalyzer;
 /// </summary>
 public partial class SonarAnalysisContext
 {
-    public delegate bool TryGetValueDelegate<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value);     // FIXME: Done, to be deleted
+    private delegate bool TryGetValueDelegate<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value);     // FIXME: Done, to be deleted
 
     private static readonly SourceTextValueProvider<ProjectConfigReader> ProjectConfigProvider = new(x => new ProjectConfigReader(x));      // FIXME: Done, to be deleted
 
-    public bool IsScannerRun(AnalyzerOptions options) =>
+    public bool IsScannerRun(AnalyzerOptions options) =>                    // FIXME: Done, to be deleted
         ProjectConfiguration(context.TryGetValue, options).IsScannerRun;
 
-    public static bool IsScannerRun(CompilationAnalysisContext context) =>
+    public static bool IsScannerRun(CompilationAnalysisContext context) =>  // FIXME: Done, to be deleted
         ProjectConfiguration(context.TryGetValue, context.Options).IsScannerRun;
 
-    public bool IsTestProject(Compilation c, AnalyzerOptions options) =>
+    public bool IsTestProject(Compilation c, AnalyzerOptions options) =>    // FIXME: Done, to be deleted
         IsTestProject(context.TryGetValue, c, options);
 
-    public static bool IsTestProject(CompilationAnalysisContext analysisContext) =>
+    public static bool IsTestProject(CompilationAnalysisContext analysisContext) => // FIXME: Done, to be deleted
         IsTestProject(analysisContext.TryGetValue, analysisContext.Compilation, analysisContext.Options);
 
     private static ProjectConfigReader ProjectConfiguration(TryGetValueDelegate<ProjectConfigReader> tryGetValue, AnalyzerOptions options) // FIXME: Done, to be deleted
