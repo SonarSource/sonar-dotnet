@@ -31,12 +31,13 @@ import org.sonarqube.ws.Duplications;
 import org.sonarqube.ws.Issues;
 
 import java.io.BufferedWriter;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
-import java.nio.file.Files;
 
 import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -194,7 +195,13 @@ public class IncrementalAnalysisTest {
   }
 
   private void createDuplicate(File oldFile, File newFile) throws IOException {
-    String content = Files.readString(oldFile.toPath());
+    BufferedReader reader = new BufferedReader(new FileReader(oldFile));
+    String content = "";
+    String currentLine;
+    while ((currentLine = reader.readLine()) != null) {
+      content += currentLine + System.lineSeparator();
+    }
+    reader.close();
     content = content.replace("OriginalClass", "CopyClass");
     createFileWithContent(newFile, content);
   }
