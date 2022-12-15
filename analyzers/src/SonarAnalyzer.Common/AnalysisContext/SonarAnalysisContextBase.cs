@@ -57,7 +57,7 @@ public abstract class SonarAnalysisContextBase
         }
     }
 
-    private bool IsUnchanged(SyntaxTree tree, Compilation compilation, AnalyzerOptions options) =>
+    public bool IsUnchanged(SyntaxTree tree, Compilation compilation, AnalyzerOptions options) =>
         UnchangedFilesCache.GetValue(compilation, _ => CreateUnchangedFilesHashSet(options)).Contains(tree.FilePath);
 
     private ImmutableHashSet<string> CreateUnchangedFilesHashSet(AnalyzerOptions options) =>

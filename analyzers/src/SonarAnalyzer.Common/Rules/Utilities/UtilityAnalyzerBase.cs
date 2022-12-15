@@ -120,7 +120,7 @@ namespace SonarAnalyzer.Rules
             && (AnalyzeGeneratedCode || !Language.GeneratedCodeRecognizer.IsGenerated(tree));
 
         private bool ShouldGenerateMetrics(SonarCompilationAnalysisContext context, SyntaxTree tree) =>
-            (AnalyzeUnchangedFiles || !SonarAnalysisContext.IsUnchanged(context.TryGetValue, tree, context.Compilation, context.Options))
+            (AnalyzeUnchangedFiles || !context.IsUnchanged(tree, context.Compilation, context.Options))
             && ShouldGenerateMetrics(tree);
     }
 }
