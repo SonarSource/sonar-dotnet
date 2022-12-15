@@ -27,8 +27,8 @@ using SonarAnalyzer.Common;
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
     /// <summary>
-    /// Click <see href="https://github.com/SonarSource/sonar-dotnet/blob/master/docs/verifier-syntax.md">here</see> to see the
-    /// description of the supported syntax elements in code comments.
+    /// See <see href="https://github.com/SonarSource/sonar-dotnet/blob/master/docs/verifier-syntax.md">docs/verifier-syntax.md</see>
+    /// for a comprehensive documentation of the verifier syntax.
     /// </summary>
     public static class IssueLocationCollector
     {
