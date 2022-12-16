@@ -21,13 +21,13 @@
 using System.Collections.Concurrent;
 using System.Runtime.CompilerServices;
 
-namespace SonarAnalyzer;
+namespace SonarAnalyzer.Extensions;
 
-internal static class DiagnosticAnalyzerContextHelper   // FIXME: Rename and move
+internal static class SyntaxTreeExtensions
 {
     private static readonly ConditionalWeakTable<Compilation, ConcurrentDictionary<SyntaxTree, bool>> GeneratedCodeCache = new();
 
-    public static bool IsGenerated(this SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer, Compilation compilation)  // FIXME: Move
+    public static bool IsGenerated(this SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer, Compilation compilation)
     {
         if (tree == null)
         {

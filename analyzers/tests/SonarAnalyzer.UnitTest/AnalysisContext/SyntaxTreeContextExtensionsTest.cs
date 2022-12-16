@@ -27,8 +27,9 @@ using VB = SonarAnalyzer.Rules.VisualBasic;
 namespace SonarAnalyzer.UnitTest;
 
 [TestClass]
-public class DiagnosticAnalyzerContextHelperTest
+public class SyntaxTreeContextExtensionsTest
 {
+    // FIXME: Most of these UTs needs to go away
     private const string SnippetFileName = "snippet0.cs";
     private const string AnotherFileName = "Any other file name to make snippet0 considered as changed.cs";
 
@@ -304,7 +305,7 @@ $@"namespace PartiallyGenerated
     public void RegisterSyntaxNodeActionInNonGenerated_UnchangedFiles_ParameterLoadingAnalysisContext(string unchangedFileName, bool expected)
     {
         var context = new DummyAnalysisContext(TestContext, unchangedFileName);
-        var sut = new ParameterLoadingAnalysisContext(new(context, DummyMainDescriptor));
+        var sut = new SonarParametrizedAnalysisContext(new(context, DummyMainDescriptor));
         sut.RegisterSyntaxNodeActionInNonGenerated<SyntaxKind>(CSharpGeneratedCodeRecognizer.Instance, context.DelegateAction);
 
         context.AssertDelegateInvoked(expected);
@@ -328,7 +329,7 @@ $@"namespace PartiallyGenerated
     public void RegisterSyntaxTreeActionInNonGenerated_UnchangedFiles_ParameterLoadingAnalysisContext(string unchangedFileName, bool expected)
     {
         var context = new DummyAnalysisContext(TestContext, unchangedFileName);
-        var sut = new ParameterLoadingAnalysisContext(new(context, DummyMainDescriptor));
+        var sut = new SonarParametrizedAnalysisContext(new(context, DummyMainDescriptor));
         sut.RegisterSyntaxTreeActionInNonGenerated(CSharpGeneratedCodeRecognizer.Instance, context.DelegateAction);
         sut.ExecutePostponedActions(new(sut.Context, MockCompilationStartAnalysisContext(context)));  // Manual invocation, because ParameterLoadingAnalysisContext stores actions separately
 
