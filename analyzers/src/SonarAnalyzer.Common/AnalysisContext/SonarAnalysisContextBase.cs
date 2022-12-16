@@ -122,33 +122,4 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
 
     public bool ShouldAnalyze(GeneratedCodeRecognizer generatedCodeRecognizer) =>
         ShouldAnalyze(generatedCodeRecognizer, Tree, Compilation, Options);
-
-    private protected void ReportIssue(ReportingContext reportingContext)   // FIXME: Change design to make this public on one place
-    {
-        if (!reportingContext.Diagnostic.Descriptor.HasMatchingScope(reportingContext.Compilation, IsTestProject(), ProjectConfiguration().IsScannerRun))
-        {
-            return;
-        }
-
-        if (reportingContext is { Compilation: { } compilation, Diagnostic.Location: { Kind: LocationKind.SourceFile, SourceTree: { } tree } } && !compilation.ContainsSyntaxTree(tree))
-        {
-            Debug.Fail("Primary location should be part of the compilation. An AD0001 is raised if this is not the case.");
-            return;
-        }
-
-        // This is the current way SonarLint will handle how and what to report.
-        if (SonarAnalysisContext.ReportDiagnostic is not null)
-        {
-            Debug.Assert(SonarAnalysisContext.ShouldDiagnosticBeReported == null, "Not expecting SonarLint to set both the old and the new delegates.");
-            SonarAnalysisContext.ReportDiagnostic(reportingContext);
-            return;
-        }
-
-        // Standalone NuGet, Scanner run and SonarLint < 4.0 used with latest NuGet
-        if (!VbcHelper.IsTriggeringVbcError(reportingContext.Diagnostic)
-            && (SonarAnalysisContext.ShouldDiagnosticBeReported?.Invoke(reportingContext.SyntaxTree, reportingContext.Diagnostic) ?? true))
-        {
-            reportingContext.ReportDiagnostic(reportingContext.Diagnostic);
-        }
-    }
 }

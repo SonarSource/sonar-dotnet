@@ -23,7 +23,6 @@ namespace SonarAnalyzer.Helpers
     public interface IReportingContext
     {
         SyntaxTree SyntaxTree { get; }
-
         Diagnostic Diagnostic { get; }
 
         void ReportDiagnostic(Diagnostic diagnostic);

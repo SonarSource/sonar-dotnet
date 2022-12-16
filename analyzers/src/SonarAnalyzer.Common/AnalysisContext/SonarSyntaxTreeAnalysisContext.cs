@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer;
 
-public sealed class SonarSyntaxTreeAnalysisContext : SonarAnalysisContextBase<SyntaxTreeAnalysisContext>
+public sealed class SonarSyntaxTreeAnalysisContext : SonarReportingContextBase<SyntaxTreeAnalysisContext>
 {
     public override SyntaxTree Tree => Context.Tree;
     public override Compilation Compilation { get; }    // SyntaxTreeAnalysisContext doens't hold a Compilation reference
@@ -30,6 +30,6 @@ public sealed class SonarSyntaxTreeAnalysisContext : SonarAnalysisContextBase<Sy
     internal SonarSyntaxTreeAnalysisContext(SonarAnalysisContext analysisContext, SyntaxTreeAnalysisContext context, Compilation compilation) : base(analysisContext, context) =>
         Compilation = compilation;
 
-    public void ReportIssue(Diagnostic diagnostic) =>
-        ReportIssue(new ReportingContext(Context, diagnostic));
+    private protected override ReportingContext CreateReportingContext(Diagnostic diagnostic) =>
+        new(this, diagnostic);
 }
