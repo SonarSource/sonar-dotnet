@@ -11,5 +11,5 @@
   "ruleSpecification": "RSPEC-3353",
   "sqKey": "S3353",
   "scope": "Main",
-  "quickfix": "unknown"
+  "quickfix": "partial"
 }
