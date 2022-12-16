@@ -27,7 +27,7 @@ namespace SonarAnalyzer.Helpers
                                                                                params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct =>
             context.RegisterSyntaxNodeActionInNonGenerated(VisualBasicGeneratedCodeRecognizer.Instance, action, syntaxKinds);
 
-        public static void RegisterSyntaxNodeActionInNonGenerated<TSyntaxKind>(this ParameterLoadingAnalysisContext context,
+        public static void RegisterSyntaxNodeActionInNonGenerated<TSyntaxKind>(this SonarParametrizedAnalysisContext context,
                                                                                Action<SonarSyntaxNodeAnalysisContext> action,
                                                                                params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct =>
             context.RegisterSyntaxNodeActionInNonGenerated(VisualBasicGeneratedCodeRecognizer.Instance, action, syntaxKinds);
@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Helpers
         public static void RegisterSyntaxTreeActionInNonGenerated(this SonarAnalysisContext context, Action<SonarSyntaxTreeAnalysisContext> action) =>
             context.RegisterSyntaxTreeActionInNonGenerated(VisualBasicGeneratedCodeRecognizer.Instance, action);
 
-        public static void RegisterSyntaxTreeActionInNonGenerated(this ParameterLoadingAnalysisContext context, Action<SonarSyntaxTreeAnalysisContext> action) =>
+        public static void RegisterSyntaxTreeActionInNonGenerated(this SonarParametrizedAnalysisContext context, Action<SonarSyntaxTreeAnalysisContext> action) =>
             context.RegisterSyntaxTreeActionInNonGenerated(VisualBasicGeneratedCodeRecognizer.Instance, action);
 
         public static void RegisterCodeBlockStartActionInNonGenerated<TSyntaxKind>(this SonarAnalysisContext context, Action<SonarCodeBlockStartAnalysisContext<TSyntaxKind>> action)
