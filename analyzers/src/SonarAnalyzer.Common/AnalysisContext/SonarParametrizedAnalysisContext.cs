@@ -22,13 +22,13 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace SonarAnalyzer.Helpers;
 
-public sealed class ParameterLoadingAnalysisContext : SonarAnalysisContextBase
+public sealed class SonarParametrizedAnalysisContext : SonarAnalysisContextBase
 {
     private readonly List<Action<SonarCompilationStartAnalysisContext>> postponedActions = new();
 
     public SonarAnalysisContext Context { get; }
 
-    internal ParameterLoadingAnalysisContext(SonarAnalysisContext context) =>
+    internal SonarParametrizedAnalysisContext(SonarAnalysisContext context) =>
         Context = context;
 
     public void RegisterSyntaxNodeActionInNonGenerated<TSyntaxKind>(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxNodeAnalysisContext> action, params TSyntaxKind[] syntaxKinds)
