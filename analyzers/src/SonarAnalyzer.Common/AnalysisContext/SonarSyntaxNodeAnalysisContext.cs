@@ -22,7 +22,7 @@ namespace SonarAnalyzer;
 
 public sealed class SonarSyntaxNodeAnalysisContext : SonarReportingContextBase<SyntaxNodeAnalysisContext>
 {
-    public override SyntaxTree Tree => Context.GetSyntaxTree();
+    public override SyntaxTree Tree => Context.Node.SyntaxTree;
     public override Compilation Compilation => Context.Compilation;
     public override AnalyzerOptions Options => Context.Options;
     public override CancellationToken Cancel => Context.CancellationToken;

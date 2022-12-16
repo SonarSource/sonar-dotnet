@@ -19,7 +19,6 @@
  */
 
 using System.Text;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 using Moq;
 using SonarAnalyzer.Common;

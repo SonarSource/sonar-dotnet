@@ -22,7 +22,7 @@ namespace SonarAnalyzer;
 
 public sealed class SonarSymbolAnalysisContext : SonarReportingContextBase<SymbolAnalysisContext>
 {
-    public override SyntaxTree Tree => Context.GetFirstSyntaxTree();
+    public override SyntaxTree Tree => Context.Symbol.Locations.Select(x => x.SourceTree).FirstOrDefault(x => x is not null);
     public override Compilation Compilation => Context.Compilation;
     public override AnalyzerOptions Options => Context.Options;
     public override CancellationToken Cancel => Context.CancellationToken;
