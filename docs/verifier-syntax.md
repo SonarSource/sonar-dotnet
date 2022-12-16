@@ -9,7 +9,7 @@ These annotation patterns must appear after a single line comment (the supported
 Use `Noncompliant` to mark the current line as the primary location of an expected issue.
 
 ```cs
-    private void MyMethod() // Noncompliant
+    private void MyMethod() { } // Noncompliant
 ```
 
 ### Using offsets
@@ -17,7 +17,7 @@ Use `Noncompliant` to mark the current line as the primary location of an expect
 Using `@[+-][0-9]+` after a `Noncompliant` or `Secondary` comment will mark the expected location to be offset by the given number of lines.
 
 ```cs
-    private void MyMethod() // Noncompliant@+2 - issue is actually expected 2 lines after this comment
+    private void MyMethod() { } // Noncompliant@+2 - issue is actually expected 2 lines after this comment
 ```
 
 ### Checking the issue message
@@ -25,7 +25,7 @@ Using `@[+-][0-9]+` after a `Noncompliant` or `Secondary` comment will mark the 
 The message raised by the issue can be checked using the `{{expected message}}` pattern.
 
 ```cs
-    private void MyMethod() // Noncompliant {{Remove this unused private method}}
+    private void MyMethod() { } // Noncompliant {{Remove this unused private method}}
 ```
 
 ### Checking the precise/exact location of an issue
@@ -33,10 +33,10 @@ The message raised by the issue can be checked using the `{{expected message}}` 
 Only one precise location or column location can be present at one time. Precise location is used by adding `^^^^` comment under the location where the issue is expected. The alternative column location pattern can be used by following the `Noncompliant` or `Secondary` comment with `^X#Y` where `X` is the expected start column and Y the length of the issue.
 
 ```cs
-    private void MyMethod() // Noncompliant
+    private void MyMethod() { } // Noncompliant
 //  ^^^^^^^
 
-    private void MyMethod() // Noncompliant ^4#7
+    private void MyMethod() { } // Noncompliant ^4#7
 ```
 
 ### `Secondary` location comment
@@ -81,7 +81,7 @@ To declare that multiple issues are expected, each issue must be assigned an `[I
 Note that most of the previous patterns can be used together when needed.
 
 ```cs
-    private void MyMethod() // Noncompliant@+1 ^4#7 [MyIssueId] {{Remove this unused private method}}
+    private void MyMethod() { } // Noncompliant@+1 ^4#7 [MyIssueId] {{Remove this unused private method}}
 
     private void MyMethod(int i1, int i2) { }
     //                    ^^^^^^             {{Message for issue 1}}
