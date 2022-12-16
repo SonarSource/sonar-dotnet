@@ -18,9 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Extensions
 {
-    public static class VisualBasicDiagnosticAnalyzerContextHelper  // FIXME: Move and rename
+    public static class VisualBasicSonarAnalysisContextExtensions
     {
         public static void RegisterSyntaxNodeActionInNonGenerated<TSyntaxKind>(this SonarAnalysisContext context,
                                                                                Action<SonarSyntaxNodeAnalysisContext> action,
