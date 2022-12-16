@@ -33,7 +33,6 @@ import org.sonarsource.dotnet.shared.plugins.AnalysisWarningsSensor;
 import org.sonarsource.dotnet.shared.plugins.CodeCoverageProvider;
 import org.sonarsource.dotnet.shared.plugins.DotNetSensor;
 import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
-import org.sonarsource.dotnet.shared.plugins.FileCacheSensor;
 import org.sonarsource.dotnet.shared.plugins.FileTypeSensor;
 import org.sonarsource.dotnet.shared.plugins.GeneratedFileFilter;
 import org.sonarsource.dotnet.shared.plugins.HashProvider;
@@ -64,6 +63,7 @@ public class CSharpPluginTest {
     Object[] expectedExtensions = new Object[] {
       AnalysisWarningsSensor.class,
       CSharp.class,
+      CSharpFileCacheSensor.class,
       CSharpGlobalProtobufFileProcessor.class,
       CSharpLanguageConfiguration.class,
       CSharpModuleConfiguration.class,
@@ -71,7 +71,6 @@ public class CSharpPluginTest {
       CSharpSonarRulesDefinition.class,
       DotNetSensor.class,
       EncodingPerFile.class,
-      FileCacheSensor.class,
       FileTypeSensor.class,
       GeneratedFileFilter.class,
       HashProvider.class,

@@ -21,6 +21,7 @@ package org.sonarsource.dotnet.shared.plugins;
 
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
+import org.sonar.api.resources.AbstractLanguage;
 import org.sonar.api.scanner.ScannerSide;
 import org.sonar.api.scanner.sensor.ProjectSensor;
 import org.sonar.api.utils.log.Logger;
@@ -30,17 +31,20 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @ScannerSide
-public class FileCacheSensor implements ProjectSensor {
-  private static final Logger LOG = Loggers.get(FileCacheSensor.class);
+public abstract class AbstractFileCacheSensor implements ProjectSensor {
+  private static final Logger LOG = Loggers.get(AbstractFileCacheSensor.class);
+  private final AbstractLanguage language;
   private final HashProvider hashProvider;
 
-  public FileCacheSensor(HashProvider hashProvider) {
+  protected AbstractFileCacheSensor(AbstractLanguage language, HashProvider hashProvider) {
+    this.language = language;
     this.hashProvider = hashProvider;
   }
 
   @Override
   public void describe(SensorDescriptor descriptor) {
-    descriptor.name("File Hash Caching Sensor");
+    descriptor.name(language.getName() + " File Caching Sensor");
+    descriptor.onlyOnLanguage(language.getKey());
   }
 
   @Override
@@ -66,7 +70,7 @@ public class FileCacheSensor implements ProjectSensor {
 
     LOG.debug("Incremental PR analysis: Preparing to upload file hashes.");
     var fileSystem = context.fileSystem();
-    fileSystem.inputFiles(fileSystem.predicates().all()).forEach(inputFile -> {
+    fileSystem.inputFiles(fileSystem.predicates().hasLanguage(language.getKey())).forEach(inputFile -> {
       // Normalize to unix style separators. The scanner should be able to read the files on both windows and unix.
       var uri = inputFile.uri();
       var key = basePath.get().relativize(uri).getPath().replace('\\','/');
