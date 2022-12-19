@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.GreaterThanOrEqualExpression,
                 SyntaxKind.LeftShiftExpression,
                 SyntaxKind.RightShiftExpression,
-                SyntaxKindEx.UnsignedRightShiftAssignmentExpression,
+                SyntaxKindEx.UnsignedRightShiftExpression,
                 SyntaxKind.AddExpression,
                 SyntaxKind.SubtractExpression,
                 SyntaxKind.MultiplyExpression,

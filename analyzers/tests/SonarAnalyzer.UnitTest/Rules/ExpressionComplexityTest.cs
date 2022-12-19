@@ -61,6 +61,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("i", "^")]
         [DataRow("i", "&")]
         [DataRow("i", ">>")]
+        [DataRow("i", ">>>")]
         [DataRow("i", "<<")]
         [DataRow("i", "+")]
         [DataRow("i", "-")]
