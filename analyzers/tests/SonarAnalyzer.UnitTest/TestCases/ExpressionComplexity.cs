@@ -23,6 +23,9 @@ namespace Tests.Diagnostics
 
             var h = v1 ??= v2 ??= v3 ??= v4 ??= v5; // Noncompliant
 
+            var m = true && true && true && call(true && true && true && true && true, true, true) && true;
+            //                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                          [iss1] {{Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).}}
+            //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ @-1 [iss2] {{Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).}}
             call(
                 a =>
                 a = ((a1 ? false : true) || a1 || true && false && true || false)); // Noncompliant
