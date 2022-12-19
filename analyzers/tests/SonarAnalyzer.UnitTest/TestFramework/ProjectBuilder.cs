@@ -85,6 +85,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public ProjectBuilder AddSnippets(params string[] snippets) =>
             snippets.Aggregate(this, (current, snippet) => current.AddSnippet(snippet));
 
+        public ProjectBuilder AddSnippets(IEnumerable<Snippet> snippets) =>
+            snippets.Aggregate(this, (current, snippet) => current.AddSnippet(snippet.Content, snippet.FileName));
+
         public ProjectBuilder AddSnippet(string code, string fileName = null)
         {
             _ = code ?? throw new ArgumentNullException(nameof(code));
@@ -98,4 +101,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private static ProjectBuilder AddDocument(Project project, string fileName, string fileContent) =>
             FromProject(project.AddDocument(fileName, fileContent).Project);
     }
+
+    public record Snippet(string Content, string FileName);
 }
