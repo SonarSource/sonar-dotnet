@@ -24,7 +24,7 @@ using SonarAnalyzer.Metrics.CSharp;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class FunctionComplexity : ParameterLoadingDiagnosticAnalyzer
+    public class FunctionComplexity : ParametrizedDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S1541";
         private const string MessageFormat = "The Cyclomatic Complexity of this {2} is {1} which is greater than {0} authorized.";
@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context)
+        protected override void Initialize(SonarParametrizedAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {

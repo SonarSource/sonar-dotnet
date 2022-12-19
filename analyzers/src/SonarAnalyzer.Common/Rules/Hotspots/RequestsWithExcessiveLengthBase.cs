@@ -24,7 +24,7 @@ using System.Xml.XPath;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class RequestsWithExcessiveLengthBase<TSyntaxKind, TAttributeSyntax> : ParameterLoadingDiagnosticAnalyzer
+    public abstract class RequestsWithExcessiveLengthBase<TSyntaxKind, TAttributeSyntax> : ParametrizedDiagnosticAnalyzer
         where TSyntaxKind : struct
         where TAttributeSyntax : SyntaxNode
     {
@@ -63,7 +63,7 @@ namespace SonarAnalyzer.Rules
             rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
         }
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context)
+        protected override void Initialize(SonarParametrizedAnalysisContext context)
         {
             context.RegisterPostponedAction(
                 c =>

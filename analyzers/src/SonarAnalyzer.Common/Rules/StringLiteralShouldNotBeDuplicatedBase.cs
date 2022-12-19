@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class StringLiteralShouldNotBeDuplicatedBase<TSyntaxKind, TLiteralExpressionSyntax> : ParameterLoadingDiagnosticAnalyzer
+    public abstract class StringLiteralShouldNotBeDuplicatedBase<TSyntaxKind, TLiteralExpressionSyntax> : ParametrizedDiagnosticAnalyzer
         where TSyntaxKind : struct
         where TLiteralExpressionSyntax : SyntaxNode
     {
@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules
         protected StringLiteralShouldNotBeDuplicatedBase() =>
             rule = Language.CreateDescriptor(DiagnosticId, MessageFormat, isEnabledByDefault: false);
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context) =>
+        protected override void Initialize(SonarParametrizedAnalysisContext context) =>
             // Ideally we would like to report at assembly/project level for the primary and all string instances for secondary
             // locations. The problem is that this scenario is not yet supported on SonarQube side.
             // Hence the decision to do like other languages, at class-level

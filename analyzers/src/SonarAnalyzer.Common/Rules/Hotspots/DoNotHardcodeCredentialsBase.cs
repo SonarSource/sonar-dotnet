@@ -26,7 +26,7 @@ using SonarAnalyzer.Json.Parsing;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class DoNotHardcodeCredentialsBase<TSyntaxKind> : ParameterLoadingDiagnosticAnalyzer
+    public abstract class DoNotHardcodeCredentialsBase<TSyntaxKind> : ParametrizedDiagnosticAnalyzer
         where TSyntaxKind : struct
     {
         protected const char CredentialSeparator = ';';
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules
         private Regex passwordValuePattern;
 
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
-        protected abstract void InitializeActions(ParameterLoadingAnalysisContext context);
+        protected abstract void InitializeActions(SonarParametrizedAnalysisContext context);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
@@ -85,7 +85,7 @@ namespace SonarAnalyzer.Rules
                 $@"(?<{name}>[\w\d{Regex.Escape(UriPasswordSpecialCharacters)}{additionalCharacters}]+)";
         }
 
-        protected sealed override void Initialize(ParameterLoadingAnalysisContext context)
+        protected sealed override void Initialize(SonarParametrizedAnalysisContext context)
         {
             var input = new TrackerInput(context.Context, configuration, rule);
 

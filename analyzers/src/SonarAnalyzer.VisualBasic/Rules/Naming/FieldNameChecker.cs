@@ -20,13 +20,13 @@
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
-    public abstract class FieldNameChecker : ParameterLoadingDiagnosticAnalyzer
+    public abstract class FieldNameChecker : ParametrizedDiagnosticAnalyzer
     {
         public virtual string Pattern { get; set; }
 
         protected abstract bool IsCandidateSymbol(IFieldSymbol symbol);
 
-        protected sealed override void Initialize(ParameterLoadingAnalysisContext context)
+        protected sealed override void Initialize(SonarParametrizedAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
