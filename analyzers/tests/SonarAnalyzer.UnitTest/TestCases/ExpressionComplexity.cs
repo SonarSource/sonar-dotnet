@@ -26,9 +26,12 @@ namespace Tests.Diagnostics
             var m = true && true && true && call(true && true && true && true && true, true, true) && true;
             //                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                          [iss1] {{Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).}}
             //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ @-1 [iss2] {{Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).}}
+
             call(
                 a =>
                 a = ((a1 ? false : true) || a1 || true && false && true || false)); // Noncompliant
+
+            var n = (true && true && true) == (true && true && true); // Noncompliant
 
             for (var i = a1 ? (b1==0 ? (c1 ? (d1 ? 1 : 1) : 1) : 1) : 1; i < 1; i++) {} // Noncompliant
 

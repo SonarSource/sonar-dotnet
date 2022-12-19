@@ -42,18 +42,17 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(">")]
         [DataRow(">=")]
         public void ExpressionComplexity_TransparentComparissionOperators(string @operator) =>
-            builderCS
-                .AddSnippet($$$"""
-                class C
+            builderCS.AddSnippet($$$"""
+            class C
+            {
+                public void M()
                 {
-                    public void M()
-                    {
-                        var x = true && true && (1 {{{@operator}}} (true ? 1 : 1));         // Compliant (Make sure, the @operator is not increasing complexity)
-                        var y = true && true && true && (1 {{{@operator}}} (true ? 1 : 1)); // Noncompliant {{Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).}}
-                    }
+                    var x = true && true && (1 {{{@operator}}} (true ? 1 : 1));         // Compliant (Make sure, the @operator is not increasing complexity)
+                    var y = true && true && true && (1 {{{@operator}}} (true ? 1 : 1)); // Noncompliant {{Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).}}
                 }
-                """)
-                .Verify();
+            }
+            """)
+            .Verify();
 
         [DataTestMethod]
         [DataRow("o", "??")]
@@ -69,19 +68,18 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("i", "/")]
         [DataRow("i", "%")]
         public void ExpressionComplexity_TransparentBinaryOperators(string parameter, string @operator) =>
-            builderCS
-                .AddSnippet($$"""
-                class C
+            builderCS.AddSnippet($$"""
+            class C
+            {
+                public void M(int i, object o, bool b)
                 {
-                    public void M(int i, object o, bool b)
-                    {
-                        var x = true && true && (({{parameter}} {{@operator}} (true ? {{parameter}} : {{parameter}})) == {{parameter}});         // Compliant
-                        var y = true && true && true && (({{parameter}} {{@operator}} (true ? {{parameter}} : {{parameter}})) == {{parameter}}); // Noncompliant
-                    }
+                    var x = true && true && (({{parameter}} {{@operator}} (true ? {{parameter}} : {{parameter}})) == {{parameter}});         // Compliant
+                    var y = true && true && true && (({{parameter}} {{@operator}} (true ? {{parameter}} : {{parameter}})) == {{parameter}}); // Noncompliant
                 }
-                """)
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .Verify();
+            }
+            """)
+            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .Verify();
 
 #if NET
 
