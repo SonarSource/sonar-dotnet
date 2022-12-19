@@ -63,7 +63,7 @@ namespace SonarAnalyzer.Rules
                         return;
                     }
 
-                    c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], GetNamedTypeIdentifierLocation(declaringSyntax), errorMessage));
+                    c.ReportIssue(Language.GeneratedCodeRecognizer, Diagnostic.Create(SupportedDiagnostics[0], GetNamedTypeIdentifierLocation(declaringSyntax), errorMessage));
                 },
                 SymbolKind.NamedType);
 
