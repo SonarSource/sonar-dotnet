@@ -23,9 +23,16 @@ namespace Tests.Diagnostics
 
             var h = v1 ??= v2 ??= v3 ??= v4 ??= v5; // Noncompliant
 
+            var m = true && true && true && call(true && true && true && true && true, true, true) && true;
+            //                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                          [iss1] {{Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).}}
+            //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ @-1 [iss2] {{Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).}}
+
             call(
                 a =>
                 a = ((a1 ? false : true) || a1 || true && false && true || false)); // Noncompliant
+
+            var n = (true && true && true) == (true && true && true); // Noncompliant
+            n = true && true && true && (((true ? new object() : new object()) as bool?) ?? true); // Compliant. The ? : expression is inside the binary as expression. The as expression starts a new root.
 
             for (var i = a1 ? (b1==0 ? (c1 ? (d1 ? 1 : 1) : 1) : 1) : 1; i < 1; i++) {} // Noncompliant
 

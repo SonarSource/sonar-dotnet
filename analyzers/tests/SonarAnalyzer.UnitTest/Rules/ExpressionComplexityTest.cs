@@ -34,6 +34,65 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .Verify();
 
+        [DataTestMethod]
+        [DataRow("==")]
+        [DataRow("!=")]
+        [DataRow("<")]
+        [DataRow("<=")]
+        [DataRow(">")]
+        [DataRow(">=")]
+        public void ExpressionComplexity_TransparentComparissionOperators(string @operator) =>
+            builderCS.AddSnippet($$$"""
+            class C
+            {
+                public void M()
+                {
+                    var x = true && true && (1 {{{@operator}}} (true ? 1 : 1));         // Compliant (Make sure, the @operator is not increasing complexity)
+                    var y = true && true && true && (1 {{{@operator}}} (true ? 1 : 1)); // Noncompliant {{Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).}}
+                }
+            }
+            """)
+            .Verify();
+
+        [DataTestMethod]
+        [DataRow("o", "??")]
+        [DataRow("i", "|")]
+        [DataRow("i", "^")]
+        [DataRow("i", "&")]
+        [DataRow("i", ">>")]
+
+#if NET
+
+        [DataRow("i", ">>>")]
+
+#endif
+
+        [DataRow("i", "<<")]
+        [DataRow("i", "+")]
+        [DataRow("i", "-")]
+        [DataRow("i", "*")]
+        [DataRow("i", "/")]
+        [DataRow("i", "%")]
+        public void ExpressionComplexity_TransparentBinaryOperators(string parameter, string @operator) =>
+            builderCS.AddSnippet($$"""
+            class C
+            {
+                public void M(int i, object o)
+                {
+                    var x = true && true && (({{parameter}} {{@operator}} (true ? {{parameter}} : {{parameter}})) == {{parameter}});         // Compliant
+                    var y = true && true && true && (({{parameter}} {{@operator}} (true ? {{parameter}} : {{parameter}})) == {{parameter}}); // Noncompliant
+                }
+            }
+            """)
+
+#if NET
+
+            .WithOptions(ParseOptionsHelper.FromCSharp11)
+
+#endif
+
+            .Verify();
+
 #if NET
 
         [TestMethod]
