@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.Extensions;
 
-public static class SyntaxNodeAnalysisContextExtensions // FIXME: Doesn't need to be extension anymore
+public static class SonarSyntaxNodeAnalysisContextExtensions
 {
     public static bool IsTopLevelMain(this SonarSyntaxNodeAnalysisContext context) =>
         context.Node is CompilationUnitSyntax compilationUnitSyntax
