@@ -18,9 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.ComponentModel.Design;
 using System.IO;
 using System.Runtime.CompilerServices;
 using Microsoft.CodeAnalysis.Text;
+using static SonarAnalyzer.Helpers.DiagnosticDescriptorFactory;
 
 namespace SonarAnalyzer;
 
@@ -109,4 +111,20 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
 
     public bool ShouldAnalyze(GeneratedCodeRecognizer generatedCodeRecognizer) =>
         ShouldAnalyze(generatedCodeRecognizer, Tree, Compilation, Options);
+
+    public bool HasMatchingScope(IEnumerable<DiagnosticDescriptor> descriptors) =>
+        descriptors.Any(HasMatchingScope);
+
+    public bool HasMatchingScope(DiagnosticDescriptor descriptor)
+    {
+        // MMF-2297: Test Code as 1st Class Citizen is not ready on server side yet.
+        // ScannerRun: Only utility rules and rules with TEST-ONLY scope are executed for test projects for now.
+        // SonarLint & Standalone NuGet: Respect the scope as before.
+        return IsTestProject()
+            ? ContainsTag(TestSourceScopeTag) && !(IsScannerRun() && ContainsTag(MainSourceScopeTag) && !ContainsTag(UtilityTag))
+            : ContainsTag(MainSourceScopeTag);
+
+        bool ContainsTag(string tag) =>
+            descriptor.CustomTags.Contains(tag);
+    }
 }
