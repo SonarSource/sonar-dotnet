@@ -34,6 +34,54 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .Verify();
 
+        [DataTestMethod]
+        [DataRow("==")]
+        [DataRow("!=")]
+        [DataRow("<")]
+        [DataRow("<=")]
+        [DataRow(">")]
+        [DataRow(">=")]
+        public void ExpressionComplexity_TransparentComparissionOperators(string @operator) =>
+            builderCS
+                .AddSnippet($$"""
+                class C
+                {
+                    public void M()
+                    {
+                        var x = true && true && (1 {{@operator}} (true ? 1 : 1));         // Compliant
+                        var y = true && true && true && (1 {{@operator}} (true ? 1 : 1)); // Noncompliant
+                    }
+                }
+                """)
+                .Verify();
+
+        [DataTestMethod]
+        [DataRow("o", "??")]
+        [DataRow("i", "|")]
+        [DataRow("i", "^")]
+        [DataRow("i", "&")]
+        [DataRow("i", ">>")]
+        [DataRow("i", "<<")]
+        [DataRow("i", "+")]
+        [DataRow("i", "-")]
+        [DataRow("i", "*")]
+        [DataRow("i", "/")]
+        [DataRow("i", "%")]
+        public void ExpressionComplexity_TransparentBinaryOperators(string parameter, string @operator) =>
+            builderCS
+                .AddSnippet($$"""
+                class C
+                {
+                    public void M(int i, object o, bool b)
+                    {
+                        var x = true && true && (({{parameter}} {{@operator}} (true ? {{parameter}} : {{parameter}})) == {{parameter}});         // Compliant
+                        var y = true && true && true && (({{parameter}} {{@operator}} (true ? {{parameter}} : {{parameter}})) == {{parameter}}); // Noncompliant
+                    }
+                }
+                """)
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
 #if NET
 
         [TestMethod]

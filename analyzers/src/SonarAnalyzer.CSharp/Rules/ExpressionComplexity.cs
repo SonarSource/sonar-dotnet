@@ -27,6 +27,27 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override SyntaxKind[] TransparentKinds { get; } =
             {
+                // Binary
+                SyntaxKind.CoalesceExpression,
+                SyntaxKind.BitwiseOrExpression,
+                SyntaxKind.ExclusiveOrExpression,
+                SyntaxKind.BitwiseAndExpression,
+                SyntaxKind.EqualsExpression,
+                SyntaxKind.NotEqualsExpression,
+                SyntaxKind.LessThanExpression,
+                SyntaxKind.LessThanOrEqualExpression,
+                SyntaxKind.GreaterThanExpression,
+                SyntaxKind.GreaterThanOrEqualExpression,
+                SyntaxKind.LeftShiftExpression,
+                SyntaxKind.RightShiftExpression,
+                SyntaxKindEx.UnsignedRightShiftAssignmentExpression,
+                SyntaxKind.AddExpression,
+                SyntaxKind.SubtractExpression,
+                SyntaxKind.MultiplyExpression,
+                SyntaxKind.DivideExpression,
+                SyntaxKind.ModuloExpression,
+
+                // Unary
                 SyntaxKind.ParenthesizedExpression,
                 SyntaxKind.LogicalNotExpression,
                 SyntaxKindEx.ParenthesizedPattern,
@@ -47,7 +68,7 @@ namespace SonarAnalyzer.Rules.CSharp
             node switch
             {
                 ConditionalExpressionSyntax conditional => new[] { conditional.Condition, conditional.WhenTrue, conditional.WhenFalse },
-                BinaryExpressionSyntax { RawKind: (int)SyntaxKind.LogicalAndExpression or (int)SyntaxKind.LogicalOrExpression } binary => new[] { binary.Left, binary.Right },
+                BinaryExpressionSyntax binary when binary.Kind() is var kind && (TransparentKinds.Contains(kind) || ComplexityIncreasingKinds.Contains(kind)) => new[] { binary.Left, binary.Right },
                 { RawKind: (int)SyntaxKindEx.AndPattern or (int)SyntaxKindEx.OrPattern } pattern when (BinaryPatternSyntaxWrapper)pattern is var patternWrapper =>
                     new[] { patternWrapper.Left.SyntaxNode, patternWrapper.Right.SyntaxNode },
                 AssignmentExpressionSyntax { RawKind: (int)SyntaxKindEx.CoalesceAssignmentExpression } assigment => new[] { assigment.Left, assigment.Right },
