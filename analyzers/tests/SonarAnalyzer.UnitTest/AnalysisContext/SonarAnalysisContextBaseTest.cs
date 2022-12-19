@@ -18,14 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Extensions;
-
-using static SonarAnalyzer.Helpers.DiagnosticDescriptorFactory;
-
-namespace SonarAnalyzer.UnitTest.Extensions;
+namespace SonarAnalyzer.UnitTest.AnalysisContext;
 
 [TestClass]
-public class DiagnosticDescriptorExtensionsTest
+public class SonarAnalysisContextBaseTest
 {
     private const string MainTag = "MainSourceScope";
     private const string TestTag = "TestSourceScope";
