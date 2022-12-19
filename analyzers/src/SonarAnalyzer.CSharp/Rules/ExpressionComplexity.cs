@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override SyntaxNode[] ExpressionChildren(SyntaxNode node) =>
             node switch
             {
-                ConditionalExpressionSyntax conditional => new[] { conditional.WhenTrue, conditional.WhenFalse },
+                ConditionalExpressionSyntax conditional => new[] { conditional.Condition, conditional.WhenTrue, conditional.WhenFalse },
                 BinaryExpressionSyntax { RawKind: (int)SyntaxKind.LogicalAndExpression or (int)SyntaxKind.LogicalOrExpression } binary => new[] { binary.Left, binary.Right },
                 { RawKind: (int)SyntaxKindEx.AndPattern or (int)SyntaxKindEx.OrPattern } pattern when (BinaryPatternSyntaxWrapper)pattern is var patternWrapper =>
                     new[] { patternWrapper.Left.SyntaxNode, patternWrapper.Right.SyntaxNode },
