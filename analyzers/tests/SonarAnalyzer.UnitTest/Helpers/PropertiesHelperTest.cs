@@ -68,7 +68,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var options = new AnalyzerOptions(ImmutableArray.Create(additionalText.Object));
 
             // Act
-            return PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(PropertiesHelper.GetSettings(options), LanguageNames.CSharp);
+            return PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(PropertiesHelper.ParseXmlSettings(options), LanguageNames.CSharp);
         }
     }
 }
