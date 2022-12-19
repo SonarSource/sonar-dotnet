@@ -21,6 +21,7 @@
 using Microsoft.CodeAnalysis.CSharp;
 using Moq;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
@@ -302,7 +303,7 @@ $@"namespace PartiallyGenerated
     [DataTestMethod]
     [DataRow(SnippetFileName, false)]
     [DataRow(AnotherFileName, true)]
-    public void RegisterSyntaxNodeActionInNonGenerated_UnchangedFiles_ParameterLoadingAnalysisContext(string unchangedFileName, bool expected)
+    public void RegisterSyntaxNodeActionInNonGenerated_UnchangedFiles_SonarParametrizedAnalysisContext(string unchangedFileName, bool expected)
     {
         var context = new DummyAnalysisContext(TestContext, unchangedFileName);
         var sut = new SonarParametrizedAnalysisContext(new(context, DummyMainDescriptor));
@@ -326,12 +327,12 @@ $@"namespace PartiallyGenerated
     [DataTestMethod]
     [DataRow(SnippetFileName, false)]
     [DataRow(AnotherFileName, true)]
-    public void RegisterSyntaxTreeActionInNonGenerated_UnchangedFiles_ParameterLoadingAnalysisContext(string unchangedFileName, bool expected)
+    public void RegisterSyntaxTreeActionInNonGenerated_UnchangedFiles_SonarParametrizedAnalysisContext(string unchangedFileName, bool expected)
     {
         var context = new DummyAnalysisContext(TestContext, unchangedFileName);
         var sut = new SonarParametrizedAnalysisContext(new(context, DummyMainDescriptor));
         sut.RegisterSyntaxTreeActionInNonGenerated(CSharpGeneratedCodeRecognizer.Instance, context.DelegateAction);
-        sut.ExecutePostponedActions(new(sut.Context, MockCompilationStartAnalysisContext(context)));  // Manual invocation, because ParameterLoadingAnalysisContext stores actions separately
+        sut.ExecutePostponedActions(new(sut.Context, MockCompilationStartAnalysisContext(context)));  // Manual invocation, because SonarParametrizedAnalysisContext stores actions separately
 
         context.AssertDelegateInvoked(expected);
     }
