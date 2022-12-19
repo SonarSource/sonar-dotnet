@@ -71,7 +71,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             builderCS.AddSnippet($$"""
             class C
             {
-                public void M(int i, object o, bool b)
+                public void M(int i, object o)
                 {
                     var x = true && true && (({{parameter}} {{@operator}} (true ? {{parameter}} : {{parameter}})) == {{parameter}});         // Compliant
                     var y = true && true && true && (({{parameter}} {{@operator}} (true ? {{parameter}} : {{parameter}})) == {{parameter}}); // Noncompliant
