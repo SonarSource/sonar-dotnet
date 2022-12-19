@@ -28,7 +28,7 @@ public abstract class SonarReportingContextBase<TContext> : SonarAnalysisContext
 
     public void ReportIssue(Diagnostic diagnostic)  // FIXME: Make this obsolete
     {
-        if (diagnostic.Descriptor.HasMatchingScope(Compilation, IsTestProject(), IsScannerRun()))
+        if (HasMatchingScope(diagnostic.Descriptor))
         {
             var reportingContext = CreateReportingContext(diagnostic);
 

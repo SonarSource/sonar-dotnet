@@ -18,7 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.UnitTest.AnalysisContext;
+using Moq;
+
+namespace SonarAnalyzer.UnitTest;
 
 [TestClass]
 public class SonarAnalysisContextBaseTest
@@ -27,9 +29,7 @@ public class SonarAnalysisContextBaseTest
     private const string TestTag = "TestSourceScope";
     private const string UtilityTag = "Utility";
 
-    [TestMethod]
-    public void HasMatchingScope_NoCompilation_IsMatching() =>
-        TestHelper.CreateDescriptor("Sxxx").HasMatchingScope(null, true, false).Should().BeTrue();
+    public TestContext TestContext { get; set; }
 
     [DataTestMethod]
     [DataRow(true, ProjectType.Product, MainTag)]
@@ -46,9 +46,8 @@ public class SonarAnalysisContextBaseTest
     [DataRow(false, ProjectType.Test, MainTag, MainTag)]
     public void HasMatchingScope_SingleDiagnostic_WithOneOrMoreScopes_SonarLint(bool expectedResult, ProjectType projectType, params string[] ruleTags)
     {
-        var compilation = new SnippetCompiler("// Nothing to see here").SemanticModel.Compilation;
         var diagnostic = TestHelper.CreateDescriptor("Sxxx", ruleTags);
-        diagnostic.HasMatchingScope(compilation, projectType == ProjectType.Test, false).Should().Be(expectedResult);
+        CreateSut(projectType, false).HasMatchingScope(diagnostic).Should().Be(expectedResult);
     }
 
     [DataTestMethod]
@@ -68,9 +67,8 @@ public class SonarAnalysisContextBaseTest
     [DataRow(false, ProjectType.Test, MainTag, MainTag)]
     public void HasMatchingScope_SingleDiagnostic_WithOneOrMoreScopes_Scanner(bool expectedResult, ProjectType projectType, params string[] ruleTags)
     {
-        var compilation = new SnippetCompiler("// Nothing to see here").SemanticModel.Compilation;
         var diagnostic = TestHelper.CreateDescriptor("Sxxx", ruleTags);
-        diagnostic.HasMatchingScope(compilation, projectType == ProjectType.Test, true).Should().Be(expectedResult);
+        CreateSut(projectType, true).HasMatchingScope(diagnostic).Should().Be(expectedResult);
     }
 
     [DataTestMethod]
@@ -83,9 +81,8 @@ public class SonarAnalysisContextBaseTest
     [DataRow(false, ProjectType.Test, MainTag, MainTag)]
     public void HasMatchingScope_MultipleDiagnostics_WithSingleScope_SonarLint(bool expectedResult, ProjectType projectType, params string[] rulesTag)
     {
-        var compilation = new SnippetCompiler("// Nothing to see here").SemanticModel.Compilation;
         var diagnostics = rulesTag.Select(x => TestHelper.CreateDescriptor("Sxxx", x));
-        diagnostics.Any(x => x.HasMatchingScope(compilation, projectType == ProjectType.Test, false)).Should().Be(expectedResult);
+        CreateSut(projectType, false).HasMatchingScope(diagnostics).Should().Be(expectedResult);
     }
 
     [DataTestMethod]
@@ -97,8 +94,16 @@ public class SonarAnalysisContextBaseTest
     [DataRow(false, ProjectType.Test, MainTag, MainTag)]
     public void HasMatchingScope_MultipleDiagnostics_WithSingleScope_Scanner(bool expectedResult, ProjectType projectType, params string[] rulesTag)
     {
-        var compilation = new SnippetCompiler("// Nothing to see here").SemanticModel.Compilation;
         var diagnostics = rulesTag.Select(x => TestHelper.CreateDescriptor("Sxxx", x));
-        diagnostics.Any(x => x.HasMatchingScope(compilation, projectType == ProjectType.Test, true)).Should().Be(expectedResult);
+        CreateSut(projectType, true).HasMatchingScope(diagnostics).Should().Be(expectedResult);
+    }
+
+    private SonarCompilationAnalysisContext CreateSut(ProjectType projectType, bool isScannerRun)
+    {
+        var compilation = new SnippetCompiler("// Nothing to see here").SemanticModel.Compilation;
+        var analysisContext = new SonarAnalysisContext(Mock.Of<AnalysisContext>(), Enumerable.Empty<DiagnosticDescriptor>());
+        var options = TestHelper.CreateOptions(TestHelper.CreateSonarProjectConfig(TestContext, projectType, isScannerRun));
+        var compilationContext = new CompilationAnalysisContext(compilation, options, _ => { }, _ => true, default);
+        return new(analysisContext, compilationContext);
     }
 }
