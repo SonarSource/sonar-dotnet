@@ -20,7 +20,7 @@
 
 using Moq;
 
-namespace SonarAnalyzer.UnitTest;
+namespace SonarAnalyzer.UnitTest.AnalysisContext;
 
 [TestClass]
 public class SonarAnalysisContextBaseTest
