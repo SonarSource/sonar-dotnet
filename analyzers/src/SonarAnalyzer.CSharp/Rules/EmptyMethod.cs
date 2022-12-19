@@ -23,10 +23,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class EmptyMethod : EmptyMethodBase<SyntaxKind>
     {
-        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = CSharpGeneratedCodeRecognizer.Instance;
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
         protected override SyntaxKind[] SyntaxKinds { get; } =
             {
@@ -34,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKindEx.LocalFunctionStatement
             };
 
-        protected override void CheckMethod(SonarSyntaxNodeAnalysisContext context, bool isTestProject)
+        protected override void CheckMethod(SonarSyntaxNodeAnalysisContext context)
         {
             if (LocalFunctionStatementSyntaxWrapper.IsInstance(context.Node))
             {
@@ -51,27 +48,16 @@ namespace SonarAnalyzer.Rules.CSharp
                 // No need to check for ExpressionBody as arrowed methods can't be empty
                 if (methodDeclaration.Body is { } body
                     && body.IsEmpty()
-                    && !ShouldMethodBeExcluded(methodDeclaration, context.SemanticModel, isTestProject))
+                    && !ShouldMethodBeExcluded(context, methodDeclaration))
                 {
                     context.ReportIssue(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation()));
                 }
             }
         }
 
-        private static bool ShouldMethodBeExcluded(BaseMethodDeclarationSyntax methodNode, SemanticModel semanticModel, bool isTestProject)
-        {
-            if (methodNode.Modifiers.Any(SyntaxKind.VirtualKeyword))
-            {
-                return true;
-            }
-
-            var methodSymbol = semanticModel.GetDeclaredSymbol(methodNode);
-            if (methodSymbol is { IsOverride: true, OverriddenMethod: { IsAbstract: true } })
-            {
-                return true;
-            }
-
-            return methodNode.Modifiers.Any(SyntaxKind.OverrideKeyword) && isTestProject;
-        }
+        private static bool ShouldMethodBeExcluded(SonarSyntaxNodeAnalysisContext context, BaseMethodDeclarationSyntax methodNode) =>
+            methodNode.Modifiers.Any(SyntaxKind.VirtualKeyword)
+            || context.SemanticModel.GetDeclaredSymbol(methodNode) is { IsOverride: true, OverriddenMethod.IsAbstract: true }
+            || (methodNode.Modifiers.Any(SyntaxKind.OverrideKeyword) && context.IsTestProject());
     }
 }
