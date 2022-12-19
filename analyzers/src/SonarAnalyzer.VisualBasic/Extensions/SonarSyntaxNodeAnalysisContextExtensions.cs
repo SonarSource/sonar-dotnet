@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.Extensions;
 
-public static class SyntaxNodeAnalysisContextExtensions // FIXME: Doesnt' need to be an extension anymore
+public static class SonarSyntaxNodeAnalysisContextExtensions
 {
     public static bool IsInExpressionTree(this SonarSyntaxNodeAnalysisContext context) =>
         context.Node.IsInExpressionTree(context.SemanticModel);
