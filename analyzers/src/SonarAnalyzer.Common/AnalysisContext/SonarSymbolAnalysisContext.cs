@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer;
 
-public sealed class SonarSymbolAnalysisContext : SonarReportingContextBase<SymbolAnalysisContext>
+public sealed class SonarSymbolAnalysisContext : SonarCompilationReportingContextBase<SymbolAnalysisContext>
 {
     public override SyntaxTree Tree => Context.Symbol.Locations.Select(x => x.SourceTree).FirstOrDefault(x => x is not null);
     public override Compilation Compilation => Context.Compilation;
@@ -29,9 +29,6 @@ public sealed class SonarSymbolAnalysisContext : SonarReportingContextBase<Symbo
     public ISymbol Symbol => Context.Symbol;
 
     internal SonarSymbolAnalysisContext(SonarAnalysisContext analysisContext, SymbolAnalysisContext context) : base(analysisContext, context) { }
-
-    public void ReportIssue(GeneratedCodeRecognizer generatedCodeRecognizer, Diagnostic diagnostic) =>
-        ReportIssueCore(generatedCodeRecognizer, diagnostic);
 
     private protected override ReportingContext CreateReportingContext(Diagnostic diagnostic) =>
         new(this, diagnostic);

@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer;
 
-public sealed class SonarCodeBlockAnalysisContext : SonarReportingContextBase<CodeBlockAnalysisContext>
+public sealed class SonarCodeBlockAnalysisContext : SonarTreeReportingContextBase<CodeBlockAnalysisContext>
 {
     public override SyntaxTree Tree => Context.CodeBlock.SyntaxTree;
     public override Compilation Compilation => Context.SemanticModel.Compilation;
