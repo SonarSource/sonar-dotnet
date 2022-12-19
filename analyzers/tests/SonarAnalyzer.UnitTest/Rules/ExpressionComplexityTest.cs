@@ -60,7 +60,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("i", "^")]
         [DataRow("i", "&")]
         [DataRow("i", ">>")]
+
+#if NET
+
         [DataRow("i", ">>>")]
+
+#endif
+
         [DataRow("i", "<<")]
         [DataRow("i", "+")]
         [DataRow("i", "-")]
@@ -78,8 +84,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                 }
             }
             """)
+
+#if NET
+
             .WithOptions(ParseOptionsHelper.FromCSharp11)
-            .Verify();
+
+#endif
 
             .Verify();
 
