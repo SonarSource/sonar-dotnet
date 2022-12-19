@@ -39,7 +39,7 @@ public sealed class SonarParametrizedAnalysisContext : SonarAnalysisContextBase
     {
         // This is tricky. SyntaxTree actions do not have compilation. So we register them in CompilationStart.
         // ParametrizedAnalyzer postpones CompilationStartActions to enforce that parameters are already set when the postponed action is executed.
-        var wrappedAction = Context.WrapSyntaxTreeAction(action, generatedCodeRecognizer);  // FIXME: Revisit
+        var wrappedAction = Context.WrapSyntaxTreeAction(action, generatedCodeRecognizer);
         RegisterPostponedAction(startContext => wrappedAction(startContext.Context));
     }
 
