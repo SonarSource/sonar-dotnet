@@ -75,7 +75,7 @@ public abstract class SonarCompilationReportingContextBase<TContext> : SonarRepo
     public void ReportIssue(GeneratedCodeRecognizer generatedCodeRecognizer, Diagnostic diagnostic)
     {
         var tree = diagnostic.Location.SourceTree;
-        if (ShouldAnalyze(generatedCodeRecognizer, tree, Compilation, Options) && !IsUnchanged(tree, Compilation, Options))
+        if (tree is null || (ShouldAnalyze(generatedCodeRecognizer, tree, Compilation, Options) && !IsUnchanged(tree, Compilation, Options)))
         {
             ReportIssueCore(diagnostic);
         }

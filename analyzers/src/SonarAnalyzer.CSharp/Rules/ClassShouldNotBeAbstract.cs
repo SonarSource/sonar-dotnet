@@ -83,13 +83,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 var node = declaringSyntaxReference.GetSyntax();
                 if (node is ClassDeclarationSyntax classDeclaration)
                 {
-                    context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, classDeclaration.Identifier.GetLocation(), "class", message));
+                    context.ReportIssue(Diagnostic.Create(Rule, classDeclaration.Identifier.GetLocation(), "class", message));
                 }
 
                 if (RecordDeclarationSyntaxWrapper.IsInstance(node))
                 {
                     var wrapper = (RecordDeclarationSyntaxWrapper)node;
-                    context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, wrapper.Identifier.GetLocation(), "record", message));
+                    context.ReportIssue(Diagnostic.Create(Rule, wrapper.Identifier.GetLocation(), "record", message));
                 }
             }
         }
