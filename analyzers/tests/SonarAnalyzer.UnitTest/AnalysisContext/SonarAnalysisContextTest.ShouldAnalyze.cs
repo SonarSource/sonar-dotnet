@@ -40,40 +40,6 @@ public partial class SonarAnalysisContextTest
         ShouldAnalyze(options).Should().BeTrue();
     }
 
-    [TestMethod]
-    public void ShouldAnalyze_Scanner_UnchangedFiles_NotAvailable()
-    {
-        var sonarProjectConfig = TestHelper.CreateSonarProjectConfig(TestContext, ProjectType.Product); // SonarProjectConfig.xml without UnchangedFiles.txt
-        var additionalFile = new AnalyzerAdditionalFile(sonarProjectConfig);
-        var options = new AnalyzerOptions(ImmutableArray.Create<AdditionalText>(additionalFile));
-
-        ShouldAnalyze(options).Should().BeTrue();
-    }
-
-    [TestMethod]
-    public void ShouldAnalyze_Scanner_UnchangedFiles_Empty()
-    {
-        var options = CreateOptions(Array.Empty<string>());
-
-        ShouldAnalyze(options).Should().BeTrue();
-    }
-
-    [TestMethod]
-    public void ShouldAnalyze_Scanner_UnchangedFiles_ContainsTreeFile()
-    {
-        var options = CreateOptions(new[] { OtherFileName + "cs" });
-
-        ShouldAnalyze(options).Should().BeFalse("File is known to be Unchanged in Incremental PR analysis");
-    }
-
-    [TestMethod]
-    public void ShouldAnalyze_Scanner_UnchangedFiles_ContainsOtherFile()
-    {
-        var options = CreateOptions(new[] { "ThisIsNotInCompilation.cs", "SomethingElse.cs" });
-
-        ShouldAnalyze(options).Should().BeTrue();
-    }
-
     private static bool ShouldAnalyze(AnalyzerOptions options)
     {
         var compilation = CreateDummyCompilation(AnalyzerLanguage.CSharp);
@@ -363,13 +329,6 @@ public partial class SonarAnalysisContextTest
                 </Settings>
             </AnalysisInput>
             """);
-
-    private AnalyzerOptions CreateOptions(string[] unchangedFiles)
-    {
-        var sonarProjectConfig = TestHelper.CreateSonarProjectConfigWithUnchangedFiles(TestContext, unchangedFiles);
-        var additionalFile = new AnalyzerAdditionalFile(sonarProjectConfig);
-        return new(ImmutableArray.Create<AdditionalText>(additionalFile));
-    }
 
     private static AnalyzerOptions CreateOptions(SourceText sourceText, string path = @"ResourceTests\SonarLint.xml") =>
         new(ImmutableArray.Create(MockAdditionalText(sourceText, path).Object));

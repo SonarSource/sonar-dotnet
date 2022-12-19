@@ -35,8 +35,7 @@ public abstract class SonarAnalysisContextBase
     public abstract bool TryGetValue<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value);
 
     public bool ShouldAnalyze(GeneratedCodeRecognizer generatedCodeRecognizer, SyntaxTree tree, Compilation compilation, AnalyzerOptions options) =>    // FIXME: This thing has confusing name
-        !IsUnchanged(tree, compilation, options)        // FIXME: This needs to go to
-        && (ShouldAnalyzeGenerated(compilation, options) || !tree.IsGenerated(generatedCodeRecognizer, compilation));
+        ShouldAnalyzeGenerated(compilation, options) || !tree.IsGenerated(generatedCodeRecognizer, compilation);
 
     /// <summary>
     /// Reads configuration from SonarProjectConfig.xml file and caches the result for scope of this analysis.

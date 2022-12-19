@@ -70,7 +70,7 @@ public partial class SonarAnalysisContextTest
                         """);
         if (expectedEmptyResult)
         {
-            builder.Verify();   // FIXME: This should do VerifyNoIssueReported(); instead, because the generated file is unchanged
+            builder.VerifyNoIssueReported();
         }
         else
         {
