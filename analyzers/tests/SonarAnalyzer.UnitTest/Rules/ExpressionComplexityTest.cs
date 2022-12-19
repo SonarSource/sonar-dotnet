@@ -43,13 +43,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(">=")]
         public void ExpressionComplexity_TransparentComparissionOperators(string @operator) =>
             builderCS
-                .AddSnippet($$"""
+                .AddSnippet($$$"""
                 class C
                 {
                     public void M()
                     {
-                        var x = true && true && (1 {{@operator}} (true ? 1 : 1));         // Compliant
-                        var y = true && true && true && (1 {{@operator}} (true ? 1 : 1)); // Noncompliant
+                        var x = true && true && (1 {{{@operator}}} (true ? 1 : 1));         // Compliant (Make sure, the @operator is not increasing complexity)
+                        var y = true && true && true && (1 {{{@operator}}} (true ? 1 : 1)); // Noncompliant {{Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).}}
                     }
                 }
                 """)
