@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class LineLengthBase : ParameterLoadingDiagnosticAnalyzer
+    public abstract class LineLengthBase : ParametrizedDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S103";
         internal const string MessageFormat = "Split this {1} characters long line (which is greater than {0} authorized).";
@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules
 
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
 
-        protected sealed override void Initialize(ParameterLoadingAnalysisContext context)
+        protected sealed override void Initialize(SonarParametrizedAnalysisContext context)
         {
             context.RegisterSyntaxTreeActionInNonGenerated(
                 GeneratedCodeRecognizer,

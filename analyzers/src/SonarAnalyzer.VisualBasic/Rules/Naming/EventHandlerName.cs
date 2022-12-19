@@ -21,7 +21,7 @@
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class EventHandlerName : ParameterLoadingDiagnosticAnalyzer
+    public sealed class EventHandlerName : ParametrizedDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2347";
         private const string MessageFormat = "Rename event handler '{0}' to match the regular expression: '{1}'.";
@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         [RuleParameter("format", PropertyType.String, "Regular expression used to check the even handler names against.", DefaultPattern)]
         public string Pattern { get; set; } = DefaultPattern;
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context) =>
+        protected override void Initialize(SonarParametrizedAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {

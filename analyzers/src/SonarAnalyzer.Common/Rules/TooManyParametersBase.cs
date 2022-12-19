@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class TooManyParametersBase<TSyntaxKind, TParameterListSyntax> : ParameterLoadingDiagnosticAnalyzer
+    public abstract class TooManyParametersBase<TSyntaxKind, TParameterListSyntax> : ParametrizedDiagnosticAnalyzer
         where TSyntaxKind : struct
         where TParameterListSyntax : SyntaxNode
     {
@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules
         protected TooManyParametersBase() =>
             rule = Language.CreateDescriptor(DiagnosticId, MessageFormat, isEnabledByDefault: false);
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context) =>
+        protected override void Initialize(SonarParametrizedAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 Language.GeneratedCodeRecognizer,
                 c =>

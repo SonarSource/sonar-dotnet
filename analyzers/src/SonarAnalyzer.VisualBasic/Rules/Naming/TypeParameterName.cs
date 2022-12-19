@@ -21,7 +21,7 @@
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class TypeParameterName : ParameterLoadingDiagnosticAnalyzer
+    public sealed class TypeParameterName : ParametrizedDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2373";
         private const string MessageFormat = "Rename '{0}' to match the regular expression: '{1}'.";
@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             "Regular expression used to check the generic type parameter names against.", DefaultFormat)]
         public string Pattern { get; set; } = DefaultFormat;
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context)
+        protected override void Initialize(SonarParametrizedAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

@@ -21,7 +21,7 @@
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class ParameterName : ParameterLoadingDiagnosticAnalyzer
+    public sealed class ParameterName : ParametrizedDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1654";
         private const string MessageFormat = "Rename this parameter to match the regular expression: '{0}'.";
@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             "Regular expression used to check the parameter names against.", NamingHelper.CamelCasingPattern)]
         public string Pattern { get; set; } = NamingHelper.CamelCasingPattern;
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context)
+        protected override void Initialize(SonarParametrizedAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
