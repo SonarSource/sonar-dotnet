@@ -19,35 +19,31 @@
  */
 
 using System.Xml.Linq;
+using Microsoft.CodeAnalysis.Text;
 
 namespace SonarAnalyzer.Helpers
 {
     internal static class PropertiesHelper
     {
-        internal static IEnumerable<XElement> GetSettings(AnalyzerOptions options)
-        {
-            var sonarLintAdditionalFile = options.SonarLintXml();
-            if (sonarLintAdditionalFile == null)
-            {
-                return Enumerable.Empty<XElement>();
-            }
+        public static XElement[] ParseXmlSettings(AnalyzerOptions options) =>
+            options.SonarLintXml() is { } sonarLintXml ? ParseXmlSettings(sonarLintXml.GetText()) : Array.Empty<XElement>();
 
+        public static XElement[] ParseXmlSettings(SourceText sourceText)
+        {
             try
             {
-                var xml = XDocument.Parse(sonarLintAdditionalFile.GetText().ToString());
-                return xml.Descendants("Setting");
+                return XDocument.Parse(sourceText.ToString()).Descendants("Setting").ToArray();
             }
             catch
             {
-                // ignoring exception as we cannot log it
-                return Enumerable.Empty<XElement>();
+                return Array.Empty<XElement>();    // Can not log the exception, so ignore it
             }
         }
 
-        internal static bool ReadAnalyzeGeneratedCodeProperty(IEnumerable<XElement> settings, string language) =>
+        public static bool ReadAnalyzeGeneratedCodeProperty(IEnumerable<XElement> settings, string language) =>
             ReadBooleanProperty(settings, language, "analyzeGeneratedCode");
 
-        internal static bool ReadIgnoreHeaderCommentsProperty(IEnumerable<XElement> settings, string language) =>
+        public static bool ReadIgnoreHeaderCommentsProperty(IEnumerable<XElement> settings, string language) =>
             ReadBooleanProperty(settings, language, "ignoreHeaderComments");
 
         private static bool ReadBooleanProperty(IEnumerable<XElement> settings, string language, string propertySuffix, bool defaultValue = false)
