@@ -65,21 +65,23 @@ namespace SonarAnalyzer.Rules.CSharp
             };
 
         protected override SyntaxNode[] ExpressionChildren(SyntaxNode node) =>
-            node switch
-            {
-                ConditionalExpressionSyntax conditional => new[] { conditional.Condition, conditional.WhenTrue, conditional.WhenFalse },
-                BinaryExpressionSyntax binary when binary.Kind() is var kind && (TransparentKinds.Contains(kind) || ComplexityIncreasingKinds.Contains(kind)) => new[] { binary.Left, binary.Right },
-                { RawKind: (int)SyntaxKindEx.AndPattern or (int)SyntaxKindEx.OrPattern } pattern when (BinaryPatternSyntaxWrapper)pattern is var patternWrapper =>
-                    new[] { patternWrapper.Left.SyntaxNode, patternWrapper.Right.SyntaxNode },
-                AssignmentExpressionSyntax { RawKind: (int)SyntaxKindEx.CoalesceAssignmentExpression } assigment => new[] { assigment.Left, assigment.Right },
+            node.IsAnyKind(TransparentKinds) || node.IsAnyKind(ComplexityIncreasingKinds)
+            ?  node switch
+                {
+                    ConditionalExpressionSyntax conditional => new[] { conditional.Condition, conditional.WhenTrue, conditional.WhenFalse },
+                    BinaryExpressionSyntax binary => new[] { binary.Left, binary.Right },
+                    { RawKind: (int)SyntaxKindEx.AndPattern or (int)SyntaxKindEx.OrPattern } pattern when (BinaryPatternSyntaxWrapper)pattern is var patternWrapper =>
+                        new[] { patternWrapper.Left.SyntaxNode, patternWrapper.Right.SyntaxNode },
+                    AssignmentExpressionSyntax assigment => new[] { assigment.Left, assigment.Right },
 
-                ParenthesizedExpressionSyntax { Expression: { } expression } => new[] { expression },
-                PrefixUnaryExpressionSyntax { RawKind: (int)SyntaxKind.LogicalNotExpression, Operand: { } operand } => new[] { operand },
-                { RawKind: (int)SyntaxKindEx.ParenthesizedPattern } parenthesized when (ParenthesizedPatternSyntaxWrapper)parenthesized is var parenthesizedWrapped =>
-                    new[] { parenthesizedWrapped.Pattern.SyntaxNode },
-                { RawKind: (int)SyntaxKindEx.NotPattern } negated when (UnaryPatternSyntaxWrapper)negated is var negatedWrapper =>
-                    new[] { negatedWrapper.Pattern.SyntaxNode },
-                _ => Array.Empty<SyntaxNode>(),
-            };
+                    ParenthesizedExpressionSyntax { Expression: { } expression } => new[] { expression },
+                    PrefixUnaryExpressionSyntax { Operand: { } operand } => new[] { operand },
+                    { RawKind: (int)SyntaxKindEx.ParenthesizedPattern } parenthesized when (ParenthesizedPatternSyntaxWrapper)parenthesized is var parenthesizedWrapped =>
+                        new[] { parenthesizedWrapped.Pattern.SyntaxNode },
+                    { RawKind: (int)SyntaxKindEx.NotPattern } negated when (UnaryPatternSyntaxWrapper)negated is var negatedWrapper =>
+                        new[] { negatedWrapper.Pattern.SyntaxNode },
+                    _ => Array.Empty<SyntaxNode>(),
+                }
+            : Array.Empty<SyntaxNode>();
     }
 }
