@@ -49,6 +49,7 @@ namespace Tests.Diagnostics
             var e2 = true | false | true | false;
 
             var a2 = false ? (true ? (false ? 1 : 0) : 0) : 1;
+            var a3 = (true && true && true && true && true && true) ? true : true; // Noncompliant
 
             var foo3 = new Action(delegate () {
                 bool a = true && true;
