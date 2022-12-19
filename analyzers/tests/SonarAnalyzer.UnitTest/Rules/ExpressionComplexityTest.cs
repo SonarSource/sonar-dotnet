@@ -92,7 +92,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 }
             }
             """)
-            .WithOptions(ParseOptionsHelper.FromCSharp11)
             .Verify();
 
 #if NET
