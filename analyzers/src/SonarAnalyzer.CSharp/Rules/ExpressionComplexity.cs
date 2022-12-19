@@ -73,7 +73,6 @@ namespace SonarAnalyzer.Rules.CSharp
                     { RawKind: (int)SyntaxKindEx.AndPattern or (int)SyntaxKindEx.OrPattern } pattern when (BinaryPatternSyntaxWrapper)pattern is var patternWrapper =>
                         new[] { patternWrapper.Left.SyntaxNode, patternWrapper.Right.SyntaxNode },
                     AssignmentExpressionSyntax assigment => new[] { assigment.Left, assigment.Right },
-
                     ParenthesizedExpressionSyntax { Expression: { } expression } => new[] { expression },
                     PrefixUnaryExpressionSyntax { Operand: { } operand } => new[] { operand },
                     { RawKind: (int)SyntaxKindEx.ParenthesizedPattern } parenthesized when (ParenthesizedPatternSyntaxWrapper)parenthesized is var parenthesizedWrapped =>
