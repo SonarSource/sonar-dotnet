@@ -26,7 +26,7 @@ public abstract class SonarReportingContextBase<TContext> : SonarAnalysisContext
 
     protected SonarReportingContextBase(SonarAnalysisContext analysisContext, TContext context) : base(analysisContext, context) { }
 
-    public void ReportIssue(Diagnostic diagnostic)  // FIXME: This is wrong design now, see next commit. This overload should not be accessible from Symbol-based and Compilation-based contexts
+    protected void ReportIssueCore(Diagnostic diagnostic)
     {
         if (HasMatchingScope(diagnostic.Descriptor))
         {
@@ -52,13 +52,32 @@ public abstract class SonarReportingContextBase<TContext> : SonarAnalysisContext
             }
         }
     }
+}
 
-    protected void ReportIssueCore(GeneratedCodeRecognizer generatedCodeRecognizer, Diagnostic diagnostic) // FIXME: this is wrong desing now, see next commit
+/// <summary>
+/// Base class for reporting contexts that are executed on a known Tree. And decision about generated code and unchanged files is taken during action registration.
+/// </summary>
+public abstract class SonarTreeReportingContextBase<TContext> : SonarReportingContextBase<TContext>
+{
+    protected SonarTreeReportingContextBase(SonarAnalysisContext analysisContext, TContext context) : base(analysisContext, context) { }
+
+    public void ReportIssue(Diagnostic diagnostic) =>
+        ReportIssueCore(diagnostic);
+}
+
+/// <summary>
+/// Base class for reporting contexts that are common for the entire compilation. Specific tree is not known before the action is executed.
+/// </summary>
+public abstract class SonarCompilationReportingContextBase<TContext> : SonarReportingContextBase<TContext>
+{
+    protected SonarCompilationReportingContextBase(SonarAnalysisContext analysisContext, TContext context) : base(analysisContext, context) { }
+
+    public void ReportIssue(GeneratedCodeRecognizer generatedCodeRecognizer, Diagnostic diagnostic)
     {
         var tree = diagnostic.Location.SourceTree;
         if (ShouldAnalyze(generatedCodeRecognizer, tree, Compilation, Options) && !IsUnchanged(tree, Compilation, Options))
         {
-            ReportIssue(diagnostic);
+            ReportIssueCore(diagnostic);
         }
     }
 }

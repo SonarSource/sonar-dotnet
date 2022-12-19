@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer;
 
-public sealed class SonarSyntaxTreeAnalysisContext : SonarReportingContextBase<SyntaxTreeAnalysisContext>
+public sealed class SonarSyntaxTreeAnalysisContext : SonarTreeReportingContextBase<SyntaxTreeAnalysisContext>
 {
     public override SyntaxTree Tree => Context.Tree;
     public override Compilation Compilation { get; }    // SyntaxTreeAnalysisContext doens't hold a Compilation reference, we need to provide it from CompilationStart context via constructor
