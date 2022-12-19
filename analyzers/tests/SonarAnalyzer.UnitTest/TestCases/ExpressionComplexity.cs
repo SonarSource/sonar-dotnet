@@ -32,6 +32,7 @@ namespace Tests.Diagnostics
                 a = ((a1 ? false : true) || a1 || true && false && true || false)); // Noncompliant
 
             var n = (true && true && true) == (true && true && true); // Noncompliant
+            n = true && true && true && (((true ? new object() : new object()) as bool?) ?? true); // Compliant. The ? : expression is inside the binary as expression. The as expression starts a new root.
 
             for (var i = a1 ? (b1==0 ? (c1 ? (d1 ? 1 : 1) : 1) : 1) : 1; i < 1; i++) {} // Noncompliant
 

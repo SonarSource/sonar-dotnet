@@ -81,17 +81,6 @@ namespace SonarAnalyzer.UnitTest.Rules
             .WithOptions(ParseOptionsHelper.FromCSharp11)
             .Verify();
 
-        [TestMethod]
-        public void ExpressionComplexity_RootBinaryOperators() =>
-            builderCS.AddSnippet("""
-            class C
-            {
-                public void M(object o)
-                {
-                    var x = true && true && true && (((true ? o : o) as bool?) ?? true); // Compliant. The ? : expression is inside the binary as expression. The as expression starts a new root.
-                }
-            }
-            """)
             .Verify();
 
 #if NET
