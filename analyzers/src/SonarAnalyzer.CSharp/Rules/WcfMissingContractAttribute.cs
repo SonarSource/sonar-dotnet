@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Helpers;
-
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -45,49 +43,28 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     var hasServiceContract = namedType.HasAttribute(KnownType.System_ServiceModel_ServiceContractAttribute);
-                    var hasAnyMethodWithOperationContract = HasAnyMethodWithOperationContract(namedType);
-
-                    if (!(hasServiceContract ^ hasAnyMethodWithOperationContract))
+                    if (hasServiceContract ^ HasAnyMethodWithOperationContract(namedType)
+                        && namedType.DeclaringSyntaxReferences.Select(sr => sr.GetSyntax() as TypeDeclarationSyntax).FirstOrDefault(x => x != null) is { } declarationSyntax)
                     {
-                        return;
+                        string message;
+                        string attributeToAdd;
+                        if (hasServiceContract)
+                        {
+                            message = MessageOperation;
+                            attributeToAdd = "OperationContract";
+                        }
+                        else
+                        {
+                            message = MessageService;
+                            attributeToAdd = "ServiceContract";
+                        }
+                        message = string.Format(message, namedType.IsClass() ? "class" : "interface");
+                        c.ReportIssue(Diagnostic.Create(Rule, declarationSyntax.Identifier.GetLocation(), attributeToAdd, message));
                     }
-
-                    var declarationSyntax = GetTypeDeclaration(context, namedType, c.Compilation, c.Options);
-                    if (declarationSyntax == null)
-                    {
-                        return;
-                    }
-
-                    string message;
-                    string attributeToAdd;
-
-                    if (hasServiceContract)
-                    {
-                        message = MessageOperation;
-                        attributeToAdd = "OperationContract";
-                    }
-                    else
-                    {
-                        message = MessageService;
-                        attributeToAdd = "ServiceContract";
-                    }
-
-                    var classOrInterface = namedType.IsClass() ? "class" : "interface";
-                    message = string.Format(message, classOrInterface);
-
-                    c.ReportIssue(Diagnostic.Create(Rule, declarationSyntax.Identifier.GetLocation(), attributeToAdd, message));
                 },
                 SymbolKind.NamedType);
 
         private static bool HasAnyMethodWithOperationContract(INamespaceOrTypeSymbol namedType) =>
-            namedType.GetMembers()
-                     .OfType<IMethodSymbol>()
-                     .Any(m => m.HasAttribute(KnownType.System_ServiceModel_OperationContractAttribute));
-
-        private static TypeDeclarationSyntax GetTypeDeclaration(SonarAnalysisContext context, ISymbol namedType, Compilation compilation, AnalyzerOptions options) =>
-            namedType.DeclaringSyntaxReferences
-                     .Where(sr => context.ShouldAnalyze(CSharpGeneratedCodeRecognizer.Instance, sr.SyntaxTree, compilation, options))
-                     .Select(sr => sr.GetSyntax() as TypeDeclarationSyntax)
-                     .FirstOrDefault(s => s != null);
+            namedType.GetMembers().OfType<IMethodSymbol>().Any(x => x.HasAttribute(KnownType.System_ServiceModel_OperationContractAttribute));
     }
 }
