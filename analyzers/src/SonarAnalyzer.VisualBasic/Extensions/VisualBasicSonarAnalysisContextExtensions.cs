@@ -48,6 +48,6 @@ namespace SonarAnalyzer.Extensions
             context.RegisterCodeBlockStartActionInNonGenerated(VisualBasicGeneratedCodeRecognizer.Instance, action);
 
         public static void ReportDiagnosticIfNonGenerated(this SonarSymbolAnalysisContext context, Diagnostic diagnostic) =>
-            context.ReportDiagnosticIfNonGenerated(VisualBasicGeneratedCodeRecognizer.Instance, diagnostic);
+            context.ReportIssue(VisualBasicGeneratedCodeRecognizer.Instance, diagnostic);
     }
 }

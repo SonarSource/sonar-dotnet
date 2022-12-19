@@ -26,7 +26,7 @@ public abstract class SonarReportingContextBase<TContext> : SonarAnalysisContext
 
     protected SonarReportingContextBase(SonarAnalysisContext analysisContext, TContext context) : base(analysisContext, context) { }
 
-    public void ReportIssue(Diagnostic diagnostic)  // FIXME: Make this obsolete
+    public void ReportIssue(Diagnostic diagnostic)  // FIXME: This is wrong design now, see next commit. This overload should not be accessible from Symbol-based and Compilation-based contexts
     {
         if (HasMatchingScope(diagnostic.Descriptor))
         {
@@ -50,6 +50,15 @@ public abstract class SonarReportingContextBase<TContext> : SonarAnalysisContext
             {
                 reportingContext.ReportDiagnostic(reportingContext.Diagnostic);
             }
+        }
+    }
+
+    protected void ReportIssueCore(GeneratedCodeRecognizer generatedCodeRecognizer, Diagnostic diagnostic) // FIXME: this is wrong desing now, see next commit
+    {
+        var tree = diagnostic.Location.SourceTree;
+        if (ShouldAnalyze(generatedCodeRecognizer, tree, Compilation, Options) && !IsUnchanged(tree, Compilation, Options))
+        {
+            ReportIssue(diagnostic);
         }
     }
 }

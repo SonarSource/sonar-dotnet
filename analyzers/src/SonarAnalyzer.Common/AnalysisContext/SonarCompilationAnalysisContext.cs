@@ -35,13 +35,8 @@ public sealed class SonarCompilationAnalysisContext : SonarReportingContextBase<
 
     internal SonarCompilationAnalysisContext(SonarAnalysisContext analysisContext, CompilationAnalysisContext context) : base(analysisContext, context) { }
 
-    public void ReportDiagnosticIfNonGenerated(GeneratedCodeRecognizer generatedCodeRecognizer, Diagnostic diagnostic)
-    {
-        if (ShouldAnalyze(generatedCodeRecognizer, diagnostic.Location.SourceTree, Compilation, Options))
-        {
-            ReportIssue(diagnostic);
-        }
-    }
+    public void ReportIssue(GeneratedCodeRecognizer generatedCodeRecognizer, Diagnostic diagnostic) =>
+        ReportIssueCore(generatedCodeRecognizer, diagnostic);
 
     public IEnumerable<string> WebConfigFiles()
     {
