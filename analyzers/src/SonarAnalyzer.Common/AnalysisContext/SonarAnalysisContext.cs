@@ -19,13 +19,13 @@
  */
 
 using Microsoft.CodeAnalysis.Text;
-//FIXME: using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext;
+using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext;
 
-namespace SonarAnalyzer;    // FIXME: SonarAnalyzer.AnalysisContext
+namespace SonarAnalyzer.AnalysisContext;
 
 public sealed class SonarAnalysisContext : SonarAnalysisContextBase // FIXME: Remove inheritance
 {
-    private readonly AnalysisContext analysisContext;
+    private readonly RoslynAnalysisContext analysisContext;
     private readonly IEnumerable<DiagnosticDescriptor> supportedDiagnostics;
 
     /// <summary>
@@ -57,7 +57,7 @@ public sealed class SonarAnalysisContext : SonarAnalysisContextBase // FIXME: Re
     /// </remarks>
     public static Action<IReportingContext> ReportDiagnostic { get; set; }
 
-    internal SonarAnalysisContext(AnalysisContext analysisContext, IEnumerable<DiagnosticDescriptor> supportedDiagnostics)
+    internal SonarAnalysisContext(RoslynAnalysisContext analysisContext, IEnumerable<DiagnosticDescriptor> supportedDiagnostics)
     {
         this.analysisContext = analysisContext ?? throw new ArgumentNullException(nameof(analysisContext));
         this.supportedDiagnostics = supportedDiagnostics ?? throw new ArgumentNullException(nameof(supportedDiagnostics));

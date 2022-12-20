@@ -20,12 +20,14 @@
 
 using System.IO;
 using Moq;
+using SonarAnalyzer.AnalysisContext;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.Helpers;
 using SonarAnalyzer.UnitTest.Rules;
+using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext;
 
-namespace SonarAnalyzer.UnitTest;
+namespace SonarAnalyzer.UnitTest.AnalysisContext;
 
 [TestClass]
 public partial class SonarAnalysisContextTest
@@ -381,8 +383,8 @@ public partial class SonarAnalysisContextTest
         wasReported.Should().Be(expected);
     }
 
-    internal class DummyContext : AnalysisContext
-    {
+    internal class DummyContext : RoslynAnalysisContext
+{
         public override void RegisterCodeBlockAction(Action<CodeBlockAnalysisContext> action) => throw new NotImplementedException();
         public override void RegisterCodeBlockStartAction<TLanguageKindEnum>(Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action) => throw new NotImplementedException();
         public override void RegisterCompilationAction(Action<CompilationAnalysisContext> action) => throw new NotImplementedException();

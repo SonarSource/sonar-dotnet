@@ -26,6 +26,7 @@
   <ItemGroup>
     <Using Include="Microsoft.CodeAnalysis.VisualBasic" />
     <Using Include="Microsoft.CodeAnalysis.VisualBasic.Syntax" />
+    <Using Include="SonarAnalyzer.AnalysisContext" />
     <Using Include="SonarAnalyzer.Common" />
     <Using Include="SonarAnalyzer.Extensions" />
     <Using Include="SonarAnalyzer.Helpers" />

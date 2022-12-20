@@ -21,7 +21,7 @@
 using System.IO;
 using System.Text.RegularExpressions;
 
-namespace SonarAnalyzer;
+namespace SonarAnalyzer.AnalysisContext;
 
 public sealed class SonarCompilationAnalysisContext : SonarCompilationReportingContextBase<CompilationAnalysisContext>
 {
