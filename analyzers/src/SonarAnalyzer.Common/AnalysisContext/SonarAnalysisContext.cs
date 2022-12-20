@@ -24,17 +24,17 @@ namespace SonarAnalyzer;
 
 public partial /*FIXME: REMOVE partial */ class SonarAnalysisContext : SonarAnalysisContextBase
 {
-    private readonly AnalysisContext context;
+    private readonly AnalysisContext analysisContext;
     private readonly IEnumerable<DiagnosticDescriptor> supportedDiagnostics;
 
-    internal SonarAnalysisContext(AnalysisContext context, IEnumerable<DiagnosticDescriptor> supportedDiagnostics)
+    internal SonarAnalysisContext(AnalysisContext analysisContext, IEnumerable<DiagnosticDescriptor> supportedDiagnostics)
     {
-        this.context = context ?? throw new ArgumentNullException(nameof(context));
+        this.analysisContext = analysisContext ?? throw new ArgumentNullException(nameof(analysisContext));
         this.supportedDiagnostics = supportedDiagnostics ?? throw new ArgumentNullException(nameof(supportedDiagnostics));
     }
 
     public override bool TryGetValue<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value) =>
-        context.TryGetValue(text, valueProvider, out value);
+        analysisContext.TryGetValue(text, valueProvider, out value);
 
     private void Execute<TSonarContext, TRoslynContext>(TSonarContext context, Action<TSonarContext> action) where TSonarContext : SonarAnalysisContextBase<TRoslynContext>
     {

@@ -79,7 +79,7 @@ public partial class SonarAnalysisContext
     public static Action<IReportingContext> ReportDiagnostic { get; set; }
 
     public bool ShouldAnalyzeGenerated(Compilation c, AnalyzerOptions options) =>
-        ShouldAnalyzeGenerated(context.TryGetValue, c, options);
+        ShouldAnalyzeGenerated(analysisContext.TryGetValue, c, options);
 
     public static bool ShouldAnalyze(TryGetValueDelegate<bool> tryGetBool,
                                      TryGetValueDelegate<ProjectConfigReader> tryGetProjectConfigReader,
@@ -97,7 +97,7 @@ public partial class SonarAnalysisContext
         ProjectConfiguration(context.TryGetValue, context.Options).IsScannerRun;
 
     public bool IsTestProject(Compilation c, AnalyzerOptions options) =>
-        IsTestProject(context.TryGetValue, c, options);
+        IsTestProject(analysisContext.TryGetValue, c, options);
 
     public static bool IsTestProject(CompilationAnalysisContext analysisContext) =>
         IsTestProject(analysisContext.TryGetValue, analysisContext.Compilation, analysisContext.Options);
@@ -107,35 +107,35 @@ public partial class SonarAnalysisContext
 
     // FIXME: Use the other one
     internal void RegisterCompilationAction(Action<CompilationAnalysisContext> action) =>
-        context.RegisterCompilationAction(c => Execute<SonarCompilationAnalysisContext, CompilationAnalysisContext>(new(this, c), x => action(x.Context)));
+        analysisContext.RegisterCompilationAction(c => Execute<SonarCompilationAnalysisContext, CompilationAnalysisContext>(new(this, c), x => action(x.Context)));
 
     //internal void RegisterCompilationAction(Action<SonarCompilationAnalysisContext> action) =>
     //    context.RegisterCompilationAction(c => Execute<SonarCompilationAnalysisContext, CompilationAnalysisContext>(new(this, c), action));
 
     // FIXME: Use the other one
     public void RegisterCompilationStartAction(Action<CompilationStartAnalysisContext> action) =>
-        context.RegisterCompilationStartAction(c => Execute<SonarCompilationStartAnalysisContext, CompilationStartAnalysisContext>(new(this, c), x => action(x.Context)));
+        analysisContext.RegisterCompilationStartAction(c => Execute<SonarCompilationStartAnalysisContext, CompilationStartAnalysisContext>(new(this, c), x => action(x.Context)));
 
     //public void RegisterCompilationStartAction(Action<SonarCompilationStartAnalysisContext> action) =>
     //    context.RegisterCompilationStartAction(c => Execute<SonarCompilationStartAnalysisContext, CompilationStartAnalysisContext>(new(this, c), action));
 
     // FIXME: Use the other one
     public void RegisterSymbolAction(Action<SymbolAnalysisContext> action, params SymbolKind[] symbolKinds) =>
-        context.RegisterSymbolAction(c => Execute<SonarSymbolAnalysisContext, SymbolAnalysisContext>(new(this, c), x => action(x.Context)), symbolKinds);
+        analysisContext.RegisterSymbolAction(c => Execute<SonarSymbolAnalysisContext, SymbolAnalysisContext>(new(this, c), x => action(x.Context)), symbolKinds);
 
     //public void RegisterSymbolAction(Action<SonarSymbolAnalysisContext> action, params SymbolKind[] symbolKinds) =>
     //    context.RegisterSymbolAction(c => Execute<SonarSymbolAnalysisContext, SymbolAnalysisContext>(new(this, c), action), symbolKinds);
 
     // FIXME: Use the other one
     internal void RegisterCodeBlockStartAction<TSyntaxKind>(Action<CodeBlockStartAnalysisContext<TSyntaxKind>> action) where TSyntaxKind : struct =>
-        context.RegisterCodeBlockStartAction<TSyntaxKind>(c => Execute<SonarCodeBlockStartAnalysisContext<TSyntaxKind>, CodeBlockStartAnalysisContext<TSyntaxKind>>(new(this, c), x => action(x.Context)));
+        analysisContext.RegisterCodeBlockStartAction<TSyntaxKind>(c => Execute<SonarCodeBlockStartAnalysisContext<TSyntaxKind>, CodeBlockStartAnalysisContext<TSyntaxKind>>(new(this, c), x => action(x.Context)));
 
     //internal void RegisterCodeBlockStartAction<TSyntaxKind>(Action<SonarCodeBlockStartAnalysisContext<TSyntaxKind>> action) where TSyntaxKind : struct =>
     //    context.RegisterCodeBlockStartAction<TSyntaxKind>(c => Execute<SonarCodeBlockStartAnalysisContext<TSyntaxKind>, CodeBlockStartAnalysisContext<TSyntaxKind>>(new(this, c), action));
 
     // FIXME: Use the other one
     internal void RegisterSyntaxNodeAction<TSyntaxKind>(Action<SyntaxNodeAnalysisContext> action, params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct =>
-        context.RegisterSyntaxNodeAction(c => Execute<SonarSyntaxNodeAnalysisContext, SyntaxNodeAnalysisContext>(new(this, c), x => action(x.Context)), syntaxKinds);
+        analysisContext.RegisterSyntaxNodeAction(c => Execute<SonarSyntaxNodeAnalysisContext, SyntaxNodeAnalysisContext>(new(this, c), x => action(x.Context)), syntaxKinds);
 
     //internal void RegisterSyntaxNodeAction<TSyntaxKind>(Action<SonarSyntaxNodeAnalysisContext> action, params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct =>
     //    context.RegisterSyntaxNodeAction(c => Execute<SonarSyntaxNodeAnalysisContext, SyntaxNodeAnalysisContext>(new(this, c), action), syntaxKinds);
@@ -158,7 +158,7 @@ public partial class SonarAnalysisContext
     /// Reads configuration from SonarProjectConfig.xml file and caches the result for scope of this analysis.
     /// </summary>
     internal ProjectConfigReader ProjectConfiguration(AnalyzerOptions options) =>
-        ProjectConfiguration(context.TryGetValue, options);
+        ProjectConfiguration(analysisContext.TryGetValue, options);
 
     internal static ProjectConfigReader ProjectConfiguration(TryGetValueDelegate<ProjectConfigReader> tryGetValue, AnalyzerOptions options)
     {
