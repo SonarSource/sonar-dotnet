@@ -90,35 +90,27 @@ namespace SonarAnalyzer.Rules
         protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterCompilationAction(c =>
                 {
-                    try
+                    ReadParameters(context, c);
+                    if (!IsAnalyzerEnabled)
                     {
-                        ReadParameters(context, c);
-                        if (!IsAnalyzerEnabled)
-                        {
-                            return;
-                        }
-
-                        var treeMessages = c.Compilation.SyntaxTrees
-                            .Where(x => ShouldGenerateMetrics(c, x))
-                            .Select(x => CreateMessage(x, c.Compilation.GetSemanticModel(x)));
-                        var messages = CreateAnalysisMessages(c)
-                            .Concat(treeMessages)
-                            .WhereNotNull()
-                            .ToArray();
-                        lock (FileWriteLock)
-                        {
-                            Directory.CreateDirectory(OutPath);
-                            using var stream = File.Create(Path.Combine(OutPath, FileName));
-                            foreach (var message in messages)
-                            {
-                                message.WriteDelimitedTo(stream);
-                            }
-                        }
+                        return;
                     }
-                    catch (Exception ex)
+
+                    var treeMessages = c.Compilation.SyntaxTrees
+                        .Where(x => ShouldGenerateMetrics(c, x))
+                        .Select(x => CreateMessage(x, c.Compilation.GetSemanticModel(x)));
+                    var messages = CreateAnalysisMessages(c)
+                        .Concat(treeMessages)
+                        .WhereNotNull()
+                        .ToArray();
+                    lock (FileWriteLock)
                     {
-                        var up = new WtfException(ex);
-                        throw up;
+                        Directory.CreateDirectory(OutPath);
+                        using var stream = File.Create(Path.Combine(OutPath, FileName));
+                        foreach (var message in messages)
+                        {
+                            message.WriteDelimitedTo(stream);
+                        }
                     }
                 });
 
@@ -131,10 +123,5 @@ namespace SonarAnalyzer.Rules
         private bool ShouldGenerateMetrics(CompilationAnalysisContext context, SyntaxTree tree) =>
             (AnalyzeUnchangedFiles || !SonarAnalysisContext.IsUnchanged(context.TryGetValue, tree, context.Compilation, context.Options))
             && ShouldGenerateMetrics(tree);
-    }
-
-    public class WtfException : Exception
-    {
-        public WtfException(Exception ex) : base(ex.ToString().Replace(Environment.NewLine, "##")) { }
     }
 }
