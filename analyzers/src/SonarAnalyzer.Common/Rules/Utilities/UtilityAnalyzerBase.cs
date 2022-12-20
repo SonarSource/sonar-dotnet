@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Concurrent;
 using System.IO;
 using Google.Protobuf;
 using SonarAnalyzer.Protobuf;
@@ -87,26 +88,30 @@ namespace SonarAnalyzer.Rules
         protected UtilityAnalyzerBase(string diagnosticId, string title) : base(diagnosticId, title) { }
 
         protected sealed override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterCompilationStartAction(start =>
+            context.RegisterCompilationStartAction(startContext =>
             {
-                ReadParameters(context, start.Options, start.Compilation);
+                ReadParameters(context, startContext.Options, startContext.Compilation);
                 if (!IsAnalyzerEnabled)
                 {
                     return;
                 }
-                List<TMessage> treeMessages = new();
-                start.RegisterSemanticModelAction(model =>
+
+                ConcurrentStack<TMessage> treeMessages = new();
+                SonarAnalysisContext.TryGetValueDelegate<ProjectConfigReader> tryGetValue = startContext.TryGetValue;
+
+                startContext.RegisterSemanticModelAction(modelContext =>
                 {
-                    var syntaxTree = model.SemanticModel.SyntaxTree;
-                    if (ShouldGenerateMetrics(start, syntaxTree))
+                    var semanticModel = modelContext.SemanticModel;
+                    var syntaxTree = semanticModel.SyntaxTree;
+                    if (ShouldGenerateMetrics(tryGetValue, semanticModel.Compilation, modelContext.Options, syntaxTree))
                     {
-                        treeMessages.Add(CreateMessage(syntaxTree, model.SemanticModel));
+                        treeMessages.Push(CreateMessage(syntaxTree, semanticModel));
                     }
                 });
 
-                start.RegisterCompilationEndAction(end =>
+                startContext.RegisterCompilationEndAction(endContext =>
                 {
-                    var analysisMessages = CreateAnalysisMessages(end.Compilation).ToList();
+                    var analysisMessages = CreateAnalysisMessages(endContext.Compilation);
 
                     var allMessages = analysisMessages
                         .Concat(treeMessages)
@@ -121,6 +126,7 @@ namespace SonarAnalyzer.Rules
                         {
                             message.WriteDelimitedTo(stream);
                         }
+                        stream.Close();
                     }
                 });
             });
@@ -131,8 +137,8 @@ namespace SonarAnalyzer.Rules
             && FileExtensionWhitelist.Contains(Path.GetExtension(tree.FilePath))
             && (AnalyzeGeneratedCode || !Language.GeneratedCodeRecognizer.IsGenerated(tree));
 
-        private bool ShouldGenerateMetrics(CompilationStartAnalysisContext context, SyntaxTree tree) =>
-            (AnalyzeUnchangedFiles || !SonarAnalysisContext.IsUnchanged(context.TryGetValue, tree, context.Compilation, context.Options))
+        private bool ShouldGenerateMetrics(SonarAnalysisContext.TryGetValueDelegate<ProjectConfigReader> tryGetValue, Compilation compilation, AnalyzerOptions options, SyntaxTree tree) =>
+            (AnalyzeUnchangedFiles || !SonarAnalysisContext.IsUnchanged(tryGetValue, tree, compilation, options))
             && ShouldGenerateMetrics(tree);
     }
 }
