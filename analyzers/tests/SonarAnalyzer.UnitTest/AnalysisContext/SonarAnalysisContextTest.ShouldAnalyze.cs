@@ -20,7 +20,7 @@
 
 using SonarAnalyzer.Common;
 
-namespace SonarAnalyzer.UnitTest.Helpers;
+namespace SonarAnalyzer.UnitTest;
 
 public partial class SonarAnalysisContextTest
 {
