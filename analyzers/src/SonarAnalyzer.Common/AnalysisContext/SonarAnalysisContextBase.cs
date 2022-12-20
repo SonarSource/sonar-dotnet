@@ -26,3 +26,22 @@ public abstract class SonarAnalysisContextBase
 {
     public abstract bool TryGetValue<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value);
 }
+
+public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextBase
+{
+    public abstract SyntaxTree Tree { get; }
+    public abstract Compilation Compilation { get; }
+    public abstract AnalyzerOptions Options { get; }
+
+    public SonarAnalysisContext AnalysisContext { get; }
+    public TContext Context { get; }
+
+    protected SonarAnalysisContextBase(SonarAnalysisContext analysisContext, TContext context)
+    {
+        AnalysisContext = analysisContext ?? throw new ArgumentNullException(nameof(analysisContext));
+        Context = context;
+    }
+
+    public override bool TryGetValue<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value) =>
+        AnalysisContext.TryGetValue(text, valueProvider, out value);
+}
