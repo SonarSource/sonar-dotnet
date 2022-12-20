@@ -65,40 +65,40 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context)
         {
             base.Initialize(context);
-            context.RegisterCompilationAction(c => CheckWebConfig(context, c));
-            context.RegisterCompilationAction(c => CheckAppSettings(context, c));
+            context.RegisterCompilationAction(CheckWebConfig);
+            context.RegisterCompilationAction(CheckAppSettings);
         }
 
-        private void CheckWebConfig(SonarAnalysisContext context, CompilationAnalysisContext c)
+        private void CheckWebConfig(SonarCompilationAnalysisContext c)
         {
-            foreach (var fullPath in context.WebConfigFiles(c))
+            foreach (var fullPath in c.WebConfigFiles())
             {
                 var webConfig = File.ReadAllText(fullPath);
                 if (webConfig.Contains("<connectionStrings>") && XmlHelper.ParseXDocument(webConfig) is { } doc)
                 {
-                    ReportEmptyPassword(doc, fullPath, c);
+                    ReportEmptyPassword(c, doc, fullPath);
                 }
             }
         }
 
-        private void CheckAppSettings(SonarAnalysisContext context, CompilationAnalysisContext c)
+        private void CheckAppSettings(SonarCompilationAnalysisContext c)
         {
-            foreach (var fullPath in context.AppSettingsFiles(c))
+            foreach (var fullPath in c.AppSettingsFiles())
             {
                 CheckAppSettingJson(c, fullPath);
             }
         }
 
-        private void CheckAppSettingJson(CompilationAnalysisContext c, string fullPath)
+        private void CheckAppSettingJson(SonarCompilationAnalysisContext c, string fullPath)
         {
             var appSettings = File.ReadAllText(fullPath);
             if (appSettings.Contains("\"ConnectionStrings\"") && JsonNode.FromString(appSettings) is { } json)
             {
-                ReportEmptyPassword(json, fullPath, c);
+                ReportEmptyPassword(c, json, fullPath);
             }
         }
 
-        private void ReportEmptyPassword(XDocument doc, string webConfigPath, CompilationAnalysisContext c)
+        private void ReportEmptyPassword(SonarCompilationAnalysisContext c, XDocument doc, string webConfigPath)
         {
             foreach (var addAttribute in doc.XPathSelectElements("configuration/connectionStrings/add"))
             {
@@ -112,7 +112,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private void ReportEmptyPassword(JsonNode doc, string appSettingsPath, CompilationAnalysisContext c)
+        private void ReportEmptyPassword(SonarCompilationAnalysisContext c, JsonNode doc, string appSettingsPath)
         {
             if (doc.TryGetPropertyNode("ConnectionStrings", out var connectionStrings) && connectionStrings.Kind == Kind.Object)
             {

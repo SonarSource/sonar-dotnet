@@ -28,4 +28,7 @@ public sealed class SonarSymbolAnalysisContext : SonarAnalysisContextBase<Symbol
     public ISymbol Symbol => Context.Symbol;
 
     internal SonarSymbolAnalysisContext(SonarAnalysisContext analysisContext, SymbolAnalysisContext context) : base(analysisContext, context) { }
+
+    public void ReportIssue(Diagnostic diagnostic) =>
+        ReportIssue(new ReportingContext(Context, diagnostic));
 }

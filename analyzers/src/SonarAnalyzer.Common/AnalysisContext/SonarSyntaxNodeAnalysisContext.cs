@@ -30,4 +30,7 @@ public sealed class SonarSyntaxNodeAnalysisContext : SonarAnalysisContextBase<Sy
     public ISymbol ContainingSymbol => Context.ContainingSymbol;
 
     internal SonarSyntaxNodeAnalysisContext(SonarAnalysisContext analysisContext, SyntaxNodeAnalysisContext context) : base(analysisContext, context) { }
+
+    public void ReportIssue(Diagnostic diagnostic) =>
+        ReportIssue(new ReportingContext(Context, diagnostic));
 }
