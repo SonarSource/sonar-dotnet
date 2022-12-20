@@ -18,13 +18,38 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.IO;
+using System.Text.RegularExpressions;
+
 namespace SonarAnalyzer;
 
 public sealed class SonarCompilationAnalysisContext : SonarAnalysisContextBase<CompilationAnalysisContext>
 {
+    private static readonly Regex WebConfigRegex = new(@"[\\\/]web\.([^\\\/]+\.)?config$", RegexOptions.IgnoreCase);
+    private static readonly Regex AppSettingsRegex = new(@"[\\\/]appsettings\.([^\\\/]+\.)?json$", RegexOptions.IgnoreCase);
+
     public override SyntaxTree Tree => Context.GetFirstSyntaxTree();
     public override Compilation Compilation => Context.Compilation;
     public override AnalyzerOptions Options => Context.Options;
 
     internal SonarCompilationAnalysisContext(SonarAnalysisContext analysisContext, CompilationAnalysisContext context) : base(analysisContext, context) { }
+
+    public void ReportIssue(Diagnostic diagnostic) =>
+        ReportIssue(new ReportingContext(Context, diagnostic));
+
+    internal IEnumerable<string> WebConfigFiles()
+    {
+        return ProjectConfiguration().FilesToAnalyze.FindFiles(WebConfigRegex).Where(ShouldProcess);
+
+        static bool ShouldProcess(string path) =>
+            !Path.GetFileName(path).Equals("web.debug.config", StringComparison.OrdinalIgnoreCase);
+    }
+
+    internal IEnumerable<string> AppSettingsFiles()
+    {
+        return ProjectConfiguration().FilesToAnalyze.FindFiles(AppSettingsRegex).Where(ShouldProcess);
+
+        static bool ShouldProcess(string path) =>
+            !Path.GetFileName(path).Equals("appsettings.development.json", StringComparison.OrdinalIgnoreCase);
+    }
 }
