@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         // This functions is called for each issue found by cbde after it runs
-        private void OnCbdeIssue(string key, string message, Location loc, CompilationAnalysisContext context)
+        private void OnCbdeIssue(SonarCompilationAnalysisContext context, string key, string message, Location loc)
         {
             if (!ruleIdToDiagDescriptor.ContainsKey(key))
             {
