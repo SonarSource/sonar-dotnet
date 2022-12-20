@@ -18,20 +18,19 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+public class ParameterLoadingAnalysisContext
 {
-    public class ParameterLoadingAnalysisContext
-    {
-        private readonly List<Action<CompilationStartAnalysisContext>> compilationStartActions = new();
+    private readonly List<Action<CompilationStartAnalysisContext>> compilationStartActions = new();
 
-        internal SonarAnalysisContext Context { get; }
-        internal IEnumerable<Action<CompilationStartAnalysisContext>> CompilationStartActions => compilationStartActions;
+    internal SonarAnalysisContext Context { get; }
+    internal IEnumerable<Action<CompilationStartAnalysisContext>> CompilationStartActions => compilationStartActions;
 
-        internal ParameterLoadingAnalysisContext(SonarAnalysisContext context) =>
-            Context = context;
+    internal ParameterLoadingAnalysisContext(SonarAnalysisContext context) =>
+        Context = context;
 
-        internal void RegisterCompilationStartAction(Action<CompilationStartAnalysisContext> action) =>
-            // only collect compilation start actions and call them later
-            compilationStartActions.Add(action);
-    }
+    internal void RegisterCompilationStartAction(Action<CompilationStartAnalysisContext> action) =>
+        // only collect compilation start actions and call them later
+        compilationStartActions.Add(action);
 }
