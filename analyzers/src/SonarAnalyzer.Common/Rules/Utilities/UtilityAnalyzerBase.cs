@@ -97,11 +97,6 @@ namespace SonarAnalyzer.Rules
                 List<TMessage> treeMessages = new();
                 start.RegisterSemanticModelAction(model =>
                 {
-                    ReadParameters(context, model.Options, model.SemanticModel.Compilation);
-                    if (!IsAnalyzerEnabled)
-                    {
-                        return;
-                    }
                     var syntaxTree = model.SemanticModel.SyntaxTree;
                     if (ShouldGenerateMetrics(start, syntaxTree))
                     {
