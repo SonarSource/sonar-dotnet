@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules
             // For backward compatibility with S4MSB <= 5.0
             if (outPath == null && c.Options.ProjectOutFolderPath() is { } projectOutFolderAdditionalFile)
             {
-                outPath = projectOutFolderAdditionalFile.GetText().ToString();
+                outPath = projectOutFolderAdditionalFile.GetText().ToString().TrimEnd();
             }
             if (settings.Any() && !string.IsNullOrEmpty(outPath))
             {
