@@ -65,7 +65,7 @@ public sealed partial /*FIXME: REMOVE partial */ class SonarAnalysisContext : So
         analysisContext.TryGetValue(text, valueProvider, out value);
 
     internal void RegisterCompilationAction(Action<SonarCompilationAnalysisContext> action) =>
-        context.RegisterCompilationAction(c => Execute<SonarCompilationAnalysisContext, CompilationAnalysisContext>(new(this, c), action));
+        analysisContext.RegisterCompilationAction(c => Execute<SonarCompilationAnalysisContext, CompilationAnalysisContext>(new(this, c), action));
 
     private void Execute<TSonarContext, TRoslynContext>(TSonarContext context, Action<TSonarContext> action) where TSonarContext : SonarAnalysisContextBase<TRoslynContext>
     {
