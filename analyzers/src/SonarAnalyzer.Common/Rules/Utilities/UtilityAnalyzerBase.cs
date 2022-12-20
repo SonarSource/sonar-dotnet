@@ -55,7 +55,6 @@ namespace SonarAnalyzer.Rules
             var settings = PropertiesHelper.GetSettings(c.Options).ToList();
             var outPath = context.ProjectConfiguration(c.Options).OutPath;
             // For backward compatibility with S4MSB <= 5.0
-
             if (outPath == null && c.Options.ProjectOutFolderPath() is { } projectOutFolderAdditionalFile)
             {
                 outPath = projectOutFolderAdditionalFile.GetText().ToString().TrimEnd();
@@ -95,6 +94,7 @@ namespace SonarAnalyzer.Rules
                     {
                         return;
                     }
+
                     var treeMessages = c.Compilation.SyntaxTrees
                         .Where(x => ShouldGenerateMetrics(c, x))
                         .Select(x => CreateMessage(x, c.Compilation.GetSemanticModel(x)));
