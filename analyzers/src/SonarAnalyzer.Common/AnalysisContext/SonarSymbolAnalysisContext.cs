@@ -30,13 +30,8 @@ public sealed class SonarSymbolAnalysisContext : SonarReportingContextBase<Symbo
 
     internal SonarSymbolAnalysisContext(SonarAnalysisContext analysisContext, SymbolAnalysisContext context) : base(analysisContext, context) { }
 
-    public void ReportDiagnosticIfNonGenerated(GeneratedCodeRecognizer generatedCodeRecognizer, Diagnostic diagnostic)
-    {
-        if (ShouldAnalyzeTree(diagnostic.Location.SourceTree, Compilation, Options, generatedCodeRecognizer))
-        {
-            ReportIssue(diagnostic);
-        }
-    }
+    public void ReportIssue(GeneratedCodeRecognizer generatedCodeRecognizer, Diagnostic diagnostic) =>
+        ReportIssueCore(generatedCodeRecognizer, diagnostic);
 
     private protected override ReportingContext CreateReportingContext(Diagnostic diagnostic) =>
         new(this, diagnostic);

@@ -48,9 +48,9 @@ namespace SonarAnalyzer.Extensions
             context.RegisterCodeBlockStartActionInNonGenerated(CSharpGeneratedCodeRecognizer.Instance, action);
 
         public static void ReportDiagnosticIfNonGenerated(this SonarCompilationAnalysisContext context, Diagnostic diagnostic) =>
-            context.ReportDiagnosticIfNonGenerated(CSharpGeneratedCodeRecognizer.Instance, diagnostic);
+            context.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, diagnostic);
 
         public static void ReportDiagnosticIfNonGenerated(this SonarSymbolAnalysisContext context, Diagnostic diagnostic) =>
-            context.ReportDiagnosticIfNonGenerated(CSharpGeneratedCodeRecognizer.Instance, diagnostic);
+            context.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, diagnostic);
     }
 }
