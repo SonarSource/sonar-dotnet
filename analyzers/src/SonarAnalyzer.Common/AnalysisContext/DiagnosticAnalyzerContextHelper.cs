@@ -124,12 +124,12 @@ internal static class DiagnosticAnalyzerContextHelper
             return true;
         }
 
-            bool CreateProjectConfigReader(SourceText text, SourceTextValueProvider<ProjectConfigReader> valueProvider, out ProjectConfigReader value)
-            {
-                value = new ProjectConfigReader(text); // Recreating manually, SourceTextValueProvider doesn't have public API to use
-                return true;
-            }
+        bool CreateProjectConfigReader(SourceText text, SourceTextValueProvider<ProjectConfigReader> valueProvider, out ProjectConfigReader value)
+        {
+            value = new ProjectConfigReader(text); // Recreating manually, SourceTextValueProvider doesn't have public API to use
+            return true;
         }
+    }
 
     public static bool IsGenerated(this SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer, Compilation compilation)
     {
