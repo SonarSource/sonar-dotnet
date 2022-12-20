@@ -50,7 +50,7 @@ internal static class DiagnosticAnalyzerContextHelper
                 {
                     action(c);
                 }
-            }, syntaxKinds.ToImmutableArray());
+            }, syntaxKinds);
 
     public static void RegisterSyntaxNodeActionInNonGenerated<TLanguageKindEnum>(this CompilationStartAnalysisContext context,
                                                                                  GeneratedCodeRecognizer generatedCodeRecognizer,
