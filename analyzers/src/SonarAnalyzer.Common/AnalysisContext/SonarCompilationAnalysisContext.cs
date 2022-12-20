@@ -37,7 +37,7 @@ public sealed class SonarCompilationAnalysisContext : SonarReportingContextBase<
 
     public void ReportDiagnosticIfNonGenerated(GeneratedCodeRecognizer generatedCodeRecognizer, Diagnostic diagnostic)
     {
-        if (ShouldAnalyze(generatedCodeRecognizer, diagnostic.Location.SourceTree, Compilation, Options))
+        if (ShouldAnalyzeTree(diagnostic.Location.SourceTree, Compilation, Options, generatedCodeRecognizer))
         {
             ReportIssue(diagnostic);
         }

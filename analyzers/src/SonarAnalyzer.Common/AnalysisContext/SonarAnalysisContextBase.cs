@@ -34,9 +34,11 @@ public abstract class SonarAnalysisContextBase
 
     public abstract bool TryGetValue<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value);
 
-    public bool ShouldAnalyze(GeneratedCodeRecognizer generatedCodeRecognizer, SyntaxTree tree, Compilation compilation, AnalyzerOptions options) =>    // FIXME: This thing has confusing name
-        !IsUnchanged(tree, compilation, options)        // FIXME: This needs to go to
-        && (ShouldAnalyzeGenerated(compilation, options) || !tree.IsGenerated(generatedCodeRecognizer, compilation));
+    /// <param name="tree">Tree to decide on. Can be null for Symbol-based and Compilation-based scenarios. And we want to analyze those too.</param>
+    /// <param name="generatedCodeRecognizer">When set, generated trees are analyzed only when langauge-specific 'analyzeGeneratedCode' configuration property is also set.</param>
+    public bool ShouldAnalyzeTree(SyntaxTree tree, Compilation compilation, AnalyzerOptions options, GeneratedCodeRecognizer generatedCodeRecognizer) =>
+        (generatedCodeRecognizer is null || ShouldAnalyzeGenerated(compilation, options) || !tree.IsGenerated(generatedCodeRecognizer, compilation))
+        && (tree is null || !IsUnchanged(tree, compilation, options));
 
     /// <summary>
     /// Reads configuration from SonarProjectConfig.xml file and caches the result for scope of this analysis.
@@ -107,9 +109,6 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
             ? Compilation.IsTest()              // SonarLint, NuGet or Scanner <= 5.0
             : projectType == ProjectType.Test;  // Scanner >= 5.1 does authoritative decision that we follow
     }
-
-    public bool ShouldAnalyze(GeneratedCodeRecognizer generatedCodeRecognizer) =>
-        ShouldAnalyze(generatedCodeRecognizer, Tree, Compilation, Options);
 
     public bool HasMatchingScope(IEnumerable<DiagnosticDescriptor> descriptors) =>
         descriptors.Any(HasMatchingScope);

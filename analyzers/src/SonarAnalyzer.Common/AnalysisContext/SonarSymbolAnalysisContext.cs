@@ -32,7 +32,7 @@ public sealed class SonarSymbolAnalysisContext : SonarReportingContextBase<Symbo
 
     public void ReportDiagnosticIfNonGenerated(GeneratedCodeRecognizer generatedCodeRecognizer, Diagnostic diagnostic)
     {
-        if (ShouldAnalyze(generatedCodeRecognizer, diagnostic.Location.SourceTree, Compilation, Options))
+        if (ShouldAnalyzeTree(diagnostic.Location.SourceTree, Compilation, Options, generatedCodeRecognizer))
         {
             ReportIssue(diagnostic);
         }
