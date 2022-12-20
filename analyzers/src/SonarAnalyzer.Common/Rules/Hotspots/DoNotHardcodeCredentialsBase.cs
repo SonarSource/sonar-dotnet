@@ -117,42 +117,42 @@ namespace SonarAnalyzer.Rules
             return configuration.IsEnabled(DiagnosticId);
         }
 
-        private void CheckWebConfig(SonarCompilationAnalysisContext c)
+        private void CheckWebConfig(SonarCompilationAnalysisContext context)
         {
-            foreach (var path in c.WebConfigFiles())
+            foreach (var path in context.WebConfigFiles())
             {
                 if (XmlHelper.ParseXDocument(File.ReadAllText(path)) is { } doc)
                 {
-                    CheckWebConfig(c, path, doc.Descendants());
+                    CheckWebConfig(context, path, doc.Descendants());
                 }
             }
         }
 
-        private void CheckWebConfig(SonarCompilationAnalysisContext c, string path, IEnumerable<XElement> elements)
+        private void CheckWebConfig(SonarCompilationAnalysisContext context, string path, IEnumerable<XElement> elements)
         {
             foreach (var element in elements)
             {
                 if (!element.HasElements && IssueMessage(element.Name.LocalName, element.Value) is { } elementMessage && element.CreateLocation(path) is { } elementLocation)
                 {
-                    c.ReportIssue(Diagnostic.Create(rule, elementLocation, elementMessage));
+                    context.ReportIssue(Diagnostic.Create(rule, elementLocation, elementMessage));
                 }
                 foreach (var attribute in element.Attributes())
                 {
                     if (IssueMessage(attribute.Name.LocalName, attribute.Value) is { } attributeMessage && attribute.CreateLocation(path) is { } attributeLocation)
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, attributeLocation, attributeMessage));
+                        context.ReportIssue(Diagnostic.Create(rule, attributeLocation, attributeMessage));
                     }
                 }
             }
         }
 
-        private void CheckAppSettings(SonarCompilationAnalysisContext c)
+        private void CheckAppSettings(SonarCompilationAnalysisContext context)
         {
-            foreach (var path in c.AppSettingsFiles())
+            foreach (var path in context.AppSettingsFiles())
             {
                 if (JsonNode.FromString(File.ReadAllText(path)) is { } json)
                 {
-                    var walker = new CredentialWordsJsonWalker(this, c, path);
+                    var walker = new CredentialWordsJsonWalker(this, context, path);
                     walker.Visit(json);
                 }
             }

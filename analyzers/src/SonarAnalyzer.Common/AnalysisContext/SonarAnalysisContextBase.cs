@@ -19,7 +19,6 @@
  */
 
 using System.IO;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 
 namespace SonarAnalyzer;

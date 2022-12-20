@@ -37,11 +37,11 @@ namespace SonarAnalyzer;
 /// </summary>
 public partial class SonarAnalysisContext
 {
-    public delegate bool TryGetValueDelegate<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value);     // FIXME: Done
+    public delegate bool TryGetValueDelegate<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value);     // FIXME: Remove, new system doesn't need this anymore
 
     private static readonly SourceTextValueProvider<bool> ShouldAnalyzeGeneratedCS = CreateAnalyzeGeneratedProvider(LanguageNames.CSharp);
     private static readonly SourceTextValueProvider<bool> ShouldAnalyzeGeneratedVB = CreateAnalyzeGeneratedProvider(LanguageNames.VisualBasic);
-    private static readonly SourceTextValueProvider<ProjectConfigReader> ProjectConfigProvider = new(x => new ProjectConfigReader(x));  // FIXME: Done
+    private static readonly SourceTextValueProvider<ProjectConfigReader> ProjectConfigProvider = new(x => new ProjectConfigReader(x));  // FIXME: Remove, it was migrated to the SonarAnalysisContextBase
     private static readonly ConditionalWeakTable<Compilation, ImmutableHashSet<string>> UnchangedFilesCache = new();
 
     public bool ShouldAnalyzeGenerated(Compilation c, AnalyzerOptions options) =>
@@ -102,10 +102,10 @@ public partial class SonarAnalysisContext
     /// <summary>
     /// Reads configuration from SonarProjectConfig.xml file and caches the result for scope of this analysis.
     /// </summary>
-    internal ProjectConfigReader ProjectConfiguration(AnalyzerOptions options) =>   // FIXME: Done
+    internal ProjectConfigReader ProjectConfiguration(AnalyzerOptions options) =>   // FIXME: Remove, it was migrated to the SonarAnalysisContextBase
         ProjectConfiguration(analysisContext.TryGetValue, options);
 
-    internal static ProjectConfigReader ProjectConfiguration(TryGetValueDelegate<ProjectConfigReader> tryGetValue, AnalyzerOptions options) // FIXME: Done
+    internal static ProjectConfigReader ProjectConfiguration(TryGetValueDelegate<ProjectConfigReader> tryGetValue, AnalyzerOptions options) // FIXME: Remove, it was migrated to the SonarAnalysisContextBase
     {
         if (options.SonarProjectConfig() is { } sonarProjectConfigXml)
         {
@@ -146,7 +146,7 @@ public partial class SonarAnalysisContext
     private static ImmutableHashSet<string> CreateUnchangedFilesHashSet(TryGetValueDelegate<ProjectConfigReader> tryGetValue, AnalyzerOptions options) =>
         ImmutableHashSet.Create(StringComparer.OrdinalIgnoreCase, ProjectConfiguration(tryGetValue, options).AnalysisConfig?.UnchangedFiles() ?? Array.Empty<string>());
 
-    private static bool IsTestProject(TryGetValueDelegate<ProjectConfigReader> tryGetValue, Compilation compilation, AnalyzerOptions options)   // FIXME: Done
+    private static bool IsTestProject(TryGetValueDelegate<ProjectConfigReader> tryGetValue, Compilation compilation, AnalyzerOptions options)   // FIXME: Remove, it was migrated to the SonarAnalysisContextBase
     {
         var projectType = ProjectConfiguration(tryGetValue, options).ProjectType;
         return projectType == ProjectType.Unknown

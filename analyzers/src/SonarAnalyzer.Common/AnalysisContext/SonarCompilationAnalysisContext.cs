@@ -52,6 +52,4 @@ public sealed class SonarCompilationAnalysisContext : SonarAnalysisContextBase<C
         static bool ShouldProcess(string path) =>
             !Path.GetFileName(path).Equals("appsettings.development.json", StringComparison.OrdinalIgnoreCase);
     }
-
-
 }

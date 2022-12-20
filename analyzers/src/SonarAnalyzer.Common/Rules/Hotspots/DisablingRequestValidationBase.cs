@@ -27,7 +27,7 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class DisablingRequestValidationBase : HotspotDiagnosticAnalyzer
     {
-        protected const string DiagnosticId = "S5753";
+        private const string DiagnosticId = "S5753";
         private const string MessageFormat = "Make sure disabling ASP.NET Request Validation feature is safe here.";
         // See https://docs.microsoft.com/en-us/dotnet/api/system.web.configuration.httpruntimesection.requestvalidationmode
         private const int MinimumAcceptedRequestValidationModeValue = 4;
@@ -50,13 +50,13 @@ namespace SonarAnalyzer.Rules
             context.RegisterCompilationAction(CheckWebConfig);
         }
 
-        private void CheckController(SymbolAnalysisContext c)
+        private void CheckController(SymbolAnalysisContext context)
         {
-            if (!IsEnabled(c.Options))
+            if (!IsEnabled(context.Options))
             {
                 return;
             }
-            var attributes = c.Symbol.GetAttributes();
+            var attributes = context.Symbol.GetAttributes();
             if (attributes.IsEmpty)
             {
                 return;
@@ -70,41 +70,41 @@ namespace SonarAnalyzer.Rules
                 && a.AttributeClass.Is(KnownType.System_Web_Mvc_ValidateInputAttribute));
             if (attributeWithFalseParameter != null)
             {
-                c.ReportIssue(Diagnostic.Create(rule, attributeWithFalseParameter.ApplicationSyntaxReference.GetSyntax().GetLocation()));
+                context.ReportIssue(Diagnostic.Create(rule, attributeWithFalseParameter.ApplicationSyntaxReference.GetSyntax().GetLocation()));
             }
         }
 
-        private void CheckWebConfig(SonarCompilationAnalysisContext c)
+        private void CheckWebConfig(SonarCompilationAnalysisContext context)
         {
-            if (!IsEnabled(c.Options))
+            if (!IsEnabled(context.Options))
             {
                 return;
             }
 
-            foreach (var fullPath in c.WebConfigFiles())
+            foreach (var fullPath in context.WebConfigFiles())
             {
                 var webConfig = File.ReadAllText(fullPath);
                 if (webConfig.Contains("<system.web>") && XmlHelper.ParseXDocument(webConfig) is { } doc)
                 {
-                    ReportValidateRequest(c, doc, fullPath);
-                    ReportRequestValidationMode(c, doc, fullPath);
+                    ReportValidateRequest(context, doc, fullPath);
+                    ReportRequestValidationMode(context, doc, fullPath);
                 }
             }
         }
 
-        private void ReportValidateRequest(SonarCompilationAnalysisContext c, XDocument doc, string webConfigPath)
+        private void ReportValidateRequest(SonarCompilationAnalysisContext context, XDocument doc, string webConfigPath)
         {
             foreach (var pages in doc.XPathSelectElements("configuration/system.web/pages"))
             {
                 if (pages.GetAttributeIfBoolValueIs("validateRequest", false) is { } validateRequest
                     && validateRequest.CreateLocation(webConfigPath) is { } location)
                 {
-                    c.ReportIssue(Diagnostic.Create(rule, location));
+                    context.ReportIssue(Diagnostic.Create(rule, location));
                 }
             }
         }
 
-        private void ReportRequestValidationMode(SonarCompilationAnalysisContext c, XDocument doc, string webConfigPath)
+        private void ReportRequestValidationMode(SonarCompilationAnalysisContext context, XDocument doc, string webConfigPath)
         {
             foreach (var httpRuntime in doc.XPathSelectElements("configuration/system.web/httpRuntime"))
             {
@@ -113,7 +113,7 @@ namespace SonarAnalyzer.Rules
                     && value < MinimumAcceptedRequestValidationModeValue
                     && requestValidationMode.CreateLocation(webConfigPath) is { } location)
                 {
-                    c.ReportIssue(Diagnostic.Create(rule, location));
+                    context.ReportIssue(Diagnostic.Create(rule, location));
                 }
             }
         }
