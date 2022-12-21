@@ -49,12 +49,12 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    CheckClasses(namedType, c);
-                    CheckConstructors(namedType, c);
+                    CheckClasses(c, namedType);
+                    CheckConstructors(c, namedType);
                 },
                 SymbolKind.NamedType);
 
-        private static void CheckClasses(INamedTypeSymbol utilityClass, SymbolAnalysisContext context)
+        private static void CheckClasses(SonarSymbolAnalysisContext context, INamedTypeSymbol utilityClass)
         {
             if (!ClassIsRelevant(utilityClass))
             {
@@ -72,7 +72,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckConstructors(INamedTypeSymbol utilityClass, SymbolAnalysisContext context)
+        private static void CheckConstructors(SonarSymbolAnalysisContext context, INamedTypeSymbol utilityClass)
         {
             if (!ClassQualifiesForIssue(utilityClass) || !HasMembersAndAllAreStaticExceptConstructors(utilityClass))
             {

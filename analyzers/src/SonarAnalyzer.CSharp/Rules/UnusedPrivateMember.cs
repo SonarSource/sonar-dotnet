@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     // or not.
                     var removableInternalTypes = new HashSet<ISymbol>();
 
-                    c.RegisterSymbolAction(cc => NamedSymbolAction(cc, removableInternalTypes), SymbolKind.NamedType);
+                    c.RegisterSymbolAction(x => NamedSymbolAction(new(context, x), removableInternalTypes), SymbolKind.NamedType);
                     c.RegisterCompilationEndAction(
                         cc =>
                         {
@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Rules.CSharp
                                 usageCollector.SafeVisit(syntaxTree.GetRoot());
                             }
 
-                            var diagnostics = GetDiagnosticsForUnusedPrivateMembers(
+                            var diagnostics = DiagnosticsForUnusedPrivateMembers(
                                 usageCollector,
                                 removableInternalTypes.ToHashSet(),
                                 SyntaxConstants.Internal,
@@ -79,7 +79,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         });
                 });
 
-        private static void NamedSymbolAction(SymbolAnalysisContext context, HashSet<ISymbol> removableInternalTypes)
+        private static void NamedSymbolAction(SonarSymbolAnalysisContext context, HashSet<ISymbol> removableInternalTypes)
         {
             var namedType = (INamedTypeSymbol)context.Symbol;
             var privateSymbols = new HashSet<ISymbol>();
@@ -89,9 +89,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 && new CSharpSymbolUsageCollector(context.Compilation, privateSymbols) is var usageCollector
                 && VisitDeclaringReferences(namedType, usageCollector, context.Compilation, includeGeneratedFile: true))
             {
-                var diagnostics = GetDiagnosticsForUnusedPrivateMembers(usageCollector, privateSymbols, SyntaxConstants.Private, fieldLikeSymbols)
-                                        .Concat(GetDiagnosticsForUsedButUnreadFields(usageCollector, privateSymbols));
-                context.ReportDiagnosticIfNonGenerated(diagnostics);
+                foreach (var diagnostic in DiagnosticsForUnusedPrivateMembers(usageCollector, privateSymbols, SyntaxConstants.Private, fieldLikeSymbols))
+                {
+                    context.ReportDiagnosticIfNonGenerated(diagnostic);
+                }
+                foreach (var diagnostic in DiagnosticsForUsedButUnreadFields(usageCollector, privateSymbols))
+                {
+                    context.ReportDiagnosticIfNonGenerated(diagnostic);
+                }
             }
         }
 
@@ -126,7 +131,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return true;
         }
 
-        private static IEnumerable<Diagnostic> GetDiagnosticsForUnusedPrivateMembers(CSharpSymbolUsageCollector usageCollector,
+        private static IEnumerable<Diagnostic> DiagnosticsForUnusedPrivateMembers(CSharpSymbolUsageCollector usageCollector,
                                                                                      ISet<ISymbol> removableSymbols,
                                                                                      string accessibility,
                                                                                      BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols)
@@ -147,7 +152,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsMentionedInDebuggerDisplay(ISymbol symbol, CSharpSymbolUsageCollector usageCollector) =>
                 usageCollector.DebuggerDisplayValues.Any(value => value.Contains(symbol.Name));
 
-        private static IEnumerable<Diagnostic> GetDiagnosticsForUsedButUnreadFields(CSharpSymbolUsageCollector usageCollector, IEnumerable<ISymbol> removableSymbols)
+        private static IEnumerable<Diagnostic> DiagnosticsForUsedButUnreadFields(CSharpSymbolUsageCollector usageCollector, IEnumerable<ISymbol> removableSymbols)
         {
             var unusedSymbols = GetUnusedSymbols(usageCollector, removableSymbols);
 

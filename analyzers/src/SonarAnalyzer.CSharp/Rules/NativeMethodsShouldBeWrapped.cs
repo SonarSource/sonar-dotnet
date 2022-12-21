@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(ReportTrivialWrappers, SyntaxKind.MethodDeclaration);
         }
 
-        private static void ReportPublicExternalMethods(SymbolAnalysisContext c)
+        private static void ReportPublicExternalMethods(SonarSymbolAnalysisContext c)
         {
             var methodSymbol = (IMethodSymbol)c.Symbol;
             if (methodSymbol.IsExtern
