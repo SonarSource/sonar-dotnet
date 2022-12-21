@@ -38,10 +38,10 @@ public partial class SonarAnalysisContext
     private static readonly SourceTextValueProvider<ProjectConfigReader> ProjectConfigProvider = new(x => new ProjectConfigReader(x));      // FIXME: Remove, it was migrated to the SonarAnalysisContextBase
 
     public bool IsScannerRun(AnalyzerOptions options) =>                    // FIXME: Remove, it was migrated to the SonarAnalysisContextBase
-        ProjectConfiguration(context.TryGetValue, options).IsScannerRun;
+        ProjectConfiguration(analysisContext.TryGetValue, options).IsScannerRun;
 
     public bool IsTestProject(Compilation c, AnalyzerOptions options) =>    // FIXME: Remove, it was migrated to the SonarAnalysisContextBase
-        IsTestProject(context.TryGetValue, c, options);
+        IsTestProject(analysisContext.TryGetValue, c, options);
 
     private static ProjectConfigReader ProjectConfiguration(TryGetValueDelegate<ProjectConfigReader> tryGetValue, AnalyzerOptions options) // FIXME: Remove, it was migrated to the SonarAnalysisContextBase
     {
