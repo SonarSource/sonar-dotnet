@@ -33,10 +33,10 @@ namespace SonarAnalyzer.Rules
             context.RegisterSyntaxNodeAction(
                 c =>
                 {
-                    if (SonarAnalysisContext.ShouldAnalyze(context.TryGetValue, context.TryGetValue, GeneratedCodeRecognizer, c.GetSyntaxTree(), c.Compilation, c.Options))
+                    if (c.ShouldAnalyze(GeneratedCodeRecognizer))
                     {
                         var isTestProject = context.IsTestProject(c.Compilation, c.Options);
-                        CheckMethod(c, isTestProject);
+                        CheckMethod(c.Context, isTestProject);
                     }
                 },
                 SyntaxKinds.ToArray());
