@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Helpers
             where TSyntaxKind : struct =>
             context.RegisterCodeBlockStartActionInNonGenerated(VisualBasicGeneratedCodeRecognizer.Instance, action);
 
-        public static void ReportDiagnosticIfNonGenerated(this SymbolAnalysisContext context, Diagnostic diagnostic) =>
+        public static void ReportDiagnosticIfNonGenerated(this SonarSymbolAnalysisContext context, Diagnostic diagnostic) =>
             context.ReportDiagnosticIfNonGenerated(VisualBasicGeneratedCodeRecognizer.Instance, diagnostic);
     }
 }

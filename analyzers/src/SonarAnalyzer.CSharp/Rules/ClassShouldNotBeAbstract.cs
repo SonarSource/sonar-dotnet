@@ -47,13 +47,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (!IsRecordWithParameters(symbol) && AbstractTypeShouldBeInterface(symbol))
                     {
-                        Report(symbol, MessageToInterface, c);
+                        Report(c, symbol, MessageToInterface);
                         return;
                     }
 
                     if (AbstractTypeShouldBeConcrete(symbol))
                     {
-                        Report(symbol, MessageToConcreteImplementation, c);
+                        Report(c, symbol, MessageToConcreteImplementation);
                     }
                 },
                 SymbolKind.NamedType);
@@ -76,7 +76,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static IEnumerable<IMethodSymbol> GetAllOverrideMethods(INamedTypeSymbol symbol) =>
             GetAllMethods(symbol).Where(m => m.IsOverride);
 
-        private static void Report(INamedTypeSymbol symbol, string message, SymbolAnalysisContext context)
+        private static void Report(SonarSymbolAnalysisContext context, INamedTypeSymbol symbol, string message)
         {
             foreach (var declaringSyntaxReference in symbol.DeclaringSyntaxReferences)
             {

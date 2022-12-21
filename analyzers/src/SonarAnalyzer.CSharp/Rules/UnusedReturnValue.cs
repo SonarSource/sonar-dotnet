@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeLocalFunctionStatements, SyntaxKindEx.LocalFunctionStatement);
         }
 
-        private static void AnalyzeNamedTypes(SymbolAnalysisContext context)
+        private static void AnalyzeNamedTypes(SonarSymbolAnalysisContext context)
         {
             var namedType = (INamedTypeSymbol)context.Symbol;
             if (!namedType.IsClassOrStruct() || namedType.ContainingType != null)
