@@ -105,7 +105,7 @@ public partial class SonarAnalysisContextBaseTest
     public void ProjectConfiguration_LoadsExpectedValues()
     {
         var options = TestHelper.CreateOptions($@"ResourceTests\SonarProjectConfig\Path_Windows\SonarProjectConfig.xml");
-        var config = CreateSut(options).ProjectConfiguration(options);
+        var config = CreateSut(options).ProjectConfiguration();
 
         config.AnalysisConfigPath.Should().Be(@"c:\foo\bar\.sonarqube\conf\SonarQubeAnalysisConfig.xml");
     }
@@ -116,9 +116,10 @@ public partial class SonarAnalysisContextBaseTest
         var options = TestHelper.CreateOptions($@"ResourceTests\SonarProjectConfig\Path_Windows\SonarProjectConfig.xml");
         var firstSut = CreateSut(options);
         var secondSut = CreateSut(options);
-        var firstConfig = firstSut.ProjectConfiguration(options);
+        var firstConfig = firstSut.ProjectConfiguration();
+        var secondConfig = firstSut.ProjectConfiguration();
 
-        secondSut.ProjectConfiguration(options).Should().BeSameAs(firstConfig);
+        secondConfig.Should().BeSameAs(firstConfig);
     }
 
     [TestMethod]
@@ -152,10 +153,9 @@ public partial class SonarAnalysisContextBaseTest
     [TestMethod]
     public void ProjectConfiguration_WhenFileIsMissing_ThrowException()
     {
-        var options = TestHelper.CreateOptions("ThisPathDoesNotExist\\SonarProjectConfig.xml");
-        var sut = CreateSut(options);
+        var sut = CreateSut(TestHelper.CreateOptions("ThisPathDoesNotExist\\SonarProjectConfig.xml"));
 
-        sut.Invoking(x => x.ProjectConfiguration(options))
+        sut.Invoking(x => x.ProjectConfiguration())
            .Should()
            .Throw<InvalidOperationException>()
            .WithMessage("File 'SonarProjectConfig.xml' has been added as an AdditionalFile but could not be read and parsed.");
@@ -164,10 +164,9 @@ public partial class SonarAnalysisContextBaseTest
     [TestMethod]
     public void ProjectConfiguration_WhenInvalidXml_ThrowException()
     {
-        var options = TestHelper.CreateOptions($@"ResourceTests\SonarProjectConfig\Invalid_Xml\SonarProjectConfig.xml");
-        var sut = CreateSut(options);
+        var sut = CreateSut(TestHelper.CreateOptions($@"ResourceTests\SonarProjectConfig\Invalid_Xml\SonarProjectConfig.xml"));
 
-        sut.Invoking(x => x.ProjectConfiguration(options))
+        sut.Invoking(x => x.ProjectConfiguration())
            .Should()
            .Throw<InvalidOperationException>()
            .WithMessage("File 'SonarProjectConfig.xml' has been added as an AdditionalFile but could not be read and parsed.");
@@ -176,9 +175,11 @@ public partial class SonarAnalysisContextBaseTest
     private SonarCompilationAnalysisContext CreateSut(ProjectType projectType, bool isScannerRun) =>
         CreateSut(TestHelper.CreateOptions(TestHelper.CreateSonarProjectConfig(TestContext, projectType, isScannerRun)));
 
-    private SonarCompilationAnalysisContext CreateSut(AnalyzerOptions options)
+    private static SonarCompilationAnalysisContext CreateSut(AnalyzerOptions options) =>
+        CreateSut(new SnippetCompiler("// Nothing to see here").SemanticModel.Compilation, options);
+
+    private static SonarCompilationAnalysisContext CreateSut(Compilation compilation, AnalyzerOptions options)
     {
-        var compilation = new SnippetCompiler("// Nothing to see here").SemanticModel.Compilation;
         var analysisContext = new SonarAnalysisContext(Mock.Of<RoslynAnalysisContext>(), Enumerable.Empty<DiagnosticDescriptor>());
         var compilationContext = new CompilationAnalysisContext(compilation, options, _ => { }, _ => true, default);
         return new(analysisContext, compilationContext);

@@ -73,7 +73,7 @@ public abstract class SonarCompilationReportingContextBase<TContext> : SonarRepo
 
     public void ReportIssue(GeneratedCodeRecognizer generatedCodeRecognizer, Diagnostic diagnostic)
     {
-        if (ShouldAnalyzeTree(diagnostic.Location.SourceTree, Compilation, Options, generatedCodeRecognizer))
+        if (ShouldAnalyzeTree(diagnostic.Location.SourceTree, generatedCodeRecognizer))
         {
             ReportIssueCore(diagnostic);
         }

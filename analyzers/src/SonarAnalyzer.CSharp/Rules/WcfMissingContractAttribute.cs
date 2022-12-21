@@ -86,7 +86,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static TypeDeclarationSyntax GetTypeDeclaration(SonarSymbolAnalysisContext context, ISymbol namedType) =>
             namedType.DeclaringSyntaxReferences
-                     .Where(x => context.ShouldAnalyzeTree(x.SyntaxTree, context.Compilation, context.Options, CSharpGeneratedCodeRecognizer.Instance))
+                     .Where(x => context.ShouldAnalyzeTree(x.SyntaxTree, CSharpGeneratedCodeRecognizer.Instance))
                      .Select(x => x.GetSyntax() as TypeDeclarationSyntax)
                      .FirstOrDefault(x => x is not null);
     }
