@@ -29,7 +29,7 @@ using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.AnalysisContext;
 
-public partial class SonarAnalysisContextTest
+public partial class SonarAnalysisContextBaseTest
 {
     private const string GeneratedFileName = "ExtraEmptyFile.g.";
     private const string OtherFileName = "OtherFile";
@@ -85,7 +85,7 @@ public partial class SonarAnalysisContextTest
         var options = CreateOptions(sonarLintXml, @"ResourceTests\Foo.xml");
         var (compilation, tree) = CreateDummyCompilation(AnalyzerLanguage.CSharp, fileName);
 
-        CreateSut().ShouldAnalyzeTree(tree, compilation, options, CSharpGeneratedCodeRecognizer.Instance).Should().Be(expected);
+        CreateSut(options).ShouldAnalyzeTree(tree, compilation, options, CSharpGeneratedCodeRecognizer.Instance).Should().Be(expected);
         sonarLintXml.ToStringCallCount.Should().Be(0, "this file doesn't have 'SonarLint.xml' name");
     }
 
@@ -96,7 +96,7 @@ public partial class SonarAnalysisContextTest
         var additionalText = MockAdditionalText(sonarLintXml);
         var options = new AnalyzerOptions(ImmutableArray.Create(additionalText.Object));
         var (compilation, tree) = CreateDummyCompilation(AnalyzerLanguage.CSharp, OtherFileName);
-        var sut = CreateSut();
+        var sut = CreateSut(options);
 
         // Call ShouldAnalyzeGenerated multiple times...
         sut.ShouldAnalyzeTree(tree, compilation, options, CSharpGeneratedCodeRecognizer.Instance).Should().BeTrue();
@@ -116,7 +116,7 @@ public partial class SonarAnalysisContextTest
         var sonarLintXml = new DummySourceText("Not valid xml");
         var options = CreateOptions(sonarLintXml);
         var (compilation, tree) = CreateDummyCompilation(AnalyzerLanguage.CSharp, fileName);
-        var sut = CreateSut();
+        var sut = CreateSut(options);
 
         // 1. Read -> no error
         sut.ShouldAnalyzeTree(tree, compilation, options, CSharpGeneratedCodeRecognizer.Instance).Should().Be(expected);
@@ -135,7 +135,7 @@ public partial class SonarAnalysisContextTest
         var sonarLintXml = CreateSonarLintXml(true);
         var options = CreateOptions(sonarLintXml);
         var (compilation, tree) = CreateDummyCompilation(AnalyzerLanguage.CSharp, fileName);
-        var sut = CreateSut();
+        var sut = CreateSut(options);
 
         sut.ShouldAnalyzeTree(tree, compilation, options, CSharpGeneratedCodeRecognizer.Instance).Should().BeTrue();
     }
@@ -149,7 +149,7 @@ public partial class SonarAnalysisContextTest
         var options = CreateOptions(sonarLintXml);
         var (compilationCS, treeCS) = CreateDummyCompilation(AnalyzerLanguage.CSharp, fileName);
         var (compilationVB, treeVB) = CreateDummyCompilation(AnalyzerLanguage.VisualBasic, fileName);
-        var sut = CreateSut();
+        var sut = CreateSut(options);
 
         sut.ShouldAnalyzeTree(treeCS, compilationCS, options, CSharpGeneratedCodeRecognizer.Instance).Should().Be(expectedCSharp);
         sut.ShouldAnalyzeTree(treeVB, compilationVB, options, VisualBasicGeneratedCodeRecognizer.Instance).Should().BeTrue();
@@ -333,9 +333,6 @@ public partial class SonarAnalysisContextTest
         VerifyEmpty("test.cs", sourceCs, new CS.EmptyStatement());
     }
 
-    private static SonarAnalysisContext CreateSut() =>
-        new(Mock.Of<RoslynAnalysisContext>(), Enumerable.Empty<DiagnosticDescriptor>());
-
     private static DummySourceText CreateSonarLintXml(bool analyzeGeneratedCSharp) =>
         new($"""
             <?xml version="1.0" encoding="UTF-8"?>
@@ -384,7 +381,7 @@ public partial class SonarAnalysisContextTest
     private static bool ShouldAnalyzeTree(AnalyzerOptions options)
     {
         var (compilation, tree) = CreateDummyCompilation(AnalyzerLanguage.CSharp, OtherFileName);
-        return CreateSut().ShouldAnalyzeTree(tree, compilation, options, CSharpGeneratedCodeRecognizer.Instance);
+        return CreateSut(options).ShouldAnalyzeTree(tree, compilation, options, CSharpGeneratedCodeRecognizer.Instance);
     }
 
     private static void VerifyEmpty(string fileName, string snippet, DiagnosticAnalyzer analyzer)

@@ -36,7 +36,7 @@ public abstract class SonarAnalysisContextBase
 
     /// <param name="tree">Tree to decide on. Can be null for Symbol-based and Compilation-based scenarios. And we want to analyze those too.</param>
     /// <param name="generatedCodeRecognizer">When set, generated trees are analyzed only when langauge-specific 'analyzeGeneratedCode' configuration property is also set.</param>
-    public bool ShouldAnalyzeTree(SyntaxTree tree, Compilation compilation, AnalyzerOptions options, GeneratedCodeRecognizer generatedCodeRecognizer) =>
+    public bool ShouldAnalyzeTree(SyntaxTree tree, Compilation compilation, AnalyzerOptions options, GeneratedCodeRecognizer generatedCodeRecognizer) =>    // FIXME: Move this away
         (generatedCodeRecognizer is null || ShouldAnalyzeGenerated(compilation, options) || !tree.IsGenerated(generatedCodeRecognizer, compilation))
         && (tree is null || !IsUnchanged(tree, compilation, options));
 

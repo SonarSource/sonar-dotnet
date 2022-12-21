@@ -23,7 +23,7 @@ using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext
 
 namespace SonarAnalyzer.AnalysisContext;
 
-public sealed class SonarAnalysisContext : SonarAnalysisContextBase // FIXME: Remove inheritance
+public sealed class SonarAnalysisContext
 {
     private readonly RoslynAnalysisContext analysisContext;
     private readonly IEnumerable<DiagnosticDescriptor> supportedDiagnostics;
@@ -63,7 +63,7 @@ public sealed class SonarAnalysisContext : SonarAnalysisContextBase // FIXME: Re
         this.supportedDiagnostics = supportedDiagnostics ?? throw new ArgumentNullException(nameof(supportedDiagnostics));
     }
 
-    public override bool TryGetValue<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value) =>
+    public bool TryGetValue<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value) =>
         analysisContext.TryGetValue(text, valueProvider, out value);
 
     /// <summary>

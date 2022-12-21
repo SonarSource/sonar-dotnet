@@ -105,7 +105,7 @@ namespace SonarAnalyzer.CBDE
                 c =>
                 {
                     // Do not run CBDE in SonarLint. OutPath is present only when run from S4MSB.
-                    var outPath = unitTest ? Path.GetTempPath() : context.ProjectConfiguration(c.Options).OutPath;
+                    var outPath = unitTest ? Path.GetTempPath() : c.ProjectConfiguration().OutPath;
                     if (string.IsNullOrEmpty(outPath))
                     {
                         return;

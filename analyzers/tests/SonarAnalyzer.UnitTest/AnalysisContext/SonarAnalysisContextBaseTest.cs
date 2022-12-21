@@ -25,7 +25,7 @@ using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext
 namespace SonarAnalyzer.UnitTest.AnalysisContext;
 
 [TestClass]
-public class SonarAnalysisContextBaseTest
+public partial class SonarAnalysisContextBaseTest
 {
     private const string MainTag = "MainSourceScope";
     private const string TestTag = "TestSourceScope";
@@ -101,11 +101,85 @@ public class SonarAnalysisContextBaseTest
         CreateSut(projectType, true).HasMatchingScope(diagnostics).Should().Be(expectedResult);
     }
 
-    private SonarCompilationAnalysisContext CreateSut(ProjectType projectType, bool isScannerRun)
+    [TestMethod]
+    public void ProjectConfiguration_LoadsExpectedValues()
+    {
+        var options = TestHelper.CreateOptions($@"ResourceTests\SonarProjectConfig\Path_Windows\SonarProjectConfig.xml");
+        var config = CreateSut(options).ProjectConfiguration(options);
+
+        config.AnalysisConfigPath.Should().Be(@"c:\foo\bar\.sonarqube\conf\SonarQubeAnalysisConfig.xml");
+    }
+
+    [TestMethod]
+    public void ProjectConfiguration_UsesCachedValue()
+    {
+        var options = TestHelper.CreateOptions($@"ResourceTests\SonarProjectConfig\Path_Windows\SonarProjectConfig.xml");
+        var firstSut = CreateSut(options);
+        var secondSut = CreateSut(options);
+        var firstConfig = firstSut.ProjectConfiguration(options);
+
+        secondSut.ProjectConfiguration(options).Should().BeSameAs(firstConfig);
+    }
+
+    [TestMethod]
+    public void ProjectConfiguration_WhenFileChanges_RebuildsCache()
+    {
+        var firstOptions = TestHelper.CreateOptions($@"ResourceTests\SonarProjectConfig\Path_Windows\SonarProjectConfig.xml");
+        var secondOptions = TestHelper.CreateOptions($@"ResourceTests\SonarProjectConfig\Path_Unix\SonarProjectConfig.xml");
+        var firstConfig = CreateSut(firstOptions).ProjectConfiguration();
+        var secondConfig = CreateSut(secondOptions).ProjectConfiguration();
+
+        secondConfig.Should().NotBeSameAs(firstConfig);
+    }
+
+    [TestMethod]
+    [DataRow(null)]
+    [DataRow("/foo/bar/does-not-exit")]
+    [DataRow("/foo/bar/x.xml")]
+    public void ProjectConfiguration_WhenAdditionalFileNotPresent_ReturnsEmptyConfig(string folder)
+    {
+        var options = TestHelper.CreateOptions(folder);
+        var config = CreateSut(options).ProjectConfiguration();
+
+        config.AnalysisConfigPath.Should().BeNull();
+        config.ProjectPath.Should().BeNull();
+        config.FilesToAnalyzePath.Should().BeNull();
+        config.OutPath.Should().BeNull();
+        config.ProjectType.Should().Be(ProjectType.Unknown);
+        config.TargetFramework.Should().BeNull();
+    }
+
+    [TestMethod]
+    public void ProjectConfiguration_WhenFileIsMissing_ThrowException()
+    {
+        var options = TestHelper.CreateOptions("ThisPathDoesNotExist\\SonarProjectConfig.xml");
+        var sut = CreateSut(options);
+
+        sut.Invoking(x => x.ProjectConfiguration(options))
+           .Should()
+           .Throw<InvalidOperationException>()
+           .WithMessage("File 'SonarProjectConfig.xml' has been added as an AdditionalFile but could not be read and parsed.");
+    }
+
+    [TestMethod]
+    public void ProjectConfiguration_WhenInvalidXml_ThrowException()
+    {
+        var options = TestHelper.CreateOptions($@"ResourceTests\SonarProjectConfig\Invalid_Xml\SonarProjectConfig.xml");
+        var sut = CreateSut(options);
+
+        sut.Invoking(x => x.ProjectConfiguration(options))
+           .Should()
+           .Throw<InvalidOperationException>()
+           .WithMessage("File 'SonarProjectConfig.xml' has been added as an AdditionalFile but could not be read and parsed.");
+    }
+
+    private SonarCompilationAnalysisContext CreateSut(ProjectType projectType, bool isScannerRun) =>
+        CreateSut(TestHelper.CreateOptions(TestHelper.CreateSonarProjectConfig(TestContext, projectType, isScannerRun)));
+
+    private SonarCompilationAnalysisContext CreateSut(AnalyzerOptions options)
     {
         var compilation = new SnippetCompiler("// Nothing to see here").SemanticModel.Compilation;
         var analysisContext = new SonarAnalysisContext(Mock.Of<RoslynAnalysisContext>(), Enumerable.Empty<DiagnosticDescriptor>());
-        var options = TestHelper.CreateOptions(TestHelper.CreateSonarProjectConfig(TestContext, projectType, isScannerRun));
         var compilationContext = new CompilationAnalysisContext(compilation, options, _ => { }, _ => true, default);
         return new(analysisContext, compilationContext);
     }
