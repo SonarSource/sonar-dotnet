@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var disposeMethodsCalledFromDispose = new HashSet<IMethodSymbol>();
                     CollectInvocationsFromDisposeImplementation(disposeMethod, c.Compilation, mightImplementDispose, disposeMethodsCalledFromDispose);
 
-                    ReportDisposeMethods(namedDispose.Except(mightImplementDispose).Where(m => !disposeMethodsCalledFromDispose.Contains(m)), c);
+                    ReportDisposeMethods(c, namedDispose.Except(mightImplementDispose).Where(m => !disposeMethodsCalledFromDispose.Contains(m)));
                 },
                 SymbolKind.NamedType);
 
@@ -107,15 +107,13 @@ namespace SonarAnalyzer.Rules.CSharp
             disposeMethodsCalledFromDispose.Add(invokedMethod);
         }
 
-        private static void ReportDisposeMethods(IEnumerable<IMethodSymbol> disposeMethods,
-                                                 SymbolAnalysisContext context)
+        private static void ReportDisposeMethods(SonarSymbolAnalysisContext context, IEnumerable<IMethodSymbol> disposeMethods)
         {
             foreach (var disposeMethod in disposeMethods)
             {
                 foreach (var location in disposeMethod.Locations)
                 {
-                    var diagnostic = Rule.CreateDiagnostic(context.Compilation, location, disposeMethod.PartialImplementationPart?.Locations ?? Enumerable.Empty<Location>());
-                    context.ReportDiagnosticIfNonGenerated(diagnostic);
+                    context.ReportDiagnosticIfNonGenerated(Rule.CreateDiagnostic(context.Compilation, location, disposeMethod.PartialImplementationPart?.Locations ?? Enumerable.Empty<Location>()));
                 }
             }
         }
