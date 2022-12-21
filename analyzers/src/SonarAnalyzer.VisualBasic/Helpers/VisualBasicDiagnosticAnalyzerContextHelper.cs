@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.Helpers
 {
-    public static class VisualBasicDiagnosticAnalyzerContextHelper
+    public static class VisualBasicDiagnosticAnalyzerContextHelper  // FIXME: Move and rename
     {
         public static void RegisterSyntaxNodeActionInNonGenerated<TSyntaxKind>(this SonarAnalysisContext context,
                                                                                Action<SyntaxNodeAnalysisContext> action,
@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Helpers
                                                                                params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct =>
             context.RegisterSyntaxNodeActionInNonGenerated(VisualBasicGeneratedCodeRecognizer.Instance, action, syntaxKinds);
 
-        public static void RegisterSyntaxNodeActionInNonGenerated<TSyntaxKind>(this CompilationStartAnalysisContext context,
+        public static void RegisterSyntaxNodeActionInNonGenerated<TSyntaxKind>(this SonarCompilationStartAnalysisContext context,
                                                                                Action<SyntaxNodeAnalysisContext> action,
                                                                                params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct =>
             context.RegisterSyntaxNodeActionInNonGenerated(VisualBasicGeneratedCodeRecognizer.Instance, action, syntaxKinds);

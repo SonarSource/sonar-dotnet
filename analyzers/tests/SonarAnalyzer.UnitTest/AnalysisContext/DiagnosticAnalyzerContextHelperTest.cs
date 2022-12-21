@@ -330,7 +330,7 @@ $@"namespace PartiallyGenerated
         var context = new DummyAnalysisContext(TestContext, unchangedFileName);
         var sut = new ParameterLoadingAnalysisContext(new(context, DummyMainDescriptor));
         sut.RegisterSyntaxTreeActionInNonGenerated(CSharpGeneratedCodeRecognizer.Instance, context.DelegateAction);
-        sut.CompilationStartActions.Single()(MockCompilationStartAnalysisContext(context));  // Manual invocation, because ParameterLoadingAnalysisContext stores actions separately
+        sut.ExecutePostponedActions(new(sut.Context, MockCompilationStartAnalysisContext(context)));  // Manual invocation, because ParameterLoadingAnalysisContext stores actions separately
 
         context.AssertDelegateInvoked(expected);
     }
