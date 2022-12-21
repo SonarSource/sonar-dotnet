@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SymbolKind.NamedType);
 
-        private static void CheckNamedType(SymbolAnalysisContext context, IReadOnlyList<ISymbol> outerMembersOfSameName, INamedTypeSymbol namedType)
+        private static void CheckNamedType(SonarSymbolAnalysisContext context, IReadOnlyList<ISymbol> outerMembersOfSameName, INamedTypeSymbol namedType)
         {
             if (outerMembersOfSameName.Any(x => x is INamedTypeSymbol { TypeKind: TypeKind.Class or TypeKind.Struct or TypeKind.Delegate or TypeKind.Enum or TypeKind.Interface }))
             {
@@ -77,7 +77,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckMember(SymbolAnalysisContext context, IReadOnlyList<ISymbol> outerMembersOfSameName, ISymbol member)
+        private static void CheckMember(SonarSymbolAnalysisContext context, IReadOnlyList<ISymbol> outerMembersOfSameName, ISymbol member)
         {
             if (outerMembersOfSameName.Any(x => (x.IsStatic && !x.IsAbstract && !x.IsVirtual) || x is IFieldSymbol { IsConst: true })
                 && member.FirstDeclaringReferenceIdentifier() is { } identifier
