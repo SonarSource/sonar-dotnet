@@ -42,60 +42,57 @@ namespace SonarAnalyzer.Rules.CSharp
                     var symbolsWhereLocaleIsSet = new HashSet<ISymbol>();
 
                     compilationStartContext.RegisterSyntaxNodeActionInNonGenerated(
-                        ProcessObjectCreations(symbolsWhereTypeIsCreated),
+                        c => ProcessObjectCreations(c, symbolsWhereTypeIsCreated),
                         SyntaxKind.ObjectCreationExpression,
                         SyntaxKindEx.ImplicitObjectCreationExpression);
-                    compilationStartContext.RegisterSyntaxNodeActionInNonGenerated(ProcessSimpleAssignments(symbolsWhereLocaleIsSet), SyntaxKind.SimpleAssignmentExpression);
-                    compilationStartContext.RegisterCompilationEndAction(ProcessCollectedSymbols(symbolsWhereTypeIsCreated, symbolsWhereLocaleIsSet));
+                    compilationStartContext.RegisterSyntaxNodeActionInNonGenerated(c => ProcessSimpleAssignments(c, symbolsWhereLocaleIsSet), SyntaxKind.SimpleAssignmentExpression);
+                    compilationStartContext.RegisterCompilationEndAction(c => ProcessCollectedSymbols(c, symbolsWhereTypeIsCreated, symbolsWhereLocaleIsSet));
                 });
 
-        private static Action<SyntaxNodeAnalysisContext> ProcessObjectCreations(IDictionary<ISymbol, SyntaxNode> symbolsWhereTypeIsCreated) =>
-            c =>
+        private static void ProcessObjectCreations(SyntaxNodeAnalysisContext c, IDictionary<ISymbol, SyntaxNode> symbolsWhereTypeIsCreated)
+        {
+            if (GetSymbolFromConstructorInvocation(c.Node, c.SemanticModel) is ITypeSymbol objectType
+                && objectType.IsAny(CheckedTypes)
+                && GetAssignmentTargetVariable(c.Node) is { } variableSyntax)
             {
-                if (GetSymbolFromConstructorInvocation(c.Node, c.SemanticModel) is ITypeSymbol objectType
-                    && objectType.IsAny(CheckedTypes)
-                    && GetAssignmentTargetVariable(c.Node) is { } variableSyntax)
+                if (DeclarationExpressionSyntaxWrapper.IsInstance(variableSyntax))
                 {
-                    if (DeclarationExpressionSyntaxWrapper.IsInstance(variableSyntax))
-                    {
-                        variableSyntax = ((DeclarationExpressionSyntaxWrapper)variableSyntax).Designation;
-                    }
-
-                    var variableSymbol = variableSyntax is IdentifierNameSyntax
-                        ? c.SemanticModel.GetSymbolInfo(variableSyntax).Symbol
-                        : c.SemanticModel.GetDeclaredSymbol(variableSyntax);
-
-                    if (variableSymbol != null && !symbolsWhereTypeIsCreated.ContainsKey(variableSymbol))
-                    {
-                        symbolsWhereTypeIsCreated.Add(variableSymbol, c.Node);
-                    }
+                    variableSyntax = ((DeclarationExpressionSyntaxWrapper)variableSyntax).Designation;
                 }
-            };
 
-        private static Action<SyntaxNodeAnalysisContext> ProcessSimpleAssignments(ISet<ISymbol> symbolsWhereLocaleIsSet) =>
-            c =>
-            {
-                var assignmentExpression = (AssignmentExpressionSyntax)c.Node;
-                var variableSymbols = assignmentExpression.AssignmentTargets()
-                    .Where(x => c.SemanticModel.GetSymbolInfo(x).Symbol is IPropertySymbol propertySymbol
-                                && propertySymbol.Name == "Locale"
-                                && propertySymbol.ContainingType.IsAny(CheckedTypes))
-                    .Select(x => GetAccessedVariable(x, c.SemanticModel))
-                    .WhereNotNull();
-                symbolsWhereLocaleIsSet.UnionWith(variableSymbols);
-            };
+                var variableSymbol = variableSyntax is IdentifierNameSyntax
+                    ? c.SemanticModel.GetSymbolInfo(variableSyntax).Symbol
+                    : c.SemanticModel.GetDeclaredSymbol(variableSyntax);
 
-        private static Action<CompilationAnalysisContext> ProcessCollectedSymbols(IDictionary<ISymbol, SyntaxNode> symbolsWhereTypeIsCreated, ISet<ISymbol> symbolsWhereLocaleIsSet) =>
-            c =>
-            {
-                foreach (var invalidCreation in symbolsWhereTypeIsCreated.Where(x => !symbolsWhereLocaleIsSet.Contains(x.Key)))
+                if (variableSymbol != null && !symbolsWhereTypeIsCreated.ContainsKey(variableSymbol))
                 {
-                    if (invalidCreation.Key.GetSymbolType() is { } type)
-                    {
-                        c.ReportIssue(Diagnostic.Create(Rule, invalidCreation.Value.GetLocation(), type.Name));
-                    }
+                    symbolsWhereTypeIsCreated.Add(variableSymbol, c.Node);
                 }
-            };
+            }
+        }
+
+        private static void ProcessSimpleAssignments(SyntaxNodeAnalysisContext c, ISet<ISymbol> symbolsWhereLocaleIsSet)
+        {
+            var assignmentExpression = (AssignmentExpressionSyntax)c.Node;
+            var variableSymbols = assignmentExpression.AssignmentTargets()
+                .Where(x => c.SemanticModel.GetSymbolInfo(x).Symbol is IPropertySymbol propertySymbol
+                            && propertySymbol.Name == "Locale"
+                            && propertySymbol.ContainingType.IsAny(CheckedTypes))
+                .Select(x => GetAccessedVariable(x, c.SemanticModel))
+                .WhereNotNull();
+            symbolsWhereLocaleIsSet.UnionWith(variableSymbols);
+        }
+
+        private static void ProcessCollectedSymbols(SonarCompilationAnalysisContext c, IDictionary<ISymbol, SyntaxNode> symbolsWhereTypeIsCreated, ISet<ISymbol> symbolsWhereLocaleIsSet)
+        {
+            foreach (var invalidCreation in symbolsWhereTypeIsCreated.Where(x => !symbolsWhereLocaleIsSet.Contains(x.Key)))
+            {
+                if (invalidCreation.Key.GetSymbolType() is { } type)
+                {
+                    c.ReportIssue(Diagnostic.Create(Rule, invalidCreation.Value.GetLocation(), type.Name));
+                }
+            }
+        }
 
         private static ISymbol GetSymbolFromConstructorInvocation(SyntaxNode constructorCall, SemanticModel semanticModel) =>
             constructorCall is ObjectCreationExpressionSyntax objectCreation
