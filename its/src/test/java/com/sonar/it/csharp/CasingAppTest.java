@@ -46,17 +46,15 @@ public class CasingAppTest {
 
   @Test
   public void class1_should_have_metrics_and_issues() throws IOException {
-    Tests.analyzeProjectWithSubProject(temp, "CasingApp", "CasingApp", null);
+    String projectKey = "CasingApp";
+    String componentKey = "CasingApp:CasingApp/SRC/Class1.cs";
 
-    String class1ComponentKey = "CasingApp:SRC/Class1.cs";
+    Tests.analyzeProject(temp, projectKey, null);
 
-    assertThat(getComponent(class1ComponentKey)).isNotNull();
-
-    assertThat(getMeasureAsInt(class1ComponentKey, "files")).isEqualTo(1);
-    assertThat(getMeasureAsInt(class1ComponentKey, "lines")).isEqualTo(10);
-    assertThat(getMeasureAsInt(class1ComponentKey, "ncloc")).isEqualTo(9);
-
-    List<Issues.Issue> issues = getIssues(class1ComponentKey);
-    assertThat(issues).hasSize(1);
+    assertThat(getComponent(componentKey)).isNotNull();
+    assertThat(getMeasureAsInt(componentKey, "files")).isEqualTo(1);
+    assertThat(getMeasureAsInt(componentKey, "lines")).isEqualTo(10);
+    assertThat(getMeasureAsInt(componentKey, "ncloc")).isEqualTo(9);
+    assertThat(getIssues(componentKey)).hasSize(1);
   }
 }

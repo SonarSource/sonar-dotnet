@@ -21,17 +21,14 @@ package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.build.BuildResult;
-import java.util.List;
-import java.util.stream.Collectors;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
-import org.sonarqube.ws.Issues;
 
-import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
-import static com.sonar.it.csharp.Tests.getComponent;
-import static com.sonar.it.csharp.Tests.getIssues;
+import java.util.stream.Collectors;
+
+import static com.sonar.it.csharp.Tests.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MultiTargetAppTest {
@@ -45,17 +42,12 @@ public class MultiTargetAppTest {
 
   @Test
   public void should_analyze_multitarget_project() throws Exception {
-    BuildResult buildResult = Tests.analyzeProjectWithSubProject(temp, "MultiTargetConsoleApp", "MultiTargetConsoleApp", null);
+    String componentKey = "MultiTargetConsoleApp:MultiTargetConsoleApp/Program.cs";
 
-    String programCsComponentId = "MultiTargetConsoleApp:Program.cs";
-    assertThat(getComponent(programCsComponentId)).isNotNull();
-
-    List<Issues.Issue> issues = getIssues(programCsComponentId)
-      .stream()
-      .filter(x -> x.getRule().startsWith("csharpsquid:"))
-      .collect(Collectors.toList());
-    assertThat(issues).hasSize(4);
+    BuildResult buildResult = Tests.analyzeProject(temp, "MultiTargetConsoleApp", null);
 
     assertThat(buildResult.getLogs()).contains("Found 1 MSBuild C# project: 1 MAIN project.");
+    assertThat(getComponent(componentKey)).isNotNull();
+    assertThat(getIssues(componentKey).stream().filter(x -> x.getRule().startsWith("csharpsquid:")).collect(Collectors.toList())).hasSize(4);
   }
 }
