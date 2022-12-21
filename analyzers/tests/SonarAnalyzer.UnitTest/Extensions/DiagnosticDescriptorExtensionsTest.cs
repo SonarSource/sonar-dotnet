@@ -30,10 +30,11 @@ public class DiagnosticDescriptorExtensionsTest
     private const string MainTag = "MainSourceScope";
     private const string TestTag = "TestSourceScope";
     private const string UtilityTag = "Utility";
+    private const string DummyID = "Sxxx";
 
     [TestMethod]
     public void HasMatchingScope_NoCompilation_IsMatching() =>
-        TestHelper.CreateDescriptor("Sxxx").HasMatchingScope(null, true, false).Should().BeTrue();
+        TestHelper.CreateDescriptor(DummyID).HasMatchingScope(null, true, false).Should().BeTrue();
 
     [DataTestMethod]
     [DataRow(true, ProjectType.Product, MainTag)]
@@ -51,7 +52,7 @@ public class DiagnosticDescriptorExtensionsTest
     public void HasMatchingScope_SingleDiagnostic_WithOneOrMoreScopes_SonarLint(bool expectedResult, ProjectType projectType, params string[] ruleTags)
     {
         var compilation = new SnippetCompiler("// Nothing to see here").SemanticModel.Compilation;
-        var diagnostic = TestHelper.CreateDescriptor("Sxxx", ruleTags);
+        var diagnostic = TestHelper.CreateDescriptor(DummyID, ruleTags);
         diagnostic.HasMatchingScope(compilation, projectType == ProjectType.Test, false).Should().Be(expectedResult);
     }
 
@@ -73,7 +74,7 @@ public class DiagnosticDescriptorExtensionsTest
     public void HasMatchingScope_SingleDiagnostic_WithOneOrMoreScopes_Scanner(bool expectedResult, ProjectType projectType, params string[] ruleTags)
     {
         var compilation = new SnippetCompiler("// Nothing to see here").SemanticModel.Compilation;
-        var diagnostic = TestHelper.CreateDescriptor("Sxxx", ruleTags);
+        var diagnostic = TestHelper.CreateDescriptor(DummyID, ruleTags);
         diagnostic.HasMatchingScope(compilation, projectType == ProjectType.Test, true).Should().Be(expectedResult);
     }
 
@@ -88,7 +89,7 @@ public class DiagnosticDescriptorExtensionsTest
     public void HasMatchingScope_MultipleDiagnostics_WithSingleScope_SonarLint(bool expectedResult, ProjectType projectType, params string[] rulesTag)
     {
         var compilation = new SnippetCompiler("// Nothing to see here").SemanticModel.Compilation;
-        var diagnostics = rulesTag.Select(x => TestHelper.CreateDescriptor("Sxxx", x));
+        var diagnostics = rulesTag.Select(x => TestHelper.CreateDescriptor(DummyID, x));
         diagnostics.Any(x => x.HasMatchingScope(compilation, projectType == ProjectType.Test, false)).Should().Be(expectedResult);
     }
 
@@ -102,7 +103,7 @@ public class DiagnosticDescriptorExtensionsTest
     public void HasMatchingScope_MultipleDiagnostics_WithSingleScope_Scanner(bool expectedResult, ProjectType projectType, params string[] rulesTag)
     {
         var compilation = new SnippetCompiler("// Nothing to see here").SemanticModel.Compilation;
-        var diagnostics = rulesTag.Select(x => TestHelper.CreateDescriptor("Sxxx", x));
+        var diagnostics = rulesTag.Select(x => TestHelper.CreateDescriptor(DummyID, x));
         diagnostics.Any(x => x.HasMatchingScope(compilation, projectType == ProjectType.Test, true)).Should().Be(expectedResult);
     }
 }

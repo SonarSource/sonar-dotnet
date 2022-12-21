@@ -19,7 +19,6 @@
  */
 
 using System.Text;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 using Moq;
 using SonarAnalyzer.Common;
@@ -29,7 +28,7 @@ namespace SonarAnalyzer.UnitTest;
 public partial class SonarAnalysisContextTest   // FIXME: Move UTs to ShouldAnalyze
 {
     private const string GeneratedFileName = "ExtraEmptyFile.g.";
-    private const string OtherFileName = "NormalFile.";
+    private const string OtherFileName = "OtherFile";
 
     [DataTestMethod]
     [DataRow(GeneratedFileName, false)]
@@ -38,9 +37,9 @@ public partial class SonarAnalysisContextTest   // FIXME: Move UTs to ShouldAnal
     {
         var sonarLintXml = CreateSonarLintXml(true);
         var options = CreateOptions(sonarLintXml, @"ResourceTests\Foo.xml");
-        var compilation = CreateDummyCompilation(AnalyzerLanguage.CSharp);
+        var (compilation, tree) = CreateDummyCompilation(AnalyzerLanguage.CSharp, fileName);
 
-        CreateSut().ShouldAnalyze(CSharpGeneratedCodeRecognizer.Instance, compilation.SyntaxTrees.Single(x => x.FilePath.Contains(fileName)), compilation, options).Should().Be(expected);
+        CreateSut().ShouldAnalyze(CSharpGeneratedCodeRecognizer.Instance, tree, compilation, options).Should().Be(expected);
         sonarLintXml.ToStringCallCount.Should().Be(0, "this file doesn't have 'SonarLint.xml' name");
     }
 
@@ -50,13 +49,13 @@ public partial class SonarAnalysisContextTest   // FIXME: Move UTs to ShouldAnal
         var sonarLintXml = CreateSonarLintXml(true);
         var additionalText = MockAdditionalText(sonarLintXml);
         var options = new AnalyzerOptions(ImmutableArray.Create(additionalText.Object));
-        var compilation = CreateDummyCompilation(AnalyzerLanguage.CSharp);
+        var (compilation, tree) = CreateDummyCompilation(AnalyzerLanguage.CSharp, OtherFileName);
         var sut = CreateSut();
 
         // Call ShouldAnalyzeGenerated multiple times...
-        sut.ShouldAnalyze(CSharpGeneratedCodeRecognizer.Instance, compilation.SyntaxTrees.Last(), compilation, options).Should().BeTrue();
-        sut.ShouldAnalyze(CSharpGeneratedCodeRecognizer.Instance, compilation.SyntaxTrees.Last(), compilation, options).Should().BeTrue();
-        sut.ShouldAnalyze(CSharpGeneratedCodeRecognizer.Instance, compilation.SyntaxTrees.Last(), compilation, options).Should().BeTrue();
+        sut.ShouldAnalyze(CSharpGeneratedCodeRecognizer.Instance, tree, compilation, options).Should().BeTrue();
+        sut.ShouldAnalyze(CSharpGeneratedCodeRecognizer.Instance, tree, compilation, options).Should().BeTrue();
+        sut.ShouldAnalyze(CSharpGeneratedCodeRecognizer.Instance, tree, compilation, options).Should().BeTrue();
 
         // GetText should be called every time ShouldAnalyzeGenerated is called...
         additionalText.Verify(x => x.GetText(It.IsAny<CancellationToken>()), Times.Exactly(3));
@@ -70,8 +69,7 @@ public partial class SonarAnalysisContextTest   // FIXME: Move UTs to ShouldAnal
     {
         var sonarLintXml = new DummySourceText("Not valid xml");
         var options = CreateOptions(sonarLintXml);
-        var compilation = CreateDummyCompilation(AnalyzerLanguage.CSharp);
-        var tree = compilation.SyntaxTrees.Single(x => x.FilePath.Contains(fileName));
+        var (compilation, tree) = CreateDummyCompilation(AnalyzerLanguage.CSharp, fileName);
         var sut = CreateSut();
 
         // 1. Read -> no error
@@ -90,10 +88,10 @@ public partial class SonarAnalysisContextTest   // FIXME: Move UTs to ShouldAnal
     {
         var sonarLintXml = CreateSonarLintXml(true);
         var options = CreateOptions(sonarLintXml);
-        var compilation = CreateDummyCompilation(AnalyzerLanguage.CSharp);
+        var (compilation, tree) = CreateDummyCompilation(AnalyzerLanguage.CSharp, fileName);
         var sut = CreateSut();
 
-        sut.ShouldAnalyze(CSharpGeneratedCodeRecognizer.Instance, compilation.SyntaxTrees.Single(x => x.FilePath.Contains(fileName)), compilation, options).Should().BeTrue();
+        sut.ShouldAnalyze(CSharpGeneratedCodeRecognizer.Instance, tree, compilation, options).Should().BeTrue();
     }
 
     [DataTestMethod]
@@ -103,10 +101,8 @@ public partial class SonarAnalysisContextTest   // FIXME: Move UTs to ShouldAnal
     {
         var sonarLintXml = CreateSonarLintXml(false);
         var options = CreateOptions(sonarLintXml);
-        var compilationCS = CreateDummyCompilation(AnalyzerLanguage.CSharp);
-        var compilationVB = CreateDummyCompilation(AnalyzerLanguage.VisualBasic);
-        var treeCS = compilationCS.SyntaxTrees.Single(x => x.FilePath.Contains(fileName));
-        var treeVB = compilationVB.SyntaxTrees.Single(x => x.FilePath.Contains(fileName));
+        var (compilationCS, treeCS) = CreateDummyCompilation(AnalyzerLanguage.CSharp, fileName);
+        var (compilationVB, treeVB) = CreateDummyCompilation(AnalyzerLanguage.VisualBasic, fileName);
         var sut = CreateSut();
 
         sut.ShouldAnalyze(CSharpGeneratedCodeRecognizer.Instance, treeCS, compilationCS, options).Should().Be(expectedCSharp);
@@ -155,8 +151,11 @@ public partial class SonarAnalysisContextTest   // FIXME: Move UTs to ShouldAnal
         return additionalText;
     }
 
-    private static Compilation CreateDummyCompilation(AnalyzerLanguage language) =>
-        SolutionBuilder.Create().AddProject(language).AddSnippet(string.Empty, "NormalFile" + language.FileExtension).GetCompilation();
+    private static (Compilation Compilation, SyntaxTree Tree) CreateDummyCompilation(AnalyzerLanguage language, string treeFileName)
+    {
+        var compilation = SolutionBuilder.Create().AddProject(language).AddSnippet(string.Empty, OtherFileName + language.FileExtension).GetCompilation();
+        return (compilation, compilation.SyntaxTrees.Single(x => x.FilePath.Contains(treeFileName)));
+    }
 
     private sealed class DummySourceText : SourceText
     {

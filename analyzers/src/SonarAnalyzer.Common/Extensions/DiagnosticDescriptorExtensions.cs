@@ -50,6 +50,4 @@ public static class DiagnosticDescriptorExtensions
 
     private static bool IsLocationValid(Location location, Compilation compilation) =>
         location.Kind != LocationKind.SourceFile || compilation.ContainsSyntaxTree(location.SourceTree);
-
-
 }

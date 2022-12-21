@@ -68,8 +68,8 @@ public partial class SonarAnalysisContextTest
 
     private static bool ShouldAnalyze(AnalyzerOptions options)
     {
-        var compilation = CreateDummyCompilation(AnalyzerLanguage.CSharp);
-        return CreateSut().ShouldAnalyze(CSharpGeneratedCodeRecognizer.Instance, compilation.SyntaxTrees.Single(x => x.FilePath.Contains(OtherFileName)), compilation, options);
+        var (compilation, tree) = CreateDummyCompilation(AnalyzerLanguage.CSharp, OtherFileName);
+        return CreateSut().ShouldAnalyze(CSharpGeneratedCodeRecognizer.Instance, tree, compilation, options);
     }
 
     private AnalyzerOptions CreateOptions(string[] unchangedFiles)

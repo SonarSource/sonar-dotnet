@@ -129,7 +129,8 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
             return;
         }
 
-        if (reportingContext is { Compilation: { } compilation, Diagnostic.Location: { Kind: LocationKind.SourceFile, SourceTree: { } tree } } && !compilation.ContainsSyntaxTree(tree))
+        if (reportingContext is { Compilation: { } compilation, Diagnostic.Location: { Kind: LocationKind.SourceFile, SourceTree: { } tree } }
+            && !compilation.ContainsSyntaxTree(tree))
         {
             Debug.Fail("Primary location should be part of the compilation. An AD0001 is raised if this is not the case.");
             return;
