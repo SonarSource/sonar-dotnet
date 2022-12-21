@@ -34,7 +34,7 @@ public sealed class SonarSymbolAnalysisContext : SonarAnalysisContextBase<Symbol
 
     public void ReportDiagnosticIfNonGenerated(GeneratedCodeRecognizer generatedCodeRecognizer, Diagnostic diagnostic)
     {
-        if (ShouldAnalyze(generatedCodeRecognizer))
+        if (ShouldAnalyze(generatedCodeRecognizer, diagnostic.Location.SourceTree, Compilation, Options))
         {
             ReportIssue(diagnostic);
         }

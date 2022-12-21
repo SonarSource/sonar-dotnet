@@ -20,11 +20,10 @@
 
 using System.Collections.Concurrent;
 using System.Runtime.CompilerServices;
-using Microsoft.CodeAnalysis.Text;
 
 namespace SonarAnalyzer;
 
-internal static class DiagnosticAnalyzerContextHelper
+internal static class DiagnosticAnalyzerContextHelper   // FIXME: Rename and move
 {
     private static readonly ConditionalWeakTable<Compilation, ConcurrentDictionary<SyntaxTree, bool>> GeneratedCodeCache = new();
 
@@ -34,7 +33,7 @@ internal static class DiagnosticAnalyzerContextHelper
                                                                                  params TLanguageKindEnum[] syntaxKinds) where TLanguageKindEnum : struct =>
         context.RegisterSyntaxNodeAction(c =>
             {
-                if (c.ShouldAnalyze(generatedCodeRecognizer))
+                if (c.ShouldAnalyze(generatedCodeRecognizer))   // FIXME: Unify
                 {
                     action(c.Context);
                 }
@@ -44,68 +43,51 @@ internal static class DiagnosticAnalyzerContextHelper
                                                                                  GeneratedCodeRecognizer generatedCodeRecognizer,
                                                                                  Action<SyntaxNodeAnalysisContext> action,
                                                                                  params TLanguageKindEnum[] syntaxKinds) where TLanguageKindEnum : struct =>
-        context.Context.RegisterSyntaxNodeAction(c =>
-            {
-                if (c.ShouldAnalyze(generatedCodeRecognizer))
-                {
-                    action(c.Context);
-                }
-            }, syntaxKinds);
+        context.Context.RegisterSyntaxNodeActionInNonGenerated(generatedCodeRecognizer, action, syntaxKinds);
 
-    public static void RegisterSyntaxNodeActionInNonGenerated<TLanguageKindEnum>(this CompilationStartAnalysisContext context,
+    public static void RegisterSyntaxNodeActionInNonGenerated<TLanguageKindEnum>(this SonarCompilationStartAnalysisContext context,
                                                                                  GeneratedCodeRecognizer generatedCodeRecognizer,
                                                                                  Action<SyntaxNodeAnalysisContext> action,
                                                                                  params TLanguageKindEnum[] syntaxKinds) where TLanguageKindEnum : struct =>
-        context.RegisterSyntaxNodeAction(c =>
-            {
-                if (SonarAnalysisContext.ShouldAnalyze(context.TryGetValue, context.TryGetValue, generatedCodeRecognizer, c.GetSyntaxTree(), c.Compilation, c.Options))
-                {
-                    action(c);
-                }
-            }, syntaxKinds);
+        context.AnalysisContext.RegisterSyntaxNodeActionInNonGenerated(generatedCodeRecognizer, action, syntaxKinds);
 
     public static void RegisterSyntaxTreeActionInNonGenerated(this SonarAnalysisContext context, GeneratedCodeRecognizer generatedCodeRecognizer, Action<SyntaxTreeAnalysisContext> action) =>
-        context.RegisterCompilationStartAction(csac =>
-            csac.RegisterSyntaxTreeAction(c =>
+        context.RegisterSyntaxTreeAction(c =>
+            {
+                if (c.ShouldAnalyze(generatedCodeRecognizer))   // FIXME: Unify
                 {
-                    if (SonarAnalysisContext.ShouldAnalyze(context.TryGetValue, context.TryGetValue, generatedCodeRecognizer, c.GetSyntaxTree(), csac.Compilation, c.Options))
-                    {
-                        action(c);
-                    }
-                }));
+                    action(c.Context);
+                }
+            });
 
     public static void RegisterSyntaxTreeActionInNonGenerated(this ParameterLoadingAnalysisContext context,
                                                               GeneratedCodeRecognizer generatedCodeRecognizer,
-                                                              Action<SyntaxTreeAnalysisContext> action) =>
-        context.RegisterCompilationStartAction(csac =>
-            csac.RegisterSyntaxTreeAction(c =>
-                {
-                    if (SonarAnalysisContext.ShouldAnalyze(context.Context.TryGetValue, context.Context.TryGetValue, generatedCodeRecognizer, c.GetSyntaxTree(), csac.Compilation, c.Options))
-                    {
-                        action(c);
-                    }
-                }));
+                                                              Action<SyntaxTreeAnalysisContext> action)
+    {
+        // This is tricky. SyntaxTree actions do not have compilation. So we register them in CompilationStart.
+        // ParametrizedAnalyzer postpones CompilationStartActions to enforce that parameters are already set when the postponed action is executed.
+        var wrappedAction = context.Context.WrapSyntaxTreeAction(c =>
+        {
+            if (c.ShouldAnalyze(generatedCodeRecognizer))
+            {
+                action(c.Context);
+            }
+        });
+        context.RegisterPostponedAction(startContext => wrappedAction(startContext.Context));
+    }
 
     public static void RegisterCodeBlockStartActionInNonGenerated<TLanguageKindEnum>(this SonarAnalysisContext context,
                                                                                      GeneratedCodeRecognizer generatedCodeRecognizer,
                                                                                      Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action) where TLanguageKindEnum : struct =>
         context.RegisterCodeBlockStartAction<TLanguageKindEnum>(c =>
             {
-                if (c.ShouldAnalyze(generatedCodeRecognizer))
+                if (c.ShouldAnalyze(generatedCodeRecognizer))   // FIXME: Unify
                 {
                     action(c.Context);
                 }
             });
 
-    public static void ReportDiagnosticIfNonGenerated(this CompilationAnalysisContext context, GeneratedCodeRecognizer generatedCodeRecognizer, Diagnostic diagnostic)  // FIXME: Move
-    {
-        if (SonarAnalysisContext.ShouldAnalyze(context.TryGetValue, context.TryGetValue, generatedCodeRecognizer, diagnostic.Location.SourceTree, context.Compilation, context.Options))
-        {
-            context.ReportIssue(diagnostic);
-        }
-    }
-
-    public static bool IsGenerated(this SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer, Compilation compilation)
+    public static bool IsGenerated(this SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer, Compilation compilation)  // FIXME: Move
     {
         if (tree == null)
         {

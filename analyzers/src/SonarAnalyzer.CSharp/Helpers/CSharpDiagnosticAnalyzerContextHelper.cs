@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.Helpers
 {
-    internal static class CSharpDiagnosticAnalyzerContextHelper
+    internal static class CSharpDiagnosticAnalyzerContextHelper     // FIXME: Move and rename
     {
         public static void RegisterSyntaxNodeActionInNonGenerated<TSyntaxKind>(this SonarAnalysisContext context,
                                                                                Action<SyntaxNodeAnalysisContext> action,
@@ -32,8 +32,9 @@ namespace SonarAnalyzer.Helpers
                                                                                params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct =>
             context.RegisterSyntaxNodeActionInNonGenerated(CSharpGeneratedCodeRecognizer.Instance, action, syntaxKinds);
 
-        public static void RegisterSyntaxNodeActionInNonGenerated<TSyntaxKind>(this CompilationStartAnalysisContext context, Action<SyntaxNodeAnalysisContext> action, params TSyntaxKind[] syntaxKinds)
-            where TSyntaxKind : struct =>
+        public static void RegisterSyntaxNodeActionInNonGenerated<TSyntaxKind>(this SonarCompilationStartAnalysisContext context,
+                                                                               Action<SyntaxNodeAnalysisContext> action,
+                                                                               params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct =>
             context.RegisterSyntaxNodeActionInNonGenerated(CSharpGeneratedCodeRecognizer.Instance, action, syntaxKinds);
 
         public static void RegisterSyntaxTreeActionInNonGenerated(this SonarAnalysisContext context, Action<SyntaxTreeAnalysisContext> action) =>
@@ -46,21 +47,10 @@ namespace SonarAnalyzer.Helpers
             where TSyntaxKind : struct =>
             context.RegisterCodeBlockStartActionInNonGenerated(CSharpGeneratedCodeRecognizer.Instance, action);
 
-        public static void ReportDiagnosticIfNonGenerated(this CompilationAnalysisContext context, Diagnostic diagnostic) =>
+        public static void ReportDiagnosticIfNonGenerated(this SonarCompilationAnalysisContext context, Diagnostic diagnostic) =>
             context.ReportDiagnosticIfNonGenerated(CSharpGeneratedCodeRecognizer.Instance, diagnostic);
-
-        public static void ReportDiagnosticIfNonGenerated(this CompilationAnalysisContext context, IEnumerable<Diagnostic> diagnostics)
-        {
-            foreach (var diagnostic in diagnostics)
-            {
-                context.ReportDiagnosticIfNonGenerated(CSharpGeneratedCodeRecognizer.Instance, diagnostic);
-            }
-        }
 
         public static void ReportDiagnosticIfNonGenerated(this SonarSymbolAnalysisContext context, Diagnostic diagnostic) =>
             context.ReportDiagnosticIfNonGenerated(CSharpGeneratedCodeRecognizer.Instance, diagnostic);
-
-        internal static bool ShouldAnalyze(this SyntaxTree tree, SonarAnalysisContext context, Compilation compilation, AnalyzerOptions options) =>
-            SonarAnalysisContext.ShouldAnalyze(context.TryGetValue, context.TryGetValue, CSharpGeneratedCodeRecognizer.Instance, tree, compilation, options);
     }
 }
