@@ -27,4 +27,10 @@ public sealed class SonarCompilationStartAnalysisContext : SonarAnalysisContextB
     public override AnalyzerOptions Options => Context.Options;
 
     internal SonarCompilationStartAnalysisContext(SonarAnalysisContext analysisContext, CompilationStartAnalysisContext context) : base(analysisContext, context) { }
+
+    public void RegisterSymbolAction(Action<SonarSymbolAnalysisContext> action, params SymbolKind[] symbolKinds) =>
+        Context.RegisterSymbolAction(x => action(new(AnalysisContext, x)), symbolKinds);
+
+    public void RegisterCompilationEndAction(Action<SonarCompilationAnalysisContext> action) =>
+        Context.RegisterCompilationEndAction(x => action(new(AnalysisContext, x)));
 }
