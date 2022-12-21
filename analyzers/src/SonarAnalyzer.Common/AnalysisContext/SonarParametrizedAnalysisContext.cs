@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.AnalysisContext;
 
-public sealed class SonarParametrizedAnalysisContext : SonarAnalysisContextBase
+public sealed class SonarParametrizedAnalysisContext
 {
     private readonly List<Action<SonarCompilationStartAnalysisContext>> postponedActions = new();
 
