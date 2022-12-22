@@ -229,7 +229,7 @@ namespace SonarAnalyzer.Rules
             protected CredentialWordsFinderBase(DoNotHardcodeCredentialsBase<TSyntaxKind> analyzer) =>
                 this.analyzer = analyzer;
 
-            public Action<SyntaxNodeAnalysisContext> AnalysisAction() =>
+            public Action<SonarSyntaxNodeAnalysisContext> AnalysisAction() =>
                 context =>
                 {
                     var declarator = (TSyntaxNode)context.Node;

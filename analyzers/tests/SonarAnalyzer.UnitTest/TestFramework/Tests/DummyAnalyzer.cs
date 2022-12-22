@@ -35,9 +35,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         protected override VB.SyntaxKind NumericLiteralExpression => VB.SyntaxKind.NumericLiteralExpression;
     }
 
-    internal abstract class DummyAnalyzer<TSyntaxKind> : DiagnosticAnalyzer where TSyntaxKind : struct
+    internal abstract class DummyAnalyzer<TSyntaxKind> : SonarDiagnosticAnalyzer where TSyntaxKind : struct
     {
-        private static readonly DiagnosticDescriptor Rule = TestHelper.CreateDescriptor("SDummy");
+        private static readonly DiagnosticDescriptor Rule = TestHelper.CreateDescriptor("SDummy", DiagnosticDescriptorFactory.MainSourceScopeTag);
 
         protected abstract TSyntaxKind NumericLiteralExpression { get; }
 
@@ -45,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-        public sealed override void Initialize(AnalysisContext context) =>
+        protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeAction(c => c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation())), NumericLiteralExpression);
     }
 }

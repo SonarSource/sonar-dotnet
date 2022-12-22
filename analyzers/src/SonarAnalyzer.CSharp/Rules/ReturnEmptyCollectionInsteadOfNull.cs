@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.PropertyDeclaration,
                 SyntaxKind.OperatorDeclaration);
 
-        private static void ReportIfReturnsNullOrDefault(SyntaxNodeAnalysisContext context)
+        private static void ReportIfReturnsNullOrDefault(SonarSyntaxNodeAnalysisContext context)
         {
             if (GetExpressionBody(context.Node) is { } expressionBody)
             {
@@ -68,7 +68,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static bool IsReturningCollection(SyntaxNodeAnalysisContext context)
+        private static bool IsReturningCollection(SonarSyntaxNodeAnalysisContext context)
         {
             var symbol = context.SemanticModel.GetDeclaredSymbol(context.Node);
             var methodSymbol = (symbol as IPropertySymbol)?.GetMethod ?? symbol as IMethodSymbol;

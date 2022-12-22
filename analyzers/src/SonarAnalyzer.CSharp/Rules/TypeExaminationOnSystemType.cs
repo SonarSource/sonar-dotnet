@@ -41,13 +41,13 @@ namespace SonarAnalyzer.Rules.CSharp
                    if (invocation.Expression.ToStringContainsEitherOr(nameof(Type.IsInstanceOfType), nameof(Type.GetType))
                        && c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol)
                    {
-                       CheckGetTypeCallOnType(invocation, methodSymbol, c);
-                       CheckIsInstanceOfTypeCallWithTypeArgument(invocation, methodSymbol, c);
+                       CheckGetTypeCallOnType(c, invocation, methodSymbol);
+                       CheckIsInstanceOfTypeCallWithTypeArgument(c, invocation, methodSymbol);
                    }
                },
                SyntaxKind.InvocationExpression);
 
-        private static void CheckIsInstanceOfTypeCallWithTypeArgument(InvocationExpressionSyntax invocation, ISymbol methodSymbol, SyntaxNodeAnalysisContext context)
+        private static void CheckIsInstanceOfTypeCallWithTypeArgument(SonarSyntaxNodeAnalysisContext context, InvocationExpressionSyntax invocation, ISymbol methodSymbol)
         {
             if (methodSymbol.Name != nameof(Type.IsInstanceOfType) || !methodSymbol.ContainingType.Is(KnownType.System_Type))
             {
@@ -70,7 +70,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.ReportIssue(Diagnostic.Create(Rule, argument.GetLocation(), message));
         }
 
-        private static void CheckGetTypeCallOnType(InvocationExpressionSyntax invocation, IMethodSymbol invokedMethod, SyntaxNodeAnalysisContext context)
+        private static void CheckGetTypeCallOnType(SonarSyntaxNodeAnalysisContext context, InvocationExpressionSyntax invocation, IMethodSymbol invokedMethod)
         {
             if (!(invocation.Expression is MemberAccessExpressionSyntax memberCall)
                 || IsException(memberCall, context.SemanticModel)

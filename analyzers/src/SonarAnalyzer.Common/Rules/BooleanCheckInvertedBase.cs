@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules
 
         protected abstract bool IsIgnoredNullableOperation(TBinaryExpression expression, SemanticModel semanticModel);
 
-        protected Action<SyntaxNodeAnalysisContext> GetAnalysisAction(DiagnosticDescriptor rule)
+        protected Action<SonarSyntaxNodeAnalysisContext> GetAnalysisAction(DiagnosticDescriptor rule)
         {
             return c =>
             {
@@ -46,8 +46,7 @@ namespace SonarAnalyzer.Rules
 
                 if (IsLogicalNot(expression, out var logicalNot))
                 {
-                    c.ReportIssue(
-                        Diagnostic.Create(rule, logicalNot.GetLocation(), GetSuggestedReplacement(expression)));
+                    c.ReportIssue(Diagnostic.Create(rule, logicalNot.GetLocation(), GetSuggestedReplacement(expression)));
                 }
             };
         }

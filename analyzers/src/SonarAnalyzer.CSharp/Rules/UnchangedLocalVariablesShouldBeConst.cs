@@ -60,7 +60,7 @@ public sealed class UnchangedLocalVariablesShouldBeConst : SonarDiagnosticAnalyz
                         && IsInitializedWithCompatibleConstant(v, c.SemanticModel, declaredType)
                         && !HasMutableUsagesInMethod(c.SemanticModel, v))
                     .ToList()
-                    .ForEach(x => Report(x, c));
+                    .ForEach(x => Report(c, x));
             },
             SyntaxKind.LocalDeclarationStatement);
 
@@ -169,7 +169,7 @@ public sealed class UnchangedLocalVariablesShouldBeConst : SonarDiagnosticAnalyz
         declaratorSyntax is { Initializer.Value: { } initializer }
             && initializer.DescendantNodesAndSelf().Any(x => x.IsKind(SyntaxKind.Interpolation));
 
-    private static void Report(VariableDeclaratorSyntax declaratorSyntax, SyntaxNodeAnalysisContext c) =>
+    private static void Report(SonarSyntaxNodeAnalysisContext c, VariableDeclaratorSyntax declaratorSyntax) =>
         c.ReportIssue(Diagnostic.Create(Rule,
             declaratorSyntax.Identifier.GetLocation(),
             declaratorSyntax.Identifier.ValueText,

@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.EventFieldDeclaration);
         }
 
-        private static void ReportDiagnostics(SyntaxNodeAnalysisContext context, SyntaxNode declaration, IEnumerable<SyntaxToken> modifiers)
+        private static void ReportDiagnostics(SonarSyntaxNodeAnalysisContext context, SyntaxNode declaration, IEnumerable<SyntaxToken> modifiers)
         {
             var symbol = context.SemanticModel.GetDeclaredSymbol(declaration);
             if (symbol == null || symbol.IsOverride || !symbol.ContainingType.IsSealed)

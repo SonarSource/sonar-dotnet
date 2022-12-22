@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(CheckDestructorDeclaration, SyntaxKind.DestructorDeclaration);
         }
 
-        private static void CheckDestructorDeclaration(SyntaxNodeAnalysisContext context)
+        private static void CheckDestructorDeclaration(SonarSyntaxNodeAnalysisContext context)
         {
             var destructorDeclaration = (DestructorDeclarationSyntax)context.Node;
 
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckConstructorDeclaration(SyntaxNodeAnalysisContext context)
+        private static void CheckConstructorDeclaration(SonarSyntaxNodeAnalysisContext context)
         {
             var constructorDeclaration = (ConstructorDeclarationSyntax)context.Node;
 

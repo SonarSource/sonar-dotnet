@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsExternMethod(IMethodSymbol methodSymbol) =>
             methodSymbol.IsExtern || methodSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_LibraryImportAttribute);
 
-        private static void ReportTrivialWrappers(SyntaxNodeAnalysisContext c)
+        private static void ReportTrivialWrappers(SonarSyntaxNodeAnalysisContext c)
         {
             var methodDeclaration = (MethodDeclarationSyntax)c.Node;
 
