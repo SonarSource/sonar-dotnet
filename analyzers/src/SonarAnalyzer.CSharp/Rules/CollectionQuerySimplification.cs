@@ -232,8 +232,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 : invocation.ArgumentList.Arguments.Skip(1).ToList();
         }
 
-        private static void CheckForCastSimplification(SonarSyntaxNodeAnalysisContext context, IMethodSymbol outerMethodSymbol, InvocationExpressionSyntax outerInvocation,
-            IMethodSymbol innerMethodSymbol, InvocationExpressionSyntax innerInvocation)
+        private static void CheckForCastSimplification(SonarSyntaxNodeAnalysisContext context,
+                                                       IMethodSymbol outerMethodSymbol,
+                                                       InvocationExpressionSyntax outerInvocation,
+                                                       IMethodSymbol innerMethodSymbol,
+                                                       InvocationExpressionSyntax innerInvocation)
         {
             if (MethodNamesForTypeCheckingWithSelect.Contains(outerMethodSymbol.Name) &&
                 innerMethodSymbol.Name == SelectMethodName &&
@@ -393,8 +396,11 @@ namespace SonarAnalyzer.Rules.CSharp
             return true;
         }
 
-        private static bool CheckForSimplifiable(SonarSyntaxNodeAnalysisContext context, IMethodSymbol outerMethodSymbol, InvocationExpressionSyntax outerInvocation,
-            IMethodSymbol innerMethodSymbol, InvocationExpressionSyntax innerInvocation)
+        private static bool CheckForSimplifiable(SonarSyntaxNodeAnalysisContext context,
+                                                 IMethodSymbol outerMethodSymbol,
+                                                 InvocationExpressionSyntax outerInvocation,
+                                                 IMethodSymbol innerMethodSymbol,
+                                                 InvocationExpressionSyntax innerInvocation)
         {
             if (MethodIsNotUsingPredicate(outerMethodSymbol, outerInvocation) &&
                 innerMethodSymbol.Name == WhereMethodName &&

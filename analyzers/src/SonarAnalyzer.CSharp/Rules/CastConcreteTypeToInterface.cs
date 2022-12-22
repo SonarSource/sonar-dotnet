@@ -23,13 +23,12 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class CastConcreteTypeToInterface : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3215";
+        private const string DiagnosticId = "S3215";
         private const string MessageFormat = "Remove this cast and edit the interface to add the missing functionality.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -37,9 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var castExpression = (CastExpressionSyntax)c.Node;
-                    var castedTo = c.SemanticModel.GetTypeInfo(castExpression.Type).Type;
-                    var castedFrom = c.SemanticModel.GetTypeInfo(castExpression.Expression).Type;
-                    CheckForIssue(c, castedTo, castedFrom);
+                    CheckForIssue(c, castExpression.Expression, castExpression.Type);
                 },
                 SyntaxKind.CastExpression);
 
@@ -47,24 +44,22 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var castExpression = (BinaryExpressionSyntax)c.Node;
-                    var castedTo = c.SemanticModel.GetTypeInfo(castExpression.Right).Type;
-                    var castedFrom = c.SemanticModel.GetTypeInfo(castExpression.Left).Type;
-                    CheckForIssue(c, castedTo, castedFrom);
+                    CheckForIssue(c, castExpression.Left, castExpression.Right);
                 },
                 SyntaxKind.AsExpression);
         }
 
-        public static void CheckForIssue(SonarSyntaxNodeAnalysisContext context, ITypeSymbol castedTo, ITypeSymbol castedFrom)
+        private static void CheckForIssue(SonarSyntaxNodeAnalysisContext context, SyntaxNode fromExpression, SyntaxNode toExpression)
         {
-            if (!castedFrom.Is(TypeKind.Interface) ||
-                !castedFrom.DeclaringSyntaxReferences.Any() ||
-                !castedTo.Is(TypeKind.Class) ||
-                castedTo.Is(KnownType.System_Object))
+            var castedFrom = context.SemanticModel.GetTypeInfo(fromExpression).Type;
+            var castedTo = context.SemanticModel.GetTypeInfo(toExpression).Type;
+            if (castedFrom.Is(TypeKind.Interface)
+                && castedFrom.DeclaringSyntaxReferences.Any()
+                && castedTo.Is(TypeKind.Class)
+                && !castedTo.Is(KnownType.System_Object))
             {
-                return;
+                context.ReportIssue(Diagnostic.Create(Rule, context.Node.GetLocation()));
             }
-
-            context.ReportIssue(Diagnostic.Create(rule, context.Node.GetLocation()));
         }
     }
 }
