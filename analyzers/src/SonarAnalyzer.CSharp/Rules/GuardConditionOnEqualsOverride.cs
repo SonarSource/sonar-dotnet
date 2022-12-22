@@ -43,10 +43,10 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    cb.RegisterSyntaxNodeAction(c => { CheckInvocationInsideMethod(c, methodSymbol); }, SyntaxKind.InvocationExpression);
+                    cb.RegisterSyntaxNodeAction(c => CheckInvocationInsideMethod(c, methodSymbol), SyntaxKind.InvocationExpression);
                 });
 
-        private static void CheckInvocationInsideMethod(SyntaxNodeAnalysisContext context, ISymbol symbol)
+        private static void CheckInvocationInsideMethod(SonarSyntaxNodeAnalysisContext context, ISymbol symbol)
         {
             var invocation = (InvocationExpressionSyntax)context.Node;
             if (!(context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol invokedMethod)
