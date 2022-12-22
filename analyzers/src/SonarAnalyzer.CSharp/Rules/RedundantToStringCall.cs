@@ -117,23 +117,23 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.InvocationExpression);
         }
 
-        private static void CheckLeftExpressionForRemovableToStringCall(SyntaxNodeAnalysisContext context,
+        private static void CheckLeftExpressionForRemovableToStringCall(SonarSyntaxNodeAnalysisContext context,
             BinaryExpressionSyntax binary)
         {
             CheckExpressionForRemovableToStringCall(context, binary.Left, binary.Right, 0);
         }
-        private static void CheckRightExpressionForRemovableToStringCall(SyntaxNodeAnalysisContext context,
+        private static void CheckRightExpressionForRemovableToStringCall(SonarSyntaxNodeAnalysisContext context,
             BinaryExpressionSyntax binary)
         {
             CheckExpressionForRemovableToStringCall(context, binary.Right, binary.Left, 1);
         }
-        private static void CheckRightExpressionForRemovableToStringCall(SyntaxNodeAnalysisContext context,
+        private static void CheckRightExpressionForRemovableToStringCall(SonarSyntaxNodeAnalysisContext context,
             AssignmentExpressionSyntax assignment)
         {
             CheckExpressionForRemovableToStringCall(context, assignment.Right, assignment.Left, 1);
         }
 
-        private static void CheckExpressionForRemovableToStringCall(SyntaxNodeAnalysisContext context,
+        private static void CheckExpressionForRemovableToStringCall(SonarSyntaxNodeAnalysisContext context,
             ExpressionSyntax expressionWithToStringCall, ExpressionSyntax otherOperandOfAddition, int checkedSideIndex)
         {
             if (!IsArgumentlessToStringCallNotOnBaseExpression(expressionWithToStringCall, context.SemanticModel, out var location, out var methodSymbol) ||

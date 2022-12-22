@@ -97,9 +97,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private sealed class StringConcatenationWalker : SafeCSharpSyntaxWalker
         {
-            private readonly SyntaxNodeAnalysisContext context;
+            private readonly SonarSyntaxNodeAnalysisContext context;
 
-            public StringConcatenationWalker(SyntaxNodeAnalysisContext context) =>
+            public StringConcatenationWalker(SonarSyntaxNodeAnalysisContext context) =>
                 this.context = context;
 
             public override void VisitInterpolatedStringExpression(InterpolatedStringExpressionSyntax node)

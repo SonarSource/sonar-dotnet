@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules
 
             protected abstract Location GetLocation(TIfSyntax topLevelIf);
 
-            public Action<SyntaxNodeAnalysisContext> GetAnalysisAction(DiagnosticDescriptor rule) =>
+            public Action<SonarSyntaxNodeAnalysisContext> GetAnalysisAction(DiagnosticDescriptor rule) =>
                 context =>
                 {
                     var elseSyntax = (TElseSyntax)context.Node;
@@ -77,7 +77,7 @@ namespace SonarAnalyzer.Rules
 
             protected abstract Location GetLocation(TTernaryStatement ternaryStatement);
 
-            public Action<SyntaxNodeAnalysisContext> GetAnalysisAction(DiagnosticDescriptor rule) =>
+            public Action<SonarSyntaxNodeAnalysisContext> GetAnalysisAction(DiagnosticDescriptor rule) =>
                 context =>
                 {
                     var ternaryStatement = (TTernaryStatement)context.Node;
@@ -87,7 +87,7 @@ namespace SonarAnalyzer.Rules
 
                     if (whenTrue.IsEquivalentTo(whenFalse, topLevel: false))
                     {
-                        context.ReportDiagnostic(Diagnostic.Create(rule, GetLocation(ternaryStatement), TernaryMessage));
+                        context.ReportIssue(Diagnostic.Create(rule, GetLocation(ternaryStatement), TernaryMessage));
                     }
                 };
         }
@@ -104,7 +104,7 @@ namespace SonarAnalyzer.Rules
 
             protected abstract Location GetLocation(TSwitchStatement switchStatement);
 
-            public Action<SyntaxNodeAnalysisContext> GetAnalysisAction(DiagnosticDescriptor rule) =>
+            public Action<SonarSyntaxNodeAnalysisContext> GetAnalysisAction(DiagnosticDescriptor rule) =>
                 context =>
                 {
                     var switchStatement = (TSwitchStatement)context.Node;
@@ -115,7 +115,7 @@ namespace SonarAnalyzer.Rules
                         HasDefaultLabel(switchStatement) &&
                         sections.Skip(1).All(section => AreEquivalent(section, sections[0])))
                     {
-                        context.ReportDiagnostic(Diagnostic.Create(rule, GetLocation(switchStatement), StatementsMessage));
+                        context.ReportIssue(Diagnostic.Create(rule, GetLocation(switchStatement), StatementsMessage));
                     }
                 };
         }

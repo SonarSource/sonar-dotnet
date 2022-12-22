@@ -77,7 +77,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 ? methodDeclaration.Body?.DescendantNodes()
                 : methodDeclaration.ExpressionBody.DescendantNodes();
 
-        private static void CheckIssue<TDeclarationSyntax>(SyntaxNodeAnalysisContext context,
+        private static void CheckIssue<TDeclarationSyntax>(SonarSyntaxNodeAnalysisContext context,
                                                            Func<TDeclarationSyntax, IEnumerable<SyntaxNode>> getDescendants,
                                                            Func<TDeclarationSyntax, SyntaxToken> getIdentifier,
                                                            string memberKind)

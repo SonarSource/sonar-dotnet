@@ -27,31 +27,31 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         private sealed class RoslynChecker : IChecker
         {
-            public void CheckForNoExitProperty(SyntaxNodeAnalysisContext c, PropertyDeclarationSyntax property, IPropertySymbol propertySymbol)
+            public void CheckForNoExitProperty(SonarSyntaxNodeAnalysisContext c, PropertyDeclarationSyntax property, IPropertySymbol propertySymbol)
             {
                 if (property.ExpressionBody?.Expression != null)
                 {
-                    var cfg = ControlFlowGraph.Create(property.ExpressionBody, c.SemanticModel, c.CancellationToken);
-                    var walker = new RecursionSearcher(new RecursionContext<ControlFlowGraph>(cfg, propertySymbol, property.Identifier.GetLocation(), c, "property's recursion"));
+                    var cfg = ControlFlowGraph.Create(property.ExpressionBody, c.SemanticModel, c.Cancel);
+                    var walker = new RecursionSearcher(new RecursionContext<ControlFlowGraph>(c, cfg, propertySymbol, property.Identifier.GetLocation(), "property's recursion"));
                     walker.CheckPaths();
                 }
                 else if (property.AccessorList != null)
                 {
                     foreach (var accessor in property.AccessorList.Accessors.Where(a => a.HasBodyOrExpressionBody()))
                     {
-                        var cfg = ControlFlowGraph.Create(accessor, c.SemanticModel, c.CancellationToken);
-                        var context = new RecursionContext<ControlFlowGraph>(cfg, propertySymbol, accessor.Keyword.GetLocation(), c, "property accessor's recursion");
+                        var cfg = ControlFlowGraph.Create(accessor, c.SemanticModel, c.Cancel);
+                        var context = new RecursionContext<ControlFlowGraph>(c, cfg, propertySymbol, accessor.Keyword.GetLocation(), "property accessor's recursion");
                         var walker = new RecursionSearcher(context, !accessor.Keyword.IsKind(SyntaxKind.SetKeyword));
                         walker.CheckPaths();
                     }
                 }
             }
 
-            public void CheckForNoExitMethod(SyntaxNodeAnalysisContext c, CSharpSyntaxNode body, SyntaxToken identifier, IMethodSymbol symbol)
+            public void CheckForNoExitMethod(SonarSyntaxNodeAnalysisContext c, CSharpSyntaxNode body, SyntaxToken identifier, IMethodSymbol symbol)
             {
-                if (body.CreateCfg(c.SemanticModel, c.CancellationToken) is { } cfg)
+                if (body.CreateCfg(c.SemanticModel, c.Cancel) is { } cfg)
                 {
-                    var context = new RecursionContext<ControlFlowGraph>(cfg, symbol, identifier.GetLocation(), c, "method's recursion");
+                    var context = new RecursionContext<ControlFlowGraph>(c, cfg, symbol, identifier.GetLocation(), "method's recursion");
                     var walker = new RecursionSearcher(context);
                     walker.CheckPaths();
                 }

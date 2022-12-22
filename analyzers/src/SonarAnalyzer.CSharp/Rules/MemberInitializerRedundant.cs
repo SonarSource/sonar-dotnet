@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.StructDeclaration,
                 SyntaxKind.InterfaceDeclaration);
 
-        private void CheckInstanceMembers(SyntaxNodeAnalysisContext c, TypeDeclarationSyntax declaration, IEnumerable<ISymbol> typeMembers)
+        private void CheckInstanceMembers(SonarSyntaxNodeAnalysisContext c, TypeDeclarationSyntax declaration, IEnumerable<ISymbol> typeMembers)
         {
             var typeInitializers = typeMembers.OfType<IMethodSymbol>().Where(x => x is { MethodKind: MethodKind.Constructor, IsStatic: false, IsImplicitlyDeclared: false }).ToList();
             if (typeInitializers.Count == 0)
@@ -96,7 +96,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             return true;
                         }
 
-                        return IsSymbolFirstSetInCfg(memberSymbol, constructor.Node, constructor.Model, c.CancellationToken);
+                        return IsSymbolFirstSetInCfg(memberSymbol, constructor.Node, constructor.Model, c.Cancel);
                     }))
                 {
                     c.ReportIssue(Diagnostic.Create(Rule, initializedMembers[memberSymbol].GetLocation(), InstanceMemberMessage));
@@ -104,7 +104,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private void CheckStaticMembers(SyntaxNodeAnalysisContext c, TypeDeclarationSyntax declaration, IEnumerable<ISymbol> typeMembers)
+        private void CheckStaticMembers(SonarSyntaxNodeAnalysisContext c, TypeDeclarationSyntax declaration, IEnumerable<ISymbol> typeMembers)
         {
             var typeInitializers = typeMembers.OfType<IMethodSymbol>().Where(method => method.MethodKind == MethodKind.StaticConstructor || method.IsModuleInitializer()).ToList();
             if (typeInitializers.Count == 0)
@@ -124,7 +124,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 // there can be only one static constructor
                 // all module initializers are executed when the type is created, so it is enough if ANY initializes the member
-                if (initializerDeclarations.Any(x => IsSymbolFirstSetInCfg(memberSymbol, x.Node, x.Model, c.CancellationToken)))
+                if (initializerDeclarations.Any(x => IsSymbolFirstSetInCfg(memberSymbol, x.Node, x.Model, c.Cancel)))
                 {
                     c.ReportIssue(Diagnostic.Create(Rule, initializedMembers[memberSymbol].GetLocation(), StaticMemberMessage));
                 }
@@ -177,7 +177,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return allMembers;
         }
 
-        private static List<NodeSymbolAndModel<TSyntax, IMethodSymbol>> GetInitializerDeclarations<TSyntax>(SyntaxNodeAnalysisContext context, List<IMethodSymbol> constructorSymbols)
+        private static List<NodeSymbolAndModel<TSyntax, IMethodSymbol>> GetInitializerDeclarations<TSyntax>(SonarSyntaxNodeAnalysisContext context, List<IMethodSymbol> constructorSymbols)
             where TSyntax : SyntaxNode =>
             constructorSymbols
                 .Select(x => new NodeSymbolAndModel<TSyntax, IMethodSymbol>(null, x.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() as TSyntax, x))

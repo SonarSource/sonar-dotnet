@@ -41,10 +41,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         private class IdentifierWalker : SafeVisualBasicSyntaxWalker
         {
-            private readonly SyntaxNodeAnalysisContext context;
+            private readonly SonarSyntaxNodeAnalysisContext context;
             private readonly string name;
 
-            public IdentifierWalker(SyntaxNodeAnalysisContext context, string name)
+            public IdentifierWalker(SonarSyntaxNodeAnalysisContext context, string name)
             {
                 this.context = context;
                 this.name = name;

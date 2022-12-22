@@ -64,12 +64,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKindsToCheckAssignment);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => ReportOnObjectEqualsMatches((InvocationExpressionSyntax)c.Node, c),
+                c => ReportOnObjectEqualsMatches(c, (InvocationExpressionSyntax)c.Node),
                 SyntaxKind.InvocationExpression);
         }
 
-        private static void ReportOnObjectEqualsMatches(InvocationExpressionSyntax invocation,
-            SyntaxNodeAnalysisContext context)
+        private static void ReportOnObjectEqualsMatches(SonarSyntaxNodeAnalysisContext context, InvocationExpressionSyntax invocation)
         {
             var methodSymbol = context.SemanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
 
@@ -110,7 +109,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static SyntaxNode RemoveParentheses(SyntaxNode node) =>
             node is ExpressionSyntax expression ? expression.RemoveParentheses() : node;
 
-        private static void ReportIfOperatorExpressionsMatch(SyntaxNodeAnalysisContext context, ExpressionSyntax left, ExpressionSyntax right, SyntaxToken operatorToken)
+        private static void ReportIfOperatorExpressionsMatch(SonarSyntaxNodeAnalysisContext context, ExpressionSyntax left, ExpressionSyntax right, SyntaxToken operatorToken)
         {
             if (CSharpEquivalenceChecker.AreEquivalent(left.RemoveParentheses(), right.RemoveParentheses()))
             {

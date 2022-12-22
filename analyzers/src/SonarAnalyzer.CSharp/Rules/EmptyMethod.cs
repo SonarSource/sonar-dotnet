@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKindEx.LocalFunctionStatement
             };
 
-        protected override void CheckMethod(SyntaxNodeAnalysisContext context, bool isTestProject)
+        protected override void CheckMethod(SonarSyntaxNodeAnalysisContext context, bool isTestProject)
         {
             if (LocalFunctionStatementSyntaxWrapper.IsInstance(context.Node))
             {

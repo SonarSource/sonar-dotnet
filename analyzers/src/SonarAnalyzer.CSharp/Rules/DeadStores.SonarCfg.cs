@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             private readonly SyntaxNode node;
 
-            public SonarChecker(SyntaxNodeAnalysisContext context, SonarCSharpLiveVariableAnalysis lva, SyntaxNode node) : base(context, lva) =>
+            public SonarChecker(SonarSyntaxNodeAnalysisContext context, SonarCSharpLiveVariableAnalysis lva, SyntaxNode node) : base(context, lva) =>
                 this.node = node;
 
             protected override State CreateState(Block block) =>

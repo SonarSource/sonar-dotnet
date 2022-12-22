@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules
                 KnownType.System_OutOfMemoryException
             );
 
-        protected void ReportReservedExceptionCreation(SyntaxNodeAnalysisContext context,
+        protected void ReportReservedExceptionCreation(SonarSyntaxNodeAnalysisContext context,
             SyntaxNode throwStatementExpression)
         {
             if (throwStatementExpression == null ||
@@ -48,8 +48,7 @@ namespace SonarAnalyzer.Rules
             var expressionType = context.SemanticModel.GetTypeInfo(throwStatementExpression).Type;
             if (expressionType.IsAny(ReservedExceptionTypeNames))
             {
-                context.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], throwStatementExpression.GetLocation(),
-                    expressionType.ToDisplayString()));
+                context.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], throwStatementExpression.GetLocation(), expressionType.ToDisplayString()));
             }
         }
 

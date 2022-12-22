@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;
-                    CheckCall(invocation, invocation.ArgumentList, c);
+                    CheckCall(c, invocation, invocation.ArgumentList);
                 },
                 SyntaxKind.InvocationExpression);
 
@@ -43,12 +43,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var objectCreation = (ObjectCreationExpressionSyntax)c.Node;
-                    CheckCall(objectCreation, objectCreation.ArgumentList, c);
+                    CheckCall(c, objectCreation, objectCreation.ArgumentList);
                 },
                 SyntaxKind.ObjectCreationExpression);
         }
 
-        private static void CheckCall(SyntaxNode node, ArgumentListSyntax argumentList, SyntaxNodeAnalysisContext context)
+        private static void CheckCall(SonarSyntaxNodeAnalysisContext context, SyntaxNode node, ArgumentListSyntax argumentList)
         {
             if (argumentList == null
                 || argumentList.Arguments.Count == 0

@@ -74,16 +74,14 @@ namespace SonarAnalyzer.Rules.CSharp
                             var interfaceType = c.SemanticModel.GetTypeInfo(cast.Type).Type as INamedTypeSymbol;
                             var expressionType = c.SemanticModel.GetTypeInfo(cast.Expression).Type as INamedTypeSymbol;
 
-                            CheckTypesForInvalidCast(interfaceType, expressionType, interfaceImplementerMappings,
-                                cast.Type.GetLocation(), c);
+                            CheckTypesForInvalidCast(c, interfaceType, expressionType, interfaceImplementerMappings, cast.Type.GetLocation());
                         },
                         SyntaxKind.CastExpression);
                 });
         }
 
-        private static void CheckTypesForInvalidCast(INamedTypeSymbol interfaceType, INamedTypeSymbol expressionType,
-            Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>> interfaceImplementerMappings, Location issueLocation,
-            SyntaxNodeAnalysisContext context)
+        private static void CheckTypesForInvalidCast(SonarSyntaxNodeAnalysisContext context, INamedTypeSymbol interfaceType, INamedTypeSymbol expressionType,
+            Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>> interfaceImplementerMappings, Location issueLocation)
         {
             if (interfaceType == null ||
                 expressionType == null ||
@@ -108,7 +106,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 !interfaceImplementerMappings[interfaceType.OriginalDefinition].Any(t => t.DerivesOrImplements(expressionType.OriginalDefinition)) &&
                 !expressionType.IsSealed)
             {
-                ReportIssue(interfaceType, expressionType, issueLocation, context);
+                ReportIssue(context, interfaceType, expressionType, issueLocation);
             }
         }
 
@@ -117,8 +115,7 @@ namespace SonarAnalyzer.Rules.CSharp
             interfaceImplementerMappings.ContainsKey(type) &&
             interfaceImplementerMappings[type].Any(t => t.IsClassOrStruct());
 
-        private static void ReportIssue(ISymbol interfaceType, ITypeSymbol expressionType, Location issueLocation,
-            SyntaxNodeAnalysisContext context)
+        private static void ReportIssue(SonarSyntaxNodeAnalysisContext context, ISymbol interfaceType, ITypeSymbol expressionType, Location issueLocation)
         {
             var interfaceTypeName = interfaceType.ToMinimalDisplayString(context.SemanticModel, issueLocation.SourceSpan.Start);
             var expressionTypeName = expressionType.ToMinimalDisplayString(context.SemanticModel, issueLocation.SourceSpan.Start);

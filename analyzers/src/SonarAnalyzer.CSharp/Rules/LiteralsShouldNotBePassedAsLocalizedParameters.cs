@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeAssignments, SyntaxKind.SimpleAssignmentExpression);
         }
 
-        private static void AnalyzeInvocations(SyntaxNodeAnalysisContext context)
+        private static void AnalyzeInvocations(SonarSyntaxNodeAnalysisContext context)
         {
             var invocationSyntax = (InvocationExpressionSyntax)context.Node;
             if (!(context.SemanticModel.GetSymbolInfo(invocationSyntax).Symbol is IMethodSymbol methodSymbol)
@@ -80,7 +80,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void AnalyzeAssignments(SyntaxNodeAnalysisContext context)
+        private static void AnalyzeAssignments(SonarSyntaxNodeAnalysisContext context)
         {
             var assignmentSyntax = (AssignmentExpressionSyntax)context.Node;
             if (CSharpDebugOnlyCodeHelper.IsCallerInConditionalDebug(assignmentSyntax, context.SemanticModel))

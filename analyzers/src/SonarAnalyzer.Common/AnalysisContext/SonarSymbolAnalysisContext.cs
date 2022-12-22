@@ -25,6 +25,7 @@ public sealed class SonarSymbolAnalysisContext : SonarAnalysisContextBase<Symbol
     public override SyntaxTree Tree => Context.GetFirstSyntaxTree();
     public override Compilation Compilation => Context.Compilation;
     public override AnalyzerOptions Options => Context.Options;
+    public override CancellationToken Cancel => Context.CancellationToken;
     public ISymbol Symbol => Context.Symbol;
 
     internal SonarSymbolAnalysisContext(SonarAnalysisContext analysisContext, SymbolAnalysisContext context) : base(analysisContext, context) { }

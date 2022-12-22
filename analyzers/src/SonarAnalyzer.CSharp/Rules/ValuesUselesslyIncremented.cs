@@ -39,13 +39,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (symbol is ILocalSymbol || symbol is IParameterSymbol { RefKind: RefKind.None })
                     {
-                        VisitParent(increment, c);
+                        VisitParent(c, increment);
                     }
                 },
                 SyntaxKind.PostIncrementExpression,
                 SyntaxKind.PostDecrementExpression);
 
-        private static void VisitParent(PostfixUnaryExpressionSyntax increment, SyntaxNodeAnalysisContext context)
+        private static void VisitParent(SonarSyntaxNodeAnalysisContext context, PostfixUnaryExpressionSyntax increment)
         {
             switch (increment.Parent)
             {

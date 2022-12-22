@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
                                                                    ImplicitObjectCreationExpression);
                 });
 
-        private static void CheckIgnoreAntiforgeryTokenAttribute(SyntaxNodeAnalysisContext c)
+        private static void CheckIgnoreAntiforgeryTokenAttribute(SonarSyntaxNodeAnalysisContext c)
         {
             var shouldReport = c.Node switch
             {
@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void ReportDiagnostic(SyntaxNodeAnalysisContext context) =>
+        private static void ReportDiagnostic(SonarSyntaxNodeAnalysisContext context) =>
             context.ReportIssue(Diagnostic.Create(Rule, context.Node.GetLocation()));
     }
 }

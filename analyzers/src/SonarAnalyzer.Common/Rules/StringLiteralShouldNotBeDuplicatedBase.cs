@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules
         protected abstract TSyntaxKind[] SyntaxKinds { get; }
 
         protected abstract bool IsMatchingMethodParameterName(TLiteralExpressionSyntax literalExpression);
-        protected abstract bool IsInnerInstance(SyntaxNodeAnalysisContext context);
+        protected abstract bool IsInnerInstance(SonarSyntaxNodeAnalysisContext context);
         protected abstract IEnumerable<TLiteralExpressionSyntax> FindLiteralExpressions(SyntaxNode node);
         protected abstract SyntaxToken LiteralToken(TLiteralExpressionSyntax literal);
 
@@ -54,13 +54,13 @@ namespace SonarAnalyzer.Rules
             // Hence the decision to do like other languages, at class-level
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, ReportOnViolation, SyntaxKinds);
 
-        protected virtual bool IsNamedTypeOrTopLevelMain(SyntaxNodeAnalysisContext context) =>
+        protected virtual bool IsNamedTypeOrTopLevelMain(SonarSyntaxNodeAnalysisContext context) =>
             IsNamedType(context);
 
-        protected static bool IsNamedType(SyntaxNodeAnalysisContext context) =>
+        protected static bool IsNamedType(SonarSyntaxNodeAnalysisContext context) =>
             context.ContainingSymbol.Kind == SymbolKind.NamedType;
 
-        private void ReportOnViolation(SyntaxNodeAnalysisContext context)
+        private void ReportOnViolation(SonarSyntaxNodeAnalysisContext context)
         {
             if (!IsNamedTypeOrTopLevelMain(context) || IsInnerInstance(context))
             {

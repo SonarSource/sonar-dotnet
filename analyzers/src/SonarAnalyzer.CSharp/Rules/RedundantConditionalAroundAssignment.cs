@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(UselessConditionSwitchExpression, SyntaxKindEx.SwitchExpression);
         }
 
-        private static void UselessConditionIfStatement(SyntaxNodeAnalysisContext c)
+        private static void UselessConditionIfStatement(SonarSyntaxNodeAnalysisContext c)
         {
             var ifStatement = (IfStatementSyntax)c.Node;
 
@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void UselessConditionSwitchExpression(SyntaxNodeAnalysisContext c)
+        private static void UselessConditionSwitchExpression(SonarSyntaxNodeAnalysisContext c)
         {
             var switchExpression = (SwitchExpressionSyntaxWrapper)c.Node;
 
