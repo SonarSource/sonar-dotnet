@@ -41,7 +41,7 @@ public abstract class SonarAnalysisContextBase
     /// <summary>
     /// Reads configuration from SonarProjectConfig.xml file and caches the result for scope of this analysis.
     /// </summary>
-    protected ProjectConfigReader ProjectConfiguration(AnalyzerOptions options)
+    public ProjectConfigReader ProjectConfiguration(AnalyzerOptions options)
     {
         if (options.SonarProjectConfig() is { } sonarProjectConfig)
         {
@@ -108,9 +108,12 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
     public ProjectConfigReader ProjectConfiguration() =>
         ProjectConfiguration(Options);
 
+    public bool IsScannerRun() =>
+        ProjectConfiguration().IsScannerRun;
+
     public bool IsTestProject()
     {
-        var projectType = ProjectConfiguration(Options).ProjectType;
+        var projectType = ProjectConfiguration().ProjectType;
         return projectType == ProjectType.Unknown
             ? Compilation.IsTest()              // SonarLint, NuGet or Scanner <= 5.0
             : projectType == ProjectType.Test;  // Scanner >= 5.1 does authoritative decision that we follow
@@ -121,20 +124,20 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
 
     private protected void ReportIssue(ReportingContext reportingContext)
     {
-        if (!SonarAnalysisContext.IsAnalysisScopeMatching(reportingContext.Compilation, IsTestProject(), ProjectConfiguration().IsScannerRun, new[] { reportingContext.Diagnostic.Descriptor }))
+        if (!reportingContext.Diagnostic.Descriptor.HasMatchingScope(reportingContext.Compilation, IsTestProject(), ProjectConfiguration().IsScannerRun))
         {
             return;
         }
 
-        if (reportingContext is { Compilation: { } compilation, Diagnostic.Location: { Kind: LocationKind.SourceFile, SourceTree: { } syntaxTree } }
-            && !compilation.ContainsSyntaxTree(syntaxTree))
+        if (reportingContext is { Compilation: { } compilation, Diagnostic.Location: { Kind: LocationKind.SourceFile, SourceTree: { } tree } }
+            && !compilation.ContainsSyntaxTree(tree))
         {
             Debug.Fail("Primary location should be part of the compilation. An AD0001 is raised if this is not the case.");
             return;
         }
 
         // This is the current way SonarLint will handle how and what to report.
-        if (SonarAnalysisContext.ReportDiagnostic != null)
+        if (SonarAnalysisContext.ReportDiagnostic is not null)
         {
             Debug.Assert(SonarAnalysisContext.ShouldDiagnosticBeReported == null, "Not expecting SonarLint to set both the old and the new delegates.");
             SonarAnalysisContext.ReportDiagnostic(reportingContext);
