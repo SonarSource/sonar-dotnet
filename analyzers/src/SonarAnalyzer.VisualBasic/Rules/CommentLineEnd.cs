@@ -45,12 +45,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 {
                     foreach (var token in c.Tree.GetRoot().DescendantTokens())
                     {
-                        CheckTokenComments(token, c);
+                        CheckTokenComments(c, token);
                     }
                 });
         }
 
-        private void CheckTokenComments(SyntaxToken token, SyntaxTreeAnalysisContext context)
+        private void CheckTokenComments(SonarSyntaxTreeAnalysisContext context, SyntaxToken token)
         {
             var tokenLine = token.GetLocation().GetLineSpan().StartLinePosition.Line;
 
