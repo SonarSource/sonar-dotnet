@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     SyntaxKindEx.DeclarationPattern,
                     SyntaxKindEx.ListPattern);
                 cbc.RegisterSyntaxNodeAction(collector.CollectUsages, SyntaxKind.IdentifierName);
-                cbc.RegisterCodeBlockEndAction(collector.GetReportUnusedVariablesAction(Rule));
+                cbc.RegisterCodeBlockEndAction(c => collector.ReportUnusedVariables(c, Rule));
             });
 
         private sealed class UnusedLocalsCollector : UnusedLocalsCollectorBase<SyntaxNode>
