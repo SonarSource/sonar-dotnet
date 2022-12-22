@@ -35,12 +35,4 @@ public interface DotNetPluginMetadata {
   String sonarAnalyzerName();
   String repositoryKey();
 
-  default String ignoreHeaderCommentPropertyKey() {
-    return AbstractPropertyDefinitions.getIgnoreHeaderCommentsProperty(languageKey());
-  }
-
-  default String analyzeGeneratedCodePropertyKey() {
-    return AbstractPropertyDefinitions.getAnalyzeGeneratedCode(languageKey());
-  }
-
 }
