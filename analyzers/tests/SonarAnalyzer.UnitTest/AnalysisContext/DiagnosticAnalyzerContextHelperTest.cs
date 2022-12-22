@@ -405,13 +405,13 @@ $@"namespace PartiallyGenerated
         public readonly SyntaxTree Tree;
         private bool delegateWasInvoked;
 
-            public DummyAnalysisContext(TestContext testContext, params string[] unchangedFiles)
-            {
-                var sonarProjectConfig = TestHelper.CreateSonarProjectConfigWithUnchangedFiles(testContext, unchangedFiles);
-                var additionalFile = new AnalyzerAdditionalFile(sonarProjectConfig);
-                Options = new(ImmutableArray.Create<AdditionalText>(additionalFile));
-                (Tree, Model) = TestHelper.CompileCS("public class Sample { }");
-            }
+        public DummyAnalysisContext(TestContext testContext, params string[] unchangedFiles)
+        {
+            var sonarProjectConfig = TestHelper.CreateSonarProjectConfigWithUnchangedFiles(testContext, unchangedFiles);
+            var additionalFile = new AnalyzerAdditionalFile(sonarProjectConfig);
+            Options = new(ImmutableArray.Create<AdditionalText>(additionalFile));
+            (Tree, Model) = TestHelper.CompileCS("public class Sample { }");
+        }
 
         public void DelegateAction<T>(T arg) =>
             delegateWasInvoked = true;

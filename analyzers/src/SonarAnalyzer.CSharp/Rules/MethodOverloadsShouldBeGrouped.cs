@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKindEx.RecordStructDeclaration,
         };
 
-        protected override MemberInfo CreateMemberInfo(SyntaxNodeAnalysisContext c, MemberDeclarationSyntax member) =>
+        protected override MemberInfo CreateMemberInfo(SonarSyntaxNodeAnalysisContext c, MemberDeclarationSyntax member) =>
             member switch
             {
                 ConstructorDeclarationSyntax constructor => new MemberInfo(c, member, constructor.Identifier, constructor.IsStatic(), false, true),

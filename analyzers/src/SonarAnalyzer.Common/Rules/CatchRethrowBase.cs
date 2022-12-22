@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules
 
         protected abstract SyntaxNode GetDeclarationType(TCatchClause catchClause);
 
-        protected void RaiseOnInvalidCatch(SyntaxNodeAnalysisContext context)
+        protected void RaiseOnInvalidCatch(SonarSyntaxNodeAnalysisContext context)
         {
             var catches = GetCatches(context.Node);
             var caughtExceptionTypes = new Lazy<List<INamedTypeSymbol>>(() =>

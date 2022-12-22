@@ -108,14 +108,14 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var identifier = GetDeclarationIdentifier(c.Node);
-                    CheckMemberName(c.Node, identifier, c);
+                    CheckMemberName(c, identifier);
                 },
                 SyntaxKind.MethodDeclaration,
                 SyntaxKind.PropertyDeclaration,
                 SyntaxKindEx.LocalFunctionStatement);
         }
 
-        private static void CheckTypeName(SyntaxNodeAnalysisContext context, bool isTest)
+        private static void CheckTypeName(SonarSyntaxNodeAnalysisContext context, bool isTest)
         {
             var typeDeclaration = (BaseTypeDeclarationSyntax)context.Node;
             var identifier = typeDeclaration.Identifier;
@@ -159,9 +159,9 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckMemberName(SyntaxNode member, SyntaxToken identifier, SyntaxNodeAnalysisContext context)
+        private static void CheckMemberName(SonarSyntaxNodeAnalysisContext context, SyntaxToken identifier)
         {
-            var symbol = context.SemanticModel.GetDeclaredSymbol(member);
+            var symbol = context.SemanticModel.GetDeclaredSymbol(context.Node);
             if (symbol == null)
             {
                 return;
@@ -179,7 +179,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (identifier.ValueText.StartsWith("_", StringComparison.Ordinal)
                 || identifier.ValueText.EndsWith("_", StringComparison.Ordinal))
             {
-                context.ReportIssue(Diagnostic.Create(MethodNameRule, identifier.GetLocation(), member.GetDeclarationTypeName(), identifier.ValueText, MessageFormatUnderscore));
+                context.ReportIssue(Diagnostic.Create(MethodNameRule, identifier.GetLocation(), context.Node.GetDeclarationTypeName(), identifier.ValueText, MessageFormatUnderscore));
                 return;
             }
 
@@ -191,7 +191,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (!IsMemberNameValid(identifier.ValueText, out var suggestion))
             {
                 var messageEnding = string.Format(MessageFormatNonUnderscore, suggestion);
-                context.ReportIssue(Diagnostic.Create(MethodNameRule, identifier.GetLocation(), member.GetDeclarationTypeName(), identifier.ValueText, messageEnding));
+                context.ReportIssue(Diagnostic.Create(MethodNameRule, identifier.GetLocation(), context.Node.GetDeclarationTypeName(), identifier.ValueText, messageEnding));
             }
         }
 

@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules
         protected CognitiveComplexityBase() =>
             rule = Language.CreateDescriptor(DiagnosticId, MessageFormat, isEnabledByDefault: false);
 
-        protected void CheckComplexity<TSyntax>(SyntaxNodeAnalysisContext context,
+        protected void CheckComplexity<TSyntax>(SonarSyntaxNodeAnalysisContext context,
                                                 Func<TSyntax, SyntaxNode> nodeSelector,
                                                 Func<TSyntax, Location> getLocationToReport,
                                                 Func<SyntaxNode, CognitiveComplexity> getComplexity,

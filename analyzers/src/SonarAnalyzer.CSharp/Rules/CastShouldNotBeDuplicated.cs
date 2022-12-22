@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(CasePatternSwitchLabel, SyntaxKindEx.CasePatternSwitchLabel);
         }
 
-        private static void CasePatternSwitchLabel(SyntaxNodeAnalysisContext analysisContext)
+        private static void CasePatternSwitchLabel(SonarSyntaxNodeAnalysisContext analysisContext)
         {
             var casePatternSwitch = (CasePatternSwitchLabelSyntaxWrapper)analysisContext.Node;
             if (casePatternSwitch.SyntaxNode.GetFirstNonParenthesizedParent().GetFirstNonParenthesizedParent() is not SwitchStatementSyntax parentSwitchStatement)
@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
                                      parentSwitchStatement);
         }
 
-        private static void SwitchExpressionArm(SyntaxNodeAnalysisContext analysisContext)
+        private static void SwitchExpressionArm(SonarSyntaxNodeAnalysisContext analysisContext)
         {
             var isSwitchExpression = (SwitchExpressionArmSyntaxWrapper)analysisContext.Node;
             var parent = isSwitchExpression.SyntaxNode.GetFirstNonParenthesizedParent();
@@ -70,7 +70,7 @@ namespace SonarAnalyzer.Rules.CSharp
                                      isSwitchExpression);
         }
 
-        private static void IsPatternExpression(SyntaxNodeAnalysisContext analysisContext)
+        private static void IsPatternExpression(SonarSyntaxNodeAnalysisContext analysisContext)
         {
             var isPatternExpression = (IsPatternExpressionSyntaxWrapper)analysisContext.Node;
             if (isPatternExpression.SyntaxNode.GetFirstNonParenthesizedParent() is not IfStatementSyntax parentIfStatement)
@@ -83,7 +83,7 @@ namespace SonarAnalyzer.Rules.CSharp
                                      parentIfStatement.Statement);
         }
 
-        private static void IsExpression(SyntaxNodeAnalysisContext analysisContext)
+        private static void IsExpression(SonarSyntaxNodeAnalysisContext analysisContext)
         {
             var isExpression = (BinaryExpressionSyntax)analysisContext.Node;
 
@@ -98,7 +98,7 @@ namespace SonarAnalyzer.Rules.CSharp
             ReportPatternAtMainVariable(analysisContext, isExpression.Left, isExpression.GetLocation(), parentIfStatement.Statement, castType, ReplaceWithAsAndNullCheckMessage);
         }
 
-        private static List<Location> GetDuplicatedCastLocations(SyntaxNodeAnalysisContext analysisContext, SyntaxNode parentStatement, TypeSyntax castType, SyntaxNode typedVariable)
+        private static List<Location> GetDuplicatedCastLocations(SonarSyntaxNodeAnalysisContext analysisContext, SyntaxNode parentStatement, TypeSyntax castType, SyntaxNode typedVariable)
         {
             var typeExpressionSymbol = analysisContext.SemanticModel.GetSymbolInfo(typedVariable).Symbol
                                        ?? analysisContext.SemanticModel.GetDeclaredSymbol(typedVariable);
@@ -115,7 +115,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 Equals(analysisContext.SemanticModel.GetSymbolInfo(castExpression.Expression).Symbol, typeExpressionSymbol);
         }
 
-        private static void ProcessPatternExpression(SyntaxNodeAnalysisContext analysisContext,
+        private static void ProcessPatternExpression(SonarSyntaxNodeAnalysisContext analysisContext,
                                                      SyntaxNode isPattern,
                                                      SyntaxNode mainVariableExpression,
                                                      SyntaxNode parentStatement)
@@ -209,7 +209,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return null;
         }
 
-        private static void ReportPatternAtMainVariable(SyntaxNodeAnalysisContext context,
+        private static void ReportPatternAtMainVariable(SonarSyntaxNodeAnalysisContext context,
                                                         SyntaxNode variableExpression,
                                                         Location mainLocation,
                                                         SyntaxNode parentStatement,
@@ -224,7 +224,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void ReportPatternAtCastLocation(SyntaxNodeAnalysisContext context,
+        private static void ReportPatternAtCastLocation(SonarSyntaxNodeAnalysisContext context,
                                                         SyntaxNode variableExpression,
                                                         Location patternLocation,
                                                         SyntaxNode parentStatement,
