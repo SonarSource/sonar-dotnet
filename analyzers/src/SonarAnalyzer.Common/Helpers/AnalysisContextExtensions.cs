@@ -52,15 +52,6 @@ namespace SonarAnalyzer.Helpers
         public static void ReportIssue(this SyntaxNodeAnalysisContext context, Diagnostic diagnostic, SonarAnalysisContext verifyScopeContext = null) =>
             ReportIssue(new ReportingContext(context, diagnostic), verifyScopeContext?.IsTestProject(context.Compilation, context.Options), verifyScopeContext?.IsScannerRun(context.Options));
 
-        // SyntaxTreeAnalysisContext doesn't have a Compilation => verifyScopeContext is never needed, because IsAnalysisScopeMatching returns always true.
-        public static void ReportIssue(this SyntaxTreeAnalysisContext context, Diagnostic diagnostic) =>
-            ReportIssue(new ReportingContext(context, diagnostic), null, null);
-
-        /// <param name="verifyScopeContext">Provide value for this argument only if the class has more than one SupportedDiagnostics.</param>
-        public static void ReportIssue(this CodeBlockAnalysisContext context, Diagnostic diagnostic, SonarAnalysisContext verifyScopeContext = null) =>
-            ReportIssue(new ReportingContext(context, diagnostic), verifyScopeContext?.IsTestProject(context.SemanticModel.Compilation, context.Options),
-                verifyScopeContext?.IsScannerRun(context.Options));
-
         private static void ReportIssue(ReportingContext reportingContext, bool? isTestProject, bool? isScannerRun) // FIXME: REMOVE, already migrated
         {
             if (isTestProject.HasValue && !reportingContext.Diagnostic.Descriptor.HasMatchingScope(reportingContext.Compilation, isTestProject.Value, isScannerRun ?? true))
