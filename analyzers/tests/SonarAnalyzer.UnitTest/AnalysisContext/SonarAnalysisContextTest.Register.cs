@@ -193,6 +193,6 @@ public partial class SonarAnalysisContextTest
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeAction(c => c.ReportIssue(Diagnostic.Create(rule, c.Node.GetLocation())), SyntaxKind.ClassDeclaration);
+            context.RegisterSyntaxNodeActionInNonGenerated(CSharpGeneratedCodeRecognizer.Instance, c => c.ReportIssue(Diagnostic.Create(rule, c.Node.GetLocation())), SyntaxKind.ClassDeclaration);
     }
 }
