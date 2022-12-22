@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Rules
         public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         protected sealed override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterCodeBlockStartActionInNonGenerated<SyntaxKind>(cbc =>
+            context.RegisterCodeBlockStartAction<SyntaxKind>(cbc =>
                 {
                     if (!IsValidCodeBlockContext(cbc.CodeBlock, cbc.OwningSymbol))
                     {

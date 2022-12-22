@@ -43,9 +43,9 @@ namespace SonarAnalyzer.Extensions
         public static void RegisterSyntaxTreeActionInNonGenerated(this SonarParametrizedAnalysisContext context, Action<SonarSyntaxTreeAnalysisContext> action) =>
             context.RegisterSyntaxTreeActionInNonGenerated(CSharpGeneratedCodeRecognizer.Instance, action);
 
-        public static void RegisterCodeBlockStartActionInNonGenerated<TSyntaxKind>(this SonarAnalysisContext context, Action<SonarCodeBlockStartAnalysisContext<TSyntaxKind>> action)
+        public static void RegisterCodeBlockStartAction<TSyntaxKind>(this SonarAnalysisContext context, Action<SonarCodeBlockStartAnalysisContext<TSyntaxKind>> action)
             where TSyntaxKind : struct =>
-            context.RegisterCodeBlockStartActionInNonGenerated(CSharpGeneratedCodeRecognizer.Instance, action);
+            context.RegisterCodeBlockStartAction(CSharpGeneratedCodeRecognizer.Instance, action);
 
         public static void ReportIssue(this SonarCompilationAnalysisContext context, Diagnostic diagnostic) =>
             context.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, diagnostic);

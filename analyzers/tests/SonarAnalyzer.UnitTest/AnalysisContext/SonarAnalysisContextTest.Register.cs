@@ -97,11 +97,11 @@ public partial class SonarAnalysisContextTest
     [DataTestMethod]
     [DataRow(SnippetFileName, false)]
     [DataRow(AnotherFileName, true)]
-    public void RegisterCodeBlockStartActionInNonGenerated_UnchangedFiles_SonarAnalysisContext(string unchangedFileName, bool expected)
+    public void RegisterCodeBlockStartAction_UnchangedFiles_SonarAnalysisContext(string unchangedFileName, bool expected)
     {
         var context = new DummyAnalysisContext(TestContext, unchangedFileName);
         var sut = new SonarAnalysisContext(context, DummyMainDescriptor);
-        sut.RegisterCodeBlockStartActionInNonGenerated<SyntaxKind>(CSharpGeneratedCodeRecognizer.Instance, context.DelegateAction);
+        sut.RegisterCodeBlockStartAction<SyntaxKind>(CSharpGeneratedCodeRecognizer.Instance, context.DelegateAction);
 
         context.AssertDelegateInvoked(expected);
     }

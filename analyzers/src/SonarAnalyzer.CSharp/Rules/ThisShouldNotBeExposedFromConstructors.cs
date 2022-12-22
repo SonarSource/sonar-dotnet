@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterCodeBlockStartActionInNonGenerated<SyntaxKind>(
+            context.RegisterCodeBlockStartAction<SyntaxKind>(
                 cbc =>
                 {
                     if (!IsInstanceConstructor(cbc.CodeBlock))

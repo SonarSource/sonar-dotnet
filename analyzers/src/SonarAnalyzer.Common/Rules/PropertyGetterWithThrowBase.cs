@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules
     {
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterCodeBlockStartActionInNonGenerated<TLanguageKindEnum>(
+            context.RegisterCodeBlockStartAction<TLanguageKindEnum>(
                 GeneratedCodeRecognizer,
                 cbc =>
                 {
