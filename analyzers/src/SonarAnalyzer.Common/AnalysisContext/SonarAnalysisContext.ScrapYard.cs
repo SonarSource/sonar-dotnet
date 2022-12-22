@@ -19,10 +19,7 @@
  */
 
 using System.IO;
-using System.Runtime.CompilerServices;
-using System.Xml.Linq;
 using Microsoft.CodeAnalysis.Text;
-using static SonarAnalyzer.Helpers.DiagnosticDescriptorFactory;
 
 namespace SonarAnalyzer;
 
@@ -36,37 +33,17 @@ namespace SonarAnalyzer;
 /// </summary>
 public partial class SonarAnalysisContext
 {
-    public delegate bool TryGetValueDelegate<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value);     // FIXME: Remove, new system doesn't need this anymore
+    private delegate bool TryGetValueDelegate<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value);     // FIXME: Remove, new system doesn't need this anymore
 
-    private static readonly SourceTextValueProvider<bool> ShouldAnalyzeGeneratedCS = CreateAnalyzeGeneratedProvider(LanguageNames.CSharp);
-    private static readonly SourceTextValueProvider<bool> ShouldAnalyzeGeneratedVB = CreateAnalyzeGeneratedProvider(LanguageNames.VisualBasic);
-    private static readonly SourceTextValueProvider<ProjectConfigReader> ProjectConfigProvider = new(x => new ProjectConfigReader(x));  // FIXME: Remove, it was migrated to the SonarAnalysisContextBase
+    private static readonly SourceTextValueProvider<ProjectConfigReader> ProjectConfigProvider = new(x => new ProjectConfigReader(x));      // FIXME: Remove, it was migrated to the SonarAnalysisContextBase
 
-    public bool ShouldAnalyzeGenerated(Compilation c, AnalyzerOptions options) =>
-        ShouldAnalyzeGenerated(analysisContext.TryGetValue, c, options);
+    public bool IsScannerRun(AnalyzerOptions options) =>                    // FIXME: Remove, it was migrated to the SonarAnalysisContextBase
+        ProjectConfiguration(analysisContext.TryGetValue, options).IsScannerRun;
 
-    public bool IsScannerRun(AnalyzerOptions options) =>
-        ProjectConfiguration(options).IsScannerRun;
-
-    public static bool IsScannerRun(CompilationAnalysisContext context) =>
-        ProjectConfiguration(context.TryGetValue, context.Options).IsScannerRun;
-
-    public bool IsTestProject(Compilation c, AnalyzerOptions options) =>
+    public bool IsTestProject(Compilation c, AnalyzerOptions options) =>    // FIXME: Remove, it was migrated to the SonarAnalysisContextBase
         IsTestProject(analysisContext.TryGetValue, c, options);
 
-    public static bool IsTestProject(CompilationAnalysisContext analysisContext) =>
-        IsTestProject(analysisContext.TryGetValue, analysisContext.Compilation, analysisContext.Options);
-
-    internal static bool IsRegisteredActionEnabled(IEnumerable<DiagnosticDescriptor> diagnostics, SyntaxTree tree) =>
-        ShouldExecuteRegisteredAction == null || tree == null || ShouldExecuteRegisteredAction(diagnostics, tree);
-
-    /// <summary>
-    /// Reads configuration from SonarProjectConfig.xml file and caches the result for scope of this analysis.
-    /// </summary>
-    internal ProjectConfigReader ProjectConfiguration(AnalyzerOptions options) =>   // FIXME: Remove, it was migrated to the SonarAnalysisContextBase
-        ProjectConfiguration(analysisContext.TryGetValue, options);
-
-    internal static ProjectConfigReader ProjectConfiguration(TryGetValueDelegate<ProjectConfigReader> tryGetValue, AnalyzerOptions options) // FIXME: Remove, it was migrated to the SonarAnalysisContextBase
+    private static ProjectConfigReader ProjectConfiguration(TryGetValueDelegate<ProjectConfigReader> tryGetValue, AnalyzerOptions options) // FIXME: Remove, it was migrated to the SonarAnalysisContextBase
     {
         if (options.SonarProjectConfig() is { } sonarProjectConfigXml)
         {
@@ -82,25 +59,6 @@ public partial class SonarAnalysisContext
         }
     }
 
-    internal static bool IsAnalysisScopeMatching(Compilation compilation, bool isTestProject, bool isScannerRun, IEnumerable<DiagnosticDescriptor> diagnostics)
-    {
-        // We don't know the project type without the compilation so let's run the rule
-        return compilation == null || diagnostics.Any(IsMatching);
-
-        bool IsMatching(DiagnosticDescriptor descriptor)
-        {
-            // MMF-2297: Test Code as 1st Class Citizen is not ready on server side yet.
-            // ScannerRun: Only utility rules and rules with TEST-ONLY scope are executed for test projects for now.
-            // SonarLint & Standalone Nuget: Respect the scope as before.
-            return isTestProject
-                ? ContainsTag(TestSourceScopeTag) && !(isScannerRun && ContainsTag(MainSourceScopeTag) && !ContainsTag(UtilityTag))
-                : ContainsTag(MainSourceScopeTag);
-
-            bool ContainsTag(string tag) =>
-                descriptor.CustomTags.Contains(tag);
-        }
-    }
-
     private static bool IsTestProject(TryGetValueDelegate<ProjectConfigReader> tryGetValue, Compilation compilation, AnalyzerOptions options)   // FIXME: Remove, it was migrated to the SonarAnalysisContextBase
     {
         var projectType = ProjectConfiguration(tryGetValue, options).ProjectType;
@@ -108,28 +66,4 @@ public partial class SonarAnalysisContext
             ? compilation.IsTest()              // SonarLint, NuGet or Scanner <= 5.0
             : projectType == ProjectType.Test;  // Scanner >= 5.1 does authoritative decision that we follow
     }
-
-    private static SourceTextValueProvider<bool> CreateAnalyzeGeneratedProvider(string language) => //FIXME: Remove, it was migrated to the SonarAnalysisContextBase
-        new(x => PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(ParseXmlSettings(x), language));
-
-    private static IEnumerable<XElement> ParseXmlSettings(SourceText sourceText)    // FIXME: Remove, it was migrated to the SonarAnalysisContextBase
-    {
-        try
-        {
-            return XDocument.Parse(sourceText.ToString()).Descendants("Setting");
-        }
-        catch
-        {
-            // cannot log the exception, so ignore it
-            return Enumerable.Empty<XElement>();
-        }
-    }
-
-    private static bool ShouldAnalyzeGenerated(TryGetValueDelegate<bool> tryGetValue, Compilation c, AnalyzerOptions options) =>    // FIXME: Remove, it was migrated to the SonarAnalysisContextBase
-        options.SonarLintXml() is { } sonarLintXml
-        && tryGetValue(sonarLintXml.GetText(), ShouldAnalyzeGeneratedProvider(c.Language), out var shouldAnalyzeGenerated)
-        && shouldAnalyzeGenerated;
-
-    private static SourceTextValueProvider<bool> ShouldAnalyzeGeneratedProvider(string language) => // FIXME: Remove, it was migrated to the SonarAnalysisContextBase
-        language == LanguageNames.CSharp ? ShouldAnalyzeGeneratedCS : ShouldAnalyzeGeneratedVB;
 }

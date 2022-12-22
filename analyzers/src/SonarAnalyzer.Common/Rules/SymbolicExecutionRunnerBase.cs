@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules
 
         // We need to rewrite this https://github.com/SonarSource/sonar-dotnet/issues/4824
         protected static bool IsEnabled(SyntaxNodeAnalysisContext context, bool isTestProject, bool isScannerRun, DiagnosticDescriptor descriptor) =>
-            SonarAnalysisContext.IsAnalysisScopeMatching(context.Compilation, isTestProject, isScannerRun, new[] { descriptor })
+            descriptor.HasMatchingScope(context.Compilation, isTestProject, isScannerRun)
             && descriptor.GetEffectiveSeverity(context.Compilation.Options) != ReportDiagnostic.Suppress;
 
         protected void Analyze<TNode>(SonarAnalysisContext analysisContext, SyntaxNodeAnalysisContext context, Func<TNode, SyntaxNode> getBody) where TNode : SyntaxNode
