@@ -96,8 +96,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         return;
                     }
-                    var isTestProject = context.IsTestProject(c.Compilation, c.Options);
-                    CheckTypeName(c, isTestProject);
+                    CheckTypeName(c);
                 },
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.InterfaceDeclaration,
@@ -115,7 +114,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKindEx.LocalFunctionStatement);
         }
 
-        private static void CheckTypeName(SonarSyntaxNodeAnalysisContext context, bool isTest)
+        private static void CheckTypeName(SonarSyntaxNodeAnalysisContext context)
         {
             var typeDeclaration = (BaseTypeDeclarationSyntax)context.Node;
             var identifier = typeDeclaration.Identifier;
@@ -149,7 +148,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var isNameValid = IsTypeNameValid(identifier.ValueText,
                                               requireInitialI: typeDeclaration is InterfaceDeclarationSyntax,
                                               allowInitialI: typeDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword),
-                                              areUnderscoresAllowed: isTest,
+                                              areUnderscoresAllowed: context.IsTestProject(),
                                               suggestion: out var suggestion);
 
             if (!isNameValid)
