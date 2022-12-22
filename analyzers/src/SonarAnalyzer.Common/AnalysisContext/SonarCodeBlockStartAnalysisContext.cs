@@ -36,5 +36,4 @@ public sealed class SonarCodeBlockStartAnalysisContext<TSyntaxKind> : SonarAnaly
 
     public void RegisterCodeBlockEndAction(Action<SonarCodeBlockAnalysisContext> action) =>
         Context.RegisterCodeBlockEndAction(x => action(new(AnalysisContext, x)));
-
 }
