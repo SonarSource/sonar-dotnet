@@ -51,18 +51,18 @@ internal static class DiagnosticAnalyzerContextHelper   // FIXME: Rename and mov
                                                                                  params TLanguageKindEnum[] syntaxKinds) where TLanguageKindEnum : struct =>
         context.AnalysisContext.RegisterSyntaxNodeActionInNonGenerated(generatedCodeRecognizer, action, syntaxKinds);
 
-    public static void RegisterSyntaxTreeActionInNonGenerated(this SonarAnalysisContext context, GeneratedCodeRecognizer generatedCodeRecognizer, Action<SyntaxTreeAnalysisContext> action) =>
+    public static void RegisterSyntaxTreeActionInNonGenerated(this SonarAnalysisContext context, GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxTreeAnalysisContext> action) =>
         context.RegisterSyntaxTreeAction(c =>
             {
                 if (c.ShouldAnalyze(generatedCodeRecognizer))   // FIXME: Unify
                 {
-                    action(c.Context);
+                    action(c);
                 }
             });
 
     public static void RegisterSyntaxTreeActionInNonGenerated(this ParameterLoadingAnalysisContext context,
                                                               GeneratedCodeRecognizer generatedCodeRecognizer,
-                                                              Action<SyntaxTreeAnalysisContext> action)
+                                                              Action<SonarSyntaxTreeAnalysisContext> action)
     {
         // This is tricky. SyntaxTree actions do not have compilation. So we register them in CompilationStart.
         // ParametrizedAnalyzer postpones CompilationStartActions to enforce that parameters are already set when the postponed action is executed.
@@ -70,7 +70,7 @@ internal static class DiagnosticAnalyzerContextHelper   // FIXME: Rename and mov
         {
             if (c.ShouldAnalyze(generatedCodeRecognizer))
             {
-                action(c.Context);
+                action(c);
             }
         });
         context.RegisterPostponedAction(startContext => wrappedAction(startContext.Context));
@@ -78,12 +78,12 @@ internal static class DiagnosticAnalyzerContextHelper   // FIXME: Rename and mov
 
     public static void RegisterCodeBlockStartActionInNonGenerated<TLanguageKindEnum>(this SonarAnalysisContext context,
                                                                                      GeneratedCodeRecognizer generatedCodeRecognizer,
-                                                                                     Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action) where TLanguageKindEnum : struct =>
+                                                                                     Action<SonarCodeBlockStartAnalysisContext<TLanguageKindEnum>> action) where TLanguageKindEnum : struct =>
         context.RegisterCodeBlockStartAction<TLanguageKindEnum>(c =>
             {
                 if (c.ShouldAnalyze(generatedCodeRecognizer))   // FIXME: Unify
                 {
-                    action(c.Context);
+                    action(c);
                 }
             });
 
