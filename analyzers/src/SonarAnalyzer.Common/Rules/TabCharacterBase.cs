@@ -26,7 +26,7 @@ namespace SonarAnalyzer.Rules
     {
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxTreeActionInNonGenerated(
+            context.RegisterTreeAction(
                 GeneratedCodeRecognizer,
                 c =>
                 {

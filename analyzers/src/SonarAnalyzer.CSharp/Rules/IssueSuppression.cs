@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.Attribute);
 
-            context.RegisterSyntaxTreeActionInNonGenerated(
+            context.RegisterTreeAction(
                 c =>
                 {
                     foreach (var token in c.Tree.GetRoot().DescendantTokens())

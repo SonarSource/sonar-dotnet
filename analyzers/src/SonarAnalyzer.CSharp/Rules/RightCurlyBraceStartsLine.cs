@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxTreeActionInNonGenerated(
+            context.RegisterTreeAction(
                 c =>
                 {
                     var root = c.Tree.GetRoot();

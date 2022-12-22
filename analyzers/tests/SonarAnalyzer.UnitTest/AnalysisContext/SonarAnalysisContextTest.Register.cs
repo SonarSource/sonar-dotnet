@@ -72,11 +72,11 @@ public partial class SonarAnalysisContextTest
     [DataTestMethod]
     [DataRow(SnippetFileName, false)]
     [DataRow(AnotherFileName, true)]
-    public void RegisterSyntaxTreeActionInNonGenerated_UnchangedFiles_SonarAnalysisContext(string unchangedFileName, bool expected)
+    public void RegisterTreeAction_UnchangedFiles_SonarAnalysisContext(string unchangedFileName, bool expected)
     {
         var context = new DummyAnalysisContext(TestContext, unchangedFileName);
         var sut = new SonarAnalysisContext(context, DummyMainDescriptor);
-        sut.RegisterSyntaxTreeActionInNonGenerated(CSharpGeneratedCodeRecognizer.Instance, context.DelegateAction);
+        sut.RegisterTreeAction(CSharpGeneratedCodeRecognizer.Instance, context.DelegateAction);
 
         context.AssertDelegateInvoked(expected);
     }
@@ -84,11 +84,11 @@ public partial class SonarAnalysisContextTest
     [DataTestMethod]
     [DataRow(SnippetFileName, false)]
     [DataRow(AnotherFileName, true)]
-    public void RegisterSyntaxTreeActionInNonGenerated_UnchangedFiles_SonarParametrizedAnalysisContext(string unchangedFileName, bool expected)
+    public void RegisterTreeAction_UnchangedFiles_SonarParametrizedAnalysisContext(string unchangedFileName, bool expected)
     {
         var context = new DummyAnalysisContext(TestContext, unchangedFileName);
         var sut = new SonarParametrizedAnalysisContext(new(context, DummyMainDescriptor));
-        sut.RegisterSyntaxTreeActionInNonGenerated(CSharpGeneratedCodeRecognizer.Instance, context.DelegateAction);
+        sut.RegisterTreeAction(CSharpGeneratedCodeRecognizer.Instance, context.DelegateAction);
         sut.ExecutePostponedActions(new(sut.Context, MockCompilationStartAnalysisContext(context)));  // Manual invocation, because SonarParametrizedAnalysisContext stores actions separately
 
         context.AssertDelegateInvoked(expected);
