@@ -41,34 +41,34 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     foreach (var token in c.Tree.GetRoot().DescendantTokens())
                     {
-                        CheckTrivias(c, token.LeadingTrivia);
-                        CheckTrivias(c, token.TrailingTrivia);
+                        CheckTrivia(c, token.LeadingTrivia);
+                        CheckTrivia(c, token.TrailingTrivia);
                     }
                 });
 
-        private static void CheckTrivias(SyntaxTreeAnalysisContext context, IEnumerable<SyntaxTrivia> trivias)
+        private static void CheckTrivia(SonarSyntaxTreeAnalysisContext context, IEnumerable<SyntaxTrivia> trivia)
         {
             var shouldReport = true;
-            foreach (var trivia in trivias)
+            foreach (var trivium in trivia)
             {
                 // comment start is checked because of  https://github.com/dotnet/roslyn/issues/10003
-                if (trivia.IsKind(SyntaxKind.MultiLineCommentTrivia) && !trivia.ToFullString().TrimStart().StartsWith("/**", StringComparison.Ordinal))
+                if (trivium.IsKind(SyntaxKind.MultiLineCommentTrivia) && !trivium.ToFullString().TrimStart().StartsWith("/**", StringComparison.Ordinal))
                 {
-                    CheckMultilineComment(context, trivia);
+                    CheckMultilineComment(context, trivium);
                     shouldReport = true;
                 }
                 else if (shouldReport
-                    && trivia.IsKind(SyntaxKind.SingleLineCommentTrivia)
-                    && !trivia.ToFullString().TrimStart().StartsWith("///", StringComparison.Ordinal)
-                    && IsCode(trivia.ToString().Substring(CommentMarkLength)))
+                    && trivium.IsKind(SyntaxKind.SingleLineCommentTrivia)
+                    && !trivium.ToFullString().TrimStart().StartsWith("///", StringComparison.Ordinal)
+                    && IsCode(trivium.ToString().Substring(CommentMarkLength)))
                 {
-                    context.ReportIssue(Diagnostic.Create(Rule, trivia.GetLocation()));
+                    context.ReportIssue(Diagnostic.Create(Rule, trivium.GetLocation()));
                     shouldReport = false;
                 }
             }
         }
 
-        private static void CheckMultilineComment(SyntaxTreeAnalysisContext context, SyntaxTrivia trivia)
+        private static void CheckMultilineComment(SonarSyntaxTreeAnalysisContext context, SyntaxTrivia trivia)
         {
             var triviaLines = TriviaContent().Split(MetricsBase.LineTerminators, StringSplitOptions.None);
 

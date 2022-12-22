@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
                 cbc.RegisterSyntaxNodeAction(collector.CollectDeclarations, SyntaxKind.LocalDeclarationStatement);
                 cbc.RegisterSyntaxNodeAction(collector.CollectUsages, SyntaxKind.IdentifierName);
-                cbc.RegisterCodeBlockEndAction(collector.GetReportUnusedVariablesAction(Rule));
+                cbc.RegisterCodeBlockEndAction(c => collector.ReportUnusedVariables(c, Rule));
             });
 
         private class UnusedLocalsCollector : UnusedLocalsCollectorBase<LocalDeclarationStatementSyntax>
