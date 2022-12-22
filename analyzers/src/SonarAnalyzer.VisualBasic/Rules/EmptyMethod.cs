@@ -23,60 +23,49 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     public sealed class EmptyMethod : EmptyMethodBase<SyntaxKind>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = VisualBasicGeneratedCodeRecognizer.Instance;
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        protected override SyntaxKind[] SyntaxKinds { get; } = new []
+        protected override SyntaxKind[] SyntaxKinds { get; } = new[]
         {
             SyntaxKind.FunctionBlock,
             SyntaxKind.SubBlock
         };
 
-        protected override void CheckMethod(SonarSyntaxNodeAnalysisContext context, bool isTestProject)
+        protected override void CheckMethod(SonarSyntaxNodeAnalysisContext context)
         {
             var methodBlock = (MethodBlockSyntax)context.Node;
-
-            if (methodBlock.Statements.Count == 0 &&
-                !ContainsComments(methodBlock.EndSubOrFunctionStatement.GetLeadingTrivia()) &&
-                !ShouldMethodBeExcluded(methodBlock.SubOrFunctionStatement, context.SemanticModel, isTestProject))
+            if (methodBlock.Statements.Count == 0
+                && !ContainsComments(methodBlock.EndSubOrFunctionStatement.GetLeadingTrivia())
+                && !ShouldMethodBeExcluded(context, methodBlock.SubOrFunctionStatement))
             {
-                context.ReportIssue(
-                    Diagnostic.Create(rule, methodBlock.SubOrFunctionStatement.Identifier.GetLocation()));
+                context.ReportIssue(Diagnostic.Create(Rule, methodBlock.SubOrFunctionStatement.Identifier.GetLocation()));
             }
         }
 
-        private static bool ContainsComments(IEnumerable<SyntaxTrivia> trivias)
-            => trivias.Any(s => s.IsKind(SyntaxKind.CommentTrivia));
+        private static bool ContainsComments(IEnumerable<SyntaxTrivia> trivias) =>
+            trivias.Any(s => s.IsKind(SyntaxKind.CommentTrivia));
 
-        private static bool ShouldMethodBeExcluded(MethodStatementSyntax methodStatement, SemanticModel semanticModel, bool isTestProject)
+        private static bool ShouldMethodBeExcluded(SonarSyntaxNodeAnalysisContext context, MethodStatementSyntax methodStatement)
         {
-            if (methodStatement.Modifiers.Any(SyntaxKind.MustOverrideKeyword) ||
-                methodStatement.Modifiers.Any(SyntaxKind.OverridableKeyword))
+            if (methodStatement.Modifiers.Any(SyntaxKind.MustOverrideKeyword)
+                || methodStatement.Modifiers.Any(SyntaxKind.OverridableKeyword)
+                || IsDllImport(context.SemanticModel, methodStatement))
             {
                 return true;
             }
 
-            if (IsDllImport(methodStatement))
+            if (context.SemanticModel.GetDeclaredSymbol(methodStatement) is { IsOverride: true } methodSymbol)
             {
-                return true;
+                return methodSymbol.OverriddenMethod is { IsAbstract: true }
+                    || (methodSymbol.IsOverrides() && context.IsTestProject());
             }
-
-            var methodSymbol = semanticModel.GetDeclaredSymbol(methodStatement);
-            if (methodSymbol != null &&
-                methodSymbol.IsOverride &&
-                methodSymbol.OverriddenMethod != null &&
-                methodSymbol.OverriddenMethod.IsMustOverride())
+            else
             {
-                return true;
+                return false;
             }
-
-            return methodSymbol.IsOverrides() && isTestProject;
         }
 
-        private static bool IsDllImport(MethodStatementSyntax methodStatement) => methodStatement.AttributeLists
-            .SelectMany(list => list.Attributes)
-            .Any(a => a.Name.GetText().ToString().Equals("dllimport", System.StringComparison.OrdinalIgnoreCase));
+        private static bool IsDllImport(SemanticModel model, MethodStatementSyntax methodStatement) =>
+            methodStatement.AttributeLists.SelectMany(x => x.Attributes).Any(x => x.IsKnownType(KnownType.System_Runtime_InteropServices_DllImportAttribute, model));
     }
 }
