@@ -53,7 +53,7 @@ public partial class SonarAnalysisContextTest
     [TestMethod]
     public void ShouldAnalyze_Scanner_UnchangedFiles_ContainsTreeFile()
     {
-        var options = CreateOptions(new[] { OtherFileName + "cs" });
+        var options = CreateOptions(new[] { OtherFileName + ".cs" });
 
         ShouldAnalyze(options).Should().BeFalse("File is known to be Unchanged in Incremental PR analysis");
     }
