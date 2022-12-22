@@ -47,11 +47,39 @@ In general, it is best to run commands from the Visual Studio Developer Command 
         - SonarScanner for .NET folder and to the Scanner CLI ([SonarScanner download](https://github.com/SonarSource/sonar-scanner-msbuild/releases))
 1. Open `analyzers/SonarAnalyzer.sln`
 
-## Running Tests
+## Tests
 
-### Unit Tests
+### Running Unit Tests
 
 You can run the Unit Tests via the Test Explorer of Visual Studio or using `.\scripts\build\dev-build.ps1 -test`
+
+### Writing Unit Tests
+
+Rule tests are written in source files and setup like this:
+
+```cs
+public class MyAnalyzerTest
+{
+    private readonly VerifierBuilder verifier = new VerifierBuilder<MyAnalyzer>();
+
+    [TestMethod]
+    public void MyAnalyzer_CSharp10()
+    {
+        verifier
+            .AddPaths("MyAnalyzer.CSharp10.cs") // searched in analyzers\tests\SonarAnalyzer.UnitTest\TestCases\
+            .AddReferences(MetadataReferenceFacade.SystemData);
+            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .Verify();
+    }
+}
+```
+
+In the test files [special annotations](verifier-syntax.md) are used to describe the non-compliant code.
+
+```cs
+    private void MyMethod() // Noncompliant {{Remove this unused private method}}
+    //           ^^^^^^^^
+```
 
 ### Integration Tests
 
