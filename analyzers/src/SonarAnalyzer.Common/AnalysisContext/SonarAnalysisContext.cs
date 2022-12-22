@@ -32,9 +32,10 @@ public sealed partial /*FIXME: REMOVE partial */ class SonarAnalysisContext : So
     /// control whether or not the action should be executed.
     /// </summary>
     /// <remarks>
-    /// Currently this delegate is set by SonarLint (4.0+) when the project has the NuGet package installed to avoid
+    /// This delegate is set by old SonarLint (from v4.0 to v5.5) when the project has the NuGet package installed to avoid
     /// duplicated analysis and issues. When both the NuGet and the VSIX are available, NuGet will take precedence and VSIX
     /// will be inhibited.
+    /// This delegate was removed from SonarLint v6.0.
     /// </remarks>
     public static Func<IEnumerable<DiagnosticDescriptor>, SyntaxTree, bool> ShouldExecuteRegisteredAction { get; set; }
 
@@ -64,6 +65,12 @@ public sealed partial /*FIXME: REMOVE partial */ class SonarAnalysisContext : So
     public override bool TryGetValue<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value) =>
         analysisContext.TryGetValue(text, valueProvider, out value);
 
+    /// <summary>
+    /// Legacy API for backward compatibility with SonarLint v4.0 - v5.5. See <see cref="ShouldExecuteRegisteredAction"/>.
+    /// </summary>
+    internal static bool LegacyIsRegisteredActionEnabled(IEnumerable<DiagnosticDescriptor> diagnostics, SyntaxTree tree) =>
+        ShouldExecuteRegisteredAction == null || tree == null || ShouldExecuteRegisteredAction(diagnostics, tree);
+
     public void RegisterCodeBlockStartAction<TSyntaxKind>(Action<SonarCodeBlockStartAnalysisContext<TSyntaxKind>> action) where TSyntaxKind : struct =>
         analysisContext.RegisterCodeBlockStartAction<TSyntaxKind>(c => Execute<SonarCodeBlockStartAnalysisContext<TSyntaxKind>, CodeBlockStartAnalysisContext<TSyntaxKind>>(new(this, c), action));
 
@@ -89,10 +96,10 @@ public sealed partial /*FIXME: REMOVE partial */ class SonarAnalysisContext : So
     {
         // For each action registered on context we need to do some pre-processing before actually calling the rule.
         // First, we need to ensure the rule does apply to the current scope (main vs test source).
-        // Second, we call an external delegate (set by SonarLint for VS) to ensure the rule should be run (usually
+        // Second, we call an external delegate (set by legacy SonarLint for VS) to ensure the rule should be run (usually
         // the decision is made on based on whether the project contains the analyzer as NuGet).
-        var isTestProject = IsTestProject(context.Compilation, context.Options);
-        if (IsAnalysisScopeMatching(context.Compilation, isTestProject, IsScannerRun(context.Options), supportedDiagnostics) && IsRegisteredActionEnabled(supportedDiagnostics, context.Tree))
+        if (supportedDiagnostics.Any(x => x.HasMatchingScope(context.Compilation, context.IsTestProject(), context.IsScannerRun()))
+            && LegacyIsRegisteredActionEnabled(supportedDiagnostics, context.Tree))
         {
             action(context);
         }
