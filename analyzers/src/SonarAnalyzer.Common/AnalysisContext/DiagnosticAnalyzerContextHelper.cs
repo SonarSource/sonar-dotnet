@@ -29,25 +29,25 @@ internal static class DiagnosticAnalyzerContextHelper   // FIXME: Rename and mov
 
     public static void RegisterSyntaxNodeActionInNonGenerated<TLanguageKindEnum>(this SonarAnalysisContext context, // FIXME: Move them
                                                                                  GeneratedCodeRecognizer generatedCodeRecognizer,
-                                                                                 Action<SyntaxNodeAnalysisContext> action,
+                                                                                 Action<SonarSyntaxNodeAnalysisContext> action,
                                                                                  params TLanguageKindEnum[] syntaxKinds) where TLanguageKindEnum : struct =>
         context.RegisterSyntaxNodeAction(c =>
             {
                 if (c.ShouldAnalyze(generatedCodeRecognizer))   // FIXME: Unify
                 {
-                    action(c.Context);
+                    action(c);
                 }
             }, syntaxKinds);
 
     public static void RegisterSyntaxNodeActionInNonGenerated<TLanguageKindEnum>(this ParameterLoadingAnalysisContext context,
                                                                                  GeneratedCodeRecognizer generatedCodeRecognizer,
-                                                                                 Action<SyntaxNodeAnalysisContext> action,
+                                                                                 Action<SonarSyntaxNodeAnalysisContext> action,
                                                                                  params TLanguageKindEnum[] syntaxKinds) where TLanguageKindEnum : struct =>
         context.Context.RegisterSyntaxNodeActionInNonGenerated(generatedCodeRecognizer, action, syntaxKinds);
 
     public static void RegisterSyntaxNodeActionInNonGenerated<TLanguageKindEnum>(this SonarCompilationStartAnalysisContext context,
                                                                                  GeneratedCodeRecognizer generatedCodeRecognizer,
-                                                                                 Action<SyntaxNodeAnalysisContext> action,
+                                                                                 Action<SonarSyntaxNodeAnalysisContext> action,
                                                                                  params TLanguageKindEnum[] syntaxKinds) where TLanguageKindEnum : struct =>
         context.AnalysisContext.RegisterSyntaxNodeActionInNonGenerated(generatedCodeRecognizer, action, syntaxKinds);
 

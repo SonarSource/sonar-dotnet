@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.PropertyDeclaration);
         }
 
-        private static void AnalyzeNode<TSyntax>(SyntaxNodeAnalysisContext context,
+        private static void AnalyzeNode<TSyntax>(SonarSyntaxNodeAnalysisContext context,
             Func<SemanticModel, TSyntax, ITypeSymbol> getTypeSymbol, Func<TSyntax, Location> getLocation)
             where TSyntax : SyntaxNode
         {

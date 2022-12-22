@@ -72,10 +72,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKindEx.LocalFunctionStatement);
         }
 
-        private void CheckForDeadStores<T>(SyntaxNodeAnalysisContext context, ISymbol symbol, Func<T, CSharpSyntaxNode> bodyOrExpressionBody) where T : SyntaxNode =>
+        private void CheckForDeadStores<T>(SonarSyntaxNodeAnalysisContext context, ISymbol symbol, Func<T, CSharpSyntaxNode> bodyOrExpressionBody) where T : SyntaxNode =>
             CheckForDeadStores(context, symbol, bodyOrExpressionBody((T)context.Node));
 
-        private void CheckForDeadStores(SyntaxNodeAnalysisContext context, ISymbol symbol, CSharpSyntaxNode node)
+        private void CheckForDeadStores(SonarSyntaxNodeAnalysisContext context, ISymbol symbol, CSharpSyntaxNode node)
         {
             if (symbol != null && node != null)
             {
@@ -84,14 +84,14 @@ namespace SonarAnalyzer.Rules.CSharp
                     // Tuple expressions are not supported. See https://github.com/SonarSource/sonar-dotnet/issues/3094
                     if (!node.DescendantNodes().AnyOfKind(SyntaxKindEx.TupleExpression) && CSharpControlFlowGraph.TryGet(node, context.SemanticModel, out var cfg))
                     {
-                        var lva = new SonarCSharpLiveVariableAnalysis(cfg, symbol, context.SemanticModel, context.CancellationToken);
+                        var lva = new SonarCSharpLiveVariableAnalysis(cfg, symbol, context.SemanticModel, context.Cancel);
                         var checker = new SonarChecker(context, lva, node);
                         checker.Analyze(cfg.Blocks);
                     }
                 }
-                else if (node.CreateCfg(context.SemanticModel, context.CancellationToken) is { } cfg)
+                else if (node.CreateCfg(context.SemanticModel, context.Cancel) is { } cfg)
                 {
-                    var lva = new RoslynLiveVariableAnalysis(cfg, context.CancellationToken);
+                    var lva = new RoslynLiveVariableAnalysis(cfg, context.Cancel);
                     var checker = new RoslynChecker(context, lva);
                     checker.Analyze(cfg.Blocks);
                 }
@@ -101,12 +101,12 @@ namespace SonarAnalyzer.Rules.CSharp
         private abstract class CheckerBase<TCfg, TBlock>
         {
             private readonly LiveVariableAnalysisBase<TCfg, TBlock> lva;
-            private readonly SyntaxNodeAnalysisContext context;
+            private readonly SonarSyntaxNodeAnalysisContext context;
             private readonly ISet<ISymbol> capturedVariables;
 
             protected abstract State CreateState(TBlock block);
 
-            protected CheckerBase(SyntaxNodeAnalysisContext context, LiveVariableAnalysisBase<TCfg, TBlock> lva)
+            protected CheckerBase(SonarSyntaxNodeAnalysisContext context, LiveVariableAnalysisBase<TCfg, TBlock> lva)
             {
                 this.context = context;
                 this.lva = lva;

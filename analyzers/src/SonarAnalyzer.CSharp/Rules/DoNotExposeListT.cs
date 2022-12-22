@@ -49,14 +49,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (baseMethodDeclaration is MethodDeclarationSyntax methodDeclaration)
                     {
-                        ReportIfListT(methodDeclaration.ReturnType, c, methodType);
+                        ReportIfListT(c, methodDeclaration.ReturnType, methodType);
                     }
 
                     baseMethodDeclaration
                         .ParameterList?
                         .Parameters
                         .ToList()
-                        .ForEach(p => ReportIfListT(p.Type, c, methodType));
+                        .ForEach(p => ReportIfListT(c, p.Type, methodType));
                 },
                 SyntaxKind.MethodDeclaration,
                 SyntaxKind.ConstructorDeclaration);
@@ -72,7 +72,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         && !propertySymbol.IsOverride
                         && !HasXmlElementAttribute(propertySymbol))
                     {
-                        ReportIfListT(propertyDeclaration.Type, c, "property");
+                        ReportIfListT(c, propertyDeclaration.Type, "property");
                     }
                 },
                 SyntaxKind.PropertyDeclaration);
@@ -94,13 +94,13 @@ namespace SonarAnalyzer.Rules.CSharp
                         && fieldSymbol.IsPubliclyAccessible()
                         && !HasXmlElementAttribute(fieldSymbol))
                     {
-                        ReportIfListT(fieldDeclaration.Declaration.Type, c, "field");
+                        ReportIfListT(c, fieldDeclaration.Declaration.Type, "field");
                     }
                 },
                 SyntaxKind.FieldDeclaration);
         }
 
-        private static void ReportIfListT(TypeSyntax typeSyntax, SyntaxNodeAnalysisContext context, string memberType)
+        private static void ReportIfListT(SonarSyntaxNodeAnalysisContext context, TypeSyntax typeSyntax, string memberType)
         {
             if (typeSyntax != null && typeSyntax.IsKnownType(KnownType.System_Collections_Generic_List_T, context.SemanticModel))
             {

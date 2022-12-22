@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
                     var currentMemberExpression = simpleMemberAccess.Expression.RemoveParentheses();
                     while (simpleMemberAccess != null &&
-                        !CheckExpression(currentMemberExpression, c))
+                        !CheckExpression(c, currentMemberExpression))
                     {
                         simpleMemberAccess = currentMemberExpression as MemberAccessExpressionSyntax;
                         currentMemberExpression = simpleMemberAccess?.Expression.RemoveParentheses();
@@ -74,9 +74,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 SyntaxKind.SimpleMemberAccessExpression);
         }
 
-        private bool CheckExpression(ExpressionSyntax expression, SyntaxNodeAnalysisContext context)
+        private bool CheckExpression(SonarSyntaxNodeAnalysisContext context, ExpressionSyntax expression)
         {
-            if (!IsCandidateForExtraction(expression, context))
+            if (!IsCandidateForExtraction(context, expression))
             {
                 return false;
             }
@@ -115,7 +115,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             return false;
         }
 
-        private static bool IsCandidateForExtraction(ExpressionSyntax currentMemberExpression, SyntaxNodeAnalysisContext context)
+        private static bool IsCandidateForExtraction(SonarSyntaxNodeAnalysisContext context, ExpressionSyntax currentMemberExpression)
         {
             return currentMemberExpression != null &&
                 !currentMemberExpression.IsKind(SyntaxKind.IdentifierName) &&

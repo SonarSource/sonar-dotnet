@@ -96,21 +96,21 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override ControlFlowGraph CreateCfg(SemanticModel model, SyntaxNode node, CancellationToken cancel) =>
             node.CreateCfg(model, cancel);
 
-        protected override void AnalyzeSonar(SyntaxNodeAnalysisContext context, bool isTestProject, bool isScannerRun, SyntaxNode body, ISymbol symbol)
+        protected override void AnalyzeSonar(SonarSyntaxNodeAnalysisContext context, SyntaxNode body, ISymbol symbol)
         {
             var enabledAnalyzers = AllRules.Select(x => x.Value.CreateSonarFallback(Configuration))
                                            .WhereNotNull()
                                            .Cast<ISymbolicExecutionAnalyzer>() // ISymbolicExecutionAnalyzer should be passed as TSonarFallback to CreateFactory. Have you passed a Roslyn rule instead?
                                            .Union(SonarRules)
-                                           .Where(x => x.SupportedDiagnostics.Any(descriptor => IsEnabled(context, isTestProject, isScannerRun, descriptor)))
+                                           .Where(x => x.SupportedDiagnostics.Any(descriptor => IsEnabled(context, descriptor)))
                                            .ToList();
             if (enabledAnalyzers.Any() && CSharpControlFlowGraph.TryGet((CSharpSyntaxNode)body, context.SemanticModel, out var cfg))
             {
-                var lva = new SonarCSharpLiveVariableAnalysis(cfg, symbol, context.SemanticModel, context.CancellationToken);
+                var lva = new SonarCSharpLiveVariableAnalysis(cfg, symbol, context.SemanticModel, context.Cancel);
                 try
                 {
                     var explodedGraph = new SonarExplodedGraph(cfg, symbol, context.SemanticModel, lva);
-                    var analyzerContexts = enabledAnalyzers.Select(x => x.CreateContext(explodedGraph, context)).ToList();
+                    var analyzerContexts = enabledAnalyzers.Select(x => x.CreateContext(context, explodedGraph)).ToList();
                     try
                     {
                         explodedGraph.ExplorationEnded += ExplorationEndedHandlerSonar;
@@ -128,10 +128,10 @@ namespace SonarAnalyzer.Rules.CSharp
                     // - When the tree is successfully visited and ExplorationEnded event is raised.
                     // - When the tree visit ends (explodedGraph.Walk() returns). This will happen even if the maximum number of steps was
                     // reached or if an exception was thrown during analysis.
-                    ReportDiagnosticsSonar(analyzerContexts, context, true);
+                    ReportDiagnosticsSonar(context, analyzerContexts, true);
 
                     void ExplorationEndedHandlerSonar(object sender, EventArgs args) =>
-                        ReportDiagnosticsSonar(analyzerContexts, context, false);
+                        ReportDiagnosticsSonar(context, analyzerContexts, false);
                 }
                 catch (Exception ex)
                 {
@@ -140,7 +140,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void ReportDiagnosticsSonar(IEnumerable<ISymbolicExecutionAnalysisContext> analyzerContexts, SyntaxNodeAnalysisContext context, bool supportsPartialResults)
+        private static void ReportDiagnosticsSonar(SonarSyntaxNodeAnalysisContext context, IEnumerable<ISymbolicExecutionAnalysisContext> analyzerContexts, bool supportsPartialResults)
         {
             foreach (var analyzerContext in analyzerContexts.Where(x => x.SupportsPartialResults == supportsPartialResults))
             {

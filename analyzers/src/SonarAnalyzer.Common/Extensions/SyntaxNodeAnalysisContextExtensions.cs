@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.Extensions
 {
-    internal static class SyntaxNodeAnalysisContextExtensions
+    internal static class SyntaxNodeAnalysisContextExtensions// FIXME: Doesn't need to be extension anymore
     {
         /// <summary>
         /// Roslyn invokes the analyzer twice for positional records. The first invocation is for the class declaration and the second for the ctor represented by the positional parameter list.
@@ -33,13 +33,13 @@ namespace SonarAnalyzer.Extensions
         /// record R(int i);
         /// </example>
         /// <seealso href="https://github.com/dotnet/roslyn/issues/53136"/>
-        internal static bool IsRedundantPositionalRecordContext(this SyntaxNodeAnalysisContext context) =>
+        internal static bool IsRedundantPositionalRecordContext(this SonarSyntaxNodeAnalysisContext context) =>
             context.ContainingSymbol.Kind == SymbolKind.Method;
 
-        public static bool IsAzureFunction(this SyntaxNodeAnalysisContext context) =>
+        public static bool IsAzureFunction(this SonarSyntaxNodeAnalysisContext context) =>
             context.AzureFunctionMethod() is not null;
 
-        public static IMethodSymbol AzureFunctionMethod(this SyntaxNodeAnalysisContext context) =>
+        public static IMethodSymbol AzureFunctionMethod(this SonarSyntaxNodeAnalysisContext context) =>
             context.ContainingSymbol is IMethodSymbol method && method.HasAttribute(KnownType.Microsoft_Azure_WebJobs_FunctionNameAttribute)
                 ? method
                 : null;

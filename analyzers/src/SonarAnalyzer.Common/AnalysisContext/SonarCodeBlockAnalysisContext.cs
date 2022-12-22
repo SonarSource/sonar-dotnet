@@ -25,6 +25,7 @@ public sealed class SonarCodeBlockAnalysisContext : SonarAnalysisContextBase<Cod
     public override SyntaxTree Tree => Context.GetSyntaxTree();
     public override Compilation Compilation => Context.SemanticModel.Compilation;
     public override AnalyzerOptions Options => Context.Options;
+    public override CancellationToken Cancel => Context.CancellationToken;
     public SyntaxNode CodeBlock => Context.CodeBlock;
     public ISymbol OwningSymbol => Context.OwningSymbol;
     public SemanticModel SemanticModel => Context.SemanticModel;

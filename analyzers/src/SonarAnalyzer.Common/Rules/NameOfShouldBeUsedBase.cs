@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules
 
         protected abstract IEnumerable<string> GetParameterNames(TMethodSyntax method); // Handle parameters with the same name (in the IDE it can happen)
         protected abstract bool IsStringLiteral(SyntaxToken t);
-        protected abstract bool LeastLanguageVersionMatches(SyntaxNodeAnalysisContext context);
+        protected abstract bool LeastLanguageVersionMatches(SonarSyntaxNodeAnalysisContext context);
         protected abstract bool IsArgumentExceptionCallingNameOf(SyntaxNode node, IEnumerable<string> arguments);
         protected abstract TMethodSyntax MethodSyntax(SyntaxNode node);
 
@@ -63,7 +63,7 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        private void ReportIssues(SyntaxNodeAnalysisContext context)
+        private void ReportIssues(SonarSyntaxNodeAnalysisContext context)
         {
             if (!LeastLanguageVersionMatches(context))
             {

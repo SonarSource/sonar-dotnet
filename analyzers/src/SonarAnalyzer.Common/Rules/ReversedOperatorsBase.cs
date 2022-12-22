@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules
         private static bool TiedTogether(FileLinePositionSpan left, FileLinePositionSpan right) =>
             left.EndLinePosition == right.StartLinePosition;
 
-        protected Action<SyntaxNodeAnalysisContext> GetAnalysisAction(DiagnosticDescriptor rule) =>
+        protected Action<SonarSyntaxNodeAnalysisContext> GetAnalysisAction(DiagnosticDescriptor rule) =>
             c =>
             {
                 var unaryExpression = (TUnaryExpressionSyntax)c.Node;

@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules
                 Language.SyntaxKind.RightShiftAssignmentStatement);
         }
 
-        protected void CheckExpressionWithTwoParts(SyntaxNodeAnalysisContext context, Func<SyntaxNode, SyntaxNode> getLeft, Func<SyntaxNode, SyntaxNode> getRight)
+        protected void CheckExpressionWithTwoParts(SonarSyntaxNodeAnalysisContext context, Func<SyntaxNode, SyntaxNode> getLeft, Func<SyntaxNode, SyntaxNode> getRight)
         {
             var expression = context.Node;
             var left = getLeft(expression);
@@ -57,9 +57,7 @@ namespace SonarAnalyzer.Rules
                 && ShouldRaise(context.SemanticModel, left, right))
             {
                 var typeInMessage = GetTypeNameForMessage(right, typeOfRight, context.SemanticModel);
-
-                context.ReportIssue(
-                    Diagnostic.Create(Rule, right.GetLocation(), typeInMessage));
+                context.ReportIssue(Diagnostic.Create(Rule, right.GetLocation(), typeInMessage));
             }
         }
 

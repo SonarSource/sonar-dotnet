@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.InvocationExpression);
         }
 
-        private static void ReportOnViolation(SyntaxNodeAnalysisContext context)
+        private static void ReportOnViolation(SonarSyntaxNodeAnalysisContext context)
         {
             var invocation = (InvocationExpressionSyntax)context.Node;
 

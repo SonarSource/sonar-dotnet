@@ -28,7 +28,7 @@ namespace SonarAnalyzer.Rules
     {
         protected abstract ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules { get; }
         protected abstract ControlFlowGraph CreateCfg(SemanticModel model, SyntaxNode node, CancellationToken cancel);
-        protected abstract void AnalyzeSonar(SyntaxNodeAnalysisContext context, bool isTestProject, bool isScannerRun, SyntaxNode body, ISymbol symbol);
+        protected abstract void AnalyzeSonar(SonarSyntaxNodeAnalysisContext context, SyntaxNode body, ISymbol symbol);
 
         protected IAnalyzerConfiguration Configuration { get; }
 
@@ -47,11 +47,11 @@ namespace SonarAnalyzer.Rules
             new RuleFactory<TRuleCheck, TSonarFallback>();
 
         // We need to rewrite this https://github.com/SonarSource/sonar-dotnet/issues/4824
-        protected static bool IsEnabled(SyntaxNodeAnalysisContext context, bool isTestProject, bool isScannerRun, DiagnosticDescriptor descriptor) =>
-            descriptor.HasMatchingScope(context.Compilation, isTestProject, isScannerRun)
+        protected static bool IsEnabled(SonarSyntaxNodeAnalysisContext context, DiagnosticDescriptor descriptor) =>
+            descriptor.HasMatchingScope(context.Compilation, context.IsTestProject(), context.IsScannerRun())
             && descriptor.GetEffectiveSeverity(context.Compilation.Options) != ReportDiagnostic.Suppress;
 
-        protected void Analyze<TNode>(SonarAnalysisContext analysisContext, SyntaxNodeAnalysisContext context, Func<TNode, SyntaxNode> getBody) where TNode : SyntaxNode
+        protected void Analyze<TNode>(SonarAnalysisContext analysisContext, SonarSyntaxNodeAnalysisContext context, Func<TNode, SyntaxNode> getBody) where TNode : SyntaxNode
         {
             if (getBody((TNode)context.Node) is { } body && context.SemanticModel.GetDeclaredSymbol(context.Node) is { } symbol)
             {
@@ -59,35 +59,33 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        protected void Analyze(SonarAnalysisContext sonarContext, SyntaxNodeAnalysisContext nodeContext, SyntaxNode body, ISymbol symbol)
+        protected void Analyze(SonarAnalysisContext analysisContext, SonarSyntaxNodeAnalysisContext nodeContext, SyntaxNode body, ISymbol symbol)
         {
             if (body is { ContainsDiagnostics: false })
             {
-                var isTestProject = sonarContext.IsTestProject(nodeContext.Compilation, nodeContext.Options);
-                var isScannerRun = sonarContext.IsScannerRun(nodeContext.Options);
-                AnalyzeSonar(nodeContext, isTestProject, isScannerRun, body, symbol);
+                AnalyzeSonar(nodeContext, body, symbol);
                 if (ControlFlowGraph.IsAvailable)
                 {
-                    AnalyzeRoslyn(sonarContext, nodeContext, isTestProject, isScannerRun, body, symbol);
+                    AnalyzeRoslyn(analysisContext, nodeContext, body, symbol);
                 }
             }
         }
 
-        private void AnalyzeRoslyn(SonarAnalysisContext sonarContext, SyntaxNodeAnalysisContext nodeContext, bool isTestProject, bool isScannerRun, SyntaxNode body, ISymbol symbol)
+        private void AnalyzeRoslyn(SonarAnalysisContext analysisContext, SonarSyntaxNodeAnalysisContext nodeContext, SyntaxNode body, ISymbol symbol)
         {
             var checks = AllRules
-                .Where(x => IsEnabled(nodeContext, isTestProject, isScannerRun, x.Key))
+                .Where(x => IsEnabled(nodeContext, x.Key))
                 .GroupBy(x => x.Value.Type)                             // Multiple DiagnosticDescriptors (S2583, S2589) can share the same check type
-                .Select(x => x.First().Value.CreateInstance(Configuration, sonarContext, nodeContext))   // We need just one instance in that case
+                .Select(x => x.First().Value.CreateInstance(Configuration, analysisContext, nodeContext))   // We need just one instance in that case
                 .Where(x => x?.ShouldExecute() is true)
                 .ToArray();
             if (checks.Any())
             {
                 try
                 {
-                    if (CreateCfg(nodeContext.SemanticModel, body, nodeContext.CancellationToken) is { } cfg)
+                    if (CreateCfg(nodeContext.SemanticModel, body, nodeContext.Cancel) is { } cfg)
                     {
-                        var engine = new RoslynSymbolicExecution(cfg, checks, nodeContext.CancellationToken);
+                        var engine = new RoslynSymbolicExecution(cfg, checks, nodeContext.Cancel);
                         engine.Execute();
                     }
                 }
@@ -112,7 +110,7 @@ namespace SonarAnalyzer.Rules
                 this.createSonarFallbackInstance = createSonarFallbackInstance;
             }
 
-            public SymbolicRuleCheck CreateInstance(IAnalyzerConfiguration configuration, SonarAnalysisContext sonarContext, SyntaxNodeAnalysisContext nodeContext)
+            public SymbolicRuleCheck CreateInstance(IAnalyzerConfiguration configuration, SonarAnalysisContext analysisContext, SonarSyntaxNodeAnalysisContext nodeContext)
             {
                 if (configuration.ForceSonarCfg && createSonarFallbackInstance is not null)
                 {
@@ -120,7 +118,7 @@ namespace SonarAnalyzer.Rules
                 }
 
                 var ret = createInstance();
-                ret.Init(sonarContext, nodeContext);
+                ret.Init(analysisContext, nodeContext);
                 return ret;
             }
 

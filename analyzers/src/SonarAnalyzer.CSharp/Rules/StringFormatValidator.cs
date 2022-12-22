@@ -80,7 +80,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(CheckForFormatStringIssues, SyntaxKind.InvocationExpression);
 
-        private static void CheckForFormatStringIssues(SyntaxNodeAnalysisContext analysisContext)
+        private static void CheckForFormatStringIssues(SonarSyntaxNodeAnalysisContext analysisContext)
         {
             var invocation = (InvocationExpressionSyntax)analysisContext.Node;
 

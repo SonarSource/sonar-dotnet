@@ -38,7 +38,7 @@ public abstract class MultipleVariableDeclarationBase<TSyntaxKind> : SonarDiagno
             Language.GeneratedCodeRecognizer,
             c =>
             {
-                CheckAndReportVariables(Language.Syntax.LocalDeclarationIdentifiers(c.Node), c, Rule);
+                CheckAndReportVariables(c, Rule, Language.Syntax.LocalDeclarationIdentifiers(c.Node));
             },
             Language.SyntaxKind.LocalDeclaration);
 
@@ -46,12 +46,12 @@ public abstract class MultipleVariableDeclarationBase<TSyntaxKind> : SonarDiagno
             Language.GeneratedCodeRecognizer,
             c =>
             {
-                CheckAndReportVariables(Language.Syntax.FieldDeclarationIdentifiers(c.Node), c, Rule);
+                CheckAndReportVariables(c, Rule, Language.Syntax.FieldDeclarationIdentifiers(c.Node));
             },
             Language.SyntaxKind.FieldDeclaration);
     }
 
-    private static void CheckAndReportVariables(ICollection<SyntaxToken> variables, SyntaxNodeAnalysisContext context, DiagnosticDescriptor rule)
+    private static void CheckAndReportVariables(SonarSyntaxNodeAnalysisContext context, DiagnosticDescriptor rule, ICollection<SyntaxToken> variables)
     {
         if (variables.Count <= 1)
         {

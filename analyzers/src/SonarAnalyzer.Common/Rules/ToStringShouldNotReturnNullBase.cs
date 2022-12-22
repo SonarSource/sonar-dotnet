@@ -41,7 +41,7 @@ public abstract class ToStringShouldNotReturnNullBase<TSyntaxKind> : SonarDiagno
             c => ToStringReturnsNull(c, c.Node),
             Language.SyntaxKind.ReturnStatement);
 
-    protected void ToStringReturnsNull(SyntaxNodeAnalysisContext context, SyntaxNode node)
+    protected void ToStringReturnsNull(SonarSyntaxNodeAnalysisContext context, SyntaxNode node)
     {
         if (node is not null && ReturnsNull(Language.Syntax.NodeExpression(node)) && WithinToString(node))
         {

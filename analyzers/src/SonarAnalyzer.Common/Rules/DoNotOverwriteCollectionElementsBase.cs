@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules
 
         protected DoNotOverwriteCollectionElementsBase() : base(DiagnosticId) { }
 
-        protected void AnalysisAction(SyntaxNodeAnalysisContext context)
+        protected void AnalysisAction(SonarSyntaxNodeAnalysisContext context)
         {
             var statement = (TStatementSyntax)context.Node;
             var collectionIdentifier = GetCollectionIdentifier(statement);

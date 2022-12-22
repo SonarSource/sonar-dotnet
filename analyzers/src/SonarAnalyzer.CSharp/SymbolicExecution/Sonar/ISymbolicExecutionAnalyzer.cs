@@ -24,6 +24,6 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar
     {
         IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; }
 
-        ISymbolicExecutionAnalysisContext CreateContext(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context);
+        ISymbolicExecutionAnalysisContext CreateContext(SonarSyntaxNodeAnalysisContext context, SonarExplodedGraph explodedGraph);
     }
 }
