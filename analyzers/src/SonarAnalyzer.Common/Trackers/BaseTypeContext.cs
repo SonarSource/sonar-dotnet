@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Helpers
         /// </summary>
         public IEnumerable<SyntaxNode> AllBaseTypeNodes { get; }
 
-        public BaseTypeContext(SyntaxNodeAnalysisContext context, IEnumerable<SyntaxNode> allBaseTypeNodes) : base(context) =>
+        public BaseTypeContext(SonarSyntaxNodeAnalysisContext context, IEnumerable<SyntaxNode> allBaseTypeNodes) : base(context) =>
             AllBaseTypeNodes = allBaseTypeNodes ?? Enumerable.Empty<SyntaxNode>();
     }
 }

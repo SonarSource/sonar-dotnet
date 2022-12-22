@@ -79,7 +79,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.UncheckedStatement);
         }
 
-        private static void CheckForUnnecessaryUnsafeBlocks(SyntaxNodeAnalysisContext context)
+        private static void CheckForUnnecessaryUnsafeBlocks(SonarSyntaxNodeAnalysisContext context)
         {
             var typeDeclaration = (TypeDeclarationSyntax)context.Node;
             if (typeDeclaration.Parent is TypeDeclarationSyntax || context.IsRedundantPositionalRecordContext())
@@ -91,7 +91,7 @@ namespace SonarAnalyzer.Rules.CSharp
             CheckForUnnecessaryUnsafeBlocksBelow(context, typeDeclaration);
         }
 
-        private static void CheckForUnnecessaryUnsafeBlocksBelow(SyntaxNodeAnalysisContext context, TypeDeclarationSyntax typeDeclaration)
+        private static void CheckForUnnecessaryUnsafeBlocksBelow(SonarSyntaxNodeAnalysisContext context, TypeDeclarationSyntax typeDeclaration)
         {
             var unsafeKeyword = FindUnsafeKeyword(typeDeclaration);
             if (unsafeKeyword == default)
@@ -111,7 +111,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckForUnnecessaryUnsafeBlocksInMember(SyntaxNodeAnalysisContext context, MemberDeclarationSyntax member)
+        private static void CheckForUnnecessaryUnsafeBlocksInMember(SonarSyntaxNodeAnalysisContext context, MemberDeclarationSyntax member)
         {
             var unsafeKeyword = FindUnsafeKeyword(member);
             if (unsafeKeyword != default)
@@ -175,7 +175,7 @@ namespace SonarAnalyzer.Rules.CSharp
             && (type.TypeKind == TypeKind.Pointer
                 || (type.TypeKind == TypeKind.Array && IsUnsafe(((IArrayTypeSymbol)type).ElementType)));
 
-        private static void MarkAllUnsafeBlockInside(SyntaxNodeAnalysisContext context, SyntaxNode container)
+        private static void MarkAllUnsafeBlockInside(SonarSyntaxNodeAnalysisContext context, SyntaxNode container)
         {
             foreach (var @unsafe in container.DescendantNodes().SelectMany(x => x.ChildTokens()).Where(x => x.IsKind(SyntaxKind.UnsafeKeyword)))
             {
@@ -183,13 +183,13 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void ReportOnUnsafeBlock(SyntaxNodeAnalysisContext context, Location issueLocation) =>
+        private static void ReportOnUnsafeBlock(SonarSyntaxNodeAnalysisContext context, Location issueLocation) =>
             context.ReportIssue(Diagnostic.Create(Rule, issueLocation, "unsafe", "redundant"));
 
         private static SyntaxToken FindUnsafeKeyword(MemberDeclarationSyntax memberDeclaration) =>
             Modifiers(memberDeclaration).FirstOrDefault(x => x.IsKind(SyntaxKind.UnsafeKeyword));
 
-        private static void CheckTypeDeclarationForRedundantPartial(SyntaxNodeAnalysisContext context)
+        private static void CheckTypeDeclarationForRedundantPartial(SonarSyntaxNodeAnalysisContext context)
         {
             var typeDeclaration = (TypeDeclarationSyntax)context.Node;
             if (!context.IsRedundantPositionalRecordContext()
@@ -212,7 +212,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 _ => default
             };
 
-        private static void CheckSealedMemberInSealedClass(SyntaxNodeAnalysisContext context)
+        private static void CheckSealedMemberInSealedClass(SonarSyntaxNodeAnalysisContext context)
         {
             if (Modifiers((MemberDeclarationSyntax)context.Node) is var modifiers
                 && modifiers.Any(SyntaxKind.SealedKeyword)
@@ -250,11 +250,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.PreIncrementExpression
             };
 
-            private readonly SyntaxNodeAnalysisContext context;
+            private readonly SonarSyntaxNodeAnalysisContext context;
             private bool isCurrentContextChecked;
             private bool currentContextHasIntegralOperation;
 
-            public CheckedWalker(SyntaxNodeAnalysisContext context)
+            public CheckedWalker(SonarSyntaxNodeAnalysisContext context)
             {
                 this.context = context;
                 isCurrentContextChecked = context.Node switch

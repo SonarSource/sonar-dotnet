@@ -25,6 +25,7 @@ public sealed class SonarSyntaxNodeAnalysisContext : SonarAnalysisContextBase<Sy
     public override SyntaxTree Tree => Context.GetSyntaxTree();
     public override Compilation Compilation => Context.Compilation;
     public override AnalyzerOptions Options => Context.Options;
+    public override CancellationToken Cancel => Context.CancellationToken;
     public SyntaxNode Node => Context.Node;
     public SemanticModel SemanticModel => Context.SemanticModel;
     public ISymbol ContainingSymbol => Context.ContainingSymbol;

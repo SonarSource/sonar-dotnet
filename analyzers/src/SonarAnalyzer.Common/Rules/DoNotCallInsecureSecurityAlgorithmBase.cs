@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, CheckInvocation, Language.SyntaxKind.InvocationExpression);
         }
 
-        private void CheckInvocation(SyntaxNodeAnalysisContext context)
+        private void CheckInvocation(SonarSyntaxNodeAnalysisContext context)
         {
             var invocation = (TInvocationExpressionSyntax)context.Node;
 
@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        private void CheckObjectCreation(SyntaxNodeAnalysisContext context)
+        private void CheckObjectCreation(SonarSyntaxNodeAnalysisContext context)
         {
             var objectCreation = context.Node;
 
@@ -102,7 +102,7 @@ namespace SonarAnalyzer.Rules
             return FactoryParameterNames.Any(alg => alg.Equals(StringLiteralValue(Arguments(argumentList).First()), StringComparison.Ordinal));
         }
 
-        private void ReportAllDiagnostics(SyntaxNodeAnalysisContext context, Location location)
+        private void ReportAllDiagnostics(SonarSyntaxNodeAnalysisContext context, Location location)
         {
             foreach (var supportedDiagnostic in SupportedDiagnostics)
             {

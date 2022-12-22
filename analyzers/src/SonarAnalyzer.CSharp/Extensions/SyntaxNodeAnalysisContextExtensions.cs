@@ -20,13 +20,13 @@
 
 namespace SonarAnalyzer.Extensions;
 
-public static class SyntaxNodeAnalysisContextExtensions
+public static class SyntaxNodeAnalysisContextExtensions // FIXME: Doesn't need to be extension anymore
 {
-    public static bool IsTopLevelMain(this SyntaxNodeAnalysisContext context) =>
+    public static bool IsTopLevelMain(this SonarSyntaxNodeAnalysisContext context) =>
         context.Node is CompilationUnitSyntax compilationUnitSyntax
         && compilationUnitSyntax.IsTopLevelMain()
         && context.ContainingSymbol.IsGlobalNamespace(); // Needed to avoid the duplicate calls from Roslyn 4.0.0
 
-    public static bool IsInExpressionTree(this SyntaxNodeAnalysisContext context) =>
+    public static bool IsInExpressionTree(this SonarSyntaxNodeAnalysisContext context) =>
         context.Node.IsInExpressionTree(context.SemanticModel);
 }

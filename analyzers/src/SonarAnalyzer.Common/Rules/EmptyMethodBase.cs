@@ -35,13 +35,13 @@ namespace SonarAnalyzer.Rules
                 {
                     if (c.ShouldAnalyze(GeneratedCodeRecognizer))
                     {
-                        CheckMethod(c.Context, c.IsTestProject());
+                        CheckMethod(c, c.IsTestProject());
                     }
                 },
                 SyntaxKinds.ToArray());
 
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
         protected abstract TLanguageKindEnum[] SyntaxKinds { get; }
-        protected abstract void CheckMethod(SyntaxNodeAnalysisContext context, bool isTestProject);
+        protected abstract void CheckMethod(SonarSyntaxNodeAnalysisContext context, bool isTestProject);
     }
 }

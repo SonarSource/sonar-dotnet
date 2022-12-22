@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Helpers.Trackers
             };
         }
 
-        protected override BaseTypeContext CreateContext(SyntaxNodeAnalysisContext context) =>
+        protected override BaseTypeContext CreateContext(SonarSyntaxNodeAnalysisContext context) =>
             GetBaseTypeNodes(context.Node) is { } baseTypeList
             && baseTypeList.Any()
             ? new BaseTypeContext(context, baseTypeList)

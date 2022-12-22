@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules
         protected SillyBitwiseOperationBase() =>
             Rule = Language.CreateDescriptor(DiagnosticId, MessageFormat, fadeOutCode: true);
 
-        protected void CheckBinary(SyntaxNodeAnalysisContext context, SyntaxNode left, SyntaxToken @operator, SyntaxNode right, int constValueToLookFor)
+        protected void CheckBinary(SonarSyntaxNodeAnalysisContext context, SyntaxNode left, SyntaxToken @operator, SyntaxNode right, int constValueToLookFor)
         {
             Location location;
             bool isReportingOnLeftKey;

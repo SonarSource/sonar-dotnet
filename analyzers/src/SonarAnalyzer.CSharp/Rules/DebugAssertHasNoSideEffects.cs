@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var invokedMethodSyntax = c.Node as InvocationExpressionSyntax;
 
-                    if (IsDebugAssert(invokedMethodSyntax, c)
+                    if (IsDebugAssert(c, invokedMethodSyntax)
                         && ContainsCallsWithSideEffects(invokedMethodSyntax))
                     {
                         c.ReportIssue(Diagnostic.Create(rule, invokedMethodSyntax.ArgumentList.GetLocation()));
@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return memberBinding?.Name?.Identifier.ValueText;
         }
 
-        private static bool IsDebugAssert(InvocationExpressionSyntax invocation, SyntaxNodeAnalysisContext context) =>
+        private static bool IsDebugAssert(SonarSyntaxNodeAnalysisContext context, InvocationExpressionSyntax invocation) =>
             invocation.Expression is MemberAccessExpressionSyntax memberAccess
             && memberAccess.Name.Identifier.ValueText == nameof(System.Diagnostics.Debug.Assert)
             && context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol symbol

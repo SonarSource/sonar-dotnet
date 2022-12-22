@@ -33,7 +33,8 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
 
         public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(S3900);
 
-        public ISymbolicExecutionAnalysisContext CreateContext(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) => new AnalysisContext(explodedGraph, context);
+        public ISymbolicExecutionAnalysisContext CreateContext(SonarSyntaxNodeAnalysisContext context, SonarExplodedGraph explodedGraph) =>
+            new AnalysisContext(context, explodedGraph);
 
         private static void CollectMemberAccesses(MemberAccessingEventArgs args, ISet<IdentifierNameSyntax> identifiers, SemanticModel semanticModel)
         {
@@ -50,18 +51,18 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
         {
             public bool SupportsPartialResults => true;
 
+            private readonly SonarSyntaxNodeAnalysisContext context;
             private readonly HashSet<IdentifierNameSyntax> identifiers = new();
             private readonly NullPointerDereference.NullPointerCheck nullPointerCheck;
-            private readonly SyntaxNodeAnalysisContext syntaxNodeAnalysisContext;
 
-            public AnalysisContext(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
+            public AnalysisContext(SonarSyntaxNodeAnalysisContext context, SonarExplodedGraph explodedGraph)
             {
                 if (!GetMethodSymbol(context).IsPubliclyAccessible())
                 {
                     return;
                 }
 
-                syntaxNodeAnalysisContext = context;
+                this.context = context;
                 nullPointerCheck = explodedGraph.NullPointerCheck;
                 nullPointerCheck.MemberAccessing += MemberAccessingHandler;
             }
@@ -78,7 +79,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
             }
 
             private void MemberAccessingHandler(object sender, MemberAccessingEventArgs args) =>
-                CollectMemberAccesses(args, identifiers, syntaxNodeAnalysisContext.SemanticModel);
+                CollectMemberAccesses(args, identifiers, context.SemanticModel);
 
             private static string GetMessage(SimpleNameSyntax identifier) =>
                 IsArgumentOfConstructorInitializer(identifier)
@@ -88,7 +89,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
             private static bool IsArgumentOfConstructorInitializer(SyntaxNode identifier) =>
                 identifier.FirstAncestorOrSelf<ConstructorInitializerSyntax>() != null;
 
-            private static ISymbol GetMethodSymbol(SyntaxNodeAnalysisContext context) =>
+            private static ISymbol GetMethodSymbol(SonarSyntaxNodeAnalysisContext context) =>
                 context.SemanticModel.GetSymbolInfo(context.Node).Symbol ?? context.SemanticModel.GetDeclaredSymbol(context.Node);
         }
     }

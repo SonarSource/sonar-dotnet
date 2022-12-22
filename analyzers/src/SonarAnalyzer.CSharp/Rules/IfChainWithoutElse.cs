@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
            ifSyntax.Parent.IsKind(SyntaxKind.ElseClause)
            && (ifSyntax.Else == null || IsEmptyBlock(ifSyntax.Else));
 
-        protected override Location IssueLocation(SyntaxNodeAnalysisContext context, IfStatementSyntax ifSyntax)
+        protected override Location IssueLocation(SonarSyntaxNodeAnalysisContext context, IfStatementSyntax ifSyntax)
         {
             var parentElse = (ElseClauseSyntax)ifSyntax.Parent;
             var diff = ifSyntax.IfKeyword.Span.End - parentElse.ElseKeyword.SpanStart;

@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, Visit, Language.SyntaxKind.SimpleMemberAccessExpression);
 
-        private void Visit(SyntaxNodeAnalysisContext context)
+        private void Visit(SonarSyntaxNodeAnalysisContext context)
         {
             var memberAccess = (TMemberAccessSyntax)context.Node;
             if (IsMemberAccessOnKnownType(memberAccess, VulnerableApiName, KnownType.System_IO_Path, context.SemanticModel))
