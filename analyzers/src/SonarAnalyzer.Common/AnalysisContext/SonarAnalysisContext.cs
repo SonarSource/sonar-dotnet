@@ -22,7 +22,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace SonarAnalyzer;
 
-public sealed partial /*FIXME: REMOVE partial */ class SonarAnalysisContext : SonarAnalysisContextBase
+public sealed class SonarAnalysisContext : SonarAnalysisContextBase
 {
     private readonly AnalysisContext analysisContext;
     private readonly IEnumerable<DiagnosticDescriptor> supportedDiagnostics;
