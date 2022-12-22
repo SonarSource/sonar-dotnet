@@ -35,12 +35,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 CheckEquality,
                 SyntaxKind.EqualsExpression,
                 SyntaxKind.NotEqualsExpression);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 CheckLogicalExpression,
                 SyntaxKind.LogicalAndExpression,
                 SyntaxKind.LogicalOrExpression);

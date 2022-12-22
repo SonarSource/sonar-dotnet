@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var methodCall = (InvocationExpressionSyntax)c.Node;
@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     AnalyzeArguments(c, methodCall.ArgumentList, getLocation);
                 }, SyntaxKind.InvocationExpression);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var objectCreationCall = (ObjectCreationExpressionSyntax)c.Node;

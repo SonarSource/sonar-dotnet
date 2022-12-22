@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                c =>
                {
                    var eventField = (EventFieldDeclarationSyntax)c.Node;
@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
                    }
                }, SyntaxKind.EventFieldDeclaration);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                c =>
                {
                    var eventDeclaration = (EventDeclarationSyntax)c.Node;

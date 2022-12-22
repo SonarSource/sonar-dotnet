@@ -33,8 +33,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckForCandidatePartialDeclaration, SyntaxKind.MethodDeclaration);
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckForCandidatePartialInvocation, SyntaxKind.InvocationExpression);
+            context.RegisterNodeAction(CheckForCandidatePartialDeclaration, SyntaxKind.MethodDeclaration);
+            context.RegisterNodeAction(CheckForCandidatePartialInvocation, SyntaxKind.InvocationExpression);
         }
 
         private static void CheckForCandidatePartialDeclaration(SonarSyntaxNodeAnalysisContext context)

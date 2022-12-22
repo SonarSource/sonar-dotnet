@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => Analyze<MethodBlockBaseSyntax>(context, c, x => x),
                 SyntaxKind.ConstructorBlock,
                 SyntaxKind.OperatorBlock,
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 SyntaxKind.RemoveHandlerAccessorBlock,
                 SyntaxKind.RaiseEventAccessorBlock);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var declaration = (LambdaExpressionSyntax)c.Node;

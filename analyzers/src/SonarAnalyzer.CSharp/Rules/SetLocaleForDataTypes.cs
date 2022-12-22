@@ -41,11 +41,11 @@ namespace SonarAnalyzer.Rules.CSharp
                     var symbolsWhereTypeIsCreated = new Dictionary<ISymbol, SyntaxNode>();
                     var symbolsWhereLocaleIsSet = new HashSet<ISymbol>();
 
-                    compilationStartContext.RegisterSyntaxNodeActionInNonGenerated(
+                    compilationStartContext.RegisterNodeAction(
                         c => ProcessObjectCreations(c, symbolsWhereTypeIsCreated),
                         SyntaxKind.ObjectCreationExpression,
                         SyntaxKindEx.ImplicitObjectCreationExpression);
-                    compilationStartContext.RegisterSyntaxNodeActionInNonGenerated(c => ProcessSimpleAssignments(c, symbolsWhereLocaleIsSet), SyntaxKind.SimpleAssignmentExpression);
+                    compilationStartContext.RegisterNodeAction(c => ProcessSimpleAssignments(c, symbolsWhereLocaleIsSet), SyntaxKind.SimpleAssignmentExpression);
                     compilationStartContext.RegisterCompilationEndAction(c => ProcessCollectedSymbols(c, symbolsWhereTypeIsCreated, symbolsWhereLocaleIsSet));
                 });
 

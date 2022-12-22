@@ -33,14 +33,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterNodeAction(c =>
             {
                 var method = (MethodDeclarationSyntax)c.Node;
                 CheckMethodParameters(c, method.Identifier, method.ParameterList);
             },
             SyntaxKind.MethodDeclaration);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterNodeAction(c =>
             {
                 var localFunction = (LocalFunctionStatementSyntaxWrapper)c.Node;
                 CheckMethodParameters(c, localFunction.Identifier, localFunction.ParameterList);

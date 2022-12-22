@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterNodeAction(c =>
             {
                 var invocationExpression = (InvocationExpressionSyntax)c.Node;
                 var invokedMethod = c.SemanticModel.GetSymbolInfo(invocationExpression).Symbol as IMethodSymbol;

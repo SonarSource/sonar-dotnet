@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         }
                     }
 
-                    compilationStartContext.RegisterSyntaxNodeActionInNonGenerated(
+                    compilationStartContext.RegisterNodeAction(
                         c =>
                         {
                             var cast = (CastExpressionSyntax)c.Node;

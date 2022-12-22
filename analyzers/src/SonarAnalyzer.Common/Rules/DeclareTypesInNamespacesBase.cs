@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules
         protected DeclareTypesInNamespacesBase() : base(DiagnosticId) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
-          context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer,
+          context.RegisterNodeAction(Language.GeneratedCodeRecognizer,
               c =>
               {
                   var declaration = c.Node;

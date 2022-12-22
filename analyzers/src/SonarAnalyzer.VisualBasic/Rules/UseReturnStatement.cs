@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterNodeAction(c =>
             {
                 var method = (MethodStatementSyntax)((MethodBlockSyntax)c.Node).BlockStatement;
                 new IdentifierWalker(c, method.Identifier.ValueText).SafeVisit(c.Node);

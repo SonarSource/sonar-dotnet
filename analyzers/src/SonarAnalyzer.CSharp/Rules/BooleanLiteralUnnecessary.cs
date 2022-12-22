@@ -43,13 +43,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckLogicalNot, SyntaxKind.LogicalNotExpression);
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckAndExpression, SyntaxKind.LogicalAndExpression);
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckOrExpression, SyntaxKind.LogicalOrExpression);
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckEquals, SyntaxKind.EqualsExpression);
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckNotEquals, SyntaxKind.NotEqualsExpression);
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckConditional, SyntaxKind.ConditionalExpression);
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckForLoopCondition, SyntaxKind.ForStatement);
+            context.RegisterNodeAction(CheckLogicalNot, SyntaxKind.LogicalNotExpression);
+            context.RegisterNodeAction(CheckAndExpression, SyntaxKind.LogicalAndExpression);
+            context.RegisterNodeAction(CheckOrExpression, SyntaxKind.LogicalOrExpression);
+            context.RegisterNodeAction(CheckEquals, SyntaxKind.EqualsExpression);
+            context.RegisterNodeAction(CheckNotEquals, SyntaxKind.NotEqualsExpression);
+            context.RegisterNodeAction(CheckConditional, SyntaxKind.ConditionalExpression);
+            context.RegisterNodeAction(CheckForLoopCondition, SyntaxKind.ForStatement);
         }
 
         private void CheckForLoopCondition(SonarSyntaxNodeAnalysisContext context)

@@ -32,11 +32,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => CheckMatchingExpressionsInSucceedingStatements<IfStatementSyntax>(c, x => x.Condition),
                 SyntaxKind.IfStatement);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => CheckMatchingExpressionsInSucceedingStatements<SwitchStatementSyntax>(c, x => x.Expression),
                 SyntaxKind.SwitchStatement);
         }

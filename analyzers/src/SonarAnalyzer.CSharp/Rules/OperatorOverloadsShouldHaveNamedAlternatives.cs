@@ -93,7 +93,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterNodeAction(c =>
             {
                 var operatorDeclaration = (OperatorDeclarationSyntax)c.Node;
                 var operatorSymbol = c.SemanticModel.GetDeclaredSymbol(operatorDeclaration);

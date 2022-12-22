@@ -78,7 +78,7 @@ namespace SonarAnalyzer.Rules.CSharp
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(BugRule, CodeSmellRule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckForFormatStringIssues, SyntaxKind.InvocationExpression);
+            context.RegisterNodeAction(CheckForFormatStringIssues, SyntaxKind.InvocationExpression);
 
         private static void CheckForFormatStringIssues(SonarSyntaxNodeAnalysisContext analysisContext)
         {

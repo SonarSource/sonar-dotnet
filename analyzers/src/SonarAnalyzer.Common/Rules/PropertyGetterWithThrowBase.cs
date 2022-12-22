@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules
                         return;
                     }
 
-                    cbc.RegisterSyntaxNodeAction(
+                    cbc.RegisterNodeAction(
                         c =>
                         {
                             var throwExpression = GetThrowExpression(c.Node);

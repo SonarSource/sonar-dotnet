@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => CheckTarget(c, ((AssignmentExpressionSyntax)c.Node).Left),
                 SyntaxKind.SimpleAssignmentExpression,
                 SyntaxKind.AddAssignmentExpression,
@@ -48,17 +48,17 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKindEx.CoalesceAssignmentExpression,
                 SyntaxKindEx.UnsignedRightShiftAssignmentExpression);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => CheckTarget(c, ((PrefixUnaryExpressionSyntax)c.Node).Operand),
                 SyntaxKind.PreDecrementExpression,
                 SyntaxKind.PreIncrementExpression);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => CheckTarget(c, ((PostfixUnaryExpressionSyntax)c.Node).Operand),
                 SyntaxKind.PostDecrementExpression,
                 SyntaxKind.PostIncrementExpression);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterNodeAction(c =>
                 {
                     var argument = (ArgumentSyntax)c.Node;
                     if (argument.RefOrOutKeyword != default)

@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules
         protected DoNotCallMethodsBase(string diagnosticId) : base(diagnosticId) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, AnalyzeInvocation, Language.SyntaxKind.InvocationExpression);
+            context.RegisterNodeAction(Language.GeneratedCodeRecognizer, AnalyzeInvocation, Language.SyntaxKind.InvocationExpression);
 
         private void AnalyzeInvocation(SonarSyntaxNodeAnalysisContext analysisContext)
         {

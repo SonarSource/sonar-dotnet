@@ -92,12 +92,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => CheckControlCharacter(c, ((LiteralExpressionSyntax)c.Node).Token.Text, 0),
                 SyntaxKind.StringLiteralExpression,
                 SyntaxKindEx.Utf8StringLiteralExpression);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => CheckControlCharacter(c, ((InterpolatedStringTextSyntax)c.Node).TextToken.Text, 1),
                 SyntaxKind.InterpolatedStringText);
         }

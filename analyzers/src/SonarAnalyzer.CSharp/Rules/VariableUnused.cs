@@ -32,14 +32,14 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var collector = new UnusedLocalsCollector();
 
-                cbc.RegisterSyntaxNodeAction(collector.CollectDeclarations,
+                cbc.RegisterNodeAction(collector.CollectDeclarations,
                     SyntaxKind.LocalDeclarationStatement,
                     SyntaxKind.SimpleAssignmentExpression,
                     SyntaxKindEx.VarPattern,
                     SyntaxKindEx.RecursivePattern,
                     SyntaxKindEx.DeclarationPattern,
                     SyntaxKindEx.ListPattern);
-                cbc.RegisterSyntaxNodeAction(collector.CollectUsages, SyntaxKind.IdentifierName);
+                cbc.RegisterNodeAction(collector.CollectUsages, SyntaxKind.IdentifierName);
                 cbc.RegisterCodeBlockEndAction(c => collector.ReportUnusedVariables(c, Rule));
             });
 

@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 CheckSealedMemberInSealedClass,
                 SyntaxKind.EventDeclaration,
                 SyntaxKind.EventFieldDeclaration,
@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.MethodDeclaration,
                 SyntaxKind.PropertyDeclaration);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 CheckTypeDeclarationForRedundantPartial,
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.InterfaceDeclaration,
@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKindEx.RecordStructDeclaration,
                 SyntaxKind.StructDeclaration);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 CheckForUnnecessaryUnsafeBlocks,
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.InterfaceDeclaration,
@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKindEx.RecordStructDeclaration,
                 SyntaxKind.StructDeclaration);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterNodeAction(c =>
                 {
                     if (CheckedWalker.IsTopLevel(c.Node))
                     {

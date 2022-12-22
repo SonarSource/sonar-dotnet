@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules
 
                     var locationsForFields = new MultiValueDictionary<IFieldSymbol, Location>();
 
-                    cbc.RegisterSyntaxNodeAction(c =>
+                    cbc.RegisterNodeAction(c =>
                         {
                             var assignment = (AssignmentExpressionSyntax)c.Node;
 
@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Rules
                         SyntaxKindEx.CoalesceAssignmentExpression,
                         SyntaxKindEx.UnsignedRightShiftAssignmentExpression);
 
-                    cbc.RegisterSyntaxNodeAction(c =>
+                    cbc.RegisterNodeAction(c =>
                         {
                             var unary = (PrefixUnaryExpressionSyntax)c.Node;
                             CollectLocationOfStaticField(c.SemanticModel, locationsForFields, unary.Operand);
@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Rules
                         SyntaxKind.PreDecrementExpression,
                         SyntaxKind.PreIncrementExpression);
 
-                    cbc.RegisterSyntaxNodeAction(c =>
+                    cbc.RegisterNodeAction(c =>
                         {
                             var unary = (PostfixUnaryExpressionSyntax)c.Node;
                             CollectLocationOfStaticField(c.SemanticModel, locationsForFields, unary.Operand);

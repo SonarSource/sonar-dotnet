@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterNodeAction(c =>
                 {
                     var assignment = (AssignmentExpressionSyntax)c.Node;
                     var expression = assignment.Left;
@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKindEx.CoalesceAssignmentExpression,
                 SyntaxKindEx.UnsignedRightShiftAssignmentExpression);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterNodeAction(c =>
                 {
                     var unary = (PrefixUnaryExpressionSyntax)c.Node;
                     ProcessPropertyChange(c, c.SemanticModel, unary.Operand);
@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.PreDecrementExpression,
                 SyntaxKind.PreIncrementExpression);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterNodeAction(c =>
                 {
                     var unary = (PostfixUnaryExpressionSyntax)c.Node;
                     ProcessPropertyChange(c, c.SemanticModel, unary.Operand);

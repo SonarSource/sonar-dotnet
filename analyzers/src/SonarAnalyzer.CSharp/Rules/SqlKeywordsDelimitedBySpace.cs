@@ -74,7 +74,7 @@ namespace SonarAnalyzer.Rules.CSharp
             .First();
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var namespaceDeclaration = (BaseNamespaceDeclarationSyntaxWrapper)c.Node;

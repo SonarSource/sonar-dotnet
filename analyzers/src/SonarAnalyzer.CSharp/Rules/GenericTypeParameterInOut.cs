@@ -32,8 +32,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(c => CheckInterfaceVariance(c, (InterfaceDeclarationSyntax)c.Node), SyntaxKind.InterfaceDeclaration);
-            context.RegisterSyntaxNodeActionInNonGenerated(c => CheckDelegateVariance(c, (DelegateDeclarationSyntax)c.Node), SyntaxKind.DelegateDeclaration);
+            context.RegisterNodeAction(c => CheckInterfaceVariance(c, (InterfaceDeclarationSyntax)c.Node), SyntaxKind.InterfaceDeclaration);
+            context.RegisterNodeAction(c => CheckDelegateVariance(c, (DelegateDeclarationSyntax)c.Node), SyntaxKind.DelegateDeclaration);
         }
 
         #region Top level

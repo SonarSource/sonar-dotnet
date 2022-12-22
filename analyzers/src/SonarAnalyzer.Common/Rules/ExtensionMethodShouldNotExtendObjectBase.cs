@@ -33,7 +33,7 @@ public abstract class ExtensionMethodShouldNotExtendObjectBase<TSyntaxKind, TMet
     protected ExtensionMethodShouldNotExtendObjectBase() : base(DiagnosticId) { }
 
     protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterSyntaxNodeActionInNonGenerated(
+        context.RegisterNodeAction(
             Language.GeneratedCodeRecognizer,
             c =>
             {

@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules
         protected MarkWindowsFormsMainWithStaThreadBase() : base(DiagnosticId) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, Action, SyntaxKinds);
+            context.RegisterNodeAction(Language.GeneratedCodeRecognizer, Action, SyntaxKinds);
 
         private void Action(SonarSyntaxNodeAnalysisContext c)
         {

@@ -29,9 +29,9 @@ public sealed class SonarParametrizedAnalysisContext
     internal SonarParametrizedAnalysisContext(SonarAnalysisContext context) =>
         Context = context;
 
-    public void RegisterSyntaxNodeActionInNonGenerated<TSyntaxKind>(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxNodeAnalysisContext> action, params TSyntaxKind[] syntaxKinds)
+    public void RegisterNodeAction<TSyntaxKind>(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxNodeAnalysisContext> action, params TSyntaxKind[] syntaxKinds)
         where TSyntaxKind : struct =>
-        Context.RegisterSyntaxNodeActionInNonGenerated(generatedCodeRecognizer, action, syntaxKinds);
+        Context.RegisterNodeAction(generatedCodeRecognizer, action, syntaxKinds);
 
     public void RegisterTreeAction(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxTreeAnalysisContext> action)
     {

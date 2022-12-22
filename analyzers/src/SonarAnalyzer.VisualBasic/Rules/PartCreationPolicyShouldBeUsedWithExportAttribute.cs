@@ -33,6 +33,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
             attribute.FirstAncestorOrSelf<ClassStatementSyntax>();
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeNode, SyntaxKind.Attribute);
+            context.RegisterNodeAction(AnalyzeNode, SyntaxKind.Attribute);
     }
 }

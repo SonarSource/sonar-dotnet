@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var switchNode = (SwitchStatementSyntax)c.Node;
@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.SwitchStatement);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var switchNode = (SwitchExpressionSyntaxWrapper)c.Node;

@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var locations = new List<Location>();
 
-                    cb.RegisterSyntaxNodeAction(
+                    cb.RegisterNodeAction(
                         c =>
                         {
                             if (TryGetLocationFromInvocationInsideMethod(c, methodSymbol, out var location))

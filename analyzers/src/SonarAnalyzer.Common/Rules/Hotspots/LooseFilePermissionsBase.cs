@@ -45,8 +45,8 @@ namespace SonarAnalyzer.Rules
                     return;
                 }
 
-                c.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, VisitInvocations, Language.SyntaxKind.InvocationExpression);
-                c.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, VisitAssignments, Language.SyntaxKind.IdentifierName);
+                c.RegisterNodeAction(Language.GeneratedCodeRecognizer, VisitInvocations, Language.SyntaxKind.InvocationExpression);
+                c.RegisterNodeAction(Language.GeneratedCodeRecognizer, VisitAssignments, Language.SyntaxKind.IdentifierName);
             });
 
         protected bool IsFileAccessPermissions(SyntaxNode syntaxNode, SemanticModel semanticModel) =>

@@ -48,13 +48,13 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context)
         {
             // Handling of += syntax
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckAssignmentSyntax, SyntaxKind.AddAssignmentExpression);
+            context.RegisterNodeAction(CheckAssignmentSyntax, SyntaxKind.AddAssignmentExpression);
 
             // Handling of = syntax
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckAssignmentSyntax, SyntaxKind.SimpleAssignmentExpression);
+            context.RegisterNodeAction(CheckAssignmentSyntax, SyntaxKind.SimpleAssignmentExpression);
 
             // Handling of constructor parameter syntax (SslStream)
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckConstructorParameterSyntax, SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
+            context.RegisterNodeAction(CheckConstructorParameterSyntax, SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
         }
 
         protected override SyntaxNode FindRootTypeDeclaration(SyntaxNode node) =>

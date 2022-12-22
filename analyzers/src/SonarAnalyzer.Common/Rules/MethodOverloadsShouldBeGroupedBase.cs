@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules
         protected MethodOverloadsShouldBeGroupedBase() : base(DiagnosticId) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
+            context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
             {
                 if (c.IsRedundantPositionalRecordContext())
                 {

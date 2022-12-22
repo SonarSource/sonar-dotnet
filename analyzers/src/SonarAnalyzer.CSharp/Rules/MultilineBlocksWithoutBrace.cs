@@ -33,19 +33,19 @@ public sealed class MultilineBlocksWithoutBrace : SonarDiagnosticAnalyzer
 
     protected override void Initialize(SonarAnalysisContext context)
     {
-        context.RegisterSyntaxNodeActionInNonGenerated(
+        context.RegisterNodeAction(
             c => CheckLoop(c, ((WhileStatementSyntax)c.Node).Statement),
             SyntaxKind.WhileStatement);
 
-        context.RegisterSyntaxNodeActionInNonGenerated(
+        context.RegisterNodeAction(
             c => CheckLoop(c, ((ForStatementSyntax)c.Node).Statement),
             SyntaxKind.ForStatement);
 
-        context.RegisterSyntaxNodeActionInNonGenerated(
+        context.RegisterNodeAction(
             c => CheckLoop(c, ((ForEachStatementSyntax)c.Node).Statement),
             SyntaxKind.ForEachStatement);
 
-        context.RegisterSyntaxNodeActionInNonGenerated(
+        context.RegisterNodeAction(
             c => CheckIf(c, (IfStatementSyntax)c.Node),
             SyntaxKind.IfStatement);
     }

@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules
         {
             var kinds = Language.SyntaxKind.MethodDeclarations.ToList();
             kinds.Add(Language.SyntaxKind.ConstructorDeclaration);
-            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, ReportIssues, kinds.ToArray());
+            context.RegisterNodeAction(Language.GeneratedCodeRecognizer, ReportIssues, kinds.ToArray());
         }
 
         protected int ArgumentExceptionNameOfPosition(string name)

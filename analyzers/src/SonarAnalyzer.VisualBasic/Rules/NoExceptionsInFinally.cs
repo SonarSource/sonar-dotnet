@@ -26,7 +26,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterNodeAction(c =>
                 {
                     var walker = new ThrowInFinallyWalker(c, Rule);
                     foreach (var statement in ((FinallyBlockSyntax)c.Node).Statements)

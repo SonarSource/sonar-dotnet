@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var ifStatement = (SingleLineIfStatementSyntax)c.Node;
@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 },
                 SyntaxKind.SingleLineIfStatement);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var ifBlock = (MultiLineIfBlockSyntax)c.Node;
@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 },
                 SyntaxKind.MultiLineIfBlock);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var select = (SelectBlockSyntax)c.Node;

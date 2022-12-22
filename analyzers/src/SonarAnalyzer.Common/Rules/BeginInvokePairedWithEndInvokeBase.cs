@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules
         protected BeginInvokePairedWithEndInvokeBase() : base(DiagnosticId) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
+            context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
             {
                 var invocation = (TInvocationExpressionSyntax)c.Node;
                 if (Language.Syntax.NodeExpression(invocation) is { } expression

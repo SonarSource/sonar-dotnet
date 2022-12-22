@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules
         protected ParameterAssignedToBase() : base(DiagnosticId) { }
 
         protected sealed override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 Language.GeneratedCodeRecognizer, c =>
                 {
                     foreach (var target in Language.Syntax.AssignmentTargets(c.Node))

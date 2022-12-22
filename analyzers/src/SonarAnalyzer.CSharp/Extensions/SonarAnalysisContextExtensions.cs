@@ -22,20 +22,20 @@ namespace SonarAnalyzer.Extensions
 {
     internal static class SonarAnalysisContextExtensions
     {
-        public static void RegisterSyntaxNodeActionInNonGenerated<TSyntaxKind>(this SonarAnalysisContext context,
+        public static void RegisterNodeAction<TSyntaxKind>(this SonarAnalysisContext context,
                                                                                Action<SonarSyntaxNodeAnalysisContext> action,
                                                                                params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct =>
-            context.RegisterSyntaxNodeActionInNonGenerated(CSharpGeneratedCodeRecognizer.Instance, action, syntaxKinds);
+            context.RegisterNodeAction(CSharpGeneratedCodeRecognizer.Instance, action, syntaxKinds);
 
-        public static void RegisterSyntaxNodeActionInNonGenerated<TSyntaxKind>(this SonarParametrizedAnalysisContext context,
+        public static void RegisterNodeAction<TSyntaxKind>(this SonarParametrizedAnalysisContext context,
                                                                                Action<SonarSyntaxNodeAnalysisContext> action,
                                                                                params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct =>
-            context.RegisterSyntaxNodeActionInNonGenerated(CSharpGeneratedCodeRecognizer.Instance, action, syntaxKinds);
+            context.RegisterNodeAction(CSharpGeneratedCodeRecognizer.Instance, action, syntaxKinds);
 
-        public static void RegisterSyntaxNodeActionInNonGenerated<TSyntaxKind>(this SonarCompilationStartAnalysisContext context,
+        public static void RegisterNodeAction<TSyntaxKind>(this SonarCompilationStartAnalysisContext context,
                                                                                Action<SonarSyntaxNodeAnalysisContext> action,
                                                                                params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct =>
-            context.RegisterSyntaxNodeActionInNonGenerated(CSharpGeneratedCodeRecognizer.Instance, action, syntaxKinds);
+            context.RegisterNodeAction(CSharpGeneratedCodeRecognizer.Instance, action, syntaxKinds);
 
         public static void RegisterTreeAction(this SonarAnalysisContext context, Action<SonarSyntaxTreeAnalysisContext> action) =>
             context.RegisterTreeAction(CSharpGeneratedCodeRecognizer.Instance, action);

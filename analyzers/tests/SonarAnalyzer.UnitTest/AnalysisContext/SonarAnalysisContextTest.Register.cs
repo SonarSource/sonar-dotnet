@@ -36,11 +36,11 @@ public partial class SonarAnalysisContextTest
     [DataTestMethod]
     [DataRow(SnippetFileName, false)]
     [DataRow(AnotherFileName, true)]
-    public void RegisterSyntaxNodeActionInNonGenerated_UnchangedFiles_SonarAnalysisContext(string unchangedFileName, bool expected)
+    public void RegisterNodeAction_UnchangedFiles_SonarAnalysisContext(string unchangedFileName, bool expected)
     {
         var context = new DummyAnalysisContext(TestContext, unchangedFileName);
         var sut = new SonarAnalysisContext(context, DummyMainDescriptor);
-        sut.RegisterSyntaxNodeActionInNonGenerated<SyntaxKind>(CSharpGeneratedCodeRecognizer.Instance, context.DelegateAction);
+        sut.RegisterNodeAction<SyntaxKind>(CSharpGeneratedCodeRecognizer.Instance, context.DelegateAction);
 
         context.AssertDelegateInvoked(expected);
     }
@@ -48,11 +48,11 @@ public partial class SonarAnalysisContextTest
     [DataTestMethod]
     [DataRow(SnippetFileName, false)]
     [DataRow(AnotherFileName, true)]
-    public void RegisterSyntaxNodeActionInNonGenerated_UnchangedFiles_SonarParametrizedAnalysisContext(string unchangedFileName, bool expected)
+    public void RegisterNodeAction_UnchangedFiles_SonarParametrizedAnalysisContext(string unchangedFileName, bool expected)
     {
         var context = new DummyAnalysisContext(TestContext, unchangedFileName);
         var sut = new SonarParametrizedAnalysisContext(new(context, DummyMainDescriptor));
-        sut.RegisterSyntaxNodeActionInNonGenerated<SyntaxKind>(CSharpGeneratedCodeRecognizer.Instance, context.DelegateAction);
+        sut.RegisterNodeAction<SyntaxKind>(CSharpGeneratedCodeRecognizer.Instance, context.DelegateAction);
 
         context.AssertDelegateInvoked(expected);
     }

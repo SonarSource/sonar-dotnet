@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules
             rule = Language.CreateDescriptor(DiagnosticId, MessageFormat, isEnabledByDefault: false);
 
         protected sealed override void Initialize(SonarParametrizedAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
+            context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
                 {
                     var pattern = c.Node.HasFlagsAttribute(c.SemanticModel) ? FlagsEnumNamePattern : EnumNamePattern;
                     if (Language.Syntax.NodeIdentifier(c.Node) is { } identifier && !NamingHelper.IsRegexMatch(identifier.ValueText, pattern))

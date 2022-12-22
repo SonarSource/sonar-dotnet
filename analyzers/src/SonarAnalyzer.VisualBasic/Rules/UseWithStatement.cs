@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override void Initialize(SonarParametrizedAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     if (MinimumSeriesLength <= 1)

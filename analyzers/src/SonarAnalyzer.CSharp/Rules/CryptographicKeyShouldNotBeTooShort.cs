@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;
@@ -86,7 +86,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.InvocationExpression);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var objectCreation = ObjectCreationFactory.Create(c.Node);
@@ -97,7 +97,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var assignment = (AssignmentExpressionSyntax)c.Node;

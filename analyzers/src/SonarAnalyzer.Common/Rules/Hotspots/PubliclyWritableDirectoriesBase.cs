@@ -74,7 +74,7 @@ namespace SonarAnalyzer.Rules
             var kinds = Language.SyntaxKind.StringLiteralExpressions.ToList();
             kinds.Add(Language.SyntaxKind.InterpolatedStringExpression);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 Language.GeneratedCodeRecognizer,
                 c =>
                 {
@@ -87,7 +87,7 @@ namespace SonarAnalyzer.Rules
                 },
                 kinds.ToArray());
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 Language.GeneratedCodeRecognizer,
                 c =>
                 {
