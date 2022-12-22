@@ -164,4 +164,3 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         }
     }
 }
-
