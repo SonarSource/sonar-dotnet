@@ -34,6 +34,5 @@ namespace SonarAnalyzer.Rules
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterNodeAction(Language.GeneratedCodeRecognizer, CheckMethod, SyntaxKinds.ToArray());
-
     }
 }
