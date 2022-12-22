@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
                SyntaxKind.EventDeclaration);
         }
 
-        private static void AnalyzeEventType(SyntaxNodeAnalysisContext analysisContext, TypeSyntax typeSyntax, ISymbol eventSymbol)
+        private static void AnalyzeEventType(SonarSyntaxNodeAnalysisContext analysisContext, TypeSyntax typeSyntax, ISymbol eventSymbol)
         {
             if (!eventSymbol.IsOverride
                 && eventSymbol.GetInterfaceMember() is null

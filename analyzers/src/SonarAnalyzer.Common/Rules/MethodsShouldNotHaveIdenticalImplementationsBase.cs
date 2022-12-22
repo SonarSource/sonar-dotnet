@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Rules
                 },
                 SyntaxKinds);
 
-        protected virtual bool IsExcludedFromBeingExamined(SyntaxNodeAnalysisContext context) =>
+        protected virtual bool IsExcludedFromBeingExamined(SonarSyntaxNodeAnalysisContext context) =>
             context.ContainingSymbol.Kind != SymbolKind.NamedType;
 
         protected static bool HaveSameParameters<TSyntax>(SeparatedSyntaxList<TSyntax>? leftParameters, SeparatedSyntaxList<TSyntax>? rightParameters)

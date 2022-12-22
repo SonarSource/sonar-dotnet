@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules
                 },
                 Language.SyntaxKind.ComparisonKinds);
 
-        protected void CheckExpression(SyntaxNodeAnalysisContext context, SyntaxNode issue, SyntaxNode expression, int constant, ComparisonKind comparison)
+        protected void CheckExpression(SonarSyntaxNodeAnalysisContext context, SyntaxNode issue, SyntaxNode expression, int constant, ComparisonKind comparison)
         {
             expression = Language.Syntax.RemoveConditionalAccess(expression);
             var result = comparison.Compare(constant);

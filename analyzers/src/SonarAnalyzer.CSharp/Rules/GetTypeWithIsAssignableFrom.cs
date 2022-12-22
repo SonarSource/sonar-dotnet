@@ -92,7 +92,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKindEx.IsPatternExpression);
         }
 
-        private static void CheckAsOperatorComparedToNull(SyntaxNodeAnalysisContext context, ExpressionSyntax sideA, ExpressionSyntax sideB)
+        private static void CheckAsOperatorComparedToNull(SonarSyntaxNodeAnalysisContext context, ExpressionSyntax sideA, ExpressionSyntax sideB)
         {
             if (sideA.RemoveParentheses().IsKind(SyntaxKind.AsExpression) && sideB.RemoveParentheses().IsKind(SyntaxKind.NullLiteralExpression))
             {
@@ -100,7 +100,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckGetTypeAndTypeOfEquality(SyntaxNodeAnalysisContext context, ExpressionSyntax sideA, ExpressionSyntax sideB)
+        private static void CheckGetTypeAndTypeOfEquality(SonarSyntaxNodeAnalysisContext context, ExpressionSyntax sideA, ExpressionSyntax sideB)
         {
             if (sideA.ToStringContains("GetType")
                 && sideB is TypeOfExpressionSyntax sideBTypeOf
@@ -113,7 +113,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckForIsInstanceOfType(SyntaxNodeAnalysisContext context, MemberAccessExpressionSyntax memberAccess, IMethodSymbol methodSymbol)
+        private static void CheckForIsInstanceOfType(SonarSyntaxNodeAnalysisContext context, MemberAccessExpressionSyntax memberAccess, IMethodSymbol methodSymbol)
         {
             if (methodSymbol.Name == "IsInstanceOfType" && memberAccess.Expression is TypeOfExpressionSyntax)
             {
@@ -121,7 +121,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckForIsAssignableFrom(SyntaxNodeAnalysisContext context, MemberAccessExpressionSyntax memberAccess, IMethodSymbol methodSymbol, ExpressionSyntax argument)
+        private static void CheckForIsAssignableFrom(SonarSyntaxNodeAnalysisContext context, MemberAccessExpressionSyntax memberAccess, IMethodSymbol methodSymbol, ExpressionSyntax argument)
         {
             if (methodSymbol.Name == nameof(Type.IsAssignableFrom) && (argument as InvocationExpressionSyntax).IsGetTypeCall(context.SemanticModel))
             {
@@ -144,7 +144,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 _ => null
             };
 
-        private static void ReportDiagnostic(SyntaxNodeAnalysisContext context, string messageArg, bool useIsOperator = false, bool shouldRemoveGetType = false)
+        private static void ReportDiagnostic(SonarSyntaxNodeAnalysisContext context, string messageArg, bool useIsOperator = false, bool shouldRemoveGetType = false)
         {
             var properties = ImmutableDictionary<string, string>.Empty
                 .Add(UseIsOperatorKey, useIsOperator.ToString())

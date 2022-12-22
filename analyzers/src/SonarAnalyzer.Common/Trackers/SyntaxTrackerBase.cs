@@ -25,7 +25,7 @@ namespace SonarAnalyzer.Helpers
         where TContext : SyntaxBaseContext
     {
         protected abstract TSyntaxKind[] TrackedSyntaxKinds { get; }
-        protected abstract TContext CreateContext(SyntaxNodeAnalysisContext context);
+        protected abstract TContext CreateContext(SonarSyntaxNodeAnalysisContext context);
 
         public void Track(TrackerInput input, params Condition[] conditions) =>
             Track(input, Array.Empty<object>(), conditions);
@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Helpers
                   }
               });
 
-            void TrackAndReportIfNecessary(SyntaxNodeAnalysisContext c)
+            void TrackAndReportIfNecessary(SonarSyntaxNodeAnalysisContext c)
             {
                 if (CreateContext(c) is { } trackingContext
                     && conditions.All(c => c(trackingContext))

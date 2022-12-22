@@ -89,13 +89,13 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
 
         public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(S2583, S2589);
 
-        public ISymbolicExecutionAnalysisContext CreateContext(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
-            new AnalysisContext(explodedGraph, context);
+        public ISymbolicExecutionAnalysisContext CreateContext(SonarSyntaxNodeAnalysisContext context, SonarExplodedGraph explodedGraph) =>
+            new AnalysisContext(context, explodedGraph);
 
         private sealed class AnalysisContext : ISymbolicExecutionAnalysisContext
         {
+            private readonly SonarSyntaxNodeAnalysisContext context;
             private readonly SonarExplodedGraph explodedGraph;
-            private readonly SyntaxNodeAnalysisContext context;
 
             private readonly HashSet<SyntaxNode> conditionTrue = new HashSet<SyntaxNode>();
             private readonly HashSet<SyntaxNode> conditionFalse = new HashSet<SyntaxNode>();
@@ -105,10 +105,10 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
 
             private bool hasYieldStatement;
 
-            public AnalysisContext(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
+            public AnalysisContext(SonarSyntaxNodeAnalysisContext context, SonarExplodedGraph explodedGraph)
             {
-                this.explodedGraph = explodedGraph;
                 this.context = context;
+                this.explodedGraph = explodedGraph;
 
                 explodedGraph.InstructionProcessed += InstructionProcessed;
                 explodedGraph.ConditionEvaluated += ConditionEvaluatedHandler;

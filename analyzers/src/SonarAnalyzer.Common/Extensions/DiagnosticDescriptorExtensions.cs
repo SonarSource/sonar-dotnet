@@ -24,7 +24,7 @@ namespace SonarAnalyzer.Extensions;
 
 public static class DiagnosticDescriptorExtensions
 {
-    public static bool HasMatchingScope(this DiagnosticDescriptor descriptor, Compilation compilation, bool isTestProject, bool isScannerRun)
+    public static bool HasMatchingScope(this DiagnosticDescriptor descriptor, Compilation compilation, bool isTestProject, bool isScannerRun)   // FIXME: Pass context instead?
     {
         if (compilation is null)
         {

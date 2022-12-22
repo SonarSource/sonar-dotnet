@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
                  SyntaxKind.StructDeclaration);
         }
 
-        private static void CheckGenericTypeParameters(SyntaxNodeAnalysisContext c, ISymbol symbol)
+        private static void CheckGenericTypeParameters(SonarSyntaxNodeAnalysisContext c, ISymbol symbol)
         {
             var info = CreateParametersInfo(c);
             if (info?.Parameters is null || info.Parameters.Parameters.Count == 0)
@@ -70,14 +70,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
             var typeParameterNames = info.Parameters.Parameters.Select(x => x.Identifier.Text).ToArray();
-            var usedTypeParameters = GetUsedTypeParameters(symbol.DeclaringSyntaxReferences.Select(x => x.GetSyntax()), typeParameterNames, c).ToHashSet();
+            var usedTypeParameters = GetUsedTypeParameters(c, symbol.DeclaringSyntaxReferences.Select(x => x.GetSyntax()), typeParameterNames).ToHashSet();
             foreach (var typeParameter in typeParameterNames.Where(x => !usedTypeParameters.Contains(x)))
             {
                 c.ReportIssue(Diagnostic.Create(Rule, info.Parameters.Parameters.First(x => x.Identifier.Text == typeParameter).GetLocation(), typeParameter, info.ContainerName));
             }
         }
 
-        private static ParametersInfo CreateParametersInfo(SyntaxNodeAnalysisContext c) =>
+        private static ParametersInfo CreateParametersInfo(SonarSyntaxNodeAnalysisContext c) =>
             c.Node switch
             {
                 InterfaceDeclarationSyntax interfaceDeclaration => new ParametersInfo(interfaceDeclaration.TypeParameterList, "interface"),
@@ -96,7 +96,7 @@ namespace SonarAnalyzer.Rules.CSharp
             && semanticModel.GetDeclaredSymbol(methodDeclaration) is { } methodSymbol
             && methodSymbol.IsChangeable();
 
-        private static List<string> GetUsedTypeParameters(IEnumerable<SyntaxNode> declarations, string[] typeParameterNames, SyntaxNodeAnalysisContext context) =>
+        private static List<string> GetUsedTypeParameters(SonarSyntaxNodeAnalysisContext context, IEnumerable<SyntaxNode> declarations, string[] typeParameterNames) =>
             declarations.SelectMany(x => x.DescendantNodes())
                 .OfType<IdentifierNameSyntax>()
                 .Where(x => x.Parent is not TypeParameterConstraintClauseSyntax && typeParameterNames.Contains(x.Identifier.ValueText))

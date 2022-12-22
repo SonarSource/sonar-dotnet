@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void ReportTrivialWrappers(SyntaxNodeAnalysisContext c)
+        private static void ReportTrivialWrappers(SonarSyntaxNodeAnalysisContext c)
         {
             var methodDeclaration = (MethodDeclarationSyntax)c.Node;
 

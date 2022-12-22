@@ -75,7 +75,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.PropertyDeclaration);
         }
 
-        private void CheckForNoExitMethod(SyntaxNodeAnalysisContext c, CSharpSyntaxNode body, SyntaxToken identifier)
+        private void CheckForNoExitMethod(SonarSyntaxNodeAnalysisContext c, CSharpSyntaxNode body, SyntaxToken identifier)
         {
             if (body != null && c.SemanticModel.GetDeclaredSymbol(c.Node) is IMethodSymbol symbol)
             {
@@ -96,22 +96,22 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private sealed class RecursionContext<TControlFlowGraph>
         {
+            private readonly SonarSyntaxNodeAnalysisContext analysisContext;
             private readonly string messageArg;
-            private readonly SyntaxNodeAnalysisContext analysisContext;
             private readonly Location issueLocation;
 
             public TControlFlowGraph ControlFlowGraph { get; }
             public ISymbol AnalyzedSymbol { get; }
             public SemanticModel SemanticModel => analysisContext.SemanticModel;
 
-            public RecursionContext(TControlFlowGraph controlFlowGraph,
+            public RecursionContext(SonarSyntaxNodeAnalysisContext analysisContext,
+                                    TControlFlowGraph controlFlowGraph,
                                     ISymbol analyzedSymbol,
                                     Location issueLocation,
-                                    SyntaxNodeAnalysisContext analysisContext,
                                     string messageArg)
             {
-                this.messageArg = messageArg;
                 this.analysisContext = analysisContext;
+                this.messageArg = messageArg;
                 this.issueLocation = issueLocation;
                 ControlFlowGraph = controlFlowGraph;
                 AnalyzedSymbol = analyzedSymbol;
@@ -123,8 +123,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private interface IChecker
         {
-            void CheckForNoExitProperty(SyntaxNodeAnalysisContext c, PropertyDeclarationSyntax property, IPropertySymbol propertySymbol);
-            void CheckForNoExitMethod(SyntaxNodeAnalysisContext c, CSharpSyntaxNode body, SyntaxToken identifier, IMethodSymbol symbol);
+            void CheckForNoExitProperty(SonarSyntaxNodeAnalysisContext c, PropertyDeclarationSyntax property, IPropertySymbol propertySymbol);
+            void CheckForNoExitMethod(SonarSyntaxNodeAnalysisContext c, CSharpSyntaxNode body, SyntaxToken identifier, IMethodSymbol symbol);
         }
     }
 }

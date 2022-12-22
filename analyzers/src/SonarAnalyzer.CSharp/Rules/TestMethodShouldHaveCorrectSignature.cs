@@ -96,7 +96,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeMethod, SyntaxKind.MethodDeclaration, SyntaxKindEx.LocalFunctionStatement);
 
-        private static void AnalyzeMethod(SyntaxNodeAnalysisContext c)
+        private static void AnalyzeMethod(SonarSyntaxNodeAnalysisContext c)
         {
             if (HasAttributes(c.Node) && c.SemanticModel.GetDeclaredSymbol(c.Node) is IMethodSymbol methodSymbol)
             {

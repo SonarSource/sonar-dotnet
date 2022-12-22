@@ -93,7 +93,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override bool AreEquivalent(SyntaxNode node1, SyntaxNode node2) => CSharpEquivalenceChecker.AreEquivalent(node1, node2);
 
-        private static void CheckAndPattern(SyntaxNodeAnalysisContext context)
+        private static void CheckAndPattern(SonarSyntaxNodeAnalysisContext context)
         {
             var binaryPatternNode = (BinaryPatternSyntaxWrapper)context.Node;
             var left = binaryPatternNode.Left.SyntaxNode.RemoveParentheses();
@@ -122,7 +122,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 && !isPatternWrapper.IsNull();
         }
 
-        private static void CheckOrPattern(SyntaxNodeAnalysisContext context)
+        private static void CheckOrPattern(SonarSyntaxNodeAnalysisContext context)
         {
             var binaryPatternNode = (BinaryPatternSyntaxWrapper)context.Node;
             var left = binaryPatternNode.Left.SyntaxNode.RemoveParentheses();

@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKindEx.RecordClassDeclaration,
             SyntaxKindEx.RecordStructDeclaration);
 
-        private static void ReportRedundantBaseType(SyntaxNodeAnalysisContext context, BaseTypeDeclarationSyntax typeDeclaration, KnownType redundantType, string message)
+        private static void ReportRedundantBaseType(SonarSyntaxNodeAnalysisContext context, BaseTypeDeclarationSyntax typeDeclaration, KnownType redundantType, string message)
         {
             var baseTypeSyntax = typeDeclaration.BaseList.Types.First().Type;
             if (context.SemanticModel.GetSymbolInfo(baseTypeSyntax).Symbol is ITypeSymbol baseTypeSymbol
@@ -75,7 +75,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void ReportRedundantInterfaces(SyntaxNodeAnalysisContext context, BaseTypeDeclarationSyntax typeDeclaration)
+        private static void ReportRedundantInterfaces(SonarSyntaxNodeAnalysisContext context, BaseTypeDeclarationSyntax typeDeclaration)
         {
             var declaredType = context.SemanticModel.GetDeclaredSymbol(typeDeclaration);
             if (declaredType is null)

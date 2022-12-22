@@ -63,7 +63,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ConstructorDeclaration,
                 SyntaxKindEx.LocalFunctionStatement);
 
-        private static MethodContext CreateContext(SyntaxNodeAnalysisContext c)
+        private static MethodContext CreateContext(SonarSyntaxNodeAnalysisContext c)
         {
             if (c.Node is BaseMethodDeclarationSyntax method)
             {
@@ -156,8 +156,8 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             else
             {
-                return body.CreateCfg(declaration.Context.SemanticModel, declaration.Context.CancellationToken) is { } cfg
-                    ? new LvaResult(cfg, declaration.Context.CancellationToken)
+                return body.CreateCfg(declaration.Context.SemanticModel, declaration.Context.Cancel) is { } cfg
+                    ? new LvaResult(cfg, declaration.Context.Cancel)
                     : null;
             }
         }
@@ -254,19 +254,19 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private class MethodContext
         {
-            public readonly SyntaxNodeAnalysisContext Context;
+            public readonly SonarSyntaxNodeAnalysisContext Context;
             public readonly IMethodSymbol Symbol;
             public readonly ParameterListSyntax ParameterList;
             public readonly BlockSyntax Body;
             public readonly ArrowExpressionClauseSyntax ExpressionBody;
 
-            public MethodContext(SyntaxNodeAnalysisContext context, BaseMethodDeclarationSyntax declaration)
+            public MethodContext(SonarSyntaxNodeAnalysisContext context, BaseMethodDeclarationSyntax declaration)
                 : this(context, declaration.ParameterList, declaration.Body, declaration.ExpressionBody()) { }
 
-            public MethodContext(SyntaxNodeAnalysisContext context, LocalFunctionStatementSyntaxWrapper declaration)
+            public MethodContext(SonarSyntaxNodeAnalysisContext context, LocalFunctionStatementSyntaxWrapper declaration)
                 : this(context, declaration.ParameterList, declaration.Body, declaration.ExpressionBody) { }
 
-            private MethodContext(SyntaxNodeAnalysisContext context, ParameterListSyntax parameterList, BlockSyntax body, ArrowExpressionClauseSyntax expressionBody)
+            private MethodContext(SonarSyntaxNodeAnalysisContext context, ParameterListSyntax parameterList, BlockSyntax body, ArrowExpressionClauseSyntax expressionBody)
             {
                 Context = context;
                 Symbol = context.SemanticModel.GetDeclaredSymbol(context.Node) as IMethodSymbol;
@@ -283,7 +283,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public LvaResult(MethodContext declaration, IControlFlowGraph cfg)
             {
-                var lva = new SonarCSharpLiveVariableAnalysis(cfg, declaration.Symbol, declaration.Context.SemanticModel, declaration.Context.CancellationToken);
+                var lva = new SonarCSharpLiveVariableAnalysis(cfg, declaration.Symbol, declaration.Context.SemanticModel, declaration.Context.Cancel);
                 LiveInEntryBlock = lva.LiveIn(cfg.EntryBlock).OfType<IParameterSymbol>().ToImmutableArray();
                 CapturedVariables = lva.CapturedVariables;
             }
