@@ -108,24 +108,8 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
 
     public override SyntaxNode RemoveParentheses(SyntaxNode node) => node.RemoveParentheses();
 
-    public override string StringValue(SyntaxNode node, SemanticModel semanticModel)
-    {
-        if (node != null)
-        {
-            if (node.IsAnyKind(SyntaxKind.StringLiteralExpression, SyntaxKindEx.Utf8StringLiteralExpression)
-                && node is LiteralExpressionSyntax literal)
-            {
-                return literal.Token.ValueText;
-            }
-            else if (node is InterpolatedStringExpressionSyntax interpolatedExpression)
-            {
-                interpolatedExpression.TryGetGetInterpolatedTextValue(semanticModel, out var interpolatedValue);
-                return interpolatedValue ?? interpolatedExpression.GetContentsText() ?? null;
-            }
-        }
-        return null;
-    }
-
+    public override string StringValue(SyntaxNode node, SemanticModel semanticModel) =>
+        CSharpSyntaxHelper.StringValue(node, semanticModel);
     public override bool TryGetGetInterpolatedTextValue(SyntaxNode node, SemanticModel semanticModel, out string interpolatedValue) =>
         Cast<InterpolatedStringExpressionSyntax>(node).TryGetGetInterpolatedTextValue(semanticModel, out interpolatedValue);
 }
