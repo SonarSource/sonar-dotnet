@@ -18,9 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Moq;
 using SonarAnalyzer.AnalysisContext;
-using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext;
 
 namespace SonarAnalyzer.UnitTest.AnalysisContext;
 
@@ -49,7 +47,7 @@ public partial class SonarAnalysisContextBaseTest
     [DataRow(false, ProjectType.Test, MainTag, MainTag)]
     public void HasMatchingScope_SingleDiagnostic_WithOneOrMoreScopes_SonarLint(bool expectedResult, ProjectType projectType, params string[] ruleTags)
     {
-        var diagnostic = TestHelper.CreateDescriptor("Sxxx", ruleTags);
+        var diagnostic = TestHelper.CreateDescriptor(DummyID, ruleTags);
         CreateSut(projectType, false).HasMatchingScope(diagnostic).Should().Be(expectedResult);
     }
 
@@ -70,7 +68,7 @@ public partial class SonarAnalysisContextBaseTest
     [DataRow(false, ProjectType.Test, MainTag, MainTag)]
     public void HasMatchingScope_SingleDiagnostic_WithOneOrMoreScopes_Scanner(bool expectedResult, ProjectType projectType, params string[] ruleTags)
     {
-        var diagnostic = TestHelper.CreateDescriptor("Sxxx", ruleTags);
+        var diagnostic = TestHelper.CreateDescriptor(DummyID, ruleTags);
         CreateSut(projectType, true).HasMatchingScope(diagnostic).Should().Be(expectedResult);
     }
 
@@ -84,7 +82,7 @@ public partial class SonarAnalysisContextBaseTest
     [DataRow(false, ProjectType.Test, MainTag, MainTag)]
     public void HasMatchingScope_MultipleDiagnostics_WithSingleScope_SonarLint(bool expectedResult, ProjectType projectType, params string[] rulesTag)
     {
-        var diagnostics = rulesTag.Select(x => TestHelper.CreateDescriptor("Sxxx", x));
+        var diagnostics = rulesTag.Select(x => TestHelper.CreateDescriptor(DummyID, x));
         CreateSut(projectType, false).HasMatchingScope(diagnostics).Should().Be(expectedResult);
     }
 
@@ -97,7 +95,7 @@ public partial class SonarAnalysisContextBaseTest
     [DataRow(false, ProjectType.Test, MainTag, MainTag)]
     public void HasMatchingScope_MultipleDiagnostics_WithSingleScope_Scanner(bool expectedResult, ProjectType projectType, params string[] rulesTag)
     {
-        var diagnostics = rulesTag.Select(x => TestHelper.CreateDescriptor("Sxxx", x));
+        var diagnostics = rulesTag.Select(x => TestHelper.CreateDescriptor(DummyID, x));
         CreateSut(projectType, true).HasMatchingScope(diagnostics).Should().Be(expectedResult);
     }
 

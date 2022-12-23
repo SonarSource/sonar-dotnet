@@ -24,7 +24,6 @@ extern alias vbnet;
 using Microsoft.CodeAnalysis.CSharp;
 using Moq;
 using SonarAnalyzer.AnalysisContext;
-using SonarAnalyzer.Common;
 using CS = csharp::SonarAnalyzer.Extensions.SonarAnalysisContextExtensions;
 using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext;
 using VB = vbnet::SonarAnalyzer.Extensions.SonarAnalysisContextExtensions;

@@ -20,11 +20,9 @@
 
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.VisualBasic;
-using Moq;
 using SonarAnalyzer.AnalysisContext;
 using SonarAnalyzer.Common;
 using CS = Microsoft.CodeAnalysis.CSharp.Syntax;
-using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext;
 using VB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
