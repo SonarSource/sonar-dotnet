@@ -19,6 +19,7 @@
  */
 
 using System.IO;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
@@ -201,10 +202,12 @@ End Class", AnalyzerLanguage.VisualBasic);
         public static SonarAnalysisContext CreateSonarAnalysisContext() =>                  // FIXME: Use everywhere
             new(Mock.Of<RoslynAnalysisContext>(), Enumerable.Empty<DiagnosticDescriptor>());
 
+        public static AnalyzerOptions CreateOptions() =>
+            new(ImmutableArray<AdditionalText>.Empty);
+
         public static AnalyzerOptions CreateOptions(string relativePath)
         {
             var text = File.Exists(relativePath) ? SourceText.From(File.ReadAllText(relativePath)) : null;
-
             return CreateOptions(relativePath, text);
         }
 

@@ -277,8 +277,7 @@ public partial class SonarAnalysisContextTest
     public void IsTestProject_Standalone(ProjectType projectType, bool expectedResult)
     {
         var compilation = new SnippetCompiler("// Nothing to see here", TestHelper.ProjectTypeReference(projectType)).SemanticModel.Compilation;
-        var options = new AnalyzerOptions(ImmutableArray<AdditionalText>.Empty);
-        var context = new CompilationAnalysisContext(compilation, options, null, null, default);
+        var context = new CompilationAnalysisContext(compilation, TestHelper.CreateOptions(), null, null, default);
         var sut = new SonarCompilationAnalysisContext(TestHelper.CreateSonarAnalysisContext(), context);
 
         sut.IsTestProject().Should().Be(expectedResult);

@@ -43,7 +43,7 @@ public class SonarAnalysisContextExtensions
                 public class Sample {}
                 """);
         var wasReported = false;
-        var symbolContext = new SymbolAnalysisContext(Mock.Of<ISymbol>(), model.Compilation, TestHelper.CreateOptions(null), _ => wasReported = true, _ => true, default);
+        var symbolContext = new SymbolAnalysisContext(Mock.Of<ISymbol>(), model.Compilation, TestHelper.CreateOptions(), _ => wasReported = true, _ => true, default);
         var context = new SonarSymbolAnalysisContext(TestHelper.CreateSonarAnalysisContext(), symbolContext);
         CS.ReportIssue(context, Diagnostic.Create(DummyMainDescriptor, tree.GetRoot().GetLocation()));
 
@@ -61,7 +61,7 @@ public class SonarAnalysisContextExtensions
                 End Class
                 """);
         var wasReported = false;
-        var symbolContext = new SymbolAnalysisContext(Mock.Of<ISymbol>(), model.Compilation, TestHelper.CreateOptions(null), _ => wasReported = true, _ => true, default);
+        var symbolContext = new SymbolAnalysisContext(Mock.Of<ISymbol>(), model.Compilation, TestHelper.CreateOptions(), _ => wasReported = true, _ => true, default);
         var context = new SonarSymbolAnalysisContext(TestHelper.CreateSonarAnalysisContext(), symbolContext);
         VB.ReportIssue(context, Diagnostic.Create(DummyMainDescriptor, tree.GetRoot().GetLocation()));
 

@@ -152,9 +152,7 @@ public partial class SonarAnalysisContextTest
 
         public DummyAnalysisContext(TestContext testContext, params string[] unchangedFiles)
         {
-            var sonarProjectConfig = TestHelper.CreateSonarProjectConfigWithUnchangedFiles(testContext, unchangedFiles);
-            var additionalFile = new AnalyzerAdditionalFile(sonarProjectConfig);
-            Options = new(ImmutableArray.Create<AdditionalText>(additionalFile));
+            Options = TestHelper.CreateOptions(TestHelper.CreateSonarProjectConfigWithUnchangedFiles(testContext, unchangedFiles));
             (Tree, Model) = TestHelper.CompileCS("public class Sample { }");
         }
 

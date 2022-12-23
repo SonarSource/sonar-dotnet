@@ -32,7 +32,7 @@ public class SonarSyntaxNodeAnalysisContextTest
         var cancel = new CancellationToken(true);
         var (tree, model) = TestHelper.CompileCS("// Nothing to see here");
         var node = tree.GetRoot();
-        var options = TestHelper.CreateOptions(null);
+        var options = TestHelper.CreateOptions();
         var containingSymbol = Mock.Of<ISymbol>();
         var context = new SyntaxNodeAnalysisContext(node, containingSymbol, model, options, _ => { }, _ => true, cancel);
         var sut = new SonarSyntaxNodeAnalysisContext(TestHelper.CreateSonarAnalysisContext(), context);
@@ -60,7 +60,7 @@ public class SonarSyntaxNodeAnalysisContextTest
         var rule = TestHelper.CreateDescriptorMain();
         var node = tree.GetRoot();
         var wasReported = false;
-        var context = new SyntaxNodeAnalysisContext(node, model, TestHelper.CreateOptions(null), _ => wasReported = true, _ => true, default);
+        var context = new SyntaxNodeAnalysisContext(node, model, TestHelper.CreateOptions(), _ => wasReported = true, _ => true, default);
         var sut = new SonarSyntaxNodeAnalysisContext(analysisContext, context);
         try
         {

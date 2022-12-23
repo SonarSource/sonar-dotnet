@@ -59,17 +59,10 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void ShouldAnalyzeGeneratedCode_NonSonarLintXmlPath_ReturnsFalse(string filePath) =>
             GetSetting(SourceText.From(File.ReadAllText("ResourceTests\\AnalyzeGeneratedTrue\\SonarLint.xml")), filePath).Should().BeFalse();
 
-        private static bool GetSetting(SourceText content, string filePath = "fakePath\\SonarLint.xml")
+        private static bool GetSetting(SourceText text, string path = "fakePath\\SonarLint.xml")
         {
-            // Arrange
-            var additionalText = new Mock<AdditionalText>();
-            additionalText.Setup(x => x.Path).Returns(filePath); // use in-memory additional file
-            additionalText.Setup(x => x.GetText(default)).Returns(content);
-
-            var options = new AnalyzerOptions(ImmutableArray.Create(additionalText.Object));
-
-            // Act
-            return PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(options.ParseSonarLintXmlSettings(), LanguageNames.CSharp);
+            var options = TestHelper.CreateOptions(path, text);
+            return PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(PropertiesHelper.ParseXmlSettings(options), LanguageNames.CSharp);
         }
     }
 }
