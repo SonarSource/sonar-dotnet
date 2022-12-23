@@ -93,7 +93,7 @@ namespace SonarAnalyzer.Rules
         private void CheckForHardcodedIpAddressesInStringInterpolation(SyntaxNodeAnalysisContext context)
         {
             if (IsEnabled(context.Options)
-                && Language.Syntax.TryGetGetInterpolatedTextValue(context.Node, context.SemanticModel, out var stringContent)
+                && Language.Syntax.TryGetInterpolatedTextValue(context.Node, context.SemanticModel, out var stringContent)
                 && IsHardcodedIp(stringContent, context.Node))
             {
                 context.ReportIssue(Diagnostic.Create(Rule, context.Node.GetLocation(), stringContent));

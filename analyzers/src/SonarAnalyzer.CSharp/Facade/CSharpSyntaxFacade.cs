@@ -110,8 +110,8 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
     public override string StringValue(SyntaxNode node, SemanticModel semanticModel) =>
         CSharpSyntaxHelper.StringValue(node, semanticModel);
 
-    public override bool TryGetGetInterpolatedTextValue(SyntaxNode node, SemanticModel semanticModel, out string interpolatedValue) =>
-        Cast<InterpolatedStringExpressionSyntax>(node).TryGetGetInterpolatedTextValue(semanticModel, out interpolatedValue);
+    public override bool TryGetInterpolatedTextValue(SyntaxNode node, SemanticModel semanticModel, out string interpolatedValue) =>
+        Cast<InterpolatedStringExpressionSyntax>(node).TryGetInterpolatedTextValue(semanticModel, out interpolatedValue);
 
     public override bool IsStatic(SyntaxNode node) =>
         Cast<BaseMethodDeclarationSyntax>(node).IsStatic();

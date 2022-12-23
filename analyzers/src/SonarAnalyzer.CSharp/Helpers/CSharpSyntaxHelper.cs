@@ -286,7 +286,7 @@ namespace SonarAnalyzer.Helpers
             node switch
             {
                 LiteralExpressionSyntax literal when literal.IsAnyKind(SyntaxKind.StringLiteralExpression, SyntaxKindEx.Utf8StringLiteralExpression) => literal.Token.ValueText,
-                InterpolatedStringExpressionSyntax expression => expression.TryGetGetInterpolatedTextValue(semanticModel, out var interpolatedValue) ? interpolatedValue : expression.GetContentsText(),
+                InterpolatedStringExpressionSyntax expression => expression.TryGetInterpolatedTextValue(semanticModel, out var interpolatedValue) ? interpolatedValue : expression.GetContentsText(),
                 _ => null
             };
 

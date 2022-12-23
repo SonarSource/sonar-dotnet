@@ -110,11 +110,11 @@ internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
         Cast<MethodBlockSyntax>(node).IsShared();
 
     public override SyntaxNode RemoveParentheses(SyntaxNode node) =>
-    node.RemoveParentheses();
+        node.RemoveParentheses();
 
     public override string StringValue(SyntaxNode node, SemanticModel semanticModel) =>
         VisualBasicSyntaxHelper.StringValue(node, semanticModel);
 
-    public override bool TryGetGetInterpolatedTextValue(SyntaxNode node, SemanticModel semanticModel, out string interpolatedValue) =>
-        Cast<InterpolatedStringExpressionSyntax>(node).TryGetGetInterpolatedTextValue(semanticModel, out interpolatedValue);
+    public override bool TryGetInterpolatedTextValue(SyntaxNode node, SemanticModel semanticModel, out string interpolatedValue) =>
+        Cast<InterpolatedStringExpressionSyntax>(node).TryGetInterpolatedTextValue(semanticModel, out interpolatedValue);
 }

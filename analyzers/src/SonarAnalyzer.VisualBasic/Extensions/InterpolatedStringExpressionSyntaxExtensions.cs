@@ -25,7 +25,7 @@ namespace SonarAnalyzer.Extensions
         public static string GetContentsText(this InterpolatedStringExpressionSyntax interpolatedStringExpression) =>
             interpolatedStringExpression.Contents.JoinStr(null, content => content.ToString());
 
-        public static bool TryGetGetInterpolatedTextValue(this InterpolatedStringExpressionSyntax interpolatedStringExpression, SemanticModel semanticModel, out string interpolatedValue) =>
-            VisualBasicStringInterpolationConstantValueResolver.Instance.TryGetGetInterpolatedTextValue(interpolatedStringExpression, semanticModel, out interpolatedValue);
+        public static bool TryGetInterpolatedTextValue(this InterpolatedStringExpressionSyntax interpolatedStringExpression, SemanticModel semanticModel, out string interpolatedValue) =>
+            VisualBasicStringInterpolationConstantValueResolver.Instance.TryGetInterpolatedTextValue(interpolatedStringExpression, semanticModel, out interpolatedValue);
     }
 }
