@@ -36,7 +36,7 @@ public partial class SonarAnalysisContextTest
     private const string SnippetFileName = "snippet0.cs";
     private const string AnotherFileName = "Any other file name to make snippet0 considered as changed.cs";
 
-    private static readonly DiagnosticDescriptor[] DummyMainDescriptor = { TestHelper.CreateDescriptor("Sxxxx", DiagnosticDescriptorFactory.MainSourceScopeTag) };
+    private static readonly DiagnosticDescriptor[] DummyMainDescriptor = { TestHelper.CreateDescriptorMain() };
 
     [DataTestMethod]
     [DataRow(SnippetFileName, false)]
@@ -206,7 +206,7 @@ public partial class SonarAnalysisContextTest
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     private class DummyAnalyzerForGenerated : SonarDiagnosticAnalyzer
     {
-        private readonly DiagnosticDescriptor rule = TestHelper.CreateDescriptor("SGenerated", DiagnosticDescriptorFactory.MainSourceScopeTag);
+        private readonly DiagnosticDescriptor rule = TestHelper.CreateDescriptorMain();
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 

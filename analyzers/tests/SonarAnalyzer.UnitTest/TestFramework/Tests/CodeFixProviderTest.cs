@@ -45,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         {
             public const string DiagnosticId = "Test42";
 
-            private readonly DiagnosticDescriptor rule = TestHelper.CreateDescriptor(DiagnosticId, DiagnosticDescriptorFactory.MainSourceScopeTag);
+            private readonly DiagnosticDescriptor rule = TestHelper.CreateDescriptorMain(DiagnosticId);
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 

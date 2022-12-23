@@ -40,7 +40,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 
     internal abstract class DummyAnalyzer<TSyntaxKind> : SonarDiagnosticAnalyzer where TSyntaxKind : struct
     {
-        private static readonly DiagnosticDescriptor Rule = TestHelper.CreateDescriptor("SDummy", DiagnosticDescriptorFactory.MainSourceScopeTag);
+        private static readonly DiagnosticDescriptor Rule = TestHelper.CreateDescriptorMain("SDummy");
 
         protected abstract TSyntaxKind NumericLiteralExpression { get; }
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }

@@ -59,7 +59,7 @@ public class SonarSyntaxNodeAnalysisContextTest
         var (tree, model) = TestHelper.CompileCS("// Nothing to see here");
         var nodeFromCorrectCompilation = tree.GetRoot();
         var nodeFromAnotherCompilation = TestHelper.CompileCS("// This is another Compilation with another Tree").Tree.GetRoot();
-        var rule = TestHelper.CreateDescriptor("Sxxx", DiagnosticDescriptorFactory.MainSourceScopeTag);
+        var rule = TestHelper.CreateDescriptorMain();
         var node = tree.GetRoot();
         var wasReported = false;
         var context = new SyntaxNodeAnalysisContext(node, model, TestHelper.CreateOptions(null), _ => wasReported = true, _ => true, default);

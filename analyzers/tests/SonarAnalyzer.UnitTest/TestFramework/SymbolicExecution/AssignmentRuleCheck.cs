@@ -40,7 +40,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 
     internal class MainScopeAssignmentRuleCheck : AssignmentRuleCheck
     {
-        public static readonly DiagnosticDescriptor SMain = TestHelper.CreateDescriptor("SMain", DiagnosticDescriptorFactory.MainSourceScopeTag);
+        public static readonly DiagnosticDescriptor SMain = TestHelper.CreateDescriptorMain("SMain");
 
         protected override DiagnosticDescriptor Rule => SMain;
     }
@@ -61,7 +61,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 
     internal class InvocationAssignmentRuleCheck : AssignmentRuleCheck
     {
-        public static readonly DiagnosticDescriptor SInvocation = TestHelper.CreateDescriptor("SInvocation", DiagnosticDescriptorFactory.MainSourceScopeTag);
+        public static readonly DiagnosticDescriptor SInvocation = TestHelper.CreateDescriptorMain("SInvocation");
 
         protected override DiagnosticDescriptor Rule => SInvocation;
 
@@ -72,7 +72,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 
     internal class ThrowAssignmentRuleCheck : AssignmentRuleCheck
     {
-        public static readonly DiagnosticDescriptor SThrow = TestHelper.CreateDescriptor("SThrow", DiagnosticDescriptorFactory.MainSourceScopeTag);
+        public static readonly DiagnosticDescriptor SThrow = TestHelper.CreateDescriptorMain("SThrow");
 
         protected override DiagnosticDescriptor Rule => SThrow;
 

@@ -24,7 +24,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 {
     internal class BinaryRuleCheck : SymbolicRuleCheck
     {
-        public static readonly DiagnosticDescriptor SBinary = TestHelper.CreateDescriptor("SBinary", DiagnosticDescriptorFactory.MainSourceScopeTag);
+        public static readonly DiagnosticDescriptor SBinary = TestHelper.CreateDescriptorMain("SBinary");
 
         protected override DiagnosticDescriptor Rule => SBinary;
 
