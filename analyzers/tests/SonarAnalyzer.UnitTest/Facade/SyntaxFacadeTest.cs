@@ -95,6 +95,14 @@ namespace SonarAnalyzer.UnitTest.Helpers
             vb.StringValue(VB.SyntaxFactory.ThrowStatement(), null).Should().BeNull();
 
         [TestMethod]
+        public void StringValue_NodeIsNull_ReturnsNull_CS() =>
+            cs.StringValue(null, null).Should().BeNull();
+
+        [TestMethod]
+        public void StringValue_NodeIsNull_ReturnsNull_VB() =>
+            vb.StringValue(null, null).Should().BeNull();
+
+        [TestMethod]
         public void RemoveConditionalAccess_Null_CS() =>
             cs.RemoveConditionalAccess(null).Should().BeNull();
 
