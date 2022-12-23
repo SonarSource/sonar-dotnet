@@ -95,11 +95,11 @@ namespace SonarAnalyzer.UnitTest.Helpers
             vb.StringValue(VB.SyntaxFactory.ThrowStatement(), null).Should().BeNull();
 
         [TestMethod]
-        public void StringValue_NodeIsNull_ReturnsNull_CS() =>
+        public void StringValue_NodeIsNull_CS() =>
             cs.StringValue(null, null).Should().BeNull();
 
         [TestMethod]
-        public void StringValue_NodeIsNull_ReturnsNull_VB() =>
+        public void StringValue_NodeIsNull_VB() =>
             vb.StringValue(null, null).Should().BeNull();
 
         [TestMethod]

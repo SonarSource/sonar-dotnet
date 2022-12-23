@@ -189,19 +189,19 @@ namespace SonarAnalyzer.Helpers
 
         public static string StringValue(this SyntaxNode node, SemanticModel semanticModel)
         {
-            if (node != null)
+            if (node.IsKind(SyntaxKind.StringLiteralExpression) && node is LiteralExpressionSyntax literal)
             {
-                if (node.IsKind(SyntaxKind.StringLiteralExpression) && node is LiteralExpressionSyntax literal)
-                {
-                    return literal.Token.ValueText;
-                }
-                else if (node is InterpolatedStringExpressionSyntax interpolatedExpression)
-                {
-                    interpolatedExpression.TryGetGetInterpolatedTextValue(semanticModel, out var interpolatedValue);
-                    return interpolatedValue ?? interpolatedExpression.GetContentsText() ?? null;
-                }
+                return literal.Token.ValueText;
             }
-            return null;
+            else if (node is InterpolatedStringExpressionSyntax interpolatedExpression)
+            {
+                interpolatedExpression.TryGetGetInterpolatedTextValue(semanticModel, out var interpolatedValue);
+                return interpolatedValue ?? interpolatedExpression.GetContentsText() ?? null;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public static bool IsLeftSideOfAssignment(this ExpressionSyntax expression)

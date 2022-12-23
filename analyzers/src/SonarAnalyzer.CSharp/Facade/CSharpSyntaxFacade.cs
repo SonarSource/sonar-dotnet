@@ -104,12 +104,15 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
             ? expression.RemoveConditionalAccess()
             : node;
 
-    public override bool IsStatic(SyntaxNode node) => Cast<BaseMethodDeclarationSyntax>(node).IsStatic();
-
-    public override SyntaxNode RemoveParentheses(SyntaxNode node) => node.RemoveParentheses();
+    public override SyntaxNode RemoveParentheses(SyntaxNode node) =>
+        node.RemoveParentheses();
 
     public override string StringValue(SyntaxNode node, SemanticModel semanticModel) =>
         CSharpSyntaxHelper.StringValue(node, semanticModel);
+
     public override bool TryGetGetInterpolatedTextValue(SyntaxNode node, SemanticModel semanticModel, out string interpolatedValue) =>
         Cast<InterpolatedStringExpressionSyntax>(node).TryGetGetInterpolatedTextValue(semanticModel, out interpolatedValue);
+
+    public override bool IsStatic(SyntaxNode node) =>
+        Cast<BaseMethodDeclarationSyntax>(node).IsStatic();
 }

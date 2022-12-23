@@ -106,9 +106,11 @@ internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
         return whenNotNull;
     }
 
-    public override SyntaxNode RemoveParentheses(SyntaxNode node) => node.RemoveParentheses();
+    public override bool IsStatic(SyntaxNode node) =>
+        Cast<MethodBlockSyntax>(node).IsShared();
 
-    public override bool IsStatic(SyntaxNode node) => Cast<MethodBlockSyntax>(node).IsShared();
+    public override SyntaxNode RemoveParentheses(SyntaxNode node) =>
+    node.RemoveParentheses();
 
     public override string StringValue(SyntaxNode node, SemanticModel semanticModel) =>
         VisualBasicSyntaxHelper.StringValue(node, semanticModel);
