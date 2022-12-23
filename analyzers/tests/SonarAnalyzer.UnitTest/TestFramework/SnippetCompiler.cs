@@ -144,9 +144,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public SonarSyntaxNodeAnalysisContext CreateAnalysisContext(SyntaxNode node)
         {
-            var analysisContext = new SonarAnalysisContext(Mock.Of<RoslynAnalysisContext>(), Enumerable.Empty<DiagnosticDescriptor>());
             var nodeContext =  new SyntaxNodeAnalysisContext(node, SemanticModel, null, null, null, default);
-            return new(analysisContext, nodeContext);
+            return new(TestHelper.CreateSonarAnalysisContext(), nodeContext);
         }
 
         private static bool HasCompilationErrors(Compilation compilation) =>

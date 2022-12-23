@@ -180,8 +180,7 @@ public partial class SonarAnalysisContextBaseTest
 
     private static SonarCompilationAnalysisContext CreateSut(Compilation compilation, AnalyzerOptions options)
     {
-        var analysisContext = new SonarAnalysisContext(Mock.Of<RoslynAnalysisContext>(), Enumerable.Empty<DiagnosticDescriptor>());
         var compilationContext = new CompilationAnalysisContext(compilation, options, _ => { }, _ => true, default);
-        return new(analysisContext, compilationContext);
+        return new(TestHelper.CreateSonarAnalysisContext(), compilationContext);
     }
 }

@@ -130,7 +130,6 @@ namespace SonarAnalyzer.UnitTest.Rules.Utilities
             public TestUtilityAnalyzer(string language, params string[] additionalPaths) : base("S9999-test", "Title")
             {
                 var additionalFiles = additionalPaths.Select(x => new AnalyzerAdditionalFile(x)).ToImmutableArray<AdditionalText>();
-                var context = new SonarAnalysisContext(new SonarAnalysisContextTest.DummyContext(), Enumerable.Empty<DiagnosticDescriptor>());
                 Compilation compilation = language switch
                 {
                     LanguageNames.CSharp => CSharpCompilation.Create(null),
@@ -138,7 +137,7 @@ namespace SonarAnalyzer.UnitTest.Rules.Utilities
                     _ => throw new InvalidOperationException($"Unexpected {nameof(language)}: {language}")
                 };
                 var c = new CompilationAnalysisContext(compilation, new AnalyzerOptions(additionalFiles), null, null, default);
-                ReadParameters(new(context, c));
+                ReadParameters(new(TestHelper.CreateSonarAnalysisContext(), c));
             }
 
             protected override void Initialize(SonarAnalysisContext context) =>

@@ -278,9 +278,8 @@ public partial class SonarAnalysisContextTest
     {
         var compilation = new SnippetCompiler("// Nothing to see here", TestHelper.ProjectTypeReference(projectType)).SemanticModel.Compilation;
         var options = new AnalyzerOptions(ImmutableArray<AdditionalText>.Empty);
-        var analysisContext = new SonarAnalysisContext(new DummyContext(), Enumerable.Empty<DiagnosticDescriptor>());
         var context = new CompilationAnalysisContext(compilation, options, null, null, default);
-        var sut = new SonarCompilationAnalysisContext(analysisContext, context);
+        var sut = new SonarCompilationAnalysisContext(TestHelper.CreateSonarAnalysisContext(), context);
 
         sut.IsTestProject().Should().Be(expectedResult);
     }
@@ -291,9 +290,8 @@ public partial class SonarAnalysisContextTest
     public void IsTestProject_WithConfigFile(ProjectType projectType, bool expectedResult)
     {
         var configPath = TestHelper.CreateSonarProjectConfig(TestContext, projectType);
-        var analysisContext = new SonarAnalysisContext(new DummyContext(), Enumerable.Empty<DiagnosticDescriptor>());
         var context = new CompilationAnalysisContext(null, TestHelper.CreateOptions(configPath), null, null, default);
-        var sut = new SonarCompilationAnalysisContext(analysisContext, context);
+        var sut = new SonarCompilationAnalysisContext(TestHelper.CreateSonarAnalysisContext(), context);
 
         sut.IsTestProject().Should().Be(expectedResult);
     }
@@ -312,17 +310,5 @@ public partial class SonarAnalysisContextTest
         sut.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, Mock.Of<Diagnostic>(x => x.Id == "Sxxx" && x.Location == location && x.Descriptor == DummyMainDescriptor[0]));
 
         wasReported.Should().Be(expected);
-    }
-
-    internal class DummyContext : RoslynAnalysisContext
-{
-        public override void RegisterCodeBlockAction(Action<CodeBlockAnalysisContext> action) => throw new NotImplementedException();
-        public override void RegisterCodeBlockStartAction<TLanguageKindEnum>(Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action) => throw new NotImplementedException();
-        public override void RegisterCompilationAction(Action<CompilationAnalysisContext> action) => throw new NotImplementedException();
-        public override void RegisterCompilationStartAction(Action<CompilationStartAnalysisContext> action) => throw new NotImplementedException();
-        public override void RegisterSemanticModelAction(Action<SemanticModelAnalysisContext> action) => throw new NotImplementedException();
-        public override void RegisterSymbolAction(Action<SymbolAnalysisContext> action, ImmutableArray<SymbolKind> symbolKinds) => throw new NotImplementedException();
-        public override void RegisterSyntaxNodeAction<TLanguageKindEnum>(Action<SyntaxNodeAnalysisContext> action, ImmutableArray<TLanguageKindEnum> syntaxKinds) => throw new NotImplementedException();
-        public override void RegisterSyntaxTreeAction(Action<SyntaxTreeAnalysisContext> action) => throw new NotImplementedException();
     }
 }
