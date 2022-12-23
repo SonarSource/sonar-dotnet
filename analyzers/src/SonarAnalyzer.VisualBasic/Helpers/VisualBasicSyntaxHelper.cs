@@ -187,22 +187,13 @@ namespace SonarAnalyzer.Helpers
         public static bool HasConstantValue(this ExpressionSyntax expression, SemanticModel semanticModel) =>
             expression.RemoveParentheses().IsAnyKind(LiteralSyntaxKinds) || expression.FindConstantValue(semanticModel) != null;
 
-        public static string StringValue(this SyntaxNode node, SemanticModel semanticModel)
-        {
-            if (node.IsKind(SyntaxKind.StringLiteralExpression) && node is LiteralExpressionSyntax literal)
+        public static string StringValue(this SyntaxNode node, SemanticModel semanticModel) =>
+            node switch
             {
-                return literal.Token.ValueText;
-            }
-            else if (node is InterpolatedStringExpressionSyntax interpolatedExpression)
-            {
-                interpolatedExpression.TryGetGetInterpolatedTextValue(semanticModel, out var interpolatedValue);
-                return interpolatedValue ?? interpolatedExpression.GetContentsText() ?? null;
-            }
-            else
-            {
-                return null;
-            }
-        }
+                LiteralExpressionSyntax literal when literal.IsAnyKind(SyntaxKind.StringLiteralExpression) => literal.Token.ValueText,
+                InterpolatedStringExpressionSyntax expression => expression.TryGetGetInterpolatedTextValue(semanticModel, out var interpolatedValue) ? interpolatedValue : expression.GetContentsText(),
+                _ => null
+            };
 
         public static bool IsLeftSideOfAssignment(this ExpressionSyntax expression)
         {
