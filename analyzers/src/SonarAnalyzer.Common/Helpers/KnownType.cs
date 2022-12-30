@@ -232,6 +232,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_ComponentModel_Composition_ExportAttribute = new("System.ComponentModel.Composition.ExportAttribute");
         internal static readonly KnownType System_ComponentModel_Composition_InheritedExportAttribute = new("System.ComponentModel.Composition.InheritedExportAttribute");
         internal static readonly KnownType System_ComponentModel_Composition_PartCreationPolicyAttribute = new("System.ComponentModel.Composition.PartCreationPolicyAttribute");
+        internal static readonly KnownType System_ComponentModel_DataAnnotations_RegularExpressionAttribute = new("System.ComponentModel.DataAnnotations.RegularExpressionAttribute");
         internal static readonly KnownType System_Configuration_ConfigXmlDocument = new("System.Configuration.ConfigXmlDocument");
         internal static readonly KnownType System_Console = new("System.Console");
         internal static readonly KnownType System_Data_Common_CommandTrees_DbExpression = new("System.Data.Common.CommandTrees.DbExpression");
@@ -451,6 +452,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_SystemException = new("System.SystemException");
         internal static readonly KnownType System_Text_RegularExpressions_Regex = new("System.Text.RegularExpressions.Regex");
         internal static readonly KnownType System_Text_RegularExpressions_RegexOptions = new("System.Text.RegularExpressions.RegexOptions");
+        internal static readonly KnownType System_Text_RegularExpressions_GeneratedRegexAttribute = new("System.Text.RegularExpressions.GeneratedRegexAttribute");
         internal static readonly KnownType System_Text_StringBuilder = new("System.Text.StringBuilder");
         internal static readonly KnownType System_Threading_Monitor = new("System.Threading.Monitor");
         internal static readonly KnownType System_Threading_Mutex = new("System.Threading.Mutex");

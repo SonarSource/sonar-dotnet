@@ -55,6 +55,7 @@ internal sealed class CSharpFacade : ILanguageFacade<SyntaxKind>
         invocation switch
         {
             null => null,
+            AttributeSyntax x => new CSharpAttributeParameterLookup(x, methodSymbol),
             ObjectCreationExpressionSyntax x => new CSharpMethodParameterLookup(x.ArgumentList, methodSymbol),
             InvocationExpressionSyntax x => new CSharpMethodParameterLookup(x, methodSymbol),
             _ when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(invocation) =>

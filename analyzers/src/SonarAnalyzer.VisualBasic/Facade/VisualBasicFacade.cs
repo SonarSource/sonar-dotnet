@@ -54,6 +54,7 @@ internal sealed class VisualBasicFacade : ILanguageFacade<SyntaxKind>
         invocation switch
         {
             null => null,
+            AttributeSyntax x => new VisualBasicMethodParameterLookup(x.ArgumentList, methodSymbol),
             ObjectCreationExpressionSyntax x => new VisualBasicMethodParameterLookup(x.ArgumentList, methodSymbol),
             InvocationExpressionSyntax x => new VisualBasicMethodParameterLookup(x, methodSymbol),
             _ => throw new ArgumentException($"{invocation.GetType()} does not contain an ArgumentList.", nameof(invocation)),

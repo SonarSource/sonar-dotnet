@@ -1,6 +1,6 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2015-2022 SonarSource SA
+ * Copyright (C) 2015-2023 SonarSource SA
  * mailto: contact AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -18,23 +18,22 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+internal class VisualBasicMethodParameterLookup : MethodParameterLookupBase<ArgumentSyntax>
 {
-    internal class VisualBasicMethodParameterLookup : MethodParameterLookupBase<ArgumentSyntax>
-    {
-        public VisualBasicMethodParameterLookup(ArgumentListSyntax argumentList, IMethodSymbol methodSymbol)
-            : base(argumentList?.Arguments, methodSymbol) { }
+    public VisualBasicMethodParameterLookup(ArgumentListSyntax argumentList, IMethodSymbol methodSymbol)
+        : base(argumentList?.Arguments, methodSymbol) { }
 
-        public VisualBasicMethodParameterLookup(InvocationExpressionSyntax invocation, IMethodSymbol methodSymbol)
-            : this(invocation.ArgumentList, methodSymbol) { }
+    public VisualBasicMethodParameterLookup(InvocationExpressionSyntax invocation, IMethodSymbol methodSymbol)
+        : this(invocation.ArgumentList, methodSymbol) { }
 
-        public VisualBasicMethodParameterLookup(ArgumentListSyntax argumentList, SemanticModel semanticModel)
-            : base(argumentList?.Arguments, argumentList == null ? null : semanticModel.GetSymbolInfo(argumentList.Parent).Symbol as IMethodSymbol) { }
+    public VisualBasicMethodParameterLookup(ArgumentListSyntax argumentList, SemanticModel semanticModel)
+        : base(argumentList?.Arguments, argumentList == null ? null : semanticModel.GetSymbolInfo(argumentList.Parent).Symbol as IMethodSymbol) { }
 
-        protected override SyntaxToken? GetNameColonArgumentIdentifier(ArgumentSyntax argument) =>
-            (argument as SimpleArgumentSyntax)?.NameColonEquals?.Name.Identifier;
+    protected override SyntaxToken? GetNameColonArgumentIdentifier(ArgumentSyntax argument) =>
+        (argument as SimpleArgumentSyntax)?.NameColonEquals?.Name.Identifier;
 
-        protected override SyntaxNode Expression(ArgumentSyntax argument) =>
-            argument.GetExpression();
-    }
+    protected override SyntaxNode Expression(ArgumentSyntax argument) =>
+        argument.GetExpression();
 }
