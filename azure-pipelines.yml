@@ -519,7 +519,7 @@ stages:
             -DskipTests=true
           publishJUnitResults: false
           javaHomeOption: 'JDKVersion'
-          jdkVersionOption: '1.11'
+          jdkVersionOption: '1.17'
           mavenOptions: $(MAVEN_OPTS)
 
       - task: Maven@3
@@ -535,7 +535,7 @@ stages:
           testResultsFiles: '**/surefire-reports/TEST-*.xml'
           testRunTitle: '$(Agent.JobName)'
           javaHomeOption: 'JDKVersion'
-          jdkVersionOption: '1.11'
+          jdkVersionOption: '1.17'
           mavenOptions: $(MAVEN_OPTS)
 
 - stage: promoteNugets
