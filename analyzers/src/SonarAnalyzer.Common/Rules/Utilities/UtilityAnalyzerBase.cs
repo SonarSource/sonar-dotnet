@@ -101,8 +101,7 @@ namespace SonarAnalyzer.Rules
 
                 startContext.RegisterSemanticModelAction(modelContext =>
                 {
-                    var semanticModel = modelContext.SemanticModel;
-                    var syntaxTree = semanticModel.SyntaxTree;
+                    var tree = semanticModel.SyntaxTree;
                     if (ShouldGenerateMetrics(tryGetValue, semanticModel.Compilation, modelContext.Options, syntaxTree))
                     {
                         treeMessages.Push(CreateMessage(syntaxTree, semanticModel));
@@ -113,7 +112,7 @@ namespace SonarAnalyzer.Rules
                 {
                     var analysisMessages = CreateAnalysisMessages(endContext.Compilation);
 
-                    var allMessages = analysisMessages
+                    var allMessages = CreateAnalysisMessages(endContext.Compilation)
                         .Concat(treeMessages)
                         .WhereNotNull()
                         .ToArray();
@@ -126,7 +125,6 @@ namespace SonarAnalyzer.Rules
                         {
                             message.WriteDelimitedTo(stream);
                         }
-                        stream.Close();
                     }
                 });
             });
