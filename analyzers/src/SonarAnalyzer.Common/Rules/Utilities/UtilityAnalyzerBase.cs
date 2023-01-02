@@ -101,17 +101,15 @@ namespace SonarAnalyzer.Rules
 
                 startContext.RegisterSemanticModelAction(modelContext =>
                 {
-                    var tree = semanticModel.SyntaxTree;
-                    if (ShouldGenerateMetrics(tryGetValue, semanticModel.Compilation, modelContext.Options, syntaxTree))
+                    var tree = modelContext.SemanticModel.SyntaxTree;
+                    if (ShouldGenerateMetrics(tryGetValue, modelContext.SemanticModel.Compilation, modelContext.Options, tree))
                     {
-                        treeMessages.Push(CreateMessage(syntaxTree, semanticModel));
+                        treeMessages.Push(CreateMessage(tree, modelContext.SemanticModel));
                     }
                 });
 
                 startContext.RegisterCompilationEndAction(endContext =>
                 {
-                    var analysisMessages = CreateAnalysisMessages(endContext.Compilation);
-
                     var allMessages = CreateAnalysisMessages(endContext.Compilation)
                         .Concat(treeMessages)
                         .WhereNotNull()

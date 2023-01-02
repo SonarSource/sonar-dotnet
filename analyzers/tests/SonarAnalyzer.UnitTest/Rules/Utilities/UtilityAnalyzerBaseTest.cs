@@ -136,7 +136,6 @@ namespace SonarAnalyzer.UnitTest.Rules.Utilities
                     LanguageNames.VisualBasic => VisualBasicCompilation.Create(null),
                     _ => throw new InvalidOperationException($"Unexpected {nameof(language)}: {language}")
                 };
-                var c = new CompilationAnalysisContext(compilation, new AnalyzerOptions(additionalFiles), null, null, default);
                 ReadParameters(context, new AnalyzerOptions(additionalFiles), compilation);
             }
 
