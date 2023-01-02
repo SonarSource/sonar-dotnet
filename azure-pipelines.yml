@@ -506,12 +506,6 @@ stages:
 
       - template: set-azp-variables-steps.yml@pipelines-yaml-templates
 
-      - task: JavaToolInstaller@0
-        inputs:
-          versionSpec: '17'
-          jdkArchitectureOption: 'x64'
-          jdkSourceOption: 'PreInstalled'
-
       - task: Maven@3
         displayName: 'Maven install'
         env:
