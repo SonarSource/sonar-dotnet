@@ -102,6 +102,7 @@ public class AbstractFileCacheSensorTest {
 
     assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
     assertThat(logTester.logs(LoggerLevel.INFO)).containsExactly("Incremental PR analysis is supported only starting with SonarQube 9.4.");
+    assertThat(logTester.logs(LoggerLevel.INFO)).doesNotContain("Incremental PR analysis: Analysis cache is disabled.");
   }
 
   @Test
