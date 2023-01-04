@@ -38,16 +38,14 @@ internal sealed class RegexNode
     public SyntaxNodeValue<RegexOptions?> Options { get; }
 
     public static RegexNode? FromCtor<TSyntaxKind>(SyntaxNode node, SemanticModel model, ILanguageFacade<TSyntaxKind> language) where TSyntaxKind : struct =>
-        language.Syntax.IsAnyKind(node, language.SyntaxKind.ObjectCreationExpressions)
-        && model.GetSymbolInfo(node).Symbol is IMethodSymbol method
+        model.GetSymbolInfo(node).Symbol is IMethodSymbol method
         && method.ContainingType.Is(KnownType.System_Text_RegularExpressions_Regex)
         && method.IsConstructor()
         ? FromSymbol(method, node, model, language)
         : null;
 
     public static RegexNode? FromMethod<TSyntaxKind>(SyntaxNode node, SemanticModel model, ILanguageFacade<TSyntaxKind> language) where TSyntaxKind : struct =>
-        language.Syntax.IsKind(node, language.SyntaxKind.InvocationExpression)
-        && language.Syntax.NodeIdentifier(node).GetValueOrDefault().Text is { } name
+        language.Syntax.NodeIdentifier(node).GetValueOrDefault().Text is { } name
         && MatchMethods.Any(x => x.Equals(name, language.NameComparison))
         && model.GetSymbolInfo(node).Symbol is IMethodSymbol method
         && method.ContainingType.Is(KnownType.System_Text_RegularExpressions_Regex)
