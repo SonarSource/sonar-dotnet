@@ -22,12 +22,16 @@ package org.sonar.plugins.csharp;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import org.sonar.api.SonarEdition;
+import org.sonar.api.SonarQubeSide;
+import org.sonar.api.SonarRuntime;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.cache.WriteCache;
-import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.internal.MapSettings;
+import org.sonar.api.internal.SonarRuntimeImpl;
+import org.sonar.api.utils.Version;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 import org.sonarsource.dotnet.shared.plugins.HashProvider;
@@ -42,6 +46,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class CSharpFileCacheSensorTest {
+  private static final SonarRuntime RUNTIME_WITH_ANALYSIS_CACHE = SonarRuntimeImpl.forSonarQube(Version.create(9, 4), SonarQubeSide.SERVER, SonarEdition.COMMUNITY);
+
   @Rule
   public TemporaryFolder temp = new TemporaryFolder();
 
@@ -62,7 +68,7 @@ public class CSharpFileCacheSensorTest {
     context.setNextCache(mock(WriteCache.class));
     AddFile(context, basePath, "CSharp/Foo.cs", CSharpPlugin.LANGUAGE_KEY);
     AddFile(context, basePath, "VB/Bar.vb", "other-language-key");
-    var sut = new CSharpFileCacheSensor(new CSharp(settings.asConfig()), hashProvider);
+    var sut = new CSharpFileCacheSensor(new CSharp(settings.asConfig()), hashProvider, RUNTIME_WITH_ANALYSIS_CACHE);
 
     sut.execute(context);
 

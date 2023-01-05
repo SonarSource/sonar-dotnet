@@ -22,6 +22,9 @@ package org.sonarsource.dotnet.shared.plugins;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import org.sonar.api.SonarEdition;
+import org.sonar.api.SonarQubeSide;
+import org.sonar.api.SonarRuntime;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.SensorContext;
@@ -29,7 +32,9 @@ import org.sonar.api.batch.sensor.cache.WriteCache;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.internal.MapSettings;
+import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.resources.AbstractLanguage;
+import org.sonar.api.utils.Version;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
@@ -45,6 +50,8 @@ import static org.mockito.Mockito.when;
 public class AbstractFileCacheSensorTest {
   private static final String LANGUAGE_KEY = "language-key";
   private static final String LANGUAGE_NAME = "Language Name";
+  private static final SonarRuntime RUNTIME_WITH_ANALYSIS_CACHE = SonarRuntimeImpl.forSonarQube(Version.create(9, 4), SonarQubeSide.SERVER, SonarEdition.COMMUNITY);
+  private static final SonarRuntime RUNTIME_WITHOUT_ANALYSIS_CACHE = SonarRuntimeImpl.forSonarQube(Version.create(9, 3), SonarQubeSide.SERVER, SonarEdition.COMMUNITY);
 
   @Rule
   public TemporaryFolder temp = new TemporaryFolder();
@@ -55,7 +62,7 @@ public class AbstractFileCacheSensorTest {
   @Test
   public void should_describe() {
     var sensorDescriptor = new DefaultSensorDescriptor();
-    var sensor = new FileCacheSensor(new HashProvider());
+    var sensor = new FileCacheSensor(new HashProvider(), RUNTIME_WITH_ANALYSIS_CACHE);
     sensor.describe(sensorDescriptor);
 
     assertThat(sensorDescriptor.name()).isEqualTo("Language Name File Caching Sensor");
@@ -66,7 +73,7 @@ public class AbstractFileCacheSensorTest {
   public void execute_whenAnalyzingPullRequest_logsMessage() throws IOException {
     var settings = new MapSettings().setProperty("sonar.pullrequest.base", "42");
     var context = SensorContextTester.create(temp.newFolder()).setSettings(settings);
-    var sensor = new FileCacheSensor(new HashProvider());
+    var sensor = new FileCacheSensor(new HashProvider(), RUNTIME_WITH_ANALYSIS_CACHE);
 
     sensor.execute(context);
 
@@ -78,7 +85,7 @@ public class AbstractFileCacheSensorTest {
   public void execute_whenPullRequestCacheBasePathIsNotConfigured_logsWarning() throws IOException {
     var context = SensorContextTester.create(temp.newFolder());
     context.setCacheEnabled(true);
-    var sut = new FileCacheSensor(new HashProvider());
+    var sut = new FileCacheSensor(new HashProvider(), RUNTIME_WITH_ANALYSIS_CACHE);
 
     sut.execute(context);
 
@@ -86,10 +93,23 @@ public class AbstractFileCacheSensorTest {
   }
 
   @Test
+  public void execute_whenCacheIsNotAvailable_logsWarning() throws IOException {
+    var context = SensorContextTester.create(temp.newFolder());
+    context.setCacheEnabled(false);
+    var sensor = new FileCacheSensor(new HashProvider(), RUNTIME_WITHOUT_ANALYSIS_CACHE);
+
+    sensor.execute(context);
+
+    assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
+    assertThat(logTester.logs(LoggerLevel.INFO)).containsExactly("Incremental PR analysis is supported only starting with SonarQube 9.4.");
+    assertThat(logTester.logs(LoggerLevel.INFO)).doesNotContain("Incremental PR analysis: Analysis cache is disabled.");
+  }
+
+  @Test
   public void execute_whenCacheIsDisabled_logsWarning() throws IOException {
     var context = SensorContextTester.create(temp.newFolder());
     context.setCacheEnabled(false);
-    var sensor = new FileCacheSensor(new HashProvider());
+    var sensor = new FileCacheSensor(new HashProvider(), RUNTIME_WITH_ANALYSIS_CACHE);
 
     sensor.execute(context);
 
@@ -102,7 +122,7 @@ public class AbstractFileCacheSensorTest {
     var hashProvider = mock(HashProvider.class);
     when(hashProvider.computeHash(any())).thenReturn(new byte[] {42} );
     var context = CreateContextForCaching();
-    var sut = new FileCacheSensor(hashProvider);
+    var sut = new FileCacheSensor(hashProvider, RUNTIME_WITH_ANALYSIS_CACHE);
 
     sut.execute(context);
 
@@ -119,7 +139,7 @@ public class AbstractFileCacheSensorTest {
     var hashProvider = mock(HashProvider.class);
     when(hashProvider.computeHash(any())).thenThrow(new IOException("exception message"));
     var context = CreateContextForCaching();
-    var sut = new FileCacheSensor(hashProvider);
+    var sut = new FileCacheSensor(hashProvider, RUNTIME_WITH_ANALYSIS_CACHE);
 
     sut.execute(context);
 
@@ -151,8 +171,8 @@ public class AbstractFileCacheSensorTest {
   }
 
   private static class FileCacheSensor extends AbstractFileCacheSensor {
-    public FileCacheSensor(HashProvider hashProvider) {
-      super(new Language(), hashProvider);
+    public FileCacheSensor(HashProvider hashProvider, SonarRuntime runtime) {
+      super(new Language(), hashProvider, runtime);
     }
   }
 
