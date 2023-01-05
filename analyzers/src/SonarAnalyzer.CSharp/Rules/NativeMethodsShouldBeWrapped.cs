@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void ReportPublicExternalMethods(SymbolAnalysisContext c)
         {
             var methodSymbol = (IMethodSymbol)c.Symbol;
-            if (methodSymbol.IsExtern
+            if ((methodSymbol.IsExtern || methodSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_LibraryImportAttribute))
                 && methodSymbol.IsPubliclyAccessible())
             {
                 foreach (var methodDeclaration in methodSymbol.DeclaringSyntaxReferences
