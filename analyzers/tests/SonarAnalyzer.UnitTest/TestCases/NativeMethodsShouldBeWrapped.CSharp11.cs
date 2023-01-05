@@ -34,8 +34,6 @@ namespace LibraryImportAttributeTests
         }
 
         public static void CompliantDllImportAttributeAppliedToGeneratedLocalFunctionWrapper(string p) // Noncompliant
-        {
-            CompliantDllImportAttributeAppliedToGeneratedLocalFunction(p);
-        }
+            => CompliantDllImportAttributeAppliedToGeneratedLocalFunction(p);
     }
 }
