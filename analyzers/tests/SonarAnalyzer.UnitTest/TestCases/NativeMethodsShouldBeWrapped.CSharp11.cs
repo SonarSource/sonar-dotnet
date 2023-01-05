@@ -14,6 +14,6 @@ namespace LibraryImportAttributeTests
     public static partial class ExternMethods
     {
         [LibraryImport("foo.dll")]
-        public static partial void DllImportAttributeAppliedToThisFunction();
+        public static partial void DllImportAttributeAppliedToThisFunction(); // Noncompliant
     }
 }

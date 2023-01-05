@@ -34,17 +34,22 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSymbolAction(ReportPublicExternalMethods, SymbolKind.Method);
-            context.RegisterSyntaxNodeAction(ReportTrivialWrappers, SyntaxKind.MethodDeclaration);
+            context.RegisterSyntaxNodeActionInNonGenerated(ReportTrivialWrappers, SyntaxKind.MethodDeclaration);
         }
 
         private static void ReportPublicExternalMethods(SymbolAnalysisContext c)
         {
             var methodSymbol = (IMethodSymbol)c.Symbol;
             if (methodSymbol.IsExtern
-                && methodSymbol.IsPubliclyAccessible()
-                && methodSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is MethodDeclarationSyntax methodDeclaration)
+                && methodSymbol.IsPubliclyAccessible())
             {
-                c.ReportIssue(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation(), MakeThisMethodPrivateMessage));
+                foreach (var methodDeclaration in methodSymbol.DeclaringSyntaxReferences
+                    .Where(x => !x.SyntaxTree.IsGenerated(CSharpGeneratedCodeRecognizer.Instance, c.Compilation))
+                    .Select(x => x.GetSyntax())
+                    .OfType<MethodDeclarationSyntax>())
+                {
+                    c.ReportIssue(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation(), MakeThisMethodPrivateMessage));
+                }
             }
         }
 

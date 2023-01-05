@@ -47,6 +47,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .AddPaths("NativeMethodsShouldBeWrapped.CSharp11.cs")
                 .AddPaths("NativeMethodsShouldBeWrapped.CSharp11.SourceGenerator.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .WithConcurrentAnalysis(false)
                 .Verify();
 
 #endif
