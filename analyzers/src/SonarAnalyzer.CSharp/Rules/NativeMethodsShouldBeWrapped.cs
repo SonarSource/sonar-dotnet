@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void ReportPublicExternalMethods(SymbolAnalysisContext c)
         {
             var methodSymbol = (IMethodSymbol)c.Symbol;
-            if ((methodSymbol.IsExtern || methodSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_LibraryImportAttribute))
+            if (IsExternMethod(methodSymbol)
                 && methodSymbol.IsPubliclyAccessible())
             {
                 foreach (var methodDeclaration in methodSymbol.DeclaringSyntaxReferences
@@ -52,6 +52,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
         }
+
+        private static bool IsExternMethod(IMethodSymbol methodSymbol) =>
+            methodSymbol.IsExtern || methodSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_LibraryImportAttribute);
 
         private static void ReportTrivialWrappers(SyntaxNodeAnalysisContext c)
         {
@@ -102,7 +105,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static ISet<IMethodSymbol> GetExternalMethods(IMethodSymbol methodSymbol) =>
             methodSymbol.ContainingType.GetMembers()
                 .OfType<IMethodSymbol>()
-                .Where(m => m.IsExtern)
+                .Where(IsExternMethod)
                 .ToHashSet();
 
         private static IEnumerable<SyntaxNode> GetBodyDescendants(MethodDeclarationSyntax methodDeclaration) =>
