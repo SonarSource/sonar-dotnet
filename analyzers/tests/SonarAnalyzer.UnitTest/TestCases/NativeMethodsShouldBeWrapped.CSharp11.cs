@@ -28,7 +28,7 @@ namespace LibraryImportAttributeTests
 
         // Wrapper tests
 
-        public static void CompliantDllImportAttributeAppliedToThisFunctionWrapper(int i) // Noncompliant
+        public static void CompliantDllImportAttributeAppliedToThisFunctionWrapper(int i) // Noncompliant {{Make this wrapper for native method 'CompliantDllImportAttributeAppliedToThisFunction' less trivial.}}
         {
             CompliantDllImportAttributeAppliedToThisFunction(i);
         }
