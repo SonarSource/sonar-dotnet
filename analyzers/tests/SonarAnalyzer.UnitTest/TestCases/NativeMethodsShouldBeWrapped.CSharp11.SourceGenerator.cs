@@ -5,5 +5,34 @@ namespace LibraryImportAttributeTests
     {
         [System.Runtime.InteropServices.DllImportAttribute("foo.dll", EntryPoint = "DllImportAttributeAppliedToThisFunction", ExactSpelling = true)]
         public static extern partial void DllImportAttributeAppliedToThisFunction();
+
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Interop.LibraryImportGenerator", "7.0.7.6804")]
+        [System.Runtime.CompilerServices.SkipLocalsInitAttribute]
+        public static partial void DllImportAttributeAppliedToGeneratedLocalFunction(string p)
+        {
+            byte* __p_native = default;
+            // Setup - Perform required setup.
+            global::System.Runtime.InteropServices.Marshalling.Utf8StringMarshaller.ManagedToUnmanagedIn __p_native__marshaller = new();
+            try
+            {
+                // Marshal - Convert managed data to native data.
+                byte* __p_native__stackptr = stackalloc byte[global::System.Runtime.InteropServices.Marshalling.Utf8StringMarshaller.ManagedToUnmanagedIn.BufferSize];
+                __p_native__marshaller.FromManaged(p, new System.Span<byte>(__p_native__stackptr, global::System.Runtime.InteropServices.Marshalling.Utf8StringMarshaller.ManagedToUnmanagedIn.BufferSize));
+                {
+                    // PinnedMarshal - Convert managed data to native data that requires the managed data to be pinned.
+                    __p_native = __p_native__marshaller.ToUnmanaged();
+                    __PInvoke(__p_native);
+                }
+            }
+            finally
+            {
+                // Cleanup - Perform required cleanup.
+                __p_native__marshaller.Free();
+            }
+
+            // Local P/Invoke
+            [System.Runtime.InteropServices.DllImportAttribute("foo.dll", EntryPoint = "DllImportAttributeAppliedToGeneratedLocalFunction", ExactSpelling = true)]
+            static extern unsafe void __PInvoke(byte* p);
+        }
     }
 }

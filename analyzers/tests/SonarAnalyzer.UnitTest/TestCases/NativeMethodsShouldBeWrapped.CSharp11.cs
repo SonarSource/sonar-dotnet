@@ -15,5 +15,8 @@ namespace LibraryImportAttributeTests
     {
         [LibraryImport("foo.dll")]
         public static partial void DllImportAttributeAppliedToThisFunction(); // Noncompliant
+
+        [LibraryImport("foo.dll", StringMarshalling = StringMarshalling.Utf8)]
+        public static partial void DllImportAttributeAppliedToGeneratedLocalFunction(string p); // Noncompliant
     }
 }
