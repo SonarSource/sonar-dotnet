@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules
 
         protected void ReadParameters(SonarCompilationAnalysisContext c)
         {
-            var settings = PropertiesHelper.ParseXmlSettings(c.Options);
+            var settings = c.Options.ParseSonarLintXmlSettings();
             var outPath = c.ProjectConfiguration().OutPath;
             // For backward compatibility with S4MSB <= 5.0
             if (outPath == null && c.Options.ProjectOutFolderPath() is { } projectOutFolderAdditionalFile)

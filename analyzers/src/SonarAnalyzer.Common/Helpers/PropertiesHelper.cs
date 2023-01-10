@@ -25,9 +25,6 @@ namespace SonarAnalyzer.Helpers
 {
     internal static class PropertiesHelper
     {
-        public static XElement[] ParseXmlSettings(AnalyzerOptions options) =>
-            options.SonarLintXml() is { } sonarLintXml ? ParseXmlSettings(sonarLintXml.GetText()) : Array.Empty<XElement>();
-
         public static XElement[] ParseXmlSettings(SourceText sourceText)
         {
             try
