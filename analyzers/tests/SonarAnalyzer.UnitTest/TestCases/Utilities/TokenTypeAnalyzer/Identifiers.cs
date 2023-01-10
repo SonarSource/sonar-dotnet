@@ -11,6 +11,7 @@ public class Sample
     {
         var g = new Generic<int>();
         var alias = new AliasName();
+        var qualified = new System.Collections.Generic.List<string>();
         dynamic d = g;
         value = 42;
 

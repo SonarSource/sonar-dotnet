@@ -40,5 +40,19 @@ namespace SonarAnalyzer.Rules.CSharp
                 or SyntaxKind.MultiLineDocumentationCommentTrivia => TokenType.Comment,
                 _ => TokenType.UnknownTokentype,
             };
+
+        private static SyntaxNode WalkUpNames(SyntaxNode node)
+        {
+            while (node is TypeSyntax)
+            {
+                node = node.Parent;
+            }
+            return node;
+        }
+
+        protected override bool IsTypeIdentifier(SyntaxToken token) =>
+            WalkUpNames(token.Parent) is ObjectCreationExpressionSyntax
+            // TODO: Fix token in the middle of qualified name
+            && token is { Parent.Parent: not QualifiedNameSyntax };
     }
 }

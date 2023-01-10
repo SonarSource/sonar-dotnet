@@ -35,6 +35,7 @@ namespace SonarAnalyzer.Rules
 
         protected abstract string ClassifyToken(SyntaxToken token);
         protected abstract TokenType ClassifyTrivia(SyntaxTrivia trivia);
+        protected abstract bool IsTypeIdentifier(SyntaxToken token);
 
         protected sealed override TokenTypeInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
         {
@@ -62,6 +63,9 @@ namespace SonarAnalyzer.Rules
                         or StructName
                         or RecordStructName
                         or TypeParameterName => TokenType.TypeName,
+                    Identifier => IsTypeIdentifier(token)
+                        ? TokenType.TypeName
+                        : TokenType.UnknownTokentype,
                     _ => TokenType.UnknownTokentype,
                 };
 
