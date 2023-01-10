@@ -16,7 +16,7 @@
     <releaseNotes>https://github.com/SonarSource/sonar-dotnet/releases/tag/8.52.0.0</releaseNotes>
     <language>en-US</language>
     <copyright>Copyright © 2015-2022 SonarSource SA</copyright>
-    <tags>Roslyn Analyzers Refactoring CodeAnalysis</tags>
+    <tags>Roslyn Analyzers Refactoring CodeAnalysis CleanCode</tags>
     <developmentDependency>true</developmentDependency>
     <frameworkAssemblies>
       <frameworkAssembly assemblyName="System" targetFramework="" />
