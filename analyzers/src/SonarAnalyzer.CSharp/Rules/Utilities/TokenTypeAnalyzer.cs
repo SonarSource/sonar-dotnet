@@ -18,6 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.Protobuf;
+using SonarAnalyzer.ShimLayer;
+
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -25,47 +28,17 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected override ILanguageFacade<SyntaxKind> Language { get; } = CSharpFacade.Instance;
 
-        protected override TokenClassifierBase GetTokenClassifier(SyntaxToken token, SemanticModel semanticModel, bool skipIdentifierTokens) =>
-            new TokenClassifier(token, semanticModel, skipIdentifierTokens);
+        protected override string ClassifyToken(SyntaxToken token) =>
+            ClassificationHelpersWrapper.GetCSharpClassification(token);
 
-        private sealed class TokenClassifier : TokenClassifierBase
-        {
-            public TokenClassifier(SyntaxToken token, SemanticModel semanticModel, bool skipIdentifiers) : base(token, semanticModel, skipIdentifiers) { }
-
-            protected override SyntaxNode GetBindableParent(SyntaxToken token) =>
-                token.GetBindableParent();
-
-            protected override bool IsIdentifier(SyntaxToken token) =>
-                token.IsKind(SyntaxKind.IdentifierToken);
-
-            protected override bool IsKeyword(SyntaxToken token) =>
-                SyntaxFacts.IsKeywordKind(token.Kind());
-
-            protected override bool IsRegularComment(SyntaxTrivia trivia) =>
-                trivia.IsAnyKind(SyntaxKind.SingleLineCommentTrivia, SyntaxKind.MultiLineCommentTrivia);
-
-            protected override bool IsNumericLiteral(SyntaxToken token) =>
-                token.IsKind(SyntaxKind.NumericLiteralToken);
-
-            protected override bool IsStringLiteral(SyntaxToken token) =>
-                token.IsAnyKind(
-                    SyntaxKind.StringLiteralToken,
-                    SyntaxKind.CharacterLiteralToken,
-                    SyntaxKindEx.SingleLineRawStringLiteralToken,
-                    SyntaxKindEx.MultiLineRawStringLiteralToken,
-                    SyntaxKindEx.Utf8StringLiteralToken,
-                    SyntaxKindEx.Utf8SingleLineRawStringLiteralToken,
-                    SyntaxKindEx.Utf8MultiLineRawStringLiteralToken,
-                    SyntaxKind.InterpolatedStringStartToken,
-                    SyntaxKind.InterpolatedVerbatimStringStartToken,
-                    SyntaxKindEx.InterpolatedSingleLineRawStringStartToken,
-                    SyntaxKindEx.InterpolatedMultiLineRawStringStartToken,
-                    SyntaxKind.InterpolatedStringTextToken,
-                    SyntaxKind.InterpolatedStringEndToken,
-                    SyntaxKindEx.InterpolatedRawStringEndToken);
-
-            protected override bool IsDocComment(SyntaxTrivia trivia) =>
-                trivia.IsAnyKind(SyntaxKind.SingleLineDocumentationCommentTrivia, SyntaxKind.MultiLineDocumentationCommentTrivia);
-        }
+        protected override TokenType ClassifyTrivia(SyntaxTrivia trivia) =>
+            trivia.Kind() switch
+            {
+                SyntaxKind.SingleLineCommentTrivia
+                or SyntaxKind.MultiLineCommentTrivia
+                or SyntaxKind.SingleLineDocumentationCommentTrivia
+                or SyntaxKind.MultiLineDocumentationCommentTrivia => TokenType.Comment,
+                _ => TokenType.UnknownTokentype,
+            };
     }
 }

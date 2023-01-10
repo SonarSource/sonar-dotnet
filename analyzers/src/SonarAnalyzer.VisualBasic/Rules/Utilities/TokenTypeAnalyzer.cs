@@ -18,6 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.Protobuf;
+using SonarAnalyzer.ShimLayer;
+
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
@@ -25,37 +28,16 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         protected override ILanguageFacade<SyntaxKind> Language { get; } = VisualBasicFacade.Instance;
 
-        protected override TokenClassifierBase GetTokenClassifier(SyntaxToken token, SemanticModel semanticModel, bool skipIdentifierTokens) =>
-            new TokenClassifier(token, semanticModel, skipIdentifierTokens);
+        protected override string ClassifyToken(SyntaxToken token) =>
+            ClassificationHelpersWrapper.GetVBClassification(token);
 
-        private sealed class TokenClassifier : TokenClassifierBase
-        {
-            public TokenClassifier(SyntaxToken token, SemanticModel semanticModel, bool skipIdentifiers) : base(token, semanticModel, skipIdentifiers) { }
+        protected override TokenType ClassifyTrivia(SyntaxTrivia trivia) =>
+            trivia.Kind() switch
+            {
+                SyntaxKind.CommentTrivia
+                or SyntaxKind.DocumentationCommentTrivia => TokenType.Comment,
+                _ => TokenType.UnknownTokentype,
+            };
 
-            protected override SyntaxNode GetBindableParent(SyntaxToken token) =>
-                token.GetBindableParent();
-
-            protected override bool IsIdentifier(SyntaxToken token) =>
-                token.IsKind(SyntaxKind.IdentifierToken);
-
-            protected override bool IsKeyword(SyntaxToken token) =>
-                SyntaxFacts.IsKeywordKind(token.Kind());
-
-            protected override bool IsRegularComment(SyntaxTrivia trivia) =>
-                trivia.IsKind(SyntaxKind.CommentTrivia);
-
-            protected override bool IsNumericLiteral(SyntaxToken token) =>
-                token.IsAnyKind(SyntaxKind.DecimalLiteralToken, SyntaxKind.FloatingLiteralToken, SyntaxKind.IntegerLiteralToken);
-
-            protected override bool IsStringLiteral(SyntaxToken token) =>
-                token.IsAnyKind(
-                    SyntaxKind.StringLiteralToken,
-                    SyntaxKind.CharacterLiteralToken,
-                    SyntaxKind.InterpolatedStringTextToken,
-                    SyntaxKind.EndOfInterpolatedStringToken);
-
-            protected override bool IsDocComment(SyntaxTrivia trivia) =>
-                trivia.IsKind(SyntaxKind.DocumentationCommentTrivia);
-        }
     }
 }

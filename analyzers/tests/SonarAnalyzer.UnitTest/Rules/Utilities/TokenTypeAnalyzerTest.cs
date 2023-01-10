@@ -19,7 +19,6 @@
  */
 
 using System.IO;
-using System.Runtime.CompilerServices;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Protobuf;
 using SonarAnalyzer.Rules;
@@ -41,9 +40,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void Verify_MainTokens_CS(ProjectType projectType) =>
             Verify("Tokens.cs", projectType, info =>
             {
-                info.Should().HaveCount(15);
+                info.Should().HaveCount(16);
                 info.Where(x => x.TokenType == TokenType.Keyword).Should().HaveCount(10);
-                info.Where(x => x.TokenType == TokenType.StringLiteral).Should().HaveCount(3);
+                info.Where(x => x.TokenType == TokenType.StringLiteral).Should().HaveCount(4);
                 info.Should().ContainSingle(x => x.TokenType == TokenType.TypeName);
                 info.Should().ContainSingle(x => x.TokenType == TokenType.NumericLiteral);
             });
@@ -56,9 +55,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void Verify_MainTokens_CSSharp11(ProjectType projectType) =>
             Verify("Tokens.Csharp11.cs", projectType, info =>
             {
-                info.Should().HaveCount(41);
+                info.Should().HaveCount(42);
                 info.Where(x => x.TokenType == TokenType.Keyword).Should().HaveCount(25);
-                info.Where(x => x.TokenType == TokenType.StringLiteral).Should().HaveCount(14);
+                info.Where(x => x.TokenType == TokenType.StringLiteral).Should().HaveCount(15);
                 info.Should().ContainSingle(x => x.TokenType == TokenType.TypeName);
                 info.Should().ContainSingle(x => x.TokenType == TokenType.NumericLiteral);
             });
@@ -71,9 +70,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void Verify_MainTokens_VB(ProjectType projectType) =>
             Verify("Tokens.vb", projectType, info =>
             {
-                info.Should().HaveCount(18);
+                info.Should().HaveCount(21);
                 info.Where(x => x.TokenType == TokenType.Keyword).Should().HaveCount(15);
-                info.Should().ContainSingle(x => x.TokenType == TokenType.StringLiteral);
+                info.Where(x => x.TokenType == TokenType.StringLiteral).Should().HaveCount(4);
                 info.Should().ContainSingle(x => x.TokenType == TokenType.TypeName);
                 info.Should().ContainSingle(x => x.TokenType == TokenType.NumericLiteral);
             });
@@ -84,9 +83,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void Verify_Identifiers_CS(ProjectType projectType) =>
             Verify("Identifiers.cs", projectType, info =>
             {
-                info.Should().HaveCount(39);
-                info.Count(x => x.TokenType == TokenType.Keyword).Should().Be(29);
-                info.Count(x => x.TokenType == TokenType.TypeName).Should().Be(7);
+                info.Should().HaveCount(33);
+                info.Count(x => x.TokenType == TokenType.Keyword).Should().Be(26);
+                info.Count(x => x.TokenType == TokenType.TypeName).Should().Be(4);
                 info.Count(x => x.TokenType == TokenType.NumericLiteral).Should().Be(1);
                 info.Count(x => x.TokenType == TokenType.StringLiteral).Should().Be(2);
             });
@@ -97,9 +96,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void Verify_Identifiers_VB(ProjectType projectType) =>
             Verify("Identifiers.vb", projectType, info =>
             {
-                info.Should().HaveCount(63);
+                info.Should().HaveCount(60);
                 info.Where(x => x.TokenType == TokenType.Keyword).Should().HaveCount(56);
-                info.Where(x => x.TokenType == TokenType.TypeName).Should().HaveCount(6);
+                info.Where(x => x.TokenType == TokenType.TypeName).Should().HaveCount(3);
                 info.Should().ContainSingle(x => x.TokenType == TokenType.NumericLiteral);
             });
 
@@ -129,8 +128,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void Verify_IdentifierTokenThreshold() =>
             Verify("IdentifierTokenThreshold.cs", ProjectType.Product, tokenInfo =>
             {
-                // IdentifierTokenThreshold.cs has 4001 identifiers which exceeds current threshold of 4000. Due to this, the identifiers are not classified
-                tokenInfo.Where(token => token.TokenType == TokenType.TypeName).Should().BeEmpty();
+                tokenInfo.Where(token => token.TokenType == TokenType.TypeName).Should().HaveCount(5);
             });
 
         [DataTestMethod]
