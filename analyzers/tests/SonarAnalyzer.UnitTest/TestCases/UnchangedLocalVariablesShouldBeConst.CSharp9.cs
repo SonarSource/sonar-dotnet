@@ -42,6 +42,32 @@ public record Rec
         {
         }
     }
+
+    public void Test_Shadowing()
+    {
+        int shadowed = 0;
+        shadowed++;
+
+        void LocalFunction()
+        {
+            int shadowed = 0; // Noncompliant
+        }
+
+        Action a1 = () =>
+        {
+            int shadow = 0; // Noncompliant
+        };
+
+        Action<int> a2 = x =>
+        {
+            int shadow = 0; // Noncompliant
+        };
+
+        Action a3 = delegate ()
+        {
+            int shadow = 0; // Noncompliant
+        };
+    }
 }
 
 public record RecordWithImplicitOperator
