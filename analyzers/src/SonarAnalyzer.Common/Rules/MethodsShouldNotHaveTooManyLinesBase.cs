@@ -21,7 +21,7 @@
 namespace SonarAnalyzer.Rules
 {
     public abstract class MethodsShouldNotHaveTooManyLinesBase<TSyntaxKind, TBaseMethodSyntax>
-        : ParameterLoadingDiagnosticAnalyzer
+        : ParametrizedDiagnosticAnalyzer
         where TSyntaxKind : struct
         where TBaseMethodSyntax : SyntaxNode
     {
@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules
         protected abstract SyntaxToken? GetMethodIdentifierToken(TBaseMethodSyntax baseMethodDeclaration);
         protected abstract string GetMethodKindAndName(SyntaxToken identifierToken);
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context) =>
+        protected override void Initialize(SonarParametrizedAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 GeneratedCodeRecognizer,
                 c =>

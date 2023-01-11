@@ -21,7 +21,7 @@
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class LocalVariableName : ParameterLoadingDiagnosticAnalyzer
+    public sealed class LocalVariableName : ParametrizedDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S117";
         private const string MessageFormat = "Rename this local variable to match the regular expression: '{0}'.";
@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             "Regular expression used to check the local variable names against.", NamingHelper.CamelCasingPattern)]
         public string Pattern { get; set; } = NamingHelper.CamelCasingPattern;
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context)
+        protected override void Initialize(SonarParametrizedAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 ProcessVariableDeclarator,

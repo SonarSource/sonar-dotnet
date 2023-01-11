@@ -22,7 +22,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class FileLinesBase : ParameterLoadingDiagnosticAnalyzer
+    public abstract class FileLinesBase : ParametrizedDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S104";
         internal const string MessageFormat = "This file has {1} lines, which is greater than {0} authorized. Split it into " +
@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules
             DefaultValueMaximum)]
         public int Maximum { get; set; } = DefaultValueMaximum;
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context)
+        protected override void Initialize(SonarParametrizedAnalysisContext context)
         {
             context.RegisterSyntaxTreeActionInNonGenerated(
                 GeneratedCodeRecognizer,

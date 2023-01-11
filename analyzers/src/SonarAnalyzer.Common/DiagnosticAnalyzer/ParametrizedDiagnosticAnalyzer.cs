@@ -18,10 +18,23 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Extensions;
-
-public static class SyntaxNodeAnalysisContextExtensions // FIXME: Doesnt' need to be an extension anymore
+namespace SonarAnalyzer.Helpers
 {
-    public static bool IsInExpressionTree(this SonarSyntaxNodeAnalysisContext context) =>
-        context.Node.IsInExpressionTree(context.SemanticModel);
+    public abstract class ParametrizedDiagnosticAnalyzer : SonarDiagnosticAnalyzer
+    {
+        protected abstract void Initialize(SonarParametrizedAnalysisContext context);
+
+        protected sealed override void Initialize(SonarAnalysisContext context)
+        {
+            var parameterContext = new SonarParametrizedAnalysisContext(context);
+            Initialize(parameterContext);
+
+            context.RegisterCompilationStartAction(
+                c =>
+                {
+                    ParameterLoader.SetParameterValues(this, c.Options);
+                    parameterContext.ExecutePostponedActions(c);
+                });
+        }
+    }
 }

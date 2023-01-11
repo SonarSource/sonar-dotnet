@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class SwitchSectionShouldNotHaveTooManyStatementsBase : ParameterLoadingDiagnosticAnalyzer
+    public abstract class SwitchSectionShouldNotHaveTooManyStatementsBase : ParametrizedDiagnosticAnalyzer
     {
         protected const string DiagnosticId = "S1151";
         protected const string MessageFormat = "Reduce this {0} number of statements from {1} to at most {2}, for example by extracting code into a {3}.";

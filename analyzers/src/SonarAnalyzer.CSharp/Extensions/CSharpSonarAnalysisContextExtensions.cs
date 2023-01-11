@@ -18,16 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Extensions
 {
-    internal static class CSharpDiagnosticAnalyzerContextHelper     // FIXME: Move and rename
+    internal static class CSharpSonarAnalysisContextExtensions
     {
         public static void RegisterSyntaxNodeActionInNonGenerated<TSyntaxKind>(this SonarAnalysisContext context,
                                                                                Action<SonarSyntaxNodeAnalysisContext> action,
                                                                                params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct =>
             context.RegisterSyntaxNodeActionInNonGenerated(CSharpGeneratedCodeRecognizer.Instance, action, syntaxKinds);
 
-        public static void RegisterSyntaxNodeActionInNonGenerated<TSyntaxKind>(this ParameterLoadingAnalysisContext context,
+        public static void RegisterSyntaxNodeActionInNonGenerated<TSyntaxKind>(this SonarParametrizedAnalysisContext context,
                                                                                Action<SonarSyntaxNodeAnalysisContext> action,
                                                                                params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct =>
             context.RegisterSyntaxNodeActionInNonGenerated(CSharpGeneratedCodeRecognizer.Instance, action, syntaxKinds);
@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Helpers
         public static void RegisterSyntaxTreeActionInNonGenerated(this SonarAnalysisContext context, Action<SonarSyntaxTreeAnalysisContext> action) =>
             context.RegisterSyntaxTreeActionInNonGenerated(CSharpGeneratedCodeRecognizer.Instance, action);
 
-        public static void RegisterSyntaxTreeActionInNonGenerated(this ParameterLoadingAnalysisContext context, Action<SonarSyntaxTreeAnalysisContext> action) =>
+        public static void RegisterSyntaxTreeActionInNonGenerated(this SonarParametrizedAnalysisContext context, Action<SonarSyntaxTreeAnalysisContext> action) =>
             context.RegisterSyntaxTreeActionInNonGenerated(CSharpGeneratedCodeRecognizer.Instance, action);
 
         public static void RegisterCodeBlockStartActionInNonGenerated<TSyntaxKind>(this SonarAnalysisContext context, Action<SonarCodeBlockStartAnalysisContext<TSyntaxKind>> action)

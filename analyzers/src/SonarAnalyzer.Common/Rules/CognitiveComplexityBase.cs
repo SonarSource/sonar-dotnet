@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class CognitiveComplexityBase<TSyntaxKind> : ParameterLoadingDiagnosticAnalyzer
+    public abstract class CognitiveComplexityBase<TSyntaxKind> : ParametrizedDiagnosticAnalyzer
         where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S3776";
