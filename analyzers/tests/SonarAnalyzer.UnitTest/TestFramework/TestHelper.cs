@@ -198,7 +198,7 @@ End Class", AnalyzerLanguage.VisualBasic);
             return operation.Instance.Kind + ": " + operation.Instance.Syntax + (operation.IsImplicit ? " (Implicit)" : null);
         }
 
-        public static SonarAnalysisContext CreateSonarAnalysisContext() =>                  // FIXME: Use everywhere
+        public static SonarAnalysisContext CreateSonarAnalysisContext() =>
             new(Mock.Of<RoslynAnalysisContext>(), Enumerable.Empty<DiagnosticDescriptor>());
 
         public static AnalyzerOptions CreateOptions() =>
