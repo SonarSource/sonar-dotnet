@@ -41,11 +41,13 @@ public class SonarSyntaxTreeAnalysisContextTest
     {
         var cancel = new CancellationToken(true);
         var (tree, model) = TestHelper.CompileCS("// Nothing to see here");
-        var context = new SyntaxTreeAnalysisContext(tree, null, _ => { }, _ => true, cancel);
+        var options = TestHelper.CreateOptions(null);   // FIXME: Remove null argument in #6590
+        var context = new SyntaxTreeAnalysisContext(tree, options, _ => { }, _ => true, cancel);
         var sut = new SonarSyntaxTreeAnalysisContext(TestHelper.CreateSonarAnalysisContext(), context, model.Compilation);
 
         sut.Tree.Should().Be(tree);
         sut.Compilation.Should().Be(model.Compilation);
+        sut.Options.Should().Be(options);
         sut.Cancel.Should().Be(cancel);
     }
 }

@@ -39,10 +39,10 @@ public class SonarSyntaxNodeAnalysisContextTest
         var context = new SyntaxNodeAnalysisContext(node, containingSymbol, model, options, _ => { }, _ => true, cancel);
         var sut = new SonarSyntaxNodeAnalysisContext(analysisContext, context);
 
-        sut.Cancel.Should().Be(cancel);
         sut.Tree.Should().Be(tree);
         sut.Compilation.Should().Be(model.Compilation);
         sut.Options.Should().Be(options);
+        sut.Cancel.Should().Be(cancel);
         sut.Node.Should().Be(node);
         sut.SemanticModel.Should().Be(model);
         sut.ContainingSymbol.Should().Be(containingSymbol);

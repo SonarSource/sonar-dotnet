@@ -34,15 +34,16 @@ public class SonarSymbolAnalysisContextTest
     {
         var analysisContext = new SonarAnalysisContext(Mock.Of<RoslynAnalysisContext>(), Enumerable.Empty<DiagnosticDescriptor>());
         var cancel = new CancellationToken(true);
-        var codeBlock = SyntaxFactory.Block();
         var (tree, model) = TestHelper.CompileCS("public class Sample { }");
+        var options = TestHelper.CreateOptions(null);   // FIXME: Remove null argument in #6590
         var symbol = model.GetDeclaredSymbol(tree.GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>().Single());
-        var context = new SymbolAnalysisContext(symbol, model.Compilation, null, _ => { }, _ => true, cancel);
+        var context = new SymbolAnalysisContext(symbol, model.Compilation, options, _ => { }, _ => true, cancel);
         var sut = new SonarSymbolAnalysisContext(analysisContext, context);
 
-        sut.Cancel.Should().Be(cancel);
         sut.Tree.Should().Be(tree);
         sut.Compilation.Should().Be(model.Compilation);
+        sut.Options.Should().Be(options);
+        sut.Cancel.Should().Be(cancel);
         sut.Symbol.Should().Be(symbol);
     }
 }

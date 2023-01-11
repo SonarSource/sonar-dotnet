@@ -36,9 +36,13 @@ public class SonarCodeBlockStartAnalysisContextTest
         var codeBlock = SyntaxFactory.Block();
         var owningSymbol = Mock.Of<ISymbol>();
         var model = Mock.Of<SemanticModel>();
-        var context = new Mock<CodeBlockStartAnalysisContext<SyntaxKind>>(codeBlock, owningSymbol, model, null, cancel).Object;
+        var options = TestHelper.CreateOptions(null);   // FIXME: Remove null argument in #6590
+        var context = new Mock<CodeBlockStartAnalysisContext<SyntaxKind>>(codeBlock, owningSymbol, model, options, cancel).Object;
         var sut = new SonarCodeBlockStartAnalysisContext<SyntaxKind>(analysisContext, context);
 
+        sut.Tree.Should().Be(codeBlock.SyntaxTree);
+        sut.Compilation.Should().Be(model.Compilation);
+        sut.Options.Should().Be(options);
         sut.Cancel.Should().Be(cancel);
         sut.CodeBlock.Should().Be(codeBlock);
         sut.OwningSymbol.Should().Be(owningSymbol);

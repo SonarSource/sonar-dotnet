@@ -33,11 +33,13 @@ public class SonarCompilationAnalysisContextTest
         var analysisContext = new SonarAnalysisContext(Mock.Of<RoslynAnalysisContext>(), Enumerable.Empty<DiagnosticDescriptor>());
         var cancel = new CancellationToken(true);
         var (tree, model) = TestHelper.CompileCS("// Nothing to see here");
-        var context = new CompilationAnalysisContext(model.Compilation, null, _ => { }, _ => true, cancel);
+        var options = TestHelper.CreateOptions(null);   // FIXME: Remove null argument in #6590
+        var context = new CompilationAnalysisContext(model.Compilation, options, _ => { }, _ => true, cancel);
         var sut = new SonarCompilationAnalysisContext(analysisContext, context);
 
-        sut.Cancel.Should().Be(cancel);
         sut.Tree.Should().Be(tree);
         sut.Compilation.Should().Be(model.Compilation);
+        sut.Options.Should().Be(options);
+        sut.Cancel.Should().Be(cancel);
     }
 }
