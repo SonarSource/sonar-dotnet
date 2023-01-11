@@ -1,5 +1,6 @@
 ﻿using System;
 using AliasName = System.Exception;
+using static System.Math;
 
 public class Sample
 {
@@ -11,7 +12,8 @@ public class Sample
     {
         var g = new Generic<int>();
         var alias = new AliasName();
-        var qualified = new System.Collections.Generic.List<string>();
+        var qualified1 = new global::System.Collections.ArrayList();
+        var qualified2 = new System.Collections.Generic.List<Sample>();
         dynamic d = g;
         value = 42;
 

@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 _ => TokenType.UnknownTokentype,
             };
 
-        protected override bool IsTypeIdentifier(SyntaxToken token) =>
+        protected override bool IsTypeIdentifier(SemanticModel semanticModel, SyntaxToken token) =>
             false;
     }
 }

@@ -50,9 +50,38 @@ namespace SonarAnalyzer.Rules.CSharp
             return node;
         }
 
-        protected override bool IsTypeIdentifier(SyntaxToken token) =>
-            WalkUpNames(token.Parent) is ObjectCreationExpressionSyntax
-            // TODO: Fix token in the middle of qualified name
-            && token is { Parent.Parent: not QualifiedNameSyntax };
+        protected override bool IsTypeIdentifier(SemanticModel semanticModel, SyntaxToken token)
+        {
+            return WalkUpNames(token.Parent) switch
+            {
+                ObjectCreationExpressionSyntax when IsRightSideOfQualifiedName(token) => true,
+                UsingDirectiveSyntax { StaticKeyword.RawKind: (int)SyntaxKind.StaticKeyword } when IsRightSideOfQualifiedName(token) => true,
+                NameEqualsSyntax { Parent: UsingDirectiveSyntax { Alias.Name: IdentifierNameSyntax identifier } usingDirective } when identifier.Identifier == token =>
+                    IsTypeAlias(semanticModel, usingDirective),
+                UsingDirectiveSyntax { Alias.Name: IdentifierNameSyntax } usingDirective when IsRightSideOfQualifiedName(token) => IsTypeAlias(semanticModel, usingDirective),
+                TypeArgumentListSyntax when IsRightSideOfQualifiedName(token) => true,
+                _ => false,
+            };
+
+            // Returns true for C in A.B.C (This qualifies nested types wrong).
+            static bool IsRightSideOfQualifiedName(SyntaxToken token)
+                => token.Parent switch
+                {
+                    IdentifierNameSyntax { Parent: not QualifiedNameSyntax } => true,
+                    IdentifierNameSyntax
+                    {
+                        Parent: QualifiedNameSyntax
+                        {
+                            Right: IdentifierNameSyntax { Identifier: var rightIdentifier },
+                            Parent: not QualifiedNameSyntax,
+                        }
+                    } => rightIdentifier == token,
+                    GenericNameSyntax { Identifier: var identifier } => identifier == token,
+                    _ => false,
+                };
+
+            static bool IsTypeAlias(SemanticModel semanticModel, UsingDirectiveSyntax usingDirective)
+                => semanticModel.GetDeclaredSymbol(usingDirective) is IAliasSymbol { Target: ITypeSymbol };
+        }
     }
 }
