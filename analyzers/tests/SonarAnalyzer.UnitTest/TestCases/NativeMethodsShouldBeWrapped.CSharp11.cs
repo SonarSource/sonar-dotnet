@@ -28,9 +28,17 @@ namespace LibraryImportAttributeTests
 
         // Wrapper tests
 
-        public static void CompliantDllImportAttributeAppliedToThisFunctionWrapper(int i) // Noncompliant {{Make this wrapper for native method 'CompliantDllImportAttributeAppliedToThisFunction' less trivial.}}
+        public static void CompliantDllImportAttributeAppliedToThisFunctionNoncompliantWrapper(int i) // Noncompliant {{Make this wrapper for native method 'CompliantDllImportAttributeAppliedToThisFunction' less trivial.}}
         {
             CompliantDllImportAttributeAppliedToThisFunction(i);
+        }
+
+        public static void CompliantDllImportAttributeAppliedToThisFunctionCompliantWrapper(int i) // Compliant
+        {
+            if (i > 0)
+            {
+                CompliantDllImportAttributeAppliedToThisFunction(i);
+            }
         }
 
         public static void CompliantDllImportAttributeAppliedToGeneratedLocalFunctionWrapper(string p) // Noncompliant
