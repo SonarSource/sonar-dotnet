@@ -138,7 +138,7 @@ public partial class SonarAnalysisContextBaseTest
     [DataTestMethod]
     [DataRow(GeneratedFileName, false)]
     [DataRow(OtherFileName, true)]
-    public void ShouldAnalyzeTree_CorrectSettingUsed_VB(string fileName, bool expectedCSharp)
+    public void ShouldAnalyzeTree_CorrectSettingUsed(string fileName, bool expectedCSharp)
     {
         var sonarLintXml = CreateSonarLintXml(false);
         var (compilationCS, treeCS) = CreateDummyCompilation(AnalyzerLanguage.CSharp, fileName);
@@ -373,9 +373,9 @@ public partial class SonarAnalysisContextBaseTest
         return (compilation, compilation.SyntaxTrees.Single(x => x.FilePath.Contains(treeFileName)));
     }
 
-    private bool ShouldAnalyzeTree(AnalyzerOptions options)
+    private static bool ShouldAnalyzeTree(AnalyzerOptions options)
     {
-        var (compilation, tree) = CreateDummyCompilation(AnalyzerLanguage.CSharp, OtherFileName);
+        var tree = CreateDummyCompilation(AnalyzerLanguage.CSharp, OtherFileName).Tree;
         return CreateSut(options).ShouldAnalyzeTree(tree, CSharpGeneratedCodeRecognizer.Instance);
     }
 

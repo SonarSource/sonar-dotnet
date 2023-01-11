@@ -117,7 +117,7 @@ public partial class SonarAnalysisContextBaseTest
         var firstSut = CreateSut(options);
         var secondSut = CreateSut(options);
         var firstConfig = firstSut.ProjectConfiguration();
-        var secondConfig = firstSut.ProjectConfiguration();
+        var secondConfig = secondSut.ProjectConfiguration();
 
         secondConfig.Should().BeSameAs(firstConfig);
     }

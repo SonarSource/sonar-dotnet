@@ -55,7 +55,7 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
     }
 
     /// <param name="tree">Tree to decide on. Can be null for Symbol-based and Compilation-based scenarios. And we want to analyze those too.</param>
-    /// <param name="generatedCodeRecognizer">When set, generated trees are analyzed only when langauge-specific 'analyzeGeneratedCode' configuration property is also set.</param>
+    /// <param name="generatedCodeRecognizer">When set, generated trees are analyzed only when language-specific 'analyzeGeneratedCode' configuration property is also set.</param>
     public bool ShouldAnalyzeTree(SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer) =>
         (generatedCodeRecognizer is null || ShouldAnalyzeGenerated() || !tree.IsGenerated(generatedCodeRecognizer, Compilation))
         && (tree is null || !IsUnchanged(tree));
@@ -79,9 +79,6 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
         }
     }
 
-    public bool IsScannerRun() =>
-        ProjectConfiguration().IsScannerRun;
-
     public bool IsTestProject()
     {
         var projectType = ProjectConfiguration().ProjectType;
@@ -91,7 +88,7 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
     }
 
     public bool IsUnchanged(SyntaxTree tree) =>
-        UnchangedFilesCache.GetValue(Compilation, _ => CreateUnchangedFilesHashSet(Options)).Contains(tree.FilePath);
+        UnchangedFilesCache.GetValue(Compilation, _ => CreateUnchangedFilesHashSet()).Contains(tree.FilePath);
 
     public bool HasMatchingScope(IEnumerable<DiagnosticDescriptor> descriptors) =>
         descriptors.Any(HasMatchingScope);
@@ -102,14 +99,14 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
         // ScannerRun: Only utility rules and rules with TEST-ONLY scope are executed for test projects for now.
         // SonarLint & Standalone NuGet: Respect the scope as before.
         return IsTestProject()
-            ? ContainsTag(TestSourceScopeTag) && !(IsScannerRun() && ContainsTag(MainSourceScopeTag) && !ContainsTag(UtilityTag))
+            ? ContainsTag(TestSourceScopeTag) && !(ProjectConfiguration().IsScannerRun && ContainsTag(MainSourceScopeTag) && !ContainsTag(UtilityTag))
             : ContainsTag(MainSourceScopeTag);
 
         bool ContainsTag(string tag) =>
             descriptor.CustomTags.Contains(tag);
     }
 
-    private ImmutableHashSet<string> CreateUnchangedFilesHashSet(AnalyzerOptions options) =>
+    private ImmutableHashSet<string> CreateUnchangedFilesHashSet() =>
         ImmutableHashSet.Create(StringComparer.OrdinalIgnoreCase, ProjectConfiguration().AnalysisConfig?.UnchangedFiles() ?? Array.Empty<string>());
 
     private bool ShouldAnalyzeGenerated() =>
