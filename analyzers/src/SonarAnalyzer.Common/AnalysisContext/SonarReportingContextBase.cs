@@ -54,7 +54,7 @@ public abstract class SonarReportingContextBase<TContext> : SonarAnalysisContext
 }
 
 /// <summary>
-/// Base class for reporting contexts that are executed on a known Tree. And decision about generated code and unchanged files is taken during action registration.
+/// Base class for reporting contexts that are executed on a known Tree. The decisions about generated code and unchanged files are taken during action registration.
 /// </summary>
 public abstract class SonarTreeReportingContextBase<TContext> : SonarReportingContextBase<TContext>
 {
