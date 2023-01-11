@@ -44,10 +44,11 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    context.RegisterNodeAction(CheckIgnoreAntiforgeryTokenAttribute,
-                                                                   SyntaxKind.Attribute,
-                                                                   SyntaxKind.ObjectCreationExpression,
-                                                                   ImplicitObjectCreationExpression);
+                    context.RegisterNodeAction(
+                        CheckIgnoreAntiforgeryTokenAttribute,
+                        SyntaxKind.Attribute,
+                        SyntaxKind.ObjectCreationExpression,
+                        ImplicitObjectCreationExpression);
                 });
 
         private static void CheckIgnoreAntiforgeryTokenAttribute(SonarSyntaxNodeAnalysisContext c)
