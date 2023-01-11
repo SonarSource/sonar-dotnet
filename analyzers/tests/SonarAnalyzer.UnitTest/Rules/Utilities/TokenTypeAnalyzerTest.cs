@@ -128,7 +128,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void Verify_IdentifierTokenThreshold() =>
             Verify("IdentifierTokenThreshold.cs", ProjectType.Product, tokenInfo =>
             {
-                tokenInfo.Where(token => token.TokenType == TokenType.TypeName).Should().HaveCount(5);
+                tokenInfo.Where(token => token.TokenType == TokenType.TypeName).Should().HaveCount(3991);
             });
 
         [DataTestMethod]
