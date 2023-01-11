@@ -4,45 +4,6 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserResponseBodyWrapperExtensions.cs",
-"region":  {
-"startLine":  56,
-"startColumn":  30,
-"endLine":  56,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserResponseBodyWrapperExtensions.cs",
-"region":  {
-"startLine":  69,
-"startColumn":  30,
-"endLine":  69,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserResponseBodyWrapperExtensions.cs",
-"region":  {
-"startLine":  83,
-"startColumn":  30,
-"endLine":  83,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
 "uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  194,
@@ -712,58 +673,6 @@
 "startColumn":  57,
 "endLine":  1991,
 "endColumn":  75
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\NancyContextExtensions.cs",
-"region":  {
-"startLine":  52,
-"startColumn":  30,
-"endLine":  52,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\NancyContextExtensions.cs",
-"region":  {
-"startLine":  57,
-"startColumn":  30,
-"endLine":  57,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\NancyContextExtensions.cs",
-"region":  {
-"startLine":  74,
-"startColumn":  30,
-"endLine":  74,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\TestingViewBrowserResponseExtensions.cs",
-"region":  {
-"startLine":  16,
-"startColumn":  29,
-"endLine":  16,
-"endColumn":  37
 }
 }
 }
