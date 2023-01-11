@@ -27,66 +27,6 @@ internal static class DiagnosticAnalyzerContextHelper   // FIXME: Rename and mov
 {
     private static readonly ConditionalWeakTable<Compilation, ConcurrentDictionary<SyntaxTree, bool>> GeneratedCodeCache = new();
 
-    public static void RegisterSyntaxNodeActionInNonGenerated<TLanguageKindEnum>(this SonarAnalysisContext context, // FIXME: Move them
-                                                                                 GeneratedCodeRecognizer generatedCodeRecognizer,
-                                                                                 Action<SonarSyntaxNodeAnalysisContext> action,
-                                                                                 params TLanguageKindEnum[] syntaxKinds) where TLanguageKindEnum : struct =>
-        context.RegisterSyntaxNodeAction(c =>
-            {
-                if (c.ShouldAnalyze(generatedCodeRecognizer))   // FIXME: Unify
-                {
-                    action(c);
-                }
-            }, syntaxKinds);
-
-    public static void RegisterSyntaxNodeActionInNonGenerated<TLanguageKindEnum>(this ParameterLoadingAnalysisContext context,
-                                                                                 GeneratedCodeRecognizer generatedCodeRecognizer,
-                                                                                 Action<SonarSyntaxNodeAnalysisContext> action,
-                                                                                 params TLanguageKindEnum[] syntaxKinds) where TLanguageKindEnum : struct =>
-        context.Context.RegisterSyntaxNodeActionInNonGenerated(generatedCodeRecognizer, action, syntaxKinds);
-
-    public static void RegisterSyntaxNodeActionInNonGenerated<TLanguageKindEnum>(this SonarCompilationStartAnalysisContext context,
-                                                                                 GeneratedCodeRecognizer generatedCodeRecognizer,
-                                                                                 Action<SonarSyntaxNodeAnalysisContext> action,
-                                                                                 params TLanguageKindEnum[] syntaxKinds) where TLanguageKindEnum : struct =>
-        context.AnalysisContext.RegisterSyntaxNodeActionInNonGenerated(generatedCodeRecognizer, action, syntaxKinds);
-
-    public static void RegisterSyntaxTreeActionInNonGenerated(this SonarAnalysisContext context, GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxTreeAnalysisContext> action) =>
-        context.RegisterSyntaxTreeAction(c =>
-            {
-                if (c.ShouldAnalyze(generatedCodeRecognizer))   // FIXME: Unify
-                {
-                    action(c);
-                }
-            });
-
-    public static void RegisterSyntaxTreeActionInNonGenerated(this ParameterLoadingAnalysisContext context,
-                                                              GeneratedCodeRecognizer generatedCodeRecognizer,
-                                                              Action<SonarSyntaxTreeAnalysisContext> action)
-    {
-        // This is tricky. SyntaxTree actions do not have compilation. So we register them in CompilationStart.
-        // ParametrizedAnalyzer postpones CompilationStartActions to enforce that parameters are already set when the postponed action is executed.
-        var wrappedAction = context.Context.WrapSyntaxTreeAction(c =>
-        {
-            if (c.ShouldAnalyze(generatedCodeRecognizer))
-            {
-                action(c);
-            }
-        });
-        context.RegisterPostponedAction(startContext => wrappedAction(startContext.Context));
-    }
-
-    public static void RegisterCodeBlockStartActionInNonGenerated<TLanguageKindEnum>(this SonarAnalysisContext context,
-                                                                                     GeneratedCodeRecognizer generatedCodeRecognizer,
-                                                                                     Action<SonarCodeBlockStartAnalysisContext<TLanguageKindEnum>> action) where TLanguageKindEnum : struct =>
-        context.RegisterCodeBlockStartAction<TLanguageKindEnum>(c =>
-            {
-                if (c.ShouldAnalyze(generatedCodeRecognizer))   // FIXME: Unify
-                {
-                    action(c);
-                }
-            });
-
     public static bool IsGenerated(this SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer, Compilation compilation)  // FIXME: Move
     {
         if (tree == null)

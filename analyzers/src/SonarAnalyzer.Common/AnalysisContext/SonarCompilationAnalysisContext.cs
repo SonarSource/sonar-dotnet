@@ -23,20 +23,17 @@ using System.Text.RegularExpressions;
 
 namespace SonarAnalyzer;
 
-public sealed class SonarCompilationAnalysisContext : SonarAnalysisContextBase<CompilationAnalysisContext>
+public sealed class SonarCompilationAnalysisContext : SonarReportingContextBase<CompilationAnalysisContext>
 {
     private static readonly Regex WebConfigRegex = new(@"[\\\/]web\.([^\\\/]+\.)?config$", RegexOptions.IgnoreCase);
     private static readonly Regex AppSettingsRegex = new(@"[\\\/]appsettings\.([^\\\/]+\.)?json$", RegexOptions.IgnoreCase);
 
-    public override SyntaxTree Tree => Context.GetFirstSyntaxTree();
+    public override SyntaxTree Tree => Context.Compilation.SyntaxTrees.FirstOrDefault();
     public override Compilation Compilation => Context.Compilation;
     public override AnalyzerOptions Options => Context.Options;
     public override CancellationToken Cancel => Context.CancellationToken;
 
     internal SonarCompilationAnalysisContext(SonarAnalysisContext analysisContext, CompilationAnalysisContext context) : base(analysisContext, context) { }
-
-    public void ReportIssue(Diagnostic diagnostic) =>
-        ReportIssue(new ReportingContext(Context, diagnostic));
 
     public void ReportDiagnosticIfNonGenerated(GeneratedCodeRecognizer generatedCodeRecognizer, Diagnostic diagnostic)
     {
@@ -46,7 +43,7 @@ public sealed class SonarCompilationAnalysisContext : SonarAnalysisContextBase<C
         }
     }
 
-    internal IEnumerable<string> WebConfigFiles()
+    public IEnumerable<string> WebConfigFiles()
     {
         return ProjectConfiguration().FilesToAnalyze.FindFiles(WebConfigRegex).Where(ShouldProcess);
 
@@ -54,11 +51,14 @@ public sealed class SonarCompilationAnalysisContext : SonarAnalysisContextBase<C
             !Path.GetFileName(path).Equals("web.debug.config", StringComparison.OrdinalIgnoreCase);
     }
 
-    internal IEnumerable<string> AppSettingsFiles()
+    public IEnumerable<string> AppSettingsFiles()
     {
         return ProjectConfiguration().FilesToAnalyze.FindFiles(AppSettingsRegex).Where(ShouldProcess);
 
         static bool ShouldProcess(string path) =>
             !Path.GetFileName(path).Equals("appsettings.development.json", StringComparison.OrdinalIgnoreCase);
     }
+
+    private protected override ReportingContext CreateReportingContext(Diagnostic diagnostic) =>
+        new(this, diagnostic);
 }
