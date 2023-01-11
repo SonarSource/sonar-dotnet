@@ -367,8 +367,7 @@
           "Microsoft.CodeAnalysis.Workspaces.Common": "[1.3.2, )",
           "Microsoft.Composition": "[1.0.27, )",
           "SonarAnalyzer.CFG": "[1.0.0, )",
-          "System.Collections.Immutable": "[1.1.37, )",
-          "System.Text.RegularExpressions": "[4.3.1, )"
+          "System.Collections.Immutable": "[1.1.37, )"
         }
       },
       "sonaranalyzer.cfg": {
@@ -377,8 +376,7 @@
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "[1.3.2, )",
           "Microsoft.CodeAnalysis.VisualBasic.Workspaces": "[1.3.2, )",
           "Microsoft.Composition": "[1.0.27, )",
-          "System.Collections.Immutable": "[1.1.37, )",
-          "System.Text.RegularExpressions": "[4.3.1, )"
+          "System.Collections.Immutable": "[1.1.37, )"
         }
       }
     },
@@ -422,22 +420,6 @@
         "requested": "[1.1.37, )",
         "resolved": "1.1.37",
         "contentHash": "fTpqwZYBzoklTT+XjTRK8KxvmrGkYHzBiylCcKyQcxiOM8k+QvhNBxRvFHDWzy4OEP5f8/9n+xQ9mEgEXY+muA==",
-        "dependencies": {
-          "System.Collections": "4.0.0",
-          "System.Diagnostics.Debug": "4.0.0",
-          "System.Globalization": "4.0.0",
-          "System.Linq": "4.0.0",
-          "System.Resources.ResourceManager": "4.0.0",
-          "System.Runtime": "4.0.0",
-          "System.Runtime.Extensions": "4.0.0",
-          "System.Threading": "4.0.0"
-        }
-      },
-      "System.Text.RegularExpressions": {
-        "type": "Direct",
-        "requested": "[4.3.1, )",
-        "resolved": "4.3.1",
-        "contentHash": "N0kNRrWe4+nXOWlpLT4LAY5brb8caNFlUuIRpraCVMDLYutKkol1aV079rQjLuSxKMJT2SpBQsYX9xbcTMmzwg==",
         "dependencies": {
           "System.Collections": "4.0.0",
           "System.Diagnostics.Debug": "4.0.0",
@@ -1334,8 +1316,7 @@
           "Microsoft.CodeAnalysis.Workspaces.Common": "[1.3.2, )",
           "Microsoft.Composition": "[1.0.27, )",
           "SonarAnalyzer.CFG": "[1.0.0, )",
-          "System.Collections.Immutable": "[1.1.37, )",
-          "System.Text.RegularExpressions": "[4.3.1, )"
+          "System.Collections.Immutable": "[1.1.37, )"
         }
       },
       "sonaranalyzer.cfg": {
@@ -1344,8 +1325,7 @@
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "[1.3.2, )",
           "Microsoft.CodeAnalysis.VisualBasic.Workspaces": "[1.3.2, )",
           "Microsoft.Composition": "[1.0.27, )",
-          "System.Collections.Immutable": "[1.1.37, )",
-          "System.Text.RegularExpressions": "[4.3.1, )"
+          "System.Collections.Immutable": "[1.1.37, )"
         }
       }
     }
