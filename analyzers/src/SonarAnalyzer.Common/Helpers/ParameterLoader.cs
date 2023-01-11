@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Helpers
          * - diffing the contents of the configuration file
          * - associating the file with a unique identifier for the build project
          */
-        internal static void SetParameterValues(ParameterLoadingDiagnosticAnalyzer parameteredAnalyzer,
+        internal static void SetParameterValues(ParametrizedDiagnosticAnalyzer parameteredAnalyzer,
             AnalyzerOptions options)
         {
             var sonarLintXml = options.SonarLintXml();

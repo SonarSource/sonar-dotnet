@@ -18,22 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Concurrent;
-using System.Runtime.CompilerServices;
+namespace SonarAnalyzer.Extensions;
 
-namespace SonarAnalyzer;
-
-internal static class DiagnosticAnalyzerContextHelper   // FIXME: Rename and move
+public static class SonarSyntaxNodeAnalysisContextExtensions
 {
-    private static readonly ConditionalWeakTable<Compilation, ConcurrentDictionary<SyntaxTree, bool>> GeneratedCodeCache = new();
-
-    public static bool IsGenerated(this SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer, Compilation compilation)  // FIXME: Move
-    {
-        if (tree == null)
-        {
-            return false;
-        }
-        var cache = GeneratedCodeCache.GetOrCreateValue(compilation);
-        return cache.GetOrAdd(tree, generatedCodeRecognizer.IsGenerated);
-    }
+    public static bool IsInExpressionTree(this SonarSyntaxNodeAnalysisContext context) =>
+        context.Node.IsInExpressionTree(context.SemanticModel);
 }

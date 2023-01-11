@@ -23,7 +23,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class CheckFileLicenseBase : ParameterLoadingDiagnosticAnalyzer
+    public abstract class CheckFileLicenseBase : ParametrizedDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1451";
         internal const string HeaderFormatPropertyKey = nameof(HeaderFormat);
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules
         protected CheckFileLicenseBase() =>
             rule = Language.CreateDescriptor(DiagnosticId, MessageFormat, isEnabledByDefault: false);
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context) =>
+        protected override void Initialize(SonarParametrizedAnalysisContext context) =>
             context.RegisterSyntaxTreeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
                 {
                     if (HeaderFormat == null)

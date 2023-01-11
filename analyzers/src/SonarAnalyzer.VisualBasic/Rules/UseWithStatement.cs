@@ -21,7 +21,7 @@
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class UseWithStatement : ParameterLoadingDiagnosticAnalyzer
+    public sealed class UseWithStatement : ParametrizedDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2375";
         private const string MessageFormat = "Wrap this and the following {0} statement{2} that use '{1}' in a 'With' statement.";
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             typeof(ExpressionStatementSyntax)
         };
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context)
+        protected override void Initialize(SonarParametrizedAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

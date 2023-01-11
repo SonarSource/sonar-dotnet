@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class ExpressionComplexityBase<TSyntaxKind> : ParameterLoadingDiagnosticAnalyzer
+    public abstract class ExpressionComplexityBase<TSyntaxKind> : ParametrizedDiagnosticAnalyzer
         where TSyntaxKind : struct, Enum
     {
         protected const string DiagnosticId = "S1067";
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules
         protected ExpressionComplexityBase() =>
             rule = Language.CreateDescriptor(DiagnosticId, MessageFormat, isEnabledByDefault: false);
 
-        protected sealed override void Initialize(ParameterLoadingAnalysisContext context) =>
+        protected sealed override void Initialize(SonarParametrizedAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
                 {
                     if (IsRoot(c.Node))

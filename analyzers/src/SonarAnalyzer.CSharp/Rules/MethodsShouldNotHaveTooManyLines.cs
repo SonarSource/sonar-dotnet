@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override string MethodKeyword => "methods";
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context)
+        protected override void Initialize(SonarParametrizedAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
