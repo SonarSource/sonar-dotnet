@@ -34,9 +34,9 @@ public class SonarCodeBlockAnalysisContextTest
         var codeBlock = SyntaxFactory.Block();
         var owningSymbol = Mock.Of<ISymbol>();
         var model = Mock.Of<SemanticModel>();
-        var options = TestHelper.CreateOptions();
+        var options = AnalysisScaffolding.CreateOptions();
         var context = new CodeBlockAnalysisContext(codeBlock, owningSymbol, model, options, _ => { }, _ => true, cancel);
-        var sut = new SonarCodeBlockAnalysisContext(TestHelper.CreateSonarAnalysisContext(), context);
+        var sut = new SonarCodeBlockAnalysisContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context);
 
         sut.Tree.Should().Be(codeBlock.SyntaxTree);
         sut.Compilation.Should().Be(model.Compilation);

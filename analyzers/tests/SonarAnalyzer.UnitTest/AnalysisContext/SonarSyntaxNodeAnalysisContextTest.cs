@@ -32,10 +32,10 @@ public class SonarSyntaxNodeAnalysisContextTest
         var cancel = new CancellationToken(true);
         var (tree, model) = TestHelper.CompileCS("// Nothing to see here");
         var node = tree.GetRoot();
-        var options = TestHelper.CreateOptions();
+        var options = AnalysisScaffolding.CreateOptions();
         var containingSymbol = Mock.Of<ISymbol>();
         var context = new SyntaxNodeAnalysisContext(node, containingSymbol, model, options, _ => { }, _ => true, cancel);
-        var sut = new SonarSyntaxNodeAnalysisContext(TestHelper.CreateSonarAnalysisContext(), context);
+        var sut = new SonarSyntaxNodeAnalysisContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context);
 
         sut.Tree.Should().Be(tree);
         sut.Compilation.Should().Be(model.Compilation);
@@ -53,14 +53,14 @@ public class SonarSyntaxNodeAnalysisContextTest
     [DataRow(false)]
     public void ReportIssue_TreeNotInCompilation_DoNotReport(bool reportOnCorrectTree)
     {
-        var analysisContext = TestHelper.CreateSonarAnalysisContext();
+        var analysisContext = AnalysisScaffolding.CreateSonarAnalysisContext();
         var (tree, model) = TestHelper.CompileCS("// Nothing to see here");
         var nodeFromCorrectCompilation = tree.GetRoot();
         var nodeFromAnotherCompilation = TestHelper.CompileCS("// This is another Compilation with another Tree").Tree.GetRoot();
-        var rule = TestHelper.CreateDescriptorMain();
+        var rule = AnalysisScaffolding.CreateDescriptorMain();
         var node = tree.GetRoot();
         var wasReported = false;
-        var context = new SyntaxNodeAnalysisContext(node, model, TestHelper.CreateOptions(), _ => wasReported = true, _ => true, default);
+        var context = new SyntaxNodeAnalysisContext(node, model, AnalysisScaffolding.CreateOptions(), _ => wasReported = true, _ => true, default);
         var sut = new SonarSyntaxNodeAnalysisContext(analysisContext, context);
         try
         {

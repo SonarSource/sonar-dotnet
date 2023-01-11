@@ -46,7 +46,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void UnchangedFiles_NotPresent_ReturnsEmpty()
         {
-            var path = TestHelper.CreateAnalysisConfig(TestContext, "SomeOtherProperty", "This is not UnchangedFilesPath");
+            var path = AnalysisScaffolding.CreateAnalysisConfig(TestContext, "SomeOtherProperty", "This is not UnchangedFilesPath");
             var sut = new AnalysisConfigReader(path);
             sut.UnchangedFiles().Should().BeEmpty();
         }
@@ -54,7 +54,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void UnchangedFiles_Empty_ReturnsEmpty()
         {
-            var path = TestHelper.CreateAnalysisConfig(TestContext, Array.Empty<string>());
+            var path = AnalysisScaffolding.CreateAnalysisConfig(TestContext, Array.Empty<string>());
             var sut = new AnalysisConfigReader(path);
             sut.UnchangedFiles().Should().BeEmpty();
         }
@@ -62,7 +62,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void UnchangedFiles_Present_ReturnsContent()
         {
-            var path = TestHelper.CreateAnalysisConfig(TestContext, new[] { @"C:\File1.cs", @"C:\File2.cs", "Any other string" });
+            var path = AnalysisScaffolding.CreateAnalysisConfig(TestContext, new[] { @"C:\File1.cs", @"C:\File2.cs", "Any other string" });
             var sut = new AnalysisConfigReader(path);
             sut.UnchangedFiles().Should().BeEquivalentTo(@"C:\File1.cs", @"C:\File2.cs", "Any other string");
         }

@@ -30,7 +30,7 @@ public class SonarSyntaxTreeAnalysisContextTest
     {
         var (tree, model) = TestHelper.CompileCS("// Nothing to see here");
         var treeContext = new SyntaxTreeAnalysisContext(tree, null, _ => { }, _ => true, default);
-        var analysisContext = TestHelper.CreateSonarAnalysisContext();
+        var analysisContext = AnalysisScaffolding.CreateSonarAnalysisContext();
 
         ((Func<SonarSyntaxTreeAnalysisContext>)(() => new(null, treeContext, model.Compilation))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("analysisContext");
         ((Func<SonarSyntaxTreeAnalysisContext>)(() => new(analysisContext, treeContext, null))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("compilation");
@@ -41,9 +41,9 @@ public class SonarSyntaxTreeAnalysisContextTest
     {
         var cancel = new CancellationToken(true);
         var (tree, model) = TestHelper.CompileCS("// Nothing to see here");
-        var options = TestHelper.CreateOptions(null);   // FIXME: Remove null argument in #6590
+        var options = AnalysisScaffolding.CreateOptions(null);   // FIXME: Remove null argument in #6590
         var context = new SyntaxTreeAnalysisContext(tree, options, _ => { }, _ => true, cancel);
-        var sut = new SonarSyntaxTreeAnalysisContext(TestHelper.CreateSonarAnalysisContext(), context, model.Compilation);
+        var sut = new SonarSyntaxTreeAnalysisContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context, model.Compilation);
 
         sut.Tree.Should().Be(tree);
         sut.Compilation.Should().Be(model.Compilation);

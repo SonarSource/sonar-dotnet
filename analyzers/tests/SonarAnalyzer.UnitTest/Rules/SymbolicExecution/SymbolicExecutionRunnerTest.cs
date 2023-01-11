@@ -338,7 +338,7 @@ End Sub");
         public void Enabled_TestProject_ScannerRun() =>
             Verify(@"string s = null;   // Noncompliant {{Message for STest}}",
                 ProjectType.Test,
-                TestHelper.CreateSonarProjectConfig(TestContext, ProjectType.Test));
+                AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Test));
 
         [TestMethod]
         public void Analyze_DescriptorsWithSameType_ExecutesOnce()
@@ -351,7 +351,7 @@ End Sub");
         string s = null;   // Noncompliant {{Message for SMain}} - this should be raised only once
     }
 }";
-            var another = TestHelper.CreateDescriptorMain("SAnother");
+            var another = AnalysisScaffolding.CreateDescriptorMain("SAnother");
             var sut = new ConfigurableSERunnerCS();
             sut.RegisterRule<MainScopeAssignmentRuleCheck>(MainScopeAssignmentRuleCheck.SMain);
             sut.RegisterRule<MainScopeAssignmentRuleCheck>(another);     // Register the same RuleCheck with another ID
@@ -391,7 +391,7 @@ if (condition)
         public void Analyze_Severity_DoesNotExecutesWhenNone() =>
             Verify(@"string s = null;   // Compliant, SMain and SAll are suppressed by test framework, because only 'SAnother' is active
                      s.ToString();      // Compliant, should not raise S2259",
-                TestHelper.CreateDescriptorMain("SAnother"));
+                AnalysisScaffolding.CreateDescriptorMain("SAnother"));
 
         [TestMethod]
         public void Analyze_ShouldExecute_ExcludesCheckFromExecution()

@@ -47,7 +47,7 @@ public partial class SonarAnalysisContextBaseTest
     [DataRow(false, ProjectType.Test, MainTag, MainTag)]
     public void HasMatchingScope_SingleDiagnostic_WithOneOrMoreScopes_SonarLint(bool expectedResult, ProjectType projectType, params string[] ruleTags)
     {
-        var diagnostic = TestHelper.CreateDescriptor(DummyID, ruleTags);
+        var diagnostic = AnalysisScaffolding.CreateDescriptor(DummyID, ruleTags);
         CreateSut(projectType, false).HasMatchingScope(diagnostic).Should().Be(expectedResult);
     }
 
@@ -68,7 +68,7 @@ public partial class SonarAnalysisContextBaseTest
     [DataRow(false, ProjectType.Test, MainTag, MainTag)]
     public void HasMatchingScope_SingleDiagnostic_WithOneOrMoreScopes_Scanner(bool expectedResult, ProjectType projectType, params string[] ruleTags)
     {
-        var diagnostic = TestHelper.CreateDescriptor(DummyID, ruleTags);
+        var diagnostic = AnalysisScaffolding.CreateDescriptor(DummyID, ruleTags);
         CreateSut(projectType, true).HasMatchingScope(diagnostic).Should().Be(expectedResult);
     }
 
@@ -82,7 +82,7 @@ public partial class SonarAnalysisContextBaseTest
     [DataRow(false, ProjectType.Test, MainTag, MainTag)]
     public void HasMatchingScope_MultipleDiagnostics_WithSingleScope_SonarLint(bool expectedResult, ProjectType projectType, params string[] rulesTag)
     {
-        var diagnostics = rulesTag.Select(x => TestHelper.CreateDescriptor(DummyID, x));
+        var diagnostics = rulesTag.Select(x => AnalysisScaffolding.CreateDescriptor(DummyID, x));
         CreateSut(projectType, false).HasMatchingScope(diagnostics).Should().Be(expectedResult);
     }
 
@@ -95,14 +95,14 @@ public partial class SonarAnalysisContextBaseTest
     [DataRow(false, ProjectType.Test, MainTag, MainTag)]
     public void HasMatchingScope_MultipleDiagnostics_WithSingleScope_Scanner(bool expectedResult, ProjectType projectType, params string[] rulesTag)
     {
-        var diagnostics = rulesTag.Select(x => TestHelper.CreateDescriptor(DummyID, x));
+        var diagnostics = rulesTag.Select(x => AnalysisScaffolding.CreateDescriptor(DummyID, x));
         CreateSut(projectType, true).HasMatchingScope(diagnostics).Should().Be(expectedResult);
     }
 
     [TestMethod]
     public void ProjectConfiguration_LoadsExpectedValues()
     {
-        var options = TestHelper.CreateOptions($@"ResourceTests\SonarProjectConfig\Path_Windows\SonarProjectConfig.xml");
+        var options = AnalysisScaffolding.CreateOptions($@"ResourceTests\SonarProjectConfig\Path_Windows\SonarProjectConfig.xml");
         var config = CreateSut(options).ProjectConfiguration();
 
         config.AnalysisConfigPath.Should().Be(@"c:\foo\bar\.sonarqube\conf\SonarQubeAnalysisConfig.xml");
@@ -111,7 +111,7 @@ public partial class SonarAnalysisContextBaseTest
     [TestMethod]
     public void ProjectConfiguration_UsesCachedValue()
     {
-        var options = TestHelper.CreateOptions($@"ResourceTests\SonarProjectConfig\Path_Windows\SonarProjectConfig.xml");
+        var options = AnalysisScaffolding.CreateOptions($@"ResourceTests\SonarProjectConfig\Path_Windows\SonarProjectConfig.xml");
         var firstSut = CreateSut(options);
         var secondSut = CreateSut(options);
         var firstConfig = firstSut.ProjectConfiguration();
@@ -123,8 +123,8 @@ public partial class SonarAnalysisContextBaseTest
     [TestMethod]
     public void ProjectConfiguration_WhenFileChanges_RebuildsCache()
     {
-        var firstOptions = TestHelper.CreateOptions($@"ResourceTests\SonarProjectConfig\Path_Windows\SonarProjectConfig.xml");
-        var secondOptions = TestHelper.CreateOptions($@"ResourceTests\SonarProjectConfig\Path_Unix\SonarProjectConfig.xml");
+        var firstOptions = AnalysisScaffolding.CreateOptions($@"ResourceTests\SonarProjectConfig\Path_Windows\SonarProjectConfig.xml");
+        var secondOptions = AnalysisScaffolding.CreateOptions($@"ResourceTests\SonarProjectConfig\Path_Unix\SonarProjectConfig.xml");
         var firstConfig = CreateSut(firstOptions).ProjectConfiguration();
         var secondConfig = CreateSut(secondOptions).ProjectConfiguration();
 
@@ -137,7 +137,7 @@ public partial class SonarAnalysisContextBaseTest
     [DataRow("/foo/bar/x.xml")]
     public void ProjectConfiguration_WhenAdditionalFileNotPresent_ReturnsEmptyConfig(string folder)
     {
-        var options = TestHelper.CreateOptions(folder);
+        var options = AnalysisScaffolding.CreateOptions(folder);
         var config = CreateSut(options).ProjectConfiguration();
 
         config.AnalysisConfigPath.Should().BeNull();
@@ -151,7 +151,7 @@ public partial class SonarAnalysisContextBaseTest
     [TestMethod]
     public void ProjectConfiguration_WhenFileIsMissing_ThrowException()
     {
-        var sut = CreateSut(TestHelper.CreateOptions("ThisPathDoesNotExist\\SonarProjectConfig.xml"));
+        var sut = CreateSut(AnalysisScaffolding.CreateOptions("ThisPathDoesNotExist\\SonarProjectConfig.xml"));
 
         sut.Invoking(x => x.ProjectConfiguration())
            .Should()
@@ -162,7 +162,7 @@ public partial class SonarAnalysisContextBaseTest
     [TestMethod]
     public void ProjectConfiguration_WhenInvalidXml_ThrowException()
     {
-        var sut = CreateSut(TestHelper.CreateOptions($@"ResourceTests\SonarProjectConfig\Invalid_Xml\SonarProjectConfig.xml"));
+        var sut = CreateSut(AnalysisScaffolding.CreateOptions($@"ResourceTests\SonarProjectConfig\Invalid_Xml\SonarProjectConfig.xml"));
 
         sut.Invoking(x => x.ProjectConfiguration())
            .Should()
@@ -171,7 +171,7 @@ public partial class SonarAnalysisContextBaseTest
     }
 
     private SonarCompilationAnalysisContext CreateSut(ProjectType projectType, bool isScannerRun) =>
-        CreateSut(TestHelper.CreateOptions(TestHelper.CreateSonarProjectConfig(TestContext, projectType, isScannerRun)));
+        CreateSut(AnalysisScaffolding.CreateOptions(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, projectType, isScannerRun)));
 
     private static SonarCompilationAnalysisContext CreateSut(AnalyzerOptions options) =>
         CreateSut(new SnippetCompiler("// Nothing to see here").SemanticModel.Compilation, options);
@@ -179,6 +179,6 @@ public partial class SonarAnalysisContextBaseTest
     private static SonarCompilationAnalysisContext CreateSut(Compilation compilation, AnalyzerOptions options)
     {
         var compilationContext = new CompilationAnalysisContext(compilation, options, _ => { }, _ => true, default);
-        return new(TestHelper.CreateSonarAnalysisContext(), compilationContext);
+        return new(AnalysisScaffolding.CreateSonarAnalysisContext(), compilationContext);
     }
 }

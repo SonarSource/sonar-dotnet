@@ -36,7 +36,7 @@ public partial class SonarAnalysisContextBaseTest
     [TestMethod]
     public void ShouldAnalyzeTree_SonarLint()
     {
-        var options = TestHelper.CreateOptions();   // No SonarProjectConfig.xml
+        var options = AnalysisScaffolding.CreateOptions();   // No SonarProjectConfig.xml
 
         ShouldAnalyzeTree(options).Should().BeTrue();
     }
@@ -44,7 +44,7 @@ public partial class SonarAnalysisContextBaseTest
     [TestMethod]
     public void ShouldAnalyzeTree_Scanner_UnchangedFiles_NotAvailable()
     {
-        var options = TestHelper.CreateOptions(TestHelper.CreateSonarProjectConfig(TestContext, ProjectType.Product));  // SonarProjectConfig.xml without UnchangedFiles.txt
+        var options = AnalysisScaffolding.CreateOptions(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product));  // SonarProjectConfig.xml without UnchangedFiles.txt
 
         ShouldAnalyzeTree(options).Should().BeTrue();
     }
@@ -351,10 +351,10 @@ public partial class SonarAnalysisContextBaseTest
             """);
 
     private AnalyzerOptions CreateOptions(string[] unchangedFiles) =>
-        TestHelper.CreateOptions(TestHelper.CreateSonarProjectConfigWithUnchangedFiles(TestContext, unchangedFiles));
+        AnalysisScaffolding.CreateOptions(AnalysisScaffolding.CreateSonarProjectConfigWithUnchangedFiles(TestContext, unchangedFiles));
 
     private static AnalyzerOptions CreateOptions(SourceText sourceText, string path = @"ResourceTests\SonarLint.xml") =>
-        TestHelper.CreateOptions(path, sourceText);
+        AnalysisScaffolding.CreateOptions(path, sourceText);
 
     private static (Compilation Compilation, SyntaxTree Tree) CreateDummyCompilation(AnalyzerLanguage language, string treeFileName)
     {

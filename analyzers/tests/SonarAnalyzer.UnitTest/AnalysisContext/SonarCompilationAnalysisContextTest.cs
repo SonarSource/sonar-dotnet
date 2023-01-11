@@ -30,9 +30,9 @@ public class SonarCompilationAnalysisContextTest
     {
         var cancel = new CancellationToken(true);
         var (tree, model) = TestHelper.CompileCS("// Nothing to see here");
-        var options = TestHelper.CreateOptions();
+        var options = AnalysisScaffolding.CreateOptions();
         var context = new CompilationAnalysisContext(model.Compilation, options, _ => { }, _ => true, cancel);
-        var sut = new SonarCompilationAnalysisContext(TestHelper.CreateSonarAnalysisContext(), context);
+        var sut = new SonarCompilationAnalysisContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context);
 
         sut.Tree.Should().Be(tree);
         sut.Compilation.Should().Be(model.Compilation);

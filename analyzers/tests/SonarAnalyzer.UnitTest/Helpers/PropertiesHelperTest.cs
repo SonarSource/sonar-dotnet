@@ -59,7 +59,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
         private static bool GetSetting(SourceText text, string path = "fakePath\\SonarLint.xml")
         {
-            var options = TestHelper.CreateOptions(path, text);
+            var options = AnalysisScaffolding.CreateOptions(path, text);
             return PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(PropertiesHelper.ParseXmlSettings(options), LanguageNames.CSharp);
         }
     }

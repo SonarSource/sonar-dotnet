@@ -143,7 +143,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public SonarSyntaxNodeAnalysisContext CreateAnalysisContext(SyntaxNode node)
         {
             var nodeContext =  new SyntaxNodeAnalysisContext(node, SemanticModel, null, null, null, default);
-            return new(TestHelper.CreateSonarAnalysisContext(), nodeContext);
+            return new(AnalysisScaffolding.CreateSonarAnalysisContext(), nodeContext);
         }
 
         private static bool HasCompilationErrors(Compilation compilation) =>

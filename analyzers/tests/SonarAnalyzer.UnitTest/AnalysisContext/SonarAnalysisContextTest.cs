@@ -135,7 +135,7 @@ public partial class SonarAnalysisContextTest
     [TestMethod]
     public void WhenProjectType_IsTest_RunRulesWithTestScope_SonarLint()
     {
-        var sonarProjectConfig = TestHelper.CreateSonarProjectConfig(TestContext, ProjectType.Test, false);
+        var sonarProjectConfig = AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Test, false);
         foreach (var testCase in testCases)
         {
             var hasTestScope = testCase.Analyzer.SupportedDiagnostics.Any(d => d.CustomTags.Contains(DiagnosticDescriptorFactory.TestSourceScopeTag));
@@ -160,7 +160,7 @@ public partial class SonarAnalysisContextTest
     [TestMethod]
     public void WhenProjectType_IsTest_RunRulesWithTestScope_Scanner()
     {
-        var sonarProjectConfig = TestHelper.CreateSonarProjectConfig(TestContext, ProjectType.Test);
+        var sonarProjectConfig = AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Test);
         foreach (var testCase in testCases)
         {
             var hasProductScope = testCase.Analyzer.SupportedDiagnostics.Any(d => d.CustomTags.Contains(DiagnosticDescriptorFactory.MainSourceScopeTag));
@@ -185,7 +185,7 @@ public partial class SonarAnalysisContextTest
     [TestMethod]
     public void WhenProjectType_IsTest_RunRulesWithMainScope()
     {
-        var sonarProjectConfig = TestHelper.CreateSonarProjectConfig(TestContext, ProjectType.Product);
+        var sonarProjectConfig = AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product);
         foreach (var testCase in testCases)
         {
             var hasProductScope = testCase.Analyzer.SupportedDiagnostics.Any(d => d.CustomTags.Contains(DiagnosticDescriptorFactory.MainSourceScopeTag));
@@ -277,8 +277,8 @@ public partial class SonarAnalysisContextTest
     public void IsTestProject_Standalone(ProjectType projectType, bool expectedResult)
     {
         var compilation = new SnippetCompiler("// Nothing to see here", TestHelper.ProjectTypeReference(projectType)).SemanticModel.Compilation;
-        var context = new CompilationAnalysisContext(compilation, TestHelper.CreateOptions(), null, null, default);
-        var sut = new SonarCompilationAnalysisContext(TestHelper.CreateSonarAnalysisContext(), context);
+        var context = new CompilationAnalysisContext(compilation, AnalysisScaffolding.CreateOptions(), null, null, default);
+        var sut = new SonarCompilationAnalysisContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context);
 
         sut.IsTestProject().Should().Be(expectedResult);
     }
@@ -288,9 +288,9 @@ public partial class SonarAnalysisContextTest
     [DataRow(ProjectType.Test, true)]
     public void IsTestProject_WithConfigFile(ProjectType projectType, bool expectedResult)
     {
-        var configPath = TestHelper.CreateSonarProjectConfig(TestContext, projectType);
-        var context = new CompilationAnalysisContext(null, TestHelper.CreateOptions(configPath), null, null, default);
-        var sut = new SonarCompilationAnalysisContext(TestHelper.CreateSonarAnalysisContext(), context);
+        var configPath = AnalysisScaffolding.CreateSonarProjectConfig(TestContext, projectType);
+        var context = new CompilationAnalysisContext(null, AnalysisScaffolding.CreateOptions(configPath), null, null, default);
+        var sut = new SonarCompilationAnalysisContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context);
 
         sut.IsTestProject().Should().Be(expectedResult);
     }

@@ -40,28 +40,28 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 
     internal class MainScopeAssignmentRuleCheck : AssignmentRuleCheck
     {
-        public static readonly DiagnosticDescriptor SMain = TestHelper.CreateDescriptorMain("SMain");
+        public static readonly DiagnosticDescriptor SMain = AnalysisScaffolding.CreateDescriptorMain("SMain");
 
         protected override DiagnosticDescriptor Rule => SMain;
     }
 
     internal class TestScopeAssignmentRuleCheck : AssignmentRuleCheck
     {
-        public static readonly DiagnosticDescriptor STest = TestHelper.CreateDescriptor("STest", DiagnosticDescriptorFactory.TestSourceScopeTag);
+        public static readonly DiagnosticDescriptor STest = AnalysisScaffolding.CreateDescriptor("STest", DiagnosticDescriptorFactory.TestSourceScopeTag);
 
         protected override DiagnosticDescriptor Rule => STest;
     }
 
     internal class AllScopeAssignmentRuleCheck : AssignmentRuleCheck
     {
-        public static readonly DiagnosticDescriptor SAll = TestHelper.CreateDescriptor("SAll", DiagnosticDescriptorFactory.MainSourceScopeTag, DiagnosticDescriptorFactory.TestSourceScopeTag);
+        public static readonly DiagnosticDescriptor SAll = AnalysisScaffolding.CreateDescriptor("SAll", DiagnosticDescriptorFactory.MainSourceScopeTag, DiagnosticDescriptorFactory.TestSourceScopeTag);
 
         protected override DiagnosticDescriptor Rule => SAll;
     }
 
     internal class InvocationAssignmentRuleCheck : AssignmentRuleCheck
     {
-        public static readonly DiagnosticDescriptor SInvocation = TestHelper.CreateDescriptorMain("SInvocation");
+        public static readonly DiagnosticDescriptor SInvocation = AnalysisScaffolding.CreateDescriptorMain("SInvocation");
 
         protected override DiagnosticDescriptor Rule => SInvocation;
 
@@ -72,7 +72,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 
     internal class ThrowAssignmentRuleCheck : AssignmentRuleCheck
     {
-        public static readonly DiagnosticDescriptor SThrow = TestHelper.CreateDescriptorMain("SThrow");
+        public static readonly DiagnosticDescriptor SThrow = AnalysisScaffolding.CreateDescriptorMain("SThrow");
 
         protected override DiagnosticDescriptor Rule => SThrow;
 

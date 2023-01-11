@@ -75,7 +75,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 CreateCompilation(),
                 new DatabasePasswordsShouldBeSecure(),
                 webConfigPath,
-                TestHelper.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath));
+                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath));
         }
 
         [TestMethod]
@@ -88,7 +88,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 CreateCompilation(),
                 new DatabasePasswordsShouldBeSecure(),
                 webConfigPath,
-                TestHelper.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath, externalConfigPath));
+                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath, externalConfigPath));
         }
 
         [TestMethod]
@@ -102,7 +102,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 CreateCompilation(),
                 new DatabasePasswordsShouldBeSecure(),
                 corruptFilePath,
-                TestHelper.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, corruptFilePath, nonExistingFilePath));
+                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, corruptFilePath, nonExistingFilePath));
         }
 
         [DataTestMethod]
@@ -122,7 +122,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 CreateCompilation(),
                 new DatabasePasswordsShouldBeSecure(),
                 appSettingsPath,
-                TestHelper.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, appSettingsPath));
+                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, appSettingsPath));
         }
 
         [TestMethod]
@@ -136,7 +136,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 CreateCompilation(),
                 new DatabasePasswordsShouldBeSecure(),
                 corruptFilePath,
-                TestHelper.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, corruptFilePath, nonExistingFilePath));
+                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, corruptFilePath, nonExistingFilePath));
         }
 
         private static string GetWebConfigPath(string rootFolder) => Path.Combine(rootFolder, "Web.config");
