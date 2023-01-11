@@ -56,17 +56,8 @@ namespace MyLibrary
         public void MyMethod_24<T, TBase>(T arg) where T : TBase { }
         public void MyMethod_25<T, TBase>(T arg) where T : IEnumerable<TBase> { }
         public void MyMethod_26<T, TBase>(T arg) where T : IEnumerable<int>, TBase { }
-        public TypeMap MyMethod_271<T, TBase>() => new TypeMap(typeof(T), typeof(TBase)); // Noncompliant FP
         public void MyMethod_27<T, TBase>() where T : TBase { } // Noncompliant
         public void MyMethod_28<T, TBase>(TBase arg) where T : TBase { } // Noncompliant
         public void MyMethod_29<T, TBase>(T arg) where T : new() { } // Noncompliant
-    }
-
-    public class TypeMap
-    {
-        public TypeMap(Type source, Type destination)
-        {
-
-        }
     }
 }
