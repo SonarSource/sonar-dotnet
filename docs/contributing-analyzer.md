@@ -25,7 +25,9 @@ In general, it is best to run commands from the Visual Studio Developer Command 
     - .NET SDK
     - .NET Compiler Platform SDK
 1. Install also:
-    - [.NET Core 3.1 SDK](https://dotnet.microsoft.com/en-us/download/dotnet)
+    - [.NET Core 2.1 SDK](https://dotnet.microsoft.com/en-us/download/dotnet)
+    - .NET Core 3.1 SDK
+    - .NET 5.0 SDK
     - .NET 3.5 SDK (SP1) from [Microsoft download center](https://www.microsoft.com/en-us/download/details.aspx?id=21)
     - Install Visual Studio 2019 and check these SDKs in the *individual components* tab
         - .NET framework 4 targeting pack
