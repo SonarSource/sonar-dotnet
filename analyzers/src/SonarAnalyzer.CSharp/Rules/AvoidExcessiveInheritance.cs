@@ -23,7 +23,7 @@ using System.Text.RegularExpressions;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class AvoidExcessiveInheritance : ParameterLoadingDiagnosticAnalyzer
+    public class AvoidExcessiveInheritance : ParametrizedDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S110";
         private const string MessageFormat = "This {0} has {1} parents which is greater than {2} authorized.";
@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context) =>
+        protected override void Initialize(SonarParametrizedAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     if (c.IsRedundantPositionalRecordContext())

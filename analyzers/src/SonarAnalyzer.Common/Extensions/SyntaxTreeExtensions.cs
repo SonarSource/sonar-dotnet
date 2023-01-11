@@ -18,23 +18,22 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+using System.Collections.Concurrent;
+using System.Runtime.CompilerServices;
+
+namespace SonarAnalyzer.Extensions;
+
+internal static class SyntaxTreeExtensions
 {
-    public abstract class ParameterLoadingDiagnosticAnalyzer : SonarDiagnosticAnalyzer  // FIXME: Rename To Sonar*
+    private static readonly ConditionalWeakTable<Compilation, ConcurrentDictionary<SyntaxTree, bool>> GeneratedCodeCache = new();
+
+    public static bool IsGenerated(this SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer, Compilation compilation)
     {
-        protected abstract void Initialize(ParameterLoadingAnalysisContext context);
-
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        if (tree == null)
         {
-            var parameterContext = new ParameterLoadingAnalysisContext(context);
-            Initialize(parameterContext);
-
-            context.RegisterCompilationStartAction(
-                c =>
-                {
-                    ParameterLoader.SetParameterValues(this, c.Options);
-                    parameterContext.ExecutePostponedActions(c);
-                });
+            return false;
         }
+        var cache = GeneratedCodeCache.GetOrCreateValue(compilation);
+        return cache.GetOrAdd(tree, generatedCodeRecognizer.IsGenerated);
     }
 }

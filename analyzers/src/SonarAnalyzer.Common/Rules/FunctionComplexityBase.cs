@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class FunctionComplexityBase : ParameterLoadingDiagnosticAnalyzer
+    public abstract class FunctionComplexityBase : ParametrizedDiagnosticAnalyzer
     {
         protected const string DiagnosticId = "S1541";
         protected const string MessageFormat = "The Cyclomatic Complexity of this {2} is {1} which is greater than {0} authorized.";
@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules
 
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
 
-        protected abstract override void Initialize(ParameterLoadingAnalysisContext context);
+        protected abstract override void Initialize(SonarParametrizedAnalysisContext context);
 
         protected void CheckComplexity<TSyntax>(SonarSyntaxNodeAnalysisContext context, Func<TSyntax, SyntaxNode> nodeSelector, Func<TSyntax, Location> location,
             string declarationType)

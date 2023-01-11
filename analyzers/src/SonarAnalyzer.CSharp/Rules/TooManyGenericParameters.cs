@@ -21,7 +21,7 @@
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class TooManyGenericParameters : ParameterLoadingDiagnosticAnalyzer
+    public class TooManyGenericParameters : ParametrizedDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S2436";
         private const string MessageFormat = "Reduce the number of generic parameters in the '{0}' {1} to no more than the {2} authorized.";
@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
         [RuleParameter("maxMethod", PropertyType.Integer, "Maximum authorized number of generic parameters for methods.", DefaultMaxNumberOfGenericParametersInMethod)]
         public int MaxNumberOfGenericParametersInMethod { get; set; } = DefaultMaxNumberOfGenericParametersInMethod;
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context)
+        protected override void Initialize(SonarParametrizedAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

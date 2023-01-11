@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class TooManyLabelsInSwitchBase<TSyntaxKind, TSwitchStatementSyntax> : ParameterLoadingDiagnosticAnalyzer
+    public abstract class TooManyLabelsInSwitchBase<TSyntaxKind, TSwitchStatementSyntax> : ParametrizedDiagnosticAnalyzer
         where TSyntaxKind : struct
         where TSwitchStatementSyntax : SyntaxNode
     {
@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
             ImmutableArray.Create(Rule);
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context)
+        protected override void Initialize(SonarParametrizedAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 GeneratedCodeRecognizer,
