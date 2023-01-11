@@ -21,9 +21,6 @@
 using System.IO;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Text;
-using Moq;
-using SonarAnalyzer.AnalysisContext;
 using SonarAnalyzer.CFG;
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.Common;
@@ -142,38 +139,6 @@ End Class", AnalyzerLanguage.VisualBasic);
             var (syntaxTree, semanticModel) = tuple;
             return (syntaxTree.GetConstructor(name), semanticModel);
         }
-
-        public static IndexerDeclarationSyntax GetIndexer(this SyntaxTree syntaxTree) =>
-            syntaxTree.GetRoot()
-                .DescendantNodes()
-                .OfType<IndexerDeclarationSyntax>()
-                .First();
-
-        public static AccessorDeclarationSyntax GetAccessor(this SyntaxTree syntaxTree, string accessorKeyword) =>
-           syntaxTree.GetRoot()
-               .DescendantNodes()
-               .OfType<AccessorDeclarationSyntax>()
-               .First(m => m.Keyword.ValueText == accessorKeyword);
-
-        public static ConversionOperatorDeclarationSyntax GetConversionOperator(this SyntaxTree syntaxTree) =>
-           syntaxTree.GetRoot()
-               .DescendantNodes()
-               .OfType<ConversionOperatorDeclarationSyntax>()
-               .First();
-
-        public static DestructorDeclarationSyntax GetDestructor(this SyntaxTree syntaxTree) =>
-            syntaxTree.GetRoot()
-                .DescendantNodes()
-                .OfType<DestructorDeclarationSyntax>()
-                .First();
-
-        public static BaseTypeDeclarationSyntax GetType(this SyntaxTree syntaxTree, string name, int skip = 0) =>
-            syntaxTree.GetRoot()
-                .DescendantNodes()
-                .OfType<BaseTypeDeclarationSyntax>()
-                .Where(m => m.Identifier.ValueText == name)
-                .Skip(skip)
-                .First();
 
         public static IMethodSymbol GetMethodSymbol(this (SyntaxTree, SemanticModel) tuple, string name, int skip = 0)
         {
