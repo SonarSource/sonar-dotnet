@@ -66,4 +66,17 @@ namespace Tests.Diagnostics
                 $" [other_column] = @{nameof(SomeColumn)}";     // Noncompliant FP
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/6355
+    public class Repro_6355
+    {
+        public void VariousSqlKeywords(string unknownValue)
+        {
+            const string Something = "Things";
+            const string myString = $"{Something}Else"; // Noncompliant FP
+            const string myString1 = $"{nameof(Something)}Else"; // Noncompliant FP
+            string myString2 = $"{unknownValue}what";
+            string myString3 = $"{nameof(unknownValue)}when"; // Noncompliant FP
+        }
+    }
 }
