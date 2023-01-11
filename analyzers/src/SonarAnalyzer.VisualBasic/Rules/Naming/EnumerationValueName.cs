@@ -21,7 +21,7 @@
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class EnumerationValueName : ParameterLoadingDiagnosticAnalyzer
+    public sealed class EnumerationValueName : ParametrizedDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2343";
         private const string MessageFormat = "Rename '{0}' to match the regular expression: '{1}'.";
@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             "Regular expression used to check the enumeration value names against.", NamingHelper.PascalCasingPattern)]
         public string Pattern { get; set; } = NamingHelper.PascalCasingPattern;
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context)
+        protected override void Initialize(SonarParametrizedAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

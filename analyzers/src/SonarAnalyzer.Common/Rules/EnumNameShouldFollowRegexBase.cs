@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class EnumNameShouldFollowRegexBase<TSyntaxKind> : ParameterLoadingDiagnosticAnalyzer
+    public abstract class EnumNameShouldFollowRegexBase<TSyntaxKind> : ParametrizedDiagnosticAnalyzer
         where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S2342";
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules
         protected EnumNameShouldFollowRegexBase() =>
             rule = Language.CreateDescriptor(DiagnosticId, MessageFormat, isEnabledByDefault: false);
 
-        protected sealed override void Initialize(ParameterLoadingAnalysisContext context) =>
+        protected sealed override void Initialize(SonarParametrizedAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
                 {
                     var pattern = c.Node.HasFlagsAttribute(c.SemanticModel) ? FlagsEnumNamePattern : EnumNamePattern;

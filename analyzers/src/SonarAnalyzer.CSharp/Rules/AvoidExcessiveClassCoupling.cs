@@ -21,7 +21,7 @@
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class AvoidExcessiveClassCoupling : ParameterLoadingDiagnosticAnalyzer
+    public sealed class AvoidExcessiveClassCoupling : ParametrizedDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S1200";
         private const string MessageFormat = "Split this {0} into smaller and more specialized ones to reduce its dependencies on other types from {1} to the maximum authorized {2} or less.";
@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
         [RuleParameter("max", PropertyType.Integer, "Maximum number of types a single type is allowed to depend upon", ThresholdDefaultValue)]
         public int Threshold { get; set; } = ThresholdDefaultValue;
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context) =>
+        protected override void Initialize(SonarParametrizedAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var typeDeclaration = (TypeDeclarationSyntax)c.Node;

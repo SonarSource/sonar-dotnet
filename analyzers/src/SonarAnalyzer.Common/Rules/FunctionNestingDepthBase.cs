@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class FunctionNestingDepthBase : ParameterLoadingDiagnosticAnalyzer
+    public abstract class FunctionNestingDepthBase : ParametrizedDiagnosticAnalyzer
     {
         protected const string DiagnosticId = "S134";
         private const string MessageFormat = "Refactor this code to not nest more than {0} control flow statements.";
