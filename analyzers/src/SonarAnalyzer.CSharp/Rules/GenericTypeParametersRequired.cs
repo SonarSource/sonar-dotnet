@@ -31,35 +31,50 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            {
+                var methodDeclaration = (MethodDeclarationSyntax)c.Node;
+
+                var typeParameters = methodDeclaration
+                        .TypeParameterList
+                        ?.Parameters
+                        .Select(p => c.SemanticModel.GetDeclaredSymbol(p));
+
+                if (typeParameters == null)
                 {
-                    var methodDeclaration = (MethodDeclarationSyntax)c.Node;
+                    return;
+                }
 
-                    var typeParameters = methodDeclaration
-                            .TypeParameterList
-                            ?.Parameters
-                            .Select(p => c.SemanticModel.GetDeclaredSymbol(p));
+                var argumentTypes = methodDeclaration
+                        .ParameterList
+                        .Parameters
+                        .Select(p => c.SemanticModel.GetDeclaredSymbol(p)?.Type);
 
-                    if (typeParameters == null)
-                    {
-                        return;
-                    }
+                var constraintTypes = methodDeclaration
+                    .ConstraintClauses
+                    .OfType<TypeParameterConstraintClauseSyntax>()
+                    .SelectMany(p => p
+                                    .Constraints
+                                    .OfType<TypeConstraintSyntax>()
+                                    .Select(t => c.SemanticModel.GetSymbolInfo(t.Type).Symbol))
+                    .OfType<ITypeSymbol>();
 
-                    var argumentTypes = methodDeclaration
-                            .ParameterList
-                            .Parameters
-                            .Select(p => c.SemanticModel.GetDeclaredSymbol(p)?.Type);
+                var returnType = (ITypeSymbol)c.SemanticModel.GetSymbolInfo(methodDeclaration.ReturnType).Symbol;
 
-                    var typeParametersInArguments = new HashSet<ITypeParameterSymbol>();
-                    foreach (var argumentType in argumentTypes)
-                    {
-                        AddTypeParameters(argumentType, typeParametersInArguments);
-                    }
+                var allTypeSymbolsInMethodDeclaration = argumentTypes
+                    .Concat(constraintTypes)
+                    .Concat(new[] { returnType });
+                var typeParametersInArgumentsAndContraints = new HashSet<ITypeParameterSymbol>();
 
-                    if (typeParameters.Except(typeParametersInArguments).Any())
-                    {
-                        c.ReportIssue(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation()));
-                    }
-                },
+                foreach (var type in allTypeSymbolsInMethodDeclaration)
+                {
+                    AddTypeParameters(type, typeParametersInArgumentsAndContraints);
+                }
+
+                if (typeParameters.Except(typeParametersInArgumentsAndContraints).Any())
+                {
+                    c.ReportIssue(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation()));
+                }
+            },
                 SyntaxKind.MethodDeclaration);
 
         private static void AddTypeParameters(ITypeSymbol argumentSymbol, ISet<ITypeParameterSymbol> set)
