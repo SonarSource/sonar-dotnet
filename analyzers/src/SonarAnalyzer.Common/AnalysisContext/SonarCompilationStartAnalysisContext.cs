@@ -22,7 +22,7 @@ namespace SonarAnalyzer;
 
 public sealed class SonarCompilationStartAnalysisContext : SonarAnalysisContextBase<CompilationStartAnalysisContext>
 {
-    public override SyntaxTree Tree => Context.GetFirstSyntaxTree();
+    public override SyntaxTree Tree => Context.Compilation.SyntaxTrees.FirstOrDefault();
     public override Compilation Compilation => Context.Compilation;
     public override AnalyzerOptions Options => Context.Options;
     public override CancellationToken Cancel => Context.CancellationToken;
@@ -34,4 +34,8 @@ public sealed class SonarCompilationStartAnalysisContext : SonarAnalysisContextB
 
     public void RegisterCompilationEndAction(Action<SonarCompilationAnalysisContext> action) =>
         Context.RegisterCompilationEndAction(x => action(new(AnalysisContext, x)));
+
+    public void RegisterSyntaxNodeActionInNonGenerated<TSyntaxKind>(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxNodeAnalysisContext> action, params TSyntaxKind[] syntaxKinds)
+        where TSyntaxKind : struct =>
+        AnalysisContext.RegisterSyntaxNodeActionInNonGenerated(generatedCodeRecognizer, action, syntaxKinds);
 }
