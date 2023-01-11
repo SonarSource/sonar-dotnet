@@ -22,39 +22,39 @@ namespace SonarAnalyzer.Helpers
 {
     internal class ReportingContext : IReportingContext
     {
-        private readonly Action<Diagnostic> contextSpecificReport;
+        private readonly Action<Diagnostic> roslynReportDiagnostic;
 
         public SyntaxTree SyntaxTree { get; }
         public Diagnostic Diagnostic { get; }
         public Compilation Compilation { get; }
 
-        public ReportingContext(SyntaxNodeAnalysisContext context, Diagnostic diagnostic)
-            : this(diagnostic, context.ReportDiagnostic, context.Compilation, context.GetSyntaxTree()) { }
+        public ReportingContext(SonarSyntaxNodeAnalysisContext context, Diagnostic diagnostic)
+            : this(diagnostic, context.Context.ReportDiagnostic, context.Compilation, context.Tree) { }
 
-        public ReportingContext(SyntaxTreeAnalysisContext context, Diagnostic diagnostic)
-            : this(diagnostic, context.ReportDiagnostic, null, context.GetSyntaxTree()) { }
+        public ReportingContext(SonarSyntaxTreeAnalysisContext context, Diagnostic diagnostic)
+            : this(diagnostic, context.Context.ReportDiagnostic, context.Compilation, context.Tree) { }
 
-        public ReportingContext(CompilationAnalysisContext context, Diagnostic diagnostic)
-            : this(diagnostic, context.ReportDiagnostic, context.Compilation, context.GetFirstSyntaxTree()) { }
+        public ReportingContext(SonarCompilationAnalysisContext context, Diagnostic diagnostic)
+            : this(diagnostic, context.Context.ReportDiagnostic, context.Compilation, diagnostic.Location?.SourceTree ?? context.Tree) { }
 
-        public ReportingContext(SymbolAnalysisContext context, Diagnostic diagnostic)
-            : this(diagnostic, context.ReportDiagnostic, context.Compilation, context.GetFirstSyntaxTree()) { }
+        public ReportingContext(SonarSymbolAnalysisContext context, Diagnostic diagnostic)
+            : this(diagnostic, context.Context.ReportDiagnostic, context.Compilation, diagnostic.Location?.SourceTree ?? context.Tree) { }
 
-        public ReportingContext(CodeBlockAnalysisContext context, Diagnostic diagnostic)
-            : this(diagnostic, context.ReportDiagnostic, context.SemanticModel.Compilation, context.GetSyntaxTree()) { }
+        public ReportingContext(SonarCodeBlockAnalysisContext context, Diagnostic diagnostic)
+            : this(diagnostic, context.Context.ReportDiagnostic, context.Compilation, context.Tree) { }
 
         private ReportingContext(Diagnostic diagnostic,
-                                 Action<Diagnostic> contextSpecificReport,
+                                 Action<Diagnostic> roslynReportDiagnostic,
                                  Compilation compilation,
                                  SyntaxTree syntaxTree)
         {
             Diagnostic = diagnostic;
-            SyntaxTree = syntaxTree;
+            this.roslynReportDiagnostic = roslynReportDiagnostic;
             Compilation = compilation;
-            this.contextSpecificReport = contextSpecificReport;
+            SyntaxTree = syntaxTree;
         }
 
         public void ReportDiagnostic(Diagnostic diagnostic) =>
-            contextSpecificReport(diagnostic);
+            roslynReportDiagnostic(diagnostic);
     }
 }
