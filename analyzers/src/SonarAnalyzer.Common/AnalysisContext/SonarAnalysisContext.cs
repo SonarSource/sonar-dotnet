@@ -112,7 +112,7 @@ public sealed class SonarAnalysisContext : SonarAnalysisContextBase
         // First, we need to ensure the rule does apply to the current scope (main vs test source).
         // Second, we call an external delegate (set by legacy SonarLint for VS) to ensure the rule should be run (usually
         // the decision is made on based on whether the project contains the analyzer as NuGet).
-        if (supportedDiagnostics.Any(x => x.HasMatchingScope(context.Compilation, context.IsTestProject(), context.IsScannerRun()))
+        if (context.HasMatchingScope(supportedDiagnostics)
             && (generatedCodeRecognizer is null || context.ShouldAnalyze(generatedCodeRecognizer))
             && LegacyIsRegisteredActionEnabled(supportedDiagnostics, context.Tree))
         {
