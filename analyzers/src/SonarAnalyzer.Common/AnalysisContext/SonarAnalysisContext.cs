@@ -71,31 +71,32 @@ public sealed class SonarAnalysisContext : SonarAnalysisContextBase
     internal static bool LegacyIsRegisteredActionEnabled(IEnumerable<DiagnosticDescriptor> diagnostics, SyntaxTree tree) =>
         ShouldExecuteRegisteredAction == null || tree == null || ShouldExecuteRegisteredAction(diagnostics, tree);
 
-    // FIXME: Better names for these pairs
+    // FIXME: Better names for these pairs, this one is not used
     public void RegisterCodeBlockStartAction<TSyntaxKind>(Action<SonarCodeBlockStartAnalysisContext<TSyntaxKind>> action) where TSyntaxKind : struct =>
-        analysisContext.RegisterCodeBlockStartAction<TSyntaxKind>(c => Execute<SonarCodeBlockStartAnalysisContext<TSyntaxKind>, CodeBlockStartAnalysisContext<TSyntaxKind>>(new(this, c), action));
+        analysisContext.RegisterCodeBlockStartAction<TSyntaxKind>(c => Execute<SonarCodeBlockStartAnalysisContext<TSyntaxKind>, CodeBlockStartAnalysisContext<TSyntaxKind>>(new(this, c), action, c.CodeBlock.SyntaxTree));
 
     public void RegisterCodeBlockStartActionInNonGenerated<TSyntaxKind>(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarCodeBlockStartAnalysisContext<TSyntaxKind>> action)
         where TSyntaxKind : struct =>
-        analysisContext.RegisterCodeBlockStartAction<TSyntaxKind>(c => Execute<SonarCodeBlockStartAnalysisContext<TSyntaxKind>, CodeBlockStartAnalysisContext<TSyntaxKind>>(new(this, c), action, generatedCodeRecognizer));    // FIXME: Rename generatedCodeRecognizer everywhere
+        analysisContext.RegisterCodeBlockStartAction<TSyntaxKind>(c => Execute<SonarCodeBlockStartAnalysisContext<TSyntaxKind>, CodeBlockStartAnalysisContext<TSyntaxKind>>(new(this, c), action, c.CodeBlock.SyntaxTree, generatedCodeRecognizer));
 
     public void RegisterCompilationAction(Action<SonarCompilationAnalysisContext> action) =>
-        analysisContext.RegisterCompilationAction(c => Execute<SonarCompilationAnalysisContext, CompilationAnalysisContext>(new(this, c), action));
+        analysisContext.RegisterCompilationAction(c => Execute<SonarCompilationAnalysisContext, CompilationAnalysisContext>(new(this, c), action, null));
 
     public void RegisterCompilationStartAction(Action<SonarCompilationStartAnalysisContext> action) =>
-        analysisContext.RegisterCompilationStartAction(c => Execute<SonarCompilationStartAnalysisContext, CompilationStartAnalysisContext>(new(this, c), action));
+        analysisContext.RegisterCompilationStartAction(c => Execute<SonarCompilationStartAnalysisContext, CompilationStartAnalysisContext>(new(this, c), action, null));
 
     public void RegisterSymbolAction(Action<SonarSymbolAnalysisContext> action, params SymbolKind[] symbolKinds) =>
-        analysisContext.RegisterSymbolAction(c => Execute<SonarSymbolAnalysisContext, SymbolAnalysisContext>(new(this, c), action), symbolKinds);
+        analysisContext.RegisterSymbolAction(c => Execute<SonarSymbolAnalysisContext, SymbolAnalysisContext>(new(this, c), action, null), symbolKinds);
 
-    // FIXME: Better names for these pairs
+    // FIXME: Better names for these pairs,this one is not used (almost)
     public void RegisterSyntaxNodeAction<TSyntaxKind>(Action<SonarSyntaxNodeAnalysisContext> action, params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct =>
-        analysisContext.RegisterSyntaxNodeAction(c => Execute<SonarSyntaxNodeAnalysisContext, SyntaxNodeAnalysisContext>(new(this, c), action), syntaxKinds);
+        analysisContext.RegisterSyntaxNodeAction(c => Execute<SonarSyntaxNodeAnalysisContext, SyntaxNodeAnalysisContext>(new(this, c), action, c.Node.SyntaxTree), syntaxKinds);
 
     public void RegisterSyntaxNodeActionInNonGenerated<TSyntaxKind>(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxNodeAnalysisContext> action, params TSyntaxKind[] syntaxKinds)
         where TSyntaxKind : struct =>
-        analysisContext.RegisterSyntaxNodeAction(c => Execute<SonarSyntaxNodeAnalysisContext, SyntaxNodeAnalysisContext>(new(this, c), action, generatedCodeRecognizer), syntaxKinds);
+        analysisContext.RegisterSyntaxNodeAction(c => Execute<SonarSyntaxNodeAnalysisContext, SyntaxNodeAnalysisContext>(new(this, c), action, c.Node.SyntaxTree, generatedCodeRecognizer), syntaxKinds);
 
+    // FIXME: Better names for these pairs,this one is not used
     public void RegisterSyntaxTreeAction(Action<SonarSyntaxTreeAnalysisContext> action) =>
         analysisContext.RegisterCompilationStartAction(WrapSyntaxTreeAction(action));
 
@@ -103,9 +104,10 @@ public sealed class SonarAnalysisContext : SonarAnalysisContextBase
         analysisContext.RegisterCompilationStartAction(WrapSyntaxTreeAction(action, generatedCodeRecognizer));
 
     public Action<CompilationStartAnalysisContext> WrapSyntaxTreeAction(Action<SonarSyntaxTreeAnalysisContext> action, GeneratedCodeRecognizer generatedCodeRecognizer = null) =>   // FIXME: Better name
-        c => c.RegisterSyntaxTreeAction(treeContext => Execute<SonarSyntaxTreeAnalysisContext, SyntaxTreeAnalysisContext>(new(this, treeContext, c.Compilation), action, generatedCodeRecognizer));
+        c => c.RegisterSyntaxTreeAction(treeContext => Execute<SonarSyntaxTreeAnalysisContext, SyntaxTreeAnalysisContext>(new(this, treeContext, c.Compilation), action, treeContext.Tree, generatedCodeRecognizer));
 
-    private void Execute<TSonarContext, TRoslynContext>(TSonarContext context, Action<TSonarContext> action, GeneratedCodeRecognizer generatedCodeRecognizer = null)
+    /// <param name="sourceTree">Tree that is definitely known to be analyzed. Pass 'null' if the context doesn't know a specific tree to be analyzed, like a CompilationContext.</param>
+    private void Execute<TSonarContext, TRoslynContext>(TSonarContext context, Action<TSonarContext> action, SyntaxTree sourceTree, GeneratedCodeRecognizer generatedCodeRecognizer = null)
         where TSonarContext : SonarAnalysisContextBase<TRoslynContext>
     {
         // For each action registered on context we need to do some pre-processing before actually calling the rule.
@@ -113,7 +115,7 @@ public sealed class SonarAnalysisContext : SonarAnalysisContextBase
         // Second, we call an external delegate (set by legacy SonarLint for VS) to ensure the rule should be run (usually
         // the decision is made on based on whether the project contains the analyzer as NuGet).
         if (context.HasMatchingScope(supportedDiagnostics)
-            && (generatedCodeRecognizer is null || context.ShouldAnalyze(generatedCodeRecognizer))
+            && context.ShouldAnalyzeTree(sourceTree, context.Compilation, context.Options, generatedCodeRecognizer)
             && LegacyIsRegisteredActionEnabled(supportedDiagnostics, context.Tree))
         {
             action(context);

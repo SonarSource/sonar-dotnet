@@ -33,62 +33,62 @@ public partial class SonarAnalysisContextTest
     private const string OtherFileName = "OtherFile";
 
     [TestMethod]
-    public void ShouldAnalyze_SonarLint()
+    public void ShouldAnalyzeTree_SonarLint()
     {
         var options = new AnalyzerOptions(ImmutableArray<AdditionalText>.Empty);    // No SonarProjectConfig.xml
 
-        ShouldAnalyze(options).Should().BeTrue();
+        ShouldAnalyzeTree(options).Should().BeTrue();
     }
 
     [TestMethod]
-    public void ShouldAnalyze_Scanner_UnchangedFiles_NotAvailable()
+    public void ShouldAnalyzeTree_Scanner_UnchangedFiles_NotAvailable()
     {
         var sonarProjectConfig = TestHelper.CreateSonarProjectConfig(TestContext, ProjectType.Product); // SonarProjectConfig.xml without UnchangedFiles.txt
         var additionalFile = new AnalyzerAdditionalFile(sonarProjectConfig);
         var options = new AnalyzerOptions(ImmutableArray.Create<AdditionalText>(additionalFile));
 
-        ShouldAnalyze(options).Should().BeTrue();
+        ShouldAnalyzeTree(options).Should().BeTrue();
     }
 
     [TestMethod]
-    public void ShouldAnalyze_Scanner_UnchangedFiles_Empty()
+    public void ShouldAnalyzeTree_Scanner_UnchangedFiles_Empty()
     {
         var options = CreateOptions(Array.Empty<string>());
 
-        ShouldAnalyze(options).Should().BeTrue();
+        ShouldAnalyzeTree(options).Should().BeTrue();
     }
 
     [TestMethod]
-    public void ShouldAnalyze_Scanner_UnchangedFiles_ContainsTreeFile()
+    public void ShouldAnalyzeTree_Scanner_UnchangedFiles_ContainsTreeFile()
     {
         var options = CreateOptions(new[] { OtherFileName + ".cs" });
 
-        ShouldAnalyze(options).Should().BeFalse("File is known to be Unchanged in Incremental PR analysis");
+        ShouldAnalyzeTree(options).Should().BeFalse("File is known to be Unchanged in Incremental PR analysis");
     }
 
     [TestMethod]
-    public void ShouldAnalyze_Scanner_UnchangedFiles_ContainsOtherFile()
+    public void ShouldAnalyzeTree_Scanner_UnchangedFiles_ContainsOtherFile()
     {
         var options = CreateOptions(new[] { "ThisIsNotInCompilation.cs", "SomethingElse.cs" });
 
-        ShouldAnalyze(options).Should().BeTrue();
+        ShouldAnalyzeTree(options).Should().BeTrue();
     }
 
     [DataTestMethod]
     [DataRow(GeneratedFileName, false)]
     [DataRow(OtherFileName, true)]
-    public void ShouldAnalyze_GeneratedFile_NoSonarLintXml(string fileName, bool expected)
+    public void ShouldAnalyzeTree_GeneratedFile_NoSonarLintXml(string fileName, bool expected)
     {
         var sonarLintXml = CreateSonarLintXml(true);
         var options = CreateOptions(sonarLintXml, @"ResourceTests\Foo.xml");
         var (compilation, tree) = CreateDummyCompilation(AnalyzerLanguage.CSharp, fileName);
 
-        CreateSut().ShouldAnalyze(CSharpGeneratedCodeRecognizer.Instance, tree, compilation, options).Should().Be(expected);
+        CreateSut().ShouldAnalyzeTree(tree, compilation, options, CSharpGeneratedCodeRecognizer.Instance).Should().Be(expected);
         sonarLintXml.ToStringCallCount.Should().Be(0, "this file doesn't have 'SonarLint.xml' name");
     }
 
     [TestMethod]
-    public void ShouldAnalyze_GeneratedFile_ShouldAnalyzeGeneratedProvider_IsCached()
+    public void ShouldAnalyzeTree_GeneratedFile_ShouldAnalyzeGeneratedProvider_IsCached()
     {
         var sonarLintXml = CreateSonarLintXml(true);
         var additionalText = MockAdditionalText(sonarLintXml);
@@ -97,9 +97,9 @@ public partial class SonarAnalysisContextTest
         var sut = CreateSut();
 
         // Call ShouldAnalyzeGenerated multiple times...
-        sut.ShouldAnalyze(CSharpGeneratedCodeRecognizer.Instance, tree, compilation, options).Should().BeTrue();
-        sut.ShouldAnalyze(CSharpGeneratedCodeRecognizer.Instance, tree, compilation, options).Should().BeTrue();
-        sut.ShouldAnalyze(CSharpGeneratedCodeRecognizer.Instance, tree, compilation, options).Should().BeTrue();
+        sut.ShouldAnalyzeTree(tree, compilation, options, CSharpGeneratedCodeRecognizer.Instance).Should().BeTrue();
+        sut.ShouldAnalyzeTree(tree, compilation, options, CSharpGeneratedCodeRecognizer.Instance).Should().BeTrue();
+        sut.ShouldAnalyzeTree(tree, compilation, options, CSharpGeneratedCodeRecognizer.Instance).Should().BeTrue();
 
         // GetText should be called every time ShouldAnalyzeGenerated is called...
         additionalText.Verify(x => x.GetText(It.IsAny<CancellationToken>()), Times.Exactly(3));
@@ -109,7 +109,7 @@ public partial class SonarAnalysisContextTest
     [DataTestMethod]
     [DataRow(GeneratedFileName, false)]
     [DataRow(OtherFileName, true)]
-    public void ShouldAnalyze_GeneratedFile_InvalidSonarLintXml(string fileName, bool expected)
+    public void ShouldAnalyzeTree_GeneratedFile_InvalidSonarLintXml(string fileName, bool expected)
     {
         var sonarLintXml = new DummySourceText("Not valid xml");
         var options = CreateOptions(sonarLintXml);
@@ -117,31 +117,31 @@ public partial class SonarAnalysisContextTest
         var sut = CreateSut();
 
         // 1. Read -> no error
-        sut.ShouldAnalyze(CSharpGeneratedCodeRecognizer.Instance, tree, compilation, options).Should().Be(expected);
+        sut.ShouldAnalyzeTree(tree, compilation, options, CSharpGeneratedCodeRecognizer.Instance).Should().Be(expected);
         sonarLintXml.ToStringCallCount.Should().Be(1); // should have attempted to read the file
 
         // 2. Read again to check that the load error doesn't prevent caching from working
-        sut.ShouldAnalyze(CSharpGeneratedCodeRecognizer.Instance, tree, compilation, options).Should().Be(expected);
+        sut.ShouldAnalyzeTree(tree, compilation, options, CSharpGeneratedCodeRecognizer.Instance).Should().Be(expected);
         sonarLintXml.ToStringCallCount.Should().Be(1); // should not have attempted to read the file again
     }
 
     [DataTestMethod]
     [DataRow(GeneratedFileName)]
     [DataRow(OtherFileName)]
-    public void ShouldAnalyze_GeneratedFile_AnalyzeGenerated_AnalyzeAllFiles(string fileName)
+    public void ShouldAnalyzeTree_GeneratedFile_AnalyzeGenerated_AnalyzeAllFiles(string fileName)
     {
         var sonarLintXml = CreateSonarLintXml(true);
         var options = CreateOptions(sonarLintXml);
         var (compilation, tree) = CreateDummyCompilation(AnalyzerLanguage.CSharp, fileName);
         var sut = CreateSut();
 
-        sut.ShouldAnalyze(CSharpGeneratedCodeRecognizer.Instance, tree, compilation, options).Should().BeTrue();
+        sut.ShouldAnalyzeTree(tree, compilation, options, CSharpGeneratedCodeRecognizer.Instance).Should().BeTrue();
     }
 
     [DataTestMethod]
     [DataRow(GeneratedFileName, false)]
     [DataRow(OtherFileName, true)]
-    public void ShouldAnalyze_CorrectSettingUsed_VB(string fileName, bool expectedCSharp)
+    public void ShouldAnalyzeTree_CorrectSettingUsed_VB(string fileName, bool expectedCSharp)
     {
         var sonarLintXml = CreateSonarLintXml(false);
         var options = CreateOptions(sonarLintXml);
@@ -149,13 +149,13 @@ public partial class SonarAnalysisContextTest
         var (compilationVB, treeVB) = CreateDummyCompilation(AnalyzerLanguage.VisualBasic, fileName);
         var sut = CreateSut();
 
-        sut.ShouldAnalyze(CSharpGeneratedCodeRecognizer.Instance, treeCS, compilationCS, options).Should().Be(expectedCSharp);
-        sut.ShouldAnalyze(VisualBasicGeneratedCodeRecognizer.Instance, treeVB, compilationVB, options).Should().BeTrue();
+        sut.ShouldAnalyzeTree(treeCS, compilationCS, options, CSharpGeneratedCodeRecognizer.Instance).Should().Be(expectedCSharp);
+        sut.ShouldAnalyzeTree(treeVB, compilationVB, options, VisualBasicGeneratedCodeRecognizer.Instance).Should().BeTrue();
 
         sonarLintXml.ToStringCallCount.Should().Be(2, "file should be read once per language");
 
         // Read again to check caching
-        sut.ShouldAnalyze(VisualBasicGeneratedCodeRecognizer.Instance, treeVB, compilationVB, options).Should().BeTrue();
+        sut.ShouldAnalyzeTree(treeVB, compilationVB, options, VisualBasicGeneratedCodeRecognizer.Instance).Should().BeTrue();
 
         sonarLintXml.ToStringCallCount.Should().Be(2, "file should not have been read again");
     }
@@ -166,7 +166,7 @@ public partial class SonarAnalysisContextTest
     [DataRow("Contains FooGenerated methods")]
     [DataRow("Windows Form Designer generated code")] // legacy Windows Forms used to include generated code in dev files, surrounded by such a region
     [DataRow("Windows Form Designer GeNeRaTed code")] // legacy Windows Forms used to include generated code in dev files, surrounded by such a region
-    public void ShouldAnalyze_IssuesRaisedOnPartiallyGenerated_LegacyWinFormsFile(string regionName)
+    public void ShouldAnalyzeTree_IssuesRaisedOnPartiallyGenerated_LegacyWinFormsFile(string regionName)
     {
         var content = $$"""
             class Sample
@@ -193,7 +193,7 @@ public partial class SonarAnalysisContextTest
     }
 
     [TestMethod]
-    public void ShouldAnalyze_NoIssue_OnGeneratedFile_WithGeneratedName()
+    public void ShouldAnalyzeTree_NoIssue_OnGeneratedFile_WithGeneratedName()
     {
         const string sourceCS = """
             class Sample
@@ -216,7 +216,7 @@ public partial class SonarAnalysisContextTest
     }
 
     [TestMethod]
-    public void ShouldAnalyze_NoIssueOnGeneratedFile_WithAutoGeneratedComment()
+    public void ShouldAnalyzeTree_NoIssueOnGeneratedFile_WithAutoGeneratedComment()
     {
         const string autogeneratedExpandedTagCS = """
             // ------------------------------------------------------------------------------
@@ -276,7 +276,7 @@ public partial class SonarAnalysisContextTest
     }
 
     [TestMethod]
-    public void ShouldAnalyze_NoIssueOnGeneratedFile_WithExcludedAttribute()
+    public void ShouldAnalyzeTree_NoIssueOnGeneratedFile_WithExcludedAttribute()
     {
         const string sourceCS = """
             class Sample
@@ -301,7 +301,7 @@ public partial class SonarAnalysisContextTest
     }
 
     [TestMethod]
-    public void ShouldAnalyze_NoIssueOnGeneratedAnnotatedLambda_WithExcludedAttribute()
+    public void ShouldAnalyzeTree_NoIssueOnGeneratedAnnotatedLambda_WithExcludedAttribute()
     {
         const string sourceCs = """
             using System;
@@ -379,10 +379,10 @@ public partial class SonarAnalysisContextTest
         return (compilation, compilation.SyntaxTrees.Single(x => x.FilePath.Contains(treeFileName)));
     }
 
-    private static bool ShouldAnalyze(AnalyzerOptions options)
+    private static bool ShouldAnalyzeTree(AnalyzerOptions options)
     {
         var (compilation, tree) = CreateDummyCompilation(AnalyzerLanguage.CSharp, OtherFileName);
-        return CreateSut().ShouldAnalyze(CSharpGeneratedCodeRecognizer.Instance, tree, compilation, options);
+        return CreateSut().ShouldAnalyzeTree(tree, compilation, options, CSharpGeneratedCodeRecognizer.Instance);
     }
 
     private static void VerifyEmpty(string fileName, string snippet, DiagnosticAnalyzer analyzer)

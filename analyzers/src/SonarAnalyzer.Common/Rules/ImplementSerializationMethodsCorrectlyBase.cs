@@ -63,7 +63,7 @@ namespace SonarAnalyzer.Rules
                     var issues = FindIssues(methodSymbol);
                     if (issues.Any() && GetIdentifierLocation(methodSymbol) is { } location)
                     {
-                        c.ReportDiagnosticIfNonGenerated(Language.GeneratedCodeRecognizer, Diagnostic.Create(rule, location, issues.ToSentence()));
+                        c.ReportIssue(Language.GeneratedCodeRecognizer, Diagnostic.Create(rule, location, issues.ToSentence()));
                     }
                 },
                 SymbolKind.Method);
