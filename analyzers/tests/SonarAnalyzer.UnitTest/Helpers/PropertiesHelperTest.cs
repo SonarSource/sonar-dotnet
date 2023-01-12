@@ -21,6 +21,7 @@
 using System.IO;
 using Microsoft.CodeAnalysis.Text;
 using Moq;
+using SonarAnalyzer.Extensions;
 
 namespace SonarAnalyzer.UnitTest.Helpers
 {
@@ -68,7 +69,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var options = new AnalyzerOptions(ImmutableArray.Create(additionalText.Object));
 
             // Act
-            return PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(PropertiesHelper.GetSettings(options), LanguageNames.CSharp);
+            return PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(options.ParseSonarLintXmlSettings(), LanguageNames.CSharp);
         }
     }
 }

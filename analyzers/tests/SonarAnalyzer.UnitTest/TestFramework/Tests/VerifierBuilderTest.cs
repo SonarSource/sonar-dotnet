@@ -72,10 +72,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         public void AddSnippet_Appends_IsImmutable()
         {
             var one = Empty.AddSnippet("First");
-            var two = one.AddSnippet("Second");
+            var two = one.AddSnippet("Second", "WithFileName.cs");
             Empty.Snippets.Should().BeEmpty();
-            one.Snippets.Should().BeEquivalentTo("First");
-            two.Snippets.Should().BeEquivalentTo("First", "Second");
+            one.Snippets.Should().BeEquivalentTo(new Snippet("First", null));
+            two.Snippets.Should().BeEquivalentTo(new Snippet("First", null), new Snippet("Second", "WithFileName.cs"));
         }
 
         [TestMethod]

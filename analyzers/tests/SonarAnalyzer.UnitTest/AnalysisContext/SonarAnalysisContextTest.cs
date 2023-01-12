@@ -365,6 +365,22 @@ public partial class SonarAnalysisContextTest
         sut.IsTestProject().Should().Be(expectedResult);
     }
 
+    [DataTestMethod]
+    [DataRow(SnippetFileName, false)]
+    [DataRow(AnotherFileName, true)]
+    public void ReportDiagnosticIfNonGenerated_UnchangedFiles_CompilationAnalysisContext(string unchangedFileName, bool expected)
+    {
+        var context = new DummyAnalysisContext(TestContext, unchangedFileName);
+        var wasReported = false;
+        var location = context.Tree.GetRoot().GetLocation();
+        var symbol = Mock.Of<ISymbol>(x => x.Locations == ImmutableArray.Create(location));
+        var symbolContext = new SymbolAnalysisContext(symbol, context.Model.Compilation, context.Options, _ => wasReported = true, _ => true, default);
+        var sut = new SonarSymbolAnalysisContext(new SonarAnalysisContext(context, DummyMainDescriptor), symbolContext);
+        sut.ReportDiagnosticIfNonGenerated(CSharpGeneratedCodeRecognizer.Instance, Mock.Of<Diagnostic>(x => x.Id == "Sxxx" && x.Location == location && x.Descriptor == DummyMainDescriptor[0]));
+
+        wasReported.Should().Be(expected);
+    }
+
     internal class DummyContext : AnalysisContext
     {
         public override void RegisterCodeBlockAction(Action<CodeBlockAnalysisContext> action) => throw new NotImplementedException();

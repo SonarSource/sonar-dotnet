@@ -20,7 +20,6 @@
 
 using System.IO;
 using System.Runtime.CompilerServices;
-using System.Xml.Linq;
 using Microsoft.CodeAnalysis.Text;
 
 namespace SonarAnalyzer;
@@ -72,19 +71,7 @@ public abstract class SonarAnalysisContextBase
         language == LanguageNames.CSharp ? ShouldAnalyzeGeneratedCS.Value : ShouldAnalyzeGeneratedVB.Value;
 
     private static SourceTextValueProvider<bool> CreateAnalyzeGeneratedProvider(string language) =>
-        new(x => PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(ParseXmlSettings(x), language));
-
-    private static IEnumerable<XElement> ParseXmlSettings(SourceText sourceText)    // FIXME: This should not be here
-    {
-        try
-        {
-            return XDocument.Parse(sourceText.ToString()).Descendants("Setting");
-        }
-        catch
-        {
-            return Enumerable.Empty<XElement>();    // Can not log the exception, so ignore it
-        }
-    }
+        new(x => PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(PropertiesHelper.ParseXmlSettings(x), language));
 }
 
 public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextBase
