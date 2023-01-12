@@ -18,23 +18,19 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Extensions;
+using Moq;
 
-using static SonarAnalyzer.Helpers.DiagnosticDescriptorFactory;
-
-namespace SonarAnalyzer.UnitTest.Extensions;
+namespace SonarAnalyzer.UnitTest;
 
 [TestClass]
-public class DiagnosticDescriptorExtensionsTest
+public class SonarAnalysisContextBaseTest
 {
     private const string MainTag = "MainSourceScope";
     private const string TestTag = "TestSourceScope";
     private const string UtilityTag = "Utility";
     private const string DummyID = "Sxxx";
 
-    [TestMethod]
-    public void HasMatchingScope_NoCompilation_IsMatching() =>
-        TestHelper.CreateDescriptor(DummyID).HasMatchingScope(null, true, false).Should().BeTrue();
+    public TestContext TestContext { get; set; }
 
     [DataTestMethod]
     [DataRow(true, ProjectType.Product, MainTag)]
@@ -51,9 +47,8 @@ public class DiagnosticDescriptorExtensionsTest
     [DataRow(false, ProjectType.Test, MainTag, MainTag)]
     public void HasMatchingScope_SingleDiagnostic_WithOneOrMoreScopes_SonarLint(bool expectedResult, ProjectType projectType, params string[] ruleTags)
     {
-        var compilation = new SnippetCompiler("// Nothing to see here").SemanticModel.Compilation;
-        var diagnostic = TestHelper.CreateDescriptor(DummyID, ruleTags);
-        diagnostic.HasMatchingScope(compilation, projectType == ProjectType.Test, false).Should().Be(expectedResult);
+        var diagnostic = TestHelper.CreateDescriptor("Sxxx", ruleTags);
+        CreateSut(projectType, false).HasMatchingScope(diagnostic).Should().Be(expectedResult);
     }
 
     [DataTestMethod]
@@ -73,9 +68,8 @@ public class DiagnosticDescriptorExtensionsTest
     [DataRow(false, ProjectType.Test, MainTag, MainTag)]
     public void HasMatchingScope_SingleDiagnostic_WithOneOrMoreScopes_Scanner(bool expectedResult, ProjectType projectType, params string[] ruleTags)
     {
-        var compilation = new SnippetCompiler("// Nothing to see here").SemanticModel.Compilation;
-        var diagnostic = TestHelper.CreateDescriptor(DummyID, ruleTags);
-        diagnostic.HasMatchingScope(compilation, projectType == ProjectType.Test, true).Should().Be(expectedResult);
+        var diagnostic = TestHelper.CreateDescriptor("Sxxx", ruleTags);
+        CreateSut(projectType, true).HasMatchingScope(diagnostic).Should().Be(expectedResult);
     }
 
     [DataTestMethod]
@@ -88,9 +82,8 @@ public class DiagnosticDescriptorExtensionsTest
     [DataRow(false, ProjectType.Test, MainTag, MainTag)]
     public void HasMatchingScope_MultipleDiagnostics_WithSingleScope_SonarLint(bool expectedResult, ProjectType projectType, params string[] rulesTag)
     {
-        var compilation = new SnippetCompiler("// Nothing to see here").SemanticModel.Compilation;
-        var diagnostics = rulesTag.Select(x => TestHelper.CreateDescriptor(DummyID, x));
-        diagnostics.Any(x => x.HasMatchingScope(compilation, projectType == ProjectType.Test, false)).Should().Be(expectedResult);
+        var diagnostics = rulesTag.Select(x => TestHelper.CreateDescriptor("Sxxx", x));
+        CreateSut(projectType, false).HasMatchingScope(diagnostics).Should().Be(expectedResult);
     }
 
     [DataTestMethod]
@@ -102,8 +95,16 @@ public class DiagnosticDescriptorExtensionsTest
     [DataRow(false, ProjectType.Test, MainTag, MainTag)]
     public void HasMatchingScope_MultipleDiagnostics_WithSingleScope_Scanner(bool expectedResult, ProjectType projectType, params string[] rulesTag)
     {
+        var diagnostics = rulesTag.Select(x => TestHelper.CreateDescriptor("Sxxx", x));
+        CreateSut(projectType, true).HasMatchingScope(diagnostics).Should().Be(expectedResult);
+    }
+
+    private SonarCompilationAnalysisContext CreateSut(ProjectType projectType, bool isScannerRun)
+    {
         var compilation = new SnippetCompiler("// Nothing to see here").SemanticModel.Compilation;
-        var diagnostics = rulesTag.Select(x => TestHelper.CreateDescriptor(DummyID, x));
-        diagnostics.Any(x => x.HasMatchingScope(compilation, projectType == ProjectType.Test, true)).Should().Be(expectedResult);
+        var analysisContext = new SonarAnalysisContext(Mock.Of<AnalysisContext>(), Enumerable.Empty<DiagnosticDescriptor>());
+        var options = TestHelper.CreateOptions(TestHelper.CreateSonarProjectConfig(TestContext, projectType, isScannerRun));
+        var compilationContext = new CompilationAnalysisContext(compilation, options, _ => { }, _ => true, default);
+        return new(analysisContext, compilationContext);
     }
 }

@@ -74,12 +74,6 @@ public partial class SonarAnalysisContextTest
         ShouldAnalyze(options).Should().BeTrue();
     }
 
-    private static bool ShouldAnalyze(AnalyzerOptions options)
-    {
-        var (compilation, tree) = CreateDummyCompilation(AnalyzerLanguage.CSharp, OtherFileName);
-        return CreateSut().ShouldAnalyze(CSharpGeneratedCodeRecognizer.Instance, tree, compilation, options);
-    }
-
     [DataTestMethod]
     [DataRow(GeneratedFileName, false)]
     [DataRow(OtherFileName, true)]
@@ -383,6 +377,12 @@ public partial class SonarAnalysisContextTest
     {
         var compilation = SolutionBuilder.Create().AddProject(language).AddSnippet(string.Empty, OtherFileName + language.FileExtension).GetCompilation();
         return (compilation, compilation.SyntaxTrees.Single(x => x.FilePath.Contains(treeFileName)));
+    }
+
+    private static bool ShouldAnalyze(AnalyzerOptions options)
+    {
+        var (compilation, tree) = CreateDummyCompilation(AnalyzerLanguage.CSharp, OtherFileName);
+        return CreateSut().ShouldAnalyze(CSharpGeneratedCodeRecognizer.Instance, tree, compilation, options);
     }
 
     private static void VerifyEmpty(string fileName, string snippet, DiagnosticAnalyzer analyzer)

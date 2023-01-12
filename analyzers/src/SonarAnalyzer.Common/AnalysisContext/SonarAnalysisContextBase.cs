@@ -21,6 +21,7 @@
 using System.IO;
 using System.Runtime.CompilerServices;
 using Microsoft.CodeAnalysis.Text;
+using static SonarAnalyzer.Helpers.DiagnosticDescriptorFactory;
 
 namespace SonarAnalyzer;
 
@@ -110,33 +111,19 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
     public bool ShouldAnalyze(GeneratedCodeRecognizer generatedCodeRecognizer) =>
         ShouldAnalyze(generatedCodeRecognizer, Tree, Compilation, Options);
 
-    private protected void ReportIssue(ReportingContext reportingContext)   // FIXME: Change design to make this public on one place
+    public bool HasMatchingScope(IEnumerable<DiagnosticDescriptor> descriptors) =>
+        descriptors.Any(HasMatchingScope);
+
+    public bool HasMatchingScope(DiagnosticDescriptor descriptor)
     {
-        if (!reportingContext.Diagnostic.Descriptor.HasMatchingScope(reportingContext.Compilation, IsTestProject(), ProjectConfiguration().IsScannerRun))
-        {
-            return;
-        }
+        // MMF-2297: Test Code as 1st Class Citizen is not ready on server side yet.
+        // ScannerRun: Only utility rules and rules with TEST-ONLY scope are executed for test projects for now.
+        // SonarLint & Standalone NuGet: Respect the scope as before.
+        return IsTestProject()
+            ? ContainsTag(TestSourceScopeTag) && !(IsScannerRun() && ContainsTag(MainSourceScopeTag) && !ContainsTag(UtilityTag))
+            : ContainsTag(MainSourceScopeTag);
 
-        if (reportingContext is { Compilation: { } compilation, Diagnostic.Location: { Kind: LocationKind.SourceFile, SourceTree: { } tree } }
-            && !compilation.ContainsSyntaxTree(tree))
-        {
-            Debug.Fail("Primary location should be part of the compilation. An AD0001 is raised if this is not the case.");
-            return;
-        }
-
-        // This is the current way SonarLint will handle how and what to report.
-        if (SonarAnalysisContext.ReportDiagnostic is not null)
-        {
-            Debug.Assert(SonarAnalysisContext.ShouldDiagnosticBeReported == null, "Not expecting SonarLint to set both the old and the new delegates.");
-            SonarAnalysisContext.ReportDiagnostic(reportingContext);
-            return;
-        }
-
-        // Standalone NuGet, Scanner run and SonarLint < 4.0 used with latest NuGet
-        if (!VbcHelper.IsTriggeringVbcError(reportingContext.Diagnostic)
-            && (SonarAnalysisContext.ShouldDiagnosticBeReported?.Invoke(reportingContext.SyntaxTree, reportingContext.Diagnostic) ?? true))
-        {
-            reportingContext.ReportDiagnostic(reportingContext.Diagnostic);
-        }
+        bool ContainsTag(string tag) =>
+            descriptor.CustomTags.Contains(tag);
     }
 }
