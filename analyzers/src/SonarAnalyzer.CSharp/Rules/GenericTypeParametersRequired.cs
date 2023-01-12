@@ -31,50 +31,50 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
-            {
-                var methodDeclaration = (MethodDeclarationSyntax)c.Node;
-
-                var typeParameters = methodDeclaration
-                        .TypeParameterList
-                        ?.Parameters
-                        .Select(p => c.SemanticModel.GetDeclaredSymbol(p));
-
-                if (typeParameters == null)
                 {
-                    return;
-                }
+                    var methodDeclaration = (MethodDeclarationSyntax)c.Node;
 
-                var argumentTypes = methodDeclaration
-                        .ParameterList
-                        .Parameters
-                        .Select(p => c.SemanticModel.GetDeclaredSymbol(p)?.Type);
+                    var typeParameters = methodDeclaration
+                            .TypeParameterList
+                            ?.Parameters
+                            .Select(p => c.SemanticModel.GetDeclaredSymbol(p));
 
-                var constraintTypes = methodDeclaration
-                    .ConstraintClauses
-                    .OfType<TypeParameterConstraintClauseSyntax>()
-                    .SelectMany(p => p
-                                    .Constraints
-                                    .OfType<TypeConstraintSyntax>()
-                                    .Select(t => c.SemanticModel.GetSymbolInfo(t.Type).Symbol))
-                    .OfType<ITypeSymbol>();
+                    if (typeParameters == null)
+                    {
+                        return;
+                    }
 
-                var returnType = (ITypeSymbol)c.SemanticModel.GetSymbolInfo(methodDeclaration.ReturnType).Symbol;
+                    var argumentTypes = methodDeclaration
+                            .ParameterList
+                            .Parameters
+                            .Select(p => c.SemanticModel.GetDeclaredSymbol(p)?.Type);
 
-                var allTypeSymbolsInMethodDeclaration = argumentTypes
-                    .Concat(constraintTypes)
-                    .Concat(new[] { returnType });
-                var typeParametersInArgumentsAndContraints = new HashSet<ITypeParameterSymbol>();
+                    var constraintTypes = methodDeclaration
+                        .ConstraintClauses
+                        .OfType<TypeParameterConstraintClauseSyntax>()
+                        .SelectMany(p => p
+                                        .Constraints
+                                        .OfType<TypeConstraintSyntax>()
+                                        .Select(t => c.SemanticModel.GetSymbolInfo(t.Type).Symbol))
+                        .OfType<ITypeSymbol>();
 
-                foreach (var type in allTypeSymbolsInMethodDeclaration)
-                {
-                    AddTypeParameters(type, typeParametersInArgumentsAndContraints);
-                }
+                    var returnType = (ITypeSymbol)c.SemanticModel.GetSymbolInfo(methodDeclaration.ReturnType).Symbol;
 
-                if (typeParameters.Except(typeParametersInArgumentsAndContraints).Any())
-                {
-                    c.ReportIssue(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation()));
-                }
-            },
+                    var allTypeSymbolsInMethodDeclaration = argumentTypes
+                        .Concat(constraintTypes)
+                        .Concat(new[] { returnType });
+                    var typeParametersInArgumentsAndContraints = new HashSet<ITypeParameterSymbol>();
+
+                    foreach (var type in allTypeSymbolsInMethodDeclaration)
+                    {
+                        AddTypeParameters(type, typeParametersInArgumentsAndContraints);
+                    }
+
+                    if (typeParameters.Except(typeParametersInArgumentsAndContraints).Any())
+                    {
+                        c.ReportIssue(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation()));
+                    }
+                },
                 SyntaxKind.MethodDeclaration);
 
         private static void AddTypeParameters(ITypeSymbol argumentSymbol, ISet<ITypeParameterSymbol> set)
