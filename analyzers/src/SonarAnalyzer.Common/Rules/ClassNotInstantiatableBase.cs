@@ -72,7 +72,7 @@ namespace SonarAnalyzer.Rules
             {
                 foreach (var typeDeclaration in removableDeclarationsAndErrors)
                 {
-                    context.ReportDiagnosticIfNonGenerated(Language.GeneratedCodeRecognizer, typeDeclaration.Diagnostic);
+                    context.ReportIssue(Language.GeneratedCodeRecognizer, typeDeclaration.Diagnostic);
                 }
             }
         }

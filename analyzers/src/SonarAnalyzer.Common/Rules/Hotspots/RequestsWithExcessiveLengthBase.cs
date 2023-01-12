@@ -121,6 +121,7 @@ namespace SonarAnalyzer.Rules
             foreach (var invalidAttributes in attributesOverTheLimit.Values)
             {
                 context.ReportIssue(
+                    Language.GeneratedCodeRecognizer,
                     invalidAttributes.SecondaryAttribute != null
                         ? rule.CreateDiagnostic(context.Compilation, invalidAttributes.MainAttribute.GetLocation(), new List<Location> { invalidAttributes.SecondaryAttribute.GetLocation() })
                         : Diagnostic.Create(rule, invalidAttributes.MainAttribute.GetLocation()));
@@ -157,7 +158,7 @@ namespace SonarAnalyzer.Rules
                     && IsVulnerable(maxRequestLength.Value, MaxAllowedRequestLength)
                     && maxRequestLength.CreateLocation(webConfigPath) is { } location)
                 {
-                    c.ReportIssue(Diagnostic.Create(rule, location));
+                    c.ReportIssue(Language.GeneratedCodeRecognizer, Diagnostic.Create(rule, location));
                 }
             }
             foreach (var requestLimit in doc.XPathSelectElements("configuration/system.webServer/security/requestFiltering/requestLimits"))
@@ -166,7 +167,7 @@ namespace SonarAnalyzer.Rules
                     && IsVulnerable(maxAllowedContentLength.Value, MaxAllowedContentLength)
                     && maxAllowedContentLength.CreateLocation(webConfigPath) is { } location)
                 {
-                    c.ReportIssue(Diagnostic.Create(rule, location));
+                    c.ReportIssue(Language.GeneratedCodeRecognizer, Diagnostic.Create(rule, location));
                 }
             }
         }

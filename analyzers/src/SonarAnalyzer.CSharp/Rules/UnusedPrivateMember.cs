@@ -70,7 +70,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             }
                             foreach (var diagnostic in DiagnosticsForUnusedPrivateMembers(usageCollector, removableInternalTypes, SyntaxConstants.Internal, new()))
                             {
-                                cc.ReportDiagnosticIfNonGenerated(diagnostic);
+                                cc.ReportIssue(diagnostic);
                             }
                         });
                 });
@@ -87,11 +87,11 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 foreach (var diagnostic in DiagnosticsForUnusedPrivateMembers(usageCollector, privateSymbols, SyntaxConstants.Private, fieldLikeSymbols))
                 {
-                    context.ReportDiagnosticIfNonGenerated(diagnostic);
+                    context.ReportIssue(diagnostic);
                 }
                 foreach (var diagnostic in DiagnosticsForUsedButUnreadFields(usageCollector, privateSymbols))
                 {
-                    context.ReportDiagnosticIfNonGenerated(diagnostic);
+                    context.ReportIssue(diagnostic);
                 }
             }
         }

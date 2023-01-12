@@ -99,7 +99,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                         foreach (var trackedNodeAndSymbol in trackedNodesAndSymbols.Where(x => !excludedSymbols.Contains(x.Symbol)))
                         {
-                            c.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, trackedNodeAndSymbol.Node.GetLocation(), trackedNodeAndSymbol.Symbol.Name));
+                            c.ReportIssue(Diagnostic.Create(Rule, trackedNodeAndSymbol.Node.GetLocation(), trackedNodeAndSymbol.Symbol.Name));
                         }
                     }
                 },
