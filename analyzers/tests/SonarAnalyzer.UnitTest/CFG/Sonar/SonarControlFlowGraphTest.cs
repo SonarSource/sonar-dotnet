@@ -284,11 +284,11 @@ public class Sample
             var trueBlock = cfg.Blocks.ToList()[1];
             var exitBlock = cfg.ExitBlock;
 
-            branchBlock.SuccessorBlocks.Should().Equal(trueBlock, exitBlock);
+            branchBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { trueBlock, exitBlock });
             branchBlock.BranchingNode.Kind().Should().Be(SyntaxKind.TrueLiteralExpression);
 
             trueBlock.SuccessorBlocks.Should().Equal(exitBlock);
-            exitBlock.PredecessorBlocks.Should().Equal(branchBlock, trueBlock);
+            exitBlock.PredecessorBlocks.Should().BeEquivalentTo(new[] { branchBlock, trueBlock });
 
             VerifyAllInstructions(branchBlock, "true");
             VerifyAllInstructions(trueBlock, "10", "x = 10");
@@ -364,7 +364,7 @@ public class Sample
             var falseBlock = cfg.Blocks.ToList()[2];
             var exitBlock = cfg.ExitBlock;
 
-            branchBlock.SuccessorBlocks.Should().Equal(trueBlock, falseBlock);
+            branchBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { trueBlock, falseBlock });
             branchBlock.BranchingNode.Kind().Should().Be(SyntaxKind.TrueLiteralExpression);
 
             trueBlock.SuccessorBlocks.Should().Equal(exitBlock);
@@ -383,15 +383,15 @@ public class Sample
             var trueBlockY = cfg.Blocks.ToList()[3];
             var exitBlock = cfg.ExitBlock;
 
-            firstCondition.SuccessorBlocks.Should().Equal(trueBlockX, secondCondition);
+            firstCondition.SuccessorBlocks.Should().BeEquivalentTo(new[] { trueBlockX, secondCondition });
             firstCondition.BranchingNode.Kind().Should().Be(SyntaxKind.TrueLiteralExpression);
 
             trueBlockX.SuccessorBlocks.Should().Equal(exitBlock);
 
-            secondCondition.SuccessorBlocks.Should().Equal(trueBlockY, exitBlock);
+            secondCondition.SuccessorBlocks.Should().BeEquivalentTo(new[] { trueBlockY, exitBlock });
             secondCondition.BranchingNode.Kind().Should().Be(SyntaxKind.FalseLiteralExpression);
 
-            exitBlock.PredecessorBlocks.Should().Equal(trueBlockX, trueBlockY, secondCondition);
+            exitBlock.PredecessorBlocks.Should().BeEquivalentTo(new[] { trueBlockX, trueBlockY, secondCondition });
         }
 
         [TestMethod]
@@ -406,18 +406,18 @@ public class Sample
             var falseBlockZ = cfg.Blocks.ToList()[4];
             var exitBlock = cfg.ExitBlock;
 
-            firstCondition.SuccessorBlocks.Should().Equal(trueBlockX, secondCondition);
+            firstCondition.SuccessorBlocks.Should().BeEquivalentTo(new[] { trueBlockX, secondCondition });
             firstCondition.BranchingNode.Kind().Should().Be(SyntaxKind.TrueLiteralExpression);
 
             trueBlockX.SuccessorBlocks.Should().Equal(exitBlock);
 
-            secondCondition.SuccessorBlocks.Should().Equal(trueBlockY, falseBlockZ);
+            secondCondition.SuccessorBlocks.Should().BeEquivalentTo(new[] { trueBlockY, falseBlockZ });
             secondCondition.BranchingNode.Kind().Should().Be(SyntaxKind.FalseLiteralExpression);
 
             trueBlockY.SuccessorBlocks.Should().Equal(exitBlock);
             falseBlockZ.SuccessorBlocks.Should().Equal(exitBlock);
 
-            exitBlock.PredecessorBlocks.Should().Equal(trueBlockX, trueBlockY, falseBlockZ);
+            exitBlock.PredecessorBlocks.Should().BeEquivalentTo(new[] { trueBlockX, trueBlockY, falseBlockZ });
         }
 
         [TestMethod]
@@ -435,10 +435,10 @@ public class Sample
             var falseBlockY = cfg.Blocks.ToList()[3];
             var exitBlock = cfg.ExitBlock;
 
-            firstCondition.SuccessorBlocks.Should().Equal(secondCondition, exitBlock);
+            firstCondition.SuccessorBlocks.Should().BeEquivalentTo(new Block[] { secondCondition, exitBlock });
             firstCondition.BranchingNode.Kind().Should().Be(SyntaxKind.TrueLiteralExpression);
 
-            secondCondition.SuccessorBlocks.Should().Equal(trueBlockX, falseBlockY);
+            secondCondition.SuccessorBlocks.Should().BeEquivalentTo(new[] { trueBlockX, falseBlockY });
             secondCondition.BranchingNode.Kind().Should().Be(SyntaxKind.FalseLiteralExpression);
 
             trueBlockX.SuccessorBlocks.Should().Equal(exitBlock);
@@ -464,7 +464,7 @@ public class Sample
 
             branchBlockA.TrueSuccessorBlock.Should().Be(branchBlockB);
             branchBlockA.FalseSuccessorBlock.Should().Be(branchBlockALeft);
-            branchBlockALeft.SuccessorBlocks.Should().Equal(trueBlock, exit);
+            branchBlockALeft.SuccessorBlocks.Should().BeEquivalentTo(new[] { trueBlock, exit });
             branchBlockB.TrueSuccessorBlock.Should().Be(trueBlock);
             branchBlockB.FalseSuccessorBlock.Should().Be(exit);
             trueBlock.SuccessorBlocks.Should().Equal(exit);
@@ -487,7 +487,7 @@ public class Sample
 
             branchBlockX.TrueSuccessorBlock.Should().Be(branchBlockY);
             branchBlockX.FalseSuccessorBlock.Should().Be(branchBlockXLeft);
-            branchBlockXLeft.SuccessorBlocks.Should().Equal(condTrue, condFalse);
+            branchBlockXLeft.SuccessorBlocks.Should().BeEquivalentTo(new[] { condTrue, condFalse });
             branchBlockY.TrueSuccessorBlock.Should().Be(condTrue);
             branchBlockY.FalseSuccessorBlock.Should().Be(condFalse);
 
@@ -515,11 +515,11 @@ public class Sample
             var falseBlock = cfg.Blocks.ElementAt(3);
             var exitBlock = cfg.ExitBlock;
 
-            xBranchBlock.SuccessorBlocks.Should().Equal(oBranchBlock, falseBlock);
+            xBranchBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { oBranchBlock, falseBlock });
             xBranchBlock.BranchingNode.Kind().Should().Be(SyntaxKindEx.IsPatternExpression);
             VerifyAllInstructions(xBranchBlock, "cw0", "cw0()", "x", "10", "x is 10");
 
-            oBranchBlock.SuccessorBlocks.Should().Equal(trueBlock, falseBlock);
+            oBranchBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { trueBlock, falseBlock });
             oBranchBlock.BranchingNode.Kind().Should().Be(SyntaxKindEx.IsPatternExpression);
             VerifyAllInstructions(oBranchBlock, "o", "null", "o is null");
 
@@ -544,11 +544,11 @@ public class Sample
             var falseBlock = cfg.Blocks.ElementAt(3);
             var exitBlock = cfg.ExitBlock;
 
-            xBranchBlock.SuccessorBlocks.Should().Equal(oBranchBlock, falseBlock);
+            xBranchBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { oBranchBlock, falseBlock });
             xBranchBlock.BranchingNode.Kind().Should().Be(SyntaxKindEx.IsPatternExpression);
             VerifyAllInstructions(xBranchBlock, "cw0", "cw0()", "x", "x is int i");
 
-            oBranchBlock.SuccessorBlocks.Should().Equal(trueBlock, falseBlock);
+            oBranchBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { trueBlock, falseBlock });
             oBranchBlock.BranchingNode.Kind().Should().Be(SyntaxKindEx.IsPatternExpression);
             VerifyAllInstructions(oBranchBlock, "o", "o is string s");
 
@@ -600,7 +600,7 @@ public class Sample
                 .First(b => b.Instructions.Any(n => n.ToString() == "x = 10"));
             var exitBlock = cfg.ExitBlock;
 
-            branchBlock.SuccessorBlocks.Should().Equal(loopBodyBlock, exitBlock);
+            branchBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { loopBodyBlock, exitBlock });
             branchBlock.BranchingNode.Kind().Should().Be(SyntaxKind.TrueLiteralExpression);
 
             loopBodyBlock.SuccessorBlocks.Should().Equal(branchBlock);
@@ -661,7 +661,7 @@ public class Sample
 
             loopBodyBlock.SuccessorBlocks.Should().Equal(branchBlockA);
 
-            exitBlock.PredecessorBlocks.Should().Equal(branchBlockB, branchBlockA);
+            exitBlock.PredecessorBlocks.Should().BeEquivalentTo(new[] { branchBlockB, branchBlockA });
 
             VerifyAllInstructions(branchBlockA, "a");
             VerifyAllInstructions(branchBlockB, "b");
@@ -682,15 +682,15 @@ public class Sample
             secondBranchBlock.Instructions.Should().Contain(n => n.IsKind(SyntaxKind.FalseLiteralExpression));
             var exitBlock = cfg.ExitBlock;
 
-            firstBranchBlock.SuccessorBlocks.Should().Equal(secondBranchBlock, exitBlock);
+            firstBranchBlock.SuccessorBlocks.Should().BeEquivalentTo(new Block[] { secondBranchBlock, exitBlock });
             firstBranchBlock.BranchingNode.Kind().Should().Be(SyntaxKind.TrueLiteralExpression);
 
-            secondBranchBlock.SuccessorBlocks.Should().Equal(loopBodyBlock, firstBranchBlock);
+            secondBranchBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { loopBodyBlock, firstBranchBlock });
             secondBranchBlock.BranchingNode.Kind().Should().Be(SyntaxKind.FalseLiteralExpression);
 
             loopBodyBlock.SuccessorBlocks.Should().Equal(secondBranchBlock);
             firstBranchBlock.PredecessorBlocks.Should().Equal(secondBranchBlock);
-            secondBranchBlock.PredecessorBlocks.Should().Equal(firstBranchBlock, loopBodyBlock);
+            secondBranchBlock.PredecessorBlocks.Should().BeEquivalentTo(new[] { firstBranchBlock, loopBodyBlock });
             exitBlock.PredecessorBlocks.Should().Equal(firstBranchBlock);
         }
 
@@ -733,7 +733,7 @@ public class Sample
 
             loopBodyBlock.SuccessorBlocks.Should().Equal(branchBlock);
 
-            branchBlock.SuccessorBlocks.Should().Equal(loopBodyBlock, exitBlock);
+            branchBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { loopBodyBlock, exitBlock });
             branchBlock.BranchingNode.Kind().Should().Be(SyntaxKind.TrueLiteralExpression);
 
             branchBlock.PredecessorBlocks.Should().Equal(loopBodyBlock);
@@ -758,10 +758,10 @@ public class Sample
 
             loopBodyBlock.SuccessorBlocks.Should().Equal(falseBranchBlock);
 
-            falseBranchBlock.SuccessorBlocks.Should().Equal(loopBodyBlock, trueBranchBlock);
+            falseBranchBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { loopBodyBlock, trueBranchBlock });
             falseBranchBlock.BranchingNode.Kind().Should().Be(SyntaxKind.FalseLiteralExpression);
 
-            trueBranchBlock.SuccessorBlocks.Should().Equal(loopBodyBlock, exitBlock);
+            trueBranchBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { loopBodyBlock, exitBlock });
             trueBranchBlock.BranchingNode.Kind().Should().Be(SyntaxKind.TrueLiteralExpression);
 
             falseBranchBlock.PredecessorBlocks.Should().Equal(loopBodyBlock);
@@ -798,7 +798,7 @@ public class Sample
             defBlock.SuccessorBlocks.Should().Equal(ifBlock);
             VerifyAllInstructions(defBlock, "p");
 
-            ifBlock.SuccessorBlocks.Should().Equal(continueJump, doCondition);
+            ifBlock.SuccessorBlocks.Should().BeEquivalentTo(new Block[] { continueJump, doCondition });
             ifBlock.BranchingNode.Kind().Should().Be(SyntaxKind.InvocationExpression);
             VerifyAllInstructions(ifBlock, "unknown", "unknown()", "p = unknown()", "unknown", "unknown()");
 
@@ -806,7 +806,7 @@ public class Sample
             continueJump.JumpNode.Kind().Should().Be(SyntaxKind.ContinueStatement);
             VerifyAllInstructions(continueJump, "0", "p = 0");
 
-            doCondition.SuccessorBlocks.Should().Equal(ifBlock, exitBlock);
+            doCondition.SuccessorBlocks.Should().BeEquivalentTo(new[] { ifBlock, exitBlock });
             doCondition.BranchingNode.Kind().Should().Be(SyntaxKind.LogicalNotExpression);
             VerifyAllInstructions(doCondition, "p", "!p");
 
@@ -832,7 +832,7 @@ public class Sample
 
             collectionBlock.SuccessorBlocks.Should().Contain(foreachBlock);
 
-            foreachBlock.SuccessorBlocks.Should().Equal(loopBodyBlock, exitBlock);
+            foreachBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { loopBodyBlock, exitBlock });
             foreachBlock.BranchingNode.Kind().Should().Be(SyntaxKind.ForEachStatement);
 
             loopBodyBlock.SuccessorBlocks.Should().Equal(foreachBlock);
@@ -866,12 +866,12 @@ public class Sample
 
             collection1Block.SuccessorBlocks.Should().Contain(foreach1Block);
 
-            foreach1Block.SuccessorBlocks.Should().Equal(collection2Block, exitBlock);
+            foreach1Block.SuccessorBlocks.Should().BeEquivalentTo(new[] { collection2Block, exitBlock });
             foreach1Block.BranchingNode.Kind().Should().Be(SyntaxKind.ForEachStatement);
 
             collection2Block.SuccessorBlocks.Should().Contain(foreach2Block);
 
-            foreach2Block.SuccessorBlocks.Should().Equal(loopBodyBlock, foreach1Block);
+            foreach2Block.SuccessorBlocks.Should().BeEquivalentTo(new[] { loopBodyBlock, foreach1Block });
             foreach2Block.BranchingNode.Kind().Should().Be(SyntaxKind.ForEachStatement);
 
             loopBodyBlock.SuccessorBlocks.Should().Equal(foreach2Block);
@@ -901,7 +901,7 @@ public class Sample
 
             forEachCollectionBlock.SuccessorBlocks.Should().Contain(foreachBlock);
 
-            foreachBlock.SuccessorBlocks.Should().Equal(loopBodyBlock, exitBlock);
+            foreachBlock.SuccessorBlocks.Should().BeEquivalentTo(new Block[] { loopBodyBlock, exitBlock });
             foreachBlock.BranchingNode.Kind().Should().Be(SyntaxKind.ForEachVariableStatement);
 
             loopBodyBlock.SuccessorBlocks.Should().Equal(foreachBlock);
@@ -924,7 +924,7 @@ public class Sample
             collectionBlock.SuccessorBlocks.Should().Contain(foreachBlock);
             VerifyAllInstructions(collectionBlock, "GetAsync", "GetAsync()");
 
-            foreachBlock.SuccessorBlocks.Should().Equal(loopBodyBlock, exitBlock);
+            foreachBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { loopBodyBlock, exitBlock });
             foreachBlock.BranchingNode.Kind().Should().Be(SyntaxKind.ForEachStatement);
             VerifyNoInstruction(foreachBlock);
 
@@ -1016,12 +1016,12 @@ public class Sample
 
             initBlockI.SuccessorBlocks.Should().Equal(branchBlockTrue);
 
-            branchBlockTrue.SuccessorBlocks.Should().Equal(initBlockJ, exitBlock);
+            branchBlockTrue.SuccessorBlocks.Should().BeEquivalentTo(new[] { initBlockJ, exitBlock });
             branchBlockTrue.BranchingNode.Kind().Should().Be(SyntaxKind.ForStatement);
 
             initBlockJ.SuccessorBlocks.Should().Equal(branchBlockFalse);
 
-            branchBlockFalse.SuccessorBlocks.Should().Equal(loopBodyBlock, incrementorBlockI);
+            branchBlockFalse.SuccessorBlocks.Should().BeEquivalentTo(new[] { loopBodyBlock, incrementorBlockI });
             branchBlockFalse.BranchingNode.Kind().Should().Be(SyntaxKind.ForStatement);
 
             loopBodyBlock.SuccessorBlocks.Should().Equal(incrementorBlockJ);
@@ -1270,7 +1270,7 @@ public class Sample
             var afterOp = blocks[2];
             var exitBlock = cfg.ExitBlock;
 
-            branchBlock.SuccessorBlocks.Should().Equal(trueABlock, afterOp);
+            branchBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { trueABlock, afterOp });
             trueABlock.SuccessorBlocks.Should().Equal(afterOp);
             afterOp.SuccessorBlocks.Should().Equal(exitBlock);
 
@@ -1293,7 +1293,7 @@ public class Sample
             var afterOp = blocks[2];
             var exitBlock = cfg.ExitBlock;
 
-            branchBlock.SuccessorBlocks.Should().Equal(afterOp, falseABlock);
+            branchBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { afterOp, falseABlock });
             falseABlock.SuccessorBlocks.Should().Equal(afterOp);
             afterOp.SuccessorBlocks.Should().Equal(exitBlock);
 
@@ -1318,9 +1318,9 @@ public class Sample
             var afterOp = blocks[4];
             var exitBlock = cfg.ExitBlock;
 
-            branchBlock.SuccessorBlocks.Should().Equal(trueABlock, afterAC);
+            branchBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { trueABlock, afterAC });
             trueABlock.SuccessorBlocks.Should().Equal(afterAC);
-            afterAC.SuccessorBlocks.Should().Equal(trueACBlock, afterOp);
+            afterAC.SuccessorBlocks.Should().BeEquivalentTo(new[] { trueACBlock, afterOp });
             trueACBlock.SuccessorBlocks.Should().Equal(afterOp);
             afterOp.SuccessorBlocks.Should().Equal(exitBlock);
         }
@@ -1345,9 +1345,9 @@ public class Sample
             var exitBlock = cfg.ExitBlock;
 
             initBlock.SuccessorBlocks.Should().Equal(aBlock);
-            aBlock.SuccessorBlocks.Should().Equal(cBlock, acBlock);
+            aBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { cBlock, acBlock });
             cBlock.SuccessorBlocks.Should().Equal(acBlock);
-            acBlock.SuccessorBlocks.Should().Equal(bodyBlock, exitBlock);
+            acBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { bodyBlock, exitBlock });
             bodyBlock.SuccessorBlocks.Should().Equal(incrementBlock);
             incrementBlock.SuccessorBlocks.Should().Equal(aBlock);
 
@@ -1369,7 +1369,7 @@ public class Sample
             var assignmentBlock = blocks[2];
             var exitBlock = cfg.ExitBlock;
 
-            branchBlock.SuccessorBlocks.Should().Equal(bNullBlock, assignmentBlock);
+            branchBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { bNullBlock, assignmentBlock });
             bNullBlock.SuccessorBlocks.Should().Equal(assignmentBlock);
             assignmentBlock.SuccessorBlocks.Should().Equal(exitBlock);
 
@@ -1673,7 +1673,7 @@ public class Sample
             var after = blocks[3];
             var exitBlock = cfg.ExitBlock;
 
-            branchBlock.SuccessorBlocks.Should().Equal(condTrue, condFalse);
+            branchBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { condTrue, condFalse });
             condFalse.SuccessorBlocks.Should().Equal(after);
             condTrue.SuccessorBlocks.Should().Equal(after);
             after.SuccessorBlocks.Should().Equal(exitBlock);
@@ -1759,7 +1759,7 @@ public class Sample
             var cond3Block = blocks[4];
             VerifyAllInstructions(cond3Block, "cond3");
 
-            branchBlock.SuccessorBlocks.Should().Equal(cond2Block, cond3Block);
+            branchBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { cond2Block, cond3Block });
             cond2Block.SuccessorBlocks.Should().HaveCount(2);
             cond3Block.SuccessorBlocks.Should().HaveCount(2);
 
@@ -1799,7 +1799,7 @@ public class Sample
             var assignmentBlock = blocks[3] as SimpleBlock;
             var exitBlock = cfg.ExitBlock;
 
-            binaryBranch.SuccessorBlocks.Should().Equal(trueBlock, falseJumpBlock);
+            binaryBranch.SuccessorBlocks.Should().BeEquivalentTo(new[] { trueBlock, falseJumpBlock });
             trueBlock.SuccessorBlocks.Should().Equal(assignmentBlock);
             falseJumpBlock.SuccessorBlock.Should().Be(exitBlock);
             falseJumpBlock.WouldBeSuccessor.Should().Be(assignmentBlock);
@@ -2037,10 +2037,10 @@ public class Sample
             cw0.Should().BeSameAs(cfg.EntryBlock);
 
             cw0.SuccessorBlocks.Should().Equal(b);
-            b.SuccessorBlocks.Should().Equal(c, bc);
+            b.SuccessorBlocks.Should().BeEquivalentTo(new[] { c, bc });
             c.SuccessorBlocks.Should().Equal(bc);
-            bc.SuccessorBlocks.Should().Equal(e, cw3);
-            e.SuccessorBlocks.Should().Equal(cw1, cw2);
+            bc.SuccessorBlocks.Should().BeEquivalentTo(new[] { e, cw3 });
+            e.SuccessorBlocks.Should().BeEquivalentTo(new[] { cw1, cw2 });
             cw1.SuccessorBlocks.Should().Equal(cw3);
             cw3.SuccessorBlocks.Should().Equal(exitBlock);
             cw2.SuccessorBlocks.Should().Equal(d);
@@ -2105,8 +2105,8 @@ public class Sample
             cw0.Should().BeSameAs(cfg.EntryBlock);
 
             cw0.SuccessorBlocks.Should().Equal(xs);
-            xs.SuccessorBlocks.Should().Equal(e, cw3);
-            e.SuccessorBlocks.Should().Equal(cw1, cw2);
+            xs.SuccessorBlocks.Should().BeEquivalentTo(new[] { e, cw3 });
+            e.SuccessorBlocks.Should().BeEquivalentTo(new[] { cw1, cw2 });
             cw1.SuccessorBlocks.Should().Equal(cw3);
             cw3.SuccessorBlocks.Should().Equal(exitBlock);
             cw2.SuccessorBlocks.Should().Equal(xs);
@@ -2212,10 +2212,10 @@ public class Sample
             cw0.Should().BeSameAs(cfg.EntryBlock);
 
             cw0.SuccessorBlocks.Should().Equal(b);
-            b.SuccessorBlocks.Should().Equal(c, bc);
+            b.SuccessorBlocks.Should().BeEquivalentTo(new[] { c, bc });
             c.SuccessorBlocks.Should().Equal(bc);
-            bc.SuccessorBlocks.Should().Equal(e, cw3);
-            e.SuccessorBlocks.Should().Equal(cw1, cw2);
+            bc.SuccessorBlocks.Should().BeEquivalentTo(new[] { e, cw3 });
+            e.SuccessorBlocks.Should().BeEquivalentTo(new[] { cw1, cw2 });
             cw1.SuccessorBlocks.Should().Equal(d);
             cw3.SuccessorBlocks.Should().Equal(exitBlock);
             cw2.SuccessorBlocks.Should().Equal(d);
@@ -2280,8 +2280,8 @@ public class Sample
             cw0.Should().BeSameAs(cfg.EntryBlock);
 
             cw0.SuccessorBlocks.Should().Equal(foreachBlock);
-            foreachBlock.SuccessorBlocks.Should().Equal(e, cw3);
-            e.SuccessorBlocks.Should().Equal(cw1, cw2);
+            foreachBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { e, cw3 });
+            e.SuccessorBlocks.Should().BeEquivalentTo(new[] { cw1, cw2 });
             cw1.SuccessorBlocks.Should().Equal(foreachBlock);
             cw3.SuccessorBlocks.Should().Equal(exitBlock);
             cw2.SuccessorBlocks.Should().Equal(foreachBlock);
@@ -2327,7 +2327,7 @@ public class Sample
             foreachDecision.FalseSuccessorBlock.Should().Be(afterForeach);
             beforeTry.SuccessorBlock.Should().Be(insideTry);
             insideTry.SuccessorBlocks.Should().Equal(insideFinally);
-            insideFinally.SuccessorBlocks.Should().Equal(afterFinally, exit);
+            insideFinally.SuccessorBlocks.Should().BeEquivalentTo(new Block[] { afterFinally, exit });
             afterFinally.SuccessorBlock.Should().Be(foreachDecision);
             afterForeach.SuccessorBlock.Should().Be(exit);
         }
@@ -2401,7 +2401,7 @@ public class Sample
 
             finallyBlock.Should().BeOfType<BranchBlock>();
             VerifyAllInstructions(finallyBlock, "fin", "fin()");
-            finallyBlock.SuccessorBlocks.Should().Equal(afterFinallyBlock, exit);
+            finallyBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { afterFinallyBlock, exit });
 
             afterFinallyBlock.Should().BeOfType<SimpleBlock>();
             VerifyAllInstructions(afterFinallyBlock, "after", "after()");
@@ -2566,7 +2566,7 @@ public class Sample
 
             finallyBlock.Should().BeOfType<BranchBlock>();
             VerifyAllInstructions(finallyBlock, "fin", "fin()");
-            finallyBlock.SuccessorBlocks.Should().Equal(afterFinallyBlock, exit);
+            finallyBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { afterFinallyBlock, exit });
 
             afterFinallyBlock.Should().BeOfType<SimpleBlock>();
             VerifyAllInstructions(afterFinallyBlock, "after", "after()");
@@ -2627,7 +2627,7 @@ public class Sample
 
             finallyBlock.Should().BeOfType<BranchBlock>();
             VerifyAllInstructions(finallyBlock, "fin", "fin()");
-            finallyBlock.SuccessorBlocks.Should().Equal(afterFinallyBlock, exit);
+            finallyBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { afterFinallyBlock, exit });
 
             afterFinallyBlock.Should().BeOfType<SimpleBlock>();
             VerifyAllInstructions(afterFinallyBlock, "after", "after()");
@@ -2682,13 +2682,13 @@ public class Sample
             returnBlock.SuccessorBlocks.Should().Equal(finallyBlock);
 
             VerifyAllInstructions(tryEndBlock, "inside", "inside()");
-            tryEndBlock.SuccessorBlocks.Should().Equal(catchBlock /*exception thrown*/, finallyBlock /*no exception*/);
+            tryEndBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { catchBlock /*exception thrown*/, finallyBlock /*no exception*/});
 
             VerifyAllInstructions(catchBlock, "cat", "cat()");
             catchBlock.SuccessorBlocks.Should().Equal(finallyBlock);
 
             VerifyAllInstructions(finallyBlock, "fin", "fin()");
-            finallyBlock.SuccessorBlocks.Should().Equal(afterFinallyBlock, exit);
+            finallyBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { afterFinallyBlock, exit });
 
             VerifyAllInstructions(afterFinallyBlock, "after", "after()");
             afterFinallyBlock.SuccessorBlocks.Should().Equal(exit);
@@ -2743,13 +2743,13 @@ public class Sample
             returnBlock.SuccessorBlocks.Should().Equal(finallyBlock);
 
             VerifyAllInstructions(tryEndBlock, "inside", "inside()");
-            tryEndBlock.SuccessorBlocks.Should().Equal(catchBlock /*caught exception thrown*/, finallyBlock);
+            tryEndBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { catchBlock /*caught exception thrown*/, finallyBlock });
 
             VerifyAllInstructions(catchBlock, "cat", "cat()");
             catchBlock.SuccessorBlocks.Should().Equal(finallyBlock);
 
             VerifyAllInstructions(finallyBlock, "fin", "fin()");
-            finallyBlock.SuccessorBlocks.Should().Equal(afterFinallyBlock, exit);
+            finallyBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { afterFinallyBlock, exit });
 
             VerifyAllInstructions(afterFinallyBlock, "after", "after()");
             afterFinallyBlock.SuccessorBlocks.Should().Equal(exit);
@@ -2799,7 +2799,7 @@ public class Sample
             returnBlock.SuccessorBlocks.Should().Equal(exit);
 
             VerifyAllInstructions(tryEndBlock, "inside", "inside()");
-            tryEndBlock.SuccessorBlocks.Should().Equal(catchBlock /*caught exception thrown*/, afterFinallyBlock /*no exception*/, exit /*uncaught exception*/);
+            tryEndBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { catchBlock /*caught exception thrown*/, afterFinallyBlock /*no exception*/, exit /*uncaught exception*/});
 
             VerifyAllInstructions(catchBlock, "cat", "cat()");
             catchBlock.SuccessorBlocks.Should().Equal(afterFinallyBlock);
@@ -2852,7 +2852,7 @@ public class Sample
             returnBlock.SuccessorBlocks.Should().Equal(exit);
 
             VerifyAllInstructions(tryEndBlock, "inside", "inside()");
-            tryEndBlock.SuccessorBlocks.Should().Equal(catchBlock /*caught exception thrown*/, afterFinallyBlock /*no exception*/);
+            tryEndBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { catchBlock /*caught exception thrown*/, afterFinallyBlock /*no exception*/});
 
             VerifyAllInstructions(catchBlock, "cat", "cat()");
             catchBlock.SuccessorBlocks.Should().Equal(afterFinallyBlock);
@@ -2895,11 +2895,11 @@ public class Sample
 
             tryBodyBlock.Should().BeOfType<BranchBlock>();
             VerifyAllInstructions(tryBodyBlock, "cw1", "cw1()");
-            tryBodyBlock.SuccessorBlocks.Should().Equal(whenBlock, afterTryBlock, exit);
+            tryBodyBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { whenBlock, afterTryBlock, exit });
 
             whenBlock.Should().BeOfType<BinaryBranchBlock>();
             VerifyAllInstructions(whenBlock, "e", "e is InvalidOperationException");
-            whenBlock.SuccessorBlocks.Should().Equal(catchBlock, afterTryBlock);
+            whenBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { catchBlock, afterTryBlock });
 
             catchBlock.Should().BeOfType<SimpleBlock>();
             VerifyAllInstructions(catchBlock, "cw2", "cw2()");
@@ -2945,11 +2945,11 @@ public class Sample
 
             tryBodyBlock.Should().BeOfType<BranchBlock>();
             VerifyAllInstructions(tryBodyBlock, "true", "shouldCatch = true", "\"bar\"", "new InvalidOperationException(\"bar\")");
-            tryBodyBlock.SuccessorBlocks.Should().Equal(whenBlock, afterTryBlock, exit);
+            tryBodyBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { whenBlock, afterTryBlock, exit });
 
             whenBlock.Should().BeOfType<BinaryBranchBlock>();
             VerifyAllInstructions(whenBlock, "shouldCatch");
-            whenBlock.SuccessorBlocks.Should().Equal(catchBlock, afterTryBlock);
+            whenBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { catchBlock, afterTryBlock });
 
             catchBlock.Should().BeOfType<SimpleBlock>();
             VerifyAllInstructions(catchBlock, "cw2", "cw2()");
@@ -3004,10 +3004,10 @@ public class Sample
 
             VerifyAllInstructions(tryBody, "attempts", "attempts++", "cw1", "cw1()");
             // this is wrong, the tryBody should not have a connection with whileStmt, it can lead to FNs
-            tryBody.SuccessorBlocks.Should().Equal(catchBlock, whileStmt, afterDoWhile);
+            tryBody.SuccessorBlocks.Should().BeEquivalentTo(new Block[] { catchBlock, whileStmt, afterDoWhile });
 
             tryStatementBranch.ReversedInstructions.Should().BeEmpty();
-            tryStatementBranch.SuccessorBlocks.Should().Equal(catchBlock, whileStmt);
+            tryStatementBranch.SuccessorBlocks.Should().BeEquivalentTo(new Block[] { catchBlock, whileStmt });
 
             VerifyAllInstructions(catchBlock, "cw2", "cw2()");
             catchBlock.SuccessorBlocks.Should().Equal(whileStmt);
@@ -3068,9 +3068,9 @@ public class Sample
             doBeforeTry.SuccessorBlocks.Should().Equal(tryStatement);
 
             VerifyAllInstructions(tryStatement, "cw1", "cw1()");
-            tryStatement.SuccessorBlocks.Should().Equal(catchBody, finallyBlock, afterDoWhile);
+            tryStatement.SuccessorBlocks.Should().BeEquivalentTo(new Block[] { catchBody, finallyBlock, afterDoWhile });
 
-            tryBody.SuccessorBlocks.Should().Equal(catchBody, finallyBlock);
+            tryBody.SuccessorBlocks.Should().BeEquivalentTo(new Block[] { catchBody, finallyBlock });
 
             VerifyAllInstructions(catchBody, "cw2", "cw2()");
             catchBody.SuccessorBlock.Should().Be(whileStmt);
@@ -3079,7 +3079,7 @@ public class Sample
             // - EXIT
             // - WHILE (because of `continue`)
             // - afterDoWhile (because of `break`)
-            finallyBlock.SuccessorBlocks.Should().Equal(afterTry, exit);
+            finallyBlock.SuccessorBlocks.Should().BeEquivalentTo(new Block[] { afterTry, exit });
             afterTry.SuccessorBlock.Should().Be(whileStmt);
 
             VerifyAllInstructions(whileStmt, "true");
@@ -3154,7 +3154,7 @@ public class Sample
             // ToDo: this is weird and is basically skipped
             tryStatement.SuccessorBlocks.Should().Equal(finallyBody);
 
-            finallyBody.SuccessorBlocks.Should().Equal(afterTry, exit);
+            finallyBody.SuccessorBlocks.Should().BeEquivalentTo(new Block[] { afterTry, exit });
             afterTry.SuccessorBlock.Should().Be(whileStmt);
 
             VerifyAllInstructions(whileStmt, "true");
@@ -3220,10 +3220,10 @@ public class Sample
             insideDoBeforeTry.SuccessorBlocks.Should().Equal(insideTry);
 
             VerifyAllInstructions(insideTry, "attempts", "attempts++", "cw1", "cw1()");
-            insideTry.SuccessorBlocks.Should().Equal(catchBodyWithIf, whileStmt, afterDoWhile);
+            insideTry.SuccessorBlocks.Should().BeEquivalentTo(new Block[] { catchBodyWithIf, whileStmt, afterDoWhile });
 
             temporaryStrayBlock.ReversedInstructions.Should().BeEmpty();
-            temporaryStrayBlock.SuccessorBlocks.Should().Equal(catchBodyWithIf, whileStmt);
+            temporaryStrayBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { catchBodyWithIf, whileStmt });
 
             VerifyAllInstructions(catchBodyWithIf, "cw2", "cw2()", "attempts", "retries", "attempts > retries");
             catchBodyWithIf.TrueSuccessorBlock.Should().Be(insideIfInsideCatch);
@@ -3293,7 +3293,7 @@ public class Sample
 
             finallyBifurcation.SuccessorBlocks.Should().Equal(finallyBlock);
 
-            finallyBlock.SuccessorBlocks.Should().Equal(whileStmt, exit);
+            finallyBlock.SuccessorBlocks.Should().BeEquivalentTo(new Block[] { whileStmt, exit });
 
             whileStmt.TrueSuccessorBlock.Should().Be(insideDoBeforeTry);
             whileStmt.FalseSuccessorBlock.Should().Be(afterDoWhile);
@@ -3361,7 +3361,7 @@ public class Sample
             innerTryStartBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { innerReturnBlock /*no ex*/, outerCatchBlock, outerFinallyBlock });
 
             innerReturnBlock.Should().BeOfType<BranchBlock>();
-            innerReturnBlock.SuccessorBlocks.Should().Equal(innerTryEndBlock, innerCatchBlock);
+            innerReturnBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { innerTryEndBlock, innerCatchBlock });
 
             innerTryEndBlock.Should().BeOfType<JumpBlock>();
             VerifyAllInstructions(innerTryEndBlock, "foo", "foo()");
@@ -3371,16 +3371,16 @@ public class Sample
             innerCatchBlock.SuccessorBlocks.Should().Equal(innerFinallyBlock);
 
             innerFinallyBlock.Should().BeOfType<BranchBlock>();
-            innerFinallyBlock.SuccessorBlocks.Should().Equal(outerTryBlock, outerFinallyBlock);
+            innerFinallyBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { outerTryBlock, outerFinallyBlock });
 
             outerTryBlock.Should().BeOfType<BranchBlock>();
-            outerTryBlock.SuccessorBlocks.Should().Equal(outerCatchBlock /*ex*/, outerFinallyBlock /*no ex*/);
+            outerTryBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { outerCatchBlock /*ex*/, outerFinallyBlock /*no ex*/});
 
             outerCatchBlock.Should().BeOfType<SimpleBlock>();
             outerCatchBlock.SuccessorBlocks.Should().Equal(outerFinallyBlock);
 
             outerFinallyBlock.Should().BeOfType<BranchBlock>();
-            outerFinallyBlock.SuccessorBlocks.Should().Equal(afterFinallyBlock, exit);
+            outerFinallyBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { afterFinallyBlock, exit });
 
             afterFinallyBlock.Should().BeOfType<SimpleBlock>();
             afterFinallyBlock.SuccessorBlocks.Should().Equal(exit);
@@ -3417,7 +3417,7 @@ public class Sample
             beforeOuterTry.SuccessorBlocks.Should().Equal(tryStatementBlock);
 
             VerifyNoInstruction(tryStatementBlock);
-            tryStatementBlock.SuccessorBlocks.Should().Equal(tryReturn, catchReturn);
+            tryStatementBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { tryReturn, catchReturn });
 
             VerifyAllInstructions(tryReturn, "bar", "bar()", "0");
             tryReturn.SuccessorBlocks.Should().Equal(exit);
@@ -3463,7 +3463,7 @@ public class Sample
             beforeOuterTry.SuccessorBlocks.Should().Equal(tryStatementBlock);
 
             VerifyNoInstruction(tryStatementBlock);
-            tryStatementBlock.SuccessorBlocks.Should().Equal(tryReturn, ifInsideCatch);
+            tryStatementBlock.SuccessorBlocks.Should().BeEquivalentTo(new Block[] { tryReturn, ifInsideCatch });
 
             VerifyAllInstructions(tryReturn, "bar", "bar()", "0");
             tryReturn.SuccessorBlocks.Should().Equal(exit);
@@ -3523,7 +3523,7 @@ public class Sample
             secondIf.FalseSuccessorBlock.Should().Be(tryStatementBranch);
 
             // ToDo: this tryStatementBranch is not always used as such, or is it?
-            tryStatementBranch.SuccessorBlocks.Should().Equal(insideCatch, afterTry);
+            tryStatementBranch.SuccessorBlocks.Should().BeEquivalentTo(new[] { insideCatch, afterTry });
 
             insideCatch.SuccessorBlocks.Should().Equal(afterTry);
             afterTry.SuccessorBlocks.Should().Equal(exit);
@@ -4555,7 +4555,7 @@ switch (o)
             entry.SuccessorBlocks.Should().Equal(a);
             a.SuccessorBlocks.Should().Equal(b);
             b.SuccessorBlocks.Should().Equal(cond);
-            cond.SuccessorBlocks.Should().Equal(cw1, cw2);
+            cond.SuccessorBlocks.Should().BeEquivalentTo(new[] { cw1, cw2 });
             cw1.SuccessorBlocks.Should().Equal(a);
             cw2.SuccessorBlocks.Should().Equal(cfg.ExitBlock);
         }
@@ -4587,7 +4587,7 @@ switch (o)
             entry.SuccessorBlocks.Should().Equal(a);
             a.SuccessorBlocks.Should().Equal(b);
             b.SuccessorBlocks.Should().Equal(cond);
-            cond.SuccessorBlocks.Should().Equal(cw1, cw2);
+            cond.SuccessorBlocks.Should().BeEquivalentTo(new[] { cw1, cw2 });
             cw1.SuccessorBlocks.Should().Equal(b);
             cw2.SuccessorBlocks.Should().Equal(cfg.ExitBlock);
         }
@@ -5123,7 +5123,7 @@ namespace NS
 
             initBlock.SuccessorBlocks.Should().Equal(branchBlock);
 
-            branchBlock.SuccessorBlocks.Should().Equal(loopBodyBlock, exitBlock);
+            branchBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { loopBodyBlock, exitBlock });
             branchBlock.BranchingNode.Kind().Should().Be(SyntaxKind.ForStatement);
 
             loopBodyBlock.SuccessorBlocks.Should().Equal(incrementorBlock);
@@ -5202,12 +5202,12 @@ namespace NS
 
             initializerBlock.SuccessorBlock.Should().Be(branchBlock);
 
-            branchBlock.SuccessorBlocks.Should().Equal(loopBodyBlock, exitBlock);
+            branchBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { loopBodyBlock, exitBlock });
             branchBlock.BranchingNode.Kind().Should().Be(SyntaxKind.ForStatement);
 
             loopBodyBlock.SuccessorBlocks.Should().Equal(incrementorBlock);
             incrementorBlock.SuccessorBlocks.Should().Equal(branchBlock);
-            branchBlock.PredecessorBlocks.Should().Equal(incrementorBlock, initializerBlock);
+            branchBlock.PredecessorBlocks.Should().BeEquivalentTo(new[] { incrementorBlock, initializerBlock });
             exitBlock.PredecessorBlocks.Should().Equal(branchBlock);
         }
 
@@ -5223,12 +5223,12 @@ namespace NS
 
             initBlock.SuccessorBlocks.Should().Equal(branchBlock);
 
-            branchBlock.SuccessorBlocks.Should().Equal(loopBodyBlock, exitBlock);
+            branchBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { loopBodyBlock, exitBlock });
             branchBlock.BranchingNode.Kind().Should().Be(SyntaxKind.ForStatement);
 
             loopBodyBlock.SuccessorBlocks.Should().Equal(branchBlock);
 
-            branchBlock.PredecessorBlocks.Should().Equal(initBlock, loopBodyBlock);
+            branchBlock.PredecessorBlocks.Should().BeEquivalentTo(new[] { initBlock, loopBodyBlock });
 
             exitBlock.PredecessorBlocks.Should().Equal(branchBlock);
         }
@@ -5245,7 +5245,7 @@ namespace NS
 
             initializerBlock.SuccessorBlock.Should().Be(branchBlock);
 
-            branchBlock.SuccessorBlocks.Should().Equal(loopBodyBlock, exitBlock);
+            branchBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { loopBodyBlock, exitBlock });
             branchBlock.BranchingNode.Kind().Should().Be(SyntaxKind.ForStatement);
 
             loopBodyBlock.SuccessorBlocks.Should().Equal(branchBlock);
@@ -5275,7 +5275,7 @@ namespace NS
             var falseBlock = blocks[2];
             var exitBlock = cfg.ExitBlock;
 
-            branchBlock.SuccessorBlocks.Should().Equal(trueBlock, falseBlock);
+            branchBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { trueBlock, falseBlock });
             trueBlock.SuccessorBlocks.Should().Equal(exitBlock);
             trueBlock.JumpNode.Kind().Should().Be(kind);
             falseBlock.SuccessorBlocks.Should().Equal(exitBlock);
@@ -5291,13 +5291,13 @@ namespace NS
             var falseBlock = blocks[2];
             var exitBlock = cfg.ExitBlock;
 
-            branchBlock.SuccessorBlocks.Should().Equal(trueBlock, falseBlock);
+            branchBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { trueBlock, falseBlock });
             trueBlock.SuccessorBlocks.Should().Equal(exitBlock);
             trueBlock.JumpNode.Kind().Should().Be(kind);
 
             trueBlock.Instructions.Should().Contain(n => n.IsKind(SyntaxKind.IdentifierName) && n.ToString() == "ii");
 
-            exitBlock.PredecessorBlocks.Should().Equal(trueBlock, falseBlock);
+            exitBlock.PredecessorBlocks.Should().BeEquivalentTo(new[] { trueBlock, falseBlock });
         }
 
         #endregion
