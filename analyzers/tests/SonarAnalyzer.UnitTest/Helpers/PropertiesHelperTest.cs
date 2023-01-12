@@ -20,6 +20,7 @@
 
 using System.IO;
 using Microsoft.CodeAnalysis.Text;
+using SonarAnalyzer.Extensions;
 
 namespace SonarAnalyzer.UnitTest.Helpers
 {
@@ -60,7 +61,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         private static bool GetSetting(SourceText text, string path = "fakePath\\SonarLint.xml")
         {
             var options = AnalysisScaffolding.CreateOptions(path, text);
-            return PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(PropertiesHelper.ParseXmlSettings(options), LanguageNames.CSharp);
+            return PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(options.ParseSonarLintXmlSettings(), LanguageNames.CSharp);
         }
     }
 }
