@@ -6,19 +6,6 @@
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
 "region":  {
-"startLine":  358,
-"startColumn":  33,
-"endLine":  358,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
-"region":  {
 "startLine":  371,
 "startColumn":  33,
 "endLine":  371,
@@ -45,36 +32,10 @@
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
 "region":  {
-"startLine":  589,
-"startColumn":  32,
-"endLine":  589,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
-"region":  {
 "startLine":  682,
 "startColumn":  39,
 "endLine":  682,
 "endColumn":  49
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
-"region":  {
-"startLine":  736,
-"startColumn":  32,
-"endLine":  736,
-"endColumn":  59
 }
 }
 },
