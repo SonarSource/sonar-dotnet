@@ -33,7 +33,7 @@ namespace Repro_6547
 {
     class Program
     {
-        enum Seasons
+        public enum Seasons
         {
             Spring,
             Summer,
@@ -42,15 +42,14 @@ namespace Repro_6547
         }
 
         [Fact]
-        public void Repro_6547()
+        public void Repro_6547(Seasons seasonEnum, string seasonString)
         {
             const string expected = "Spring";
-            string actual = "Spring";
-            Assert.Same(actual, expected); // FN
-            Assert.Same(actual, Seasons.Spring); //FN
+            Assert.Same(seasonString, expected); // FN
+            Assert.Same(seasonEnum, Seasons.Spring); //FN
 
-            Assert.Same(expected, actual); // Compliant
-            Assert.Same(Seasons.Spring, actual); // Compliant
+            Assert.Same(expected, seasonString); // Compliant
+            Assert.Same(Seasons.Spring, seasonEnum); // Compliant
         }
     }
 }

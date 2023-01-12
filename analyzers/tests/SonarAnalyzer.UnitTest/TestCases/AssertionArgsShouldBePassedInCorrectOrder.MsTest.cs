@@ -39,7 +39,7 @@ namespace Repro_6547
     [TestClass]
     class Program
     {
-        enum Seasons
+        public enum Seasons
         {
             Spring,
             Summer,
@@ -48,15 +48,14 @@ namespace Repro_6547
         }
 
         [TestMethod]
-        public void Repro_6547()
+        public void Repro_6547(Seasons seasonEnum, string seasonString)
         {
             const string expected = "Spring";
-            string actual = "Spring";
-            Assert.AreEqual(actual, expected); // FN
-            Assert.AreEqual(actual, Seasons.Spring.ToString()); //FN
+            Assert.AreEqual(seasonString, expected); // FN
+            Assert.AreEqual(seasonEnum, Seasons.Spring); // FN
 
-            Assert.AreEqual(expected, actual); // Compliant
-            Assert.AreEqual(Seasons.Spring.ToString(), actual); // Compliant
+            Assert.AreEqual(expected, seasonString); // Compliant
+            Assert.AreEqual(Seasons.Spring, seasonEnum); // Compliant
         }
     }
 }
