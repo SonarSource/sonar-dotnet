@@ -32,9 +32,6 @@ public sealed class SonarSyntaxNodeAnalysisContext : SonarReportingContextBase<S
 
     internal SonarSyntaxNodeAnalysisContext(SonarAnalysisContext analysisContext, SyntaxNodeAnalysisContext context) : base(analysisContext, context) { }
 
-    private protected override ReportingContext CreateReportingContext(Diagnostic diagnostic) =>
-        new(this, diagnostic);
-
     /// <summary>
     /// Roslyn invokes the analyzer twice for positional records. The first invocation is for the class declaration and the second for the ctor represented by the positional parameter list.
     /// This behavior has been fixed since the Roslyn version 4.2.0 but we still need this for the proper support of Roslyn 4.0.0.
@@ -56,4 +53,7 @@ public sealed class SonarSyntaxNodeAnalysisContext : SonarReportingContextBase<S
         Context.ContainingSymbol is IMethodSymbol method && method.HasAttribute(KnownType.Microsoft_Azure_WebJobs_FunctionNameAttribute)
             ? method
             : null;
+
+    private protected override ReportingContext CreateReportingContext(Diagnostic diagnostic) =>
+        new(this, diagnostic);
 }
