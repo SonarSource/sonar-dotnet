@@ -2,14 +2,13 @@
   "version": 1,
   "dependencies": {
     ".NETFramework,Version=v4.6": {
-      "Microsoft.CodeAnalysis.CSharp.Workspaces": {
+      "Microsoft.CodeAnalysis.CSharp": {
         "type": "Direct",
         "requested": "[1.3.2, )",
         "resolved": "1.3.2",
-        "contentHash": "MwGmrrPx3okEJuCogSn4TM3yTtJUDdmTt8RXpnjVo0dPund0YSAq4bHQQ9bxgArbrrapcopJmkb7UOLAvanXkg==",
+        "contentHash": "GrYMp6ScZDOMR0fNn/Ce6SegNVFw1G/QRT/8FiKv7lAP+V6lEZx9e42n0FvFUgjjcKgcEJOI4muU6i+3LSvOBA==",
         "dependencies": {
-          "Microsoft.CodeAnalysis.CSharp": "[1.3.2]",
-          "Microsoft.CodeAnalysis.Workspaces.Common": "[1.3.2]"
+          "Microsoft.CodeAnalysis.Common": "[1.3.2]"
         }
       },
       "SonarSource.CBDE": {
@@ -102,14 +101,6 @@
           "System.Xml.XDocument": "4.0.11",
           "System.Xml.XPath.XDocument": "4.0.1",
           "System.Xml.XmlDocument": "4.0.1"
-        }
-      },
-      "Microsoft.CodeAnalysis.CSharp": {
-        "type": "Transitive",
-        "resolved": "1.3.2",
-        "contentHash": "GrYMp6ScZDOMR0fNn/Ce6SegNVFw1G/QRT/8FiKv7lAP+V6lEZx9e42n0FvFUgjjcKgcEJOI4muU6i+3LSvOBA==",
-        "dependencies": {
-          "Microsoft.CodeAnalysis.Common": "[1.3.2]"
         }
       },
       "Microsoft.CodeAnalysis.Workspaces.Common": {
@@ -356,21 +347,20 @@
       "sonaranalyzer.cfg": {
         "type": "Project",
         "dependencies": {
-          "Microsoft.CodeAnalysis.CSharp.Workspaces": "[1.3.2, )",
+          "Microsoft.CodeAnalysis.CSharp": "[1.3.2, )",
           "Microsoft.Composition": "[1.0.27, )",
           "System.Collections.Immutable": "[1.1.37, )"
         }
       }
     },
     ".NETStandard,Version=v2.0": {
-      "Microsoft.CodeAnalysis.CSharp.Workspaces": {
+      "Microsoft.CodeAnalysis.CSharp": {
         "type": "Direct",
         "requested": "[1.3.2, )",
         "resolved": "1.3.2",
-        "contentHash": "MwGmrrPx3okEJuCogSn4TM3yTtJUDdmTt8RXpnjVo0dPund0YSAq4bHQQ9bxgArbrrapcopJmkb7UOLAvanXkg==",
+        "contentHash": "GrYMp6ScZDOMR0fNn/Ce6SegNVFw1G/QRT/8FiKv7lAP+V6lEZx9e42n0FvFUgjjcKgcEJOI4muU6i+3LSvOBA==",
         "dependencies": {
-          "Microsoft.CodeAnalysis.CSharp": "[1.3.2]",
-          "Microsoft.CodeAnalysis.Workspaces.Common": "[1.3.2]"
+          "Microsoft.CodeAnalysis.Common": "[1.3.2]"
         }
       },
       "NETStandard.Library": {
@@ -475,14 +465,6 @@
           "System.Xml.XDocument": "4.0.11",
           "System.Xml.XPath.XDocument": "4.0.1",
           "System.Xml.XmlDocument": "4.0.1"
-        }
-      },
-      "Microsoft.CodeAnalysis.CSharp": {
-        "type": "Transitive",
-        "resolved": "1.3.2",
-        "contentHash": "GrYMp6ScZDOMR0fNn/Ce6SegNVFw1G/QRT/8FiKv7lAP+V6lEZx9e42n0FvFUgjjcKgcEJOI4muU6i+3LSvOBA==",
-        "dependencies": {
-          "Microsoft.CodeAnalysis.Common": "[1.3.2]"
         }
       },
       "Microsoft.CodeAnalysis.Workspaces.Common": {
@@ -1287,7 +1269,7 @@
       "sonaranalyzer.cfg": {
         "type": "Project",
         "dependencies": {
-          "Microsoft.CodeAnalysis.CSharp.Workspaces": "[1.3.2, )",
+          "Microsoft.CodeAnalysis.CSharp": "[1.3.2, )",
           "Microsoft.Composition": "[1.0.27, )",
           "System.Collections.Immutable": "[1.1.37, )"
         }
