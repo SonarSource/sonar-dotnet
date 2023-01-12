@@ -20,28 +20,20 @@
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class EmptyMethodBase : SonarDiagnosticAnalyzer
+    public abstract class EmptyMethodBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+        where TSyntaxKind : struct
     {
         internal const string DiagnosticId = "S1186";
-        protected const string MessageFormat = "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.";
-    }
 
-    public abstract class EmptyMethodBase<TLanguageKindEnum> : EmptyMethodBase
-        where TLanguageKindEnum : struct
-    {
+        protected abstract TSyntaxKind[] SyntaxKinds { get; }
+        protected abstract void CheckMethod(SonarSyntaxNodeAnalysisContext context);
+
+        protected override string MessageFormat => "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.";
+
+        protected EmptyMethodBase() : base(DiagnosticId) { }
+
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeAction(
-                c =>
-                {
-                    if (c.ShouldAnalyze(GeneratedCodeRecognizer))
-                    {
-                        CheckMethod(c, c.IsTestProject());
-                    }
-                },
-                SyntaxKinds.ToArray());
+            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, CheckMethod, SyntaxKinds.ToArray());
 
-        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
-        protected abstract TLanguageKindEnum[] SyntaxKinds { get; }
-        protected abstract void CheckMethod(SonarSyntaxNodeAnalysisContext context, bool isTestProject);
     }
 }
