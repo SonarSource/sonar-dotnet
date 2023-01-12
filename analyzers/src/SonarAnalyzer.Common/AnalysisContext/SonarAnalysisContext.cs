@@ -20,7 +20,7 @@
 
 using Microsoft.CodeAnalysis.Text;
 
-namespace SonarAnalyzer;
+namespace SonarAnalyzer;    // FIXME: Better namespace name or directory name
 
 public sealed class SonarAnalysisContext : SonarAnalysisContextBase
 {
