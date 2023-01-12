@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer;
 
-public sealed class SonarSyntaxNodeAnalysisContext : SonarReportingContextBase<SyntaxNodeAnalysisContext>
+public sealed class SonarSyntaxNodeAnalysisContext : SonarTreeReportingContextBase<SyntaxNodeAnalysisContext>
 {
     public override SyntaxTree Tree => Context.Node.SyntaxTree;
     public override Compilation Compilation => Context.Compilation;

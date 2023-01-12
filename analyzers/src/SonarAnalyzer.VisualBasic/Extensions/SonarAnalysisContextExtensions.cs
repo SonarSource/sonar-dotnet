@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.Extensions
 {
-    public static class VisualBasicSonarAnalysisContextExtensions
+    public static class SonarAnalysisContextExtensions
     {
         public static void RegisterSyntaxNodeActionInNonGenerated<TSyntaxKind>(this SonarAnalysisContext context,
                                                                                Action<SonarSyntaxNodeAnalysisContext> action,
@@ -47,7 +47,10 @@ namespace SonarAnalyzer.Extensions
             where TSyntaxKind : struct =>
             context.RegisterCodeBlockStartActionInNonGenerated(VisualBasicGeneratedCodeRecognizer.Instance, action);
 
-        public static void ReportDiagnosticIfNonGenerated(this SonarSymbolAnalysisContext context, Diagnostic diagnostic) =>
-            context.ReportDiagnosticIfNonGenerated(VisualBasicGeneratedCodeRecognizer.Instance, diagnostic);
+        public static void ReportIssue(this SonarCompilationAnalysisContext context, Diagnostic diagnostic) =>
+            context.ReportIssue(VisualBasicGeneratedCodeRecognizer.Instance, diagnostic);
+
+        public static void ReportIssue(this SonarSymbolAnalysisContext context, Diagnostic diagnostic) =>
+            context.ReportIssue(VisualBasicGeneratedCodeRecognizer.Instance, diagnostic);
     }
 }

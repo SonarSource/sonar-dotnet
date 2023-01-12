@@ -26,7 +26,7 @@ public abstract class SonarReportingContextBase<TContext> : SonarAnalysisContext
 
     protected SonarReportingContextBase(SonarAnalysisContext analysisContext, TContext context) : base(analysisContext, context) { }
 
-    public void ReportIssue(Diagnostic diagnostic)  // FIXME: Make this obsolete
+    protected void ReportIssueCore(Diagnostic diagnostic)
     {
         if (HasMatchingScope(diagnostic.Descriptor))
         {
@@ -49,6 +49,33 @@ public abstract class SonarReportingContextBase<TContext> : SonarAnalysisContext
             {
                 reportingContext.ReportDiagnostic(reportingContext.Diagnostic);
             }
+        }
+    }
+}
+
+/// <summary>
+/// Base class for reporting contexts that are executed on a known Tree. The decisions about generated code and unchanged files are taken during action registration.
+/// </summary>
+public abstract class SonarTreeReportingContextBase<TContext> : SonarReportingContextBase<TContext>
+{
+    protected SonarTreeReportingContextBase(SonarAnalysisContext analysisContext, TContext context) : base(analysisContext, context) { }
+
+    public void ReportIssue(Diagnostic diagnostic) =>
+        ReportIssueCore(diagnostic);
+}
+
+/// <summary>
+/// Base class for reporting contexts that are common for the entire compilation. Specific tree is not known before the action is executed.
+/// </summary>
+public abstract class SonarCompilationReportingContextBase<TContext> : SonarReportingContextBase<TContext>
+{
+    protected SonarCompilationReportingContextBase(SonarAnalysisContext analysisContext, TContext context) : base(analysisContext, context) { }
+
+    public void ReportIssue(GeneratedCodeRecognizer generatedCodeRecognizer, Diagnostic diagnostic)
+    {
+        if (ShouldAnalyzeTree(diagnostic.Location.SourceTree, Compilation, Options, generatedCodeRecognizer))
+        {
+            ReportIssueCore(diagnostic);
         }
     }
 }

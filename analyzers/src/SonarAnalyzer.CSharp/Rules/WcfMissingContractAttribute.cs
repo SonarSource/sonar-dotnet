@@ -75,7 +75,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var classOrInterface = namedType.IsClass() ? "class" : "interface";
                     message = string.Format(message, classOrInterface);
 
-                    c.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, declarationSyntax.Identifier.GetLocation(), attributeToAdd, message));
+                    c.ReportIssue(Diagnostic.Create(Rule, declarationSyntax.Identifier.GetLocation(), attributeToAdd, message));
                 },
                 SymbolKind.NamedType);
 
@@ -86,8 +86,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static TypeDeclarationSyntax GetTypeDeclaration(SonarAnalysisContext context, ISymbol namedType, Compilation compilation, AnalyzerOptions options) =>
             namedType.DeclaringSyntaxReferences
-                     .Where(sr => context.ShouldAnalyze(CSharpGeneratedCodeRecognizer.Instance, sr.SyntaxTree, compilation, options))
-                     .Select(sr => sr.GetSyntax() as TypeDeclarationSyntax)
-                     .FirstOrDefault(s => s != null);
+                     .Where(x => context.ShouldAnalyzeTree(x.SyntaxTree, compilation, options, CSharpGeneratedCodeRecognizer.Instance))
+                     .Select(x => x.GetSyntax() as TypeDeclarationSyntax)
+                     .FirstOrDefault(x => x is not null);
     }
 }

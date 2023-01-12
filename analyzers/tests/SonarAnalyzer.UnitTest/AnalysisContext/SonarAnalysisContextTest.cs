@@ -376,7 +376,7 @@ public partial class SonarAnalysisContextTest
         var symbol = Mock.Of<ISymbol>(x => x.Locations == ImmutableArray.Create(location));
         var symbolContext = new SymbolAnalysisContext(symbol, context.Model.Compilation, context.Options, _ => wasReported = true, _ => true, default);
         var sut = new SonarSymbolAnalysisContext(new SonarAnalysisContext(context, DummyMainDescriptor), symbolContext);
-        sut.ReportDiagnosticIfNonGenerated(CSharpGeneratedCodeRecognizer.Instance, Mock.Of<Diagnostic>(x => x.Id == "Sxxx" && x.Location == location && x.Descriptor == DummyMainDescriptor[0]));
+        sut.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, Mock.Of<Diagnostic>(x => x.Id == "Sxxx" && x.Location == location && x.Descriptor == DummyMainDescriptor[0]));
 
         wasReported.Should().Be(expected);
     }
