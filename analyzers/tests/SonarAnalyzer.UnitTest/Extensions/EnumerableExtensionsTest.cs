@@ -183,7 +183,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
             ((object[])null).JoinAnd().Should().Be(string.Empty);
 
         [DataTestMethod]
-        [DataRow("", new object[0])] // empty collection
+        [DataRow("")] // empty collection
         [DataRow("", null)]
         [DataRow("", "")]
         [DataRow("", "", "")]
@@ -197,7 +197,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
             collection.JoinAnd().Should().Be(expected);
 
         [DataTestMethod]
-        [DataRow("", new object[0])] // Empty collection
+        [DataRow("")] // Empty collection
         [DataRow("0", 0)]
         [DataRow("0 and 1", 0, 1)]
         [DataRow("0, 1, and 2", 0, 1, 2)]
@@ -206,7 +206,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
             collection.JoinAnd().Should().Be(expected);
 
         [DataTestMethod]
-        [DataRow("", new object[0])] // Empty collection
+        [DataRow("")] // Empty collection
         [DataRow("08/30/2022 12:29:11", "2022-08-30T12:29:11")]
         [DataRow("08/30/2022 12:29:11 and 12/24/2022 16:00:00", "2022-08-30T12:29:11", "2022-12-24T16:00:00")]
         [DataRow("08/30/2022 12:29:11, 12/24/2022 16:00:00, and 12/31/2022 00:00:00", "2022-08-30T12:29:11", "2022-12-24T16:00:00", "2022-12-31T00:00:00")]
