@@ -40,11 +40,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void Verify_Method_PreciseLocation_CS(ProjectType projectType) =>
             Verify("Method.cs", projectType, references =>
             {
-                references.Select(x => x.Declaration.StartLine).Should().BeEquivalentTo(1, 3, 5, 7);   // class 'Sample' on line 1, method 'Method' on line 3, method 'method' on line 5 and method 'Go' on line 7
+                references.Select(x => x.Declaration.StartLine).Should().BeEquivalentTo(new[] { 1, 3, 5, 7 });   // class 'Sample' on line 1, method 'Method' on line 3, method 'method' on line 5 and method 'Go' on line 7
                 var methodDeclaration = references.Single(x => x.Declaration.StartLine == 3);
                 methodDeclaration.Declaration.Should().BeEquivalentTo(new TextRange { StartLine = 3, EndLine = 3, StartOffset = 16, EndOffset = 22 });
-                methodDeclaration.Reference.Should().HaveCount(1);
-                methodDeclaration.Reference.Single().Should().BeEquivalentTo(new TextRange { StartLine = 9, EndLine = 9, StartOffset = 8, EndOffset = 14 });
+                methodDeclaration.Reference.Should().Equal(new TextRange { StartLine = 9, EndLine = 9, StartOffset = 8, EndOffset = 14 });
             });
 
         [DataTestMethod]
@@ -53,18 +52,17 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void Verify_Method_PreciseLocation_VB(ProjectType projectType) =>
             Verify("Method.vb", projectType, references =>
             {
-                references.Select(x => x.Declaration.StartLine).Should().BeEquivalentTo(1, 3, 6, 10);
+                references.Select(x => x.Declaration.StartLine).Should().BeEquivalentTo(new[] { 1, 3, 6, 10 });
 
                 var procedureDeclaration = references.Single(x => x.Declaration.StartLine == 3);
                 procedureDeclaration.Declaration.Should().BeEquivalentTo(new TextRange { StartLine = 3, EndLine = 3, StartOffset = 15, EndOffset = 21 });
-                procedureDeclaration.Reference.Should().HaveCount(2);
-                procedureDeclaration.Reference[0].Should().BeEquivalentTo(new TextRange { StartLine = 11, EndLine = 11, StartOffset = 8, EndOffset = 14 });
-                procedureDeclaration.Reference[1].Should().BeEquivalentTo(new TextRange { StartLine = 13, EndLine = 13, StartOffset = 8, EndOffset = 14 });
+                procedureDeclaration.Reference.Should().Equal(
+                    new TextRange { StartLine = 11, EndLine = 11, StartOffset = 8, EndOffset = 14 },
+                    new TextRange { StartLine = 13, EndLine = 13, StartOffset = 8, EndOffset = 14 });
 
                 var functionDeclaration = references.Single(x => x.Declaration.StartLine == 6);
                 functionDeclaration.Declaration.Should().BeEquivalentTo(new TextRange { StartLine = 6, EndLine = 6, StartOffset = 13, EndOffset = 23 });
-                functionDeclaration.Reference.Should().HaveCount(1);
-                functionDeclaration.Reference.Single().Should().BeEquivalentTo(new TextRange { StartLine = 12, EndLine = 12, StartOffset = 8, EndOffset = 18 });
+                functionDeclaration.Reference.Should().Equal(new TextRange { StartLine = 12, EndLine = 12, StartOffset = 8, EndOffset = 18 });
             });
 
         [DataTestMethod]

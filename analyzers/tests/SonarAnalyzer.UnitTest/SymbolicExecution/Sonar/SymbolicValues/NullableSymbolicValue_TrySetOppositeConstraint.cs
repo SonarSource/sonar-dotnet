@@ -105,7 +105,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.SymbolicValues
 
             var newProgramStates = nullableSymbolicValue.TrySetOppositeConstraint(ObjectConstraint.NotNull, ps).ToList();
 
-            newProgramStates.Should().BeEquivalentTo(ps);
+            newProgramStates.Should().Equal(ps);
         }
 
         private static void ShouldHaveConstraint(ProgramState ps, SymbolicValue sv, SymbolicConstraint expectedConstraint)

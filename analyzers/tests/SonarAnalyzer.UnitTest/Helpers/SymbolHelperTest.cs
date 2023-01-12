@@ -174,7 +174,7 @@ namespace NS
             baseTypes = derived1Type.GetSelfAndBaseTypes().ToList();
             baseTypes.Should().HaveCount(3);
             baseTypes.Should().HaveElementAt(0, derived1Type);
-            baseTypes.Should().HaveElementAt(1, testCode.GetTypeSymbol("Base"));
+            baseTypes.Should().HaveElementAt(1, testCode.GetTypeSymbol("Base").Should().BeAssignableTo<INamedTypeSymbol>().Subject);
             baseTypes.Should().HaveElementAt(2, objectType);
         }
 

@@ -266,8 +266,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
                 expectedLineNumbers: new[] { 1 },
                 expectedMessages: new[] { "MyMessage" },
                 expectedIssueIds: new[] { "myIssueId" });
-            result.Select(issue => issue.Start).Should().Equal(new[] { 4 });
-            result.Select(issue => issue.Length).Should().Equal(new[] { 16 });
+            result.Select(issue => issue.Start).Should().Equal(4);
+            result.Select(issue => issue.Length).Should().Equal(16);
         }
 
         [TestMethod]
@@ -286,8 +286,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
                 expectedLineNumbers: new[] { 1 },
                 expectedMessages: new[] { "MyMessage" },
                 expectedIssueIds: new[] { "myIssueId" });
-            result.Select(issue => issue.Start).Should().Equal(new[] { 4 });
-            result.Select(issue => issue.Length).Should().Equal(new[] { 16 });
+            result.Select(issue => issue.Start).Should().Equal(4);
+            result.Select(issue => issue.Length).Should().Equal(16);
         }
 
         [TestMethod]
@@ -306,8 +306,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
                 expectedLineNumbers: new[] { 1 },
                 expectedMessages: new[] { "MyMessage" },
                 expectedIssueIds: new[] { "myIssueId" });
-            result.Select(issue => issue.Start).Should().Equal(new[] { 4 });
-            result.Select(issue => issue.Length).Should().Equal(new[] { 16 });
+            result.Select(issue => issue.Start).Should().Equal(4);
+            result.Select(issue => issue.Length).Should().Equal(16);
         }
     }
 }

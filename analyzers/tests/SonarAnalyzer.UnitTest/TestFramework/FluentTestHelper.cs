@@ -18,27 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using FluentAssertions.Collections;
 using FluentAssertions.Primitives;
 
 namespace SonarAnalyzer.UnitTest.Helpers
 {
     internal static class FluentTestHelper
     {
-        public static void OnlyContain<T, TAssertions>(this SelfReferencingCollectionAssertions<T, TAssertions> self, params T[] expected)
-             where TAssertions : SelfReferencingCollectionAssertions<T, TAssertions>
-        {
-            _ = expected ?? throw new ArgumentNullException(nameof(expected));
-            self.Subject.Should().Contain(expected).And.HaveSameCount(expected);
-        }
-
-        public static void OnlyContainInOrder<T, TAssertions>(this SelfReferencingCollectionAssertions<T, TAssertions> self, params T[] expected)
-             where TAssertions : SelfReferencingCollectionAssertions<T, TAssertions>
-        {
-            _ = expected ?? throw new ArgumentNullException(nameof(expected));
-            self.Subject.Should().ContainInOrder(expected).And.BeEquivalentTo(expected);    // BeEquivalentTo to have better collection message
-        }
-
         public static void BeIgnoringLineEndings(this StringAssertions stringAssertions, string expected) =>
             stringAssertions.Subject.ToUnixLineEndings().Should().Be(expected.ToUnixLineEndings());
     }

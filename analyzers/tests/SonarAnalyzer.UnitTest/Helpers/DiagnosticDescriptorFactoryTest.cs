@@ -49,7 +49,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             result.IsEnabledByDefault.Should().BeTrue();
             result.Description.ToString().Should().Be("Sxxxx Description");
             result.HelpLinkUri.Should().Be("https://rules.sonarsource.com/csharp/RSPEC-xxxx");
-            result.CustomTags.Should().OnlyContain(LanguageNames.CSharp, DiagnosticDescriptorFactory.MainSourceScopeTag, DiagnosticDescriptorFactory.SonarWayTag);
+            result.CustomTags.Should().BeEquivalentTo(LanguageNames.CSharp, DiagnosticDescriptorFactory.MainSourceScopeTag, DiagnosticDescriptorFactory.SonarWayTag);
         }
 
         [TestMethod]
@@ -65,7 +65,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             result.IsEnabledByDefault.Should().BeTrue();
             result.Description.ToString().Should().Be("Sxxxx Description");
             result.HelpLinkUri.Should().Be("https://rules.sonarsource.com/vbnet/RSPEC-xxxx");
-            result.CustomTags.Should().OnlyContain(LanguageNames.VisualBasic, DiagnosticDescriptorFactory.MainSourceScopeTag, DiagnosticDescriptorFactory.SonarWayTag);
+            result.CustomTags.Should().BeEquivalentTo(LanguageNames.VisualBasic, DiagnosticDescriptorFactory.MainSourceScopeTag, DiagnosticDescriptorFactory.SonarWayTag);
         }
 
         [TestMethod]

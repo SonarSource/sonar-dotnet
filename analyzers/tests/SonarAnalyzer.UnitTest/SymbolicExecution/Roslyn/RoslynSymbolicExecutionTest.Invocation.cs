@@ -378,7 +378,7 @@ if (this.ObjectField == null)
 }}
 Tag(""After"", this.ObjectField);";
             var validator = SETestContext.CreateCS(code).Validator;
-            validator.TagValues("After").Should().BeEquivalentTo(
+            validator.TagValues("After").Should().Equal(
                 new SymbolicValue().WithConstraint(ObjectConstraint.NotNull),
                 new SymbolicValue());
         }

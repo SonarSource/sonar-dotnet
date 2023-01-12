@@ -62,7 +62,7 @@ public class Sample
             // Assert
             nestedRegionA.CaptureIds.Should().HaveCount(1).And.Contain(captureA).And.NotContain(captureB);
             nestedRegionB.CaptureIds.Should().HaveCount(1).And.Contain(captureB).And.NotContain(captureA);
-            nestedRegionA.CaptureIds.Single().GetHashCode().Should().Be(captureA.GetHashCode()).And.Should().NotBe(captureB.GetHashCode());
+            nestedRegionA.CaptureIds.Single().GetHashCode().Should().Be(captureA.GetHashCode()).And.NotBe(captureB.GetHashCode());
             nestedRegionA.CaptureIds.Single().Equals((object)captureA).Should().BeTrue();
             nestedRegionA.CaptureIds.Single().Equals((object)captureB).Should().BeFalse();
 

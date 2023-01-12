@@ -114,7 +114,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.SymbolicValues
 
             var newProgramStates = nullableSymbolicValue.TrySetConstraint(null, ps).ToList();
 
-            newProgramStates.Should().BeEquivalentTo(ps);
+            newProgramStates.Should().Equal(ps);
         }
 
         [TestMethod]
@@ -124,7 +124,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.SymbolicValues
 
             var newProgramStates = nullableSymbolicValue.TrySetConstraint(BoolConstraint.True, ps).ToList();
 
-            newProgramStates.Should().BeEquivalentTo(ps);
+            newProgramStates.Should().Equal(ps);
         }
 
         [TestMethod]
@@ -154,7 +154,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.SymbolicValues
 
             var newProgramStates = nullableSymbolicValue.TrySetConstraint(NullableConstraint.HasValue, ps).ToList();
 
-            newProgramStates.Should().BeEquivalentTo(ps);
+            newProgramStates.Should().Equal(ps);
         }
 
         [TestMethod]
@@ -174,7 +174,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.SymbolicValues
 
             var newProgramStates = nullableSymbolicValue.TrySetConstraint(ObjectConstraint.NotNull, ps).ToList();
 
-            newProgramStates.Should().BeEquivalentTo(ps);
+            newProgramStates.Should().Equal(ps);
         }
 
         [TestMethod]
@@ -184,7 +184,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.SymbolicValues
 
             var newProgramStates = nullableSymbolicValue.TrySetConstraint(null, ps).ToList();
 
-            newProgramStates.Should().BeEquivalentTo(ps);
+            newProgramStates.Should().Equal(ps);
         }
 
         [TestMethod]
@@ -204,7 +204,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.SymbolicValues
 
             var newProgramStates = nullableSymbolicValue.TrySetConstraint(BoolConstraint.False, ps).ToList();
 
-            newProgramStates.Should().BeEquivalentTo(ps);
+            newProgramStates.Should().Equal(ps);
         }
 
         [TestMethod]
@@ -224,7 +224,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.SymbolicValues
 
             var newProgramStates = nullableSymbolicValue.TrySetConstraint(NullableConstraint.HasValue, ps).ToList();
 
-            newProgramStates.Should().BeEquivalentTo(ps);
+            newProgramStates.Should().Equal(ps);
         }
 
         [TestMethod]
@@ -244,7 +244,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.SymbolicValues
 
             var newProgramStates = nullableSymbolicValue.TrySetConstraint(ObjectConstraint.NotNull, ps).ToList();
 
-            newProgramStates.Should().BeEquivalentTo(ps);
+            newProgramStates.Should().Equal(ps);
         }
 
         [TestMethod]
@@ -254,7 +254,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.SymbolicValues
 
             var newProgramStates = nullableSymbolicValue.TrySetConstraint(null, ps).ToList();
 
-            newProgramStates.Should().BeEquivalentTo(ps);
+            newProgramStates.Should().Equal(ps);
         }
 
         [TestMethod]
@@ -284,7 +284,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.SymbolicValues
 
             var newProgramStates = nullableSymbolicValue.TrySetConstraint(NullableConstraint.NoValue, ps).ToList();
 
-            newProgramStates.Should().BeEquivalentTo(ps);
+            newProgramStates.Should().Equal(ps);
         }
 
         [TestMethod]
@@ -304,7 +304,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.SymbolicValues
 
             var newProgramStates = nullableSymbolicValue.TrySetConstraint(ObjectConstraint.Null, ps).ToList();
 
-            newProgramStates.Should().BeEquivalentTo(ps);
+            newProgramStates.Should().Equal(ps);
         }
 
         [TestMethod]
@@ -324,7 +324,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.SymbolicValues
 
             var newProgramStates = nullableSymbolicValue.TrySetConstraint(null, ps).ToList();
 
-            newProgramStates.Should().BeEquivalentTo(ps);
+            newProgramStates.Should().Equal(ps);
         }
 
         [TestMethod]
@@ -368,7 +368,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.SymbolicValues
 
             var newProgramStates = nullableSymbolicValue.TrySetConstraint(NullableConstraint.HasValue, ps).ToList();
 
-            newProgramStates.Should().BeEquivalentTo(ps);
+            newProgramStates.Should().Equal(ps);
         }
 
         [TestMethod]
@@ -388,7 +388,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.SymbolicValues
 
             var newProgramStates = nullableSymbolicValue.TrySetConstraint(ObjectConstraint.NotNull, ps).ToList();
 
-            newProgramStates.Should().BeEquivalentTo(ps);
+            newProgramStates.Should().Equal(ps);
         }
 
         [TestMethod]
@@ -398,7 +398,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.SymbolicValues
 
             var newProgramStates = nullableSymbolicValue.TrySetConstraint(null, ps).ToList();
 
-            newProgramStates.Should().BeEquivalentTo(ps);
+            newProgramStates.Should().Equal(ps);
         }
 
         [TestMethod]
@@ -428,7 +428,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.SymbolicValues
 
             var newProgramStates = nullableSymbolicValue.TrySetConstraint(NullableConstraint.NoValue, ps).ToList();
 
-            newProgramStates.Should().BeEquivalentTo(ps);
+            newProgramStates.Should().Equal(ps);
         }
 
         [TestMethod]
@@ -448,7 +448,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.SymbolicValues
 
             var newProgramStates = nullableSymbolicValue.TrySetConstraint(ObjectConstraint.Null, ps).ToList();
 
-            newProgramStates.Should().BeEquivalentTo(ps);
+            newProgramStates.Should().Equal(ps);
         }
 
         [TestMethod]
@@ -468,7 +468,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.SymbolicValues
 
             var newProgramStates = nullableSymbolicValue.TrySetConstraint(null, ps).ToList();
 
-            newProgramStates.Should().BeEquivalentTo(ps);
+            newProgramStates.Should().Equal(ps);
         }
 
         [TestMethod]
@@ -512,7 +512,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.SymbolicValues
 
             var newProgramStates = nullableSymbolicValue.TrySetConstraint(NullableConstraint.HasValue, ps).ToList();
 
-            newProgramStates.Should().BeEquivalentTo(ps);
+            newProgramStates.Should().Equal(ps);
         }
 
         [TestMethod]
@@ -532,7 +532,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.SymbolicValues
 
             var newProgramStates = nullableSymbolicValue.TrySetConstraint(ObjectConstraint.NotNull, ps).ToList();
 
-            newProgramStates.Should().BeEquivalentTo(ps);
+            newProgramStates.Should().Equal(ps);
         }
 
         [TestMethod]
@@ -542,7 +542,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.SymbolicValues
 
             var newProgramStates = nullableSymbolicValue.TrySetConstraint(null, ps).ToList();
 
-            newProgramStates.Should().BeEquivalentTo(ps);
+            newProgramStates.Should().Equal(ps);
         }
 
         private static void ShouldHaveConstraint(ProgramState ps, SymbolicValue sv, SymbolicConstraint constraint)

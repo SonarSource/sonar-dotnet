@@ -619,7 +619,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.SymbolicValues
             var inputProgramState = SetupProgramState(sv, new[] { BoolConstraint.True });
             var newProgramStates = sv.TrySetConstraint(ObjectConstraint.NotNull, inputProgramState);
 
-            newProgramStates.Should().ContainSingle().And.BeEquivalentTo(inputProgramState);
+            newProgramStates.Should().ContainSingle().And.Equal(inputProgramState);
         }
 
         private static IList<IList<SymbolicConstraint>> ProgramStateList(params IList<SymbolicConstraint>[] programStates) => programStates;

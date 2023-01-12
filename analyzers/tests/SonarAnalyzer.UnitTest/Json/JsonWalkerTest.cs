@@ -42,7 +42,7 @@ public class JsonWalkerTest
         var sut = new JsonWalkerCollector();
         sut.Visit(JsonNode.FromString(json));
         sut.VisitedKeys.Should().BeEquivalentTo("OuterKey", "OuterBool", "OuterNull", "NestedArray", "InnerKey");
-        sut.VisitedValues.Should().BeEquivalentTo("OuterValue", true, null, "Array1", "Array2-Nested1", null, "Array2-Nested2", "Array2-NestedObject", "Array3");
+        sut.VisitedValues.Should().BeEquivalentTo(new object[] { "OuterValue", true, null, "Array1", "Array2-Nested1", null, "Array2-Nested2", "Array2-NestedObject", "Array3" });
     }
 
     [DataTestMethod]

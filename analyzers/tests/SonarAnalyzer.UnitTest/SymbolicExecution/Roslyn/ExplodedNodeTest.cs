@@ -55,7 +55,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         {
             var block = TestHelper.CompileCfgBodyCS("var value = 42;").Blocks[1];
             // Visualize operations to understand the rest of this UT
-            block.OperationsAndBranchValue.ToExecutionOrder().Select(TestHelper.Serialize).Should().OnlyContainInOrder(
+            block.OperationsAndBranchValue.ToExecutionOrder().Select(TestHelper.Serialize).Should().Equal(
                  "LocalReference: value = 42 (Implicit)",
                  "Literal: 42",
                  "SimpleAssignment: value = 42 (Implicit)");
@@ -78,7 +78,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         {
             var block = TestHelper.CompileCfgBodyVB("Dim Value As Integer = 42").Blocks[1];
             // Visualize operations to understand the rest of this UT
-            block.OperationsAndBranchValue.ToExecutionOrder().Select(TestHelper.Serialize).Should().OnlyContainInOrder(
+            block.OperationsAndBranchValue.ToExecutionOrder().Select(TestHelper.Serialize).Should().Equal(
                 "LocalReference: Value (Implicit)",
                 "Literal: 42",
                 "SimpleAssignment: Value As Integer = 42 (Implicit)");
