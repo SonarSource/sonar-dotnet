@@ -61,6 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 argumentExceptionLocations.Add(node.Expression.GetLocation());
             }
+
             // there is no need to visit children
         }
 
@@ -68,9 +69,14 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if (node.IsMemberAccessOnKnownType("ThrowIfNull", KnownType.System_ArgumentNullException, semanticModel))
             {
+                // "ThrowIfNull" returns void so it cannot be an argument. We can stop.
                 argumentExceptionLocations.Add(node.GetLocation());
             }
-            // "ThrowIfNull" returns void so it cannot be an argument. We can stop.
+            else
+            {
+                // Need to check the children of this node because of the pattern (await SomeTask()).Invocation()
+                DefaultVisit(node);
+            }
         }
     }
 }

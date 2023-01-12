@@ -62,11 +62,11 @@ namespace Tests.Diagnostics
             public Task<int[]> CheckAsync() => Task.FromResult(new int[] { 1 });
             public Task<int> Check2Async() => Task.FromResult(1);
 
-            public async Task HasS4457Async(int request) // Noncompliant, FP
+            public async Task HasS4457Async(int request) // Compliant 
             {
                 var identifierType = (await CheckAsync()).FirstOrDefault(x => x == request);
                 if (identifierType == 0)
-                    throw new ArgumentException("message"); // Secondary
+                    throw new ArgumentException("message"); 
             }
         }
 
