@@ -29,13 +29,13 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void DoNotUseIif() =>
-            builder.AddPaths("DoNotUseIif.vb").Verify();
+            builder.AddPaths("DoNotUseIIf.vb").Verify();
 
         [TestMethod]
         public void DoNotUseIif_CodeFix() =>
-            builder.AddPaths("DoNotUseIif.vb")
+            builder.AddPaths("DoNotUseIIf.vb")
                 .WithCodeFix<DoNotUseIIfCodeFix>()
-                .WithCodeFixedPaths("DoNotUseIif.Fixed.vb")
+                .WithCodeFixedPaths("DoNotUseIIf.Fixed.vb")
                 .VerifyCodeFix();
     }
 }
