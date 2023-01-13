@@ -29,11 +29,6 @@ namespace Tests.Diagnostics
             Assert.AreEqual(42, d, 1, "message");
             Assert.AreNotEqual(42, d, 1, "message");
             Assert.IsNull(str);
-
-            Assert.AreEqual(actual: "", expected: str);
-            Assert.AreEqual(expected: "", actual: str);
-            Assert.AreEqual(actual: str, expected: ""); // Noncompliant FP
-            Assert.AreEqual(expected: str, actual: "");
         }
     }
 }
