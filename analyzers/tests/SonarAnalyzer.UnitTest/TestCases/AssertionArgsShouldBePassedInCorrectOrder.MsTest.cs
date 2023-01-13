@@ -29,6 +29,11 @@ namespace Tests.Diagnostics
             Assert.AreEqual(42, d, 1, "message");
             Assert.AreNotEqual(42, d, 1, "message");
             Assert.IsNull(str);
+
+            Assert.AreEqual(actual: "", expected: str);
+            Assert.AreEqual(expected: "", actual: str);
+            Assert.AreEqual(actual: str, expected: ""); // Noncompliant FP
+            Assert.AreEqual(expected: str, actual: "");
         }
     }
 }
@@ -48,14 +53,16 @@ namespace Repro_6547
         }
 
         [TestMethod]
-        public void Repro_6547(Seasons seasonEnum, string seasonString)
+        [DataRow(Seasons.Spring, "Spring")]
+        [DataRow(Seasons.Autumn, "Autumn")]
+        public void Repro_6547(Seasons enumParameter, string stringParameter)
         {
-            const string expected = "Spring";
-            Assert.AreEqual(seasonString, expected); // FN
-            Assert.AreEqual(seasonEnum, Seasons.Spring); // FN
+            const string constString = "Spring";
+            Assert.AreEqual(expected: stringParameter, actual: constString); // FN
+            Assert.AreEqual(expected: enumParameter, actual: Seasons.Spring); // FN
 
-            Assert.AreEqual(expected, seasonString); // Compliant
-            Assert.AreEqual(Seasons.Spring, seasonEnum); // Compliant
+            Assert.AreEqual(expected: constString, actual: stringParameter); // Compliant
+            Assert.AreEqual(expected: Seasons.Spring, actual: enumParameter); // Compliant
         }
     }
 }

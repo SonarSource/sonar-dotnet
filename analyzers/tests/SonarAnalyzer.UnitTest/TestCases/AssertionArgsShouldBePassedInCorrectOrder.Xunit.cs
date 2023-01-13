@@ -41,15 +41,17 @@ namespace Repro_6547
             Winter
         }
 
-        [Fact]
-        public void Repro_6547(Seasons seasonEnum, string seasonString)
+        [Theory]
+        [InlineData(Seasons.Spring, "Spring")]
+        [InlineData(Seasons.Autumn, "Autumn")]
+        public void Repro_6547(Seasons enumParameter, string stringParameter)
         {
-            const string expected = "Spring";
-            Assert.Same(seasonString, expected); // FN
-            Assert.Same(seasonEnum, Seasons.Spring); //FN
+            const string constString = "Spring";
+            Assert.Same(expected: stringParameter, actual: constString); // FN
+            Assert.Same(expected: enumParameter, actual: Seasons.Spring); //FN
 
-            Assert.Same(expected, seasonString); // Compliant
-            Assert.Same(Seasons.Spring, seasonEnum); // Compliant
+            Assert.Same(expected: constString, actual: stringParameter); // Compliant
+            Assert.Same(expected: Seasons.Spring, actual: enumParameter); // Compliant
         }
     }
 }
