@@ -128,7 +128,12 @@ public sealed class UnchangedLocalVariablesShouldBeConst : SonarDiagnosticAnalyz
                 .Any(x => IsMutatingUse(semanticModel, x));
 
         static bool IsMethodLike(SyntaxNode arg) =>
-            arg is BaseMethodDeclarationSyntax or AccessorDeclarationSyntax or LambdaExpressionSyntax or GlobalStatementSyntax;
+            arg is BaseMethodDeclarationSyntax
+                or AccessorDeclarationSyntax
+                or LambdaExpressionSyntax
+                or AnonymousFunctionExpressionSyntax
+                or GlobalStatementSyntax
+            || LocalFunctionStatementSyntaxWrapper.IsInstance(arg);
     }
 
     private static bool IsMutatingUse(SemanticModel semanticModel, IdentifierNameSyntax identifier) =>
