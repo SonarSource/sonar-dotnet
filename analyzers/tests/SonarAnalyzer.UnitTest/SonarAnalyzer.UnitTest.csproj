@@ -25,16 +25,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="altcover" Version="8.3.839" />
+    <PackageReference Include="altcover" Version="8.6.14" />
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
     <PackageReference Include="FluentAssertions.Analyzers" Version="0.17.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
-    <PackageReference Include="Moq" Version="4.18.2" />
-    <PackageReference Include="MSTest.TestAdapter" Version="2.2.10" />
-    <PackageReference Include="MSTest.TestFramework" Version="2.2.10" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.1" />
+    <PackageReference Include="Moq" Version="4.18.4" />
+    <PackageReference Include="MSTest.TestAdapter" Version="3.0.2" />
+    <PackageReference Include="MSTest.TestFramework" Version="3.0.2" />
     <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="4.4.0-2.final" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.4.0-2.final" />
     <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic.Workspaces" Version="4.4.0-2.final" />
