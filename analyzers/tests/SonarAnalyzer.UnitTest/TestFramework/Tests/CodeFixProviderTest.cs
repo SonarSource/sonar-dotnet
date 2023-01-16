@@ -40,22 +40,22 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             a.Should().NotThrow();
         }
 
-        [Microsoft.CodeAnalysis.Diagnostics.DiagnosticAnalyzer(LanguageNames.CSharp)]
+        [DiagnosticAnalyzer(LanguageNames.CSharp)]
         private class TestDuplicateLocationRule : SonarDiagnosticAnalyzer
         {
             public const string DiagnosticId = "Test42";
+
             private readonly DiagnosticDescriptor rule = TestHelper.CreateDescriptor(DiagnosticId, DiagnosticDescriptorFactory.MainSourceScopeTag);
+
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-            protected override void Initialize(SonarAnalysisContext context)
-            {
-                context.RegisterSyntaxNodeAction(c =>
+            protected override void Initialize(SonarAnalysisContext context) =>
+                context.RegisterSyntaxNodeActionInNonGenerated(CSharpGeneratedCodeRecognizer.Instance, c =>
                 {
                     // Duplicate issues from different analyzer versions, see https://github.com/SonarSource/sonar-dotnet/issues/1109
                     c.ReportIssue(Diagnostic.Create(rule, c.Context.Node.GetLocation()));
                     c.ReportIssue(Diagnostic.Create(rule, c.Context.Node.GetLocation()));
                 }, SyntaxKind.NamespaceDeclaration);
-            }
         }
 
         [ExportCodeFixProvider(LanguageNames.CSharp)]
