@@ -23,7 +23,7 @@ using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext
 
 namespace SonarAnalyzer.AnalysisContext;
 
-public sealed class SonarAnalysisContext
+public class SonarAnalysisContext
 {
     private readonly RoslynAnalysisContext analysisContext;
     private readonly IEnumerable<DiagnosticDescriptor> supportedDiagnostics;
@@ -63,6 +63,8 @@ public sealed class SonarAnalysisContext
         this.supportedDiagnostics = supportedDiagnostics ?? throw new ArgumentNullException(nameof(supportedDiagnostics));
     }
 
+    private protected SonarAnalysisContext(SonarAnalysisContext context) : this(context.analysisContext, context.supportedDiagnostics) { }
+
     public bool TryGetValue<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value) =>
         analysisContext.TryGetValue(text, valueProvider, out value);
 
@@ -81,7 +83,7 @@ public sealed class SonarAnalysisContext
         analysisContext.RegisterCompilationAction(
             c => Execute<SonarCompilationReportingContext, CompilationAnalysisContext>(new(this, c), action, null));
 
-    public void RegisterCompilationStartAction(Action<SonarCompilationStartAnalysisContext> action) =>
+    public virtual void RegisterCompilationStartAction(Action<SonarCompilationStartAnalysisContext> action) =>
         analysisContext.RegisterCompilationStartAction(
             c => Execute<SonarCompilationStartAnalysisContext, CompilationStartAnalysisContext>(new(this, c), action, null));
 
