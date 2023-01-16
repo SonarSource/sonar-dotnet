@@ -23,7 +23,7 @@ using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext
 
 namespace SonarAnalyzer.AnalysisContext;
 
-public sealed class SonarAnalysisContext : SonarAnalysisContextBase // FIXME: Remove inheritance
+public sealed class SonarAnalysisContext
 {
     private readonly RoslynAnalysisContext analysisContext;
     private readonly IEnumerable<DiagnosticDescriptor> supportedDiagnostics;
@@ -63,7 +63,7 @@ public sealed class SonarAnalysisContext : SonarAnalysisContextBase // FIXME: Re
         this.supportedDiagnostics = supportedDiagnostics ?? throw new ArgumentNullException(nameof(supportedDiagnostics));
     }
 
-    public override bool TryGetValue<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value) =>
+    public bool TryGetValue<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value) =>
         analysisContext.TryGetValue(text, valueProvider, out value);
 
     /// <summary>
@@ -119,7 +119,7 @@ public sealed class SonarAnalysisContext : SonarAnalysisContextBase // FIXME: Re
         // Second, we call an external delegate (set by legacy SonarLint for VS) to ensure the rule should be run (usually
         // the decision is made on based on whether the project contains the analyzer as NuGet).
         if (context.HasMatchingScope(supportedDiagnostics)
-            && context.ShouldAnalyzeTree(sourceTree, context.Compilation, context.Options, generatedCodeRecognizer)
+            && context.ShouldAnalyzeTree(sourceTree, generatedCodeRecognizer)
             && LegacyIsRegisteredActionEnabled(supportedDiagnostics, context.Tree))
         {
             action(context);
