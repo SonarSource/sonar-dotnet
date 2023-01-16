@@ -4,6 +4,14 @@
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\CodeSharing\Microsoft.CodeSharing.CSharp.targets" />
   <ItemGroup>
     <!-- only includes files, not folders -->
-    <None Include="*" />
+    <None Include="AllSonarAnalyzerRules.ruleset" />
+    <None Include="create-issue-reports.ps1" />
+    <None Include="Orchestration.shproj" />
+    <None Include="regression-test.ps1" />
+    <None Include="SingleRule.ruleset.template" />
+    <None Include="SonarAnalyzer.Testing.ImportBefore.targets" />
+    <None Include="SonarQubeAnalysisConfig.xml" />
+    <None Include="update-expected.ps1" />
+    <None Include="ValidationRuleset.ruleset" />
   </ItemGroup>
 </Project>

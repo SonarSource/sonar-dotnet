@@ -24,7 +24,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class GenericTypeParametersRequired : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S4018";
-        private const string MessageFormat = "Use all type parameters in the parameter list to enable type inference.";
+        private const string MessageFormat = "Refactor this method to use all type parameters in the parameter list to enable type inference.";
 
         private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);

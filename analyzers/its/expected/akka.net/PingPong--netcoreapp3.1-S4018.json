@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S4018",
-"message":  "Use all type parameters in the parameter list to enable type inference.",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
