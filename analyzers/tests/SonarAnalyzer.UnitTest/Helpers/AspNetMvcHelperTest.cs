@@ -44,13 +44,13 @@ public class Foo : System.Web.Mvc.Controller
     [System.Web.Mvc.NonActionAttribute]
     public void PublicNonAction() { }
 }";
-            var compilation = TestHelper.CompileCS(code, NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion).ToArray());
-            var publicFoo = compilation.GetMethodSymbol("PublicFoo");
-            var protectedFoo = compilation.GetMethodSymbol("ProtectedFoo");
-            var internalFoo = compilation.GetMethodSymbol("InternalFoo");
-            var privateFoo = compilation.GetMethodSymbol("PrivateFoo");
-            var innerFoo = compilation.GetMethodSymbol("InnerFoo");
-            var publicNonAction = compilation.GetMethodSymbol("PublicNonAction");
+            var compilation = TestHelper.CompileCS(code, NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion).ToArray()).Model.Compilation;
+            var publicFoo = GetMethodSymbol(compilation, "PublicFoo");
+            var protectedFoo = GetMethodSymbol(compilation, "ProtectedFoo");
+            var internalFoo = GetMethodSymbol(compilation, "InternalFoo");
+            var privateFoo = GetMethodSymbol(compilation, "PrivateFoo");
+            var innerFoo = GetMethodSymbol(compilation, "InnerFoo");
+            var publicNonAction = GetMethodSymbol(compilation, "PublicNonAction");
 
             AspNetMvcHelper.IsControllerMethod(publicFoo).Should().Be(true);
             AspNetMvcHelper.IsControllerMethod(protectedFoo).Should().Be(false);
@@ -80,11 +80,11 @@ public class MyController : Controller
 {
     public void PublicDiz() { }
 }";
-            var compilation = TestHelper.CompileCS(code, NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion).ToArray());
-            var publicFoo = compilation.GetMethodSymbol("PublicFoo");
-            var publicBar = compilation.GetMethodSymbol("PublicBar");
-            var publicDiz = compilation.GetMethodSymbol("PublicDiz");
-            var publicNonAction = compilation.GetMethodSymbol("PublicNonAction");
+            var compilation = TestHelper.CompileCS(code, NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion).ToArray()).Model.Compilation;
+            var publicFoo = GetMethodSymbol(compilation, "PublicFoo");
+            var publicBar = GetMethodSymbol(compilation, "PublicBar");
+            var publicDiz = GetMethodSymbol(compilation, "PublicDiz");
+            var publicNonAction = GetMethodSymbol(compilation, "PublicNonAction");
 
             AspNetMvcHelper.IsControllerMethod(publicFoo).Should().Be(true);
             AspNetMvcHelper.IsControllerMethod(publicBar).Should().Be(false);
@@ -105,9 +105,11 @@ public class Foo
     [Microsoft.AspNetCore.Mvc.NonActionAttribute]
     public void PublicNonAction() { }
 }";
-            var compilation = TestHelper.CompileCS(code, NetStandardMetadataReference.Netstandard.Union(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetMvcVersion)).ToArray());
-            var publicFoo = compilation.GetMethodSymbol("PublicFoo");
-            var publicNonAction = compilation.GetMethodSymbol("PublicNonAction");
+            var compilation = TestHelper.CompileCS(code, NetStandardMetadataReference.Netstandard.Union(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetMvcVersion)).ToArray())
+                .Model
+                .Compilation;
+            var publicFoo = GetMethodSymbol(compilation, "PublicFoo");
+            var publicNonAction = GetMethodSymbol(compilation, "PublicNonAction");
 
             AspNetMvcHelper.IsControllerMethod(publicFoo).Should().Be(true);
             AspNetMvcHelper.IsControllerMethod(publicNonAction).Should().Be(false);
@@ -124,8 +126,10 @@ public class Foo : Microsoft.AspNetCore.Mvc.ControllerBase
 {
     public void PublicFoo() { }
 }";
-            var compilation = TestHelper.CompileCS(code, NetStandardMetadataReference.Netstandard.Union(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetMvcVersion)).ToArray());
-            var publicFoo = compilation.GetMethodSymbol("PublicFoo");
+            var compilation = TestHelper.CompileCS(code, NetStandardMetadataReference.Netstandard.Union(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetMvcVersion)).ToArray())
+                .Model
+                .Compilation;
+            var publicFoo = GetMethodSymbol(compilation, "PublicFoo");
 
             AspNetMvcHelper.IsControllerMethod(publicFoo).Should().Be(false);
         }
@@ -145,5 +149,8 @@ public class Foo : Microsoft.AspNetCore.Mvc.ControllerBase
             var methodSymbol = semanticModel.GetDeclaredSymbol(tree.GetRoot().DescendantNodes().OfType<ConstructorDeclarationSyntax>().Single()) as IMethodSymbol;
             methodSymbol.IsControllerMethod().Should().Be(false);
         }
+
+        private static IMethodSymbol GetMethodSymbol(Compilation compilation, string name) =>
+            (IMethodSymbol)compilation.GetSymbolsWithName(name).Single();
     }
 }

@@ -110,26 +110,6 @@ End Class", AnalyzerLanguage.VisualBasic);
                     : node.RawKind == (int)VB.SyntaxKind.FunctionBlock || node.RawKind == (int)VB.SyntaxKind.SubBlock;
         }
 
-        private static MethodDeclarationSyntax GetMethod(this SyntaxTree syntaxTree, string name, int skip = 0) =>
-            syntaxTree.GetRoot()
-                .DescendantNodes()
-                .OfType<MethodDeclarationSyntax>()
-                .Where(m => m.Identifier.ValueText == name)
-                .Skip(skip)
-                .First();
-
-        private static (MethodDeclarationSyntax, SemanticModel) GetMethod(this (SyntaxTree, SemanticModel) tuple, string name)
-        {
-            var (syntaxTree, semanticModel) = tuple;
-            return (syntaxTree.GetMethod(name), semanticModel);
-        }
-
-        public static IMethodSymbol GetMethodSymbol(this (SyntaxTree, SemanticModel) tuple, string name, int skip = 0)
-        {
-            var (syntaxTree, semanticModel) = tuple;
-            return semanticModel.GetDeclaredSymbol(syntaxTree.GetMethod(name, skip));
-        }
-
         public static bool IsSecurityHotspot(DiagnosticDescriptor diagnostic)
         {
             var type = RuleTypeMappingCS.Rules.GetValueOrDefault(diagnostic.Id) ?? RuleTypeMappingVB.Rules.GetValueOrDefault(diagnostic.Id);

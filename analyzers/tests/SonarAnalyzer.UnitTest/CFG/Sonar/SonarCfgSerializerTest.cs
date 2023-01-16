@@ -68,7 +68,7 @@ class C
     }
 }
 ";
-            var dot = CfgSerializer.Serialize(GetCfgForMethod(code, "Foo"), "Foo");
+            var dot = CfgSerializer.Serialize(CreateMethodCfg(code), "Foo");
 
             dot.Should().BeIgnoringLineEndings(@"digraph ""Foo"" {
 0 [shape=record label=""{BRANCH:SwitchStatement|a}""]
