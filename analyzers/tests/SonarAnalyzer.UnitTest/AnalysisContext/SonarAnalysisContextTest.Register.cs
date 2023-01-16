@@ -18,11 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+extern alias csharp;
+extern alias vbnet;
+
 using Microsoft.CodeAnalysis.CSharp;
 using Moq;
 using SonarAnalyzer.AnalysisContext;
 using SonarAnalyzer.Common;
+using CS = csharp::SonarAnalyzer.Extensions.SonarAnalysisContextExtensions;
 using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext;
+using VB = vbnet::SonarAnalyzer.Extensions.SonarAnalysisContextExtensions;
 
 namespace SonarAnalyzer.UnitTest.AnalysisContext;
 
@@ -92,6 +97,28 @@ public partial class SonarAnalysisContextTest
         sut.ExecutePostponedActions(new(sut.Context, MockCompilationStartAnalysisContext(context)));  // Manual invocation, because SonarParametrizedAnalysisContext stores actions separately
 
         context.AssertDelegateInvoked(expected);
+    }
+
+    [TestMethod]
+    public void RegisterTreeAction_Extension_SonarParametrizedAnalysisContext_CS()
+    {
+        var context = new DummyAnalysisContext(TestContext);
+        var self = new SonarParametrizedAnalysisContext(new(context, DummyMainDescriptor));
+        CS.RegisterTreeAction(self, context.DelegateAction);
+        self.ExecutePostponedActions(new(self.Context, MockCompilationStartAnalysisContext(context)));  // Manual invocation, because SonarParametrizedAnalysisContext stores actions separately
+
+        context.AssertDelegateInvoked(true);
+    }
+
+    [TestMethod]
+    public void RegisterTreeAction_Extension_SonarParametrizedAnalysisContext_VB()
+    {
+        var context = new DummyAnalysisContext(TestContext);
+        var self = new SonarParametrizedAnalysisContext(new(context, DummyMainDescriptor));
+        VB.RegisterTreeAction(self, context.DelegateAction);
+        self.ExecutePostponedActions(new(self.Context, MockCompilationStartAnalysisContext(context)));  // Manual invocation, because SonarParametrizedAnalysisContext stores actions separately
+
+        context.AssertDelegateInvoked(true);
     }
 
     [DataTestMethod]
