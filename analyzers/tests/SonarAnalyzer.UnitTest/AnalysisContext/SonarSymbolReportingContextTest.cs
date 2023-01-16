@@ -18,36 +18,29 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.AnalysisContext;
 
 namespace SonarAnalyzer.UnitTest.AnalysisContext;
 
 [TestClass]
-public class SonarSyntaxTreeAnalysisContextTest
+public class SonarSymbolReportingContextTest
 {
-    [TestMethod]
-    public void Constructor_Null_Throws()
-    {
-        var (tree, model) = TestHelper.CompileCS("// Nothing to see here");
-        var treeContext = new SyntaxTreeAnalysisContext(tree, null, _ => { }, _ => true, default);
-        var analysisContext = AnalysisScaffolding.CreateSonarAnalysisContext();
-
-        ((Func<SonarSyntaxTreeAnalysisContext>)(() => new(null, treeContext, model.Compilation))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("analysisContext");
-        ((Func<SonarSyntaxTreeAnalysisContext>)(() => new(analysisContext, treeContext, null))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("compilation");
-    }
-
     [TestMethod]
     public void Properties_ArePropagated()
     {
         var cancel = new CancellationToken(true);
-        var (tree, model) = TestHelper.CompileCS("// Nothing to see here");
+        var (tree, model) = TestHelper.CompileCS("public class Sample { }");
         var options = AnalysisScaffolding.CreateOptions(null);   // FIXME: Remove null argument in #6590
-        var context = new SyntaxTreeAnalysisContext(tree, options, _ => { }, _ => true, cancel);
-        var sut = new SonarSyntaxTreeAnalysisContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context, model.Compilation);
+        var symbol = model.GetDeclaredSymbol(tree.GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>().Single());
+        var context = new SymbolAnalysisContext(symbol, model.Compilation, options, _ => { }, _ => true, cancel);
+        var sut = new SonarSymbolReportingContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context);
 
         sut.Tree.Should().Be(tree);
         sut.Compilation.Should().Be(model.Compilation);
         sut.Options.Should().Be(options);
         sut.Cancel.Should().Be(cancel);
+        sut.Symbol.Should().Be(symbol);
     }
 }

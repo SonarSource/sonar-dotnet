@@ -24,7 +24,7 @@ using SonarAnalyzer.AnalysisContext;
 namespace SonarAnalyzer.UnitTest.AnalysisContext;
 
 [TestClass]
-public class SonarSyntaxNodeAnalysisContextTest
+public class SonarSyntaxNodeReportingContextTest
 {
     [TestMethod]
     public void Properties_ArePropagated()
@@ -35,7 +35,7 @@ public class SonarSyntaxNodeAnalysisContextTest
         var options = AnalysisScaffolding.CreateOptions();
         var containingSymbol = Mock.Of<ISymbol>();
         var context = new SyntaxNodeAnalysisContext(node, containingSymbol, model, options, _ => { }, _ => true, cancel);
-        var sut = new SonarSyntaxNodeAnalysisContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context);
+        var sut = new SonarSyntaxNodeReportingContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context);
 
         sut.Tree.Should().Be(tree);
         sut.Compilation.Should().Be(model.Compilation);
@@ -61,7 +61,7 @@ public class SonarSyntaxNodeAnalysisContextTest
         var node = tree.GetRoot();
         var wasReported = false;
         var context = new SyntaxNodeAnalysisContext(node, model, AnalysisScaffolding.CreateOptions(), _ => wasReported = true, _ => true, default);
-        var sut = new SonarSyntaxNodeAnalysisContext(analysisContext, context);
+        var sut = new SonarSyntaxNodeReportingContext(analysisContext, context);
         try
         {
             sut.ReportIssue(Diagnostic.Create(rule, (reportOnCorrectTree ? nodeFromCorrectCompilation : nodeFromAnotherCompilation).GetLocation()));
