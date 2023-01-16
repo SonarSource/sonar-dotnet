@@ -31,7 +31,7 @@ public class SonarCompilationStartAnalysisContextTest
     {
         var cancel = new CancellationToken(true);
         var (tree, model) = TestHelper.CompileCS("// Nothing to see here");
-        var options = AnalysisScaffolding.CreateOptions(null);   // FIXME: Remove null argument in #6590
+        var options = AnalysisScaffolding.CreateOptions();
         var context = new Mock<CompilationStartAnalysisContext>(model.Compilation, options, cancel).Object;
         var sut = new SonarCompilationStartAnalysisContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context);
 
