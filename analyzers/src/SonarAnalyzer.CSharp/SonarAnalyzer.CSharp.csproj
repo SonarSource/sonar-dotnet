@@ -32,6 +32,7 @@
   <ItemGroup>
     <Using Include="Microsoft.CodeAnalysis.CSharp" />
     <Using Include="Microsoft.CodeAnalysis.CSharp.Syntax" />
+    <Using Include="SonarAnalyzer.AnalysisContext" />
     <Using Include="SonarAnalyzer.Common" />
     <Using Include="SonarAnalyzer.Extensions" />
     <Using Include="SonarAnalyzer.Helpers" />

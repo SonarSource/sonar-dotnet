@@ -20,9 +20,11 @@
 
 using Microsoft.CodeAnalysis.CSharp;
 using Moq;
+using SonarAnalyzer.AnalysisContext;
 using SonarAnalyzer.Common;
+using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext;
 
-namespace SonarAnalyzer.UnitTest;
+namespace SonarAnalyzer.UnitTest.AnalysisContext;
 
 public partial class SonarAnalysisContextTest
 {
@@ -123,7 +125,7 @@ public partial class SonarAnalysisContextTest
         return mock.Object;
     }
 
-    private sealed class DummyAnalysisContext : AnalysisContext
+    private sealed class DummyAnalysisContext : RoslynAnalysisContext
     {
         public readonly AnalyzerOptions Options;
         public readonly SemanticModel Model;

@@ -20,7 +20,7 @@
 
 using Microsoft.CodeAnalysis.Text;
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.AnalysisContext;
 
 public sealed class SonarParametrizedAnalysisContext : SonarAnalysisContextBase
 {

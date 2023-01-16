@@ -22,6 +22,7 @@ using System.Collections.Concurrent;
 using System.Text;
 using FluentAssertions.Execution;
 using Microsoft.CodeAnalysis.Text;
+using SonarAnalyzer.AnalysisContext;
 using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.UnitTest.TestFramework

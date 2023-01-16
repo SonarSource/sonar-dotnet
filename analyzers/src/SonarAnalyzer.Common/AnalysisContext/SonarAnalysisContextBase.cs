@@ -23,7 +23,7 @@ using System.Runtime.CompilerServices;
 using Microsoft.CodeAnalysis.Text;
 using static SonarAnalyzer.Helpers.DiagnosticDescriptorFactory;
 
-namespace SonarAnalyzer;
+namespace SonarAnalyzer.AnalysisContext;
 
 public abstract class SonarAnalysisContextBase
 {
