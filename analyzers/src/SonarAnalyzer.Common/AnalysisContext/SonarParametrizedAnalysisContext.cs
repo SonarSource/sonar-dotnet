@@ -18,11 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.Text;
-
 namespace SonarAnalyzer.AnalysisContext;
 
-public sealed class SonarParametrizedAnalysisContext : SonarAnalysisContextBase
+public sealed class SonarParametrizedAnalysisContext
 {
     private readonly List<Action<SonarCompilationStartAnalysisContext>> postponedActions = new();
 
@@ -59,7 +57,4 @@ public sealed class SonarParametrizedAnalysisContext : SonarAnalysisContextBase
             action(context);
         }
     }
-
-    public override bool TryGetValue<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value) =>
-        Context.TryGetValue(text, valueProvider, out value);
 }
