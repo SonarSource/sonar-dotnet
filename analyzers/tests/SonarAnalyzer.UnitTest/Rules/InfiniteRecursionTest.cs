@@ -48,6 +48,12 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
 
         [TestMethod]
+        public void InfiniteRecursion_RoslynCfg_CSharp9() =>
+            roslynCfg.AddPaths("InfiniteRecursion.RoslynCfg.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
+
+        [TestMethod]
         public void InfiniteRecursion_CSharp11() =>
             roslynCfg.AddPaths("InfiniteRecursion.CSharp11.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp11)

@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         var cfg = ControlFlowGraph.Create(accessor, c.SemanticModel, c.Cancel);
                         var context = new RecursionContext<ControlFlowGraph>(c, cfg, propertySymbol, accessor.Keyword.GetLocation(), "property accessor's recursion");
-                        var walker = new RecursionSearcher(context, !accessor.Keyword.IsKind(SyntaxKind.SetKeyword));
+                        var walker = new RecursionSearcher(context, !accessor.Keyword.IsAnyKind(SyntaxKind.SetKeyword, SyntaxKindEx.InitKeyword));
                         walker.CheckPaths();
                     }
                 }
