@@ -28,13 +28,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         private const string IIfOperatorName = "IIf";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 var invocationExpression = (InvocationExpressionSyntax)c.Node;
@@ -42,17 +41,14 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
                 if (IsIIf(invokedMethod))
                 {
-                    c.ReportIssue(Diagnostic.Create(rule, invocationExpression.GetLocation()));
+                    c.ReportIssue(Diagnostic.Create(Rule, invocationExpression.GetLocation()));
                 }
             },
             SyntaxKind.InvocationExpression);
-        }
 
-        private bool IsIIf(IMethodSymbol method)
-        {
-            return method != null
-                && method.Name == IIfOperatorName
-                && method.ContainingType.Is(KnownType.Microsoft_VisualBasic_Interaction);
-        }
+        private static bool IsIIf(IMethodSymbol method) =>
+            method != null
+            && method.Name == IIfOperatorName
+            && method.ContainingType.Is(KnownType.Microsoft_VisualBasic_Interaction);
     }
 }
