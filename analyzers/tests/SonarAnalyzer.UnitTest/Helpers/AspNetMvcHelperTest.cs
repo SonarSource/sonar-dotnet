@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+
 namespace SonarAnalyzer.UnitTest.Helpers
 {
     [TestClass]
@@ -139,9 +141,8 @@ public class Foo : Microsoft.AspNetCore.Mvc.ControllerBase
 {
         public Foo() { }
 }";
-            var compilation = TestHelper.CompileCS(code, NetStandardMetadataReference.Netstandard.Union(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetMvcVersion)).ToArray());
-            var (ctor, semanticModel) = compilation.GetConstructor("Foo");
-            var methodSymbol = semanticModel.GetDeclaredSymbol(ctor) as IMethodSymbol;
+            var (tree, semanticModel) = TestHelper.CompileCS(code, NetStandardMetadataReference.Netstandard.Union(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetMvcVersion)).ToArray());
+            var methodSymbol = semanticModel.GetDeclaredSymbol(tree.GetRoot().DescendantNodes().OfType<ConstructorDeclarationSyntax>().Single()) as IMethodSymbol;
             methodSymbol.IsControllerMethod().Should().Be(false);
         }
     }

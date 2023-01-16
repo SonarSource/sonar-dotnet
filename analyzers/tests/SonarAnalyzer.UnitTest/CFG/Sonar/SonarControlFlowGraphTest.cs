@@ -80,8 +80,8 @@ namespace NS
         public Foo(int i) {}
     }
 }";
-            var (ctor, semanticModel) = TestHelper.CompileCS(input).GetConstructor("Foo");
-            var cfg = CSharpControlFlowGraph.Create(ctor.Body, semanticModel);
+            var (tree, semanticModel) = TestHelper.CompileCS(input);
+            var cfg = CSharpControlFlowGraph.Create(FirstConstructorBody(tree), semanticModel);
 
             VerifyCfg(cfg, 5);
 
@@ -120,8 +120,8 @@ namespace NS
         public Foo(int i) {}
     }
 }";
-            var (ctor, semanticModel) = TestHelper.CompileCS(input).GetConstructor("Foo");
-            var cfg = CSharpControlFlowGraph.Create(ctor.Body, semanticModel);
+            var (tree, semanticModel) = TestHelper.CompileCS(input);
+            var cfg = CSharpControlFlowGraph.Create(FirstConstructorBody(tree), semanticModel);
 
             VerifyCfg(cfg, 2);
 
@@ -152,8 +152,8 @@ namespace NS
         public Bar(int i) {}
     }
 }";
-            var (ctor, semanticModel) = TestHelper.CompileCS(input).GetConstructor("Foo");
-            var cfg = CSharpControlFlowGraph.Create(ctor.Body, semanticModel);
+            var (tree, semanticModel) = TestHelper.CompileCS(input);
+            var cfg = CSharpControlFlowGraph.Create(FirstConstructorBody(tree), semanticModel);
 
             VerifyCfg(cfg, 2);
 
@@ -5078,6 +5078,9 @@ namespace NS
 
             return cfg;
         }
+
+        private static SyntaxNode FirstConstructorBody(SyntaxTree tree) =>
+            tree.GetRoot().DescendantNodes().OfType<ConstructorDeclarationSyntax>().First().Body;
 
         #endregion
 
