@@ -57,4 +57,21 @@ namespace Tests.Diagnostics
 
         public ValueTask AnotherPublicValueTaskMethod() => field_fs6.DisposeAsync();
     }
+
+    // Compliant
+    // see GitHub issue: https://github.com/SonarSource/sonar-dotnet/issues/5879
+    public sealed class Test : IAsyncDisposable
+    {
+        private readonly FileStream stream;
+
+        public Test()
+        {
+            stream = new FileStream("C://some-path", FileMode.CreateNew);
+        }
+
+        public async ValueTask DisposeAsync()
+        {
+            await stream.DisposeAsync();
+        }
+    }
 }
