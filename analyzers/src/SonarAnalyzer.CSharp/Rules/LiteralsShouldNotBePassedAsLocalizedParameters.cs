@@ -39,8 +39,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeInvocations, SyntaxKind.InvocationExpression);
-            context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeAssignments, SyntaxKind.SimpleAssignmentExpression);
+            context.RegisterNodeAction(AnalyzeInvocations, SyntaxKind.InvocationExpression);
+            context.RegisterNodeAction(AnalyzeAssignments, SyntaxKind.SimpleAssignmentExpression);
         }
 
         private static void AnalyzeInvocations(SonarSyntaxNodeAnalysisContext context)

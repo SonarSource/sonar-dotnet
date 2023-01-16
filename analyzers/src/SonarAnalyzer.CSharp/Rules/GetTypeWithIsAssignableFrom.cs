@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterNodeAction(c =>
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;
                     if (invocation.Expression is MemberAccessExpressionSyntax memberAccess
@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.InvocationExpression);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var binary = (BinaryExpressionSyntax)c.Node;
@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.EqualsExpression,
                 SyntaxKind.NotEqualsExpression);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterNodeAction(c =>
                 {
                     var isExpression = (BinaryExpressionSyntax)c.Node;
                     if (c.SemanticModel.GetTypeInfo(isExpression.Left).Type is var objectToCast
@@ -81,7 +81,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.IsExpression);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterNodeAction(c =>
             {
                 var isPattern = (IsPatternExpressionSyntaxWrapper)c.Node;
                 if (ConstantPatternExpression(isPattern.Pattern) is { } constantExpression)

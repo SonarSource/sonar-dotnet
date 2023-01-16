@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules
         protected EmptyMethodBase() : base(DiagnosticId) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, CheckMethod, SyntaxKinds.ToArray());
+            context.RegisterNodeAction(Language.GeneratedCodeRecognizer, CheckMethod, SyntaxKinds.ToArray());
 
     }
 }

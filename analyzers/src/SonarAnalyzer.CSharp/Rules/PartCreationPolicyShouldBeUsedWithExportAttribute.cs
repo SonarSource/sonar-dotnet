@@ -46,6 +46,6 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeNode, SyntaxKind.Attribute);
+            context.RegisterNodeAction(AnalyzeNode, SyntaxKind.Attribute);
     }
 }

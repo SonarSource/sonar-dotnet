@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
             ImmutableArray.Create(Rule);
 
         protected sealed override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterNodeAction(c =>
                 {
                     if (c.Compilation.Options.OutputKind == OutputKind.ConsoleApplication)
                     {

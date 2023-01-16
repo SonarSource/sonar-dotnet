@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => c.ReportIssue(Diagnostic.Create(rule, c.Node.GetLocation())),
                 SyntaxKind.ExitForStatement,
                 SyntaxKind.ExitFunctionStatement,
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 SyntaxKind.ExitTryStatement,
                 SyntaxKind.ExitWhileStatement);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var parent = c.Node.Parent;

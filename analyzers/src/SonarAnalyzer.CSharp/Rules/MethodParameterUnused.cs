@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
             useSonarCfg = configuration.UseSonarCfg();
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterNodeAction(c =>
                 {
                     var declaration = CreateContext(c);
                     if ((declaration.Body == null && declaration.ExpressionBody == null)

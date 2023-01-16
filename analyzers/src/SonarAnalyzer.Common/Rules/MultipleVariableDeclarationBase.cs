@@ -34,7 +34,7 @@ public abstract class MultipleVariableDeclarationBase<TSyntaxKind> : SonarDiagno
 
     protected sealed override void Initialize(SonarAnalysisContext context)
     {
-        context.RegisterSyntaxNodeActionInNonGenerated(
+        context.RegisterNodeAction(
             Language.GeneratedCodeRecognizer,
             c =>
             {
@@ -42,7 +42,7 @@ public abstract class MultipleVariableDeclarationBase<TSyntaxKind> : SonarDiagno
             },
             Language.SyntaxKind.LocalDeclaration);
 
-        context.RegisterSyntaxNodeActionInNonGenerated(
+        context.RegisterNodeAction(
             Language.GeneratedCodeRecognizer,
             c =>
             {

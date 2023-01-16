@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var argumentList = (AttributeArgumentListSyntax)c.Node;
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.AttributeArgumentList);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var objectCreation = (ObjectCreationExpressionSyntax)c.Node;

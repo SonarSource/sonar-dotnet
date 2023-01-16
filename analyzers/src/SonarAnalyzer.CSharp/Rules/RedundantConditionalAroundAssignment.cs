@@ -32,8 +32,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(UselessConditionIfStatement, SyntaxKind.IfStatement);
-            context.RegisterSyntaxNodeActionInNonGenerated(UselessConditionSwitchExpression, SyntaxKindEx.SwitchExpression);
+            context.RegisterNodeAction(UselessConditionIfStatement, SyntaxKind.IfStatement);
+            context.RegisterNodeAction(UselessConditionSwitchExpression, SyntaxKindEx.SwitchExpression);
         }
 
         private static void UselessConditionIfStatement(SonarSyntaxNodeAnalysisContext c)

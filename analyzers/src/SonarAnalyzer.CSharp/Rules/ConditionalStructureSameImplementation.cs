@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var ifStatement = (IfStatementSyntax)c.Node;
@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.IfStatement);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var switchSection = (SwitchSectionSyntax)c.Node;

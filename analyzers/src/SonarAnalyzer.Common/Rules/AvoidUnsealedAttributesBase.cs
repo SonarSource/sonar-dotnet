@@ -30,7 +30,7 @@ public abstract class AvoidUnsealedAttributesBase<TSyntaxKind> : SonarDiagnostic
     protected AvoidUnsealedAttributesBase() : base(DiagnosticId) { }
 
     protected sealed override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterSyntaxNodeActionInNonGenerated(
+        context.RegisterNodeAction(
             Language.GeneratedCodeRecognizer,
             c =>
             {

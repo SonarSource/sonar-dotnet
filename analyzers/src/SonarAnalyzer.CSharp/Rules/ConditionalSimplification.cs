@@ -52,10 +52,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckConditionalExpression, SyntaxKind.ConditionalExpression);
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckIfStatement, SyntaxKind.IfStatement);
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckCoalesceExpression, SyntaxKind.CoalesceExpression);
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckNotPattern, SyntaxKindEx.NotPattern);
+            context.RegisterNodeAction(CheckConditionalExpression, SyntaxKind.ConditionalExpression);
+            context.RegisterNodeAction(CheckIfStatement, SyntaxKind.IfStatement);
+            context.RegisterNodeAction(CheckCoalesceExpression, SyntaxKind.CoalesceExpression);
+            context.RegisterNodeAction(CheckNotPattern, SyntaxKindEx.NotPattern);
         }
 
         private static void CheckNotPattern(SonarSyntaxNodeAnalysisContext context)

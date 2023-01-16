@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules
         protected ExpectedExceptionAttributeShouldNotBeUsedBase() : base(DiagnosticId) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
+            context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
             {
                 if (HasMultiLineBody(c.Node)
                     && c.SemanticModel.GetDeclaredSymbol(c.Node) is { } methodSymbol

@@ -41,6 +41,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
             catchClause.CatchStatement?.WhenClause != null;
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(RaiseOnInvalidCatch, SyntaxKind.TryBlock);
+            context.RegisterNodeAction(RaiseOnInvalidCatch, SyntaxKind.TryBlock);
     }
 }

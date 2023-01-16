@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules
              rule = DescriptorFactory.Create(diagnosticId, messageFormat);
 
         protected sealed override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterNodeAction(c =>
             {
                 if (c.IsRedundantPositionalRecordContext())
                 {

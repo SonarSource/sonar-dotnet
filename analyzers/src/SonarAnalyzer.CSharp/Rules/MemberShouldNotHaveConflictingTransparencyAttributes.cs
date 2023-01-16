@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var nodesWithSecuritySafeCritical = new Dictionary<SyntaxNode, AttributeSyntax>();
                     var nodesWithSecurityCritical = new Dictionary<SyntaxNode, AttributeSyntax>();
 
-                    csac.RegisterSyntaxNodeActionInNonGenerated(snac => CollectSecurityAttributes(snac, nodesWithSecuritySafeCritical, nodesWithSecurityCritical), SyntaxKind.Attribute);
+                    csac.RegisterNodeAction(snac => CollectSecurityAttributes(snac, nodesWithSecuritySafeCritical, nodesWithSecurityCritical), SyntaxKind.Attribute);
 
                     csac.RegisterCompilationEndAction(cac => ReportOnConflictingTransparencyAttributes(cac, nodesWithSecuritySafeCritical, nodesWithSecurityCritical));
                 });

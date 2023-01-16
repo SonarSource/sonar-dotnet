@@ -31,7 +31,7 @@ public sealed class ToStringShouldNotReturnNull : ToStringShouldNotReturnNullBas
     {
         base.Initialize(context);
 
-        context.RegisterSyntaxNodeActionInNonGenerated(
+        context.RegisterNodeAction(
             c => ToStringReturnsNull(c, ((MethodDeclarationSyntax)c.Node).ExpressionBody),
             SyntaxKind.MethodDeclaration);
     }

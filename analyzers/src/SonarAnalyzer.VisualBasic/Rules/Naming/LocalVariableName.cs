@@ -37,15 +37,15 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override void Initialize(SonarParametrizedAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 ProcessVariableDeclarator,
                 SyntaxKind.VariableDeclarator);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => ProcessLoop(c, (ForStatementSyntax)c.Node, f => f.ControlVariable, s => s.IsFor()),
                 SyntaxKind.ForStatement);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => ProcessLoop(c, (ForEachStatementSyntax)c.Node, f => f.ControlVariable, s => s.IsForEach()),
                 SyntaxKind.ForEachStatement);
         }

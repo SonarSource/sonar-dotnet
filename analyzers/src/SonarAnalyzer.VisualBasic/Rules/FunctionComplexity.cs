@@ -30,23 +30,23 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override void Initialize(SonarParametrizedAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => CheckComplexity<MethodBlockBaseSyntax>(c, m => m.BlockStatement.GetLocation(), "procedure"),
                 SyntaxKind.SubBlock);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => CheckComplexity<MethodBlockBaseSyntax>(c, m => m.BlockStatement.GetLocation(), "function"),
                 SyntaxKind.FunctionBlock);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => CheckComplexity<MethodBlockBaseSyntax>(c, m => m.BlockStatement.GetLocation(), "constructor"),
                 SyntaxKind.ConstructorBlock);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => CheckComplexity<OperatorBlockSyntax>(c, m => m.OperatorStatement.GetLocation(), "operator"),
                 SyntaxKind.OperatorBlock);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => CheckComplexity<AccessorBlockSyntax>(c, m => m.AccessorStatement.GetLocation(), "accessor"),
                 SyntaxKind.GetAccessorBlock,
                 SyntaxKind.SetAccessorBlock,

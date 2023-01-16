@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules
 
         protected override void Initialize(SonarParametrizedAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 GeneratedCodeRecognizer,
                 c =>
                 {

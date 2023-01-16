@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules
         protected abstract string GetMethodKindAndName(SyntaxToken identifierToken);
 
         protected override void Initialize(SonarParametrizedAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 GeneratedCodeRecognizer,
                 c =>
                 {

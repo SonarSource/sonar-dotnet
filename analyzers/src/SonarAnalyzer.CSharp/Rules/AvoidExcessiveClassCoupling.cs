@@ -68,7 +68,7 @@ namespace SonarAnalyzer.Rules.CSharp
         public int Threshold { get; set; } = ThresholdDefaultValue;
 
         protected override void Initialize(SonarParametrizedAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterNodeAction(c =>
                 {
                     var typeDeclaration = (TypeDeclarationSyntax)c.Node;
                     if (typeDeclaration.Identifier.IsMissing || c.IsRedundantPositionalRecordContext())

@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
             KnownType.System_Array);
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(ReportIfReturnsNullOrDefault,
+            context.RegisterNodeAction(ReportIfReturnsNullOrDefault,
                 SyntaxKind.MethodDeclaration,
                 SyntaxKindEx.LocalFunctionStatement,
                 SyntaxKind.PropertyDeclaration,

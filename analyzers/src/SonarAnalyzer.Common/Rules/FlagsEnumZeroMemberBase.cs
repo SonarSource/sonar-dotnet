@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Rules
         protected FlagsEnumZeroMemberBase() : base(DiagnosticId) { }
 
         protected sealed override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
+            context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
                 {
                     if (c.Node.HasFlagsAttribute(c.SemanticModel)
                         && ZeroMember(c.Node, c.SemanticModel) is { } zeroMember

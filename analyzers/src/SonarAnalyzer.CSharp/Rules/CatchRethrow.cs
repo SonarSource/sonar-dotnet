@@ -41,6 +41,6 @@ namespace SonarAnalyzer.Rules.CSharp
             catchClause.Filter != null;
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(RaiseOnInvalidCatch, SyntaxKind.TryStatement);
+            context.RegisterNodeAction(RaiseOnInvalidCatch, SyntaxKind.TryStatement);
     }
 }

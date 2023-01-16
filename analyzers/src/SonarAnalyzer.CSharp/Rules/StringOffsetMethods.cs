@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(analysisContext =>
+            context.RegisterNodeAction(analysisContext =>
                 {
                     var invocationExpression = (InvocationExpressionSyntax)analysisContext.Node;
                     var semanticModel = analysisContext.SemanticModel;

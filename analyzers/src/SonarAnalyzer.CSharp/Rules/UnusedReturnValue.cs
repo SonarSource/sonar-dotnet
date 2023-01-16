@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSymbolAction(AnalyzeNamedTypes, SymbolKind.NamedType);
-            context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeLocalFunctionStatements, SyntaxKindEx.LocalFunctionStatement);
+            context.RegisterNodeAction(AnalyzeLocalFunctionStatements, SyntaxKindEx.LocalFunctionStatement);
         }
 
         private static void AnalyzeNamedTypes(SonarSymbolAnalysisContext context)

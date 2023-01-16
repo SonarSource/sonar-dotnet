@@ -26,7 +26,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => new ThrowInFinallyWalker(c, Rule).SafeVisit(((FinallyClauseSyntax)c.Node).Block),
                 SyntaxKind.FinallyClause);
 

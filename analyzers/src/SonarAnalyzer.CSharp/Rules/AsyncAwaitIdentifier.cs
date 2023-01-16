@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxTreeActionInNonGenerated(
+            context.RegisterTreeAction(
                 c =>
                 {
                     foreach (var asyncOrAwaitToken in GetAsyncOrAwaitTokens(c.Tree.GetRoot())

@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var expression = (BinaryExpressionSyntax)c.Node;
@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKindsToCheckBinary);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var expression = (AssignmentExpressionSyntax)c.Node;
@@ -63,7 +63,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKindsToCheckAssignment);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => ReportOnObjectEqualsMatches(c, (InvocationExpressionSyntax)c.Node),
                 SyntaxKind.InvocationExpression);
         }

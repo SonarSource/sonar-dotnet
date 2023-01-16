@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var attribute = (AttributeSyntax)c.Node;
@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.Attribute);
 
-            context.RegisterSyntaxTreeActionInNonGenerated(
+            context.RegisterTreeAction(
                 c =>
                 {
                     foreach (var token in c.Tree.GetRoot().DescendantTokens())

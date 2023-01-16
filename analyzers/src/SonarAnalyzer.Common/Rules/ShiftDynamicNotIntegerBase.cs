@@ -34,13 +34,13 @@ namespace SonarAnalyzer.Rules
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 Language.GeneratedCodeRecognizer,
                 c => CheckExpressionWithTwoParts(c, b => Language.Syntax.BinaryExpressionLeft(b), b => Language.Syntax.BinaryExpressionRight(b)),
                 Language.SyntaxKind.LeftShiftExpression,
                 Language.SyntaxKind.RightShiftExpression);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 Language.GeneratedCodeRecognizer,
                 c => CheckExpressionWithTwoParts(c, b => Language.Syntax.AssignmentLeft(b), b => Language.Syntax.AssignmentRight(b)),
                 Language.SyntaxKind.LeftShiftAssignmentStatement,

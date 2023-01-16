@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var assignment = (AssignmentExpressionSyntax)c.Node;
@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.SubtractAssignmentExpression);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var binary = (BinaryExpressionSyntax)c.Node;

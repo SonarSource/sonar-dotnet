@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules
         protected SecurityPInvokeMethodShouldNotBeCalledBase() : base(DiagnosticId) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, CheckForIssue, Language.SyntaxKind.InvocationExpression);
+            context.RegisterNodeAction(Language.GeneratedCodeRecognizer, CheckForIssue, Language.SyntaxKind.InvocationExpression);
 
         protected virtual bool IsImportFromInteropDll(IMethodSymbol symbol, SemanticModel semanticModel) =>
             (symbol.IsExtern

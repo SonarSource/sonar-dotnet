@@ -31,19 +31,19 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 new SelectCaseStatementAnalyzer().GetAnalysisAction(rule),
                 SyntaxKind.SelectBlock);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 new TernaryStatementAnalyzer().GetAnalysisAction(rule),
                 SyntaxKind.TernaryConditionalExpression);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 new IfStatementAnalyzer().GetAnalysisAction(rule),
                 SyntaxKind.ElseBlock);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 new SingleLineIfStatementAnalyzer().GetAnalysisAction(rule),
                 SyntaxKind.SingleLineElseClause);
         }

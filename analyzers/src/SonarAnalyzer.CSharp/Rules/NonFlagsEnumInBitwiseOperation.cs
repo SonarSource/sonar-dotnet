@@ -35,13 +35,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => CheckExpressionWithOperator<BinaryExpressionSyntax>(c, b => b.OperatorToken),
                 SyntaxKind.BitwiseOrExpression,
                 SyntaxKind.BitwiseAndExpression,
                 SyntaxKind.ExclusiveOrExpression);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => CheckExpressionWithOperator<AssignmentExpressionSyntax>(c, a => a.OperatorToken),
                 SyntaxKind.AndAssignmentExpression,
                 SyntaxKind.OrAssignmentExpression,

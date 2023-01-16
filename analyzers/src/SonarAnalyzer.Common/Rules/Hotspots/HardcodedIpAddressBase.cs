@@ -65,8 +65,8 @@ namespace SonarAnalyzer.Rules
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, CheckForHardcodedIpAddressesInStringLiteral, Language.SyntaxKind.StringLiteralExpressions);
-            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, CheckForHardcodedIpAddressesInStringInterpolation, Language.SyntaxKind.InterpolatedStringExpression);
+            context.RegisterNodeAction(Language.GeneratedCodeRecognizer, CheckForHardcodedIpAddressesInStringLiteral, Language.SyntaxKind.StringLiteralExpressions);
+            context.RegisterNodeAction(Language.GeneratedCodeRecognizer, CheckForHardcodedIpAddressesInStringInterpolation, Language.SyntaxKind.InterpolatedStringExpression);
         }
 
         protected bool IsHardcodedIp(string literalValue, SyntaxNode node) =>

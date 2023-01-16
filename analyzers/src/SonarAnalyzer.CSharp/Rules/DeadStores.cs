@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context)
         {
             // No need to check for ExpressionBody as it can't contain variable assignment
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => CheckForDeadStores<BaseMethodDeclarationSyntax>(c, c.SemanticModel.GetDeclaredSymbol(c.Node), x => (CSharpSyntaxNode)x.Body ?? x.ExpressionBody()),
                 SyntaxKind.MethodDeclaration,
                 SyntaxKind.ConstructorDeclaration,
@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ConversionOperatorDeclaration,
                 SyntaxKind.OperatorDeclaration);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => CheckForDeadStores<AccessorDeclarationSyntax>(c, c.SemanticModel.GetDeclaredSymbol(c.Node), x => (CSharpSyntaxNode)x.Body ?? x.ExpressionBody()),
                 SyntaxKind.GetAccessorDeclaration,
                 SyntaxKind.SetAccessorDeclaration,
@@ -61,13 +61,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.AddAccessorDeclaration,
                 SyntaxKind.RemoveAccessorDeclaration);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => CheckForDeadStores<AnonymousFunctionExpressionSyntax>(c, c.SemanticModel.GetSymbolInfo(c.Node).Symbol, x => x.Body),
                 SyntaxKind.AnonymousMethodExpression,
                 SyntaxKind.SimpleLambdaExpression,
                 SyntaxKind.ParenthesizedLambdaExpression);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => CheckForDeadStores(c, c.SemanticModel.GetDeclaredSymbol(c.Node), ((LocalFunctionStatementSyntaxWrapper)c.Node).Body),
                 SyntaxKindEx.LocalFunctionStatement);
         }

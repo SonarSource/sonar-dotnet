@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         public string Pattern { get; set; } = DefaultPattern;
 
         protected override void Initialize(SonarParametrizedAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var methodDeclaration = (MethodStatementSyntax)c.Node;

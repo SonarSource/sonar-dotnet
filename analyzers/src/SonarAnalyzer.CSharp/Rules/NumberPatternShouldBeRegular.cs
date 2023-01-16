@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     if (!c.Compilation.IsAtLeastLanguageVersion(LanguageVersionEx.CSharp7))

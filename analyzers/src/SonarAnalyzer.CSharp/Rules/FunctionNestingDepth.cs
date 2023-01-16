@@ -26,7 +26,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override ILanguageFacade Language => CSharpFacade.Instance;
 
         protected override void Initialize(SonarParametrizedAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterNodeAction(c =>
             {
                 var walker = new NestingDepthWalker(Maximum, token => c.ReportIssue(Diagnostic.Create(rule, token.GetLocation(), Maximum)));
                 walker.SafeVisit(c.Node);

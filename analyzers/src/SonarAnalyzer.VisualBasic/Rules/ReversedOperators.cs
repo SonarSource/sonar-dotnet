@@ -28,7 +28,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                GetAnalysisAction(Rule),
                // As opposed to C#, the VB operators for negation ('Not') and inequality ('<>') leave no room for confusion
                SyntaxKind.UnaryMinusExpression,

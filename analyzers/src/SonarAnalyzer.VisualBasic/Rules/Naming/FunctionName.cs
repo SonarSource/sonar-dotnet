@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override void Initialize(SonarParametrizedAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var methodDeclaration = (MethodStatementSyntax)c.Node;
@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 },
                 SyntaxKind.FunctionStatement);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var methodDeclaration = (MethodStatementSyntax)c.Node;

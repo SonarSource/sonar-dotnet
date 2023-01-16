@@ -32,8 +32,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckConstructorDeclaration, SyntaxKind.ConstructorDeclaration);
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckDestructorDeclaration, SyntaxKind.DestructorDeclaration);
+            context.RegisterNodeAction(CheckConstructorDeclaration, SyntaxKind.ConstructorDeclaration);
+            context.RegisterNodeAction(CheckDestructorDeclaration, SyntaxKind.DestructorDeclaration);
         }
 
         private static void CheckDestructorDeclaration(SonarSyntaxNodeAnalysisContext context)
