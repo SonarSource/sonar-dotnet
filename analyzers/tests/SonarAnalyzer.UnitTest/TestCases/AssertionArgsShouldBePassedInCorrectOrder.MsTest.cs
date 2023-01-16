@@ -47,6 +47,11 @@ namespace Repro_6630
             Assert.AreEqual(expected: "", actual: str); // Compliant
             Assert.AreEqual(actual: str, expected: ""); // Noncompliant FP
             Assert.AreEqual(expected: str, actual: ""); // Noncompliant
+
+            Assert.AreNotEqual(actual: "", notExpected: str); // Compliant FN
+            Assert.AreSame(actual: "", expected: str); // Compliant FN
+            Assert.AreNotSame(actual: "", notExpected: str); // Compliant FN
+
         }
     }
 }
