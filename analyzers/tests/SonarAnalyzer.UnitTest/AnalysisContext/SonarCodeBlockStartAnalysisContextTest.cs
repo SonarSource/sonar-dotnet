@@ -21,7 +21,6 @@
 using Microsoft.CodeAnalysis.CSharp;
 using Moq;
 using SonarAnalyzer.AnalysisContext;
-using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext;
 
 namespace SonarAnalyzer.UnitTest.AnalysisContext;
 
@@ -31,14 +30,13 @@ public class SonarCodeBlockStartAnalysisContextTest
     [TestMethod]
     public void Properties_ArePropagated()
     {
-        var analysisContext = new SonarAnalysisContext(Mock.Of<RoslynAnalysisContext>(), Enumerable.Empty<DiagnosticDescriptor>());
         var cancel = new CancellationToken(true);
         var codeBlock = SyntaxFactory.Block();
         var owningSymbol = Mock.Of<ISymbol>();
         var model = Mock.Of<SemanticModel>();
-        var options = TestHelper.CreateOptions(null);   // FIXME: Remove null argument in #6590
+        var options = AnalysisScaffolding.CreateOptions();
         var context = new Mock<CodeBlockStartAnalysisContext<SyntaxKind>>(codeBlock, owningSymbol, model, options, cancel).Object;
-        var sut = new SonarCodeBlockStartAnalysisContext<SyntaxKind>(analysisContext, context);
+        var sut = new SonarCodeBlockStartAnalysisContext<SyntaxKind>(AnalysisScaffolding.CreateSonarAnalysisContext(), context);
 
         sut.Tree.Should().Be(codeBlock.SyntaxTree);
         sut.Compilation.Should().Be(model.Compilation);
