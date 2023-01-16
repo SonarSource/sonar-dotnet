@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules
                 },
                 Language.SyntaxKind.ComparisonKinds);
 
-        private void CheckExpression(SonarSyntaxNodeAnalysisContext context, SyntaxNode expression, int constant, ComparisonKind comparison)
+        private void CheckExpression(SonarSyntaxNodeReportingContext context, SyntaxNode expression, int constant, ComparisonKind comparison)
         {
             if (comparison.Compare(constant).IsEmptyOrNotEmpty()
                 && TryGetCountCall(expression, context.SemanticModel, out var location, out var typeArgument))

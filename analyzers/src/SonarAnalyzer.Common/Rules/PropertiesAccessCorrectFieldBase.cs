@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules
             ? invokedMethod
             : null;
 
-        private void CheckType(SonarSymbolAnalysisContext context)
+        private void CheckType(SonarSymbolReportingContext context)
         {
             var symbol = (INamedTypeSymbol)context.Symbol;
             if (!symbol.TypeKind.Equals(TypeKind.Class)
@@ -113,7 +113,7 @@ namespace SonarAnalyzer.Rules
                   .OfType<IPropertySymbol>()
                   .Where(ImplementsExplicitGetterOrSetter);
 
-        private void CheckExpectedFieldIsUsed(SonarSymbolAnalysisContext context, IMethodSymbol methodSymbol, IFieldSymbol expectedField, ImmutableArray<FieldData> actualFields)
+        private void CheckExpectedFieldIsUsed(SonarSymbolReportingContext context, IMethodSymbol methodSymbol, IFieldSymbol expectedField, ImmutableArray<FieldData> actualFields)
         {
             var expectedFieldIsUsed = actualFields.Any(a => a.Field.Equals(expectedField));
             if (!expectedFieldIsUsed || !actualFields.Any())

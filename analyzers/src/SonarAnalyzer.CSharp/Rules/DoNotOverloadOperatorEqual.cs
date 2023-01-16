@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterNodeAction(CheckForIssue, SyntaxKind.OperatorDeclaration);
 
-        private static void CheckForIssue(SonarSyntaxNodeAnalysisContext analysisContext)
+        private static void CheckForIssue(SonarSyntaxNodeReportingContext analysisContext)
         {
             var declaration = (OperatorDeclarationSyntax)analysisContext.Node;
 

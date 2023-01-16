@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules
 
             protected abstract Location GetLocation(TIfSyntax topLevelIf);
 
-            public Action<SonarSyntaxNodeAnalysisContext> GetAnalysisAction(DiagnosticDescriptor rule) =>
+            public Action<SonarSyntaxNodeReportingContext> GetAnalysisAction(DiagnosticDescriptor rule) =>
                 context =>
                 {
                     var elseSyntax = (TElseSyntax)context.Node;
@@ -77,7 +77,7 @@ namespace SonarAnalyzer.Rules
 
             protected abstract Location GetLocation(TTernaryStatement ternaryStatement);
 
-            public Action<SonarSyntaxNodeAnalysisContext> GetAnalysisAction(DiagnosticDescriptor rule) =>
+            public Action<SonarSyntaxNodeReportingContext> GetAnalysisAction(DiagnosticDescriptor rule) =>
                 context =>
                 {
                     var ternaryStatement = (TTernaryStatement)context.Node;
@@ -104,7 +104,7 @@ namespace SonarAnalyzer.Rules
 
             protected abstract Location GetLocation(TSwitchStatement switchStatement);
 
-            public Action<SonarSyntaxNodeAnalysisContext> GetAnalysisAction(DiagnosticDescriptor rule) =>
+            public Action<SonarSyntaxNodeReportingContext> GetAnalysisAction(DiagnosticDescriptor rule) =>
                 context =>
                 {
                     var switchStatement = (TSwitchStatement)context.Node;

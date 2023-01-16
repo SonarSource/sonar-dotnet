@@ -117,7 +117,7 @@ namespace SonarAnalyzer.Rules
             return configuration.IsEnabled(DiagnosticId);
         }
 
-        private void CheckWebConfig(SonarCompilationAnalysisContext context)
+        private void CheckWebConfig(SonarCompilationReportingContext context)
         {
             foreach (var path in context.WebConfigFiles())
             {
@@ -128,7 +128,7 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        private void CheckWebConfig(SonarCompilationAnalysisContext context, string path, IEnumerable<XElement> elements)
+        private void CheckWebConfig(SonarCompilationReportingContext context, string path, IEnumerable<XElement> elements)
         {
             foreach (var element in elements)
             {
@@ -146,7 +146,7 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        private void CheckAppSettings(SonarCompilationAnalysisContext context)
+        private void CheckAppSettings(SonarCompilationReportingContext context)
         {
             foreach (var path in context.AppSettingsFiles())
             {
@@ -229,7 +229,7 @@ namespace SonarAnalyzer.Rules
             protected CredentialWordsFinderBase(DoNotHardcodeCredentialsBase<TSyntaxKind> analyzer) =>
                 this.analyzer = analyzer;
 
-            public Action<SonarSyntaxNodeAnalysisContext> AnalysisAction() =>
+            public Action<SonarSyntaxNodeReportingContext> AnalysisAction() =>
                 context =>
                 {
                     var declarator = (TSyntaxNode)context.Node;
@@ -245,10 +245,10 @@ namespace SonarAnalyzer.Rules
         private sealed class CredentialWordsJsonWalker : JsonWalker
         {
             private readonly DoNotHardcodeCredentialsBase<TSyntaxKind> analyzer;
-            private readonly SonarCompilationAnalysisContext context;
+            private readonly SonarCompilationReportingContext context;
             private readonly string path;
 
-            public CredentialWordsJsonWalker(DoNotHardcodeCredentialsBase<TSyntaxKind> analyzer, SonarCompilationAnalysisContext context, string path)
+            public CredentialWordsJsonWalker(DoNotHardcodeCredentialsBase<TSyntaxKind> analyzer, SonarCompilationReportingContext context, string path)
             {
                 this.analyzer = analyzer;
                 this.context = context;

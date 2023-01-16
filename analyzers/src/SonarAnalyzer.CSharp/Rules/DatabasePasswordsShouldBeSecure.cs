@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterCompilationAction(CheckAppSettings);
         }
 
-        private void CheckWebConfig(SonarCompilationAnalysisContext c)
+        private void CheckWebConfig(SonarCompilationReportingContext c)
         {
             foreach (var fullPath in c.WebConfigFiles())
             {
@@ -81,7 +81,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private void CheckAppSettings(SonarCompilationAnalysisContext c)
+        private void CheckAppSettings(SonarCompilationReportingContext c)
         {
             foreach (var fullPath in c.AppSettingsFiles())
             {
@@ -89,7 +89,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private void CheckAppSettingJson(SonarCompilationAnalysisContext c, string fullPath)
+        private void CheckAppSettingJson(SonarCompilationReportingContext c, string fullPath)
         {
             var appSettings = File.ReadAllText(fullPath);
             if (appSettings.Contains("\"ConnectionStrings\"") && JsonNode.FromString(appSettings) is { } json)
@@ -98,7 +98,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private void ReportEmptyPassword(SonarCompilationAnalysisContext c, XDocument doc, string webConfigPath)
+        private void ReportEmptyPassword(SonarCompilationReportingContext c, XDocument doc, string webConfigPath)
         {
             foreach (var addAttribute in doc.XPathSelectElements("configuration/connectionStrings/add"))
             {
@@ -112,7 +112,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private void ReportEmptyPassword(SonarCompilationAnalysisContext c, JsonNode doc, string appSettingsPath)
+        private void ReportEmptyPassword(SonarCompilationReportingContext c, JsonNode doc, string appSettingsPath)
         {
             if (doc.TryGetPropertyNode("ConnectionStrings", out var connectionStrings) && connectionStrings.Kind == Kind.Object)
             {

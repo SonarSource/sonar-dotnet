@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterNodeAction(AnalyzePropertyPatternClause, SyntaxKindEx.PropertyPatternClause);
         }
 
-        private void AnalyzePropertyPatternClause(SonarSyntaxNodeAnalysisContext c)
+        private void AnalyzePropertyPatternClause(SonarSyntaxNodeReportingContext c)
         {
             var propertyPatternClause = (PropertyPatternClauseSyntaxWrapper)c.Node;
 
@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private void AnalyzePatterns(SonarSyntaxNodeAnalysisContext c, ExpressionSyntax expression, SyntaxNode pattern)
+        private void AnalyzePatterns(SonarSyntaxNodeReportingContext c, ExpressionSyntax expression, SyntaxNode pattern)
         {
             var objectToPatternMap = new Dictionary<ExpressionSyntax, SyntaxNode>();
             PatternExpressionObjectToPatternMapping.MapObjectToPattern(expression, pattern, objectToPatternMap);
@@ -66,13 +66,13 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private void AnalyzeIsPatternExpression(SonarSyntaxNodeAnalysisContext c)
+        private void AnalyzeIsPatternExpression(SonarSyntaxNodeReportingContext c)
         {
             var isPatternExpression = (IsPatternExpressionSyntaxWrapper)c.Node;
             AnalyzePatterns(c, isPatternExpression.Expression, isPatternExpression.Pattern);
         }
 
-        private void AnalyzeSwitchExpression(SonarSyntaxNodeAnalysisContext c)
+        private void AnalyzeSwitchExpression(SonarSyntaxNodeReportingContext c)
         {
             var switchExpression = (SwitchExpressionSyntaxWrapper)c.Node;
 
@@ -82,7 +82,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private void AnalyzeSwitchStatement(SonarSyntaxNodeAnalysisContext c)
+        private void AnalyzeSwitchStatement(SonarSyntaxNodeReportingContext c)
         {
             var switchStatement = (SwitchStatementSyntax)c.Node;
             foreach (var section in switchStatement.Sections)
@@ -94,7 +94,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private void CheckPatternCondition(SonarSyntaxNodeAnalysisContext context, SyntaxNode expression, SyntaxNode pattern)
+        private void CheckPatternCondition(SonarSyntaxNodeReportingContext context, SyntaxNode expression, SyntaxNode pattern)
         {
             if (pattern.DescendantNodesAndSelf().FirstOrDefault(x => x.IsKind(SyntaxKindEx.RelationalPattern)) is { } relationalPatternNode
                 && ((RelationalPatternSyntaxWrapper)relationalPatternNode) is var relationalPattern

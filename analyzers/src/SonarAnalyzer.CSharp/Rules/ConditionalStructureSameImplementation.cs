@@ -85,7 +85,7 @@ namespace SonarAnalyzer.Rules.CSharp
                       .Union(switchSection.Statements.OfType<BlockSyntax>().SelectMany(block => block.Statements))
                       .Union(switchSection.Statements.Where(s => !s.IsKind(SyntaxKind.Block)));
 
-        private static void CheckStatement(SonarSyntaxNodeAnalysisContext context, SyntaxNode statement, IEnumerable<StatementSyntax> precedingStatements)
+        private static void CheckStatement(SonarSyntaxNodeReportingContext context, SyntaxNode statement, IEnumerable<StatementSyntax> precedingStatements)
         {
             if (statement.ChildNodes().Count() < 2)
             {
@@ -99,7 +99,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void ReportSyntaxNode(SonarSyntaxNodeAnalysisContext context, SyntaxNode node, SyntaxNode precedingNode, string errorMessageDiscriminator) =>
+        private static void ReportSyntaxNode(SonarSyntaxNodeReportingContext context, SyntaxNode node, SyntaxNode precedingNode, string errorMessageDiscriminator) =>
             context.ReportIssue(Rule.CreateDiagnostic(context.Compilation,
                 node.GetLocation(),
                 additionalLocations: new[] { precedingNode.GetLocation() },

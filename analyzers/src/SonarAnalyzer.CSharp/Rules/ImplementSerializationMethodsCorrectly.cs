@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
             base.Initialize(context);
         }
 
-        private void ReportOnAttributes(SonarSyntaxNodeAnalysisContext context, IEnumerable<AttributeSyntax> attributes, string memberType)
+        private void ReportOnAttributes(SonarSyntaxNodeReportingContext context, IEnumerable<AttributeSyntax> attributes, string memberType)
         {
             foreach (var attribute in attributes)
             {

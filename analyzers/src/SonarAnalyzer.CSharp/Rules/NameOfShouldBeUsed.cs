@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 : paramGroups.Select(g => g.First().Identifier.ValueText);
         }
 
-        protected override bool LeastLanguageVersionMatches(SonarSyntaxNodeAnalysisContext context) =>
+        protected override bool LeastLanguageVersionMatches(SonarSyntaxNodeReportingContext context) =>
             context.Compilation.IsAtLeastLanguageVersion(LanguageVersion.CSharp6);
 
         protected override bool IsArgumentExceptionCallingNameOf(SyntaxNode node, IEnumerable<string> arguments) =>

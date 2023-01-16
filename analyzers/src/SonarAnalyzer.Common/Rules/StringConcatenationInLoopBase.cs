@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules
                 SimpleAssignmentKinds.ToArray());
         }
 
-        private void CheckSimpleAssignment(SonarSyntaxNodeAnalysisContext context)
+        private void CheckSimpleAssignment(SonarSyntaxNodeReportingContext context)
         {
             var assignment = (TAssignmentExpression)context.Node;
             if (!IsString(GetLeft(assignment), context.SemanticModel))
@@ -97,7 +97,7 @@ namespace SonarAnalyzer.Rules
             return nestedLeft;
         }
 
-        private void CheckCompoundAssignment(SonarSyntaxNodeAnalysisContext context)
+        private void CheckCompoundAssignment(SonarSyntaxNodeReportingContext context)
         {
             var addAssignment = (TAssignmentExpression)context.Node;
             if (!IsString(GetLeft(addAssignment), context.SemanticModel))

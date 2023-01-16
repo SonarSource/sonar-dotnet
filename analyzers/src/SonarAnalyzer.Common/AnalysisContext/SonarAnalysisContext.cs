@@ -77,24 +77,24 @@ public sealed class SonarAnalysisContext
         analysisContext.RegisterCodeBlockStartAction<TSyntaxKind>(
             c => Execute<SonarCodeBlockStartAnalysisContext<TSyntaxKind>, CodeBlockStartAnalysisContext<TSyntaxKind>>(new(this, c), action, c.CodeBlock.SyntaxTree, generatedCodeRecognizer));
 
-    public void RegisterCompilationAction(Action<SonarCompilationAnalysisContext> action) =>
+    public void RegisterCompilationAction(Action<SonarCompilationReportingContext> action) =>
         analysisContext.RegisterCompilationAction(
-            c => Execute<SonarCompilationAnalysisContext, CompilationAnalysisContext>(new(this, c), action, null));
+            c => Execute<SonarCompilationReportingContext, CompilationAnalysisContext>(new(this, c), action, null));
 
     public void RegisterCompilationStartAction(Action<SonarCompilationStartAnalysisContext> action) =>
         analysisContext.RegisterCompilationStartAction(
             c => Execute<SonarCompilationStartAnalysisContext, CompilationStartAnalysisContext>(new(this, c), action, null));
 
-    public void RegisterSymbolAction(Action<SonarSymbolAnalysisContext> action, params SymbolKind[] symbolKinds) =>
+    public void RegisterSymbolAction(Action<SonarSymbolReportingContext> action, params SymbolKind[] symbolKinds) =>
         analysisContext.RegisterSymbolAction(
-            c => Execute<SonarSymbolAnalysisContext, SymbolAnalysisContext>(new(this, c), action, null), symbolKinds);
+            c => Execute<SonarSymbolReportingContext, SymbolAnalysisContext>(new(this, c), action, null), symbolKinds);
 
-    public void RegisterNodeAction<TSyntaxKind>(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxNodeAnalysisContext> action, params TSyntaxKind[] syntaxKinds)
+    public void RegisterNodeAction<TSyntaxKind>(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxNodeReportingContext> action, params TSyntaxKind[] syntaxKinds)
         where TSyntaxKind : struct =>
         analysisContext.RegisterSyntaxNodeAction(
-            c => Execute<SonarSyntaxNodeAnalysisContext, SyntaxNodeAnalysisContext>(new(this, c), action, c.Node.SyntaxTree, generatedCodeRecognizer), syntaxKinds);
+            c => Execute<SonarSyntaxNodeReportingContext, SyntaxNodeAnalysisContext>(new(this, c), action, c.Node.SyntaxTree, generatedCodeRecognizer), syntaxKinds);
 
-    public void RegisterTreeAction(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxTreeAnalysisContext> action) =>
+    public void RegisterTreeAction(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxTreeReportingContext> action) =>
         analysisContext.RegisterCompilationStartAction(WrapTreeAction(action, generatedCodeRecognizer));
 
     /// <summary>
@@ -104,12 +104,12 @@ public sealed class SonarAnalysisContext
     /// * For all unchanged files under PR analysis.
     /// This should NOT be used for actions that report issues.
     /// </summary>
-    public void RegisterNodeActionInAllFiles<TSyntaxKind>(Action<SonarSyntaxNodeAnalysisContext> action, params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct =>
+    public void RegisterNodeActionInAllFiles<TSyntaxKind>(Action<SonarSyntaxNodeReportingContext> action, params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct =>
         analysisContext.RegisterSyntaxNodeAction(c => action(new(this, c)), syntaxKinds);
 
-    public Action<CompilationStartAnalysisContext> WrapTreeAction(Action<SonarSyntaxTreeAnalysisContext> action, GeneratedCodeRecognizer generatedCodeRecognizer = null) =>
+    public Action<CompilationStartAnalysisContext> WrapTreeAction(Action<SonarSyntaxTreeReportingContext> action, GeneratedCodeRecognizer generatedCodeRecognizer = null) =>
         c => c.RegisterSyntaxTreeAction(
-            treeContext => Execute<SonarSyntaxTreeAnalysisContext, SyntaxTreeAnalysisContext>(new(this, treeContext, c.Compilation), action, treeContext.Tree, generatedCodeRecognizer));
+            treeContext => Execute<SonarSyntaxTreeReportingContext, SyntaxTreeAnalysisContext>(new(this, treeContext, c.Compilation), action, treeContext.Tree, generatedCodeRecognizer));
 
     /// <param name="sourceTree">Tree that is definitely known to be analyzed. Pass 'null' if the context doesn't know a specific tree to be analyzed, like a CompilationContext.</param>
     private void Execute<TSonarContext, TRoslynContext>(TSonarContext context, Action<TSonarContext> action, SyntaxTree sourceTree, GeneratedCodeRecognizer generatedCodeRecognizer = null)

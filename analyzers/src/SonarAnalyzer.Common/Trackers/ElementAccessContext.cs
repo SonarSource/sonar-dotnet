@@ -24,7 +24,7 @@ namespace SonarAnalyzer.Helpers
     {
         public Lazy<IPropertySymbol> InvokedPropertySymbol { get; }
 
-        public ElementAccessContext(SonarSyntaxNodeAnalysisContext context) : base(context) =>
+        public ElementAccessContext(SonarSyntaxNodeReportingContext context) : base(context) =>
             InvokedPropertySymbol = new Lazy<IPropertySymbol>(() => context.SemanticModel.GetSymbolInfo(context.Node).Symbol as IPropertySymbol);
     }
 }

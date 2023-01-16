@@ -121,7 +121,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.SimpleAssignmentExpression);
         }
 
-        private void CheckAlgorithmCreation(SonarSyntaxNodeAnalysisContext c, ITypeSymbol containingType, InvocationExpressionSyntax invocation)
+        private void CheckAlgorithmCreation(SonarSyntaxNodeReportingContext c, ITypeSymbol containingType, InvocationExpressionSyntax invocation)
         {
             var firstParam = invocation.ArgumentList.Get(0);
             if (firstParam == null || containingType == null)
@@ -139,7 +139,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private void CheckBouncyCastleEllipticCurve(SonarSyntaxNodeAnalysisContext c, ITypeSymbol containingType, InvocationExpressionSyntax invocation)
+        private void CheckBouncyCastleEllipticCurve(SonarSyntaxNodeReportingContext c, ITypeSymbol containingType, InvocationExpressionSyntax invocation)
         {
             var firstParam = invocation.ArgumentList.Get(0);
             if (firstParam == null || containingType == null || !containingType.IsAny(BouncyCastleCurveClasses))
@@ -153,7 +153,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private void CheckSystemSecurityEllipticCurve(SonarSyntaxNodeAnalysisContext c, ITypeSymbol containingType, SyntaxNode syntaxElement, ArgumentListSyntax argumentList)
+        private void CheckSystemSecurityEllipticCurve(SonarSyntaxNodeReportingContext c, ITypeSymbol containingType, SyntaxNode syntaxElement, ArgumentListSyntax argumentList)
         {
             var firstParam = argumentList.Get(0);
             if (firstParam == null || containingType == null || !containingType.DerivesFromAny(SystemSecurityCryptographyCurveClasses))
@@ -167,7 +167,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private void CheckCurveNameKeyLength(SonarSyntaxNodeAnalysisContext c, SyntaxNode syntaxElement, string curveName)
+        private void CheckCurveNameKeyLength(SonarSyntaxNodeReportingContext c, SyntaxNode syntaxElement, string curveName)
         {
             var match = namedEllipticCurve.Match(curveName);
             if (match.Success && int.TryParse(match.Groups["KeyLength"].Value, out var keyLength) && keyLength < MinimalEllipticCurveKeyLength)
@@ -176,7 +176,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckSystemSecurityCryptographyAlgorithms(SonarSyntaxNodeAnalysisContext c, ITypeSymbol containingType, IObjectCreation objectCreation)
+        private static void CheckSystemSecurityCryptographyAlgorithms(SonarSyntaxNodeReportingContext c, ITypeSymbol containingType, IObjectCreation objectCreation)
         {
             // DSACryptoServiceProvider is always noncompliant as it has a max key size of 1024
             // RSACryptoServiceProvider() and RSACryptoServiceProvider(System.Security.Cryptography.CspParameters) constructors are noncompliants as they have a default key size of 1024
@@ -192,14 +192,14 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static bool HasDefaultSize(SonarSyntaxNodeAnalysisContext c, ArgumentListSyntax argumentList) =>
+        private static bool HasDefaultSize(SonarSyntaxNodeReportingContext c, ArgumentListSyntax argumentList) =>
             argumentList == null
             || argumentList.Arguments.Count == 0
             || (argumentList.Arguments.Count == 1
                 && c.SemanticModel.GetTypeInfo(argumentList.Arguments[0].Expression).Type is ITypeSymbol type
                 && type.Is(KnownType.System_Security_Cryptography_CspParameters));
 
-        private static void CheckGenericDsaRsaCryptographyAlgorithms(SonarSyntaxNodeAnalysisContext c, ITypeSymbol containingType, SyntaxNode syntaxElement, SyntaxNode keyLengthSyntax)
+        private static void CheckGenericDsaRsaCryptographyAlgorithms(SonarSyntaxNodeReportingContext c, ITypeSymbol containingType, SyntaxNode syntaxElement, SyntaxNode keyLengthSyntax)
         {
             if (containingType.DerivesFromAny(SystemSecurityCryptographyDsaRsa) && keyLengthSyntax != null && IsInvalidCommonKeyLength(c, keyLengthSyntax))
             {
@@ -207,7 +207,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckBouncyCastleParametersGenerators(SonarSyntaxNodeAnalysisContext c, ITypeSymbol containingType, InvocationExpressionSyntax invocation)
+        private static void CheckBouncyCastleParametersGenerators(SonarSyntaxNodeReportingContext c, ITypeSymbol containingType, InvocationExpressionSyntax invocation)
         {
             if (invocation.ArgumentList.Get(0) is { } firstParam
                 && containingType != null
@@ -219,7 +219,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckBouncyCastleKeyGenerationParameters(SonarSyntaxNodeAnalysisContext c, ITypeSymbol containingType, IObjectCreation objectCreation)
+        private static void CheckBouncyCastleKeyGenerationParameters(SonarSyntaxNodeReportingContext c, ITypeSymbol containingType, IObjectCreation objectCreation)
         {
             if (objectCreation.ArgumentList.Get(2) is { } keyLengthParam
                 && containingType.Is(KnownType.Org_BouncyCastle_Crypto_Parameters_RsaKeyGenerationParameters)
@@ -229,7 +229,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static bool IsInvalidCommonKeyLength(SonarSyntaxNodeAnalysisContext c, SyntaxNode keyLengthSyntax) =>
+        private static bool IsInvalidCommonKeyLength(SonarSyntaxNodeReportingContext c, SyntaxNode keyLengthSyntax) =>
             keyLengthSyntax.FindConstantValue(c.SemanticModel) is int keyLength && keyLength < MinimalCommonKeyLength;
 
         private static string GetMethodName(InvocationExpressionSyntax invocationExpression) =>

@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Any(p => p.Identifier.ValueText == literalExpression.Token.ValueText)
             ?? false;
 
-        protected override bool IsInnerInstance(SonarSyntaxNodeAnalysisContext context) =>
+        protected override bool IsInnerInstance(SonarSyntaxNodeReportingContext context) =>
             context.Node.Ancestors().Any(x =>
                 x.IsAnyKind(TypeDeclarationSyntaxKinds)
                 || (x.IsKind(SyntaxKind.CompilationUnit) && x.ChildNodes().Any(y => y.IsKind(SyntaxKind.GlobalStatement))));
@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override SyntaxToken LiteralToken(LiteralExpressionSyntax literal) =>
             literal.Token;
 
-        protected override bool IsNamedTypeOrTopLevelMain(SonarSyntaxNodeAnalysisContext context) =>
+        protected override bool IsNamedTypeOrTopLevelMain(SonarSyntaxNodeReportingContext context) =>
             IsNamedType(context) || context.IsTopLevelMain();
     }
 }

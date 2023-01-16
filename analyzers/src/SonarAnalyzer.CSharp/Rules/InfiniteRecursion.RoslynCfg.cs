@@ -27,7 +27,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         private sealed class RoslynChecker : IChecker
         {
-            public void CheckForNoExitProperty(SonarSyntaxNodeAnalysisContext c, PropertyDeclarationSyntax property, IPropertySymbol propertySymbol)
+            public void CheckForNoExitProperty(SonarSyntaxNodeReportingContext c, PropertyDeclarationSyntax property, IPropertySymbol propertySymbol)
             {
                 if (property.ExpressionBody?.Expression != null)
                 {
@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
 
-            public void CheckForNoExitMethod(SonarSyntaxNodeAnalysisContext c, CSharpSyntaxNode body, SyntaxToken identifier, IMethodSymbol symbol)
+            public void CheckForNoExitMethod(SonarSyntaxNodeReportingContext c, CSharpSyntaxNode body, SyntaxToken identifier, IMethodSymbol symbol)
             {
                 if (body.CreateCfg(c.SemanticModel, c.Cancel) is { } cfg)
                 {

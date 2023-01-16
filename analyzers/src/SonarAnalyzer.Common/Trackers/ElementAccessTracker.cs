@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Helpers.Trackers
             context => context.InvokedPropertySymbol.Value != null
                        && context.InvokedPropertySymbol.Value.ContainingType.DerivesOrImplementsAny(types.ToImmutableArray());
 
-        protected override ElementAccessContext CreateContext(SonarSyntaxNodeAnalysisContext context) =>
+        protected override ElementAccessContext CreateContext(SonarSyntaxNodeReportingContext context) =>
             new ElementAccessContext(context);
     }
 }

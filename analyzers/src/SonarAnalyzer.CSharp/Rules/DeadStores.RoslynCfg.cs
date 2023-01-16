@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             private readonly RoslynLiveVariableAnalysis lva;
 
-            public RoslynChecker(SonarSyntaxNodeAnalysisContext context, RoslynLiveVariableAnalysis lva) : base(context, lva) =>
+            public RoslynChecker(SonarSyntaxNodeReportingContext context, RoslynLiveVariableAnalysis lva) : base(context, lva) =>
                 this.lva = lva;
 
             protected override State CreateState(BasicBlock block) =>

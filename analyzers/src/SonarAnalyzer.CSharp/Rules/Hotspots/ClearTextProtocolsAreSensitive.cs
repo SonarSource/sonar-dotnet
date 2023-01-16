@@ -125,7 +125,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 context.RegisterNodeAction(VisitAssignments, SyntaxKind.SimpleAssignmentExpression);
             });
 
-        private void VisitObjectCreation(SonarSyntaxNodeAnalysisContext context)
+        private void VisitObjectCreation(SonarSyntaxNodeReportingContext context)
         {
             var objectCreation = ObjectCreationFactory.Create(context.Node);
 
@@ -139,7 +139,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private void VisitInvocationExpression(SonarSyntaxNodeAnalysisContext context)
+        private void VisitInvocationExpression(SonarSyntaxNodeReportingContext context)
         {
             var invocation = (InvocationExpressionSyntax)context.Node;
             if (telnetRegexForIdentifier.IsMatch(invocation.Expression.ToString()))
@@ -148,7 +148,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void VisitAssignments(SonarSyntaxNodeAnalysisContext context)
+        private static void VisitAssignments(SonarSyntaxNodeReportingContext context)
         {
             var assignment = (AssignmentExpressionSyntax)context.Node;
             if (assignment.Left is MemberAccessExpressionSyntax memberAccess
@@ -160,7 +160,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private void VisitStringExpressions(SonarSyntaxNodeAnalysisContext c)
+        private void VisitStringExpressions(SonarSyntaxNodeReportingContext c)
         {
             if (GetUnsafeProtocol(c.Node, c.SemanticModel) is { } unsafeProtocol)
             {

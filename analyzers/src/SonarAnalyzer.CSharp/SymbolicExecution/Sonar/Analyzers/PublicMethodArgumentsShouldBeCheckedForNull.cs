@@ -33,7 +33,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
 
         public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(S3900);
 
-        public ISymbolicExecutionAnalysisContext CreateContext(SonarSyntaxNodeAnalysisContext context, SonarExplodedGraph explodedGraph) =>
+        public ISymbolicExecutionAnalysisContext CreateContext(SonarSyntaxNodeReportingContext context, SonarExplodedGraph explodedGraph) =>
             new AnalysisContext(context, explodedGraph);
 
         private static void CollectMemberAccesses(MemberAccessingEventArgs args, ISet<IdentifierNameSyntax> identifiers, SemanticModel semanticModel)
@@ -51,11 +51,11 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
         {
             public bool SupportsPartialResults => true;
 
-            private readonly SonarSyntaxNodeAnalysisContext context;
+            private readonly SonarSyntaxNodeReportingContext context;
             private readonly HashSet<IdentifierNameSyntax> identifiers = new();
             private readonly NullPointerDereference.NullPointerCheck nullPointerCheck;
 
-            public AnalysisContext(SonarSyntaxNodeAnalysisContext context, SonarExplodedGraph explodedGraph)
+            public AnalysisContext(SonarSyntaxNodeReportingContext context, SonarExplodedGraph explodedGraph)
             {
                 if (!GetMethodSymbol(context).IsPubliclyAccessible())
                 {
@@ -89,7 +89,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
             private static bool IsArgumentOfConstructorInitializer(SyntaxNode identifier) =>
                 identifier.FirstAncestorOrSelf<ConstructorInitializerSyntax>() != null;
 
-            private static ISymbol GetMethodSymbol(SonarSyntaxNodeAnalysisContext context) =>
+            private static ISymbol GetMethodSymbol(SonarSyntaxNodeReportingContext context) =>
                 context.SemanticModel.GetSymbolInfo(context.Node).Symbol ?? context.SemanticModel.GetDeclaredSymbol(context.Node);
         }
     }

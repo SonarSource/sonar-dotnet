@@ -60,7 +60,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterNodeAction(c => ProcessVariableDesignation(c, ((ListPatternSyntaxWrapper)c.Node).Designation), SyntaxKindEx.ListPattern);
         }
 
-        private static void ProcessVariableDesignation(SonarSyntaxNodeAnalysisContext context, VariableDesignationSyntaxWrapper variableDesignation)
+        private static void ProcessVariableDesignation(SonarSyntaxNodeReportingContext context, VariableDesignationSyntaxWrapper variableDesignation)
         {
             if (variableDesignation.AllVariables() is { Length: > 0 } variables
                 && context.ContainingSymbol.ContainingType is { } containingType
@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void ProcessVariableDeclaration(SonarSyntaxNodeAnalysisContext context, VariableDeclarationSyntax variableDeclaration)
+        private static void ProcessVariableDeclaration(SonarSyntaxNodeReportingContext context, VariableDeclarationSyntax variableDeclaration)
         {
             if (variableDeclaration is { Variables: { Count: > 0 } variables }
                 && context.ContainingSymbol.ContainingType is { } containingType
@@ -86,7 +86,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void ReportOnVariableMatchingField(SonarSyntaxNodeAnalysisContext context, IEnumerable<ISymbol> members, SyntaxToken identifier)
+        private static void ReportOnVariableMatchingField(SonarSyntaxNodeReportingContext context, IEnumerable<ISymbol> members, SyntaxToken identifier)
         {
             if (members.FirstOrDefault(m => m.Name == identifier.ValueText) is { } matchingMember)
             {

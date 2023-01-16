@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSymbolAction(RaiseOnUninvokedEventDeclaration, SymbolKind.NamedType);
 
-        private void RaiseOnUninvokedEventDeclaration(SonarSymbolAnalysisContext context)
+        private void RaiseOnUninvokedEventDeclaration(SonarSymbolReportingContext context)
         {
             var namedType = (INamedTypeSymbol)context.Symbol;
             if (!namedType.IsClassOrStruct() || namedType.ContainingType != null)

@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.EventDeclaration);
         }
 
-        private static void ReportOnIssue<TMemberSyntax>(SonarSyntaxNodeAnalysisContext analysisContext,
+        private static void ReportOnIssue<TMemberSyntax>(SonarSyntaxNodeReportingContext analysisContext,
                                                          Func<TMemberSyntax, ExplicitInterfaceSpecifierSyntax> getExplicitInterfaceSpecifier,
                                                          Func<TMemberSyntax, SyntaxToken> getIdentifierName,
                                                          Func<TMemberSyntax, TMemberSyntax, bool> areMembersEquivalent)

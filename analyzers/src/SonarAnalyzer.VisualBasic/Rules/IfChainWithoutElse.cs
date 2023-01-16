@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             ifSyntax.ElseIfBlocks.Any()
             && (ifSyntax.ElseBlock == null || IsEmptyBlock(ifSyntax));
 
-        protected override Location IssueLocation(SonarSyntaxNodeAnalysisContext context, MultiLineIfBlockSyntax ifSyntax) =>
+        protected override Location IssueLocation(SonarSyntaxNodeReportingContext context, MultiLineIfBlockSyntax ifSyntax) =>
             ifSyntax.ElseIfBlocks.Last().ElseIfStatement.ElseIfKeyword.GetLocation();
 
         private static bool IsEmptyBlock(MultiLineIfBlockSyntax multiLineIfBlock) =>

@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules
             dllName.Equals(InteropName, StringComparison.OrdinalIgnoreCase)
             || dllName.Equals(InteropDllName, StringComparison.OrdinalIgnoreCase);
 
-        private void CheckForIssue(SonarSyntaxNodeAnalysisContext analysisContext)
+        private void CheckForIssue(SonarSyntaxNodeReportingContext analysisContext)
         {
             if (analysisContext.Node is TInvocationExpressionSyntax invocation
                 && Language.Syntax.NodeExpression(invocation) is { } directMethodCall

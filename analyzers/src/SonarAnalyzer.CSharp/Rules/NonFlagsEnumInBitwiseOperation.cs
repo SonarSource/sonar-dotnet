@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ExclusiveOrAssignmentExpression);
         }
 
-        private static void CheckExpressionWithOperator<T>(SonarSyntaxNodeAnalysisContext context, Func<T, SyntaxToken> operatorSelector)
+        private static void CheckExpressionWithOperator<T>(SonarSyntaxNodeReportingContext context, Func<T, SyntaxToken> operatorSelector)
             where T : SyntaxNode
         {
             if (context.SemanticModel.GetSymbolInfo(context.Node).Symbol is not IMethodSymbol { MethodKind: MethodKind.BuiltinOperator, ReturnType.TypeKind: TypeKind.Enum } operation

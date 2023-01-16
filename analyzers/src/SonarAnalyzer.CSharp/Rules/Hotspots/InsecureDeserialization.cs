@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKindEx.RecordStructDeclaration,
             SyntaxKind.StructDeclaration);
 
-        private static void ReportOnInsecureDeserializations(SonarSyntaxNodeAnalysisContext context, TypeDeclarationSyntax declaration, ITypeSymbol typeSymbol)
+        private static void ReportOnInsecureDeserializations(SonarSyntaxNodeReportingContext context, TypeDeclarationSyntax declaration, ITypeSymbol typeSymbol)
         {
             var implementsISerializable = ImplementsISerializable(typeSymbol);
             var implementsIDeserializationCallback = ImplementsIDeserializationCallback(typeSymbol);
@@ -83,7 +83,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
 
-            static void ReportIssue(SonarSyntaxNodeAnalysisContext context, ConstructorInfo constructor) =>
+            static void ReportIssue(SonarSyntaxNodeReportingContext context, ConstructorInfo constructor) =>
                 context.ReportIssue(Diagnostic.Create(Rule, constructor.GetReportLocation()));
         }
 

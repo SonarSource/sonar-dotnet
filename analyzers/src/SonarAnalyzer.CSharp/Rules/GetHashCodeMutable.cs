@@ -79,7 +79,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static SecondaryLocation CreateSecondaryLocation(SimpleNameSyntax identifierSyntax) =>
             new SecondaryLocation(identifierSyntax.GetLocation(), string.Format(SecondaryMessageFormat, identifierSyntax.Identifier.Text));
 
-        private static IEnumerable<IdentifierNameSyntax> GetAllFirstMutableFieldsUsed(SonarSyntaxNodeAnalysisContext context,
+        private static IEnumerable<IdentifierNameSyntax> GetAllFirstMutableFieldsUsed(SonarSyntaxNodeReportingContext context,
                                                                                       ICollection<IFieldSymbol> fieldsOfClass,
                                                                                       IEnumerable<IdentifierNameSyntax> identifiers)
         {

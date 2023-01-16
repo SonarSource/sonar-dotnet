@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules
                 },
                 SyntaxKinds);
 
-        private void VerifyParameters(SonarSyntaxNodeAnalysisContext context, TMethodDeclarationSyntax methodSyntax, IList<IParameterSymbol> expectedParameters, string expectedLocation)
+        private void VerifyParameters(SonarSyntaxNodeReportingContext context, TMethodDeclarationSyntax methodSyntax, IList<IParameterSymbol> expectedParameters, string expectedLocation)
         {
             foreach (var item in ParameterIdentifiers(methodSyntax)
                                     .Zip(expectedParameters, (actual, expected) => new { actual, expected })
@@ -68,7 +68,7 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        private void VerifyGenericParameters(SonarSyntaxNodeAnalysisContext context,
+        private void VerifyGenericParameters(SonarSyntaxNodeReportingContext context,
                                              TMethodDeclarationSyntax methodSyntax,
                                              IList<IParameterSymbol> actualParameters,
                                              IList<IParameterSymbol> expectedParameters,

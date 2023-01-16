@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 : paramGroups.Select(x => x.First().Identifier.Identifier.ValueText);
         }
 
-        protected override bool LeastLanguageVersionMatches(SonarSyntaxNodeAnalysisContext context) =>
+        protected override bool LeastLanguageVersionMatches(SonarSyntaxNodeReportingContext context) =>
             context.Compilation.IsAtLeastLanguageVersion(LanguageVersion.VisualBasic14);
 
         protected override bool IsArgumentExceptionCallingNameOf(SyntaxNode node, IEnumerable<string> arguments) =>

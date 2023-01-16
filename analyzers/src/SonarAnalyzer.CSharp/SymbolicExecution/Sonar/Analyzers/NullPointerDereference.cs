@@ -32,7 +32,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
 
         public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(S2259);
 
-        public ISymbolicExecutionAnalysisContext CreateContext(SonarSyntaxNodeAnalysisContext context, SonarExplodedGraph explodedGraph) =>
+        public ISymbolicExecutionAnalysisContext CreateContext(SonarSyntaxNodeReportingContext context, SonarExplodedGraph explodedGraph) =>
             new AnalysisContext(context, explodedGraph);
 
         internal sealed class NullPointerCheck : ExplodedGraphCheck
@@ -192,11 +192,11 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
 
         private sealed class AnalysisContext : ISymbolicExecutionAnalysisContext
         {
-            private readonly SonarSyntaxNodeAnalysisContext context;
+            private readonly SonarSyntaxNodeReportingContext context;
             private readonly HashSet<IdentifierNameSyntax> nullIdentifiers = new();
             private readonly NullPointerCheck nullPointerCheck;
 
-            public AnalysisContext(SonarSyntaxNodeAnalysisContext context, SonarExplodedGraph explodedGraph)
+            public AnalysisContext(SonarSyntaxNodeReportingContext context, SonarExplodedGraph explodedGraph)
             {
                 this.context = context;
 

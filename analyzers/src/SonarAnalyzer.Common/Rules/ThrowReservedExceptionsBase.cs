@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules
                 KnownType.System_OutOfMemoryException
             );
 
-        protected void ReportReservedExceptionCreation(SonarSyntaxNodeAnalysisContext context,
+        protected void ReportReservedExceptionCreation(SonarSyntaxNodeReportingContext context,
             SyntaxNode throwStatementExpression)
         {
             if (throwStatementExpression == null ||

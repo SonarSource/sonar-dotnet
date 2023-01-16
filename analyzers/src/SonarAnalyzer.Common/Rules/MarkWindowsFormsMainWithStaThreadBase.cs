@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterNodeAction(Language.GeneratedCodeRecognizer, Action, SyntaxKinds);
 
-        private void Action(SonarSyntaxNodeAnalysisContext c)
+        private void Action(SonarSyntaxNodeReportingContext c)
         {
             var methodDeclaration = (TMethodSyntax)c.Node;
 

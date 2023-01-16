@@ -28,19 +28,19 @@ namespace SonarAnalyzer.Helpers
         public Diagnostic Diagnostic { get; }
         public Compilation Compilation { get; }
 
-        public ReportingContext(SonarSyntaxNodeAnalysisContext context, Diagnostic diagnostic)
+        public ReportingContext(SonarSyntaxNodeReportingContext context, Diagnostic diagnostic)
             : this(diagnostic, context.Context.ReportDiagnostic, context.Compilation, context.Tree) { }
 
-        public ReportingContext(SonarSyntaxTreeAnalysisContext context, Diagnostic diagnostic)
+        public ReportingContext(SonarSyntaxTreeReportingContext context, Diagnostic diagnostic)
             : this(diagnostic, context.Context.ReportDiagnostic, context.Compilation, context.Tree) { }
 
-        public ReportingContext(SonarCompilationAnalysisContext context, Diagnostic diagnostic)
+        public ReportingContext(SonarCompilationReportingContext context, Diagnostic diagnostic)
             : this(diagnostic, context.Context.ReportDiagnostic, context.Compilation, diagnostic.Location?.SourceTree ?? context.Tree) { }
 
-        public ReportingContext(SonarSymbolAnalysisContext context, Diagnostic diagnostic)
+        public ReportingContext(SonarSymbolReportingContext context, Diagnostic diagnostic)
             : this(diagnostic, context.Context.ReportDiagnostic, context.Compilation, diagnostic.Location?.SourceTree ?? context.Tree) { }
 
-        public ReportingContext(SonarCodeBlockAnalysisContext context, Diagnostic diagnostic)
+        public ReportingContext(SonarCodeBlockReportingContext context, Diagnostic diagnostic)
             : this(diagnostic, context.Context.ReportDiagnostic, context.Compilation, context.Tree) { }
 
         private ReportingContext(Diagnostic diagnostic,
