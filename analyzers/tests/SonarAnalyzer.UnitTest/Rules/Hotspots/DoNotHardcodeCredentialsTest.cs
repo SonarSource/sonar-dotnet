@@ -136,7 +136,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             var compilation = CreateCompilation(language);
             foreach (var path in paths)
             {
-                DiagnosticVerifier.VerifyExternalFile(compilation, analyzer, path, TestHelper.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, path));
+                DiagnosticVerifier.VerifyExternalFile(compilation, analyzer, path, AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, path));
             }
         }
 

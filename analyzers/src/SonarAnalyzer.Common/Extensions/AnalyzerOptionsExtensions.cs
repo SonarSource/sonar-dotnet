@@ -37,7 +37,6 @@ public static class AnalyzerOptionsExtensions
     public static XElement[] ParseSonarLintXmlSettings(this AnalyzerOptions options) =>
         options.SonarLintXml() is { } sonarLintXml ? PropertiesHelper.ParseXmlSettings(sonarLintXml.GetText()) : Array.Empty<XElement>();
 
-
     private static AdditionalText AdditionalFile(this AnalyzerOptions options, string fileName) =>
         options.AdditionalFiles.FirstOrDefault(x => x.Path is not null && Path.GetFileName(x.Path).Equals(fileName, StringComparison.OrdinalIgnoreCase));
 }

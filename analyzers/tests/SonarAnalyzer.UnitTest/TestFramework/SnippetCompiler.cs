@@ -20,11 +20,9 @@
 
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.VisualBasic;
-using Moq;
 using SonarAnalyzer.AnalysisContext;
 using SonarAnalyzer.Common;
 using CS = Microsoft.CodeAnalysis.CSharp.Syntax;
-using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext;
 using VB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
@@ -144,9 +142,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public SonarSyntaxNodeAnalysisContext CreateAnalysisContext(SyntaxNode node)
         {
-            var analysisContext = new SonarAnalysisContext(Mock.Of<RoslynAnalysisContext>(), Enumerable.Empty<DiagnosticDescriptor>());
             var nodeContext =  new SyntaxNodeAnalysisContext(node, SemanticModel, null, null, null, default);
-            return new(analysisContext, nodeContext);
+            return new(AnalysisScaffolding.CreateSonarAnalysisContext(), nodeContext);
         }
 
         private static bool HasCompilationErrors(Compilation compilation) =>

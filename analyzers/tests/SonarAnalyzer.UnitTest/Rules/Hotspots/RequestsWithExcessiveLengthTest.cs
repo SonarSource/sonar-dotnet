@@ -104,7 +104,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 CreateCompilation(),
                 new CS.RequestsWithExcessiveLength(),
                 webConfigPath,
-                TestHelper.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath));
+                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath));
         }
 
         [TestMethod]
@@ -118,7 +118,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 CreateCompilation(),
                 new CS.RequestsWithExcessiveLength(),
                 corruptFilePath,
-                TestHelper.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, corruptFilePath, nonExistingFilePath));
+                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, corruptFilePath, nonExistingFilePath));
         }
 
         private static string GetWebConfigPath(string rootFolder) => Path.Combine(rootFolder, "Web.config");

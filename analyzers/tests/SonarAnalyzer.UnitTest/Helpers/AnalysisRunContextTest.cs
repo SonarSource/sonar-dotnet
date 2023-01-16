@@ -61,7 +61,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void AnalysisRunContext_ReturnsSameCollectionOfDiagnosticDescriptors()
         {
             // Arrange
-            var collection = new List<DiagnosticDescriptor> { TestHelper.CreateDescriptor("id") };
+            var collection = new List<DiagnosticDescriptor> { AnalysisScaffolding.CreateDescriptor("id") };
             var ctx = new AnalysisRunContext(null, collection);
 
             // Act & Assert

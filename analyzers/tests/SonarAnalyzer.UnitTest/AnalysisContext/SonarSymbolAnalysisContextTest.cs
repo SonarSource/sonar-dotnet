@@ -20,9 +20,7 @@
 
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Moq;
 using SonarAnalyzer.AnalysisContext;
-using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext;
 
 namespace SonarAnalyzer.UnitTest.AnalysisContext;
 
@@ -32,13 +30,12 @@ public class SonarSymbolAnalysisContextTest
     [TestMethod]
     public void Properties_ArePropagated()
     {
-        var analysisContext = new SonarAnalysisContext(Mock.Of<RoslynAnalysisContext>(), Enumerable.Empty<DiagnosticDescriptor>());
         var cancel = new CancellationToken(true);
         var (tree, model) = TestHelper.CompileCS("public class Sample { }");
-        var options = TestHelper.CreateOptions(null);   // FIXME: Remove null argument in #6590
+        var options = AnalysisScaffolding.CreateOptions(null);   // FIXME: Remove null argument in #6590
         var symbol = model.GetDeclaredSymbol(tree.GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>().Single());
         var context = new SymbolAnalysisContext(symbol, model.Compilation, options, _ => { }, _ => true, cancel);
-        var sut = new SonarSymbolAnalysisContext(analysisContext, context);
+        var sut = new SonarSymbolAnalysisContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context);
 
         sut.Tree.Should().Be(tree);
         sut.Compilation.Should().Be(model.Compilation);

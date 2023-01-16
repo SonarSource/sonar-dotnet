@@ -20,7 +20,6 @@
 
 using Moq;
 using SonarAnalyzer.AnalysisContext;
-using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext;
 
 namespace SonarAnalyzer.UnitTest.AnalysisContext;
 
@@ -30,14 +29,13 @@ public class SonarSyntaxNodeAnalysisContextTest
     [TestMethod]
     public void Properties_ArePropagated()
     {
-        var analysisContext = new SonarAnalysisContext(Mock.Of<RoslynAnalysisContext>(), Enumerable.Empty<DiagnosticDescriptor>());
         var cancel = new CancellationToken(true);
         var (tree, model) = TestHelper.CompileCS("// Nothing to see here");
         var node = tree.GetRoot();
-        var options = TestHelper.CreateOptions(null);
+        var options = AnalysisScaffolding.CreateOptions();
         var containingSymbol = Mock.Of<ISymbol>();
         var context = new SyntaxNodeAnalysisContext(node, containingSymbol, model, options, _ => { }, _ => true, cancel);
-        var sut = new SonarSyntaxNodeAnalysisContext(analysisContext, context);
+        var sut = new SonarSyntaxNodeAnalysisContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context);
 
         sut.Tree.Should().Be(tree);
         sut.Compilation.Should().Be(model.Compilation);
@@ -55,14 +53,14 @@ public class SonarSyntaxNodeAnalysisContextTest
     [DataRow(false)]
     public void ReportIssue_TreeNotInCompilation_DoNotReport(bool reportOnCorrectTree)
     {
-        var analysisContext = new SonarAnalysisContext(Mock.Of<RoslynAnalysisContext>(), Enumerable.Empty<DiagnosticDescriptor>());
+        var analysisContext = AnalysisScaffolding.CreateSonarAnalysisContext();
         var (tree, model) = TestHelper.CompileCS("// Nothing to see here");
         var nodeFromCorrectCompilation = tree.GetRoot();
         var nodeFromAnotherCompilation = TestHelper.CompileCS("// This is another Compilation with another Tree").Tree.GetRoot();
-        var rule = TestHelper.CreateDescriptor("Sxxx", DiagnosticDescriptorFactory.MainSourceScopeTag);
+        var rule = AnalysisScaffolding.CreateDescriptorMain();
         var node = tree.GetRoot();
         var wasReported = false;
-        var context = new SyntaxNodeAnalysisContext(node, model, TestHelper.CreateOptions(null), _ => wasReported = true, _ => true, default);
+        var context = new SyntaxNodeAnalysisContext(node, model, AnalysisScaffolding.CreateOptions(), _ => wasReported = true, _ => true, default);
         var sut = new SonarSyntaxNodeAnalysisContext(analysisContext, context);
         try
         {

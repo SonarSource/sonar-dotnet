@@ -64,7 +64,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
             builder.AddPaths("CookieShouldBeSecure_WithWebConfig.cs")
                 .AddReferences(MetadataReferenceFacade.SystemWeb)
-                .WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath))
+                .WithSonarProjectConfigPath(AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath))
                 .Verify();
         }
 
@@ -77,7 +77,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             var webConfigPath = Path.Combine(root, WebConfig);
             builder.AddPaths("CookieShouldBeSecure.cs")
                 .AddReferences(MetadataReferenceFacade.SystemWeb)
-                .WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath))
+                .WithSonarProjectConfigPath(AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath))
                 .Verify();
         }
 

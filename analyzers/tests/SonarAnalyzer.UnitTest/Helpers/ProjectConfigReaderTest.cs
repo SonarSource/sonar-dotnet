@@ -109,7 +109,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void AnalysisConfig_LoadsConfigFromDisk()
         {
-            var path = TestHelper.CreateSonarProjectConfigWithUnchangedFiles(TestContext);     // With AnalysisConfigPath that exists
+            var path = AnalysisScaffolding.CreateSonarProjectConfigWithUnchangedFiles(TestContext);     // With AnalysisConfigPath that exists
             var sut = CreateProjectConfigReader(path);
             sut.AnalysisConfig.Should().NotBeNull();
         }
