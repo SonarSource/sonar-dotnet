@@ -106,9 +106,6 @@ internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
         return whenNotNull;
     }
 
-    public override bool IsStatic(SyntaxNode node) =>
-        Cast<MethodBlockSyntax>(node).IsShared();
-
     public override SyntaxNode RemoveParentheses(SyntaxNode node) =>
         node.RemoveParentheses();
 
@@ -117,4 +114,7 @@ internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
 
     public override bool TryGetInterpolatedTextValue(SyntaxNode node, SemanticModel semanticModel, out string interpolatedValue) =>
         Cast<InterpolatedStringExpressionSyntax>(node).TryGetInterpolatedTextValue(semanticModel, out interpolatedValue);
+
+    public override bool IsStatic(SyntaxNode node) =>
+        Cast<MethodBlockSyntax>(node).IsShared();
 }

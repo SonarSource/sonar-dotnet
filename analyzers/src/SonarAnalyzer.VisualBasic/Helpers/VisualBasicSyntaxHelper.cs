@@ -190,7 +190,7 @@ namespace SonarAnalyzer.Helpers
         public static string StringValue(this SyntaxNode node, SemanticModel semanticModel) =>
             node switch
             {
-                LiteralExpressionSyntax literal when literal.IsAnyKind(SyntaxKind.StringLiteralExpression) => literal.Token.ValueText,
+                LiteralExpressionSyntax literal when literal.IsKind(SyntaxKind.StringLiteralExpression) => literal.Token.ValueText,
                 InterpolatedStringExpressionSyntax expression => expression.TryGetInterpolatedTextValue(semanticModel, out var interpolatedValue) ? interpolatedValue : expression.GetContentsText(),
                 _ => null
             };
