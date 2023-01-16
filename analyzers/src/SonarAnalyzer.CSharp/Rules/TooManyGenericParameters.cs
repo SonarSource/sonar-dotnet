@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarParametrizedAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var typeDeclaration = (TypeDeclarationSyntax)c.Node;
@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKindEx.RecordClassDeclaration,
                 SyntaxKindEx.RecordStructDeclaration);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var methodDeclaration = MethodDeclarationFactory.Create(c.Node);

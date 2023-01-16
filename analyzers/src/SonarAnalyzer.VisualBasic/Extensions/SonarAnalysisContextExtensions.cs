@@ -22,30 +22,30 @@ namespace SonarAnalyzer.Extensions
 {
     public static class SonarAnalysisContextExtensions
     {
-        public static void RegisterSyntaxNodeActionInNonGenerated<TSyntaxKind>(this SonarAnalysisContext context,
+        public static void RegisterNodeAction<TSyntaxKind>(this SonarAnalysisContext context,
                                                                                Action<SonarSyntaxNodeAnalysisContext> action,
                                                                                params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct =>
-            context.RegisterSyntaxNodeActionInNonGenerated(VisualBasicGeneratedCodeRecognizer.Instance, action, syntaxKinds);
+            context.RegisterNodeAction(VisualBasicGeneratedCodeRecognizer.Instance, action, syntaxKinds);
 
-        public static void RegisterSyntaxNodeActionInNonGenerated<TSyntaxKind>(this SonarParametrizedAnalysisContext context,
+        public static void RegisterNodeAction<TSyntaxKind>(this SonarParametrizedAnalysisContext context,
                                                                                Action<SonarSyntaxNodeAnalysisContext> action,
                                                                                params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct =>
-            context.RegisterSyntaxNodeActionInNonGenerated(VisualBasicGeneratedCodeRecognizer.Instance, action, syntaxKinds);
+            context.RegisterNodeAction(VisualBasicGeneratedCodeRecognizer.Instance, action, syntaxKinds);
 
-        public static void RegisterSyntaxNodeActionInNonGenerated<TSyntaxKind>(this SonarCompilationStartAnalysisContext context,
+        public static void RegisterNodeAction<TSyntaxKind>(this SonarCompilationStartAnalysisContext context,
                                                                                Action<SonarSyntaxNodeAnalysisContext> action,
                                                                                params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct =>
-            context.RegisterSyntaxNodeActionInNonGenerated(VisualBasicGeneratedCodeRecognizer.Instance, action, syntaxKinds);
+            context.RegisterNodeAction(VisualBasicGeneratedCodeRecognizer.Instance, action, syntaxKinds);
 
-        public static void RegisterSyntaxTreeActionInNonGenerated(this SonarAnalysisContext context, Action<SonarSyntaxTreeAnalysisContext> action) =>
-            context.RegisterSyntaxTreeActionInNonGenerated(VisualBasicGeneratedCodeRecognizer.Instance, action);
+        public static void RegisterTreeAction(this SonarAnalysisContext context, Action<SonarSyntaxTreeAnalysisContext> action) =>
+            context.RegisterTreeAction(VisualBasicGeneratedCodeRecognizer.Instance, action);
 
-        public static void RegisterSyntaxTreeActionInNonGenerated(this SonarParametrizedAnalysisContext context, Action<SonarSyntaxTreeAnalysisContext> action) =>
-            context.RegisterSyntaxTreeActionInNonGenerated(VisualBasicGeneratedCodeRecognizer.Instance, action);
+        public static void RegisterTreeAction(this SonarParametrizedAnalysisContext context, Action<SonarSyntaxTreeAnalysisContext> action) =>
+            context.RegisterTreeAction(VisualBasicGeneratedCodeRecognizer.Instance, action);
 
-        public static void RegisterCodeBlockStartActionInNonGenerated<TSyntaxKind>(this SonarAnalysisContext context, Action<SonarCodeBlockStartAnalysisContext<TSyntaxKind>> action)
+        public static void RegisterCodeBlockStartAction<TSyntaxKind>(this SonarAnalysisContext context, Action<SonarCodeBlockStartAnalysisContext<TSyntaxKind>> action)
             where TSyntaxKind : struct =>
-            context.RegisterCodeBlockStartActionInNonGenerated(VisualBasicGeneratedCodeRecognizer.Instance, action);
+            context.RegisterCodeBlockStartAction(VisualBasicGeneratedCodeRecognizer.Instance, action);
 
         public static void ReportIssue(this SonarCompilationAnalysisContext context, Diagnostic diagnostic) =>
             context.ReportIssue(VisualBasicGeneratedCodeRecognizer.Instance, diagnostic);

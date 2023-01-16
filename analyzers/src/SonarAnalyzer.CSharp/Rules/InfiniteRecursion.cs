@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var method = (MethodDeclarationSyntax)c.Node;
@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.MethodDeclaration);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var function = (LocalFunctionStatementSyntaxWrapper)c.Node;
@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKindEx.LocalFunctionStatement);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var @operator = (OperatorDeclarationSyntax)c.Node;
@@ -63,7 +63,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.OperatorDeclaration);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var property = (PropertyDeclarationSyntax)c.Node;

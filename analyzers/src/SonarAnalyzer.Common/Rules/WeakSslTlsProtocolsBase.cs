@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules
         protected WeakSslTlsProtocolsBase() : base(DiagnosticId) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 Language.GeneratedCodeRecognizer,
                 c =>
                 {

@@ -50,7 +50,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
             protected override void Initialize(SonarAnalysisContext context) =>
-                context.RegisterSyntaxNodeActionInNonGenerated(CSharpGeneratedCodeRecognizer.Instance, c =>
+                context.RegisterNodeAction(CSharpGeneratedCodeRecognizer.Instance, c =>
                 {
                     // Duplicate issues from different analyzer versions, see https://github.com/SonarSource/sonar-dotnet/issues/1109
                     c.ReportIssue(Diagnostic.Create(rule, c.Context.Node.GetLocation()));

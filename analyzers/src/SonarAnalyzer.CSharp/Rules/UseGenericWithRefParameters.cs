@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterNodeAction(c =>
             {
                 var methodDeclaration = (MethodDeclarationSyntax)c.Node;
                 var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);

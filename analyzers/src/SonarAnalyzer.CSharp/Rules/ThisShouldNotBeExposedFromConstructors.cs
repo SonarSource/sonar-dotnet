@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterCodeBlockStartActionInNonGenerated<SyntaxKind>(
+            context.RegisterCodeBlockStartAction<SyntaxKind>(
                 cbc =>
                 {
                     if (!IsInstanceConstructor(cbc.CodeBlock))
@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    cbc.RegisterSyntaxNodeAction(
+                    cbc.RegisterNodeAction(
                         c =>
                         {
                             var invocation = (InvocationExpressionSyntax)c.Node;
@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             }
                         },
                         SyntaxKind.InvocationExpression);
-                    cbc.RegisterSyntaxNodeAction(
+                    cbc.RegisterNodeAction(
                         c =>
                         {
                             var assignment = (AssignmentExpressionSyntax)c.Node;

@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules
             rule = Language.CreateDescriptor(DiagnosticId, MessageFormat, isEnabledByDefault: false);
 
         protected sealed override void Initialize(SonarParametrizedAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
+            context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
                 {
                     if (IsRoot(c.Node))
                     {

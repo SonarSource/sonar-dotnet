@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules
         protected EnumNameHasEnumSuffixBase() : base(DiagnosticId) { }
 
         protected sealed override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
+            context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
                 {
                     if (Language.Syntax.NodeIdentifier(c.Node) is { } identifier
                         && nameEndings.FirstOrDefault(ending => identifier.ValueText.EndsWith(ending, System.StringComparison.OrdinalIgnoreCase)) is { } nameEnding)

@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules
             // Ideally we would like to report at assembly/project level for the primary and all string instances for secondary
             // locations. The problem is that this scenario is not yet supported on SonarQube side.
             // Hence the decision to do like other languages, at class-level
-            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, ReportOnViolation, SyntaxKinds);
+            context.RegisterNodeAction(Language.GeneratedCodeRecognizer, ReportOnViolation, SyntaxKinds);
 
         protected virtual bool IsNamedTypeOrTopLevelMain(SonarSyntaxNodeAnalysisContext context) =>
             IsNamedType(context);

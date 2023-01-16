@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.System_Runtime_CompilerServices_CallerLineNumberAttribute);
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterNodeAction(c =>
             {
                 if (new CSharpMethodParameterLookup((InvocationExpressionSyntax)c.Node, c.SemanticModel) is { MethodSymbol: { } } methodParameterLookup
                     && methodParameterLookup.GetAllArgumentParameterMappings() is { } argumentMappings)

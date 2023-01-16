@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(FindPossibleViolations, SyntaxKind.ConstructorDeclaration);
+            context.RegisterNodeAction(FindPossibleViolations, SyntaxKind.ConstructorDeclaration);
         }
 
         private static void FindPossibleViolations(SonarSyntaxNodeAnalysisContext c)

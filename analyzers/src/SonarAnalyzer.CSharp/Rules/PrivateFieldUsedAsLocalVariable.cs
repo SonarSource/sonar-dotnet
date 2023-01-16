@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
         };
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterNodeAction(c =>
                 {
                     var typeDeclaration = (TypeDeclarationSyntax)c.Node;
                     if (c.IsRedundantPositionalRecordContext() || typeDeclaration.Modifiers.Any(SyntaxKind.PartialKeyword))

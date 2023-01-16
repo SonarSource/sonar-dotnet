@@ -32,25 +32,25 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => AnalyzeNode<VariableDeclarationSyntax>(c,
                     (semanticModel, variable) => semanticModel.GetDeclaredSymbol(variable.Variables[0]).GetSymbolType(),
                     variable => variable.Variables[0].Identifier.GetLocation()),
                 SyntaxKind.VariableDeclaration);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => AnalyzeNode<ParameterSyntax>(c,
                     (semanticModel, parameter) => semanticModel.GetDeclaredSymbol(parameter)?.Type,
                     parameter => parameter.Identifier.GetLocation()),
                 SyntaxKind.Parameter);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => AnalyzeNode<MethodDeclarationSyntax>(c,
                     (semanticModel, method) => semanticModel.GetDeclaredSymbol(method)?.ReturnType,
                     method => method.Identifier.GetLocation()),
                 SyntaxKind.MethodDeclaration);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => AnalyzeNode<PropertyDeclarationSyntax>(c,
                     (semanticModel, property) => semanticModel.GetDeclaredSymbol(property)?.Type,
                     property => property.Identifier.GetLocation()),

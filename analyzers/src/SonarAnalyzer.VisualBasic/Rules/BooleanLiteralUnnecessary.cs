@@ -39,14 +39,14 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckLogicalNot, SyntaxKind.NotExpression);
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckAndExpression, SyntaxKind.AndAlsoExpression);
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckAndExpression, SyntaxKind.AndExpression);
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckOrExpression, SyntaxKind.OrElseExpression);
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckOrExpression, SyntaxKind.OrExpression);
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckEquals, SyntaxKind.EqualsExpression);
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckNotEquals, SyntaxKind.NotEqualsExpression);
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckConditional, SyntaxKind.TernaryConditionalExpression);
+            context.RegisterNodeAction(CheckLogicalNot, SyntaxKind.NotExpression);
+            context.RegisterNodeAction(CheckAndExpression, SyntaxKind.AndAlsoExpression);
+            context.RegisterNodeAction(CheckAndExpression, SyntaxKind.AndExpression);
+            context.RegisterNodeAction(CheckOrExpression, SyntaxKind.OrElseExpression);
+            context.RegisterNodeAction(CheckOrExpression, SyntaxKind.OrExpression);
+            context.RegisterNodeAction(CheckEquals, SyntaxKind.EqualsExpression);
+            context.RegisterNodeAction(CheckNotEquals, SyntaxKind.NotEqualsExpression);
+            context.RegisterNodeAction(CheckConditional, SyntaxKind.TernaryConditionalExpression);
         }
 
         private void CheckLogicalNot(SonarSyntaxNodeAnalysisContext context)

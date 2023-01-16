@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarParametrizedAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterNodeAction(c =>
                 {
                     var localFunctionStatement = (LocalFunctionStatementSyntaxWrapper)c.Node;
                     if (localFunctionStatement.IsTopLevel()

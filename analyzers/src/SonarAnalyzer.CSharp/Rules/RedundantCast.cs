@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var castExpression = (CastExpressionSyntax)c.Node;
@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.CastExpression);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var castExpression = (BinaryExpressionSyntax)c.Node;
@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.AsExpression);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 CheckExtensionMethodInvocation,
                 SyntaxKind.InvocationExpression);
         }

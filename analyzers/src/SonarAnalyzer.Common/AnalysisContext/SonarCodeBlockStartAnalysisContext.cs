@@ -32,7 +32,7 @@ public sealed class SonarCodeBlockStartAnalysisContext<TSyntaxKind> : SonarAnaly
 
     internal SonarCodeBlockStartAnalysisContext(SonarAnalysisContext analysisContext, CodeBlockStartAnalysisContext<TSyntaxKind> context) : base(analysisContext, context) { }
 
-    public void RegisterSyntaxNodeAction(Action<SonarSyntaxNodeAnalysisContext> action, params TSyntaxKind[] symbolKinds) =>
+    public void RegisterNodeAction(Action<SonarSyntaxNodeAnalysisContext> action, params TSyntaxKind[] symbolKinds) =>
         Context.RegisterSyntaxNodeAction(x => action(new(AnalysisContext, x)), symbolKinds);
 
     public void RegisterCodeBlockEndAction(Action<SonarCodeBlockAnalysisContext> action) =>

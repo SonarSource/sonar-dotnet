@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
         public InsecureDeserialization(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterNodeAction(c =>
             {
                 var declaration = (TypeDeclarationSyntax)c.Node;
                 if (!c.IsRedundantPositionalRecordContext()

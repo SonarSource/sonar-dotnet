@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterNodeAction(c =>
                 {
                     var declaration = (ForEachStatementSyntax)c.Node;
 
@@ -48,16 +48,16 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.ForEachStatement);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(c => ProcessVariableDeclaration(c, ((LocalDeclarationStatementSyntax)c.Node).Declaration), SyntaxKind.LocalDeclarationStatement);
-            context.RegisterSyntaxNodeActionInNonGenerated(c => ProcessVariableDeclaration(c, ((ForStatementSyntax)c.Node).Declaration), SyntaxKind.ForStatement);
-            context.RegisterSyntaxNodeActionInNonGenerated(c => ProcessVariableDeclaration(c, ((UsingStatementSyntax)c.Node).Declaration), SyntaxKind.UsingStatement);
-            context.RegisterSyntaxNodeActionInNonGenerated(c => ProcessVariableDeclaration(c, ((FixedStatementSyntax)c.Node).Declaration), SyntaxKind.FixedStatement);
+            context.RegisterNodeAction(c => ProcessVariableDeclaration(c, ((LocalDeclarationStatementSyntax)c.Node).Declaration), SyntaxKind.LocalDeclarationStatement);
+            context.RegisterNodeAction(c => ProcessVariableDeclaration(c, ((ForStatementSyntax)c.Node).Declaration), SyntaxKind.ForStatement);
+            context.RegisterNodeAction(c => ProcessVariableDeclaration(c, ((UsingStatementSyntax)c.Node).Declaration), SyntaxKind.UsingStatement);
+            context.RegisterNodeAction(c => ProcessVariableDeclaration(c, ((FixedStatementSyntax)c.Node).Declaration), SyntaxKind.FixedStatement);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(c => ProcessVariableDesignation(c, ((DeclarationExpressionSyntaxWrapper)c.Node).Designation), SyntaxKindEx.DeclarationExpression);
-            context.RegisterSyntaxNodeActionInNonGenerated(c => ProcessVariableDesignation(c, ((RecursivePatternSyntaxWrapper)c.Node).Designation), SyntaxKindEx.RecursivePattern);
-            context.RegisterSyntaxNodeActionInNonGenerated(c => ProcessVariableDesignation(c, ((VarPatternSyntaxWrapper)c.Node).Designation), SyntaxKindEx.VarPattern);
-            context.RegisterSyntaxNodeActionInNonGenerated(c => ProcessVariableDesignation(c, ((DeclarationPatternSyntaxWrapper)c.Node).Designation), SyntaxKindEx.DeclarationPattern);
-            context.RegisterSyntaxNodeActionInNonGenerated(c => ProcessVariableDesignation(c, ((ListPatternSyntaxWrapper)c.Node).Designation), SyntaxKindEx.ListPattern);
+            context.RegisterNodeAction(c => ProcessVariableDesignation(c, ((DeclarationExpressionSyntaxWrapper)c.Node).Designation), SyntaxKindEx.DeclarationExpression);
+            context.RegisterNodeAction(c => ProcessVariableDesignation(c, ((RecursivePatternSyntaxWrapper)c.Node).Designation), SyntaxKindEx.RecursivePattern);
+            context.RegisterNodeAction(c => ProcessVariableDesignation(c, ((VarPatternSyntaxWrapper)c.Node).Designation), SyntaxKindEx.VarPattern);
+            context.RegisterNodeAction(c => ProcessVariableDesignation(c, ((DeclarationPatternSyntaxWrapper)c.Node).Designation), SyntaxKindEx.DeclarationPattern);
+            context.RegisterNodeAction(c => ProcessVariableDesignation(c, ((ListPatternSyntaxWrapper)c.Node).Designation), SyntaxKindEx.ListPattern);
         }
 
         private static void ProcessVariableDesignation(SonarSyntaxNodeAnalysisContext context, VariableDesignationSyntaxWrapper variableDesignation)

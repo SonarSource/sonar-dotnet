@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     ReportOnExplicitDelegateCreation(c);
@@ -60,9 +60,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(ReportOnRedundantParameterList, SyntaxKind.AnonymousMethodExpression);
-            context.RegisterSyntaxNodeActionInNonGenerated(ReportRedundancyInArrayCreation, SyntaxKind.ArrayCreationExpression);
-            context.RegisterSyntaxNodeActionInNonGenerated(VisitParenthesizedLambdaExpression, SyntaxKind.ParenthesizedLambdaExpression);
+            context.RegisterNodeAction(ReportOnRedundantParameterList, SyntaxKind.AnonymousMethodExpression);
+            context.RegisterNodeAction(ReportRedundancyInArrayCreation, SyntaxKind.ArrayCreationExpression);
+            context.RegisterNodeAction(VisitParenthesizedLambdaExpression, SyntaxKind.ParenthesizedLambdaExpression);
         }
 
         #region Type specification in lambda

@@ -38,28 +38,28 @@ namespace SonarAnalyzer.Rules.VisualBasic
                         return;
                     }
 
-                    c.RegisterSyntaxNodeActionInNonGenerated(
+                    c.RegisterNodeAction(
                         new VariableDeclarationBannedWordsFinder(this).AnalysisAction(),
                         SyntaxKind.VariableDeclarator);
 
-                    c.RegisterSyntaxNodeActionInNonGenerated(
+                    c.RegisterNodeAction(
                         new AssignmentExpressionBannedWordsFinder(this).AnalysisAction(),
                         SyntaxKind.SimpleAssignmentStatement);
 
-                    c.RegisterSyntaxNodeActionInNonGenerated(
+                    c.RegisterNodeAction(
                         new StringLiteralBannedWordsFinder(this).AnalysisAction(),
                         SyntaxKind.StringLiteralExpression);
 
-                    c.RegisterSyntaxNodeActionInNonGenerated(
+                    c.RegisterNodeAction(
                         new AddExpressionBannedWordsFinder(this).AnalysisAction(),
                         SyntaxKind.ConcatenateExpression,
                         SyntaxKind.AddExpression);
 
-                    c.RegisterSyntaxNodeActionInNonGenerated(
+                    c.RegisterNodeAction(
                         new InterpolatedStringBannedWordsFinder(this).AnalysisAction(),
                         SyntaxKind.InterpolatedStringExpression);
 
-                    c.RegisterSyntaxNodeActionInNonGenerated(
+                    c.RegisterNodeAction(
                         new InvocationBannedWordsFinder(this).AnalysisAction(),
                         SyntaxKind.InvocationExpression);
                 });

@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 CheckOverridableCallInConstructor,
                 SyntaxKind.InvocationExpression);
         }

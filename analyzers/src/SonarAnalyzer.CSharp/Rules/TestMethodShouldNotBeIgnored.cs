@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
             .ToImmutableArray();
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var attribute = (AttributeSyntax)c.Node;

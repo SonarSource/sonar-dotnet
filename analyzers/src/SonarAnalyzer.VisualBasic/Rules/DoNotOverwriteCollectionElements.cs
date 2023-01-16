@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 AnalysisAction,
                 SyntaxKind.ExpressionStatement,
                 SyntaxKind.SimpleAssignmentStatement);

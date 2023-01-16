@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     if (IsFinalizer(c.Node.FirstAncestorOrSelf<MethodBlockSyntax>()))

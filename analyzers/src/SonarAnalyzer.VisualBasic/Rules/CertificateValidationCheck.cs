@@ -51,10 +51,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
             // Only assignment and object creation are valid cases for VB.NET
 
             // Handling of = syntax
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckAssignmentSyntax, SyntaxKind.SimpleAssignmentStatement);
+            context.RegisterNodeAction(CheckAssignmentSyntax, SyntaxKind.SimpleAssignmentStatement);
 
             // Handling of constructor parameter syntax (SslStream)
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckConstructorParameterSyntax, SyntaxKind.ObjectCreationExpression);
+            context.RegisterNodeAction(CheckConstructorParameterSyntax, SyntaxKind.ObjectCreationExpression);
         }
 
         protected override Location ExpressionLocation(SyntaxNode expression) =>

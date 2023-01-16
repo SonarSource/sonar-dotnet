@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules
         protected DoNotLockWeakIdentityObjectsBase() : base(DiagnosticId) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
+            context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
             {
                 var lockExpression = Language.Syntax.NodeExpression(c.Node);
                 if (c.SemanticModel.GetSymbolInfo(lockExpression).Symbol?.GetSymbolType() is { } lockExpressionType && lockExpressionType.DerivesFromAny(weakIdentityTypes))

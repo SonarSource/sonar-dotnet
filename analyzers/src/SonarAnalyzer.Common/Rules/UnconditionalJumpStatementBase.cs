@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules
         protected UnconditionalJumpStatementBase() : base(DiagnosticId) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer,
+            context.RegisterNodeAction(Language.GeneratedCodeRecognizer,
                 c =>
                 {
                     var walker = GetWalker(c);

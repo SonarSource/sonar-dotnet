@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterNodeAction(c =>
             {
                 var parameter = (ParameterSyntax)c.Node;
                 foreach (var byVal in parameter.Modifiers.Where(IsByVal))

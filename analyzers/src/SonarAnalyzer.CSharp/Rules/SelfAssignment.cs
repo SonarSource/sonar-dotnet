@@ -26,7 +26,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterNodeAction(c =>
                 {
                     var expression = (AssignmentExpressionSyntax)c.Node;
 

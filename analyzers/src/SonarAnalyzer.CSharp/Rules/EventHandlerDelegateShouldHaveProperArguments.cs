@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterNodeAction(c =>
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;
                     if (invocation.ArgumentList == null ||

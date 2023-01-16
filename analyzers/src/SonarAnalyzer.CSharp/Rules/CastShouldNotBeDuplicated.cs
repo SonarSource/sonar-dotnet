@@ -35,10 +35,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(IsExpression, SyntaxKind.IsExpression);
-            context.RegisterSyntaxNodeActionInNonGenerated(IsPatternExpression, SyntaxKindEx.IsPatternExpression);
-            context.RegisterSyntaxNodeActionInNonGenerated(SwitchExpressionArm, SyntaxKindEx.SwitchExpressionArm);
-            context.RegisterSyntaxNodeActionInNonGenerated(CasePatternSwitchLabel, SyntaxKindEx.CasePatternSwitchLabel);
+            context.RegisterNodeAction(IsExpression, SyntaxKind.IsExpression);
+            context.RegisterNodeAction(IsPatternExpression, SyntaxKindEx.IsPatternExpression);
+            context.RegisterNodeAction(SwitchExpressionArm, SyntaxKindEx.SwitchExpressionArm);
+            context.RegisterNodeAction(CasePatternSwitchLabel, SyntaxKindEx.CasePatternSwitchLabel);
         }
 
         private static void CasePatternSwitchLabel(SonarSyntaxNodeAnalysisContext analysisContext)

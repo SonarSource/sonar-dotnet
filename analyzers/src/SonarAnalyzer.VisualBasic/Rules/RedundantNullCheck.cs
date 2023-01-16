@@ -32,12 +32,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 CheckAndExpression,
                 SyntaxKind.AndExpression,
                 SyntaxKind.AndAlsoExpression);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 CheckOrExpression,
                 SyntaxKind.OrExpression,
                 SyntaxKind.OrElseExpression);

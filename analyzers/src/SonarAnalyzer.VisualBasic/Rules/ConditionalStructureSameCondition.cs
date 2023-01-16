@@ -26,7 +26,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override ILanguageFacade Language => VisualBasicFacade.Instance;
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterNodeAction(c =>
                 {
                     var ifBlock = (MultiLineIfBlockSyntax)c.Node;
                     var conditions = new[] { ifBlock.IfStatement?.Condition }

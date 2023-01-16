@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterNodeAction(c =>
                 {
                     var wrapper = (LocalFunctionStatementSyntaxWrapper)c.Node;
                     var attributes = GetSerializationAttributes(wrapper.AttributeLists, c.SemanticModel);
@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKindEx.LocalFunctionStatement);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterNodeAction(c =>
                 {
                     var wrapper = (ParenthesizedLambdaExpressionSyntaxWrapper)c.Node;
                     var attributes = GetSerializationAttributes(wrapper.AttributeLists, c.SemanticModel);

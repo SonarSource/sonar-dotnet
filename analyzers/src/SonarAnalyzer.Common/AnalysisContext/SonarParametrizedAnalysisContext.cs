@@ -29,15 +29,15 @@ public sealed class SonarParametrizedAnalysisContext
     internal SonarParametrizedAnalysisContext(SonarAnalysisContext context) =>
         Context = context;
 
-    public void RegisterSyntaxNodeActionInNonGenerated<TSyntaxKind>(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxNodeAnalysisContext> action, params TSyntaxKind[] syntaxKinds)
+    public void RegisterNodeAction<TSyntaxKind>(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxNodeAnalysisContext> action, params TSyntaxKind[] syntaxKinds)
         where TSyntaxKind : struct =>
-        Context.RegisterSyntaxNodeActionInNonGenerated(generatedCodeRecognizer, action, syntaxKinds);
+        Context.RegisterNodeAction(generatedCodeRecognizer, action, syntaxKinds);
 
-    public void RegisterSyntaxTreeActionInNonGenerated(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxTreeAnalysisContext> action)
+    public void RegisterTreeAction(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxTreeAnalysisContext> action)
     {
         // This is tricky. SyntaxTree actions do not have compilation. So we register them in CompilationStart.
         // ParametrizedAnalyzer postpones CompilationStartActions to enforce that parameters are already set when the postponed action is executed.
-        var wrappedAction = Context.WrapSyntaxTreeAction(action, generatedCodeRecognizer);
+        var wrappedAction = Context.WrapTreeAction(action, generatedCodeRecognizer);
         RegisterPostponedAction(startContext => wrappedAction(startContext.Context));
     }
 
