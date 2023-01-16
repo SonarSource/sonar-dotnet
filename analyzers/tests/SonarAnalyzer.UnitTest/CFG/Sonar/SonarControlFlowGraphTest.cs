@@ -56,7 +56,7 @@ namespace NS
     public int Bar() => 4 + 5;
   }
 }";
-            var (method, model) = CompileWithMethodBody(input, "Bar");
+            var (method, model) = CompileWithMethodBody(input);
             var expression = method.ExpressionBody.Expression;
             var cfg = CSharpControlFlowGraph.Create(expression, model);
             VerifyMinimalCfg(cfg);
@@ -172,7 +172,7 @@ namespace NS
         [TestMethod]
         public void Cfg_ExtremelyNestedExpression_NotSupported_FromExpression()
         {
-            var (method, model) = CompileWithMethodBody(string.Format(TestInput, $"var x = {ExtremelyNestedExpression()};"), "Bar");
+            var (method, model) = CompileWithMethodBody(string.Format(TestInput, $"var x = {ExtremelyNestedExpression()};"));
             var equalsValueSyntax = method.DescendantNodes(x => !(x is ExpressionSyntax)).OfType<EqualsValueClauseSyntax>().Single();
             Action a = () => CSharpControlFlowGraph.Create(equalsValueSyntax.Value, model);
 
@@ -191,7 +191,8 @@ public class Sample
         return {ExtremelyNestedExpression()};
     }}
 }}";
-            var (method, semanticModel) = TestHelper.CompileCS(input).GetMethod("Main");
+            var (tree, semanticModel) = TestHelper.CompileCS(input);
+            var method = FirstMethod(tree);
             Action a = () => CSharpControlFlowGraph.Create(method.Body, semanticModel);
 
             a.Should().Throw<NotSupportedException>().WithMessage("Too complex expression");
@@ -206,7 +207,8 @@ public class Sample
 {{
     public string Main() =>{ExtremelyNestedExpression()};
 }}";
-            var (method, semanticModel) = TestHelper.CompileCS(input).GetMethod("Main");
+            var (tree, semanticModel) = TestHelper.CompileCS(input);
+            var method = FirstMethod(tree);
             Action a = () => CSharpControlFlowGraph.Create(method.ExpressionBody, semanticModel);
 
             a.Should().Throw<NotSupportedException>().WithMessage("Too complex expression");
@@ -223,7 +225,8 @@ public class Sample
 
     public void Go(System.Func<string, string> arg) {{ }}
 }}";
-            var (method, semanticModel) = TestHelper.CompileCS(input).GetMethod("Main");
+            var (tree, semanticModel) = TestHelper.CompileCS(input);
+            var method = FirstMethod(tree);
             CSharpControlFlowGraph.Create(method.ExpressionBody, semanticModel).Should().NotBeNull();
             CSharpControlFlowGraph.TryGet(method.ExpressionBody, semanticModel, out _).Should().BeTrue();
         }
@@ -238,7 +241,8 @@ public class Sample
 
     public void Go(System.Func<string> arg) {{ }}
 }}";
-            var (method, semanticModel) = TestHelper.CompileCS(input).GetMethod("Main");
+            var (tree, semanticModel) = TestHelper.CompileCS(input);
+            var method = FirstMethod(tree);
             CSharpControlFlowGraph.Create(method.ExpressionBody, semanticModel).Should().NotBeNull();
             CSharpControlFlowGraph.TryGet(method.ExpressionBody, semanticModel, out _).Should().BeTrue();
         }
@@ -5057,8 +5061,11 @@ namespace NS
   }}
 }}";
 
-        internal static (MethodDeclarationSyntax, SemanticModel) CompileWithMethodBody(string input, string methodName) =>
-            TestHelper.CompileIgnoreErrorsCS(input).GetMethod(methodName);
+        internal static (MethodDeclarationSyntax Method, SemanticModel Model) CompileWithMethodBody(string input)
+        {
+            var (tree, semanticModel) = TestHelper.CompileIgnoreErrorsCS(input);
+            return (tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().First(), semanticModel);
+        }
 
         internal static string ExtremelyNestedExpression()
         {
@@ -5069,7 +5076,7 @@ namespace NS
 
         private static IControlFlowGraph Build(string methodBody)
         {
-            var (method, model) = CompileWithMethodBody(string.Format(TestInput, methodBody), "Bar");
+            var (method, model) = CompileWithMethodBody(string.Format(TestInput, methodBody));
             var cfg = CSharpControlFlowGraph.Create(method.Body, model);
 
             // when debugging the CFG, it is useful to visualize the CFG
@@ -5081,6 +5088,9 @@ namespace NS
 
         private static SyntaxNode FirstConstructorBody(SyntaxTree tree) =>
             tree.GetRoot().DescendantNodes().OfType<ConstructorDeclarationSyntax>().First().Body;
+
+        private static MethodDeclarationSyntax FirstMethod(SyntaxTree tree) =>
+            tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().First();
 
         #endregion
 

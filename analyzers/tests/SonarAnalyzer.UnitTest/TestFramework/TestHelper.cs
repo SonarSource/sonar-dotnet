@@ -19,7 +19,6 @@
  */
 
 using System.IO;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.CFG;
 using SonarAnalyzer.CFG.Roslyn;
@@ -28,7 +27,6 @@ using SonarAnalyzer.Extensions;
 using SonarAnalyzer.UnitTest.PackagingTests;
 using StyleCop.Analyzers.Lightup;
 using CS = Microsoft.CodeAnalysis.CSharp;
-using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest
@@ -112,7 +110,7 @@ End Class", AnalyzerLanguage.VisualBasic);
                     : node.RawKind == (int)VB.SyntaxKind.FunctionBlock || node.RawKind == (int)VB.SyntaxKind.SubBlock;
         }
 
-        public static MethodDeclarationSyntax GetMethod(this SyntaxTree syntaxTree, string name, int skip = 0) =>
+        private static MethodDeclarationSyntax GetMethod(this SyntaxTree syntaxTree, string name, int skip = 0) =>
             syntaxTree.GetRoot()
                 .DescendantNodes()
                 .OfType<MethodDeclarationSyntax>()
@@ -120,7 +118,7 @@ End Class", AnalyzerLanguage.VisualBasic);
                 .Skip(skip)
                 .First();
 
-        public static (MethodDeclarationSyntax, SemanticModel) GetMethod(this (SyntaxTree, SemanticModel) tuple, string name)
+        private static (MethodDeclarationSyntax, SemanticModel) GetMethod(this (SyntaxTree, SemanticModel) tuple, string name)
         {
             var (syntaxTree, semanticModel) = tuple;
             return (syntaxTree.GetMethod(name), semanticModel);

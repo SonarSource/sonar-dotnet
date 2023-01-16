@@ -1525,7 +1525,7 @@ namespace Namespace
             public int NumberOfProcessedInstructions;
 
             public ExplodedGraphContext(string methodBody)
-                : this(SonarControlFlowGraphTest.CompileWithMethodBody(string.Format(TestInput, methodBody), "Main"))
+                : this(SonarControlFlowGraphTest.CompileWithMethodBody(string.Format(TestInput, methodBody)))
             { }
 
             public ExplodedGraphContext((SyntaxTree tree, SemanticModel semanticModel) compilation)

@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.Extensions;
 
@@ -35,7 +36,7 @@ public class Sample
     public void Method() { }
 }";
             var (tree, semanticModel) = TestHelper.CompileCS(code);
-            var method = tree.GetMethod("Method");
+            var method = tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single();
             var symbol = semanticModel.GetDeclaredSymbol(method) as IMethodSymbol;
             var cfg = ControlFlowGraph.Create(method, semanticModel, default);
 
