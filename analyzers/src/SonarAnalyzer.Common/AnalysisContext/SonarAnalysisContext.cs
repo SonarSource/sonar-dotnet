@@ -72,10 +72,6 @@ public sealed class SonarAnalysisContext
     internal static bool LegacyIsRegisteredActionEnabled(IEnumerable<DiagnosticDescriptor> diagnostics, SyntaxTree tree) =>
         ShouldExecuteRegisteredAction == null || tree == null || ShouldExecuteRegisteredAction(diagnostics, tree);
 
-    // FIXME: Drop
-    public void RegisterCodeBlockStartAction<TSyntaxKind>(Action<SonarCodeBlockStartAnalysisContext<TSyntaxKind>> action) where TSyntaxKind : struct =>
-        analysisContext.RegisterCodeBlockStartAction<TSyntaxKind>(c => Execute<SonarCodeBlockStartAnalysisContext<TSyntaxKind>, CodeBlockStartAnalysisContext<TSyntaxKind>>(new(this, c), action, c.CodeBlock.SyntaxTree));
-
     // FIXME: Rename to RegisterCodeBlockStartAction
     public void RegisterCodeBlockStartActionInNonGenerated<TSyntaxKind>(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarCodeBlockStartAnalysisContext<TSyntaxKind>> action)
         where TSyntaxKind : struct =>
@@ -90,18 +86,20 @@ public sealed class SonarAnalysisContext
     public void RegisterSymbolAction(Action<SonarSymbolAnalysisContext> action, params SymbolKind[] symbolKinds) =>
         analysisContext.RegisterSymbolAction(c => Execute<SonarSymbolAnalysisContext, SymbolAnalysisContext>(new(this, c), action, null), symbolKinds);
 
-    // FIXME: Drop
-    public void RegisterSyntaxNodeAction<TSyntaxKind>(Action<SonarSyntaxNodeAnalysisContext> action, params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct =>
-        analysisContext.RegisterSyntaxNodeAction(c => Execute<SonarSyntaxNodeAnalysisContext, SyntaxNodeAnalysisContext>(new(this, c), action, c.Node.SyntaxTree), syntaxKinds);
+    /// <summary>
+    /// Register action for a SyntaxNode that is executed unconditionally:
+    /// * For all non-generated code.
+    /// * For all generated code.
+    /// * For all unchanged files under PR analysis.
+    /// This should NOT be used for actions that report issues.
+    /// </summary>
+    public void RegisterNodeActionInAllFiles<TSyntaxKind>(Action<SonarSyntaxNodeAnalysisContext> action, params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct =>
+        analysisContext.RegisterSyntaxNodeAction(c => action(new(this, c)), syntaxKinds);
 
     // FIXME: Rename to RegisterNodeAction
     public void RegisterSyntaxNodeActionInNonGenerated<TSyntaxKind>(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxNodeAnalysisContext> action, params TSyntaxKind[] syntaxKinds)
         where TSyntaxKind : struct =>
         analysisContext.RegisterSyntaxNodeAction(c => Execute<SonarSyntaxNodeAnalysisContext, SyntaxNodeAnalysisContext>(new(this, c), action, c.Node.SyntaxTree, generatedCodeRecognizer), syntaxKinds);
-
-    // FIXME: Drop
-    public void RegisterSyntaxTreeAction(Action<SonarSyntaxTreeAnalysisContext> action) =>
-        analysisContext.RegisterCompilationStartAction(WrapSyntaxTreeAction(action));
 
     // FIXME: RegisterTreeAction
     public void RegisterSyntaxTreeActionInNonGenerated(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxTreeAnalysisContext> action) =>
