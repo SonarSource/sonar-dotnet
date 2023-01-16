@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
+"message":  "Use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
+"message":  "Use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
+"message":  "Use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
+"message":  "Use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\FSMSpecHelpers.cs",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
+"message":  "Use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\FSMSpecHelpers.cs",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
+"message":  "Use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
 "region":  {
@@ -80,7 +80,7 @@
 },
 {
 "id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
+"message":  "Use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
 "region":  {
@@ -93,7 +93,7 @@
 },
 {
 "id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
+"message":  "Use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
 "region":  {
@@ -106,7 +106,7 @@
 },
 {
 "id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
+"message":  "Use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
 "region":  {
@@ -119,7 +119,7 @@
 },
 {
 "id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
+"message":  "Use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
 "region":  {
@@ -132,7 +132,7 @@
 },
 {
 "id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
+"message":  "Use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
 "region":  {
@@ -145,7 +145,7 @@
 },
 {
 "id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
+"message":  "Use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
 "region":  {
@@ -158,7 +158,7 @@
 },
 {
 "id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
+"message":  "Use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
 "region":  {
@@ -171,7 +171,7 @@
 },
 {
 "id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
+"message":  "Use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
 "region":  {
@@ -184,7 +184,7 @@
 },
 {
 "id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
+"message":  "Use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
 "region":  {
@@ -197,7 +197,7 @@
 },
 {
 "id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
+"message":  "Use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
 "region":  {
@@ -210,7 +210,7 @@
 },
 {
 "id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
+"message":  "Use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
 "region":  {
@@ -223,7 +223,7 @@
 },
 {
 "id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
+"message":  "Use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
 "region":  {
@@ -236,7 +236,7 @@
 },
 {
 "id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
+"message":  "Use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
 "region":  {
@@ -249,7 +249,7 @@
 },
 {
 "id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
+"message":  "Use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ExpectMsgFrom.cs",
 "region":  {
@@ -262,7 +262,7 @@
 },
 {
 "id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
+"message":  "Use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\TestProbe.cs",
 "region":  {
@@ -275,7 +275,7 @@
 },
 {
 "id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
+"message":  "Use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\TestProbe.cs",
 "region":  {
@@ -288,7 +288,7 @@
 },
 {
 "id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
+"message":  "Use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\TestProbe.cs",
 "region":  {
@@ -301,7 +301,7 @@
 },
 {
 "id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
+"message":  "Use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\TestProbe.cs",
 "region":  {
