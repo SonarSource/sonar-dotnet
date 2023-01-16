@@ -39,25 +39,23 @@ namespace Repro_6547
     [TestClass]
     class Program
     {
-        public enum Seasons
-        {
-            Spring,
-            Summer,
-            Autumn,
-            Winter
-        }
+        public enum Seasons { Spring, Summer, Autumn, Winter }
 
         [TestMethod]
-        [DataRow(Seasons.Spring, "Spring")]
-        [DataRow(Seasons.Autumn, "Autumn")]
-        public void Repro_6547(Seasons enumParameter, string stringParameter)
+        public void Repro_6547()
         {
-            const string constString = "Spring";
-            Assert.AreEqual(expected: stringParameter, actual: constString); // FN
-            Assert.AreEqual(expected: enumParameter, actual: Seasons.Spring); // FN
+            string sutString = RetriveString();
+            Seasons sutSeason = RetriveSeason();
 
-            Assert.AreEqual(expected: constString, actual: stringParameter); // Compliant
-            Assert.AreEqual(expected: Seasons.Spring, actual: enumParameter); // Compliant
+            const string constString = "Spring";
+            Assert.AreEqual(expected: sutString, actual: constString); // FN
+            Assert.AreEqual(expected: sutSeason, actual: Seasons.Spring); // FN
+
+            Assert.AreEqual(expected: constString, actual: sutString); // Compliant
+            Assert.AreEqual(expected: Seasons.Spring, actual: sutSeason); // Compliant
         }
+
+        public Seasons RetriveSeason() => Seasons.Spring;
+        public string RetriveString() => "Spring";
     }
 }

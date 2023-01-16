@@ -33,25 +33,23 @@ namespace Repro_6547
 {
     class Program
     {
-        public enum Seasons
-        {
-            Spring,
-            Summer,
-            Autumn,
-            Winter
-        }
+        public enum Seasons { Spring, Summer, Autumn, Winter }
 
-        [Theory]
-        [InlineData(Seasons.Spring, "Spring")]
-        [InlineData(Seasons.Autumn, "Autumn")]
-        public void Repro_6547(Seasons enumParameter, string stringParameter)
+        [Fact]
+        public void Repro_6547()
         {
+            string sutString = RetriveString();
+            Seasons sutSeason = RetriveSeason();
+
             const string constString = "Spring";
-            Assert.Same(expected: stringParameter, actual: constString); // FN
-            Assert.Same(expected: enumParameter, actual: Seasons.Spring); //FN
+            Assert.Same(expected: sutString, actual: constString); // FN
+            Assert.Same(expected: sutSeason, actual: Seasons.Spring); //FN
 
-            Assert.Same(expected: constString, actual: stringParameter); // Compliant
-            Assert.Same(expected: Seasons.Spring, actual: enumParameter); // Compliant
+            Assert.Same(expected: constString, actual: sutString); // Compliant
+            Assert.Same(expected: Seasons.Spring, actual: sutSeason); // Compliant
         }
+
+        public Seasons RetriveSeason() => Seasons.Spring;
+        public string RetriveString() => "Spring";
     }
 }
