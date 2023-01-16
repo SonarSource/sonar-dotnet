@@ -42,16 +42,22 @@ namespace Repro_6547
         public enum Seasons { Spring, Summer, Autumn, Winter }
 
         [TestMethod]
-        public void Repro_6547()
+        public void TestString()
+        {
+            string sutString = RetriveString();
+            const string constString = "Spring";
+
+            Assert.AreEqual(expected: sutString, actual: constString); // FN
+            Assert.AreEqual(expected: constString, actual: sutString); // Compliant
+        }
+
+        [TestMethod]
+        public void TestEnum()
         {
             string sutString = RetriveString();
             Seasons sutSeason = RetriveSeason();
 
-            const string constString = "Spring";
-            Assert.AreEqual(expected: sutString, actual: constString); // FN
             Assert.AreEqual(expected: sutSeason, actual: Seasons.Spring); // FN
-
-            Assert.AreEqual(expected: constString, actual: sutString); // Compliant
             Assert.AreEqual(expected: Seasons.Spring, actual: sutSeason); // Compliant
         }
 
