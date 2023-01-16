@@ -7,7 +7,7 @@ namespace Tests.Diagnostics
     public class DisposableNotDisposedAsync
     {
         private FileStream field_fs1 = new FileStream(@"c:\foo.txt", FileMode.Open);    // Compliant - disposed in a public async method
-        private FileStream field_fs2 = File.Open(@"c:\foo.txt", FileMode.Open);         // Compliant - disposed in a public async method with the ?. operator
+        private FileStream field_fs2 = File.Open(@"c:\foo.txt", FileMode.Open);         // Compliant - disposed in a public async method
         private FileStream field_fs3 = new FileStream(@"c:\foo.txt", FileMode.Open);    // FN - the method which disposes it is private, and it's not referenced anywhere
         private FileStream field_fs4 = new FileStream(@"c:\foo.txt", FileMode.Open);    // Compliant - disposed in a public async ValueTask method
         private FileStream field_fs5 = new FileStream(@"c:\foo.txt", FileMode.Open);    // Compliant - disposed in a public ValueTask method (without async/await)
