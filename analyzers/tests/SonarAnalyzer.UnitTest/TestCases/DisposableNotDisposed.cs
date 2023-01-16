@@ -98,7 +98,7 @@ namespace Tests.Diagnostics
             field_fs5 = new FileStream(@"c:\foo.txt", FileMode.Open); // Noncompliant
 
             NoOperation(field_fs6);
-            field_fs6 = new FileStream(@"c:\foo.txt", FileMode.Open); // Compliant - field_fs6 gets passed to a method
+            field_fs6 = new FileStream(@"c:\foo.txt", FileMode.Open); // Compliant - FN: field_fs6 is assigned a new FileStream (and not disposed) after passing it to a method
 
             field_fs7 = new FileStream(@"c:\foo.txt", FileMode.Open); // Noncompliant - even if field_fs7's type is object
 
