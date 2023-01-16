@@ -44,21 +44,20 @@ namespace Repro_6547
         [TestMethod]
         public void TestString()
         {
-            string sutString = RetriveString();
+            string stringToTest = RetriveString();
             const string constString = "Spring";
 
-            Assert.AreEqual(expected: sutString, actual: constString); // FN
-            Assert.AreEqual(expected: constString, actual: sutString); // Compliant
+            Assert.AreEqual(expected: stringToTest, actual: constString); // FN
+            Assert.AreEqual(expected: constString, actual: stringToTest); // Compliant
         }
 
         [TestMethod]
         public void TestEnum()
         {
-            string sutString = RetriveString();
-            Seasons sutSeason = RetriveSeason();
+            Seasons seasonToTest = RetriveSeason();
 
-            Assert.AreEqual(expected: sutSeason, actual: Seasons.Spring); // FN
-            Assert.AreEqual(expected: Seasons.Spring, actual: sutSeason); // Compliant
+            Assert.AreEqual(expected: seasonToTest, actual: Seasons.Spring); // FN
+            Assert.AreEqual(expected: Seasons.Spring, actual: seasonToTest); // Compliant
         }
 
         public Seasons RetriveSeason() => Seasons.Spring;
