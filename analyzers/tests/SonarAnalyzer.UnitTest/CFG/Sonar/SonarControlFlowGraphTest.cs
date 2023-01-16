@@ -5064,7 +5064,7 @@ namespace NS
         internal static (MethodDeclarationSyntax Method, SemanticModel Model) CompileWithMethodBody(string input)
         {
             var (tree, semanticModel) = TestHelper.CompileIgnoreErrorsCS(input);
-            return (tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().First(), semanticModel);
+            return (tree.First<MethodDeclarationSyntax>(), semanticModel);
         }
 
         internal static string ExtremelyNestedExpression()
@@ -5087,10 +5087,10 @@ namespace NS
         }
 
         private static SyntaxNode FirstConstructorBody(SyntaxTree tree) =>
-            tree.GetRoot().DescendantNodes().OfType<ConstructorDeclarationSyntax>().First().Body;
+            tree.First<ConstructorDeclarationSyntax>().Body;
 
         private static MethodDeclarationSyntax FirstMethod(SyntaxTree tree) =>
-            tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().First();
+            tree.First<MethodDeclarationSyntax>();
 
         #endregion
 

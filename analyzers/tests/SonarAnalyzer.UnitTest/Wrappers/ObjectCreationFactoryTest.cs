@@ -45,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.Wrappers
                     }
                 }";
             var snippet = new SnippetCompiler(code);
-            var objectCreation = snippet.SyntaxTree.GetRoot().DescendantNodes().OfType<ObjectCreationExpressionSyntax>().First();
+            var objectCreation = snippet.SyntaxTree.Single<ObjectCreationExpressionSyntax>();
             var wrapper = ObjectCreationFactory.Create(objectCreation);
             wrapper.Expression.Should().BeEquivalentTo(objectCreation);
             wrapper.Initializer.Should().BeEquivalentTo(objectCreation.Initializer);
@@ -73,7 +73,7 @@ namespace SonarAnalyzer.UnitTest.Wrappers
                     }
                 }";
             var snippet = new SnippetCompiler(code);
-            var objectCreation = snippet.SyntaxTree.GetRoot().DescendantNodes().OfType<ObjectCreationExpressionSyntax>().First();
+            var objectCreation = snippet.SyntaxTree.Single<ObjectCreationExpressionSyntax>();
             var wrapper = ObjectCreationFactory.Create(objectCreation);
             wrapper.Initializer.Should().BeNull();
             wrapper.InitializerExpressions.Should().BeNull();
@@ -97,7 +97,7 @@ namespace SonarAnalyzer.UnitTest.Wrappers
                 }";
             var snippet = new SnippetCompiler(code);
             var syntaxTree = snippet.SyntaxTree;
-            var objectCreation = (ImplicitObjectCreationExpressionSyntaxWrapper)syntaxTree.GetRoot().DescendantNodes().First((node => node.IsKind(SyntaxKindEx.ImplicitObjectCreationExpression)));
+            var objectCreation = (ImplicitObjectCreationExpressionSyntaxWrapper)syntaxTree.GetRoot().DescendantNodes().First(node => node.IsKind(SyntaxKindEx.ImplicitObjectCreationExpression));
             var wrapper = ObjectCreationFactory.Create(objectCreation);
             wrapper.Expression.Should().BeEquivalentTo(objectCreation.SyntaxNode);
             wrapper.Initializer.Should().BeEquivalentTo(objectCreation.Initializer);
@@ -125,7 +125,7 @@ namespace SonarAnalyzer.UnitTest.Wrappers
                     }
                 }";
             var snippet = new SnippetCompiler(code);
-            var objectCreation = snippet.SyntaxTree.GetRoot().DescendantNodes().OfType<ImplicitObjectCreationExpressionSyntax>().First();
+            var objectCreation = snippet.SyntaxTree.Single<ImplicitObjectCreationExpressionSyntax>();
             var wrapper = ObjectCreationFactory.Create(objectCreation);
             wrapper.Initializer.Should().BeNull();
             wrapper.InitializerExpressions.Should().BeNull();
@@ -144,7 +144,7 @@ namespace SonarAnalyzer.UnitTest.Wrappers
                 }";
             var snippet = new SnippetCompiler(code, true, AnalyzerLanguage.CSharp);
             var syntaxTree = snippet.SyntaxTree;
-            var objectCreation = (ImplicitObjectCreationExpressionSyntaxWrapper)syntaxTree.GetRoot().DescendantNodes().First((node => node.IsKind(SyntaxKindEx.ImplicitObjectCreationExpression)));
+            var objectCreation = (ImplicitObjectCreationExpressionSyntaxWrapper)syntaxTree.GetRoot().DescendantNodes().First(node => node.IsKind(SyntaxKindEx.ImplicitObjectCreationExpression));
             var wrapper = ObjectCreationFactory.Create(objectCreation);
             wrapper.TypeAsString(snippet.SemanticModel).Should().BeEmpty();
         }
@@ -160,7 +160,7 @@ namespace SonarAnalyzer.UnitTest.Wrappers
         public void GivenNonConstructor_ThrowsException()
         {
             var snippet = new SnippetCompiler("public class A{}");
-            var classDeclaration = snippet.SyntaxTree.GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>().First();
+            var classDeclaration = snippet.SyntaxTree.Single<ClassDeclarationSyntax>();
             Action action = () => { ObjectCreationFactory.Create(classDeclaration); };
             action.Should().Throw<InvalidOperationException>().WithMessage("Unexpected type: ClassDeclarationSyntax");
         }

@@ -84,14 +84,8 @@ End Class";
 
         private static (InterpolatedStringExpressionSyntax InterpolatedStringExpression, SemanticModel SemanticModel) Compile(string code)
         {
-            var tree = VisualBasicSyntaxTree.ParseText(code);
-            var compilation = VisualBasicCompilation.Create("TempAssembly.dll")
-                                                    .AddSyntaxTrees(tree)
-                                                    .AddReferences(MetadataReferenceFacade.ProjectDefaultReferences);
-
-            var semanticModel = compilation.GetSemanticModel(tree);
-
-            return (tree.GetRoot().DescendantNodes().OfType<InterpolatedStringExpressionSyntax>().First(), semanticModel);
+            var (tree, model) = TestHelper.CompileCS(code);
+            return (tree.First<InterpolatedStringExpressionSyntax>(), model);
         }
     }
 }

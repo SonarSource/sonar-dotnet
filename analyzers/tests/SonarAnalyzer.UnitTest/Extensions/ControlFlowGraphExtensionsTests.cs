@@ -36,7 +36,7 @@ public class Sample
     public void Method() { }
 }";
             var (tree, semanticModel) = TestHelper.CompileCS(code);
-            var method = tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single();
+            var method = tree.Single<MethodDeclarationSyntax>();
             var symbol = semanticModel.GetDeclaredSymbol(method) as IMethodSymbol;
             var cfg = ControlFlowGraph.Create(method, semanticModel, default);
 

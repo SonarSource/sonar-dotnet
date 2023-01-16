@@ -146,7 +146,7 @@ public class Foo : Microsoft.AspNetCore.Mvc.ControllerBase
         public Foo() { }
 }";
             var (tree, semanticModel) = TestHelper.CompileCS(code, NetStandardMetadataReference.Netstandard.Union(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetMvcVersion)).ToArray());
-            var methodSymbol = semanticModel.GetDeclaredSymbol(tree.GetRoot().DescendantNodes().OfType<ConstructorDeclarationSyntax>().Single()) as IMethodSymbol;
+            var methodSymbol = semanticModel.GetDeclaredSymbol(tree.Single<ConstructorDeclarationSyntax>()) as IMethodSymbol;
             methodSymbol.IsControllerMethod().Should().Be(false);
         }
 

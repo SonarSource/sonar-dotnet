@@ -33,7 +33,7 @@ public class SonarSymbolReportingContextTest
         var cancel = new CancellationToken(true);
         var (tree, model) = TestHelper.CompileCS("public class Sample { }");
         var options = AnalysisScaffolding.CreateOptions(null);   // FIXME: Remove null argument in #6590
-        var symbol = model.GetDeclaredSymbol(tree.GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>().Single());
+        var symbol = model.GetDeclaredSymbol(tree.Single<ClassDeclarationSyntax>());
         var context = new SymbolAnalysisContext(symbol, model.Compilation, options, _ => { }, _ => true, cancel);
         var sut = new SonarSymbolReportingContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context);
 

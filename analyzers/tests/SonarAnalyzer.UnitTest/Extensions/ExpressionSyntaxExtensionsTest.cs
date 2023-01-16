@@ -49,7 +49,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
 
             var semanticModel = compilation.GetSemanticModel(tree);
 
-            return (tree.GetRoot().DescendantNodes().OfType<ExpressionSyntax>().First(), semanticModel);
+            return (tree.First<ExpressionSyntax>(), semanticModel);
         }
     }
 }

@@ -18,30 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+namespace SonarAnalyzer.UnitTest;
 
-namespace SonarAnalyzer.UnitTest.Helpers
+internal static class SyntaxTreeExtensions
 {
-    [TestClass]
-    public class DiagnosticReportHelperTest
-    {
-        private const string Source =
-@"namespace Test
-{
-    class TestClass
-    {
-    }
-}";
-        [TestMethod]
-        public void GetLineNumberToReport()
-        {
-            var syntaxTree = CSharpSyntaxTree.ParseText(Source);
-            var method = syntaxTree.Single<ClassDeclarationSyntax>();
-            method.GetLineNumberToReport()
-                .Should().Be(3);
-            method.GetLocation().GetLineSpan().StartLinePosition.GetLineNumberToReport()
-                .Should().Be(3);
-        }
-    }
+    public static T First<T>(this SyntaxTree tree) where T : SyntaxNode =>
+        tree.GetRoot().DescendantNodes().OfType<T>().First();
+
+    public static T Single<T>(this SyntaxTree tree) where T : SyntaxNode =>
+        tree.GetRoot().DescendantNodes().OfType<T>().Single();
 }

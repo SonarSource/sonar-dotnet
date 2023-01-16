@@ -384,7 +384,7 @@ internal class Test
         private static IControlFlowGraph CreateMethodCfg(string code)
         {
             var (tree, model) = TestHelper.CompileIgnoreErrorsCS(code);
-            return CSharpControlFlowGraph.Create(tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().First().Body, model);
+            return CSharpControlFlowGraph.Create(tree.First<MethodDeclarationSyntax>().Body, model);
         }
     }
 }

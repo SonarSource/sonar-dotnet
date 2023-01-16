@@ -80,7 +80,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         {
             const string source = @"class X{void Foo(object x){x.ToString()}};";
             var snippet = new SnippetCompiler(source, true, AnalyzerLanguage.CSharp);
-            return new InvocationContext(snippet.SyntaxTree.GetRoot().DescendantNodes().OfType<InvocationExpressionSyntax>().Single(), "ToString", snippet.SemanticModel);
+            return new InvocationContext(snippet.SyntaxTree.Single<InvocationExpressionSyntax>(), "ToString", snippet.SemanticModel);
         }
     }
 }

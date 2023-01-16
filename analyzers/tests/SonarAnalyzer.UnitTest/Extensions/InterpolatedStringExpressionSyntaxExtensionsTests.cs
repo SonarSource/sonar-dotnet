@@ -92,7 +92,7 @@ public class C
 
             var semanticModel = compilation.GetSemanticModel(tree);
 
-            return (tree.GetRoot().DescendantNodes().OfType<InterpolatedStringExpressionSyntax>().First(), semanticModel);
+            return (tree.First<InterpolatedStringExpressionSyntax>(), semanticModel);
         }
     }
 }
