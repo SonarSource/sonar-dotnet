@@ -20,6 +20,7 @@
 
 using System.IO;
 using Google.Protobuf;
+using SonarAnalyzer.AnalysisContext;
 using SonarAnalyzer.Rules;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.Tests

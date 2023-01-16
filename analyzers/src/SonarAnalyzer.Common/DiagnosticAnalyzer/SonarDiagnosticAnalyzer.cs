@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext;
+
 namespace SonarAnalyzer.Helpers
 {
     public abstract class SonarDiagnosticAnalyzer : DiagnosticAnalyzer
@@ -28,7 +30,7 @@ namespace SonarAnalyzer.Helpers
 
         protected abstract void Initialize(SonarAnalysisContext context);
 
-        public sealed override void Initialize(AnalysisContext context)
+        public sealed override void Initialize(RoslynAnalysisContext context)
         {
             if (EnableConcurrentExecution)
             {

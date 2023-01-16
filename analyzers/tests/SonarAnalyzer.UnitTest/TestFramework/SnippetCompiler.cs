@@ -18,13 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Threading;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Moq;
+using SonarAnalyzer.AnalysisContext;
 using SonarAnalyzer.Common;
-using CSharpSyntax = Microsoft.CodeAnalysis.CSharp.Syntax;
-using VBSyntax = Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using CS = Microsoft.CodeAnalysis.CSharp.Syntax;
+using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext;
+using VB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
@@ -77,13 +78,13 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             if (IsCSharp())
             {
-                var type = GetNodes<CSharpSyntax.TypeDeclarationSyntax>().First(m => m.Identifier.ValueText == nameParts[0]);
-                method = type.DescendantNodes().OfType<CSharpSyntax.MethodDeclarationSyntax>().First(m => m.Identifier.ValueText == nameParts[1]);
+                var type = GetNodes<CS.TypeDeclarationSyntax>().First(m => m.Identifier.ValueText == nameParts[0]);
+                method = type.DescendantNodes().OfType<CS.MethodDeclarationSyntax>().First(m => m.Identifier.ValueText == nameParts[1]);
             }
             else
             {
-                var type = GetNodes<VBSyntax.TypeStatementSyntax>().First(m => m.Identifier.ValueText == nameParts[0]);
-                method = type.DescendantNodes().OfType<VBSyntax.MethodStatementSyntax>().First(m => m.Identifier.ValueText == nameParts[1]);
+                var type = GetNodes<VB.TypeStatementSyntax>().First(m => m.Identifier.ValueText == nameParts[0]);
+                method = type.DescendantNodes().OfType<VB.MethodStatementSyntax>().First(m => m.Identifier.ValueText == nameParts[1]);
             }
 
             method.Should().NotBeNull("Test setup error: could not find method declaration in code snippet: Type: {nameParts[0]}, Method: {nameParts[1]}");
@@ -92,8 +93,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public INamespaceSymbol GetNamespaceSymbol(string name)
         {
-            var symbol = GetNodes<CSharpSyntax.BaseNamespaceDeclarationSyntax>()
-                .Concat<SyntaxNode>(GetNodes<VBSyntax.NamespaceStatementSyntax>())
+            var symbol = GetNodes<CS.BaseNamespaceDeclarationSyntax>()
+                .Concat<SyntaxNode>(GetNodes<VB.NamespaceStatementSyntax>())
                 .Select(s => SemanticModel.GetDeclaredSymbol(s))
                 .First(s => s.Name == name) as INamespaceSymbol;
 
@@ -103,8 +104,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public ITypeSymbol GetTypeSymbol(string typeName)
         {
-            var type = (SyntaxNode)GetNodes<CSharpSyntax.TypeDeclarationSyntax>().FirstOrDefault(m => m.Identifier.ValueText == typeName)
-                ?? GetNodes<VBSyntax.TypeStatementSyntax>().FirstOrDefault(m => m.Identifier.ValueText == typeName);
+            var type = (SyntaxNode)GetNodes<CS.TypeDeclarationSyntax>().FirstOrDefault(m => m.Identifier.ValueText == typeName)
+                ?? GetNodes<VB.TypeStatementSyntax>().FirstOrDefault(m => m.Identifier.ValueText == typeName);
 
             var symbol = SemanticModel.GetDeclaredSymbol(type) as ITypeSymbol;
             symbol.Should().NotBeNull($"Test setup error: could not find type in code snippet: {type}");
@@ -124,13 +125,13 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             if (IsCSharp())
             {
-                var type = SyntaxTree.GetRoot().DescendantNodes().OfType<CSharpSyntax.TypeDeclarationSyntax>().First(m => m.Identifier.ValueText == nameParts[0]);
-                property = type.DescendantNodes().OfType<CSharpSyntax.PropertyDeclarationSyntax>().First(m => m.Identifier.ValueText == nameParts[1]);
+                var type = SyntaxTree.GetRoot().DescendantNodes().OfType<CS.TypeDeclarationSyntax>().First(m => m.Identifier.ValueText == nameParts[0]);
+                property = type.DescendantNodes().OfType<CS.PropertyDeclarationSyntax>().First(m => m.Identifier.ValueText == nameParts[1]);
             }
             else
             {
-                var type = SyntaxTree.GetRoot().DescendantNodes().OfType<VBSyntax.TypeStatementSyntax>().First(m => m.Identifier.ValueText == nameParts[0]);
-                property = type.DescendantNodes().OfType<VBSyntax.PropertyStatementSyntax>().First(m => m.Identifier.ValueText == nameParts[1]);
+                var type = SyntaxTree.GetRoot().DescendantNodes().OfType<VB.TypeStatementSyntax>().First(m => m.Identifier.ValueText == nameParts[0]);
+                property = type.DescendantNodes().OfType<VB.PropertyStatementSyntax>().First(m => m.Identifier.ValueText == nameParts[1]);
             }
 
             var symbol = SemanticModel.GetDeclaredSymbol(property) as IPropertySymbol;
@@ -143,7 +144,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public SonarSyntaxNodeAnalysisContext CreateAnalysisContext(SyntaxNode node)
         {
-            var analysisContext = new SonarAnalysisContext(Mock.Of<AnalysisContext>(), Enumerable.Empty<DiagnosticDescriptor>());
+            var analysisContext = new SonarAnalysisContext(Mock.Of<RoslynAnalysisContext>(), Enumerable.Empty<DiagnosticDescriptor>());
             var nodeContext =  new SyntaxNodeAnalysisContext(node, SemanticModel, null, null, null, default);
             return new(analysisContext, nodeContext);
         }

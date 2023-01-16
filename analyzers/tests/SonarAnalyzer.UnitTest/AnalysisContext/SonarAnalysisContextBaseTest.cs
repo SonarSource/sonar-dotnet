@@ -19,8 +19,10 @@
  */
 
 using Moq;
+using SonarAnalyzer.AnalysisContext;
+using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext;
 
-namespace SonarAnalyzer.UnitTest;
+namespace SonarAnalyzer.UnitTest.AnalysisContext;
 
 [TestClass]
 public class SonarAnalysisContextBaseTest
@@ -102,7 +104,7 @@ public class SonarAnalysisContextBaseTest
     private SonarCompilationAnalysisContext CreateSut(ProjectType projectType, bool isScannerRun)
     {
         var compilation = new SnippetCompiler("// Nothing to see here").SemanticModel.Compilation;
-        var analysisContext = new SonarAnalysisContext(Mock.Of<AnalysisContext>(), Enumerable.Empty<DiagnosticDescriptor>());
+        var analysisContext = new SonarAnalysisContext(Mock.Of<RoslynAnalysisContext>(), Enumerable.Empty<DiagnosticDescriptor>());
         var options = TestHelper.CreateOptions(TestHelper.CreateSonarProjectConfig(TestContext, projectType, isScannerRun));
         var compilationContext = new CompilationAnalysisContext(compilation, options, _ => { }, _ => true, default);
         return new(analysisContext, compilationContext);
