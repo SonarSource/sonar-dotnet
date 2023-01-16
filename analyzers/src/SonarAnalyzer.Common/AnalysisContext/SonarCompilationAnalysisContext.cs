@@ -25,8 +25,9 @@ namespace SonarAnalyzer.AnalysisContext;
 
 public sealed class SonarCompilationAnalysisContext : SonarCompilationReportingContextBase<CompilationAnalysisContext>
 {
-    private static readonly Regex WebConfigRegex = new(@"[\\\/]web\.([^\\\/]+\.)?config$", RegexOptions.IgnoreCase);
-    private static readonly Regex AppSettingsRegex = new(@"[\\\/]appsettings\.([^\\\/]+\.)?json$", RegexOptions.IgnoreCase);
+    private static readonly TimeSpan FileNameTimeout = TimeSpan.FromMilliseconds(100);
+    private static readonly Regex WebConfigRegex = new(@"[\\\/]web\.([^\\\/]+\.)?config$", RegexOptions.IgnoreCase, FileNameTimeout);
+    private static readonly Regex AppSettingsRegex = new(@"[\\\/]appsettings\.([^\\\/]+\.)?json$", RegexOptions.IgnoreCase, FileNameTimeout);
 
     public override SyntaxTree Tree => Context.Compilation.SyntaxTrees.FirstOrDefault();
     public override Compilation Compilation => Context.Compilation;
