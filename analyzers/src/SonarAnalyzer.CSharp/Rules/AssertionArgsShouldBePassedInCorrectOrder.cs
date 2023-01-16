@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
         };
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterNodeAction(c =>
             {
                 var methodCall = (InvocationExpressionSyntax)c.Node;
                 if (!methodCall.Expression.IsKind(SyntaxKind.SimpleMemberAccessExpression)

@@ -27,20 +27,20 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => CheckBinary(c, -1),
                 SyntaxKind.BitwiseAndExpression);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => CheckBinary(c, 0),
                 SyntaxKind.BitwiseOrExpression,
                 SyntaxKind.ExclusiveOrExpression);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => CheckAssignment(c, -1),
                 SyntaxKind.AndAssignmentExpression);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => CheckAssignment(c, 0),
                 SyntaxKind.OrAssignmentExpression,
                 SyntaxKind.ExclusiveOrAssignmentExpression);

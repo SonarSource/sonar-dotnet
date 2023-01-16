@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules
         protected GenericInheritanceShouldNotBeRecursiveBase() : base(DiagnosticId) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer,
+            context.RegisterNodeAction(Language.GeneratedCodeRecognizer,
                 c =>
                 {
                     var declaration = (TDeclaration)c.Node;

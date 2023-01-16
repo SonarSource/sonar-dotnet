@@ -45,17 +45,17 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(VerifyMethodDeclaration, SyntaxKind.MethodDeclaration, SyntaxKind.ConstructorDeclaration);
+            context.RegisterNodeAction(VerifyMethodDeclaration, SyntaxKind.MethodDeclaration, SyntaxKind.ConstructorDeclaration);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(VerifyPropertyDeclaration, SyntaxKind.PropertyDeclaration);
+            context.RegisterNodeAction(VerifyPropertyDeclaration, SyntaxKind.PropertyDeclaration);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 VerifyInvocationAndCreation,
                 SyntaxKind.InvocationExpression,
                 SyntaxKind.ObjectCreationExpression,
                 SyntaxKindEx.ImplicitObjectCreationExpression);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 VerifyRecordDeclaration,
                 SyntaxKindEx.RecordClassDeclaration,
                 SyntaxKindEx.RecordStructDeclaration);

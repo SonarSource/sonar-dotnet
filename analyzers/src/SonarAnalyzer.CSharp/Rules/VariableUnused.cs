@@ -28,18 +28,18 @@ namespace SonarAnalyzer.Rules.CSharp
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterCodeBlockStartActionInNonGenerated<SyntaxKind>(cbc =>
+            context.RegisterCodeBlockStartAction<SyntaxKind>(cbc =>
             {
                 var collector = new UnusedLocalsCollector();
 
-                cbc.RegisterSyntaxNodeAction(collector.CollectDeclarations,
+                cbc.RegisterNodeAction(collector.CollectDeclarations,
                     SyntaxKind.LocalDeclarationStatement,
                     SyntaxKind.SimpleAssignmentExpression,
                     SyntaxKindEx.VarPattern,
                     SyntaxKindEx.RecursivePattern,
                     SyntaxKindEx.DeclarationPattern,
                     SyntaxKindEx.ListPattern);
-                cbc.RegisterSyntaxNodeAction(collector.CollectUsages, SyntaxKind.IdentifierName);
+                cbc.RegisterNodeAction(collector.CollectUsages, SyntaxKind.IdentifierName);
                 cbc.RegisterCodeBlockEndAction(c => collector.ReportUnusedVariables(c, Rule));
             });
 

@@ -28,7 +28,7 @@ namespace SonarAnalyzer.Rules
         protected CollectionEmptinessCheckingBase() : base(DiagnosticId) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer,
+            context.RegisterNodeAction(Language.GeneratedCodeRecognizer,
                 c =>
                 {
                     var binaryLeft = Language.Syntax.BinaryExpressionLeft(c.Node);

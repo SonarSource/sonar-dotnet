@@ -71,9 +71,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckExtensionMethodsOnIEnumerable, SyntaxKind.InvocationExpression);
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckToCollectionCalls, SyntaxKind.InvocationExpression);
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckCountCall, SyntaxKind.InvocationExpression);
+            context.RegisterNodeAction(CheckExtensionMethodsOnIEnumerable, SyntaxKind.InvocationExpression);
+            context.RegisterNodeAction(CheckToCollectionCalls, SyntaxKind.InvocationExpression);
+            context.RegisterNodeAction(CheckCountCall, SyntaxKind.InvocationExpression);
         }
 
         private static void CheckCountCall(SonarSyntaxNodeAnalysisContext context)

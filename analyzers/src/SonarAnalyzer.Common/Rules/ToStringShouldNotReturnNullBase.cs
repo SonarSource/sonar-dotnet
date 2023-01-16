@@ -36,7 +36,7 @@ public abstract class ToStringShouldNotReturnNullBase<TSyntaxKind> : SonarDiagno
     protected ToStringShouldNotReturnNullBase() : base(DiagnosticId) { }
 
     protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterSyntaxNodeActionInNonGenerated(
+        context.RegisterNodeAction(
             Language.GeneratedCodeRecognizer,
             c => ToStringReturnsNull(c, c.Node),
             Language.SyntaxKind.ReturnStatement);

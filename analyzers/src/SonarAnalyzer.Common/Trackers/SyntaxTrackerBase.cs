@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Helpers
               {
                   if (input.IsEnabled(c.Options))
                   {
-                      c.RegisterSyntaxNodeActionInNonGenerated(
+                      c.RegisterNodeAction(
                           Language.GeneratedCodeRecognizer,
                           TrackAndReportIfNecessary,
                           TrackedSyntaxKinds);

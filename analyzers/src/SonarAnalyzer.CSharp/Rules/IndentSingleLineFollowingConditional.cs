@@ -33,12 +33,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckWhile, SyntaxKind.WhileStatement);
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckDo, SyntaxKind.DoStatement);
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckFor, SyntaxKind.ForStatement);
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckForEach, SyntaxKind.ForEachStatement);
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckIf, SyntaxKind.IfStatement);
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckElse, SyntaxKind.ElseClause);
+            context.RegisterNodeAction(CheckWhile, SyntaxKind.WhileStatement);
+            context.RegisterNodeAction(CheckDo, SyntaxKind.DoStatement);
+            context.RegisterNodeAction(CheckFor, SyntaxKind.ForStatement);
+            context.RegisterNodeAction(CheckForEach, SyntaxKind.ForEachStatement);
+            context.RegisterNodeAction(CheckIf, SyntaxKind.IfStatement);
+            context.RegisterNodeAction(CheckElse, SyntaxKind.ElseClause);
         }
 
         private static void CheckWhile(SonarSyntaxNodeAnalysisContext context)

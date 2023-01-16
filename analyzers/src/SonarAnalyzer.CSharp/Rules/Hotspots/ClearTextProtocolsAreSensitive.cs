@@ -114,15 +114,15 @@ namespace SonarAnalyzer.Rules.CSharp
                     return;
                 }
 
-                context.RegisterSyntaxNodeActionInNonGenerated(
+                context.RegisterNodeAction(
                     VisitStringExpressions,
                     SyntaxKind.StringLiteralExpression,
                     SyntaxKind.InterpolatedStringExpression,
                     SyntaxKindEx.Utf8StringLiteralExpression);
 
-                context.RegisterSyntaxNodeActionInNonGenerated(VisitObjectCreation, SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
-                context.RegisterSyntaxNodeActionInNonGenerated(VisitInvocationExpression, SyntaxKind.InvocationExpression);
-                context.RegisterSyntaxNodeActionInNonGenerated(VisitAssignments, SyntaxKind.SimpleAssignmentExpression);
+                context.RegisterNodeAction(VisitObjectCreation, SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
+                context.RegisterNodeAction(VisitInvocationExpression, SyntaxKind.InvocationExpression);
+                context.RegisterNodeAction(VisitAssignments, SyntaxKind.SimpleAssignmentExpression);
             });
 
         private void VisitObjectCreation(SonarSyntaxNodeAnalysisContext context)

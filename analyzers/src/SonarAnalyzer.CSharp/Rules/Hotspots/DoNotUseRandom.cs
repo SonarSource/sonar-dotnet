@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    ccc.RegisterSyntaxNodeActionInNonGenerated(
+                    ccc.RegisterNodeAction(
                         c =>
                         {
                             var objectCreationSyntax = (ObjectCreationExpressionSyntax)c.Node;

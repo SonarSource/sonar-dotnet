@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 Language.GeneratedCodeRecognizer,
                 c =>
                 {
@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Rules
                 },
                 LessThanExpression);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 Language.GeneratedCodeRecognizer,
                 c =>
                 {

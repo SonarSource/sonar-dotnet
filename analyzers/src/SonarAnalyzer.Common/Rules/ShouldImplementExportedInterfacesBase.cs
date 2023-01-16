@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules
         protected ShouldImplementExportedInterfacesBase() : base(DiagnosticId) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer,
+            context.RegisterNodeAction(Language.GeneratedCodeRecognizer,
                 c =>
                 {
                     var attributeSyntax = (TAttributeSyntax)c.Node;

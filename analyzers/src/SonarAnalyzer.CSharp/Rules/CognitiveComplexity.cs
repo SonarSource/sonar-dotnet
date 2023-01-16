@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarParametrizedAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterNodeAction(c =>
                 {
                     if (c.IsTopLevelMain())
                     {
@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.CompilationUnit);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => CheckComplexity<MethodDeclarationSyntax>(
                     c,
                     m => m,
@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.MethodDeclaration);
 
             // Here, we only care about arrowed properties, others will be handled by the accessor.
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => CheckComplexity<PropertyDeclarationSyntax>(
                     c,
                     p => p.ExpressionBody,
@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     PropertyThreshold),
                 SyntaxKind.PropertyDeclaration);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => CheckComplexity<ConstructorDeclarationSyntax>(
                     c,
                     co => co,
@@ -76,7 +76,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     Threshold),
                 SyntaxKind.ConstructorDeclaration);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => CheckComplexity<DestructorDeclarationSyntax>(
                     c,
                     d => d,
@@ -86,7 +86,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     Threshold),
                 SyntaxKind.DestructorDeclaration);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => CheckComplexity<OperatorDeclarationSyntax>(
                     c,
                     o => o,
@@ -96,7 +96,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     Threshold),
                 SyntaxKind.OperatorDeclaration);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => CheckComplexity<AccessorDeclarationSyntax>(
                     c,
                     a => a,
@@ -110,7 +110,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.AddAccessorDeclaration,
                 SyntaxKind.RemoveAccessorDeclaration);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                c => CheckComplexity<FieldDeclarationSyntax>(
                    c,
                    f => f,
@@ -120,7 +120,7 @@ namespace SonarAnalyzer.Rules.CSharp
                    Threshold),
                SyntaxKind.FieldDeclaration);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterNodeAction(c =>
             {
                 if (((LocalFunctionStatementSyntaxWrapper)c.Node).Modifiers.Any(SyntaxKind.StaticKeyword))
                 {

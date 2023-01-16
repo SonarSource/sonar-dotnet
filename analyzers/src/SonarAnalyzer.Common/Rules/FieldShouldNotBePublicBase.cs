@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules
             && fieldSymbol.ContainingType.IsClass();
 
         protected sealed override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 Language.GeneratedCodeRecognizer,
                 c =>
                 {

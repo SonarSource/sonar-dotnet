@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckRightSideOfAddAssignmentsForToStringCall(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var assignment = (AssignmentExpressionSyntax)c.Node;
@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckSidesOfAddExpressionsForToStringCall(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var binary = (BinaryExpressionSyntax)c.Node;
@@ -79,7 +79,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckToStringInvocationsOnStringAndInStringFormat(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;

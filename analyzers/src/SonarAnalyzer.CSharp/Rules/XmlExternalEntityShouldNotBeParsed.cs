@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterCompilationStartAction(
                 ccc =>
                 {
-                    ccc.RegisterSyntaxNodeActionInNonGenerated(
+                    ccc.RegisterNodeAction(
                         c =>
                         {
                             var objectCreation = ObjectCreationFactory.Create(c.Node);
@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         },
                         SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
 
-                    ccc.RegisterSyntaxNodeActionInNonGenerated(
+                    ccc.RegisterNodeAction(
                         c =>
                         {
                             var assignment = (AssignmentExpressionSyntax)c.Node;
@@ -81,7 +81,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         },
                         SyntaxKind.SimpleAssignmentExpression);
 
-                    ccc.RegisterSyntaxNodeActionInNonGenerated(VerifyXmlReaderInvocations, SyntaxKind.InvocationExpression);
+                    ccc.RegisterNodeAction(VerifyXmlReaderInvocations, SyntaxKind.InvocationExpression);
                 });
 
         private void VerifyXmlReaderInvocations(SonarSyntaxNodeAnalysisContext context)

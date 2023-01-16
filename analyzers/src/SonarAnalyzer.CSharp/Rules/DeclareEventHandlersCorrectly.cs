@@ -35,11 +35,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                c => AnalyzeEventType(c, ((EventFieldDeclarationSyntax)c.Node).Declaration.Type, c.ContainingSymbol),
                SyntaxKind.EventFieldDeclaration);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                c => AnalyzeEventType(c, ((EventDeclarationSyntax)c.Node).Type, c.ContainingSymbol),
                SyntaxKind.EventDeclaration);
         }

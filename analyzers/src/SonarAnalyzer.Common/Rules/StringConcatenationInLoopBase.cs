@@ -36,12 +36,12 @@ namespace SonarAnalyzer.Rules
     {
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 GeneratedCodeRecognizer,
                 CheckCompoundAssignment,
                 CompoundAssignmentKinds.ToArray());
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 GeneratedCodeRecognizer,
                 CheckSimpleAssignment,
                 SimpleAssignmentKinds.ToArray());

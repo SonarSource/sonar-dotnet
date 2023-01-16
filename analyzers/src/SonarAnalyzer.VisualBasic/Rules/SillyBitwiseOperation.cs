@@ -27,11 +27,11 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => CheckBinary(c, -1),
                 SyntaxKind.AndExpression);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => CheckBinary(c, 0),
                 SyntaxKind.OrExpression,
                 SyntaxKind.ExclusiveOrExpression);

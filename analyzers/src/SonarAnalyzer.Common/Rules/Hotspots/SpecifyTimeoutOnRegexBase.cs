@@ -52,7 +52,7 @@ public abstract class SpecifyTimeoutOnRegexBase<TSyntaxKind> : HotspotDiagnostic
 
     protected override void Initialize(SonarAnalysisContext context)
     {
-        context.RegisterSyntaxNodeActionInNonGenerated(
+        context.RegisterNodeAction(
             Language.GeneratedCodeRecognizer,
             c =>
             {
@@ -69,7 +69,7 @@ public abstract class SpecifyTimeoutOnRegexBase<TSyntaxKind> : HotspotDiagnostic
             },
             Language.SyntaxKind.ObjectCreationExpressions);
 
-        context.RegisterSyntaxNodeActionInNonGenerated(
+        context.RegisterNodeAction(
             Language.GeneratedCodeRecognizer,
             c =>
             {

@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => CheckForRedundantJumps(c, ((BaseMethodDeclarationSyntax)c.Node).Body),
                 SyntaxKind.MethodDeclaration,
                 SyntaxKind.ConstructorDeclaration,
@@ -42,11 +42,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ConversionOperatorDeclaration,
                 SyntaxKind.OperatorDeclaration);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => CheckForRedundantJumps(c, ((LocalFunctionStatementSyntaxWrapper)c.Node).Body),
                 SyntaxKindEx.LocalFunctionStatement);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => CheckForRedundantJumps(c, ((AccessorDeclarationSyntax)c.Node).Body),
                 SyntaxKind.GetAccessorDeclaration,
                 SyntaxKind.SetAccessorDeclaration,
@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.AddAccessorDeclaration,
                 SyntaxKind.RemoveAccessorDeclaration);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => CheckForRedundantJumps(c, ((AnonymousFunctionExpressionSyntax)c.Node).Body),
                 SyntaxKind.AnonymousMethodExpression,
                 SyntaxKind.SimpleLambdaExpression,

@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterNodeAction(c =>
                 {
                     var block = (BlockSyntax)c.Node;
                     if (block.Parent.IsAnyKind(SyntaxKind.Block, SyntaxKind.GlobalStatement))

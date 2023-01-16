@@ -31,10 +31,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(RaiseOnArrayCovarianceInSimpleAssignmentExpression, SyntaxKind.SimpleAssignmentExpression);
-            context.RegisterSyntaxNodeActionInNonGenerated(RaiseOnArrayCovarianceInVariableDeclaration, SyntaxKind.VariableDeclaration);
-            context.RegisterSyntaxNodeActionInNonGenerated(RaiseOnArrayCovarianceInInvocationExpression, SyntaxKind.InvocationExpression);
-            context.RegisterSyntaxNodeActionInNonGenerated(RaiseOnArrayCovarianceInCastExpression, SyntaxKind.CastExpression);
+            context.RegisterNodeAction(RaiseOnArrayCovarianceInSimpleAssignmentExpression, SyntaxKind.SimpleAssignmentExpression);
+            context.RegisterNodeAction(RaiseOnArrayCovarianceInVariableDeclaration, SyntaxKind.VariableDeclaration);
+            context.RegisterNodeAction(RaiseOnArrayCovarianceInInvocationExpression, SyntaxKind.InvocationExpression);
+            context.RegisterNodeAction(RaiseOnArrayCovarianceInCastExpression, SyntaxKind.CastExpression);
         }
 
         private static void RaiseOnArrayCovarianceInSimpleAssignmentExpression(SonarSyntaxNodeAnalysisContext context)

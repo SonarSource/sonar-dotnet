@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(VisitEquality, SyntaxKind.EqualsExpression, SyntaxKind.NotEqualsExpression);
+            context.RegisterNodeAction(VisitEquality, SyntaxKind.EqualsExpression, SyntaxKind.NotEqualsExpression);
 
         private static void VisitEquality(SonarSyntaxNodeAnalysisContext c)
         {

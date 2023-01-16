@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             .SelectMany(t => t.AllInterfaces)
                             .ToHashSet();
 
-                    compilationStartContext.RegisterSyntaxNodeActionInNonGenerated(
+                    compilationStartContext.RegisterNodeAction(
                         c =>
                         {
                             var binary = (BinaryExpressionSyntax)c.Node;

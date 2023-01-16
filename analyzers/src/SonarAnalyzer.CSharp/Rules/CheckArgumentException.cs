@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.System_DuplicateWaitObjectException);
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckForIssue, SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
+            context.RegisterNodeAction(CheckForIssue, SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
 
         private static void CheckForIssue(SonarSyntaxNodeAnalysisContext analysisContext)
         {

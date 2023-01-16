@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var baseMethodDeclaration = (BaseMethodDeclarationSyntax)c.Node;
@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.MethodDeclaration,
                 SyntaxKind.ConstructorDeclaration);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var propertyDeclaration = (PropertyDeclarationSyntax)c.Node;
@@ -77,7 +77,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.PropertyDeclaration);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var fieldDeclaration = (FieldDeclarationSyntax)c.Node;

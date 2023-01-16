@@ -90,7 +90,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterNodeAction(c =>
                 {
                     if (c.IsRedundantPositionalRecordContext())
                     {
@@ -104,7 +104,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKindEx.RecordClassDeclaration,
                 SyntaxKindEx.RecordStructDeclaration);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterNodeAction(c =>
                 {
                     var identifier = GetDeclarationIdentifier(c.Node);
                     CheckMemberName(c, identifier);

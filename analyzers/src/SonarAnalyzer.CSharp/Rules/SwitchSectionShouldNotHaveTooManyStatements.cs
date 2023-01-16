@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarParametrizedAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var switchSection = (SwitchSectionSyntax)c.Node;

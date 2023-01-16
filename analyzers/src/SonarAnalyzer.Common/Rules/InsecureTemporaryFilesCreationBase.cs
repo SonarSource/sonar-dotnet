@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules
         protected InsecureTemporaryFilesCreationBase() : base(DiagnosticId) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, Visit, Language.SyntaxKind.SimpleMemberAccessExpression);
+            context.RegisterNodeAction(Language.GeneratedCodeRecognizer, Visit, Language.SyntaxKind.SimpleMemberAccessExpression);
 
         private void Visit(SonarSyntaxNodeAnalysisContext context)
         {

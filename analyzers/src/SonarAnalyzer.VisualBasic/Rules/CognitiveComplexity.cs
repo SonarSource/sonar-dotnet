@@ -29,29 +29,29 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override void Initialize(SonarParametrizedAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                  c => CheckComplexity<MethodBlockSyntax>(c, m => m, m => m.SubOrFunctionStatement.Identifier.GetLocation(),
                      VisualBasicCognitiveComplexityMetric.GetComplexity, "method", Threshold),
                  SyntaxKind.SubBlock,
                  SyntaxKind.FunctionBlock);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => CheckComplexity<ConstructorBlockSyntax>(c, co => co, co => co.BlockStatement.DeclarationKeyword.GetLocation(),
                     VisualBasicCognitiveComplexityMetric.GetComplexity, "constructor", Threshold),
                 SyntaxKind.ConstructorBlock);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => CheckComplexity<OperatorBlockSyntax>(c, o => o, o => o.BlockStatement.DeclarationKeyword.GetLocation(),
                     VisualBasicCognitiveComplexityMetric.GetComplexity, "operator", Threshold),
                 SyntaxKind.OperatorBlock);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => CheckComplexity<AccessorBlockSyntax>(c, a => a, a => a.AccessorStatement.DeclarationKeyword.GetLocation(),
                     VisualBasicCognitiveComplexityMetric.GetComplexity, "accessor", PropertyThreshold),
                 SyntaxKind.GetAccessorBlock,
                 SyntaxKind.SetAccessorBlock);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                c => CheckComplexity<FieldDeclarationSyntax>(c, f => f, f => f.Declarators[0].Names[0].Identifier.GetLocation(),
                     VisualBasicCognitiveComplexityMetric.GetComplexity, "field", Threshold),
                SyntaxKind.FieldDeclaration);

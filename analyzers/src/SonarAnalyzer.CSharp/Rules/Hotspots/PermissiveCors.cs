@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (IsEnabled(compilationContext.Options))
                 {
-                    context.RegisterSyntaxNodeActionInNonGenerated(VisitAttribute, SyntaxKind.Attribute);
+                    context.RegisterNodeAction(VisitAttribute, SyntaxKind.Attribute);
                 }
             });
         }

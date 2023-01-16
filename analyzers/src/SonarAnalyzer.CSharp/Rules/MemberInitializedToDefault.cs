@@ -35,9 +35,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckField, SyntaxKind.FieldDeclaration);
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckEvent, SyntaxKind.EventFieldDeclaration);
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckAutoProperty, SyntaxKind.PropertyDeclaration);
+            context.RegisterNodeAction(CheckField, SyntaxKind.FieldDeclaration);
+            context.RegisterNodeAction(CheckEvent, SyntaxKind.EventFieldDeclaration);
+            context.RegisterNodeAction(CheckAutoProperty, SyntaxKind.PropertyDeclaration);
         }
 
         private static void CheckAutoProperty(SonarSyntaxNodeAnalysisContext context)

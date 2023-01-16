@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterNodeAction(c =>
                 {
                     if (c.SemanticModel.GetDeclaredSymbol(c.Node) is { } declarationSymbol)
                     {
@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.MethodDeclaration,
                 SyntaxKindEx.LocalFunctionStatement);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterNodeAction(c =>
                  {
                      if (!c.IsRedundantPositionalRecordContext())
                      {

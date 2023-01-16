@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var expressionStatement = (ExpressionStatementSyntax)c.Node;
@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.ExpressionStatement);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var lambda = (LambdaExpressionSyntax)c.Node;

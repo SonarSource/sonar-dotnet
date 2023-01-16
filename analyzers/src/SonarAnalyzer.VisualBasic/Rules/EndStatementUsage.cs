@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c => c.ReportIssue(Diagnostic.Create(rule, c.Node.GetLocation())),
                 SyntaxKind.EndStatement);
         }

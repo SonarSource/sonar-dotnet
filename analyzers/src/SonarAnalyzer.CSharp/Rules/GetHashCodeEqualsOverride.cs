@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterCodeBlockStartActionInNonGenerated<SyntaxKind>(
+            context.RegisterCodeBlockStartAction<SyntaxKind>(
                 cb =>
                 {
                     if (!(cb.CodeBlock is MethodDeclarationSyntax methodDeclaration))
@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var locations = new List<Location>();
 
-                    cb.RegisterSyntaxNodeAction(
+                    cb.RegisterNodeAction(
                         c =>
                         {
                             if (TryGetLocationFromInvocationInsideMethod(c, methodSymbol, out var location))

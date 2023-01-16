@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules
         protected IfChainWithoutElseBase() : base(DiagnosticId) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer,
+            context.RegisterNodeAction(Language.GeneratedCodeRecognizer,
                 c =>
                 {
                     var ifNode = (TIfSyntax)c.Node;

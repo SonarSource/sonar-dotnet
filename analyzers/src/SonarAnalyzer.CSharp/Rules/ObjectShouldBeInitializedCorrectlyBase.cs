@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules
 
                     var isDefaultConstructorSafe = IsDefaultConstructorSafe(compilationStartContext);
 
-                    compilationStartContext.RegisterSyntaxNodeActionInNonGenerated(
+                    compilationStartContext.RegisterNodeAction(
                         c =>
                         {
                             var objectCreation = ObjectCreationFactory.Create(c.Node);
@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Rules
                         },
                         SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
 
-                    compilationStartContext.RegisterSyntaxNodeActionInNonGenerated(
+                    compilationStartContext.RegisterNodeAction(
                         c =>
                         {
                             var assignment = (AssignmentExpressionSyntax)c.Node;

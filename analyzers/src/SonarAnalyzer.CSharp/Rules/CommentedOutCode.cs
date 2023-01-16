@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxTreeActionInNonGenerated(c =>
+            context.RegisterTreeAction(c =>
                 {
                     foreach (var token in c.Tree.GetRoot().DescendantTokens())
                     {

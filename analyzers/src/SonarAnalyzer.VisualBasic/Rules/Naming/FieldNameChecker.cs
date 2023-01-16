@@ -28,7 +28,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected sealed override void Initialize(SonarParametrizedAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var fieldDeclaration = (FieldDeclarationSyntax)c.Node;

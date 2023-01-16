@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules
     {
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterCodeBlockStartActionInNonGenerated<TLanguageKindEnum>(
+            context.RegisterCodeBlockStartAction<TLanguageKindEnum>(
                 GeneratedCodeRecognizer,
                 cbc =>
                 {
@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules
                         return;
                     }
 
-                    cbc.RegisterSyntaxNodeAction(
+                    cbc.RegisterNodeAction(
                         c =>
                         {
                             var throwExpression = GetThrowExpression(c.Node);

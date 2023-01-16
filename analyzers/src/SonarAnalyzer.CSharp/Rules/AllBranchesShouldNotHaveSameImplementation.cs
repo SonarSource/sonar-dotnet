@@ -31,19 +31,19 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 context => Analyze(context, (SwitchExpressionSyntaxWrapper)context.Node),
                 SyntaxKindEx.SwitchExpression);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 new SwitchStatementAnalyzer().GetAnalysisAction(rule),
                 SyntaxKind.SwitchStatement);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 new TernaryStatementAnalyzer().GetAnalysisAction(rule),
                 SyntaxKind.ConditionalExpression);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 new IfStatementAnalyzer().GetAnalysisAction(rule),
                 SyntaxKind.ElseClause);
         }

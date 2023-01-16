@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var node = (OnErrorGoToStatementSyntax)c.Node;
@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 SyntaxKind.OnErrorGoToZeroStatement,
                 SyntaxKind.OnErrorGoToMinusOneStatement);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var node = (OnErrorResumeNextStatementSyntax)c.Node;

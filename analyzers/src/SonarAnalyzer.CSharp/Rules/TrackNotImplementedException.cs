@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     var throwStatement = (ThrowStatementSyntax)c.Node;
@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.ThrowStatement);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                  c =>
                  {
                      var throwExpression = (ThrowExpressionSyntaxWrapper)c.Node;

@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules
         protected ParameterNameMatchesOriginalBase() : base(DiagnosticId) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
+            context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
                 {
                     var methodSyntax = (TMethodDeclarationSyntax)c.Node;
                     if (c.SemanticModel.GetDeclaredSymbol(methodSyntax) is IMethodSymbol methodSymbol && methodSymbol.Parameters.Any())

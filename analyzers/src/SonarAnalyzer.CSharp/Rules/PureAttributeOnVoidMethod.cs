@@ -28,7 +28,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context)
         {
             base.Initialize(context);
-            context.RegisterSyntaxNodeActionInNonGenerated(
+            context.RegisterNodeAction(
                 c =>
                 {
                     if ((LocalFunctionStatementSyntaxWrapper)c.Node is var localFunction

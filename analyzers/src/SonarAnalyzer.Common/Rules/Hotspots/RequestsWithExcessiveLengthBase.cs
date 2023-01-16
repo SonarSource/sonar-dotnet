@@ -70,7 +70,7 @@ namespace SonarAnalyzer.Rules
                 {
                     var attributesOverTheLimit = new Dictionary<SyntaxNode, Attributes>();
 
-                    c.RegisterSyntaxNodeActionInNonGenerated(
+                    c.RegisterNodeAction(
                         Language.GeneratedCodeRecognizer,
                         cc => CollectAttributesOverTheLimit(cc, attributesOverTheLimit),
                         Language.SyntaxKind.Attribute);
