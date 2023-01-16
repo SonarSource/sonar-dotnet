@@ -97,7 +97,9 @@ public class SonarAnalysisContext
             c => Execute<SonarSyntaxNodeReportingContext, SyntaxNodeAnalysisContext>(new(this, c), action, c.Node.SyntaxTree, generatedCodeRecognizer), syntaxKinds);
 
     public void RegisterTreeAction(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxTreeReportingContext> action) =>
-        analysisContext.RegisterCompilationStartAction(WrapTreeAction(action, generatedCodeRecognizer));
+        analysisContext.RegisterCompilationStartAction(
+            c => c.RegisterSyntaxTreeAction(
+                treeContext => Execute<SonarSyntaxTreeReportingContext, SyntaxTreeAnalysisContext>(new(this, treeContext, c.Compilation), action, treeContext.Tree, generatedCodeRecognizer)));
 
     /// <summary>
     /// Register action for a SyntaxNode that is executed unconditionally:
@@ -108,10 +110,6 @@ public class SonarAnalysisContext
     /// </summary>
     public void RegisterNodeActionInAllFiles<TSyntaxKind>(Action<SonarSyntaxNodeReportingContext> action, params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct =>
         analysisContext.RegisterSyntaxNodeAction(c => action(new(this, c)), syntaxKinds);
-
-    public Action<CompilationStartAnalysisContext> WrapTreeAction(Action<SonarSyntaxTreeReportingContext> action, GeneratedCodeRecognizer generatedCodeRecognizer = null) =>
-        c => c.RegisterSyntaxTreeAction(
-            treeContext => Execute<SonarSyntaxTreeReportingContext, SyntaxTreeAnalysisContext>(new(this, treeContext, c.Compilation), action, treeContext.Tree, generatedCodeRecognizer));
 
     /// <param name="sourceTree">Tree that is definitely known to be analyzed. Pass 'null' if the context doesn't know a specific tree to be analyzed, like a CompilationContext.</param>
     private void Execute<TSonarContext, TRoslynContext>(TSonarContext context, Action<TSonarContext> action, SyntaxTree sourceTree, GeneratedCodeRecognizer generatedCodeRecognizer = null)
