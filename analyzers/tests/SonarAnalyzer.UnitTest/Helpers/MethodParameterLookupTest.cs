@@ -214,7 +214,8 @@ End Module
                 {
                     if (parameter.IsParams && lookup.TryGetSyntax(parameter, out var expressions))
                     {
-                        expressions.Select(x => ConstantValue(x)).Should().BeEquivalentTo(((IEnumerable)ExtractExpectedValue(expectedArguments, parameter.Name)).Cast<object>());
+                        var expected = ExtractExpectedValue(expectedArguments, parameter.Name).Should().BeAssignableTo<IEnumerable>().Subject.Cast<object>();
+                        expressions.Select(x => ConstantValue(x)).Should().Equal(expected);
                     }
                     else if (!parameter.IsParams && lookup.TryGetNonParamsSyntax(parameter, out var expression))
                     {
