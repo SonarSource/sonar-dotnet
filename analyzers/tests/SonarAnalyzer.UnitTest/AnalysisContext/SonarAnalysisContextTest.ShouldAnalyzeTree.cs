@@ -21,11 +21,13 @@
 using System.Text;
 using Microsoft.CodeAnalysis.Text;
 using Moq;
+using SonarAnalyzer.AnalysisContext;
 using SonarAnalyzer.Common;
 using CS = SonarAnalyzer.Rules.CSharp;
+using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.UnitTest;
+namespace SonarAnalyzer.UnitTest.AnalysisContext;
 
 public partial class SonarAnalysisContextTest
 {
@@ -332,7 +334,7 @@ public partial class SonarAnalysisContextTest
     }
 
     private static SonarAnalysisContext CreateSut() =>
-        new(Mock.Of<AnalysisContext>(), Enumerable.Empty<DiagnosticDescriptor>());
+        new(Mock.Of<RoslynAnalysisContext>(), Enumerable.Empty<DiagnosticDescriptor>());
 
     private static DummySourceText CreateSonarLintXml(bool analyzeGeneratedCSharp) =>
         new($"""
