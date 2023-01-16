@@ -239,8 +239,8 @@ End Module
                         var expected = ExtractExpectedValue(expectedArguments, symbol.Name);
                         if (symbol.IsParams)
                         {
-                            expected.Should().BeOfType(value.GetType().MakeArrayType());
-                            ((IEnumerable)expected).Cast<object>().Should().Contain(value); // Expected contains all values {1, 2, 3} for ParamArray/params, but foreach is probing one at a time
+                            // Expected contains all values {1, 2, 3} for ParamArray/params, but foreach is probing one at a time
+                            expected.Should().BeAssignableTo<IEnumerable>().Which.Cast<object>().Should().Contain(value);
                         }
                         else
                         {
