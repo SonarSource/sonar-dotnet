@@ -179,7 +179,7 @@ public partial class SonarAnalysisContextTest
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     private class DummyAnalyzerForGenerated : SonarDiagnosticAnalyzer
     {
-        private readonly DiagnosticDescriptor rule = TestHelper.CreateDescriptor("SDummy", DiagnosticDescriptorFactory.MainSourceScopeTag);
+        private readonly DiagnosticDescriptor rule = TestHelper.CreateDescriptor("SGenerated", DiagnosticDescriptorFactory.MainSourceScopeTag);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
