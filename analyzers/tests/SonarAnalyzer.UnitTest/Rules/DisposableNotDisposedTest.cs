@@ -37,6 +37,12 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
 
         [TestMethod]
+        public void DisposableNotDisposed_CSharp8() =>
+            builder.AddPaths("DisposableNotDisposed.CSharp8.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
+
+        [TestMethod]
         public void DisposableNotDisposed_CSharp9() =>
             builder.AddPaths("DisposableNotDisposed.CSharp9.cs")
                 .WithTopLevelStatements()
