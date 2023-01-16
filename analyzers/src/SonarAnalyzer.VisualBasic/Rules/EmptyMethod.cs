@@ -55,8 +55,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             }
             else if (context.SemanticModel.GetDeclaredSymbol(methodStatement) is { IsOverride: true } methodSymbol)
             {
-                return methodSymbol.OverriddenMethod is { IsAbstract: true }
-                    || (methodSymbol.IsOverrides() && context.IsTestProject());
+                return methodSymbol.OverriddenMethod is { IsAbstract: true } || context.IsTestProject();
             }
             else
             {

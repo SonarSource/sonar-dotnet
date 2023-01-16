@@ -23,6 +23,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 using Moq;
+using SonarAnalyzer.AnalysisContext;
 using SonarAnalyzer.CFG;
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.Common;
@@ -30,6 +31,7 @@ using SonarAnalyzer.Extensions;
 using SonarAnalyzer.UnitTest.PackagingTests;
 using StyleCop.Analyzers.Lightup;
 using CS = Microsoft.CodeAnalysis.CSharp;
+using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest
@@ -195,6 +197,9 @@ End Class", AnalyzerLanguage.VisualBasic);
             _ = operation ?? throw new ArgumentNullException(nameof(operation));
             return operation.Instance.Kind + ": " + operation.Instance.Syntax + (operation.IsImplicit ? " (Implicit)" : null);
         }
+
+        public static SonarAnalysisContext CreateSonarAnalysisContext() =>                  // FIXME: Use everywhere
+            new(Mock.Of<RoslynAnalysisContext>(), Enumerable.Empty<DiagnosticDescriptor>());
 
         public static AnalyzerOptions CreateOptions(string relativePath)
         {
