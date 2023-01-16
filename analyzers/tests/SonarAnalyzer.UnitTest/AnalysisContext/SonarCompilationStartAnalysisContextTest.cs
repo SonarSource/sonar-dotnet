@@ -20,7 +20,6 @@
 
 using Moq;
 using SonarAnalyzer.AnalysisContext;
-using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext;
 
 namespace SonarAnalyzer.UnitTest.AnalysisContext;
 
@@ -30,12 +29,11 @@ public class SonarCompilationStartAnalysisContextTest
     [TestMethod]
     public void Properties_ArePropagated()
     {
-        var analysisContext = new SonarAnalysisContext(Mock.Of<RoslynAnalysisContext>(), Enumerable.Empty<DiagnosticDescriptor>());
         var cancel = new CancellationToken(true);
         var (tree, model) = TestHelper.CompileCS("// Nothing to see here");
-        var options = TestHelper.CreateOptions(null);   // FIXME: Remove null argument in #6590
+        var options = AnalysisScaffolding.CreateOptions(null);   // FIXME: Remove null argument in #6590
         var context = new Mock<CompilationStartAnalysisContext>(model.Compilation, options, cancel).Object;
-        var sut = new SonarCompilationStartAnalysisContext(analysisContext, context);
+        var sut = new SonarCompilationStartAnalysisContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context);
 
         sut.Tree.Should().Be(tree);
         sut.Compilation.Should().Be(model.Compilation);

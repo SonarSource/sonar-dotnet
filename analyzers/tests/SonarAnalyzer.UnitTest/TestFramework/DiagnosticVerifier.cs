@@ -127,7 +127,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             var ids = supportedDiagnostics.Select(x => x.Key).ToHashSet();
 
             var compilationOptions = compilation.Options.WithSpecificDiagnosticOptions(supportedDiagnostics);
-            var analyzerOptions = string.IsNullOrWhiteSpace(sonarProjectConfigPath) ? null : TestHelper.CreateOptions(sonarProjectConfigPath);
+            var analyzerOptions = string.IsNullOrWhiteSpace(sonarProjectConfigPath) ? null : AnalysisScaffolding.CreateOptions(sonarProjectConfigPath);
             var diagnostics = compilation
                 .WithOptions(compilationOptions)
                 .WithAnalyzers(diagnosticAnalyzers.ToImmutableArray(), analyzerOptions)

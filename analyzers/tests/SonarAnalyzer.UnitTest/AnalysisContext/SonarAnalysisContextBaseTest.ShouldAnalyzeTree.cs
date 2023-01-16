@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.IO;
 using System.Text;
 using Microsoft.CodeAnalysis.Text;
 using Moq;
@@ -35,7 +36,7 @@ public partial class SonarAnalysisContextBaseTest
     [TestMethod]
     public void ShouldAnalyzeTree_SonarLint()
     {
-        var options = new AnalyzerOptions(ImmutableArray<AdditionalText>.Empty);    // No SonarProjectConfig.xml
+        var options = AnalysisScaffolding.CreateOptions();   // No SonarProjectConfig.xml
 
         ShouldAnalyzeTree(options).Should().BeTrue();
     }
@@ -43,9 +44,7 @@ public partial class SonarAnalysisContextBaseTest
     [TestMethod]
     public void ShouldAnalyzeTree_Scanner_UnchangedFiles_NotAvailable()
     {
-        var sonarProjectConfig = TestHelper.CreateSonarProjectConfig(TestContext, ProjectType.Product); // SonarProjectConfig.xml without UnchangedFiles.txt
-        var additionalFile = new AnalyzerAdditionalFile(sonarProjectConfig);
-        var options = new AnalyzerOptions(ImmutableArray.Create<AdditionalText>(additionalFile));
+        var options = AnalysisScaffolding.CreateOptions(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product));  // SonarProjectConfig.xml without UnchangedFiles.txt
 
         ShouldAnalyzeTree(options).Should().BeTrue();
     }
@@ -91,8 +90,10 @@ public partial class SonarAnalysisContextBaseTest
     public void ShouldAnalyzeTree_GeneratedFile_ShouldAnalyzeGeneratedProvider_IsCached()
     {
         var sonarLintXml = CreateSonarLintXml(true);
-        var additionalText = MockAdditionalText(sonarLintXml);
-        var (compilation, tree) = CreateDummyCompilation(AnalyzerLanguage.CSharp, OtherFileName);
+        var additionalText = new Mock<AdditionalText>();
+        additionalText.Setup(x => x.Path).Returns("SonarLint.xml");
+        additionalText.Setup(x => x.GetText(default)).Returns(sonarLintXml);
+        var tree = CreateDummyCompilation(AnalyzerLanguage.CSharp, OtherFileName).Tree;
         var sut = CreateSut(new AnalyzerOptions(ImmutableArray.Create(additionalText.Object)));
 
         // Call ShouldAnalyzeGenerated multiple times...
@@ -349,23 +350,11 @@ public partial class SonarAnalysisContextBaseTest
             </AnalysisInput>
             """);
 
-    private AnalyzerOptions CreateOptions(string[] unchangedFiles)
-    {
-        var sonarProjectConfig = TestHelper.CreateSonarProjectConfigWithUnchangedFiles(TestContext, unchangedFiles);
-        var additionalFile = new AnalyzerAdditionalFile(sonarProjectConfig);
-        return new(ImmutableArray.Create<AdditionalText>(additionalFile));
-    }
+    private AnalyzerOptions CreateOptions(string[] unchangedFiles) =>
+        AnalysisScaffolding.CreateOptions(AnalysisScaffolding.CreateSonarProjectConfigWithUnchangedFiles(TestContext, unchangedFiles));
 
     private static AnalyzerOptions CreateOptions(SourceText sourceText, string path = @"ResourceTests\SonarLint.xml") =>
-        new(ImmutableArray.Create(MockAdditionalText(sourceText, path).Object));
-
-    private static Mock<AdditionalText> MockAdditionalText(SourceText sourceText, string path = @"ResourceTests\SonarLint.xml")
-    {
-        var additionalText = new Mock<AdditionalText>();
-        additionalText.Setup(x => x.Path).Returns(path);
-        additionalText.Setup(x => x.GetText(default)).Returns(sourceText);
-        return additionalText;
-    }
+        AnalysisScaffolding.CreateOptions(path, sourceText);
 
     private static (Compilation Compilation, SyntaxTree Tree) CreateDummyCompilation(AnalyzerLanguage language, string treeFileName)
     {

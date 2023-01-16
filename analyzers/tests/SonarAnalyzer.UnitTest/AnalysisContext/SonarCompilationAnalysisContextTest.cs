@@ -18,9 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Moq;
 using SonarAnalyzer.AnalysisContext;
-using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext;
 
 namespace SonarAnalyzer.UnitTest.AnalysisContext;
 
@@ -30,12 +28,11 @@ public class SonarCompilationAnalysisContextTest
     [TestMethod]
     public void Properties_ArePropagated()
     {
-        var analysisContext = new SonarAnalysisContext(Mock.Of<RoslynAnalysisContext>(), Enumerable.Empty<DiagnosticDescriptor>());
         var cancel = new CancellationToken(true);
         var (tree, model) = TestHelper.CompileCS("// Nothing to see here");
-        var options = TestHelper.CreateOptions(null);   // FIXME: Remove null argument in #6590
+        var options = AnalysisScaffolding.CreateOptions();
         var context = new CompilationAnalysisContext(model.Compilation, options, _ => { }, _ => true, cancel);
-        var sut = new SonarCompilationAnalysisContext(analysisContext, context);
+        var sut = new SonarCompilationAnalysisContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context);
 
         sut.Tree.Should().Be(tree);
         sut.Compilation.Should().Be(model.Compilation);
