@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules
         protected ObjectShouldBeInitializedCorrectlyBase(IAnalyzerConfiguration configuration, string diagnosticId, string messageFormat)
             : base(configuration, diagnosticId, messageFormat) { }
 
-        protected virtual bool IsDefaultConstructorSafe(SonarAnalysisContext context, AnalyzerOptions options) => false;
+        protected virtual bool IsDefaultConstructorSafe(SonarCompilationStartAnalysisContext context) => false;
 
         protected override void Initialize(TrackerInput input)
         {
@@ -44,16 +44,16 @@ namespace SonarAnalyzer.Rules
         {
             base.Initialize(context);
             context.RegisterCompilationStartAction(
-                ccc =>
+                compilationStartContext =>
                 {
-                    if (!IsEnabled(ccc.Options))
+                    if (!IsEnabled(compilationStartContext.Options))
                     {
                         return;
                     }
 
-                    var isDefaultConstructorSafe = IsDefaultConstructorSafe(context, ccc.Options);
+                    var isDefaultConstructorSafe = IsDefaultConstructorSafe(compilationStartContext);
 
-                    ccc.RegisterSyntaxNodeActionInNonGenerated(
+                    compilationStartContext.RegisterSyntaxNodeActionInNonGenerated(
                         c =>
                         {
                             var objectCreation = ObjectCreationFactory.Create(c.Node);
@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Rules
                         },
                         SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
 
-                    ccc.RegisterSyntaxNodeActionInNonGenerated(
+                    compilationStartContext.RegisterSyntaxNodeActionInNonGenerated(
                         c =>
                         {
                             var assignment = (AssignmentExpressionSyntax)c.Node;
@@ -77,9 +77,9 @@ namespace SonarAnalyzer.Rules
                 });
         }
 
-        protected static bool IsWebConfigCookieSet(SonarAnalysisContext context, AnalyzerOptions options, string attribute)
+        protected static bool IsWebConfigCookieSet(SonarCompilationStartAnalysisContext context, string attribute)
         {
-            foreach (var fullPath in context.ProjectConfiguration(options).FilesToAnalyze.FindFiles("web.config"))
+            foreach (var fullPath in context.ProjectConfiguration().FilesToAnalyze.FindFiles("web.config"))
             {
                 var webConfig = File.ReadAllText(fullPath);
                 if (webConfig.Contains("<system.web>") && XmlHelper.ParseXDocument(webConfig) is { } doc
