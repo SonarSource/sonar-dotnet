@@ -64,7 +64,7 @@ namespace CustomTests
     public class DerivedTest : BaseTest
     {
         [TestMethod]
-        public void Derived() // Noncompliant FP: The overridden method needs to be annotated because Roslyn does not respect AttributeUsage.Inherited in ISymbol.GetAttributes
+        public void Derived() // Compliant
         {
             CustomAssertionMethod();
         }
