@@ -68,7 +68,7 @@ namespace SonarAnalyzer.Rules.CSharp
             public VariableDeclarationBannedWordsFinder(DoNotHardcodeCredentials analyzer) : base(analyzer) { }
 
             protected override string GetAssignedValue(VariableDeclaratorSyntax syntaxNode, SemanticModel semanticModel) =>
-                FindStringLiteralInVariableDeclaration(syntaxNode.Initializer?.Value)?.StringValue(semanticModel);
+                FindStringLiteralInVariableDeclaration(syntaxNode.Initializer.Value)?.StringValue(semanticModel);
 
             protected override string GetVariableName(VariableDeclaratorSyntax syntaxNode) =>
                 syntaxNode.Identifier.ValueText;
