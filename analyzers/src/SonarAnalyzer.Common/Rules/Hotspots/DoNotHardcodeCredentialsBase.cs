@@ -87,7 +87,7 @@ namespace SonarAnalyzer.Rules
 
         protected sealed override void Initialize(SonarParametrizedAnalysisContext context)
         {
-            var input = new TrackerInput(context.Context, configuration, rule);
+            var input = new TrackerInput(context, configuration, rule);
 
             var oc = Language.Tracker.ObjectCreation;
             oc.Track(input, new object[] { MessageHardcodedPassword },
@@ -107,8 +107,8 @@ namespace SonarAnalyzer.Rules
                pa.MatchProperty(new MemberDescriptor(KnownType.System_Net_NetworkCredential, "Password")));
 
             InitializeActions(context);
-            context.Context.RegisterCompilationAction(CheckWebConfig);
-            context.Context.RegisterCompilationAction(CheckAppSettings);
+            context.RegisterCompilationAction(CheckWebConfig);
+            context.RegisterCompilationAction(CheckAppSettings);
         }
 
         protected bool IsEnabled(AnalyzerOptions options)
