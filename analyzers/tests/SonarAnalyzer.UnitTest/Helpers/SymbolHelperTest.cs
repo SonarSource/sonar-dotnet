@@ -426,9 +426,6 @@ namespace NS
 
                 public class MyUnannotatedAttribute : Attribute { }
 
-                [MyInheritedAttribute]
-                [MyNotInherited]
-                [MyUnannotatedAttribute]
                 public class BaseClass<T1>
                 {
                     [MyInheritedAttribute]
@@ -476,10 +473,6 @@ namespace NS
                 {
                     public static void Main()
                     {
-                        var baseClass = new BaseClass<int>();
-                        var derivedOpen = new DerivedOpenGeneric<int>();
-                        var derivedClosed = new DerivedClosedGeneric();
-                        var derivedNoOverrides = new DerivedNoOverrides<int>();
                         new {{className.Replace(@"`1", "<int>")}}().{{methodName.Replace(@"`1", "<int>")}}();
                     }
                 }
@@ -495,6 +488,75 @@ namespace NS
             var type = assembly.GetType(className, throwOnError: true);
             var methodInfo = type.GetMethod(methodName.Replace("`1", string.Empty));
             methodInfo.GetCustomAttributes(inherit: true).Select(x => x.GetType().Name).Should().BeEquivalentTo(expectedAttributes);
+        }
+
+        [DataTestMethod]
+        [DataRow("BaseClass`1", "MyInheritedAttribute", "MyNotInheritedAttribute", "MyUnannotatedAttribute")]
+        [DataRow("DerivedOpenGeneric`1", "MyInheritedAttribute", "MyUnannotatedAttribute")]
+        [DataRow("DerivedClosedGeneric", "MyInheritedAttribute", "MyUnannotatedAttribute")]
+        [DataRow("Implement")]
+        public void GetAttributesWithInherited_TypeSymbol(string className, params string[] expectedAttributes)
+        {
+            var code = $$"""
+                using System;
+
+                [AttributeUsage(AttributeTargets.All, Inherited = true)]
+                public class MyInheritedAttribute : Attribute { }
+
+                [AttributeUsage(AttributeTargets.All, Inherited = false)]
+                public class MyNotInheritedAttribute : Attribute { }
+
+                public class MyUnannotatedAttribute : Attribute { }
+
+                [MyInheritedAttribute]
+                [MyNotInherited]
+                [MyUnannotatedAttribute]
+                public class BaseClass<T1>
+                {
+                }
+
+                [MyInheritedAttribute]
+                [MyNotInherited]
+                [MyUnannotatedAttribute]
+                public interface IInterface
+                {
+                }
+
+                public class DerivedOpenGeneric<T1>: BaseClass<T1>
+                {
+                }
+
+                public class DerivedClosedGeneric: BaseClass<int>
+                {
+                }
+
+                public class Implement: IInterface
+                {
+                }
+
+                public class Program
+                {
+                    public static void Main()
+                    {
+                        new {{className.Replace(@"`1", "<int>")}}();
+                    }
+                }
+                """;
+            var compiler = new SnippetCompiler(code);
+            var objectCreation = compiler.GetNodes<ObjectCreationExpressionSyntax>().Should().ContainSingle().Subject;
+            if (compiler.GetSymbol<IMethodSymbol>(objectCreation) is { MethodKind: MethodKind.Constructor, ReceiverType: { } receiver })
+            {
+                var actual = receiver.GetAttributesWithInherited().Select(x => x.AttributeClass.Name).ToList();
+                actual.Should().BeEquivalentTo(expectedAttributes);
+            }
+            else
+            {
+                Assert.Fail("Constructor could not be found.");
+            }
+            // GetAttributesWithInherited should behave like MemberInfo.GetCustomAttributes from runtime reflection:
+            var assembly = compiler.GetEmittedAssembly();
+            var type = assembly.GetType(className, throwOnError: true);
+            type.GetCustomAttributes(inherit: true).Select(x => x.GetType().Name).Should().BeEquivalentTo(expectedAttributes);
         }
     }
 }
