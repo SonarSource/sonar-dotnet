@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Rules
 
         protected override void Initialize(SonarParametrizedAnalysisContext context)
         {
-            context.RegisterPostponedAction(
+            context.RegisterCompilationStartAction(
                 c =>
                 {
                     var attributesOverTheLimit = new Dictionary<SyntaxNode, Attributes>();
@@ -77,7 +77,7 @@ namespace SonarAnalyzer.Rules
 
                     c.RegisterCompilationEndAction(cc => ReportOnCollectedAttributes(cc, attributesOverTheLimit));
                 });
-            context.Context.RegisterCompilationAction(CheckWebConfig);
+            context.RegisterCompilationAction(CheckWebConfig);
         }
 
         protected bool IsRequestFormLimits(string attributeName) =>
