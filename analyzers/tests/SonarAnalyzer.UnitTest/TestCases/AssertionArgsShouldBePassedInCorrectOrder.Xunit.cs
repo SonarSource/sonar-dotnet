@@ -44,6 +44,10 @@ namespace Repro_6630
 
             Assert.Same(actual: "", expected: str); // Compliant FN
             Assert.NotSame(actual: "", expected: str); // Compliant FN
+
+            int d = 42;
+            Assert.Equal<int>(actual: 1, expected: d); // Compliant FN
+            Assert.Equal(actual: null, expected: new Program()); // Compliant FN
         }
     }
 }
