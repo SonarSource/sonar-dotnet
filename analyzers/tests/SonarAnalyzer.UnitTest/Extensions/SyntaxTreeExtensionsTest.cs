@@ -21,13 +21,11 @@
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 
-namespace SonarAnalyzer.UnitTest.AnalysisContext;
+namespace SonarAnalyzer.UnitTest.Extensions;
 
 [TestClass]
-public class SyntaxTreeContextExtensionsTest
+public class SyntaxTreeExtensionsTest
 {
-    public TestContext TestContext { get; set; }
-
     [TestMethod]
     public void IsGenerated_On_GeneratedTree()
     {
