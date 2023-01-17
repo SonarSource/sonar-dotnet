@@ -27,7 +27,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         protected SemanticModel SemanticModel => context.SemanticModel;
 
         private readonly HashSet<Location> reportedDiagnostics = new();
-        private SonarSyntaxNodeAnalysisContext context;
+        private SonarSyntaxNodeReportingContext context;
 
         protected abstract DiagnosticDescriptor Rule { get; }
 
@@ -39,7 +39,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         /// </remarks>
         public abstract bool ShouldExecute();
 
-        public void Init(SonarAnalysisContext sonarContext, SonarSyntaxNodeAnalysisContext nodeContext)
+        public void Init(SonarAnalysisContext sonarContext, SonarSyntaxNodeReportingContext nodeContext)
         {
             SonarContext = sonarContext;
             context = nodeContext;

@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.InvocationExpression);
         }
 
-        private static void CheckCastExpression(SonarSyntaxNodeAnalysisContext context, ExpressionSyntax expression, ExpressionSyntax type, Location location)
+        private static void CheckCastExpression(SonarSyntaxNodeReportingContext context, ExpressionSyntax expression, ExpressionSyntax type, Location location)
         {
             if (expression.IsKind(SyntaxKindEx.DefaultLiteralExpression))
             {
@@ -83,7 +83,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckExtensionMethodInvocation(SonarSyntaxNodeAnalysisContext context)
+        private static void CheckExtensionMethodInvocation(SonarSyntaxNodeReportingContext context)
         {
             var invocation = (InvocationExpressionSyntax)context.Node;
             if (GetEnumerableExtensionSymbol(invocation, context.SemanticModel) is { } methodSymbol)

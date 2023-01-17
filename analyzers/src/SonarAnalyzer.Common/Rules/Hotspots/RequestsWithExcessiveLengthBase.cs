@@ -88,7 +88,7 @@ namespace SonarAnalyzer.Rules
             attributeName.Equals(RequestSizeLimit, Language.NameComparison)
             || attributeName.Equals(RequestSizeLimitAttribute, Language.NameComparison);
 
-        private void CollectAttributesOverTheLimit(SonarSyntaxNodeAnalysisContext context, IDictionary<SyntaxNode, Attributes> attributesOverTheLimit)
+        private void CollectAttributesOverTheLimit(SonarSyntaxNodeReportingContext context, IDictionary<SyntaxNode, Attributes> attributesOverTheLimit)
         {
             if (!IsEnabled(context.Options))
             {
@@ -116,7 +116,7 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        private void ReportOnCollectedAttributes(SonarCompilationAnalysisContext context, IDictionary<SyntaxNode, Attributes> attributesOverTheLimit)
+        private void ReportOnCollectedAttributes(SonarCompilationReportingContext context, IDictionary<SyntaxNode, Attributes> attributesOverTheLimit)
         {
             foreach (var invalidAttributes in attributesOverTheLimit.Values)
             {
@@ -138,7 +138,7 @@ namespace SonarAnalyzer.Rules
             return SupportedDiagnostics.Any(d => analyzerConfiguration.IsEnabled(d.Id));
         }
 
-        private void CheckWebConfig(SonarCompilationAnalysisContext c)
+        private void CheckWebConfig(SonarCompilationReportingContext c)
         {
             foreach (var fullPath in c.WebConfigFiles())
             {
@@ -150,7 +150,7 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        private void ReportRequestLengthViolation(SonarCompilationAnalysisContext c, XDocument doc, string webConfigPath)
+        private void ReportRequestLengthViolation(SonarCompilationReportingContext c, XDocument doc, string webConfigPath)
         {
             foreach (var httpRuntime in doc.XPathSelectElements("configuration/system.web/httpRuntime"))
             {

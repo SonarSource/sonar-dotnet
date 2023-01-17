@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules
 
         protected abstract override void Initialize(SonarParametrizedAnalysisContext context);
 
-        protected void CheckComplexity<TSyntax>(SonarSyntaxNodeAnalysisContext context, Func<TSyntax, SyntaxNode> nodeSelector, Func<TSyntax, Location> location,
+        protected void CheckComplexity<TSyntax>(SonarSyntaxNodeReportingContext context, Func<TSyntax, SyntaxNode> nodeSelector, Func<TSyntax, Location> location,
             string declarationType)
             where TSyntax : SyntaxNode
         {
@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        protected void CheckComplexity<TSyntax>(SonarSyntaxNodeAnalysisContext context, Func<TSyntax, Location> location,
+        protected void CheckComplexity<TSyntax>(SonarSyntaxNodeReportingContext context, Func<TSyntax, Location> location,
             string declarationType)
             where TSyntax : SyntaxNode
         {

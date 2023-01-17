@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.AnalysisContext;
 
-public sealed class SonarCodeBlockAnalysisContext : SonarTreeReportingContextBase<CodeBlockAnalysisContext>
+public sealed class SonarCodeBlockReportingContext : SonarTreeReportingContextBase<CodeBlockAnalysisContext>
 {
     public override SyntaxTree Tree => Context.CodeBlock.SyntaxTree;
     public override Compilation Compilation => Context.SemanticModel.Compilation;
@@ -30,7 +30,7 @@ public sealed class SonarCodeBlockAnalysisContext : SonarTreeReportingContextBas
     public ISymbol OwningSymbol => Context.OwningSymbol;
     public SemanticModel SemanticModel => Context.SemanticModel;
 
-    internal SonarCodeBlockAnalysisContext(SonarAnalysisContext analysisContext, CodeBlockAnalysisContext context) : base(analysisContext, context) { }
+    internal SonarCodeBlockReportingContext(SonarAnalysisContext analysisContext, CodeBlockAnalysisContext context) : base(analysisContext, context) { }
 
     private protected override ReportingContext CreateReportingContext(Diagnostic diagnostic) =>
         new(this, diagnostic);

@@ -84,7 +84,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.LocalDeclarationStatement);
         }
 
-        private static void CheckReturns(SonarSyntaxNodeAnalysisContext c, SyntaxToken usingKeyword, SyntaxNode body, HashSet<ISymbol> declaredSymbols)
+        private static void CheckReturns(SonarSyntaxNodeReportingContext c, SyntaxToken usingKeyword, SyntaxNode body, HashSet<ISymbol> declaredSymbols)
         {
             if (declaredSymbols.Count == 0)
             {

@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.SimpleLambdaExpression);
         }
 
-        private static void CheckExpressionForPureMethod(SonarSyntaxNodeAnalysisContext context, ExpressionSyntax expression)
+        private static void CheckExpressionForPureMethod(SonarSyntaxNodeReportingContext context, ExpressionSyntax expression)
         {
             if (expression is InvocationExpressionSyntax invocation
                 && context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol { ReturnsVoid: false } invokedMethodSymbol

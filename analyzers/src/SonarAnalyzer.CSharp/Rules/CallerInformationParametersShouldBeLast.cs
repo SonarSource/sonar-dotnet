@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ConstructorDeclaration,
                 SyntaxKindEx.LocalFunctionStatement);
 
-        private static void ReportOnViolation(SonarSyntaxNodeAnalysisContext context)
+        private static void ReportOnViolation(SonarSyntaxNodeReportingContext context)
         {
             var methodDeclaration = context.Node;
             var parameterList = LocalFunctionStatementSyntaxWrapper.IsInstance(methodDeclaration)

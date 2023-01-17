@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules
 
         protected LogAnalyzerBase() : base(DiagnosticId, Title) { }
 
-        protected sealed override IEnumerable<LogInfo> CreateAnalysisMessages(SonarCompilationAnalysisContext c) =>
+        protected sealed override IEnumerable<LogInfo> CreateAnalysisMessages(SonarCompilationReportingContext c) =>
             new[]
             {
                 new LogInfo { Severity = LogSeverity.Info, Text = "Roslyn version: " + typeof(SyntaxNode).Assembly.GetName().Version },

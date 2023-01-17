@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules
             context.RegisterCompilationAction(CheckWebConfig);
         }
 
-        private void CheckController(SonarSymbolAnalysisContext context)
+        private void CheckController(SonarSymbolReportingContext context)
         {
             if (!IsEnabled(context.Options))
             {
@@ -74,7 +74,7 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        private void CheckWebConfig(SonarCompilationAnalysisContext context)
+        private void CheckWebConfig(SonarCompilationReportingContext context)
         {
             if (!IsEnabled(context.Options))
             {
@@ -92,7 +92,7 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        private void ReportValidateRequest(SonarCompilationAnalysisContext context, XDocument doc, string webConfigPath)
+        private void ReportValidateRequest(SonarCompilationReportingContext context, XDocument doc, string webConfigPath)
         {
             foreach (var pages in doc.XPathSelectElements("configuration/system.web/pages"))
             {
@@ -104,7 +104,7 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        private void ReportRequestValidationMode(SonarCompilationAnalysisContext context, XDocument doc, string webConfigPath)
+        private void ReportRequestValidationMode(SonarCompilationReportingContext context, XDocument doc, string webConfigPath)
         {
             foreach (var httpRuntime in doc.XPathSelectElements("configuration/system.web/httpRuntime"))
             {

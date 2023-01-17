@@ -26,7 +26,7 @@ namespace SonarAnalyzer.Helpers
         public SyntaxNode Node { get; }
         public Location PrimaryLocation { get; set; }
 
-        public SyntaxBaseContext(SonarSyntaxNodeAnalysisContext context) : this(context.Node, context.SemanticModel) { }
+        public SyntaxBaseContext(SonarSyntaxNodeReportingContext context) : this(context.Node, context.SemanticModel) { }
 
         public SyntaxBaseContext(SyntaxNode node, SemanticModel semanticModel)
         {

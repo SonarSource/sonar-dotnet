@@ -140,7 +140,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public INamedTypeSymbol GetTypeByMetadataName(string metadataName) =>
             SemanticModel.Compilation.GetTypeByMetadataName(metadataName);
 
-        public SonarSyntaxNodeAnalysisContext CreateAnalysisContext(SyntaxNode node)
+        public SonarSyntaxNodeReportingContext CreateAnalysisContext(SyntaxNode node)
         {
             var nodeContext =  new SyntaxNodeAnalysisContext(node, SemanticModel, null, null, null, default);
             return new(AnalysisScaffolding.CreateSonarAnalysisContext(), nodeContext);

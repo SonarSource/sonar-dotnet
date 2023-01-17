@@ -75,7 +75,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.PropertyDeclaration);
         }
 
-        private void CheckForNoExitMethod(SonarSyntaxNodeAnalysisContext c, CSharpSyntaxNode body, SyntaxToken identifier)
+        private void CheckForNoExitMethod(SonarSyntaxNodeReportingContext c, CSharpSyntaxNode body, SyntaxToken identifier)
         {
             if (body != null && c.SemanticModel.GetDeclaredSymbol(c.Node) is IMethodSymbol symbol)
             {
@@ -96,7 +96,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private sealed class RecursionContext<TControlFlowGraph>
         {
-            private readonly SonarSyntaxNodeAnalysisContext analysisContext;
+            private readonly SonarSyntaxNodeReportingContext analysisContext;
             private readonly string messageArg;
             private readonly Location issueLocation;
 
@@ -104,7 +104,7 @@ namespace SonarAnalyzer.Rules.CSharp
             public ISymbol AnalyzedSymbol { get; }
             public SemanticModel SemanticModel => analysisContext.SemanticModel;
 
-            public RecursionContext(SonarSyntaxNodeAnalysisContext analysisContext,
+            public RecursionContext(SonarSyntaxNodeReportingContext analysisContext,
                                     TControlFlowGraph controlFlowGraph,
                                     ISymbol analyzedSymbol,
                                     Location issueLocation,
@@ -123,8 +123,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private interface IChecker
         {
-            void CheckForNoExitProperty(SonarSyntaxNodeAnalysisContext c, PropertyDeclarationSyntax property, IPropertySymbol propertySymbol);
-            void CheckForNoExitMethod(SonarSyntaxNodeAnalysisContext c, CSharpSyntaxNode body, SyntaxToken identifier, IMethodSymbol symbol);
+            void CheckForNoExitProperty(SonarSyntaxNodeReportingContext c, PropertyDeclarationSyntax property, IPropertySymbol propertySymbol);
+            void CheckForNoExitMethod(SonarSyntaxNodeReportingContext c, CSharpSyntaxNode body, SyntaxToken identifier, IMethodSymbol symbol);
         }
     }
 }

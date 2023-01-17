@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
                },
                SyntaxKind.InvocationExpression);
 
-        private static void CheckIsInstanceOfTypeCallWithTypeArgument(SonarSyntaxNodeAnalysisContext context, InvocationExpressionSyntax invocation, ISymbol methodSymbol)
+        private static void CheckIsInstanceOfTypeCallWithTypeArgument(SonarSyntaxNodeReportingContext context, InvocationExpressionSyntax invocation, ISymbol methodSymbol)
         {
             if (methodSymbol.Name != nameof(Type.IsInstanceOfType) || !methodSymbol.ContainingType.Is(KnownType.System_Type))
             {
@@ -70,7 +70,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.ReportIssue(Diagnostic.Create(Rule, argument.GetLocation(), message));
         }
 
-        private static void CheckGetTypeCallOnType(SonarSyntaxNodeAnalysisContext context, InvocationExpressionSyntax invocation, IMethodSymbol invokedMethod)
+        private static void CheckGetTypeCallOnType(SonarSyntaxNodeReportingContext context, InvocationExpressionSyntax invocation, IMethodSymbol invokedMethod)
         {
             if (!(invocation.Expression is MemberAccessExpressionSyntax memberCall)
                 || IsException(memberCall, context.SemanticModel)

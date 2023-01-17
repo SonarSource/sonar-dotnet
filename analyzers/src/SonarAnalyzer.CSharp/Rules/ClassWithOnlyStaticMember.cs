@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SymbolKind.NamedType);
 
-        private static void CheckClasses(SonarSymbolAnalysisContext context, INamedTypeSymbol utilityClass)
+        private static void CheckClasses(SonarSymbolReportingContext context, INamedTypeSymbol utilityClass)
         {
             if (!ClassIsRelevant(utilityClass))
             {
@@ -72,7 +72,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckConstructors(SonarSymbolAnalysisContext context, INamedTypeSymbol utilityClass)
+        private static void CheckConstructors(SonarSymbolReportingContext context, INamedTypeSymbol utilityClass)
         {
             if (!ClassQualifiesForIssue(utilityClass) || !HasMembersAndAllAreStaticExceptConstructors(utilityClass))
             {

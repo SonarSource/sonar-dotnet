@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 });
         }
 
-        private void CheckTokenComments(SonarSyntaxTreeAnalysisContext context, SyntaxToken token)
+        private void CheckTokenComments(SonarSyntaxTreeReportingContext context, SyntaxToken token)
         {
             var tokenLine = token.GetLocation().GetLineSpan().StartLinePosition.Line;
 

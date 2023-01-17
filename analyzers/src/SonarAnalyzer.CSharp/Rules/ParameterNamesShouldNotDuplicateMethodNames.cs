@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKindEx.LocalFunctionStatement);
         }
 
-        private static void CheckMethodParameters(SonarSyntaxNodeAnalysisContext context, SyntaxToken identifier, ParameterListSyntax parameterList)
+        private static void CheckMethodParameters(SonarSyntaxNodeReportingContext context, SyntaxToken identifier, ParameterListSyntax parameterList)
         {
             var methodName = identifier.ToString();
             foreach (var parameter in parameterList.Parameters.Select(p => p.Identifier))

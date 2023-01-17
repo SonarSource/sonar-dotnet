@@ -68,7 +68,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.InvocationExpression);
         }
 
-        private static void ReportOnObjectEqualsMatches(SonarSyntaxNodeAnalysisContext context, InvocationExpressionSyntax invocation)
+        private static void ReportOnObjectEqualsMatches(SonarSyntaxNodeReportingContext context, InvocationExpressionSyntax invocation)
         {
             var methodSymbol = context.SemanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
 
@@ -109,7 +109,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static SyntaxNode RemoveParentheses(SyntaxNode node) =>
             node is ExpressionSyntax expression ? expression.RemoveParentheses() : node;
 
-        private static void ReportIfOperatorExpressionsMatch(SonarSyntaxNodeAnalysisContext context, ExpressionSyntax left, ExpressionSyntax right, SyntaxToken operatorToken)
+        private static void ReportIfOperatorExpressionsMatch(SonarSyntaxNodeReportingContext context, ExpressionSyntax left, ExpressionSyntax right, SyntaxToken operatorToken)
         {
             if (CSharpEquivalenceChecker.AreEquivalent(left.RemoveParentheses(), right.RemoveParentheses()))
             {

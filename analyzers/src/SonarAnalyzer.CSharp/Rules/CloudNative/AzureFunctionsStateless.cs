@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.Argument);
         }
 
-        private static void CheckTarget(SonarSyntaxNodeAnalysisContext context, ExpressionSyntax target)
+        private static void CheckTarget(SonarSyntaxNodeReportingContext context, ExpressionSyntax target)
         {
             if (context.IsAzureFunction()
                 && context.SemanticModel.GetSymbolInfo((target as ElementAccessExpressionSyntax)?.Expression ?? target).Symbol is { } symbol

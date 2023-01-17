@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
                  SyntaxKind.StructDeclaration);
         }
 
-        private static void CheckGenericTypeParameters(SonarSyntaxNodeAnalysisContext c, ISymbol symbol)
+        private static void CheckGenericTypeParameters(SonarSyntaxNodeReportingContext c, ISymbol symbol)
         {
             var info = CreateParametersInfo(c);
             if (info?.Parameters is null || info.Parameters.Parameters.Count == 0)
@@ -77,7 +77,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static ParametersInfo CreateParametersInfo(SonarSyntaxNodeAnalysisContext c) =>
+        private static ParametersInfo CreateParametersInfo(SonarSyntaxNodeReportingContext c) =>
             c.Node switch
             {
                 InterfaceDeclarationSyntax interfaceDeclaration => new ParametersInfo(interfaceDeclaration.TypeParameterList, "interface"),
@@ -96,7 +96,7 @@ namespace SonarAnalyzer.Rules.CSharp
             && semanticModel.GetDeclaredSymbol(methodDeclaration) is { } methodSymbol
             && methodSymbol.IsChangeable();
 
-        private static List<string> GetUsedTypeParameters(SonarSyntaxNodeAnalysisContext context, IEnumerable<SyntaxNode> declarations, string[] typeParameterNames) =>
+        private static List<string> GetUsedTypeParameters(SonarSyntaxNodeReportingContext context, IEnumerable<SyntaxNode> declarations, string[] typeParameterNames) =>
             declarations.SelectMany(x => x.DescendantNodes())
                 .OfType<IdentifierNameSyntax>()
                 .Where(x => x.Parent is not TypeParameterConstraintClauseSyntax && typeParameterNames.Contains(x.Identifier.ValueText))

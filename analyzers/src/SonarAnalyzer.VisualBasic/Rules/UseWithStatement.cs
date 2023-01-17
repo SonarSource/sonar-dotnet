@@ -74,7 +74,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 SyntaxKind.SimpleMemberAccessExpression);
         }
 
-        private bool CheckExpression(SonarSyntaxNodeAnalysisContext context, ExpressionSyntax expression)
+        private bool CheckExpression(SonarSyntaxNodeReportingContext context, ExpressionSyntax expression)
         {
             if (!IsCandidateForExtraction(context, expression))
             {
@@ -115,7 +115,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             return false;
         }
 
-        private static bool IsCandidateForExtraction(SonarSyntaxNodeAnalysisContext context, ExpressionSyntax currentMemberExpression)
+        private static bool IsCandidateForExtraction(SonarSyntaxNodeReportingContext context, ExpressionSyntax currentMemberExpression)
         {
             return currentMemberExpression != null &&
                 !currentMemberExpression.IsKind(SyntaxKind.IdentifierName) &&

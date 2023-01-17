@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ElseClause);
         }
 
-        private static void Analyze(SonarSyntaxNodeAnalysisContext context, SwitchExpressionSyntaxWrapper switchExpression)
+        private static void Analyze(SonarSyntaxNodeReportingContext context, SwitchExpressionSyntaxWrapper switchExpression)
         {
             var arms = switchExpression.Arms;
             if (arms.Count < 2)

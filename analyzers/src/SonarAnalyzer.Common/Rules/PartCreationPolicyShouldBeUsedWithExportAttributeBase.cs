@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Rules
 
         protected abstract TDeclarationSyntax GetTypeDeclaration(TAttributeSyntax attribute);
 
-        protected void AnalyzeNode(SonarSyntaxNodeAnalysisContext c)
+        protected void AnalyzeNode(SonarSyntaxNodeReportingContext c)
         {
             var attribute = (TAttributeSyntax)c.Node;
             if (!IsPartCreationPolicyAttribute(attribute))

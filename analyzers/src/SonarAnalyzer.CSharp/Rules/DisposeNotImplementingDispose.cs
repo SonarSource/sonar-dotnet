@@ -107,7 +107,7 @@ namespace SonarAnalyzer.Rules.CSharp
             disposeMethodsCalledFromDispose.Add(invokedMethod);
         }
 
-        private static void ReportDisposeMethods(SonarSymbolAnalysisContext context, IEnumerable<IMethodSymbol> disposeMethods)
+        private static void ReportDisposeMethods(SonarSymbolReportingContext context, IEnumerable<IMethodSymbol> disposeMethods)
         {
             foreach (var disposeMethod in disposeMethods)
             {

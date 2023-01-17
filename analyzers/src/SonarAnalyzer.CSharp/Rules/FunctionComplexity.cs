@@ -86,12 +86,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKindEx.InitAccessorDeclaration);
         }
 
-        private void CheckComplexity<TSyntax>(SonarSyntaxNodeAnalysisContext context, Func<TSyntax, Location> getLocation, string declarationType, bool onlyGlobalStatements = false)
+        private void CheckComplexity<TSyntax>(SonarSyntaxNodeReportingContext context, Func<TSyntax, Location> getLocation, string declarationType, bool onlyGlobalStatements = false)
             where TSyntax : SyntaxNode =>
             CheckComplexity(context, getLocation, n => n, declarationType, onlyGlobalStatements);
 
         private void CheckComplexity<TSyntax>(
-            SonarSyntaxNodeAnalysisContext context,
+            SonarSyntaxNodeReportingContext context,
             Func<TSyntax, Location> getLocation,
             Func<TSyntax, SyntaxNode> getNodeToCheck,
             string declarationType,

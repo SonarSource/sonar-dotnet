@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 .Any(p => p.Identifier.Identifier.ValueText.Equals(literalExpression.Token.ValueText, StringComparison.OrdinalIgnoreCase))
                 ?? false;
 
-        protected override bool IsInnerInstance(SonarSyntaxNodeAnalysisContext context) =>
+        protected override bool IsInnerInstance(SonarSyntaxNodeReportingContext context) =>
             context.Node.Ancestors().Any(x => x is ClassBlockSyntax || x is StructureBlockSyntax);
 
         protected override IEnumerable<LiteralExpressionSyntax> FindLiteralExpressions(SyntaxNode node) =>

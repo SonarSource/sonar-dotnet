@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKindEx.RecordStructDeclaration);
         }
 
-        private static void VerifyMethodDeclaration(SonarSyntaxNodeAnalysisContext context)
+        private static void VerifyMethodDeclaration(SonarSyntaxNodeReportingContext context)
         {
             var methodDeclaration = (BaseMethodDeclarationSyntax)context.Node;
             var methodSymbol = context.SemanticModel.GetDeclaredSymbol(methodDeclaration);
@@ -95,7 +95,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void VerifyPropertyDeclaration(SonarSyntaxNodeAnalysisContext context)
+        private static void VerifyPropertyDeclaration(SonarSyntaxNodeReportingContext context)
         {
             var propertyDeclaration = (PropertyDeclarationSyntax)context.Node;
             var propertySymbol = context.SemanticModel.GetDeclaredSymbol(propertyDeclaration);
@@ -107,7 +107,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void VerifyRecordDeclaration(SonarSyntaxNodeAnalysisContext context)
+        private static void VerifyRecordDeclaration(SonarSyntaxNodeReportingContext context)
         {
             var declaration = (RecordDeclarationSyntaxWrapper)context.Node;
             if (!context.IsRedundantPositionalRecordContext() && HasStringUriParams(declaration.ParameterList, context.SemanticModel))
@@ -120,7 +120,7 @@ namespace SonarAnalyzer.Rules.CSharp
             parameterList != null
             && parameterList.Parameters.Any(x => NameContainsUri(x.Identifier.Text) && model.GetDeclaredSymbol(x).IsType(KnownType.System_String));
 
-        private static void VerifyInvocationAndCreation(SonarSyntaxNodeAnalysisContext context)
+        private static void VerifyInvocationAndCreation(SonarSyntaxNodeReportingContext context)
         {
             if (context.SemanticModel.GetSymbolInfo(context.Node).Symbol is IMethodSymbol invokedMethodSymbol
                 && !invokedMethodSymbol.IsInType(KnownType.System_Uri)
@@ -131,7 +131,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void VerifyReturnType(SonarSyntaxNodeAnalysisContext context, BaseMethodDeclarationSyntax methodDeclaration, IMethodSymbol methodSymbol)
+        private static void VerifyReturnType(SonarSyntaxNodeReportingContext context, BaseMethodDeclarationSyntax methodDeclaration, IMethodSymbol methodSymbol)
         {
             if ((methodDeclaration as MethodDeclarationSyntax)?.ReturnType?.GetLocation() is { } returnTypeLocation
                 && methodSymbol.ReturnType.Is(KnownType.System_String)

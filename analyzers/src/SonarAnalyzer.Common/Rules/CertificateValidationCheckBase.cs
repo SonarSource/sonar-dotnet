@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Rules
 
         protected CertificateValidationCheckBase() : base(DiagnosticId) { }
 
-        protected void CheckAssignmentSyntax(SonarSyntaxNodeAnalysisContext c)
+        protected void CheckAssignmentSyntax(SonarSyntaxNodeReportingContext c)
         {
             SplitAssignment((TAssignmentExpressionSyntax)c.Node, out var leftIdentifier, out var right);
             if (leftIdentifier != null && right != null
@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        protected void CheckConstructorParameterSyntax(SonarSyntaxNodeAnalysisContext c)
+        protected void CheckConstructorParameterSyntax(SonarSyntaxNodeReportingContext c)
         {
             if (c.SemanticModel.GetSymbolInfo(c.Node).Symbol is IMethodSymbol ctor)
             {
@@ -290,7 +290,7 @@ namespace SonarAnalyzer.Rules
             return lst;
         }
 
-        private ImmutableArray<TInvocationExpressionSyntax> FindInvocationList(SonarSyntaxNodeAnalysisContext c, SyntaxNode root, IMethodSymbol method)
+        private ImmutableArray<TInvocationExpressionSyntax> FindInvocationList(SonarSyntaxNodeReportingContext c, SyntaxNode root, IMethodSymbol method)
         {
             if (root == null || method == null)
             {
@@ -312,10 +312,10 @@ namespace SonarAnalyzer.Rules
 
         protected readonly struct InspectionContext
         {
-            public readonly SonarSyntaxNodeAnalysisContext Context;
+            public readonly SonarSyntaxNodeReportingContext Context;
             public readonly HashSet<SyntaxNode> VisitedMethods;
 
-            public InspectionContext(SonarSyntaxNodeAnalysisContext context)
+            public InspectionContext(SonarSyntaxNodeReportingContext context)
             {
                 Context = context;
                 VisitedMethods = new HashSet<SyntaxNode>();

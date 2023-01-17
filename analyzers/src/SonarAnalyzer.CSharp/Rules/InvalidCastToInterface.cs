@@ -80,7 +80,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 });
         }
 
-        private static void CheckTypesForInvalidCast(SonarSyntaxNodeAnalysisContext context, INamedTypeSymbol interfaceType, INamedTypeSymbol expressionType,
+        private static void CheckTypesForInvalidCast(SonarSyntaxNodeReportingContext context, INamedTypeSymbol interfaceType, INamedTypeSymbol expressionType,
             Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>> interfaceImplementerMappings, Location issueLocation)
         {
             if (interfaceType == null ||
@@ -115,7 +115,7 @@ namespace SonarAnalyzer.Rules.CSharp
             interfaceImplementerMappings.ContainsKey(type) &&
             interfaceImplementerMappings[type].Any(t => t.IsClassOrStruct());
 
-        private static void ReportIssue(SonarSyntaxNodeAnalysisContext context, ISymbol interfaceType, ITypeSymbol expressionType, Location issueLocation)
+        private static void ReportIssue(SonarSyntaxNodeReportingContext context, ISymbol interfaceType, ITypeSymbol expressionType, Location issueLocation)
         {
             var interfaceTypeName = interfaceType.ToMinimalDisplayString(context.SemanticModel, issueLocation.SourceSpan.Start);
             var expressionTypeName = expressionType.ToMinimalDisplayString(context.SemanticModel, issueLocation.SourceSpan.Start);

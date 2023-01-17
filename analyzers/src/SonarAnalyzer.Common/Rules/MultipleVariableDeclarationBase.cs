@@ -51,7 +51,7 @@ public abstract class MultipleVariableDeclarationBase<TSyntaxKind> : SonarDiagno
             Language.SyntaxKind.FieldDeclaration);
     }
 
-    private static void CheckAndReportVariables(SonarSyntaxNodeAnalysisContext context, DiagnosticDescriptor rule, ICollection<SyntaxToken> variables)
+    private static void CheckAndReportVariables(SonarSyntaxNodeReportingContext context, DiagnosticDescriptor rule, ICollection<SyntaxToken> variables)
     {
         if (variables.Count <= 1)
         {
