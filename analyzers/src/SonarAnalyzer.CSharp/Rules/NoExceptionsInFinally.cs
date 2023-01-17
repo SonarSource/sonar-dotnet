@@ -32,10 +32,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private sealed class ThrowInFinallyWalker : SafeCSharpSyntaxWalker
         {
-            private readonly SonarSyntaxNodeAnalysisContext context;
+            private readonly SonarSyntaxNodeReportingContext context;
             private readonly DiagnosticDescriptor rule;
 
-            public ThrowInFinallyWalker(SonarSyntaxNodeAnalysisContext context, DiagnosticDescriptor rule)
+            public ThrowInFinallyWalker(SonarSyntaxNodeReportingContext context, DiagnosticDescriptor rule)
             {
                 this.context = context;
                 this.rule = rule;

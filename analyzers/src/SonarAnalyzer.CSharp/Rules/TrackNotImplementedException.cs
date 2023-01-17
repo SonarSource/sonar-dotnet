@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
                  SyntaxKindEx.ThrowExpression);
         }
 
-        private static void ReportDiagnostic(SonarSyntaxNodeAnalysisContext c, ExpressionSyntax newExceptionExpression, SyntaxNode throwExpression)
+        private static void ReportDiagnostic(SonarSyntaxNodeReportingContext c, ExpressionSyntax newExceptionExpression, SyntaxNode throwExpression)
         {
             if (c.SemanticModel.GetTypeInfo(newExceptionExpression).Type.Is(KnownType.System_NotImplementedException))
             {

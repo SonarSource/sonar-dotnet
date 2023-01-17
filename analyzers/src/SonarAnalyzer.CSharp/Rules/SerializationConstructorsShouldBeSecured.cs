@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterNodeAction(FindPossibleViolations, SyntaxKind.ConstructorDeclaration);
         }
 
-        private static void FindPossibleViolations(SonarSyntaxNodeAnalysisContext c)
+        private static void FindPossibleViolations(SonarSyntaxNodeReportingContext c)
         {
             var constructorSyntax = (ConstructorDeclarationSyntax)c.Node;
             var reportLocation = constructorSyntax?.Identifier.GetLocation();

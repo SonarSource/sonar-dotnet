@@ -72,10 +72,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKindEx.LocalFunctionStatement);
         }
 
-        private void CheckForDeadStores<T>(SonarSyntaxNodeAnalysisContext context, ISymbol symbol, Func<T, CSharpSyntaxNode> bodyOrExpressionBody) where T : SyntaxNode =>
+        private void CheckForDeadStores<T>(SonarSyntaxNodeReportingContext context, ISymbol symbol, Func<T, CSharpSyntaxNode> bodyOrExpressionBody) where T : SyntaxNode =>
             CheckForDeadStores(context, symbol, bodyOrExpressionBody((T)context.Node));
 
-        private void CheckForDeadStores(SonarSyntaxNodeAnalysisContext context, ISymbol symbol, CSharpSyntaxNode node)
+        private void CheckForDeadStores(SonarSyntaxNodeReportingContext context, ISymbol symbol, CSharpSyntaxNode node)
         {
             if (symbol != null && node != null)
             {
@@ -101,12 +101,12 @@ namespace SonarAnalyzer.Rules.CSharp
         private abstract class CheckerBase<TCfg, TBlock>
         {
             private readonly LiveVariableAnalysisBase<TCfg, TBlock> lva;
-            private readonly SonarSyntaxNodeAnalysisContext context;
+            private readonly SonarSyntaxNodeReportingContext context;
             private readonly ISet<ISymbol> capturedVariables;
 
             protected abstract State CreateState(TBlock block);
 
-            protected CheckerBase(SonarSyntaxNodeAnalysisContext context, LiveVariableAnalysisBase<TCfg, TBlock> lva)
+            protected CheckerBase(SonarSyntaxNodeReportingContext context, LiveVariableAnalysisBase<TCfg, TBlock> lva)
             {
                 this.context = context;
                 this.lva = lva;

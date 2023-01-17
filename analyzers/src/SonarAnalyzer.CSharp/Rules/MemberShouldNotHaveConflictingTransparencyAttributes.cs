@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     csac.RegisterCompilationEndAction(cac => ReportOnConflictingTransparencyAttributes(cac, nodesWithSecuritySafeCritical, nodesWithSecurityCritical));
                 });
 
-        private static void CollectSecurityAttributes(SonarSyntaxNodeAnalysisContext syntaxNodeAnalysisContext,
+        private static void CollectSecurityAttributes(SonarSyntaxNodeReportingContext syntaxNodeAnalysisContext,
                                                       Dictionary<SyntaxNode, AttributeSyntax> nodesWithSecuritySafeCritical,
                                                       Dictionary<SyntaxNode, AttributeSyntax> nodesWithSecurityCritical)
         {
@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void ReportOnConflictingTransparencyAttributes(SonarCompilationAnalysisContext compilationContext,
+        private static void ReportOnConflictingTransparencyAttributes(SonarCompilationReportingContext compilationContext,
                                                                       Dictionary<SyntaxNode, AttributeSyntax> nodesWithSecuritySafeCritical,
                                                                       Dictionary<SyntaxNode, AttributeSyntax> nodesWithSecurityCritical)
         {

@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Helpers.Trackers
                     }
                 });
 
-            void TrackMethodDeclaration(SonarSymbolAnalysisContext c)
+            void TrackMethodDeclaration(SonarSymbolReportingContext c)
             {
                 if (!IsTrackedMethod((IMethodSymbol)c.Symbol, c.Compilation))
                 {

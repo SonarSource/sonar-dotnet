@@ -100,7 +100,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.FieldDeclaration);
         }
 
-        private static void ReportIfListT(SonarSyntaxNodeAnalysisContext context, TypeSyntax typeSyntax, string memberType)
+        private static void ReportIfListT(SonarSyntaxNodeReportingContext context, TypeSyntax typeSyntax, string memberType)
         {
             if (typeSyntax != null && typeSyntax.IsKnownType(KnownType.System_Collections_Generic_List_T, context.SemanticModel))
             {

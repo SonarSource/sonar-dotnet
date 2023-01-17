@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules
 
         protected abstract bool IsIgnoredNullableOperation(TBinaryExpression expression, SemanticModel semanticModel);
 
-        protected Action<SonarSyntaxNodeAnalysisContext> GetAnalysisAction(DiagnosticDescriptor rule)
+        protected Action<SonarSyntaxNodeReportingContext> GetAnalysisAction(DiagnosticDescriptor rule)
         {
             return c =>
             {

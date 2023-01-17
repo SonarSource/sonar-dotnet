@@ -63,7 +63,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ConstructorDeclaration,
                 SyntaxKindEx.LocalFunctionStatement);
 
-        private static MethodContext CreateContext(SonarSyntaxNodeAnalysisContext c)
+        private static MethodContext CreateContext(SonarSyntaxNodeReportingContext c)
         {
             if (c.Node is BaseMethodDeclarationSyntax method)
             {
@@ -254,19 +254,19 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private class MethodContext
         {
-            public readonly SonarSyntaxNodeAnalysisContext Context;
+            public readonly SonarSyntaxNodeReportingContext Context;
             public readonly IMethodSymbol Symbol;
             public readonly ParameterListSyntax ParameterList;
             public readonly BlockSyntax Body;
             public readonly ArrowExpressionClauseSyntax ExpressionBody;
 
-            public MethodContext(SonarSyntaxNodeAnalysisContext context, BaseMethodDeclarationSyntax declaration)
+            public MethodContext(SonarSyntaxNodeReportingContext context, BaseMethodDeclarationSyntax declaration)
                 : this(context, declaration.ParameterList, declaration.Body, declaration.ExpressionBody()) { }
 
-            public MethodContext(SonarSyntaxNodeAnalysisContext context, LocalFunctionStatementSyntaxWrapper declaration)
+            public MethodContext(SonarSyntaxNodeReportingContext context, LocalFunctionStatementSyntaxWrapper declaration)
                 : this(context, declaration.ParameterList, declaration.Body, declaration.ExpressionBody) { }
 
-            private MethodContext(SonarSyntaxNodeAnalysisContext context, ParameterListSyntax parameterList, BlockSyntax body, ArrowExpressionClauseSyntax expressionBody)
+            private MethodContext(SonarSyntaxNodeReportingContext context, ParameterListSyntax parameterList, BlockSyntax body, ArrowExpressionClauseSyntax expressionBody)
             {
                 Context = context;
                 Symbol = context.SemanticModel.GetDeclaredSymbol(context.Node) as IMethodSymbol;

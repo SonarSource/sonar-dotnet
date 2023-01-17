@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return memberBinding?.Name?.Identifier.ValueText;
         }
 
-        private static bool IsDebugAssert(SonarSyntaxNodeAnalysisContext context, InvocationExpressionSyntax invocation) =>
+        private static bool IsDebugAssert(SonarSyntaxNodeReportingContext context, InvocationExpressionSyntax invocation) =>
             invocation.Expression is MemberAccessExpressionSyntax memberAccess
             && memberAccess.Name.Identifier.ValueText == nameof(System.Diagnostics.Debug.Assert)
             && context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol symbol

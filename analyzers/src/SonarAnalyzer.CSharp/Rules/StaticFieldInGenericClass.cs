@@ -60,7 +60,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKindEx.RecordStructDeclaration,
                 SyntaxKind.StructDeclaration);
 
-        private static void CheckMember(SonarSyntaxNodeAnalysisContext context, SyntaxNode root, Location location, string[] typeParameterNames)
+        private static void CheckMember(SonarSyntaxNodeReportingContext context, SyntaxNode root, Location location, string[] typeParameterNames)
         {
             if (!HasGenericType(context, root, typeParameterNames))
             {
@@ -68,7 +68,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static bool HasGenericType(SonarSyntaxNodeAnalysisContext context, SyntaxNode root, string[] typeParameterNames) =>
+        private static bool HasGenericType(SonarSyntaxNodeReportingContext context, SyntaxNode root, string[] typeParameterNames) =>
             root.DescendantNodesAndSelf()
                 .OfType<IdentifierNameSyntax>()
                 .Any(x => typeParameterNames.Contains(x.Identifier.Value) && context.SemanticModel.GetSymbolInfo(x).Symbol is { Kind: SymbolKind.TypeParameter });

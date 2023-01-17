@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ExclusiveOrAssignmentExpression);
         }
 
-        private void CheckAssignment(SonarSyntaxNodeAnalysisContext context, int constValueToLookFor)
+        private void CheckAssignment(SonarSyntaxNodeReportingContext context, int constValueToLookFor)
         {
             var assignment = (AssignmentExpressionSyntax)context.Node;
             if (FindIntConstant(context.SemanticModel, assignment.Right) is { } constValue
@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private void CheckBinary(SonarSyntaxNodeAnalysisContext context, int constValueToLookFor)
+        private void CheckBinary(SonarSyntaxNodeReportingContext context, int constValueToLookFor)
         {
             var binary = (BinaryExpressionSyntax)context.Node;
             CheckBinary(context, binary.Left, binary.OperatorToken, binary.Right, constValueToLookFor);

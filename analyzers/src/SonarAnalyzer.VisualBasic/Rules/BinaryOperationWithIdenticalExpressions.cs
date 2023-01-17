@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 SyntaxKindsToCheckAssignment);
         }
 
-        private static void ReportIfExpressionsMatch(SonarSyntaxNodeAnalysisContext context, ExpressionSyntax left, ExpressionSyntax right,
+        private static void ReportIfExpressionsMatch(SonarSyntaxNodeReportingContext context, ExpressionSyntax left, ExpressionSyntax right,
             SyntaxToken operatorToken)
         {
             if (VisualBasicEquivalenceChecker.AreEquivalent(left.RemoveParentheses(), right.RemoveParentheses()))

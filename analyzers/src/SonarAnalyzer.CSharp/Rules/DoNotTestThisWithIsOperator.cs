@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterNodeAction(AnalyzeSwitchStatement, SyntaxKind.SwitchStatement);
         }
 
-        private static void AnalyzeIsExpression(SonarSyntaxNodeAnalysisContext context)
+        private static void AnalyzeIsExpression(SonarSyntaxNodeReportingContext context)
         {
             if (IsThisExpressionSyntax(((BinaryExpressionSyntax)context.Node).Left))
             {
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void AnalyzeIsPatternExpression(SonarSyntaxNodeAnalysisContext context)
+        private static void AnalyzeIsPatternExpression(SonarSyntaxNodeReportingContext context)
         {
             if (IsThisExpressionSyntax(((IsPatternExpressionSyntaxWrapper)context.Node).Expression) && ContainsTypeCheckInPattern(context.Node))
             {
@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void AnalyzeSwitchStatement(SonarSyntaxNodeAnalysisContext context)
+        private static void AnalyzeSwitchStatement(SonarSyntaxNodeReportingContext context)
         {
             var switchStatement = (SwitchStatementSyntax)context.Node;
             if (IsThisExpressionSyntax(switchStatement.Expression))
@@ -63,7 +63,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void AnalyzeSwitchExpression(SonarSyntaxNodeAnalysisContext context)
+        private static void AnalyzeSwitchExpression(SonarSyntaxNodeReportingContext context)
         {
             var switchExpression = (SwitchExpressionSyntaxWrapper)context.Node;
             if (IsThisExpressionSyntax(switchExpression.GoverningExpression))
@@ -122,10 +122,10 @@ namespace SonarAnalyzer.Rules.CSharp
                                                                   SyntaxKindEx.Subpattern))
                                                  .IsKind(SyntaxKindEx.Subpattern);
 
-        private static void ReportDiagnostic(SonarSyntaxNodeAnalysisContext context, SyntaxNode node) =>
+        private static void ReportDiagnostic(SonarSyntaxNodeReportingContext context, SyntaxNode node) =>
             context.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
 
-        private static void ReportDiagnostic(SonarSyntaxNodeAnalysisContext context, SyntaxNode node, IList<SecondaryLocation> secondaryLocations)
+        private static void ReportDiagnostic(SonarSyntaxNodeReportingContext context, SyntaxNode node, IList<SecondaryLocation> secondaryLocations)
         {
             if (secondaryLocations.Any())
             {

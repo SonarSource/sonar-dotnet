@@ -170,13 +170,13 @@ public partial class SonarAnalysisContextBaseTest
            .WithMessage("File 'SonarProjectConfig.xml' has been added as an AdditionalFile but could not be read and parsed.");
     }
 
-    private SonarCompilationAnalysisContext CreateSut(ProjectType projectType, bool isScannerRun) =>
+    private SonarCompilationReportingContext CreateSut(ProjectType projectType, bool isScannerRun) =>
         CreateSut(AnalysisScaffolding.CreateOptions(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, projectType, isScannerRun)));
 
-    private static SonarCompilationAnalysisContext CreateSut(AnalyzerOptions options) =>
+    private static SonarCompilationReportingContext CreateSut(AnalyzerOptions options) =>
         CreateSut(new SnippetCompiler("// Nothing to see here").SemanticModel.Compilation, options);
 
-    private static SonarCompilationAnalysisContext CreateSut(Compilation compilation, AnalyzerOptions options)
+    private static SonarCompilationReportingContext CreateSut(Compilation compilation, AnalyzerOptions options)
     {
         var compilationContext = new CompilationAnalysisContext(compilation, options, _ => { }, _ => true, default);
         return new(AnalysisScaffolding.CreateSonarAnalysisContext(), compilationContext);

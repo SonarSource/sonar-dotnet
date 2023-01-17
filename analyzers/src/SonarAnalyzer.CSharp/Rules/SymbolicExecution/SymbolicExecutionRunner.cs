@@ -96,7 +96,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override ControlFlowGraph CreateCfg(SemanticModel model, SyntaxNode node, CancellationToken cancel) =>
             node.CreateCfg(model, cancel);
 
-        protected override void AnalyzeSonar(SonarSyntaxNodeAnalysisContext context, SyntaxNode body, ISymbol symbol)
+        protected override void AnalyzeSonar(SonarSyntaxNodeReportingContext context, SyntaxNode body, ISymbol symbol)
         {
             var enabledAnalyzers = AllRules.Select(x => x.Value.CreateSonarFallback(Configuration))
                                            .WhereNotNull()
@@ -140,7 +140,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void ReportDiagnosticsSonar(SonarSyntaxNodeAnalysisContext context, IEnumerable<ISymbolicExecutionAnalysisContext> analyzerContexts, bool supportsPartialResults)
+        private static void ReportDiagnosticsSonar(SonarSyntaxNodeReportingContext context, IEnumerable<ISymbolicExecutionAnalysisContext> analyzerContexts, bool supportsPartialResults)
         {
             foreach (var analyzerContext in analyzerContexts.Where(x => x.SupportsPartialResults == supportsPartialResults))
             {

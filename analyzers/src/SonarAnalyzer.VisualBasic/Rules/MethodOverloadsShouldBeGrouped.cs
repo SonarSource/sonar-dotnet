@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             SyntaxKind.StructureBlock
         };
 
-        protected override MemberInfo CreateMemberInfo(SonarSyntaxNodeAnalysisContext c, StatementSyntax member)
+        protected override MemberInfo CreateMemberInfo(SonarSyntaxNodeReportingContext c, StatementSyntax member)
         {
             if (member is ConstructorBlockSyntax constructor)
             {

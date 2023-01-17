@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.LogicalOrExpression);
         }
 
-        private static void CheckLogicalExpression(SonarSyntaxNodeAnalysisContext context)
+        private static void CheckLogicalExpression(SonarSyntaxNodeReportingContext context)
         {
             var binaryExpression = (BinaryExpressionSyntax)context.Node;
             var left = TryGetBinaryExpression(binaryExpression.Left);
@@ -77,7 +77,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static string GetMessageEqualityPart(bool isEquality) =>
             isEquality ? "equality" : "inequality";
 
-        private static void CheckEquality(SonarSyntaxNodeAnalysisContext context)
+        private static void CheckEquality(SonarSyntaxNodeReportingContext context)
         {
             var equals = (BinaryExpressionSyntax)context.Node;
 

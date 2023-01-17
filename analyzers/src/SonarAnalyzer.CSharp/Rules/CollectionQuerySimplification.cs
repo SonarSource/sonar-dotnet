@@ -76,7 +76,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterNodeAction(CheckCountCall, SyntaxKind.InvocationExpression);
         }
 
-        private static void CheckCountCall(SonarSyntaxNodeAnalysisContext context)
+        private static void CheckCountCall(SonarSyntaxNodeReportingContext context)
         {
             const string CountName = "Count";
 
@@ -97,7 +97,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 semanticModel.GetTypeInfo(expression).Type.GetMembers(CountName).OfType<IPropertySymbol>().Any();
         }
 
-        private static void CheckToCollectionCalls(SonarSyntaxNodeAnalysisContext context)
+        private static void CheckToCollectionCalls(SonarSyntaxNodeReportingContext context)
         {
             var outerInvocation = (InvocationExpressionSyntax)context.Node;
             if (!(context.SemanticModel.GetSymbolInfo(outerInvocation).Symbol is IMethodSymbol outerMethodSymbol) ||
@@ -169,7 +169,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 methodSymbol.ContainingType.ConstructedFrom.Is(KnownType.System_Collections_Generic_List_T));
         }
 
-        private static void CheckExtensionMethodsOnIEnumerable(SonarSyntaxNodeAnalysisContext context)
+        private static void CheckExtensionMethodsOnIEnumerable(SonarSyntaxNodeReportingContext context)
         {
             var outerInvocation = (InvocationExpressionSyntax)context.Node;
             if (!(context.SemanticModel.GetSymbolInfo(outerInvocation).Symbol is IMethodSymbol outerMethodSymbol) ||
@@ -232,7 +232,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 : invocation.ArgumentList.Arguments.Skip(1).ToList();
         }
 
-        private static void CheckForCastSimplification(SonarSyntaxNodeAnalysisContext context,
+        private static void CheckForCastSimplification(SonarSyntaxNodeReportingContext context,
                                                        IMethodSymbol outerMethodSymbol,
                                                        InvocationExpressionSyntax outerInvocation,
                                                        IMethodSymbol innerMethodSymbol,
@@ -396,7 +396,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return true;
         }
 
-        private static bool CheckForSimplifiable(SonarSyntaxNodeAnalysisContext context,
+        private static bool CheckForSimplifiable(SonarSyntaxNodeReportingContext context,
                                                  IMethodSymbol outerMethodSymbol,
                                                  InvocationExpressionSyntax outerInvocation,
                                                  IMethodSymbol innerMethodSymbol,

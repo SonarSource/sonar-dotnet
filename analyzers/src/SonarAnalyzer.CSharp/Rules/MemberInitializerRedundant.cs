@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.StructDeclaration,
                 SyntaxKind.InterfaceDeclaration);
 
-        private void CheckInstanceMembers(SonarSyntaxNodeAnalysisContext c, TypeDeclarationSyntax declaration, IEnumerable<ISymbol> typeMembers)
+        private void CheckInstanceMembers(SonarSyntaxNodeReportingContext c, TypeDeclarationSyntax declaration, IEnumerable<ISymbol> typeMembers)
         {
             var typeInitializers = typeMembers.OfType<IMethodSymbol>().Where(x => x is { MethodKind: MethodKind.Constructor, IsStatic: false, IsImplicitlyDeclared: false }).ToList();
             if (typeInitializers.Count == 0)
@@ -104,7 +104,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private void CheckStaticMembers(SonarSyntaxNodeAnalysisContext c, TypeDeclarationSyntax declaration, IEnumerable<ISymbol> typeMembers)
+        private void CheckStaticMembers(SonarSyntaxNodeReportingContext c, TypeDeclarationSyntax declaration, IEnumerable<ISymbol> typeMembers)
         {
             var typeInitializers = typeMembers.OfType<IMethodSymbol>().Where(method => method.MethodKind == MethodKind.StaticConstructor || method.IsModuleInitializer()).ToList();
             if (typeInitializers.Count == 0)
@@ -177,7 +177,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return allMembers;
         }
 
-        private static List<NodeSymbolAndModel<TSyntax, IMethodSymbol>> GetInitializerDeclarations<TSyntax>(SonarSyntaxNodeAnalysisContext context, List<IMethodSymbol> constructorSymbols)
+        private static List<NodeSymbolAndModel<TSyntax, IMethodSymbol>> GetInitializerDeclarations<TSyntax>(SonarSyntaxNodeReportingContext context, List<IMethodSymbol> constructorSymbols)
             where TSyntax : SyntaxNode =>
             constructorSymbols
                 .Select(x => new NodeSymbolAndModel<TSyntax, IMethodSymbol>(null, x.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() as TSyntax, x))

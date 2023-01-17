@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules
         protected abstract SyntaxToken? GetArgumentIdentifier(TArgumentSyntax argument);
         protected abstract SyntaxToken? GetNameColonArgumentIdentifier(TArgumentSyntax argument);
 
-        internal void ReportIncorrectlyOrderedParameters(SonarSyntaxNodeAnalysisContext analysisContext,
+        internal void ReportIncorrectlyOrderedParameters(SonarSyntaxNodeReportingContext analysisContext,
             MethodParameterLookupBase<TArgumentSyntax> methodParameterLookup, SeparatedSyntaxList<TArgumentSyntax> argumentList,
             Func<Location> getLocationToReport)
         {

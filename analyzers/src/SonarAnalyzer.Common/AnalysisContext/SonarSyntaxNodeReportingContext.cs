@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.AnalysisContext;
 
-public sealed class SonarSyntaxNodeAnalysisContext : SonarTreeReportingContextBase<SyntaxNodeAnalysisContext>
+public sealed class SonarSyntaxNodeReportingContext : SonarTreeReportingContextBase<SyntaxNodeAnalysisContext>
 {
     public override SyntaxTree Tree => Context.Node.SyntaxTree;
     public override Compilation Compilation => Context.Compilation;
@@ -30,7 +30,7 @@ public sealed class SonarSyntaxNodeAnalysisContext : SonarTreeReportingContextBa
     public SemanticModel SemanticModel => Context.SemanticModel;
     public ISymbol ContainingSymbol => Context.ContainingSymbol;
 
-    internal SonarSyntaxNodeAnalysisContext(SonarAnalysisContext analysisContext, SyntaxNodeAnalysisContext context) : base(analysisContext, context) { }
+    internal SonarSyntaxNodeReportingContext(SonarAnalysisContext analysisContext, SyntaxNodeAnalysisContext context) : base(analysisContext, context) { }
 
     /// <summary>
     /// Roslyn invokes the analyzer twice for positional records. The first invocation is for the class declaration and the second for the ctor represented by the positional parameter list.

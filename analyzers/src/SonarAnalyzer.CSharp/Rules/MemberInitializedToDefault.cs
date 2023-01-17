@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterNodeAction(CheckAutoProperty, SyntaxKind.PropertyDeclaration);
         }
 
-        private static void CheckAutoProperty(SonarSyntaxNodeAnalysisContext context)
+        private static void CheckAutoProperty(SonarSyntaxNodeReportingContext context)
         {
             var propertyDeclaration = (PropertyDeclarationSyntax)context.Node;
 
@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckEvent(SonarSyntaxNodeAnalysisContext context)
+        private static void CheckEvent(SonarSyntaxNodeReportingContext context)
         {
             var field = (EventFieldDeclarationSyntax)context.Node;
 
@@ -78,7 +78,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckField(SonarSyntaxNodeAnalysisContext context)
+        private static void CheckField(SonarSyntaxNodeReportingContext context)
         {
             var field = (FieldDeclarationSyntax)context.Node;
 

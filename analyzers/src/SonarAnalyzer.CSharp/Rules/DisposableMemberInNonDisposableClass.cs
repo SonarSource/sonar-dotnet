@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
             || typeSymbol.Implements(KnownType.System_IDisposable)
             || typeSymbol.Implements(KnownType.System_IAsyncDisposable);
 
-        private static string GetMessage(SonarSymbolAnalysisContext context, INamespaceOrTypeSymbol namedType)
+        private static string GetMessage(SonarSymbolReportingContext context, INamespaceOrTypeSymbol namedType)
         {
             var disposableFields = namedType.GetMembers()
                                             .OfType<IFieldSymbol>()

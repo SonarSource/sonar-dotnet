@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.OutKeyword
         };
 
-        private static void VisitParenthesizedLambdaExpression(SonarSyntaxNodeAnalysisContext context)
+        private static void VisitParenthesizedLambdaExpression(SonarSyntaxNodeReportingContext context)
         {
             var lambda = (ParenthesizedLambdaExpressionSyntax)context.Node;
 
@@ -81,7 +81,7 @@ namespace SonarAnalyzer.Rules.CSharp
             CheckTypeSpecifications(context, lambda);
         }
 
-        private static void CheckTypeSpecifications(SonarSyntaxNodeAnalysisContext context, ParenthesizedLambdaExpressionSyntax lambda)
+        private static void CheckTypeSpecifications(SonarSyntaxNodeReportingContext context, ParenthesizedLambdaExpressionSyntax lambda)
         {
             if (!IsParameterListModifiable(lambda))
             {
@@ -113,7 +113,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckUnusedParameters(SonarSyntaxNodeAnalysisContext context, ParenthesizedLambdaExpressionSyntax lambda)
+        private static void CheckUnusedParameters(SonarSyntaxNodeReportingContext context, ParenthesizedLambdaExpressionSyntax lambda)
         {
             if (context.Compilation.IsLambdaDiscardParameterSupported())
             {
@@ -156,7 +156,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         #region Nullable constructor call
 
-        private static void ReportRedundantNullableConstructorCall(SonarSyntaxNodeAnalysisContext context)
+        private static void ReportRedundantNullableConstructorCall(SonarSyntaxNodeReportingContext context)
         {
             var objectCreation = ObjectCreationFactory.Create(context.Node);
             if (!IsNullableCreation(objectCreation, context.SemanticModel))
@@ -196,14 +196,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
         #region Array (creation, size, type)
 
-        private static void ReportRedundancyInArrayCreation(SonarSyntaxNodeAnalysisContext context)
+        private static void ReportRedundancyInArrayCreation(SonarSyntaxNodeReportingContext context)
         {
             var array = (ArrayCreationExpressionSyntax)context.Node;
             ReportRedundantArraySizeSpecifier(context, array);
             ReportRedundantArrayTypeSpecifier(context, array);
         }
 
-        private static void ReportRedundantArraySizeSpecifier(SonarSyntaxNodeAnalysisContext context, ArrayCreationExpressionSyntax array)
+        private static void ReportRedundantArraySizeSpecifier(SonarSyntaxNodeReportingContext context, ArrayCreationExpressionSyntax array)
         {
             if (array.Initializer == null || array.Type == null)
             {
@@ -223,7 +223,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void ReportRedundantArrayTypeSpecifier(SonarSyntaxNodeAnalysisContext context, ArrayCreationExpressionSyntax array)
+        private static void ReportRedundantArrayTypeSpecifier(SonarSyntaxNodeReportingContext context, ArrayCreationExpressionSyntax array)
         {
             if (array.Initializer == null
                 || !array.Initializer.Expressions.Any()
@@ -264,7 +264,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         #region Object initializer
 
-        private static void ReportOnRedundantObjectInitializer(SonarSyntaxNodeAnalysisContext context)
+        private static void ReportOnRedundantObjectInitializer(SonarSyntaxNodeReportingContext context)
         {
             var objectCreation = ObjectCreationFactory.Create(context.Node);
 
@@ -280,7 +280,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         #region Explicit delegate creation
 
-        private static void ReportOnExplicitDelegateCreation(SonarSyntaxNodeAnalysisContext context)
+        private static void ReportOnExplicitDelegateCreation(SonarSyntaxNodeReportingContext context)
         {
             var objectCreation = ObjectCreationFactory.Create(context.Node);
             var argumentExpression = objectCreation.ArgumentList?.Arguments.FirstOrDefault()?.Expression;
@@ -361,7 +361,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         #region Parameter list
 
-        private static void ReportOnRedundantParameterList(SonarSyntaxNodeAnalysisContext context)
+        private static void ReportOnRedundantParameterList(SonarSyntaxNodeReportingContext context)
         {
             var anonymousMethod = (AnonymousMethodExpressionSyntax)context.Node;
             if (anonymousMethod.ParameterList == null)
@@ -426,7 +426,7 @@ namespace SonarAnalyzer.Rules.CSharp
                    && methodSymbol.ToDisplayString() == newMethodSymbol.ToDisplayString();
         }
 
-        private static void ReportIssueOnRedundantObjectCreation(SonarSyntaxNodeAnalysisContext context, SyntaxNode node, string message, RedundancyType redundancyType)
+        private static void ReportIssueOnRedundantObjectCreation(SonarSyntaxNodeReportingContext context, SyntaxNode node, string message, RedundancyType redundancyType)
         {
             var location = node is ObjectCreationExpressionSyntax objectCreation
                 ? objectCreation.CreateLocation(objectCreation.Type)

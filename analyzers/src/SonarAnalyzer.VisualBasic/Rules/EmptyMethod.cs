@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             SyntaxKind.SubBlock
         };
 
-        protected override void CheckMethod(SonarSyntaxNodeAnalysisContext context)
+        protected override void CheckMethod(SonarSyntaxNodeReportingContext context)
         {
             var methodBlock = (MethodBlockSyntax)context.Node;
             if (methodBlock.Statements.Count == 0
@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         private static bool ContainsComments(IEnumerable<SyntaxTrivia> trivias) =>
             trivias.Any(s => s.IsKind(SyntaxKind.CommentTrivia));
 
-        private static bool ShouldMethodBeExcluded(SonarSyntaxNodeAnalysisContext context, MethodStatementSyntax methodStatement)
+        private static bool ShouldMethodBeExcluded(SonarSyntaxNodeReportingContext context, MethodStatementSyntax methodStatement)
         {
             if (methodStatement.Modifiers.Any(SyntaxKind.MustOverrideKeyword)
                 || methodStatement.Modifiers.Any(SyntaxKind.OverridableKeyword)

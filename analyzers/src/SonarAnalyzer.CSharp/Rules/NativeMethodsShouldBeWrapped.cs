@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterNodeAction(ReportTrivialWrappers, SyntaxKind.MethodDeclaration);
         }
 
-        private static void ReportPublicExternalMethods(SonarSymbolAnalysisContext c)
+        private static void ReportPublicExternalMethods(SonarSymbolReportingContext c)
         {
             var methodSymbol = (IMethodSymbol)c.Symbol;
             if (IsExternMethod(methodSymbol)
@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsExternMethod(IMethodSymbol methodSymbol) =>
             methodSymbol.IsExtern || methodSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_LibraryImportAttribute);
 
-        private static void ReportTrivialWrappers(SonarSyntaxNodeAnalysisContext c)
+        private static void ReportTrivialWrappers(SonarSyntaxNodeReportingContext c)
         {
             var methodDeclaration = (MethodDeclarationSyntax)c.Node;
 

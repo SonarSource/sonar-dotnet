@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules
                 EndOffset = lineSpan.EndLinePosition.Character
             };
 
-        protected void ReadParameters(SonarCompilationAnalysisContext c)
+        protected void ReadParameters(SonarCompilationReportingContext c)
         {
             var settings = c.Options.ParseSonarLintXmlSettings();
             var outPath = c.ProjectConfiguration().OutPath;
@@ -82,7 +82,7 @@ namespace SonarAnalyzer.Rules
 
         protected virtual bool AnalyzeUnchangedFiles => false;
 
-        protected virtual IEnumerable<TMessage> CreateAnalysisMessages(SonarCompilationAnalysisContext c) => Enumerable.Empty<TMessage>();
+        protected virtual IEnumerable<TMessage> CreateAnalysisMessages(SonarCompilationReportingContext c) => Enumerable.Empty<TMessage>();
 
         protected UtilityAnalyzerBase(string diagnosticId, string title) : base(diagnosticId, title) { }
 
@@ -119,7 +119,7 @@ namespace SonarAnalyzer.Rules
             && FileExtensionWhitelist.Contains(Path.GetExtension(tree.FilePath))
             && (AnalyzeGeneratedCode || !Language.GeneratedCodeRecognizer.IsGenerated(tree));
 
-        private bool ShouldGenerateMetrics(SonarCompilationAnalysisContext context, SyntaxTree tree) =>
+        private bool ShouldGenerateMetrics(SonarCompilationReportingContext context, SyntaxTree tree) =>
             (AnalyzeUnchangedFiles || !context.IsUnchanged(tree))
             && ShouldGenerateMetrics(tree);
     }

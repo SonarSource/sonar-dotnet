@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules
                 Language.SyntaxKind.RightShiftAssignmentStatement);
         }
 
-        protected void CheckExpressionWithTwoParts(SonarSyntaxNodeAnalysisContext context, Func<SyntaxNode, SyntaxNode> getLeft, Func<SyntaxNode, SyntaxNode> getRight)
+        protected void CheckExpressionWithTwoParts(SonarSyntaxNodeReportingContext context, Func<SyntaxNode, SyntaxNode> getLeft, Func<SyntaxNode, SyntaxNode> getRight)
         {
             var expression = context.Node;
             var left = getLeft(expression);

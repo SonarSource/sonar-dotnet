@@ -63,7 +63,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.MethodDeclaration);
         }
 
-        private static void ReportParameterIfNeeded(SonarSyntaxNodeAnalysisContext context, IParameterSymbol overridingParameter, IParameterSymbol overriddenParameter,
+        private static void ReportParameterIfNeeded(SonarSyntaxNodeReportingContext context, IParameterSymbol overridingParameter, IParameterSymbol overriddenParameter,
             ParameterSyntax parameterSyntax, bool isExplicitImplementation)
         {
             if (isExplicitImplementation)

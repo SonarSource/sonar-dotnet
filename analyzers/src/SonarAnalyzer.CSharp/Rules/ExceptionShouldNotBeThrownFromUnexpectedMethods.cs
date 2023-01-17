@@ -74,7 +74,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ConversionOperatorDeclaration);
         }
 
-        private static void CheckForIssue<TSyntax>(SonarSyntaxNodeAnalysisContext analysisContext, Func<TSyntax, bool> isTrackedSyntax, ImmutableArray<KnownType> allowedThrowTypes)
+        private static void CheckForIssue<TSyntax>(SonarSyntaxNodeReportingContext analysisContext, Func<TSyntax, bool> isTrackedSyntax, ImmutableArray<KnownType> allowedThrowTypes)
             where TSyntax : SyntaxNode
         {
             var syntax = (TSyntax)analysisContext.Node;
@@ -118,7 +118,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsModuleInitializer(IMethodSymbol methodSymbol) =>
             methodSymbol.AnyAttributeDerivesFrom(KnownType.System_Runtime_CompilerServices_ModuleInitializerAttribute);
 
-        private static void ReportOnInvalidThrow(SonarSyntaxNodeAnalysisContext analysisContext, SyntaxNode node, ImmutableArray<KnownType> allowedTypes)
+        private static void ReportOnInvalidThrow(SonarSyntaxNodeReportingContext analysisContext, SyntaxNode node, ImmutableArray<KnownType> allowedTypes)
         {
             if (node.ArrowExpressionBody() is { } expressionBody
                 && GetLocationToReport(
