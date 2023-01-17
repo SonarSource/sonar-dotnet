@@ -152,6 +152,6 @@ namespace SonarAnalyzer.Rules.CSharp
             || methodSymbol.ContainingType.DerivesFromAny(KnownAssertionTypes);
 
         private static bool IsCustomAssertion(ISymbol methodSymbol) =>
-            methodSymbol.GetAttributes().Any(x => x.AttributeClass.Name == CustomAssertionAttributeName);
+            methodSymbol.GetAttributesWithInherited().Any(x => x.AttributeClass.Name == CustomAssertionAttributeName);
     }
 }

@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.IO;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Moq;
 using SonarAnalyzer.Common;
@@ -397,6 +398,104 @@ namespace NS
             fakeSymbol.Setup(x => x.MethodKind).Returns(methodKind);
 
             fakeSymbol.Object.GetClassification().Should().Be(expected);
+        }
+
+        [DataTestMethod]
+        [DataRow("BaseClass`1", "VirtualMethod", "MyInheritedAttribute", "MyNotInheritedAttribute", "MyUnannotatedAttribute")]
+        [DataRow("DerivedOpenGeneric`1", "VirtualMethod", "MyInheritedAttribute", "MyUnannotatedAttribute")]
+        [DataRow("DerivedOpenGeneric`1", "NonVirtualMethod")]
+        [DataRow("DerivedOpenGeneric`1", "GenericVirtualMethod`1", "MyInheritedAttribute", "MyUnannotatedAttribute")]
+        [DataRow("DerivedOpenGeneric`1", "GenericNonVirtualMethod`1")]
+        [DataRow("DerivedClosedGeneric", "VirtualMethod", "MyInheritedAttribute", "MyUnannotatedAttribute")]
+        [DataRow("DerivedClosedGeneric", "NonVirtualMethod")]
+        [DataRow("DerivedClosedGeneric", "GenericVirtualMethod`1", "MyInheritedAttribute", "MyUnannotatedAttribute")]
+        [DataRow("DerivedClosedGeneric", "GenericNonVirtualMethod`1")]
+        [DataRow("DerivedNoOverrides`1", "VirtualMethod", "MyInheritedAttribute", "MyNotInheritedAttribute", "MyUnannotatedAttribute")]
+        [DataRow("DerivedNoOverrides`1", "NonVirtualMethod", "MyInheritedAttribute", "MyNotInheritedAttribute", "MyUnannotatedAttribute")]
+        [DataRow("DerivedNoOverrides`1", "GenericVirtualMethod`1", "MyInheritedAttribute", "MyNotInheritedAttribute", "MyUnannotatedAttribute")]
+        [DataRow("DerivedNoOverrides`1", "GenericNonVirtualMethod`1", "MyInheritedAttribute", "MyNotInheritedAttribute", "MyUnannotatedAttribute")]
+        public void GetAttributesWithInherited_MethodSymbol(string className, string methodName, params string[] expectedAttributes)
+        {
+            var code = $$"""
+                using System;
+
+                [AttributeUsage(AttributeTargets.All, Inherited = true)]
+                public class MyInheritedAttribute : Attribute { }
+
+                [AttributeUsage(AttributeTargets.All, Inherited = false)]
+                public class MyNotInheritedAttribute : Attribute { }
+
+                public class MyUnannotatedAttribute : Attribute { }
+
+                [MyInheritedAttribute]
+                [MyNotInherited]
+                [MyUnannotatedAttribute]
+                public class BaseClass<T1>
+                {
+                    [MyInheritedAttribute]
+                    [MyNotInherited]
+                    [MyUnannotatedAttribute]
+                    public virtual void VirtualMethod() { }
+
+                    [MyInheritedAttribute]
+                    [MyNotInherited]
+                    [MyUnannotatedAttribute]
+                    public void NonVirtualMethod() { }
+
+                    [MyInheritedAttribute]
+                    [MyNotInherited]
+                    [MyUnannotatedAttribute]
+                    public void GenericNonVirtualMethod<T2>() { }
+
+                    [MyInheritedAttribute]
+                    [MyNotInherited]
+                    [MyUnannotatedAttribute]
+                    public virtual void GenericVirtualMethod<T2>() { }
+                }
+
+                public class DerivedOpenGeneric<T1>: BaseClass<T1>
+                {
+                    public override void VirtualMethod() { }
+                    public new void NonVirtualMethod() { }
+                    public new void GenericNonVirtualMethod<T2>() { }
+                    public override void GenericVirtualMethod<T2>() { }
+                }
+
+                public class DerivedClosedGeneric: BaseClass<int>
+                {
+                    public override void VirtualMethod() { }
+                    public new void NonVirtualMethod() { }
+                    public new void GenericNonVirtualMethod<T2>() { }
+                    public override void GenericVirtualMethod<T2>() { }
+                }
+
+                public class DerivedNoOverrides<T>: BaseClass<T>
+                {
+                }
+
+                public class Program
+                {
+                    public static void Main()
+                    {
+                        var baseClass = new BaseClass<int>();
+                        var derivedOpen = new DerivedOpenGeneric<int>();
+                        var derivedClosed = new DerivedClosedGeneric();
+                        var derivedNoOverrides = new DerivedNoOverrides<int>();
+                        new {{className.Replace(@"`1", "<int>")}}().{{methodName.Replace(@"`1", "<int>")}}();
+                    }
+                }
+                """;
+            var compiler = new SnippetCompiler(code);
+            var invocationExpression = compiler.GetNodes<InvocationExpressionSyntax>().Should().ContainSingle().Subject;
+            var method = compiler.GetSymbol<IMethodSymbol>(invocationExpression);
+            var actual = method.GetAttributesWithInherited().Select(x => x.AttributeClass.Name).ToList();
+            actual.Should().BeEquivalentTo(expectedAttributes);
+
+            // GetAttributesWithInherited should behave like MemberInfo.GetCustomAttributes from runtime reflection:
+            var assembly = compiler.GetEmittedAssembly();
+            var type = assembly.GetType(className, throwOnError: true);
+            var methodInfo = type.GetMethod(methodName.Replace("`1", string.Empty));
+            methodInfo.GetCustomAttributes(inherit: true).Select(x => x.GetType().Name).Should().BeEquivalentTo(expectedAttributes);
         }
     }
 }
