@@ -27,3 +27,34 @@ namespace Tests.Diagnostics
         }
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/6547
+namespace Repro_6547
+{
+    class Program
+    {
+        public enum Seasons { Spring, Summer, Autumn, Winter }
+
+        [Fact]
+        public void TestString()
+        {
+            string stringToTest = RetrieveString();
+            const string constString = "Spring";
+
+            Assert.Same(expected: stringToTest, actual: constString); // FN
+            Assert.Same(expected: constString, actual: stringToTest); // Compliant
+        }
+
+        [Fact]
+        public void TestEnum()
+        {
+            Seasons seasonToTest = RetrieveSeason();
+
+            Assert.Same(expected: seasonToTest, actual: Seasons.Spring); //FN
+            Assert.Same(expected: Seasons.Spring, actual: seasonToTest); // Compliant
+        }
+
+        public Seasons RetrieveSeason() => Seasons.Spring;
+        public string RetrieveString() => "Spring";
+    }
+}
