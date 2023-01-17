@@ -24,43 +24,22 @@ using static SonarAnalyzer.Helpers.DiagnosticDescriptorFactory;
 
 namespace SonarAnalyzer.AnalysisContext;
 
-public class SonarAnalysisContextBase
+public abstract class SonarAnalysisContextBase
 {
     protected static readonly ConditionalWeakTable<Compilation, ImmutableHashSet<string>> UnchangedFilesCache = new();
     protected static readonly SourceTextValueProvider<ProjectConfigReader> ProjectConfigProvider = new(x => new ProjectConfigReader(x));
     private static readonly Lazy<SourceTextValueProvider<bool>> ShouldAnalyzeGeneratedCS = new(() => CreateAnalyzeGeneratedProvider(LanguageNames.CSharp));
     private static readonly Lazy<SourceTextValueProvider<bool>> ShouldAnalyzeGeneratedVB = new(() => CreateAnalyzeGeneratedProvider(LanguageNames.VisualBasic));
 
-    protected SonarAnalysisContextBase() { }
-
-    protected static SourceTextValueProvider<bool> ShouldAnalyzeGeneratedProvider(string language) =>
-        language == LanguageNames.CSharp ? ShouldAnalyzeGeneratedCS.Value : ShouldAnalyzeGeneratedVB.Value;
-
-    private static SourceTextValueProvider<bool> CreateAnalyzeGeneratedProvider(string language) =>
-        new(x => PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(PropertiesHelper.ParseXmlSettings(x), language));
-}
-
-public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextBase
-{
-    public abstract SyntaxTree Tree { get; }
-    public abstract Compilation Compilation { get; }
-    public abstract AnalyzerOptions Options { get; }
-    public abstract CancellationToken Cancel { get; }
-
-    public SonarAnalysisContext AnalysisContext { get; }
-    public TContext Context { get; }
-
-    protected SonarAnalysisContextBase(SonarAnalysisContext analysisContext, TContext context)
+    protected SonarAnalysisContextBase(SonarAnalysisContext analysisContext)
     {
         AnalysisContext = analysisContext ?? throw new ArgumentNullException(nameof(analysisContext));
-        Context = context;
     }
 
-    /// <param name="tree">Tree to decide on. Can be null for Symbol-based and Compilation-based scenarios. And we want to analyze those too.</param>
-    /// <param name="generatedCodeRecognizer">When set, generated trees are analyzed only when language-specific 'analyzeGeneratedCode' configuration property is also set.</param>
-    public bool ShouldAnalyzeTree(SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer) =>
-        (generatedCodeRecognizer is null || ShouldAnalyzeGenerated() || !tree.IsGenerated(generatedCodeRecognizer, Compilation))
-        && (tree is null || !IsUnchanged(tree));
+    public SonarAnalysisContext AnalysisContext { get; }
+
+    public abstract AnalyzerOptions Options { get; }
+    public abstract Compilation Compilation { get; }
 
     /// <summary>
     /// Reads configuration from SonarProjectConfig.xml file and caches the result for scope of this analysis.
@@ -88,6 +67,30 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
             ? Compilation.IsTest()              // SonarLint, NuGet or Scanner <= 5.0
             : projectType == ProjectType.Test;  // Scanner >= 5.1 does authoritative decision that we follow
     }
+
+    protected static SourceTextValueProvider<bool> ShouldAnalyzeGeneratedProvider(string language) =>
+        language == LanguageNames.CSharp ? ShouldAnalyzeGeneratedCS.Value : ShouldAnalyzeGeneratedVB.Value;
+
+    private static SourceTextValueProvider<bool> CreateAnalyzeGeneratedProvider(string language) =>
+        new(x => PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(PropertiesHelper.ParseXmlSettings(x), language));
+}
+
+public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextBase
+{
+    public abstract SyntaxTree Tree { get; }
+    public abstract CancellationToken Cancel { get; }
+    public TContext Context { get; }
+
+    protected SonarAnalysisContextBase(SonarAnalysisContext analysisContext, TContext context) : base(analysisContext)
+    {
+        Context = context;
+    }
+
+    /// <param name="tree">Tree to decide on. Can be null for Symbol-based and Compilation-based scenarios. And we want to analyze those too.</param>
+    /// <param name="generatedCodeRecognizer">When set, generated trees are analyzed only when language-specific 'analyzeGeneratedCode' configuration property is also set.</param>
+    public bool ShouldAnalyzeTree(SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer) =>
+        (generatedCodeRecognizer is null || ShouldAnalyzeGenerated() || !tree.IsGenerated(generatedCodeRecognizer, Compilation))
+        && (tree is null || !IsUnchanged(tree));
 
     public bool IsUnchanged(SyntaxTree tree) =>
         UnchangedFilesCache.GetValue(Compilation, _ => CreateUnchangedFilesHashSet()).Contains(tree.FilePath);

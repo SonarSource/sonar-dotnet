@@ -51,22 +51,22 @@ namespace SonarAnalyzer.Rules
                 EndOffset = lineSpan.EndLinePosition.Character
             };
 
-        protected void ReadParameters(SonarAnalysisContext context, AnalyzerOptions options, Compilation compilation)
+        protected void ReadParameters(SonarAnalysisContextBase c)
         {
-            var settings = PropertiesHelper.GetSettings(options).ToList();
-            var outPath = context.ProjectConfiguration(options).OutPath;
+            var settings = c.Options.ParseSonarLintXmlSettings();
+            var outPath = c.ProjectConfiguration().OutPath;
             // For backward compatibility with S4MSB <= 5.0
-            if (outPath == null && options.ProjectOutFolderPath() is { } projectOutFolderAdditionalFile)
+            if (outPath == null && c.Options.ProjectOutFolderPath() is { } projectOutFolderAdditionalFile)
             {
                 outPath = projectOutFolderAdditionalFile.GetText().ToString().TrimEnd();
             }
             if (settings.Any() && !string.IsNullOrEmpty(outPath))
             {
-                IgnoreHeaderComments = PropertiesHelper.ReadIgnoreHeaderCommentsProperty(settings, compilation.Language);
-                AnalyzeGeneratedCode = PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(settings, compilation.Language);
-                OutPath = Path.Combine(outPath, compilation.Language == LanguageNames.CSharp ? "output-cs" : "output-vbnet");
+                IgnoreHeaderComments = PropertiesHelper.ReadIgnoreHeaderCommentsProperty(settings, c.Compilation.Language);
+                AnalyzeGeneratedCode = PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(settings, c.Compilation.Language);
+                OutPath = Path.Combine(outPath, c.Compilation.Language == LanguageNames.CSharp ? "output-cs" : "output-vbnet");
                 IsAnalyzerEnabled = true;
-                IsTestProject = context.IsTestProject(compilation, options);
+                IsTestProject = c.IsTestProject();
             }
         }
     }
@@ -83,26 +83,25 @@ namespace SonarAnalyzer.Rules
 
         protected virtual bool AnalyzeUnchangedFiles => false;
 
-        protected virtual IEnumerable<TMessage> CreateAnalysisMessages(Compilation compilation) => Enumerable.Empty<TMessage>();
+        protected virtual IEnumerable<TMessage> CreateAnalysisMessages(SonarCompilationReportingContext c) => Enumerable.Empty<TMessage>();
 
         protected UtilityAnalyzerBase(string diagnosticId, string title) : base(diagnosticId, title) { }
 
         protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterCompilationStartAction(startContext =>
             {
-                ReadParameters(context, startContext.Options, startContext.Compilation);
+                ReadParameters(startContext);
                 if (!IsAnalyzerEnabled)
                 {
                     return;
                 }
 
                 ConcurrentStack<TMessage> treeMessages = new();
-                SonarAnalysisContext.TryGetValueDelegate<ProjectConfigReader> tryGetValue = startContext.TryGetValue;
 
                 startContext.RegisterSemanticModelAction(modelContext =>
                 {
-                    var tree = modelContext.SemanticModel.SyntaxTree;
-                    if (ShouldGenerateMetrics(tryGetValue, modelContext.SemanticModel.Compilation, modelContext.Options, tree))
+                    var tree = modelContext.Tree;
+                    if (ShouldGenerateMetrics(modelContext, modelContext.Tree))
                     {
                         treeMessages.Push(CreateMessage(tree, modelContext.SemanticModel));
                     }
@@ -110,7 +109,7 @@ namespace SonarAnalyzer.Rules
 
                 startContext.RegisterCompilationEndAction(endContext =>
                 {
-                    var allMessages = CreateAnalysisMessages(endContext.Compilation)
+                    var allMessages = CreateAnalysisMessages(endContext)
                         .Concat(treeMessages)
                         .WhereNotNull()
                         .ToArray();
@@ -133,8 +132,8 @@ namespace SonarAnalyzer.Rules
             && FileExtensionWhitelist.Contains(Path.GetExtension(tree.FilePath))
             && (AnalyzeGeneratedCode || !Language.GeneratedCodeRecognizer.IsGenerated(tree));
 
-        private bool ShouldGenerateMetrics(SonarAnalysisContext.TryGetValueDelegate<ProjectConfigReader> tryGetValue, Compilation compilation, AnalyzerOptions options, SyntaxTree tree) =>
-            (AnalyzeUnchangedFiles || !SonarAnalysisContext.IsUnchanged(tryGetValue, tree, compilation, options))
+        private bool ShouldGenerateMetrics(SonarSematicModelReportingContext context, SyntaxTree tree) =>
+            (AnalyzeUnchangedFiles || !context.IsUnchanged(tree))
             && ShouldGenerateMetrics(tree);
     }
 }
