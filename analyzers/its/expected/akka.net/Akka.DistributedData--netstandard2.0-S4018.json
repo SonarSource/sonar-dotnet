@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
 "region":  {
@@ -80,7 +80,7 @@
 },
 {
 "id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
 "region":  {
@@ -93,7 +93,7 @@
 },
 {
 "id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
 "region":  {
@@ -106,7 +106,7 @@
 },
 {
 "id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
 "region":  {
@@ -119,7 +119,7 @@
 },
 {
 "id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
 "region":  {
@@ -132,7 +132,7 @@
 },
 {
 "id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
 "region":  {
@@ -145,7 +145,7 @@
 },
 {
 "id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
 "region":  {
@@ -158,7 +158,7 @@
 },
 {
 "id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
 "region":  {
@@ -171,7 +171,7 @@
 },
 {
 "id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
 "region":  {
@@ -184,7 +184,7 @@
 },
 {
 "id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
 "region":  {
@@ -197,7 +197,7 @@
 },
 {
 "id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
 "region":  {
@@ -210,7 +210,7 @@
 },
 {
 "id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
 "region":  {
@@ -223,7 +223,7 @@
 },
 {
 "id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
 "region":  {
@@ -236,7 +236,7 @@
 },
 {
 "id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
 "region":  {

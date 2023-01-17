@@ -1,5 +1,5 @@
-<p>The best way to determine the type of a generic method is by inference based on the type of argument that is passed to the method. This is not
-possible when a parameter type is missing from the argument list.</p>
+<p>Type inference enables the call of a generic method without explicitly specifying its type arguments. This is not possible when a parameter type is
+missing from the argument list.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 using System;
@@ -10,6 +10,7 @@ namespace MyLibrary
   {
     public void MyMethod&lt;T&gt;()  // Noncompliant
     {
+        // this method can only be invoked by providing the type argument e.g. 'MyMethod&lt;int&gt;()'
     }
   }
 }
@@ -24,6 +25,7 @@ namespace MyLibrary
   {
     public void MyMethod&lt;T&gt;(T param)
     {
+        // type inference allows this to be invoked 'MyMethod(arg)'
     }
   }
 }

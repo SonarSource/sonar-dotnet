@@ -13,8 +13,8 @@ namespace MyLibrary
 
     public class Foo
     {
-        public void MyMethod<T>()  // Noncompliant {{Refactor this method to have parameters matching all the type parameters.}}
-//                  ^^^^^^^^
+        public void MyMethod<T>()  // Noncompliant {{Refactor this method to use all type parameters in the parameter list to enable type inference.}}
+        //          ^^^^^^^^
         {
         }
 
