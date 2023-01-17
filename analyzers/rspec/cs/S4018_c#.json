@@ -1,5 +1,5 @@
 {
-  "title": "Generic methods should provide type parameters",
+  "title": "All type parameters should be used in the parameter list to enable type inference",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
