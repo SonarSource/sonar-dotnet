@@ -26,17 +26,35 @@ namespace Tests.Diagnostics
                 // do nothing
             }
 
-            await using var fs3 = new FileStream(@"c:\foo.txt", FileMode.Open);
+            FileStream fs3 = new FileStream(@"c:\foo.txt", FileMode.Open);
+            await using (fs3)
+            {
+                // do nothing
+            }
 
-            await using var fs4 = File.Open(@"c:\foo.txt", FileMode.Open);
+            FileStream fs4 = new FileStream(@"c:\foo.txt", FileMode.Open);
+            await using (fs4.ConfigureAwait(false))
+            {
+                // do nothing
+            }
 
-            var fs5 = new FileStream(@"c:\foo.txt", FileMode.Open);                     // Compliant - asynchronously disposed manually
-            await fs5.DisposeAsync();
+            FileStream fs5 = new FileStream(@"c:\foo.txt", FileMode.Open);
+            await using ((fs5 = new FileStream(@"c:\foo.txt", FileMode.Open)).ConfigureAwait(false))
+            {
+                // do nothing
+            }
+
+            await using var fs6 = new FileStream(@"c:\foo.txt", FileMode.Open);
+
+            await using var fs7 = File.Open(@"c:\foo.txt", FileMode.Open);
+
+            var fs8 = new FileStream(@"c:\foo.txt", FileMode.Open);                     // Compliant - asynchronously disposed manually
+            await fs8.DisposeAsync();
         }
 
         public async Task SomePublicAsyncMethod()
         {
-            await field_fs1.DisposeAsync();
+            await field_fs1.DisposeAsync().ConfigureAwait(false);            
             await field_fs2.DisposeAsync();
         }
 
