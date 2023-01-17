@@ -622,16 +622,16 @@ public delegate bool SomeDelegate();
 
 public class Repro_6644
 {
-    public event SomeDelegate OtherEvent
+    public event SomeDelegate SomeEvent
     {
         add
         {
-            OtherEvent += value; // FN
+            SomeEvent += value; // FN
         }
 
         remove
         {
-            OtherEvent -= value; // FN
+            SomeEvent -= value; // FN
         }
     }
 }
