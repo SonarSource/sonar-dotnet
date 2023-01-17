@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         {
             var compilation = CreateCompilation(code);
             var syntaxTree = compilation.SyntaxTrees.First();
-            var attribute = syntaxTree.GetRoot().DescendantNodes().OfType<AttributeSyntax>().First();
+            var attribute = syntaxTree.First<AttributeSyntax>();
 
             attribute.IsKnownType(KnownType.System_ObsoleteAttribute, compilation.GetSemanticModel(syntaxTree)).Should().Be(isKnownType);
         }
@@ -47,7 +47,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         {
             var compilation = CreateCompilation("[System.ObsoleteAttribute] public class X{}");
             var syntaxTree = compilation.SyntaxTrees.First();
-            var attribute = syntaxTree.GetRoot().DescendantNodes().OfType<AttributeSyntax>().First();
+            var attribute = syntaxTree.First<AttributeSyntax>();
 
             attribute.IsKnownType(KnownType.System_String, compilation.GetSemanticModel(syntaxTree)).Should().Be(false);
         }
@@ -57,7 +57,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         {
             var compilation = CreateCompilation("[System.ObsoleteAttribute] public class X{}");
             var syntaxTree = compilation.SyntaxTrees.First();
-            var attribute = syntaxTree.GetRoot().DescendantNodes().OfType<AttributeSyntax>().First();
+            var attribute = syntaxTree.First<AttributeSyntax>();
 
             attribute.IsKnownType(ImmutableArray<KnownType>.Empty, compilation.GetSemanticModel(syntaxTree)).Should().Be(false);
         }

@@ -35,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Wrappers
                     public void Bar(int y) { }
                 }";
             var snippet = new SnippetCompiler(code);
-            var method = snippet.SyntaxTree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().First();
+            var method = snippet.SyntaxTree.Single<MethodDeclarationSyntax>();
             var wrapper = MethodDeclarationFactory.Create(method);
             wrapper.Body.Should().BeEquivalentTo(method.Body);
             wrapper.ExpressionBody.Should().BeEquivalentTo(method.ExpressionBody);
@@ -58,7 +58,7 @@ namespace SonarAnalyzer.UnitTest.Wrappers
                     }
                 }";
             var snippet = new SnippetCompiler(code);
-            var method = snippet.SyntaxTree.GetRoot().DescendantNodes().OfType<LocalFunctionStatementSyntax>().First();
+            var method = snippet.SyntaxTree.Single<LocalFunctionStatementSyntax>();
             var wrapper = MethodDeclarationFactory.Create(method);
             wrapper.Body.Should().BeEquivalentTo(method.Body);
             wrapper.ExpressionBody.Should().BeEquivalentTo(method.ExpressionBody);
@@ -77,7 +77,7 @@ namespace SonarAnalyzer.UnitTest.Wrappers
                     partial void Bar(int a);
                 }";
             var snippet = new SnippetCompiler(code);
-            var method = snippet.SyntaxTree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().First();
+            var method = snippet.SyntaxTree.Single<MethodDeclarationSyntax>();
             var wrapper = MethodDeclarationFactory.Create(method);
             wrapper.HasImplementation.Should().BeFalse();
         }
@@ -97,7 +97,7 @@ namespace SonarAnalyzer.UnitTest.Wrappers
                 {
                 }";
             var snippet = new SnippetCompiler(code);
-            var method = snippet.SyntaxTree.GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>().First();
+            var method = snippet.SyntaxTree.Single<ClassDeclarationSyntax>();
             Action a = () => MethodDeclarationFactory.Create(method);
             a.Should().Throw<InvalidOperationException>().WithMessage("Unexpected type: ClassDeclarationSyntax");
         }

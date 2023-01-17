@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void GetLineNumberToReport()
         {
             var syntaxTree = CSharpSyntaxTree.ParseText(Source);
-            var method = syntaxTree.GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>().First();
+            var method = syntaxTree.Single<ClassDeclarationSyntax>();
             method.GetLineNumberToReport()
                 .Should().Be(3);
             method.GetLocation().GetLineSpan().StartLinePosition.GetLineNumberToReport()

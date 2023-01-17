@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         {
             var compilation = CreateCompilation(code);
             var syntaxTree = compilation.SyntaxTrees.First();
-            var objectCreation = syntaxTree.GetRoot().DescendantNodes().OfType<ObjectCreationExpressionSyntax>().First();
+            var objectCreation = syntaxTree.First<ObjectCreationExpressionSyntax>();
 
             objectCreation.IsKnownType(KnownType.System_DateTime, compilation.GetSemanticModel(syntaxTree)).Should().Be(expectedResult);
         }
