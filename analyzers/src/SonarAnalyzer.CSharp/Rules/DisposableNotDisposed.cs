@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.System_Net_Sockets_TcpClient,
                 KnownType.System_Net_Sockets_UdpClient);
 
-        private static readonly ISet<string> DisposeMethods = new HashSet<string> { "Dispose", "Close" };
+        private static readonly ISet<string> DisposeMethods = new HashSet<string> { "Dispose", "DisposeAsync", "Close" };
 
         private static readonly ISet<string> FactoryMethods = new HashSet<string>
         {
@@ -142,7 +142,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var simpleAssignment in simpleAssignments)
             {
-                if (!simpleAssignment.Parent.IsKind(SyntaxKind.UsingStatement)
+                if (!IsNodeInsideUsingStatement(simpleAssignment)
                     && IsInstantiation(simpleAssignment.Right, semanticModel)
                     && semanticModel.GetSymbolInfo(simpleAssignment.Left).Symbol is { } referencedSymbol
                     && IsLocalOrPrivateField(referencedSymbol))
@@ -150,6 +150,14 @@ namespace SonarAnalyzer.Rules.CSharp
                     trackedNodesAndSymbols.Add(new NodeAndSymbol(simpleAssignment, referencedSymbol));
                 }
             }
+        }
+
+        private static bool IsNodeInsideUsingStatement(SyntaxNode node)
+        {
+            var ancestors = node.AncestorsAndSelf().ToArray();
+            return ancestors
+                .OfType<UsingStatementSyntax>()
+                .Any(usingStatement => ancestors.Contains(usingStatement.Expression));
         }
 
         private static IEnumerable<SyntaxNode> GetDescendantNodes(INamedTypeSymbol namedType, SyntaxNode typeDeclaration) =>
