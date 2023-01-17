@@ -23,7 +23,7 @@ using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext
 
 namespace SonarAnalyzer.AnalysisContext;
 
-public sealed class SonarAnalysisContext
+public class SonarAnalysisContext
 {
     private readonly RoslynAnalysisContext analysisContext;
     private readonly IEnumerable<DiagnosticDescriptor> supportedDiagnostics;
@@ -63,6 +63,8 @@ public sealed class SonarAnalysisContext
         this.supportedDiagnostics = supportedDiagnostics ?? throw new ArgumentNullException(nameof(supportedDiagnostics));
     }
 
+    private protected SonarAnalysisContext(SonarAnalysisContext context) : this(context.analysisContext, context.supportedDiagnostics) { }
+
     public bool TryGetValue<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value) =>
         analysisContext.TryGetValue(text, valueProvider, out value);
 
@@ -81,7 +83,7 @@ public sealed class SonarAnalysisContext
         analysisContext.RegisterCompilationAction(
             c => Execute<SonarCompilationReportingContext, CompilationAnalysisContext>(new(this, c), action, null));
 
-    public void RegisterCompilationStartAction(Action<SonarCompilationStartAnalysisContext> action) =>
+    public virtual void RegisterCompilationStartAction(Action<SonarCompilationStartAnalysisContext> action) =>
         analysisContext.RegisterCompilationStartAction(
             c => Execute<SonarCompilationStartAnalysisContext, CompilationStartAnalysisContext>(new(this, c), action, null));
 
@@ -95,7 +97,9 @@ public sealed class SonarAnalysisContext
             c => Execute<SonarSyntaxNodeReportingContext, SyntaxNodeAnalysisContext>(new(this, c), action, c.Node.SyntaxTree, generatedCodeRecognizer), syntaxKinds);
 
     public void RegisterTreeAction(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxTreeReportingContext> action) =>
-        analysisContext.RegisterCompilationStartAction(WrapTreeAction(action, generatedCodeRecognizer));
+        analysisContext.RegisterCompilationStartAction(
+            c => c.RegisterSyntaxTreeAction(
+                treeContext => Execute<SonarSyntaxTreeReportingContext, SyntaxTreeAnalysisContext>(new(this, treeContext, c.Compilation), action, treeContext.Tree, generatedCodeRecognizer)));
 
     /// <summary>
     /// Register action for a SyntaxNode that is executed unconditionally:
@@ -106,10 +110,6 @@ public sealed class SonarAnalysisContext
     /// </summary>
     public void RegisterNodeActionInAllFiles<TSyntaxKind>(Action<SonarSyntaxNodeReportingContext> action, params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct =>
         analysisContext.RegisterSyntaxNodeAction(c => action(new(this, c)), syntaxKinds);
-
-    public Action<CompilationStartAnalysisContext> WrapTreeAction(Action<SonarSyntaxTreeReportingContext> action, GeneratedCodeRecognizer generatedCodeRecognizer = null) =>
-        c => c.RegisterSyntaxTreeAction(
-            treeContext => Execute<SonarSyntaxTreeReportingContext, SyntaxTreeAnalysisContext>(new(this, treeContext, c.Compilation), action, treeContext.Tree, generatedCodeRecognizer));
 
     /// <param name="sourceTree">Tree that is definitely known to be analyzed. Pass 'null' if the context doesn't know a specific tree to be analyzed, like a CompilationContext.</param>
     private void Execute<TSonarContext, TRoslynContext>(TSonarContext context, Action<TSonarContext> action, SyntaxTree sourceTree, GeneratedCodeRecognizer generatedCodeRecognizer = null)

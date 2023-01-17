@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Rules.CSharp
         internal /*for testing*/ DoNotHardcodeCredentials(IAnalyzerConfiguration configuration) : base(configuration) { }
 
         protected override void InitializeActions(SonarParametrizedAnalysisContext context) =>
-            context.RegisterPostponedAction(
+            context.RegisterCompilationStartAction(
                 c =>
                 {
                     if (!IsEnabled(c.Options))

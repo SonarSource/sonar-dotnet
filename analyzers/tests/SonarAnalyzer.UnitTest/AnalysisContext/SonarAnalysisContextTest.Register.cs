@@ -93,7 +93,7 @@ public partial class SonarAnalysisContextTest
         var context = new DummyAnalysisContext(TestContext, unchangedFileName);
         var sut = new SonarParametrizedAnalysisContext(new(context, DummyMainDescriptor));
         sut.RegisterTreeAction(CSharpGeneratedCodeRecognizer.Instance, context.DelegateAction);
-        sut.ExecutePostponedActions(new(sut.Context, MockCompilationStartAnalysisContext(context)));  // Manual invocation, because SonarParametrizedAnalysisContext stores actions separately
+        sut.ExecutePostponedActions(new(sut, MockCompilationStartAnalysisContext(context)));  // Manual invocation, because SonarParametrizedAnalysisContext stores actions separately
 
         context.AssertDelegateInvoked(expected);
     }
@@ -104,7 +104,7 @@ public partial class SonarAnalysisContextTest
         var context = new DummyAnalysisContext(TestContext);
         var self = new SonarParametrizedAnalysisContext(new(context, DummyMainDescriptor));
         CS.RegisterTreeAction(self, context.DelegateAction);
-        self.ExecutePostponedActions(new(self.Context, MockCompilationStartAnalysisContext(context)));  // Manual invocation, because SonarParametrizedAnalysisContext stores actions separately
+        self.ExecutePostponedActions(new(self, MockCompilationStartAnalysisContext(context)));  // Manual invocation, because SonarParametrizedAnalysisContext stores actions separately
 
         context.AssertDelegateInvoked(true);
     }
@@ -115,7 +115,7 @@ public partial class SonarAnalysisContextTest
         var context = new DummyAnalysisContext(TestContext);
         var self = new SonarParametrizedAnalysisContext(new(context, DummyMainDescriptor));
         VB.RegisterTreeAction(self, context.DelegateAction);
-        self.ExecutePostponedActions(new(self.Context, MockCompilationStartAnalysisContext(context)));  // Manual invocation, because SonarParametrizedAnalysisContext stores actions separately
+        self.ExecutePostponedActions(new(self, MockCompilationStartAnalysisContext(context)));  // Manual invocation, because SonarParametrizedAnalysisContext stores actions separately
 
         context.AssertDelegateInvoked(true);
     }
