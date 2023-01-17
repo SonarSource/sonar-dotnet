@@ -74,8 +74,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             var one = Empty.AddSnippet("First");
             var two = one.AddSnippet("Second", "WithFileName.cs");
             Empty.Snippets.Should().BeEmpty();
-            one.Snippets.Should().BeEquivalentTo(new Snippet("First", null));
-            two.Snippets.Should().BeEquivalentTo(new Snippet("First", null), new Snippet("Second", "WithFileName.cs"));
+            one.Snippets.Should().Equal(new Snippet("First", null));
+            two.Snippets.Should().Equal(new Snippet("First", null), new Snippet("Second", "WithFileName.cs"));
         }
 
         [TestMethod]
