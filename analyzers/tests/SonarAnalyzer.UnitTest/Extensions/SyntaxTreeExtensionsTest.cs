@@ -26,8 +26,6 @@ namespace SonarAnalyzer.UnitTest.Extensions;
 [TestClass]
 public class SyntaxTreeExtensionsTest
 {
-    public TestContext TestContext { get; set; }
-
     [TestMethod]
     public void IsGenerated_On_GeneratedTree()
     {
