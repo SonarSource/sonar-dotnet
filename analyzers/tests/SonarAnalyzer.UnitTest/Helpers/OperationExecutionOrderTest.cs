@@ -146,7 +146,7 @@ public class Sample
     public int Nested(params int[] values) => 0;
 }}";
             var (tree, semanticModel) = TestHelper.CompileCS(code);
-            var body = tree.GetRoot().DescendantNodes().OfType<BlockSyntax>().First();
+            var body = tree.First<BlockSyntax>();
             var rootOperation = new IOperationWrapperSonar(semanticModel.GetOperation(body));
             return new OperationExecutionOrder(rootOperation.Children, reverseOrder);
         }

@@ -78,15 +78,6 @@ namespace SonarAnalyzer.UnitTest.CBDE
             Assert.AreEqual(trimmedExpected.Trim(), trimmedActual.Trim());
         }
 
-        public static IControlFlowGraph GetCfgForMethod(string code, string methodName)
-        {
-            (var method, var semanticModel) = TestHelper.CompileCS(code).GetMethod(methodName);
-            return CSharpControlFlowGraph.Create(method.Body, semanticModel);
-        }
-
-        public static string GetCfgGraph(string code, string methodName) =>
-            CfgSerializer.Serialize(GetCfgForMethod(code, methodName), methodName);
-
         public static void ExportAllMethods(string code, TextWriter writer, bool withLoc)
         {
             var (tree, model) = TestHelper.CompileIgnoreErrorsCS(code);

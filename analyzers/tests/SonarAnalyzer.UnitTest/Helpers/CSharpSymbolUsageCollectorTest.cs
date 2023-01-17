@@ -56,7 +56,7 @@ public class Bar
                 .GetCompilation();
 
             var firstTree = firstCompilation.SyntaxTrees.Single();
-            var fooMethod = firstTree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single();
+            var fooMethod = firstTree.Single<MethodDeclarationSyntax>();
             var firstCompilationSemanticModel = firstCompilation.GetSemanticModel(firstTree);
             var firstCompilationFieldSymbol = firstCompilationSemanticModel.GetSymbolInfo(fooMethod.DescendantNodes().OfType<ReturnStatementSyntax>().Single().Expression).Symbol;
             var firstCompilationKnownSymbols = new List<ISymbol> { firstCompilationFieldSymbol };
@@ -69,7 +69,7 @@ public class Bar
 
             // compilation doesn't match syntax node, since it belongs to another compilation
             var secondTree = secondCompilation.SyntaxTrees.Single();
-            var barMethod = secondTree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single();
+            var barMethod = secondTree.Single<MethodDeclarationSyntax>();
             firstCompilationUsageCollector.Visit(barMethod);
             firstCompilationUsageCollector.UsedSymbols.Should().BeEquivalentTo(firstCompilationUsedSymbols);
         }

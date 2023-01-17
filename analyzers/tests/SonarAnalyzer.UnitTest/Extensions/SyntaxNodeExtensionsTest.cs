@@ -181,7 +181,7 @@ public class Sample
     }
 }";
             var (tree, semanticModel) = TestHelper.CompileCS(code);
-            var node = tree.GetRoot().DescendantNodes().OfType<CS.MethodDeclarationSyntax>().Single();
+            var node = tree.Single<CS.MethodDeclarationSyntax>();
 
             SyntaxNodeExtensionsCS.CreateCfg(node.Body, semanticModel, default).Should().NotBeNull();
         }
@@ -196,7 +196,7 @@ Public Class Sample
     End Sub
 End Class";
             var (tree, semanticModel) = TestHelper.CompileVB(code);
-            var node = tree.GetRoot().DescendantNodes().OfType<VB.MethodBlockSyntax>().Single();
+            var node = tree.Single<VB.MethodBlockSyntax>();
 
             SyntaxNodeExtensionsVB.CreateCfg(node, semanticModel, default).Should().NotBeNull();
         }
@@ -213,7 +213,7 @@ public class Sample
     }
 }";
             var (tree, semanticModel) = TestHelper.CompileCS(code);
-            var node = tree.GetRoot().DescendantNodes().OfType<CS.InvocationExpressionSyntax>().Single();
+            var node = tree.Single<CS.InvocationExpressionSyntax>();
 
             SyntaxNodeExtensionsCS.CreateCfg(node, semanticModel, default).Should().NotBeNull();
         }
@@ -228,7 +228,7 @@ Public Class Sample
     End Sub
 End Class";
             var (tree, semanticModel) = TestHelper.CompileVB(code);
-            var node = tree.GetRoot().DescendantNodes().OfType<VB.InvocationExpressionSyntax>().Single();
+            var node = tree.Single<VB.InvocationExpressionSyntax>();
 
             SyntaxNodeExtensionsVB.CreateCfg(node, semanticModel, default).Should().NotBeNull();
         }
@@ -247,7 +247,7 @@ public class Sample
     }
 }";
             var (tree, semanticModel) = TestHelper.CompileCS(code);
-            var lambda = tree.GetRoot().DescendantNodes().OfType<CS.ParenthesizedLambdaExpressionSyntax>().Single();
+            var lambda = tree.Single<CS.ParenthesizedLambdaExpressionSyntax>();
 
             SyntaxNodeExtensionsCS.CreateCfg(lambda.Body, semanticModel, default).Should().NotBeNull();
         }
@@ -263,7 +263,7 @@ Public Class Sample
 End Class
 ";
             var (tree, semanticModel) = TestHelper.CompileVB(code);
-            var lambda = tree.GetRoot().DescendantNodes().OfType<VB.SingleLineLambdaExpressionSyntax>().Single();
+            var lambda = tree.Single<VB.SingleLineLambdaExpressionSyntax>();
 
             SyntaxNodeExtensionsVB.CreateCfg(lambda.Body, semanticModel, default).Should().NotBeNull();
         }
@@ -305,7 +305,7 @@ public class Sample
     }
 }";
             var (tree, semanticModel) = TestHelper.CompileCS(code);
-            var innerLambda = tree.GetRoot().DescendantNodes().OfType<CS.SimpleLambdaExpressionSyntax>().Single();
+            var innerLambda = tree.Single<CS.SimpleLambdaExpressionSyntax>();
             innerLambda.Parent.Parent.Should().BeOfType<CS.VariableDeclaratorSyntax>().Subject.Identifier.ValueText.Should().Be("innerLambda");
 
             var cfg = SyntaxNodeExtensionsCS.CreateCfg(innerLambda.Body, semanticModel, default);
@@ -341,7 +341,7 @@ Public Class Sample
     End Sub
 End Class";
             var (tree, semanticModel) = TestHelper.CompileVB(code);
-            var innerSub = tree.GetRoot().DescendantNodes().OfType<VB.InvocationExpressionSyntax>().Single().FirstAncestorOrSelf<VB.SingleLineLambdaExpressionSyntax>();
+            var innerSub = tree.Single<VB.InvocationExpressionSyntax>().FirstAncestorOrSelf<VB.SingleLineLambdaExpressionSyntax>();
             innerSub.Parent.Parent.Should().BeOfType<VB.VariableDeclaratorSyntax>().Subject.Names.Single().Identifier.ValueText.Should().Be("InnerSingleLineSub");
 
             var cfg = SyntaxNodeExtensionsVB.CreateCfg(innerSub, semanticModel, default);
@@ -368,7 +368,7 @@ public class Sample
     }
 }";
             var (tree, model) = TestHelper.CompileIgnoreErrorsCS(code);
-            var lambda = tree.GetRoot().DescendantNodes().OfType<CS.ParenthesizedLambdaExpressionSyntax>().Single();
+            var lambda = tree.Single<CS.ParenthesizedLambdaExpressionSyntax>();
             SyntaxNodeExtensionsCS.CreateCfg(lambda.Body, model, default).Should().NotBeNull();
         }
 
@@ -382,7 +382,7 @@ Public Class Sample
     End Sub
 End Class";
             var (tree, model) = TestHelper.CompileIgnoreErrorsVB(code);
-            var lambda = tree.GetRoot().DescendantNodes().OfType<VB.SingleLineLambdaExpressionSyntax>().Single();
+            var lambda = tree.Single<VB.SingleLineLambdaExpressionSyntax>();
             SyntaxNodeExtensionsVB.CreateCfg(lambda, model, default).Should().BeNull();
         }
 
@@ -394,7 +394,7 @@ End Class";
         public void CreateCfg_InvalidSyntax_ReturnsCfg_CS(string code)
         {
             var (tree, model) = TestHelper.CompileIgnoreErrorsCS(code);
-            var lambda = tree.GetRoot().DescendantNodes().OfType<CS.ParenthesizedLambdaExpressionSyntax>().Single();
+            var lambda = tree.Single<CS.ParenthesizedLambdaExpressionSyntax>();
 
             SyntaxNodeExtensionsCS.CreateCfg(lambda.Body, model, default).Should().NotBeNull();
         }
@@ -421,7 +421,7 @@ public class Sample
     }
 }";
             var (tree, model) = TestHelper.CompileCS(code);
-            var lambda = tree.GetRoot().DescendantNodes().OfType<CS.ParenthesizedLambdaExpressionSyntax>().Single();
+            var lambda = tree.Single<CS.ParenthesizedLambdaExpressionSyntax>();
             Action a = () =>
                 {
                     for (var i = 0; i < 10000; i++)
@@ -450,7 +450,7 @@ Public Class Sample
     End Sub
 End Class";
             var (tree, model) = TestHelper.CompileVB(code);
-            var lambda = tree.GetRoot().DescendantNodes().OfType<VB.SingleLineLambdaExpressionSyntax>().Single();
+            var lambda = tree.Single<VB.SingleLineLambdaExpressionSyntax>();
             Action a = () =>
             {
                 for (var i = 0; i < 10000; i++)
@@ -473,8 +473,8 @@ public class Sample
 }";
             var compilation1 = TestHelper.CompileCS(code).Model.Compilation;
             var compilation2 = compilation1.WithAssemblyName("Different-Compilation-Reusing-Same-Nodes");
-            var method1 = compilation1.SyntaxTrees.Single().GetRoot().DescendantNodes().OfType<CS.MethodDeclarationSyntax>().Single();
-            var method2 = compilation2.SyntaxTrees.Single().GetRoot().DescendantNodes().OfType<CS.MethodDeclarationSyntax>().Single();
+            var method1 = compilation1.SyntaxTrees.Single().Single<CS.MethodDeclarationSyntax>();
+            var method2 = compilation2.SyntaxTrees.Single().Single<CS.MethodDeclarationSyntax>();
             var cfg1 = SyntaxNodeExtensionsCS.CreateCfg(method1.Body, compilation1.GetSemanticModel(method1.SyntaxTree), default);
             var cfg2 = SyntaxNodeExtensionsCS.CreateCfg(method2.Body, compilation2.GetSemanticModel(method2.SyntaxTree), default);
 

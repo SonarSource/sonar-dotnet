@@ -48,9 +48,7 @@ namespace Test
 }
 ";
             var snippet = new SnippetCompiler(code);
-
-            var typeDeclaration = snippet.SyntaxTree.GetRoot().DescendantNodes().OfType<TypeDeclarationSyntax>().Single();
-
+            var typeDeclaration = snippet.SyntaxTree.Single<TypeDeclarationSyntax>();
             typeDeclaration.GetMethodDeclarations().Single().Identifier.Text.Should().Be("WriteLine");
         }
 
@@ -79,9 +77,7 @@ namespace Test
 }
 ";
             var snippet = new SnippetCompiler(code);
-
-            var typeDeclaration = snippet.SyntaxTree.GetRoot().DescendantNodes().OfType<TypeDeclarationSyntax>().Single();
-
+            var typeDeclaration = snippet.SyntaxTree.Single<TypeDeclarationSyntax>();
             typeDeclaration
                 .GetMethodDeclarations()
                 .Select(methodDeclaration => methodDeclaration.Identifier.Text)

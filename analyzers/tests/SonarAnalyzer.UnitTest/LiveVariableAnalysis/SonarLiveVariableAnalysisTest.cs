@@ -629,7 +629,7 @@ public class Sample
     private bool IsMethod(params bool[] args) => true;
     private void Capturing(System.Func<int> f) {{ }}
 }}";
-                var (method, model) = SonarControlFlowGraphTest.CompileWithMethodBody(code, "Main");
+                var (method, model) = SonarControlFlowGraphTest.CompileWithMethodBody(code);
                 IMethodSymbol symbol;
                 CSharpSyntaxNode body;
                 if (localFunctionName == null)
