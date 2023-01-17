@@ -19,7 +19,6 @@
  */
 
 using System.IO;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.CFG;
 using SonarAnalyzer.CFG.Roslyn;
@@ -28,7 +27,6 @@ using SonarAnalyzer.Extensions;
 using SonarAnalyzer.UnitTest.PackagingTests;
 using StyleCop.Analyzers.Lightup;
 using CS = Microsoft.CodeAnalysis.CSharp;
-using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest
@@ -110,40 +108,6 @@ End Class", AnalyzerLanguage.VisualBasic);
                 language == AnalyzerLanguage.CSharp
                     ? node.RawKind == (int)CS.SyntaxKind.MethodDeclaration
                     : node.RawKind == (int)VB.SyntaxKind.FunctionBlock || node.RawKind == (int)VB.SyntaxKind.SubBlock;
-        }
-
-        public static MethodDeclarationSyntax GetMethod(this SyntaxTree syntaxTree, string name, int skip = 0) =>
-            syntaxTree.GetRoot()
-                .DescendantNodes()
-                .OfType<MethodDeclarationSyntax>()
-                .Where(m => m.Identifier.ValueText == name)
-                .Skip(skip)
-                .First();
-
-        public static (MethodDeclarationSyntax, SemanticModel) GetMethod(this (SyntaxTree, SemanticModel) tuple, string name)
-        {
-            var (syntaxTree, semanticModel) = tuple;
-            return (syntaxTree.GetMethod(name), semanticModel);
-        }
-
-        public static ConstructorDeclarationSyntax GetConstructor(this SyntaxTree syntaxTree, string name, int skip = 0) =>
-            syntaxTree.GetRoot()
-                .DescendantNodes()
-                .OfType<ConstructorDeclarationSyntax>()
-                .Where(m => m.Identifier.ValueText == name)
-                .Skip(skip)
-                .First();
-
-        public static (ConstructorDeclarationSyntax, SemanticModel) GetConstructor(this (SyntaxTree, SemanticModel) tuple, string name)
-        {
-            var (syntaxTree, semanticModel) = tuple;
-            return (syntaxTree.GetConstructor(name), semanticModel);
-        }
-
-        public static IMethodSymbol GetMethodSymbol(this (SyntaxTree, SemanticModel) tuple, string name, int skip = 0)
-        {
-            var (syntaxTree, semanticModel) = tuple;
-            return semanticModel.GetDeclaredSymbol(syntaxTree.GetMethod(name, skip));
         }
 
         public static bool IsSecurityHotspot(DiagnosticDescriptor diagnostic)

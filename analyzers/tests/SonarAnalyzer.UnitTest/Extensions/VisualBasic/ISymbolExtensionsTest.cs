@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Extensions.VisualBasic
         public void GetDescendantNodes_ForDifferentSyntaxTrees_ReturnsEmpty_VB()
         {
             var first = SyntaxFactory.ParseSyntaxTree("Dim a As String");
-            var identifier = first.GetRoot().DescendantNodes().OfType<ModifiedIdentifierSyntax>().First();
+            var identifier = first.Single<ModifiedIdentifierSyntax>();
 
             var second = SyntaxFactory.ParseSyntaxTree("Dim a As String");
             ISymbolExtensions_VB.GetDescendantNodes(identifier.GetLocation(), second.GetRoot()).Should().BeEmpty();

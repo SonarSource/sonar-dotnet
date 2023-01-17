@@ -92,7 +92,7 @@ public class Sample
     }
 }";
             var (tree, model) = TestHelper.CompileCS(code);
-            var declaration = tree.GetRoot().DescendantNodes().OfType<EqualsValueClauseSyntax>().Single();
+            var declaration = tree.Single<EqualsValueClauseSyntax>();
             semanticModel = model;
             return new IOperationWrapperSonar(model.GetOperation(declaration));
         }

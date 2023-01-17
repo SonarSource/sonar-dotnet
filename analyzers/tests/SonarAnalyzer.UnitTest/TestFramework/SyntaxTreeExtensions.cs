@@ -18,26 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Moq;
-using SonarAnalyzer.AnalysisContext;
+namespace SonarAnalyzer.UnitTest;
 
-namespace SonarAnalyzer.UnitTest.AnalysisContext;
-
-[TestClass]
-public class SonarCompilationStartAnalysisContextTest
+internal static class SyntaxTreeExtensions
 {
-    [TestMethod]
-    public void Properties_ArePropagated()
-    {
-        var cancel = new CancellationToken(true);
-        var (tree, model) = TestHelper.CompileCS("// Nothing to see here");
-        var options = AnalysisScaffolding.CreateOptions();
-        var context = new Mock<CompilationStartAnalysisContext>(model.Compilation, options, cancel).Object;
-        var sut = new SonarCompilationStartAnalysisContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context);
+    public static T First<T>(this SyntaxTree tree) where T : SyntaxNode =>
+        tree.GetRoot().DescendantNodes().OfType<T>().First();
 
-        sut.Tree.Should().Be(tree);
-        sut.Compilation.Should().Be(model.Compilation);
-        sut.Options.Should().Be(options);
-        sut.Cancel.Should().Be(cancel);
-    }
+    public static T Single<T>(this SyntaxTree tree) where T : SyntaxNode =>
+        tree.GetRoot().DescendantNodes().OfType<T>().Single();
 }

@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Extensions;
 
@@ -47,10 +46,9 @@ End Class";
                    Dim mixConstantAndLiteral = $""TextValue {constant}""")]
         [DataRow(@"Const constant As Integer = 1
                    Dim mix = $""{constant}{$""{Foo()}""}{""{notConstant}""}""")]
-        public void TryGetGetInterpolatedTextValue_UnsupportedSyntaxKinds_ReturnsFalse(string code)
+        public void TryGetGetInterpolatedTextValue_UnsupportedSyntaxKinds_ReturnsFalse(string methodBody)
         {
-            var codeSnipet = string.Format(CodeSnipet, code);
-            var (expression, semanticModel) = Compile(codeSnipet);
+            var (expression, semanticModel) = Compile(methodBody);
             expression.TryGetGetInterpolatedTextValue(semanticModel, out var interpolatedValue).Should().Be(false);
             interpolatedValue.Should().BeNull();
         }
@@ -62,36 +60,29 @@ End Class";
                  "TextOnly")]
         [DataRow(@"
                     Const constantString As String = ""Foo""
-                    Const constantInterpolation As String = $""{constantString} with text.""
+                    Dim constantInterpolation As String = $""{constantString} with text.""
                  ",
                  "Foo with text.")]
         [DataRow(@"
                     Const constantString As String = ""Foo""
-                    Const constantInterpolation As String = $""{$""Nested {constantString}""} with text.""",
+                    Dim constantInterpolation As String = $""{$""Nested {constantString}""} with text.""",
                  "Nested Foo with text.")]
         [DataRow(@"
                     notConstantString = ""SomeValue""
                     Dim interpolatedString As String = $""{notConstantString}""
                  ",
                  "SomeValue")]
-        public void TryGetGetInterpolatedTextValue_SupportedSyntaxKinds_ReturnsTrue(string code, string expectedTextValue)
+        public void TryGetGetInterpolatedTextValue_SupportedSyntaxKinds_ReturnsTrue(string methodBody, string expectedTextValue)
         {
-            var codeSnipet = string.Format(CodeSnipet, code);
-            var (expression, semanticModel) = Compile(codeSnipet);
+            var (expression, semanticModel) = Compile(methodBody);
             expression.TryGetGetInterpolatedTextValue(semanticModel, out var interpolatedValue).Should().Be(true);
             interpolatedValue.Should().Be(expectedTextValue);
         }
 
-        private static (InterpolatedStringExpressionSyntax InterpolatedStringExpression, SemanticModel SemanticModel) Compile(string code)
+        private static (InterpolatedStringExpressionSyntax InterpolatedStringExpression, SemanticModel SemanticModel) Compile(string methodBody)
         {
-            var tree = VisualBasicSyntaxTree.ParseText(code);
-            var compilation = VisualBasicCompilation.Create("TempAssembly.dll")
-                                                    .AddSyntaxTrees(tree)
-                                                    .AddReferences(MetadataReferenceFacade.ProjectDefaultReferences);
-
-            var semanticModel = compilation.GetSemanticModel(tree);
-
-            return (tree.GetRoot().DescendantNodes().OfType<InterpolatedStringExpressionSyntax>().First(), semanticModel);
+            var (tree, model) = TestHelper.CompileVB(string.Format(CodeSnipet, methodBody));
+            return (tree.First<InterpolatedStringExpressionSyntax>(), model);
         }
     }
 }
