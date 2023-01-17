@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterNodeAction(CheckElse, SyntaxKind.ElseClause);
         }
 
-        private static void CheckWhile(SonarSyntaxNodeAnalysisContext context)
+        private static void CheckWhile(SonarSyntaxNodeReportingContext context)
         {
             var whileStatement = (WhileStatementSyntax)context.Node;
             if (!IsStatementIndentationOk(whileStatement, whileStatement.Statement))
@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckDo(SonarSyntaxNodeAnalysisContext context)
+        private static void CheckDo(SonarSyntaxNodeReportingContext context)
         {
             var doStatement = (DoStatementSyntax)context.Node;
             if (!IsStatementIndentationOk(doStatement, doStatement.Statement))
@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckFor(SonarSyntaxNodeAnalysisContext context)
+        private static void CheckFor(SonarSyntaxNodeReportingContext context)
         {
             var forStatement = (ForStatementSyntax)context.Node;
             if (!IsStatementIndentationOk(forStatement, forStatement.Statement))
@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckForEach(SonarSyntaxNodeAnalysisContext context)
+        private static void CheckForEach(SonarSyntaxNodeReportingContext context)
         {
             var forEachStatement = (ForEachStatementSyntax)context.Node;
             if (!IsStatementIndentationOk(forEachStatement, forEachStatement.Statement))
@@ -84,7 +84,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckIf(SonarSyntaxNodeAnalysisContext context)
+        private static void CheckIf(SonarSyntaxNodeReportingContext context)
         {
             var ifStatement = (IfStatementSyntax)context.Node;
 
@@ -115,7 +115,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckElse(SonarSyntaxNodeAnalysisContext context)
+        private static void CheckElse(SonarSyntaxNodeReportingContext context)
         {
             var elseClause = (ElseClauseSyntax)context.Node;
             if (!IsStatementIndentationOk(elseClause, elseClause.Statement))
@@ -129,7 +129,7 @@ namespace SonarAnalyzer.Rules.CSharp
             conditionallyExecutedNode is BlockSyntax ||
             VisualIndentComparer.IsSecondIndentLonger(controlNode, conditionallyExecutedNode);
 
-        private static void ReportIssue(SonarSyntaxNodeAnalysisContext context, Location primaryLocation,
+        private static void ReportIssue(SonarSyntaxNodeReportingContext context, Location primaryLocation,
             SyntaxNode secondaryLocationNode, string conditionLabelText) =>
                context.ReportIssue(Rule.CreateDiagnostic(context.Compilation, primaryLocation, new[] { GetFirstLineOfNode(secondaryLocationNode) }, conditionLabelText));
 

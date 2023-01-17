@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterNodeAction(AnalyzeLocalFunctionStatements, SyntaxKindEx.LocalFunctionStatement);
         }
 
-        private static void AnalyzeNamedTypes(SonarSymbolAnalysisContext context)
+        private static void AnalyzeNamedTypes(SonarSymbolReportingContext context)
         {
             var namedType = (INamedTypeSymbol)context.Symbol;
             if (!namedType.IsClassOrStruct() || namedType.ContainingType != null)
@@ -70,7 +70,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void AnalyzeLocalFunctionStatements(SonarSyntaxNodeAnalysisContext context)
+        private static void AnalyzeLocalFunctionStatements(SonarSyntaxNodeReportingContext context)
         {
             var localFunctionSyntax = (LocalFunctionStatementSyntaxWrapper)context.Node;
             var topMostContainingMethod = localFunctionSyntax.IsTopLevel()

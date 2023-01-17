@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 },
                 SyntaxKind.MultiLineIfBlock);
 
-        private void CheckConditionAt(SonarSyntaxNodeAnalysisContext context, ExpressionSyntax[] conditions, int currentIndex)
+        private void CheckConditionAt(SonarSyntaxNodeReportingContext context, ExpressionSyntax[] conditions, int currentIndex)
         {
             for (var i = 0; i < currentIndex; i++)
             {

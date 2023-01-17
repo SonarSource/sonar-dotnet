@@ -29,13 +29,13 @@ public sealed class SonarCompilationStartAnalysisContext : SonarAnalysisContextB
 
     internal SonarCompilationStartAnalysisContext(SonarAnalysisContext analysisContext, CompilationStartAnalysisContext context) : base(analysisContext, context) { }
 
-    public void RegisterSymbolAction(Action<SonarSymbolAnalysisContext> action, params SymbolKind[] symbolKinds) =>
+    public void RegisterSymbolAction(Action<SonarSymbolReportingContext> action, params SymbolKind[] symbolKinds) =>
         Context.RegisterSymbolAction(x => action(new(AnalysisContext, x)), symbolKinds);
 
-    public void RegisterCompilationEndAction(Action<SonarCompilationAnalysisContext> action) =>
+    public void RegisterCompilationEndAction(Action<SonarCompilationReportingContext> action) =>
         Context.RegisterCompilationEndAction(x => action(new(AnalysisContext, x)));
 
-    public void RegisterNodeAction<TSyntaxKind>(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxNodeAnalysisContext> action, params TSyntaxKind[] syntaxKinds)
+    public void RegisterNodeAction<TSyntaxKind>(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxNodeReportingContext> action, params TSyntaxKind[] syntaxKinds)
         where TSyntaxKind : struct =>
         AnalysisContext.RegisterNodeAction(generatedCodeRecognizer, action, syntaxKinds);
 }

@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ObjectCreationExpression);
         }
 
-        private static void CheckCall(SonarSyntaxNodeAnalysisContext context, SyntaxNode node, ArgumentListSyntax argumentList)
+        private static void CheckCall(SonarSyntaxNodeReportingContext context, SyntaxNode node, ArgumentListSyntax argumentList)
         {
             if (argumentList == null
                 || argumentList.Arguments.Count == 0

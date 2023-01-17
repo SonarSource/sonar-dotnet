@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.PostIncrementExpression,
                 SyntaxKind.PostDecrementExpression);
 
-        private static void VisitParent(SonarSyntaxNodeAnalysisContext context, PostfixUnaryExpressionSyntax increment)
+        private static void VisitParent(SonarSyntaxNodeReportingContext context, PostfixUnaryExpressionSyntax increment)
         {
             switch (increment.Parent)
             {

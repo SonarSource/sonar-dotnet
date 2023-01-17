@@ -50,7 +50,7 @@ public sealed class MultilineBlocksWithoutBrace : SonarDiagnosticAnalyzer
             SyntaxKind.IfStatement);
     }
 
-    private static void CheckLoop(SonarSyntaxNodeAnalysisContext context, StatementSyntax statement)
+    private static void CheckLoop(SonarSyntaxNodeReportingContext context, StatementSyntax statement)
     {
         if (!IsNestedStatement(statement))
         {
@@ -58,7 +58,7 @@ public sealed class MultilineBlocksWithoutBrace : SonarDiagnosticAnalyzer
         }
     }
 
-    private static void CheckIf(SonarSyntaxNodeAnalysisContext context, IfStatementSyntax ifStatement)
+    private static void CheckIf(SonarSyntaxNodeReportingContext context, IfStatementSyntax ifStatement)
     {
         if (!ifStatement.GetPrecedingIfsInConditionChain().Any()
             && !IsNestedStatement(ifStatement.Statement)
@@ -85,7 +85,7 @@ public sealed class MultilineBlocksWithoutBrace : SonarDiagnosticAnalyzer
         return statement;
     }
 
-    private static void CheckStatement(SonarSyntaxNodeAnalysisContext context, StatementSyntax first, string executed, string execute)
+    private static void CheckStatement(SonarSyntaxNodeReportingContext context, StatementSyntax first, string executed, string execute)
     {
         if (IsNotEmpty(first)
             && SecondStatement(context.Node, first) is { } second

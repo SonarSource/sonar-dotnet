@@ -26,7 +26,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         public class SonarChecker : IChecker
         {
-            public void CheckForNoExitProperty(SonarSyntaxNodeAnalysisContext c, PropertyDeclarationSyntax property, IPropertySymbol propertySymbol)
+            public void CheckForNoExitProperty(SonarSyntaxNodeReportingContext c, PropertyDeclarationSyntax property, IPropertySymbol propertySymbol)
             {
                 IControlFlowGraph cfg;
                 if (property.ExpressionBody?.Expression != null)
@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
 
-            public void CheckForNoExitMethod(SonarSyntaxNodeAnalysisContext c, CSharpSyntaxNode body, SyntaxToken identifier, IMethodSymbol symbol)
+            public void CheckForNoExitMethod(SonarSyntaxNodeReportingContext c, CSharpSyntaxNode body, SyntaxToken identifier, IMethodSymbol symbol)
             {
                 if (CSharpControlFlowGraph.TryGet(body, c.SemanticModel, out var cfg))
                 {
@@ -71,7 +71,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
 
-            private static void CheckInfiniteJumpLoop(SonarSyntaxNodeAnalysisContext context, SyntaxNode body, IControlFlowGraph cfg, string declarationType)
+            private static void CheckInfiniteJumpLoop(SonarSyntaxNodeReportingContext context, SyntaxNode body, IControlFlowGraph cfg, string declarationType)
             {
                 if (body == null)
                 {

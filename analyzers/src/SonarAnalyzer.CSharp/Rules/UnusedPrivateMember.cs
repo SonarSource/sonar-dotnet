@@ -75,7 +75,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         });
                 });
 
-        private static void NamedSymbolAction(SonarSymbolAnalysisContext context, HashSet<ISymbol> removableInternalTypes)
+        private static void NamedSymbolAction(SonarSymbolReportingContext context, HashSet<ISymbol> removableInternalTypes)
         {
             var namedType = (INamedTypeSymbol)context.Symbol;
             var privateSymbols = new HashSet<ISymbol>();

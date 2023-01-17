@@ -18,32 +18,25 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CSharp;
-using Moq;
 using SonarAnalyzer.AnalysisContext;
 
 namespace SonarAnalyzer.UnitTest.AnalysisContext;
 
 [TestClass]
-public class SonarCodeBlockAnalysisContextTest
+public class SonarCompilationReportingContextTest
 {
     [TestMethod]
     public void Properties_ArePropagated()
     {
         var cancel = new CancellationToken(true);
-        var codeBlock = SyntaxFactory.Block();
-        var owningSymbol = Mock.Of<ISymbol>();
-        var model = Mock.Of<SemanticModel>();
+        var (tree, model) = TestHelper.CompileCS("// Nothing to see here");
         var options = AnalysisScaffolding.CreateOptions();
-        var context = new CodeBlockAnalysisContext(codeBlock, owningSymbol, model, options, _ => { }, _ => true, cancel);
-        var sut = new SonarCodeBlockAnalysisContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context);
+        var context = new CompilationAnalysisContext(model.Compilation, options, _ => { }, _ => true, cancel);
+        var sut = new SonarCompilationReportingContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context);
 
-        sut.Tree.Should().Be(codeBlock.SyntaxTree);
+        sut.Tree.Should().Be(tree);
         sut.Compilation.Should().Be(model.Compilation);
         sut.Options.Should().Be(options);
         sut.Cancel.Should().Be(cancel);
-        sut.CodeBlock.Should().Be(codeBlock);
-        sut.OwningSymbol.Should().Be(owningSymbol);
-        sut.SemanticModel.Should().Be(model);
     }
 }

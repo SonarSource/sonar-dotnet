@@ -75,7 +75,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterNodeAction(ReportOnViolation, SyntaxKind.SimpleMemberAccessExpression);
 
-        private static void ReportOnViolation(SonarSyntaxNodeAnalysisContext context)
+        private static void ReportOnViolation(SonarSyntaxNodeReportingContext context)
         {
             var simpleMemberAccess = (MemberAccessExpressionSyntax)context.Node;
             var memberAccessNameName = simpleMemberAccess.GetName();
@@ -114,7 +114,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.ReportIssue(Diagnostic.Create(context.IsAzureFunction() ? RuleS6422 : RuleS4462, simpleMemberAccess.GetLocation(), MemberNameToMessageArguments[memberAccessNameName]));
         }
 
-        private static bool IsAwaited(SonarSyntaxNodeAnalysisContext context, MemberAccessExpressionSyntax simpleMemberAccess)
+        private static bool IsAwaited(SonarSyntaxNodeReportingContext context, MemberAccessExpressionSyntax simpleMemberAccess)
         {
             return context.SemanticModel.GetSymbolInfo(simpleMemberAccess.Expression).Symbol is { } accessedSymbol
                    && simpleMemberAccess.FirstAncestorOrSelf<StatementSyntax>() is { } currentStatement

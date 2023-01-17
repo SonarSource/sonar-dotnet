@@ -28,7 +28,7 @@ namespace SonarAnalyzer.Rules
     {
         protected abstract ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules { get; }
         protected abstract ControlFlowGraph CreateCfg(SemanticModel model, SyntaxNode node, CancellationToken cancel);
-        protected abstract void AnalyzeSonar(SonarSyntaxNodeAnalysisContext context, SyntaxNode body, ISymbol symbol);
+        protected abstract void AnalyzeSonar(SonarSyntaxNodeReportingContext context, SyntaxNode body, ISymbol symbol);
 
         protected IAnalyzerConfiguration Configuration { get; }
 
@@ -47,10 +47,10 @@ namespace SonarAnalyzer.Rules
             new RuleFactory<TRuleCheck, TSonarFallback>();
 
         // We need to rewrite this https://github.com/SonarSource/sonar-dotnet/issues/4824
-        protected static bool IsEnabled(SonarSyntaxNodeAnalysisContext context, DiagnosticDescriptor descriptor) =>
+        protected static bool IsEnabled(SonarSyntaxNodeReportingContext context, DiagnosticDescriptor descriptor) =>
             context.HasMatchingScope(descriptor) && descriptor.GetEffectiveSeverity(context.Compilation.Options) != ReportDiagnostic.Suppress;
 
-        protected void Analyze<TNode>(SonarAnalysisContext analysisContext, SonarSyntaxNodeAnalysisContext context, Func<TNode, SyntaxNode> getBody) where TNode : SyntaxNode
+        protected void Analyze<TNode>(SonarAnalysisContext analysisContext, SonarSyntaxNodeReportingContext context, Func<TNode, SyntaxNode> getBody) where TNode : SyntaxNode
         {
             if (getBody((TNode)context.Node) is { } body && context.SemanticModel.GetDeclaredSymbol(context.Node) is { } symbol)
             {
@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        protected void Analyze(SonarAnalysisContext analysisContext, SonarSyntaxNodeAnalysisContext nodeContext, SyntaxNode body, ISymbol symbol)
+        protected void Analyze(SonarAnalysisContext analysisContext, SonarSyntaxNodeReportingContext nodeContext, SyntaxNode body, ISymbol symbol)
         {
             if (body is { ContainsDiagnostics: false })
             {
@@ -70,7 +70,7 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        private void AnalyzeRoslyn(SonarAnalysisContext analysisContext, SonarSyntaxNodeAnalysisContext nodeContext, SyntaxNode body, ISymbol symbol)
+        private void AnalyzeRoslyn(SonarAnalysisContext analysisContext, SonarSyntaxNodeReportingContext nodeContext, SyntaxNode body, ISymbol symbol)
         {
             var checks = AllRules
                 .Where(x => IsEnabled(nodeContext, x.Key))
@@ -109,7 +109,7 @@ namespace SonarAnalyzer.Rules
                 this.createSonarFallbackInstance = createSonarFallbackInstance;
             }
 
-            public SymbolicRuleCheck CreateInstance(IAnalyzerConfiguration configuration, SonarAnalysisContext analysisContext, SonarSyntaxNodeAnalysisContext nodeContext)
+            public SymbolicRuleCheck CreateInstance(IAnalyzerConfiguration configuration, SonarAnalysisContext analysisContext, SonarSyntaxNodeReportingContext nodeContext)
             {
                 if (configuration.ForceSonarCfg && createSonarFallbackInstance is not null)
                 {

@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.SwitchStatement);
         }
 
-        private static void CheckMatchingExpressionsInSucceedingStatements<T>(SonarSyntaxNodeAnalysisContext context, Func<T, ExpressionSyntax> expression) where T : StatementSyntax
+        private static void CheckMatchingExpressionsInSucceedingStatements<T>(SonarSyntaxNodeReportingContext context, Func<T, ExpressionSyntax> expression) where T : StatementSyntax
         {
             var currentStatement = (T)context.Node;
             if (currentStatement.GetPrecedingStatement() is T previousStatement)

@@ -76,7 +76,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static IEnumerable<IMethodSymbol> GetAllOverrideMethods(INamedTypeSymbol symbol) =>
             GetAllMethods(symbol).Where(m => m.IsOverride);
 
-        private static void Report(SonarSymbolAnalysisContext context, INamedTypeSymbol symbol, string message)
+        private static void Report(SonarSymbolReportingContext context, INamedTypeSymbol symbol, string message)
         {
             foreach (var declaringSyntaxReference in symbol.DeclaringSyntaxReferences)
             {

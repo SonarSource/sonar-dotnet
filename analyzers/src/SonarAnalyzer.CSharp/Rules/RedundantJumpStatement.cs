@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ParenthesizedLambdaExpression);
         }
 
-        private static void CheckForRedundantJumps(SonarSyntaxNodeAnalysisContext context, CSharpSyntaxNode node)
+        private static void CheckForRedundantJumps(SonarSyntaxNodeReportingContext context, CSharpSyntaxNode node)
         {
             if (!CSharpControlFlowGraph.TryGet(node, context.SemanticModel, out var cfg))
             {

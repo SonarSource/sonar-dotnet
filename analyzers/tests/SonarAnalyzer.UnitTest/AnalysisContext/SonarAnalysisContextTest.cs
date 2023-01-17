@@ -278,7 +278,7 @@ public partial class SonarAnalysisContextTest
     {
         var compilation = new SnippetCompiler("// Nothing to see here", TestHelper.ProjectTypeReference(projectType)).SemanticModel.Compilation;
         var context = new CompilationAnalysisContext(compilation, AnalysisScaffolding.CreateOptions(), null, null, default);
-        var sut = new SonarCompilationAnalysisContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context);
+        var sut = new SonarCompilationReportingContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context);
 
         sut.IsTestProject().Should().Be(expectedResult);
     }
@@ -290,7 +290,7 @@ public partial class SonarAnalysisContextTest
     {
         var configPath = AnalysisScaffolding.CreateSonarProjectConfig(TestContext, projectType);
         var context = new CompilationAnalysisContext(null, AnalysisScaffolding.CreateOptions(configPath), null, null, default);
-        var sut = new SonarCompilationAnalysisContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context);
+        var sut = new SonarCompilationReportingContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context);
 
         sut.IsTestProject().Should().Be(expectedResult);
     }
@@ -305,7 +305,7 @@ public partial class SonarAnalysisContextTest
         var location = context.Tree.GetRoot().GetLocation();
         var symbol = Mock.Of<ISymbol>(x => x.Locations == ImmutableArray.Create(location));
         var symbolContext = new SymbolAnalysisContext(symbol, context.Model.Compilation, context.Options, _ => wasReported = true, _ => true, default);
-        var sut = new SonarSymbolAnalysisContext(new SonarAnalysisContext(context, DummyMainDescriptor), symbolContext);
+        var sut = new SonarSymbolReportingContext(new SonarAnalysisContext(context, DummyMainDescriptor), symbolContext);
         sut.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, Mock.Of<Diagnostic>(x => x.Id == "Sxxx" && x.Location == location && x.Descriptor == DummyMainDescriptor[0]));
 
         wasReported.Should().Be(expected);

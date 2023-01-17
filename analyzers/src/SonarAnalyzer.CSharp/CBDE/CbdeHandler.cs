@@ -42,7 +42,7 @@ namespace SonarAnalyzer.CBDE
         // this is the place where the cbde executable is unpacked. It is in a temp folder
         private static string extractedCbdeBinaryPath;
 
-        private readonly Action<SonarCompilationAnalysisContext, string, string, Location> raiseIssue;
+        private readonly Action<SonarCompilationReportingContext, string, string, Location> raiseIssue;
         // This is used by unit tests that want to check the log (whose path is the parameter of this action) contains what is expected
         private readonly Action<string> onCbdeExecution;
         // the cbdeExecutablePath is normally the extractedCbdeBinaryPath, but can be different in tests
@@ -64,7 +64,7 @@ namespace SonarAnalyzer.CBDE
         private string cbdePerfLogFile;
         private string moreDetailsMessage;
 
-        public CbdeHandler(Action<SonarCompilationAnalysisContext, string, string, Location> raiseIssue,
+        public CbdeHandler(Action<SonarCompilationReportingContext, string, string, Location> raiseIssue,
             bool unitTest,
             string testCbdeBinaryPath = null, // Used by unit tests
             Action<string> onCbdeExecution = null) // Used by unit tests
@@ -267,7 +267,7 @@ Stack trace: {e.StackTrace}";
             PerformanceLog(perfLog.ToString());
         }
 
-        private void RunCbdeAndRaiseIssues(SonarCompilationAnalysisContext c)
+        private void RunCbdeAndRaiseIssues(SonarCompilationReportingContext c)
         {
             Log("Running CBDE");
             using (var cbdeProcess = new Process())
@@ -341,7 +341,7 @@ Stack trace: {e.StackTrace}";
         private void Cleanup() =>
             logStringBuilder.Clear();
 
-        private void RaiseIssueFromXElement(SonarCompilationAnalysisContext context, XElement issue)
+        private void RaiseIssueFromXElement(SonarCompilationReportingContext context, XElement issue)
         {
             var key = issue.Attribute("key").Value;
             var message = issue.Attribute("message").Value;
@@ -372,7 +372,7 @@ Stack trace: {e.StackTrace}";
             throw new CbdeException($"CBDE external process reported an error{moreDetailsMessage}");
         }
 
-        private void RaiseIssuesFromResultFile(SonarCompilationAnalysisContext context)
+        private void RaiseIssuesFromResultFile(SonarCompilationReportingContext context)
         {
             LogIfFailure($"- parsing file {cbdeResultsPath}");
             try

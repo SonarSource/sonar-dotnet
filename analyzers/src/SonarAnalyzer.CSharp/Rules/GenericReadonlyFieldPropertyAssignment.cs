@@ -70,7 +70,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.PostIncrementExpression);
         }
 
-        private static void ProcessPropertyChange(SonarSyntaxNodeAnalysisContext context, SemanticModel semanticModel, ExpressionSyntax expression)
+        private static void ProcessPropertyChange(SonarSyntaxNodeReportingContext context, SemanticModel semanticModel, ExpressionSyntax expression)
         {
             if (TupleExpressionSyntaxWrapper.IsInstance(expression))
             {

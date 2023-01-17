@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         #region Top level
 
-        private static void CheckInterfaceVariance(SonarSyntaxNodeAnalysisContext context, InterfaceDeclarationSyntax declaration)
+        private static void CheckInterfaceVariance(SonarSyntaxNodeReportingContext context, InterfaceDeclarationSyntax declaration)
         {
             var interfaceType = context.SemanticModel.GetDeclaredSymbol(declaration);
             if (interfaceType == null)
@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
         }
-        private static void CheckDelegateVariance(SonarSyntaxNodeAnalysisContext context, DelegateDeclarationSyntax declaration)
+        private static void CheckDelegateVariance(SonarSyntaxNodeReportingContext context, DelegateDeclarationSyntax declaration)
         {
             var declaredSymbol = context.SemanticModel.GetDeclaredSymbol(declaration);
             if (declaredSymbol == null)
@@ -170,7 +170,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         #endregion
 
-        private static void ReportIssue(SonarSyntaxNodeAnalysisContext context, ITypeParameterSymbol typeParameter, VarianceKind variance)
+        private static void ReportIssue(SonarSyntaxNodeReportingContext context, ITypeParameterSymbol typeParameter, VarianceKind variance)
         {
             if (!typeParameter.DeclaringSyntaxReferences.Any())
             {

@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override ControlFlowGraph CreateCfg(SemanticModel model, SyntaxNode node, CancellationToken cancel) =>
             node.CreateCfg(model, cancel);
 
-        protected override void AnalyzeSonar(SonarSyntaxNodeAnalysisContext context, SyntaxNode body, ISymbol symbol)
+        protected override void AnalyzeSonar(SonarSyntaxNodeReportingContext context, SyntaxNode body, ISymbol symbol)
         {
             // There are no old Sonar rules in VB.NET
         }

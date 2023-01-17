@@ -23,7 +23,7 @@ using System.Text.RegularExpressions;
 
 namespace SonarAnalyzer.AnalysisContext;
 
-public sealed class SonarCompilationAnalysisContext : SonarCompilationReportingContextBase<CompilationAnalysisContext>
+public sealed class SonarCompilationReportingContext : SonarCompilationReportingContextBase<CompilationAnalysisContext>
 {
     private static readonly TimeSpan FileNameTimeout = TimeSpan.FromMilliseconds(100);
     private static readonly Regex WebConfigRegex = new(@"[\\\/]web\.([^\\\/]+\.)?config$", RegexOptions.IgnoreCase, FileNameTimeout);
@@ -34,7 +34,7 @@ public sealed class SonarCompilationAnalysisContext : SonarCompilationReportingC
     public override AnalyzerOptions Options => Context.Options;
     public override CancellationToken Cancel => Context.CancellationToken;
 
-    internal SonarCompilationAnalysisContext(SonarAnalysisContext analysisContext, CompilationAnalysisContext context) : base(analysisContext, context) { }
+    internal SonarCompilationReportingContext(SonarAnalysisContext analysisContext, CompilationAnalysisContext context) : base(analysisContext, context) { }
 
     public IEnumerable<string> WebConfigFiles()
     {

@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             context.RegisterNodeAction(CheckConditional, SyntaxKind.TernaryConditionalExpression);
         }
 
-        private void CheckLogicalNot(SonarSyntaxNodeAnalysisContext context)
+        private void CheckLogicalNot(SonarSyntaxNodeReportingContext context)
         {
             var logicalNot = (UnaryExpressionSyntax)context.Node;
             var logicalNotOperand = logicalNot.Operand.RemoveParentheses();
@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             }
         }
 
-        private void CheckConditional(SonarSyntaxNodeAnalysisContext context)
+        private void CheckConditional(SonarSyntaxNodeReportingContext context)
         {
             var conditional = (TernaryConditionalExpressionSyntax)context.Node;
             var whenTrue = conditional.WhenTrue;

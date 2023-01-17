@@ -22,11 +22,11 @@ namespace SonarAnalyzer.Extensions;
 
 public static class SonarSyntaxNodeAnalysisContextExtensions
 {
-    public static bool IsTopLevelMain(this SonarSyntaxNodeAnalysisContext context) =>
+    public static bool IsTopLevelMain(this SonarSyntaxNodeReportingContext context) =>
         context.Node is CompilationUnitSyntax compilationUnitSyntax
         && compilationUnitSyntax.IsTopLevelMain()
         && context.ContainingSymbol.IsGlobalNamespace(); // Needed to avoid the duplicate calls from Roslyn 4.0.0
 
-    public static bool IsInExpressionTree(this SonarSyntaxNodeAnalysisContext context) =>
+    public static bool IsInExpressionTree(this SonarSyntaxNodeReportingContext context) =>
         context.Node.IsInExpressionTree(context.SemanticModel);
 }

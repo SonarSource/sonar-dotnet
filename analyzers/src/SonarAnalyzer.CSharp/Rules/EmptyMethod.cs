@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKindEx.LocalFunctionStatement
             };
 
-        protected override void CheckMethod(SonarSyntaxNodeAnalysisContext context)
+        protected override void CheckMethod(SonarSyntaxNodeReportingContext context)
         {
             if (LocalFunctionStatementSyntaxWrapper.IsInstance(context.Node))
             {
@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static bool ShouldMethodBeExcluded(SonarSyntaxNodeAnalysisContext context, BaseMethodDeclarationSyntax methodNode) =>
+        private static bool ShouldMethodBeExcluded(SonarSyntaxNodeReportingContext context, BaseMethodDeclarationSyntax methodNode) =>
             methodNode.Modifiers.Any(SyntaxKind.VirtualKeyword)
             || context.SemanticModel.GetDeclaredSymbol(methodNode) is { IsOverride: true, OverriddenMethod.IsAbstract: true }
             || (methodNode.Modifiers.Any(SyntaxKind.OverrideKeyword) && context.IsTestProject());

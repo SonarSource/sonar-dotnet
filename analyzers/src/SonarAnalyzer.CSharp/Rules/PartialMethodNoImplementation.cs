@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterNodeAction(CheckForCandidatePartialInvocation, SyntaxKind.InvocationExpression);
         }
 
-        private static void CheckForCandidatePartialDeclaration(SonarSyntaxNodeAnalysisContext context)
+        private static void CheckForCandidatePartialDeclaration(SonarSyntaxNodeReportingContext context)
         {
             var declaration = (MethodDeclarationSyntax)context.Node;
             var partialKeyword = declaration.Modifiers.FirstOrDefault(m => m.IsKind(SyntaxKind.PartialKeyword));
@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckForCandidatePartialInvocation(SonarSyntaxNodeAnalysisContext context)
+        private static void CheckForCandidatePartialInvocation(SonarSyntaxNodeReportingContext context)
         {
             var invocation = (InvocationExpressionSyntax)context.Node;
 

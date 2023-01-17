@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 SyntaxKind.ExclusiveOrExpression);
         }
 
-        private void CheckBinary(SonarSyntaxNodeAnalysisContext context, int constValueToLookFor)
+        private void CheckBinary(SonarSyntaxNodeReportingContext context, int constValueToLookFor)
         {
             var binary = (BinaryExpressionSyntax)context.Node;
             CheckBinary(context, binary.Left, binary.OperatorToken, binary.Right, constValueToLookFor);

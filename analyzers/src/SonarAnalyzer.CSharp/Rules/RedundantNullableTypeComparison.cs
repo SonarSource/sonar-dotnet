@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.NotEqualsExpression);
         }
 
-        private static void CheckGetTypeAndTypeOfEquality(SonarSyntaxNodeAnalysisContext context, ExpressionSyntax sideA, ExpressionSyntax sideB, Location location)
+        private static void CheckGetTypeAndTypeOfEquality(SonarSyntaxNodeReportingContext context, ExpressionSyntax sideA, ExpressionSyntax sideB, Location location)
         {
             if (!(sideA as InvocationExpressionSyntax).IsGetTypeCall(context.SemanticModel))
             {

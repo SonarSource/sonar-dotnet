@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 SyntaxKind.ForEachStatement);
         }
 
-        private void ProcessLoop<T>(SonarSyntaxNodeAnalysisContext context, T loop, Func<T, VisualBasicSyntaxNode> GetControlVariable, Func<ILocalSymbol, bool> isDeclaredInLoop)
+        private void ProcessLoop<T>(SonarSyntaxNodeReportingContext context, T loop, Func<T, VisualBasicSyntaxNode> GetControlVariable, Func<ILocalSymbol, bool> isDeclaredInLoop)
         {
             var controlVar = GetControlVariable(loop);
             if (!(controlVar is IdentifierNameSyntax))
@@ -68,7 +68,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             context.ReportIssue(Diagnostic.Create(rule, controlVar.GetLocation(), Pattern));
         }
 
-        private void ProcessVariableDeclarator(SonarSyntaxNodeAnalysisContext context)
+        private void ProcessVariableDeclarator(SonarSyntaxNodeReportingContext context)
         {
             var declarator = (VariableDeclaratorSyntax)context.Node;
             if (declarator.Parent is FieldDeclarationSyntax)

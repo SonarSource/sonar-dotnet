@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.AsExpression);
         }
 
-        private static void CheckForIssue(SonarSyntaxNodeAnalysisContext context, SyntaxNode fromExpression, SyntaxNode toExpression)
+        private static void CheckForIssue(SonarSyntaxNodeReportingContext context, SyntaxNode fromExpression, SyntaxNode toExpression)
         {
             var castedFrom = context.SemanticModel.GetTypeInfo(fromExpression).Type;
             var castedTo = context.SemanticModel.GetTypeInfo(toExpression).Type;

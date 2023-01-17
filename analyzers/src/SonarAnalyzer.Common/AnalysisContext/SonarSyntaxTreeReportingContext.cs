@@ -20,15 +20,15 @@
 
 namespace SonarAnalyzer.AnalysisContext;
 
-public sealed class SonarSymbolAnalysisContext : SonarCompilationReportingContextBase<SymbolAnalysisContext>
+public sealed class SonarSyntaxTreeReportingContext : SonarTreeReportingContextBase<SyntaxTreeAnalysisContext>
 {
-    public override SyntaxTree Tree => Context.Symbol.Locations.Select(x => x.SourceTree).FirstOrDefault(x => x is not null);
-    public override Compilation Compilation => Context.Compilation;
+    public override SyntaxTree Tree => Context.Tree;
+    public override Compilation Compilation { get; }    // SyntaxTreeAnalysisContext doesn't hold a Compilation reference, we need to provide it from CompilationStart context via constructor
     public override AnalyzerOptions Options => Context.Options;
     public override CancellationToken Cancel => Context.CancellationToken;
-    public ISymbol Symbol => Context.Symbol;
 
-    internal SonarSymbolAnalysisContext(SonarAnalysisContext analysisContext, SymbolAnalysisContext context) : base(analysisContext, context) { }
+    internal SonarSyntaxTreeReportingContext(SonarAnalysisContext analysisContext, SyntaxTreeAnalysisContext context, Compilation compilation) : base(analysisContext, context) =>
+        Compilation = compilation ?? throw new ArgumentNullException(nameof(compilation));
 
     private protected override ReportingContext CreateReportingContext(Diagnostic diagnostic) =>
         new(this, diagnostic);

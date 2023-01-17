@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.DoStatement
         };
 
-        protected override LoopWalkerBase<StatementSyntax, SyntaxKind> GetWalker(SonarSyntaxNodeAnalysisContext context)
+        protected override LoopWalkerBase<StatementSyntax, SyntaxKind> GetWalker(SonarSyntaxNodeReportingContext context)
             => new LoopWalker(context, LoopStatements);
 
         private class LoopWalker : LoopWalkerBase<StatementSyntax, SyntaxKind>
@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-            public LoopWalker(SonarSyntaxNodeAnalysisContext context, ISet<SyntaxKind> loopStatements) : base(context, loopStatements) { }
+            public LoopWalker(SonarSyntaxNodeReportingContext context, ISet<SyntaxKind> loopStatements) : base(context, loopStatements) { }
 
             public override void Visit()
             {

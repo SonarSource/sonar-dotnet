@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         internal LooseFilePermissions(IAnalyzerConfiguration configuration) : base(configuration) { }
 
-        protected override void VisitAssignments(SonarSyntaxNodeAnalysisContext context)
+        protected override void VisitAssignments(SonarSyntaxNodeReportingContext context)
         {
             var node = context.Node;
             if (IsFileAccessPermissions(node, context.SemanticModel) && !node.IsPartOfBinaryNegationOrCondition())
@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             }
         }
 
-        protected override void VisitInvocations(SonarSyntaxNodeAnalysisContext context)
+        protected override void VisitInvocations(SonarSyntaxNodeReportingContext context)
         {
             var invocation = (InvocationExpressionSyntax)context.Node;
             if ((IsSetAccessRule(invocation, context.SemanticModel) || IsAddAccessRule(invocation, context.SemanticModel))

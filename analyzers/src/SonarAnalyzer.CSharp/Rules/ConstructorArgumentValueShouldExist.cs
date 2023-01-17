@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Select(x => x.Identifier.ValueText);
         }
 
-        protected override void ReportIssue(SonarSyntaxNodeAnalysisContext c, AttributeData constructorArgumentAttribute)
+        protected override void ReportIssue(SonarSyntaxNodeReportingContext c, AttributeData constructorArgumentAttribute)
         {
             var attributeSyntax =
                 (AttributeSyntax)constructorArgumentAttribute.ApplicationSyntaxReference.GetSyntax();

@@ -71,7 +71,7 @@ namespace SonarAnalyzer.Helpers.Trackers
                        && context.InvokedConstructorSymbol.Value.IsConstructor()
                        && context.InvokedConstructorSymbol.Value.ContainingType.Implements(baseType);
 
-        protected override ObjectCreationContext CreateContext(SonarSyntaxNodeAnalysisContext context) =>
+        protected override ObjectCreationContext CreateContext(SonarSyntaxNodeReportingContext context) =>
             new ObjectCreationContext(context);
     }
 }

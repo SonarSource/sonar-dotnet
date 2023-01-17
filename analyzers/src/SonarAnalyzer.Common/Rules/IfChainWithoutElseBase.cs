@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Rules
         protected abstract string ElseClause { get; }
 
         protected abstract bool IsElseIfWithoutElse(TIfSyntax ifSyntax);
-        protected abstract Location IssueLocation(SonarSyntaxNodeAnalysisContext context, TIfSyntax ifSyntax);
+        protected abstract Location IssueLocation(SonarSyntaxNodeReportingContext context, TIfSyntax ifSyntax);
 
         protected override string MessageFormat => "Add the missing '{0}' clause with either the appropriate action or a suitable comment as to why no action is taken.";
 

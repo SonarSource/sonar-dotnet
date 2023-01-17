@@ -80,7 +80,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 SyntaxKind.SelectBlock);
         }
 
-        private static void CheckStatementsAt(SonarSyntaxNodeAnalysisContext context, List<SyntaxList<StatementSyntax>> statements, int currentIndex, string constructType)
+        private static void CheckStatementsAt(SonarSyntaxNodeReportingContext context, List<SyntaxList<StatementSyntax>> statements, int currentIndex, string constructType)
         {
             var currentBlockStatements = statements[currentIndex];
             if (currentBlockStatements.Count(IsApprovedStatement) < 2)
@@ -98,7 +98,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             }
         }
 
-        private static void ReportIssue(SonarSyntaxNodeAnalysisContext context, SyntaxList<StatementSyntax> statementsToReport, SyntaxList<StatementSyntax> locationProvider, string constructType)
+        private static void ReportIssue(SonarSyntaxNodeReportingContext context, SyntaxList<StatementSyntax> statementsToReport, SyntaxList<StatementSyntax> locationProvider, string constructType)
         {
             var firstStatement = statementsToReport.FirstOrDefault();
             if (firstStatement == null)

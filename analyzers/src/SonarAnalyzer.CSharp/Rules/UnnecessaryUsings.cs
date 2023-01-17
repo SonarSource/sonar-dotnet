@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckUnnecessaryUsings(SonarSyntaxNodeAnalysisContext context, IEnumerable<UsingDirectiveSyntax> usingDirectives, ISet<INamespaceSymbol> necessaryNamespaces)
+        private static void CheckUnnecessaryUsings(SonarSyntaxNodeReportingContext context, IEnumerable<UsingDirectiveSyntax> usingDirectives, ISet<INamespaceSymbol> necessaryNamespaces)
         {
             foreach (var usingDirective in usingDirectives)
             {
@@ -91,12 +91,12 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             public readonly HashSet<INamespaceSymbol> NecessaryNamespaces = new();
 
-            private readonly SonarSyntaxNodeAnalysisContext context;
+            private readonly SonarSyntaxNodeReportingContext context;
             private readonly IImmutableSet<EquivalentNameSyntax> usingDirectivesFromParent;
             private readonly INamespaceSymbol currentNamespace;
             private bool linqQueryVisited;
 
-            public CSharpRemovableUsingWalker(SonarSyntaxNodeAnalysisContext context, IImmutableSet<EquivalentNameSyntax> usingDirectivesFromParent, INamespaceSymbol currentNamespace)
+            public CSharpRemovableUsingWalker(SonarSyntaxNodeReportingContext context, IImmutableSet<EquivalentNameSyntax> usingDirectivesFromParent, INamespaceSymbol currentNamespace)
             {
                 this.context = context;
                 this.usingDirectivesFromParent = usingDirectivesFromParent;

@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 });
         }
 
-        private static void CheckTrivias(SonarSyntaxTreeAnalysisContext c, SyntaxTriviaList triviaList)
+        private static void CheckTrivias(SonarSyntaxTreeReportingContext c, SyntaxTriviaList triviaList)
         {
             var pragmaWarnings = triviaList
                 .Where(t => t.HasStructure)

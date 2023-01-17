@@ -114,7 +114,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKindEx.LocalFunctionStatement);
         }
 
-        private static void CheckTypeName(SonarSyntaxNodeAnalysisContext context)
+        private static void CheckTypeName(SonarSyntaxNodeReportingContext context)
         {
             var typeDeclaration = (BaseTypeDeclarationSyntax)context.Node;
             var identifier = typeDeclaration.Identifier;
@@ -158,7 +158,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckMemberName(SonarSyntaxNodeAnalysisContext context, SyntaxToken identifier)
+        private static void CheckMemberName(SonarSyntaxNodeReportingContext context, SyntaxToken identifier)
         {
             var symbol = context.SemanticModel.GetDeclaredSymbol(context.Node);
             if (symbol == null)

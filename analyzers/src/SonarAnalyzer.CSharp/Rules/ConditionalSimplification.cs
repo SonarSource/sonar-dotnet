@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterNodeAction(CheckNotPattern, SyntaxKindEx.NotPattern);
         }
 
-        private static void CheckNotPattern(SonarSyntaxNodeAnalysisContext context)
+        private static void CheckNotPattern(SonarSyntaxNodeReportingContext context)
         {
             var wrapper = (UnaryPatternSyntaxWrapper)context.Node;
             if (wrapper.Pattern.IsNot()
@@ -78,7 +78,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckCoalesceExpression(SonarSyntaxNodeAnalysisContext context)
+        private static void CheckCoalesceExpression(SonarSyntaxNodeReportingContext context)
         {
             if (context.Node.GetFirstNonParenthesizedParent() is AssignmentExpressionSyntax assignment
                 && !assignment.Parent.IsKind(SyntaxKind.ObjectInitializerExpression)
@@ -92,7 +92,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckIfStatement(SonarSyntaxNodeAnalysisContext context)
+        private static void CheckIfStatement(SonarSyntaxNodeReportingContext context)
         {
             var ifStatement = (IfStatementSyntax)context.Node;
             if (ifStatement.Parent is ElseClauseSyntax)
@@ -122,7 +122,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckConditionalExpression(SonarSyntaxNodeAnalysisContext context)
+        private static void CheckConditionalExpression(SonarSyntaxNodeReportingContext context)
         {
             var conditional = (ConditionalExpressionSyntax)context.Node;
             var condition = conditional.Condition.RemoveParentheses();
@@ -183,7 +183,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsNullAndValueType(ITypeSymbol typeNull, ITypeSymbol typeValue) =>
             typeNull == null && typeValue is {IsValueType: true};
 
-        private static bool CanBeSimplified(SonarSyntaxNodeAnalysisContext context,
+        private static bool CanBeSimplified(SonarSyntaxNodeReportingContext context,
                                             StatementSyntax statement1,
                                             StatementSyntax statement2,
                                             SyntaxNode comparedToNull,
@@ -343,7 +343,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static ImmutableDictionary<string, string> BuildCodeFixProperties(SonarSyntaxNodeAnalysisContext c, string simplifiedOperator = null)
+        private static ImmutableDictionary<string, string> BuildCodeFixProperties(SonarSyntaxNodeReportingContext c, string simplifiedOperator = null)
         {
             var ret = new Dictionary<string, string> { {IsCoalesceAssignmentSupportedKey, c.Compilation.IsCoalesceAssignmentSupported().ToString() }};
             if (simplifiedOperator != null)

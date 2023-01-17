@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.InvocationExpression);
         }
 
-        private static void CheckOverridableCallInConstructor(SonarSyntaxNodeAnalysisContext context)
+        private static void CheckOverridableCallInConstructor(SonarSyntaxNodeReportingContext context)
         {
             var invocationExpression = (InvocationExpressionSyntax)context.Node;
 

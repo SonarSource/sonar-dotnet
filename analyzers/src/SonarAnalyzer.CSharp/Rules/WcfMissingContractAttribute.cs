@@ -84,7 +84,7 @@ namespace SonarAnalyzer.Rules.CSharp
                      .OfType<IMethodSymbol>()
                      .Any(m => m.HasAttribute(KnownType.System_ServiceModel_OperationContractAttribute));
 
-        private static TypeDeclarationSyntax GetTypeDeclaration(SonarSymbolAnalysisContext context, ISymbol namedType) =>
+        private static TypeDeclarationSyntax GetTypeDeclaration(SonarSymbolReportingContext context, ISymbol namedType) =>
             namedType.DeclaringSyntaxReferences
                      .Where(x => context.ShouldAnalyzeTree(x.SyntaxTree, CSharpGeneratedCodeRecognizer.Instance))
                      .Select(x => x.GetSyntax() as TypeDeclarationSyntax)

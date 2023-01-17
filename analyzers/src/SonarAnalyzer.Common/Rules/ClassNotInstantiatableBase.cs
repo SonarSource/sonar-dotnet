@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules
                     IsAnyConstructorToCurrentType(descendants.DescendantNodes, namedType, descendants.Model)
                     || IsAnyNestedTypeExtendingCurrentType(descendants.DescendantNodes, namedType, descendants.Model));
 
-        private void CheckClassWithOnlyUnusedPrivateConstructors(SonarSymbolAnalysisContext context)
+        private void CheckClassWithOnlyUnusedPrivateConstructors(SonarSymbolReportingContext context)
         {
             var namedType = (INamedTypeSymbol)context.Symbol;
             if (!IsNonStaticClassWithNoAttributes(namedType) || DerivesFromSafeHandle(namedType))
