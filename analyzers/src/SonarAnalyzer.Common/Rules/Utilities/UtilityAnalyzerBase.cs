@@ -100,7 +100,7 @@ namespace SonarAnalyzer.Rules
 
                 startContext.RegisterSemanticModelAction(modelContext =>
                 {
-                    if (ShouldGenerateMetrics(modelContext, modelContext.Tree))
+                    if (ShouldGenerateMetrics(modelContext))
                     {
                         treeMessages.Push(CreateMessage(modelContext.Tree, modelContext.SemanticModel));
                     }
