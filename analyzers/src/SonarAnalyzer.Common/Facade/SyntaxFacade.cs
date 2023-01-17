@@ -25,13 +25,11 @@ public abstract class SyntaxFacade<TSyntaxKind>
 {
     public abstract TSyntaxKind Kind(SyntaxNode node);
     public abstract ComparisonKind ComparisonKind(SyntaxNode node);
-
     public abstract bool IsNullLiteral(SyntaxNode node);
     public abstract bool IsKind(SyntaxNode node, TSyntaxKind kind);
     public abstract bool IsKind(SyntaxToken token, TSyntaxKind kind);
     public abstract bool IsAnyKind(SyntaxNode node, ISet<TSyntaxKind> syntaxKinds);
     public abstract bool IsAnyKind(SyntaxNode node, params TSyntaxKind[] syntaxKinds);
-
     public abstract IEnumerable<SyntaxNode> ArgumentExpressions(SyntaxNode node);
     public abstract ImmutableArray<SyntaxNode> AssignmentTargets(SyntaxNode assignment);
     public abstract SyntaxNode AssignmentLeft(SyntaxNode assignment);
@@ -46,8 +44,8 @@ public abstract class SyntaxFacade<TSyntaxKind>
     public abstract SyntaxToken? NodeIdentifier(SyntaxNode node);
     public abstract SyntaxNode RemoveConditionalAccess(SyntaxNode node);
     public abstract SyntaxNode RemoveParentheses(SyntaxNode node);
-    public abstract string NodeStringTextValue(SyntaxNode node, SemanticModel semanticModel);
-    public abstract bool TryGetGetInterpolatedTextValue(SyntaxNode node, SemanticModel semanticModel, out string interpolatedValue);
+    public abstract string StringValue(SyntaxNode node, SemanticModel semanticModel);
+    public abstract bool TryGetInterpolatedTextValue(SyntaxNode node, SemanticModel semanticModel, out string interpolatedValue);
     public abstract bool IsStatic(SyntaxNode node);
 
     protected static T Cast<T>(SyntaxNode node) where T : SyntaxNode =>

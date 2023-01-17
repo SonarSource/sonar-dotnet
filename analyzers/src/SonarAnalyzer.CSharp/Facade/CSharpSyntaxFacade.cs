@@ -99,19 +99,6 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
     public override SyntaxToken? NodeIdentifier(SyntaxNode node) =>
         node.NodeIdentifier();
 
-    public override string NodeStringTextValue(SyntaxNode node, SemanticModel semanticModel)
-    {
-        if (node is InterpolatedStringExpressionSyntax interpolatedStringExpression)
-        {
-            interpolatedStringExpression.TryGetGetInterpolatedTextValue(semanticModel, out var interpolatedValue);
-            return interpolatedValue ?? interpolatedStringExpression.GetContentsText();
-        }
-        else
-        {
-            return node is LiteralExpressionSyntax literalExpression ? literalExpression.Token.ValueText : string.Empty;
-        }
-    }
-
     public override SyntaxNode RemoveConditionalAccess(SyntaxNode node) =>
         node is ExpressionSyntax expression
             ? expression.RemoveConditionalAccess()
@@ -120,8 +107,11 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
     public override SyntaxNode RemoveParentheses(SyntaxNode node) =>
         node.RemoveParentheses();
 
-    public override bool TryGetGetInterpolatedTextValue(SyntaxNode node, SemanticModel semanticModel, out string interpolatedValue) =>
-        Cast<InterpolatedStringExpressionSyntax>(node).TryGetGetInterpolatedTextValue(semanticModel, out interpolatedValue);
+    public override string StringValue(SyntaxNode node, SemanticModel semanticModel) =>
+        CSharpSyntaxHelper.StringValue(node, semanticModel);
+
+    public override bool TryGetInterpolatedTextValue(SyntaxNode node, SemanticModel semanticModel, out string interpolatedValue) =>
+        Cast<InterpolatedStringExpressionSyntax>(node).TryGetInterpolatedTextValue(semanticModel, out interpolatedValue);
 
     public override bool IsStatic(SyntaxNode node) =>
         Cast<BaseMethodDeclarationSyntax>(node).IsStatic();

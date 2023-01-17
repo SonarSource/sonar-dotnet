@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Helpers
         protected abstract IEnumerable<TInterpolatedStringContentSyntax> Contents(TInterpolatedStringExpressionSyntax interpolatedStringExpression);
         protected abstract SyntaxToken TextToken(TInterpolatedStringTextSyntax interpolatedStringText);
 
-        public bool TryGetGetInterpolatedTextValue(TInterpolatedStringExpressionSyntax interpolatedStringExpression, SemanticModel semanticModel, out string interpolatedValue)
+        public bool TryGetInterpolatedTextValue(TInterpolatedStringExpressionSyntax interpolatedStringExpression, SemanticModel semanticModel, out string interpolatedValue)
         {
             var resolvedContent = new StringBuilder();
             foreach (var interpolatedStringContent in Contents(interpolatedStringExpression))
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Helpers
                 if (interpolatedStringContent is TInterpolationSyntax interpolation)
                 {
                     if (Language.Syntax.NodeExpression(interpolation) is TInterpolatedStringExpressionSyntax nestedInterpolatedString
-                        && TryGetGetInterpolatedTextValue(nestedInterpolatedString, semanticModel, out var innerInterpolatedValue))
+                        && TryGetInterpolatedTextValue(nestedInterpolatedString, semanticModel, out var innerInterpolatedValue))
                     {
                         resolvedContent.Append(innerInterpolatedValue);
                     }

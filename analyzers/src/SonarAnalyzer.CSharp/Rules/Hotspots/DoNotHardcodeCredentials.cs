@@ -68,7 +68,7 @@ namespace SonarAnalyzer.Rules.CSharp
             public VariableDeclarationBannedWordsFinder(DoNotHardcodeCredentials analyzer) : base(analyzer) { }
 
             protected override string GetAssignedValue(VariableDeclaratorSyntax syntaxNode, SemanticModel semanticModel) =>
-                FindStringLiteralInVariableDeclaration(syntaxNode.Initializer?.Value)?.GetStringValue(semanticModel);
+                FindStringLiteralInVariableDeclaration(syntaxNode.Initializer.Value)?.StringValue(semanticModel);
 
             protected override string GetVariableName(VariableDeclaratorSyntax syntaxNode) =>
                 syntaxNode.Identifier.ValueText;
@@ -99,7 +99,7 @@ namespace SonarAnalyzer.Rules.CSharp
             public AssignmentExpressionBannedWordsFinder(DoNotHardcodeCredentials analyzer) : base(analyzer) { }
 
             protected override string GetAssignedValue(AssignmentExpressionSyntax syntaxNode, SemanticModel semanticModel) =>
-                syntaxNode.Right.GetStringValue(semanticModel);
+                syntaxNode.Right.StringValue(semanticModel);
 
             protected override string GetVariableName(AssignmentExpressionSyntax syntaxNode) =>
                 (syntaxNode.Left as IdentifierNameSyntax)?.Identifier.ValueText;
@@ -121,7 +121,7 @@ namespace SonarAnalyzer.Rules.CSharp
             public StringLiteralBannedWordsFinder(DoNotHardcodeCredentials analyzer) : base(analyzer) { }
 
             protected override string GetAssignedValue(LiteralExpressionSyntax syntaxNode, SemanticModel semanticModel) =>
-                syntaxNode.GetStringValue(semanticModel);
+                syntaxNode.StringValue(semanticModel);
 
             // We don't have a variable for cases that this finder should handle.  Cases with variable name are
             // handled by VariableDeclarationBannedWordsFinder and AssignmentExpressionBannedWordsFinder

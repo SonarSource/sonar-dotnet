@@ -51,7 +51,7 @@ End Class";
         {
             var codeSnipet = string.Format(CodeSnipet, code);
             var (expression, semanticModel) = Compile(codeSnipet);
-            expression.TryGetGetInterpolatedTextValue(semanticModel, out var interpolatedValue).Should().Be(false);
+            expression.TryGetInterpolatedTextValue(semanticModel, out var interpolatedValue).Should().Be(false);
             interpolatedValue.Should().BeNull();
         }
 
@@ -78,7 +78,7 @@ End Class";
         {
             var codeSnipet = string.Format(CodeSnipet, code);
             var (expression, semanticModel) = Compile(codeSnipet);
-            expression.TryGetGetInterpolatedTextValue(semanticModel, out var interpolatedValue).Should().Be(true);
+            expression.TryGetInterpolatedTextValue(semanticModel, out var interpolatedValue).Should().Be(true);
             interpolatedValue.Should().Be(expectedTextValue);
         }
 

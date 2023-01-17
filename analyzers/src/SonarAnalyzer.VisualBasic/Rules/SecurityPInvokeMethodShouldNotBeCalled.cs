@@ -28,12 +28,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override bool IsImportFromInteropDll(IMethodSymbol symbol, SemanticModel semanticModel) =>
             base.IsImportFromInteropDll(symbol, semanticModel)
             || (symbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is DeclareStatementSyntax declaration
-                && IsInterop(declaration.LibraryName?.GetStringValue(semanticModel)));
+                && IsInterop(declaration.LibraryName?.StringValue(semanticModel)));
 
         protected override string GetMethodName(ISymbol symbol, SemanticModel semanticModel) =>
             symbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is DeclareStatementSyntax declaration
             && declaration.AliasName != null
-                ? declaration.AliasName.GetStringValue(semanticModel)
+                ? declaration.AliasName.StringValue(semanticModel)
                 : symbol.Name;
 
         protected override IMethodSymbol MethodSymbolForInvalidInvocation(SyntaxNode syntaxNode, SemanticModel semanticModel) =>

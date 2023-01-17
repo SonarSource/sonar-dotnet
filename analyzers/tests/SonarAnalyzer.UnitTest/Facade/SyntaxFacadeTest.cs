@@ -87,12 +87,20 @@ namespace SonarAnalyzer.UnitTest.Helpers
             vb.NodeIdentifier(VB.SyntaxFactory.AttributeList()).Should().BeNull();
 
         [TestMethod]
-        public void NodeStringTextValue_UnexpectedType_CS() =>
-             cs.NodeStringTextValue(CS.SyntaxFactory.ThrowStatement(), null).Should().BeEmpty();
+        public void StringValue_UnexpectedType_CS() =>
+             cs.StringValue(CS.SyntaxFactory.ThrowStatement(), null).Should().BeNull();
 
         [TestMethod]
-        public void NodeStringTextValue_UnexpectedType_VB() =>
-            vb.NodeStringTextValue(VB.SyntaxFactory.ThrowStatement(), null).Should().BeEmpty();
+        public void StringValue_UnexpectedType_VB() =>
+            vb.StringValue(VB.SyntaxFactory.ThrowStatement(), null).Should().BeNull();
+
+        [TestMethod]
+        public void StringValue_NodeIsNull_CS() =>
+            cs.StringValue(null, null).Should().BeNull();
+
+        [TestMethod]
+        public void StringValue_NodeIsNull_VB() =>
+            vb.StringValue(null, null).Should().BeNull();
 
         [TestMethod]
         public void RemoveConditionalAccess_Null_CS() =>

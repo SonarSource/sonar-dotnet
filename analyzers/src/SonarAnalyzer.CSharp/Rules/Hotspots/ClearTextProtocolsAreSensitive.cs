@@ -197,7 +197,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if (node is InterpolatedStringExpressionSyntax interpolatedStringExpression)
             {
-                interpolatedStringExpression.TryGetGetInterpolatedTextValue(semanticModel, out var interpolatedValue);
+                interpolatedStringExpression.TryGetInterpolatedTextValue(semanticModel, out var interpolatedValue);
                 return interpolatedValue ?? interpolatedStringExpression.GetContentsText();
             }
             else

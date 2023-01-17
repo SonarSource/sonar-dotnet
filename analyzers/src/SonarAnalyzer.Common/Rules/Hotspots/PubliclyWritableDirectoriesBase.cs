@@ -79,7 +79,7 @@ namespace SonarAnalyzer.Rules
                 c =>
                 {
                     if (IsEnabled(c.Options)
-                        && Language.Syntax.NodeStringTextValue(c.Node, c.SemanticModel) is { } stringValue
+                        && Language.Syntax.StringValue(c.Node, c.SemanticModel) is { } stringValue
                         && IsSensitiveDirectoryUsage(stringValue))
                     {
                         c.ReportIssue(Diagnostic.Create(rule, c.Node.GetLocation()));
