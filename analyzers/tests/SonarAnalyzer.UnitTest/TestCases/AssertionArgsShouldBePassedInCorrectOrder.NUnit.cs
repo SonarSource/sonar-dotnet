@@ -44,7 +44,7 @@ namespace Repro_6547
         [Test]
         public void TestString()
         {
-            string stringToTest = RetriveString();
+            string stringToTest = RetrieveString();
             const string constString = "Spring";
 
             Assert.AreEqual(expected: stringToTest, actual: constString); // FN
@@ -54,13 +54,13 @@ namespace Repro_6547
         [Test]
         public void TestEnum()
         {
-            Seasons seasonToTest = RetriveSeason();
+            Seasons seasonToTest = RetrieveSeason();
 
             Assert.AreEqual(expected: seasonToTest, actual: Seasons.Spring); //FN
             Assert.AreEqual(expected: Seasons.Spring, actual: seasonToTest); // Compliant
         }
 
-        public Seasons RetriveSeason() => Seasons.Spring;
-        public string RetriveString() => "Spring";
+        public Seasons RetrieveSeason() => Seasons.Spring;
+        public string RetrieveString() => "Spring";
     }
 }
