@@ -82,3 +82,13 @@ namespace Repro1144
         }
     }
 }
+
+class NullCoalescingAssignment
+{
+    private object field;
+
+    public void SetIfNull()
+    {
+        field ??= new object(); // Noncompliant FP
+    }
+}
