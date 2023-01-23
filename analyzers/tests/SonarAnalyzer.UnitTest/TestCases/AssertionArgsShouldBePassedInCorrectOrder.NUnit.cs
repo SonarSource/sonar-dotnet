@@ -33,6 +33,30 @@ namespace Tests.Diagnostics
     }
 }
 
+// https://github.com/SonarSource/sonar-dotnet/issues/6630
+namespace Repro_6630
+{
+    [TestFixture]
+    class Program
+    {
+        [Test]
+        public void Foo()
+        {
+            var str = "";
+            Assert.AreEqual(actual: "", expected: str); // Compliant FN
+            Assert.AreEqual(expected: "", actual: str); // Compliant
+            Assert.AreEqual(actual: str, expected: ""); // Noncompliant FP
+            Assert.AreEqual(expected: str, actual: ""); // Noncompliant
+
+            Assert.AreNotEqual(actual: "", expected: str); // Compliant FN
+            Assert.AreSame(actual: "", expected: str); // Compliant FN
+            Assert.AreNotSame(actual: "", expected: str); // Compliant FN
+
+            Assert.AreEqual(actual: null, expected: new Program()); // Compliant FN
+        }
+    }
+}
+
 // https://github.com/SonarSource/sonar-dotnet/issues/6547
 namespace Repro_6547
 {
