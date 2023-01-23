@@ -34,7 +34,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
     /// </summary>
     internal class SnippetCompiler
     {
-        public Compilation Compilation { get; }
+        private readonly Compilation compilation;
+
         public SyntaxTree SyntaxTree { get; }
         public SemanticModel SemanticModel { get; }
 
@@ -44,25 +45,25 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public SnippetCompiler(string code, bool ignoreErrors, AnalyzerLanguage language, IEnumerable<MetadataReference> additionalReferences = null, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary)
         {
-            Compilation = SolutionBuilder
+            compilation = SolutionBuilder
                 .Create()
                 .AddProject(language, createExtraEmptyFile: false, outputKind)
                 .AddSnippet(code)
                 .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
                 .GetCompilation();
 
-            if (!ignoreErrors && HasCompilationErrors(Compilation))
+            if (!ignoreErrors && HasCompilationErrors(compilation))
             {
-                DumpCompilationErrors(Compilation);
+                DumpCompilationErrors(compilation);
                 throw new InvalidOperationException("Test setup error: test code snippet did not compile. See output window for details.");
             }
 
-            SyntaxTree = Compilation.SyntaxTrees.First();
-            SemanticModel = Compilation.GetSemanticModel(SyntaxTree);
+            SyntaxTree = compilation.SyntaxTrees.First();
+            SemanticModel = compilation.GetSemanticModel(SyntaxTree);
         }
 
         public bool IsCSharp() =>
-            Compilation.Language == LanguageNames.CSharp;
+            compilation.Language == LanguageNames.CSharp;
 
         public IEnumerable<TSyntaxNodeType> GetNodes<TSyntaxNodeType>() where TSyntaxNodeType : SyntaxNode =>
             SyntaxTree.GetRoot().DescendantNodes().OfType<TSyntaxNodeType>();
@@ -150,7 +151,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public Assembly EmitAssembly()
         {
             using var memoryStream = new MemoryStream();
-            Compilation.Emit(memoryStream).Success.Should().BeTrue("The provided snippet should emit assembly.");
+            compilation.Emit(memoryStream).Success.Should().BeTrue("The provided snippet should emit assembly.");
             return Assembly.Load(memoryStream.ToArray());
         }
 
