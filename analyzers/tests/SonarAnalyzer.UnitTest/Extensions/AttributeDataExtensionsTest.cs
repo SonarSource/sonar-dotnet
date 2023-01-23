@@ -141,6 +141,102 @@ namespace SonarAnalyzer.UnitTest.Extensions
             actualValue.Should().Be(value);
         }
 
+        [DataTestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
+        public void AttributeUsageInherited_InheritedSpecified(bool inherited)
+        {
+            var code = $$"""
+                    using System;
+
+                    [AttributeUsage(AttributeTargets.All, Inherited = {{(inherited ? "true" : "false")}})]
+                    public class MyAttribute: Attribute
+                    {
+                    }
+
+                    [My]
+                    public class Program
+                    {
+                    }
+                    """;
+            var snippet = new SnippetCompiler(code);
+            var attribute = snippet.GetTypeSymbol("Program").GetAttributes().Single(x => x.HasName("MyAttribute"));
+            var actual = attribute.AttributeUsageInherited();
+            actual.Should().Be(inherited);
+        }
+
+        [TestMethod]
+        public void AttributeUsageInherited_InheritedUnSpecified()
+        {
+            var code = $$"""
+                    using System;
+
+                    [AttributeUsage(AttributeTargets.All)]
+                    public class MyAttribute: Attribute
+                    {
+                    }
+
+                    [My]
+                    public class Program
+                    {
+                    }
+                    """;
+            var snippet = new SnippetCompiler(code);
+            var attribute = snippet.GetTypeSymbol("Program").GetAttributes().Single(x => x.HasName("MyAttribute"));
+            var actual = attribute.AttributeUsageInherited();
+            actual.Should().Be(true);
+        }
+
+        [TestMethod]
+        public void AttributeUsageInherited_NoUsageAttribute()
+        {
+            var code = $$"""
+                    using System;
+
+                    public class MyAttribute: Attribute
+                    {
+                    }
+
+                    [My]
+                    public class Program
+                    {
+                    }
+                    """;
+            var snippet = new SnippetCompiler(code);
+            var attribute = snippet.GetTypeSymbol("Program").GetAttributes().Single(x => x.HasName("MyAttribute"));
+            var actual = attribute.AttributeUsageInherited();
+            actual.Should().Be(true);
+        }
+
+        [DataTestMethod]
+        [DataRow(true, true)]
+        [DataRow(false, true)] // The "Inherited" flag is not inherited for the AttributeUsage attribute itself. See also the SymbolHelperTest.GetAttributesWithInherited... tests,
+                               // where the reflection behavior of MemberInfo.GetCustomAttributes is also tested.
+        public void AttributeUsageInherited_UsageInherited(bool inherited, bool expected)
+        {
+            var code = $$"""
+                    using System;
+
+                    [AttributeUsage(AttributeTargets.All, Inherited = {{(inherited ? "true" : "false")}})]
+                    public class BaseAttribute: Attribute
+                    {
+                    }
+
+                    public class MyAttribute: BaseAttribute
+                    {
+                    }
+
+                    [My]
+                    public class Program
+                    {
+                    }
+                    """;
+            var snippet = new SnippetCompiler(code);
+            var attribute = snippet.GetTypeSymbol("Program").GetAttributes().Single(x => x.HasName("MyAttribute"));
+            var actual = attribute.AttributeUsageInherited();
+            actual.Should().Be(expected);
+        }
+
         private static AttributeData AttributeDataWithName(string attributeClassName)
         {
             var namedType = new Mock<INamedTypeSymbol>();

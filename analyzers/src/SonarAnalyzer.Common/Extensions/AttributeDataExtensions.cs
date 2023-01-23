@@ -46,6 +46,24 @@ namespace SonarAnalyzer.Extensions
             }
         }
 
+        /// <summary>
+        /// Returns the <see cref="AttributeUsageAttribute.Inherited"/> setting for the attribute associated with <paramref name="attribute"/>.
+        /// The returned value is in line with the runtime behavior of <see cref="System.Reflection.MemberInfo.GetCustomAttributes"/>.
+        /// </summary>
+        /// <param name="attribute">The <see cref="AttributeData"/> of an <see cref="Attribute"/>.</param>
+        /// <returns>
+        /// The <see cref="AttributeUsageAttribute.Inherited"/> value of the <see cref="AttributeUsageAttribute"/> applied to the <paramref name="attribute"/>.
+        /// Returns <see langword="true"/> if no <see cref="AttributeUsageAttribute"/> is applied to the <see cref="Attribute"/> associated with <paramref name="attribute"/>.
+        /// </returns>
+        public static bool AttributeUsageInherited(this AttributeData attribute) =>
+            attribute.AttributeClass.GetAttributes()
+                .Where(x => x.AttributeClass is { Name: nameof(AttributeUsageAttribute), ContainingNamespace.Name: "System" })
+                .SelectMany(x => x.NamedArguments.Where(x => x.Key == nameof(AttributeUsageAttribute.Inherited)))
+                .Select(x => x.Value)
+                .Where(x => x is { Kind: TypedConstantKind.Primitive, Type.SpecialType: SpecialType.System_Boolean })
+                .Select(x => (bool?)x.Value)
+                .FirstOrDefault() ?? true; // Default value of Inherited is true
+
         private static bool TryConvertConstant<T>(TypedConstant constant, out T value)
         {
             value = default;

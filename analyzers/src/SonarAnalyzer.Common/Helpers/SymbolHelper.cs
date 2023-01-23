@@ -205,6 +205,10 @@ namespace SonarAnalyzer.Helpers
             symbol?.GetAttributes().Where(a => a.AttributeClass.Is(attributeType))
             ?? Enumerable.Empty<AttributeData>();
 
+        internal static IEnumerable<AttributeData> GetAttributes(this ISymbol symbol, ImmutableArray<KnownType> attributeTypes) =>
+            symbol?.GetAttributes().Where(a => a.AttributeClass.IsAny(attributeTypes))
+            ?? Enumerable.Empty<AttributeData>();
+
         internal static IEnumerable<AttributeData> GetAttributesWithInherited(this ISymbol symbol)
         {
             foreach (var attribute in symbol.GetAttributes())
@@ -215,57 +219,23 @@ namespace SonarAnalyzer.Helpers
             var baseSymbol = GetBaseSymbol(symbol);
             while (baseSymbol != null)
             {
-                foreach (var attribute in baseSymbol.GetAttributes().Where(IsInherited))
+                foreach (var attribute in baseSymbol.GetAttributes().Where(x => x.AttributeUsageInherited()))
                 {
                     yield return attribute;
                 }
 
                 baseSymbol = GetBaseSymbol(baseSymbol);
             }
-        }
 
-        private static ISymbol GetBaseSymbol(ISymbol symbol) =>
-            symbol switch
-            {
-                INamedTypeSymbol namedType => namedType.BaseType,
-                IMethodSymbol { OriginalDefinition: { } originalDefinition } method when method != originalDefinition => GetBaseSymbol(originalDefinition),
-                IMethodSymbol { IsOverride: true, OverriddenMethod: { } overridenMethod } => overridenMethod,
-                _ => null,
-            };
-
-        private static bool IsInherited(this AttributeData attribute)
-        {
-            if (attribute.AttributeClass == null)
-            {
-                return false;
-            }
-
-            foreach (var attributeAttribute in attribute.AttributeClass.GetAttributes())
-            {
-                var @class = attributeAttribute.AttributeClass;
-                if (@class != null && @class.Name == nameof(AttributeUsageAttribute) &&
-                    @class.ContainingNamespace?.Name == "System")
+            static ISymbol GetBaseSymbol(ISymbol symbol) =>
+                symbol switch
                 {
-                    foreach (var kvp in attributeAttribute.NamedArguments)
-                    {
-                        if (kvp.Key == nameof(AttributeUsageAttribute.Inherited))
-                        {
-                            return (bool)kvp.Value.Value!;
-                        }
-                    }
-
-                    // Default value of Inherited is true
-                    return true;
-                }
-            }
-
-            return true;
+                    INamedTypeSymbol namedType => namedType.BaseType,
+                    IMethodSymbol { OriginalDefinition: { } originalDefinition } method when !method.Equals(originalDefinition) => GetBaseSymbol(originalDefinition),
+                    IMethodSymbol { IsOverride: true, OverriddenMethod: { } overridenMethod } => overridenMethod,
+                    _ => null,
+                };
         }
-
-
-        internal static IEnumerable<AttributeData> GetAttributes(this ISymbol symbol, ImmutableArray<KnownType> attributeTypes) =>
-            symbol?.GetAttributes().Where(a => a.AttributeClass.IsAny(attributeTypes))
-            ?? Enumerable.Empty<AttributeData>();
 
         internal static bool AnyAttributeDerivesFrom(this ISymbol symbol, KnownType attributeType) =>
             symbol?.GetAttributes().Any(a => a.AttributeClass.DerivesFrom(attributeType)) ?? false;

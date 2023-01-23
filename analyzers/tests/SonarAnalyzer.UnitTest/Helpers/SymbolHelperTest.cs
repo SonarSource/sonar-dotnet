@@ -400,19 +400,19 @@ namespace NS
         }
 
         [DataTestMethod]
-        [DataRow("BaseClass`1", "VirtualMethod", "MyInheritedAttribute", "MyNotInheritedAttribute", "MyUnannotatedAttribute")]
-        [DataRow("DerivedOpenGeneric`1", "VirtualMethod", "MyInheritedAttribute", "MyUnannotatedAttribute")]
+        [DataRow("BaseClass`1", "VirtualMethod", "MyInheritedAttribute", "MyDerivedInheritedAttribute", "MyNotInheritedAttribute", "MyDerivedNotInheritedAttribute", "MyUnannotatedAttribute")]
+        [DataRow("DerivedOpenGeneric`1", "VirtualMethod", "MyInheritedAttribute", "MyDerivedInheritedAttribute", "MyDerivedNotInheritedAttribute", "MyUnannotatedAttribute")]
         [DataRow("DerivedOpenGeneric`1", "NonVirtualMethod")]
-        [DataRow("DerivedOpenGeneric`1", "GenericVirtualMethod`1", "MyInheritedAttribute", "MyUnannotatedAttribute")]
+        [DataRow("DerivedOpenGeneric`1", "GenericVirtualMethod`1", "MyInheritedAttribute", "MyDerivedInheritedAttribute", "MyDerivedNotInheritedAttribute", "MyUnannotatedAttribute")]
         [DataRow("DerivedOpenGeneric`1", "GenericNonVirtualMethod`1")]
-        [DataRow("DerivedClosedGeneric", "VirtualMethod", "MyInheritedAttribute", "MyUnannotatedAttribute")]
+        [DataRow("DerivedClosedGeneric", "VirtualMethod", "MyInheritedAttribute", "MyDerivedInheritedAttribute", "MyDerivedNotInheritedAttribute", "MyUnannotatedAttribute")]
         [DataRow("DerivedClosedGeneric", "NonVirtualMethod")]
-        [DataRow("DerivedClosedGeneric", "GenericVirtualMethod`1", "MyInheritedAttribute", "MyUnannotatedAttribute")]
+        [DataRow("DerivedClosedGeneric", "GenericVirtualMethod`1", "MyInheritedAttribute", "MyDerivedInheritedAttribute", "MyDerivedNotInheritedAttribute", "MyUnannotatedAttribute")]
         [DataRow("DerivedClosedGeneric", "GenericNonVirtualMethod`1")]
-        [DataRow("DerivedNoOverrides`1", "VirtualMethod", "MyInheritedAttribute", "MyNotInheritedAttribute", "MyUnannotatedAttribute")]
-        [DataRow("DerivedNoOverrides`1", "NonVirtualMethod", "MyInheritedAttribute", "MyNotInheritedAttribute", "MyUnannotatedAttribute")]
-        [DataRow("DerivedNoOverrides`1", "GenericVirtualMethod`1", "MyInheritedAttribute", "MyNotInheritedAttribute", "MyUnannotatedAttribute")]
-        [DataRow("DerivedNoOverrides`1", "GenericNonVirtualMethod`1", "MyInheritedAttribute", "MyNotInheritedAttribute", "MyUnannotatedAttribute")]
+        [DataRow("DerivedNoOverrides`1", "VirtualMethod", "MyInheritedAttribute", "MyDerivedInheritedAttribute", "MyNotInheritedAttribute", "MyDerivedNotInheritedAttribute", "MyUnannotatedAttribute")]
+        [DataRow("DerivedNoOverrides`1", "NonVirtualMethod", "MyInheritedAttribute", "MyDerivedInheritedAttribute", "MyNotInheritedAttribute", "MyDerivedNotInheritedAttribute", "MyUnannotatedAttribute")]
+        [DataRow("DerivedNoOverrides`1", "GenericVirtualMethod`1", "MyInheritedAttribute", "MyDerivedInheritedAttribute", "MyNotInheritedAttribute", "MyDerivedNotInheritedAttribute", "MyUnannotatedAttribute")]
+        [DataRow("DerivedNoOverrides`1", "GenericNonVirtualMethod`1", "MyInheritedAttribute", "MyDerivedInheritedAttribute", "MyNotInheritedAttribute", "MyDerivedNotInheritedAttribute", "MyUnannotatedAttribute")]
         public void GetAttributesWithInherited_MethodSymbol(string className, string methodName, params string[] expectedAttributes)
         {
             var code = $$"""
@@ -424,27 +424,39 @@ namespace NS
                 [AttributeUsage(AttributeTargets.All, Inherited = false)]
                 public class MyNotInheritedAttribute : Attribute { }
 
+                public class MyDerivedInheritedAttribute: MyInheritedAttribute { }
+
+                public class MyDerivedNotInheritedAttribute: MyNotInheritedAttribute { }
+
                 public class MyUnannotatedAttribute : Attribute { }
 
                 public class BaseClass<T1>
                 {
                     [MyInheritedAttribute]
+                    [MyDerivedInheritedAttribute]
                     [MyNotInherited]
+                    [MyDerivedNotInherited]
                     [MyUnannotatedAttribute]
                     public virtual void VirtualMethod() { }
 
                     [MyInheritedAttribute]
+                    [MyDerivedInheritedAttribute]
                     [MyNotInherited]
+                    [MyDerivedNotInherited]
                     [MyUnannotatedAttribute]
                     public void NonVirtualMethod() { }
 
                     [MyInheritedAttribute]
+                    [MyDerivedInheritedAttribute]
                     [MyNotInherited]
+                    [MyDerivedNotInherited]
                     [MyUnannotatedAttribute]
                     public void GenericNonVirtualMethod<T2>() { }
 
                     [MyInheritedAttribute]
+                    [MyDerivedInheritedAttribute]
                     [MyNotInherited]
+                    [MyDerivedNotInherited]
                     [MyUnannotatedAttribute]
                     public virtual void GenericVirtualMethod<T2>() { }
                 }
@@ -491,9 +503,9 @@ namespace NS
         }
 
         [DataTestMethod]
-        [DataRow("BaseClass`1", "MyInheritedAttribute", "MyNotInheritedAttribute", "MyUnannotatedAttribute")]
-        [DataRow("DerivedOpenGeneric`1", "MyInheritedAttribute", "MyUnannotatedAttribute")]
-        [DataRow("DerivedClosedGeneric", "MyInheritedAttribute", "MyUnannotatedAttribute")]
+        [DataRow("BaseClass`1", "MyInheritedAttribute", "MyDerivedInheritedAttribute", "MyNotInheritedAttribute", "MyDerivedNotInheritedAttribute", "MyUnannotatedAttribute")]
+        [DataRow("DerivedOpenGeneric`1", "MyInheritedAttribute", "MyDerivedInheritedAttribute", "MyDerivedNotInheritedAttribute", "MyUnannotatedAttribute")]
+        [DataRow("DerivedClosedGeneric", "MyInheritedAttribute", "MyDerivedInheritedAttribute", "MyDerivedNotInheritedAttribute", "MyUnannotatedAttribute")]
         [DataRow("Implement")]
         public void GetAttributesWithInherited_TypeSymbol(string className, params string[] expectedAttributes)
         {
@@ -506,17 +518,25 @@ namespace NS
                 [AttributeUsage(AttributeTargets.All, Inherited = false)]
                 public class MyNotInheritedAttribute : Attribute { }
 
+                public class MyDerivedInheritedAttribute: MyInheritedAttribute { }
+
+                public class MyDerivedNotInheritedAttribute: MyNotInheritedAttribute { }
+
                 public class MyUnannotatedAttribute : Attribute { }
 
                 [MyInheritedAttribute]
+                [MyDerivedInheritedAttribute]
                 [MyNotInherited]
+                [MyDerivedNotInherited]
                 [MyUnannotatedAttribute]
                 public class BaseClass<T1>
                 {
                 }
 
                 [MyInheritedAttribute]
+                [MyDerivedInheritedAttribute]
                 [MyNotInherited]
+                [MyDerivedNotInherited]
                 [MyUnannotatedAttribute]
                 public interface IInterface
                 {
