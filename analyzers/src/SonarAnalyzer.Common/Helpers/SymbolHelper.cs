@@ -19,6 +19,7 @@
  */
 
 using System.Reflection;
+using static System.Net.WebRequestMethods;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -233,6 +234,8 @@ namespace SonarAnalyzer.Helpers
                     INamedTypeSymbol namedType => namedType.BaseType,
                     IMethodSymbol { OriginalDefinition: { } originalDefinition } method when !method.Equals(originalDefinition) => BaseSymbol(originalDefinition),
                     IMethodSymbol { OverriddenMethod: { } overridenMethod } => overridenMethod,
+                    // Other symbols kind supported needs to be implemented/tested as needed. A full list can be found here:
+                    // https://learn.microsoft.com/dotnet/api/system.attributetargets
                     _ => null,
                 };
         }
