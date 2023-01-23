@@ -39,11 +39,13 @@ public interface ISyntaxKindFacade<out TSyntaxKind>
     abstract TSyntaxKind[] MethodDeclarations { get; }
     abstract TSyntaxKind[] ObjectCreationExpressions { get; }
     abstract TSyntaxKind Parameter { get; }
+    abstract TSyntaxKind RefKeyword { get; }
     abstract TSyntaxKind ParameterList { get; }
     abstract TSyntaxKind ReturnStatement { get; }
     abstract TSyntaxKind SimpleAssignment { get; }
     abstract TSyntaxKind SimpleMemberAccessExpression { get; }
     abstract TSyntaxKind[] StringLiteralExpressions { get; }
+    abstract TSyntaxKind StructDeclaration { get; }
     abstract TSyntaxKind[] TypeDeclaration { get; }
     abstract TSyntaxKind LeftShiftExpression { get; }
     abstract TSyntaxKind RightShiftExpression { get; }

@@ -18,26 +18,30 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Rules.CSharp;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.UnitTest.Rules;
+
+[TestClass]
+public class ValueTypeShouldImplementIEquatableTest
 {
-    [TestClass]
-    public class ValueTypeShouldImplementIEquatableTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<ValueTypeShouldImplementIEquatable>();
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ValueTypeShouldImplementIEquatable>();
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.ValueTypeShouldImplementIEquatable>();
 
-        [TestMethod]
-        public void ValueTypeShouldImplementIEquatable() =>
-            builder.AddPaths("ValueTypeShouldImplementIEquatable.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+    [TestMethod]
+    public void ValueTypeShouldImplementIEquatable_CS() =>
+        builderCS.AddPaths("ValueTypeShouldImplementIEquatable.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
 
-        [TestMethod]
-        public void ValueTypeShouldImplementIEquatable_CSharp10() =>
-            builder.AddPaths("ValueTypeShouldImplementIEquatable.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+    [TestMethod]
+    public void ValueTypeShouldImplementIEquatable_CSharp10() =>
+        builderCS.AddPaths("ValueTypeShouldImplementIEquatable.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
 #endif
 
-    }
+    [TestMethod]
+    public void ValueTypeShouldImplementIEquatable_VB() =>
+        builderVB.AddPaths("ValueTypeShouldImplementIEquatable.vb").Verify();
 }

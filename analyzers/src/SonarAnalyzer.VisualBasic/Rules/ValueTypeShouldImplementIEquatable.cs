@@ -1,6 +1,6 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2015-2023 SonarSource SA
+ * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -18,11 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
+using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.CSharp;
+namespace SonarAnalyzer.Rules.VisualBasic;
 
-[DiagnosticAnalyzer(LanguageNames.CSharp)]
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
 public sealed class ValueTypeShouldImplementIEquatable : ValueTypeShouldImplementIEquatableBase<SyntaxKind>
 {
-    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 }
