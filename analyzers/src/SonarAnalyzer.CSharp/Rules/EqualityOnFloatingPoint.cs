@@ -26,10 +26,9 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S1244";
         private const string MessageFormat = "Do not check floating point {0} with exact values, use a range instead.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         private static readonly ISet<string> EqualityOperators = new HashSet<string> { "op_Equality", "op_Inequality" };
 
@@ -51,7 +50,6 @@ namespace SonarAnalyzer.Rules.CSharp
             var binaryExpression = (BinaryExpressionSyntax)context.Node;
             var left = TryGetBinaryExpression(binaryExpression.Left);
             var right = TryGetBinaryExpression(binaryExpression.Right);
-
             if (right == null || left == null)
             {
                 return;
@@ -65,16 +63,13 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var isEquality = IsIndirectEquality(context.SemanticModel, binaryExpression, left, right);
-
             if (isEquality || IsIndirectInequality(context.SemanticModel, binaryExpression, left, right))
             {
-                var messageEqualityPart = GetMessageEqualityPart(isEquality);
-
-                context.ReportIssue(Diagnostic.Create(rule, binaryExpression.GetLocation(), messageEqualityPart));
+                context.ReportIssue(Diagnostic.Create(Rule, binaryExpression.GetLocation(), MessageEqualityPart(isEquality), "a range"));
             }
         }
 
-        private static string GetMessageEqualityPart(bool isEquality) =>
+        private static string MessageEqualityPart(bool isEquality) =>
             isEquality ? "equality" : "inequality";
 
         private static void CheckEquality(SonarSyntaxNodeReportingContext context)
@@ -101,20 +96,20 @@ namespace SonarAnalyzer.Rules.CSharp
                 && type is INamedTypeSymbol { TypeArguments: { } typeArguments }           // Arguments of TSelf, TOther, TResult
                 && typeArguments.Any(IsFloatingPointNumberType))
             || (type is ITypeParameterSymbol { ConstraintTypes: { } constraintTypes }      // constraints of TSelf or of TSelf, TOther, TResult from IEqualityOperators
-                && constraintTypes.Any(constraint => constraint.DerivesOrImplements(KnownType.System_Numerics_IFloatingPointIeee754_TSelf)));
+                && constraintTypes.Any(x => x.DerivesOrImplements(KnownType.System_Numerics_IFloatingPointIeee754_TSelf)));
 
         private static BinaryExpressionSyntax TryGetBinaryExpression(ExpressionSyntax expression) =>
             expression.RemoveParentheses() as BinaryExpressionSyntax;
 
         private static bool IsIndirectInequality(SemanticModel semanticModel, BinaryExpressionSyntax binaryExpression, BinaryExpressionSyntax left, BinaryExpressionSyntax right) =>
             binaryExpression.IsKind(SyntaxKind.LogicalOrExpression)
-                && HasAppropriateOperatorsForInequality(left, right)
-                && HasFloatingType(semanticModel, right.Left, right.Right);
+            && IsOperatorPair(left, right, SyntaxKind.GreaterThanToken, SyntaxKind.LessThanToken)
+            && HasFloatingType(semanticModel, right.Left, right.Right);
 
         private static bool IsIndirectEquality(SemanticModel semanticModel, BinaryExpressionSyntax binaryExpression, BinaryExpressionSyntax left, BinaryExpressionSyntax right) =>
             binaryExpression.IsKind(SyntaxKind.LogicalAndExpression)
-                && HasAppropriateOperatorsForEquality(left, right)
-                && HasFloatingType(semanticModel, right.Left, right.Right);
+            && IsOperatorPair(left, right, SyntaxKind.GreaterThanEqualsToken, SyntaxKind.LessThanEqualsToken)
+            && HasFloatingType(semanticModel, right.Left, right.Right);
 
         private static bool HasFloatingType(SemanticModel semanticModel, ExpressionSyntax left, ExpressionSyntax right) =>
             IsExpressionFloatingType(semanticModel, right) || IsExpressionFloatingType(semanticModel, left);
@@ -122,12 +117,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsExpressionFloatingType(SemanticModel semanticModel, ExpressionSyntax expression) =>
             IsFloatingPointNumberType(semanticModel.GetTypeInfo(expression).Type);
 
-        private static bool HasAppropriateOperatorsForEquality(BinaryExpressionSyntax left, BinaryExpressionSyntax right) =>
-            (left.OperatorToken.Kind() is SyntaxKind.GreaterThanEqualsToken && right.OperatorToken.Kind() is SyntaxKind.LessThanEqualsToken)
-            || (left.OperatorToken.Kind() is SyntaxKind.LessThanEqualsToken && right.OperatorToken.Kind() is SyntaxKind.GreaterThanEqualsToken);
-
-        private static bool HasAppropriateOperatorsForInequality(BinaryExpressionSyntax left, BinaryExpressionSyntax right) =>
-            (left.OperatorToken.Kind() is SyntaxKind.GreaterThanToken && right.OperatorToken.Kind() is SyntaxKind.LessThanToken)
-            || (left.OperatorToken.Kind() is SyntaxKind.LessThanToken && right.OperatorToken.Kind() is SyntaxKind.GreaterThanToken);
+        private static bool IsOperatorPair(BinaryExpressionSyntax left, BinaryExpressionSyntax right, SyntaxKind first, SyntaxKind second) =>
+            (left.OperatorToken.IsKind(first) && right.OperatorToken.IsKind(second))
+            || (left.OperatorToken.IsKind(second) && right.OperatorToken.IsKind(first));
     }
 }
