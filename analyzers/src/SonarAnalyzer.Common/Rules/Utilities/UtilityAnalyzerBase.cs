@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Concurrent;
 using System.IO;
 using Google.Protobuf;
 using SonarAnalyzer.Protobuf;
@@ -96,7 +95,7 @@ namespace SonarAnalyzer.Rules
                     return;
                 }
 
-                ConcurrentStack<TMessage> treeMessages = new();
+                Stack<TMessage> treeMessages = new();
 
                 startContext.RegisterSemanticModelAction(modelContext =>
                 {
@@ -112,7 +111,6 @@ namespace SonarAnalyzer.Rules
                         .Concat(treeMessages)
                         .WhereNotNull()
                         .ToArray();
-
                     lock (FileWriteLock)
                     {
                         Directory.CreateDirectory(OutPath);
