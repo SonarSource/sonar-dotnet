@@ -184,7 +184,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
             var snippet = new SnippetCompiler(code);
             var attribute = snippet.GetTypeSymbol("Program").GetAttributes().Single(x => x.HasName("MyAttribute"));
             var actual = attribute.AttributeUsageInherited();
-            actual.Should().Be(true);
+            actual.Should().Be(true); // The default for Inherited = true
         }
 
         [TestMethod]
@@ -205,7 +205,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
             var snippet = new SnippetCompiler(code);
             var attribute = snippet.GetTypeSymbol("Program").GetAttributes().Single(x => x.HasName("MyAttribute"));
             var actual = attribute.AttributeUsageInherited();
-            actual.Should().Be(true);
+            actual.Should().Be(true); // The default for Inherited = true
         }
 
         [DataTestMethod]
