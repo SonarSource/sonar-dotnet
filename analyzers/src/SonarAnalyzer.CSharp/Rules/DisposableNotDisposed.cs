@@ -241,13 +241,11 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static bool IsConfigureAwaitInvocationInsideUsingStatement(ExpressionSyntax expression)
-        {
-            return expression.Parent is MemberAccessExpressionSyntax memberAccessExpression
+        private static bool IsConfigureAwaitInvocationInsideUsingStatement(ExpressionSyntax expression) =>
+            expression.Parent is MemberAccessExpressionSyntax memberAccessExpression
                 && memberAccessExpression.Parent is InvocationExpressionSyntax
                 && memberAccessExpression.Name.Identifier.ValueText == "ConfigureAwait"
                 && IsNodeInsideUsingStatement(expression);
-        }
 
         private static bool IsStandaloneExpression(ExpressionSyntax expression) =>
             !(expression.Parent is ExpressionSyntax)
