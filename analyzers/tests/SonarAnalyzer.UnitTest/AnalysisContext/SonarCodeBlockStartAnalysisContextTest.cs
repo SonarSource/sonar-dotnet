@@ -38,12 +38,12 @@ public class SonarCodeBlockStartAnalysisContextTest
         var context = new Mock<CodeBlockStartAnalysisContext<SyntaxKind>>(codeBlock, owningSymbol, model, options, cancel).Object;
         var sut = new SonarCodeBlockStartAnalysisContext<SyntaxKind>(AnalysisScaffolding.CreateSonarAnalysisContext(), context);
 
-        sut.Tree.Should().Be(codeBlock.SyntaxTree);
-        sut.Compilation.Should().Be(model.Compilation);
-        sut.Options.Should().Be(options);
+        sut.Tree.Should().BeSameAs(codeBlock.SyntaxTree);
+        sut.Compilation.Should().BeSameAs(model.Compilation);
+        sut.Options.Should().BeSameAs(options);
         sut.Cancel.Should().Be(cancel);
-        sut.CodeBlock.Should().Be(codeBlock);
-        sut.OwningSymbol.Should().Be(owningSymbol);
-        sut.SemanticModel.Should().Be(model);
+        sut.CodeBlock.Should().BeSameAs(codeBlock);
+        sut.OwningSymbol.Should().BeSameAs(owningSymbol);
+        sut.SemanticModel.Should().BeSameAs(model);
     }
 }

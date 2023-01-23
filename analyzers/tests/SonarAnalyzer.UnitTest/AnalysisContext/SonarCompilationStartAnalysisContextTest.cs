@@ -35,9 +35,9 @@ public class SonarCompilationStartAnalysisContextTest
         var context = new Mock<CompilationStartAnalysisContext>(model.Compilation, options, cancel).Object;
         var sut = new SonarCompilationStartAnalysisContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context);
 
-        sut.Tree.Should().Be(tree);
-        sut.Compilation.Should().Be(model.Compilation);
-        sut.Options.Should().Be(options);
+        sut.Tree.Should().BeSameAs(tree);
+        sut.Compilation.Should().BeSameAs(model.Compilation);
+        sut.Options.Should().BeSameAs(options);
         sut.Cancel.Should().Be(cancel);
     }
 }

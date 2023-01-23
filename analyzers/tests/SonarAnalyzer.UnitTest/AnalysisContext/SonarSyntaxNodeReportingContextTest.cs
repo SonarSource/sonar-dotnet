@@ -37,13 +37,13 @@ public class SonarSyntaxNodeReportingContextTest
         var context = new SyntaxNodeAnalysisContext(node, containingSymbol, model, options, _ => { }, _ => true, cancel);
         var sut = new SonarSyntaxNodeReportingContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context);
 
-        sut.Tree.Should().Be(tree);
-        sut.Compilation.Should().Be(model.Compilation);
-        sut.Options.Should().Be(options);
+        sut.Tree.Should().BeSameAs(tree);
+        sut.Compilation.Should().BeSameAs(model.Compilation);
+        sut.Options.Should().BeSameAs(options);
         sut.Cancel.Should().Be(cancel);
-        sut.Node.Should().Be(node);
-        sut.SemanticModel.Should().Be(model);
-        sut.ContainingSymbol.Should().Be(containingSymbol);
+        sut.Node.Should().BeSameAs(node);
+        sut.SemanticModel.Should().BeSameAs(model);
+        sut.ContainingSymbol.Should().BeSameAs(containingSymbol);
     }
 
 #if NET // .NET Fx shows the message box directly, the exception cannot be caught
