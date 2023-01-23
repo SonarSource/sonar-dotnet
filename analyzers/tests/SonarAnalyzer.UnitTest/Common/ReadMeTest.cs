@@ -51,7 +51,7 @@ public class ReadMeTest
 
         var count = int.Parse(match.Groups["count"].Value);
         var min = (count / 10) * 10;
-        rules.Should().BeInRange(min, min + 10);
+        rules.Should().BeInRange(min, min + 9);
     }
 }
 
