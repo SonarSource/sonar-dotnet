@@ -261,7 +261,7 @@ namespace SonarAnalyzer.Rules.CSharp
             && semanticModel.GetTypeInfo(expression).Type is var type
             && type.IsAny(TrackedTypes)
             && semanticModel.GetSymbolInfo(expression).Symbol is IMethodSymbol constructor
-            && !constructor.Parameters.Any(x => x.Type.Implements(KnownType.System_IDisposable));
+            && !constructor.Parameters.Any(x => x.Type.Implements(KnownType.System_IDisposable) || x.Type.Implements(KnownType.System_IAsyncDisposable));
 
         private static bool IsDisposableRefStructCreation(ExpressionSyntax expression, SemanticModel semanticModel) =>
             expression.IsAnyKind(SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression)
