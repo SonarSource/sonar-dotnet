@@ -19,6 +19,7 @@
  */
 
 using System.IO;
+using System.Reflection;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.VisualBasic;
 using SonarAnalyzer.AnalysisContext;
@@ -149,9 +150,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public Assembly EmitAssembly()
         {
             using var memoryStream = new MemoryStream();
-            Compilation.Emit(memoryStream).Should().BeTrue("The provided snippet should emit assembly.");
+            Compilation.Emit(memoryStream).Success.Should().BeTrue("The provided snippet should emit assembly.");
             return Assembly.Load(memoryStream.ToArray());
-            return assembly;
         }
 
         private static bool HasCompilationErrors(Compilation compilation) =>

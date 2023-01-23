@@ -496,7 +496,7 @@ namespace NS
             actual.Should().BeEquivalentTo(expectedAttributes);
 
             // GetAttributesWithInherited should behave like MemberInfo.GetCustomAttributes from runtime reflection:
-            var assembly = compiler.GetEmittedAssembly();
+            var assembly = compiler.EmitAssembly();
             var type = assembly.GetType(className, throwOnError: true);
             var methodInfo = type.GetMethod(methodName.Replace("`1", string.Empty));
             methodInfo.GetCustomAttributes(inherit: true).Select(x => x.GetType().Name).Should().BeEquivalentTo(expectedAttributes);
@@ -574,7 +574,7 @@ namespace NS
                 Assert.Fail("Constructor could not be found.");
             }
             // GetAttributesWithInherited should behave like MemberInfo.GetCustomAttributes from runtime reflection:
-            var assembly = compiler.GetEmittedAssembly();
+            var assembly = compiler.EmitAssembly();
             var type = assembly.GetType(className, throwOnError: true);
             type.GetCustomAttributes(inherit: true).Select(x => x.GetType().Name).Should().BeEquivalentTo(expectedAttributes);
         }

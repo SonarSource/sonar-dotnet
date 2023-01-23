@@ -216,22 +216,22 @@ namespace SonarAnalyzer.Helpers
                 yield return attribute;
             }
 
-            var baseSymbol = GetBaseSymbol(symbol);
+            var baseSymbol = BaseSymbol(symbol);
             while (baseSymbol is not null)
             {
-                foreach (var attribute in baseSymbol.GetAttributes().Where(x => x.AttributeUsageInherited()))
+                foreach (var attribute in baseSymbol.GetAttributes().Where(x => x.HasAttributeUsageInherited()))
                 {
                     yield return attribute;
                 }
 
-                baseSymbol = GetBaseSymbol(baseSymbol);
+                baseSymbol = BaseSymbol(baseSymbol);
             }
 
             static ISymbol BaseSymbol(ISymbol symbol) =>
                 symbol switch
                 {
                     INamedTypeSymbol namedType => namedType.BaseType,
-                    IMethodSymbol { OriginalDefinition: { } originalDefinition } method when !method.Equals(originalDefinition) => GetBaseSymbol(originalDefinition),
+                    IMethodSymbol { OriginalDefinition: { } originalDefinition } method when !method.Equals(originalDefinition) => BaseSymbol(originalDefinition),
                     IMethodSymbol { OverriddenMethod: { } overridenMethod } => overridenMethod,
                     _ => null,
                 };
