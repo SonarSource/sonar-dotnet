@@ -232,13 +232,21 @@ namespace SonarAnalyzer.Rules.CSharp
                     throw new NotSupportedException("Syntax node should be either an identifier or a simple member access expression");
                 }
 
-                if (IsStandaloneExpression(expression)
+                if ((IsStandaloneExpression(expression) || IsConfigureAwaitInvocationInsideUsingStatement(expression))
                     && semanticModel.GetSymbolInfo(identifierOrSimpleMemberAccess).Symbol is { } referencedSymbol
                     && IsLocalOrPrivateField(referencedSymbol))
                 {
                     excludedSymbols.Add(referencedSymbol);
                 }
             }
+        }
+
+        private static bool IsConfigureAwaitInvocationInsideUsingStatement(ExpressionSyntax expression)
+        {
+            return expression.Parent is MemberAccessExpressionSyntax memberAccessExpression
+                && memberAccessExpression.Parent is InvocationExpressionSyntax
+                && memberAccessExpression.Name.Identifier.ValueText == "ConfigureAwait"
+                && IsNodeInsideUsingStatement(expression);
         }
 
         private static bool IsStandaloneExpression(ExpressionSyntax expression) =>
