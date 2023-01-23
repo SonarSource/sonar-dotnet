@@ -24,13 +24,18 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class EqualityOnFloatingPoint : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1244";
-        private const string MessageFormat = "Do not check floating point {0} with exact values, use a range instead.";
+        private const string MessageFormat = "Do not check floating point {0} with exact values, use {1} instead.";
 
         private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         private static readonly ISet<string> EqualityOperators = new HashSet<string> { "op_Equality", "op_Inequality" };
+
+        private static readonly IDictionary<string, string> FloatingPointEpsilonDependantMembers = new Dictionary<string, string>
+        {
+            [nameof(double.NaN)] = $"{nameof(double.IsNaN)}()",
+        };
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -80,11 +85,20 @@ namespace SonarAnalyzer.Rules.CSharp
                 && IsFloatingPointNumberType(container)
                 && EqualityOperators.Contains(equalitySymbolName))
             {
-                var messageEqualityPart = GetMessageEqualityPart(equals.IsKind(SyntaxKind.EqualsExpression));
-
-                context.ReportIssue(Diagnostic.Create(rule, equals.OperatorToken.GetLocation(), messageEqualityPart));
+                var messageEqualityPart = MessageEqualityPart(equals.IsKind(SyntaxKind.EqualsExpression));
+                var proposed = ProposedMessage(context, equals.Right) ?? ProposedMessage(context, equals.Left) ?? "a range";
+                context.ReportIssue(Diagnostic.Create(Rule, equals.OperatorToken.GetLocation(), messageEqualityPart, proposed));
             }
         }
+
+        private static string ProposedMessage(SonarSyntaxNodeReportingContext context, ExpressionSyntax expression) =>
+            expression is MemberAccessExpressionSyntax memberAccess
+            && memberAccess.GetName() is var memberName
+            && FloatingPointEpsilonDependantMembers.TryGetValue(memberName, out var proposedMethod)
+            && context.SemanticModel.GetSymbolInfo(memberAccess.Expression).Symbol is ITypeSymbol type
+            && IsFloatingPointNumberType(type)
+            ? $"{type}.{proposedMethod}"
+            : null;
 
         // Returns true for the floating point types that suffer from equivalence problems. All .NET floating point types have this problem except `decimal.`
         // - Reason for excluding `decimal`: the documentation for the `decimal.Equals()` method does not have a "Precision in Comparisons" section as the other .NET floating point types.
