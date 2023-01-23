@@ -50,18 +50,11 @@ namespace SonarAnalyzer.Extensions
         /// Returns the <see cref="AttributeUsageAttribute.Inherited"/> setting for the attribute associated with <paramref name="attribute"/>.
         /// The returned value is in line with the runtime behavior of <see cref="System.Reflection.MemberInfo.GetCustomAttributes(bool)"/>.
         /// </summary>
-        /// <param name="attribute">The <see cref="AttributeData"/> of an <see cref="Attribute"/>.</param>
-        /// <returns>
-        /// The <see cref="AttributeUsageAttribute.Inherited"/> value of the <see cref="AttributeUsageAttribute"/> applied to the <paramref name="attribute"/>.
-        /// Returns <see langword="true"/> if no <see cref="AttributeUsageAttribute"/> is applied to the <see cref="Attribute"/> associated with <paramref name="attribute"/>
-        /// as this is the default behavior of <see cref="System.Reflection.MemberInfo.GetCustomAttributes(bool)"/>.
-        /// </returns>
-        public static bool AttributeUsageInherited(this AttributeData attribute) =>
+        public static bool HasAttributeUsageInherited(this AttributeData attribute) =>
             attribute.AttributeClass.GetAttributes()
-                .Where(x => x.AttributeClass is { Name: nameof(AttributeUsageAttribute), ContainingNamespace.Name: "System" })
+                .Where(x => x.AttributeClass.Is(KnownType.System_AttributeUsageAttribute))
                 .SelectMany(x => x.NamedArguments.Where(x => x.Key == nameof(AttributeUsageAttribute.Inherited)))
-                .Select(x => x.Value)
-                .Where(x => x is { Kind: TypedConstantKind.Primitive, Type.SpecialType: SpecialType.System_Boolean })
+                .Where(x => x.Value is { Kind: TypedConstantKind.Primitive, Type.SpecialType: SpecialType.System_Boolean })
                 .Select(x => (bool?)x.Value)
                 .FirstOrDefault() ?? true; // Default value of Inherited is true
 

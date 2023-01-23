@@ -209,7 +209,7 @@ namespace SonarAnalyzer.Helpers
             symbol?.GetAttributes().Where(a => a.AttributeClass.IsAny(attributeTypes))
             ?? Enumerable.Empty<AttributeData>();
 
-        internal static IEnumerable<AttributeData> GetAttributesWithInherited(this ISymbol symbol)
+        public static IEnumerable<AttributeData> GetAttributesWithInherited(this ISymbol symbol)
         {
             foreach (var attribute in symbol.GetAttributes())
             {
@@ -217,7 +217,7 @@ namespace SonarAnalyzer.Helpers
             }
 
             var baseSymbol = GetBaseSymbol(symbol);
-            while (baseSymbol != null)
+            while (baseSymbol is not null)
             {
                 foreach (var attribute in baseSymbol.GetAttributes().Where(x => x.AttributeUsageInherited()))
                 {
@@ -227,12 +227,12 @@ namespace SonarAnalyzer.Helpers
                 baseSymbol = GetBaseSymbol(baseSymbol);
             }
 
-            static ISymbol GetBaseSymbol(ISymbol symbol) =>
+            static ISymbol BaseSymbol(ISymbol symbol) =>
                 symbol switch
                 {
                     INamedTypeSymbol namedType => namedType.BaseType,
                     IMethodSymbol { OriginalDefinition: { } originalDefinition } method when !method.Equals(originalDefinition) => GetBaseSymbol(originalDefinition),
-                    IMethodSymbol { IsOverride: true, OverriddenMethod: { } overridenMethod } => overridenMethod,
+                    IMethodSymbol { OverriddenMethod: { } overridenMethod } => overridenMethod,
                     _ => null,
                 };
         }
