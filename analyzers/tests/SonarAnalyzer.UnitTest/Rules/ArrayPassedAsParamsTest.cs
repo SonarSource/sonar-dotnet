@@ -27,14 +27,11 @@ namespace SonarAnalyzer.UnitTest.Rules;
 [TestClass]
 public class ArrayPassedAsParamsTest
 {
-    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ArrayPassedAsParams>();
-    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.ArrayPassedAsParams>();
-
     [TestMethod]
     public void ArrayPassedAsParams_CS() =>
-        builderCS.AddPaths("ArrayPassedAsParams.cs").Verify();
+        new VerifierBuilder<CS.ArrayPassedAsParams>().AddPaths("ArrayPassedAsParams.cs").Verify();
 
     [TestMethod]
     public void ArrayPassedAsParams_VB() =>
-        builderVB.AddPaths("ArrayPassedAsParams.vb").Verify();
+        new VerifierBuilder<VB.ArrayPassedAsParams>().AddPaths("ArrayPassedAsParams.vb").Verify();
 }

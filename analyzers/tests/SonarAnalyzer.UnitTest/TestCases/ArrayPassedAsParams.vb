@@ -15,7 +15,7 @@ Public Class Program
         Method2(1, "s1")                ' Compliant
         Method2(1, "s1", "s2")          ' Compliant
         Method2(1, myArray)             ' Compliant
-        Method2(1, New String(11) {})    ' Compliant
+        Method2(1, New String(11) {})   ' Compliant
 
         Method3(New String() {"s1", "s2"}, "s1") ' Compliant
         Method3(New String() {"s1", "s2"}, New String(11) {}) ' Compliant

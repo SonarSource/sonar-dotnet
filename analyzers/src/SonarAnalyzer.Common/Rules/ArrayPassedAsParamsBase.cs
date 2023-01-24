@@ -30,7 +30,7 @@ public abstract class ArrayPassedAsParamsBase<TSyntaxKind, TInvocationExpression
 
     private readonly DiagnosticDescriptor rule;
     protected abstract string ParameterKeyword { get; }
-    protected abstract bool ShouldReport(SonarSyntaxNodeReportingContext context, TInvocationExpressionSyntax invocation);
+    protected abstract bool ShouldReport(TInvocationExpressionSyntax invocation);
     protected abstract Location GetLocation(TInvocationExpressionSyntax context);
 
     protected ArrayPassedAsParamsBase() : base(DiagnosticId)
@@ -44,7 +44,10 @@ public abstract class ArrayPassedAsParamsBase<TSyntaxKind, TInvocationExpression
     private void CheckInvocation(SonarSyntaxNodeReportingContext context)
     {
         if ((TInvocationExpressionSyntax)context.Node is var invocation
-            && ShouldReport(context, invocation))
+            && context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol invokedMethodSymbol
+            && invokedMethodSymbol.Parameters.Any()
+            && invokedMethodSymbol.Parameters.Last().IsParams // No additional parameters are permitted after the params keyword in a method declaration, and only one params keyword is permitted in a method declaration.
+            && ShouldReport(invocation))
         {
             context.ReportIssue(Diagnostic.Create(rule, GetLocation(invocation), ParameterKeyword));
         }

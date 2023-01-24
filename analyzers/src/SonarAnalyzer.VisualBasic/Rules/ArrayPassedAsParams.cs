@@ -27,14 +27,11 @@ public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, In
     protected override string ParameterKeyword => "ParamArray";
     protected override string MessageFormat => MessageBase;
 
-    protected override bool ShouldReport(SonarSyntaxNodeReportingContext context, InvocationExpressionSyntax invocation) =>
+    protected override bool ShouldReport(InvocationExpressionSyntax invocation) =>
         invocation.ArgumentList.Arguments.Count > 0
         && invocation.ArgumentList.Arguments.Last().GetExpression() is ArrayCreationExpressionSyntax array
         && array.Initializer is CollectionInitializerSyntax initializer
-        && initializer.Initializers.Count > 0
-        && context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol invokedMethodSymbol
-        && invokedMethodSymbol.Parameters.Any()
-        && invokedMethodSymbol.Parameters.Last().IsParams; // No additional parameters are permitted after the params keyword in a method declaration, and only one params keyword is permitted in a method declaration.
+        && initializer.Initializers.Count > 0;
 
     protected override Location GetLocation(InvocationExpressionSyntax invocation) =>
         invocation.ArgumentList.Arguments.Last().GetExpression().GetLocation();
