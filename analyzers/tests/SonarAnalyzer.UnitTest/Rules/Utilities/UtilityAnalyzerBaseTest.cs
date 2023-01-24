@@ -137,12 +137,17 @@ namespace SonarAnalyzer.UnitTest.Rules.Utilities
                 };
                 var analyzerOptions = new AnalyzerOptions(additionalFiles);
                 var config = analyzerOptions.SonarProjectConfig() is { } sonarProjectConfig ? new ProjectConfigReader(sonarProjectConfig.GetText()) : ProjectConfigReader.Empty;
-                ReadParameters(analyzerOptions, config.OutPath, language, isTestProject: false);
+                var isTestProject = config.ProjectType switch
+                {
+                    ProjectType.Unknown => compilation.IsTest(),
+                    ProjectType.Test => true,
+                    _ => false
+                };
+                ReadParameters(analyzerOptions, config.OutPath, language, isTestProject);
             }
 
             protected override void Initialize(SonarAnalysisContext context) =>
-                throw new NotImplementedException();
-
+                throw new NotSupportedException();
         }
     }
 }
