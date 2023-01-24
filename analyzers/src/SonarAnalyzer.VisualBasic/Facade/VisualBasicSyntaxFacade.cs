@@ -81,10 +81,10 @@ internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
     public override ImmutableArray<SyntaxToken> FieldDeclarationIdentifiers(SyntaxNode node) =>
         Cast<FieldDeclarationSyntax>(node).Declarators.SelectMany(d => d.Names.Select(n => n.Identifier)).ToImmutableArray();
 
-    public override IEnumerable<SyntaxKind> ModifierKinds(SyntaxNode node) =>
+    public override ImmutableArray<SyntaxKind> ModifierKinds(SyntaxNode node) =>
         node is StructureBlockSyntax structureBlock
-            ? structureBlock.StructureStatement.Modifiers.Select(x => x.Kind())
-            : Array.Empty<SyntaxKind>();
+            ? structureBlock.StructureStatement.Modifiers.Select(x => x.Kind()).ToImmutableArray()
+            : Array.Empty<SyntaxKind>().ToImmutableArray();
 
     public override SyntaxNode NodeExpression(SyntaxNode node) =>
         node switch
