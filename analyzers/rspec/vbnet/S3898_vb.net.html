@@ -1,4 +1,4 @@
-<p>If you’re using a <code>struct</code>, it is likely because you’re interested in performance. But by failing to implement
+<p>If you’re using a <code>Structure</code>, it is likely because you’re interested in performance. But by failing to implement
 <code>IEquatable&lt;T&gt;</code> you’re loosing performance when comparisons are made because without <code>IEquatable&lt;T&gt;</code>, boxing and
 reflection are used to make comparisons.</p>
 <h2>Noncompliant Code Example</h2>
@@ -22,4 +22,8 @@ Structure MyStruct
 
 End Structure
 </pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.iequatable-1">IEquatable&lt;T&gt; Interface</a> </li>
+</ul>
 
