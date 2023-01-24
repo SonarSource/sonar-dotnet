@@ -83,10 +83,10 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
     public override ImmutableArray<SyntaxToken> FieldDeclarationIdentifiers(SyntaxNode node) =>
         Cast<FieldDeclarationSyntax>(node).Declaration.Variables.Select(x => x.Identifier).ToImmutableArray();
 
-    public override ImmutableArray<SyntaxKind> ModifierKinds(SyntaxNode node) =>
+    public override SyntaxKind[] ModifierKinds(SyntaxNode node) =>
         node is TypeDeclarationSyntax typeDeclaration
-            ? typeDeclaration.Modifiers.Select(x => x.Kind()).ToImmutableArray()
-            : Array.Empty<SyntaxKind>().ToImmutableArray();
+            ? typeDeclaration.Modifiers.Select(x => x.Kind()).ToArray()
+            : Array.Empty<SyntaxKind>();
 
     public override SyntaxNode NodeExpression(SyntaxNode node) =>
         node switch
