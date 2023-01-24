@@ -20,12 +20,33 @@
 
 namespace SonarAnalyzer.Rules;
 
-public abstract class ArrayPassedAsParamsBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+public abstract class ArrayPassedAsParamsBase<TSyntaxKind, TInvocationExpressionSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
     where TSyntaxKind : struct
+    where TInvocationExpressionSyntax : SyntaxNode
 {
     private const string DiagnosticId = "S3878";
 
-    protected override string MessageFormat => "FIXME";
+    public const string MessageBase = "Arrays should not be created for {0} parameters.";
 
-    protected ArrayPassedAsParamsBase() : base(DiagnosticId) { }
+    private readonly DiagnosticDescriptor rule;
+    protected abstract string ParameterKeyword { get; }
+    protected abstract bool ShouldReport(SonarSyntaxNodeReportingContext context, TInvocationExpressionSyntax invocation);
+    protected abstract Location GetLocation(TInvocationExpressionSyntax context);
+
+    protected ArrayPassedAsParamsBase() : base(DiagnosticId)
+    {
+        rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
+    }
+
+    protected sealed override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, CheckInvocation, Language.SyntaxKind.InvocationExpression);
+
+    private void CheckInvocation(SonarSyntaxNodeReportingContext context)
+    {
+        if ((TInvocationExpressionSyntax)context.Node is var invocation
+            && ShouldReport(context, invocation))
+        {
+            context.ReportIssue(Diagnostic.Create(rule, GetLocation(invocation), ParameterKeyword));
+        }
+    }
 }

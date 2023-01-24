@@ -21,19 +21,21 @@
 namespace SonarAnalyzer.Rules.VisualBasic;
 
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind>
+public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, InvocationExpressionSyntax>
 {
-
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+    protected override string ParameterKeyword => "ParamArray";
+    protected override string MessageFormat => MessageBase;
 
-    protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterSyntaxNodeActionInNonGenerated(c =>
-            {
-                var node = c.Node;
-                if (true)
-                {
-                    c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
-                }
-            },
-            SyntaxKind.InvocationExpression);
+    protected override bool ShouldReport(SonarSyntaxNodeReportingContext context, InvocationExpressionSyntax invocation) =>
+        invocation.ArgumentList.Arguments.Count > 0
+        && invocation.ArgumentList.Arguments.Last().GetExpression() is ArrayCreationExpressionSyntax array
+        && array.Initializer is CollectionInitializerSyntax initializer
+        && initializer.Initializers.Count > 0
+        && context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol invokedMethodSymbol
+        && invokedMethodSymbol.Parameters.Any()
+        && invokedMethodSymbol.Parameters.Last().IsParams; // No additional parameters are permitted after the params keyword in a method declaration, and only one params keyword is permitted in a method declaration.
+
+    protected override Location GetLocation(InvocationExpressionSyntax invocation) =>
+        invocation.ArgumentList.Arguments.Last().GetExpression().GetLocation();
 }
