@@ -1,6 +1,6 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2015-2022 SonarSource SA
+ * Copyright (C) 2015-2023 SonarSource SA
  * mailto: contact AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -26,7 +26,7 @@ public abstract class ArrayPassedAsParamsBase<TSyntaxKind, TInvocationExpression
 {
     private const string DiagnosticId = "S3878";
 
-    public const string MessageBase = "Arrays should not be created for {0} parameters.";
+    public static readonly string MessageBase = "Arrays should not be created for {0} parameters.";
 
     private readonly DiagnosticDescriptor rule;
     protected abstract string ParameterKeyword { get; }
@@ -47,7 +47,7 @@ public abstract class ArrayPassedAsParamsBase<TSyntaxKind, TInvocationExpression
             && ShouldReport(invocation)
             && context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol invokedMethodSymbol
             && invokedMethodSymbol.Parameters.Any()
-            && invokedMethodSymbol.Parameters.Last().IsParams) // No additional parameters are permitted after the params keyword in a method declaration, and only one params keyword is permitted in a method declaration.
+            && invokedMethodSymbol.Parameters.Last().IsParams) // params keyword should be only one and no additional parameters are permitted after that.
         {
             context.ReportIssue(Diagnostic.Create(rule, GetLocation(invocation), ParameterKeyword));
         }

@@ -27,6 +27,9 @@ public class Program
         Method3(null, null);        // Compliant
         Method4(new [] { "s1" });   // Compliant
         Method4(new [] { "s1", "s2" }); // Compliant
+
+        Method2(args: new string[] { "s1", "s2" }, a: 1); // Noncompliant
+        Method3(args: new string[12], a: new string[] { "s1", "s2" }) // Compliant
     }
 
     public void Method(params string[] args) { }
