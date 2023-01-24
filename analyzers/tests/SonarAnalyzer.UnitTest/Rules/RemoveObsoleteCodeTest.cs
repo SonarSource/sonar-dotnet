@@ -28,12 +28,11 @@ namespace SonarAnalyzer.UnitTest.Rules;
 public class RemoveObsoleteCodeTest
 {
     private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.RemoveObsoleteCode>();
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.RemoveObsoleteCode>();
 
     [TestMethod]
     public void RemoveObsoleteCode_CS() =>
         builderCS.AddPaths("RemoveObsoleteCode.cs").Verify();
-
-    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.RemoveObsoleteCode>();    // FIXME: Move this up
 
     [TestMethod]
     public void RemoveObsoleteCode_VB() =>

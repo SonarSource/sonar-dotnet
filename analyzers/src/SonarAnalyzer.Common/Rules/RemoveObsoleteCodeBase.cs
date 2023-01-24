@@ -18,9 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
-using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules;
@@ -30,7 +27,18 @@ public abstract class RemoveObsoleteCodeBase<TSyntaxKind> : SonarDiagnosticAnaly
 {
     private const string DiagnosticId = "S1133";
 
-    protected override string MessageFormat => "FIXME";
+    protected override string MessageFormat => "Do not forget to remove this deprecated code someday.";
 
     protected RemoveObsoleteCodeBase() : base(DiagnosticId) { }
+
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
+        {
+            if (c.SemanticModel.GetSymbolInfo(c.Node).Symbol is { } attribute
+                && attribute.IsInType(KnownType.System_ObsoleteAttribute))
+            {
+                c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
+            }
+        },
+        Language.SyntaxKind.Attribute);
 }
