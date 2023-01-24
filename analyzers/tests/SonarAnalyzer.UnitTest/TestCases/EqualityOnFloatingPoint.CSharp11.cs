@@ -4,22 +4,22 @@ using System.Runtime.InteropServices;
 
 public class EqualityOnFloatingPoint
 {
-    void testHalf()
+    void TestHalfNaN()
     {
         bool b;
-        var h1 = Half.NaN;
+        var h = Half.NaN;
 
-        b = h1 == Half.NaN; // Noncompliant {{Do not check floating point equality with exact values, use System.Half.IsNaN() instead.}}
-        //     ^^
+        b = h == Half.NaN; // Noncompliant {{Do not check floating point equality with exact values, use 'Half.IsNaN()' instead.}}
+        //    ^^
     }
 
-    void testNFloat()
+    void TestNFloatNaN()
     {
         bool b;
-        var nf1 = System.Runtime.InteropServices.NFloat.NaN;
+        var nf = System.Runtime.InteropServices.NFloat.NaN;
 
-        b = nf1 == System.Runtime.InteropServices.NFloat.NaN; // Noncompliant {{Do not check floating point equality with exact values, use System.Runtime.InteropServices.NFloat.IsNaN() instead.}}
-        b = nf1 == NFloat.NaN;                                // Noncompliant {{Do not check floating point equality with exact values, use System.Runtime.InteropServices.NFloat.IsNaN() instead.}}
+        b = nf == System.Runtime.InteropServices.NFloat.NaN; // Noncompliant {{Do not check floating point equality with exact values, use 'NFloat.IsNaN()' instead.}}
+        b = nf == NFloat.NaN;                                // Noncompliant {{Do not check floating point equality with exact values, use 'NFloat.IsNaN()' instead.}}
     }
 
     bool HalfEqual(Half first, Half second)
