@@ -35,7 +35,7 @@ public abstract class ValueTypeShouldImplementIEquatableBase<TSyntaxKind> : Sona
             c =>
             {
                 var modifiers = Language.Syntax.Modifiers(c.Node).ToArray();
-                if (!Language.Syntax.Modifiers(c.Node).Any(mod => mod.Equals(Language.SyntaxKind.RefKeyword))
+                if (!modifiers.Any(x => x.Equals(Language.SyntaxKind.RefKeyword))
                     && c.SemanticModel.GetDeclaredSymbol(c.Node) is INamedTypeSymbol structSymbol
                     && !structSymbol.Implements(KnownType.System_IEquatable_T))
                 {

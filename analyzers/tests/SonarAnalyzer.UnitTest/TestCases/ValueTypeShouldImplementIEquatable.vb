@@ -3,9 +3,9 @@
 End Structure
 
 Public Structure MyCompliantStruct ' Compliant
-        Implements IEquatable(Of MyCompliantStruct)
+    Implements IEquatable(Of MyCompliantStruct)
 
-        Public Overloads Function Equals(other As MyCompliantStruct) As Boolean Implements IEquatable(Of MyCompliantStruct).Equals
-            Return True
-        End Function
-    End Structure
+    Public Overloads Function Equals(other As MyCompliantStruct) As Boolean Implements IEquatable(Of MyCompliantStruct).Equals
+        Return True
+    End Function
+End Structure
