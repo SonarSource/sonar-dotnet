@@ -1,7 +1,8 @@
 ﻿Imports System
 
 Namespace Tests
-    <Obsolete> ' Noncompliant {{Do not forget to remove this deprecated code someday.}}
+
+    <Obsolete> ' Noncompliant ^6#8 {{Do not forget to remove this deprecated code someday.}}
     Public Class Program
 
         <Obsolete("Message")>                   ' Noncompliant
@@ -10,7 +11,7 @@ Namespace Tests
         <Obsolete("Message", True)>             ' Noncompliant
         Public Event OnClose As CloseDelegate
 
-        <Obsolete()>                            ' Noncompliant
+        <ObsoleteAttribute()>                            ' Noncompliant
         Public Sub New()
         End Sub
     End Class

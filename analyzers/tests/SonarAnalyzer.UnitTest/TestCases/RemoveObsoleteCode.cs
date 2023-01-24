@@ -12,7 +12,7 @@ namespace Tests
         [Obsolete("Message", error: true)]   // Noncompliant
         public event CloseDelegate OnClose;
 
-        [Obsolete()]                         // Noncompliant
+        [ObsoleteAttribute()]                         // Noncompliant
         public Program()
         {
 
