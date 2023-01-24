@@ -22,7 +22,7 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class PropertyGetterWithThrowBase : SonarDiagnosticAnalyzer
     {
-        protected const string DiagnosticId = "S101";//"S2372";
+        protected const string DiagnosticId = "S2372";
 
         protected const string MessageFormat = "Remove the exception throwing from this property getter, or refactor the " +
             "property into a method.";
