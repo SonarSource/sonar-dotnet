@@ -44,10 +44,10 @@ public abstract class ArrayPassedAsParamsBase<TSyntaxKind, TInvocationExpression
     private void CheckInvocation(SonarSyntaxNodeReportingContext context)
     {
         if ((TInvocationExpressionSyntax)context.Node is var invocation
+            && ShouldReport(invocation)
             && context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol invokedMethodSymbol
             && invokedMethodSymbol.Parameters.Any()
-            && invokedMethodSymbol.Parameters.Last().IsParams // No additional parameters are permitted after the params keyword in a method declaration, and only one params keyword is permitted in a method declaration.
-            && ShouldReport(invocation))
+            && invokedMethodSymbol.Parameters.Last().IsParams) // No additional parameters are permitted after the params keyword in a method declaration, and only one params keyword is permitted in a method declaration.
         {
             context.ReportIssue(Diagnostic.Create(rule, GetLocation(invocation), ParameterKeyword));
         }
