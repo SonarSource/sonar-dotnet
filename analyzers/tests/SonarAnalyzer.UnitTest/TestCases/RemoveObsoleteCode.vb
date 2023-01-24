@@ -11,7 +11,7 @@ Namespace Tests
         <Obsolete("Message", True)>             ' Noncompliant
         Public Event OnClose As CloseDelegate
 
-        <ObsoleteAttribute()>                            ' Noncompliant
+        <ObsoleteAttribute()>                   ' Noncompliant
         Public Sub New()
         End Sub
     End Class
