@@ -1,7 +1,17 @@
-﻿Public Class Program
+﻿Imports System
 
-    Public Sub Test()
+Namespace Tests
+    <Obsolete> ' Noncompliant {{Do not forget to remove this deprecated code someday.}}
+    Public Class Program
 
-    End Sub
+        <Obsolete("Message")>                   ' Noncompliant
+        Public Delegate Sub CloseDelegate(ByVal sender As Object, ByVal eventArgs As EventArgs)
 
-End Class
+        <Obsolete("Message", True)>             ' Noncompliant
+        Public Event OnClose As CloseDelegate
+
+        <Obsolete()>                            ' Noncompliant
+        Public Sub New()
+        End Sub
+    End Class
+End Namespace
