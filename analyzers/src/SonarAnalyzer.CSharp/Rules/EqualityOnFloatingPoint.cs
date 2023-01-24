@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (TryGetBinaryExpression(binaryExpression.Left) is { } left
                 && TryGetBinaryExpression(binaryExpression.Right) is { } right
-                && (CSharpEquivalenceChecker.AreEquivalent(right.Right, left.Right) || CSharpEquivalenceChecker.AreEquivalent(right.Left, left.Left))
+                && (CSharpEquivalenceChecker.AreEquivalent(right.Right, left.Right) && CSharpEquivalenceChecker.AreEquivalent(right.Left, left.Left))
                 && IsIndirectEquality(context.SemanticModel, binaryExpression, left, right) is var isEquality
                 && IsIndirectInequality(context.SemanticModel, binaryExpression, left, right) is var isInequality
                 && (isEquality || isInequality))
