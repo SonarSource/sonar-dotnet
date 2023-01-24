@@ -23,6 +23,7 @@ using Microsoft.CodeAnalysis.Text;
 using Microsoft.CodeAnalysis.VisualBasic;
 using SonarAnalyzer.AnalysisContext;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Rules;
 
 namespace SonarAnalyzer.UnitTest.Rules.Utilities
@@ -134,24 +135,14 @@ namespace SonarAnalyzer.UnitTest.Rules.Utilities
                     LanguageNames.VisualBasic => VisualBasicCompilation.Create(null),
                     _ => throw new InvalidOperationException($"Unexpected {nameof(language)}: {language}")
                 };
-                ReadParameters(new SonarAnalysisTestContext(AnalysisScaffolding.CreateSonarAnalysisContext(), new AnalyzerOptions(additionalFiles), compilation));
+                var analyzerOptions = new AnalyzerOptions(additionalFiles);
+                var config = analyzerOptions.SonarProjectConfig() is { } sonarProjectConfig ? new ProjectConfigReader(sonarProjectConfig.GetText()) : ProjectConfigReader.Empty;
+                ReadParameters(analyzerOptions, config.OutPath, language, isTestProject: false);
             }
 
             protected override void Initialize(SonarAnalysisContext context) =>
                 throw new NotImplementedException();
 
-            private class SonarAnalysisTestContext : SonarAnalysisContextBase
-            {
-                public SonarAnalysisTestContext(SonarAnalysisContext context, AnalyzerOptions options, Compilation compilation) : base(context)
-                {
-                    Options = options;
-                    Compilation = compilation;
-                }
-
-                public override AnalyzerOptions Options { get; }
-
-                public override Compilation Compilation { get; }
-            }
         }
     }
 }

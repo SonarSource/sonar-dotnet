@@ -50,22 +50,21 @@ namespace SonarAnalyzer.Rules
                 EndOffset = lineSpan.EndLinePosition.Character
             };
 
-        protected void ReadParameters(SonarAnalysisContextBase c)
+        protected void ReadParameters(AnalyzerOptions options, string outPath, string language, bool isTestProject)
         {
-            var settings = c.Options.ParseSonarLintXmlSettings();
-            var outPath = c.ProjectConfiguration().OutPath;
+            var settings = options.ParseSonarLintXmlSettings();
             // For backward compatibility with S4MSB <= 5.0
-            if (outPath == null && c.Options.ProjectOutFolderPath() is { } projectOutFolderAdditionalFile)
+            if (outPath == null && options.ProjectOutFolderPath() is { } projectOutFolderAdditionalFile)
             {
                 outPath = projectOutFolderAdditionalFile.GetText().ToString().TrimEnd();
             }
             if (settings.Any() && !string.IsNullOrEmpty(outPath))
             {
-                IgnoreHeaderComments = PropertiesHelper.ReadIgnoreHeaderCommentsProperty(settings, c.Compilation.Language);
-                AnalyzeGeneratedCode = PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(settings, c.Compilation.Language);
-                OutPath = Path.Combine(outPath, c.Compilation.Language == LanguageNames.CSharp ? "output-cs" : "output-vbnet");
+                IgnoreHeaderComments = PropertiesHelper.ReadIgnoreHeaderCommentsProperty(settings, language);
+                AnalyzeGeneratedCode = PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(settings, language);
+                OutPath = Path.Combine(outPath, language == LanguageNames.CSharp ? "output-cs" : "output-vbnet");
                 IsAnalyzerEnabled = true;
-                IsTestProject = c.IsTestProject();
+                IsTestProject = isTestProject;
             }
         }
     }
@@ -89,7 +88,7 @@ namespace SonarAnalyzer.Rules
         protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterCompilationStartAction(startContext =>
             {
-                ReadParameters(startContext);
+                ReadParameters(startContext.Options, startContext.ProjectConfiguration().OutPath, startContext.Compilation.Language, startContext.IsTestProject());
                 if (!IsAnalyzerEnabled)
                 {
                     return;
