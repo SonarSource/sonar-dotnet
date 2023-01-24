@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.Hyperion\HyperionSerializer.cs",
+"region":  {
+"startLine":  265,
+"startColumn":  10,
+"endLine":  265,
+"endColumn":  18
+}
+}
+}
+]
+}

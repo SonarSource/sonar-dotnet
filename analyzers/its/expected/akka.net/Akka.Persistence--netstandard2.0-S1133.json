@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"region":  {
+"startLine":  387,
+"startColumn":  14,
+"endLine":  389,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"region":  {
+"startLine":  290,
+"startColumn":  10,
+"endLine":  290,
+"endColumn":  132
+}
+}
+}
+]
+}

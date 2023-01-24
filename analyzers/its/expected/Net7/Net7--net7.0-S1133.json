@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\ExtendedNameofScope.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  10,
+"endLine":  5,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\ExtendedNameofScope.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  10,
+"endLine":  11,
+"endColumn":  38
+}
+}
+}
+]
+}

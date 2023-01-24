@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Query\EventEnvelope.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  10,
+"endLine":  26,
+"endColumn":  69
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.Core\DIActorContextAdapter.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  10,
+"endLine":  46,
+"endColumn":  106
+}
+}
+}
+]
+}

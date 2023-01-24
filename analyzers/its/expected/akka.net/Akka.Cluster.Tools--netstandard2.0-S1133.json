@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubSettings.cs",
+"region":  {
+"startLine":  121,
+"startColumn":  10,
+"endLine":  121,
+"endColumn":  134
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonProxySettings.cs",
+"region":  {
+"startLine":  147,
+"startColumn":  10,
+"endLine":  147,
+"endColumn":  96
+}
+}
+}
+]
+}
