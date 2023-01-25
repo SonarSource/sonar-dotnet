@@ -9,3 +9,11 @@ End Structure
 Structure MyStruct ' Noncompliant {{Implement 'IEquatable<T>' in value type 'MyStruct'.}}
     '     ^^^^^^^^
 End Structure
+
+Structure ComparableStruct ' Noncompliant
+    Implements IComparable(Of ComparableStruct)
+
+    Public Function CompareTo(other As ComparableStruct) As Integer Implements IComparable(Of ComparableStruct).CompareTo
+        Return 0
+    End Function
+End Structure
