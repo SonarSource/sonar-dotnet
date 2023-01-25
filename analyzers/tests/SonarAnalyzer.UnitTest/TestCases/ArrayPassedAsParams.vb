@@ -35,4 +35,12 @@ Public Class Program
 
     Public Sub Method4(ParamArray a As String(), ParamArray args As String()) 'Error [CS0231]
     End Sub
+
+    Private a = New [MyClass](1, New Integer() {2, 3}) ' Noncompliant
+    Private b = New [MyClass](1, 2, 3) ' Compliant
+End Class
+
+Public Class [MyClass]
+    Public Sub New(ByVal a As Integer, ParamArray args As Integer())
+    End Sub
 End Class
