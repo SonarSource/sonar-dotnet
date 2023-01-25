@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
 
@@ -127,5 +128,25 @@ namespace Tests.Diagnostics
 
     public class Empty
     {
+    }
+
+    public sealed class ImplementsDisposable : IDisposable
+    {
+        private readonly FileStream stream;
+
+        public ImplementsDisposable()
+        {
+            stream = new FileStream(@"c:\foo.txt", FileMode.Open);              // Compliant
+        }
+
+        public void Dispose()
+        {
+            stream.Dispose();
+        }
+    }
+
+    public class DisposableTest
+    {
+        private ImplementsDisposable stream = new ImplementsDisposable();     // Compliant - the rule only tracks specific IDisposable / IAsyncDisposable types
     }
 }

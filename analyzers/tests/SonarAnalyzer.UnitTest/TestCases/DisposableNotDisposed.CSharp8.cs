@@ -106,6 +106,11 @@ namespace Tests.Diagnostics
         }
     }
 
+    public class AsyncDisposableTest
+    {
+        private ImplementsAsyncDisposable stream = new ImplementsAsyncDisposable();     // Compliant - the rule only tracks specific IDisposable / IAsyncDisposable types
+    }
+
     public class FluentAssertionsTest
     {
         public void FluentAssertionTypes()
