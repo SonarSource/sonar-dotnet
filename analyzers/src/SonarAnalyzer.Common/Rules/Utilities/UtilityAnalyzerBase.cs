@@ -96,13 +96,13 @@ namespace SonarAnalyzer.Rules
                     return;
                 }
 
-                Stack<TMessage> treeMessages = new();
+                List<TMessage> treeMessages = new();
 
                 startContext.RegisterSemanticModelAction(modelContext =>
                 {
                     if (ShouldGenerateMetrics(modelContext))
                     {
-                        treeMessages.Push(CreateMessage(modelContext.Tree, modelContext.SemanticModel));
+                        treeMessages.Add(CreateMessage(modelContext.Tree, modelContext.SemanticModel));
                     }
                 });
 
