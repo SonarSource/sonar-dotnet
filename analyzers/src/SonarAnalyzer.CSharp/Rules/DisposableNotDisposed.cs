@@ -40,6 +40,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.System_Net_Sockets_TcpClient,
                 KnownType.System_Net_Sockets_UdpClient);
 
+        private static readonly ImmutableArray<KnownType> DisposableTypes = ImmutableArray.Create
+        (
+            KnownType.System_IDisposable,
+            KnownType.System_IAsyncDisposable
+        );
+
         private static readonly ISet<string> DisposeMethods = new HashSet<string> { "Dispose", "DisposeAsync", "Close" };
 
         private static readonly ISet<string> FactoryMethods = new HashSet<string>
@@ -159,8 +165,8 @@ namespace SonarAnalyzer.Rules.CSharp
             var usingDeclarations = ancestors.OfType<LocalDeclarationStatementSyntax>();
 
             return
-                usingStatements.Any(usingStatement => ancestors.Contains(usingStatement.Expression) || ancestors.Contains(usingStatement.Declaration))
-             || usingDeclarations.Any(localDeclaration => ancestors.Contains(localDeclaration.Declaration));
+                usingStatements.Any(x => ancestors.Contains(x.Expression) || ancestors.Contains(x.Declaration))
+             || usingDeclarations.Any(x => ancestors.Contains(x.Declaration));
         }
 
         private static IEnumerable<SyntaxNode> GetDescendantNodes(INamedTypeSymbol namedType, SyntaxNode typeDeclaration) =>
@@ -264,7 +270,7 @@ namespace SonarAnalyzer.Rules.CSharp
             && semanticModel.GetTypeInfo(expression).Type is var type
             && type.IsAny(TrackedTypes)
             && semanticModel.GetSymbolInfo(expression).Symbol is IMethodSymbol constructor
-            && !constructor.Parameters.Any(x => x.Type.Implements(KnownType.System_IDisposable) || x.Type.Implements(KnownType.System_IAsyncDisposable));
+            && !constructor.Parameters.Any(x => x.Type.ImplementsAny(DisposableTypes));
 
         private static bool IsDisposableRefStructCreation(ExpressionSyntax expression, SemanticModel semanticModel) =>
             expression.IsAnyKind(SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression)
