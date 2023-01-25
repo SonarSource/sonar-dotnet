@@ -28,12 +28,11 @@ namespace SonarAnalyzer.UnitTest.Rules;
 public class CommentsShouldNotBeEmptyTest
 {
     private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.CommentsShouldNotBeEmpty>();
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.CommentsShouldNotBeEmpty>();
 
     [TestMethod]
     public void CommentsShouldNotBeEmpty_CS() =>
         builderCS.AddPaths("CommentsShouldNotBeEmpty.cs").Verify();
-
-    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.CommentsShouldNotBeEmpty>();    // FIXME: Move this up
 
     [TestMethod]
     public void CommentsShouldNotBeEmpty_VB() =>

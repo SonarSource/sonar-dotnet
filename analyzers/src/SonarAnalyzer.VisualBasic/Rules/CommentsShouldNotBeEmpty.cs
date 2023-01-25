@@ -23,17 +23,22 @@ namespace SonarAnalyzer.Rules.VisualBasic;
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
 public sealed class CommentsShouldNotBeEmpty : CommentsShouldNotBeEmptyBase<SyntaxKind>
 {
-
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-    protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(c =>
+    protected override void CheckTrivia(IEnumerable<SyntaxTrivia> trivia)
+    {
+        // FIXME
+        foreach (var trivium in trivia)
+        {
+            switch (trivium.Kind())
             {
-                var node = c.Node;
-                if (true)
-                {
-                    c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
-                }
-            },
-            SyntaxKind.InvocationExpression);
+                case SyntaxKind.CommentTrivia:                              // usecase: '
+                    var x = 1;
+                    break;
+                case SyntaxKind.DocumentationCommentTrivia:                 // usecase: '''
+                default:
+                    break;
+            }
+        }
+    }
 }

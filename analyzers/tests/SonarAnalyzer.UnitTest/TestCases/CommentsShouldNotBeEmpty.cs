@@ -1,5 +1,9 @@
 ﻿using System;
 
-public class Program
+// 
+//
+// a
+// 
+public class SingleLineComment
 {
 }

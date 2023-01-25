@@ -18,22 +18,41 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis.CSharp;
+
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class CommentsShouldNotBeEmpty : CommentsShouldNotBeEmptyBase<SyntaxKind>
 {
-
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-    protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(c =>
+    protected override void CheckTrivia(IEnumerable<SyntaxTrivia> trivia)
+    {
+        foreach (var trivium in trivia)
+        {
+            switch (trivium.Kind())
             {
-                var node = c.Node;
-                if (true)
-                {
-                    c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
-                }
-            },
-            SyntaxKind.InvocationExpression);
+                case SyntaxKind.SingleLineCommentTrivia:                // usecase: //
+                    var vv1 = trivium.ToFullString();
+                    break;
+                case SyntaxKind.MultiLineCommentTrivia:                 // usecase: /* [many lines...] */
+                    var vv2 = trivium.ToFullString();
+                    break;
+                case SyntaxKind.SingleLineDocumentationCommentTrivia:   // usecase: ///
+                    var vv3 = trivium.ToFullString();
+                    break;
+                case SyntaxKind.MultiLineDocumentationCommentTrivia:    // usecase: /**
+                    var vv4 = trivium.ToFullString();
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    void DoWork()
+    {
+
+    }
 }
