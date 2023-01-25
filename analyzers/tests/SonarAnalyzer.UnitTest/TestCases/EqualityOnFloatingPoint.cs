@@ -4,10 +4,9 @@ using System.Runtime.Versioning;
 
 public class EqualityOnFloatingPoint
 {
-    void Test(float f, double d1, double d2)
+    void Test(float f, double d1, double d2, dynamic dyn)
     {
-        dynamic din = null;
-        if (din == null) { }
+        if (dyn == 3.14) { }        // FN. {{Do not check floating point equality with exact values, use a range instead.}}
         if (f == 3.14F) { }         // Noncompliant {{Do not check floating point equality with exact values, use a range instead.}}
         //    ^^
         if (f != 3.14F) { }         // Noncompliant {{Do not check floating point inequality with exact values, use a range instead.}}
@@ -43,73 +42,61 @@ public class ReportSpecificMessage_NaN
 {
     public void WithDoubleEquality(int iPar, double dPar, float fPar)
     {
-        bool b;
         double d = 1.0;
 
         if (d == double.NaN) { }      // Noncompliant {{Do not check floating point equality with exact values, use 'double.IsNaN()' instead.}}
-        b = d == double.NaN;          // Noncompliant {{Do not check floating point equality with exact values, use 'double.IsNaN()' instead.}}
-        b = double.NaN == d;          // Noncompliant {{Do not check floating point equality with exact values, use 'double.IsNaN()' instead.}}
-        b = double.NaN == double.NaN; // Noncompliant {{Do not check floating point equality with exact values, use 'double.IsNaN()' instead.}}
-        b = iPar == double.NaN;       // Noncompliant {{Do not check floating point equality with exact values, use 'double.IsNaN()' instead.}}
-        b = dPar == double.NaN;       // Noncompliant {{Do not check floating point equality with exact values, use 'double.IsNaN()' instead.}}
-        b = fPar == double.NaN;       // Noncompliant {{Do not check floating point equality with exact values, use 'double.IsNaN()' instead.}}
-        b = float.NaN == double.NaN;  // Noncompliant {{Do not check floating point equality with exact values, use 'double.IsNaN()' instead.}}
-
-        // Wrong message: should be "use double.IsNaN()" instead
-        b = double.NaN == float.NaN;  // Noncompliant {{Do not check floating point equality with exact values, use 'float.IsNaN()' instead.}}
+        _ = d == double.NaN;          // Noncompliant {{Do not check floating point equality with exact values, use 'double.IsNaN()' instead.}}
+        _ = double.NaN == d;          // Noncompliant {{Do not check floating point equality with exact values, use 'double.IsNaN()' instead.}}
+        _ = double.NaN == double.NaN; // Noncompliant {{Do not check floating point equality with exact values, use 'double.IsNaN()' instead.}}
+        _ = iPar == double.NaN;       // Noncompliant {{Do not check floating point equality with exact values, use 'double.IsNaN()' instead.}}
+        _ = dPar == double.NaN;       // Noncompliant {{Do not check floating point equality with exact values, use 'double.IsNaN()' instead.}}
+        _ = fPar == double.NaN;       // Noncompliant {{Do not check floating point equality with exact values, use 'double.IsNaN()' instead.}}
+        _ = float.NaN == double.NaN;  // Noncompliant {{Do not check floating point equality with exact values, use 'double.IsNaN()' instead.}}
+        _ = double.NaN == float.NaN;  // Noncompliant {{Do not check floating point equality with exact values, use 'double.IsNaN()' instead.}}
     }
 
     public void WithDoubleInequality(int iPar, double dPar, float fPar)
     {
-        bool b;
         double d = 1.0;
 
         if (d != double.NaN) { }      // Noncompliant {{Do not check floating point inequality with exact values, use 'double.IsNaN()' instead.}}
-        b = d != double.NaN;          // Noncompliant {{Do not check floating point inequality with exact values, use 'double.IsNaN()' instead.}}
-        b = double.NaN != d;          // Noncompliant {{Do not check floating point inequality with exact values, use 'double.IsNaN()' instead.}}
-        b = double.NaN != double.NaN; // Noncompliant {{Do not check floating point inequality with exact values, use 'double.IsNaN()' instead.}}
-        b = iPar != double.NaN;       // Noncompliant {{Do not check floating point inequality with exact values, use 'double.IsNaN()' instead.}}
-        b = dPar != double.NaN;       // Noncompliant {{Do not check floating point inequality with exact values, use 'double.IsNaN()' instead.}}
-        b = fPar != double.NaN;       // Noncompliant {{Do not check floating point inequality with exact values, use 'double.IsNaN()' instead.}}
-        b = float.NaN != double.NaN;  // Noncompliant {{Do not check floating point inequality with exact values, use 'double.IsNaN()' instead.}}
-
-        // Wrong message: should be "use double.IsNaN()" instead
-        b = double.NaN != float.NaN;  // Noncompliant {{Do not check floating point inequality with exact values, use 'float.IsNaN()' instead.}}
+        _ = d != double.NaN;          // Noncompliant {{Do not check floating point inequality with exact values, use 'double.IsNaN()' instead.}}
+        _ = double.NaN != d;          // Noncompliant {{Do not check floating point inequality with exact values, use 'double.IsNaN()' instead.}}
+        _ = double.NaN != double.NaN; // Noncompliant {{Do not check floating point inequality with exact values, use 'double.IsNaN()' instead.}}
+        _ = iPar != double.NaN;       // Noncompliant {{Do not check floating point inequality with exact values, use 'double.IsNaN()' instead.}}
+        _ = dPar != double.NaN;       // Noncompliant {{Do not check floating point inequality with exact values, use 'double.IsNaN()' instead.}}
+        _ = fPar != double.NaN;       // Noncompliant {{Do not check floating point inequality with exact values, use 'double.IsNaN()' instead.}}
+        _ = float.NaN != double.NaN;  // Noncompliant {{Do not check floating point inequality with exact values, use 'double.IsNaN()' instead.}}
+        _ = double.NaN != float.NaN;  // Noncompliant {{Do not check floating point inequality with exact values, use 'double.IsNaN()' instead.}}
     }
 
     public void WithFloat(int iPar, float fPar)
     {
-        bool b;
         float f = 1.0f;
-
-        b = f == float.NaN;    // Noncompliant {{Do not check floating point equality with exact values, use 'float.IsNaN()' instead.}}
-        b = f != float.NaN;    // Noncompliant {{Do not check floating point inequality with exact values, use 'float.IsNaN()' instead.}}
-        b = iPar == float.NaN; // Noncompliant {{Do not check floating point equality with exact values, use 'float.IsNaN()' instead.}}
-        b = fPar == float.NaN; // Noncompliant {{Do not check floating point equality with exact values, use 'float.IsNaN()' instead.}}
-        b = iPar != float.NaN; // Noncompliant {{Do not check floating point inequality with exact values, use 'float.IsNaN()' instead.}}
-        b = fPar != float.NaN; // Noncompliant {{Do not check floating point inequality with exact values, use 'float.IsNaN()' instead.}}
+        _ = f == float.NaN;    // Noncompliant {{Do not check floating point equality with exact values, use 'float.IsNaN()' instead.}}
+        _ = f != float.NaN;    // Noncompliant {{Do not check floating point inequality with exact values, use 'float.IsNaN()' instead.}}
+        _ = iPar == float.NaN; // Noncompliant {{Do not check floating point equality with exact values, use 'float.IsNaN()' instead.}}
+        _ = fPar == float.NaN; // Noncompliant {{Do not check floating point equality with exact values, use 'float.IsNaN()' instead.}}
+        _ = iPar != float.NaN; // Noncompliant {{Do not check floating point inequality with exact values, use 'float.IsNaN()' instead.}}
+        _ = fPar != float.NaN; // Noncompliant {{Do not check floating point inequality with exact values, use 'float.IsNaN()' instead.}}
     }
 
     public void WithDoublePascalCase()
     {
-        bool b;
         Double d = 1.0;
-
-        b = d == Double.NaN;        // Noncompliant {{Do not check floating point equality with exact values, use 'double.IsNaN()' instead.}}
-        b = d == System.Double.NaN; // Noncompliant {{Do not check floating point equality with exact values, use 'double.IsNaN()' instead.}}
-        b = d != Double.NaN;        // Noncompliant {{Do not check floating point inequality with exact values, use 'double.IsNaN()' instead.}}
-        b = d != System.Double.NaN; // Noncompliant {{Do not check floating point inequality with exact values, use 'double.IsNaN()' instead.}}
+        _ = d == Double.NaN;        // Noncompliant {{Do not check floating point equality with exact values, use 'double.IsNaN()' instead.}}
+        _ = d == System.Double.NaN; // Noncompliant {{Do not check floating point equality with exact values, use 'double.IsNaN()' instead.}}
+        _ = d != Double.NaN;        // Noncompliant {{Do not check floating point inequality with exact values, use 'double.IsNaN()' instead.}}
+        _ = d != System.Double.NaN; // Noncompliant {{Do not check floating point inequality with exact values, use 'double.IsNaN()' instead.}}
     }
 
     public void WithSingle()
     {
-        bool b;
         Single f = 3.14159f;
-
-        b = f == Single.NaN;         // Noncompliant {{Do not check floating point equality with exact values, use 'float.IsNaN()' instead.}}
-        b = f == System.Single.NaN;  // Noncompliant {{Do not check floating point equality with exact values, use 'float.IsNaN()' instead.}}
-        b = f != Single.NaN;         // Noncompliant {{Do not check floating point inequality with exact values, use 'float.IsNaN()' instead.}}
-        b = f != System.Single.NaN;  // Noncompliant {{Do not check floating point inequality with exact values, use 'float.IsNaN()' instead.}}
+        _ = f == Single.NaN;         // Noncompliant {{Do not check floating point equality with exact values, use 'float.IsNaN()' instead.}}
+        _ = f == System.Single.NaN;  // Noncompliant {{Do not check floating point equality with exact values, use 'float.IsNaN()' instead.}}
+        _ = f != Single.NaN;         // Noncompliant {{Do not check floating point inequality with exact values, use 'float.IsNaN()' instead.}}
+        _ = f != System.Single.NaN;  // Noncompliant {{Do not check floating point inequality with exact values, use 'float.IsNaN()' instead.}}
     }
 }
 
@@ -117,17 +104,36 @@ namespace TestsWithTypeAliases
 {
     using DoubleAlias = Double;
 
-    public class ReportSpecificMessage_WithAliases
+    public class ReportSpecificMessage
     {
         public void WithDoubleAlias()
         {
-            bool b;
-            DoubleAlias d1 = 1.674927471E-27;
+            DoubleAlias d = 1.674927471E-27;
+            _ = d == DoubleAlias.NaN;     // Noncompliant {{Do not check floating point equality with exact values, use 'DoubleAlias.IsNaN()' instead.}}
+            if (d == double.NaN) { }      // Noncompliant {{Do not check floating point equality with exact values, use 'DoubleAlias.IsNaN()' instead.}}
+        }
+    }
+}
 
-            b = d1 == DoubleAlias.NaN;    // Noncompliant {{Do not check floating point equality with exact values, use 'DoubleAlias.IsNaN()' instead.}}
+namespace TestWithUsingStatic
+{
+    using static System.Double;
 
-            double d2 = 1.674927471E-27;
-            if (d2 == double.NaN) { }     // Noncompliant {{Do not check floating point equality with exact values, use 'DoubleAlias.IsNaN()' instead.}}
+    public class ReportSpecificMessage
+    {
+        public void WithUsingStatic(double d)
+        {
+            _ = d == NaN;          // Noncompliant {{Do not check floating point equality with exact values, use 'IsNaN()' instead.}}
+            _ = NaN == d;          // Noncompliant {{Do not check floating point equality with exact values, use 'IsNaN()' instead.}}
+            _ = NaN == NaN;        // Noncompliant {{Do not check floating point equality with exact values, use 'IsNaN()' instead.}}
+            _ = NaN == float.NaN;  // Noncompliant {{Do not check floating point equality with exact values, use 'double.IsNaN()' instead.}}
+            _ = double.NaN == NaN; // Noncompliant {{Do not check floating point equality with exact values, use 'double.IsNaN()' instead.}}
+        }
+
+        public void WithLocalVar(double d)
+        {
+            var NaN = 5;
+            _ = d == NaN;   // Noncompliant {{Do not check floating point equality with exact values, use a range instead.}}
         }
     }
 }

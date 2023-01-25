@@ -4,22 +4,23 @@ using System.Runtime.InteropServices;
 
 public class EqualityOnFloatingPoint
 {
-    void TestHalfNaN()
+    void HalfNaN(Half h)
     {
-        bool b;
-        var h = Half.NaN;
-
-        b = h == Half.NaN; // Noncompliant {{Do not check floating point equality with exact values, use 'Half.IsNaN()' instead.}}
+        _ = h == Half.NaN; // Noncompliant {{Do not check floating point equality with exact values, use 'Half.IsNaN()' instead.}}
         //    ^^
+        h = Half.NaN;      // Compliant, not a comparison
     }
 
-    void TestNFloatNaN()
+    void NFloatNaN(NFloat nf)
     {
-        bool b;
-        var nf = System.Runtime.InteropServices.NFloat.NaN;
+        _ = nf == System.Runtime.InteropServices.NFloat.NaN; // Noncompliant {{Do not check floating point equality with exact values, use 'NFloat.IsNaN()' instead.}}
+        _ = nf == NFloat.NaN;                                // Noncompliant {{Do not check floating point equality with exact values, use 'NFloat.IsNaN()' instead.}}
+    }
 
-        b = nf == System.Runtime.InteropServices.NFloat.NaN; // Noncompliant {{Do not check floating point equality with exact values, use 'NFloat.IsNaN()' instead.}}
-        b = nf == NFloat.NaN;                                // Noncompliant {{Do not check floating point equality with exact values, use 'NFloat.IsNaN()' instead.}}
+    public void M<T>(T t) where T : IFloatingPointIeee754<T>
+    {
+        if (t == T.NaN) { } // Noncompliant {{Do not check floating point equality with exact values, use 'T.IsNaN()' instead.}}
+        if (T.IsNaN(t)) { } // Compliant
     }
 
     bool HalfEqual(Half first, Half second)
