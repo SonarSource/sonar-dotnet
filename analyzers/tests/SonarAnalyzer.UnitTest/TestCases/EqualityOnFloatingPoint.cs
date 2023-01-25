@@ -100,6 +100,37 @@ public class ReportSpecificMessage_NaN
     }
 }
 
+public class ReportSpecificMessage_Infinities
+{
+    public void WithDouble(double d)
+    {
+        _ = d == double.PositiveInfinity; // Noncompliant {{Do not check floating point equality with exact values, use 'double.IsPositiveInfinity()' instead.}}
+        _ = double.PositiveInfinity != d; // Noncompliant {{Do not check floating point inequality with exact values, use 'double.IsPositiveInfinity()' instead.}}
+        _ = d == double.NegativeInfinity; // Noncompliant {{Do not check floating point equality with exact values, use 'double.IsNegativeInfinity()' instead.}}
+        _ = double.NegativeInfinity != d; // Noncompliant {{Do not check floating point inequality with exact values, use 'double.IsNegativeInfinity()' instead.}}
+    }
+
+    public void WithFloat(float f)
+    {
+        _ = f == float.PositiveInfinity; // Noncompliant {{Do not check floating point equality with exact values, use 'float.IsPositiveInfinity()' instead.}}
+        _ = float.PositiveInfinity != f; // Noncompliant {{Do not check floating point inequality with exact values, use 'float.IsPositiveInfinity()' instead.}}
+        _ = f == float.NegativeInfinity; // Noncompliant {{Do not check floating point equality with exact values, use 'float.IsNegativeInfinity()' instead.}}
+        _ = float.NegativeInfinity != f; // Noncompliant {{Do not check floating point inequality with exact values, use 'float.IsNegativeInfinity()' instead.}}
+    }
+
+    public void WithDoublePascalCase(Double d)
+    {
+        _ = Double.PositiveInfinity == d;        // Noncompliant {{Do not check floating point equality with exact values, use 'double.IsPositiveInfinity()' instead.}}
+        _ = d == System.Double.NegativeInfinity; // Noncompliant {{Do not check floating point equality with exact values, use 'double.IsNegativeInfinity()' instead.}}
+    }
+
+    public void WithSingle(Single f)
+    {
+        _ = Single.PositiveInfinity == f;        // Noncompliant {{Do not check floating point equality with exact values, use 'float.IsPositiveInfinity()' instead.}}
+        _ = f == System.Single.NegativeInfinity; // Noncompliant {{Do not check floating point equality with exact values, use 'float.IsNegativeInfinity()' instead.}}
+    }
+}
+
 namespace TestsWithTypeAliases
 {
     using DoubleAlias = Double;

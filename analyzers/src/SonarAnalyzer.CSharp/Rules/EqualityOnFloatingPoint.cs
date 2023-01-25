@@ -30,6 +30,8 @@ public sealed class EqualityOnFloatingPoint : SonarDiagnosticAnalyzer
     private static readonly Dictionary<string, string> SpecialMembers = new()
     {
         { nameof(double.NaN), nameof(double.IsNaN) },
+        { nameof(double.PositiveInfinity), nameof(double.IsPositiveInfinity) },
+        { nameof(double.NegativeInfinity), nameof(double.IsNegativeInfinity) },
     };
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
@@ -83,6 +85,11 @@ public sealed class EqualityOnFloatingPoint : SonarDiagnosticAnalyzer
         }
     }
 
+    // Only checks for type and member accessed. No need to check that proposedMethod exists in type because:
+    // - both special members and corresponding `IsXXX()` methods exist in double and float since .NET 1.1
+    // - both special members and corresponding `IsXXX()` methods exist in Half since its introduction, in .NET 5
+    // - while NFloat has been introduced in .NET 6, special members and corresponding IsXXX() methods have been introduced at the same time, in .NET 7
+    // - no other floating point typeswith prevision issues exist before .NET 7, and any new type after has to conform to `IFloatingPointIeee754`
     private static string ProposedMessageForMemberAccess(SonarSyntaxNodeReportingContext context, ExpressionSyntax expression) =>
         expression is MemberAccessExpressionSyntax memberAccess
         && SpecialMembers.TryGetValue(memberAccess.GetName(), out var proposedMethod)
