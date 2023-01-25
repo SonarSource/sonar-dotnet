@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3878",
+"message":  "Arrays should not be created for params parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  633,
+"startColumn":  35,
+"endLine":  645,
+"endColumn":  18
+}
+}
+}
+]
+}

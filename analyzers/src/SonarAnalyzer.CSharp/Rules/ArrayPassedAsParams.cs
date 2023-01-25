@@ -33,7 +33,8 @@ public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, In
         && CheckArrayCreation(array);
 
     protected override bool ShouldReportCreation(ObjectCreationExpressionSyntax creation) =>
-        creation.ArgumentList.Arguments.Count > 0
+        creation.ArgumentList is not null
+        && creation.ArgumentList.Arguments.Count > 0
         && creation.ArgumentList.Arguments.Last().Expression is ArrayCreationExpressionSyntax array
         && CheckArrayCreation(array);
 

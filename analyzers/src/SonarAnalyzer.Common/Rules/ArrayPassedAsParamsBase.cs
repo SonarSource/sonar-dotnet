@@ -52,7 +52,7 @@ public abstract class ArrayPassedAsParamsBase<TSyntaxKind, TInvocationExpression
 
     private void CheckInvocation(SonarSyntaxNodeReportingContext context)
     {
-        if ((TInvocationExpressionSyntax)context.Node is var invocation
+        if (context.Node is TInvocationExpressionSyntax invocation
             && ShouldReportInvocation(invocation)
             && context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol invokedMethodSymbol
             && invokedMethodSymbol.Parameters.Any()
@@ -64,7 +64,7 @@ public abstract class ArrayPassedAsParamsBase<TSyntaxKind, TInvocationExpression
 
     private void CheckObjectCreation(SonarSyntaxNodeReportingContext context)
     {
-        if ((TObjectCreationExpressionSyntax)context.Node is var creation
+        if (context.Node is TObjectCreationExpressionSyntax creation
             && ShouldReportCreation(creation)
             && context.SemanticModel.GetSymbolInfo(creation).Symbol is IMethodSymbol invokedMethodSymbol
             && invokedMethodSymbol.Parameters.Any()
