@@ -18,11 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Xml.Linq;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+
 namespace SonarAnalyzer.Rules;
 
-public abstract class ArrayPassedAsParamsBase<TSyntaxKind, TInvocationExpressionSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
+public abstract class ArrayPassedAsParamsBase<TSyntaxKind, TInvocationExpressionSyntax, TObjectCreationExpressionSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
     where TSyntaxKind : struct
     where TInvocationExpressionSyntax : SyntaxNode
+    where TObjectCreationExpressionSyntax : SyntaxNode
 {
     private const string DiagnosticId = "S3878";
 
@@ -30,26 +34,43 @@ public abstract class ArrayPassedAsParamsBase<TSyntaxKind, TInvocationExpression
 
     private readonly DiagnosticDescriptor rule;
     protected abstract string ParameterKeyword { get; }
-    protected abstract bool ShouldReport(TInvocationExpressionSyntax invocation);
-    protected abstract Location GetLocation(TInvocationExpressionSyntax context);
+    protected abstract bool ShouldReportInvocation(TInvocationExpressionSyntax invocation);
+    protected abstract bool ShouldReportCreation(TObjectCreationExpressionSyntax creation);
+    protected abstract Location GetInvocationLocation(TInvocationExpressionSyntax context);
+    protected abstract Location GetCreationLocation(TObjectCreationExpressionSyntax context);
 
     protected ArrayPassedAsParamsBase() : base(DiagnosticId)
     {
         rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
     }
 
-    protected sealed override void Initialize(SonarAnalysisContext context) =>
+    protected sealed override void Initialize(SonarAnalysisContext context)
+    {
         context.RegisterNodeAction(Language.GeneratedCodeRecognizer, CheckInvocation, Language.SyntaxKind.InvocationExpression);
+        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, CheckObjectCreation, Language.SyntaxKind.ObjectCreationExpressions);
+    }
 
     private void CheckInvocation(SonarSyntaxNodeReportingContext context)
     {
         if ((TInvocationExpressionSyntax)context.Node is var invocation
-            && ShouldReport(invocation)
+            && ShouldReportInvocation(invocation)
             && context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol invokedMethodSymbol
             && invokedMethodSymbol.Parameters.Any()
             && invokedMethodSymbol.Parameters.Last().IsParams) // params keyword should be only one and no additional parameters are permitted after that.
         {
-            context.ReportIssue(Diagnostic.Create(rule, GetLocation(invocation), ParameterKeyword));
+            context.ReportIssue(Diagnostic.Create(rule, GetInvocationLocation(invocation), ParameterKeyword));
+        }
+    }
+
+    private void CheckObjectCreation(SonarSyntaxNodeReportingContext context)
+    {
+        if ((TObjectCreationExpressionSyntax)context.Node is var creation
+            && ShouldReportCreation(creation)
+            && context.SemanticModel.GetSymbolInfo(creation).Symbol is IMethodSymbol invokedMethodSymbol
+            && invokedMethodSymbol.Parameters.Any()
+            && invokedMethodSymbol.Parameters.Last().IsParams) // params keyword should be only one and no additional parameters are permitted after that.
+        {
+            context.ReportIssue(Diagnostic.Create(rule, GetCreationLocation(creation), ParameterKeyword));
         }
     }
 }

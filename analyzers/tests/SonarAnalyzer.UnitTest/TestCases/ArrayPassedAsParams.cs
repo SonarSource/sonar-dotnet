@@ -28,8 +28,12 @@ public class Program
         Method4(new [] { "s1" });   // Compliant
         Method4(new [] { "s1", "s2" }); // Compliant
 
-        Method2(args: new string[] { "s1", "s2" }, a: 1); // Noncompliant
-        Method3(args: new string[12], a: new string[] { "s1", "s2" }) // Compliant
+        Method2(args: new string[] { "s1", "s2" }, a: 1); // FN
+        Method3(args: new string[12], a: new string[] { "s1", "s2" }); // Noncompliant FP
+
+        var s = new MyClass(1, new int[] { 2, 3 }); // Noncompliant
+//                             ^^^^^^^^^^^^^^^^^^
+        var s1 = new MyClass(1, 2, 3); // Compliant
     }
 
     public void Method(params string[] args) { }
@@ -41,4 +45,9 @@ public class Program
     public void Method4(object[] a, params object[] args) { }
 
     public void Method5(params string[] a, params string[] args) { } // Error [CS0231]
+}
+
+public class MyClass
+{
+    public MyClass(int a, params int[] args) { }
 }

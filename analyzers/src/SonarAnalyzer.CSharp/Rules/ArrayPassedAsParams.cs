@@ -21,18 +21,29 @@
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, InvocationExpressionSyntax>
+public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, InvocationExpressionSyntax, ObjectCreationExpressionSyntax>
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
     protected override string ParameterKeyword => "params";
     protected override string MessageFormat => MessageBase;
 
-    protected override bool ShouldReport(InvocationExpressionSyntax invocation) =>
+    protected override bool ShouldReportInvocation(InvocationExpressionSyntax invocation) =>
         invocation.ArgumentList.Arguments.Count > 0
         && invocation.ArgumentList.Arguments.Last().Expression is ArrayCreationExpressionSyntax array
-        && array.Initializer is InitializerExpressionSyntax initializer
-        && initializer.Expressions.Count > 0;
+        && CheckArrayCreation(array);
 
-    protected override Location GetLocation(InvocationExpressionSyntax invocation) =>
+    protected override bool ShouldReportCreation(ObjectCreationExpressionSyntax creation) =>
+        creation.ArgumentList.Arguments.Count > 0
+        && creation.ArgumentList.Arguments.Last().Expression is ArrayCreationExpressionSyntax array
+        && CheckArrayCreation(array);
+
+    protected override Location GetInvocationLocation(InvocationExpressionSyntax invocation) =>
         invocation.ArgumentList.Arguments.Last().Expression.GetLocation();
+
+    protected override Location GetCreationLocation(ObjectCreationExpressionSyntax creation) =>
+        creation.ArgumentList.Arguments.Last().Expression.GetLocation();
+
+    private bool CheckArrayCreation(ArrayCreationExpressionSyntax array) =>
+        array.Initializer is InitializerExpressionSyntax initializer
+        && initializer.Expressions.Count > 0;
 }
