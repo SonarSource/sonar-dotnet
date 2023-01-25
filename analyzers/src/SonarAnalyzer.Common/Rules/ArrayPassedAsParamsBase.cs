@@ -18,9 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Xml.Linq;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-
 namespace SonarAnalyzer.Rules;
 
 public abstract class ArrayPassedAsParamsBase<TSyntaxKind, TInvocationExpressionSyntax, TObjectCreationExpressionSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>

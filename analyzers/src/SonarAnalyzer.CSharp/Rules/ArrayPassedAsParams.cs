@@ -44,7 +44,7 @@ public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, In
     protected override Location GetCreationLocation(ObjectCreationExpressionSyntax creation) =>
         creation.ArgumentList.Arguments.Last().Expression.GetLocation();
 
-    private bool CheckArrayCreation(ArrayCreationExpressionSyntax array) =>
+    private static bool CheckArrayCreation(ArrayCreationExpressionSyntax array) =>
         array.Initializer is InitializerExpressionSyntax initializer
         && initializer.Expressions.Count > 0;
 }
