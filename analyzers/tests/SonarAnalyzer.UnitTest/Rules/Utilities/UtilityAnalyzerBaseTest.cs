@@ -21,6 +21,7 @@
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.CodeAnalysis.VisualBasic;
+using Moq;
 using SonarAnalyzer.AnalysisContext;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
@@ -135,15 +136,8 @@ namespace SonarAnalyzer.UnitTest.Rules.Utilities
                     LanguageNames.VisualBasic => VisualBasicCompilation.Create(null),
                     _ => throw new InvalidOperationException($"Unexpected {nameof(language)}: {language}")
                 };
-                var analyzerOptions = new AnalyzerOptions(additionalFiles);
-                var config = analyzerOptions.SonarProjectConfig() is { } sonarProjectConfig ? new ProjectConfigReader(sonarProjectConfig.GetText()) : ProjectConfigReader.Empty;
-                var isTestProject = config.ProjectType switch
-                {
-                    ProjectType.Unknown => compilation.IsTest(),
-                    ProjectType.Test => true,
-                    _ => false
-                };
-                ReadParameters(analyzerOptions, config.OutPath, language, isTestProject);
+                var context = new Mock<CompilationStartAnalysisContext>(compilation, new AnalyzerOptions(additionalFiles), default).Object;
+                ReadParameters(new SonarCompilationStartAnalysisContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context));
             }
 
             protected override void Initialize(SonarAnalysisContext context) =>

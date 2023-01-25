@@ -50,21 +50,23 @@ namespace SonarAnalyzer.Rules
                 EndOffset = lineSpan.EndLinePosition.Character
             };
 
-        protected void ReadParameters(AnalyzerOptions options, string outPath, string language, bool isTestProject)
+        protected void ReadParameters(SonarCompilationStartAnalysisContext context)
         {
-            var settings = options.ParseSonarLintXmlSettings();
+            var settings = context.Options.ParseSonarLintXmlSettings();
+            var outPath = context.ProjectConfiguration().OutPath;
             // For backward compatibility with S4MSB <= 5.0
-            if (outPath == null && options.ProjectOutFolderPath() is { } projectOutFolderAdditionalFile)
+            if (outPath == null && context.Options.ProjectOutFolderPath() is { } projectOutFolderAdditionalFile)
             {
                 outPath = projectOutFolderAdditionalFile.GetText().ToString().TrimEnd();
             }
             if (settings.Any() && !string.IsNullOrEmpty(outPath))
             {
+                var language = context.Compilation.Language;
                 IgnoreHeaderComments = PropertiesHelper.ReadIgnoreHeaderCommentsProperty(settings, language);
                 AnalyzeGeneratedCode = PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(settings, language);
                 OutPath = Path.Combine(outPath, language == LanguageNames.CSharp ? "output-cs" : "output-vbnet");
                 IsAnalyzerEnabled = true;
-                IsTestProject = isTestProject;
+                IsTestProject = context.IsTestProject();
             }
         }
     }
@@ -88,7 +90,7 @@ namespace SonarAnalyzer.Rules
         protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterCompilationStartAction(startContext =>
             {
-                ReadParameters(startContext.Options, startContext.ProjectConfiguration().OutPath, startContext.Compilation.Language, startContext.IsTestProject());
+                ReadParameters(startContext);
                 if (!IsAnalyzerEnabled)
                 {
                     return;
