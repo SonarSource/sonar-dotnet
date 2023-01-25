@@ -34,20 +34,16 @@ public sealed class CommentsShouldNotBeEmpty : CommentsShouldNotBeEmptyBase<Synt
             switch (trivium.Kind())
             {
                 case SyntaxKind.SingleLineCommentTrivia:
-                    var vv1 = trivium.ToFullString().Trim();
-                    if (string.CompareOrdinal(vv1, "//") == 0)
-                    {
-                        context.ReportIssue(Diagnostic.Create(Rule, trivium.GetLocation()));
-                    }
+                    CheckSingleLineTrivia(context, trivium);
                     break;
                 case SyntaxKind.MultiLineCommentTrivia:                 // usecase: /* [many lines...] */
-                    var vv2 = trivium.ToFullString();
+                    CheckMultiLineTrivia(context, trivium);
                     break;
-                case SyntaxKind.SingleLineDocumentationCommentTrivia:   // usecase: ///
-                    var vv3 = trivium.ToFullString();
+                case SyntaxKind.SingleLineDocumentationCommentTrivia:
+                    CheckSingleLineDocumentationTrivia(context, trivium);
                     break;
                 case SyntaxKind.MultiLineDocumentationCommentTrivia:    // usecase: /**
-                    var vv4 = trivium.ToFullString();
+                    CheckMultiLineDocumentationTrivia(context, trivium);
                     break;
                 default:
                     break;
@@ -55,7 +51,33 @@ public sealed class CommentsShouldNotBeEmpty : CommentsShouldNotBeEmptyBase<Synt
         }
     }
 
-    void DoWork()
+    private void CheckSingleLineTrivia(SonarSyntaxTreeReportingContext context, SyntaxTrivia trivium)
+    {
+        if (string.CompareOrdinal(trivium.ToFullString().Trim(), "//") == 0)
+        {
+            context.ReportIssue(Diagnostic.Create(Rule, trivium.GetLocation()));
+        }
+    }
+
+    private void CheckMultiLineTrivia(SonarSyntaxTreeReportingContext context, SyntaxTrivia trivium)
+    {
+
+    }
+
+    private void CheckSingleLineDocumentationTrivia(SonarSyntaxTreeReportingContext context, SyntaxTrivia trivium)
+    {
+        var lines = trivium.ToFullString().Split(MetricsBase.LineTerminators, StringSplitOptions.None);
+        foreach (var line in lines.Take(lines.Length - 1)) // last entry is empty string after newline
+        {
+            if (string.CompareOrdinal(line.Trim(), "///") != 0)
+            {
+                return;
+            }
+        }
+        context.ReportIssue(Diagnostic.Create(Rule, trivium.GetLocation()));
+    }
+
+    private void CheckMultiLineDocumentationTrivia(SonarSyntaxTreeReportingContext context, SyntaxTrivia trivium)
     {
 
     }
