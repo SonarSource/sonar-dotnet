@@ -97,7 +97,6 @@ namespace SonarAnalyzer.Rules
                 }
 
                 List<TMessage> treeMessages = new();
-
                 startContext.RegisterSemanticModelAction(modelContext =>
                 {
                     if (ShouldGenerateMetrics(modelContext))
@@ -130,7 +129,7 @@ namespace SonarAnalyzer.Rules
             && FileExtensionWhitelist.Contains(Path.GetExtension(tree.FilePath))
             && (AnalyzeGeneratedCode || !Language.GeneratedCodeRecognizer.IsGenerated(tree));
 
-        private bool ShouldGenerateMetrics(SonarSematicModelReportingContext context) =>
+        private bool ShouldGenerateMetrics<T>(SonarAnalysisContextBase<T> context) =>
             (AnalyzeUnchangedFiles || !context.IsUnchanged(context.Tree))
             && ShouldGenerateMetrics(context.Tree);
     }
