@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
+
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -27,10 +29,16 @@ public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, In
     protected override string ParameterKeyword => "params";
     protected override string MessageFormat => MessageBase;
 
-    protected override bool ShouldReportInvocation(InvocationExpressionSyntax invocation) =>
-        invocation.ArgumentList.Arguments.Count > 0
+    protected override bool ShouldReportInvocation(SonarSyntaxNodeReportingContext context, InvocationExpressionSyntax invocation)
+    {
+        var myLookup = new CSharpMethodParameterLookup(invocation, context.SemanticModel);
+
+        return invocation.ArgumentList.Arguments.Count > 0
         && invocation.ArgumentList.Arguments.Last().Expression is ArrayCreationExpressionSyntax array
-        && CheckArrayInitializer(array);
+        && CheckArrayInitializer(array)
+        && myLookup.TryGetSymbol(invocation.ArgumentList.Arguments.Last(), out var parameter)
+        && parameter.IsParams;
+    }
 
     protected override bool ShouldReportCreation(ObjectCreationExpressionSyntax creation) =>
         creation.ArgumentList is not null

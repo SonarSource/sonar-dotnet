@@ -27,11 +27,16 @@ public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, In
     protected override string ParameterKeyword => "ParamArray";
     protected override string MessageFormat => MessageBase;
 
-    protected override bool ShouldReportInvocation(InvocationExpressionSyntax invocation) =>
-        invocation.ArgumentList.Arguments.Count > 0
-        && invocation.ArgumentList.Arguments.Last().GetExpression() is ArrayCreationExpressionSyntax array
-        && CheckArrayInitializer(array);
+    protected override bool ShouldReportInvocation(SonarSyntaxNodeReportingContext context, InvocationExpressionSyntax invocation)
+    {
+        var myLookup = new VisualBasicMethodParameterLookup(invocation, context.SemanticModel);
 
+        return invocation.ArgumentList.Arguments.Count > 0
+        && invocation.ArgumentList.Arguments.Last().GetExpression() is ArrayCreationExpressionSyntax array
+        && CheckArrayInitializer(array)
+        && myLookup.TryGetSymbol(invocation.ArgumentList.Arguments.Last(), out var parameter)
+        && parameter.IsParams;
+    }
     protected override bool ShouldReportCreation(ObjectCreationExpressionSyntax creation) =>
         creation.ArgumentList is not null
         && creation.ArgumentList.Arguments.Count > 0

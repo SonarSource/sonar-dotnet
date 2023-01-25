@@ -22,6 +22,12 @@ Public Class Program
         Method3(New String() {"s1", "s2"}, New String() {"s1", "s2"}) ' Noncompliant
         '                                  ^^^^^^^^^^^^^^^^^^^^^^^^^
         Method3(Nothing, Nothing) ' Compliant
+
+        Dim s = New [MyClass](1, New Integer() {2, 3}) ' Noncompliant
+        '                        ^^^^^^^^^^^^^^^^^^^^
+        Dim s1 = New [MyClass](1, 2, 3) ' Compliant
+        s1 = New [MyClass](args:=New Integer() {2, 3}, a:=1) ' Error [BC30587]
+        Dim s2 = New MyOtherClass(args:=New Integer(11) {}, a:=New Integer() {2, 3}) ' Error [BC30587]
     End Sub
 
     Public Sub Method(ParamArray args As String())
@@ -42,5 +48,10 @@ End Class
 
 Public Class [MyClass]
     Public Sub New(ByVal a As Integer, ParamArray args As Integer())
+    End Sub
+End Class
+
+Public Class MyOtherClass
+    Public Sub New(ByVal a As Integer(), ParamArray args As Integer())
     End Sub
 End Class
