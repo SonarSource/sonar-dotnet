@@ -36,10 +36,8 @@ public abstract class ArrayPassedAsParamsBase<TSyntaxKind, TInvocationExpression
     protected abstract Location GetInvocationLocation(TInvocationExpressionSyntax context);
     protected abstract Location GetCreationLocation(TObjectCreationExpressionSyntax context);
 
-    protected ArrayPassedAsParamsBase() : base(DiagnosticId)
-    {
+    protected ArrayPassedAsParamsBase() : base(DiagnosticId) =>
         rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
-    }
 
     protected sealed override void Initialize(SonarAnalysisContext context)
     {
@@ -55,7 +53,7 @@ public abstract class ArrayPassedAsParamsBase<TSyntaxKind, TInvocationExpression
             && invokedMethodSymbol.Parameters.Any()
             && invokedMethodSymbol.Parameters.Last().IsParams) // params keyword should be only one and no additional parameters are permitted after that.
         {
-            context.ReportIssue(Diagnostic.Create(rule, GetInvocationLocation(invocation), ParameterKeyword));
+            Report(context, GetInvocationLocation(invocation));
         }
     }
 
@@ -67,7 +65,10 @@ public abstract class ArrayPassedAsParamsBase<TSyntaxKind, TInvocationExpression
             && invokedMethodSymbol.Parameters.Any()
             && invokedMethodSymbol.Parameters.Last().IsParams) // params keyword should be only one and no additional parameters are permitted after that.
         {
-            context.ReportIssue(Diagnostic.Create(rule, GetCreationLocation(creation), ParameterKeyword));
+            Report(context, GetCreationLocation(creation));
         }
     }
+
+    private void Report(SonarSyntaxNodeReportingContext context, Location location) =>
+        context.ReportIssue(Diagnostic.Create(rule, location, ParameterKeyword));
 }

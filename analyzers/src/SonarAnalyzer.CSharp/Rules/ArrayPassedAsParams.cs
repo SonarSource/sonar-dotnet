@@ -30,13 +30,13 @@ public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, In
     protected override bool ShouldReportInvocation(InvocationExpressionSyntax invocation) =>
         invocation.ArgumentList.Arguments.Count > 0
         && invocation.ArgumentList.Arguments.Last().Expression is ArrayCreationExpressionSyntax array
-        && CheckArrayCreation(array);
+        && CheckArrayInitializer(array);
 
     protected override bool ShouldReportCreation(ObjectCreationExpressionSyntax creation) =>
         creation.ArgumentList is not null
         && creation.ArgumentList.Arguments.Count > 0
         && creation.ArgumentList.Arguments.Last().Expression is ArrayCreationExpressionSyntax array
-        && CheckArrayCreation(array);
+        && CheckArrayInitializer(array);
 
     protected override Location GetInvocationLocation(InvocationExpressionSyntax invocation) =>
         invocation.ArgumentList.Arguments.Last().Expression.GetLocation();
@@ -44,7 +44,7 @@ public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, In
     protected override Location GetCreationLocation(ObjectCreationExpressionSyntax creation) =>
         creation.ArgumentList.Arguments.Last().Expression.GetLocation();
 
-    private static bool CheckArrayCreation(ArrayCreationExpressionSyntax array) =>
+    private static bool CheckArrayInitializer(ArrayCreationExpressionSyntax array) =>
         array.Initializer is InitializerExpressionSyntax initializer
         && initializer.Expressions.Count > 0;
 }
