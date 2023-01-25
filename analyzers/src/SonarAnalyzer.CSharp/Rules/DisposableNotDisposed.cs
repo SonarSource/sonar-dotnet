@@ -166,7 +166,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             return
                 usingStatements.Any(x => ancestors.Contains(x.Expression) || ancestors.Contains(x.Declaration))
-             || usingDeclarations.Any(x => ancestors.Contains(x.Declaration));
+                || usingDeclarations.Any(x => ancestors.Contains(x.Declaration));
         }
 
         private static IEnumerable<SyntaxNode> GetDescendantNodes(INamedTypeSymbol namedType, SyntaxNode typeDeclaration) =>
