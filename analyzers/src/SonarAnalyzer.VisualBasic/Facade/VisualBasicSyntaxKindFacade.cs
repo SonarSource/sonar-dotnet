@@ -25,6 +25,11 @@ internal sealed class VisualBasicSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind
     public SyntaxKind Attribute => SyntaxKind.Attribute;
     public SyntaxKind[] ClassAndRecordDeclaration => new[] { SyntaxKind.ClassBlock };
     public SyntaxKind ClassDeclaration => SyntaxKind.ClassBlock;
+    public SyntaxKind[] CommentTrivia => new[]
+    {
+        SyntaxKind.CommentTrivia,
+        SyntaxKind.DocumentationCommentTrivia,
+    };
     public SyntaxKind[] ComparisonKinds => new[]
     {
         SyntaxKind.GreaterThanExpression,

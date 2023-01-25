@@ -29,6 +29,13 @@ internal sealed class CSharpSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind>
         SyntaxKindEx.RecordClassDeclaration,
     };
     public SyntaxKind ClassDeclaration => SyntaxKind.ClassDeclaration;
+    public SyntaxKind[] CommentTrivia => new[]
+    {
+        SyntaxKind.SingleLineCommentTrivia,
+        SyntaxKind.MultiLineCommentTrivia,
+        SyntaxKind.SingleLineDocumentationCommentTrivia,
+        SyntaxKind.MultiLineDocumentationCommentTrivia,
+    };
     public SyntaxKind[] ComparisonKinds => new[]
     {
         SyntaxKind.GreaterThanExpression,
