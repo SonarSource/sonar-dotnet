@@ -96,7 +96,7 @@ namespace SonarAnalyzer.Rules
                     return;
                 }
 
-                List<TMessage> treeMessages = new();
+                var treeMessages = new List<TMessage>();
                 startContext.RegisterSemanticModelAction(modelContext =>
                 {
                     if (ShouldGenerateMetrics(modelContext))
