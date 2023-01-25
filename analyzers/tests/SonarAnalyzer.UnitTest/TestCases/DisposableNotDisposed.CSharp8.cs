@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
+using FluentAssertions.Execution;
 
 namespace Tests.Diagnostics
 {
@@ -50,12 +51,14 @@ namespace Tests.Diagnostics
                 // do nothing
             }
 
-            await using var fs7 = new FileStream(@"c:\foo.txt", FileMode.Open);
+            using var fs7 = new FileStream(@"c:\foo.txt", FileMode.Open);
 
-            await using var fs8 = File.Open(@"c:\foo.txt", FileMode.Open);
+            await using var fs8 = new FileStream(@"c:\foo.txt", FileMode.Open);
 
-            var fs9 = new FileStream(@"c:\foo.txt", FileMode.Open);                     // Compliant - asynchronously disposed manually
-            await fs9.DisposeAsync();
+            await using var fs9 = File.Open(@"c:\foo.txt", FileMode.Open);
+
+            var fs10 = new FileStream(@"c:\foo.txt", FileMode.Open);                     // Compliant - asynchronously disposed manually
+            await fs10.DisposeAsync();
         }
 
         public async Task SomePublicAsyncMethod()
@@ -82,11 +85,11 @@ namespace Tests.Diagnostics
         public ValueTask AnotherPublicValueTaskMethod() => field_fs6.DisposeAsync();
     }
 
-    public sealed class Test : IAsyncDisposable
+    public sealed class ImplementsAsyncDisposable : IAsyncDisposable
     {
         private readonly FileStream stream;
 
-        public Test()
+        public ImplementsAsyncDisposable()
         {
             stream = new FileStream(@"c:\foo.txt", FileMode.Open);                      // Compliant - see GitHub issue: https://github.com/SonarSource/sonar-dotnet/issues/5879
         }
@@ -94,6 +97,36 @@ namespace Tests.Diagnostics
         public async ValueTask DisposeAsync()
         {
             await stream.DisposeAsync();
+        }
+    }
+
+    public class FluentAssertionsTest
+    {
+        public void FluentAssertionTypes()
+        {
+            var scope = new AssertionScope();                           // Noncompliant
+            var s = new FluentAssertions.Execution.AssertionScope();    // Noncompliant
+
+            using var _ = new AssertionScope();
+            using (var disposed = new AssertionScope())
+            {
+            }
+        }
+    }
+
+    public ref struct Struct
+    {
+        public void Dispose()
+        {
+        }
+    }
+
+    public class Consumer
+    {
+        public void Method()
+        {
+            using var x = new Struct();
+            var y = new Struct();                                                       // Noncompliant
         }
     }
 }

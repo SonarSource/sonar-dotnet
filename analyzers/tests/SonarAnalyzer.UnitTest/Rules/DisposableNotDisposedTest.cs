@@ -30,8 +30,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void DisposableNotDisposed() =>
             builder.AddPaths("DisposableNotDisposed.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
-                .AddReferences(MetadataReferenceFacade.SystemNetHttp.Concat(NuGetMetadataReference.FluentAssertions("5.9.0")))
+                .WithOptions(ParseOptionsHelper.FromCSharp7)
+                .AddReferences(MetadataReferenceFacade.SystemNetHttp)
                 .Verify();
 
 #if NET
@@ -40,6 +40,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DisposableNotDisposed_CSharp8() =>
             builder.AddPaths("DisposableNotDisposed.CSharp8.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .AddReferences(NuGetMetadataReference.FluentAssertions("5.9.0"))
                 .Verify();
 
         [TestMethod]

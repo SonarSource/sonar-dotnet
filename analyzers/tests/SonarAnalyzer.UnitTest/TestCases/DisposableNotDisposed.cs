@@ -1,7 +1,6 @@
 ﻿using System.IO;
 using System.Net;
 using System.Net.Sockets;
-using FluentAssertions.Execution;
 
 namespace Tests.Diagnostics
 {
@@ -117,38 +116,6 @@ namespace Tests.Diagnostics
         private void NoOperation(FileStream fs)
         {
             // do nothing
-        }
-
-
-        private void Clear()
-        {
-            using var inner_field_fs1 = new FileStream(@"c:\foo.txt", FileMode.Open);
-        }
-
-        public void FluentAssertionTypes()
-        {
-            var scope = new AssertionScope();                           // Noncompliant
-            var s = new FluentAssertions.Execution.AssertionScope();    // Noncompliant
-
-            using var _ = new AssertionScope();
-            using (var disposed = new AssertionScope()) {
-            }
-        }
-    }
-
-    public ref struct Struct
-    {
-        public void Dispose()
-        {
-        }
-    }
-
-    public class Consumer
-    {
-        public void Method()
-        {
-            using var x = new Struct();
-            var y = new Struct(); // Noncompliant
         }
     }
 
