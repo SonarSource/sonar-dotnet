@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CSharp;
+using System.Text;
 
 namespace SonarAnalyzer.Rules.CSharp;
 
@@ -27,58 +27,86 @@ public sealed class CommentsShouldNotBeEmpty : CommentsShouldNotBeEmptyBase<Synt
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-    protected override void CheckTrivia(SonarSyntaxTreeReportingContext context, IEnumerable<SyntaxTrivia> trivia)
-    {
-        foreach (var trivium in trivia)
+    protected override string GetCommentText(SyntaxTrivia trivia)
+        => trivia.Kind() switch
         {
-            switch (trivium.Kind())
+            SyntaxKind.SingleLineCommentTrivia => GetSingleLineText(trivia),
+            SyntaxKind.MultiLineCommentTrivia => GetMultiLineText(trivia),
+            SyntaxKind.SingleLineDocumentationCommentTrivia => GetSingleLineDocumentationText(trivia),
+            SyntaxKind.MultiLineDocumentationCommentTrivia => GetMultiLineDocumentationText(trivia),
+        };
+
+    protected override bool IsValidTriviaType(SyntaxTrivia trivia)
+        => Language.SyntaxKind.CommentTrivia.Contains(trivia.Kind());
+
+    // //
+    private static string GetSingleLineText(SyntaxTrivia trivia)
+        => trivia.ToString().Trim().Substring(2);
+
+    // /* */
+    private static string GetMultiLineText(SyntaxTrivia trivia)
+    {
+        var stringBuilder = new StringBuilder();
+        var commentText = trivia.ToString().Trim().Substring(2);
+
+        if (commentText.EndsWith("*/", StringComparison.Ordinal)) // Might be unclosed, still reported
+        {
+            commentText = commentText.Substring(0, commentText.Length - 2);
+        }
+
+        foreach (var line in commentText.Split(MetricsBase.LineTerminators, StringSplitOptions.None))
+        {
+            var trimmedLine = line.TrimStart(null);
+            if (trimmedLine.StartsWith("*", StringComparison.Ordinal))
             {
-                case SyntaxKind.SingleLineCommentTrivia:
-                    CheckSingleLineTrivia(context, trivium);
-                    break;
-                case SyntaxKind.MultiLineCommentTrivia:                 // usecase: /* [many lines...] */
-                    CheckMultiLineTrivia(context, trivium);
-                    break;
-                case SyntaxKind.SingleLineDocumentationCommentTrivia:
-                    CheckSingleLineDocumentationTrivia(context, trivium);
-                    break;
-                case SyntaxKind.MultiLineDocumentationCommentTrivia:    // usecase: /**
-                    CheckMultiLineDocumentationTrivia(context, trivium);
-                    break;
-                default:
-                    break;
+                trimmedLine = trimmedLine.TrimStart('*');
             }
+
+            stringBuilder.Append(trimmedLine.Trim());
         }
+
+        return stringBuilder.ToString();
     }
 
-    private void CheckSingleLineTrivia(SonarSyntaxTreeReportingContext context, SyntaxTrivia trivium)
+    // ///
+    private static string GetSingleLineDocumentationText(SyntaxTrivia trivia)
     {
-        if (string.CompareOrdinal(trivium.ToFullString().Trim(), "//") == 0)
+        var stringBuilder = new StringBuilder();
+
+        foreach (var line in trivia.ToFullString().Split(MetricsBase.LineTerminators, StringSplitOptions.None))
         {
-            context.ReportIssue(Diagnostic.Create(Rule, trivium.GetLocation()));
+            var trimmedLine = line.TrimStart(null);
+            trimmedLine = trimmedLine.StartsWith("///")
+                ? trimmedLine.Substring(3).Trim()
+                : trimmedLine.TrimEnd(null);
+
+            stringBuilder.Append(trimmedLine);
         }
+        return stringBuilder.ToString();
     }
 
-    private void CheckMultiLineTrivia(SonarSyntaxTreeReportingContext context, SyntaxTrivia trivium)
+    // /** */
+    private static string GetMultiLineDocumentationText(SyntaxTrivia trivia)
     {
+        var stringBuilder = new StringBuilder();
+        var commentText = trivia.ToFullString().Trim().Substring(3);
 
-    }
-
-    private void CheckSingleLineDocumentationTrivia(SonarSyntaxTreeReportingContext context, SyntaxTrivia trivium)
-    {
-        var lines = trivium.ToFullString().Split(MetricsBase.LineTerminators, StringSplitOptions.None);
-        foreach (var line in lines.Take(lines.Length - 1)) // last entry is empty string after newline
+        if (commentText.EndsWith("*/", StringComparison.Ordinal)) // Might be unclosed, still reported
         {
-            if (string.CompareOrdinal(line.Trim(), "///") != 0)
+            commentText = commentText.Substring(0, commentText.Length - 2);
+        }
+
+        foreach (var line in commentText.Split(MetricsBase.LineTerminators, StringSplitOptions.None))
+        {
+            var trimmedLine = line.TrimStart(null);
+            if (trimmedLine.StartsWith("*", StringComparison.Ordinal))
             {
-                return;
+                trimmedLine = trimmedLine.TrimStart('*');
             }
+
+            stringBuilder.Append(trimmedLine.Trim());
         }
-        context.ReportIssue(Diagnostic.Create(Rule, trivium.GetLocation()));
-    }
 
-    private void CheckMultiLineDocumentationTrivia(SonarSyntaxTreeReportingContext context, SyntaxTrivia trivium)
-    {
-
+        return stringBuilder.ToString();
     }
 }

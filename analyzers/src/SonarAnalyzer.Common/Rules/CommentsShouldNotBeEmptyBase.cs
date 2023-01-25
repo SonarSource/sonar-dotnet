@@ -24,6 +24,10 @@ public abstract class CommentsShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosti
     where TSyntaxKind : struct
 {
     private const string DiagnosticId = "S4663";
+
+    protected abstract bool IsValidTriviaType(SyntaxTrivia trivia);
+    protected abstract string GetCommentText(SyntaxTrivia trivia);
+
     protected override string MessageFormat => "Remove this empty comment";
 
     protected CommentsShouldNotBeEmptyBase() : base(DiagnosticId) { }
@@ -38,5 +42,14 @@ public abstract class CommentsShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosti
             }
         });
 
-    protected abstract void CheckTrivia(SonarSyntaxTreeReportingContext context, IEnumerable<SyntaxTrivia> trivia);
+    protected void CheckTrivia(SonarSyntaxTreeReportingContext context, IEnumerable<SyntaxTrivia> trivia)
+    {
+        foreach (var trivium in trivia.Where(ShouldReport))
+        {
+            context.ReportIssue(Diagnostic.Create(Rule, trivium.GetLocation()));
+        }
+
+        bool ShouldReport(SyntaxTrivia trivia)
+        => IsValidTriviaType(trivia) && string.IsNullOrEmpty(GetCommentText(trivia));
+    }
 }

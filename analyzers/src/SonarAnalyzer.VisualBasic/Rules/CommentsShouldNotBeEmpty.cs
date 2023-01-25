@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Text;
+
 namespace SonarAnalyzer.Rules.VisualBasic;
 
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
@@ -25,20 +27,34 @@ public sealed class CommentsShouldNotBeEmpty : CommentsShouldNotBeEmptyBase<Synt
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-    protected override void CheckTrivia(SonarSyntaxTreeReportingContext context, IEnumerable<SyntaxTrivia> trivia)
-    {
-        // FIXME
-        foreach (var trivium in trivia)
+    protected override string GetCommentText(SyntaxTrivia trivia)
+        => trivia.Kind() switch
         {
-            switch (trivium.Kind())
-            {
-                case SyntaxKind.CommentTrivia:                              // usecase: '
-                    var x = 1;
-                    break;
-                case SyntaxKind.DocumentationCommentTrivia:                 // usecase: '''
-                default:
-                    break;
-            }
+            SyntaxKind.CommentTrivia => GetText(trivia),
+            SyntaxKind.DocumentationCommentTrivia => GetDocumentationText(trivia),
+        };
+
+    protected override bool IsValidTriviaType(SyntaxTrivia trivia)
+        => Language.SyntaxKind.CommentTrivia.Contains(trivia.Kind());
+
+    // '
+    private static string GetText(SyntaxTrivia trivia)
+        => trivia.ToString().Trim().Substring(1);
+
+    // '''
+    private static string GetDocumentationText(SyntaxTrivia trivia)
+    {
+        var stringBuilder = new StringBuilder();
+
+        foreach (var line in trivia.ToFullString().Split(MetricsBase.LineTerminators, StringSplitOptions.None))
+        {
+            var trimmedLine = line.TrimStart(null);
+            trimmedLine = trimmedLine.StartsWith("'''")
+                ? trimmedLine.Substring(3).Trim()
+                : trimmedLine.TrimEnd(null);
+
+            stringBuilder.Append(trimmedLine);
         }
+        return stringBuilder.ToString();
     }
 }
