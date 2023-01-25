@@ -82,14 +82,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.IsExpression);
 
             context.RegisterNodeAction(c =>
-            {
-                var isPattern = (IsPatternExpressionSyntaxWrapper)c.Node;
-                if (ConstantPatternExpression(isPattern.Pattern) is { } constantExpression)
                 {
-                    CheckAsOperatorComparedToNull(c, isPattern.Expression, constantExpression);
-                }
-            },
-            SyntaxKindEx.IsPatternExpression);
+                    var isPattern = (IsPatternExpressionSyntaxWrapper)c.Node;
+                    if (ConstantPatternExpression(isPattern.Pattern) is { } constantExpression)
+                    {
+                        CheckAsOperatorComparedToNull(c, isPattern.Expression, constantExpression);
+                    }
+                },
+                SyntaxKindEx.IsPatternExpression);
         }
 
         private static void CheckAsOperatorComparedToNull(SonarSyntaxNodeReportingContext context, ExpressionSyntax sideA, ExpressionSyntax sideB)
@@ -115,7 +115,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckForIsInstanceOfType(SonarSyntaxNodeReportingContext context, MemberAccessExpressionSyntax memberAccess, IMethodSymbol methodSymbol)
         {
-            if (methodSymbol.Name == "IsInstanceOfType" && memberAccess.Expression is TypeOfExpressionSyntax)
+            if (methodSymbol.Name == nameof(Type.IsInstanceOfType)
+                && memberAccess.Expression is TypeOfExpressionSyntax typeOf
+                && !(context.SemanticModel.GetTypeInfo(typeOf.Type).Type is INamedTypeSymbol { IsUnboundGenericType: true }))
             {
                 ReportDiagnostic(context, MessageIsOperator, useIsOperator: true);
             }
@@ -125,9 +127,12 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if (methodSymbol.Name == nameof(Type.IsAssignableFrom) && (argument as InvocationExpressionSyntax).IsGetTypeCall(context.SemanticModel))
             {
-                if (memberAccess.Expression is TypeOfExpressionSyntax)
+                if (memberAccess.Expression is TypeOfExpressionSyntax typeOf)
                 {
-                    ReportDiagnostic(context, MessageIsOperator, useIsOperator: true, shouldRemoveGetType: true);
+                    if (!(context.SemanticModel.GetTypeInfo(typeOf.Type).Type is INamedTypeSymbol { IsUnboundGenericType: true }))
+                    {
+                        ReportDiagnostic(context, MessageIsOperator, useIsOperator: true, shouldRemoveGetType: true);
+                    }
                 }
                 else
                 {

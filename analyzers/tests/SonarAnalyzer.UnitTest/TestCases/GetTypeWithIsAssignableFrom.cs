@@ -10,33 +10,33 @@ namespace Tests.Diagnostics
             var expr1 = new GetTypeWithIsAssignableFrom();
             var expr2 = new GetTypeWithIsAssignableFrom();
 
-            if (expr1.GetType()/*abcd*/.IsAssignableFrom(expr2.GetType() /*efgh*/)) //Noncompliant {{Use the 'IsInstanceOfType()' method instead.}}
+            if (expr1.GetType()/*abcd*/.IsAssignableFrom(expr2.GetType() /*efgh*/)) // Noncompliant {{Use the 'IsInstanceOfType()' method instead.}}
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             { }
-            if (expr1.GetType().IsInstanceOfType(expr2)) //Compliant
+            if (expr1.GetType().IsInstanceOfType(expr2)) // Compliant
             { }
 
-            if (!typeof(GetTypeWithIsAssignableFrom).IsAssignableFrom(expr1.GetType())) //Noncompliant {{Use the 'is' operator instead.}}
+            if (!typeof(GetTypeWithIsAssignableFrom).IsAssignableFrom(expr1.GetType())) // Noncompliant {{Use the 'is' operator instead.}}
             { }
-            var x = typeof(GetTypeWithIsAssignableFrom).IsAssignableFrom(expr1.GetType()); //Noncompliant
+            var x = typeof(GetTypeWithIsAssignableFrom).IsAssignableFrom(expr1.GetType()); // Noncompliant
             if (expr1 is GetTypeWithIsAssignableFrom) // Noncompliant  {{Use a 'null' check instead.}}
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             { }
 
-            if (typeof(GetTypeWithIsAssignableFrom).IsAssignableFrom(typeof(GetTypeWithIsAssignableFrom))) //Compliant
+            if (typeof(GetTypeWithIsAssignableFrom).IsAssignableFrom(typeof(GetTypeWithIsAssignableFrom))) // Compliant
             { }
 
             var t1 = expr1.GetType();
             var t2 = expr2.GetType();
-            if (t1.IsAssignableFrom(t2)) //Compliant
+            if (t1.IsAssignableFrom(t2)) // Compliant
             { }
-            if (t1.IsAssignableFrom(c: expr2.GetType())) //Noncompliant
-            { }
-
-            if (t1.IsAssignableFrom(typeof(GetTypeWithIsAssignableFrom))) //Compliant
+            if (t1.IsAssignableFrom(c: expr2.GetType())) // Noncompliant
             { }
 
-            Test(t1.IsAssignableFrom(c: expr2.GetType())); //Noncompliant
+            if (t1.IsAssignableFrom(typeof(GetTypeWithIsAssignableFrom))) // Compliant
+            { }
+
+            Test(t1.IsAssignableFrom(c: expr2.GetType())); // Noncompliant
 
             if (expr1 is object) // Compliant - "is object" is a commonly used pattern for non-null check
             { }
@@ -89,6 +89,33 @@ namespace Tests.Diagnostics
         public void Go(Repro_3605 value)
         {
             bool result = value.StringProperty is Example; // Noncompliant FP for pattern matching
+        }
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/6616
+    public class Repro_6616
+    {
+        public void IsInstanceOfType(object obj)
+        {
+            _ = typeof(ISet<int>).IsInstanceOfType(obj); // Noncompliant, bounded generic type
+            _ = typeof(ISet<>).IsInstanceOfType(obj); // Compliant, unbonded generic type
+            _ = typeof(IDictionary<int, int>).IsInstanceOfType(obj); // Noncompliant, bounded generic type
+            _ = typeof(IDictionary<,>).IsInstanceOfType(obj); // Compliant, unbonded generic type
+
+            Type t = typeof(ISet<>);
+            _ = t.IsInstanceOfType(obj); // Compliant, not a typeof expression
+        }
+
+        public void IsAssignableFrom(object obj)
+        {
+            _ = typeof(HashSet<int>).IsAssignableFrom(obj.GetType()); // Noncompliant, bounded generic type
+            _ = typeof(HashSet<>).IsAssignableFrom(obj.GetType()); // Compliant, unbonded generic type
+            _ = typeof(Dictionary<int, int>).IsAssignableFrom(obj.GetType()); // Noncompliant, bounded generic type
+            _ = typeof(Dictionary<,>).IsAssignableFrom(obj.GetType()); // Compliant, unbonded generic type
+
+            Type t1 = typeof(ISet<>);
+            Type t2 = obj.GetType();
+            _ = t1.IsAssignableFrom(t2); // Compliant, not a typeof expression, nor having GetType as arg
         }
     }
 

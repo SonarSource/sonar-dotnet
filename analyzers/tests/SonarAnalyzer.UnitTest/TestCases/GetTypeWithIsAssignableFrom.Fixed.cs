@@ -10,31 +10,31 @@ namespace Tests.Diagnostics
             var expr1 = new GetTypeWithIsAssignableFrom();
             var expr2 = new GetTypeWithIsAssignableFrom();
 
-            if (expr1.GetType()/*abcd*/.IsInstanceOfType(expr2 /*efgh*/)) //Fixed
+            if (expr1.GetType()/*abcd*/.IsInstanceOfType(expr2 /*efgh*/)) // Fixed
             { }
-            if (expr1.GetType().IsInstanceOfType(expr2)) //Compliant
+            if (expr1.GetType().IsInstanceOfType(expr2)) // Compliant
             { }
 
-            if (!(expr1 != null)) //Fixed
+            if (!(expr1 != null)) // Fixed
             { }
-            var x = expr1 != null; //Fixed
+            var x = expr1 != null; // Fixed
             if (expr1 != null) // Fixed
             { }
 
-            if (typeof(GetTypeWithIsAssignableFrom).IsAssignableFrom(typeof(GetTypeWithIsAssignableFrom))) //Compliant
+            if (typeof(GetTypeWithIsAssignableFrom).IsAssignableFrom(typeof(GetTypeWithIsAssignableFrom))) // Compliant
             { }
 
             var t1 = expr1.GetType();
             var t2 = expr2.GetType();
-            if (t1.IsAssignableFrom(t2)) //Compliant
+            if (t1.IsAssignableFrom(t2)) // Compliant
             { }
-            if (t1.IsInstanceOfType(expr2)) //Fixed
-            { }
-
-            if (t1.IsAssignableFrom(typeof(GetTypeWithIsAssignableFrom))) //Compliant
+            if (t1.IsInstanceOfType(expr2)) // Fixed
             { }
 
-            Test(t1.IsInstanceOfType(expr2)); //Fixed
+            if (t1.IsAssignableFrom(typeof(GetTypeWithIsAssignableFrom))) // Compliant
+            { }
+
+            Test(t1.IsInstanceOfType(expr2)); // Fixed
 
             if (expr1 is object) // Compliant - "is object" is a commonly used pattern for non-null check
             { }
@@ -87,6 +87,33 @@ namespace Tests.Diagnostics
         public void Go(Repro_3605 value)
         {
             bool result = value.StringProperty != null; // Fixed
+        }
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/6616
+    public class Repro_6616
+    {
+        public void IsInstanceOfType(object obj)
+        {
+            _ = obj is ISet<int>; // Fixed
+            _ = typeof(ISet<>).IsInstanceOfType(obj); // Compliant, unbonded generic type
+            _ = obj is IDictionary<int, int>; // Fixed
+            _ = typeof(IDictionary<,>).IsInstanceOfType(obj); // Compliant, unbonded generic type
+
+            Type t = typeof(ISet<>);
+            _ = t.IsInstanceOfType(obj); // Compliant, not a typeof expression
+        }
+
+        public void IsAssignableFrom(object obj)
+        {
+            _ = obj is HashSet<int>; // Fixed
+            _ = typeof(HashSet<>).IsAssignableFrom(obj.GetType()); // Compliant, unbonded generic type
+            _ = obj is Dictionary<int, int>; // Fixed
+            _ = typeof(Dictionary<,>).IsAssignableFrom(obj.GetType()); // Compliant, unbonded generic type
+
+            Type t1 = typeof(ISet<>);
+            Type t2 = obj.GetType();
+            _ = t1.IsAssignableFrom(t2); // Compliant, not a typeof expression, nor having GetType as arg
         }
     }
 
