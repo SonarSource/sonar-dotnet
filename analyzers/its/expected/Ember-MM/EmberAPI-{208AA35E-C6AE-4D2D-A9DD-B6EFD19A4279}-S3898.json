@@ -1,0 +1,368 @@
+{
+"issues":  [
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'CustomUpdaterStruct'.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"region":  {
+"startLine":  1079,
+"startColumn":  22,
+"endLine":  1079,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'MovieSource'.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"region":  {
+"startLine":  1091,
+"startColumn":  22,
+"endLine":  1091,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'TVSource'.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"region":  {
+"startLine":  1099,
+"startColumn":  22,
+"endLine":  1099,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'DBMovie'.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"region":  {
+"startLine":  1105,
+"startColumn":  22,
+"endLine":  1105,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'DBTV'.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"region":  {
+"startLine":  1135,
+"startColumn":  22,
+"endLine":  1135,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Scans'.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"region":  {
+"startLine":  1169,
+"startColumn":  22,
+"endLine":  1169,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'ScrapeInfo'.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"region":  {
+"startLine":  1180,
+"startColumn":  22,
+"endLine":  1180,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'ScrapeModifier'.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"region":  {
+"startLine":  1201,
+"startColumn":  22,
+"endLine":  1201,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'ScrapeOptions'.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"region":  {
+"startLine":  1217,
+"startColumn":  22,
+"endLine":  1217,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'SettingsResult'.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"region":  {
+"startLine":  1252,
+"startColumn":  22,
+"endLine":  1252,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'TVScrapeOptions'.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"region":  {
+"startLine":  1264,
+"startColumn":  22,
+"endLine":  1264,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'ModulesMenus'.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"region":  {
+"startLine":  1291,
+"startColumn":  22,
+"endLine":  1291,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'DVD_Time_Type'.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"region":  {
+"startLine":  522,
+"startColumn":  23,
+"endLine":  522,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'PGC_Cell_Info_Type'.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"region":  {
+"startLine":  536,
+"startColumn":  23,
+"endLine":  536,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'struct_AudioAttributes_VTSM_VTS'.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"region":  {
+"startLine":  547,
+"startColumn":  23,
+"endLine":  547,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'struct_IFO_VST_Parse'.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"region":  {
+"startLine":  560,
+"startColumn":  23,
+"endLine":  560,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'struct_Program_Chain_Type'.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"region":  {
+"startLine":  599,
+"startColumn":  23,
+"endLine":  599,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'struct_SRPT'.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"region":  {
+"startLine":  617,
+"startColumn":  23,
+"endLine":  617,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'struct_VideoAttributes_VTS_VOBS'.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"region":  {
+"startLine":  630,
+"startColumn":  23,
+"endLine":  630,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'SubPictureAtt_VTSM_VTS_Type'.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"region":  {
+"startLine":  645,
+"startColumn":  23,
+"endLine":  645,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'VTS_PTT_SRPT'.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"region":  {
+"startLine":  658,
+"startColumn":  23,
+"endLine":  658,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'ModuleResult'.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIInterfaces.vb",
+"region":  {
+"startLine":  202,
+"startColumn":  22,
+"endLine":  202,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Locs'.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPILocalization.vb",
+"region":  {
+"startLine":  267,
+"startColumn":  15,
+"endLine":  267,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type '_ISOLanguage'.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPILocalization.vb",
+"region":  {
+"startLine":  279,
+"startColumn":  15,
+"endLine":  279,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'AssemblyListItem'.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"region":  {
+"startLine":  635,
+"startColumn":  15,
+"endLine":  635,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'VersionItem'.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"region":  {
+"startLine":  646,
+"startColumn":  15,
+"endLine":  646,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Arguments'.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  1363,
+"startColumn":  23,
+"endLine":  1363,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'ProgressValue'.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  1374,
+"startColumn":  23,
+"endLine":  1374,
+"endColumn":  36
+}
+}
+}
+]
+}

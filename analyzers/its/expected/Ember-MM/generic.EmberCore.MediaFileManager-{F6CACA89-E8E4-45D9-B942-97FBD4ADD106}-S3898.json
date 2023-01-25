@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Arguments'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  379,
+"startColumn":  23,
+"endLine":  379,
+"endColumn":  32
+}
+}
+}
+]
+}

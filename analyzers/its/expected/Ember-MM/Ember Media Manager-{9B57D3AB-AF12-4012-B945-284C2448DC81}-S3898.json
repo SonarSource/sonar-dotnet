@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Arguments'.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8978,
+"startColumn":  23,
+"endLine":  8978,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Results'.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8997,
+"startColumn":  23,
+"endLine":  8997,
+"endColumn":  30
+}
+}
+}
+]
+}

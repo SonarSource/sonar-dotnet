@@ -1,0 +1,225 @@
+{
+"issues":  [
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Arguments'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  1001,
+"startColumn":  27,
+"endLine":  1001,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Results'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  1016,
+"startColumn":  27,
+"endLine":  1016,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Arguments'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMPA.vb",
+"region":  {
+"startLine":  152,
+"startColumn":  27,
+"endLine":  152,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Results'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMPA.vb",
+"region":  {
+"startLine":  163,
+"startColumn":  27,
+"endLine":  163,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Arguments'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeMPDB.vb",
+"region":  {
+"startLine":  134,
+"startColumn":  27,
+"endLine":  134,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Results'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeMPDB.vb",
+"region":  {
+"startLine":  144,
+"startColumn":  27,
+"endLine":  144,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Arguments'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTMDB.vb",
+"region":  {
+"startLine":  228,
+"startColumn":  27,
+"endLine":  228,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Arguments'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgIMDBSearchResults.vb",
+"region":  {
+"startLine":  486,
+"startColumn":  23,
+"endLine":  486,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Results'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgIMDBSearchResults.vb",
+"region":  {
+"startLine":  497,
+"startColumn":  23,
+"endLine":  497,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Arguments'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgTrailer.vb",
+"region":  {
+"startLine":  418,
+"startColumn":  23,
+"endLine":  418,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type '_MySettings'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\scraperMovieNativeModule.vb",
+"region":  {
+"startLine":  668,
+"startColumn":  15,
+"endLine":  668,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'TVImages'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  130,
+"startColumn":  22,
+"endLine":  130,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Arguments'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1262,
+"startColumn":  27,
+"endLine":  1262,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Results'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1269,
+"startColumn":  27,
+"endLine":  1269,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Arguments'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVDBSearchResults.vb",
+"region":  {
+"startLine":  415,
+"startColumn":  23,
+"endLine":  415,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Results'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVDBSearchResults.vb",
+"region":  {
+"startLine":  425,
+"startColumn":  23,
+"endLine":  425,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'ImageTag'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region":  {
+"startLine":  1196,
+"startColumn":  23,
+"endLine":  1196,
+"endColumn":  31
+}
+}
+}
+]
+}
