@@ -75,7 +75,7 @@ namespace SonarAnalyzer.Helpers
             else
             {
                 // Need to check the children of this node because of the pattern (await SomeTask()).Invocation()
-                DefaultVisit(node);
+                base.VisitInvocationExpression(node);
             }
         }
     }
