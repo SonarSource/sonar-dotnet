@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3878",
+"message":  "Arrays should not be created for params parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  270,
+"startColumn":  73,
+"endLine":  270,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S3878",
+"message":  "Arrays should not be created for params parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  271,
+"startColumn":  77,
+"endLine":  271,
+"endColumn":  95
+}
+}
+}
+]
+}
