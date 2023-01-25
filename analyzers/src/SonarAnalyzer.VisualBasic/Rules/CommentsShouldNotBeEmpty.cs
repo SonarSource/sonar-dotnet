@@ -25,7 +25,7 @@ public sealed class CommentsShouldNotBeEmpty : CommentsShouldNotBeEmptyBase<Synt
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-    protected override void CheckTrivia(IEnumerable<SyntaxTrivia> trivia)
+    protected override void CheckTrivia(SonarSyntaxTreeReportingContext context, IEnumerable<SyntaxTrivia> trivia)
     {
         // FIXME
         foreach (var trivium in trivia)

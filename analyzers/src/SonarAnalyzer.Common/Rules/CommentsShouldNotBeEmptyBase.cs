@@ -24,7 +24,7 @@ public abstract class CommentsShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosti
     where TSyntaxKind : struct
 {
     private const string DiagnosticId = "S4663";
-    protected override string MessageFormat => "FIXME";
+    protected override string MessageFormat => "Remove this empty comment";
 
     protected CommentsShouldNotBeEmptyBase() : base(DiagnosticId) { }
 
@@ -33,10 +33,10 @@ public abstract class CommentsShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosti
         {
             foreach (var token in c.Tree.GetRoot().DescendantTokens())
             {
-                CheckTrivia(token.LeadingTrivia);
-                CheckTrivia(token.TrailingTrivia);
+                CheckTrivia(c, token.LeadingTrivia);
+                CheckTrivia(c, token.TrailingTrivia);
             }
         });
 
-    protected abstract void CheckTrivia(IEnumerable<SyntaxTrivia> trivia);
+    protected abstract void CheckTrivia(SonarSyntaxTreeReportingContext context, IEnumerable<SyntaxTrivia> trivia);
 }

@@ -27,14 +27,18 @@ public sealed class CommentsShouldNotBeEmpty : CommentsShouldNotBeEmptyBase<Synt
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-    protected override void CheckTrivia(IEnumerable<SyntaxTrivia> trivia)
+    protected override void CheckTrivia(SonarSyntaxTreeReportingContext context, IEnumerable<SyntaxTrivia> trivia)
     {
         foreach (var trivium in trivia)
         {
             switch (trivium.Kind())
             {
-                case SyntaxKind.SingleLineCommentTrivia:                // usecase: //
-                    var vv1 = trivium.ToFullString();
+                case SyntaxKind.SingleLineCommentTrivia:
+                    var vv1 = trivium.ToFullString().Trim();
+                    if (string.CompareOrdinal(vv1, "//") == 0)
+                    {
+                        context.ReportIssue(Diagnostic.Create(Rule, trivium.GetLocation()));
+                    }
                     break;
                 case SyntaxKind.MultiLineCommentTrivia:                 // usecase: /* [many lines...] */
                     var vv2 = trivium.ToFullString();
