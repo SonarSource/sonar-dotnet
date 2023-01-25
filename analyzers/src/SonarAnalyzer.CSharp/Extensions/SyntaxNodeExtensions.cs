@@ -296,7 +296,8 @@ namespace SonarAnalyzer.Extensions
         /// <summary>
         /// Returns the left hand side of a conditional access expression. Returns c in case like a?.b?[0].c?.d.e?.f if d is passed.
         /// </summary>
-        /// <remarks>Copied from Roslyn SyntaxNodeExtensions.</remarks>
+        /// <remarks>Copied from <seealso href="https://github.com/dotnet/roslyn/blob/18f20b489a95cf0a5d4dea19a98592d4d1abb3ad/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/SyntaxNodeExtensions.cs#L188">
+        /// Roslyn SyntaxNodeExtensions</seealso></remarks>
         public static ConditionalAccessExpressionSyntax GetParentConditionalAccessExpression(this SyntaxNode node)
         {
             // Walk upwards based on the grammar/parser rules around ?. expressions (can be seen in
