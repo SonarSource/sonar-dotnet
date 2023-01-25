@@ -56,6 +56,12 @@ namespace Tests.Diagnostics
                 // do nothing but dispose
             }
 
+            FileStream fs6_1 = new FileStream(@"c:\foo.txt", FileMode.Open);
+            using (fs6_1)
+            {
+                // do nothing but dispose
+            }
+
             var fs7 = new FileStream(@"c:\foo.txt", FileMode.Open); // Compliant - Dispose()
             fs7.Dispose();
 

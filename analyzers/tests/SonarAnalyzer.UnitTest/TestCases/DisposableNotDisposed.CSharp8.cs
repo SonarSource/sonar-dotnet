@@ -110,8 +110,8 @@ namespace Tests.Diagnostics
     {
         public void FluentAssertionTypes()
         {
-            var scope = new AssertionScope();                           // Noncompliant
-            var s = new FluentAssertions.Execution.AssertionScope();    // Noncompliant
+            var scope = new AssertionScope();                                           // Noncompliant
+            var s = new FluentAssertions.Execution.AssertionScope();                    // Noncompliant
 
             using var _ = new AssertionScope();
             using (var disposed = new AssertionScope())

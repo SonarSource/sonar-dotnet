@@ -40,11 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.System_Net_Sockets_TcpClient,
                 KnownType.System_Net_Sockets_UdpClient);
 
-        private static readonly ImmutableArray<KnownType> DisposableTypes = ImmutableArray.Create
-        (
-            KnownType.System_IDisposable,
-            KnownType.System_IAsyncDisposable
-        );
+        private static readonly ImmutableArray<KnownType> DisposableTypes = ImmutableArray.Create(KnownType.System_IDisposable, KnownType.System_IAsyncDisposable);
 
         private static readonly ISet<string> DisposeMethods = new HashSet<string> { "Dispose", "DisposeAsync", "Close" };
 
@@ -164,8 +160,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var usingStatements = ancestors.OfType<UsingStatementSyntax>();
             var usingDeclarations = ancestors.OfType<LocalDeclarationStatementSyntax>();
 
-            return
-                usingStatements.Any(x => ancestors.Contains(x.Expression) || ancestors.Contains(x.Declaration))
+            return usingStatements.Any(x => ancestors.Contains(x.Expression) || ancestors.Contains(x.Declaration))
                 || usingDeclarations.Any(x => ancestors.Contains(x.Declaration));
         }
 
@@ -202,7 +197,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 if (name != null
-                    && DisposeMethods.Contains(name.Identifier.Text)
+                    && (DisposeMethods.Contains(name.Identifier.Text) || IsNodeInsideUsingStatement(expression))
                     && semanticModel.GetSymbolInfo(expression).Symbol is { } referencedSymbol
                     && IsLocalOrPrivateField(referencedSymbol))
                 {
@@ -241,7 +236,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     throw new NotSupportedException("Syntax node should be either an identifier or a simple member access expression");
                 }
 
-                if ((IsStandaloneExpression(expression) || IsConfigureAwaitInvocationInsideUsingStatement(expression))
+                if (IsStandaloneExpression(expression)
                     && semanticModel.GetSymbolInfo(identifierOrSimpleMemberAccess).Symbol is { } referencedSymbol
                     && IsLocalOrPrivateField(referencedSymbol))
                 {
@@ -249,12 +244,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
         }
-
-        private static bool IsConfigureAwaitInvocationInsideUsingStatement(ExpressionSyntax expression) =>
-            expression.Parent is MemberAccessExpressionSyntax memberAccessExpression
-                && memberAccessExpression.Parent is InvocationExpressionSyntax
-                && memberAccessExpression.Name.Identifier.ValueText == "ConfigureAwait"
-                && IsNodeInsideUsingStatement(expression);
 
         private static bool IsStandaloneExpression(ExpressionSyntax expression) =>
             !(expression.Parent is ExpressionSyntax)
