@@ -54,14 +54,17 @@ namespace Tests.Diagnostics
             FileStream fs7 = new FileStream(@"c:\foo.txt", FileMode.Open);
             await using (var ignored = fs7.ConfigureAwait(false));
 
-            using var fs8 = new FileStream(@"c:\foo.txt", FileMode.Open);
+            FileStream fs8 = new FileStream(@"c:\foo.txt", FileMode.Open);
+            await using var ignored2 = fs8.ConfigureAwait(false);
 
-            await using var fs9 = new FileStream(@"c:\foo.txt", FileMode.Open);
+            using var fs9 = new FileStream(@"c:\foo.txt", FileMode.Open);
 
-            await using var fs10 = File.Open(@"c:\foo.txt", FileMode.Open);
+            await using var fs10 = new FileStream(@"c:\foo.txt", FileMode.Open);
 
-            var fs11 = new FileStream(@"c:\foo.txt", FileMode.Open);                     // Compliant - asynchronously disposed manually
-            await fs11.DisposeAsync();
+            await using var fs11 = File.Open(@"c:\foo.txt", FileMode.Open);
+
+            var fs12 = new FileStream(@"c:\foo.txt", FileMode.Open);                     // Compliant - asynchronously disposed manually
+            await fs12.DisposeAsync();
         }
 
         public async Task SomePublicAsyncMethod()
