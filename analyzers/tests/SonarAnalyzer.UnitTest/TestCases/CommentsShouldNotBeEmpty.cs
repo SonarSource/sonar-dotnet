@@ -2,18 +2,42 @@
 
 [Obsolete] // Ipsem Lorum
 public class SingleLine //
-// Noncompliant@-1 (inline comment)
-{
+// hey
+
+// Noncompliant@-3 (inline comment)
+{ // Ipsem Lorum
              //
-    // Noncompliant@-1 (a lot of whitespace before)
+
+    // Noncompliant@-2 (a lot of whitespace before)
 
     //               
-    // Noncompliant@-1 (a lot of whitespace after)
+
+    // Noncompliant@-2 (a lot of whitespace after)
 
     // *
     // Ipsem Lorum
     //
-    // Noncompliant @-1
+
+    // hey
+    //
+    //
+    //
+
+    //
+    //
+    // hey
+    //
+    //
+    //
+
+    //
+    //
+    //
+    // hey
+    //
+    //
+    //
+
 
     //
 
@@ -36,6 +60,73 @@ public class SingleLine //
     // //
 
     // /** */
+
+    //
+    //
+    // hey
+    //
+    //
+    // there
+    //
+    //
+
+    //
+    //
+    //
+    /// text
+    // Noncompliant@-4
+
+    //
+    //
+    //
+    /*
+     * text
+     */
+    // Noncompliant@-6
+
+    //
+    //
+    //
+    /**
+     * text
+     */
+    // Noncompliant@-6
+
+    void Method()
+    {
+        // Noncompliant@+2
+
+        //
+        //
+        //
+        var x = 42; //
+        //
+        //
+        //
+
+        // Noncompliant@-5
+        // Noncompliant@-5
+
+        //
+        //
+        // hello
+        //
+        //
+        var y = 42; //
+        //
+        //
+        //
+        // there
+
+        // Noncompliant@-6
+
+        //
+    } //
+    //
+
+    // Noncompliant@-4
+    // Noncompliant@-4
+    // Noncompliant@-4
 }
 
 [Obsolete] /// Ipsem Lorum
@@ -58,6 +149,7 @@ public class SingleLineDocumentation ///
     /// hey there
 
     /// hey there
+    /// text
     ///
 
     /// ///
