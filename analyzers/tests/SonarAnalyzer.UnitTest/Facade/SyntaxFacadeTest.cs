@@ -55,11 +55,11 @@ public class SyntaxFacadeTest
         vb.Invoking(x => x.InvocationIdentifier(VB.SyntaxFactory.IdentifierName("ThisIsNotInvocation"))).Should().Throw<InvalidCastException>();
 
     [TestMethod]
-    public void ModifierKinds_empty_array_for_null_CS() =>
+    public void ModifierKinds_Null_CS() =>
         cs.ModifierKinds(null).Should().BeEmpty();
 
     [TestMethod]
-    public void ModifierKinds_empty_array_for_null_VB() =>
+    public void ModifierKinds_Null_VB() =>
         vb.ModifierKinds(null).Should().BeEmpty();
 
     [TestMethod]
