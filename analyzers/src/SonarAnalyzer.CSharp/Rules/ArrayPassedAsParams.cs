@@ -18,47 +18,41 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
-
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, InvocationExpressionSyntax, ObjectCreationExpressionSyntax>
+public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
     protected override string ParameterKeyword => "params";
-    protected override string MessageFormat => MessageBase;
 
-    protected override bool ShouldReportInvocation(SonarSyntaxNodeReportingContext context, InvocationExpressionSyntax invocation)
-    {
-        var myLookup = new CSharpMethodParameterLookup(invocation, context.SemanticModel);
+    protected override bool ShouldReport(SonarSyntaxNodeReportingContext context, SyntaxNode expression) =>
+        expression switch
+        {
+            ObjectCreationExpressionSyntax { } creation =>
+                CheckLastArgument(creation.ArgumentList) && IsParamParameter(context, creation, creation.ArgumentList.Arguments.Last()),
+            InvocationExpressionSyntax { } invocation =>
+                CheckLastArgument(invocation.ArgumentList) && IsParamParameter(context, invocation, invocation.ArgumentList.Arguments.Last()),
+            _ => false
+        };
 
-        return invocation.ArgumentList.Arguments.Count > 0
-            && invocation.ArgumentList.Arguments.Last().Expression is ArrayCreationExpressionSyntax array
-            && CheckArrayInitializer(array)
-            && myLookup.TryGetSymbol(invocation.ArgumentList.Arguments.Last(), out var parameter)
-            && parameter.IsParams;
-    }
+    protected override Location GetLocation(SyntaxNode expression) =>
+        expression switch
+        {
+            ObjectCreationExpressionSyntax { } creation => creation.ArgumentList.Arguments.Last().Expression.GetLocation(),
+            InvocationExpressionSyntax { } invocation => invocation.ArgumentList.Arguments.Last().Expression.GetLocation(),
+            _ => expression.GetLocation()
+        };
 
-    protected override bool ShouldReportCreation(SonarSyntaxNodeReportingContext context, ObjectCreationExpressionSyntax creation)
-    {
-        var myLookup = new CSharpConstructorParameterLookup(creation, context.SemanticModel);
+    private static bool CheckLastArgument(ArgumentListSyntax argumentList) =>
+        argumentList is not null
+        && argumentList.Arguments.Any()
+        && argumentList.Arguments.Last().Expression is ArrayCreationExpressionSyntax invocationArray
+        && invocationArray.Initializer is InitializerExpressionSyntax { Expressions.Count: > 0 };
 
-        return creation.ArgumentList is not null
-            && creation.ArgumentList.Arguments.Count > 0
-            && creation.ArgumentList.Arguments.Last().Expression is ArrayCreationExpressionSyntax array
-            && CheckArrayInitializer(array)
-            && myLookup.TryGetSymbol(creation.ArgumentList.Arguments.Last(), out var parameter)
-            && parameter.IsParams;
-    }
-
-    protected override Location GetInvocationLocation(InvocationExpressionSyntax invocation) =>
-        invocation.ArgumentList.Arguments.Last().Expression.GetLocation();
-
-    protected override Location GetCreationLocation(ObjectCreationExpressionSyntax creation) =>
-        creation.ArgumentList.Arguments.Last().Expression.GetLocation();
-
-    private static bool CheckArrayInitializer(ArrayCreationExpressionSyntax array) =>
-        array.Initializer is InitializerExpressionSyntax initializer
-        && initializer.Expressions.Count > 0;
+    private bool IsParamParameter(SonarSyntaxNodeReportingContext context, SyntaxNode node, ArgumentSyntax argument) =>
+        context.SemanticModel.GetSymbolInfo(node).Symbol is IMethodSymbol methodSymbol
+        && Language.MethodParameterLookup(node, methodSymbol) is CSharpMethodParameterLookup lookup
+        && lookup.TryGetSymbol(argument, out var param)
+        && param.IsParams;
 }

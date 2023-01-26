@@ -21,36 +21,38 @@
 namespace SonarAnalyzer.Rules.VisualBasic;
 
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, InvocationExpressionSyntax, ObjectCreationExpressionSyntax>
+public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
     protected override string ParameterKeyword => "ParamArray";
-    protected override string MessageFormat => MessageBase;
 
-    protected override bool ShouldReportInvocation(SonarSyntaxNodeReportingContext context, InvocationExpressionSyntax invocation) =>
-        invocation.ArgumentList.Arguments.Count > 0
-        && invocation.ArgumentList.Arguments.Last().GetExpression() is ArrayCreationExpressionSyntax array
-        && CheckArrayInitializer(array)
-        && context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol invokedMethodSymbol
-        && invokedMethodSymbol.Parameters.Any()
-        && invokedMethodSymbol.Parameters.Last().IsParams;
+    protected override bool ShouldReport(SonarSyntaxNodeReportingContext context, SyntaxNode expression) =>
+        expression switch
+        {
+            ObjectCreationExpressionSyntax { } creation =>
+                CheckLastArgument(creation.ArgumentList) && IsParamParameter(context, creation, creation.ArgumentList.Arguments.Last()),
+            InvocationExpressionSyntax { } invocation =>
+                CheckLastArgument(invocation.ArgumentList) && IsParamParameter(context, invocation, invocation.ArgumentList.Arguments.Last()),
+            _ => false,
+        };
 
-    protected override bool ShouldReportCreation(SonarSyntaxNodeReportingContext context, ObjectCreationExpressionSyntax creation) =>
-        creation.ArgumentList is not null
-        && creation.ArgumentList.Arguments.Count > 0
-        && creation.ArgumentList.Arguments.Last().GetExpression() is ArrayCreationExpressionSyntax array
-        && CheckArrayInitializer(array)
-        && context.SemanticModel.GetSymbolInfo(creation).Symbol is IMethodSymbol invokedMethodSymbol
-        && invokedMethodSymbol.Parameters.Any()
-        && invokedMethodSymbol.Parameters.Last().IsParams;
+    protected override Location GetLocation(SyntaxNode expression) =>
+        expression switch
+        {
+            ObjectCreationExpressionSyntax { } creation => creation.ArgumentList.Arguments.Last().GetExpression().GetLocation(),
+            InvocationExpressionSyntax { } invocation => invocation.ArgumentList.Arguments.Last().GetExpression().GetLocation(),
+            _ => expression.GetLocation()
+        };
 
-    protected override Location GetInvocationLocation(InvocationExpressionSyntax invocation) =>
-        invocation.ArgumentList.Arguments.Last().GetExpression().GetLocation();
+    private static bool CheckLastArgument(ArgumentListSyntax argumentList) =>
+        argumentList is not null
+        && argumentList.Arguments.Any()
+        && argumentList.Arguments.Last().GetExpression() is ArrayCreationExpressionSyntax invocationArray
+        && invocationArray.Initializer is CollectionInitializerSyntax { Initializers.Count: > 0 };
 
-    protected override Location GetCreationLocation(ObjectCreationExpressionSyntax creation) =>
-        creation.ArgumentList.Arguments.Last().GetExpression().GetLocation();
-
-    private static bool CheckArrayInitializer(ArrayCreationExpressionSyntax array) =>
-        array.Initializer is CollectionInitializerSyntax initializer
-        && initializer.Initializers.Count > 0;
+    private bool IsParamParameter(SonarSyntaxNodeReportingContext context, SyntaxNode node, ArgumentSyntax argument) =>
+        context.SemanticModel.GetSymbolInfo(node).Symbol is IMethodSymbol methodSymbol
+        && Language.MethodParameterLookup(node, methodSymbol) is VisualBasicMethodParameterLookup lookup
+        && lookup.TryGetSymbol(argument, out var param)
+        && param.IsParams;
 }

@@ -20,44 +20,31 @@
 
 namespace SonarAnalyzer.Rules;
 
-public abstract class ArrayPassedAsParamsBase<TSyntaxKind, TInvocationExpressionSyntax, TObjectCreationExpressionSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
+public abstract class ArrayPassedAsParamsBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
     where TSyntaxKind : struct
-    where TInvocationExpressionSyntax : SyntaxNode
-    where TObjectCreationExpressionSyntax : SyntaxNode
 {
     private const string DiagnosticId = "S3878";
-
-    protected const string MessageBase = "Arrays should not be created for {0} parameters.";
+    protected override string MessageFormat => "Arrays should not be created for {0} parameters.";
 
     private readonly DiagnosticDescriptor rule;
     protected abstract string ParameterKeyword { get; }
-    protected abstract bool ShouldReportInvocation(SonarSyntaxNodeReportingContext context, TInvocationExpressionSyntax invocation);
-    protected abstract bool ShouldReportCreation(SonarSyntaxNodeReportingContext context, TObjectCreationExpressionSyntax creation);
-    protected abstract Location GetInvocationLocation(TInvocationExpressionSyntax context);
-    protected abstract Location GetCreationLocation(TObjectCreationExpressionSyntax context);
+    protected abstract bool ShouldReport(SonarSyntaxNodeReportingContext context, SyntaxNode expression);
+    protected abstract Location GetLocation(SyntaxNode expression);
 
     protected ArrayPassedAsParamsBase() : base(DiagnosticId) =>
         rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
 
     protected sealed override void Initialize(SonarAnalysisContext context)
     {
-        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, CheckInvocation, Language.SyntaxKind.InvocationExpression);
-        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, CheckObjectCreation, Language.SyntaxKind.ObjectCreationExpressions);
+        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, CheckExpression, Language.SyntaxKind.ObjectCreationExpressions);
+        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, CheckExpression, Language.SyntaxKind.InvocationExpression);
     }
 
-    private void CheckInvocation(SonarSyntaxNodeReportingContext context)
+    private void CheckExpression(SonarSyntaxNodeReportingContext context)
     {
-        if (context.Node is TInvocationExpressionSyntax invocation && ShouldReportInvocation(context, invocation))
+        if (context.Node is { } expression && ShouldReport(context, expression))
         {
-            Report(context, GetInvocationLocation(invocation));
-        }
-    }
-
-    private void CheckObjectCreation(SonarSyntaxNodeReportingContext context)
-    {
-        if (context.Node is TObjectCreationExpressionSyntax creation && ShouldReportCreation(context, creation))
-        {
-            Report(context, GetCreationLocation(creation));
+            Report(context, GetLocation(expression));
         }
     }
 
