@@ -23,11 +23,14 @@ Public Class Program
         '                                  ^^^^^^^^^^^^^^^^^^^^^^^^^
         Method3(Nothing, Nothing) ' Compliant
 
+        Method3(args:=New String() {"s1", "s2"}, a:=New String(11) {}) ' Error [BC30587] Named argument cannot match a ParamArray parameter
+        Method3(args:=New String(11) {}, a:=New String() {"s1", "s2"}) ' Error [BC30587] Named argument cannot match a ParamArray parameter
+
         Dim s = New [MyClass](1, New Integer() {2, 3}) ' Noncompliant
         '                        ^^^^^^^^^^^^^^^^^^^^
         Dim s1 = New [MyClass](1, 2, 3) ' Compliant
-        s1 = New [MyClass](args:=New Integer() {2, 3}, a:=1) ' Error [BC30587]
-        Dim s2 = New MyOtherClass(args:=New Integer(11) {}, a:=New Integer() {2, 3}) ' Error [BC30587]
+        s1 = New [MyClass](args:=New Integer() {2, 3}, a:=1) ' Error [BC30587] Named argument cannot match a ParamArray parameter
+        Dim s2 = New MyOtherClass(args:=New Integer(11) {}, a:=New Integer() {2, 3}) ' Error [BC30587] Named argument cannot match a ParamArray parameter
     End Sub
 
     Public Sub Method(ParamArray args As String())

@@ -35,7 +35,7 @@ public class Program
 //                             ^^^^^^^^^^^^^^^^^^
         var s1 = new MyClass(1, 2, 3); // Compliant
         s1 = new MyClass(args: new int[] { 2, 3 }, a: 1); // Compliant (if you specifically require the arguments to be passed in this order there is no way of making this compliant, thus we shouldn't raise)
-        var s2 = new MyOtherClass(args: new int[12], a: new int[] { 2, 3 }); // Noncompliant FP
+        var s2 = new MyOtherClass(args: new int[12], a: new int[] { 2, 3 }); // Compliant
     }
 
     public void Method(params string[] args) { }

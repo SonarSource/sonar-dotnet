@@ -34,17 +34,23 @@ public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, In
         var myLookup = new CSharpMethodParameterLookup(invocation, context.SemanticModel);
 
         return invocation.ArgumentList.Arguments.Count > 0
-        && invocation.ArgumentList.Arguments.Last().Expression is ArrayCreationExpressionSyntax array
-        && CheckArrayInitializer(array)
-        && myLookup.TryGetSymbol(invocation.ArgumentList.Arguments.Last(), out var parameter)
-        && parameter.IsParams;
+            && invocation.ArgumentList.Arguments.Last().Expression is ArrayCreationExpressionSyntax array
+            && CheckArrayInitializer(array)
+            && myLookup.TryGetSymbol(invocation.ArgumentList.Arguments.Last(), out var parameter)
+            && parameter.IsParams;
     }
 
-    protected override bool ShouldReportCreation(ObjectCreationExpressionSyntax creation) =>
-        creation.ArgumentList is not null
-        && creation.ArgumentList.Arguments.Count > 0
-        && creation.ArgumentList.Arguments.Last().Expression is ArrayCreationExpressionSyntax array
-        && CheckArrayInitializer(array);
+    protected override bool ShouldReportCreation(SonarSyntaxNodeReportingContext context, ObjectCreationExpressionSyntax creation)
+    {
+        var myLookup = new CSharpConstructorParameterLookup(creation, context.SemanticModel);
+
+        return creation.ArgumentList is not null
+            && creation.ArgumentList.Arguments.Count > 0
+            && creation.ArgumentList.Arguments.Last().Expression is ArrayCreationExpressionSyntax array
+            && CheckArrayInitializer(array)
+            && myLookup.TryGetSymbol(creation.ArgumentList.Arguments.Last(), out var parameter)
+            && parameter.IsParams;
+    }
 
     protected override Location GetInvocationLocation(InvocationExpressionSyntax invocation) =>
         invocation.ArgumentList.Arguments.Last().Expression.GetLocation();

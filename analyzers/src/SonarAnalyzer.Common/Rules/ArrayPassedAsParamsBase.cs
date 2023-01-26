@@ -32,7 +32,7 @@ public abstract class ArrayPassedAsParamsBase<TSyntaxKind, TInvocationExpression
     private readonly DiagnosticDescriptor rule;
     protected abstract string ParameterKeyword { get; }
     protected abstract bool ShouldReportInvocation(SonarSyntaxNodeReportingContext context, TInvocationExpressionSyntax invocation);
-    protected abstract bool ShouldReportCreation(TObjectCreationExpressionSyntax creation);
+    protected abstract bool ShouldReportCreation(SonarSyntaxNodeReportingContext context, TObjectCreationExpressionSyntax creation);
     protected abstract Location GetInvocationLocation(TInvocationExpressionSyntax context);
     protected abstract Location GetCreationLocation(TObjectCreationExpressionSyntax context);
 
@@ -55,11 +55,7 @@ public abstract class ArrayPassedAsParamsBase<TSyntaxKind, TInvocationExpression
 
     private void CheckObjectCreation(SonarSyntaxNodeReportingContext context)
     {
-        if (context.Node is TObjectCreationExpressionSyntax creation
-            && ShouldReportCreation(creation)
-            && context.SemanticModel.GetSymbolInfo(creation).Symbol is IMethodSymbol invokedMethodSymbol
-            && invokedMethodSymbol.Parameters.Any()
-            && invokedMethodSymbol.Parameters.Last().IsParams) // params keyword should be only one and no additional parameters are permitted after that.
+        if (context.Node is TObjectCreationExpressionSyntax creation && ShouldReportCreation(context, creation))
         {
             Report(context, GetCreationLocation(creation));
         }
