@@ -96,7 +96,7 @@ public class MultiLine /* */
     /*      */
     // Noncompliant@-1 (a lot of whitespace inside)
 
-    /**/
+    /**/            
     // Noncompliant@-1 (a lot of whitespace after)
 
     // Noncompliant@+1
@@ -194,13 +194,8 @@ public class MultiLineDocumentation /** */
     /**      */
     // Noncompliant@-1 (a lot of whitespace inside)
 
-    /***/
+    /***/         
     // Noncompliant@-1 (a lot of whitespace after)
-
-    // Noncompliant@+1
-    /**
-     * 
-     */
 
     // Noncompliant@+1
     /**
