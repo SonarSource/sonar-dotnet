@@ -20,9 +20,9 @@
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanOut.cs",
 "region":  {
 "startLine":  36,
-"startColumn":  13,
+"startColumn":  38,
 "endLine":  36,
-"endColumn":  107
+"endColumn":  56
 }
 }
 },
@@ -33,9 +33,9 @@
 "uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
 "region":  {
 "startLine":  542,
-"startColumn":  13,
-"endLine":  554,
-"endColumn":  14
+"startColumn":  26,
+"endLine":  542,
+"endColumn":  38
 }
 }
 }

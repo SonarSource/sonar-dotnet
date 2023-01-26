@@ -7,9 +7,9 @@
 "uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperLocator.cs",
 "region":  {
 "startLine":  66,
-"startColumn":  9,
-"endLine":  82,
-"endColumn":  10
+"startColumn":  29,
+"endLine":  66,
+"endColumn":  47
 }
 }
 },
@@ -33,9 +33,9 @@
 "uri":  "sources\Nancy\src\Nancy\Routing\DefaultRouteCacheProvider.cs",
 "region":  {
 "startLine":  76,
-"startColumn":  13,
-"endLine":  93,
-"endColumn":  14
+"startColumn":  55,
+"endLine":  76,
+"endColumn":  67
 }
 }
 },
@@ -46,9 +46,9 @@
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  3843,
-"startColumn":  9,
-"endLine":  3846,
-"endColumn":  10
+"startColumn":  24,
+"endLine":  3843,
+"endColumn":  37
 }
 }
 }

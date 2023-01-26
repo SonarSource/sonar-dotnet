@@ -20,9 +20,9 @@
 "uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs",
 "region":  {
 "startLine":  402,
-"startColumn":  9,
-"endLine":  408,
-"endColumn":  10
+"startColumn":  40,
+"endLine":  402,
+"endColumn":  56
 }
 }
 }

@@ -33,9 +33,9 @@
 "uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\ReachabilityBenchmarks.cs",
 "region":  {
 "startLine":  84,
-"startColumn":  9,
-"endLine":  88,
-"endColumn":  10
+"startColumn":  22,
+"endLine":  84,
+"endColumn":  33
 }
 }
 },

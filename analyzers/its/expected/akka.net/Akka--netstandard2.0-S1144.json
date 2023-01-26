@@ -7,9 +7,9 @@
 "uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
 "region":  {
 "startLine":  683,
-"startColumn":  9,
-"endLine":  704,
-"endColumn":  10
+"startColumn":  23,
+"endLine":  683,
+"endColumn":  38
 }
 }
 },
@@ -189,9 +189,9 @@
 "uri":  "sources\akka.net\src\core\Akka\IO\UdpConnection.cs",
 "region":  {
 "startLine":  245,
-"startColumn":  9,
-"endLine":  249,
-"endColumn":  10
+"startColumn":  22,
+"endLine":  245,
+"endColumn":  31
 }
 }
 },
@@ -215,9 +215,9 @@
 "uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
 "region":  {
 "startLine":  155,
-"startColumn":  9,
-"endLine":  158,
-"endColumn":  10
+"startColumn":  30,
+"endLine":  155,
+"endColumn":  42
 }
 }
 },
