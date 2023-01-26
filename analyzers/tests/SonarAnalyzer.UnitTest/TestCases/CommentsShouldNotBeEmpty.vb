@@ -1,7 +1,85 @@
-﻿Public Class Program
+﻿Public Class Testcases
 
-    Public Sub Test()
+    Public Sub Comment() '    
+        ' Noncompliant@-1 (inline comment)
 
+        Dim x = 42 'Ipsem Lorum
+        Dim y = 42 ' Ipsem Lorum
+        Dim z = 42 ' 
+        ' Noncompliant@-1 (whitespace)
+
+        Dim a = 42 '''Ipsem Lorum
+        Dim b = 42 ''' Ipsem Lorum
+        Dim c = 42 '''    
+
+        '                                          
+        ' Noncompliant@-1 (whitespace)
+
+        ' *
+        ' Ipsem Lorum
+        'Ipsem Lorum
+        '
+        ' Noncompliant @-1
+
+        '
+
+        ' Noncompliant @-2 
+
+        ' \r
+
+        ' \n
+
+        ' \r\n
+
+        ' \t
+
+        ' z̶̤͚̅̍a̷͈̤̪͌͛̈ļ̷̈͐͝g̸̰̈́͂̆o̴̓̏͜
+
+        ' '''
+
+        ''''
+
+        ' '
+
+        ''
+
+        ''''''
+    End Sub
+
+    Public Sub DocumentationComment()
+        '''                                          
+        ' Noncompliant@-1 (whitespace)
+
+        ''' *
+        ''' Ipsem Lorum
+        '''Ipsem Lorum
+        '''
+
+        ''' Ipsem Lorum
+
+        '''Ipsem Lorum
+
+        '''
+        ' Noncompliant @-1 
+
+        ' Noncompliant @+1
+        '''
+        '''
+        '''
+
+        ''' \r
+
+        ''' \n
+
+        ''' \r\n
+
+        ''' \t
+
+        ''' z̶̤͚̅̍a̷͈̤̪͌͛̈ļ̷̈͐͝g̸̰̈́͂̆o̴̓̏͜
+
+        ''' '''
+
+        ''' '
     End Sub
 
 End Class
