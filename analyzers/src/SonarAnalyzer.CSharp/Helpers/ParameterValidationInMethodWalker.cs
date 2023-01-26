@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Helpers
         private readonly SemanticModel semanticModel;
         private readonly List<Location> argumentExceptionLocations = new();
 
-        private bool keepWalking = true;
+        protected bool keepWalking = true;
 
         public IEnumerable<Location> ArgumentExceptionLocations => argumentExceptionLocations;
 
@@ -48,9 +48,6 @@ namespace SonarAnalyzer.Helpers
                 base.Visit(node);
             }
         }
-
-        public override void VisitAwaitExpression(AwaitExpressionSyntax node) =>
-            keepWalking = false;
 
         public override void VisitThrowStatement(ThrowStatementSyntax node)
         {
