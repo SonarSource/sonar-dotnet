@@ -1,0 +1,17 @@
+{
+  "title": "Value types should implement \"IEquatable\u003cT\u003e\"",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "20min"
+  },
+  "tags": [
+    "performance"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-3898",
+  "sqKey": "S3898",
+  "scope": "All",
+  "quickfix": "unknown"
+}

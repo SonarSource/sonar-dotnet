@@ -40,6 +40,7 @@ public abstract class SyntaxFacade<TSyntaxKind>
     public abstract SyntaxToken? InvocationIdentifier(SyntaxNode invocation);
     public abstract ImmutableArray<SyntaxToken> LocalDeclarationIdentifiers(SyntaxNode node);
     public abstract ImmutableArray<SyntaxToken> FieldDeclarationIdentifiers(SyntaxNode node);
+    public abstract TSyntaxKind[] ModifierKinds(SyntaxNode node);
     public abstract SyntaxNode NodeExpression(SyntaxNode node);
     public abstract SyntaxToken? NodeIdentifier(SyntaxNode node);
     public abstract SyntaxNode RemoveConditionalAccess(SyntaxNode node);

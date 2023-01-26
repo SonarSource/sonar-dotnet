@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Arguments'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgSearchResults.vb",
+"region":  {
+"startLine":  302,
+"startColumn":  23,
+"endLine":  302,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Results'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgSearchResults.vb",
+"region":  {
+"startLine":  312,
+"startColumn":  23,
+"endLine":  312,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Arguments'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgTrailer.vb",
+"region":  {
+"startLine":  336,
+"startColumn":  23,
+"endLine":  336,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Arguments'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  49,
+"startColumn":  23,
+"endLine":  49,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'BufferContents'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\FunctionInformation.vb",
+"region":  {
+"startLine":  33,
+"startColumn":  26,
+"endLine":  33,
+"endColumn":  40
+}
+}
+}
+]
+}

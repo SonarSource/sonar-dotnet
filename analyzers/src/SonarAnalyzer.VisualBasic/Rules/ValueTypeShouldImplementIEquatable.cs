@@ -18,10 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.CSharp;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
+using SonarAnalyzer.Helpers;
 
-[DiagnosticAnalyzer(LanguageNames.CSharp)]
+namespace SonarAnalyzer.Rules.VisualBasic;
+
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
 public sealed class ValueTypeShouldImplementIEquatable : ValueTypeShouldImplementIEquatableBase<SyntaxKind>
 {
-    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 }

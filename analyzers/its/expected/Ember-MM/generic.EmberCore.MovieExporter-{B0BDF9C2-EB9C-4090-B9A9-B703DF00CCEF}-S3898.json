@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Arguments'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  837,
+"startColumn":  23,
+"endLine":  837,
+"endColumn":  32
+}
+}
+}
+]
+}

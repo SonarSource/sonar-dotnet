@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type '_MySettings'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\Module.BulkRenamer.vb",
+"region":  {
+"startLine":  268,
+"startColumn":  15,
+"endLine":  268,
+"endColumn":  26
+}
+}
+}
+]
+}

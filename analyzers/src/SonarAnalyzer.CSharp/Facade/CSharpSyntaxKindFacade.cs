@@ -51,10 +51,12 @@ internal sealed class CSharpSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind>
     public SyntaxKind[] ObjectCreationExpressions => new[] { SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression };
     public SyntaxKind Parameter => SyntaxKind.Parameter;
     public SyntaxKind ParameterList => SyntaxKind.ParameterList;
+    public SyntaxKind RefKeyword => SyntaxKind.RefKeyword;
     public SyntaxKind ReturnStatement => SyntaxKind.ReturnStatement;
     public SyntaxKind SimpleAssignment => SyntaxKind.SimpleAssignmentExpression;
     public SyntaxKind SimpleMemberAccessExpression => SyntaxKind.SimpleMemberAccessExpression;
     public SyntaxKind[] StringLiteralExpressions => new[] { SyntaxKind.StringLiteralExpression, SyntaxKindEx.Utf8StringLiteralExpression };
+    public SyntaxKind StructDeclaration => SyntaxKind.StructDeclaration;
     public SyntaxKind[] TypeDeclaration => new[]
     {
         SyntaxKind.ClassDeclaration,
