@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis.Text;
+
 namespace SonarAnalyzer.Rules;
 
 public abstract class CommentsShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
@@ -25,8 +27,12 @@ public abstract class CommentsShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosti
 {
     private const string DiagnosticId = "S4663";
 
-    protected abstract bool IsValidTriviaType(SyntaxTrivia trivia);
     protected abstract string GetCommentText(SyntaxTrivia trivia);
+    protected abstract bool IsValidTriviaType(SyntaxTrivia trivia);
+
+    protected abstract bool IsSimpleComment(SyntaxTrivia trivia);
+    protected abstract bool IsEndOfLine(SyntaxTrivia trivia);
+    protected abstract bool IsWhitespace(SyntaxTrivia trivia);
 
     protected override string MessageFormat => "Remove this empty comment";
 
@@ -44,12 +50,77 @@ public abstract class CommentsShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosti
 
     protected void CheckTrivia(SonarSyntaxTreeReportingContext context, IEnumerable<SyntaxTrivia> trivia)
     {
-        foreach (var trivium in trivia.Where(ShouldReport))
+        foreach (var partition in Partition(trivia).Where(ShouldReport))
         {
-            context.ReportIssue(Diagnostic.Create(Rule, trivium.GetLocation()));
+            var start = partition.First().GetLocation().SourceSpan.Start;
+            var end = partition.Last().GetLocation().SourceSpan.End;
+
+            var location = Location.Create(context.Tree, TextSpan.FromBounds(start, end));
+            context.ReportIssue(Diagnostic.Create(Rule, location));
+        }
+    }
+
+    protected IEnumerable<IEnumerable<SyntaxTrivia>> Partition(IEnumerable<SyntaxTrivia> trivia)
+    {
+        var res = new List<List<SyntaxTrivia>>();
+
+        var current = new List<SyntaxTrivia>();
+        var endOfLineFound = false;
+
+        foreach (var trivium in trivia)
+        {
+            if (IsWhitespace(trivium))
+            {
+                continue;
+            }
+
+            if (IsSimpleComment(trivium)) // put it on the current block of "//"
+            {
+                current.Add(trivium);
+                endOfLineFound = false;
+                continue;
+            }
+
+            // This is for the case, of two different comment types, for example:
+            // //
+            // ///
+            if (IsValidTriviaType(trivium)) // valid but not "//", because of the upper if
+            {
+                AddCurrent();
+                res.Add(new List<SyntaxTrivia> { trivium });
+            }
+            else if (IsEndOfLine(trivium))
+            {
+                // This is for the case, of an empty line in between, for example:
+                // //
+                //
+                // //
+                if (endOfLineFound)
+                {
+                    AddCurrent();
+                }
+                else
+                {
+                    endOfLineFound = true;
+                }
+            }
+            else
+            {
+                AddCurrent();
+            }
         }
 
-        bool ShouldReport(SyntaxTrivia trivia)
-        => IsValidTriviaType(trivia) && string.IsNullOrEmpty(GetCommentText(trivia));
+        res.Add(current);
+        return res;
+
+        void AddCurrent()
+        {
+            res.Add(current);
+            current = new();
+            endOfLineFound = false;
+        }
     }
+
+    protected bool ShouldReport(IEnumerable<SyntaxTrivia> trivia) =>
+        trivia.Any() && trivia.All(x => GetCommentText(x) == string.Empty);
 }

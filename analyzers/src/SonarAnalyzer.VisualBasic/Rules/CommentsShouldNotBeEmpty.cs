@@ -27,15 +27,19 @@ public sealed class CommentsShouldNotBeEmpty : CommentsShouldNotBeEmptyBase<Synt
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
+    protected override bool IsValidTriviaType(SyntaxTrivia trivia)
+        => Language.SyntaxKind.CommentTrivia.Contains(trivia.Kind());
+
+    protected override bool IsSimpleComment(SyntaxTrivia trivia) => trivia.IsKind(SyntaxKind.CommentTrivia);
+    protected override bool IsEndOfLine(SyntaxTrivia trivia) => trivia.IsKind(SyntaxKind.EndOfLineTrivia);
+    protected override bool IsWhitespace(SyntaxTrivia trivia) => trivia.IsKind(SyntaxKind.WhitespaceTrivia);
+
     protected override string GetCommentText(SyntaxTrivia trivia)
         => trivia.Kind() switch
         {
             SyntaxKind.CommentTrivia => GetText(trivia),
             SyntaxKind.DocumentationCommentTrivia => GetDocumentationText(trivia),
         };
-
-    protected override bool IsValidTriviaType(SyntaxTrivia trivia)
-        => Language.SyntaxKind.CommentTrivia.Contains(trivia.Kind());
 
     // '
     private static string GetText(SyntaxTrivia trivia)

@@ -27,6 +27,13 @@ public sealed class CommentsShouldNotBeEmpty : CommentsShouldNotBeEmptyBase<Synt
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
+    protected override bool IsValidTriviaType(SyntaxTrivia trivia)
+        => Language.SyntaxKind.CommentTrivia.Contains(trivia.Kind());
+
+    protected override bool IsSimpleComment(SyntaxTrivia trivia) => trivia.IsKind(SyntaxKind.SingleLineCommentTrivia);
+    protected override bool IsEndOfLine(SyntaxTrivia trivia) => trivia.IsKind(SyntaxKind.EndOfLineTrivia);
+    protected override bool IsWhitespace(SyntaxTrivia trivia) => trivia.IsKind(SyntaxKind.WhitespaceTrivia);
+
     protected override string GetCommentText(SyntaxTrivia trivia)
         => trivia.Kind() switch
         {
@@ -36,16 +43,9 @@ public sealed class CommentsShouldNotBeEmpty : CommentsShouldNotBeEmptyBase<Synt
             SyntaxKind.MultiLineDocumentationCommentTrivia => GetMultiLineDocumentationText(trivia),
         };
 
-    protected override bool IsValidTriviaType(SyntaxTrivia trivia)
-        => Language.SyntaxKind.CommentTrivia.Contains(trivia.Kind());
-
     // //
     private static string GetSingleLineText(SyntaxTrivia trivia)
         => trivia.ToString().Trim().Substring(2);
-
-    // /* */
-    private static string GetMultiLineText(SyntaxTrivia trivia) =>
-        ParseMultiLine(trivia.ToString(), 2); // Length of "/*"
 
     // ///
     private static string GetSingleLineDocumentationText(SyntaxTrivia trivia)
@@ -63,6 +63,10 @@ public sealed class CommentsShouldNotBeEmpty : CommentsShouldNotBeEmptyBase<Synt
         }
         return stringBuilder.ToString();
     }
+
+    // /* */
+    private static string GetMultiLineText(SyntaxTrivia trivia) =>
+        ParseMultiLine(trivia.ToString(), 2); // Length of "/*"
 
     // /** */
     private static string GetMultiLineDocumentationText(SyntaxTrivia trivia) =>
