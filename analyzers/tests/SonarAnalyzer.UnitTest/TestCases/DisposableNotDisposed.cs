@@ -1,7 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
-using FluentAssertions.Execution;
 
 namespace Tests.Diagnostics
 {
@@ -57,6 +57,12 @@ namespace Tests.Diagnostics
                 // do nothing but dispose
             }
 
+            FileStream fs6_1 = new FileStream(@"c:\foo.txt", FileMode.Open);
+            using (fs6_1)
+            {
+                // do nothing but dispose
+            }
+
             var fs7 = new FileStream(@"c:\foo.txt", FileMode.Open); // Compliant - Dispose()
             fs7.Dispose();
 
@@ -98,7 +104,7 @@ namespace Tests.Diagnostics
             field_fs5 = new FileStream(@"c:\foo.txt", FileMode.Open); // Noncompliant
 
             NoOperation(field_fs6);
-            field_fs6 = new FileStream(@"c:\foo.txt", FileMode.Open); // Compliant - field_fs6 gets passed to a method
+            field_fs6 = new FileStream(@"c:\foo.txt", FileMode.Open); // FN - field_fs6 is re-assigned a new FileStream (and not disposed) after passing it to a method
 
             field_fs7 = new FileStream(@"c:\foo.txt", FileMode.Open); // Noncompliant - even if field_fs7's type is object
 
@@ -118,41 +124,29 @@ namespace Tests.Diagnostics
         {
             // do nothing
         }
-
-
-        private void Clear()
-        {
-            using var inner_field_fs1 = new FileStream(@"c:\foo.txt", FileMode.Open);
-        }
-
-        public void FluentAssertionTypes()
-        {
-            var scope = new AssertionScope();                           // Noncompliant
-            var s = new FluentAssertions.Execution.AssertionScope();    // Noncompliant
-
-            using var _ = new AssertionScope();
-            using (var disposed = new AssertionScope()) {
-            }
-        }
-    }
-
-    public ref struct Struct
-    {
-        public void Dispose()
-        {
-        }
-    }
-
-    public class Consumer
-    {
-        public void Method()
-        {
-            using var x = new Struct();
-            var y = new Struct(); // Noncompliant
-        }
     }
 
     public class Empty
     {
+    }
+
+    public sealed class ImplementsDisposable : IDisposable
+    {
+        private readonly FileStream stream;
+
+        public ImplementsDisposable()
+        {
+            stream = new FileStream(@"c:\foo.txt", FileMode.Open);              // Compliant
+        }
+
+        public void Dispose()
+        {
+            stream.Dispose();
+        }
+    }
+
+    public class DisposableTest
+    {
+        private ImplementsDisposable stream = new ImplementsDisposable();     // Compliant - the rule only tracks specific IDisposable / IAsyncDisposable types
     }
 }

@@ -40,7 +40,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.System_Net_Sockets_TcpClient,
                 KnownType.System_Net_Sockets_UdpClient);
 
-        private static readonly ISet<string> DisposeMethods = new HashSet<string> { "Dispose", "Close" };
+        private static readonly ImmutableArray<KnownType> DisposableTypes = ImmutableArray.Create(KnownType.System_IDisposable, KnownType.System_IAsyncDisposable);
+
+        private static readonly ISet<string> DisposeMethods = new HashSet<string> { "Dispose", "DisposeAsync", "Close" };
 
         private static readonly ISet<string> FactoryMethods = new HashSet<string>
         {
@@ -142,7 +144,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var simpleAssignment in simpleAssignments)
             {
-                if (!simpleAssignment.Parent.IsKind(SyntaxKind.UsingStatement)
+                if (!IsNodeInsideUsingStatement(simpleAssignment)
                     && IsInstantiation(simpleAssignment.Right, semanticModel)
                     && semanticModel.GetSymbolInfo(simpleAssignment.Left).Symbol is { } referencedSymbol
                     && IsLocalOrPrivateField(referencedSymbol))
@@ -150,6 +152,16 @@ namespace SonarAnalyzer.Rules.CSharp
                     trackedNodesAndSymbols.Add(new NodeAndSymbol(simpleAssignment, referencedSymbol));
                 }
             }
+        }
+
+        private static bool IsNodeInsideUsingStatement(SyntaxNode node)
+        {
+            var ancestors = node.AncestorsAndSelf().ToArray();
+            var usingStatements = ancestors.OfType<UsingStatementSyntax>();
+            var usingDeclarations = ancestors.OfType<LocalDeclarationStatementSyntax>();
+
+            return usingStatements.Any(x => ancestors.Contains(x.Expression) || ancestors.Contains(x.Declaration))
+                || usingDeclarations.Any(x => ancestors.Contains(x.Declaration));
         }
 
         private static IEnumerable<SyntaxNode> GetDescendantNodes(INamedTypeSymbol namedType, SyntaxNode typeDeclaration) =>
@@ -185,7 +197,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 if (name != null
-                    && DisposeMethods.Contains(name.Identifier.Text)
+                    && (DisposeMethods.Contains(name.Identifier.Text) || IsNodeInsideUsingStatement(expression))
                     && semanticModel.GetSymbolInfo(expression).Symbol is { } referencedSymbol
                     && IsLocalOrPrivateField(referencedSymbol))
                 {
@@ -247,7 +259,7 @@ namespace SonarAnalyzer.Rules.CSharp
             && semanticModel.GetTypeInfo(expression).Type is var type
             && type.IsAny(TrackedTypes)
             && semanticModel.GetSymbolInfo(expression).Symbol is IMethodSymbol constructor
-            && !constructor.Parameters.Any(x => x.Type.Implements(KnownType.System_IDisposable));
+            && !constructor.Parameters.Any(x => x.Type.ImplementsAny(DisposableTypes));
 
         private static bool IsDisposableRefStructCreation(ExpressionSyntax expression, SemanticModel semanticModel) =>
             expression.IsAnyKind(SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression)

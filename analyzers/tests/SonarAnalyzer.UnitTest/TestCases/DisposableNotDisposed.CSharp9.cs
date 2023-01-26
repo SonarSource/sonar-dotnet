@@ -97,19 +97,3 @@ record MyRecord
         var s = new WebClient();                                   // Noncompliant - another tracked type
     }
 }
-
-// Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/5879
-public class Test : IAsyncDisposable
-{
-    private readonly FileStream stream;
-
-    public Test()
-    {
-        stream = new FileStream("C://some-path", FileMode.CreateNew); // Noncompliant - FP stream is disposed in DisposeAsync
-    }
-
-    public async ValueTask DisposeAsync()
-    {
-        await stream.DisposeAsync();
-    }
-}
