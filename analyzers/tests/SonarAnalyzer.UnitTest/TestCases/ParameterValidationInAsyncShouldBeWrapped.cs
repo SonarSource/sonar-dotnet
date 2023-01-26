@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Tests.Diagnostics
@@ -55,6 +56,20 @@ namespace Tests.Diagnostics
 
     public class ValidCases
     {
+        // https://github.com/SonarSource/sonar-dotnet/issues/6449
+        public class Repro_6449
+        {
+            public Task<int[]> CheckAsync() => Task.FromResult(new int[] { 1 });
+            public Task<int> Check2Async() => Task.FromResult(1);
+
+            public async Task HasS4457Async(int request) // Compliant 
+            {
+                var identifierType = (await CheckAsync()).FirstOrDefault(x => x == request);
+                if (identifierType == 0)
+                    throw new ArgumentException("message"); 
+            }
+        }
+
         public static Task FooAsync(string something)
         {
             if (something == null) { throw new ArgumentNullException(nameof(something)); }

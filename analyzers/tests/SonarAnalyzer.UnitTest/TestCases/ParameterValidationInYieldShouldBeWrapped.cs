@@ -54,6 +54,20 @@ namespace Tests.Diagnostics
         {
             return new ArgumentNullException(name);
         }
+
+        // Documenting that this rule fires even if T:ArgumentException has no argument
+        public static IEnumerable<int> ThrowWithoutArgument(int a) // Noncompliant
+        {
+            throw new ArgumentNullException(); // Secondary
+            yield return 42;
+        }
+
+        // Documenting that this rule fires even if T:ArgumentException has an ad-hoc argument
+        public static IEnumerable<int> ThrowWithAdHocArgument(int a) // Noncompliant
+        {
+            throw new ArgumentNullException("i am not a parameter name"); // Secondary
+            yield return 42;
+        }
     }
 
     public static class ValidCases

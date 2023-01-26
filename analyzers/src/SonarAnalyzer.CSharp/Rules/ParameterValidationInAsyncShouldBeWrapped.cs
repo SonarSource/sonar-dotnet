@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var walker = new ParameterValidationInMethodWalker(c.SemanticModel);
+                    var walker = new ParameterValidationInAsyncWalker(c.SemanticModel);
                     walker.SafeVisit(method);
                     if (walker.ArgumentExceptionLocations.Any())
                     {
@@ -49,5 +49,16 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 },
                 SyntaxKind.MethodDeclaration);
+
+        private sealed class ParameterValidationInAsyncWalker : ParameterValidationInMethodWalker
+        {
+            public ParameterValidationInAsyncWalker(SemanticModel semanticModel)
+                : base(semanticModel)
+            {
+            }
+
+            public override void VisitAwaitExpression(AwaitExpressionSyntax node) =>
+                keepWalking = false;
+        }
     }
 }
