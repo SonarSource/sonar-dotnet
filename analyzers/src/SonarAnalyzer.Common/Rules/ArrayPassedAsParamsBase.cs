@@ -27,7 +27,7 @@ public abstract class ArrayPassedAsParamsBase<TSyntaxKind, TInvocationExpression
 {
     private const string DiagnosticId = "S3878";
 
-    public static readonly string MessageBase = "Arrays should not be created for {0} parameters.";
+    protected const string MessageBase = "Arrays should not be created for {0} parameters.";
 
     private readonly DiagnosticDescriptor rule;
     protected abstract string ParameterKeyword { get; }
