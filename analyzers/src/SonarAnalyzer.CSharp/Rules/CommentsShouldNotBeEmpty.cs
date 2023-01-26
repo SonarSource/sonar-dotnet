@@ -44,29 +44,8 @@ public sealed class CommentsShouldNotBeEmpty : CommentsShouldNotBeEmptyBase<Synt
         => trivia.ToString().Trim().Substring(2);
 
     // /* */
-    private static string GetMultiLineText(SyntaxTrivia trivia)
-    {
-        var stringBuilder = new StringBuilder();
-        var commentText = trivia.ToString().Trim().Substring(2);
-
-        if (commentText.EndsWith("*/", StringComparison.Ordinal)) // Might be unclosed, still reported
-        {
-            commentText = commentText.Substring(0, commentText.Length - 2);
-        }
-
-        foreach (var line in commentText.Split(MetricsBase.LineTerminators, StringSplitOptions.None))
-        {
-            var trimmedLine = line.TrimStart(null);
-            if (trimmedLine.StartsWith("*", StringComparison.Ordinal))
-            {
-                trimmedLine = trimmedLine.TrimStart('*');
-            }
-
-            stringBuilder.Append(trimmedLine.Trim());
-        }
-
-        return stringBuilder.ToString();
-    }
+    private static string GetMultiLineText(SyntaxTrivia trivia) =>
+        ParseMultiLine(trivia.ToString(), 2); // Length of "/*"
 
     // ///
     private static string GetSingleLineDocumentationText(SyntaxTrivia trivia)
@@ -86,16 +65,19 @@ public sealed class CommentsShouldNotBeEmpty : CommentsShouldNotBeEmptyBase<Synt
     }
 
     // /** */
-    private static string GetMultiLineDocumentationText(SyntaxTrivia trivia)
+    private static string GetMultiLineDocumentationText(SyntaxTrivia trivia) =>
+        ParseMultiLine(trivia.ToFullString(), 3); // Length of "/**"
+
+    private static string ParseMultiLine(string commentText, int initialTrimSize)
     {
-        var stringBuilder = new StringBuilder();
-        var commentText = trivia.ToFullString().Trim().Substring(3);
+        commentText = commentText.Trim().Substring(initialTrimSize);
 
         if (commentText.EndsWith("*/", StringComparison.Ordinal)) // Might be unclosed, still reported
         {
             commentText = commentText.Substring(0, commentText.Length - 2);
         }
 
+        var stringBuilder = new StringBuilder();
         foreach (var line in commentText.Split(MetricsBase.LineTerminators, StringSplitOptions.None))
         {
             var trimmedLine = line.TrimStart(null);
