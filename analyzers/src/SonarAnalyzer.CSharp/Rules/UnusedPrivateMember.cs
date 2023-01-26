@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Constants;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -40,6 +41,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.UnityEngine_MonoBehaviour,
                 KnownType.UnityEngine_ScriptableObject,
                 KnownType.Microsoft_EntityFrameworkCore_Migrations_Migration);
+
+        private static readonly SyntaxKind[] SyntaxKindsToOnlyShowIdentifierLocation = new[]
+        {
+            SyntaxKindEx.RecordClassDeclaration,
+            SyntaxKindEx.RecordStructDeclaration,
+            SyntaxKind.ClassDeclaration, SyntaxKind.StructDeclaration,
+            SyntaxKind.MethodDeclaration
+        };
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(RuleS1144, RuleS4487);
         protected override bool EnableConcurrentExecution => false;
@@ -215,8 +224,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 };
 
             Diagnostic CreateS1144Diagnostic(SyntaxNode syntaxNode, ISymbol symbol) =>
-                Diagnostic.Create(RuleS1144, syntaxNode.GetLocation(), accessibility, symbol.GetClassification(), GetMemberName(symbol));
+                Diagnostic.Create(RuleS1144, GetIssueLocation(syntaxNode), accessibility, symbol.GetClassification(), GetMemberName(symbol));
         }
+
+        private static Location GetIssueLocation(SyntaxNode syntaxNode) =>
+            syntaxNode.IsAnyKind(SyntaxKindsToOnlyShowIdentifierLocation) && syntaxNode.GetIdentifier().HasValue
+                ? syntaxNode.GetIdentifier().Value.GetLocation()
+                : syntaxNode.GetLocation();
 
         private static Diagnostic GetDiagnosticsForProperty(IPropertySymbol property, IReadOnlyDictionary<IPropertySymbol, AccessorAccess> propertyAccessorAccess)
         {

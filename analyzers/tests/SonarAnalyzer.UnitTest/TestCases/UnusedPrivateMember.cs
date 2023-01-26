@@ -67,10 +67,11 @@ namespace Tests.Diagnostics
             get; set;
         }
         private void Method() { } // Noncompliant {{Remove the unused private method 'Method'.}}
+//                   ^^^^^^
         private class Class { }// Noncompliant {{Remove the unused private class 'Class'.}}
-//      ^^^^^^^^^^^^^^^^^^^^^^^
+//                    ^^^^^
         private struct Struct { }// Noncompliant {{Remove the unused private struct 'Struct'.}}
-//      ^^^^^^^^^^^^^^^^^^^^^^^^^
+//                     ^^^^^^
         private delegate void Delegate();
         private delegate void Delegate2(); // Noncompliant {{Remove the unused private delegate 'Delegate2'.}}
         private event Delegate Event; //Noncompliant {{Remove the unused private event 'Event'.}}
