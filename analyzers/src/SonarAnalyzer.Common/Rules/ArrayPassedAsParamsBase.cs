@@ -20,15 +20,15 @@
 
 namespace SonarAnalyzer.Rules;
 
-public abstract class ArrayPassedAsParamsBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+public abstract class ArrayPassedAsParamsBase<TSyntaxKind, TArgumentNode> : SonarDiagnosticAnalyzer<TSyntaxKind>
     where TSyntaxKind : struct
+    where TArgumentNode : SyntaxNode
 {
     private const string DiagnosticId = "S3878";
     protected override string MessageFormat => "Remove this array creation and simply pass the elements.";
 
     private readonly DiagnosticDescriptor rule;
-    protected abstract bool ShouldReport(SonarSyntaxNodeReportingContext context, SyntaxNode expression);
-    protected abstract Location GetLocation(SyntaxNode expression);
+    protected abstract TArgumentNode GetLastArgumentIfArrayCreation(SyntaxNode invocation);
 
     protected ArrayPassedAsParamsBase() : base(DiagnosticId) =>
         rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
@@ -41,17 +41,15 @@ public abstract class ArrayPassedAsParamsBase<TSyntaxKind> : SonarDiagnosticAnal
 
     private void CheckExpression(SonarSyntaxNodeReportingContext context)
     {
-        if (context.Node is { } expression && ShouldReport(context, expression))
+        if (GetLastArgumentIfArrayCreation(context.Node) is { } lastArgument
+            && IsParamParameter(context, context.Node, lastArgument))
         {
-            Report(context, GetLocation(expression));
+            context.ReportIssue(Diagnostic.Create(rule, lastArgument.GetLocation()));
         }
     }
 
-    private void Report(SonarSyntaxNodeReportingContext context, Location location) =>
-        context.ReportIssue(Diagnostic.Create(rule, location));
-
-    protected bool IsParamParameter(SonarSyntaxNodeReportingContext context, SyntaxNode node, SyntaxNode argument) =>
-        context.SemanticModel.GetSymbolInfo(node).Symbol is IMethodSymbol methodSymbol
-        && Language.MethodParameterLookup(node, methodSymbol).TryGetSymbol(argument, out var param)
+    protected bool IsParamParameter(SonarSyntaxNodeReportingContext context, SyntaxNode invocation, SyntaxNode argument) =>
+        context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
+        && Language.MethodParameterLookup(invocation, methodSymbol).TryGetSymbol(argument, out var param)
         && param.IsParams;
 }

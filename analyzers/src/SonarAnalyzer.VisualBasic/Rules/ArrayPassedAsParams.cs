@@ -21,31 +21,23 @@
 namespace SonarAnalyzer.Rules.VisualBasic;
 
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind>
+public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, ArgumentSyntax>
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-    protected override bool ShouldReport(SonarSyntaxNodeReportingContext context, SyntaxNode expression) =>
+    protected override ArgumentSyntax GetLastArgumentIfArrayCreation(SyntaxNode expression) =>
         expression switch
         {
-            ObjectCreationExpressionSyntax { } creation =>
-                CheckLastArgument(creation.ArgumentList) && IsParamParameter(context, creation, creation.ArgumentList.Arguments.Last()),
-            InvocationExpressionSyntax { } invocation =>
-                CheckLastArgument(invocation.ArgumentList) && IsParamParameter(context, invocation, invocation.ArgumentList.Arguments.Last()),
-            _ => false,
+            ObjectCreationExpressionSyntax { } creation => CheckLastArgument(creation.ArgumentList),
+            InvocationExpressionSyntax { } invocation => CheckLastArgument(invocation.ArgumentList),
+            _ => null
         };
 
-    protected override Location GetLocation(SyntaxNode expression) =>
-        expression switch
-        {
-            ObjectCreationExpressionSyntax { } creation => creation.ArgumentList.Arguments.Last().GetExpression().GetLocation(),
-            InvocationExpressionSyntax { } invocation => invocation.ArgumentList.Arguments.Last().GetExpression().GetLocation(),
-            _ => expression.GetLocation()
-        };
-
-    private static bool CheckLastArgument(ArgumentListSyntax argumentList) =>
+    private static ArgumentSyntax CheckLastArgument(ArgumentListSyntax argumentList) =>
         argumentList is not null
         && argumentList.Arguments.Any()
         && argumentList.Arguments.Last().GetExpression() is ArrayCreationExpressionSyntax invocationArray
-        && invocationArray.Initializer is CollectionInitializerSyntax { Initializers.Count: > 0 };
+        && invocationArray.Initializer is CollectionInitializerSyntax { Initializers.Count: > 0 }
+        ? argumentList.Arguments.Last()
+        : null;
 }
