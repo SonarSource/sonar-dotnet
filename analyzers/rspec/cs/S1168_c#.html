@@ -1,6 +1,6 @@
-<p>Returning <code>null</code> instead of an actual array, collection or map forces callers of the method to explicitly test for nullity, making them
-more complex and less readable.</p>
-<p>Moreover, in many cases, <code>null</code> is used as a synonym for empty.</p>
+<p>Returning <code>null</code> or <code>default</code> instead of an actual collection forces the method callers to explicitly test for null, making
+the code more complex and less readable.</p>
+<p>Moreover, in many cases, <code>null</code> or <code>default</code> is used as a synonym for empty.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 public Result[] GetResults()
@@ -8,9 +8,12 @@ public Result[] GetResults()
     return null; // Noncompliant
 }
 
-public IEnumerable&lt;Result&gt; GetResults()
+public IEnumerable&lt;Result&gt; GetResults(bool condition)
 {
-    return null; // Noncompliant
+    var results = GenerateResults();
+    return condition
+        ? results
+        : null; // Noncompliant
 }
 
 public IEnumerable&lt;Result&gt; GetResults() =&gt; null; // Noncompliant
@@ -19,11 +22,11 @@ public IEnumerable&lt;Result&gt; Results
 {
     get
     {
-        return null; // Noncompliant
+        return default(IEnumerable&lt;Result&gt;); // Noncompliant
     }
 }
 
-public IEnumerable&lt;Result&gt; Results =&gt; null; // Noncompliant
+public IEnumerable&lt;Result&gt; Results =&gt; default; // Noncompliant
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
@@ -32,9 +35,12 @@ public Result[] GetResults()
     return new Result[0];
 }
 
-public IEnumerable&lt;Result&gt; GetResults()
+public IEnumerable&lt;Result&gt; GetResults(bool condition)
 {
-    return Enumerable.Empty&lt;Result&gt;();
+    var results = GenerateResults();
+    return condition
+        ? results
+        : Enumerable.Empty&lt;Result&gt;();
 }
 
 public IEnumerable&lt;Result&gt; GetResults() =&gt; Enumerable.Empty&lt;Result&gt;();

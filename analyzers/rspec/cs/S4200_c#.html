@@ -1,8 +1,8 @@
-<p>Native methods are functions that reside in libraries outside the virtual machine. Being able to call them is useful for interoperability with
-applications and libraries written in other programming languages, in particular when performing platform-specific operations. However doing so comes
-with extra risks since it means stepping out of the security model of the virtual machine. It is therefore highly recommended to take extra steps,
-like input validation, when invoking native methods. This is best done by making the native method <code>private</code> and by providing a wrapper
-that performs these extra steps and verifications.</p>
+<p>Native methods are functions that reside in libraries outside the .NET runtime. Calling them is helpful for interoperability with applications and
+libraries written in other programming languages, mainly when performing platform-specific operations. However, doing so comes with additional risks
+since it means stepping out of the memory-safety model of the runtime. It is therefore highly recommended to take extra steps, like input validation,
+when invoking native methods. Making the native method <code>private</code> and providing a wrapper that performs these additional steps is the best
+way to do so.</p>
 <p>This rule raises an issue when a native method is declared <code>public</code> or its wrapper is too trivial.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
@@ -34,7 +34,7 @@ namespace MyLibrary
     {
       if (s != null &amp;&amp; x &gt;= 0  &amp;&amp; x &lt; s.Length)
       {
-        bar(s, x);
+        Bar(s, x);
       }
     }
   }

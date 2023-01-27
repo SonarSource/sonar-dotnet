@@ -1,5 +1,5 @@
 {
-  "title": "\"Exception\" should not be caught when not required by called methods",
+  "title": "\"Exception\" should not be caught",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {

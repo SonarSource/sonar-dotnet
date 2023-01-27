@@ -5,27 +5,23 @@ reflection are used to make comparisons.</p>
 <pre>
 struct MyStruct  // Noncompliant
 {
-  private int i;
-  public int I
-  {
-    //...
-  }
+    public int Value { get; set; }
 }
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
 struct MyStruct : IEquatable&lt;MyStruct&gt;
 {
-  private int i;
-  public int I
-  {
-    //...
-  }
+    public int Value { get; set; }
 
-  public bool Equals(MyStruct other)
-  {
-    throw new NotImplementedException();
-  }
+    public bool Equals(MyStruct other)
+    {
+        // ...
+    }
 }
 </pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.iequatable-1">IEquatable&lt;T&gt; Interface</a> </li>
+</ul>
 
