@@ -28,7 +28,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 public class PrivateConstructors
 {
     private PrivateConstructors(int i) { var x = 5; } // Noncompliant {{Remove the unused private constructor 'PrivateConstructors'.}}
-//  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+//          ^^^^^^^^^^^^^^^^^^^
     static PrivateConstructors() { var x = 5; }
 
     private class InnerPrivateClass // Noncompliant

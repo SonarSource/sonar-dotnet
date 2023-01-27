@@ -223,12 +223,12 @@ namespace Tests.Diagnostics
     public class PropertyAccess
     {
         private int OnlyRead { get; set; }  // Noncompliant {{Remove the unused private set accessor in property 'OnlyRead'.}}
-//                                  ^^^^
+//                                  ^^^
         private int OnlySet { get; set; }
         private int OnlySet2 { get { return 42; } set { } } // Noncompliant {{Remove the unused private get accessor in property 'OnlySet2'.}}
-//                             ^^^^^^^^^^^^^^^^^^
+//                             ^^^
         private int NotAccessed { get; set; }   // Noncompliant {{Remove the unused private property 'NotAccessed'.}}
-//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+//                  ^^^^^^^^^^^
         private int BothAccessed { get; set; }
 
         private int OnlyGet { get { return 42; } }

@@ -28,7 +28,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 public class PrivateMembers
 {
     private int PrivateProperty { get; set; } // Noncompliant {{Remove the unused private property 'PrivateProperty'.}}
-//  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+//              ^^^^^^^^^^^^^^^
     private static int PrivateStaticProperty { get; set; } // Noncompliant
     private int this[string i] { get { return 5; } set { } } // Noncompliant
 

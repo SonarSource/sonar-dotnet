@@ -42,14 +42,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.UnityEngine_ScriptableObject,
                 KnownType.Microsoft_EntityFrameworkCore_Migrations_Migration);
 
-        private static readonly SyntaxKind[] SyntaxKindsToOnlyShowIdentifierLocation = new[]
-        {
-            SyntaxKindEx.RecordClassDeclaration,
-            SyntaxKindEx.RecordStructDeclaration,
-            SyntaxKind.ClassDeclaration, SyntaxKind.StructDeclaration,
-            SyntaxKind.MethodDeclaration
-        };
-
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(RuleS1144, RuleS4487);
         protected override bool EnableConcurrentExecution => false;
 
@@ -228,7 +220,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static Location GetIssueLocation(SyntaxNode syntaxNode) =>
-            syntaxNode.IsAnyKind(SyntaxKindsToOnlyShowIdentifierLocation) && syntaxNode.GetIdentifier().HasValue
+            syntaxNode.GetIdentifier().HasValue
                 ? syntaxNode.GetIdentifier().Value.GetLocation()
                 : syntaxNode.GetLocation();
 
@@ -239,14 +231,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 && property.SetMethod is { }
                 && GetAccessorSyntax(property.SetMethod) is { } setter)
             {
-                return Diagnostic.Create(RuleS1144, setter.GetLocation(), SyntaxConstants.Private, "set accessor in property", property.Name);
+                return Diagnostic.Create(RuleS1144, setter.Keyword.GetLocation(), SyntaxConstants.Private, "set accessor in property", property.Name);
             }
             else if (access == AccessorAccess.Set
                      && property.GetMethod is { }
                      && GetAccessorSyntax(property.GetMethod) is { } getter
                      && getter.HasBodyOrExpressionBody())
             {
-                return Diagnostic.Create(RuleS1144, getter.GetLocation(), SyntaxConstants.Private, "get accessor in property", property.Name);
+                return Diagnostic.Create(RuleS1144, getter.Keyword.GetLocation(), SyntaxConstants.Private, "get accessor in property", property.Name);
             }
             else
             {
