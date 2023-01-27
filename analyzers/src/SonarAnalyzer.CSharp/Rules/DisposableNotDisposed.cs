@@ -158,10 +158,12 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var ancestors = node.AncestorsAndSelf().ToArray();
             var usingStatements = ancestors.OfType<UsingStatementSyntax>();
-            var usingDeclarations = ancestors.OfType<LocalDeclarationStatementSyntax>();
+            var usingDeclarations = ancestors
+                .OfType<LocalDeclarationStatementSyntax>()
+                .Where(x => x.UsingKeyword() != default);
 
             return usingStatements.Any(x => ancestors.Contains(x.Expression) || ancestors.Contains(x.Declaration))
-                || usingDeclarations.Any(x => ancestors.Contains(x.Declaration));
+                || usingDeclarations.Any();
         }
 
         private static IEnumerable<SyntaxNode> GetDescendantNodes(INamedTypeSymbol namedType, SyntaxNode typeDeclaration) =>
