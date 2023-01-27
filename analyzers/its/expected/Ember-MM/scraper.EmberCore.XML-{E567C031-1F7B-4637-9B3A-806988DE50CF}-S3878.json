@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3878",
-"message":  "Arrays should not be created for ParamArray parameters.",
+"message":  "Remove this array creation and simply pass the elements.",
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S3878",
-"message":  "Arrays should not be created for ParamArray parameters.",
+"message":  "Remove this array creation and simply pass the elements.",
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S3878",
-"message":  "Arrays should not be created for ParamArray parameters.",
+"message":  "Remove this array creation and simply pass the elements.",
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S3878",
-"message":  "Arrays should not be created for ParamArray parameters.",
+"message":  "Remove this array creation and simply pass the elements.",
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S3878",
-"message":  "Arrays should not be created for ParamArray parameters.",
+"message":  "Remove this array creation and simply pass the elements.",
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MusicVideoTag.vb",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S3878",
-"message":  "Arrays should not be created for ParamArray parameters.",
+"message":  "Remove this array creation and simply pass the elements.",
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\PersonInfo.vb",
 "region":  {
@@ -80,7 +80,7 @@
 },
 {
 "id":  "S3878",
-"message":  "Arrays should not be created for ParamArray parameters.",
+"message":  "Remove this array creation and simply pass the elements.",
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
 "region":  {
@@ -93,7 +93,7 @@
 },
 {
 "id":  "S3878",
-"message":  "Arrays should not be created for ParamArray parameters.",
+"message":  "Remove this array creation and simply pass the elements.",
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVShow.vb",
 "region":  {

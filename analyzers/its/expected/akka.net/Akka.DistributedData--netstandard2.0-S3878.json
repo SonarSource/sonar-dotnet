@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3878",
-"message":  "Arrays should not be created for params parameters.",
+"message":  "Remove this array creation and simply pass the elements.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S3878",
-"message":  "Arrays should not be created for params parameters.",
+"message":  "Remove this array creation and simply pass the elements.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
 "region":  {
