@@ -22,6 +22,7 @@ namespace SonarAnalyzer.Helpers
 {
     public interface IMethodParameterLookup
     {
+        bool TryGetSymbol(SyntaxNode argument, out IParameterSymbol parameter);
         bool TryGetSyntax(IParameterSymbol parameter, out ImmutableArray<SyntaxNode> expressions);
         bool TryGetSyntax(string parameterName, out ImmutableArray<SyntaxNode> expressions);
         bool TryGetNonParamsSyntax(IParameterSymbol parameter, out SyntaxNode expression);
@@ -44,9 +45,10 @@ namespace SonarAnalyzer.Helpers
             MethodSymbol = methodSymbol;
         }
 
-        public bool TryGetSymbol(TArgumentSyntax argument, out IParameterSymbol parameter)
+        public bool TryGetSymbol(SyntaxNode arg, out IParameterSymbol parameter)
         {
             parameter = null;
+            var argument = (TArgumentSyntax)arg;
 
             if (!argumentList.HasValue
                 || !argumentList.Value.Contains(argument)

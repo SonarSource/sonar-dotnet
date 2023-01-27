@@ -24,7 +24,6 @@ namespace SonarAnalyzer.Rules.CSharp;
 public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
-    protected override string ParameterKeyword => "params";
 
     protected override bool ShouldReport(SonarSyntaxNodeReportingContext context, SyntaxNode expression) =>
         expression switch
@@ -49,10 +48,4 @@ public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind>
         && argumentList.Arguments.Any()
         && argumentList.Arguments.Last().Expression is ArrayCreationExpressionSyntax invocationArray
         && invocationArray.Initializer is InitializerExpressionSyntax { Expressions.Count: > 0 };
-
-    private bool IsParamParameter(SonarSyntaxNodeReportingContext context, SyntaxNode node, ArgumentSyntax argument) =>
-        context.SemanticModel.GetSymbolInfo(node).Symbol is IMethodSymbol methodSymbol
-        && Language.MethodParameterLookup(node, methodSymbol) is CSharpMethodParameterLookup lookup
-        && lookup.TryGetSymbol(argument, out var param)
-        && param.IsParams;
 }

@@ -4,7 +4,7 @@ public class Program
 {
     public void Base(string[] myArray)
     {
-        Method(new string[] { "s1", "s2" }); // Noncompliant {{Arrays should not be created for params parameters.}}
+        Method(new string[] { "s1", "s2" }); // Noncompliant {{Remove this array creation and simply pass the elements.}}
 //             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
         Method(new string[] { "s1" }); // Noncompliant
         Method("s1");           // Compliant
@@ -12,7 +12,7 @@ public class Program
         Method(myArray);        // Compliant
         Method(new string[12]); // Compliant
 
-        Method2(1, new string[] { "s1", "s2" }); // Noncompliant {{Arrays should not be created for params parameters.}}
+        Method2(1, new string[] { "s1", "s2" }); // Noncompliant {{Remove this array creation and simply pass the elements.}}
 //                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
         Method2(1, new string[] { "s1" }); // Noncompliant
         Method2(1, "s1");           // Compliant

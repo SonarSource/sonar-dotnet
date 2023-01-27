@@ -24,10 +24,9 @@ public abstract class ArrayPassedAsParamsBase<TSyntaxKind> : SonarDiagnosticAnal
     where TSyntaxKind : struct
 {
     private const string DiagnosticId = "S3878";
-    protected override string MessageFormat => "Arrays should not be created for {0} parameters.";
+    protected override string MessageFormat => "Remove this array creation and simply pass the elements.";
 
     private readonly DiagnosticDescriptor rule;
-    protected abstract string ParameterKeyword { get; }
     protected abstract bool ShouldReport(SonarSyntaxNodeReportingContext context, SyntaxNode expression);
     protected abstract Location GetLocation(SyntaxNode expression);
 
@@ -49,5 +48,10 @@ public abstract class ArrayPassedAsParamsBase<TSyntaxKind> : SonarDiagnosticAnal
     }
 
     private void Report(SonarSyntaxNodeReportingContext context, Location location) =>
-        context.ReportIssue(Diagnostic.Create(rule, location, ParameterKeyword));
+        context.ReportIssue(Diagnostic.Create(rule, location));
+
+    protected bool IsParamParameter(SonarSyntaxNodeReportingContext context, SyntaxNode node, SyntaxNode argument) =>
+        context.SemanticModel.GetSymbolInfo(node).Symbol is IMethodSymbol methodSymbol
+        && Language.MethodParameterLookup(node, methodSymbol).TryGetSymbol(argument, out var param)
+        && param.IsParams;
 }

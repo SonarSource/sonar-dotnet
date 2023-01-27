@@ -1,7 +1,7 @@
 ﻿
 Public Class Program
     Public Sub Base(ByVal myArray As String())
-        Method(New String() {"s1", "s2"}) ' Noncompliant {{Arrays should not be created for ParamArray parameters.}}
+        Method(New String() {"s1", "s2"}) ' Noncompliant {{Remove this array creation and simply pass the elements.}}
         '      ^^^^^^^^^^^^^^^^^^^^^^^^^
         Method(New String() {"s1"}) ' Noncompliant
         Method("s1")               ' Compliant
@@ -9,7 +9,7 @@ Public Class Program
         Method(myArray)            ' Compliant
         Method(New String(11) {})  ' Compliant
 
-        Method2(1, New String() {"s1", "s2"}) ' Noncompliant {{Arrays should not be created for ParamArray parameters.}}
+        Method2(1, New String() {"s1", "s2"}) ' Noncompliant {{Remove this array creation and simply pass the elements.}}
         '          ^^^^^^^^^^^^^^^^^^^^^^^^^
         Method2(1, New String() {"s1"}) ' Noncompliant
         Method2(1, "s1")                ' Compliant
