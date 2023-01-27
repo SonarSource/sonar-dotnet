@@ -34,16 +34,15 @@ public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, Ar
     protected override ArgumentSyntax GetLastArgumentIfArrayCreation(SyntaxNode expression) =>
         expression switch
         {
-            ObjectCreationExpressionSyntax { } creation => CheckLastArgument(creation.ArgumentList),
-            InvocationExpressionSyntax { } invocation => CheckLastArgument(invocation.ArgumentList),
+            ObjectCreationExpressionSyntax { } creation => GetLastArgumentIfArrayCreation(creation.ArgumentList),
+            InvocationExpressionSyntax { } invocation => GetLastArgumentIfArrayCreation(invocation.ArgumentList),
             _ => null
         };
 
-    private static ArgumentSyntax CheckLastArgument(ArgumentListSyntax argumentList) =>
-        argumentList is not null
-        && argumentList.Arguments.Any()
-        && argumentList.Arguments.Last().GetExpression() is ArrayCreationExpressionSyntax invocationArray
+    private static ArgumentSyntax GetLastArgumentIfArrayCreation(ArgumentListSyntax argumentList) =>
+        argumentList is { Arguments: { Count: > 0 } arguments}
+        && arguments.Last().GetExpression() is ArrayCreationExpressionSyntax invocationArray
         && invocationArray.Initializer is CollectionInitializerSyntax { Initializers.Count: > 0 }
-        ? argumentList.Arguments.Last()
-        : null;
+            ? arguments.Last()
+            : null;
 }

@@ -41,14 +41,14 @@ public abstract class ArrayPassedAsParamsBase<TSyntaxKind, TArgumentNode> : Sona
     private void CheckExpression(SonarSyntaxNodeReportingContext context)
     {
         if (GetLastArgumentIfArrayCreation(context.Node) is { } lastArgument
-            && IsParamParameter(context, context.Node, lastArgument))
+            && IsParamParameter(context.SemanticModel, context.Node, lastArgument))
         {
             context.ReportIssue(Diagnostic.Create(rule, lastArgument.GetLocation()));
         }
     }
 
-    protected bool IsParamParameter(SonarSyntaxNodeReportingContext context, SyntaxNode invocation, SyntaxNode argument) =>
-        context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
+    protected bool IsParamParameter(SemanticModel model, SyntaxNode invocation, SyntaxNode argument) =>
+        model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
         && Language.MethodParameterLookup(invocation, methodSymbol).TryGetSymbol(argument, out var param)
         && param.IsParams;
 }

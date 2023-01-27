@@ -39,7 +39,8 @@ public class Program
 
         var s3 = new IndexerClass();
         var indexer1 = s3[new int[] { 1, 2 }]; // FN
-        var indexer2 = s3[1, 2]; // Compliant
+        var indexer2 = s3?[new int[] { 1, 2 }]; // FN
+        var indexer3 = s3[1, 2]; // Compliant
     }
 
     public void Method(params string[] args) { }
