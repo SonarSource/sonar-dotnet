@@ -49,14 +49,12 @@ public sealed class CommentsShouldNotBeEmpty : CommentsShouldNotBeEmptyBase<Synt
     private static string GetDocumentationText(SyntaxTrivia trivia)
     {
         var stringBuilder = new StringBuilder();
-
         foreach (var line in trivia.ToFullString().Split(MetricsBase.LineTerminators, StringSplitOptions.None))
         {
             var trimmedLine = line.TrimStart(null);
             trimmedLine = trimmedLine.StartsWith("'''")
                 ? trimmedLine.Substring(3).Trim()
                 : trimmedLine.TrimEnd(null);
-
             stringBuilder.Append(trimmedLine);
         }
         return stringBuilder.ToString();

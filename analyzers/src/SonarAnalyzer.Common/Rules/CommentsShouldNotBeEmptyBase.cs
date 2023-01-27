@@ -60,12 +60,11 @@ public abstract class CommentsShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosti
         }
     }
 
-    protected IEnumerable<IEnumerable<SyntaxTrivia>> Partition(IEnumerable<SyntaxTrivia> trivia)
+    protected List<List<SyntaxTrivia>> Partition(IEnumerable<SyntaxTrivia> trivia)
     {
         var res = new List<List<SyntaxTrivia>>();
-
         var current = new List<SyntaxTrivia>();
-        var endOfLineFound = false;
+        var firstEndOfLineFound = false;
 
         foreach (var trivium in trivia)
         {
@@ -77,7 +76,7 @@ public abstract class CommentsShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosti
             if (IsSimpleComment(trivium)) // put it on the current block of "//"
             {
                 current.Add(trivium);
-                endOfLineFound = false;
+                firstEndOfLineFound = false;
                 continue;
             }
 
@@ -86,8 +85,10 @@ public abstract class CommentsShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosti
             // ///
             if (IsValidTriviaType(trivium)) // valid but not "//", because of the upper if
             {
-                AddCurrent();
-                res.Add(new List<SyntaxTrivia> { trivium });
+                CloseCurrentPartition();
+                // all comments except single-line comments are parsed as a block already.
+                current.Add(trivium);
+                CloseCurrentPartition();
             }
             else if (IsEndOfLine(trivium))
             {
@@ -95,32 +96,35 @@ public abstract class CommentsShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosti
                 // //
                 //
                 // //
-                if (endOfLineFound)
+                if (firstEndOfLineFound)
                 {
-                    AddCurrent();
+                    CloseCurrentPartition();
                 }
                 else
                 {
-                    endOfLineFound = true;
+                    firstEndOfLineFound = true;
                 }
             }
             else
             {
-                AddCurrent();
+                CloseCurrentPartition();
             }
         }
 
         res.Add(current);
         return res;
 
-        void AddCurrent()
+        void CloseCurrentPartition()
         {
-            res.Add(current);
-            current = new();
-            endOfLineFound = false;
+            if (current.Count > 0)
+            {
+                res.Add(current);
+                current = new();
+            }
+            firstEndOfLineFound = false;
         }
     }
 
-    protected bool ShouldReport(IEnumerable<SyntaxTrivia> trivia) =>
+    private bool ShouldReport(IEnumerable<SyntaxTrivia> trivia) =>
         trivia.Any() && trivia.All(x => GetCommentText(x) == string.Empty);
 }

@@ -51,14 +51,12 @@ public sealed class CommentsShouldNotBeEmpty : CommentsShouldNotBeEmptyBase<Synt
     private static string GetSingleLineDocumentationText(SyntaxTrivia trivia)
     {
         var stringBuilder = new StringBuilder();
-
         foreach (var line in trivia.ToFullString().Split(MetricsBase.LineTerminators, StringSplitOptions.None))
         {
             var trimmedLine = line.TrimStart(null);
             trimmedLine = trimmedLine.StartsWith("///")
                 ? trimmedLine.Substring(3).Trim()
                 : trimmedLine.TrimEnd(null);
-
             stringBuilder.Append(trimmedLine);
         }
         return stringBuilder.ToString();
@@ -75,7 +73,6 @@ public sealed class CommentsShouldNotBeEmpty : CommentsShouldNotBeEmptyBase<Synt
     private static string ParseMultiLine(string commentText, int initialTrimSize)
     {
         commentText = commentText.Trim().Substring(initialTrimSize);
-
         if (commentText.EndsWith("*/", StringComparison.Ordinal)) // Might be unclosed, still reported
         {
             commentText = commentText.Substring(0, commentText.Length - 2);
@@ -92,7 +89,6 @@ public sealed class CommentsShouldNotBeEmpty : CommentsShouldNotBeEmptyBase<Synt
 
             stringBuilder.Append(trimmedLine.Trim());
         }
-
         return stringBuilder.ToString();
     }
 }
