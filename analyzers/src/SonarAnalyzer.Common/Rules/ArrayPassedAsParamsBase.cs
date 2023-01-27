@@ -29,14 +29,14 @@ public abstract class ArrayPassedAsParamsBase<TSyntaxKind, TArgumentNode> : Sona
 
     private readonly DiagnosticDescriptor rule;
 
-    protected abstract TSyntaxKind[] ParamsInvocationKinds { get; }
-    protected abstract TArgumentNode GetLastArgumentIfArrayCreation(SyntaxNode invocation);
+    protected abstract TSyntaxKind[] ExpressionKinds { get; }
+    protected abstract TArgumentNode GetLastArgumentIfArrayCreation(SyntaxNode expression);
 
     protected ArrayPassedAsParamsBase() : base(DiagnosticId) =>
         rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
 
     protected sealed override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, CheckExpression, ParamsInvocationKinds);
+        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, CheckExpression, ExpressionKinds);
 
     private void CheckExpression(SonarSyntaxNodeReportingContext context)
     {
