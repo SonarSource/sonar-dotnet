@@ -59,9 +59,9 @@
 "uri":  "sources\Net5\Net5\S1144.cs",
 "region":  {
 "startLine":  10,
-"startColumn":  9,
-"endLine":  13,
-"endColumn":  10
+"startColumn":  17,
+"endLine":  10,
+"endColumn":  22
 }
 }
 },
@@ -255,8 +255,8 @@
 "region":  {
 "startLine":  7,
 "startColumn":  9,
-"endLine":  17,
-"endColumn":  10
+"endLine":  7,
+"endColumn":  15
 }
 }
 },
@@ -267,9 +267,9 @@
 "uri":  "sources\Net5\Net5\S3626.cs",
 "region":  {
 "startLine":  5,
-"startColumn":  9,
-"endLine":  13,
-"endColumn":  10
+"startColumn":  13,
+"endLine":  5,
+"endColumn":  17
 }
 }
 },
@@ -280,9 +280,9 @@
 "uri":  "sources\Net5\Net5\S3776.cs",
 "region":  {
 "startLine":  8,
-"startColumn":  9,
-"endLine":  21,
-"endColumn":  10
+"startColumn":  16,
+"endLine":  8,
+"endColumn":  24
 }
 }
 },
@@ -332,9 +332,9 @@
 "uri":  "sources\Net5\Net5\S4015.cs",
 "region":  {
 "startLine":  7,
-"startColumn":  13,
+"startColumn":  24,
 "endLine":  7,
-"endColumn":  47
+"endColumn":  32
 }
 }
 },
@@ -358,9 +358,9 @@
 "uri":  "sources\Net5\Net5\S4015.cs",
 "region":  {
 "startLine":  12,
-"startColumn":  13,
+"startColumn":  24,
 "endLine":  12,
-"endColumn":  55
+"endColumn":  32
 }
 }
 },
