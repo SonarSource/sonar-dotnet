@@ -47,7 +47,7 @@ public abstract class ArrayPassedAsParamsBase<TSyntaxKind, TArgumentNode> : Sona
         }
     }
 
-    protected bool IsParamParameter(SemanticModel model, SyntaxNode invocation, SyntaxNode argument) =>
+    private bool IsParamParameter(SemanticModel model, SyntaxNode invocation, SyntaxNode argument) =>
         model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
         && Language.MethodParameterLookup(invocation, methodSymbol).TryGetSymbol(argument, out var param)
         && param.IsParams;
