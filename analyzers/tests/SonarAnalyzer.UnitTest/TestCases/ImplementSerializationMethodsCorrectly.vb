@@ -124,3 +124,20 @@ Public Class Foo
     End Function
 
 End Class
+
+Public Interface IWithInvalidSerializationMethodsParams
+
+    <OnSerializing>
+    Sub OnSerializingMethod(Context As StreamingContext, OtherPar As Object) ' Compliant
+
+    <OnSerialized>
+    Sub OnSerializedMethod(OtherPar As Object) ' Compliant
+
+    <OnDeserializing>
+    Sub OnDeserializingMethod(OtherPar As Object, Context As StreamingContext) ' Compliant
+
+    <OnDeserialized>
+    Sub OnDeserializedMethod() ' Compliant
+
+End Interface
+
