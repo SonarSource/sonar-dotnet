@@ -36,6 +36,10 @@ public class Program
         var s1 = new MyClass(1, 2, 3); // Compliant
         s1 = new MyClass(args: new int[] { 2, 3 }, a: 1); // Compliant (if you specifically require the arguments to be passed in this order there is no way of making this compliant, thus we shouldn't raise)
         var s2 = new MyOtherClass(args: new int[12], a: new int[] { 2, 3 }); // Compliant
+
+        var s3 = new IndexerClass();
+        var indexer1 = s3[new int[] { 1, 2 }]; // FN
+        var indexer2 = s3[1, 2]; // Compliant
     }
 
     public void Method(params string[] args) { }
@@ -57,4 +61,9 @@ public class MyClass
 public class MyOtherClass
 {
     public MyOtherClass(int[] a, params int[] args) { }
+}
+
+public class IndexerClass
+{
+    public int this[params int[] i] => 1;
 }

@@ -31,6 +31,9 @@ Public Class Program
         Dim s1 = New [MyClass](1, 2, 3) ' Compliant
         s1 = New [MyClass](args:=New Integer() {2, 3}, a:=1) ' Error [BC30587] Named argument cannot match a ParamArray parameter
         Dim s2 = New MyOtherClass(args:=New Integer(11) {}, a:=New Integer() {2, 3}) ' Error [BC30587] Named argument cannot match a ParamArray parameter
+
+        Dim s3 = Prop(New String() {"s1", "s2"}) ' FN
+        Dim s4 = Prop("s1", "s2") ' Compliant
     End Sub
 
     Public Sub Method(ParamArray args As String())
@@ -44,6 +47,12 @@ Public Class Program
 
     Public Sub Method4(ParamArray a As String(), ParamArray args As String()) 'Error [CS0231]
     End Sub
+
+    Public ReadOnly Property Prop(ParamArray param() As String) As Integer
+        Get
+        End Get
+    End Property
+
 End Class
 
 Public Class [MyClass]
