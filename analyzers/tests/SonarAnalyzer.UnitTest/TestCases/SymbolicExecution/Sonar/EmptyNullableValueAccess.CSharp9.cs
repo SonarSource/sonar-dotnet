@@ -125,3 +125,27 @@ public partial class Partial
         var v = nullable.Value;    // Noncompliant
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/6682
+public struct Repro_6682
+{
+    public bool SomeProperty { get; }
+
+    public void PatternMatching(Repro_6682? arg, bool condition)
+    {
+        if (condition)
+        {
+            arg = null;
+        }
+
+        if (arg is { SomeProperty: true })   // A null check
+        {
+            var value = arg.Value;  // Noncompliant FP
+        }
+
+        if (arg is { })   // A null check
+        {
+            var value = arg.Value;  // Noncompliant FP
+        }
+    }
+}
