@@ -25,6 +25,12 @@ public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, Ar
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
+    protected override SyntaxKind[] ParamsInvocationKinds { get; } =
+        {
+            SyntaxKind.ObjectCreationExpression,
+            SyntaxKind.InvocationExpression
+        };
+
     protected override ArgumentSyntax GetLastArgumentIfArrayCreation(SyntaxNode expression) =>
         expression switch
         {

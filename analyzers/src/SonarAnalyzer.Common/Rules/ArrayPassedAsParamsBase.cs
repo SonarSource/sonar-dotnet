@@ -28,16 +28,15 @@ public abstract class ArrayPassedAsParamsBase<TSyntaxKind, TArgumentNode> : Sona
     protected override string MessageFormat => "Remove this array creation and simply pass the elements.";
 
     private readonly DiagnosticDescriptor rule;
+
+    protected abstract TSyntaxKind[] ParamsInvocationKinds { get; }
     protected abstract TArgumentNode GetLastArgumentIfArrayCreation(SyntaxNode invocation);
 
     protected ArrayPassedAsParamsBase() : base(DiagnosticId) =>
         rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
 
-    protected sealed override void Initialize(SonarAnalysisContext context)
-    {
-        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, CheckExpression, Language.SyntaxKind.ObjectCreationExpressions);
-        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, CheckExpression, Language.SyntaxKind.InvocationExpression);
-    }
+    protected sealed override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, CheckExpression, ParamsInvocationKinds);
 
     private void CheckExpression(SonarSyntaxNodeReportingContext context)
     {
