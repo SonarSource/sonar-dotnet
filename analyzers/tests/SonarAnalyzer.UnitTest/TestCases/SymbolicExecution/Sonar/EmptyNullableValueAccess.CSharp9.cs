@@ -138,12 +138,12 @@ public struct Repro_6682
             arg = null;
         }
 
-        if (arg is { SomeProperty: true })   // A null check
+        if (arg is { SomeProperty: true })  // A null check
         {
             var value = arg.Value;  // Noncompliant FP
         }
 
-        if (arg is { })   // A null check
+        if (arg is { })             // A null check
         {
             var value = arg.Value;  // Noncompliant FP
         }
