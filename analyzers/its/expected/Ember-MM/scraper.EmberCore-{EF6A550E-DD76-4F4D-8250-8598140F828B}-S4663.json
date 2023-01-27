@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4663",
+"message":  "Remove this empty comment",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\scraperMovieNativeModule.vb",
+"region":  {
+"startLine":  364,
+"startColumn":  104,
+"endLine":  364,
+"endColumn":  105
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4663",
+"message":  "Remove this empty comment",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"region":  {
+"startLine":  577,
+"startColumn":  19,
+"endLine":  577,
+"endColumn":  21
+}
+}
+}
+]
+}
