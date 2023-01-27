@@ -122,7 +122,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static string ImplementedOperator(IMethodSymbol member) =>
             member switch
             {
-                { MethodKind: not MethodKind.BuiltinOperator } => null,
+                { MethodKind: not MethodKind.UserDefinedOperator } => null,
                 _ when KnownMethods.IsOperatorBinaryPlus(member) => MethodName.OperatorPlus,
                 _ when KnownMethods.IsOperatorBinaryMinus(member) => MethodName.OperatorMinus,
                 _ when KnownMethods.IsOperatorBinaryMultiply(member) => MethodName.OperatorMultiply,
