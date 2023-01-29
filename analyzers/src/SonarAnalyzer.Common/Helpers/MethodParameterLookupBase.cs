@@ -45,26 +45,26 @@ namespace SonarAnalyzer.Helpers
             MethodSymbol = methodSymbol;
         }
 
-        public bool TryGetSymbol(SyntaxNode arg, out IParameterSymbol parameter)
+        public bool TryGetSymbol(SyntaxNode argument, out IParameterSymbol parameter)
         {
             parameter = null;
-            var argument = (TArgumentSyntax)arg;
+            var arg = argument as TArgumentSyntax ?? throw new ArgumentException($"{nameof(argument)} must be of type {typeof(TArgumentSyntax)}", nameof(argument));
 
             if (!argumentList.HasValue
-                || !argumentList.Value.Contains(argument)
+                || !argumentList.Value.Contains(arg)
                 || MethodSymbol == null
                 || MethodSymbol.IsVararg)
             {
                 return false;
             }
 
-            if (GetNameColonArgumentIdentifier(argument) is { } nameColonArgumentIdentifier)
+            if (GetNameColonArgumentIdentifier(arg) is { } nameColonArgumentIdentifier)
             {
                 parameter = MethodSymbol.Parameters.FirstOrDefault(symbol => symbol.Name == nameColonArgumentIdentifier.ValueText);
                 return parameter != null;
             }
 
-            var index = argumentList.Value.IndexOf(argument);
+            var index = argumentList.Value.IndexOf(arg);
             if (index >= MethodSymbol.Parameters.Length)
             {
                 var lastParameter = MethodSymbol.Parameters.Last();

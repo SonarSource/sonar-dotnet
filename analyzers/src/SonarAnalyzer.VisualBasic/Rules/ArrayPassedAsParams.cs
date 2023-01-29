@@ -40,7 +40,7 @@ public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, Ar
         };
 
     private static ArgumentSyntax GetLastArgumentIfArrayCreation(ArgumentListSyntax argumentList) =>
-        argumentList is { Arguments: { Count: > 0 } arguments}
+        argumentList is { Arguments: { Count: > 0 } arguments }
         && arguments.Last().GetExpression() is ArrayCreationExpressionSyntax invocationArray
         && invocationArray.Initializer is CollectionInitializerSyntax { Initializers.Count: > 0 }
             ? arguments.Last()

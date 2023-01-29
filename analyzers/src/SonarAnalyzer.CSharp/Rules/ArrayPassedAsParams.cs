@@ -28,7 +28,8 @@ public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, Ar
     protected override SyntaxKind[] ExpressionKinds { get; } =
         {
             SyntaxKind.ObjectCreationExpression,
-            SyntaxKind.InvocationExpression
+            SyntaxKind.InvocationExpression,
+            SyntaxKindEx.ImplicitObjectCreationExpression
         };
 
     protected override ArgumentSyntax GetLastArgumentIfArrayCreation(SyntaxNode expression) =>
@@ -36,10 +37,12 @@ public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, Ar
         {
             ObjectCreationExpressionSyntax { } creation => GetLastArgumentIfArrayCreation(creation.ArgumentList),
             InvocationExpressionSyntax { } invocation => GetLastArgumentIfArrayCreation(invocation.ArgumentList),
+            _ when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(expression) =>
+                GetLastArgumentIfArrayCreation(((ImplicitObjectCreationExpressionSyntaxWrapper)expression).ArgumentList),
             _ => null
         };
 
-    private static ArgumentSyntax GetLastArgumentIfArrayCreation(ArgumentListSyntax argumentList) =>
+    private static ArgumentSyntax GetLastArgumentIfArrayCreation(BaseArgumentListSyntax argumentList) =>
         argumentList is { Arguments: { Count: > 0 } arguments }
         && arguments.Last() is { Expression: ArrayCreationExpressionSyntax { Initializer: InitializerExpressionSyntax { Expressions.Count: > 0 } } } lastArgument
             ? lastArgument

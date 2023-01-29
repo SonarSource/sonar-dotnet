@@ -36,16 +36,14 @@ public abstract class ArrayPassedAsParamsBase<TSyntaxKind, TArgumentNode> : Sona
         rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
 
     protected sealed override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, CheckExpression, ExpressionKinds);
-
-    private void CheckExpression(SonarSyntaxNodeReportingContext context)
-    {
-        if (GetLastArgumentIfArrayCreation(context.Node) is { } lastArgument
-            && IsParamParameter(context.SemanticModel, context.Node, lastArgument))
+        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
         {
-            context.ReportIssue(Diagnostic.Create(rule, lastArgument.GetLocation()));
-        }
-    }
+            if (GetLastArgumentIfArrayCreation(c.Node) is { } lastArgument
+            && IsParamParameter(c.SemanticModel, c.Node, lastArgument))
+            {
+                c.ReportIssue(Diagnostic.Create(rule, lastArgument.GetLocation()));
+            }
+        }, ExpressionKinds);
 
     private bool IsParamParameter(SemanticModel model, SyntaxNode invocation, SyntaxNode argument) =>
         model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
