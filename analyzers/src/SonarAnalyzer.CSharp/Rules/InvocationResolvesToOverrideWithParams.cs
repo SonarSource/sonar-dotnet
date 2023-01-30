@@ -56,8 +56,8 @@ public sealed class InvocationResolvesToOverrideWithParams : SonarDiagnosticAnal
             && !IsInvocationWithExplicitArray(argumentList, method, context.SemanticModel)
             && ArgumentTypes(context, argumentList) is var argumentTypes
             && argumentTypes.All(x => x is not IErrorTypeSymbol)
-            && OtherOverloadsOf(method)
-                .FirstOrDefault(x => ArgumentsMatchParameters(argumentList, argumentTypes, x, context.SemanticModel))
+            && OtherOverloadsOf(method).FirstOrDefault(x =>
+                ArgumentsMatchParameters(argumentList, argumentTypes, x, context.SemanticModel) && MethodAccessibleWithinType(x, context.ContainingSymbol.ContainingType))
                     is { } otherMethod)
         {
             context.ReportIssue(Diagnostic.Create(Rule, node.GetLocation(), otherMethod.ToMinimalDisplayString(context.SemanticModel, node.SpanStart)));
@@ -102,4 +102,22 @@ public sealed class InvocationResolvesToOverrideWithParams : SonarDiagnosticAnal
                 ? parameter
                 : null;
     }
+
+    private static bool MethodAccessibleWithinType(IMethodSymbol method, ITypeSymbol type) =>
+        IsInTypeOrNested(method, type)
+        || method.DeclaredAccessibility switch // FIXME: Null check for top-level statements?
+            {
+                Accessibility.Private => false,
+                // ProtectedAndInternal corresponds to `private protected`.
+                Accessibility.ProtectedAndInternal => type.DerivesFrom(method.ContainingType) && method.IsInSameAssembly(type),
+                // ProtectedOrInternal corresponds to `protected internal`.
+                Accessibility.ProtectedOrInternal => type.DerivesFrom(method.ContainingType) || method.IsInSameAssembly(type),
+                Accessibility.Protected => type.DerivesFrom(method.ContainingType),
+                Accessibility.Internal => method.IsInSameAssembly(type),
+                Accessibility.Public => true,
+                _ => false,
+            };
+
+    private static bool IsInTypeOrNested(IMethodSymbol method, ITypeSymbol type) =>
+        type is not null && (method.IsInType(type) || IsInTypeOrNested(method, type.ContainingType));
 }

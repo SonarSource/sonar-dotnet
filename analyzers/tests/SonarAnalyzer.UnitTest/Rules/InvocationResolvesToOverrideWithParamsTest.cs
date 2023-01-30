@@ -28,10 +28,29 @@ namespace SonarAnalyzer.UnitTest.Rules
         private readonly VerifierBuilder builder = new VerifierBuilder<InvocationResolvesToOverrideWithParams>();
 
         [TestMethod]
-        public void InvocationResolvesToOverrideWithParams() =>
+        public void InvocationResolvesToOverrideWithParams()
+        {
+            var anotherAssembly = TestHelper.CompileCS("""
+                public class FromAnotherAssembly
+                {
+                    protected int ProtectedOverload(object a, string b) => 1493;
+                    public int ProtectedOverload(string a, params string[] bs) => 1607;
+
+                    private protected int PrivateProtectedOverload(object a, string b) => 1494;
+                    public int PrivateProtectedOverload(string a, params string[] bs) => 1608;
+
+                    protected internal int ProtectedInternalOverload(object a, string b) => 1495;
+                    public int ProtectedInternalOverload(string a, params string[] bs) => 1609;
+
+                    internal int InternalOverload(object a, string b) => 1496;
+                    public int InternalOverload(string a, params string[] bs) => 1610;
+                }
+                """).Model.Compilation.ToMetadataReference();
             builder.AddPaths("InvocationResolvesToOverrideWithParams.cs")
+                .AddReferences(new[] { anotherAssembly })
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .Verify();
+        }
 
 #if NET
 
