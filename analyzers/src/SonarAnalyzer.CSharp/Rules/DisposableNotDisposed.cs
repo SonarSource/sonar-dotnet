@@ -157,13 +157,17 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsNodeInsideUsingStatement(SyntaxNode node)
         {
             var ancestors = node.AncestorsAndSelf().ToArray();
-            var usingStatements = ancestors.OfType<UsingStatementSyntax>();
-            var usingDeclarations = ancestors
-                .OfType<LocalDeclarationStatementSyntax>()
-                .Where(x => x.UsingKeyword() != default);
 
-            return usingStatements.Any(x => ancestors.Contains(x.Expression) || ancestors.Contains(x.Declaration))
-                || usingDeclarations.Any();
+            var isPartOfUsingStatement = ancestors
+                .OfType<UsingStatementSyntax>()
+                .Any(x => (x.Expression is not null && x.Expression.DescendantNodesAndSelf().Contains(node))
+                       || (x.Declaration is not null && x.Declaration.DescendantNodesAndSelf().Contains(node)));
+
+            var isPartOfUsingDeclaration = ancestors
+                .OfType<LocalDeclarationStatementSyntax>()
+                .Any(x => x.UsingKeyword() != default);
+
+            return isPartOfUsingStatement || isPartOfUsingDeclaration;
         }
 
         private static IEnumerable<SyntaxNode> GetDescendantNodes(INamedTypeSymbol namedType, SyntaxNode typeDeclaration) =>
