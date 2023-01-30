@@ -33,12 +33,16 @@ public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, Ar
         };
 
     protected override ArgumentSyntax GetLastArgumentIfArrayCreation(SyntaxNode expression) =>
+        GetLastArgumentIfArrayCreation(GetArgumentListFromExpression(expression));
+
+    private static BaseArgumentListSyntax GetArgumentListFromExpression(SyntaxNode expression) =>
         expression switch
         {
-            ObjectCreationExpressionSyntax { } creation => GetLastArgumentIfArrayCreation(creation.ArgumentList),
-            InvocationExpressionSyntax { } invocation => GetLastArgumentIfArrayCreation(invocation.ArgumentList),
+            ObjectCreationExpressionSyntax { } creation => creation.ArgumentList,
+            InvocationExpressionSyntax { } invocation => invocation.ArgumentList,
             _ when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(expression) =>
-                GetLastArgumentIfArrayCreation(((ImplicitObjectCreationExpressionSyntaxWrapper)expression).ArgumentList)
+                ((ImplicitObjectCreationExpressionSyntaxWrapper)expression).ArgumentList,
+            _ => null
         };
 
     private static ArgumentSyntax GetLastArgumentIfArrayCreation(BaseArgumentListSyntax argumentList) =>
