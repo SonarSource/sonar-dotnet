@@ -39,13 +39,13 @@ public abstract class ArrayPassedAsParamsBase<TSyntaxKind, TArgumentNode> : Sona
         context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
         {
             if (GetLastArgumentIfArrayCreation(c.Node) is { } lastArgument
-            && IsParamParameter(c.SemanticModel, c.Node, lastArgument))
+                && IsParamParameter(c.SemanticModel, c.Node, lastArgument))
             {
                 c.ReportIssue(Diagnostic.Create(rule, lastArgument.GetLocation()));
             }
         }, ExpressionKinds);
 
-    private bool IsParamParameter(SemanticModel model, SyntaxNode invocation, SyntaxNode argument) =>
+    private bool IsParamParameter(SemanticModel model, SyntaxNode invocation, TArgumentNode argument) =>
         model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
         && Language.MethodParameterLookup(invocation, methodSymbol).TryGetSymbol(argument, out var param)
         && param.IsParams;

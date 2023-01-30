@@ -35,14 +35,13 @@ public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, Ar
         expression switch
         {
             ObjectCreationExpressionSyntax { } creation => GetLastArgumentIfArrayCreation(creation.ArgumentList),
-            InvocationExpressionSyntax { } invocation => GetLastArgumentIfArrayCreation(invocation.ArgumentList),
-            _ => null
+            InvocationExpressionSyntax { } invocation => GetLastArgumentIfArrayCreation(invocation.ArgumentList)
         };
 
     private static ArgumentSyntax GetLastArgumentIfArrayCreation(ArgumentListSyntax argumentList) =>
         argumentList is { Arguments: { Count: > 0 } arguments }
-        && arguments.Last().GetExpression() is ArrayCreationExpressionSyntax invocationArray
-        && invocationArray.Initializer is CollectionInitializerSyntax { Initializers.Count: > 0 }
-            ? arguments.Last()
+        && arguments.Last() is var argument
+        && argument.GetExpression() is ArrayCreationExpressionSyntax { Initializer: CollectionInitializerSyntax { Initializers.Count: > 0 } }
+            ? argument
             : null;
 }

@@ -38,8 +38,7 @@ public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, Ar
             ObjectCreationExpressionSyntax { } creation => GetLastArgumentIfArrayCreation(creation.ArgumentList),
             InvocationExpressionSyntax { } invocation => GetLastArgumentIfArrayCreation(invocation.ArgumentList),
             _ when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(expression) =>
-                GetLastArgumentIfArrayCreation(((ImplicitObjectCreationExpressionSyntaxWrapper)expression).ArgumentList),
-            _ => null
+                GetLastArgumentIfArrayCreation(((ImplicitObjectCreationExpressionSyntaxWrapper)expression).ArgumentList)
         };
 
     private static ArgumentSyntax GetLastArgumentIfArrayCreation(BaseArgumentListSyntax argumentList) =>
