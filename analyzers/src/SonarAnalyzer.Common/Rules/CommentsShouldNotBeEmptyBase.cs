@@ -45,7 +45,7 @@ public abstract class CommentsShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosti
 
     private void CheckTrivia(SonarSyntaxTreeReportingContext context, IEnumerable<SyntaxTrivia> trivia)
     {
-        var partitions = Partition(trivia);
+        var partitions = PartitionComments(trivia);
         if (partitions is null)
         {
             return;
@@ -63,10 +63,10 @@ public abstract class CommentsShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosti
             trivia.Any() && trivia.All(x => string.IsNullOrWhiteSpace(GetCommentText(x)));
     }
 
-    private List<List<SyntaxTrivia>> Partition(IEnumerable<SyntaxTrivia> trivia)
+    private List<List<SyntaxTrivia>> PartitionComments(IEnumerable<SyntaxTrivia> trivia)
     {
-        // hot path: avoid unnecessary allocations
-        List<List<SyntaxTrivia>> res = null;
+        // Hotpath: avoid unnecessary allocations
+        List<List<SyntaxTrivia>> partitions = null;
         List<SyntaxTrivia> current = null;
         var firstEndOfLineFound = false;
 
@@ -74,8 +74,7 @@ public abstract class CommentsShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosti
         {
             if (IsSimpleComment(trivium)) // put it on the current block of "//"
             {
-                current ??= new();
-                current.Add(trivium);
+                AddTriviaToPartition(ref current, trivium);
                 firstEndOfLineFound = false;
             }
             // This is for the case, of two different comment types, for example:
@@ -83,11 +82,10 @@ public abstract class CommentsShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosti
             // ///
             else if (IsValidTriviaType(trivium)) // valid but not "//", because of the upper if
             {
-                CloseCurrentPartition();
+                CloseCurrentPartition(ref current, ref partitions, ref firstEndOfLineFound);
                 // all comments except single-line comments are parsed as a block already.
-                current ??= new();
-                current.Add(trivium);
-                CloseCurrentPartition();
+                AddTriviaToPartition(ref current, trivium);
+                CloseCurrentPartition(ref current, ref partitions, ref firstEndOfLineFound);
             }
             // This handles an empty line, for example:
             // // some comment \n <- EOL found, set to true
@@ -98,7 +96,7 @@ public abstract class CommentsShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosti
             {
                 if (firstEndOfLineFound)
                 {
-                    CloseCurrentPartition();
+                    CloseCurrentPartition(ref current, ref partitions, ref firstEndOfLineFound);
                 }
                 else
                 {
@@ -107,26 +105,29 @@ public abstract class CommentsShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosti
             }
             else if (!IsWhitespace(trivium))
             {
-                CloseCurrentPartition();
+                CloseCurrentPartition(ref current, ref partitions, ref firstEndOfLineFound);
             }
         }
 
-        if (current is not null)
+        CloseCurrentPartition(ref current, ref partitions, ref firstEndOfLineFound);
+        return partitions;
+
+        static void AddTriviaToPartition(ref List<SyntaxTrivia> current, SyntaxTrivia trivia)
         {
-            res ??= new();
-            res.Add(current);
+            current ??= new();
+            current.Add(trivia);
         }
 
-        return res;
-
-        void CloseCurrentPartition()
+        // Hotpath: Don't capture variables
+        static void CloseCurrentPartition(ref List<SyntaxTrivia> current, ref List<List<SyntaxTrivia>> partitions, ref bool firstEndOfLineFound)
         {
             if (current is { Count: > 0 })
             {
-                res ??= new();
-                res.Add(current);
+                partitions ??= new();
+                partitions.Add(current);
                 current = null;
             }
+
             firstEndOfLineFound = false;
         }
     }
