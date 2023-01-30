@@ -45,11 +45,16 @@ public abstract class CommentsShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosti
 
     private void CheckTrivia(SonarSyntaxTreeReportingContext context, IEnumerable<SyntaxTrivia> trivia)
     {
-        foreach (var partition in Partition(trivia)?.Where(ShouldReport))
+        var partitions = Partition(trivia);
+        if (partitions is null)
+        {
+            return;
+        }
+
+        foreach (var partition in partitions.Where(ShouldReport))
         {
             var start = partition.First().GetLocation().SourceSpan.Start;
             var end = partition.Last().GetLocation().SourceSpan.End;
-
             var location = Location.Create(context.Tree, TextSpan.FromBounds(start, end));
             context.ReportIssue(Diagnostic.Create(Rule, location));
         }
@@ -58,34 +63,30 @@ public abstract class CommentsShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosti
             trivia.Any() && trivia.All(x => string.IsNullOrWhiteSpace(GetCommentText(x)));
     }
 
-    private List<List<SyntaxTrivia>>? Partition(IEnumerable<SyntaxTrivia> trivia)
+    private List<List<SyntaxTrivia>> Partition(IEnumerable<SyntaxTrivia> trivia)
     {
-        var res = new Lazy<List<List<SyntaxTrivia>>>();
-        var current = new Lazy<List<SyntaxTrivia>>();
+        // hot path: avoid unnecessary allocations
+        List<List<SyntaxTrivia>> res = null;
+        List<SyntaxTrivia> current = null;
         var firstEndOfLineFound = false;
 
         foreach (var trivium in trivia)
         {
-            if (IsWhitespace(trivium))
-            {
-                continue;
-            }
-
             if (IsSimpleComment(trivium)) // put it on the current block of "//"
             {
-                current.Value.Add(trivium);
+                current ??= new();
+                current.Add(trivium);
                 firstEndOfLineFound = false;
-                continue;
             }
-
             // This is for the case, of two different comment types, for example:
             // //
             // ///
-            if (IsValidTriviaType(trivium)) // valid but not "//", because of the upper if
+            else if (IsValidTriviaType(trivium)) // valid but not "//", because of the upper if
             {
                 CloseCurrentPartition();
                 // all comments except single-line comments are parsed as a block already.
-                current.Value.Add(trivium);
+                current ??= new();
+                current.Add(trivium);
                 CloseCurrentPartition();
             }
             // This handles an empty line, for example:
@@ -104,38 +105,41 @@ public abstract class CommentsShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosti
                     firstEndOfLineFound = true;
                 }
             }
-            else
+            else if (!IsWhitespace(trivium))
             {
                 CloseCurrentPartition();
             }
         }
 
-        res.Value.Add(current.Value);
-        return res.Value;
+        if (current is not null)
+        {
+            res ??= new();
+            res.Add(current);
+        }
+
+        return res;
 
         void CloseCurrentPartition()
         {
-            if (current.Value.Count > 0)
+            if (current is { Count: > 0 })
             {
-                res.Value.Add(current.Value);
-                current = new();
+                res ??= new();
+                res.Add(current);
+                current = null;
             }
             firstEndOfLineFound = false;
         }
     }
 
     private bool IsValidTriviaType(SyntaxTrivia trivia) =>
-        Language.SyntaxKind.CommentTrivia.Contains((TSyntaxKind)Enum.ToObject(typeof(TSyntaxKind), trivia.RawKind));
+        Language.Syntax.IsAnyKind(trivia, Language.SyntaxKind.CommentTrivia);
 
     private bool IsSimpleComment(SyntaxTrivia trivia) =>
-        IsKind(trivia, Language.SyntaxKind.SimpleCommentTrivia);
+        Language.Syntax.IsKind(trivia, Language.SyntaxKind.SimpleCommentTrivia);
 
     private bool IsEndOfLine(SyntaxTrivia trivia) =>
-        IsKind(trivia, Language.SyntaxKind.EndOfLineTrivia);
+        Language.Syntax.IsKind(trivia, Language.SyntaxKind.EndOfLineTrivia);
 
     private bool IsWhitespace(SyntaxTrivia trivia) =>
-        IsKind(trivia, Language.SyntaxKind.WhitespaceTrivia);
-
-    private bool IsKind(SyntaxTrivia trivia, TSyntaxKind kind) =>
-        kind.Equals(Enum.ToObject(typeof(TSyntaxKind), trivia.RawKind));
+        Language.Syntax.IsKind(trivia, Language.SyntaxKind.WhitespaceTrivia);
 }
