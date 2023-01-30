@@ -42,7 +42,13 @@ namespace Tests.Diagnostics
             FileStream fs5;
             await using ((fs5 = new FileStream(@"c:\foo.txt", FileMode.Open)).ConfigureAwait(false))
             {
-                // do nothing
+                var fs5_1 = new FileStream(@"c:\foo.txt", FileMode.Open);               // Noncompliant
+                fs5_1 = new FileStream(@"c:\foo.txt", FileMode.Open);                   // Noncompliant
+
+                using (var fs5_2 = new FileStream(@"c:\foo.txt", FileMode.Open))
+                {
+                    fs5_1 = new FileStream(@"c:\foo.txt", FileMode.Open);               // Noncompliant
+                }
             }
 
             FileStream fs6;
