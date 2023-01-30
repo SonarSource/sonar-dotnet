@@ -37,11 +37,15 @@ public interface ISyntaxKindFacade<out TSyntaxKind>
     abstract TSyntaxKind IdentifierToken { get; }
     abstract TSyntaxKind InvocationExpression { get; }
     abstract TSyntaxKind InterpolatedStringExpression { get; }
+    abstract TSyntaxKind LeftShiftAssignmentStatement { get; }
+    abstract TSyntaxKind LeftShiftExpression { get; }
     abstract TSyntaxKind LocalDeclaration { get; }
     abstract TSyntaxKind[] MethodDeclarations { get; }
     abstract TSyntaxKind[] ObjectCreationExpressions { get; }
     abstract TSyntaxKind Parameter { get; }
     abstract TSyntaxKind RefKeyword { get; }
+    abstract TSyntaxKind RightShiftExpression { get; }
+    abstract TSyntaxKind RightShiftAssignmentStatement { get; }
     abstract TSyntaxKind ParameterList { get; }
     abstract TSyntaxKind ReturnStatement { get; }
     abstract TSyntaxKind SimpleAssignment { get; }
@@ -51,8 +55,4 @@ public interface ISyntaxKindFacade<out TSyntaxKind>
     abstract TSyntaxKind StructDeclaration { get; }
     abstract TSyntaxKind[] TypeDeclaration { get; }
     abstract TSyntaxKind WhitespaceTrivia { get; }
-    abstract TSyntaxKind LeftShiftExpression { get; }
-    abstract TSyntaxKind RightShiftExpression { get; }
-    abstract TSyntaxKind LeftShiftAssignmentStatement { get; }
-    abstract TSyntaxKind RightShiftAssignmentStatement { get; }
 }

@@ -25,6 +25,11 @@ internal sealed class VisualBasicSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind
     public SyntaxKind Attribute => SyntaxKind.Attribute;
     public SyntaxKind[] ClassAndRecordDeclaration => new[] { SyntaxKind.ClassBlock };
     public SyntaxKind ClassDeclaration => SyntaxKind.ClassBlock;
+    public SyntaxKind[] CommentTrivia => new[]
+    {
+        SyntaxKind.CommentTrivia,
+        SyntaxKind.DocumentationCommentTrivia,
+    };
     public SyntaxKind[] ComparisonKinds => new[]
     {
         SyntaxKind.GreaterThanExpression,
@@ -36,6 +41,7 @@ internal sealed class VisualBasicSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind
     };
     public SyntaxKind ConstructorDeclaration => SyntaxKind.ConstructorBlock;
     public SyntaxKind[] DefaultExpressions => new[] { SyntaxKind.NothingLiteralExpression };
+    public SyntaxKind EndOfLineTrivia => SyntaxKind.EndOfLineTrivia;
     public SyntaxKind EnumDeclaration => SyntaxKind.EnumStatement;
     public SyntaxKind FieldDeclaration => SyntaxKind.FieldDeclaration;
     public SyntaxKind IdentifierName => SyntaxKind.IdentifierName;
@@ -50,6 +56,7 @@ internal sealed class VisualBasicSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind
     public SyntaxKind RefKeyword => SyntaxKind.ByRefKeyword;
     public SyntaxKind ReturnStatement => SyntaxKind.ReturnStatement;
     public SyntaxKind SimpleAssignment => SyntaxKind.SimpleAssignmentStatement;
+    public SyntaxKind SimpleCommentTrivia => SyntaxKind.CommentTrivia;
     public SyntaxKind SimpleMemberAccessExpression => SyntaxKind.SimpleMemberAccessExpression;
     public SyntaxKind[] StringLiteralExpressions => new[] { SyntaxKind.StringLiteralExpression };
     public SyntaxKind StructDeclaration => SyntaxKind.StructureBlock;
@@ -58,12 +65,5 @@ internal sealed class VisualBasicSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind
     public SyntaxKind RightShiftExpression => SyntaxKind.RightShiftExpression;
     public SyntaxKind LeftShiftAssignmentStatement => SyntaxKind.LeftShiftAssignmentStatement;
     public SyntaxKind RightShiftAssignmentStatement => SyntaxKind.RightShiftAssignmentStatement;
-    public SyntaxKind[] CommentTrivia => new[]
-    {
-        SyntaxKind.CommentTrivia,
-        SyntaxKind.DocumentationCommentTrivia,
-    };
-    public SyntaxKind SimpleCommentTrivia => SyntaxKind.CommentTrivia;
     public SyntaxKind WhitespaceTrivia => SyntaxKind.WhitespaceTrivia;
-    public SyntaxKind EndOfLineTrivia => SyntaxKind.EndOfLineTrivia;
 }
