@@ -54,8 +54,8 @@ namespace SonarAnalyzer.Rules
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSymbolAction(c =>
                 {
-                    if (c.Symbol is IMethodSymbol methodSymbol
-                        && !methodSymbol.ContainingType.IsInterface()
+                    var methodSymbol = (IMethodSymbol)c.Symbol;
+                    if (!methodSymbol.ContainingType.IsInterface()
                         && methodSymbol.GetAttributes(SerializationAttributes).Any()
                         && !HiddenByEditorBrowsableAttribute(methodSymbol)
                         && FindIssues(methodSymbol) is var issues
