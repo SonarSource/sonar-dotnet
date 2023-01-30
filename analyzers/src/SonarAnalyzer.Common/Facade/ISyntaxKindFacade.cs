@@ -30,6 +30,7 @@ public interface ISyntaxKindFacade<out TSyntaxKind>
     abstract TSyntaxKind[] ComparisonKinds { get; }
     abstract TSyntaxKind ConstructorDeclaration { get; }
     abstract TSyntaxKind[] DefaultExpressions { get; }
+    abstract TSyntaxKind EndOfLineTrivia { get; }
     abstract TSyntaxKind EnumDeclaration { get; }
     abstract TSyntaxKind FieldDeclaration { get; }
     abstract TSyntaxKind IdentifierName { get; }
@@ -44,10 +45,12 @@ public interface ISyntaxKindFacade<out TSyntaxKind>
     abstract TSyntaxKind ParameterList { get; }
     abstract TSyntaxKind ReturnStatement { get; }
     abstract TSyntaxKind SimpleAssignment { get; }
+    abstract TSyntaxKind SimpleCommentTrivia { get; }
     abstract TSyntaxKind SimpleMemberAccessExpression { get; }
     abstract TSyntaxKind[] StringLiteralExpressions { get; }
     abstract TSyntaxKind StructDeclaration { get; }
     abstract TSyntaxKind[] TypeDeclaration { get; }
+    abstract TSyntaxKind WhitespaceTrivia { get; }
     abstract TSyntaxKind LeftShiftExpression { get; }
     abstract TSyntaxKind RightShiftExpression { get; }
     abstract TSyntaxKind LeftShiftAssignmentStatement { get; }

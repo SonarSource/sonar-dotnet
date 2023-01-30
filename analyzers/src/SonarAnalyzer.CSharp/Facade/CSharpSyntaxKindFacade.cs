@@ -29,13 +29,6 @@ internal sealed class CSharpSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind>
         SyntaxKindEx.RecordClassDeclaration,
     };
     public SyntaxKind ClassDeclaration => SyntaxKind.ClassDeclaration;
-    public SyntaxKind[] CommentTrivia => new[]
-    {
-        SyntaxKind.SingleLineCommentTrivia,
-        SyntaxKind.MultiLineCommentTrivia,
-        SyntaxKind.SingleLineDocumentationCommentTrivia,
-        SyntaxKind.MultiLineDocumentationCommentTrivia,
-    };
     public SyntaxKind[] ComparisonKinds => new[]
     {
         SyntaxKind.GreaterThanExpression,
@@ -77,4 +70,14 @@ internal sealed class CSharpSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind>
     public SyntaxKind RightShiftExpression => SyntaxKind.RightShiftExpression;
     public SyntaxKind LeftShiftAssignmentStatement => SyntaxKind.LeftShiftAssignmentExpression;
     public SyntaxKind RightShiftAssignmentStatement => SyntaxKind.RightShiftAssignmentExpression;
+    public SyntaxKind[] CommentTrivia => new[]
+    {
+        SyntaxKind.SingleLineCommentTrivia,
+        SyntaxKind.MultiLineCommentTrivia,
+        SyntaxKind.SingleLineDocumentationCommentTrivia,
+        SyntaxKind.MultiLineDocumentationCommentTrivia,
+    };
+    public SyntaxKind SimpleCommentTrivia => SyntaxKind.SingleLineCommentTrivia;
+    public SyntaxKind WhitespaceTrivia => SyntaxKind.WhitespaceTrivia;
+    public SyntaxKind EndOfLineTrivia => SyntaxKind.EndOfLineTrivia;
 }

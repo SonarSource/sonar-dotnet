@@ -25,11 +25,6 @@ internal sealed class VisualBasicSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind
     public SyntaxKind Attribute => SyntaxKind.Attribute;
     public SyntaxKind[] ClassAndRecordDeclaration => new[] { SyntaxKind.ClassBlock };
     public SyntaxKind ClassDeclaration => SyntaxKind.ClassBlock;
-    public SyntaxKind[] CommentTrivia => new[]
-    {
-        SyntaxKind.CommentTrivia,
-        SyntaxKind.DocumentationCommentTrivia,
-    };
     public SyntaxKind[] ComparisonKinds => new[]
     {
         SyntaxKind.GreaterThanExpression,
@@ -63,4 +58,12 @@ internal sealed class VisualBasicSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind
     public SyntaxKind RightShiftExpression => SyntaxKind.RightShiftExpression;
     public SyntaxKind LeftShiftAssignmentStatement => SyntaxKind.LeftShiftAssignmentStatement;
     public SyntaxKind RightShiftAssignmentStatement => SyntaxKind.RightShiftAssignmentStatement;
+    public SyntaxKind[] CommentTrivia => new[]
+    {
+        SyntaxKind.CommentTrivia,
+        SyntaxKind.DocumentationCommentTrivia,
+    };
+    public SyntaxKind SimpleCommentTrivia => SyntaxKind.CommentTrivia;
+    public SyntaxKind WhitespaceTrivia => SyntaxKind.WhitespaceTrivia;
+    public SyntaxKind EndOfLineTrivia => SyntaxKind.EndOfLineTrivia;
 }

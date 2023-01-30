@@ -27,12 +27,7 @@ public abstract class CommentsShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosti
 {
     private const string DiagnosticId = "S4663";
 
-    protected abstract bool IsValidTriviaType(SyntaxTrivia trivia);
     protected abstract string GetCommentText(SyntaxTrivia trivia);
-
-    protected abstract bool IsSimpleComment(SyntaxTrivia trivia);
-    protected abstract bool IsEndOfLine(SyntaxTrivia trivia);
-    protected abstract bool IsWhitespace(SyntaxTrivia trivia);
 
     protected override string MessageFormat => "Remove this empty comment";
 
@@ -48,7 +43,7 @@ public abstract class CommentsShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosti
             }
         });
 
-    protected void CheckTrivia(SonarSyntaxTreeReportingContext context, IEnumerable<SyntaxTrivia> trivia)
+    private void CheckTrivia(SonarSyntaxTreeReportingContext context, IEnumerable<SyntaxTrivia> trivia)
     {
         foreach (var partition in Partition(trivia)?.Where(ShouldReport))
         {
@@ -58,9 +53,12 @@ public abstract class CommentsShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosti
             var location = Location.Create(context.Tree, TextSpan.FromBounds(start, end));
             context.ReportIssue(Diagnostic.Create(Rule, location));
         }
+
+        bool ShouldReport(IEnumerable<SyntaxTrivia> trivia) =>
+            trivia.Any() && trivia.All(x => string.IsNullOrWhiteSpace(GetCommentText(x)));
     }
 
-    protected List<List<SyntaxTrivia>>? Partition(IEnumerable<SyntaxTrivia> trivia)
+    private List<List<SyntaxTrivia>>? Partition(IEnumerable<SyntaxTrivia> trivia)
     {
         var res = new Lazy<List<List<SyntaxTrivia>>>();
         var current = new Lazy<List<SyntaxTrivia>>();
@@ -126,6 +124,18 @@ public abstract class CommentsShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosti
         }
     }
 
-    private bool ShouldReport(IEnumerable<SyntaxTrivia> trivia) =>
-        trivia.Any() && trivia.All(x => string.IsNullOrWhiteSpace(GetCommentText(x)));
+    private bool IsValidTriviaType(SyntaxTrivia trivia) =>
+        Language.SyntaxKind.CommentTrivia.Contains((TSyntaxKind)Enum.ToObject(typeof(TSyntaxKind), trivia.RawKind));
+
+    private bool IsSimpleComment(SyntaxTrivia trivia) =>
+        IsKind(trivia, Language.SyntaxKind.SimpleCommentTrivia);
+
+    private bool IsEndOfLine(SyntaxTrivia trivia) =>
+        IsKind(trivia, Language.SyntaxKind.EndOfLineTrivia);
+
+    private bool IsWhitespace(SyntaxTrivia trivia) =>
+        IsKind(trivia, Language.SyntaxKind.WhitespaceTrivia);
+
+    private bool IsKind(SyntaxTrivia trivia, TSyntaxKind kind) =>
+        kind.Equals(Enum.ToObject(typeof(TSyntaxKind), trivia.RawKind));
 }
