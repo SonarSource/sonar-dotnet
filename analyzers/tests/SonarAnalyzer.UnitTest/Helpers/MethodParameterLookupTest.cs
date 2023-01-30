@@ -207,6 +207,7 @@ End Module
 
             private void InspectTryGetSymbol(MethodParameterLookupBase<TArgumentSyntax> lookup, object expectedArguments, TArgumentSyntax[] arguments)
             {
+                Assert.ThrowsException<ArgumentException>(() => lookup.TryGetSymbol(SpecialArgument.Parent, out var parameter));
                 lookup.TryGetSymbol(SpecialArgument, out var parameter).Should().Be(false);
 
                 foreach (var argument in arguments)
