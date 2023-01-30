@@ -1,0 +1,37 @@
+<p><code>StringBuilder</code> instances that are <code>append</code>ed but never <code>toString</code>ed needlessly clutter the code, and worse are a
+drag on performance. Either they should be removed, or the missing <code>toString</code> call added.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public void doSomething(List&lt;string&gt; strings) {
+  StringBuilder sb = new StringBuilder();  // Noncompliant
+  sb.Append("Got: ");
+  foreach(string str in strings) {
+    sb.Append(str).Append(", ");
+    // ...
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public void doSomething(List&lt;string&gt; strings) {
+  foreach(string str in strings) {
+    // ...
+  }
+}
+</pre>
+<p>or</p>
+<pre>
+public void doSomething(List&lt;string&gt; strings) {
+  StringBuilder sb = new StringBuilder();  // Noncompliant
+  sb.Append("Got: ");
+  foreach(string str in strings) {
+    sb.Append(str).Append(", ");
+    // ...
+  }
+  _logger.LogInformation(sb.toString, DateTimeOffset.UtcNow);
+}
+</pre>
+<h2>Exceptions</h2>
+<p>This rule ignores <code>StringBuilder</code>s that are passed as method arguments on the grounds that they are likely <code>toString</code>ed
+there.</p>
+
