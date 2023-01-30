@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq;
 using Microsoft.CodeAnalysis.Text;
 
 namespace SonarAnalyzer.Rules;
@@ -51,16 +52,13 @@ public abstract class CommentsShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosti
             return;
         }
 
-        foreach (var partition in partitions.Where(ShouldReport))
+        foreach (var partition in partitions.Where(trivia => trivia.Any() && trivia.All(x => string.IsNullOrWhiteSpace(GetCommentText(x)))))
         {
             var start = partition.First().GetLocation().SourceSpan.Start;
             var end = partition.Last().GetLocation().SourceSpan.End;
             var location = Location.Create(context.Tree, TextSpan.FromBounds(start, end));
             context.ReportIssue(Diagnostic.Create(Rule, location));
         }
-
-        bool ShouldReport(IEnumerable<SyntaxTrivia> trivia) =>
-            trivia.Any() && trivia.All(x => string.IsNullOrWhiteSpace(GetCommentText(x)));
     }
 
     private List<List<SyntaxTrivia>> PartitionComments(IEnumerable<SyntaxTrivia> trivia)
