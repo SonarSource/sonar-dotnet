@@ -37,7 +37,7 @@ public class ArrayPassedAsParamsTest
     [TestMethod]
     public void ArrayPassedAsParams_CSharp9() =>
         builderCS.AddPaths("ArrayPassedAsParams.CSharp9.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .WithTopLevelStatements()
             .Verify();
 
 #endif

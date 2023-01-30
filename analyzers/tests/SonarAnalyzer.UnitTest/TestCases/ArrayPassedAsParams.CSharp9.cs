@@ -1,14 +1,8 @@
 ﻿using System;
 
-public class Program
-{
-    public void Base()
-    {
-        MyClass s = new(1, new int[] { 2, 3 }); // Noncompliant
-//                         ^^^^^^^^^^^^^^^^^^
-        MyClass s1 = new(1, 2, 3); // Compliant
-    }
-}
+MyClass s = new(1, new int[] { 2, 3 }); // Noncompliant
+//                 ^^^^^^^^^^^^^^^^^^
+MyClass s1 = new(1, 2, 3); // Compliant
 
 public class MyClass
 {
