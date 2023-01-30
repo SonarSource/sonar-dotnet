@@ -27,8 +27,8 @@ public abstract class CommentsShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosti
 {
     private const string DiagnosticId = "S4663";
 
-    protected abstract string GetCommentText(SyntaxTrivia trivia);
     protected abstract bool IsValidTriviaType(SyntaxTrivia trivia);
+    protected abstract string GetCommentText(SyntaxTrivia trivia);
 
     protected abstract bool IsSimpleComment(SyntaxTrivia trivia);
     protected abstract bool IsEndOfLine(SyntaxTrivia trivia);
@@ -50,7 +50,7 @@ public abstract class CommentsShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosti
 
     protected void CheckTrivia(SonarSyntaxTreeReportingContext context, IEnumerable<SyntaxTrivia> trivia)
     {
-        foreach (var partition in Partition(trivia).Where(ShouldReport))
+        foreach (var partition in Partition(trivia)?.Where(ShouldReport))
         {
             var start = partition.First().GetLocation().SourceSpan.Start;
             var end = partition.Last().GetLocation().SourceSpan.End;
@@ -60,10 +60,10 @@ public abstract class CommentsShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosti
         }
     }
 
-    protected List<List<SyntaxTrivia>> Partition(IEnumerable<SyntaxTrivia> trivia)
+    protected List<List<SyntaxTrivia>>? Partition(IEnumerable<SyntaxTrivia> trivia)
     {
-        var res = new List<List<SyntaxTrivia>>();
-        var current = new List<SyntaxTrivia>();
+        var res = new Lazy<List<List<SyntaxTrivia>>>();
+        var current = new Lazy<List<SyntaxTrivia>>();
         var firstEndOfLineFound = false;
 
         foreach (var trivium in trivia)
@@ -75,7 +75,7 @@ public abstract class CommentsShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosti
 
             if (IsSimpleComment(trivium)) // put it on the current block of "//"
             {
-                current.Add(trivium);
+                current.Value.Add(trivium);
                 firstEndOfLineFound = false;
                 continue;
             }
@@ -87,15 +87,16 @@ public abstract class CommentsShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosti
             {
                 CloseCurrentPartition();
                 // all comments except single-line comments are parsed as a block already.
-                current.Add(trivium);
+                current.Value.Add(trivium);
                 CloseCurrentPartition();
             }
+            // This handles an empty line, for example:
+            // // some comment \n <- EOL found, set to true
+            // //  \n <- EOL is set to false at CommentTrivia, set to true after it
+            // // some other comment <- EOL is set to false at CommentTrivia, set to true after it
+            // \n <- EOL found, is already true, closes current partition
             else if (IsEndOfLine(trivium))
             {
-                // This is for the case, of an empty line in between, for example:
-                // //
-                //
-                // //
                 if (firstEndOfLineFound)
                 {
                     CloseCurrentPartition();
@@ -111,14 +112,14 @@ public abstract class CommentsShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosti
             }
         }
 
-        res.Add(current);
-        return res;
+        res.Value.Add(current.Value);
+        return res.Value;
 
         void CloseCurrentPartition()
         {
-            if (current.Count > 0)
+            if (current.Value.Count > 0)
             {
-                res.Add(current);
+                res.Value.Add(current.Value);
                 current = new();
             }
             firstEndOfLineFound = false;
@@ -126,5 +127,5 @@ public abstract class CommentsShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosti
     }
 
     private bool ShouldReport(IEnumerable<SyntaxTrivia> trivia) =>
-        trivia.Any() && trivia.All(x => GetCommentText(x) == string.Empty);
+        trivia.Any() && trivia.All(x => string.IsNullOrWhiteSpace(GetCommentText(x)));
 }

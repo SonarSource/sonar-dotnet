@@ -27,15 +27,20 @@ public sealed class CommentsShouldNotBeEmpty : CommentsShouldNotBeEmptyBase<Synt
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-    protected override bool IsValidTriviaType(SyntaxTrivia trivia)
-        => Language.SyntaxKind.CommentTrivia.Contains(trivia.Kind());
+    protected override bool IsSimpleComment(SyntaxTrivia trivia) =>
+        trivia.IsKind(SyntaxKind.SingleLineCommentTrivia);
 
-    protected override bool IsSimpleComment(SyntaxTrivia trivia) => trivia.IsKind(SyntaxKind.SingleLineCommentTrivia);
-    protected override bool IsEndOfLine(SyntaxTrivia trivia) => trivia.IsKind(SyntaxKind.EndOfLineTrivia);
-    protected override bool IsWhitespace(SyntaxTrivia trivia) => trivia.IsKind(SyntaxKind.WhitespaceTrivia);
+    protected override bool IsEndOfLine(SyntaxTrivia trivia) =>
+        trivia.IsKind(SyntaxKind.EndOfLineTrivia);
 
-    protected override string GetCommentText(SyntaxTrivia trivia)
-        => trivia.Kind() switch
+    protected override bool IsWhitespace(SyntaxTrivia trivia) =>
+        trivia.IsKind(SyntaxKind.WhitespaceTrivia);
+
+    protected override bool IsValidTriviaType(SyntaxTrivia trivia) =>
+        Language.SyntaxKind.CommentTrivia.Contains(trivia.Kind());
+
+    protected override string GetCommentText(SyntaxTrivia trivia) =>
+        trivia.Kind() switch
         {
             SyntaxKind.SingleLineCommentTrivia => GetSingleLineText(trivia),
             SyntaxKind.MultiLineCommentTrivia => GetMultiLineText(trivia),
@@ -44,8 +49,8 @@ public sealed class CommentsShouldNotBeEmpty : CommentsShouldNotBeEmptyBase<Synt
         };
 
     // //
-    private static string GetSingleLineText(SyntaxTrivia trivia)
-        => trivia.ToString().Trim().Substring(2);
+    private static string GetSingleLineText(SyntaxTrivia trivia) =>
+        trivia.ToString().Trim().Substring(2);
 
     // ///
     private static string GetSingleLineDocumentationText(SyntaxTrivia trivia)
