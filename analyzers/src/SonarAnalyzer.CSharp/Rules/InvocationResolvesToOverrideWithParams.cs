@@ -105,7 +105,7 @@ public sealed class InvocationResolvesToOverrideWithParams : SonarDiagnosticAnal
 
     private static bool MethodAccessibleWithinType(IMethodSymbol method, ITypeSymbol type) =>
         IsInTypeOrNested(method, type)
-        || method.DeclaredAccessibility switch // FIXME: Null check for top-level statements?
+        || method.DeclaredAccessibility switch
             {
                 Accessibility.Private => false,
                 // ProtectedAndInternal corresponds to `private protected`.

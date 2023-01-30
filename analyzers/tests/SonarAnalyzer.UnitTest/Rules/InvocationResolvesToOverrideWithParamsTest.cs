@@ -60,6 +60,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
                 .Verify();
 
+        [TestMethod]
+        public void InvocationResolvesToOverrideWithParams_TopLevelStatements() =>
+            builder.AddPaths("InvocationResolvesToOverrideWithParams.TopLevelStatements.cs")
+                .WithTopLevelStatements()
+                .Verify();
+
 #endif
 
     }
