@@ -12,6 +12,6 @@ class Noncompliant
 {
     void ImplicitObject()
     {
-        Regex patternOnly = new("[A"); // Noncompliant {{The pattern contains a syntax error: Invalid pattern '[A' at offset 2. Unterminated [] set.}}
+        Regex patternOnly = new("[A"); // Noncompliant {{Fix the syntax error inside this regex: Invalid pattern '[A' at offset 2. Unterminated [] set.}}
     }
 }

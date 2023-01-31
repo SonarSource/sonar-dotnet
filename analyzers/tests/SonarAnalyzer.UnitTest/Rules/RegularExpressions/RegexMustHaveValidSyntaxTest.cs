@@ -26,8 +26,7 @@ namespace SonarAnalyzer.UnitTest.Rules;
 [TestClass]
 public class RegexMustHaveValidSyntaxTest
 {
-    private readonly VerifierBuilder builderCS = new VerifierBuilder()
-        .AddAnalyzer(() => new CS.RegexMustHaveValidSyntax())
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.RegexMustHaveValidSyntax>()
         .WithBasePath("RegularExpressions")
         .AddReferences(MetadataReferenceFacade.RegularExpressions)
         .AddReferences(NuGetMetadataReference.SystemComponentModelAnnotations());

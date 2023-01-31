@@ -42,4 +42,10 @@ class Noncompliant
 
     [RegularExpression("[A")] // Noncompliant
     public string Attribute { get; set; }
+
+    [System.ComponentModel.DataAnnotations.RegularExpression("[A")] // Noncompliant
+    public string AttributeFullySpecified { get; set; }
+
+    [global::System.ComponentModel.DataAnnotations.RegularExpression("[A")] // Noncompliant
+    public string AttributeGloballySpecified { get; set; }
 }

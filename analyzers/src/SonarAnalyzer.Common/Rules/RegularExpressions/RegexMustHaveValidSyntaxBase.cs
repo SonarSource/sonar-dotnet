@@ -25,7 +25,7 @@ namespace SonarAnalyzer.Rules;
 public abstract class RegexMustHaveValidSyntaxBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
     where TSyntaxKind : struct
 {
-    private const string DiagnosticId = "S101"; //"S5856";
+    private const string DiagnosticId = "S5856";
 
     protected sealed override string MessageFormat => "Fix the syntax error inside this regex: {0}";
 
