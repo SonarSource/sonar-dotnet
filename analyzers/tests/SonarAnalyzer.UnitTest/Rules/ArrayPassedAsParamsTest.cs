@@ -27,6 +27,7 @@ namespace SonarAnalyzer.UnitTest.Rules;
 public class ArrayPassedAsParamsTest
 {
     private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ArrayPassedAsParams>();
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.ArrayPassedAsParams>();
 
     [TestMethod]
     public void ArrayPassedAsParams_CS() =>
@@ -44,5 +45,35 @@ public class ArrayPassedAsParamsTest
 
     [TestMethod]
     public void ArrayPassedAsParams_VB() =>
-        new VerifierBuilder<VB.ArrayPassedAsParams>().AddPaths("ArrayPassedAsParams.vb").Verify();
+        builderVB.AddPaths("ArrayPassedAsParams.vb").Verify();
+
+    [DataTestMethod]
+    [DataRow("{ }", false)]
+    [DataRow("{ \"s\", \"s\", \"s\", \"s\" }", false)]
+    [DataRow("New String(2) { }", true)]
+    [DataRow("New String(2) { \"s\", \"s\", \"s\" }", false)]
+    [DataRow("New String() { }", false)]
+    [DataRow("New String() { \"s\" }", false)]
+    public void ArrayPassedAsParams_VBCollectionInitializerSyntaxTests(string arrayCreation, bool compliant)
+    {
+        var code = $$"""
+            Public Class C
+                Public Sub M()
+                    ParamsMethod({{arrayCreation}}) ' {{(compliant ? "Compliant" : "Noncompliant")}}
+                End Sub
+
+                Public Sub ParamsMethod(ParamArray p As String())
+                End Sub
+            End Class
+            """;
+        var builder = builderVB.AddSnippet(code);
+        if (compliant)
+        {
+            builder.VerifyNoIssueReported();
+        }
+        else
+        {
+            builder.Verify();
+        }
+    }
 }

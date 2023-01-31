@@ -143,9 +143,12 @@ End Module
             var c = new CSharpInspection(SourceCS);
             var lookupThrow = c.CreateLookup(1, "DoSomething");
 
-            Assert.ThrowsException<InvalidOperationException>(() => lookupThrow.TryGetNonParamsSyntax(lookupThrow.MethodSymbol.Parameters.Single(), out var argument));
-            Assert.ThrowsException<ArgumentException>(() =>
+            var invalidOperationEx = Assert.ThrowsException<InvalidOperationException>(() => lookupThrow.TryGetNonParamsSyntax(lookupThrow.MethodSymbol.Parameters.Single(), out var argument));
+            invalidOperationEx.Message.Should().Be("Sequence contains more than one element");
+
+            var argumentEx = Assert.ThrowsException<ArgumentException>(() =>
                 lookupThrow.TryGetSymbol(CSharpCodeAnalysis.SyntaxFactory.LiteralExpression(CSharpCodeAnalysis.SyntaxKind.StringLiteralExpression), out var parameter));
+            argumentEx.Message.Should().Be("argument must be of type Microsoft.CodeAnalysis.CSharp.Syntax.ArgumentSyntax (Parameter 'argument')");
         }
 
         [TestMethod]
@@ -154,9 +157,12 @@ End Module
             var c = new VisualBasicInspection(SourceVB);
             var lookupThrow = c.CreateLookup(1, "DoSomething");
 
-            Assert.ThrowsException<InvalidOperationException>(() => lookupThrow.TryGetNonParamsSyntax(lookupThrow.MethodSymbol.Parameters.Single(), out var argument));
-            Assert.ThrowsException<ArgumentException>(() =>
+            var invalidOperationEx = Assert.ThrowsException<InvalidOperationException>(() => lookupThrow.TryGetNonParamsSyntax(lookupThrow.MethodSymbol.Parameters.Single(), out var argument));
+            invalidOperationEx.Message.Should().Be("Sequence contains more than one element");
+
+            var argumentEx = Assert.ThrowsException<ArgumentException>(() =>
                 lookupThrow.TryGetSymbol(VBCodeAnalysis.SyntaxFactory.StringLiteralExpression(VBCodeAnalysis.SyntaxFactory.StringLiteralToken(string.Empty, string.Empty)), out var parameter));
+            argumentEx.Message.Should().Be("argument must be of type Microsoft.CodeAnalysis.VisualBasic.Syntax.ArgumentSyntax (Parameter 'argument')");
         }
 
         private abstract class InspectionBase<TArgumentSyntax, TInvocationSyntax>

@@ -45,7 +45,17 @@ public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, Ar
     private static ArgumentSyntax GetLastArgumentIfArrayCreation(ArgumentListSyntax argumentList) =>
         argumentList is { Arguments: { Count: > 0 } arguments }
         && arguments.Last() is var argument
-        && argument.GetExpression() is ArrayCreationExpressionSyntax { Initializer: CollectionInitializerSyntax { Initializers.Count: > 0 } }
+        && IsArrayCreation(argument.GetExpression())
             ? argument
             : null;
+
+    private static bool IsArrayCreation(ExpressionSyntax expression) =>
+        expression switch
+        {
+            ArrayCreationExpressionSyntax { } arrayCreation =>
+                arrayCreation.Initializer is CollectionInitializerSyntax { Initializers.Count: > 0 }
+                || arrayCreation.ArrayBounds is not ArgumentListSyntax { },
+            CollectionInitializerSyntax { } => true,
+            _ => false
+        };
 }
