@@ -30,16 +30,15 @@ public abstract class ObsoleteAttributesNeedExplanationBase<TSyntaxKind> : Sonar
     protected ObsoleteAttributesNeedExplanationBase() : base(DiagnosticId) { }
 
     protected sealed override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(
-            Language.GeneratedCodeRecognizer,
-            c =>
+        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
+        {
+            if (c.ContainingSymbol?.HasAttribute(KnownType.System_ObsoleteAttribute) is true
+                && c.SemanticModel.GetSymbolInfo(c.Node).Symbol is { } attribute
+                && attribute.IsInType(KnownType.System_ObsoleteAttribute)
+                && !attribute.GetParameters().Any())
             {
-                if (c.SemanticModel.GetSymbolInfo(c.Node).Symbol is { } attribute
-                    && attribute.IsInType(KnownType.System_ObsoleteAttribute)
-                    && !attribute.GetParameters().Any())
-                {
-                    c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
-                }
-            },
-            Language.SyntaxKind.Attribute);
+                c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
+            }
+        },
+        Language.SyntaxKind.Attribute);
 }
