@@ -35,7 +35,10 @@ public class RemoveObsoleteCodeTest
 
     [TestMethod]
     public void RemoveObsoleteCode_CSharp10() =>
-        builderCS.AddPaths("RemoveObsoleteCode.CSharp10.cs").WithTopLevelStatements().WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+        builderCS.AddPaths("RemoveObsoleteCode.CSharp10.cs")
+        .WithTopLevelStatements()
+        .WithOptions(ParseOptionsHelper.FromCSharp10)
+        .Verify();
 
     [TestMethod]
     public void RemoveObsoleteCode_VB() =>
