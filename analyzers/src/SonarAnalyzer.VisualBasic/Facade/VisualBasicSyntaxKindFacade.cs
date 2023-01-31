@@ -48,6 +48,8 @@ internal sealed class VisualBasicSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind
     public SyntaxKind IdentifierToken => SyntaxKind.IdentifierToken;
     public SyntaxKind InvocationExpression => SyntaxKind.InvocationExpression;
     public SyntaxKind InterpolatedStringExpression => SyntaxKind.InterpolatedStringExpression;
+    public SyntaxKind LeftShiftAssignmentStatement => SyntaxKind.LeftShiftAssignmentStatement;
+    public SyntaxKind LeftShiftExpression => SyntaxKind.LeftShiftExpression;
     public SyntaxKind LocalDeclaration => SyntaxKind.LocalDeclarationStatement;
     public SyntaxKind[] MethodDeclarations => new[] { SyntaxKind.FunctionStatement, SyntaxKind.SubStatement };
     public SyntaxKind[] ObjectCreationExpressions => new[] { SyntaxKind.ObjectCreationExpression };
@@ -55,15 +57,13 @@ internal sealed class VisualBasicSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind
     public SyntaxKind ParameterList => SyntaxKind.ParameterList;
     public SyntaxKind RefKeyword => SyntaxKind.ByRefKeyword;
     public SyntaxKind ReturnStatement => SyntaxKind.ReturnStatement;
+    public SyntaxKind RightShiftAssignmentStatement => SyntaxKind.RightShiftAssignmentStatement;
+    public SyntaxKind RightShiftExpression => SyntaxKind.RightShiftExpression;
     public SyntaxKind SimpleAssignment => SyntaxKind.SimpleAssignmentStatement;
     public SyntaxKind SimpleCommentTrivia => SyntaxKind.CommentTrivia;
     public SyntaxKind SimpleMemberAccessExpression => SyntaxKind.SimpleMemberAccessExpression;
     public SyntaxKind[] StringLiteralExpressions => new[] { SyntaxKind.StringLiteralExpression };
     public SyntaxKind StructDeclaration => SyntaxKind.StructureBlock;
     public SyntaxKind[] TypeDeclaration => new[] { SyntaxKind.ClassBlock, SyntaxKind.StructureBlock, SyntaxKind.InterfaceBlock, SyntaxKind.EnumBlock };
-    public SyntaxKind LeftShiftExpression => SyntaxKind.LeftShiftExpression;
-    public SyntaxKind RightShiftExpression => SyntaxKind.RightShiftExpression;
-    public SyntaxKind LeftShiftAssignmentStatement => SyntaxKind.LeftShiftAssignmentStatement;
-    public SyntaxKind RightShiftAssignmentStatement => SyntaxKind.RightShiftAssignmentStatement;
     public SyntaxKind WhitespaceTrivia => SyntaxKind.WhitespaceTrivia;
 }
