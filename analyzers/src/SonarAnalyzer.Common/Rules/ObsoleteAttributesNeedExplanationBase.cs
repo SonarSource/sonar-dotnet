@@ -32,8 +32,7 @@ public abstract class ObsoleteAttributesNeedExplanationBase<TSyntaxKind> : Sonar
     protected sealed override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
         {
-            if (c.ContainingSymbol?.HasAttribute(KnownType.System_ObsoleteAttribute) is true
-                && c.SemanticModel.GetSymbolInfo(c.Node).Symbol is { } attribute
+            if (c.SemanticModel.GetSymbolInfo(c.Node).Symbol is { } attribute
                 && attribute.IsInType(KnownType.System_ObsoleteAttribute)
                 && !attribute.GetParameters().Any())
             {
