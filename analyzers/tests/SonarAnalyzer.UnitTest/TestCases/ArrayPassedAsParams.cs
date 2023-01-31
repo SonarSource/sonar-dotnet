@@ -7,6 +7,7 @@ public class Program
         Method(new string[] { "s1", "s2" }); // Noncompliant {{Remove this array creation and simply pass the elements.}}
 //             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
         Method(new string[] { "s1" }); // Noncompliant
+        Method(new[] { "s1" }); // Noncompliant
         Method(new string[] { }); // Compliant
         Method("s1");           // Compliant
         Method("s1", "s2");     // Compliant
