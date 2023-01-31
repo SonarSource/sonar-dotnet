@@ -1,20 +1,20 @@
 ﻿Public Class Testcases
 
-    Public Sub Comment() '    
+    Public Sub Comment() '
 
         ' Noncompliant@-2 (inline comment)
 
         Dim x = 42 'Ipsem Lorum
         Dim y = 42 ' Ipsem Lorum
-        Dim z = 42 ' 
+        Dim z = 42 '
 
         ' Noncompliant@-2
 
         Dim a = 42 '''Ipsem Lorum
         Dim b = 42 ''' Ipsem Lorum
-        Dim c = 42 '''    
+        Dim c = 42 '''
 
-        '                                          
+        '
 
         ' Noncompliant@-2 (whitespace)
 
@@ -53,7 +53,7 @@
 
         '
 
-        ' Noncompliant @-2 
+        ' Noncompliant @-2
 
         ' \r
 
@@ -83,7 +83,7 @@
     End Sub
 
     Public Sub DocumentationComment()
-        '''                                          
+        '''
         ' Noncompliant@-1 (whitespace)
 
         ''' *
@@ -96,7 +96,7 @@
         '''Ipsem Lorum
 
         '''
-        ' Noncompliant @-1 
+        ' Noncompliant @-1
 
         ' Noncompliant @+1
         '''
@@ -119,3 +119,26 @@
     End Sub
 
 End Class
+'
+' hey
+'
+'
+' there
+'
+
+'''
+''' hey
+'''
+''' there
+'''
+
+
+' Noncompliant@+2
+
+'
+'
+'
+
+' Noncompliant@+1
+'''
+'''

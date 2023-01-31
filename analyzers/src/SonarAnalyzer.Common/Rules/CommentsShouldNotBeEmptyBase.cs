@@ -39,8 +39,16 @@ public abstract class CommentsShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosti
         {
             foreach (var token in c.Tree.GetRoot().DescendantTokens())
             {
-                CheckTrivia(c, token.LeadingTrivia);
-                CheckTrivia(c, token.TrailingTrivia);
+                // Hotpath: Don't allocate the trivia enumerable if not needed
+                if (token.HasLeadingTrivia)
+                {
+                    CheckTrivia(c, token.LeadingTrivia);
+                }
+
+                if (token.HasTrailingTrivia)
+                {
+                    CheckTrivia(c, token.TrailingTrivia);
+                }
             }
         });
 
@@ -70,10 +78,9 @@ public abstract class CommentsShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosti
 
         foreach (var trivium in trivia)
         {
-            if (IsSimpleComment(trivium)) // put it on the current block of "//"
+            if (IsSimpleComment(trivium))
             {
-                AddTriviaToPartition(ref current, trivium);
-                firstEndOfLineFound = false;
+                AddTriviaToPartition(ref current, trivium, ref firstEndOfLineFound);
             }
             // This is for the case, of two different comment types, for example:
             // //
@@ -82,11 +89,11 @@ public abstract class CommentsShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosti
             {
                 CloseCurrentPartition(ref current, ref partitions, ref firstEndOfLineFound);
                 // all comments except single-line comments are parsed as a block already.
-                AddTriviaToPartition(ref current, trivium);
+                AddTriviaToPartition(ref current, trivium, ref firstEndOfLineFound);
                 CloseCurrentPartition(ref current, ref partitions, ref firstEndOfLineFound);
             }
             // This handles an empty line, for example:
-            // // some comment \n <- EOL found, set to true
+            // // some comment \n <- EOL found, firstEndOfLineFound set to true
             // //  \n <- EOL is set to false at CommentTrivia, set to true after it
             // // some other comment <- EOL is set to false at CommentTrivia, set to true after it
             // \n <- EOL found, is already true, closes current partition
@@ -110,13 +117,14 @@ public abstract class CommentsShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosti
         CloseCurrentPartition(ref current, ref partitions, ref firstEndOfLineFound);
         return partitions;
 
-        static void AddTriviaToPartition(ref List<SyntaxTrivia> current, SyntaxTrivia trivia)
+        // Hotpath: Don't capture variables
+        static void AddTriviaToPartition(ref List<SyntaxTrivia> current, SyntaxTrivia trivia, ref bool firstEndOfLineFound)
         {
             current ??= new();
             current.Add(trivia);
+            firstEndOfLineFound = false;
         }
 
-        // Hotpath: Don't capture variables
         static void CloseCurrentPartition(ref List<SyntaxTrivia> current, ref List<List<SyntaxTrivia>> partitions, ref bool firstEndOfLineFound)
         {
             if (current is { Count: > 0 })
