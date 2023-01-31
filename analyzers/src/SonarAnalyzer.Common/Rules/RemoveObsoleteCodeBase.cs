@@ -32,7 +32,8 @@ public abstract class RemoveObsoleteCodeBase<TSyntaxKind> : SonarDiagnosticAnaly
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
         {
-            if (c.SemanticModel.GetSymbolInfo(c.Node).Symbol is { } attribute
+            if (c.ContainingSymbol?.HasAttribute(KnownType.System_ObsoleteAttribute) is true
+                && c.SemanticModel.GetSymbolInfo(c.Node).Symbol is { } attribute
                 && attribute.IsInType(KnownType.System_ObsoleteAttribute))
             {
                 c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
