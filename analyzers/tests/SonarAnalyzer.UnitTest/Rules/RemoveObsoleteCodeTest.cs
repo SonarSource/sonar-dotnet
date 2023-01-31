@@ -46,17 +46,17 @@ public class RemoveObsoleteCodeTest
 
     [DataTestMethod]
     // All attribute targets of [Obsolete]
-    [DataRow("private bool field;")]                   // AttributeTargets.Field
-    [DataRow("private event EventHandler SomeEvent;")] // AttributeTargets.Event
-    [DataRow("private bool Prop { get; set; }")]       // AttributeTargets.Property
-    [DataRow("private void Method() { }")]             // AttributeTargets.Method
-    [DataRow("class C { }")]                           // AttributeTargets.Class
-    [DataRow("struct S { }")]                          // AttributeTargets.Struct
-    [DataRow("interface I { }")]                       // AttributeTargets.Interface
-    [DataRow("enum E { A }")]                          // AttributeTargets.Enum
-    [DataRow("public Test() { }")]                     // AttributeTargets.Constructor
-    [DataRow("delegate void Del();")]                  // AttributeTargets.Delegate
-    [DataRow("int this[int i] => 1;")]                 // Indexer
+    [DataRow("bool field;")]                   // AttributeTargets.Field
+    [DataRow("event EventHandler SomeEvent;")] // AttributeTargets.Event
+    [DataRow("bool Prop { get; set; }")]       // AttributeTargets.Property
+    [DataRow("void Method() { }")]             // AttributeTargets.Method
+    [DataRow("class C { }")]                   // AttributeTargets.Class
+    [DataRow("struct S { }")]                  // AttributeTargets.Struct
+    [DataRow("interface I { }")]               // AttributeTargets.Interface
+    [DataRow("enum E { A }")]                  // AttributeTargets.Enum
+    [DataRow("public Test() { }")]             // AttributeTargets.Constructor
+    [DataRow("delegate void Del();")]          // AttributeTargets.Delegate
+    [DataRow("int this[int i] => 1;")]         // Indexer
     public void RemoveObsoleteCode_AttributeTargetTest(string attributeTargetDeclaration)
     {
         builderCS.AddSnippet(WrapInTestCode(string.Empty)).VerifyNoIssueReported();
