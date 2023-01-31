@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S3878",
+"message":  "Remove this array creation and simply pass the elements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"region":  {
+"startLine":  110,
+"startColumn":  37,
+"endLine":  110,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S3878",
+"message":  "Remove this array creation and simply pass the elements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"region":  {
+"startLine":  122,
+"startColumn":  38,
+"endLine":  122,
+"endColumn":  122
+}
+}
+},
+{
+"id":  "S3878",
+"message":  "Remove this array creation and simply pass the elements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterReadView.cs",
+"region":  {
+"startLine":  173,
+"startColumn":  42,
+"endLine":  173,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S3878",
+"message":  "Remove this array creation and simply pass the elements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterRemoteWatcher.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  38,
+"endLine":  77,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S3878",
+"message":  "Remove this array creation and simply pass the elements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  640,
+"startColumn":  37,
+"endLine":  644,
+"endColumn":  14
+}
+}
+}
+]
+}

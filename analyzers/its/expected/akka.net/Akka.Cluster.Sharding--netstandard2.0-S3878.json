@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3878",
+"message":  "Remove this array creation and simply pass the elements.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  1304,
+"startColumn":  101,
+"endLine":  1304,
+"endColumn":  151
+}
+}
+}
+]
+}
