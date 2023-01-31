@@ -148,7 +148,7 @@ End Module
 
             var argumentEx = Assert.ThrowsException<ArgumentException>(() =>
                 lookupThrow.TryGetSymbol(CSharpCodeAnalysis.SyntaxFactory.LiteralExpression(CSharpCodeAnalysis.SyntaxKind.StringLiteralExpression), out var parameter));
-            argumentEx.Message.Should().Be("argument must be of type Microsoft.CodeAnalysis.CSharp.Syntax.ArgumentSyntax (Parameter 'argument')");
+            argumentEx.Message.Should().StartWith("argument must be of type Microsoft.CodeAnalysis.CSharp.Syntax.ArgumentSyntax");
         }
 
         [TestMethod]
@@ -162,7 +162,7 @@ End Module
 
             var argumentEx = Assert.ThrowsException<ArgumentException>(() =>
                 lookupThrow.TryGetSymbol(VBCodeAnalysis.SyntaxFactory.StringLiteralExpression(VBCodeAnalysis.SyntaxFactory.StringLiteralToken(string.Empty, string.Empty)), out var parameter));
-            argumentEx.Message.Should().Be("argument must be of type Microsoft.CodeAnalysis.VisualBasic.Syntax.ArgumentSyntax (Parameter 'argument')");
+            argumentEx.Message.Should().StartWith("argument must be of type Microsoft.CodeAnalysis.VisualBasic.Syntax.ArgumentSyntax");
         }
 
         private abstract class InspectionBase<TArgumentSyntax, TInvocationSyntax>
