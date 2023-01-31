@@ -33,6 +33,47 @@ public class RemoveObsoleteCodeTest
     public void RemoveObsoleteCode_CS() =>
         builderCS.AddPaths("RemoveObsoleteCode.cs").Verify();
 
+    [DataTestMethod]
+    // All attribute targets of [Obsolete]
+    [DataRow("private bool field;")]                   // AttributeTargets.Field
+    [DataRow("private event EventHandler SomeEvent;")] // AttributeTargets.Event
+    [DataRow("private bool Prop { get; set; }")]       // AttributeTargets.Property
+    [DataRow("private void Method() { }")]             // AttributeTargets.Method
+    [DataRow("class C { }")]                           // AttributeTargets.Class
+    [DataRow("struct S { }")]                          // AttributeTargets.Struct
+    [DataRow("interface I { }")]                       // AttributeTargets.Interface
+    [DataRow("enum E { A }")]                          // AttributeTargets.Enum
+    [DataRow("public Test() { }")]                     // AttributeTargets.Constructor
+    [DataRow("delegate void Del();")]                  // AttributeTargets.Delegate
+    [DataRow("int this[int i] => 1;")]                 // Indexer
+    public void RemoveObsoleteCode_AttributeTargetTest(string attributeTargetDeclaration)
+    {
+        builderCS.AddSnippet(WrapInTestCode(attribute: null)).VerifyNoIssueReported();
+        builderCS.AddSnippet(WrapInTestCode(attribute: "[Obsolete] // Noncompliant")).Verify();
+        builderCS.AddSnippet(WrapInTestCode(attribute: "[Custom]")).VerifyNoIssueReported();
+        builderCS.AddSnippet(WrapInTestCode(attribute: """
+            [Obsolete] // Noncompliant
+            [Custom]
+            """)).Verify();
+
+        string WrapInTestCode(string attribute)
+        {
+            return $$"""
+                using System;
+
+                [AttributeUsage(AttributeTargets.All)]
+                public sealed class CustomAttribute: Attribute
+                {
+                }
+                public class Test
+                {
+                    {{attribute}}
+                    {{attributeTargetDeclaration}}
+                }
+                """;
+        }
+    }
+
     [TestMethod]
     public void RemoveObsoleteCode_VB() =>
         builderVB.AddPaths("RemoveObsoleteCode.vb").Verify();
