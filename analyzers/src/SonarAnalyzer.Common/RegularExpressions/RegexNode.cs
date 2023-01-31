@@ -60,8 +60,8 @@ internal sealed class RegexNode
             var parameters = language.MethodParameterLookup(node, method);
             var pattern = TryGetNonParamsSyntax(method, parameters, "pattern");
             return new RegexNode(
-             new(pattern, language.FindConstantValue(model, pattern) as string),
-             new(null, null));
+                new(pattern, language.FindConstantValue(model, pattern) as string),
+                new(null, null));
         }
         return null;
     }
