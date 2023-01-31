@@ -32,8 +32,7 @@ public class RegexMustHaveValidSyntaxTest
         .AddReferences(MetadataReferenceFacade.RegularExpressions)
         .AddReferences(NuGetMetadataReference.SystemComponentModelAnnotations());
 
-    private readonly VerifierBuilder builderVB = new VerifierBuilder()
-        .AddAnalyzer(() => new VB.RegexMustHaveValidSyntax())
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.RegexMustHaveValidSyntax>()
         .WithBasePath("RegularExpressions")
         .AddReferences(MetadataReferenceFacade.RegularExpressions)
         .AddReferences(NuGetMetadataReference.SystemComponentModelAnnotations());
