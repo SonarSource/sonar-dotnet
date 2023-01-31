@@ -57,7 +57,7 @@ public class RemoveObsoleteCodeTest
     [DataRow("public Test() { }")]             // AttributeTargets.Constructor
     [DataRow("delegate void Del();")]          // AttributeTargets.Delegate
     [DataRow("int this[int i] => 1;")]         // Indexer
-    public void RemoveObsoleteCode_AttributeTargetTest(string attributeTargetDeclaration)
+    public void RemoveObsoleteCode_AttributeTargetTest_CS(string attributeTargetDeclaration)
     {
         builderCS.AddSnippet(WrapInTestCode(string.Empty)).VerifyNoIssueReported();
         builderCS.AddSnippet(WrapInTestCode("[Obsolete] // Noncompliant")).Verify();
@@ -81,6 +81,70 @@ public class RemoveObsoleteCodeTest
                 {{attribute}}
                 {{attributeTargetDeclaration}}
             }
+            """;
+    }
+
+    [DataTestMethod]
+    // All attribute targets of [Obsolete]
+    [DataRow("Private field As Boolean")]                // AttributeTargets.Field
+    [DataRow("Event SomeEvent As EventHandler")] // AttributeTargets.Event
+    [DataRow("Property Prop As Boolean")]        // AttributeTargets.Property
+    [DataRow("""
+            Private Sub Method()
+            End Sub
+        """)]                                    // AttributeTargets.Method
+    [DataRow("""
+            Class C
+            End Class
+        """)]                                    // AttributeTargets.Class
+    [DataRow("""
+            Structure S
+            End Structure
+        """)]                                    // AttributeTargets.Struct
+    [DataRow("""
+            Interface I
+            End Interface
+        """)]                                    // AttributeTargets.Interface
+    [DataRow("""
+            Enum E
+                A
+            End Enum
+        """)]                                    // AttributeTargets.Enum
+    [DataRow("""
+            Public Sub New()
+            End Sub
+        """)]                                    // AttributeTargets.Constructor
+    [DataRow("Delegate Sub Del()")]              // AttributeTargets.Delegate
+    [DataRow("""
+            Default ReadOnly Property Item(ByVal i As Integer) As Integer
+                Get
+                    Return 1
+                End Get
+            End Property
+        """)]                                    // Indexer
+    public void RemoveObsoleteCode_AttributeTargetTest_VB(string attributeTargetDeclaration)
+    {
+        builderVB.AddSnippet(WrapInTestCode(string.Empty)).VerifyNoIssueReported();
+        builderVB.AddSnippet(WrapInTestCode("<Obsolete> ' Noncompliant")).Verify();
+        builderVB.AddSnippet(WrapInTestCode("<Custom>")).VerifyNoIssueReported();
+        builderVB.AddSnippet(WrapInTestCode("""
+            <Obsolete> ' Noncompliant
+            <Custom>
+            """)).Verify();
+
+        string WrapInTestCode(string attribute) =>
+            $$"""
+            Imports System
+
+            <AttributeUsage(AttributeTargets.All)>
+            Public NotInheritable Class CustomAttribute
+                Inherits Attribute
+            End Class
+
+            Public Class Test
+                {{attribute}}
+                {{attributeTargetDeclaration}}
+            End Class
             """;
     }
 }
