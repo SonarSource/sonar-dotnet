@@ -27,7 +27,7 @@ public abstract class RegexMustHaveValidSyntaxBase<TSyntaxKind> : SonarDiagnosti
 {
     private const string DiagnosticId = "S101"; //"S5856";
 
-    protected sealed override string MessageFormat => "The pattern contains a syntax error: {0}";
+    protected sealed override string MessageFormat => "Fix the syntax error inside this regex: {0}";
 
     protected RegexMustHaveValidSyntaxBase() : base(DiagnosticId) { }
 
