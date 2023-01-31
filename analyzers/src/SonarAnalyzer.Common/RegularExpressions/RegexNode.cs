@@ -47,7 +47,7 @@ internal sealed class RegexNode
     public static RegexNode? FromMethod<TSyntaxKind>(SyntaxNode node, SemanticModel model, ILanguageFacade<TSyntaxKind> language) where TSyntaxKind : struct =>
         language.Syntax.NodeIdentifier(node).GetValueOrDefault().Text is { } name
         && MatchMethods.Any(x => x.Equals(name, language.NameComparison))
-        && model.GetSymbolInfo(node).Symbol is IMethodSymbol method
+        && model.GetSymbolInfo(node).Symbol is IMethodSymbol {IsStatic: true } method
         && method.ContainingType.Is(KnownType.System_Text_RegularExpressions_Regex)
         ? FromSymbol(method, node, model, language)
         : null;
