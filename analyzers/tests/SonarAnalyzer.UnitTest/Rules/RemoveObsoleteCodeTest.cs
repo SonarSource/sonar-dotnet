@@ -86,7 +86,7 @@ public class RemoveObsoleteCodeTest
 
     [DataTestMethod]
     // All attribute targets of [Obsolete]
-    [DataRow("Private field As Boolean")]                // AttributeTargets.Field
+    [DataRow("Private field As Boolean")]        // AttributeTargets.Field
     [DataRow("Event SomeEvent As EventHandler")] // AttributeTargets.Event
     [DataRow("Property Prop As Boolean")]        // AttributeTargets.Property
     [DataRow("""
