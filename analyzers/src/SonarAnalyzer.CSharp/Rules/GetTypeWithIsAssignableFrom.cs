@@ -117,7 +117,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if (methodSymbol.Name == nameof(Type.IsInstanceOfType)
                 && memberAccess.Expression is TypeOfExpressionSyntax typeOf
-                && !(context.SemanticModel.GetTypeInfo(typeOf.Type).Type is INamedTypeSymbol { IsUnboundGenericType: true }))
+                && !IsUnboundedGenericType(typeOf))
             {
                 ReportDiagnostic(context, MessageIsOperator, useIsOperator: true);
             }
@@ -129,7 +129,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (memberAccess.Expression is TypeOfExpressionSyntax typeOf)
                 {
-                    if (!(context.SemanticModel.GetTypeInfo(typeOf.Type).Type is INamedTypeSymbol { IsUnboundGenericType: true }))
+                    if (!IsUnboundedGenericType(typeOf))
                     {
                         ReportDiagnostic(context, MessageIsOperator, useIsOperator: true, shouldRemoveGetType: true);
                     }
@@ -140,6 +140,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
         }
+
+        private static bool IsUnboundedGenericType(TypeOfExpressionSyntax typeOf) =>
+            typeOf.DescendantNodes().Any(x => x is OmittedTypeArgumentSyntax);
 
         private static ExpressionSyntax ConstantPatternExpression(SyntaxNode node) =>
             node.Kind() switch
