@@ -14,7 +14,7 @@
         Dim b = 42 ''' Ipsem Lorum
         Dim c = 42 '''
 
-        '
+        '		
 
         ' Noncompliant@-2 (whitespace)
 
@@ -83,7 +83,7 @@
     End Sub
 
     Public Sub DocumentationComment()
-        '''
+        '''		
         ' Noncompliant@-1 (whitespace)
 
         ''' *

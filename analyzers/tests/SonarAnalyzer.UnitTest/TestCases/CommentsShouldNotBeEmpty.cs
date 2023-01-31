@@ -10,7 +10,7 @@ public class SingleLine //
 
     // Noncompliant@-2 (a lot of whitespace before)
 
-    //
+    //            
 
     // Noncompliant@-2 (a lot of whitespace after)
 
@@ -136,7 +136,7 @@ public class SingleLineDocumentation ///
             ///
     // Noncompliant@-1 (a lot of whitespace before)
 
-    ///
+    ///					
     // Noncompliant@-1 (a lot of whitespace after)
 
     ///
@@ -188,7 +188,7 @@ public class MultiLine /* */
     /*      */
     // Noncompliant@-1 (a lot of whitespace inside)
 
-    /**/
+    /**/					
     // Noncompliant@-1 (a lot of whitespace after)
 
     // Noncompliant@+1
@@ -286,7 +286,7 @@ public class MultiLineDocumentation /** */
     /**      */
     // Noncompliant@-1 (a lot of whitespace inside)
 
-    /***/
+    /***/						
     // Noncompliant@-1 (a lot of whitespace after)
 
     // Noncompliant@+1
