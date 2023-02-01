@@ -20,27 +20,26 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.UnitTest.Rules
-{
-    [TestClass]
-    public class EqualityOnFloatingPointTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<EqualityOnFloatingPoint>();
+namespace SonarAnalyzer.UnitTest.Rules;
 
-        [TestMethod]
-        public void EqualityOnFloatingPoint() =>
-            builder.AddPaths("EqualityOnFloatingPoint.cs").Verify();
+[TestClass]
+public class EqualityOnFloatingPointTest
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder<EqualityOnFloatingPoint>();
+
+    [TestMethod]
+    public void EqualityOnFloatingPoint() =>
+        builder.AddPaths("EqualityOnFloatingPoint.cs").Verify();
 
 #if NET
 
-        [TestMethod]
-        public void EqualityOnFloatingPoint_CSharp11() =>
-            builder.AddPaths("EqualityOnFloatingPoint.CSharp11.cs")
-                .AddReferences(new[] { CoreMetadataReference.SystemRuntime })
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .Verify();
+    [TestMethod]
+    public void EqualityOnFloatingPoint_CSharp11() =>
+        builder.AddPaths("EqualityOnFloatingPoint.CSharp11.cs")
+            .AddReferences(new[] { CoreMetadataReference.SystemRuntime })
+            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .Verify();
 
 #endif
 
-    }
 }

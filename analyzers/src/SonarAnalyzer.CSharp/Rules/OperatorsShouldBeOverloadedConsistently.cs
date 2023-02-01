@@ -102,56 +102,35 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static IEnumerable<string> GetImplementedMethods(INamedTypeSymbol classSymbol)
         {
-            var classMethods = classSymbol
-                .GetMembers()
-                .OfType<IMethodSymbol>()
-                .Where(m => !m.IsConstructor())
-                .ToList();
-
-            if (classMethods.Any(KnownMethods.IsOperatorBinaryPlus))
+            foreach (var member in classSymbol.GetMembers().OfType<IMethodSymbol>().Where(x => !x.IsConstructor()))
             {
-                yield return MethodName.OperatorPlus;
-            }
-
-            if (classMethods.Any(KnownMethods.IsOperatorBinaryMinus))
-            {
-                yield return MethodName.OperatorMinus;
-            }
-
-            if (classMethods.Any(KnownMethods.IsOperatorBinaryMultiply))
-            {
-                yield return MethodName.OperatorMultiply;
-            }
-
-            if (classMethods.Any(KnownMethods.IsOperatorBinaryDivide))
-            {
-                yield return MethodName.OperatorDivide;
-            }
-
-            if (classMethods.Any(KnownMethods.IsOperatorBinaryModulus))
-            {
-                yield return MethodName.OperatorReminder;
-            }
-
-            if (classMethods.Any(KnownMethods.IsOperatorEquals))
-            {
-                yield return MethodName.OperatorEquals;
-            }
-
-            if (classMethods.Any(KnownMethods.IsOperatorNotEquals))
-            {
-                yield return MethodName.OperatorNotEquals;
-            }
-
-            if (classMethods.Any(KnownMethods.IsObjectEquals))
-            {
-                yield return MethodName.ObjectEquals;
-            }
-
-            if (classMethods.Any(KnownMethods.IsObjectGetHashCode))
-            {
-                yield return MethodName.ObjectGetHashCode;
+                if (ImplementedOperator(member) is { } name)
+                {
+                    yield return name;
+                }
+                else if (KnownMethods.IsObjectEquals(member))
+                {
+                    yield return MethodName.ObjectEquals;
+                }
+                else if (KnownMethods.IsObjectGetHashCode(member))
+                {
+                    yield return MethodName.ObjectGetHashCode;
+                }
             }
         }
+
+        private static string ImplementedOperator(IMethodSymbol member) =>
+            member switch
+            {
+                { MethodKind: not MethodKind.UserDefinedOperator } => null,
+                _ when KnownMethods.IsOperatorBinaryPlus(member) => MethodName.OperatorPlus,
+                _ when KnownMethods.IsOperatorBinaryMinus(member) => MethodName.OperatorMinus,
+                _ when KnownMethods.IsOperatorBinaryMultiply(member) => MethodName.OperatorMultiply,
+                _ when KnownMethods.IsOperatorBinaryDivide(member) => MethodName.OperatorDivide,
+                _ when KnownMethods.IsOperatorBinaryModulus(member) => MethodName.OperatorReminder,
+                _ when KnownMethods.IsOperatorEquals(member) => MethodName.OperatorEquals,
+                _ when KnownMethods.IsOperatorNotEquals(member) => MethodName.OperatorNotEquals,
+                _ => null
+            };
     }
 }

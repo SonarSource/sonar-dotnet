@@ -4,6 +4,25 @@ using System.Runtime.InteropServices;
 
 public class EqualityOnFloatingPoint
 {
+    void HalfNaN(Half h)
+    {
+        _ = h == Half.NaN; // Noncompliant {{Do not check floating point equality with exact values, use 'Half.IsNaN()' instead.}}
+        //    ^^
+        h = Half.NaN;      // Compliant, not a comparison
+    }
+
+    void NFloatNaN(NFloat nf)
+    {
+        _ = nf == System.Runtime.InteropServices.NFloat.NaN; // Noncompliant {{Do not check floating point equality with exact values, use 'NFloat.IsNaN()' instead.}}
+        _ = nf == NFloat.NaN;                                // Noncompliant {{Do not check floating point equality with exact values, use 'NFloat.IsNaN()' instead.}}
+    }
+
+    public void M<T>(T t) where T : IFloatingPointIeee754<T>
+    {
+        if (t == T.NaN) { } // Noncompliant {{Do not check floating point equality with exact values, use 'T.IsNaN()' instead.}}
+        if (T.IsNaN(t)) { } // Compliant
+    }
+
     bool HalfEqual(Half first, Half second)
         => first == second;    // Noncompliant {{Do not check floating point equality with exact values, use a range instead.}}
     //           ^^

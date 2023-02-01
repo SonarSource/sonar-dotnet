@@ -157,25 +157,25 @@ namespace SonarAnalyzer.Helpers
             methodSymbol != null && methodSymbol.ContainingType.Is(KnownType.System_Diagnostics_Debug);
 
         public static bool IsOperatorBinaryPlus(this IMethodSymbol methodSymbol) =>
-            methodSymbol is { MethodKind: MethodKind.UserDefinedOperator, Name: "op_Addition", Parameters: { Length: NumberOfParamsForBinaryOperator } };
+            methodSymbol is { MethodKind: MethodKind.BuiltinOperator or MethodKind.UserDefinedOperator, Name: "op_Addition", Parameters.Length: NumberOfParamsForBinaryOperator };
 
         public static bool IsOperatorBinaryMinus(this IMethodSymbol methodSymbol) =>
-            methodSymbol is { MethodKind: MethodKind.UserDefinedOperator, Name: "op_Subtraction", Parameters: { Length: NumberOfParamsForBinaryOperator } };
+            methodSymbol is { MethodKind: MethodKind.BuiltinOperator or MethodKind.UserDefinedOperator, Name: "op_Subtraction", Parameters.Length: NumberOfParamsForBinaryOperator };
 
         public static bool IsOperatorBinaryMultiply(this IMethodSymbol methodSymbol) =>
-            methodSymbol is { MethodKind: MethodKind.UserDefinedOperator, Name: "op_Multiply", Parameters: { Length: NumberOfParamsForBinaryOperator } };
+            methodSymbol is { MethodKind: MethodKind.BuiltinOperator or MethodKind.UserDefinedOperator, Name: "op_Multiply", Parameters.Length: NumberOfParamsForBinaryOperator };
 
         public static bool IsOperatorBinaryDivide(this IMethodSymbol methodSymbol) =>
-            methodSymbol is { MethodKind: MethodKind.UserDefinedOperator, Name: "op_Division", Parameters: { Length: NumberOfParamsForBinaryOperator } };
+            methodSymbol is { MethodKind: MethodKind.BuiltinOperator or MethodKind.UserDefinedOperator, Name: "op_Division", Parameters.Length: NumberOfParamsForBinaryOperator };
 
         public static bool IsOperatorBinaryModulus(this IMethodSymbol methodSymbol) =>
-            methodSymbol is { MethodKind: MethodKind.UserDefinedOperator, Name: "op_Modulus", Parameters: { Length: NumberOfParamsForBinaryOperator } };
+            methodSymbol is { MethodKind: MethodKind.BuiltinOperator or MethodKind.UserDefinedOperator, Name: "op_Modulus", Parameters.Length: NumberOfParamsForBinaryOperator };
 
         public static bool IsOperatorEquals(this IMethodSymbol methodSymbol) =>
-            methodSymbol is { MethodKind: MethodKind.UserDefinedOperator, Name: "op_Equality", Parameters: { Length: NumberOfParamsForBinaryOperator } };
+            methodSymbol is { MethodKind: MethodKind.BuiltinOperator or MethodKind.UserDefinedOperator, Name: "op_Equality", Parameters.Length: NumberOfParamsForBinaryOperator };
 
         public static bool IsOperatorNotEquals(this IMethodSymbol methodSymbol) =>
-            methodSymbol is { MethodKind: MethodKind.UserDefinedOperator, Name: "op_Inequality", Parameters: { Length: NumberOfParamsForBinaryOperator } };
+            methodSymbol is { MethodKind: MethodKind.BuiltinOperator or MethodKind.UserDefinedOperator, Name: "op_Inequality", Parameters.Length: NumberOfParamsForBinaryOperator };
 
         public static bool IsConsoleWriteLine(this IMethodSymbol methodSymbol) =>
             methodSymbol != null
