@@ -1,0 +1,18 @@
+<p>Certain mathematical comparisons will always return the same value, and should simply not be made.</p>
+<p>This comparison will always return <code>false</code>:</p>
+<ul>
+  <li> comparing a <code>float</code> with a <code>double</code> constant that’s outside the <code>float</code> range </li>
+</ul>
+<p>These will always return <code>true</code>:</p>
+<ul>
+  <li> comparing <code>aByte &lt;= Byte.MaxValue</code> and <code>aByte &gt;= Byte.MinValue</code> </li>
+  <li> comparing <code>anInt &lt;= int.MaxValue</code> and <code>anInt &gt;= int.MinValue</code> </li>
+  <li> comparing <code>aLong &lt;= long.MaxValue</code> and <code>aLong &gt;= long.MinValue</code> </li>
+</ul>
+<h2>Noncompliant Code Example</h2>
+<pre>
+float f = 42.0f;
+const double d = float.MaxValue + 1;
+if (f &lt;= d) { } // Noncompliant
+</pre>
+

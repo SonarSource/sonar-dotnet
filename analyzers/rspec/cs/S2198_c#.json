@@ -1,0 +1,17 @@
+{
+  "title": "Silly mathematical comparisons should not be made",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "15min"
+  },
+  "tags": [
+    "suspicious"
+  ],
+  "defaultSeverity": "Critical",
+  "ruleSpecification": "RSPEC-2198",
+  "sqKey": "S2198",
+  "scope": "Main",
+  "quickfix": "unknown"
+}
