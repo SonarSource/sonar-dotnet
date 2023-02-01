@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
+
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -27,6 +29,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
+            // FIRST RULE
             context.RegisterNodeAction(
                 c => CheckBinary(c, -1),
                 SyntaxKind.BitwiseAndExpression);
@@ -44,6 +47,15 @@ namespace SonarAnalyzer.Rules.CSharp
                 c => CheckAssignment(c, 0),
                 SyntaxKind.OrAssignmentExpression,
                 SyntaxKind.ExclusiveOrAssignmentExpression);
+
+            // SECOND RULE
+            context.RegisterNodeAction(
+            CheckLessOrEqualExpression,
+            SyntaxKind.LessThanOrEqualExpression);
+
+            context.RegisterNodeAction(
+            CheckGreaterOrEqualExpression,
+            SyntaxKind.GreaterThanOrEqualExpression);
         }
 
         private void CheckAssignment(SonarSyntaxNodeReportingContext context, int constValueToLookFor)
@@ -55,7 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var location = assignment.Parent is StatementSyntax
                     ? assignment.Parent.GetLocation()
                     : assignment.OperatorToken.CreateLocation(assignment.Right);
-                context.ReportIssue(Diagnostic.Create(Rule, location));
+                context.ReportIssue(Diagnostic.Create(BitwiseRule, location));
             }
         }
 
@@ -64,5 +76,48 @@ namespace SonarAnalyzer.Rules.CSharp
             var binary = (BinaryExpressionSyntax)context.Node;
             CheckBinary(context, binary.Left, binary.OperatorToken, binary.Right, constValueToLookFor);
         }
+
+        private void CheckLessOrEqualExpression(SonarSyntaxNodeReportingContext context) // x <= y
+        {
+            var binary = (BinaryExpressionSyntax)context.Node;
+
+            if (ShouldRaise(context.SemanticModel, binary.Left, binary.Right, x => x.MinValue)) // minConstant <= actualValue
+            {
+                context.ReportIssue(Diagnostic.Create(ComparisonRule, binary.GetLocation()));
+            }
+            else if (ShouldRaise(context.SemanticModel, binary.Right, binary.Left, x => x.MaxValue)) // actualValue <= maxConstant
+            {
+                context.ReportIssue(Diagnostic.Create(ComparisonRule, binary.GetLocation()));
+            }
+        }
+
+        private void CheckGreaterOrEqualExpression(SonarSyntaxNodeReportingContext context) // x >= y
+        {
+            var binary = (BinaryExpressionSyntax)context.Node;
+
+            if (ShouldRaise(context.SemanticModel, binary.Right, binary.Left, x => x.MinValue)) // actualValue >= minConstant
+            {
+                context.ReportIssue(Diagnostic.Create(ComparisonRule, binary.GetLocation()));
+            }
+            else if (ShouldRaise(context.SemanticModel, binary.Left, binary.Right, x => x.MaxValue)) // maxConstant >= actualValue
+            {
+                context.ReportIssue(Diagnostic.Create(ComparisonRule, binary.GetLocation()));
+            }
+        }
+
+        private bool ShouldRaise(SemanticModel semanticModel, SyntaxNode expectedConstant, SyntaxNode other, Func<Thingy, double> getSide) =>
+            FindConstant(semanticModel, expectedConstant, Convert.ToDouble) is { } constant
+            && semanticModel.GetSymbolInfo(other).Symbol.GetSymbolType() is { } symbol
+            && Ranges.FirstOrDefault(x => symbol.Is(x.Type)) is { } typeMetadata
+            && constant == getSide(typeMetadata);
+
+        private Thingy[] Ranges = new[]
+        {
+            new Thingy(KnownType.System_Byte, byte.MinValue, byte.MaxValue),
+            new Thingy(KnownType.System_Int32, int.MinValue, int.MaxValue),
+            new Thingy(KnownType.System_Int64, long.MinValue, long.MaxValue),
+        };
+
+        private record struct Thingy(KnownType Type, double MinValue, double MaxValue);
     }
 }
