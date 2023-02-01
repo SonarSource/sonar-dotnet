@@ -26,9 +26,21 @@ namespace SonarAnalyzer.UnitTest.Rules;
 [TestClass]
 public class UnusedStringBuilderTest
 {
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.UnusedStringBuilder>();
+
     [TestMethod]
     public void UnusedStringBuilder_CS() =>
-        new VerifierBuilder<CS.UnusedStringBuilder>().AddPaths("UnusedStringBuilder.cs").Verify();
+        builderCS.AddPaths("UnusedStringBuilder.cs").Verify();
+
+#if NET
+
+    [TestMethod]
+    public void UnusedStringBuilder_CSharp9() =>
+        builderCS.AddPaths("UnusedStringBuilder.CSharp9.cs")
+            .WithTopLevelStatements()
+            .Verify();
+
+#endif
 
     [TestMethod]
     public void UnusedStringBuilder_VB() =>

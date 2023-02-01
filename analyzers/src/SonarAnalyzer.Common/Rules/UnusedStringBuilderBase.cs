@@ -20,12 +20,49 @@
 
 namespace SonarAnalyzer.Rules;
 
-public abstract class UnusedStringBuilderBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+public abstract class UnusedStringBuilderBase<TSyntaxKind, TVariableDeclarator, TInvocationExpression, TReturnStatement> : SonarDiagnosticAnalyzer<TSyntaxKind>
     where TSyntaxKind : struct
+    where TVariableDeclarator : SyntaxNode
+    where TInvocationExpression : SyntaxNode
+    where TReturnStatement : SyntaxNode
 {
     private const string DiagnosticId = "S3063";
+    protected override string MessageFormat => """Remove this "StringBuilder"; ".ToString()" is never called.""";
 
-    protected override string MessageFormat => "Remove this \"StringBuilder\"; it is appended to but \".toString()\" is never called.";
+    private readonly DiagnosticDescriptor rule;
 
-    protected UnusedStringBuilderBase() : base(DiagnosticId) { }
+    protected abstract string GetVariableName(TVariableDeclarator declaration);
+    protected abstract bool NeedsToTrack(TVariableDeclarator declaration, SemanticModel semanticModel);
+    protected abstract SyntaxNode GetAncestorBlock(TVariableDeclarator declaration);
+    protected abstract bool IsIsStringInvoked(string variableName, List<TInvocationExpression> invocations, SemanticModel semanticModel);
+    protected abstract bool IsPassedToMethod(string variableName, List<TInvocationExpression> invocations);
+    protected abstract bool IsReturned(string variableName, List<TReturnStatement> returnStatements);
+
+    protected UnusedStringBuilderBase() : base(DiagnosticId) =>
+        rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
+
+    protected sealed override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
+        {
+            var variableDeclaration = (TVariableDeclarator)c.Node;
+            if (!NeedsToTrack(variableDeclaration, c.SemanticModel))
+            {
+                return;
+            }
+            var variableName = GetVariableName(variableDeclaration);
+
+            var block = GetAncestorBlock(variableDeclaration);
+            if (block == null || string.IsNullOrEmpty(variableName))
+            {
+                return;
+            }
+            var invocations = block.DescendantNodes().OfType<TInvocationExpression>().ToList();
+            if (IsIsStringInvoked(variableName, invocations, c.SemanticModel)
+                || IsPassedToMethod(variableName, invocations)
+                || IsReturned(variableName, block.DescendantNodes().OfType<TReturnStatement>().ToList()))
+            {
+                return;
+            }
+            c.ReportIssue(Diagnostic.Create(rule, variableDeclaration.GetLocation()));
+        }, Language.SyntaxKind.VariableDeclarator);
 }

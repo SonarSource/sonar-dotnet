@@ -3,7 +3,7 @@ using System.Text;
 
 public class Program
 {
-    public StringBuilder NotUsed(StringBuilder builder) // Compliant
+    public StringBuilder MyMethod(StringBuilder builder) // Compliant
     {
         StringBuilder builder1 = GetStringBuilder(); // Compliant
 
@@ -18,8 +18,10 @@ public class Program
 
         var builder5 = new StringBuilder(); // Compliant
 
-        StringBuilder builder6 = new StringBuilder(); // Noncompliant
+        StringBuilder builder6 = new StringBuilder(); // Noncompliant {{Remove this "StringBuilder"; ".ToString()" is never called.}}
+//                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         var builder7 = new StringBuilder(); // Noncompliant
+//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
         StringBuilder builder8 = new StringBuilder(); // Noncompliant
         builder8.Append(builder5.ToString());
