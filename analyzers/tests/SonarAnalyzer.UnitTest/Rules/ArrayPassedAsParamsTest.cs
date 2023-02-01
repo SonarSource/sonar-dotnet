@@ -49,11 +49,11 @@ public class ArrayPassedAsParamsTest
 
     [DataTestMethod]
     [DataRow("{ }", false)]
-    [DataRow("{ \"s\", \"s\", \"s\", \"s\" }", false)]
+    [DataRow("""{ "s", "s", "s", "s" }""", false)]
     [DataRow("New String(2) { }", true)]
-    [DataRow("New String(2) { \"s\", \"s\", \"s\" }", false)]
+    [DataRow("""New String(2) { "s", "s", "s" }""", false)]
     [DataRow("New String() { }", false)]
-    [DataRow("New String() { \"s\" }", false)]
+    [DataRow("""New String() { "s" }""", false)]
     public void ArrayPassedAsParams_VBCollectionInitializerSyntaxTests(string arrayCreation, bool compliant)
     {
         var code = $$"""

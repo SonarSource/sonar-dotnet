@@ -8,7 +8,7 @@ public class Program
 //             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
         Method(new string[] { "s1" }); // Noncompliant
         Method(new[] { "s1" }); // Noncompliant
-        Method(new string[] { }); // Compliant
+        Method(new string[] { }); // Noncompliant
         Method("s1");           // Compliant
         Method("s1", "s2");     // Compliant
         Method(myArray);        // Compliant

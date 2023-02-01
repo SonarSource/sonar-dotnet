@@ -44,9 +44,9 @@ public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, Ar
 
     private static ArgumentSyntax GetLastArgumentIfArrayCreation(ArgumentListSyntax argumentList) =>
         argumentList is { Arguments: { Count: > 0 } arguments }
-        && arguments.Last() is var argument
-        && IsArrayCreation(argument.GetExpression())
-            ? argument
+        && arguments.Last() is var lastArgument
+        && IsArrayCreation(lastArgument.GetExpression())
+            ? lastArgument
             : null;
 
     private static bool IsArrayCreation(ExpressionSyntax expression) =>
@@ -54,8 +54,8 @@ public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, Ar
         {
             ArrayCreationExpressionSyntax { } arrayCreation =>
                 arrayCreation.Initializer is CollectionInitializerSyntax { Initializers.Count: > 0 }
-                || arrayCreation.ArrayBounds is not ArgumentListSyntax { },
-            CollectionInitializerSyntax { } => true,
+                || arrayCreation.ArrayBounds is null,
+            CollectionInitializerSyntax => true,
             _ => false
         };
 }
