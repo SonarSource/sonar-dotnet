@@ -46,7 +46,7 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
     protected override bool IsIsStringInvoked(string variableName, IList<InvocationExpressionSyntax> invocations, SemanticModel semanticModel) =>
         invocations.Any(x => x.Expression is MemberAccessExpressionSyntax { } member
             && IsSameVariable(member.Expression, variableName)
-            && member.IsMemberAccessOnKnownType(nameof(ToString), KnownType.System_Text_StringBuilder, semanticModel)
+            && member.NameIs(nameof(ToString))
             && semanticModel.GetSymbolInfo(x).Symbol is IMethodSymbol symbol
             && symbol.OriginalDefinition.ToString().Equals(StringBuilderToString));
 

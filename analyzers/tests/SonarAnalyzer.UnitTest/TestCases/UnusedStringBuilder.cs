@@ -27,7 +27,13 @@ public class Program
         builder8.Append(builder5.ToString());
 
         StringBuilder builder9 = new StringBuilder(); // Compliant
-        var a = builder9.Append("&").ToString();
+        var a = builder9.ToString();
+
+        StringBuilder builder10 = new StringBuilder(); // Compliant
+        var b = builder10.ToString().ToLower();
+
+        StringBuilder builder11 = new StringBuilder(); // Compliant
+        var c = builder11.Append("").Append("").Append("").Append("").ToString().ToLower();
 
         (StringBuilder, StringBuilder) builderTuple = (new StringBuilder(), new StringBuilder()); // FN
 
@@ -49,9 +55,9 @@ public class Program
         var builderReturn = new StringBuilder(); // Compliant
         return builderReturn;
 
-        void LocalMethod(StringBuilder b)
+        void LocalMethod(StringBuilder local)
         {
-            b.ToString();
+            local.ToString();
         }
     }
 
