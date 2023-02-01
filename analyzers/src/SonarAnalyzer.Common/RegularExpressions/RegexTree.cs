@@ -37,7 +37,8 @@ public sealed class RegexTree
         | RegexOptions.IgnorePatternWhitespace
         | RegexOptions.RightToLeft
         | RegexOptions.ECMAScript
-        | RegexOptions.CultureInvariant;
+        | RegexOptions.CultureInvariant
+        | NonBacktracking;
 
     private RegexTree(Regex? regex, string pattern, RegexOptions? options, Exception? parseError)
     {
