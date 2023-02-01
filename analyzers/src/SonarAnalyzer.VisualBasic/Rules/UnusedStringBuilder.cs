@@ -33,7 +33,8 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
         declaration.Names.FirstOrDefault().ToString();
 
     protected override bool NeedsToTrack(VariableDeclaratorSyntax expression, SemanticModel semanticModel) =>
-        expression.Initializer.Value is ObjectCreationExpressionSyntax objectCreation
+        expression.Initializer is not null
+        && expression.Initializer.Value is ObjectCreationExpressionSyntax objectCreation
         && objectCreation.Type.ToString().Equals(nameof(StringBuilder));
 
     protected override SyntaxNode GetAncestorBlock(VariableDeclaratorSyntax declaration) =>

@@ -31,7 +31,9 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
         declaration.GetIdentifier().ToString();
 
     protected override bool NeedsToTrack(VariableDeclaratorSyntax declaration, SemanticModel semanticModel) =>
-        declaration.Initializer.Value is { } expression && expression switch
+        declaration.Initializer is not null
+        && declaration.Initializer.Value is { } expression
+        && expression switch
         {
             ObjectCreationExpressionSyntax => ObjectCreationFactory.Create(expression).IsKnownType(KnownType.System_Text_StringBuilder, semanticModel),
             _ when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(expression) => ObjectCreationFactory.Create(expression).IsKnownType(KnownType.System_Text_StringBuilder, semanticModel),
