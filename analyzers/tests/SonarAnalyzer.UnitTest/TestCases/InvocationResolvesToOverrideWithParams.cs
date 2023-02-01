@@ -136,50 +136,51 @@ public class WithLocalFunctions
     }
 }
 
-// Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/5430
+// https://github.com/SonarSource/sonar-dotnet/issues/5430
 namespace Repro5430
 {
     public class SomeClass
     {
-        private int InlineInitializedField11 = new SomeClass("1", "s1").PrivateOverload("s1");                  // Compliant
-        private int InlineInitializedField12 = new SomeClass("1", "s1").PrivateOverload("s1", "s2");            // Noncompliant
-        private int InlineInitializedField13 = new SomeClass("1", "s1").PrivateOverload(null, "s2");            // Noncompliant
-        private int InlineInitializedField14 = new SomeClass("1", "s1").PrivateOverload(null, new[] { "s2" });  // Compliant
-        private int InlineInitializedField15 = new SomeClass("1", "s1").PrivateOverload("42", "s1", "s2");      // Compliant
+        private int InlineInitializedField11 = new SomeClass().PrivateOverload("s1");                  // Compliant
+        private int InlineInitializedField12 = new SomeClass().PrivateOverload("s1", "s2");            // Noncompliant
+        private int InlineInitializedField13 = new SomeClass().PrivateOverload(null, "s2");            // Noncompliant
+        private int InlineInitializedField14 = new SomeClass().PrivateOverload(null, new[] { "s2" });  // Compliant
+        private int InlineInitializedField15 = new SomeClass().PrivateOverload("42", "s1", "s2");      // Compliant
 
-        private int InlineInitializedField21 = new SomeClass("1", "s1").InternalOverload("s1");                 // Compliant
-        private int InlineInitializedField22 = new SomeClass("1", "s1").InternalOverload("s1", "s2");           // Noncompliant
-        private int InlineInitializedField23 = new SomeClass("1", "s1").InternalOverload(null, "s2");           // Noncompliant
-        private int InlineInitializedField24 = new SomeClass("1", "s1").InternalOverload(null, new[] { "s2" }); // Compliant
-        private int InlineInitializedField25 = new SomeClass("1", "s1").InternalOverload("42", "s1", "s2");     // Compliant
+        private int InlineInitializedField21 = new SomeClass().InternalOverload("s1");                 // Compliant
+        private int InlineInitializedField22 = new SomeClass().InternalOverload("s1", "s2");           // Noncompliant
+        private int InlineInitializedField23 = new SomeClass().InternalOverload(null, "s2");           // Noncompliant
+        private int InlineInitializedField24 = new SomeClass().InternalOverload(null, new[] { "s2" }); // Compliant
+        private int InlineInitializedField25 = new SomeClass().InternalOverload("42", "s1", "s2");     // Compliant
 
+        public SomeClass() { }
         private SomeClass(object a, string b) { }
         private SomeClass(string a, string b) { }
         public SomeClass(string a, params string[] bs) { }
 
-        private int PrivateOverload(object a, string b) => 1492;
-        public int PrivateOverload(string a, params string[] bs) => 1606;
+        private int PrivateOverload(object a, string b) => 42;
+        public int PrivateOverload(string a, params string[] bs) => 42;
 
-        protected int ProtectedOverload(object a, string b) => 1493;
-        public int ProtectedOverload(string a, params string[] bs) => 1607;
+        protected int ProtectedOverload(object a, string b) => 42;
+        public int ProtectedOverload(string a, params string[] bs) => 42;
 
-        private protected int PrivateProtectedOverload(object a, string b) => 1494;
-        public int PrivateProtectedOverload(string a, params string[] bs) => 1608;
+        private protected int PrivateProtectedOverload(object a, string b) => 42;
+        public int PrivateProtectedOverload(string a, params string[] bs) => 42;
 
-        protected internal int ProtectedInternalOverload(object a, string b) => 1495;
-        public int ProtectedInternalOverload(string a, params string[] bs) => 1609;
+        protected internal int ProtectedInternalOverload(object a, string b) => 42;
+        public int ProtectedInternalOverload(string a, params string[] bs) => 42;
 
-        internal int InternalOverload(object a, string b) => 1496;
-        public int InternalOverload(string a, params string[] bs) => 1610;
+        internal int InternalOverload(object a, string b) => 42;
+        public int InternalOverload(string a, params string[] bs) => 42;
 
-        protected virtual int OverriddenAsProtected(object a, string b) => 1497;
-        public int OverriddenAsProtected(string a, params string[] bs) => 1611;
+        protected virtual int OverriddenAsProtected(object a, string b) => 42;
+        public int OverriddenAsProtected(string a, params string[] bs) => 42;
 
-        protected int ShadowedAsPublic(object a, string b) => 1498;
-        public int ShadowedAsPublic(string a, params string[] bs) => 1612;
+        protected int ShadowedAsPublic(object a, string b) => 42;
+        public int ShadowedAsPublic(string a, params string[] bs) => 42;
 
-        protected int ShadowedAsProtectedInternal(object a, string b) => 1499;
-        public int ShadowedAsProtectedInternal(string a, params string[] bs) => 1613;
+        protected int ShadowedAsProtectedInternal(object a, string b) => 42;
+        public int ShadowedAsProtectedInternal(string a, params string[] bs) => 42;
 
         public void AllOverloadsVisibleFromSameClass()
         {
@@ -225,7 +226,7 @@ namespace Repro5430
         {
             public void AllOverloadsVisibleFromWithinNestedClass()
             {
-                var x = new SomeClass("1", "s1");
+                var x = new SomeClass();
                 x.PrivateOverload("42");                 // Compliant
                 x.PrivateOverload("42", "s1");           // Noncompliant
                 x.PrivateOverload(null, "s1");           // Noncompliant
@@ -237,7 +238,7 @@ namespace Repro5430
             {
                 public void AllOverloadsVisibleFromWithinNested2ndLevel()
                 {
-                    var x = new SomeClass("1", "s1");
+                    var x = new SomeClass();
                     x.PrivateOverload("42");                 // Compliant
                     x.PrivateOverload("42", "s1");           // Noncompliant
                     x.PrivateOverload(null, "s1");           // Noncompliant
@@ -250,23 +251,23 @@ namespace Repro5430
 
     public class OtherClass
     {
-        private int InlineInitializedField11 = new SomeClass("1", "s1").PrivateOverload("s1");                  // Compliant
-        private int InlineInitializedField12 = new SomeClass("1", "s1").PrivateOverload("s1", "s2");            // Compliant
-        private int InlineInitializedField13 = new SomeClass("1", "s1").PrivateOverload(null, "s2");            // Compliant
-        private int InlineInitializedField14 = new SomeClass("1", "s1").PrivateOverload(null, new[] { "s2" });  // Compliant
-        private int InlineInitializedField15 = new SomeClass("1", "s1").PrivateOverload("42", "s1", "s2");      // Compliant
+        private int InlineInitializedField11 = new SomeClass().PrivateOverload("s1");                  // Compliant
+        private int InlineInitializedField12 = new SomeClass().PrivateOverload("s1", "s2");            // Compliant
+        private int InlineInitializedField13 = new SomeClass().PrivateOverload(null, "s2");            // Compliant
+        private int InlineInitializedField14 = new SomeClass().PrivateOverload(null, new[] { "s2" });  // Compliant
+        private int InlineInitializedField15 = new SomeClass().PrivateOverload("42", "s1", "s2");      // Compliant
 
-        private int InlineInitializedField21 = new SomeClass("1", "s1").InternalOverload("s1");                 // Compliant
-        private int InlineInitializedField22 = new SomeClass("1", "s1").InternalOverload("s1", "s2");           // Noncompliant
-        private int InlineInitializedField23 = new SomeClass("1", "s1").InternalOverload(null, "s2");           // Noncompliant
-        private int InlineInitializedField24 = new SomeClass("1", "s1").InternalOverload(null, new[] { "s2" }); // Compliant
-        private int InlineInitializedField25 = new SomeClass("1", "s1").InternalOverload("42", "s1", "s2");     // Compliant
+        private int InlineInitializedField21 = new SomeClass().InternalOverload("s1");                 // Compliant
+        private int InlineInitializedField22 = new SomeClass().InternalOverload("s1", "s2");           // Noncompliant
+        private int InlineInitializedField23 = new SomeClass().InternalOverload(null, "s2");           // Noncompliant
+        private int InlineInitializedField24 = new SomeClass().InternalOverload(null, new[] { "s2" }); // Compliant
+        private int InlineInitializedField25 = new SomeClass().InternalOverload("42", "s1", "s2");     // Compliant
 
         public int this[int i]
         {
             get
             {
-                var x = new SomeClass("1", "s1");
+                var x = new SomeClass();
                 x.InternalOverload("s1");                      // Compliant
                 x.InternalOverload("s1", "s2");                // Noncompliant
                 x.InternalOverload(null, "s2");                // Noncompliant
@@ -280,7 +281,7 @@ namespace Repro5430
         {
             get
             {
-                var x = new SomeClass("1", "s1");
+                var x = new SomeClass();
                 x.InternalOverload("s1");                      // Compliant
                 x.InternalOverload("s1", "s2");                // Noncompliant
                 x.InternalOverload(null, "s2");                // Noncompliant
@@ -293,11 +294,11 @@ namespace Repro5430
         public void CheckAccessibilityInMethod()
         {
             SomeClass x;
-            x = new SomeClass("1");                            // Compliant, can't see non-param overload
-            x = new SomeClass("1", "s1");                      // Compliant, can't see non-param overload
-            x = new SomeClass(null, "s1");                     // Compliant, can't see non-param overload
-            x = new SomeClass("1", "s1", "s2");                // Compliant, can't see non-param overload
-            x = new SomeClass(null, "s1", "s2");               // Compliant, can't see non-param overload
+            x = new SomeClass("1");                            // Compliant, can't see non-param overload because it's private
+            x = new SomeClass("1", "s1");                      // Compliant
+            x = new SomeClass(null, "s1");                     // Compliant
+            x = new SomeClass("1", "s1", "s2");                // Compliant
+            x = new SomeClass(null, "s1", "s2");               // Compliant
 
             x.PrivateOverload("42");                           // Compliant
             x.PrivateOverload("42", "s1");                     // Compliant
@@ -333,17 +334,18 @@ namespace Repro5430
 
     public class SubClass : SomeClass
     {
+        public SubClass(): base() { }
         public SubClass(string a, params string[] bs) : base(a, bs) { }
 
-        protected override int OverriddenAsProtected(object a, string b) => 2494;
+        protected override int OverriddenAsProtected(object a, string b) => 42;
 
-        public new int ShadowedAsPublic(object a, string b) => 2498;
+        public new int ShadowedAsPublic(object a, string b) => 42;
 
-        protected internal new int ShadowedAsProtectedInternal(object a, string b) => 2499;
+        protected internal new int ShadowedAsProtectedInternal(object a, string b) => 42;
 
         public void OverridenAndShadowedAccessibility()
         {
-            var x = new SubClass("3");
+            var x = new SubClass();
             x.OverriddenAsProtected("42");                       // Compliant
             x.OverriddenAsProtected("42", "s1");                 // Noncompliant, overrides doesn't change priority
             x.OverriddenAsProtected(null, "s1");                 // Noncompliant, overrides doesn't change priority
@@ -367,7 +369,7 @@ namespace Repro5430
         {
             public void AllOverloadsVisibleFromWithinNestedClass()
             {
-                var x = new SomeClass("1", "s1");
+                var x = new SomeClass();
                 x.PrivateOverload("42");                 // Compliant
                 x.PrivateOverload("42", "s1");           // Compliant
                 x.PrivateOverload(null, "s1");           // Compliant

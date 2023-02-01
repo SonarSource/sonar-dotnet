@@ -1,4 +1,4 @@
-﻿Repro5430.SomeClass x;
+﻿SomeClass x;
 x = new ("1");              // Compliant, can't see non-param overload
 x = new ("1", "s1");        // Compliant, can't see non-param overload
 x = new (null, "s1");       // Compliant, can't see non-param overload
@@ -35,37 +35,33 @@ x.InternalOverload(null, "s2");                    // Noncompliant
 x.InternalOverload(null, new[] { "s2" });          // Compliant
 x.InternalOverload("42", "s1", "s2");              // Compliant
 
-// Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/5430
-namespace Repro5430
+public class SomeClass
 {
-    public class SomeClass
-    {
-        private SomeClass(object a, string b) { }
-        private SomeClass(string a, string b) { }
-        public SomeClass(string a, params string[] bs) { }
+    private SomeClass(object a, string b) { }
+    private SomeClass(string a, string b) { }
+    public SomeClass(string a, params string[] bs) { }
 
-        private int PrivateOverload(object a, string b) => 1492;
-        public int PrivateOverload(string a, params string[] bs) => 1606;
+    private int PrivateOverload(object a, string b) => 42;
+    public int PrivateOverload(string a, params string[] bs) => 42;
 
-        protected int ProtectedOverload(object a, string b) => 1493;
-        public int ProtectedOverload(string a, params string[] bs) => 1607;
+    protected int ProtectedOverload(object a, string b) => 42;
+    public int ProtectedOverload(string a, params string[] bs) => 42;
 
-        private protected int PrivateProtectedOverload(object a, string b) => 1494;
-        public int PrivateProtectedOverload(string a, params string[] bs) => 1608;
+    private protected int PrivateProtectedOverload(object a, string b) => 42;
+    public int PrivateProtectedOverload(string a, params string[] bs) => 42;
 
-        protected internal int ProtectedInternalOverload(object a, string b) => 1495;
-        public int ProtectedInternalOverload(string a, params string[] bs) => 1609;
+    protected internal int ProtectedInternalOverload(object a, string b) => 42;
+    public int ProtectedInternalOverload(string a, params string[] bs) => 42;
 
-        internal int InternalOverload(object a, string b) => 1496;
-        public int InternalOverload(string a, params string[] bs) => 1610;
+    internal int InternalOverload(object a, string b) => 42;
+    public int InternalOverload(string a, params string[] bs) => 42;
 
-        protected virtual int OverriddenAsProtected(object a, string b) => 1497;
-        public int OverriddenAsProtected(string a, params string[] bs) => 1611;
+    protected virtual int OverriddenAsProtected(object a, string b) => 42;
+    public int OverriddenAsProtected(string a, params string[] bs) => 42;
 
-        protected int ShadowedAsPublic(object a, string b) => 1498;
-        public int ShadowedAsPublic(string a, params string[] bs) => 1612;
+    protected int ShadowedAsPublic(object a, string b) => 1498;
+    public int ShadowedAsPublic(string a, params string[] bs) => 1612;
 
-        protected int ShadowedAsProtectedInternal(object a, string b) => 1499;
-        public int ShadowedAsProtectedInternal(string a, params string[] bs) => 1613;
-    }
+    protected int ShadowedAsProtectedInternal(object a, string b) => 1499;
+    public int ShadowedAsProtectedInternal(string a, params string[] bs) => 1613;
 }

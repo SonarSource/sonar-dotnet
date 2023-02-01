@@ -56,31 +56,32 @@ public sealed class InvocationResolvesToOverrideWithParams : SonarDiagnosticAnal
             && !IsInvocationWithExplicitArray(argumentList, method, context.SemanticModel)
             && ArgumentTypes(context, argumentList) is var argumentTypes
             && argumentTypes.All(x => x is not IErrorTypeSymbol)
-            && OtherOverloadsOf(method).FirstOrDefault(x =>
-                ArgumentsMatchParameters(argumentList, argumentTypes, x, context.SemanticModel) && MethodAccessibleWithinType(x, context.ContainingSymbol.ContainingType))
-                    is { } otherMethod)
+            && OtherOverloadsOf(method).FirstOrDefault(IsPossibleMatch) is { } otherMethod)
         {
             context.ReportIssue(Diagnostic.Create(Rule, node.GetLocation(), otherMethod.ToMinimalDisplayString(context.SemanticModel, node.SpanStart)));
         }
+
+        bool IsPossibleMatch(IMethodSymbol method) =>
+            ArgumentsMatchParameters(argumentList, argumentTypes, method, context.SemanticModel) && MethodAccessibleWithinType(method, context.ContainingSymbol.ContainingType);
     }
 
-    private static List<ITypeSymbol> ArgumentTypes(SonarSyntaxNodeReportingContext context, ArgumentListSyntax argumentList) =>
+    private static ITypeSymbol[] ArgumentTypes(SonarSyntaxNodeReportingContext context, ArgumentListSyntax argumentList) =>
         argumentList.Arguments
             .Select(x => context.SemanticModel.GetTypeInfo(x.Expression))
             .Select(x => x.Type ?? x.ConvertedType) // Action and Func won't always resolve properly with Type
-            .ToList();
+            .ToArray();
 
     private static IEnumerable<IMethodSymbol> OtherOverloadsOf(IMethodSymbol method) =>
         method.ContainingType
             .GetMembers(method.Name)
             .OfType<IMethodSymbol>()
-            .Where(x => !x.IsVararg && x.MethodKind == method.MethodKind && !method.Equals(x) && x.Parameters.Any() && !x.Parameters.Last().IsParams);
+            .Where(x => !x.IsVararg && x.MethodKind == method.MethodKind && !x.Equals(method) && x.Parameters.Any() && !x.Parameters.Last().IsParams);
 
     private static bool IsInvocationWithExplicitArray(ArgumentListSyntax argumentList, IMethodSymbol invokedMethodSymbol, SemanticModel semanticModel)
     {
         var lookup = new CSharpMethodParameterLookup(argumentList, invokedMethodSymbol);
-        var parameters = argumentList.Arguments.Select(Valid).ToList();
-        return parameters.All(x => x != null) && parameters.Count(x => x.IsParams) == 1;
+        var parameters = argumentList.Arguments.Select(Valid).ToArray();
+        return parameters.All(x => x is not null) && parameters.Count(x => x.IsParams) == 1;
 
         IParameterSymbol Valid(ArgumentSyntax argument) =>
             lookup.TryGetSymbol(argument, out var parameter)
@@ -89,11 +90,11 @@ public sealed class InvocationResolvesToOverrideWithParams : SonarDiagnosticAnal
                 : null;
     }
 
-    private static bool ArgumentsMatchParameters(ArgumentListSyntax argumentList, List<ITypeSymbol> argumentTypes, IMethodSymbol possibleOtherMethod, SemanticModel semanticModel)
+    private static bool ArgumentsMatchParameters(ArgumentListSyntax argumentList, ITypeSymbol[] argumentTypes, IMethodSymbol possibleOtherMethod, SemanticModel semanticModel)
     {
         var lookup = new CSharpMethodParameterLookup(argumentList, possibleOtherMethod);
-        var parameters = argumentList.Arguments.Select((argument, index) => Valid(argument, argumentTypes[index])).ToList();
-        return parameters.All(x => x != null) && possibleOtherMethod.Parameters.Except(parameters).All(x => x.HasExplicitDefaultValue);
+        var parameters = argumentList.Arguments.Select((argument, index) => Valid(argument, argumentTypes[index])).ToArray();
+        return parameters.All(x => x is not null) && possibleOtherMethod.Parameters.Except(parameters).All(x => x.HasExplicitDefaultValue);
 
         IParameterSymbol Valid(ArgumentSyntax argument, ITypeSymbol type) =>
             lookup.TryGetSymbol(argument, out var parameter)
