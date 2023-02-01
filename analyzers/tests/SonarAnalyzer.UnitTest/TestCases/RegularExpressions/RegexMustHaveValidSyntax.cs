@@ -6,7 +6,7 @@ class Compliant
 {
     void Ctor()
     {
-        var defaultOrder = new Regex("some pattern", RegexOptions.None); // Compliant
+        var defaultOrder = new Regex("valid pattern", RegexOptions.None); // Compliant
 
         var namedArgs = new Regex(
             options: RegexOptions.None,
