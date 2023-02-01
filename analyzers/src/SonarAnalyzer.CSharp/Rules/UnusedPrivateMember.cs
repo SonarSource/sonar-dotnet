@@ -218,8 +218,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 Diagnostic.Create(RuleS1144, GetIdentifierLocation(syntaxNode), accessibility, symbol.GetClassification(), GetMemberName(symbol));
 
             static Location GetIdentifierLocation(SyntaxNode syntaxNode) =>
-                syntaxNode.GetIdentifier().HasValue
-                    ? syntaxNode.GetIdentifier().Value.GetLocation()
+                syntaxNode.GetIdentifier() is { } identifier
+                    ? identifier.GetLocation()
                     : syntaxNode.GetLocation();
         }
 
