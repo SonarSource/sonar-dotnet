@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3878",
+"message":  "Remove this array creation and simply pass the elements.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.BuildProviders\NancyCSharpRazorBuildProvider.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  104,
+"endLine":  47,
+"endColumn":  175
+}
+}
+},
+{
+"id":  "S3878",
+"message":  "Remove this array creation and simply pass the elements.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.BuildProviders\NancyCSharpRazorBuildProvider.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  106,
+"endLine":  57,
+"endColumn":  177
+}
+}
+}
+]
+}

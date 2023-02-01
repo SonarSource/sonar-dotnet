@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3878",
+"message":  "Remove this array creation and simply pass the elements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  633,
+"startColumn":  35,
+"endLine":  645,
+"endColumn":  18
+}
+}
+}
+]
+}
