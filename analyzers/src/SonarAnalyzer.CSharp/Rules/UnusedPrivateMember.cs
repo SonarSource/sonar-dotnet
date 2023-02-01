@@ -216,13 +216,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 };
 
             Diagnostic CreateS1144Diagnostic(SyntaxNode syntaxNode, ISymbol symbol) =>
-                Diagnostic.Create(RuleS1144, GetIssueLocation(syntaxNode), accessibility, symbol.GetClassification(), GetMemberName(symbol));
-        }
+                Diagnostic.Create(RuleS1144, GetIdentifierLocation(syntaxNode), accessibility, symbol.GetClassification(), GetMemberName(symbol));
 
-        private static Location GetIssueLocation(SyntaxNode syntaxNode) =>
-            syntaxNode.GetIdentifier().HasValue
-                ? syntaxNode.GetIdentifier().Value.GetLocation()
-                : syntaxNode.GetLocation();
+            static Location GetIdentifierLocation(SyntaxNode syntaxNode) =>
+                syntaxNode.GetIdentifier().HasValue
+                    ? syntaxNode.GetIdentifier().Value.GetLocation()
+                    : syntaxNode.GetLocation();
+        }
 
         private static Diagnostic GetDiagnosticsForProperty(IPropertySymbol property, IReadOnlyDictionary<IPropertySymbol, AccessorAccess> propertyAccessorAccess)
         {

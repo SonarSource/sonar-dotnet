@@ -36,6 +36,8 @@ namespace Tests.Diagnostics
         }
 
         private record UnusedNested1(string Name, int CategoryId); // Noncompliant
+//                     ^^^^^^^^^^^^^
+
         internal record UnusedNested2(string Name, int CategoryId); // Noncompliant
         public record UnusedNested3(string Name, int CategoryId);
 
