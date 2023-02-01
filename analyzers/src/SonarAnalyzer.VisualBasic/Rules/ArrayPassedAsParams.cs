@@ -50,12 +50,8 @@ public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, Ar
             : null;
 
     private static bool IsArrayCreation(ExpressionSyntax expression) =>
-        expression switch
-        {
-            ArrayCreationExpressionSyntax { } arrayCreation =>
-                arrayCreation.Initializer is CollectionInitializerSyntax { Initializers.Count: > 0 }
-                || arrayCreation.ArrayBounds is null,
-            CollectionInitializerSyntax => true,
-            _ => false
-        };
+        expression
+            is ArrayCreationExpressionSyntax { Initializer.Initializers.Count: > 0 }
+            or ArrayCreationExpressionSyntax { ArrayBounds: null }
+            or CollectionInitializerSyntax;
 }
