@@ -20,19 +20,29 @@
 
 namespace SonarAnalyzer.Rules
 {
+    // FIXME: Rename this to something like SillyNumericalOperatorUsage
     public abstract class SillyBitwiseOperationBase : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S2437";
+        internal const string BitwiseDiagnosticId = "S2437";
         internal const string IsReportingOnLeftKey = "IsReportingOnLeft";
-        private const string MessageFormat = "Remove this silly bit operation.";
+        private const string BitwiseMessageFormat = "Remove this silly bit operation.";
+
+        // No codefix (yet?)
+        private const string ComparisonDiagnosticId = "S2198";
+        private const string ComparisonMessageFormat = "Remove this silly mathematical comparison.";
 
         protected abstract ILanguageFacade Language { get; }
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
-        protected DiagnosticDescriptor Rule { get; }
+        protected DiagnosticDescriptor BitwiseRule { get; }
+        protected DiagnosticDescriptor ComparisonRule { get; }
 
-        protected SillyBitwiseOperationBase() =>
-            Rule = Language.CreateDescriptor(DiagnosticId, MessageFormat, fadeOutCode: true);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(BitwiseRule, ComparisonRule);
+
+        protected SillyBitwiseOperationBase()
+        {
+            BitwiseRule = Language.CreateDescriptor(BitwiseDiagnosticId, BitwiseMessageFormat, fadeOutCode: true);
+            ComparisonRule = Language.CreateDescriptor(ComparisonDiagnosticId, ComparisonMessageFormat, fadeOutCode: true);
+        }
 
         protected void CheckBinary(SonarSyntaxNodeReportingContext context, SyntaxNode left, SyntaxToken @operator, SyntaxNode right, int constValueToLookFor)
         {
@@ -53,7 +63,7 @@ namespace SonarAnalyzer.Rules
                 return;
             }
 
-            context.ReportIssue(Diagnostic.Create(Rule, location, ImmutableDictionary<string, string>.Empty.Add(IsReportingOnLeftKey, isReportingOnLeftKey.ToString())));
+            context.ReportIssue(Diagnostic.Create(BitwiseRule, location, ImmutableDictionary<string, string>.Empty.Add(IsReportingOnLeftKey, isReportingOnLeftKey.ToString())));
         }
 
         protected int? FindIntConstant(SemanticModel semanticModel, SyntaxNode node) =>
@@ -63,6 +73,17 @@ namespace SonarAnalyzer.Rules
             && Language.FindConstantValue(semanticModel, node) is { } value
                 ? ConversionHelper.TryConvertToInt(value)
                 : null;
+
+        protected T? FindConstant<T>(SemanticModel semanticModel, SyntaxNode node, Func<object, T> converter) where T : struct
+        {
+            return semanticModel.GetSymbolInfo(node).Symbol is var symbol
+                && !IsFieldOrPropertyOutsideSystemNamespace(symbol)
+                && !IsEnum(symbol)
+                && Language.FindConstantValue(semanticModel, node) is { } value
+                && ConversionHelper.TryConvertWith(value, converter, out T typedValue)
+                ? typedValue
+                : null;
+        }
 
         private static bool IsEnum(ISymbol symbol) =>
             symbol.GetSymbolType() is INamedTypeSymbol { EnumUnderlyingType: { } };
