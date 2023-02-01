@@ -79,6 +79,14 @@ namespace Tests.Diagnostics
 
         [My]
         private class Class1 { }
+
+        public void MethodUsingLocalMethod()
+        {
+            void LocalMethod() // Compliant - FN: local function is never used
+            {
+
+            }
+        }
     }
 
     class NewClass1

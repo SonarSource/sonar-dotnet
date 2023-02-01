@@ -145,6 +145,14 @@ namespace Tests.Diagnostics
         {
             public void Method() { }
         }
+
+        public void MethodUsingLocalMethod()
+        {
+            void LocalMethod() // Compliant - FN: local function is never used
+            {
+
+            }
+        }
     }
 
     class NewClass1
@@ -229,6 +237,8 @@ namespace Tests.Diagnostics
 //                             ^^^
         private int NotAccessed { get; set; }   // Noncompliant {{Remove the unused private property 'NotAccessed'.}}
 //                  ^^^^^^^^^^^
+        private int Calculated => 1; // Noncompliant {{Remove the unused private property 'Calculated'.}}
+//                  ^^^^^^^^^^
         private int BothAccessed { get; set; }
 
         private int OnlyGet { get { return 42; } }
