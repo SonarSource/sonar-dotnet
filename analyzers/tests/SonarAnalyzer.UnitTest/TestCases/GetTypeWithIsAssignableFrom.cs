@@ -97,26 +97,26 @@ namespace Tests.Diagnostics
     {
         public void IsInstanceOfType(object obj, Type t)
         {
-            _ = typeof(ISet<int>).IsInstanceOfType(obj); // Noncompliant, bounded generic type
-            _ = typeof(ISet<>).IsInstanceOfType(obj); // Compliant, unbonded generic type
-            _ = typeof(IDictionary<int, int>).IsInstanceOfType(obj); // Noncompliant, bounded generic type
-            _ = typeof(IDictionary<,>).IsInstanceOfType(obj); // Compliant, unbonded generic type
+            _ = typeof(ISet<int>).IsInstanceOfType(obj);                            // Noncompliant, bounded generic type
+            _ = typeof(ISet<>).IsInstanceOfType(obj);                               // Compliant, unbonded generic type
+            _ = typeof(IDictionary<int, int>).IsInstanceOfType(obj);                // Noncompliant, bounded generic type
+            _ = typeof(IDictionary<,>).IsInstanceOfType(obj);                       // Compliant, unbonded generic type
             _ = typeof(System.Collections.Generic.ISet<int>).IsInstanceOfType(obj); // Noncompliant, bounded generic type
-            _ = typeof(System.Collections.Generic.ISet<>).IsInstanceOfType(obj); // Compliant, unbonded generic type
+            _ = typeof(System.Collections.Generic.ISet<>).IsInstanceOfType(obj);    // Compliant, unbonded generic type
 
-            _ = t.IsInstanceOfType(obj); // Compliant, not a typeof expression
+            _ = t.IsInstanceOfType(obj);                                            // Compliant, not a typeof expression
             t = typeof(ISet<>);
-            _ = t.IsInstanceOfType(obj); // Compliant, not a typeof expression and value not tracked
+            _ = t.IsInstanceOfType(obj);                                            // Compliant, not a typeof expression and value not tracked
         }
 
         public void IsAssignableFrom(object obj, Type t1, Type t2)
         {
-            _ = typeof(HashSet<int>).IsAssignableFrom(obj.GetType()); // Noncompliant, bounded generic type
-            _ = typeof(HashSet<>).IsAssignableFrom(obj.GetType()); // Compliant, unbonded generic type
-            _ = typeof(Dictionary<int, int>).IsAssignableFrom(obj.GetType()); // Noncompliant, bounded generic type
-            _ = typeof(Dictionary<,>).IsAssignableFrom(obj.GetType()); // Compliant, unbonded generic type
+            _ = typeof(HashSet<int>).IsAssignableFrom(obj.GetType());                         // Noncompliant, bounded generic type
+            _ = typeof(HashSet<>).IsAssignableFrom(obj.GetType());                            // Compliant, unbonded generic type
+            _ = typeof(Dictionary<int, int>).IsAssignableFrom(obj.GetType());                 // Noncompliant, bounded generic type
+            _ = typeof(Dictionary<,>).IsAssignableFrom(obj.GetType());                        // Compliant, unbonded generic type
             _ = typeof(System.Collections.Generic.ISet<int>).IsAssignableFrom(obj.GetType()); // Noncompliant, bounded generic type
-            _ = typeof(System.Collections.Generic.ISet<>).IsAssignableFrom(obj.GetType()); // Compliant, unbonded generic type
+            _ = typeof(System.Collections.Generic.ISet<>).IsAssignableFrom(obj.GetType());    // Compliant, unbonded generic type
 
             _ = t1.IsAssignableFrom(t2); // Compliant, not a typeof expression, nor having GetType as arg
             t1 = typeof(ISet<>);
