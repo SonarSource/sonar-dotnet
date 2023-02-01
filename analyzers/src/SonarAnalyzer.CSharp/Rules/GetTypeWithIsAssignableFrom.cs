@@ -142,7 +142,12 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static bool IsUnboundedGenericType(TypeOfExpressionSyntax typeOf) =>
-            typeOf.DescendantNodes().Any(x => x is OmittedTypeArgumentSyntax);
+            typeOf.Type switch
+            {
+                GenericNameSyntax { IsUnboundGenericName: true } => true,
+                QualifiedNameSyntax { Right: GenericNameSyntax { IsUnboundGenericName: true } } => true,
+                _ => false,
+            };
 
         private static ExpressionSyntax ConstantPatternExpression(SyntaxNode node) =>
             node.Kind() switch

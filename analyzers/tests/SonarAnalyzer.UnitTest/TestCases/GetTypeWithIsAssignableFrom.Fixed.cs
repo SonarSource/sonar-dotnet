@@ -105,6 +105,9 @@ namespace Tests.Diagnostics
             _ = t.IsInstanceOfType(obj);                                            // Compliant, not a typeof expression
             t = typeof(ISet<>);
             _ = t.IsInstanceOfType(obj);                                            // Compliant, not a typeof expression and value not tracked
+
+            _ = obj is ISet<ISet<>>;                         // Error [CS7003] Unexpected use of an unbound generic name // Fixed
+            _ = obj is IDictionary<string, ISet<>>;          // Error [CS7003] Unexpected use of an unbound generic name // Fixed
         }
 
         public void IsAssignableFrom(object obj, Type t1, Type t2)
@@ -116,10 +119,13 @@ namespace Tests.Diagnostics
             _ = obj is System.Collections.Generic.ISet<int>; // Fixed
             _ = typeof(System.Collections.Generic.ISet<>).IsAssignableFrom(obj.GetType());    // Compliant, unbonded generic type
 
-            _ = t1.IsAssignableFrom(t2); // Compliant, not a typeof expression, nor having GetType as arg
+            _ = t1.IsAssignableFrom(t2);                                                      // Compliant, not a typeof expression, nor having GetType as arg
             t1 = typeof(ISet<>);
             t2 = obj.GetType();
-            _ = t1.IsAssignableFrom(t2); // Compliant, not a typeof expression, nor having GetType as arg, and values not tracked
+            _ = t1.IsAssignableFrom(t2);                                                      // Compliant, not a typeof expression, nor having GetType as arg, and values not tracked
+
+            _ = obj is ISet<ISet<>>;                         // Error [CS7003] Unexpected use of an unbound generic name // Fixed
+            _ = obj is IDictionary<string, ISet<>>;          // Error [CS7003] Unexpected use of an unbound generic name // Fixed
         }
     }
 

@@ -107,6 +107,9 @@ namespace Tests.Diagnostics
             _ = t.IsInstanceOfType(obj);                                            // Compliant, not a typeof expression
             t = typeof(ISet<>);
             _ = t.IsInstanceOfType(obj);                                            // Compliant, not a typeof expression and value not tracked
+
+            _ = typeof(ISet<ISet<>>).IsInstanceOfType(obj);                         // Error [CS7003] Unexpected use of an unbound generic name // Noncompliant, FP: omitted type nested
+            _ = typeof(IDictionary<string, ISet<>>).IsInstanceOfType(obj);          // Error [CS7003] Unexpected use of an unbound generic name // Noncompliant, FP: omitted type nested
         }
 
         public void IsAssignableFrom(object obj, Type t1, Type t2)
@@ -118,10 +121,13 @@ namespace Tests.Diagnostics
             _ = typeof(System.Collections.Generic.ISet<int>).IsAssignableFrom(obj.GetType()); // Noncompliant, bounded generic type
             _ = typeof(System.Collections.Generic.ISet<>).IsAssignableFrom(obj.GetType());    // Compliant, unbonded generic type
 
-            _ = t1.IsAssignableFrom(t2); // Compliant, not a typeof expression, nor having GetType as arg
+            _ = t1.IsAssignableFrom(t2);                                                      // Compliant, not a typeof expression, nor having GetType as arg
             t1 = typeof(ISet<>);
             t2 = obj.GetType();
-            _ = t1.IsAssignableFrom(t2); // Compliant, not a typeof expression, nor having GetType as arg, and values not tracked
+            _ = t1.IsAssignableFrom(t2);                                                      // Compliant, not a typeof expression, nor having GetType as arg, and values not tracked
+
+            _ = typeof(ISet<ISet<>>).IsAssignableFrom(obj.GetType());                         // Error [CS7003] Unexpected use of an unbound generic name // Noncompliant, FP: omitted type nested
+            _ = typeof(IDictionary<string, ISet<>>).IsAssignableFrom(obj.GetType());          // Error [CS7003] Unexpected use of an unbound generic name // Noncompliant, FP: omitted type nested
         }
     }
 
