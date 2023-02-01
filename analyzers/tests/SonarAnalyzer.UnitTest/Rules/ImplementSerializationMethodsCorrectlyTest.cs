@@ -36,6 +36,12 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
 
         [TestMethod]
+        public void ImplementSerializationMethodsCorrectly_CSharp8() =>
+            builderCS.AddPaths("ImplementSerializationMethodsCorrectly.CSharp8.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
+
+        [TestMethod]
         public void ImplementSerializationMethodsCorrectly_CSharp9() =>
             builderCS.AddPaths("ImplementSerializationMethodsCorrectly.CSharp9.cs")
                 .WithTopLevelStatements()
