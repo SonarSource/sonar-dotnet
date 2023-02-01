@@ -20,8 +20,6 @@
 
 extern alias csharp;
 extern alias vbnet;
-
-using System.Linq.Expressions;
 using Microsoft.CodeAnalysis.CSharp;
 using Moq;
 using SonarAnalyzer.AnalysisContext;
@@ -134,38 +132,47 @@ public partial class SonarAnalysisContextTest
     }
 
     [TestMethod]
-    public void SonarCompilationStartAnalysisContext_RegisterCompilationEndAction() =>
-        TestStartContextRegistration<SonarCompilationReportingContext>(
-            registrationSetup: x => x.RegisterCompilationEndAction(It.IsAny<Action<CompilationAnalysisContext>>()),
-            registration: (context, action) => context.RegisterCompilationEndAction(action));
+    public void SonarCompilationStartAnalysisContext_RegisterCompilationEndAction()
+    {
+        var context = new DummyAnalysisContext(TestContext);
+        var startContext = new DummyCompilationStartAnalysisContext(context);
+        var sut = new SonarCompilationStartAnalysisContext(new(context, DummyMainDescriptor), startContext);
+        sut.RegisterCompilationEndAction(_ => { });
+
+        startContext.AssertExpectedInvocationCounts(expectedCompilationEndCount: 1);
+    }
 
     [TestMethod]
     public void SonarCompilationStartAnalysisContext_RegisterSemanticModel()
     {
-        TestStartContextRegistration<SonarSematicModelReportingContext>(
-            registrationSetup: x => x.RegisterSemanticModelAction(It.IsAny<Action<SemanticModelAnalysisContext>>()),
-            registration: (context, action) => context.RegisterSemanticModelAction(action));
+        var context = new DummyAnalysisContext(TestContext);
+        var startContext = new DummyCompilationStartAnalysisContext(context);
+        var sut = new SonarCompilationStartAnalysisContext(new(context, DummyMainDescriptor), startContext);
+        sut.RegisterSemanticModelAction(_ => { });
+
+        startContext.AssertExpectedInvocationCounts(expectedSemanticModelCount: 1);
     }
 
     [TestMethod]
-    public void SonarCompilationStartAnalysisContext_RegisterSymbolAction() =>
-        TestStartContextRegistration<SonarSymbolReportingContext>(
-            registrationSetup: x => x.RegisterSymbolAction(It.IsAny<Action<SymbolAnalysisContext>>(), It.IsAny<ImmutableArray<SymbolKind>>()),
-            registration: (context, action) => context.RegisterSymbolAction(action));
-
-    public void TestStartContextRegistration<TSonarContext>(Expression<Action<CompilationStartAnalysisContext>> registrationSetup,
-        Action<SonarCompilationStartAnalysisContext, Action<TSonarContext>> registration)
+    public void SonarCompilationStartAnalysisContext_RegisterSymbolAction()
     {
         var context = new DummyAnalysisContext(TestContext);
-        var roslynStartContextMock = new Mock<CompilationStartAnalysisContext>(context.Model.Compilation, context.Options, CancellationToken.None);
-        roslynStartContextMock.Setup(registrationSetup).Callback(new InvocationAction(x =>
-            (x.Arguments[0] as Delegate).DynamicInvoke(new object[] { null })));
-        var startContext = new SonarCompilationStartAnalysisContext(new(context, DummyMainDescriptor), roslynStartContextMock.Object);
-        var wasExecuted = 0;
-        registration(startContext, x => wasExecuted++);
-        wasExecuted.Should().Be(1);
-        roslynStartContextMock.Verify(registrationSetup, Times.Once);
-        roslynStartContextMock.VerifyNoOtherCalls();
+        var startContext = new DummyCompilationStartAnalysisContext(context);
+        var sut = new SonarCompilationStartAnalysisContext(new(context, DummyMainDescriptor), startContext);
+        sut.RegisterSymbolAction(_ => { });
+
+        startContext.AssertExpectedInvocationCounts(expectedSymbolCount: 1);
+    }
+
+    [TestMethod]
+    public void SonarCompilationStartAnalysisContext_RegisterNodeAction()
+    {
+        var context = new DummyAnalysisContext(TestContext);
+        var startContext = new DummyCompilationStartAnalysisContext(context);
+        var sut = new SonarCompilationStartAnalysisContext(new(context, DummyMainDescriptor), startContext);
+        sut.RegisterNodeAction<SyntaxKind>(CSharpGeneratedCodeRecognizer.Instance, _ => { });
+
+        startContext.AssertExpectedInvocationCounts(expectedNodeCount: 0); // RegisterNodeAction doesn't use DummyCompilationStartAnalysisContext to register but a newly created context
     }
 
     private static CompilationStartAnalysisContext MockCompilationStartAnalysisContext(DummyAnalysisContext context)
@@ -234,6 +241,32 @@ public partial class SonarAnalysisContextTest
 
         public override void RegisterSyntaxNodeAction(Action<SyntaxNodeAnalysisContext> action, ImmutableArray<TSyntaxKind> syntaxKinds) =>
             throw new NotImplementedException();
+    }
+
+    private class DummyCompilationStartAnalysisContext : CompilationStartAnalysisContext
+    {
+        private int compilationEndCount;
+        private int semanticModelCount;
+        private int symbolCount;
+        private int nodeCount;
+
+        public DummyCompilationStartAnalysisContext(DummyAnalysisContext context) : base(context.Model.Compilation, context.Options, default) { }
+
+        public void AssertExpectedInvocationCounts(int expectedCompilationEndCount = 0, int expectedSemanticModelCount = 0, int expectedSymbolCount = 0, int expectedNodeCount = 0)
+        {
+            compilationEndCount.Should().Be(expectedCompilationEndCount);
+            semanticModelCount.Should().Be(expectedSemanticModelCount);
+            symbolCount.Should().Be(expectedSymbolCount);
+            nodeCount.Should().Be(expectedNodeCount);
+        }
+
+        public override void RegisterCodeBlockAction(Action<CodeBlockAnalysisContext> action) => throw new NotImplementedException();
+        public override void RegisterCodeBlockStartAction<TLanguageKindEnum>(Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action) => throw new NotImplementedException();
+        public override void RegisterCompilationEndAction(Action<CompilationAnalysisContext> action) => compilationEndCount++;
+        public override void RegisterSemanticModelAction(Action<SemanticModelAnalysisContext> action) => semanticModelCount++;
+        public override void RegisterSymbolAction(Action<SymbolAnalysisContext> action, ImmutableArray<SymbolKind> symbolKinds) => symbolCount++;
+        public override void RegisterSyntaxNodeAction<TLanguageKindEnum>(Action<SyntaxNodeAnalysisContext> action, ImmutableArray<TLanguageKindEnum> syntaxKinds) => nodeCount++;
+        public override void RegisterSyntaxTreeAction(Action<SyntaxTreeAnalysisContext> action) => throw new NotImplementedException();
     }
 
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
