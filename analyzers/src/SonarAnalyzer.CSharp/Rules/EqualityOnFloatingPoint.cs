@@ -30,6 +30,8 @@ public sealed class EqualityOnFloatingPoint : SonarDiagnosticAnalyzer
     private static readonly Dictionary<string, string> SpecialMembers = new()
     {
         { nameof(double.NaN), nameof(double.IsNaN) },
+        { nameof(double.PositiveInfinity), nameof(double.IsPositiveInfinity) },
+        { nameof(double.NegativeInfinity), nameof(double.IsNegativeInfinity) },
     };
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
