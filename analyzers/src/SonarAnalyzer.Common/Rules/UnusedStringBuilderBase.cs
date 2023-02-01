@@ -29,8 +29,6 @@ public abstract class UnusedStringBuilderBase<TSyntaxKind, TVariableDeclarator, 
     private const string DiagnosticId = "S3063";
     protected override string MessageFormat => """Remove this "StringBuilder"; ".ToString()" is never called.""";
 
-    private readonly DiagnosticDescriptor rule;
-
     protected abstract string GetVariableName(TVariableDeclarator declaration);
     protected abstract bool NeedsToTrack(TVariableDeclarator declaration, SemanticModel semanticModel);
     protected abstract SyntaxNode GetAncestorBlock(TVariableDeclarator declaration);
@@ -38,8 +36,7 @@ public abstract class UnusedStringBuilderBase<TSyntaxKind, TVariableDeclarator, 
     protected abstract bool IsPassedToMethod(string variableName, IList<TInvocationExpression> invocations);
     protected abstract bool IsReturned(string variableName, IList<TReturnStatement> returnStatements);
 
-    protected UnusedStringBuilderBase() : base(DiagnosticId) =>
-        rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
+    protected UnusedStringBuilderBase() : base(DiagnosticId) { }
 
     protected sealed override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
@@ -56,13 +53,12 @@ public abstract class UnusedStringBuilderBase<TSyntaxKind, TVariableDeclarator, 
                 return;
             }
             var invocations = block.DescendantNodes().OfType<TInvocationExpression>().ToList();
-
             if (IsIsStringInvoked(variableName, invocations, c.SemanticModel)
                 || IsPassedToMethod(variableName, invocations)
                 || IsReturned(variableName, block.DescendantNodes().OfType<TReturnStatement>().ToList()))
             {
                 return;
             }
-            c.ReportIssue(Diagnostic.Create(rule, variableDeclaration.GetLocation()));
+            c.ReportIssue(Diagnostic.Create(Rule, variableDeclaration.GetLocation()));
         }, Language.SyntaxKind.VariableDeclarator);
 }

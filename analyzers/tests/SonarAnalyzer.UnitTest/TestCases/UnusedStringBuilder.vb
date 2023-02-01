@@ -24,9 +24,11 @@ Public Class Program
         builderCalls.Append("Append")
         builderCalls.AppendLine("AppendLine")
         builderCalls.Replace("a", "b")
-        builderCalls.Remove(builderCalls.Length - 1, 1)
-        builderCalls.Insert(builderCalls.Length, "a")
         builderCalls.Clear()
+
+        Dim builderCalls2 As StringBuilder = New StringBuilder() ' Compliant
+        builderCalls2.Remove(builderCalls2.Length - 1, 1)
+
         Dim builderReturn = New StringBuilder()                 ' Compliant
         Return builderReturn
     End Function

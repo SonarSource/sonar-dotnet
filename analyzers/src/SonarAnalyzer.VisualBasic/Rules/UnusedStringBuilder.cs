@@ -28,7 +28,7 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
     protected override string GetVariableName(VariableDeclaratorSyntax declaration) =>
-        declaration.GetName();
+        declaration.Names.FirstOrDefault().ToString();
 
     protected override bool NeedsToTrack(VariableDeclaratorSyntax expression, SemanticModel semanticModel) =>
         expression.Initializer is not null
