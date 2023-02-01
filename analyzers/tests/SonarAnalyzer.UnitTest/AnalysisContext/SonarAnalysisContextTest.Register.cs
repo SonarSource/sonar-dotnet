@@ -21,6 +21,7 @@
 extern alias csharp;
 extern alias vbnet;
 
+using System.Linq.Expressions;
 using Microsoft.CodeAnalysis.CSharp;
 using Moq;
 using SonarAnalyzer.AnalysisContext;
@@ -130,6 +131,41 @@ public partial class SonarAnalysisContextTest
         sut.RegisterCodeBlockStartAction<SyntaxKind>(CSharpGeneratedCodeRecognizer.Instance, context.DelegateAction);
 
         context.AssertDelegateInvoked(expected);
+    }
+
+    [TestMethod]
+    public void SonarCompilationStartAnalysisContext_RegisterCompilationEndAction() =>
+        TestStartContextRegistration<SonarCompilationReportingContext>(
+            registrationSetup: x => x.RegisterCompilationEndAction(It.IsAny<Action<CompilationAnalysisContext>>()),
+            registration: (context, action) => context.RegisterCompilationEndAction(action));
+
+    [TestMethod]
+    public void SonarCompilationStartAnalysisContext_RegisterSemanticModel()
+    {
+        TestStartContextRegistration<SonarSematicModelReportingContext>(
+            registrationSetup: x => x.RegisterSemanticModelAction(It.IsAny<Action<SemanticModelAnalysisContext>>()),
+            registration: (context, action) => context.RegisterSemanticModelAction(action));
+    }
+
+    [TestMethod]
+    public void SonarCompilationStartAnalysisContext_RegisterSymbolAction() =>
+        TestStartContextRegistration<SonarSymbolReportingContext>(
+            registrationSetup: x => x.RegisterSymbolAction(It.IsAny<Action<SymbolAnalysisContext>>(), It.IsAny<ImmutableArray<SymbolKind>>()),
+            registration: (context, action) => context.RegisterSymbolAction(action));
+
+    public void TestStartContextRegistration<TSonarContext>(Expression<Action<CompilationStartAnalysisContext>> registrationSetup,
+        Action<SonarCompilationStartAnalysisContext, Action<TSonarContext>> registration)
+    {
+        var context = new DummyAnalysisContext(TestContext);
+        var roslynStartContextMock = new Mock<CompilationStartAnalysisContext>(context.Model.Compilation, context.Options, CancellationToken.None);
+        roslynStartContextMock.Setup(registrationSetup).Callback(new InvocationAction(x =>
+            (x.Arguments[0] as Delegate).DynamicInvoke(new object[] { null })));
+        var startContext = new SonarCompilationStartAnalysisContext(new(context, DummyMainDescriptor), roslynStartContextMock.Object);
+        var wasExecuted = 0;
+        registration(startContext, x => wasExecuted++);
+        wasExecuted.Should().Be(1);
+        roslynStartContextMock.Verify(registrationSetup, Times.Once);
+        roslynStartContextMock.VerifyNoOtherCalls();
     }
 
     private static CompilationStartAnalysisContext MockCompilationStartAnalysisContext(DummyAnalysisContext context)
