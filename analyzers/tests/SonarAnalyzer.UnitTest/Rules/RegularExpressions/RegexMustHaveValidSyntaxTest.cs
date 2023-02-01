@@ -41,11 +41,11 @@ public class RegexMustHaveValidSyntaxTest
         builderCS.AddPaths("RegexMustHaveValidSyntax.cs").Verify();
 
 #if NET
+
     [TestMethod]
     public void RegexMustHaveValidSyntax_CSharp9() =>
-        builderCS.AddPaths("RegexMustHaveValidSyntax.CSharp9.cs")
-        .WithOptions(ParseOptionsHelper.FromCSharp9)
-        .Verify();
+        builderCS.AddPaths("RegexMustHaveValidSyntax.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+
 #endif
 
     [TestMethod]
