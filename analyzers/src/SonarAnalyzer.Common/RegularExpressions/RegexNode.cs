@@ -39,8 +39,8 @@ internal sealed class RegexNode
 
     public static RegexNode? FromCtor<TSyntaxKind>(SyntaxNode node, SemanticModel model, ILanguageFacade<TSyntaxKind> language) where TSyntaxKind : struct =>
         model.GetSymbolInfo(node).Symbol is IMethodSymbol method
-        && method.ContainingType.Is(KnownType.System_Text_RegularExpressions_Regex)
         && method.IsConstructor()
+        && method.ContainingType.Is(KnownType.System_Text_RegularExpressions_Regex)
         ? FromSymbol(method, node, model, language)
         : null;
 
