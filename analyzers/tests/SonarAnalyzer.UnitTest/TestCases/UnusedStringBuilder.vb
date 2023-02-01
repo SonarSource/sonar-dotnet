@@ -12,22 +12,23 @@ Public Class Program
         Dim builder6 = New StringBuilder()                  ' Noncompliant
         Dim builder7 As StringBuilder = New StringBuilder() ' Noncompliant
         builder7.Append(builder4.ToString())
+        Dim builder8 As StringBuilder = New StringBuilder() ' Compliant
+        builder8.Append("&").ToString()
 
-        Dim builder8 As StringBuilder = New StringBuilder() ' FN
-
+        Dim builderCfg As StringBuilder = New StringBuilder() ' FN (we should use cfg with significant impact on performance)
         If False Then
-            builder8.ToString()
+            builderCfg.ToString()
         End If
 
-        Dim builder9 As StringBuilder = New StringBuilder() ' Noncompliant
-        builder9.Append("Append")
-        builder9.AppendLine("AppendLine")
-        builder9.Replace("a", "b")
-        builder9.Remove(builder9.Length - 1, 1)
-        builder9.Insert(builder9.Length, "a")
-        builder9.Clear()
-        Dim builder10 = New StringBuilder()                 ' Compliant
-        Return builder10
+        Dim builderCalls As StringBuilder = New StringBuilder() ' Noncompliant
+        builderCalls.Append("Append")
+        builderCalls.AppendLine("AppendLine")
+        builderCalls.Replace("a", "b")
+        builderCalls.Remove(builderCalls.Length - 1, 1)
+        builderCalls.Insert(builderCalls.Length, "a")
+        builderCalls.Clear()
+        Dim builderReturn = New StringBuilder()                 ' Compliant
+        Return builderReturn
     End Function
 
     Public Function GetStringBuilder() As StringBuilder     ' Compliant

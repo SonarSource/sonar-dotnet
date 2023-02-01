@@ -43,18 +43,18 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
     protected override SyntaxNode GetAncestorBlock(VariableDeclaratorSyntax declaration) =>
         declaration.Ancestors().OfType<BlockSyntax>().FirstOrDefault();
 
-    protected override bool IsIsStringInvoked(string variableName, List<InvocationExpressionSyntax> invocations, SemanticModel semanticModel) =>
-        invocations.Where(x => x.Expression is MemberAccessExpressionSyntax { } member
+    protected override bool IsIsStringInvoked(string variableName, IList<InvocationExpressionSyntax> invocations, SemanticModel semanticModel) =>
+        invocations.Any(x => x.Expression is MemberAccessExpressionSyntax { } member
             && IsSameVariable(member.Expression, variableName)
             && member.IsMemberAccessOnKnownType(nameof(ToString), KnownType.System_Text_StringBuilder, semanticModel)
             && semanticModel.GetSymbolInfo(x).Symbol is IMethodSymbol symbol
-            && symbol.OriginalDefinition.ToString().Equals(StringBuilderToString)).Any();
+            && symbol.OriginalDefinition.ToString().Equals(StringBuilderToString));
 
-    protected override bool IsPassedToMethod(string variableName, List<InvocationExpressionSyntax> invocations) =>
-        invocations.Where(x => x.ArgumentList.Arguments.Where(y => IsSameVariable(y.Expression, variableName)).Any()).Any();
+    protected override bool IsPassedToMethod(string variableName, IList<InvocationExpressionSyntax> invocations) =>
+        invocations.Any(x => x.ArgumentList.Arguments.Any(y => IsSameVariable(y.Expression, variableName)));
 
-    protected override bool IsReturned(string variableName, List<ReturnStatementSyntax> returnStatements) =>
-        returnStatements.Where(x => IsSameVariable(x.Expression, variableName)).Any();
+    protected override bool IsReturned(string variableName, IList<ReturnStatementSyntax> returnStatements) =>
+        returnStatements.Any(x => IsSameVariable(x.Expression, variableName));
 
     private static bool IsSameVariable(ExpressionSyntax expression, string variableName) =>
         expression is IdentifierNameSyntax identifierName

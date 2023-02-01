@@ -34,9 +34,9 @@ public abstract class UnusedStringBuilderBase<TSyntaxKind, TVariableDeclarator, 
     protected abstract string GetVariableName(TVariableDeclarator declaration);
     protected abstract bool NeedsToTrack(TVariableDeclarator declaration, SemanticModel semanticModel);
     protected abstract SyntaxNode GetAncestorBlock(TVariableDeclarator declaration);
-    protected abstract bool IsIsStringInvoked(string variableName, List<TInvocationExpression> invocations, SemanticModel semanticModel);
-    protected abstract bool IsPassedToMethod(string variableName, List<TInvocationExpression> invocations);
-    protected abstract bool IsReturned(string variableName, List<TReturnStatement> returnStatements);
+    protected abstract bool IsIsStringInvoked(string variableName, IList<TInvocationExpression> invocations, SemanticModel semanticModel);
+    protected abstract bool IsPassedToMethod(string variableName, IList<TInvocationExpression> invocations);
+    protected abstract bool IsReturned(string variableName, IList<TReturnStatement> returnStatements);
 
     protected UnusedStringBuilderBase() : base(DiagnosticId) =>
         rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);

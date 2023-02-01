@@ -26,25 +26,28 @@ public class Program
         StringBuilder builder8 = new StringBuilder(); // Noncompliant
         builder8.Append(builder5.ToString());
 
-        (StringBuilder, StringBuilder) builder9 = (new StringBuilder(), new StringBuilder()); // FN
+        StringBuilder builder9 = new StringBuilder(); // Compliant
+        var a = builder9.Append("&").ToString();
 
-        StringBuilder builder10 = new StringBuilder(); // FN
+        (StringBuilder, StringBuilder) builderTuple = (new StringBuilder(), new StringBuilder()); // FN
+
+        StringBuilder builderCfg = new StringBuilder(); // FN (we should use cfg with significant impact on performance)
         if (false)
         {
-            builder10.ToString();
+            builderCfg.ToString();
         }
 
-        StringBuilder builder11 = new StringBuilder(); // Noncompliant
-        builder11.Append("Append");
-        builder11.AppendLine("AppendLine");
-        builder11.Replace("\r\n", "\n");
-        builder11.Remove(builder11.Length - 1, 1);
-        builder11.Insert(builder11.Length, "\r\n");
-        builder11.Clear();
-        builder11.GetType();
+        StringBuilder builderCalls = new StringBuilder(); // Noncompliant
+        builderCalls.Append("Append");
+        builderCalls.AppendLine("AppendLine");
+        builderCalls.Replace("\r\n", "\n");
+        builderCalls.Remove(builderCalls.Length - 1, 1);
+        builderCalls.Insert(builderCalls.Length, "\r\n");
+        builderCalls.Clear();
+        builderCalls.GetType();
 
-        var builder12 = new StringBuilder(); // Compliant
-        return builder12;
+        var builderReturn = new StringBuilder(); // Compliant
+        return builderReturn;
 
         void LocalMethod(StringBuilder b)
         {
@@ -56,6 +59,12 @@ public class Program
         new StringBuilder();
 
     public void ExternalMethod(StringBuilder builder) { } // Compliant
+
+    public string AnotherMethod()
+    {
+        var builder = new StringBuilder(); // FP
+        return $"{builder} is ToStringed here";
+    }
 
     public string MyProperty
     {
