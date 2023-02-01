@@ -50,13 +50,13 @@ public abstract class UnusedStringBuilderBase<TSyntaxKind, TVariableDeclarator, 
                 return;
             }
             var variableName = GetVariableName(variableDeclaration);
-
             var block = GetAncestorBlock(variableDeclaration);
             if (block == null || string.IsNullOrEmpty(variableName))
             {
                 return;
             }
             var invocations = block.DescendantNodes().OfType<TInvocationExpression>().ToList();
+
             if (IsIsStringInvoked(variableName, invocations, c.SemanticModel)
                 || IsPassedToMethod(variableName, invocations)
                 || IsReturned(variableName, block.DescendantNodes().OfType<TReturnStatement>().ToList()))

@@ -47,10 +47,11 @@ public class Program
         builderCalls.Append("Append");
         builderCalls.AppendLine("AppendLine");
         builderCalls.Replace("\r\n", "\n");
-        builderCalls.Remove(builderCalls.Length - 1, 1);
-        builderCalls.Insert(builderCalls.Length, "\r\n");
         builderCalls.Clear();
         builderCalls.GetType();
+
+        var builderCalls2 = new StringBuilder(); // Compliant
+        builderCalls2.Remove(builderCalls2.Length - 1, 1);
 
         var builderReturn = new StringBuilder(); // Compliant
         return builderReturn;

@@ -28,7 +28,7 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
     private const string StringBuilderToString = "System.Text.StringBuilder.ToString()";
 
     protected override string GetVariableName(VariableDeclaratorSyntax declaration) =>
-        declaration.GetIdentifier().ToString();
+        declaration.GetName();
 
     protected override bool NeedsToTrack(VariableDeclaratorSyntax declaration, SemanticModel semanticModel) =>
         declaration.Initializer is not null
@@ -57,7 +57,5 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
         returnStatements.Any(x => IsSameVariable(x.Expression, variableName));
 
     private static bool IsSameVariable(ExpressionSyntax expression, string variableName) =>
-        expression is IdentifierNameSyntax identifierName
-        && identifierName.GetIdentifier().Value is SyntaxToken { } token
-        && token.ToString().Equals(variableName);
+        expression.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Any(p => p.NameIs(variableName));
 }
