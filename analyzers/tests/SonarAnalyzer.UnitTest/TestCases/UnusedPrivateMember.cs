@@ -237,8 +237,16 @@ namespace Tests.Diagnostics
 //                             ^^^
         private int NotAccessed { get; set; }   // Noncompliant {{Remove the unused private property 'NotAccessed'.}}
 //                  ^^^^^^^^^^^
-        private int Calculated => 1; // Noncompliant {{Remove the unused private property 'Calculated'.}}
-//                  ^^^^^^^^^^
+        private int ExpressionBodiedProperty => 1;                             // Noncompliant {{Remove the unused private property 'ExpressionBodiedProperty'.}}
+//                  ^^^^^^^^^^^^^^^^^^^^^^^^
+        private int ExpressionBodiedProperty2 { get => 1; }                    // Noncompliant
+        private int ExpressionBodiedProperty3 { set => _ = value; }            // Noncompliant
+        private int ExpressionBodiedProperty4 { get => 1; set => _ = value; }  // Noncompliant
+        private int ExpressionBodiedProperty5 { get => 1; set => _ = value; }  // Noncompliant
+//                                              ^^^
+        private int ExpressionBodiedProperty6 { get => 1; set => _ = value; }  // Noncompliant
+//                                                        ^^^
+
         private int BothAccessed { get; set; }
 
         private int OnlyGet { get { return 42; } }
@@ -253,6 +261,9 @@ namespace Tests.Diagnostics
 
             int? x = 10;
             x = this?.OnlyGet;
+
+            ExpressionBodiedProperty5 = 0;
+            Console.WriteLine(ExpressionBodiedProperty6);
         }
     }
 

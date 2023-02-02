@@ -160,6 +160,9 @@ namespace Tests.Diagnostics
         private int OnlyRead { get; }  // Fixed
         private int OnlySet { get; set; }
         private int OnlySet2 { set { } } // Fixed
+        private int ExpressionBodiedProperty5 { set => _ = value; }  // Fixed
+        private int ExpressionBodiedProperty6 { get => 1; }  // Fixed
+
         private int BothAccessed { get; set; }
 
         private int OnlyGet { get { return 42; } }
@@ -174,6 +177,9 @@ namespace Tests.Diagnostics
 
             int? x = 10;
             x = this?.OnlyGet;
+
+            ExpressionBodiedProperty5 = 0;
+            Console.WriteLine(ExpressionBodiedProperty6);
         }
     }
 
