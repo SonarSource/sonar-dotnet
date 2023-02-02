@@ -217,10 +217,17 @@ namespace SonarAnalyzer.Rules.CSharp
             Diagnostic CreateS1144Diagnostic(SyntaxNode syntaxNode, ISymbol symbol) =>
                 Diagnostic.Create(RuleS1144, GetIdentifierLocation(syntaxNode), accessibility, symbol.GetClassification(), GetMemberName(symbol));
 
-            static Location GetIdentifierLocation(SyntaxNode syntaxNode) =>
-                syntaxNode.GetIdentifier() is { } identifier
+            static Location GetIdentifierLocation(SyntaxNode syntaxNode)
+            {
+                if (syntaxNode is IndexerDeclarationSyntax indexer)
+                {
+                    return indexer.ThisKeyword.GetLocation();
+                }
+
+                return syntaxNode.GetIdentifier() is { } identifier
                     ? identifier.GetLocation()
                     : syntaxNode.GetLocation();
+            }
         }
 
         private static Diagnostic GetDiagnosticsForProperty(IPropertySymbol property, IReadOnlyDictionary<IPropertySymbol, AccessorAccess> propertyAccessorAccess)

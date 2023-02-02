@@ -256,6 +256,27 @@ namespace Tests.Diagnostics
         }
     }
 
+    public class Indexer1
+    {
+        private int this[int i] => 1;                                       // Noncompliant
+//                  ^^^^
+    }
+
+    public class Indexer2
+    {
+        private int this[int i] { get => 1; }                               // Noncompliant
+    }
+
+    public class Indexer3
+    {
+        private int this[int i] { set => _ = value; }                       // Noncompliant
+    }
+
+    public class Indexer4
+    {
+        private int this[int i] { get { return 1; } set { _ = value; } }    // Noncompliant
+    }
+
     [Serializable]
     public sealed class GoodException : Exception
     {

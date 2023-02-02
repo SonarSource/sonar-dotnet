@@ -193,6 +193,22 @@ namespace Tests.Diagnostics
         }
     }
 
+    public class Indexer1
+    {
+    }
+
+    public class Indexer2
+    {
+    }
+
+    public class Indexer3
+    {
+    }
+
+    public class Indexer4
+    {
+    }
+
     [Serializable]
     public sealed class GoodException : Exception
     {
