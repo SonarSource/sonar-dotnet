@@ -175,6 +175,18 @@ public partial class SonarAnalysisContextTest
         startContext.AssertExpectedInvocationCounts(expectedNodeCount: 0); // RegisterNodeAction doesn't use DummyCompilationStartAnalysisContext to register but a newly created context
     }
 
+    [TestMethod]
+    public void SonarCompilationStartAnalysisContext_RegisterSemanticModel_ReportsIssue()
+    {
+        var context = new DummyAnalysisContext(TestContext);
+        var startContext = new DummyCompilationStartAnalysisContext(context);
+        var sut = new SonarCompilationStartAnalysisContext(new(context, DummyMainDescriptor), startContext);
+        var diagnostic = Diagnostic.Create(DiagnosticDescriptorFactory.CreateUtility("TEST", "Test report"), context.Tree.GetRoot().GetLocation());
+        sut.RegisterSemanticModelAction(x => x.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, diagnostic));
+
+        startContext.RaisedDiagnostic.Should().NotBeNull().And.BeSameAs(diagnostic);
+    }
+
     private static CompilationStartAnalysisContext MockCompilationStartAnalysisContext(DummyAnalysisContext context)
     {
         var mock = new Mock<CompilationStartAnalysisContext>(context.Model.Compilation, context.Options, CancellationToken.None);
@@ -245,12 +257,18 @@ public partial class SonarAnalysisContextTest
 
     private class DummyCompilationStartAnalysisContext : CompilationStartAnalysisContext
     {
+        private readonly DummyAnalysisContext context;
         private int compilationEndCount;
         private int semanticModelCount;
         private int symbolCount;
         private int nodeCount;
 
-        public DummyCompilationStartAnalysisContext(DummyAnalysisContext context) : base(context.Model.Compilation, context.Options, default) { }
+        public Diagnostic RaisedDiagnostic { get; private set; }
+
+        public DummyCompilationStartAnalysisContext(DummyAnalysisContext context) : base(context.Model.Compilation, context.Options, default)
+        {
+            this.context = context;
+        }
 
         public void AssertExpectedInvocationCounts(int expectedCompilationEndCount = 0, int expectedSemanticModelCount = 0, int expectedSymbolCount = 0, int expectedNodeCount = 0)
         {
@@ -263,7 +281,12 @@ public partial class SonarAnalysisContextTest
         public override void RegisterCodeBlockAction(Action<CodeBlockAnalysisContext> action) => throw new NotImplementedException();
         public override void RegisterCodeBlockStartAction<TLanguageKindEnum>(Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action) => throw new NotImplementedException();
         public override void RegisterCompilationEndAction(Action<CompilationAnalysisContext> action) => compilationEndCount++;
-        public override void RegisterSemanticModelAction(Action<SemanticModelAnalysisContext> action) => semanticModelCount++;
+        public override void RegisterSemanticModelAction(Action<SemanticModelAnalysisContext> action)
+        {
+            semanticModelCount++;
+            action(new SemanticModelAnalysisContext(context.Model, context.Options, reportDiagnostic: x => RaisedDiagnostic = x, isSupportedDiagnostic: _ => true, CancellationToken.None));
+        }
+
         public override void RegisterSymbolAction(Action<SymbolAnalysisContext> action, ImmutableArray<SymbolKind> symbolKinds) => symbolCount++;
         public override void RegisterSyntaxNodeAction<TLanguageKindEnum>(Action<SyntaxNodeAnalysisContext> action, ImmutableArray<TLanguageKindEnum> syntaxKinds) => nodeCount++;
         public override void RegisterSyntaxTreeAction(Action<SyntaxTreeAnalysisContext> action) => throw new NotImplementedException();
