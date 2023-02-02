@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3878",
+"message":  "Remove this array creation and simply pass the elements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Program.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  55,
+"endLine":  62,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3878",
+"message":  "Remove this array creation and simply pass the elements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Program.cs",
+"region":  {
+"startLine":  164,
+"startColumn":  54,
+"endLine":  164,
+"endColumn":  67
+}
+}
+}
+]
+}

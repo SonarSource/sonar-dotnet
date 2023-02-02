@@ -1,0 +1,108 @@
+{
+"issues":  [
+{
+"id":  "S3878",
+"message":  "Remove this array creation and simply pass the elements.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"region":  {
+"startLine":  304,
+"startColumn":  97,
+"endLine":  304,
+"endColumn":  138
+}
+}
+},
+{
+"id":  "S3878",
+"message":  "Remove this array creation and simply pass the elements.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"region":  {
+"startLine":  411,
+"startColumn":  97,
+"endLine":  411,
+"endColumn":  138
+}
+}
+},
+{
+"id":  "S3878",
+"message":  "Remove this array creation and simply pass the elements.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  291,
+"startColumn":  97,
+"endLine":  291,
+"endColumn":  138
+}
+}
+},
+{
+"id":  "S3878",
+"message":  "Remove this array creation and simply pass the elements.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  446,
+"startColumn":  97,
+"endLine":  446,
+"endColumn":  138
+}
+}
+},
+{
+"id":  "S3878",
+"message":  "Remove this array creation and simply pass the elements.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MusicVideoTag.vb",
+"region":  {
+"startLine":  160,
+"startColumn":  97,
+"endLine":  160,
+"endColumn":  138
+}
+}
+},
+{
+"id":  "S3878",
+"message":  "Remove this array creation and simply pass the elements.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\PersonInfo.vb",
+"region":  {
+"startLine":  272,
+"startColumn":  97,
+"endLine":  272,
+"endColumn":  138
+}
+}
+},
+{
+"id":  "S3878",
+"message":  "Remove this array creation and simply pass the elements.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"region":  {
+"startLine":  224,
+"startColumn":  97,
+"endLine":  224,
+"endColumn":  138
+}
+}
+},
+{
+"id":  "S3878",
+"message":  "Remove this array creation and simply pass the elements.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVShow.vb",
+"region":  {
+"startLine":  261,
+"startColumn":  97,
+"endLine":  261,
+"endColumn":  138
+}
+}
+}
+]
+}

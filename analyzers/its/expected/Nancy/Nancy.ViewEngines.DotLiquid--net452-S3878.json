@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3878",
+"message":  "Remove this array creation and simply pass the elements.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid\LiquidNancyFileSystem.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  74,
+"endLine":  76,
+"endColumn":  96
+}
+}
+}
+]
+}

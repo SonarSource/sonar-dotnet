@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3878",
+"message":  "Remove this array creation and simply pass the elements.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\RemotePingPong\Program.cs",
+"region":  {
+"startLine":  202,
+"startColumn":  32,
+"endLine":  202,
+"endColumn":  82
+}
+}
+}
+]
+}

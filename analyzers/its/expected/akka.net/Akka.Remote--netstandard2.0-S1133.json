@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"region":  {
+"startLine":  286,
+"startColumn":  10,
+"endLine":  286,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\DeadlineFailureDetector.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  10,
+"endLine":  32,
+"endColumn":  118
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRef.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  10,
+"endLine":  99,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\Transport.cs",
+"region":  {
+"startLine":  385,
+"startColumn":  10,
+"endLine":  385,
+"endColumn":  104
+}
+}
+}
+]
+}

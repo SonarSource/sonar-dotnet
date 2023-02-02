@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestBarrier.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  10,
+"endLine":  29,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestLatch.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  10,
+"endLine":  36,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestProbe.cs",
+"region":  {
+"startLine":  91,
+"startColumn":  10,
+"endLine":  91,
+"endColumn":  70
+}
+}
+}
+]
+}

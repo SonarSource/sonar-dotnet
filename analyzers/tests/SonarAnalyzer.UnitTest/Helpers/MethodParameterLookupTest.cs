@@ -20,7 +20,9 @@
 
 using System.Collections;
 using SonarAnalyzer.Common;
+using CSharpCodeAnalysis = Microsoft.CodeAnalysis.CSharp;
 using CSharpSyntax = Microsoft.CodeAnalysis.CSharp.Syntax;
+using VBCodeAnalysis = Microsoft.CodeAnalysis.VisualBasic;
 using VBSyntax = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace SonarAnalyzer.UnitTest.Helpers
@@ -28,10 +30,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
     [TestClass]
     public class MethodParameterLookupTest
     {
-        [TestMethod]
-        public void TestMethodParameterLookup_CS()
-        {
-            const string Source = @"
+        private const string SourceCS = @"
 namespace Test
 {
     class TestClass
@@ -74,28 +73,8 @@ namespace Test
         }
     }
 }";
-            var c = new CSharpInspection(Source);
-            c.CheckExpectedParameterMappings(0, "DoNothing", new { });
-            c.CheckExpectedParameterMappings(1, "DoSomething", new { a = 1, b = true });
-            c.CheckExpectedParameterMappings(2, "DoSomething", new { a = 1, b = true });
-            c.CheckExpectedParameterMappings(3, "WithOptional", new { a = 1 });
-            c.CheckExpectedParameterMappings(4, "WithOptional", new { a = 1, opt = "Ipsum" });
-            c.CheckExpectedParameterMappings(5, "WithOptional", new { a = 1, opt = "Ipsum" });
-            c.CheckExpectedParameterMappings(6, "WithParams", new { });
-            c.CheckExpectedParameterMappings(7, "WithParams", new { arr = new[] { 1, 2, 3 } });
 
-            c.MainInvocations.Length.Should().Be(8); // Self-Test of this test. If new Invocation is added to the Main(), this number has to be updated and test should be written for that case.
-
-            // TryGetNonParamsSyntax throw scenario
-            var lookupThrow = c.CreateLookup(6, "WithParams");
-            Action actionThrow = () => lookupThrow.TryGetNonParamsSyntax(lookupThrow.MethodSymbol.Parameters.Single(), out var argument);
-            actionThrow.Should().Throw<InvalidOperationException>();
-        }
-
-        [TestMethod]
-        public void TestMethodParameterLookup_VB()
-        {
-            const string Source = @"
+        private const string SourceVB = @"
 Module MainModule
 
     Sub Main()
@@ -127,7 +106,27 @@ Module MainModule
     End Sub
 End Module
 ";
-            var c = new VisualBasicInspection(Source);
+
+        [TestMethod]
+        public void TestMethodParameterLookup_CS()
+        {
+            var c = new CSharpInspection(SourceCS);
+            c.CheckExpectedParameterMappings(0, "DoNothing", new { });
+            c.CheckExpectedParameterMappings(1, "DoSomething", new { a = 1, b = true });
+            c.CheckExpectedParameterMappings(2, "DoSomething", new { a = 1, b = true });
+            c.CheckExpectedParameterMappings(3, "WithOptional", new { a = 1 });
+            c.CheckExpectedParameterMappings(4, "WithOptional", new { a = 1, opt = "Ipsum" });
+            c.CheckExpectedParameterMappings(5, "WithOptional", new { a = 1, opt = "Ipsum" });
+            c.CheckExpectedParameterMappings(6, "WithParams", new { });
+            c.CheckExpectedParameterMappings(7, "WithParams", new { arr = new[] { 1, 2, 3 } });
+
+            c.MainInvocations.Length.Should().Be(8); // Self-Test of this test. If new Invocation is added to the Main(), this number has to be updated and test should be written for that case.
+        }
+
+        [TestMethod]
+        public void TestMethodParameterLookup_VB()
+        {
+            var c = new VisualBasicInspection(SourceVB);
             c.CheckExpectedParameterMappings(0, "DoNothing", new { });
             c.CheckExpectedParameterMappings(1, "DoSomething", new { a = 1, b = true });
             c.CheckExpectedParameterMappings(2, "WithOptional", new { a = 1 });
@@ -136,11 +135,34 @@ End Module
             c.CheckExpectedParameterMappings(5, "WithParams", new { arr = new[] { 1, 2, 3 } });
 
             c.MainInvocations.Length.Should().Be(6); // Self-Test of this test. If new Invocation is added to the Main(), this number has to be updated and test should be written for that case.
+        }
 
-            // TryGetNonParamsSyntax throw scenario
-            var lookupThrow = c.CreateLookup(4, "WithParams");
-            Action actionThrow = () => lookupThrow.TryGetNonParamsSyntax(lookupThrow.MethodSymbol.Parameters.Single(), out var argument);
-            actionThrow.Should().Throw<InvalidOperationException>();
+        [TestMethod]
+        public void TestMethodParameterLookup_CS_ThrowsException()
+        {
+            var c = new CSharpInspection(SourceCS);
+            var lookupThrow = c.CreateLookup(1, "DoSomething");
+
+            var invalidOperationEx = Assert.ThrowsException<InvalidOperationException>(() => lookupThrow.TryGetNonParamsSyntax(lookupThrow.MethodSymbol.Parameters.Single(), out var argument));
+            invalidOperationEx.Message.Should().Be("Sequence contains more than one element");
+
+            var argumentEx = Assert.ThrowsException<ArgumentException>(() =>
+                lookupThrow.TryGetSymbol(CSharpCodeAnalysis.SyntaxFactory.LiteralExpression(CSharpCodeAnalysis.SyntaxKind.StringLiteralExpression), out var parameter));
+            argumentEx.Message.Should().StartWith("argument must be of type Microsoft.CodeAnalysis.CSharp.Syntax.ArgumentSyntax");
+        }
+
+        [TestMethod]
+        public void TestMethodParameterLookup_VB_ThrowsException()
+        {
+            var c = new VisualBasicInspection(SourceVB);
+            var lookupThrow = c.CreateLookup(1, "DoSomething");
+
+            var invalidOperationEx = Assert.ThrowsException<InvalidOperationException>(() => lookupThrow.TryGetNonParamsSyntax(lookupThrow.MethodSymbol.Parameters.Single(), out var argument));
+            invalidOperationEx.Message.Should().Be("Sequence contains more than one element");
+
+            var argumentEx = Assert.ThrowsException<ArgumentException>(() =>
+                lookupThrow.TryGetSymbol(VBCodeAnalysis.SyntaxFactory.StringLiteralExpression(VBCodeAnalysis.SyntaxFactory.StringLiteralToken(string.Empty, string.Empty)), out var parameter));
+            argumentEx.Message.Should().StartWith("argument must be of type Microsoft.CodeAnalysis.VisualBasic.Syntax.ArgumentSyntax");
         }
 
         private abstract class InspectionBase<TArgumentSyntax, TInvocationSyntax>

@@ -23,16 +23,14 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class ParameterValidationInYieldShouldBeWrapped : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S4456";
+        private const string DiagnosticId = "S4456";
         private const string MessageFormat = "Split this method into two, one handling parameters check and the other " +
            "handling the iterator.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterNodeAction(
                 c =>
                 {
@@ -44,13 +42,12 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (walker.HasYieldStatement &&
                         walker.ArgumentExceptionLocations.Any())
                     {
-                        c.ReportIssue(rule.CreateDiagnostic(c.Compilation, methodDeclaration.Identifier.GetLocation(), additionalLocations: walker.ArgumentExceptionLocations));
+                        c.ReportIssue(Rule.CreateDiagnostic(c.Compilation, methodDeclaration.Identifier.GetLocation(), additionalLocations: walker.ArgumentExceptionLocations));
                     }
                 },
                 SyntaxKind.MethodDeclaration);
-        }
 
-        private class ParameterValidationInYieldWalker : ParameterValidationInMethodWalker
+        private sealed class ParameterValidationInYieldWalker : ParameterValidationInMethodWalker
         {
             public bool HasYieldStatement { get; private set; }
 
@@ -62,7 +59,6 @@ namespace SonarAnalyzer.Rules.CSharp
             public override void VisitYieldStatement(YieldStatementSyntax node)
             {
                 HasYieldStatement = true;
-
                 base.VisitYieldStatement(node);
             }
         }

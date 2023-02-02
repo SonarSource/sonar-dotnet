@@ -1,7 +1,7 @@
 ---
 name: Report a False Positive / False Negative
 about: Open an issue about a C#/VB.NET analysis rule.
-title: ''
+title: "Fix Sxxxx [FP/FN]: Issue title"
 labels: ''
 assignees: ''
 

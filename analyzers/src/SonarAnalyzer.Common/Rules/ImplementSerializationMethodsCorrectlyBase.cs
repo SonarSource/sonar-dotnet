@@ -55,13 +55,12 @@ namespace SonarAnalyzer.Rules
             context.RegisterSymbolAction(c =>
                 {
                     var methodSymbol = (IMethodSymbol)c.Symbol;
-                    if (!methodSymbol.GetAttributes(SerializationAttributes).Any() || HiddenByEditorBrowsableAttribute(methodSymbol))
-                    {
-                        return;
-                    }
-
-                    var issues = FindIssues(methodSymbol);
-                    if (issues.Any() && GetIdentifierLocation(methodSymbol) is { } location)
+                    if (!methodSymbol.ContainingType.IsInterface()
+                        && methodSymbol.GetAttributes(SerializationAttributes).Any()
+                        && !HiddenByEditorBrowsableAttribute(methodSymbol)
+                        && FindIssues(methodSymbol) is var issues
+                        && issues.Any()
+                        && GetIdentifierLocation(methodSymbol) is { } location)
                     {
                         c.ReportIssue(Language.GeneratedCodeRecognizer, Diagnostic.Create(rule, location, issues.ToSentence()));
                     }

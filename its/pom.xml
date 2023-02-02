@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.sonarsource.dotnet</groupId>
     <artifactId>sonar-dotnet</artifactId>
-    <version>8.52-SNAPSHOT</version>
+    <version>8.53-SNAPSHOT</version>
   </parent>
 
   <groupId>com.sonarsource.it</groupId>
@@ -20,7 +20,7 @@
   </organization>
 
   <properties>
-    <scannerMsbuild.version>5.10.0.59947</scannerMsbuild.version>
+    <scannerMsbuild.version>5.11.0.60783</scannerMsbuild.version>
     <surefire.argLine>-server</surefire.argLine>
   </properties>
 

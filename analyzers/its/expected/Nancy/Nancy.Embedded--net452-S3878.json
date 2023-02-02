@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3878",
+"message":  "Remove this array creation and simply pass the elements.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Embedded\Conventions\EmbeddedStaticContentConventionBuilder.cs",
+"region":  {
+"startLine":  130,
+"startColumn":  60,
+"endLine":  130,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S3878",
+"message":  "Remove this array creation and simply pass the elements.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Embedded\Conventions\EmbeddedStaticContentConventionBuilder.cs",
+"region":  {
+"startLine":  169,
+"startColumn":  45,
+"endLine":  169,
+"endColumn":  58
+}
+}
+}
+]
+}

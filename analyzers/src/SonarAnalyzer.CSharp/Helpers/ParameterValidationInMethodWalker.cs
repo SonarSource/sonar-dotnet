@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Helpers
 {
     internal class ParameterValidationInMethodWalker : SafeCSharpSyntaxWalker
     {
@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private readonly SemanticModel semanticModel;
         private readonly List<Location> argumentExceptionLocations = new();
 
-        private bool keepWalking = true;
+        protected bool keepWalking = true;
 
         public IEnumerable<Location> ArgumentExceptionLocations => argumentExceptionLocations;
 
@@ -49,9 +49,6 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        public override void VisitAwaitExpression(AwaitExpressionSyntax node) =>
-            keepWalking = false;
-
         public override void VisitThrowStatement(ThrowStatementSyntax node)
         {
             // When throw is like `throw new XXX` where XXX derives from ArgumentException, save location
@@ -61,6 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 argumentExceptionLocations.Add(node.Expression.GetLocation());
             }
+
             // there is no need to visit children
         }
 
@@ -68,9 +66,14 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if (node.IsMemberAccessOnKnownType("ThrowIfNull", KnownType.System_ArgumentNullException, semanticModel))
             {
+                // "ThrowIfNull" returns void so it cannot be an argument. We can stop.
                 argumentExceptionLocations.Add(node.GetLocation());
             }
-            // "ThrowIfNull" returns void so it cannot be an argument. We can stop.
+            else
+            {
+                // Need to check the children of this node because of the pattern (await SomeTask()).Invocation()
+                base.VisitInvocationExpression(node);
+            }
         }
     }
 }

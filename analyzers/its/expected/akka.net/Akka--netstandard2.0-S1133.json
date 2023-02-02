@@ -1,0 +1,472 @@
+{
+"issues":  [
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
+"region":  {
+"startLine":  359,
+"startColumn":  10,
+"endLine":  359,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.cs",
+"region":  {
+"startLine":  236,
+"startColumn":  10,
+"endLine":  236,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorProducerPipeline.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  6,
+"endLine":  21,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorProducerPipeline.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  6,
+"endLine":  49,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorProducerPipeline.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  6,
+"endLine":  80,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorProducerPipeline.cs",
+"region":  {
+"startLine":  121,
+"startColumn":  6,
+"endLine":  121,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorProducerPipeline.cs",
+"region":  {
+"startLine":  237,
+"startColumn":  6,
+"endLine":  237,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
+"region":  {
+"startLine":  399,
+"startColumn":  10,
+"endLine":  399,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
+"region":  {
+"startLine":  444,
+"startColumn":  10,
+"endLine":  444,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
+"region":  {
+"startLine":  493,
+"startColumn":  10,
+"endLine":  493,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
+"region":  {
+"startLine":  568,
+"startColumn":  10,
+"endLine":  568,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Cancellation\Cancelable.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  10,
+"endLine":  79,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Cell.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  10,
+"endLine":  92,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\EmptyLocalActorRef.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  10,
+"endLine":  50,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ExtendedActorSystem.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  10,
+"endLine":  46,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"region":  {
+"startLine":  740,
+"startColumn":  10,
+"endLine":  740,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"region":  {
+"startLine":  384,
+"startColumn":  10,
+"endLine":  384,
+"endColumn":  113
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"region":  {
+"startLine":  562,
+"startColumn":  10,
+"endLine":  562,
+"endColumn":  121
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\DeprecatedSchedulerExtensions.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  6,
+"endLine":  16,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\DeprecatedSchedulerExtensions.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  10,
+"endLine":  27,
+"endColumn":  245
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Stash\IWithBoundedStash.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  6,
+"endLine":  20,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\TypedActor.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  6,
+"endLine":  29,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\MessageQueues\UnboundedPriorityMessageQueue.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  10,
+"endLine":  28,
+"endColumn":  130
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Udp.cs",
+"region":  {
+"startLine":  173,
+"startColumn":  14,
+"endLine":  173,
+"endColumn":  142
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnected.cs",
+"region":  {
+"startLine":  155,
+"startColumn":  14,
+"endLine":  155,
+"endColumn":  142
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Pattern\BackoffOptions.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  10,
+"endLine":  26,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Pattern\BackoffOptions.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  10,
+"endLine":  55,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\PatternMatch.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  6,
+"endLine":  15,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\Broadcast.cs",
+"region":  {
+"startLine":  284,
+"startColumn":  10,
+"endLine":  284,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
+"region":  {
+"startLine":  653,
+"startColumn":  10,
+"endLine":  653,
+"endColumn":  110
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\RoundRobin.cs",
+"region":  {
+"startLine":  334,
+"startColumn":  10,
+"endLine":  334,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  10,
+"endLine":  47,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"region":  {
+"startLine":  160,
+"startColumn":  10,
+"endLine":  160,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\ScatterGatherFirstCompleted.cs",
+"region":  {
+"startLine":  405,
+"startColumn":  10,
+"endLine":  405,
+"endColumn":  128
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"region":  {
+"startLine":  134,
+"startColumn":  10,
+"endLine":  134,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"region":  {
+"startLine":  325,
+"startColumn":  10,
+"endLine":  325,
+"endColumn":  106
+}
+}
+}
+]
+}
