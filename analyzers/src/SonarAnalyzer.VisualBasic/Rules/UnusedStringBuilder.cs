@@ -27,8 +27,7 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-    protected override string GetVariableName(VariableDeclaratorSyntax declaration) =>
-        declaration.Names.FirstOrDefault().ToString();
+    protected override string GetVariableName(VariableDeclaratorSyntax declaration) => declaration.Names.FirstOrDefault().ToString();
 
     protected override bool NeedsToTrack(VariableDeclaratorSyntax expression, SemanticModel semanticModel) =>
         expression.Initializer is not null
@@ -36,14 +35,12 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
         && objectCreation.Type.ToString().Equals(nameof(StringBuilder));
 
     protected override SyntaxNode GetAncestorBlock(VariableDeclaratorSyntax declaration) =>
-        declaration.Ancestors().OfType<MethodBlockSyntax>().Any()
-        ? declaration.Ancestors().OfType<MethodBlockSyntax>().First()
-        : declaration.Ancestors().OfType<AccessorBlockSyntax>().FirstOrDefault();
+        declaration.Ancestors().OfType<MethodBlockBaseSyntax>().First();
 
-    protected override bool IsIsStringInvoked(string variableName, IList<InvocationExpressionSyntax> invocations, SemanticModel semanticModel) =>
+    protected override bool IsIsStringInvoked(string variableName, IList<InvocationExpressionSyntax> invocations) =>
         invocations.Any(x => x.Expression is MemberAccessExpressionSyntax { } member
             && IsSameVariable(member.Expression, variableName)
-            && member.IsMemberAccessOnKnownType(nameof(ToString), KnownType.System_Text_StringBuilder, semanticModel));
+            && member.NameIs(nameof(ToString)));
 
     protected override bool IsPassedToMethod(string variableName, IList<InvocationExpressionSyntax> invocations) =>
         invocations.Any(x => x.ArgumentList.Arguments.Any(y => IsSameVariable(y.GetExpression(), variableName)));

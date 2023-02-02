@@ -32,7 +32,7 @@ public abstract class UnusedStringBuilderBase<TSyntaxKind, TVariableDeclarator, 
     protected abstract string GetVariableName(TVariableDeclarator declaration);
     protected abstract bool NeedsToTrack(TVariableDeclarator declaration, SemanticModel semanticModel);
     protected abstract SyntaxNode GetAncestorBlock(TVariableDeclarator declaration);
-    protected abstract bool IsIsStringInvoked(string variableName, IList<TInvocationExpression> invocations, SemanticModel semanticModel);
+    protected abstract bool IsIsStringInvoked(string variableName, IList<TInvocationExpression> invocations);
     protected abstract bool IsPassedToMethod(string variableName, IList<TInvocationExpression> invocations);
     protected abstract bool IsReturned(string variableName, IList<TReturnStatement> returnStatements);
 
@@ -53,7 +53,7 @@ public abstract class UnusedStringBuilderBase<TSyntaxKind, TVariableDeclarator, 
                 return;
             }
             var invocations = block.DescendantNodes().OfType<TInvocationExpression>().ToList();
-            if (IsIsStringInvoked(variableName, invocations, c.SemanticModel)
+            if (IsIsStringInvoked(variableName, invocations)
                 || IsPassedToMethod(variableName, invocations)
                 || IsReturned(variableName, block.DescendantNodes().OfType<TReturnStatement>().ToList()))
             {

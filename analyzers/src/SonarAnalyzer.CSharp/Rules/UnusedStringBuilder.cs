@@ -25,36 +25,30 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-    private const string StringBuilderToString = "System.Text.StringBuilder.ToString()";
-
-    protected override string GetVariableName(VariableDeclaratorSyntax declaration) =>
-        declaration.GetName();
+    protected override string GetVariableName(VariableDeclaratorSyntax declaration) => declaration.GetName();
 
     protected override bool NeedsToTrack(VariableDeclaratorSyntax declaration, SemanticModel semanticModel) =>
         declaration.Initializer is not null
         && declaration.Initializer.Value is { } expression
-        && expression switch
-        {
-            ObjectCreationExpressionSyntax => ObjectCreationFactory.Create(expression).IsKnownType(KnownType.System_Text_StringBuilder, semanticModel),
-            _ when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(expression) => ObjectCreationFactory.Create(expression).IsKnownType(KnownType.System_Text_StringBuilder, semanticModel),
-            _ => false
-        };
+        && IsStringBuilderObjectCreation(expression, semanticModel);
 
     protected override SyntaxNode GetAncestorBlock(VariableDeclaratorSyntax declaration) =>
         declaration.Ancestors().OfType<BlockSyntax>().FirstOrDefault();
 
-    protected override bool IsIsStringInvoked(string variableName, IList<InvocationExpressionSyntax> invocations, SemanticModel semanticModel) =>
+    protected override bool IsIsStringInvoked(string variableName, IList<InvocationExpressionSyntax> invocations) =>
         invocations.Any(x => x.Expression is MemberAccessExpressionSyntax { } member
             && IsSameVariable(member.Expression, variableName)
-            && member.NameIs(nameof(ToString))
-            && semanticModel.GetSymbolInfo(x).Symbol is IMethodSymbol symbol
-            && symbol.OriginalDefinition.ToString().Equals(StringBuilderToString));
+            && member.NameIs(nameof(ToString)));
 
     protected override bool IsPassedToMethod(string variableName, IList<InvocationExpressionSyntax> invocations) =>
         invocations.Any(x => x.ArgumentList.Arguments.Any(y => IsSameVariable(y.Expression, variableName)));
 
     protected override bool IsReturned(string variableName, IList<ReturnStatementSyntax> returnStatements) =>
         returnStatements.Any(x => IsSameVariable(x.Expression, variableName));
+
+    private static bool IsStringBuilderObjectCreation(ExpressionSyntax expression, SemanticModel semanticModel) =>
+        (expression is ObjectCreationExpressionSyntax || ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(expression))
+        && ObjectCreationFactory.Create(expression).IsKnownType(KnownType.System_Text_StringBuilder, semanticModel);
 
     private static bool IsSameVariable(ExpressionSyntax expression, string variableName) =>
         expression.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Any(p => p.NameIs(variableName));
