@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules
                 EndOffset = lineSpan.EndLinePosition.Character
             };
 
-        protected void ReadParameters<T>(SonarAnalysisContextBase<T> context)
+        protected void ReadParameters(SonarCompilationStartAnalysisContext context)
         {
             var settings = context.Options.ParseSonarLintXmlSettings();
             var outPath = context.ProjectConfiguration().OutPath;
