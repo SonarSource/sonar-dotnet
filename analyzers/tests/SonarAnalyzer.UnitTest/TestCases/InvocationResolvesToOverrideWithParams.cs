@@ -141,17 +141,17 @@ namespace Repro5430
 {
     public class SomeClass
     {
-        private int InlineInitializedField11 = new SomeClass().PrivateOverload("s1");                  // Compliant
-        private int InlineInitializedField12 = new SomeClass().PrivateOverload("s1", "s2");            // Noncompliant
-        private int InlineInitializedField13 = new SomeClass().PrivateOverload(null, "s2");            // Noncompliant
-        private int InlineInitializedField14 = new SomeClass().PrivateOverload(null, new[] { "s2" });  // Compliant
-        private int InlineInitializedField15 = new SomeClass().PrivateOverload("42", "s1", "s2");      // Compliant
+        private int Field11 = new SomeClass().PrivateOverload("s1");                  // Compliant
+        private int Field12 = new SomeClass().PrivateOverload("s1", "s2");            // Noncompliant
+        private int Field13 = new SomeClass().PrivateOverload(null, "s2");            // Noncompliant
+        private int Field14 = new SomeClass().PrivateOverload(null, new[] { "s2" });  // Compliant
+        private int Field15 = new SomeClass().PrivateOverload("42", "s1", "s2");      // Compliant
 
-        private int InlineInitializedField21 = new SomeClass().InternalOverload("s1");                 // Compliant
-        private int InlineInitializedField22 = new SomeClass().InternalOverload("s1", "s2");           // Noncompliant
-        private int InlineInitializedField23 = new SomeClass().InternalOverload(null, "s2");           // Noncompliant
-        private int InlineInitializedField24 = new SomeClass().InternalOverload(null, new[] { "s2" }); // Compliant
-        private int InlineInitializedField25 = new SomeClass().InternalOverload("42", "s1", "s2");     // Compliant
+        private int Field21 = new SomeClass().InternalOverload("s1");                 // Compliant
+        private int Field22 = new SomeClass().InternalOverload("s1", "s2");           // Noncompliant
+        private int Field23 = new SomeClass().InternalOverload(null, "s2");           // Noncompliant
+        private int Field24 = new SomeClass().InternalOverload(null, new[] { "s2" }); // Compliant
+        private int Field25 = new SomeClass().InternalOverload("42", "s1", "s2");     // Compliant
 
         public SomeClass() { }
         private SomeClass(object a, string b) { }
