@@ -49,7 +49,7 @@ public class ScannerCliTest {
     BuildResult result = ORCHESTRATOR.executeBuild(scanner);
 
     assertThat(result.getLogsLines(l -> l.contains("WARN")))
-      // ToDo containsExactly in order https://github.com/SonarSource/sonar-dotnet/issues/6714
+      // ToDo revert back to containsExactlyInAnyOrder https://github.com/SonarSource/sonar-dotnet/issues/6714
       .contains(
         "WARN: Your project contains C# files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html",
         "WARN: Incremental PR analysis: Could not determine common base path, cache will not be computed. Consider setting 'sonar.projectBaseDir' property.",
@@ -68,7 +68,7 @@ public class ScannerCliTest {
     BuildResult result = ORCHESTRATOR.executeBuild(scanner);
 
     assertThat(result.getLogsLines(l -> l.contains("WARN")))
-      // ToDo containsExactly in order https://github.com/SonarSource/sonar-dotnet/issues/6714
+      // ToDo revert back to containsExactlyInAnyOrder https://github.com/SonarSource/sonar-dotnet/issues/6714
       .contains(
         "WARN: Your project contains C# files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html",
         "WARN: Incremental PR analysis: Could not determine common base path, cache will not be computed. Consider setting 'sonar.projectBaseDir' property."
@@ -86,7 +86,7 @@ public class ScannerCliTest {
     BuildResult result = ORCHESTRATOR.executeBuild(scanner);
 
     assertThat(result.getLogsLines(l -> l.contains("WARN")))
-      // ToDo containsExactly in order https://github.com/SonarSource/sonar-dotnet/issues/6714
+      // ToDo revert back to containsExactlyInAnyOrder https://github.com/SonarSource/sonar-dotnet/issues/6714
       .contains(
         "WARN: Your project contains C# files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html",
         "WARN: Incremental PR analysis: Could not determine common base path, cache will not be computed. Consider setting 'sonar.projectBaseDir' property."
