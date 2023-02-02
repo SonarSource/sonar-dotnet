@@ -10,31 +10,31 @@ namespace Tests.Diagnostics
             var expr1 = new GetTypeWithIsAssignableFrom();
             var expr2 = new GetTypeWithIsAssignableFrom();
 
-            if (expr1.GetType()/*abcd*/.IsInstanceOfType(expr2 /*efgh*/)) //Fixed
+            if (expr1.GetType()/*abcd*/.IsInstanceOfType(expr2 /*efgh*/)) // Fixed
             { }
-            if (expr1.GetType().IsInstanceOfType(expr2)) //Compliant
+            if (expr1.GetType().IsInstanceOfType(expr2)) // Compliant
             { }
 
-            if (!(expr1 is GetTypeWithIsAssignableFrom)) //Fixed
+            if (!(expr1 is GetTypeWithIsAssignableFrom)) // Fixed
             { }
-            var x = expr1 is GetTypeWithIsAssignableFrom; //Fixed
+            var x = expr1 is GetTypeWithIsAssignableFrom; // Fixed
             if (expr1 != null) // Fixed
             { }
 
-            if (typeof(GetTypeWithIsAssignableFrom).IsAssignableFrom(typeof(GetTypeWithIsAssignableFrom))) //Compliant
+            if (typeof(GetTypeWithIsAssignableFrom).IsAssignableFrom(typeof(GetTypeWithIsAssignableFrom))) // Compliant
             { }
 
             var t1 = expr1.GetType();
             var t2 = expr2.GetType();
-            if (t1.IsAssignableFrom(t2)) //Compliant
+            if (t1.IsAssignableFrom(t2)) // Compliant
             { }
-            if (t1.IsInstanceOfType(expr2)) //Fixed
-            { }
-
-            if (t1.IsAssignableFrom(typeof(GetTypeWithIsAssignableFrom))) //Compliant
+            if (t1.IsInstanceOfType(expr2)) // Fixed
             { }
 
-            Test(t1.IsInstanceOfType(expr2)); //Fixed
+            if (t1.IsAssignableFrom(typeof(GetTypeWithIsAssignableFrom))) // Compliant
+            { }
+
+            Test(t1.IsInstanceOfType(expr2)); // Fixed
 
             if (expr1 is object) // Compliant - "is object" is a commonly used pattern for non-null check
             { }
@@ -87,6 +87,45 @@ namespace Tests.Diagnostics
         public void Go(Repro_3605 value)
         {
             bool result = value.StringProperty != null; // Fixed
+        }
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/6616
+    public class Repro_6616
+    {
+        public void IsInstanceOfType(object obj, Type t)
+        {
+            _ = obj is ISet<int>;                            // Fixed
+            _ = typeof(ISet<>).IsInstanceOfType(obj);                               // Compliant, unbonded generic type
+            _ = obj is IDictionary<int, int>;                // Fixed
+            _ = typeof(IDictionary<,>).IsInstanceOfType(obj);                       // Compliant, unbonded generic type
+            _ = obj is System.Collections.Generic.ISet<int>; // Fixed
+            _ = typeof(System.Collections.Generic.ISet<>).IsInstanceOfType(obj);    // Compliant, unbonded generic type
+
+            _ = t.IsInstanceOfType(obj);                                            // Compliant, not a typeof expression
+            t = typeof(ISet<>);
+            _ = t.IsInstanceOfType(obj);                                            // Compliant, not a typeof expression and value not tracked
+
+            _ = obj is ISet<ISet<>>;                         // Error [CS7003] Unexpected use of an unbound generic name // Fixed
+            _ = obj is IDictionary<string, ISet<>>;          // Error [CS7003] Unexpected use of an unbound generic name // Fixed
+        }
+
+        public void IsAssignableFrom(object obj, Type t1, Type t2)
+        {
+            _ = obj is HashSet<int>;                         // Fixed
+            _ = typeof(HashSet<>).IsAssignableFrom(obj.GetType());                            // Compliant, unbonded generic type
+            _ = obj is Dictionary<int, int>;                 // Fixed
+            _ = typeof(Dictionary<,>).IsAssignableFrom(obj.GetType());                        // Compliant, unbonded generic type
+            _ = obj is System.Collections.Generic.ISet<int>; // Fixed
+            _ = typeof(System.Collections.Generic.ISet<>).IsAssignableFrom(obj.GetType());    // Compliant, unbonded generic type
+
+            _ = t1.IsAssignableFrom(t2);                                                      // Compliant, not a typeof expression, nor having GetType as arg
+            t1 = typeof(ISet<>);
+            t2 = obj.GetType();
+            _ = t1.IsAssignableFrom(t2);                                                      // Compliant, not a typeof expression, nor having GetType as arg, and values not tracked
+
+            _ = obj is ISet<ISet<>>;                         // Error [CS7003] Unexpected use of an unbound generic name // Fixed
+            _ = obj is IDictionary<string, ISet<>>;          // Error [CS7003] Unexpected use of an unbound generic name // Fixed
         }
     }
 
