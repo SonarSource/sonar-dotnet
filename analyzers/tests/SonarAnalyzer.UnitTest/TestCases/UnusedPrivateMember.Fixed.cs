@@ -193,6 +193,26 @@ namespace Tests.Diagnostics
     {
     }
 
+    public class Indexer5
+    {
+        private int this[int i] { get { return 1; } }    // Fixed
+
+        public void Method()
+        {
+            Console.WriteLine(this[0]);
+        }
+    }
+
+    public class Indexer6
+    {
+        private int this[int i] { set { _ = value; } }    // Fixed
+
+        public void Method()
+        {
+            this[0] = 42;
+        }
+    }
+
     [Serializable]
     public sealed class GoodException : Exception
     {

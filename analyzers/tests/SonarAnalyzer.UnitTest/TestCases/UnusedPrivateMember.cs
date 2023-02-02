@@ -275,6 +275,29 @@ namespace Tests.Diagnostics
     public class Indexer4
     {
         private int this[int i] { get { return 1; } set { _ = value; } }    // Noncompliant
+//                  ^^^^
+    }
+
+    public class Indexer5
+    {
+        private int this[int i] { get { return 1; } set { _ = value; } }    // Noncompliant
+//                                                  ^^^
+
+        public void Method()
+        {
+            Console.WriteLine(this[0]);
+        }
+    }
+
+    public class Indexer6
+    {
+        private int this[int i] { get { return 1; } set { _ = value; } }    // Noncompliant
+//                                ^^^
+
+        public void Method()
+        {
+            this[0] = 42;
+        }
     }
 
     [Serializable]
