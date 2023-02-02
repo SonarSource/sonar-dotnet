@@ -61,10 +61,10 @@ internal sealed class CSharpSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind>
     public SyntaxKind[] ObjectCreationExpressions => new[] { SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression };
     public SyntaxKind Parameter => SyntaxKind.Parameter;
     public SyntaxKind ParameterList => SyntaxKind.ParameterList;
-    public SyntaxKind RightShiftAssignmentStatement => SyntaxKind.RightShiftAssignmentExpression;
-    public SyntaxKind RightShiftExpression => SyntaxKind.RightShiftExpression;
     public SyntaxKind RefKeyword => SyntaxKind.RefKeyword;
     public SyntaxKind ReturnStatement => SyntaxKind.ReturnStatement;
+    public SyntaxKind RightShiftAssignmentStatement => SyntaxKind.RightShiftAssignmentExpression;
+    public SyntaxKind RightShiftExpression => SyntaxKind.RightShiftExpression;
     public SyntaxKind SimpleAssignment => SyntaxKind.SimpleAssignmentExpression;
     public SyntaxKind SimpleCommentTrivia => SyntaxKind.SingleLineCommentTrivia;
     public SyntaxKind SimpleMemberAccessExpression => SyntaxKind.SimpleMemberAccessExpression;
