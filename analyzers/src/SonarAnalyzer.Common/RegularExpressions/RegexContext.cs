@@ -18,66 +18,91 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#nullable enable
-
 using System.Text.RegularExpressions;
 
 namespace SonarAnalyzer.RegularExpressions;
 
-internal sealed class RegexNode
+internal sealed class RegexContext
 {
-    public RegexNode(
-        SyntaxNodeValue<string?> pattern,
-        SyntaxNodeValue<RegexOptions?> options)
+    private static readonly RegexOptions TestMask = (RegexOptions)int.MinValue ^ RegexOptions.Compiled;
+
+    public RegexContext(
+        SyntaxNode patternNode,
+        string pattern,
+        SyntaxNode optionsNode,
+        RegexOptions? options)
     {
+        PatternNode = patternNode;
         Pattern = pattern;
+        OptionsNode = optionsNode;
         Options = options;
+
+        if (!string.IsNullOrEmpty(pattern))
+        {
+            try
+            {
+                Regex = new(Pattern, options.GetValueOrDefault() & TestMask, TimeSpan.FromMilliseconds(100));
+            }
+            catch (Exception x)
+            {
+                ParseError = x;
+            }
+        }
     }
 
-    public SyntaxNodeValue<string?> Pattern { get; }
-    public SyntaxNodeValue<RegexOptions?> Options { get; }
+    public SyntaxNode PatternNode { get; }
+    public string Pattern { get; }
+    public SyntaxNode OptionsNode { get; }
+    public RegexOptions? Options { get; }
 
-    public static RegexNode? FromCtor<TSyntaxKind>(SyntaxNode node, SemanticModel model, ILanguageFacade<TSyntaxKind> language) where TSyntaxKind : struct =>
+    public Regex Regex { get; }
+    public Exception ParseError { get; }
+
+    public static RegexContext FromCtor<TSyntaxKind>(SyntaxNode node, SemanticModel model, ILanguageFacade<TSyntaxKind> language) where TSyntaxKind : struct =>
         model.GetSymbolInfo(node).Symbol is IMethodSymbol method
         && method.IsConstructor()
         && method.ContainingType.Is(KnownType.System_Text_RegularExpressions_Regex)
         ? FromSymbol(method, node, model, language)
         : null;
 
-    public static RegexNode? FromMethod<TSyntaxKind>(SyntaxNode node, SemanticModel model, ILanguageFacade<TSyntaxKind> language) where TSyntaxKind : struct =>
+    public static RegexContext FromMethod<TSyntaxKind>(SyntaxNode node, SemanticModel model, ILanguageFacade<TSyntaxKind> language) where TSyntaxKind : struct =>
         language.Syntax.NodeIdentifier(node).GetValueOrDefault().Text is { } name
         && MatchMethods.Any(x => x.Equals(name, language.NameComparison))
-        && model.GetSymbolInfo(node).Symbol is IMethodSymbol {IsStatic: true } method
+        && model.GetSymbolInfo(node).Symbol is IMethodSymbol { IsStatic: true } method
         && method.ContainingType.Is(KnownType.System_Text_RegularExpressions_Regex)
         ? FromSymbol(method, node, model, language)
         : null;
 
-    public static RegexNode? FromAttribute<TSyntaxKind>(SyntaxNode node, SemanticModel model, ILanguageFacade<TSyntaxKind> language) where TSyntaxKind : struct
+    public static RegexContext FromAttribute<TSyntaxKind>(SyntaxNode node, SemanticModel model, ILanguageFacade<TSyntaxKind> language) where TSyntaxKind : struct
     {
         if (model.GetSymbolInfo(node).Symbol is IMethodSymbol method
             && method.IsInType(KnownType.System_ComponentModel_DataAnnotations_RegularExpressionAttribute))
         {
             var parameters = language.MethodParameterLookup(node, method);
             var pattern = TryGetNonParamsSyntax(method, parameters, "pattern");
-            return new RegexNode(
-                new(pattern, language.FindConstantValue(model, pattern) as string),
-                new(null, null));
+            return new RegexContext(
+                pattern,
+                language.FindConstantValue(model, pattern) as string,
+                null,
+                null);
         }
         return null;
     }
 
-    private static RegexNode FromSymbol<TSyntaxKind>(IMethodSymbol method, SyntaxNode node, SemanticModel model, ILanguageFacade<TSyntaxKind> language) where TSyntaxKind : struct
+    private static RegexContext FromSymbol<TSyntaxKind>(IMethodSymbol method, SyntaxNode node, SemanticModel model, ILanguageFacade<TSyntaxKind> language) where TSyntaxKind : struct
     {
         var parameters = language.MethodParameterLookup(node, method);
         var pattern = TryGetNonParamsSyntax(method, parameters, "pattern");
         var options = TryGetNonParamsSyntax(method, parameters, "options");
 
-        return new RegexNode(
-            new(pattern, language.FindConstantValue(model, pattern) as string),
-            new(options, language.FindConstantValue(model, options) is RegexOptions value ? value : null));
+        return new RegexContext(
+            pattern,
+            language.FindConstantValue(model, pattern) as string,
+            options,
+            language.FindConstantValue(model, options) is RegexOptions value ? value : null);
     }
 
-    private static SyntaxNode? TryGetNonParamsSyntax(IMethodSymbol method, IMethodParameterLookup parameters, string paramName) =>
+    private static SyntaxNode TryGetNonParamsSyntax(IMethodSymbol method, IMethodParameterLookup parameters, string paramName) =>
         method.Parameters.SingleOrDefault(x => x.Name == paramName) is { } param
         && parameters.TryGetNonParamsSyntax(param, out var node)
         ? node

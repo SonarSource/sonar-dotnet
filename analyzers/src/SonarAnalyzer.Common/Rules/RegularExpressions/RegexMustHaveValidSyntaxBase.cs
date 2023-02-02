@@ -35,27 +35,25 @@ public abstract class RegexMustHaveValidSyntaxBase<TSyntaxKind> : SonarDiagnosti
     {
         context.RegisterNodeAction(
             Language.GeneratedCodeRecognizer,
-            c => Analyze(c, RegexNode.FromCtor(c.Node, c.SemanticModel, Language)),
+            c => Analyze(c, RegexContext.FromCtor(c.Node, c.SemanticModel, Language)),
             Language.SyntaxKind.ObjectCreationExpressions);
 
         context.RegisterNodeAction(
             Language.GeneratedCodeRecognizer,
-            c => Analyze(c, RegexNode.FromMethod(c.Node, c.SemanticModel, Language)),
+            c => Analyze(c, RegexContext.FromMethod(c.Node, c.SemanticModel, Language)),
             Language.SyntaxKind.InvocationExpression);
 
         context.RegisterNodeAction(
             Language.GeneratedCodeRecognizer,
-            c => Analyze(c, RegexNode.FromAttribute(c.Node, c.SemanticModel, Language)),
+            c => Analyze(c, RegexContext.FromAttribute(c.Node, c.SemanticModel, Language)),
             Language.SyntaxKind.Attribute);
     }
 
-    private void Analyze(SonarSyntaxNodeReportingContext c, RegexNode regex)
+    private void Analyze(SonarSyntaxNodeReportingContext c, RegexContext context)
     {
-        if (regex is { }
-            && regex.Pattern.Value is { } pattern
-            && RegexTree.Parse(pattern, regex.Options.Value).ParseError is { } error)
+        if (context is { } && context.ParseError is { } error)
         {
-            c.ReportIssue(Diagnostic.Create(Rule, regex.Pattern.Node.GetLocation(), error.Message));
+            c.ReportIssue(Diagnostic.Create(Rule, context.PatternNode.GetLocation(), error.Message));
         }
     }
 }
