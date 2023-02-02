@@ -27,21 +27,15 @@ namespace SonarAnalyzer.Rules
         internal const string IsReportingOnLeftKey = "IsReportingOnLeft";
         private const string BitwiseMessageFormat = "Remove this silly bit operation.";
 
-        // No codefix (yet?)
-        private const string ComparisonDiagnosticId = "S2198";
-        private const string ComparisonMessageFormat = "Remove this silly mathematical comparison.";
-
         protected abstract ILanguageFacade Language { get; }
 
         protected DiagnosticDescriptor BitwiseRule { get; }
-        protected DiagnosticDescriptor ComparisonRule { get; }
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(BitwiseRule, ComparisonRule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(BitwiseRule);
 
         protected SillyBitwiseOperationBase()
         {
             BitwiseRule = Language.CreateDescriptor(BitwiseDiagnosticId, BitwiseMessageFormat, fadeOutCode: true);
-            ComparisonRule = Language.CreateDescriptor(ComparisonDiagnosticId, ComparisonMessageFormat, fadeOutCode: true);
         }
 
         protected void CheckBinary(SonarSyntaxNodeReportingContext context, SyntaxNode left, SyntaxToken @operator, SyntaxNode right, int constValueToLookFor)

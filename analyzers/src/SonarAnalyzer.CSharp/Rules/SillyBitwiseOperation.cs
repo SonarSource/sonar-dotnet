@@ -18,15 +18,25 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Numerics;
-using Microsoft.CodeAnalysis;
-
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class SillyBitwiseOperation : SillyBitwiseOperationBase
     {
         protected override ILanguageFacade Language => CSharpFacade.Instance;
+
+        // No codefix (yet?)
+        private const string ComparisonDiagnosticId = "S2198";
+        private const string ComparisonMessageFormat = "Remove this silly mathematical comparison.";
+
+        protected DiagnosticDescriptor ComparisonRule { get; set; }
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(BitwiseRule, ComparisonRule);
+
+        public SillyBitwiseOperation()
+        {
+            ComparisonRule = Language.CreateDescriptor(ComparisonDiagnosticId, ComparisonMessageFormat, fadeOutCode: true);
+        }
 
         protected override void Initialize(SonarAnalysisContext context)
         {
