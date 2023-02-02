@@ -5,6 +5,9 @@
     <RootNamespace>SonarAnalyzer.RuleDescriptorGenerator</RootNamespace>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6</TargetFramework>
+    <!-- https://github.com/SonarSource/sonar-dotnet/issues/6711 -->
+    <!-- Output into a folder shared between Debug and Release, without a TFM subdirectory -->
+    <OutDir>bin</OutDir>
   </PropertyGroup>
 
   <ItemGroup>
