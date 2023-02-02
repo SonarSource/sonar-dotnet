@@ -23,10 +23,10 @@ Class Noncompliant
 
     Private Sub [Static]()
         Dim isMatch = Regex.IsMatch("some input", "[A") ' Noncompliant
-        Dim match = Regex.Match("some input", "[A") ' Noncompliant
+        Dim match = Regex.Match("some input", "[A")     ' Noncompliant
         Dim matches = Regex.Matches("some input", "[A") ' Noncompliant
+        Dim split = Regex.Split("some input", "[A")     ' Noncompliant
         Dim replace = Regex.Replace("some input", "[A", "some replacement") ' Noncompliant
-        Dim split = Regex.Split("some input", "[A") ' Noncompliant
     End Sub
 
     <RegularExpression("[A")> ' Noncompliant

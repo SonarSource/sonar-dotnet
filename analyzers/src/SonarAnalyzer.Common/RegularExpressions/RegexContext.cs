@@ -26,6 +26,13 @@ internal sealed class RegexContext
 {
     private static readonly RegexOptions TestMask = (RegexOptions)int.MinValue ^ RegexOptions.Compiled;
 
+    public SyntaxNode PatternNode { get; }
+    public string Pattern { get; }
+    public SyntaxNode OptionsNode { get; }
+    public RegexOptions? Options { get; }
+    public Regex Regex { get; }
+    public Exception ParseError { get; }
+
     public RegexContext(
         SyntaxNode patternNode,
         string pattern,
@@ -49,14 +56,6 @@ internal sealed class RegexContext
             }
         }
     }
-
-    public SyntaxNode PatternNode { get; }
-    public string Pattern { get; }
-    public SyntaxNode OptionsNode { get; }
-    public RegexOptions? Options { get; }
-
-    public Regex Regex { get; }
-    public Exception ParseError { get; }
 
     public static RegexContext FromCtor<TSyntaxKind>(SyntaxNode node, SemanticModel model, ILanguageFacade<TSyntaxKind> language) where TSyntaxKind : struct =>
         model.GetSymbolInfo(node).Symbol is IMethodSymbol method
