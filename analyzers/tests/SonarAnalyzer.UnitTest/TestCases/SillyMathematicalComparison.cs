@@ -34,12 +34,6 @@ namespace SonarAnalyzer.UnitTest.TestCases
             const ulong smallULong = byte.MinValue;
             const ulong bigULong = byte.MaxValue;
 
-            //const nint smallNint = byte.MinValue;
-            //const nint bigNint = byte.MaxValue;
-
-            //const nuint smallNuint = byte.MinValue;
-            //const nuint bigNuint = byte.MaxValue;
-
             const float smallFloat = byte.MinValue;
             const float bigFloat = byte.MaxValue;
 
@@ -70,6 +64,54 @@ namespace SonarAnalyzer.UnitTest.TestCases
             _ = bigShort <= b; // Compliant, not (always true) or (always false)
             _ = smallByte >= b; // Compliant, not (always true) or (always false)
             _ = smallShort >= b; // Compliant, not (always true) or (always false)
+
+            const int veryBig = byte.MaxValue + 1;
+            const int verySmall = byte.MinValue - 1;
+
+            _ = b < veryBig; // Compliant, raised by CS0652
+            _ = veryBig > b; // Compliant, raised by CS0652
+            _ = b > verySmall; // Compliant, raised by CS0652
+            _ = verySmall < b; // Compliant, raised by CS0652
         }
+
+        public void Floats()
+        {
+            const float smallFloat = float.MinValue;
+            const float bigFloat = float.MaxValue;
+
+            const double smallDouble = float.MinValue;
+            const double bigDouble = float.MaxValue;
+
+            const double veryBig = float.MaxValue + 1;
+            const double verySmall = float.MinValue - 1;
+
+            float f = 42;
+
+            _ = f <= bigFloat; // Noncompliant
+            _ = f <= bigDouble; // Noncompliant
+            _ = f >= smallFloat; // Noncompliant
+            _ = f >= smallDouble; // Noncompliant
+
+            _ = bigFloat >= f; // Noncompliant
+            _ = bigDouble >= f; // Noncompliant
+            _ = smallFloat <= f; // Noncompliant
+            _ = smallDouble <= f; // Noncompliant
+
+            _ = f >= bigFloat; // Compliant, not (always true) or (always false)
+            _ = f >= bigDouble; // Compliant, not (always true) or (always false)
+            _ = f <= smallFloat; // Compliant, not (always true) or (always false)
+            _ = f <= smallDouble; // Compliant, not (always true) or (always false)
+
+            _ = bigFloat <= f; // Compliant, not (always true) or (always false)
+            _ = bigDouble <= f; // Compliant, not (always true) or (always false)
+            _ = smallFloat >= f; // Compliant, not (always true) or (always false)
+            _ = smallDouble >= f; // Compliant, not (always true) or (always false)
+
+            _ = f < veryBig; // Noncompliant
+            _ = veryBig > f; // Noncompliant
+            _ = f > verySmall; // Noncompliant
+            _ = verySmall < f; // Noncompliant
+        }
+
     }
 }

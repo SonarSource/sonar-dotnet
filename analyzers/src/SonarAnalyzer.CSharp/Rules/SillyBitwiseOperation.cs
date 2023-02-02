@@ -29,7 +29,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            // FIRST RULE
             context.RegisterNodeAction(
                 c => CheckBinary(c, -1),
                 SyntaxKind.BitwiseAndExpression);
@@ -48,14 +47,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.OrAssignmentExpression,
                 SyntaxKind.ExclusiveOrAssignmentExpression);
 
-            // SECOND RULE
             context.RegisterNodeAction(
-            CheckLessOrEqualExpression,
-            SyntaxKind.LessThanOrEqualExpression);
-
-            context.RegisterNodeAction(
-            CheckGreaterOrEqualExpression,
-            SyntaxKind.GreaterThanOrEqualExpression);
+                CheckComparison,
+                SyntaxKind.GreaterThanExpression,
+                SyntaxKind.GreaterThanOrEqualExpression,
+                SyntaxKind.LessThanExpression,
+                SyntaxKind.LessThanOrEqualExpression);
         }
 
         private void CheckAssignment(SonarSyntaxNodeReportingContext context, int constValueToLookFor)
@@ -77,47 +74,105 @@ namespace SonarAnalyzer.Rules.CSharp
             CheckBinary(context, binary.Left, binary.OperatorToken, binary.Right, constValueToLookFor);
         }
 
-        private void CheckLessOrEqualExpression(SonarSyntaxNodeReportingContext context) // x <= y
+        private void CheckComparison(SonarSyntaxNodeReportingContext context)
         {
             var binary = (BinaryExpressionSyntax)context.Node;
 
-            if (ShouldRaise(context.SemanticModel, binary.Left, binary.Right, x => x.MinValue)) // minConstant <= actualValue
+            var normalComparer = GetNormalComparer(binary.Kind());
+            var inverseComparer = GetReverseComparer(binary.Kind());
+
+            if (ShouldRaise(context.SemanticModel, binary.Left, binary.Right, normalComparer)) // x >= constant
             {
                 context.ReportIssue(Diagnostic.Create(ComparisonRule, binary.GetLocation()));
             }
-            else if (ShouldRaise(context.SemanticModel, binary.Right, binary.Left, x => x.MaxValue)) // actualValue <= maxConstant
+            else if (ShouldRaise(context.SemanticModel, binary.Right, binary.Left, inverseComparer))  // constant >= x inversed: x <= constant
             {
                 context.ReportIssue(Diagnostic.Create(ComparisonRule, binary.GetLocation()));
             }
         }
 
-        private void CheckGreaterOrEqualExpression(SonarSyntaxNodeReportingContext context) // x >= y
-        {
-            var binary = (BinaryExpressionSyntax)context.Node;
-
-            if (ShouldRaise(context.SemanticModel, binary.Right, binary.Left, x => x.MinValue)) // actualValue >= minConstant
+        private Func<TypeMetadata, double, bool> GetNormalComparer(SyntaxKind kind) =>
+            kind switch
             {
-                context.ReportIssue(Diagnostic.Create(ComparisonRule, binary.GetLocation()));
-            }
-            else if (ShouldRaise(context.SemanticModel, binary.Left, binary.Right, x => x.MaxValue)) // maxConstant >= actualValue
-            {
-                context.ReportIssue(Diagnostic.Create(ComparisonRule, binary.GetLocation()));
-            }
-        }
+                SyntaxKind.LessThanExpression => (tm, constant) => tm.Less(constant),
+                SyntaxKind.LessThanOrEqualExpression => (tm, constant) => tm.LessOrEqual(constant),
+                SyntaxKind.GreaterThanExpression => (tm, constant) => tm.Greater(constant),
+                SyntaxKind.GreaterThanOrEqualExpression => (tm, constant) => tm.GreaterOrEqual(constant),
+            };
 
-        private bool ShouldRaise(SemanticModel semanticModel, SyntaxNode expectedConstant, SyntaxNode other, Func<Thingy, double> getSide) =>
+        private Func<TypeMetadata, double, bool> GetReverseComparer(SyntaxKind kind) =>
+            kind switch
+            {
+                SyntaxKind.LessThanExpression => (tm, constant) => tm.Greater(constant),
+                SyntaxKind.LessThanOrEqualExpression => (tm, constant) => tm.GreaterOrEqual(constant),
+                SyntaxKind.GreaterThanExpression => (tm, constant) => tm.Less(constant),
+                SyntaxKind.GreaterThanOrEqualExpression => (tm, constant) => tm.LessOrEqual(constant),
+            };
+
+        private bool ShouldRaise(SemanticModel semanticModel, SyntaxNode value, SyntaxNode expectedConstant, Func<TypeMetadata, double, bool> checkConstant) =>
             FindConstant(semanticModel, expectedConstant, Convert.ToDouble) is { } constant
-            && semanticModel.GetSymbolInfo(other).Symbol.GetSymbolType() is { } symbol
+            && semanticModel.GetSymbolInfo(value).Symbol.GetSymbolType() is { } symbol
             && Ranges.FirstOrDefault(x => symbol.Is(x.Type)) is { } typeMetadata
-            && constant == getSide(typeMetadata);
+            && checkConstant(typeMetadata, constant);
 
-        private Thingy[] Ranges = new[]
+        private static readonly TypeMetadata[] Ranges = new TypeMetadata[] // FIXME: Add more types here
         {
-            new Thingy(KnownType.System_Byte, byte.MinValue, byte.MaxValue),
-            new Thingy(KnownType.System_Int32, int.MinValue, int.MaxValue),
-            new Thingy(KnownType.System_Int64, long.MinValue, long.MaxValue),
+            new LimitedFunctionalityTypeMetadata(KnownType.System_Byte, byte.MinValue, byte.MaxValue),
+            new LimitedFunctionalityTypeMetadata(KnownType.System_Int32, int.MinValue, int.MaxValue),
+            new LimitedFunctionalityTypeMetadata(KnownType.System_Int64, long.MinValue, long.MaxValue),
+            new FullFunctionalityTypeMetadata(KnownType.System_Single, long.MinValue, long.MaxValue),
         };
 
-        private record struct Thingy(KnownType Type, double MinValue, double MaxValue);
+        private abstract class TypeMetadata
+        {
+            public KnownType Type { get; init; }
+            public double MinValue { get; init; }
+            public double MaxValue { get; init; }
+
+            protected TypeMetadata(KnownType type, double minValue, double maxValue)
+            {
+                Type = type;
+                MinValue = minValue;
+                MaxValue = maxValue;
+            }
+
+            public virtual bool Less(double constant) => false;
+            public virtual bool Greater(double constant) => false;
+
+            public abstract bool LessOrEqual(double constant);
+            public abstract bool GreaterOrEqual(double constant);
+        }
+
+        private class LimitedFunctionalityTypeMetadata : TypeMetadata // For types that are already semi-covered by CS0652
+        {
+            public LimitedFunctionalityTypeMetadata(KnownType type, double minValue, double maxValue)
+                : base(type, minValue, maxValue)
+            { }
+
+            public override bool GreaterOrEqual(double constant) => // something >= constant
+                constant == MinValue;
+
+            public override bool LessOrEqual(double constant) => // something <= constant
+                constant == MaxValue;
+        }
+
+        private class FullFunctionalityTypeMetadata : TypeMetadata // For types that are not covered by CS0652
+        {
+            public FullFunctionalityTypeMetadata(KnownType type, double minValue, double maxValue)
+                : base(type, minValue, maxValue)
+            { }
+
+            public override bool Greater(double constant) => // something > constant
+                constant < MinValue;
+
+            public override bool Less(double constant) => // something < constant
+                constant > MaxValue;
+
+            public override bool GreaterOrEqual(double constant) => // something >= constant
+                constant <= MinValue;
+
+            public override bool LessOrEqual(double constant) => // something <= constant
+                constant >= MaxValue;
+        }
     }
 }
