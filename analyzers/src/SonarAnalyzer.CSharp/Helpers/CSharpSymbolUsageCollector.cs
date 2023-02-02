@@ -259,6 +259,9 @@ namespace SonarAnalyzer.Helpers
                 MemberAccessExpressionSyntax memberAccess => node == memberAccess.Name ? ParentAccessType(memberAccess) : SymbolAccess.Read,
                 // _?.node : node?._
                 MemberBindingExpressionSyntax memberBinding => node == memberBinding.Name ? ParentAccessType(memberBinding) : SymbolAccess.Read,
+                // node ??= _ : _ ??= node
+                AssignmentExpressionSyntax assignmentExpression when assignmentExpression.IsKind(SyntaxKindEx.CoalesceAssignmentExpression) =>
+                    node == assignmentExpression.Left ? SymbolAccess.ReadWrite : SymbolAccess.Read,
                 // Ignoring distinction assignmentExpression.IsKind(SyntaxKind.SimpleAssignmentExpression) between
                 // "node = _" and "node += _" both are considered as Write and rely on the parent to know if its read.
                 //  node = _ : _ = node
