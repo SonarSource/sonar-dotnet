@@ -98,7 +98,7 @@ namespace Tests.Diagnostics
 
         public void MethodUsingLocalMethod()
         {
-            void LocalMethod() // Compliant - FN: local function is never used
+            void LocalMethod() // FN: local function is never used
             {
 
             }
