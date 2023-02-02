@@ -82,8 +82,8 @@ namespace SonarAnalyzer.UnitTest.TestCases
             const double smallDouble = float.MinValue;
             const double bigDouble = float.MaxValue;
 
-            const double veryBig = float.MaxValue + 1;
-            const double verySmall = float.MinValue - 1;
+            const double veryBig = double.MaxValue;
+            const double verySmall = double.MinValue;
 
             float f = 42;
 

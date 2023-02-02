@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Numerics;
 using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -77,102 +78,95 @@ namespace SonarAnalyzer.Rules.CSharp
         private void CheckComparison(SonarSyntaxNodeReportingContext context)
         {
             var binary = (BinaryExpressionSyntax)context.Node;
-
-            var normalComparer = GetNormalComparer(binary.Kind());
-            var inverseComparer = GetReverseComparer(binary.Kind());
-
-            if (ShouldRaise(context.SemanticModel, binary.Left, binary.Right, normalComparer)) // x >= constant
+            if (ShouldRaise(context.SemanticModel, binary.Left, binary.Right, binary.Kind(), false))
             {
-                context.ReportIssue(Diagnostic.Create(ComparisonRule, binary.GetLocation()));
+                context.ReportIssue(Diagnostic.Create(BitwiseRule, binary.GetLocation()));
             }
-            else if (ShouldRaise(context.SemanticModel, binary.Right, binary.Left, inverseComparer))  // constant >= x inversed: x <= constant
+
+            if (ShouldRaise(context.SemanticModel, binary.Right, binary.Left, binary.Kind(), true))
             {
-                context.ReportIssue(Diagnostic.Create(ComparisonRule, binary.GetLocation()));
+                context.ReportIssue(Diagnostic.Create(BitwiseRule, binary.GetLocation()));
             }
         }
 
-        private Func<TypeMetadata, double, bool> GetNormalComparer(SyntaxKind kind) =>
-            kind switch
-            {
-                SyntaxKind.LessThanExpression => (tm, constant) => tm.Less(constant),
-                SyntaxKind.LessThanOrEqualExpression => (tm, constant) => tm.LessOrEqual(constant),
-                SyntaxKind.GreaterThanExpression => (tm, constant) => tm.Greater(constant),
-                SyntaxKind.GreaterThanOrEqualExpression => (tm, constant) => tm.GreaterOrEqual(constant),
-            };
-
-        private Func<TypeMetadata, double, bool> GetReverseComparer(SyntaxKind kind) =>
-            kind switch
-            {
-                SyntaxKind.LessThanExpression => (tm, constant) => tm.Greater(constant),
-                SyntaxKind.LessThanOrEqualExpression => (tm, constant) => tm.GreaterOrEqual(constant),
-                SyntaxKind.GreaterThanExpression => (tm, constant) => tm.Less(constant),
-                SyntaxKind.GreaterThanOrEqualExpression => (tm, constant) => tm.LessOrEqual(constant),
-            };
-
-        private bool ShouldRaise(SemanticModel semanticModel, SyntaxNode value, SyntaxNode expectedConstant, Func<TypeMetadata, double, bool> checkConstant) =>
-            FindConstant(semanticModel, expectedConstant, Convert.ToDouble) is { } constant
-            && semanticModel.GetSymbolInfo(value).Symbol.GetSymbolType() is { } symbol
-            && Ranges.FirstOrDefault(x => symbol.Is(x.Type)) is { } typeMetadata
-            && checkConstant(typeMetadata, constant);
-
-        private static readonly TypeMetadata[] Ranges = new TypeMetadata[] // FIXME: Add more types here
+        private bool ShouldRaise(SemanticModel semanticModel, SyntaxNode value, SyntaxNode expectedConstant, SyntaxKind kind, bool constantIsLeft)
         {
-            new LimitedFunctionalityTypeMetadata(KnownType.System_Byte, byte.MinValue, byte.MaxValue),
-            new LimitedFunctionalityTypeMetadata(KnownType.System_Int32, int.MinValue, int.MaxValue),
-            new LimitedFunctionalityTypeMetadata(KnownType.System_Int64, long.MinValue, long.MaxValue),
-            new FullFunctionalityTypeMetadata(KnownType.System_Single, long.MinValue, long.MaxValue),
+            if (FindConstant(semanticModel, expectedConstant, Convert.ToDouble) is { } constant
+                && semanticModel.GetSymbolInfo(value).Symbol.GetSymbolType() is { } symbol
+                && Ranges.FirstOrDefault(x => symbol.Is(x.Type)) is { } range)
+            {
+                // Implement out-of-range checks for the types that CS0652 does not.
+                if (symbol.IsAny(FullyImplementedTypes) && (constant < range.MinValue || constant > range.MaxValue))
+                {
+                    return true;
+                }
+
+                // Implement threshold checks for every type.
+                return GetThreshold(kind, constantIsLeft, range) is { } threshold && constant == threshold;
+            }
+
+            return false;
+        }
+
+        private static double? GetThreshold(SyntaxKind operation, bool constantIsLeft, TypeRange range)
+        {
+            if (constantIsLeft)
+            {
+                return operation switch
+                {
+                    SyntaxKind.LessThanExpression => range.MaxValue, // T.MaxValue < x
+                    SyntaxKind.LessThanOrEqualExpression => range.MinValue, // T.MinValue <= x
+                    SyntaxKind.GreaterThanExpression => range.MinValue, // T.MinValue > x
+                    SyntaxKind.GreaterThanOrEqualExpression => range.MaxValue, //  T.MaxValue >= x
+                    _ => null
+                };
+            }
+            else
+            {
+
+                return operation switch
+                {
+                    SyntaxKind.LessThanExpression => range.MinValue, // x < T.MinValue
+                    SyntaxKind.LessThanOrEqualExpression => range.MaxValue, // x <= T.MaxValue
+                    SyntaxKind.GreaterThanExpression => range.MaxValue, // x > T.MaxValue
+                    SyntaxKind.GreaterThanOrEqualExpression => range.MinValue, // x >= T.MinValue
+                    _ => null
+                };
+            }
+        }
+
+        private static readonly KnownType[] FullyImplementedTypes = new[]
+        {
+            KnownType.System_Half,
+            KnownType.System_Single,
         };
 
-        private abstract class TypeMetadata
+        private static readonly TypeRange[] Ranges = new[]
+        {
+            new TypeRange(KnownType.System_SByte, sbyte.MinValue, sbyte.MaxValue),
+            new TypeRange(KnownType.System_Byte, byte.MinValue, byte.MaxValue),
+            new TypeRange(KnownType.System_Int16, short.MinValue, short.MaxValue),
+            new TypeRange(KnownType.System_UInt16, ushort.MinValue, ushort.MaxValue),
+            new TypeRange(KnownType.System_Int32, int.MinValue, int.MaxValue),
+            new TypeRange(KnownType.System_UInt32, uint.MinValue, uint.MaxValue),
+            new TypeRange(KnownType.System_Int64, long.MinValue, long.MaxValue),
+            new TypeRange(KnownType.System_UInt64, ulong.MinValue, ulong.MaxValue),
+            new TypeRange(KnownType.System_Single, float.MinValue, float.MaxValue),
+            //new TypeRange(KnownType.System_Half, half.MinValue, half.MaxValue),
+        };
+
+        private class TypeRange
         {
             public KnownType Type { get; init; }
             public double MinValue { get; init; }
             public double MaxValue { get; init; }
 
-            protected TypeMetadata(KnownType type, double minValue, double maxValue)
+            public TypeRange(KnownType type, double minValue, double maxValue)
             {
                 Type = type;
                 MinValue = minValue;
                 MaxValue = maxValue;
             }
-
-            public virtual bool Less(double constant) => false;
-            public virtual bool Greater(double constant) => false;
-
-            public abstract bool LessOrEqual(double constant);
-            public abstract bool GreaterOrEqual(double constant);
-        }
-
-        private class LimitedFunctionalityTypeMetadata : TypeMetadata // For types that are already semi-covered by CS0652
-        {
-            public LimitedFunctionalityTypeMetadata(KnownType type, double minValue, double maxValue)
-                : base(type, minValue, maxValue)
-            { }
-
-            public override bool GreaterOrEqual(double constant) => // something >= constant
-                constant == MinValue;
-
-            public override bool LessOrEqual(double constant) => // something <= constant
-                constant == MaxValue;
-        }
-
-        private class FullFunctionalityTypeMetadata : TypeMetadata // For types that are not covered by CS0652
-        {
-            public FullFunctionalityTypeMetadata(KnownType type, double minValue, double maxValue)
-                : base(type, minValue, maxValue)
-            { }
-
-            public override bool Greater(double constant) => // something > constant
-                constant < MinValue;
-
-            public override bool Less(double constant) => // something < constant
-                constant > MaxValue;
-
-            public override bool GreaterOrEqual(double constant) => // something >= constant
-                constant <= MinValue;
-
-            public override bool LessOrEqual(double constant) => // something <= constant
-                constant >= MaxValue;
         }
     }
 }
