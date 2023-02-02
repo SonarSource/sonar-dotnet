@@ -39,7 +39,6 @@ namespace Tests.Diagnostics
 
         private record struct UnusedNested1(string Name, int CategoryId); // Noncompliant
 //                            ^^^^^^^^^^^^^
-
         internal record struct UnusedNested2(string Name, int CategoryId); // Noncompliant
         public record struct UnusedNested3(string Name, int CategoryId);
         record struct UnusedNested4(string Name, int CategoryId); // Noncompliant
