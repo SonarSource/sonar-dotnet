@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "sources\Net5\Net5\AttributesOnLocalFunctions.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  14,
+"endLine":  11,
+"endColumn":  22
+}
+}
+}
+]
+}

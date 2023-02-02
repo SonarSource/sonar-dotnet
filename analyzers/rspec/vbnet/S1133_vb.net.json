@@ -1,0 +1,17 @@
+{
+  "title": "Deprecated code should be removed",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "10min"
+  },
+  "tags": [
+    "obsolete"
+  ],
+  "defaultSeverity": "Info",
+  "ruleSpecification": "RSPEC-1133",
+  "sqKey": "S1133",
+  "scope": "All",
+  "quickfix": "unknown"
+}
