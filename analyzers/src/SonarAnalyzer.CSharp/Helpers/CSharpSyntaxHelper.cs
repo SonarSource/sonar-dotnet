@@ -270,6 +270,7 @@ namespace SonarAnalyzer.Helpers
                 UsingDirectiveSyntax { Alias.Name: { } name } => GetIdentifier(name),
                 VariableDeclaratorSyntax { Identifier: var identifier } => identifier,
                 { } refType when RefTypeSyntaxWrapper.IsInstance(refType) => GetIdentifier(((RefTypeSyntaxWrapper)refType).Type),
+                { } localFunction when LocalFunctionStatementSyntaxWrapper.IsInstance(localFunction) => ((LocalFunctionStatementSyntaxWrapper)localFunction).Identifier,
                 _ => null
             };
 
