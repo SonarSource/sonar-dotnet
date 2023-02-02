@@ -51,6 +51,10 @@ namespace SonarAnalyzer.UnitTest.Rules
             var expectedPath = ExecuteAnalyzer(languageName, true, 1000);  // Requiring too high Roslyn version => we're under unsupported scenario
             File.Exists(expectedPath).Should().BeTrue();
             File.ReadAllText(expectedPath).Should().Be(@"[{""text"": ""Analysis using MsBuild 14 and 15 build tools is deprecated. Please update your pipeline to MsBuild 16 or higher.""}]");
+
+            // Lock file and run it for 2nd time
+            using var lockedFile = new FileStream(expectedPath, FileMode.Open, FileAccess.Write, FileShare.None);
+            ExecuteAnalyzer(languageName, true, 1000).Should().Be(expectedPath, "path should be reused and analyzer should not fail");
         }
 
         private string ExecuteAnalyzer(string languageName, bool isAnalyzerEnabled, int minimalSupportedRoslynVersion)

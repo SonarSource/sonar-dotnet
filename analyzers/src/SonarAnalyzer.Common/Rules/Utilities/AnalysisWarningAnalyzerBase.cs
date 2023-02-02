@@ -28,6 +28,8 @@ public abstract class AnalysisWarningAnalyzerBase : UtilityAnalyzerBase
     private const string DiagnosticId = "S9999-warning";
     private const string Title = "Analysis Warning generator";
 
+    private static readonly object FileWriteLock = new();
+
     protected virtual int MinimalSupportedRoslynVersion { get; } = RoslynHelper.MinimalSupportedMajorVersion;   // For testing
 
     protected AnalysisWarningAnalyzerBase() : base(DiagnosticId, Title) { }
@@ -40,9 +42,19 @@ public abstract class AnalysisWarningAnalyzerBase : UtilityAnalyzerBase
             {
                 // This can be removed after we bump Microsoft.CodeAnalysis references to 3.0 or higher.
                 var path = Path.GetFullPath(Path.Combine(OutPath, "../../AnalysisWarnings.MsBuild.json"));
-                if (!File.Exists(path))
+                lock (FileWriteLock)
                 {
-                    File.WriteAllText(path, @"[{""text"": ""Analysis using MsBuild 14 and 15 build tools is deprecated. Please update your pipeline to MsBuild 16 or higher.""}]");
+                    if (!File.Exists(path))
+                    {
+                        try
+                        {
+                            File.WriteAllText(path, @"[{""text"": ""Analysis using MsBuild 14 and 15 build tools is deprecated. Please update your pipeline to MsBuild 16 or higher.""}]");
+                        }
+                        catch
+                        {
+                            // Nothing to do here. Two compilations running on two different processes are unlikely to lock each other out on a small file write.
+                        }
+                    }
                 }
             }
         });
