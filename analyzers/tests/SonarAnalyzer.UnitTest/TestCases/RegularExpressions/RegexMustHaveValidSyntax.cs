@@ -10,12 +10,12 @@ class Compliant
 
         var namedArgs = new Regex(
             options: RegexOptions.None,
-            pattern: "some pattern");
+            pattern: "valid pattern");
     }
 
     void Static()
     {
-        var isMatch = Regex.IsMatch("some input", "some pattern", RegexOptions.None); // Compliant
+        var isMatch = Regex.IsMatch("some input", "valid pattern", RegexOptions.None); // Compliant
     }
 
     [RegularExpression("[0-9]+")] // Compliant
@@ -36,8 +36,9 @@ class Noncompliant
         //                                        ^^^^
         var match = Regex.Match("some input", "[A");        // Noncompliant
         var matches = Regex.Matches("some input", "[A");    // Noncompliant
-        var replace = Regex.Replace("some input", "[A", "some replacement"); // Noncompliant
         var split = Regex.Split("some input", "[A");        // Noncompliant
+
+        var replace = Regex.Replace("some input", "[A", "some replacement"); // Noncompliant
     }
 
     [RegularExpression("[A")] // Noncompliant

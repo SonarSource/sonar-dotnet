@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Text.RegularExpressions;
+using SonarAnalyzer.RegularExpressions;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
@@ -51,4 +53,12 @@ public class RegexMustHaveValidSyntaxTest
     [TestMethod]
     public void RegexMustHaveValidSyntax_VB() =>
         builderVB.AddPaths("RegexMustHaveValidSyntax.vb").Verify();
+
+    [DataTestMethod]
+    [DataRow("[A", RegexOptions.None)]
+#if NET7_0_OR_GREATER
+    [DataRow(@"^([0-9]{2})(?<!00)$", RegexOptions.NonBacktracking)]
+#endif
+    public void Invalid_input_is_detected(string pattern, RegexOptions options) =>
+        new RegexContext(null, pattern, null, options).ParseError.Should().NotBeNull();
 }
