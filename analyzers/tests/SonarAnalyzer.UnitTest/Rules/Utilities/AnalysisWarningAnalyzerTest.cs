@@ -57,11 +57,24 @@ namespace SonarAnalyzer.UnitTest.Rules
             ExecuteAnalyzer(languageName, true, 1000).Should().Be(expectedPath, "path should be reused and analyzer should not fail");
         }
 
-        private string ExecuteAnalyzer(string languageName, bool isAnalyzerEnabled, int minimalSupportedRoslynVersion)
+        [DataTestMethod]
+        [DataRow(LanguageNames.CSharp)]
+        [DataRow(LanguageNames.VisualBasic)]
+        public void FileExceptions_AreIgnored(string languageName)
+        {
+            // This will not create the output directory, causing an exception in the File.WriteAllText(...)
+            var expectedPath = ExecuteAnalyzer(languageName, true, 1000, false);  // Requiring too high Roslyn version => we're under unsupported scenario
+            File.Exists(expectedPath).Should().BeFalse();
+        }
+
+        private string ExecuteAnalyzer(string languageName, bool isAnalyzerEnabled, int minimalSupportedRoslynVersion, bool createDirectory = true)
         {
             var language = AnalyzerLanguage.FromName(languageName);
             var outPath = TestHelper.TestPath(TestContext, @".sonarqube\out");
-            Directory.CreateDirectory(outPath);
+            if (createDirectory)
+            {
+                Directory.CreateDirectory(outPath);
+            }
             UtilityAnalyzerBase analyzer = language.LanguageName switch
             {
                 LanguageNames.CSharp => new TestAnalysisWarningAnalyzer_CS(isAnalyzerEnabled, minimalSupportedRoslynVersion, outPath),
