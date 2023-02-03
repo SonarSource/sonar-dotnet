@@ -139,12 +139,6 @@ stages:
           path: '$(UnitTestProjectPath)\bin'
           artifact: TestBinaries
 
-      - task: PublishPipelineArtifact@1
-        displayName: 'Publish rule descriptor binaries as pipeline artifact'
-        inputs:
-          path: analyzers\src\SonarAnalyzer.RuleDescriptorGenerator\bin
-          artifact: RuleDescriptorBin
-
 - template: stage-with-burgr-notifications.yml@pipelines-yaml-templates
   parameters:
     burgrName: 'qa'
@@ -369,12 +363,6 @@ stages:
           artifact: Binaries
           targetPath: 'analyzers/packaging/binaries/'
 
-      - task: DownloadPipelineArtifact@2
-        displayName: 'Download rule descriptor binaries'
-        inputs:
-          artifact: RuleDescriptorBin
-          targetPath: analyzers\src\SonarAnalyzer.RuleDescriptorGenerator\bin
-
       - template: set-azp-variables-steps.yml@pipelines-yaml-templates
 
       - task: DownloadSecureFile@1
@@ -438,12 +426,6 @@ stages:
           artifact: Binaries
           targetPath: 'analyzers/packaging/binaries/'
 
-      - task: DownloadPipelineArtifact@2
-        displayName: 'Download rule descriptor binaries'
-        inputs:
-          artifact: RuleDescriptorBin
-          targetPath: 'analyzers\src\SonarAnalyzer.RuleDescriptorGenerator\bin'
-
       - task: SonarCloudPrepare@1
         displayName: 'Prepare code analysis for Java plugin'
         inputs:
@@ -497,12 +479,6 @@ stages:
         inputs:
           artifact: Binaries
           targetPath: 'analyzers/packaging/binaries/'
-
-      - task: DownloadPipelineArtifact@2
-        displayName: 'Download rule descriptor binaries'
-        inputs:
-          artifact: RuleDescriptorBin
-          targetPath: 'analyzers\src\SonarAnalyzer.RuleDescriptorGenerator\bin'
 
       - template: set-azp-variables-steps.yml@pipelines-yaml-templates
 
