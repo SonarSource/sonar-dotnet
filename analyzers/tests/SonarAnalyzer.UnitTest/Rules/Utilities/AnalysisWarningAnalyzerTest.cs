@@ -25,88 +25,87 @@ using SonarAnalyzer.Rules;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.UnitTest.Rules;
+
+[TestClass]
+public class AnalysisWarningAnalyzerTest
 {
-    [TestClass]
-    public class AnalysisWarningAnalyzerTest
+    public TestContext TestContext { get; set; }
+
+    [DataTestMethod]
+    [DataRow(LanguageNames.CSharp, true)]
+    [DataRow(LanguageNames.CSharp, false)]
+    [DataRow(LanguageNames.VisualBasic, true)]
+    [DataRow(LanguageNames.VisualBasic, false)]
+    public void SupportedRoslyn(string languageName, bool isAnalyzerEnabled)
     {
-        public TestContext TestContext { get; set; }
+        var expectedPath = ExecuteAnalyzer(languageName, isAnalyzerEnabled, RoslynHelper.MinimalSupportedMajorVersion); // Using production value that is lower than our UT Roslyn version
+        File.Exists(expectedPath).Should().BeFalse("Analysis warning file should not be generated.");
+    }
 
-        [DataTestMethod]
-        [DataRow(LanguageNames.CSharp, true)]
-        [DataRow(LanguageNames.CSharp, false)]
-        [DataRow(LanguageNames.VisualBasic, true)]
-        [DataRow(LanguageNames.VisualBasic, false)]
-        public void SupportedRoslyn(string languageName, bool isAnalyzerEnabled)
+    [DataTestMethod]
+    [DataRow(LanguageNames.CSharp)]
+    [DataRow(LanguageNames.VisualBasic)]
+    public void OldRoslyn(string languageName)
+    {
+        var expectedPath = ExecuteAnalyzer(languageName, true, 1000);  // Requiring too high Roslyn version => we're under unsupported scenario
+        File.Exists(expectedPath).Should().BeTrue();
+        File.ReadAllText(expectedPath).Should().Be("""[{"text": "Analysis using MsBuild 14 and 15 build tools is deprecated. Please update your pipeline to MsBuild 16 or higher."}]""");
+
+        // Lock file and run it for 2nd time
+        using var lockedFile = new FileStream(expectedPath, FileMode.Open, FileAccess.Write, FileShare.None);
+        ExecuteAnalyzer(languageName, true, 1000).Should().Be(expectedPath, "path should be reused and analyzer should not fail");
+    }
+
+    [DataTestMethod]
+    [DataRow(LanguageNames.CSharp)]
+    [DataRow(LanguageNames.VisualBasic)]
+    public void FileExceptions_AreIgnored(string languageName)
+    {
+        // This will not create the output directory, causing an exception in the File.WriteAllText(...)
+        var expectedPath = ExecuteAnalyzer(languageName, true, 1000, false);  // Requiring too high Roslyn version => we're under unsupported scenario
+        File.Exists(expectedPath).Should().BeFalse();
+    }
+
+    private string ExecuteAnalyzer(string languageName, bool isAnalyzerEnabled, int minimalSupportedRoslynVersion, bool createDirectory = true)
+    {
+        var language = AnalyzerLanguage.FromName(languageName);
+        var outPath = TestHelper.TestPath(TestContext, @".sonarqube\out");
+        if (createDirectory)
         {
-            var expectedPath = ExecuteAnalyzer(languageName, isAnalyzerEnabled, RoslynHelper.MinimalSupportedMajorVersion); // Using production value that is lower than our UT Roslyn version
-            File.Exists(expectedPath).Should().BeFalse("Analysis warning file should not be generated.");
+            Directory.CreateDirectory(outPath);
         }
-
-        [DataTestMethod]
-        [DataRow(LanguageNames.CSharp)]
-        [DataRow(LanguageNames.VisualBasic)]
-        public void OldRoslyn(string languageName)
+        UtilityAnalyzerBase analyzer = language.LanguageName switch
         {
-            var expectedPath = ExecuteAnalyzer(languageName, true, 1000);  // Requiring too high Roslyn version => we're under unsupported scenario
-            File.Exists(expectedPath).Should().BeTrue();
-            File.ReadAllText(expectedPath).Should().Be(@"[{""text"": ""Analysis using MsBuild 14 and 15 build tools is deprecated. Please update your pipeline to MsBuild 16 or higher.""}]");
+            LanguageNames.CSharp => new TestAnalysisWarningAnalyzer_CS(isAnalyzerEnabled, minimalSupportedRoslynVersion, outPath),
+            LanguageNames.VisualBasic => new TestAnalysisWarningAnalyzer_VB(isAnalyzerEnabled, minimalSupportedRoslynVersion, outPath),
+            _ => throw new UnexpectedLanguageException(language)
+        };
+        new VerifierBuilder().AddAnalyzer(() => analyzer).AddSnippet(string.Empty).VerifyNoIssueReported(); // Nothing to analyze, just make it run
+        return Path.Combine(outPath, "AnalysisWarnings.MsBuild.json");
+    }
 
-            // Lock file and run it for 2nd time
-            using var lockedFile = new FileStream(expectedPath, FileMode.Open, FileAccess.Write, FileShare.None);
-            ExecuteAnalyzer(languageName, true, 1000).Should().Be(expectedPath, "path should be reused and analyzer should not fail");
+    private sealed class TestAnalysisWarningAnalyzer_CS : CS.AnalysisWarningAnalyzer
+    {
+        protected override int MinimalSupportedRoslynVersion { get; }
+
+        public TestAnalysisWarningAnalyzer_CS(bool isAnalyzerEnabled, int minimalSupportedRoslynVersion, string outPath)
+        {
+            IsAnalyzerEnabled = isAnalyzerEnabled;
+            MinimalSupportedRoslynVersion = minimalSupportedRoslynVersion;
+            OutPath = Path.GetFullPath(Path.Combine(outPath, "0", "output-language"));
         }
+    }
 
-        [DataTestMethod]
-        [DataRow(LanguageNames.CSharp)]
-        [DataRow(LanguageNames.VisualBasic)]
-        public void FileExceptions_AreIgnored(string languageName)
+    private sealed class TestAnalysisWarningAnalyzer_VB : VB.AnalysisWarningAnalyzer
+    {
+        protected override int MinimalSupportedRoslynVersion { get; }
+
+        public TestAnalysisWarningAnalyzer_VB(bool isAnalyzerEnabled, int minimalSupportedRoslynVersion, string outPath)
         {
-            // This will not create the output directory, causing an exception in the File.WriteAllText(...)
-            var expectedPath = ExecuteAnalyzer(languageName, true, 1000, false);  // Requiring too high Roslyn version => we're under unsupported scenario
-            File.Exists(expectedPath).Should().BeFalse();
-        }
-
-        private string ExecuteAnalyzer(string languageName, bool isAnalyzerEnabled, int minimalSupportedRoslynVersion, bool createDirectory = true)
-        {
-            var language = AnalyzerLanguage.FromName(languageName);
-            var outPath = TestHelper.TestPath(TestContext, @".sonarqube\out");
-            if (createDirectory)
-            {
-                Directory.CreateDirectory(outPath);
-            }
-            UtilityAnalyzerBase analyzer = language.LanguageName switch
-            {
-                LanguageNames.CSharp => new TestAnalysisWarningAnalyzer_CS(isAnalyzerEnabled, minimalSupportedRoslynVersion, outPath),
-                LanguageNames.VisualBasic => new TestAnalysisWarningAnalyzer_VB(isAnalyzerEnabled, minimalSupportedRoslynVersion, outPath),
-                _ => throw new UnexpectedLanguageException(language)
-            };
-            new VerifierBuilder().AddAnalyzer(() => analyzer).AddSnippet(string.Empty).VerifyNoIssueReported(); // Nothing to analyze, just make it run
-            return Path.Combine(outPath, "AnalysisWarnings.MsBuild.json");
-        }
-
-        private sealed class TestAnalysisWarningAnalyzer_CS : CS.AnalysisWarningAnalyzer
-        {
-            protected override int MinimalSupportedRoslynVersion { get; }
-
-            public TestAnalysisWarningAnalyzer_CS(bool isAnalyzerEnabled, int minimalSupportedRoslynVersion, string outPath)
-            {
-                IsAnalyzerEnabled = isAnalyzerEnabled;
-                MinimalSupportedRoslynVersion = minimalSupportedRoslynVersion;
-                OutPath = Path.GetFullPath(Path.Combine(outPath, "0", "output-language"));
-            }
-        }
-
-        private sealed class TestAnalysisWarningAnalyzer_VB : VB.AnalysisWarningAnalyzer
-        {
-            protected override int MinimalSupportedRoslynVersion { get; }
-
-            public TestAnalysisWarningAnalyzer_VB(bool isAnalyzerEnabled, int minimalSupportedRoslynVersion, string outPath)
-            {
-                IsAnalyzerEnabled = isAnalyzerEnabled;
-                MinimalSupportedRoslynVersion = minimalSupportedRoslynVersion;
-                OutPath = outPath;
-            }
+            IsAnalyzerEnabled = isAnalyzerEnabled;
+            MinimalSupportedRoslynVersion = minimalSupportedRoslynVersion;
+            OutPath = outPath;
         }
     }
 }

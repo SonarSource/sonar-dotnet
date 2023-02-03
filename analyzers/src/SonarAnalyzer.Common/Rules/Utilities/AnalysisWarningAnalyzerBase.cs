@@ -36,26 +36,26 @@ public abstract class AnalysisWarningAnalyzerBase : UtilityAnalyzerBase
 
     protected sealed override void Initialize(SonarAnalysisContext context) =>
         context.RegisterCompilationAction(c =>
-        {
-            ReadParameters(c);
-            if (IsAnalyzerEnabled && !RoslynHelper.IsRoslynCfgSupported(MinimalSupportedRoslynVersion))     // MsBuild 15 is bound with Roslyn 2.x, where Roslyn CFG is not available.
             {
-                // This can be removed after we bump Microsoft.CodeAnalysis references to 3.0 or higher.
-                var path = Path.GetFullPath(Path.Combine(OutPath, "../../AnalysisWarnings.MsBuild.json"));
-                lock (FileWriteLock)
+                ReadParameters(c);
+                if (IsAnalyzerEnabled && !RoslynHelper.IsRoslynCfgSupported(MinimalSupportedRoslynVersion))     // MsBuild 15 is bound with Roslyn 2.x, where Roslyn CFG is not available.
                 {
-                    if (!File.Exists(path))
+                    // This can be removed after we bump Microsoft.CodeAnalysis references to 3.0 or higher.
+                    var path = Path.GetFullPath(Path.Combine(OutPath, "../../AnalysisWarnings.MsBuild.json"));
+                    lock (FileWriteLock)
                     {
-                        try
+                        if (!File.Exists(path))
                         {
-                            File.WriteAllText(path, @"[{""text"": ""Analysis using MsBuild 14 and 15 build tools is deprecated. Please update your pipeline to MsBuild 16 or higher.""}]");
-                        }
-                        catch
-                        {
-                            // Nothing to do here. Two compilations running on two different processes are unlikely to lock each other out on a small file write.
+                            try
+                            {
+                                File.WriteAllText(path, """[{"text": "Analysis using MsBuild 14 and 15 build tools is deprecated. Please update your pipeline to MsBuild 16 or higher."}]""");
+                            }
+                            catch
+                            {
+                                // Nothing to do here. Two compilations running on two different processes are unlikely to lock each other out on a small file write.
+                            }
                         }
                     }
                 }
-            }
-        });
+            });
 }
