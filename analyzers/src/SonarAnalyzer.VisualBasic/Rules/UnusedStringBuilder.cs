@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Text;
-
 namespace SonarAnalyzer.Rules.VisualBasic;
 
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
@@ -32,15 +30,18 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
     protected override bool NeedsToTrack(VariableDeclaratorSyntax expression, SemanticModel semanticModel) =>
         expression.Initializer is not null
         && expression.Initializer.Value is ObjectCreationExpressionSyntax objectCreation
-        && objectCreation.Type.ToString().Equals(nameof(StringBuilder));
+        && objectCreation.Type.IsKnownType(KnownType.System_Text_StringBuilder, semanticModel);
 
-    protected override SyntaxNode GetAncestorBlock(VariableDeclaratorSyntax declaration) =>
-        declaration.Ancestors().OfType<MethodBlockBaseSyntax>().First();
+    protected override IList<InvocationExpressionSyntax> GetInvocations(VariableDeclaratorSyntax declaration) =>
+        declaration.Parent.Parent.Parent.DescendantNodes().OfType<InvocationExpressionSyntax>().ToList();
 
-    protected override bool IsIsStringInvoked(string variableName, IList<InvocationExpressionSyntax> invocations) =>
+    protected override IList<ReturnStatementSyntax> GetReturnStatements(VariableDeclaratorSyntax declaration) =>
+        declaration.Parent.Parent.Parent.DescendantNodes().OfType<ReturnStatementSyntax>().ToList();
+
+    protected override bool IsStringBuilderAccessed(string variableName, IList<InvocationExpressionSyntax> invocations) =>
         invocations.Any(x => x.Expression is MemberAccessExpressionSyntax { } member
             && IsSameVariable(member.Expression, variableName)
-            && member.NameIs(nameof(ToString)));
+            && StringBuilderAccessMethods.Contains(member.GetName()));
 
     protected override bool IsPassedToMethod(string variableName, IList<InvocationExpressionSyntax> invocations) =>
         invocations.Any(x => x.ArgumentList.Arguments.Any(y => IsSameVariable(y.GetExpression(), variableName)));

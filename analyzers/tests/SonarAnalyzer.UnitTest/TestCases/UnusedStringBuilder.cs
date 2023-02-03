@@ -3,7 +3,7 @@ using System.Text;
 
 public class Program
 {
-    public StringBuilder MyMethod(StringBuilder builder) // Compliant
+    public StringBuilder MyMethod(StringBuilder builder, string myString) // Compliant
     {
         StringBuilder builder1 = GetStringBuilder(); // Compliant
 
@@ -34,6 +34,35 @@ public class Program
 
         StringBuilder builder11 = new StringBuilder(); // Compliant
         var c = builder11.Append("").Append("").Append("").Append("").ToString().ToLower();
+
+        StringBuilder builder12 = new StringBuilder(); // Compliant
+        builder12.CopyTo(0, new char[1], 0, 1);
+
+        StringBuilder builder13 = new StringBuilder(); // Compliant
+        var d = builder13.GetChunks();
+
+        StringBuilder builder14 = new StringBuilder(); // Noncompliant FP
+        var m = builder14[0];
+
+        StringBuilder builder15 = new StringBuilder(); // Noncompliant FP
+        builder15?.ToString();
+
+        if (true)
+        {
+            if (true)
+            {
+                if (true)
+                {
+                    if (true)
+                    {
+                        if (true)
+                        {
+                            var builder16 = new StringBuilder(); // Noncompliant
+                        }
+                    }
+                }
+            }
+        }
 
         (StringBuilder, StringBuilder) builderTuple = (new StringBuilder(), new StringBuilder()); // FN
 

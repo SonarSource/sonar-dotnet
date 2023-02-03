@@ -1,8 +1,8 @@
 ﻿using System.Text;
 
-StringBuilder builder1 = new(); // Compliant
-StringBuilder builder2 = new(); // FN (Top level statement not covered yet)
-builder2.Append(builder1.ToString());
+StringBuilder builder1 = new(); // Noncompliant
+StringBuilder builder2 = new(); // Compliant
+builder1.Append(builder2.ToString());
 
 public class MyClass
 {

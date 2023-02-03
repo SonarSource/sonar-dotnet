@@ -32,13 +32,20 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
         && declaration.Initializer.Value is { } expression
         && IsStringBuilderObjectCreation(expression, semanticModel);
 
-    protected override SyntaxNode GetAncestorBlock(VariableDeclaratorSyntax declaration) =>
-        declaration.Ancestors().OfType<BlockSyntax>().FirstOrDefault();
+    protected override IList<InvocationExpressionSyntax> GetInvocations(VariableDeclaratorSyntax declaration) =>
+        declaration.IsTopLevel()
+        ? GetTopLevelInvocations(declaration)
+        : declaration.Parent.Parent.Parent.DescendantNodes().OfType<InvocationExpressionSyntax>().ToList();
 
-    protected override bool IsIsStringInvoked(string variableName, IList<InvocationExpressionSyntax> invocations) =>
+    protected override IList<ReturnStatementSyntax> GetReturnStatements(VariableDeclaratorSyntax declaration) =>
+        declaration.IsTopLevel()
+        ? new()
+        : declaration.Parent.Parent.Parent.DescendantNodes().OfType<ReturnStatementSyntax>().ToList();
+
+    protected override bool IsStringBuilderAccessed(string variableName, IList<InvocationExpressionSyntax> invocations) =>
         invocations.Any(x => x.Expression is MemberAccessExpressionSyntax { } member
             && IsSameVariable(member.Expression, variableName)
-            && member.NameIs(nameof(ToString)));
+            && StringBuilderAccessMethods.Contains(member.GetName()));
 
     protected override bool IsPassedToMethod(string variableName, IList<InvocationExpressionSyntax> invocations) =>
         invocations.Any(x => x.ArgumentList.Arguments.Any(y => IsSameVariable(y.Expression, variableName)));
@@ -52,4 +59,17 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
 
     private static bool IsSameVariable(ExpressionSyntax expression, string variableName) =>
         expression.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Any(p => p.NameIs(variableName));
+
+    private static IList<InvocationExpressionSyntax> GetTopLevelInvocations(VariableDeclaratorSyntax declaration)
+    {
+        List<InvocationExpressionSyntax> list = new();
+        foreach (var globalStatement in declaration.Parent.Parent.Parent.Parent.DescendantNodes().OfType<GlobalStatementSyntax>())
+        {
+            foreach (var invocation in globalStatement.DescendantNodes().OfType<InvocationExpressionSyntax>())
+            {
+                list.Add(invocation);
+            }
+        }
+        return list;
+    }
 }

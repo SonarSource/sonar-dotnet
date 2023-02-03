@@ -29,10 +29,13 @@ public abstract class UnusedStringBuilderBase<TSyntaxKind, TVariableDeclarator, 
     private const string DiagnosticId = "S3063";
     protected override string MessageFormat => """Remove this "StringBuilder"; ".ToString()" is never called.""";
 
+    internal readonly string[] StringBuilderAccessMethods = { "ToString", "CopyTo", "GetChunks" };
+
     protected abstract string GetVariableName(TVariableDeclarator declaration);
     protected abstract bool NeedsToTrack(TVariableDeclarator declaration, SemanticModel semanticModel);
-    protected abstract SyntaxNode GetAncestorBlock(TVariableDeclarator declaration);
-    protected abstract bool IsIsStringInvoked(string variableName, IList<TInvocationExpression> invocations);
+    protected abstract IList<TInvocationExpression> GetInvocations(TVariableDeclarator declaration);
+    protected abstract IList<TReturnStatement> GetReturnStatements(TVariableDeclarator declaration);
+    protected abstract bool IsStringBuilderAccessed(string variableName, IList<TInvocationExpression> invocations);
     protected abstract bool IsPassedToMethod(string variableName, IList<TInvocationExpression> invocations);
     protected abstract bool IsReturned(string variableName, IList<TReturnStatement> returnStatements);
 
@@ -47,15 +50,10 @@ public abstract class UnusedStringBuilderBase<TSyntaxKind, TVariableDeclarator, 
                 return;
             }
             var variableName = GetVariableName(variableDeclaration);
-            var block = GetAncestorBlock(variableDeclaration);
-            if (block == null || string.IsNullOrEmpty(variableName))
-            {
-                return;
-            }
-            var invocations = block.DescendantNodes().OfType<TInvocationExpression>().ToList();
-            if (IsIsStringInvoked(variableName, invocations)
+            var invocations = GetInvocations(variableDeclaration);
+            if (IsStringBuilderAccessed(variableName, invocations)
                 || IsPassedToMethod(variableName, invocations)
-                || IsReturned(variableName, block.DescendantNodes().OfType<TReturnStatement>().ToList()))
+                || IsReturned(variableName, GetReturnStatements(variableDeclaration)))
             {
                 return;
             }
