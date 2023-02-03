@@ -22,7 +22,6 @@ package com.sonar.it.vbnet;
 import com.sonar.it.shared.TestUtils;
 import com.sonar.it.shared.WebConfigBase;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.sonarqube.ws.Hotspots;
 
