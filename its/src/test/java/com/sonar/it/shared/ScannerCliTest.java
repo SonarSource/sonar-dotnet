@@ -107,8 +107,10 @@ public class ScannerCliTest {
   }
 
   private SonarScanner getSonarScanner(String projectKey, String projectDir) {
-    return SonarScanner.create(new File(projectDir))
+    File projectDirPath = new File(projectDir);
+    return SonarScanner.create(projectDirPath)
       .setProjectKey(projectKey)
+      .setProperty("sonar.projectBaseDir", projectDirPath.getAbsolutePath())
       .setSourceDirs(".");
   }
 }
