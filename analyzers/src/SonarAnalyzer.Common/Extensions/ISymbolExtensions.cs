@@ -36,5 +36,8 @@ namespace SonarAnalyzer.Helpers
 
         public static bool IsGlobalNamespace(this ISymbol symbol) =>
             symbol is INamespaceSymbol { Name: "" };
+
+        public static bool IsInSameAssembly(this ISymbol symbol, ISymbol anotherSymbol) =>
+            symbol.ContainingAssembly.Equals(anotherSymbol.ContainingAssembly);
     }
 }
