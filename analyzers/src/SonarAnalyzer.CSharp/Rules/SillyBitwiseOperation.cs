@@ -88,97 +88,29 @@ namespace SonarAnalyzer.Rules.CSharp
         private void CheckComparison(SonarSyntaxNodeReportingContext context)
         {
             var binary = (BinaryExpressionSyntax)context.Node;
-            if (ShouldRaise(context.SemanticModel, binary.Left, binary.Right, binary.Kind(), false))
+            if (ShouldRaise(context.SemanticModel, binary.Left, binary.Right))
             {
                 context.ReportIssue(Diagnostic.Create(BitwiseRule, binary.GetLocation()));
             }
 
-            if (ShouldRaise(context.SemanticModel, binary.Right, binary.Left, binary.Kind(), true))
+            if (ShouldRaise(context.SemanticModel, binary.Right, binary.Left))
             {
                 context.ReportIssue(Diagnostic.Create(BitwiseRule, binary.GetLocation()));
             }
         }
 
-        private bool ShouldRaise(SemanticModel semanticModel, SyntaxNode value, SyntaxNode expectedConstant, SyntaxKind kind, bool constantIsLeft)
-        {
-            if (FindConstant(semanticModel, expectedConstant, Convert.ToDouble) is { } constant
-                && semanticModel.GetSymbolInfo(value).Symbol.GetSymbolType() is { } symbol
-                && Ranges.FirstOrDefault(x => symbol.Is(x.Type)) is { } range)
-            {
-                // Implement out-of-range checks for the types that CS0652 does not.
-                if (symbol.IsAny(FullyImplementedTypes) && (constant < range.MinValue || constant > range.MaxValue))
-                {
-                    return true;
-                }
-
-                // Implement threshold checks for every type.
-                return GetThreshold(kind, constantIsLeft, range) is { } threshold && constant == threshold;
-            }
-
-            return false;
-        }
-
-        private static double? GetThreshold(SyntaxKind operation, bool constantIsLeft, TypeRange range)
-        {
-            if (constantIsLeft)
-            {
-                return operation switch
-                {
-                    SyntaxKind.LessThanExpression => range.MaxValue, // T.MaxValue < x
-                    SyntaxKind.LessThanOrEqualExpression => range.MinValue, // T.MinValue <= x
-                    SyntaxKind.GreaterThanExpression => range.MinValue, // T.MinValue > x
-                    SyntaxKind.GreaterThanOrEqualExpression => range.MaxValue, //  T.MaxValue >= x
-                    _ => null
-                };
-            }
-            else
-            {
-
-                return operation switch
-                {
-                    SyntaxKind.LessThanExpression => range.MinValue, // x < T.MinValue
-                    SyntaxKind.LessThanOrEqualExpression => range.MaxValue, // x <= T.MaxValue
-                    SyntaxKind.GreaterThanExpression => range.MaxValue, // x > T.MaxValue
-                    SyntaxKind.GreaterThanOrEqualExpression => range.MinValue, // x >= T.MinValue
-                    _ => null
-                };
-            }
-        }
-
-        private static readonly KnownType[] FullyImplementedTypes = new[]
-        {
-            KnownType.System_Int64,
-            KnownType.System_UInt64,
-            KnownType.System_Half,
-            KnownType.System_Single,
-        };
+        private bool ShouldRaise(SemanticModel semanticModel, SyntaxNode value, SyntaxNode expectedConstant) =>
+            FindConstant(semanticModel, expectedConstant, Convert.ToDouble) is { } constant
+            && semanticModel.GetSymbolInfo(value).Symbol.GetSymbolType() is { } symbol
+            && Ranges.FirstOrDefault(x => symbol.Is(x.Type)) is { } range
+            && (constant < range.MinValue || constant > range.MaxValue);
 
         private static readonly TypeRange[] Ranges = new[]
         {
-            new TypeRange(KnownType.System_SByte, sbyte.MinValue, sbyte.MaxValue),
-            new TypeRange(KnownType.System_Byte, byte.MinValue, byte.MaxValue),
-            new TypeRange(KnownType.System_Int16, short.MinValue, short.MaxValue),
-            new TypeRange(KnownType.System_UInt16, ushort.MinValue, ushort.MaxValue),
-            new TypeRange(KnownType.System_Int32, int.MinValue, int.MaxValue),
-            new TypeRange(KnownType.System_UInt32, uint.MinValue, uint.MaxValue),
-            new TypeRange(KnownType.System_Int64, long.MinValue, long.MaxValue),
-            new TypeRange(KnownType.System_UInt64, ulong.MinValue, ulong.MaxValue),
             new TypeRange(KnownType.System_Single, float.MinValue, float.MaxValue),
             //new TypeRange(KnownType.System_Half, half.MinValue, half.MaxValue),
         };
 
-        private class TypeRange
-        {
-            public KnownType Type { get; init; }
-            public double MinValue { get; init; }
-            public double MaxValue { get; init; }
-
-            public TypeRange(KnownType type, double minValue, double maxValue)
-            {
-                Type = type;
-                MinValue = minValue;
-                MaxValue = maxValue;
-            }
-        }
+        private sealed record TypeRange(KnownType Type, double MinValue, double MaxValue);
     }
 }
