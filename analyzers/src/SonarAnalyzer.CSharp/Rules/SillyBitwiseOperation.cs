@@ -147,6 +147,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly KnownType[] FullyImplementedTypes = new[]
         {
+            KnownType.System_Int64,
+            KnownType.System_UInt64,
             KnownType.System_Half,
             KnownType.System_Single,
         };
