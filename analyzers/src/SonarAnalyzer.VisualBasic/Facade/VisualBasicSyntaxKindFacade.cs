@@ -25,6 +25,11 @@ internal sealed class VisualBasicSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind
     public SyntaxKind Attribute => SyntaxKind.Attribute;
     public SyntaxKind[] ClassAndRecordDeclaration => new[] { SyntaxKind.ClassBlock };
     public SyntaxKind ClassDeclaration => SyntaxKind.ClassBlock;
+    public SyntaxKind[] CommentTrivia => new[]
+    {
+        SyntaxKind.CommentTrivia,
+        SyntaxKind.DocumentationCommentTrivia,
+    };
     public SyntaxKind[] ComparisonKinds => new[]
     {
         SyntaxKind.GreaterThanExpression,
@@ -36,12 +41,15 @@ internal sealed class VisualBasicSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind
     };
     public SyntaxKind ConstructorDeclaration => SyntaxKind.ConstructorBlock;
     public SyntaxKind[] DefaultExpressions => new[] { SyntaxKind.NothingLiteralExpression };
+    public SyntaxKind EndOfLineTrivia => SyntaxKind.EndOfLineTrivia;
     public SyntaxKind EnumDeclaration => SyntaxKind.EnumStatement;
     public SyntaxKind FieldDeclaration => SyntaxKind.FieldDeclaration;
     public SyntaxKind IdentifierName => SyntaxKind.IdentifierName;
     public SyntaxKind IdentifierToken => SyntaxKind.IdentifierToken;
     public SyntaxKind InvocationExpression => SyntaxKind.InvocationExpression;
     public SyntaxKind InterpolatedStringExpression => SyntaxKind.InterpolatedStringExpression;
+    public SyntaxKind LeftShiftAssignmentStatement => SyntaxKind.LeftShiftAssignmentStatement;
+    public SyntaxKind LeftShiftExpression => SyntaxKind.LeftShiftExpression;
     public SyntaxKind LocalDeclaration => SyntaxKind.LocalDeclarationStatement;
     public SyntaxKind[] MethodDeclarations => new[] { SyntaxKind.FunctionStatement, SyntaxKind.SubStatement };
     public SyntaxKind[] ObjectCreationExpressions => new[] { SyntaxKind.ObjectCreationExpression };
@@ -49,13 +57,13 @@ internal sealed class VisualBasicSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind
     public SyntaxKind ParameterList => SyntaxKind.ParameterList;
     public SyntaxKind RefKeyword => SyntaxKind.ByRefKeyword;
     public SyntaxKind ReturnStatement => SyntaxKind.ReturnStatement;
+    public SyntaxKind RightShiftAssignmentStatement => SyntaxKind.RightShiftAssignmentStatement;
+    public SyntaxKind RightShiftExpression => SyntaxKind.RightShiftExpression;
     public SyntaxKind SimpleAssignment => SyntaxKind.SimpleAssignmentStatement;
+    public SyntaxKind SimpleCommentTrivia => SyntaxKind.CommentTrivia;
     public SyntaxKind SimpleMemberAccessExpression => SyntaxKind.SimpleMemberAccessExpression;
     public SyntaxKind[] StringLiteralExpressions => new[] { SyntaxKind.StringLiteralExpression };
     public SyntaxKind StructDeclaration => SyntaxKind.StructureBlock;
     public SyntaxKind[] TypeDeclaration => new[] { SyntaxKind.ClassBlock, SyntaxKind.StructureBlock, SyntaxKind.InterfaceBlock, SyntaxKind.EnumBlock };
-    public SyntaxKind LeftShiftExpression => SyntaxKind.LeftShiftExpression;
-    public SyntaxKind RightShiftExpression => SyntaxKind.RightShiftExpression;
-    public SyntaxKind LeftShiftAssignmentStatement => SyntaxKind.LeftShiftAssignmentStatement;
-    public SyntaxKind RightShiftAssignmentStatement => SyntaxKind.RightShiftAssignmentStatement;
+    public SyntaxKind WhitespaceTrivia => SyntaxKind.WhitespaceTrivia;
 }

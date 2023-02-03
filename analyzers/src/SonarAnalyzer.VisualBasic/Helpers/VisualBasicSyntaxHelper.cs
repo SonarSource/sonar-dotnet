@@ -98,6 +98,9 @@ internal static class VisualBasicSyntaxHelper
     public static bool IsAnyKind(this SyntaxToken syntaxToken, params SyntaxKind[] syntaxKinds) =>
         syntaxKinds.Contains((SyntaxKind)syntaxToken.RawKind);
 
+    public static bool IsAnyKind(this SyntaxTrivia syntaxTrivia, params SyntaxKind[] syntaxKinds) =>
+        syntaxKinds.Contains((SyntaxKind)syntaxTrivia.RawKind);
+
     public static bool AnyOfKind(this IEnumerable<SyntaxNode> nodes, SyntaxKind kind) =>
         nodes.Any(n => n.RawKind == (int)kind);
 

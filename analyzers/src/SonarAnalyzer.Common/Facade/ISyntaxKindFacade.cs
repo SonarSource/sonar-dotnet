@@ -26,29 +26,33 @@ public interface ISyntaxKindFacade<out TSyntaxKind>
     abstract TSyntaxKind Attribute { get; }
     abstract TSyntaxKind[] ClassAndRecordDeclaration { get; }
     abstract TSyntaxKind ClassDeclaration { get; }
+    abstract TSyntaxKind[] CommentTrivia { get; }
     abstract TSyntaxKind[] ComparisonKinds { get; }
     abstract TSyntaxKind ConstructorDeclaration { get; }
     abstract TSyntaxKind[] DefaultExpressions { get; }
+    abstract TSyntaxKind EndOfLineTrivia { get; }
     abstract TSyntaxKind EnumDeclaration { get; }
     abstract TSyntaxKind FieldDeclaration { get; }
     abstract TSyntaxKind IdentifierName { get; }
     abstract TSyntaxKind IdentifierToken { get; }
     abstract TSyntaxKind InvocationExpression { get; }
     abstract TSyntaxKind InterpolatedStringExpression { get; }
+    abstract TSyntaxKind LeftShiftAssignmentStatement { get; }
+    abstract TSyntaxKind LeftShiftExpression { get; }
     abstract TSyntaxKind LocalDeclaration { get; }
     abstract TSyntaxKind[] MethodDeclarations { get; }
     abstract TSyntaxKind[] ObjectCreationExpressions { get; }
     abstract TSyntaxKind Parameter { get; }
     abstract TSyntaxKind RefKeyword { get; }
+    abstract TSyntaxKind RightShiftExpression { get; }
+    abstract TSyntaxKind RightShiftAssignmentStatement { get; }
     abstract TSyntaxKind ParameterList { get; }
     abstract TSyntaxKind ReturnStatement { get; }
     abstract TSyntaxKind SimpleAssignment { get; }
+    abstract TSyntaxKind SimpleCommentTrivia { get; }
     abstract TSyntaxKind SimpleMemberAccessExpression { get; }
     abstract TSyntaxKind[] StringLiteralExpressions { get; }
     abstract TSyntaxKind StructDeclaration { get; }
     abstract TSyntaxKind[] TypeDeclaration { get; }
-    abstract TSyntaxKind LeftShiftExpression { get; }
-    abstract TSyntaxKind RightShiftExpression { get; }
-    abstract TSyntaxKind LeftShiftAssignmentStatement { get; }
-    abstract TSyntaxKind RightShiftAssignmentStatement { get; }
+    abstract TSyntaxKind WhitespaceTrivia { get; }
 }
