@@ -31,7 +31,6 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -75,7 +74,6 @@ public class IncrementalAnalysisTest {
   }
 
   @Test
-  @Ignore // ToDo: Re-enable this IT after SQ/S4NET fix
   public void incrementalPrAnalysis_cacheAvailableNoChanges_nothingReported() throws IOException {
     Tests.analyzeProject(temp, PROJECT, null, "sonar.branch.name", "base-branch");
     Path projectDir = Tests.projectDir(temp, PROJECT);
@@ -92,7 +90,6 @@ public class IncrementalAnalysisTest {
   }
 
   @Test
-  @Ignore // ToDo: Re-enable this IT after SQ/S4NET fix
   public void incrementalPrAnalysis_cacheAvailableChangesDone_issuesReportedForChangedFiles() throws IOException {
     Tests.analyzeProject(temp, PROJECT, null, "sonar.branch.name", "base-branch");
     Path projectDir = Tests.projectDir(temp, PROJECT);
@@ -122,7 +119,6 @@ public class IncrementalAnalysisTest {
   }
 
   @Test
-  @Ignore // ToDo: Re-enable this IT after SQ/S4NET fix
   public void incrementalPrAnalysis_cacheAvailableProjectBaseDirChanged_everythingIsReanalyzed() throws IOException {
     Tests.analyzeProject(temp, PROJECT, null, "sonar.branch.name", "base-branch");
     Path projectDir = Tests.projectDir(temp, PROJECT);
@@ -147,7 +143,6 @@ public class IncrementalAnalysisTest {
   }
 
   @Test
-  @Ignore // ToDo: Re-enable this IT after SQ/S4NET fix
   public void incrementalPrAnalysis_cacheAvailableDuplicationIntroduced_duplicationReportedForChangedFile() throws IOException {
     String projectName = "IncrementalPRAnalysisDuplication";
     Tests.analyzeProject(temp, projectName, null, "sonar.branch.name", "base-branch");
