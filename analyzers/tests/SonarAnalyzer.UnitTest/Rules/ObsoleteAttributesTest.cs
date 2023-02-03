@@ -24,25 +24,49 @@ using VB = SonarAnalyzer.Rules.VisualBasic;
 namespace SonarAnalyzer.UnitTest.Rules;
 
 [TestClass]
-public class RemoveObsoleteCodeTest
+public class ObsoleteAttributesTest
 {
-    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.RemoveObsoleteCode>();
-    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.RemoveObsoleteCode>();
+    private readonly VerifierBuilder builderExplanationNeededCS =
+        new VerifierBuilder<CS.ObsoleteAttributes>().WithOnlyDiagnostics(CS.ObsoleteAttributes.S1123);
+    private readonly VerifierBuilder builderExplanationNeededVB =
+        new VerifierBuilder<VB.ObsoleteAttributes>().WithOnlyDiagnostics(CS.ObsoleteAttributes.S1123);
+    private readonly VerifierBuilder builderRemoveCS =
+        new VerifierBuilder<CS.ObsoleteAttributes>().WithOnlyDiagnostics(CS.ObsoleteAttributes.S1133);
+    private readonly VerifierBuilder builderRemoveVB =
+        new VerifierBuilder<VB.ObsoleteAttributes>().WithOnlyDiagnostics(CS.ObsoleteAttributes.S1133);
+
+    [TestMethod]
+    public void ObsoleteAttributesNeedExplanation_CS() =>
+       builderExplanationNeededCS.AddPaths("ObsoleteAttributesNeedExplanation.cs").Verify();
+
+#if NET
+    [TestMethod]
+    public void ObsoleteAttributesNeedExplanation_CSharp9() =>
+        builderExplanationNeededCS.AddPaths("ObsoleteAttributesNeedExplanation.CSharp9.cs").WithTopLevelStatements().Verify();
+
+    [TestMethod]
+    public void ObsoleteAttributesNeedExplanation_CSharp10() =>
+        builderExplanationNeededCS.AddPaths("ObsoleteAttributesNeedExplanation.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+#endif
+
+    [TestMethod]
+    public void ObsoleteAttributesNeedExplanation_VB() =>
+        builderExplanationNeededVB.AddPaths("ObsoleteAttributesNeedExplanation.vb").Verify();
 
     [TestMethod]
     public void RemoveObsoleteCode_CS() =>
-        builderCS.AddPaths("RemoveObsoleteCode.cs").Verify();
+        builderRemoveCS.AddPaths("RemoveObsoleteCode.cs").Verify();
 
     [TestMethod]
     public void RemoveObsoleteCode_CSharp10() =>
-        builderCS.AddPaths("RemoveObsoleteCode.CSharp10.cs")
+        builderRemoveCS.AddPaths("RemoveObsoleteCode.CSharp10.cs")
         .WithTopLevelStatements()
         .WithOptions(ParseOptionsHelper.FromCSharp10)
         .Verify();
 
     [TestMethod]
     public void RemoveObsoleteCode_VB() =>
-        builderVB.AddPaths("RemoveObsoleteCode.vb").Verify();
+        builderRemoveVB.AddPaths("RemoveObsoleteCode.vb").Verify();
 
     [DataTestMethod]
     // All attribute targets of [Obsolete]
@@ -59,10 +83,10 @@ public class RemoveObsoleteCodeTest
     [DataRow("int this[int i] => 1;")]         // Indexer
     public void RemoveObsoleteCode_AttributeTargetTest_CS(string attributeTargetDeclaration)
     {
-        builderCS.AddSnippet(WrapInTestCode(string.Empty)).VerifyNoIssueReported();
-        builderCS.AddSnippet(WrapInTestCode("[Obsolete] // Noncompliant")).Verify();
-        builderCS.AddSnippet(WrapInTestCode("[Custom]")).VerifyNoIssueReported();
-        builderCS.AddSnippet(WrapInTestCode("""
+        builderRemoveCS.AddSnippet(WrapInTestCode(string.Empty)).VerifyNoIssueReported();
+        builderRemoveCS.AddSnippet(WrapInTestCode("""[Obsolete] // Noncompliant""")).Verify();
+        builderRemoveCS.AddSnippet(WrapInTestCode("[Custom]")).VerifyNoIssueReported();
+        builderRemoveCS.AddSnippet(WrapInTestCode("""
             [Obsolete] // Noncompliant
             [Custom]
             """)).Verify();
@@ -124,10 +148,10 @@ public class RemoveObsoleteCodeTest
         """)]                                    // Indexer
     public void RemoveObsoleteCode_AttributeTargetTest_VB(string attributeTargetDeclaration)
     {
-        builderVB.AddSnippet(WrapInTestCode(string.Empty)).VerifyNoIssueReported();
-        builderVB.AddSnippet(WrapInTestCode("<Obsolete> ' Noncompliant")).Verify();
-        builderVB.AddSnippet(WrapInTestCode("<Custom>")).VerifyNoIssueReported();
-        builderVB.AddSnippet(WrapInTestCode("""
+        builderRemoveVB.AddSnippet(WrapInTestCode(string.Empty)).VerifyNoIssueReported();
+        builderRemoveVB.AddSnippet(WrapInTestCode("""<Obsolete> ' Noncompliant""")).Verify();
+        builderRemoveVB.AddSnippet(WrapInTestCode("<Custom>")).VerifyNoIssueReported();
+        builderRemoveVB.AddSnippet(WrapInTestCode("""
             <Obsolete> ' Noncompliant
             <Custom>
             """)).Verify();

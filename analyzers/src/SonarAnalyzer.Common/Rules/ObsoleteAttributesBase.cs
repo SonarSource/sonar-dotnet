@@ -20,14 +20,25 @@
 
 namespace SonarAnalyzer.Rules;
 
-public abstract class ObsoleteAttributesNeedExplanationBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+public abstract class ObsoleteAttributesBase<TSyntaxKind> : SonarDiagnosticAnalyzer
     where TSyntaxKind : struct
 {
-    private const string DiagnosticId = "S1123";
+    protected const string ExplanationNeededDiagnosticId = "S1123";
+    protected const string ExplanationNeededMessageFormat = "Add an explanation.";
+    protected abstract DiagnosticDescriptor ExplanationNeededRule { get; }
 
-    protected override string MessageFormat => "Add an explanation.";
+    protected const string RemoveDiagnosticId = "S1133";
+    protected const string RemoveMessageFormat = "Do not forget to remove this deprecated code someday.";
+    protected abstract DiagnosticDescriptor RemoveRule { get; }
 
-    protected ObsoleteAttributesNeedExplanationBase() : base(DiagnosticId) { }
+    protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
+
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; }
+
+    protected ObsoleteAttributesBase()
+    {
+        SupportedDiagnostics = ImmutableArray.Create(ExplanationNeededRule, RemoveRule);
+    }
 
     protected sealed override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(
@@ -35,10 +46,14 @@ public abstract class ObsoleteAttributesNeedExplanationBase<TSyntaxKind> : Sonar
             c =>
             {
                 if (c.SemanticModel.GetSymbolInfo(c.Node).Symbol is { } attribute
-                    && attribute.IsInType(KnownType.System_ObsoleteAttribute)
-                    && !attribute.GetParameters().Any())
+                    && attribute.IsInType(KnownType.System_ObsoleteAttribute))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
+                    c.ReportIssue(Diagnostic.Create(RemoveRule, c.Node.GetLocation()));
+
+                    if (!attribute.GetParameters().Any())
+                    {
+                        c.ReportIssue(Diagnostic.Create(ExplanationNeededRule, c.Node.GetLocation()));
+                    }
                 }
             },
             Language.SyntaxKind.Attribute);

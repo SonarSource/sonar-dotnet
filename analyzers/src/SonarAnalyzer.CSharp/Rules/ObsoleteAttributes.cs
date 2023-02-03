@@ -18,10 +18,18 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.VisualBasic;
+namespace SonarAnalyzer.Rules.CSharp;
 
-[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-public sealed class ObsoleteAttributesNeedExplanation : ObsoleteAttributesNeedExplanationBase<SyntaxKind>
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class ObsoleteAttributes : ObsoleteAttributesBase<SyntaxKind>
 {
-    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+    internal static readonly DiagnosticDescriptor S1123 =
+        DescriptorFactory.Create(ExplanationNeededDiagnosticId, ExplanationNeededMessageFormat);
+    internal static readonly DiagnosticDescriptor S1133 =
+        DescriptorFactory.Create(RemoveDiagnosticId, RemoveMessageFormat);
+
+    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
+    protected override DiagnosticDescriptor ExplanationNeededRule { get; } = S1123;
+    protected override DiagnosticDescriptor RemoveRule { get; } = S1133;
 }
