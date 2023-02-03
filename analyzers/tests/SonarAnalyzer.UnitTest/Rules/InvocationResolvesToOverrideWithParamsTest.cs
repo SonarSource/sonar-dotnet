@@ -33,17 +33,17 @@ namespace SonarAnalyzer.UnitTest.Rules
             var anotherAssembly = TestHelper.CompileCS("""
                 public class FromAnotherAssembly
                 {
-                    protected int ProtectedOverload(object a, string b) => 1493;
-                    public int ProtectedOverload(string a, params string[] bs) => 1607;
+                    protected int ProtectedOverload(object a, string b) => 42;
+                    public int ProtectedOverload(string a, params string[] bs) => 42;
 
-                    private protected int PrivateProtectedOverload(object a, string b) => 1494;
-                    public int PrivateProtectedOverload(string a, params string[] bs) => 1608;
+                    private protected int PrivateProtectedOverload(object a, string b) => 42;
+                    public int PrivateProtectedOverload(string a, params string[] bs) => 42;
 
-                    protected internal int ProtectedInternalOverload(object a, string b) => 1495;
-                    public int ProtectedInternalOverload(string a, params string[] bs) => 1609;
+                    protected internal int ProtectedInternalOverload(object a, string b) => 42;
+                    public int ProtectedInternalOverload(string a, params string[] bs) => 42;
 
-                    internal int InternalOverload(object a, string b) => 1496;
-                    public int InternalOverload(string a, params string[] bs) => 1610;
+                    internal int InternalOverload(object a, string b) => 42;
+                    public int InternalOverload(string a, params string[] bs) => 42;
                 }
                 """).Model.Compilation.ToMetadataReference();
             builder.AddPaths("InvocationResolvesToOverrideWithParams.cs")

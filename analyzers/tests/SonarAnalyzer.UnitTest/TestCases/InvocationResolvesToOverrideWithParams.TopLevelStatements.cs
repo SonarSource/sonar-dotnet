@@ -59,9 +59,9 @@ public class SomeClass
     protected virtual int OverriddenAsProtected(object a, string b) => 42;
     public int OverriddenAsProtected(string a, params string[] bs) => 42;
 
-    protected int ShadowedAsPublic(object a, string b) => 1498;
-    public int ShadowedAsPublic(string a, params string[] bs) => 1612;
+    protected int ShadowedAsPublic(object a, string b) => 42;
+    public int ShadowedAsPublic(string a, params string[] bs) => 42;
 
-    protected int ShadowedAsProtectedInternal(object a, string b) => 1499;
-    public int ShadowedAsProtectedInternal(string a, params string[] bs) => 1613;
+    protected int ShadowedAsProtectedInternal(object a, string b) => 42;
+    public int ShadowedAsProtectedInternal(string a, params string[] bs) => 42;
 }
