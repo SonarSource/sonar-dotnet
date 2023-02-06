@@ -27,22 +27,126 @@ namespace SonarAnalyzer.UnitTest.Rules;
 public class UnusedStringBuilderTest
 {
     private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.UnusedStringBuilder>();
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.UnusedStringBuilder>();
 
     [TestMethod]
     public void UnusedStringBuilder_CS() =>
         builderCS.AddPaths("UnusedStringBuilder.cs").Verify();
+
+    [DataTestMethod]
+    [DataRow("", false)]
+    [DataRow("sb.ToString();", true)]
+    [DataRow("""var a = sb.Append("").Append("").Append("").Append("").ToString().ToLower();""", true)]
+    [DataRow("sb.CopyTo(0, new char[1], 0, 1);", true)]
+    [DataRow("sb.GetChunks();", true)]
+    [DataRow("var a = sb[0];", false)] // FP
+    [DataRow("""sb?.Append("").ToString().ToLower();""", true)]
+    [DataRow("""@sb.Append("").ToString();""", true)]
+    [DataRow("sb.Remove(sb.Length - 1, 1);", true)]
+    [DataRow("""var a = $"{sb} is ToStringed here";""", true)]
+    [DataRow("var a = sb.Length;", false)] // FP
+    public void UnusedStringBuilder_CSExpressionsTest(string expression, bool compliant)
+    {
+        var code = $$"""
+            using System.Text;
+
+            public class MyClass
+            {
+                public void MyMethod()
+                {
+                    var sb = new StringBuilder(); // {{(compliant ? "Compliant" : "Noncompliant")}}
+                    {{expression}}
+                }
+            }
+            """;
+        var builder = builderCS.AddSnippet(code);
+        if (compliant)
+        {
+            builder.VerifyNoIssueReported();
+        }
+        else
+        {
+            builder.Verify();
+        }
+    }
 
 #if NET
 
     [TestMethod]
     public void UnusedStringBuilder_CSharp9() =>
         builderCS.AddPaths("UnusedStringBuilder.CSharp9.cs")
-            .WithTopLevelStatements()
+            .WithOptions(ParseOptionsHelper.FromCSharp9)
             .Verify();
+
+    [DataTestMethod]
+    [DataRow("", false)]
+    [DataRow("sb.ToString();", true)]
+    [DataRow("""var a = sb.Append("").Append("").Append("").Append("").ToString().ToLower();""", true)]
+    [DataRow("sb.CopyTo(0, new char[1], 0, 1);", true)]
+    [DataRow("sb.GetChunks();", true)]
+    [DataRow("var a = sb[0];", false)] // FP
+    [DataRow("""sb?.Append("").ToString().ToLower();""", true)]
+    [DataRow("""@sb.Append("").ToString();""", true)]
+    [DataRow("sb.Remove(sb.Length - 1, 1);", true)]
+    [DataRow("""var a = $"{sb} is ToStringed here";""", true)]
+    [DataRow("var a = sb.Length;", false)] // FP
+    public void UnusedStringBuilder_TopLevelStatements(string expression, bool compliant)
+    {
+        var code = $$"""
+            using System.Text;
+
+            var sb = new StringBuilder(); // {{(compliant ? "Compliant" : "Noncompliant")}}
+            {{expression}}
+            """;
+        var builder = builderCS.AddSnippet(code).WithTopLevelStatements();
+        if (compliant)
+        {
+            builder.VerifyNoIssueReported();
+        }
+        else
+        {
+            builder.Verify();
+        }
+    }
 
 #endif
 
+    [DataTestMethod]
+    [DataRow("", false)]
+    [DataRow("sb.ToString()", true)]
+    [DataRow("""Dim a = sb.Append("").Append("").Append("").Append("").ToString().ToLower()""", true)]
+    [DataRow("sb.CopyTo(0, New Char(0) {}, 0, 1)", true)]
+    [DataRow("sb.GetChunks()", true)]
+    [DataRow("Dim a = sb(0)", false)] // FP
+    [DataRow("""sb?.Append("").ToString().ToLower()""", true)]
+    [DataRow("""sb.Append("").ToString()""", true)]
+    [DataRow("sb.Remove(sb.Length - 1, 1)", true)]
+    [DataRow("""Dim a = $"{sb} is ToStringed here" """, true)]
+    [DataRow("Dim a = sb.Length", false)] // FP
+    public void UnusedStringBuilder_VBExpressionsTest(string expression, bool compliant)
+    {
+        var code = $$"""
+            Imports System.Text
+
+            Public Class [MyClass]
+                Public Sub MyMethod()
+                    Dim sb = New StringBuilder() ' {{(compliant ? "Compliant" : "Noncompliant")}}
+                    {{expression}}
+                End Sub
+            End Class
+            """;
+        var builder = builderVB.AddSnippet(code);
+        if (compliant)
+        {
+            builder.VerifyNoIssueReported();
+        }
+        else
+        {
+            builder.Verify();
+        }
+    }
+
     [TestMethod]
     public void UnusedStringBuilder_VB() =>
-        new VerifierBuilder<VB.UnusedStringBuilder>().AddPaths("UnusedStringBuilder.vb").Verify();
+        builderVB.AddPaths("UnusedStringBuilder.vb").Verify();
 }

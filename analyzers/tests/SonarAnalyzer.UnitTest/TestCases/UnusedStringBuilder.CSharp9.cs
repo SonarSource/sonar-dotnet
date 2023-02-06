@@ -1,9 +1,5 @@
 ﻿using System.Text;
 
-StringBuilder builder1 = new(); // Noncompliant
-StringBuilder builder2 = new(); // Compliant
-builder1.Append(builder2.ToString());
-
 public class MyClass
 {
     public void MyMethod(StringBuilder builder) // Compliant

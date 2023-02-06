@@ -5,47 +5,23 @@ public class Program
 {
     public StringBuilder MyMethod(StringBuilder builder, string myString) // Compliant
     {
-        StringBuilder builder1 = GetStringBuilder(); // Compliant
+        StringBuilder sb1 = GetStringBuilder(); // Compliant
 
-        var builder2 = new StringBuilder(); // Compliant
-        ExternalMethod(builder2);
+        var sb2 = new StringBuilder(); // Compliant
+        ExternalMethod(sb2);
 
-        var builder3 = new StringBuilder(); // Compliant
-        LocalMethod(builder3);
+        var sb3 = new StringBuilder(); // Compliant
+        LocalMethod(sb3);
 
-        StringBuilder builder4 = new StringBuilder(); // Compliant
-        builder4.ToString();
+        var sb4 = new StringBuilder(); // Compliant
 
-        var builder5 = new StringBuilder(); // Compliant
+        StringBuilder sb5 = new StringBuilder(); // Noncompliant {{Remove this "StringBuilder"; ".ToString()" is never called.}}
+//                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+        var sb6 = new StringBuilder(); // Noncompliant
+//          ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-        StringBuilder builder6 = new StringBuilder(); // Noncompliant {{Remove this "StringBuilder"; ".ToString()" is never called.}}
-//                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        var builder7 = new StringBuilder(); // Noncompliant
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-        StringBuilder builder8 = new StringBuilder(); // Noncompliant
-        builder8.Append(builder5.ToString());
-
-        StringBuilder builder9 = new StringBuilder(); // Compliant
-        var a = builder9.ToString();
-
-        StringBuilder builder10 = new StringBuilder(); // Compliant
-        var b = builder10.ToString().ToLower();
-
-        StringBuilder builder11 = new StringBuilder(); // Compliant
-        var c = builder11.Append("").Append("").Append("").Append("").ToString().ToLower();
-
-        StringBuilder builder12 = new StringBuilder(); // Compliant
-        builder12.CopyTo(0, new char[1], 0, 1);
-
-        StringBuilder builder13 = new StringBuilder(); // Compliant
-        var d = builder13.GetChunks();
-
-        StringBuilder builder14 = new StringBuilder(); // Noncompliant FP
-        var m = builder14[0];
-
-        StringBuilder builder15 = new StringBuilder(); // Noncompliant FP
-        builder15?.Append("").ToString();
+        StringBuilder sb7 = new StringBuilder(); // Noncompliant
+        sb7.Append(sb4.ToString());
 
         if (true)
         {
@@ -57,7 +33,7 @@ public class Program
                     {
                         if (true)
                         {
-                            var builder16 = new StringBuilder(); // Noncompliant
+                            var buildernested = new StringBuilder(); // Noncompliant
                         }
                     }
                 }
@@ -78,9 +54,6 @@ public class Program
         builderCalls.Replace("\r\n", "\n");
         builderCalls.Clear();
         builderCalls.GetType();
-
-        var builderCalls2 = new StringBuilder(); // Compliant
-        builderCalls2.Remove(builderCalls2.Length - 1, 1);
 
         var builderReturn = new StringBuilder(); // Compliant
         return builderReturn;

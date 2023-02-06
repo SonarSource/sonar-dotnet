@@ -21,7 +21,7 @@
 namespace SonarAnalyzer.Rules.VisualBasic;
 
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, VariableDeclaratorSyntax, InvocationExpressionSyntax, ReturnStatementSyntax>
+public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, VariableDeclaratorSyntax, InvocationExpressionSyntax, ReturnStatementSyntax, InterpolationSyntax>
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
@@ -38,10 +38,11 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
     protected override IList<ReturnStatementSyntax> GetReturnStatements(VariableDeclaratorSyntax declaration) =>
         declaration.Parent.Parent.Parent.DescendantNodes().OfType<ReturnStatementSyntax>().ToList();
 
+    protected override IList<InterpolationSyntax> GetInterpolatedStrings(VariableDeclaratorSyntax declaration) =>
+        declaration.Parent.Parent.Parent.DescendantNodes().OfType<InterpolationSyntax>().ToList();
+
     protected override bool IsStringBuilderAccessed(string variableName, IList<InvocationExpressionSyntax> invocations) =>
-    invocations.Any(x => x.Expression is MemberAccessExpressionSyntax { } member
-        && IsSameVariable(member.Expression, variableName)
-        && StringBuilderAccessMethods.Contains(member.GetName()));
+        invocations.Any(x => IsSameVariable(x.Expression, variableName) && StringBuilderAccessMethods.Contains(x.GetName()));
 
     protected override bool IsPassedToMethod(string variableName, IList<InvocationExpressionSyntax> invocations) =>
         invocations.Any(x => x.ArgumentList.Arguments.Any(y => IsSameVariable(y.GetExpression(), variableName)));
@@ -49,6 +50,11 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
     protected override bool IsReturned(string variableName, IList<ReturnStatementSyntax> returnStatements) =>
         returnStatements.Any(x => IsSameVariable(x.Expression, variableName));
 
+    protected override bool IsWithinInterpolatedString(string variableName, IList<InterpolationSyntax> interpolations) =>
+        interpolations.Any(x => IsSameVariable(x.Expression, variableName));
+
     private static bool IsSameVariable(ExpressionSyntax expression, string variableName) =>
-        expression.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Any(p => p.NameIs(variableName));
+        expression.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Any(p => p.NameIs(variableName))
+        || (expression.Ancestors().OfType<ConditionalAccessExpressionSyntax>().Any() && expression.Ancestors().OfType<ConditionalAccessExpressionSyntax>().First()
+            .DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Any(p => p.NameIs(variableName)));
 }

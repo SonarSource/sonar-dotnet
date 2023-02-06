@@ -21,7 +21,7 @@
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, VariableDeclaratorSyntax, InvocationExpressionSyntax, ReturnStatementSyntax>
+public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, VariableDeclaratorSyntax, InvocationExpressionSyntax, ReturnStatementSyntax, InterpolationSyntax>
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
@@ -34,7 +34,7 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
 
     protected override IList<InvocationExpressionSyntax> GetInvocations(VariableDeclaratorSyntax declaration) =>
         declaration.IsTopLevel()
-        ? GetTopLevelInvocations(declaration)
+        ? GetTopLevelStatementSyntax<InvocationExpressionSyntax>(declaration)
         : declaration.Parent.Parent.Parent.DescendantNodes().OfType<InvocationExpressionSyntax>().ToList();
 
     protected override IList<ReturnStatementSyntax> GetReturnStatements(VariableDeclaratorSyntax declaration) =>
@@ -42,12 +42,13 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
         ? new()
         : declaration.Parent.Parent.Parent.DescendantNodes().OfType<ReturnStatementSyntax>().ToList();
 
+    protected override IList<InterpolationSyntax> GetInterpolatedStrings(VariableDeclaratorSyntax declaration) =>
+        declaration.IsTopLevel()
+        ? GetTopLevelStatementSyntax<InterpolationSyntax>(declaration)
+        : declaration.Parent.Parent.Parent.DescendantNodes().OfType<InterpolationSyntax>().ToList();
+
     protected override bool IsStringBuilderAccessed(string variableName, IList<InvocationExpressionSyntax> invocations) =>
-        invocations.Any(x => x.Expression switch {
-            MemberAccessExpressionSyntax { } member => IsSameVariable(member.Expression, variableName) && StringBuilderAccessMethods.Contains(member.GetName()),
-            MemberBindingExpressionSyntax { } member => IsSameVariable(member.Ancestors().OfType<ConditionalAccessExpressionSyntax>().First(), variableName) && StringBuilderAccessMethods.Contains(member.GetName()),
-            _ => false
-            });
+        invocations.Any(x => StringBuilderAccessMethods.Contains(x.Expression.GetName()) && IsSameVariable(x.Expression, variableName));
 
     protected override bool IsPassedToMethod(string variableName, IList<InvocationExpressionSyntax> invocations) =>
         invocations.Any(x => x.ArgumentList.Arguments.Any(y => IsSameVariable(y.Expression, variableName)));
@@ -55,21 +56,26 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
     protected override bool IsReturned(string variableName, IList<ReturnStatementSyntax> returnStatements) =>
         returnStatements.Any(x => IsSameVariable(x.Expression, variableName));
 
+    protected override bool IsWithinInterpolatedString(string variableName, IList<InterpolationSyntax> interpolations) =>
+        interpolations.Any(x => IsSameVariable(x.Expression, variableName));
+
     private static bool IsStringBuilderObjectCreation(ExpressionSyntax expression, SemanticModel semanticModel) =>
         (expression is ObjectCreationExpressionSyntax || ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(expression))
         && ObjectCreationFactory.Create(expression).IsKnownType(KnownType.System_Text_StringBuilder, semanticModel);
 
     private static bool IsSameVariable(ExpressionSyntax expression, string variableName) =>
-        expression.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Any(p => p.NameIs(variableName));
+        expression.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Any(p => p.NameIs(variableName))
+        || (expression.Ancestors().OfType<ConditionalAccessExpressionSyntax>().Any() && expression.Ancestors().OfType<ConditionalAccessExpressionSyntax>().First()
+            .DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Any(p => p.NameIs(variableName)));
 
-    private static IList<InvocationExpressionSyntax> GetTopLevelInvocations(VariableDeclaratorSyntax declaration)
+    private static IList<T> GetTopLevelStatementSyntax<T>(VariableDeclaratorSyntax declaration)
     {
-        List<InvocationExpressionSyntax> list = new();
+        List<T> list = new();
         foreach (var globalStatement in declaration.Parent.Parent.Parent.Parent.DescendantNodes().OfType<GlobalStatementSyntax>())
         {
-            foreach (var invocation in globalStatement.DescendantNodes().OfType<InvocationExpressionSyntax>())
+            foreach (var interpolation in globalStatement.DescendantNodes().OfType<T>())
             {
-                list.Add(invocation);
+                list.Add(interpolation);
             }
         }
         return list;

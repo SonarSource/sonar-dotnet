@@ -20,11 +20,12 @@
 
 namespace SonarAnalyzer.Rules;
 
-public abstract class UnusedStringBuilderBase<TSyntaxKind, TVariableDeclarator, TInvocationExpression, TReturnStatement> : SonarDiagnosticAnalyzer<TSyntaxKind>
+public abstract class UnusedStringBuilderBase<TSyntaxKind, TVariableDeclarator, TInvocationExpression, TReturnStatement, TInterpolatedString> : SonarDiagnosticAnalyzer<TSyntaxKind>
     where TSyntaxKind : struct
     where TVariableDeclarator : SyntaxNode
     where TInvocationExpression : SyntaxNode
     where TReturnStatement : SyntaxNode
+    where TInterpolatedString : SyntaxNode
 {
     private const string DiagnosticId = "S3063";
     protected override string MessageFormat => """Remove this "StringBuilder"; ".ToString()" is never called.""";
@@ -35,9 +36,11 @@ public abstract class UnusedStringBuilderBase<TSyntaxKind, TVariableDeclarator, 
     protected abstract bool NeedsToTrack(TVariableDeclarator declaration, SemanticModel semanticModel);
     protected abstract IList<TInvocationExpression> GetInvocations(TVariableDeclarator declaration);
     protected abstract IList<TReturnStatement> GetReturnStatements(TVariableDeclarator declaration);
+    protected abstract IList<TInterpolatedString> GetInterpolatedStrings(TVariableDeclarator declaration);
     protected abstract bool IsStringBuilderAccessed(string variableName, IList<TInvocationExpression> invocations);
     protected abstract bool IsPassedToMethod(string variableName, IList<TInvocationExpression> invocations);
     protected abstract bool IsReturned(string variableName, IList<TReturnStatement> returnStatements);
+    protected abstract bool IsWithinInterpolatedString(string variableName, IList<TInterpolatedString> interpolations);
 
     protected UnusedStringBuilderBase() : base(DiagnosticId) { }
 
@@ -53,7 +56,8 @@ public abstract class UnusedStringBuilderBase<TSyntaxKind, TVariableDeclarator, 
             var invocations = GetInvocations(variableDeclaration);
             if (IsStringBuilderAccessed(variableName, invocations)
                 || IsPassedToMethod(variableName, invocations)
-                || IsReturned(variableName, GetReturnStatements(variableDeclaration)))
+                || IsReturned(variableName, GetReturnStatements(variableDeclaration))
+                || IsWithinInterpolatedString(variableName, GetInterpolatedStrings(variableDeclaration)))
             {
                 return;
             }
