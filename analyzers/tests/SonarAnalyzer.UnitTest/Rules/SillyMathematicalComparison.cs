@@ -25,7 +25,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class SillyMathematicalComparisonTest
     {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.SillyBitwiseOperation>();
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.SillyMathematicalComparison>();
 
         [TestMethod]
         public void SillyMathematicalComparison_CS() =>

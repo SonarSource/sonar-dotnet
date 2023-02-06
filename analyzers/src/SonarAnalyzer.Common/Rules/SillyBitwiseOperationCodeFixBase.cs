@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Rules
 
         protected abstract Func<SyntaxNode> CreateNewRoot(SyntaxNode root, TextSpan diagnosticSpan, bool isReportingOnLeft);
 
-        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(SillyBitwiseOperationBase.BitwiseDiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(SillyBitwiseOperationBase.DiagnosticId);
 
         protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {

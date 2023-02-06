@@ -8,7 +8,6 @@ namespace SonarAnalyzer.UnitTest.TestCases
 {
     internal class SillyMathematicalComparison
     {
-
         public void Floats()
         {
             float f = 42;

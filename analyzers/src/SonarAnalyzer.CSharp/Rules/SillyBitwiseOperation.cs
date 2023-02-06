@@ -25,19 +25,6 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected override ILanguageFacade Language => CSharpFacade.Instance;
 
-        // No codefix (yet?)
-        private const string ComparisonDiagnosticId = "S2198";
-        private const string ComparisonMessageFormat = "Remove this silly mathematical comparison.";
-
-        protected DiagnosticDescriptor ComparisonRule { get; set; }
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(BitwiseRule, ComparisonRule);
-
-        public SillyBitwiseOperation()
-        {
-            ComparisonRule = Language.CreateDescriptor(ComparisonDiagnosticId, ComparisonMessageFormat, fadeOutCode: true);
-        }
-
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterNodeAction(
@@ -57,13 +44,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 c => CheckAssignment(c, 0),
                 SyntaxKind.OrAssignmentExpression,
                 SyntaxKind.ExclusiveOrAssignmentExpression);
-
-            context.RegisterNodeAction(
-                CheckComparison,
-                SyntaxKind.GreaterThanExpression,
-                SyntaxKind.GreaterThanOrEqualExpression,
-                SyntaxKind.LessThanExpression,
-                SyntaxKind.LessThanOrEqualExpression);
         }
 
         private void CheckAssignment(SonarSyntaxNodeReportingContext context, int constValueToLookFor)
@@ -75,7 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var location = assignment.Parent is StatementSyntax
                     ? assignment.Parent.GetLocation()
                     : assignment.OperatorToken.CreateLocation(assignment.Right);
-                context.ReportIssue(Diagnostic.Create(BitwiseRule, location));
+                context.ReportIssue(Diagnostic.Create(Rule, location));
             }
         }
 
@@ -84,33 +64,5 @@ namespace SonarAnalyzer.Rules.CSharp
             var binary = (BinaryExpressionSyntax)context.Node;
             CheckBinary(context, binary.Left, binary.OperatorToken, binary.Right, constValueToLookFor);
         }
-
-        private void CheckComparison(SonarSyntaxNodeReportingContext context)
-        {
-            var binary = (BinaryExpressionSyntax)context.Node;
-            if (ShouldRaise(context.SemanticModel, binary.Left, binary.Right))
-            {
-                context.ReportIssue(Diagnostic.Create(BitwiseRule, binary.GetLocation()));
-            }
-
-            if (ShouldRaise(context.SemanticModel, binary.Right, binary.Left))
-            {
-                context.ReportIssue(Diagnostic.Create(BitwiseRule, binary.GetLocation()));
-            }
-        }
-
-        private bool ShouldRaise(SemanticModel semanticModel, SyntaxNode value, SyntaxNode expectedConstant) =>
-            FindConstant(semanticModel, expectedConstant, Convert.ToDouble) is { } constant
-            && semanticModel.GetSymbolInfo(value).Symbol.GetSymbolType() is { } symbol
-            && Ranges.FirstOrDefault(x => symbol.Is(x.Type)) is { } range
-            && (constant < range.MinValue || constant > range.MaxValue);
-
-        private static readonly TypeRange[] Ranges = new[]
-        {
-            new TypeRange(KnownType.System_Single, float.MinValue, float.MaxValue),
-            //new TypeRange(KnownType.System_Half, half.MinValue, half.MaxValue),
-        };
-
-        private sealed record TypeRange(KnownType Type, double MinValue, double MaxValue);
     }
 }
