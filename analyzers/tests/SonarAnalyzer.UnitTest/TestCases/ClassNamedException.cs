@@ -1,6 +1,6 @@
 ﻿using System;
 
-class CustomException { }                                        // Noncompliant {{Classes named like "Exception" should extend "Exception" or a subclass}}
+class CustomException { }                                        // Noncompliant {{Rename this class to remove "(e|E)xception" or correct its inheritance.}}
 //    ^^^^^^^^^^^^^^^
 class Customexception { }                                        // Noncompliant
 class CustomEXCEPTION { }                                        // Noncompliant
@@ -24,7 +24,7 @@ class ExtendsNullReferenceException : NullReferenceException { } // Compliant - 
 
 class ExtendsCustomException: CustomException { }                // Noncompliant - CustomException is not an Exception subclass
 
-partial class PartialClassExtends Exception { }                  // Noncompliant
+partial class PartialClassDoesNotExtendException { }             // Noncompliant
 
 partial class PartialClassExtendsException { }                   // Compliant - the other part of the class extends Exception
 partial class PartialClassExtendsException: Exception { }

@@ -24,7 +24,7 @@ namespace SonarAnalyzer.Rules.CSharp;
 public sealed class ClassNamedException : SonarDiagnosticAnalyzer
 {
     private const string DiagnosticId = "S2166";
-    private const string MessageFormat = "FIXME";
+    private const string MessageFormat = "Rename this class to remove \"(e|E)xception\" or correct its inheritance.";
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
@@ -33,11 +33,16 @@ public sealed class ClassNamedException : SonarDiagnosticAnalyzer
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(c =>
             {
-                var node = c.Node;
-                if (true)
+                var classDeclaration = (ClassDeclarationSyntax)c.Node;
+                var className = classDeclaration.Identifier.ValueText;
+
+                if (className.EndsWith("Exception", StringComparison.InvariantCultureIgnoreCase)
+                 && c.SemanticModel.GetDeclaredSymbol(classDeclaration) is { } classSymbol
+                 && !classSymbol.IsStatic
+                 && !classSymbol.DerivesFrom(KnownType.System_Exception))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
+                    c.ReportIssue(Diagnostic.Create(Rule, classDeclaration.Identifier.GetLocation()));
                 }
             },
-            SyntaxKind.InvocationExpression);
+            SyntaxKind.ClassDeclaration);
 }
