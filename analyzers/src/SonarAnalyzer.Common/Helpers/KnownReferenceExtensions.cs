@@ -18,21 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+internal static class KnownReferenceExtensions
 {
-    public static class CompilationExtensions
-    {
-        public static IMethodSymbol GetTypeMethod(this Compilation compilation, SpecialType type, string methodName) =>
-            (IMethodSymbol)compilation.GetSpecialType(type)
-                .GetMembers(methodName)
-                .SingleOrDefault();
+    internal static Func<AssemblyIdentity, bool> And(this Func<AssemblyIdentity, bool> predicate, Func<AssemblyIdentity, bool> and)
+        => identity => predicate(identity) && and(identity);
 
-        public static bool IsNetFrameworkTarget(this Compilation compilation) =>
-            // There's no direct way of checking compilation target framework yet (09/2020).
-            // See https://github.com/dotnet/roslyn/issues/3798
-            compilation.ObjectType.ContainingAssembly.Name == "mscorlib";
-
-        public static bool References(this Compilation compilation, KnownReference reference)
-            => reference.IsReferenced(compilation);
-    }
+    internal static Func<AssemblyIdentity, bool> Or(this Func<AssemblyIdentity, bool> predicate, Func<AssemblyIdentity, bool> or)
+        => identity => predicate(identity) || or(identity);
 }
