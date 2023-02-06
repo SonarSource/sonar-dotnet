@@ -28,6 +28,19 @@ public class ClassNamedExceptionTest
     private readonly VerifierBuilder builder = new VerifierBuilder<ClassNamedException>();
 
     [TestMethod]
-    public void ClassNamedException_CS() =>
-        builder.AddPaths("ClassNamedException.cs").Verify();
+    public void ClassNamedException_CS() => builder
+        .AddPaths("ClassNamedException.cs")
+        .Verify();
+
+    [TestMethod]
+    public void ClassNamedException_FromCSharp9() => builder
+        .AddPaths("ClassNamedException.CSharp9.cs")
+        .WithOptions(ParseOptionsHelper.FromCSharp9)
+        .Verify();
+
+    [TestMethod]
+    public void ClassNamedException_FromCSharp10() => builder
+        .AddPaths("ClassNamedException.CSharp10.cs")
+        .WithOptions(ParseOptionsHelper.FromCSharp10)
+        .Verify();
 }
