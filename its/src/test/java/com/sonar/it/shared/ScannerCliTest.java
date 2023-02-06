@@ -37,6 +37,9 @@ public class ScannerCliTest {
   private static final String RAZOR_PAGES_PROJECT = "WebApplication";
   private static final String HTML_IN_MAIN_AND_CSHARP_IN_TEST_SUBFOLDERS = "ScannerCli";
 
+  // Note: setting the `sonar.projectBaseDir` only enables Incremental PR Analysis when used with the Scanner for .NET.
+  private static final String INCREMENTAL_PR_ANALYSIS_WARNING = "WARN: Incremental PR analysis: Could not determine common base path, cache will not be computed. Consider setting 'sonar.projectBaseDir' property.";
+
   @Before
   public void init() {
     TestUtils.reset(ORCHESTRATOR);
@@ -52,9 +55,9 @@ public class ScannerCliTest {
       .containsExactlyInAnyOrder(
         "WARN: Your project contains C# files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html",
         "WARN: Your project contains VB.NET files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html",
-        // the below warnigns are not related to this test; however we still want to be in control of the warning messages
-        "WARN: Incremental PR analysis: Could not determine common base path, cache will not be computed. Consider setting 'sonar.projectBaseDir' property.",
-        "WARN: Incremental PR analysis: Could not determine common base path, cache will not be computed. Consider setting 'sonar.projectBaseDir' property.");
+        INCREMENTAL_PR_ANALYSIS_WARNING,
+        INCREMENTAL_PR_ANALYSIS_WARNING
+      );
     // The HTML plugin works
     assertThat(TestUtils.getMeasureAsInt(ORCHESTRATOR, RAZOR_PAGES_PROJECT, "violations")).isEqualTo(2);
     TestUtils.verifyNoGuiWarnings(ORCHESTRATOR, result);
@@ -70,8 +73,7 @@ public class ScannerCliTest {
     assertThat(result.getLogsLines(l -> l.contains("WARN")))
       .containsExactlyInAnyOrder(
         "WARN: Your project contains C# files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html",
-        // the below warning is not related to this test; however we still want to be in control of the warning messages
-        "WARN: Incremental PR analysis: Could not determine common base path, cache will not be computed. Consider setting 'sonar.projectBaseDir' property."
+        INCREMENTAL_PR_ANALYSIS_WARNING
       );
     // The HTML plugin works
     assertThat(TestUtils.getMeasureAsInt(ORCHESTRATOR, HTML_IN_MAIN_AND_CSHARP_IN_TEST_SUBFOLDERS, "violations")).isEqualTo(2);
@@ -88,8 +90,7 @@ public class ScannerCliTest {
     assertThat(result.getLogsLines(l -> l.contains("WARN")))
       .containsExactlyInAnyOrder(
         "WARN: Your project contains C# files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html",
-        // the below warning is not related to this test; however we still want to be in control of the warning messages
-        "WARN: Incremental PR analysis: Could not determine common base path, cache will not be computed. Consider setting 'sonar.projectBaseDir' property."
+        INCREMENTAL_PR_ANALYSIS_WARNING
       );
     TestUtils.verifyNoGuiWarnings(ORCHESTRATOR, result);
   }
@@ -110,6 +111,8 @@ public class ScannerCliTest {
     File projectDirPath = new File(projectDir);
     return SonarScanner.create(projectDirPath)
       .setProjectKey(projectKey)
+      // This is set just to underline that the message regarding Incremental PR Analysis is confusing when the Scanner for .NET is not used.
+      // The Scanner for .NET under the hood sets the `sonar.pullrequest.cache.basepath` property (which is needed by the plugin) based on `sonar.projectBaseDir` property.
       .setProperty("sonar.projectBaseDir", projectDirPath.getAbsolutePath())
       .setSourceDirs(".");
   }
