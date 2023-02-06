@@ -1,0 +1,15 @@
+{
+  "title": "\"DebuggerDisplayAttribute\" strings should reference existing members",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-4545",
+  "sqKey": "S4545",
+  "scope": "All",
+  "quickfix": "unknown"
+}
