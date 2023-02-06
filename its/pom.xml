@@ -40,7 +40,7 @@
     <dependency>
       <groupId>org.sonarsource.sonarqube</groupId>
       <artifactId>sonar-ws</artifactId>
-      <version>9.7.1.62043</version>
+      <version>9.9.0.65466</version>
     </dependency>
     <dependency>
       <groupId>org.sonarsource.ucfg</groupId>
