@@ -22,9 +22,9 @@ namespace SonarAnalyzer.Helpers;
 
 internal static class KnownReferenceExtensions
 {
-    internal static Func<AssemblyIdentity, bool> And(this Func<AssemblyIdentity, bool> predicate, Func<AssemblyIdentity, bool> and)
-        => identity => predicate(identity) && and(identity);
+    internal static Func<AssemblyIdentity, bool> And(this Func<AssemblyIdentity, bool> @this, Func<AssemblyIdentity, bool> predicate)
+        => identity => @this(identity) && predicate(identity);
 
-    internal static Func<AssemblyIdentity, bool> Or(this Func<AssemblyIdentity, bool> predicate, Func<AssemblyIdentity, bool> or)
-        => identity => predicate(identity) || or(identity);
+    internal static Func<AssemblyIdentity, bool> Or(this Func<AssemblyIdentity, bool> @this, Func<AssemblyIdentity, bool> predicate)
+        => identity => @this(identity) || predicate(identity);
 }
