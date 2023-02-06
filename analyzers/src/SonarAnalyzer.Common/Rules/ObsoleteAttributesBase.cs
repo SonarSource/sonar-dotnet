@@ -48,11 +48,12 @@ public abstract class ObsoleteAttributesBase<TSyntaxKind> : SonarDiagnosticAnaly
                 if (c.SemanticModel.GetSymbolInfo(c.Node).Symbol is { } attribute
                     && attribute.IsInType(KnownType.System_ObsoleteAttribute))
                 {
-                    c.ReportIssue(Diagnostic.Create(RemoveRule, c.Node.GetLocation()));
+                    var location = c.Node.GetLocation();
+                    c.ReportIssue(Diagnostic.Create(RemoveRule, location));
 
                     if (!attribute.GetParameters().Any())
                     {
-                        c.ReportIssue(Diagnostic.Create(ExplanationNeededRule, c.Node.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(ExplanationNeededRule, location));
                     }
                 }
             },
