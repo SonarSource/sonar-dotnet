@@ -84,4 +84,6 @@ public class Program
             return builder2.ToString();
         }
     }
+
+    private StringBuilder myField = new StringBuilder(); // Compliant
 }

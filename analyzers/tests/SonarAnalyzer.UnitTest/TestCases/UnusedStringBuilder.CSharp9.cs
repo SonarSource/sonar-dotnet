@@ -13,5 +13,8 @@ public class MyClass
         builder3.Append(builder1.ToString());
 
         (StringBuilder, StringBuilder) builder4 = (new(), new()); // FN
+
+        StringBuilder builderInLine1 = new(), builderInLine2 = new(); // Noncompliant
+//                    ^^^^^^^^^^^^^^^^^^^^^^  ^^^^^^^^^^^^^^^^^^^^^^  // Noncompliant@-1
     }
 }

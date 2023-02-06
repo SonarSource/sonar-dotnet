@@ -123,6 +123,7 @@ public class UnusedStringBuilderTest
     [DataRow("sb.Remove(sb.Length - 1, 1)", true)]
     [DataRow("""Dim a = $"{sb} is ToStringed here" """, true)]
     [DataRow("Dim a = sb.Length", false)] // FP
+    [DataRow("""SB.ToString()""", true)]
     public void UnusedStringBuilder_VBExpressionsTest(string expression, bool compliant)
     {
         var code = $$"""

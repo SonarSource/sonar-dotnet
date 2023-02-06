@@ -29,6 +29,7 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
 
     protected override bool NeedsToTrack(VariableDeclaratorSyntax declaration, SemanticModel semanticModel) =>
         declaration.Initializer is not null
+        && declaration.Parent.Parent is LocalDeclarationStatementSyntax
         && declaration.Initializer.Value is { } expression
         && IsStringBuilderObjectCreation(expression, semanticModel);
 

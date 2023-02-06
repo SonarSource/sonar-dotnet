@@ -27,9 +27,10 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
 
     protected override string GetVariableName(VariableDeclaratorSyntax declaration) => declaration.Names.FirstOrDefault().ToString();
 
-    protected override bool NeedsToTrack(VariableDeclaratorSyntax expression, SemanticModel semanticModel) =>
-        expression.Initializer is not null
-        && expression.Initializer.Value is ObjectCreationExpressionSyntax objectCreation
+    protected override bool NeedsToTrack(VariableDeclaratorSyntax declaration, SemanticModel semanticModel) =>
+        declaration.Initializer is not null
+        && declaration.Parent is LocalDeclarationStatementSyntax
+        && declaration.Initializer.Value is ObjectCreationExpressionSyntax objectCreation
         && objectCreation.Type.IsKnownType(KnownType.System_Text_StringBuilder, semanticModel);
 
     protected override IList<InvocationExpressionSyntax> GetInvocations(VariableDeclaratorSyntax declaration) =>

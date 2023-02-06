@@ -47,5 +47,7 @@ Public Class Program
             Return builder2.ToString()
         End Get
     End Property
+
+    Private myField As StringBuilder = New StringBuilder() ' Compliant
 End Class
 
