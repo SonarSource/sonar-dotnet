@@ -10,7 +10,7 @@ public class SingleLine //
 
     // Noncompliant@-2 (a lot of whitespace before)
 
-    //            
+    //
 
     // Noncompliant@-2 (a lot of whitespace after)
 
@@ -75,6 +75,8 @@ public class SingleLine //
     //
     /// text
     // Noncompliant@-4
+    // Secondary@-4
+    // Secondary@-4
 
     //
     //
@@ -83,6 +85,8 @@ public class SingleLine //
      * text
      */
     // Noncompliant@-6
+    // Secondary@-6
+    // Secondary@-6
 
     //
     //
@@ -91,10 +95,14 @@ public class SingleLine //
      * text
      */
     // Noncompliant@-6
+    // Secondary@-6
+    // Secondary@-6
 
     void Method()
     {
-        // Noncompliant@+2
+        // Noncompliant@+4
+        // Secondary@+4
+        // Secondary@+4
 
         //
         //
@@ -106,6 +114,8 @@ public class SingleLine //
 
         // Noncompliant@-5
         // Noncompliant@-5
+        // Secondary@-5
+        // Secondary@-5
 
         //
         //
@@ -136,7 +146,7 @@ public class SingleLineDocumentation ///
             ///
     // Noncompliant@-1 (a lot of whitespace before)
 
-    ///					
+    ///
     // Noncompliant@-1 (a lot of whitespace after)
 
     ///
@@ -188,7 +198,7 @@ public class MultiLine /* */
     /*      */
     // Noncompliant@-1 (a lot of whitespace inside)
 
-    /**/					
+    /**/
     // Noncompliant@-1 (a lot of whitespace after)
 
     // Noncompliant@+1
@@ -286,7 +296,7 @@ public class MultiLineDocumentation /** */
     /**      */
     // Noncompliant@-1 (a lot of whitespace inside)
 
-    /***/						
+    /***/
     // Noncompliant@-1 (a lot of whitespace after)
 
     // Noncompliant@+1
@@ -381,7 +391,9 @@ public class MultiLineDocumentation /** */
 ///
 
 
-// Noncompliant@+2
+// Noncompliant@+4
+// Secondary@+4
+// Secondary@+4
 
 //
 //
