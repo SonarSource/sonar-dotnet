@@ -187,6 +187,30 @@ public partial class SonarAnalysisContextTest
         startContext.RaisedDiagnostic.Should().NotBeNull().And.BeSameAs(diagnostic);
     }
 
+    [TestMethod]
+    public void SonarCompilationStartAnalysisContext_RegisterCompilationEnd_ReportsIssue()
+    {
+        var context = new DummyAnalysisContext(TestContext);
+        var startContext = new DummyCompilationStartAnalysisContext(context);
+        var sut = new SonarCompilationStartAnalysisContext(new(context, DummyMainDescriptor), startContext);
+        var diagnostic = Diagnostic.Create(DiagnosticDescriptorFactory.CreateUtility("TEST", "Test report"), context.Tree.GetRoot().GetLocation());
+        sut.RegisterCompilationEndAction(x => x.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, diagnostic));
+
+        startContext.RaisedDiagnostic.Should().NotBeNull().And.BeSameAs(diagnostic);
+    }
+
+    [TestMethod]
+    public void SonarCompilationStartAnalysisContext_RegistSymbol_ReportsIssue()
+    {
+        var context = new DummyAnalysisContext(TestContext);
+        var startContext = new DummyCompilationStartAnalysisContext(context);
+        var sut = new SonarCompilationStartAnalysisContext(new(context, DummyMainDescriptor), startContext);
+        var diagnostic = Diagnostic.Create(DiagnosticDescriptorFactory.CreateUtility("TEST", "Test report"), context.Tree.GetRoot().GetLocation());
+        sut.RegisterSymbolAction(x => x.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, diagnostic));
+
+        startContext.RaisedDiagnostic.Should().NotBeNull().And.BeSameAs(diagnostic);
+    }
+
     private static CompilationStartAnalysisContext MockCompilationStartAnalysisContext(DummyAnalysisContext context)
     {
         var mock = new Mock<CompilationStartAnalysisContext>(context.Model.Compilation, context.Options, CancellationToken.None);
@@ -280,14 +304,25 @@ public partial class SonarAnalysisContextTest
 
         public override void RegisterCodeBlockAction(Action<CodeBlockAnalysisContext> action) => throw new NotImplementedException();
         public override void RegisterCodeBlockStartAction<TLanguageKindEnum>(Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action) => throw new NotImplementedException();
-        public override void RegisterCompilationEndAction(Action<CompilationAnalysisContext> action) => compilationEndCount++;
+        public override void RegisterCompilationEndAction(Action<CompilationAnalysisContext> action)
+        {
+            compilationEndCount++;
+            action(new CompilationAnalysisContext(context.Model.Compilation, context.Options, reportDiagnostic: x => RaisedDiagnostic = x, isSupportedDiagnostic: _ => true, CancellationToken.None));
+        }
+
         public override void RegisterSemanticModelAction(Action<SemanticModelAnalysisContext> action)
         {
             semanticModelCount++;
             action(new SemanticModelAnalysisContext(context.Model, context.Options, reportDiagnostic: x => RaisedDiagnostic = x, isSupportedDiagnostic: _ => true, CancellationToken.None));
         }
 
-        public override void RegisterSymbolAction(Action<SymbolAnalysisContext> action, ImmutableArray<SymbolKind> symbolKinds) => symbolCount++;
+        public override void RegisterSymbolAction(Action<SymbolAnalysisContext> action, ImmutableArray<SymbolKind> symbolKinds)
+        {
+            symbolCount++;
+            action(new SymbolAnalysisContext(Mock.Of<ISymbol>(), context.Model.Compilation, context.Options,
+                reportDiagnostic: x => RaisedDiagnostic = x, isSupportedDiagnostic: _ => true, CancellationToken.None));
+        }
+
         public override void RegisterSyntaxNodeAction<TLanguageKindEnum>(Action<SyntaxNodeAnalysisContext> action, ImmutableArray<TLanguageKindEnum> syntaxKinds) => nodeCount++;
         public override void RegisterSyntaxTreeAction(Action<SyntaxTreeAnalysisContext> action) => throw new NotImplementedException();
     }
