@@ -39,9 +39,9 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
         declaration.Parent.Parent.Parent.DescendantNodes().OfType<ReturnStatementSyntax>().ToList();
 
     protected override bool IsStringBuilderAccessed(string variableName, IList<InvocationExpressionSyntax> invocations) =>
-        invocations.Any(x => x.Expression is MemberAccessExpressionSyntax { } member
-            && IsSameVariable(member.Expression, variableName)
-            && StringBuilderAccessMethods.Contains(member.GetName()));
+    invocations.Any(x => x.Expression is MemberAccessExpressionSyntax { } member
+        && IsSameVariable(member.Expression, variableName)
+        && StringBuilderAccessMethods.Contains(member.GetName()));
 
     protected override bool IsPassedToMethod(string variableName, IList<InvocationExpressionSyntax> invocations) =>
         invocations.Any(x => x.ArgumentList.Arguments.Any(y => IsSameVariable(y.GetExpression(), variableName)));

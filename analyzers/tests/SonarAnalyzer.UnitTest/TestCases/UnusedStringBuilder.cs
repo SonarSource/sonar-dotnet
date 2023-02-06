@@ -45,7 +45,7 @@ public class Program
         var m = builder14[0];
 
         StringBuilder builder15 = new StringBuilder(); // Noncompliant FP
-        builder15?.ToString();
+        builder15?.Append("").ToString();
 
         if (true)
         {
