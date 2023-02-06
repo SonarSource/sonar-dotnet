@@ -230,22 +230,27 @@ namespace Tests.Diagnostics
 
     public class PropertyAccess
     {
-        private int OnlyRead { get; set; }  // Noncompliant {{Remove the unused private set accessor in property 'OnlyRead'.}}
+        private int OnlyRead { get; set; }                                              // Noncompliant {{Remove the unused private set accessor in property 'OnlyRead'.}}
 //                                  ^^^
         private int OnlySet { get; set; }
-        private int OnlySet2 { get { return 42; } set { } } // Noncompliant {{Remove the unused private get accessor in property 'OnlySet2'.}}
+        private int OnlySet2 { get { return 42; } set { } }                             // Noncompliant {{Remove the unused private get accessor in property 'OnlySet2'.}}
 //                             ^^^
-        private int NotAccessed { get; set; }   // Noncompliant {{Remove the unused private property 'NotAccessed'.}}
+        private int NotAccessed { get; set; }                                           // Noncompliant {{Remove the unused private property 'NotAccessed'.}}
 //                  ^^^^^^^^^^^
-        private int ExpressionBodiedProperty => 1;                             // Noncompliant {{Remove the unused private property 'ExpressionBodiedProperty'.}}
+        public int PrivateGetter { private get; set; }                                  // FN - unused private getter
+        public int PrivateSetter { get; private set; }                                  // FN - unused private setter
+
+        private int ExpressionBodiedProperty => 1;                                      // Noncompliant {{Remove the unused private property 'ExpressionBodiedProperty'.}}
 //                  ^^^^^^^^^^^^^^^^^^^^^^^^
-        private int ExpressionBodiedProperty2 { get => 1; }                    // Noncompliant
-        private int ExpressionBodiedProperty3 { set => _ = value; }            // Noncompliant
-        private int ExpressionBodiedProperty4 { get => 1; set => _ = value; }  // Noncompliant
-        private int ExpressionBodiedProperty5 { get => 1; set => _ = value; }  // Noncompliant
+        private int ExpressionBodiedProperty2 { get => 1; }                             // Noncompliant
+        private int ExpressionBodiedProperty3 { set => _ = value; }                     // Noncompliant
+        private int ExpressionBodiedProperty4 { get => 1; set => _ = value; }           // Noncompliant
+        private int ExpressionBodiedProperty5 { get => 1; set => _ = value; }           // Noncompliant
 //                                              ^^^
-        private int ExpressionBodiedProperty6 { get => 1; set => _ = value; }  // Noncompliant
+        private int ExpressionBodiedProperty6 { get => 1; set => _ = value; }           // Noncompliant
 //                                                        ^^^
+        public int ExpressionBodiedProperty7 { private get => 1; set => _ = value; }    // FN - unused private getter
+        public int ExpressionBodiedProperty8 { get => 1; private set => _ = value; }    // FN - unused private setter
 
         private int BothAccessed { get; set; }
 
