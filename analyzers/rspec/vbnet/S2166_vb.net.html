@@ -1,0 +1,35 @@
+<p>Clear, communicative naming is important in code. It helps maintainers and API users understand the intentions for and uses of a unit of code.
+Using "exception" in the name of a class that does not extend <code>Exception</code> or one of its subclasses is a clear violation of the expectation
+that a class' name will indicate what it is and/or does.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Public Class FruitException ' Noncompliant - this has nothing to do with Exception
+    Private expected As Fruit
+    Private unusualCharacteristics As String
+    Private appropriateForCommercialExploitation As Boolean
+    ' ...
+End Class
+
+Public Class CarException ' Noncompliant - does not derive from any Exception-based class
+    Public Sub New(ByVal message As String, ByVal inner As Exception)
+        ' ...
+    End Sub
+End Class
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Public Class FruitSport ' Compliant - class name does not end with 'Exception'
+    Private expected As Fruit
+    Private unusualCharacteristics As String
+    Private appropriateForCommercialExploitation As Boolean
+    ' ...
+End Class
+
+Public Class CarException Inherits Exception ' Compliant - correctly extends System.Exception
+    Public Sub New(ByVal message As String, ByVal inner As Exception)
+        MyBase.New(message, inner)
+        ' ...
+    End Sub
+End Class
+</pre>
+

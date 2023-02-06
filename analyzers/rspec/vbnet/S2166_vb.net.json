@@ -1,0 +1,19 @@
+{
+  "title": "Classes named like \"Exception\" should extend \"Exception\" or a subclass",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "convention",
+    "error-handling",
+    "pitfall"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-2166",
+  "sqKey": "S2166",
+  "scope": "Main",
+  "quickfix": "unknown"
+}
