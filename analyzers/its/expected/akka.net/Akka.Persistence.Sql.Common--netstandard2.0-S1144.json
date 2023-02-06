@@ -7,9 +7,9 @@
 "uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\SqlJournal.cs",
 "region":  {
 "startLine":  416,
-"startColumn":  9,
-"endLine":  424,
-"endColumn":  10
+"startColumn":  34,
+"endLine":  416,
+"endColumn":  51
 }
 }
 },
@@ -20,9 +20,9 @@
 "uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\SqlSnapshotStore.cs",
 "region":  {
 "startLine":  224,
-"startColumn":  9,
-"endLine":  239,
-"endColumn":  10
+"startColumn":  31,
+"endLine":  224,
+"endColumn":  46
 }
 }
 }

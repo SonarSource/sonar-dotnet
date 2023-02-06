@@ -7,9 +7,9 @@
 "uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  189,
-"startColumn":  9,
-"endLine":  192,
-"endColumn":  10
+"startColumn":  31,
+"endLine":  189,
+"endColumn":  51
 }
 }
 }

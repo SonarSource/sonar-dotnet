@@ -33,9 +33,9 @@
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
 "region":  {
 "startLine":  56,
-"startColumn":  13,
-"endLine":  60,
-"endColumn":  14
+"startColumn":  25,
+"endLine":  56,
+"endColumn":  29
 }
 }
 }

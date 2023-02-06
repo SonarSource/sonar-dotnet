@@ -35,7 +35,7 @@ public class PrivateTypes
     }
 
     private class PrivateClass { } // Noncompliant
-//  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+//                ^^^^^^^^^^^^
     internal class InternalClass { } // Noncompliant
 
     private struct PrivateStruct { } // Noncompliant

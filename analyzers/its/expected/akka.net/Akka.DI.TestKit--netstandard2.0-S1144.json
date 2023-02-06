@@ -7,9 +7,9 @@
 "uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
 "region":  {
 "startLine":  34,
-"startColumn":  13,
-"endLine":  40,
-"endColumn":  14
+"startColumn":  20,
+"endLine":  34,
+"endColumn":  37
 }
 }
 },
@@ -20,9 +20,9 @@
 "uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
 "region":  {
 "startLine":  47,
-"startColumn":  13,
-"endLine":  53,
-"endColumn":  14
+"startColumn":  20,
+"endLine":  47,
+"endColumn":  36
 }
 }
 },
@@ -33,9 +33,9 @@
 "uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
 "region":  {
 "startLine":  62,
-"startColumn":  13,
-"endLine":  65,
-"endColumn":  14
+"startColumn":  20,
+"endLine":  62,
+"endColumn":  33
 }
 }
 },
@@ -46,9 +46,9 @@
 "uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
 "region":  {
 "startLine":  82,
-"startColumn":  13,
-"endLine":  88,
-"endColumn":  14
+"startColumn":  20,
+"endLine":  82,
+"endColumn":  35
 }
 }
 },
@@ -59,9 +59,9 @@
 "uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
 "region":  {
 "startLine":  170,
-"startColumn":  13,
-"endLine":  173,
-"endColumn":  14
+"startColumn":  20,
+"endLine":  170,
+"endColumn":  39
 }
 }
 },
@@ -72,9 +72,9 @@
 "uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
 "region":  {
 "startLine":  182,
-"startColumn":  13,
-"endLine":  185,
-"endColumn":  14
+"startColumn":  20,
+"endLine":  182,
+"endColumn":  37
 }
 }
 }

@@ -31,8 +31,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string S4487DiagnosticId = "S4487";
         private const string S4487MessageFormat = "Remove this unread {0} field '{1}' or refactor the code to use its value.";
 
-        private static readonly DiagnosticDescriptor RuleS1144 = DescriptorFactory.Create(S1144DiagnosticId, S1144MessageFormat, fadeOutCode: true);
-        private static readonly DiagnosticDescriptor RuleS4487 = DescriptorFactory.Create(S4487DiagnosticId, S4487MessageFormat, fadeOutCode: true);
+        private static readonly DiagnosticDescriptor RuleS1144 = DescriptorFactory.Create(S1144DiagnosticId, S1144MessageFormat);
+        private static readonly DiagnosticDescriptor RuleS4487 = DescriptorFactory.Create(S4487DiagnosticId, S4487MessageFormat);
         private static readonly ImmutableArray<KnownType> IgnoredTypes =
             ImmutableArray.Create(
                 KnownType.UnityEditor_AssetModificationProcessor,
@@ -215,7 +215,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 };
 
             Diagnostic CreateS1144Diagnostic(SyntaxNode syntaxNode, ISymbol symbol) =>
-                Diagnostic.Create(RuleS1144, syntaxNode.GetLocation(), accessibility, symbol.GetClassification(), GetMemberName(symbol));
+                Diagnostic.Create(RuleS1144, GetIdentifierLocation(syntaxNode), accessibility, symbol.GetClassification(), GetMemberName(symbol));
+
+            static Location GetIdentifierLocation(SyntaxNode syntaxNode) =>
+                syntaxNode.GetIdentifier() is { } identifier
+                    ? identifier.GetLocation()
+                    : syntaxNode.GetLocation();
         }
 
         private static Diagnostic GetDiagnosticsForProperty(IPropertySymbol property, IReadOnlyDictionary<IPropertySymbol, AccessorAccess> propertyAccessorAccess)
@@ -225,14 +230,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 && property.SetMethod is { }
                 && GetAccessorSyntax(property.SetMethod) is { } setter)
             {
-                return Diagnostic.Create(RuleS1144, setter.GetLocation(), SyntaxConstants.Private, "set accessor in property", property.Name);
+                return Diagnostic.Create(RuleS1144, setter.Keyword.GetLocation(), SyntaxConstants.Private, "set accessor in property", property.Name);
             }
             else if (access == AccessorAccess.Set
                      && property.GetMethod is { }
                      && GetAccessorSyntax(property.GetMethod) is { } getter
                      && getter.HasBodyOrExpressionBody())
             {
-                return Diagnostic.Create(RuleS1144, getter.GetLocation(), SyntaxConstants.Private, "get accessor in property", property.Name);
+                return Diagnostic.Create(RuleS1144, getter.Keyword.GetLocation(), SyntaxConstants.Private, "get accessor in property", property.Name);
             }
             else
             {

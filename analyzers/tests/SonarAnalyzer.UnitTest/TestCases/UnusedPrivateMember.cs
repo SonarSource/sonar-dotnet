@@ -67,10 +67,11 @@ namespace Tests.Diagnostics
             get; set;
         }
         private void Method() { } // Noncompliant {{Remove the unused private method 'Method'.}}
+//                   ^^^^^^
         private class Class { }// Noncompliant {{Remove the unused private class 'Class'.}}
-//      ^^^^^^^^^^^^^^^^^^^^^^^
+//                    ^^^^^
         private struct Struct { }// Noncompliant {{Remove the unused private struct 'Struct'.}}
-//      ^^^^^^^^^^^^^^^^^^^^^^^^^
+//                     ^^^^^^
         private delegate void Delegate();
         private delegate void Delegate2(); // Noncompliant {{Remove the unused private delegate 'Delegate2'.}}
         private event Delegate Event; //Noncompliant {{Remove the unused private event 'Event'.}}
@@ -143,6 +144,14 @@ namespace Tests.Diagnostics
         internal class Class4 : MyInterface // Noncompliant {{Remove the unused internal class 'Class4'.}}
         {
             public void Method() { }
+        }
+
+        public void MethodUsingLocalMethod()
+        {
+            void LocalMethod() // FN: local function is never used
+            {
+
+            }
         }
     }
 
@@ -221,13 +230,28 @@ namespace Tests.Diagnostics
 
     public class PropertyAccess
     {
-        private int OnlyRead { get; set; }  // Noncompliant {{Remove the unused private set accessor in property 'OnlyRead'.}}
-//                                  ^^^^
+        private int OnlyRead { get; set; }                                              // Noncompliant {{Remove the unused private set accessor in property 'OnlyRead'.}}
+//                                  ^^^
         private int OnlySet { get; set; }
-        private int OnlySet2 { get { return 42; } set { } } // Noncompliant {{Remove the unused private get accessor in property 'OnlySet2'.}}
-//                             ^^^^^^^^^^^^^^^^^^
-        private int NotAccessed { get; set; }   // Noncompliant {{Remove the unused private property 'NotAccessed'.}}
-//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        private int OnlySet2 { get { return 42; } set { } }                             // Noncompliant {{Remove the unused private get accessor in property 'OnlySet2'.}}
+//                             ^^^
+        private int NotAccessed { get; set; }                                           // Noncompliant {{Remove the unused private property 'NotAccessed'.}}
+//                  ^^^^^^^^^^^
+        public int PrivateGetter { private get; set; }                                  // FN - unused private getter
+        public int PrivateSetter { get; private set; }                                  // FN - unused private setter
+
+        private int ExpressionBodiedProperty => 1;                                      // Noncompliant {{Remove the unused private property 'ExpressionBodiedProperty'.}}
+//                  ^^^^^^^^^^^^^^^^^^^^^^^^
+        private int ExpressionBodiedProperty2 { get => 1; }                             // Noncompliant
+        private int ExpressionBodiedProperty3 { set => _ = value; }                     // Noncompliant
+        private int ExpressionBodiedProperty4 { get => 1; set => _ = value; }           // Noncompliant
+        private int ExpressionBodiedProperty5 { get => 1; set => _ = value; }           // Noncompliant
+//                                              ^^^
+        private int ExpressionBodiedProperty6 { get => 1; set => _ = value; }           // Noncompliant
+//                                                        ^^^
+        public int ExpressionBodiedProperty7 { private get => 1; set => _ = value; }    // FN - unused private getter
+        public int ExpressionBodiedProperty8 { get => 1; private set => _ = value; }    // FN - unused private setter
+
         private int BothAccessed { get; set; }
 
         private int OnlyGet { get { return 42; } }
@@ -242,6 +266,53 @@ namespace Tests.Diagnostics
 
             int? x = 10;
             x = this?.OnlyGet;
+
+            ExpressionBodiedProperty5 = 0;
+            Console.WriteLine(ExpressionBodiedProperty6);
+        }
+    }
+
+    public class Indexer1
+    {
+        private int this[int i] => 1;                                       // Noncompliant
+//                  ^^^^
+    }
+
+    public class Indexer2
+    {
+        private int this[int i] { get => 1; }                               // Noncompliant
+    }
+
+    public class Indexer3
+    {
+        private int this[int i] { set => _ = value; }                       // Noncompliant
+    }
+
+    public class Indexer4
+    {
+        private int this[int i] { get { return 1; } set { _ = value; } }    // Noncompliant
+//                  ^^^^
+    }
+
+    public class Indexer5
+    {
+        private int this[int i] { get { return 1; } set { _ = value; } }    // Noncompliant
+//                                                  ^^^
+
+        public void Method()
+        {
+            Console.WriteLine(this[0]);
+        }
+    }
+
+    public class Indexer6
+    {
+        private int this[int i] { get { return 1; } set { _ = value; } }    // Noncompliant
+//                                ^^^
+
+        public void Method()
+        {
+            this[0] = 42;
         }
     }
 

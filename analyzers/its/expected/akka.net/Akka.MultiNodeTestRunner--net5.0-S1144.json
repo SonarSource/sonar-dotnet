@@ -7,9 +7,9 @@
 "uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
 "region":  {
 "startLine":  469,
-"startColumn":  9,
-"endLine":  472,
-"endColumn":  10
+"startColumn":  23,
+"endLine":  469,
+"endColumn":  44
 }
 }
 },
@@ -20,9 +20,9 @@
 "uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
 "region":  {
 "startLine":  536,
-"startColumn":  9,
-"endLine":  539,
-"endColumn":  10
+"startColumn":  29,
+"endLine":  536,
+"endColumn":  46
 }
 }
 }

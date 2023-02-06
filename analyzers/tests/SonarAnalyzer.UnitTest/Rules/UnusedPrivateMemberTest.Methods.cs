@@ -28,7 +28,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 public class PrivateMembers
 {
     private int PrivateMethod() { return 0; } // Noncompliant {{Remove the unused private method 'PrivateMethod'.}}
-//  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+//              ^^^^^^^^^^^^^
     private static int PrivateStaticMethod() { return 0; } // Noncompliant
 
     private class InnerPrivateClass // Noncompliant

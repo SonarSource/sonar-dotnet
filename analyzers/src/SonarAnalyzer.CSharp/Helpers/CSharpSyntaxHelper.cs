@@ -249,6 +249,7 @@ namespace SonarAnalyzer.Helpers
                 DelegateDeclarationSyntax { Identifier: var identifier } => identifier,
                 DestructorDeclarationSyntax { Identifier: var identifier } => identifier,
                 EnumMemberDeclarationSyntax { Identifier: var identifier } => identifier,
+                IndexerDeclarationSyntax { ThisKeyword: var thisKeyword } => thisKeyword,
                 InvocationExpressionSyntax
                 {
                     Expression: not InvocationExpressionSyntax // We don't want to recurse into nested invocations like: fun()()

@@ -79,6 +79,14 @@ namespace Tests.Diagnostics
 
         [My]
         private class Class1 { }
+
+        public void MethodUsingLocalMethod()
+        {
+            void LocalMethod() // FN: local function is never used
+            {
+
+            }
+        }
     }
 
     class NewClass1
@@ -149,9 +157,16 @@ namespace Tests.Diagnostics
 
     public class PropertyAccess
     {
-        private int OnlyRead { get; }  // Fixed
+        private int OnlyRead { get; }                                              // Fixed
         private int OnlySet { get; set; }
-        private int OnlySet2 { set { } } // Fixed
+        private int OnlySet2 { set { } }                             // Fixed
+        public int PrivateGetter { private get; set; }                                  // FN - unused private getter
+        public int PrivateSetter { get; private set; }                                  // FN - unused private setter
+        private int ExpressionBodiedProperty5 { set => _ = value; }           // Fixed
+        private int ExpressionBodiedProperty6 { get => 1; }           // Fixed
+        public int ExpressionBodiedProperty7 { private get => 1; set => _ = value; }    // FN - unused private getter
+        public int ExpressionBodiedProperty8 { get => 1; private set => _ = value; }    // FN - unused private setter
+
         private int BothAccessed { get; set; }
 
         private int OnlyGet { get { return 42; } }
@@ -166,6 +181,45 @@ namespace Tests.Diagnostics
 
             int? x = 10;
             x = this?.OnlyGet;
+
+            ExpressionBodiedProperty5 = 0;
+            Console.WriteLine(ExpressionBodiedProperty6);
+        }
+    }
+
+    public class Indexer1
+    {
+    }
+
+    public class Indexer2
+    {
+    }
+
+    public class Indexer3
+    {
+    }
+
+    public class Indexer4
+    {
+    }
+
+    public class Indexer5
+    {
+        private int this[int i] { get { return 1; } }    // Fixed
+
+        public void Method()
+        {
+            Console.WriteLine(this[0]);
+        }
+    }
+
+    public class Indexer6
+    {
+        private int this[int i] { set { _ = value; } }    // Fixed
+
+        public void Method()
+        {
+            this[0] = 42;
         }
     }
 
