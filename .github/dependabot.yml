@@ -16,7 +16,7 @@ updates:
     labels: [ ]     # Do not add default "dependency" label
 
   - package-ecosystem: "nuget"
-    directory: "/"
+    directory: "/analyzers"
     schedule:
       interval: "daily"
     labels: [ ]     # Do not add default "dependency" label
