@@ -18,10 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using SonarAnalyzer.Common;
-using SonarAnalyzer.Helpers;
 using static SonarAnalyzer.Helpers.KnownReference;
 
 namespace SonarAnalyzer.UnitTest;
@@ -157,6 +155,52 @@ public class KnownReferenceTests
         sut.IsReferenced(compilation.Object).Should().Be(expected);
         sut = new KnownReference(VersionBetween("2.0.0.0", "3.5.0.0"));
         sut.IsReferenced(compilation.Object).Should().Be(expected);
+    }
+
+    [DataTestMethod]
+    [DataRow("c5b62af9de6d7244", true)]
+    [DataRow("C5B62AF9DE6D7244", true)]
+    [DataRow("c5-b6-2a-f9-de-6d-72-44", true)]
+    [DataRow(
+        "002400000480000094000000060200000024000052534131000400000100010081b4345a022cc0f4b42bdc795a5a7a1623c1e58dc2246645d751ad41ba98f2749dc5c4e0da3a9e09febcb2cd5b088a0f" +
+        "041f8ac24b20e736d8ae523061733782f9c4cd75b44f17a63714aced0b29a59cd1ce58d8e10ccdb6012c7098c39871043b7241ac4ab9f6b34f183db716082cd57c1ff648135bece256357ba735e67dc6", true)]
+    [DataRow("AA-68-91-16-d3-a4-ae-33", false)]
+    public void PublicKeyTokenIs_c5b62af9de6d7244(string publicKeyToken, bool expected)
+    {
+        var compilation = new Mock<Compilation>("compilationName", ImmutableArray<MetadataReference>.Empty, new Dictionary<string, string>(), false, null, null);
+        var identity = new AssemblyIdentity("assemblyName", publicKeyOrToken: ImmutableArray.Create<byte>(
+            0x00, 0x24, 0x00, 0x00, 0x04, 0x80, 0x00, 0x00, 0x94, 0x00, 0x00, 0x00, 0x06, 0x02, 0x00, 0x00, 0x00, 0x24, 0x00, 0x00, 0x52, 0x53, 0x41, 0x31, 0x00,
+            0x04, 0x00, 0x00, 0x01, 0x00, 0x01, 0x00, 0x81, 0xb4, 0x34, 0x5a, 0x02, 0x2c, 0xc0, 0xf4, 0xb4, 0x2b, 0xdc, 0x79, 0x5a, 0x5a, 0x7a, 0x16, 0x23, 0xc1,
+            0xe5, 0x8d, 0xc2, 0x24, 0x66, 0x45, 0xd7, 0x51, 0xad, 0x41, 0xba, 0x98, 0xf2, 0x74, 0x9d, 0xc5, 0xc4, 0xe0, 0xda, 0x3a, 0x9e, 0x09, 0xfe, 0xbc, 0xb2,
+            0xcd, 0x5b, 0x08, 0x8a, 0x0f, 0x04, 0x1f, 0x8a, 0xc2, 0x4b, 0x20, 0xe7, 0x36, 0xd8, 0xae, 0x52, 0x30, 0x61, 0x73, 0x37, 0x82, 0xf9, 0xc4, 0xcd, 0x75,
+            0xb4, 0x4f, 0x17, 0xa6, 0x37, 0x14, 0xac, 0xed, 0x0b, 0x29, 0xa5, 0x9c, 0xd1, 0xce, 0x58, 0xd8, 0xe1, 0x0c, 0xcd, 0xb6, 0x01, 0x2c, 0x70, 0x98, 0xc3,
+            0x98, 0x71, 0x04, 0x3b, 0x72, 0x41, 0xac, 0x4a, 0xb9, 0xf6, 0xb3, 0x4f, 0x18, 0x3d, 0xb7, 0x16, 0x08, 0x2c, 0xd5, 0x7c, 0x1f, 0xf6, 0x48, 0x13, 0x5b,
+            0xec, 0xe2, 0x56, 0x35, 0x7b, 0xa7, 0x35, 0xe6, 0x7d, 0xc6), hasPublicKey: true);
+        compilation.SetupGet(x => x.ReferencedAssemblyNames).Returns(new[] { identity });
+        var sut = new KnownReference(PublicKeyTokenIs(publicKeyToken));
+        sut.IsReferenced(compilation.Object).Should().Be(expected);
+        sut = new KnownReference(OptionalPublicKeyTokenIs(publicKeyToken));
+        sut.IsReferenced(compilation.Object).Should().Be(expected);
+    }
+
+    [TestMethod]
+    public void PublicKeyTokenIs_FailsWhenKeyIsMissing()
+    {
+        var compilation = new Mock<Compilation>("compilationName", ImmutableArray<MetadataReference>.Empty, new Dictionary<string, string>(), false, null, null);
+        var identity = new AssemblyIdentity("assemblyName", hasPublicKey: false);
+        compilation.SetupGet(x => x.ReferencedAssemblyNames).Returns(new[] { identity });
+        var sut = new KnownReference(PublicKeyTokenIs("c5b62af9de6d7244"));
+        sut.IsReferenced(compilation.Object).Should().BeFalse();
+    }
+
+    [TestMethod]
+    public void OptionalPublicKeyTokenIs_SucceedsWhenKeyIsMissing()
+    {
+        var compilation = new Mock<Compilation>("compilationName", ImmutableArray<MetadataReference>.Empty, new Dictionary<string, string>(), false, null, null);
+        var identity = new AssemblyIdentity("assemblyName", hasPublicKey: false);
+        compilation.SetupGet(x => x.ReferencedAssemblyNames).Returns(new[] { identity });
+        var sut = new KnownReference(OptionalPublicKeyTokenIs("c5b62af9de6d7244"));
+        sut.IsReferenced(compilation.Object).Should().BeTrue();
     }
 
     [DataTestMethod]

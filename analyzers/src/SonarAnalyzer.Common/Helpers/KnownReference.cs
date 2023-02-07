@@ -65,6 +65,21 @@ namespace SonarAnalyzer.Helpers
         internal static Func<AssemblyIdentity, bool> VersionBetween(Version from, Version to) =>
             new(x => x.Version >= from && x.Version <= to);
 
+        internal static Func<AssemblyIdentity, bool> OptionalPublicKeyTokenIs(string key) =>
+            new(x => !x.HasPublicKey || PublicKeyEqualHex(x, key));
+
+        internal static Func<AssemblyIdentity, bool> PublicKeyTokenIs(string key) =>
+            new(x => x.HasPublicKey && PublicKeyEqualHex(x, key));
+
+        private static bool PublicKeyEqualHex(AssemblyIdentity identity, string hexString)
+        {
+            var normalizedHexString = hexString.Replace("-", string.Empty);
+            return ArraysEqual(identity.PublicKeyToken.ToArray(), normalizedHexString) || ArraysEqual(identity.PublicKey.ToArray(), normalizedHexString);
+
+            static bool ArraysEqual(byte[] key, string hexString) =>
+                BitConverter.ToString(key).Replace("-", string.Empty).Equals(hexString, StringComparison.OrdinalIgnoreCase);
+        }
+
         internal static Func<IEnumerable<AssemblyIdentity>, bool> Any(Func<AssemblyIdentity, bool> predicate) =>
             new(identities => identities.Any(predicate));
 
