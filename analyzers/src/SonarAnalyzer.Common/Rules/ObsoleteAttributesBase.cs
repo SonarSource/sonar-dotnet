@@ -23,20 +23,23 @@ namespace SonarAnalyzer.Rules;
 public abstract class ObsoleteAttributesBase<TSyntaxKind> : SonarDiagnosticAnalyzer
     where TSyntaxKind : struct
 {
-    protected const string ExplanationNeededDiagnosticId = "S1123";
-    protected const string ExplanationNeededMessageFormat = "Add an explanation.";
-    protected abstract DiagnosticDescriptor ExplanationNeededRule { get; }
+    private const string ExplanationNeededDiagnosticId = "S1123";
+    private const string ExplanationNeededMessageFormat = "Add an explanation.";
 
-    protected const string RemoveDiagnosticId = "S1133";
-    protected const string RemoveMessageFormat = "Do not forget to remove this deprecated code someday.";
-    protected abstract DiagnosticDescriptor RemoveRule { get; }
+    private const string RemoveDiagnosticId = "S1133";
+    private const string RemoveMessageFormat = "Do not forget to remove this deprecated code someday.";
 
     protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; }
 
+    internal DiagnosticDescriptor ExplanationNeededRule { get; }
+    internal DiagnosticDescriptor RemoveRule { get; }
+
     protected ObsoleteAttributesBase()
     {
+        ExplanationNeededRule = Language.CreateDescriptor(ExplanationNeededDiagnosticId, ExplanationNeededMessageFormat);
+        RemoveRule = Language.CreateDescriptor(RemoveDiagnosticId, RemoveMessageFormat);
         SupportedDiagnostics = ImmutableArray.Create(ExplanationNeededRule, RemoveRule);
     }
 

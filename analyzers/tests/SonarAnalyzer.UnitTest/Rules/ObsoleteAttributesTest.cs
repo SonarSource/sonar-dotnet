@@ -26,14 +26,23 @@ namespace SonarAnalyzer.UnitTest.Rules;
 [TestClass]
 public class ObsoleteAttributesTest
 {
-    private readonly VerifierBuilder explanationNeededCS =
-        new VerifierBuilder<CS.ObsoleteAttributes>().WithOnlyDiagnostics(CS.ObsoleteAttributes.S1123);
-    private readonly VerifierBuilder explanationNeededVB =
-        new VerifierBuilder<VB.ObsoleteAttributes>().WithOnlyDiagnostics(CS.ObsoleteAttributes.S1123);
-    private readonly VerifierBuilder removeCS =
-        new VerifierBuilder<CS.ObsoleteAttributes>().WithOnlyDiagnostics(CS.ObsoleteAttributes.S1133);
-    private readonly VerifierBuilder removeVB =
-        new VerifierBuilder<VB.ObsoleteAttributes>().WithOnlyDiagnostics(CS.ObsoleteAttributes.S1133);
+    private readonly VerifierBuilder explanationNeededCS;
+    private readonly VerifierBuilder explanationNeededVB;
+    private readonly VerifierBuilder removeCS;
+    private readonly VerifierBuilder removeVB;
+
+    public ObsoleteAttributesTest()
+    {
+        var analyzerCs = new CS.ObsoleteAttributes();
+        var builderCs = new VerifierBuilder().AddAnalyzer(() => analyzerCs);
+        explanationNeededCS = builderCs.WithOnlyDiagnostics(analyzerCs.ExplanationNeededRule);
+        removeCS = builderCs.WithOnlyDiagnostics(analyzerCs.RemoveRule);
+
+        var analyzerVb = new VB.ObsoleteAttributes();
+        var builderVb = new VerifierBuilder().AddAnalyzer(() => analyzerVb);
+        explanationNeededVB = builderVb.WithOnlyDiagnostics(analyzerVb.ExplanationNeededRule);
+        removeVB = builderVb.WithOnlyDiagnostics(analyzerVb.RemoveRule);
+    }
 
     [TestMethod]
     public void ObsoleteAttributesNeedExplanation_CS() =>

@@ -23,13 +23,5 @@ namespace SonarAnalyzer.Rules.VisualBasic;
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
 public sealed class ObsoleteAttributes : ObsoleteAttributesBase<SyntaxKind>
 {
-    internal static readonly DiagnosticDescriptor S1123 =
-        DescriptorFactory.Create(ExplanationNeededDiagnosticId, ExplanationNeededMessageFormat);
-    internal static readonly DiagnosticDescriptor S1133 =
-        DescriptorFactory.Create(RemoveDiagnosticId, RemoveMessageFormat);
-
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
-
-    protected override DiagnosticDescriptor ExplanationNeededRule { get; } = S1123;
-    protected override DiagnosticDescriptor RemoveRule { get; } = S1133;
 }
