@@ -59,10 +59,15 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
     protected override bool IsPropertyReferenced(VariableDeclaratorSyntax declaration, IList<InvocationExpressionSyntax> invocations, ISymbol variableSymbol, SemanticModel semanticModel) =>
         invocations.Any(x => IsSameVariable(x.Expression, variableSymbol, semanticModel) && semanticModel.GetOperation(x).Kind is OperationKindEx.PropertyReference);
 
-    private static bool IsSameVariable(ExpressionSyntax expression, ISymbol variableSymbol, SemanticModel semanticModel) =>
-        expression.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Any(p => IsSameVariable(p, variableSymbol, semanticModel))
-        || (expression.Ancestors().OfType<ConditionalAccessExpressionSyntax>().Any() && expression.Ancestors().OfType<ConditionalAccessExpressionSyntax>().First()
-            .DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Any(p => IsSameVariable(p, variableSymbol, semanticModel)));
+    private static bool IsSameVariable(ExpressionSyntax expression, ISymbol variableSymbol, SemanticModel semanticModel)
+    {
+        var identifiers = expression.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>();
+        if (!identifiers.Any() && expression.Ancestors().OfType<ConditionalAccessExpressionSyntax>().Any())
+        {
+            identifiers = expression.Ancestors().OfType<ConditionalAccessExpressionSyntax>().First().DescendantNodesAndSelf().OfType<IdentifierNameSyntax>();
+        }
+        return identifiers.Any(x => IsSameVariable(x, variableSymbol, semanticModel));
+    }
 
     private static bool IsSameVariable(IdentifierNameSyntax identifier, ISymbol variableSymbol, SemanticModel semanticModel) =>
         variableSymbol.Equals(semanticModel.GetSymbolInfo(identifier).Symbol);
