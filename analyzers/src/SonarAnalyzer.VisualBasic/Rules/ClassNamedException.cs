@@ -24,4 +24,6 @@ namespace SonarAnalyzer.Rules.VisualBasic;
 public sealed class ClassNamedException : ClassNamedExceptionBase<SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+
+    protected override SyntaxKind[] AnalyzedSyntaxKinds => new[] { SyntaxKind.ClassBlock, SyntaxKind.ModuleBlock };
 }

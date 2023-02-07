@@ -67,6 +67,6 @@ Partial Class PartialClassExtendsException
     Inherits Exception
 End Class
 
-Module StaticException                           ' Compliant - modules cannot inherit from Exception
+Module StaticException                           ' Noncompliant - the module should be renamed, as it cannot inherit from Exception
 End Module
 

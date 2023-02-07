@@ -24,4 +24,6 @@ namespace SonarAnalyzer.Rules.CSharp;
 public sealed class ClassNamedException : ClassNamedExceptionBase<SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
+    protected override SyntaxKind[] AnalyzedSyntaxKinds => new[] { SyntaxKind.ClassDeclaration };
 }

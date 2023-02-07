@@ -25,6 +25,7 @@ public abstract class ClassNamedExceptionBase<TSyntaxKind> : SonarDiagnosticAnal
 {
     private const string DiagnosticId = "S2166";
 
+    protected abstract TSyntaxKind[] AnalyzedSyntaxKinds { get; }
     protected override string MessageFormat => "Rename this class to remove \"(e|E)xception\" or correct its inheritance.";
 
     protected ClassNamedExceptionBase() : base(DiagnosticId) { }
@@ -37,12 +38,11 @@ public abstract class ClassNamedExceptionBase<TSyntaxKind> : SonarDiagnosticAnal
                 if (Language.Syntax.NodeIdentifier(c.Node) is { IsMissing: false } classIdentifier
                     && classIdentifier.ValueText.EndsWith("Exception", StringComparison.InvariantCultureIgnoreCase)
                     && c.SemanticModel.GetDeclaredSymbol(c.Node) is INamedTypeSymbol { } classSymbol
-                    && !classSymbol.IsStatic
                     && !classSymbol.DerivesFrom(KnownType.System_Exception))
                 {
                     c.ReportIssue(Diagnostic.Create(Rule, classIdentifier.GetLocation()));
                 }
             },
-            Language.SyntaxKind.ClassDeclaration);
+            AnalyzedSyntaxKinds);
 
 }

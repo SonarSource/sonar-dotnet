@@ -34,4 +34,4 @@ partial class PartialClassDoesNotExtendException { }             // Noncompliant
 partial class PartialClassExtendsException { }                   // Compliant - the other part of the class extends Exception
 partial class PartialClassExtendsException: Exception { }
 
-static class StaticException { }                                 // Compliant - static classes cannot inherit from Exception
+static class StaticException { }                                 // Noncompliant - the static class should be renamed, as it cannot inherit from Exception
