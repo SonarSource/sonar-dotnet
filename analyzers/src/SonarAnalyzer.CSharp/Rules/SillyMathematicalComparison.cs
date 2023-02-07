@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if (ShouldRaise(context.SemanticModel, first, second))
             {
-                var typeName = context.SemanticModel.GetSymbolInfo(second).Symbol.ToMinimalDisplayString(context.SemanticModel, second.GetLocation().SourceSpan.Start);
+                var typeName = context.SemanticModel.GetTypeInfo(second).Type.ToString();
                 context.ReportIssue(Diagnostic.Create(Rule, first.Parent.GetLocation(), typeName));
             }
         }
@@ -86,6 +86,18 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 min = float.MinValue;
                 max = float.MaxValue;
+                return true;
+            }
+            if (typeSymbol.Is(KnownType.System_Int64))
+            {
+                min = long.MinValue;
+                max = long.MaxValue;
+                return true;
+            }
+            if (typeSymbol.Is(KnownType.System_UInt64))
+            {
+                min = ulong.MinValue;
+                max = ulong.MaxValue;
                 return true;
             }
 
