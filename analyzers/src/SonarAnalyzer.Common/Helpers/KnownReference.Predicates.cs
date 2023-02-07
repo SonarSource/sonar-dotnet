@@ -23,40 +23,40 @@ namespace SonarAnalyzer.Helpers;
 public sealed partial class KnownReference
 {
     internal static Func<AssemblyIdentity, bool> NameIs(string name) =>
-        new(x => x.Name.Equals(name));
+        x => x.Name.Equals(name);
 
     internal static Func<AssemblyIdentity, bool> StartsWith(string name) =>
-        new(x => x.Name.StartsWith(name));
+        x => x.Name.StartsWith(name);
 
     internal static Func<AssemblyIdentity, bool> EndsWith(string name) =>
-        new(x => x.Name.EndsWith(name));
+        x => x.Name.EndsWith(name);
 
     internal static Func<AssemblyIdentity, bool> Contains(string name) =>
-        new(x => x.Name.Contains(name));
+        x => x.Name.Contains(name);
 
     internal static Func<AssemblyIdentity, bool> VersionLowerThen(string version) =>
         VersionLowerThen(Version.Parse(version));
 
     internal static Func<AssemblyIdentity, bool> VersionLowerThen(Version version) =>
-        new(x => x.Version < version);
+        x => x.Version < version;
 
     internal static Func<AssemblyIdentity, bool> VersionGreaterOrEqual(string version) =>
         VersionGreaterOrEqual(Version.Parse(version));
 
     internal static Func<AssemblyIdentity, bool> VersionGreaterOrEqual(Version version) =>
-        new(x => x.Version >= version);
+        x => x.Version >= version;
 
     internal static Func<AssemblyIdentity, bool> VersionBetween(string from, string to) =>
         VersionBetween(Version.Parse(from), Version.Parse(to));
 
     internal static Func<AssemblyIdentity, bool> VersionBetween(Version from, Version to) =>
-        new(x => x.Version >= from && x.Version <= to);
+        x => x.Version >= from && x.Version <= to;
 
     internal static Func<AssemblyIdentity, bool> OptionalPublicKeyTokenIs(string key) =>
-        new(x => !x.HasPublicKey || PublicKeyEqualHex(x, key));
+        x => !x.HasPublicKey || PublicKeyEqualHex(x, key);
 
     internal static Func<AssemblyIdentity, bool> PublicKeyTokenIs(string key) =>
-        new(x => x.HasPublicKey && PublicKeyEqualHex(x, key));
+        x => x.HasPublicKey && PublicKeyEqualHex(x, key);
 
     private static bool PublicKeyEqualHex(AssemblyIdentity identity, string hexString)
     {
@@ -68,6 +68,5 @@ public sealed partial class KnownReference
     }
 
     internal static Func<IEnumerable<AssemblyIdentity>, bool> Any(Func<AssemblyIdentity, bool> predicate) =>
-        new(identities => identities.Any(predicate));
-
+        identities => identities.Any(predicate);
 }
