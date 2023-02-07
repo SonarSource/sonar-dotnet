@@ -24,11 +24,13 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class SillyMathematicalComparison : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S2198";
-        private const string MessageFormat = "Comparison to this constant is useless; the constant is outside the range of type '{0}'";
+        private const string MathComparisonMessage = "Comparison to this constant is useless; the constant is outside the range of type '{0}'";
+        private const string ConstantComparisonMessage = "Don't compare constant values";
 
-        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+        private static readonly DiagnosticDescriptor MathComparisonRule = DescriptorFactory.Create(DiagnosticId, MathComparisonMessage);
+        private static readonly DiagnosticDescriptor ConstantComparisonRule = DescriptorFactory.Create(DiagnosticId, ConstantComparisonMessage);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(MathComparisonRule, ConstantComparisonRule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterNodeAction(
@@ -43,42 +45,38 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckBinary(SonarSyntaxNodeReportingContext context)
         {
             var binary = (BinaryExpressionSyntax)context.Node;
-            CheckOneSide(context, binary.Left, binary.Right);
-            CheckOneSide(context, binary.Right, binary.Left);
-        }
 
-        private static void CheckOneSide(SonarSyntaxNodeReportingContext context, SyntaxNode first, SyntaxNode second)
-        {
-            if (ShouldRaise(context.SemanticModel, first, second))
+            var constantLeft = binary.Left.FindConstantValue(context.SemanticModel);
+            var constantRight = binary.Right.FindConstantValue(context.SemanticModel);
+
+            if (constantLeft is not null)
             {
-                var typeName = context.SemanticModel.GetTypeInfo(second).Type.ToDisplayString();
-                context.ReportIssue(Diagnostic.Create(Rule, first.Parent.GetLocation(), typeName));
+                if (constantRight is not null) // both are constants
+                {
+                    context.ReportIssue(Diagnostic.Create(ConstantComparisonRule, binary.GetLocation()));
+                }
+                else // left is constant
+                {
+                    CheckOneSide(context, constantLeft, binary.Right);
+                }
+            }
+            else if (constantRight is not null) // right is constant
+            {
+                CheckOneSide(context, constantRight, binary.Left);
             }
         }
 
-        private static bool ShouldRaise(SemanticModel model, SyntaxNode expectedConstant, SyntaxNode other) =>
-            TryGetConstant(model, expectedConstant, out var constant)
-            && model.GetTypeInfo(other).Type is { } typeSymbolOfOther
-            && TryGetRange(typeSymbolOfOther, out var min, out var max)
-            && (constant < min || constant > max);
-
-        private static bool TryGetConstant(SemanticModel model, SyntaxNode expectedConstant, out double constant)
+        private static void CheckOneSide(SonarSyntaxNodeReportingContext context, object constant, SyntaxNode other)
         {
-            if (FindConstant(model, expectedConstant) is { } constValue)
+            if (ConversionHelper.TryConvertWith(constant, Convert.ToDouble, out var doubleConstant)
+                && context.SemanticModel.GetTypeInfo(other).Type is { } typeSymbolOfOther
+                && TryGetRange(typeSymbolOfOther, out var min, out var max)
+                && (doubleConstant < min || doubleConstant > max))
             {
-                constant = constValue;
-                return true;
+                var typeName = context.SemanticModel.GetTypeInfo(other).Type.ToDisplayString();
+                context.ReportIssue(Diagnostic.Create(MathComparisonRule, other.Parent.GetLocation(), typeName));
             }
-
-            constant = default;
-            return false;
         }
-
-        private static double? FindConstant(SemanticModel semanticModel, SyntaxNode node) =>
-            node.FindConstantValue(semanticModel) is { } value
-            && ConversionHelper.TryConvertWith(value, Convert.ToDouble, out var typedValue)
-                ? typedValue
-                : null;
 
         private static bool TryGetRange(ITypeSymbol typeSymbol, out double min, out double max)
         {

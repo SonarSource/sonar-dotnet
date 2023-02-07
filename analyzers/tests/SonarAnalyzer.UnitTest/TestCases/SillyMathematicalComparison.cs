@@ -8,6 +8,8 @@ namespace SonarAnalyzer.UnitTest.TestCases
 {
     internal class SillyMathematicalComparison
     {
+        private T GetValue<T>() => default(T);
+
         public void SBytes()
         {
             const sbyte smallSByte = sbyte.MinValue;
@@ -26,7 +28,7 @@ namespace SonarAnalyzer.UnitTest.TestCases
             const double bigDouble = sbyte.MaxValue;
             const decimal bigDecimal = sbyte.MaxValue;
 
-            sbyte sb = 42;
+            var sb = GetValue<sbyte>();
 
             _ = sb >= bigSByte; // Compliant, not (always true) or (always false)
             _ = sb >= bigShort; // Compliant, not (always true) or (always false)
@@ -79,7 +81,7 @@ namespace SonarAnalyzer.UnitTest.TestCases
             const double bigDouble = byte.MaxValue;
             const decimal bigDecimal = byte.MaxValue;
 
-            byte b = 42;
+            var b = GetValue<byte>();
 
             _ = b >= bigByte; // Compliant, not (always true) or (always false)
             _ = b >= bigShort; // Compliant, not (always true) or (always false)
@@ -130,7 +132,7 @@ namespace SonarAnalyzer.UnitTest.TestCases
             const double bigDouble = short.MaxValue;
             const decimal bigDecimal = short.MaxValue;
 
-            short s = 42;
+            var s = GetValue<short>();
 
             _ = s >= bigShort; // Compliant, not (always true) or (always false)
             _ = s >= bigInt; // Compliant, not (always true) or (always false)
@@ -177,7 +179,7 @@ namespace SonarAnalyzer.UnitTest.TestCases
             const double bigDouble = ushort.MaxValue;
             const decimal bigDecimal = ushort.MaxValue;
 
-            ushort us = 42;
+            var us = GetValue<ushort>();
 
             _ = us >= bigUShort; // Compliant, not (always true) or (always false)
             _ = us >= bigInt; // Compliant, not (always true) or (always false)
@@ -223,7 +225,7 @@ namespace SonarAnalyzer.UnitTest.TestCases
             const double bigDouble = int.MaxValue;
             const decimal bigDecimal = int.MaxValue;
 
-            int i = 42;
+            var i = GetValue<int>();
 
             _ = i >= bigInt; // Compliant, not (always true) or (always false)
             _ = i >= bigUInt; // Compliant, not (always true) or (always false)
@@ -265,7 +267,7 @@ namespace SonarAnalyzer.UnitTest.TestCases
             const double bigDouble = uint.MaxValue;
             const decimal bigDecimal = uint.MaxValue;
 
-            uint ui = 42;
+            var ui = GetValue<uint>();
 
             _ = ui >= bigUInt; // Compliant, not (always true) or (always false)
             _ = bigLong <= ui; // Compliant, not (always true) or (always false)
@@ -304,7 +306,7 @@ namespace SonarAnalyzer.UnitTest.TestCases
             const double bigDouble = long.MaxValue;
             const decimal bigDecimal = long.MaxValue;
 
-            long l = 42;
+            var l = GetValue<long>();
 
             _ = bigLong <= l; // Compliant, not (always true) or (always false)
             _ = bigFloat <= l; // Compliant, not (always true) or (always false)
@@ -339,7 +341,7 @@ namespace SonarAnalyzer.UnitTest.TestCases
             const double bigDouble = ulong.MaxValue;
             const decimal bigDecimal = ulong.MaxValue;
 
-            ulong ul = 42;
+            var ul = GetValue<ulong>();
 
             _ = bigULong <= ul; // Compliant, not (always true) or (always false)
             _ = bigFloat <= ul; // Compliant, not (always true) or (always false)
@@ -370,7 +372,7 @@ namespace SonarAnalyzer.UnitTest.TestCases
             const float bigFloat = float.MaxValue;
             const double bigDouble = float.MaxValue;
 
-            System.Single f = 42;
+            System.Single f = GetValue<float>();
 
             _ = bigFloat <= f; // Compliant, not (always true) or (always false)
             _ = bigDouble <= f; // Compliant, not (always true) or (always false)
@@ -387,6 +389,25 @@ namespace SonarAnalyzer.UnitTest.TestCases
             _ = verySmall < f; // Noncompliant {{Comparison to this constant is useless; the constant is outside the range of type 'float'}}
             _ = verySmall == f; // Noncompliant {{Comparison to this constant is useless; the constant is outside the range of type 'float'}}
             _ = f == veryBig; // Noncompliant {{Comparison to this constant is useless; the constant is outside the range of type 'float'}}
+        }
+
+        public void ConstantInBothOperands()
+        {
+            _ = "Happy" == "Sad"; // Noncompliant {{Don't compare constant values}}
+            _ = "Ipsum" != "Lorem"; // Noncompliant {{Don't compare constant values}}
+
+            var george = true;
+            var boole = false;
+
+            _ = george == boole; // Noncompliant {{Don't compare constant values}}
+
+            var number1 = 128;
+            var number2 = 42;
+
+            _ = 42 == 256; // Noncompliant {{Don't compare constant values}}
+            _ = number1 >= 256; // Noncompliant {{Don't compare constant values}}
+            _ = 42 <= number2; // Noncompliant {{Don't compare constant values}}
+            _ = number1 != number2; // Noncompliant {{Don't compare constant values}}
         }
     }
 }
