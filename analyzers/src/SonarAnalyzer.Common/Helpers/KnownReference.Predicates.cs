@@ -68,5 +68,7 @@ public sealed partial class KnownReference
     }
 
     internal static Func<IEnumerable<AssemblyIdentity>, bool> Any(Func<AssemblyIdentity, bool> predicate) =>
-        identities => identities.Any(predicate);
+        predicate is null
+            ? throw new ArgumentNullException(nameof(predicate))
+            : (identities => identities.Any(predicate));
 }

@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Helpers
 
         internal KnownReference(Func<IEnumerable<AssemblyIdentity>, bool> predicate)
         {
-            this.predicate = predicate;
+            this.predicate = predicate ?? throw new ArgumentNullException(nameof(predicate));
         }
 
         public static KnownReference XUnit_Assert { get; } = new(NameIs("xunit.assert").Or(NameIs("xunit").And(VersionLowerThen("2.0"))));

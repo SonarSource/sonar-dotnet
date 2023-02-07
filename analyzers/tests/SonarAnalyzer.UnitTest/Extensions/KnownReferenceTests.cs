@@ -27,6 +27,20 @@ namespace SonarAnalyzer.UnitTest;
 [TestClass]
 public class KnownReferenceTests
 {
+    [TestMethod]
+    public void KnownReference_ThrowsWhenPredicateNull_1()
+    {
+        var sut = () => new KnownReference(default(Func<AssemblyIdentity, bool>));
+        sut.Should().Throw<ArgumentNullException>();
+    }
+
+    [TestMethod]
+    public void KnownReference_ThrowsWhenPredicateNull_2()
+    {
+        var sut = () => new KnownReference(default(Func<IEnumerable<AssemblyIdentity>, bool>));
+        sut.Should().Throw<ArgumentNullException>();
+    }
+
     [DataTestMethod]
     [DataRow("Test", true)]
     [DataRow("test", false)]
