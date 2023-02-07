@@ -21,19 +21,16 @@
 namespace SonarAnalyzer.Rules.VisualBasic;
 
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-public sealed class DebuggerDisplayUsesExistingMembers : DebuggerDisplayUsesExistingMembersBase<SyntaxKind>
+public sealed class DebuggerDisplayUsesExistingMembers : DebuggerDisplayUsesExistingMembersBase<AttributeSyntax, SyntaxKind>
 {
-
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-    protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(c =>
-            {
-                var node = c.Node;
-                if (true)
-                {
-                    c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
-                }
-            },
-            SyntaxKind.InvocationExpression);
+    protected override SyntaxNode GetAttributeFormatString(AttributeSyntax attribute) =>
+        attribute.ArgumentList.Arguments.FirstOrDefault() is SimpleArgumentSyntax { Expression: LiteralExpressionSyntax { RawKind: (int)SyntaxKind.StringLiteralExpression } formatString }
+            ? formatString
+            : null;
+
+    protected override string GetAttributeName(AttributeSyntax attribute) => attribute.Name.ToString();
+
+    protected override bool IsValidMemberName(string memberName) => SyntaxFacts.IsValidIdentifier(memberName);
 }

@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
@@ -28,12 +27,33 @@ namespace SonarAnalyzer.UnitTest.Rules;
 public class DebuggerDisplayUsesExistingMembersTest
 {
     private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.DebuggerDisplayUsesExistingMembers>();
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.DebuggerDisplayUsesExistingMembers>();
 
     [TestMethod]
     public void DebuggerDisplayUsesExistingMembers_CS() =>
         builderCS.AddPaths("DebuggerDisplayUsesExistingMembers.cs").Verify();
 
-    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.DebuggerDisplayUsesExistingMembers>();    // FIXME: Move this up
+#if NET
+
+    [TestMethod]
+    public void DebuggerDisplayUsesExistingMembers_CSharp8() =>
+        builderCS.AddPaths("DebuggerDisplayUsesExistingMembers.CSharp8.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .Verify();
+
+    [TestMethod]
+    public void DebuggerDisplayUsesExistingMembers_CSharp9() =>
+        builderCS.AddPaths("DebuggerDisplayUsesExistingMembers.CSharp9.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .Verify();
+
+    [TestMethod]
+    public void DebuggerDisplayUsesExistingMembers_CSharp10() =>
+        builderCS.AddPaths("DebuggerDisplayUsesExistingMembers.CSharp10.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .Verify();
+
+#endif
 
     [TestMethod]
     public void DebuggerDisplayUsesExistingMembers_VB() =>
