@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if (ShouldRaise(context.SemanticModel, first, second))
             {
-                var typeName = context.SemanticModel.GetTypeInfo(second).Type.ToString();
+                var typeName = context.SemanticModel.GetTypeInfo(second).Type.ToDisplayString();
                 context.ReportIssue(Diagnostic.Create(Rule, first.Parent.GetLocation(), typeName));
             }
         }

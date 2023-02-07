@@ -30,5 +30,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void SillyMathematicalComparison_CS() =>
             builderCS.AddPaths("SillyMathematicalComparison.cs").Verify();
+
+        [TestMethod]
+        public void SillyMathematicalComparison_CSharp9() =>
+            builderCS.AddPaths("SillyMathematicalComparison.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
     }
 }
