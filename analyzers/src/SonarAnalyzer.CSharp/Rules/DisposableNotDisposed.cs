@@ -86,20 +86,20 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (disposableObjects.Any())
                     {
-                        var probablyDisposed = new HashSet<ISymbol>();
+                        var possiblyDisposed = new HashSet<ISymbol>();
                         foreach (var typeDeclarationAndSemanticModel in typesDeclarationsAndSemanticModels)
                         {
                             ExcludeDisposedAndClosedLocalsAndPrivateFields(
                                 typeDeclarationAndSemanticModel.Node,
                                 typeDeclarationAndSemanticModel.Model,
-                                probablyDisposed);
+                                possiblyDisposed);
                             ExcludeReturnedPassedAndAliasedLocalsAndPrivateFields(
                                 typeDeclarationAndSemanticModel.Node,
                                 typeDeclarationAndSemanticModel.Model,
-                                probablyDisposed);
+                                possiblyDisposed);
                         }
 
-                        foreach (var disposable in disposableObjects.Where(x => !probablyDisposed.Contains(x.Symbol)))
+                        foreach (var disposable in disposableObjects.Where(x => !possiblyDisposed.Contains(x.Symbol)))
                         {
                             c.ReportIssue(Diagnostic.Create(Rule, disposable.Node.GetLocation(), disposable.Symbol.Name));
                         }
@@ -179,7 +179,7 @@ namespace SonarAnalyzer.Rules.CSharp
             symbol.Kind == SymbolKind.Local
             || (symbol.Kind == SymbolKind.Field && symbol.DeclaredAccessibility == Accessibility.Private);
 
-        private static void ExcludeDisposedAndClosedLocalsAndPrivateFields(SyntaxNode typeDeclaration, SemanticModel semanticModel, ISet<ISymbol> probablyDisposed)
+        private static void ExcludeDisposedAndClosedLocalsAndPrivateFields(SyntaxNode typeDeclaration, SemanticModel semanticModel, ISet<ISymbol> possiblyDisposed)
         {
             var invocationsAndConditionalAccesses = typeDeclaration.DescendantNodes().Where(n => n.IsAnyKind(SyntaxKind.InvocationExpression, SyntaxKind.ConditionalAccessExpression));
             foreach (var invocationOrConditionalAccess in invocationsAndConditionalAccesses)
@@ -207,12 +207,12 @@ namespace SonarAnalyzer.Rules.CSharp
                     && semanticModel.GetSymbolInfo(expression).Symbol is { } referencedSymbol
                     && IsLocalOrPrivateField(referencedSymbol))
                 {
-                    probablyDisposed.Add(referencedSymbol);
+                    possiblyDisposed.Add(referencedSymbol);
                 }
             }
         }
 
-        private static void ExcludeReturnedPassedAndAliasedLocalsAndPrivateFields(SyntaxNode typeDeclaration, SemanticModel semanticModel, ISet<ISymbol> probablyDisposed)
+        private static void ExcludeReturnedPassedAndAliasedLocalsAndPrivateFields(SyntaxNode typeDeclaration, SemanticModel semanticModel, ISet<ISymbol> possiblyDisposed)
         {
             var identifiersAndSimpleMemberAccesses = typeDeclaration
                 .DescendantNodes()
@@ -246,7 +246,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     && semanticModel.GetSymbolInfo(identifierOrSimpleMemberAccess).Symbol is { } referencedSymbol
                     && IsLocalOrPrivateField(referencedSymbol))
                 {
-                    probablyDisposed.Add(referencedSymbol);
+                    possiblyDisposed.Add(referencedSymbol);
                 }
             }
         }
