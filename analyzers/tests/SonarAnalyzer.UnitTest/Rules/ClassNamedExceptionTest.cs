@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
@@ -31,23 +30,28 @@ public class ClassNamedExceptionTest
     private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.ClassNamedException>();
 
     [TestMethod]
-    public void ClassNamedException_CS() => builderCS
-        .AddPaths("ClassNamedException.cs")
-        .Verify();
+    public void ClassNamedException_CS() =>
+        builderCS
+            .AddPaths("ClassNamedException.cs")
+            .Verify();
 
     [TestMethod]
-    public void ClassNamedException_FromCSharp9() => builderCS
-        .AddPaths("ClassNamedException.CSharp9.cs")
-        .WithOptions(ParseOptionsHelper.FromCSharp9)
-        .Verify();
+    public void ClassNamedException_FromCSharp9() =>
+        builderCS
+            .AddPaths("ClassNamedException.CSharp9.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .Verify();
 
     [TestMethod]
-    public void ClassNamedException_FromCSharp10() => builderCS
-        .AddPaths("ClassNamedException.CSharp10.cs")
-        .WithOptions(ParseOptionsHelper.FromCSharp10)
-        .Verify();
+    public void ClassNamedException_FromCSharp10() =>
+        builderCS
+            .AddPaths("ClassNamedException.CSharp10.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .Verify();
 
     [TestMethod]
     public void ClassNamedException_VB() =>
-        builderVB.AddPaths("ClassNamedException.vb").Verify();
+        builderVB
+            .AddPaths("ClassNamedException.vb")
+            .Verify();
 }

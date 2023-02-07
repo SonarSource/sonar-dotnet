@@ -31,18 +31,18 @@ public abstract class ClassNamedExceptionBase<TSyntaxKind> : SonarDiagnosticAnal
 
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(
-        Language.GeneratedCodeRecognizer,
-        c =>
-        {
-            if (Language.Syntax.NodeIdentifier(c.Node) is { IsMissing: false } classIdentifier
-             && classIdentifier.ValueText.EndsWith("Exception", StringComparison.InvariantCultureIgnoreCase)
-             && c.SemanticModel.GetDeclaredSymbol(c.Node) is INamedTypeSymbol { } classSymbol
-             && !classSymbol.IsStatic
-             && !classSymbol.DerivesFrom(KnownType.System_Exception))
+            Language.GeneratedCodeRecognizer,
+            c =>
             {
-                c.ReportIssue(Diagnostic.Create(Rule, classIdentifier.GetLocation()));
-            }
-        },
-        Language.SyntaxKind.ClassDeclaration);
+                if (Language.Syntax.NodeIdentifier(c.Node) is { IsMissing: false } classIdentifier
+                    && classIdentifier.ValueText.EndsWith("Exception", StringComparison.InvariantCultureIgnoreCase)
+                    && c.SemanticModel.GetDeclaredSymbol(c.Node) is INamedTypeSymbol { } classSymbol
+                    && !classSymbol.IsStatic
+                    && !classSymbol.DerivesFrom(KnownType.System_Exception))
+                {
+                    c.ReportIssue(Diagnostic.Create(Rule, classIdentifier.GetLocation()));
+                }
+            },
+            Language.SyntaxKind.ClassDeclaration);
 
 }
