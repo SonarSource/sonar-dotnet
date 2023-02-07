@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Helpers
             this.predicate = predicate;
         }
 
-        public static KnownReference XUnit_Assert { get; } = new(NameIs("xunit.assert").Or(NameIs("xunit").And(VersionLowerThen(new Version(2, 0)))));
+        public static KnownReference XUnit_Assert { get; } = new(NameIs("xunit.assert").Or(NameIs("xunit").And(VersionLowerThen("2.0"))));
 
         internal static Func<AssemblyIdentity, bool> NameIs(string name) =>
             new(x => x.Name.Equals(name));
@@ -47,11 +47,20 @@ namespace SonarAnalyzer.Helpers
         internal static Func<AssemblyIdentity, bool> Contains(string name) =>
             new(x => x.Name.Contains(name));
 
+        internal static Func<AssemblyIdentity, bool> VersionLowerThen(string version) =>
+            VersionLowerThen(Version.Parse(version));
+
         internal static Func<AssemblyIdentity, bool> VersionLowerThen(Version version) =>
             new(x => x.Version < version);
 
+        internal static Func<AssemblyIdentity, bool> VersionGreaterOrEqual(string version) =>
+            VersionGreaterOrEqual(Version.Parse(version));
+
         internal static Func<AssemblyIdentity, bool> VersionGreaterOrEqual(Version version) =>
             new(x => x.Version >= version);
+
+        internal static Func<AssemblyIdentity, bool> VersionBetween(string from, string to) =>
+            VersionBetween(Version.Parse(from), Version.Parse(to));
 
         internal static Func<AssemblyIdentity, bool> VersionBetween(Version from, Version to) =>
             new(x => x.Version >= from && x.Version <= to);

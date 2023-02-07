@@ -110,10 +110,12 @@ public class KnownReferenceTests
     [DataRow("3.1.0.0", true)]
     public void Version_GreaterOrEqual_2_0(string version, bool expected)
     {
-        var sut = new KnownReference(VersionGreaterOrEqual(new Version(2, 0)));
         var compilation = new Mock<Compilation>("compilationName", ImmutableArray<MetadataReference>.Empty, new Dictionary<string, string>(), false, null, null);
         var identity = new AssemblyIdentity("assemblyName", new Version(version));
         compilation.SetupGet(x => x.ReferencedAssemblyNames).Returns(new[] { identity });
+        var sut = new KnownReference(VersionGreaterOrEqual(new Version(2, 0)));
+        sut.IsReferenced(compilation.Object).Should().Be(expected);
+        sut = new KnownReference(VersionGreaterOrEqual("2.0"));
         sut.IsReferenced(compilation.Object).Should().Be(expected);
     }
 
@@ -126,10 +128,12 @@ public class KnownReferenceTests
     [DataRow("3.1.0.0", false)]
     public void Version_LowerThen_2_0(string version, bool expected)
     {
-        var sut = new KnownReference(VersionLowerThen(new Version(2, 0)));
         var compilation = new Mock<Compilation>("compilationName", ImmutableArray<MetadataReference>.Empty, new Dictionary<string, string>(), false, null, null);
         var identity = new AssemblyIdentity("assemblyName", new Version(version));
         compilation.SetupGet(x => x.ReferencedAssemblyNames).Returns(new[] { identity });
+        var sut = new KnownReference(VersionLowerThen(new Version(2, 0)));
+        sut.IsReferenced(compilation.Object).Should().Be(expected);
+        sut = new KnownReference(VersionLowerThen("2.0"));
         sut.IsReferenced(compilation.Object).Should().Be(expected);
     }
 
@@ -146,10 +150,12 @@ public class KnownReferenceTests
     [DataRow("10.0.0.0", false)]
     public void Version_Between_2_0_and_3_5(string version, bool expected)
     {
-        var sut = new KnownReference(VersionBetween(new Version(2, 0, 0, 0), new Version(3, 5, 0, 0)));
         var compilation = new Mock<Compilation>("compilationName", ImmutableArray<MetadataReference>.Empty, new Dictionary<string, string>(), false, null, null);
         var identity = new AssemblyIdentity("assemblyName", new Version(version));
         compilation.SetupGet(x => x.ReferencedAssemblyNames).Returns(new[] { identity });
+        var sut = new KnownReference(VersionBetween(new Version(2, 0, 0, 0), new Version(3, 5, 0, 0)));
+        sut.IsReferenced(compilation.Object).Should().Be(expected);
+        sut = new KnownReference(VersionBetween("2.0.0.0", "3.5.0.0"));
         sut.IsReferenced(compilation.Object).Should().Be(expected);
     }
 
