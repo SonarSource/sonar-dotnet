@@ -93,7 +93,7 @@ public class ObsoleteAttributesTest
     public void RemoveObsoleteCode_AttributeTargetTest_CS(string attributeTargetDeclaration)
     {
         removeCS.AddSnippet(WrapInTestCode(string.Empty)).VerifyNoIssueReported();
-        removeCS.AddSnippet(WrapInTestCode("""[Obsolete] // Noncompliant""")).Verify();
+        removeCS.AddSnippet(WrapInTestCode("[Obsolete] // Noncompliant")).Verify();
         removeCS.AddSnippet(WrapInTestCode("[Custom]")).VerifyNoIssueReported();
         removeCS.AddSnippet(WrapInTestCode("""
             [Obsolete] // Noncompliant
@@ -158,7 +158,7 @@ public class ObsoleteAttributesTest
     public void RemoveObsoleteCode_AttributeTargetTest_VB(string attributeTargetDeclaration)
     {
         removeVB.AddSnippet(WrapInTestCode(string.Empty)).VerifyNoIssueReported();
-        removeVB.AddSnippet(WrapInTestCode("""<Obsolete> ' Noncompliant""")).Verify();
+        removeVB.AddSnippet(WrapInTestCode("<Obsolete> ' Noncompliant")).Verify();
         removeVB.AddSnippet(WrapInTestCode("<Custom>")).VerifyNoIssueReported();
         removeVB.AddSnippet(WrapInTestCode("""
             <Obsolete> ' Noncompliant
