@@ -79,5 +79,6 @@ internal sealed class CSharpSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind>
         SyntaxKindEx.RecordClassDeclaration,
         SyntaxKindEx.RecordStructDeclaration,
     };
+    public SyntaxKind VariableDeclarator => SyntaxKind.VariableDeclarator;
     public SyntaxKind WhitespaceTrivia => SyntaxKind.WhitespaceTrivia;
 }

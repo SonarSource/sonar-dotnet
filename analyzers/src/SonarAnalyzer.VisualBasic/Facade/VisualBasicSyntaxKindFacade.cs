@@ -65,5 +65,6 @@ internal sealed class VisualBasicSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind
     public SyntaxKind[] StringLiteralExpressions => new[] { SyntaxKind.StringLiteralExpression };
     public SyntaxKind StructDeclaration => SyntaxKind.StructureBlock;
     public SyntaxKind[] TypeDeclaration => new[] { SyntaxKind.ClassBlock, SyntaxKind.StructureBlock, SyntaxKind.InterfaceBlock, SyntaxKind.EnumBlock };
+    public SyntaxKind VariableDeclarator => SyntaxKind.VariableDeclarator;
     public SyntaxKind WhitespaceTrivia => SyntaxKind.WhitespaceTrivia;
 }
