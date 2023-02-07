@@ -58,50 +58,50 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSymbolAction(
                 c =>
                 {
-                    var namedTypeSymbol = (INamedTypeSymbol)c.Symbol;
-                    if (namedTypeSymbol.ContainingType != null || !namedTypeSymbol.IsClassOrStruct())
+                    var namedType = (INamedTypeSymbol)c.Symbol;
+                    if (namedType.ContainingType != null || !namedType.IsClassOrStruct())
                     {
                         return;
                     }
 
-                    var typesDeclarationsAndSemanticModels = namedTypeSymbol.DeclaringSyntaxReferences
+                    var typesDeclarationsAndSemanticModels = namedType.DeclaringSyntaxReferences
                                                                             .Select(x => CreateNodeAndModel(c, x))
                                                                             .ToList();
 
-                    var trackedNodesAndSymbols = new HashSet<NodeAndSymbol>();
+                    var disposableObjects = new HashSet<NodeAndSymbol>();
                     foreach (var typeDeclarationAndSemanticModel in typesDeclarationsAndSemanticModels)
                     {
                         TrackInitializedLocalsAndPrivateFields(
-                            namedTypeSymbol,
+                            namedType,
                             typeDeclarationAndSemanticModel.Node,
                             typeDeclarationAndSemanticModel.Model,
-                            trackedNodesAndSymbols);
+                            disposableObjects);
 
                         TrackAssignmentsToLocalsAndPrivateFields(
-                            namedTypeSymbol,
+                            namedType,
                             typeDeclarationAndSemanticModel.Node,
                             typeDeclarationAndSemanticModel.Model,
-                            trackedNodesAndSymbols);
+                            disposableObjects);
                     }
 
-                    if (trackedNodesAndSymbols.Any())
+                    if (disposableObjects.Any())
                     {
-                        var excludedSymbols = new HashSet<ISymbol>();
+                        var possiblyDisposed = new HashSet<ISymbol>();
                         foreach (var typeDeclarationAndSemanticModel in typesDeclarationsAndSemanticModels)
                         {
                             ExcludeDisposedAndClosedLocalsAndPrivateFields(
                                 typeDeclarationAndSemanticModel.Node,
                                 typeDeclarationAndSemanticModel.Model,
-                                excludedSymbols);
+                                possiblyDisposed);
                             ExcludeReturnedPassedAndAliasedLocalsAndPrivateFields(
                                 typeDeclarationAndSemanticModel.Node,
                                 typeDeclarationAndSemanticModel.Model,
-                                excludedSymbols);
+                                possiblyDisposed);
                         }
 
-                        foreach (var trackedNodeAndSymbol in trackedNodesAndSymbols.Where(x => !excludedSymbols.Contains(x.Symbol)))
+                        foreach (var disposable in disposableObjects.Where(x => !possiblyDisposed.Contains(x.Symbol)))
                         {
-                            c.ReportIssue(Diagnostic.Create(Rule, trackedNodeAndSymbol.Node.GetLocation(), trackedNodeAndSymbol.Symbol.Name));
+                            c.ReportIssue(Diagnostic.Create(Rule, disposable.Node.GetLocation(), disposable.Symbol.Name));
                         }
                     }
                 },
@@ -113,7 +113,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void TrackInitializedLocalsAndPrivateFields(INamedTypeSymbol namedType,
                                                                    SyntaxNode typeDeclaration,
                                                                    SemanticModel semanticModel,
-                                                                   ISet<NodeAndSymbol> trackedNodesAndSymbols)
+                                                                   ISet<NodeAndSymbol> disposableObjects)
         {
             var descendantNodes = GetDescendantNodes(namedType, typeDeclaration).ToList();
             var localVariableDeclarations = descendantNodes.OfType<LocalDeclarationStatementSyntax>()
@@ -129,7 +129,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var trackedVariables = declaration.Variables.Where(x => x.Initializer != null && IsInstantiation(x.Initializer.Value, semanticModel));
                 foreach (var variableNode in trackedVariables)
                 {
-                    trackedNodesAndSymbols.Add(new NodeAndSymbol(variableNode, semanticModel.GetDeclaredSymbol(variableNode)));
+                    disposableObjects.Add(new NodeAndSymbol(variableNode, semanticModel.GetDeclaredSymbol(variableNode)));
                 }
             }
         }
@@ -137,7 +137,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void TrackAssignmentsToLocalsAndPrivateFields(INamedTypeSymbol namedType,
                                                                      SyntaxNode typeDeclaration,
                                                                      SemanticModel semanticModel,
-                                                                     ISet<NodeAndSymbol> trackedNodesAndSymbols)
+                                                                     ISet<NodeAndSymbol> disposableObjects)
         {
             var simpleAssignments = GetDescendantNodes(namedType, typeDeclaration).Where(n => n.IsKind(SyntaxKind.SimpleAssignmentExpression))
                                                                                   .Cast<AssignmentExpressionSyntax>();
@@ -149,7 +149,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     && semanticModel.GetSymbolInfo(simpleAssignment.Left).Symbol is { } referencedSymbol
                     && IsLocalOrPrivateField(referencedSymbol))
                 {
-                    trackedNodesAndSymbols.Add(new NodeAndSymbol(simpleAssignment, referencedSymbol));
+                    disposableObjects.Add(new NodeAndSymbol(simpleAssignment, referencedSymbol));
                 }
             }
         }
@@ -179,7 +179,7 @@ namespace SonarAnalyzer.Rules.CSharp
             symbol.Kind == SymbolKind.Local
             || (symbol.Kind == SymbolKind.Field && symbol.DeclaredAccessibility == Accessibility.Private);
 
-        private static void ExcludeDisposedAndClosedLocalsAndPrivateFields(SyntaxNode typeDeclaration, SemanticModel semanticModel, ISet<ISymbol> excludedSymbols)
+        private static void ExcludeDisposedAndClosedLocalsAndPrivateFields(SyntaxNode typeDeclaration, SemanticModel semanticModel, ISet<ISymbol> possiblyDisposed)
         {
             var invocationsAndConditionalAccesses = typeDeclaration.DescendantNodes().Where(n => n.IsAnyKind(SyntaxKind.InvocationExpression, SyntaxKind.ConditionalAccessExpression));
             foreach (var invocationOrConditionalAccess in invocationsAndConditionalAccesses)
@@ -207,12 +207,12 @@ namespace SonarAnalyzer.Rules.CSharp
                     && semanticModel.GetSymbolInfo(expression).Symbol is { } referencedSymbol
                     && IsLocalOrPrivateField(referencedSymbol))
                 {
-                    excludedSymbols.Add(referencedSymbol);
+                    possiblyDisposed.Add(referencedSymbol);
                 }
             }
         }
 
-        private static void ExcludeReturnedPassedAndAliasedLocalsAndPrivateFields(SyntaxNode typeDeclaration, SemanticModel semanticModel, ISet<ISymbol> excludedSymbols)
+        private static void ExcludeReturnedPassedAndAliasedLocalsAndPrivateFields(SyntaxNode typeDeclaration, SemanticModel semanticModel, ISet<ISymbol> possiblyDisposed)
         {
             var identifiersAndSimpleMemberAccesses = typeDeclaration
                 .DescendantNodes()
@@ -246,7 +246,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     && semanticModel.GetSymbolInfo(identifierOrSimpleMemberAccess).Symbol is { } referencedSymbol
                     && IsLocalOrPrivateField(referencedSymbol))
                 {
-                    excludedSymbols.Add(referencedSymbol);
+                    possiblyDisposed.Add(referencedSymbol);
                 }
             }
         }
