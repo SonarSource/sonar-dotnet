@@ -33,6 +33,6 @@ namespace SonarAnalyzer.Helpers
             compilation.ObjectType.ContainingAssembly.Name == "mscorlib";
 
         public static bool References(this Compilation compilation, KnownReference reference)
-            => reference.IsReferenced(compilation);
+            => reference.IsReferencedBy(compilation);
     }
 }

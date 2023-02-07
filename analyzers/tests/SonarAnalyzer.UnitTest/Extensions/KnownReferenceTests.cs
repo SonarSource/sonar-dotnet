@@ -42,7 +42,7 @@ public class KnownReferenceTests
         var compilation = new Mock<Compilation>("compilationName", ImmutableArray<MetadataReference>.Empty, new Dictionary<string, string>(), false, null, null);
         var identity = new AssemblyIdentity(name);
         compilation.SetupGet(x => x.ReferencedAssemblyNames).Returns(new[] { identity });
-        sut.IsReferenced(compilation.Object).Should().Be(expected);
+        sut.IsReferencedBy(compilation.Object).Should().Be(expected);
     }
 
     [DataTestMethod]
@@ -60,7 +60,7 @@ public class KnownReferenceTests
         var compilation = new Mock<Compilation>("compilationName", ImmutableArray<MetadataReference>.Empty, new Dictionary<string, string>(), false, null, null);
         var identity = new AssemblyIdentity(name);
         compilation.SetupGet(x => x.ReferencedAssemblyNames).Returns(new[] { identity });
-        sut.IsReferenced(compilation.Object).Should().Be(expected);
+        sut.IsReferencedBy(compilation.Object).Should().Be(expected);
     }
 
     [DataTestMethod]
@@ -78,7 +78,7 @@ public class KnownReferenceTests
         var compilation = new Mock<Compilation>("compilationName", ImmutableArray<MetadataReference>.Empty, new Dictionary<string, string>(), false, null, null);
         var identity = new AssemblyIdentity(name);
         compilation.SetupGet(x => x.ReferencedAssemblyNames).Returns(new[] { identity });
-        sut.IsReferenced(compilation.Object).Should().Be(expected);
+        sut.IsReferencedBy(compilation.Object).Should().Be(expected);
     }
 
     [DataTestMethod]
@@ -96,7 +96,7 @@ public class KnownReferenceTests
         var compilation = new Mock<Compilation>("compilationName", ImmutableArray<MetadataReference>.Empty, new Dictionary<string, string>(), false, null, null);
         var identity = new AssemblyIdentity(name);
         compilation.SetupGet(x => x.ReferencedAssemblyNames).Returns(new[] { identity });
-        sut.IsReferenced(compilation.Object).Should().Be(expected);
+        sut.IsReferencedBy(compilation.Object).Should().Be(expected);
     }
 
     [DataTestMethod]
@@ -112,9 +112,9 @@ public class KnownReferenceTests
         var identity = new AssemblyIdentity("assemblyName", new Version(version));
         compilation.SetupGet(x => x.ReferencedAssemblyNames).Returns(new[] { identity });
         var sut = new KnownReference(VersionGreaterOrEqual(new Version(2, 0)));
-        sut.IsReferenced(compilation.Object).Should().Be(expected);
+        sut.IsReferencedBy(compilation.Object).Should().Be(expected);
         sut = new KnownReference(VersionGreaterOrEqual("2.0"));
-        sut.IsReferenced(compilation.Object).Should().Be(expected);
+        sut.IsReferencedBy(compilation.Object).Should().Be(expected);
     }
 
     [DataTestMethod]
@@ -130,9 +130,9 @@ public class KnownReferenceTests
         var identity = new AssemblyIdentity("assemblyName", new Version(version));
         compilation.SetupGet(x => x.ReferencedAssemblyNames).Returns(new[] { identity });
         var sut = new KnownReference(VersionLowerThen(new Version(2, 0)));
-        sut.IsReferenced(compilation.Object).Should().Be(expected);
+        sut.IsReferencedBy(compilation.Object).Should().Be(expected);
         sut = new KnownReference(VersionLowerThen("2.0"));
-        sut.IsReferenced(compilation.Object).Should().Be(expected);
+        sut.IsReferencedBy(compilation.Object).Should().Be(expected);
     }
 
     [DataTestMethod]
@@ -152,9 +152,9 @@ public class KnownReferenceTests
         var identity = new AssemblyIdentity("assemblyName", new Version(version));
         compilation.SetupGet(x => x.ReferencedAssemblyNames).Returns(new[] { identity });
         var sut = new KnownReference(VersionBetween(new Version(2, 0, 0, 0), new Version(3, 5, 0, 0)));
-        sut.IsReferenced(compilation.Object).Should().Be(expected);
+        sut.IsReferencedBy(compilation.Object).Should().Be(expected);
         sut = new KnownReference(VersionBetween("2.0.0.0", "3.5.0.0"));
-        sut.IsReferenced(compilation.Object).Should().Be(expected);
+        sut.IsReferencedBy(compilation.Object).Should().Be(expected);
     }
 
     [DataTestMethod]
@@ -178,9 +178,9 @@ public class KnownReferenceTests
             0xec, 0xe2, 0x56, 0x35, 0x7b, 0xa7, 0x35, 0xe6, 0x7d, 0xc6), hasPublicKey: true);
         compilation.SetupGet(x => x.ReferencedAssemblyNames).Returns(new[] { identity });
         var sut = new KnownReference(PublicKeyTokenIs(publicKeyToken));
-        sut.IsReferenced(compilation.Object).Should().Be(expected);
+        sut.IsReferencedBy(compilation.Object).Should().Be(expected);
         sut = new KnownReference(OptionalPublicKeyTokenIs(publicKeyToken));
-        sut.IsReferenced(compilation.Object).Should().Be(expected);
+        sut.IsReferencedBy(compilation.Object).Should().Be(expected);
     }
 
     [TestMethod]
@@ -190,7 +190,7 @@ public class KnownReferenceTests
         var identity = new AssemblyIdentity("assemblyName", hasPublicKey: false);
         compilation.SetupGet(x => x.ReferencedAssemblyNames).Returns(new[] { identity });
         var sut = new KnownReference(PublicKeyTokenIs("c5b62af9de6d7244"));
-        sut.IsReferenced(compilation.Object).Should().BeFalse();
+        sut.IsReferencedBy(compilation.Object).Should().BeFalse();
     }
 
     [TestMethod]
@@ -200,7 +200,7 @@ public class KnownReferenceTests
         var identity = new AssemblyIdentity("assemblyName", hasPublicKey: false);
         compilation.SetupGet(x => x.ReferencedAssemblyNames).Returns(new[] { identity });
         var sut = new KnownReference(OptionalPublicKeyTokenIs("c5b62af9de6d7244"));
-        sut.IsReferenced(compilation.Object).Should().BeTrue();
+        sut.IsReferencedBy(compilation.Object).Should().BeTrue();
     }
 
     [DataTestMethod]
@@ -217,7 +217,7 @@ public class KnownReferenceTests
         var compilation = new Mock<Compilation>("compilationName", ImmutableArray<MetadataReference>.Empty, new Dictionary<string, string>(), false, null, null);
         var identity = new AssemblyIdentity(name, new Version(version));
         compilation.SetupGet(x => x.ReferencedAssemblyNames).Returns(new[] { identity });
-        sut.IsReferenced(compilation.Object).Should().Be(expected);
+        sut.IsReferencedBy(compilation.Object).Should().Be(expected);
     }
 
     [DataTestMethod]
@@ -235,7 +235,7 @@ public class KnownReferenceTests
         var compilation = new Mock<Compilation>("compilationName", ImmutableArray<MetadataReference>.Empty, new Dictionary<string, string>(), false, null, null);
         var identity = new AssemblyIdentity(name);
         compilation.SetupGet(x => x.ReferencedAssemblyNames).Returns(new[] { identity });
-        sut.IsReferenced(compilation.Object).Should().Be(expected);
+        sut.IsReferencedBy(compilation.Object).Should().Be(expected);
     }
 
     [TestMethod]

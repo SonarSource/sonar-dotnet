@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Helpers
 
         public static KnownReference XUnit_Assert { get; } = new(NameIs("xunit.assert").Or(NameIs("xunit").And(VersionLowerThen("2.0"))));
 
-        public bool IsReferenced(Compilation compilation) =>
+        public bool IsReferencedBy(Compilation compilation) =>
             predicate(compilation.ReferencedAssemblyNames);
     }
 }
