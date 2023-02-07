@@ -25,7 +25,7 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-    protected override string GetVariableName(VariableDeclaratorSyntax declaration) => declaration.Names.FirstOrDefault().ToString();
+    protected override ISymbol GetSymbol(VariableDeclaratorSyntax declaration, SemanticModel semanticModel) => semanticModel.GetDeclaredSymbol(declaration.Names.First());
 
     protected override bool NeedsToTrack(VariableDeclaratorSyntax declaration, SemanticModel semanticModel) =>
         declaration.Initializer is not null
@@ -42,20 +42,23 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
     protected override IList<InterpolationSyntax> GetInterpolatedStrings(VariableDeclaratorSyntax declaration) =>
         declaration.Parent.Parent.Parent.DescendantNodes().OfType<InterpolationSyntax>().ToList();
 
-    protected override bool IsStringBuilderAccessed(string variableName, IList<InvocationExpressionSyntax> invocations) =>
-        invocations.Any(x => IsSameVariable(x.Expression, variableName) && StringBuilderAccessMethods.Contains(x.GetName()));
+    protected override bool IsStringBuilderContentRead(IList<InvocationExpressionSyntax> invocations, ISymbol variableSymbol, SemanticModel semanticModel) =>
+        invocations.Any(x => IsSameVariable(x.Expression, variableSymbol, semanticModel) && StringBuilderAccessMethods.Contains(x.GetName()));
 
-    protected override bool IsPassedToMethod(string variableName, IList<InvocationExpressionSyntax> invocations) =>
-        invocations.Any(x => x.ArgumentList.Arguments.Any(y => IsSameVariable(y.GetExpression(), variableName)));
+    protected override bool IsPassedToMethod(IList<InvocationExpressionSyntax> invocations, ISymbol variableSymbol, SemanticModel semanticModel) =>
+        invocations.Any(x => x.ArgumentList.Arguments.Any(y => IsSameVariable(y.GetExpression(), variableSymbol, semanticModel)));
 
-    protected override bool IsReturned(string variableName, IList<ReturnStatementSyntax> returnStatements) =>
-        returnStatements.Any(x => IsSameVariable(x.Expression, variableName));
+    protected override bool IsReturned(IList<ReturnStatementSyntax> returnStatements, ISymbol variableSymbol, SemanticModel semanticModel) =>
+        returnStatements.Any(x => IsSameVariable(x.Expression, variableSymbol, semanticModel));
 
-    protected override bool IsWithinInterpolatedString(string variableName, IList<InterpolationSyntax> interpolations) =>
-        interpolations.Any(x => IsSameVariable(x.Expression, variableName));
+    protected override bool IsWithinInterpolatedString(IList<InterpolationSyntax> interpolations, ISymbol variableSymbol, SemanticModel semanticModel) =>
+        interpolations.Any(x => IsSameVariable(x.Expression, variableSymbol, semanticModel));
 
-    private static bool IsSameVariable(ExpressionSyntax expression, string variableName) =>
-        expression.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Any(p => p.NameIs(variableName))
+    private static bool IsSameVariable(ExpressionSyntax expression, ISymbol variableSymbol, SemanticModel semanticModel) =>
+        expression.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Any(p => IsSameVariable(p, variableSymbol, semanticModel))
         || (expression.Ancestors().OfType<ConditionalAccessExpressionSyntax>().Any() && expression.Ancestors().OfType<ConditionalAccessExpressionSyntax>().First()
-            .DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Any(p => p.NameIs(variableName)));
+            .DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Any(p => IsSameVariable(p, variableSymbol, semanticModel)));
+
+    private static bool IsSameVariable(IdentifierNameSyntax identifier, ISymbol variableSymbol, SemanticModel semanticModel) =>
+        variableSymbol.Equals(semanticModel.GetSymbolInfo(identifier).Symbol);
 }

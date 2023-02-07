@@ -42,6 +42,9 @@ public class Program
 
         (StringBuilder, StringBuilder) builderTuple = (new StringBuilder(), new StringBuilder()); // FN
 
+        StringBuilder builderInLine1 = new StringBuilder(), builderInLine2 = new StringBuilder(); // Noncompliant
+//                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  // Noncompliant@-1
+
         StringBuilder builderCfg = new StringBuilder(); // FN (we should use cfg with significant impact on performance)
         if (false)
         {
@@ -54,6 +57,10 @@ public class Program
         builderCalls.Replace("\r\n", "\n");
         builderCalls.Clear();
         builderCalls.GetType();
+
+        StringBuilder mySbField = new StringBuilder(); // Noncompliant
+        MyClass myClass = new MyClass();
+        myClass.mySbField.ToString();
 
         var builderReturn = new StringBuilder(); // Compliant
         return builderReturn;
@@ -86,4 +93,9 @@ public class Program
     }
 
     private StringBuilder myField = new StringBuilder(); // Compliant
+}
+
+public class MyClass
+{
+    public StringBuilder mySbField = new StringBuilder();
 }

@@ -44,7 +44,6 @@ public class UnusedStringBuilderTest
     [DataRow("""@sb.Append("").ToString();""", true)]
     [DataRow("sb.Remove(sb.Length - 1, 1);", true)]
     [DataRow("""var a = $"{sb} is ToStringed here";""", true)]
-    [DataRow("var a = sb.Length;", false)] // FP
     public void UnusedStringBuilder_CSExpressionsTest(string expression, bool compliant)
     {
         var code = $$"""
@@ -89,7 +88,6 @@ public class UnusedStringBuilderTest
     [DataRow("""@sb.Append("").ToString();""", true)]
     [DataRow("sb.Remove(sb.Length - 1, 1);", true)]
     [DataRow("""var a = $"{sb} is ToStringed here";""", true)]
-    [DataRow("var a = sb.Length;", false)] // FP
     public void UnusedStringBuilder_TopLevelStatements(string expression, bool compliant)
     {
         var code = $$"""
@@ -122,7 +120,6 @@ public class UnusedStringBuilderTest
     [DataRow("""sb.Append("").ToString()""", true)]
     [DataRow("sb.Remove(sb.Length - 1, 1)", true)]
     [DataRow("""Dim a = $"{sb} is ToStringed here" """, true)]
-    [DataRow("Dim a = sb.Length", false)] // FP
     [DataRow("""SB.ToString()""", true)]
     public void UnusedStringBuilder_VBExpressionsTest(string expression, bool compliant)
     {

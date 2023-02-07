@@ -15,6 +15,9 @@ Public Class Program
         Dim builder8 As StringBuilder = New StringBuilder() ' Compliant
         builder8.Append("&").ToString()
 
+        Dim builderInLine1 As StringBuilder = New StringBuilder(), builderInLine2 As StringBuilder = New StringBuilder() ' Noncompliant
+        '   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ' Noncompliant@-1
+
         Dim builderCfg As StringBuilder = New StringBuilder() ' FN (we should use cfg with significant impact on performance)
         If False Then
             builderCfg.ToString()
@@ -28,6 +31,10 @@ Public Class Program
 
         Dim builderCalls2 As StringBuilder = New StringBuilder() ' Compliant
         builderCalls2.Remove(builderCalls2.Length - 1, 1)
+
+        Dim mySbField As StringBuilder = New StringBuilder()    ' Noncompliant
+        Dim [myClass] As [MyClass] = New [MyClass]()
+        [myClass].mySbField.ToString()
 
         Dim builderReturn = New StringBuilder()                 ' Compliant
         Return builderReturn
@@ -51,3 +58,6 @@ Public Class Program
     Private myField As StringBuilder = New StringBuilder() ' Compliant
 End Class
 
+Public Class [MyClass]
+    Public mySbField As StringBuilder = New StringBuilder()
+End Class

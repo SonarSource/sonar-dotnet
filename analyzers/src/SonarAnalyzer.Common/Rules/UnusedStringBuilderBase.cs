@@ -32,15 +32,15 @@ public abstract class UnusedStringBuilderBase<TSyntaxKind, TVariableDeclarator, 
 
     internal readonly string[] StringBuilderAccessMethods = { "ToString", "CopyTo", "GetChunks" };
 
-    protected abstract string GetVariableName(TVariableDeclarator declaration);
+    protected abstract ISymbol GetSymbol(TVariableDeclarator declaration, SemanticModel semanticModel);
     protected abstract bool NeedsToTrack(TVariableDeclarator declaration, SemanticModel semanticModel);
     protected abstract IList<TInvocationExpression> GetInvocations(TVariableDeclarator declaration);
     protected abstract IList<TReturnStatement> GetReturnStatements(TVariableDeclarator declaration);
     protected abstract IList<TInterpolatedString> GetInterpolatedStrings(TVariableDeclarator declaration);
-    protected abstract bool IsStringBuilderAccessed(string variableName, IList<TInvocationExpression> invocations);
-    protected abstract bool IsPassedToMethod(string variableName, IList<TInvocationExpression> invocations);
-    protected abstract bool IsReturned(string variableName, IList<TReturnStatement> returnStatements);
-    protected abstract bool IsWithinInterpolatedString(string variableName, IList<TInterpolatedString> interpolations);
+    protected abstract bool IsStringBuilderContentRead(IList<TInvocationExpression> invocations, ISymbol variableSymbol, SemanticModel semanticModel);
+    protected abstract bool IsPassedToMethod(IList<TInvocationExpression> invocations, ISymbol variableSymbol, SemanticModel semanticModel);
+    protected abstract bool IsReturned(IList<TReturnStatement> returnStatements, ISymbol variableSymbol, SemanticModel semanticModel);
+    protected abstract bool IsWithinInterpolatedString(IList<TInterpolatedString> interpolations, ISymbol variableSymbol, SemanticModel semanticModel);
 
     protected UnusedStringBuilderBase() : base(DiagnosticId) { }
 
@@ -52,12 +52,12 @@ public abstract class UnusedStringBuilderBase<TSyntaxKind, TVariableDeclarator, 
             {
                 return;
             }
-            var variableName = GetVariableName(variableDeclaration);
+            var variableSymbol = GetSymbol(variableDeclaration, c.SemanticModel);
             var invocations = GetInvocations(variableDeclaration);
-            if (IsStringBuilderAccessed(variableName, invocations)
-                || IsPassedToMethod(variableName, invocations)
-                || IsReturned(variableName, GetReturnStatements(variableDeclaration))
-                || IsWithinInterpolatedString(variableName, GetInterpolatedStrings(variableDeclaration)))
+            if (IsStringBuilderContentRead(invocations, variableSymbol, c.SemanticModel)
+                || IsPassedToMethod(invocations, variableSymbol, c.SemanticModel)
+                || IsReturned(GetReturnStatements(variableDeclaration), variableSymbol, c.SemanticModel)
+                || IsWithinInterpolatedString(GetInterpolatedStrings(variableDeclaration), variableSymbol, c.SemanticModel))
             {
                 return;
             }
