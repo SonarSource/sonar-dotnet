@@ -62,10 +62,9 @@ public abstract class CommentsShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosti
 
         foreach (var partition in partitions.Where(trivia => trivia.Any() && trivia.All(x => string.IsNullOrWhiteSpace(GetCommentText(x)))))
         {
-            var start = partition.First().GetLocation().SourceSpan.Start;
-            var end = partition.Last().GetLocation().SourceSpan.End;
-            var location = Location.Create(context.Tree, TextSpan.FromBounds(start, end));
-            context.ReportIssue(Diagnostic.Create(Rule, location));
+            var location = partition.First().GetLocation();
+            var secondary = partition.Skip(1).Select(x => x.GetLocation());
+            context.ReportIssue(Diagnostic.Create(Rule, location, secondary));
         }
     }
 

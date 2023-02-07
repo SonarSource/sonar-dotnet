@@ -14,7 +14,7 @@
         Dim b = 42 ''' Ipsem Lorum
         Dim c = 42 '''
 
-        '		
+        '
 
         ' Noncompliant@-2 (whitespace)
 
@@ -29,12 +29,16 @@
         '
         '
 
-        ' Noncompliant@+2
 
         '
         '
         '
         '
+
+        ' Noncompliant@-5
+        ' Secondary@-5
+        ' Secondary@-5
+        ' Secondary@-5
 
         ' Noncompliant@+2
 
@@ -45,6 +49,8 @@
         '
 
         ' Noncompliant@-4
+        ' Secondary@-4
+        ' Secondary@-4
 
         ' *
         ' Ipsem Lorum
@@ -80,10 +86,12 @@
         '
         ''' Ipsem Lorum
         ' Noncompliant@-4
+        ' Secondary@-4
+        ' Secondary@-4
     End Sub
 
     Public Sub DocumentationComment()
-        '''		
+        '''
         ' Noncompliant@-1 (whitespace)
 
         ''' *
@@ -133,11 +141,14 @@ End Class
 '''
 
 
-' Noncompliant@+2
 
 '
 '
 '
+
+' Noncompliant@-4
+' Secondary@-4
+' Secondary@-4
 
 ' Noncompliant@+1
 '''
