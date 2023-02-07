@@ -28,8 +28,9 @@ public abstract class DebuggerDisplayUsesExistingMembersBase<TAttributeSyntax, T
 {
     private const string DiagnosticId = "S4545";
 
-    private static readonly Regex NqModifierExpressionRegex = new(@",\s*nq\s*$", RegexOptions.Compiled);
-    private static readonly Regex EvaluatedExpressionRegex = new(@"\{(?<EvaluatedExpression>[^\}]+)\}", RegexOptions.Compiled);
+    private static readonly TimeSpan RegexTimeout = TimeSpan.FromMilliseconds(100);
+    private static readonly Regex NqModifierExpressionRegex = new(@",\s*nq\s*$", RegexOptions.Compiled, RegexTimeout);
+    private static readonly Regex EvaluatedExpressionRegex = new(@"\{(?<EvaluatedExpression>[^\}]+)\}", RegexOptions.Compiled, RegexTimeout);
 
     protected abstract string GetAttributeName(TAttributeSyntax attribute);
     protected abstract SyntaxNode GetAttributeFormatString(TAttributeSyntax attribute);
@@ -56,20 +57,27 @@ public abstract class DebuggerDisplayUsesExistingMembersBase<TAttributeSyntax, T
 
     private string FirstInvalidMemberName(SonarSyntaxNodeReportingContext context, string formatString, TAttributeSyntax attributeSyntax)
     {
-        foreach (Match match in EvaluatedExpressionRegex.Matches(formatString))
+        try
         {
-            if (match.Groups["EvaluatedExpression"] is { Success: true, Value: var evaluatedExpression }
-                && ExtractValidMemberName(evaluatedExpression) is { } memberName
-                && attributeSyntax.Parent?.Parent is { } targetSyntax
-                && context.SemanticModel.GetDeclaredSymbol(targetSyntax) is { } targetSymbol
-                && RelevantType(targetSymbol) is { } typeSymbol
-                && typeSymbol.GetSelfAndBaseTypes().SelectMany(x => x.GetMembers()).All(x => Language.NameComparer.Compare(x.Name, memberName) != 0))
+            foreach (Match match in EvaluatedExpressionRegex.Matches(formatString))
             {
-                return memberName;
+                if (match.Groups["EvaluatedExpression"] is { Success: true, Value: var evaluatedExpression }
+                    && ExtractValidMemberName(evaluatedExpression) is { } memberName
+                    && attributeSyntax.Parent?.Parent is { } targetSyntax
+                    && context.SemanticModel.GetDeclaredSymbol(targetSyntax) is { } targetSymbol
+                    && RelevantType(targetSymbol) is { } typeSymbol
+                    && typeSymbol.GetSelfAndBaseTypes().SelectMany(x => x.GetMembers()).All(x => Language.NameComparer.Compare(x.Name, memberName) != 0))
+                {
+                    return memberName;
+                }
             }
-        }
 
-        return null;
+            return null;
+        }
+        catch (RegexMatchTimeoutException)
+        {
+            return null;
+        }
     }
 
     private string ExtractValidMemberName(string evaluatedExpression)
