@@ -58,8 +58,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool ShouldRaise(SemanticModel model, SyntaxNode expectedConstant, SyntaxNode other) =>
             TryGetConstant(model, expectedConstant, out var constant)
-            && model.GetTypeInfo(other).Type is { } symbol
-            && TryGetRange(symbol, out var min, out var max)
+            && model.GetTypeInfo(other).Type is { } typeSymbolOfOther
+            && TryGetRange(typeSymbolOfOther, out var min, out var max)
             && (constant < min || constant > max);
 
         private static bool TryGetConstant(SemanticModel model, SyntaxNode expectedConstant, out double constant)
