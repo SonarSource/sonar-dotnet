@@ -1,1 +1,2 @@
-﻿record RecordException { } // Compliant - records cannot inherit from Exception
+﻿record RecordException { }            // Compliant
+record class RecordClassException { } // Compliant

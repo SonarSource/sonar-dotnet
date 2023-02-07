@@ -1,1 +1,1 @@
-﻿record struct RecordStructException { } // Compliant - record structs cannot inherit from Exception
+﻿record struct RecordStructException { } // Compliant
