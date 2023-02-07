@@ -41,6 +41,7 @@ public abstract class UnusedStringBuilderBase<TSyntaxKind, TVariableDeclarator, 
     protected abstract bool IsPassedToMethod(IList<TInvocationExpression> invocations, ISymbol variableSymbol, SemanticModel semanticModel);
     protected abstract bool IsReturned(IList<TReturnStatement> returnStatements, ISymbol variableSymbol, SemanticModel semanticModel);
     protected abstract bool IsWithinInterpolatedString(IList<TInterpolatedString> interpolations, ISymbol variableSymbol, SemanticModel semanticModel);
+    protected abstract bool IsPropertyReferenced(TVariableDeclarator declaration, IList<TInvocationExpression> invocations, ISymbol variableSymbol, SemanticModel semanticModel);
 
     protected UnusedStringBuilderBase() : base(DiagnosticId) { }
 
@@ -57,7 +58,8 @@ public abstract class UnusedStringBuilderBase<TSyntaxKind, TVariableDeclarator, 
             if (IsStringBuilderContentRead(invocations, variableSymbol, c.SemanticModel)
                 || IsPassedToMethod(invocations, variableSymbol, c.SemanticModel)
                 || IsReturned(GetReturnStatements(variableDeclaration), variableSymbol, c.SemanticModel)
-                || IsWithinInterpolatedString(GetInterpolatedStrings(variableDeclaration), variableSymbol, c.SemanticModel))
+                || IsWithinInterpolatedString(GetInterpolatedStrings(variableDeclaration), variableSymbol, c.SemanticModel)
+                || IsPropertyReferenced(variableDeclaration, invocations, variableSymbol, c.SemanticModel))
             {
                 return;
             }

@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using StyleCop.Analyzers.Lightup;
+
 namespace SonarAnalyzer.Rules.VisualBasic;
 
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
@@ -53,6 +55,9 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
 
     protected override bool IsWithinInterpolatedString(IList<InterpolationSyntax> interpolations, ISymbol variableSymbol, SemanticModel semanticModel) =>
         interpolations.Any(x => IsSameVariable(x.Expression, variableSymbol, semanticModel));
+
+    protected override bool IsPropertyReferenced(VariableDeclaratorSyntax declaration, IList<InvocationExpressionSyntax> invocations, ISymbol variableSymbol, SemanticModel semanticModel) =>
+        invocations.Any(x => IsSameVariable(x.Expression, variableSymbol, semanticModel) && semanticModel.GetOperation(x).Kind is OperationKindEx.PropertyReference);
 
     private static bool IsSameVariable(ExpressionSyntax expression, ISymbol variableSymbol, SemanticModel semanticModel) =>
         expression.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Any(p => IsSameVariable(p, variableSymbol, semanticModel))

@@ -60,6 +60,9 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
     protected override bool IsWithinInterpolatedString(IList<InterpolationSyntax> interpolations, ISymbol variableSymbol, SemanticModel semanticModel) =>
         interpolations.Any(x => IsSameVariable(x.Expression, variableSymbol, semanticModel));
 
+    protected override bool IsPropertyReferenced(VariableDeclaratorSyntax declaration, IList<InvocationExpressionSyntax> invocations, ISymbol variableSymbol, SemanticModel semanticModel) =>
+        GetElementAccessExpressions(declaration).Any(x => IsSameVariable(x.Expression, variableSymbol, semanticModel));
+
     private static bool IsStringBuilderObjectCreation(ExpressionSyntax expression, SemanticModel semanticModel) =>
         (expression is ObjectCreationExpressionSyntax || ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(expression))
         && ObjectCreationFactory.Create(expression).IsKnownType(KnownType.System_Text_StringBuilder, semanticModel);
@@ -71,6 +74,11 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
 
     private static bool IsSameVariable(IdentifierNameSyntax identifier, ISymbol variableSymbol, SemanticModel semanticModel) =>
         variableSymbol.Equals(semanticModel.GetSymbolInfo(identifier).Symbol);
+
+    private static IList<ElementAccessExpressionSyntax> GetElementAccessExpressions(VariableDeclaratorSyntax declaration) =>
+        declaration.IsTopLevel()
+        ? GetTopLevelStatementSyntax<ElementAccessExpressionSyntax>(declaration)
+        : declaration.Parent.Parent.Parent.DescendantNodes().OfType<ElementAccessExpressionSyntax>().ToList();
 
     private static IList<T> GetTopLevelStatementSyntax<T>(VariableDeclaratorSyntax declaration)
     {
