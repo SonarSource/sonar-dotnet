@@ -1,0 +1,19 @@
+﻿using System;
+using System.Diagnostics;
+
+public class SupportAccessModifiers
+{
+    public class BaseClass
+    {
+        private protected int PrivateProtectedProperty => 1;
+
+        [DebuggerDisplay("{PrivateProtectedProperty}")] // Compliant
+        public int SomeProperty => 1;
+    }
+
+    public class SubClass : BaseClass
+    {
+        [DebuggerDisplay("{PrivateProtectedProperty}")] // Compliant
+        public int OtherProperty => 1;
+    }
+}

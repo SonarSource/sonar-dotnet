@@ -18,14 +18,70 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Text.RegularExpressions;
+
 namespace SonarAnalyzer.Rules;
 
-public abstract class DebuggerDisplayUsesExistingMembersBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+public abstract class DebuggerDisplayUsesExistingMembersBase<TAttributeSyntax, TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+    where TAttributeSyntax : SyntaxNode
     where TSyntaxKind : struct
 {
     private const string DiagnosticId = "S4545";
 
-    protected override string MessageFormat => "FIXME";
+    private static readonly Regex NqModifierExpressionRegex = new(@",\s*nq\s*$", RegexOptions.Compiled);
+    private static readonly Regex EvaluatedExpressionRegex = new(@"\{(?<EvaluatedExpression>[^\}]+)\}", RegexOptions.Compiled);
+
+    protected abstract string GetAttributeName(TAttributeSyntax attribute);
+    protected abstract SyntaxNode GetAttributeFormatString(TAttributeSyntax attribute);
+    protected abstract bool IsValidMemberName(string memberName);
+
+    protected override string MessageFormat => "'{0}' doesn't exist in this context.";
 
     protected DebuggerDisplayUsesExistingMembersBase() : base(DiagnosticId) { }
+
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(Language.GeneratedCodeRecognizer,
+            c =>
+            {
+                var attribute = (TAttributeSyntax)c.Node;
+                var attributeName = GetAttributeName(attribute);
+                if ((string.Equals(attributeName, "DebuggerDisplayAttribute", Language.NameComparison) || string.Equals(attributeName, "DebuggerDisplay", Language.NameComparison))
+                    && GetAttributeFormatString(attribute) is { } formatString
+                    && FirstInvalidMemberName(c, formatString.GetFirstToken().ValueText, attribute) is { } firstInvalidMember)
+                {
+                    c.ReportIssue(Diagnostic.Create(Rule, formatString.GetLocation(), firstInvalidMember));
+                }
+            },
+            Language.SyntaxKind.Attribute);
+
+    private string FirstInvalidMemberName(SonarSyntaxNodeReportingContext context, string formatString, TAttributeSyntax attributeSyntax)
+    {
+        foreach (Match match in EvaluatedExpressionRegex.Matches(formatString))
+        {
+            if (match.Groups["EvaluatedExpression"] is { Success: true, Value: var evaluatedExpression }
+                && ExtractValidMemberName(evaluatedExpression) is { } memberName
+                && attributeSyntax.Parent?.Parent is { } targetSyntax
+                && context.SemanticModel.GetDeclaredSymbol(targetSyntax) is { } targetSymbol
+                && RelevantType(targetSymbol) is { } typeSymbol
+                && typeSymbol.GetSelfAndBaseTypes().SelectMany(x => x.GetMembers()).All(x => Language.NameComparer.Compare(x.Name, memberName) != 0))
+            {
+                return memberName;
+            }
+        }
+
+        return null;
+    }
+
+    private string ExtractValidMemberName(string evaluatedExpression)
+    {
+        var sanitizedExpression = RemoveNqModifier(evaluatedExpression).Trim();
+        return IsValidMemberName(sanitizedExpression) ? sanitizedExpression : null;
+    }
+
+    private static string RemoveNqModifier(string evaluatedExpression) =>
+        NqModifierExpressionRegex.Match(evaluatedExpression) is { Success: true, Length: var matchLength }
+            ? evaluatedExpression.Substring(0, evaluatedExpression.Length - matchLength)
+            : evaluatedExpression;
+
+    private static ITypeSymbol RelevantType(ISymbol symbol) => symbol is ITypeSymbol typeSymbol ? typeSymbol : symbol.ContainingType;
 }
