@@ -14,6 +14,11 @@ class OuterClass
     class InnerException { }                                     // Noncompliant
 }
 
+class GenericClassDoesNotExtendException<T> { }                  // Noncompliant
+//    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+class GenericClassExtendsException<T> : Exception { }            // Compliant
+class SimpleGenericClass<T> { }                                  // Compliant - "Exception" is not in the name of the class
+
 interface IEmptyInterfaceException { }                           // Compliant - interfaces cannot inherit from Exception
 struct StructException { }                                       // Compliant - structs cannot inherit from Exception
 enum EnumException { }                                           // Compliant - enums cannot inherit from Exception

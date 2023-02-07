@@ -19,6 +19,17 @@ Class OuterClass
     End Class
 End Class
 
+Class GenericClassDoesNotExtendException(Of T)   ' Noncompliant
+    ' ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+End Class
+
+Class GenericClassExtendsException(Of T)         ' Compliant
+    Inherits Exception
+End Class
+
+Class SimpleGenericClass(Of T)                   ' Compliant - "Exception" is not in the name of the class
+End Class
+
 Interface IEmptyInterfaceException               ' Compliant - interfaces cannot inherit from Exception
 End Interface
 
