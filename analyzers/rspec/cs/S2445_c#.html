@@ -1,30 +1,35 @@
-<p>Synchronizing on a class field synchronizes not on the field itself, but on the object assigned to it. So synchronizing on a non-<code>final</code>
-field makes it possible for the field’s value to change while a thread is in a block synchronized on the old value. That would allow a second thread,
-synchronized on the new value, to enter the block at the same time.</p>
-<p>The story is very similar for synchronizing on parameters; two different threads running the method in parallel could pass two different object
-instances in to the method as parameters, completely undermining the synchronization.</p>
+<p>Locking on a class field synchronizes not on the field itself, but on the object assigned to it. So locking on a non-<code>readonly</code> field
+makes it possible for the field’s value to change while a thread is in a block locked on the old value. That would allow a second thread, locked on
+the new value, to enter the block at the same time.</p>
+<p>The story is very similar for locking on a local variable or on a new instance; two different threads running the method in parallel would lock on
+two different object instances, completely undermining the synchronization.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-private String color = "red";
+private string color = "red";
 
-private void doSomething(){
-  synchronized(color) {  // Noncompliant; lock is actually on object instance "red" referred to by the color variable
+private void DoSomething()
+{
+  lock (color) // Noncompliant; lock is actually on object instance "red" referred to by the color variable
+  {
     //...
     color = "green"; // other threads now allowed into this block
     // ...
   }
-  synchronized(new Object()) { // Noncompliant this is a no-op.
+  lock (new object()) // Noncompliant this is a no-op.
+  {
      // ...
   }
 }
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-private String color = "red";
-private final Object lockObj = new Object();
+private string color = "red";
+private readonly object lockObj = new object();
 
-private void doSomething(){
-  synchronized(lockObj) {
+private void DoSomething()
+{
+  lock (lockObj)
+  {
     //...
     color = "green";
     // ...

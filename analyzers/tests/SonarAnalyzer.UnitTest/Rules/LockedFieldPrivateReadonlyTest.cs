@@ -23,11 +23,25 @@ using SonarAnalyzer.Rules.CSharp;
 namespace SonarAnalyzer.UnitTest.Rules;
 
 [TestClass]
-public class SynchronizedFieldAssignmentTest
+public class LockedFieldPrivateReadonlyTest
 {
-    private readonly VerifierBuilder builder = new VerifierBuilder<SynchronizedFieldAssignment>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<LockedFieldPrivateReadonly>();
 
     [TestMethod]
-    public void SynchronizedFieldAssignment_CS() =>
-        builder.AddPaths("SynchronizedFieldAssignment.cs").Verify();
+    public void LockedFieldPrivateReadonly_CS() =>
+        builder.AddPaths("LockedFieldPrivateReadonly.cs").Verify();
+
+    [TestMethod]
+    public void LockedFieldPrivateReadonly_CSharp8() =>
+        builder
+            .AddPaths("LockedFieldPrivateReadonly.CSharp8.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .Verify();
+
+    [TestMethod]
+    public void LockedFieldPrivateReadonly_CSharp11() =>
+        builder
+            .AddPaths("LockedFieldPrivateReadonly.CSharp11.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .Verify();
 }
