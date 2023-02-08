@@ -33,9 +33,10 @@ public abstract class UnusedStringBuilderBase<TSyntaxKind, TVariableDeclarator, 
     internal readonly string[] StringBuilderAccessExpressions = { "Length", "Capacity", "MaxCapacity" };
 
     protected abstract ILocalSymbol GetSymbol(TVariableDeclarator declaration, SemanticModel semanticModel);
-    protected abstract bool NeedsToTrack(TVariableDeclarator declaration, SemanticModel semanticModel);
-    protected abstract bool IsStringBuilderRead(SemanticModel model, ILocalSymbol local, SyntaxNode node);
+    protected abstract string GetName(SyntaxNode declaration);
     protected abstract SyntaxNode GetScope(TVariableDeclarator declarator);
+    protected abstract bool NeedsToTrack(TVariableDeclarator declaration, SemanticModel semanticModel);
+    protected abstract bool IsStringBuilderRead(string name, ILocalSymbol symbol, SyntaxNode node, SemanticModel model);
     protected abstract bool DescendIntoChildren(SyntaxNode node);
 
     protected UnusedStringBuilderBase() : base(DiagnosticId) { }
@@ -45,25 +46,25 @@ public abstract class UnusedStringBuilderBase<TSyntaxKind, TVariableDeclarator, 
         {
             var variableDeclaration = (TVariableDeclarator)c.Node;
             if (!NeedsToTrack(variableDeclaration, c.SemanticModel)
-                || GetScope(variableDeclaration).DescendantNodes(DescendIntoChildren).Any(node => IsStringBuilderRead(c.SemanticModel, GetSymbol(variableDeclaration, c.SemanticModel), node)))
+                || GetScope(variableDeclaration).DescendantNodes(DescendIntoChildren).Any(node => IsStringBuilderRead(GetName(variableDeclaration), GetSymbol(variableDeclaration, c.SemanticModel), node, c.SemanticModel)))
             {
                 return;
             }
             c.ReportIssue(Diagnostic.Create(Rule, variableDeclaration.GetLocation()));
         }, Language.SyntaxKind.VariableDeclarator);
 
-    internal static bool IsSameReference(SyntaxNode expression, ILocalSymbol variableSymbol, SemanticModel semanticModel)
+    internal bool IsSameReference(SyntaxNode expression, string name, ILocalSymbol symbol, SemanticModel semanticModel)
     {
         var references = GetLocalReferences(expression, semanticModel);
         if (!references.Any() && expression.Ancestors().OfType<TConditionalExpression>().Any())
         {
             references = GetLocalReferences(expression.Ancestors().OfType<TConditionalExpression>().First(), semanticModel);
         }
-        return references.Any(x => IsSameVariable(x, variableSymbol, semanticModel));
+        return references.Any(x => IsSameVariable(x, name, symbol, semanticModel));
     }
 
-    internal static bool IsSameVariable(SyntaxNode identifier, ILocalSymbol variableSymbol, SemanticModel semanticModel) =>
-        variableSymbol.Equals(semanticModel.GetSymbolInfo(identifier).Symbol);
+    internal bool IsSameVariable(SyntaxNode identifier, string name, ILocalSymbol symbol, SemanticModel semanticModel) =>
+        GetName(identifier).Equals(name, Language.NameComparison) && symbol.Equals(semanticModel.GetSymbolInfo(identifier).Symbol);
 
     internal static IEnumerable<TIdentifierName> GetLocalReferences(SyntaxNode node, SemanticModel semanticModel) =>
         node.DescendantNodesAndSelf().OfType<TIdentifierName>().Where(x => IsLocalReference(x, semanticModel));

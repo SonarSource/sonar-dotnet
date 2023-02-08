@@ -29,6 +29,10 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
 
     protected override ILocalSymbol GetSymbol(VariableDeclaratorSyntax declaration, SemanticModel semanticModel) => (ILocalSymbol)semanticModel.GetDeclaredSymbol(declaration.Names.First());
 
+    protected override string GetName(SyntaxNode declaration) => declaration.GetName();
+
+    protected override SyntaxNode GetScope(VariableDeclaratorSyntax declarator) => declarator.Parent.Parent.Parent;
+
     protected override bool NeedsToTrack(VariableDeclaratorSyntax declaration, SemanticModel semanticModel) =>
         declaration is
         {
@@ -37,21 +41,18 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
         }
         && objectCreation.Type.IsKnownType(KnownType.System_Text_StringBuilder, semanticModel);
 
-    protected override SyntaxNode GetScope(VariableDeclaratorSyntax declarator) =>
-        declarator.Parent.Parent.Parent;
-
-    protected override bool DescendIntoChildren(SyntaxNode node) => true;
-
-    protected override bool IsStringBuilderRead(SemanticModel model, ILocalSymbol local, SyntaxNode node) =>
+    protected override bool IsStringBuilderRead(string name, ILocalSymbol local, SyntaxNode node, SemanticModel model) =>
         node switch
         {
             InvocationExpressionSyntax invocation =>
-                (StringBuilderAccessInvocations.Contains(invocation.GetName()) && IsSameReference(invocation.Expression, local, model))
-                || invocation.ArgumentList.Arguments.Any(argument => IsSameReference(argument.GetExpression(), local, model))
-                || (IsSameReference(invocation.Expression, local, model) && model.GetOperation(invocation).Kind is OperationKindEx.PropertyReference), // Property reference
-            ReturnStatementSyntax returnStatement => IsSameReference(returnStatement.Expression, local, model),
-            InterpolationSyntax interpolation => IsSameReference(interpolation.Expression, local, model),
-            MemberAccessExpressionSyntax memberAccess => StringBuilderAccessExpressions.Contains(memberAccess.Name.GetName()) && IsSameReference(memberAccess.Expression, local, model),
+                (StringBuilderAccessInvocations.Contains(invocation.GetName()) && IsSameReference(invocation.Expression, name, local, model))
+                || invocation.ArgumentList.Arguments.Any(argument => IsSameReference(argument.GetExpression(), name, local, model))
+                || (IsSameReference(invocation.Expression, name, local, model) && model.GetOperation(invocation).Kind is OperationKindEx.PropertyReference), // Property reference
+            ReturnStatementSyntax returnStatement => IsSameReference(returnStatement.Expression, name, local, model),
+            InterpolationSyntax interpolation => IsSameReference(interpolation.Expression, name, local, model),
+            MemberAccessExpressionSyntax memberAccess => StringBuilderAccessExpressions.Contains(memberAccess.Name.GetName()) && IsSameReference(memberAccess.Expression, name, local, model),
             _ => false,
         };
+
+    protected override bool DescendIntoChildren(SyntaxNode node) => true;
 }
