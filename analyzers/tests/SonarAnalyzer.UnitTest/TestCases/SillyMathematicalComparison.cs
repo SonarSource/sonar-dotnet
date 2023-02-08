@@ -434,5 +434,19 @@ namespace SonarAnalyzer.UnitTest.TestCases
             _ = verySmall == f; // Noncompliant {{Comparison to this constant is useless; the constant is outside the range of type 'float'}}
             _ = f == veryBig; // Noncompliant {{Comparison to this constant is useless; the constant is outside the range of type 'float'}}
         }
+
+        public void ConstantInBothOperands()
+        {
+            const float number1 = 42;
+            const double number2 = double.MaxValue;
+
+            _ = number1 != number2; // Compliant, constant in both operands
+            _ = number1 == number2; // Compliant
+            _ = number1 <= double.MaxValue; // Compliant
+            _ = double.MaxValue >= number2; // Compliant
+
+            _ = 42f != double.MaxValue; // Compliant
+            _ = 42f <= double.MaxValue; // Compliant
+        }
     }
 }
