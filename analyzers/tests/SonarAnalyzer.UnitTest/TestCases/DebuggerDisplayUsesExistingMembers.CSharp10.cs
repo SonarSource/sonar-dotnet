@@ -5,7 +5,7 @@ using System.Diagnostics;
 public record SomeRecord(int RecordProperty)
 {
     [DebuggerDisplay("{RecordProperty}")] public record struct RecordStruct1(int RecordStructProperty);       // Noncompliant
-    [DebuggerDisplay("{RecordStructProperty}")] public record struct RecordStruct2(int RecordStructProperty); // Compliant
+    [DebuggerDisplay("{RecordStructProperty}")] public record struct RecordStruct2(int RecordStructProperty); // Compliant, RecordStructProperty is a property
 }
 
 [DebuggerDisplay("{RecordProperty1} bla bla {RecordProperty2}")]
@@ -14,21 +14,23 @@ public record struct SomeRecordStruct(int RecordProperty1, string RecordProperty
     [DebuggerDisplay("{RecordProperty}")]            // Noncompliant
     public class NestedClass1
     {
-        [DebuggerDisplay("{NestedClassProperty}")]   // Compliant
+        [DebuggerDisplay("{NestedClassProperty}")]
         public int NestedClassProperty => 1;
     }
 
-    [DebuggerDisplay("{NestedClassProperty}")]       // Compliant
+    [DebuggerDisplay("{NestedClassProperty}")]
     public class NestedClass2
     {
-        [DebuggerDisplay("{NestedClassProperty}")]   // Compliant
+        [DebuggerDisplay("{NestedClassProperty}")]
         public int NestedClassProperty => 1;
     }
 }
 
 public class SupportConstantInterpolatedStrings
 {
-    [DebuggerDisplay($"{{{nameof(SomeProperty)}}}")] // Compliant
-    [DebuggerDisplay($"{{{nameof(SomeProperty)}}}")] // Compliant, FN: constant interpolated strings not supported
+    [DebuggerDisplay($"{{{nameof(SomeProperty)}}}")]
+    [DebuggerDisplay($"{{{nameof(NotAProperty)}}}")] // FN: constant interpolated strings not supported
     public int SomeProperty => 1;
+
+    public class NotAProperty { }
 }
