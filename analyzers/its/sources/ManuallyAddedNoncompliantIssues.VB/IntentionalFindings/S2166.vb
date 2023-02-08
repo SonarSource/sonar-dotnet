@@ -6,6 +6,5 @@
 
 Public Class S2166
     Public Class CustomException ' Noncompliant (S2166)
-
     End Class
 End Class
