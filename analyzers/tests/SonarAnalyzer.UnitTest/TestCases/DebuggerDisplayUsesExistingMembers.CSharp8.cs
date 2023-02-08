@@ -7,13 +7,13 @@ public class SupportAccessModifiers
     {
         private protected int PrivateProtectedProperty => 1;
 
-        [DebuggerDisplay("{PrivateProtectedProperty}")] // Compliant
+        [DebuggerDisplay("{PrivateProtectedProperty}")]
         public int SomeProperty => 1;
     }
 
     public class SubClass : BaseClass
     {
-        [DebuggerDisplay("{PrivateProtectedProperty}")] // Compliant
+        [DebuggerDisplay("{PrivateProtectedProperty}")]
         public int OtherProperty => 1;
     }
 }

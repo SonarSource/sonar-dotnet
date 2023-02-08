@@ -28,9 +28,8 @@ public abstract class DebuggerDisplayUsesExistingMembersBase<TAttributeSyntax, T
 {
     private const string DiagnosticId = "S4545";
 
-    private static readonly TimeSpan RegexTimeout = TimeSpan.FromMilliseconds(100);
-    private static readonly Regex NqModifierExpressionRegex = new(@",\s*nq\s*$", RegexOptions.Compiled, RegexTimeout);
-    private static readonly Regex EvaluatedExpressionRegex = new(@"\{(?<EvaluatedExpression>[^\}]+)\}", RegexOptions.Compiled, RegexTimeout);
+    private readonly Regex nqModifierExpressionRegex = new(@",\s*nq\s*$", RegexOptions.None, RegexConstants.DefaultTimeout);
+    private readonly Regex evaluatedExpressionRegex = new(@"\{(?<EvaluatedExpression>[^\}]+)\}", RegexOptions.None, RegexConstants.DefaultTimeout);
 
     protected abstract string GetAttributeName(TAttributeSyntax attribute);
     protected abstract SyntaxNode GetAttributeFormatString(TAttributeSyntax attribute);
@@ -59,7 +58,7 @@ public abstract class DebuggerDisplayUsesExistingMembersBase<TAttributeSyntax, T
     {
         try
         {
-            foreach (Match match in EvaluatedExpressionRegex.Matches(formatString))
+            foreach (Match match in evaluatedExpressionRegex.Matches(formatString))
             {
                 if (match.Groups["EvaluatedExpression"] is { Success: true, Value: var evaluatedExpression }
                     && ExtractValidMemberName(evaluatedExpression) is { } memberName
@@ -86,8 +85,8 @@ public abstract class DebuggerDisplayUsesExistingMembersBase<TAttributeSyntax, T
         return IsValidMemberName(sanitizedExpression) ? sanitizedExpression : null;
     }
 
-    private static string RemoveNqModifier(string evaluatedExpression) =>
-        NqModifierExpressionRegex.Match(evaluatedExpression) is { Success: true, Length: var matchLength }
+    private string RemoveNqModifier(string evaluatedExpression) =>
+        nqModifierExpressionRegex.Match(evaluatedExpression) is { Success: true, Length: var matchLength }
             ? evaluatedExpression.Substring(0, evaluatedExpression.Length - matchLength)
             : evaluatedExpression;
 

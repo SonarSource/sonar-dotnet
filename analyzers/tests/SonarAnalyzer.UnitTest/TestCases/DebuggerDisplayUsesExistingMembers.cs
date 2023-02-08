@@ -34,16 +34,16 @@ class TestOnPropertiesAndFields
     //               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     [DebuggerDisplay(@"{NonExisting}")] int WithNonExistingMemberVerbatim => 1;                  // Noncompliant {{'NonExisting' doesn't exist in this context.}}
 
-    [DebuggerDisplay(ConstantWithInvalidMember)] int WithFormatAsConstant2 => 1;                            // Compliant, FN: constants are not checked
-    [DebuggerDisplay("{Non" + "Existing}")] int WithFormatAsConcatenationOfLiterals => 1;                   // Compliant, FN: only simple literal supported
-    [DebuggerDisplay(ConstantFragment1 + ConstantFragment2)] int WithFormatAsConcatenationOfConstants => 1; // Compliant, FN: only simple literal supported
+    [DebuggerDisplay(ConstantWithInvalidMember)] int WithFormatAsConstant2 => 1;                            // FN: constants are not checked
+    [DebuggerDisplay("{Non" + "Existing}")] int WithFormatAsConcatenationOfLiterals => 1;                   // FN: only simple literal supported
+    [DebuggerDisplay(ConstantFragment1 + ConstantFragment2)] int WithFormatAsConcatenationOfConstants => 1; // FN: only simple literal supported
 
-    [DebuggerDisplay("{this.NonExistingProperty}")] int PropertyWithExplicitThis => 1;                      // Compliant, FN: "this." not supported
-    [DebuggerDisplay("{this.NonExistingField}")] int FieldWithExplicitThis => 1;                            // Compliant, FN: "this." not supported
-    [DebuggerDisplay("{1 + NonExistingProperty}")] int ContainingInvalidMembers => 1;                       // Compliant, FN: expressions not supported
+    [DebuggerDisplay("{this.NonExistingProperty}")] int PropertyWithExplicitThis => 1;                      // FN: "this." not supported
+    [DebuggerDisplay("{this.NonExistingField}")] int FieldWithExplicitThis => 1;                            // FN: "this." not supported
+    [DebuggerDisplay("{1 + NonExistingProperty}")] int ContainingInvalidMembers => 1;                       // FN: expressions not supported
 }
 
-[DebuggerDisplay("{this.ToString()}")]  // Compliant
+[DebuggerDisplay("{this.ToString()}")]
 [DebuggerDisplay("{NonExisting}")]      // Noncompliant {{'NonExisting' doesn't exist in this context.}}
 public enum TopLevelEnum { One, Two, Three }
 
@@ -83,7 +83,7 @@ public class TestOnDelegates
     int ExistingProperty => 1;
 
     [DebuggerDisplay("{ExistingProperty}")] // Noncompliant
-    [DebuggerDisplay("{1}")]                // Compliant
+    [DebuggerDisplay("{1}")]
     public delegate void Delegate1();
 }
 
@@ -125,10 +125,10 @@ public class SupportCaseSensitivity
     int SOMEPROPERTY => 1;
     int SomeProperty => 1;
 
-    [DebuggerDisplay("{SOMEPROPERTY}")]  // Compliant
-    [DebuggerDisplay("{SomeProperty}")]  // Compliant
-    [DebuggerDisplay("{someProperty}")]  // Noncompliant {{'someProperty' doesn't exist in this context.}}
-    [DebuggerDisplay("{someproperty}")]  // Noncompliant {{'someproperty' doesn't exist in this context.}}
+    [DebuggerDisplay("{SOMEPROPERTY}")]
+    [DebuggerDisplay("{SomeProperty}")]
+    [DebuggerDisplay("{someProperty}")] // Noncompliant {{'someProperty' doesn't exist in this context.}}
+    [DebuggerDisplay("{someproperty}")] // Noncompliant {{'someproperty' doesn't exist in this context.}}
     int OtherProperty => 1;
 }
 
@@ -136,8 +136,8 @@ public class SupportNonAlphanumericChars
 {
     int Aa1_뿓 => 1;
 
-    [DebuggerDisplay("{Aa1_뿓}")]  // Compliant
-    [DebuggerDisplay("{Aa1_㤬}")]  // Noncompliant {{'Aa1_㤬' doesn't exist in this context.}}
+    [DebuggerDisplay("{Aa1_뿓}")]
+    [DebuggerDisplay("{Aa1_㤬}")] // Noncompliant {{'Aa1_㤬' doesn't exist in this context.}}
     int SomeProperty1 => 1;
 }
 
@@ -169,7 +169,7 @@ public class SupportNq
 
 public class SupportOptionalAttributeParameter
 {
-    [DebuggerDisplay("{SomeProperty}", Name = "Any name")]                                                    // Compliant
+    [DebuggerDisplay("{SomeProperty}", Name = "Any name")]
     [DebuggerDisplay("{NonExisting}", Name = "Any name")]                                                     // Noncompliant {{'NonExisting' doesn't exist in this context.}}
     //               ^^^^^^^^^^^^^^^
     [DebuggerDisplay("{NonExisting}", Name = "Any name", Type = nameof(SupportOptionalAttributeParameter))]   // Noncompliant {{'NonExisting' doesn't exist in this context.}}
@@ -202,19 +202,19 @@ public class SupportAccessModifiers
         protected int ProtectedProperty => 1;
         private int PrivateProperty => 1;
 
-        [DebuggerDisplay("{PublicProperty}")]           // Compliant
-        [DebuggerDisplay("{InternalProperty}")]         // Compliant
-        [DebuggerDisplay("{ProtectedProperty}")]        // Compliant
-        [DebuggerDisplay("{PrivateProperty}")]          // Compliant
+        [DebuggerDisplay("{PublicProperty}")]
+        [DebuggerDisplay("{InternalProperty}")]
+        [DebuggerDisplay("{ProtectedProperty}")]
+        [DebuggerDisplay("{PrivateProperty}")]
         int SomeProperty => 1;
     }
 
     public class SubClass : BaseClass
     {
-        [DebuggerDisplay("{PublicProperty}")]           // Compliant
-        [DebuggerDisplay("{InternalProperty}")]         // Compliant
-        [DebuggerDisplay("{ProtectedProperty}")]        // Compliant
-        [DebuggerDisplay("{PrivateProperty}")]          // Compliant
+        [DebuggerDisplay("{PublicProperty}")]
+        [DebuggerDisplay("{InternalProperty}")]
+        [DebuggerDisplay("{ProtectedProperty}")]
+        [DebuggerDisplay("{PrivateProperty}")]
         int OtherProperty => 1;
     }
 }
@@ -233,6 +233,6 @@ namespace WithTypeAlias
 
     public class Test
     {
-        [DebuggerDisplayAlias("{NonExisting}")] int WithAlias => 1; // Compliant, FN: attribute name checked at syntax level
+        [DebuggerDisplayAlias("{NonExisting}")] int WithAlias => 1; // FN: attribute name checked at syntax level
     }
 }

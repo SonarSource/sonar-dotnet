@@ -33,17 +33,17 @@ Public Class TestOnPropertiesAndFields
     <DebuggerDisplay("{NonExisting}")> Property WithNonExistingMemberVerbatim As Integer                   ' Noncompliant {{'NonExisting' doesn't exist in this context.}}
     '                ^^^^^^^^^^^^^^^
 
-    <DebuggerDisplay(ConstantWithInvalidMember)> Property WithFormatAsConstant2 As Integer                            ' Compliant, FN: constants are not checked
-    <DebuggerDisplay("{Non" & "Existing}")> Property WithFormatAsConcatenationOfLiterals As Integer                   ' Compliant, FN: only simple literal supported
-    <DebuggerDisplay(ConstantFragment1 & ConstantFragment2)> Property WithFormatAsConcatenationOfConstants As Integer ' Compliant, FN: only simple literal supported
+    <DebuggerDisplay(ConstantWithInvalidMember)> Property WithFormatAsConstant2 As Integer                            ' FN: constants are not checked
+    <DebuggerDisplay("{Non" & "Existing}")> Property WithFormatAsConcatenationOfLiterals As Integer                   ' FN: only simple literal supported
+    <DebuggerDisplay(ConstantFragment1 & ConstantFragment2)> Property WithFormatAsConcatenationOfConstants As Integer ' FN: only simple literal supported
 
-    <DebuggerDisplay("{this.NonExistingProperty}")> Property PropertyWithExplicitThis As Integer                      ' Compliant, FN: "this." not supported
-    <DebuggerDisplay("{this.NonExistingField}")> Property FieldWithExplicitThis As Integer                            ' Compliant, FN: "this." not supported
-    <DebuggerDisplay("{1 + NonExistingProperty}")> Property ContainingInvalidMembers As Integer                       ' Compliant, FN: expressions not supported
+    <DebuggerDisplay("{this.NonExistingProperty}")> Property PropertyWithExplicitThis As Integer                      ' FN: "this." not supported
+    <DebuggerDisplay("{this.NonExistingField}")> Property FieldWithExplicitThis As Integer                            ' FN: "this." not supported
+    <DebuggerDisplay("{1 + NonExistingProperty}")> Property ContainingInvalidMembers As Integer                       ' FN: expressions not supported
 End Class
 
-<DebuggerDisplay("{this.ToString()}")> ' Compliant
-<DebuggerDisplay("{NonExisting}")>     ' Noncompliant {{'NonExisting' doesn't exist in this context.}}
+<DebuggerDisplay("{this.ToString()}")>
+<DebuggerDisplay("{NonExisting}")> ' Noncompliant {{'NonExisting' doesn't exist in this context.}}
 Public Enum TopLevelEnum
     One
     Two
@@ -86,7 +86,7 @@ Class TestOnDelegates
     Property ExistingProperty As Integer
 
     <DebuggerDisplay("{ExistingProperty}")> ' Noncompliant
-    <DebuggerDisplay("{1}")>                ' Compliant
+    <DebuggerDisplay("{1}")>
     Delegate Sub Delegate1()
 End Class
 
@@ -128,17 +128,17 @@ End Class
 Class SupportCaseInsensitivity
     Property SomeProperty As Integer = 1
 
-    <DebuggerDisplay("{SOMEPROPERTY}")> ' Compliant
-    <DebuggerDisplay("{SomeProperty}")> ' Compliant
-    <DebuggerDisplay("{someProperty}")> ' Compliant
-    <DebuggerDisplay("{someproperty}")> ' Compliant
+    <DebuggerDisplay("{SOMEPROPERTY}")>
+    <DebuggerDisplay("{SomeProperty}")>
+    <DebuggerDisplay("{someProperty}")>
+    <DebuggerDisplay("{someproperty}")>
     Property OtherProperty As Integer
 End Class
 
 Class SupportNonAlphanumericChars
     Property Aa1_뿓 As Integer
 
-    <DebuggerDisplay("{Aa1_뿓}")> ' Compliant
+    <DebuggerDisplay("{Aa1_뿓}")>
     <DebuggerDisplay("{Aa1_㤬}")> ' Noncompliant {{'Aa1_㤬' doesn't exist in this context.}}
     Property SomeProperty1 As Integer
 End Class
@@ -150,8 +150,8 @@ Class SupportWhitespaces
     <DebuggerDisplay("{" & vbTab & "SomeProperty" & vbTab & "}")>
     <DebuggerDisplay("{ NonExisting}")>                          ' Noncompliant {{'NonExisting' doesn't exist in this context.}}
     <DebuggerDisplay("{NonExisting }")>                          ' Noncompliant {{'NonExisting' doesn't exist in this context.}}
-    <DebuggerDisplay("{" & vbTab & "NonExisting}")>              ' Compliant, FN: string concatenation not supported
-    <DebuggerDisplay("{" & vbTab & "NonExisting" & vbTab & "}")> ' Compliant, FN: string concatenation not supported
+    <DebuggerDisplay("{" & vbTab & "NonExisting}")>              ' FN: string concatenation not supported
+    <DebuggerDisplay("{" & vbTab & "NonExisting" & vbTab & "}")> ' FN: string concatenation not supported
     Property SomeProperty As Integer
 End Class
 
@@ -168,7 +168,7 @@ Class SupportNq
 End Class
 
 Class SupportOptionalAttributeParameter
-    <DebuggerDisplay("{SomeProperty}", Name:="Any name")>                                                    ' Compliant
+    <DebuggerDisplay("{SomeProperty}", Name:="Any name")>
     <DebuggerDisplay("{NonExisting}", Name:="Any name")>                                                     ' Noncompliant {{'NonExisting' doesn't exist in this context.}}
     <DebuggerDisplay("{NonExisting}", Name:="Any name", Type:=NameOf(SupportOptionalAttributeParameter))>    ' Noncompliant {{'NonExisting' doesn't exist in this context.}}
     <DebuggerDisplay("{NonExisting}", Name:="Any name", Target:=GetType(SupportOptionalAttributeParameter))> ' Noncompliant {{'NonExisting' doesn't exist in this context.}}
