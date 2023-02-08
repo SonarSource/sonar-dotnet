@@ -43,5 +43,4 @@ public abstract class ClassNamedExceptionBase<TSyntaxKind> : SonarDiagnosticAnal
                 }
             },
             Language.SyntaxKind.ClassAndModuleDeclarations);
-
 }
