@@ -13,12 +13,14 @@ namespace SonarAnalyzer.UnitTest.TestCases
 
         public void Chars() // Rule applies
         {
+            const char smallChar = char.MinValue;
             const int smallInt = char.MinValue;
             const long smallLong = char.MinValue;
             const float smallFloat = char.MinValue;
             const double smallDouble = char.MinValue;
             const decimal smallDecimal = char.MinValue;
 
+            const char bigChar = char.MaxValue;
             const int bigInt = char.MaxValue;
             const long bigLong = char.MaxValue;
             const float bigFloat = char.MaxValue;
@@ -27,12 +29,14 @@ namespace SonarAnalyzer.UnitTest.TestCases
 
             var c = GetValue<char>();
 
+            _ = c >= bigChar; // Compliant, not (always true) or (always false)
             _ = c >= bigInt; // Compliant, not (always true) or (always false)
             _ = bigLong <= c; // Compliant, not (always true) or (always false)
             _ = bigFloat <= c; // Compliant, not (always true) or (always false)
             _ = bigDouble <= c; // Compliant, not (always true) or (always false)
             _ = bigDecimal <= c; // Compliant, not (always true) or (always false)
 
+            _ = c <= smallChar; // Compliant, not (always true) or (always false)
             _ = c <= smallInt; // Compliant, not (always true) or (always false)
             _ = smallLong >= c; // Compliant, not (always true) or (always false)
             _ = smallFloat >= c; // Compliant, not (always true) or (always false)
