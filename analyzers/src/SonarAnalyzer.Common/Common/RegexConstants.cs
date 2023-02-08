@@ -1,5 +1,5 @@
 ﻿/*
- * SonarScanner for .NET
+ * SonarAnalyzer for .NET
  * Copyright (C) 2016-2023 SonarSource SA
  * mailto: info AT sonarsource DOT com
  *
@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Common
+namespace SonarAnalyzer.Common;
+
+public static class RegexConstants
 {
-    public static class RegexConstants
-    {
-        public static TimeSpan DefaultTimeout => TimeSpan.FromMilliseconds(100);
-    }
+    public static TimeSpan DefaultTimeout => TimeSpan.FromMilliseconds(100);
 }
