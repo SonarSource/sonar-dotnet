@@ -24,7 +24,4 @@ internal static class KnownReferenceExtensions
 {
     internal static Func<AssemblyIdentity, bool> And(this Func<AssemblyIdentity, bool> @this, Func<AssemblyIdentity, bool> predicate)
         => identity => @this(identity) && predicate(identity);
-
-    internal static Func<AssemblyIdentity, bool> Or(this Func<AssemblyIdentity, bool> @this, Func<AssemblyIdentity, bool> predicate)
-        => identity => @this(identity) || predicate(identity);
 }

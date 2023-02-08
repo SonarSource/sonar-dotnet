@@ -31,14 +31,21 @@ public class KnownReferenceTests
     public void KnownReference_ThrowsWhenPredicateNull_1()
     {
         var sut = () => new KnownReference(default(Func<AssemblyIdentity, bool>));
-        sut.Should().Throw<ArgumentNullException>();
+        sut.Should().Throw<ArgumentNullException>().Which.ParamName.Should().Be("predicate");
     }
 
     [TestMethod]
     public void KnownReference_ThrowsWhenPredicateNull_2()
     {
         var sut = () => new KnownReference(default(Func<IEnumerable<AssemblyIdentity>, bool>));
-        sut.Should().Throw<ArgumentNullException>();
+        sut.Should().Throw<ArgumentNullException>().Which.ParamName.Should().Be("predicate");
+    }
+
+    [TestMethod]
+    public void KnownReference_ThrowsWhenPredicateNull_params()
+    {
+        var sut = () => new KnownReference(_ => true, null, x => true);
+        sut.Should().Throw<ArgumentException>().Which.ParamName.Should().Be("or");
     }
 
     [DataTestMethod]
@@ -245,7 +252,7 @@ public class KnownReferenceTests
     [DataRow("SomethingStart", false)]
     public void Combinator_StartsWith_Start_Or_EndsWith_End(string name, bool expected)
     {
-        var sut = new KnownReference(StartsWith("Start").Or(EndsWith("End")));
+        var sut = new KnownReference(StartsWith("Start"), EndsWith("End"));
         var compilation = new Mock<Compilation>("compilationName", ImmutableArray<MetadataReference>.Empty, new Dictionary<string, string>(), false, null, null);
         var identity = new AssemblyIdentity(name);
         compilation.SetupGet(x => x.ReferencedAssemblyNames).Returns(new[] { identity });

@@ -24,16 +24,30 @@ namespace SonarAnalyzer.Helpers
     {
         private readonly Func<IEnumerable<AssemblyIdentity>, bool> predicate;
 
-        internal KnownReference(Func<AssemblyIdentity, bool> predicate) : this(Any(predicate))
+        internal KnownReference(Func<AssemblyIdentity, bool> predicate, params Func<AssemblyIdentity, bool>[] or)
+            : this(Any(predicate, or))
         {
         }
 
-        internal KnownReference(Func<IEnumerable<AssemblyIdentity>, bool> predicate)
-        {
+        internal KnownReference(Func<IEnumerable<AssemblyIdentity>, bool> predicate) =>
             this.predicate = predicate ?? throw new ArgumentNullException(nameof(predicate));
+
+        private static Func<IEnumerable<AssemblyIdentity>, bool> Any(Func<AssemblyIdentity, bool> predicate, Func<AssemblyIdentity, bool>[] or)
+        {
+            if (predicate is null)
+            {
+                throw new ArgumentNullException(nameof(predicate));
+            }
+            if (or.Any(x => x is null))
+            {
+                throw new ArgumentException("predicate should not be null", nameof(or));
+            }
+            return Any(identitiy => predicate(identitiy) || or.Any(x => x(identitiy)));
         }
 
-        public static KnownReference XUnit_Assert { get; } = new(NameIs("xunit.assert").Or(NameIs("xunit").And(VersionLowerThen("2.0"))));
+        public static KnownReference XUnit_Assert { get; } = new(
+            NameIs("xunit.assert"),
+            NameIs("xunit").And(VersionLowerThen("2.0")));
 
         public bool IsReferencedBy(Compilation compilation) =>
             predicate(compilation.ReferencedAssemblyNames);
