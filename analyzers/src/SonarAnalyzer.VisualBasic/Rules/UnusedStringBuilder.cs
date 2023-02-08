@@ -25,6 +25,8 @@ namespace SonarAnalyzer.Rules.VisualBasic;
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
 public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, VariableDeclaratorSyntax, IdentifierNameSyntax, ConditionalAccessExpressionSyntax>
 {
+    internal readonly SyntaxKind[] SkipChildren = { };
+
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
     protected override ILocalSymbol GetSymbol(VariableDeclaratorSyntax declaration, SemanticModel semanticModel) => (ILocalSymbol)semanticModel.GetDeclaredSymbol(declaration.Names.First());
@@ -54,5 +56,5 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
             _ => false,
         };
 
-    protected override bool DescendIntoChildren(SyntaxNode node) => true;
+    protected override bool DescendIntoChildren(SyntaxNode node) => !node.IsAnyKind(SkipChildren);
 }

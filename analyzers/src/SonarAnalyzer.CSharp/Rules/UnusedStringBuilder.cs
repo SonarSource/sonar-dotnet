@@ -23,6 +23,11 @@ namespace SonarAnalyzer.Rules.CSharp;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, VariableDeclaratorSyntax, IdentifierNameSyntax, ConditionalAccessExpressionSyntax>
 {
+    internal readonly SyntaxKind[] SkipChildren =
+    {
+        SyntaxKind.ClassDeclaration,
+    };
+
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
     protected override ILocalSymbol GetSymbol(VariableDeclaratorSyntax declaration, SemanticModel semanticModel) => (ILocalSymbol)semanticModel.GetDeclaredSymbol(declaration);
@@ -55,7 +60,9 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
             _ => false,
         };
 
-    protected override bool DescendIntoChildren(SyntaxNode node) => true;
+    protected override bool DescendIntoChildren(SyntaxNode node) =>
+        !node.IsAnyKind(SkipChildren)
+        || !(node.IsKind(SyntaxKindEx.LocalFunctionStatement) && ((LocalFunctionStatementSyntaxWrapper)node).Modifiers.Any(SyntaxKind.StaticKeyword));
 
     private static bool IsStringBuilderObjectCreation(ExpressionSyntax expression, SemanticModel semanticModel) =>
         expression.IsAnyKind(SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression)
