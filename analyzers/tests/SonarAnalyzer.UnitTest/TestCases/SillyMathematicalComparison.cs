@@ -399,6 +399,13 @@ namespace SonarAnalyzer.UnitTest.TestCases
             const bool b2 = true;
             const float f1 = 42;
             const float f2 = 256;
+            const MyEnum e1 = MyEnum.One;
+            const MyEnum e2 = MyEnum.Two;
+            const char c1 = 'a';
+            const char c2 = '1';
+
+            const Thingy constReference1 = null;
+            const Thingy constReference2 = null;
 
             _ = s1 == s2; // Noncompliant {{Don't compare constant values}}
             _ = s1 != s2; // Noncompliant {{Don't compare constant values}}
@@ -419,6 +426,21 @@ namespace SonarAnalyzer.UnitTest.TestCases
 
             _ = 42 != 300; // Noncompliant {{Don't compare constant values}}
             _ = 42 != 256; // Noncompliant {{Don't compare constant values}}
+
+            _ = e1 != e2; // Noncompliant {{Don't compare constant values}}
+            _ = e1 == e2; // Noncompliant {{Don't compare constant values}}
+            _ = e1 <= 0; // Noncompliant {{Don't compare constant values}}
+            _ = MyEnum.One >= e2; // Noncompliant {{Don't compare constant values}}
+
+            _ = c1 != c2; // Noncompliant {{Don't compare constant values}}
+            _ = c1 == c2; // Noncompliant {{Don't compare constant values}}
+            _ = c1 <= 0; // Noncompliant {{Don't compare constant values}}
+            _ = 'b' >= c2; // Noncompliant {{Don't compare constant values}}
+
+            _ = constReference1 == constReference2; // Noncompliant {{Don't compare constant values}}
+            _ = constReference1 != constReference2; // Noncompliant {{Don't compare constant values}}
+            _ = null != constReference2; // Noncompliant {{Don't compare constant values}}
+            _ = constReference1 == null; // Noncompliant {{Don't compare constant values}}
         }
 
         public void NotConstantInBothOperands()
@@ -426,10 +448,17 @@ namespace SonarAnalyzer.UnitTest.TestCases
             string s1 = "Yes";
             bool b1 = false;
             float f1 = GetValue<float>();
+            MyEnum e1 = GetValue<MyEnum>();
+            char c1 = 'a';
+            Thingy reference = new();
+
 
             const string s2 = "No";
             const bool b2 = true;
             const float f2 = 256;
+            const MyEnum e2 = MyEnum.Two;
+            const char c2 = '1';
+            const Thingy constReference = null;
 
             _ = s1 == s2; // Compliant
             _ = s1 != s2; // Compliant
@@ -445,6 +474,24 @@ namespace SonarAnalyzer.UnitTest.TestCases
             _ = f1 == f2; // Compliant
             _ = f1 <= 0; // Compliant
             _ = 128 >= f1; // Compliant
+
+            _ = e1 != e2; // Compliant
+            _ = e1 == e2; // Compliant
+            _ = e1 <= 0; // Compliant
+            _ = MyEnum.One >= e1; // Compliant
+
+            _ = c1 != c2; // Compliant
+            _ = c1 == c2; // Compliant
+            _ = c1 <= 0; // Compliant
+            _ = 'b' >= c1; // Compliant
+
+            _ = reference == constReference; // Compliant
+            _ = constReference != reference; // Compliant
+            _ = null != reference; // Compliant
+            _ = reference == null; // Compliant
         }
+
+        private enum MyEnum { One, Two }
+        private sealed class Thingy { }
     }
 }
