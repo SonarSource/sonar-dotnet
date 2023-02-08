@@ -21,7 +21,7 @@
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, VariableDeclaratorSyntax, InvocationExpressionSyntax, ReturnStatementSyntax, InterpolationSyntax>
+public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, VariableDeclaratorSyntax, IdentifierNameSyntax, ConditionalAccessExpressionSyntax>
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
@@ -35,77 +35,27 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
         }
         && IsStringBuilderObjectCreation(expression, semanticModel);
 
+    protected override SyntaxNode GetScope(VariableDeclaratorSyntax declarator) =>
+        declarator.IsTopLevel()
+        ? declarator.Parent.Parent.Parent.Parent
+        : declarator.Parent.Parent.Parent;
+
+    protected override bool DescendIntoChildren(SyntaxNode node) => true;
+
     protected override bool IsStringBuilderRead(SemanticModel model, ILocalSymbol local, SyntaxNode node) =>
-        throw new NotImplementedException();
-
-    protected override IList<InvocationExpressionSyntax> GetInvocations(VariableDeclaratorSyntax declaration) =>
-        declaration.IsTopLevel()
-        ? GetTopLevelStatementSyntax<InvocationExpressionSyntax>(declaration)
-        : declaration.Parent.Parent.Parent.DescendantNodes().OfType<InvocationExpressionSyntax>().ToList();
-
-    protected override IList<ReturnStatementSyntax> GetReturnStatements(VariableDeclaratorSyntax declaration) =>
-        declaration.IsTopLevel()
-        ? new()
-        : declaration.Parent.Parent.Parent.DescendantNodes().OfType<ReturnStatementSyntax>().ToList();
-
-    protected override IList<InterpolationSyntax> GetInterpolatedStrings(VariableDeclaratorSyntax declaration) =>
-        declaration.IsTopLevel()
-        ? GetTopLevelStatementSyntax<InterpolationSyntax>(declaration)
-        : declaration.Parent.Parent.Parent.DescendantNodes().OfType<InterpolationSyntax>().ToList();
-
-    protected override bool IsStringBuilderContentRead(IList<InvocationExpressionSyntax> invocations, ILocalSymbol variableSymbol, SemanticModel semanticModel) =>
-        invocations.Any(x => StringBuilderAccessMethods.Contains(x.Expression.GetName()) && IsSameVariable(x.Expression, variableSymbol, semanticModel));
-
-    protected override bool IsPassedToMethod(IList<InvocationExpressionSyntax> invocations, ILocalSymbol variableSymbol, SemanticModel semanticModel) =>
-        invocations.Any(x => x.ArgumentList.Arguments.Any(y => IsSameVariable(y.Expression, variableSymbol, semanticModel)));
-
-    protected override bool IsReturned(IList<ReturnStatementSyntax> returnStatements, ILocalSymbol variableSymbol, SemanticModel semanticModel) =>
-        returnStatements.Any(x => IsSameVariable(x.Expression, variableSymbol, semanticModel));
-
-    protected override bool IsWithinInterpolatedString(IList<InterpolationSyntax> interpolations, ILocalSymbol variableSymbol, SemanticModel semanticModel) =>
-        interpolations.Any(x => IsSameVariable(x.Expression, variableSymbol, semanticModel));
-
-    protected override bool IsPropertyReferenced(VariableDeclaratorSyntax declaration, IList<InvocationExpressionSyntax> invocations, ILocalSymbol variableSymbol, SemanticModel semanticModel) =>
-        GetElementAccessExpressions(declaration).Any(x => IsSameVariable(x.Expression, variableSymbol, semanticModel));
+        node switch
+        {
+            InvocationExpressionSyntax invocation =>
+                (StringBuilderAccessInvocations.Contains(invocation.Expression.GetName()) && IsSameReference(invocation.Expression, local, model))
+                || invocation.ArgumentList.Arguments.Any(argument => IsSameReference(argument.Expression, local, model)),
+            ReturnStatementSyntax returnStatement => IsSameReference(returnStatement.Expression, local, model),
+            InterpolationSyntax interpolation => IsSameReference(interpolation.Expression, local, model),
+            ElementAccessExpressionSyntax elementAccess => IsSameReference(elementAccess.Expression, local, model),
+            MemberAccessExpressionSyntax memberAccess => StringBuilderAccessExpressions.Contains(memberAccess.Name.GetName()) && IsSameReference(memberAccess.Expression, local, model),
+            _ => false,
+        };
 
     private static bool IsStringBuilderObjectCreation(ExpressionSyntax expression, SemanticModel semanticModel) =>
         expression.IsAnyKind(SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression)
         && ObjectCreationFactory.Create(expression).IsKnownType(KnownType.System_Text_StringBuilder, semanticModel);
-
-    private static bool IsSameVariable(ExpressionSyntax expression, ILocalSymbol variableSymbol, SemanticModel semanticModel)
-    {
-        var references = GetLocalReferences(expression, semanticModel);
-        if (!references.Any() && expression.Ancestors().OfType<ConditionalAccessExpressionSyntax>().Any())
-        {
-            references = GetLocalReferences(expression.Ancestors().OfType<ConditionalAccessExpressionSyntax>().First(), semanticModel);
-        }
-        return references.Any(x => IsSameVariable(x, variableSymbol, semanticModel));
-    }
-
-    private static IEnumerable<IdentifierNameSyntax> GetLocalReferences(SyntaxNode node, SemanticModel semanticModel) =>
-        node.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Where(x => IsLocalReference(x, semanticModel));
-
-    private static bool IsLocalReference(IdentifierNameSyntax identifier, SemanticModel semanticModel) =>
-        semanticModel.GetOperation(identifier) is { Kind: OperationKindEx.LocalReference };
-
-    private static bool IsSameVariable(IdentifierNameSyntax identifier, ILocalSymbol variableSymbol, SemanticModel semanticModel) =>
-        variableSymbol.Equals(semanticModel.GetSymbolInfo(identifier).Symbol);
-
-    private static IList<ElementAccessExpressionSyntax> GetElementAccessExpressions(VariableDeclaratorSyntax declaration) =>
-        declaration.IsTopLevel()
-        ? GetTopLevelStatementSyntax<ElementAccessExpressionSyntax>(declaration)
-        : declaration.Parent.Parent.Parent.DescendantNodes().OfType<ElementAccessExpressionSyntax>().ToList();
-
-    private static IList<T> GetTopLevelStatementSyntax<T>(VariableDeclaratorSyntax declaration)
-    {
-        List<T> list = new();
-        foreach (var globalStatement in declaration.Parent.Parent.Parent.Parent.DescendantNodes().OfType<GlobalStatementSyntax>())
-        {
-            foreach (var interpolation in globalStatement.DescendantNodes().OfType<T>())
-            {
-                list.Add(interpolation);
-            }
-        }
-        return list;
-    }
 }

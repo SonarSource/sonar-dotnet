@@ -20,30 +20,23 @@
 
 namespace SonarAnalyzer.Rules;
 
-public abstract class UnusedStringBuilderBase<TSyntaxKind, TVariableDeclarator, TInvocationExpression, TReturnStatement, TInterpolatedString> : SonarDiagnosticAnalyzer<TSyntaxKind>
+public abstract class UnusedStringBuilderBase<TSyntaxKind, TVariableDeclarator, TIdentifierName, TConditionalExpression> : SonarDiagnosticAnalyzer<TSyntaxKind>
     where TSyntaxKind : struct
     where TVariableDeclarator : SyntaxNode
-    where TInvocationExpression : SyntaxNode
-    where TReturnStatement : SyntaxNode
-    where TInterpolatedString : SyntaxNode
+    where TIdentifierName : SyntaxNode
+    where TConditionalExpression : SyntaxNode
 {
     private const string DiagnosticId = "S3063";
     protected override string MessageFormat => """Remove this "StringBuilder"; ".ToString()" is never called.""";
 
-    internal readonly string[] StringBuilderAccessMethods = { "ToString", "CopyTo", "GetChunks" };
+    internal readonly string[] StringBuilderAccessInvocations = { "ToString", "CopyTo", "GetChunks" };
+    internal readonly string[] StringBuilderAccessExpressions = { "Length", "Capacity", "MaxCapacity" };
 
     protected abstract ILocalSymbol GetSymbol(TVariableDeclarator declaration, SemanticModel semanticModel);
     protected abstract bool NeedsToTrack(TVariableDeclarator declaration, SemanticModel semanticModel);
-    protected abstract IList<TInvocationExpression> GetInvocations(TVariableDeclarator declaration);
-    protected abstract IList<TReturnStatement> GetReturnStatements(TVariableDeclarator declaration);
-    protected abstract IList<TInterpolatedString> GetInterpolatedStrings(TVariableDeclarator declaration);
-    protected abstract bool IsStringBuilderContentRead(IList<TInvocationExpression> invocations, ILocalSymbol variableSymbol, SemanticModel semanticModel);
-    protected abstract bool IsPassedToMethod(IList<TInvocationExpression> invocations, ILocalSymbol variableSymbol, SemanticModel semanticModel);
-    protected abstract bool IsReturned(IList<TReturnStatement> returnStatements, ILocalSymbol variableSymbol, SemanticModel semanticModel);
-    protected abstract bool IsWithinInterpolatedString(IList<TInterpolatedString> interpolations, ILocalSymbol variableSymbol, SemanticModel semanticModel);
-    protected abstract bool IsPropertyReferenced(TVariableDeclarator declaration, IList<TInvocationExpression> invocations, ILocalSymbol variableSymbol, SemanticModel semanticModel);
-
     protected abstract bool IsStringBuilderRead(SemanticModel model, ILocalSymbol local, SyntaxNode node);
+    protected abstract SyntaxNode GetScope(TVariableDeclarator declarator);
+    protected abstract bool DescendIntoChildren(SyntaxNode node);
 
     protected UnusedStringBuilderBase() : base(DiagnosticId) { }
 
@@ -51,22 +44,30 @@ public abstract class UnusedStringBuilderBase<TSyntaxKind, TVariableDeclarator, 
         context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
         {
             var variableDeclaration = (TVariableDeclarator)c.Node;
-            if (!NeedsToTrack(variableDeclaration, c.SemanticModel))
-            {
-                return;
-            }
-            var variableSymbol = GetSymbol(variableDeclaration, c.SemanticModel);
-            var invocations = GetInvocations(variableDeclaration);
-
-            //var wasRead = c.Node.DescendantNodes().Any(node => IsStringBuilderRead(c.SemanticModel, symbol, node));
-            if (IsStringBuilderContentRead(invocations, variableSymbol, c.SemanticModel)
-                || IsPassedToMethod(invocations, variableSymbol, c.SemanticModel)
-                || IsReturned(GetReturnStatements(variableDeclaration), variableSymbol, c.SemanticModel)
-                || IsWithinInterpolatedString(GetInterpolatedStrings(variableDeclaration), variableSymbol, c.SemanticModel)
-                || IsPropertyReferenced(variableDeclaration, invocations, variableSymbol, c.SemanticModel))
+            if (!NeedsToTrack(variableDeclaration, c.SemanticModel)
+                || GetScope(variableDeclaration).DescendantNodes(DescendIntoChildren).Any(node => IsStringBuilderRead(c.SemanticModel, GetSymbol(variableDeclaration, c.SemanticModel), node)))
             {
                 return;
             }
             c.ReportIssue(Diagnostic.Create(Rule, variableDeclaration.GetLocation()));
         }, Language.SyntaxKind.VariableDeclarator);
+
+    internal static bool IsSameReference(SyntaxNode expression, ILocalSymbol variableSymbol, SemanticModel semanticModel)
+    {
+        var references = GetLocalReferences(expression, semanticModel);
+        if (!references.Any() && expression.Ancestors().OfType<TConditionalExpression>().Any())
+        {
+            references = GetLocalReferences(expression.Ancestors().OfType<TConditionalExpression>().First(), semanticModel);
+        }
+        return references.Any(x => IsSameVariable(x, variableSymbol, semanticModel));
+    }
+
+    internal static bool IsSameVariable(SyntaxNode identifier, ILocalSymbol variableSymbol, SemanticModel semanticModel) =>
+        variableSymbol.Equals(semanticModel.GetSymbolInfo(identifier).Symbol);
+
+    internal static IEnumerable<TIdentifierName> GetLocalReferences(SyntaxNode node, SemanticModel semanticModel) =>
+        node.DescendantNodesAndSelf().OfType<TIdentifierName>().Where(x => IsLocalReference(x, semanticModel));
+
+    internal static bool IsLocalReference(SyntaxNode identifier, SemanticModel semanticModel) =>
+        semanticModel.GetOperation(identifier) is { Kind: OperationKindEx.LocalReference };
 }

@@ -23,7 +23,7 @@ using StyleCop.Analyzers.Lightup;
 namespace SonarAnalyzer.Rules.VisualBasic;
 
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, VariableDeclaratorSyntax, InvocationExpressionSyntax, ReturnStatementSyntax, InterpolationSyntax>
+public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, VariableDeclaratorSyntax, IdentifierNameSyntax, ConditionalAccessExpressionSyntax>
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
@@ -37,49 +37,21 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
         }
         && objectCreation.Type.IsKnownType(KnownType.System_Text_StringBuilder, semanticModel);
 
+    protected override SyntaxNode GetScope(VariableDeclaratorSyntax declarator) =>
+        declarator.Parent.Parent.Parent;
+
+    protected override bool DescendIntoChildren(SyntaxNode node) => true;
+
     protected override bool IsStringBuilderRead(SemanticModel model, ILocalSymbol local, SyntaxNode node) =>
-        throw new NotImplementedException();
-
-    protected override IList<InvocationExpressionSyntax> GetInvocations(VariableDeclaratorSyntax declaration) =>
-        declaration.Parent.Parent.Parent.DescendantNodes().OfType<InvocationExpressionSyntax>().ToList();
-
-    protected override IList<ReturnStatementSyntax> GetReturnStatements(VariableDeclaratorSyntax declaration) =>
-        declaration.Parent.Parent.Parent.DescendantNodes().OfType<ReturnStatementSyntax>().ToList();
-
-    protected override IList<InterpolationSyntax> GetInterpolatedStrings(VariableDeclaratorSyntax declaration) =>
-        declaration.Parent.Parent.Parent.DescendantNodes().OfType<InterpolationSyntax>().ToList();
-
-    protected override bool IsStringBuilderContentRead(IList<InvocationExpressionSyntax> invocations, ILocalSymbol variableSymbol, SemanticModel semanticModel) =>
-        invocations.Any(x => IsSameVariable(x.Expression, variableSymbol, semanticModel) && StringBuilderAccessMethods.Contains(x.GetName()));
-
-    protected override bool IsPassedToMethod(IList<InvocationExpressionSyntax> invocations, ILocalSymbol variableSymbol, SemanticModel semanticModel) =>
-        invocations.Any(x => x.ArgumentList.Arguments.Any(y => IsSameVariable(y.GetExpression(), variableSymbol, semanticModel)));
-
-    protected override bool IsReturned(IList<ReturnStatementSyntax> returnStatements, ILocalSymbol variableSymbol, SemanticModel semanticModel) =>
-        returnStatements.Any(x => IsSameVariable(x.Expression, variableSymbol, semanticModel));
-
-    protected override bool IsWithinInterpolatedString(IList<InterpolationSyntax> interpolations, ILocalSymbol variableSymbol, SemanticModel semanticModel) =>
-        interpolations.Any(x => IsSameVariable(x.Expression, variableSymbol, semanticModel));
-
-    protected override bool IsPropertyReferenced(VariableDeclaratorSyntax declaration, IList<InvocationExpressionSyntax> invocations, ILocalSymbol variableSymbol, SemanticModel semanticModel) =>
-        invocations.Any(x => IsSameVariable(x.Expression, variableSymbol, semanticModel) && semanticModel.GetOperation(x).Kind is OperationKindEx.PropertyReference);
-
-    private static bool IsSameVariable(ExpressionSyntax expression, ILocalSymbol variableSymbol, SemanticModel semanticModel)
-    {
-        var references = GetLocalReferences(expression, semanticModel);
-        if (!references.Any() && expression.Ancestors().OfType<ConditionalAccessExpressionSyntax>().Any())
+        node switch
         {
-            references = GetLocalReferences(expression.Ancestors().OfType<ConditionalAccessExpressionSyntax>().First(), semanticModel);
-        }
-        return references.Any(x => IsSameVariable(x, variableSymbol, semanticModel));
-    }
-
-    private static IEnumerable<IdentifierNameSyntax> GetLocalReferences(SyntaxNode node, SemanticModel semanticModel) =>
-        node.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Where(x => IsLocalReference(x, semanticModel));
-
-    private static bool IsLocalReference(IdentifierNameSyntax identifier, SemanticModel semanticModel) =>
-        semanticModel.GetOperation(identifier) is { Kind: OperationKindEx.LocalReference };
-
-    private static bool IsSameVariable(IdentifierNameSyntax identifier, ILocalSymbol variableSymbol, SemanticModel semanticModel) =>
-        variableSymbol.Equals(semanticModel.GetSymbolInfo(identifier).Symbol);
+            InvocationExpressionSyntax invocation =>
+                (StringBuilderAccessInvocations.Contains(invocation.GetName()) && IsSameReference(invocation.Expression, local, model))
+                || invocation.ArgumentList.Arguments.Any(argument => IsSameReference(argument.GetExpression(), local, model))
+                || (IsSameReference(invocation.Expression, local, model) && model.GetOperation(invocation).Kind is OperationKindEx.PropertyReference), // Property reference
+            ReturnStatementSyntax returnStatement => IsSameReference(returnStatement.Expression, local, model),
+            InterpolationSyntax interpolation => IsSameReference(interpolation.Expression, local, model),
+            MemberAccessExpressionSyntax memberAccess => StringBuilderAccessExpressions.Contains(memberAccess.Name.GetName()) && IsSameReference(memberAccess.Expression, local, model),
+            _ => false,
+        };
 }
