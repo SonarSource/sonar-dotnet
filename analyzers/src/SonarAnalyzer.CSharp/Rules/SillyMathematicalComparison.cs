@@ -46,23 +46,20 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var binary = (BinaryExpressionSyntax)context.Node;
 
-            var constantLeft = binary.Left.FindConstantValue(context.SemanticModel);
-            var constantRight = binary.Right.FindConstantValue(context.SemanticModel);
+            var constantLeft = context.SemanticModel.GetConstantValue(binary.Left);
+            var constantRight = context.SemanticModel.GetConstantValue(binary.Right);
 
-            if (constantLeft is not null)
+            if (constantLeft.HasValue && constantRight.HasValue)
             {
-                if (constantRight is not null) // both are constants
-                {
-                    context.ReportIssue(Diagnostic.Create(ConstantComparisonRule, binary.GetLocation()));
-                }
-                else // left is constant
-                {
-                    CheckOneSide(context, constantLeft, binary.Right);
-                }
+                context.ReportIssue(Diagnostic.Create(ConstantComparisonRule, binary.GetLocation()));
             }
-            else if (constantRight is not null) // right is constant
+            else if (constantLeft.HasValue)
             {
-                CheckOneSide(context, constantRight, binary.Left);
+                CheckOneSide(context, constantLeft.Value, binary.Right);
+            }
+            else if (constantRight.HasValue)
+            {
+                CheckOneSide(context, constantRight.Value, binary.Left);
             }
         }
 
@@ -73,7 +70,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 && TryGetRange(typeSymbolOfOther, out var min, out var max)
                 && (doubleConstant < min || doubleConstant > max))
             {
-                var typeName = context.SemanticModel.GetTypeInfo(other).Type.ToDisplayString();
+                var typeName = context.SemanticModel.GetTypeInfo(other).Type.ToMinimalDisplayString(context.SemanticModel, other.GetLocation().SourceSpan.Start);
                 context.ReportIssue(Diagnostic.Create(MathComparisonRule, other.Parent.GetLocation(), typeName));
             }
         }

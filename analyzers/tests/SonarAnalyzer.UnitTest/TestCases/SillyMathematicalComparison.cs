@@ -341,7 +341,7 @@ namespace SonarAnalyzer.UnitTest.TestCases
             const double bigDouble = ulong.MaxValue;
             const decimal bigDecimal = ulong.MaxValue;
 
-            var ul = GetValue<ulong>();
+            ulong ul = 42;
 
             _ = bigULong <= ul; // Compliant, not (always true) or (always false)
             _ = bigFloat <= ul; // Compliant, not (always true) or (always false)
@@ -393,21 +393,58 @@ namespace SonarAnalyzer.UnitTest.TestCases
 
         public void ConstantInBothOperands()
         {
-            _ = "Happy" == "Sad"; // Noncompliant {{Don't compare constant values}}
+            const string s1 = "Yes";
+            const string s2 = "No";
+            const bool b1 = false;
+            const bool b2 = true;
+            const float f1 = 42;
+            const float f2 = 256;
+
+            _ = s1 == s2; // Noncompliant {{Don't compare constant values}}
+            _ = s1 != s2; // Noncompliant {{Don't compare constant values}}
+            _ = s1 != "Lorum"; // Noncompliant {{Don't compare constant values}}
+            _ = "Ipsem" != s2; // Noncompliant {{Don't compare constant values}}
+            _ = "Ipsem" == "Lorum"; // Noncompliant {{Don't compare constant values}}
             _ = "Ipsum" != "Lorem"; // Noncompliant {{Don't compare constant values}}
 
-            var george = true;
-            var boole = false;
+            _ = b1 == b2; // Noncompliant {{Don't compare constant values}}
+            _ = b1 != b2; // Noncompliant {{Don't compare constant values}}
+            _ = true != b2; // Noncompliant {{Don't compare constant values}}
+            _ = b1 == false; // Noncompliant {{Don't compare constant values}}
 
-            _ = george == boole; // Noncompliant {{Don't compare constant values}}
+            _ = f1 != f2; // Noncompliant {{Don't compare constant values}}
+            _ = f1 == f2; // Noncompliant {{Don't compare constant values}}
+            _ = f1 <= 0; // Noncompliant {{Don't compare constant values}}
+            _ = 128 >= f2; // Noncompliant {{Don't compare constant values}}
 
-            var number1 = 128;
-            var number2 = 42;
+            _ = 42 != 300; // Noncompliant {{Don't compare constant values}}
+            _ = 42 != 256; // Noncompliant {{Don't compare constant values}}
+        }
 
-            _ = 42 == 256; // Noncompliant {{Don't compare constant values}}
-            _ = number1 >= 256; // Noncompliant {{Don't compare constant values}}
-            _ = 42 <= number2; // Noncompliant {{Don't compare constant values}}
-            _ = number1 != number2; // Noncompliant {{Don't compare constant values}}
+        public void NotConstantInBothOperands()
+        {
+            string s1 = "Yes";
+            bool b1 = false;
+            float f1 = GetValue<float>();
+
+            const string s2 = "No";
+            const bool b2 = true;
+            const float f2 = 256;
+
+            _ = s1 == s2; // Compliant
+            _ = s1 != s2; // Compliant
+            _ = s1 != "Lorum"; // Compliant
+            _ = "Ipsem" == s1; // Compliant
+
+            _ = b1 == b2; // Compliant
+            _ = b1 != b2; // Compliant
+            _ = true != b1; // Compliant
+            _ = b1 == false; // Compliant
+
+            _ = f1 != f2; // Compliant
+            _ = f1 == f2; // Compliant
+            _ = f1 <= 0; // Compliant
+            _ = 128 >= f1; // Compliant
         }
     }
 }
