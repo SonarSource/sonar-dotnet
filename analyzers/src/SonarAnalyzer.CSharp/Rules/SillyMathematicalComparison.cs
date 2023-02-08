@@ -25,12 +25,10 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         private const string DiagnosticId = "S2198";
         private const string MathComparisonMessage = "Comparison to this constant is useless; the constant is outside the range of type '{0}'";
-        private const string ConstantComparisonMessage = "Don't compare constant values";
 
         private static readonly DiagnosticDescriptor MathComparisonRule = DescriptorFactory.Create(DiagnosticId, MathComparisonMessage);
-        private static readonly DiagnosticDescriptor ConstantComparisonRule = DescriptorFactory.Create(DiagnosticId, ConstantComparisonMessage);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(MathComparisonRule, ConstantComparisonRule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(MathComparisonRule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterNodeAction(
@@ -44,35 +42,39 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckBinary(SonarSyntaxNodeReportingContext context)
         {
-            var binary = (BinaryExpressionSyntax)context.Node;
-
-            var constantLeft = context.SemanticModel.GetConstantValue(binary.Left);
-            var constantRight = context.SemanticModel.GetConstantValue(binary.Right);
-
-            if (constantLeft.HasValue && constantRight.HasValue)
-            {
-                context.ReportIssue(Diagnostic.Create(ConstantComparisonRule, binary.GetLocation()));
-            }
-            else if (constantLeft.HasValue)
-            {
-                CheckOneSide(context, constantLeft.Value, binary.Right);
-            }
-            else if (constantRight.HasValue)
-            {
-                CheckOneSide(context, constantRight.Value, binary.Left);
-            }
-        }
-
-        private static void CheckOneSide(SonarSyntaxNodeReportingContext context, object constant, SyntaxNode other)
-        {
-            if (ConversionHelper.TryConvertWith(constant, Convert.ToDouble, out var doubleConstant)
-                && context.SemanticModel.GetTypeInfo(other).Type is { } typeSymbolOfOther
-                && TryGetRange(typeSymbolOfOther, out var min, out var max)
-                && (doubleConstant < min || doubleConstant > max))
+            if (TryGetConstantValue(context, (BinaryExpressionSyntax)context.Node, out var constant, out var other)
+               && context.SemanticModel.GetTypeInfo(other).Type is { } typeSymbolOfOther
+               && TryGetRange(typeSymbolOfOther, out var min, out var max)
+               && (constant < min || constant > max))
             {
                 var typeName = context.SemanticModel.GetTypeInfo(other).Type.ToMinimalDisplayString(context.SemanticModel, other.GetLocation().SourceSpan.Start);
                 context.ReportIssue(Diagnostic.Create(MathComparisonRule, other.Parent.GetLocation(), typeName));
             }
+        }
+
+        private static bool TryGetConstantValue(SonarSyntaxNodeReportingContext context, BinaryExpressionSyntax binary, out double constant, out SyntaxNode other)
+        {
+            constant = default;
+            other = default;
+            var maybeLeft = context.SemanticModel.GetConstantValue(binary.Left);
+            var maybeRight = context.SemanticModel.GetConstantValue(binary.Right);
+
+            if (maybeLeft.HasValue ^ maybeRight.HasValue)
+            {
+                if (maybeLeft.HasValue)
+                {
+                    ConversionHelper.TryConvertWith(maybeLeft.Value, Convert.ToDouble, out constant);
+                    other = binary.Right;
+                    return true;
+                }
+                else
+                {
+                    ConversionHelper.TryConvertWith(maybeRight.Value, Convert.ToDouble, out constant);
+                    other = binary.Left;
+                    return true;
+                }
+            }
+            return false;
         }
 
         private static bool TryGetRange(ITypeSymbol typeSymbol, out double min, out double max)
