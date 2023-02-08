@@ -44,7 +44,7 @@ public class KnownReferenceTests
     [TestMethod]
     public void KnownReference_ThrowsWhenPredicateNull_params()
     {
-        var sut = () => new KnownReference(_ => true, null, x => true);
+        var sut = () => new KnownReference(_ => true, null, _ => true);
         sut.Should().Throw<ArgumentException>().Which.ParamName.Should().Be("or");
     }
 
