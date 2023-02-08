@@ -33,6 +33,51 @@ public class UnusedStringBuilderTest
     public void UnusedStringBuilder_CS() =>
         builderCS.AddPaths("UnusedStringBuilder.cs").Verify();
 
+    [TestMethod]
+    public void UnusedStringBuilder_VB() =>
+        builderVB.AddPaths("UnusedStringBuilder.vb").Verify();
+
+#if NET
+
+    [TestMethod]
+    public void UnusedStringBuilder_CSharp9() =>
+        builderCS.AddPaths("UnusedStringBuilder.CSharp9.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .Verify();
+
+    [DataTestMethod]
+    [DataRow("", false)]
+    [DataRow("sb.ToString();", true)]
+    [DataRow("""var a = sb.Append("").Append("").Append("").Append("").ToString().ToLower();""", true)]
+    [DataRow("sb.CopyTo(0, new char[1], 0, 1);", true)]
+    [DataRow("sb.GetChunks();", true)]
+    [DataRow("var a = sb[0];", true)]
+    [DataRow("""sb?.Append("").ToString().ToLower();""", true)]
+    [DataRow("sb?.ToString().ToLower();", true)]
+    [DataRow("""@sb.Append("").ToString();""", true)]
+    [DataRow("sb.Remove(sb.Length - 1, 1);", true)]
+    [DataRow("""var a = $"{sb} is ToStringed here";""", true)]
+    public void UnusedStringBuilder_TopLevelStatements(string expression, bool compliant)
+    {
+        var code = $$"""
+            using System.Text;
+
+            var sb = new StringBuilder(); // {{(compliant ? "Compliant" : "Noncompliant")}}
+            {{expression}}
+            """;
+        var builder = builderCS.AddSnippet(code).WithTopLevelStatements();
+        if (compliant)
+        {
+            builder.VerifyNoIssueReported();
+        }
+        else
+        {
+            builder.Verify();
+        }
+    }
+
+#endif
+
     [DataTestMethod]
     [DataRow("", false)]
     [DataRow("sb.ToString();", true)]
@@ -40,6 +85,7 @@ public class UnusedStringBuilderTest
     [DataRow("sb.CopyTo(0, new char[1], 0, 1);", true)]
     [DataRow("var a = sb[0];", true)]
     [DataRow("""sb?.Append("").ToString().ToLower();""", true)]
+    [DataRow("sb?.ToString();", true)]
     [DataRow("""@sb.Append("").ToString();""", true)]
     [DataRow("sb.Remove(sb.Length - 1, 1);", true)]
     [DataRow("""var a = $"{sb} is ToStringed here";""", true)]
@@ -75,46 +121,6 @@ public class UnusedStringBuilderTest
         }
     }
 
-#if NET
-
-    [TestMethod]
-    public void UnusedStringBuilder_CSharp9() =>
-        builderCS.AddPaths("UnusedStringBuilder.CSharp9.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp9)
-            .Verify();
-
-    [DataTestMethod]
-    [DataRow("", false)]
-    [DataRow("sb.ToString();", true)]
-    [DataRow("""var a = sb.Append("").Append("").Append("").Append("").ToString().ToLower();""", true)]
-    [DataRow("sb.CopyTo(0, new char[1], 0, 1);", true)]
-    [DataRow("sb.GetChunks();", true)]
-    [DataRow("var a = sb[0];", true)]
-    [DataRow("""sb?.Append("").ToString().ToLower();""", true)]
-    [DataRow("""@sb.Append("").ToString();""", true)]
-    [DataRow("sb.Remove(sb.Length - 1, 1);", true)]
-    [DataRow("""var a = $"{sb} is ToStringed here";""", true)]
-    public void UnusedStringBuilder_TopLevelStatements(string expression, bool compliant)
-    {
-        var code = $$"""
-            using System.Text;
-
-            var sb = new StringBuilder(); // {{(compliant ? "Compliant" : "Noncompliant")}}
-            {{expression}}
-            """;
-        var builder = builderCS.AddSnippet(code).WithTopLevelStatements();
-        if (compliant)
-        {
-            builder.VerifyNoIssueReported();
-        }
-        else
-        {
-            builder.Verify();
-        }
-    }
-
-#endif
-
     [DataTestMethod]
     [DataRow("", false)]
     [DataRow("sb.ToString()", true)]
@@ -122,6 +128,7 @@ public class UnusedStringBuilderTest
     [DataRow("sb.CopyTo(0, New Char(0) {}, 0, 1)", true)]
     [DataRow("Dim a = sb(0)", true)]
     [DataRow("""sb?.Append("").ToString().ToLower()""", true)]
+    [DataRow("sb?.ToString().ToLower()", true)]
     [DataRow("""sb.Append("").ToString()""", true)]
     [DataRow("sb.Remove(sb.Length - 1, 1)", true)]
     [DataRow("""Dim a = $"{sb} is ToStringed here" """, true)]
@@ -155,8 +162,4 @@ public class UnusedStringBuilderTest
             builder.Verify();
         }
     }
-
-    [TestMethod]
-    public void UnusedStringBuilder_VB() =>
-        builderVB.AddPaths("UnusedStringBuilder.vb").Verify();
 }

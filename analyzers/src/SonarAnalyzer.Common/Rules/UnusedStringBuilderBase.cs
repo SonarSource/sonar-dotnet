@@ -32,16 +32,18 @@ public abstract class UnusedStringBuilderBase<TSyntaxKind, TVariableDeclarator, 
 
     internal readonly string[] StringBuilderAccessMethods = { "ToString", "CopyTo", "GetChunks" };
 
-    protected abstract ISymbol GetSymbol(TVariableDeclarator declaration, SemanticModel semanticModel);
+    protected abstract ILocalSymbol GetSymbol(TVariableDeclarator declaration, SemanticModel semanticModel);
     protected abstract bool NeedsToTrack(TVariableDeclarator declaration, SemanticModel semanticModel);
     protected abstract IList<TInvocationExpression> GetInvocations(TVariableDeclarator declaration);
     protected abstract IList<TReturnStatement> GetReturnStatements(TVariableDeclarator declaration);
     protected abstract IList<TInterpolatedString> GetInterpolatedStrings(TVariableDeclarator declaration);
-    protected abstract bool IsStringBuilderContentRead(IList<TInvocationExpression> invocations, ISymbol variableSymbol, SemanticModel semanticModel);
-    protected abstract bool IsPassedToMethod(IList<TInvocationExpression> invocations, ISymbol variableSymbol, SemanticModel semanticModel);
-    protected abstract bool IsReturned(IList<TReturnStatement> returnStatements, ISymbol variableSymbol, SemanticModel semanticModel);
-    protected abstract bool IsWithinInterpolatedString(IList<TInterpolatedString> interpolations, ISymbol variableSymbol, SemanticModel semanticModel);
-    protected abstract bool IsPropertyReferenced(TVariableDeclarator declaration, IList<TInvocationExpression> invocations, ISymbol variableSymbol, SemanticModel semanticModel);
+    protected abstract bool IsStringBuilderContentRead(IList<TInvocationExpression> invocations, ILocalSymbol variableSymbol, SemanticModel semanticModel);
+    protected abstract bool IsPassedToMethod(IList<TInvocationExpression> invocations, ILocalSymbol variableSymbol, SemanticModel semanticModel);
+    protected abstract bool IsReturned(IList<TReturnStatement> returnStatements, ILocalSymbol variableSymbol, SemanticModel semanticModel);
+    protected abstract bool IsWithinInterpolatedString(IList<TInterpolatedString> interpolations, ILocalSymbol variableSymbol, SemanticModel semanticModel);
+    protected abstract bool IsPropertyReferenced(TVariableDeclarator declaration, IList<TInvocationExpression> invocations, ILocalSymbol variableSymbol, SemanticModel semanticModel);
+
+    protected abstract bool IsStringBuilderRead(SemanticModel model, ILocalSymbol local, SyntaxNode node);
 
     protected UnusedStringBuilderBase() : base(DiagnosticId) { }
 
@@ -55,6 +57,8 @@ public abstract class UnusedStringBuilderBase<TSyntaxKind, TVariableDeclarator, 
             }
             var variableSymbol = GetSymbol(variableDeclaration, c.SemanticModel);
             var invocations = GetInvocations(variableDeclaration);
+
+            //var wasRead = c.Node.DescendantNodes().Any(node => IsStringBuilderRead(c.SemanticModel, symbol, node));
             if (IsStringBuilderContentRead(invocations, variableSymbol, c.SemanticModel)
                 || IsPassedToMethod(invocations, variableSymbol, c.SemanticModel)
                 || IsReturned(GetReturnStatements(variableDeclaration), variableSymbol, c.SemanticModel)

@@ -25,13 +25,18 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-    protected override ISymbol GetSymbol(VariableDeclaratorSyntax declaration, SemanticModel semanticModel) => semanticModel.GetDeclaredSymbol(declaration);
+    protected override ILocalSymbol GetSymbol(VariableDeclaratorSyntax declaration, SemanticModel semanticModel) => (ILocalSymbol)semanticModel.GetDeclaredSymbol(declaration);
 
     protected override bool NeedsToTrack(VariableDeclaratorSyntax declaration, SemanticModel semanticModel) =>
-        declaration.Initializer is not null
-        && declaration.Parent.Parent is LocalDeclarationStatementSyntax
-        && declaration.Initializer.Value is { } expression
+        declaration is
+        {
+            Parent.Parent: LocalDeclarationStatementSyntax,
+            Initializer.Value: { } expression,
+        }
         && IsStringBuilderObjectCreation(expression, semanticModel);
+
+    protected override bool IsStringBuilderRead(SemanticModel model, ILocalSymbol local, SyntaxNode node) =>
+        throw new NotImplementedException();
 
     protected override IList<InvocationExpressionSyntax> GetInvocations(VariableDeclaratorSyntax declaration) =>
         declaration.IsTopLevel()
@@ -48,36 +53,42 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
         ? GetTopLevelStatementSyntax<InterpolationSyntax>(declaration)
         : declaration.Parent.Parent.Parent.DescendantNodes().OfType<InterpolationSyntax>().ToList();
 
-    protected override bool IsStringBuilderContentRead(IList<InvocationExpressionSyntax> invocations, ISymbol variableSymbol, SemanticModel semanticModel) =>
+    protected override bool IsStringBuilderContentRead(IList<InvocationExpressionSyntax> invocations, ILocalSymbol variableSymbol, SemanticModel semanticModel) =>
         invocations.Any(x => StringBuilderAccessMethods.Contains(x.Expression.GetName()) && IsSameVariable(x.Expression, variableSymbol, semanticModel));
 
-    protected override bool IsPassedToMethod(IList<InvocationExpressionSyntax> invocations, ISymbol variableSymbol, SemanticModel semanticModel) =>
+    protected override bool IsPassedToMethod(IList<InvocationExpressionSyntax> invocations, ILocalSymbol variableSymbol, SemanticModel semanticModel) =>
         invocations.Any(x => x.ArgumentList.Arguments.Any(y => IsSameVariable(y.Expression, variableSymbol, semanticModel)));
 
-    protected override bool IsReturned(IList<ReturnStatementSyntax> returnStatements, ISymbol variableSymbol, SemanticModel semanticModel) =>
+    protected override bool IsReturned(IList<ReturnStatementSyntax> returnStatements, ILocalSymbol variableSymbol, SemanticModel semanticModel) =>
         returnStatements.Any(x => IsSameVariable(x.Expression, variableSymbol, semanticModel));
 
-    protected override bool IsWithinInterpolatedString(IList<InterpolationSyntax> interpolations, ISymbol variableSymbol, SemanticModel semanticModel) =>
+    protected override bool IsWithinInterpolatedString(IList<InterpolationSyntax> interpolations, ILocalSymbol variableSymbol, SemanticModel semanticModel) =>
         interpolations.Any(x => IsSameVariable(x.Expression, variableSymbol, semanticModel));
 
-    protected override bool IsPropertyReferenced(VariableDeclaratorSyntax declaration, IList<InvocationExpressionSyntax> invocations, ISymbol variableSymbol, SemanticModel semanticModel) =>
+    protected override bool IsPropertyReferenced(VariableDeclaratorSyntax declaration, IList<InvocationExpressionSyntax> invocations, ILocalSymbol variableSymbol, SemanticModel semanticModel) =>
         GetElementAccessExpressions(declaration).Any(x => IsSameVariable(x.Expression, variableSymbol, semanticModel));
 
     private static bool IsStringBuilderObjectCreation(ExpressionSyntax expression, SemanticModel semanticModel) =>
-        (expression is ObjectCreationExpressionSyntax || ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(expression))
+        expression.IsAnyKind(SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression)
         && ObjectCreationFactory.Create(expression).IsKnownType(KnownType.System_Text_StringBuilder, semanticModel);
 
-    private static bool IsSameVariable(ExpressionSyntax expression, ISymbol variableSymbol, SemanticModel semanticModel)
+    private static bool IsSameVariable(ExpressionSyntax expression, ILocalSymbol variableSymbol, SemanticModel semanticModel)
     {
-        var identifiers = expression.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>();
-        if (!identifiers.Any() && expression.Ancestors().OfType<ConditionalAccessExpressionSyntax>().Any())
+        var references = GetLocalReferences(expression, semanticModel);
+        if (!references.Any() && expression.Ancestors().OfType<ConditionalAccessExpressionSyntax>().Any())
         {
-            identifiers = expression.Ancestors().OfType<ConditionalAccessExpressionSyntax>().First().DescendantNodesAndSelf().OfType<IdentifierNameSyntax>();
+            references = GetLocalReferences(expression.Ancestors().OfType<ConditionalAccessExpressionSyntax>().First(), semanticModel);
         }
-        return identifiers.Any(x => IsSameVariable(x, variableSymbol, semanticModel));
+        return references.Any(x => IsSameVariable(x, variableSymbol, semanticModel));
     }
 
-    private static bool IsSameVariable(IdentifierNameSyntax identifier, ISymbol variableSymbol, SemanticModel semanticModel) =>
+    private static IEnumerable<IdentifierNameSyntax> GetLocalReferences(SyntaxNode node, SemanticModel semanticModel) =>
+        node.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Where(x => IsLocalReference(x, semanticModel));
+
+    private static bool IsLocalReference(IdentifierNameSyntax identifier, SemanticModel semanticModel) =>
+        semanticModel.GetOperation(identifier) is { Kind: OperationKindEx.LocalReference };
+
+    private static bool IsSameVariable(IdentifierNameSyntax identifier, ILocalSymbol variableSymbol, SemanticModel semanticModel) =>
         variableSymbol.Equals(semanticModel.GetSymbolInfo(identifier).Symbol);
 
     private static IList<ElementAccessExpressionSyntax> GetElementAccessExpressions(VariableDeclaratorSyntax declaration) =>
