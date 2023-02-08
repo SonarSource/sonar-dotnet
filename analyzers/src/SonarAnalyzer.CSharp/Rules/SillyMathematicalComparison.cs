@@ -63,22 +63,32 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (maybeLeft.HasValue)
                 {
-                    ConversionHelper.TryConvertWith(maybeLeft.Value, Convert.ToDouble, out constant);
                     other = binary.Right;
-                    return true;
+                    return TryConvertToDouble(maybeLeft.Value, out constant);
                 }
                 else
                 {
-                    ConversionHelper.TryConvertWith(maybeRight.Value, Convert.ToDouble, out constant);
                     other = binary.Left;
-                    return true;
+                    return TryConvertToDouble(maybeRight.Value, out constant);
                 }
             }
             return false;
         }
 
+        // 'char' needs to roundtrip {{char -> int -> double}}, can't go {{char -> double}}
+        private static bool TryConvertToDouble(object constant, out double typedConstant) =>
+            constant is char
+            ? ConversionHelper.TryConvertWith(Convert.ToInt32(constant), Convert.ToDouble, out typedConstant)
+            : ConversionHelper.TryConvertWith(constant, Convert.ToDouble, out typedConstant);
+
         private static bool TryGetRange(ITypeSymbol typeSymbol, out double min, out double max)
         {
+            if (typeSymbol.Is(KnownType.System_Char))
+            {
+                min = char.MinValue;
+                max = char.MaxValue;
+                return true;
+            }
             if (typeSymbol.Is(KnownType.System_Single))
             {
                 min = float.MinValue;

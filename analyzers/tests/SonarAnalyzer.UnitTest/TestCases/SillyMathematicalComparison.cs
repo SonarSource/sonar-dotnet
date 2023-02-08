@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,7 +11,46 @@ namespace SonarAnalyzer.UnitTest.TestCases
     {
         private T GetValue<T>() => default(T);
 
-        public void SBytes()
+        public void Chars() // Rule applies
+        {
+            const int smallInt = char.MinValue;
+            const long smallLong = char.MinValue;
+            const float smallFloat = char.MinValue;
+            const double smallDouble = char.MinValue;
+            const decimal smallDecimal = char.MinValue;
+
+            const int bigInt = char.MaxValue;
+            const long bigLong = char.MaxValue;
+            const float bigFloat = char.MaxValue;
+            const double bigDouble = char.MaxValue;
+            const decimal bigDecimal = char.MaxValue;
+
+            var c = GetValue<char>();
+
+            _ = c >= bigInt; // Compliant, not (always true) or (always false)
+            _ = bigLong <= c; // Compliant, not (always true) or (always false)
+            _ = bigFloat <= c; // Compliant, not (always true) or (always false)
+            _ = bigDouble <= c; // Compliant, not (always true) or (always false)
+            _ = bigDecimal <= c; // Compliant, not (always true) or (always false)
+
+            _ = c <= smallInt; // Compliant, not (always true) or (always false)
+            _ = smallLong >= c; // Compliant, not (always true) or (always false)
+            _ = smallFloat >= c; // Compliant, not (always true) or (always false)
+            _ = smallDouble >= c; // Compliant, not (always true) or (always false)
+            _ = smallDecimal >= c; // Compliant, not (always true) or (always false)
+
+            const int veryBig = int.MaxValue;
+            const long verySmall = long.MinValue;
+
+            _ = c < veryBig; // Noncompliant {{Comparison to this constant is useless; the constant is outside the range of type 'char'}}
+            _ = veryBig > c; // Noncompliant {{Comparison to this constant is useless; the constant is outside the range of type 'char'}}
+            _ = c > verySmall; // Noncompliant {{Comparison to this constant is useless; the constant is outside the range of type 'char'}}
+            _ = verySmall < c; // Noncompliant {{Comparison to this constant is useless; the constant is outside the range of type 'char'}}
+            _ = verySmall == c; // Noncompliant {{Comparison to this constant is useless; the constant is outside the range of type 'char'}}
+            _ = c == veryBig; // Noncompliant {{Comparison to this constant is useless; the constant is outside the range of type 'char'}}
+        }
+
+        public void SBytes() // CS0652
         {
             const sbyte smallSByte = sbyte.MinValue;
             const short smallShort = sbyte.MinValue;
@@ -57,7 +97,7 @@ namespace SonarAnalyzer.UnitTest.TestCases
             _ = sb == veryBig; // Compliant, raised by CS0652
         }
 
-        public void Bytes()
+        public void Bytes() // CS0652
         {
             const byte smallByte = byte.MinValue;
             const short smallShort = byte.MinValue;
@@ -116,7 +156,7 @@ namespace SonarAnalyzer.UnitTest.TestCases
             _ = b == veryBig; // Compliant, raised by CS0652
         }
 
-        public void Shorts()
+        public void Shorts() // CS0652
         {
             const short smallShort = short.MinValue;
             const int smallInt = short.MinValue;
@@ -159,7 +199,7 @@ namespace SonarAnalyzer.UnitTest.TestCases
             _ = s == veryBig; // Compliant, raised by CS0652
         }
 
-        public void UShorts()
+        public void UShorts() // CS0652
         {
             const ushort smallUShort = ushort.MinValue;
             const int smallInt = ushort.MinValue;
@@ -210,7 +250,7 @@ namespace SonarAnalyzer.UnitTest.TestCases
             _ = us == veryBig; // Compliant, raised by CS0652
         }
 
-        public void Ints()
+        public void Ints() // CS0652
         {
             const int smallInt = int.MinValue;
             const long smallLong = int.MinValue;
@@ -251,7 +291,7 @@ namespace SonarAnalyzer.UnitTest.TestCases
             _ = i == veryBig; // Compliant, raised by CS0652
         }
 
-        public void UInts()
+        public void UInts() // CS0652
         {
             const uint smallUInt = uint.MinValue;
             const long smallLong = uint.MinValue;
@@ -294,7 +334,7 @@ namespace SonarAnalyzer.UnitTest.TestCases
             _ = ui == veryBig; // Compliant, raised by CS0652
         }
 
-        public void Longs()
+        public void Longs() // Rule applies
         {
             const long smallLong = long.MinValue;
             const float smallFloat = long.MinValue;
@@ -329,7 +369,7 @@ namespace SonarAnalyzer.UnitTest.TestCases
             _ = l == veryBig; // Noncompliant {{Comparison to this constant is useless; the constant is outside the range of type 'long'}}
         }
 
-        public void ULongs()
+        public void ULongs() // Rule applies
         {
             const ulong smallULong = ulong.MinValue;
             const float smallFloat = ulong.MinValue;
@@ -364,13 +404,17 @@ namespace SonarAnalyzer.UnitTest.TestCases
             _ = ul == veryBig; // Noncompliant {{Comparison to this constant is useless; the constant is outside the range of type 'ulong'}}
         }
 
-        public void Floats()
+        public void Floats() // Rule applies
         {
             const float smallFloat = float.MinValue;
             const double smallDouble = float.MinValue;
 
             const float bigFloat = float.MaxValue;
             const double bigDouble = float.MaxValue;
+
+
+            const long l = long.MaxValue;
+            var i = 42;
 
             System.Single f = GetValue<float>();
 
