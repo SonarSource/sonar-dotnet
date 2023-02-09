@@ -32,10 +32,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterNodeAction(
-                CheckBinary,
+                CheckComparisonOutOfRange,
                 CSharpFacade.Instance.SyntaxKind.ComparisonKinds);
 
-        private static void CheckBinary(SonarSyntaxNodeReportingContext context)
+        private static void CheckComparisonOutOfRange(SonarSyntaxNodeReportingContext context)
         {
             if (TryGetConstantValue(context.SemanticModel, (BinaryExpressionSyntax)context.Node, out var constant, out var other)
                && context.SemanticModel.GetTypeInfo(other).Type is { } typeSymbolOfOther
