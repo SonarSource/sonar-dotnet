@@ -14,18 +14,18 @@ class SupportRawStringLiterals
         Some text{SomeField}
         """"")] int ExistingMultiLineInterpolated => 1;
 
-    [DebuggerDisplay("""{NonExisting}""")] int NonExistingTripleQuotes => 1;      // Noncompliant {{'NonExisting' doesn't exist in this context.}}
+    [DebuggerDisplay("""{Nonexistent}""")] int NonexistentTripleQuotes => 1;      // Noncompliant {{'Nonexistent' doesn't exist in this context.}}
     //               ^^^^^^^^^^^^^^^^^^^
-    [DebuggerDisplay(""""{NonExisting}"""")] int NonExistingQuadrupleQuotes => 1; // Noncompliant {{'NonExisting' doesn't exist in this context.}}
+    [DebuggerDisplay(""""{Nonexistent}"""")] int NonexistentQuadrupleQuotes => 1; // Noncompliant {{'Nonexistent' doesn't exist in this context.}}
     //               ^^^^^^^^^^^^^^^^^^^^^
     [DebuggerDisplay("""
-        Some text{NonExisting}
-        """)] int NonExistingMultiLine1 => 1;                                     // Noncompliant@-2^22#46 {{'NonExisting' doesn't exist in this context.}}
+        Some text{Nonexistent}
+        """)] int NonexistentMultiLine1 => 1;                                     // Noncompliant@-2^22#46 {{'Nonexistent' doesn't exist in this context.}}
     [DebuggerDisplay("""
         Some text{Some
         Property}
-        """)] int NonExistingMultiLine2 => 1;                                     // FN: the new line char make the expression within braces not a valid identifier
+        """)] int NonexistentMultiLine2 => 1;                                     // FN: the new line char make the expression within braces not a valid identifier
     [DebuggerDisplay($$"""""
-        Some text{NonExisting}
-        """"")] int NonExistingMultiLineInterpolated => 1;                        // FN: interpolated raw string literals strings not supported
+        Some text{Nonexistent}
+        """"")] int NonexistentMultiLineInterpolated => 1;                        // FN: interpolated raw string literals strings not supported
 }

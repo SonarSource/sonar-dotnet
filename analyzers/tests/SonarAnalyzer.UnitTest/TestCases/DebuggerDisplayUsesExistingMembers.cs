@@ -4,9 +4,9 @@ using System.Diagnostics;
 class TestOnPropertiesAndFields
 {
     const string ConstantWithoutInvalidMembers = "1";
-    const string ConstantWithInvalidMember = "{NonExisting}";
+    const string ConstantWithInvalidMember = "{Nonexistent}";
     const string ConstantFragment1 = "{Non";
-    const string ConstantFragment2 = "Existing}";
+    const string ConstantFragment2 = "existent}";
 
     int SomeProperty => 1;
     int SomeField = 2;
@@ -29,17 +29,17 @@ class TestOnPropertiesAndFields
     [DebuggerDisplay("{1 + 1}")] int WithNoMemberReferenced1 => 1;
     [DebuggerDisplay(@"{""1"" + ""1""}")] int WithNoMemberReferenced2 => 1;
 
-    [DebuggerDisplay("{NonExisting}")] int WithNonExistingMember1 => 1;                          // Noncompliant {{'NonExisting' doesn't exist in this context.}}
+    [DebuggerDisplay("{Nonexistent}")] int WithNonexistentMember1 => 1;                          // Noncompliant {{'Nonexistent' doesn't exist in this context.}}
     //               ^^^^^^^^^^^^^^^
-    [DebuggerDisplay("1 + {NonExisting}")] int WithNonExistingMember2 => 1;                      // Noncompliant {{'NonExisting' doesn't exist in this context.}}
+    [DebuggerDisplay("1 + {Nonexistent}")] int WithNonexistentMember2 => 1;                      // Noncompliant {{'Nonexistent' doesn't exist in this context.}}
     //               ^^^^^^^^^^^^^^^^^^^
-    [DebuggerDisplay("{NonExisting1} bla bla {NonExisting2}")] int WithMultipleNonExisting => 1; // Noncompliant {{'NonExisting1' doesn't exist in this context.}}
+    [DebuggerDisplay("{Nonexistent1} bla bla {Nonexistent2}")] int WithMultipleNonexistent => 1; // Noncompliant {{'Nonexistent1' doesn't exist in this context.}}
     //               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    [DebuggerDisplay(@"{NonExisting}")] int WithNonExistingMemberVerbatim => 1;                  // Noncompliant {{'NonExisting' doesn't exist in this context.}}
+    [DebuggerDisplay(@"{Nonexistent}")] int WithNonexistentMemberVerbatim => 1;                  // Noncompliant {{'Nonexistent' doesn't exist in this context.}}
     [DebuggerDisplay(@"Some text
-        {NonExisting}")] int WithNonExistingMemberVerbatimMultiLine1 => 1;                       // Noncompliant@-1^22#34 {{'NonExisting' doesn't exist in this context.}}
+        {Nonexistent}")] int WithNonexistentMemberVerbatimMultiLine1 => 1;                       // Noncompliant@-1^22#34 {{'Nonexistent' doesn't exist in this context.}}
     [DebuggerDisplay(@"Some text {Some
-        Property}")] int WithNonExistingMemberVerbatimMultiLine2 => 1;                           // FN@-1: the new line char make the expression within braces not a valid identifier
+        Property}")] int WithNonexistentMemberVerbatimMultiLine2 => 1;                           // FN@-1: the new line char make the expression within braces not a valid identifier
 
     [DebuggerDisplay(ConstantWithInvalidMember)] int WithFormatAsConstant2 => 1;                            // FN: constants are not checked
     [DebuggerDisplay("{Non" + "Existing}")] int WithFormatAsConcatenationOfLiterals => 1;                   // FN: only simple literal supported
@@ -47,18 +47,18 @@ class TestOnPropertiesAndFields
         + "Existing}")] int WithFormatAsConcatenationOfLiteralsMultiLine => 1;                              // FN: only simple literal supported
     [DebuggerDisplay(ConstantFragment1 + ConstantFragment2)] int WithFormatAsConcatenationOfConstants => 1; // FN: only simple literal supported
 
-    [DebuggerDisplay("{this.NonExistingProperty}")] int PropertyWithExplicitThis => 1;                      // FN: "this." not supported (valid when debugging a C# project)
-    [DebuggerDisplay("{Me.NonExistingField}")] int FieldWithExplicitThis => 1;                              // FN: "Me." not supported (valid when debugging a VB.NET project)
-    [DebuggerDisplay("{1 + NonExistingProperty}")] int ContainingInvalidMembers => 1;                       // FN: expressions not supported
+    [DebuggerDisplay("{this.NonexistentProperty}")] int PropertyWithExplicitThis => 1;                      // FN: "this." not supported (valid when debugging a C# project)
+    [DebuggerDisplay("{Me.NonexistentField}")] int FieldWithExplicitThis => 1;                              // FN: "Me." not supported (valid when debugging a VB.NET project)
+    [DebuggerDisplay("{1 + NonexistentProperty}")] int ContainingInvalidMembers => 1;                       // FN: expressions not supported
 }
 
 [DebuggerDisplay("{this.ToString()}")]
-[DebuggerDisplay("{NonExisting}")]      // Noncompliant {{'NonExisting' doesn't exist in this context.}}
+[DebuggerDisplay("{Nonexistent}")]      // Noncompliant {{'Nonexistent' doesn't exist in this context.}}
 public enum TopLevelEnum { One, Two, Three }
 
 [DebuggerDisplay("{SomeProperty}")]
 [DebuggerDisplay("{SomeField}")]
-[DebuggerDisplay("{NonExisting}")]      // Noncompliant {{'NonExisting' doesn't exist in this context.}}
+[DebuggerDisplay("{Nonexistent}")]      // Noncompliant {{'Nonexistent' doesn't exist in this context.}}
 public class TestOnNestedTypes
 {
     int SomeProperty => 1;
@@ -103,27 +103,27 @@ public class TestOnIndexers
 
     [DebuggerDisplay("{ExistingProperty}")]
     [DebuggerDisplay("{ExistingField}")]
-    [DebuggerDisplay("{NonExisting}")] // Noncompliant
+    [DebuggerDisplay("{Nonexistent}")] // Noncompliant
     int this[int i] => 1;
 }
 
-[DebuggerDisplay("{SomeProperty}"), DebuggerDisplay("{SomeField}"), DebuggerDisplay("{NonExisting}")] // Noncompliant
+[DebuggerDisplay("{SomeProperty}"), DebuggerDisplay("{SomeField}"), DebuggerDisplay("{Nonexistent}")] // Noncompliant
 //                                                                                  ^^^^^^^^^^^^^^^
 public class TestMultipleAttributes
 {
     int SomeProperty => 1;
     int SomeField = 1;
 
-    [DebuggerDisplay("{SomeProperty}"), DebuggerDisplay("{SomeField}"), DebuggerDisplay("{NonExisting}")] // Noncompliant
+    [DebuggerDisplay("{SomeProperty}"), DebuggerDisplay("{SomeField}"), DebuggerDisplay("{Nonexistent}")] // Noncompliant
     //                                                                                  ^^^^^^^^^^^^^^^
     int OtherProperty1 => 1;
 
-    [DebuggerDisplay("{NonExisting1}"), DebuggerDisplay("{NonExisting2}")]
+    [DebuggerDisplay("{Nonexistent1}"), DebuggerDisplay("{Nonexistent2}")]
     //               ^^^^^^^^^^^^^^^^
     //                                                  ^^^^^^^^^^^^^^^^@-1
     int OtherProperty2 => 1;
 
-    [DebuggerDisplay("{NonExisting1}")][DebuggerDisplay("{NonExisting2}")]
+    [DebuggerDisplay("{Nonexistent1}")][DebuggerDisplay("{Nonexistent2}")]
     //               ^^^^^^^^^^^^^^^^
     //                                                  ^^^^^^^^^^^^^^^^@-1
     int OtherProperty3 => 1;
@@ -156,10 +156,10 @@ public class SupportWhitespaces
     [DebuggerDisplay("{SomeProperty }")]
     [DebuggerDisplay("{\tSomeProperty}")]
     [DebuggerDisplay("{\tSomeProperty\t}")]
-    [DebuggerDisplay("{ NonExisting}")]    // Noncompliant {{'NonExisting' doesn't exist in this context.}}
-    [DebuggerDisplay("{NonExisting }")]    // Noncompliant {{'NonExisting' doesn't exist in this context.}}
-    [DebuggerDisplay("{\tNonExisting}")]   // Noncompliant {{'NonExisting' doesn't exist in this context.}}
-    [DebuggerDisplay("{\tNonExisting\t}")] // Noncompliant {{'NonExisting' doesn't exist in this context.}}
+    [DebuggerDisplay("{ Nonexistent}")]    // Noncompliant {{'Nonexistent' doesn't exist in this context.}}
+    [DebuggerDisplay("{Nonexistent }")]    // Noncompliant {{'Nonexistent' doesn't exist in this context.}}
+    [DebuggerDisplay("{\tNonexistent}")]   // Noncompliant {{'Nonexistent' doesn't exist in this context.}}
+    [DebuggerDisplay("{\tNonexistent\t}")] // Noncompliant {{'Nonexistent' doesn't exist in this context.}}
     int SomeProperty => 1;
 }
 
@@ -169,21 +169,21 @@ public class SupportNq
     [DebuggerDisplay("{SomeProperty ,nq}")]
     [DebuggerDisplay("{SomeProperty, nq}")]
     [DebuggerDisplay("{SomeProperty,nq }")]
-    [DebuggerDisplay("{NonExisting,nq}")]  // Noncompliant
-    [DebuggerDisplay("{NonExisting ,nq}")] // Noncompliant
-    [DebuggerDisplay("{NonExisting, nq}")] // Noncompliant
-    [DebuggerDisplay("{NonExisting,nq }")] // Noncompliant
+    [DebuggerDisplay("{Nonexistent,nq}")]  // Noncompliant
+    [DebuggerDisplay("{Nonexistent ,nq}")] // Noncompliant
+    [DebuggerDisplay("{Nonexistent, nq}")] // Noncompliant
+    [DebuggerDisplay("{Nonexistent,nq }")] // Noncompliant
     int SomeProperty => 1;
 }
 
 public class SupportOptionalAttributeParameter
 {
     [DebuggerDisplay("{SomeProperty}", Name = "Any name")]
-    [DebuggerDisplay("{NonExisting}", Name = "Any name")]                                                     // Noncompliant {{'NonExisting' doesn't exist in this context.}}
+    [DebuggerDisplay("{Nonexistent}", Name = "Any name")]                                                     // Noncompliant {{'Nonexistent' doesn't exist in this context.}}
     //               ^^^^^^^^^^^^^^^
-    [DebuggerDisplay("{NonExisting}", Name = "Any name", Type = nameof(SupportOptionalAttributeParameter))]   // Noncompliant {{'NonExisting' doesn't exist in this context.}}
+    [DebuggerDisplay("{Nonexistent}", Name = "Any name", Type = nameof(SupportOptionalAttributeParameter))]   // Noncompliant {{'Nonexistent' doesn't exist in this context.}}
     //               ^^^^^^^^^^^^^^^
-    [DebuggerDisplay("{NonExisting}", Name = "Any name", Target = typeof(SupportOptionalAttributeParameter))] // Noncompliant {{'NonExisting' doesn't exist in this context.}}
+    [DebuggerDisplay("{Nonexistent}", Name = "Any name", Target = typeof(SupportOptionalAttributeParameter))] // Noncompliant {{'Nonexistent' doesn't exist in this context.}}
     //               ^^^^^^^^^^^^^^^
     int SomeProperty => 1;
 }
@@ -230,9 +230,9 @@ public class SupportAccessModifiers
 
 public class SupportAttributeTargets
 {
-    [assembly: DebuggerDisplay("{NonExisting}")] // Noncompliant, attribute at assembly level, referencing a non-existing member
-    [field: DebuggerDisplay("{NonExisting}")]    // Noncompliant, attribute ignored, still referencing a non-existing member
-    [property: DebuggerDisplay("{NonExisting}")] // Noncompliant, attribute taken into account
+    [assembly: DebuggerDisplay("{Nonexistent}")] // Noncompliant, attribute at assembly level, referencing a non-existing member
+    [field: DebuggerDisplay("{Nonexistent}")]    // Noncompliant, attribute ignored, still referencing a non-existing member
+    [property: DebuggerDisplay("{Nonexistent}")] // Noncompliant, attribute taken into account
     int SomeProperty => 1;
 }
 
@@ -242,6 +242,6 @@ namespace WithTypeAlias
 
     public class Test
     {
-        [DebuggerDisplayAlias("{NonExisting}")] int WithAlias => 1; // Noncompliant: attribute name also checked at semantic level
+        [DebuggerDisplayAlias("{Nonexistent}")] int WithAlias => 1; // Noncompliant: attribute name also checked at semantic level
     }
 }
