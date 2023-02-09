@@ -28,14 +28,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly DiagnosticDescriptor MathComparisonRule = DescriptorFactory.Create(DiagnosticId, MathComparisonMessage);
 
-        private static readonly Dictionary<KnownType, ValuesRange> ValuesRanges = new()
-        {
-            {KnownType.System_Char, new ValuesRange(char.MinValue, char.MaxValue) },
-            {KnownType.System_Single, new ValuesRange(float.MinValue, float.MaxValue) },
-            {KnownType.System_Int64, new ValuesRange(long.MinValue, long.MaxValue) },
-            {KnownType.System_UInt64, new ValuesRange(ulong.MinValue, ulong.MaxValue) },
-        };
-
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(MathComparisonRule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
@@ -57,8 +49,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool TryGetConstantValue(SemanticModel model, BinaryExpressionSyntax binary, out double constant, out SyntaxNode other)
         {
-            constant = default;
-            other = default;
             var optionalLeft = model.GetConstantValue(binary.Left);
             var optionalRight = model.GetConstantValue(binary.Right);
 
@@ -69,12 +59,14 @@ namespace SonarAnalyzer.Rules.CSharp
                     other = binary.Right;
                     return true;
                 }
-                else if (TryConvertToDouble(optionalRight.Value, out constant))
+                else if (optionalRight.HasValue && TryConvertToDouble(optionalRight.Value, out constant))
                 {
                     other = binary.Left;
                     return true;
                 }
             }
+            constant = default;
+            other = default;
             return false;
         }
 
@@ -82,9 +74,16 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool TryConvertToDouble(object constant, out double typedConstant) =>
             ConversionHelper.TryConvertWith(constant is char ? Convert.ToInt32(constant) : constant, Convert.ToDouble, out typedConstant);
 
-        private static ValuesRange TryGetRange(ITypeSymbol typeSymbol) =>
-            ValuesRanges.FirstOrDefault(x => typeSymbol.Is(x.Key)).Value;
+        private static ValuesRange? TryGetRange(ITypeSymbol typeSymbol) =>
+            typeSymbol switch
+            {
+                _ when typeSymbol.Is(KnownType.System_Char) => new(char.MinValue, char.MaxValue),
+                _ when typeSymbol.Is(KnownType.System_Single) => new(float.MinValue, float.MaxValue),
+                _ when typeSymbol.Is(KnownType.System_Int64) => new(long.MinValue, long.MaxValue),
+                _ when typeSymbol.Is(KnownType.System_UInt64) => new(ulong.MinValue, ulong.MaxValue),
+                _ => null,
+            };
 
-        private sealed record ValuesRange(double Min, double Max);
+        private readonly record struct ValuesRange(double Min, double Max);
     }
 }
