@@ -11,7 +11,7 @@ Public Class FruitException ' Noncompliant - this has nothing to do with Excepti
 End Class
 
 Public Class CarException ' Noncompliant - does not derive from any Exception-based class
-    Public Sub New(ByVal message As String, ByVal inner As Exception)
+    Public Sub New(message As String, inner As Exception)
         ' ...
     End Sub
 End Class
@@ -26,7 +26,7 @@ Public Class FruitSport ' Compliant - class name does not end with 'Exception'
 End Class
 
 Public Class CarException Inherits Exception ' Compliant - correctly extends System.Exception
-    Public Sub New(ByVal message As String, ByVal inner As Exception)
+    Public Sub New(message As String, inner As Exception)
         MyBase.New(message, inner)
         ' ...
     End Sub

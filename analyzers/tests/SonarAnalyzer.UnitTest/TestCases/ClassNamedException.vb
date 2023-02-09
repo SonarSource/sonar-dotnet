@@ -1,6 +1,6 @@
 ﻿Imports System
 
-Class CustomException                            ' Noncompliant {{Rename this class to remove "(e|E)xception" or correct its inheritance.}}
+Class CustomException                            ' Noncompliant {{Rename this class to remove "Exception" or correct its inheritance.}}
     ' ^^^^^^^^^^^^^^^
 End Class
 

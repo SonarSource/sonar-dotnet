@@ -25,7 +25,7 @@ public abstract class ClassNamedExceptionBase<TSyntaxKind> : SonarDiagnosticAnal
 {
     private const string DiagnosticId = "S2166";
 
-    protected override string MessageFormat => "Rename this class to remove \"(e|E)xception\" or correct its inheritance.";
+    protected override string MessageFormat => "Rename this class to remove \"Exception\" or correct its inheritance.";
 
     protected ClassNamedExceptionBase() : base(DiagnosticId) { }
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-class CustomException { }                                        // Noncompliant {{Rename this class to remove "(e|E)xception" or correct its inheritance.}}
+class CustomException { }                                        // Noncompliant {{Rename this class to remove "Exception" or correct its inheritance.}}
 //    ^^^^^^^^^^^^^^^
 class Customexception { }                                        // Noncompliant
 class CustomEXCEPTION { }                                        // Noncompliant
