@@ -1,0 +1,27 @@
+<p>Classes that declare an implementation of <code>Serializable</code> should provide a serializable constructor. Without such a constructor, you’ll
+be unable to deserialize the class.</p>
+<p>Serialization constructors should be <code>private</code> for <code>sealed</code> types and <code>protected</code> otherwise.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+[Serializable]
+public class Person : ISerializable {  // Noncompliant; missing serializable constructor
+  public void GetObjectData (SerializationInfo info, StreamingContext context) {
+    // ...
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+[Serializable]
+public class Person : ISerializable {  // Noncompliant; missing serializable constructor
+
+  protected Person (SerializationInfo info, StreamingContext context) {
+    // ...
+  }
+
+  public void GetObjectData (SerializationInfo info, StreamingContext context) {
+    // ...
+  }
+}
+</pre>
+

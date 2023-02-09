@@ -1,0 +1,18 @@
+{
+  "title": "\"Serializable\" classes should provide a serialization constructor",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "15min"
+  },
+  "tags": [
+    "serialization",
+    "bug"
+  ],
+  "defaultSeverity": "Critical",
+  "ruleSpecification": "RSPEC-2552",
+  "sqKey": "S2552",
+  "scope": "Main",
+  "quickfix": "unknown"
+}
