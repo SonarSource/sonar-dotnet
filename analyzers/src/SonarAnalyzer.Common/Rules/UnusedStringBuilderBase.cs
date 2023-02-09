@@ -27,10 +27,11 @@ public abstract class UnusedStringBuilderBase<TSyntaxKind, TVariableDeclarator, 
     where TConditionalExpression : SyntaxNode
 {
     private const string DiagnosticId = "S3063";
-    protected override string MessageFormat => """Remove this "StringBuilder"; ".ToString()" is never called.""";
 
     internal readonly string[] StringBuilderAccessInvocations = { "ToString", "CopyTo", "GetChunks" };
     internal readonly string[] StringBuilderAccessExpressions = { "Length", "Capacity", "MaxCapacity" };
+
+    protected override string MessageFormat => """Remove this "StringBuilder"; ".ToString()" is never called.""";
 
     protected abstract ILocalSymbol GetSymbol(TVariableDeclarator declaration, SemanticModel semanticModel);
     protected abstract string GetName(SyntaxNode declaration);
@@ -56,10 +57,15 @@ public abstract class UnusedStringBuilderBase<TSyntaxKind, TVariableDeclarator, 
 
     internal bool IsSameReference(SyntaxNode expression, string name, ILocalSymbol symbol, SemanticModel semanticModel)
     {
-        var references = GetLocalReferences(expression, semanticModel);
-        if (!references.Any() && expression.Ancestors().OfType<TConditionalExpression>().Any())
+        if (expression == null)
         {
-            references = GetLocalReferences(expression.Ancestors().OfType<TConditionalExpression>().First(), semanticModel);
+            return false;
+        }
+
+        var references = GetLocalReferences(expression);
+        if (expression.Ancestors().OfType<TConditionalExpression>().Any())
+        {
+            references = GetLocalReferences(expression.Ancestors().OfType<TConditionalExpression>().First());
         }
         return references.Any(x => IsSameVariable(x, name, symbol, semanticModel));
     }
@@ -67,9 +73,6 @@ public abstract class UnusedStringBuilderBase<TSyntaxKind, TVariableDeclarator, 
     internal bool IsSameVariable(SyntaxNode identifier, string name, ILocalSymbol symbol, SemanticModel semanticModel) =>
         GetName(identifier).Equals(name, Language.NameComparison) && symbol.Equals(semanticModel.GetSymbolInfo(identifier).Symbol);
 
-    internal static IEnumerable<TIdentifierName> GetLocalReferences(SyntaxNode node, SemanticModel semanticModel) =>
-        node.DescendantNodesAndSelf().OfType<TIdentifierName>().Where(x => IsLocalReference(x, semanticModel));
-
-    internal static bool IsLocalReference(SyntaxNode identifier, SemanticModel semanticModel) =>
-        semanticModel.GetOperation(identifier) is { Kind: OperationKindEx.LocalReference };
+    internal static IEnumerable<TIdentifierName> GetLocalReferences(SyntaxNode node) =>
+        node.DescendantNodesAndSelf().OfType<TIdentifierName>();
 }
