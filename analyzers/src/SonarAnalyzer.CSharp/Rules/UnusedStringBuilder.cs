@@ -23,39 +23,38 @@ namespace SonarAnalyzer.Rules.CSharp;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, VariableDeclaratorSyntax, IdentifierNameSyntax, ConditionalAccessExpressionSyntax>
 {
-    internal readonly SyntaxKind[] SkipChildren =
+    private static readonly SyntaxKind[] SkipChildren =
     {
         SyntaxKind.ClassDeclaration,
     };
 
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-    protected override ILocalSymbol GetSymbol(VariableDeclaratorSyntax declaration, SemanticModel semanticModel) => (ILocalSymbol)semanticModel.GetDeclaredSymbol(declaration);
-
     protected override string GetName(SyntaxNode declaration) => declaration.GetName();
 
     protected override SyntaxNode GetScope(VariableDeclaratorSyntax declarator) =>
-        declarator.IsTopLevel()
+        declarator.Parent.Parent is { Parent: GlobalStatementSyntax { Parent: CompilationUnitSyntax } }
         ? declarator.Parent.Parent.Parent.Parent
         : declarator.Parent.Parent.Parent;
 
-    protected override bool NeedsToTrack(VariableDeclaratorSyntax declaration, SemanticModel semanticModel) =>
-        declaration is
+    protected override ILocalSymbol RetrieveStringBuilderObject(VariableDeclaratorSyntax declarator, SemanticModel semanticModel) =>
+        declarator is
         {
             Parent.Parent: LocalDeclarationStatementSyntax,
             Initializer.Value: { } expression,
         }
-        && IsStringBuilderObjectCreation(expression, semanticModel);
+        && IsStringBuilderObjectCreation(expression, semanticModel)
+            ? semanticModel.GetDeclaredSymbol(declarator) as ILocalSymbol
+            : null;
 
     protected override bool IsStringBuilderRead(string name, ILocalSymbol symbol, SyntaxNode node, SemanticModel model) =>
         node switch
         {
-            InvocationExpressionSyntax invocation =>
-                (StringBuilderAccessInvocations.Contains(invocation.Expression.GetName()) && IsSameReference(invocation.Expression, name, symbol, model))
-                || invocation.ArgumentList.Arguments.Any(argument => IsSameReference(argument.Expression, name, symbol, model)),
+            InvocationExpressionSyntax invocation => StringBuilderAccessInvocations.Contains(invocation.Expression.GetName()) && IsSameReference(invocation.Expression, name, symbol, model),
             ReturnStatementSyntax returnStatement => IsSameReference(returnStatement.Expression, name, symbol, model),
             InterpolationSyntax interpolation => IsSameReference(interpolation.Expression, name, symbol, model),
             ElementAccessExpressionSyntax elementAccess => IsSameReference(elementAccess.Expression, name, symbol, model),
+            ArgumentSyntax argument => IsSameReference(argument.Expression, name, symbol, model),
             MemberAccessExpressionSyntax memberAccess => StringBuilderAccessExpressions.Contains(memberAccess.Name.GetName()) && IsSameReference(memberAccess.Expression, name, symbol, model),
             _ => false,
         };

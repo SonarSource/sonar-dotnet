@@ -33,10 +33,9 @@ public abstract class UnusedStringBuilderBase<TSyntaxKind, TVariableDeclarator, 
 
     protected override string MessageFormat => """Remove this "StringBuilder"; ".ToString()" is never called.""";
 
-    protected abstract ILocalSymbol GetSymbol(TVariableDeclarator declaration, SemanticModel semanticModel);
     protected abstract string GetName(SyntaxNode declaration);
     protected abstract SyntaxNode GetScope(TVariableDeclarator declarator);
-    protected abstract bool NeedsToTrack(TVariableDeclarator declaration, SemanticModel semanticModel);
+    protected abstract ILocalSymbol RetrieveStringBuilderObject(TVariableDeclarator declaration, SemanticModel semanticModel);
     protected abstract bool IsStringBuilderRead(string name, ILocalSymbol symbol, SyntaxNode node, SemanticModel model);
     protected abstract bool DescendIntoChildren(SyntaxNode node);
 
@@ -46,9 +45,10 @@ public abstract class UnusedStringBuilderBase<TSyntaxKind, TVariableDeclarator, 
         context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
         {
             var variableDeclaration = (TVariableDeclarator)c.Node;
-            if (!NeedsToTrack(variableDeclaration, c.SemanticModel)
+
+            if (RetrieveStringBuilderObject(variableDeclaration, c.SemanticModel) is not { } symbol
                 || GetScope(variableDeclaration).DescendantNodes(DescendIntoChildren).Any(node =>
-                    IsStringBuilderRead(GetName(variableDeclaration), GetSymbol(variableDeclaration, c.SemanticModel), node, c.SemanticModel)))
+                    IsStringBuilderRead(GetName(variableDeclaration), symbol, node, c.SemanticModel)))
             {
                 return;
             }

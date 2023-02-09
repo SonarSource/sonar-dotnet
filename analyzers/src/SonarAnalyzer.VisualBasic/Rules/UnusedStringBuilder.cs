@@ -25,33 +25,36 @@ namespace SonarAnalyzer.Rules.VisualBasic;
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
 public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, VariableDeclaratorSyntax, IdentifierNameSyntax, ConditionalAccessExpressionSyntax>
 {
-    internal readonly SyntaxKind[] SkipChildren = { };
+    private static readonly SyntaxKind[] SkipChildren = { };
 
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-    protected override ILocalSymbol GetSymbol(VariableDeclaratorSyntax declaration, SemanticModel semanticModel) => (ILocalSymbol)semanticModel.GetDeclaredSymbol(declaration.Names.First());
-
-    protected override string GetName(SyntaxNode declaration) => declaration.GetName();
+    protected override string GetName(SyntaxNode declaration) =>
+        declaration is VariableDeclaratorSyntax variableDeclarator
+            ? variableDeclarator.Names[0].Identifier.ValueText ?? string.Empty
+            : declaration.GetName();
 
     protected override SyntaxNode GetScope(VariableDeclaratorSyntax declarator) => declarator.Parent.Parent.Parent;
 
-    protected override bool NeedsToTrack(VariableDeclaratorSyntax declaration, SemanticModel semanticModel) =>
-        declaration is
+    protected override ILocalSymbol RetrieveStringBuilderObject(VariableDeclaratorSyntax declarator, SemanticModel semanticModel) =>
+        declarator is
         {
             Parent: LocalDeclarationStatementSyntax,
             Initializer.Value: ObjectCreationExpressionSyntax { } objectCreation,
         }
-        && objectCreation.Type.IsKnownType(KnownType.System_Text_StringBuilder, semanticModel);
+        && objectCreation.Type.IsKnownType(KnownType.System_Text_StringBuilder, semanticModel)
+            ? semanticModel.GetDeclaredSymbol(declarator.Names.First()) as ILocalSymbol
+            : null;
 
     protected override bool IsStringBuilderRead(string name, ILocalSymbol symbol, SyntaxNode node, SemanticModel model) =>
         node switch
         {
             InvocationExpressionSyntax invocation =>
                 (StringBuilderAccessInvocations.Contains(invocation.GetName()) && IsSameReference(invocation.Expression, name, symbol, model))
-                || invocation.ArgumentList.Arguments.Any(argument => IsSameReference(argument.GetExpression(), name, symbol, model))
-                || (IsSameReference(invocation.Expression, name, symbol, model) && model.GetOperation(invocation).Kind is OperationKindEx.PropertyReference), // Property reference
+                || (IsSameReference(invocation.Expression, name, symbol, model) && model.GetOperation(invocation).Kind is OperationKindEx.PropertyReference),
             ReturnStatementSyntax returnStatement => IsSameReference(returnStatement.Expression, name, symbol, model),
             InterpolationSyntax interpolation => IsSameReference(interpolation.Expression, name, symbol, model),
+            ArgumentSyntax argument => IsSameReference(argument.GetExpression(), name, symbol, model),
             MemberAccessExpressionSyntax memberAccess => StringBuilderAccessExpressions.Contains(memberAccess.Name.GetName()) && IsSameReference(memberAccess.Expression, name, symbol, model),
             _ => false,
         };
