@@ -43,16 +43,16 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
         }
         && objectCreation.Type.IsKnownType(KnownType.System_Text_StringBuilder, semanticModel);
 
-    protected override bool IsStringBuilderRead(string name, ILocalSymbol local, SyntaxNode node, SemanticModel model) =>
+    protected override bool IsStringBuilderRead(string name, ILocalSymbol symbol, SyntaxNode node, SemanticModel model) =>
         node switch
         {
             InvocationExpressionSyntax invocation =>
-                (StringBuilderAccessInvocations.Contains(invocation.GetName()) && IsSameReference(invocation.Expression, name, local, model))
-                || invocation.ArgumentList.Arguments.Any(argument => IsSameReference(argument.GetExpression(), name, local, model))
-                || (IsSameReference(invocation.Expression, name, local, model) && model.GetOperation(invocation).Kind is OperationKindEx.PropertyReference), // Property reference
-            ReturnStatementSyntax returnStatement => IsSameReference(returnStatement.Expression, name, local, model),
-            InterpolationSyntax interpolation => IsSameReference(interpolation.Expression, name, local, model),
-            MemberAccessExpressionSyntax memberAccess => StringBuilderAccessExpressions.Contains(memberAccess.Name.GetName()) && IsSameReference(memberAccess.Expression, name, local, model),
+                (StringBuilderAccessInvocations.Contains(invocation.GetName()) && IsSameReference(invocation.Expression, name, symbol, model))
+                || invocation.ArgumentList.Arguments.Any(argument => IsSameReference(argument.GetExpression(), name, symbol, model))
+                || (IsSameReference(invocation.Expression, name, symbol, model) && model.GetOperation(invocation).Kind is OperationKindEx.PropertyReference), // Property reference
+            ReturnStatementSyntax returnStatement => IsSameReference(returnStatement.Expression, name, symbol, model),
+            InterpolationSyntax interpolation => IsSameReference(interpolation.Expression, name, symbol, model),
+            MemberAccessExpressionSyntax memberAccess => StringBuilderAccessExpressions.Contains(memberAccess.Name.GetName()) && IsSameReference(memberAccess.Expression, name, symbol, model),
             _ => false,
         };
 

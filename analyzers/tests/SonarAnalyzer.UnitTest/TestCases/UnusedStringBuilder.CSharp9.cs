@@ -16,5 +16,11 @@ public class MyClass
 
         StringBuilder builderInLine1 = new(), builderInLine2 = new(); // Noncompliant
 //                    ^^^^^^^^^^^^^^^^^^^^^^  ^^^^^^^^^^^^^^^^^^^^^^  // Noncompliant@-1
+
+        static void LocalStaticMethod()
+        {
+            StringBuilder builder2 = new StringBuilder(); // Compliant
+            var a = builder2.Length;
+        }
     }
 }

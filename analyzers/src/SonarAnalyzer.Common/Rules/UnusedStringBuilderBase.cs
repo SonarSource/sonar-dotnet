@@ -46,7 +46,8 @@ public abstract class UnusedStringBuilderBase<TSyntaxKind, TVariableDeclarator, 
         {
             var variableDeclaration = (TVariableDeclarator)c.Node;
             if (!NeedsToTrack(variableDeclaration, c.SemanticModel)
-                || GetScope(variableDeclaration).DescendantNodes(DescendIntoChildren).Any(node => IsStringBuilderRead(GetName(variableDeclaration), GetSymbol(variableDeclaration, c.SemanticModel), node, c.SemanticModel)))
+                || GetScope(variableDeclaration).DescendantNodes(DescendIntoChildren).Any(node =>
+                    IsStringBuilderRead(GetName(variableDeclaration), GetSymbol(variableDeclaration, c.SemanticModel), node, c.SemanticModel)))
             {
                 return;
             }
