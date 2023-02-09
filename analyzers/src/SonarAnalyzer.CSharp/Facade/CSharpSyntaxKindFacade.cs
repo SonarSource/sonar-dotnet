@@ -18,19 +18,17 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CSharp;
-
 namespace SonarAnalyzer.Helpers.Facade;
 
 internal sealed class CSharpSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind>
 {
     public SyntaxKind Attribute => SyntaxKind.Attribute;
+    public SyntaxKind ClassDeclaration => SyntaxKind.ClassDeclaration;
     public SyntaxKind[] ClassAndRecordDeclaration => new[]
     {
         SyntaxKind.ClassDeclaration,
         SyntaxKindEx.RecordClassDeclaration,
     };
-    public SyntaxKind ClassDeclaration => SyntaxKind.ClassDeclaration;
     public SyntaxKind[] ClassAndModuleDeclarations => new[] { SyntaxKind.ClassDeclaration };
     public SyntaxKind[] CommentTrivia => new[]
     {
