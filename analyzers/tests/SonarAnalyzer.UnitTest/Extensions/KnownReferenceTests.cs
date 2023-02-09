@@ -20,6 +20,7 @@
 
 using Moq;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using static SonarAnalyzer.Helpers.KnownReference;
 
 namespace SonarAnalyzer.UnitTest;

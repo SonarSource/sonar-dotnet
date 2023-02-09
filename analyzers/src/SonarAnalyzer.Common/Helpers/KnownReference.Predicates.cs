@@ -22,14 +22,16 @@ namespace SonarAnalyzer.Helpers;
 
 public sealed partial class KnownReference
 {
+    private const StringComparison AssemblyNameComparission = StringComparison.OrdinalIgnoreCase;
+
     internal static Func<AssemblyIdentity, bool> NameIs(string name) =>
-        x => x.Name.Equals(name);
+        x => x.Name.Equals(name, AssemblyNameComparission);
 
     internal static Func<AssemblyIdentity, bool> StartsWith(string name) =>
-        x => x.Name.StartsWith(name);
+        x => x.Name.StartsWith(name, AssemblyNameComparission);
 
     internal static Func<AssemblyIdentity, bool> EndsWith(string name) =>
-        x => x.Name.EndsWith(name);
+        x => x.Name.EndsWith(name, AssemblyNameComparission);
 
     internal static Func<AssemblyIdentity, bool> Contains(string name) =>
         x => x.Name.Contains(name);
