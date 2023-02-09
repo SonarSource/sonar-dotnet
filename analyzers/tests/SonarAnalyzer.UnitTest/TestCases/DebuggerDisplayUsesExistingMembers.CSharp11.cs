@@ -20,7 +20,7 @@ class SupportRawStringLiterals
     //               ^^^^^^^^^^^^^^^^^^^^^
     [DebuggerDisplay("""
         Some text{NonExisting}
-        """)] int NonExistingMultiLine1 => 1;                                     // Noncompliant@-2^22#48 {{'NonExisting' doesn't exist in this context.}}
+        """)] int NonExistingMultiLine1 => 1;                                     // Noncompliant@-2^22#46 {{'NonExisting' doesn't exist in this context.}}
     [DebuggerDisplay("""
         Some text{Some
         Property}
