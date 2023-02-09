@@ -77,3 +77,11 @@ End Class
 Module StaticException                           ' Noncompliant - the module should be renamed, as it cannot inherit from Exception
 End Module
 
+Module                                           ' Error [BC30179,BC30203]
+End Module
+
+Class                                            ' Error [BC30179,BC30203]
+End Class
+
+
+

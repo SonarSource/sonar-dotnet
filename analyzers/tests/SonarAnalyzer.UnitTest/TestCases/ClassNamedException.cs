@@ -36,3 +36,5 @@ partial class PartialClassExtendsException { }                   // Compliant - 
 partial class PartialClassExtendsException: Exception { }
 
 static class StaticException { }                                 // Noncompliant - the static class should be renamed, as it cannot inherit from Exception
+
+class { }                                                        // Error [CS1001]
