@@ -226,8 +226,10 @@ namespace SonarAnalyzer.Rules.CSharp
             token.Text.IndexOf("Namespace", StringComparison.OrdinalIgnoreCase) != -1;
 
         private static Regex CompileRegex(string pattern, bool ignoreCase = true) =>
-            new(pattern, ignoreCase
-                          ? RegexOptions.Compiled | RegexOptions.IgnoreCase
-                          : RegexOptions.Compiled);
+            new(pattern,
+                ignoreCase
+                    ? RegexOptions.Compiled | RegexOptions.IgnoreCase
+                    : RegexOptions.Compiled,
+                RegexConstants.DefaultTimeout);
     }
 }

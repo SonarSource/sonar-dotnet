@@ -45,10 +45,10 @@ namespace SonarAnalyzer.Rules
             "/private/tmp",
             "/private/var/tmp",
         };
-        private readonly Regex userProfile = new(@"^%USERPROFILE%[\\\/]AppData[\\\/]Local[\\\/]Temp", WindowsAndUnixOptions);
+        private readonly Regex userProfile = new(@"^%USERPROFILE%[\\\/]AppData[\\\/]Local[\\\/]Temp", WindowsAndUnixOptions, RegexConstants.DefaultTimeout);
         private readonly Regex linuxDirectories;
         private readonly Regex macDirectories;
-        private readonly Regex windowsDirectories = new(@"^([a-z]:[\\\/]?|[\\\/][\\\/][^\\\/]+[\\\/]|[\\\/])(windows[\\\/])?te?mp([\\\/]|$)", WindowsAndUnixOptions);
+        private readonly Regex windowsDirectories = new(@"^([a-z]:[\\\/]?|[\\\/][\\\/][^\\\/]+[\\\/]|[\\\/])(windows[\\\/])?te?mp([\\\/]|$)", WindowsAndUnixOptions, RegexConstants.DefaultTimeout);
         private readonly Regex environmentVariables;
         private readonly DiagnosticDescriptor rule;
 
@@ -64,9 +64,9 @@ namespace SonarAnalyzer.Rules
         protected PubliclyWritableDirectoriesBase(IAnalyzerConfiguration configuration) : base(configuration)
         {
             rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
-            linuxDirectories = new Regex($@"^({linuxDirs.JoinStr("|", x => Regex.Escape(x))})(\/|$)", RegexOptions.Compiled);
-            macDirectories = new Regex($@"^({macDirs.JoinStr("|", x => Regex.Escape(x))})(\/|$)", WindowsAndUnixOptions);
-            environmentVariables = new Regex($@"^%({InsecureEnvironmentVariables.JoinStr("|")})%([\\\/]|$)", WindowsAndUnixOptions);
+            linuxDirectories = new Regex($@"^({linuxDirs.JoinStr("|", Regex.Escape)})(\/|$)", RegexOptions.Compiled, RegexConstants.DefaultTimeout);
+            macDirectories = new Regex($@"^({macDirs.JoinStr("|", Regex.Escape)})(\/|$)", WindowsAndUnixOptions, RegexConstants.DefaultTimeout);
+            environmentVariables = new Regex($@"^%({InsecureEnvironmentVariables.JoinStr("|")})%([\\\/]|$)", WindowsAndUnixOptions, RegexConstants.DefaultTimeout);
         }
 
         protected override void Initialize(SonarAnalysisContext context)

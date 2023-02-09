@@ -855,6 +855,6 @@ namespace SonarAnalyzer.CBDE
     internal static class SyntaxNodeExtension
     {
         public static string Dump(this SyntaxNode node) =>
-            Regex.Replace(node.ToString(), @"\t|\n|\r", " ");
+            Regex.Replace(node.ToString(), @"\t|\n|\r", " ", RegexOptions.None, RegexConstants.DefaultTimeout);
     }
 }

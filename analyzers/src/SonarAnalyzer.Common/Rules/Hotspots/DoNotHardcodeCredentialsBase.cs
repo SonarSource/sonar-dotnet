@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules
 
         private readonly IAnalyzerConfiguration configuration;
         private readonly DiagnosticDescriptor rule;
-        private readonly Regex validCredentialPattern = new(@"^(\?|:\w+|\{\d+[^}]*\}|""|')$", RegexOptions.IgnoreCase);
+        private readonly Regex validCredentialPattern = new(@"^(\?|:\w+|\{\d+[^}]*\}|""|')$", RegexOptions.IgnoreCase, RegexConstants.DefaultTimeout);
         private readonly Regex uriUserInfoPattern;
         private string credentialWords;
         private IEnumerable<string> splitCredentialWords;
@@ -62,8 +62,10 @@ namespace SonarAnalyzer.Rules
                     .Select(x => x.Trim())
                     .Where(x => x.Length != 0)
                     .ToList();
-                passwordValuePattern = new Regex(string.Format(@"\b(?<credential>{0})\s*[:=]\s*(?<suffix>.+)$",
-                    string.Join("|", splitCredentialWords.Select(Regex.Escape))), RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                passwordValuePattern = new Regex(
+                    $@"\b(?<credential>{string.Join("|", splitCredentialWords.Select(Regex.Escape))})\s*[:=]\s*(?<suffix>.+)$",
+                    RegexOptions.Compiled | RegexOptions.IgnoreCase,
+                    RegexConstants.DefaultTimeout);
             }
         }
 
@@ -76,7 +78,7 @@ namespace SonarAnalyzer.Rules
             // See https://tools.ietf.org/html/rfc3986 Userinfo can contain groups: unreserved | pct-encoded | sub-delims
             var loginGroup = CreateUserInfoGroup("Login");
             var passwordGroup = CreateUserInfoGroup("Password", ":");   // Additional ":" to capture passwords containing it
-            uriUserInfoPattern = new Regex(@$"\w+:\/\/{loginGroup}:{passwordGroup}@", RegexOptions.Compiled);
+            uriUserInfoPattern = new Regex(@$"\w+:\/\/{loginGroup}:{passwordGroup}@", RegexOptions.Compiled, RegexConstants.DefaultTimeout);
             this.configuration = configuration;
             rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
             CredentialWords = DefaultCredentialWords;   // Property will initialize multiple state variables

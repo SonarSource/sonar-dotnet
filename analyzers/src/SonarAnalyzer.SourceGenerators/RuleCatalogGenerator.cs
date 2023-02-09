@@ -106,13 +106,13 @@ namespace SonarAnalyzer
 
         private static string FirstParagraphText(string id, string html)
         {
-            var match = Regex.Match(html, "<p>(?<Text>.*?)</p>", RegexOptions.Singleline);
+            var match = Regex.Match(html, "<p>(?<Text>.*?)</p>", RegexOptions.Singleline, RegexConstants.DefaultTimeout);
             if (match.Success)
             {
                 var text = match.Groups["Text"].Value;
-                text = Regex.Replace(text, "<[^>]*>", string.Empty);
+                text = Regex.Replace(text, "<[^>]*>", string.Empty, RegexOptions.None, RegexConstants.DefaultTimeout);
                 text = text.Replace("\n", " ").Replace("\r", " ");
-                text = Regex.Replace(text, @"\s{2,}", " ");
+                text = Regex.Replace(text, @"\s{2,}", " ", RegexOptions.None, RegexConstants.DefaultTimeout);
                 return WebUtility.HtmlDecode(text);
             }
             else

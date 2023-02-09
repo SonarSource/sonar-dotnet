@@ -71,7 +71,7 @@ namespace SonarAnalyzer.Rules
         {
             try
             {
-                Regex.Match(string.Empty, pattern);
+                Regex.Match(string.Empty, pattern, RegexOptions.None, RegexConstants.DefaultTimeout);
                 return true;
             }
             catch (ArgumentException)
@@ -102,7 +102,7 @@ namespace SonarAnalyzer.Rules
                 unixEndingHeaderFormat += "\n";
             }
             return IsRegularExpression
-                ? Regex.IsMatch(unixEndingHeader, unixEndingHeaderFormat, RegexOptions.Singleline)
+                ? Regex.IsMatch(unixEndingHeader, unixEndingHeaderFormat, RegexOptions.Singleline, RegexConstants.DefaultTimeout)
                 : unixEndingHeader.StartsWith(unixEndingHeaderFormat, StringComparison.Ordinal);
         }
 

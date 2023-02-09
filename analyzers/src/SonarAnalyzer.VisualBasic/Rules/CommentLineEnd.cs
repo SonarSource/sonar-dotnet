@@ -25,11 +25,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     public sealed class CommentLineEnd : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S139";
+        private const string DiagnosticId = "S139";
         private const string MessageFormat = "Move this trailing comment on the previous empty line.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
+        private static readonly DiagnosticDescriptor rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
         private const string DefaultPattern = @"^'\s*\S+\s*$";
@@ -38,8 +37,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             "Pattern for text of trailing comments that are allowed.", DefaultPattern)]
         public string LegalCommentPattern { get; set; } = DefaultPattern;
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterTreeAction(
                 c =>
                 {
@@ -48,20 +46,18 @@ namespace SonarAnalyzer.Rules.VisualBasic
                         CheckTokenComments(c, token);
                     }
                 });
-        }
 
         private void CheckTokenComments(SonarSyntaxTreeReportingContext context, SyntaxToken token)
         {
             var tokenLine = token.GetLocation().GetLineSpan().StartLinePosition.Line;
-
             var comments = token.TrailingTrivia
                 .Where(tr => tr.IsKind(SyntaxKind.CommentTrivia));
 
             foreach (var comment in comments)
             {
                 var location = comment.GetLocation();
-                if (location.GetLineSpan().StartLinePosition.Line == tokenLine &&
-                    !Regex.IsMatch(comment.ToString(), LegalCommentPattern))
+                if (location.GetLineSpan().StartLinePosition.Line == tokenLine
+                    && !Regex.IsMatch(comment.ToString(), LegalCommentPattern, RegexOptions.None, RegexConstants.DefaultTimeout))
                 {
                     context.ReportIssue(Diagnostic.Create(rule, location));
                 }

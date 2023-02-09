@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Rules.CSharp
         };
 
         // pattern is: index[,alignment][:formatString]
-        private static readonly Regex StringFormatItemRegex = new Regex(@"^(?<Index>\d+)(\s*,\s*(?<Alignment>-?\d+)\s*)?(:(?<Format>.+))?$", RegexOptions.Compiled);
+        private static readonly Regex StringFormatItemRegex = new Regex(@"^(?<Index>\d+)(\s*,\s*(?<Alignment>-?\d+)\s*)?(:(?<Format>.+))?$", RegexOptions.Compiled, RegexConstants.DefaultTimeout);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(BugRule, CodeSmellRule);
 
