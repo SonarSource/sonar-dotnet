@@ -53,12 +53,12 @@ class TestOnPropertiesAndFields
 }
 
 [DebuggerDisplay("{this.ToString()}")]
-[DebuggerDisplay("{Nonexistent}")]      // Noncompliant {{'Nonexistent' doesn't exist in this context.}}
+[DebuggerDisplay("{Nonexistent}")]      // Noncompliant
 public enum TopLevelEnum { One, Two, Three }
 
 [DebuggerDisplay("{SomeProperty}")]
 [DebuggerDisplay("{SomeField}")]
-[DebuggerDisplay("{Nonexistent}")]      // Noncompliant {{'Nonexistent' doesn't exist in this context.}}
+[DebuggerDisplay("{Nonexistent}")]      // Noncompliant
 public class TestOnNestedTypes
 {
     int SomeProperty => 1;
@@ -66,8 +66,8 @@ public class TestOnNestedTypes
 
     [DebuggerDisplay("{ExistingProperty}")]
     [DebuggerDisplay("{ExistingField}")]
-    [DebuggerDisplay("{SomeProperty}")] // Noncompliant {{'SomeProperty' doesn't exist in this context.}}
-    [DebuggerDisplay("{SomeField}")]    // Noncompliant {{'SomeField' doesn't exist in this context.}}
+    [DebuggerDisplay("{SomeProperty}")] // Noncompliant
+    [DebuggerDisplay("{SomeField}")]    // Noncompliant
     public class NestedClass
     {
         int ExistingProperty => 1;
@@ -76,8 +76,8 @@ public class TestOnNestedTypes
 
     [DebuggerDisplay("{ExistingProperty}")]
     [DebuggerDisplay("{ExistingField}")]
-    [DebuggerDisplay("{SomeProperty}")] // Noncompliant {{'SomeProperty' doesn't exist in this context.}}
-    [DebuggerDisplay("{SomeField}")]    // Noncompliant {{'SomeField' doesn't exist in this context.}}
+    [DebuggerDisplay("{SomeProperty}")] // Noncompliant
+    [DebuggerDisplay("{SomeField}")]    // Noncompliant
     public struct NestedStruct
     {
         int ExistingProperty => 1;
@@ -136,8 +136,8 @@ public class SupportCaseSensitivity
 
     [DebuggerDisplay("{SOMEPROPERTY}")]
     [DebuggerDisplay("{SomeProperty}")]
-    [DebuggerDisplay("{someProperty}")] // Noncompliant {{'someProperty' doesn't exist in this context.}}
-    [DebuggerDisplay("{someproperty}")] // Noncompliant {{'someproperty' doesn't exist in this context.}}
+    [DebuggerDisplay("{someProperty}")] // Noncompliant
+    [DebuggerDisplay("{someproperty}")] // Noncompliant
     int OtherProperty => 1;
 }
 
@@ -169,10 +169,10 @@ public class SupportNq
     [DebuggerDisplay("{SomeProperty ,nq}")]
     [DebuggerDisplay("{SomeProperty, nq}")]
     [DebuggerDisplay("{SomeProperty,nq }")]
-    [DebuggerDisplay("{Nonexistent,nq}")]  // Noncompliant
-    [DebuggerDisplay("{Nonexistent ,nq}")] // Noncompliant
-    [DebuggerDisplay("{Nonexistent, nq}")] // Noncompliant
-    [DebuggerDisplay("{Nonexistent,nq }")] // Noncompliant
+    [DebuggerDisplay("{Nonexistent,nq}")]  // Noncompliant {{'Nonexistent' doesn't exist in this context.}}
+    [DebuggerDisplay("{Nonexistent ,nq}")] // Noncompliant {{'Nonexistent' doesn't exist in this context.}}
+    [DebuggerDisplay("{Nonexistent, nq}")] // Noncompliant {{'Nonexistent' doesn't exist in this context.}}
+    [DebuggerDisplay("{Nonexistent,nq }")] // Noncompliant {{'Nonexistent' doesn't exist in this context.}}
     int SomeProperty => 1;
 }
 
@@ -181,9 +181,9 @@ public class SupportOptionalAttributeParameter
     [DebuggerDisplay("{SomeProperty}", Name = "Any name")]
     [DebuggerDisplay("{Nonexistent}", Name = "Any name")]                                                     // Noncompliant {{'Nonexistent' doesn't exist in this context.}}
     //               ^^^^^^^^^^^^^^^
-    [DebuggerDisplay("{Nonexistent}", Name = "Any name", Type = nameof(SupportOptionalAttributeParameter))]   // Noncompliant {{'Nonexistent' doesn't exist in this context.}}
+    [DebuggerDisplay("{Nonexistent}", Name = "Any name", Type = nameof(SupportOptionalAttributeParameter))]   // Noncompliant
     //               ^^^^^^^^^^^^^^^
-    [DebuggerDisplay("{Nonexistent}", Name = "Any name", Target = typeof(SupportOptionalAttributeParameter))] // Noncompliant {{'Nonexistent' doesn't exist in this context.}}
+    [DebuggerDisplay("{Nonexistent}", Name = "Any name", Target = typeof(SupportOptionalAttributeParameter))] // Noncompliant
     //               ^^^^^^^^^^^^^^^
     int SomeProperty => 1;
 }
@@ -234,6 +234,12 @@ public class SupportAttributeTargets
     [field: DebuggerDisplay("{Nonexistent}")]    // Noncompliant, attribute ignored, still referencing a non-existing member
     [property: DebuggerDisplay("{Nonexistent}")] // Noncompliant, attribute taken into account
     int SomeProperty => 1;
+}
+
+public class InvalidAttributes
+{
+    [DebuggerDisplay] int NoArgs => 1;                                         // Error [CS7036]
+    [DebuggerDisplay(Type = nameof(InvalidAttributes))] int MissingValue => 1; // Error [CS0029]
 }
 
 namespace WithTypeAlias

@@ -43,7 +43,7 @@ Public Class TestOnPropertiesAndFields
 End Class
 
 <DebuggerDisplay("{this.ToString()}")>
-<DebuggerDisplay("{Nonexistent}")> ' Noncompliant {{'Nonexistent' doesn't exist in this context.}}
+<DebuggerDisplay("{Nonexistent}")> ' Noncompliant
 Public Enum TopLevelEnum
     One
     Two
@@ -52,15 +52,15 @@ End Enum
 
 <DebuggerDisplay("{SomeProperty}")>
 <DebuggerDisplay("{SomeField}")>
-<DebuggerDisplay("{Nonexistent}")>      ' Noncompliant {{'Nonexistent' doesn't exist in this context.}}
+<DebuggerDisplay("{Nonexistent}")>      ' Noncompliant
 Public Class TestOnNestedTypes
     Property SomeProperty As Integer
     Public SomeField As Integer
 
     <DebuggerDisplay("{ExistingProperty}")>
     <DebuggerDisplay("{ExistingField}")>
-    <DebuggerDisplay("{SomeProperty}")> ' Noncompliant {{'SomeProperty' doesn't exist in this context.}}
-    <DebuggerDisplay("{SomeField}")>    ' Noncompliant {{'SomeField' doesn't exist in this context.}}
+    <DebuggerDisplay("{SomeProperty}")> ' Noncompliant
+    <DebuggerDisplay("{SomeField}")>    ' Noncompliant
     Public Class NestedClass
         Property ExistingProperty As Integer
         Property ExistingField As Integer
@@ -68,8 +68,8 @@ Public Class TestOnNestedTypes
 
     <DebuggerDisplay("{ExistingProperty}")>
     <DebuggerDisplay("{ExistingField}")>
-    <DebuggerDisplay("{SomeProperty}")> ' Noncompliant {{'SomeProperty' doesn't exist in this context.}}
-    <DebuggerDisplay("{SomeField}")>    ' Noncompliant {{'SomeField' doesn't exist in this context.}}
+    <DebuggerDisplay("{SomeProperty}")> ' Noncompliant
+    <DebuggerDisplay("{SomeField}")>    ' Noncompliant
     Public Structure NestedStruct
         Property ExistingProperty As Integer
         Property ExistingField As Integer
@@ -169,9 +169,9 @@ End Class
 
 Class SupportOptionalAttributeParameter
     <DebuggerDisplay("{SomeProperty}", Name:="Any name")>
-    <DebuggerDisplay("{Nonexistent}", Name:="Any name")>                                                     ' Noncompliant {{'Nonexistent' doesn't exist in this context.}}
-    <DebuggerDisplay("{Nonexistent}", Name:="Any name", Type:=NameOf(SupportOptionalAttributeParameter))>    ' Noncompliant {{'Nonexistent' doesn't exist in this context.}}
-    <DebuggerDisplay("{Nonexistent}", Name:="Any name", Target:=GetType(SupportOptionalAttributeParameter))> ' Noncompliant {{'Nonexistent' doesn't exist in this context.}}
+    <DebuggerDisplay("{Nonexistent}", Name:="Any name")>                                                     ' Noncompliant
+    <DebuggerDisplay("{Nonexistent}", Name:="Any name", Type:=NameOf(SupportOptionalAttributeParameter))>    ' Noncompliant
+    <DebuggerDisplay("{Nonexistent}", Name:="Any name", Target:=GetType(SupportOptionalAttributeParameter))> ' Noncompliant
     Property SomeProperty As Integer
     '                ^^^^^^^^^^^^^^^@-3
     '                ^^^^^^^^^^^^^^^@-3

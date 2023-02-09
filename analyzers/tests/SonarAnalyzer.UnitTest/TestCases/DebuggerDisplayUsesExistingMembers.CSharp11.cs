@@ -14,13 +14,13 @@ class SupportRawStringLiterals
         Some text{SomeField}
         """"")] int ExistingMultiLineInterpolated => 1;
 
-    [DebuggerDisplay("""{Nonexistent}""")] int NonexistentTripleQuotes => 1;      // Noncompliant {{'Nonexistent' doesn't exist in this context.}}
+    [DebuggerDisplay("""{Nonexistent}""")] int NonexistentTripleQuotes => 1;      // Noncompliant
     //               ^^^^^^^^^^^^^^^^^^^
-    [DebuggerDisplay(""""{Nonexistent}"""")] int NonexistentQuadrupleQuotes => 1; // Noncompliant {{'Nonexistent' doesn't exist in this context.}}
+    [DebuggerDisplay(""""{Nonexistent}"""")] int NonexistentQuadrupleQuotes => 1; // Noncompliant
     //               ^^^^^^^^^^^^^^^^^^^^^
     [DebuggerDisplay("""
         Some text{Nonexistent}
-        """)] int NonexistentMultiLine1 => 1;                                     // Noncompliant@-2^22#46 {{'Nonexistent' doesn't exist in this context.}}
+        """)] int NonexistentMultiLine1 => 1;                                     // Noncompliant@-2^22#46
     [DebuggerDisplay("""
         Some text{Some
         Property}
