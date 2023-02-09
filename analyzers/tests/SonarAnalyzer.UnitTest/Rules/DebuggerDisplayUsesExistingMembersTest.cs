@@ -52,6 +52,7 @@ public class DebuggerDisplayUsesExistingMembersTest
         builderCS.AddPaths("DebuggerDisplayUsesExistingMembers.CSharp10.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp10)
             .Verify();
+
 #endif
 
     [TestMethod]
