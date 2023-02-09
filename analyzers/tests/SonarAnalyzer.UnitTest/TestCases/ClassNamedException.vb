@@ -7,10 +7,13 @@ End Class
 Class ExceptionHandler                           ' Compliant - "Exception" is not at end of the name of the class
 End Class
 
+Class SimpleExceptionClass
+End Class
+
 Class SimpleClass
 End Class
 
-Class SimpleExceptionClass
+Class SimpleException
     Inherits Exception
 End Class
 
@@ -41,6 +44,10 @@ Enum EnumException                               ' Compliant - enums cannot inhe
 End Enum
 
 Class ExtendsException                           ' Compliant - direct subclass of Exception
+    Inherits Exception
+End Class
+
+Class AlsoExtendsIt                              ' Compliant - it'd be better to have "Exception" at the end, but this rule doesn't deal with that
     Inherits Exception
 End Class
 

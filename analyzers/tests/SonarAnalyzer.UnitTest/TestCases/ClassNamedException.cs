@@ -6,8 +6,8 @@ class Customexception { }                                        // Noncompliant
 class CustomEXCEPTION { }                                        // Noncompliant
 
 class ExceptionHandler { }                                       // Compliant - "Exception" is not at end of the name of the class
+class SimpleExceptionClass { }
 class SimpleClass { }
-class SimpleExceptionClass: Exception { }
 
 class OuterClass
 {
@@ -24,6 +24,7 @@ struct StructException { }                                       // Compliant - 
 enum EnumException { }                                           // Compliant - enums cannot inherit from Exception
 
 class ExtendsException: Exception { }                            // Compliant - direct subclass of Exception
+class AlsoExtendsIt : Exception { }                              // Compliant - it'd be better to have "Exception" at the end, but this rule doesn't deal with that
 class ImplementsAnInterfaceAndExtendsException: Exception, IEmptyInterfaceException { }
 class ExtendsNullReferenceException : NullReferenceException { } // Compliant - indirect subclass of Exception
 
