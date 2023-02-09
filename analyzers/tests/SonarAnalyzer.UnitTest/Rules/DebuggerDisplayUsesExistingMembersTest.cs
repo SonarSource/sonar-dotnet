@@ -39,6 +39,8 @@ public class DebuggerDisplayUsesExistingMembersTest
             .WithOptions(ParseOptionsHelper.FromCSharp8)
             .Verify();
 
+#if NET
+
     [TestMethod]
     public void DebuggerDisplayUsesExistingMembers_CSharp9() =>
         builderCS.AddPaths("DebuggerDisplayUsesExistingMembers.CSharp9.cs")
@@ -50,6 +52,7 @@ public class DebuggerDisplayUsesExistingMembersTest
         builderCS.AddPaths("DebuggerDisplayUsesExistingMembers.CSharp10.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp10)
             .Verify();
+#endif
 
     [TestMethod]
     public void DebuggerDisplayUsesExistingMembers_CSharp11() =>
