@@ -56,6 +56,7 @@ public class ClassNamedExceptionTest
             .Verify();
 
 #if NETFRAMEWORK
+
     [TestMethod]
     public void ClassNamedException_Interop_CS() =>
         builderCS
@@ -67,5 +68,6 @@ public class ClassNamedExceptionTest
         builderVB
             .AddPaths("ClassNamedException.Interop.vb")
             .Verify();
+
 #endif
 }

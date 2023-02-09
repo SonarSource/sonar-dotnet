@@ -23,8 +23,8 @@ namespace SonarAnalyzer.Helpers.Facade;
 internal sealed class VisualBasicSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind>
 {
     public SyntaxKind Attribute => SyntaxKind.Attribute;
-    public SyntaxKind[] ClassAndRecordDeclaration => new[] { SyntaxKind.ClassBlock };
     public SyntaxKind ClassDeclaration => SyntaxKind.ClassBlock;
+    public SyntaxKind[] ClassAndRecordDeclaration => new[] { SyntaxKind.ClassBlock };
     public SyntaxKind[] ClassAndModuleDeclarations => new[]
     {
         SyntaxKind.ClassBlock,
