@@ -57,8 +57,8 @@ public class UnusedStringBuilderTest
     [DataRow("""@sb.Append("").ToString();""", true)]
     [DataRow("sb.Remove(sb.Length - 1, 1);", true)]
     [DataRow("var a = sb.Length;", true)]
-    [DataRow("var a = sb.Capacity;", true)]
-    [DataRow("var a = sb.MaxCapacity;", true)]
+    [DataRow("var a = sb.Capacity;", false)]
+    [DataRow("var a = sb.MaxCapacity;", false)]
     [DataRow("""var a = $"{sb} is ToStringed here";""", true)]
     public void UnusedStringBuilder_TopLevelStatements(string expression, bool compliant)
     {
@@ -92,8 +92,8 @@ public class UnusedStringBuilderTest
     [DataRow("""@sb.Append("").ToString();""", true)]
     [DataRow("sb.Remove(sb.Length - 1, 1);", true)]
     [DataRow("var a = sb.Length;", true)]
-    [DataRow("var a = sb.Capacity;", true)]
-    [DataRow("var a = sb.MaxCapacity;", true)]
+    [DataRow("var a = sb.Capacity;", false)]
+    [DataRow("var a = sb.MaxCapacity;", false)]
     [DataRow("""var a = $"{sb} is ToStringed here";""", true)]
 
 #if NET
@@ -139,8 +139,8 @@ public class UnusedStringBuilderTest
     [DataRow("sb.Remove(sb.Length - 1, 1)", true)]
     [DataRow("""Dim a = $"{sb} is ToStringed here" """, true)]
     [DataRow("Dim a = sb.Length", true)]
-    [DataRow("Dim a = sb.Capacity", true)]
-    [DataRow("Dim a = sb.MaxCapacity", true)]
+    [DataRow("Dim a = sb.Capacity", false)]
+    [DataRow("Dim a = sb.MaxCapacity", false)]
     [DataRow("""SB.ToString()""", true)]
 
 #if NET

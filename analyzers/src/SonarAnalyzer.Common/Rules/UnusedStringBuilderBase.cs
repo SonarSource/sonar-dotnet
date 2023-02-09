@@ -29,7 +29,7 @@ public abstract class UnusedStringBuilderBase<TSyntaxKind, TVariableDeclarator, 
     private const string DiagnosticId = "S3063";
 
     internal readonly string[] StringBuilderAccessInvocations = { "ToString", "CopyTo", "GetChunks" };
-    internal readonly string[] StringBuilderAccessExpressions = { "Length", "Capacity", "MaxCapacity" };
+    internal readonly string[] StringBuilderAccessExpressions = { "Length" };
 
     protected override string MessageFormat => """Remove this "StringBuilder"; ".ToString()" is never called.""";
 
