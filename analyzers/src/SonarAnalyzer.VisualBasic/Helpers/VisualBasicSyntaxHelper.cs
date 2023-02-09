@@ -168,6 +168,7 @@ internal static class VisualBasicSyntaxHelper
             MemberAccessExpressionSyntax x => x.Name.Identifier,
             MethodBlockSyntax x => x.SubOrFunctionStatement?.GetIdentifier(),
             MethodStatementSyntax x => x.Identifier,
+            ModuleBlockSyntax x => x.ModuleStatement.Identifier,
             EnumStatementSyntax x => x.Identifier,
             EnumMemberDeclarationSyntax x => x.Identifier,
             InvocationExpressionSyntax x => x.Expression?.GetIdentifier(),

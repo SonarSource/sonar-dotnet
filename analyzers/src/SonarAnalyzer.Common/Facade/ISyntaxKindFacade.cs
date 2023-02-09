@@ -24,8 +24,9 @@ public interface ISyntaxKindFacade<out TSyntaxKind>
     where TSyntaxKind : struct
 {
     abstract TSyntaxKind Attribute { get; }
-    abstract TSyntaxKind[] ClassAndRecordDeclaration { get; }
     abstract TSyntaxKind ClassDeclaration { get; }
+    abstract TSyntaxKind[] ClassAndRecordDeclaration { get; }
+    abstract TSyntaxKind[] ClassAndModuleDeclarations { get; }
     abstract TSyntaxKind[] CommentTrivia { get; }
     abstract TSyntaxKind[] ComparisonKinds { get; }
     abstract TSyntaxKind ConstructorDeclaration { get; }
