@@ -37,8 +37,8 @@ Public Class TestOnPropertiesAndFields
     <DebuggerDisplay("{Non" & "Existing}")> Property WithFormatAsConcatenationOfLiterals As Integer                   ' FN: only simple literal supported
     <DebuggerDisplay(ConstantFragment1 & ConstantFragment2)> Property WithFormatAsConcatenationOfConstants As Integer ' FN: only simple literal supported
 
-    <DebuggerDisplay("{this.NonExistingProperty}")> Property PropertyWithExplicitThis As Integer                      ' FN: "this." not supported
-    <DebuggerDisplay("{this.NonExistingField}")> Property FieldWithExplicitThis As Integer                            ' FN: "this." not supported
+    <DebuggerDisplay("{Me.NonExistingProperty}")> Property PropertyWithExplicitThis As Integer                        ' FN: "Me." not supported (valid when debugging a VB.NET project)
+    <DebuggerDisplay("{this.NonExistingField}")> Property FieldWithExplicitThis As Integer                            ' FN: "this." not supported (valid when debugging a C# project)
     <DebuggerDisplay("{1 + NonExistingProperty}")> Property ContainingInvalidMembers As Integer                       ' FN: expressions not supported
 End Class
 

@@ -30,7 +30,5 @@ public sealed class DebuggerDisplayUsesExistingMembers : DebuggerDisplayUsesExis
             ? formatString
             : null;
 
-    protected override string GetAttributeName(AttributeSyntax attribute) => attribute.Name.ToString();
-
     protected override bool IsValidMemberName(string memberName) => SyntaxFacts.IsValidIdentifier(memberName);
 }

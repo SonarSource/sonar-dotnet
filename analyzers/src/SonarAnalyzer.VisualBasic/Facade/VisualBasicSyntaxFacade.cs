@@ -50,6 +50,9 @@ internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
 
     public override bool IsAnyKind(SyntaxTrivia trivia, params SyntaxKind[] syntaxKinds) => trivia.IsAnyKind(syntaxKinds);
 
+    public override bool IsKnownAttribute(SyntaxNode attribute, KnownType knownAttribute, SemanticModel semanticModel) =>
+        AttributeSyntaxExtensions.IsKnownType(Cast<AttributeSyntax>(attribute), knownAttribute, semanticModel);
+
     public override IEnumerable<SyntaxNode> ArgumentExpressions(SyntaxNode node) =>
         node switch
         {

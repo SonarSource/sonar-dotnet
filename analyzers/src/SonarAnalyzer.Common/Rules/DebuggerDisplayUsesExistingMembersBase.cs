@@ -28,10 +28,9 @@ public abstract class DebuggerDisplayUsesExistingMembersBase<TAttributeSyntax, T
 {
     private const string DiagnosticId = "S4545";
 
-    private readonly Regex nqModifierExpressionRegex = new(@",\s*nq\s*$", RegexOptions.None, RegexConstants.DefaultTimeout);
-    private readonly Regex evaluatedExpressionRegex = new(@"\{(?<EvaluatedExpression>[^\}]+)\}", RegexOptions.None, RegexConstants.DefaultTimeout);
+    private readonly Regex noQuotesModifierExpressionRegex = new(@",\s*nq\s*$", RegexOptions.None, RegexConstants.DefaultTimeout);
+    private readonly Regex evaluatedExpressionRegex = new(@"\{(?<EvaluatedExpression>[^\}]+)\}", RegexOptions.Multiline, RegexConstants.DefaultTimeout);
 
-    protected abstract string GetAttributeName(TAttributeSyntax attribute);
     protected abstract SyntaxNode GetAttributeFormatString(TAttributeSyntax attribute);
     protected abstract bool IsValidMemberName(string memberName);
 
@@ -44,8 +43,7 @@ public abstract class DebuggerDisplayUsesExistingMembersBase<TAttributeSyntax, T
             c =>
             {
                 var attribute = (TAttributeSyntax)c.Node;
-                var attributeName = GetAttributeName(attribute);
-                if ((string.Equals(attributeName, "DebuggerDisplayAttribute", Language.NameComparison) || string.Equals(attributeName, "DebuggerDisplay", Language.NameComparison))
+                if (Language.Syntax.IsKnownAttribute(attribute, KnownType.System_Diagnostics_DebuggerDisplayAttribute, c.SemanticModel)
                     && GetAttributeFormatString(attribute) is { } formatString
                     && FirstInvalidMemberName(c, formatString.GetFirstToken().ValueText, attribute) is { } firstInvalidMember)
                 {
@@ -62,9 +60,9 @@ public abstract class DebuggerDisplayUsesExistingMembersBase<TAttributeSyntax, T
             {
                 if (match.Groups["EvaluatedExpression"] is { Success: true, Value: var evaluatedExpression }
                     && ExtractValidMemberName(evaluatedExpression) is { } memberName
-                    && attributeSyntax.Parent?.Parent is { } targetSyntax
+                    && GetAttributeTarget(attributeSyntax) is { } targetSyntax
                     && context.SemanticModel.GetDeclaredSymbol(targetSyntax) is { } targetSymbol
-                    && RelevantType(targetSymbol) is { } typeSymbol
+                    && GetTypeContainingReferencedMembers(targetSymbol) is { } typeSymbol
                     && typeSymbol.GetSelfAndBaseTypes().SelectMany(x => x.GetMembers()).All(x => Language.NameComparer.Compare(x.Name, memberName) != 0))
                 {
                     return memberName;
@@ -77,18 +75,15 @@ public abstract class DebuggerDisplayUsesExistingMembersBase<TAttributeSyntax, T
         {
             return null;
         }
+
+        string ExtractValidMemberName(string evaluatedExpression)
+        {
+            var sanitizedExpression = noQuotesModifierExpressionRegex.Replace(evaluatedExpression, string.Empty).Trim();
+            return IsValidMemberName(sanitizedExpression) ? sanitizedExpression : null;
+        }
+
+        static SyntaxNode GetAttributeTarget(TAttributeSyntax attributeSyntax) => attributeSyntax.Parent?.Parent;
+
+        static ITypeSymbol GetTypeContainingReferencedMembers(ISymbol symbol) => symbol is ITypeSymbol typeSymbol ? typeSymbol : symbol.ContainingType;
     }
-
-    private string ExtractValidMemberName(string evaluatedExpression)
-    {
-        var sanitizedExpression = RemoveNqModifier(evaluatedExpression).Trim();
-        return IsValidMemberName(sanitizedExpression) ? sanitizedExpression : null;
-    }
-
-    private string RemoveNqModifier(string evaluatedExpression) =>
-        nqModifierExpressionRegex.Match(evaluatedExpression) is { Success: true, Length: var matchLength }
-            ? evaluatedExpression.Substring(0, evaluatedExpression.Length - matchLength)
-            : evaluatedExpression;
-
-    private static ITypeSymbol RelevantType(ISymbol symbol) => symbol is ITypeSymbol typeSymbol ? typeSymbol : symbol.ContainingType;
 }

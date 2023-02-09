@@ -23,6 +23,9 @@ class TestOnPropertiesAndFields
     [DebuggerDisplay("{SomeProperty}")] int WithExistingProperty => 1;
     [DebuggerDisplay("{SomeField}")] int WithExistingField => 1;
     [DebuggerDisplay(@"{SomeField}")] int WithExistingFieldVerbatim => 1;
+    [DebuggerDisplay(@"Some text
+        {SomeField}")] int WithExistingFieldVerbatimMultiLine => 1;
+
     [DebuggerDisplay("{1 + 1}")] int WithNoMemberReferenced1 => 1;
     [DebuggerDisplay(@"{""1"" + ""1""}")] int WithNoMemberReferenced2 => 1;
 
@@ -33,13 +36,19 @@ class TestOnPropertiesAndFields
     [DebuggerDisplay("{NonExisting1} bla bla {NonExisting2}")] int WithMultipleNonExisting => 1; // Noncompliant {{'NonExisting1' doesn't exist in this context.}}
     //               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     [DebuggerDisplay(@"{NonExisting}")] int WithNonExistingMemberVerbatim => 1;                  // Noncompliant {{'NonExisting' doesn't exist in this context.}}
+    [DebuggerDisplay(@"Some text
+        {NonExisting}")] int WithNonExistingMemberVerbatimMultiLine1 => 1;                       // Noncompliant@-1^22#34 {{'NonExisting' doesn't exist in this context.}}
+    [DebuggerDisplay(@"Some text {Some
+        Property}")] int WithNonExistingMemberVerbatimMultiLine2 => 1;                           // FN@-1: the new line char make the expression within braces not a valid identifier
 
     [DebuggerDisplay(ConstantWithInvalidMember)] int WithFormatAsConstant2 => 1;                            // FN: constants are not checked
     [DebuggerDisplay("{Non" + "Existing}")] int WithFormatAsConcatenationOfLiterals => 1;                   // FN: only simple literal supported
+    [DebuggerDisplay("{Non"
+        + "Existing}")] int WithFormatAsConcatenationOfLiteralsMultiLine => 1;                              // FN: only simple literal supported
     [DebuggerDisplay(ConstantFragment1 + ConstantFragment2)] int WithFormatAsConcatenationOfConstants => 1; // FN: only simple literal supported
 
-    [DebuggerDisplay("{this.NonExistingProperty}")] int PropertyWithExplicitThis => 1;                      // FN: "this." not supported
-    [DebuggerDisplay("{this.NonExistingField}")] int FieldWithExplicitThis => 1;                            // FN: "this." not supported
+    [DebuggerDisplay("{this.NonExistingProperty}")] int PropertyWithExplicitThis => 1;                      // FN: "this." not supported (valid when debugging a C# project)
+    [DebuggerDisplay("{Me.NonExistingField}")] int FieldWithExplicitThis => 1;                              // FN: "Me." not supported (valid when debugging a VB.NET project)
     [DebuggerDisplay("{1 + NonExistingProperty}")] int ContainingInvalidMembers => 1;                       // FN: expressions not supported
 }
 
@@ -233,6 +242,6 @@ namespace WithTypeAlias
 
     public class Test
     {
-        [DebuggerDisplayAlias("{NonExisting}")] int WithAlias => 1; // FN: attribute name checked at syntax level
+        [DebuggerDisplayAlias("{NonExisting}")] int WithAlias => 1; // Noncompliant: attribute name also checked at semantic level
     }
 }
