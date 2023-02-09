@@ -20,11 +20,10 @@
 
 namespace SonarAnalyzer.Rules;
 
-public abstract class UnusedStringBuilderBase<TSyntaxKind, TVariableDeclarator, TIdentifierName, TConditionalExpression> : SonarDiagnosticAnalyzer<TSyntaxKind>
+public abstract class UnusedStringBuilderBase<TSyntaxKind, TVariableDeclarator, TIdentifierName> : SonarDiagnosticAnalyzer<TSyntaxKind>
     where TSyntaxKind : struct
     where TVariableDeclarator : SyntaxNode
     where TIdentifierName : SyntaxNode
-    where TConditionalExpression : SyntaxNode
 {
     private const string DiagnosticId = "S3063";
 
@@ -55,20 +54,8 @@ public abstract class UnusedStringBuilderBase<TSyntaxKind, TVariableDeclarator, 
             c.ReportIssue(Diagnostic.Create(Rule, variableDeclaration.GetLocation()));
         }, Language.SyntaxKind.VariableDeclarator);
 
-    internal bool IsSameReference(SyntaxNode expression, string name, ILocalSymbol symbol, SemanticModel semanticModel)
-    {
-        if (expression == null)
-        {
-            return false;
-        }
-
-        var references = GetLocalReferences(expression);
-        if (expression.Ancestors().OfType<TConditionalExpression>().Any())
-        {
-            references = GetLocalReferences(expression.Ancestors().OfType<TConditionalExpression>().First());
-        }
-        return references.Any(x => IsSameVariable(x, name, symbol, semanticModel));
-    }
+    internal bool IsSameReference(SyntaxNode expression, string name, ILocalSymbol symbol, SemanticModel semanticModel) =>
+        expression is not null && GetLocalReferences(expression).Any(x => IsSameVariable(x, name, symbol, semanticModel));
 
     internal bool IsSameVariable(SyntaxNode identifier, string name, ILocalSymbol symbol, SemanticModel semanticModel) =>
         GetName(identifier).Equals(name, Language.NameComparison) && symbol.Equals(semanticModel.GetSymbolInfo(identifier).Symbol);
