@@ -28,48 +28,51 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly DiagnosticDescriptor MathComparisonRule = DescriptorFactory.Create(DiagnosticId, MathComparisonMessage);
 
+        private static readonly Dictionary<KnownType, ValuesRange> ValuesRanges = new()
+        {
+            {KnownType.System_Char, new ValuesRange(char.MinValue, char.MaxValue) },
+            {KnownType.System_Single, new ValuesRange(float.MinValue, float.MaxValue) },
+            {KnownType.System_Int64, new ValuesRange(long.MinValue, long.MaxValue) },
+            {KnownType.System_UInt64, new ValuesRange(ulong.MinValue, ulong.MaxValue) },
+        };
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(MathComparisonRule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterNodeAction(
                 CheckBinary,
-                SyntaxKind.GreaterThanExpression,
-                SyntaxKind.GreaterThanOrEqualExpression,
-                SyntaxKind.LessThanExpression,
-                SyntaxKind.LessThanOrEqualExpression,
-                SyntaxKind.EqualsExpression,
-                SyntaxKind.NotEqualsExpression);
+                CSharpFacade.Instance.SyntaxKind.ComparisonKinds);
 
         private static void CheckBinary(SonarSyntaxNodeReportingContext context)
         {
-            if (TryGetConstantValue(context, (BinaryExpressionSyntax)context.Node, out var constant, out var other)
+            if (TryGetConstantValue(context.SemanticModel, (BinaryExpressionSyntax)context.Node, out var constant, out var other)
                && context.SemanticModel.GetTypeInfo(other).Type is { } typeSymbolOfOther
-               && TryGetRange(typeSymbolOfOther, out var min, out var max)
-               && (constant < min || constant > max))
+               && TryGetRange(typeSymbolOfOther) is { } range
+               && (constant < range.Min || constant > range.Max))
             {
-                var typeName = context.SemanticModel.GetTypeInfo(other).Type.ToMinimalDisplayString(context.SemanticModel, other.GetLocation().SourceSpan.Start);
+                var typeName = typeSymbolOfOther.ToMinimalDisplayString(context.SemanticModel, other.GetLocation().SourceSpan.Start);
                 context.ReportIssue(Diagnostic.Create(MathComparisonRule, other.Parent.GetLocation(), typeName));
             }
         }
 
-        private static bool TryGetConstantValue(SonarSyntaxNodeReportingContext context, BinaryExpressionSyntax binary, out double constant, out SyntaxNode other)
+        private static bool TryGetConstantValue(SemanticModel model, BinaryExpressionSyntax binary, out double constant, out SyntaxNode other)
         {
             constant = default;
             other = default;
-            var maybeLeft = context.SemanticModel.GetConstantValue(binary.Left);
-            var maybeRight = context.SemanticModel.GetConstantValue(binary.Right);
+            var optionalLeft = model.GetConstantValue(binary.Left);
+            var optionalRight = model.GetConstantValue(binary.Right);
 
-            if (maybeLeft.HasValue ^ maybeRight.HasValue)
+            if (optionalLeft.HasValue ^ optionalRight.HasValue)
             {
-                if (maybeLeft.HasValue)
+                if (optionalLeft.HasValue && TryConvertToDouble(optionalLeft.Value, out constant))
                 {
                     other = binary.Right;
-                    return TryConvertToDouble(maybeLeft.Value, out constant);
+                    return true;
                 }
-                else
+                else if (TryConvertToDouble(optionalRight.Value, out constant))
                 {
                     other = binary.Left;
-                    return TryConvertToDouble(maybeRight.Value, out constant);
+                    return true;
                 }
             }
             return false;
@@ -77,40 +80,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
         // 'char' needs to roundtrip {{char -> int -> double}}, can't go {{char -> double}}
         private static bool TryConvertToDouble(object constant, out double typedConstant) =>
-            constant is char
-            ? ConversionHelper.TryConvertWith(Convert.ToInt32(constant), Convert.ToDouble, out typedConstant)
-            : ConversionHelper.TryConvertWith(constant, Convert.ToDouble, out typedConstant);
+            ConversionHelper.TryConvertWith(constant is char ? Convert.ToInt32(constant) : constant, Convert.ToDouble, out typedConstant);
 
-        private static bool TryGetRange(ITypeSymbol typeSymbol, out double min, out double max)
-        {
-            if (typeSymbol.Is(KnownType.System_Char))
-            {
-                min = char.MinValue;
-                max = char.MaxValue;
-                return true;
-            }
-            if (typeSymbol.Is(KnownType.System_Single))
-            {
-                min = float.MinValue;
-                max = float.MaxValue;
-                return true;
-            }
-            if (typeSymbol.Is(KnownType.System_Int64))
-            {
-                min = long.MinValue;
-                max = long.MaxValue;
-                return true;
-            }
-            if (typeSymbol.Is(KnownType.System_UInt64))
-            {
-                min = ulong.MinValue;
-                max = ulong.MaxValue;
-                return true;
-            }
+        private static ValuesRange TryGetRange(ITypeSymbol typeSymbol) =>
+            ValuesRanges.FirstOrDefault(x => typeSymbol.Is(x.Key)).Value;
 
-            min = default;
-            max = default;
-            return false;
-        }
+        private sealed record ValuesRange(double Min, double Max);
     }
 }
