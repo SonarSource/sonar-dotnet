@@ -25,7 +25,8 @@ enum EnumException { }                                           // Compliant - 
 
 class ExtendsException: Exception { }                            // Compliant - direct subclass of Exception
 class AlsoExtendsIt : Exception { }                              // Compliant - it'd be better to have "Exception" at the end, but this rule doesn't deal with that
-class ImplementsAnInterfaceAndExtendsException: Exception, IEmptyInterfaceException { }
+class ImplementsAnInterfaceAndExtendsException:
+    Exception, IEmptyInterfaceException { }
 class ExtendsNullReferenceException : NullReferenceException { } // Compliant - indirect subclass of Exception
 
 class ExtendsCustomException: CustomException { }                // Noncompliant - CustomException is not an Exception subclass

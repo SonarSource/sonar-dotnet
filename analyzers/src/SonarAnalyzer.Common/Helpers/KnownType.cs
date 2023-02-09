@@ -367,6 +367,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Runtime_InteropServices_ComVisibleAttribute = new("System.Runtime.InteropServices.ComVisibleAttribute");
         internal static readonly KnownType System_Runtime_InteropServices_DefaultParameterValueAttribute = new("System.Runtime.InteropServices.DefaultParameterValueAttribute");
         internal static readonly KnownType System_Runtime_InteropServices_DllImportAttribute = new("System.Runtime.InteropServices.DllImportAttribute");
+        internal static readonly KnownType System_Runtime_InteropServices_Exception = new("System.Runtime.InteropServices._Exception");
         internal static readonly KnownType System_Runtime_InteropServices_HandleRef = new("System.Runtime.InteropServices.HandleRef");
         internal static readonly KnownType System_Runtime_InteropServices_InterfaceTypeAttribute = new("System.Runtime.InteropServices.InterfaceTypeAttribute");
         internal static readonly KnownType System_Runtime_InteropServices_LibraryImportAttribute = new("System.Runtime.InteropServices.LibraryImportAttribute");

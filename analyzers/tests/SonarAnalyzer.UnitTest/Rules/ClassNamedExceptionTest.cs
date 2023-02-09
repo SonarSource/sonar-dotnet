@@ -54,4 +54,18 @@ public class ClassNamedExceptionTest
         builderVB
             .AddPaths("ClassNamedException.vb")
             .Verify();
+
+#if NETFRAMEWORK
+    [TestMethod]
+    public void ClassNamedException_Interop_CS() =>
+        builderCS
+            .AddPaths("ClassNamedException.Interop.cs")
+            .Verify();
+
+    [TestMethod]
+    public void ClassNamedException_Interop_VB() =>
+        builderVB
+            .AddPaths("ClassNamedException.Interop.vb")
+            .Verify();
+#endif
 }

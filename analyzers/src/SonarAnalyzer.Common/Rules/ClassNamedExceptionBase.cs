@@ -37,7 +37,8 @@ public abstract class ClassNamedExceptionBase<TSyntaxKind> : SonarDiagnosticAnal
                 if (Language.Syntax.NodeIdentifier(c.Node) is { IsMissing: false } classIdentifier
                     && classIdentifier.ValueText.EndsWith("Exception", StringComparison.InvariantCultureIgnoreCase)
                     && c.SemanticModel.GetDeclaredSymbol(c.Node) is INamedTypeSymbol { } classSymbol
-                    && !classSymbol.DerivesFrom(KnownType.System_Exception))
+                    && !classSymbol.DerivesFrom(KnownType.System_Exception)
+                    && !classSymbol.Implements(KnownType.System_Runtime_InteropServices_Exception))
                 {
                     c.ReportIssue(Diagnostic.Create(Rule, classIdentifier.GetLocation()));
                 }
