@@ -32,32 +32,52 @@ public sealed class TimFirstRule : SonarDiagnosticAnalyzer
 
     protected override void Initialize(SonarAnalysisContext context)
     {
+        // Part 1
         context.RegisterNodeAction(c =>
             {
-                if (c.Node is LocalDeclarationStatementSyntax { Declaration.Variables: var variables } node
-                    && variables.Any(x => IdentifierIsNotTim(x.Identifier)))
+                if (c.Node is LocalDeclarationStatementSyntax { Declaration.Variables: var variables } node)
                 {
-                    ReportIssue(c, node);
+                    foreach (var variable in variables)
+                    {
+                        ReportIfIdentifierIsNotTimLowerCase(c, variable.Identifier);
+                    }
                 }
             }, SyntaxKind.LocalDeclarationStatement);
+        context.RegisterNodeAction(
+            c => ReportIfIdentifierIsNotTimLowerCase(c, ((SingleVariableDesignationSyntaxWrapper)c.Node).Identifier),
+            SyntaxKindEx.SingleVariableDesignation);
         context.RegisterNodeAction(c =>
             {
-                var node = c.Node;
-                if (IdentifierIsNotTim(((SingleVariableDesignationSyntaxWrapper)node).Identifier))
+                if (c.Node is ForEachStatementSyntax node)
                 {
-                    ReportIssue(c, node);
-                }
-            }, SyntaxKindEx.SingleVariableDesignation);
-        context.RegisterNodeAction(c =>
-            {
-                if (c.Node is ForEachStatementSyntax node && IdentifierIsNotTim(node.Identifier))
-                {
-                    ReportIssue(c, node);
+                    ReportIfIdentifierIsNotTimLowerCase(c, node.Identifier);
                 }
             }, SyntaxKind.ForEachStatement);
+        // Part 2
+        context.RegisterNodeAction(c =>
+            {
+                if (c.Node is IdentifierNameSyntax node
+                    && c.SemanticModel.GetSymbolInfo(node).Symbol is { Kind: SymbolKind.Property } symbol)
+                {
+                    ReportIfIdentifierIsNotTim(c, node.Identifier);
+                }
+            }, SyntaxKind.IdentifierName);
     }
 
-    private static void ReportIssue(SonarSyntaxNodeReportingContext c, SyntaxNode node) =>
-        c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
-    private static bool IdentifierIsNotTim(SyntaxToken identifier) => identifier is { IsMissing: false, ValueText: not "tim" };
+    private static void ReportIfIdentifierIsNotTim(SonarSyntaxNodeReportingContext c, SyntaxToken identifier)
+    {
+        if (identifier is { IsMissing: false, ValueText: not "Tim" })
+        {
+            ReportIssue(c, identifier);
+        }
+    }
+    private static void ReportIfIdentifierIsNotTimLowerCase(SonarSyntaxNodeReportingContext c, SyntaxToken identifier)
+    {
+        if (identifier is { IsMissing: false, ValueText: not "tim" })
+        {
+            ReportIssue(c, identifier);
+        }
+    }
+    private static void ReportIssue(SonarSyntaxNodeReportingContext c, SyntaxToken identifier) =>
+        c.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation()));
 }

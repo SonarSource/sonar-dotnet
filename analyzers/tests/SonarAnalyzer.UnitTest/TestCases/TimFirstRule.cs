@@ -9,10 +9,11 @@ public class Program
     {
         get
         {
-            int i;  // Noncompliant {{Tim's first rule!}}
+            int i;      // Noncompliant {{Tim's first rule!}}
+//              ^
             int tim;
-            i = 5;
-            tim = i;
+            i = MyInt;  // Noncompliant
+            tim = Tim;
             return i;
         }
     }
@@ -22,11 +23,17 @@ public class Program
         int tim;
         int Tim;    // Noncompliant
         i = 5;
-        tim = i;
+    }
+    void Porperty()
+    {
+        var tim = MyInt;    // Noncompliant
+        _ = 5 == MyInt;     // Noncompliant
+        tim = Tim;
     }
     void At()
     {
         int @tim;
+        tim = Tim;
     }
     void ForEach()
     {
