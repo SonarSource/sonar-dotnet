@@ -4,7 +4,7 @@ public class Program
 {
     void PatternMatching()
     {
-        if ("" is { Length: var length })   // Noncompliant {{Tim's first rule!}}
+        if ("" is var myString)   // Noncompliant {{Tim's first rule!}}
         {
 
         }
