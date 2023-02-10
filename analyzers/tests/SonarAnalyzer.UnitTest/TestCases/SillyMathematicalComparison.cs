@@ -444,6 +444,7 @@ namespace SonarAnalyzer.UnitTest.TestCases
             const float number1 = 42;
             const double number2 = double.MaxValue;
 
+            // https://github.com/SonarSource/sonar-dotnet/issues/6745
             _ = number1 != number2; // Compliant, constant in both operands
             _ = number1 == number2; // Compliant
             _ = number1 <= double.MaxValue; // Compliant
