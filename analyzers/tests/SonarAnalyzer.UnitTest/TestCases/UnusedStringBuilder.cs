@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Text;
+﻿using System.Text;
 
 public class Program
 {
@@ -26,6 +25,9 @@ public class Program
         StringBuilder sb8 = new StringBuilder(); // Compliant
         StringBuilder sb9 = new StringBuilder(); // Noncompliant
         sb9 = sb8;
+
+        StringBuilder sb10 = new StringBuilder(); // Noncompliant FP
+        sb10.ToStringAndFree();
 
         if (true)
         {
@@ -86,6 +88,17 @@ public class Program
         return $"{builder} is ToStringed here";
     }
 
+    public void Scoping()
+    {
+        {
+            var sb = new StringBuilder(); // Noncompliant
+        }
+        {
+            var sb = new StringBuilder();
+            sb.ToString();
+        }
+    }
+
     public string MyProperty
     {
         get
@@ -102,4 +115,9 @@ public class Program
 public class MyClass
 {
     public StringBuilder mySbField = new StringBuilder();
+}
+
+public static class StringBuilderExtensions
+{
+    public static string ToStringAndFree(this StringBuilder sb) => string.Empty;
 }
