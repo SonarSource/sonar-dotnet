@@ -139,9 +139,8 @@ namespace SonarAnalyzer.Rules.CSharp
                         {
                             return true;
                         }
-                        else if (initializer.Value is ObjectCreationExpressionSyntax || ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(initializer.Value))
+                        else if (ObjectCreationFactory.TryCreate(initializer.Value) is { } objectCreation)
                         {
-                            var objectCreation = ObjectCreationFactory.Create(initializer.Value);
                             var argCount = objectCreation.ArgumentList?.Arguments.Count;
                             if (argCount == null || argCount == 0)
                             {
