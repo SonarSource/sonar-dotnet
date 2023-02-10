@@ -26,9 +26,9 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S2234";
         protected const string MessageFormat = "Parameters to '{0}' have the same names but not the same order as the method arguments.";
 
-        protected abstract TypeInfo GetArgumentTypeSymbolInfo(TArgumentSyntax argument, SemanticModel semanticModel);
+        protected abstract TypeInfo GetArgumentTypeSymbolInfo(TArgumentSyntax argument, SemanticModel model);
         protected abstract Location GetMethodDeclarationIdentifierLocation(SyntaxNode syntaxNode);
-        protected abstract SyntaxToken? GetArgumentIdentifier(TArgumentSyntax argument);
+        protected abstract SyntaxToken? GetArgumentIdentifier(TArgumentSyntax argument, SemanticModel model);
         protected abstract SyntaxToken? GetNameColonArgumentIdentifier(TArgumentSyntax argument);
 
         internal void ReportIncorrectlyOrderedParameters(SonarSyntaxNodeReportingContext analysisContext,
@@ -45,15 +45,15 @@ namespace SonarAnalyzer.Rules
             }
 
             var parameterNames = argumentParameterMappings.Values
-                .Select(symbol => symbol.Name)
+                .Select(symbol => symbol.Name.ToLowerInvariant())
                 .Distinct()
                 .ToList();
 
             var argumentIdentifiers = argumentList
-                .Select(argument => ConvertToArgumentIdentifier(argument))
+                .Select(argument => ConvertToArgumentIdentifier(argument, analysisContext.SemanticModel))
                 .ToList();
             var identifierNames = argumentIdentifiers
-                .Select(p => p.IdentifierName)
+                .Select(p => p.IdentifierName?.ToLowerInvariant())
                 .ToList();
 
             if (parameterNames.Intersect(identifierNames).Any() &&
@@ -71,24 +71,36 @@ namespace SonarAnalyzer.Rules
 
         private bool HasIncorrectlyOrderedParameters(List<ArgumentIdentifier> argumentIdentifiers,
             Dictionary<TArgumentSyntax, IParameterSymbol> argumentParameterMappings, List<string> parameterNames,
-            List<string> identifierNames, SemanticModel semanticModel)
+            List<string> identifierNames, SemanticModel model)
         {
+            var mappedParams = new HashSet<string>();
+            var mappedArgs = new HashSet<string>();
             for (var i = 0; i < argumentIdentifiers.Count; i++)
             {
                 var argumentIdentifier = argumentIdentifiers[i];
-                var identifierName = argumentIdentifier.IdentifierName;
+                var identifierName = argumentIdentifier.IdentifierName?.ToLowerInvariant();
                 var parameter = argumentParameterMappings[argumentIdentifier.ArgumentSyntax];
-                var parameterName = parameter.Name;
+                var parameterName = parameter.Name.ToLowerInvariant();
 
-                if (string.IsNullOrEmpty(identifierName) ||
-                    !parameterNames.Contains(identifierName) ||
-                    !IdentifierWithSameNameAndTypeExists(parameter))
+                if (string.IsNullOrEmpty(identifierName) || !parameterNames.Contains(identifierName))
                 {
                     continue;
                 }
 
                 if (argumentIdentifier is PositionalArgumentIdentifier positional &&
                     (parameter.IsParams || identifierName == parameterName))
+                {
+                    mappedParams.Add(parameterName);
+                    mappedArgs.Add(identifierName);
+                    continue;
+                }
+
+                if (mappedParams.Contains(parameterName) || mappedArgs.Contains(identifierName) || IdentifierWithSameNameAndTypeExistsLater(argumentIdentifier, i))
+                {
+                    continue;
+                }
+
+                if (!IdentifierWithSameNameAndTypeExists(parameter) && !ParameterWithSameNameAndTypeExists(argumentIdentifier))
                 {
                     continue;
                 }
@@ -107,20 +119,29 @@ namespace SonarAnalyzer.Rules
             bool IdentifierWithSameNameAndTypeExists(IParameterSymbol parameter) =>
                 argumentIdentifiers.Any(ia =>
                     ia.IdentifierName == parameter.Name &&
-                    GetArgumentTypeSymbolInfo(ia.ArgumentSyntax, semanticModel).ConvertedType.DerivesOrImplements(parameter.Type));
+                    GetArgumentTypeSymbolInfo(ia.ArgumentSyntax, model).ConvertedType.DerivesOrImplements(parameter.Type));
+
+            bool IdentifierWithSameNameAndTypeExistsLater(ArgumentIdentifier argumentIdentifier, int index) =>
+                argumentIdentifiers.Skip(index + 1)
+                                   .Any(ia => string.Equals(ia.IdentifierName, argumentIdentifier.IdentifierName, StringComparison.OrdinalIgnoreCase)
+                                                              && ArgumentTypesAreSame(ia.ArgumentSyntax, argumentIdentifier.ArgumentSyntax));
+
+            bool ArgumentTypesAreSame(TArgumentSyntax first, TArgumentSyntax second) =>
+                GetArgumentTypeSymbolInfo(first, model).ConvertedType.DerivesOrImplements(GetArgumentTypeSymbolInfo(second, model).ConvertedType);
+
+            bool ParameterWithSameNameAndTypeExists(ArgumentIdentifier argumentIdentifier) =>
+                argumentParameterMappings.Values.Any(parameter => string.Equals(parameter.Name, argumentIdentifier.IdentifierName, StringComparison.OrdinalIgnoreCase) &&
+                                                                  GetArgumentTypeSymbolInfo(argumentIdentifier.ArgumentSyntax, model).ConvertedType.DerivesOrImplements(parameter.Type));
         }
 
-        private ArgumentIdentifier ConvertToArgumentIdentifier(TArgumentSyntax argument)
+        private ArgumentIdentifier ConvertToArgumentIdentifier(TArgumentSyntax argument, SemanticModel model)
         {
-            var identifierName = GetArgumentIdentifier(argument)?.Text;
+            var identifierName = GetArgumentIdentifier(argument, model)?.Text;
             var nameColonIdentifier = GetNameColonArgumentIdentifier(argument);
 
-            if (nameColonIdentifier == null)
-            {
-                return new PositionalArgumentIdentifier(identifierName, argument);
-            }
-
-            return new NamedArgumentIdentifier(identifierName, argument, nameColonIdentifier.Value.Text);
+            return nameColonIdentifier == null
+                ? new PositionalArgumentIdentifier(identifierName, argument)
+                : new NamedArgumentIdentifier(identifierName, argument, nameColonIdentifier.Value.Text);
         }
 
         private class ArgumentIdentifier
@@ -155,4 +176,3 @@ namespace SonarAnalyzer.Rules
         }
     }
 }
-

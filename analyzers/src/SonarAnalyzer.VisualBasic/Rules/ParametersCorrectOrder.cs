@@ -23,9 +23,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     public sealed class ParametersCorrectOrder : ParametersCorrectOrderBase<ArgumentSyntax>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -33,33 +33,28 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 c =>
                 {
                     var methodCall = (InvocationExpressionSyntax)c.Node;
+                    AnalyzeArguments(c, methodCall.ArgumentList, GetLocation);
 
-                    var memberAccess = methodCall.Expression as MemberAccessExpressionSyntax;
-                    Location getLocation() =>
-                        memberAccess == null
+                    Location GetLocation() =>
+                        methodCall.Expression is not MemberAccessExpressionSyntax memberAccess
                         ? methodCall.Expression.GetLocation()
                         : memberAccess.Name.GetLocation();
-
-                    AnalyzeArguments(c, methodCall.ArgumentList, getLocation);
                 }, SyntaxKind.InvocationExpression);
 
             context.RegisterNodeAction(
                 c =>
                 {
                     var objectCreationCall = (ObjectCreationExpressionSyntax)c.Node;
+                    AnalyzeArguments(c, objectCreationCall.ArgumentList, GetLocation);
 
-                    var qualifiedAccess = objectCreationCall.Type as QualifiedNameSyntax;
-                    Location getLocation() =>
-                        qualifiedAccess == null
+                    Location GetLocation() =>
+                        objectCreationCall.Type is not QualifiedNameSyntax qualifiedAccess
                         ? objectCreationCall.Type.GetLocation()
                         : qualifiedAccess.Right.GetLocation();
-
-                    AnalyzeArguments(c, objectCreationCall.ArgumentList, getLocation);
                 }, SyntaxKind.ObjectCreationExpression);
         }
 
-        private void AnalyzeArguments(SonarSyntaxNodeReportingContext analysisContext, ArgumentListSyntax argumentList,
-            Func<Location> getLocation)
+        private void AnalyzeArguments(SonarSyntaxNodeReportingContext analysisContext, ArgumentListSyntax argumentList, Func<Location> getLocation)
         {
             if (argumentList == null)
             {
@@ -67,21 +62,35 @@ namespace SonarAnalyzer.Rules.VisualBasic
             }
 
             var methodParameterLookup = new VisualBasicMethodParameterLookup(argumentList, analysisContext.SemanticModel);
-
             ReportIncorrectlyOrderedParameters(analysisContext, methodParameterLookup, argumentList.Arguments, getLocation);
         }
 
-        protected override TypeInfo GetArgumentTypeSymbolInfo(ArgumentSyntax argument, SemanticModel semanticModel) =>
-            semanticModel.GetTypeInfo(argument.GetExpression());
+        protected override TypeInfo GetArgumentTypeSymbolInfo(ArgumentSyntax argument, SemanticModel model) =>
+            model.GetTypeInfo(argument.GetExpression());
 
         protected override Location GetMethodDeclarationIdentifierLocation(SyntaxNode syntaxNode) =>
             (syntaxNode as MethodBlockBaseSyntax)?.FindIdentifierLocation();
 
-        protected override SyntaxToken? GetArgumentIdentifier(ArgumentSyntax argument) =>
-            (argument.GetExpression() as IdentifierNameSyntax)?.Identifier;
+        protected override SyntaxToken? GetArgumentIdentifier(ArgumentSyntax argument, SemanticModel model) =>
+            GetExpressionSyntaxIdentifier(argument?.GetExpression(), model);
 
         protected override SyntaxToken? GetNameColonArgumentIdentifier(ArgumentSyntax argument) =>
             (argument as SimpleArgumentSyntax)?.NameColonEquals?.Name.Identifier;
+
+        private static SyntaxToken? GetExpressionSyntaxIdentifier(ExpressionSyntax expression, SemanticModel model) =>
+            expression switch
+            {
+                IdentifierNameSyntax identifier => identifier.Identifier,
+                MemberAccessExpressionSyntax memberAccess => GetValueAccessIdentifier(memberAccess, model),
+                CastExpressionSyntax cast => GetExpressionSyntaxIdentifier(cast.Expression, model),
+                PredefinedCastExpressionSyntax predefinedCast => GetExpressionSyntaxIdentifier(predefinedCast.Expression, model),
+                ParenthesizedExpressionSyntax parentheses => GetExpressionSyntaxIdentifier(parentheses.Expression, model),
+                _ => null
+            };
+
+        private static SyntaxToken? GetValueAccessIdentifier(MemberAccessExpressionSyntax expression, SemanticModel model) =>
+            expression.Name.ToString() == "Value" && model.GetTypeInfo(expression.Expression).ConvertedType.DerivesOrImplements(KnownType.System_Nullable_T)
+                ? GetExpressionSyntaxIdentifier(expression.Expression, model)
+                : expression.Name.Identifier;
     }
 }
-

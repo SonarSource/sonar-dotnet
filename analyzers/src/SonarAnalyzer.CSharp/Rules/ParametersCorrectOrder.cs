@@ -23,9 +23,9 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class ParametersCorrectOrder : ParametersCorrectOrderBase<ArgumentSyntax>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -33,33 +33,28 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var methodCall = (InvocationExpressionSyntax)c.Node;
+                    AnalyzeArguments(c, methodCall.ArgumentList, GetLocation);
 
-                    var memberAccess = methodCall.Expression as MemberAccessExpressionSyntax;
-                    Location getLocation() =>
-                        memberAccess == null
-                        ? methodCall.Expression.GetLocation()
-                        : memberAccess.Name.GetLocation();
-
-                    AnalyzeArguments(c, methodCall.ArgumentList, getLocation);
+                    Location GetLocation() =>
+                        methodCall.Expression is MemberAccessExpressionSyntax memberAccess
+                        ? memberAccess.Name.GetLocation()
+                        : methodCall.Expression.GetLocation();
                 }, SyntaxKind.InvocationExpression);
 
             context.RegisterNodeAction(
                 c =>
                 {
                     var objectCreationCall = (ObjectCreationExpressionSyntax)c.Node;
+                    AnalyzeArguments(c, objectCreationCall.ArgumentList, GetLocation);
 
-                    var qualifiedAccess = objectCreationCall.Type as QualifiedNameSyntax;
-                    Location getLocation() =>
-                        qualifiedAccess == null
+                    Location GetLocation() =>
+                        objectCreationCall.Type is not QualifiedNameSyntax qualifiedAccess
                         ? objectCreationCall.Type.GetLocation()
                         : qualifiedAccess.Right.GetLocation();
-
-                    AnalyzeArguments(c, objectCreationCall.ArgumentList, getLocation);
                 }, SyntaxKind.ObjectCreationExpression);
         }
 
-        private void AnalyzeArguments(SonarSyntaxNodeReportingContext analysisContext, ArgumentListSyntax argumentList,
-            Func<Location> getLocation)
+        private void AnalyzeArguments(SonarSyntaxNodeReportingContext analysisContext, ArgumentListSyntax argumentList, Func<Location> getLocation)
         {
             if (argumentList == null)
             {
@@ -71,16 +66,31 @@ namespace SonarAnalyzer.Rules.CSharp
             ReportIncorrectlyOrderedParameters(analysisContext, methodParameterLookup, argumentList.Arguments, getLocation);
         }
 
-        protected override TypeInfo GetArgumentTypeSymbolInfo(ArgumentSyntax argument, SemanticModel semanticModel) =>
-            semanticModel.GetTypeInfo(argument.Expression);
+        protected override TypeInfo GetArgumentTypeSymbolInfo(ArgumentSyntax argument, SemanticModel model) =>
+            model.GetTypeInfo(argument.Expression);
 
         protected override Location GetMethodDeclarationIdentifierLocation(SyntaxNode syntaxNode) =>
             (syntaxNode as BaseMethodDeclarationSyntax)?.FindIdentifierLocation();
 
-        protected override SyntaxToken? GetArgumentIdentifier(ArgumentSyntax argument) =>
-            (argument.Expression as IdentifierNameSyntax)?.Identifier;
+        protected override SyntaxToken? GetArgumentIdentifier(ArgumentSyntax argument, SemanticModel model) =>
+            GetExpressionSyntaxIdentifier(argument?.Expression, model);
 
         protected override SyntaxToken? GetNameColonArgumentIdentifier(ArgumentSyntax argument) =>
             argument.NameColon?.Name.Identifier;
+
+        private static SyntaxToken? GetExpressionSyntaxIdentifier(ExpressionSyntax expression, SemanticModel syntaxNodeAnalysisContext) =>
+            expression switch
+            {
+                IdentifierNameSyntax identifier => identifier.Identifier,
+                MemberAccessExpressionSyntax memberAccess => GetValueAccessIdentifier(memberAccess, syntaxNodeAnalysisContext),
+                CastExpressionSyntax cast => GetExpressionSyntaxIdentifier(cast.Expression, syntaxNodeAnalysisContext),
+                ParenthesizedExpressionSyntax parentheses => GetExpressionSyntaxIdentifier(parentheses.Expression, syntaxNodeAnalysisContext),
+                _ => null
+            };
+
+        private static SyntaxToken? GetValueAccessIdentifier(MemberAccessExpressionSyntax expression, SemanticModel model) =>
+            expression.Name.ToString() == "Value" && model.GetTypeInfo(expression.Expression).ConvertedType.DerivesOrImplements(KnownType.System_Nullable_T)
+                ? GetExpressionSyntaxIdentifier(expression.Expression, model)
+                : expression.Name.Identifier;
     }
 }

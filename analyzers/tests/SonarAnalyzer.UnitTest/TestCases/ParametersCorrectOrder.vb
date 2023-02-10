@@ -1,4 +1,6 @@
-﻿Namespace Tests.TestCases
+﻿Imports System
+
+Namespace Tests.TestCases
     Public Class Foo
         Public Shared Property ValProp As Integer
 
@@ -21,14 +23,14 @@
             Divide(dividend, divisor) ' Noncompliant [1] {{Parameters to 'Divide' have the same names but not the same order as the method arguments.}}
             Foo.GlobalDivide(dividend, divisor) ' Noncompliant
 
-            Divide(dividend:=dividend, divisor:= divisor)
+            Divide(dividend:=dividend, divisor:=divisor)
 
             Divide(ValProp, Foo.ValProp)
 
             FooBar(1)
             FooBar(1, "a", "b")
-            FooBar(value:= 1)
-		End Sub
+            FooBar(value:=1)
+        End Sub
 
         Public Sub ObjectCreations()
             Dim left = 1
@@ -37,7 +39,7 @@
             Dim x = New Foo(left, right)
             x = New Foo(left, left)
             x = New Foo(right, right)
-            x = New Foo(right:= right, left:= left)
+            x = New Foo(right:=right, left:=left)
             x = New Foo
 
             x = New Foo(right, left) ' Noncompliant
@@ -67,5 +69,66 @@
                 MyBase.New(right, left) ' Noncompliant
             End Sub
         End Class
+    End Class
+
+    ' See https://github.com/SonarSource/sonar-dotnet/issues/3879
+    Public Class NotOnlyNullableParam
+
+        Public Class A
+            Public Property Something As C
+        End Class
+
+        Public Class C
+            Public Property b As Integer
+        End Class
+
+        Public Class B
+            Public Property Value As Integer
+        End Class
+
+        Sub NotNullableParamVoid(ByVal a As Integer, ByVal b As Integer)
+            ' Do nothing
+        End Sub
+
+        Sub NullableParamValueVoid(ByVal a As Integer, ByVal b As Nullable(Of Integer))
+
+            If b.HasValue Then
+                NotNullableParamVoid(b.Value, a) ' Noncompliant
+                NotNullableParamVoid(a, b.Value) ' Compliant
+            End If
+        End Sub
+
+
+        Sub NullableParamCastVoid(ByVal a As Integer, ByVal b As Integer?)
+            If b.HasValue Then
+                NotNullableParamVoid(CInt(b), a) ' Noncompliant
+                NotNullableParamVoid(a, CInt(b)) ' Compliant
+            End If
+        End Sub
+
+        Sub InnerPropertyParamVoid(ByVal a As Integer, ByRef c As A)
+            NotNullableParamVoid(c.Something.b, a) ' Noncompliant
+            NotNullableParamVoid(a, c.Something.b) ' Compliant
+        End Sub
+
+        Sub InnerPropertyParamVoid(ByVal c As Integer, ByRef b As B)
+            NotNullableParamVoid(b.Value, c) ' Compliant
+            NotNullableParamVoid(c, b.Value) ' Compliant
+        End Sub
+
+        Sub ObjectParamCastVoid(ByVal a As Integer, ByVal b As Object)
+            NotNullableParamVoid(CInt(b), a) ' Noncompliant
+            NotNullableParamVoid(a, CInt(b)) ' Compliant
+        End Sub
+
+        Sub ObjectParamNullableCastVoid(ByVal a As Integer, ByVal b As Object)
+            NotNullableParamVoid(DirectCast(b, Integer?).Value, a) ' Noncompliant
+            NotNullableParamVoid(a, DirectCast(b, Integer?).Value) ' Compliant
+        End Sub
+
+        Sub DifferentCaseParamsVoid(ByVal a As Integer, ByVal B As Integer)
+            NotNullableParamVoid(B, a) ' Noncompliant
+            NotNullableParamVoid(a, B) ' Compliant
+        End Sub
     End Class
 End Namespace
