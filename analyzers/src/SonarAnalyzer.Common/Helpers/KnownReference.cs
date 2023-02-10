@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Helpers
         internal KnownReference(Func<AssemblyIdentity, bool> predicate, params Func<AssemblyIdentity, bool>[] or)
             : this(predicate is null || or.Any(x => x is null)
                   ? throw new ArgumentNullException(nameof(predicate))
-                  : identities => identities.Any(identitiy => predicate(identitiy) || or.Any(x => x(identitiy))))
+                  : identities => identities.Any(identitiy => predicate(identitiy) || or.Any(orPredicate => orPredicate(identitiy))))
         {
         }
 
