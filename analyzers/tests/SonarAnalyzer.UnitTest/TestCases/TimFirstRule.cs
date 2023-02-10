@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 public class Program
 {
@@ -26,6 +27,19 @@ public class Program
     void At()
     {
         int @tim;
+    }
+    void ForEach()
+    {
+        foreach (var t in Enumerable.Empty<int>())  // Noncompliant
+        { }
+    }
+    void Out()
+    {
+        local(out var i);   // Noncompliant
+        void local(out int j)
+        {
+            j = 5;
+        }
     }
     void Tuple()
     {

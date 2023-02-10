@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Xml.Linq;
-
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -50,6 +48,13 @@ public sealed class TimFirstRule : SonarDiagnosticAnalyzer
                     ReportIssue(c, node);
                 }
             }, SyntaxKindEx.SingleVariableDesignation);
+        context.RegisterNodeAction(c =>
+            {
+                if (c.Node is ForEachStatementSyntax node && IdentifierIsNotTim(node.Identifier))
+                {
+                    ReportIssue(c, node);
+                }
+            }, SyntaxKind.ForEachStatement);
     }
 
     private static void ReportIssue(SonarSyntaxNodeReportingContext c, SyntaxNode node) =>
