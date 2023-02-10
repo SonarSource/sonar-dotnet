@@ -182,7 +182,7 @@ public partial class SonarAnalysisContextTest
         var startContext = new DummyCompilationStartAnalysisContext(context);
         var sut = new SonarCompilationStartAnalysisContext(new(context, DummyMainDescriptor), startContext);
         var diagnostic = Diagnostic.Create(DiagnosticDescriptorFactory.CreateUtility("TEST", "Test report"), context.Tree.GetRoot().GetLocation());
-        sut.RegisterSemanticModelAction(x => x.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, diagnostic));
+        sut.RegisterSemanticModelAction(x => x.ReportIssue(diagnostic));
 
         startContext.RaisedDiagnostic.Should().NotBeNull().And.BeSameAs(diagnostic);
     }
@@ -289,10 +289,8 @@ public partial class SonarAnalysisContextTest
 
         public Diagnostic RaisedDiagnostic { get; private set; }
 
-        public DummyCompilationStartAnalysisContext(DummyAnalysisContext context) : base(context.Model.Compilation, context.Options, default)
-        {
+        public DummyCompilationStartAnalysisContext(DummyAnalysisContext context) : base(context.Model.Compilation, context.Options, default) =>
             this.context = context;
-        }
 
         public void AssertExpectedInvocationCounts(int expectedCompilationEndCount = 0, int expectedSemanticModelCount = 0, int expectedSymbolCount = 0, int expectedNodeCount = 0)
         {
@@ -302,8 +300,12 @@ public partial class SonarAnalysisContextTest
             nodeCount.Should().Be(expectedNodeCount);
         }
 
-        public override void RegisterCodeBlockAction(Action<CodeBlockAnalysisContext> action) => throw new NotImplementedException();
-        public override void RegisterCodeBlockStartAction<TLanguageKindEnum>(Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action) => throw new NotImplementedException();
+        public override void RegisterCodeBlockAction(Action<CodeBlockAnalysisContext> action) =>
+            throw new NotImplementedException();
+
+        public override void RegisterCodeBlockStartAction<TLanguageKindEnum>(Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action) =>
+            throw new NotImplementedException();
+
         public override void RegisterCompilationEndAction(Action<CompilationAnalysisContext> action)
         {
             compilationEndCount++;
@@ -323,8 +325,11 @@ public partial class SonarAnalysisContextTest
                 reportDiagnostic: x => RaisedDiagnostic = x, isSupportedDiagnostic: _ => true, CancellationToken.None));
         }
 
-        public override void RegisterSyntaxNodeAction<TLanguageKindEnum>(Action<SyntaxNodeAnalysisContext> action, ImmutableArray<TLanguageKindEnum> syntaxKinds) => nodeCount++;
-        public override void RegisterSyntaxTreeAction(Action<SyntaxTreeAnalysisContext> action) => throw new NotImplementedException();
+        public override void RegisterSyntaxNodeAction<TLanguageKindEnum>(Action<SyntaxNodeAnalysisContext> action, ImmutableArray<TLanguageKindEnum> syntaxKinds) =>
+            nodeCount++;
+
+        public override void RegisterSyntaxTreeAction(Action<SyntaxTreeAnalysisContext> action) =>
+            throw new NotImplementedException();
     }
 
     [DiagnosticAnalyzer(LanguageNames.CSharp)]

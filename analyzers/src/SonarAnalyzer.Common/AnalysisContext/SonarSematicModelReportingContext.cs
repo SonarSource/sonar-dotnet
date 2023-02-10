@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.AnalysisContext;
 
-public sealed class SonarSematicModelReportingContext : SonarCompilationReportingContextBase<SemanticModelAnalysisContext>
+public sealed class SonarSematicModelReportingContext : SonarTreeReportingContextBase<SemanticModelAnalysisContext>
 {
     public override SyntaxTree Tree => SemanticModel.SyntaxTree;
     public override Compilation Compilation => Context.SemanticModel.Compilation;
