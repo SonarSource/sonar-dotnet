@@ -26,7 +26,7 @@ public class Program
         StringBuilder sb9 = new StringBuilder(); // Noncompliant
         sb9 = sb8;
 
-        StringBuilder sb10 = new StringBuilder(); // Noncompliant FP
+        StringBuilder sb10 = new StringBuilder(); // Noncompliant FP see https://github.com/SonarSource/sonar-dotnet/issues/6747
         sb10.ToStringAndFree();
 
         if (true)
