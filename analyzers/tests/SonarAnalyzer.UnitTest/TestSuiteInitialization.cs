@@ -30,6 +30,8 @@ namespace SonarAnalyzer.UnitTest
         [AssemblyInitialize]
         public static void AssemblyInit(TestContext context)
         {
+            ConfigureFluentValidation();
+
             Console.WriteLine(@"Running tests initialization...");
             Console.WriteLine(@$"Build reason: {Environment.GetEnvironmentVariable(TestContextHelper.BuildReason) ?? "Not set / Local build"}");
 
@@ -38,6 +40,11 @@ namespace SonarAnalyzer.UnitTest
 
             var vbVersions = ParseOptionsHelper.Default(LanguageNames.VisualBasic).Cast<VisualBasicParseOptions>().Select(x => x.LanguageVersion.ToDisplayString());
             Console.WriteLine(@"VB.Net versions used for analysis: " + string.Join(", ", vbVersions));
+        }
+
+        private static void ConfigureFluentValidation()
+        {
+            AssertionOptions.FormattingOptions.MaxLines = -1;
         }
     }
 }
