@@ -20,19 +20,17 @@
 package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
-import com.sonar.it.shared.Tests;
 import com.sonar.orchestrator.build.BuildResult;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.sonarqube.ws.Ce;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-
-import static com.sonar.it.shared.Tests.ORCHESTRATOR;
+import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AnalysisWarningsTest {
