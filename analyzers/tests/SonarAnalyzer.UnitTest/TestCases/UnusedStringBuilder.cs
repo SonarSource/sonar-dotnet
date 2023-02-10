@@ -23,6 +23,10 @@ public class Program
         StringBuilder sb7 = new StringBuilder(); // Noncompliant
         sb7.Append(sb4.ToString());
 
+        StringBuilder sb8 = new StringBuilder(); // Compliant
+        StringBuilder sb9 = new StringBuilder(); // Noncompliant
+        sb9 = sb8;
+
         if (true)
         {
             if (true)

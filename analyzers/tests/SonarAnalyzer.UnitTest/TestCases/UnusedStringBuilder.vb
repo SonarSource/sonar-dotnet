@@ -21,6 +21,10 @@ Public Class Program
         Dim sb1, sb2 ' Compliant
         Dim sb3, sb4 As StringBuilder = New StringBuilder() ' Error [BC30671]: Explicit initialization is not permitted with multiple variables declared with a single type specifier.
 
+        Dim sb5 As StringBuilder = New StringBuilder() ' Compliant
+        Dim sb6 As StringBuilder = New StringBuilder() ' Noncompliant
+        sb6 = sb5
+
         Dim builderCfg As StringBuilder = New StringBuilder() ' FN (requires use of cfg with significant impact on performance)
         If False Then
             builderCfg.ToString()

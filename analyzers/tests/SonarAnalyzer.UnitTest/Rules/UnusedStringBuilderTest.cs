@@ -60,6 +60,7 @@ public class UnusedStringBuilderTest
     [DataRow("var a = sb.Capacity;", false)]
     [DataRow("var a = sb.MaxCapacity;", false)]
     [DataRow("""var a = $"{sb} is ToStringed here";""", true)]
+    [DataRow("var a = sb;", true)]
     public void UnusedStringBuilder_TopLevelStatements(string expression, bool compliant)
     {
         var code = $$"""
@@ -95,6 +96,7 @@ public class UnusedStringBuilderTest
     [DataRow("var a = sb.Capacity;", false)]
     [DataRow("var a = sb.MaxCapacity;", false)]
     [DataRow("""var a = $"{sb} is ToStringed here";""", true)]
+    [DataRow("var a = sb;", true)]
 
 #if NET
 
@@ -144,6 +146,7 @@ public class UnusedStringBuilderTest
     [DataRow("Dim a = SB.ToString()", true)]
     [DataRow("Dim a = sb.TOSTRING()", true)]
     [DataRow("Dim a = sb.LENGTH", true)]
+    [DataRow("Dim a = sb", true)]
 
 #if NET
 

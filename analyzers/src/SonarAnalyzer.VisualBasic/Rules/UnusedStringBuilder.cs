@@ -57,6 +57,8 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
             InterpolationSyntax interpolation => IsSameReference(model, symbol, interpolation.Expression),
             ArgumentSyntax argument => IsSameReference(model, symbol, argument.GetExpression()),
             MemberAccessExpressionSyntax memberAccess => IsAccessExpression(memberAccess.Name.GetName()) && IsSameReference(model, symbol, memberAccess.Expression),
+            EqualsValueSyntax { Value: IdentifierNameSyntax identifier } => IsSameReference(model, symbol, identifier),
+            AssignmentStatementSyntax { Right: IdentifierNameSyntax identifier } => IsSameReference(model, symbol, identifier),
             _ => false,
         };
 
