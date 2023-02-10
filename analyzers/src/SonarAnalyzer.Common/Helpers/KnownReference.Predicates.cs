@@ -73,10 +73,5 @@ public sealed partial class KnownReference
             static bool ArraysEqual(byte[] key, string hexString) =>
                 BitConverter.ToString(key).Replace("-", string.Empty).Equals(hexString, StringComparison.OrdinalIgnoreCase);
         }
-
-        internal static Func<IEnumerable<AssemblyIdentity>, bool> Any(Func<AssemblyIdentity, bool> predicate) =>
-            predicate is null
-                ? throw new ArgumentNullException(nameof(predicate))
-                : identities => identities.Any(predicate);
     }
 }
