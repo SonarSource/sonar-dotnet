@@ -22,5 +22,5 @@ namespace SonarAnalyzer.Common;
 
 public static class RegexConstants
 {
-    public static TimeSpan DefaultTimeout => TimeSpan.FromMilliseconds(100);
+    public static TimeSpan DefaultTimeout => TimeSpan.FromMilliseconds(200);
 }
