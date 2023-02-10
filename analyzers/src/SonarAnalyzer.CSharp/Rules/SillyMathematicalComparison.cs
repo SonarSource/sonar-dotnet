@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (TryGetConstantValue(context.SemanticModel, (BinaryExpressionSyntax)context.Node, out var constant, out var other)
                && context.SemanticModel.GetTypeInfo(other).Type is { } typeSymbolOfOther
                && TryGetRange(typeSymbolOfOther) is { } range
-               && (constant < range.Min || constant > range.Max))
+               && range.IsOutOfRange(constant))
             {
                 var typeName = typeSymbolOfOther.ToMinimalDisplayString(context.SemanticModel, other.GetLocation().SourceSpan.Start);
                 context.ReportIssue(Diagnostic.Create(MathComparisonRule, other.Parent.GetLocation(), typeName));
@@ -84,6 +84,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 _ => null,
             };
 
-        private readonly record struct ValuesRange(double Min, double Max);
+        private readonly record struct ValuesRange(double Min, double Max)
+        {
+            public bool IsOutOfRange(double value) =>
+               value < Min || value > Max;
+        }
     }
 }
