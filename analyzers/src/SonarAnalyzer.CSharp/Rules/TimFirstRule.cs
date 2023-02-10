@@ -35,14 +35,11 @@ public sealed class TimFirstRule : SonarDiagnosticAnalyzer
         // Part 1
         context.RegisterNodeAction(c =>
             {
-                if (c.Node is LocalDeclarationStatementSyntax { Declaration.Variables: var variables } node)
+                if (c.Node is VariableDeclaratorSyntax node)
                 {
-                    foreach (var variable in variables)
-                    {
-                        ReportIfIdentifierIsNotTimLowerCase(c, variable.Identifier);
-                    }
+                    ReportIfIdentifierIsNotTimLowerCase(c, node.Identifier);
                 }
-            }, SyntaxKind.LocalDeclarationStatement);
+            }, SyntaxKind.VariableDeclarator);
         context.RegisterNodeAction(
             c => ReportIfIdentifierIsNotTimLowerCase(c, ((SingleVariableDesignationSyntaxWrapper)c.Node).Identifier),
             SyntaxKindEx.SingleVariableDesignation);
@@ -57,7 +54,7 @@ public sealed class TimFirstRule : SonarDiagnosticAnalyzer
         context.RegisterNodeAction(c =>
             {
                 if (c.Node is IdentifierNameSyntax node
-                    && c.SemanticModel.GetSymbolInfo(node).Symbol is { Kind: SymbolKind.Property } symbol)
+                    && c.SemanticModel.GetSymbolInfo(node).Symbol is { Kind: SymbolKind.Property })
                 {
                     ReportIfIdentifierIsNotTim(c, node.Identifier);
                 }

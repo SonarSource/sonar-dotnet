@@ -37,8 +37,9 @@ public class Program
     }
     void ForEach()
     {
-        foreach (var t in Enumerable.Empty<int>())  // Noncompliant
-        { }
+        for (int i; ;)  // Noncompliant
+            foreach (var t in Enumerable.Empty<int>())  // Noncompliant
+            { }
     }
     void Out()
     {
@@ -59,5 +60,9 @@ public class Program
     void MultiDeclaration2()
     {
         int i, tim;  // Noncompliant
+    }
+    void InvalidSyntax()
+    {
+        int tim,;   // Error
     }
 }

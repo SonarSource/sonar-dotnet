@@ -4,9 +4,11 @@ public class Program
 {
     void PatternMatching()
     {
-        if ("" is var myString)   // Noncompliant {{Tim's first rule!}}
+        var tim = new { Tim = 5 };
+        if (tim is { Tim: int i })  // Noncompliant {{Tim's first rule!}}
         {
 
         }
     }
+
 }
