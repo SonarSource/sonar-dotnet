@@ -34,6 +34,8 @@ public class Program
     {
         int @tim;
         tim = Tim;
+        int @i; // Noncompliant
+        //  ^^
     }
     void ForEach()
     {
@@ -52,6 +54,12 @@ public class Program
     void Tuple()
     {
         var (i, tim) = (5, 6);  // Noncompliant
+        //   ^
+    }
+    void Tuple2()
+    {
+        (var i, var tim) = (5, 6);  // Noncompliant
+        //   ^
     }
     void MultiDeclaration()
     {

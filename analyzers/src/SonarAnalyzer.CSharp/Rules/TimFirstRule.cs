@@ -37,44 +37,40 @@ public sealed class TimFirstRule : SonarDiagnosticAnalyzer
             {
                 if (c.Node is VariableDeclaratorSyntax node)
                 {
-                    ReportIfIdentifierIsNotTimLowerCase(c, node.Identifier);
+                    ReportIfIdentifierIsNotTim(c, node.Identifier, lowerCase: true);
                 }
             }, SyntaxKind.VariableDeclarator);
         context.RegisterNodeAction(
-            c => ReportIfIdentifierIsNotTimLowerCase(c, ((SingleVariableDesignationSyntaxWrapper)c.Node).Identifier),
+            c => ReportIfIdentifierIsNotTim(c, ((SingleVariableDesignationSyntaxWrapper)c.Node).Identifier, lowerCase: true),
             SyntaxKindEx.SingleVariableDesignation);
         context.RegisterNodeAction(c =>
             {
-                if (c.Node is ForEachStatementSyntax node)
+                if (c.Node is ForEachStatementSyntax { Identifier: var identifier })
                 {
-                    ReportIfIdentifierIsNotTimLowerCase(c, node.Identifier);
+                    ReportIfIdentifierIsNotTim(c, identifier, lowerCase: true);
                 }
             }, SyntaxKind.ForEachStatement);
         // Part 2
         context.RegisterNodeAction(c =>
             {
-                if (c.Node is IdentifierNameSyntax node
+                if (c.Node is IdentifierNameSyntax { Identifier: var identifier } node
                     && c.SemanticModel.GetSymbolInfo(node).Symbol is { Kind: SymbolKind.Property })
                 {
-                    ReportIfIdentifierIsNotTim(c, node.Identifier);
+                    ReportIfIdentifierIsNotTim(c, identifier);
                 }
             }, SyntaxKind.IdentifierName);
     }
 
-    private static void ReportIfIdentifierIsNotTim(SonarSyntaxNodeReportingContext c, SyntaxToken identifier)
+    private static void ReportIfIdentifierIsNotTim(SonarSyntaxNodeReportingContext c, SyntaxToken identifier, bool lowerCase = false)
     {
-        if (identifier is { IsMissing: false, ValueText: not "Tim" })
+        var expected = lowerCase switch
         {
-            ReportIssue(c, identifier);
+            true => "tim",
+            false => "Tim"
+        };
+        if (identifier is { IsMissing: false, ValueText: var valueText } && valueText != expected)
+        {
+            c.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation()));
         }
     }
-    private static void ReportIfIdentifierIsNotTimLowerCase(SonarSyntaxNodeReportingContext c, SyntaxToken identifier)
-    {
-        if (identifier is { IsMissing: false, ValueText: not "tim" })
-        {
-            ReportIssue(c, identifier);
-        }
-    }
-    private static void ReportIssue(SonarSyntaxNodeReportingContext c, SyntaxToken identifier) =>
-        c.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation()));
 }
