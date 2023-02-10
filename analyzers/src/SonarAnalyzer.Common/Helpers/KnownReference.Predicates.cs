@@ -18,59 +18,65 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.ComponentModel;
+
 namespace SonarAnalyzer.Helpers;
 
 public sealed partial class KnownReference
 {
     private const StringComparison AssemblyNameComparission = StringComparison.OrdinalIgnoreCase;
 
-    internal static Func<AssemblyIdentity, bool> NameIs(string name) =>
-        x => x.Name.Equals(name, AssemblyNameComparission);
-
-    internal static Func<AssemblyIdentity, bool> StartsWith(string name) =>
-        x => x.Name.StartsWith(name, AssemblyNameComparission);
-
-    internal static Func<AssemblyIdentity, bool> EndsWith(string name) =>
-        x => x.Name.EndsWith(name, AssemblyNameComparission);
-
-    internal static Func<AssemblyIdentity, bool> Contains(string name) =>
-        x => x.Name.Contains(name);
-
-    internal static Func<AssemblyIdentity, bool> VersionLowerThen(string version) =>
-        VersionLowerThen(Version.Parse(version));
-
-    internal static Func<AssemblyIdentity, bool> VersionLowerThen(Version version) =>
-        x => x.Version < version;
-
-    internal static Func<AssemblyIdentity, bool> VersionGreaterOrEqual(string version) =>
-        VersionGreaterOrEqual(Version.Parse(version));
-
-    internal static Func<AssemblyIdentity, bool> VersionGreaterOrEqual(Version version) =>
-        x => x.Version >= version;
-
-    internal static Func<AssemblyIdentity, bool> VersionBetween(string from, string to) =>
-        VersionBetween(Version.Parse(from), Version.Parse(to));
-
-    internal static Func<AssemblyIdentity, bool> VersionBetween(Version from, Version to) =>
-        x => x.Version >= from && x.Version <= to;
-
-    internal static Func<AssemblyIdentity, bool> OptionalPublicKeyTokenIs(string key) =>
-        x => !x.HasPublicKey || PublicKeyEqualHex(x, key);
-
-    internal static Func<AssemblyIdentity, bool> PublicKeyTokenIs(string key) =>
-        x => x.HasPublicKey && PublicKeyEqualHex(x, key);
-
-    private static bool PublicKeyEqualHex(AssemblyIdentity identity, string hexString)
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    internal static class Predicates
     {
-        var normalizedHexString = hexString.Replace("-", string.Empty);
-        return ArraysEqual(identity.PublicKeyToken.ToArray(), normalizedHexString) || ArraysEqual(identity.PublicKey.ToArray(), normalizedHexString);
+        internal static Func<AssemblyIdentity, bool> NameIs(string name) =>
+            x => x.Name.Equals(name, AssemblyNameComparission);
 
-        static bool ArraysEqual(byte[] key, string hexString) =>
-            BitConverter.ToString(key).Replace("-", string.Empty).Equals(hexString, StringComparison.OrdinalIgnoreCase);
+        internal static Func<AssemblyIdentity, bool> StartsWith(string name) =>
+            x => x.Name.StartsWith(name, AssemblyNameComparission);
+
+        internal static Func<AssemblyIdentity, bool> EndsWith(string name) =>
+            x => x.Name.EndsWith(name, AssemblyNameComparission);
+
+        internal static Func<AssemblyIdentity, bool> Contains(string name) =>
+            x => x.Name.IndexOf(name, 0, AssemblyNameComparission) >= 0;
+
+        internal static Func<AssemblyIdentity, bool> VersionLowerThen(string version) =>
+            VersionLowerThen(Version.Parse(version));
+
+        internal static Func<AssemblyIdentity, bool> VersionLowerThen(Version version) =>
+            x => x.Version < version;
+
+        internal static Func<AssemblyIdentity, bool> VersionGreaterOrEqual(string version) =>
+            VersionGreaterOrEqual(Version.Parse(version));
+
+        internal static Func<AssemblyIdentity, bool> VersionGreaterOrEqual(Version version) =>
+            x => x.Version >= version;
+
+        internal static Func<AssemblyIdentity, bool> VersionBetween(string from, string to) =>
+            VersionBetween(Version.Parse(from), Version.Parse(to));
+
+        internal static Func<AssemblyIdentity, bool> VersionBetween(Version from, Version to) =>
+            x => x.Version >= from && x.Version <= to;
+
+        internal static Func<AssemblyIdentity, bool> OptionalPublicKeyTokenIs(string key) =>
+            x => !x.HasPublicKey || PublicKeyEqualHex(x, key);
+
+        internal static Func<AssemblyIdentity, bool> PublicKeyTokenIs(string key) =>
+            x => x.HasPublicKey && PublicKeyEqualHex(x, key);
+
+        private static bool PublicKeyEqualHex(AssemblyIdentity identity, string hexString)
+        {
+            var normalizedHexString = hexString.Replace("-", string.Empty);
+            return ArraysEqual(identity.PublicKeyToken.ToArray(), normalizedHexString) || ArraysEqual(identity.PublicKey.ToArray(), normalizedHexString);
+
+            static bool ArraysEqual(byte[] key, string hexString) =>
+                BitConverter.ToString(key).Replace("-", string.Empty).Equals(hexString, StringComparison.OrdinalIgnoreCase);
+        }
+
+        internal static Func<IEnumerable<AssemblyIdentity>, bool> Any(Func<AssemblyIdentity, bool> predicate) =>
+            predicate is null
+                ? throw new ArgumentNullException(nameof(predicate))
+                : identities => identities.Any(predicate);
     }
-
-    internal static Func<IEnumerable<AssemblyIdentity>, bool> Any(Func<AssemblyIdentity, bool> predicate) =>
-        predicate is null
-            ? throw new ArgumentNullException(nameof(predicate))
-            : identities => identities.Any(predicate);
 }
