@@ -18,36 +18,27 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using static SonarAnalyzer.Helpers.KnownReference.Predicates;
+
 namespace SonarAnalyzer.Helpers
 {
     public sealed partial class KnownReference
     {
         private readonly Func<IEnumerable<AssemblyIdentity>, bool> predicate;
 
+        public static KnownReference XUnit_Assert { get; } = new(
+            NameIs("xunit.assert"),
+            NameIs("xunit").And(VersionLowerThen("2.0")));
+
         internal KnownReference(Func<AssemblyIdentity, bool> predicate, params Func<AssemblyIdentity, bool>[] or)
-            : this(Any(predicate, or))
+            : this(predicate is null || or.Any(x => x is null)
+                  ? throw new ArgumentNullException(nameof(predicate))
+                  : Any(identitiy => predicate(identitiy) || or.Any(x => x(identitiy))))
         {
         }
 
         internal KnownReference(Func<IEnumerable<AssemblyIdentity>, bool> predicate) =>
             this.predicate = predicate ?? throw new ArgumentNullException(nameof(predicate));
-
-        private static Func<IEnumerable<AssemblyIdentity>, bool> Any(Func<AssemblyIdentity, bool> predicate, Func<AssemblyIdentity, bool>[] or)
-        {
-            if (predicate is null)
-            {
-                throw new ArgumentNullException(nameof(predicate));
-            }
-            if (or.Any(x => x is null))
-            {
-                throw new ArgumentException("predicate should not be null", nameof(or));
-            }
-            return Any(identitiy => predicate(identitiy) || or.Any(x => x(identitiy)));
-        }
-
-        public static KnownReference XUnit_Assert { get; } = new(
-            NameIs("xunit.assert"),
-            NameIs("xunit").And(VersionLowerThen("2.0")));
 
         public bool IsReferencedBy(Compilation compilation) =>
             predicate(compilation.ReferencedAssemblyNames);
