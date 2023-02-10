@@ -29,12 +29,10 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
 
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-    protected override SyntaxNode GetScope(VariableDeclaratorSyntax declarator) => // declarator.Parent.Parent.Parent;
-        declarator switch
-        {
-            { Parent: LocalDeclarationStatementSyntax { Parent: { } block } } => block,
-            _ => null,
-        };
+    protected override SyntaxNode GetScope(VariableDeclaratorSyntax declarator) =>
+        declarator is { Parent: LocalDeclarationStatementSyntax { Parent: { } block } }
+        ? block
+        : null;
 
     protected override ILocalSymbol RetrieveStringBuilderObject(SemanticModel semanticModel, VariableDeclaratorSyntax declarator) =>
         declarator is

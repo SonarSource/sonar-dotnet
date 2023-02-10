@@ -27,8 +27,8 @@ public abstract class UnusedStringBuilderBase<TSyntaxKind, TVariableDeclarator, 
 {
     private const string DiagnosticId = "S3063";
 
-    private static readonly string[] StringBuilderAccessInvocations = { "ToString", "CopyTo", "GetChunks" };
-    private static readonly string[] StringBuilderAccessExpressions = { "Length" };
+    private readonly string[] stringBuilderAccessInvocations = { "ToString", "CopyTo", "GetChunks" };
+    private readonly string[] stringBuilderAccessExpressions = { "Length" };
 
     protected override string MessageFormat => """Remove this "StringBuilder"; ".ToString()" is never called.""";
 
@@ -65,7 +65,7 @@ public abstract class UnusedStringBuilderBase<TSyntaxKind, TVariableDeclarator, 
         scope.DescendantNodes(DescendIntoChildren).Any(node => IsStringBuilderRead(model, symbol, node));
 
     internal bool IsAccessInvocation(string invocation) =>
-        StringBuilderAccessInvocations.Any(x => x.Equals(invocation, Language.NameComparison));
+        stringBuilderAccessInvocations.Any(x => x.Equals(invocation, Language.NameComparison));
     internal bool IsAccessExpression(string expression) =>
-        StringBuilderAccessExpressions.Any(x => x.Equals(expression, Language.NameComparison));
+        stringBuilderAccessExpressions.Any(x => x.Equals(expression, Language.NameComparison));
 }
