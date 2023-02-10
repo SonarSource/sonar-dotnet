@@ -19,7 +19,6 @@
  */
 
 using SonarAnalyzer.Helpers.Facade;
-using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Helpers;
 
@@ -61,4 +60,10 @@ internal sealed class CSharpFacade : ILanguageFacade<SyntaxKind>
                 new CSharpMethodParameterLookup(((ImplicitObjectCreationExpressionSyntaxWrapper)invocation).ArgumentList, methodSymbol),
             _ => throw new ArgumentException($"{invocation.GetType()} does not contain an ArgumentList.", nameof(invocation)),
         };
+
+    public string GetName(SyntaxNode expression) =>
+        expression.GetName();
+
+    public SyntaxToken? GetIdentifier(SyntaxNode node) =>
+        node.GetIdentifier();
 }

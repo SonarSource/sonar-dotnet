@@ -52,7 +52,7 @@ public class UnusedStringBuilderTest
     [DataRow("sb.CopyTo(0, new char[1], 0, 1);", true)]
     [DataRow("sb.GetChunks();", true)]
     [DataRow("var a = sb[0];", true)]
-    [DataRow("""sb?.Append("").ToString().ToLower();""", false)] // FP
+    [DataRow("""sb?.Append("").ToString().ToLower();""", false)] // FP see https://github.com/SonarSource/sonar-dotnet/issues/6743
     [DataRow("sb?.ToString().ToLower();", false)] // FP
     [DataRow("""@sb.Append("").ToString();""", true)]
     [DataRow("sb.Remove(sb.Length - 1, 1);", true)]
@@ -87,7 +87,7 @@ public class UnusedStringBuilderTest
     [DataRow("""var a = sb.Append("").Append("").Append("").Append("").ToString().ToLower();""", true)]
     [DataRow("sb.CopyTo(0, new char[1], 0, 1);", true)]
     [DataRow("var a = sb[0];", true)]
-    [DataRow("""sb?.Append("").ToString().ToLower();""", false)] // FP
+    [DataRow("""sb?.Append("").ToString().ToLower();""", false)] // FP see https://github.com/SonarSource/sonar-dotnet/issues/6743
     [DataRow("sb?.ToString();", false)] // FP
     [DataRow("""@sb.Append("").ToString();""", true)]
     [DataRow("sb.Remove(sb.Length - 1, 1);", true)]
@@ -133,7 +133,7 @@ public class UnusedStringBuilderTest
     [DataRow("""Dim a = sb.Append("").Append("").Append("").Append("").ToString().ToLower()""", true)]
     [DataRow("sb.CopyTo(0, New Char(0) {}, 0, 1)", true)]
     [DataRow("Dim a = sb(0)", true)]
-    [DataRow("""sb?.Append("").ToString().ToLower()""", false)] // FP
+    [DataRow("""sb?.Append("").ToString().ToLower()""", false)] // FP see https://github.com/SonarSource/sonar-dotnet/issues/6743
     [DataRow("sb?.ToString().ToLower()", false)] // FP
     [DataRow("""sb.Append("").ToString()""", true)]
     [DataRow("sb.Remove(sb.Length - 1, 1)", true)]
@@ -141,7 +141,9 @@ public class UnusedStringBuilderTest
     [DataRow("Dim a = sb.Length", true)]
     [DataRow("Dim a = sb.Capacity", false)]
     [DataRow("Dim a = sb.MaxCapacity", false)]
-    [DataRow("""SB.ToString()""", true)]
+    [DataRow("Dim a = SB.ToString()", true)]
+    [DataRow("Dim a = sb.TOSTRING()", true)]
+    [DataRow("Dim a = sb.LENGTH", true)]
 
 #if NET
 

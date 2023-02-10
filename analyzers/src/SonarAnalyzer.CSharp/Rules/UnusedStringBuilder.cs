@@ -26,18 +26,24 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
     private static readonly SyntaxKind[] SkipChildren =
     {
         SyntaxKind.ClassDeclaration,
+        SyntaxKind.StructDeclaration,
+        SyntaxKind.EnumDeclaration,
+        SyntaxKind.InterfaceDeclaration,
+        SyntaxKindEx.RecordClassDeclaration,
+        SyntaxKindEx.RecordStructDeclaration
     };
 
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-    protected override string GetName(SyntaxNode declaration) => declaration.GetName();
-
     protected override SyntaxNode GetScope(VariableDeclaratorSyntax declarator) =>
-        declarator.Parent.Parent is { Parent: GlobalStatementSyntax { Parent: CompilationUnitSyntax } }
-        ? declarator.Parent.Parent.Parent.Parent
-        : declarator.Parent.Parent.Parent;
+        declarator switch
+        {
+            { Parent: VariableDeclarationSyntax { Parent: LocalDeclarationStatementSyntax { Parent: BlockSyntax block } } } => block,
+            { Parent: VariableDeclarationSyntax { Parent: LocalDeclarationStatementSyntax { Parent: GlobalStatementSyntax { Parent: CompilationUnitSyntax compilationUnit } } } } => compilationUnit,
+            _ => null,
+        };
 
-    protected override ILocalSymbol RetrieveStringBuilderObject(VariableDeclaratorSyntax declarator, SemanticModel semanticModel) =>
+    protected override ILocalSymbol RetrieveStringBuilderObject(SemanticModel semanticModel, VariableDeclaratorSyntax declarator) =>
         declarator is
         {
             Parent.Parent: LocalDeclarationStatementSyntax,
@@ -47,15 +53,15 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
             ? semanticModel.GetDeclaredSymbol(declarator) as ILocalSymbol
             : null;
 
-    protected override bool IsStringBuilderRead(string name, ILocalSymbol symbol, SyntaxNode node, SemanticModel model) =>
+    protected override bool IsStringBuilderRead(SemanticModel model, ILocalSymbol symbol, SyntaxNode node) =>
         node switch
         {
-            InvocationExpressionSyntax invocation => StringBuilderAccessInvocations.Contains(invocation.Expression.GetName()) && IsSameReference(invocation.Expression, name, symbol, model),
-            ReturnStatementSyntax returnStatement => IsSameReference(returnStatement.Expression, name, symbol, model),
-            InterpolationSyntax interpolation => IsSameReference(interpolation.Expression, name, symbol, model),
-            ElementAccessExpressionSyntax elementAccess => IsSameReference(elementAccess.Expression, name, symbol, model),
-            ArgumentSyntax argument => IsSameReference(argument.Expression, name, symbol, model),
-            MemberAccessExpressionSyntax memberAccess => StringBuilderAccessExpressions.Contains(memberAccess.Name.GetName()) && IsSameReference(memberAccess.Expression, name, symbol, model),
+            InvocationExpressionSyntax invocation => IsAccessInvocation(invocation.Expression.GetName()) && IsSameReference(model, symbol, invocation.Expression),
+            ReturnStatementSyntax returnStatement => IsSameReference(model, symbol, returnStatement.Expression),
+            InterpolationSyntax interpolation => IsSameReference(model, symbol, interpolation.Expression),
+            ElementAccessExpressionSyntax elementAccess => IsSameReference(model, symbol, elementAccess.Expression),
+            ArgumentSyntax argument => IsSameReference(model, symbol, argument.Expression),
+            MemberAccessExpressionSyntax memberAccess => IsAccessExpression(memberAccess.Name.GetName()) && IsSameReference(model, symbol, memberAccess.Expression),
             _ => false,
         };
 

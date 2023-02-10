@@ -29,35 +29,37 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
 
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-    protected override string GetName(SyntaxNode declaration) =>
-        declaration is VariableDeclaratorSyntax variableDeclarator
-            ? variableDeclarator.Names[0].Identifier.ValueText ?? string.Empty
-            : declaration.GetName();
+    protected override SyntaxNode GetScope(VariableDeclaratorSyntax declarator) => // declarator.Parent.Parent.Parent;
+        declarator switch
+        {
+            { Parent: LocalDeclarationStatementSyntax { Parent: { } block } } => block,
+            _ => null,
+        };
 
-    protected override SyntaxNode GetScope(VariableDeclaratorSyntax declarator) => declarator.Parent.Parent.Parent;
-
-    protected override ILocalSymbol RetrieveStringBuilderObject(VariableDeclaratorSyntax declarator, SemanticModel semanticModel) =>
+    protected override ILocalSymbol RetrieveStringBuilderObject(SemanticModel semanticModel, VariableDeclaratorSyntax declarator) =>
         declarator is
         {
             Parent: LocalDeclarationStatementSyntax,
             Initializer.Value: ObjectCreationExpressionSyntax { } objectCreation,
+            Names: { Count: 1 } names, // Must be 1, because otherwise "BC30671: Explicit initialization is not permitted with multiple variables declared with a single type specifier." is raised.
         }
         && objectCreation.Type.IsKnownType(KnownType.System_Text_StringBuilder, semanticModel)
-            ? semanticModel.GetDeclaredSymbol(declarator.Names.First()) as ILocalSymbol
+            ? semanticModel.GetDeclaredSymbol(names[0]) as ILocalSymbol
             : null;
 
-    protected override bool IsStringBuilderRead(string name, ILocalSymbol symbol, SyntaxNode node, SemanticModel model) =>
+    protected override bool IsStringBuilderRead(SemanticModel model, ILocalSymbol symbol, SyntaxNode node) =>
         node switch
         {
             InvocationExpressionSyntax invocation =>
-                (StringBuilderAccessInvocations.Contains(invocation.GetName()) && IsSameReference(invocation.Expression, name, symbol, model))
-                || (IsSameReference(invocation.Expression, name, symbol, model) && model.GetOperation(invocation).Kind is OperationKindEx.PropertyReference),
-            ReturnStatementSyntax returnStatement => IsSameReference(returnStatement.Expression, name, symbol, model),
-            InterpolationSyntax interpolation => IsSameReference(interpolation.Expression, name, symbol, model),
-            ArgumentSyntax argument => IsSameReference(argument.GetExpression(), name, symbol, model),
-            MemberAccessExpressionSyntax memberAccess => StringBuilderAccessExpressions.Contains(memberAccess.Name.GetName()) && IsSameReference(memberAccess.Expression, name, symbol, model),
+                (IsAccessInvocation(invocation.GetName()) && IsSameReference(model, symbol, invocation.Expression))
+                || (IsSameReference(model, symbol, invocation.Expression) && model.GetOperation(invocation).Kind is OperationKindEx.PropertyReference),
+            ReturnStatementSyntax returnStatement => IsSameReference(model, symbol, returnStatement.Expression),
+            InterpolationSyntax interpolation => IsSameReference(model, symbol, interpolation.Expression),
+            ArgumentSyntax argument => IsSameReference(model, symbol, argument.GetExpression()),
+            MemberAccessExpressionSyntax memberAccess => IsAccessExpression(memberAccess.Name.GetName()) && IsSameReference(model, symbol, memberAccess.Expression),
             _ => false,
         };
 
-    protected override bool DescendIntoChildren(SyntaxNode node) => !node.IsAnyKind(SkipChildren);
+    protected override bool DescendIntoChildren(SyntaxNode node) =>
+        !node.IsAnyKind(SkipChildren);
 }

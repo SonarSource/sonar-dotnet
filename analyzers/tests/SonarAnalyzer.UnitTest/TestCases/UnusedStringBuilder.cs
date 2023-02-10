@@ -45,7 +45,7 @@ public class Program
         StringBuilder builderInLine1 = new StringBuilder(), builderInLine2 = new StringBuilder(); // Noncompliant
 //                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  // Noncompliant@-1
 
-        StringBuilder builderCfg = new StringBuilder(); // FN (we should use cfg with significant impact on performance)
+        StringBuilder builderCfg = new StringBuilder(); // FN (requires use of cfg with significant impact on performance)
         if (false)
         {
             builderCfg.ToString();
