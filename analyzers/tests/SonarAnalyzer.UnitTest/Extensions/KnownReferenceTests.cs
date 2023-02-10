@@ -22,6 +22,7 @@ using Moq;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using static SonarAnalyzer.Helpers.KnownReference;
+using static SonarAnalyzer.Helpers.KnownReference.Predicates;
 
 namespace SonarAnalyzer.UnitTest;
 
@@ -46,13 +47,13 @@ public class KnownReferenceTests
     public void KnownReference_ThrowsWhenPredicateNull_Params()
     {
         var sut = () => new KnownReference(_ => true, null, _ => true);
-        sut.Should().Throw<ArgumentException>().Which.ParamName.Should().Be("or");
+        sut.Should().Throw<ArgumentNullException>().Which.ParamName.Should().Be("predicate");
     }
 
     [DataTestMethod]
     [DataRow("Test", true)]
-    [DataRow("test", false)]
-    [DataRow("TEST", false)]
+    [DataRow("test", true)]
+    [DataRow("TEST", true)]
     [DataRow("MyTest", false)]
     [DataRow("TestMy", false)]
     [DataRow("MyTestMy", false)]
@@ -69,12 +70,12 @@ public class KnownReferenceTests
 
     [DataTestMethod]
     [DataRow("Test", true)]
-    [DataRow("test", false)]
-    [DataRow("TEST", false)]
+    [DataRow("test", true)]
+    [DataRow("TEST", true)]
     [DataRow("MyTest", true)]
     [DataRow("TestMy", true)]
     [DataRow("MyTestMy", true)]
-    [DataRow("MyTESTMy", false)]
+    [DataRow("MyTESTMy", true)]
     [DataRow("Without", false)]
     public void NameContains_Test(string name, bool expected)
     {
@@ -87,8 +88,8 @@ public class KnownReferenceTests
 
     [DataTestMethod]
     [DataRow("Test", true)]
-    [DataRow("test", false)]
-    [DataRow("TEST", false)]
+    [DataRow("test", true)]
+    [DataRow("TEST", true)]
     [DataRow("MyTest", false)]
     [DataRow("TestMy", true)]
     [DataRow("MyTestMy", false)]
@@ -105,8 +106,8 @@ public class KnownReferenceTests
 
     [DataTestMethod]
     [DataRow("Test", true)]
-    [DataRow("test", false)]
-    [DataRow("TEST", false)]
+    [DataRow("test", true)]
+    [DataRow("TEST", true)]
     [DataRow("MyTest", true)]
     [DataRow("TestMy", false)]
     [DataRow("MyTestMy", false)]
