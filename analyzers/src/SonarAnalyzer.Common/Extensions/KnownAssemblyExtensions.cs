@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.Extensions;
 
-internal static class KnownReferenceExtensions
+internal static class KnownAssemblyExtensions
 {
     internal static Func<AssemblyIdentity, bool> And(this Func<AssemblyIdentity, bool> @this, Func<AssemblyIdentity, bool> predicate)
         => identity => @this(identity) && predicate(identity);

@@ -35,6 +35,6 @@ internal static class CompilationExtensions
         // See https://github.com/dotnet/roslyn/issues/3798
         compilation.ObjectType.ContainingAssembly.Name == "mscorlib";
 
-    public static bool References(this Compilation compilation, KnownReference reference)
-        => reference.IsReferencedBy(compilation);
+    public static bool References(this Compilation compilation, KnownAssembly assembly)
+        => assembly.IsReferencedBy(compilation);
 }

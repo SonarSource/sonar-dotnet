@@ -18,26 +18,26 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using static SonarAnalyzer.Helpers.KnownReference.Predicates;
+using static SonarAnalyzer.Helpers.KnownAssembly.Predicates;
 
 namespace SonarAnalyzer.Helpers
 {
-    public sealed partial class KnownReference
+    public sealed partial class KnownAssembly
     {
         private readonly Func<IEnumerable<AssemblyIdentity>, bool> predicate;
 
-        public static KnownReference XUnit_Assert { get; } = new(
+        public static KnownAssembly XUnit_Assert { get; } = new(
             NameIs("xunit.assert"),
             NameIs("xunit").And(VersionLowerThen("2.0")));
 
-        internal KnownReference(Func<AssemblyIdentity, bool> predicate, params Func<AssemblyIdentity, bool>[] or)
+        internal KnownAssembly(Func<AssemblyIdentity, bool> predicate, params Func<AssemblyIdentity, bool>[] or)
             : this(predicate is null || or.Any(x => x is null)
                   ? throw new ArgumentNullException(nameof(predicate), "All predicates must be non-null.")
                   : identities => identities.Any(identitiy => predicate(identitiy) || or.Any(orPredicate => orPredicate(identitiy))))
         {
         }
 
-        internal KnownReference(Func<IEnumerable<AssemblyIdentity>, bool> predicate) =>
+        internal KnownAssembly(Func<IEnumerable<AssemblyIdentity>, bool> predicate) =>
             this.predicate = predicate ?? throw new ArgumentNullException(nameof(predicate));
 
         public bool IsReferencedBy(Compilation compilation) =>

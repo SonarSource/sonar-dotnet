@@ -22,7 +22,7 @@ using System.ComponentModel;
 
 namespace SonarAnalyzer.Helpers;
 
-public sealed partial class KnownReference
+public sealed partial class KnownAssembly
 {
     private const StringComparison AssemblyNameComparission = StringComparison.OrdinalIgnoreCase;
 
