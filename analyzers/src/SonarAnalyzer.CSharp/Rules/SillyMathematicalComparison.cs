@@ -72,7 +72,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         // 'char' needs to roundtrip {{char -> int -> double}}, can't go {{char -> double}}
         private static bool TryConvertToDouble(object constant, out double typedConstant) =>
-            ConversionHelper.TryConvertWith(constant is char ? Convert.ToInt32(constant) : constant, Convert.ToDouble, out typedConstant);
+            ConversionHelper.TryConvertWith(constant is char ? Convert.ToInt32(constant) : constant, Convert.ToDouble, out typedConstant)
+            && !double.IsInfinity(typedConstant);
 
         private static ValuesRange? TryGetRange(ITypeSymbol typeSymbol) =>
             typeSymbol switch
