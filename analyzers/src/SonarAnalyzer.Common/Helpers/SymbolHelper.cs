@@ -210,6 +210,10 @@ namespace SonarAnalyzer.Helpers
             symbol?.GetAttributes().Where(a => a.AttributeClass.IsAny(attributeTypes))
             ?? Enumerable.Empty<AttributeData>();
 
+        /// <summary>
+        /// Returns attributes for the symbol by also respecting <see cref="AttributeUsageAttribute.Inherited"/>.
+        /// The returned <see cref="AttributeData"/> is consistent with the results from <see cref="MemberInfo.GetCustomAttributes(bool)"/>.
+        /// </summary>
         public static IEnumerable<AttributeData> GetAttributesWithInherited(this ISymbol symbol)
         {
             foreach (var attribute in symbol.GetAttributes())
