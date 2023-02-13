@@ -28,4 +28,6 @@ public sealed class ClassShouldNotBeEmpty : ClassShouldNotBeEmptyBase<SyntaxKind
     protected override bool IsEmptyClass(SyntaxNode node) => node is ClassBlockSyntax { Members.Count : 0 };
 
     protected override bool IsEmptyRecordClass(SyntaxNode node) => false;
+
+    protected override bool IsClassWithDeclaredBaseClass(SyntaxNode node) => node is ClassBlockSyntax { Inherits.Count: > 0 };
 }

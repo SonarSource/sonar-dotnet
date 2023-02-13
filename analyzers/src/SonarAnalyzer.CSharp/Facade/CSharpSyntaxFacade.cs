@@ -48,8 +48,6 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
 
     public override bool IsAnyKind(SyntaxTrivia trivia, params SyntaxKind[] syntaxKinds) => trivia.IsAnyKind(syntaxKinds);
 
-    public override bool HasDeclaredBaseClass(SyntaxNode node) => node is ClassDeclarationSyntax { BaseList: not null };
-
     public override bool IsNullLiteral(SyntaxNode node) => node.IsNullLiteral();
 
     public override IEnumerable<SyntaxNode> ArgumentExpressions(SyntaxNode node) =>

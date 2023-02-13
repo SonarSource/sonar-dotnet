@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
-
 namespace SonarAnalyzer.Rules;
 
 public abstract class ClassShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
@@ -46,13 +44,13 @@ public abstract class ClassShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosticAn
                 }
 
                 bool ShouldIgnoreBecauseOfBaseClass(SyntaxNode node, SemanticModel model) =>
-                    Language.Syntax.HasDeclaredBaseClass(node)
+                    IsClassWithDeclaredBaseClass(node)
                     && model.GetDeclaredSymbol(node) is INamedTypeSymbol classSymbol
                     && classSymbol.DerivesFromAny(SubClassesToIgnore);
-
             },
             Language.SyntaxKind.ClassAndRecordClassDeclaration);
 
     protected abstract bool IsEmptyClass(SyntaxNode node);
     protected abstract bool IsEmptyRecordClass(SyntaxNode node);
+    protected abstract bool IsClassWithDeclaredBaseClass(SyntaxNode node);
 }
