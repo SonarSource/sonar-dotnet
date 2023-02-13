@@ -27,13 +27,18 @@ namespace SonarAnalyzer.UnitTest.Rules;
 public class ClassShouldNotBeEmptyTest
 {
     private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ClassShouldNotBeEmpty>();
-    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.ClassShouldNotBeEmpty>();    // FIXME: Move this up
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.ClassShouldNotBeEmpty>();
 
     [TestMethod]
     public void ClassShouldNotBeEmpty_CS() =>
         builderCS.AddPaths("ClassShouldNotBeEmpty.cs").Verify();
 
 #if NET
+
+    private static IEnumerable<MetadataReference> AdditionalReferences => new[]
+    {
+        AspNetCoreMetadataReference.MicrosoftAspNetCoreRazorPages
+    };
 
     [TestMethod]
     public void ClassShouldNotBeEmpty_CSharp9() =>
@@ -42,6 +47,10 @@ public class ClassShouldNotBeEmptyTest
     [TestMethod]
     public void ClassShouldNotBeEmpty_CSharp10() =>
         builderCS.AddPaths("ClassShouldNotBeEmpty.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+
+    [TestMethod]
+    public void ClassShouldNotBeEmpty_Inheritance() =>
+        builderCS.AddPaths("ClassShouldNotBeEmpty.Inheritance.cs").AddReferences(AdditionalReferences).Verify();
 
 #endif
 

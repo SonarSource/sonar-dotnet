@@ -37,6 +37,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         internal static MetadataReference MicrosoftAspNetCoreMvcAbstractions { get; } = Create(typeof(Microsoft.AspNetCore.Mvc.IActionResult));
         internal static MetadataReference MicrosoftAspNetCoreMvcCore { get; } = Create(typeof(Microsoft.AspNetCore.Mvc.ControllerBase));
         internal static MetadataReference MicrosoftAspNetCoreMvcViewFeatures { get; } = Create(typeof(Microsoft.AspNetCore.Mvc.Controller));
+        internal static MetadataReference MicrosoftAspNetCoreRazorPages { get; } = Create(typeof(Microsoft.AspNetCore.Mvc.RazorPages.PageModel));
         internal static MetadataReference MicrosoftAspNetCoreWebHost { get; } = Create(typeof(Microsoft.AspNetCore.WebHost));
         internal static MetadataReference MicrosoftExtensionsHostingAbstractions { get; } = Create(typeof(Microsoft.Extensions.Hosting.IHost));
     }

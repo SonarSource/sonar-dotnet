@@ -25,10 +25,9 @@ public sealed class ClassShouldNotBeEmpty : ClassShouldNotBeEmptyBase<SyntaxKind
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-    protected override bool IsEmptyClass(SyntaxNode node) => !node.ChildNodes().Any();
+    protected override bool IsEmptyClass(SyntaxNode node) => node is ClassDeclarationSyntax { Members.Count : 0 };
 
     protected override bool IsEmptyRecordClass(SyntaxNode node) =>
         RecordDeclarationSyntaxWrapper.IsInstance(node)
-        && !((RecordDeclarationSyntaxWrapper)node).ParameterList.Parameters.Any()
-        && node.ChildNodes().All(x => x is ParameterListSyntax);
+        && (RecordDeclarationSyntaxWrapper)node is { Members.Count: 0, ParameterList.Parameters.Count: 0 };
 }
