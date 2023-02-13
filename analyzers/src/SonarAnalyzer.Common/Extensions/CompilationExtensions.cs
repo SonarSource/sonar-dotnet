@@ -25,7 +25,7 @@ internal static class CompilationExtensions
     public static INamedTypeSymbol GetTypeByMetadataName(this Compilation compilation, KnownType knownType) =>
         compilation.GetTypeByMetadataName(knownType.FullName);
 
-    public static IMethodSymbol GetTypeMethod(this Compilation compilation, SpecialType type, string methodName) =>
+    public static IMethodSymbol SpecialTypeMethod(this Compilation compilation, SpecialType type, string methodName) =>
         (IMethodSymbol)compilation.GetSpecialType(type)
             .GetMembers(methodName)
             .SingleOrDefault();
