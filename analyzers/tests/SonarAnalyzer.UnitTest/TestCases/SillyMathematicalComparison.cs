@@ -453,5 +453,44 @@ namespace SonarAnalyzer.UnitTest.TestCases
             _ = 42f != double.MaxValue; // Compliant
             _ = 42f <= double.MaxValue; // Compliant
         }
+
+        public void Edgecases()
+        {
+            const float fPositiveInfinity = float.PositiveInfinity;
+            const float fNegativeInfinity = float.NegativeInfinity;
+            const double dPositiveInfinity = double.PositiveInfinity;
+            const double dNegativeInfinity = double.NegativeInfinity;
+
+            const float fNan = float.NaN;
+            const double dNan = double.NaN;
+
+            float f = 42;
+
+            _ = f <= fPositiveInfinity; // Compliant
+            _ = fNegativeInfinity < f; // Compliant
+
+            _ = fNegativeInfinity != f; // Compliant
+            _ = dNegativeInfinity == f; // Compliant
+
+            _ = f >= dPositiveInfinity; // Compliant
+            _ = dNegativeInfinity > f; // Compliant
+            _ = f != fPositiveInfinity; // Compliant
+            _ = f == dPositiveInfinity; // Compliant
+
+
+            _ = f == fNan; // Compliant
+            _ = f != fNan; // Compliant
+            _ = f <= fNan; // Compliant
+            _ = f >= fNan; // Compliant
+            _ = f > fNan; // Compliant
+            _ = f < fNan; // Compliant
+
+            _ = dNan == f; // Compliant
+            _ = dNan != f; // Compliant
+            _ = dNan <= f; // Compliant
+            _ = dNan >= f; // Compliant
+            _ = dNan > f; // Compliant
+            _ = dNan < f; // Compliant
+        }
     }
 }
