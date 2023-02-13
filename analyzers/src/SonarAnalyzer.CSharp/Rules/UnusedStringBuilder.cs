@@ -69,7 +69,7 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
         };
 
     protected override bool DescendIntoChildren(SyntaxNode node) =>
-        !(node.IsAnyKind(SkipChildren) && node.IsKind(SyntaxKindEx.LocalFunctionStatement) && ((LocalFunctionStatementSyntaxWrapper)node).Modifiers.Any(SyntaxKind.StaticKeyword));
+        !(node.IsAnyKind(SkipChildren) || (node.IsKind(SyntaxKindEx.LocalFunctionStatement) && ((LocalFunctionStatementSyntaxWrapper)node).Modifiers.Any(SyntaxKind.StaticKeyword)));
 
     private static bool IsStringBuilderObjectCreation(ExpressionSyntax expression, SemanticModel semanticModel) =>
         ObjectCreationFactory.TryCreate(expression) is { } creation
