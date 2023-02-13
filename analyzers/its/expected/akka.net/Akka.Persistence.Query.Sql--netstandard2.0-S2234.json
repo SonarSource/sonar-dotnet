@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2234",
+"message":  "Parameters to '.ctor' have the same names but not the same order as the method arguments.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\AllEventsPublisher.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  36,
+"endLine":  115,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S2234",
+"message":  "Parameters to '.ctor' have the same names but not the same order as the method arguments.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\EventsByPersistenceIdPublisher.cs",
+"region":  {
+"startLine":  113,
+"startColumn":  36,
+"endLine":  113,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S2234",
+"message":  "Parameters to '.ctor' have the same names but not the same order as the method arguments.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\EventsByTagPublisher.cs",
+"region":  {
+"startLine":  98,
+"startColumn":  36,
+"endLine":  98,
+"endColumn":  49
+}
+}
+}
+]
+}

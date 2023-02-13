@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S2234",
+"message":  "Parameters to '.ctor' have the same names but not the same order as the method arguments.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"region":  {
+"startLine":  203,
+"startColumn":  36,
+"endLine":  203,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"region":  {
+"startLine":  783,
+"startColumn":  16,
+"endLine":  783,
+"endColumn":  37
+}
+}
+]
+}
+]
+}

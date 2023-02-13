@@ -1,0 +1,76 @@
+{
+"issues":  [
+{
+"id":  "S2234",
+"message":  "Parameters to '.ctor' have the same names but not the same order as the method arguments.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
+"region":  {
+"startLine":  369,
+"startColumn":  41,
+"endLine":  369,
+"endColumn":  61
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"region":  {
+"startLine":  442,
+"startColumn":  16,
+"endLine":  442,
+"endColumn":  36
+}
+}
+]
+},
+{
+"id":  "S2234",
+"message":  "Parameters to '.ctor' have the same names but not the same order as the method arguments.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"region":  {
+"startLine":  272,
+"startColumn":  59,
+"endLine":  272,
+"endColumn":  80
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"region":  {
+"startLine":  342,
+"startColumn":  16,
+"endLine":  342,
+"endColumn":  37
+}
+}
+]
+},
+{
+"id":  "S2234",
+"message":  "Parameters to '.ctor' have the same names but not the same order as the method arguments.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"region":  {
+"startLine":  201,
+"startColumn":  40,
+"endLine":  201,
+"endColumn":  58
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\EmptyLocalActorRef.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  16,
+"endLine":  30,
+"endColumn":  34
+}
+}
+]
+}
+]
+}

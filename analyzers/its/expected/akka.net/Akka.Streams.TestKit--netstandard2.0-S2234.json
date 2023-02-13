@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S2234",
+"message":  "Parameters to 'AssertEquals' have the same names but not the same order as the method arguments.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit\TestSubscriber.cs",
+"region":  {
+"startLine":  263,
+"startColumn":  54,
+"endLine":  263,
+"endColumn":  66
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit\TestSubscriber.cs",
+"region":  {
+"startLine":  521,
+"startColumn":  26,
+"endLine":  521,
+"endColumn":  38
+}
+}
+]
+}
+]
+}

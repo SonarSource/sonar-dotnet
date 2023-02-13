@@ -1,0 +1,100 @@
+{
+"issues":  [
+{
+"id":  "S2234",
+"message":  "Parameters to '.ctor' have the same names but not the same order as the method arguments.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  24,
+"endLine":  82,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"region":  {
+"startLine":  240,
+"startColumn":  16,
+"endLine":  240,
+"endColumn":  37
+}
+}
+]
+},
+{
+"id":  "S2234",
+"message":  "Parameters to '.ctor' have the same names but not the same order as the method arguments.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  657,
+"startColumn":  24,
+"endLine":  657,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1108,
+"startColumn":  16,
+"endLine":  1108,
+"endColumn":  31
+}
+}
+]
+},
+{
+"id":  "S2234",
+"message":  "Parameters to '.ctor' have the same names but not the same order as the method arguments.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  680,
+"startColumn":  24,
+"endLine":  680,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1108,
+"startColumn":  16,
+"endLine":  1108,
+"endColumn":  31
+}
+}
+]
+},
+{
+"id":  "S2234",
+"message":  "Parameters to '.ctor' have the same names but not the same order as the method arguments.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  806,
+"startColumn":  24,
+"endLine":  806,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1108,
+"startColumn":  16,
+"endLine":  1108,
+"endColumn":  31
+}
+}
+]
+}
+]
+}

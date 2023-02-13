@@ -1,0 +1,41 @@
+{
+"issues":  [
+{
+"id":  "S2234",
+"message":  "Parameters to 'Props' have the same names but not the same order as the method arguments.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"region":  {
+"startLine":  1199,
+"startColumn":  48,
+"endLine":  1199,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2234",
+"message":  "Parameters to '.ctor' have the same names but not the same order as the method arguments.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\SqlSnapshotStore.cs",
+"region":  {
+"startLine":  233,
+"startColumn":  24,
+"endLine":  233,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\QueryExecutor.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  16,
+"endLine":  57,
+"endColumn":  29
+}
+}
+]
+}
+]
+}

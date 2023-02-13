@@ -1,0 +1,196 @@
+{
+"issues":  [
+{
+"id":  "S2234",
+"message":  "Parameters to '.ctor' have the same names but not the same order as the method arguments.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.cs",
+"region":  {
+"startLine":  306,
+"startColumn":  54,
+"endLine":  306,
+"endColumn":  64
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"region":  {
+"startLine":  315,
+"startColumn":  16,
+"endLine":  315,
+"endColumn":  26
+}
+}
+]
+},
+{
+"id":  "S2234",
+"message":  "Parameters to '.ctor' have the same names but not the same order as the method arguments.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.cs",
+"region":  {
+"startLine":  333,
+"startColumn":  37,
+"endLine":  333,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"region":  {
+"startLine":  315,
+"startColumn":  16,
+"endLine":  315,
+"endColumn":  26
+}
+}
+]
+},
+{
+"id":  "S2234",
+"message":  "Parameters to '.ctor' have the same names but not the same order as the method arguments.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.cs",
+"region":  {
+"startLine":  377,
+"startColumn":  54,
+"endLine":  377,
+"endColumn":  64
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"region":  {
+"startLine":  315,
+"startColumn":  16,
+"endLine":  315,
+"endColumn":  26
+}
+}
+]
+},
+{
+"id":  "S2234",
+"message":  "Parameters to '.ctor' have the same names but not the same order as the method arguments.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.cs",
+"region":  {
+"startLine":  403,
+"startColumn":  77,
+"endLine":  403,
+"endColumn":  87
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"region":  {
+"startLine":  315,
+"startColumn":  16,
+"endLine":  315,
+"endColumn":  26
+}
+}
+]
+},
+{
+"id":  "S2234",
+"message":  "Parameters to '.ctor' have the same names but not the same order as the method arguments.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"region":  {
+"startLine":  354,
+"startColumn":  59,
+"endLine":  354,
+"endColumn":  69
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"region":  {
+"startLine":  315,
+"startColumn":  16,
+"endLine":  315,
+"endColumn":  26
+}
+}
+]
+},
+{
+"id":  "S2234",
+"message":  "Parameters to '.ctor' have the same names but not the same order as the method arguments.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"region":  {
+"startLine":  360,
+"startColumn":  24,
+"endLine":  360,
+"endColumn":  34
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"region":  {
+"startLine":  315,
+"startColumn":  16,
+"endLine":  315,
+"endColumn":  26
+}
+}
+]
+},
+{
+"id":  "S2234",
+"message":  "Parameters to '.ctor' have the same names but not the same order as the method arguments.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"region":  {
+"startLine":  366,
+"startColumn":  54,
+"endLine":  366,
+"endColumn":  64
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"region":  {
+"startLine":  315,
+"startColumn":  16,
+"endLine":  315,
+"endColumn":  26
+}
+}
+]
+},
+{
+"id":  "S2234",
+"message":  "Parameters to '.ctor' have the same names but not the same order as the method arguments.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"region":  {
+"startLine":  372,
+"startColumn":  24,
+"endLine":  372,
+"endColumn":  34
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"region":  {
+"startLine":  315,
+"startColumn":  16,
+"endLine":  315,
+"endColumn":  26
+}
+}
+]
+}
+]
+}

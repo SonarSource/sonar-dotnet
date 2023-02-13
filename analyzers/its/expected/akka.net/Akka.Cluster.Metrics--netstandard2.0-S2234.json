@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S2234",
+"message":  "Parameters to '.ctor' have the same names but not the same order as the method arguments.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\Metric.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  51,
+"endLine":  60,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\EWMA.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  24,
+"endLine":  47,
+"endColumn":  28
+}
+}
+]
+}
+]
+}

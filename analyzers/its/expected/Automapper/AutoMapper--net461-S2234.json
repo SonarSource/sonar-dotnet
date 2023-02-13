@@ -1,0 +1,52 @@
+{
+"issues":  [
+{
+"id":  "S2234",
+"message":  "Parameters to '.ctor' have the same names but not the same order as the method arguments.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  257,
+"startColumn":  34,
+"endLine":  257,
+"endColumn":  74
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  153,
+"startColumn":  16,
+"endLine":  153,
+"endColumn":  33
+}
+}
+]
+},
+{
+"id":  "S2234",
+"message":  "Parameters to '.ctor' have the same names but not the same order as the method arguments.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  37,
+"endLine":  20,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Internal\TypePair.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  16,
+"endLine":  29,
+"endColumn":  24
+}
+}
+]
+}
+]
+}

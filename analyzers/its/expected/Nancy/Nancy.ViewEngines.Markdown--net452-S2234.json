@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2234",
+"message":  "Parameters to 'Substring' have the same names but not the same order as the method arguments.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Markdown\MarkdownViewengineRender.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  41,
+"endLine":  37,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2234",
+"message":  "Parameters to 'Substring' have the same names but not the same order as the method arguments.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Markdown\MarkdownViewengineRender.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  45,
+"endLine":  41,
+"endColumn":  54
+}
+}
+}
+]
+}

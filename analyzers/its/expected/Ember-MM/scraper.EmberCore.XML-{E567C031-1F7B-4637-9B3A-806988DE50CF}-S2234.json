@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S2234",
+"message":  "Parameters to 'GetStringElement' have the same names but not the same order as the method arguments.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  255,
+"startColumn":  32,
+"endLine":  255,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2234",
+"message":  "Parameters to 'AddStringElement' have the same names but not the same order as the method arguments.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  297,
+"startColumn":  21,
+"endLine":  297,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2234",
+"message":  "Parameters to 'GetStringElement' have the same names but not the same order as the method arguments.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\PersonInfo.vb",
+"region":  {
+"startLine":  241,
+"startColumn":  32,
+"endLine":  241,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2234",
+"message":  "Parameters to 'AddStringElement' have the same names but not the same order as the method arguments.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\PersonInfo.vb",
+"region":  {
+"startLine":  278,
+"startColumn":  21,
+"endLine":  278,
+"endColumn":  37
+}
+}
+}
+]
+}
