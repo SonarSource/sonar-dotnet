@@ -21,7 +21,7 @@
 namespace SonarAnalyzer.Rules;
 
 public abstract class ParametersCorrectOrderBase<TSyntaxKind, TArgumentSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
-    where TSyntaxKind: struct
+    where TSyntaxKind : struct
     where TArgumentSyntax : SyntaxNode
 {
     protected const string DiagnosticId = "S2234";
@@ -76,8 +76,10 @@ public abstract class ParametersCorrectOrderBase<TSyntaxKind, TArgumentSyntax> :
         }
     }
 
-    private bool HasIncorrectlyOrderedParameters(List<ArgumentIdentifier> argumentIdentifiers,
-        Dictionary<TArgumentSyntax, IParameterSymbol> argumentParameterMappings, List<string> parameterNames,
+    private bool HasIncorrectlyOrderedParameters(
+        List<ArgumentIdentifier> argumentIdentifiers,
+        Dictionary<TArgumentSyntax, IParameterSymbol> argumentParameterMappings,
+        List<string> parameterNames,
         List<string> identifierNames, SemanticModel model)
     {
         var mappedParams = new HashSet<string>();
@@ -102,36 +104,27 @@ public abstract class ParametersCorrectOrderBase<TSyntaxKind, TArgumentSyntax> :
                 continue;
             }
 
-            if (mappedParams.Contains(parameterName) || mappedArgs.Contains(identifierName) || IdentifierWithSameNameAndTypeExistsLater(argumentIdentifier, i))
+            if (mappedParams.Contains(parameterName)
+                || mappedArgs.Contains(identifierName)
+                || IdentifierWithSameNameAndTypeExistsLater(argumentIdentifier, i)
+                || (!IdentifierWithSameNameAndTypeExists(parameter) && !ParameterWithSameNameAndTypeExists(argumentIdentifier))
+                || (argumentIdentifier is NamedArgumentIdentifier named && (!identifierNames.Contains(named.DeclaredName) || named.DeclaredName == named.IdentifierName)))
             {
                 continue;
             }
-
-            if (!IdentifierWithSameNameAndTypeExists(parameter) && !ParameterWithSameNameAndTypeExists(argumentIdentifier))
-            {
-                continue;
-            }
-
-            if (argumentIdentifier is NamedArgumentIdentifier named &&
-                (!identifierNames.Contains(named.DeclaredName) || named.DeclaredName == named.IdentifierName))
-            {
-                continue;
-            }
-
             return true;
         }
-
         return false;
 
         bool IdentifierWithSameNameAndTypeExists(IParameterSymbol parameter) =>
-            argumentIdentifiers.Any(ia =>
-                ia.IdentifierName == parameter.Name &&
-                GetArgumentTypeSymbolInfo(ia.ArgumentSyntax, model).ConvertedType.DerivesOrImplements(parameter.Type));
+            argumentIdentifiers.Any(x =>
+                x.IdentifierName == parameter.Name &&
+                GetArgumentTypeSymbolInfo(x.ArgumentSyntax, model).ConvertedType.DerivesOrImplements(parameter.Type));
 
         bool IdentifierWithSameNameAndTypeExistsLater(ArgumentIdentifier argumentIdentifier, int index) =>
             argumentIdentifiers.Skip(index + 1)
-                               .Any(ia => string.Equals(ia.IdentifierName, argumentIdentifier.IdentifierName, StringComparison.OrdinalIgnoreCase)
-                                                          && ArgumentTypesAreSame(ia.ArgumentSyntax, argumentIdentifier.ArgumentSyntax));
+                               .Any(x => string.Equals(x.IdentifierName, argumentIdentifier.IdentifierName, StringComparison.OrdinalIgnoreCase)
+                                    && ArgumentTypesAreSame(x.ArgumentSyntax, argumentIdentifier.ArgumentSyntax));
 
         bool ArgumentTypesAreSame(TArgumentSyntax first, TArgumentSyntax second) =>
             GetArgumentTypeSymbolInfo(first, model).ConvertedType.DerivesOrImplements(GetArgumentTypeSymbolInfo(second, model).ConvertedType);
