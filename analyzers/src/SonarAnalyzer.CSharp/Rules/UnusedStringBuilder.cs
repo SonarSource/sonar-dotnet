@@ -29,6 +29,7 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
         SyntaxKind.StructDeclaration,
         SyntaxKind.EnumDeclaration,
         SyntaxKind.InterfaceDeclaration,
+        SyntaxKind.UsingDirective,
         SyntaxKindEx.RecordClassDeclaration,
         SyntaxKindEx.RecordStructDeclaration
     };
@@ -62,7 +63,7 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
             ElementAccessExpressionSyntax elementAccess => IsSameReference(model, symbol, elementAccess.Expression),
             ArgumentSyntax argument => IsSameReference(model, symbol, argument.Expression),
             MemberAccessExpressionSyntax memberAccess => IsAccessExpression(memberAccess.Name.GetName()) && IsSameReference(model, symbol, memberAccess.Expression),
-            EqualsValueClauseSyntax { Value: IdentifierNameSyntax identifier } => IsSameReference(model, symbol, identifier),
+            VariableDeclaratorSyntax { Initializer.Value: IdentifierNameSyntax identifier } => IsSameReference(model, symbol, identifier),
             AssignmentExpressionSyntax { Right: IdentifierNameSyntax identifier } => IsSameReference(model, symbol, identifier),
             _ => false,
         };

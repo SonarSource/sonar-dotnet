@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using StyleCop.Analyzers.Lightup;
-
 namespace SonarAnalyzer.Rules.VisualBasic;
 
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
@@ -50,12 +48,12 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
         {
             InvocationExpressionSyntax invocation =>
                 (IsAccessInvocation(invocation.GetName()) && IsSameReference(model, symbol, invocation.Expression))
-                || (IsSameReference(model, symbol, invocation.Expression) && model.GetOperation(invocation).Kind is OperationKindEx.PropertyReference),
+                || (IsSameReference(model, symbol, invocation.Expression) && model.GetSymbolInfo(invocation).Symbol is IPropertySymbol { IsIndexer: true }),
             ReturnStatementSyntax returnStatement => IsSameReference(model, symbol, returnStatement.Expression),
             InterpolationSyntax interpolation => IsSameReference(model, symbol, interpolation.Expression),
             ArgumentSyntax argument => IsSameReference(model, symbol, argument.GetExpression()),
             MemberAccessExpressionSyntax memberAccess => IsAccessExpression(memberAccess.Name.GetName()) && IsSameReference(model, symbol, memberAccess.Expression),
-            EqualsValueSyntax { Value: IdentifierNameSyntax identifier } => IsSameReference(model, symbol, identifier),
+            VariableDeclaratorSyntax { Initializer.Value: IdentifierNameSyntax identifier } => IsSameReference(model, symbol, identifier),
             AssignmentStatementSyntax { Right: IdentifierNameSyntax identifier } => IsSameReference(model, symbol, identifier),
             _ => false,
         };
