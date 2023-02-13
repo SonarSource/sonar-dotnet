@@ -46,10 +46,6 @@ namespace SonarAnalyzer.Extensions
             }
         }
 
-        /// <summary>
-        /// Returns the <see cref="AttributeUsageAttribute.Inherited"/> setting for the attribute associated with <paramref name="attribute"/>.
-        /// The returned value is in line with the runtime behavior of <see cref="System.Reflection.MemberInfo.GetCustomAttributes(bool)"/>.
-        /// </summary>
         public static bool HasAttributeUsageInherited(this AttributeData attribute) =>
             attribute.AttributeClass.GetAttributes()
                 .Where(x => x.AttributeClass.Is(KnownType.System_AttributeUsageAttribute))
