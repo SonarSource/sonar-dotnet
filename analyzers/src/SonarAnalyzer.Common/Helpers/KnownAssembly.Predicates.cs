@@ -18,15 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.ComponentModel;
-
 namespace SonarAnalyzer.Helpers;
 
 public sealed partial class KnownAssembly
 {
     private const StringComparison AssemblyNameComparission = StringComparison.OrdinalIgnoreCase;
 
-    [EditorBrowsable(EditorBrowsableState.Never)]
     internal static class Predicates
     {
         internal static Func<AssemblyIdentity, bool> NameIs(string name) =>
