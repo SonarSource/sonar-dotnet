@@ -32,4 +32,6 @@ public sealed class ClassShouldNotBeEmpty : ClassShouldNotBeEmptyBase<SyntaxKind
         && (RecordDeclarationSyntaxWrapper)node is { Members.Count: 0, ParameterList.Parameters.Count: 0 };
 
     protected override bool IsClassWithDeclaredBaseClass(SyntaxNode node) => node is ClassDeclarationSyntax { BaseList: not null };
+
+    protected override string DeclaredTypeNameOf(SyntaxNode node) => ((TypeDeclarationSyntax)node).Keyword.ValueText;
 }

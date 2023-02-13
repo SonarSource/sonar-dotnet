@@ -1,6 +1,6 @@
 ﻿using System;
 
-class Empty { }                              // Noncompliant {{Remove this empty class, write its code or make it an "interface".}}
+class Empty { }                              // Noncompliant {{Remove this empty class, or add members to it.}}
 //    ^^^^^
 
 public class PublicEmpty { }                 // Noncompliant
@@ -44,7 +44,7 @@ partial class PartialEmpty
     public int SomeProperty => 0;
 }
 
-interface IMarker { }                        // Compliant - using marker interfaces vs. attributes is a topic of debate, but they are commonly used
+interface IMarker { }                        // Compliant - this rule only deals with classes
 
 struct EmptyStruct { }                       // Compliant - this rule only deals with classes
 

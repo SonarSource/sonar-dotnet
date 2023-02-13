@@ -1,6 +1,6 @@
 ﻿using System;
 
-record class EmptyRecordClass1();        // Noncompliant
+record class EmptyRecordClass1();        // Noncompliant {{Remove this empty record, or add members to it.}}
 //           ^^^^^^^^^^^^^^^^^
 record class EmptyRecordClass2() { };    // Noncompliant
 
