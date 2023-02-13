@@ -242,32 +242,21 @@ public class KnownAssemblyTest
     [TestMethod]
     public void XUnitAssert_2_4()
     {
-        var compilation = SolutionBuilder.Create()
-            .AddProject(AnalyzerLanguage.CSharp)
-            .AddReferences(NuGetMetadataReference.XunitFramework("2.4.2"))
-            .AddSnippet("// Empty file")
-            .GetCompilation();
+        var compilation = TestHelper.CompileCS("// Empty file", NuGetMetadataReference.XunitFramework("2.4.2").ToArray()).Model.Compilation;
         compilation.References(XUnit_Assert).Should().BeTrue();
     }
 
     [TestMethod]
     public void XUnitAssert_1_9()
     {
-        var compilation = SolutionBuilder.Create()
-            .AddProject(AnalyzerLanguage.CSharp)
-            .AddReferences(NuGetMetadataReference.XunitFrameworkV1)
-            .AddSnippet("// Empty file")
-            .GetCompilation();
+        var compilation = TestHelper.CompileCS("// Empty file", NuGetMetadataReference.XunitFrameworkV1.ToArray()).Model.Compilation;
         compilation.References(XUnit_Assert).Should().BeTrue();
     }
 
     [TestMethod]
     public void XUnitAssert_NoReference()
     {
-        var compilation = SolutionBuilder.Create()
-            .AddProject(AnalyzerLanguage.CSharp)
-            .AddSnippet("// Empty file")
-            .GetCompilation();
+        var compilation = TestHelper.CompileCS("// Empty file").Model.Compilation;
         compilation.References(XUnit_Assert).Should().BeFalse();
     }
 
