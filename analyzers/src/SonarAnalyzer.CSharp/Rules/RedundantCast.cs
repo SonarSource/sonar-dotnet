@@ -76,13 +76,13 @@ public sealed class RedundantCast : SonarDiagnosticAnalyzer
             return;
         }
 
-        if (expression.Parent.Parent is AnonymousObjectMemberDeclaratorSyntax anonDeclarator)
+        if (expression.Parent.Parent is AnonymousObjectMemberDeclaratorSyntax { Parent: AnonymousObjectCreationExpressionSyntax anon })
         {
-            if (anonDeclarator.Parent.Parent.Parent is ImplicitArrayCreationExpressionSyntax)
+            if (anon.Parent.Parent is ImplicitArrayCreationExpressionSyntax)
             {
                 return;
             }
-            if (SwitchExpressionArmSyntaxWrapper.IsInstance(anonDeclarator.Parent.Parent))
+            if (SwitchExpressionArmSyntaxWrapper.IsInstance(anon.Parent))
             {
                 return;
             }
