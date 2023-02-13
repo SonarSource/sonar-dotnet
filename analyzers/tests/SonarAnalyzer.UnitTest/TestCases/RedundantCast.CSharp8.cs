@@ -15,16 +15,35 @@ namespace Tests.Diagnostics
     }
 
     // https://github.com/SonarSource/sonar-dotnet/issues/6438
-    public class ArrayOfAnonTypes
+    public class AnonTypes
     {
-        public void UsefulCast()
+        public void Simple()
         {
-            var anonArray = new[] { new { X = (string?)"foo" }, new { X = (string?)null } }; // Compliant
-            var anon = true switch
+            var anon = new { X = (string?)"foo" };  // Noncompliant
+        }
+
+        public void Array()
+        {
+            var anonArray = new[] { new { X = (string?)"foo" }, new { X = (string?)null } };    // Compliant
+            var notSoAnonArray = new[] { new HoldsObject(new { X = (string?)"foo" }) };         // Noncompliant
+        }
+
+        public void SwitchExpression()
+        {
+            var anonSwitch = true switch
             {
                 true => new { X = (string?)"foo" }, // Compliant
                 false => new { X = (string?)null }  // Compliant
             };
+        }
+    }
+
+    internal class HoldsObject
+    {
+        object O { get; }
+        public HoldsObject(object o)
+        {
+            O = o;
         }
     }
 }
