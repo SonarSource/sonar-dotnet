@@ -2,16 +2,17 @@
 Imports System.Diagnostics
 
 Public Class TestOnPropertiesAndFields
-    Const ConstantWithoutInvalidMembers As String = "1"
+    Const ConstantWithoutInvalidMembers As String = "Something"
     Const ConstantWithInvalidMember As String = "{Nonexistent}"
     Const ConstantFragment1 As String = "{Non"
-    Const ConstantFragment2 As String = "Existing}"
+    Const ConstantFragment2 As String = "Existent}"
 
-    Property SomeProperty As Integer
+    Public Property SomeProperty As Integer
     Public SomeField As Integer
 
-    <DebuggerDisplayAttribute("1")> Property WithSuffix As Integer
-    <System.Diagnostics.DebuggerDisplay("1")> Property WithNamespace As Integer
+    <DebuggerDisplayAttribute("Hardcoded text")> Property WithSuffix As Integer
+    <System.Diagnostics.DebuggerDisplay("Hardcoded text")> Property WithNamespace As Integer
+    <Global.System.Diagnostics.DebuggerDisplay("Hardcoded text")> Property WithGlobal As Integer
 
     <DebuggerDisplay(Nothing)> Property WithEmptyArgList As Integer
     <DebuggerDisplay("")> Property WithEmptyFormat As Integer
@@ -24,14 +25,18 @@ Public Class TestOnPropertiesAndFields
     <DebuggerDisplay("{1 + 1}")> Property WithNoMemberReferenced1 As Integer
     <DebuggerDisplay("{""1"" + ""1""}")> Property WithNoMemberReferenced2 As Integer
 
-    <DebuggerDisplay("{Nonexistent}")> Property WithNonexistentMember1 As Integer                          ' Noncompliant {{'Nonexistent' doesn't exist in this context.}}
+    <DebuggerDisplay("{Nonexistent}")> Property WithNonexistentMember1 As Integer                             ' Noncompliant {{'Nonexistent' doesn't exist in this context.}}
     '                ^^^^^^^^^^^^^^^
-    <DebuggerDisplay("1 + {Nonexistent}")> Property WithNonexistentMember2 As Integer                      ' Noncompliant {{'Nonexistent' doesn't exist in this context.}}
+    <DebuggerDisplay("1 + {Nonexistent}")> Property WithNonexistentMember2 As Integer                         ' Noncompliant {{'Nonexistent' doesn't exist in this context.}}
     '                ^^^^^^^^^^^^^^^^^^^
-    <DebuggerDisplay("{Nonexistent1} bla bla {Nonexistent2}")> Property WithMultipleNonexistent As Integer ' Noncompliant {{'Nonexistent1' doesn't exist in this context.}}
+    <DebuggerDisplay("{Nonexistent1} bla bla {Nonexistent2}")> Property WithMultipleNonexistent As Integer    ' Noncompliant {{'Nonexistent1' doesn't exist in this context.}}
     '                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    <DebuggerDisplay("{Nonexistent}")> Property WithNonexistentMemberVerbatim As Integer                   ' Noncompliant {{'Nonexistent' doesn't exist in this context.}}
+    <DebuggerDisplay("{Nonexistent}")> Property WithNonexistentMemberVerbatim As Integer                      ' Noncompliant {{'Nonexistent' doesn't exist in this context.}}
     '                ^^^^^^^^^^^^^^^
+    <System.Diagnostics.DebuggerDisplay("{Nonexistent}")> Property WithNamespaceAndNonexistent As Integer     ' Noncompliant {{'Nonexistent' doesn't exist in this context.}}
+    '                                   ^^^^^^^^^^^^^^^
+    <Global.System.Diagnostics.DebuggerDisplay("{Nonexistent}")> Property WithGlobalAndNonexistent As Integer ' Noncompliant {{'Nonexistent' doesn't exist in this context.}}
+    '                                          ^^^^^^^^^^^^^^^
 
     <DebuggerDisplay(ConstantWithInvalidMember)> Property WithFormatAsConstant2 As Integer                            ' FN: constants are not checked
     <DebuggerDisplay("{Non" & "Existing}")> Property WithFormatAsConcatenationOfLiterals As Integer                   ' FN: only simple literal supported
@@ -42,6 +47,7 @@ Public Class TestOnPropertiesAndFields
     <DebuggerDisplay("{1 + NonexistentProperty}")> Property ContainingInvalidMembers As Integer                       ' FN: expressions not supported
 End Class
 
+<DebuggerDisplay("{Me.ToString()}")>
 <DebuggerDisplay("{this.ToString()}")>
 <DebuggerDisplay("{Nonexistent}")> ' Noncompliant
 Public Enum TopLevelEnum
@@ -54,7 +60,7 @@ End Enum
 <DebuggerDisplay("{SomeField}")>
 <DebuggerDisplay("{Nonexistent}")>      ' Noncompliant
 Public Class TestOnNestedTypes
-    Property SomeProperty As Integer
+    Public Property SomeProperty As Integer
     Public SomeField As Integer
 
     <DebuggerDisplay("{ExistingProperty}")>
@@ -86,12 +92,12 @@ Class TestOnDelegates
     Property ExistingProperty As Integer
 
     <DebuggerDisplay("{ExistingProperty}")> ' Noncompliant
-    <DebuggerDisplay("{1}")>
+    <DebuggerDisplay("{42}")>
     Delegate Sub Delegate1()
 End Class
 
 Class TestOnIndexers
-    Property ExistingProperty As Integer
+    Public Property ExistingProperty As Integer
     Public ExistingField As Integer
 
     <DebuggerDisplay("{ExistingProperty}")>
@@ -110,7 +116,7 @@ End Class
 Class TestMultipleAttributes
     '                                                                               ^^^^^^^^^^^^^^^@-1
 
-    Property SomeProperty As Integer
+    Public Property SomeProperty As Integer
     Public SomeField As Integer = 1
 
     <DebuggerDisplay("{SomeProperty}"), DebuggerDisplay("{SomeField}"), DebuggerDisplay("{Nonexistent}")> Property OtherProperty1 As Integer ' Noncompliant

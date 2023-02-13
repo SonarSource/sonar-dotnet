@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-class SupportRawStringLiterals
+class RawStringLiterals
 {
     int SomeProperty => 1;
     int SomeField = 2;

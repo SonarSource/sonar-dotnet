@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
 
-class TestOnPropertiesAndFields
+class PropertiesAndFields
 {
-    const string ConstantWithoutInvalidMembers = "1";
+    const string ConstantWithoutInvalidMembers = "Something";
     const string ConstantWithInvalidMember = "{Nonexistent}";
     const string ConstantFragment1 = "{Non";
     const string ConstantFragment2 = "existent}";
@@ -11,9 +11,9 @@ class TestOnPropertiesAndFields
     int SomeProperty => 1;
     int SomeField = 2;
 
-    [DebuggerDisplayAttribute("1")] int WithSuffix => 1;
-    [System.Diagnostics.DebuggerDisplay("1")] int WithNamespace => 1;
-    [DebuggerDisplay(value: "1")] int WithExplicitParameterName => 1;
+    [DebuggerDisplayAttribute("Hardcoded text")] int WithSuffix => 1;
+    [System.Diagnostics.DebuggerDisplay("Hardcoded text")] int WithNamespace => 1;
+    [DebuggerDisplay(value: "Hardcoded text")] int WithExplicitParameterName => 1;
 
     [DebuggerDisplay(null)] int WithEmptyArgList => 1;
     [DebuggerDisplay("")] int WithEmptyFormat => 1;
@@ -42,9 +42,9 @@ class TestOnPropertiesAndFields
         Property}")] int WithNonexistentMemberVerbatimMultiLine2 => 1;                           // FN@-1: the new line char make the expression within braces not a valid identifier
 
     [DebuggerDisplay(ConstantWithInvalidMember)] int WithFormatAsConstant2 => 1;                            // FN: constants are not checked
-    [DebuggerDisplay("{Non" + "Existing}")] int WithFormatAsConcatenationOfLiterals => 1;                   // FN: only simple literal supported
+    [DebuggerDisplay("{Non" + "Existent}")] int WithFormatAsConcatenationOfLiterals => 1;                   // FN: only simple literal supported
     [DebuggerDisplay("{Non"
-        + "Existing}")] int WithFormatAsConcatenationOfLiteralsMultiLine => 1;                              // FN: only simple literal supported
+        + "Existent}")] int WithFormatAsConcatenationOfLiteralsMultiLine => 1;                              // FN: only simple literal supported
     [DebuggerDisplay(ConstantFragment1 + ConstantFragment2)] int WithFormatAsConcatenationOfConstants => 1; // FN: only simple literal supported
 
     [DebuggerDisplay("{this.NonexistentProperty}")] int PropertyWithExplicitThis => 1;                      // FN: "this." not supported (valid when debugging a C# project)
@@ -53,13 +53,14 @@ class TestOnPropertiesAndFields
 }
 
 [DebuggerDisplay("{this.ToString()}")]
+[DebuggerDisplay("{Me.ToString()}")]
 [DebuggerDisplay("{Nonexistent}")]      // Noncompliant
 public enum TopLevelEnum { One, Two, Three }
 
 [DebuggerDisplay("{SomeProperty}")]
 [DebuggerDisplay("{SomeField}")]
 [DebuggerDisplay("{Nonexistent}")]      // Noncompliant
-public class TestOnNestedTypes
+public class NestedTypes
 {
     int SomeProperty => 1;
     int SomeField = 1;
@@ -84,19 +85,22 @@ public class TestOnNestedTypes
         int ExistingField => 1;
     }
 
+    [DebuggerDisplay("{42}")]
+    [DebuggerDisplay("{SomeProperty}")] // Noncompliant
+    [DebuggerDisplay("{SomeField}")]    // Noncompliant
     public enum NestedEnum { One, Two, Three }
 }
 
-public class TestOnDelegates
+public class Delegates
 {
     int ExistingProperty => 1;
 
     [DebuggerDisplay("{ExistingProperty}")] // Noncompliant
-    [DebuggerDisplay("{1}")]
+    [DebuggerDisplay("{42}")]
     public delegate void Delegate1();
 }
 
-public class TestOnIndexers
+public class Indexers
 {
     int ExistingProperty => 1;
     int ExistingField => 1;
@@ -109,7 +113,7 @@ public class TestOnIndexers
 
 [DebuggerDisplay("{SomeProperty}"), DebuggerDisplay("{SomeField}"), DebuggerDisplay("{Nonexistent}")] // Noncompliant
 //                                                                                  ^^^^^^^^^^^^^^^
-public class TestMultipleAttributes
+public class MultipleAttributes
 {
     int SomeProperty => 1;
     int SomeField = 1;
@@ -129,7 +133,7 @@ public class TestMultipleAttributes
     int OtherProperty3 => 1;
 }
 
-public class SupportCaseSensitivity
+public class CaseSensitivity
 {
     int SOMEPROPERTY => 1;
     int SomeProperty => 1;
@@ -141,7 +145,7 @@ public class SupportCaseSensitivity
     int OtherProperty => 1;
 }
 
-public class SupportNonAlphanumericChars
+public class NonAlphanumericChars
 {
     int Aa1_뿓 => 1;
 
@@ -150,7 +154,7 @@ public class SupportNonAlphanumericChars
     int SomeProperty1 => 1;
 }
 
-public class SupportWhitespaces
+public class Whitespaces
 {
     [DebuggerDisplay("{ SomeProperty}")]
     [DebuggerDisplay("{SomeProperty }")]
@@ -163,7 +167,7 @@ public class SupportWhitespaces
     int SomeProperty => 1;
 }
 
-public class SupportNq
+public class NoQuotesModifier
 {
     [DebuggerDisplay("{SomeProperty,nq}")]
     [DebuggerDisplay("{SomeProperty ,nq}")]
@@ -176,19 +180,28 @@ public class SupportNq
     int SomeProperty => 1;
 }
 
-public class SupportOptionalAttributeParameter
+public class InvalidModifier
+{
+    [DebuggerDisplay("{SomeProperty,asdf}")]
+    [DebuggerDisplay("{SomeProperty, asdf}")]
+    [DebuggerDisplay("{Nonexistent,asdf}")]  // Noncompliant {{'Nonexistent' doesn't exist in this context.}}
+    [DebuggerDisplay("{Nonexistent, asdf}")] // Noncompliant {{'Nonexistent' doesn't exist in this context.}}
+    int SomeProperty => 1;
+}
+
+public class OptionalAttributeParameter
 {
     [DebuggerDisplay("{SomeProperty}", Name = "Any name")]
-    [DebuggerDisplay("{Nonexistent}", Name = "Any name")]                                                     // Noncompliant {{'Nonexistent' doesn't exist in this context.}}
+    [DebuggerDisplay("{Nonexistent}", Name = "Any name")]                                              // Noncompliant {{'Nonexistent' doesn't exist in this context.}}
     //               ^^^^^^^^^^^^^^^
-    [DebuggerDisplay("{Nonexistent}", Name = "Any name", Type = nameof(SupportOptionalAttributeParameter))]   // Noncompliant
+    [DebuggerDisplay("{Nonexistent}", Name = "Any name", Type = nameof(OptionalAttributeParameter))]   // Noncompliant
     //               ^^^^^^^^^^^^^^^
-    [DebuggerDisplay("{Nonexistent}", Name = "Any name", Target = typeof(SupportOptionalAttributeParameter))] // Noncompliant
+    [DebuggerDisplay("{Nonexistent}", Name = "Any name", Target = typeof(OptionalAttributeParameter))] // Noncompliant
     //               ^^^^^^^^^^^^^^^
     int SomeProperty => 1;
 }
 
-public class SupportInheritance
+public class Inheritance
 {
     public class BaseClass
     {
@@ -202,7 +215,7 @@ public class SupportInheritance
     }
 }
 
-public class SupportAccessModifiers
+public class AccessModifiers
 {
     public class BaseClass
     {
@@ -228,10 +241,11 @@ public class SupportAccessModifiers
     }
 }
 
-public class SupportAttributeTargets
+public class AttributeTargets
 {
-    [assembly: DebuggerDisplay("{Nonexistent}")] // Noncompliant, attribute at assembly level, referencing a non-existing member
-    [field: DebuggerDisplay("{Nonexistent}")]    // Noncompliant, attribute ignored, still referencing a non-existing member
+    [global:DebuggerDisplay("{Nonexistent}")]    // Noncompliant, attribute at global level, referencing a non-existent member
+    [assembly: DebuggerDisplay("{Nonexistent}")] // Noncompliant, attribute at assembly level, referencing a non-existent member
+    [field: DebuggerDisplay("{Nonexistent}")]    // Noncompliant, attribute ignored, still referencing a non-existent member
     [property: DebuggerDisplay("{Nonexistent}")] // Noncompliant, attribute taken into account
     int SomeProperty => 1;
 }

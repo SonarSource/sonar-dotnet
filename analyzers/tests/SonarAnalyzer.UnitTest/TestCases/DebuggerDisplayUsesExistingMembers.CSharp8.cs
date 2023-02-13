@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-public class SupportAccessModifiers
+public class AccessModifiers
 {
     public class BaseClass
     {

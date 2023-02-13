@@ -25,10 +25,11 @@ public sealed class DebuggerDisplayUsesExistingMembers : DebuggerDisplayUsesExis
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-    protected override SyntaxNode GetAttributeFormatString(AttributeSyntax attribute) =>
+    protected override SyntaxNode AttributeFormatString(AttributeSyntax attribute) =>
         attribute.ArgumentList.Arguments.FirstOrDefault() is SimpleArgumentSyntax { Expression: LiteralExpressionSyntax { RawKind: (int)SyntaxKind.StringLiteralExpression } formatString }
             ? formatString
             : null;
 
-    protected override bool IsValidMemberName(string memberName) => SyntaxFacts.IsValidIdentifier(memberName);
+    protected override bool IsValidMemberName(string memberName) =>
+        SyntaxFacts.IsValidIdentifier(memberName);
 }

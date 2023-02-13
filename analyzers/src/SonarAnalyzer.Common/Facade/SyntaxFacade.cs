@@ -32,7 +32,7 @@ public abstract class SyntaxFacade<TSyntaxKind>
     public abstract bool IsAnyKind(SyntaxNode node, ISet<TSyntaxKind> syntaxKinds);
     public abstract bool IsAnyKind(SyntaxNode node, params TSyntaxKind[] syntaxKinds);
     public abstract bool IsAnyKind(SyntaxTrivia trivia, params TSyntaxKind[] syntaxKinds);
-    public abstract bool IsKnownAttribute(SyntaxNode attribute, KnownType knownAttribute, SemanticModel semanticModel);
+    public abstract bool IsKnownAttributeType(SyntaxNode attribute, KnownType knownType, SemanticModel model);
     public abstract IEnumerable<SyntaxNode> ArgumentExpressions(SyntaxNode node);
     public abstract ImmutableArray<SyntaxNode> AssignmentTargets(SyntaxNode assignment);
     public abstract SyntaxNode AssignmentLeft(SyntaxNode assignment);

@@ -19,6 +19,7 @@
  */
 
 using System.Text.RegularExpressions;
+using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Rules;
 
@@ -28,10 +29,9 @@ public abstract class DebuggerDisplayUsesExistingMembersBase<TAttributeSyntax, T
 {
     private const string DiagnosticId = "S4545";
 
-    private readonly Regex noQuotesModifierExpressionRegex = new(@",\s*nq\s*$", RegexOptions.None, RegexConstants.DefaultTimeout);
-    private readonly Regex evaluatedExpressionRegex = new(@"\{(?<EvaluatedExpression>[^\}]+)\}", RegexOptions.Multiline, RegexConstants.DefaultTimeout);
+    private readonly Regex evaluatedExpressionRegex = new(@"\{(?<EvaluatedExpression>[^}]+)\}", RegexOptions.Multiline, RegexConstants.DefaultTimeout);
 
-    protected abstract SyntaxNode GetAttributeFormatString(TAttributeSyntax attribute);
+    protected abstract SyntaxNode AttributeFormatString(TAttributeSyntax attribute);
     protected abstract bool IsValidMemberName(string memberName);
 
     protected override string MessageFormat => "'{0}' doesn't exist in this context.";
@@ -43,9 +43,10 @@ public abstract class DebuggerDisplayUsesExistingMembersBase<TAttributeSyntax, T
             c =>
             {
                 var attribute = (TAttributeSyntax)c.Node;
-                if (Language.Syntax.IsKnownAttribute(attribute, KnownType.System_Diagnostics_DebuggerDisplayAttribute, c.SemanticModel)
-                    && GetAttributeFormatString(attribute) is { } formatString
-                    && FirstInvalidMemberName(c, formatString.GetFirstToken().ValueText, attribute) is { } firstInvalidMember)
+                if (Language.Syntax.IsKnownAttributeType(attribute, KnownType.System_Diagnostics_DebuggerDisplayAttribute, c.SemanticModel)
+                    && AttributeFormatString(attribute) is { } formatString
+                    && Language.Syntax.StringValue(formatString, c.SemanticModel) is { } formatStringText
+                    && FirstInvalidMemberName(c, formatStringText, attribute) is { } firstInvalidMember)
                 {
                     c.ReportIssue(Diagnostic.Create(Rule, formatString.GetLocation(), firstInvalidMember));
                 }
@@ -56,14 +57,30 @@ public abstract class DebuggerDisplayUsesExistingMembersBase<TAttributeSyntax, T
     {
         try
         {
+            return (attributeSyntax.Parent?.Parent is { } targetSyntax
+                && context.SemanticModel.GetDeclaredSymbol(targetSyntax) is { } targetSymbol
+                && TypeContainingReferencedMembers(targetSymbol) is { } typeSymbol)
+                    ? FirstInvalidMemberName(typeSymbol)
+                    : null;
+        }
+        catch (RegexMatchTimeoutException)
+        {
+            return null;
+        }
+
+        string FirstInvalidMemberName(ITypeSymbol typeSymbol)
+        {
+            var allMembers = typeSymbol
+                .GetSelfAndBaseTypes()
+                .SelectMany(x => x.GetMembers())
+                .Select(x => x.Name)
+                .ToHashSet(Language.NameComparer);
+
             foreach (Match match in evaluatedExpressionRegex.Matches(formatString))
             {
                 if (match.Groups["EvaluatedExpression"] is { Success: true, Value: var evaluatedExpression }
                     && ExtractValidMemberName(evaluatedExpression) is { } memberName
-                    && GetAttributeTarget(attributeSyntax) is { } targetSyntax
-                    && context.SemanticModel.GetDeclaredSymbol(targetSyntax) is { } targetSymbol
-                    && GetTypeContainingReferencedMembers(targetSymbol) is { } typeSymbol
-                    && typeSymbol.GetSelfAndBaseTypes().SelectMany(x => x.GetMembers()).All(x => Language.NameComparer.Compare(x.Name, memberName) != 0))
+                    && !allMembers.Contains(memberName))
                 {
                     return memberName;
                 }
@@ -71,19 +88,14 @@ public abstract class DebuggerDisplayUsesExistingMembersBase<TAttributeSyntax, T
 
             return null;
         }
-        catch (RegexMatchTimeoutException)
-        {
-            return null;
-        }
 
         string ExtractValidMemberName(string evaluatedExpression)
         {
-            var sanitizedExpression = noQuotesModifierExpressionRegex.Replace(evaluatedExpression, string.Empty).Trim();
+            var sanitizedExpression = evaluatedExpression.Split(',')[0].Trim();
             return IsValidMemberName(sanitizedExpression) ? sanitizedExpression : null;
         }
 
-        static SyntaxNode GetAttributeTarget(TAttributeSyntax attributeSyntax) => attributeSyntax.Parent?.Parent;
-
-        static ITypeSymbol GetTypeContainingReferencedMembers(ISymbol symbol) => symbol is ITypeSymbol typeSymbol ? typeSymbol : symbol.ContainingType;
+        static ITypeSymbol TypeContainingReferencedMembers(ISymbol symbol) =>
+            symbol is ITypeSymbol typeSymbol ? typeSymbol : symbol.ContainingType;
     }
 }
