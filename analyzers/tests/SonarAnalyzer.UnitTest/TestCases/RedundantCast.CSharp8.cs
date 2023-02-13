@@ -1,16 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
 namespace Tests.Diagnostics
 {
     // https://github.com/SonarSource/sonar-dotnet/issues/3273
     public class CastOnNullable
     {
+#nullable enable
         public void Simple()
         {
-            var s1 = (string?)"Test";   // Noncompliant
-            var s2 = (string)s1!;       // Noncompliant
+            var nullable = (string?)"Test";         // Compliant
+            var nonNullable = (string)nullable!;    // Compliant
+            if (nullable != null)
+            {
+                var s1 = (string)nullable;          // Compliant
+                var s2 = (string?)nullable;         // Compliant
+            }
+            if (nonNullable != null)
+            {
+                var s1 = (string)nonNullable;       // Compliant
+                var s2 = (string?)nonNullable;      // Compliant
+            }
+        }
+
+        public void NonNullable()
+        {
+#nullable disable
+            var s1 = (string?)"Test";   // Compliant
+            var s2 = (string)s1!;       // Compliant
+#nullable enable
         }
 
         public static IEnumerable<string> UsefulCast()
@@ -25,14 +43,14 @@ namespace Tests.Diagnostics
     {
         public void Simple()
         {
-            var anon = new { X = (string?)"foo" };  // Noncompliant
+            var anon = new { X = (string?)"foo" };  // Compliant
         }
 
         public void Array()
         {
             var anonArray = new[] { new { X = (string?)"foo" }, new { X = (string?)null } };    // Compliant
-            var oneElementAnonArray = new[] { new { X = (string?)"foo" } };                     // Noncompliant
-            var notSoAnonArray = new[] { new HoldsObject(new { X = (string?)"foo" }) };         // Noncompliant
+            var oneElementAnonArray = new[] { new { X = (string?)"foo" } };                     // Compliant
+            var notSoAnonArray = new[] { new HoldsObject(new { X = (string?)"foo" }) };         // Compliant
         }
 
         public void SwitchExpression()

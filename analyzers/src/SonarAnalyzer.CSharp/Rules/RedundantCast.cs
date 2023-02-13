@@ -64,32 +64,21 @@ public sealed class RedundantCast : SonarDiagnosticAnalyzer
             return;
         }
 
-        var expressionType = context.SemanticModel.GetTypeInfo(expression).Type;
+        var expressionTypeInfo = context.SemanticModel.GetTypeInfo(expression);
+        var expressionType = expressionTypeInfo.Type;
         if (expressionType == null)
         {
             return;
         }
 
-        var castType = context.SemanticModel.GetTypeInfo(type).Type;
+        var castTypeInfo = context.SemanticModel.GetTypeInfo(type);
+        var castType = castTypeInfo.Type;
         if (castType == null)
         {
             return;
         }
 
-        if (expression.Parent.Parent is AnonymousObjectMemberDeclaratorSyntax { Parent: AnonymousObjectCreationExpressionSyntax anon })
-        {
-            if (anon.Parent.Parent is ImplicitArrayCreationExpressionSyntax arrayCreation
-                && arrayCreation.Initializer.Expressions.Skip(1).Any())
-            {
-                return;
-            }
-            if (SwitchExpressionArmSyntaxWrapper.IsInstance(anon.Parent))
-            {
-                return;
-            }
-        }
-
-        if (expressionType.Equals(castType))
+        if (expressionType.Equals(castType) && expressionTypeInfo.Nullability() == castTypeInfo.Nullability())
         {
             ReportIssue(context, expression, location, castType);
         }
