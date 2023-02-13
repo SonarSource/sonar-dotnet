@@ -66,6 +66,7 @@ public abstract class UnusedStringBuilderBase<TSyntaxKind, TVariableDeclarator, 
 
     internal bool IsAccessInvocation(string invocation) =>
         stringBuilderAccessInvocations.Any(x => x.Equals(invocation, Language.NameComparison));
+
     internal bool IsAccessExpression(string expression) =>
         stringBuilderAccessExpressions.Any(x => x.Equals(expression, Language.NameComparison));
 }

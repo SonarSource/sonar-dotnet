@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
             argumentListNode switch
             {
                 InvocationExpressionSyntax invocation => new CSharpMethodParameterLookup(invocation.ArgumentList, method),
-                _ when ObjectCreationFactory.TryCreate(argumentListNode) is { } objectCreation => new CSharpMethodParameterLookup(objectCreation.ArgumentList, method),
+                _ when ObjectCreationFactory.TryCreate(argumentListNode) is { ArgumentList: { } argumentList } => new CSharpMethodParameterLookup(argumentList, method),
                 _ => throw new ArgumentException("Unexpected type.", nameof(argumentListNode))  // This should be throw only by bad usage of this method, not by input dependency
             };
 
