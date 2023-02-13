@@ -52,6 +52,3 @@ enum EmptyEnum { }                           // Compliant - this rule only deals
 
 class { }                                    // Error
 
-
-// Razor Pages: PageModel
-

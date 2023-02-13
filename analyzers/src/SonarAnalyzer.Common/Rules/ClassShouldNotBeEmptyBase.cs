@@ -18,12 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
+
 namespace SonarAnalyzer.Rules;
 
 public abstract class ClassShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
     where TSyntaxKind : struct
 {
     private const string DiagnosticId = "S2094";
+
+    private static readonly ImmutableArray<KnownType> SubClassesToIgnore = ImmutableArray.Create(KnownType.Microsoft_AspNetCore_Mvc_RazorPages_PageModel);
 
     protected override string MessageFormat => "Remove this empty class, write its code or make it an \"interface\".";
 
@@ -35,10 +39,17 @@ public abstract class ClassShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosticAn
             c =>
             {
                 if (Language.Syntax.NodeIdentifier(c.Node) is { IsMissing: false } identifier
-                    && (IsEmptyClass(c.Node) || IsEmptyRecordClass(c.Node)))
+                    && (IsEmptyClass(c.Node) || IsEmptyRecordClass(c.Node))
+                    && !ShouldIgnoreBecauseOfBaseClass(c.Node, c.SemanticModel))
                 {
                     c.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation()));
                 }
+
+                bool ShouldIgnoreBecauseOfBaseClass(SyntaxNode node, SemanticModel model) =>
+                    Language.Syntax.HasDeclaredBaseClass(node)
+                    && model.GetDeclaredSymbol(node) is INamedTypeSymbol classSymbol
+                    && classSymbol.DerivesFromAny(SubClassesToIgnore);
+
             },
             Language.SyntaxKind.ClassAndRecordClassDeclaration);
 

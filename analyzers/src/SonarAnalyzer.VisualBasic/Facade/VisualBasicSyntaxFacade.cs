@@ -50,6 +50,8 @@ internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
 
     public override bool IsAnyKind(SyntaxTrivia trivia, params SyntaxKind[] syntaxKinds) => trivia.IsAnyKind(syntaxKinds);
 
+    public override bool HasDeclaredBaseClass(SyntaxNode node) => node is ClassBlockSyntax { Inherits.Count: > 0 };
+
     public override IEnumerable<SyntaxNode> ArgumentExpressions(SyntaxNode node) =>
         node switch
         {
