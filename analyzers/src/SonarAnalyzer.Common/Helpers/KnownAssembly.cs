@@ -20,27 +20,26 @@
 
 using static SonarAnalyzer.Helpers.KnownAssembly.Predicates;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+public sealed partial class KnownAssembly
 {
-    public sealed partial class KnownAssembly
+    private readonly Func<IEnumerable<AssemblyIdentity>, bool> predicate;
+
+    public static KnownAssembly XUnit_Assert { get; } = new(
+        NameIs("xunit.assert"),
+        NameIs("xunit").And(VersionLowerThen("2.0")));
+
+    internal KnownAssembly(Func<AssemblyIdentity, bool> predicate, params Func<AssemblyIdentity, bool>[] or)
+        : this(predicate is null || or.Any(x => x is null)
+              ? throw new ArgumentNullException(nameof(predicate), "All predicates must be non-null.")
+              : identities => identities.Any(identitiy => predicate(identitiy) || or.Any(orPredicate => orPredicate(identitiy))))
     {
-        private readonly Func<IEnumerable<AssemblyIdentity>, bool> predicate;
-
-        public static KnownAssembly XUnit_Assert { get; } = new(
-            NameIs("xunit.assert"),
-            NameIs("xunit").And(VersionLowerThen("2.0")));
-
-        internal KnownAssembly(Func<AssemblyIdentity, bool> predicate, params Func<AssemblyIdentity, bool>[] or)
-            : this(predicate is null || or.Any(x => x is null)
-                  ? throw new ArgumentNullException(nameof(predicate), "All predicates must be non-null.")
-                  : identities => identities.Any(identitiy => predicate(identitiy) || or.Any(orPredicate => orPredicate(identitiy))))
-        {
-        }
-
-        internal KnownAssembly(Func<IEnumerable<AssemblyIdentity>, bool> predicate) =>
-            this.predicate = predicate ?? throw new ArgumentNullException(nameof(predicate));
-
-        public bool IsReferencedBy(Compilation compilation) =>
-            predicate(compilation.ReferencedAssemblyNames);
     }
+
+    internal KnownAssembly(Func<IEnumerable<AssemblyIdentity>, bool> predicate) =>
+        this.predicate = predicate ?? throw new ArgumentNullException(nameof(predicate));
+
+    public bool IsReferencedBy(Compilation compilation) =>
+        predicate(compilation.ReferencedAssemblyNames);
 }
