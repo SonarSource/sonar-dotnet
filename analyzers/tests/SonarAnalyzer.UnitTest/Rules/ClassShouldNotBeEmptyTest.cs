@@ -33,6 +33,10 @@ public class ClassShouldNotBeEmptyTest
     public void ClassShouldNotBeEmpty_CS() =>
         builderCS.AddPaths("ClassShouldNotBeEmpty.cs").Verify();
 
+    [TestMethod]
+    public void ClassShouldNotBeEmpty_VB() =>
+        builderVB.AddPaths("ClassShouldNotBeEmpty.vb").Verify();
+
 #if NET
 
     private static IEnumerable<MetadataReference> AdditionalReferences => new[]
@@ -49,12 +53,12 @@ public class ClassShouldNotBeEmptyTest
         builderCS.AddPaths("ClassShouldNotBeEmpty.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
     [TestMethod]
-    public void ClassShouldNotBeEmpty_Inheritance() =>
+    public void ClassShouldNotBeEmpty_Inheritance_CS() =>
         builderCS.AddPaths("ClassShouldNotBeEmpty.Inheritance.cs").AddReferences(AdditionalReferences).Verify();
 
-#endif
-
     [TestMethod]
-    public void ClassShouldNotBeEmpty_VB() =>
-        builderVB.AddPaths("ClassShouldNotBeEmpty.vb").Verify();
+    public void ClassShouldNotBeEmpty_Inheritance_VB() =>
+        builderVB.AddPaths("ClassShouldNotBeEmpty.Inheritance.vb").AddReferences(AdditionalReferences).Verify();
+
+#endif
 }
