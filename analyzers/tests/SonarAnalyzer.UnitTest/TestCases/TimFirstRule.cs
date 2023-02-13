@@ -9,10 +9,10 @@ public class Program
     {
         get
         {
-            int i;      // Noncompliant {{Tim's first rule!}}
+            int i;      // Noncompliant {{Expected Identifier to be 'tim' but found 'i'!}}
 //              ^
             int tim;
-            i = MyInt;  // Noncompliant
+            i = MyInt;  // Noncompliant {{Expected Identifier to be 'Tim' but found 'MyInt'!}}
             tim = Tim;
             return i;
         }

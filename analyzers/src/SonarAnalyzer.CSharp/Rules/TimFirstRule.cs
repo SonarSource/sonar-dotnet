@@ -24,7 +24,7 @@ namespace SonarAnalyzer.Rules.CSharp;
 public sealed class TimFirstRule : SonarDiagnosticAnalyzer
 {
     private const string DiagnosticId = "S2552";
-    private const string MessageFormat = "Tim's first rule!";
+    private const string MessageFormat = "Expected Identifier to be '{0}' but found '{1}'!";
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
@@ -70,7 +70,7 @@ public sealed class TimFirstRule : SonarDiagnosticAnalyzer
         };
         if (identifier is { IsMissing: false, ValueText: var valueText } && valueText != expected)
         {
-            c.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation()));
+            c.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation(), expected, valueText));
         }
     }
 }
