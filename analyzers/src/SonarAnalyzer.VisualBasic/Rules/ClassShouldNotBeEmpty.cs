@@ -25,5 +25,9 @@ public sealed class ClassShouldNotBeEmpty : ClassShouldNotBeEmptyBase<SyntaxKind
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-    protected override bool IsRecordClassWithEmptyTypeList(SyntaxNode node) => false;
+    protected override bool IsEmptyClass(SyntaxNode node) =>
+        node is ClassBlockSyntax
+        && node.ChildNodes().All(x => x is ClassStatementSyntax or EndBlockStatementSyntax);
+
+    protected override bool IsEmptyRecordClass(SyntaxNode node) => false;
 }

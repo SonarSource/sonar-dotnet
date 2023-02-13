@@ -1,4 +1,5 @@
-﻿
+﻿using System;
+
 record class EmptyRecordClass1();        // Noncompliant
 //           ^^^^^^^^^^^^^^^^^
 record class EmptyRecordClass2() { };    // Noncompliant

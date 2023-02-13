@@ -35,12 +35,13 @@ public abstract class ClassShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosticAn
             c =>
             {
                 if (Language.Syntax.NodeIdentifier(c.Node) is { IsMissing: false } identifier
-                    && (!c.Node.ChildNodes().Any() || IsRecordClassWithEmptyTypeList(c.Node)))
+                    && (IsEmptyClass(c.Node) || IsEmptyRecordClass(c.Node)))
                 {
                     c.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation()));
                 }
             },
             Language.SyntaxKind.ClassAndRecordClassDeclaration);
 
-    protected abstract bool IsRecordClassWithEmptyTypeList(SyntaxNode node);
+    protected abstract bool IsEmptyClass(SyntaxNode node);
+    protected abstract bool IsEmptyRecordClass(SyntaxNode node);
 }

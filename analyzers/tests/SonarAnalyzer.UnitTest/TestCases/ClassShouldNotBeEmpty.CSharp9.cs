@@ -1,4 +1,5 @@
-﻿
+﻿using System;
+
 record EmptyRecord1();                      // Noncompliant
 //     ^^^^^^^^^^^^
 record EmptyRecord2() { };                  // Noncompliant
