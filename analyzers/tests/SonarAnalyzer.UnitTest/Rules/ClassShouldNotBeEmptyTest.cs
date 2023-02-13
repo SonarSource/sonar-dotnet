@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
@@ -28,12 +27,23 @@ namespace SonarAnalyzer.UnitTest.Rules;
 public class ClassShouldNotBeEmptyTest
 {
     private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ClassShouldNotBeEmpty>();
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.ClassShouldNotBeEmpty>();    // FIXME: Move this up
 
     [TestMethod]
     public void ClassShouldNotBeEmpty_CS() =>
         builderCS.AddPaths("ClassShouldNotBeEmpty.cs").Verify();
 
-    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.ClassShouldNotBeEmpty>();    // FIXME: Move this up
+#if NET
+
+    [TestMethod]
+    public void ClassShouldNotBeEmpty_CSharp9() =>
+        builderCS.AddPaths("ClassShouldNotBeEmpty.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+
+    [TestMethod]
+    public void ClassShouldNotBeEmpty_CSharp10() =>
+        builderCS.AddPaths("ClassShouldNotBeEmpty.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+
+#endif
 
     [TestMethod]
     public void ClassShouldNotBeEmpty_VB() =>
