@@ -25,7 +25,22 @@ public abstract class ClassShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosticAn
 {
     private const string DiagnosticId = "S2094";
 
-    protected override string MessageFormat => "FIXME";
+    protected override string MessageFormat => "Remove this empty class, write its code or make it an \"interface\".";
 
     protected ClassShouldNotBeEmptyBase() : base(DiagnosticId) { }
+
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(
+            Language.GeneratedCodeRecognizer,
+            c =>
+            {
+                if (Language.Syntax.NodeIdentifier(c.Node) is { IsMissing: false } identifier
+                    && (!c.Node.ChildNodes().Any() || IsRecordClassWithEmptyTypeList(c.Node)))
+                {
+                    c.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation()));
+                }
+            },
+            Language.SyntaxKind.ClassAndRecordClassDeclaration);
+
+    protected abstract bool IsRecordClassWithEmptyTypeList(SyntaxNode node);
 }
