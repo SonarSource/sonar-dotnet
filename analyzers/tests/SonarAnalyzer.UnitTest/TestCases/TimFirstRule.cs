@@ -5,9 +5,10 @@ namespace NotTim   // Compliant
 {
     public class Program
     {
-        int MyInt { get; }
+        int MyInt { get; }  // Noncompliant
+        //  ^^^^^
         int Tim { get; }
-        int MyProperty
+        int MyProperty      // Noncompliant
         {
             get
             {

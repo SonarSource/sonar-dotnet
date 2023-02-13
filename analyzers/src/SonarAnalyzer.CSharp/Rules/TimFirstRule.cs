@@ -32,7 +32,7 @@ public sealed class TimFirstRule : SonarDiagnosticAnalyzer
 
     protected override void Initialize(SonarAnalysisContext context)
     {
-        // Part 1
+        // Part 1 - Find local variable declarations
         context.RegisterNodeAction(c =>
             {
                 if (c.Node is VariableDeclaratorSyntax node)
@@ -50,7 +50,7 @@ public sealed class TimFirstRule : SonarDiagnosticAnalyzer
                     ReportIfIdentifierIsNotTim(c, identifier, lowerCase: true);
                 }
             }, SyntaxKind.ForEachStatement);
-        // Part 2
+        // Part 2 - Find property usage
         context.RegisterNodeAction(c =>
             {
                 if (c.Node is IdentifierNameSyntax { Identifier: var identifier } node
@@ -59,6 +59,14 @@ public sealed class TimFirstRule : SonarDiagnosticAnalyzer
                     ReportIfIdentifierIsNotTim(c, identifier);
                 }
             }, SyntaxKind.IdentifierName);
+        // Part 3 - Find property declaration
+        context.RegisterNodeAction(c =>
+            {
+                if (c.Node is PropertyDeclarationSyntax { Identifier: var identifier })
+                {
+                    ReportIfIdentifierIsNotTim(c, identifier);
+                }
+            }, SyntaxKind.PropertyDeclaration);
     }
 
     private static void ReportIfIdentifierIsNotTim(SonarSyntaxNodeReportingContext c, SyntaxToken identifier, bool lowerCase = false)
