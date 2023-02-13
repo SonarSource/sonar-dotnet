@@ -7,6 +7,12 @@ namespace Tests.Diagnostics
     // https://github.com/SonarSource/sonar-dotnet/issues/3273
     public class CastOnNullable
     {
+        public void Simple()
+        {
+            var s1 = (string?)"Test";   // Noncompliant
+            var s2 = (string)s1!;       // Noncompliant
+        }
+
         public static IEnumerable<string> UsefulCast()
         {
             var nullableStrings = new string?[] { "one", "two", null, "three" };
@@ -25,6 +31,7 @@ namespace Tests.Diagnostics
         public void Array()
         {
             var anonArray = new[] { new { X = (string?)"foo" }, new { X = (string?)null } };    // Compliant
+            var oneElementAnonArray = new[] { new { X = (string?)"foo" } };                     // Noncompliant
             var notSoAnonArray = new[] { new HoldsObject(new { X = (string?)"foo" }) };         // Noncompliant
         }
 
