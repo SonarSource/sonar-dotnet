@@ -19,7 +19,6 @@
  */
 
 using Moq;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using static SonarAnalyzer.Helpers.KnownAssembly;
 using static SonarAnalyzer.Helpers.KnownAssembly.Predicates;
@@ -232,10 +231,26 @@ public class KnownAssemblyTest
     [DataRow("EndStart", false)]
     [DataRow("EndSomething", false)]
     [DataRow("SomethingStart", false)]
-    public void Combinator_StartsWith_Start_Or_EndsWith_End(string name, bool expected)
+    public void Combinator_StartsWith_Start_Or_EndsWith_End_1(string name, bool expected)
     {
         var compilation = CompilationWithReferenceTo(new AssemblyIdentity(name));
         var sut = new KnownAssembly(StartsWith("Start"), EndsWith("End"));
+        sut.IsReferencedBy(compilation.Object).Should().Be(expected);
+    }
+
+    [DataTestMethod]
+    [DataRow("Start", true)]
+    [DataRow("End", true)]
+    [DataRow("StartOrEnd", true)]
+    [DataRow("StartTest", true)]
+    [DataRow("TestEnd", true)]
+    [DataRow("EndStart", false)]
+    [DataRow("EndSomething", false)]
+    [DataRow("SomethingStart", false)]
+    public void Combinator_StartsWith_Start_Or_EndsWith_End_2(string name, bool expected)
+    {
+        var compilation = CompilationWithReferenceTo(new AssemblyIdentity(name));
+        var sut = new KnownAssembly(StartsWith("Start").Or(EndsWith("End")));
         sut.IsReferencedBy(compilation.Object).Should().Be(expected);
     }
 

@@ -27,8 +27,8 @@ public sealed partial class KnownAssembly
     private readonly Func<IEnumerable<AssemblyIdentity>, bool> predicate;
 
     public static KnownAssembly XUnit_Assert { get; } = new(
-        NameIs("xunit.assert"),
-        NameIs("xunit").And(VersionLowerThen("2.0")));
+        And(NameIs("xunit.assert").Or(NameIs("xunit").And(VersionLowerThen("2.0"))),
+            PublicKeyTokenIs("8d05b1bb7a6fdb6c")));
 
     internal KnownAssembly(Func<AssemblyIdentity, bool> predicate, params Func<AssemblyIdentity, bool>[] or)
         : this(predicate is null || or.Any(x => x is null)
@@ -42,4 +42,7 @@ public sealed partial class KnownAssembly
 
     public bool IsReferencedBy(Compilation compilation) =>
         predicate(compilation.ReferencedAssemblyNames);
+
+    internal static Func<AssemblyIdentity, bool> And(Func<AssemblyIdentity, bool> left, Func<AssemblyIdentity, bool> right) =>
+        KnownAssemblyExtensions.And(left, right);
 }
