@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2094",
+"message":  "Remove this empty class, or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\RemotePingPong\Program.cs",
+"region":  {
+"startLine":  226,
+"startColumn":  26,
+"endLine":  226,
+"endColumn":  36
+}
+}
+}
+]
+}

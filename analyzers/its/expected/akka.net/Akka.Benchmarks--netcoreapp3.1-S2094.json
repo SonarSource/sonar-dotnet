@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2094",
+"message":  "Remove this empty class, or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\IO\TcpOperationsBenchmarks.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  22,
+"endLine":  76,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2094",
+"message":  "Remove this empty class, or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\IO\TcpOperationsBenchmarks.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  22,
+"endLine":  77,
+"endColumn":  48
+}
+}
+}
+]
+}

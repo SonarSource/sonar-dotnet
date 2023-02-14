@@ -1,0 +1,147 @@
+{
+"issues":  [
+{
+"id":  "S2094",
+"message":  "Remove this empty class, or add members to it.",
+"location":  {
+"uri":  "sources\Net5\Net5\ModuleInitializers.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  18,
+"endLine":  3,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2094",
+"message":  "Remove this empty class, or add members to it.",
+"location":  {
+"uri":  "sources\Net5\Net5\ParameterValidation.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  18,
+"endLine":  3,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2094",
+"message":  "Remove this empty class, or add members to it.",
+"location":  {
+"uri":  "sources\Net5\Net5\RelaxRefPartialOrder.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  26,
+"endLine":  3,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S2094",
+"message":  "Remove this empty class, or add members to it.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2330.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  32,
+"endLine":  5,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2094",
+"message":  "Remove this empty class, or add members to it.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2330.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  23,
+"endLine":  6,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2094",
+"message":  "Remove this empty class, or add members to it.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2330.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  23,
+"endLine":  7,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2094",
+"message":  "Remove this empty class, or add members to it.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3240.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  24,
+"endLine":  5,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2094",
+"message":  "Remove this empty class, or add members to it.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3240.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  15,
+"endLine":  6,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S2094",
+"message":  "Remove this empty class, or add members to it.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3247.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  15,
+"endLine":  8,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2094",
+"message":  "Remove this empty class, or add members to it.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3453.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  26,
+"endLine":  22,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2094",
+"message":  "Remove this empty class, or add members to it.",
+"location":  {
+"uri":  "sources\Net5\Net5\StaticLambdas.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  18,
+"endLine":  3,
+"endColumn":  31
+}
+}
+}
+]
+}

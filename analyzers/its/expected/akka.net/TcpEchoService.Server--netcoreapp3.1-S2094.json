@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2094",
+"message":  "Remove this empty class, or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\TcpEchoService.Server\Actors.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  22,
+"endLine":  47,
+"endColumn":  32
+}
+}
+}
+]
+}
