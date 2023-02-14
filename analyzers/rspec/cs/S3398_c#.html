@@ -1,0 +1,49 @@
+<p>When a <code>private</code> method is only invoked by an inner class, there’s no reason not to move it into that class. It will still have the same
+access to the outer class' members, but the outer class will be clearer and less cluttered.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public class Outer
+{
+    public void OuterMethod()
+    {
+        Console.WriteLine("Called from an outer method.");
+    }
+
+    private static void Print(int num) // Noncompliant - method is only used by inner class, should be moved there
+    {
+        Console.WriteLine(num);
+    }
+
+    public class Inner
+    {
+        public void SomeMethod()
+        {
+            Outer.Print(42);
+        }
+    }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public class Outer
+{
+    public void OuterMethod()
+    {
+        Console.WriteLine("Called from an outer method.");
+    }
+
+    public class Inner
+    {
+        public void SomeMethod()
+        {
+            Print(42);
+        }
+
+        private static void Print(int num)
+        {
+            Console.WriteLine(num);
+        }
+    }
+}
+</pre>
+
