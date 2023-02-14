@@ -27,6 +27,7 @@ public class SonarAnalysisContext
 {
     private readonly RoslynAnalysisContext analysisContext;
     private readonly IEnumerable<DiagnosticDescriptor> supportedDiagnostics;
+    private readonly IGlobPatternMatcher globPatternMatcher;
 
     /// <summary>
     /// This delegate is called on all specific contexts, after the registration to the <see cref="RoslynAnalysisContext"/>, to
@@ -61,6 +62,7 @@ public class SonarAnalysisContext
     {
         this.analysisContext = analysisContext ?? throw new ArgumentNullException(nameof(analysisContext));
         this.supportedDiagnostics = supportedDiagnostics ?? throw new ArgumentNullException(nameof(supportedDiagnostics));
+        globPatternMatcher = new GlobPatternMatcher();
     }
 
     private protected SonarAnalysisContext(SonarAnalysisContext context) : this(context.analysisContext, context.supportedDiagnostics) { }
@@ -121,9 +123,23 @@ public class SonarAnalysisContext
         // the decision is made on based on whether the project contains the analyzer as NuGet).
         if (context.HasMatchingScope(supportedDiagnostics)
             && context.ShouldAnalyzeTree(sourceTree, generatedCodeRecognizer)
+            && context.Options.ParseSonarLintXmlSettings() is { } sonarLintSettings
+            && IsIncluded(PropertiesHelper.ReadSourceFileInclusionsProperty(sonarLintSettings, context.Compilation.Language), context.Tree.FilePath)
+            && !IsExcluded(PropertiesHelper.ReadSourceFileInclusionsProperty(sonarLintSettings, context.Compilation.Language), context.Tree.FilePath)
             && LegacyIsRegisteredActionEnabled(supportedDiagnostics, context.Tree))
         {
             action(context);
         }
     }
+
+    private bool IsIncluded(string[] inclusions, string filePath) =>
+        inclusions is null
+        || inclusions.Length == 0
+        || inclusions.Any(x => IsMatch(x, filePath));
+
+    private bool IsExcluded(string[] exclusions, string filePath) =>
+        exclusions is { Length: > 0 } && exclusions.Any(x => IsMatch(x, filePath));
+
+    private bool IsMatch(string pattern, string filePath) =>
+        globPatternMatcher.IsMatch(pattern, filePath);
 }

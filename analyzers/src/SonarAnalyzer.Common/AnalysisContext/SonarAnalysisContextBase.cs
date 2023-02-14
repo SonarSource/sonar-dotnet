@@ -42,8 +42,6 @@ public class SonarAnalysisContextBase
 
 public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextBase
 {
-    private readonly IGlobPatternMatcher globPatternMatcher;
-
     public abstract SyntaxTree Tree { get; }
     public abstract Compilation Compilation { get; }
     public abstract AnalyzerOptions Options { get; }
@@ -54,7 +52,6 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
 
     protected SonarAnalysisContextBase(SonarAnalysisContext analysisContext, TContext context)
     {
-        globPatternMatcher = new GlobPatternMatcher();
         AnalysisContext = analysisContext ?? throw new ArgumentNullException(nameof(analysisContext));
         Context = context;
     }
@@ -116,18 +113,6 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
 
     private bool ShouldAnalyzeGenerated() =>
         Options.SonarLintXml() is { } sonarLintXml
-        && Options.ParseSonarLintXmlSettings() is { } sonarLintSettings
-        && IsIncluded(PropertiesHelper.ReadSourceFileInclusionsProperty(sonarLintSettings, Compilation.Language), Tree.FilePath)
-        && !IsExcluded(PropertiesHelper.ReadSourceFileInclusionsProperty(sonarLintSettings, Compilation.Language), Tree.FilePath)
         && AnalysisContext.TryGetValue(sonarLintXml.GetText(), ShouldAnalyzeGeneratedProvider(Compilation.Language), out var shouldAnalyzeGenerated)
         && shouldAnalyzeGenerated;
-
-    private bool IsIncluded(string[] inclusions, string filePath) =>
-        inclusions is { Length: > 0 } && inclusions.Any(x => IsMatch(x, filePath));
-
-    private bool IsExcluded(string[] exclusions, string filePath) =>
-        exclusions is { Length: > 0 } && exclusions.Any(x => IsMatch(x, filePath));
-
-    private bool IsMatch(string pattern, string filePath) =>
-        globPatternMatcher.IsMatch(pattern, filePath);
 }
