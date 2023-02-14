@@ -30,6 +30,20 @@ public sealed partial class KnownAssembly
         And(NameIs("xunit.assert").Or(NameIs("xunit").And(VersionLowerThen("2.0"))),
             PublicKeyTokenIs("8d05b1bb7a6fdb6c")));
 
+    /// <summary>
+    /// Any MSTest framework either referenced via <see href="https://www.nuget.org/packages/MicrosoftVisualStudioQualityToolsUnitTestFramework">nuget.org/MicrosoftVisualStudioQualityToolsUnitTestFramework</see> (MSTest V1)
+    /// or <see href="https://www.nuget.org/packages/MSTest.TestFramework">nuget.org/MSTest.TestFramework</see> (MSTest V2).
+    /// </summary>
+    public static KnownAssembly MSTest { get; } = new(
+        And(NameIs("Microsoft.VisualStudio.QualityTools.UnitTestFramework").Or(NameIs("Microsoft.VisualStudio.TestPlatform.TestFramework")),
+            PublicKeyTokenIs("b03f5f7f11d50a3a")));
+
+    /// <summary>
+    /// Assemblies that contain <see href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.visualstudio.testtools.unittesting.assert.that">Assert.That</see>.
+    /// </summary>
+    public static KnownAssembly MSTest_Assert_That { get; } = new(
+        NameIs("Microsoft.VisualStudio.TestPlatform.TestFramework").And(PublicKeyTokenIs("b03f5f7f11d50a3a")));
+
     internal KnownAssembly(Func<AssemblyIdentity, bool> predicate, params Func<AssemblyIdentity, bool>[] or)
         : this(predicate is null || or.Any(x => x is null)
               ? throw new ArgumentNullException(nameof(predicate), "All predicates must be non-null.")
