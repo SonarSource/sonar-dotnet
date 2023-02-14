@@ -2987,7 +2987,7 @@ internal static class RuleTypeMappingVB
         // ["S3060"],
         // ["S3061"],
         // ["S3062"],
-        // ["S3063"],
+        ["S3063"] = "CODE_SMELL",
         // ["S3064"],
         // ["S3065"],
         // ["S3066"],

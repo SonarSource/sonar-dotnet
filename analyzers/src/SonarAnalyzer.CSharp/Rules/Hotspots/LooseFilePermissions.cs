@@ -103,6 +103,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static IEnumerable<IObjectCreation> FilterObjectCreations(IEnumerable<SyntaxNode> nodes) =>
             nodes.Where(x => x.IsAnyKind(SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression))
-                 .Select(x => ObjectCreationFactory.Create(x));
+                 .Select(ObjectCreationFactory.Create);
     }
 }

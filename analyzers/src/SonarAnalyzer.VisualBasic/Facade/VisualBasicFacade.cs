@@ -58,4 +58,7 @@ internal sealed class VisualBasicFacade : ILanguageFacade<SyntaxKind>
             InvocationExpressionSyntax x => new VisualBasicMethodParameterLookup(x, methodSymbol),
             _ => throw new ArgumentException($"{invocation.GetType()} does not contain an ArgumentList.", nameof(invocation)),
         };
+
+    public string GetName(SyntaxNode expression) =>
+        expression.GetName();
 }
