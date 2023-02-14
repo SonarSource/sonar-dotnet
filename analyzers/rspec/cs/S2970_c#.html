@@ -1,0 +1,13 @@
+<p>It is very easy to write incomplete assertions when using some test frameworks. This rule raises an issue when an assertion doesn’t actually test
+anything.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+string actual = "Hello World!";
+actual.Should();  // Noncompliant
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+string actual = "Hello World!";
+actual.Should().Contain("Hello");
+</pre>
+
