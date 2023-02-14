@@ -43,18 +43,30 @@ namespace SonarAnalyzer.Helpers
         public static bool ReadIgnoreHeaderCommentsProperty(IEnumerable<XElement> settings, string language) =>
             ReadBooleanProperty(settings, language, "ignoreHeaderComments");
 
-        private static bool ReadBooleanProperty(IEnumerable<XElement> settings, string language, string propertySuffix, bool defaultValue = false)
-        {
-            var propertyLanguage = language == LanguageNames.CSharp ? "cs" : "vbnet";
-            var propertyName = $"sonar.{propertyLanguage}.{propertySuffix}";
-            return settings.Any()
-                && GetPropertyStringValue(propertyName) is { } propertyStringValue
+        public static string[] ReadSourceFileInclusionsProperty(IEnumerable<XElement> settings, string language) =>
+            ReadArrayProperty(settings, language, "sonar.inclusions");
+
+        public static string[] ReadSourceFileExclusionsProperty(IEnumerable<XElement> settings, string language) =>
+            ReadArrayProperty(settings, language, "sonar.exclusions");
+
+        private static bool ReadBooleanProperty(IEnumerable<XElement> settings, string language, string propertySuffix, bool defaultValue = false) =>
+            settings.Any()
+                && GetPropertyStringValue(settings, GetPropertyName(language, propertySuffix)) is { } propertyStringValue
                 && bool.TryParse(propertyStringValue, out var propertyValue)
                 ? propertyValue
                 : defaultValue;
 
-            string GetPropertyStringValue(string propName) =>
-                settings.FirstOrDefault(s => s.Element("Key")?.Value == propName)?.Element("Value").Value;
-        }
+        public static string[] ReadArrayProperty(IEnumerable<XElement> settings, string language, string propertySuffix, params string[] defaultValue) =>
+            settings.Any()
+                && GetPropertyStringValue(settings, GetPropertyName(language, propertySuffix)) is { } propertyStringValue
+                && propertyStringValue.Split(',') is { } propertyValue
+                ? propertyValue
+                : defaultValue;
+
+        private static string GetPropertyStringValue(IEnumerable<XElement> settings, string propName) =>
+            settings.FirstOrDefault(s => s.Element("Key")?.Value == propName)?.Element("Value").Value;
+
+        public static string GetPropertyName(string language, string propertySuffix) =>
+            $"sonar.{(language is LanguageNames.CSharp ? "cs" : "vbnet")}.{propertySuffix}";
     }
 }
