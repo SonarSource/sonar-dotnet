@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var disposeMethod = c.Compilation.GetTypeMethod(SpecialType.System_IDisposable, "Dispose");
+                    var disposeMethod = c.Compilation.SpecialTypeMethod(SpecialType.System_IDisposable, "Dispose");
                     if (disposeMethod == null)
                     {
                         return;
