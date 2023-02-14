@@ -17,4 +17,9 @@ Public Class IFoo ' NOSONAR
 End Class
 
 Public Class ABCDEFGHIJKLMNOPQRSTUVWXYZ
+    Public ReadOnly Property Prop As Integer
+        Get
+            Return 42
+        End Get
+    End Property
 End Class

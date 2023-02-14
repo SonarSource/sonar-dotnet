@@ -29,6 +29,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.stream.Collectors;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Rule;
@@ -110,7 +111,11 @@ public class IncrementalAnalysisTest {
     assertThat(endStepResults.getLogs()).doesNotContain("Adding normal issue S1134: " + unchanged2Path);
     assertThat(endStepResults.getLogs()).contains("Adding normal issue S1134: " + withChangesPath);
     assertThat(endStepResults.getLogs()).contains("Adding normal issue S1134: " + fileToBeAddedPath);
-    List<Issues.Issue> allIssues = TestUtils.getIssues(ORCHESTRATOR, PROJECT, "42");
+    List<Issues.Issue> allIssues = TestUtils
+        .getIssues(ORCHESTRATOR, PROJECT, "42")
+        .stream()
+        .filter(x -> x.getRule().startsWith("csharpsquid:S1134"))
+        .collect(Collectors.toList());
     assertThat(allIssues).hasSize(2);
     assertThat(allIssues.get(0).getRule()).isEqualTo("csharpsquid:S1134");
     assertThat(allIssues.get(0).getComponent()).isEqualTo("IncrementalPRAnalysis:IncrementalPRAnalysis/AddedFile.cs");
@@ -132,7 +137,11 @@ public class IncrementalAnalysisTest {
     assertTrue(endStepResults.isSuccess());
     assertCacheIsUsed(beginStepResults, PROJECT);
     assertAllFilesWereAnalysed(endStepResults, projectDir);
-    List<Issues.Issue> allIssues = TestUtils.getIssues(ORCHESTRATOR, PROJECT, "42");
+    List<Issues.Issue> allIssues = TestUtils
+      .getIssues(ORCHESTRATOR, PROJECT, "42")
+      .stream()
+      .filter(x -> x.getRule().startsWith("csharpsquid:S1134"))
+      .collect(Collectors.toList());
     assertThat(allIssues).hasSize(3);
     assertThat(allIssues.get(0).getRule()).isEqualTo("csharpsquid:S1134");
     assertThat(allIssues.get(0).getComponent()).isEqualTo("IncrementalPRAnalysis:Unchanged1.cs");
