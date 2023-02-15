@@ -1,23 +1,25 @@
 <p>The <code>DebuggerDisplayAttribute</code> is used to determine how an object is displayed in the debugger window.</p>
 <p>The <code>DebuggerDisplayAttribute</code> constructor takes a single argument: the string to be displayed in the value column for instances of the
 type. Any text within curly braces is evaluated as the name of a field, property, or method.</p>
-<p>Naming a non-existent field, property or method between curly braces will result in a CS0103 error in the debug window when debugging objects.
+<p>Naming a non-existent field, property or method between curly braces will result in a BC30451 error in the debug window when debugging objects.
 Although there is no impact on the production code, providing a wrong value can lead to difficulties when debugging the application.</p>
 <p>This rule raises an issue when text specified between curly braces refers to members that don’t exist in the current context.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-[DebuggerDisplay("Name: {Name}")] // Noncompliant - Name doesn't exist in this context
-public class Person
-{
-    public string FullName { get; private set; }
-}
+&lt;DebuggerDisplay("Name: {Name}")&gt; ' Noncompliant - Name doesn't exist in this context
+Public Class Person
+
+    Public Property FullName As String
+
+End Class
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-[DebuggerDisplay("Name: {FullName}")]
-public class Person
-{
-    public string FullName { get; private set; }
-}
+&lt;DebuggerDisplay("Name: {FullName}")&gt;
+Public Class Person
+
+    Public Property FullName As String
+
+End Class
 </pre>
 
