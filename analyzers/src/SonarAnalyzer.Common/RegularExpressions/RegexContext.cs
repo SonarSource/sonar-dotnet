@@ -61,16 +61,16 @@ internal sealed class RegexContext
         model.GetSymbolInfo(node).Symbol is IMethodSymbol method
         && method.IsConstructor()
         && method.ContainingType.Is(KnownType.System_Text_RegularExpressions_Regex)
-        ? FromSymbol(method, node, model, language)
-        : null;
+            ? FromSymbol(method, node, model, language)
+            : null;
 
     public static RegexContext FromMethod<TSyntaxKind>(SyntaxNode node, SemanticModel model, ILanguageFacade<TSyntaxKind> language) where TSyntaxKind : struct =>
         language.Syntax.NodeIdentifier(node).GetValueOrDefault().Text is { } name
         && MatchMethods.Any(x => x.Equals(name, language.NameComparison))
         && model.GetSymbolInfo(node).Symbol is IMethodSymbol { IsStatic: true } method
         && method.ContainingType.Is(KnownType.System_Text_RegularExpressions_Regex)
-        ? FromSymbol(method, node, model, language)
-        : null;
+            ? FromSymbol(method, node, model, language)
+            : null;
 
     public static RegexContext FromAttribute<TSyntaxKind>(SyntaxNode node, SemanticModel model, ILanguageFacade<TSyntaxKind> language) where TSyntaxKind : struct
     {
@@ -104,8 +104,8 @@ internal sealed class RegexContext
     private static SyntaxNode TryGetNonParamsSyntax(IMethodSymbol method, IMethodParameterLookup parameters, string paramName) =>
         method.Parameters.SingleOrDefault(x => x.Name == paramName) is { } param
         && parameters.TryGetNonParamsSyntax(param, out var node)
-        ? node
-        : null;
+            ? node
+            : null;
 
     private static readonly IReadOnlyList<string> MatchMethods = new[]
     {
