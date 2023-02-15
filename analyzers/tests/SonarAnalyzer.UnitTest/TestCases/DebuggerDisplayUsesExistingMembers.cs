@@ -52,8 +52,8 @@ class PropertiesAndFields
     [DebuggerDisplay("{1 + NonexistentProperty}")] int ContainingInvalidMembers => 1;                       // FN: expressions not supported
 }
 
-[DebuggerDisplay("{this.ToString()}")]
-[DebuggerDisplay("{Me.ToString()}")]
+[DebuggerDisplay("{this.ToString()}")]  // Compliant, it's a method call in C# syntax (valid when debugging a C# project)
+[DebuggerDisplay("{Me.ToString()}")]    // Compliant, it's a method call in VB.NET syntax (valid when debugging a VB.NET project)
 [DebuggerDisplay("{Nonexistent}")]      // Noncompliant
 public enum TopLevelEnum { One, Two, Three }
 

@@ -47,9 +47,9 @@ Public Class TestOnPropertiesAndFields
     <DebuggerDisplay("{1 + NonexistentProperty}")> Property ContainingInvalidMembers As Integer                       ' FN: expressions not supported
 End Class
 
-<DebuggerDisplay("{Me.ToString()}")>
-<DebuggerDisplay("{this.ToString()}")>
-<DebuggerDisplay("{Nonexistent}")> ' Noncompliant
+<DebuggerDisplay("{Me.ToString()}")>    ' Compliant, it's a method call in VB.NET syntax (valid when debugging a VB.NET project)
+<DebuggerDisplay("{this.ToString()}")>  ' Compliant, it's a method call in C# syntax (valid when debugging a C# project)
+<DebuggerDisplay("{Nonexistent}")>      ' Noncompliant
 Public Enum TopLevelEnum
     One
     Two
