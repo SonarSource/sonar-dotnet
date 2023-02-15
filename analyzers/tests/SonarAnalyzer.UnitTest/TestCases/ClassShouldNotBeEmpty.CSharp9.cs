@@ -18,6 +18,10 @@ record RecordWithMethod
 {
     void Method() { }
 }
+record RecordWithMethodOverride
+{
+    public override string ToString() => "";
+}
 record RecordWithIndexer
 {
     int this[int index] => 42;
