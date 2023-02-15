@@ -35,8 +35,8 @@ namespace SonarAnalyzer.Rules
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSymbolAction(CheckClassWithOnlyUnusedPrivateConstructors, SymbolKind.NamedType);
 
-        private bool IsTypeDeclaration(SyntaxNode node) =>
-            Language.Syntax.IsAnyKind(node, Language.SyntaxKind.ClassAndRecordClassDeclaration);
+        private bool IsClassTypeDeclaration(SyntaxNode node) =>
+            Language.Syntax.IsAnyKind(node, Language.SyntaxKind.ClassAndRecordClassDeclarations);
 
         private bool IsAnyConstructorCalled(INamedTypeSymbol namedType, IEnumerable<ConstructorContext> typeDeclarations) =>
             typeDeclarations
@@ -79,7 +79,7 @@ namespace SonarAnalyzer.Rules
 
         private bool IsAnyNestedTypeExtendingCurrentType(IEnumerable<SyntaxNode> descendantNodes, INamedTypeSymbol namedType, SemanticModel semanticModel) =>
             descendantNodes
-                .Where(IsTypeDeclaration)
+                .Where(IsClassTypeDeclaration)
                 .Select(x => (semanticModel.GetDeclaredSymbol(x) as ITypeSymbol)?.BaseType)
                 .WhereNotNull()
                 .Any(baseType => baseType.OriginalDefinition.DerivesFrom(namedType));

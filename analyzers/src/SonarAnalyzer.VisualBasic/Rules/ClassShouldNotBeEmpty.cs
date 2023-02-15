@@ -25,11 +25,9 @@ public sealed class ClassShouldNotBeEmpty : ClassShouldNotBeEmptyBase<SyntaxKind
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-    protected override bool IsEmptyClass(SyntaxNode node) => node is ClassBlockSyntax { Members.Count : 0 };
-
-    protected override bool IsEmptyRecordClass(SyntaxNode node) => false;
+    protected override bool IsEmpty(SyntaxNode node) => node is ClassBlockSyntax { Members.Count: 0 };
 
     protected override bool IsClassWithDeclaredBaseClass(SyntaxNode node) => node is ClassBlockSyntax { Inherits.Count: > 0 };
 
-    protected override string DeclaredTypeNameOf(SyntaxNode node) => ((TypeBlockSyntax)node).BlockStatement.DeclarationKeyword.ValueText.ToLower();
+    protected override string DeclarationTypeKeyword(SyntaxNode node) => ((TypeBlockSyntax)node).BlockStatement.DeclarationKeyword.ValueText.ToLower();
 }

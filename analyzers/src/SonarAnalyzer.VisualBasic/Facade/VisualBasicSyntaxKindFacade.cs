@@ -24,7 +24,7 @@ internal sealed class VisualBasicSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind
 {
     public SyntaxKind Attribute => SyntaxKind.Attribute;
     public SyntaxKind ClassDeclaration => SyntaxKind.ClassBlock;
-    public SyntaxKind[] ClassAndRecordClassDeclaration => new[] { SyntaxKind.ClassBlock };
+    public SyntaxKind[] ClassAndRecordClassDeclarations => new[] { SyntaxKind.ClassBlock };
     public SyntaxKind[] ClassAndModuleDeclarations => new[]
     {
         SyntaxKind.ClassBlock,

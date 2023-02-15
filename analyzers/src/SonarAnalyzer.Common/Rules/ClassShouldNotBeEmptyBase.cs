@@ -29,6 +29,10 @@ public abstract class ClassShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosticAn
 
     protected override string MessageFormat => "Remove this empty {0}, or add members to it.";
 
+    protected abstract bool IsEmpty(SyntaxNode node);
+    protected abstract bool IsClassWithDeclaredBaseClass(SyntaxNode node);
+    protected abstract string DeclarationTypeKeyword(SyntaxNode node);
+
     protected ClassShouldNotBeEmptyBase() : base(DiagnosticId) { }
 
     protected override void Initialize(SonarAnalysisContext context) =>
@@ -37,10 +41,10 @@ public abstract class ClassShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosticAn
             c =>
             {
                 if (Language.Syntax.NodeIdentifier(c.Node) is { IsMissing: false } identifier
-                    && (IsEmptyClass(c.Node) || IsEmptyRecordClass(c.Node))
+                    && IsEmpty(c.Node)
                     && !ShouldIgnoreBecauseOfBaseClass(c.Node, c.SemanticModel))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation(), DeclaredTypeNameOf(c.Node)));
+                    c.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation(), DeclarationTypeKeyword(c.Node)));
                 }
 
                 bool ShouldIgnoreBecauseOfBaseClass(SyntaxNode node, SemanticModel model) =>
@@ -48,10 +52,5 @@ public abstract class ClassShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosticAn
                     && model.GetDeclaredSymbol(node) is INamedTypeSymbol classSymbol
                     && classSymbol.DerivesFromAny(SubClassesToIgnore);
             },
-            Language.SyntaxKind.ClassAndRecordClassDeclaration);
-
-    protected abstract bool IsEmptyClass(SyntaxNode node);
-    protected abstract bool IsEmptyRecordClass(SyntaxNode node);
-    protected abstract bool IsClassWithDeclaredBaseClass(SyntaxNode node);
-    protected abstract string DeclaredTypeNameOf(SyntaxNode node);
+            Language.SyntaxKind.ClassAndRecordClassDeclarations);
 }

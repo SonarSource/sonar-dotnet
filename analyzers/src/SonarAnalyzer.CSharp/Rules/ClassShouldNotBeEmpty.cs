@@ -25,13 +25,11 @@ public sealed class ClassShouldNotBeEmpty : ClassShouldNotBeEmptyBase<SyntaxKind
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-    protected override bool IsEmptyClass(SyntaxNode node) => node is ClassDeclarationSyntax { Members.Count : 0 };
-
-    protected override bool IsEmptyRecordClass(SyntaxNode node) =>
-        RecordDeclarationSyntaxWrapper.IsInstance(node)
-        && (RecordDeclarationSyntaxWrapper)node is { Members.Count: 0, ParameterList.Parameters.Count: 0 };
+    protected override bool IsEmpty(SyntaxNode node) =>
+        node is ClassDeclarationSyntax { Members.Count: 0 }
+        || (RecordDeclarationSyntaxWrapper.IsInstance(node) && (RecordDeclarationSyntaxWrapper)node is { Members.Count: 0, ParameterList.Parameters.Count: 0 });
 
     protected override bool IsClassWithDeclaredBaseClass(SyntaxNode node) => node is ClassDeclarationSyntax { BaseList: not null };
 
-    protected override string DeclaredTypeNameOf(SyntaxNode node) => ((TypeDeclarationSyntax)node).Keyword.ValueText;
+    protected override string DeclarationTypeKeyword(SyntaxNode node) => ((TypeDeclarationSyntax)node).Keyword.ValueText;
 }

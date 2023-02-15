@@ -24,7 +24,7 @@ internal sealed class CSharpSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind>
 {
     public SyntaxKind Attribute => SyntaxKind.Attribute;
     public SyntaxKind ClassDeclaration => SyntaxKind.ClassDeclaration;
-    public SyntaxKind[] ClassAndRecordClassDeclaration => new[]
+    public SyntaxKind[] ClassAndRecordClassDeclarations => new[]
     {
         SyntaxKind.ClassDeclaration,
         SyntaxKindEx.RecordClassDeclaration,
