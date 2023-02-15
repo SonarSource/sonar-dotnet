@@ -50,11 +50,11 @@ public sealed class AssertionArgsShouldBePassedInCorrectOrder : SonarDiagnosticA
                 return;
             }
 
-            var argsWithSymbols = new CSharpMethodParameterLookup(methodCall.ArgumentList, c.SemanticModel).GetAllArgumentParameterMappings().ToList();
-            var expected = argsWithSymbols.SingleOrDefault(x => x.Symbol.Name == "expected")?.Node.Expression;
-            var actual = argsWithSymbols.SingleOrDefault(x => x.Symbol.Name == "actual")?.Node.Expression;
-
-            if (expected is LiteralExpressionSyntax || actual is not LiteralExpressionSyntax)
+            var argumentList = methodCall.ArgumentList;
+            var parameterLookup = new CSharpMethodParameterLookup(argumentList, c.SemanticModel);
+            parameterLookup.TryGetSyntax("expected", out var expected);
+            parameterLookup.TryGetSyntax("actual", out var actual);
+            if (expected.FirstOrDefault() is LiteralExpressionSyntax || actual.FirstOrDefault() is not LiteralExpressionSyntax)
             {
                 return;
             }
@@ -74,7 +74,7 @@ public sealed class AssertionArgsShouldBePassedInCorrectOrder : SonarDiagnosticA
                 return;
             }
 
-            c.ReportIssue(Diagnostic.Create(Rule, argsWithSymbols[0].Node.CreateLocation(argsWithSymbols[1].Node)));
+            c.ReportIssue(Diagnostic.Create(Rule, argumentList.Arguments[0].CreateLocation(argumentList.Arguments[1])));
         },
         SyntaxKind.InvocationExpression);
 }
