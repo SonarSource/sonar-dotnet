@@ -23,7 +23,7 @@ using System.Text;
 namespace SonarAnalyzer.Helpers
 {
     [DebuggerDisplay("{DebuggerDisplay}")]
-    internal sealed partial class KnownType
+    public sealed partial class KnownType
     {
         private readonly IList<string> namespaceParts;
         private readonly string[] genericParameters;
