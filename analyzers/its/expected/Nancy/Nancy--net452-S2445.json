@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2445",
+"message":  "'entitiesLock' is not 'private readonly', and should not be used for locking.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  23,
+"endLine":  62,
+"endColumn":  35
+}
+}
+}
+]
+}

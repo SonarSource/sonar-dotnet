@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2445",
+"message":  "'typeMap' is a local variable, and should not be used for locking.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
+"region":  {
+"startLine":  256,
+"startColumn":  27,
+"endLine":  256,
+"endColumn":  34
+}
+}
+}
+]
+}
