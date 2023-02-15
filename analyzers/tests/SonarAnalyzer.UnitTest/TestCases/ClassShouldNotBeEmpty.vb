@@ -115,5 +115,6 @@ End Interface
 Structure EmptyStruct                               ' Compliant - this rule only deals with classes
 End Structure
 
+
 Class                                               ' Error
 End Class                                    
