@@ -98,11 +98,11 @@ Class GenericNotEmptyWithConstraints(Of T As Class)
 End Class
 
 
-Partial Class PartialEmpty                          ' Noncompliant
+Partial Class PartialEmpty                          ' Compliant - Source Generators and some frameworks use empty partial classes as placeholders
 End Class
 
-Partial Class PartialEmpty
-    Public ReadOnly Property SomeProperty As Integer
+Partial Class PartialNotEmpty
+    Public ReadOnly Property Prop As Integer
         Get
             Return 42
         End Get

@@ -35,6 +35,8 @@ record RecordWithEvent
     event EventHandler CustomEvent;
 }
 
+partial record EmptyPartialRecord();                                // Compliant - partial classes are ignored, so partial record classes are ignored as well
+
 record EmptyGenericRecord<T>();                                     // Noncompliant
 //     ^^^^^^^^^^^^^^^^^^
 record EmptyGenericRecordWithContraint<T>() where T : class;        // Noncompliant

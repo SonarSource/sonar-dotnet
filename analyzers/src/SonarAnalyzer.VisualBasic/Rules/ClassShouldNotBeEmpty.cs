@@ -25,7 +25,9 @@ public sealed class ClassShouldNotBeEmpty : ClassShouldNotBeEmptyBase<SyntaxKind
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-    protected override bool IsEmpty(SyntaxNode node) => node is ClassBlockSyntax { Members.Count: 0 };
+    protected override bool IsEmptyAndNotPartial(SyntaxNode node) =>
+        node is ClassBlockSyntax { Members.Count: 0 } classSyntax
+        && !classSyntax.ClassStatement.Modifiers.Any(x => x.IsKind(SyntaxKind.PartialKeyword));
 
     protected override bool IsClassWithDeclaredBaseClass(SyntaxNode node) => node is ClassBlockSyntax { Inherits.Count: > 0 };
 

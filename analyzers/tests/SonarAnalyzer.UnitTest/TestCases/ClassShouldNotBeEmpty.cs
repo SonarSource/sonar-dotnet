@@ -76,10 +76,11 @@ class GenericNotEmptyWithConstraints<T>
 
 static class StaticEmpty { }                 // Noncompliant
 
-partial class PartialEmpty { }               // Noncompliant
-partial class PartialEmpty
+partial class PartialEmpty { }               // Compliant - Source Generators and some frameworks use empty partial classes as placeholders
+
+partial class PartialNotEmpty
 {
-    public int SomeProperty => 42;
+    int Prop => 42;
 }
 
 interface IMarker { }                        // Compliant - this rule only deals with classes

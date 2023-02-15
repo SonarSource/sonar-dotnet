@@ -29,7 +29,7 @@ public abstract class ClassShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosticAn
         KnownType.Microsoft_AspNetCore_Mvc_RazorPages_PageModel,
         KnownType.System_Exception);
 
-    protected abstract bool IsEmpty(SyntaxNode node);
+    protected abstract bool IsEmptyAndNotPartial(SyntaxNode node);
     protected abstract bool IsClassWithDeclaredBaseClass(SyntaxNode node);
     protected abstract string DeclarationTypeKeyword(SyntaxNode node);
 
@@ -43,7 +43,7 @@ public abstract class ClassShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosticAn
             c =>
             {
                 if (Language.Syntax.NodeIdentifier(c.Node) is { IsMissing: false } identifier
-                    && IsEmpty(c.Node)
+                    && IsEmptyAndNotPartial(c.Node)
                     && !ShouldIgnoreBecauseOfBaseClass(c.Node, c.SemanticModel))
                 {
                     c.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation(), DeclarationTypeKeyword(c.Node)));
