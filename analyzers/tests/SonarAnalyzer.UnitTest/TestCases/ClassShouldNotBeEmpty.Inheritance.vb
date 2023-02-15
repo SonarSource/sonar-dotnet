@@ -13,6 +13,23 @@ Public Class SubClass       ' Noncompliant - not derived from any special base c
     Inherits BaseClass
 End Class
 
+MustInherit Class AbstractBaseWithAbstractMethods
+    Public MustOverride Sub AbstractMethod()
+End Class
+
+MustInherit Class AbstractBaseWithoutAbstractMethods
+    Public Overridable Sub DefaultMethod()
+    End Sub
+End Class
+
+Class NoImplementation       ' Error - abstract methods should be implemented
+    Inherits AbstractBaseWithAbstractMethods
+End Class
+
+Class DefaultImplementation  ' Compliant - the class will use the default implementation of DefaultMethod
+    Inherits AbstractBaseWithoutAbstractMethods
+End Class
+
 Public Class EmptyPageModel ' Compliant - an empty PageModel can be fully functional, the VB code can be in the vbhtml file
     Inherits PageModel
 End Class
