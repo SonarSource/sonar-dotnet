@@ -78,7 +78,7 @@ public sealed class RedundantCast : SonarDiagnosticAnalyzer
 
         if (expressionType.Equals(castType) && FlowStateIsNoneOrMatchesCast(expressionTypeInfo, type))
         {
-            ReportIssue(context, expression, location, castType);
+            ReportIssue(context, expression, castType, location);
         }
     }
 
@@ -114,7 +114,7 @@ public sealed class RedundantCast : SonarDiagnosticAnalyzer
                 if (elementType != null && elementType.Equals(castType) && string.Equals(elementType.ToString(), castType.ToString(), StringComparison.Ordinal))
                 {
                     var methodCalledAsStatic = methodSymbol.MethodKind == MethodKind.Ordinary;
-                    ReportIssue(context, invocation, GetReportLocation(invocation, methodCalledAsStatic), returnType);
+                    ReportIssue(context, invocation, returnType, GetReportLocation(invocation, methodCalledAsStatic));
                 }
             }
         }
