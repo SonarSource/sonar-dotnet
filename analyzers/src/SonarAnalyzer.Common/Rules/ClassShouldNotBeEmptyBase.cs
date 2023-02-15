@@ -29,11 +29,11 @@ public abstract class ClassShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosticAn
         KnownType.Microsoft_AspNetCore_Mvc_RazorPages_PageModel,
         KnownType.System_Exception);
 
-    protected override string MessageFormat => "Remove this empty {0}, or add members to it.";
-
     protected abstract bool IsEmpty(SyntaxNode node);
     protected abstract bool IsClassWithDeclaredBaseClass(SyntaxNode node);
     protected abstract string DeclarationTypeKeyword(SyntaxNode node);
+
+    protected override string MessageFormat => "Remove this empty {0}, or add members to it.";
 
     protected ClassShouldNotBeEmptyBase() : base(DiagnosticId) { }
 
