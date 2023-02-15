@@ -12,7 +12,7 @@ class EmptyWithComments                      // Noncompliant
 
 class NotEmpty
 {
-    public int SomeProperty => 0;
+    public int SomeProperty => 42;
 }
 
 class OuterClass
@@ -31,7 +31,7 @@ class OuterClass
 
     class InnerNonEmpty
     {
-        public int SomeProperty => 0;
+        public int SomeProperty => 42;
     }
 }
 
@@ -40,7 +40,7 @@ static class StaticEmpty { }                 // Noncompliant
 partial class PartialEmpty { }               // Noncompliant
 partial class PartialEmpty
 {
-    public int SomeProperty => 0;
+    public int SomeProperty => 42;
 }
 
 interface IMarker { }                        // Compliant - this rule only deals with classes

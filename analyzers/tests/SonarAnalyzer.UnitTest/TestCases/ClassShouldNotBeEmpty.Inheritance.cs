@@ -3,7 +3,7 @@ using System;
 
 public class BaseClass
 {
-    int Prop => 0;
+    int Prop => 42;
 }
 public class SubClass: BaseClass { }    // Noncompliant - not derived from any special base class
 

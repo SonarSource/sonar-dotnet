@@ -17,7 +17,7 @@ End Class
 Class NotEmpty
     Public ReadOnly Property SomeProperty As Integer
         Get
-            Return 0
+            Return 42
         End Get
     End Property
 End Class
@@ -48,7 +48,7 @@ Class OuterClass
     Class InnerNonEmpty
         Public ReadOnly Property SomeProperty As Integer
             Get
-                Return 0
+                Return 42
             End Get
         End Property
     End Class
@@ -60,7 +60,7 @@ End Class
 Partial Class PartialEmpty
     Public ReadOnly Property SomeProperty As Integer
         Get
-            Return 0
+            Return 42
         End Get
     End Property
 End Class

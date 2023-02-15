@@ -4,7 +4,7 @@ Imports System
 Public Class BaseClass
     Private ReadOnly Property Prop As Integer
         Get
-            Return 0
+            Return 42
         End Get
     End Property
 End Class

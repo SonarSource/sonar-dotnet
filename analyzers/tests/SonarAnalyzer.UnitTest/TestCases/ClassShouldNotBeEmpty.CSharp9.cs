@@ -6,5 +6,5 @@ record EmptyRecord2() { };                  // Noncompliant
 record NotEmptyRecord1(int RecordMember);
 record NotEmptyRecord2()
 {
-    int RecordMember => 0;
+    int RecordMember => 42;
 };
