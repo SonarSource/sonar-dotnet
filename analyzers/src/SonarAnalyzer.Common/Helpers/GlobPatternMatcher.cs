@@ -35,7 +35,7 @@ public class GlobPatternMatcher : IGlobPatternMatcher
         WildcardPattern.Create(pattern).Match(input);
 
     /// <summary>
-    /// Copied as-is from https://github.com/SonarSource/sonar-plugin-api/blob/a9bd7ff48f0f77811ed909070030678c443c975a/sonar-plugin-api/src/main/java/org/sonar/api/utils/WildcardPattern.java
+    /// Copied from https://github.com/SonarSource/sonar-plugin-api/blob/a9bd7ff48f0f77811ed909070030678c443c975a/sonar-plugin-api/src/main/java/org/sonar/api/utils/WildcardPattern.java
     /// </summary>
     private sealed class WildcardPattern
     {
