@@ -24,20 +24,24 @@ namespace SonarAnalyzer.Rules.CSharp;
 public sealed class AssertionsShouldBeComplete : SonarDiagnosticAnalyzer
 {
     private const string DiagnosticId = "S2970";
-    private const string MessageFormat = "FIXME";
+    private const string MessageFormat = "Complete the assertion";
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
     protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(c =>
+        context.RegisterCompilationStartAction(c =>
             {
-                var node = c.Node;
-                if (true)
+                if (c.Compilation.References(KnownAssembly.MSTest_Assert_That)
+                    && c.Compilation.GetTypeByMetadataName(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert) is { } assertType
+                    && assertType.GetMembers("That") is { Length: 1 } thatMembers
+                    && thatMembers[0] is IPropertySymbol { IsStatic: true })
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
+                    c.RegisterNodeAction(c =>
+                    {
+
+                    }, SyntaxKind.SimpleMemberAccessExpression);
                 }
-            },
-            SyntaxKind.InvocationExpression);
+            });
 }
