@@ -13,4 +13,14 @@ Public Interface IEmpty
 
 End Interface
 </pre>
+<h2>Exceptions</h2>
+<p>Subclasses of System.Exception will be ignored, as even an empty Exception class can provide useful information by its type name alone. Subclasses
+of certain framework types - like the PageModel class used in ASP.NET Core Razor Pages - will also be ignored.</p>
+<pre>
+Imports Microsoft.AspNetCore.Mvc.RazorPages
+
+Public Class EmptyPageModel ' Compliant - an empty PageModel can be fully functional, the VB code can be in the vbhtml file
+    Inherits PageModel
+End Class
+</pre>
 
