@@ -11,11 +11,14 @@ class Compliant
         var namedArgs = new Regex(
             options: RegexOptions.None,
             pattern: "valid pattern");
+
+        var noRegex = new NoRegex("[A", RegexOptions.None); // Compliant
     }
 
     void Static()
     {
         var isMatch = Regex.IsMatch("some input", "valid pattern", RegexOptions.None); // Compliant
+        var noRegex = NoRegex.IsMatch("some input", "[A", RegexOptions.None); // Compliant
     }
 
     [RegularExpression("[0-9]+")] // Compliant
@@ -24,10 +27,14 @@ class Compliant
 
 class Noncompliant
 {
+    private const string Prefix = ".*";
+
     void Ctor()
     {
         var patternOnly = new Regex("[A"); // Noncompliant
         //                          ^^^^
+
+        var withConst = new Regex(Prefix + "[A"); // Noncompliant
     }
 
     void Static()
@@ -49,4 +56,11 @@ class Noncompliant
 
     [global::System.ComponentModel.DataAnnotations.RegularExpression("[A")] // Noncompliant
     public string AttributeGloballySpecified { get; set; }
+}
+
+public class NoRegex
+{
+    public NoRegex(string pattern, RegexOptions options) { }
+
+    public static bool IsMatch(string input, string pattern, RegexOptions options) { return true; }
 }
