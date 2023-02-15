@@ -1,4 +1,5 @@
-﻿
+﻿using System;
+
 class Empty { }                              // Noncompliant {{Remove this empty class, or add members to it.}}
 //    ^^^^^
 
@@ -10,9 +11,29 @@ class EmptyWithComments                      // Noncompliant
     // Some comment
 }
 
-class NotEmpty
+class ClassWithProperty
 {
-    public int SomeProperty => 42;
+    int SomeProperty => 42;
+}
+class ClassWithField
+{
+    int SomeField = 42;
+}
+class ClassWithMethod
+{
+    void Method() { }
+}
+class ClassWithIndexer
+{
+    int this[int index] => 42;
+}
+class ClassWithDelegate
+{
+    delegate void MethodDelegate();
+}
+class ClassWithEvent
+{
+    event EventHandler CustomEvent;
 }
 
 class OuterClass

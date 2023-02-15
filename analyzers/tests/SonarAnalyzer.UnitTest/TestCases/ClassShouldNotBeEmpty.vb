@@ -1,4 +1,5 @@
-﻿
+﻿Imports System
+
 Class Empty                                         ' Noncompliant {{Remove this empty class, or add members to it.}}
     ' ^^^^^
 End Class
@@ -14,12 +15,37 @@ Class EmptyWithComments                             ' Noncompliant
     ' Some comment
 End Class
 
-Class NotEmpty
-    Public ReadOnly Property SomeProperty As Integer
+Class ClassWithProperty
+    Private ReadOnly Property SomeProperty As Integer
         Get
             Return 42
         End Get
     End Property
+End Class
+
+Class ClassWithField
+    Private SomeField As Integer = 42
+End Class
+
+Class ClassWithMethod
+    Private Sub Method()
+    End Sub
+End Class
+
+Class ClassWithIndexer
+    Private ReadOnly Property Item(index As Integer) As Integer
+        Get
+            Return 42
+        End Get
+    End Property
+End Class
+
+Class ClassWithDelegate
+    Delegate Sub MethodDelegate()
+End Class
+
+Class ClassWithEvent
+    Private Event CustomEvent As EventHandler
 End Class
 
 Class OuterClass
