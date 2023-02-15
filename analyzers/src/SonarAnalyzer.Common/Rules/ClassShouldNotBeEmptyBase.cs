@@ -25,7 +25,7 @@ public abstract class ClassShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosticAn
 {
     private const string DiagnosticId = "S2094";
 
-    private static readonly ImmutableArray<KnownType> SubClassesToIgnore = ImmutableArray.Create(
+    private static readonly ImmutableArray<KnownType> BaseClassesToIgnore = ImmutableArray.Create(
         KnownType.Microsoft_AspNetCore_Mvc_RazorPages_PageModel,
         KnownType.System_Exception);
 
@@ -52,7 +52,7 @@ public abstract class ClassShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosticAn
                 bool ShouldIgnoreBecauseOfBaseClass(SyntaxNode node, SemanticModel model) =>
                     IsClassWithDeclaredBaseClass(node)
                     && model.GetDeclaredSymbol(node) is INamedTypeSymbol classSymbol
-                    && (classSymbol.BaseType is { IsAbstract: true } || classSymbol.DerivesFromAny(SubClassesToIgnore));
+                    && (classSymbol.BaseType is { IsAbstract: true } || classSymbol.DerivesFromAny(BaseClassesToIgnore));
             },
             Language.SyntaxKind.ClassAndRecordClassDeclarations);
 }

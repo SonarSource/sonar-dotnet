@@ -31,34 +31,50 @@ public class ClassShouldNotBeEmptyTest
 
     [TestMethod]
     public void ClassShouldNotBeEmpty_CS() =>
-        builderCS.AddPaths("ClassShouldNotBeEmpty.cs").Verify();
+        builderCS
+            .AddPaths("ClassShouldNotBeEmpty.cs")
+            .Verify();
 
     [TestMethod]
     public void ClassShouldNotBeEmpty_VB() =>
-        builderVB.AddPaths("ClassShouldNotBeEmpty.vb").Verify();
+        builderVB
+            .AddPaths("ClassShouldNotBeEmpty.vb")
+            .Verify();
 
 #if NET
 
-    private static IEnumerable<MetadataReference> AdditionalReferences => new[]
+    private static readonly MetadataReference[] AdditionalReferences = new[]
     {
         AspNetCoreMetadataReference.MicrosoftAspNetCoreRazorPages
     };
 
     [TestMethod]
     public void ClassShouldNotBeEmpty_CSharp9() =>
-        builderCS.AddPaths("ClassShouldNotBeEmpty.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+        builderCS
+            .AddPaths("ClassShouldNotBeEmpty.CSharp9.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .Verify();
 
     [TestMethod]
     public void ClassShouldNotBeEmpty_CSharp10() =>
-        builderCS.AddPaths("ClassShouldNotBeEmpty.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+        builderCS
+            .AddPaths("ClassShouldNotBeEmpty.CSharp10.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .Verify();
 
     [TestMethod]
     public void ClassShouldNotBeEmpty_Inheritance_CS() =>
-        builderCS.AddPaths("ClassShouldNotBeEmpty.Inheritance.cs").AddReferences(AdditionalReferences).Verify();
+        builderCS
+            .AddPaths("ClassShouldNotBeEmpty.Inheritance.cs")
+            .AddReferences(AdditionalReferences)
+            .Verify();
 
     [TestMethod]
     public void ClassShouldNotBeEmpty_Inheritance_VB() =>
-        builderVB.AddPaths("ClassShouldNotBeEmpty.Inheritance.vb").AddReferences(AdditionalReferences).Verify();
+        builderVB
+            .AddPaths("ClassShouldNotBeEmpty.Inheritance.vb")
+            .AddReferences(AdditionalReferences)
+            .Verify();
 
 #endif
 }

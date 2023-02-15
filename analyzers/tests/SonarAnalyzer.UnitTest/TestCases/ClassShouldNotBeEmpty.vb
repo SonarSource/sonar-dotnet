@@ -1,16 +1,16 @@
 ﻿
-Class Empty                            ' Noncompliant {{Remove this empty class, or add members to it.}}
+Class Empty                                         ' Noncompliant {{Remove this empty class, or add members to it.}}
     ' ^^^^^
 End Class
 
 
-Public Class PublicEmpty               ' Noncompliant
+Public Class PublicEmpty                            ' Noncompliant
 End Class
 
-Class InternalEmpty                    ' Noncompliant
+Class InternalEmpty                                 ' Noncompliant
 End Class
 
-Class EmptyWithComments                ' Noncompliant
+Class EmptyWithComments                             ' Noncompliant
     ' Some comment
 End Class
 
@@ -23,25 +23,25 @@ Class NotEmpty
 End Class
 
 Class OuterClass
-    Class InnerEmpty1                   ' Noncompliant
+    Class InnerEmpty1                               ' Noncompliant
     End Class
 
-    Private Class InnerEmpty2           ' Noncompliant
+    Private Class InnerEmpty2                       ' Noncompliant
     End Class
 
-    Protected Class InnerEmpty3         ' Noncompliant
+    Protected Class InnerEmpty3                     ' Noncompliant
     End Class
 
-    Class InnerEmpty4                   ' Noncompliant
+    Class InnerEmpty4                               ' Noncompliant
     End Class
 
-    Protected Class InnerEmpty5         ' Noncompliant
+    Protected Class InnerEmpty5                     ' Noncompliant
     End Class
 
-    Public Class InnerEmpty6            ' Noncompliant
+    Public Class InnerEmpty6                        ' Noncompliant
     End Class
 
-    Public Class InnerEmptyWithComments ' Noncompliant
+    Public Class InnerEmptyWithComments             ' Noncompliant
         ' Some comment
     End Class
 
@@ -54,7 +54,25 @@ Class OuterClass
     End Class
 End Class
 
-Partial Class PartialEmpty               ' Noncompliant
+Class GenericEmpty(Of T)
+    ' ^^^^^^^^^^^^
+End Class
+
+Class GenericEmptyWithConstraints(Of T As Class)    ' Noncompliant
+End Class
+
+Class GenericNotEmpty(Of T)
+    Private Sub Method(arg As T)
+    End Sub
+End Class
+
+Class GenericNotEmptyWithConstraints(Of T As Class)
+    Private Sub Method(arg As T)
+    End Sub
+End Class
+
+
+Partial Class PartialEmpty                          ' Noncompliant
 End Class
 
 Partial Class PartialEmpty
@@ -65,11 +83,11 @@ Partial Class PartialEmpty
     End Property
 End Class
 
-Interface IMarker                        ' Compliant - this rule only deals with classes
+Interface IMarker                                   ' Compliant - this rule only deals with classes
 End Interface
 
-Structure EmptyStruct                    ' Compliant - this rule only deals with classes
+Structure EmptyStruct                               ' Compliant - this rule only deals with classes
 End Structure
 
-Class                                    ' Error
+Class                                               ' Error
 End Class                                    

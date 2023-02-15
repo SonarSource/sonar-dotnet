@@ -35,6 +35,24 @@ class OuterClass
     }
 }
 
+class GenericEmpty<T> { }                    // Noncompliant
+//    ^^^^^^^^^^^^
+class GenericEmptyWithConstraints<T>         // Noncompliant
+    where T : class
+{
+}
+
+class GenericNotEmpty<T>
+{
+    void Method(T arg) { }
+}
+class GenericNotEmptyWithConstraints<T>
+    where T : class
+{
+    void Method(T arg) { }
+}
+
+
 static class StaticEmpty { }                 // Noncompliant
 
 partial class PartialEmpty { }               // Noncompliant
