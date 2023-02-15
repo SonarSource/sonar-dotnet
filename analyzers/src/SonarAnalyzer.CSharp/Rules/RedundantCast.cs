@@ -59,24 +59,11 @@ public sealed class RedundantCast : SonarDiagnosticAnalyzer
 
     private static void CheckCastExpression(SonarSyntaxNodeReportingContext context, ExpressionSyntax expression, ExpressionSyntax type, Location location)
     {
-        if (expression.IsKind(SyntaxKindEx.DefaultLiteralExpression))
-        {
-            return;
-        }
-
-        var expressionTypeInfo = context.SemanticModel.GetTypeInfo(expression);
-        if (expressionTypeInfo.Type is not { } expressionType)
-        {
-            return;
-        }
-
-        var castTypeInfo = context.SemanticModel.GetTypeInfo(type);
-        if (castTypeInfo.Type is not { } castType)
-        {
-            return;
-        }
-
-        if (expressionType.Equals(castType) && FlowStateIsNoneOrMatchesCast(expressionTypeInfo, type))
+        if (!expression.IsKind(SyntaxKindEx.DefaultLiteralExpression)
+            && context.SemanticModel.GetTypeInfo(expression) is { Type: { } expressionType } expressionTypeInfo
+            && context.SemanticModel.GetTypeInfo(type) is { Type: { } castType }
+            && expressionType.Equals(castType)
+            && FlowStateIsNoneOrMatchesCast(expressionTypeInfo, type))
         {
             ReportIssue(context, expression, castType, location);
         }

@@ -65,6 +65,7 @@ public class RedundantCastTest
 
     private static IEnumerable<object[]> NullableTestData => new[]
     {
+        // snippet, compliant when flow state is available, compliant when flow state is unavailable
         new object[] { """_ = (string)"Test";""", false, false },
         new object[] { """_ = (string?)"Test";""", true, false },
         new object[] { """_ = (string)null;""", true, true },
@@ -73,10 +74,14 @@ public class RedundantCastTest
         new object[] { """_ = (string?)nullable;""", false, false },
         new object[] { """_ = (string)nonNullable;""", false, false },
         new object[] { """_ = (string?)nonNullable;""", true, false },
+        new object[] { """_ = nullable as string;""", true, false },
+        new object[] { """_ = nonNullable as string;""", false, false },
         new object[] { """if (nullable != null) _ = (string)nullable;""", false, false },
         new object[] { """if (nullable != null) _ = (string?)nullable;""", true, false },
+        new object[] { """if (nullable != null) _ = nullable as string;""", false, false },
         new object[] { """if (nonNullable == null) _ = (string)nonNullable;""", true, false },
         new object[] { """if (nonNullable == null) _ = (string?)nonNullable;""", false, false },
+        new object[] { """if (nonNullable == null) _ = nonNullable as string;""", true, false },
     };
 
     private static IEnumerable<object[]> NullableTestDataWithFlowState =>
