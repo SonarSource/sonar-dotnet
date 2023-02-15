@@ -41,8 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (InvocationTargetAndName(invocation, out var fieldCandidate, out var name)
                     && c.SemanticModel.GetSymbolInfo(fieldCandidate).Symbol is IFieldSymbol invocationTarget
                     && invocationTarget.IsNonStaticNonPublicDisposableField(languageVersion)
-                    && c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
-                    && IsDisposeMethodCalled(methodSymbol, c.SemanticModel, languageVersion)
+                    && IsDisposeMethodCalled(invocation, c.SemanticModel, languageVersion)
                     && IsDisposableClassOrStruct(invocationTarget.ContainingType, languageVersion)
                     && !IsCalledInsideDispose(invocation, c.SemanticModel)
                     && FieldDeclaredInType(c.SemanticModel, invocation, invocationTarget)
@@ -127,7 +126,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 || methodSymbol.ContainingType.IsDisposableRefStruct(languageVersion));
 
         private static IMethodSymbol IDisposableDisposeMethodSymbol(SemanticModel model)
-            => model.Compilation.GetTypeMethod(SpecialType.System_IDisposable, DisposeMethodName);
+            => model.Compilation.SpecialTypeMethod(SpecialType.System_IDisposable, DisposeMethodName);
 
         private static bool IsMethodMatchingDisposeMethodName(IMethodSymbol enclosingMethodSymbol) =>
             enclosingMethodSymbol.Name == DisposeMethodName
