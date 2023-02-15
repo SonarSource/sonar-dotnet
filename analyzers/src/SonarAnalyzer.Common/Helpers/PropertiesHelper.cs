@@ -44,10 +44,10 @@ namespace SonarAnalyzer.Helpers
             ReadBooleanProperty(settings, language, "ignoreHeaderComments");
 
         public static string[] ReadSourceFileInclusionsProperty(IEnumerable<XElement> settings, string language) =>
-            ReadArrayProperty(settings, language, "sonar.inclusions");
+            ReadCommaSeparatedArrayProperty(settings, language, "sonar.inclusions");
 
         public static string[] ReadSourceFileExclusionsProperty(IEnumerable<XElement> settings, string language) =>
-            ReadArrayProperty(settings, language, "sonar.exclusions");
+            ReadCommaSeparatedArrayProperty(settings, language, "sonar.exclusions");
 
         private static bool ReadBooleanProperty(IEnumerable<XElement> settings, string language, string propertySuffix, bool defaultValue = false) =>
             settings.Any()
@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Helpers
                 ? propertyValue
                 : defaultValue;
 
-        public static string[] ReadArrayProperty(IEnumerable<XElement> settings, string language, string propertySuffix, params string[] defaultValue) =>
+        public static string[] ReadCommaSeparatedArrayProperty(IEnumerable<XElement> settings, string language, string propertySuffix, params string[] defaultValue) =>
             settings.Any()
                 && GetPropertyStringValue(settings, GetPropertyName(language, propertySuffix)) is { } propertyStringValue
                 && propertyStringValue.Split(',') is { } propertyValue
