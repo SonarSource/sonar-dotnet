@@ -137,7 +137,8 @@ public sealed class RedundantCast : SonarDiagnosticAnalyzer
             ? returnType.TypeArguments.Single()
             : null;
 
-    private static bool CanHaveNullValue(ITypeSymbol type) => type.IsReferenceType || type.Name == "Nullable";
+    private static bool CanHaveNullValue(ITypeSymbol type) =>
+        type.IsReferenceType || type.Name == "Nullable";
 
     private static Location GetReportLocation(InvocationExpressionSyntax invocation, bool methodCalledAsStatic) =>
         invocation.Expression switch
