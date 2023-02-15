@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RuleSet xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="SonarQube - SonarAnalyzer .Net C# QP for .NET Analyzers" Description="This rule set was automatically generated from SonarQube https://sonarcloud.io/profiles/show?key=AYS9H5b7szY8h8f_RKYR" ToolsVersion="14.0">
+<RuleSet xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="SonarQube - SonarAnalyzer for .NET C# QP for .NET Analyzers" Description="This rule set was automatically generated from SonarQube https://sonarcloud.io/profiles/show?key=AYS9H5b7szY8h8f_RKYR" ToolsVersion="14.0">
   <Rules AnalyzerId="SonarAnalyzer.CSharp" RuleNamespace="SonarAnalyzer.CSharp">
     <Rule Id="S100" Action="Info" />
     <Rule Id="S1006" Action="Warning" />
@@ -298,7 +298,7 @@
     <Rule Id="S4015" Action="Warning" />
     <Rule Id="S4016" Action="None" />
     <Rule Id="S4017" Action="Warning" />
-    <Rule Id="S4018" Action="Info" />
+    <Rule Id="S4018" Action="None" />
     <Rule Id="S4019" Action="Warning" />
     <Rule Id="S4022" Action="Info" />
     <Rule Id="S4023" Action="Info" />
@@ -332,7 +332,7 @@
     <Rule Id="S4210" Action="Warning" />
     <Rule Id="S4211" Action="Warning" />
     <Rule Id="S4212" Action="Warning" />
-    <Rule Id="S4214" Action="Warning" />
+    <Rule Id="S4214" Action="None" />
     <Rule Id="S4220" Action="Warning" />
     <Rule Id="S4225" Action="Info" />
     <Rule Id="S4226" Action="Info" />
@@ -345,7 +345,7 @@
     <Rule Id="S4428" Action="Warning" />
     <Rule Id="S4433" Action="Warning" />
     <Rule Id="S4456" Action="Warning" />
-    <Rule Id="S4457" Action="Warning" />
+    <Rule Id="S4457" Action="None" />
     <Rule Id="S4462" Action="Warning" />
     <Rule Id="S4487" Action="Warning" />
     <Rule Id="S4524" Action="Warning" />
