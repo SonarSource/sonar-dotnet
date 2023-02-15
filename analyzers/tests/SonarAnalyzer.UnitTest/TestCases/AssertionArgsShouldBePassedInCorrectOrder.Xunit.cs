@@ -37,17 +37,17 @@ namespace Repro_6630
         public void Foo()
         {
             var str = "";
-            Assert.Equal(actual: "", expected: str); // Compliant FN
+            Assert.Equal(actual: "", expected: str); // Noncompliant
             Assert.Equal(expected: "", actual: str); // Compliant
-            Assert.Equal(actual: str, expected: ""); // Noncompliant FP
+            Assert.Equal(actual: str, expected: ""); // Compliant
             Assert.Equal(expected: str, actual: ""); // Noncompliant
 
-            Assert.Same(actual: "", expected: str); // Compliant FN
-            Assert.NotSame(actual: "", expected: str); // Compliant FN
+            Assert.Same(actual: "", expected: str); // Noncompliant
+            Assert.NotSame(actual: "", expected: str); // Noncompliant
 
             int d = 42;
-            Assert.Equal<int>(actual: 1, expected: d); // Compliant FN
-            Assert.Equal(actual: null, expected: new Program()); // Compliant FN
+            Assert.Equal<int>(actual: 1, expected: d); // Noncompliant
+            Assert.Equal(actual: null, expected: new Program()); // Noncompliant
         }
     }
 }
