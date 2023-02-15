@@ -120,10 +120,7 @@ public sealed class RedundantCast : SonarDiagnosticAnalyzer
         }
     }
 
-    private static void ReportIssue(SonarSyntaxNodeReportingContext context,
-                                    ExpressionSyntax expression,
-                                    Location location,
-                                    ITypeSymbol castType) =>
+    private static void ReportIssue(SonarSyntaxNodeReportingContext context, ExpressionSyntax expression, ITypeSymbol castType, Location location) =>
         context.ReportIssue(Diagnostic.Create(Rule, location, castType.ToMinimalDisplayString(context.SemanticModel, expression.SpanStart)));
 
     /// If the invocation one of the <see cref="CastIEnumerableMethods"/> extensions, returns the method symbol.
