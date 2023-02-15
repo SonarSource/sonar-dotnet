@@ -114,7 +114,7 @@ public class IncrementalAnalysisTest {
     List<Issues.Issue> allIssues = TestUtils
         .getIssues(ORCHESTRATOR, PROJECT, "42")
         .stream()
-        .filter(x -> x.getRule().startsWith("csharpsquid:S1134"))
+        .filter(x -> x.getRule().equals("csharpsquid:S1134"))
         .collect(Collectors.toList());
     assertThat(allIssues).hasSize(2);
     assertThat(allIssues.get(0).getRule()).isEqualTo("csharpsquid:S1134");
@@ -140,7 +140,7 @@ public class IncrementalAnalysisTest {
     List<Issues.Issue> allIssues = TestUtils
       .getIssues(ORCHESTRATOR, PROJECT, "42")
       .stream()
-      .filter(x -> x.getRule().startsWith("csharpsquid:S1134"))
+      .filter(x -> x.getRule().equals("csharpsquid:S1134"))
       .collect(Collectors.toList());
     assertThat(allIssues).hasSize(3);
     assertThat(allIssues.get(0).getRule()).isEqualTo("csharpsquid:S1134");

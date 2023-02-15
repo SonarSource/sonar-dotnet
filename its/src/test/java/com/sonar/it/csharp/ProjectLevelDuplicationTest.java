@@ -52,7 +52,7 @@ public class ProjectLevelDuplicationTest {
 
     List<Issues.Issue> issues = getIssues("ProjectLevelDuplication")
       .stream()
-      .filter(x -> x.getRule().startsWith("csharpsquid:S3904"))
+      .filter(x -> x.getRule().equals("csharpsquid:S3904"))
       .collect(Collectors.toList());
     assertThat(issues).hasSize(1);
   }
