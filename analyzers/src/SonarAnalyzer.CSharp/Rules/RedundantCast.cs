@@ -90,7 +90,7 @@ public sealed class RedundantCast : SonarDiagnosticAnalyzer
             NullableFlowState.None => true,
             NullableFlowState.MaybeNull => castingToNullable,
             NullableFlowState.NotNull => !castingToNullable,
-            _ => throw new NotSupportedException()
+            _ => true,
         };
     }
 
