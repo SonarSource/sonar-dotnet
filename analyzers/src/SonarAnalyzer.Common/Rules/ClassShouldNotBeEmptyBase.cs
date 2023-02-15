@@ -25,7 +25,9 @@ public abstract class ClassShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosticAn
 {
     private const string DiagnosticId = "S2094";
 
-    private static readonly ImmutableArray<KnownType> SubClassesToIgnore = ImmutableArray.Create(KnownType.Microsoft_AspNetCore_Mvc_RazorPages_PageModel);
+    private static readonly ImmutableArray<KnownType> SubClassesToIgnore = ImmutableArray.Create(
+        KnownType.Microsoft_AspNetCore_Mvc_RazorPages_PageModel,
+        KnownType.System_Exception);
 
     protected override string MessageFormat => "Remove this empty {0}, or add members to it.";
 

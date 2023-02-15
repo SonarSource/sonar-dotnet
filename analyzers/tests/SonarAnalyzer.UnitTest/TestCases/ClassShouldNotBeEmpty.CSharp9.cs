@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 record EmptyRecord1();                      // Noncompliant {{Remove this empty record, or add members to it.}}
 //     ^^^^^^^^^^^^
 record EmptyRecord2() { };                  // Noncompliant

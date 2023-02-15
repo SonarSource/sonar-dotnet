@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 class Empty { }                              // Noncompliant {{Remove this empty class, or add members to it.}}
 //    ^^^^^
 
