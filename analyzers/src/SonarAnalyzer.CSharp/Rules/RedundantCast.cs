@@ -78,7 +78,11 @@ public sealed class RedundantCast : SonarDiagnosticAnalyzer
             return;
         }
 
-        if (expressionType.Equals(castType) && expressionTypeInfo.Nullability() == castTypeInfo.Nullability())
+        var castToNullable = type is NullableTypeSyntax;
+        var expressionFlowState = expressionTypeInfo.Nullability().FlowState;
+        var expressionMaybeNull = expressionFlowState == NullableFlowState.MaybeNull;
+
+        if (expressionType.Equals(castType) && (expressionFlowState == NullableFlowState.None || expressionMaybeNull == castToNullable))
         {
             ReportIssue(context, expression, location, castType);
         }

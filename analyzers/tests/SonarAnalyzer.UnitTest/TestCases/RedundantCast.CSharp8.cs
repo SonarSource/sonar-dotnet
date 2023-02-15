@@ -1,37 +1,60 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
+#nullable enable
 namespace Tests.Diagnostics
 {
     // https://github.com/SonarSource/sonar-dotnet/issues/3273
     public class CastOnNullable
     {
-#nullable enable
-        public void Simple()
+        public void Simple(string nonNullable, string? nullable)
         {
-            var nullable = (string?)"Test";         // Compliant
-            var nonNullable = (string)nullable!;    // Compliant
+            _ = (string)"Test";             // Noncompliant
+            _ = (string?)"Test";            // Compliant
+            _ = (string)null;               // Compliant
+            _ = (string?)null;              // Compliant
+            _ = (string)nullable;           // Compliant
+            _ = (string?)nullable;          // Noncompliant
+            _ = (string)nonNullable;        // Noncompliant
+            _ = (string?)nonNullable;       // Compliant
             if (nullable != null)
             {
-                var s1 = (string)nullable;          // Compliant
-                var s2 = (string?)nullable;         // Compliant
+                _ = (string)nullable;       // Noncompliant
+                _ = (string?)nullable;      // Compliant
             }
-            if (nonNullable != null)
+            if (nonNullable == null)
             {
-                var s1 = (string)nonNullable;       // Compliant
-                var s2 = (string?)nonNullable;      // Compliant
+                _ = (string)nonNullable;    // Compliant
+                _ = (string?)nonNullable;   // Noncompliant
             }
         }
 
-        public void NonNullable()
-        {
 #nullable disable
-            var s1 = (string?)"Test";   // Compliant
-            var s2 = (string)s1!;       // Compliant
-#nullable enable
+        public void NullableDisabled(string nonNullable, string? nullable)
+        {
+            _ = (string)"Test";             // Noncompliant
+            _ = (string?)"Test";            // Noncompliant
+            _ = (string)null;               // Compliant
+            _ = (string?)null;              // Compliant
+            _ = (string)nullable;           // Noncompliant
+            _ = (string?)nullable;          // Noncompliant
+            _ = (string)nonNullable;        // Noncompliant
+            _ = (string?)nonNullable;       // Noncompliant
+            if (nullable != null)
+            {
+                _ = (string)nullable;       // Noncompliant
+                _ = (string?)nullable;      // Noncompliant
+            }
+            if (nonNullable == null)
+            {
+                _ = (string)nonNullable;    // Noncompliant
+                _ = (string?)nonNullable;   // Noncompliant
+            }
         }
+#nullable enable
 
-        public static IEnumerable<string> UsefulCast()
+        public static IEnumerable<string> Array()
         {
             var nullableStrings = new string?[] { "one", "two", null, "three" };
             return nullableStrings.OfType<string>(); // Compliant - filters out the null
