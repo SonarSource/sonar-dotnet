@@ -44,6 +44,11 @@ namespace SonarAnalyzer.Wrappers
                 _ => throw new InvalidOperationException("Unexpected type: " + node.GetType().Name)
             };
 
+        public static IObjectCreation TryCreate(SyntaxNode node) =>
+             node.IsAnyKind(SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression)
+                 ? Create(node)
+                 : null;
+
         private class ObjectCreation : IObjectCreation
         {
             private readonly ObjectCreationExpressionSyntax objectCreation;

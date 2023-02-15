@@ -18,18 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
-{
-    public static class CompilationExtensions
-    {
-        public static IMethodSymbol GetTypeMethod(this Compilation compilation, SpecialType type, string methodName) =>
-            (IMethodSymbol)compilation.GetSpecialType(type)
-                .GetMembers(methodName)
-                .SingleOrDefault();
+namespace SonarAnalyzer.Rules.CSharp;
 
-        public static bool IsNetFrameworkTarget(this Compilation compilation) =>
-            // There's no direct way of checking compilation target framework yet (09/2020).
-            // See https://github.com/dotnet/roslyn/issues/3798
-            compilation.ObjectType.ContainingAssembly.Name == "mscorlib";
-    }
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class ObsoleteAttributes : ObsoleteAttributesBase<SyntaxKind>
+{
+    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 }

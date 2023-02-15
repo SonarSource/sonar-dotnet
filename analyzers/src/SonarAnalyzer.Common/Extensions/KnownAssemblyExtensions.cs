@@ -18,10 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.VisualBasic;
+namespace SonarAnalyzer.Extensions;
 
-[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-public sealed class ObsoleteAttributesNeedExplanation : ObsoleteAttributesNeedExplanationBase<SyntaxKind>
+internal static class KnownAssemblyExtensions
 {
-    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+    internal static Func<AssemblyIdentity, bool> And(this Func<AssemblyIdentity, bool> @this, Func<AssemblyIdentity, bool> predicate)
+        => identity => @this(identity) && predicate(identity);
+
+    internal static Func<AssemblyIdentity, bool> Or(this Func<AssemblyIdentity, bool> @this, Func<AssemblyIdentity, bool> predicate)
+        => identity => @this(identity) || predicate(identity);
 }

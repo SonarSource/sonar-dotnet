@@ -18,10 +18,21 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.VisualBasic;
+using CS = SonarAnalyzer.Rules.CSharp;
 
-[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-public sealed class RemoveObsoleteCode : RemoveObsoleteCodeBase<SyntaxKind>
+namespace SonarAnalyzer.UnitTest.Rules
 {
-    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+    [TestClass]
+    public class SillyMathematicalComparisonTest
+    {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.SillyMathematicalComparison>();
+
+        [TestMethod]
+        public void SillyMathematicalComparison_CS() =>
+            builderCS.AddPaths("SillyMathematicalComparison.cs").Verify();
+
+        [TestMethod]
+        public void SillyMathematicalComparison_CSharp9() =>
+            builderCS.AddPaths("SillyMathematicalComparison.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+    }
 }

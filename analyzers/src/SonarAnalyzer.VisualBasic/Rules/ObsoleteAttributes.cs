@@ -18,10 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.CSharp;
+namespace SonarAnalyzer.Rules.VisualBasic;
 
-[DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class RemoveObsoleteCode : RemoveObsoleteCodeBase<SyntaxKind>
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class ObsoleteAttributes : ObsoleteAttributesBase<SyntaxKind>
 {
-    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 }

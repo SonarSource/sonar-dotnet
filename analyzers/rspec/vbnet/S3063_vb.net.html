@@ -1,0 +1,37 @@
+<p><code>StringBuilder</code> instances that are <code>append</code>ed but never <code>toString</code>ed needlessly clutter the code, and worse are a
+drag on performance. Either they should be removed, or the missing <code>toString</code> call added.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Public Sub doSomething(ByVal strings As List(Of String))
+    Dim sb As StringBuilder = New StringBuilder()
+    sb.Append("Got: ")
+
+    For Each str As String In strings
+        sb.Append(str).Append(", ")
+    Next
+End Sub
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Public Sub doSomething(ByVal strings As List(Of String))
+    For Each str As String In strings
+    Next
+End Sub
+</pre>
+<p>or</p>
+<pre>
+Public Sub doSomething(ByVal strings As List(Of String))
+    Dim sb As StringBuilder = New StringBuilder()
+    sb.Append("Got: ")
+
+    For Each str As String In strings
+        sb.Append(str).Append(", ")
+    Next
+
+    My.Application.Log.WriteEntry(sb.toString)
+End Sub
+</pre>
+<h2>Exceptions</h2>
+<p>This rule ignores <code>StringBuilder</code>s that are passed as method arguments on the grounds that they are likely <code>toString</code>ed
+there.</p>
+
