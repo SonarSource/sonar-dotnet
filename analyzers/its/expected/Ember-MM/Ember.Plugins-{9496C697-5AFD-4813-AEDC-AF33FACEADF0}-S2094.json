@@ -12,45 +12,6 @@
 "endColumn":  37
 }
 }
-},
-{
-"id":  "S2094",
-"message":  "Remove this empty class, or add members to it.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
-"region":  {
-"startLine":  113,
-"startColumn":  23,
-"endLine":  113,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S2094",
-"message":  "Remove this empty class, or add members to it.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
-"region":  {
-"startLine":  114,
-"startColumn":  23,
-"endLine":  114,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S2094",
-"message":  "Remove this empty class, or add members to it.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\Scraper\Exceptions.cs",
-"region":  {
-"startLine":  9,
-"startColumn":  18,
-"endLine":  9,
-"endColumn":  39
-}
-}
 }
 ]
 }

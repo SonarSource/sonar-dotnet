@@ -56,51 +56,12 @@
 "id":  "S2094",
 "message":  "Remove this empty class, or add members to it.",
 "location":  {
-"uri":  "sources\Net5\Net5\S2330.cs",
-"region":  {
-"startLine":  6,
-"startColumn":  23,
-"endLine":  6,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2094",
-"message":  "Remove this empty class, or add members to it.",
-"location":  {
-"uri":  "sources\Net5\Net5\S2330.cs",
-"region":  {
-"startLine":  7,
-"startColumn":  23,
-"endLine":  7,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S2094",
-"message":  "Remove this empty class, or add members to it.",
-"location":  {
 "uri":  "sources\Net5\Net5\S3240.cs",
 "region":  {
 "startLine":  5,
 "startColumn":  24,
 "endLine":  5,
 "endColumn":  29
-}
-}
-},
-{
-"id":  "S2094",
-"message":  "Remove this empty class, or add members to it.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3240.cs",
-"region":  {
-"startLine":  6,
-"startColumn":  15,
-"endLine":  6,
-"endColumn":  20
 }
 }
 },

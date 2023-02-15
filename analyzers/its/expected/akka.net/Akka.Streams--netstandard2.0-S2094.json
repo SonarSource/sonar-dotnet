@@ -51,19 +51,6 @@
 "endColumn":  38
 }
 }
-},
-{
-"id":  "S2094",
-"message":  "Remove this empty class, or add members to it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
-"region":  {
-"startLine":  92,
-"startColumn":  27,
-"endLine":  92,
-"endColumn":  40
-}
-}
 }
 ]
 }

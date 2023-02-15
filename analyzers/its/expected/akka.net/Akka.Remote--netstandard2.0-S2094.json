@@ -45,32 +45,6 @@
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
 "region":  {
-"startLine":  140,
-"startColumn":  29,
-"endLine":  140,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S2094",
-"message":  "Remove this empty class, or add members to it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
-"region":  {
-"startLine":  145,
-"startColumn":  29,
-"endLine":  145,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S2094",
-"message":  "Remove this empty class, or add members to it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
-"region":  {
 "startLine":  289,
 "startColumn":  29,
 "endLine":  289,
@@ -127,19 +101,6 @@
 "startColumn":  29,
 "endLine":  538,
 "endColumn":  46
-}
-}
-},
-{
-"id":  "S2094",
-"message":  "Remove this empty class, or add members to it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
-"region":  {
-"startLine":  542,
-"startColumn":  29,
-"endLine":  542,
-"endColumn":  53
 }
 }
 },
