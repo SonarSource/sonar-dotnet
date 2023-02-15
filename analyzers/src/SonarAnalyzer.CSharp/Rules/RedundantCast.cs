@@ -71,7 +71,7 @@ public sealed class RedundantCast : SonarDiagnosticAnalyzer
 
     private static bool FlowStateIsNoneOrMatchesCast(TypeInfo expressionTypeInfo, ExpressionSyntax type)
     {
-        var castingToNullable = type is NullableTypeSyntax;
+        var castingToNullable = type.IsKind(SyntaxKind.NullableType);
         return expressionTypeInfo.Nullability().FlowState switch
         {
             NullableFlowState.None => true,
@@ -136,9 +136,7 @@ public sealed class RedundantCast : SonarDiagnosticAnalyzer
             _ => invocation.Expression.GetLocation()
         };
 
-    private static ITypeSymbol GetElementType(InvocationExpressionSyntax invocation,
-                                              IMethodSymbol methodSymbol,
-                                              SemanticModel semanticModel)
+    private static ITypeSymbol GetElementType(InvocationExpressionSyntax invocation, IMethodSymbol methodSymbol, SemanticModel semanticModel)
     {
         ExpressionSyntax collection;
         if (methodSymbol.MethodKind == MethodKind.Ordinary)

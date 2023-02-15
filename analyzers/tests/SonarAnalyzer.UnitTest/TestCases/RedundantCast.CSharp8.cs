@@ -13,6 +13,19 @@ namespace Tests.Diagnostics
             var nullableStrings = new string?[] { "one", "two", null, "three" };
             return nullableStrings.OfType<string>(); // Compliant - filters out the null
         }
+
+        public void Tuple()
+        {
+            _ = (a: (string?)"", b: "");    // Compliant
+        }
+
+        public void ValueTypes(int nonNullable, int? nullable)
+        {
+            _ = (int?)nonNullable;  // Compliant
+            _ = (int?)nullable;     // Noncompliant
+            _ = (int)nonNullable;   // Noncompliant
+            _ = (int)nullable;      // Compliant
+        }
     }
 
     // https://github.com/SonarSource/sonar-dotnet/issues/6438

@@ -63,32 +63,32 @@ public class RedundantCastTest
             }
             """).WithLanguageVersion(LanguageVersion.CSharp7_1).Verify();
 
-    private static IEnumerable<object[]> NullableTestData => new[]
+    private static IEnumerable<(string Snippet, bool CompliantWithFlowState, bool CompliantWithoutFlowState)> NullableTestData => new[]
     {
         // snippet, compliant when flow state is available, compliant when flow state is unavailable
-        new object[] { """_ = (string)"Test";""", false, false },
-        new object[] { """_ = (string?)"Test";""", true, false },
-        new object[] { """_ = (string)null;""", true, true },
-        new object[] { """_ = (string?)null;""", true, true },
-        new object[] { """_ = (string)nullable;""", true, false },
-        new object[] { """_ = (string?)nullable;""", false, false },
-        new object[] { """_ = (string)nonNullable;""", false, false },
-        new object[] { """_ = (string?)nonNullable;""", true, false },
-        new object[] { """_ = nullable as string;""", true, false },
-        new object[] { """_ = nonNullable as string;""", false, false },
-        new object[] { """if (nullable != null) _ = (string)nullable;""", false, false },
-        new object[] { """if (nullable != null) _ = (string?)nullable;""", true, false },
-        new object[] { """if (nullable != null) _ = nullable as string;""", false, false },
-        new object[] { """if (nonNullable == null) _ = (string)nonNullable;""", true, false },
-        new object[] { """if (nonNullable == null) _ = (string?)nonNullable;""", false, false },
-        new object[] { """if (nonNullable == null) _ = nonNullable as string;""", true, false },
+        ("""_ = (string)"Test";""", false, false),
+        ("""_ = (string?)"Test";""", true, false),
+        ("""_ = (string)null;""", true, true),
+        ("""_ = (string?)null;""", true, true),
+        ("""_ = (string)nullable;""", true, false),
+        ("""_ = (string?)nullable;""", false, false),
+        ("""_ = (string)nonNullable;""", false, false),
+        ("""_ = (string?)nonNullable;""", true, false),
+        ("""_ = nullable as string;""", true, false),
+        ("""_ = nonNullable as string;""", false, false),
+        ("""if (nullable != null) _ = (string)nullable;""", false, false),
+        ("""if (nullable != null) _ = (string?)nullable;""", true, false),
+        ("""if (nullable != null) _ = nullable as string;""", false, false),
+        ("""if (nonNullable == null) _ = (string)nonNullable;""", true, false),
+        ("""if (nonNullable == null) _ = (string?)nonNullable;""", false, false),
+        ("""if (nonNullable == null) _ = nonNullable as string;""", true, false),
     };
 
     private static IEnumerable<object[]> NullableTestDataWithFlowState =>
-        NullableTestData.Select(x => new[] { x[0], x[1] });
+        NullableTestData.Select(x => new object[] { x.Snippet, x.CompliantWithFlowState });
 
     private static IEnumerable<object[]> NullableTestDataWithoutFlowState =>
-        NullableTestData.Select(x => new[] { x[0], x[2] });
+        NullableTestData.Select(x => new object[] { x.Snippet, x.CompliantWithoutFlowState });
 
     [TestMethod]
     [DynamicData(nameof(NullableTestDataWithFlowState))]
