@@ -67,6 +67,6 @@ namespace SonarAnalyzer.Helpers
             settings.FirstOrDefault(s => s.Element("Key")?.Value == propName)?.Element("Value").Value;
 
         public static string GetPropertyName(string language, string propertySuffix) =>
-            $"sonar.{(language is LanguageNames.CSharp ? "cs" : "vbnet")}.{propertySuffix}";
+            $"sonar.{(language.Equals(LanguageNames.CSharp) ? "cs" : "vbnet")}.{propertySuffix}";
     }
 }

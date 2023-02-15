@@ -37,16 +37,14 @@ public class GlobPatternMatcher : IGlobPatternMatcher
     /// <summary>
     /// Copied as-is from https://github.com/SonarSource/sonar-plugin-api/blob/a9bd7ff48f0f77811ed909070030678c443c975a/sonar-plugin-api/src/main/java/org/sonar/api/utils/WildcardPattern.java
     /// </summary>
-    private class WildcardPattern
+    private sealed class WildcardPattern
     {
-        private static readonly ConcurrentDictionary<string, WildcardPattern> CACHE = new ConcurrentDictionary<string, WildcardPattern>();
-        private static readonly string SPECIALCHARS = "()[]^$.{}+|";
+        private const string SPECIALCHARS = "()[]^$.{}+|";
+        private static readonly ConcurrentDictionary<string, WildcardPattern> CACHE = new();
         internal readonly Regex Pattern;
 
-        private WildcardPattern(string pattern, string directorySeparator)
-        {
-            Pattern = new Regex(ToRegexp(pattern, directorySeparator));
-        }
+        private WildcardPattern(string pattern, string directorySeparator) =>
+            Pattern = new Regex(ToRegexp(pattern, directorySeparator), RegexOptions.None, TimeSpan.FromSeconds(10));
 
         private static string ToRegexp(string antPattern, string directorySeparator)
         {
@@ -128,7 +126,6 @@ public class GlobPatternMatcher : IGlobPatternMatcher
 
         /**
          * Creates pattern with "/" as a directory separator.
-         * 
          * @see #create(string, string)
          */
         public static WildcardPattern Create(string pattern) =>
