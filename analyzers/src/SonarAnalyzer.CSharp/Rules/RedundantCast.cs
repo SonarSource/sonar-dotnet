@@ -65,27 +65,33 @@ public sealed class RedundantCast : SonarDiagnosticAnalyzer
         }
 
         var expressionTypeInfo = context.SemanticModel.GetTypeInfo(expression);
-        var expressionType = expressionTypeInfo.Type;
-        if (expressionType == null)
+        if (expressionTypeInfo.Type is not { } expressionType)
         {
             return;
         }
 
         var castTypeInfo = context.SemanticModel.GetTypeInfo(type);
-        var castType = castTypeInfo.Type;
-        if (castType == null)
+        if (castTypeInfo.Type is not { } castType)
         {
             return;
         }
 
-        var castToNullable = type is NullableTypeSyntax;
-        var expressionFlowState = expressionTypeInfo.Nullability().FlowState;
-        var expressionMaybeNull = expressionFlowState == NullableFlowState.MaybeNull;
-
-        if (expressionType.Equals(castType) && (expressionFlowState == NullableFlowState.None || expressionMaybeNull == castToNullable))
+        if (expressionType.Equals(castType) && FlowStateIsNoneOrMatchesCast(expressionTypeInfo, type))
         {
             ReportIssue(context, expression, location, castType);
         }
+    }
+
+    private static bool FlowStateIsNoneOrMatchesCast(TypeInfo expressionTypeInfo, ExpressionSyntax type)
+    {
+        var castingToNullable = type is NullableTypeSyntax;
+        return expressionTypeInfo.Nullability().FlowState switch
+        {
+            NullableFlowState.None => true,
+            NullableFlowState.MaybeNull => castingToNullable,
+            NullableFlowState.NotNull => !castingToNullable,
+            _ => throw new NotSupportedException()
+        };
     }
 
     private static void CheckExtensionMethodInvocation(SonarSyntaxNodeReportingContext context)
