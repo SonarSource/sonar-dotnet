@@ -74,13 +74,16 @@ namespace SonarAnalyzer.Rules.CSharp
             .OfType<InvocationExpressionSyntax>())
             .Any(x => InvocationTargetAndName(x, out var target, out var name)
                 && name.NameIs(DisposeMethodName)
-                && model.GetSymbolInfo(target).Symbol is IFieldSymbol field
+                && target.EnsureCorrectSemanticModelOrDefault(model) is { } correctModel
+                && correctModel.GetSymbolInfo(target).Symbol is IFieldSymbol field
                 && field.Equals(invocationTarget)
-                && model.GetSymbolInfo(x).Symbol is IMethodSymbol invokedDispose
-                && invokedDispose.Equals(field.Type.FindImplementationForInterfaceMember(IDisposableDisposeMethodSymbol(model))));
+                && correctModel.GetSymbolInfo(x).Symbol is IMethodSymbol invokedDispose
+                && invokedDispose.Equals(field.Type.FindImplementationForInterfaceMember(IDisposableDisposeMethodSymbol(correctModel))));
 
         private static bool FieldDeclaredInType(SemanticModel model, InvocationExpressionSyntax invocation, IFieldSymbol invocationTarget) =>
-            model.GetDeclaredSymbol(invocation.GetTopMostContainingMethod())?.ContainingSymbol?.Equals(invocationTarget.ContainingType) ?? true;
+            invocation.GetTopMostContainingMethod() is { } containingMethod
+            && containingMethod.EnsureCorrectSemanticModelOrDefault(model) is { } correctModel
+            && (correctModel.GetDeclaredSymbol(containingMethod)?.ContainingSymbol?.Equals(invocationTarget.ContainingType) ?? true);
 
         private static bool InvocationTargetAndName(InvocationExpressionSyntax invocation, out ExpressionSyntax target, out SimpleNameSyntax name)
         {
