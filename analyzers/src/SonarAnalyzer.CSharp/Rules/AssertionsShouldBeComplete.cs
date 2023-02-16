@@ -45,5 +45,26 @@ public sealed class AssertionsShouldBeComplete : SonarDiagnosticAnalyzer
 
                     }, SyntaxKind.SimpleMemberAccessExpression);
                 }
+                if (c.Compilation.References(KnownAssembly.FluentAssertions))
+                {
+                    c.RegisterNodeAction(c =>
+                    {
+
+                    }, SyntaxKind.InvocationExpression);
+                }
+                if (c.Compilation.References(KnownAssembly.NFluent))
+                {
+                    c.RegisterNodeAction(c =>
+                    {
+
+                    }, SyntaxKind.InvocationExpression);
+                }
+                if (c.Compilation.References(KnownAssembly.NSubstitute))
+                {
+                    c.RegisterNodeAction(c =>
+                    {
+
+                    }, SyntaxKind.InvocationExpression);
+                }
             });
 }

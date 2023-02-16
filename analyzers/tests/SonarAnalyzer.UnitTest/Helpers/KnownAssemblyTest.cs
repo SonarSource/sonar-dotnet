@@ -303,6 +303,56 @@ public class KnownAssemblyTest
         compilation.References(MSTest).Should().BeFalse();
     }
 
+    [TestMethod]
+    public void FluentAssertions_6_10()
+    {
+        var compilation = TestHelper.CompileCS("// Empty file", NuGetMetadataReference.FluentAssertions("6.10.0").ToArray()).Model.Compilation;
+        compilation.References(KnownAssembly.FluentAssertions).Should().BeTrue();
+    }
+
+    [TestMethod]
+    public void FluentAssertions_NoReference()
+    {
+        var compilation = TestHelper.CompileCS("// Empty file").Model.Compilation;
+        compilation.References(KnownAssembly.FluentAssertions).Should().BeFalse();
+    }
+
+    [TestMethod]
+    public void NFluent_2_8()
+    {
+        var compilation = TestHelper.CompileCS("// Empty file", NuGetMetadataReference.NFluent("2.8.0").ToArray()).Model.Compilation;
+        compilation.References(NFluent).Should().BeTrue();
+    }
+
+    [TestMethod]
+    public void NFluent_1_0()
+    {
+        // 1.0.0 has no publicKeyToken
+        var compilation = TestHelper.CompileCS("// Empty file", NuGetMetadataReference.NFluent("1.0.0").ToArray()).Model.Compilation;
+        compilation.References(NFluent).Should().BeTrue();
+    }
+
+    [TestMethod]
+    public void NFluent_NoReference()
+    {
+        var compilation = TestHelper.CompileCS("// Empty file").Model.Compilation;
+        compilation.References(NFluent).Should().BeFalse();
+    }
+
+    [TestMethod]
+    public void NSubstitute_5_0()
+    {
+        var compilation = TestHelper.CompileCS("// Empty file", NuGetMetadataReference.NSubstitute("5.0.0").ToArray()).Model.Compilation;
+        compilation.References(NSubstitute).Should().BeTrue();
+    }
+
+    [TestMethod]
+    public void NSubstitute_NoReference()
+    {
+        var compilation = TestHelper.CompileCS("// Empty file").Model.Compilation;
+        compilation.References(NSubstitute).Should().BeFalse();
+    }
+
     private static Mock<Compilation> CompilationWithReferenceTo(AssemblyIdentity identity)
     {
         var compilation = new Mock<Compilation>("compilationName", ImmutableArray<MetadataReference>.Empty, new Dictionary<string, string>(), false, null, null);
