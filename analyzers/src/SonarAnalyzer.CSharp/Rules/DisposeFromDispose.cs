@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static bool FieldIsDisposedIn(SemanticModel model, IFieldSymbol invocationTarget, IMethodSymbol dispose) =>
-            dispose.DeclaringSyntaxReferences
+            (dispose.PartialImplementationPart ?? dispose).DeclaringSyntaxReferences
             .SelectMany(x => x.GetSyntax().DescendantNodesAndSelf(x =>
                 !x.IsAnyKind(
                     SyntaxKindEx.LocalFunctionStatement,
