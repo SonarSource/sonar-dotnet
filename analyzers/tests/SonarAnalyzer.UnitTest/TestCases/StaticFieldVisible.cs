@@ -6,6 +6,10 @@ namespace Tests.TestCases
     {
         public static double Pi = 3.14;  // Noncompliant
 //                           ^^
+        public static int X = 1, Y, Z = 100;
+//                        ^
+//                               ^@-1
+//                                  ^@-2
         public const double Pi2 = 3.14;
         public double Pi3 = 3.14;
 
