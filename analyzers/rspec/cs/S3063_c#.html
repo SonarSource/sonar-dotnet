@@ -1,11 +1,11 @@
-<p><code>StringBuilder</code> instances that are <code>append</code>ed but never <code>toString</code>ed needlessly clutter the code, and worse are a
-drag on performance. Either they should be removed, or the missing <code>toString</code> call added.</p>
+<p><code>StringBuilder</code> instances that never build a <code>string</code> clutter the code and worse are a drag on performance. Either they
+should be removed, or the missing <code>ToString()</code> call should be added.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public void doSomething(List&lt;string&gt; strings) {
-  StringBuilder sb = new StringBuilder();  // Noncompliant
+public void DoSomething(List&lt;string&gt; strings) {
+  var sb = new StringBuilder();  // Noncompliant
   sb.Append("Got: ");
-  foreach(string str in strings) {
+  foreach(var str in strings) {
     sb.Append(str).Append(", ");
     // ...
   }
@@ -13,25 +13,31 @@ public void doSomething(List&lt;string&gt; strings) {
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public void doSomething(List&lt;string&gt; strings) {
-  foreach(string str in strings) {
+public void DoSomething(List&lt;string&gt; strings) {
+  foreach(var str in strings) {
     // ...
   }
 }
 </pre>
 <p>or</p>
 <pre>
-public void doSomething(List&lt;string&gt; strings) {
-  StringBuilder sb = new StringBuilder();  // Noncompliant
+public void DoSomething(List&lt;string&gt; strings) {
+  var sb = new StringBuilder();
   sb.Append("Got: ");
-  foreach(string str in strings) {
+  foreach(var str in strings) {
     sb.Append(str).Append(", ");
     // ...
   }
-  _logger.LogInformation(sb.toString, DateTimeOffset.UtcNow);
+  logger.LogInformation(sb.ToString());
 }
 </pre>
 <h2>Exceptions</h2>
-<p>This rule ignores <code>StringBuilder</code>s that are passed as method arguments on the grounds that they are likely <code>toString</code>ed
-there.</p>
+<p>No issue is reported when <code>StringBuilder</code> is:</p>
+<ul>
+  <li> Accessed through <code>sb.CopyTo()</code>, <code>sb.GetChunks()</code>, <code>sb.Length</code>, or <code>sb[index]</code>. </li>
+  <li> Passed as a method argument, on the grounds that it will likely be accessed through a <code>ToString()</code> invocation there. </li>
+  <li> Passed in as a parameter to the current method, on the grounds that the callee will materialize the string. </li>
+  <li> Retrieved by a custom function (<code>var sb = GetStringBuilder();</code>). </li>
+  <li> Returned by the method. </li>
+</ul>
 

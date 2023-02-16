@@ -1,31 +1,31 @@
-<p>There’s no point in creating an array solely for the purpose of passing it as a params (<code>...</code>) argument; params keyword allow to pass a
-variable number of parameters that will behave exactly like an array variable inside the method implementation. Simply pass the elements directly.</p>
+<p>There’s no point in creating an array solely for the purpose of passing it to a <code>params</code> parameter. Simply pass the elements directly.
+They will be consolidated into an array automatically.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public void CallTheThing() {
-	//...
-	DoTheThing(new string[] { "s1", "s2"});  // Noncompliant: unnecessary
-	DoTheThing(new string[12]);  // Compliant
-	// ...
+public void Base()
+{
+    Method(new string[] { "s1", "s2" }); // Noncompliant: unnecessary
+    Method(new string[] { });            // Noncompliant
+    Method(new string[12]);              // Compliant
 }
 
-public void DoTheThing (params string[] args) {
-	// ...
+public void Method(params string[] args)
+{
+    // ...
 }
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public void CallTheThing()
+public void Base()
 {
-	//...
-	DoTheThing("s1", "s2");
-	DoTheThing(new string[12]);
-	// ...
+    Method("s1", "s2");
+    Method();
+    Method(new string[12]);
 }
 
-public void DoTheThing(params string[] args)
+public void Method(params string[] args)
 {
-	// ...
+    // ...
 }
 </pre>
 
