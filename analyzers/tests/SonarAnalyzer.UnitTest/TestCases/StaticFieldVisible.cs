@@ -9,6 +9,11 @@ namespace Tests.TestCases
         public const double Pi2 = 3.14;
         public double Pi3 = 3.14;
 
+        protected static double Pi4 = 3.14; // Noncompliant
+        internal static double Pi5 = 3.14; // Noncompliant
+        internal static double Pi6 = 3.14; // Noncompliant
+        protected internal static double Pi7 = 3.14; // Noncompliant
+
         [ThreadStatic]
         public static int value; // Compliant, thread static field values are not shared between threads
     }
