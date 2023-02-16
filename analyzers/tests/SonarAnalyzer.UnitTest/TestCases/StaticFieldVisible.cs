@@ -18,6 +18,11 @@ namespace Tests.TestCases
         internal static double Pi6 = 3.14; // Noncompliant
         protected internal static double Pi7 = 3.14; // Noncompliant
 
+        private static double Pi8 = 3.14;
+        private double Pi9 = 3.14;
+        static double Pi10 = 3.14; // Noncompliant "internal" is the default if no access modifier is specified
+                                   // https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/access-modifiers
+
         [ThreadStatic]
         public static int value; // Compliant, thread static field values are not shared between threads
     }
