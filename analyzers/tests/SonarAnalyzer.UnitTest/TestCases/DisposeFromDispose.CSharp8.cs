@@ -348,7 +348,7 @@ namespace Tests.Diagnostics
 
         private void NullSupressionOperator()
         {
-            fs!.Dispose();  // Noncompliant
+            fs!.Dispose();  // Noncompliant {{Move this 'Dispose' call into this class' own 'Dispose' method.}}
         }
 
         private void NullSupressionAndNullCoalescing()
