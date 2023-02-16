@@ -21,6 +21,7 @@
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Moq;
 using Moq.Protected;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 
 namespace SonarAnalyzer.UnitTest.Extensions
@@ -235,6 +236,30 @@ namespace SonarAnalyzer.UnitTest.Extensions
             var attribute = snippet.GetTypeSymbol("Program").GetAttributes().Single(x => x.HasName("MyAttribute"));
             var actual = attribute.HasAttributeUsageInherited();
             actual.Should().Be(expected);
+        }
+
+        [TestMethod]
+        public void HasAttributeUsageInherited_DuplicateAttributeUsage()
+        {
+            var code = $$"""
+                    using System;
+
+                    [AttributeUsage(AttributeTargets.All, Inherited = true)]
+                    [AttributeUsage(AttributeTargets.All, Inherited = false)] // Compiler error
+                    public class MyAttribute: Attribute
+                    {
+                    }
+
+                    [My]
+                    public class Program
+                    {
+                    }
+                    """;
+            var snippet = new SnippetCompiler(code, ignoreErrors: true, AnalyzerLanguage.CSharp);
+            var attribute = snippet.GetTypeSymbol("Program").GetAttributes().Single(x => x.HasName("MyAttribute"));
+            var actual = attribute.HasAttributeUsageInherited();
+            snippet.GetDiagnostics().Should().ContainEquivalentOf(new { Id = "CS0579" }); // "Duplicate 'AttributeUsage' attribute"
+            actual.Should().BeTrue();
         }
 
         private static AttributeData AttributeDataWithName(string attributeClassName)

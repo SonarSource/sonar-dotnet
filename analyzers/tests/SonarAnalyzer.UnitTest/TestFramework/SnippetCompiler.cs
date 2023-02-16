@@ -71,6 +71,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public TSymbolType GetSymbol<TSymbolType>(SyntaxNode node) where TSymbolType : class, ISymbol =>
             SemanticModel.GetSymbolInfo(node).Symbol as TSymbolType;
 
+        public ImmutableArray<Diagnostic> GetDiagnostics() =>
+            compilation.GetDiagnostics();
+
         public SyntaxNode GetMethodDeclaration(string typeDotMethodName)
         {
             var nameParts = typeDotMethodName.Split('.');
