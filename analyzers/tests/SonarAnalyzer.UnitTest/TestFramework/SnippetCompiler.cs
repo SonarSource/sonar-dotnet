@@ -71,6 +71,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public TSymbolType GetSymbol<TSymbolType>(SyntaxNode node) where TSymbolType : class, ISymbol =>
             SemanticModel.GetSymbolInfo(node).Symbol as TSymbolType;
 
+        /// <inheritdoc cref="Compilation.GetDiagnostics(CancellationToken)"/>
         public ImmutableArray<Diagnostic> GetDiagnostics() =>
             compilation.GetDiagnostics();
 
