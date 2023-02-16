@@ -52,16 +52,10 @@ namespace SonarAnalyzer.Rules.CSharp
             },
             SyntaxKind.InvocationExpression);
 
-        private static bool FieldDisposedInDispose(SemanticModel model, IFieldSymbol invocationTarget)
-        {
-            if (invocationTarget.ContainingSymbol is ITypeSymbol container
-                && container.FindImplementationForInterfaceMember(IDisposableDisposeMethodSymbol(model)) is IMethodSymbol dispose
-                && FieldIsDisposedIn(model, invocationTarget, dispose))
-            {
-                return true;
-            }
-            return false;
-        }
+        private static bool FieldDisposedInDispose(SemanticModel model, IFieldSymbol invocationTarget) =>
+            invocationTarget.ContainingSymbol is ITypeSymbol container
+            && container.FindImplementationForInterfaceMember(IDisposableDisposeMethodSymbol(model.Compilation)) is IMethodSymbol dispose
+            && FieldIsDisposedIn(model, invocationTarget, dispose);
 
         private static bool FieldIsDisposedIn(SemanticModel model, IFieldSymbol invocationTarget, IMethodSymbol dispose) =>
             (dispose.PartialImplementationPart ?? dispose).DeclaringSyntaxReferences
@@ -74,11 +68,11 @@ namespace SonarAnalyzer.Rules.CSharp
             .OfType<InvocationExpressionSyntax>())
             .Any(x => InvocationTargetAndName(x, out var target, out var name)
                 && name.NameIs(DisposeMethodName)
-                && target.EnsureCorrectSemanticModelOrDefault(model) is { } correctModel
+                && x.EnsureCorrectSemanticModelOrDefault(model) is { } correctModel
                 && correctModel.GetSymbolInfo(target).Symbol is IFieldSymbol field
                 && field.Equals(invocationTarget)
-                && correctModel.GetSymbolInfo(x).Symbol is IMethodSymbol invokedDispose
-                && invokedDispose.Equals(field.Type.FindImplementationForInterfaceMember(IDisposableDisposeMethodSymbol(correctModel))));
+                && correctModel.GetSymbolInfo(name).Symbol is IMethodSymbol invokedDispose
+                && invokedDispose.Equals(field.Type.FindImplementationForInterfaceMember(IDisposableDisposeMethodSymbol(correctModel.Compilation))));
 
         private static bool FieldDeclaredInType(SemanticModel model, InvocationExpressionSyntax invocation, IFieldSymbol invocationTarget) =>
             invocation.GetTopMostContainingMethod() is { } containingMethod
@@ -124,12 +118,12 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsDisposeMethodCalled(InvocationExpressionSyntax invocation, SemanticModel semanticModel, LanguageVersion languageVersion) =>
             semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
             && KnownMethods.IsIDisposableDispose(methodSymbol)
-            && IDisposableDisposeMethodSymbol(semanticModel) is { } disposeMethodSignature
+            && IDisposableDisposeMethodSymbol(semanticModel.Compilation) is { } disposeMethodSignature
             && (methodSymbol.Equals(methodSymbol.ContainingType.FindImplementationForInterfaceMember(disposeMethodSignature))
                 || methodSymbol.ContainingType.IsDisposableRefStruct(languageVersion));
 
-        private static IMethodSymbol IDisposableDisposeMethodSymbol(SemanticModel model)
-            => model.Compilation.SpecialTypeMethod(SpecialType.System_IDisposable, DisposeMethodName);
+        private static IMethodSymbol IDisposableDisposeMethodSymbol(Compilation compilation)
+            => compilation.SpecialTypeMethod(SpecialType.System_IDisposable, DisposeMethodName);
 
         private static bool IsMethodMatchingDisposeMethodName(IMethodSymbol enclosingMethodSymbol) =>
             enclosingMethodSymbol.Name == DisposeMethodName
