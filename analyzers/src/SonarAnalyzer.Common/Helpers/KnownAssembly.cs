@@ -38,16 +38,6 @@ public sealed partial class KnownAssembly
         And(NameIs("Microsoft.VisualStudio.QualityTools.UnitTestFramework").Or(NameIs("Microsoft.VisualStudio.TestPlatform.TestFramework")),
             PublicKeyTokenIs("b03f5f7f11d50a3a")));
 
-    /// <summary>
-    /// Assemblies that contain <see href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.visualstudio.testtools.unittesting.assert.that">Assert.That</see>.
-    /// </summary>
-    /// <remarks>
-    /// <see href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.visualstudio.testtools.unittesting.assert.that">Assert.That</see> was introduced in version 1.1.14 but
-    /// the NuGet versioning is not in line with the assembly versioning which is 14.0.0.0 for all versions.
-    /// </remarks>
-    public static KnownAssembly MSTest_Assert_That { get; } = new(
-        NameIs("Microsoft.VisualStudio.TestPlatform.TestFramework").And(PublicKeyTokenIs("b03f5f7f11d50a3a")));
-
     internal KnownAssembly(Func<AssemblyIdentity, bool> predicate, params Func<AssemblyIdentity, bool>[] or)
         : this(predicate is null || or.Any(x => x is null)
               ? throw new ArgumentNullException(nameof(predicate), "All predicates must be non-null.")

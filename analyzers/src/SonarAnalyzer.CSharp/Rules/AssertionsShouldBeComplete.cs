@@ -33,7 +33,9 @@ public sealed class AssertionsShouldBeComplete : SonarDiagnosticAnalyzer
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterCompilationStartAction(c =>
             {
-                if (c.Compilation.References(KnownAssembly.MSTest_Assert_That)
+                if (c.Compilation.References(KnownAssembly.MSTest)
+                    // Assert.That was introduced in Version 1.1.14 but the AssemblyIdentity version (14.0.0.0) does not align with the Nuget version so we need
+                    // to check at runtime for the presence of "Assert.That"
                     && c.Compilation.GetTypeByMetadataName(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert) is { } assertType
                     && assertType.GetMembers("That") is { Length: 1 } thatMembers
                     && thatMembers[0] is IPropertySymbol { IsStatic: true })

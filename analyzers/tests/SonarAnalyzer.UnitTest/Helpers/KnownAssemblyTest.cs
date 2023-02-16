@@ -303,36 +303,6 @@ public class KnownAssemblyTest
         compilation.References(MSTest).Should().BeFalse();
     }
 
-    [TestMethod]
-    public void MSTest_Assert_That_V1_FalsePositive()
-    {
-        var compilation = TestHelper.CompileCS("// Empty file", NuGetMetadataReference.MSTestTestFrameworkV1.ToArray()).Model.Compilation;
-        // FP: Assert.That was introduced in Version 1.1.14 but the AssemblyIdentity version (14.0.0.0) does not align with the Nuget version.
-        compilation.References(MSTest_Assert_That).Should().BeTrue();
-    }
-
-    [TestMethod]
-    public void MSTest_Assert_That_V2_1_1_13_FalsePostive()
-    {
-        var compilation = TestHelper.CompileCS("// Empty file", NuGetMetadataReference.MSTestTestFramework("1.1.13").ToArray()).Model.Compilation;
-        // FP: Assert.That was introduced in Version 1.1.14 but the AssemblyIdentity version (14.0.0.0) does not align with the Nuget version.
-        compilation.References(MSTest_Assert_That).Should().BeTrue();
-    }
-
-    [TestMethod]
-    public void MSTest_Assert_That_V2_1_1_14()
-    {
-        var compilation = TestHelper.CompileCS("// Empty file", NuGetMetadataReference.MSTestTestFramework("1.1.14").ToArray()).Model.Compilation;
-        compilation.References(MSTest_Assert_That).Should().BeTrue(); // Assert.That was introduced in Version 1.1.14
-    }
-
-    [TestMethod]
-    public void MSTest_Assert_That_MicrosoftVisualStudioQualityToolsUnitTestFramework()
-    {
-        var compilation = TestHelper.CompileCS("// Empty file", NuGetMetadataReference.MicrosoftVisualStudioQualityToolsUnitTestFramework.ToArray()).Model.Compilation;
-        compilation.References(MSTest_Assert_That).Should().BeFalse();
-    }
-
     private static Mock<Compilation> CompilationWithReferenceTo(AssemblyIdentity identity)
     {
         var compilation = new Mock<Compilation>("compilationName", ImmutableArray<MetadataReference>.Empty, new Dictionary<string, string>(), false, null, null);
