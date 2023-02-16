@@ -39,12 +39,12 @@ public class GlobPatternMatcher : IGlobPatternMatcher
     /// </summary>
     private sealed class WildcardPattern
     {
-        private const string SPECIALCHARS = "()[]^$.{}+|";
-        private static readonly ConcurrentDictionary<string, WildcardPattern> CACHE = new();
+        private const string SpecialChars = "()[]^$.{}+|";
+        private static readonly ConcurrentDictionary<string, WildcardPattern> Cache = new();
         internal readonly Regex Pattern;
 
         private WildcardPattern(string pattern, string directorySeparator) =>
-            Pattern = new Regex(ToRegexp(pattern, directorySeparator), RegexOptions.None, TimeSpan.FromSeconds(10));
+            Pattern = new Regex(ToRegexp(pattern, directorySeparator), RegexOptions.None, TimeSpan.FromMilliseconds(100));
 
         private static string ToRegexp(string antPattern, string directorySeparator)
         {
@@ -58,7 +58,7 @@ public class GlobPatternMatcher : IGlobPatternMatcher
             {
                 var ch = antPattern[i];
 
-                if (SPECIALCHARS.IndexOf(ch) != -1)
+                if (SpecialChars.IndexOf(ch) != -1)
                 {
                     // Escape regexp-specific characters
                     sb.Append('\\').Append(ch);
@@ -143,6 +143,6 @@ public class GlobPatternMatcher : IGlobPatternMatcher
          * Thus to match Windows-style path "dir\file.ext" against pattern "dir/file.ext" normalization should be performed.
          */
         public static WildcardPattern Create(string pattern, string directorySeparator) =>
-            CACHE.GetOrAdd(pattern + directorySeparator, k => new WildcardPattern(pattern, directorySeparator));
+            Cache.GetOrAdd(pattern + directorySeparator, k => new WildcardPattern(pattern, directorySeparator));
     }
 }

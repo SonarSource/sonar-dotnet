@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Concurrent;
-using System.Runtime.CompilerServices;
 using Microsoft.CodeAnalysis.Text;
 using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext;
 
@@ -29,10 +27,6 @@ public class SonarAnalysisContext
 {
     private readonly RoslynAnalysisContext analysisContext;
     private readonly IEnumerable<DiagnosticDescriptor> supportedDiagnostics;
-    private readonly IGlobPatternMatcher globPatternMatcher;
-
-    protected static readonly ConditionalWeakTable<Compilation, ConcurrentDictionary<string, bool>> InclusionsCache = new();
-    protected static readonly ConditionalWeakTable<Compilation, ConcurrentDictionary<string, bool>> ExclusionsCache = new();
 
     /// <summary>
     /// This delegate is called on all specific contexts, after the registration to the <see cref="RoslynAnalysisContext"/>, to
@@ -67,7 +61,6 @@ public class SonarAnalysisContext
     {
         this.analysisContext = analysisContext ?? throw new ArgumentNullException(nameof(analysisContext));
         this.supportedDiagnostics = supportedDiagnostics ?? throw new ArgumentNullException(nameof(supportedDiagnostics));
-        globPatternMatcher = new GlobPatternMatcher();
     }
 
     private protected SonarAnalysisContext(SonarAnalysisContext context) : this(context.analysisContext, context.supportedDiagnostics) { }
@@ -128,37 +121,9 @@ public class SonarAnalysisContext
         // the decision is made on based on whether the project contains the analyzer as NuGet).
         if (context.HasMatchingScope(supportedDiagnostics)
             && context.ShouldAnalyzeTree(sourceTree, generatedCodeRecognizer)
-            && context.Options.ParseSonarLintXmlSettings() is { } sonarLintSettings
-            && IsIncluded(context.Compilation, PropertiesHelper.ReadSourceFileInclusionsProperty(sonarLintSettings, context.Compilation.Language), context.Tree.FilePath)
-            && !IsExcluded(context.Compilation, PropertiesHelper.ReadSourceFileInclusionsProperty(sonarLintSettings, context.Compilation.Language), context.Tree.FilePath)
             && LegacyIsRegisteredActionEnabled(supportedDiagnostics, context.Tree))
         {
             action(context);
         }
     }
-
-    private bool IsIncluded(Compilation compilation, string[] inclusions, string filePath) =>
-        inclusions is null
-        || inclusions.Length == 0
-        || FindOrCreate(compilation, InclusionsCache, inclusions, filePath);
-
-    private bool IsExcluded(Compilation compilation, string[] exclusions, string filePath) =>
-        exclusions is { Length: > 0 } && FindOrCreate(compilation, ExclusionsCache, exclusions, filePath);
-
-    private bool FindOrCreate(Compilation compilation,
-                              ConditionalWeakTable<Compilation, ConcurrentDictionary<string, bool>> compilationCache,
-                              string[] set,
-                              string filePath)
-    {
-        var cache = compilationCache.GetValue(compilation, x => new());
-        if (!cache.TryGetValue(filePath, out var wrapper))
-        {
-            wrapper = set.Any(x => IsMatch(x, filePath));
-            cache[filePath] = wrapper;
-        }
-        return wrapper;
-    }
-
-    private bool IsMatch(string pattern, string filePath) =>
-        globPatternMatcher.IsMatch(pattern, filePath);
 }

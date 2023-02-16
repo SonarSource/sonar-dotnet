@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Text;
 using System.Xml.Linq;
 using Microsoft.CodeAnalysis.Text;
 
@@ -43,30 +44,38 @@ namespace SonarAnalyzer.Helpers
         public static bool ReadIgnoreHeaderCommentsProperty(IEnumerable<XElement> settings, string language) =>
             ReadBooleanProperty(settings, language, "ignoreHeaderComments");
 
-        public static string[] ReadSourceFileInclusionsProperty(IEnumerable<XElement> settings, string language) =>
-            ReadCommaSeparatedArrayProperty(settings, language, "sonar.inclusions");
+        public static string[] ReadSourceFileInclusionsProperty(IEnumerable<XElement> settings) =>
+            ReadCommaSeparatedArrayProperty(settings, "inclusions");
 
-        public static string[] ReadSourceFileExclusionsProperty(IEnumerable<XElement> settings, string language) =>
-            ReadCommaSeparatedArrayProperty(settings, language, "sonar.exclusions");
+        public static string[] ReadSourceFileExclusionsProperty(IEnumerable<XElement> settings) =>
+            ReadCommaSeparatedArrayProperty(settings, "exclusions");
 
         private static bool ReadBooleanProperty(IEnumerable<XElement> settings, string language, string propertySuffix, bool defaultValue = false) =>
             settings.Any()
-                && GetPropertyStringValue(settings, GetPropertyName(language, propertySuffix)) is { } propertyStringValue
+                && GetPropertyStringValue(settings, GetPropertyName(propertySuffix, language)) is { } propertyStringValue
                 && bool.TryParse(propertyStringValue, out var propertyValue)
                 ? propertyValue
                 : defaultValue;
 
-        public static string[] ReadCommaSeparatedArrayProperty(IEnumerable<XElement> settings, string language, string propertySuffix, params string[] defaultValue) =>
+        public static string[] ReadCommaSeparatedArrayProperty(IEnumerable<XElement> settings, string propertySuffix) =>
             settings.Any()
-                && GetPropertyStringValue(settings, GetPropertyName(language, propertySuffix)) is { } propertyStringValue
+                && GetPropertyStringValue(settings, GetPropertyName(propertySuffix)) is { } propertyStringValue
                 && propertyStringValue.Split(',') is { } propertyValue
                 ? propertyValue
-                : defaultValue;
+                : new string[] { };
 
         private static string GetPropertyStringValue(IEnumerable<XElement> settings, string propName) =>
             settings.FirstOrDefault(s => s.Element("Key")?.Value == propName)?.Element("Value").Value;
 
-        public static string GetPropertyName(string language, string propertySuffix) =>
-            $"sonar.{(language.Equals(LanguageNames.CSharp) ? "cs" : "vbnet")}.{propertySuffix}";
+        public static string GetPropertyName(string propertySuffix, string language = "")
+        {
+            StringBuilder sb = new("sonar");
+            if (!string.IsNullOrEmpty(language))
+            {
+                sb.Append(language.Equals(LanguageNames.CSharp) ? ".cs" : ".vbnet");
+            }
+            sb.Append($".{propertySuffix}");
+            return sb.ToString();
+        }
     }
 }
