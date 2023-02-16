@@ -120,7 +120,6 @@ public class SonarAnalysisContext
         // Second, we call an external delegate (set by legacy SonarLint for VS) to ensure the rule should be run (usually
         // the decision is made on based on whether the project contains the analyzer as NuGet).
         if (context.HasMatchingScope(supportedDiagnostics)
-            && context.ShouldAnalyzeFile(context.Compilation, context.Options.ParseSonarLintXmlSettings(), context.Tree.FilePath)
             && context.ShouldAnalyzeTree(sourceTree, generatedCodeRecognizer)
             && LegacyIsRegisteredActionEnabled(supportedDiagnostics, context.Tree))
         {
