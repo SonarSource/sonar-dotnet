@@ -15,6 +15,71 @@
 },
 {
 "id":  "S2223",
+"message":  "Change the visibility of 'hexChars' or make it 'const' or 'readonly'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  23,
+"endLine":  47,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S2223",
+"message":  "Change the visibility of 'entitiesLock' or make it 'const' or 'readonly'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  23,
+"endLine":  48,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2223",
+"message":  "Change the visibility of 'entities' or make it 'const' or 'readonly'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  47,
+"endLine":  49,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S2223",
+"message":  "Change the visibility of 'defaultEncoder' or make it 'const' or 'readonly'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  28,
+"endLine":  54,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2223",
+"message":  "Change the visibility of 'currentEncoder' or make it 'const' or 'readonly'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  28,
+"endLine":  56,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2223",
 "message":  "Change the visibility of 'DEFAULT_SWITCHOVER_THRESHOLD' or make it 'const' or 'readonly'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\IO\RequestStream.cs",
@@ -23,6 +88,19 @@
 "startColumn":  28,
 "endLine":  19,
 "endColumn":  56
+}
+}
+},
+{
+"id":  "S2223",
+"message":  "Change the visibility of 'mimeTypes' or make it 'const' or 'readonly'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  44,
+"endLine":  41,
+"endColumn":  53
 }
 }
 },
