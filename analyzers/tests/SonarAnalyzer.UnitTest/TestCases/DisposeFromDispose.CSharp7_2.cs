@@ -53,13 +53,13 @@ namespace Tests.Diagnostics
         }
     }
 
-    public class OutterClass : IDisposable
+    public class OuterClass : IDisposable
     {
         private Stream stream;
 
         class InnerClass : IDisposable
         {
-            public void M(OutterClass outter)
+            public void M(OuterClass outter)
             {
                 outter.stream.Dispose(); // Compliant
             }
