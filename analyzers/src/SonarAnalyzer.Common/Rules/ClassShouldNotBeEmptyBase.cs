@@ -48,11 +48,11 @@ public abstract class ClassShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosticAn
                 {
                     c.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation(), DeclarationTypeKeyword(c.Node)));
                 }
-
-                bool ShouldIgnoreBecauseOfBaseClass(SyntaxNode node, SemanticModel model) =>
-                    IsClassWithDeclaredBaseClass(node)
-                    && model.GetDeclaredSymbol(node) is INamedTypeSymbol classSymbol
-                    && (classSymbol.BaseType is { IsAbstract: true } || classSymbol.DerivesFromAny(BaseClassesToIgnore));
             },
             Language.SyntaxKind.ClassAndRecordClassDeclarations);
+
+    private bool ShouldIgnoreBecauseOfBaseClass(SyntaxNode node, SemanticModel model) =>
+        IsClassWithDeclaredBaseClass(node)
+        && model.GetDeclaredSymbol(node) is INamedTypeSymbol classSymbol
+        && (classSymbol.BaseType is { IsAbstract: true } || classSymbol.DerivesFromAny(BaseClassesToIgnore));
 }
