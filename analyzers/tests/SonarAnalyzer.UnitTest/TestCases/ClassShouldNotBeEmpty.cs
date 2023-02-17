@@ -73,8 +73,9 @@ class GenericNotEmptyWithConstraints<T>
     void Method(T arg) { }
 }
 
-
 static class StaticEmpty { }                 // Noncompliant
+
+abstract class AbstractEmpty { }             // Noncompliant
 
 partial class PartialEmpty { }               // Compliant - Source Generators and some frameworks use empty partial classes as placeholders
 

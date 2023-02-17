@@ -97,6 +97,8 @@ Class GenericNotEmptyWithConstraints(Of T As Class)
     End Sub
 End Class
 
+MustInherit Class AbstractEmpty                     ' Noncompliant
+End Class
 
 Partial Class PartialEmpty                          ' Compliant - Source Generators and some frameworks use empty partial classes as placeholders
 End Class
