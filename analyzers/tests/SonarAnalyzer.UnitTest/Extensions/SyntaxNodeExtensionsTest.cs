@@ -646,10 +646,7 @@ public class X
     }}
 }}
 ";
-            var position = code.IndexOf("$$");
-            code = code.Replace("$$", string.Empty);
-            var (tree, _) = TestHelper.CompileCS(code);
-            var node = tree.GetRoot().FindNode(new TextSpan(position, 0));
+            var node = NodeAtMarker(code);
             var parentConditional = SyntaxNodeExtensionsCS.GetParentConditionalAccessExpression(node);
             parentConditional.ToString().Should().Be(parent);
             parentConditional.Expression.ToString().Should().Be(parentExpression);
@@ -681,12 +678,18 @@ public class X
     }}
 }}
 ";
+            var node = NodeAtMarker(code);
+            var parentConditional = SyntaxNodeExtensionsCS.GetRootConditionalAccessExpression(node);
+            parentConditional.ToString().Should().Be(expression.Replace("$$", string.Empty));
+        }
+
+        private static SyntaxNode NodeAtMarker(string code)
+        {
             var position = code.IndexOf("$$");
             code = code.Replace("$$", string.Empty);
             var (tree, _) = TestHelper.CompileCS(code);
             var node = tree.GetRoot().FindNode(new TextSpan(position, 0));
-            var parentConditional = SyntaxNodeExtensionsCS.GetRootConditionalAccessExpression(node);
-            parentConditional.ToString().Should().Be(expression.Replace("$$", string.Empty));
+            return node;
         }
 
         private static SyntaxToken GetFirstTokenOfKind(SyntaxTree syntaxTree, SyntaxKind kind) =>
