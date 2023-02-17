@@ -1,8 +1,8 @@
 ﻿using System;
 
-record EmptyRecord1();                                              // Noncompliant {{Remove this empty record, or add members to it.}}
+record EmptyRecord1();                                      // Noncompliant {{Remove this empty record, or add members to it.}}
 //     ^^^^^^^^^^^^
-record EmptyRecord2() { };                                          // Noncompliant
+record EmptyRecord2() { };                                  // Noncompliant
 
 record RecordWithParameters(int RecordMember);
 
@@ -35,10 +35,10 @@ record RecordWithEvent
     event EventHandler CustomEvent;
 }
 
-partial record EmptyPartialRecord();                                // Compliant - partial classes are ignored, so partial record classes are ignored as well
+partial record EmptyPartialRecord();                            // Compliant - partial classes are ignored, so partial record classes are ignored as well
 
-record EmptyGenericRecord<T>();                                     // Noncompliant
+record EmptyGenericRecord<T>();                                 // Noncompliant
 //     ^^^^^^^^^^^^^^^^^^
-record EmptyGenericRecordWithContraint<T>() where T : class;        // Noncompliant
+record EmptyGenericRecordWithContraint<T>() where T : class;    // Noncompliant
 record NotEmptyGenericRecord<T>(T RecordMember);
 record NotEmptyGenericRecordWithContraint<T>(T RecordMember) where T : class;

@@ -11,9 +11,3 @@ record class NotEmptyRecordClass2()
 {
     int RecordMember => 42;
 };
-
-record struct NotEmptyRecordStruct1(int RecordMember);
-record struct NotEmptyRecordStruct2()
-{
-    int RecordMember => 42;
-};

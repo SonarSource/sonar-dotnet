@@ -8,7 +8,7 @@ End Class
 Public Class PublicEmpty                            ' Noncompliant
 End Class
 
-Class InternalEmpty                                 ' Noncompliant
+Friend Class InternalEmpty                          ' Noncompliant
 End Class
 
 Class EmptyWithComments                             ' Noncompliant
@@ -58,10 +58,10 @@ Class OuterClass
     Protected Class InnerEmpty3                     ' Noncompliant
     End Class
 
-    Class InnerEmpty4                               ' Noncompliant
+    Friend Class InnerEmpty4                        ' Noncompliant
     End Class
 
-    Protected Class InnerEmpty5                     ' Noncompliant
+    Protected Friend Class InnerEmpty5              ' Noncompliant
     End Class
 
     Public Class InnerEmpty6                        ' Noncompliant
@@ -80,7 +80,7 @@ Class OuterClass
     End Class
 End Class
 
-Class GenericEmpty(Of T)
+Class GenericEmpty(Of T)                            ' Noncompliant
     ' ^^^^^^^^^^^^
 End Class
 
