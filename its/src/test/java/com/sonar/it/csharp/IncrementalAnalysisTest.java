@@ -112,16 +112,16 @@ public class IncrementalAnalysisTest {
     assertThat(endStepResults.getLogs()).doesNotContain("Adding normal issue S1134: " + unchanged2Path);
     assertThat(endStepResults.getLogs()).contains("Adding normal issue S1134: " + withChangesPath);
     assertThat(endStepResults.getLogs()).contains("Adding normal issue S1134: " + fileToBeAddedPath);
-    List<Issues.Issue> fixMeTagTrackingIssues = TestUtils
+    List<Issues.Issue> fixMeIssues = TestUtils
         .getIssues(ORCHESTRATOR, PROJECT, PULL_REQUEST_KEY)
         .stream()
         .filter(x -> x.getRule().equals("csharpsquid:S1134"))
         .collect(Collectors.toList());
-    assertThat(fixMeTagTrackingIssues).hasSize(2);
-    assertThat(fixMeTagTrackingIssues.get(0).getRule()).isEqualTo("csharpsquid:S1134");
-    assertThat(fixMeTagTrackingIssues.get(0).getComponent()).isEqualTo("IncrementalPRAnalysis:IncrementalPRAnalysis/AddedFile.cs");
-    assertThat(fixMeTagTrackingIssues.get(1).getRule()).isEqualTo("csharpsquid:S1134");
-    assertThat(fixMeTagTrackingIssues.get(1).getComponent()).isEqualTo("IncrementalPRAnalysis:IncrementalPRAnalysis/WithChanges.cs");
+    assertThat(fixMeIssues).hasSize(2);
+    assertThat(fixMeIssues.get(0).getRule()).isEqualTo("csharpsquid:S1134");
+    assertThat(fixMeIssues.get(0).getComponent()).isEqualTo("IncrementalPRAnalysis:IncrementalPRAnalysis/AddedFile.cs");
+    assertThat(fixMeIssues.get(1).getRule()).isEqualTo("csharpsquid:S1134");
+    assertThat(fixMeIssues.get(1).getComponent()).isEqualTo("IncrementalPRAnalysis:IncrementalPRAnalysis/WithChanges.cs");
   }
 
   @Test
@@ -138,18 +138,18 @@ public class IncrementalAnalysisTest {
     assertTrue(endStepResults.isSuccess());
     assertCacheIsUsed(beginStepResults, PROJECT);
     assertAllFilesWereAnalysed(endStepResults, projectDir);
-    List<Issues.Issue> fixMeTagTrackingIssues = TestUtils
+    List<Issues.Issue> fixMeIssues = TestUtils
       .getIssues(ORCHESTRATOR, PROJECT, PULL_REQUEST_KEY)
       .stream()
       .filter(x -> x.getRule().equals("csharpsquid:S1134"))
       .collect(Collectors.toList());
-    assertThat(fixMeTagTrackingIssues).hasSize(3);
-    assertThat(fixMeTagTrackingIssues.get(0).getRule()).isEqualTo("csharpsquid:S1134");
-    assertThat(fixMeTagTrackingIssues.get(0).getComponent()).isEqualTo("IncrementalPRAnalysis:Unchanged1.cs");
-    assertThat(fixMeTagTrackingIssues.get(1).getRule()).isEqualTo("csharpsquid:S1134");
-    assertThat(fixMeTagTrackingIssues.get(1).getComponent()).isEqualTo("IncrementalPRAnalysis:Unchanged2.cs");
-    assertThat(fixMeTagTrackingIssues.get(2).getRule()).isEqualTo("csharpsquid:S1134");
-    assertThat(fixMeTagTrackingIssues.get(2).getComponent()).isEqualTo("IncrementalPRAnalysis:WithChanges.cs");
+    assertThat(fixMeIssues).hasSize(3);
+    assertThat(fixMeIssues.get(0).getRule()).isEqualTo("csharpsquid:S1134");
+    assertThat(fixMeIssues.get(0).getComponent()).isEqualTo("IncrementalPRAnalysis:Unchanged1.cs");
+    assertThat(fixMeIssues.get(1).getRule()).isEqualTo("csharpsquid:S1134");
+    assertThat(fixMeIssues.get(1).getComponent()).isEqualTo("IncrementalPRAnalysis:Unchanged2.cs");
+    assertThat(fixMeIssues.get(2).getRule()).isEqualTo("csharpsquid:S1134");
+    assertThat(fixMeIssues.get(2).getComponent()).isEqualTo("IncrementalPRAnalysis:WithChanges.cs");
   }
 
   @Test
