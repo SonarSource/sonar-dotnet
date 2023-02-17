@@ -20,8 +20,7 @@ namespace Tests.TestCases
 
         private static double Pi8 = 3.14;
         private double Pi9 = 3.14;
-        static double Pi10 = 3.14; // Noncompliant "internal" is the default if no access modifier is specified
-                                   // https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/access-modifiers
+        static double Pi10 = 3.14; // Compliant - if not access modifier exist the field is private
         public readonly double Pi11 = 3.14;
 
         [ThreadStatic]

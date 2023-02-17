@@ -49,8 +49,9 @@ namespace SonarAnalyzer.Rules.CSharp
             : Enumerable.Empty<Diagnostic>();
 
         private static bool FieldIsRelevant(FieldDeclarationSyntax node) =>
-            !node.Modifiers.Any(SyntaxKind.PrivateKeyword)
-            && node.Modifiers.Any(SyntaxKind.StaticKeyword)
+            node.Modifiers.Any(SyntaxKind.StaticKeyword)
+            && node.Modifiers.Count > 1
+            && !node.Modifiers.Any(SyntaxKind.PrivateKeyword)
             && !node.Modifiers.Any(SyntaxKind.ReadOnlyKeyword);
 
         private static bool FieldIsThreadSafe(IFieldSymbol fieldSymbol) =>
