@@ -515,7 +515,14 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar
                     }
                     else
                     {
-                        throw new NotSupportedException($"{instruction.Kind()}");
+                        // Unsupported patten kinds:
+                        // * ParenthesizedPattern
+                        // * BinaryPattern
+                        // * UnaryPattern
+                        // * VarPattern
+                        // * RelationalPattern
+                        // * ListPattern
+                        // * SlicePattern
                     }
                     break;
 

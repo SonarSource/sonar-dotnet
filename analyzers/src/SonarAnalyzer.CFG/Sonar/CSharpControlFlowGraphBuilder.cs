@@ -1286,6 +1286,36 @@ namespace SonarAnalyzer.CFG.Sonar
                 currentBlock.ReversedInstructions.Add(patternSyntaxWrapper);
                 return currentBlock;
             }
+            else if (ParenthesizedPatternSyntaxWrapper.IsInstance(patternSyntaxWrapper))
+            {
+                var parenthesized = (ParenthesizedPatternSyntaxWrapper)patternSyntaxWrapper;
+                return BuildPatternExpression(parenthesized.Pattern, currentBlock);
+            }
+            else if (BinaryPatternSyntaxWrapper.IsInstance(patternSyntaxWrapper))
+            {
+                // Unsupported
+                return currentBlock;
+            }
+            else if (UnaryPatternSyntaxWrapper.IsInstance(patternSyntaxWrapper))
+            {
+                // Unsupported
+                return currentBlock;
+            }
+            else if (VarPatternSyntaxWrapper.IsInstance(patternSyntaxWrapper))
+            {
+                // Unsupported
+                return currentBlock;
+            }
+            else if (RelationalPatternSyntaxWrapper.IsInstance(patternSyntaxWrapper))
+            {
+                // Unsupported
+                return currentBlock;
+            }
+            else if (ListPatternSyntaxWrapper.IsInstance(patternSyntaxWrapper))
+            {
+                // Unsupported
+                return currentBlock;
+            }
 
             throw new NotSupportedException($"{patternSyntaxWrapper.SyntaxNode.Kind()}");
         }
