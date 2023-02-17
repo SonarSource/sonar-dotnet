@@ -25,6 +25,13 @@ namespace Tests.Diagnostics
             Assert.Same("", str);
             Assert.Equal(42, d, 1);
         }
+
+        [Fact]
+        public void Dynamic()
+        {
+            dynamic d = 42;
+            Assert.Equal(d, 35);    // Noncompliant
+        }
     }
 }
 
