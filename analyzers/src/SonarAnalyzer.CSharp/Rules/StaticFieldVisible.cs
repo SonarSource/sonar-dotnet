@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool FieldIsRelevant(FieldDeclarationSyntax node) =>
             !node.Modifiers.Any(SyntaxKind.PrivateKeyword)
             && node.Modifiers.Any(SyntaxKind.StaticKeyword)
-            && !(node.Modifiers.Any(SyntaxKind.ConstKeyword) || node.Modifiers.Any(SyntaxKind.ReadOnlyKeyword));
+            && !node.Modifiers.Any(SyntaxKind.ReadOnlyKeyword);
 
         private static bool FieldIsThreadSafe(IFieldSymbol fieldSymbol) =>
             fieldSymbol.GetAttributes().Any(x => x.AttributeClass.Is(KnownType.System_ThreadStaticAttribute));
