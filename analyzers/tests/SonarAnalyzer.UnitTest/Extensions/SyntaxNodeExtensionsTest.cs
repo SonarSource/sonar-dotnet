@@ -631,21 +631,20 @@ End Class";
         [DataRow("A?.$$B?.C", "A?.B?.C", "A")]
         public void GetParentConditionalAccessExpression(string expression, string parent, string parentExpression)
         {
-            var code = @$"
-public class X
-{{
-    public X A {{ get; }}
-    public X B {{ get; }}
-    public X C {{ get; }}
-    public X this[int i] => null;
-
-    public X M()
-    {{
-        var _ = {expression};
-        return null;
-    }}
-}}
-";
+            var code = $$"""
+                public class X
+                {
+                    public X A { get; }
+                    public X B { get; }
+                    public X C { get; }
+                    public X this[int i] => null;
+                    public X M()
+                    {
+                        var _ = {{expression}};
+                        return null;
+                    }
+                }
+                """;
             var node = NodeAtMarker(code);
             var parentConditional = SyntaxNodeExtensionsCS.GetParentConditionalAccessExpression(node);
             parentConditional.ToString().Should().Be(parent);
