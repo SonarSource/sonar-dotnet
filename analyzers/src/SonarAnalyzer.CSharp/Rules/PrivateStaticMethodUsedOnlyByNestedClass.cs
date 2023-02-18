@@ -21,10 +21,10 @@
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class PrivateMethodUsedOnlyByInnerClass : SonarDiagnosticAnalyzer
+public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAnalyzer
 {
     private const string DiagnosticId = "S3398";
-    private const string MessageFormat = "Move '{0}' inside '{1}'.";
+    private const string MessageFormat = "Move the method inside '{1}'.";
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
@@ -36,7 +36,7 @@ public sealed class PrivateMethodUsedOnlyByInnerClass : SonarDiagnosticAnalyzer
                 var node = c.Node;
                 if (true)
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation(), "MethodName", "InnerClassName"));
+                    c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation(), "InnerClassName"));
                 }
             },
             SyntaxKind.MethodDeclaration);
