@@ -26,9 +26,9 @@ public sealed class ClassShouldNotBeEmpty : ClassShouldNotBeEmptyBase<SyntaxKind
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
     protected override bool IsEmptyAndNotPartial(SyntaxNode node) =>
-        node is TypeDeclarationSyntax { Members.Count: 0 } typeDeclaration && !typeDeclaration.Modifiers.Any(x => x.IsKind(SyntaxKind.PartialKeyword))
-        && (node is ClassDeclarationSyntax
-           || (RecordDeclarationSyntaxWrapper.IsInstance(node) && (RecordDeclarationSyntaxWrapper)node is { ParameterList.Parameters.Count: 0 }));
+        node is TypeDeclarationSyntax { Members.Count: 0 } typeDeclaration
+        && !typeDeclaration.Modifiers.Any(x => x.IsKind(SyntaxKind.PartialKeyword))
+        && (node is ClassDeclarationSyntax || IsParameterlessRecord(node));
 
     protected override bool IsClassWithDeclaredBaseClass(SyntaxNode node) => node is ClassDeclarationSyntax { BaseList: not null };
 
@@ -36,4 +36,8 @@ public sealed class ClassShouldNotBeEmpty : ClassShouldNotBeEmptyBase<SyntaxKind
         node is TypeDeclarationSyntax typeDeclaration
             ? typeDeclaration.Keyword.ValueText
             : "type";
+
+    private bool IsParameterlessRecord(SyntaxNode node) =>
+        RecordDeclarationSyntaxWrapper.IsInstance(node)
+        && (RecordDeclarationSyntaxWrapper)node is { ParameterList.Parameters.Count: 0 };
 }
