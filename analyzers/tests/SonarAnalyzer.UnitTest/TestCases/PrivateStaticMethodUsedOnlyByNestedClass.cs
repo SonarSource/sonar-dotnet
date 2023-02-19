@@ -14,6 +14,8 @@ class OuterClass
     static void UnusedMethod() { }                                  // Compliant - no need to move unused method anywhere
 
     void NotStatic() { }                                            // Compliant - method is not static
+    static int _outerField;                                         // Compliant - not a method
+    static int OuterProp { get; set; }                              // Compliant - not a method
 
     public static void PublicMethod() { }                           // Compliant - method is not private
     protected static void ProtectedMethod() { }                     // Compliant - method is not private
@@ -42,16 +44,15 @@ class OuterClass
 
     class NestedClass
     {
-        int _field = UsedOnlyByFieldInitializerInNestedClass();
-
-        int Prop => UsedOnlyByPropertyInNestedClass();
+        int _nestedField = UsedOnlyByFieldInitializerInNestedClass();
+        int NestedProp => UsedOnlyByPropertyInNestedClass();
 
         public NestedClass()
         {
             UsedOnlyByConstructorInNestedClass();
         }
 
-        static void OnlyUsedByDeeperNestedClass() { }                   // Noncompliant {{Move the method inside 'DeeperNestedClass'.}}
+        static void OnlyUsedByDeeperNestedClass() { }               // Noncompliant {{Move the method inside 'DeeperNestedClass'.}}
 
         void Bar()
         {
@@ -63,6 +64,8 @@ class OuterClass
             UsedByNestedClassAndDeeperNestedClass();
 
             new OuterClass().NotStatic();
+            _outerField = 42;
+            OuterProp = 42;
 
             PublicMethod();
             ProtectedMethod();
@@ -107,7 +110,7 @@ class OuterClass
 
 class ClassContainsStruct
 {
-    static void OnlyUsedByNestedStruct() { }                            // Noncompliant
+    static void OnlyUsedByNestedStruct() { }                        // Noncompliant
 
     struct NestedStruct
     {
@@ -120,7 +123,7 @@ class ClassContainsStruct
 
 struct StructContainsClass
 {
-    static void OnlyUsedByNestedClass() { }                             // Noncompliant
+    static void OnlyUsedByNestedClass() { }                         // Noncompliant
 
     class NestedClass
     {
@@ -133,8 +136,8 @@ struct StructContainsClass
 
 partial class PartialOuterClass
 {
-    static void OnlyUsedByNestedClass() { }                             // Noncompliant
-    static partial void PartialOnlyUsedByNestedClass() { }              // Noncompliant
+    static void OnlyUsedByNestedClass() { }                         // Noncompliant
+    static partial void PartialOnlyUsedByNestedClass() { }          // Noncompliant
 }
 
 partial class PartialOuterClass
@@ -150,7 +153,3 @@ partial class PartialOuterClass
         }
     }
 }
-
-// static classes
-// nameof
-// top-level methods
