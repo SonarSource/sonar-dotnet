@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Helpers;
-
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -50,26 +48,65 @@ public sealed class AssertionsShouldBeComplete : SonarDiagnosticAnalyzer
                 if (start.Compilation.References(KnownAssembly.FluentAssertions))
                 {
                     start.RegisterNodeAction(c =>
-                    {
-                        CheckInvocation(c, invoke => invoke.NameIs("Should")
-                            && c.SemanticModel.GetSymbolInfo(invoke) is { Symbol: IMethodSymbol method }
-                            && method.ContainingType.Is(KnownType.FluentAssertions_Execution_AssertionScope));
-                    }, SyntaxKind.InvocationExpression);
+                        CheckInvocation(c, invocation =>
+                            invocation.NameIs("Should")
+                            && c.SemanticModel.GetSymbolInfo(invocation).AllSymbols().Any(x =>
+                                x is IMethodSymbol { IsExtensionMethod: true } method
+                                && method.ContainingType?.IsStatic is true
+                                && method.ContainingType.Is(KnownType.FluentAssertions_AssertionExtensions))),
+                            SyntaxKind.InvocationExpression);
                 }
                 if (start.Compilation.References(KnownAssembly.NFluent))
                 {
                     start.RegisterNodeAction(c =>
-                    {
-
-                    }, SyntaxKind.InvocationExpression);
+                        CheckInvocation(c, invocation =>
+                            invocation.NameIs("That", "ThatCode", "ThatAsyncCode", "ThatDynamic")
+                            && c.SemanticModel.GetSymbolInfo(invocation) is { Symbol: IMethodSymbol { IsStatic: true } method }
+                            && method.ContainingType?.IsStatic is true
+                            && method.ContainingType.Is(KnownType.NFluent_Check)), SyntaxKind.InvocationExpression);
                 }
                 if (start.Compilation.References(KnownAssembly.NSubstitute))
                 {
                     start.RegisterNodeAction(c =>
-                    {
-
-                    }, SyntaxKind.InvocationExpression);
+                        CheckInvocation(c, invocation =>
+                            invocation.NameIs("DidNotReceive", "DidNotReceiveWithAnyArgs", "Received", "ReceivedCalls", "ReceivedWithAnyArgs")
+                            && c.SemanticModel.GetSymbolInfo(invocation) is { Symbol: IMethodSymbol { IsStatic: true } method }
+                            && method.ContainingType?.IsStatic is true
+                            && method.ContainingType.Is(KnownType.NSubstitute_SubstituteExtensions)), SyntaxKind.InvocationExpression);
                 }
             });
-    private void CheckInvocation(SonarSyntaxNodeReportingContext c, Func<InvocationExpressionSyntax, bool> value) => throw new NotImplementedException();
+
+    private void CheckInvocation(SonarSyntaxNodeReportingContext c, Func<InvocationExpressionSyntax, bool> isAssertionMethod)
+    {
+        if (c.Node is InvocationExpressionSyntax invocation
+            && isAssertionMethod(invocation)
+            && !HasContinuation(invocation))
+        {
+            c.ReportIssue(Diagnostic.Create(Rule, invocation.GetLocation()));
+        }
+    }
+
+    private static bool HasContinuation(InvocationExpressionSyntax invocation)
+    {
+        var closeParen = invocation.ArgumentList.CloseParenToken;
+        if (!closeParen.IsKind(SyntaxKind.CloseParenToken))
+        {
+            // Any invocation should end with ")". We are in unknown territory here.
+            return true;
+        }
+        if (closeParen.GetNextToken() is var nextToken
+            && !nextToken.IsKind(SyntaxKind.SemicolonToken))
+        {
+            // There is something right to the invocation that is not a semicolon.
+            return true;
+        }
+        // We are in some kind of statement context "??? Should();"
+        // The result might be stored in a variable or returned from the method
+        if (invocation.Ancestors().TakeWhile(x => !(x.IsAnyKind(SyntaxKind.Block, SyntaxKindEx.LocalFunctionStatement) || x is BaseMethodDeclarationSyntax or AnonymousFunctionExpressionSyntax)).
+            Any(x => x.IsAnyKind(SyntaxKind.ReturnStatement, SyntaxKind.ArrowExpressionClause) || x is AssignmentExpressionSyntax or LocalDeclarationStatementSyntax))
+        {
+            return true;
+        }
+        return false;
+    }
 }

@@ -18,23 +18,17 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Rules.CSharp;
-using SonarAnalyzer.UnitTest.MetadataReferences;
 
-namespace SonarAnalyzer.UnitTest.Rules;
-
-[TestClass]
-public class AssertionsShouldBeCompleteTest
+namespace SonarAnalyzer.Extensions
 {
-    private readonly VerifierBuilder builder = new VerifierBuilder<AssertionsShouldBeComplete>();
-
-    [TestMethod]
-    public void AssertionsShouldBeComplete_CS() =>
-        builder
-        .AddPaths("AssertionsShouldBeComplete.FluentAssertions.cs")
-        .AddReferences(NuGetMetadataReference.FluentAssertions("6.10"))
-        .AddReferences(MetadataReferenceFacade.SystemXml)
-        .AddReferences(MetadataReferenceFacade.SystemNetHttp)
-        .AddReferences(MetadataReferenceFacade.SystemData)
-        .Verify();
+    public static class SymbolInfoExtensions
+    {
+        /// <summary>
+        /// Returns the <see cref="SymbolInfo.Symbol"/> or if no symbol could be found the <see cref="SymbolInfo.CandidateSymbols"/>.
+        /// </summary>
+        public static IEnumerable<ISymbol> AllSymbols(this SymbolInfo symbolInfo) =>
+            symbolInfo.Symbol == null
+                ? symbolInfo.CandidateSymbols
+                : new[] { symbolInfo.Symbol };
+    }
 }
