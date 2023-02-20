@@ -37,7 +37,9 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Azure_ResourceManager_ArmClient = new("Azure.ResourceManager.ArmClient");
         public static readonly KnownType Dapper_SqlMapper = new("Dapper.SqlMapper");
         public static readonly KnownType Dapper_CommandDefinition = new("Dapper.CommandDefinition");
+        public static readonly KnownType FluentAssertions_AssertionExtensions = new("FluentAssertions.AssertionExtensions");
         public static readonly KnownType FluentAssertions_Execution_AssertionScope = new("FluentAssertions.Execution.AssertionScope");
+        public static readonly KnownType FluentAssertions_Primitives_ReferenceTypeAssertions = new("FluentAssertions.Primitives.ReferenceTypeAssertions", "TSubject", "TAssertions");
         public static readonly KnownType JWT_Builder_JwtBuilder = new("JWT.Builder.JwtBuilder");
         public static readonly KnownType JWT_IJwtDecoder = new("JWT.IJwtDecoder");
         public static readonly KnownType JWT_JwtDecoderExtensions = new("JWT.JwtDecoderExtensions");
