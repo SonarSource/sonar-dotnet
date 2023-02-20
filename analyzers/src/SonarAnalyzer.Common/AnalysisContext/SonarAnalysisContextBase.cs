@@ -77,9 +77,8 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
     /// <param name="tree">Tree to decide on. Can be null for Symbol-based and Compilation-based scenarios. And we want to analyze those too.</param>
     /// <param name="generatedCodeRecognizer">When set, generated trees are analyzed only when language-specific 'analyzeGeneratedCode' configuration property is also set.</param>
     public bool ShouldAnalyzeTree(SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer) =>
-        Options.SonarLintXml().GetText() is { } sonarLintXml
-        && (generatedCodeRecognizer is null || ShouldAnalyzeGenerated(sonarLintXml) || !tree.IsGenerated(generatedCodeRecognizer, Compilation))
-        && (tree is null || (!IsUnchanged(tree) && ShouldAnalyzeFile(Compilation, sonarLintXml, tree.FilePath)));
+        (generatedCodeRecognizer is null || ShouldAnalyzeGenerated() || !tree.IsGenerated(generatedCodeRecognizer, Compilation))
+        && (tree is null || (!IsUnchanged(tree) && ShouldAnalyzeFile(tree.FilePath)));
 
     /// <summary>
     /// Reads configuration from SonarProjectConfig.xml file and caches the result for scope of this analysis.
@@ -130,15 +129,20 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
     private ImmutableHashSet<string> CreateUnchangedFilesHashSet() =>
         ImmutableHashSet.Create(StringComparer.OrdinalIgnoreCase, ProjectConfiguration().AnalysisConfig?.UnchangedFiles() ?? Array.Empty<string>());
 
-    private bool ShouldAnalyzeGenerated(SourceText sonarLintXml) =>
-        AnalysisContext.TryGetValue(sonarLintXml, ShouldAnalyzeGeneratedProvider(Compilation.Language), out var shouldAnalyzeGenerated) && shouldAnalyzeGenerated;
+    private bool ShouldAnalyzeGenerated() =>
+        Options.SonarLintXml() is { } sonarLintXml
+        && AnalysisContext.TryGetValue(sonarLintXml.GetText(), ShouldAnalyzeGeneratedProvider(Compilation.Language), out var shouldAnalyzeGenerated)
+        && shouldAnalyzeGenerated;
 
     /// <summary>
     /// Check if the current file path is included or excuded and caches the result.
     /// </summary>
-    private bool ShouldAnalyzeFile(Compilation compilation, SourceText sonarLintXml, string filePath) =>
-        IncludedExcludedFilesCache.GetValue(compilation, x => new()) is var cache
-        && cache.GetOrAdd(filePath, _ => ShouldAnalyzeFile(sonarLintXml, filePath));
+    private bool ShouldAnalyzeFile(string filePath) =>
+        Options.SonarLintXml() is null
+        || Options.SonarLintXml().GetText() is null
+        || (Options.SonarLintXml().GetText() is { } sonarLintXmlText
+            && IncludedExcludedFilesCache.GetValue(Compilation, x => new()) is var cache
+            && cache.GetOrAdd(filePath, _ => ShouldAnalyzeFile(sonarLintXmlText, filePath)));
 
     private bool ShouldAnalyzeFile(SourceText sonarLintXml, string filePath) =>
         AnalysisContext.TryGetValue(sonarLintXml, RetrieveIncludedFiles(), out var inclusions)
