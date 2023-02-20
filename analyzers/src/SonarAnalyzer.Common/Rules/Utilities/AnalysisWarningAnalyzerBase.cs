@@ -30,7 +30,7 @@ public abstract class AnalysisWarningAnalyzerBase : UtilityAnalyzerBase
 
     private static readonly object FileWriteLock = new();
 
-    protected virtual int MinimalSupportedRoslynVersion { get; } = RoslynHelper.MinimalSupportedMajorVersion;   // For testing
+    protected virtual int MinimalSupportedRoslynVersion => RoslynHelper.MinimalSupportedMajorVersion;   // For testing
 
     protected AnalysisWarningAnalyzerBase() : base(DiagnosticId, Title) { }
 

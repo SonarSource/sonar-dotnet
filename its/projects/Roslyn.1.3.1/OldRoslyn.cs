@@ -1,5 +1,4 @@
-﻿
-namespace Roslyn
+﻿namespace Roslyn
 {
     public class OldRoslyn
     {

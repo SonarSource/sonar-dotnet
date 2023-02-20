@@ -70,19 +70,20 @@ public class AnalysisWarningAnalyzerTest
     private string ExecuteAnalyzer(string languageName, bool isAnalyzerEnabled, int minimalSupportedRoslynVersion, bool createDirectory = true)
     {
         var language = AnalyzerLanguage.FromName(languageName);
-        var outPath = TestHelper.TestPath(TestContext, @".sonarqube\out");
+        var analysisOutPath = TestHelper.TestPath(TestContext, @$"{languageName}\.sonarqube\out");
+        var projectOutPath = Path.GetFullPath(Path.Combine(analysisOutPath, "0", "output-language"));
         if (createDirectory)
         {
-            Directory.CreateDirectory(outPath);
+            Directory.CreateDirectory(analysisOutPath);
         }
         UtilityAnalyzerBase analyzer = language.LanguageName switch
         {
-            LanguageNames.CSharp => new TestAnalysisWarningAnalyzer_CS(isAnalyzerEnabled, minimalSupportedRoslynVersion, outPath),
-            LanguageNames.VisualBasic => new TestAnalysisWarningAnalyzer_VB(isAnalyzerEnabled, minimalSupportedRoslynVersion, outPath),
+            LanguageNames.CSharp => new TestAnalysisWarningAnalyzer_CS(isAnalyzerEnabled, minimalSupportedRoslynVersion, projectOutPath),
+            LanguageNames.VisualBasic => new TestAnalysisWarningAnalyzer_VB(isAnalyzerEnabled, minimalSupportedRoslynVersion, projectOutPath),
             _ => throw new UnexpectedLanguageException(language)
         };
         new VerifierBuilder().AddAnalyzer(() => analyzer).AddSnippet(string.Empty).VerifyNoIssueReported(); // Nothing to analyze, just make it run
-        return Path.Combine(outPath, "AnalysisWarnings.MsBuild.json");
+        return Path.Combine(analysisOutPath, "AnalysisWarnings.MsBuild.json");
     }
 
     private sealed class TestAnalysisWarningAnalyzer_CS : CS.AnalysisWarningAnalyzer
@@ -93,7 +94,7 @@ public class AnalysisWarningAnalyzerTest
         {
             IsAnalyzerEnabled = isAnalyzerEnabled;
             MinimalSupportedRoslynVersion = minimalSupportedRoslynVersion;
-            OutPath = Path.GetFullPath(Path.Combine(outPath, "0", "output-language"));
+            OutPath = outPath;
         }
     }
 
