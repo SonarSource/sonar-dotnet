@@ -52,8 +52,8 @@ public sealed class AssertionsShouldBeComplete : SonarDiagnosticAnalyzer
                             invocation.NameIs("Should")
                             && c.SemanticModel.GetSymbolInfo(invocation).AllSymbols().Any(x =>
                                 x is IMethodSymbol { IsExtensionMethod: true } method
-                                && method.ContainingType?.IsStatic is true
-                                && method.ContainingType.Is(KnownType.FluentAssertions_AssertionExtensions))),
+                                && (method.ContainingType.Is(KnownType.FluentAssertions_AssertionExtensions)
+                                    || method.ReturnType.DerivesFrom(KnownType.FluentAssertions_Primitives_ReferenceTypeAssertions)))),
                             SyntaxKind.InvocationExpression);
                 }
                 if (start.Compilation.References(KnownAssembly.NFluent))
