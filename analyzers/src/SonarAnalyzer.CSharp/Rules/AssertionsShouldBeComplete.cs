@@ -89,7 +89,7 @@ public sealed class AssertionsShouldBeComplete : SonarDiagnosticAnalyzer
     private static bool HasContinuation(InvocationExpressionSyntax invocation)
     {
         var closeParen = invocation.ArgumentList.CloseParenToken;
-        if (!closeParen.IsKind(SyntaxKind.CloseParenToken))
+        if (!closeParen.IsKind(SyntaxKind.CloseParenToken) || !invocation.GetLastToken().Equals(closeParen))
         {
             // Any invocation should end with ")". We are in unknown territory here.
             return true;
