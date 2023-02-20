@@ -21,7 +21,6 @@
 using System.Collections.Concurrent;
 using System.IO;
 using System.Runtime.CompilerServices;
-using System.Xml.Linq;
 using Microsoft.CodeAnalysis.Text;
 using static SonarAnalyzer.Helpers.DiagnosticDescriptorFactory;
 
@@ -29,20 +28,31 @@ namespace SonarAnalyzer.AnalysisContext;
 
 public class SonarAnalysisContextBase
 {
-
-    protected static readonly ConditionalWeakTable<Compilation, ConcurrentDictionary<string, bool>> FileCache = new();
+    protected static readonly ConditionalWeakTable<Compilation, ConcurrentDictionary<string, bool>> IncludedExcludedFilesCache = new();
     protected static readonly ConditionalWeakTable<Compilation, ImmutableHashSet<string>> UnchangedFilesCache = new();
     protected static readonly SourceTextValueProvider<ProjectConfigReader> ProjectConfigProvider = new(x => new ProjectConfigReader(x));
     private static readonly Lazy<SourceTextValueProvider<bool>> ShouldAnalyzeGeneratedCS = new(() => CreateAnalyzeGeneratedProvider(LanguageNames.CSharp));
     private static readonly Lazy<SourceTextValueProvider<bool>> ShouldAnalyzeGeneratedVB = new(() => CreateAnalyzeGeneratedProvider(LanguageNames.VisualBasic));
+    private static readonly Lazy<SourceTextValueProvider<string[]>> FileExclusions = new(() => CreateFileExclusions());
+    private static readonly Lazy<SourceTextValueProvider<string[]>> FileInclusions = new(() => CreateFileInclusions());
 
     protected SonarAnalysisContextBase() { }
 
     protected static SourceTextValueProvider<bool> ShouldAnalyzeGeneratedProvider(string language) =>
         language == LanguageNames.CSharp ? ShouldAnalyzeGeneratedCS.Value : ShouldAnalyzeGeneratedVB.Value;
 
+    protected static SourceTextValueProvider<string[]> RetrieveExcludedFiles() => FileExclusions.Value;
+
+    protected static SourceTextValueProvider<string[]> RetrieveIncludedFiles() => FileInclusions.Value;
+
     private static SourceTextValueProvider<bool> CreateAnalyzeGeneratedProvider(string language) =>
         new(x => PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(PropertiesHelper.ParseXmlSettings(x), language));
+
+    private static SourceTextValueProvider<string[]> CreateFileExclusions() =>
+        new(x => PropertiesHelper.ReadSourceFileExclusionsProperty(PropertiesHelper.ParseXmlSettings(x)));
+
+    private static SourceTextValueProvider<string[]> CreateFileInclusions() =>
+        new(x => PropertiesHelper.ReadSourceFileInclusionsProperty(PropertiesHelper.ParseXmlSettings(x)));
 }
 
 public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextBase
@@ -127,13 +137,14 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
     /// Check if the current file path is included or excuded and caches the result.
     /// </summary>
     private bool ShouldAnalyzeFile(Compilation compilation, SourceText sonarLintXml, string filePath) =>
-        FileCache.GetValue(compilation, x => new()) is var cache
-        && PropertiesHelper.ParseXmlSettings(sonarLintXml) is { } sonarLintSettings
-        && cache.GetOrAdd(filePath, _ => ShouldAnalyzeFile(sonarLintSettings, filePath));
+        IncludedExcludedFilesCache.GetValue(compilation, x => new()) is var cache
+        && cache.GetOrAdd(filePath, _ => ShouldAnalyzeFile(sonarLintXml, filePath));
 
-    private bool ShouldAnalyzeFile(XElement[] sonarLintSettings, string filePath) =>
-        IsIncluded(PropertiesHelper.ReadSourceFileInclusionsProperty(sonarLintSettings), filePath)
-        && !IsExcluded(PropertiesHelper.ReadSourceFileExclusionsProperty(sonarLintSettings), filePath);
+    private bool ShouldAnalyzeFile(SourceText sonarLintXml, string filePath) =>
+        AnalysisContext.TryGetValue(sonarLintXml, RetrieveIncludedFiles(), out var inclusions)
+        && AnalysisContext.TryGetValue(sonarLintXml, RetrieveExcludedFiles(), out var exclusions)
+        && IsIncluded(inclusions, filePath)
+        && !IsExcluded(exclusions, filePath);
 
     private bool IsIncluded(string[] inclusions, string filePath) =>
         inclusions is { Length: 0 } || inclusions.Any(x => globPatternMatcher.IsMatch(x, filePath));
