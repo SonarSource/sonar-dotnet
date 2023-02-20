@@ -54,6 +54,20 @@ namespace Repro_6630
 
             Assert.AreEqual(actual: null, expected: new Program()); // Noncompliant
         }
+
+        [Test]
+        public void Dynamic()
+        {
+            dynamic d = 42;
+            Assert.AreEqual(d, 35);    // Noncompliant
+        }
+
+        [Test]
+        public void BrokeSyntax()
+        {
+            double d = 42;
+            Assert.Equual(d, 42);   // Error
+        }
     }
 }
 

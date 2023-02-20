@@ -30,6 +30,20 @@ namespace Tests.Diagnostics
             Assert.AreNotEqual(42, d, 1, "message");
             Assert.IsNull(str);
         }
+
+        [TestMethod]
+        public void Dynamic()
+        {
+            dynamic d = 42;
+            Assert.AreEqual(d, 35);    // Noncompliant
+        }
+
+        [TestMethod]
+        public void BrokeSyntax()
+        {
+            double d = 42;
+            Assert.Equual(d, 42);   // Error
+        }
     }
 }
 

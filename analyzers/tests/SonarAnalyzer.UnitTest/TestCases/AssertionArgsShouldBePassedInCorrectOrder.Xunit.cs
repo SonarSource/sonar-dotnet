@@ -32,6 +32,13 @@ namespace Tests.Diagnostics
             dynamic d = 42;
             Assert.Equal(d, 35);    // Noncompliant
         }
+
+        [Fact]
+        public void BrokeSyntax()
+        {
+            double d = 42;
+            Assert.Equual(d, 42);   // Error
+        }
     }
 }
 
