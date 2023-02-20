@@ -43,8 +43,17 @@ public class GlobPatternMatcher : IGlobPatternMatcher
         private static readonly ConcurrentDictionary<string, WildcardPattern> Cache = new();
         internal readonly Regex Pattern;
 
-        private WildcardPattern(string pattern, string directorySeparator) =>
-            Pattern = new Regex(ToRegexp(pattern, directorySeparator), RegexOptions.None, TimeSpan.FromMilliseconds(100));
+        private WildcardPattern(string pattern, string directorySeparator)
+        {
+            try
+            {
+                Pattern = new Regex(ToRegexp(pattern, directorySeparator), RegexOptions.None, TimeSpan.FromMilliseconds(100));
+            }
+            catch (RegexMatchTimeoutException)
+            {
+                Pattern = null;
+            }
+        }
 
         private static string ToRegexp(string antPattern, string directorySeparator)
         {
