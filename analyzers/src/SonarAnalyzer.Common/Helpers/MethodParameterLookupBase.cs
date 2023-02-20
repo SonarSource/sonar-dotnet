@@ -93,8 +93,8 @@ internal abstract class MethodParameterLookupBase<TArgumentSyntax> : IMethodPara
     /// There could be zero or one result for optional parameters.
     /// There will be single result for normal parameters.
     /// </summary>
-        public bool TryGetSyntax(IParameterSymbol parameter, out ImmutableArray<SyntaxNode> expressions) =>
-            TryGetSyntax(parameter.Name, out expressions);
+    public bool TryGetSyntax(IParameterSymbol parameter, out ImmutableArray<SyntaxNode> expressions) =>
+        TryGetSyntax(parameter.Name, out expressions);
 
     /// <summary>
     /// Method returns array of argument syntaxes that represents all syntaxes passed to the parameter.
@@ -113,7 +113,7 @@ internal abstract class MethodParameterLookupBase<TArgumentSyntax> : IMethodPara
         {
             var candidateArgumentLists = MethodSymbolInfo.Value.CandidateSymbols.OfType<IMethodSymbol>()
                 .Select(x => GetAllArgumentParameterMappings(x).Where(x => x.Symbol.Name == parameterName).Select(x => Expression(x.Node)).ToImmutableArray()).ToImmutableArray();
-            if (candidateArgumentLists.Skip(1).All(x => x.SequenceEqual(candidateArgumentLists[0])))
+            if (candidateArgumentLists.Any() && candidateArgumentLists.Skip(1).All(x => x.SequenceEqual(candidateArgumentLists[0])))
             {
                 expressions = candidateArgumentLists[0];
             }
