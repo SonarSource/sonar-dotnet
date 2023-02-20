@@ -26,15 +26,25 @@ namespace SonarAnalyzer.UnitTest.Rules;
 [TestClass]
 public class AssertionsShouldBeCompleteTest
 {
-    private readonly VerifierBuilder builder = new VerifierBuilder<AssertionsShouldBeComplete>();
-
-    [TestMethod]
-    public void AssertionsShouldBeComplete_CS() =>
-        builder
-        .AddPaths("AssertionsShouldBeComplete.FluentAssertions.cs")
+    private readonly VerifierBuilder fluentAssertions = new VerifierBuilder<AssertionsShouldBeComplete>()
         .AddReferences(NuGetMetadataReference.FluentAssertions("6.10"))
         .AddReferences(MetadataReferenceFacade.SystemXml)
+        .AddReferences(MetadataReferenceFacade.SystemXmlLinq)
         .AddReferences(MetadataReferenceFacade.SystemNetHttp)
-        .AddReferences(MetadataReferenceFacade.SystemData)
+        .AddReferences(MetadataReferenceFacade.SystemData);
+
+    [TestMethod]
+    public void AssertionsShouldBeComplete_CSharp7() =>
+        fluentAssertions
+        .WithOptions(ParseOptionsHelper.OnlyCSharp7)
+        .AddPaths("AssertionsShouldBeComplete.FluentAssertions.CSharp7.cs")
+        .Verify();
+
+    [TestMethod]
+    public void AssertionsShouldBeComplete_CSharp8() =>
+        fluentAssertions
+        .WithOptions(ParseOptionsHelper.FromCSharp8)
+        .AddPaths("AssertionsShouldBeComplete.FluentAssertions.CSharp8.cs")
+        .WithConcurrentAnalysis(false)
         .Verify();
 }

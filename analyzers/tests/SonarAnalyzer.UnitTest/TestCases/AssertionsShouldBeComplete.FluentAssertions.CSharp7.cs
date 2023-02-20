@@ -8,32 +8,26 @@ public class Program
     public void StringAssertions()
     {
         var s = "Test";
-        s.Should();            // Noncompliant {{Complete the assertion}}
-//      ^^^^^^^^^^
-        s?.Should();           // Noncompliant
-        s[0].Should();         // Error [CS0121] ambiguous calls
-                               // Noncompliant@-1
-        s?[0].Should();        // Error [CS0121] ambiguous calls
-                               // Noncompliant@-1
-        s.Should().Be("Test"); // Compliant
+        s.Should();              // Noncompliant {{Complete the assertion}}
+//        ^^^^^^
+        s[0].Should();           // Error [CS0121] ambiguous calls
+                                 // Noncompliant@-1
+        s.Should().Be("Test");   // Compliant
     }
 
     public void DictAssertions()
     {
         var dict = new Dictionary<string, object>();
         dict["A"].Should();    // Noncompliant
-        dict["A"]?.Should();   // Noncompliant
-        dict?["A"].Should();   // Noncompliant
-        dict?["A"]?.Should();  // Noncompliant
     }
 
-    public object ReturnedByReturn()
+    public StringAssertions ReturnedByReturn()
     {
         var s = "Test";
         return s.Should();     // Compliant
     }
 
-    public object ReturnedByArrow(string s) =>
+    public StringAssertions ReturnedByArrow(string s) =>
         s.Should();            // Compliant
 
     public void Assigned()
