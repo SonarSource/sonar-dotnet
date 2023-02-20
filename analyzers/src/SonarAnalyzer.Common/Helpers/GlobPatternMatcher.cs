@@ -130,7 +130,7 @@ public class GlobPatternMatcher : IGlobPatternMatcher
         {
             value = value.TrimStart('/');
             value = value.TrimEnd('/');
-            return Pattern.IsMatch(value);
+            return Pattern is not null && Pattern.IsMatch(value);
         }
 
         /**
