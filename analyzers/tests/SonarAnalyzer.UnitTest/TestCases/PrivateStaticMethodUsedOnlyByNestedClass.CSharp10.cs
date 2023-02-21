@@ -22,8 +22,8 @@
 
 record struct OuterRecordStruct
 {
-    static void UsedOnlyByNestedClass() { }  // Noncompliant
-    static void UsedOnlyByNestedRecord() { } // Noncompliant
+    private static void UsedOnlyByNestedClass() { }  // Noncompliant
+    private static void UsedOnlyByNestedRecord() { } // Noncompliant
 
     class NestedClass
     {

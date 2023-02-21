@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.Runtime.InteropServices;
 
 class OuterClass
 {
@@ -36,6 +37,8 @@ class OuterClass
     static int UsedOnlyByPropertyInNestedClass() => 42;             // Noncompliant
     static int UsedOnlyByFieldInitializerInNestedClass() => 42;     // Noncompliant
     static void UsedOnlyByConstructorInNestedClass() { }            // Noncompliant
+    static void AssignedToDelegateInNestedClass() { }               // Noncompliant
+    static void UsedInNameOfExpressionInNestedClass() { }           // Noncompliant 
 
     void Foo()
     {
@@ -79,6 +82,9 @@ class OuterClass
             MutuallyRecursive1();
 
             ExternalMethod();
+
+            Action methodDelegate = AssignedToDelegateInNestedClass;
+            string methodName = nameof(UsedInNameOfExpressionInNestedClass);
         }
 
         void FooBaz()
@@ -123,7 +129,7 @@ class ClassContainsStruct
 
 struct StructContainsClass
 {
-    static void OnlyUsedByNestedClass() { }                         // Noncompliant
+    private static void OnlyUsedByNestedClass() { }                 // Noncompliant
 
     class NestedClass
     {
@@ -136,8 +142,8 @@ struct StructContainsClass
 
 partial class PartialOuterClass
 {
-    static void OnlyUsedByNestedClass() { }                         // Noncompliant
-    static partial void PartialOnlyUsedByNestedClass() { }          // Noncompliant
+    static void OnlyUsedByNestedClass() { }                         // Compliant - partial classes are often a result of code generation, so their methods shouldn't be moved
+    static partial void PartialOnlyUsedByNestedClass() { }          // Compliant
 }
 
 partial class PartialOuterClass
@@ -153,3 +159,5 @@ partial class PartialOuterClass
         }
     }
 }
+
+// attributes - DebuggerDisplay

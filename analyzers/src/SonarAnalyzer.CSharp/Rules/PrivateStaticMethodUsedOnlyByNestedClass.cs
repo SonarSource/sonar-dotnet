@@ -26,6 +26,15 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
     private const string DiagnosticId = "S3398";
     private const string MessageFormat = "Move the method inside '{1}'.";
 
+    private static readonly SyntaxKind[] AnalyzedSyntaxKinds = new[]
+    {
+        SyntaxKind.ClassDeclaration,
+        SyntaxKind.StructDeclaration,
+        SyntaxKind.InterfaceDeclaration,
+        SyntaxKindEx.RecordClassDeclaration,
+        SyntaxKindEx.RecordStructDeclaration
+    };
+
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
@@ -33,11 +42,62 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(c =>
             {
-                var node = c.Node;
-                if (true)
+                var declaredType = (TypeDeclarationSyntax)c.Node;
+
+                if (!IsPartial(declaredType)
+                    && PrivateStaticMethodsOf(declaredType) is { Length: > 0 } candidates
+                    && NestedTypeDeclarationsOf(declaredType) is { Length: > 0} nestedTypes)
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation(), "InnerClassName"));
+                    c.ReportIssue(Diagnostic.Create(Rule, declaredType.GetLocation(), "InnerClassName"));
                 }
             },
-            SyntaxKind.MethodDeclaration);
+            AnalyzedSyntaxKinds);
+
+    private static MethodDeclarationSyntax[] PrivateStaticMethodsOf(TypeDeclarationSyntax type) =>
+        type.Members
+                .OfType<MethodDeclarationSyntax>()
+                .Where(x => IsPrivateAndStatic(x, type))
+                .ToArray();
+
+    private static TypeDeclarationSyntax[] NestedTypeDeclarationsOf(TypeDeclarationSyntax type) =>
+        type.Members
+            .OfType<TypeDeclarationSyntax>()
+            .Where(x => x is ClassDeclarationSyntax or StructDeclarationSyntax or InterfaceDeclarationSyntax
+                        || RecordDeclarationSyntaxWrapper.IsInstance(x))
+            .ToArray();
+
+    private static bool IsPrivateAndStatic(MethodDeclarationSyntax method, TypeDeclarationSyntax containingType) =>
+        method.Modifiers.Any(x => x.IsKind(SyntaxKind.StaticKeyword))
+        && ((HasAnyModifier(method, SyntaxKind.PrivateKeyword) && !HasAnyModifier(method, SyntaxKind.ProtectedKeyword))
+           || (!HasAnyModifier(method, SyntaxKind.PublicKeyword, SyntaxKind.ProtectedKeyword, SyntaxKind.InternalKeyword) && IsClassOrRecordClassOrInterfaceDeclaration(containingType)));
+
+    private static bool IsPartial(TypeDeclarationSyntax type) =>
+        type.Modifiers.Any(x => x.IsKind(SyntaxKind.PartialKeyword));
+
+    private static bool IsClassOrRecordClassOrInterfaceDeclaration(TypeDeclarationSyntax type) =>
+        type is ClassDeclarationSyntax or InterfaceDeclarationSyntax
+        || (RecordDeclarationSyntaxWrapper.IsInstance(type) && !((RecordDeclarationSyntaxWrapper)type).ClassOrStructKeyword.IsKind(SyntaxKind.StructKeyword));
+
+    private static bool HasAnyModifier(MethodDeclarationSyntax method, params SyntaxKind[] modifiers) =>
+        method.Modifiers.Any(x => x.IsAnyKind(modifiers));
+
+    private class PotentialMethodReferenceCollector : CSharpSyntaxWalker
+    {
+        private readonly ISet<MethodDeclarationSyntax> methodsToFind;
+        internal Dictionary<MethodDeclarationSyntax, List<IdentifierNameSyntax>> PotentialMethodReferences { get; } = new();
+
+        public PotentialMethodReferenceCollector(IEnumerable<MethodDeclarationSyntax> methodsToFind)
+        {
+            this.methodsToFind = new HashSet<MethodDeclarationSyntax>(methodsToFind);
+        }
+
+        public override void VisitIdentifierName(IdentifierNameSyntax identifier)
+        {
+            if (methodsToFind.FirstOrDefault(x => x.Identifier.ValueText == identifier.Identifier.ValueText) is { } method)
+            {
+                var referenceList = PotentialMethodReferences.GetOrAdd(method, _ => new());
+                referenceList.Add(identifier);
+            }
+        }
+    }
 }
