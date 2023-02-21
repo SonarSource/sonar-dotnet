@@ -74,7 +74,8 @@ public sealed class AssertionsShouldBeComplete : SonarDiagnosticAnalyzer
                             invocation.NameIs("DidNotReceive", "DidNotReceiveWithAnyArgs", "Received", "ReceivedCalls", "ReceivedWithAnyArgs")
                             && c.SemanticModel.GetSymbolInfo(invocation) is { Symbol: IMethodSymbol { IsStatic: true } method }
                             && method.ContainingType?.IsStatic is true
-                            && method.ContainingType.Is(KnownType.NSubstitute_SubstituteExtensions)), SyntaxKind.InvocationExpression);
+                            && method.ContainingType.Is(KnownType.NSubstitute_SubstituteExtensions)),
+                            SyntaxKind.InvocationExpression);
                 }
             });
 
