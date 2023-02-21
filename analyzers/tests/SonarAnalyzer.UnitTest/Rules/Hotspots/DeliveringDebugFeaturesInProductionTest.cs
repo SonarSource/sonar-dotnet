@@ -56,6 +56,21 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .AddReferences(AdditionalReferencesForAspNetCore3AndLater)
                 .Verify();
 
+        [TestMethod]
+        public void DeliveringDebugFeaturesInProduction_Net7_CS() =>
+            builderCS.AddPaths("DeliveringDebugFeaturesInProduction.Net7.cs")
+                .WithTopLevelStatements()
+                .AddReferences(new[]
+                {
+                    AspNetCoreMetadataReference.MicrosoftAspNetCoreWebHost,
+                    AspNetCoreMetadataReference.MicrosoftAspNetCoreRouting,
+                    AspNetCoreMetadataReference.MicrosoftAspNetCoreDiagnostics,
+                    AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpAbstractions,
+                    AspNetCoreMetadataReference.MicrosoftAspNetCoreHostingAbstractions,
+                    AspNetCoreMetadataReference.MicrosoftExtensionsHostingAbstractions,
+                })
+                .Verify();
+
         private static IEnumerable<MetadataReference> AdditionalReferencesForAspNetCore3AndLater =>
             new[]
             {
