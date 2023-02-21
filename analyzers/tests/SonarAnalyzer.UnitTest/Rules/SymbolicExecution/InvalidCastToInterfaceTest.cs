@@ -26,7 +26,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class InvalidCastToInterfaceTest
     {
-        private readonly VerifierBuilder sonarVerifier = new VerifierBuilder<SymbolicExecutionRunner>()
+        private readonly VerifierBuilder sonar = new VerifierBuilder<SymbolicExecutionRunner>()
             .AddAnalyzer(() => new InvalidCastToInterface())
             .WithBasePath(@"SymbolicExecution\Sonar")
             .WithOnlyDiagnostics(InvalidCastToInterfaceSymbolicExecution.S1944);
@@ -35,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void InvalidCastToInterface(ProjectType projectType) =>
-            sonarVerifier.AddPaths("InvalidCastToInterface.cs")
+            sonar.AddPaths("InvalidCastToInterface.cs")
                 .AddReferences(TestHelper.ProjectTypeReference(projectType).Union(MetadataReferenceFacade.NETStandard21))
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .Verify();
@@ -44,11 +44,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void InvalidCastToInterface_CSharp9() =>
-            sonarVerifier.AddPaths("InvalidCastToInterface.CSharp9.cs").WithTopLevelStatements().Verify();
+            sonar.AddPaths("InvalidCastToInterface.CSharp9.cs").WithTopLevelStatements().Verify();
 
         [TestMethod]
         public void InvalidCastToInterface_CSharp10() =>
-            sonarVerifier.AddPaths("InvalidCastToInterface.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            sonar.AddPaths("InvalidCastToInterface.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
 #endif
 

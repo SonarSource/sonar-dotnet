@@ -28,19 +28,19 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class HashesShouldHaveUnpredictableSaltTest
     {
-        private readonly VerifierBuilder sonarVerifier = new VerifierBuilder<SymbolicExecutionRunner>().WithBasePath(@"SymbolicExecution\Sonar")
+        private readonly VerifierBuilder sonar = new VerifierBuilder<SymbolicExecutionRunner>().WithBasePath(@"SymbolicExecution\Sonar")
             .WithOnlyDiagnostics(HashesShouldHaveUnpredictableSalt.S2053)
             .AddReferences(MetadataReferenceFacade.SystemSecurityCryptography);
 
         [TestMethod]
         public void HashesShouldHaveUnpredictableSalt_CSharp8() =>
-            sonarVerifier.AddPaths("HashesShouldHaveUnpredictableSalt.cs")
+            sonar.AddPaths("HashesShouldHaveUnpredictableSalt.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .Verify();
 
         [TestMethod]
         public void HashesShouldHaveUnpredictableSalt_DoesNotRaiseIssuesForTestProject() =>
-            sonarVerifier.AddPaths("HashesShouldHaveUnpredictableSalt.cs")
+            sonar.AddPaths("HashesShouldHaveUnpredictableSalt.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .AddTestReference()
                 .VerifyNoIssueReported();
@@ -49,13 +49,13 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void HashesShouldHaveUnpredictableSalt_CSharp9() =>
-            sonarVerifier.AddPaths("HashesShouldHaveUnpredictableSalt.CSharp9.cs")
+            sonar.AddPaths("HashesShouldHaveUnpredictableSalt.CSharp9.cs")
                 .WithTopLevelStatements()
                 .Verify();
 
         [TestMethod]
         public void HashesShouldHaveUnpredictableSalt_CSharp10() =>
-            sonarVerifier.AddPaths("HashesShouldHaveUnpredictableSalt.CSharp10.cs")
+            sonar.AddPaths("HashesShouldHaveUnpredictableSalt.CSharp10.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
                 .Verify();
 

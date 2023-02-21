@@ -26,14 +26,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ObjectsShouldNotBeDisposedMoreThanOnceTest
     {
-        private readonly VerifierBuilder sonarVerifier = new VerifierBuilder<SymbolicExecutionRunner>().WithBasePath(@"SymbolicExecution\Sonar")
+        private readonly VerifierBuilder sonar = new VerifierBuilder<SymbolicExecutionRunner>().WithBasePath(@"SymbolicExecution\Sonar")
             .WithOnlyDiagnostics(ObjectsShouldNotBeDisposedMoreThanOnce.S3966);
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void ObjectsShouldNotBeDisposedMoreThanOnce_CSharp8(ProjectType projectType) =>
-            sonarVerifier.AddPaths("ObjectsShouldNotBeDisposedMoreThanOnce.cs")
+            sonar.AddPaths("ObjectsShouldNotBeDisposedMoreThanOnce.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .AddReferences(TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21))
                 .Verify();
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void ObjectsShouldNotBeDisposedMoreThanOnce_CSharp9() =>
-            sonarVerifier.AddPaths("ObjectsShouldNotBeDisposedMoreThanOnce.CSharp9.cs")
+            sonar.AddPaths("ObjectsShouldNotBeDisposedMoreThanOnce.CSharp9.cs")
                 .WithTopLevelStatements()
                 .Verify();
 
