@@ -126,6 +126,16 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
             descriptor.CustomTags.Contains(tag);
     }
 
+    /// <summary>
+    /// Check if the current file path is included or excuded and caches the result.
+    /// </summary>
+    public bool ShouldAnalyzeFile(string filePath) =>
+        Options.SonarLintXml() is null
+        || Options.SonarLintXml().GetText() is null
+        || (Options.SonarLintXml().GetText() is { } sonarLintXmlText
+            && IncludedExcludedFilesCache.GetValue(Compilation, x => new()) is var cache
+            && cache.GetOrAdd(filePath, _ => ShouldAnalyzeFile(sonarLintXmlText, filePath)));
+
     private ImmutableHashSet<string> CreateUnchangedFilesHashSet() =>
         ImmutableHashSet.Create(StringComparer.OrdinalIgnoreCase, ProjectConfiguration().AnalysisConfig?.UnchangedFiles() ?? Array.Empty<string>());
 
@@ -133,16 +143,6 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
         Options.SonarLintXml() is { } sonarLintXml
         && AnalysisContext.TryGetValue(sonarLintXml.GetText(), ShouldAnalyzeGeneratedProvider(Compilation.Language), out var shouldAnalyzeGenerated)
         && shouldAnalyzeGenerated;
-
-    /// <summary>
-    /// Check if the current file path is included or excuded and caches the result.
-    /// </summary>
-    private bool ShouldAnalyzeFile(string filePath) =>
-        Options.SonarLintXml() is null
-        || Options.SonarLintXml().GetText() is null
-        || (Options.SonarLintXml().GetText() is { } sonarLintXmlText
-            && IncludedExcludedFilesCache.GetValue(Compilation, x => new()) is var cache
-            && cache.GetOrAdd(filePath, _ => ShouldAnalyzeFile(sonarLintXmlText, filePath)));
 
     private bool ShouldAnalyzeFile(SourceText sonarLintXml, string filePath) =>
         AnalysisContext.TryGetValue(sonarLintXml, RetrieveIncludedFiles(), out var inclusions)

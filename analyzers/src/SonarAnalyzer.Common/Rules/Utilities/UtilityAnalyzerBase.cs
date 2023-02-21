@@ -96,7 +96,7 @@ namespace SonarAnalyzer.Rules
                     }
 
                     var treeMessages = c.Compilation.SyntaxTrees
-                        .Where(x => ShouldGenerateMetrics(c, x))
+                        .Where(x => ShouldCreateMetrics(c, x))
                         .Select(x => CreateMessage(x, c.Compilation.GetSemanticModel(x)));
                     var messages = CreateAnalysisMessages(c)
                         .Concat(treeMessages)
@@ -113,14 +113,17 @@ namespace SonarAnalyzer.Rules
                     }
                 });
 
-        protected virtual bool ShouldGenerateMetrics(SyntaxTree tree) =>
+        protected virtual bool ShouldGenerateMetrics(SonarCompilationReportingContext context, SyntaxTree tree) =>
             // The results of Metrics and CopyPasteToken analyzers are not needed for Test projects yet the plugin side expects the protobuf files, so we create empty ones.
             (AnalyzeTestProjects || !IsTestProject)
             && FileExtensionWhitelist.Contains(Path.GetExtension(tree.FilePath))
-            && (AnalyzeGeneratedCode || !Language.GeneratedCodeRecognizer.IsGenerated(tree));
+            && (AnalyzeGeneratedCode || !Language.GeneratedCodeRecognizer.IsGenerated(tree))
+            && context.ShouldAnalyzeFile(tree.FilePath);
 
-        private bool ShouldGenerateMetrics(SonarCompilationReportingContext context, SyntaxTree tree) =>
+        private bool ShouldCreateMetrics(SonarCompilationReportingContext context, SyntaxTree tree) =>
             (AnalyzeUnchangedFiles || !context.IsUnchanged(tree))
-            && ShouldGenerateMetrics(tree);
+            && ShouldGenerateMetrics(context, tree);
+
+
     }
 }
