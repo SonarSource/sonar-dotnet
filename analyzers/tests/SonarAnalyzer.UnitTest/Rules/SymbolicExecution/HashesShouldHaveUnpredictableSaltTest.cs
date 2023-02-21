@@ -61,7 +61,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void HashesShouldHaveUnpredictableSalt_CSharp11() =>
-            sonarVerifier.AddPaths("HashesShouldHaveUnpredictableSalt.CSharp11.cs")
+            sonar.AddPaths("HashesShouldHaveUnpredictableSalt.CSharp11.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
                 .Verify();
 

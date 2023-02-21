@@ -59,7 +59,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void InitializationVectorShouldBeRandom_CSharp11() =>
-            sonarVerifier.AddPaths("InitializationVectorShouldBeRandom.CSharp11.cs")
+            sonar.AddPaths("InitializationVectorShouldBeRandom.CSharp11.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
                 .Verify();
 
