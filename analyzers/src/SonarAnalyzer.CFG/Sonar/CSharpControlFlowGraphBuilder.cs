@@ -1292,6 +1292,7 @@ namespace SonarAnalyzer.CFG.Sonar
             // BinaryPattern
             // UnaryPattern
             // VarPattern
+            // TypePattern
             // RelationalPattern
             // ListPattern
             // (SlicePattern)
