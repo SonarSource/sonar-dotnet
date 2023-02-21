@@ -20,11 +20,15 @@ namespace Tests.TestCases
 
         private static double Pi8 = 3.14;
         private double Pi9 = 3.14;
-        static double Pi10 = 3.14; // Compliant - if not access modifier exist the field is private
-        public readonly double Pi11 = 3.14;
+        static double Pi10 = 3.14; // Compliant - if no access modifier exist, the field is private
+        double Pi11 = 3.14;
+        public readonly double Pi12 = 3.14;
 
         [ThreadStatic]
-        public static int value; // Compliant, thread static field values are not shared between threads
+        public static int Value; // Compliant, thread static field values are not shared between threads
+
+        [NonSerialized]
+        public static int Value2; // Noncompliant
     }
 
     public class Shape
