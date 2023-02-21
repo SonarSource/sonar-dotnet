@@ -43,15 +43,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static IEnumerable<Diagnostic> GetDiagnostics(FieldDeclarationSyntax declaration, SemanticModel semanticModel) =>
             FieldIsRelevant(declaration)
-            ? declaration.Declaration.Variables
+                ? declaration.Declaration.Variables
                     .Where(x => !FieldIsThreadSafe(semanticModel.GetDeclaredSymbol(x) as IFieldSymbol))
                     .Select(x => Diagnostic.Create(Rule, x.Identifier.GetLocation(), x.Identifier.ValueText))
-            : Enumerable.Empty<Diagnostic>();
+                : Enumerable.Empty<Diagnostic>();
 
         private static bool FieldIsRelevant(FieldDeclarationSyntax node) =>
             node.Modifiers.Any(SyntaxKind.StaticKeyword)
             && node.Modifiers.Count > 1
-            && !node.Modifiers.Any(SyntaxKind.PrivateKeyword)
+            && (!node.Modifiers.Any(SyntaxKind.PrivateKeyword) || (node.Modifiers.Any(SyntaxKind.PrivateKeyword) && node.Modifiers.Any(SyntaxKind.ProtectedKeyword)))
             && !node.Modifiers.Any(SyntaxKind.ReadOnlyKeyword);
 
         private static bool FieldIsThreadSafe(IFieldSymbol fieldSymbol) =>

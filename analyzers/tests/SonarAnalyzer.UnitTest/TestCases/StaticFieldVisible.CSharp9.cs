@@ -6,6 +6,9 @@ public record StaticFieldVisible
 //                       ^^
     public const double Pi2 = 3.14;
     public double Pi3 = 3.14;
+    private protected static double Pi4 = 3.14; // Noncompliant
+    protected private static double Pi15 = 3.14; // Noncompliant
+
     public static Shape Empty = Shape.Empty; // Noncompliant {{Change the visibility of 'Empty' or make it 'const' or 'readonly'.}}
 
     [ThreadStatic]
