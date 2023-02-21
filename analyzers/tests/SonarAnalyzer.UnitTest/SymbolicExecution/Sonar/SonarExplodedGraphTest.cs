@@ -942,11 +942,7 @@ namespace Namespace
                     }
                 };
             var walk = () => context.WalkWithInstructions(2);
-#if DEBUG
             walk.Should().Throw<Exception>().Which.Message.Should().Be("Expected NumberOfExitBlockReached to be 1, but found 0.");
-#else
-            walk();
-#endif
         }
 
         [TestMethod]
