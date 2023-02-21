@@ -50,10 +50,10 @@ public class ProjectLevelDuplicationTest {
 
     assertThat(getComponent("ProjectLevelDuplication")).isNotNull();
 
-    List<Issues.Issue> issues = getIssues("ProjectLevelDuplication")
+    List<Issues.Issue> projectLevelIssues = getIssues("ProjectLevelDuplication")
       .stream()
-      .filter(x -> x.getRule().startsWith("csharpsquid:"))
+      .filter(x -> x.getRule().equals("csharpsquid:S3904"))
       .collect(Collectors.toList());
-    assertThat(issues).hasSize(1);
+    assertThat(projectLevelIssues).hasSize(1);
   }
 }

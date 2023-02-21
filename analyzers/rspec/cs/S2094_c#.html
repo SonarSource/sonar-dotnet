@@ -1,0 +1,27 @@
+<p>There is no good excuse for an empty class. If it’s being used simply as a common extension point, it should be replaced with an
+<code>interface</code>. If it was stubbed in as a placeholder for future development it should be fleshed-out. In any other case, it should be
+eliminated.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public class Empty // Noncompliant
+{
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public interface IEmpty
+{
+}
+</pre>
+<h2>Exceptions</h2>
+<p>Partial classes are ignored entirely, as they are often used with Source Generators. Subclasses of System.Exception are be ignored, as even an
+empty Exception class can provide useful information by its type name alone. Subclasses of certain framework types - like the PageModel class used in
+ASP.NET Core Razor Pages - are also be ignored.</p>
+<pre>
+using Microsoft.AspNetCore.Mvc.RazorPages;
+
+public class EmptyPageModel: PageModel // Compliant - an empty PageModel can be fully functional, the C# code can be in the cshtml file
+{
+}
+</pre>
+

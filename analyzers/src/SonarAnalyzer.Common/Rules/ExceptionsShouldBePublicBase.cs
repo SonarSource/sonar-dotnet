@@ -46,5 +46,5 @@ public abstract class ExceptionsShouldBePublicBase<TSyntaxKind> : SonarDiagnosti
                     c.ReportIssue(Diagnostic.Create(Rule, Language.Syntax.NodeIdentifier(c.Node).Value.GetLocation()));
                 }
             },
-            Language.SyntaxKind.ClassAndRecordDeclaration);
+            Language.SyntaxKind.ClassAndRecordClassDeclarations);
 }

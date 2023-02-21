@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S2094",
+"message":  "Remove this empty class, or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"region":  {
+"startLine":  257,
+"startColumn":  26,
+"endLine":  257,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2094",
+"message":  "Remove this empty class, or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"region":  {
+"startLine":  263,
+"startColumn":  26,
+"endLine":  263,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2094",
+"message":  "Remove this empty class, or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"region":  {
+"startLine":  275,
+"startColumn":  26,
+"endLine":  275,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2094",
+"message":  "Remove this empty class, or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Context.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  25,
+"endLine":  53,
+"endColumn":  38
+}
+}
+}
+]
+}

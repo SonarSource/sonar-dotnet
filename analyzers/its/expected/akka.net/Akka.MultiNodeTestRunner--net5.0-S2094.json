@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2094",
+"message":  "Remove this empty class, or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  617,
+"startColumn":  22,
+"endLine":  617,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2094",
+"message":  "Remove this empty class, or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  618,
+"startColumn":  22,
+"endLine":  618,
+"endColumn":  37
+}
+}
+}
+]
+}

@@ -2018,7 +2018,7 @@ internal static class RuleTypeMappingCS
         // ["S2091"],
         ["S2092"] = "SECURITY_HOTSPOT",
         // ["S2093"],
-        // ["S2094"],
+        ["S2094"] = "CODE_SMELL",
         // ["S2095"],
         // ["S2096"],
         // ["S2097"],

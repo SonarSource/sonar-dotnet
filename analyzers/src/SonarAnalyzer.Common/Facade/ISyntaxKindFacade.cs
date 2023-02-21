@@ -25,7 +25,7 @@ public interface ISyntaxKindFacade<out TSyntaxKind>
 {
     abstract TSyntaxKind Attribute { get; }
     abstract TSyntaxKind ClassDeclaration { get; }
-    abstract TSyntaxKind[] ClassAndRecordDeclaration { get; }
+    abstract TSyntaxKind[] ClassAndRecordClassDeclarations { get; }
     abstract TSyntaxKind[] ClassAndModuleDeclarations { get; }
     abstract TSyntaxKind[] CommentTrivia { get; }
     abstract TSyntaxKind[] ComparisonKinds { get; }

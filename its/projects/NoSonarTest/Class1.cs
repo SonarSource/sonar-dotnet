@@ -2,8 +2,9 @@
 
 namespace CSLib.foo
 {
-    class IFoo
+    public class IFoo
     {
+        public int Prop => 42;
     }
 
     class IBar // NOSONAR

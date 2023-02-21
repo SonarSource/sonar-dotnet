@@ -1,0 +1,121 @@
+{
+"issues":  [
+{
+"id":  "S2094",
+"message":  "Remove this empty class, or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\CompilerErrorCollection.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  18,
+"endLine":  14,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2094",
+"message":  "Remove this empty class, or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunCoordinator.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  22,
+"endLine":  27,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2094",
+"message":  "Remove this empty class, or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\Messages.cs",
+"region":  {
+"startLine":  156,
+"startColumn":  18,
+"endLine":  156,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2094",
+"message":  "Remove this empty class, or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\MessageSinkActor.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  22,
+"endLine":  42,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2094",
+"message":  "Remove this empty class, or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\SinkCoordinator.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  22,
+"endLine":  43,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2094",
+"message":  "Remove this empty class, or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\SinkCoordinator.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  22,
+"endLine":  48,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2094",
+"message":  "Remove this empty class, or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\SinkCoordinator.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  22,
+"endLine":  66,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2094",
+"message":  "Remove this empty class, or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TimelineLogCollectorActor.cs",
+"region":  {
+"startLine":  190,
+"startColumn":  22,
+"endLine":  190,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S2094",
+"message":  "Remove this empty class, or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TimelineLogCollectorActor.cs",
+"region":  {
+"startLine":  202,
+"startColumn":  22,
+"endLine":  202,
+"endColumn":  32
+}
+}
+}
+]
+}

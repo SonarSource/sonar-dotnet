@@ -29,6 +29,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.stream.Collectors;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Rule;
@@ -43,6 +44,7 @@ import static org.junit.Assert.assertTrue;
 
 public class IncrementalAnalysisTest {
   private static final String PROJECT = "IncrementalPRAnalysis";
+  private static final String PULL_REQUEST_KEY = "42";
 
   @Rule
   public TemporaryFolder temp = TestUtils.createTempFolder();
@@ -68,7 +70,7 @@ public class IncrementalAnalysisTest {
     assertThat(beginStepResults.getLogs()).contains("Processing pull request with base branch 'base-branch'.");
     assertThat(beginStepResults.getLogs()).contains("Cache data is not available. Incremental PR analysis is disabled.");
     assertAllFilesWereAnalysed(endStepResults, projectDir);
-    List<Issues.Issue> allIssues = TestUtils.getIssues(ORCHESTRATOR, PROJECT, "42");
+    List<Issues.Issue> allIssues = TestUtils.getIssues(ORCHESTRATOR, PROJECT, PULL_REQUEST_KEY);
     assertThat(allIssues).hasSize(1);
     assertThat(allIssues.get(0).getRule()).isEqualTo("csharpsquid:S1134");
   }
@@ -85,7 +87,7 @@ public class IncrementalAnalysisTest {
     assertTrue(endStepResults.isSuccess());
     assertCacheIsUsed(beginStepResults, PROJECT);
     assertThat(endStepResults.getLogs()).doesNotContain("Adding normal issue S1134");
-    List<Issues.Issue> allIssues = TestUtils.getIssues(ORCHESTRATOR, PROJECT, "42");
+    List<Issues.Issue> allIssues = TestUtils.getIssues(ORCHESTRATOR, PROJECT, PULL_REQUEST_KEY);
     assertThat(allIssues).isEmpty();
   }
 
@@ -110,12 +112,16 @@ public class IncrementalAnalysisTest {
     assertThat(endStepResults.getLogs()).doesNotContain("Adding normal issue S1134: " + unchanged2Path);
     assertThat(endStepResults.getLogs()).contains("Adding normal issue S1134: " + withChangesPath);
     assertThat(endStepResults.getLogs()).contains("Adding normal issue S1134: " + fileToBeAddedPath);
-    List<Issues.Issue> allIssues = TestUtils.getIssues(ORCHESTRATOR, PROJECT, "42");
-    assertThat(allIssues).hasSize(2);
-    assertThat(allIssues.get(0).getRule()).isEqualTo("csharpsquid:S1134");
-    assertThat(allIssues.get(0).getComponent()).isEqualTo("IncrementalPRAnalysis:IncrementalPRAnalysis/AddedFile.cs");
-    assertThat(allIssues.get(1).getRule()).isEqualTo("csharpsquid:S1134");
-    assertThat(allIssues.get(1).getComponent()).isEqualTo("IncrementalPRAnalysis:IncrementalPRAnalysis/WithChanges.cs");
+    List<Issues.Issue> fixMeIssues = TestUtils
+        .getIssues(ORCHESTRATOR, PROJECT, PULL_REQUEST_KEY)
+        .stream()
+        .filter(x -> x.getRule().equals("csharpsquid:S1134"))
+        .collect(Collectors.toList());
+    assertThat(fixMeIssues).hasSize(2);
+    assertThat(fixMeIssues.get(0).getRule()).isEqualTo("csharpsquid:S1134");
+    assertThat(fixMeIssues.get(0).getComponent()).isEqualTo("IncrementalPRAnalysis:IncrementalPRAnalysis/AddedFile.cs");
+    assertThat(fixMeIssues.get(1).getRule()).isEqualTo("csharpsquid:S1134");
+    assertThat(fixMeIssues.get(1).getComponent()).isEqualTo("IncrementalPRAnalysis:IncrementalPRAnalysis/WithChanges.cs");
   }
 
   @Test
@@ -132,14 +138,18 @@ public class IncrementalAnalysisTest {
     assertTrue(endStepResults.isSuccess());
     assertCacheIsUsed(beginStepResults, PROJECT);
     assertAllFilesWereAnalysed(endStepResults, projectDir);
-    List<Issues.Issue> allIssues = TestUtils.getIssues(ORCHESTRATOR, PROJECT, "42");
-    assertThat(allIssues).hasSize(3);
-    assertThat(allIssues.get(0).getRule()).isEqualTo("csharpsquid:S1134");
-    assertThat(allIssues.get(0).getComponent()).isEqualTo("IncrementalPRAnalysis:Unchanged1.cs");
-    assertThat(allIssues.get(1).getRule()).isEqualTo("csharpsquid:S1134");
-    assertThat(allIssues.get(1).getComponent()).isEqualTo("IncrementalPRAnalysis:Unchanged2.cs");
-    assertThat(allIssues.get(2).getRule()).isEqualTo("csharpsquid:S1134");
-    assertThat(allIssues.get(2).getComponent()).isEqualTo("IncrementalPRAnalysis:WithChanges.cs");
+    List<Issues.Issue> fixMeIssues = TestUtils
+      .getIssues(ORCHESTRATOR, PROJECT, PULL_REQUEST_KEY)
+      .stream()
+      .filter(x -> x.getRule().equals("csharpsquid:S1134"))
+      .collect(Collectors.toList());
+    assertThat(fixMeIssues).hasSize(3);
+    assertThat(fixMeIssues.get(0).getRule()).isEqualTo("csharpsquid:S1134");
+    assertThat(fixMeIssues.get(0).getComponent()).isEqualTo("IncrementalPRAnalysis:Unchanged1.cs");
+    assertThat(fixMeIssues.get(1).getRule()).isEqualTo("csharpsquid:S1134");
+    assertThat(fixMeIssues.get(1).getComponent()).isEqualTo("IncrementalPRAnalysis:Unchanged2.cs");
+    assertThat(fixMeIssues.get(2).getRule()).isEqualTo("csharpsquid:S1134");
+    assertThat(fixMeIssues.get(2).getComponent()).isEqualTo("IncrementalPRAnalysis:WithChanges.cs");
   }
 
   @Test
@@ -157,7 +167,10 @@ public class IncrementalAnalysisTest {
 
     assertTrue(endStepResults.isSuccess());
     assertCacheIsUsed(beginStepResults, projectName);
-    List<Duplications.Duplication> duplications = TestUtils.getDuplication(ORCHESTRATOR, "IncrementalPRAnalysisDuplication:IncrementalPRAnalysisDuplication/CopyClass.cs", "42")
+    List<Duplications.Duplication> duplications = TestUtils.getDuplication(
+        ORCHESTRATOR,
+        "IncrementalPRAnalysisDuplication:IncrementalPRAnalysisDuplication/CopyClass.cs",
+        PULL_REQUEST_KEY)
       .getDuplicationsList();
     assertThat(duplications).isNotEmpty();
   }
@@ -221,7 +234,7 @@ public class IncrementalAnalysisTest {
 
     BuildResult beginStepResults = ORCHESTRATOR.executeBuild(beginStep
       .setProperty("sonar.pullrequest.base", "base-branch")
-      .setProperty("sonar.pullrequest.key", "42")
+      .setProperty("sonar.pullrequest.key", PULL_REQUEST_KEY)
       .setProperty("sonar.pullrequest.branch", "pull-request")
       .setProperty("sonar.verbose", "true"));
     TestUtils.runMSBuild(ORCHESTRATOR, projectDir, "/t:Restore,Rebuild");
