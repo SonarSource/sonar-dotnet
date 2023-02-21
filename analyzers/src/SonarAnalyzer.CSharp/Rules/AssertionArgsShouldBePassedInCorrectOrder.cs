@@ -43,38 +43,19 @@ public sealed class AssertionArgsShouldBePassedInCorrectOrder : SonarDiagnosticA
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(c =>
         {
-            var methodCall = (InvocationExpressionSyntax)c.Node;
-            if (!methodCall.Expression.IsKind(SyntaxKind.SimpleMemberAccessExpression)
-                || methodCall.ArgumentList.Arguments.Count < 2)
+            if (c.Node is InvocationExpressionSyntax { ArgumentList: { Arguments: { Count: >= 2 } arguments } argumentList, Expression: MemberAccessExpressionSyntax methodCallExpression }
+                && methodCallExpression.IsKind(SyntaxKind.SimpleMemberAccessExpression)
+                && new CSharpMethodParameterLookup(argumentList, c.SemanticModel) is var parameterLookup
+                && (parameterLookup.TryGetSyntax("expected", out var expected) || parameterLookup.TryGetSyntax("notExpected", out expected))
+                && expected.FirstOrDefault() is not LiteralExpressionSyntax
+                && parameterLookup.TryGetSyntax("actual", out var actual)
+                && actual.FirstOrDefault() is LiteralExpressionSyntax
+                && MethodsWithType.GetValueOrDefault(methodCallExpression.Name.Identifier.ValueText) is { } methodKnownTypes
+                && methodKnownTypes.IsDefault is false
+                && (c.SemanticModel.GetSymbolInfo(methodCallExpression.Expression).Symbol as INamedTypeSymbol).IsAny(methodKnownTypes))
             {
-                return;
+                c.ReportIssue(Diagnostic.Create(Rule, arguments[0].CreateLocation(arguments[1])));
             }
-
-            var argumentList = methodCall.ArgumentList;
-            var parameterLookup = new CSharpMethodParameterLookup(argumentList, c.SemanticModel);
-            parameterLookup.TryGetSyntax("expected", out var expected);
-            parameterLookup.TryGetSyntax("actual", out var actual);
-            if (expected.FirstOrDefault() is LiteralExpressionSyntax || actual.FirstOrDefault() is not LiteralExpressionSyntax)
-            {
-                return;
-            }
-
-            var methodCallExpression = (MemberAccessExpressionSyntax)methodCall.Expression;
-
-            var methodKnownTypes = MethodsWithType.GetValueOrDefault(methodCallExpression.Name.Identifier.ValueText);
-            if (methodKnownTypes == null)
-            {
-                return;
-            }
-
-            var symbolInfo = c.SemanticModel.GetSymbolInfo(methodCallExpression.Expression).Symbol;
-            var isAnyTrackedAssertType = (symbolInfo as INamedTypeSymbol).IsAny(methodKnownTypes);
-            if (!isAnyTrackedAssertType)
-            {
-                return;
-            }
-
-            c.ReportIssue(Diagnostic.Create(Rule, argumentList.Arguments[0].CreateLocation(argumentList.Arguments[1])));
         },
         SyntaxKind.InvocationExpression);
 }
