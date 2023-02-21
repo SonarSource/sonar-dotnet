@@ -61,7 +61,7 @@ public sealed class AssertionsShouldBeComplete : SonarDiagnosticAnalyzer
                 {
                     start.RegisterNodeAction(c =>
                         CheckInvocation(c, invocation =>
-                            invocation.NameIs("That", "ThatCode", "ThatAsyncCode", "ThatDynamic")
+                            invocation.NameIs("That", "ThatEnum", "ThatCode", "ThatAsyncCode", "ThatDynamic")
                             && c.SemanticModel.GetSymbolInfo(invocation) is { Symbol: IMethodSymbol { IsStatic: true } method }
                             && method.ContainingType?.IsStatic is true
                             && method.ContainingType.Is(KnownType.NFluent_Check)), SyntaxKind.InvocationExpression);

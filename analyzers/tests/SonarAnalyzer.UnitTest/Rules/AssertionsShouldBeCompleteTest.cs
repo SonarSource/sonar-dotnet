@@ -57,4 +57,12 @@ public class AssertionsShouldBeCompleteTest
         .AddTestReference()
         .AddPaths("AssertionsShouldBeComplete.NFluent.cs")
         .Verify();
+
+    [TestMethod]
+    public void AssertionsShouldBeComplete_NFluent_CSharp11() =>
+        nfluent
+        .WithOptions(ParseOptionsHelper.FromCSharp11)
+        .AddTestReference()
+        .AddPaths("AssertionsShouldBeComplete.NFluent.CSharp11.cs")
+        .Verify();
 }
