@@ -908,10 +908,8 @@ namespace Namespace
         [DataRow("var x = obj is var i;", "VarPattern")]
         [DataRow("var x = obj is > 5;", "RelationalPattern")]
         [DataRow("var x = new object[] { } is [] empty;", "ListPattern")]
-        public void ExplodedGraph_IsPattern_Parentesized(string code, string patternKind)
-        {
+        public void ExplodedGraph_IsPattern_Parentesized(string code, string patternKind) =>
             Assert.ThrowsException<NotSupportedException>(() => new ExplodedGraphContext(code)).Message.Should().Be(patternKind);
-        }
 
         [TestMethod]
         public void ExplodedGraph_SwitchExpression_TypePattern_NotSupported()
@@ -924,7 +922,7 @@ namespace Namespace
             var context = new ExplodedGraphContext(testInput);
             Assert.ThrowsException<InvalidOperationException>(() => context.GetSymbol("empty"));
             var walk = () => context.WalkWithInstructions(0);
-            walk.Should().Throw<Exception>();
+            walk.Should().Throw<Exception>().Which.Message.Should().StartWith("Method Debug.Fail failed");
         }
 
         [TestMethod]
