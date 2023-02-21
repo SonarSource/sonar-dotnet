@@ -59,3 +59,19 @@ public class Program
     public ICheck<int> CheckReturnedByExpressionBody() =>
         Check.That(1);
 }
+
+namespace OtherCheck
+{
+    public static class Check
+    {
+        public static void That(int i) { }
+    }
+
+    public class Test
+    {
+        public void CheckThat()
+        {
+            Check.That(1); // Compliant. Not NFluent
+        }
+    }
+}
