@@ -912,17 +912,31 @@ namespace Namespace
             Assert.ThrowsException<NotSupportedException>(() => new ExplodedGraphContext(code)).Message.Should().Be(patternKind);
 
         [TestMethod]
-        public void ExplodedGraph_SwitchExpression_TypePattern_NotSupported()
+        public void ExplodedGraph_SwitchStatement_TypePattern()
         {
             const string testInput = """
-                var x = new object() switch { Exception => true };
-                empty.ToString();
+                switch (new object())
+                {
+                    case int: break;
+                }
                 """;
 
             var context = new ExplodedGraphContext(testInput);
-            Assert.ThrowsException<InvalidOperationException>(() => context.GetSymbol("empty"));
-            var walk = () => context.WalkWithInstructions(0);
-            walk.Should().Throw<Exception>().Which.Message.Should().StartWith("Method Debug.Fail failed");
+            context.ExplodedGraph.InstructionProcessed += (sender, args) =>
+                {
+                    var instruction = args.Instruction.ToString();
+
+                    switch (instruction)
+                    {
+                        case "new object()":
+                            break;
+                        case "2":
+                            break;
+                        default:
+                            throw new InvalidOperationException($"Unexpected instruction: {instruction}");
+                    }
+                };
+            context.WalkWithInstructions(2);
         }
 
         [TestMethod]
