@@ -73,7 +73,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void ConditionEvaluatesToConstant_FromCSharp11() =>
-            sonarVerifier.AddPaths("ConditionEvaluatesToConstant.CSharp11.cs")
+            sonar.AddPaths("ConditionEvaluatesToConstant.CSharp11.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
                 .Verify();
 
