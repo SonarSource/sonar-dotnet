@@ -900,221 +900,17 @@ namespace Namespace
             context.WalkWithInstructions(4);
         }
 
-        [TestMethod]
-        public void ExplodedGraph_IsPattern_Parentesized()
+        [DataTestMethod]
+        [DataRow("var x = obj is (string s);", "ParenthesizedPattern")]
+        [DataRow("var x = obj is 1 or 2;", "OrPattern")]
+        [DataRow("var x = obj is 1 and 2;", "AndPattern")]
+        [DataRow("var x = obj is not 1;", "NotPattern")]
+        [DataRow("var x = obj is var i;", "VarPattern")]
+        [DataRow("var x = obj is > 5;", "RelationalPattern")]
+        [DataRow("var x = new object[] { } is [] empty;", "ListPattern")]
+        public void ExplodedGraph_IsPattern_Parentesized(string code, string patternKind)
         {
-            const string testInput = @"var x = obj is (string s);";
-
-            var context = new ExplodedGraphContext(testInput);
-            var sSymbol = context.GetSymbol("s", ExplodedGraphContext.SymbolType.Declaration);
-
-            context.ExplodedGraph.InstructionProcessed += (sender, args) =>
-            {
-                var instruction = args.Instruction.ToString();
-
-                switch (instruction)
-                {
-                    case "obj":
-                        args.ProgramState.GetSymbolValue(sSymbol).Should().BeNull();
-                        break;
-
-                    case "obj is (string s)":
-                        args.ProgramState.GetSymbolValue(sSymbol).Should().BeNull();
-                        args.ProgramState.HasValue.Should().BeTrue();
-                        break;
-
-                    case "x = obj is (string s)":
-                        args.ProgramState.GetSymbolValue(sSymbol).Should().BeNull();
-                        args.ProgramState.HasValue.Should().BeFalse();
-                        break;
-
-                    default:
-                        throw new NotImplementedException();
-                }
-            };
-
-            context.WalkWithInstructions(3);
-        }
-
-        [TestMethod]
-        public void ExplodedGraph_IsPattern_OrPattern_NotSupported()
-        {
-            const string testInput = "var x = obj is 1 or 2;";
-
-            var context = new ExplodedGraphContext(testInput);
-            context.ExplodedGraph.InstructionProcessed += (sender, args) =>
-            {
-                var instruction = args.Instruction.ToString();
-
-                switch (instruction)
-                {
-                    case "obj":
-                    case "obj is 1 or 2":
-                    case "x = obj is 1 or 2":
-                        break;
-                    default:
-                        throw new NotImplementedException();
-                }
-            };
-
-            context.WalkWithInstructions(3);
-        }
-
-        [TestMethod]
-        public void ExplodedGraph_IsPattern_AndPattern_NotSupported()
-        {
-            const string testInput = "var x = obj is 1 and 2;";
-
-            var context = new ExplodedGraphContext(testInput);
-            context.ExplodedGraph.InstructionProcessed += (sender, args) =>
-            {
-                var instruction = args.Instruction.ToString();
-
-                switch (instruction)
-                {
-                    case "obj":
-                    case "obj is 1 and 2":
-                    case "x = obj is 1 and 2":
-                        break;
-                    default:
-                        throw new NotImplementedException();
-                }
-            };
-
-            context.WalkWithInstructions(3);
-        }
-
-        [TestMethod]
-        public void ExplodedGraph_IsPattern_NotPattern_NotSupported()
-        {
-            const string testInput = "var x = obj is not 1;";
-
-            var context = new ExplodedGraphContext(testInput);
-            context.ExplodedGraph.InstructionProcessed += (sender, args) =>
-            {
-                var instruction = args.Instruction.ToString();
-
-                switch (instruction)
-                {
-                    case "obj":
-                    case "obj is not 1":
-                    case "x = obj is not 1":
-                        break;
-                    default:
-                        throw new NotImplementedException();
-                }
-            };
-
-            context.WalkWithInstructions(3);
-        }
-
-        [TestMethod]
-        public void ExplodedGraph_IsPattern_VarPattern_NotSupported()
-        {
-            const string testInput = """
-                var x = obj is var i;
-                i++;
-                """;
-
-            var context = new ExplodedGraphContext(testInput);
-            var symbolNotFound = () => context.GetSymbol("o", ExplodedGraphContext.SymbolType.Declaration);
-            symbolNotFound.Should().Throw<InvalidOperationException>("var pattern is not supported");
-
-            context.ExplodedGraph.InstructionProcessed += (sender, args) =>
-            {
-                var instruction = args.Instruction.ToString();
-
-                switch (instruction)
-                {
-                    case "obj":
-                    case "obj is var i":
-                    case "x = obj is var i":
-                    case "i":
-                    case "i++":
-                        break;
-
-                    default:
-                        throw new NotImplementedException(instruction);
-                }
-            };
-            context.WalkWithInstructions(5);
-        }
-
-        [TestMethod]
-        public void ExplodedGraph_IsPattern_RelationalPattern_NotSupported()
-        {
-            const string testInput = """
-                var x = obj is > 5;
-                """;
-
-            var context = new ExplodedGraphContext(testInput);
-
-            context.ExplodedGraph.InstructionProcessed += (sender, args) =>
-            {
-                var instruction = args.Instruction.ToString();
-
-                switch (instruction)
-                {
-                    case "obj":
-                    case "obj is > 5":
-                    case "x = obj is > 5":
-                        break;
-                    default:
-                        throw new NotImplementedException(instruction);
-                }
-            };
-            context.WalkWithInstructions(3);
-        }
-
-        [TestMethod]
-        public void ExplodedGraph_IsPattern_ListPattern_NotSupported()
-        {
-            const string testInput = """
-                var x = new object[] { } is [] empty;
-                empty.ToString();
-                """;
-
-            var context = new ExplodedGraphContext(testInput);
-            var emptySymbol = context.GetSymbol("empty", ExplodedGraphContext.SymbolType.Declaration);
-
-            context.ExplodedGraph.InstructionProcessed += (sender, args) =>
-            {
-                var instruction = args.Instruction.ToString();
-
-                switch (instruction)
-                {
-                    case "":
-                        args.ProgramState.GetSymbolValue(emptySymbol).Should().BeNull();
-                        break;
-                    case "object[]":
-                        args.ProgramState.GetSymbolValue(emptySymbol).Should().BeNull();
-                        break;
-                    case "new object[] { }":
-                        args.ProgramState.GetSymbolValue(emptySymbol).Should().BeNull();
-                        break;
-                    case "{ }":
-                        args.ProgramState.GetSymbolValue(emptySymbol).Should().BeNull();
-                        break;
-                    case "new object[] { } is [] empty":
-                        args.ProgramState.GetSymbolValue(emptySymbol).Should().BeNull();
-                        break;
-                    case "x = new object[] { } is [] empty":
-                        args.ProgramState.GetSymbolValue(emptySymbol).Should().BeNull();
-                        break;
-                    case "empty":
-                        args.ProgramState.GetSymbolValue(emptySymbol).Should().BeNull();
-                        break;
-                    case "empty.ToString":
-                        args.ProgramState.GetSymbolValue(emptySymbol).Should().BeNull();
-                        break;
-                    case "empty.ToString()":
-                        args.ProgramState.GetSymbolValue(emptySymbol).Should().BeNull();
-                        break;
-                    default:
-                        throw new NotImplementedException(instruction);
-                }
-            };
-            context.WalkWithInstructions(9);
+            Assert.ThrowsException<NotSupportedException>(() => new ExplodedGraphContext(code)).Message.Should().Be(patternKind);
         }
 
         [TestMethod]
@@ -1122,25 +918,13 @@ namespace Namespace
         {
             const string testInput = """
                 var x = new object() switch { Exception => true };
+                empty.ToString();
                 """;
 
             var context = new ExplodedGraphContext(testInput);
-
-            context.ExplodedGraph.InstructionProcessed += (sender, args) =>
-            {
-                var instruction = args.Instruction.ToString();
-
-                switch (instruction)
-                {
-                    case "Exception":
-                    case "true":
-                    case "x = new object() switch { Exception => true }":
-                        break;
-                    default:
-                        throw new NotImplementedException(instruction);
-                }
-            };
-            context.WalkWithInstructions(3);
+            Assert.ThrowsException<InvalidOperationException>(() => context.GetSymbol("empty"));
+            var walk = () => context.WalkWithInstructions(0);
+            walk.Should().Throw<Exception>();
         }
 
         [TestMethod]
