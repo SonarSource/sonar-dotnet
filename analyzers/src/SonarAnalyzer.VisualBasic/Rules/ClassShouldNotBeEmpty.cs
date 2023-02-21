@@ -31,8 +31,5 @@ public sealed class ClassShouldNotBeEmpty : ClassShouldNotBeEmptyBase<SyntaxKind
 
     protected override bool IsClassWithDeclaredBaseClass(SyntaxNode node) => node is ClassBlockSyntax { Inherits.Count: > 0 };
 
-    protected override string DeclarationTypeKeyword(SyntaxNode node) =>
-        node is TypeBlockSyntax typeBlock
-            ? typeBlock.BlockStatement.DeclarationKeyword.ValueText.ToLower()
-            : "type";
+    protected override string DeclarationTypeKeyword(SyntaxNode node) => ((TypeBlockSyntax)node).BlockStatement.DeclarationKeyword.ValueText.ToLower();
 }
