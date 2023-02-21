@@ -61,7 +61,4 @@ internal sealed class VisualBasicFacade : ILanguageFacade<SyntaxKind>
 
     public string GetName(SyntaxNode expression) =>
         expression.GetName();
-
-    public bool IsValidIdentifier(string name) =>
-        SyntaxFacts.IsValidIdentifier(name);
 }
