@@ -908,7 +908,7 @@ namespace Namespace
         [DataRow("is var i", "VarPattern")]
         [DataRow("is > 5", "RelationalPattern")]
         [DataRow("is [] empty", "ListPattern")]
-        public void ExplodedGraph_IsPattern_Parentesized(string pattern, string patternKind)
+        public void ExplodedGraph_IsPattern_UnsupportedPatternKinds(string pattern, string patternKind)
         {
             var createGraph = () => new ExplodedGraphContext($$"""
                 var x = obj {{pattern}};
