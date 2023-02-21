@@ -930,7 +930,7 @@ namespace Namespace
                     {
                         case "new object()":
                             break;
-                        case "2":
+                        case "int":
                             break;
                         default:
                             throw new InvalidOperationException($"Unexpected instruction: {instruction}");
