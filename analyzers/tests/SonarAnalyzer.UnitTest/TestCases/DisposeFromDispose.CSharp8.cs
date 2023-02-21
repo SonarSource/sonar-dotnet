@@ -69,8 +69,6 @@ namespace Tests.Diagnostics
             {
                 this.fs.Dispose(); //Noncompliant
             });
-
-            this.fs.Dispose();
         }
     }
     public class Class : IDisposable
@@ -344,4 +342,26 @@ namespace Tests.Diagnostics
         }
     }
 
+    public class NullSupression: IDisposable
+    {
+        private Stream fs;
+
+        private void NullSupressionOperator()
+        {
+            fs!.Dispose();  // Noncompliant {{Move this 'Dispose' call into this class' own 'Dispose' method.}}
+        }
+
+        private void NullSupressionAndNullCoalescing()
+        {
+            fs!?.Dispose(); // Noncompliant
+        }
+
+        private void ThisNullSupressionAndNullCoalescing()
+        {
+            this!.fs?.Dispose(); // Noncompliant
+        }
+
+        public void Dispose() { }
+
+    }
 }
