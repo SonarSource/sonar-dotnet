@@ -64,6 +64,7 @@ namespace StyleCop.Analyzers.Lightup
         public const SyntaxKind OrPattern = (SyntaxKind)9031;
         public const SyntaxKind AndPattern = (SyntaxKind)9032;
         public const SyntaxKind NotPattern = (SyntaxKind)9033;
+        public const SyntaxKind SlicePattern = (SyntaxKind)9034;
         public const SyntaxKind ListPattern = (SyntaxKind)9035;
         public const SyntaxKind DeclarationExpression = (SyntaxKind)9040;
         public const SyntaxKind RefExpression = (SyntaxKind)9050;

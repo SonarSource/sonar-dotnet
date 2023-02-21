@@ -523,6 +523,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar
                         // * RelationalPattern
                         // * ListPattern
                         // * SlicePattern
+                        throw new NotSupportedException($"{instruction.Kind()}");
                     }
                     break;
 
@@ -580,6 +581,13 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar
 
                 case SyntaxKindEx.NotPattern:
                     // NotPattern is not yet supported: https://github.com/SonarSource/sonar-dotnet/issues/4880
+                    // Do nothing
+                    break;
+
+                case SyntaxKindEx.ParenthesizedPattern:
+                case SyntaxKindEx.ListPattern:
+                case SyntaxKindEx.SlicePattern:
+                    // Not Supported
                     // Do nothing
                     break;
 

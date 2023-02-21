@@ -1286,6 +1286,7 @@ namespace SonarAnalyzer.CFG.Sonar
                 currentBlock.ReversedInstructions.Add(patternSyntaxWrapper);
                 return currentBlock;
             }
+
             // Unsupported:
             // Parenthesized
             // BinaryPattern
@@ -1293,7 +1294,8 @@ namespace SonarAnalyzer.CFG.Sonar
             // VarPattern
             // RelationalPattern
             // ListPattern
-            return currentBlock;
+            // (SlicePattern)
+            throw new NotSupportedException($"{patternSyntaxWrapper.SyntaxNode.Kind()}");
         }
 
         private Block BuildTupleExpression(TupleExpressionSyntaxWrapper tuple, Block currentBlock)
