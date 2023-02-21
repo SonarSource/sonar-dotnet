@@ -27,24 +27,34 @@ namespace SonarAnalyzer.UnitTest.Rules;
 public class AssertionsShouldBeCompleteTest
 {
     private readonly VerifierBuilder fluentAssertions = new VerifierBuilder<AssertionsShouldBeComplete>()
-        .AddReferences(NuGetMetadataReference.FluentAssertions("6.10"))
+        .AddReferences(NuGetMetadataReference.FluentAssertions("6.10.0"))
         .AddReferences(MetadataReferenceFacade.SystemXml)
         .AddReferences(MetadataReferenceFacade.SystemXmlLinq)
         .AddReferences(MetadataReferenceFacade.SystemNetHttp)
         .AddReferences(MetadataReferenceFacade.SystemData);
 
+    private readonly VerifierBuilder nfluent = new VerifierBuilder<AssertionsShouldBeComplete>()
+        .AddReferences(NuGetMetadataReference.NFluent("2.8.0"));
+
     [TestMethod]
-    public void AssertionsShouldBeComplete_CSharp7() =>
+    public void AssertionsShouldBeComplete_FluentAssertions_CSharp7() =>
         fluentAssertions
         .WithOptions(ParseOptionsHelper.OnlyCSharp7)
         .AddPaths("AssertionsShouldBeComplete.FluentAssertions.CSharp7.cs")
         .Verify();
 
     [TestMethod]
-    public void AssertionsShouldBeComplete_CSharp8() =>
+    public void AssertionsShouldBeComplete_FluentAssertions_CSharp8() =>
         fluentAssertions
         .WithOptions(ParseOptionsHelper.FromCSharp8)
         .AddPaths("AssertionsShouldBeComplete.FluentAssertions.CSharp8.cs")
         .WithConcurrentAnalysis(false)
+        .Verify();
+
+    [TestMethod]
+    public void AssertionsShouldBeComplete_NFluent_CSharp() =>
+        nfluent
+        .AddTestReference()
+        .AddPaths("AssertionsShouldBeComplete.NFluent.cs")
         .Verify();
 }
