@@ -925,24 +925,15 @@ namespace Namespace
                     case int: break;
                 }
                 """;
-
             var context = new ExplodedGraphContext(testInput);
+            var actualInstructions = new List<string>();
             context.ExplodedGraph.InstructionProcessed += (sender, args) =>
-                {
-                    var instruction = args.Instruction.ToString();
+                actualInstructions.Add(args.Instruction.ToString());
 
-                    switch (instruction)
-                    {
-                        case "new object()":
-                            break;
-                        case "int":
-                            break;
-                        default:
-                            throw new InvalidOperationException($"Unexpected instruction: {instruction}");
-                    }
-                };
             var walk = () => context.WalkWithInstructions(2);
+
             walk.Should().Throw<Exception>().Which.Message.Should().Be("Expected NumberOfExitBlockReached to be 1, but found 0.");
+            actualInstructions.Should().Equal("new object()", "int");
         }
 
         [TestMethod]
