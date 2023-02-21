@@ -901,15 +901,20 @@ namespace Namespace
         }
 
         [DataTestMethod]
-        [DataRow("var x = obj is (string s);", "ParenthesizedPattern")]
-        [DataRow("var x = obj is 1 or 2;", "OrPattern")]
-        [DataRow("var x = obj is 1 and 2;", "AndPattern")]
-        [DataRow("var x = obj is not 1;", "NotPattern")]
-        [DataRow("var x = obj is var i;", "VarPattern")]
-        [DataRow("var x = obj is > 5;", "RelationalPattern")]
-        [DataRow("var x = new object[] { } is [] empty;", "ListPattern")]
-        public void ExplodedGraph_IsPattern_Parentesized(string code, string patternKind) =>
-            Assert.ThrowsException<NotSupportedException>(() => new ExplodedGraphContext(code)).Message.Should().Be(patternKind);
+        [DataRow("is (string s)", "ParenthesizedPattern")]
+        [DataRow("is 1 or 2", "OrPattern")]
+        [DataRow("is 1 and 2", "AndPattern")]
+        [DataRow("is not 1", "NotPattern")]
+        [DataRow("is var i", "VarPattern")]
+        [DataRow("is > 5", "RelationalPattern")]
+        [DataRow("is [] empty", "ListPattern")]
+        public void ExplodedGraph_IsPattern_Parentesized(string pattern, string patternKind)
+        {
+            var createGraph = () => new ExplodedGraphContext($$"""
+                var x = obj {{pattern}};
+                """);
+            createGraph.Should().ThrowExactly<NotSupportedException>().WithMessage(patternKind);
+        }
 
         [TestMethod]
         public void ExplodedGraph_SwitchStatement_TypePattern()
