@@ -64,7 +64,8 @@ public sealed class AssertionsShouldBeComplete : SonarDiagnosticAnalyzer
                             invocation.NameIs("That", "ThatEnum", "ThatCode", "ThatAsyncCode", "ThatDynamic")
                             && c.SemanticModel.GetSymbolInfo(invocation) is { Symbol: IMethodSymbol { IsStatic: true } method }
                             && method.ContainingType?.IsStatic is true
-                            && method.ContainingType.Is(KnownType.NFluent_Check)), SyntaxKind.InvocationExpression);
+                            && method.ContainingType.Is(KnownType.NFluent_Check)),
+                            SyntaxKind.InvocationExpression);
                 }
                 if (start.Compilation.References(KnownAssembly.NSubstitute))
                 {
