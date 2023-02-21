@@ -33,6 +33,6 @@ public sealed class ClassShouldNotBeEmpty : ClassShouldNotBeEmptyBase<SyntaxKind
 
     protected override string DeclarationTypeKeyword(SyntaxNode node) =>
         node is TypeBlockSyntax typeBlock
-            ? typeBlock.BlockStatement.DeclarationKeyword.ValueText
+            ? typeBlock.BlockStatement.DeclarationKeyword.ValueText.ToLower()
             : "type";
 }
