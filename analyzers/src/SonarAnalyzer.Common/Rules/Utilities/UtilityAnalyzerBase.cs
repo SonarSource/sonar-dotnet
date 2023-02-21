@@ -123,7 +123,5 @@ namespace SonarAnalyzer.Rules
         private bool ShouldCreateMetrics(SonarCompilationReportingContext context, SyntaxTree tree) =>
             (AnalyzeUnchangedFiles || !context.IsUnchanged(tree))
             && ShouldGenerateMetrics(context, tree);
-
-
     }
 }
