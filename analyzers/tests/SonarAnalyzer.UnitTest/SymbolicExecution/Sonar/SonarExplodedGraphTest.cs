@@ -932,7 +932,7 @@ namespace Namespace
 
             var walk = () => context.WalkWithInstructions(2);
 
-            walk.Should().Throw<Exception>().Which.Message.Should().Be("Expected NumberOfExitBlockReached to be 1, but found 0.");
+            walk.Should().Throw<Exception>().WithMessage("Expected NumberOfExitBlockReached to be 1, but found 0.");
             actualInstructions.Should().Equal("new object()", "int");
         }
 
