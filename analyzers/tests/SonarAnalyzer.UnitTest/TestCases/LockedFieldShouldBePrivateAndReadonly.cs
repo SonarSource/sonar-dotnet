@@ -24,8 +24,8 @@ class Test
         lock (Test.staticReadonlyField) { }
         lock (Test.staticReadWriteField) { }             // Noncompliant {{'staticReadWriteField' is not 'private readonly', and should not be used for locking.}}
         //    ^^^^^^^^^^^^^^^^^^^^^^^^^
-        lock (AnotherClass.staticReadonlyField) { }      // Noncompliant {{Use field from 'Test' for locking.}}
-        lock (AnotherClass.staticReadWriteField) { }     // Noncompliant {{Use field from 'Test' for locking.}}
+        lock (AnotherClass.staticReadonlyField) { }      // Noncompliant {{Use fields from 'Test' for locking.}}
+        lock (AnotherClass.staticReadWriteField) { }     // Noncompliant {{Use fields from 'Test' for locking.}}
         //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     }
 
