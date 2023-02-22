@@ -38,11 +38,16 @@ public sealed class AssertionsShouldBeComplete : SonarDiagnosticAnalyzer
                     start.RegisterNodeAction(c =>
                         CheckInvocation(c, invocation =>
                             invocation.NameIs("Should")
-                            && c.SemanticModel.GetSymbolInfo(invocation).AllSymbols().Any(x =>
-                                x is IMethodSymbol { IsExtensionMethod: true } method
-                                && (method.ContainingType.Is(KnownType.FluentAssertions_AssertionExtensions)
+                            && c.SemanticModel.GetSymbolInfo(invocation).AllSymbols().Any(x => x is IMethodSymbol
+                            {
+                                IsExtensionMethod: true,
+                                ReturnsVoid: false,
+                                ContainingType: { } container,
+                                ReturnType: { } returnType,
+                            }
+                                && (container.Is(KnownType.FluentAssertions_AssertionExtensions)
                                     // ⬆️ Built in assertions. ⬇️ Custom assertions (the majority at least).
-                                    || method.ReturnType.DerivesFrom(KnownType.FluentAssertions_Primitives_ReferenceTypeAssertions)))),
+                                    || returnType.DerivesFrom(KnownType.FluentAssertions_Primitives_ReferenceTypeAssertions)))),
                             SyntaxKind.InvocationExpression);
                 }
                 if (start.Compilation.References(KnownAssembly.NFluent))
@@ -50,9 +55,16 @@ public sealed class AssertionsShouldBeComplete : SonarDiagnosticAnalyzer
                     start.RegisterNodeAction(c =>
                         CheckInvocation(c, invocation =>
                             invocation.NameIs("That", "ThatEnum", "ThatCode", "ThatAsyncCode", "ThatDynamic")
-                            && c.SemanticModel.GetSymbolInfo(invocation) is { Symbol: IMethodSymbol { IsStatic: true } method }
-                            && method.ContainingType?.IsStatic is true
-                            && method.ContainingType.Is(KnownType.NFluent_Check)),
+                            && c.SemanticModel.GetSymbolInfo(invocation) is
+                            {
+                                Symbol: IMethodSymbol
+                                {
+                                    IsStatic: true,
+                                    ReturnsVoid: false,
+                                    ContainingType: { IsStatic: true } container
+                                }
+                            }
+                            && container.Is(KnownType.NFluent_Check)),
                             SyntaxKind.InvocationExpression);
                 }
                 if (start.Compilation.References(KnownAssembly.NSubstitute))
@@ -60,9 +72,16 @@ public sealed class AssertionsShouldBeComplete : SonarDiagnosticAnalyzer
                     start.RegisterNodeAction(c =>
                         CheckInvocation(c, invocation =>
                             invocation.NameIs("Received", "DidNotReceive", "ReceivedWithAnyArgs", "DidNotReceiveWithAnyArgs", "ReceivedCalls")
-                            && c.SemanticModel.GetSymbolInfo(invocation) is { Symbol: IMethodSymbol { IsExtensionMethod: true } method }
-                            && method.ContainingType?.IsStatic is true
-                            && method.ContainingType.Is(KnownType.NSubstitute_SubstituteExtensions)),
+                            && c.SemanticModel.GetSymbolInfo(invocation) is
+                            {
+                                Symbol: IMethodSymbol
+                                {
+                                    IsExtensionMethod: true,
+                                    ReturnsVoid: false,
+                                    ContainingType: { } container,
+                                }
+                            }
+                            && container.Is(KnownType.NSubstitute_SubstituteExtensions)),
                             SyntaxKind.InvocationExpression);
                 }
             });
