@@ -49,6 +49,9 @@ namespace SonarAnalyzer.Helpers
         public static string[] ReadSourceFileExclusionsProperty(IEnumerable<XElement> settings) =>
             ReadCommaSeparatedArrayProperty(settings, "sonar.exclusions");
 
+        public static string ReadProjectRootProperty(IEnumerable<XElement> settings) =>
+            GetPropertyStringValue(settings, "sonar.projectRoot");
+
         private static bool ReadBooleanProperty(IEnumerable<XElement> settings, string propertyName, bool defaultValue = false) =>
             settings.Any()
             && GetPropertyStringValue(settings, propertyName) is { } propertyStringValue

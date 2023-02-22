@@ -35,6 +35,7 @@ public class SonarAnalysisContextBase
     private static readonly Lazy<SourceTextValueProvider<bool>> ShouldAnalyzeGeneratedVB = new(() => CreateAnalyzeGeneratedProvider(LanguageNames.VisualBasic));
     private static readonly Lazy<SourceTextValueProvider<string[]>> FileExclusions = new(() => CreateFileExclusions());
     private static readonly Lazy<SourceTextValueProvider<string[]>> FileInclusions = new(() => CreateFileInclusions());
+    private static readonly Lazy<SourceTextValueProvider<string>> ProjectRoot = new(() => CreateProjectRoot());
 
     protected SonarAnalysisContextBase() { }
 
@@ -45,6 +46,8 @@ public class SonarAnalysisContextBase
 
     protected static SourceTextValueProvider<string[]> RetrieveIncludedFiles() => FileInclusions.Value;
 
+    protected static SourceTextValueProvider<string> RetrieveProjectRoot() => ProjectRoot.Value;
+
     private static SourceTextValueProvider<bool> CreateAnalyzeGeneratedProvider(string language) =>
         new(x => PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(PropertiesHelper.ParseXmlSettings(x), language));
 
@@ -53,6 +56,9 @@ public class SonarAnalysisContextBase
 
     private static SourceTextValueProvider<string[]> CreateFileInclusions() =>
         new(x => PropertiesHelper.ReadSourceFileInclusionsProperty(PropertiesHelper.ParseXmlSettings(x)));
+
+    private static SourceTextValueProvider<string> CreateProjectRoot() =>
+        new(x => PropertiesHelper.ReadProjectRootProperty(PropertiesHelper.ParseXmlSettings(x)));
 }
 
 public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextBase
@@ -147,11 +153,15 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
     private bool ShouldAnalyzeFile(SourceText sonarLintXml, string filePath) =>
         AnalysisContext.TryGetValue(sonarLintXml, RetrieveIncludedFiles(), out var inclusions)
         && AnalysisContext.TryGetValue(sonarLintXml, RetrieveExcludedFiles(), out var exclusions)
-        && IsIncluded(inclusions, filePath)
-        && !IsExcluded(exclusions, filePath);
+        && AnalysisContext.TryGetValue(sonarLintXml, RetrieveProjectRoot(), out var root)
+        && FileHelper.GetRelativePath(filePath, root) is { } relativePath
+        && IsIncluded(inclusions, relativePath)
+        && !IsExcluded(exclusions, relativePath);
 
     private bool IsIncluded(string[] inclusions, string filePath) =>
-        inclusions is { Length: 0 } || inclusions.Any(x => globPatternMatcher.IsMatch(x, filePath));
+        inclusions is { Length: 0 }
+        || string.IsNullOrEmpty(inclusions.First())
+        || inclusions.Any(x => globPatternMatcher.IsMatch(x, filePath));
 
     private bool IsExcluded(string[] exclusions, string filePath) =>
         exclusions.Any(x => globPatternMatcher.IsMatch(x, filePath));
