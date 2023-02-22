@@ -39,6 +39,12 @@ public class Program
     public StringAssertions ReturnedByArrow(string s) =>
         s.Should();            // Compliant
 
+    public object ReturnedByArrowWithConversion(string s) =>
+        (object)s.Should();    // Compliant
+
+    public void CalledByArrow(string s) =>
+        s.Should();            // Noncompliant
+
     public void Assigned()
     {
         var s = "Test";

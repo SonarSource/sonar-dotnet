@@ -48,4 +48,20 @@ public class Program
             return s.Should();
         }
     }
+
+    public StringAssertions PropertyArrow => "Test".Should();
+
+    public StringAssertions PropertyGetterArrow
+    {
+        get => "Test".Should();
+        set => "Test".Should(); // Noncompliant
+    }
+
+    public StringAssertions PropertyGetterReturn
+    {
+        get
+        {
+            return "Test".Should();
+        }
+    }
 }

@@ -111,9 +111,11 @@ public sealed class AssertionsShouldBeComplete : SonarDiagnosticAnalyzer
             return true;
         }
         // We are in some kind of statement context "??? Should();"
-        // The result might be stored in a variable or returned from the method
+        // The result might be stored in a variable or returned from the method/property
         if (nextToken.Parent is
-            BaseMethodDeclarationSyntax
+            MethodDeclarationSyntax { ReturnType: not PredefinedTypeSyntax { Keyword.RawKind: (int)SyntaxKind.VoidKeyword } }
+            or PropertyDeclarationSyntax
+            or AccessorDeclarationSyntax { Keyword.RawKind: (int)SyntaxKind.GetKeyword }
             or ReturnStatementSyntax
             or LocalDeclarationStatementSyntax
             or ExpressionStatementSyntax { Expression: AssignmentExpressionSyntax }
