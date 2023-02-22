@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Concurrent;
+using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -136,7 +137,7 @@ public class GlobPatternMatcher : IGlobPatternMatcher
          * @see #create(string, string)
          */
         public static WildcardPattern Create(string pattern) =>
-            Create(pattern, "/");
+            Create(pattern, Path.DirectorySeparatorChar.ToString());
 
         /**
          * Creates pattern with specified separator for directories.

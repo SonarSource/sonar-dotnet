@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Helpers
 
         public static string[] ReadCommaSeparatedArrayProperty(IEnumerable<XElement> settings, string propertyName) =>
             settings.Any()
-            && GetPropertyStringValue(settings, propertyName) is { } propertyStringValue
+            && GetPropertyStringValue(settings, propertyName) is { Length: > 0 } propertyStringValue
             && propertyStringValue.Split(',') is { } propertyValue
                 ? propertyValue
                 : Array.Empty<string>();

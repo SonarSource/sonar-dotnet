@@ -151,7 +151,8 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
         && shouldAnalyzeGenerated;
 
     private bool ShouldAnalyzeFile(SourceText sonarLintXml, string filePath) =>
-        AnalysisContext.TryGetValue(sonarLintXml, RetrieveIncludedFiles(), out var inclusions)
+        File.Exists(filePath)
+        && AnalysisContext.TryGetValue(sonarLintXml, RetrieveIncludedFiles(), out var inclusions)
         && AnalysisContext.TryGetValue(sonarLintXml, RetrieveExcludedFiles(), out var exclusions)
         && AnalysisContext.TryGetValue(sonarLintXml, RetrieveProjectRoot(), out var root)
         && FileHelper.GetRelativePath(filePath, root) is { } relativePath
@@ -159,9 +160,7 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
         && !IsExcluded(exclusions, relativePath);
 
     private bool IsIncluded(string[] inclusions, string filePath) =>
-        inclusions is { Length: 0 }
-        || string.IsNullOrEmpty(inclusions.First())
-        || inclusions.Any(x => globPatternMatcher.IsMatch(x, filePath));
+        inclusions is { Length: 0 } || inclusions.Any(x => globPatternMatcher.IsMatch(x, filePath));
 
     private bool IsExcluded(string[] exclusions, string filePath) =>
         exclusions.Any(x => globPatternMatcher.IsMatch(x, filePath));
