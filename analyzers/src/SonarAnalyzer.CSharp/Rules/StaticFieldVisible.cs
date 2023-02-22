@@ -51,6 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool FieldIsRelevant(FieldDeclarationSyntax node) =>
             node.Modifiers.Count > 1
             && node.Modifiers.Any(SyntaxKind.StaticKeyword)
+            && !node.Modifiers.Any(SyntaxKind.VolatileKeyword)
             && (!node.Modifiers.Any(SyntaxKind.PrivateKeyword) || (node.Modifiers.Any(SyntaxKind.PrivateKeyword) && node.Modifiers.Any(SyntaxKind.ProtectedKeyword)))
             && !node.Modifiers.Any(SyntaxKind.ReadOnlyKeyword);
 

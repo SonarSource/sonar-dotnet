@@ -24,11 +24,15 @@ namespace Tests.TestCases
         double Pi11 = 3.14;
         public readonly double Pi12 = 3.14;
 
+        public static volatile int VolatileValue = 3; // Compliant - volatile keyword indicates that a field might be modified by multiple threads that are executing at the same time.
+                                                      // see: https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/volatile
+
         [ThreadStatic]
         public static int Value; // Compliant, thread static field values are not shared between threads
 
         [NonSerialized]
         public static int Value2; // Noncompliant
+
     }
 
     public class Shape
