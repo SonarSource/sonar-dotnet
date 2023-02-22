@@ -114,9 +114,8 @@ public sealed class AssertionsShouldBeComplete : SonarDiagnosticAnalyzer
         // The result might be stored in a variable or returned from the method/property
         return nextToken.Parent switch
         {
-
-            MethodDeclarationSyntax { ReturnType: { } returnType } when !IsVoid(returnType) => true,
-            { } parent when LocalFunctionStatementSyntaxWrapper.IsInstance(parent) && !IsVoid(((LocalFunctionStatementSyntaxWrapper)parent).ReturnType) => true,
+            MethodDeclarationSyntax { ReturnType: { } returnType } => !IsVoid(returnType),
+            { } parent when LocalFunctionStatementSyntaxWrapper.IsInstance(parent) => !IsVoid(((LocalFunctionStatementSyntaxWrapper)parent).ReturnType),
             PropertyDeclarationSyntax => true,
             AccessorDeclarationSyntax { Keyword.RawKind: (int)SyntaxKind.GetKeyword } => true,
             ReturnStatementSyntax => true,
