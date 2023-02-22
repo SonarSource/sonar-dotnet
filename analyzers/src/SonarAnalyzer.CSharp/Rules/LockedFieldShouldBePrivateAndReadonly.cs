@@ -52,7 +52,7 @@ public sealed class LockedFieldShouldBePrivateAndReadonly : SonarDiagnosticAnaly
                 {
                     if (lockedField.ContainingType is { } lockedFieldType && c.ContainingSymbol?.ContainingType is { } containingType && !lockedFieldType.Equals(containingType))
                     {
-                        ReportIssue($"Use field from '{containingType.ToMinimalDisplayString(c.SemanticModel, expression.SpanStart)}' for locking.");
+                        ReportIssue($"Use fields from '{containingType.ToMinimalDisplayString(c.SemanticModel, expression.SpanStart)}' for locking.");
                     }
                     else
                     {
