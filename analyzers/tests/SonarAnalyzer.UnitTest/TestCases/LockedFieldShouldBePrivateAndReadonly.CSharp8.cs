@@ -1,6 +1,4 @@
-﻿using System;
-
-class Test
+﻿class Test
 {
     static readonly object staticReadonlyField = null;
     static object staticReadWriteField = null;
@@ -32,13 +30,18 @@ class Test
 
     void OnANewInstanceOnStack()
     {
-        lock (stackalloc int[] { }) { }   // Error [CS0185]
-        lock (stackalloc [] { 1 }) { }    // Error [CS0185]
+        lock (stackalloc int[] { }) { }              // Error [CS0185]
+        lock (stackalloc [] { 1 }) { }               // Error [CS0185]
     }
 
     void CoalescingAssignment(object oPar)
     {
-        lock (oPar ??= readonlyField) { } // FN, null conditional assignment not supported
+        lock (oPar ??= readonlyField) { }            // FN, null conditional assignment not supported
+    }
+
+    void SwitchExpression(object oPar)
+    {
+        lock (oPar switch { _ => new object() }) { } // FN, switch expression not supported
     }
 }
 

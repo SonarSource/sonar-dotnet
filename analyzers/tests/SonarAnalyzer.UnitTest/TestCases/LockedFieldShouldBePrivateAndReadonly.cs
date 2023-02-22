@@ -24,18 +24,21 @@ class Test
         lock (Test.staticReadonlyField) { }
         lock (Test.staticReadWriteField) { }             // Noncompliant {{'staticReadWriteField' is not 'private readonly', and should not be used for locking.}}
         //    ^^^^^^^^^^^^^^^^^^^^^^^^^
-        lock (AnotherClass.staticReadonlyField) { }      // Noncompliant {{'staticReadonlyField' is not 'private readonly', and should not be used for locking.}}
-        lock (AnotherClass.staticReadWriteField) { }     // Noncompliant {{'staticReadWriteField' is not 'private readonly', and should not be used for locking.}}
+        lock (AnotherClass.staticReadonlyField) { }      // Noncompliant {{Use field from 'Test' for locking.}}
+        lock (AnotherClass.staticReadWriteField) { }     // Noncompliant {{Use field from 'Test' for locking.}}
         //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     }
 
     void OnAFieldOfSameInstance()
     {
         lock (readonlyField) { }
-        lock (readonlyStringField) { }
+        lock ((readonlyField)) { }
+        lock (readonlyStringField) { }                   // Noncompliant {{Strings can be interned, and should not be used for locking.}}
         lock (readWriteField) { }                        // Noncompliant {{'readWriteField' is not 'private readonly', and should not be used for locking.}}
+        lock ((readWriteField)) { }                      // Noncompliant {{'readWriteField' is not 'private readonly', and should not be used for locking.}}
         lock (this.readonlyField) { }
         lock (this.readWriteField) { }                   // Noncompliant {{'readWriteField' is not 'private readonly', and should not be used for locking.}}
+        lock ((this.readWriteField)) { }                 // Noncompliant {{'readWriteField' is not 'private readonly', and should not be used for locking.}}
     }
 
     void OnAFieldOfDifferentInstance()
@@ -44,6 +47,7 @@ class Test
         lock (anotherInstance.readonlyField) { }
         lock (anotherInstance.readWriteField) { }        // Noncompliant {{'readWriteField' is not 'private readonly', and should not be used for locking.}}
         lock (anotherInstance.readonlyField) { }
+        lock (anotherInstance?.readWriteField) { }       // FN: ?. not supported
     }
 
     void OnALocalVariable()
@@ -60,13 +64,11 @@ class Test
     {
         lock (new object()) { }                          // Noncompliant {{Locking on a new instance is a no-op.}}
         lock (new ANamespace.AClass()) { }               // Noncompliant
-        lock (new Test[] { })                            // Noncompliant
-        lock (new[] { readonlyField}) { }                // Noncompliant
+        lock (new Test[] { }) { }                        // Noncompliant
+        lock (new[] { readonlyField }) { }               // Noncompliant
         lock (new Tuple<object>(readonlyField)) { }      // Noncompliant
-        lock (new { })                                   // Noncompliant
+        lock (new { }) { }                               // Noncompliant
 
-        lock ("a string") { }                            // Noncompliant
-        lock ($"an interpolated {"string"}") { }         // Noncompliant
         lock (1) { }                                     // Error [CS0185]
         lock ((a: readonlyField, b: readonlyField)) { }  // Error [CS0185]
 
@@ -78,6 +80,16 @@ class Test
         lock (from x in new object[2] select x) { }      // Noncompliant
     }
 
+    void OnAStringInstance()
+    {
+        lock ("a string") { }                            // Noncompliant {{Strings can be interned, and should not be used for locking.}}
+        lock ($"an interpolated {"string"}") { }         // Noncompliant {{Strings can be interned, and should not be used for locking.}}
+        lock ("a" + "string") { }                        // Noncompliant {{Strings can be interned, and should not be used for locking.}}
+        lock (MethodReturningString()) { }               // Noncompliant {{Strings can be interned, and should not be used for locking.}}
+
+        string MethodReturningString() => "a string";
+    }
+
     void OnAssignment()
     {
         object x;
@@ -85,7 +97,7 @@ class Test
         lock (x = readWriteField) { }                    // FN, assignment not supported
     }
 
-    void OtherCases(object oPar, bool bPar)
+    void OtherCases(object oPar, bool bPar, object[] arrayPar)
     {
         lock (null) { }
 
@@ -109,6 +121,8 @@ class Test
 
         lock (oPar ?? readonlyField) { }
         lock (oPar = readonlyField) { }
+
+        lock (arrayPar[0]) { }
     }
 
     void ReadWriteReferences()
@@ -118,6 +132,12 @@ class Test
 
         ref object RefReturnReadWriteField(Test instance) => ref instance.readWriteField;
         ref object RefReturnStaticReadonlyField(Test instance) => ref Test.staticReadWriteField;
+    }
+
+    void NoIdentifier()
+    {
+        lock () { }   // Error
+        lock (()) { } // Error
     }
 
     delegate object ADelegate(object oPar);

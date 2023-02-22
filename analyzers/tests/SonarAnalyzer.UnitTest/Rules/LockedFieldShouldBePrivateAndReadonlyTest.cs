@@ -23,25 +23,32 @@ using SonarAnalyzer.Rules.CSharp;
 namespace SonarAnalyzer.UnitTest.Rules;
 
 [TestClass]
-public class LockedFieldPrivateReadonlyTest
+public class LockedFieldShouldBePrivateAndReadonlyTest
 {
-    private readonly VerifierBuilder builder = new VerifierBuilder<LockedFieldPrivateReadonly>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<LockedFieldShouldBePrivateAndReadonly>();
 
     [TestMethod]
-    public void LockedFieldPrivateReadonly_CS() =>
-        builder.AddPaths("LockedFieldPrivateReadonly.cs").Verify();
+    public void LockedFieldShouldBePrivateAndReadonly_CS() =>
+        builder.AddPaths("LockedFieldShouldBePrivateAndReadonly.cs").Verify();
 
     [TestMethod]
-    public void LockedFieldPrivateReadonly_CSharp8() =>
+    public void LockedFieldShouldBePrivateAndReadonly_CSharp8() =>
         builder
-            .AddPaths("LockedFieldPrivateReadonly.CSharp8.cs")
+            .AddPaths("LockedFieldShouldBePrivateAndReadonly.CSharp8.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp8)
             .Verify();
 
     [TestMethod]
-    public void LockedFieldPrivateReadonly_CSharp11() =>
+    public void LockedFieldShouldBePrivateAndReadonly_CSharp9() =>
         builder
-            .AddPaths("LockedFieldPrivateReadonly.CSharp11.cs")
+            .AddPaths("LockedFieldShouldBePrivateAndReadonly.CSharp9.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .Verify();
+
+    [TestMethod]
+    public void LockedFieldShouldBePrivateAndReadonly_CSharp11() =>
+        builder
+            .AddPaths("LockedFieldShouldBePrivateAndReadonly.CSharp11.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp11)
             .Verify();
 }
