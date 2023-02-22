@@ -47,6 +47,22 @@ public class AssertionsShouldBeCompleteTest
         .Verify();
 
     [TestMethod]
+    public void AssertionsShouldBeComplete_FluentAssertions_MissingParen() =>
+        fluentAssertions
+        .AddSnippet("""
+            using FluentAssertions;
+            public class Test
+            {
+                public void MissingParen()
+                {
+                    var s = "Test";
+                    s.Should(;  // Error
+                }
+            }
+            """)
+        .Verify();
+
+    [TestMethod]
     public void AssertionsShouldBeComplete_FluentAssertions_CSharp8() =>
         fluentAssertions
         .WithOptions(ParseOptionsHelper.FromCSharp8)

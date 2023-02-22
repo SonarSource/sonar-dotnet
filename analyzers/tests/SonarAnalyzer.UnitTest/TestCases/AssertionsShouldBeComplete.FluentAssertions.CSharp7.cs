@@ -12,6 +12,7 @@ public class Program
         //^^^^^^
         s[0].Should();                // Error [CS0121] ambiguous calls
                                       // Noncompliant@-1
+
         s.Should().Be("Test");        // Compliant
     }
 
@@ -21,6 +22,7 @@ public class Program
         collection.Should();                               // Error [CS0121] ambiguous calls
                                                            // Noncompliant@-1
         collection.Should<string>();                       // Noncompliant
+
         collection.Should<string>().Equal("Test", "Test"); // Compliant
     }
 

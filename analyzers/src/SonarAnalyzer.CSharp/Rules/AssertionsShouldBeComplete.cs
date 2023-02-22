@@ -39,12 +39,12 @@ public sealed class AssertionsShouldBeComplete : SonarDiagnosticAnalyzer
                         CheckInvocation(c, invocation =>
                             invocation.NameIs("Should")
                             && c.SemanticModel.GetSymbolInfo(invocation).AllSymbols().Any(x => x is IMethodSymbol
-                            {
-                                IsExtensionMethod: true,
-                                ReturnsVoid: false,
-                                ContainingType: { } container,
-                                ReturnType: { } returnType,
-                            }
+                                {
+                                    IsExtensionMethod: true,
+                                    ReturnsVoid: false,
+                                    ContainingType: { } container,
+                                    ReturnType: { } returnType,
+                                }
                                 && (container.Is(KnownType.FluentAssertions_AssertionExtensions)
                                     // ⬆️ Built in assertions. ⬇️ Custom assertions (the majority at least).
                                     || returnType.DerivesFrom(KnownType.FluentAssertions_Primitives_ReferenceTypeAssertions)))),
@@ -99,7 +99,7 @@ public sealed class AssertionsShouldBeComplete : SonarDiagnosticAnalyzer
     private static bool HasContinuation(InvocationExpressionSyntax invocation)
     {
         var closeParen = invocation.ArgumentList.CloseParenToken;
-        if (!closeParen.IsKind(SyntaxKind.CloseParenToken) || !invocation.GetLastToken().Equals(closeParen))
+        if (!closeParen.IsKind(SyntaxKind.CloseParenToken) || closeParen.IsMissing || !invocation.GetLastToken().Equals(closeParen))
         {
             // Any invocation should end with ")". We are in unknown territory here.
             return true;
