@@ -1,7 +1,10 @@
-<p>A <code>static</code> field that is neither constant nor read-only is not thread-safe. Correctly accessing these fields from different threads
-needs synchronization with <code>lock</code>s. Improper synchronization may lead to unexpected results, thus publicly visible static fields are best
-suited for storing non-changing data shared by many consumers. To enforce this intent, these fields should be marked <code>readonly</code> or
-converted to constants.</p>
+<p>Non-private <code>static</code> fields that are neither <code>const</code> nor <code>readonly</code> can lead to errors and unpredictable
+behavior.</p>
+<p>This can happen because: * Any object can modify these fields and alter the global state. This makes the code more difficult to read, debug and
+test. * Correctly accessing these fields from different threads needs synchronization with <code>lock</code>. Improper synchronization may lead to
+unexpected results.</p>
+<p>Publicly visible static fields should only be used to store shared data that does not change. To enforce this intent, these fields should be marked
+<code>readonly</code> or converted to <code>const</code>.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 public class Math

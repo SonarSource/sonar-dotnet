@@ -34,22 +34,28 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterNodeAction(
                 c =>
                 {
-                    var fieldDeclaration = (FieldDeclarationSyntax)c.Node;
-                    foreach (var diagnostic in GetDiagnostics(fieldDeclaration.Declaration, c.SemanticModel))
+                    foreach (var diagnostic in GetDiagnostics(c.SemanticModel, (FieldDeclarationSyntax)c.Node))
                     {
                         c.ReportIssue(diagnostic);
                     }
                 },
                 SyntaxKind.FieldDeclaration);
 
-        private static IEnumerable<Diagnostic> GetDiagnostics(VariableDeclarationSyntax declaration, SemanticModel semanticModel) =>
-            declaration.Variables
-                       .Where(x => FieldIsRelevant(semanticModel.GetDeclaredSymbol(x) as IFieldSymbol))
-                       .Select(x => Diagnostic.Create(Rule, x.Identifier.GetLocation(), x.Identifier.ValueText));
+        private static IEnumerable<Diagnostic> GetDiagnostics(SemanticModel model, FieldDeclarationSyntax declaration) =>
+            FieldIsRelevant(declaration)
+                ? declaration.Declaration.Variables
+                    .Where(x => !FieldIsThreadSafe(model.GetDeclaredSymbol(x) as IFieldSymbol))
+                    .Select(x => Diagnostic.Create(Rule, x.Identifier.GetLocation(), x.Identifier.ValueText))
+                : Enumerable.Empty<Diagnostic>();
 
-        private static bool FieldIsRelevant(IFieldSymbol fieldSymbol) =>
-            fieldSymbol is {IsStatic: true, IsConst: false, IsReadOnly: false}
-            && fieldSymbol.DeclaredAccessibility != Accessibility.Private
-            && !fieldSymbol.GetAttributes().Any(x => x.AttributeClass.Is(KnownType.System_ThreadStaticAttribute));
+        private static bool FieldIsRelevant(FieldDeclarationSyntax node) =>
+            node.Modifiers.Count > 1
+            && node.Modifiers.Any(SyntaxKind.StaticKeyword)
+            && !node.Modifiers.Any(SyntaxKind.VolatileKeyword)
+            && (!node.Modifiers.Any(SyntaxKind.PrivateKeyword) || node.Modifiers.Any(SyntaxKind.ProtectedKeyword))
+            && !node.Modifiers.Any(SyntaxKind.ReadOnlyKeyword);
+
+        private static bool FieldIsThreadSafe(IFieldSymbol fieldSymbol) =>
+            fieldSymbol.GetAttributes().Any(x => x.AttributeClass.Is(KnownType.System_ThreadStaticAttribute));
     }
 }
