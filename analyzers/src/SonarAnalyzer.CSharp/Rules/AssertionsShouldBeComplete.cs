@@ -86,7 +86,7 @@ public sealed class AssertionsShouldBeComplete : SonarDiagnosticAnalyzer
                 }
             });
 
-    private void CheckInvocation(SonarSyntaxNodeReportingContext c, Func<InvocationExpressionSyntax, bool> isAssertionMethod)
+    private static void CheckInvocation(SonarSyntaxNodeReportingContext c, Func<InvocationExpressionSyntax, bool> isAssertionMethod)
     {
         if (c.Node is InvocationExpressionSyntax invocation
             && isAssertionMethod(invocation)

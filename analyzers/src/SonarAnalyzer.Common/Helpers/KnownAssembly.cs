@@ -31,7 +31,8 @@ public sealed partial class KnownAssembly
             PublicKeyTokenIs("8d05b1bb7a6fdb6c")));
 
     /// <summary>
-    /// Any MSTest framework either referenced via <see href="https://www.nuget.org/packages/MicrosoftVisualStudioQualityToolsUnitTestFramework">nuget.org/MicrosoftVisualStudioQualityToolsUnitTestFramework</see> (MSTest V1)
+    /// Any MSTest framework either referenced via
+    /// <see href="https://www.nuget.org/packages/MicrosoftVisualStudioQualityToolsUnitTestFramework">nuget.org/MicrosoftVisualStudioQualityToolsUnitTestFramework</see> (MSTest V1)
     /// or <see href="https://www.nuget.org/packages/MSTest.TestFramework">nuget.org/MSTest.TestFramework</see> (MSTest V2).
     /// </summary>
     public static KnownAssembly MSTest { get; } = new(
