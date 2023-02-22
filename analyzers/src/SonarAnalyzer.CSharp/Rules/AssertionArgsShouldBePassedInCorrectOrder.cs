@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq.Expressions;
 using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Rules.CSharp;
@@ -45,20 +46,31 @@ public sealed class AssertionArgsShouldBePassedInCorrectOrder : SonarDiagnosticA
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(c =>
         {
-            if (c.Node is InvocationExpressionSyntax { ArgumentList: { Arguments: { Count: >= 2 } arguments } argumentList, Expression: MemberAccessExpressionSyntax methodCallExpression }
-                && methodCallExpression.IsKind(SyntaxKind.SimpleMemberAccessExpression)
+            if (c.Node is InvocationExpressionSyntax { ArgumentList: { Arguments: { Count: >= 2 } arguments } argumentList } invocation
                 && CSharpFacade.Instance.MethodParameterLookup(argumentList, c.SemanticModel) is var parameterLookup
                 && CheckArguments(parameterLookup)
-                && MethodsWithType.GetValueOrDefault(methodCallExpression.Name.Identifier.ValueText) is { } methodKnownTypes
-                && methodKnownTypes.IsDefault is false
-                && (c.SemanticModel.GetSymbolInfo(methodCallExpression.Expression).Symbol as INamedTypeSymbol).IsAny(methodKnownTypes))
+                && AssertionMethods(invocation, c.SemanticModel))
             {
                 c.ReportIssue(Diagnostic.Create(Rule, arguments[0].CreateLocation(arguments[1])));
             }
         },
         SyntaxKind.InvocationExpression);
 
-    private bool CheckArguments(IMethodParameterLookup parameterLookup) =>
+    private static bool AssertionMethods(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
+        invocation.GetName() switch
+        {
+            "AreEqual" or "AreNotEqual" => Check(invocation, semanticModel, KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert, KnownType.NUnit_Framework_Assert),
+            "AreSame" or "AreNotSame" => Check(invocation, semanticModel, KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert, KnownType.NUnit_Framework_Assert),
+            "Equal" or "Same" or "NotSame" => Check(invocation, semanticModel, KnownType.Xunit_Assert),
+            _ => false
+        };
+
+    private static bool Check(InvocationExpressionSyntax invocation, SemanticModel semanticModel, params KnownType[] knownTypes) =>
+        semanticModel.GetSymbolInfo(invocation).AllSymbols().All(x =>
+            x is IMethodSymbol { IsStatic: true, ContainingSymbol: INamedTypeSymbol container }
+            && container.IsAny(knownTypes));
+
+    private static bool CheckArguments(IMethodParameterLookup parameterLookup) =>
         // "notExpected" is used in MSTest's AreNotEqual and AreNotSame
         (parameterLookup.TryGetSyntax("expected", out var expected) || parameterLookup.TryGetSyntax("notExpected", out expected))
         && expected.FirstOrDefault() is not LiteralExpressionSyntax
