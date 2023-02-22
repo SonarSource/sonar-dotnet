@@ -59,6 +59,11 @@ public class Program
         FluentAssertions.AssertionExtensions.Should(s); // Noncompliant
     }
 
+    public void ReturnedInLambda()
+    {
+        Func<StringAssertions> a = () => "Test".Should();
+    }
+
     public void CustomAssertions()
     {
         var custom = new Custom();

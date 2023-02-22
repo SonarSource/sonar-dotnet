@@ -35,4 +35,17 @@ public class Program
         dict?["A"]!.Should();  // Noncompliant
         //          ^^^^^^
     }
+
+    public void LocalFunction()
+    {
+        var s = "Test";
+
+        StringAssertions ExpressionBodyLocalFunction() =>
+            s.Should();
+
+        StringAssertions ReturnLocalFunction()
+        {
+            return s.Should();
+        }
+    }
 }

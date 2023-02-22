@@ -112,8 +112,12 @@ public sealed class AssertionsShouldBeComplete : SonarDiagnosticAnalyzer
         }
         // We are in some kind of statement context "??? Should();"
         // The result might be stored in a variable or returned from the method
-        if (invocation.Ancestors().TakeWhile(x => !(x.IsAnyKind(SyntaxKind.Block, SyntaxKindEx.LocalFunctionStatement) || x is BaseMethodDeclarationSyntax or AnonymousFunctionExpressionSyntax)).
-            Any(x => x.IsAnyKind(SyntaxKind.ReturnStatement, SyntaxKind.ArrowExpressionClause) || x is AssignmentExpressionSyntax or LocalDeclarationStatementSyntax))
+        if (nextToken.Parent is
+            BaseMethodDeclarationSyntax
+            or ReturnStatementSyntax
+            or LocalDeclarationStatementSyntax
+            or ExpressionStatementSyntax { Expression: AssignmentExpressionSyntax }
+            || LocalFunctionStatementSyntaxWrapper.IsInstance(nextToken.Parent))
         {
             return true;
         }
