@@ -2,7 +2,7 @@
 makes it possible for the field’s value to change while a thread is in a block locked on the old value. That would allow a second thread, locked on
 the new value, to enter the block at the same time.</p>
 <p>Locking on a <code>readonly</code> field of a class which is not <code>private</code> allows external code to lock the field, potentially
-interfering with synchronization by methods of that class.</p>
+interfering with synchronization of methods in that class.</p>
 <p>Locking on a local variable or on a new instance undermines the synchronization: two different threads running the method in parallel would lock on
 two different object instances.</p>
 <p>Locking on a string literal is even more dangerous: depending on whether the string is interned or not, different threads may or may not
