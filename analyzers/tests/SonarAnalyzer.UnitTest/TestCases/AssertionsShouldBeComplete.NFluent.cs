@@ -58,6 +58,9 @@ public class Program
 
     public ICheck<int> CheckReturnedByExpressionBody() =>
         Check.That(1);
+
+    public void AnonymousInvocation(Func<Action> a) =>
+        a()();
 }
 
 namespace OtherCheck
