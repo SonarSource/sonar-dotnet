@@ -47,6 +47,24 @@ public class CSharpFacadeTests
     }
 
     [TestMethod]
+    public void MethodParameterLookupAlternativeOverload()
+    {
+        var sut = CSharpFacade.Instance;
+        var code = """
+            public class C
+            {
+                public int M(int arg) =>
+                    M(1);
+            }
+            """;
+        var (tree, model) = TestHelper.CompileCS(code);
+        var root = tree.GetRoot();
+        var invocation = root.DescendantNodes().OfType<InvocationExpressionSyntax>().First();
+        var actual = sut.MethodParameterLookup(invocation, model);
+        actual.Should().NotBeNull().And.BeOfType<CSharpMethodParameterLookup>();
+    }
+
+    [TestMethod]
     public void MethodParameterLookupForObjectCreation()
     {
         var sut = CSharpFacade.Instance;

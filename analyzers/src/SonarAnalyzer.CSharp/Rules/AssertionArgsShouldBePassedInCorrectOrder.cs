@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
+
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -45,11 +47,8 @@ public sealed class AssertionArgsShouldBePassedInCorrectOrder : SonarDiagnosticA
         {
             if (c.Node is InvocationExpressionSyntax { ArgumentList: { Arguments: { Count: >= 2 } arguments } argumentList, Expression: MemberAccessExpressionSyntax methodCallExpression }
                 && methodCallExpression.IsKind(SyntaxKind.SimpleMemberAccessExpression)
-                && new CSharpMethodParameterLookup(argumentList, c.SemanticModel) is var parameterLookup
-                && (parameterLookup.TryGetSyntax("expected", out var expected) || parameterLookup.TryGetSyntax("notExpected", out expected))
-                && expected.FirstOrDefault() is not LiteralExpressionSyntax
-                && parameterLookup.TryGetSyntax("actual", out var actual)
-                && actual.FirstOrDefault() is LiteralExpressionSyntax
+                && CSharpFacade.Instance.MethodParameterLookup(argumentList, c.SemanticModel) is var parameterLookup
+                && CheckArguments(parameterLookup)
                 && MethodsWithType.GetValueOrDefault(methodCallExpression.Name.Identifier.ValueText) is { } methodKnownTypes
                 && methodKnownTypes.IsDefault is false
                 && (c.SemanticModel.GetSymbolInfo(methodCallExpression.Expression).Symbol as INamedTypeSymbol).IsAny(methodKnownTypes))
@@ -58,4 +57,11 @@ public sealed class AssertionArgsShouldBePassedInCorrectOrder : SonarDiagnosticA
             }
         },
         SyntaxKind.InvocationExpression);
+
+    private bool CheckArguments(IMethodParameterLookup parameterLookup) =>
+        // "notExpected" is used in MSTest's AreNotEqual and AreNotSame
+        (parameterLookup.TryGetSyntax("expected", out var expected) || parameterLookup.TryGetSyntax("notExpected", out expected))
+        && expected.FirstOrDefault() is not LiteralExpressionSyntax
+        && parameterLookup.TryGetSyntax("actual", out var actual)
+        && actual.FirstOrDefault() is LiteralExpressionSyntax;
 }

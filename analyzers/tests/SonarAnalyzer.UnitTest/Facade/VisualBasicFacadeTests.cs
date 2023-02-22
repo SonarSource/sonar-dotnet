@@ -46,6 +46,24 @@ public class VisualBasicFacadeTests
     }
 
     [TestMethod]
+    public void MethodParameterLookupAlternativeOverload()
+    {
+        var sut = VisualBasicFacade.Instance;
+        var code = """
+            Public Class C
+                Public Function M(arg As Integer) As Integer
+                    Return M(1)
+                End Function
+            End Class
+            """;
+        var (tree, model) = TestHelper.CompileVB(code);
+        var root = tree.GetRoot();
+        var invocation = root.DescendantNodes().OfType<InvocationExpressionSyntax>().First();
+        var actual = sut.MethodParameterLookup(invocation, model);
+        actual.Should().NotBeNull().And.BeOfType<VisualBasicMethodParameterLookup>();
+    }
+
+    [TestMethod]
     public void MethodParameterLookupForObjectCreation()
     {
         var sut = VisualBasicFacade.Instance;

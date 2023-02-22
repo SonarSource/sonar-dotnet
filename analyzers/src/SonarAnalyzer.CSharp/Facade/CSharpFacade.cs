@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers.Facade;
 
 namespace SonarAnalyzer.Helpers;
@@ -51,13 +52,19 @@ internal sealed class CSharpFacade : ILanguageFacade<SyntaxKind>
         node.FindConstantValue(model);
 
     public IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, IMethodSymbol methodSymbol) =>
+        invocation != null ? new CSharpMethodParameterLookup(GetArgumentList(invocation), methodSymbol) : null;
+
+    public IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, SemanticModel semanticModel) =>
+        invocation != null ? new CSharpMethodParameterLookup(GetArgumentList(invocation), semanticModel) : null;
+
+    private static ArgumentListSyntax GetArgumentList(SyntaxNode invocation) =>
         invocation switch
         {
-            null => null,
-            ObjectCreationExpressionSyntax x => new CSharpMethodParameterLookup(x.ArgumentList, methodSymbol),
-            InvocationExpressionSyntax x => new CSharpMethodParameterLookup(x, methodSymbol),
+            ArgumentListSyntax x => x,
+            ObjectCreationExpressionSyntax x => x.ArgumentList,
+            InvocationExpressionSyntax x => x.ArgumentList,
             _ when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(invocation) =>
-                new CSharpMethodParameterLookup(((ImplicitObjectCreationExpressionSyntaxWrapper)invocation).ArgumentList, methodSymbol),
+                ((ImplicitObjectCreationExpressionSyntaxWrapper)invocation).ArgumentList,
             _ => throw new ArgumentException($"{invocation.GetType()} does not contain an ArgumentList.", nameof(invocation)),
         };
 

@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Linq;
-
 namespace SonarAnalyzer.Helpers;
 
 public interface IMethodParameterLookup
@@ -40,18 +38,19 @@ internal abstract class MethodParameterLookupBase<TArgumentSyntax> : IMethodPara
     protected abstract SyntaxNode Expression(TArgumentSyntax argument);
 
     public IMethodSymbol MethodSymbol { get; }
-    private SymbolInfo? MethodSymbolInfo { get; }
+    private ImmutableArray<IMethodSymbol> MethodSymbolOrCandidates { get; }
 
     protected MethodParameterLookupBase(SeparatedSyntaxList<TArgumentSyntax>? argumentList, SymbolInfo? methodSymbolInfo)
-        : this(argumentList, methodSymbolInfo?.Symbol as IMethodSymbol)
-    {
-        MethodSymbolInfo = methodSymbolInfo;
-    }
+     : this(argumentList, methodSymbolInfo?.Symbol as IMethodSymbol, methodSymbolInfo?.AllSymbols().OfType<IMethodSymbol>()) { }
 
     protected MethodParameterLookupBase(SeparatedSyntaxList<TArgumentSyntax>? argumentList, IMethodSymbol methodSymbol)
+        : this(argumentList, methodSymbol, new[] { methodSymbol }) { }
+
+    private MethodParameterLookupBase(SeparatedSyntaxList<TArgumentSyntax>? argumentList, IMethodSymbol methodSymbol, IEnumerable<IMethodSymbol> methodSymbolOrCandidates)
     {
         this.argumentList = argumentList;
         MethodSymbol = methodSymbol;
+        MethodSymbolOrCandidates = methodSymbolOrCandidates?.ToImmutableArray() ?? ImmutableArray.Create<IMethodSymbol>();
     }
 
     public bool TryGetSymbol(SyntaxNode argument, out IParameterSymbol parameter) => TryGetSymbol(argument, MethodSymbol, out parameter);
@@ -104,22 +103,16 @@ internal abstract class MethodParameterLookupBase<TArgumentSyntax> : IMethodPara
     /// There will be single result for normal parameters.
     public bool TryGetSyntax(string parameterName, out ImmutableArray<SyntaxNode> expressions)
     {
-        expressions = Enumerable.Empty<SyntaxNode>().ToImmutableArray();
-        if (MethodSymbol is not null)
-        {
-            expressions = GetAllArgumentParameterMappings().Where(x => x.Symbol.Name == parameterName).Select(x => Expression(x.Node)).ToImmutableArray();
-        }
-        else if (MethodSymbolInfo is not null)
-        {
-            var candidateArgumentLists = MethodSymbolInfo.Value.CandidateSymbols.OfType<IMethodSymbol>()
-                .Select(x => GetAllArgumentParameterMappings(x).Where(x => x.Symbol.Name == parameterName).Select(x => Expression(x.Node)).ToImmutableArray()).ToImmutableArray();
-            if (candidateArgumentLists.Any() && candidateArgumentLists.Skip(1).All(x => x.SequenceEqual(candidateArgumentLists[0])))
-            {
-                expressions = candidateArgumentLists[0];
-            }
-        }
+        var candidateArgumentLists = MethodSymbolOrCandidates
+            .Select(x => GetAllArgumentParameterMappings(x).Where(x => x.Symbol.Name == parameterName).Select(x => Expression(x.Node)).ToImmutableArray()).ToImmutableArray();
+        expressions = candidateArgumentLists.Any() && AllArgumentsAreTheSame(candidateArgumentLists)
+            ? candidateArgumentLists[0]
+            : Enumerable.Empty<SyntaxNode>().ToImmutableArray();
         return !expressions.IsEmpty;
     }
+
+    private static bool AllArgumentsAreTheSame(ImmutableArray<ImmutableArray<SyntaxNode>> candidateArgumentLists) =>
+        candidateArgumentLists.Skip(1).All(x => x.SequenceEqual(candidateArgumentLists[0]));
 
     /// <summary>
     /// Method returns zero or one argument syntax that represents syntax passed to the parameter.

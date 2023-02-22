@@ -25,190 +25,278 @@ using CSharpSyntax = Microsoft.CodeAnalysis.CSharp.Syntax;
 using VBCodeAnalysis = Microsoft.CodeAnalysis.VisualBasic;
 using VBSyntax = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
-namespace SonarAnalyzer.UnitTest.Helpers
+namespace SonarAnalyzer.UnitTest.Helpers;
+
+[TestClass]
+public class MethodParameterLookupTest
 {
-    [TestClass]
-    public class MethodParameterLookupTest
+    private const string SourceCS = """
+            namespace Test
+            {
+                class TestClass
+                {
+                    void Main()
+                    {
+                        DoNothing();
+                        DoSomething(1, true);
+                        DoSomething(b: true, a: 1);
+                        WithOptional(1);
+                        WithOptional(1, "Ipsum");
+                        WithOptional(opt: "Ipsum", a: 1);
+                        WithParams();
+                        WithParams(1, 2, 3);
+                    }
+
+                    void ThisShouldNotBeFoundInMain()
+                    {
+                        SpecialMethod(65535);
+                    }
+
+                    void DoNothing()
+                    {
+                    }
+
+                    void DoSomething(int a, bool b)
+                    {
+                    }
+
+                    void WithOptional(int a, string opt = "Lorem")
+                    {
+                    }
+
+                    void WithParams(params int[] arr)
+                    {
+                    }
+
+                    void SpecialMethod(int specialParameter)
+                    {
+                    }
+                }
+            }
+            """;
+
+    private const string SourceVB = """
+            Module MainModule
+
+                Sub Main()
+                    DoNothing()
+                    DoSomething(1, True)
+                    WithOptional(1)
+                    WithOptional(1, "Ipsum")
+                    WithParams()
+                    WithParams(1, 2, 3)
+                End Sub
+
+                Sub ThisShouldNotBeFoundInMain()
+                    SpecialMethod(65535)
+                End Sub
+
+                Sub DoNothing()
+                End Sub
+
+                Sub DoSomething(a As Integer, b As Boolean)
+                End Sub
+
+                Sub WithOptional(a As Integer, Optional opt As String = "Lorem")
+                End Sub
+
+                Sub WithParams(ParamArray arr() As Integer)
+                End Sub
+
+                Sub SpecialMethod(SpecialParameter As Integer)
+                End Sub
+            End Module
+            """;
+
+    [TestMethod]
+    public void TestMethodParameterLookup_CS()
     {
-        private const string SourceCS = @"
-namespace Test
-{
-    class TestClass
-    {
-        void Main()
-        {
-            DoNothing();
-            DoSomething(1, true);
-            DoSomething(b: true, a: 1);
-            WithOptional(1);
-            WithOptional(1, ""Ipsum"");
-            WithOptional(opt: ""Ipsum"", a: 1);
-            WithParams();
-            WithParams(1, 2, 3);
-        }
+        var c = new CSharpInspection(SourceCS);
+        c.CheckExpectedParameterMappings(0, "DoNothing", new { });
+        c.CheckExpectedParameterMappings(1, "DoSomething", new { a = 1, b = true });
+        c.CheckExpectedParameterMappings(2, "DoSomething", new { a = 1, b = true });
+        c.CheckExpectedParameterMappings(3, "WithOptional", new { a = 1 });
+        c.CheckExpectedParameterMappings(4, "WithOptional", new { a = 1, opt = "Ipsum" });
+        c.CheckExpectedParameterMappings(5, "WithOptional", new { a = 1, opt = "Ipsum" });
+        c.CheckExpectedParameterMappings(6, "WithParams", new { });
+        c.CheckExpectedParameterMappings(7, "WithParams", new { arr = new[] { 1, 2, 3 } });
 
-        void ThisShouldNotBeFoundInMain()
-        {
-            SpecialMethod(65535);
-        }
-
-        void DoNothing()
-        {
-        }
-
-        void DoSomething(int a, bool b)
-        {
-        }
-
-        void WithOptional(int a, string opt = ""Lorem"")
-        {
-        }
-
-        void WithParams(params int[] arr)
-        {
-        }
-
-        void SpecialMethod(int specialParameter)
-        {
-        }
+        c.MainInvocations.Length.Should().Be(8); // Self-Test of this test. If new Invocation is added to the Main(), this number has to be updated and test should be written for that case.
     }
-}";
 
-        private const string SourceVB = @"
-Module MainModule
+    [TestMethod]
+    public void TestMethodParameterLookup_VB()
+    {
+        var c = new VisualBasicInspection(SourceVB);
+        c.CheckExpectedParameterMappings(0, "DoNothing", new { });
+        c.CheckExpectedParameterMappings(1, "DoSomething", new { a = 1, b = true });
+        c.CheckExpectedParameterMappings(2, "WithOptional", new { a = 1 });
+        c.CheckExpectedParameterMappings(3, "WithOptional", new { a = 1, opt = "Ipsum" });
+        c.CheckExpectedParameterMappings(4, "WithParams", new { });
+        c.CheckExpectedParameterMappings(5, "WithParams", new { arr = new[] { 1, 2, 3 } });
 
-    Sub Main()
-        DoNothing()
-        DoSomething(1, True)
-        WithOptional(1)
-        WithOptional(1, ""Ipsum"")
-        WithParams()
-        WithParams(1, 2, 3)
-    End Sub
+        c.MainInvocations.Length.Should().Be(6); // Self-Test of this test. If new Invocation is added to the Main(), this number has to be updated and test should be written for that case.
+    }
 
-    Sub ThisShouldNotBeFoundInMain()
-        SpecialMethod(65535)
-    End Sub
+    [TestMethod]
+    public void TestMethodParameterLookup_CS_ThrowsException()
+    {
+        var c = new CSharpInspection(SourceCS);
+        var lookupThrow = c.CreateLookup(1, "DoSomething");
 
-    Sub DoNothing()
-    End Sub
+        var invalidOperationEx = Assert.ThrowsException<InvalidOperationException>(() => lookupThrow.TryGetNonParamsSyntax(lookupThrow.MethodSymbol.Parameters.Single(), out var argument));
+        invalidOperationEx.Message.Should().Be("Sequence contains more than one element");
 
-    Sub DoSomething(a As Integer, b As Boolean)
-    End Sub
+        var argumentEx = Assert.ThrowsException<ArgumentException>(() =>
+            lookupThrow.TryGetSymbol(CSharpCodeAnalysis.SyntaxFactory.LiteralExpression(CSharpCodeAnalysis.SyntaxKind.StringLiteralExpression), out var parameter));
+        argumentEx.Message.Should().StartWith("argument must be of type Microsoft.CodeAnalysis.CSharp.Syntax.ArgumentSyntax");
+    }
 
-    Sub WithOptional(a As Integer, Optional opt As String = ""Lorem"")
-    End Sub
+    [TestMethod]
+    public void TestMethodParameterLookup_VB_ThrowsException()
+    {
+        var c = new VisualBasicInspection(SourceVB);
+        var lookupThrow = c.CreateLookup(1, "DoSomething");
 
-    Sub WithParams(ParamArray arr() As Integer)
-    End Sub
+        var invalidOperationEx = Assert.ThrowsException<InvalidOperationException>(() => lookupThrow.TryGetNonParamsSyntax(lookupThrow.MethodSymbol.Parameters.Single(), out var argument));
+        invalidOperationEx.Message.Should().Be("Sequence contains more than one element");
 
-    Sub SpecialMethod(SpecialParameter As Integer)
-    End Sub
-End Module
-";
+        var argumentEx = Assert.ThrowsException<ArgumentException>(() =>
+            lookupThrow.TryGetSymbol(VBCodeAnalysis.SyntaxFactory.StringLiteralExpression(VBCodeAnalysis.SyntaxFactory.StringLiteralToken(string.Empty, string.Empty)), out var parameter));
+        argumentEx.Message.Should().StartWith("argument must be of type Microsoft.CodeAnalysis.VisualBasic.Syntax.ArgumentSyntax");
+    }
 
-        [TestMethod]
-        public void TestMethodParameterLookup_CS()
+    [TestMethod]
+    public void TestMethodParameterLookup_CS_MultipleCandidates()
+    {
+        var source = """
+            namespace Test
+            {
+                class TestClass
+                {
+                    void Main()
+                    {
+                        dynamic d = 42;
+                        AmbiguousCall(d);
+                    }
+                
+                    void AmbiguousCall(int p) { }
+
+                    void AmbiguousCall(string p) { }
+                }
+            }
+            """;
+        var compiler = new SnippetCompiler(source, false, AnalyzerLanguage.CSharp);
+        var lookup = new CSharpMethodParameterLookup(compiler.GetNodes<CSharpSyntax.InvocationExpressionSyntax>().Single(), compiler.SemanticModel);
+
+        lookup.TryGetSyntax("p", out var expressions).Should().BeTrue();
+        expressions.Should().BeEquivalentTo(new { Identifier = new { ValueText = "d" } });
+    }
+
+    [TestMethod]
+    public void TestMethodParameterLookup_VB_MultipleCandidates()
+    {
+        var source = """
+            Module Test
+                Sub Main()
+                    Overloaded(42, "")
+                End Sub
+
+                Sub Overloaded(a As Integer, b As Boolean)
+                End Sub
+
+                Sub Overloaded(a As Integer, b As Integer)
+                End Sub
+            End Module
+            """;
+        var compiler = new SnippetCompiler(source, true, AnalyzerLanguage.VisualBasic);
+        var lookup = new VisualBasicMethodParameterLookup(compiler.GetNodes<VBSyntax.InvocationExpressionSyntax>().Single(), compiler.SemanticModel);
+
+        lookup.TryGetSyntax("a", out var expressions).Should().BeTrue();
+        expressions.Should().BeEquivalentTo(new { Token = new { ValueText = "42" } });
+    }
+
+    [TestMethod]
+    public void TestMethodParameterLookup_CS_UnknownMethod()
+    {
+        var source = """
+            namespace Test
+            {
+                class TestClass
+                {
+                    void Main()
+                    {
+                        UnknownMethod(42);
+                    }
+                }
+            }
+            """;
+        var compiler = new SnippetCompiler(source, true, AnalyzerLanguage.CSharp);
+        var lookup = new CSharpMethodParameterLookup(compiler.GetNodes<CSharpSyntax.InvocationExpressionSyntax>().Single(), compiler.SemanticModel);
+
+        lookup.TryGetSyntax("p", out _).Should().BeFalse();
+    }
+
+    [TestMethod]
+    public void TestMethodParameterLookup_VB_UnknownMethod()
+    {
+        var source = """
+            Module Test
+                Sub Main()
+                    UnknownMethod(42)
+                End Sub
+            End Module
+            """;
+        var compiler = new SnippetCompiler(source, true, AnalyzerLanguage.VisualBasic);
+        var lookup = new VisualBasicMethodParameterLookup(compiler.GetNodes<VBSyntax.InvocationExpressionSyntax>().Single(), compiler.SemanticModel);
+
+        lookup.TryGetSyntax("a", out var expressions).Should().BeFalse();
+    }
+
+    private abstract class InspectionBase<TArgumentSyntax, TInvocationSyntax>
+        where TArgumentSyntax : SyntaxNode
+        where TInvocationSyntax : SyntaxNode
+    {
+        public SnippetCompiler Compiler { get; protected set; }
+        public TInvocationSyntax[] MainInvocations { get; protected set; }
+        public TArgumentSyntax SpecialArgument { get; private set; }
+        public IParameterSymbol SpecialParameter { get; private set; }
+
+        public abstract TInvocationSyntax[] FindInvocationsIn(string name);
+        public abstract object ExtractArgumentValue(TArgumentSyntax argumentSyntax);
+        public abstract TArgumentSyntax[] GetArguments(TInvocationSyntax invocation);
+        public abstract MethodParameterLookupBase<TArgumentSyntax> CreateLookup(TInvocationSyntax invocation, IMethodSymbol method);
+
+        protected InspectionBase(string source, AnalyzerLanguage language)
         {
-            var c = new CSharpInspection(SourceCS);
-            c.CheckExpectedParameterMappings(0, "DoNothing", new { });
-            c.CheckExpectedParameterMappings(1, "DoSomething", new { a = 1, b = true });
-            c.CheckExpectedParameterMappings(2, "DoSomething", new { a = 1, b = true });
-            c.CheckExpectedParameterMappings(3, "WithOptional", new { a = 1 });
-            c.CheckExpectedParameterMappings(4, "WithOptional", new { a = 1, opt = "Ipsum" });
-            c.CheckExpectedParameterMappings(5, "WithOptional", new { a = 1, opt = "Ipsum" });
-            c.CheckExpectedParameterMappings(6, "WithParams", new { });
-            c.CheckExpectedParameterMappings(7, "WithParams", new { arr = new[] { 1, 2, 3 } });
-
-            c.MainInvocations.Length.Should().Be(8); // Self-Test of this test. If new Invocation is added to the Main(), this number has to be updated and test should be written for that case.
+            Compiler = new SnippetCompiler(source, false, language);
+            MainInvocations = FindInvocationsIn("Main");
         }
 
-        [TestMethod]
-        public void TestMethodParameterLookup_VB()
+        public MethodParameterLookupBase<TArgumentSyntax> CreateLookup(int invocationIndex, string expectedMethod)
         {
-            var c = new VisualBasicInspection(SourceVB);
-            c.CheckExpectedParameterMappings(0, "DoNothing", new { });
-            c.CheckExpectedParameterMappings(1, "DoSomething", new { a = 1, b = true });
-            c.CheckExpectedParameterMappings(2, "WithOptional", new { a = 1 });
-            c.CheckExpectedParameterMappings(3, "WithOptional", new { a = 1, opt = "Ipsum" });
-            c.CheckExpectedParameterMappings(4, "WithParams", new { });
-            c.CheckExpectedParameterMappings(5, "WithParams", new { arr = new[] { 1, 2, 3 } });
-
-            c.MainInvocations.Length.Should().Be(6); // Self-Test of this test. If new Invocation is added to the Main(), this number has to be updated and test should be written for that case.
+            var invocation = MainInvocations[invocationIndex];
+            var method = Compiler.SemanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
+            method.Name.Should().Be(expectedMethod);
+            return CreateLookup(invocation, method);
         }
 
-        [TestMethod]
-        public void TestMethodParameterLookup_CS_ThrowsException()
+        public void CheckExpectedParameterMappings(int invocationIndex, string expectedMethod, object expectedArguments)
         {
-            var c = new CSharpInspection(SourceCS);
-            var lookupThrow = c.CreateLookup(1, "DoSomething");
-
-            var invalidOperationEx = Assert.ThrowsException<InvalidOperationException>(() => lookupThrow.TryGetNonParamsSyntax(lookupThrow.MethodSymbol.Parameters.Single(), out var argument));
-            invalidOperationEx.Message.Should().Be("Sequence contains more than one element");
-
-            var argumentEx = Assert.ThrowsException<ArgumentException>(() =>
-                lookupThrow.TryGetSymbol(CSharpCodeAnalysis.SyntaxFactory.LiteralExpression(CSharpCodeAnalysis.SyntaxKind.StringLiteralExpression), out var parameter));
-            argumentEx.Message.Should().StartWith("argument must be of type Microsoft.CodeAnalysis.CSharp.Syntax.ArgumentSyntax");
+            var lookup = CreateLookup(invocationIndex, expectedMethod);
+            InspectTryGetSyntax(lookup, expectedArguments, lookup.MethodSymbol);
+            InspectTryGetSymbol(lookup, expectedArguments, GetArguments(MainInvocations[invocationIndex]));
         }
 
-        [TestMethod]
-        public void TestMethodParameterLookup_VB_ThrowsException()
+        protected void InitSpecial(TInvocationSyntax specialInvocation)
         {
-            var c = new VisualBasicInspection(SourceVB);
-            var lookupThrow = c.CreateLookup(1, "DoSomething");
-
-            var invalidOperationEx = Assert.ThrowsException<InvalidOperationException>(() => lookupThrow.TryGetNonParamsSyntax(lookupThrow.MethodSymbol.Parameters.Single(), out var argument));
-            invalidOperationEx.Message.Should().Be("Sequence contains more than one element");
-
-            var argumentEx = Assert.ThrowsException<ArgumentException>(() =>
-                lookupThrow.TryGetSymbol(VBCodeAnalysis.SyntaxFactory.StringLiteralExpression(VBCodeAnalysis.SyntaxFactory.StringLiteralToken(string.Empty, string.Empty)), out var parameter));
-            argumentEx.Message.Should().StartWith("argument must be of type Microsoft.CodeAnalysis.VisualBasic.Syntax.ArgumentSyntax");
+            SpecialArgument = GetArguments(specialInvocation).Single();
+            SpecialParameter = (Compiler.SemanticModel.GetSymbolInfo(specialInvocation).Symbol as IMethodSymbol).Parameters.Single();
         }
 
-        private abstract class InspectionBase<TArgumentSyntax, TInvocationSyntax>
-            where TArgumentSyntax : SyntaxNode
-            where TInvocationSyntax : SyntaxNode
+        private void InspectTryGetSyntax(MethodParameterLookupBase<TArgumentSyntax> lookup, object expectedArguments, IMethodSymbol method)
         {
-            public SnippetCompiler Compiler { get; protected set; }
-            public TInvocationSyntax[] MainInvocations { get; protected set; }
-            public TArgumentSyntax SpecialArgument { get; private set; }
-            public IParameterSymbol SpecialParameter { get; private set; }
-
-            public abstract TInvocationSyntax[] FindInvocationsIn(string name);
-            public abstract object ExtractArgumentValue(TArgumentSyntax argumentSyntax);
-            public abstract TArgumentSyntax[] GetArguments(TInvocationSyntax invocation);
-            public abstract MethodParameterLookupBase<TArgumentSyntax> CreateLookup(TInvocationSyntax invocation, IMethodSymbol method);
-
-            protected InspectionBase(string source, AnalyzerLanguage language)
-            {
-                Compiler = new SnippetCompiler(source, false, language);
-                MainInvocations = FindInvocationsIn("Main");
-            }
-
-            public MethodParameterLookupBase<TArgumentSyntax> CreateLookup(int invocationIndex, string expectedMethod)
-            {
-                var invocation = MainInvocations[invocationIndex];
-                var method = Compiler.SemanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
-                method.Name.Should().Be(expectedMethod);
-                return CreateLookup(invocation, method);
-            }
-
-            public void CheckExpectedParameterMappings(int invocationIndex, string expectedMethod, object expectedArguments)
-            {
-                var lookup = CreateLookup(invocationIndex, expectedMethod);
-                InspectTryGetSyntax(lookup, expectedArguments, lookup.MethodSymbol);
-                InspectTryGetSymbol(lookup, expectedArguments, GetArguments(MainInvocations[invocationIndex]));
-            }
-
-            protected void InitSpecial(TInvocationSyntax specialInvocation)
-            {
-                SpecialArgument = GetArguments(specialInvocation).Single();
-                SpecialParameter = (Compiler.SemanticModel.GetSymbolInfo(specialInvocation).Symbol as IMethodSymbol).Parameters.Single();
-            }
-
-            private void InspectTryGetSyntax(MethodParameterLookupBase<TArgumentSyntax> lookup, object expectedArguments, IMethodSymbol method)
-            {
-                lookup.TryGetSyntax(SpecialParameter, out var symbol).Should().Be(false);
+            lookup.TryGetSyntax(SpecialParameter, out var symbol).Should().Be(false);
 
                 foreach (var parameter in method.Parameters)
                 {
@@ -228,9 +316,9 @@ End Module
                 }
             }
 
-            private void InspectTryGetSymbol(MethodParameterLookupBase<TArgumentSyntax> lookup, object expectedArguments, TArgumentSyntax[] arguments)
-            {
-                lookup.TryGetSymbol(SpecialArgument, out var parameter).Should().Be(false);
+        private void InspectTryGetSymbol(MethodParameterLookupBase<TArgumentSyntax> lookup, object expectedArguments, TArgumentSyntax[] arguments)
+        {
+            lookup.TryGetSymbol(SpecialArgument, out var parameter).Should().Be(false);
 
                 foreach (var argument in arguments)
                 {
@@ -255,59 +343,58 @@ End Module
                 }
             }
 
-            private static object ExtractExpectedValue(object expected, string name)
+        private static object ExtractExpectedValue(object expected, string name)
+        {
+            var pi = expected.GetType().GetProperty(name);
+            if (pi == null)
             {
-                var pi = expected.GetType().GetProperty(name);
-                if (pi == null)
-                {
-                    Assert.Fail($"Parameter name {name} was not expected.");
-                }
-                return pi.GetValue(expected, null);
+                Assert.Fail($"Parameter name {name} was not expected.");
             }
-
-            private object ConstantValue(SyntaxNode node) =>
-                Compiler.SemanticModel.GetConstantValue(node).Value;
+            return pi.GetValue(expected, null);
         }
 
-        private class CSharpInspection : InspectionBase<CSharpSyntax.ArgumentSyntax, CSharpSyntax.InvocationExpressionSyntax>
-        {
-            public CSharpInspection(string source) : base(source, AnalyzerLanguage.CSharp) =>
-                InitSpecial(Compiler.GetNodes<CSharpSyntax.InvocationExpressionSyntax>()
-                                    .Single(x => x.Expression is CSharpSyntax.IdentifierNameSyntax identifier
-                                                 && identifier.Identifier.ValueText == "SpecialMethod"));
+        private object ConstantValue(SyntaxNode node) =>
+            Compiler.SemanticModel.GetConstantValue(node).Value;
+    }
 
-            public override CSharpSyntax.InvocationExpressionSyntax[] FindInvocationsIn(string name) =>
-                Compiler.GetNodes<CSharpSyntax.MethodDeclarationSyntax>().Single(x => x.Identifier.ValueText == name).DescendantNodes().OfType<CSharpSyntax.InvocationExpressionSyntax>().ToArray();
+    private class CSharpInspection : InspectionBase<CSharpSyntax.ArgumentSyntax, CSharpSyntax.InvocationExpressionSyntax>
+    {
+        public CSharpInspection(string source) : base(source, AnalyzerLanguage.CSharp) =>
+            InitSpecial(Compiler.GetNodes<CSharpSyntax.InvocationExpressionSyntax>()
+                                .Single(x => x.Expression is CSharpSyntax.IdentifierNameSyntax identifier
+                                             && identifier.Identifier.ValueText == "SpecialMethod"));
 
-            public override CSharpSyntax.ArgumentSyntax[] GetArguments(CSharpSyntax.InvocationExpressionSyntax invocation) =>
-                invocation.ArgumentList.Arguments.ToArray();
+        public override CSharpSyntax.InvocationExpressionSyntax[] FindInvocationsIn(string name) =>
+            Compiler.GetNodes<CSharpSyntax.MethodDeclarationSyntax>().Single(x => x.Identifier.ValueText == name).DescendantNodes().OfType<CSharpSyntax.InvocationExpressionSyntax>().ToArray();
 
-            public override object ExtractArgumentValue(CSharpSyntax.ArgumentSyntax argumentSyntax) =>
-                Compiler.SemanticModel.GetConstantValue(argumentSyntax.Expression).Value;
+        public override CSharpSyntax.ArgumentSyntax[] GetArguments(CSharpSyntax.InvocationExpressionSyntax invocation) =>
+            invocation.ArgumentList.Arguments.ToArray();
 
-            public override MethodParameterLookupBase<CSharpSyntax.ArgumentSyntax> CreateLookup(CSharpSyntax.InvocationExpressionSyntax invocation, IMethodSymbol method) =>
-                new CSharpMethodParameterLookup(invocation.ArgumentList, method);
-        }
+        public override object ExtractArgumentValue(CSharpSyntax.ArgumentSyntax argumentSyntax) =>
+            Compiler.SemanticModel.GetConstantValue(argumentSyntax.Expression).Value;
 
-        private class VisualBasicInspection : InspectionBase<VBSyntax.ArgumentSyntax, VBSyntax.InvocationExpressionSyntax>
-        {
-            public VisualBasicInspection(string source) : base(source, AnalyzerLanguage.VisualBasic) =>
-                InitSpecial(Compiler.GetNodes<VBSyntax.InvocationExpressionSyntax>()
-                                    .Single(x => x.Expression is VBSyntax.IdentifierNameSyntax identifier
-                                                 && identifier.Identifier.ValueText == "SpecialMethod"));
+        public override MethodParameterLookupBase<CSharpSyntax.ArgumentSyntax> CreateLookup(CSharpSyntax.InvocationExpressionSyntax invocation, IMethodSymbol method) =>
+            new CSharpMethodParameterLookup(invocation.ArgumentList, method);
+    }
 
-            public override VBSyntax.InvocationExpressionSyntax[] FindInvocationsIn(string name) =>
-                Compiler.GetNodes<VBSyntax.MethodBlockSyntax>().Single(x => x.SubOrFunctionStatement.Identifier.ValueText == "Main")
-                                                               .DescendantNodes().OfType<VBSyntax.InvocationExpressionSyntax>().ToArray();
+    private class VisualBasicInspection : InspectionBase<VBSyntax.ArgumentSyntax, VBSyntax.InvocationExpressionSyntax>
+    {
+        public VisualBasicInspection(string source) : base(source, AnalyzerLanguage.VisualBasic) =>
+            InitSpecial(Compiler.GetNodes<VBSyntax.InvocationExpressionSyntax>()
+                                .Single(x => x.Expression is VBSyntax.IdentifierNameSyntax identifier
+                                             && identifier.Identifier.ValueText == "SpecialMethod"));
 
-            public override VBSyntax.ArgumentSyntax[] GetArguments(VBSyntax.InvocationExpressionSyntax invocation) =>
-                invocation.ArgumentList.Arguments.ToArray();
+        public override VBSyntax.InvocationExpressionSyntax[] FindInvocationsIn(string name) =>
+            Compiler.GetNodes<VBSyntax.MethodBlockSyntax>().Single(x => x.SubOrFunctionStatement.Identifier.ValueText == "Main")
+                                                           .DescendantNodes().OfType<VBSyntax.InvocationExpressionSyntax>().ToArray();
 
-            public override MethodParameterLookupBase<VBSyntax.ArgumentSyntax> CreateLookup(VBSyntax.InvocationExpressionSyntax invocation, IMethodSymbol method) =>
-                new VisualBasicMethodParameterLookup(invocation.ArgumentList, Compiler.SemanticModel);
+        public override VBSyntax.ArgumentSyntax[] GetArguments(VBSyntax.InvocationExpressionSyntax invocation) =>
+            invocation.ArgumentList.Arguments.ToArray();
 
-            public override object ExtractArgumentValue(VBSyntax.ArgumentSyntax argumentSyntax) =>
-                Compiler.SemanticModel.GetConstantValue(argumentSyntax.GetExpression()).Value;
-        }
+        public override MethodParameterLookupBase<VBSyntax.ArgumentSyntax> CreateLookup(VBSyntax.InvocationExpressionSyntax invocation, IMethodSymbol method) =>
+            new VisualBasicMethodParameterLookup(invocation.ArgumentList, Compiler.SemanticModel);
+
+        public override object ExtractArgumentValue(VBSyntax.ArgumentSyntax argumentSyntax) =>
+            Compiler.SemanticModel.GetConstantValue(argumentSyntax.GetExpression()).Value;
     }
 }

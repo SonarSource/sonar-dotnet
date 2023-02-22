@@ -18,23 +18,25 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+internal class VisualBasicMethodParameterLookup : MethodParameterLookupBase<ArgumentSyntax>
 {
-    internal class VisualBasicMethodParameterLookup : MethodParameterLookupBase<ArgumentSyntax>
-    {
-        public VisualBasicMethodParameterLookup(ArgumentListSyntax argumentList, IMethodSymbol methodSymbol)
-            : base(argumentList?.Arguments, methodSymbol) { }
+    public VisualBasicMethodParameterLookup(InvocationExpressionSyntax invocation, SemanticModel semanticModel)
+        : this(invocation.ArgumentList, semanticModel) { }
 
-        public VisualBasicMethodParameterLookup(InvocationExpressionSyntax invocation, IMethodSymbol methodSymbol)
-            : this(invocation.ArgumentList, methodSymbol) { }
+    public VisualBasicMethodParameterLookup(InvocationExpressionSyntax invocation, IMethodSymbol methodSymbol)
+        : this(invocation.ArgumentList, methodSymbol) { }
 
-        public VisualBasicMethodParameterLookup(ArgumentListSyntax argumentList, SemanticModel semanticModel)
-            : base(argumentList?.Arguments, argumentList == null ? null : semanticModel.GetSymbolInfo(argumentList.Parent).Symbol as IMethodSymbol) { }
+    public VisualBasicMethodParameterLookup(ArgumentListSyntax argumentList, SemanticModel semanticModel)
+        : base(argumentList?.Arguments, argumentList == null ? null : semanticModel.GetSymbolInfo(argumentList.Parent)) { }
 
-        protected override SyntaxToken? GetNameColonArgumentIdentifier(ArgumentSyntax argument) =>
-            (argument as SimpleArgumentSyntax)?.NameColonEquals?.Name.Identifier;
+    public VisualBasicMethodParameterLookup(ArgumentListSyntax argumentList, IMethodSymbol methodSymbol)
+        : base(argumentList?.Arguments, methodSymbol) { }
 
-        protected override SyntaxNode Expression(ArgumentSyntax argument) =>
-            argument.GetExpression();
-    }
+    protected override SyntaxToken? GetNameColonArgumentIdentifier(ArgumentSyntax argument) =>
+        (argument as SimpleArgumentSyntax)?.NameColonEquals?.Name.Identifier;
+
+    protected override SyntaxNode Expression(ArgumentSyntax argument) =>
+        argument.GetExpression();
 }
