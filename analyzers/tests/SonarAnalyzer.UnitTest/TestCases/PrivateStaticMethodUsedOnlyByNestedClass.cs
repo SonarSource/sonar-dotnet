@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 class OuterClass
@@ -23,6 +24,7 @@ class OuterClass
     internal static void InternalMethod() { }                       // Compliant - method is not private
     protected internal static void ProtectedInternalMethod() { }    // Compliant - method is not private
     private static void PrivateMethod() { }                         // Noncompliant
+    private static void PrivateMethod(int arg) { }                  // Compliant - overloaded version of the previous method, not used anywhere
 
     static T GenericMethod<T>(T arg) => arg;                        // Noncompliant
     //       ^^^^^^^^^^^^^
@@ -160,4 +162,17 @@ partial class PartialOuterClass
     }
 }
 
-// attributes - DebuggerDisplay
+[DebuggerDisplay("{UsedByDebuggerDisplay()}")]
+class DebugViewClass
+{
+    static string UsedByDebuggerDisplay() => "";                    // FP - should not be moved to nested class, because it's also used by the attribute
+
+    class NestedClass
+    {
+        void Foo()
+        {
+            UsedByDebuggerDisplay();
+        }
+    }
+}
+

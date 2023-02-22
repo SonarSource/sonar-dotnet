@@ -45,9 +45,20 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
                 var declaredType = (TypeDeclarationSyntax)c.Node;
 
                 if (!IsPartial(declaredType)
-                    && PrivateStaticMethodsOf(declaredType) is { Length: > 0 } candidates
-                    && NestedTypeDeclarationsOf(declaredType) is { Length: > 0} nestedTypes)
+                    && NestedTypeDeclarationsOf(declaredType) is { Length: > 0 } nestedTypes
+                    && PrivateStaticMethodsOf(declaredType) is { Length: > 0 } candidates)
                 {
+                    var references = PotentialReferencesOfMethodsInsideType(candidates, declaredType)
+                                        .Where(x => x.Value.Any(type => type.Item2 != declaredType))
+                                        .Select(x => (x.Key, c.SemanticModel.GetSymbolInfo(x.Key), x.Value.Select(t => c.SemanticModel.GetSymbolInfo(t.Item1))));
+                    foreach (var reference in references)
+                    {
+                        var actualMethodReferences = reference.Item3.Where(x => x.Symbol == reference.Item2.Symbol).ToArray();
+                        // scenario 1: used in outer class
+                        // scenario 2: used only in one of the nested classes
+                        // scenario 3: used by multiple nested classes
+                    }
+
                     c.ReportIssue(Diagnostic.Create(Rule, declaredType.GetLocation(), "InnerClassName"));
                 }
             },
@@ -81,10 +92,17 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
     private static bool HasAnyModifier(MethodDeclarationSyntax method, params SyntaxKind[] modifiers) =>
         method.Modifiers.Any(x => x.IsAnyKind(modifiers));
 
+    private static IDictionary<MethodDeclarationSyntax, List<(IdentifierNameSyntax, TypeDeclarationSyntax)>> PotentialReferencesOfMethodsInsideType(IEnumerable<MethodDeclarationSyntax> methods, TypeDeclarationSyntax type)
+    {
+        var collector = new PotentialMethodReferenceCollector(methods);
+        collector.Visit(type);
+        return collector.PotentialMethodReferences;
+    }
+
     private class PotentialMethodReferenceCollector : CSharpSyntaxWalker
     {
         private readonly ISet<MethodDeclarationSyntax> methodsToFind;
-        internal Dictionary<MethodDeclarationSyntax, List<IdentifierNameSyntax>> PotentialMethodReferences { get; } = new();
+        internal Dictionary<MethodDeclarationSyntax, List<(IdentifierNameSyntax, TypeDeclarationSyntax)>> PotentialMethodReferences { get; } = new();
 
         public PotentialMethodReferenceCollector(IEnumerable<MethodDeclarationSyntax> methodsToFind)
         {
@@ -96,7 +114,12 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
             if (methodsToFind.FirstOrDefault(x => x.Identifier.ValueText == identifier.Identifier.ValueText) is { } method)
             {
                 var referenceList = PotentialMethodReferences.GetOrAdd(method, _ => new());
-                referenceList.Add(identifier);
+                referenceList.Add((identifier, ContainingTypeDeclaration(identifier)));
+            }
+
+            static TypeDeclarationSyntax ContainingTypeDeclaration(IdentifierNameSyntax identifier)
+            {
+                return identifier.Ancestors().OfType<TypeDeclarationSyntax>().First();
             }
         }
     }
