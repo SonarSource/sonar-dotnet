@@ -13,19 +13,18 @@ namespace Tests.TestCases
         public const double Pi2 = 3.14;
         public double Pi3 = 3.14;
 
-        protected static double Pi4 = 3.14; // Noncompliant
-        internal static double Pi5 = 3.14; // Noncompliant
-        internal static double Pi6 = 3.14; // Noncompliant
-        protected internal static double Pi7 = 3.14; // Noncompliant
+        protected static double Pi4 = 3.14;             // Noncompliant
+        internal static double Pi5 = 3.14;              // Noncompliant
+        internal static double Pi6 = 3.14;              // Noncompliant
+        protected internal static double Pi7 = 3.14;    // Noncompliant
 
         private static double Pi8 = 3.14;
         private double Pi9 = 3.14;
-        static double Pi10 = 3.14; // Compliant - if no access modifier exist, the field is private
+        static double Pi10 = 3.14; // Compliant - if no access modifier exists, the field is private
         double Pi11 = 3.14;
         public readonly double Pi12 = 3.14;
 
-        public static volatile int VolatileValue = 3; // Compliant - volatile keyword indicates that a field might be modified by multiple threads that are executing at the same time.
-                                                      // see: https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/volatile
+        public static volatile int VolatileValue = 3; // Compliant - see: https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/volatile
 
         [ThreadStatic]
         public static int Value; // Compliant, thread static field values are not shared between threads
