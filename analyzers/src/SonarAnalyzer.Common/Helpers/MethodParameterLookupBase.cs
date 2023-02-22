@@ -134,7 +134,9 @@ internal abstract class MethodParameterLookupBase<TArgumentSyntax> : IMethodPara
         return false;
     }
 
-    internal IEnumerable<NodeAndSymbol<TArgumentSyntax, IParameterSymbol>> GetAllArgumentParameterMappings() => GetAllArgumentParameterMappings(MethodSymbol);
+    internal IEnumerable<NodeAndSymbol<TArgumentSyntax, IParameterSymbol>> GetAllArgumentParameterMappings() =>
+        GetAllArgumentParameterMappings(MethodSymbol);
+
     private IEnumerable<NodeAndSymbol<TArgumentSyntax, IParameterSymbol>> GetAllArgumentParameterMappings(IMethodSymbol methodSymbol)
     {
         if (argumentList.HasValue)
