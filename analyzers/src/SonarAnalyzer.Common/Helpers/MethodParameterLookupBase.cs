@@ -53,7 +53,8 @@ internal abstract class MethodParameterLookupBase<TArgumentSyntax> : IMethodPara
         MethodSymbolOrCandidates = methodSymbolOrCandidates?.ToImmutableArray() ?? ImmutableArray.Create<IMethodSymbol>();
     }
 
-    public bool TryGetSymbol(SyntaxNode argument, out IParameterSymbol parameter) => TryGetSymbol(argument, MethodSymbol, out parameter);
+    public bool TryGetSymbol(SyntaxNode argument, out IParameterSymbol parameter) =>
+        TryGetSymbol(argument, MethodSymbol, out parameter);
 
     private bool TryGetSymbol(SyntaxNode argument, IMethodSymbol methodSymbol, out IParameterSymbol parameter)
     {
