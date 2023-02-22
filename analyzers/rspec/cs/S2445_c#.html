@@ -3,31 +3,37 @@ makes it possible for the field’s value to change while a thread is in a block
 the new value, to enter the block at the same time.</p>
 <p>Locking on a <code>readonly</code> field of a class which is not <code>private</code> allows external code to lock the field, potentially
 interfering with synchronization of methods in that class.</p>
-<p>Locking on a local variable or on a new instance undermines the synchronization: two different threads running the method in parallel would lock on
-two different object instances.</p>
+<p>Locking on a local variable or on a new instance undermines the synchronization: two different threads running the same method in parallel would
+lock on two different object instances. That would allow a second thread, locked on that new value, to enter the same block concurrently.</p>
 <p>Locking on a string literal is even more dangerous: depending on whether the string is interned or not, different threads may or may not
 synchronize on the same object instance.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-private string color = "red";
+private Color colorObject = new Color("red");
+private readonly colorString = "red";
 
 private void DoSomething()
 {
-  lock (color) // Noncompliant; lock is actually on object instance "red" referred to by the color variable
+  // Synchronizing access via "colorObject"
+  lock (colorObject) // Noncompliant; lock is actually on object instance "red" referred to by the color field
   {
     //...
-    color = "green"; // other threads now allowed into this block
+    colorObject = new Color("green"); // other threads now allowed into this block
     // ...
   }
-  lock (new object()) // Noncompliant this is a no-op.
+  lock (new object()) // Noncompliant; this is a no-op
   {
-     // ...
+    // ...
+  }
+  lock (colorString)  // Noncompliant; strings can be interned
+  {
+    // ...
   }
 }
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-private string color = "red";
+private Color colorObject = new Color("red");
 private readonly object lockObj = new object();
 
 private void DoSomething()
@@ -35,7 +41,7 @@ private void DoSomething()
   lock (lockObj)
   {
     //...
-    color = "green";
+    color = new Color("green");
     // ...
   }
 }
