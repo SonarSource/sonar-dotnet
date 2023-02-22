@@ -33,41 +33,46 @@ public sealed class LockedFieldShouldBePrivateAndReadonly : SonarDiagnosticAnaly
         context.RegisterNodeAction(c =>
             {
                 var expression = ((LockStatementSyntax)c.Node).Expression?.RemoveParentheses();
-                if (expression is ObjectCreationExpressionSyntax
-                    or AnonymousObjectCreationExpressionSyntax
-                    or ArrayCreationExpressionSyntax
-                    or ImplicitArrayCreationExpressionSyntax
-                    or QueryExpressionSyntax)
+                if (IsCreation(expression))
                 {
                     ReportIssue("Locking on a new instance is a no-op.");
                 }
-                else
+                else if (IsOfTypeString(c.SemanticModel, expression))
                 {
-                    var type = c.SemanticModel.GetTypeInfo(expression).Type;
-
-                    if (expression.IsAnyKind(SyntaxKind.StringLiteralExpression, SyntaxKind.InterpolatedStringExpression)
-                        || (type is not null && type.Is(KnownType.System_String)))
+                    ReportIssue("Strings can be interned, and should not be used for locking.");
+                }
+                else if (expression is IdentifierNameSyntax
+                    && c.SemanticModel.GetSymbolInfo(expression).Symbol is ILocalSymbol lockedSymbol)
+                {
+                    ReportIssue($"'{lockedSymbol.Name}' is a local variable, and should not be used for locking.");
+                }
+                else if (expression is (IdentifierNameSyntax or MemberAccessExpressionSyntax)
+                    && c.SemanticModel.GetSymbolInfo(expression).Symbol is IFieldSymbol lockedField
+                    && (!lockedField.IsReadOnly || lockedField.GetEffectiveAccessibility() != Accessibility.Private))
+                {
+                    if (lockedField.ContainingType is { } lockedFieldType && c.ContainingSymbol?.ContainingType is { } containingType && !lockedFieldType.Equals(containingType))
                     {
-                        ReportIssue("Strings can be interned, and should not be used for locking.");
+                        ReportIssue($"Use field from '{containingType.ToMinimalDisplayString(c.SemanticModel, expression.SpanStart)}' for locking.");
                     }
-                    else if (expression is IdentifierNameSyntax
-                        && c.SemanticModel.GetSymbolInfo(expression).Symbol is ILocalSymbol lockedSymbol)
+                    else
                     {
-                        ReportIssue($"'{lockedSymbol.Name}' is a local variable, and should not be used for locking.");
-                    }
-                    else if (expression is (IdentifierNameSyntax or MemberAccessExpressionSyntax)
-                        && c.SemanticModel.GetSymbolInfo(expression).Symbol is IFieldSymbol lockedField
-                        && (!lockedField.IsReadOnly || lockedField.GetEffectiveAccessibility() != Accessibility.Private))
-                    {
-                        ReportIssue(lockedField.ContainingType is { } lockedFieldType
-                            && c.ContainingSymbol?.ContainingType is { } containingType
-                            && !lockedFieldType.Equals(containingType)
-                                ? $"Use field from '{containingType.ToMinimalDisplayString(c.SemanticModel, expression.SpanStart)}' for locking."
-                                : $"'{lockedField.Name}' is not 'private readonly', and should not be used for locking.");
+                        ReportIssue($"'{lockedField.Name}' is not 'private readonly', and should not be used for locking.");
                     }
                 }
 
-                void ReportIssue(string message) => c.ReportIssue(Diagnostic.Create(Rule, expression.GetLocation(), message));
+                void ReportIssue(string message) =>
+                    c.ReportIssue(Diagnostic.Create(Rule, expression.GetLocation(), message));
             },
             SyntaxKind.LockStatement);
+
+    private static bool IsCreation(ExpressionSyntax expression) =>
+        expression is ObjectCreationExpressionSyntax
+            or AnonymousObjectCreationExpressionSyntax
+            or ArrayCreationExpressionSyntax
+            or ImplicitArrayCreationExpressionSyntax
+            or QueryExpressionSyntax;
+
+    private static bool IsOfTypeString(SemanticModel model, ExpressionSyntax expression) =>
+        expression.IsAnyKind(SyntaxKind.StringLiteralExpression, SyntaxKind.InterpolatedStringExpression)
+            || (model.GetTypeInfo(expression).Type is { } type && type.Is(KnownType.System_String));
 }
