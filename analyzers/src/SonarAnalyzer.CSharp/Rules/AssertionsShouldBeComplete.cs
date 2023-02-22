@@ -33,18 +33,6 @@ public sealed class AssertionsShouldBeComplete : SonarDiagnosticAnalyzer
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterCompilationStartAction(start =>
             {
-                if (start.Compilation.References(KnownAssembly.MSTest)
-                    // Assert.That was introduced in Version 1.1.14 but the AssemblyIdentity version (14.0.0.0) does not align with the Nuget version so we need
-                    // to check at runtime for the presence of "Assert.That"
-                    && start.Compilation.GetTypeByMetadataName(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert) is { } assertType
-                    && assertType.GetMembers("That") is { Length: 1 } thatMembers
-                    && thatMembers[0] is IPropertySymbol { IsStatic: true })
-                {
-                    start.RegisterNodeAction(c =>
-                    {
-
-                    }, SyntaxKind.SimpleMemberAccessExpression);
-                }
                 if (start.Compilation.References(KnownAssembly.FluentAssertions))
                 {
                     start.RegisterNodeAction(c =>
@@ -71,8 +59,8 @@ public sealed class AssertionsShouldBeComplete : SonarDiagnosticAnalyzer
                 {
                     start.RegisterNodeAction(c =>
                         CheckInvocation(c, invocation =>
-                            invocation.NameIs("DidNotReceive", "DidNotReceiveWithAnyArgs", "Received", "ReceivedCalls", "ReceivedWithAnyArgs")
-                            && c.SemanticModel.GetSymbolInfo(invocation) is { Symbol: IMethodSymbol { IsStatic: true } method }
+                            invocation.NameIs("Received", "DidNotReceive", "ReceivedWithAnyArgs", "DidNotReceiveWithAnyArgs", "ReceivedCalls")
+                            && c.SemanticModel.GetSymbolInfo(invocation) is { Symbol: IMethodSymbol { IsExtensionMethod: true } method }
                             && method.ContainingType?.IsStatic is true
                             && method.ContainingType.Is(KnownType.NSubstitute_SubstituteExtensions)),
                             SyntaxKind.InvocationExpression);

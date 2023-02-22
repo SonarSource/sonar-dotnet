@@ -36,6 +36,9 @@ public class AssertionsShouldBeCompleteTest
     private readonly VerifierBuilder nfluent = new VerifierBuilder<AssertionsShouldBeComplete>()
         .AddReferences(NuGetMetadataReference.NFluent("2.8.0"));
 
+    private readonly VerifierBuilder nsubstitute = new VerifierBuilder<AssertionsShouldBeComplete>()
+        .AddReferences(NuGetMetadataReference.NSubstitute("5.0.0"));
+
     [TestMethod]
     public void AssertionsShouldBeComplete_FluentAssertions_CSharp7() =>
         fluentAssertions
@@ -64,5 +67,11 @@ public class AssertionsShouldBeCompleteTest
         .WithOptions(ParseOptionsHelper.FromCSharp11)
         .AddTestReference()
         .AddPaths("AssertionsShouldBeComplete.NFluent.CSharp11.cs")
+        .Verify();
+
+    [TestMethod]
+    public void AssertionsShouldBeComplete_NSubstitute_CS() =>
+        nsubstitute
+        .AddPaths("AssertionsShouldBeComplete.NSubstitute.cs")
         .Verify();
 }
