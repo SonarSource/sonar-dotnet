@@ -30,7 +30,10 @@ namespace Tests.Diagnostics
         public void Dynamic()
         {
             dynamic d = 42;
-            Assert.Equal(d, 35);    // Noncompliant
+            Assert.Equal(d, 35);                    // Noncompliant
+            Assert.Equal(35, d);                    // Compliant
+            Assert.Equal(actual: d, expected: 35);  // Compliant
+            Assert.Equal(actual: 35, expected: d);  // Noncompliant
         }
 
         [Fact]
