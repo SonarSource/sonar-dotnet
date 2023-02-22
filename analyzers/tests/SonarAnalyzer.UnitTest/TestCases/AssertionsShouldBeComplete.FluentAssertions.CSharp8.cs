@@ -43,6 +43,9 @@ public class Program
         StringAssertions ExpressionBodyLocalFunction() =>
             s.Should();
 
+        void VoidReturningExpressionBodyLocalFunction() =>
+            s.Should();  // Noncompliant
+
         StringAssertions ReturnLocalFunction()
         {
             return s.Should();

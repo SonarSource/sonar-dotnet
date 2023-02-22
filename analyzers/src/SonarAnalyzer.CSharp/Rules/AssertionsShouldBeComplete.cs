@@ -112,17 +112,20 @@ public sealed class AssertionsShouldBeComplete : SonarDiagnosticAnalyzer
         }
         // We are in some kind of statement context "??? Should();"
         // The result might be stored in a variable or returned from the method/property
-        if (nextToken.Parent is
-            MethodDeclarationSyntax { ReturnType: not PredefinedTypeSyntax { Keyword.RawKind: (int)SyntaxKind.VoidKeyword } }
-            or PropertyDeclarationSyntax
-            or AccessorDeclarationSyntax { Keyword.RawKind: (int)SyntaxKind.GetKeyword }
-            or ReturnStatementSyntax
-            or LocalDeclarationStatementSyntax
-            or ExpressionStatementSyntax { Expression: AssignmentExpressionSyntax }
-            || LocalFunctionStatementSyntaxWrapper.IsInstance(nextToken.Parent))
+        return nextToken.Parent switch
         {
-            return true;
-        }
-        return false;
+
+            MethodDeclarationSyntax { ReturnType: { } returnType } when !IsVoid(returnType) => true,
+            { } parent when LocalFunctionStatementSyntaxWrapper.IsInstance(parent) && !IsVoid(((LocalFunctionStatementSyntaxWrapper)parent).ReturnType) => true,
+            PropertyDeclarationSyntax => true,
+            AccessorDeclarationSyntax { Keyword.RawKind: (int)SyntaxKind.GetKeyword } => true,
+            ReturnStatementSyntax => true,
+            LocalDeclarationStatementSyntax => true,
+            ExpressionStatementSyntax { Expression: AssignmentExpressionSyntax } => true,
+            _ => false,
+        };
     }
+
+    private static bool IsVoid(TypeSyntax type) =>
+        type is PredefinedTypeSyntax { Keyword.RawKind: (int)SyntaxKind.VoidKeyword };
 }
