@@ -82,6 +82,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("System.Data.Entity")]
         [DataRow("System.Data.Odbc")]
         [DataRow("Dapper")]
+        [DataRow("Microsoft.Data.SqlClient")]
         [DataRow("Microsoft.Data.Sqlite")]
         [DataRow("NHibernate")]
         [DataRow("PetaPoco")]
@@ -91,6 +92,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .AddReferences(MetadataReferenceFacade.SystemData)
                 .AddReferences(NuGetMetadataReference.Dapper())
                 .AddReferences(NuGetMetadataReference.EntityFramework())
+                .AddReferences(NuGetMetadataReference.MicrosoftDataSqlClient())
                 .AddReferences(NuGetMetadataReference.MicrosoftDataSqliteCore())
                 .AddReferences(NuGetMetadataReference.MicrosoftSqlServerCompact())
                 .AddReferences(NuGetMetadataReference.NHibernate())

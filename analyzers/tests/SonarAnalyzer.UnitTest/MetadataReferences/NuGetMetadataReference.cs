@@ -77,6 +77,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static References MicrosoftAzureWebJobsExtensionsDurableTask(string packageVersion = Constants.NuGetLatestVersion) => Create("Microsoft.Azure.WebJobs.Extensions.DurableTask", packageVersion);
         public static References MicrosoftAzureWebJobsExtensionsHttp(string packageVersion = Constants.NuGetLatestVersion) => Create("Microsoft.Azure.WebJobs.Extensions.Http", packageVersion);
         public static References MicrosoftBuildNoTargets(string packageVersion = "3.1.0") => Create("Microsoft.Build.NoTargets", packageVersion);
+        public static References MicrosoftDataSqlClient(string packageVersion = "5.1.0") => Create("Microsoft.Data.SqlClient", packageVersion);
         public static References MicrosoftDataSqliteCore(string packageVersion = "2.0.0") => Create("Microsoft.Data.Sqlite.Core", packageVersion);
         public static References MicrosoftEntityFrameworkCore(string packageVersion) => Create("Microsoft.EntityFrameworkCore", packageVersion);
         public static References MicrosoftEntityFrameworkCoreSqliteCore(string packageVersion) => Create("Microsoft.EntityFrameworkCore.Sqlite.Core", packageVersion);
