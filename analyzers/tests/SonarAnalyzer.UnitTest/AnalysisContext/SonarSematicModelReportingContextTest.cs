@@ -23,30 +23,20 @@ using SonarAnalyzer.AnalysisContext;
 namespace SonarAnalyzer.UnitTest.AnalysisContext;
 
 [TestClass]
-public class SonarSyntaxTreeReportingContextTest
+public class SonarSematicModelReportingContextTest
 {
-    [TestMethod]
-    public void Constructor_Null_Throws()
-    {
-        var (tree, model) = TestHelper.CompileCS("// Nothing to see here");
-        var treeContext = new SyntaxTreeAnalysisContext(tree, null, _ => { }, _ => true, default);
-        var analysisContext = AnalysisScaffolding.CreateSonarAnalysisContext();
-
-        ((Func<SonarSyntaxTreeReportingContext>)(() => new(null, treeContext, model.Compilation))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("analysisContext");
-        ((Func<SonarSyntaxTreeReportingContext>)(() => new(analysisContext, treeContext, null))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("compilation");
-    }
-
     [TestMethod]
     public void Properties_ArePropagated()
     {
         var cancel = new CancellationToken(true);
         var (tree, model) = TestHelper.CompileCS("// Nothing to see here");
         var options = AnalysisScaffolding.CreateOptions();
-        var context = new SyntaxTreeAnalysisContext(tree, options, _ => { }, _ => true, cancel);
-        var sut = new SonarSyntaxTreeReportingContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context, model.Compilation);
+        var context = new SemanticModelAnalysisContext(model, options, _ => { }, _ => true, cancel);
+        var sut = new SonarSematicModelReportingContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context);
 
         sut.Tree.Should().BeSameAs(tree);
         sut.Compilation.Should().BeSameAs(model.Compilation);
+        sut.SemanticModel.Should().BeSameAs(model);
         sut.Options.Should().BeSameAs(options);
         sut.Cancel.Should().Be(cancel);
     }

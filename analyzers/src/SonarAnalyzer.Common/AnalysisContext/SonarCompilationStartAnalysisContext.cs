@@ -32,6 +32,9 @@ public sealed class SonarCompilationStartAnalysisContext : SonarAnalysisContextB
     public void RegisterSymbolAction(Action<SonarSymbolReportingContext> action, params SymbolKind[] symbolKinds) =>
         Context.RegisterSymbolAction(x => action(new(AnalysisContext, x)), symbolKinds);
 
+    public void RegisterSemanticModelAction(Action<SonarSematicModelReportingContext> action) =>
+        Context.RegisterSemanticModelAction(x => action(new(AnalysisContext, x)));
+
     public void RegisterCompilationEndAction(Action<SonarCompilationReportingContext> action) =>
         Context.RegisterCompilationEndAction(x => action(new(AnalysisContext, x)));
 

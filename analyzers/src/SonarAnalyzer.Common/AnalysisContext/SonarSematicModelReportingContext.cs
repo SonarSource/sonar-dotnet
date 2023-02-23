@@ -18,26 +18,18 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Moq;
-using SonarAnalyzer.AnalysisContext;
+namespace SonarAnalyzer.AnalysisContext;
 
-namespace SonarAnalyzer.UnitTest.AnalysisContext;
-
-[TestClass]
-public class SonarCompilationStartAnalysisContextTest
+public sealed class SonarSematicModelReportingContext : SonarTreeReportingContextBase<SemanticModelAnalysisContext>
 {
-    [TestMethod]
-    public void Properties_ArePropagated()
-    {
-        var cancel = new CancellationToken(true);
-        var (tree, model) = TestHelper.CompileCS("// Nothing to see here");
-        var options = AnalysisScaffolding.CreateOptions();
-        var context = new Mock<CompilationStartAnalysisContext>(model.Compilation, options, cancel).Object;
-        var sut = new SonarCompilationStartAnalysisContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context);
+    public override SyntaxTree Tree => SemanticModel.SyntaxTree;
+    public override Compilation Compilation => Context.SemanticModel.Compilation;
+    public override AnalyzerOptions Options => Context.Options;
+    public override CancellationToken Cancel => Context.CancellationToken;
+    public SemanticModel SemanticModel => Context.SemanticModel;
 
-        sut.Tree.Should().BeSameAs(tree);
-        sut.Compilation.Should().BeSameAs(model.Compilation);
-        sut.Options.Should().BeSameAs(options);
-        sut.Cancel.Should().Be(cancel);
-    }
+    internal SonarSematicModelReportingContext(SonarAnalysisContext analysisContext, SemanticModelAnalysisContext context) : base(analysisContext, context) { }
+
+    private protected override ReportingContext CreateReportingContext(Diagnostic diagnostic) =>
+        new(this, diagnostic);
 }
