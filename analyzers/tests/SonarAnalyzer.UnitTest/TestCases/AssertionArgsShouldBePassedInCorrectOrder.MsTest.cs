@@ -11,7 +11,8 @@ namespace Tests.Diagnostics
         {
             var str = "";
             Assert.AreEqual(str, ""); // Noncompliant {{Make sure these 2 arguments are in the correct order: expected value, actual value.}}
-//                          ^^^^^^^
+//                          ^^^
+//                               ^^   Secondary@-2
             Assert.AreSame(str, ""); // Noncompliant
 //                         ^^^^^^^
 

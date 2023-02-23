@@ -18,7 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.ComponentModel;
 using System.Linq.Expressions;
+using System.Xml.Linq;
 using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Rules.CSharp;
@@ -32,48 +34,63 @@ public sealed class AssertionArgsShouldBePassedInCorrectOrder : SonarDiagnosticA
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-    private static readonly IDictionary<string, ImmutableArray<KnownType>> MethodsWithType = new Dictionary<string, ImmutableArray<KnownType>>
-    {
-        ["AreEqual"]    = ImmutableArray.Create(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert, KnownType.NUnit_Framework_Assert),
-        ["AreNotEqual"] = ImmutableArray.Create(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert, KnownType.NUnit_Framework_Assert),
-        ["AreSame"]     = ImmutableArray.Create(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert, KnownType.NUnit_Framework_Assert),
-        ["AreNotSame"]  = ImmutableArray.Create(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert, KnownType.NUnit_Framework_Assert),
-        ["Equal"]       = ImmutableArray.Create(KnownType.Xunit_Assert),
-        ["Same"]        = ImmutableArray.Create(KnownType.Xunit_Assert),
-        ["NotSame"]     = ImmutableArray.Create(KnownType.Xunit_Assert)
-    };
-
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(c =>
         {
-            if (c.Node is InvocationExpressionSyntax { ArgumentList: { Arguments: { Count: >= 2 } arguments } argumentList } invocation
-                && CSharpFacade.Instance.MethodParameterLookup(argumentList, c.SemanticModel) is var parameterLookup
-                && CheckArguments(parameterLookup)
-                && AssertionMethods(invocation, c.SemanticModel))
+        if (c.Node is InvocationExpressionSyntax { ArgumentList: { Arguments.Count: >= 2 } argumentList } invocation
+            && GetParameters(invocation.GetName()) is { } knownAssertParameters
+            && c.SemanticModel.GetSymbolInfo(invocation).AllSymbols()
+                .SelectMany(symbol =>
+                    symbol is IMethodSymbol { IsStatic: true, ContainingSymbol: INamedTypeSymbol container } methodSymbol
+                        ? knownAssertParameters.Select(knownParameters => FindWrongArguments(container, methodSymbol, argumentList, knownParameters))
+                        : Enumerable.Empty<WrongArguments?>())
+                .FirstOrDefault(x => x is not null) is { Expected: var expected, Actual: var actual })
             {
-                c.ReportIssue(Diagnostic.Create(Rule, arguments[0].CreateLocation(arguments[1])));
+                c.ReportIssue(Diagnostic.Create(Rule, expected.GetLocation(), additionalLocations: new[] { actual.GetLocation() }));
             }
         },
         SyntaxKind.InvocationExpression);
 
-    private static bool AssertionMethods(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
-        invocation.GetName() switch
+    private static KnownAssertParameters[] GetParameters(string name) =>
+        name switch
         {
-            "AreEqual" or "AreNotEqual" => Check(invocation, semanticModel, KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert, KnownType.NUnit_Framework_Assert),
-            "AreSame" or "AreNotSame" => Check(invocation, semanticModel, KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert, KnownType.NUnit_Framework_Assert),
-            "Equal" or "Same" or "NotSame" => Check(invocation, semanticModel, KnownType.Xunit_Assert),
-            _ => false
+            "AreEqual" => new KnownAssertParameters[]
+                {
+                    new(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert, "expected", "actual"),
+                    new(KnownType.NUnit_Framework_Assert, "expected", "actual")
+                },
+            "AreNotEqual" => new KnownAssertParameters[]
+                {
+                    new(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert, "notExpected", "actual"),
+                    new(KnownType.NUnit_Framework_Assert, "expected", "actual")
+                },
+            "AreSame" => new KnownAssertParameters[]
+                {
+                    new(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert, "expected", "actual"),
+                    new(KnownType.NUnit_Framework_Assert, "expected", "actual")
+                },
+            "AreNotSame" => new KnownAssertParameters[]
+                {
+                    new(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert, "notExpected", "actual"),
+                    new(KnownType.NUnit_Framework_Assert, "expected", "actual")
+                },
+            "Equal" or "Same" or "NotSame" => new KnownAssertParameters[]
+                {
+                    new KnownAssertParameters(KnownType.Xunit_Assert, "expected", "actual")
+                },
+            _ => null
         };
 
-    private static bool Check(InvocationExpressionSyntax invocation, SemanticModel semanticModel, params KnownType[] knownTypes) =>
-        semanticModel.GetSymbolInfo(invocation).AllSymbols().All(x =>
-            x is IMethodSymbol { IsStatic: true, ContainingSymbol: INamedTypeSymbol container }
-            && container.IsAny(knownTypes));
+    private static WrongArguments? FindWrongArguments(INamedTypeSymbol container, IMethodSymbol symbol, ArgumentListSyntax argumentList, KnownAssertParameters knownParameters) =>
+        container.Is(knownParameters.AssertClass)
+        && CSharpFacade.Instance.MethodParameterLookup(argumentList, symbol) is var parameterLookup
+        && parameterLookup.TryGetSyntax(knownParameters.ExpectedParamterName, out var expectedArguments)
+        && expectedArguments.FirstOrDefault() is not LiteralExpressionSyntax and var expected
+        && parameterLookup.TryGetSyntax(knownParameters.ActualParameterName, out var actualArguments)
+        && actualArguments.FirstOrDefault() is LiteralExpressionSyntax actual
+            ? new(expected, actual)
+            : null;
 
-    private static bool CheckArguments(IMethodParameterLookup parameterLookup) =>
-        // "notExpected" is used in MSTest's AreNotEqual and AreNotSame
-        (parameterLookup.TryGetSyntax("expected", out var expected) || parameterLookup.TryGetSyntax("notExpected", out expected))
-        && expected.FirstOrDefault() is not LiteralExpressionSyntax
-        && parameterLookup.TryGetSyntax("actual", out var actual)
-        && actual.FirstOrDefault() is LiteralExpressionSyntax;
+    private readonly record struct KnownAssertParameters(KnownType AssertClass, string ExpectedParamterName, string ActualParameterName);
+    private readonly record struct WrongArguments(SyntaxNode Expected, SyntaxNode Actual);
 }
