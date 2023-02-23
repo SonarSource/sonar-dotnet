@@ -32,12 +32,12 @@ public class Program
         Check.ThatCode(() => { }).DoesNotThrow();
     }
 
-    public async Task CheckThatCodeAsync()
+    public async Task CheckThatAsyncCode()
     {
         Check.ThatAsyncCode(async () => await Task.CompletedTask); // Noncompliant {{Complete the assertion}}
         //    ^^^^^^^^^^^^^
         Check.ThatAsyncCode(async () => await Task.FromResult(1)); // Noncompliant
-        Check.ThatAsyncCode(CheckThatCodeAsync);                   // Noncompliant
+        Check.ThatAsyncCode(CheckThatAsyncCode);                   // Noncompliant
 
         Check.ThatAsyncCode(async () => await Task.CompletedTask).DoesNotThrow();
     }
