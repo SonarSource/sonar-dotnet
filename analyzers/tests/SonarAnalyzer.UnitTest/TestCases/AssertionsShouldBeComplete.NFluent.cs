@@ -42,7 +42,7 @@ public class Program
         Check.ThatAsyncCode(async () => await Task.CompletedTask).DoesNotThrow();
     }
 
-    public async Task CheckThatCodeDynamic(dynamic expando)
+    public async Task CheckThatDynamic(dynamic expando)
     {
         Check.ThatDynamic(1);       // Noncompliant {{Complete the assertion}}
         //    ^^^^^^^^^^^
