@@ -2,20 +2,7 @@
 "issues":  [
 {
 "id":  "S2094",
-"message":  "Remove this empty class, or add members to it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\CompilerErrorCollection.cs",
-"region":  {
-"startLine":  14,
-"startColumn":  18,
-"endLine":  14,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S2094",
-"message":  "Remove this empty class, or add members to it.",
+"message":  "Remove this empty class, write its code or make it an "interface".",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunCoordinator.cs",
 "region":  {
@@ -28,7 +15,7 @@
 },
 {
 "id":  "S2094",
-"message":  "Remove this empty class, or add members to it.",
+"message":  "Remove this empty class, write its code or make it an "interface".",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\Messages.cs",
 "region":  {
@@ -41,7 +28,7 @@
 },
 {
 "id":  "S2094",
-"message":  "Remove this empty class, or add members to it.",
+"message":  "Remove this empty class, write its code or make it an "interface".",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\MessageSinkActor.cs",
 "region":  {
@@ -54,7 +41,7 @@
 },
 {
 "id":  "S2094",
-"message":  "Remove this empty class, or add members to it.",
+"message":  "Remove this empty class, write its code or make it an "interface".",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\SinkCoordinator.cs",
 "region":  {
@@ -67,7 +54,7 @@
 },
 {
 "id":  "S2094",
-"message":  "Remove this empty class, or add members to it.",
+"message":  "Remove this empty class, write its code or make it an "interface".",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\SinkCoordinator.cs",
 "region":  {
@@ -80,7 +67,7 @@
 },
 {
 "id":  "S2094",
-"message":  "Remove this empty class, or add members to it.",
+"message":  "Remove this empty class, write its code or make it an "interface".",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\SinkCoordinator.cs",
 "region":  {
@@ -93,7 +80,7 @@
 },
 {
 "id":  "S2094",
-"message":  "Remove this empty class, or add members to it.",
+"message":  "Remove this empty class, write its code or make it an "interface".",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TimelineLogCollectorActor.cs",
 "region":  {
@@ -106,7 +93,7 @@
 },
 {
 "id":  "S2094",
-"message":  "Remove this empty class, or add members to it.",
+"message":  "Remove this empty class, write its code or make it an "interface".",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TimelineLogCollectorActor.cs",
 "region":  {

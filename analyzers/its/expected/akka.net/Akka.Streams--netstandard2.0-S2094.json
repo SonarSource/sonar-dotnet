@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S2094",
-"message":  "Remove this empty class, or add members to it.",
+"message":  "Remove this empty class, write its code or make it an "interface".",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S2094",
-"message":  "Remove this empty class, or add members to it.",
+"message":  "Remove this empty class, write its code or make it an "interface".",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S2094",
-"message":  "Remove this empty class, or add members to it.",
+"message":  "Remove this empty class, write its code or make it an "interface".",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S2094",
-"message":  "Remove this empty class, or add members to it.",
+"message":  "Remove this empty class, write its code or make it an "interface".",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Context.cs",
 "region":  {

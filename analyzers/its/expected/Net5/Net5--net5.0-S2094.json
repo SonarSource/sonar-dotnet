@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S2094",
-"message":  "Remove this empty class, or add members to it.",
+"message":  "Remove this empty class, write its code or make it an "interface".",
 "location":  {
 "uri":  "sources\Net5\Net5\ModuleInitializers.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S2094",
-"message":  "Remove this empty class, or add members to it.",
+"message":  "Remove this empty class, write its code or make it an "interface".",
 "location":  {
 "uri":  "sources\Net5\Net5\ParameterValidation.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S2094",
-"message":  "Remove this empty class, or add members to it.",
+"message":  "Remove this empty class, write its code or make it an "interface".",
 "location":  {
 "uri":  "sources\Net5\Net5\S2330.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S2094",
-"message":  "Remove this empty class, or add members to it.",
+"message":  "Remove this empty class, write its code or make it an "interface".",
 "location":  {
 "uri":  "sources\Net5\Net5\S3240.cs",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S2094",
-"message":  "Remove this empty class, or add members to it.",
+"message":  "Remove this empty class, write its code or make it an "interface".",
 "location":  {
 "uri":  "sources\Net5\Net5\S3247.cs",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S2094",
-"message":  "Remove this empty class, or add members to it.",
+"message":  "Remove this empty class, write its code or make it an "interface".",
 "location":  {
 "uri":  "sources\Net5\Net5\S3453.cs",
 "region":  {
@@ -80,7 +80,7 @@
 },
 {
 "id":  "S2094",
-"message":  "Remove this empty class, or add members to it.",
+"message":  "Remove this empty class, write its code or make it an "interface".",
 "location":  {
 "uri":  "sources\Net5\Net5\StaticLambdas.cs",
 "region":  {
