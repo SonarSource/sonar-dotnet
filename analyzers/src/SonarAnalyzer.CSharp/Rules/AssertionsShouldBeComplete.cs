@@ -38,7 +38,8 @@ public sealed class AssertionsShouldBeComplete : SonarDiagnosticAnalyzer
                     start.RegisterNodeAction(c =>
                         CheckInvocation(c, invocation =>
                             invocation.NameIs("Should")
-                            && c.SemanticModel.GetSymbolInfo(invocation).AllSymbols().Any(x => x is IMethodSymbol
+                            && c.SemanticModel.GetSymbolInfo(invocation).AllSymbols().Any(x =>
+                                x is IMethodSymbol
                                 {
                                     IsExtensionMethod: true,
                                     ReturnsVoid: false,

@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Extensions;
 using CS = Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -146,14 +145,14 @@ End Class";
         [DataRow(false, "TEST")]
         public void NameIsOrNames_CS(bool expected, params string[] orNames)
         {
-            var identifier = SyntaxFactory.IdentifierName("Test");
+            var identifier = Microsoft.CodeAnalysis.CSharp.SyntaxFactory.IdentifierName("Test");
             identifier.NameIs("other", orNames).Should().Be(expected);
         }
 
         [TestMethod]
         public void NameIsOrNamesNodeWithoutName_CS()
         {
-            var returnStatement = SyntaxFactory.ReturnStatement();
+            var returnStatement = Microsoft.CodeAnalysis.CSharp.SyntaxFactory.ReturnStatement();
             returnStatement.NameIs("A", "B", "C").Should().BeFalse();
         }
 
