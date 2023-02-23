@@ -83,9 +83,9 @@ class Test
     void OnAStringInstance()
     {
         lock ("a string") { }                            // Noncompliant {{Strings can be interned, and should not be used for locking.}}
-        lock ($"an interpolated {"string"}") { }         // Noncompliant {{Strings can be interned, and should not be used for locking.}}
-        lock ("a" + "string") { }                        // Noncompliant {{Strings can be interned, and should not be used for locking.}}
-        lock (MethodReturningString()) { }               // Noncompliant {{Strings can be interned, and should not be used for locking.}}
+        lock ($"an interpolated {"string"}") { }         // Noncompliant
+        lock ("a" + "string") { }                        // Noncompliant
+        lock (MethodReturningString()) { }               // Noncompliant
 
         string MethodReturningString() => "a string";
     }

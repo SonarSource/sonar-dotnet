@@ -30,40 +30,44 @@ public sealed class LockedFieldShouldBePrivateAndReadonly : SonarDiagnosticAnaly
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
     protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(c =>
-            {
-                var expression = ((LockStatementSyntax)c.Node).Expression?.RemoveParentheses();
-                if (IsCreation(expression))
-                {
-                    ReportIssue("Locking on a new instance is a no-op.");
-                }
-                else if (IsOfTypeString(c.SemanticModel, expression))
-                {
-                    ReportIssue("Strings can be interned, and should not be used for locking.");
-                }
-                else if (expression is IdentifierNameSyntax
-                    && c.SemanticModel.GetSymbolInfo(expression).Symbol is ILocalSymbol lockedSymbol)
-                {
-                    ReportIssue($"'{lockedSymbol.Name}' is a local variable, and should not be used for locking.");
-                }
-                else if (expression is (IdentifierNameSyntax or MemberAccessExpressionSyntax)
-                    && c.SemanticModel.GetSymbolInfo(expression).Symbol is IFieldSymbol lockedField
-                    && (!lockedField.IsReadOnly || lockedField.GetEffectiveAccessibility() != Accessibility.Private))
-                {
-                    if (lockedField.ContainingType is { } lockedFieldType && c.ContainingSymbol?.ContainingType is { } containingType && !lockedFieldType.Equals(containingType))
-                    {
-                        ReportIssue($"Use fields from '{containingType.ToMinimalDisplayString(c.SemanticModel, expression.SpanStart)}' for locking.");
-                    }
-                    else
-                    {
-                        ReportIssue($"'{lockedField.Name}' is not 'private readonly', and should not be used for locking.");
-                    }
-                }
+        context.RegisterNodeAction(CheckLockStatement, SyntaxKind.LockStatement);
 
-                void ReportIssue(string message) =>
-                    c.ReportIssue(Diagnostic.Create(Rule, expression.GetLocation(), message));
-            },
-            SyntaxKind.LockStatement);
+    private static void CheckLockStatement(SonarSyntaxNodeReportingContext context)
+    {
+        var expression = ((LockStatementSyntax)context.Node).Expression?.RemoveParentheses();
+        if (IsCreation(expression))
+        {
+            ReportIssue("Locking on a new instance is a no-op.");
+        }
+        else
+        {
+            var symbol = context.SemanticModel.GetSymbolInfo(expression).Symbol;
+            if (IsOfTypeString(expression, symbol))
+            {
+                ReportIssue("Strings can be interned, and should not be used for locking.");
+            }
+            else if (expression is IdentifierNameSyntax && symbol is ILocalSymbol lockedSymbol)
+            {
+                ReportIssue($"'{lockedSymbol.Name}' is a local variable, and should not be used for locking.");
+            }
+            else if (expression is (IdentifierNameSyntax or MemberAccessExpressionSyntax)
+                && symbol is IFieldSymbol lockedField
+                && (!lockedField.IsReadOnly || lockedField.GetEffectiveAccessibility() != Accessibility.Private))
+            {
+                if (lockedField.ContainingType is { } lockedFieldType && context.ContainingSymbol?.ContainingType is { } containingType && !lockedFieldType.Equals(containingType))
+                {
+                    ReportIssue($"Use members from '{containingType.ToMinimalDisplayString(context.SemanticModel, expression.SpanStart)}' for locking.");
+                }
+                else
+                {
+                    ReportIssue($"'{lockedField.Name}' is not 'private readonly', and should not be used for locking.");
+                }
+            }
+        }
+
+        void ReportIssue(string message) =>
+            context.ReportIssue(Diagnostic.Create(Rule, expression.GetLocation(), message));
+    }
 
     private static bool IsCreation(ExpressionSyntax expression) =>
         expression is ObjectCreationExpressionSyntax
@@ -72,7 +76,7 @@ public sealed class LockedFieldShouldBePrivateAndReadonly : SonarDiagnosticAnaly
             or ImplicitArrayCreationExpressionSyntax
             or QueryExpressionSyntax;
 
-    private static bool IsOfTypeString(SemanticModel model, ExpressionSyntax expression) =>
+    private static bool IsOfTypeString(ExpressionSyntax expression, ISymbol symbol) =>
         expression.IsAnyKind(SyntaxKind.StringLiteralExpression, SyntaxKind.InterpolatedStringExpression)
-            || (model.GetTypeInfo(expression).Type is { } type && type.Is(KnownType.System_String));
+            || (symbol.GetSymbolType() is { } type && type.Is(KnownType.System_String));
 }
