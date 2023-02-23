@@ -35,18 +35,13 @@ public sealed partial class KnownAssembly
     /// <see href="https://www.nuget.org/packages/MicrosoftVisualStudioQualityToolsUnitTestFramework">nuget.org/MicrosoftVisualStudioQualityToolsUnitTestFramework</see> (MSTest V1)
     /// or <see href="https://www.nuget.org/packages/MSTest.TestFramework">nuget.org/MSTest.TestFramework</see> (MSTest V2).
     /// </summary>
-    public static KnownAssembly MSTest { get; } = new(
-        And(NameIs("Microsoft.VisualStudio.QualityTools.UnitTestFramework").Or(NameIs("Microsoft.VisualStudio.TestPlatform.TestFramework")),
-            PublicKeyTokenIs("b03f5f7f11d50a3a")));
+    public static KnownAssembly MSTest { get; } =
+        new(And(NameIs("Microsoft.VisualStudio.QualityTools.UnitTestFramework").Or(NameIs("Microsoft.VisualStudio.TestPlatform.TestFramework")),
+                PublicKeyTokenIs("b03f5f7f11d50a3a")));
 
-    public static KnownAssembly FluentAssertions { get; } = new(
-        NameIs("FluentAssertions").And(PublicKeyTokenIs("33f2691a05b67b6a")));
-
-    public static KnownAssembly NFluent { get; } = new(
-        NameIs("NFluent").And(OptionalPublicKeyTokenIs("18828b37b84b1437")));
-
-    public static KnownAssembly NSubstitute { get; } = new(
-        NameIs("NSubstitute").And(PublicKeyTokenIs("92dd2e9066daa5ca")));
+    public static KnownAssembly FluentAssertions { get; } = new(NameIs("FluentAssertions").And(PublicKeyTokenIs("33f2691a05b67b6a")));
+    public static KnownAssembly NFluent { get; } = new(NameIs("NFluent").And(OptionalPublicKeyTokenIs("18828b37b84b1437")));
+    public static KnownAssembly NSubstitute { get; } = new(NameIs("NSubstitute").And(PublicKeyTokenIs("92dd2e9066daa5ca")));
 
     internal KnownAssembly(Func<AssemblyIdentity, bool> predicate, params Func<AssemblyIdentity, bool>[] or)
         : this(predicate is null || or.Any(x => x is null)
