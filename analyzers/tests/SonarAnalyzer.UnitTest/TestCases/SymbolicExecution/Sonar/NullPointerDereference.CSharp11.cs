@@ -23,11 +23,23 @@ namespace SonarAnalyzer.UnitTest.TestCases.SymbolicExecution.Sonar
     // https://github.com/SonarSource/sonar-dotnet/issues/6766
     public class Repo_6766
     {
-        public void ParenthesizedSwitchPattern(int i)
+        public void SwitchCasePattern(object o, object[] array)
         {
-            switch (i)
+            switch (o)
             {
-                case (1 or 2):
+                case (1 or 2):                        // Parenthesized
+                case 3 or 4:                          // Binary
+                case > 5:                             // Relational
+                case char:                            // Type
+                case Exception { Message.Length: 1 }: // Recursive
+                case (int _, int _):                  // Recursive
+                case not "":                          // Unary
+                    break;
+            }
+            switch (array)
+            {
+                case []:         // list pattern
+                case [1, .., 2]: // list pattern with slice
                     break;
             }
         }
