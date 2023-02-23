@@ -19,7 +19,6 @@
  */
 
 using System.IO;
-using System.Runtime.CompilerServices;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Protobuf;
 using SonarAnalyzer.Rules;

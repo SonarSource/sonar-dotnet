@@ -6,9 +6,9 @@
 "location":  {
 "uri":  "sources\Roslyn.1.3.1\OldRoslyn.cs",
 "region":  {
-"startLine":  16,
+"startLine":  15,
 "startColumn":  19,
-"endLine":  16,
+"endLine":  15,
 "endColumn":  24
 }
 }
@@ -19,9 +19,9 @@
 "location":  {
 "uri":  "sources\Roslyn.1.3.1\OldRoslyn.cs",
 "region":  {
-"startLine":  23,
+"startLine":  22,
 "startColumn":  20,
-"endLine":  23,
+"endLine":  22,
 "endColumn":  28
 }
 }
@@ -32,9 +32,9 @@
 "location":  {
 "uri":  "sources\Roslyn.1.3.1\OldRoslyn.cs",
 "region":  {
-"startLine":  37,
+"startLine":  36,
 "startColumn":  24,
-"endLine":  37,
+"endLine":  36,
 "endColumn":  27
 }
 }

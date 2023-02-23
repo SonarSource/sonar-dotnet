@@ -18,16 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CFG.Helpers
-{
-    public static class RoslynHelper
-    {
-        public const int MinimalSupportedMajorVersion = 3;
+namespace SonarAnalyzer.Rules.CSharp;
 
-        public static bool IsRoslynCfgSupported(int minimalVersion = MinimalSupportedMajorVersion) =>
-            typeof(SemanticModel).Assembly.GetName().Version.Major >= minimalVersion;
-
-        public static Type FlowAnalysisType(string typeName) =>
-            typeof(SemanticModel).Assembly.GetType("Microsoft.CodeAnalysis.FlowAnalysis." + typeName);
-    }
-}
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public class AnalysisWarningAnalyzer : AnalysisWarningAnalyzerBase { }
