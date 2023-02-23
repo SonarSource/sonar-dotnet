@@ -1,0 +1,20 @@
+name: Toggle lock branch
+
+on:
+  workflow_dispatch:    # Triggered manually from the GitHub UI / Actions
+
+jobs:
+  ToggleLockBranch_job:
+    name: Toggle lock branch
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    steps:
+      - id: secrets
+        uses: SonarSource/vault-action-wrapper@2.4.3-1
+        with:
+          secrets: |
+            development/github/token/{REPO_OWNER_NAME_DASH}-lock token | lock_token;
+      - uses: sonarsource/gh-action-lt-backlog/ToggleLockBranch@v1
+        with:
+          github-token: ${{ fromJSON(steps.secrets.outputs.vault).lock_token }}
