@@ -1,6 +1,6 @@
 ﻿using System;
 
-record EmptyRecord1();                                      // Noncompliant {{Remove this empty record, or add members to it.}}
+record EmptyRecord1();                                      // Noncompliant {{Remove this empty record, write its code or make it an "interface".}}
 //     ^^^^^^^^^^^^
 record EmptyRecord2() { };                                  // Noncompliant
 

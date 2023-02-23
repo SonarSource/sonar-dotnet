@@ -1,6 +1,8 @@
 ﻿Imports System
+Imports System.Collections.Generic
+Imports System.Runtime.InteropServices
 
-Class Empty                                         ' Noncompliant {{Remove this empty class, or add members to it.}}
+Class Empty                                         ' Noncompliant {{Remove this empty class, write its code or make it an "interface".}}
     ' ^^^^^
 End Class
 
@@ -97,6 +99,22 @@ Class GenericNotEmptyWithConstraints(Of T As Class)
     End Sub
 End Class
 
+Class IntegerList                                   ' Compliant - creates a more specific type without adding new members to it (similar to using the typedef keyword in C/C++)
+    Inherits List(Of Integer)
+End Class
+
+Class StringLookup(Of T)
+    Inherits Dictionary(Of String, T)
+End Class
+
+Interface IIntegerSet(Of T)
+    Inherits ISet(Of Integer)
+End Interface
+
+<ComVisible(True)>
+Class ClassWithAttribute                            ' Compliant - types with attributes are ignored
+End Class
+
 MustInherit Class AbstractEmpty                     ' Noncompliant
 End Class
 
@@ -117,5 +135,13 @@ End Interface
 Structure EmptyStruct                               ' Compliant - this rule only deals with classes
 End Structure
 
+Class Conditional                                   ' Compliant - it's not empty when the given symbol is defined
+#If NOTDEFINED Then
+    Public Overrides Function ToString() As String
+        Return "Debug Text"
+    End Function
+#End If
+End Class
+
 Class                                               ' Error
-End Class                                    
+End Class

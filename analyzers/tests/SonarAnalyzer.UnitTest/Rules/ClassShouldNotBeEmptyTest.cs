@@ -45,7 +45,9 @@ public class ClassShouldNotBeEmptyTest
 
     private static readonly MetadataReference[] AdditionalReferences = new[]
     {
-        AspNetCoreMetadataReference.MicrosoftAspNetCoreRazorPages
+        AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcAbstractions,
+        AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcCore,
+        AspNetCoreMetadataReference.MicrosoftAspNetCoreRazorPages,
     };
 
     [TestMethod]
