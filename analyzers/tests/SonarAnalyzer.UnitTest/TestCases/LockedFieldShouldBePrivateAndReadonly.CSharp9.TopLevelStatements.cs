@@ -2,8 +2,16 @@
 //    ^^^^^^^^^^
 lock (MethodReturningString()) { } // Noncompliant
 lock (new object()) { }            // Noncompliant
+lock (staticReadonlyField) { }
+lock (staticReadWriteField) {}     // Noncompliant
 
 string MethodReturningString() => "a string";
+
+partial class Program
+{
+    static readonly object staticReadonlyField = new();
+    static object staticReadWriteField = new();
+}
 
 class ClassNestedAtTopLevel
 {
