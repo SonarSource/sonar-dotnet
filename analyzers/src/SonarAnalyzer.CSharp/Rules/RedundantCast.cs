@@ -63,13 +63,13 @@ public sealed class RedundantCast : SonarDiagnosticAnalyzer
             && context.SemanticModel.GetTypeInfo(expression) is { Type: { } expressionType } expressionTypeInfo
             && context.SemanticModel.GetTypeInfo(type) is { Type: { } castType }
             && expressionType.Equals(castType)
-            && FlowStateIsNoneOrMatchesCast(expressionTypeInfo, type))
+            && FlowStateEquals(expressionTypeInfo, type))
         {
             ReportIssue(context, expression, castType, location);
         }
     }
 
-    private static bool FlowStateIsNoneOrMatchesCast(TypeInfo expressionTypeInfo, ExpressionSyntax type)
+    private static bool FlowStateEquals(TypeInfo expressionTypeInfo, ExpressionSyntax type)
     {
         var castingToNullable = type.IsKind(SyntaxKind.NullableType);
         return expressionTypeInfo.Nullability().FlowState switch
@@ -125,7 +125,7 @@ public sealed class RedundantCast : SonarDiagnosticAnalyzer
             : null;
 
     private static bool CanHaveNullValue(ITypeSymbol type) =>
-        type.IsReferenceType || type.Name == "Nullable";
+        type.IsReferenceType || type.Name == nameof(Nullable<int>);
 
     private static Location GetReportLocation(InvocationExpressionSyntax invocation, bool methodCalledAsStatic) =>
         invocation.Expression switch

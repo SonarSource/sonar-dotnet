@@ -31,24 +31,35 @@ namespace Tests.Diagnostics
     // https://github.com/SonarSource/sonar-dotnet/issues/6438
     public class AnonTypes
     {
-        public void Simple()
+        public void Simple(string nonNullable, string? nullable)
         {
-            var anon = new { X = (string?)"foo" };  // Compliant
+            _ = new { X = (string?)nonNullable };   // Compliant
+            _ = new { X = (string?)nullable };      // Noncompliant
+            _ = new { X = (string)nonNullable };    // Noncompliant
+            _ = new { X = (string)nullable };       // Compliant
         }
 
-        public void Array()
+        public void Array(string nonNullable, string? nullable)
         {
-            var anonArray = new[] { new { X = (string?)"foo" }, new { X = (string?)null } };    // Compliant
-            var oneElementAnonArray = new[] { new { X = (string?)"foo" } };                     // Compliant
-            var notSoAnonArray = new[] { new HoldsObject(new { X = (string?)"foo" }) };         // Compliant
+            _ = new[] { new { X = (string?)nonNullable }, new { X = (string?)null } };  // Compliant
+            _ = new[] { new { X = (string?)nullable }, new { X = (string?)null } };     // Noncompliant
+            _ = new[] { new { X = (string?)nonNullable } };                             // Compliant
+            _ = new[] { new { X = (string?)nullable } };                                // Noncompliant
+            _ = new[] { new HoldsObject(new { X = (string?)nonNullable }) };            // Compliant
+            _ = new[] { new HoldsObject(new { X = (string?)nullable }) };               // Noncompliant
         }
 
-        public void SwitchExpression()
+        public void SwitchExpression(string nonNullable, string? nullable)
         {
-            var anonSwitch = true switch
+            _ = true switch
             {
-                true => new { X = (string?)"foo" }, // Compliant
-                false => new { X = (string?)null }  // Compliant
+                true => new { X = (string?)nonNullable },   // Compliant
+                false => new { X = (string?)null }          // Compliant
+            };
+            _ = true switch
+            {
+                true => new { X = (string?)nullable },   // Noncompliant
+                false => new { X = (string?)null }          // Compliant
             };
         }
     }
