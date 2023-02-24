@@ -25,12 +25,14 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected override ILanguageFacade<SyntaxKind> Language { get; } = CSharpFacade.Instance;
 
-        protected override TokenClassifierBase GetTokenClassifier(SyntaxToken token, SemanticModel semanticModel, bool skipIdentifierTokens) =>
-            new TokenClassifier(token, semanticModel, skipIdentifierTokens);
+        protected override TokenClassifierBase GetTokenClassifier(SemanticModel semanticModel, bool skipIdentifierTokens) =>
+            new TokenClassifier(semanticModel, skipIdentifierTokens);
+        protected override TriviaClassifierBase GetTriviaClassifier() =>
+            new TriviaClassifier();
 
         private sealed class TokenClassifier : TokenClassifierBase
         {
-            public TokenClassifier(SyntaxToken token, SemanticModel semanticModel, bool skipIdentifiers) : base(token, semanticModel, skipIdentifiers) { }
+            public TokenClassifier(SemanticModel semanticModel, bool skipIdentifiers) : base(semanticModel, skipIdentifiers) { }
 
             protected override SyntaxNode GetBindableParent(SyntaxToken token) =>
                 token.GetBindableParent();
@@ -40,9 +42,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
             protected override bool IsKeyword(SyntaxToken token) =>
                 SyntaxFacts.IsKeywordKind(token.Kind());
-
-            protected override bool IsRegularComment(SyntaxTrivia trivia) =>
-                trivia.IsAnyKind(SyntaxKind.SingleLineCommentTrivia, SyntaxKind.MultiLineCommentTrivia);
 
             protected override bool IsNumericLiteral(SyntaxToken token) =>
                 token.IsKind(SyntaxKind.NumericLiteralToken);
@@ -63,6 +62,12 @@ namespace SonarAnalyzer.Rules.CSharp
                     SyntaxKind.InterpolatedStringTextToken,
                     SyntaxKind.InterpolatedStringEndToken,
                     SyntaxKindEx.InterpolatedRawStringEndToken);
+        }
+
+        private sealed class TriviaClassifier: TriviaClassifierBase
+        {
+            protected override bool IsRegularComment(SyntaxTrivia trivia) =>
+                trivia.IsAnyKind(SyntaxKind.SingleLineCommentTrivia, SyntaxKind.MultiLineCommentTrivia);
 
             protected override bool IsDocComment(SyntaxTrivia trivia) =>
                 trivia.IsAnyKind(SyntaxKind.SingleLineDocumentationCommentTrivia, SyntaxKind.MultiLineDocumentationCommentTrivia);

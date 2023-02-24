@@ -25,12 +25,14 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         protected override ILanguageFacade<SyntaxKind> Language { get; } = VisualBasicFacade.Instance;
 
-        protected override TokenClassifierBase GetTokenClassifier(SyntaxToken token, SemanticModel semanticModel, bool skipIdentifierTokens) =>
-            new TokenClassifier(token, semanticModel, skipIdentifierTokens);
+        protected override TokenClassifierBase GetTokenClassifier(SemanticModel semanticModel, bool skipIdentifierTokens) =>
+            new TokenClassifier(semanticModel, skipIdentifierTokens);
+        protected override TriviaClassifierBase GetTriviaClassifier() =>
+            new TriviaClassifier();
 
         private sealed class TokenClassifier : TokenClassifierBase
         {
-            public TokenClassifier(SyntaxToken token, SemanticModel semanticModel, bool skipIdentifiers) : base(token, semanticModel, skipIdentifiers) { }
+            public TokenClassifier(SemanticModel semanticModel, bool skipIdentifiers) : base(semanticModel, skipIdentifiers) { }
 
             protected override SyntaxNode GetBindableParent(SyntaxToken token) =>
                 token.GetBindableParent();
@@ -41,9 +43,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
             protected override bool IsKeyword(SyntaxToken token) =>
                 SyntaxFacts.IsKeywordKind(token.Kind());
 
-            protected override bool IsRegularComment(SyntaxTrivia trivia) =>
-                trivia.IsKind(SyntaxKind.CommentTrivia);
-
             protected override bool IsNumericLiteral(SyntaxToken token) =>
                 token.IsAnyKind(SyntaxKind.DecimalLiteralToken, SyntaxKind.FloatingLiteralToken, SyntaxKind.IntegerLiteralToken);
 
@@ -53,6 +52,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     SyntaxKind.CharacterLiteralToken,
                     SyntaxKind.InterpolatedStringTextToken,
                     SyntaxKind.EndOfInterpolatedStringToken);
+        }
+
+        private sealed class TriviaClassifier : TriviaClassifierBase
+        {
+            protected override bool IsRegularComment(SyntaxTrivia trivia) =>
+                trivia.IsKind(SyntaxKind.CommentTrivia);
 
             protected override bool IsDocComment(SyntaxTrivia trivia) =>
                 trivia.IsKind(SyntaxKind.DocumentationCommentTrivia);
