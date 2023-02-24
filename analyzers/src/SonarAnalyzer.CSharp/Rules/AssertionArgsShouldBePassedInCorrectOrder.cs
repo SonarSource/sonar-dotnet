@@ -42,7 +42,7 @@ public sealed class AssertionArgsShouldBePassedInCorrectOrder : SonarDiagnosticA
             && c.SemanticModel.GetSymbolInfo(invocation).AllSymbols()
                 .SelectMany(symbol =>
                     symbol is IMethodSymbol { IsStatic: true, ContainingSymbol: INamedTypeSymbol container } methodSymbol
-                        ? knownAssertParameters.Select(knownParameters => FindWrongArguments(container, methodSymbol, argumentList, knownParameters))
+                        ? knownAssertParameters.Select(knownParameters => FindWrongArguments(c.SemanticModel, container, methodSymbol, argumentList, knownParameters))
                         : Enumerable.Empty<WrongArguments?>())
                 .FirstOrDefault(x => x is not null) is { Expected: var expected, Actual: var actual })
             {
@@ -81,13 +81,15 @@ public sealed class AssertionArgsShouldBePassedInCorrectOrder : SonarDiagnosticA
             _ => null
         };
 
-    private static WrongArguments? FindWrongArguments(INamedTypeSymbol container, IMethodSymbol symbol, ArgumentListSyntax argumentList, KnownAssertParameters knownParameters) =>
+    private static WrongArguments? FindWrongArguments(SemanticModel semanticModel, INamedTypeSymbol container, IMethodSymbol symbol, ArgumentListSyntax argumentList, KnownAssertParameters knownParameters) =>
         container.Is(knownParameters.AssertClass)
         && CSharpFacade.Instance.MethodParameterLookup(argumentList, symbol) is var parameterLookup
         && parameterLookup.TryGetSyntax(knownParameters.ExpectedParamterName, out var expectedArguments)
-        && expectedArguments.FirstOrDefault() is not LiteralExpressionSyntax and var expected
+        && expectedArguments.FirstOrDefault() is { } expected
+        && semanticModel.GetConstantValue(expected).HasValue is false
         && parameterLookup.TryGetSyntax(knownParameters.ActualParameterName, out var actualArguments)
-        && actualArguments.FirstOrDefault() is LiteralExpressionSyntax actual
+        && actualArguments.FirstOrDefault() is { } actual
+        && semanticModel.GetConstantValue(actual).HasValue is true
             ? new(expected, actual)
             : null;
 

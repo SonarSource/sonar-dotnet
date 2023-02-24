@@ -95,7 +95,7 @@ namespace Repro_6547
             string stringToTest = RetrieveString();
             const string constString = "Spring";
 
-            Assert.AreEqual(expected: stringToTest, actual: constString); // FN
+            Assert.AreEqual(expected: stringToTest, actual: constString); // Noncompliant
             Assert.AreEqual(expected: constString, actual: stringToTest); // Compliant
         }
 
@@ -104,7 +104,7 @@ namespace Repro_6547
         {
             Seasons seasonToTest = RetrieveSeason();
 
-            Assert.AreEqual(expected: seasonToTest, actual: Seasons.Spring); // FN
+            Assert.AreEqual(expected: seasonToTest, actual: Seasons.Spring); // Noncompliant
             Assert.AreEqual(expected: Seasons.Spring, actual: seasonToTest); // Compliant
         }
 
