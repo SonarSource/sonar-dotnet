@@ -53,6 +53,11 @@ namespace Repro_6630
             Assert.AreNotSame(actual: "", expected: str); // Noncompliant
 
             Assert.AreEqual(actual: null, expected: new Program()); // Noncompliant
+
+            Assert.AreEqual(message: "", expected: str, actual: ""); // Noncompliant
+            //                                     ^^^^^^^^^^^^^^^
+            Assert.AreEqual(expected: str, message: "", actual: ""); // Noncompliant
+            //                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         }
 
         [Test]

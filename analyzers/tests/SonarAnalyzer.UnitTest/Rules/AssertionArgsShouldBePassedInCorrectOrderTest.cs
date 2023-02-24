@@ -20,36 +20,59 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.UnitTest.Rules;
+
+[TestClass]
+public class AssertionArgsShouldBePassedInCorrectOrderTest
 {
-    [TestClass]
-    public class AssertionArgsShouldBePassedInCorrectOrderTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<AssertionArgsShouldBePassedInCorrectOrder>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<AssertionArgsShouldBePassedInCorrectOrder>();
 
-        [DataTestMethod]
-        [DataRow("1.1.11")]
-        [DataRow(Constants.NuGetLatestVersion)]
-        public void AssertionArgsShouldBePassedInCorrectOrder_MsTest(string testFwkVersion) =>
-            builder.AddPaths("AssertionArgsShouldBePassedInCorrectOrder.MsTest.cs")
-                .AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion))
-                .Verify();
+    [DataTestMethod]
+    [DataRow("1.1.11")]
+    [DataRow(Constants.NuGetLatestVersion)]
+    public void AssertionArgsShouldBePassedInCorrectOrder_MsTest(string testFwkVersion) =>
+        builder.AddPaths("AssertionArgsShouldBePassedInCorrectOrder.MsTest.cs")
+            .AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion))
+            .Verify();
 
-        [DataTestMethod]
-        [DataRow("2.5.7.10213")]
-        [DataRow(Constants.NuGetLatestVersion)]
-        public void AssertionArgsShouldBePassedInCorrectOrder_NUnit(string testFwkVersion) =>
-            builder.AddPaths("AssertionArgsShouldBePassedInCorrectOrder.NUnit.cs")
-                .AddReferences(NuGetMetadataReference.NUnit(testFwkVersion))
-                .Verify();
+    [TestMethod]
+    public void AssertionArgsShouldBePassedInCorrectOrder_MsTest_Static() =>
+        builder.WithTopLevelStatements().AddReferences(NuGetMetadataReference.MSTestTestFramework(Constants.NuGetLatestVersion)).AddSnippet("""
+            using static Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
+            var str = "";
+            AreEqual(str, ""); // Noncompliant
+            """).Verify();
 
-        [DataTestMethod]
-        [DataRow("2.0.0")]
-        [DataRow(Constants.NuGetLatestVersion)]
-        public void AssertionArgsShouldBePassedInCorrectOrder_XUnit(string testFwkVersion) =>
-            builder.AddPaths("AssertionArgsShouldBePassedInCorrectOrder.Xunit.cs")
-                .AddReferences(NuGetMetadataReference.XunitFramework(testFwkVersion)
-                                .Concat(NetStandardMetadataReference.Netstandard))
-                .Verify();
-    }
+    [DataTestMethod]
+    [DataRow("2.5.7.10213")]
+    [DataRow(Constants.NuGetLatestVersion)]
+    public void AssertionArgsShouldBePassedInCorrectOrder_NUnit(string testFwkVersion) =>
+        builder.AddPaths("AssertionArgsShouldBePassedInCorrectOrder.NUnit.cs")
+            .AddReferences(NuGetMetadataReference.NUnit(testFwkVersion))
+            .Verify();
+
+    [TestMethod]
+    public void AssertionArgsShouldBePassedInCorrectOrder_NUnit_Static() =>
+        builder.WithTopLevelStatements().AddReferences(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion)).AddSnippet("""
+            using static NUnit.Framework.Assert;
+            var str = "";
+            AreEqual(str, ""); // Noncompliant
+            """).Verify();
+
+    [DataTestMethod]
+    [DataRow("2.0.0")]
+    [DataRow(Constants.NuGetLatestVersion)]
+    public void AssertionArgsShouldBePassedInCorrectOrder_XUnit(string testFwkVersion) =>
+        builder.AddPaths("AssertionArgsShouldBePassedInCorrectOrder.Xunit.cs")
+            .AddReferences(NuGetMetadataReference.XunitFramework(testFwkVersion)
+                            .Concat(NetStandardMetadataReference.Netstandard))
+            .Verify();
+
+    [TestMethod]
+    public void AssertionArgsShouldBePassedInCorrectOrder_XUnit_Static() =>
+        builder.WithTopLevelStatements().AddReferences(NuGetMetadataReference.XunitFramework(Constants.NuGetLatestVersion)).AddSnippet("""
+            using static Xunit.Assert;
+            var str = "";
+            Equal(str, ""); // Noncompliant
+            """).Verify();
 }

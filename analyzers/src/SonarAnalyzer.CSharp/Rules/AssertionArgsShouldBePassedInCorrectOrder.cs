@@ -46,7 +46,7 @@ public sealed class AssertionArgsShouldBePassedInCorrectOrder : SonarDiagnosticA
                         : Enumerable.Empty<WrongArguments?>())
                 .FirstOrDefault(x => x is not null) is { Expected: var expected, Actual: var actual })
             {
-                c.ReportIssue(Diagnostic.Create(Rule, expected.GetLocation(), additionalLocations: new[] { actual.GetLocation() }));
+                c.ReportIssue(Diagnostic.Create(Rule, CreateLocation(expected, actual)));
             }
         },
         SyntaxKind.InvocationExpression);
@@ -90,6 +90,12 @@ public sealed class AssertionArgsShouldBePassedInCorrectOrder : SonarDiagnosticA
         && actualArguments.FirstOrDefault() is LiteralExpressionSyntax actual
             ? new(expected, actual)
             : null;
+
+    private static Location CreateLocation(SyntaxNode argument1, SyntaxNode argument2)
+    {
+        var array = new[] { argument1, argument2 }.OrderBy(x => x.Span);
+        return array.First().CreateLocation(array.Skip(1).Single());
+    }
 
     private readonly record struct KnownAssertParameters(KnownType AssertClass, string ExpectedParamterName, string ActualParameterName);
     private readonly record struct WrongArguments(SyntaxNode Expected, SyntaxNode Actual);

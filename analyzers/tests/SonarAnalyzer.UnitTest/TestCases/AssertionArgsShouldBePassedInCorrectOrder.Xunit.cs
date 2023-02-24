@@ -65,6 +65,9 @@ namespace Repro_6630
             int d = 42;
             Assert.Equal<int>(actual: 1, expected: d); // Noncompliant
             Assert.Equal(actual: null, expected: new Program()); // Noncompliant
+
+            Assert.Equal(expected: str, actual: ""); // Noncompliant
+            //                     ^^^^^^^^^^^^^^^
         }
     }
 }

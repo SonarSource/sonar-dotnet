@@ -11,8 +11,7 @@ namespace Tests.Diagnostics
         {
             var str = "";
             Assert.AreEqual(str, ""); // Noncompliant {{Make sure these 2 arguments are in the correct order: expected value, actual value.}}
-//                          ^^^
-//                               ^^   Secondary@-2
+//                          ^^^^^^^
             Assert.AreSame(str, ""); // Noncompliant
 //                         ^^^^^^^
 
@@ -73,6 +72,11 @@ namespace Repro_6630
             int d = 42;
             Assert.AreEqual<int>(actual: 1, expected: d); // Noncompliant
             Assert.AreEqual(actual: null, expected: new Program()); // Noncompliant
+
+            Assert.AreEqual(message: "", expected: str, actual: ""); // Noncompliant
+            //                                     ^^^^^^^^^^^^^^^
+            Assert.AreEqual(expected: str, message: "", actual: ""); // Noncompliant
+            //                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         }
     }
 }
