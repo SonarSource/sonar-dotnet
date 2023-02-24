@@ -27,6 +27,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override TokenClassifierBase GetTokenClassifier(SemanticModel semanticModel, bool skipIdentifierTokens) =>
             new TokenClassifier(semanticModel, skipIdentifierTokens);
+
         protected override TriviaClassifierBase GetTriviaClassifier() =>
             new TriviaClassifier();
 
@@ -64,7 +65,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     SyntaxKindEx.InterpolatedRawStringEndToken);
         }
 
-        private sealed class TriviaClassifier: TriviaClassifierBase
+        private sealed class TriviaClassifier : TriviaClassifierBase
         {
             protected override bool IsRegularComment(SyntaxTrivia trivia) =>
                 trivia.IsAnyKind(SyntaxKind.SingleLineCommentTrivia, SyntaxKind.MultiLineCommentTrivia);

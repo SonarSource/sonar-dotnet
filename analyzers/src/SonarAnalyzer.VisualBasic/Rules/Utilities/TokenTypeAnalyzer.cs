@@ -27,6 +27,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override TokenClassifierBase GetTokenClassifier(SemanticModel semanticModel, bool skipIdentifierTokens) =>
             new TokenClassifier(semanticModel, skipIdentifierTokens);
+
         protected override TriviaClassifierBase GetTriviaClassifier() =>
             new TriviaClassifier();
 
