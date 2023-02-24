@@ -32,9 +32,9 @@ Methods which are called by other methods in the same category should be placed 
 ```csharp
 public int Bar() => 2;
 
-int MethodOne(int one) => Foo() + one;
+int CallerOne(int x) => Foo() + x;
 
-int MethodTwo(int two) => Foo() + two + Bar();
+int CallerTwo(int x) => Foo() + x + Bar();
 
 int Foo() =>  1; // this is placed at the bottom, as it's a "leaf" method within the same category
 ```
