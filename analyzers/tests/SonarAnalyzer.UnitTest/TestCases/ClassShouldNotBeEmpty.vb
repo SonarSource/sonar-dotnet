@@ -115,6 +115,14 @@ End Interface
 Class ClassWithAttribute                            ' Compliant - types with attributes are ignored
 End Class
 
+<ComVisible(True), Obsolete>
+Class ClassWithMultipleAttributes
+End Class
+
+<>                                                  ' Error
+Class AttributeError                                ' Noncompliant
+End Class
+
 MustInherit Class AbstractEmpty                     ' Noncompliant
 End Class
 

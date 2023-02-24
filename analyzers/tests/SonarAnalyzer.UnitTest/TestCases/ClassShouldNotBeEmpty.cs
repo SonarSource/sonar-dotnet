@@ -82,6 +82,12 @@ interface IIntegerSet<T>: ISet<int> { }
 [ComVisible(true)]
 class ClassWithAttribute { }                 // Compliant - types with attributes are ignored
 
+[ComVisible(true), Obsolete]
+class ClassWithMultipleAttributes { }
+
+[]                                           // Error
+class AttributeError { }
+
 static class StaticEmpty { }                 // Noncompliant
 
 abstract class AbstractEmpty { }             // Noncompliant

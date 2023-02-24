@@ -62,9 +62,11 @@ public abstract class ClassShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosticAn
 
     private bool ShouldIgnoreBecauseOfBaseClassOrInterface(SyntaxNode node, SemanticModel model) =>
         IsClassWithDeclaredBaseClass(node)
-        && (HasGenericBaseClassOrInterface(node)
-            || (model.GetDeclaredSymbol(node) is INamedTypeSymbol classSymbol
-                && (classSymbol.BaseType is { IsAbstract: true }
-                || classSymbol.DerivesFromAny(BaseClassesToIgnore)
-                || classSymbol.ImplementsAny(InterfacesToIgnore))));
+        && (HasGenericBaseClassOrInterface(node) || ShouldIgnoreType(node, model));
+
+    private static bool ShouldIgnoreType(SyntaxNode node, SemanticModel model) =>
+        model.GetDeclaredSymbol(node) is INamedTypeSymbol classSymbol
+            && (classSymbol.BaseType is { IsAbstract: true }
+            || classSymbol.DerivesFromAny(BaseClassesToIgnore)
+            || classSymbol.ImplementsAny(InterfacesToIgnore));
 }

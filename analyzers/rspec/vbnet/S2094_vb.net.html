@@ -14,9 +14,10 @@ Public Interface IEmpty
 End Interface
 </pre>
 <h2>Exceptions</h2>
-<p>Partial classes are ignored entirely, as they are often used with Source Generators. Subclasses of System.Exception will be ignored, as even an
-empty Exception class can provide useful information by its type name alone. Subclasses of certain framework types - like the PageModel class used in
-ASP.NET Core Razor Pages - will also be ignored.</p>
+<p>Partial classes are ignored entirely, as they are often used with Source Generators. Subclasses of System.Exception are ignored, as even an empty
+Exception class can provide useful information by its type name alone. Subclasses of System.Attribute are ignored, as well as classes which are
+annotated with attributes. Subclasses of generic classes are ignored, as even when empty they can be used for type specialization. Subclasses of
+certain framework types - like the PageModel class used in ASP.NET Core Razor Pages - are also be ignored.</p>
 <pre>
 Imports Microsoft.AspNetCore.Mvc.RazorPages
 
