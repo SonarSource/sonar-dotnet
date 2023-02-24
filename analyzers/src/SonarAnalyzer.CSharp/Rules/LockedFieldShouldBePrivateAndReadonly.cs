@@ -72,14 +72,14 @@ public sealed class LockedFieldShouldBePrivateAndReadonly : SonarDiagnosticAnaly
 
     private static bool IsOfTypeString(SemanticModel model, ExpressionSyntax expression) =>
         expression.IsAnyKind(SyntaxKind.StringLiteralExpression, SyntaxKind.InterpolatedStringExpression)
-            || expression.IsKnownType(KnownType.System_String, model);
+        || expression.IsKnownType(KnownType.System_String, model);
 
     private static IFieldSymbol FieldNotReadonlyOrNotPrivate(ExpressionSyntax expression, ISymbol symbol) =>
         expression.IsAnyKind(SyntaxKind.IdentifierName, SyntaxKind.SimpleMemberAccessExpression)
-            && symbol is IFieldSymbol lockedField
-            && (!lockedField.IsReadOnly || lockedField.GetEffectiveAccessibility() != Accessibility.Private)
-                ? lockedField
-                : null;
+        && symbol is IFieldSymbol lockedField
+        && (!lockedField.IsReadOnly || lockedField.GetEffectiveAccessibility() != Accessibility.Private)
+            ? lockedField
+            : null;
 
     private static ITypeSymbol FieldInSameTypeAs(IFieldSymbol field, INamedTypeSymbol type) =>
         field.ContainingType is { } fieldType && type is { } && !fieldType.Equals(type)
