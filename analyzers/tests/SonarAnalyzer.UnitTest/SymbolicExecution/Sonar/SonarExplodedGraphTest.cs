@@ -901,28 +901,19 @@ namespace Namespace
         }
 
         [DataTestMethod]
-        [DataRow("is (string s)", "ParenthesizedPattern")]
-        [DataRow("is 1 or 2", "OrPattern")]
-        [DataRow("is 1 and 2", "AndPattern")]
-        [DataRow("is not 1", "NotPattern")]
-        [DataRow("is var i", "VarPattern")]
-        [DataRow("is > 5", "RelationalPattern")]
-        [DataRow("is [] empty", "ListPattern")]
-        public void ExplodedGraph_IsPattern_UnsupportedPatternKinds(string pattern, string patternKind)
+        [DataRow("int")]
+        [DataRow("(string s)")]
+        [DataRow("1 or 2")]
+        [DataRow("1 and 2")]
+        [DataRow("not 1")]
+        [DataRow("> 5")]
+        [DataRow("[] empty")]
+        public void ExplodedGraph_SwitchStatement_UnsupportedPatternKinds(string pattern)
         {
-            var createGraph = () => new ExplodedGraphContext($$"""
-                var x = obj {{pattern}};
-                """);
-            createGraph.Should().ThrowExactly<NotSupportedException>().WithMessage(patternKind);
-        }
-
-        [TestMethod]
-        public void ExplodedGraph_SwitchStatement_TypePattern()
-        {
-            const string testInput = """
+            var testInput = $$"""
                 switch (new object())
                 {
-                    case int: break;
+                    case {{pattern}}: break;
                 }
                 """;
             var context = new ExplodedGraphContext(testInput);
@@ -933,7 +924,7 @@ namespace Namespace
             var walk = () => context.WalkWithInstructions(2);
 
             walk.Should().Throw<Exception>().WithMessage("Expected NumberOfExitBlockReached to be 1, but found 0.");
-            actualInstructions.Should().Equal("new object()", "int");
+            actualInstructions.Should().Equal("new object()", pattern);
         }
 
         [TestMethod]
