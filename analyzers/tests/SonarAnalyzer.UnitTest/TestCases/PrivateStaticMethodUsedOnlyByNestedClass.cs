@@ -57,7 +57,7 @@ class OuterClass
             UsedOnlyByConstructorInNestedClass();
         }
 
-        static void OnlyUsedByDeeperNestedClass() { }               // Noncompliant {{Move the method inside 'DeeperNestedClass'.}}
+        static void NestedClassMethodUsedByDeeperNestedClass() { }  // Noncompliant {{Move the method inside 'DeeperNestedClass'.}}
 
         void Bar()
         {
@@ -101,7 +101,7 @@ class OuterClass
                 OnlyUsedByDeeperNestedClass();
                 UsedByNestedClassAndDeeperNestedClass();
                 UsedBySiblingAndDeeperNestedClasses();
-                OnlyUsedByDeeperNestedClass();
+                NestedClassMethodUsedByDeeperNestedClass();
             }
         }
     }
@@ -165,7 +165,7 @@ partial class PartialOuterClass
 [DebuggerDisplay("{UsedByDebuggerDisplay()}")]
 class DebugViewClass
 {
-    static string UsedByDebuggerDisplay() => "";                    // FP - should not be moved to nested class, because it's also used by the attribute
+    static string UsedByDebuggerDisplay() => "";                    // Noncompliant - FP: should not be moved to nested class, because it's also used by the attribute
 
     class NestedClass
     {
