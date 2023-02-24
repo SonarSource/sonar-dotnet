@@ -42,7 +42,7 @@ public sealed class LockedFieldShouldBePrivateAndReadonly : SonarDiagnosticAnaly
         else
         {
             var symbol = context.SemanticModel.GetSymbolInfo(expression).Symbol;
-            if (IsOfTypeString(context.SemanticModel, expression))
+            if (IsOfTypeString(expression, symbol))
             {
                 ReportIssue("Strings can be interned, and should not be used for locking.");
             }
@@ -70,9 +70,9 @@ public sealed class LockedFieldShouldBePrivateAndReadonly : SonarDiagnosticAnaly
             SyntaxKind.ImplicitArrayCreationExpression,
             SyntaxKind.QueryExpression);
 
-    private static bool IsOfTypeString(SemanticModel model, ExpressionSyntax expression) =>
+    private static bool IsOfTypeString(ExpressionSyntax expression, ISymbol symbol) =>
         expression.IsAnyKind(SyntaxKind.StringLiteralExpression, SyntaxKind.InterpolatedStringExpression)
-        || expression.IsKnownType(KnownType.System_String, model);
+        || symbol.GetSymbolType().Is(KnownType.System_String);
 
     private static IFieldSymbol FieldNotReadonlyOrNotPrivate(ExpressionSyntax expression, ISymbol symbol) =>
         expression.IsAnyKind(SyntaxKind.IdentifierName, SyntaxKind.SimpleMemberAccessExpression)
