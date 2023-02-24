@@ -29,10 +29,10 @@ internal class VisualBasicMethodParameterLookup : MethodParameterLookupBase<Argu
         : this(invocation.ArgumentList, methodSymbol) { }
 
     public VisualBasicMethodParameterLookup(ArgumentListSyntax argumentList, SemanticModel semanticModel)
-        : base(argumentList?.Arguments, argumentList == null ? null : semanticModel.GetSymbolInfo(argumentList.Parent)) { }
+        : base(argumentList.Arguments, argumentList == null ? null : semanticModel.GetSymbolInfo(argumentList.Parent)) { }
 
     public VisualBasicMethodParameterLookup(ArgumentListSyntax argumentList, IMethodSymbol methodSymbol)
-        : base(argumentList?.Arguments, methodSymbol) { }
+        : base(argumentList.Arguments, methodSymbol) { }
 
     protected override SyntaxToken? GetNameColonArgumentIdentifier(ArgumentSyntax argument) =>
         (argument as SimpleArgumentSyntax)?.NameColonEquals?.Name.Identifier;

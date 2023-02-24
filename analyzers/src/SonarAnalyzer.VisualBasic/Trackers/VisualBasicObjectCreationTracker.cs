@@ -29,13 +29,11 @@ namespace SonarAnalyzer.Helpers.Trackers
                        && argumentList.Arguments.Count > index
                        && argumentList.Arguments[index].GetExpression().HasConstantValue(context.SemanticModel);
 
-        internal override object ConstArgumentForParameter(ObjectCreationContext context, string parameterName)
-        {
-            var argumentList = ((ObjectCreationExpressionSyntax)context.Node).ArgumentList;
-            var values = VisualBasicSyntaxHelper.ArgumentValuesForParameter(context.SemanticModel, argumentList, parameterName);
-            return values.Length == 1 && values[0] is ExpressionSyntax valueSyntax
-                ? valueSyntax.FindConstantValue(context.SemanticModel)
-                : null;
-        }
+        internal override object ConstArgumentForParameter(ObjectCreationContext context, string parameterName) =>
+            ((ObjectCreationExpressionSyntax)context.Node).ArgumentList is { } argumentList
+                && VisualBasicSyntaxHelper.ArgumentValuesForParameter(context.SemanticModel, argumentList, parameterName) is { Length: 1 } values
+                && values[0] is ExpressionSyntax valueSyntax
+                    ? valueSyntax.FindConstantValue(context.SemanticModel)
+                    : null;
     }
 }

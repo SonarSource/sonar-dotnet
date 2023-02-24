@@ -40,13 +40,13 @@ internal abstract class MethodParameterLookupBase<TArgumentSyntax> : IMethodPara
     public IMethodSymbol MethodSymbol { get; }
     private ImmutableArray<IMethodSymbol> MethodSymbolOrCandidates { get; }
 
-    protected MethodParameterLookupBase(SeparatedSyntaxList<TArgumentSyntax>? argumentList, SymbolInfo? methodSymbolInfo)
-     : this(argumentList, methodSymbolInfo?.Symbol as IMethodSymbol, methodSymbolInfo?.AllSymbols().OfType<IMethodSymbol>()) { }
+    protected MethodParameterLookupBase(SeparatedSyntaxList<TArgumentSyntax> argumentList, SymbolInfo? methodSymbolInfo)
+        : this(argumentList, methodSymbolInfo?.Symbol as IMethodSymbol, methodSymbolInfo?.AllSymbols().OfType<IMethodSymbol>()) { }
 
-    protected MethodParameterLookupBase(SeparatedSyntaxList<TArgumentSyntax>? argumentList, IMethodSymbol methodSymbol)
+    protected MethodParameterLookupBase(SeparatedSyntaxList<TArgumentSyntax> argumentList, IMethodSymbol methodSymbol)
         : this(argumentList, methodSymbol, new[] { methodSymbol }) { }
 
-    private MethodParameterLookupBase(SeparatedSyntaxList<TArgumentSyntax>? argumentList, IMethodSymbol methodSymbol, IEnumerable<IMethodSymbol> methodSymbolOrCandidates)
+    private MethodParameterLookupBase(SeparatedSyntaxList<TArgumentSyntax> argumentList, IMethodSymbol methodSymbol, IEnumerable<IMethodSymbol> methodSymbolOrCandidates)
     {
         this.argumentList = argumentList;
         MethodSymbol = methodSymbol;
