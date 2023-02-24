@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
-class Empty { }                              // Noncompliant {{Remove this empty class, or add members to it.}}
+class Empty { }                              // Noncompliant {{Remove this empty class, write its code or make it an "interface".}}
 //    ^^^^^
 
 public class PublicEmpty { }                 // Noncompliant
@@ -73,6 +75,19 @@ class GenericNotEmptyWithConstraints<T>
     void Method(T arg) { }
 }
 
+class IntegerList: List<int> { }             // Compliant - creates a more specific type without adding new members to it (similar to using the typedef keyword in C/C++)
+class StringLookup<T>: Dictionary<string, T> { }
+interface IIntegerSet<T>: ISet<int> { }
+
+[ComVisible(true)]
+class ClassWithAttribute { }                 // Compliant - types with attributes are ignored
+
+[ComVisible(true), Obsolete]
+class ClassWithMultipleAttributes { }
+
+[]                                           // Error
+class AttributeError { }
+
 static class StaticEmpty { }                 // Noncompliant
 
 abstract class AbstractEmpty { }             // Noncompliant
@@ -89,6 +104,16 @@ interface IMarker { }                        // Compliant - this rule only deals
 struct EmptyStruct { }                       // Compliant - this rule only deals with classes
 
 enum EmptyEnum { }                           // Compliant - this rule only deals with classes
+
+class Conditional                            // Compliant - it's not empty when the given symbol is defined
+{
+#if NOTDEFINED
+    public override string ToString()
+    {
+        return "Debug Text";
+    }
+#endif
+}
 
 class { }                                    // Error
 

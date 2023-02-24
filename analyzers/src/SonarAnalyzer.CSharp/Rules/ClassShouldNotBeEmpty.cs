@@ -21,7 +21,7 @@
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class ClassShouldNotBeEmpty : ClassShouldNotBeEmptyBase<SyntaxKind>
+public sealed class ClassShouldNotBeEmpty : ClassShouldNotBeEmptyBase<SyntaxKind, BaseTypeDeclarationSyntax>
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
@@ -30,9 +30,26 @@ public sealed class ClassShouldNotBeEmpty : ClassShouldNotBeEmptyBase<SyntaxKind
         && !typeDeclaration.Modifiers.Any(x => x.IsKind(SyntaxKind.PartialKeyword))
         && (node is ClassDeclarationSyntax || IsParameterlessRecord(node));
 
-    protected override bool IsClassWithDeclaredBaseClass(SyntaxNode node) => node is ClassDeclarationSyntax { BaseList: not null };
+    protected override BaseTypeDeclarationSyntax GetIfHasDeclaredBaseClass(SyntaxNode node) =>
+        node is ClassDeclarationSyntax { BaseList: not null } declaration
+            ? declaration
+            : null;
 
-    protected override string DeclarationTypeKeyword(SyntaxNode node) => ((TypeDeclarationSyntax)node).Keyword.ValueText;
+    protected override bool HasGenericBaseClassOrInterface(BaseTypeDeclarationSyntax declaration) =>
+        declaration.BaseList.Types.Any(x => x.Type is GenericNameSyntax);
+
+    protected override bool HasAnyAttribute(SyntaxNode node) =>
+        node is TypeDeclarationSyntax { AttributeLists.Count: > 0  };
+
+    protected override string DeclarationTypeKeyword(SyntaxNode node) =>
+        ((TypeDeclarationSyntax)node).Keyword.ValueText;
+
+    protected override bool HasConditionalCompilationDirectives(SyntaxNode node) =>
+        node.DescendantNodes(descendIntoTrivia: true).Any(x => x.IsAnyKind(
+            SyntaxKind.IfDirectiveTrivia,
+            SyntaxKind.ElifDirectiveTrivia,
+            SyntaxKind.ElseDirectiveTrivia,
+            SyntaxKind.EndIfDirectiveTrivia));
 
     private bool IsParameterlessRecord(SyntaxNode node) =>
         RecordDeclarationSyntaxWrapper.IsInstance(node)

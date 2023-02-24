@@ -1,5 +1,5 @@
 ﻿
-record class EmptyRecordClass1();        // Noncompliant {{Remove this empty record, or add members to it.}}
+record class EmptyRecordClass1();        // Noncompliant {{Remove this empty record, write its code or make it an "interface".}}
 //           ^^^^^^^^^^^^^^^^^
 record class EmptyRecordClass2() { };    // Noncompliant
 

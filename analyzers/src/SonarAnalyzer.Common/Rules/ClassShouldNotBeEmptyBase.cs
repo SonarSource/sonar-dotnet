@@ -20,20 +20,28 @@
 
 namespace SonarAnalyzer.Rules;
 
-public abstract class ClassShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+public abstract class ClassShouldNotBeEmptyBase<TSyntaxKind, TDeclarationSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
     where TSyntaxKind : struct
+    where TDeclarationSyntax: SyntaxNode
 {
     private const string DiagnosticId = "S2094";
 
     private static readonly ImmutableArray<KnownType> BaseClassesToIgnore = ImmutableArray.Create(
         KnownType.Microsoft_AspNetCore_Mvc_RazorPages_PageModel,
+        KnownType.System_Attribute,
         KnownType.System_Exception);
 
-    protected abstract bool IsEmptyAndNotPartial(SyntaxNode node);
-    protected abstract bool IsClassWithDeclaredBaseClass(SyntaxNode node);
-    protected abstract string DeclarationTypeKeyword(SyntaxNode node);
+    private static readonly ImmutableArray<KnownType> InterfacesToIgnore = ImmutableArray.Create(
+        KnownType.Microsoft_AspNetCore_Mvc_IActionResult);
 
-    protected override string MessageFormat => "Remove this empty {0}, or add members to it.";
+    protected abstract bool IsEmptyAndNotPartial(SyntaxNode node);
+    protected abstract TDeclarationSyntax GetIfHasDeclaredBaseClass(SyntaxNode node);
+    protected abstract bool HasGenericBaseClassOrInterface(TDeclarationSyntax declaration);
+    protected abstract bool HasAnyAttribute(SyntaxNode node);
+    protected abstract string DeclarationTypeKeyword(SyntaxNode node);
+    protected abstract bool HasConditionalCompilationDirectives(SyntaxNode node);
+
+    protected override string MessageFormat => "Remove this empty {0}, write its code or make it an \"interface\".";
 
     protected ClassShouldNotBeEmptyBase() : base(DiagnosticId) { }
 
@@ -44,15 +52,22 @@ public abstract class ClassShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosticAn
             {
                 if (Language.Syntax.NodeIdentifier(c.Node) is { IsMissing: false } identifier
                     && IsEmptyAndNotPartial(c.Node)
-                    && !ShouldIgnoreBecauseOfBaseClass(c.Node, c.SemanticModel))
+                    && !HasAnyAttribute(c.Node)
+                    && !HasConditionalCompilationDirectives(c.Node)
+                    && !ShouldIgnoreBecauseOfBaseClassOrInterface(c.Node, c.SemanticModel))
                 {
                     c.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation(), DeclarationTypeKeyword(c.Node)));
                 }
             },
             Language.SyntaxKind.ClassAndRecordClassDeclarations);
 
-    private bool ShouldIgnoreBecauseOfBaseClass(SyntaxNode node, SemanticModel model) =>
-        IsClassWithDeclaredBaseClass(node)
-        && model.GetDeclaredSymbol(node) is INamedTypeSymbol classSymbol
-        && (classSymbol.BaseType is { IsAbstract: true } || classSymbol.DerivesFromAny(BaseClassesToIgnore));
+    private bool ShouldIgnoreBecauseOfBaseClassOrInterface(SyntaxNode node, SemanticModel model) =>
+        GetIfHasDeclaredBaseClass(node) is { } declaration
+        && (HasGenericBaseClassOrInterface(declaration) || ShouldIgnoreType(declaration, model));
+
+    private static bool ShouldIgnoreType(TDeclarationSyntax node, SemanticModel model) =>
+        model.GetDeclaredSymbol(node) is INamedTypeSymbol classSymbol
+            && (classSymbol.BaseType is { IsAbstract: true }
+            || classSymbol.DerivesFromAny(BaseClassesToIgnore)
+            || classSymbol.ImplementsAny(InterfacesToIgnore));
 }

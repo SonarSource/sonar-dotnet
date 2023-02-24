@@ -21,7 +21,7 @@
 namespace SonarAnalyzer.Rules.VisualBasic;
 
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-public sealed class ClassShouldNotBeEmpty : ClassShouldNotBeEmptyBase<SyntaxKind>
+public sealed class ClassShouldNotBeEmpty : ClassShouldNotBeEmptyBase<SyntaxKind, TypeBlockSyntax>
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
@@ -29,7 +29,24 @@ public sealed class ClassShouldNotBeEmpty : ClassShouldNotBeEmptyBase<SyntaxKind
         node is ClassBlockSyntax { Members.Count: 0 } classSyntax
         && !classSyntax.ClassStatement.Modifiers.Any(x => x.IsKind(SyntaxKind.PartialKeyword));
 
-    protected override bool IsClassWithDeclaredBaseClass(SyntaxNode node) => node is ClassBlockSyntax { Inherits.Count: > 0 };
+    protected override TypeBlockSyntax GetIfHasDeclaredBaseClass(SyntaxNode node) =>
+        node is ClassBlockSyntax { Inherits.Count: > 0 } classBlock
+            ? classBlock
+            : null;
 
-    protected override string DeclarationTypeKeyword(SyntaxNode node) => ((TypeBlockSyntax)node).BlockStatement.DeclarationKeyword.ValueText.ToLower();
+    protected override bool HasGenericBaseClassOrInterface(TypeBlockSyntax declaration) =>
+        declaration.Inherits.Any(x => x.Types.Any(t => t is GenericNameSyntax));
+
+    protected override bool HasAnyAttribute(SyntaxNode node) =>
+        node is ClassBlockSyntax { ClassStatement.AttributeLists.Count: > 0 };
+
+    protected override bool HasConditionalCompilationDirectives(SyntaxNode node) =>
+        node.DescendantNodes(descendIntoTrivia: true).Any(x => x.IsAnyKind(
+            SyntaxKind.IfDirectiveTrivia,
+            SyntaxKind.ElseIfDirectiveTrivia,
+            SyntaxKind.ElseDirectiveTrivia,
+            SyntaxKind.EndIfDirectiveTrivia));
+
+    protected override string DeclarationTypeKeyword(SyntaxNode node) =>
+        ((TypeBlockSyntax)node).BlockStatement.DeclarationKeyword.ValueText.ToLower();
 }
