@@ -40,6 +40,16 @@ Local functions should always be placed at the end of a method.
     }
 ```
 
+Methods which are called by other methods should be placed below the callers.
+
+```csharp
+int MethodOne(int one) => Foo() + one;
+
+int MethodTwo(int two) => Foo() + two;
+
+int Foo() =>  1; // this is placed at the bottom, as it's a "leaf" method
+```
+
 ## Naming conventions
 
 Single variable lambdas should use `x` as the variable name (based on lambda calculus λx). Multi variable lambdas should use descriptive names, where `x` can be used for the main iterated item like `(x, index) => ...`. Name `c` can be used for context of Roslyn callback.
