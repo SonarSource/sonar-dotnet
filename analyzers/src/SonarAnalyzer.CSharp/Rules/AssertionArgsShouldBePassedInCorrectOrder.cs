@@ -32,14 +32,14 @@ public sealed class AssertionArgsShouldBePassedInCorrectOrder : SonarDiagnosticA
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(c =>
         {
-        if (c.Node is InvocationExpressionSyntax { ArgumentList: { Arguments.Count: >= 2 } argumentList } invocation
-            && GetParameters(invocation.GetName()) is { } knownAssertParameters
-            && c.SemanticModel.GetSymbolInfo(invocation).AllSymbols()
-                .SelectMany(symbol =>
-                    symbol is IMethodSymbol { IsStatic: true, ContainingSymbol: INamedTypeSymbol container } methodSymbol
-                        ? knownAssertParameters.Select(knownParameters => FindWrongArguments(c.SemanticModel, container, methodSymbol, argumentList, knownParameters))
-                        : Enumerable.Empty<WrongArguments?>())
-                .FirstOrDefault(x => x is not null) is (Expected: var expected, Actual: var actual))
+            if (c.Node is InvocationExpressionSyntax { ArgumentList: { Arguments.Count: >= 2 } argumentList } invocation
+                && GetParameters(invocation.GetName()) is { } knownAssertParameters
+                && c.SemanticModel.GetSymbolInfo(invocation).AllSymbols()
+                    .SelectMany(symbol =>
+                        symbol is IMethodSymbol { IsStatic: true, ContainingSymbol: INamedTypeSymbol container } methodSymbol
+                            ? knownAssertParameters.Select(knownParameters => FindWrongArguments(c.SemanticModel, container, methodSymbol, argumentList, knownParameters))
+                            : Enumerable.Empty<WrongArguments?>())
+                    .FirstOrDefault(x => x is not null) is (Expected: var expected, Actual: var actual))
             {
                 c.ReportIssue(Diagnostic.Create(Rule, CreateLocation(expected, actual)));
             }
@@ -92,11 +92,12 @@ public sealed class AssertionArgsShouldBePassedInCorrectOrder : SonarDiagnosticA
             ? new(expected, actual)
             : null;
 
-    private static Location CreateLocation(SyntaxNode argument1, SyntaxNode argument2)
-    {
-        var array = new[] { argument1, argument2 }.OrderBy(x => x.Span);
-        return array.First().CreateLocation(array.Skip(1).Single());
-    }
+    private static Location CreateLocation(SyntaxNode argument1, SyntaxNode argument2) =>
+        argument1.Span.CompareTo(argument2.Span) switch
+        {
+            < 0 => argument1.CreateLocation(argument2),
+            _ => argument2.CreateLocation(argument1)
+        };
 
     private readonly record struct KnownAssertParameters(KnownType AssertClass, string ExpectedParamterName, string ActualParameterName);
     private readonly record struct WrongArguments(SyntaxNode Expected, SyntaxNode Actual);

@@ -30,8 +30,8 @@ namespace SonarAnalyzer.Helpers.Trackers
                        && argumentList.Arguments[index].Expression.HasConstantValue(context.SemanticModel);
 
         internal override object ConstArgumentForParameter(ObjectCreationContext context, string parameterName) =>
-            ObjectCreationFactory.Create(context.Node).ArgumentList is { } argumentList
-            && CSharpSyntaxHelper.ArgumentValuesForParameter(context.SemanticModel, argumentList, parameterName) is { Length: 1 } values
+            ObjectCreationFactory.TryCreate(context.Node, out var objectCreation)
+            && CSharpSyntaxHelper.ArgumentValuesForParameter(context.SemanticModel, objectCreation.ArgumentList, parameterName) is { Length: 1 } values
             && values[0] is ExpressionSyntax valueSyntax
                 ? valueSyntax.FindConstantValue(context.SemanticModel)
                 : null;

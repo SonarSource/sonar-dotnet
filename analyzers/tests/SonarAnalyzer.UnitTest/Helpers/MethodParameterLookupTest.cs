@@ -19,7 +19,6 @@
  */
 
 using System.Collections;
-using System.Linq.Expressions;
 using SonarAnalyzer.Common;
 using CSharpCodeAnalysis = Microsoft.CodeAnalysis.CSharp;
 using CSharpSyntax = Microsoft.CodeAnalysis.CSharp.Syntax;
