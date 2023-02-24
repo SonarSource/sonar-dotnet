@@ -51,7 +51,7 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
                     var references = PotentialReferencesOfMethodsInsideType(candidates, declaredType)
                                         .Where(x => x.Value.Any(id => ContainingTypeDeclaration(id) != declaredType))
                                         .Select(x => new { Refs = x, MethodSymbol = c.SemanticModel.GetDeclaredSymbol(x.Key) })
-                                        .Select(x => new { MethodDeclaration = x.Refs.Key, References = x.Refs.Value.Where(t => c.SemanticModel.GetSymbolInfo(t).Symbol == x.MethodSymbol).Select(t => new { Identifier = t, Type = ContainingTypeDeclaration(t) }) })
+                                        .Select(x => new { MethodDeclaration = x.Refs.Key, References = x.Refs.Value.Where(t => c.SemanticModel.GetSymbolInfo(t).Symbol is IMethodSymbol { } methodReference && (methodReference == x.MethodSymbol || methodReference.ConstructedFrom == x.MethodSymbol) && ContainingMethodDeclaration(t) != x.Refs.Key).Select(t => new { Identifier = t, Type = ContainingTypeDeclaration(t) }) })
                                         .Where(x => x.References.Any())
                                         .ToArray();
 
@@ -116,6 +116,12 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
             .Ancestors()
             .OfType<TypeDeclarationSyntax>()
             .First();
+
+    private static MethodDeclarationSyntax ContainingMethodDeclaration(IdentifierNameSyntax identifier) =>
+        identifier
+            .Ancestors()
+            .OfType<MethodDeclarationSyntax>()
+            .FirstOrDefault();
 
     private record MethodAndReferences(MethodDeclarationSyntax SyntaxNode, ISymbol MethodSymbol, ISymbol[] PotentialMethodReferences);
 
