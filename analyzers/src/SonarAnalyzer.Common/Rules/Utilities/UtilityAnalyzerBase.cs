@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules
         protected virtual bool AnalyzeTestProjects => true;
         protected string OutPath { get; set; }
         protected bool IsTestProject { get; set; }
-        protected override bool EnableConcurrentExecution => false;
+        protected override bool EnableConcurrentExecution => true;
 
         protected UtilityAnalyzerBase(string diagnosticId, string title) =>
             rule = DiagnosticDescriptorFactory.CreateUtility(diagnosticId, title);
