@@ -19,6 +19,7 @@
  */
 
 using System.Collections;
+using System.Linq.Expressions;
 using SonarAnalyzer.Common;
 using CSharpCodeAnalysis = Microsoft.CodeAnalysis.CSharp;
 using CSharpSyntax = Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -174,11 +175,8 @@ public class MethodParameterLookupTest
             {
                 class TestClass
                 {
-                    void Main()
-                    {
-                        dynamic d = 42;
+                    void Main(dynamic d) =>
                         AmbiguousCall(d);
-                    }
                 
                     void AmbiguousCall(int p) { }
 
@@ -186,8 +184,8 @@ public class MethodParameterLookupTest
                 }
             }
             """;
-        var compiler = new SnippetCompiler(source, false, AnalyzerLanguage.CSharp);
-        var lookup = new CSharpMethodParameterLookup(compiler.GetNodes<CSharpSyntax.InvocationExpressionSyntax>().Single(), compiler.SemanticModel);
+        var (tree, model) = TestHelper.CompileCS(source);
+        var lookup = new CSharpMethodParameterLookup(tree.GetRoot().DescendantNodes().OfType<CSharpSyntax.InvocationExpressionSyntax>().Single(), model);
 
         lookup.TryGetSyntax("p", out var expressions).Should().BeTrue();
         expressions.Should().BeEquivalentTo(new { Identifier = new { ValueText = "d" } });
@@ -209,11 +207,58 @@ public class MethodParameterLookupTest
                 End Sub
             End Module
             """;
-        var compiler = new SnippetCompiler(source, true, AnalyzerLanguage.VisualBasic);
-        var lookup = new VisualBasicMethodParameterLookup(compiler.GetNodes<VBSyntax.InvocationExpressionSyntax>().Single(), compiler.SemanticModel);
+        var (tree, model) = TestHelper.CompileIgnoreErrorsVB(source);
+        var lookup = new VisualBasicMethodParameterLookup(tree.GetRoot().DescendantNodes().OfType<VBSyntax.InvocationExpressionSyntax>().Single(), model);
 
         lookup.TryGetSyntax("a", out var expressions).Should().BeTrue();
         expressions.Should().BeEquivalentTo(new { Token = new { ValueText = "42" } });
+    }
+
+    [TestMethod]
+    public void TestMethodParameterLookup_CS_MultipleCandidatesWithDifferentParameters()
+    {
+        var source = """
+            namespace Test
+            {
+                class TestClass
+                {
+                    void Main(dynamic d) =>
+                        AmbiguousCall(d, d);
+                
+                    void AmbiguousCall(int a, int b) { }
+
+                    void AmbiguousCall(string b, string a) { }
+                }
+            }
+            """;
+        var (tree, model) = TestHelper.CompileCS(source);
+        var lookup = new CSharpMethodParameterLookup(tree.GetRoot().DescendantNodes().OfType<CSharpSyntax.InvocationExpressionSyntax>().Single(), model);
+
+        lookup.TryGetSyntax("a", out var expressions).Should().BeFalse();
+        expressions.Should().BeEmpty();
+    }
+
+    [TestMethod]
+    public void TestMethodParameterLookup_VB_MultipleCandidatesWithDifferentParameters()
+    {
+        var source = """
+            Module Test
+                Sub Main()
+                    Overloaded(42, "")
+                End Sub
+
+                Sub Overloaded(a As Integer, b As Integer)
+                End Sub
+
+                Sub Overloaded(b As Boolean, a As Boolean)
+                End Sub
+            End Module
+            """;
+        var (tree, model) = TestHelper.CompileIgnoreErrorsVB(source);
+        var lookup = new VisualBasicMethodParameterLookup(tree.GetRoot().DescendantNodes().OfType<VBSyntax.InvocationExpressionSyntax>().Single(), model);
+
+        lookup.TryGetSyntax("a", out var expressions).Should().BeFalse();
+        expressions.Should().BeEmpty();
     }
 
     [TestMethod]
@@ -231,10 +276,11 @@ public class MethodParameterLookupTest
                 }
             }
             """;
-        var compiler = new SnippetCompiler(source, true, AnalyzerLanguage.CSharp);
-        var lookup = new CSharpMethodParameterLookup(compiler.GetNodes<CSharpSyntax.InvocationExpressionSyntax>().Single(), compiler.SemanticModel);
+        var (tree, model) = TestHelper.CompileIgnoreErrorsCS(source);
+        var lookup = new CSharpMethodParameterLookup(tree.GetRoot().DescendantNodes().OfType<CSharpSyntax.InvocationExpressionSyntax>().Single(), model);
 
-        lookup.TryGetSyntax("p", out _).Should().BeFalse();
+        lookup.TryGetSyntax("p", out var expressions).Should().BeFalse();
+        expressions.Should().BeEmpty();
     }
 
     [TestMethod]
@@ -247,10 +293,11 @@ public class MethodParameterLookupTest
                 End Sub
             End Module
             """;
-        var compiler = new SnippetCompiler(source, true, AnalyzerLanguage.VisualBasic);
-        var lookup = new VisualBasicMethodParameterLookup(compiler.GetNodes<VBSyntax.InvocationExpressionSyntax>().Single(), compiler.SemanticModel);
+        var (tree, model) = TestHelper.CompileIgnoreErrorsVB(source);
+        var lookup = new VisualBasicMethodParameterLookup(tree.GetRoot().DescendantNodes().OfType<VBSyntax.InvocationExpressionSyntax>().Single(), model);
 
         lookup.TryGetSyntax("a", out var expressions).Should().BeFalse();
+        expressions.Should().BeEmpty();
     }
 
     private abstract class InspectionBase<TArgumentSyntax, TInvocationSyntax>

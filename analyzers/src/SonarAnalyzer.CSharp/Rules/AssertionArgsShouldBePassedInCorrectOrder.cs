@@ -18,11 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.ComponentModel;
-using System.Linq.Expressions;
-using System.Xml.Linq;
-using Microsoft.CodeAnalysis;
-
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -81,7 +76,11 @@ public sealed class AssertionArgsShouldBePassedInCorrectOrder : SonarDiagnosticA
             _ => null
         };
 
-    private static WrongArguments? FindWrongArguments(SemanticModel semanticModel, INamedTypeSymbol container, IMethodSymbol symbol, ArgumentListSyntax argumentList, KnownAssertParameters knownParameters) =>
+    private static WrongArguments? FindWrongArguments(SemanticModel semanticModel,
+                                                      INamedTypeSymbol container,
+                                                      IMethodSymbol symbol,
+                                                      ArgumentListSyntax argumentList,
+                                                      KnownAssertParameters knownParameters) =>
         container.Is(knownParameters.AssertClass)
         && CSharpFacade.Instance.MethodParameterLookup(argumentList, symbol) is var parameterLookup
         && parameterLookup.TryGetSyntax(knownParameters.ExpectedParamterName, out var expectedArguments)

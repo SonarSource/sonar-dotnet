@@ -29,7 +29,7 @@ internal class CSharpMethodParameterLookup : MethodParameterLookupBase<ArgumentS
         : this(invocation.ArgumentList, methodSymbol) { }
 
     public CSharpMethodParameterLookup(ArgumentListSyntax argumentList, SemanticModel semanticModel)
-        : base(argumentList.Arguments, argumentList == null ? null : semanticModel.GetSymbolInfo(argumentList.Parent)) { }
+        : base(argumentList.Arguments, semanticModel.GetSymbolInfo(argumentList.Parent)) { }
 
     public CSharpMethodParameterLookup(ArgumentListSyntax argumentList, IMethodSymbol methodSymbol)
         : base(argumentList.Arguments, methodSymbol) { }
