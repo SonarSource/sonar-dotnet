@@ -138,30 +138,30 @@ public sealed class RedundantCast : SonarDiagnosticAnalyzer
 
     private static ITypeSymbol GetElementType(InvocationExpressionSyntax invocation, IMethodSymbol methodSymbol, SemanticModel semanticModel)
     {
-        ExpressionSyntax collection;
-        if (methodSymbol.MethodKind == MethodKind.Ordinary)
-        {
-            var firstArgument = invocation.ArgumentList.Arguments.FirstOrDefault();
-            if (firstArgument == default)
+        return CollectionExpression() is { } collection
+            ? semanticModel.GetTypeInfo(collection).Type switch
             {
-                return null;
+                INamedTypeSymbol { TypeArguments: { Length: 1 } typeArguments } => typeArguments.First(),
+                IArrayTypeSymbol { Rank: 1 } arrayType => arrayType.ElementType,    // casting is necessary for multidimensional arrays
+                _ => null
             }
-            collection = firstArgument.Expression;
-        }
-        else
-        {
-            if (invocation.Expression is not MemberAccessExpressionSyntax memberAccess)
-            {
-                return null;
-            }
-            collection = memberAccess.Expression;
-        }
+            : null;
 
-        return semanticModel.GetTypeInfo(collection).Type switch
+        ExpressionSyntax CollectionExpression()
         {
-            INamedTypeSymbol { TypeArguments: { Length: 1 } typeArguments } => typeArguments.First(),
-            IArrayTypeSymbol { Rank: 1 } arrayType => arrayType.ElementType,    // casting is necessary for multidimensional arrays
-            _ => null
-        };
+            if (methodSymbol.MethodKind == MethodKind.Ordinary)
+            {
+                if (invocation.ArgumentList.Arguments.FirstOrDefault() is { Expression: { } firstArgumentExpression })
+                {
+                    return firstArgumentExpression;
+                }
+            }
+            else if (invocation is { Expression: MemberAccessExpressionSyntax { Expression: { } memberAccessExpression } })
+            {
+                return memberAccessExpression;
+            }
+
+            return null;
+        }
     }
 }
