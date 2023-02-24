@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules
         {
             var tokens = syntaxTree.GetRoot().DescendantTokens();
             var identifierTokenKind = Language.SyntaxKind.IdentifierToken;  // Performance optimization
-            var skipIdentifierTokens = tokens.Count(token => Language.Syntax.IsKind(token, identifierTokenKind)) > IdentifierTokenCountThreshold;
+            var skipIdentifierTokens = tokens.Take(IdentifierTokenCountThreshold + 1).Count(token => Language.Syntax.IsKind(token, identifierTokenKind)) > IdentifierTokenCountThreshold;
 
             var tokenClassifier = GetTokenClassifier(semanticModel, skipIdentifierTokens);
             var triviaClassifier = GetTriviaClassifier();
@@ -170,13 +170,13 @@ namespace SonarAnalyzer.Rules
             public TokenTypeInfo.Types.TokenInfo ClassifyTrivia(SyntaxTrivia trivia) =>
                 trivia switch
                 {
-                    _ when IsRegularComment(trivia) => CollectClassified(trivia.SyntaxTree, TokenType.Comment, trivia.Span),
+                    _ when IsRegularComment(trivia) => TokenInfo(trivia.SyntaxTree, TokenType.Comment, trivia.Span),
                     _ when IsDocComment(trivia) => ClassifyDocComment(trivia),
                     // Handle preprocessor directives here
                     _ => null,
                 };
 
-            private TokenTypeInfo.Types.TokenInfo CollectClassified(SyntaxTree tree, TokenType tokenType, TextSpan span) =>
+            private TokenTypeInfo.Types.TokenInfo TokenInfo(SyntaxTree tree, TokenType tokenType, TextSpan span) =>
                 new()
                 {
                     TokenType = tokenType,
@@ -184,7 +184,7 @@ namespace SonarAnalyzer.Rules
                 };
 
             private TokenTypeInfo.Types.TokenInfo ClassifyDocComment(SyntaxTrivia trivia) =>
-                CollectClassified(trivia.SyntaxTree, TokenType.Comment, trivia.FullSpan);
+                TokenInfo(trivia.SyntaxTree, TokenType.Comment, trivia.FullSpan);
         }
     }
 }
