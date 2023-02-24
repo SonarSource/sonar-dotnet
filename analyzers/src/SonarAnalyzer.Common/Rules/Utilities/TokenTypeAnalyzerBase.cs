@@ -68,7 +68,7 @@ namespace SonarAnalyzer.Rules
                 FilePath = syntaxTree.FilePath
             };
 
-            tokenTypeInfo.TokenInfo.AddRange(spans.OrderBy(s => s.TextRange.StartLine).ThenBy(s => s.TextRange.StartOffset));
+            tokenTypeInfo.TokenInfo.AddRange(spans);
             return tokenTypeInfo;
 
             void IterateTrivia(SyntaxTriviaList triviaList)
@@ -118,34 +118,20 @@ namespace SonarAnalyzer.Rules
                 string.IsNullOrWhiteSpace(token.ValueText)
                 ? null
                 : new()
-                    {
-                        TokenType = tokenType,
-                        TextRange = GetTextRange(token.GetLocation().GetLineSpan()),
-                    };
+                {
+                    TokenType = tokenType,
+                    TextRange = GetTextRange(token.GetLocation().GetLineSpan()),
+                };
 
-            public TokenTypeInfo.Types.TokenInfo ClassifyToken(SyntaxToken token)
-            {
-                if (IsKeyword(token))
+            public TokenTypeInfo.Types.TokenInfo ClassifyToken(SyntaxToken token) =>
+                token switch
                 {
-                    return TokenInfo(token, TokenType.Keyword);
-                }
-                else if (IsStringLiteral(token))
-                {
-                    return TokenInfo(token, TokenType.StringLiteral);
-                }
-                else if (IsNumericLiteral(token))
-                {
-                    return TokenInfo(token, TokenType.NumericLiteral);
-                }
-                else if (IsIdentifier(token) && !skipIdentifiers)
-                {
-                    return ClassifyIdentifier(token);
-                }
-                else
-                {
-                    return null;
-                }
-            }
+                    _ when IsKeyword(token) => TokenInfo(token, TokenType.Keyword),
+                    _ when IsStringLiteral(token) => TokenInfo(token, TokenType.StringLiteral),
+                    _ when IsNumericLiteral(token) => TokenInfo(token, TokenType.NumericLiteral),
+                    _ when IsIdentifier(token) && !skipIdentifiers => ClassifyIdentifier(token),
+                    _ => null,
+                };
 
             private TokenTypeInfo.Types.TokenInfo ClassifyIdentifier(SyntaxToken token)
             {
@@ -163,37 +149,17 @@ namespace SonarAnalyzer.Rules
                 }
             }
 
-            private TokenTypeInfo.Types.TokenInfo ClassifyIdentifier(SyntaxToken token, ISymbol symbol)
-            {
-                if (symbol.Kind == SymbolKind.Alias)
+            private TokenTypeInfo.Types.TokenInfo ClassifyIdentifier(SyntaxToken token, ISymbol symbol) =>
+                symbol switch
                 {
-                    return ClassifyIdentifier(token, ((IAliasSymbol)symbol).Target);
-                }
-                else if (symbol is IMethodSymbol ctorSymbol && ConstructorKinds.Contains(ctorSymbol.MethodKind))
-                {
-                    return TokenInfo(token, TokenType.TypeName);
-                }
-                else if (token.ToString() == "var" && VarSymbolKinds.Contains(symbol.Kind))
-                {
-                    return TokenInfo(token, TokenType.Keyword);
-                }
-                else if (token.ToString() == "value" && symbol.Kind == SymbolKind.Parameter && symbol.IsImplicitlyDeclared)
-                {
-                    return TokenInfo(token, TokenType.Keyword);
-                }
-                else if (symbol.Kind == SymbolKind.NamedType || symbol.Kind == SymbolKind.TypeParameter)
-                {
-                    return TokenInfo(token, TokenType.TypeName);
-                }
-                else if (symbol.Kind == SymbolKind.DynamicType)
-                {
-                    return TokenInfo(token, TokenType.Keyword);
-                }
-                else
-                {
-                    return null;
-                }
-            }
+                    IAliasSymbol alias => ClassifyIdentifier(token, alias.Target),
+                    IMethodSymbol ctorSymbol when ConstructorKinds.Contains(ctorSymbol.MethodKind) => TokenInfo(token, TokenType.TypeName),
+                    _ when token.ValueText == "var" && VarSymbolKinds.Contains(symbol.Kind) => TokenInfo(token, TokenType.Keyword),
+                    { Kind: SymbolKind.Parameter, IsImplicitlyDeclared: true } when token.ValueText == "value" => TokenInfo(token, TokenType.Keyword),
+                    { Kind: SymbolKind.NamedType or SymbolKind.TypeParameter } => TokenInfo(token, TokenType.TypeName),
+                    { Kind: SymbolKind.DynamicType } => TokenInfo(token, TokenType.Keyword),
+                    _ => null,
+                };
         }
 
         protected abstract class TriviaClassifierBase
@@ -201,25 +167,14 @@ namespace SonarAnalyzer.Rules
             protected abstract bool IsDocComment(SyntaxTrivia trivia);
             protected abstract bool IsRegularComment(SyntaxTrivia trivia);
 
-            public TokenTypeInfo.Types.TokenInfo ClassifyTrivia(SyntaxTrivia trivia)
-            {
-                if (IsRegularComment(trivia))
+            public TokenTypeInfo.Types.TokenInfo ClassifyTrivia(SyntaxTrivia trivia) =>
+                trivia switch
                 {
-                    return CollectClassified(trivia.SyntaxTree, TokenType.Comment, trivia.Span);
-                }
-                else if (IsDocComment(trivia))
-                {
-                    return ClassifyDocComment(trivia);
-                }
-                else
-                {
-                    return null;
-                }
-                // Handle preprocessor directives here
-            }
-
-            private TokenTypeInfo.Types.TokenInfo ClassifyDocComment(SyntaxTrivia trivia) =>
-                CollectClassified(trivia.SyntaxTree, TokenType.Comment, trivia.FullSpan);
+                    _ when IsRegularComment(trivia) => CollectClassified(trivia.SyntaxTree, TokenType.Comment, trivia.Span),
+                    _ when IsDocComment(trivia) => ClassifyDocComment(trivia),
+                    // Handle preprocessor directives here
+                    _ => null,
+                };
 
             private TokenTypeInfo.Types.TokenInfo CollectClassified(SyntaxTree tree, TokenType tokenType, TextSpan span) =>
                 new()
@@ -227,6 +182,9 @@ namespace SonarAnalyzer.Rules
                     TokenType = tokenType,
                     TextRange = GetTextRange(Location.Create(tree, span).GetLineSpan())
                 };
+
+            private TokenTypeInfo.Types.TokenInfo ClassifyDocComment(SyntaxTrivia trivia) =>
+                CollectClassified(trivia.SyntaxTree, TokenType.Comment, trivia.FullSpan);
         }
     }
 }
