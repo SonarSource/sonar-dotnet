@@ -41,16 +41,16 @@ public sealed class LockedFieldShouldBePrivateAndReadonly : SonarDiagnosticAnaly
         }
         else
         {
-            var symbol = context.SemanticModel.GetSymbolInfo(expression).Symbol;
-            if (IsOfTypeString(expression, symbol))
+            var lazySymbol = new Lazy<ISymbol>(() => context.SemanticModel.GetSymbolInfo(expression).Symbol);
+            if (IsOfTypeString(expression, lazySymbol))
             {
                 ReportIssue("Strings can be interned, and should not be used for locking.");
             }
-            else if (expression is IdentifierNameSyntax && symbol is ILocalSymbol lockedSymbol)
+            else if (expression is IdentifierNameSyntax && lazySymbol.Value is ILocalSymbol lockedSymbol)
             {
                 ReportIssue($"'{lockedSymbol.Name}' is a local variable, and should not be used for locking.");
             }
-            else if (FieldNotReadonlyOrNotPrivate(expression, symbol) is { } lockedField)
+            else if (FieldNotReadonlyOrNotPrivate(expression, lazySymbol) is { } lockedField)
             {
                 ReportIssue(FieldInSameTypeAs(lockedField, context.ContainingSymbol?.ContainingType) is { } containingType
                     ? $"Use members from '{containingType.ToMinimalDisplayString(context.SemanticModel, expression.SpanStart)}' for locking."
@@ -70,13 +70,13 @@ public sealed class LockedFieldShouldBePrivateAndReadonly : SonarDiagnosticAnaly
             SyntaxKind.ImplicitArrayCreationExpression,
             SyntaxKind.QueryExpression);
 
-    private static bool IsOfTypeString(ExpressionSyntax expression, ISymbol symbol) =>
+    private static bool IsOfTypeString(ExpressionSyntax expression, Lazy<ISymbol> lazySymbol) =>
         expression.IsAnyKind(SyntaxKind.StringLiteralExpression, SyntaxKind.InterpolatedStringExpression)
-        || symbol.GetSymbolType().Is(KnownType.System_String);
+        || lazySymbol.Value.GetSymbolType().Is(KnownType.System_String);
 
-    private static IFieldSymbol FieldNotReadonlyOrNotPrivate(ExpressionSyntax expression, ISymbol symbol) =>
+    private static IFieldSymbol FieldNotReadonlyOrNotPrivate(ExpressionSyntax expression, Lazy<ISymbol> lazySymbol) =>
         expression.IsAnyKind(SyntaxKind.IdentifierName, SyntaxKind.SimpleMemberAccessExpression)
-        && symbol is IFieldSymbol lockedField
+        && lazySymbol.Value is IFieldSymbol lockedField
         && (!lockedField.IsReadOnly || lockedField.GetEffectiveAccessibility() != Accessibility.Private)
             ? lockedField
             : null;
