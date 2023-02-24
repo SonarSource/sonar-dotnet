@@ -27,7 +27,17 @@ Static fields and properties should be placed before instance ones.
 
 Static methods are preferred to be after instance methods.
 
-Individual members must be separated by empty line, except sequence of constants, fields and abstract members. These should not be separated by empty lines.
+Methods which are called by other methods in the same category should be placed below the callers.
+
+```csharp
+public int Bar() => 2;
+
+int CallerOne(int x) => Foo() + x;
+
+int CallerTwo(int x) => Foo() + x + Bar();
+
+int Foo() =>  1; // this is placed at the bottom, as it's a "leaf" method within the same category
+```
 
 Local functions should always be placed at the end of a method.
 
@@ -39,6 +49,10 @@ Local functions should always be placed at the end of a method.
         int LocalFunction(int x) => return x;
     }
 ```
+
+### Separation
+
+Individual members must be separated by empty line, except sequence of constants, fields and abstract members. These should not be separated by empty lines.
 
 ## Naming conventions
 
