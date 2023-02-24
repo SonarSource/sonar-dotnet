@@ -168,6 +168,26 @@ public class MethodParameterLookupTest
     }
 
     [TestMethod]
+    public void TestMethodParameterLookup_CS_ThrowsException_NonParams()
+    {
+        var c = new CSharpInspection(SourceCS);
+        var lookupThrow = c.CreateLookup(7, "WithParams");
+
+        var invalidOperationEx = Assert.ThrowsException<InvalidOperationException>(() => lookupThrow.TryGetNonParamsSyntax(lookupThrow.MethodSymbol.Parameters.Single(), out var argument));
+        invalidOperationEx.Message.Should().Be("Cannot call TryGetNonParamsSyntax on ParamArray/params parameters.");
+    }
+
+    [TestMethod]
+    public void TestMethodParameterLookup_VB_ThrowsException_NonParams()
+    {
+        var c = new VisualBasicInspection(SourceVB);
+        var lookupThrow = c.CreateLookup(5, "WithParams");
+
+        var invalidOperationEx = Assert.ThrowsException<InvalidOperationException>(() => lookupThrow.TryGetNonParamsSyntax(lookupThrow.MethodSymbol.Parameters.Single(), out var argument));
+        invalidOperationEx.Message.Should().Be("Cannot call TryGetNonParamsSyntax on ParamArray/params parameters.");
+    }
+
+    [TestMethod]
     public void TestMethodParameterLookup_CS_MultipleCandidates()
     {
         var source = """

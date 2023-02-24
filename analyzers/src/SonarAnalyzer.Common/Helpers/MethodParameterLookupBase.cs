@@ -32,7 +32,7 @@ public interface IMethodParameterLookup
 internal abstract class MethodParameterLookupBase<TArgumentSyntax> : IMethodParameterLookup
     where TArgumentSyntax : SyntaxNode
 {
-    private readonly SeparatedSyntaxList<TArgumentSyntax>? argumentList;
+    private readonly SeparatedSyntaxList<TArgumentSyntax> argumentList;
 
     protected abstract SyntaxToken? GetNameColonArgumentIdentifier(TArgumentSyntax argument);
     protected abstract SyntaxNode Expression(TArgumentSyntax argument);
@@ -61,8 +61,7 @@ internal abstract class MethodParameterLookupBase<TArgumentSyntax> : IMethodPara
         parameter = null;
         var arg = argument as TArgumentSyntax ?? throw new ArgumentException($"{nameof(argument)} must be of type {typeof(TArgumentSyntax)}", nameof(argument));
 
-        if (!argumentList.HasValue
-            || !argumentList.Value.Contains(arg)
+        if (!argumentList.Contains(arg)
             || methodSymbol == null
             || methodSymbol.IsVararg)
         {
@@ -75,7 +74,7 @@ internal abstract class MethodParameterLookupBase<TArgumentSyntax> : IMethodPara
             return parameter != null;
         }
 
-        var index = argumentList.Value.IndexOf(arg);
+        var index = argumentList.IndexOf(arg);
         if (index >= methodSymbol.Parameters.Length)
         {
             var lastParameter = methodSymbol.Parameters.Last();
@@ -140,14 +139,11 @@ internal abstract class MethodParameterLookupBase<TArgumentSyntax> : IMethodPara
 
     private IEnumerable<NodeAndSymbol<TArgumentSyntax, IParameterSymbol>> GetAllArgumentParameterMappings(IMethodSymbol methodSymbol)
     {
-        if (argumentList.HasValue)
+        foreach (var argument in argumentList)
         {
-            foreach (var argument in argumentList)
+            if (TryGetSymbol(argument, methodSymbol, out var parameter))
             {
-                if (TryGetSymbol(argument, methodSymbol, out var parameter))
-                {
-                    yield return new NodeAndSymbol<TArgumentSyntax, IParameterSymbol>(argument, parameter);
-                }
+                yield return new NodeAndSymbol<TArgumentSyntax, IParameterSymbol>(argument, parameter);
             }
         }
     }
