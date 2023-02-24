@@ -110,10 +110,10 @@ internal abstract class MethodParameterLookupBase<TArgumentSyntax> : IMethodPara
             ? candidateArgumentLists[0]
             : Enumerable.Empty<SyntaxNode>().ToImmutableArray();
         return !expressions.IsEmpty;
-    }
 
-    private static bool AllArgumentsAreTheSame(ImmutableArray<ImmutableArray<SyntaxNode>> candidateArgumentLists) =>
-        candidateArgumentLists.Skip(1).All(x => x.SequenceEqual(candidateArgumentLists[0]));
+        static bool AllArgumentsAreTheSame(ImmutableArray<ImmutableArray<SyntaxNode>> candidateArgumentLists) =>
+            candidateArgumentLists.Skip(1).All(x => x.SequenceEqual(candidateArgumentLists[0]));
+    }
 
     /// <summary>
     /// Method returns zero or one argument syntax that represents syntax passed to the parameter.

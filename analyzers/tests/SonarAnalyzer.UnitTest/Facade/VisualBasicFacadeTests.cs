@@ -46,7 +46,7 @@ public class VisualBasicFacadeTests
     }
 
     [TestMethod]
-    public void MethodParameterLookupAlternativeOverload()
+    public void MethodParameterLookup_SemanticModelOverload()
     {
         var sut = VisualBasicFacade.Instance;
         var code = """

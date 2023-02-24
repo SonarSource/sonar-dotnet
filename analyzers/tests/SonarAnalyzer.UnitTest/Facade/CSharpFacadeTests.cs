@@ -47,7 +47,7 @@ public class CSharpFacadeTests
     }
 
     [TestMethod]
-    public void MethodParameterLookupAlternativeOverload()
+    public void MethodParameterLookup_SemanticModelOverload()
     {
         var sut = CSharpFacade.Instance;
         var code = """
