@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules
         {
             var tokens = syntaxTree.GetRoot().DescendantTokens();
             var identifierTokenKind = Language.SyntaxKind.IdentifierToken;  // Performance optimization
-            var skipIdentifierTokens = tokens.Take(IdentifierTokenCountThreshold + 1).Count(token => Language.Syntax.IsKind(token, identifierTokenKind)) > IdentifierTokenCountThreshold;
+            var skipIdentifierTokens = tokens.Where(token => Language.Syntax.IsKind(token, identifierTokenKind)).Take(IdentifierTokenCountThreshold + 1).Count() > IdentifierTokenCountThreshold;
 
             var tokenClassifier = GetTokenClassifier(semanticModel, skipIdentifierTokens);
             var triviaClassifier = GetTriviaClassifier();
