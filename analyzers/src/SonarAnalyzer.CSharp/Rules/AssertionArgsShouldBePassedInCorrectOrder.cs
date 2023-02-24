@@ -71,7 +71,7 @@ public sealed class AssertionArgsShouldBePassedInCorrectOrder : SonarDiagnosticA
                 },
             "Equal" or "Same" or "NotSame" => new KnownAssertParameters[]
                 {
-                    new KnownAssertParameters(KnownType.Xunit_Assert, "expected", "actual")
+                    new(KnownType.Xunit_Assert, "expected", "actual")
                 },
             _ => null
         };
