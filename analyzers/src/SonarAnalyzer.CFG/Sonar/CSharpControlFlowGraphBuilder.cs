@@ -1287,15 +1287,6 @@ namespace SonarAnalyzer.CFG.Sonar
                 return currentBlock;
             }
 
-            // Unsupported:
-            // Parenthesized
-            // BinaryPattern
-            // UnaryPattern
-            // VarPattern
-            // TypePattern
-            // RelationalPattern
-            // ListPattern
-            // (SlicePattern)
             throw new NotSupportedException($"{patternSyntaxWrapper.SyntaxNode.Kind()}");
         }
 
