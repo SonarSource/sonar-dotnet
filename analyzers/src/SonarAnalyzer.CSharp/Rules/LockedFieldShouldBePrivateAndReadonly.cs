@@ -42,7 +42,7 @@ public sealed class LockedFieldShouldBePrivateAndReadonly : SonarDiagnosticAnaly
         else
         {
             var symbol = context.SemanticModel.GetSymbolInfo(expression).Symbol;
-            if (IsOfTypeString(expression, symbol))
+            if (IsOfTypeString(context.SemanticModel, expression))
             {
                 ReportIssue("Strings can be interned, and should not be used for locking.");
             }
@@ -50,18 +50,11 @@ public sealed class LockedFieldShouldBePrivateAndReadonly : SonarDiagnosticAnaly
             {
                 ReportIssue($"'{lockedSymbol.Name}' is a local variable, and should not be used for locking.");
             }
-            else if (expression is (IdentifierNameSyntax or MemberAccessExpressionSyntax)
-                && symbol is IFieldSymbol lockedField
-                && (!lockedField.IsReadOnly || lockedField.GetEffectiveAccessibility() != Accessibility.Private))
+            else if (FieldNotReadonlyOrNotPrivate(expression, symbol) is { } lockedField)
             {
-                if (lockedField.ContainingType is { } lockedFieldType && context.ContainingSymbol?.ContainingType is { } containingType && !lockedFieldType.Equals(containingType))
-                {
-                    ReportIssue($"Use members from '{containingType.ToMinimalDisplayString(context.SemanticModel, expression.SpanStart)}' for locking.");
-                }
-                else
-                {
-                    ReportIssue($"'{lockedField.Name}' is not 'private readonly', and should not be used for locking.");
-                }
+                ReportIssue(FieldInSameTypeAs(lockedField, context.ContainingSymbol?.ContainingType) is { } containingType
+                    ? $"Use members from '{containingType.ToMinimalDisplayString(context.SemanticModel, expression.SpanStart)}' for locking."
+                    : $"'{lockedField.Name}' is not 'private readonly', and should not be used for locking.");
             }
         }
 
@@ -70,13 +63,26 @@ public sealed class LockedFieldShouldBePrivateAndReadonly : SonarDiagnosticAnaly
     }
 
     private static bool IsCreation(ExpressionSyntax expression) =>
-        expression is ObjectCreationExpressionSyntax
-            or AnonymousObjectCreationExpressionSyntax
-            or ArrayCreationExpressionSyntax
-            or ImplicitArrayCreationExpressionSyntax
-            or QueryExpressionSyntax;
+        expression.IsAnyKind(
+            SyntaxKind.ObjectCreationExpression,
+            SyntaxKind.AnonymousObjectCreationExpression,
+            SyntaxKind.ArrayCreationExpression,
+            SyntaxKind.ImplicitArrayCreationExpression,
+            SyntaxKind.QueryExpression);
 
-    private static bool IsOfTypeString(ExpressionSyntax expression, ISymbol symbol) =>
+    private static bool IsOfTypeString(SemanticModel model, ExpressionSyntax expression) =>
         expression.IsAnyKind(SyntaxKind.StringLiteralExpression, SyntaxKind.InterpolatedStringExpression)
-            || (symbol.GetSymbolType() is { } type && type.Is(KnownType.System_String));
+            || expression.IsKnownType(KnownType.System_String, model);
+
+    private static IFieldSymbol FieldNotReadonlyOrNotPrivate(ExpressionSyntax expression, ISymbol symbol) =>
+        expression.IsAnyKind(SyntaxKind.IdentifierName, SyntaxKind.SimpleMemberAccessExpression)
+            && symbol is IFieldSymbol lockedField
+            && (!lockedField.IsReadOnly || lockedField.GetEffectiveAccessibility() != Accessibility.Private)
+                ? lockedField
+                : null;
+
+    private static ITypeSymbol FieldInSameTypeAs(IFieldSymbol field, INamedTypeSymbol type) =>
+        field.ContainingType is { } fieldType && type is { } && !fieldType.Equals(type)
+            ? type
+            : null;
 }

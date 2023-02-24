@@ -24,8 +24,8 @@ class Test
         lock (Test.staticReadonlyField) { }
         lock (Test.staticReadWriteField) { }             // Noncompliant {{'staticReadWriteField' is not 'private readonly', and should not be used for locking.}}
         //    ^^^^^^^^^^^^^^^^^^^^^^^^^
-        lock (AnotherClass.staticReadonlyField) { }      // Noncompliant {{Use fields from 'Test' for locking.}}
-        lock (AnotherClass.staticReadWriteField) { }     // Noncompliant {{Use fields from 'Test' for locking.}}
+        lock (AnotherClass.staticReadonlyField) { }      // Noncompliant {{Use members from 'Test' for locking.}}
+        lock (AnotherClass.staticReadWriteField) { }     // Noncompliant {{Use members from 'Test' for locking.}}
         //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     }
 
@@ -149,7 +149,7 @@ class TestExplicitCast
 
     void Test()
     {
-        lock ((AnotherClass)readonlyField) { } // Compliant, the cast operator can build
+        lock ((AnotherClass)readonlyField) { } // Compliant, the cast operator can run arbitrary code
     }
 }
 

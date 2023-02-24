@@ -46,6 +46,14 @@ public class LockedFieldShouldBePrivateAndReadonlyTest
             .Verify();
 
     [TestMethod]
+    public void LockedFieldShouldBePrivateAndReadonly_CSharp9_TopLevelStatements() =>
+        builder
+            .AddPaths("LockedFieldShouldBePrivateAndReadonly.CSharp9.TopLevelStatements.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .WithTopLevelStatements()
+            .Verify();
+
+    [TestMethod]
     public void LockedFieldShouldBePrivateAndReadonly_CSharp11() =>
         builder
             .AddPaths("LockedFieldShouldBePrivateAndReadonly.CSharp11.cs")
