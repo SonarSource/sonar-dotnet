@@ -51,7 +51,7 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
                     var references = PotentialReferencesOfMethodsInsideType(candidates, declaredType)
                                         .Where(x => x.Value.Any(id => ContainingTypeDeclaration(id) != declaredType))
                                         .Select(x => new { Refs = x, MethodSymbol = c.SemanticModel.GetDeclaredSymbol(x.Key) })
-                                        .Select(x => new { MethodDeclaration = x.Refs.Key, References = x.Refs.Value.Where(t => c.SemanticModel.GetSymbolInfo(t).Symbol is IMethodSymbol { } methodReference && (methodReference == x.MethodSymbol || methodReference.ConstructedFrom == x.MethodSymbol) && ContainingMethodDeclaration(t) != x.Refs.Key).Select(t => new { Identifier = t, Type = ContainingTypeDeclaration(t) }) })
+                                        .Select(x => new { MethodDeclaration = x.Refs.Key, References = x.Refs.Value.Where(t => MethodReferenceFrom(t, c.SemanticModel) is { } methodReference && (methodReference == x.MethodSymbol || methodReference.ConstructedFrom == x.MethodSymbol) && ContainingMethodDeclaration(t) != x.Refs.Key).Select(t => new { Identifier = t, Type = ContainingTypeDeclaration(t) }) })
                                         .Where(x => x.References.Any())
                                         .ToArray();
 
@@ -63,16 +63,14 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
                             continue;
                         }
 
-                        // scenario 2: used only in one of the nested classes
-                        if (reference.References.Select(x => x.Type).Distinct().Count() == 1)
+                        var typeToMoveInto = LowestCommonAncestorSelf(reference.References.Select(x => x.Type));
+                        if (typeToMoveInto != declaredType)
                         {
-                            string nestedClassName = reference.References.First().Type.Identifier.ValueText;
-                            c.ReportIssue(Diagnostic.Create(Rule, reference.MethodDeclaration.Identifier.GetLocation(), nestedClassName));
+                            string nestedTypeName = typeToMoveInto.Identifier.ValueText;
+                            c.ReportIssue(Diagnostic.Create(Rule, reference.MethodDeclaration.Identifier.GetLocation(), nestedTypeName));
                         }
-
-                        // scenario 3: used by multiple nested classes
                     }
-                    }
+                }
             },
             AnalyzedSyntaxKinds);
 
@@ -123,7 +121,32 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
             .OfType<MethodDeclarationSyntax>()
             .FirstOrDefault();
 
+    private static TypeDeclarationSyntax LowestCommonAncestorSelf(IEnumerable<TypeDeclarationSyntax> declaredTypes)
+    {
+        var treePaths = declaredTypes.Distinct().Select(x => x.AncestorsAndSelf().OfType<TypeDeclarationSyntax>().Reverse().ToArray()).ToArray();
+        int minPathLength = treePaths.Select(x => x.Length).Min();
+        for (int i = 0; i < minPathLength; i++)
+        {
+            if (!treePaths.All(x => x[i] == treePaths.First()[i]))
+            {
+                return treePaths.First()[i - 1];
+            }
+        }
+
+        return treePaths.First()[minPathLength - 1];
+    }
+
     private record MethodAndReferences(MethodDeclarationSyntax SyntaxNode, ISymbol MethodSymbol, ISymbol[] PotentialMethodReferences);
+
+    private static IMethodSymbol MethodReferenceFrom(IdentifierNameSyntax identifier, SemanticModel model)
+    {
+        var symbolInfo = model.GetSymbolInfo(identifier);
+        if (symbolInfo.Symbol is IMethodSymbol { } methodSymbol)
+        {
+            return methodSymbol;
+        }
+        return symbolInfo.CandidateSymbols.FirstOrDefault() as IMethodSymbol;
+    }
 
     private class PotentialMethodReferenceCollector : CSharpSyntaxWalker
     {
