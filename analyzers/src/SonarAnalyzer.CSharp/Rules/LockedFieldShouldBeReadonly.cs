@@ -76,9 +76,4 @@ public sealed class LockedFieldShouldBeReadonly : SonarDiagnosticAnalyzer
         expression.IsAnyKind(SyntaxKind.IdentifierName, SyntaxKind.SimpleMemberAccessExpression) && lazySymbol.Value is IFieldSymbol lockedField && !lockedField.IsReadOnly
             ? lockedField
             : null;
-
-    private static ITypeSymbol FieldInSameTypeAs(IFieldSymbol field, INamedTypeSymbol type) =>
-        field.ContainingType is { } fieldType && type is { } && !fieldType.Equals(type)
-            ? type
-            : null;
 }
