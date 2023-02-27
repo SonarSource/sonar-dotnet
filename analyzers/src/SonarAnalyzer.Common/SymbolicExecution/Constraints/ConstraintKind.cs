@@ -1,6 +1,6 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2015-2022 SonarSource SA
+ * Copyright (C) 2015-2023 SonarSource SA
  * mailto: contact AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -18,35 +18,34 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.SymbolicExecution.Constraints
+namespace SonarAnalyzer.SymbolicExecution.Constraints;
+
+public enum ConstraintKind
 {
-    public enum ConstraintKind
-    {
-        BoolFalse,
-        BoolTrue,
-        ByteArrayConstant,
-        ByteArrayModified,
-        CollectionEmpty,
-        CollectionNotEmpty,
-        DisposableDisposed,
-        DisposableNotDisposed,
-        InitializationVectorInitialized,
-        InitializationVectorNotInitialized,
-        LockHeld,
-        LockReleased,
-        NullableHasValue,
-        NullableNoValue,
-        ObjectNull,
-        ObjectNotNull,
-        SaltSizeSafe,
-        SaltSizeShort,
-        SerializationSafe,
-        SerializationUnsafe,
-        StringConstraintEmpty,
-        StringConstraintFullNotWhiteSpace,
-        StringConstraintFullOrNull,
-        StringConstraintFull,
-        StringConstraintNotWhiteSpace,
-        StringConstraintWhiteSpace,
-    }
+    BoolFalse,
+    BoolTrue,
+    ByteArrayConstant,
+    ByteArrayModified,
+    CollectionEmpty,
+    CollectionNotEmpty,
+    DisposableDisposed,
+    DisposableNotDisposed,
+    InitializationVectorInitialized,
+    InitializationVectorNotInitialized,
+    LockHeld,
+    LockReleased,
+    NullableHasValue,
+    NullableNoValue,
+    ObjectNull,
+    ObjectNotNull,
+    SaltSizeSafe,
+    SaltSizeShort,
+    SerializationSafe,
+    SerializationUnsafe,
+    StringConstraintEmpty,
+    StringConstraintFullNotWhiteSpace,
+    StringConstraintFullOrNull,
+    StringConstraintFull,
+    StringConstraintNotWhiteSpace,
+    StringConstraintWhiteSpace,
 }
