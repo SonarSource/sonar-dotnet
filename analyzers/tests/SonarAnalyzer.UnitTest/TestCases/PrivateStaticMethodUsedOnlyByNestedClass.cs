@@ -13,6 +13,7 @@ class OuterClass
     static void UsedBySiblingAndDeeperNestedClasses() { }           // Compliant - SiblingNestedClass and DeeperNestedClass both need access to the method, so it must stay in the outer class
     static void OnlyUsedByDeeperNestedClass() { }                   // Noncompliant {{Move the method inside 'DeeperNestedClass'.}}
     static void UsedByNestedClassAndDeeperNestedClass() { }         // Noncompliant {{Move the method inside 'NestedClass'.}}
+    static void UsedByDeeperNestedClassesOnTheSameLevel() { }       // Noncompliant {{Move the method inside 'NestedClass'.}}
     static void UnusedMethod() { }                                  // Compliant - no need to move unused method anywhere
 
     void NotStatic() { }                                            // Compliant - method is not static
@@ -100,8 +101,17 @@ class OuterClass
             {
                 OnlyUsedByDeeperNestedClass();
                 UsedByNestedClassAndDeeperNestedClass();
+                UsedByDeeperNestedClassesOnTheSameLevel();
                 UsedBySiblingAndDeeperNestedClasses();
                 NestedClassMethodUsedByDeeperNestedClass();
+            }
+        }
+
+        class AnotherDeeperNestedClass
+        {
+            void Foo()
+            {
+                UsedByDeeperNestedClassesOnTheSameLevel();
             }
         }
     }
