@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules
             var skipIdentifierTokens = tokens
                 .Where(token => Language.Syntax.IsKind(token, identifierTokenKind))
                 .Skip(IdentifierTokenCountThreshold)
-                .Any()
+                .Any();
 
             var tokenClassifier = GetTokenClassifier(semanticModel, skipIdentifierTokens);
             var triviaClassifier = GetTriviaClassifier();
