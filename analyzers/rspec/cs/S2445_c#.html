@@ -3,25 +3,23 @@ avoid bugs related to thread synchronization.</p>
 <ol>
   <li> Locking on a non-<code>readonly</code> field makes it possible for the field’s value to change while a thread is in the code block locked on
   the old value. This allows another thread to lock on the new value and access the same block concurrently. </li>
-  <li> Locking on a <code>readonly</code> non-<code>private</code> field allows, for example, a method from another class to lock on the same field,
-  potentially interfering with the synchronization. </li>
-  <li> Locking on a local variable or a new instance of an object undermines the synchronization because two different threads running the same method
-  in parallel will lock on two different instances of the same object, allowing them to access the synchronized block at the same time. </li>
+  <li> Locking on a local variable or a new instance of an object can undermine synchronization because two different threads running the same method
+  in parallel will potentially lock on different instances of the same object, allowing them to access the synchronized block at the same time. </li>
   <li> Locking on a string literal is also dangerous since, depending on whether the string is interned or not, different threads may or may not
   synchronize on the same object instance. </li>
 </ol>
 <h2>Noncompliant Code Example</h2>
 <pre>
-private Color colorObject = new Color("red");
-private readonly colorString = "red";
+private Color color = new Color("red");
+private readonly string colorString = "red";
 
 private void DoSomething()
 {
-  // Synchronizing access via "colorObject"
-  lock (colorObject) // Noncompliant; lock is actually on object instance "red" referred to by the color field
+  // Synchronizing access via "color"
+  lock (color) // Noncompliant; lock is actually on object instance "red" referred to by the "color" field
   {
     //...
-    colorObject = new Color("green"); // other threads now allowed into this block
+    color = new Color("green"); // other threads now allowed into this block
     // ...
   }
   lock (new object()) // Noncompliant; this is a no-op
@@ -36,7 +34,7 @@ private void DoSomething()
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-private Color colorObject = new Color("red");
+private Color color = new Color("red");
 private readonly object lockObj = new object();
 
 private void DoSomething()
