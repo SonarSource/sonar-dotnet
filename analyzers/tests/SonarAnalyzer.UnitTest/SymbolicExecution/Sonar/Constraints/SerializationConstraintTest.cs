@@ -35,10 +35,10 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.Constraints
 
         [TestMethod]
         public void GivenBinderIsSafe_ToStringShouldBe_Safe() =>
-            SerializationConstraint.Safe.ToString().Should().Be("Safe");
+            SerializationConstraint.Safe.ToString().Should().Be("SerializationSafe");
 
         [TestMethod]
         public void GivenBinderIsUnsafe_ToStringShouldBe_Unsafe() =>
-            SerializationConstraint.Unsafe.ToString().Should().Be("Unsafe");
+            SerializationConstraint.Unsafe.ToString().Should().Be("SerializationUnsafe");
     }
 }
