@@ -21,7 +21,7 @@
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class LockedFieldShouldBePrivateAndReadonly : SonarDiagnosticAnalyzer
+public sealed class LockedFieldShouldBeReadonly : SonarDiagnosticAnalyzer
 {
     private const string DiagnosticId = "S2445";
 
@@ -37,24 +37,22 @@ public sealed class LockedFieldShouldBePrivateAndReadonly : SonarDiagnosticAnaly
         var expression = ((LockStatementSyntax)context.Node).Expression?.RemoveParentheses();
         if (IsCreation(expression))
         {
-            ReportIssue("Locking on a new instance is a no-op.");
+            ReportIssue("Locking on a new instance is a no-op, use a 'readonly' field instead.");
         }
         else
         {
             var lazySymbol = new Lazy<ISymbol>(() => context.SemanticModel.GetSymbolInfo(expression).Symbol);
             if (IsOfTypeString(expression, lazySymbol))
             {
-                ReportIssue("Strings can be interned, and should not be used for locking.");
+                ReportIssue("Strings can be interned, and should not be used for locking. Use a 'readonly' field instead.");
             }
             else if (expression is IdentifierNameSyntax && lazySymbol.Value is ILocalSymbol lockedSymbol)
             {
-                ReportIssue($"'{lockedSymbol.Name}' is a local variable, and should not be used for locking.");
+                ReportIssue($"Do not lock on local variable '{lockedSymbol.Name}', use a 'readonly' field instead.");
             }
-            else if (FieldNotReadonlyOrNotPrivate(expression, lazySymbol) is { } lockedField)
+            else if (FieldNotReadonly(expression, lazySymbol) is { } lockedField)
             {
-                ReportIssue(FieldInSameTypeAs(lockedField, context.ContainingSymbol?.ContainingType) is { } containingType
-                    ? $"Use members from '{containingType.ToMinimalDisplayString(context.SemanticModel, expression.SpanStart)}' for locking."
-                    : $"'{lockedField.Name}' is not 'private readonly', and should not be used for locking.");
+                ReportIssue($"Do not lock on non-'readonly' field '{lockedField.Name}', use a 'readonly' field instead.");
             }
         }
 
@@ -74,10 +72,8 @@ public sealed class LockedFieldShouldBePrivateAndReadonly : SonarDiagnosticAnaly
         expression.IsAnyKind(SyntaxKind.StringLiteralExpression, SyntaxKind.InterpolatedStringExpression)
         || lazySymbol.Value.GetSymbolType().Is(KnownType.System_String);
 
-    private static IFieldSymbol FieldNotReadonlyOrNotPrivate(ExpressionSyntax expression, Lazy<ISymbol> lazySymbol) =>
-        expression.IsAnyKind(SyntaxKind.IdentifierName, SyntaxKind.SimpleMemberAccessExpression)
-        && lazySymbol.Value is IFieldSymbol lockedField
-        && (!lockedField.IsReadOnly || lockedField.GetEffectiveAccessibility() != Accessibility.Private)
+    private static IFieldSymbol FieldNotReadonly(ExpressionSyntax expression, Lazy<ISymbol> lazySymbol) =>
+        expression.IsAnyKind(SyntaxKind.IdentifierName, SyntaxKind.SimpleMemberAccessExpression) && lazySymbol.Value is IFieldSymbol lockedField && !lockedField.IsReadOnly
             ? lockedField
             : null;
 

@@ -23,40 +23,32 @@ using SonarAnalyzer.Rules.CSharp;
 namespace SonarAnalyzer.UnitTest.Rules;
 
 [TestClass]
-public class LockedFieldShouldBePrivateAndReadonlyTest
+public class LockedFieldShouldBeReadonlyTest
 {
-    private readonly VerifierBuilder builder = new VerifierBuilder<LockedFieldShouldBePrivateAndReadonly>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<LockedFieldShouldBeReadonly>();
 
     [TestMethod]
-    public void LockedFieldShouldBePrivateAndReadonly_CS() =>
-        builder.AddPaths("LockedFieldShouldBePrivateAndReadonly.cs").Verify();
+    public void LockedFieldShouldBeReadonly_CS() =>
+        builder.AddPaths("LockedFieldShouldBeReadonly.cs").Verify();
 
     [TestMethod]
-    public void LockedFieldShouldBePrivateAndReadonly_CSharp8() =>
+    public void LockedFieldShouldBeReadonly_CSharp8() =>
         builder
-            .AddPaths("LockedFieldShouldBePrivateAndReadonly.CSharp8.cs")
+            .AddPaths("LockedFieldShouldBeReadonly.CSharp8.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp8)
             .Verify();
 
     [TestMethod]
-    public void LockedFieldShouldBePrivateAndReadonly_CSharp9() =>
+    public void LockedFieldShouldBeReadonly_CSharp9() =>
         builder
-            .AddPaths("LockedFieldShouldBePrivateAndReadonly.CSharp9.cs")
+            .AddPaths("LockedFieldShouldBeReadonly.CSharp9.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp9)
             .Verify();
 
     [TestMethod]
-    public void LockedFieldShouldBePrivateAndReadonly_CSharp9_TopLevelStatements() =>
+    public void LockedFieldShouldBeReadonly_CSharp11() =>
         builder
-            .AddPaths("LockedFieldShouldBePrivateAndReadonly.CSharp9.TopLevelStatements.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp9)
-            .WithTopLevelStatements()
-            .Verify();
-
-    [TestMethod]
-    public void LockedFieldShouldBePrivateAndReadonly_CSharp11() =>
-        builder
-            .AddPaths("LockedFieldShouldBePrivateAndReadonly.CSharp11.cs")
+            .AddPaths("LockedFieldShouldBeReadonly.CSharp11.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp11)
             .Verify();
 }
