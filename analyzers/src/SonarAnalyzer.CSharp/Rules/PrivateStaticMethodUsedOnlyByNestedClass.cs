@@ -50,8 +50,7 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
                     && HasNestedTypeDeclarations(declaredType)
                     && PrivateStaticMethodsOf(declaredType) is { Length: > 0 } candidates)
                 {
-                    // TODO: naming (type hierarchy)
-                    var methodReferences = MethodReferencesInsideType(candidates, declaredType, c.SemanticModel);
+                    var methodReferences = TypesWhichUseTheMethods(candidates, declaredType, c.SemanticModel);
 
                     foreach (var reference in methodReferences)
                     {
@@ -116,7 +115,7 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
                 .ToArray();
     }
 
-    private static IEnumerable<MethodUsedByTypes> MethodReferencesInsideType(
+    private static IEnumerable<MethodUsedByTypes> TypesWhichUseTheMethods(
         IEnumerable<MethodDeclarationSyntax> methods, TypeDeclarationSyntax outerType, SemanticModel model)
     {
         var collector = new PotentialMethodReferenceCollector(methods);
@@ -136,7 +135,7 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
                 .Where(x =>
                     !IsRecursiveMethodCall(x, m.Method)
                     && model.GetSymbolOrCandidateSymbol(x) is IMethodSymbol { } methodReference
-                    && (methodReference == methodSymbol || methodReference.ConstructedFrom == methodSymbol))
+                    && (methodReference.Equals(methodSymbol) || methodReference.ConstructedFrom.Equals(methodSymbol)))
                 .Select(ContainingTypeDeclaration)
                 .Distinct()
                 .ToArray();
@@ -157,14 +156,15 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
             .OfType<TypeDeclarationSyntax>()
             .First();
 
-    private record MethodWithPotentialReferences(MethodDeclarationSyntax Method, IdentifierNameSyntax[] PotentialReferences);
-    private record MethodUsedByTypes(MethodDeclarationSyntax Method, TypeDeclarationSyntax[] Types);
+    private sealed record MethodWithPotentialReferences(MethodDeclarationSyntax Method, IdentifierNameSyntax[] PotentialReferences);
+    private sealed record MethodUsedByTypes(MethodDeclarationSyntax Method, TypeDeclarationSyntax[] Types);
 
     /// <summary>
     /// Collects all the potential references to a set of methods inside the given syntax node.
     /// The collector looks for identifiers which match any of the methods' names, but does not try to resolve them to symbols with the semantic model.
+    /// Performance gains: by only using the syntax tree to find matches we can eliminate certain methods (which are only used by the type which has declared it) without using the more costly symbolic lookup.
     /// </summary>
-    private class PotentialMethodReferenceCollector : CSharpSyntaxWalker
+    private sealed class PotentialMethodReferenceCollector : CSharpSyntaxWalker
     {
         private readonly ISet<MethodDeclarationSyntax> methodsToFind;
         private readonly Dictionary<MethodDeclarationSyntax, List<IdentifierNameSyntax>> potentialMethodReferences;
@@ -178,12 +178,12 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
             potentialMethodReferences = new();
         }
 
-        public override void VisitIdentifierName(IdentifierNameSyntax identifier)
+        public override void VisitIdentifierName(IdentifierNameSyntax node)
         {
-            if (methodsToFind.FirstOrDefault(x => x.Identifier.ValueText == identifier.Identifier.ValueText) is { } method)
+            if (methodsToFind.FirstOrDefault(x => x.Identifier.ValueText == node.Identifier.ValueText) is { } method)
             {
                 var referenceList = potentialMethodReferences.GetOrAdd(method, _ => new());
-                referenceList.Add(identifier);
+                referenceList.Add(node);
             }
         }
     }
