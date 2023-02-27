@@ -45,29 +45,18 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
                 var declaredType = (TypeDeclarationSyntax)c.Node;
 
                 if (!IsPartial(declaredType)
-                    && NestedTypeDeclarationsOf(declaredType) is { Length: > 0 } nestedTypes
+                    && HasNestedTypeDeclarations(declaredType)
                     && PrivateStaticMethodsOf(declaredType) is { Length: > 0 } candidates)
                 {
-                    var references = PotentialReferencesOfMethodsInsideType(candidates, declaredType)
-                                        .Where(x => x.Value.Any(id => ContainingTypeDeclaration(id) != declaredType))
-                                        .Select(x => new { Refs = x, MethodSymbol = c.SemanticModel.GetDeclaredSymbol(x.Key) })
-                                        .Select(x => new { MethodDeclaration = x.Refs.Key, References = x.Refs.Value.Where(t => MethodReferenceFrom(t, c.SemanticModel) is { } methodReference && (methodReference == x.MethodSymbol || methodReference.ConstructedFrom == x.MethodSymbol) && ContainingMethodDeclaration(t) != x.Refs.Key).Select(t => new { Identifier = t, Type = ContainingTypeDeclaration(t) }) })
-                                        .Where(x => x.References.Any())
-                                        .ToArray();
+                    var methodReferences = MethodReferencesInsideType(candidates, declaredType, c.SemanticModel);
 
-                    foreach (var reference in references)
+                    foreach (var reference in methodReferences)
                     {
-                        // scenario 1: used in outer class
-                        if (reference.References.Any(x => x.Type == declaredType))
-                        {
-                            continue;
-                        }
-
-                        var typeToMoveInto = LowestCommonAncestorSelf(reference.References.Select(x => x.Type));
+                        var typeToMoveInto = LowestCommonAncestorOrSelf(reference.Value);
                         if (typeToMoveInto != declaredType)
                         {
                             string nestedTypeName = typeToMoveInto.Identifier.ValueText;
-                            c.ReportIssue(Diagnostic.Create(Rule, reference.MethodDeclaration.Identifier.GetLocation(), nestedTypeName));
+                            c.ReportIssue(Diagnostic.Create(Rule, reference.Key.Identifier.GetLocation(), nestedTypeName));
                         }
                     }
                 }
@@ -80,12 +69,11 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
                 .Where(x => IsPrivateAndStatic(x, type))
                 .ToArray();
 
-    private static TypeDeclarationSyntax[] NestedTypeDeclarationsOf(TypeDeclarationSyntax type) =>
+    private static bool HasNestedTypeDeclarations(TypeDeclarationSyntax type) =>
         type.Members
-            .OfType<TypeDeclarationSyntax>()
-            .Where(x => x is ClassDeclarationSyntax or StructDeclarationSyntax or InterfaceDeclarationSyntax
-                        || RecordDeclarationSyntaxWrapper.IsInstance(x))
-            .ToArray();
+                .OfType<TypeDeclarationSyntax>()
+                .Any(x => x is ClassDeclarationSyntax or StructDeclarationSyntax or InterfaceDeclarationSyntax
+                            || RecordDeclarationSyntaxWrapper.IsInstance(x));
 
     private static bool IsPrivateAndStatic(MethodDeclarationSyntax method, TypeDeclarationSyntax containingType) =>
         method.Modifiers.Any(x => x.IsKind(SyntaxKind.StaticKeyword))
@@ -102,11 +90,17 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
     private static bool HasAnyModifier(MethodDeclarationSyntax method, params SyntaxKind[] modifiers) =>
         method.Modifiers.Any(x => x.IsAnyKind(modifiers));
 
-    private static IDictionary<MethodDeclarationSyntax, List<IdentifierNameSyntax>> PotentialReferencesOfMethodsInsideType(IEnumerable<MethodDeclarationSyntax> methods, TypeDeclarationSyntax type)
+    private static IDictionary<MethodDeclarationSyntax, TypeDeclarationSyntax[]> MethodReferencesInsideType(IEnumerable<MethodDeclarationSyntax> methods, TypeDeclarationSyntax type, SemanticModel model)
     {
         var collector = new PotentialMethodReferenceCollector(methods);
         collector.Visit(type);
-        return collector.PotentialMethodReferences;
+
+        return collector.PotentialMethodReferences
+                            .Where(x => x.Value.Any(id => ContainingTypeDeclaration(id) != type))
+                            .Select(x => new { Refs = x, MethodSymbol = model.GetDeclaredSymbol(x.Key) })
+                            .Select(x => new { MethodDeclaration = x.Refs.Key, References = x.Refs.Value.Where(t => MethodReferenceFrom(t, model) is { } methodReference && (methodReference == x.MethodSymbol || methodReference.ConstructedFrom == x.MethodSymbol) && ContainingMethodDeclaration(t) != x.Refs.Key).Select(t => new { Identifier = t, Type = ContainingTypeDeclaration(t) }) })
+                            .Where(x => x.References.Any())
+                            .ToDictionary(x => x.MethodDeclaration, x => x.References.Select(t => t.Type).ToArray());
     }
 
     private static TypeDeclarationSyntax ContainingTypeDeclaration(IdentifierNameSyntax identifier) =>
@@ -121,9 +115,9 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
             .OfType<MethodDeclarationSyntax>()
             .FirstOrDefault();
 
-    private static TypeDeclarationSyntax LowestCommonAncestorSelf(IEnumerable<TypeDeclarationSyntax> declaredTypes)
+    private static TypeDeclarationSyntax LowestCommonAncestorOrSelf(IEnumerable<TypeDeclarationSyntax> declaredTypes)
     {
-        var treePaths = declaredTypes.Distinct().Select(x => x.AncestorsAndSelf().OfType<TypeDeclarationSyntax>().Reverse().ToArray()).ToArray();
+        var treePaths = declaredTypes.Select(x => x.AncestorsAndSelf().OfType<TypeDeclarationSyntax>().Reverse().ToArray()).ToArray();
         int minPathLength = treePaths.Select(x => x.Length).Min();
         for (int i = 0; i < minPathLength; i++)
         {
@@ -135,8 +129,6 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
 
         return treePaths.First()[minPathLength - 1];
     }
-
-    private record MethodAndReferences(MethodDeclarationSyntax SyntaxNode, ISymbol MethodSymbol, ISymbol[] PotentialMethodReferences);
 
     private static IMethodSymbol MethodReferenceFrom(IdentifierNameSyntax identifier, SemanticModel model)
     {
