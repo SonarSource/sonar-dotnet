@@ -113,12 +113,12 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.Constraints
         [TestMethod]
         public void StringConstraint_ToString()
         {
-            StringConstraint.EmptyString.ToString().Should().Be("StringConstraintEmpty");
-            StringConstraint.FullString.ToString().Should().Be("StringConstraintFull");
-            StringConstraint.FullOrNullString.ToString().Should().Be("StringConstraintFullOrNull");
-            StringConstraint.WhiteSpaceString.ToString().Should().Be("StringConstraintWhiteSpace");
-            StringConstraint.NotWhiteSpaceString.ToString().Should().Be("StringConstraintNotWhiteSpace");
-            StringConstraint.FullNotWhiteSpaceString.ToString().Should().Be("StringConstraintFullNotWhiteSpace");
+            StringConstraint.EmptyString.ToString().Should().Be("StringEmpty");
+            StringConstraint.FullString.ToString().Should().Be("StringFull");
+            StringConstraint.FullOrNullString.ToString().Should().Be("StringFullOrNull");
+            StringConstraint.WhiteSpaceString.ToString().Should().Be("StringWhiteSpace");
+            StringConstraint.NotWhiteSpaceString.ToString().Should().Be("StringNotWhiteSpace");
+            StringConstraint.FullNotWhiteSpaceString.ToString().Should().Be("StringFullNotWhiteSpace");
         }
     }
 }
