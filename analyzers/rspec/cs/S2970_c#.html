@@ -1,13 +1,29 @@
-<p>It is very easy to write incomplete assertions when using some test frameworks. This rule raises an issue when an assertion doesn’t actually test
-anything.</p>
+<p>It is very easy to write incomplete assertions when using some test frameworks. This rule enforces complete assertions in the following cases:</p>
+<ul>
+  <li> Fluent Assertions: <a href="https://fluentassertions.com/introduction"><code>Should()</code></a> is not followed by an assertion invocation.
+  </li>
+  <li> NFluent: <a href="https://www.n-fluent.net"><code>Check.That()</code></a> is not followed by an assertion invocation. </li>
+  <li> NSubstitute: <a href="https://nsubstitute.github.io/help/received-calls"><code>Received()</code></a> is not followed by an invocation. </li>
+</ul>
+<p>In such cases, what is intended to be a test doesn’t actually verify anything.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 string actual = "Hello World!";
-actual.Should();  // Noncompliant
+// Fluent Assertions
+actual.Should();     // Noncompliant
+// NFluent
+Check.That(actual);  // Noncompliant
+// NSubstitute
+command.Received();  // Noncompliant
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
 string actual = "Hello World!";
+// Fluent Assertions
 actual.Should().Contain("Hello");
+// NFluent
+Check.That(actual).Contains("Hello");
+// NSubstitute
+command.Received().Execute();
 </pre>
 
