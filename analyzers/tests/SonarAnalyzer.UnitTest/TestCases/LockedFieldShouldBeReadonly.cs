@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 class Test
@@ -62,6 +63,14 @@ class Test
         lock (localVarReadonlyField) { }                 // Noncompliant, while the local variable references a readonly field, the local variable itself can mutate
         object localVarReadWriteField = readWriteField;
         lock (localVarReadWriteField) { }                // Noncompliant
+    }
+
+    void OnALocalOutVar(Dictionary<int, object> lockObjs)
+    {
+        if (lockObjs.TryGetValue(42, out var lockObj))
+        {
+            lock (lockObj) { }                           // Noncompliant, FP: the lock object is a local variable retrieved from a collection of locks
+        }
     }
 
     void OnANewInstance()

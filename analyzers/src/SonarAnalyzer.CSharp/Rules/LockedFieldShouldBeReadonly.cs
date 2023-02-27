@@ -50,7 +50,7 @@ public sealed class LockedFieldShouldBeReadonly : SonarDiagnosticAnalyzer
             {
                 ReportIssue($"local variable '{lockedSymbol.Name}'");
             }
-            else if (FieldNotReadonly(expression, lazySymbol) is { } lockedField)
+            else if (FieldWritable(expression, lazySymbol) is { } lockedField)
             {
                 ReportIssue($"writable field '{lockedField.Name}'");
             }
@@ -72,7 +72,7 @@ public sealed class LockedFieldShouldBeReadonly : SonarDiagnosticAnalyzer
         expression.IsAnyKind(SyntaxKind.StringLiteralExpression, SyntaxKind.InterpolatedStringExpression)
         || lazySymbol.Value.GetSymbolType().Is(KnownType.System_String);
 
-    private static IFieldSymbol FieldNotReadonly(ExpressionSyntax expression, Lazy<ISymbol> lazySymbol) =>
+    private static IFieldSymbol FieldWritable(ExpressionSyntax expression, Lazy<ISymbol> lazySymbol) =>
         expression.IsAnyKind(SyntaxKind.IdentifierName, SyntaxKind.SimpleMemberAccessExpression) && lazySymbol.Value is IFieldSymbol lockedField && !lockedField.IsReadOnly
             ? lockedField
             : null;

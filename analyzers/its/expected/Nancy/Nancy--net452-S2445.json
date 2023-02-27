@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S2445",
-"message":  "'entitiesLock' is not 'private readonly', and should not be used for locking.",
+"message":  "Do not lock on writable field 'entitiesLock', use a readonly field instead.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
 "region":  {
