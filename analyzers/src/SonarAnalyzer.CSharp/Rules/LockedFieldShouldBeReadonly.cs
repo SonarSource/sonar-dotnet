@@ -25,7 +25,7 @@ public sealed class LockedFieldShouldBeReadonly : SonarDiagnosticAnalyzer
 {
     private const string DiagnosticId = "S2445";
 
-    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, "{0}");
+    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, "Do not lock on {0}, use a readonly field instead.");
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
@@ -37,22 +37,22 @@ public sealed class LockedFieldShouldBeReadonly : SonarDiagnosticAnalyzer
         var expression = ((LockStatementSyntax)context.Node).Expression?.RemoveParentheses();
         if (IsCreation(expression))
         {
-            ReportIssue("Locking on a new instance is a no-op, use a 'readonly' field instead.");
+            ReportIssue("a new instance because is a no-op");
         }
         else
         {
             var lazySymbol = new Lazy<ISymbol>(() => context.SemanticModel.GetSymbolInfo(expression).Symbol);
             if (IsOfTypeString(expression, lazySymbol))
             {
-                ReportIssue("Strings can be interned, and should not be used for locking. Use a 'readonly' field instead.");
+                ReportIssue("strings as they can be interned");
             }
             else if (expression is IdentifierNameSyntax && lazySymbol.Value is ILocalSymbol lockedSymbol)
             {
-                ReportIssue($"Do not lock on local variable '{lockedSymbol.Name}', use a 'readonly' field instead.");
+                ReportIssue($"local variable '{lockedSymbol.Name}'");
             }
             else if (FieldNotReadonly(expression, lazySymbol) is { } lockedField)
             {
-                ReportIssue($"Do not lock on non-'readonly' field '{lockedField.Name}', use a 'readonly' field instead.");
+                ReportIssue($"writable field '{lockedField.Name}'");
             }
         }
 

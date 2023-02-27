@@ -19,37 +19,37 @@ class Test
     void OnAStaticField()
     {
         lock (staticReadonlyField) { }
-        lock (staticReadWriteField) { }                  // Noncompliant {{Do not lock on non-'readonly' field 'staticReadWriteField', use a 'readonly' field instead.}}
+        lock (staticReadWriteField) { }                  // Noncompliant {{Do not lock on writable field 'staticReadWriteField', use a readonly field instead.}}
         //    ^^^^^^^^^^^^^^^^^^^^
         lock (Test.staticReadonlyField) { }
-        lock (Test.staticReadWriteField) { }             // Noncompliant {{Do not lock on non-'readonly' field 'staticReadWriteField', use a 'readonly' field instead.}}
+        lock (Test.staticReadWriteField) { }             // Noncompliant {{Do not lock on writable field 'staticReadWriteField', use a readonly field instead.}}
         //    ^^^^^^^^^^^^^^^^^^^^^^^^^
         lock (AnotherClass.staticReadonlyField) { }
-        lock (AnotherClass.staticReadWriteField) { }     // Noncompliant {{Do not lock on non-'readonly' field 'staticReadWriteField', use a 'readonly' field instead.}}
+        lock (AnotherClass.staticReadWriteField) { }     // Noncompliant {{Do not lock on writable field 'staticReadWriteField', use a readonly field instead.}}
         //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     }
 
     void OnAFieldOfSameInstance()
     {
         lock (readonlyField) { }
-        lock (readonlyStringField) { }                   // Noncompliant {{Strings can be interned, and should not be used for locking. Use a 'readonly' field instead.}}
-        lock (readWriteField) { }                        // Noncompliant {{Do not lock on non-'readonly' field 'readWriteField', use a 'readonly' field instead.}}
+        lock (readonlyStringField) { }                   // Noncompliant {{Do not lock on strings as they can be interned, use a readonly field instead.}}
+        lock (readWriteField) { }                        // Noncompliant {{Do not lock on writable field 'readWriteField', use a readonly field instead.}}
         lock (this.readonlyField) { }
-        lock (this.readWriteField) { }                   // Noncompliant {{Do not lock on non-'readonly' field 'readWriteField', use a 'readonly' field instead.}}
+        lock (this.readWriteField) { }                   // Noncompliant {{Do not lock on writable field 'readWriteField', use a readonly field instead.}}
     }
 
     void OnParenthesizedExpressions()
     {
         lock ((readonlyField)) { }
-        lock ((readWriteField)) { }                      // Noncompliant {{Do not lock on non-'readonly' field 'readWriteField', use a 'readonly' field instead.}}
-        lock ((this.readWriteField)) { }                 // Noncompliant {{Do not lock on non-'readonly' field 'readWriteField', use a 'readonly' field instead.}}
+        lock ((readWriteField)) { }                      // Noncompliant {{Do not lock on writable field 'readWriteField', use a readonly field instead.}}
+        lock ((this.readWriteField)) { }                 // Noncompliant {{Do not lock on writable field 'readWriteField', use a readonly field instead.}}
     }
 
     void OnAFieldOfDifferentInstance()
     {
         var anotherInstance = new Test();
         lock (anotherInstance.readonlyField) { }
-        lock (anotherInstance.readWriteField) { }        // Noncompliant {{Do not lock on non-'readonly' field 'readWriteField', use a 'readonly' field instead.}}
+        lock (anotherInstance.readWriteField) { }        // Noncompliant {{Do not lock on writable field 'readWriteField', use a readonly field instead.}}
         lock (anotherInstance.readonlyField) { }
         lock (anotherInstance?.readWriteField) { }       // FN: ?. not supported
     }
@@ -57,7 +57,7 @@ class Test
     void OnALocalVariable()
     {
         object localVarNull = null;
-        lock (localVarNull) { }                          // Noncompliant {{Do not lock on local variable 'localVarNull', use a 'readonly' field instead.}}
+        lock (localVarNull) { }                          // Noncompliant {{Do not lock on local variable 'localVarNull', use a readonly field instead.}}
         object localVarReadonlyField = readonlyField;
         lock (localVarReadonlyField) { }                 // Noncompliant, while the local variable references a readonly field, the local variable itself can mutate
         object localVarReadWriteField = readWriteField;
@@ -66,7 +66,7 @@ class Test
 
     void OnANewInstance()
     {
-        lock (new object()) { }                          // Noncompliant {{Locking on a new instance is a no-op, use a 'readonly' field instead.}}
+        lock (new object()) { }                          // Noncompliant {{Do not lock on a new instance because is a no-op, use a readonly field instead.}}
         lock (new ANamespace.AClass()) { }               // Noncompliant
         lock (new Test[] { }) { }                        // Noncompliant
         lock (new[] { readonlyField }) { }               // Noncompliant
@@ -86,7 +86,7 @@ class Test
 
     void OnAStringInstance()
     {
-        lock ("a string") { }                            // Noncompliant {{Strings can be interned, and should not be used for locking. Use a 'readonly' field instead.}}
+        lock ("a string") { }                            // Noncompliant {{Do not lock on strings as they can be interned, use a readonly field instead.}}
         lock ($"an interpolated {"string"}") { }         // Noncompliant
         lock ("a" + "string") { }                        // Noncompliant
         lock (MethodReturningString()) { }               // Noncompliant
