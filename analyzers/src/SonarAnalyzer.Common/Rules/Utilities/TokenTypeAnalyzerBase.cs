@@ -119,12 +119,12 @@ namespace SonarAnalyzer.Rules
 
             private TokenTypeInfo.Types.TokenInfo TokenInfo(SyntaxToken token, TokenType tokenType) =>
                 string.IsNullOrWhiteSpace(token.ValueText)
-                ? null
-                : new()
-                {
-                    TokenType = tokenType,
-                    TextRange = GetTextRange(token.GetLocation().GetLineSpan()),
-                };
+                    ? null
+                    : new()
+                    {
+                        TokenType = tokenType,
+                        TextRange = GetTextRange(token.GetLocation().GetLineSpan()),
+                    };
 
             public TokenTypeInfo.Types.TokenInfo ClassifyToken(SyntaxToken token) =>
                 token switch
