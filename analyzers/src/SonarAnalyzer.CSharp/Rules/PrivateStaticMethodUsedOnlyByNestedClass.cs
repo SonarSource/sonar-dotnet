@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.CFG.Helpers;
+
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -48,15 +50,16 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
                     && HasNestedTypeDeclarations(declaredType)
                     && PrivateStaticMethodsOf(declaredType) is { Length: > 0 } candidates)
                 {
+                    // TODO: naming (type hierarchy)
                     var methodReferences = MethodReferencesInsideType(candidates, declaredType, c.SemanticModel);
 
                     foreach (var reference in methodReferences)
                     {
-                        var typeToMoveInto = LowestCommonAncestorOrSelf(reference.Value);
+                        var typeToMoveInto = LowestCommonAncestorOrSelf(reference.Types);
                         if (typeToMoveInto != declaredType)
                         {
-                            string nestedTypeName = typeToMoveInto.Identifier.ValueText;
-                            c.ReportIssue(Diagnostic.Create(Rule, reference.Key.Identifier.GetLocation(), nestedTypeName));
+                            var nestedTypeName = typeToMoveInto.Identifier.ValueText;
+                            c.ReportIssue(Diagnostic.Create(Rule, reference.Method.Identifier.GetLocation(), nestedTypeName));
                         }
                     }
                 }
@@ -89,18 +92,6 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
     private static bool HasAnyModifier(MethodDeclarationSyntax method, params SyntaxKind[] modifiers) =>
         method.Modifiers.Any(x => x.IsAnyKind(modifiers));
 
-    private static TypeDeclarationSyntax ContainingTypeDeclaration(IdentifierNameSyntax identifier) =>
-        identifier
-            .Ancestors()
-            .OfType<TypeDeclarationSyntax>()
-            .First();
-
-    private static MethodDeclarationSyntax ContainingMethodDeclaration(IdentifierNameSyntax identifier) =>
-        identifier
-            .Ancestors()
-            .OfType<MethodDeclarationSyntax>()
-            .FirstOrDefault();
-
     private static TypeDeclarationSyntax LowestCommonAncestorOrSelf(IEnumerable<TypeDeclarationSyntax> declaredTypes)
     {
         var treePaths = declaredTypes.Select(PathFromTop);
@@ -125,44 +116,73 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
                 .ToArray();
     }
 
-    private static IDictionary<MethodDeclarationSyntax, TypeDeclarationSyntax[]> MethodReferencesInsideType(IEnumerable<MethodDeclarationSyntax> methods, TypeDeclarationSyntax type, SemanticModel model)
+    private static IEnumerable<MethodUsedByTypes> MethodReferencesInsideType(
+        IEnumerable<MethodDeclarationSyntax> methods, TypeDeclarationSyntax outerType, SemanticModel model)
     {
         var collector = new PotentialMethodReferenceCollector(methods);
-        collector.Visit(type);
+        collector.Visit(outerType);
 
         return collector.PotentialMethodReferences
-                            .Where(x => x.Value.Any(id => ContainingTypeDeclaration(id) != type))
-                            .Select(x => new { Refs = x, MethodSymbol = model.GetDeclaredSymbol(x.Key) })
-                            .Select(x => new { MethodDeclaration = x.Refs.Key, References = x.Refs.Value.Where(t => MethodReferenceFrom(t, model) is { } methodReference && (methodReference == x.MethodSymbol || methodReference.ConstructedFrom == x.MethodSymbol) && ContainingMethodDeclaration(t) != x.Refs.Key).Select(t => new { Identifier = t, Type = ContainingTypeDeclaration(t) }) })
-                            .Where(x => x.References.Any())
-                            .ToDictionary(x => x.MethodDeclaration, x => x.References.Select(t => t.Type).ToArray());
-    }
+                            .Where(x => !OnlyUsedByOuterType(x))
+                            .Select(ResolveReferences)
+                            .Where(x => x.Types.Any())
+                            .ToArray();
 
-    private static IMethodSymbol MethodReferenceFrom(IdentifierNameSyntax identifier, SemanticModel model)
-    {
-        var symbolInfo = model.GetSymbolInfo(identifier);
-        if (symbolInfo.Symbol is IMethodSymbol { } methodSymbol)
+        MethodUsedByTypes ResolveReferences(MethodWithPotentialReferences m)
         {
-            return methodSymbol;
+            var methodSymbol = model.GetDeclaredSymbol(m.Method);
+
+            var typesWhichUseTheMethod = m.PotentialReferences
+                .Where(x =>
+                    !IsRecursiveMethodCall(x, m.Method)
+                    && model.GetSymbolOrCandidateSymbol(x) is IMethodSymbol { } methodReference
+                    && (methodReference == methodSymbol || methodReference.ConstructedFrom == methodSymbol))
+                .Select(ContainingTypeDeclaration)
+                .Distinct()
+                .ToArray();
+
+            return new MethodUsedByTypes(m.Method, typesWhichUseTheMethod);
         }
-        return symbolInfo.CandidateSymbols.FirstOrDefault() as IMethodSymbol;
+
+        bool IsRecursiveMethodCall(IdentifierNameSyntax methodCall, MethodDeclarationSyntax methodDeclaration) =>
+            methodCall.Ancestors().OfType<MethodDeclarationSyntax>().FirstOrDefault() == methodDeclaration;
+
+        bool OnlyUsedByOuterType(MethodWithPotentialReferences m) =>
+            m.PotentialReferences.All(x => ContainingTypeDeclaration(x) == outerType);
     }
 
+    private static TypeDeclarationSyntax ContainingTypeDeclaration(IdentifierNameSyntax identifier) =>
+        identifier
+            .Ancestors()
+            .OfType<TypeDeclarationSyntax>()
+            .First();
+
+    private record MethodWithPotentialReferences(MethodDeclarationSyntax Method, IdentifierNameSyntax[] PotentialReferences);
+    private record MethodUsedByTypes(MethodDeclarationSyntax Method, TypeDeclarationSyntax[] Types);
+
+    /// <summary>
+    /// Collects all the potential references to a set of methods inside the given syntax node.
+    /// The collector looks for identifiers which match any of the methods' names, but does not try to resolve them to symbols with the semantic model.
+    /// </summary>
     private class PotentialMethodReferenceCollector : CSharpSyntaxWalker
     {
         private readonly ISet<MethodDeclarationSyntax> methodsToFind;
-        internal Dictionary<MethodDeclarationSyntax, List<IdentifierNameSyntax>> PotentialMethodReferences { get; } = new();
+        private readonly Dictionary<MethodDeclarationSyntax, List<IdentifierNameSyntax>> potentialMethodReferences;
+
+        public IEnumerable<MethodWithPotentialReferences> PotentialMethodReferences =>
+            potentialMethodReferences.Select(x => new MethodWithPotentialReferences(x.Key, x.Value.ToArray()));
 
         public PotentialMethodReferenceCollector(IEnumerable<MethodDeclarationSyntax> methodsToFind)
         {
             this.methodsToFind = new HashSet<MethodDeclarationSyntax>(methodsToFind);
+            potentialMethodReferences = new();
         }
 
         public override void VisitIdentifierName(IdentifierNameSyntax identifier)
         {
             if (methodsToFind.FirstOrDefault(x => x.Identifier.ValueText == identifier.Identifier.ValueText) is { } method)
             {
-                var referenceList = PotentialMethodReferences.GetOrAdd(method, _ => new());
+                var referenceList = potentialMethodReferences.GetOrAdd(method, _ => new());
                 referenceList.Add(identifier);
             }
         }
