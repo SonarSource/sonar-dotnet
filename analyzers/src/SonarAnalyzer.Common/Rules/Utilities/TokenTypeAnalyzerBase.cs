@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules
             {
                 if (token.HasLeadingTrivia)
                 {
-                    IterateTrivia(token.LeadingTrivia);
+                    IterateTrivia(triviaClassifier, spans, token.LeadingTrivia);
                 }
                 if (tokenClassifier.ClassifyToken(token) is { } tokenClassification)
                 {
@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Rules
                 }
                 if (token.HasTrailingTrivia)
                 {
-                    IterateTrivia(token.TrailingTrivia);
+                    IterateTrivia(triviaClassifier, spans, token.TrailingTrivia);
                 }
             }
 
@@ -74,7 +74,7 @@ namespace SonarAnalyzer.Rules
             tokenTypeInfo.TokenInfo.AddRange(spans);
             return tokenTypeInfo;
 
-            void IterateTrivia(SyntaxTriviaList triviaList)
+            static void IterateTrivia(TriviaClassifierBase triviaClassifier, List<TokenTypeInfo.Types.TokenInfo> spans, SyntaxTriviaList triviaList)
             {
                 foreach (var trivia in triviaList)
                 {
