@@ -30,9 +30,6 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
         public override SymbolicConstraint Opposite =>
             this == NoValue ? HasValue : NoValue;
 
-        protected override string Name =>
-            this == NoValue ? nameof(NoValue) : nameof(HasValue);
-
         private NullableConstraint(ConstraintKind kind) : base(kind) { }
     }
 }

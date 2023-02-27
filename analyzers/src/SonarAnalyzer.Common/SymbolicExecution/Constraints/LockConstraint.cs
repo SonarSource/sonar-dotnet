@@ -30,9 +30,6 @@ namespace SonarAnalyzer.SymbolicExecution.Constraints
 
         public override bool PreserveOnFieldReset => true;
 
-        protected override string Name =>
-            this == Held ? nameof(Held) : nameof(Released);
-
         private LockConstraint(ConstraintKind kind) : base(kind) { }
     }
 }

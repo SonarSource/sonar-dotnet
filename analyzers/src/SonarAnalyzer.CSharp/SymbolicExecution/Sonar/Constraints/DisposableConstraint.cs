@@ -30,9 +30,6 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
         public override SymbolicConstraint Opposite =>
             this == Disposed ? NotDisposed : Disposed;
 
-        protected override string Name =>
-            this == Disposed ? nameof(Disposed) : nameof(NotDisposed);
-
         private DisposableConstraint(ConstraintKind kind) : base(kind) { }
     }
 }

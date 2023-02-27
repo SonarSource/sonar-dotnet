@@ -28,9 +28,6 @@ namespace SonarAnalyzer.SymbolicExecution.Constraints
         public override SymbolicConstraint Opposite =>
             this == True ? False : True;
 
-        protected override string Name =>
-            this == True ? nameof(True) : nameof(False);
-
         private BoolConstraint(ConstraintKind kind) : base(kind) { }
 
         public static BoolConstraint From(bool value) =>

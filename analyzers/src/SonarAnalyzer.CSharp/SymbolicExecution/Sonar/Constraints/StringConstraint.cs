@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.SymbolicExecution.Constraints;
+
 namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
 {
     internal sealed class StringConstraint : SymbolicConstraint
@@ -45,41 +47,6 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
                 else
                 {
                     return null;
-                }
-            }
-        }
-
-        protected override string Name
-        {
-            get
-            {
-                if (this == EmptyString)
-                {
-                    return nameof(EmptyString);
-                }
-                else if (this == FullString)
-                {
-                    return nameof(FullString);
-                }
-                else if (this == FullOrNullString)
-                {
-                    return nameof(FullOrNullString);
-                }
-                else if (this == WhiteSpaceString)
-                {
-                    return nameof(WhiteSpaceString);
-                }
-                else if (this == NotWhiteSpaceString)
-                {
-                    return nameof(NotWhiteSpaceString);
-                }
-                else if (this == FullNotWhiteSpaceString)
-                {
-                    return nameof(FullNotWhiteSpaceString);
-                }
-                else
-                {
-                    throw new InvalidOperationException("Unexpected object state");
                 }
             }
         }

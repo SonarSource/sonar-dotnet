@@ -30,9 +30,6 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
         public override SymbolicConstraint Opposite =>
             this == Empty ? NotEmpty : Empty;
 
-        protected override string Name =>
-            this == Empty ? nameof(Empty) : nameof(NotEmpty);
-
         private CollectionConstraint(ConstraintKind kind) : base(kind) { }
     }
 }

@@ -30,9 +30,6 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
         public override SymbolicConstraint Opposite =>
             this == Modified ? Constant : Modified;
 
-        protected override string Name =>
-            this == Modified ? nameof(Modified) : nameof(Constant);
-
         private ByteArrayConstraint(ConstraintKind kind) : base(kind) { }
     }
 }
