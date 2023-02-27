@@ -20,6 +20,7 @@
 
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Protobuf;
+using static SonarAnalyzer.Protobuf.TokenTypeInfo.Types;
 
 namespace SonarAnalyzer.Rules
 {
@@ -48,7 +49,7 @@ namespace SonarAnalyzer.Rules
 
             var tokenClassifier = GetTokenClassifier(semanticModel, skipIdentifierTokens);
             var triviaClassifier = GetTriviaClassifier();
-            var spans = new List<TokenTypeInfo.Types.TokenInfo>();
+            var spans = new List<TokenInfo>();
             // The second iteration of the tokens is intended since there is no processing done and we want to avoid copying all the tokens to a second collection.
             foreach (var token in tokens)
             {
@@ -74,7 +75,7 @@ namespace SonarAnalyzer.Rules
             tokenTypeInfo.TokenInfo.AddRange(spans);
             return tokenTypeInfo;
 
-            static void IterateTrivia(TriviaClassifierBase triviaClassifier, List<TokenTypeInfo.Types.TokenInfo> spans, SyntaxTriviaList triviaList)
+            static void IterateTrivia(TriviaClassifierBase triviaClassifier, List<TokenInfo> spans, SyntaxTriviaList triviaList)
             {
                 foreach (var trivia in triviaList)
                 {
@@ -117,7 +118,7 @@ namespace SonarAnalyzer.Rules
                 this.skipIdentifiers = skipIdentifiers;
             }
 
-            private TokenTypeInfo.Types.TokenInfo TokenInfo(SyntaxToken token, TokenType tokenType) =>
+            private TokenInfo TokenInfo(SyntaxToken token, TokenType tokenType) =>
                 string.IsNullOrWhiteSpace(token.ValueText)
                     ? null
                     : new()
@@ -126,7 +127,7 @@ namespace SonarAnalyzer.Rules
                         TextRange = GetTextRange(token.GetLocation().GetLineSpan()),
                     };
 
-            public TokenTypeInfo.Types.TokenInfo ClassifyToken(SyntaxToken token) =>
+            public TokenInfo ClassifyToken(SyntaxToken token) =>
                 token switch
                 {
                     _ when IsKeyword(token) => TokenInfo(token, TokenType.Keyword),
@@ -136,7 +137,7 @@ namespace SonarAnalyzer.Rules
                     _ => null,
                 };
 
-            private TokenTypeInfo.Types.TokenInfo ClassifyIdentifier(SyntaxToken token)
+            private TokenInfo ClassifyIdentifier(SyntaxToken token)
             {
                 if (semanticModel.GetDeclaredSymbol(token.Parent) is { } declaration)
                 {
@@ -152,7 +153,7 @@ namespace SonarAnalyzer.Rules
                 }
             }
 
-            private TokenTypeInfo.Types.TokenInfo ClassifyIdentifier(SyntaxToken token, ISymbol symbol) =>
+            private TokenInfo ClassifyIdentifier(SyntaxToken token, ISymbol symbol) =>
                 symbol switch
                 {
                     IAliasSymbol alias => ClassifyIdentifier(token, alias.Target),
@@ -170,7 +171,7 @@ namespace SonarAnalyzer.Rules
             protected abstract bool IsDocComment(SyntaxTrivia trivia);
             protected abstract bool IsRegularComment(SyntaxTrivia trivia);
 
-            public TokenTypeInfo.Types.TokenInfo ClassifyTrivia(SyntaxTrivia trivia) =>
+            public TokenInfo ClassifyTrivia(SyntaxTrivia trivia) =>
                 trivia switch
                 {
                     _ when IsRegularComment(trivia) => TokenInfo(trivia.SyntaxTree, TokenType.Comment, trivia.Span),
@@ -179,14 +180,14 @@ namespace SonarAnalyzer.Rules
                     _ => null,
                 };
 
-            private TokenTypeInfo.Types.TokenInfo TokenInfo(SyntaxTree tree, TokenType tokenType, TextSpan span) =>
+            private TokenInfo TokenInfo(SyntaxTree tree, TokenType tokenType, TextSpan span) =>
                 new()
                 {
                     TokenType = tokenType,
                     TextRange = GetTextRange(Location.Create(tree, span).GetLineSpan())
                 };
 
-            private TokenTypeInfo.Types.TokenInfo ClassifyDocComment(SyntaxTrivia trivia) =>
+            private TokenInfo ClassifyDocComment(SyntaxTrivia trivia) =>
                 TokenInfo(trivia.SyntaxTree, TokenType.Comment, trivia.FullSpan);
         }
     }
