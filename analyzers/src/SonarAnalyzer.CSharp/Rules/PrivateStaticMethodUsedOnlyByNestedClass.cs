@@ -72,8 +72,7 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
     private static bool HasNestedTypeDeclarations(TypeDeclarationSyntax type) =>
         type.Members
                 .OfType<TypeDeclarationSyntax>()
-                .Any(x => x is ClassDeclarationSyntax or StructDeclarationSyntax or InterfaceDeclarationSyntax
-                            || RecordDeclarationSyntaxWrapper.IsInstance(x));
+                .Any();
 
     private static bool IsPrivateAndStatic(MethodDeclarationSyntax method, TypeDeclarationSyntax containingType) =>
         method.Modifiers.Any(x => x.IsKind(SyntaxKind.StaticKeyword))
@@ -90,19 +89,6 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
     private static bool HasAnyModifier(MethodDeclarationSyntax method, params SyntaxKind[] modifiers) =>
         method.Modifiers.Any(x => x.IsAnyKind(modifiers));
 
-    private static IDictionary<MethodDeclarationSyntax, TypeDeclarationSyntax[]> MethodReferencesInsideType(IEnumerable<MethodDeclarationSyntax> methods, TypeDeclarationSyntax type, SemanticModel model)
-    {
-        var collector = new PotentialMethodReferenceCollector(methods);
-        collector.Visit(type);
-
-        return collector.PotentialMethodReferences
-                            .Where(x => x.Value.Any(id => ContainingTypeDeclaration(id) != type))
-                            .Select(x => new { Refs = x, MethodSymbol = model.GetDeclaredSymbol(x.Key) })
-                            .Select(x => new { MethodDeclaration = x.Refs.Key, References = x.Refs.Value.Where(t => MethodReferenceFrom(t, model) is { } methodReference && (methodReference == x.MethodSymbol || methodReference.ConstructedFrom == x.MethodSymbol) && ContainingMethodDeclaration(t) != x.Refs.Key).Select(t => new { Identifier = t, Type = ContainingTypeDeclaration(t) }) })
-                            .Where(x => x.References.Any())
-                            .ToDictionary(x => x.MethodDeclaration, x => x.References.Select(t => t.Type).ToArray());
-    }
-
     private static TypeDeclarationSyntax ContainingTypeDeclaration(IdentifierNameSyntax identifier) =>
         identifier
             .Ancestors()
@@ -117,17 +103,39 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
 
     private static TypeDeclarationSyntax LowestCommonAncestorOrSelf(IEnumerable<TypeDeclarationSyntax> declaredTypes)
     {
-        var treePaths = declaredTypes.Select(x => x.AncestorsAndSelf().OfType<TypeDeclarationSyntax>().Reverse().ToArray()).ToArray();
+        var treePaths = declaredTypes.Select(PathFromTop);
         int minPathLength = treePaths.Select(x => x.Length).Min();
+        var firstPath = treePaths.First();
+
         for (int i = 0; i < minPathLength; i++)
         {
-            if (!treePaths.All(x => x[i] == treePaths.First()[i]))
+            if (!treePaths.All(x => x[i] == firstPath[i]))
             {
-                return treePaths.First()[i - 1];
+                return firstPath[i - 1];
             }
         }
 
-        return treePaths.First()[minPathLength - 1];
+        return firstPath[minPathLength - 1];
+
+        static TypeDeclarationSyntax[] PathFromTop(SyntaxNode node) =>
+            node.AncestorsAndSelf()
+                .OfType<TypeDeclarationSyntax>()
+                .Distinct()
+                .Reverse()
+                .ToArray();
+    }
+
+    private static IDictionary<MethodDeclarationSyntax, TypeDeclarationSyntax[]> MethodReferencesInsideType(IEnumerable<MethodDeclarationSyntax> methods, TypeDeclarationSyntax type, SemanticModel model)
+    {
+        var collector = new PotentialMethodReferenceCollector(methods);
+        collector.Visit(type);
+
+        return collector.PotentialMethodReferences
+                            .Where(x => x.Value.Any(id => ContainingTypeDeclaration(id) != type))
+                            .Select(x => new { Refs = x, MethodSymbol = model.GetDeclaredSymbol(x.Key) })
+                            .Select(x => new { MethodDeclaration = x.Refs.Key, References = x.Refs.Value.Where(t => MethodReferenceFrom(t, model) is { } methodReference && (methodReference == x.MethodSymbol || methodReference.ConstructedFrom == x.MethodSymbol) && ContainingMethodDeclaration(t) != x.Refs.Key).Select(t => new { Identifier = t, Type = ContainingTypeDeclaration(t) }) })
+                            .Where(x => x.References.Any())
+                            .ToDictionary(x => x.MethodDeclaration, x => x.References.Select(t => t.Type).ToArray());
     }
 
     private static IMethodSymbol MethodReferenceFrom(IdentifierNameSyntax identifier, SemanticModel model)
