@@ -137,6 +137,25 @@ End Class";
             toString.NameIs(null).Should().BeFalse();
         }
 
+        [DataTestMethod]
+        [DataRow(true, "Test")]
+        [DataRow(true, "Test", "Test")]
+        [DataRow(true, "Other", "Test")]
+        [DataRow(false)]
+        [DataRow(false, "TEST")]
+        public void NameIsOrNames_CS(bool expected, params string[] orNames)
+        {
+            var identifier = Microsoft.CodeAnalysis.CSharp.SyntaxFactory.IdentifierName("Test");
+            identifier.NameIs("other", orNames).Should().Be(expected);
+        }
+
+        [TestMethod]
+        public void NameIsOrNamesNodeWithoutName_CS()
+        {
+            var returnStatement = Microsoft.CodeAnalysis.CSharp.SyntaxFactory.ReturnStatement();
+            returnStatement.NameIs("A", "B", "C").Should().BeFalse();
+        }
+
         [TestMethod]
         public void NameIs_VB()
         {
