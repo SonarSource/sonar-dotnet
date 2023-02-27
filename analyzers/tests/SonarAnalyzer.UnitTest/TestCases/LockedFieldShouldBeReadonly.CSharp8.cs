@@ -44,16 +44,3 @@
         lock (oPar switch { _ => new object() }) { } // FN, switch expression not supported
     }
 }
-
-class NonPrivateAccessibily
-{
-    private protected readonly object privateProtectedField = null;
-
-    private object PrivateProtectedProperty => null;
-
-    void Test()
-    {
-        lock (privateProtectedField) { }    // Noncompliant
-        lock (PrivateProtectedProperty) { } // Compliant, not a field
-    }
-}
