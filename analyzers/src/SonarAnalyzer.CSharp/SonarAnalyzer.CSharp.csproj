@@ -17,7 +17,7 @@
       <!-- Development dependency, these assets will be consumed but won't flow to the parent project -->
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="System.Collections.Immutable" Version="1.1.37">
+    <PackageReference Include="System.Collections.Immutable" Version="7.0.0">
       <!-- Downgrade System.Collections.Immutable to support VS2015 Update 3 -->
       <NoWarn>NU1605, NU1701</NoWarn>
     </PackageReference>
