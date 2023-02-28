@@ -76,36 +76,53 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
                 .OfType<TypeDeclarationSyntax>()
                 .Any();
 
-    private static bool IsPrivateAndStatic(MethodDeclarationSyntax method, TypeDeclarationSyntax containingType) =>
-        method.Modifiers.Any(x => x.IsKind(SyntaxKind.StaticKeyword))
-        && ((HasAnyModifier(method, SyntaxKind.PrivateKeyword) && !HasAnyModifier(method, SyntaxKind.ProtectedKeyword))
-           || (!HasAnyModifier(method, SyntaxKind.PublicKeyword, SyntaxKind.ProtectedKeyword, SyntaxKind.InternalKeyword) && IsClassOrRecordClassOrInterfaceDeclaration(containingType)));
-
     private static bool IsPartial(TypeDeclarationSyntax type) =>
         type.Modifiers.Any(x => x.IsKind(SyntaxKind.PartialKeyword));
 
-    private static bool IsClassOrRecordClassOrInterfaceDeclaration(TypeDeclarationSyntax type) =>
-        type is ClassDeclarationSyntax or InterfaceDeclarationSyntax
-        || (RecordDeclarationSyntaxWrapper.IsInstance(type) && !((RecordDeclarationSyntaxWrapper)type).ClassOrStructKeyword.IsKind(SyntaxKind.StructKeyword));
+
+    private static bool IsPrivateAndStatic(MethodDeclarationSyntax method, TypeDeclarationSyntax containingType)
+    {
+        return method.Modifiers.Any(x => x.IsKind(SyntaxKind.StaticKeyword))
+            && (IsExplicitlyPrivate() || IsImplicityPrivate());
+
+
+        bool IsExplicitlyPrivate() =>
+            HasAnyModifier(method, SyntaxKind.PrivateKeyword) && !HasAnyModifier(method, SyntaxKind.ProtectedKeyword);
+
+        // The default accessibility for record class members is private, but for record structs (like all structs) it's internal.
+        bool IsImplicityPrivate() =>
+            !HasAnyModifier(method, SyntaxKind.PublicKeyword, SyntaxKind.ProtectedKeyword, SyntaxKind.InternalKeyword)
+            && IsClassOrRecordClassOrInterfaceDeclaration(containingType);
+
+        static bool IsClassOrRecordClassOrInterfaceDeclaration(TypeDeclarationSyntax type) =>
+            type is ClassDeclarationSyntax or InterfaceDeclarationSyntax
+            || (RecordDeclarationSyntaxWrapper.IsInstance(type) && !((RecordDeclarationSyntaxWrapper)type).ClassOrStructKeyword.IsKind(SyntaxKind.StructKeyword));
+    }
 
     private static bool HasAnyModifier(MethodDeclarationSyntax method, params SyntaxKind[] modifiers) =>
         method.Modifiers.Any(x => x.IsAnyKind(modifiers));
 
     private static TypeDeclarationSyntax LowestCommonAncestorOrSelf(IEnumerable<TypeDeclarationSyntax> declaredTypes)
     {
-        var typeHierarchyToMethodsReference = declaredTypes.Select(PathFromTop);
-        int minPathLength = typeHierarchyToMethodsReference.Select(x => x.Length).Min();
-        var firstPath = typeHierarchyToMethodsReference.First();
+        var typeHierarchyFromTopToBottom = declaredTypes.Select(PathFromTop);
+        var minPathLength = typeHierarchyFromTopToBottom.Select(x => x.Length).Min();
+        var firstPath = typeHierarchyFromTopToBottom.First();
 
+        var lastCommonPathIndex = 0;
         for (int i = 0; i < minPathLength; i++)
         {
-            if (!typeHierarchyToMethodsReference.All(x => x[i] == firstPath[i]))
+            var isPartOfCommonPath = typeHierarchyFromTopToBottom.All(x => x[i] == firstPath[i]);
+            if (isPartOfCommonPath)
             {
-                return firstPath[i - 1];
+                lastCommonPathIndex = i;
+            }
+            else
+            {
+                break;
             }
         }
 
-        return firstPath[minPathLength - 1];
+        return firstPath[lastCommonPathIndex];
 
         static TypeDeclarationSyntax[] PathFromTop(SyntaxNode node) =>
             node.AncestorsAndSelf()
