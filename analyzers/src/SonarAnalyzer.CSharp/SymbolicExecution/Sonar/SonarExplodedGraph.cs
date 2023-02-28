@@ -582,9 +582,6 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar
                     // Not Supported
                     // Do nothing
                     break;
-
-                default:
-                    throw new NotSupportedException($"{instruction.Kind()}");
             }
 
             newProgramState = InvokeChecks(newProgramState, (ps, check) => check.PostProcessInstruction(node.ProgramPoint, ps));
