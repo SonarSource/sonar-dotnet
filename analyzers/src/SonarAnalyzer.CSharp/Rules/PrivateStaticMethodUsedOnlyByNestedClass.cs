@@ -44,18 +44,18 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(c =>
             {
-                var declaredType = (TypeDeclarationSyntax)c.Node;
+                var outerType = (TypeDeclarationSyntax)c.Node;
 
-                if (!IsPartial(declaredType)
-                    && HasNestedTypeDeclarations(declaredType)
-                    && PrivateStaticMethodsOf(declaredType) is { Length: > 0 } candidates)
+                if (!IsPartial(outerType)
+                    && HasNestedTypeDeclarations(outerType)
+                    && PrivateStaticMethodsOf(outerType) is { Length: > 0 } candidates)
                 {
-                    var methodReferences = TypesWhichUseTheMethods(candidates, declaredType, c.SemanticModel);
+                    var methodReferences = TypesWhichUseTheMethods(candidates, outerType, c.SemanticModel);
 
                     foreach (var reference in methodReferences)
                     {
                         var typeToMoveInto = LowestCommonAncestorOrSelf(reference.Types);
-                        if (typeToMoveInto != declaredType)
+                        if (typeToMoveInto != outerType)
                         {
                             var nestedTypeName = typeToMoveInto.Identifier.ValueText;
                             c.ReportIssue(Diagnostic.Create(Rule, reference.Method.Identifier.GetLocation(), nestedTypeName));
@@ -138,11 +138,11 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
 
         return collector.PotentialMethodReferences
                 .Where(x => !OnlyUsedByOuterType(x))
-                .Select(ResolveReferences)
+                .Select(DeclaredTypesWhichActuallyUseTheMethod)
                 .Where(x => x.Types.Any())
                 .ToArray();
 
-        MethodUsedByTypes ResolveReferences(MethodWithPotentialReferences m)
+        MethodUsedByTypes DeclaredTypesWhichActuallyUseTheMethod(MethodWithPotentialReferences m)
         {
             var methodSymbol = model.GetDeclaredSymbol(m.Method);
 
