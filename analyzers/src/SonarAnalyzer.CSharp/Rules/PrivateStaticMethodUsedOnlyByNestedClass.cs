@@ -65,26 +65,24 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
             },
             AnalyzedSyntaxKinds);
 
-    private static MethodDeclarationSyntax[] PrivateStaticMethodsOf(TypeDeclarationSyntax type) =>
-        type.Members
-                .OfType<MethodDeclarationSyntax>()
-                .Where(x => IsPrivateAndStatic(x, type))
-                .ToArray();
-
-    private static bool HasNestedTypeDeclarations(TypeDeclarationSyntax type) =>
-        type.Members
-                .OfType<TypeDeclarationSyntax>()
-                .Any();
-
     private static bool IsPartial(TypeDeclarationSyntax type) =>
         type.Modifiers.Any(x => x.IsKind(SyntaxKind.PartialKeyword));
 
+    private static bool HasNestedTypeDeclarations(TypeDeclarationSyntax type) =>
+        type.Members
+            .OfType<TypeDeclarationSyntax>()
+            .Any();
+
+    private static MethodDeclarationSyntax[] PrivateStaticMethodsOf(TypeDeclarationSyntax type) =>
+        type.Members
+            .OfType<MethodDeclarationSyntax>()
+            .Where(x => IsPrivateAndStatic(x, type))
+            .ToArray();
 
     private static bool IsPrivateAndStatic(MethodDeclarationSyntax method, TypeDeclarationSyntax containingType)
     {
         return method.Modifiers.Any(x => x.IsKind(SyntaxKind.StaticKeyword))
             && (IsExplicitlyPrivate() || IsImplicityPrivate());
-
 
         bool IsExplicitlyPrivate() =>
             HasAnyModifier(method, SyntaxKind.PrivateKeyword) && !HasAnyModifier(method, SyntaxKind.ProtectedKeyword);
@@ -97,10 +95,10 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
         static bool IsClassOrRecordClassOrInterfaceDeclaration(TypeDeclarationSyntax type) =>
             type is ClassDeclarationSyntax or InterfaceDeclarationSyntax
             || (RecordDeclarationSyntaxWrapper.IsInstance(type) && !((RecordDeclarationSyntaxWrapper)type).ClassOrStructKeyword.IsKind(SyntaxKind.StructKeyword));
-    }
 
-    private static bool HasAnyModifier(MethodDeclarationSyntax method, params SyntaxKind[] modifiers) =>
-        method.Modifiers.Any(x => x.IsAnyKind(modifiers));
+        static bool HasAnyModifier(MethodDeclarationSyntax method, params SyntaxKind[] modifiers) =>
+            method.Modifiers.Any(x => x.IsAnyKind(modifiers));
+    }
 
     private static TypeDeclarationSyntax LowestCommonAncestorOrSelf(IEnumerable<TypeDeclarationSyntax> declaredTypes)
     {
@@ -139,23 +137,23 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
         collector.Visit(outerType);
 
         return collector.PotentialMethodReferences
-                            .Where(x => !OnlyUsedByOuterType(x))
-                            .Select(ResolveReferences)
-                            .Where(x => x.Types.Any())
-                            .ToArray();
+                .Where(x => !OnlyUsedByOuterType(x))
+                .Select(ResolveReferences)
+                .Where(x => x.Types.Any())
+                .ToArray();
 
         MethodUsedByTypes ResolveReferences(MethodWithPotentialReferences m)
         {
             var methodSymbol = model.GetDeclaredSymbol(m.Method);
 
             var typesWhichUseTheMethod = m.PotentialReferences
-                .Where(x =>
-                    !IsRecursiveMethodCall(x, m.Method)
-                    && model.GetSymbolOrCandidateSymbol(x) is IMethodSymbol { } methodReference
-                    && (methodReference.Equals(methodSymbol) || methodReference.ConstructedFrom.Equals(methodSymbol)))
-                .Select(ContainingTypeDeclaration)
-                .Distinct()
-                .ToArray();
+                    .Where(x =>
+                        !IsRecursiveMethodCall(x, m.Method)
+                        && model.GetSymbolOrCandidateSymbol(x) is IMethodSymbol { } methodReference
+                        && (methodReference.Equals(methodSymbol) || methodReference.ConstructedFrom.Equals(methodSymbol)))
+                    .Select(ContainingTypeDeclaration)
+                    .Distinct()
+                    .ToArray();
 
             return new MethodUsedByTypes(m.Method, typesWhichUseTheMethod);
         }
@@ -165,15 +163,16 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
 
         bool OnlyUsedByOuterType(MethodWithPotentialReferences m) =>
             m.PotentialReferences.All(x => ContainingTypeDeclaration(x) == outerType);
+
+        static TypeDeclarationSyntax ContainingTypeDeclaration(IdentifierNameSyntax identifier) =>
+            identifier
+                .Ancestors()
+                .OfType<TypeDeclarationSyntax>()
+                .First();
     }
 
-    private static TypeDeclarationSyntax ContainingTypeDeclaration(IdentifierNameSyntax identifier) =>
-        identifier
-            .Ancestors()
-            .OfType<TypeDeclarationSyntax>()
-            .First();
-
     private sealed record MethodWithPotentialReferences(MethodDeclarationSyntax Method, IdentifierNameSyntax[] PotentialReferences);
+
     private sealed record MethodUsedByTypes(MethodDeclarationSyntax Method, TypeDeclarationSyntax[] Types);
 
     /// <summary>
