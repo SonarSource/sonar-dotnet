@@ -28,7 +28,6 @@ using SonarAnalyzer.Extensions;
 using SonarAnalyzer.LiveVariableAnalysis.CSharp;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Sonar;
-using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
 using SonarAnalyzer.UnitTest.CFG.Sonar;
 using SonarAnalyzer.UnitTest.Helpers;
 
@@ -899,6 +898,27 @@ namespace Namespace
             };
 
             context.WalkWithInstructions(4);
+        }
+
+        [DataTestMethod]
+        [DataRow("int")]
+        [DataRow("(string s)")]
+        [DataRow("1 or 2")]
+        [DataRow("1 and 2")]
+        [DataRow("not 1")]
+        [DataRow("> 5")]
+        [DataRow("[] empty")]
+        public void ExplodedGraph_SwitchStatement_UnsupportedPatternKinds(string pattern)
+        {
+            var testInput = $$"""
+                switch (new object())
+                {
+                    case {{pattern}}: break;
+                }
+                """;
+            var context = new ExplodedGraphContext(testInput);
+            var walk = () => context.WalkWithInstructions(2);
+            walk.Should().Throw<Exception>().WithMessage("Expected NumberOfExitBlockReached to be 1, but found 0.");
         }
 
         [TestMethod]

@@ -4142,6 +4142,22 @@ var result = first switch {""a"" => second switch {""x"" => 1, _ => 2}, ""b"" =>
         }
 
         [TestMethod]
+        public void Cfg_ParenthesizedPattern_InIf_IsNotSupported()
+        {
+            var exception = Assert.ThrowsException<NotSupportedException>(() => Build(@"if (tainted is (string s)) { }"));
+
+            exception.Message.Should().Be("ParenthesizedPattern");
+        }
+
+        [TestMethod]
+        public void Cfg_ListPattern_InIf_IsNotSupported()
+        {
+            var exception = Assert.ThrowsException<NotSupportedException>(() => Build(@"if (tainted is []) { }"));
+
+            exception.Message.Should().Be("ListPattern");
+        }
+
+        [TestMethod]
         public void Cfg_Switch_Patterns_NoDefault()
         {
             var cfg = Build("cw0(); switch(o) { case int i: case string s: cw1(); break; case double d: cw2(); break; } cw3();");
