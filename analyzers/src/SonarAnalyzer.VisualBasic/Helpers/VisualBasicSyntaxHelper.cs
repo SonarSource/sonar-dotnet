@@ -259,13 +259,9 @@ internal static class VisualBasicSyntaxHelper
     ///
     /// There can be zero, one or more results based on parameter type (Optional or ParamArray/params).
     /// </summary>
-    public static ImmutableArray<SyntaxNode> ArgumentValuesForParameter(SemanticModel semanticModel, ArgumentListSyntax argumentList, string parameterName)
-    {
-        var methodParameterLookup = new VisualBasicMethodParameterLookup(argumentList, semanticModel);
-        if (methodParameterLookup.TryGetSyntax(parameterName, out var expressions))
-        {
-            return expressions;
-        }
-        return ImmutableArray<SyntaxNode>.Empty;
-    }
+    public static ImmutableArray<SyntaxNode> ArgumentValuesForParameter(SemanticModel semanticModel, ArgumentListSyntax argumentList, string parameterName) =>
+        argumentList != null
+            && new VisualBasicMethodParameterLookup(argumentList, semanticModel).TryGetSyntax(parameterName, out var expressions)
+                ? expressions
+                : ImmutableArray<SyntaxNode>.Empty;
 }
