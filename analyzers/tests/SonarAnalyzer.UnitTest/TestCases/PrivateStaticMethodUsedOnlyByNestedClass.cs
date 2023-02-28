@@ -4,16 +4,16 @@ using System.Runtime.InteropServices;
 
 class OuterClass
 {
-    static void OnlyUsedOnceByNestedClass() { }                     // Noncompliant {{Move the method inside 'NestedClass'.}}
+    static void OnlyUsedOnceByNestedClass() { }                     // Noncompliant {{Move this method inside 'NestedClass'.}}
     //          ^^^^^^^^^^^^^^^^^^^^^^^^^
     static void OnlyUsedByNestedClassMultipleTimes() { }            // Noncompliant
     static void OnlyUsedByNestedClassWithClassName() { }            // Noncompliant
     static void UsedByMultipleSiblingNestedClasses() { }            // Compliant - it needs to stay in the outer class
     static void UsedByOuterAndNestedClasses() { }                   // Compliant - it's used by the outer class, so it needs to stay there
     static void UsedBySiblingAndDeeperNestedClasses() { }           // Compliant - SiblingNestedClass and DeeperNestedClass both need access to the method, so it must stay in the outer class
-    static void OnlyUsedByDeeperNestedClass() { }                   // Noncompliant {{Move the method inside 'DeeperNestedClass'.}}
-    static void UsedByNestedClassAndDeeperNestedClass() { }         // Noncompliant {{Move the method inside 'NestedClass'.}}
-    static void UsedByDeeperNestedClassesOnTheSameLevel() { }       // Noncompliant {{Move the method inside 'NestedClass'.}}
+    static void OnlyUsedByDeeperNestedClass() { }                   // Noncompliant {{Move this method inside 'DeeperNestedClass'.}}
+    static void UsedByNestedClassAndDeeperNestedClass() { }         // Noncompliant {{Move this method inside 'NestedClass'.}}
+    static void UsedByDeeperNestedClassesOnTheSameLevel() { }       // Noncompliant {{Move this method inside 'NestedClass'.}}
     static void UnusedMethod() { }                                  // Compliant - no need to move unused method anywhere
 
     void NotStatic() { }                                            // Compliant - method is not static
@@ -58,7 +58,7 @@ class OuterClass
             UsedOnlyByConstructorInNestedClass();
         }
 
-        static void NestedClassMethodUsedByDeeperNestedClass() { }  // Noncompliant {{Move the method inside 'DeeperNestedClass'.}}
+        static void NestedClassMethodUsedByDeeperNestedClass() { }  // Noncompliant {{Move this method inside 'DeeperNestedClass'.}}
 
         void Bar()
         {

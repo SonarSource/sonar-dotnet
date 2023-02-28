@@ -26,7 +26,7 @@ namespace SonarAnalyzer.Rules.CSharp;
 public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAnalyzer
 {
     private const string DiagnosticId = "S3398";
-    private const string MessageFormat = "Move the method inside '{0}'.";
+    private const string MessageFormat = "Move this method inside '{0}'.";
 
     private static readonly SyntaxKind[] AnalyzedSyntaxKinds = new[]
     {
@@ -93,13 +93,13 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
 
     private static TypeDeclarationSyntax LowestCommonAncestorOrSelf(IEnumerable<TypeDeclarationSyntax> declaredTypes)
     {
-        var treePaths = declaredTypes.Select(PathFromTop);
-        int minPathLength = treePaths.Select(x => x.Length).Min();
-        var firstPath = treePaths.First();
+        var typeHierarchyToMethodsReference = declaredTypes.Select(PathFromTop);
+        int minPathLength = typeHierarchyToMethodsReference.Select(x => x.Length).Min();
+        var firstPath = typeHierarchyToMethodsReference.First();
 
         for (int i = 0; i < minPathLength; i++)
         {
-            if (!treePaths.All(x => x[i] == firstPath[i]))
+            if (!typeHierarchyToMethodsReference.All(x => x[i] == firstPath[i]))
             {
                 return firstPath[i - 1];
             }
