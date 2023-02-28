@@ -576,9 +576,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar
                     // Do nothing
                     break;
 
-                case SyntaxKindEx.ParenthesizedPattern:
-                case SyntaxKindEx.ListPattern:
-                case SyntaxKindEx.SlicePattern:
+                default:
                     // Not Supported
                     // Do nothing
                     break;
