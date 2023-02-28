@@ -6,24 +6,34 @@ namespace Tests.Diagnostics
     class Program
     {
         [Fact]
-        public void Foo()
+        public void Simple(string str, double d)
         {
-            var str = "";
-            Assert.Equal(str, ""); // Noncompliant {{Make sure these 2 arguments are in the correct order: expected value, actual value.}}
+            Assert.Equal("", str);       // Compliant
+            Assert.Equal(str, "");       // Noncompliant {{Make sure these 2 arguments are in the correct order: expected value, actual value.}}
 //                       ^^^^^^^
-            Assert.Same(str, ""); // Noncompliant
-//                      ^^^^^^^
-            double d = 42;
-            Assert.Equal(d, 42); // Noncompliant
+            Assert.Equal(42, d);         // Compliant
+            Assert.Equal(d, 42);         // Noncompliant
 //                       ^^^^^
-            Assert.Same(d, 42); // Noncompliant
-            Assert.NotSame(d, 42); // Noncompliant
-            Assert.NotSame(42, d);
-            Assert.Equal(d, 42, 1); // Noncompliant
+            Assert.NotEqual("", str);    // Compliant
+            Assert.NotEqual(str, "");    // Noncompliant
+//                          ^^^^^^^
+            Assert.NotEqual(42, d);      // Compliant
+            Assert.NotEqual(d, 42);      // Noncompliant
+//                          ^^^^^
+            Assert.Same("", str);        // Compliant
+            Assert.Same(str, "");        // Noncompliant
+//                      ^^^^^^^
+            Assert.Same(42, d);          // Compliant
+            Assert.Same(d, 42);          // Noncompliant
+//                      ^^^^^
+            Assert.NotSame("", str);     // Compliant
+            Assert.NotSame(str, "");     // Noncompliant
+//                         ^^^^^^^
+            Assert.NotSame(42, d);       // Compliant
+            Assert.NotSame(d, 42);       // Noncompliant
+//                         ^^^^^
 
-            Assert.Equal("", str);
-            Assert.Same("", str);
-            Assert.Equal(42, d, 1);
+            Assert.Null(str);
         }
 
         [Fact]

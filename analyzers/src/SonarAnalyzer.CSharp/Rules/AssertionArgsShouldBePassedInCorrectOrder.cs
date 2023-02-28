@@ -69,7 +69,7 @@ public sealed class AssertionArgsShouldBePassedInCorrectOrder : SonarDiagnosticA
                     new(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert, "notExpected", "actual"),
                     new(KnownType.NUnit_Framework_Assert, "expected", "actual")
                 },
-            "Equal" or "Same" or "NotSame" => new KnownAssertParameters[]
+            "Equal" or "NotEqual" or "Same" or "NotSame" => new KnownAssertParameters[]
                 {
                     new(KnownType.Xunit_Assert, "expected", "actual")
                 },

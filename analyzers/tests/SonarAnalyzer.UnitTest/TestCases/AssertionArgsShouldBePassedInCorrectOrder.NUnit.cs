@@ -9,25 +9,43 @@ namespace Tests.Diagnostics
         void FakeAssert(object a, object b) { }
 
         [Test]
-        public void Foo()
+        public void Simple(string str, double d)
         {
-            var str = "";
-            Assert.AreEqual(str, ""); // Noncompliant {{Make sure these 2 arguments are in the correct order: expected value, actual value.}}
+            Assert.AreEqual("", str);       // Compliant
+            Assert.AreEqual(str, "");       // Noncompliant {{Make sure these 2 arguments are in the correct order: expected value, actual value.}}
 //                          ^^^^^^^
-            Assert.AreSame(str, ""); // Noncompliant
-//                         ^^^^^^^
-            Assert.AreNotSame(str, ""); // Noncompliant
-
-            double d = 42;
-            Assert.AreEqual(d, 42); // Noncompliant
+            Assert.AreEqual(42, d);         // Compliant
+            Assert.AreEqual(d, 42);         // Noncompliant
 //                          ^^^^^
-            Assert.AreSame(d, 42); // Noncompliant
-            Assert.AreEqual(d, 42, 1, "message"); // Noncompliant
+            Assert.AreNotEqual("", str);    // Compliant
+            Assert.AreNotEqual(str, "");    // Noncompliant
+//                             ^^^^^^^
+            Assert.AreNotEqual(42, d);      // Compliant
+            Assert.AreNotEqual(d, 42);      // Noncompliant
+//                             ^^^^^
+            Assert.AreSame("", str);        // Compliant
+            Assert.AreSame(str, "");        // Noncompliant
+//                         ^^^^^^^
+            Assert.AreSame(42, d);          // Compliant
+            Assert.AreSame(d, 42);          // Noncompliant
+//                         ^^^^^
+            Assert.AreNotSame("", str);     // Compliant
+            Assert.AreNotSame(str, "");     // Noncompliant
+//                            ^^^^^^^
+            Assert.AreNotSame(42, d);       // Compliant
+            Assert.AreNotSame(d, 42);       // Noncompliant
+//                            ^^^^^
 
-            Assert.AreEqual("", str);
-            Assert.AreSame("", str);
-            Assert.AreEqual(42, d, 1, "message");
+            Assert.AreEqual("", str, "message");    // Compliant
+            Assert.AreEqual(str, "", "message");    // Noncompliant
+            Assert.AreNotEqual("", str, "message"); // Compliant
+            Assert.AreNotEqual(str, "", "message"); // Noncompliant
+            Assert.AreSame("", str, "message");     // Compliant
+            Assert.AreSame(str, "", "message");     // Noncompliant
+            Assert.AreNotSame("", str, "message");  // Compliant
+            Assert.AreNotSame(str, "", "message");  // Noncompliant
 
+            Assert.IsNull(str);
             FakeAssert(d, 42);
         }
     }
