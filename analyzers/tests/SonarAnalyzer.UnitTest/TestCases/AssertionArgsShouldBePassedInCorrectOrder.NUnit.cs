@@ -13,28 +13,28 @@ namespace Tests.Diagnostics
         {
             Assert.AreEqual("", str);       // Compliant
             Assert.AreEqual(str, "");       // Noncompliant {{Make sure these 2 arguments are in the correct order: expected value, actual value.}}
-//                          ^^^^^^^
+            //              ^^^^^^^
             Assert.AreEqual(42, d);         // Compliant
             Assert.AreEqual(d, 42);         // Noncompliant
-//                          ^^^^^
+            //              ^^^^^
             Assert.AreNotEqual("", str);    // Compliant
             Assert.AreNotEqual(str, "");    // Noncompliant
-//                             ^^^^^^^
+            //                 ^^^^^^^
             Assert.AreNotEqual(42, d);      // Compliant
             Assert.AreNotEqual(d, 42);      // Noncompliant
-//                             ^^^^^
+            //                 ^^^^^
             Assert.AreSame("", str);        // Compliant
             Assert.AreSame(str, "");        // Noncompliant
-//                         ^^^^^^^
+            //             ^^^^^^^
             Assert.AreSame(42, d);          // Compliant
             Assert.AreSame(d, 42);          // Noncompliant
-//                         ^^^^^
+            //             ^^^^^
             Assert.AreNotSame("", str);     // Compliant
             Assert.AreNotSame(str, "");     // Noncompliant
-//                            ^^^^^^^
+            //                ^^^^^^^
             Assert.AreNotSame(42, d);       // Compliant
             Assert.AreNotSame(d, 42);       // Noncompliant
-//                            ^^^^^
+            //                ^^^^^
 
             Assert.AreEqual("", str, "message");    // Compliant
             Assert.AreEqual(str, "", "message");    // Noncompliant
@@ -66,16 +66,16 @@ namespace Repro_6630
             Assert.AreEqual(actual: str, expected: ""); // Compliant
             Assert.AreEqual(expected: str, actual: ""); // Noncompliant
 
-            Assert.AreNotEqual(actual: "", expected: str); // Noncompliant
-            Assert.AreSame(actual: "", expected: str); // Noncompliant
-            Assert.AreNotSame(actual: "", expected: str); // Noncompliant
+            Assert.AreNotEqual(actual: "", expected: str);  // Noncompliant
+            Assert.AreSame(actual: "", expected: str);      // Noncompliant
+            Assert.AreNotSame(actual: "", expected: str);   // Noncompliant
 
             Assert.AreEqual(actual: null, expected: new Program()); // Noncompliant
 
-            Assert.AreEqual(message: "", expected: str, actual: ""); // Noncompliant
-            //                                     ^^^^^^^^^^^^^^^
-            Assert.AreEqual(expected: str, message: "", actual: ""); // Noncompliant
-            //                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            Assert.AreEqual(message: "", expected: str, actual: "");    // Noncompliant
+            //                           ^^^^^^^^^^^^^^^^^^^^^^^^^
+            Assert.AreEqual(expected: str, message: "", actual: "");    // Noncompliant
+            //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         }
 
         [Test]
