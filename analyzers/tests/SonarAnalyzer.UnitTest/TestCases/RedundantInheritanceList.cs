@@ -160,4 +160,15 @@ namespace Tests.Diagnostics
 
     struct RedunantInterfaceImpl : IA, IBase { } // Noncompliant {{'IA' implements 'IBase' so 'IBase' can be removed from the inheritance list.}}
     //                               ^^^^^^^
+
+    // Reproducer for FP: https://github.com/SonarSource/sonar-dotnet/issues/6823
+    class Foo { }
+
+    interface IBar
+    {
+        int Test();
+    }
+
+    class Bar : Foo, IBar { } // Error [CS0535]
+    // Noncompliant@-1 {{'Foo' implements 'IBar' so 'IBar' can be removed from the inheritance list.}} FP
 }
