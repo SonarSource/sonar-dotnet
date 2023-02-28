@@ -1,0 +1,43 @@
+<p>When a <code>private static</code> method is only invoked by a nested class, there’s no reason not to move it into that class. It will still have
+the same access to the outer class' static members, but the outer class will be clearer and less cluttered.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public class Outer
+{
+    private const int base = 42;
+
+    private static void Print(int num)  // Noncompliant - static method is only used by the nested class, should be moved there
+    {
+        Console.WriteLine(num + base);
+    }
+
+    public class Nested
+    {
+        public void SomeMethod()
+        {
+            Outer.Print(1);
+        }
+    }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public class Outer
+{
+    private const int base = 42;
+
+    public class Nested
+    {
+        public void SomeMethod()
+        {
+            Print(1);
+        }
+
+        private static void Print(int num)
+        {
+            Console.WriteLine(num + base);
+        }
+    }
+}
+</pre>
+
