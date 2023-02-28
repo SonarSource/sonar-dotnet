@@ -185,3 +185,37 @@ class DebugViewClass
         }
     }
 }
+
+public class EdgeCaseWithLongCommonPaths
+{
+    private static void StaticMethod() { }                           // Noncompliant {{Move this method inside 'InsideMiddleOne'.}}
+
+    public class MiddleOne
+    {
+        public class InsideMiddleOne
+        {
+            public class Foo
+            {
+                public class FooLeaf
+                {
+                    public void Method() => StaticMethod();
+                }
+            }
+
+            public class Bar
+            {
+                public void Method() => StaticMethod();
+                public class BarLeaf
+                {
+                    public void Method() => StaticMethod();
+                }
+            }
+        }
+    }
+    public class MiddleTwo {
+        public void StaticMethod()
+        {
+        }
+        public void Method() => StaticMethod();
+    }
+}
