@@ -18,8 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.Rules.CSharp;
-using SonarAnalyzer.UnitTest.MetadataReferences;
 
 namespace SonarAnalyzer.UnitTest.Rules;
 
@@ -52,7 +52,8 @@ public class AssertionsShouldBeCompleteTest
     [TestMethod]
     public void AssertionsShouldBeComplete_FluentAssertions_CSharp7() =>
         fluentAssertions
-        .WithOptions(ParseOptionsHelper.OnlyCSharp7)
+        // The overload resolution errors for s[0].Should() and collection.Should() are fixed in CSharp 7.3.
+        .WithOptions(ImmutableArray.Create<ParseOptions>(new CSharpParseOptions[] { new(LanguageVersion.CSharp7), new(LanguageVersion.CSharp7_1), new(LanguageVersion.CSharp7_2) }))
         .AddPaths("AssertionsShouldBeComplete.FluentAssertions.CSharp7.cs")
         .Verify();
 
