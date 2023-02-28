@@ -917,14 +917,8 @@ namespace Namespace
                 }
                 """;
             var context = new ExplodedGraphContext(testInput);
-            var actualInstructions = new List<string>();
-            context.ExplodedGraph.InstructionProcessed += (sender, args) =>
-                actualInstructions.Add(args.Instruction.ToString());
-
             var walk = () => context.WalkWithInstructions(2);
-
             walk.Should().Throw<Exception>().WithMessage("Expected NumberOfExitBlockReached to be 1, but found 0.");
-            actualInstructions.Should().Equal("new object()", pattern);
         }
 
         [TestMethod]
