@@ -147,4 +147,15 @@ namespace Tests.Diagnostics
     }
 
     struct RedunantInterfaceImpl : IA { } // Fixed
+
+    // Reproducer for FP: https://github.com/SonarSource/sonar-dotnet/issues/6823
+    class Foo { }
+
+    interface IBar
+    {
+        int Test();
+    }
+
+    class Bar : Foo { } // Error [CS0535]
+    // Fixed
 }
