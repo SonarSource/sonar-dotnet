@@ -102,25 +102,18 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
 
     private static TypeDeclarationSyntax LowestCommonAncestorOrSelf(IEnumerable<TypeDeclarationSyntax> declaredTypes)
     {
-        var typeHierarchyFromTopToBottom = declaredTypes.Select(PathFromTop);
+        var typeHierarchyFromTopToBottom = declaredTypes.Select(PathFromTop).ToArray();
         var minPathLength = typeHierarchyFromTopToBottom.Select(x => x.Length).Min();
         var firstPath = typeHierarchyFromTopToBottom.First();
+        var levels = Enumerable.Range(0, minPathLength);
+        var firstDifferingLevel = levels.FirstOrDefault(NotEveryNodeIsTheSameOnLevel);
+        int levelOfLowestCommonAncestor = firstDifferingLevel == default
+            ? minPathLength - 1
+            : firstDifferingLevel - 1;
+        return firstPath[levelOfLowestCommonAncestor];
 
-        var lastCommonPathIndex = 0;
-        for (int i = 0; i < minPathLength; i++)
-        {
-            var isPartOfCommonPath = typeHierarchyFromTopToBottom.All(x => x[i] == firstPath[i]);
-            if (isPartOfCommonPath)
-            {
-                lastCommonPathIndex = i;
-            }
-            else
-            {
-                break;
-            }
-        }
-
-        return firstPath[lastCommonPathIndex];
+        bool NotEveryNodeIsTheSameOnLevel(int level) =>
+            typeHierarchyFromTopToBottom.Any(x => x[level] != firstPath[level]);
 
         static TypeDeclarationSyntax[] PathFromTop(SyntaxNode node) =>
             node.AncestorsAndSelf()
@@ -178,7 +171,8 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
     /// <summary>
     /// Collects all the potential references to a set of methods inside the given syntax node.
     /// The collector looks for identifiers which match any of the methods' names, but does not try to resolve them to symbols with the semantic model.
-    /// Performance gains: by only using the syntax tree to find matches we can eliminate certain methods (which are only used by the type which has declared it) without using the more costly symbolic lookup.
+    /// Performance gains: by only using the syntax tree to find matches we can eliminate certain methods (which are only used by the type which has declared it)
+    /// without using the more costly symbolic lookup.
     /// </summary>
     private sealed class PotentialMethodReferenceCollector : CSharpSyntaxWalker
     {
