@@ -918,7 +918,7 @@ namespace Namespace
                 """;
             var context = new ExplodedGraphContext(testInput);
             var walk = () => context.WalkWithInstructions(2);
-            walk.Should().Throw<Exception>().WithMessage("Expected NumberOfExitBlockReached to be 1, but found 0.");
+            walk.Should().Throw<Exception>().WithMessage("Expected NumberOfExitBlockReached to be 1, but found 0 (difference of -1).");
         }
 
         [TestMethod]
