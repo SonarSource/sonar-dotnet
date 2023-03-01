@@ -35,5 +35,13 @@ namespace SonarAnalyzer.SymbolicExecution.Constraints
 
         public bool Equals(bool value) =>
             this == From(value);
+
+        public override string ToString() =>
+            this switch
+            {
+                _ when ReferenceEquals(this, True) => nameof(True),
+                _ when ReferenceEquals(this, False) => nameof(False),
+                _ => base.ToString(),
+            };
     }
 }

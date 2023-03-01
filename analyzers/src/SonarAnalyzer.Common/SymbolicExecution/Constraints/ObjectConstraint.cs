@@ -31,5 +31,13 @@ namespace SonarAnalyzer.SymbolicExecution.Constraints
             this == Null ? NotNull : null;
 
         private ObjectConstraint(ConstraintKind kind) : base(kind) { }
+
+        public override string ToString() =>
+            this switch
+            {
+                _ when ReferenceEquals(this, Null) => nameof(Null),
+                _ when ReferenceEquals(this, NotNull) => nameof(NotNull),
+                _ => base.ToString(),
+            };
     }
 }
