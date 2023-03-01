@@ -53,7 +53,7 @@ public class SonarLintXmlReader
             using var reader = XmlReader.Create(sr);
             return (SonarLintXml)serializer.Deserialize(reader);
         }
-        catch (Exception)
+        catch
         {
             return SonarLintXml.Empty;
         }
@@ -103,7 +103,7 @@ public class SonarLintXmlSettingsReader
         ? settings.Where(x => x.Key.Equals(property)).Select(x => x.Value).FirstOrDefault()
         : string.Empty;
 
-    private string ReadString(string str) =>
+    private static string ReadString(string str) =>
         string.IsNullOrEmpty(str) ? string.Empty : str;
 
     private static string[] ReadCommaSeparatedArray(string str) =>
