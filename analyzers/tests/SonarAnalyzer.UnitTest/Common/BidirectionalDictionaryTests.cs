@@ -54,8 +54,8 @@ namespace SonarAnalyzer.UnitTest.Common
             sut.Add(4, 14);
             sut.Add(5, 15);
 
-            sut.AKeys.Should().BeEquivalentTo(1, 2, 3, 4, 5);
-            sut.BKeys.Should().BeEquivalentTo(11, 12, 13, 14, 15);
+            sut.AKeys.Should().BeEquivalentTo(new[] {1, 2, 3, 4, 5});
+            sut.BKeys.Should().BeEquivalentTo(new[] {11, 12, 13, 14, 15});
         }
 
         [TestMethod]

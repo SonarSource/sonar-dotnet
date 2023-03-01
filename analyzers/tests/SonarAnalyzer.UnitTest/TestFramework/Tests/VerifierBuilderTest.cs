@@ -74,8 +74,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             var one = Empty.AddSnippet("First");
             var two = one.AddSnippet("Second", "WithFileName.cs");
             Empty.Snippets.Should().BeEmpty();
-            one.Snippets.Should().BeEquivalentTo(new Snippet("First", null));
-            two.Snippets.Should().BeEquivalentTo(new Snippet("First", null), new Snippet("Second", "WithFileName.cs"));
+            one.Snippets.Should().Equal(new Snippet("First", null));
+            two.Snippets.Should().Equal(new Snippet("First", null), new Snippet("Second", "WithFileName.cs"));
         }
 
         [TestMethod]
@@ -191,8 +191,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             var one = Empty.WithOnlyDiagnostics(NullPointerDereference.S2259);
             var two = one.WithOnlyDiagnostics(PublicMethodArgumentsShouldBeCheckedForNull.S3900, ConditionEvaluatesToConstant.S2583);
             Empty.OnlyDiagnostics.Should().BeEmpty();
-            one.OnlyDiagnostics.Should().BeEquivalentTo(NullPointerDereference.S2259);
-            two.OnlyDiagnostics.Should().BeEquivalentTo(PublicMethodArgumentsShouldBeCheckedForNull.S3900, ConditionEvaluatesToConstant.S2583);
+            one.OnlyDiagnostics.Should().BeEquivalentTo(new[] { NullPointerDereference.S2259 });
+            two.OnlyDiagnostics.Should().BeEquivalentTo(new[] { PublicMethodArgumentsShouldBeCheckedForNull.S3900, ConditionEvaluatesToConstant.S2583 });
         }
 
         [TestMethod]

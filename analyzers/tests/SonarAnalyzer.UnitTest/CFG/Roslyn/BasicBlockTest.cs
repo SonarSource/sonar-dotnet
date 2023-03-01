@@ -149,7 +149,7 @@ public class Sample
             body.Kind.Should().Be(BasicBlockKind.Block);
             body.Operations.Should().HaveCount(1).And.Subject.Single().Should().BeAssignableTo<IExpressionStatementOperation>();
             body.BranchValue.Should().BeAssignableTo<ILiteralOperation>();
-            body.OperationsAndBranchValue.Should().OnlyContainInOrder(body.Operations[0], body.BranchValue);
+            body.OperationsAndBranchValue.Should().Equal(body.Operations[0], body.BranchValue);
             exit.Kind.Should().Be(BasicBlockKind.Exit);
             exit.Operations.Should().BeEmpty();
         }

@@ -129,7 +129,7 @@ Method(4);";
                     list.Add(operation.Instance.Kind + ": " + operation.Instance.Syntax);
                 }
             }
-            list.Should().OnlyContainInOrder(expected);
+            list.Should().Equal(expected);
         }
 
         private static OperationExecutionOrder Compile(string methodBody, bool reverseOrder)

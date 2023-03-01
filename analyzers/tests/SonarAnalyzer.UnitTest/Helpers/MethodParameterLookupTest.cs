@@ -214,7 +214,8 @@ End Module
                 {
                     if (parameter.IsParams && lookup.TryGetSyntax(parameter, out var expressions))
                     {
-                        expressions.Select(x => ConstantValue(x)).Should().BeEquivalentTo((IEnumerable)ExtractExpectedValue(expectedArguments, parameter.Name));
+                        var expected = ExtractExpectedValue(expectedArguments, parameter.Name).Should().BeAssignableTo<IEnumerable>().Subject.Cast<object>();
+                        expressions.Select(x => ConstantValue(x)).Should().Equal(expected);
                     }
                     else if (!parameter.IsParams && lookup.TryGetNonParamsSyntax(parameter, out var expression))
                     {
@@ -239,7 +240,8 @@ End Module
                         var expected = ExtractExpectedValue(expectedArguments, symbol.Name);
                         if (symbol.IsParams)
                         {
-                            ((IEnumerable)expected).Should().Contain(value); // Expected contains all values {1, 2, 3} for ParamArray/params, but foreach is probing one at a time
+                            // Expected contains all values {1, 2, 3} for ParamArray/params, but foreach is probing one at a time
+                            expected.Should().BeAssignableTo<IEnumerable>().Which.Cast<object>().Should().Contain(value);
                         }
                         else
                         {
