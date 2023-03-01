@@ -207,7 +207,7 @@ public class MethodParameterLookupTest
         var lookup = new CSharpMethodParameterLookup(tree.GetRoot().DescendantNodes().OfType<CSharpSyntax.InvocationExpressionSyntax>().Single(), model);
 
         lookup.TryGetSyntax("p", out var expressions).Should().BeTrue();
-        expressions.Should().BeEquivalentTo(new { Identifier = new { ValueText = "d" } });
+        expressions.Should().BeEquivalentTo<object>(new[] { new { Identifier = new { ValueText = "d" } } });
     }
 
     [TestMethod]
@@ -230,7 +230,7 @@ public class MethodParameterLookupTest
         var lookup = new VisualBasicMethodParameterLookup(tree.GetRoot().DescendantNodes().OfType<VBSyntax.InvocationExpressionSyntax>().Single(), model);
 
         lookup.TryGetSyntax("a", out var expressions).Should().BeTrue();
-        expressions.Should().BeEquivalentTo(new { Token = new { ValueText = "42" } });
+        expressions.Should().BeEquivalentTo<object>(new[] { new { Token = new { ValueText = "42" } } });
     }
 
     [TestMethod]
