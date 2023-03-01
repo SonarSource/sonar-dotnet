@@ -25,16 +25,18 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 {
     internal class TestConstraint : SymbolicConstraint
     {
+        private readonly string name;
+
         public static readonly TestConstraint First = new("First");
         public static readonly TestConstraint Second = new("Second");
 
         public override SymbolicConstraint Opposite =>
             this == First ? Second : First;
 
-        protected override string Name { get; }
-
         private TestConstraint(string name) : base((ConstraintKind)(-1)) =>
-            Name = name;
+            this.name = name;
+
+        public override string ToString() => name;
     }
 
     internal class DummyConstraint : SymbolicConstraint
@@ -43,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 
         public override SymbolicConstraint Opposite => throw new NotImplementedException();
 
-        protected override string Name => "Dummy";
+        public override string ToString() => "Dummy";
 
         private DummyConstraint() : base((ConstraintKind)(-1)) { }
     }
