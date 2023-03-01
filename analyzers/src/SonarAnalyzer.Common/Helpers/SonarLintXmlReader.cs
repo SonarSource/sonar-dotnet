@@ -19,6 +19,8 @@
  */
 
 using System.IO;
+using System.Text;
+using System.Xml;
 using System.Xml.Serialization;
 using Microsoft.CodeAnalysis.Text;
 
@@ -45,8 +47,11 @@ public class SonarLintXmlReader
         try
         {
             var serializer = new XmlSerializer(typeof(SonarLintXml));
-            using var sr = new StringReader(sonarProjectConfig.ToString());
-            return (SonarLintXml)serializer.Deserialize(sr);
+            var byteArray = Encoding.UTF8.GetBytes(sonarProjectConfig.ToString());
+            var stream = new MemoryStream(byteArray);
+            using var sr = new StreamReader(stream, Encoding.UTF8, false);
+            using var reader = XmlReader.Create(sr);
+            return (SonarLintXml)serializer.Deserialize(reader);
         }
         catch (Exception)
         {
