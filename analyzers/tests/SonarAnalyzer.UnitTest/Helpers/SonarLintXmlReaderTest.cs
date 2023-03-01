@@ -36,7 +36,6 @@ public class SonarLintXmlReaderTest
         sut.Settings.AnalyzeGeneratedCode.Should().BeFalse();
         sut.Settings.IgnoreIssues.Should().BeFalse();
         sut.Settings.Suffixes.Should().Be(fileExtension);
-        sut.Settings.RelativeRootFromSonarLintXml.Should().BeEquivalentTo("Relative/Root/From/SonarLint.xml");
         TestArray(sut.Settings.Exclusions, nameof(sut.Settings.Exclusions));
         TestArray(sut.Settings.Inclusions, nameof(sut.Settings.Inclusions));
         TestArray(sut.Settings.GlobalExclusions, nameof(sut.Settings.GlobalExclusions));
@@ -66,13 +65,16 @@ public class SonarLintXmlReaderTest
     public void SonarLintXmlSettings_WithIncorrectValueType_DefaultBehaviour() =>
         CheckSonarLintXmlDefaultValues(CreateSonarLintXmlReader("ResourceTests\\SonarLintXml\\Incorrect_value_type\\SonarLint.xml"));
 
+    [TestMethod]
+    public void SonarLintXmlSettings_CheckEmpty_DefaultBehaviour() =>
+        CheckSonarLintXmlDefaultValues(SonarLintXmlReader.Empty);
+
     private static void CheckSonarLintXmlDefaultValues(SonarLintXmlReader sut)
     {
         sut.Settings.AnalyzeGeneratedCode.Should().BeFalse();
         sut.Settings.IgnoreHeaderComments.Should().BeFalse();
         sut.Settings.IgnoreIssues.Should().BeFalse();
         sut.Settings.Suffixes.Should().BeEmpty();
-        sut.Settings.RelativeRootFromSonarLintXml.Should().BeEmpty();
         sut.Settings.Exclusions.Should().NotBeNull().And.HaveCount(0);
         sut.Settings.Inclusions.Should().NotBeNull().And.HaveCount(0);
         sut.Settings.GlobalExclusions.Should().NotBeNull().And.HaveCount(0);

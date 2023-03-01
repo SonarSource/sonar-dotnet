@@ -37,10 +37,6 @@
 	  <Key>sonar.test.inclusions</Key>
 	  <Value>Fake/TestInclusions/**/*,Fake/TestInclusions/Second*/**/*</Value>
 	</Setting>
-	<Setting>
-	  <Key>sonar.relativeRootFromSonarLintXml</Key>
-	  <Value>Relative/Root/From/SonarLint.xml</Value>
-	</Setting>
   </Settings>
   <Rules>
     <Rule>
