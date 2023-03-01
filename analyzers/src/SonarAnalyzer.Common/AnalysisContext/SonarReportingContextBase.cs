@@ -28,7 +28,7 @@ public abstract class SonarReportingContextBase<TContext> : SonarAnalysisContext
 
     protected void ReportIssueCore(Diagnostic diagnostic)
     {
-        if (HasMatchingScope(diagnostic.Descriptor))
+        if (HasMatchingScope(diagnostic.Descriptor) && SonarAnalysisContext.LegacyIsRegisteredActionEnabled(new[] { diagnostic.Descriptor }, diagnostic.Location?.SourceTree))
         {
             var reportingContext = CreateReportingContext(diagnostic);
             if (reportingContext is { Compilation: { } compilation, Diagnostic.Location: { Kind: LocationKind.SourceFile, SourceTree: { } tree } } && !compilation.ContainsSyntaxTree(tree))
