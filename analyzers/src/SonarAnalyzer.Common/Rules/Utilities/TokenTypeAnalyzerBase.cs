@@ -20,6 +20,7 @@
 
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Protobuf;
+using static SonarAnalyzer.Protobuf.TokenTypeInfo.Types;
 
 namespace SonarAnalyzer.Rules
 {
@@ -34,19 +35,36 @@ namespace SonarAnalyzer.Rules
 
         protected TokenTypeAnalyzerBase() : base(DiagnosticId, Title) { }
 
-        protected abstract TokenClassifierBase GetTokenClassifier(SyntaxToken token, SemanticModel semanticModel, bool skipIdentifierTokens);
+        protected abstract TokenClassifierBase GetTokenClassifier(SemanticModel semanticModel, bool skipIdentifierTokens);
+        protected abstract TriviaClassifierBase GetTriviaClassifier();
 
         protected sealed override TokenTypeInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
         {
             var tokens = syntaxTree.GetRoot().DescendantTokens();
             var identifierTokenKind = Language.SyntaxKind.IdentifierToken;  // Performance optimization
-            var skipIdentifierTokens = tokens.Count(token => Language.Syntax.IsKind(token, identifierTokenKind)) > IdentifierTokenCountThreshold;
+            var skipIdentifierTokens = tokens
+                .Where(token => Language.Syntax.IsKind(token, identifierTokenKind))
+                .Skip(IdentifierTokenCountThreshold)
+                .Any();
 
-            var spans = new List<TokenTypeInfo.Types.TokenInfo>();
+            var tokenClassifier = GetTokenClassifier(semanticModel, skipIdentifierTokens);
+            var triviaClassifier = GetTriviaClassifier();
+            var spans = new List<TokenInfo>();
             // The second iteration of the tokens is intended since there is no processing done and we want to avoid copying all the tokens to a second collection.
             foreach (var token in tokens)
             {
-                spans.AddRange(GetTokenClassifier(token, semanticModel, skipIdentifierTokens).Spans);
+                if (token.HasLeadingTrivia)
+                {
+                    IterateTrivia(triviaClassifier, spans, token.LeadingTrivia);
+                }
+                if (tokenClassifier.ClassifyToken(token) is { } tokenClassification)
+                {
+                    spans.Add(tokenClassification);
+                }
+                if (token.HasTrailingTrivia)
+                {
+                    IterateTrivia(triviaClassifier, spans, token.TrailingTrivia);
+                }
             }
 
             var tokenTypeInfo = new TokenTypeInfo
@@ -54,16 +72,25 @@ namespace SonarAnalyzer.Rules
                 FilePath = syntaxTree.FilePath
             };
 
-            tokenTypeInfo.TokenInfo.AddRange(spans.OrderBy(s => s.TextRange.StartLine).ThenBy(s => s.TextRange.StartOffset));
+            tokenTypeInfo.TokenInfo.AddRange(spans);
             return tokenTypeInfo;
+
+            static void IterateTrivia(TriviaClassifierBase triviaClassifier, List<TokenInfo> spans, SyntaxTriviaList triviaList)
+            {
+                foreach (var trivia in triviaList)
+                {
+                    if (triviaClassifier.ClassifyTrivia(trivia) is { } triviaClassification)
+                    {
+                        spans.Add(triviaClassification);
+                    }
+                }
+            }
         }
 
         protected abstract class TokenClassifierBase
         {
-            private readonly SyntaxToken token;
             private readonly SemanticModel semanticModel;
             private readonly bool skipIdentifiers;
-            private readonly List<TokenTypeInfo.Types.TokenInfo> spans = new();
             private static readonly ISet<MethodKind> ConstructorKinds = new HashSet<MethodKind>
             {
                 MethodKind.Constructor,
@@ -80,130 +107,88 @@ namespace SonarAnalyzer.Rules
             };
 
             protected abstract SyntaxNode GetBindableParent(SyntaxToken token);
-            protected abstract bool IsDocComment(SyntaxTrivia trivia);
-            protected abstract bool IsRegularComment(SyntaxTrivia trivia);
             protected abstract bool IsKeyword(SyntaxToken token);
             protected abstract bool IsIdentifier(SyntaxToken token);
             protected abstract bool IsNumericLiteral(SyntaxToken token);
             protected abstract bool IsStringLiteral(SyntaxToken token);
 
-            protected TokenClassifierBase(SyntaxToken token, SemanticModel semanticModel, bool skipIdentifiers)
+            protected TokenClassifierBase(SemanticModel semanticModel, bool skipIdentifiers)
             {
-                this.token = token;
                 this.semanticModel = semanticModel;
                 this.skipIdentifiers = skipIdentifiers;
             }
 
-            public IEnumerable<TokenTypeInfo.Types.TokenInfo> Spans
-            {
-                get
+            public TokenInfo ClassifyToken(SyntaxToken token) =>
+                token switch
                 {
-                    spans.Clear();
-                    ClassifyToken();
+                    _ when IsKeyword(token) => TokenInfo(token, TokenType.Keyword),
+                    _ when IsStringLiteral(token) => TokenInfo(token, TokenType.StringLiteral),
+                    _ when IsNumericLiteral(token) => TokenInfo(token, TokenType.NumericLiteral),
+                    _ when IsIdentifier(token) && !skipIdentifiers => ClassifyIdentifier(token),
+                    _ => null,
+                };
 
-                    foreach (var trivia in token.LeadingTrivia)
+            private static TokenInfo TokenInfo(SyntaxToken token, TokenType tokenType) =>
+                string.IsNullOrWhiteSpace(token.ValueText)
+                    ? null
+                    : new()
                     {
-                        ClassifyTrivia(trivia);
-                    }
+                        TokenType = tokenType,
+                        TextRange = GetTextRange(token.GetLocation().GetLineSpan()),
+                    };
 
-                    foreach (var trivia in token.TrailingTrivia)
-                    {
-                        ClassifyTrivia(trivia);
-                    }
-
-                    return spans;
-                }
-            }
-
-            private void CollectClassified(TokenType tokenType, TextSpan span)
-            {
-                if (string.IsNullOrWhiteSpace(token.SyntaxTree.GetText().GetSubText(span).ToString()))
-                {
-                    return;
-                }
-
-                spans.Add(new TokenTypeInfo.Types.TokenInfo
-                {
-                    TokenType = tokenType,
-                    TextRange = GetTextRange(Location.Create(token.SyntaxTree, span).GetLineSpan())
-                });
-            }
-
-            private void ClassifyToken()
-            {
-                if (IsKeyword(token))
-                {
-                    CollectClassified(TokenType.Keyword, token.Span);
-                }
-                else if (IsStringLiteral(token))
-                {
-                    CollectClassified(TokenType.StringLiteral, token.Span);
-                }
-                else if (IsNumericLiteral(token))
-                {
-                    CollectClassified(TokenType.NumericLiteral, token.Span);
-                }
-                else if (IsIdentifier(token) && !skipIdentifiers)
-                {
-                    ClassifyIdentifier();
-                }
-            }
-
-            private void ClassifyIdentifier()
+            private TokenInfo ClassifyIdentifier(SyntaxToken token)
             {
                 if (semanticModel.GetDeclaredSymbol(token.Parent) is { } declaration)
                 {
-                    ClassifyIdentifier(declaration);
+                    return ClassifyIdentifier(token, declaration);
                 }
-                else if (GetBindableParent(token) is { }  parent && semanticModel.GetSymbolInfo(parent).Symbol is { } symbol)
+                else if (GetBindableParent(token) is { } parent && semanticModel.GetSymbolInfo(parent).Symbol is { } symbol)
                 {
-                    ClassifyIdentifier(symbol);
+                    return ClassifyIdentifier(token, symbol);
+                }
+                else
+                {
+                    return null;
                 }
             }
 
-            private void ClassifyIdentifier(ISymbol symbol)
-            {
-                if (symbol.Kind == SymbolKind.Alias)
+            private TokenInfo ClassifyIdentifier(SyntaxToken token, ISymbol symbol) =>
+                symbol switch
                 {
-                    ClassifyIdentifier(((IAliasSymbol)symbol).Target);
-                }
-                else if (symbol is IMethodSymbol ctorSymbol && ConstructorKinds.Contains(ctorSymbol.MethodKind))
-                {
-                    CollectClassified(TokenType.TypeName, token.Span);
-                }
-                else if (token.ToString() == "var" && VarSymbolKinds.Contains(symbol.Kind))
-                {
-                    CollectClassified(TokenType.Keyword, token.Span);
-                }
-                else if (token.ToString() == "value" && symbol.Kind == SymbolKind.Parameter && symbol.IsImplicitlyDeclared)
-                {
-                    CollectClassified(TokenType.Keyword, token.Span);
-                }
-                else if (symbol.Kind == SymbolKind.NamedType || symbol.Kind == SymbolKind.TypeParameter)
-                {
-                    CollectClassified(TokenType.TypeName, token.Span);
-                }
-                else if (symbol.Kind == SymbolKind.DynamicType)
-                {
-                    CollectClassified(TokenType.Keyword, token.Span);
-                }
-            }
+                    IAliasSymbol alias => ClassifyIdentifier(token, alias.Target),
+                    IMethodSymbol ctorSymbol when ConstructorKinds.Contains(ctorSymbol.MethodKind) => TokenInfo(token, TokenType.TypeName),
+                    _ when token.ValueText == "var" && VarSymbolKinds.Contains(symbol.Kind) => TokenInfo(token, TokenType.Keyword),
+                    { Kind: SymbolKind.Parameter, IsImplicitlyDeclared: true } when token.ValueText == "value" => TokenInfo(token, TokenType.Keyword),
+                    { Kind: SymbolKind.NamedType or SymbolKind.TypeParameter } => TokenInfo(token, TokenType.TypeName),
+                    { Kind: SymbolKind.DynamicType } => TokenInfo(token, TokenType.Keyword),
+                    _ => null,
+                };
+        }
 
-            private void ClassifyTrivia(SyntaxTrivia trivia)
-            {
-                if (IsRegularComment(trivia))
-                {
-                    CollectClassified(TokenType.Comment, trivia.Span);
-                }
-                else if (IsDocComment(trivia))
-                {
-                    ClassifyDocComment(trivia);
-                }
-                // Handle preprocessor directives here
-            }
+        protected abstract class TriviaClassifierBase
+        {
+            protected abstract bool IsDocComment(SyntaxTrivia trivia);
+            protected abstract bool IsRegularComment(SyntaxTrivia trivia);
 
-            private void ClassifyDocComment(SyntaxTrivia trivia) =>
-                CollectClassified(TokenType.Comment, trivia.FullSpan);
+            public TokenInfo ClassifyTrivia(SyntaxTrivia trivia) =>
+                trivia switch
+                {
+                    _ when IsRegularComment(trivia) => TokenInfo(trivia.SyntaxTree, TokenType.Comment, trivia.Span),
+                    _ when IsDocComment(trivia) => ClassifyDocComment(trivia),
+                    // Handle preprocessor directives here
+                    _ => null,
+                };
+
+            private TokenInfo TokenInfo(SyntaxTree tree, TokenType tokenType, TextSpan span) =>
+                new()
+                {
+                    TokenType = tokenType,
+                    TextRange = GetTextRange(Location.Create(tree, span).GetLineSpan())
+                };
+
+            private TokenInfo ClassifyDocComment(SyntaxTrivia trivia) =>
+                TokenInfo(trivia.SyntaxTree, TokenType.Comment, trivia.FullSpan);
         }
     }
 }
