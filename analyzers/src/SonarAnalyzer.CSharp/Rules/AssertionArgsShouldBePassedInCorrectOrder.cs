@@ -93,11 +93,9 @@ public sealed class AssertionArgsShouldBePassedInCorrectOrder : SonarDiagnosticA
             : null;
 
     private static Location CreateLocation(SyntaxNode argument1, SyntaxNode argument2) =>
-        argument1.Span.CompareTo(argument2.Span) switch
-        {
-            < 0 => argument1.Parent.CreateLocation(argument2.Parent),
-            _ => argument2.Parent.CreateLocation(argument1.Parent)
-        };
+        argument1.Span.CompareTo(argument2.Span) < 0
+            ? argument1.Parent.CreateLocation(argument2.Parent)
+            : argument2.Parent.CreateLocation(argument1.Parent);
 
     private readonly record struct KnownAssertParameters(KnownType AssertClass, string ExpectedParamterName, string ActualParameterName);
     private readonly record struct WrongArguments(SyntaxNode Expected, SyntaxNode Actual);
