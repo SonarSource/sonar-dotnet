@@ -74,7 +74,7 @@ public class SonarLintXmlReader
             using var reader = XmlReader.Create(sr);
             return (SonarLintXml)serializer.Deserialize(reader);
         }
-        catch
+        catch (Exception)
         {
             return SonarLintXml.Empty;
         }
