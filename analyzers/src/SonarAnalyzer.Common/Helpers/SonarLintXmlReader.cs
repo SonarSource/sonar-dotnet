@@ -82,6 +82,7 @@ public class SonarLintXmlReader
             return SonarLintXml.Empty;
         }
     }
+}
 
     private List<SonarLintXmlRule> ReadRuleParameters() =>
         sonarLintXml is { Rules: { } rules }
