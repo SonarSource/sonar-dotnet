@@ -26,17 +26,18 @@ namespace SonarAnalyzer.Helpers;
 
 public class SonarLintXmlReader
 {
-    private readonly SonarLintXml sonarLintXml;
-    private readonly Lazy<SonarLintXmlSettingsReader> settings;
-
     public static readonly SonarLintXmlReader Empty = new(null, LanguageNames.CSharp);
 
-    public SonarLintXmlSettingsReader Settings => settings.Value;
+    private readonly SonarLintXml sonarLintXml;
+    private readonly string propertyLanguage;
+
+    private SonarLintXmlSettingsReader settings;
+    public SonarLintXmlSettingsReader Settings => settings ??= new(sonarLintXml, propertyLanguage);
 
     public SonarLintXmlReader(SourceText originalXml, string language)
     {
         sonarLintXml = originalXml == null ? SonarLintXml.Empty : ParseContent(originalXml);
-        settings = new Lazy<SonarLintXmlSettingsReader>(() => new(sonarLintXml, language));
+        propertyLanguage = language;
     }
 
     private static SonarLintXml ParseContent(SourceText sonarProjectConfig)
@@ -47,7 +48,7 @@ public class SonarLintXmlReader
             using var sr = new StringReader(sonarProjectConfig.ToString());
             return (SonarLintXml)serializer.Deserialize(sr);
         }
-        catch
+        catch (Exception)
         {
             return SonarLintXml.Empty;
         }
@@ -56,46 +57,48 @@ public class SonarLintXmlReader
 
 public class SonarLintXmlSettingsReader
 {
-    private readonly Lazy<bool> ignoreHeaderComments;
-    private readonly Lazy<bool> analyzeGeneratedCode;
-    private readonly Lazy<bool> ignoreIssues;
-    private readonly Lazy<string> suffixes;
-    private readonly Lazy<string> relativeRootFromSonarLintXml;
-    private readonly Lazy<string[]> exclusions;
-    private readonly Lazy<string[]> inclusions;
-    private readonly Lazy<string[]> globalExclusions;
-    private readonly Lazy<string[]> testExclusions;
-    private readonly Lazy<string[]> testInclusions;
-    public bool IgnoreHeaderComments => ignoreHeaderComments.Value;
-    public bool AnalyzeGeneratedCode => analyzeGeneratedCode.Value;
-    public bool IgnoreIssues => ignoreIssues.Value;
-    public string Suffixes => suffixes.Value;
-    public string RelativeRootFromSonarLintXml => relativeRootFromSonarLintXml.Value;
-    public string[] Exclusions => exclusions.Value;
-    public string[] Inclusions => inclusions.Value;
-    public string[] GlobalExclusions => globalExclusions.Value;
-    public string[] TestExclusions => testExclusions.Value;
-    public string[] TestInclusions => testInclusions.Value;
+    private readonly SonarLintXml sonarLintXml;
+    private readonly string propertyLanguage;
 
-    public SonarLintXmlSettingsReader(SonarLintXml sonarLintXml, string language)
+    private bool? ignoreHeaderComments;
+    public bool? IgnoreHeaderComments => ignoreHeaderComments ??= ReadBoolean(ReadProperty($"sonar.{propertyLanguage}.ignoreHeaderComments"));
+
+    private bool? analyzeGeneratedCode;
+    public bool AnalyzeGeneratedCode => analyzeGeneratedCode ??= ReadBoolean(ReadProperty($"sonar.{propertyLanguage}.analyzeGeneratedCode"));
+
+    private bool? ignoreIssues;
+    public bool IgnoreIssues => ignoreIssues ??= ReadBoolean(ReadProperty($"sonar.{propertyLanguage}.roslyn.ignoreIssues"));
+
+    private string suffixes;
+    public string Suffixes => suffixes ??= ReadString(ReadProperty($"sonar.{propertyLanguage}.file.suffixes"));
+
+    private string[] exclusions;
+    public string[] Exclusions => exclusions ??= ReadCommaSeparatedArray(ReadProperty("sonar.exclusions"));
+
+    private string[] inclusions;
+    public string[] Inclusions => inclusions ??= ReadCommaSeparatedArray(ReadProperty("sonar.inclusions"));
+
+    private string[] globalExclusions;
+    public string[] GlobalExclusions => globalExclusions ??= ReadCommaSeparatedArray(ReadProperty("sonar.global.exclusions"));
+
+    private string[] testExclusions;
+    public string[] TestExclusions => testExclusions ??= ReadCommaSeparatedArray(ReadProperty("sonar.test.exclusions"));
+
+    private string[] testInclusions;
+    public string[] TestInclusions => testInclusions ??= ReadCommaSeparatedArray(ReadProperty("sonar.test.inclusions"));
+
+    public SonarLintXmlSettingsReader(SonarLintXml originalXml, string language)
     {
-        var propertyLanguage = language == LanguageNames.CSharp ? "cs" : "vbnet";
-        ignoreHeaderComments = new Lazy<bool>(() => ReadBoolean(ReadProperty($"sonar.{propertyLanguage}.ignoreHeaderComments")));
-        analyzeGeneratedCode = new Lazy<bool>(() => ReadBoolean(ReadProperty($"sonar.{propertyLanguage}.analyzeGeneratedCode")));
-        ignoreIssues = new Lazy<bool>(() => ReadBoolean(ReadProperty($"sonar.{propertyLanguage}.roslyn.ignoreIssues")));
-        suffixes = new Lazy<string>(() => ReadString(ReadProperty($"sonar.{propertyLanguage}.file.suffixes")));
-        relativeRootFromSonarLintXml = new Lazy<string>(() => ReadString(ReadProperty("sonar.relativeRootFromSonarLintXml")));
-        exclusions = new Lazy<string[]>(() => ReadCommaSeparatedArray(ReadProperty("sonar.exclusions")));
-        inclusions = new Lazy<string[]>(() => ReadCommaSeparatedArray(ReadProperty("sonar.inclusions")));
-        globalExclusions = new Lazy<string[]>(() => ReadCommaSeparatedArray(ReadProperty("sonar.global.exclusions")));
-        testExclusions = new Lazy<string[]>(() => ReadCommaSeparatedArray(ReadProperty("sonar.test.exclusions")));
-        testInclusions = new Lazy<string[]>(() => ReadCommaSeparatedArray(ReadProperty("sonar.test.inclusions")));
-
-        string ReadProperty(string property) =>
-            sonarLintXml.Settings.Where(x => x.Key.Equals(property)).Select(x => x.Value).FirstOrDefault();
+        sonarLintXml = originalXml;
+        propertyLanguage = language == LanguageNames.CSharp ? "cs" : "vbnet";
     }
 
-    private static string ReadString(string str) =>
+    private string ReadProperty(string property) =>
+        sonarLintXml is { Settings: { } settings }
+        ? settings.Where(x => x.Key.Equals(property)).Select(x => x.Value).FirstOrDefault()
+        : string.Empty;
+
+    private string ReadString(string str) =>
         string.IsNullOrEmpty(str) ? string.Empty : str;
 
     private static string[] ReadCommaSeparatedArray(string str) =>
