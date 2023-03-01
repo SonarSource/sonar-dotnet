@@ -22,7 +22,6 @@ namespace SonarAnalyzer.AnalysisContext;
 
 public sealed class SonarCompilationStartAnalysisContext : SonarAnalysisContextBase<CompilationStartAnalysisContext>
 {
-    public override SyntaxTree Tree => Context.Compilation.SyntaxTrees.FirstOrDefault();
     public override Compilation Compilation => Context.Compilation;
     public override AnalyzerOptions Options => Context.Options;
     public override CancellationToken Cancel => Context.CancellationToken;

@@ -22,7 +22,6 @@ namespace SonarAnalyzer.AnalysisContext;
 
 public sealed class SonarCodeBlockStartAnalysisContext<TSyntaxKind> : SonarAnalysisContextBase<CodeBlockStartAnalysisContext<TSyntaxKind>> where TSyntaxKind : struct
 {
-    public override SyntaxTree Tree => Context.CodeBlock.SyntaxTree;
     public override Compilation Compilation => Context.SemanticModel.Compilation;
     public override AnalyzerOptions Options => Context.Options;
     public override CancellationToken Cancel => Context.CancellationToken;

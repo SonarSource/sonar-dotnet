@@ -29,7 +29,6 @@ public sealed class SonarCompilationReportingContext : SonarCompilationReporting
     private static readonly Regex WebConfigRegex = new(@"[\\\/]web\.([^\\\/]+\.)?config$", RegexOptions.IgnoreCase, FileNameTimeout);
     private static readonly Regex AppSettingsRegex = new(@"[\\\/]appsettings\.([^\\\/]+\.)?json$", RegexOptions.IgnoreCase, FileNameTimeout);
 
-    public override SyntaxTree Tree => Context.Compilation.SyntaxTrees.FirstOrDefault();
     public override Compilation Compilation => Context.Compilation;
     public override AnalyzerOptions Options => Context.Options;
     public override CancellationToken Cancel => Context.CancellationToken;

@@ -34,7 +34,6 @@ public class SonarCompilationReportingContextTest
         var context = new CompilationAnalysisContext(model.Compilation, options, _ => { }, _ => true, cancel);
         var sut = new SonarCompilationReportingContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context);
 
-        sut.Tree.Should().BeSameAs(tree);
         sut.Compilation.Should().BeSameAs(model.Compilation);
         sut.Options.Should().BeSameAs(options);
         sut.Cancel.Should().Be(cancel);
