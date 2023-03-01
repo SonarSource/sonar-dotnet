@@ -79,6 +79,7 @@ public class SonarLintXmlReader
             return SonarLintXml.Empty;
         }
     }
+}
 
     private string ReadProperty(string property) =>
         sonarLintXml is { Settings: { } settings }
