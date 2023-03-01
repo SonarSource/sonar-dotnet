@@ -118,15 +118,6 @@ namespace SonarAnalyzer.Rules
                 this.skipIdentifiers = skipIdentifiers;
             }
 
-            private TokenInfo TokenInfo(SyntaxToken token, TokenType tokenType) =>
-                string.IsNullOrWhiteSpace(token.ValueText)
-                    ? null
-                    : new()
-                    {
-                        TokenType = tokenType,
-                        TextRange = GetTextRange(token.GetLocation().GetLineSpan()),
-                    };
-
             public TokenInfo ClassifyToken(SyntaxToken token) =>
                 token switch
                 {
@@ -136,6 +127,15 @@ namespace SonarAnalyzer.Rules
                     _ when IsIdentifier(token) && !skipIdentifiers => ClassifyIdentifier(token),
                     _ => null,
                 };
+
+            private static TokenInfo TokenInfo(SyntaxToken token, TokenType tokenType) =>
+                string.IsNullOrWhiteSpace(token.ValueText)
+                    ? null
+                    : new()
+                    {
+                        TokenType = tokenType,
+                        TextRange = GetTextRange(token.GetLocation().GetLineSpan()),
+                    };
 
             private TokenInfo ClassifyIdentifier(SyntaxToken token)
             {
