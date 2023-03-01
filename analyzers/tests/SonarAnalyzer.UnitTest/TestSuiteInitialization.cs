@@ -45,6 +45,7 @@ namespace SonarAnalyzer.UnitTest
         private static void ConfigureFluentValidation()
         {
             AssertionOptions.FormattingOptions.MaxLines = -1;
+            AssertionOptions.FormattingOptions.MaxDepth = 5; // Keeping the default for MaxDepth of 5 as a good compromise. Change it here if needed.
         }
     }
 }
