@@ -121,7 +121,7 @@ public class SonarAnalysisContext
         // the decision is made on based on whether the project contains the analyzer as NuGet).
         if (context.HasMatchingScope(supportedDiagnostics)
             && context.ShouldAnalyzeTree(sourceTree, generatedCodeRecognizer)
-            && LegacyIsRegisteredActionEnabled(supportedDiagnostics, context.Tree))
+            && LegacyIsRegisteredActionEnabled(supportedDiagnostics, sourceTree))
         {
             action(context);
         }

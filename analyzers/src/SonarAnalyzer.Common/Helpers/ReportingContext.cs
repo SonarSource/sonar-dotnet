@@ -35,10 +35,10 @@ namespace SonarAnalyzer.Helpers
             : this(diagnostic, context.Context.ReportDiagnostic, context.Compilation, context.Tree) { }
 
         public ReportingContext(SonarCompilationReportingContext context, Diagnostic diagnostic)
-            : this(diagnostic, context.Context.ReportDiagnostic, context.Compilation, diagnostic.Location?.SourceTree ?? context.Tree) { }
+            : this(diagnostic, context.Context.ReportDiagnostic, context.Compilation, diagnostic.Location?.SourceTree) { }
 
         public ReportingContext(SonarSymbolReportingContext context, Diagnostic diagnostic)
-            : this(diagnostic, context.Context.ReportDiagnostic, context.Compilation, diagnostic.Location?.SourceTree ?? context.Tree) { }
+            : this(diagnostic, context.Context.ReportDiagnostic, context.Compilation, diagnostic.Location?.SourceTree) { }
 
         public ReportingContext(SonarCodeBlockReportingContext context, Diagnostic diagnostic)
             : this(diagnostic, context.Context.ReportDiagnostic, context.Compilation, context.Tree) { }
