@@ -173,7 +173,7 @@ public partial class SonarAnalysisContextBaseTest
     [TestMethod]
     public void SonarLintFile_LoadsExpectedValues()
     {
-        var options = AnalysisScaffolding.CreateOptions($@"ResourceTests\SonarLintXml\All_properties_cs\SonarLint.xml");
+        var options = AnalysisScaffolding.CreateOptions("ResourceTests\\SonarLintXml\\All_properties_cs\\SonarLint.xml");
         var sut = CreateSut(options).SonarLintFile();
 
         sut.Settings.IgnoreHeaderComments.Should().BeTrue();
@@ -197,7 +197,7 @@ public partial class SonarAnalysisContextBaseTest
     [TestMethod]
     public void SonarLintFile_UsesCachedValue()
     {
-        var options = AnalysisScaffolding.CreateOptions($@"ResourceTests\SonarLintXml\All_properties_cs\SonarLint.xml");
+        var options = AnalysisScaffolding.CreateOptions("ResourceTests\\SonarLintXml\\All_properties_cs\\SonarLint.xml");
         var firstSut = CreateSut(options);
         var secondSut = CreateSut(options);
         var firstFile = firstSut.SonarLintFile();
@@ -209,8 +209,8 @@ public partial class SonarAnalysisContextBaseTest
     [TestMethod]
     public void SonarLintFile_WhenFileChanges_RebuildsCache()
     {
-        var firstOptions = AnalysisScaffolding.CreateOptions($@"ResourceTests\SonarLintXml\All_properties_cs\SonarLint.xml");
-        var secondOptions = AnalysisScaffolding.CreateOptions($@"ResourceTests\SonarLintXml\All_properties_vbnet\SonarLint.xml");
+        var firstOptions = AnalysisScaffolding.CreateOptions("ResourceTests\\SonarLintXml\\All_properties_cs\\SonarLint.xml");
+        var secondOptions = AnalysisScaffolding.CreateOptions("ResourceTests\\SonarLintXml\\All_properties_vbnet\\SonarLint.xml");
         var firstFile = CreateSut(firstOptions).SonarLintFile();
         var secondFile = CreateSut(secondOptions).SonarLintFile();
 
@@ -219,8 +219,8 @@ public partial class SonarAnalysisContextBaseTest
 
     [TestMethod]
     [DataRow(null)]
-    [DataRow("/foo/bar/does-not-exit")]
-    [DataRow("/foo/bar/x.xml")]
+    [DataRow("\\foo\\bar\\does-not-exit")]
+    [DataRow("\\foo\\bar\\x.xml")]
     public void SonarLintFile_WhenAdditionalFileNotPresent_ReturnsDefaultValues(string folder)
     {
         var sut = CreateSut(AnalysisScaffolding.CreateOptions(folder)).SonarLintFile();
@@ -250,7 +250,7 @@ public partial class SonarAnalysisContextBaseTest
     [TestMethod]
     public void SonarLintFile_WhenInvalidXml_ThrowException()
     {
-        var sut = CreateSut(AnalysisScaffolding.CreateOptions($@"ResourceTests\SonarProjectConfig\Invalid_Xml\SonarLint.xml"));
+        var sut = CreateSut(AnalysisScaffolding.CreateOptions("ResourceTests\\SonarProjectConfig\\Invalid_Xml\\SonarLint.xml"));
 
         sut.Invoking(x => x.SonarLintFile())
            .Should()
