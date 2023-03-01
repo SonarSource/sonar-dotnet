@@ -1,0 +1,24 @@
+{
+  "title": "Blocks should be synchronized on read-only fields",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "15min"
+  },
+  "tags": [
+    "cwe",
+    "multi-threading"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-2445",
+  "sqKey": "S2445",
+  "scope": "All",
+  "securityStandards": {
+    "CWE": [
+      412,
+      413
+    ]
+  },
+  "quickfix": "unknown"
+}
