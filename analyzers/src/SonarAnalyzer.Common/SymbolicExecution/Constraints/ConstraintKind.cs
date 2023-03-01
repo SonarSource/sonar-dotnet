@@ -34,7 +34,9 @@ public enum ConstraintKind
     InitializationVectorNotInitialized,
     LockHeld,
     LockReleased,
+    [Obsolete("Old SE engine only")]
     NullableHasValue,
+    [Obsolete("Old SE engine only")]
     NullableNoValue,
     ObjectNull,
     ObjectNotNull,
