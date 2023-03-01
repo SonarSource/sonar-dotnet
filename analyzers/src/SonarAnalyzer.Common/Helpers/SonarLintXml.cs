@@ -49,7 +49,7 @@ public class SonarLintXmlRule
 
     [XmlArray("Parameters")]
     [XmlArrayItem("Parameter")]
-    public List<SonarLintXmlKeyValuePair> Parameters { get; set; }
+    public List<SonarLintXmlKeyValuePair> Parameters { get; set; } = new List<SonarLintXmlKeyValuePair>();
 }
 
 public class SonarLintXmlKeyValuePair
