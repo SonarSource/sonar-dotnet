@@ -117,7 +117,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         {
             Execute.Assertion
                 .BecauseOf(because, becauseArgs)
-                .ForCondition(Subject.IsSameOrEqualTo(expected))
+                .ForCondition(EqualityComparer<object>.Default.Equals(Subject, expected))
                 .FailWith("Expected {context:object} to be {0}{reason}, but found {1}.", expected, Subject);
             return new(this);
         }
