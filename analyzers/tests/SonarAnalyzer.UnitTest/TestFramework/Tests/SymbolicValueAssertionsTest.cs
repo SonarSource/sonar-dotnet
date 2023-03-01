@@ -64,17 +64,15 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         [TestMethod]
         public void SymbolicValue_HaveOnlyConstraint_OnNull()
         {
-            SymbolicValue sv = null;
-            sv.Invoking(x => x.Should().HaveOnlyConstraint(BoolConstraint.True)).Should()
-                .Throw<AssertFailedException>()
-                .WithMessage("The symbolicValue is null and can not have constraint True.");
+            var assertion = () => ((SymbolicValue)null).Should().HaveOnlyConstraint(BoolConstraint.True);
+            assertion.Should().Throw<Exception>().WithMessage("The symbolicValue is null and can not have constraint True.");
         }
 
         [TestMethod]
         public void SymbolicValue_HaveNoConstraint_OnNull()
         {
-            SymbolicValue sv = null;
-            sv.Invoking(x => x.Should().HaveNoConstraints()).Should().NotThrow();
+            var assertion = () => ((SymbolicValue)null).Should().HaveNoConstraints();
+            assertion.Should().NotThrow();
         }
 
         [TestMethod]
@@ -96,10 +94,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         [TestMethod]
         public void SymbolicValue_HaveOnlyConstraints_OnNull()
         {
-            SymbolicValue sv = null;
-            sv.Invoking(x => x.Should().HaveOnlyConstraints(BoolConstraint.True)).Should()
-                .Throw<AssertFailedException>()
-                .WithMessage(@"The symbolicValue is null and can not have constraints {True}.");
+            var assertion = () => ((SymbolicValue)null).Should().HaveOnlyConstraints(BoolConstraint.True);
+            assertion.Should().Throw<Exception>().WithMessage(@"The symbolicValue is null and can not have constraints {True}.");
         }
 
         [TestMethod]
@@ -114,10 +110,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         [TestMethod]
         public void SymbolicValue_HaveOnlyConstraints_Empty()
         {
-            SymbolicValue sv = null;
-            sv.Invoking(x => x.Should().HaveOnlyConstraints()).Should()
-                .Throw<AssertFailedException>()
-                .WithMessage(@"Expected constraints is empty. Use HaveNoConstraints() instead.");
+            var assertion = () => ((SymbolicValue)null).Should().HaveOnlyConstraints();
+            assertion.Should().Throw<Exception>().WithMessage(@"Expected constraints is empty. Use HaveNoConstraints() instead.");
         }
 
         [TestMethod]
