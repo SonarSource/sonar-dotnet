@@ -46,13 +46,13 @@ public sealed class LockedFieldShouldBeReadonly : SonarDiagnosticAnalyzer
             {
                 ReportIssue("strings as they can be interned");
             }
-            else if (expression is IdentifierNameSyntax && lazySymbol.Value is ILocalSymbol lockedSymbol)
+            else if (expression is IdentifierNameSyntax && lazySymbol.Value is ILocalSymbol localSymbol)
             {
-                ReportIssue($"local variable '{lockedSymbol.Name}'");
+                ReportIssue($"local variable '{localSymbol.Name}'");
             }
-            else if (FieldWritable(expression, lazySymbol) is { } lockedField)
+            else if (FieldWritable(expression, lazySymbol) is { } field)
             {
-                ReportIssue($"writable field '{lockedField.Name}'");
+                ReportIssue($"writable field '{field.Name}'");
             }
         }
 

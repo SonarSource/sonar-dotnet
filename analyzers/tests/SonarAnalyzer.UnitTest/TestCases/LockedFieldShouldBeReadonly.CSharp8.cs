@@ -1,7 +1,6 @@
 ﻿class Test
 {
     static readonly object staticReadonlyField = null;
-    static object staticReadWriteField = null;
 
     readonly object readonlyField = null;
     object readWriteField = null;

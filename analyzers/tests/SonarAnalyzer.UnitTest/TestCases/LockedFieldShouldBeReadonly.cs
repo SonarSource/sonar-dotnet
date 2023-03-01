@@ -191,14 +191,17 @@ class FieldAccessibily
     internal object InternalProperty => null;
     public object PublicProperty => null;
 
-    void Test()
+    void FieldAccessibilityDoesntMatter()
     {
         lock (privateField) { }
         lock (protectedField) { }
         lock (protectedInternalField) { }
         lock (internalField) { }
         lock (publicField) { }
+    }
 
+    void RuleDoesntRaiseOnProperties()
+    {
         lock (PrivateProperty) { }
         lock (ProtectedProperty) { }
         lock (ProtectedInternalProperty) { }
