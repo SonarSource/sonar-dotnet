@@ -50,7 +50,7 @@ public class SonarLintXmlReaderTest
         }
     }
 
-    [TestMethod]
+    [DataTestMethod]
     [DataRow("")]
     [DataRow("this is not an xml")]
     [DataRow(@"<?xml version=""1.0"" encoding=""UTF - 8""?><AnalysisInput><Settings>")]
