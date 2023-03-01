@@ -128,13 +128,9 @@ public sealed class RedundantCast : SonarDiagnosticAnalyzer
         type.IsReferenceType || type.Is(KnownType.System_Nullable_T);
 
     private static Location GetReportLocation(InvocationExpressionSyntax invocation, bool methodCalledAsStatic) =>
-        invocation.Expression switch
-        {
-            MemberAccessExpressionSyntax memberAccess => methodCalledAsStatic
-                ? memberAccess.GetLocation()
-                : memberAccess.OperatorToken.CreateLocation(invocation),
-            _ => invocation.Expression.GetLocation()
-        };
+        methodCalledAsStatic is false && invocation.Expression is MemberAccessExpressionSyntax memberAccess
+            ? memberAccess.OperatorToken.CreateLocation(invocation)
+            : invocation.Expression.GetLocation();
 
     private static ITypeSymbol GetElementType(InvocationExpressionSyntax invocation, IMethodSymbol methodSymbol, SemanticModel semanticModel)
     {
