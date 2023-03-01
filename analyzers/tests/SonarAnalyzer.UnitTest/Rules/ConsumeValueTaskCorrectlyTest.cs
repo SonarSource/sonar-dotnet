@@ -25,7 +25,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ConsumeValueTaskCorrectlyTest
     {
-
         private readonly VerifierBuilder builder = new VerifierBuilder<ConsumeValueTaskCorrectly>().AddReferences(MetadataReferenceFacade.SystemThreadingTasks);
 
         [TestMethod]
@@ -35,8 +34,8 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
 
         [TestMethod]
-        public void ConsumeValueTaskCorrectly_CSharp6() =>
-            builder.AddPaths("ConsumeValueTaskCorrectly.CSharp6.cs").WithOptions(ParseOptionsHelper.FromCSharp6).Verify();
+        public void ConsumeValueTaskCorrectly_NetCore() =>
+            builder.AddPaths("ConsumeValueTaskCorrectly.NetCore.cs").Verify();
 
 #endif
 
