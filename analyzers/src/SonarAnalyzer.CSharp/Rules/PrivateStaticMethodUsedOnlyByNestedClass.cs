@@ -102,18 +102,25 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
 
     private static TypeDeclarationSyntax LowestCommonAncestorOrSelf(IEnumerable<TypeDeclarationSyntax> declaredTypes)
     {
-        var typeHierarchyFromTopToBottom = declaredTypes.Select(PathFromTop).ToArray();
+        var typeHierarchyFromTopToBottom = declaredTypes.Select(PathFromTop);
         var minPathLength = typeHierarchyFromTopToBottom.Select(x => x.Length).Min();
         var firstPath = typeHierarchyFromTopToBottom.First();
-        var levels = Enumerable.Range(0, minPathLength);
-        var firstDifferingLevel = levels.FirstOrDefault(NotEveryNodeIsTheSameOnLevel);
-        int levelOfLowestCommonAncestor = firstDifferingLevel == default
-            ? minPathLength - 1
-            : firstDifferingLevel - 1;
-        return firstPath[levelOfLowestCommonAncestor];
 
-        bool NotEveryNodeIsTheSameOnLevel(int level) =>
-            typeHierarchyFromTopToBottom.Any(x => x[level] != firstPath[level]);
+        var lastCommonPathIndex = 0;
+        for (int i = 0; i < minPathLength; i++)
+        {
+            var isPartOfCommonPath = typeHierarchyFromTopToBottom.All(x => x[i] == firstPath[i]);
+            if (isPartOfCommonPath)
+            {
+                lastCommonPathIndex = i;
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        return firstPath[lastCommonPathIndex];
 
         static TypeDeclarationSyntax[] PathFromTop(SyntaxNode node) =>
             node.AncestorsAndSelf()
