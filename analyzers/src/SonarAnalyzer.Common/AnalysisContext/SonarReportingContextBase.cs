@@ -58,6 +58,8 @@ public abstract class SonarReportingContextBase<TContext> : SonarAnalysisContext
 /// </summary>
 public abstract class SonarTreeReportingContextBase<TContext> : SonarReportingContextBase<TContext>
 {
+    public abstract SyntaxTree Tree { get; }
+
     protected SonarTreeReportingContextBase(SonarAnalysisContext analysisContext, TContext context) : base(analysisContext, context) { }
 
     public void ReportIssue(Diagnostic diagnostic) =>
