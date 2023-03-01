@@ -24,12 +24,12 @@ namespace SonarAnalyzer.SymbolicExecution
 {
     public abstract class SymbolicConstraint
     {
-        protected SymbolicConstraint(ConstraintKind kind) =>
-            Kind = kind;
-
         public ConstraintKind Kind { get; }
         public abstract SymbolicConstraint Opposite { get; }
         public virtual bool PreserveOnFieldReset => false;
+
+        protected SymbolicConstraint(ConstraintKind kind) =>
+            Kind = kind;
 
         public override string ToString() =>
             Kind.ToString("G");
