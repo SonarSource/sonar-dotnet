@@ -35,11 +35,11 @@ public class SonarLintXml
 
     [XmlArray("Settings")]
     [XmlArrayItem("Setting")]
-    public List<SonarLintXmlKeyValuePair> Settings { get; set; } = new List<SonarLintXmlKeyValuePair>();
+    public List<SonarLintXmlKeyValuePair> Settings { get; set; }
 
     [XmlArray("Rules")]
     [XmlArrayItem("Rule")]
-    public List<SonarLintXmlRule> Rules { get; set; } = new List<SonarLintXmlRule>();
+    public List<SonarLintXmlRule> Rules { get; set; }
 }
 
 public class SonarLintXmlRule
@@ -49,7 +49,7 @@ public class SonarLintXmlRule
 
     [XmlArray("Parameters")]
     [XmlArrayItem("Parameter")]
-    public List<SonarLintXmlKeyValuePair> Parameters { get; set; } = new List<SonarLintXmlKeyValuePair>();
+    public List<SonarLintXmlKeyValuePair> Parameters { get; set; }
 }
 
 public class SonarLintXmlKeyValuePair
