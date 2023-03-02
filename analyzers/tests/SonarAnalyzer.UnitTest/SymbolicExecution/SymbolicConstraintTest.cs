@@ -29,8 +29,8 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.Constraints
         [TestMethod]
         public void BoolConstraint_ToString()
         {
-            BoolConstraint.True.ToString().Should().Be("BoolTrue");
-            BoolConstraint.False.ToString().Should().Be("BoolFalse");
+            BoolConstraint.True.ToString().Should().Be("True");
+            BoolConstraint.False.ToString().Should().Be("False");
         }
 
         [TestMethod]
@@ -92,8 +92,8 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.Constraints
         [TestMethod]
         public void ObjectConstraint_ToString()
         {
-            ObjectConstraint.Null.ToString().Should().Be("ObjectNull");
-            ObjectConstraint.NotNull.ToString().Should().Be("ObjectNotNull");
+            ObjectConstraint.Null.ToString().Should().Be("Null");
+            ObjectConstraint.NotNull.ToString().Should().Be("NotNull");
         }
 
         [TestMethod]
