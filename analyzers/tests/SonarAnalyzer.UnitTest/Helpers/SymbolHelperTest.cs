@@ -434,32 +434,32 @@ namespace NS
 
                 public class BaseClass<T1>
                 {
-                    [MyInheritedAttribute]
-                    [MyDerivedInheritedAttribute]
+                    [MyInherited]
+                    [MyDerivedInherited]
                     [MyNotInherited]
                     [MyDerivedNotInherited]
-                    [MyUnannotatedAttribute]
+                    [MyUnannotated]
                     public virtual void VirtualMethod() { }
 
-                    [MyInheritedAttribute]
-                    [MyDerivedInheritedAttribute]
+                    [MyInherited]
+                    [MyDerivedInherited]
                     [MyNotInherited]
                     [MyDerivedNotInherited]
-                    [MyUnannotatedAttribute]
+                    [MyUnannotated]
                     public void NonVirtualMethod() { }
 
-                    [MyInheritedAttribute]
-                    [MyDerivedInheritedAttribute]
+                    [MyInherited]
+                    [MyDerivedInherited]
                     [MyNotInherited]
                     [MyDerivedNotInherited]
-                    [MyUnannotatedAttribute]
+                    [MyUnannotated]
                     public void GenericNonVirtualMethod<T2>() { }
 
-                    [MyInheritedAttribute]
-                    [MyDerivedInheritedAttribute]
+                    [MyInherited]
+                    [MyDerivedInherited]
                     [MyNotInherited]
                     [MyDerivedNotInherited]
-                    [MyUnannotatedAttribute]
+                    [MyUnannotated]
                     public virtual void GenericVirtualMethod<T2>() { }
                 }
 
@@ -479,9 +479,7 @@ namespace NS
                     public override void GenericVirtualMethod<T2>() { }
                 }
 
-                public class DerivedNoOverrides<T>: BaseClass<T>
-                {
-                }
+                public class DerivedNoOverrides<T>: BaseClass<T> { }
 
                 public class Program
                 {
@@ -526,35 +524,25 @@ namespace NS
 
                 public class MyUnannotatedAttribute : Attribute { }
 
-                [MyInheritedAttribute]
-                [MyDerivedInheritedAttribute]
+                [MyInherited]
+                [MyDerivedInherited]
                 [MyNotInherited]
                 [MyDerivedNotInherited]
-                [MyUnannotatedAttribute]
-                public class BaseClass<T1>
-                {
-                }
+                [MyUnannotated]
+                public class BaseClass<T1> { }
 
-                [MyInheritedAttribute]
-                [MyDerivedInheritedAttribute]
+                [MyInherited]
+                [MyDerivedInherited]
                 [MyNotInherited]
                 [MyDerivedNotInherited]
-                [MyUnannotatedAttribute]
-                public interface IInterface
-                {
-                }
+                [MyUnannotated]
+                public interface IInterface { }
 
-                public class DerivedOpenGeneric<T1>: BaseClass<T1>
-                {
-                }
+                public class DerivedOpenGeneric<T1>: BaseClass<T1> { }
 
-                public class DerivedClosedGeneric: BaseClass<int>
-                {
-                }
+                public class DerivedClosedGeneric: BaseClass<int> { }
 
-                public class Implement: IInterface
-                {
-                }
+                public class Implement: IInterface { }
 
                 public class Program
                 {
