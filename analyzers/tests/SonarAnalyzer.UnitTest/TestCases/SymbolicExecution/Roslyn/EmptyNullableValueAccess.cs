@@ -2,6 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 
+/*
+class Test
+{
+    void Method(int? nullable)
+    {
+        _ = nullable.Value;
+    }
+}
+*/
+
 public class EmptyNullableValueAccess
 {
     protected void LogFailure(Exception e)
@@ -195,84 +205,31 @@ public interface IWithDefaultImplementation
 // https://github.com/SonarSource/sonar-dotnet/issues/4573
 public class Repro_4573
 {
-private DateTime? foo;
+    private DateTime? foo;
 
-public virtual DateTime? Foo
-{
-    get => foo;
-    set
+    public virtual DateTime? Foo
+    {
+        get => foo;
+        set
+        {
+            if (value.HasValue)
+            {
+                //HasValue and NoValue constraints are set here
+            }
+            if (foo != value || foo.HasValue)
+            {
+                foo = value;
+            }
+        }
+    }
+
+    public void Sequence(DateTime? value)
     {
         if (value.HasValue)
         {
             //HasValue and NoValue constraints are set here
         }
-        if (foo != value || foo.HasValue)
-        {
-            foo = value;
-        }
-    }
-}
-
-public void Sequence(DateTime? value)
-{
-    if (value.HasValue)
-    {
-        //HasValue and NoValue constraints are set here
-    }
-    if (foo == value)   // Relationship is added here
-    {
-        if (foo.HasValue)
-        {
-            Console.WriteLine(foo.Value.ToString());
-        }
-        if (!foo.HasValue)
-        {
-            Console.WriteLine(foo.Value.ToString());    // FIXME Non-compliant
-        }
-        if (foo == null)
-        {
-            Console.WriteLine(foo.Value.ToString());    // FN
-        }
-        if (foo != null)
-        {
-            Console.WriteLine(foo.Value.ToString());
-        }
-    }
-}
-
-public void NestedIsolated1(DateTime? value)
-{
-    if (foo == value)   // Relationship is added here
-    {
-        if (value.HasValue)
-        {
-            if (!foo.HasValue)
-            {
-                Console.WriteLine(foo.Value.ToString());    // Compliant
-            }
-        }
-    }
-}
-
-public void NestedIsolated2(DateTime? value)
-{
-    if (foo == value)   // Relationship is added here
-    {
-        if (!value.HasValue)
-        {
-            if (foo == null)
-            {
-                Console.WriteLine(foo.Value.ToString());    // FIXME Non-compliant
-            }
-        }
-    }
-}
-
-public void NestedCombined(DateTime? value)
-{
-    if (foo == value)   // Relationship is added here
-    {
-        if (value.HasValue)
+        if (foo == value)   // Relationship is added here
         {
             if (foo.HasValue)
             {
@@ -280,36 +237,89 @@ public void NestedCombined(DateTime? value)
             }
             if (!foo.HasValue)
             {
-                Console.WriteLine(foo.Value.ToString());    // FIXME Non-compliant FP, unreachable. It works as expected when isolated, see NestedIsolated1() above
+                Console.WriteLine(foo.Value.ToString());    // FIXME Non-compliant
             }
             if (foo == null)
             {
-                Console.WriteLine(foo.Value.ToString());    // Compliant, unreachable
+                Console.WriteLine(foo.Value.ToString());    // FN
             }
             if (foo != null)
             {
                 Console.WriteLine(foo.Value.ToString());
             }
         }
-        else
+    }
+
+    public void NestedIsolated1(DateTime? value)
+    {
+        if (foo == value)   // Relationship is added here
         {
-            if (foo.HasValue)
+            if (value.HasValue)
             {
-                Console.WriteLine(foo.Value.ToString());    // Compliant, unreachable
-            }
-            if (!foo.HasValue)
-            {
-                Console.WriteLine(foo.Value.ToString());    // FIXME Non-compliant
-            }
-            if (foo == null)
-            {
-                Console.WriteLine(foo.Value.ToString());    // FN. It works as expected when isolated, see NestedIsolated2() above
-            }
-            if (foo != null)
-            {
-                Console.WriteLine(foo.Value.ToString());    // Compliant, unreachable
+                if (!foo.HasValue)
+                {
+                    Console.WriteLine(foo.Value.ToString());    // Compliant
+                }
             }
         }
     }
-}
+
+    public void NestedIsolated2(DateTime? value)
+    {
+        if (foo == value)   // Relationship is added here
+        {
+            if (!value.HasValue)
+            {
+                if (foo == null)
+                {
+                    Console.WriteLine(foo.Value.ToString());    // FIXME Non-compliant
+                }
+            }
+        }
+    }
+
+    public void NestedCombined(DateTime? value)
+    {
+        if (foo == value)   // Relationship is added here
+        {
+            if (value.HasValue)
+            {
+                if (foo.HasValue)
+                {
+                    Console.WriteLine(foo.Value.ToString());
+                }
+                if (!foo.HasValue)
+                {
+                    Console.WriteLine(foo.Value.ToString());    // FIXME Non-compliant FP, unreachable. It works as expected when isolated, see NestedIsolated1() above
+                }
+                if (foo == null)
+                {
+                    Console.WriteLine(foo.Value.ToString());    // Compliant, unreachable
+                }
+                if (foo != null)
+                {
+                    Console.WriteLine(foo.Value.ToString());
+                }
+            }
+            else
+            {
+                if (foo.HasValue)
+                {
+                    Console.WriteLine(foo.Value.ToString());    // Compliant, unreachable
+                }
+                if (!foo.HasValue)
+                {
+                    Console.WriteLine(foo.Value.ToString());    // FIXME Non-compliant
+                }
+                if (foo == null)
+                {
+                    Console.WriteLine(foo.Value.ToString());    // FN. It works as expected when isolated, see NestedIsolated2() above
+                }
+                if (foo != null)
+                {
+                    Console.WriteLine(foo.Value.ToString());    // Compliant, unreachable
+                }
+            }
+        }
+    }
 }

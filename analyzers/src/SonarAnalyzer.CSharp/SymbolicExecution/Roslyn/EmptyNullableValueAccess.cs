@@ -28,5 +28,40 @@ public class EmptyNullableValueAccess : EmptyNullableValueAccessBase
 
     protected override DiagnosticDescriptor Rule => S3655;
 
-    public override bool ShouldExecute() => false;
+    public override bool ShouldExecute()
+    {
+        var walker = new SyntaxKindWalker();
+        walker.SafeVisit(Node);
+        return walker.Result ?? false;
+    }
+
+    private sealed class SyntaxKindWalker : SafeCSharpSyntaxWalker
+    {
+        public bool? Result { get; private set; }
+
+        public override void Visit(SyntaxNode node)
+        {
+            if (Result is false)
+            {
+                return;
+            }
+
+            switch (node.Kind())
+            {
+                case SyntaxKind.AwaitExpression:
+                case SyntaxKind.ElementAccessExpression:
+                case SyntaxKind.ForEachStatement:
+                case SyntaxKind.SimpleMemberAccessExpression when node.NameIs(nameof(Nullable<int>.Value)):
+                    Result = true;
+                    break;
+                // FIXME: why forcing to false?
+                //case SyntaxKind.CoalesceExpression:
+                //case SyntaxKind.ConditionalAccessExpression:
+                //    Result = false;
+                //    return;
+            }
+
+            base.Visit(node);
+        }
+    }
 }
