@@ -111,5 +111,19 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
             WildcardPatternMatcher.IsMatch(pattern, input).Should().Be(expectedResult);
         }
+
+        [DataTestMethod]
+        [DataRow("")]
+        [DataRow("  ")]
+        [DataRow("/")]
+        [DataRow("\\")]
+        public void IsMatch_InvalidPattern_ReturnsFalse(string pattern) =>
+            WildcardPatternMatcher.IsMatch(pattern, "foo").Should().BeFalse();
+
+        [DataTestMethod]
+        [DataRow(null, "foo")]
+        [DataRow("foo", null)]
+        public void IsMatch_InputParametersArenull_DoesNotThrow(string pattern, string input) =>
+            WildcardPatternMatcher.IsMatch(pattern, input).Should().BeFalse();
     }
 }
