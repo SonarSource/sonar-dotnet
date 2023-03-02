@@ -74,6 +74,12 @@ public class SonarAnalysisContext
     internal static bool LegacyIsRegisteredActionEnabled(IEnumerable<DiagnosticDescriptor> diagnostics, SyntaxTree tree) =>
         ShouldExecuteRegisteredAction == null || tree == null || ShouldExecuteRegisteredAction(diagnostics, tree);
 
+    /// <summary>
+    /// Legacy API for backward compatibility with SonarLint v4.0 - v5.5. See <see cref="ShouldExecuteRegisteredAction"/>.
+    /// </summary>
+    internal static bool LegacyIsRegisteredActionEnabled(DiagnosticDescriptor diagnostic, SyntaxTree tree) =>
+        ShouldExecuteRegisteredAction == null || tree == null || ShouldExecuteRegisteredAction(new[] { diagnostic }, tree);
+
     public void RegisterCodeBlockStartAction<TSyntaxKind>(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarCodeBlockStartAnalysisContext<TSyntaxKind>> action)
         where TSyntaxKind : struct =>
         analysisContext.RegisterCodeBlockStartAction<TSyntaxKind>(
