@@ -51,9 +51,5 @@ public enum ConstraintKind
     StringNotWhiteSpace,
     StringWhiteSpace,
 
-#if DEBUG
-
     Test = -1,
-
-#endif
 }
