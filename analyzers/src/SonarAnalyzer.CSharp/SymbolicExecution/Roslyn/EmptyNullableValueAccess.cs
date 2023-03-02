@@ -50,9 +50,9 @@ public class EmptyNullableValueAccess : EmptyNullableValueAccessBase
 
                 if (!Result)
                 {
-            base.Visit(node);
-        }
-    }
+                    base.Visit(node);
+                }
+            }
 
             bool CheckMemberAccess(SyntaxNode node) =>
                 node is MemberAccessExpressionSyntax memberAccess

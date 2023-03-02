@@ -18,9 +18,25 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.SymbolicExecution.Constraints;
+
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
 
 public abstract class EmptyNullableValueAccessBase : SymbolicRuleCheck
 {
     internal const string DiagnosticId = "S3655";
+
+    protected override ProgramState PreProcessSimple(SymbolicContext context)
+    {
+        if (context.Operation.Instance.Kind == OperationKindEx.PropertyReference
+            && context.Operation.Instance.ToPropertyReference() is var reference
+            && reference.Property.Name != nameof(Nullable<int>.HasValue)
+            && reference.Property.Name != nameof(Nullable<int>.GetValueOrDefault)
+            && context.HasConstraint(reference.Instance, ObjectConstraint.Null))
+        {
+            ReportIssue(reference.Instance, reference.Instance.Syntax.ToString());
+        }
+
+        return context.State;
+    }
 }
