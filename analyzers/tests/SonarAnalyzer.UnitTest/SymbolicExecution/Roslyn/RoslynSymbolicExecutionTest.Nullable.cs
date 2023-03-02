@@ -59,4 +59,30 @@ public partial class RoslynSymbolicExecutionTest
         validator.ValidateTag("FalseFirst", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
         validator.ValidateTag("FalseFirst", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());
     }
+
+    [TestMethod]
+    public void Nullable_HasValue_ReadsBoolConstraintFromObjectConstraint()
+    {
+        const string code = """
+            var hasValue = arg.HasValue;
+            Tag("HasValueUnknown", hasValue);
+            Tag("SymbolUnknown", arg);
+            arg = true;
+            hasValue = arg.HasValue;
+            Tag("HasValueAfterTrue", hasValue);
+            Tag("SymbolAfterTrue", arg);
+            arg = null;
+            hasValue = arg.HasValue;
+            Tag("HasValueAfterNull", hasValue);
+            Tag("SymbolAfterNull", arg);
+            """;
+        var validator = SETestContext.CreateCS(code, ", bool? arg").Validator;
+        validator.ValidateTag("HasValueUnknown", x => x.Should().BeNull());
+        validator.ValidateTag("SymbolUnknown", x => x.HasConstraint(ObjectConstraint.NotNull)); // FIXME: x.Should().BeNull()
+        validator.ValidateTag("HasValueAfterTrue", x => x.Should().BeNull());   // FIXME: x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+        validator.ValidateTag("SymbolAfterTrue", x => x.HasConstraint(BoolConstraint.True));
+        validator.ValidateTag("SymbolAfterTrue", x => x.HasConstraint(ObjectConstraint.NotNull));
+        validator.ValidateTag("HasValueAfterNull", x => x.Should().BeNull());  // FIXME: x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+        validator.ValidateTag("SymbolAfterNull", x => x.HasConstraint(ObjectConstraint.NotNull));  // FIXME: Null
+    }
 }
