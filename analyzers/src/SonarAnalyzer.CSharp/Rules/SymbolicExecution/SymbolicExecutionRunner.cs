@@ -35,7 +35,6 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly ImmutableArray<ISymbolicExecutionAnalyzer> SonarRules = ImmutableArray.Create<ISymbolicExecutionAnalyzer>(
             new SonarRules.EmptyNullableValueAccess(),
             new SonarRules.ObjectsShouldNotBeDisposedMoreThanOnce(),
-            new SonarRules.PublicMethodArgumentsShouldBeCheckedForNull(),
             new SonarRules.EmptyCollectionsShouldNotBeEnumerated(),
             new SonarRules.ConditionEvaluatesToConstant(),
             new SonarRules.InvalidCastToInterfaceSymbolicExecution(),

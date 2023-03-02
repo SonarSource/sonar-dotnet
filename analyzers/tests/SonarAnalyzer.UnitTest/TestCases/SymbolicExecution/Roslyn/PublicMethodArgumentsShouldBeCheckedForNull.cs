@@ -97,7 +97,7 @@ namespace Tests.Diagnostics
 
         public Program(string s) : this(s.Length) { }   // FIXME Non-compliant {{Refactor this constructor to avoid using members of parameter 's' because it could be null.}}
 
-        public void FIXME Non-compliant1(object o)
+        public void NonCompliant1(object o)
         {
             var c = o?.ToString()?.IsNormalized();
             if (c == null)
@@ -441,7 +441,7 @@ namespace CSharp8
 
     public class SwitchExpressions
     {
-        public void OnlyDiscardBranch_FIXME Non-compliant(string s, bool b)
+        public void OnlyDiscardBranch_Noncompliant(string s, bool b)
         {
             var result = b switch
             {
@@ -449,7 +449,7 @@ namespace CSharp8
             };
         }
 
-        public void MultipleBranches_FIXME Non-compliant(string s, int val)
+        public void MultipleBranches_Noncompliant(string s, int val)
         {
             var result = val switch
             {
@@ -459,7 +459,7 @@ namespace CSharp8
             };
         }
 
-        public void Nested_FIXME Non-compliant(string s, int val, bool condition)
+        public void Nested_Noncompliant(string s, int val, bool condition)
         {
             var result = val switch
             {

@@ -6,5 +6,5 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : PublicMethodArguments
 
     protected override DiagnosticDescriptor Rule => S3900;
 
-    public override bool ShouldExecute() => true;
+    public override bool ShouldExecute() => false;
 }
