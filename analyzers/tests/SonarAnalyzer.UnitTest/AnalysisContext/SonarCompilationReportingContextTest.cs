@@ -29,12 +29,12 @@ public class SonarCompilationReportingContextTest
     public void Properties_ArePropagated()
     {
         var cancel = new CancellationToken(true);
-        var (tree, model) = TestHelper.CompileCS("// Nothing to see here");
+        var compilation = TestHelper.CompileCS("// Nothing to see here").Model.Compilation;
         var options = AnalysisScaffolding.CreateOptions();
-        var context = new CompilationAnalysisContext(model.Compilation, options, _ => { }, _ => true, cancel);
+        var context = new CompilationAnalysisContext(compilation, options, _ => { }, _ => true, cancel);
         var sut = new SonarCompilationReportingContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context);
 
-        sut.Compilation.Should().BeSameAs(model.Compilation);
+        sut.Compilation.Should().BeSameAs(compilation);
         sut.Options.Should().BeSameAs(options);
         sut.Cancel.Should().Be(cancel);
     }
