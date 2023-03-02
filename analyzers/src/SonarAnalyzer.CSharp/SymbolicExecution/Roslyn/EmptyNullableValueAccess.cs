@@ -28,5 +28,45 @@ public class EmptyNullableValueAccess : EmptyNullableValueAccessBase
 
     protected override DiagnosticDescriptor Rule => S3655;
 
-    public override bool ShouldExecute() => false;
+    public override bool ShouldExecute()
+    {
+        var walker = new SyntaxKindWalker(SemanticModel);
+        walker.SafeVisit(Node);
+        return walker.Result;
+    }
+
+    private sealed class SyntaxKindWalker : SafeCSharpSyntaxWalker
+    {
+        public bool Result { get; private set; }
+        private readonly SemanticModel semanticModel;
+
+        public SyntaxKindWalker(SemanticModel semanticModel) => this.semanticModel = semanticModel;
+
+        public override void Visit(SyntaxNode node)
+        {
+            if (!Result)
+            {
+                Result |= CheckMemberAccess(node) || CheckCast(node);
+
+                if (!Result)
+                {
+            base.Visit(node);
+        }
+    }
+
+            bool CheckMemberAccess(SyntaxNode node) =>
+                node is MemberAccessExpressionSyntax memberAccess
+                && (memberAccess.NameIs(nameof(Nullable<int>.Value)) || memberAccess.NameIs(nameof(Nullable<int>.GetType)))
+                // FIXME: check with Pavel
+                && semanticModel.GetTypeInfo(memberAccess.Expression) is { Type: var memberType }
+                && memberType.IsNullableValueType();
+
+            bool CheckCast(SyntaxNode node) =>
+                node is CastExpressionSyntax cast
+                && semanticModel.GetTypeInfo(cast.Expression) is { Type: var targetType }
+                && semanticModel.GetTypeInfo(cast.Type) is { Type: var castType }
+                && targetType.IsNullableValueType()
+                && castType.IsValueType;
+        }
+    }
 }
