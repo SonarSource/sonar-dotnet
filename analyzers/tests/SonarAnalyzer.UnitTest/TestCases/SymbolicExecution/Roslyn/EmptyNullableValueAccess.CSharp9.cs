@@ -27,7 +27,7 @@ public class Sample
         var v = nullable.Value;
 
         nullable = null;
-        v = nullable.Value; // FN, can't build CFG for this method
+        v = nullable.Value;    // Noncompliant
     }
 
     public void PatternMatching(int? arg)
@@ -45,7 +45,7 @@ public class Sample
 
         if (arg is null)
         {
-            v = arg.Value;     // FN
+            v = arg.Value;     // Noncompliant
         }
         if (arg is int or null)
         {
@@ -66,7 +66,7 @@ public class Sample
             {
                 v = nullable.Value;
             }
-            v = nullable.Value;        // FN, can't build CFG for this method
+            v = nullable.Value;        // Noncompliant
         }
     }
 
@@ -75,7 +75,7 @@ public class Sample
         Func<int> a = static () =>
         {
             int? nullable = null;
-            return nullable.Value;    // FIXME Non-compliant
+            return nullable.Value;     // Noncompliant
         };
         a();
     }
@@ -86,7 +86,7 @@ public class Sample
         init
         {
             int? nullable = null;
-            field = nullable.Value;    // FIXME Non-compliant
+            field = nullable.Value;    // Noncompliant
         }
     }
 
@@ -108,7 +108,7 @@ public record Record
     public void Method()
     {
         int? nullable = null;
-        var v = nullable.Value;    // FIXME Non-compliant
+        var v = nullable.Value;        // Noncompliant
     }
 }
 
@@ -122,7 +122,7 @@ public partial class Partial
     public partial void Method()
     {
         int? nullable = null;
-        var v = nullable.Value;    // FIXME Non-compliant
+        var v = nullable.Value;        // Noncompliant
     }
 }
 
@@ -140,12 +140,12 @@ public struct Repro_6682
 
         if (arg is { SomeProperty: true })  // A null check
         {
-            var value = arg.Value;  // FIXME Non-compliant FP
+            var value = arg.Value;          // Compliant
         }
 
-        if (arg is { })             // A null check
+        if (arg is { })                     // A null check
         {
-            var value = arg.Value;  // FIXME Non-compliant FP
+            var value = arg.Value;          // Compliant
         }
     }
 }

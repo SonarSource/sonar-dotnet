@@ -4,130 +4,118 @@ using System.Linq;
 
 public class EmptyNullableValueAccess
 {
-    private IEnumerable<TestClass> numbers = new[]
+    private IEnumerable<TestClass> Numbers = new[]
     {
-        new TestClass { Number = 42 },
+        new TestClass() { Number = 42 },
         new TestClass(),
-        new TestClass { Number = 1 },
-        new TestClass { Number = null }
+        new TestClass() { Number = 1 },
+        new TestClass() { Number = null }
     };
 
-    public class TestClass
+    void NullAssignment()
     {
-        public int? Number { get; set; }
+        int? i = null;
+        if (i.HasValue)
+        {
+            Console.WriteLine(i.Value);
+        }
+
+        Console.WriteLine(i.Value); // Noncompliant {{'i' is null on at least one execution path.}}
+        //                ^
     }
 
-    void Nameof(object o)
+    IEnumerable<TestClass> EnumerableExpressionWithCompilableCode() =>
+        Numbers.OrderBy(x => x.Number.HasValue).ThenBy(i => i.Number);
+
+    IEnumerable<int> EnumerableExpressionWithNonCompilableCode() =>
+        Numbers.OrderBy(x => x.Number.HasValue).ThenBy(i => i.Number).Select(x => x.Number ?? 0);
+
+    void NonEmpty()
     {
-        if (o == null)
+        int? i = 42;
+        if (i.HasValue)
         {
+            Console.WriteLine(i.Value);
         }
 
-        if (o == nameof(Object))
-        {
-            o.ToString(); // Compliant
-        }
+        Console.WriteLine(i.Value);    // Compliant, non-empty
     }
 
-    public void TestNull()
+    void EmptyConstructor()
     {
-        int? i1 = null;
-        if (i1.HasValue)
+        int? i = new Nullable<int>();
+        if (i.HasValue)
         {
-            Console.WriteLine(i1.Value);
+            Console.WriteLine(i.Value);
         }
 
-        Console.WriteLine(i1.Value); // FIXME Non-compliant {{'i1' is null on at least one execution path.}}
-        // FIXME          hathathat
+        Console.WriteLine(i.Value);    // Noncompliant, empty
     }
 
-    public IEnumerable<TestClass> TestEnumerableExpressionWithCompilableCode() => numbers.OrderBy(i => i.Number.HasValue).ThenBy(i => i.Number);
-    public IEnumerable<int> TestEnumerableExpressionWithNonCompilableCode() => numbers.OrderBy(i => i.Number.HasValue).ThenBy(i => i.Number).Select(x => x.Number ?? 0);
-
-    public void TestNonNull()
+    void NonEmptyConstructor()
     {
-        int? i1 = 42;
-        if (i1.HasValue)
+        int? i = new Nullable<int>(42);
+        if (i.HasValue)
         {
-            Console.WriteLine(i1.Value);
+            Console.WriteLine(i.Value);
         }
 
-        Console.WriteLine(i1.Value);
+        Console.WriteLine(i.Value);
     }
 
-    public void TestNullConstructor()
+    void ComplexCondition(int? i, double? d, float? f)
     {
-        int? i2 = new Nullable<int>();
-        if (i2.HasValue)
-        {
-            Console.WriteLine(i2.Value);
-        }
+        if (i.HasValue && i.Value == 42) { }
+        if (i.HasValue == true && i.Value == 42) { }
+        if (i.HasValue == !false && i.Value == 42) { }
+        if (!!i.HasValue && i.Value == 42) { }
 
-        Console.WriteLine(i2.Value); // FIXME Non-compliant
+        if (!i.HasValue && i.Value == 42) { }           // FN - parameter should be null-constrained
+        if (i.HasValue == false && i.Value == 42) { }   // FN
+        if (i.HasValue == !true && i.Value == 42) { }   // FN
+        if (!!!i.HasValue && i.Value == 42) { }         // FN
+        if (!d.HasValue) { _ = d.Value; }               // FN
+        if (f == null) { _ = d.Value; }                 // FN
+        if (null == f) { _ = d.Value; }                 // FN
     }
 
-    public void TestNonNullConstructor()
+    void Assignment(int? i1)
     {
-        int? i1 = new Nullable<int>(42);
-        if (i1.HasValue)
         {
-            Console.WriteLine(i1.Value);
-        }
-
-        Console.WriteLine(i1.Value);
-    }
-
-    public void TestComplexCondition(int? i3, double? d3, float? f3)
-    {
-        if (i3.HasValue && i3.Value == 42)
-        {
-            Console.WriteLine();
-        }
-
-        if (!i3.HasValue && i3.Value == 42) // TODO: Should be NC
-        {
-            Console.WriteLine();
-        }
-
-        if (!d3.HasValue)
-        {
-            Console.WriteLine(d3.Value); // TODO: Should be NC
-        }
-
-        if (f3 == null)
-        {
-            Console.WriteLine(f3.Value); // TODO: Should be NC
+            int? i2;
+            if (i1 == (i2 = null)) { _ = i1.Value; } // Noncompliant
+            //                           ^^
         }
     }
 
-    public int CSharp8_SwitchExpressions(bool zero)
+    int SwitchExpressions(bool zero)
     {
         int? i = zero switch { true => 0, _ => null };
-        return i.Value; // FIXME Non-compliant
+        return i.Value; // Noncompliant
     }
 
-    public int CSharp8_SwitchExpressions2(bool zero)
+    int SwitchExpressions2(bool zero)
     {
         int? i = zero switch { true => 0, _ => 1 };
         return i.Value;
     }
 
-    public int CSharp8_SwitchExpressions3(int? value)
+    int SwitchExpressions3(int? value)
     {
         return value.HasValue switch { true => value.Value, false => 0 };
     }
 
-    public int CSharp8_SwitchExpressions4(int? value)
+    int SwitchExpressions4(int? value)
     {
-        return value.HasValue switch { true => 0, false => value.Value };   // FN - switch expressions are not constrained
+        return value.HasValue switch { true => 0, false => value.Value }; // FN - switch expressions are not constrained
     }
 
-    public int CSharp8_SwitchExpressions5(int? value, bool flag)
+    int SwitchExpressions5(int? value, bool flag)
     {
-        return flag switch { true => value.Value, false => 0 }; // FN - switch expressions are not constrained
+        return flag switch { true => value.Value, false => 0 };           // FN - switch expressions are not constrained
     }
 
-    public int CSharp8_StaticLocalFunctions(int? param)
+    int StaticLocalFunctions(int? param)
     {
         static int ExtractValue(int? intOrNull)
         {
@@ -137,12 +125,16 @@ public class EmptyNullableValueAccess
         return ExtractValue(param);
     }
 
-    public int CSharp8_NullCoalescingAssignment(int? param)
+    int NullCoalescingAssignment(int? param)
     {
         param ??= 42;
         return param.Value; // OK, value is always set
     }
 
+    class TestClass
+    {
+        public int? Number { get; set; }
+    }
 }
 
 class TestLoopWithBreak
@@ -156,7 +148,7 @@ class TestLoopWithBreak
             {
                 if (condition)
                 {
-                    Console.WriteLine(i1.Value); // FIXME Non-compliant
+                    Console.WriteLine(i1.Value); // Noncompliant
                 }
                 break;
             }
@@ -173,7 +165,7 @@ public interface IWithDefaultImplementation
     int DoSomething()
     {
         int? i = null;
-        return i.Value; //FIXME Non-compliant
+        return i.Value; // Noncompliant
     }
 }
 
@@ -216,7 +208,7 @@ public class Repro_4573
             }
             if (foo == null)
             {
-                Console.WriteLine(foo.Value.ToString());    // FN
+                Console.WriteLine(foo.Value.ToString());    // Noncompliant
             }
             if (foo != null)
             {
@@ -247,7 +239,7 @@ public class Repro_4573
             {
                 if (foo == null)
                 {
-                    Console.WriteLine(foo.Value.ToString());    // FIXME Non-compliant
+                    Console.WriteLine(foo.Value.ToString());    // Noncompliant
                 }
             }
         }
@@ -265,11 +257,12 @@ public class Repro_4573
                 }
                 if (!foo.HasValue)
                 {
-                    Console.WriteLine(foo.Value.ToString());    // FIXME Non-compliant FP, unreachable. It works as expected when isolated, see NestedIsolated1() above
+                    Console.WriteLine(foo.Value.ToString());
                 }
                 if (foo == null)
                 {
-                    Console.WriteLine(foo.Value.ToString());    // Compliant, unreachable
+                    // FIXME the following
+                    Console.WriteLine(foo.Value.ToString());    // Noncompliant
                 }
                 if (foo != null)
                 {
@@ -288,7 +281,7 @@ public class Repro_4573
                 }
                 if (foo == null)
                 {
-                    Console.WriteLine(foo.Value.ToString());    // FN. It works as expected when isolated, see NestedIsolated2() above
+                    Console.WriteLine(foo.Value.ToString());    // Noncompliant
                 }
                 if (foo != null)
                 {

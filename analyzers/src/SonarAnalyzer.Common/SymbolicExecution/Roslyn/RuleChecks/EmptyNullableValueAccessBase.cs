@@ -30,8 +30,7 @@ public abstract class EmptyNullableValueAccessBase : SymbolicRuleCheck
     {
         if (context.Operation.Instance.Kind == OperationKindEx.PropertyReference
             && context.Operation.Instance.ToPropertyReference() is var reference
-            && reference.Property.Name != nameof(Nullable<int>.HasValue)
-            && reference.Property.Name != nameof(Nullable<int>.GetValueOrDefault)
+            && reference.Property.Name == nameof(Nullable<int>.Value)
             && context.HasConstraint(reference.Instance, ObjectConstraint.Null))
         {
             ReportIssue(reference.Instance, reference.Instance.Syntax.ToString());
