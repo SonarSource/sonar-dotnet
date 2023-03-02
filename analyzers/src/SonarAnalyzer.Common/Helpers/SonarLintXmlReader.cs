@@ -71,12 +71,6 @@ public class SonarLintXmlSettingsReader
     private bool? analyzeGeneratedCode;
     public bool AnalyzeGeneratedCode => analyzeGeneratedCode ??= ReadBoolean(ReadProperty($"sonar.{propertyLanguage}.analyzeGeneratedCode"));
 
-    private bool? ignoreIssues;
-    public bool IgnoreIssues => ignoreIssues ??= ReadBoolean(ReadProperty($"sonar.{propertyLanguage}.roslyn.ignoreIssues"));
-
-    private string suffixes;
-    public string Suffixes => suffixes ??= ReadString(ReadProperty($"sonar.{propertyLanguage}.file.suffixes"));
-
     private string[] exclusions;
     public string[] Exclusions => exclusions ??= ReadCommaSeparatedArray(ReadProperty("sonar.exclusions"));
 

@@ -178,8 +178,6 @@ public partial class SonarAnalysisContextBaseTest
 
         sut.Settings.IgnoreHeaderComments.Should().BeTrue();
         sut.Settings.AnalyzeGeneratedCode.Should().BeFalse();
-        sut.Settings.IgnoreIssues.Should().BeFalse();
-        sut.Settings.Suffixes.Should().Be(".cs");
         TestArray(sut.Settings.Exclusions, nameof(sut.Settings.Exclusions));
         TestArray(sut.Settings.Inclusions, nameof(sut.Settings.Inclusions));
         TestArray(sut.Settings.GlobalExclusions, nameof(sut.Settings.GlobalExclusions));
@@ -228,8 +226,6 @@ public partial class SonarAnalysisContextBaseTest
 
         sut.Settings.AnalyzeGeneratedCode.Should().BeFalse();
         sut.Settings.IgnoreHeaderComments.Should().BeFalse();
-        sut.Settings.IgnoreIssues.Should().BeFalse();
-        sut.Settings.Suffixes.Should().BeEmpty();
         sut.Settings.Exclusions.Should().NotBeNull().And.HaveCount(0);
         sut.Settings.Inclusions.Should().NotBeNull().And.HaveCount(0);
         sut.Settings.GlobalExclusions.Should().NotBeNull().And.HaveCount(0);

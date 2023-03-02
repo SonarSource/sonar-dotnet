@@ -27,15 +27,13 @@ namespace SonarAnalyzer.UnitTest.Helpers;
 public class SonarLintXmlReaderTest
 {
     [DataTestMethod]
-    [DataRow(LanguageNames.CSharp, "cs", ".cs")]
-    [DataRow(LanguageNames.VisualBasic, "vbnet", ".vb")]
-    public void SonarLintXml_WhenAllValuesAreSet_ExpectedValues(string language, string propertyLanguage, string fileExtension)
+    [DataRow(LanguageNames.CSharp, "cs")]
+    [DataRow(LanguageNames.VisualBasic, "vbnet")]
+    public void SonarLintXml_WhenAllValuesAreSet_ExpectedValues(string language, string propertyLanguage)
     {
         var sut = CreateSonarLintXmlReader($"ResourceTests\\SonarLintXml\\All_Properties_{propertyLanguage}\\SonarLint.xml", language);
         sut.Settings.IgnoreHeaderComments.Should().BeTrue();
         sut.Settings.AnalyzeGeneratedCode.Should().BeFalse();
-        sut.Settings.IgnoreIssues.Should().BeFalse();
-        sut.Settings.Suffixes.Should().Be(fileExtension);
         TestArray(sut.Settings.Exclusions, nameof(sut.Settings.Exclusions));
         TestArray(sut.Settings.Inclusions, nameof(sut.Settings.Inclusions));
         TestArray(sut.Settings.GlobalExclusions, nameof(sut.Settings.GlobalExclusions));
@@ -74,8 +72,6 @@ public class SonarLintXmlReaderTest
     {
         sut.Settings.AnalyzeGeneratedCode.Should().BeFalse();
         sut.Settings.IgnoreHeaderComments.Should().BeFalse();
-        sut.Settings.IgnoreIssues.Should().BeFalse();
-        sut.Settings.Suffixes.Should().BeEmpty();
         sut.Settings.Exclusions.Should().NotBeNull().And.HaveCount(0);
         sut.Settings.Inclusions.Should().NotBeNull().And.HaveCount(0);
         sut.Settings.GlobalExclusions.Should().NotBeNull().And.HaveCount(0);
