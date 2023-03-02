@@ -499,7 +499,7 @@ namespace NS
 
             // GetAttributesWithInherited should behave like MemberInfo.GetCustomAttributes from runtime reflection:
             var assembly = compiler.EmitAssembly();
-            var type = assembly.GetType(className.Replace("<int>", @"`1"), throwOnError: true);
+            var type = assembly.GetType(className.Replace("<int>", "`1"), throwOnError: true);
             var methodInfo = type.GetMethod(methodName.Replace("<int>", string.Empty));
             methodInfo.GetCustomAttributes(inherit: true).Select(x => x.GetType().Name).Should().BeEquivalentTo(expectedAttributes);
         }
@@ -578,7 +578,7 @@ namespace NS
             }
             // GetAttributesWithInherited should behave like MemberInfo.GetCustomAttributes from runtime reflection:
             var assembly = compiler.EmitAssembly();
-            var type = assembly.GetType(className.Replace("<int>", @"`1"), throwOnError: true);
+            var type = assembly.GetType(className.Replace("<int>", "`1"), throwOnError: true);
             type.GetCustomAttributes(inherit: true).Select(x => x.GetType().Name).Should().BeEquivalentTo(expectedAttributes);
         }
     }
