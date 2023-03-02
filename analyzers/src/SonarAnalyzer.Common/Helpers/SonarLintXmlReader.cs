@@ -33,38 +33,6 @@ public class SonarLintXmlReader
     private readonly SonarLintXml sonarLintXml;
     private readonly string propertyLanguage;
 
-    private SonarLintXmlSettingsReader settings;
-    public SonarLintXmlSettingsReader Settings => settings ??= new(sonarLintXml, propertyLanguage);
-
-    public SonarLintXmlReader(SourceText sonarLintXml, string language)
-    {
-        this.sonarLintXml = sonarLintXml == null ? SonarLintXml.Empty : ParseContent(sonarLintXml);
-        propertyLanguage = language;
-    }
-
-    private static SonarLintXml ParseContent(SourceText sonarLintXml)
-    {
-        try
-        {
-            var serializer = new XmlSerializer(typeof(SonarLintXml));
-            var byteArray = Encoding.UTF8.GetBytes(sonarLintXml.ToString());
-            var stream = new MemoryStream(byteArray);
-            using var sr = new StreamReader(stream, Encoding.UTF8, false);
-            using var reader = XmlReader.Create(sr);
-            return (SonarLintXml)serializer.Deserialize(reader);
-        }
-        catch
-        {
-            return SonarLintXml.Empty;
-        }
-    }
-}
-
-public class SonarLintXmlSettingsReader
-{
-    private readonly SonarLintXml sonarLintXml;
-    private readonly string propertyLanguage;
-
     private bool? ignoreHeaderComments;
     public bool? IgnoreHeaderComments => ignoreHeaderComments ??= ReadBoolean(ReadProperty($"sonar.{propertyLanguage}.ignoreHeaderComments"));
 
@@ -89,10 +57,27 @@ public class SonarLintXmlSettingsReader
     private string[] globalTestExclusions;
     public string[] GlobalTestExclusions => globalTestExclusions ??= ReadCommaSeparatedArray(ReadProperty("sonar.global.test.exclusions"));
 
-    public SonarLintXmlSettingsReader(SonarLintXml sonarLintXml, string language)
+    public SonarLintXmlReader(SourceText sonarLintXml, string language)
     {
-        this.sonarLintXml = sonarLintXml;
+        this.sonarLintXml = sonarLintXml == null ? SonarLintXml.Empty : ParseContent(sonarLintXml);
         propertyLanguage = language == LanguageNames.CSharp ? "cs" : "vbnet";
+    }
+
+    private static SonarLintXml ParseContent(SourceText sonarLintXml)
+    {
+        try
+        {
+            var serializer = new XmlSerializer(typeof(SonarLintXml));
+            var byteArray = Encoding.UTF8.GetBytes(sonarLintXml.ToString());
+            var stream = new MemoryStream(byteArray);
+            using var sr = new StreamReader(stream, Encoding.UTF8, false);
+            using var reader = XmlReader.Create(sr);
+            return (SonarLintXml)serializer.Deserialize(reader);
+        }
+        catch
+        {
+            return SonarLintXml.Empty;
+        }
     }
 
     private string ReadProperty(string property) =>

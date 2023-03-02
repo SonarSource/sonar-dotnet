@@ -32,14 +32,14 @@ public class SonarLintXmlReaderTest
     public void SonarLintXml_WhenAllValuesAreSet_ExpectedValues(string language, string propertyLanguage)
     {
         var sut = CreateSonarLintXmlReader($"ResourceTests\\SonarLintXml\\All_Properties_{propertyLanguage}\\SonarLint.xml", language);
-        sut.Settings.IgnoreHeaderComments.Should().BeTrue();
-        sut.Settings.AnalyzeGeneratedCode.Should().BeFalse();
-        AssertArrayContent(sut.Settings.Exclusions, nameof(sut.Settings.Exclusions));
-        AssertArrayContent(sut.Settings.Inclusions, nameof(sut.Settings.Inclusions));
-        AssertArrayContent(sut.Settings.GlobalExclusions, nameof(sut.Settings.GlobalExclusions));
-        AssertArrayContent(sut.Settings.TestExclusions, nameof(sut.Settings.TestExclusions));
-        AssertArrayContent(sut.Settings.TestInclusions, nameof(sut.Settings.TestInclusions));
-        AssertArrayContent(sut.Settings.GlobalTestExclusions, nameof(sut.Settings.GlobalTestExclusions));
+        sut.IgnoreHeaderComments.Should().BeTrue();
+        sut.AnalyzeGeneratedCode.Should().BeFalse();
+        AssertArrayContent(sut.Exclusions, nameof(sut.Exclusions));
+        AssertArrayContent(sut.Inclusions, nameof(sut.Inclusions));
+        AssertArrayContent(sut.GlobalExclusions, nameof(sut.GlobalExclusions));
+        AssertArrayContent(sut.TestExclusions, nameof(sut.TestExclusions));
+        AssertArrayContent(sut.TestInclusions, nameof(sut.TestInclusions));
+        AssertArrayContent(sut.GlobalTestExclusions, nameof(sut.GlobalTestExclusions));
 
         static void AssertArrayContent(string[] array, string folder)
         {
@@ -50,17 +50,17 @@ public class SonarLintXmlReaderTest
     }
 
     [TestMethod]
-    public void SonarLintXmlSettings_PartiallyMissingProperties_ExpectedAndDefaultValues()
+    public void SonarLintXml_PartiallyMissingProperties_ExpectedAndDefaultValues()
     {
         var sut = CreateSonarLintXmlReader($"ResourceTests\\SonarLintXml\\Partially_missing_properties\\SonarLint.xml");
-        sut.Settings.IgnoreHeaderComments.Should().BeFalse();
-        sut.Settings.AnalyzeGeneratedCode.Should().BeTrue();
-        AssertArrayContent(sut.Settings.Exclusions, nameof(sut.Settings.Exclusions));
-        AssertArrayContent(sut.Settings.Inclusions, nameof(sut.Settings.Inclusions));
-        sut.Settings.GlobalExclusions.Should().NotBeNull().And.HaveCount(0);
-        sut.Settings.TestExclusions.Should().NotBeNull().And.HaveCount(0);
-        sut.Settings.TestInclusions.Should().NotBeNull().And.HaveCount(0);
-        sut.Settings.GlobalTestExclusions.Should().NotBeNull().And.HaveCount(0);
+        sut.IgnoreHeaderComments.Should().BeFalse();
+        sut.AnalyzeGeneratedCode.Should().BeTrue();
+        AssertArrayContent(sut.Exclusions, nameof(sut.Exclusions));
+        AssertArrayContent(sut.Inclusions, nameof(sut.Inclusions));
+        sut.GlobalExclusions.Should().NotBeNull().And.HaveCount(0);
+        sut.TestExclusions.Should().NotBeNull().And.HaveCount(0);
+        sut.TestInclusions.Should().NotBeNull().And.HaveCount(0);
+        sut.GlobalTestExclusions.Should().NotBeNull().And.HaveCount(0);
     }
 
     [DataTestMethod]
@@ -71,27 +71,27 @@ public class SonarLintXmlReaderTest
         CheckSonarLintXmlDefaultValues(new SonarLintXmlReader(SourceText.From(sonarLintXmlContent), LanguageNames.CSharp));
 
     [TestMethod]
-    public void SonarLintXmlSettings_MissingProperties_DefaultBehaviour() =>
+    public void SonarLintXml_MissingProperties_DefaultBehaviour() =>
         CheckSonarLintXmlDefaultValues(CreateSonarLintXmlReader("ResourceTests\\SonarLintXml\\Missing_properties\\SonarLint.xml"));
 
     [TestMethod]
-    public void SonarLintXmlSettings_WithIncorrectValueType_DefaultBehaviour() =>
+    public void SonarLintXml_WithIncorrectValueType_DefaultBehaviour() =>
         CheckSonarLintXmlDefaultValues(CreateSonarLintXmlReader("ResourceTests\\SonarLintXml\\Incorrect_value_type\\SonarLint.xml"));
 
     [TestMethod]
-    public void SonarLintXmlSettings_CheckEmpty_DefaultBehaviour() =>
+    public void SonarLintXml_CheckEmpty_DefaultBehaviour() =>
         CheckSonarLintXmlDefaultValues(SonarLintXmlReader.Empty);
 
     private static void CheckSonarLintXmlDefaultValues(SonarLintXmlReader sut)
     {
-        sut.Settings.AnalyzeGeneratedCode.Should().BeFalse();
-        sut.Settings.IgnoreHeaderComments.Should().BeFalse();
-        sut.Settings.Exclusions.Should().NotBeNull().And.HaveCount(0);
-        sut.Settings.Inclusions.Should().NotBeNull().And.HaveCount(0);
-        sut.Settings.GlobalExclusions.Should().NotBeNull().And.HaveCount(0);
-        sut.Settings.TestExclusions.Should().NotBeNull().And.HaveCount(0);
-        sut.Settings.TestInclusions.Should().NotBeNull().And.HaveCount(0);
-        sut.Settings.GlobalTestExclusions.Should().NotBeNull().And.HaveCount(0);
+        sut.AnalyzeGeneratedCode.Should().BeFalse();
+        sut.IgnoreHeaderComments.Should().BeFalse();
+        sut.Exclusions.Should().NotBeNull().And.HaveCount(0);
+        sut.Inclusions.Should().NotBeNull().And.HaveCount(0);
+        sut.GlobalExclusions.Should().NotBeNull().And.HaveCount(0);
+        sut.TestExclusions.Should().NotBeNull().And.HaveCount(0);
+        sut.TestInclusions.Should().NotBeNull().And.HaveCount(0);
+        sut.GlobalTestExclusions.Should().NotBeNull().And.HaveCount(0);
     }
 
     private static void AssertArrayContent(string[] array, string folder)
