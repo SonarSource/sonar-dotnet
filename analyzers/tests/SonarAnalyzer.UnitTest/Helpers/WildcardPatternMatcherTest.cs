@@ -102,6 +102,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
         [DataRow("foo\\bar", "foo\\bar", true)]
         [DataRow("foo/bar", "foo\\bar", true)]
+        [DataRow("foo\\bar/baz", "foo\\bar\\baz", true)]
 
         public void IsMatch_MatchesPatternsAsExpected(string pattern, string input, bool expectedResult)
         {

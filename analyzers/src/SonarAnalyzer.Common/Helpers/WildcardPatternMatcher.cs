@@ -60,19 +60,19 @@ internal static class WildcardPatternMatcher
             Create(pattern, Path.DirectorySeparatorChar.ToString());
 
         private static WildcardPattern Create(string pattern, string directorySeparator) =>
-            Cache.GetOrAdd(pattern + directorySeparator, k => new WildcardPattern(pattern, directorySeparator));
+            Cache.GetOrAdd(pattern + directorySeparator, _ => new WildcardPattern(pattern, directorySeparator));
 
-        private static string ToRegexp(string antPattern, string directorySeparator)
+        private static string ToRegexp(string wildcardPattern, string directorySeparator)
         {
             var escapedDirectorySeparator = '\\' + directorySeparator;
-            var sb = new StringBuilder(antPattern.Length);
+            var sb = new StringBuilder(wildcardPattern.Length);
 
             sb.Append('^');
 
-            var i = antPattern.StartsWith("/") || antPattern.StartsWith("\\") ? 1 : 0;
-            while (i < antPattern.Length)
+            var i = wildcardPattern.StartsWith("/") || wildcardPattern.StartsWith("\\") ? 1 : 0;
+            while (i < wildcardPattern.Length)
             {
-                var ch = antPattern[i];
+                var ch = wildcardPattern[i];
 
                 if (SpecialChars.IndexOf(ch) != -1)
                 {
@@ -81,11 +81,11 @@ internal static class WildcardPatternMatcher
                 }
                 else if (ch == '*')
                 {
-                    if (i + 1 < antPattern.Length && antPattern[i + 1] == '*')
+                    if (i + 1 < wildcardPattern.Length && wildcardPattern[i + 1] == '*')
                     {
                         // Double asterisk
                         // Zero or more directories
-                        if (i + 2 < antPattern.Length && IsSlash(antPattern[i + 2]))
+                        if (i + 2 < wildcardPattern.Length && IsSlash(wildcardPattern[i + 2]))
                         {
                             sb.Append("(?:.*").Append(escapedDirectorySeparator).Append("|)");
                             i += 2;
