@@ -43,7 +43,7 @@ public abstract class DebuggerDisplayUsesExistingMembersBase<TAttributeSyntax, T
             c =>
             {
                 var attribute = (TAttributeSyntax)c.Node;
-                if (Language.Syntax.IsKnownAttributeType(attribute, KnownType.System_Diagnostics_DebuggerDisplayAttribute, c.SemanticModel)
+                if (Language.Syntax.IsKnownAttributeType(c.SemanticModel, attribute, KnownType.System_Diagnostics_DebuggerDisplayAttribute)
                     && AttributeFormatString(attribute) is { } formatString
                     && Language.Syntax.StringValue(formatString, c.SemanticModel) is { } formatStringText
                     && FirstInvalidMemberName(c, formatStringText, attribute) is { } firstInvalidMember)
