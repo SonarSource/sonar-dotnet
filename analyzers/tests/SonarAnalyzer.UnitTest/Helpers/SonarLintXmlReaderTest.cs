@@ -41,6 +41,7 @@ public class SonarLintXmlReaderTest
         TestArray(sut.Settings.GlobalExclusions, nameof(sut.Settings.GlobalExclusions));
         TestArray(sut.Settings.TestExclusions, nameof(sut.Settings.TestExclusions));
         TestArray(sut.Settings.TestInclusions, nameof(sut.Settings.TestInclusions));
+        TestArray(sut.Settings.GlobalTestExclusions, nameof(sut.Settings.GlobalTestExclusions));
 
         static void TestArray(string[] array, string folder)
         {
@@ -80,6 +81,7 @@ public class SonarLintXmlReaderTest
         sut.Settings.GlobalExclusions.Should().NotBeNull().And.HaveCount(0);
         sut.Settings.TestExclusions.Should().NotBeNull().And.HaveCount(0);
         sut.Settings.TestInclusions.Should().NotBeNull().And.HaveCount(0);
+        sut.Settings.GlobalTestExclusions.Should().NotBeNull().And.HaveCount(0);
     }
 
     private static SonarLintXmlReader CreateSonarLintXmlReader(string relativePath, string language = LanguageNames.CSharp) =>

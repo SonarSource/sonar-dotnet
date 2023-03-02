@@ -92,6 +92,9 @@ public class SonarLintXmlSettingsReader
     private string[] testInclusions;
     public string[] TestInclusions => testInclusions ??= ReadCommaSeparatedArray(ReadProperty("sonar.test.inclusions"));
 
+    private string[] globalTestExclusions;
+    public string[] GlobalTestExclusions => globalTestExclusions ??= ReadCommaSeparatedArray(ReadProperty("sonar.global.test.exclusions"));
+
     public SonarLintXmlSettingsReader(SonarLintXml originalXml, string language)
     {
         sonarLintXml = originalXml;

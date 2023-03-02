@@ -37,6 +37,10 @@
 	  <Key>sonar.test.inclusions</Key>
 	  <Value>Fake/TestInclusions/**/*,Fake/TestInclusions/Second*/**/*</Value>
 	</Setting>
+	<Setting>
+	  <Key>sonar.global.test.exclusions</Key>
+	  <Value>Fake/GlobalTestExclusions/**/*,Fake/GlobalTestExclusions/Second*/**/*</Value>
+	</Setting>
   </Settings>
   <Rules>
     <Rule>
