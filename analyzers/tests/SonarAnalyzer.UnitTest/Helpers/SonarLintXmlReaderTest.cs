@@ -110,6 +110,13 @@ public class SonarLintXmlReaderTest
         array[1].Should().BeEquivalentTo($"Fake/{folder}/Second*/**/*");
     }
 
+    private static void AssertArrayContent(string[] array, string folder)
+    {
+        array.Should().HaveCount(2);
+        array[0].Should().BeEquivalentTo($"Fake/{folder}/**/*");
+        array[1].Should().BeEquivalentTo($"Fake/{folder}/Second*/**/*");
+    }
+
     private static SonarLintXmlReader CreateSonarLintXmlReader(string relativePath, string language = LanguageNames.CSharp) =>
         new(SourceText.From(File.ReadAllText(relativePath)), language);
 }
