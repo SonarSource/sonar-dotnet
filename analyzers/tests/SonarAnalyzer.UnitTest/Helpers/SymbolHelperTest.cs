@@ -400,21 +400,23 @@ namespace NS
         }
 
         [DataTestMethod]
-        [DataRow("BaseClass`1", "VirtualMethod", "MyInheritedAttribute", "MyDerivedInheritedAttribute", "MyNotInheritedAttribute", "MyDerivedNotInheritedAttribute", "MyUnannotatedAttribute")]
-        [DataRow("DerivedOpenGeneric`1", "VirtualMethod", "MyInheritedAttribute", "MyDerivedInheritedAttribute", "MyDerivedNotInheritedAttribute", "MyUnannotatedAttribute")]
-        [DataRow("DerivedOpenGeneric`1", "NonVirtualMethod")]
-        [DataRow("DerivedOpenGeneric`1", "GenericVirtualMethod`1", "MyInheritedAttribute", "MyDerivedInheritedAttribute", "MyDerivedNotInheritedAttribute", "MyUnannotatedAttribute")]
-        [DataRow("DerivedOpenGeneric`1", "GenericNonVirtualMethod`1")]
-        [DataRow("DerivedClosedGeneric", "VirtualMethod", "MyInheritedAttribute", "MyDerivedInheritedAttribute", "MyDerivedNotInheritedAttribute", "MyUnannotatedAttribute")]
-        [DataRow("DerivedClosedGeneric", "NonVirtualMethod")]
-        [DataRow("DerivedClosedGeneric", "GenericVirtualMethod`1", "MyInheritedAttribute", "MyDerivedInheritedAttribute", "MyDerivedNotInheritedAttribute", "MyUnannotatedAttribute")]
-        [DataRow("DerivedClosedGeneric", "GenericNonVirtualMethod`1")]
-        [DataRow("DerivedNoOverrides`1", "VirtualMethod", "MyInheritedAttribute", "MyDerivedInheritedAttribute", "MyNotInheritedAttribute", "MyDerivedNotInheritedAttribute", "MyUnannotatedAttribute")]
-        [DataRow("DerivedNoOverrides`1", "NonVirtualMethod", "MyInheritedAttribute", "MyDerivedInheritedAttribute", "MyNotInheritedAttribute", "MyDerivedNotInheritedAttribute", "MyUnannotatedAttribute")]
-        [DataRow("DerivedNoOverrides`1", "GenericVirtualMethod`1", "MyInheritedAttribute", "MyDerivedInheritedAttribute", "MyNotInheritedAttribute", "MyDerivedNotInheritedAttribute", "MyUnannotatedAttribute")]
-        [DataRow("DerivedNoOverrides`1", "GenericNonVirtualMethod`1", "MyInheritedAttribute", "MyDerivedInheritedAttribute", "MyNotInheritedAttribute", "MyDerivedNotInheritedAttribute", "MyUnannotatedAttribute")]
+        [DataRow("BaseClass<int>         ", "VirtualMethod               ", "MyInheritedAttribute", "MyDerivedInheritedAttribute", "MyDerivedNotInheritedAttribute", "MyUnannotatedAttribute", "MyNotInheritedAttribute")]
+        [DataRow("DerivedOpenGeneric<int>", "VirtualMethod               ", "MyInheritedAttribute", "MyDerivedInheritedAttribute", "MyDerivedNotInheritedAttribute", "MyUnannotatedAttribute")]
+        [DataRow("DerivedNoOverrides<int>", "VirtualMethod               ", "MyInheritedAttribute", "MyDerivedInheritedAttribute", "MyDerivedNotInheritedAttribute", "MyUnannotatedAttribute", "MyNotInheritedAttribute")]
+        [DataRow("DerivedClosedGeneric   ", "VirtualMethod               ", "MyInheritedAttribute", "MyDerivedInheritedAttribute", "MyDerivedNotInheritedAttribute", "MyUnannotatedAttribute")]
+        [DataRow("DerivedOpenGeneric<int>", "NonVirtualMethod            ")]
+        [DataRow("DerivedNoOverrides<int>", "NonVirtualMethod            ", "MyInheritedAttribute", "MyDerivedInheritedAttribute", "MyDerivedNotInheritedAttribute", "MyUnannotatedAttribute", "MyNotInheritedAttribute")]
+        [DataRow("DerivedClosedGeneric   ", "NonVirtualMethod            ")]
+        [DataRow("DerivedOpenGeneric<int>", "GenericVirtualMethod<int>   ", "MyInheritedAttribute", "MyDerivedInheritedAttribute", "MyDerivedNotInheritedAttribute", "MyUnannotatedAttribute")]
+        [DataRow("DerivedNoOverrides<int>", "GenericVirtualMethod<int>   ", "MyInheritedAttribute", "MyDerivedInheritedAttribute", "MyDerivedNotInheritedAttribute", "MyUnannotatedAttribute", "MyNotInheritedAttribute")]
+        [DataRow("DerivedClosedGeneric   ", "GenericVirtualMethod<int>   ", "MyInheritedAttribute", "MyDerivedInheritedAttribute", "MyDerivedNotInheritedAttribute", "MyUnannotatedAttribute")]
+        [DataRow("DerivedOpenGeneric<int>", "GenericNonVirtualMethod<int>")]
+        [DataRow("DerivedNoOverrides<int>", "GenericNonVirtualMethod<int>", "MyInheritedAttribute", "MyDerivedInheritedAttribute", "MyDerivedNotInheritedAttribute", "MyUnannotatedAttribute", "MyNotInheritedAttribute")]
+        [DataRow("DerivedClosedGeneric   ", "GenericNonVirtualMethod<int>")]
         public void GetAttributesWithInherited_MethodSymbol(string className, string methodName, params string[] expectedAttributes)
         {
+            className = className.TrimEnd();
+            methodName = methodName.TrimEnd();
             var code = $$"""
                 using System;
 
@@ -485,7 +487,7 @@ namespace NS
                 {
                     public static void Main()
                     {
-                        new {{className.Replace(@"`1", "<int>")}}().{{methodName.Replace(@"`1", "<int>")}}();
+                        new {{className}}().{{methodName}}();
                     }
                 }
                 """;
@@ -497,18 +499,19 @@ namespace NS
 
             // GetAttributesWithInherited should behave like MemberInfo.GetCustomAttributes from runtime reflection:
             var assembly = compiler.EmitAssembly();
-            var type = assembly.GetType(className, throwOnError: true);
-            var methodInfo = type.GetMethod(methodName.Replace("`1", string.Empty));
+            var type = assembly.GetType(className.Replace("<int>", @"`1"), throwOnError: true);
+            var methodInfo = type.GetMethod(methodName.Replace("<int>", string.Empty));
             methodInfo.GetCustomAttributes(inherit: true).Select(x => x.GetType().Name).Should().BeEquivalentTo(expectedAttributes);
         }
 
         [DataTestMethod]
-        [DataRow("BaseClass`1", "MyInheritedAttribute", "MyDerivedInheritedAttribute", "MyNotInheritedAttribute", "MyDerivedNotInheritedAttribute", "MyUnannotatedAttribute")]
-        [DataRow("DerivedOpenGeneric`1", "MyInheritedAttribute", "MyDerivedInheritedAttribute", "MyDerivedNotInheritedAttribute", "MyUnannotatedAttribute")]
-        [DataRow("DerivedClosedGeneric", "MyInheritedAttribute", "MyDerivedInheritedAttribute", "MyDerivedNotInheritedAttribute", "MyUnannotatedAttribute")]
-        [DataRow("Implement")]
+        [DataRow("BaseClass<int>         ", "MyInheritedAttribute", "MyDerivedInheritedAttribute", "MyDerivedNotInheritedAttribute", "MyUnannotatedAttribute", "MyNotInheritedAttribute")]
+        [DataRow("DerivedOpenGeneric<int>", "MyInheritedAttribute", "MyDerivedInheritedAttribute", "MyDerivedNotInheritedAttribute", "MyUnannotatedAttribute")]
+        [DataRow("DerivedClosedGeneric   ", "MyInheritedAttribute", "MyDerivedInheritedAttribute", "MyDerivedNotInheritedAttribute", "MyUnannotatedAttribute")]
+        [DataRow("Implement              ")]
         public void GetAttributesWithInherited_TypeSymbol(string className, params string[] expectedAttributes)
         {
+            className = className.TrimEnd();
             var code = $$"""
                 using System;
 
@@ -558,7 +561,7 @@ namespace NS
                 {
                     public static void Main()
                     {
-                        new {{className.Replace(@"`1", "<int>")}}();
+                        new {{className}}();
                     }
                 }
                 """;
@@ -575,7 +578,7 @@ namespace NS
             }
             // GetAttributesWithInherited should behave like MemberInfo.GetCustomAttributes from runtime reflection:
             var assembly = compiler.EmitAssembly();
-            var type = assembly.GetType(className, throwOnError: true);
+            var type = assembly.GetType(className.Replace("<int>", @"`1"), throwOnError: true);
             type.GetCustomAttributes(inherit: true).Select(x => x.GetType().Name).Should().BeEquivalentTo(expectedAttributes);
         }
     }
