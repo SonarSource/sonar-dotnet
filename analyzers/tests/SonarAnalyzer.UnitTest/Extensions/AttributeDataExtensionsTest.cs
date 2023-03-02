@@ -148,65 +148,44 @@ namespace SonarAnalyzer.UnitTest.Extensions
         public void HasAttributeUsageInherited_InheritedSpecified(bool inherited)
         {
             var code = $$"""
-                    using System;
+                using System;
 
-                    [AttributeUsage(AttributeTargets.All, Inherited = {{(inherited ? "true" : "false")}})]
-                    public class MyAttribute: Attribute
-                    {
-                    }
+                [AttributeUsage(AttributeTargets.All, Inherited = {{inherited.ToString().ToLower()}})]
+                public class MyAttribute: Attribute { }
 
-                    [My]
-                    public class Program
-                    {
-                    }
-                    """;
-            var snippet = new SnippetCompiler(code);
-            var attribute = snippet.GetTypeSymbol("Program").GetAttributes().Single(x => x.HasName("MyAttribute"));
-            var actual = attribute.HasAttributeUsageInherited();
-            actual.Should().Be(inherited);
+                [My]
+                public class Program { }
+                """;
+            CompileAttribute(code).HasAttributeUsageInherited().Should().Be(inherited);
         }
 
         [TestMethod]
         public void HasAttributeUsageInherited_InheritedUnSpecified()
         {
-            var code = $$"""
-                    using System;
+            const string code = """
+                using System;
 
-                    [AttributeUsage(AttributeTargets.All)]
-                    public class MyAttribute: Attribute
-                    {
-                    }
+                [AttributeUsage(AttributeTargets.All)]
+                public class MyAttribute: Attribute { }
 
-                    [My]
-                    public class Program
-                    {
-                    }
-                    """;
-            var snippet = new SnippetCompiler(code);
-            var attribute = snippet.GetTypeSymbol("Program").GetAttributes().Single(x => x.HasName("MyAttribute"));
-            var actual = attribute.HasAttributeUsageInherited();
-            actual.Should().Be(true); // The default for Inherited = true
+                [My]
+                public class Program { }
+                """;
+            CompileAttribute(code).HasAttributeUsageInherited().Should().Be(true); // The default for Inherited = true
         }
 
         [TestMethod]
         public void HasAttributeUsageInherited_NoUsageAttribute()
         {
-            var code = $$"""
-                    using System;
+            const string code = """
+                using System;
 
-                    public class MyAttribute: Attribute
-                    {
-                    }
+                public class MyAttribute: Attribute { }
 
-                    [My]
-                    public class Program
-                    {
-                    }
-                    """;
-            var snippet = new SnippetCompiler(code);
-            var attribute = snippet.GetTypeSymbol("Program").GetAttributes().Single(x => x.HasName("MyAttribute"));
-            var actual = attribute.HasAttributeUsageInherited();
-            actual.Should().Be(true); // The default for Inherited = true
+                [My]
+                public class Program { }
+                """;
+            CompileAttribute(code).HasAttributeUsageInherited().Should().Be(true); // The default for Inherited = true
         }
 
         [DataTestMethod]
@@ -216,51 +195,37 @@ namespace SonarAnalyzer.UnitTest.Extensions
         public void HasAttributeUsageInherited_UsageInherited(bool inherited, bool expected)
         {
             var code = $$"""
-                    using System;
+                using System;
 
-                    [AttributeUsage(AttributeTargets.All, Inherited = {{(inherited ? "true" : "false")}})]
-                    public class BaseAttribute: Attribute
-                    {
-                    }
+                [AttributeUsage(AttributeTargets.All, Inherited = {{inherited.ToString().ToLower()}})]
+                public class BaseAttribute: Attribute { }
 
-                    public class MyAttribute: BaseAttribute
-                    {
-                    }
+                public class MyAttribute: BaseAttribute { }
 
-                    [My]
-                    public class Program
-                    {
-                    }
-                    """;
-            var snippet = new SnippetCompiler(code);
-            var attribute = snippet.GetTypeSymbol("Program").GetAttributes().Single(x => x.HasName("MyAttribute"));
-            var actual = attribute.HasAttributeUsageInherited();
-            actual.Should().Be(expected);
+                [My]
+                public class Program { }
+                """;
+            CompileAttribute(code).HasAttributeUsageInherited().Should().Be(expected);
         }
 
         [TestMethod]
         public void HasAttributeUsageInherited_DuplicateAttributeUsage()
         {
-            var code = $$"""
-                    using System;
+            const string code = """
+                using System;
 
-                    [AttributeUsage(AttributeTargets.All, Inherited = true)]
-                    [AttributeUsage(AttributeTargets.All, Inherited = false)] // Compiler error
-                    public class MyAttribute: Attribute
-                    {
-                    }
+                [AttributeUsage(AttributeTargets.All, Inherited = true)]
+                [AttributeUsage(AttributeTargets.All, Inherited = false)] // Compiler error
+                public class MyAttribute: Attribute { }
 
-                    [My]
-                    public class Program
-                    {
-                    }
-                    """;
-            var snippet = new SnippetCompiler(code, ignoreErrors: true, AnalyzerLanguage.CSharp);
-            var attribute = snippet.GetTypeSymbol("Program").GetAttributes().Single(x => x.HasName("MyAttribute"));
-            var actual = attribute.HasAttributeUsageInherited();
-            snippet.Compilation.GetDiagnostics().Should().ContainEquivalentOf(new { Id = "CS0579" }); // "Duplicate 'AttributeUsage' attribute"
-            actual.Should().BeTrue();
+                [My]
+                public class Program { }
+                """;
+            CompileAttribute(code, ignoreErrors: true).HasAttributeUsageInherited().Should().BeTrue();
         }
+
+        private static AttributeData CompileAttribute(string code, bool ignoreErrors = false) =>
+            new SnippetCompiler(code, ignoreErrors, AnalyzerLanguage.CSharp).GetTypeSymbol("Program").GetAttributes().Single(x => x.HasName("MyAttribute"));
 
         private static AttributeData AttributeDataWithName(string attributeClassName)
         {
@@ -276,20 +241,21 @@ namespace SonarAnalyzer.UnitTest.Extensions
             namedArguments ??= new();
             constructorArguments ??= new();
             var separator = (constructorArguments.Any() && namedArguments.Any()) ? ", " : string.Empty;
-            var code = $@"
-using System;
+            var code = $$"""
+                using System;
 
-public class MyAttribute: Attribute
-{{
-    public MyAttribute({constructorArguments.Select(x => $"{TypeName(x.Value)} {x.Key}").JoinStr(", ")})
-    {{
-    }}
+                public class MyAttribute: Attribute
+                {
+                    public MyAttribute({{constructorArguments.Select(x => $"{TypeName(x.Value)} {x.Key}").JoinStr(", ")}})
+                    {
+                    }
 
-    {namedArguments.Select(x => $@"public {TypeName(x.Value)} {x.Key} {{ get; set; }}").JoinStr("\r\n")}
-}}
+                    {{namedArguments.Select(x => $@"public {TypeName(x.Value)} {x.Key} {{ get; set; }}").JoinStr("\r\n")}}
+                }
 
-[My({constructorArguments.Select(x => Quote(x.Value)).JoinStr(", ")}{separator}{namedArguments.Select(x => $"{x.Key}={Quote(x.Value)}").JoinStr(", ")})]
-public class Dummy {{ }}";
+                [My({{constructorArguments.Select(x => Quote(x.Value)).JoinStr(", ")}}{{separator}}{{namedArguments.Select(x => $"{x.Key}={Quote(x.Value)}").JoinStr(", ")}})]
+                public class Dummy { }
+                """;
             var snippet = new SnippetCompiler(code);
             var classDeclaration = snippet.SyntaxTree.GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>().Last();
             var symbol = (INamedTypeSymbol)snippet.SemanticModel.GetDeclaredSymbol(classDeclaration);
