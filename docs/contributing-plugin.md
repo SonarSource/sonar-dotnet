@@ -20,7 +20,7 @@
 
         * or run the following commands:
             1. `msbuild /t:rebuild .\analyzers\SonarAnalyzer.sln`
-            1. `mvn clean install -P local-analyzer -D analyzer.configuration=Debug`
+            1. `mvn clean install -D analyzer.configuration=Debug`
 
 ## Developing with Eclipse or IntelliJ
 
