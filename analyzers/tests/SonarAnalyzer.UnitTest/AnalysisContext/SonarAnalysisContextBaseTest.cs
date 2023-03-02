@@ -19,6 +19,7 @@
  */
 
 using SonarAnalyzer.AnalysisContext;
+using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.UnitTest.AnalysisContext;
 
@@ -173,19 +174,29 @@ public partial class SonarAnalysisContextBaseTest
     [TestMethod]
     public void SonarLintFile_LoadsExpectedValues()
     {
-        var options = AnalysisScaffolding.CreateOptions("ResourceTests\\SonarLintXml\\All_properties_cs\\SonarLint.xml");
-        var sut = CreateSut(options).SonarLintFile();
+        var (compilationCS, _) = CreateDummyCompilation(AnalyzerLanguage.CSharp, "ExtraEmptyFile");
+        var (compilationVB, _) = CreateDummyCompilation(AnalyzerLanguage.VisualBasic, "OtherFile");
+        var optionsCS = AnalysisScaffolding.CreateOptions("ResourceTests\\SonarLintXml\\All_properties_cs\\SonarLint.xml");
+        var optionsVB = AnalysisScaffolding.CreateOptions("ResourceTests\\SonarLintXml\\All_properties_vbnet\\SonarLint.xml");
+        var sutCS = CreateSut(compilationCS, optionsCS).SonarLintFile();
+        var sutVB = CreateSut(compilationVB, optionsVB).SonarLintFile();
 
-        sut.Settings.IgnoreHeaderComments.Should().BeTrue();
-        sut.Settings.AnalyzeGeneratedCode.Should().BeFalse();
-        TestArray(sut.Settings.Exclusions, nameof(sut.Settings.Exclusions));
-        TestArray(sut.Settings.Inclusions, nameof(sut.Settings.Inclusions));
-        TestArray(sut.Settings.GlobalExclusions, nameof(sut.Settings.GlobalExclusions));
-        TestArray(sut.Settings.TestExclusions, nameof(sut.Settings.TestExclusions));
-        TestArray(sut.Settings.TestInclusions, nameof(sut.Settings.TestInclusions));
-        TestArray(sut.Settings.GlobalTestExclusions, nameof(sut.Settings.GlobalTestExclusions));
+        AssertReader(sutCS);
+        AssertReader(sutVB);
 
-        static void TestArray(string[] array, string folder)
+        static void AssertReader(SonarLintXmlReader sut)
+        {
+            sut.Settings.IgnoreHeaderComments.Should().BeTrue();
+            sut.Settings.AnalyzeGeneratedCode.Should().BeFalse();
+            AssertArrayContent(sut.Settings.Exclusions, nameof(sut.Settings.Exclusions));
+            AssertArrayContent(sut.Settings.Inclusions, nameof(sut.Settings.Inclusions));
+            AssertArrayContent(sut.Settings.GlobalExclusions, nameof(sut.Settings.GlobalExclusions));
+            AssertArrayContent(sut.Settings.TestExclusions, nameof(sut.Settings.TestExclusions));
+            AssertArrayContent(sut.Settings.TestInclusions, nameof(sut.Settings.TestInclusions));
+            AssertArrayContent(sut.Settings.GlobalTestExclusions, nameof(sut.Settings.GlobalTestExclusions));
+        }
+
+        static void AssertArrayContent(string[] array, string folder)
         {
             array.Should().HaveCount(2);
             array[0].Should().BeEquivalentTo($"Fake/{folder}/**/*");
@@ -223,15 +234,14 @@ public partial class SonarAnalysisContextBaseTest
     public void SonarLintFile_WhenAdditionalFileNotPresent_ReturnsDefaultValues(string folder)
     {
         var sut = CreateSut(AnalysisScaffolding.CreateOptions(folder)).SonarLintFile();
+        CheckSonarLintXmlDefaultValues(sut);
+    }
 
-        sut.Settings.AnalyzeGeneratedCode.Should().BeFalse();
-        sut.Settings.IgnoreHeaderComments.Should().BeFalse();
-        sut.Settings.Exclusions.Should().NotBeNull().And.HaveCount(0);
-        sut.Settings.Inclusions.Should().NotBeNull().And.HaveCount(0);
-        sut.Settings.GlobalExclusions.Should().NotBeNull().And.HaveCount(0);
-        sut.Settings.TestExclusions.Should().NotBeNull().And.HaveCount(0);
-        sut.Settings.TestInclusions.Should().NotBeNull().And.HaveCount(0);
-        sut.Settings.GlobalTestExclusions.Should().NotBeNull().And.HaveCount(0);
+    [TestMethod]
+    public void SonarLintFile_WhenInvalidXml_ReturnsDefaultValues()
+    {
+        var sut = CreateSut(AnalysisScaffolding.CreateOptions("ResourceTests\\SonarLintXml\\Invalid_Xml\\SonarLint.xml")).SonarLintFile();
+        CheckSonarLintXmlDefaultValues(sut);
     }
 
     [TestMethod]
@@ -245,15 +255,16 @@ public partial class SonarAnalysisContextBaseTest
            .WithMessage("File 'SonarLint.xml' has been added as an AdditionalFile but could not be read and parsed.");
     }
 
-    [TestMethod]
-    public void SonarLintFile_WhenInvalidXml_ThrowException()
+    private static void CheckSonarLintXmlDefaultValues(SonarLintXmlReader sut)
     {
-        var sut = CreateSut(AnalysisScaffolding.CreateOptions("ResourceTests\\SonarProjectConfig\\Invalid_Xml\\SonarLint.xml"));
-
-        sut.Invoking(x => x.SonarLintFile())
-           .Should()
-           .Throw<InvalidOperationException>()
-           .WithMessage("File 'SonarLint.xml' has been added as an AdditionalFile but could not be read and parsed.");
+        sut.Settings.AnalyzeGeneratedCode.Should().BeFalse();
+        sut.Settings.IgnoreHeaderComments.Should().BeFalse();
+        sut.Settings.Exclusions.Should().NotBeNull().And.HaveCount(0);
+        sut.Settings.Inclusions.Should().NotBeNull().And.HaveCount(0);
+        sut.Settings.GlobalExclusions.Should().NotBeNull().And.HaveCount(0);
+        sut.Settings.TestExclusions.Should().NotBeNull().And.HaveCount(0);
+        sut.Settings.TestInclusions.Should().NotBeNull().And.HaveCount(0);
+        sut.Settings.GlobalTestExclusions.Should().NotBeNull().And.HaveCount(0);
     }
 
     private SonarCompilationReportingContext CreateSut(ProjectType projectType, bool isScannerRun) =>

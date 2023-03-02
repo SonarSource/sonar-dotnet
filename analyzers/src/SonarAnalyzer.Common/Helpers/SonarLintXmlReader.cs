@@ -36,18 +36,18 @@ public class SonarLintXmlReader
     private SonarLintXmlSettingsReader settings;
     public SonarLintXmlSettingsReader Settings => settings ??= new(sonarLintXml, propertyLanguage);
 
-    public SonarLintXmlReader(SourceText originalXml, string language)
+    public SonarLintXmlReader(SourceText sonarLintXml, string language)
     {
-        sonarLintXml = originalXml == null ? SonarLintXml.Empty : ParseContent(originalXml);
+        this.sonarLintXml = sonarLintXml == null ? SonarLintXml.Empty : ParseContent(sonarLintXml);
         propertyLanguage = language;
     }
 
-    private static SonarLintXml ParseContent(SourceText sonarProjectConfig)
+    private static SonarLintXml ParseContent(SourceText sonarLintXml)
     {
         try
         {
             var serializer = new XmlSerializer(typeof(SonarLintXml));
-            var byteArray = Encoding.UTF8.GetBytes(sonarProjectConfig.ToString());
+            var byteArray = Encoding.UTF8.GetBytes(sonarLintXml.ToString());
             var stream = new MemoryStream(byteArray);
             using var sr = new StreamReader(stream, Encoding.UTF8, false);
             using var reader = XmlReader.Create(sr);
@@ -89,9 +89,9 @@ public class SonarLintXmlSettingsReader
     private string[] globalTestExclusions;
     public string[] GlobalTestExclusions => globalTestExclusions ??= ReadCommaSeparatedArray(ReadProperty("sonar.global.test.exclusions"));
 
-    public SonarLintXmlSettingsReader(SonarLintXml originalXml, string language)
+    public SonarLintXmlSettingsReader(SonarLintXml sonarLintXml, string language)
     {
-        sonarLintXml = originalXml;
+        this.sonarLintXml = sonarLintXml;
         propertyLanguage = language == LanguageNames.CSharp ? "cs" : "vbnet";
     }
 

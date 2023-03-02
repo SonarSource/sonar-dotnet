@@ -35,7 +35,7 @@ public class SonarAnalysisContextBase
 
     protected SonarAnalysisContextBase() { }
 
-    protected static SourceTextValueProvider<SonarLintXmlReader> GetSonarLintXml(string language) =>
+    protected static SourceTextValueProvider<SonarLintXmlReader> SonarLintXmlReader(string language) =>
         language == LanguageNames.CSharp ? SonarLintXmlProviderCS : SonarLintXmlProviderVB;
 
     protected static SourceTextValueProvider<bool> ShouldAnalyzeGeneratedProvider(string language) =>
@@ -94,13 +94,13 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
         if (Options.SonarLintXml() is { } sonarLintXml)
         {
             return sonarLintXml.GetText() is { } sourceText
-                && AnalysisContext.TryGetValue(sourceText, GetSonarLintXml(Compilation.Language), out var cachedSonarLintXmlReader)
-                ? cachedSonarLintXmlReader
+                && AnalysisContext.TryGetValue(sourceText, SonarLintXmlReader(Compilation.Language), out var sonarLintXmlReader)
+                ? sonarLintXmlReader
                 : throw new InvalidOperationException($"File '{Path.GetFileName(sonarLintXml.Path)}' has been added as an AdditionalFile but could not be read and parsed.");
         }
         else
         {
-            return SonarLintXmlReader.Empty;
+            return Helpers.SonarLintXmlReader.Empty;
         }
     }
 

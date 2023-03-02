@@ -34,19 +34,33 @@ public class SonarLintXmlReaderTest
         var sut = CreateSonarLintXmlReader($"ResourceTests\\SonarLintXml\\All_Properties_{propertyLanguage}\\SonarLint.xml", language);
         sut.Settings.IgnoreHeaderComments.Should().BeTrue();
         sut.Settings.AnalyzeGeneratedCode.Should().BeFalse();
-        TestArray(sut.Settings.Exclusions, nameof(sut.Settings.Exclusions));
-        TestArray(sut.Settings.Inclusions, nameof(sut.Settings.Inclusions));
-        TestArray(sut.Settings.GlobalExclusions, nameof(sut.Settings.GlobalExclusions));
-        TestArray(sut.Settings.TestExclusions, nameof(sut.Settings.TestExclusions));
-        TestArray(sut.Settings.TestInclusions, nameof(sut.Settings.TestInclusions));
-        TestArray(sut.Settings.GlobalTestExclusions, nameof(sut.Settings.GlobalTestExclusions));
+        AssertArrayContent(sut.Settings.Exclusions, nameof(sut.Settings.Exclusions));
+        AssertArrayContent(sut.Settings.Inclusions, nameof(sut.Settings.Inclusions));
+        AssertArrayContent(sut.Settings.GlobalExclusions, nameof(sut.Settings.GlobalExclusions));
+        AssertArrayContent(sut.Settings.TestExclusions, nameof(sut.Settings.TestExclusions));
+        AssertArrayContent(sut.Settings.TestInclusions, nameof(sut.Settings.TestInclusions));
+        AssertArrayContent(sut.Settings.GlobalTestExclusions, nameof(sut.Settings.GlobalTestExclusions));
 
-        static void TestArray(string[] array, string folder)
+        static void AssertArrayContent(string[] array, string folder)
         {
             array.Should().HaveCount(2);
             array[0].Should().BeEquivalentTo($"Fake/{folder}/**/*");
             array[1].Should().BeEquivalentTo($"Fake/{folder}/Second*/**/*");
         }
+    }
+
+    [TestMethod]
+    public void SonarLintXmlSettings_PartiallyMissingProperties_ExpectedAndDefaultValues()
+    {
+        var sut = CreateSonarLintXmlReader($"ResourceTests\\SonarLintXml\\Partially_missing_properties\\SonarLint.xml");
+        sut.Settings.IgnoreHeaderComments.Should().BeFalse();
+        sut.Settings.AnalyzeGeneratedCode.Should().BeTrue();
+        AssertArrayContent(sut.Settings.Exclusions, nameof(sut.Settings.Exclusions));
+        AssertArrayContent(sut.Settings.Inclusions, nameof(sut.Settings.Inclusions));
+        sut.Settings.GlobalExclusions.Should().NotBeNull().And.HaveCount(0);
+        sut.Settings.TestExclusions.Should().NotBeNull().And.HaveCount(0);
+        sut.Settings.TestInclusions.Should().NotBeNull().And.HaveCount(0);
+        sut.Settings.GlobalTestExclusions.Should().NotBeNull().And.HaveCount(0);
     }
 
     [DataTestMethod]
@@ -78,6 +92,13 @@ public class SonarLintXmlReaderTest
         sut.Settings.TestExclusions.Should().NotBeNull().And.HaveCount(0);
         sut.Settings.TestInclusions.Should().NotBeNull().And.HaveCount(0);
         sut.Settings.GlobalTestExclusions.Should().NotBeNull().And.HaveCount(0);
+    }
+
+    private static void AssertArrayContent(string[] array, string folder)
+    {
+        array.Should().HaveCount(2);
+        array[0].Should().BeEquivalentTo($"Fake/{folder}/**/*");
+        array[1].Should().BeEquivalentTo($"Fake/{folder}/Second*/**/*");
     }
 
     private static SonarLintXmlReader CreateSonarLintXmlReader(string relativePath, string language = LanguageNames.CSharp) =>
