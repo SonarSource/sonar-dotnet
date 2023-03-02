@@ -50,4 +50,10 @@ public enum ConstraintKind
     StringFull,
     StringNotWhiteSpace,
     StringWhiteSpace,
+
+#if DEBUG
+
+    Test = -1,
+
+#endif
 }

@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar
     {
         private sealed class FakeConstraint : SymbolicConstraint
         {
-            public FakeConstraint() : base((ConstraintKind)(-1)) { }
+            public FakeConstraint() : base(ConstraintKind.Test) { }
             public override SymbolicConstraint Opposite => null;
         }
 

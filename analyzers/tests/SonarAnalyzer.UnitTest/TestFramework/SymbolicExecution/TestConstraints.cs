@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         public override SymbolicConstraint Opposite =>
             this == First ? Second : First;
 
-        private TestConstraint(string name) : base((ConstraintKind)(-1)) =>
+        private TestConstraint(string name) : base(ConstraintKind.Test) =>
             this.name = name;
 
         public override string ToString() => name;
@@ -47,6 +47,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 
         public override string ToString() => "Dummy";
 
-        private DummyConstraint() : base((ConstraintKind)(-1)) { }
+        private DummyConstraint() : base(ConstraintKind.Test) { }
     }
 }
