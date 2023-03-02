@@ -258,7 +258,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
             var snippet = new SnippetCompiler(code, ignoreErrors: true, AnalyzerLanguage.CSharp);
             var attribute = snippet.GetTypeSymbol("Program").GetAttributes().Single(x => x.HasName("MyAttribute"));
             var actual = attribute.HasAttributeUsageInherited();
-            snippet.GetDiagnostics().Should().ContainEquivalentOf(new { Id = "CS0579" }); // "Duplicate 'AttributeUsage' attribute"
+            snippet.Compilation.GetDiagnostics().Should().ContainEquivalentOf(new { Id = "CS0579" }); // "Duplicate 'AttributeUsage' attribute"
             actual.Should().BeTrue();
         }
 
