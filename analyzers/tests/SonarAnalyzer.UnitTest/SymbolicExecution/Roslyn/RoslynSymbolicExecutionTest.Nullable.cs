@@ -127,4 +127,23 @@ public partial class RoslynSymbolicExecutionTest
         validator.ValidateTag("IsFalse", x => x.AllConstraints.Select(x => x.Kind).Should().BeEquivalentTo(new[] { ConstraintKind.ObjectNotNull, ConstraintKind.BoolFalse, (ConstraintKind)ConstraintKindTest.First }));
         validator.ValidateTag("IsInt", x => x.AllConstraints.Select(x => x.Kind).Should().BeEquivalentTo(new[] { ConstraintKind.ObjectNotNull }));
     }
+
+    [TestMethod]
+    public void Nullable_Conversion_PropagateConstraints()
+    {
+        const string code = """
+            var isTrue = true;
+            bool? toNullableImplicit = isTrue;
+            bool? toNullableExplicit = (bool?)isTrue;
+            bool toBoolExplicit = (bool)toNullableImplicit;
+            Tag("ToNullableImplicit", toNullableImplicit);
+            Tag("ToNullableExplicit", toNullableExplicit);
+            Tag("ToBoolExplicit", toBoolExplicit);
+            """;
+        var setter = new PreProcessTestCheck(OperationKind.Literal, x => x.Operation.Instance.ConstantValue.Value is false ? x.SetOperationConstraint(TestConstraint.First) : x.State);
+        var validator = SETestContext.CreateCS(code, setter).Validator;
+        validator.ValidateTag("ToNullableImplicit", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+        validator.ValidateTag("ToNullableExplicit", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+        validator.ValidateTag("ToBoolExplicit", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+    }
 }
