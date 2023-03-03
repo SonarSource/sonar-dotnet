@@ -73,16 +73,28 @@ internal sealed class PropertyReference : SimpleProcessor<IPropertyReferenceOper
 
     protected override ProgramState Process(SymbolicContext context, IPropertyReferenceOperationWrapper propertyReference)
     {
+        var state = context.State;
         if (propertyReference.Instance.TrackedSymbol() is { } symbol)
         {
-            var state = context.State.SetSymbolConstraint(symbol, ObjectConstraint.NotNull);
-            return propertyReference.Property.Name == "Value" && propertyReference.Instance.Type.IsNullableValueType() && context.State[symbol] is { } value
-                ? state.SetOperationValue(context.Operation, value)
-                : state;
+            if (propertyReference.Instance.Type.IsNullableValueType())
+            {
+                if (propertyReference.Property.Name == "Value" && state[symbol] is { } value)
+                {
+                    state = state.SetOperationValue(context.Operation, value);
+                }
+                else if (propertyReference.Property.Name == "HasValue")
+                {
+                    // Return directly, do not set NotNull on the symbol itself
+                    return state[symbol]?.Constraint<ObjectConstraint>() is { } objectConstraint
+                        ? state.SetOperationConstraint(context.Operation, BoolConstraint.From(objectConstraint == ObjectConstraint.NotNull))
+                        : state;
+                }
+            }
+            return state.SetSymbolConstraint(symbol, ObjectConstraint.NotNull);
         }
         else
         {
-            return context.State;
+            return state;
         }
     }
 }
