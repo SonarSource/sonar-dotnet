@@ -42,8 +42,8 @@ Tag(""End"", value);";
             var validator = SETestContext.CreateCS(code, ", int[] items", new AddConstraintOnInvocationCheck(), new PreserveTestCheck("value")).Validator;
             validator.ValidateExitReachCount(2);
             validator.TagValues("End").Should().HaveCount(2)
-                .And.ContainSingle(x => x == null)
-                .And.ContainSingle(x => x != null && x.HasConstraint(TestConstraint.First) && !x.HasConstraint(BoolConstraint.True));
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull) && !x.HasConstraint(TestConstraint.First))
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull) && x.HasConstraint(TestConstraint.First));
         }
 
         [TestMethod]

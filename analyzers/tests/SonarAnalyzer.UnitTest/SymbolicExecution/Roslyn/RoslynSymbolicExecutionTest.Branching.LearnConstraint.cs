@@ -392,9 +392,11 @@ if (value = boolParameter)
         public void Branching_LearnsObjectConstraint_ConstantPattern_ValueTypes_InputIsNotReferenceType(string expression, string argType)
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.ConstantPattern, argType);
-            validator.ValidateTag("If", x => x.Should().BeNull());
+            validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.ValidateTag("Else", x => x.Should().BeNull());
-            validator.ValidateTag("End", x => x.Should().BeNull());
+            var arg = validator.Symbol("arg");
+            validator.TagStates("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x[arg] != null && x[arg].HasConstraint(ObjectConstraint.NotNull));
         }
 
         [DataTestMethod]
@@ -653,8 +655,7 @@ Tag(""End"", arg);";
         public void Branching_IsNullOperation_Equals(string expression)
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.IsNull, "string");
-            validator.TagValues("If").Should().HaveCount(2)
-                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null)) // ToDo: MMF-2401 This should not be here
+            validator.TagValues("If").Should().HaveCount(1)
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
             validator.TagValues("Else").Should().HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))

@@ -79,9 +79,9 @@ public partial class RoslynSymbolicExecutionTest
         var validator = SETestContext.CreateCS(code, ", bool? arg").Validator;
         validator.ValidateTag("HasValueUnknown", x => x.Should().BeNull());
         validator.ValidateTag("SymbolUnknown", x => x.Should().BeNull());
-        validator.ValidateTag("HasValueAfterTrue", x => x.Should().BeNull());   // ToDo: Should be x.HasConstraint(BoolConstraint.True).Should().BeTrue()); after we build NotNull for bool literal.
+        validator.ValidateTag("HasValueAfterTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
         validator.ValidateTag("SymbolAfterTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
-        validator.ValidateTag("SymbolAfterTrue", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeFalse());    // ToDo: Should be BeTrue() after we build NotNull for bool literal
+        validator.ValidateTag("SymbolAfterTrue", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
         validator.ValidateTag("HasValueAfterNull", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
         validator.ValidateTag("SymbolAfterNull", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
     }

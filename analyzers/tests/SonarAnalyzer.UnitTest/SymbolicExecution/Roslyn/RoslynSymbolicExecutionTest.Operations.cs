@@ -358,7 +358,7 @@ Tag(""AfterNullableInt"", argNullableInt);";
             validator.ValidateTag("BeforeNullableInt", x => x.Should().BeNull());
             validator.ValidateTag("AfterObjNull", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
             validator.ValidateTag("AfterObjDefault", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-            validator.ValidateTag("AfterInt", x => x.Should().BeNull());
+            validator.ValidateTag("AfterInt", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.ValidateTag("AfterNullableInt", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
         }
 
@@ -377,7 +377,7 @@ Tag(""AfterInt"", ArgInt)";
             validator.ValidateTag("BeforeObj", x => x.Should().BeNull());
             validator.ValidateTag("BeforeInt", x => x.Should().BeNull());
             validator.ValidateTag("AfterObj", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-            validator.ValidateTag("AfterInt", x => x.Should().BeNull());
+            validator.ValidateTag("AfterInt", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
         }
 
         [TestMethod]
@@ -433,7 +433,7 @@ Tag(""ObjectFromException"", o);
 Tag(""IntegerFromByte"", i);";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateTag("ObjectFromException", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-            validator.ValidateTag("IntegerFromByte", x => x.Should().BeNull());
+            validator.ValidateTag("IntegerFromByte", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
         }
 
         [TestMethod]
@@ -472,11 +472,12 @@ Tag(""Value"", value);";
         [DataRow("1.0f")]
         public void Literal_Default_OtherLiterals(string literal)
         {
-            var code = @$"
-var value = {literal};
-Tag(""Value"", value);";
+            var code = $$"""
+            var value = {{literal}};
+            Tag("Value", value);
+            """;
             var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("Value", x => x.Should().BeNull());
+            validator.ValidateTag("Value", x => x.AllConstraints.Should().ContainSingle().Which.Should().Be(ObjectConstraint.NotNull));
         }
 
         [TestMethod]

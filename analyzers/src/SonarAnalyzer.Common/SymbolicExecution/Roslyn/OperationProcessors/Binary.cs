@@ -30,10 +30,16 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
     protected override SymbolicConstraint BoolConstraintFromOperation(SymbolicContext context, IBinaryOperationWrapper operation) =>
         BinaryConstraint(operation.OperatorKind, context.State[operation.LeftOperand], context.State[operation.RightOperand]);
 
-    protected override ProgramState LearnBranchingConstraint(ProgramState state, IBinaryOperationWrapper operation, bool falseBranch) =>
-        operation.OperatorKind.IsAnyEquality()
-            ? LearnBranchingConstraint<ObjectConstraint>(state, operation, falseBranch) ?? LearnBranchingConstraint<BoolConstraint>(state, operation, falseBranch) ?? state
-            : state;
+    protected override ProgramState LearnBranchingConstraint(ProgramState state, IBinaryOperationWrapper operation, bool falseBranch)
+    {
+        if (operation.OperatorKind.IsAnyEquality())
+        {
+            state = LearnBranchingConstraint<ObjectConstraint>(state, operation, falseBranch) ?? state;
+            state = LearnBranchingConstraint<BoolConstraint>(state, operation, falseBranch) ?? state;
+            return state;
+        }
+        return state;
+    }
 
     private static ProgramState LearnBranchingConstraint<T>(ProgramState state, IBinaryOperationWrapper binary, bool falseBranch)
         where T : SymbolicConstraint

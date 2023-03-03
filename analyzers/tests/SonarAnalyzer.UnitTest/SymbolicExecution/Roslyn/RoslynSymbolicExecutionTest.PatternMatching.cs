@@ -426,8 +426,8 @@ Tag(""End"", arg);";
         [DataRow("objectUnknown", "is not string { }", OperationKindEx.NegatedPattern, null, "NotNull")]
         [DataRow("objectUnknown", "is not object { }", OperationKindEx.NegatedPattern, "Null", "NotNull")]
         [DataRow("objectUnknown", "is not not null", OperationKindEx.NegatedPattern, "Null", "NotNull")]
-        [DataRow("nullableBoolTrue", "is not false", OperationKindEx.NegatedPattern, "True", "False")]          // Should generate only single state with "true" result instead
-        [DataRow("nullableBoolFalse", "is not true", OperationKindEx.NegatedPattern, "False", "True")]          // Should generate only single state with "true" result instead
+        [DataRow("nullableBoolTrue", "is not false", OperationKindEx.NegatedPattern, "NotNull, True", "False, NotNull")]          // Should generate only single state with "true" result instead
+        [DataRow("nullableBoolFalse", "is not true", OperationKindEx.NegatedPattern, "False, NotNull", "NotNull, True")]          // Should generate only single state with "true" result instead
         [DataRow("nullableBoolNull", "is not true", OperationKindEx.NegatedPattern, "Null", "Null, True")]      // Should generate only single state with "true" result instead
         [DataRow("nullableBoolNull", "is not false", OperationKindEx.NegatedPattern, "Null", "False, Null")]    // Should generate only single state with "true" result instead
         [DataRow("nullableBoolUnknown", "is not true", OperationKindEx.NegatedPattern, null, "True")]
