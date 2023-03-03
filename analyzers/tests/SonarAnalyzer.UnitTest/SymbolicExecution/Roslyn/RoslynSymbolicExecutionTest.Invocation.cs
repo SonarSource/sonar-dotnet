@@ -889,7 +889,7 @@ f()();";
         [DataRow("new object()", "null", false, new[] { ConstraintKind.ObjectNotNull }, new[] { ConstraintKind.ObjectNull })]
         [DataRow("new int?()", "null", false, new[] { ConstraintKind.ObjectNotNull }, new[] { ConstraintKind.ObjectNull })]   // Should be "true" and "Null" because new int()? is still null
         [DataRow("new int?(42)", "null", false, new[] { ConstraintKind.ObjectNotNull }, new[] { ConstraintKind.ObjectNull })]
-        public void Invocation_Equals_LearnResult(string left, string right, bool expectedResult, ConstraintKind[] expectedConstraintsLeft, ConstraintKind[] expectedConstraintsRight)
+        public void Invocation_Equals_LearnResult(string left, string right, bool expectedResult, ConstraintKind expectedConstraintsLeft, ConstraintKind expectedConstraintsRight)
         {
             var code = $@"
 object left = {left};

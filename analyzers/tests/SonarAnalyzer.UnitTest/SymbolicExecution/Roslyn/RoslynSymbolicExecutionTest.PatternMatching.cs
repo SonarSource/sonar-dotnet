@@ -388,7 +388,7 @@ Tag(""End"", arg);";
         [DataRow("exceptionUnknown", "is object { }", new[] { ConstraintKind.ObjectNotNull }, new[] { ConstraintKind.ObjectNull })]
         [DataRow("exceptionUnknown", "is Exception { }", new[] { ConstraintKind.ObjectNotNull }, new[] { ConstraintKind.ObjectNull })]
         [DataRow("exceptionUnknown", "is FormatException { }", new[] { ConstraintKind.ObjectNotNull }, null)]
-        public void DeclarationPatternSetBoolConstraint_TwoStates(string testedSymbol, string isPattern, ConstraintKind[] expectedForTrue, ConstraintKind[] expectedForFalse) =>
+        public void DeclarationPatternSetBoolConstraint_TwoStates(string testedSymbol, string isPattern, ConstraintKind[] expectedForFalse) =>
             ValidateSetBoolConstraint_TwoStates(testedSymbol, isPattern, OperationKindEx.DeclarationPattern, expectedForTrue, expectedForFalse);
 
         [DataTestMethod]

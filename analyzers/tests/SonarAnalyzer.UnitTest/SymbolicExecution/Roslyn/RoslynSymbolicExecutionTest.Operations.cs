@@ -813,7 +813,7 @@ public async System.Threading.Tasks.Task Main(System.Threading.Tasks.Task T)
         [DataRow("bool", "false", new[] { ConstraintKind.BoolTrue })]
         [DataRow("bool?", "default", new[] { ConstraintKind.ObjectNull })]
         [DataRow("bool?", "null", new[] { ConstraintKind.ObjectNull })]
-        public void Unary_Not_SupportsBoolAndNull(string type, string defaultValue, ConstraintKind[] expectedConstraints)
+        public void Unary_Not_SupportsBoolAndNull(string type, string defaultValue, ConstraintKind expectedConstraints)
         {
             var code = $@"
 {type} value = {defaultValue};

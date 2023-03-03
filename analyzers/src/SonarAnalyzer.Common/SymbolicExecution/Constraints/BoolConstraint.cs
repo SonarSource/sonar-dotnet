@@ -41,7 +41,7 @@ namespace SonarAnalyzer.SymbolicExecution.Constraints
             {
                 _ when ReferenceEquals(this, True) => nameof(True),
                 _ when ReferenceEquals(this, False) => nameof(False),
-                _ => base.ToString(),
+                _ => throw new InvalidOperationException("Unexpected instance")
             };
     }
 }
