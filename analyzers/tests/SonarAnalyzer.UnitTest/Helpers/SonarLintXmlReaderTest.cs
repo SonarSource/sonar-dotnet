@@ -29,7 +29,7 @@ public class SonarLintXmlReaderTest
     [DataTestMethod]
     [DataRow(LanguageNames.CSharp, "cs")]
     [DataRow(LanguageNames.VisualBasic, "vbnet")]
-    public void SonarLintXml_WhenAllValuesAreSet_ExpectedValues(string language, string propertyLanguage)
+    public void SonarLintXmlReader_WhenAllValuesAreSet_ExpectedValues(string language, string propertyLanguage)
     {
         var sut = CreateSonarLintXmlReader($"ResourceTests\\SonarLintXml\\All_Properties_{propertyLanguage}\\SonarLint.xml", language);
         sut.IgnoreHeaderComments.Should().BeTrue();
@@ -50,9 +50,9 @@ public class SonarLintXmlReaderTest
     }
 
     [TestMethod]
-    public void SonarLintXml_PartiallyMissingProperties_ExpectedAndDefaultValues()
+    public void SonarLintXmlReader_PartiallyMissingProperties_ExpectedAndDefaultValues()
     {
-        var sut = CreateSonarLintXmlReader($"ResourceTests\\SonarLintXml\\Partially_missing_properties\\SonarLint.xml");
+        var sut = CreateSonarLintXmlReader("ResourceTests\\SonarLintXml\\Partially_missing_properties\\SonarLint.xml");
         sut.IgnoreHeaderComments.Should().BeFalse();
         sut.AnalyzeGeneratedCode.Should().BeTrue();
         AssertArrayContent(sut.Exclusions, nameof(sut.Exclusions));
@@ -67,22 +67,22 @@ public class SonarLintXmlReaderTest
     [DataRow("")]
     [DataRow("this is not an xml")]
     [DataRow(@"<?xml version=""1.0"" encoding=""UTF - 8""?><AnalysisInput><Settings>")]
-    public void SonarLintXml_WithMalformedXml_DefaultBehaviour(string sonarLintXmlContent) =>
-        CheckSonarLintXmlDefaultValues(new SonarLintXmlReader(SourceText.From(sonarLintXmlContent), LanguageNames.CSharp));
+    public void SonarLintXmlReader_WithMalformedXml_DefaultBehaviour(string sonarLintXmlContent) =>
+        CheckSonarLintXmlReaderDefaultValues(new SonarLintXmlReader(SourceText.From(sonarLintXmlContent), LanguageNames.CSharp));
 
     [TestMethod]
-    public void SonarLintXml_MissingProperties_DefaultBehaviour() =>
-        CheckSonarLintXmlDefaultValues(CreateSonarLintXmlReader("ResourceTests\\SonarLintXml\\Missing_properties\\SonarLint.xml"));
+    public void SonarLintXmlReader_MissingProperties_DefaultBehaviour() =>
+        CheckSonarLintXmlReaderDefaultValues(CreateSonarLintXmlReader("ResourceTests\\SonarLintXml\\Missing_properties\\SonarLint.xml"));
 
     [TestMethod]
-    public void SonarLintXml_WithIncorrectValueType_DefaultBehaviour() =>
-        CheckSonarLintXmlDefaultValues(CreateSonarLintXmlReader("ResourceTests\\SonarLintXml\\Incorrect_value_type\\SonarLint.xml"));
+    public void SonarLintXmlReader_WithIncorrectValueType_DefaultBehaviour() =>
+        CheckSonarLintXmlReaderDefaultValues(CreateSonarLintXmlReader("ResourceTests\\SonarLintXml\\Incorrect_value_type\\SonarLint.xml"));
 
     [TestMethod]
-    public void SonarLintXml_CheckEmpty_DefaultBehaviour() =>
-        CheckSonarLintXmlDefaultValues(SonarLintXmlReader.Empty);
+    public void SonarLintXmlReader_CheckEmpty_DefaultBehaviour() =>
+        CheckSonarLintXmlReaderDefaultValues(SonarLintXmlReader.Empty);
 
-    private static void CheckSonarLintXmlDefaultValues(SonarLintXmlReader sut)
+    private static void CheckSonarLintXmlReaderDefaultValues(SonarLintXmlReader sut)
     {
         sut.AnalyzeGeneratedCode.Should().BeFalse();
         sut.IgnoreHeaderComments.Should().BeFalse();
