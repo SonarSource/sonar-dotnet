@@ -395,8 +395,9 @@ if (value = boolParameter)
             validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.ValidateTag("Else", x => x.Should().BeNull());
             var arg = validator.Symbol("arg");
-            validator.TagStates("End").Should().HaveCount(2)
-                .And.ContainSingle(x => x[arg] != null && x[arg].HasConstraint(ObjectConstraint.NotNull));
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x == null)
+                .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
         }
 
         [DataTestMethod]
