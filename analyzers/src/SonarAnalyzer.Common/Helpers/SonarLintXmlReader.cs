@@ -34,7 +34,7 @@ public class SonarLintXmlReader
     private readonly string propertyLanguage;
 
     private bool? ignoreHeaderComments;
-    public bool? IgnoreHeaderComments => ignoreHeaderComments ??= ReadBoolean(ReadProperty($"sonar.{propertyLanguage}.ignoreHeaderComments"));
+    public bool IgnoreHeaderComments => ignoreHeaderComments ??= ReadBoolean(ReadProperty($"sonar.{propertyLanguage}.ignoreHeaderComments"));
 
     private bool? analyzeGeneratedCode;
     public bool AnalyzeGeneratedCode => analyzeGeneratedCode ??= ReadBoolean(ReadProperty($"sonar.{propertyLanguage}.analyzeGeneratedCode"));

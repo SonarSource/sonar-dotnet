@@ -132,7 +132,7 @@ public partial class SonarAnalysisContextBaseTest
         secondConfig.Should().NotBeSameAs(firstConfig);
     }
 
-    [TestMethod]
+    [DataTestMethod]
     [DataRow(null)]
     [DataRow("/foo/bar/does-not-exit")]
     [DataRow("/foo/bar/x.xml")]
@@ -171,30 +171,24 @@ public partial class SonarAnalysisContextBaseTest
            .WithMessage("File 'SonarProjectConfig.xml' has been added as an AdditionalFile but could not be read and parsed.");
     }
 
-    [TestMethod]
-    public void SonarLintFile_LoadsExpectedValues()
+    [DataTestMethod]
+    [DataRow("cs")]
+    [DataRow("vbnet")]
+    public void SonarLintFile_LoadsExpectedValues(string language)
     {
-        var (compilationCS, _) = CreateDummyCompilation(AnalyzerLanguage.CSharp, "ExtraEmptyFile");
-        var (compilationVB, _) = CreateDummyCompilation(AnalyzerLanguage.VisualBasic, "OtherFile");
-        var optionsCS = AnalysisScaffolding.CreateOptions("ResourceTests\\SonarLintXml\\All_properties_cs\\SonarLint.xml");
-        var optionsVB = AnalysisScaffolding.CreateOptions("ResourceTests\\SonarLintXml\\All_properties_vbnet\\SonarLint.xml");
-        var sutCS = CreateSut(compilationCS, optionsCS).SonarLintFile();
-        var sutVB = CreateSut(compilationVB, optionsVB).SonarLintFile();
+        var analyzerLanguage = language == "cs" ? AnalyzerLanguage.CSharp : AnalyzerLanguage.VisualBasic;
+        var (compilation, _) = CreateDummyCompilation(analyzerLanguage, "ExtraEmptyFile");
+        var options = AnalysisScaffolding.CreateOptions($"ResourceTests\\SonarLintXml\\All_properties_{language}\\SonarLint.xml");
+        var sut = CreateSut(compilation, options).SonarLintFile();
 
-        AssertReader(sutCS);
-        AssertReader(sutVB);
-
-        static void AssertReader(SonarLintXmlReader sut)
-        {
-            sut.IgnoreHeaderComments.Should().BeTrue();
-            sut.AnalyzeGeneratedCode.Should().BeFalse();
-            AssertArrayContent(sut.Exclusions, nameof(sut.Exclusions));
-            AssertArrayContent(sut.Inclusions, nameof(sut.Inclusions));
-            AssertArrayContent(sut.GlobalExclusions, nameof(sut.GlobalExclusions));
-            AssertArrayContent(sut.TestExclusions, nameof(sut.TestExclusions));
-            AssertArrayContent(sut.TestInclusions, nameof(sut.TestInclusions));
-            AssertArrayContent(sut.GlobalTestExclusions, nameof(sut.GlobalTestExclusions));
-        }
+        sut.IgnoreHeaderComments.Should().BeTrue();
+        sut.AnalyzeGeneratedCode.Should().BeFalse();
+        AssertArrayContent(sut.Exclusions, nameof(sut.Exclusions));
+        AssertArrayContent(sut.Inclusions, nameof(sut.Inclusions));
+        AssertArrayContent(sut.GlobalExclusions, nameof(sut.GlobalExclusions));
+        AssertArrayContent(sut.TestExclusions, nameof(sut.TestExclusions));
+        AssertArrayContent(sut.TestInclusions, nameof(sut.TestInclusions));
+        AssertArrayContent(sut.GlobalTestExclusions, nameof(sut.GlobalTestExclusions));
 
         static void AssertArrayContent(string[] array, string folder)
         {
@@ -227,7 +221,7 @@ public partial class SonarAnalysisContextBaseTest
         secondFile.Should().NotBeSameAs(firstFile);
     }
 
-    [TestMethod]
+    [DataTestMethod]
     [DataRow(null)]
     [DataRow("\\foo\\bar\\does-not-exit")]
     [DataRow("\\foo\\bar\\x.xml")]
