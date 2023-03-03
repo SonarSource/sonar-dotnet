@@ -1,7 +1,7 @@
 {
 "issues":  [
 {
-"id":  "S2445",
+"id":  "S6507",
 "message":  "Do not lock on local variable 'typeMap', use a readonly field instead.",
 "location":  {
 "uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
