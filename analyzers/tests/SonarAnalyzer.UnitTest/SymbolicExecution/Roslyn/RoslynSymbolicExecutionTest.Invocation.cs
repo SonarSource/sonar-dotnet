@@ -895,7 +895,7 @@ f()();";
         [DataRow("null", "null", true, ConstraintKind.ObjectNull, ConstraintKind.ObjectNull)]
         [DataRow("null", "new object()", false, ConstraintKind.ObjectNull, ConstraintKind.ObjectNotNull)]
         [DataRow("new object()", "null", false, ConstraintKind.ObjectNotNull, ConstraintKind.ObjectNull)]
-        [DataRow("new int?()", "null", false, ConstraintKind.ObjectNotNull, ConstraintKind.ObjectNull)]   // Should be "true" and "Null" because new int()? is still null
+        [DataRow("new int?()", "null", true, ConstraintKind.ObjectNull, ConstraintKind.ObjectNull)]
         [DataRow("new int?(42)", "null", false, ConstraintKind.ObjectNotNull, ConstraintKind.ObjectNull)]
         public void Invocation_Equals_LearnResult(string left, string right, bool expectedResult, ConstraintKind expectedConstraintLeft, ConstraintKind expectedConstraintRight)
         {
@@ -917,7 +917,6 @@ Tag(""Right"", right);";
         [DataRow("new object()", "Unknown<object>()")]
         [DataRow("Unknown<object>()", "new object()")]
         [DataRow("Unknown<object>()", "Unknown<object>()")]
-        [DataRow("new int?()", "5")]
         public void Invocation_Equals_DoesNotLearnResult(string left, string right)
         {
             var code = $@"
@@ -951,6 +950,22 @@ Tag(""End"");";
                     x[result].HasConstraint(BoolConstraint.False).Should().BeTrue();
                     x[arg].HasConstraint(ObjectConstraint.NotNull).Should().BeTrue();
                 });
+        }
+
+        [DataTestMethod]
+        [DataRow("new int?()", "42")]   // ToDo: Should be moved to Invocation_Equals_LearnResult once we build NotNull for int
+        public void Invocation_Equals_SplitsToBothResults_Nullable(string left, string right)
+        {
+            var code = $@"
+object left = {left};
+object right = {right};
+var result = object.Equals(left, right);
+Tag(""End"");";
+            var validator = SETestContext.CreateCS(code).Validator;
+            var result = validator.Symbol("result");
+            validator.TagStates("End").Should().SatisfyRespectively(
+                x => x[result].HasConstraint(BoolConstraint.True).Should().BeTrue(),
+                x => x[result].HasConstraint(BoolConstraint.False).Should().BeTrue());
         }
 
         [TestMethod]
