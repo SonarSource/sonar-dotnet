@@ -134,7 +134,7 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
         IEnumerable<MethodDeclarationSyntax> methods, TypeDeclarationSyntax outerType, SemanticModel model)
     {
         var collector = new PotentialMethodReferenceCollector(methods);
-        collector.Visit(outerType);
+        collector.SafeVisit(outerType);
 
         return collector.PotentialMethodReferences
                 .Where(x => !OnlyUsedByOuterType(x))
@@ -181,7 +181,7 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
     /// Performance gains: by only using the syntax tree to find matches we can eliminate certain methods (which are only used by the type which has declared it)
     /// without using the more costly symbolic lookup.
     /// </summary>
-    private sealed class PotentialMethodReferenceCollector : CSharpSyntaxWalker
+    private sealed class PotentialMethodReferenceCollector : SafeCSharpSyntaxWalker
     {
         private readonly ISet<MethodDeclarationSyntax> methodsToFind;
         private readonly Dictionary<MethodDeclarationSyntax, List<IdentifierNameSyntax>> potentialMethodReferences;
