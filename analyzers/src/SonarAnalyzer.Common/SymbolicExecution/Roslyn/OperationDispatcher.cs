@@ -67,10 +67,15 @@ internal static class OperationDispatcher
     {
         if (Simple.TryGetValue(context.Operation.Instance.Kind, out var simple))            // Operations that return single state
         {
-            context = context.WithState(simple.Process(context));
+            return new[] { context.WithState(simple.Process(context)) };
         }
-        return Branching.TryGetValue(context.Operation.Instance.Kind, out var processor)    // Operations that can return multiple states
-            ? processor.Process(context).Select(x => context.WithState(x))
-            : new[] { context };
+        else if (Branching.TryGetValue(context.Operation.Instance.Kind, out var processor)) // Operations that can return multiple states
+        {
+            return processor.Process(context).Select(context.WithState);
+        }
+        else
+        {
+            return new[] { context };
+        }
     }
 }
