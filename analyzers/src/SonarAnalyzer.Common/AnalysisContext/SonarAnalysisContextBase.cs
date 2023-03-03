@@ -28,10 +28,15 @@ public class SonarAnalysisContextBase
 {
     protected static readonly ConditionalWeakTable<Compilation, ImmutableHashSet<string>> UnchangedFilesCache = new();
     protected static readonly SourceTextValueProvider<ProjectConfigReader> ProjectConfigProvider = new(x => new ProjectConfigReader(x));
+    protected static readonly SourceTextValueProvider<SonarLintXmlReader> SonarLintXmlProviderCS = new(x => new SonarLintXmlReader(x, LanguageNames.CSharp));
+    protected static readonly SourceTextValueProvider<SonarLintXmlReader> SonarLintXmlProviderVB = new(x => new SonarLintXmlReader(x, LanguageNames.VisualBasic));
     private static readonly Lazy<SourceTextValueProvider<bool>> ShouldAnalyzeGeneratedCS = new(() => CreateAnalyzeGeneratedProvider(LanguageNames.CSharp));
     private static readonly Lazy<SourceTextValueProvider<bool>> ShouldAnalyzeGeneratedVB = new(() => CreateAnalyzeGeneratedProvider(LanguageNames.VisualBasic));
 
     protected SonarAnalysisContextBase() { }
+
+    protected static SourceTextValueProvider<SonarLintXmlReader> SonarLintXmlReader(string language) =>
+        language == LanguageNames.CSharp ? SonarLintXmlProviderCS : SonarLintXmlProviderVB;
 
     protected static SourceTextValueProvider<bool> ShouldAnalyzeGeneratedProvider(string language) =>
         language == LanguageNames.CSharp ? ShouldAnalyzeGeneratedCS.Value : ShouldAnalyzeGeneratedVB.Value;
@@ -78,6 +83,24 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
         else
         {
             return ProjectConfigReader.Empty;
+        }
+    }
+
+    /// <summary>
+    /// Reads the properties from the SonarLint.xml file and caches the result for the scope of this analysis.
+    /// </summary>
+    public SonarLintXmlReader SonarLintFile()
+    {
+        if (Options.SonarLintXml() is { } sonarLintXml)
+        {
+            return sonarLintXml.GetText() is { } sourceText
+                && AnalysisContext.TryGetValue(sourceText, SonarLintXmlReader(Compilation.Language), out var sonarLintXmlReader)
+                ? sonarLintXmlReader
+                : throw new InvalidOperationException($"File '{Path.GetFileName(sonarLintXml.Path)}' has been added as an AdditionalFile but could not be read and parsed.");
+        }
+        else
+        {
+            return Helpers.SonarLintXmlReader.Empty;
         }
     }
 
