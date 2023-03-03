@@ -23,15 +23,16 @@ using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Sonar;
 using SonarAnalyzer.UnitTest.CFG.Sonar;
+using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar
 {
     [TestClass]
     public class SonarProgramStateTest
     {
-        private sealed class FakeConstraint : SymbolicConstraint
+        private sealed class FakeConstraint : TestConstraintBase
         {
-            public FakeConstraint() : base(ConstraintKind.Test) { }
+            public FakeConstraint() : base(ConstraintKindTest.Fake) { }
             public override SymbolicConstraint Opposite => null;
         }
 

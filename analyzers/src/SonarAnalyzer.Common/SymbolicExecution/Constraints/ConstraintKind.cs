@@ -56,6 +56,4 @@ public enum ConstraintKind
     StringNotWhiteSpace,
     [Obsolete("Old SE engine only")]
     StringWhiteSpace,
-
-    Test = -1,
 }
