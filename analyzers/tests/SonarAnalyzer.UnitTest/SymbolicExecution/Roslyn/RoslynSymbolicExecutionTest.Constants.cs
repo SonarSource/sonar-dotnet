@@ -93,6 +93,24 @@ public void Main(bool arg = true)
             SETestContext.CreateCSMethod(code).Validator.ValidateTag("Arg", x => x.Should().BeNull());
         }
 
+        [DataTestMethod]
+        [DataRow("int", "1")]
+        [DataRow("int", "1 + 1")]
+        [DataRow("int?", "1")]
+        [DataRow("bool", "true")]
+        [DataRow("byte", "1")]
+        [DataRow("char", "'c'")]
+        [DataRow("nuint", "100")]
+        [DataRow("AttributeTargets", "AttributeTargets.All")]
+        public void PreProcess_ValueTypes(string valueType, string constant)
+        {
+            var code = $$"""
+            {{valueType}} value = {{constant}};
+            Tag("Value", value);
+            """;
+            SETestContext.CreateCS(code).Validator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        }
+
         private static BoolConstraint GetConstraint(bool value) =>
             value ? BoolConstraint.True : BoolConstraint.False;
     }
