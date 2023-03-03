@@ -96,7 +96,7 @@ public partial class RoslynSymbolicExecutionTest
             Tag("TargetTyped", targetTyped);
             """;
         var validator = SETestContext.CreateCS(code).Validator;
-        validator.ValidateTag("ExplicitType", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());        // FIXME: Null
-        validator.ValidateTag("TargetTyped", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());     // FIXME: Null
+        validator.ValidateTag("ExplicitType", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+        validator.ValidateTag("TargetTyped", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue("new() of int produces value 0"));
 }
 }

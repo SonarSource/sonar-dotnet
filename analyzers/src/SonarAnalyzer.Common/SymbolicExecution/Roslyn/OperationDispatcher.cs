@@ -51,7 +51,7 @@ internal static class OperationDispatcher
         { OperationKindEx.FlowCapture, new FlowCapture() },
         { OperationKindEx.InstanceReference, new InstanceReference() },
         { OperationKindEx.LocalReference, new LocalReference() },
-        { OperationKindEx.ObjectCreation, new NotNullOperation() },
+        { OperationKindEx.ObjectCreation, new ObjectCreation() },
         { OperationKindEx.ParameterReference, new ParameterReference() },
         { OperationKindEx.PropertyReference, new PropertyReference() },
         { OperationKindEx.RecursivePattern, new RecursivePattern() },
