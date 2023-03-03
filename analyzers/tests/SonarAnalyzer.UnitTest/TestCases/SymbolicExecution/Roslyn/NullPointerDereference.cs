@@ -26,7 +26,7 @@ namespace Tests.Diagnostics
             if (condition)
             {
                 M1(o.ToString()); // Noncompliant {{'o' is null on at least one execution path.}}
-                                  //                 ^
+//                 ^
             }
             else
             {
@@ -611,7 +611,7 @@ namespace Tests.Diagnostics
             NotNullConst.ToString();    // Compliant
             NullConstString.ToString(); // Noncompliant
             NullConst.ToString();       // Noncompliant
-                                        //          ^^^^^^^^^
+//          ^^^^^^^^^
         }
 
         void DoLearnFromAnyConstant1()
@@ -640,42 +640,42 @@ namespace Tests.Diagnostics
             object o = null;
             _foo1 = o;
             _foo1.ToString(); // Noncompliant
-                              //          ^^^^^
+//          ^^^^^
         }
         void DumbestTestOnFoo2()
         {
             object o = null;
             _foo2 = o;
             _foo2.ToString(); // Noncompliant
-                              //          ^^^^^
+//          ^^^^^
         }
         void DumbestTestOnFoo3()
         {
             object o = null;
             _foo3 = o;
             _foo3.ToString(); // Noncompliant
-                              //          ^^^^^
+//          ^^^^^
         }
         void DumbestTestOnFoo4()
         {
             object o = null;
             _foo4 = o;
             _foo4.ToString(); // Noncompliant
-                              //          ^^^^^
+//          ^^^^^
         }
         void DumbestTestOnFoo5()
         {
             object o = null;
             _foo5 = o;
             _foo5.ToString(); // Noncompliant
-                              //          ^^^^^
+//          ^^^^^
         }
         void DumbestTestOnFoo8()
         {
             object o = null;
             _foo8 = o;
             _foo8.ToString(); // Noncompliant
-                              //          ^^^^^
+//          ^^^^^
         }
         void DumbestTestOnFoo6()
         {
@@ -749,7 +749,7 @@ namespace Tests.Diagnostics
             _foo1 = null;
             var o = _foo1;
             o.ToString(); // Noncompliant
-                          //          ^
+//          ^
         }
 
         void LearntConstraintsOnField()
@@ -757,7 +757,7 @@ namespace Tests.Diagnostics
             if (_foo1 == null)
             {
                 _foo1.ToString(); // Noncompliant
-                                  //              ^^^^^
+//              ^^^^^
             }
         }
 
@@ -766,7 +766,7 @@ namespace Tests.Diagnostics
             if (_bar == null)
             {
                 _bar.ToString(); // Noncompliant
-                                 //              ^^^^
+//              ^^^^
             }
         }
 
@@ -776,7 +776,7 @@ namespace Tests.Diagnostics
             {
                 var o = _foo1;
                 o.ToString(); // Noncompliant
-                              //              ^
+//              ^
             }
         }
 
@@ -953,7 +953,7 @@ namespace Tests.Diagnostics
             {
                 bool.Parse("No");
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 if (ex == null)
                 {
@@ -986,11 +986,10 @@ namespace Tests.Diagnostics
         {
             Guard1(s1);
 
-            if (s1 == null)
-                s1.ToUpper(); // Compliant, this code is unreachable
+            if (s1 == null) s1.ToUpper(); // Compliant, this code is unreachable
         }
 
-        public static void Guard1<T>([ValidatedNotNull] T value) where T : class { }
+        public static void Guard1<T>([ValidatedNotNull]T value) where T : class { }
 
         // https://github.com/SonarSource/sonar-dotnet/issues/3850
         public static void UsedAsExtension()
@@ -1095,7 +1094,7 @@ namespace Tests.Diagnostics
             {
                 //SE creates both constrains for 'current'
             }
-            foreach (var item in list)
+            foreach(var item in list)
             {
                 if (item == current)
                 {
@@ -1435,12 +1434,9 @@ public class Repro_GridChecks
 {
     public int Go(string first, string second)
     {
-        if (first == second)
-            return 0;
-        if (first != null && second == null)
-            return -1;
-        if (first == null && second != null)
-            return 1;
+        if (first == second) return 0;
+        if (first != null && second == null) return -1;
+        if (first == null && second != null) return 1;
 
         first.Split('.');   // Noncompliant FP
         second.Split('.');  // Noncompliant FP
