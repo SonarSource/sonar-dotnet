@@ -28,6 +28,14 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
 {
     public partial class RoslynSymbolicExecutionTest
     {
+        private static IEnumerable<object[]> ThrowHelperCalls =>
+            new object[][]
+            {
+                        new[] { @"System.Diagnostics.Debug.Fail(""Fail"");" },
+                        new[] { @"Environment.FailFast(""Fail"");" },
+                        new[] { @"Environment.Exit(-1);" },
+            };
+
         [TestMethod]
         public void InstanceReference_SetsNotNull_VB()
         {
@@ -972,13 +980,5 @@ private static bool Equals(object a, object b, object c) => false;";
             validator.ValidateTag("NoArgs", x => x.Should().BeNull());
             validator.ValidateTag("MoreArgs", x => x.Should().BeNull());
         }
-
-        private static IEnumerable<object[]> ThrowHelperCalls =>
-            new object[][]
-            {
-                new[] { @"System.Diagnostics.Debug.Fail(""Fail"");" },
-                new[] { @"Environment.FailFast(""Fail"");" },
-                new[] { @"Environment.Exit(-1);" },
-            };
     }
 }
