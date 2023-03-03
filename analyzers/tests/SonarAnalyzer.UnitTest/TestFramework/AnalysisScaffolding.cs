@@ -19,6 +19,7 @@
  */
 
 using System.IO;
+using System.Xml.Linq;
 using Microsoft.CodeAnalysis.Text;
 using Moq;
 using SonarAnalyzer.AnalysisContext;
@@ -79,6 +80,37 @@ namespace SonarAnalyzer.UnitTest
 
         public static string CreateSonarProjectConfig(TestContext context, ProjectType projectType, bool isScannerRun = true) =>
             CreateSonarProjectConfig(context, "ProjectType", projectType.ToString(), isScannerRun);
+
+        public static string CreateSonarLintXml(
+            TestContext context,
+            bool ignoreHeaderComments = false,
+            bool analyzeGeneratedCode = false,
+            string suffixes = ".cs",
+            bool ignoreIssues = false,
+            string[] exclusions = null,
+            string[] inclusions = null,
+            string[] globalExclusions = null,
+            string[] testExclusions = null,
+            string[] testInclusions = null,
+            string[] globalTestExclusions = null) =>
+            TestHelper.WriteFile(context, "SonarLint.xml",
+                new XDocument(
+                    new XDeclaration("1.0", "utf-8", "yes"),
+                    new XElement("AnalysisInput",
+                        new XElement("Settings",
+                            CreateKeyValuePair("Setting", "sonar.cs.ignoreHeaderComments", ignoreHeaderComments.ToString()),
+                            CreateKeyValuePair("Setting", "sonar.cs.analyzeGeneratedCode", analyzeGeneratedCode.ToString()),
+                            CreateKeyValuePair("Setting", "sonar.cs.file.suffixes", suffixes),
+                            CreateKeyValuePair("Setting", "sonar.cs.roslyn.ignoreIssues", ignoreIssues.ToString()),
+                            CreateKeyValuePair("Setting", "sonar.exclusions", string.Join(",", exclusions ?? Array.Empty<string>())),
+                            CreateKeyValuePair("Setting", "sonar.inclusions", string.Join(",", inclusions ?? Array.Empty<string>())),
+                            CreateKeyValuePair("Setting", "sonar.global.exclusions", string.Join(",", globalExclusions ?? Array.Empty<string>())),
+                            CreateKeyValuePair("Setting", "sonar.test.exclusions", string.Join(",", testExclusions ?? Array.Empty<string>())),
+                            CreateKeyValuePair("Setting", "sonar.test.inclusions", string.Join(",", testInclusions ?? Array.Empty<string>())),
+                            CreateKeyValuePair("Setting", "sonar.global.test.exclusions", string.Join(",", globalTestExclusions ?? Array.Empty<string>()))))).ToString());
+
+        private static XElement CreateKeyValuePair(string name, string key, string value) =>
+            new(name, new XElement("Key", key), new XElement("Value", value));
 
         private static string CreateSonarProjectConfig(TestContext context, string element, string value, bool isScannerRun, string analysisConfigPath = null)
         {
