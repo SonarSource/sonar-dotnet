@@ -85,4 +85,18 @@ public partial class RoslynSymbolicExecutionTest
         validator.ValidateTag("HasValueAfterNull", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
         validator.ValidateTag("SymbolAfterNull", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
     }
+
+    [TestMethod]
+    public void Nullable_Ctor_NoArguments_SetsNullConstraint()
+    {
+        const string code = """
+            int? explicitType = new Nullable<int>();
+            int? targetTyped = new();
+            Tag("ExplicitType", explicitType);
+            Tag("TargetTyped", targetTyped);
+            """;
+        var validator = SETestContext.CreateCS(code).Validator;
+        validator.ValidateTag("ExplicitType", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());        // FIXME: Null
+        validator.ValidateTag("TargetTyped", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());     // FIXME: Null
+}
 }
