@@ -33,10 +33,10 @@ namespace SonarAnalyzer.SymbolicExecution.Constraints
         private ObjectConstraint(ConstraintKind kind) : base(kind) { }
 
         public override string ToString() =>
-            this switch
+            Kind switch
             {
-                _ when ReferenceEquals(this, Null) => nameof(Null),
-                _ when ReferenceEquals(this, NotNull) => nameof(NotNull),
+                ConstraintKind.ObjectNull => nameof(Null),
+                ConstraintKind.ObjectNotNull => nameof(NotNull),
                 _ => base.ToString(),
             };
     }

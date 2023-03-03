@@ -37,11 +37,11 @@ namespace SonarAnalyzer.SymbolicExecution.Constraints
             this == From(value);
 
         public override string ToString() =>
-            this switch
+            Kind switch
             {
-                _ when ReferenceEquals(this, True) => nameof(True),
-                _ when ReferenceEquals(this, False) => nameof(False),
-                _ => throw new InvalidOperationException("Unexpected instance")
+                ConstraintKind.BoolTrue => nameof(True),
+                ConstraintKind.BoolFalse => nameof(False),
+                _ => base.ToString(),
             };
     }
 }

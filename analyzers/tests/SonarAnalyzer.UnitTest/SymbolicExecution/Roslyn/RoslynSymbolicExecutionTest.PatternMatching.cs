@@ -384,12 +384,12 @@ Tag(""End"", arg);";
             ValidateSetBoolConstraint(isPattern, OperationKindEx.DeclarationPattern, expectedBoolConstraint);
 
         [DataTestMethod]
-        [DataRow("objectUnknown", "is object o", new[] { ConstraintKind.ObjectNotNull }, new[] { ConstraintKind.ObjectNull })]
-        [DataRow("exceptionUnknown", "is object { }", new[] { ConstraintKind.ObjectNotNull }, new[] { ConstraintKind.ObjectNull })]
-        [DataRow("exceptionUnknown", "is Exception { }", new[] { ConstraintKind.ObjectNotNull }, new[] { ConstraintKind.ObjectNull })]
-        [DataRow("exceptionUnknown", "is FormatException { }", new[] { ConstraintKind.ObjectNotNull }, null)]
+        [DataRow("objectUnknown", "is object o", new[] { ConstraintKind.ObjectNull })]
+        [DataRow("exceptionUnknown", "is object { }", new[] { ConstraintKind.ObjectNull })]
+        [DataRow("exceptionUnknown", "is Exception { }", new[] { ConstraintKind.ObjectNull })]
+        [DataRow("exceptionUnknown", "is FormatException { }", null)]
         public void DeclarationPatternSetBoolConstraint_TwoStates(string testedSymbol, string isPattern, ConstraintKind[] expectedForFalse) =>
-            ValidateSetBoolConstraint_TwoStates(testedSymbol, isPattern, OperationKindEx.DeclarationPattern, expectedForTrue, expectedForFalse);
+            ValidateSetBoolConstraint_TwoStates(testedSymbol, isPattern, OperationKindEx.DeclarationPattern, new[] { ConstraintKind.ObjectNotNull }, expectedForFalse);
 
         [DataTestMethod]
         [DataRow("objectNull is not null", OperationKindEx.NegatedPattern, false)]

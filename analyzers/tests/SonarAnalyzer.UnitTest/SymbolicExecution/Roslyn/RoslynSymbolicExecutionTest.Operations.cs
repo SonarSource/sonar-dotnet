@@ -813,7 +813,7 @@ public async System.Threading.Tasks.Task Main(System.Threading.Tasks.Task T)
         [DataRow("bool", "false", new[] { ConstraintKind.BoolTrue })]
         [DataRow("bool?", "default", new[] { ConstraintKind.ObjectNull })]
         [DataRow("bool?", "null", new[] { ConstraintKind.ObjectNull })]
-        public void Unary_Not_SupportsBoolAndNull(string type, string defaultValue, ConstraintKind expectedConstraints)
+        public void Unary_Not_SupportsBoolAndNull(string type, string defaultValue, ConstraintKind expectedConstraint)
         {
             var code = $@"
 {type} value = {defaultValue};
@@ -821,7 +821,7 @@ value = !value;
 Tag(""Value"", value);";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateContainsOperation(OperationKind.Unary);
-            validator.ValidateTag("Value", x => x.AllConstraints.Select(x => x.Kind).Should().BeEquivalentTo(expectedConstraints));
+            validator.ValidateTag("Value", x => x.AllConstraints.Select(x => x.Kind).Should().BeEquivalentTo(new[] { expectedConstraint }));
         }
     }
 }
