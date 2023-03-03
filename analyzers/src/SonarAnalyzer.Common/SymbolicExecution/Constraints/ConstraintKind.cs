@@ -44,12 +44,16 @@ public enum ConstraintKind
     SaltSizeShort,
     SerializationSafe,
     SerializationUnsafe,
+    [Obsolete("Old SE engine only")]
     StringEmpty,
+    [Obsolete("Old SE engine only")]
     StringFullNotWhiteSpace,
+    [Obsolete("Old SE engine only")]
     StringFullOrNull,
+    [Obsolete("Old SE engine only")]
     StringFull,
+    [Obsolete("Old SE engine only")]
     StringNotWhiteSpace,
+    [Obsolete("Old SE engine only")]
     StringWhiteSpace,
-
-    Test = -1,
 }
