@@ -900,8 +900,8 @@ Tag(""Left"", left);
 Tag(""Right"", right);";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateTag("Result", x => x.HasConstraint(BoolConstraint.From(expectedResult)).Should().BeTrue());
-            validator.ValidateTag("Left", x => x.AllConstraints.Select(x => x.Kind).Should().BeEquivalentTo(new[] { expectedConstraintLeft }));
-            validator.ValidateTag("Right", x => x.AllConstraints.Select(x => x.Kind).Should().BeEquivalentTo(new[] { expectedConstraintRight }));
+            validator.ValidateTag("Left", x => x.AllConstraints.Select(x => x.Kind).Should().ContainSingle().Which.Should().Be(expectedConstraintLeft));
+            validator.ValidateTag("Right", x => x.AllConstraints.Select(x => x.Kind).Should().ContainSingle().Which.Should().Be(expectedConstraintRight));
         }
 
         [DataTestMethod]
