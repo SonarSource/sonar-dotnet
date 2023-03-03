@@ -3,8 +3,8 @@ avoid bugs related to thread synchronization.</p>
 <ol>
   <li> Locking on a non-<code>readonly</code> field makes it possible for the field’s value to change while a thread is in the code block locked on
   the old value. This allows another thread to lock on the new value and access the same block concurrently. </li>
-  <li> Locking on a local variable or a new instance of an object can undermine synchronization because two different threads running the same method
-  in parallel will potentially lock on different instances of the same object, allowing them to access the synchronized block at the same time. </li>
+  <li> Locking on a new instance of an object undermines synchronization because two different threads running the same method in parallel will lock
+  on different instances of the same object, allowing them to access the synchronized block at the same time. </li>
   <li> Locking on a string literal is also dangerous since, depending on whether the string is interned or not, different threads may or may not
   synchronize on the same object instance. </li>
 </ol>
