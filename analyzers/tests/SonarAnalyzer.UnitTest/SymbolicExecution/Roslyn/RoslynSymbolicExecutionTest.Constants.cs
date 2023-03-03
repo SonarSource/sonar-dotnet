@@ -111,6 +111,30 @@ public void Main(bool arg = true)
             SETestContext.CreateCS(code).Validator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
         }
 
+        [TestMethod]
+        public void PreProcess_NullableValueTypes()
+        {
+            var code = """
+            int? value = null;
+            Tag("Value", value);
+            """;
+            SETestContext.CreateCS(code).Validator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void PreProcess_UserDefinedNullableValueType()
+        {
+            var code = """
+            struct S { }
+            public void Main()
+            {
+                S? value = null;
+                Tag("Value", value);
+            }
+            """;
+            SETestContext.CreateCSMethod(code).Validator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+        }
+
         private static BoolConstraint GetConstraint(bool value) =>
             value ? BoolConstraint.True : BoolConstraint.False;
     }
