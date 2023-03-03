@@ -27,8 +27,26 @@ internal sealed class ObjectCreation : SimpleProcessor<IObjectCreationOperationW
     protected override IObjectCreationOperationWrapper Convert(IOperation operation) =>
         IObjectCreationOperationWrapper.FromOperation(operation);
 
-    protected override ProgramState Process(SymbolicContext context, IObjectCreationOperationWrapper operation) =>
-        operation.Type.IsNullableValueType() && operation.Arguments.IsEmpty
-            ? context.SetOperationConstraint(ObjectConstraint.Null)
-            : context.SetOperationConstraint(ObjectConstraint.NotNull);
+    protected override ProgramState Process(SymbolicContext context, IObjectCreationOperationWrapper operation)
+    {
+        if (operation.Type.IsNullableValueType())
+        {
+            if (operation.Arguments.IsEmpty)
+            {
+                return context.SetOperationConstraint(ObjectConstraint.Null);
+            }
+            else if (context.State[operation.Arguments.First().ToArgument().Value] is { } value)
+            {
+                return context.State.SetOperationValue(context.Operation, value.WithConstraint(ObjectConstraint.NotNull));
+            }
+            else
+            {
+                return context.SetOperationConstraint(ObjectConstraint.NotNull);
+            }
+        }
+        else
+        {
+            return context.SetOperationConstraint(ObjectConstraint.NotNull);
+        }
+    }
 }

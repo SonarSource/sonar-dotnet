@@ -108,4 +108,24 @@ public partial class RoslynSymbolicExecutionTest
         validator.ValidateTag("GenericValue", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue("new() of T produces value T"));
         validator.ValidateTag("GenericNull", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
 }
+    }
+
+    [TestMethod]
+    public void Nullable_Ctor_Argument_PropagateConstraints()
+    {
+        const string code = """
+            var falseValue = false;     // This will set additional constraint TestConstraint.First
+            bool? isTrue = new Nullable<bool>(true);
+            bool? isFalse = new Nullable<bool>(falseValue);
+            int? isInt = new Nullable<int>(42);
+            Tag("IsTrue", isTrue);
+            Tag("IsFalse", isFalse);
+            Tag("IsInt", isInt);
+            """;
+        var setter = new PreProcessTestCheck(OperationKind.Literal, x => x.Operation.Instance.ConstantValue.Value is false ? x.SetOperationConstraint(TestConstraint.First) : x.State);
+        var validator = SETestContext.CreateCS(code, setter).Validator;
+        validator.ValidateTag("IsTrue", x => x.AllConstraints.Select(x => x.ToString()).OrderBy(x => x).JoinStr(", ").Should().Be("NotNull, True"));
+        validator.ValidateTag("IsFalse", x => x.AllConstraints.Select(x => x.ToString()).OrderBy(x => x).JoinStr(", ").Should().Be("False, First, NotNull"));
+        validator.ValidateTag("IsInt", x => x.AllConstraints.Select(x => x.ToString()).OrderBy(x => x).JoinStr(", ").Should().Be("NotNull"));
+    }
 }
