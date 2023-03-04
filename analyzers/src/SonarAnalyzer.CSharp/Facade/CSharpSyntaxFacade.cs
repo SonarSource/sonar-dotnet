@@ -50,7 +50,7 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
 
     public override bool IsNullLiteral(SyntaxNode node) => node.IsNullLiteral();
 
-    public override bool IsKnownAttributeType(SyntaxNode attribute, KnownType knownType, SemanticModel model) =>
+    public override bool IsKnownAttributeType(SemanticModel model, SyntaxNode attribute, KnownType knownType) =>
         AttributeSyntaxExtensions.IsKnownType(Cast<AttributeSyntax>(attribute), knownType, model);
 
     public override IEnumerable<SyntaxNode> ArgumentExpressions(SyntaxNode node) =>
