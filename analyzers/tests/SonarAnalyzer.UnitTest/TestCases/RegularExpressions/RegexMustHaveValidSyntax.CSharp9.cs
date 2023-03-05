@@ -21,5 +21,6 @@ class Noncompliant
     void Interpolated()
     {
         var regex = new Regex($"{InvalidPattern}"); // Noncompliant
+        var combined = new Regex($"[AB{InvalidPattern}"); // Noncompliant
     }
 }

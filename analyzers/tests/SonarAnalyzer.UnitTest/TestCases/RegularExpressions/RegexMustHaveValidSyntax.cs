@@ -48,6 +48,14 @@ class Noncompliant
         var replace = Regex.Replace("some input", "[A", "some replacement"); // Noncompliant
     }
 
+    bool Multiline(string input)
+    {
+        return Regex.IsMatch(input, "a" // Noncompliant
+            + "|b"
+            + "|c"
+            + "|[A");
+    }
+
     [RegularExpression("[A")] // Noncompliant
     public string Attribute { get; set; }
 
@@ -56,6 +64,14 @@ class Noncompliant
 
     [global::System.ComponentModel.DataAnnotations.RegularExpression("[A")] // Noncompliant
     public string AttributeGloballySpecified { get; set; }
+}
+
+class DoesNotCrash
+{
+    bool UnknownVariable(string input)
+    {
+        return Regex.IsMatch(input, "a" + unknown); // Error CS0103 The name 'unknown' does not exist in the current context
+    }
 }
 
 public class NoRegex

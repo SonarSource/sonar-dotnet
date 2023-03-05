@@ -47,7 +47,6 @@ public class RegexMustHaveValidSyntaxTest
     [TestMethod]
     public void RegexMustHaveValidSyntax_CSharp9() =>
         builderCS.AddPaths("RegexMustHaveValidSyntax.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
-
 #endif
 
     [TestMethod]
