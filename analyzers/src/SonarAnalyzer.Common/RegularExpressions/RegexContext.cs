@@ -48,7 +48,7 @@ internal sealed class RegexContext
         {
             try
             {
-                Regex = new(Pattern, options.GetValueOrDefault() & TestMask, TimeSpan.FromMilliseconds(100));
+                Regex = new(Pattern, options.GetValueOrDefault() & TestMask, RegexConstants.DefaultTimeout);
             }
             catch (Exception x)
             {
