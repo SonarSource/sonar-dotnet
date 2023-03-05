@@ -57,7 +57,7 @@ internal sealed class RegexContext
             }
             catch (Exception ex)
             {
-                ParseError = x;
+                ParseError = ex;
             }
         }
     }
