@@ -56,7 +56,7 @@ public class RegexMustHaveValidSyntaxTest
 
     [DataTestMethod]
     [DataRow("[A", RegexOptions.None)]
-#if NET7_0_OR_GREATER
+#if NET
     [DataRow(@"^([0-9]{2})(?<!00)$", RegexOptions.NonBacktracking)]
 #endif
     public void Invalid_input_is_detected(string pattern, RegexOptions options) =>
