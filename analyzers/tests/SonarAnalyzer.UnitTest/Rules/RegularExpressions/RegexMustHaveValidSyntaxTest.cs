@@ -59,6 +59,6 @@ public class RegexMustHaveValidSyntaxTest
 #if NET
     [DataRow(@"^([0-9]{2})(?<!00)$", RegexOptions.NonBacktracking)]
 #endif
-    public void Invalid_input_is_detected(string pattern, RegexOptions options) =>
+    public void InvalidInput_SetParseError(string pattern, RegexOptions options) =>
         new RegexContext(null, pattern, null, options).ParseError.Should().NotBeNull();
 }
