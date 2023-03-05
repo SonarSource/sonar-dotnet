@@ -4,7 +4,7 @@ class Compliant
 {
     void ImplicitObject()
     {
-        Regex defaultOrder = new("some pattern"); // Compliant
+        Regex defaultOrder = new("valid pattern"); // Compliant
     }
 }
 

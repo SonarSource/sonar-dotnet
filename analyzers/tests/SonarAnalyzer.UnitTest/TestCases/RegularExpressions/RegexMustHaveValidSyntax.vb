@@ -3,12 +3,12 @@ Imports System.Text.RegularExpressions
 
 Class Compliant
     Private Sub Ctor()
-        Dim defaultOrder = New Regex("some pattern", RegexOptions.None)
-        Dim namedArgs = New Regex(options:=RegexOptions.None, pattern:="some pattern")
+        Dim defaultOrder = New Regex("valid pattern", RegexOptions.None)
+        Dim namedArgs = New Regex(options:=RegexOptions.None, pattern:="valid pattern")
     End Sub
 
     Private Sub [Static]()
-        Dim isMatch = Regex.IsMatch("some input", "some pattern", RegexOptions.None)
+        Dim isMatch = Regex.IsMatch("some input", "valid pattern", RegexOptions.None)
     End Sub
 
     <RegularExpression("[0-9]+")>
