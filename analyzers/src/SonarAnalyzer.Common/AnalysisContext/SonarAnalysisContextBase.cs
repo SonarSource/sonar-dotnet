@@ -141,21 +141,18 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
         && shouldAnalyzeGenerated;
 
     private bool IsFileIncludedExcluded(string filePath) =>
-        IsTestProject() ? IsTestFileIncludedExcluded(filePath) : IsSourceFileIncludedExcluded(filePath);
+        IsTestProject()
+        ? IsFileIncludedExcluded(SonarLintFile().TestInclusions, SonarLintFile().TestExclusions, SonarLintFile().GlobalTestExclusions, filePath)
+        : IsFileIncludedExcluded(SonarLintFile().Inclusions, SonarLintFile().Exclusions, SonarLintFile().GlobalExclusions, filePath);
 
-    private bool IsSourceFileIncludedExcluded(string filePath) =>
-        IsIncluded(SonarLintFile().Inclusions, filePath)
-        && !IsExcluded(SonarLintFile().Exclusions, filePath)
-        && !IsExcluded(SonarLintFile().GlobalExclusions, filePath);
+    private static bool IsFileIncludedExcluded(string[] inclusions, string[] exclusions, string[] globalExclusions, string filePath) =>
+        IsIncluded(inclusions, filePath)
+        && !IsExcluded(exclusions, filePath)
+        && !IsExcluded(globalExclusions, filePath);
 
-    private bool IsTestFileIncludedExcluded(string filePath) =>
-        IsIncluded(SonarLintFile().TestInclusions, filePath)
-        && !IsExcluded(SonarLintFile().TestExclusions, filePath)
-        && !IsExcluded(SonarLintFile().GlobalTestExclusions, filePath);
-
-    private bool IsIncluded(string[] inclusions, string filePath) =>
+    private static bool IsIncluded(string[] inclusions, string filePath) =>
         inclusions is { Length: 0 } || inclusions.Any(x => WildcardPatternMatcher.IsMatch(x, filePath));
 
-    private bool IsExcluded(string[] exclusions, string filePath) =>
+    private static bool IsExcluded(string[] exclusions, string filePath) =>
         exclusions.Any(x => WildcardPatternMatcher.IsMatch(x, filePath));
 }
