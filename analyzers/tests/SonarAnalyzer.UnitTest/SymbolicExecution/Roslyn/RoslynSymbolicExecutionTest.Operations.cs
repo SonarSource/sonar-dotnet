@@ -195,6 +195,33 @@ public void Method()
         }
 
         [TestMethod]
+        public void Conversion_CustomOperators_DoNotPropagateState()
+        {
+            const string code = """
+            public void Main()
+            {
+                var isTrue = true;
+                WithImplicit withImplicit = isTrue;
+                WithExplicit withExplicit = (WithExplicit)isTrue;
+                Tag("WithImplicit", withImplicit);
+                Tag("WithExplicit", withExplicit);
+            }
+
+            public struct WithImplicit
+            {
+                public static implicit operator WithImplicit(bool b) => new();
+            }
+            public struct WithExplicit
+            {
+                public static explicit operator WithExplicit(bool b) => new();
+            }
+            """;
+            var validator = SETestContext.CreateCSMethod(code).Validator;
+            validator.ValidateTag("WithImplicit", x => x.Should().BeNull());
+            validator.ValidateTag("WithExplicit", x => x.Should().BeNull());
+        }
+
+        [TestMethod]
         public void Argument_Ref_ResetsConstraints_CS() =>
             SETestContext.CreateCS(@"var b = true; Main(boolParameter, ref b); Tag(""B"", b);", ", ref bool outParam").Validator.ValidateTag("B", x => x.Should().BeNull());
 

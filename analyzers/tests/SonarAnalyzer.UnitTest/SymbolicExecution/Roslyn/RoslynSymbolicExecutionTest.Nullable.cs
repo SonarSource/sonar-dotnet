@@ -135,15 +135,17 @@ public partial class RoslynSymbolicExecutionTest
             var isTrue = true;
             bool? toNullableImplicit = isTrue;
             bool? toNullableExplicit = (bool?)isTrue;
+            bool? toNullableAs = isTrue as bool?;
             bool toBoolExplicit = (bool)toNullableImplicit;
             Tag("ToNullableImplicit", toNullableImplicit);
             Tag("ToNullableExplicit", toNullableExplicit);
+            Tag("ToNullableAs", toNullableAs);
             Tag("ToBoolExplicit", toBoolExplicit);
             """;
-        var setter = new PreProcessTestCheck(OperationKind.Literal, x => x.Operation.Instance.ConstantValue.Value is false ? x.SetOperationConstraint(TestConstraint.First) : x.State);
-        var validator = SETestContext.CreateCS(code, setter).Validator;
+        var validator = SETestContext.CreateCS(code).Validator;
         validator.ValidateTag("ToNullableImplicit", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
         validator.ValidateTag("ToNullableExplicit", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+        validator.ValidateTag("ToNullableAs", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
         validator.ValidateTag("ToBoolExplicit", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
     }
 }
