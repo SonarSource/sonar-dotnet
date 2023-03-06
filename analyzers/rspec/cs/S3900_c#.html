@@ -1,5 +1,6 @@
-<p>Methods declared as public, protected, or protected internal can be accessed from other assemblies, which means you should validate parameters to
-be within the expected constraints. In general, checking against <code>null</code> is recommended in defensive programming.</p>
+<p>Methods declared as <code>public</code>, <code>protected</code>, or <code>protected internal</code> can be accessed from other assemblies, which
+means you should validate parameters to be within the expected constraints. In general, checking against <code>null</code> is recommended in defensive
+programming.</p>
 <p>This rule raises an issue when a parameter of a publicly accessible method is not validated against <code>null</code> before being
 dereferenced.</p>
 <h2>Noncompliant Code Example</h2>
@@ -51,6 +52,11 @@ public class MyClass
     public void Qux(MyOtherClass other)
     {
         this.other = other; // Compliant: "other" is not being dereferenced
+    }
+
+    private void Xyzzy(MyOtherClass other)
+    {
+        this.other = other; // Compliant: method is not publicly accessible
     }
 }
 </pre>
