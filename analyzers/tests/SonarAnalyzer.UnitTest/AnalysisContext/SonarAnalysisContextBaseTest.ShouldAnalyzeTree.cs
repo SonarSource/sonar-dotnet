@@ -115,7 +115,7 @@ public partial class SonarAnalysisContextBaseTest
         var sut = CreateSut(compilation, CreateOptions(sonarLintXml));
 
         // 1. Read -> no error
-        sut.ShouldAnalyzeTree(tree, CSharpGeneratedCodeRecognizer.Instance).Should().Be(expected); 
+        sut.ShouldAnalyzeTree(tree, CSharpGeneratedCodeRecognizer.Instance).Should().Be(expected);
         sonarLintXml.ToStringCallCount.Should().Be(1); // should have attempted to read the file
 
         // 2. Read again to check that the load error doesn't prevent caching from working
