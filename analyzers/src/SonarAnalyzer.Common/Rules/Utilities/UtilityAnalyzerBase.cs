@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Rules
             if (settings.Any() && !string.IsNullOrEmpty(outPath))
             {
                 var language = context.Compilation.Language;
-                IgnoreHeaderComments = PropertiesHelper.ReadIgnoreHeaderCommentsProperty(settings, language);
+                IgnoreHeaderComments = context.SonarLintFile().IgnoreHeaderComments;
                 AnalyzeGeneratedCode = PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(settings, language);
                 OutPath = Path.Combine(outPath, language == LanguageNames.CSharp ? "output-cs" : "output-vbnet");
                 IsAnalyzerEnabled = true;

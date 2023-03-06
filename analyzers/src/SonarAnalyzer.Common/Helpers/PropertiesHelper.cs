@@ -40,9 +40,6 @@ namespace SonarAnalyzer.Helpers
         public static bool ReadAnalyzeGeneratedCodeProperty(IEnumerable<XElement> settings, string language) =>
             ReadBooleanProperty(settings, language, "analyzeGeneratedCode");
 
-        public static bool ReadIgnoreHeaderCommentsProperty(IEnumerable<XElement> settings, string language) =>
-            ReadBooleanProperty(settings, language, "ignoreHeaderComments");
-
         private static bool ReadBooleanProperty(IEnumerable<XElement> settings, string language, string propertySuffix, bool defaultValue = false)
         {
             var propertyLanguage = language == LanguageNames.CSharp ? "cs" : "vbnet";
