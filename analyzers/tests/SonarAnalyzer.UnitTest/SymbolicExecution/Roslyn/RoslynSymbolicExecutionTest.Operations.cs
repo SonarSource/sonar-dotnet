@@ -172,7 +172,7 @@ public void Method()
                 @"Invocation: Tag(""c"", c)",
                 @"ExpressionStatement: Tag(""c"", c);");
             validator.ValidateTag("b", x => x.HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
-            validator.ValidateTag("c", x => x.Should().BeNull());
+            validator.ValidateTag("c", x => x.AllConstraints.Should().ContainSingle().Which.Should().Be(ObjectConstraint.NotNull));
         }
 
         [TestMethod]
@@ -358,7 +358,7 @@ Tag(""AfterNullableInt"", argNullableInt);";
             validator.ValidateTag("BeforeNullableInt", x => x.Should().BeNull());
             validator.ValidateTag("AfterObjNull", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
             validator.ValidateTag("AfterObjDefault", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-            validator.ValidateTag("AfterInt", x => x.Should().BeNull());
+            validator.ValidateTag("AfterInt", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.ValidateTag("AfterNullableInt", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
         }
 
@@ -377,7 +377,7 @@ Tag(""AfterInt"", ArgInt)";
             validator.ValidateTag("BeforeObj", x => x.Should().BeNull());
             validator.ValidateTag("BeforeInt", x => x.Should().BeNull());
             validator.ValidateTag("AfterObj", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-            validator.ValidateTag("AfterInt", x => x.Should().BeNull());
+            validator.ValidateTag("AfterInt", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
         }
 
         [TestMethod]
@@ -433,7 +433,7 @@ Tag(""ObjectFromException"", o);
 Tag(""IntegerFromByte"", i);";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateTag("ObjectFromException", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-            validator.ValidateTag("IntegerFromByte", x => x.Should().BeNull());
+            validator.ValidateTag("IntegerFromByte", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
         }
 
         [TestMethod]
@@ -476,7 +476,7 @@ Tag(""Value"", value);";
 var value = {literal};
 Tag(""Value"", value);";
             var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("Value", x => x.Should().BeNull());
+            validator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
         }
 
         [TestMethod]
@@ -809,11 +809,11 @@ public async System.Threading.Tasks.Task Main(System.Threading.Tasks.Task T)
         }
 
         [DataTestMethod]
-        [DataRow("bool", "true", ConstraintKind.BoolFalse)]
-        [DataRow("bool", "false", ConstraintKind.BoolTrue)]
-        [DataRow("bool?", "default", ConstraintKind.ObjectNull)]
-        [DataRow("bool?", "null", ConstraintKind.ObjectNull)]
-        public void Unary_Not_SupportsBoolAndNull(string type, string defaultValue, ConstraintKind expectedConstraint)
+        [DataRow("bool", "true", new[] { ConstraintKind.ObjectNotNull, ConstraintKind.BoolFalse })]
+        [DataRow("bool", "false", new[] { ConstraintKind.ObjectNotNull, ConstraintKind.BoolTrue })]
+        [DataRow("bool?", "default", new[] { ConstraintKind.ObjectNull })]
+        [DataRow("bool?", "null", new[] { ConstraintKind.ObjectNull })]
+        public void Unary_Not_SupportsBoolAndNull(string type, string defaultValue, ConstraintKind[] expectedConstraints)
         {
             var code = $@"
 {type} value = {defaultValue};
@@ -821,7 +821,7 @@ value = !value;
 Tag(""Value"", value);";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateContainsOperation(OperationKind.Unary);
-            validator.ValidateTag("Value", x => x.AllConstraints.Select(x => x.Kind).Should().ContainSingle().Which.Should().Be(expectedConstraint));
+            validator.ValidateTag("Value", x => x.AllConstraints.Select(y => y.Kind).Should().BeEquivalentTo(expectedConstraints));
         }
     }
 }

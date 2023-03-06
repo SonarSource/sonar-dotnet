@@ -54,7 +54,7 @@ public partial class RoslynSymbolicExecutionTest
             """;
         var setter = new PreProcessTestCheck(OperationKind.Literal, x => x.Operation.Instance.ConstantValue.Value is false ? x.SetOperationConstraint(TestConstraint.First) : x.State);
         var validator = SETestContext.CreateCS(code, ", bool? arg", setter).Validator;
-        validator.ValidateTag("Unknown", x => x.Should().BeNull());
+        validator.ValidateTag("Unknown", x => x.HasConstraint<BoolConstraint>().Should().BeFalse());
         validator.ValidateTag("True", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
         validator.ValidateTag("FalseFirst", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
         validator.ValidateTag("FalseFirst", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());
@@ -77,9 +77,9 @@ public partial class RoslynSymbolicExecutionTest
             Tag("SymbolAfterNull", arg);
             """;
         var validator = SETestContext.CreateCS(code, ", bool? arg").Validator;
-        validator.ValidateTag("HasValueUnknown", x => x.Should().BeNull());
+        validator.ValidateTag("HasValueUnknown", x => x.HasConstraint<BoolConstraint>().Should().BeFalse());
         validator.ValidateTag("SymbolUnknown", x => x.Should().BeNull());
-        validator.ValidateTag("HasValueAfterTrue", x => x.Should().BeNull());   // ToDo: Should be x.HasConstraint(BoolConstraint.True).Should().BeTrue()); after we build NotNull for bool literal.
+        validator.ValidateTag("HasValueAfterTrue", x => x.HasConstraint<BoolConstraint>().Should().BeFalse());   // ToDo: Should be x.HasConstraint(BoolConstraint.True).Should().BeTrue()); after we build NotNull for bool literal.
         validator.ValidateTag("SymbolAfterTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
         validator.ValidateTag("SymbolAfterTrue", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeFalse());    // ToDo: Should be BeTrue() after we build NotNull for bool literal
         validator.ValidateTag("HasValueAfterNull", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());

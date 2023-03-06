@@ -536,9 +536,9 @@ Tag(""IsNullOrEmpy"", isNullOrEmpy);
 Tag(""Arg"", arg);";
             var validator = SETestContext.CreateCS(code, ", string arg").Validator;
             validator.TagValues("IsNullOrEmpy").Should().Equal(
-                new SymbolicValue().WithConstraint(BoolConstraint.False),      // False/NotNull
-                new SymbolicValue().WithConstraint(BoolConstraint.True),       // True/Null
-                new SymbolicValue().WithConstraint(BoolConstraint.True));      // True/NotNull
+                SymbolicValue.NotNull.WithConstraint(BoolConstraint.False),      // False/NotNull
+                SymbolicValue.NotNull.WithConstraint(BoolConstraint.True),       // True/Null
+                SymbolicValue.NotNull.WithConstraint(BoolConstraint.True));      // True/NotNull
             validator.TagValues("Arg").Should().Equal(
                 new SymbolicValue().WithConstraint(ObjectConstraint.NotNull),  // False/NotNull
                 new SymbolicValue().WithConstraint(ObjectConstraint.Null),     // True/Null
@@ -664,7 +664,6 @@ Tag(""Value"", value);";
         [DataTestMethod]    // Just a few examples to demonstrate that we don't set it for all
         [DataRow("object", "First()")]
         [DataRow("int", "Min()")]
-        [DataRow("int", "Min()")]
         [DataRow("int", "ElementAtOrDefault(42);")]
         [DataRow("int", "FirstOrDefault();")]
         [DataRow("int", "LastOrDefault();")]
@@ -676,7 +675,14 @@ Tag(""Value"", value);";
 var value = arg.{expression};
 Tag(""Value"", value);";
             var validator = SETestContext.CreateCS(code, $", IEnumerable<{itemType}> arg").Validator;
-            validator.ValidateTag("Value", x => x.Should().BeNull());
+            if (itemType == "int")
+            {
+                validator.ValidateTag("Value", x => x.AllConstraints.Should().ContainSingle().Which.Kind.Should().Be(ConstraintKind.ObjectNotNull));
+            }
+            else
+            {
+                validator.ValidateTag("Value", x => x.Should().BeNull());
+            }
         }
 
         [TestMethod]
@@ -737,7 +743,7 @@ End Sub";
 Dim Result As Boolean = IsNothing("""" & Arg.ToString())
 Tag(""Result"", Result)";
             var validator = SETestContext.CreateVB(code, ", Arg As Object").Validator;
-            validator.ValidateTag("Result", x => x.Should().BeNull());
+            validator.ValidateTag("Result", x => x.AllConstraints.Should().ContainSingle().Which.Should().Be(ObjectConstraint.NotNull));
         }
 
         [DataTestMethod]
@@ -925,7 +931,7 @@ object right = {right};
 var result = object.Equals(left, right);
 Tag(""Result"", result);";
             var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("Result", x => x.Should().BeNull());
+            validator.ValidateTag("Result", x => x.AllConstraints.Should().ContainSingle().Which.Should().Be(ObjectConstraint.NotNull));
         }
 
         [DataTestMethod]
@@ -990,10 +996,10 @@ private bool Equals(object a, object b) => false;
 private static bool Equals() => false;
 private static bool Equals(object a, object b, object c) => false;";
             var validator = SETestContext.CreateCSMethod(code).Validator;
-            validator.ValidateTag("InstanceOne", x => x.Should().BeNull());
-            validator.ValidateTag("InstanceTwo", x => x.Should().BeNull());
-            validator.ValidateTag("NoArgs", x => x.Should().BeNull());
-            validator.ValidateTag("MoreArgs", x => x.Should().BeNull());
+            validator.ValidateTag("InstanceOne", x => x.AllConstraints.Should().ContainSingle().Which.Should().Be(ObjectConstraint.NotNull));
+            validator.ValidateTag("InstanceTwo", x => x.AllConstraints.Should().ContainSingle().Which.Should().Be(ObjectConstraint.NotNull));
+            validator.ValidateTag("NoArgs", x => x.AllConstraints.Should().ContainSingle().Which.Should().Be(ObjectConstraint.NotNull));
+            validator.ValidateTag("MoreArgs", x => x.AllConstraints.Should().ContainSingle().Which.Should().Be(ObjectConstraint.NotNull));
         }
     }
 }
