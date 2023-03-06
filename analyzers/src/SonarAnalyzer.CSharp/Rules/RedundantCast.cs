@@ -134,22 +134,19 @@ public sealed class RedundantCast : SonarDiagnosticAnalyzer
 
     private static ITypeSymbol GetElementType(InvocationExpressionSyntax invocation, IMethodSymbol methodSymbol, SemanticModel semanticModel)
     {
-        return CollectionExpression() is { } collection
-            ? semanticModel.GetTypeInfo(collection).Type switch
-            {
-                INamedTypeSymbol { TypeArguments: { Length: 1 } typeArguments } => typeArguments.First(),
-                IArrayTypeSymbol { Rank: 1 } arrayType => arrayType.ElementType,    // casting is necessary for multidimensional arrays
-                _ => null
-            }
-            : null;
+        return semanticModel.GetTypeInfo(CollectionExpression()).Type switch
+        {
+            INamedTypeSymbol { TypeArguments: { Length: 1 } typeArguments } => typeArguments.First(),
+            IArrayTypeSymbol { Rank: 1 } arrayType => arrayType.ElementType,    // casting is necessary for multidimensional arrays
+            _ => null
+        };
 
         ExpressionSyntax CollectionExpression() =>
             methodSymbol.MethodKind is MethodKind.ReducedExtension
                 ? invocation.Expression switch
                 {
                     MemberAccessExpressionSyntax { Expression: { } memberAccessExpression } => memberAccessExpression,
-                    MemberBindingExpressionSyntax => invocation.GetParentConditionalAccessExpression().Expression,
-                    _ => null
+                    _ => invocation.GetParentConditionalAccessExpression()?.Expression,
                 }
                 : invocation.ArgumentList.Arguments.FirstOrDefault()?.Expression;
     }
