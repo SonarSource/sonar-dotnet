@@ -77,12 +77,11 @@ public class SonarLintXmlReader
             using var reader = XmlReader.Create(sr);
             return (SonarLintXml)serializer.Deserialize(reader);
         }
-        catch (Exception)
+        catch
         {
             return SonarLintXml.Empty;
         }
     }
-}
 
     private List<SonarLintXmlRule> ReadRuleParameters() =>
         sonarLintXml is { Rules: { } rules }
