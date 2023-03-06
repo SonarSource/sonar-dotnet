@@ -90,13 +90,22 @@ public partial class RoslynSymbolicExecutionTest
     public void Nullable_Ctor_NoArguments_SetsNullConstraint()
     {
         const string code = """
-            int? explicitType = new Nullable<int>();
-            int? targetTyped = new();
-            Tag("ExplicitType", explicitType);
-            Tag("TargetTyped", targetTyped);
+            public void Main<T>() where T: struct
+            {
+                int? explicitType = new Nullable<int>();
+                int? targetTyped = new();
+                T? genericValue = new T();
+                T? genericNull = new T?();
+                Tag("ExplicitType", explicitType);
+                Tag("TargetTyped", targetTyped);
+                Tag("GenericValue", genericValue);
+                Tag("GenericNull", genericNull);
+            }
             """;
-        var validator = SETestContext.CreateCS(code).Validator;
+        var validator = SETestContext.CreateCSMethod(code).Validator;
         validator.ValidateTag("ExplicitType", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
         validator.ValidateTag("TargetTyped", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue("new() of int produces value 0"));
+        validator.ValidateTag("GenericValue", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue("new() of T produces value T"));
+        validator.ValidateTag("GenericNull", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
 }
 }
