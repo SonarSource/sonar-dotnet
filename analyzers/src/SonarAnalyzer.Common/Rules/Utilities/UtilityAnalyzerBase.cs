@@ -98,7 +98,7 @@ namespace SonarAnalyzer.Rules
                 var treeMessages = new List<TMessage>();
                 startContext.RegisterSemanticModelAction(modelContext =>
                 {
-                    if (ShouldGenerateMetrics(modelContext))
+                    if (ShouldCreateMetrics(modelContext))
                     {
                         treeMessages.Add(CreateMessage(modelContext.Tree, modelContext.SemanticModel));
                     }
@@ -122,14 +122,15 @@ namespace SonarAnalyzer.Rules
                 });
             });
 
-        protected virtual bool ShouldGenerateMetrics(SyntaxTree tree) =>
+        protected virtual bool ShouldGenerateMetrics(SonarSematicModelReportingContext context) =>
             // The results of Metrics and CopyPasteToken analyzers are not needed for Test projects yet the plugin side expects the protobuf files, so we create empty ones.
             (AnalyzeTestProjects || !IsTestProject)
-            && FileExtensionWhitelist.Contains(Path.GetExtension(tree.FilePath))
-            && (AnalyzeGeneratedCode || !Language.GeneratedCodeRecognizer.IsGenerated(tree));
+            && FileExtensionWhitelist.Contains(Path.GetExtension(context.Tree.FilePath))
+            && (AnalyzeGeneratedCode || !Language.GeneratedCodeRecognizer.IsGenerated(context.Tree))
+            && context.ShouldAnalyzeFile(context.Tree.FilePath);
 
-        private bool ShouldGenerateMetrics(SonarSematicModelReportingContext context) =>
+        private bool ShouldCreateMetrics(SonarSematicModelReportingContext context) =>
             (AnalyzeUnchangedFiles || !context.IsUnchanged(context.Tree))
-            && ShouldGenerateMetrics(context.Tree);
+            && ShouldGenerateMetrics(context);
     }
 }
