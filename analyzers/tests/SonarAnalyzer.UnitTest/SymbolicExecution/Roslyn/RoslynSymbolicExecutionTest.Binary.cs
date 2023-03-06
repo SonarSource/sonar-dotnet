@@ -185,7 +185,9 @@ else
                 "True & True",
                 "False & True",
                 "False & False",
+                "isFalse & arg True Unreachable",
                 "isFalse & arg False",
+                "arg & isFalse True Unreachable",
                 "arg & isFalse False",
                 "isTrue & arg True",
                 "isTrue & arg False",
@@ -251,7 +253,9 @@ else
                 "False | True",
                 "False | False",
                 "isTrue | arg True",
+                "isTrue | arg False Unreachable",
                 "arg | isTrue True",
+                "arg | isTrue False Unreachable",
                 "isFalse | arg True",
                 "isFalse | arg False",
                 "arg | isFalse True",
@@ -382,7 +386,7 @@ Tag(""ForSymbolSymbolNone"", forSymbolSymbolNone);";
             validator.ValidateTag("ForNullSymbol", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
             validator.ValidateTag("ForSymbolSymbolTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
             validator.ValidateTag("ForSymbolSymbolFalse", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
-            validator.ValidateTag("ForSymbolSymbolNone", x => x.Should().BeNull("We can't tell if two instances are equivalent."));
+            validator.ValidateTag("ForSymbolSymbolNone", x => x.HasConstraint<BoolConstraint>().Should().BeFalse("We can't tell if two instances are equivalent."));
         }
 
         [DataTestMethod]
@@ -480,7 +484,7 @@ Tag(""ForSymbolSymbolNone"", forSymbolSymbolNone);";
             validator.ValidateTag("ForNullSymbol", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
             validator.ValidateTag("ForSymbolSymbolTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
             validator.ValidateTag("ForSymbolSymbolFalse", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
-            validator.ValidateTag("ForSymbolSymbolNone", x => x.Should().BeNull("We can't tell if two instances are equivalent."));
+            validator.ValidateTag("ForSymbolSymbolNone", x => x.HasConstraint<BoolConstraint>().Should().BeFalse("We can't tell if two instances are equivalent."));
         }
 
         [DataTestMethod]
