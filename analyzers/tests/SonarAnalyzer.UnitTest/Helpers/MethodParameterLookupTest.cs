@@ -364,50 +364,50 @@ public class MethodParameterLookupTest
         {
             lookup.TryGetSyntax(SpecialParameter, out var symbol).Should().Be(false);
 
-                foreach (var parameter in method.Parameters)
+            foreach (var parameter in method.Parameters)
+            {
+                if (parameter.IsParams && lookup.TryGetSyntax(parameter, out var expressions))
                 {
-                    if (parameter.IsParams && lookup.TryGetSyntax(parameter, out var expressions))
-                    {
-                        var expected = ExtractExpectedValue(expectedArguments, parameter.Name).Should().BeAssignableTo<IEnumerable>().Subject.Cast<object>();
-                        expressions.Select(x => ConstantValue(x)).Should().Equal(expected);
-                    }
-                    else if (!parameter.IsParams && lookup.TryGetNonParamsSyntax(parameter, out var expression))
-                    {
-                        ConstantValue(expression).Should().Be(ExtractExpectedValue(expectedArguments, parameter.Name));
-                    }
-                    else if (!parameter.IsOptional && !parameter.IsParams)
-                    {
-                        Assert.Fail($"TryGetSyntax missing {parameter.Name}");
-                    } // Else it's OK
+                    var expected = ExtractExpectedValue(expectedArguments, parameter.Name).Should().BeAssignableTo<IEnumerable>().Subject.Cast<object>();
+                    expressions.Select(x => ConstantValue(x)).Should().Equal(expected);
                 }
+                else if (!parameter.IsParams && lookup.TryGetNonParamsSyntax(parameter, out var expression))
+                {
+                    ConstantValue(expression).Should().Be(ExtractExpectedValue(expectedArguments, parameter.Name));
+                }
+                else if (!parameter.IsOptional && !parameter.IsParams)
+                {
+                    Assert.Fail($"TryGetSyntax missing {parameter.Name}");
+                } // Else it's OK
             }
+        }
 
         private void InspectTryGetSymbol(MethodParameterLookupBase<TArgumentSyntax> lookup, object expectedArguments, TArgumentSyntax[] arguments)
         {
             lookup.TryGetSymbol(SpecialArgument, out var parameter).Should().Be(false);
 
-                foreach (var argument in arguments)
+            foreach (var argument in arguments)
+            {
+                if (lookup.TryGetSymbol(argument, out var symbol))
                 {
-                    if (lookup.TryGetSymbol(argument, out var symbol))
+                    var value = ExtractArgumentValue(argument);
+                    var expected = ExtractExpectedValue(expectedArguments, symbol.Name);
+                    if (symbol.IsParams)
                     {
-                        var value = ExtractArgumentValue(argument);
-                        var expected = ExtractExpectedValue(expectedArguments, symbol.Name);
-                        if (symbol.IsParams)
-                        {
-                            // Expected contains all values {1, 2, 3} for ParamArray/params, but foreach is probing one at a time
-                            expected.Should().BeAssignableTo<IEnumerable>().Which.Cast<object>().Should().Contain(value);
-                        }
-                        else
-                        {
-                            value.Should().Be(expected);
-                        }
+                        // Expected contains all values {1, 2, 3} for ParamArray/params, but foreach is probing one at a time
+                        expected.Should().BeAssignableTo<IEnumerable>().Which.Cast<object>().Should().Contain(value);
                     }
                     else
                     {
-                        Assert.Fail($"TryGetParameterSymbol missing {argument.ToString()}");
+                        value.Should().Be(expected);
                     }
                 }
+                else
+                {
+                    Assert.Fail($"TryGetParameterSymbol missing {argument.ToString()}");
+                }
             }
+        }
 
         private static object ExtractExpectedValue(object expected, string name)
         {
