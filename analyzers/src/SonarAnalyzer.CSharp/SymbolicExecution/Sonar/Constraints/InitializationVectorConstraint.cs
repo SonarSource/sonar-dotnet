@@ -18,19 +18,18 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.SymbolicExecution.Constraints;
+
 namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
 {
     internal class InitializationVectorConstraint : SymbolicConstraint
     {
-        public static readonly InitializationVectorConstraint NotInitialized = new();
-        public static readonly InitializationVectorConstraint Initialized = new();
+        public static readonly InitializationVectorConstraint NotInitialized = new(ConstraintKind.InitializationVectorNotInitialized);
+        public static readonly InitializationVectorConstraint Initialized = new(ConstraintKind.InitializationVectorInitialized);
 
         public override SymbolicConstraint Opposite =>
             this == Initialized ? NotInitialized : Initialized;
 
-        protected override string Name =>
-            this == Initialized ? nameof(Initialized) : nameof(NotInitialized);
-
-        private InitializationVectorConstraint() { }
+        private InitializationVectorConstraint(ConstraintKind kind) : base(kind) { }
     }
 }

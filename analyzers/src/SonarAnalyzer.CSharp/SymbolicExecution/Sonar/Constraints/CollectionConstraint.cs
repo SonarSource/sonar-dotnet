@@ -18,19 +18,18 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.SymbolicExecution.Constraints;
+
 namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
 {
     internal sealed class CollectionConstraint : SymbolicConstraint
     {
-        public static readonly CollectionConstraint Empty = new();
-        public static readonly CollectionConstraint NotEmpty = new();
+        public static readonly CollectionConstraint Empty = new(ConstraintKind.CollectionEmpty);
+        public static readonly CollectionConstraint NotEmpty = new(ConstraintKind.CollectionNotEmpty);
 
         public override SymbolicConstraint Opposite =>
             this == Empty ? NotEmpty : Empty;
 
-        protected override string Name =>
-            this == Empty ? nameof(Empty) : nameof(NotEmpty);
-
-        private CollectionConstraint() { }
+        private CollectionConstraint(ConstraintKind kind) : base(kind) { }
     }
 }
