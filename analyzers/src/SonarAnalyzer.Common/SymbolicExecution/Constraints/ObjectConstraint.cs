@@ -22,17 +22,22 @@ namespace SonarAnalyzer.SymbolicExecution.Constraints
 {
     internal sealed class ObjectConstraint : SymbolicConstraint
     {
-        public static readonly ObjectConstraint Null = new();
-        public static readonly ObjectConstraint NotNull = new();
+        public static readonly ObjectConstraint Null = new(ConstraintKind.ObjectNull);
+        public static readonly ObjectConstraint NotNull = new(ConstraintKind.ObjectNotNull);
 
         public override SymbolicConstraint Opposite =>
             // x == null ? <Null> : <NotNull>
             // x == "" ? <NotNull> : <unknown, could be Null or NotNull here>
             this == Null ? NotNull : null;
 
-        protected override string Name =>
-            this == Null ? nameof(Null) : nameof(NotNull);
+        private ObjectConstraint(ConstraintKind kind) : base(kind) { }
 
-        private ObjectConstraint() { }
+        public override string ToString() =>
+            Kind switch
+            {
+                ConstraintKind.ObjectNull => nameof(Null),
+                ConstraintKind.ObjectNotNull => nameof(NotNull),
+                _ => base.ToString(),
+            };
     }
 }

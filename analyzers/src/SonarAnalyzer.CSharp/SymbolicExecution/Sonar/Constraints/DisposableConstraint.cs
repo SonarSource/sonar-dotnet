@@ -18,19 +18,18 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.SymbolicExecution.Constraints;
+
 namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
 {
     internal sealed class DisposableConstraint : SymbolicConstraint
     {
-        public static readonly DisposableConstraint Disposed = new();
-        public static readonly DisposableConstraint NotDisposed = new();
+        public static readonly DisposableConstraint Disposed = new(ConstraintKind.DisposableDisposed);
+        public static readonly DisposableConstraint NotDisposed = new(ConstraintKind.DisposableNotDisposed);
 
         public override SymbolicConstraint Opposite =>
             this == Disposed ? NotDisposed : Disposed;
 
-        protected override string Name =>
-            this == Disposed ? nameof(Disposed) : nameof(NotDisposed);
-
-        private DisposableConstraint() { }
+        private DisposableConstraint(ConstraintKind kind) : base(kind) { }
     }
 }

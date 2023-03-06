@@ -35,10 +35,10 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.Constraints
 
         [TestMethod]
         public void GivenIvIsInitialized_ToStringShouldBe_Initialized() =>
-            InitializationVectorConstraint.Initialized.ToString().Should().Be("Initialized");
+            InitializationVectorConstraint.Initialized.ToString().Should().Be("InitializationVectorInitialized");
 
         [TestMethod]
         public void GivenIvIsNotInitialized_ToStringShouldBe_NotInitialized() =>
-            InitializationVectorConstraint.NotInitialized.ToString().Should().Be("NotInitialized");
+            InitializationVectorConstraint.NotInitialized.ToString().Should().Be("InitializationVectorNotInitialized");
     }
 }

@@ -22,21 +22,26 @@ namespace SonarAnalyzer.SymbolicExecution.Constraints
 {
     public sealed class BoolConstraint : SymbolicConstraint
     {
-        public static readonly BoolConstraint True = new();
-        public static readonly BoolConstraint False = new();
+        public static readonly BoolConstraint True = new(ConstraintKind.BoolTrue);
+        public static readonly BoolConstraint False = new(ConstraintKind.BoolFalse);
 
         public override SymbolicConstraint Opposite =>
             this == True ? False : True;
 
-        protected override string Name =>
-            this == True ? nameof(True) : nameof(False);
-
-        private BoolConstraint() { }
+        private BoolConstraint(ConstraintKind kind) : base(kind) { }
 
         public static BoolConstraint From(bool value) =>
             value ? True : False;
 
         public bool Equals(bool value) =>
             this == From(value);
+
+        public override string ToString() =>
+            Kind switch
+            {
+                ConstraintKind.BoolTrue => nameof(True),
+                ConstraintKind.BoolFalse => nameof(False),
+                _ => base.ToString(),
+            };
     }
 }
