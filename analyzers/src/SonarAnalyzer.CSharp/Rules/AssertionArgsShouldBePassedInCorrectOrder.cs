@@ -83,12 +83,12 @@ public sealed class AssertionArgsShouldBePassedInCorrectOrder : SonarDiagnosticA
                                                       KnownAssertParameters knownParameters) =>
         container.Is(knownParameters.AssertClass)
         && CSharpFacade.Instance.MethodParameterLookup(argumentList, symbol) is var parameterLookup
-        && parameterLookup.TryGetSyntax(knownParameters.ExpectedParamterName, out var expectedArguments)
+        && parameterLookup.TryGetSyntax(knownParameters.ExpectedParameterName, out var expectedArguments)
         && expectedArguments.FirstOrDefault() is { } expected
         && semanticModel.GetConstantValue(expected).HasValue is false
         && parameterLookup.TryGetSyntax(knownParameters.ActualParameterName, out var actualArguments)
         && actualArguments.FirstOrDefault() is { } actual
-        && semanticModel.GetConstantValue(actual).HasValue is true
+        && semanticModel.GetConstantValue(actual).HasValue
             ? new(expected, actual)
             : null;
 
@@ -97,6 +97,6 @@ public sealed class AssertionArgsShouldBePassedInCorrectOrder : SonarDiagnosticA
             ? argument1.Parent.CreateLocation(argument2.Parent)
             : argument2.Parent.CreateLocation(argument1.Parent);
 
-    private readonly record struct KnownAssertParameters(KnownType AssertClass, string ExpectedParamterName, string ActualParameterName);
+    private readonly record struct KnownAssertParameters(KnownType AssertClass, string ExpectedParameterName, string ActualParameterName);
     private readonly record struct WrongArguments(SyntaxNode Expected, SyntaxNode Actual);
 }
