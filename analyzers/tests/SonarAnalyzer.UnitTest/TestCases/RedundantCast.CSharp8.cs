@@ -13,17 +13,17 @@ namespace Tests.Diagnostics
             var objects= new object[1];
             var moreInts = new int[1][];
             var moreObjects = new object[1][];
-            ints?.Cast<int>();              // Compliant FN
+            ints?.Cast<int>();              // Noncompliant
             objects?.Cast<int>();           // Compliant
             moreInts[0].Cast<int>();        // Noncompliant
             moreObjects[0].Cast<int>();     // Compliant
-            moreInts[0]?.Cast<int>();       // Compliant FN
+            moreInts[0]?.Cast<int>();       // Noncompliant
             moreObjects[0]?.Cast<int>();    // Compliant
             GetInts().Cast<int>();          // Noncompliant
             GetObjects().Cast<int>();       // Compliant
-            GetInts()?.Cast<int>();         // Compliant FN
+            GetInts()?.Cast<int>();         // Noncompliant
             GetObjects()?.Cast<int>();      // Compliant
-            Enumerable.Cast<int>();         // Error
+            Enumerable.Cast<int>();         // Error - overload resolution failure
         }
 
         public static int[] GetInts() => null;

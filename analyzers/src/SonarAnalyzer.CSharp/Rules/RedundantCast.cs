@@ -143,21 +143,14 @@ public sealed class RedundantCast : SonarDiagnosticAnalyzer
             }
             : null;
 
-        ExpressionSyntax CollectionExpression()
-        {
-            if (methodSymbol.MethodKind == MethodKind.Ordinary)
-            {
-                if (invocation.ArgumentList.Arguments.FirstOrDefault() is { Expression: { } firstArgumentExpression })
+        ExpressionSyntax CollectionExpression() =>
+            methodSymbol.MethodKind is MethodKind.ReducedExtension
+                ? invocation.Expression switch
                 {
-                    return firstArgumentExpression;
+                    MemberAccessExpressionSyntax { Expression: { } memberAccessExpression } => memberAccessExpression,
+                    MemberBindingExpressionSyntax => invocation.GetParentConditionalAccessExpression().Expression,
+                    _ => null
                 }
-            }
-            else if (invocation is { Expression: MemberAccessExpressionSyntax { Expression: { } memberAccessExpression } })
-            {
-                return memberAccessExpression;
-            }
-
-            return null;
-        }
+                : invocation.ArgumentList.Arguments.FirstOrDefault()?.Expression;
     }
 }
