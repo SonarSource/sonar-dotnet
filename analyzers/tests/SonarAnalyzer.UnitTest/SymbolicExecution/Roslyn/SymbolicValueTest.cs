@@ -38,16 +38,16 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var sut = new SymbolicValue();
 
             sut = sut.WithConstraint(LockConstraint.Held);
-            sut.ToString().Should().Be("Held");
+            sut.ToString().Should().Be("LockHeld");
 
             sut = sut.WithConstraint(TestConstraint.First);
-            sut.ToString().Should().Be("First, Held");
+            sut.ToString().Should().Be("First, LockHeld");
 
             sut = sut.WithConstraint(TestConstraint.Second);   // Override First to Second
-            sut.ToString().Should().Be("Held, Second");
+            sut.ToString().Should().Be("LockHeld, Second");
 
             sut = sut.WithConstraint(DummyConstraint.Dummy);
-            sut.ToString().Should().Be("Dummy, Held, Second");
+            sut.ToString().Should().Be("Dummy, LockHeld, Second");
         }
 
         [TestMethod]

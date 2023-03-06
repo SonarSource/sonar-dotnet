@@ -71,10 +71,32 @@ internal sealed class PropertyReference : SimpleProcessor<IPropertyReferenceOper
     protected override IPropertyReferenceOperationWrapper Convert(IOperation operation) =>
         IPropertyReferenceOperationWrapper.FromOperation(operation);
 
-    protected override ProgramState Process(SymbolicContext context, IPropertyReferenceOperationWrapper propertyReference) =>
-        propertyReference.Instance.TrackedSymbol() is { } symbol
-            ? context.SetSymbolConstraint(symbol, ObjectConstraint.NotNull)
-            : context.State;
+    protected override ProgramState Process(SymbolicContext context, IPropertyReferenceOperationWrapper propertyReference)
+    {
+        var state = context.State;
+        if (propertyReference.Instance.TrackedSymbol() is { } symbol)
+        {
+            if (propertyReference.Instance.Type.IsNullableValueType())
+            {
+                if (propertyReference.Property.Name == "Value" && state[symbol] is { } value)
+                {
+                    state = state.SetOperationValue(context.Operation, value);
+                }
+                else if (propertyReference.Property.Name == "HasValue")
+                {
+                    // Return directly, do not set NotNull on the symbol itself
+                    return state[symbol]?.Constraint<ObjectConstraint>() is { } objectConstraint
+                        ? state.SetOperationConstraint(context.Operation, BoolConstraint.From(objectConstraint == ObjectConstraint.NotNull))
+                        : state;
+                }
+            }
+            return state.SetSymbolConstraint(symbol, ObjectConstraint.NotNull);
+        }
+        else
+        {
+            return state;
+        }
+    }
 }
 
 internal sealed class ArrayElementReference : SimpleProcessor<IArrayElementReferenceOperationWrapper>

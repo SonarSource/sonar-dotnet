@@ -35,10 +35,10 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.Constraints
 
         [TestMethod]
         public void GivenByteArrayIsInitialized_ToStringShouldBe_Initialized() =>
-            ByteArrayConstraint.Constant.ToString().Should().Be("Constant");
+            ByteArrayConstraint.Constant.ToString().Should().Be("ByteArrayConstant");
 
         [TestMethod]
         public void GivenByteArrayIsNotInitialized_ToStringShouldBe_NotInitialized() =>
-            ByteArrayConstraint.Modified.ToString().Should().Be("Modified");
+            ByteArrayConstraint.Modified.ToString().Should().Be("ByteArrayModified");
     }
 }

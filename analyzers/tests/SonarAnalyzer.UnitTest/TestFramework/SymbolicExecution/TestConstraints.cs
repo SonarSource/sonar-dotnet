@@ -19,30 +19,44 @@
  */
 
 using SonarAnalyzer.SymbolicExecution;
+using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 {
-    internal class TestConstraint : SymbolicConstraint
+    internal enum ConstraintKindTest
     {
-        public static readonly TestConstraint First = new("First");
-        public static readonly TestConstraint Second = new("Second");
+        // Make sure to not conflict with the "real" ConstraintKind values:
+        First = -1,
+        Second = -2,
+        Dummy = -3,
+        Fake = -4,
+    }
+
+    internal abstract class TestConstraintBase : SymbolicConstraint
+    {
+        protected TestConstraintBase(ConstraintKindTest kind) : base((ConstraintKind)kind) { }
+
+        public override string ToString() =>
+            ((ConstraintKindTest)Kind).ToString("G");
+    }
+
+    internal sealed class TestConstraint : TestConstraintBase
+    {
+        public static readonly TestConstraint First = new(ConstraintKindTest.First);
+        public static readonly TestConstraint Second = new(ConstraintKindTest.Second);
 
         public override SymbolicConstraint Opposite =>
             this == First ? Second : First;
 
-        protected override string Name { get; }
-
-        private TestConstraint(string name) =>
-            Name = name;
+        private TestConstraint(ConstraintKindTest kind) : base(kind) { }
     }
 
-    internal class DummyConstraint : SymbolicConstraint
+    internal sealed class DummyConstraint : TestConstraintBase
     {
         public static readonly DummyConstraint Dummy = new();
 
-        public override SymbolicConstraint Opposite => throw new System.NotImplementedException();
-        protected override string Name { get; } = "Dummy";
+        public override SymbolicConstraint Opposite => throw new NotImplementedException();
 
-        private DummyConstraint() { }
+        private DummyConstraint() : base(ConstraintKindTest.Dummy) { }
     }
 }

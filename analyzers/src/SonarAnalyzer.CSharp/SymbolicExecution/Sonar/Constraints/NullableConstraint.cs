@@ -18,19 +18,18 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.SymbolicExecution.Constraints;
+
 namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
 {
     internal sealed class NullableConstraint : SymbolicConstraint
     {
-        public static readonly NullableConstraint NoValue = new();
-        public static readonly NullableConstraint HasValue = new();
+        public static readonly NullableConstraint NoValue = new(ConstraintKind.NullableNoValue);
+        public static readonly NullableConstraint HasValue = new(ConstraintKind.NullableHasValue);
 
         public override SymbolicConstraint Opposite =>
             this == NoValue ? HasValue : NoValue;
 
-        protected override string Name =>
-            this == NoValue ? nameof(NoValue) : nameof(HasValue);
-
-        private NullableConstraint() { }
+        private NullableConstraint(ConstraintKind kind) : base(kind) { }
     }
 }
