@@ -5,6 +5,31 @@ using System.Linq;
 #nullable enable
 namespace Tests.Diagnostics
 {
+    public class InvocationTests
+    {
+        public static void Invocations()
+        {
+            var ints = new int[1];
+            var objects= new object[1];
+            var moreInts = new int[1][];
+            var moreObjects = new object[1][];
+            ints?.Cast<int>();              // Compliant FN
+            objects?.Cast<int>();           // Compliant
+            moreInts[0].Cast<int>();        // Noncompliant
+            moreObjects[0].Cast<int>();     // Compliant
+            moreInts[0]?.Cast<int>();       // Compliant FN
+            moreObjects[0]?.Cast<int>();    // Compliant
+            GetInts().Cast<int>();          // Noncompliant
+            GetObjects().Cast<int>();       // Compliant
+            GetInts()?.Cast<int>();         // Compliant FN
+            GetObjects()?.Cast<int>();      // Compliant
+            Enumerable.Cast<int>();         // Error
+        }
+
+        public static int[] GetInts() => null;
+        public static object[] GetObjects() => null;
+    }
+
     // https://github.com/SonarSource/sonar-dotnet/issues/3273
     public class CastOnNullable
     {
