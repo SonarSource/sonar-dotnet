@@ -17,30 +17,30 @@
       <Key>sonar.cs.roslyn.ignoreIssues</Key>
       <Value>false</Value>
     </Setting>
-	<Setting>
-	  <Key>sonar.exclusions</Key>
-	  <Value>Fake/Exclusions/**/*,Fake/Exclusions/Second*/**/*</Value>
-	</Setting>
-	<Setting>
-	  <Key>sonar.inclusions</Key>
-	  <Value>Fake/Inclusions/**/*,Fake/Inclusions/Second*/**/*</Value>
-	</Setting>
-	<Setting>
-	  <Key>sonar.global.exclusions</Key>
-	  <Value>Fake/GlobalExclusions/**/*,Fake/GlobalExclusions/Second*/**/*</Value>
-	</Setting>
-	<Setting>
-	  <Key>sonar.test.exclusions</Key>
-	  <Value>Fake/TestExclusions/**/*,Fake/TestExclusions/Second*/**/*</Value>
-	</Setting>
-	<Setting>
-	  <Key>sonar.test.inclusions</Key>
-	  <Value>Fake/TestInclusions/**/*,Fake/TestInclusions/Second*/**/*</Value>
-	</Setting>
-	<Setting>
+    <Setting>
+      <Key>sonar.exclusions</Key>
+      <Value>Fake/Exclusions/**/*,Fake/Exclusions/Second*/**/*</Value>
+    </Setting>
+    <Setting>
+      <Key>sonar.inclusions</Key>
+      <Value>Fake/Inclusions/**/*,Fake/Inclusions/Second*/**/*</Value>
+    </Setting>
+    <Setting>
+      <Key>sonar.global.exclusions</Key>
+      <Value>Fake/GlobalExclusions/**/*,Fake/GlobalExclusions/Second*/**/*</Value>
+    </Setting>
+    <Setting>
+      <Key>sonar.test.exclusions</Key>
+      <Value>Fake/TestExclusions/**/*,Fake/TestExclusions/Second*/**/*</Value>
+    </Setting>
+    <Setting>
+      <Key>sonar.test.inclusions</Key>
+      <Value>Fake/TestInclusions/**/*,Fake/TestInclusions/Second*/**/*</Value>
+    </Setting>
+    <Setting>
       <Key>sonar.global.test.exclusions</Key>
       <Value>Fake/GlobalTestExclusions/**/*,Fake/GlobalTestExclusions/Second*/**/*</Value>
-	</Setting>
+    </Setting>
   </Settings>
   <Rules>
     <Rule>
