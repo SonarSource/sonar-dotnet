@@ -884,12 +884,12 @@ f()();";
         }
 
         [DataTestMethod]
-        [DataRow("null", "null", true, "Null", "Null")]
-        [DataRow("null", "new object()", false, "Null", "NotNull")]
-        [DataRow("new object()", "null", false, "NotNull", "Null")]
-        [DataRow("new int?()", "null", false, "NotNull", "Null")]   // Should be "true" and "Null" because new int()? is still null
-        [DataRow("new int?(42)", "null", false, "NotNull", "Null")]
-        public void Invocation_Equals_LearnResult(string left, string right, bool? expectedResult, string expectedConstraintsLeft, string expectedConstraintsRight)
+        [DataRow("null", "null", true, ConstraintKind.ObjectNull, ConstraintKind.ObjectNull)]
+        [DataRow("null", "new object()", false, ConstraintKind.ObjectNull, ConstraintKind.ObjectNotNull)]
+        [DataRow("new object()", "null", false, ConstraintKind.ObjectNotNull, ConstraintKind.ObjectNull)]
+        [DataRow("new int?()", "null", false, ConstraintKind.ObjectNotNull, ConstraintKind.ObjectNull)]   // Should be "true" and "Null" because new int()? is still null
+        [DataRow("new int?(42)", "null", false, ConstraintKind.ObjectNotNull, ConstraintKind.ObjectNull)]
+        public void Invocation_Equals_LearnResult(string left, string right, bool expectedResult, ConstraintKind expectedConstraintLeft, ConstraintKind expectedConstraintRight)
         {
             var code = $@"
 object left = {left};
@@ -899,9 +899,9 @@ Tag(""Result"", result);
 Tag(""Left"", left);
 Tag(""Right"", right);";
             var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("Result", x => x.HasConstraint(BoolConstraint.From(expectedResult.Value)).Should().BeTrue());
-            validator.ValidateTag("Left", x => x.AllConstraints.Select(x => x.ToString()).OrderBy(x => x).JoinStr(", ").Should().Be(expectedConstraintsLeft));
-            validator.ValidateTag("Right", x => x.AllConstraints.Select(x => x.ToString()).OrderBy(x => x).JoinStr(", ").Should().Be(expectedConstraintsRight));
+            validator.ValidateTag("Result", x => x.HasConstraint(BoolConstraint.From(expectedResult)).Should().BeTrue());
+            validator.ValidateTag("Left", x => x.AllConstraints.Select(x => x.Kind).Should().ContainSingle().Which.Should().Be(expectedConstraintLeft));
+            validator.ValidateTag("Right", x => x.AllConstraints.Select(x => x.Kind).Should().ContainSingle().Which.Should().Be(expectedConstraintRight));
         }
 
         [DataTestMethod]

@@ -18,15 +18,21 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.SymbolicExecution.Constraints;
+
 namespace SonarAnalyzer.SymbolicExecution
 {
     public abstract class SymbolicConstraint
     {
+        public ConstraintKind Kind { get; }
         public abstract SymbolicConstraint Opposite { get; }
-        protected abstract string Name { get; }
         public virtual bool PreserveOnFieldReset => false;
 
-        public sealed override string ToString() => Name;
+        protected SymbolicConstraint(ConstraintKind kind) =>
+            Kind = kind;
+
+        public override string ToString() =>
+            Kind.ToString("G");
 
         public SymbolicConstraint ApplyOpposite(bool useOpposite) =>
             useOpposite ? Opposite : this;

@@ -35,10 +35,10 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.Constraints
 
         [TestMethod]
         public void GivenSaltSizeIsShort_ToStringShouldBe_Short() =>
-            SaltSizeConstraint.Short.ToString().Should().Be("Short");
+            SaltSizeConstraint.Short.ToString().Should().Be("SaltSizeShort");
 
         [TestMethod]
         public void GivenSaltSizeIsSafe_ToStringShouldBe_Safe() =>
-            SaltSizeConstraint.Safe.ToString().Should().Be("Safe");
+            SaltSizeConstraint.Safe.ToString().Should().Be("SaltSizeSafe");
     }
 }
