@@ -4,15 +4,6 @@ using System.Linq;
 
 public class EmptyNullableValueAccess
 {
-    protected void LogFailure(Exception e)
-    {
-        try
-        {
-            var message = e == null ? null : e;
-        }
-        finally { }
-    }
-
     private IEnumerable<TestClass> numbers = new[]
     {
         new TestClass { Number = 42 },
@@ -36,12 +27,6 @@ public class EmptyNullableValueAccess
         {
             o.ToString(); // Compliant
         }
-    }
-
-    private int i0;
-    public void SetI0()
-    {
-        i0 = 42;
     }
 
     public void TestNull()
