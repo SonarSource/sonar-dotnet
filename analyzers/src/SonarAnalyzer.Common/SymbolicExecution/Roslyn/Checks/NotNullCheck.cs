@@ -27,7 +27,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
     {
         protected override ProgramState PreProcessSimple(SymbolicContext context) =>
             context.Operation.Instance.Type is { } type && type.IsNonNullableValueType()
-                ? context.State.SetOperationValue(context.Operation, SymbolicValue.NotNull)
+                ? context.State.SetOperationConstraint(context.Operation, ObjectConstraint.NotNull)
                 : context.State;
     }
 }
