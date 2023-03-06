@@ -970,7 +970,6 @@ Tag(""End"");";
             var validator = SETestContext.CreateCS(code).Validator;
             var result = validator.Symbol("result");
             validator.TagStates("End").Should().SatisfyRespectively(
-                x => x[result].HasConstraint(BoolConstraint.True).Should().BeTrue(),
                 x => x[result].HasConstraint(BoolConstraint.False).Should().BeTrue());
         }
 
