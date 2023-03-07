@@ -407,6 +407,18 @@ public void Main<T>() where T : new()
         }
 
         [TestMethod]
+        public void Range_SetsNotNull()
+        {
+            const string code = """
+            var range = 0..1;
+            Tag("Range", range);
+            """;
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateContainsOperation(OperationKind.Range);
+            validator.ValidateTag("Range", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        }
+
+        [TestMethod]
         public void Literal_NullAndDefault_SetsNull_CS()
         {
             const string code = @"
