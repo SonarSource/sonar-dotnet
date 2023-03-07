@@ -32,7 +32,8 @@ internal sealed class Conversion : SimpleProcessor<IConversionOperationWrapper>
         && PropagateSymbolValue(value, conversion) is { } propagatedValue
             ? context.State.SetOperationValue(context.Operation, propagatedValue)
             : context.State;
-    private SymbolicValue PropagateSymbolValue(SymbolicValue value, IConversionOperationWrapper conversion)
+
+    private static SymbolicValue PropagateSymbolValue(SymbolicValue value, IConversionOperationWrapper conversion)
     {
         if (conversion.Type.IsNonNullableValueType())
         {
