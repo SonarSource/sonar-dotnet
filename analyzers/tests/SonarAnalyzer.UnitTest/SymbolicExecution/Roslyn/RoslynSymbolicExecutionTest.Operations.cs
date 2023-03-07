@@ -19,6 +19,7 @@
  */
 
 using Microsoft.CodeAnalysis.Operations;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
@@ -505,6 +506,17 @@ Tag(""This"", fromThis);";
             validator.ValidateContainsOperation(OperationKind.InstanceReference);
             validator.ValidateContainsOperation(OperationKind.FieldReference);  // To execute implicitCheck
             validator.ValidateTag("This", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void SizeOf_SetNotNullconstraint()
+        {
+            var code = """
+            var size = sizeof(int);
+            Tag("Size", size);
+            """;
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("Size", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
         }
 
         [DataTestMethod]
