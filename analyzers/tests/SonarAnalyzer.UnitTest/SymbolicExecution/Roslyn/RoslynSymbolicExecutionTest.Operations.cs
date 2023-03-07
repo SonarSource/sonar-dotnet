@@ -198,7 +198,7 @@ public void Method()
         public void Conversion_ToLocalNonNullableValueType_CS()
         {
             var validator = SETestContext.CreateCS("""
-                object o = null; // Set ObjectConstrint.Null and Dummy (LiteralDummyTestCheck)
+                object o = null; // Set ObjectConstraint.Null and Dummy (LiteralDummyTestCheck)
 
                 int convert = System.Convert.ToInt32(o);
                 int explicitCast = (int)o;
@@ -216,7 +216,7 @@ public void Method()
         public void Conversion_ToLocalNonNullableValueType_VB()
         {
             var validator = SETestContext.CreateVB("""
-                Dim o As Object = Nothing ' Set ObjectConstrint.Null and Dummy (LiteralDummyTestCheck)
+                Dim o As Object = Nothing ' Set ObjectConstraint.Null and Dummy (LiteralDummyTestCheck)
                 Dim iCType As Integer
                 Dim iDirectCast As Integer
                 Dim iImplicit As Integer
