@@ -52,19 +52,18 @@ namespace SonarAnalyzer.Rules
 
         protected void ReadParameters(SonarCompilationStartAnalysisContext context)
         {
-            var settings = context.Options.ParseSonarLintXmlSettings();
             var outPath = context.ProjectConfiguration().OutPath;
             // For backward compatibility with S4MSB <= 5.0
             if (outPath == null && context.Options.ProjectOutFolderPath() is { } projectOutFolderAdditionalFile)
             {
                 outPath = projectOutFolderAdditionalFile.GetText().ToString().TrimEnd();
             }
-            if (settings.Any() && !string.IsNullOrEmpty(outPath))
+            if (context.Options.SonarLintXml() != null && !string.IsNullOrEmpty(outPath))
             {
-                var language = context.Compilation.Language;
-                IgnoreHeaderComments = context.SonarLintFile().IgnoreHeaderComments;
-                AnalyzeGeneratedCode = PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(settings, language);
-                OutPath = Path.Combine(outPath, language == LanguageNames.CSharp ? "output-cs" : "output-vbnet");
+                var sonarLintXml = context.SonarLintFile();
+                IgnoreHeaderComments = sonarLintXml.IgnoreHeaderComments;
+                AnalyzeGeneratedCode = sonarLintXml.AnalyzeGeneratedCode;
+                OutPath = Path.Combine(outPath, context.Compilation.Language == LanguageNames.CSharp ? "output-cs" : "output-vbnet");
                 IsAnalyzerEnabled = true;
                 IsTestProject = context.IsTestProject();
             }
