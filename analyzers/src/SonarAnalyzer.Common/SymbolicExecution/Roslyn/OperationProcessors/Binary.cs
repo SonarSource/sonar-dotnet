@@ -71,11 +71,7 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
     {
         var leftBool = left?.Constraint<BoolConstraint>();
         var rightBool = right?.Constraint<BoolConstraint>();
-        if (leftBool is null && rightBool is null)
-        {
-            return null;
-        }
-        else if (leftBool is null || rightBool is null)
+        if (leftBool is not null ^ rightBool is not null)
         {
             return kind switch
             {
@@ -88,7 +84,7 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
         {
             return BinaryBoolConstraint(kind, leftBool == BoolConstraint.True, rightBool == BoolConstraint.True);
         }
-        else if (left.HasConstraint<ObjectConstraint>() && right.HasConstraint<ObjectConstraint>())
+        else if (left?.HasConstraint<ObjectConstraint>() is true && right?.HasConstraint<ObjectConstraint>() is true)
         {
             return BinaryNullConstraint(kind, left.HasConstraint(ObjectConstraint.Null), right.HasConstraint(ObjectConstraint.Null));
         }
