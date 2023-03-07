@@ -126,9 +126,9 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
     }
 
     public bool ShouldAnalyzeFile(string filePath) =>
-        ProjectConfiguration().ProjectType == ProjectType.Unknown // SonarLint, NuGet or Scanner <= 5.0
-        && FileInclusionCache.GetValue(Compilation, _ => new()) is var cache
-        && cache.GetOrAdd(filePath, _ => IsFileIncluded(filePath));
+        ProjectConfiguration().ProjectType != ProjectType.Unknown
+        || (FileInclusionCache.GetValue(Compilation, _ => new()) is var cache // SonarLint, NuGet or Scanner <= 5.0
+            && cache.GetOrAdd(filePath, _ => IsFileIncluded(filePath)));
 
     private ImmutableHashSet<string> CreateUnchangedFilesHashSet() =>
         ImmutableHashSet.Create(StringComparer.OrdinalIgnoreCase, ProjectConfiguration().AnalysisConfig?.UnchangedFiles() ?? Array.Empty<string>());
