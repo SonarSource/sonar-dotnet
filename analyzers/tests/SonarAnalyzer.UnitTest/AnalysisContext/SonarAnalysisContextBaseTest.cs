@@ -225,6 +225,8 @@ public partial class SonarAnalysisContextBaseTest
     [DataRow(null)]
     [DataRow("\\foo\\bar\\does-not-exit")]
     [DataRow("\\foo\\bar\\x.xml")]
+    [DataRow("path//aSonarLint.xml")] // different name
+    [DataRow("path//SonarLint.xmla")] // different extension
     public void SonarLintFile_WhenAdditionalFileNotPresent_ReturnsDefaultValues(string folder)
     {
         var sut = CreateSut(AnalysisScaffolding.CreateOptions(folder)).SonarLintFile();
