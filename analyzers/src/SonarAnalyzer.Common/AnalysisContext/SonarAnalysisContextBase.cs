@@ -133,11 +133,6 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
     private ImmutableHashSet<string> CreateUnchangedFilesHashSet() =>
         ImmutableHashSet.Create(StringComparer.OrdinalIgnoreCase, ProjectConfiguration().AnalysisConfig?.UnchangedFiles() ?? Array.Empty<string>());
 
-    private bool ShouldAnalyzeGenerated() =>
-        Options.SonarLintXml() is { } sonarLintXml
-        && AnalysisContext.TryGetValue(sonarLintXml.GetText(), ShouldAnalyzeGeneratedProvider(Compilation.Language), out var shouldAnalyzeGenerated)
-        && shouldAnalyzeGenerated;
-
     private bool IsFileIncluded(string filePath) =>
         IsTestProject()
         ? IsFileIncluded(SonarLintFile().TestInclusions, SonarLintFile().TestExclusions, SonarLintFile().GlobalTestExclusions, filePath)
