@@ -107,7 +107,6 @@ public partial class RoslynSymbolicExecutionTest
         validator.ValidateTag("TargetTyped", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue("new() of int produces value 0"));
         validator.ValidateTag("GenericValue", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue("new() of T produces value T"));
         validator.ValidateTag("GenericNull", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-}
     }
 
     [TestMethod]
