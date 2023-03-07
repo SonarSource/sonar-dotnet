@@ -70,6 +70,14 @@ public partial class SonarAnalysisContextBaseTest
     public void ShouldAnalyzeFile_TestInclusions_ReturnExpected(string filePath, string[] testInclusions, ProjectType projectType, bool shouldAnalyze) =>
         AssertShouldAnalyzeFile(filePath, projectType, shouldAnalyze, testInclusions: testInclusions);
 
+    [DataTestMethod]
+    [DataRow("Foo", new string[] { "Foo" }, new string[] { "Foo" }, ProjectType.Product, false)]
+    [DataRow("Foo", new string[] { "NotFoo" }, new string[] { "Foo" }, ProjectType.Product, false)]
+    [DataRow("Foo", new string[] { "Foo" }, new string[] { "NotFoo" }, ProjectType.Product, true)]
+    [DataRow("Foo", new string[] { "NotFoo" }, new string[] { "NotFoo" }, ProjectType.Product, false)]
+    public void ShouldAnalyzeFile_MixedInput_ReturnExpected(string filePath, string[] inclusions, string[] exclusions, ProjectType projectType, bool shouldAnalyze) =>
+        AssertShouldAnalyzeFile(filePath, projectType, shouldAnalyze, inclusions: inclusions, exclusions: exclusions);
+
     private void AssertShouldAnalyzeFile(
         string filePath,
         ProjectType projectType,
