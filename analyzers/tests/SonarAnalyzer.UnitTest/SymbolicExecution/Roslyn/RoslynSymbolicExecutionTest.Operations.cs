@@ -395,6 +395,18 @@ public void Main<T>() where T : new()
         }
 
         [TestMethod]
+        public void Index_SetsNotNull()
+        {
+            const string code = """
+            var index = ^0;
+            Tag("Index", index);
+            """;
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateContainsOperation(OperationKind.Unary);
+            validator.ValidateTag("Index", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        }
+
+        [TestMethod]
         public void Literal_NullAndDefault_SetsNull_CS()
         {
             const string code = @"
