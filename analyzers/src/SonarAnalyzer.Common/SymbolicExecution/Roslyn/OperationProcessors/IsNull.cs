@@ -27,8 +27,8 @@ internal sealed class IsNull : BranchingProcessor<IIsNullOperationWrapper>
     protected override IIsNullOperationWrapper Convert(IOperation operation) =>
         IIsNullOperationWrapper.FromOperation(operation);
 
-    protected override SymbolicConstraint BoolConstraintFromOperation(SymbolicContext context, IIsNullOperationWrapper operation) =>
-        context.State[operation.Operand] is { } value && value.HasConstraint<ObjectConstraint>()
+    protected override SymbolicConstraint BoolConstraintFromOperation(ProgramState state, IIsNullOperationWrapper operation) =>
+        state[operation.Operand] is { } value && value.HasConstraint<ObjectConstraint>()
             ? BoolConstraint.From(value.HasConstraint(ObjectConstraint.Null))
             : null;
 
