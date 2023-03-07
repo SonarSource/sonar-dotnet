@@ -60,14 +60,19 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             Exceptions = original.Exceptions;
         }
 
+        public ProgramState SetOperationValue(IOperationWrapper operation, SymbolicValue value) =>
+            operation is null
+                ? throw new ArgumentNullException(nameof(operation))
+                : SetOperationValue(operation.WrappedOperation, value);
+
         public ProgramState SetOperationValue(IOperationWrapperSonar operation, SymbolicValue value) =>
-            operation == null
+            operation is null
                 ? throw new ArgumentNullException(nameof(operation))
                 : SetOperationValue(operation.Instance, value);
 
         public ProgramState SetOperationValue(IOperation operation, SymbolicValue value) =>
             (operation ?? throw new ArgumentNullException(nameof(operation))) is var _
-            && value == null
+            && value is null
                 ? this with { OperationValue = OperationValue.Remove(ResolveCapture(operation)) }
                 : this with { OperationValue = OperationValue.SetItem(ResolveCapture(operation), value) };
 
@@ -78,7 +83,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             SetOperationValue(operation, (this[operation] ?? new()).WithConstraint(constraint));
 
         public ProgramState SetSymbolValue(ISymbol symbol, SymbolicValue value) =>
-            value == null
+            value is null
                 ? this with { SymbolValue = SymbolValue.Remove(symbol) }
                 : this with { SymbolValue = SymbolValue.SetItem(symbol, value) };
 
