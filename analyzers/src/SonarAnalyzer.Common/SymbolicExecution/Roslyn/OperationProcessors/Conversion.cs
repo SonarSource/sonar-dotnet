@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.SymbolicExecution.Constraints;
+
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
 internal sealed class Conversion : SimpleProcessor<IConversionOperationWrapper>
@@ -27,6 +29,15 @@ internal sealed class Conversion : SimpleProcessor<IConversionOperationWrapper>
 
     protected override ProgramState Process(SymbolicContext context, IConversionOperationWrapper conversion) =>
         context.State[conversion.Operand] is { } value && conversion.OperatorMethod is null // Built-in conversions only
+        && PropagateSymbolValue(value, conversion) is { } propagatedValue
             ? context.State.SetOperationValue(context.Operation, value)
             : context.State;
+    private SymbolicValue PropagateSymbolValue(SymbolicValue value, IConversionOperationWrapper conversion)
+    {
+        if (conversion.Type.IsNonNullableValueType())
+        {
+            value = value.WithConstraint(ObjectConstraint.NotNull);
+        }
+        return value;
+    }
 }
