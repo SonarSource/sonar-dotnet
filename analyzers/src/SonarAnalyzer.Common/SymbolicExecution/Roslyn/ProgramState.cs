@@ -36,6 +36,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         public ExceptionState Exception => Exceptions.IsEmpty ? null : Exceptions.Peek();
         public SymbolicValue this[IOperationWrapperSonar operation] => this[operation.Instance];
+        public SymbolicValue this[IOperationWrapper operation] => this[operation.WrappedOperation];
         public SymbolicValue this[IOperation operation] => OperationValue.TryGetValue(ResolveCapture(operation), out var value) ? value : null;
         public SymbolicValue this[ISymbol symbol] => SymbolValue.TryGetValue(symbol, out var value) ? value : null;
         public IOperation this[CaptureId capture] => CaptureOperation.TryGetValue(capture, out var value) ? value : null;
