@@ -101,11 +101,10 @@ public partial class SonarAnalysisContextBaseTest
         sut.ShouldAnalyzeTree(tree, CSharpGeneratedCodeRecognizer.Instance).Should().BeTrue();
 
         // GetText should be called every time ShouldAnalyzeGenerated is called...
-        additionalText.Verify(x => x.GetText(It.IsAny<CancellationToken>()), Times.Exactly(6)); // ToDo - reduce this number when SonarLintXmlReader will be used to access all properties.
-        sonarLintXml.ToStringCallCount.Should().Be(2); // ... but we should only try to read the file once // ToDo - reduce this number when SonarLintXmlReader will be used to access all properties.
+        additionalText.Verify(x => x.GetText(It.IsAny<CancellationToken>()), Times.Exactly(6));
+        sonarLintXml.ToStringCallCount.Should().Be(1); // ... but we should only try to read the file once
     }
 
-    [Ignore("Temporarely ignored until the new SonarLintXmlReader will be used to access all properties.")] // ToDo - remove this when SonarLintXmlReader will be used to access all properties.
     [DataTestMethod]
     [DataRow(GeneratedFileName, false)]
     [DataRow(OtherFileName, true)]
@@ -136,7 +135,6 @@ public partial class SonarAnalysisContextBaseTest
         sut.ShouldAnalyzeTree(tree, CSharpGeneratedCodeRecognizer.Instance).Should().BeTrue();
     }
 
-    [Ignore("Temporarely ignored until the new SonarLintXmlReader will be used to access all properties.")] // ToDo - remove this when SonarLintXmlReader will be used to access all properties.
     [DataTestMethod]
     [DataRow(GeneratedFileName, LanguageNames.CSharp, false)]
     [DataRow(OtherFileName, LanguageNames.CSharp, true)]
