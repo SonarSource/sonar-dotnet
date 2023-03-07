@@ -27,7 +27,7 @@ namespace SonarAnalyzer.AnalysisContext;
 
 public class SonarAnalysisContextBase
 {
-    protected static readonly ConditionalWeakTable<Compilation, ConcurrentDictionary<string, bool>> IncludedExcludedFilesCache = new();
+    protected static readonly ConditionalWeakTable<Compilation, ConcurrentDictionary<string, bool>> FileInclusionCache = new();
     protected static readonly ConditionalWeakTable<Compilation, ImmutableHashSet<string>> UnchangedFilesCache = new();
     protected static readonly SourceTextValueProvider<ProjectConfigReader> ProjectConfigProvider = new(x => new ProjectConfigReader(x));
     protected static readonly SourceTextValueProvider<SonarLintXmlReader> SonarLintXmlProviderCS = new(x => new SonarLintXmlReader(x, LanguageNames.CSharp));
@@ -125,12 +125,10 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
             descriptor.CustomTags.Contains(tag);
     }
 
-    /// <summary>
-    /// Check if the current file path is included or excuded and caches the result.
-    /// </summary>
     public bool ShouldAnalyzeFile(string filePath) =>
-        IncludedExcludedFilesCache.GetValue(Compilation, x => new()) is var cache
-        && cache.GetOrAdd(filePath, _ => IsFileIncludedExcluded(filePath));
+        ProjectConfiguration().ProjectType == ProjectType.Unknown // SonarLint, NuGet or Scanner <= 5.0
+        && FileInclusionCache.GetValue(Compilation, _ => new()) is var cache
+        && cache.GetOrAdd(filePath, _ => IsFileIncluded(filePath));
 
     private ImmutableHashSet<string> CreateUnchangedFilesHashSet() =>
         ImmutableHashSet.Create(StringComparer.OrdinalIgnoreCase, ProjectConfiguration().AnalysisConfig?.UnchangedFiles() ?? Array.Empty<string>());
@@ -140,12 +138,12 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
         && AnalysisContext.TryGetValue(sonarLintXml.GetText(), ShouldAnalyzeGeneratedProvider(Compilation.Language), out var shouldAnalyzeGenerated)
         && shouldAnalyzeGenerated;
 
-    private bool IsFileIncludedExcluded(string filePath) =>
+    private bool IsFileIncluded(string filePath) =>
         IsTestProject()
-        ? IsFileIncludedExcluded(SonarLintFile().TestInclusions, SonarLintFile().TestExclusions, SonarLintFile().GlobalTestExclusions, filePath)
-        : IsFileIncludedExcluded(SonarLintFile().Inclusions, SonarLintFile().Exclusions, SonarLintFile().GlobalExclusions, filePath);
+        ? IsFileIncluded(SonarLintFile().TestInclusions, SonarLintFile().TestExclusions, SonarLintFile().GlobalTestExclusions, filePath)
+        : IsFileIncluded(SonarLintFile().Inclusions, SonarLintFile().Exclusions, SonarLintFile().GlobalExclusions, filePath);
 
-    private static bool IsFileIncludedExcluded(string[] inclusions, string[] exclusions, string[] globalExclusions, string filePath) =>
+    private static bool IsFileIncluded(string[] inclusions, string[] exclusions, string[] globalExclusions, string filePath) =>
         IsIncluded(inclusions, filePath)
         && !IsExcluded(exclusions, filePath)
         && !IsExcluded(globalExclusions, filePath);

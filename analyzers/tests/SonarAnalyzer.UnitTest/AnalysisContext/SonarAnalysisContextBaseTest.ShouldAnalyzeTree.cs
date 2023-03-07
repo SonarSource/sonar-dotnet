@@ -102,11 +102,11 @@ public partial class SonarAnalysisContextBaseTest
         sut.ShouldAnalyzeTree(tree, CSharpGeneratedCodeRecognizer.Instance).Should().BeTrue();
 
         // GetText should be called every time ShouldAnalyzeGenerated is called...
-        additionalText.Verify(x => x.GetText(It.IsAny<CancellationToken>()), Times.Exactly(6)); // TEMPORARILY BUMPED TO 6
-        sonarLintXml.ToStringCallCount.Should().Be(2); // ... but we should only try to read the file once // TEMPORARILY BUMPED TO 2
+        additionalText.Verify(x => x.GetText(It.IsAny<CancellationToken>()), Times.Exactly(6)); // ToDo - reduce this number when SonarLintXmlReader will be used to access all properties.
+        sonarLintXml.ToStringCallCount.Should().Be(2); // ... but we should only try to read the file once // ToDo - reduce this number when SonarLintXmlReader will be used to access all properties.
     }
 
-    [Ignore("Temporarely ignored until the new SonarLintXmlReader will be used to access all properties.")]
+    [Ignore("Temporarely ignored until the new SonarLintXmlReader will be used to access all properties.")] // ToDo - remove this when SonarLintXmlReader will be used to access all properties.
     [DataTestMethod]
     [DataRow(GeneratedFileName, false)]
     [DataRow(OtherFileName, true)]
@@ -137,7 +137,7 @@ public partial class SonarAnalysisContextBaseTest
         sut.ShouldAnalyzeTree(tree, CSharpGeneratedCodeRecognizer.Instance).Should().BeTrue();
     }
 
-    [Ignore("Temporarely ignored until the new SonarLintXmlReader will be used to access all properties.")]
+    [Ignore("Temporarely ignored until the new SonarLintXmlReader will be used to access all properties.")] // ToDo - remove this when SonarLintXmlReader will be used to access all properties.
     [DataTestMethod]
     [DataRow(GeneratedFileName, false)]
     [DataRow(OtherFileName, true)]
@@ -329,6 +329,19 @@ public partial class SonarAnalysisContextBaseTest
             public class GenericAttribute<T> : Attribute { }
             """;
         VerifyEmpty("test.cs", sourceCs, new CS.EmptyStatement());
+    }
+
+    [DataTestMethod]
+    [DataRow(new string[] { }, new string[] { }, true)]
+    [DataRow(new string[] { $"{OtherFileName}.cs" }, new string[] { }, true)]
+    [DataRow(new string[] { }, new string[] { $"{OtherFileName}.cs" }, false)]
+    [DataRow(new string[] { $"{OtherFileName}.cs" }, new string[] { $"{OtherFileName}.cs" }, false)]
+    public void ShouldAnalyzeTree_SonarLint_ExclusionSet(string[] inclusions, string[] exclusions, bool expected)
+    {
+        var sonarLintXml = AnalysisScaffolding.CreateSonarLintXml(TestContext, exclusions: exclusions, inclusions: inclusions);
+        var options = AnalysisScaffolding.CreateOptions(sonarLintXml);
+
+        ShouldAnalyzeTree(options).Should().Be(expected);
     }
 
     private static DummySourceText CreateSonarLintXml(bool analyzeGeneratedCSharp) =>
