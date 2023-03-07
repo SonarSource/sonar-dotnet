@@ -195,6 +195,48 @@ public void Method()
         }
 
         [TestMethod]
+        public void Conversion_ToLocalNonNullableValueType_CS()
+        {
+            var validator = SETestContext.CreateCS("""
+                object o = null; // Set NotNull and Dummy (LiteralDummyTestCheck)
+
+                int convert = System.Convert.ToInt32(o);
+                int explicitCast = (int)o;
+
+                Tag("Object", o);
+                Tag("Convert", convert);
+                Tag("Explicit", explicitCast);
+                """, new LiteralDummyTestCheck()).Validator;
+            validator.ValidateTag("Object", x => x.AllConstraints.Select(x => x.Kind).Should().BeEquivalentTo(new[] { ConstraintKind.ObjectNull, (ConstraintKind)ConstraintKindTest.Dummy }));
+            validator.ValidateTag("Convert", x => x.AllConstraints.Select(x => x.Kind).Should().BeEquivalentTo(new[] { ConstraintKind.ObjectNotNull }));
+            validator.ValidateTag("Explicit", x => x.AllConstraints.Select(x => x.Kind).Should().BeEquivalentTo(new[] { ConstraintKind.ObjectNotNull, (ConstraintKind)ConstraintKindTest.Dummy }));
+        }
+
+        [TestMethod]
+        public void Conversion_ToLocalNonNullableValueType_VB()
+        {
+            var validator = SETestContext.CreateVB("""
+                Dim o As Object = Nothing ' Set NotNull and Dummy (LiteralDummyTestCheck)
+                Dim iCType As Integer
+                Dim iDirectCast As Integer
+                Dim iImplicit As Integer
+
+                iCType = CType(o, Integer)
+                iDirectCast = DirectCast(o, Integer)
+                iImplicit = o
+
+                Tag("Object", o)
+                Tag("CType", iCType)
+                Tag("DirectCast", iDirectCast)
+                Tag("Implicit", iImplicit)
+                """, new LiteralDummyTestCheck()).Validator;
+            validator.ValidateTag("Object", x => x.AllConstraints.Select(x => x.Kind).Should().BeEquivalentTo(new[] { ConstraintKind.ObjectNull, (ConstraintKind)ConstraintKindTest.Dummy }));
+            validator.ValidateTag("CType", x => x.AllConstraints.Select(x => x.Kind).Should().BeEquivalentTo(new[] { ConstraintKind.ObjectNotNull, (ConstraintKind)ConstraintKindTest.Dummy }));
+            validator.ValidateTag("DirectCast", x => x.AllConstraints.Select(x => x.Kind).Should().BeEquivalentTo(new[] { ConstraintKind.ObjectNotNull, (ConstraintKind)ConstraintKindTest.Dummy }));
+            validator.ValidateTag("Implicit", x => x.AllConstraints.Select(x => x.Kind).Should().BeEquivalentTo(new[] { ConstraintKind.ObjectNotNull, (ConstraintKind)ConstraintKindTest.Dummy }));
+        }
+
+        [TestMethod]
         public void Argument_Ref_ResetsConstraints_CS() =>
             SETestContext.CreateCS(@"var b = true; Main(boolParameter, ref b); Tag(""B"", b);", ", ref bool outParam").Validator.ValidateTag("B", x => x.Should().BeNull());
 
