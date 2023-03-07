@@ -30,19 +30,11 @@ public class SonarAnalysisContextBase
     protected static readonly SourceTextValueProvider<ProjectConfigReader> ProjectConfigProvider = new(x => new ProjectConfigReader(x));
     protected static readonly SourceTextValueProvider<SonarLintXmlReader> SonarLintXmlProviderCS = new(x => new SonarLintXmlReader(x, LanguageNames.CSharp));
     protected static readonly SourceTextValueProvider<SonarLintXmlReader> SonarLintXmlProviderVB = new(x => new SonarLintXmlReader(x, LanguageNames.VisualBasic));
-    private static readonly Lazy<SourceTextValueProvider<bool>> ShouldAnalyzeGeneratedCS = new(() => CreateAnalyzeGeneratedProvider(LanguageNames.CSharp));
-    private static readonly Lazy<SourceTextValueProvider<bool>> ShouldAnalyzeGeneratedVB = new(() => CreateAnalyzeGeneratedProvider(LanguageNames.VisualBasic));
 
     protected SonarAnalysisContextBase() { }
 
     protected static SourceTextValueProvider<SonarLintXmlReader> SonarLintXmlReader(string language) =>
         language == LanguageNames.CSharp ? SonarLintXmlProviderCS : SonarLintXmlProviderVB;
-
-    protected static SourceTextValueProvider<bool> ShouldAnalyzeGeneratedProvider(string language) =>
-        language == LanguageNames.CSharp ? ShouldAnalyzeGeneratedCS.Value : ShouldAnalyzeGeneratedVB.Value;
-
-    private static SourceTextValueProvider<bool> CreateAnalyzeGeneratedProvider(string language) =>
-        new(x => PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(PropertiesHelper.ParseXmlSettings(x), language));
 }
 
 public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextBase
@@ -63,7 +55,7 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
     /// <param name="tree">Tree to decide on. Can be null for Symbol-based and Compilation-based scenarios. And we want to analyze those too.</param>
     /// <param name="generatedCodeRecognizer">When set, generated trees are analyzed only when language-specific 'analyzeGeneratedCode' configuration property is also set.</param>
     public bool ShouldAnalyzeTree(SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer) =>
-        (generatedCodeRecognizer is null || ShouldAnalyzeGenerated() || !tree.IsGenerated(generatedCodeRecognizer, Compilation))
+        (generatedCodeRecognizer is null || SonarLintFile().AnalyzeGeneratedCode || !tree.IsGenerated(generatedCodeRecognizer, Compilation))
         && (tree is null || !IsUnchanged(tree));
 
     /// <summary>
@@ -132,9 +124,4 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
 
     private ImmutableHashSet<string> CreateUnchangedFilesHashSet() =>
         ImmutableHashSet.Create(StringComparer.OrdinalIgnoreCase, ProjectConfiguration().AnalysisConfig?.UnchangedFiles() ?? Array.Empty<string>());
-
-    private bool ShouldAnalyzeGenerated() =>
-        Options.SonarLintXml() is { } sonarLintXml
-        && AnalysisContext.TryGetValue(sonarLintXml.GetText(), ShouldAnalyzeGeneratedProvider(Compilation.Language), out var shouldAnalyzeGenerated)
-        && shouldAnalyzeGenerated;
 }
