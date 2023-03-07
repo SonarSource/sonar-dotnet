@@ -54,7 +54,7 @@ public partial class RoslynSymbolicExecutionTest
             """;
         var setter = new PreProcessTestCheck(OperationKind.Literal, x => x.Operation.Instance.ConstantValue.Value is false ? x.SetOperationConstraint(TestConstraint.First) : x.State);
         var validator = SETestContext.CreateCS(code, ", bool? arg", setter).Validator;
-        validator.ValidateTag("Unknown", x => x.Should().BeNull());
+        validator.ValidateTag("Unknown", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue("Accessing .Value would already throw, so it is NotNull by now"));
         validator.ValidateTag("True", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
         validator.ValidateTag("FalseFirst", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
         validator.ValidateTag("FalseFirst", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());

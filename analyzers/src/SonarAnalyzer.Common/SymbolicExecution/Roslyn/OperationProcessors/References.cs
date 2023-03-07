@@ -66,37 +66,37 @@ internal sealed class FieldReference : SimpleProcessor<IFieldReferenceOperationW
     }
 }
 
-internal sealed class PropertyReference : SimpleProcessor<IPropertyReferenceOperationWrapper>
+internal sealed class PropertyReference : BranchingProcessor<IPropertyReferenceOperationWrapper>
 {
     protected override IPropertyReferenceOperationWrapper Convert(IOperation operation) =>
         IPropertyReferenceOperationWrapper.FromOperation(operation);
 
-    protected override ProgramState Process(SymbolicContext context, IPropertyReferenceOperationWrapper propertyReference)
+    protected override ProgramState PreProcess(ProgramState state, IPropertyReferenceOperationWrapper operation)
     {
-        var state = context.State;
-        if (propertyReference.Instance.TrackedSymbol() is { } symbol)
+        if (operation.Instance.TrackedSymbol() is { } symbol)
         {
-            if (propertyReference.Instance.Type.IsNullableValueType())
+            if (!IsNullableHasValue(operation))
             {
-                if (propertyReference.Property.Name == "Value" && state[symbol] is { } value)
-                {
-                    state = state.SetOperationValue(context.Operation, value);
-                }
-                else if (propertyReference.Property.Name == "HasValue")
-                {
-                    // Return directly, do not set NotNull on the symbol itself
-                    return state[symbol]?.Constraint<ObjectConstraint>() is { } objectConstraint
-                        ? state.SetOperationConstraint(context.Operation, BoolConstraint.From(objectConstraint == ObjectConstraint.NotNull))
-                        : state;
-                }
+                state = state.SetSymbolConstraint(symbol, ObjectConstraint.NotNull);
             }
-            return state.SetSymbolConstraint(symbol, ObjectConstraint.NotNull);
+            if (operation.Property.Name == "Value" && state[symbol] is { } value)
+            {
+                state = state.SetOperationValue(operation, value);
+            }
         }
-        else
-        {
-            return state;
-        }
+        return state;
     }
+
+    protected override SymbolicConstraint BoolConstraintFromOperation(ProgramState state, IPropertyReferenceOperationWrapper operation) =>
+        IsNullableHasValue(operation) && state[operation.Instance]?.Constraint<ObjectConstraint>() is { } objectConstraint
+            ? BoolConstraint.From(objectConstraint == ObjectConstraint.NotNull)
+            : null;
+
+    protected override ProgramState LearnBranchingConstraint(ProgramState state, IPropertyReferenceOperationWrapper operation, bool falseBranch) =>
+        state;  // ToDo: Implement later to support branching on .HasValue
+
+    private static bool IsNullableHasValue(IPropertyReferenceOperationWrapper operation) =>
+        operation.Instance.Type.IsNullableValueType() && operation.Property.Name == "HasValue";
 }
 
 internal sealed class ArrayElementReference : SimpleProcessor<IArrayElementReferenceOperationWrapper>
