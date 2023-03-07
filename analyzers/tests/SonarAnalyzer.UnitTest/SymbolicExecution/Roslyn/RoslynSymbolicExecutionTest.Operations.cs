@@ -394,6 +394,8 @@ public void Main<T>() where T : new()
             validator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
         }
 
+#if NET
+
         [TestMethod]
         public void Index_SetsNotNull()
         {
@@ -417,6 +419,8 @@ public void Main<T>() where T : new()
             validator.ValidateContainsOperation(OperationKind.Range);
             validator.ValidateTag("Range", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
         }
+
+#endif
 
         [TestMethod]
         public void Literal_NullAndDefault_SetsNull_CS()
