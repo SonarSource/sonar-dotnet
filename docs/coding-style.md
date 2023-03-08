@@ -27,16 +27,16 @@ Static fields and properties should be placed before instance ones.
 
 Static methods are preferred to be after instance methods.
 
-Once grouped as specified above, methods which are called by other methods in the same group should be placed below the callers.
+Methods which are called by other methods in the same category should be placed below the callers.
 
 ```csharp
-public int PublicMethod() => 42;
+public int Bar() => 2;
 
-int CallerOne() => Leaf();
+int CallerOne(int x) => Foo() + x;
 
-int CallerTwo() => Leaf() + PublicMethod();
+int CallerTwo(int x) => Foo() + x + Bar();
 
-int Leaf() =>  42;
+int Foo() =>  1; // this is placed at the bottom, as it's a "leaf" method within the same category
 ```
 
 Local functions should always be placed at the end of a method.
