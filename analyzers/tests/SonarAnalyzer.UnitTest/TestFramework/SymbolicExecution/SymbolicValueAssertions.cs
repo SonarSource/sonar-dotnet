@@ -45,14 +45,15 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
                 .FailWith("The {context:SymbolicValue} is null and can not have constraint {0}.", expected)
                 .Then
                 .Given(() => Subject.AllConstraints.ToList())
-                .ForCondition(actual => actual.Count > 0)
+                .ForCondition(actuals => actuals.Count > 0)
                 .FailWith("Expected {context:SymbolicValue} to have constraint {0}{reason}, but SymbolicValue has no constraints.", expected)
                 .Then
-                .ForCondition(actual => actual.Count == 1)
+                .ForCondition(actuals => actuals.Count == 1)
                 .FailWith("Expected {context:SymbolicValue} to have only constraint {0}{reason}, but SymbolicValue has {1} constraints.", _ => expected, x => x.OrderBy(x => x.ToString()))
                 .Then
-                .ForCondition(actual => actual[0] == expected)
-                .FailWith("Expected {context:SymbolicValue} to have constraint {0}{reason}, but SymbolicValue has {1} constraint.", _ => expected, actual => actual[0]);
+                .Given(actuals => actuals[0])
+                .ForCondition(actual => actual == expected)
+                .FailWith("Expected {context:SymbolicValue} to have constraint {0}{reason}, but SymbolicValue has {1} constraint.", _ => expected, actual => actual);
             return new(this, Subject.AllConstraints.Single());
         }
 
