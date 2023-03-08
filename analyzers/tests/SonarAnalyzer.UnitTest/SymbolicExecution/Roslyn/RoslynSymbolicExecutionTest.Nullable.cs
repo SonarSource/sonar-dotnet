@@ -85,4 +85,46 @@ public partial class RoslynSymbolicExecutionTest
         validator.ValidateTag("HasValueAfterNull", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
         validator.ValidateTag("SymbolAfterNull", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
     }
+
+    [TestMethod]
+    public void Nullable_Ctor_NoArguments_SetsNullConstraint()
+    {
+        const string code = """
+            public void Main<T>() where T: struct
+            {
+                int? explicitType = new Nullable<int>();
+                int? targetTyped = new();
+                T? genericValue = new T();
+                T? genericNull = new T?();
+                Tag("ExplicitType", explicitType);
+                Tag("TargetTyped", targetTyped);
+                Tag("GenericValue", genericValue);
+                Tag("GenericNull", genericNull);
+            }
+            """;
+        var validator = SETestContext.CreateCSMethod(code).Validator;
+        validator.ValidateTag("ExplicitType", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+        validator.ValidateTag("TargetTyped", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue("new() of int produces value 0"));
+        validator.ValidateTag("GenericValue", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue("new() of T produces value T"));
+        validator.ValidateTag("GenericNull", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+    }
+
+    [TestMethod]
+    public void Nullable_Ctor_Argument_PropagateConstraints()
+    {
+        const string code = """
+            var falseValue = false;     // This will set additional constraint TestConstraint.First
+            bool? isTrue = new Nullable<bool>(true);
+            bool? isFalse = new Nullable<bool>(falseValue);
+            int? isInt = new Nullable<int>(42);
+            Tag("IsTrue", isTrue);
+            Tag("IsFalse", isFalse);
+            Tag("IsInt", isInt);
+            """;
+        var setter = new PreProcessTestCheck(OperationKind.Literal, x => x.Operation.Instance.ConstantValue.Value is false ? x.SetOperationConstraint(TestConstraint.First) : x.State);
+        var validator = SETestContext.CreateCS(code, setter).Validator;
+        validator.ValidateTag("IsTrue", x => x.AllConstraints.Select(x => x.Kind).Should().BeEquivalentTo(new[] { ConstraintKind.ObjectNotNull, ConstraintKind.BoolTrue }));
+        validator.ValidateTag("IsFalse", x => x.AllConstraints.Select(x => x.Kind).Should().BeEquivalentTo(new[] { ConstraintKind.ObjectNotNull, ConstraintKind.BoolFalse, (ConstraintKind)ConstraintKindTest.First }));
+        validator.ValidateTag("IsInt", x => x.AllConstraints.Select(x => x.Kind).Should().BeEquivalentTo(new[] { ConstraintKind.ObjectNotNull }));
+    }
 }

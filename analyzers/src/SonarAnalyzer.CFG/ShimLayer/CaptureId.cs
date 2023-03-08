@@ -35,5 +35,8 @@ namespace StyleCop.Analyzers.Lightup
 
         public override int GetHashCode() =>
             instance.GetHashCode();
+
+        public string Serialize() =>
+            "#Capture-" + GetHashCode();
     }
 }
