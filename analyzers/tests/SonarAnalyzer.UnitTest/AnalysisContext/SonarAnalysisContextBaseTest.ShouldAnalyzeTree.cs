@@ -80,7 +80,6 @@ public partial class SonarAnalysisContextBaseTest
         var sonarLintXml = new DummySourceText(AnalysisScaffolding.GenerateSonarLintXmlContent(analyzeGeneratedCode: true));
         var (compilation, tree) = CreateDummyCompilation(AnalyzerLanguage.CSharp, fileName);
         var sut = CreateSut(compilation, CreateOptions(sonarLintXml, @"ResourceTests\Foo.xml"));
-
         sut.ShouldAnalyzeTree(tree, CSharpGeneratedCodeRecognizer.Instance).Should().Be(expected);
         sonarLintXml.ToStringCallCount.Should().Be(0, "this file doesn't have 'SonarLint.xml' name");
     }
@@ -479,5 +478,5 @@ public partial class SonarAnalysisContextBaseTest
 
         public override void CopyTo(int sourceIndex, char[] destination, int destinationIndex, int count) =>
             throw new NotImplementedException();
+        }
     }
-}
