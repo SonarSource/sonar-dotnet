@@ -45,10 +45,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void DeclareTypesInNamespaces_CS_AfterCSharp9() =>
-            builder
-                .AddPaths("DeclareTypesInNamespaces.AfterCSharp9.cs", "DeclareTypesInNamespaces.AfterCSharp9.PartialProgramClass.cs")
-                .WithTopLevelStatements()
-                .Verify();
+            builder.AddPaths("DeclareTypesInNamespaces.AfterCSharp9.cs").WithTopLevelStatements().Verify();
 
         [TestMethod]
         public void DeclareTypesInNamespaces_CS_AfterCSharp10() =>
