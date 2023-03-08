@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using FluentAssertions.Common;
 using FluentAssertions.Execution;
 using FluentAssertions.Primitives;
 using SonarAnalyzer.SymbolicExecution;
@@ -68,8 +67,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
             return new(this);
         }
 
-        public AndConstraint<SymbolicValueAssertions> HaveOnlyConstraints(params SymbolicConstraint[] expected)
-            => HaveOnlyConstraints(expected, string.Empty);
+        public AndConstraint<SymbolicValueAssertions> HaveOnlyConstraints(params SymbolicConstraint[] expected) =>
+            HaveOnlyConstraints(expected, string.Empty);
 
         public AndConstraint<SymbolicValueAssertions> HaveOnlyConstraints(IEnumerable<SymbolicConstraint> expected, string because = "", params object[] becauseArgs)
         {
