@@ -96,7 +96,7 @@ internal sealed class PropertyReference : BranchingProcessor<IPropertyReferenceO
         state;  // ToDo: Implement later to support branching on .HasValue
 
     private static bool IsNullableHasValue(IPropertyReferenceOperationWrapper operation) =>
-        operation.Instance.Type.IsNullableValueType() && operation.Property.Name == "HasValue";
+        operation.Instance is not null && operation.Instance.Type.IsNullableValueType() && operation.Property.Name == "HasValue";
 }
 
 internal sealed class ArrayElementReference : SimpleProcessor<IArrayElementReferenceOperationWrapper>
