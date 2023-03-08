@@ -28,35 +28,64 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : PublicMethodArguments
 
     public override bool ShouldExecute()
     {
-        // Should return true if:
-        // ✔ method is public, protected or protected internal
-        // ✔ method body is not empty
-        // ✔ method body is not a single "throw NotImplementedException();"
-        // - has parameters with reference type (or nullable value type?)
-        // - and at least one of those parameters are dereferenced
-        // - parameters don't have attributes which guard against null
-        // - nullability is not enabled
         return Node is BaseMethodDeclarationSyntax { } method
-         && MethodIsAccesibleFromOtherAssemblies(method)
-         && MethodHasBody(method)
-         && !MethodOnlyThrowsException(method)
-         && MethodBodyContainsDereferencedArguments(method);
+            && MethodIsAccesibleFromOtherAssemblies(method)
+            && MethodHasBody(method)
+            && !MethodOnlyThrowsException(method)
+            && MethodBodyDereferencesArguments(method);
 
         static bool MethodIsAccesibleFromOtherAssemblies(BaseMethodDeclarationSyntax method) =>
             method.Modifiers.Any(x => x.IsKind(SyntaxKind.PublicKeyword))
             || (method.Modifiers.Any(x => x.IsKind(SyntaxKind.ProtectedKeyword)) && !method.Modifiers.Any(x => x.IsKind(SyntaxKind.PrivateKeyword)));
 
         static bool MethodHasBody(BaseMethodDeclarationSyntax method) =>
-            method.Body != null || method.ExpressionBody() != null;
+            (method.Body != null && method.Body.Statements.Any()) || method.ExpressionBody() != null;
 
         static bool MethodOnlyThrowsException(BaseMethodDeclarationSyntax method) =>
             ThrowExpressionSyntaxWrapper.IsInstance(method.ExpressionBody()?.Expression)
             || ThrowExpressionSyntaxWrapper.IsInstance(method.Body?.Statements.FirstOrDefault());
 
-        bool MethodBodyContainsDereferencedArguments(BaseMethodDeclarationSyntax method)
+        static bool MethodBodyDereferencesArguments(BaseMethodDeclarationSyntax method)
         {
-            return false;
-            //SemanticModel.GetDeclaredSymbol(method).Parameters.Where(x => x.Type.IsNullableValueType() || x.Type.IsReferenceType);
+            var argumentNames = method.ParameterList.Parameters.Select(x => x.Identifier.ValueText).ToArray();
+            if (!argumentNames.Any())
+            {
+                return false;
+            }
+
+            var walker = new ArgumentDereferenceWalker(argumentNames);
+            return walker.PossiblyDereferencesMethodArguments;
+        }
+    }
+
+    private sealed class ArgumentDereferenceWalker : SafeCSharpSyntaxWalker
+    {
+        private readonly string[] argumentNames;
+
+        public bool PossiblyDereferencesMethodArguments { get; private set; }
+
+        public ArgumentDereferenceWalker(string[] argumentNames) =>
+            this.argumentNames = argumentNames;
+
+        public override void Visit(SyntaxNode node)
+        {
+            if (PossiblyDereferencesMethodArguments)
+            {
+                return;
+            }
+
+            if (node is IdentifierNameSyntax { } identifier
+                && argumentNames.Contains(identifier.Identifier.ValueText)
+                && identifier.Ancestors().Any(x => x.IsAnyKind(
+                    SyntaxKind.AwaitExpression,
+                    SyntaxKind.ElementAccessExpression,
+                    SyntaxKind.ForEachStatement,
+                    SyntaxKind.SimpleMemberAccessExpression,
+                    SyntaxKind.SimpleAssignmentExpression,
+                    SyntaxKind.VariableDeclarator)))
+            {
+                PossiblyDereferencesMethodArguments = true;
+            }
         }
     }
 }
