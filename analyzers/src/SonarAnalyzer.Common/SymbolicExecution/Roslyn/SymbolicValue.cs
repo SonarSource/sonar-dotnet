@@ -41,7 +41,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             SerializeConstraints();
 
         public SymbolicValue WithConstraint(SymbolicConstraint constraint) =>
-            this with { Constraints = Constraints.SetItem(constraint.GetType(), constraint) };
+            HasConstraint(constraint)
+                ? this
+                : this with { Constraints = Constraints.SetItem(constraint.GetType(), constraint) };
 
         public SymbolicValue WithoutConstraint(SymbolicConstraint constraint) =>
             HasConstraint(constraint)
