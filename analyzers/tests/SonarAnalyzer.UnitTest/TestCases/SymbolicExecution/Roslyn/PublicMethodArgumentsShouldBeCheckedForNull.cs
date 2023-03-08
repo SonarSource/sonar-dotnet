@@ -12,12 +12,12 @@ public class Program
 
         Bar(o); // Compliant, we care about dereference only
 
-        throw e; // FIXME Non-compliant
+        throw e; // FIXME Non-compliant - attempting to throw null as an exception will result in a NullReferenceException
     }
 
     public void Bar(object o) { }
 
-    protected void NotCompliantCases_Nonpublic(object o)
+    protected void NotCompliantCases_Protected(object o)
     {
         o.ToString(); // FIXME Non-compliant
     }
@@ -44,7 +44,7 @@ public class Program
         throw new NotImplementedException();
     }
 
-    public void CompliantCases(bool b, object o1, object o2, object o3, object o4, Exception e)
+    public void CompliantCases(bool b, object o1, object o2, object o3, object o4, object 05, Exception e)
     {
         if (o1 != null)
         {
@@ -65,6 +65,18 @@ public class Program
         {
             throw e; // Compliant
         }
+
+        if (o1 != null && o1 == o5)
+        {
+            o5.ToString();
+        }
+
+        if (o1 != null)
+        {
+            o5 = o1;
+            o5.ToString();
+        }
+
 
         o4?.ToString(); // Compliant, conditional operator
 

@@ -81,6 +81,7 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : PublicMethodArguments
                     SyntaxKind.AwaitExpression,
                     SyntaxKind.ElementAccessExpression,
                     SyntaxKind.ForEachStatement,
+                    SyntaxKind.ThrowStatement,
                     SyntaxKind.SimpleMemberAccessExpression,
                     SyntaxKind.SimpleAssignmentExpression,
                     SyntaxKind.VariableDeclarator)))
