@@ -133,60 +133,61 @@ End If";
         [TestMethod]
         public void Binary_BoolOperands_And()
         {
-            const string code = """
-                var isTrue = true;
-                var isFalse = false;
+            const string code = @"
+var isTrue = true;
+var isFalse = false;
 
-                if (isTrue & true)
-                    Tag("True & True");
-                else
-                    Tag("True & True Unreachable");
+if (isTrue & true)
+    Tag(""True & True"");
+else
+    Tag(""True & True Unreachable"");
 
-                if (false & isTrue)
-                    Tag("False & True Unreachable");
-                else
-                    Tag("False & True");
+if (false & isTrue)
+    Tag(""False & True Unreachable"");
+else
+    Tag(""False & True"");
 
-                if (false & isFalse)
-                    Tag("False & False Unreachable");
-                else
-                    Tag("False & False");
+if (false & isFalse)
+    Tag(""False & False Unreachable"");
+else
+    Tag(""False & False"");
 
-                if (isFalse & arg)
-                    Tag("isFalse & arg True Unreachable");
-                else
-                    Tag("isFalse & arg False");
+if (isFalse & arg)
+    Tag(""isFalse & arg True Unreachable"");
+else
+    Tag(""isFalse & arg False"");
 
-                if (arg & isFalse)
-                    Tag("arg & isFalse True Unreachable");
-                else
-                    Tag("arg & isFalse False");
+if (arg & isFalse)
+    Tag(""arg & isFalse True Unreachable"");
+else
+    Tag(""arg & isFalse False"");
 
-                if (isTrue & arg)
-                    Tag("isTrue & arg True");
-                else
-                    Tag("isTrue & arg False");
+if (isTrue & arg)
+    Tag(""isTrue & arg True"");
+else
+    Tag(""isTrue & arg False"");
 
-                if (arg & isTrue)
-                    Tag("arg & isTrue True");
-                else
-                    Tag("arg & isTrue False");
+if (arg & isTrue)
+    Tag(""arg & isTrue True"");
+else
+    Tag(""arg & isTrue False"");
 
-                if (isTrue && true)
-                    Tag("True && True");
-                else
-                    Tag("True && True Unreachable");
+if (isTrue && true)
+    Tag(""True && True"");
+else
+    Tag(""True && True Unreachable"");
 
-                if (isFalse && true)
-                    Tag("False && True Unreachable");
-                else
-                    Tag("False && True");
-                """;
+if (isFalse && true)
+    Tag(""False && True Unreachable"");
+else
+    Tag(""False && True"");";
             SETestContext.CreateCS(code, ", bool arg").Validator.ValidateTagOrder(
                 "True & True",
                 "False & True",
                 "False & False",
+                "isFalse & arg True Unreachable",
                 "isFalse & arg False",
+                "arg & isFalse True Unreachable",
                 "arg & isFalse False",
                 "isTrue & arg True",
                 "isTrue & arg False",
@@ -253,7 +254,9 @@ End If";
                 "False | True",
                 "False | False",
                 "isTrue | arg True",
+                "isTrue | arg False Unreachable",
                 "arg | isTrue True",
+                "arg | isTrue False Unreachable",
                 "isFalse | arg True",
                 "isFalse | arg False",
                 "arg | isFalse True",

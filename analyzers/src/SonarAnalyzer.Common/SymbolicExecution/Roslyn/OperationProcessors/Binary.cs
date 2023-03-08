@@ -69,20 +69,22 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
 
     private static SymbolicConstraint BinaryConstraint(BinaryOperatorKind kind, SymbolicValue left, SymbolicValue right)
     {
-        var leftBool = left?.Constraint<BoolConstraint>();
-        var rightBool = right?.Constraint<BoolConstraint>();
-        if (leftBool is not null ^ rightBool is not null)
+        if (left is null && right is null)
+        {
+            return null;
+        }
+        else if (left is null || right is null)
         {
             return kind switch
             {
-                BinaryOperatorKind.Or or BinaryOperatorKind.ConditionalOr when (leftBool ?? rightBool) == BoolConstraint.True => BoolConstraint.True,
-                BinaryOperatorKind.And or BinaryOperatorKind.ConditionalAnd when (leftBool ?? rightBool) == BoolConstraint.False => BoolConstraint.False,
+                BinaryOperatorKind.Or or BinaryOperatorKind.ConditionalOr when (left ?? right).HasConstraint(BoolConstraint.True) => BoolConstraint.True,
+                BinaryOperatorKind.And or BinaryOperatorKind.ConditionalAnd when (left ?? right).HasConstraint(BoolConstraint.False) => BoolConstraint.False,
                 _ => null
             };
         }
-        else if (leftBool is not null && rightBool is not null)
+        else if (left.HasConstraint<BoolConstraint>() && right.HasConstraint<BoolConstraint>())
         {
-            return BinaryBoolConstraint(kind, leftBool == BoolConstraint.True, rightBool == BoolConstraint.True);
+            return BinaryBoolConstraint(kind, left.HasConstraint(BoolConstraint.True), right.HasConstraint(BoolConstraint.True));
         }
         else if (left?.HasConstraint<ObjectConstraint>() is true && right?.HasConstraint<ObjectConstraint>() is true)
         {
