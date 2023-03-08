@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AnalysisInput>
+    <Rules>
+    </Rules>
+    <Settings>
+        <Setting>
+            <Key>sonar.cs.ignoreHeaderComments</Key>
+            <Value>true</Value>
+        </Setting>
+        <Setting>
+            <Key>sonar.vbnet.ignoreHeaderComments</Key>
+            <Value>true</Value>
+        </Setting>
+        <Setting>
+            <Key>sonar.exclusions</Key>
+            <Value>**/Exclude.cs</Value>
+        </Setting>
+    </Settings>
+</AnalysisInput>
