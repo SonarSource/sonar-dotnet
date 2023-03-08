@@ -82,6 +82,7 @@ public partial class SonarAnalysisContextBaseTest
         string filePath,
         ProjectType projectType,
         bool shouldAnalyze,
+        string language = LanguageNames.CSharp,
         string[] exclusions = null,
         string[] inclusions = null,
         string[] globalExclusions = null,
@@ -92,6 +93,7 @@ public partial class SonarAnalysisContextBaseTest
         var compilation = new SnippetCompiler("// Nothing to see here", TestHelper.ProjectTypeReference(projectType)).SemanticModel.Compilation;
         var sonarLintXml = AnalysisScaffolding.CreateSonarLintXml(
             TestContext,
+            language: language,
             exclusions: exclusions,
             inclusions: inclusions,
             globalExclusions: globalExclusions,
@@ -102,6 +104,6 @@ public partial class SonarAnalysisContextBaseTest
         var options = AnalysisScaffolding.CreateOptions(sonarLintXml);
         var sut = CreateSut(compilation, options);
 
-        sut.ShouldAnalyzeFile(filePath).Should().Be(shouldAnalyze);
+        sut.ShouldAnalyzeFile(sut.SonarLintFile(), filePath).Should().Be(shouldAnalyze);
     }
 }
