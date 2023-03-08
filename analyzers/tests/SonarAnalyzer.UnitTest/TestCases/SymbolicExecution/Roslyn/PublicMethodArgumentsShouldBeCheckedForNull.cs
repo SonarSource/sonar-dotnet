@@ -14,6 +14,7 @@ public class Program
         Bar(o); // Compliant, we care about dereference only
 
         throw e; // FIXME Non-compliant - attempting to throw null as an exception will result in a NullReferenceException
+    //  FIXME hathathat
     }
 
     public void Bar(object o) { }
