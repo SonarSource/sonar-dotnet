@@ -201,7 +201,7 @@ public void Method()
         [DataRow("decimal")]
         [DataRow("float")]
         [DataRow("double")]
-        public void Conversion_PropagateState(string type)
+        public void Conversion_BuiltInConversion_PropagateState(string type)
         {
             var code = $"""
                 byte b = 42;
