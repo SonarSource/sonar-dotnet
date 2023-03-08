@@ -18,16 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
 {
-    internal class NotNullCheck : SymbolicCheck
+    internal sealed class NotNullCheck : SymbolicCheck
     {
         protected override ProgramState PreProcessSimple(SymbolicContext context) =>
-            context.Operation.Instance.Type is { } type && type.IsNonNullableValueType()
-                ? context.State.SetOperationConstraint(context.Operation, ObjectConstraint.NotNull)
+            context.Operation.Instance.Type.IsNonNullableValueType()
+                ? context.SetOperationConstraint(ObjectConstraint.NotNull)
                 : context.State;
     }
 }
