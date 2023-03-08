@@ -61,7 +61,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         {
             Execute.Assertion
                 .BecauseOf(because, becauseArgs)
-                .ForCondition(Subject == null || !Subject.AllConstraints.Any())
+                .ForCondition(Subject == null || Subject.AllConstraints.Count() == 0)
                 .FailWith("Expected {context:SymbolicValue} to have no constraints{reason}, but {0} was found.", Subject?.AllConstraints.OrderBy(x => x.ToString()));
             return new(this);
         }
