@@ -29,14 +29,19 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : PublicMethodArguments
     public override bool ShouldExecute()
     {
         return Node is BaseMethodDeclarationSyntax { } method
-            && MethodIsAccesibleFromOtherAssemblies(method)
+            && MethodIsAccessibleFromOtherAssemblies(method)
             && MethodHasBody(method)
             && !MethodOnlyThrowsException(method)
             && MethodBodyDereferencesArguments(method);
 
-        static bool MethodIsAccesibleFromOtherAssemblies(BaseMethodDeclarationSyntax method) =>
-            method.Modifiers.Any(x => x.IsKind(SyntaxKind.PublicKeyword))
-            || (method.Modifiers.Any(x => x.IsKind(SyntaxKind.ProtectedKeyword)) && !method.Modifiers.Any(x => x.IsKind(SyntaxKind.PrivateKeyword)));
+        static bool MethodIsAccessibleFromOtherAssemblies(BaseMethodDeclarationSyntax method) =>
+            IsAccessibleFromOtherAssemblies(method.Modifiers)
+            && method.Ancestors().OfType<BaseTypeDeclarationSyntax>().FirstOrDefault() is { } containingType
+            && IsAccessibleFromOtherAssemblies(containingType.Modifiers);
+
+        static bool IsAccessibleFromOtherAssemblies(SyntaxTokenList modifiers) =>
+            modifiers.Any(x => x.IsKind(SyntaxKind.PublicKeyword))
+            || (modifiers.Any(x => x.IsKind(SyntaxKind.ProtectedKeyword)) && !modifiers.Any(x => x.IsKind(SyntaxKind.PrivateKeyword)));
 
         static bool MethodHasBody(BaseMethodDeclarationSyntax method) =>
             (method.Body != null && method.Body.Statements.Any()) || method.ExpressionBody() != null;
@@ -75,19 +80,16 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : PublicMethodArguments
                 return;
             }
 
-            if (node is IdentifierNameSyntax { } identifier
+            PossiblyDereferencesMethodArguments =
+                node is IdentifierNameSyntax { } identifier
                 && argumentNames.Contains(identifier.Identifier.ValueText)
                 && identifier.Ancestors().Any(x => x.IsAnyKind(
-                    SyntaxKind.AwaitExpression,
                     SyntaxKind.ElementAccessExpression,
                     SyntaxKind.ForEachStatement,
                     SyntaxKind.ThrowStatement,
-                    SyntaxKind.SimpleMemberAccessExpression,
-                    SyntaxKind.SimpleAssignmentExpression,
-                    SyntaxKind.VariableDeclarator)))
-            {
-                PossiblyDereferencesMethodArguments = true;
-            }
+                    SyntaxKind.SimpleMemberAccessExpression));
+
+            base.Visit(node);
         }
     }
 }
