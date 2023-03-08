@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 
     public class SymbolicValueAssertions : ReferenceTypeAssertions<SymbolicValue, SymbolicValueAssertions>
     {
-        protected override string Identifier => "symbolicValue";
+        protected override string Identifier => "SymbolicValue";
 
         public SymbolicValueAssertions(SymbolicValue subject) : base(subject) { }
 
@@ -43,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
             Execute.Assertion
                 .BecauseOf(because, becauseArgs)
                 .ForCondition(Subject != null)
-                .FailWith("The {context:symbolicValue} is null and can not have constraint {0}.", expected)
+                .FailWith("The {context:SymbolicValue} is null and can not have constraint {0}.", expected)
                 .Then
                 .Given(() => Subject.AllConstraints.ToList())
                 .ForCondition(actual => actual.Count > 0)
@@ -56,8 +56,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
                 .FailWith("Expected {context:symbolicValue} to have constraint {0}{reason}, but SymbolicValue has {1} constraint.",
                     _ => expected,
                     actual => actual[0]);
-            var matched = Subject.AllConstraints.First(x => x == expected);
-            return new(this, matched);
+            return new(this, Subject.AllConstraints.Single());
         }
 
         public AndConstraint<SymbolicValueAssertions> HaveNoConstraints(string because = "", params object[] becauseArgs)
@@ -65,7 +64,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
             Execute.Assertion
                 .BecauseOf(because, becauseArgs)
                 .ForCondition(Subject == null || !Subject.AllConstraints.Any())
-                .FailWith("Expected {context:symbolicValue} to have no constraints{reason}, but {0} constraints were found.", Subject?.AllConstraints.OrderBy(x => x.ToString()));
+                .FailWith("Expected {context:symbolicValue} to have no constraints{reason}, but {0} was found.", Subject?.AllConstraints.OrderBy(x => x.ToString()));
             return new(this);
         }
 
@@ -77,7 +76,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
             Execute.Assertion
                 .BecauseOf(because, becauseArgs)
                 .ForCondition(expected != null && expected.Any())
-                .FailWith("Expected constraints is empty. Use HaveNoConstraints() instead.")
+                .FailWith("Expected constraints are empty. Use HaveNoConstraints() instead.")
                 .Then
                 .ForCondition(Subject != null)
                 .FailWith("The {context:symbolicValue} is null and can not have constraints {0}.", expected)
@@ -89,7 +88,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
                 .Given(actual => new
                 {
                     missing = expected.Except(actual).OrderBy(x => x.ToString()).ToList(),
-                    addional = actual.Except(expected).OrderBy(x => x.ToString()).ToList()
+                    additional = actual.Except(expected).OrderBy(x => x.ToString()).ToList()
                 })
                 .ForCondition(given => given is { missing.Count: 0 } or { addional.Count: > 0 })
                 .FailWith("Expected {context:symbolicValue} to only have constraints {0}{reason}, but constraints {1} are missing. Actual constraints {2}.",
