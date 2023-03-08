@@ -26,7 +26,7 @@ internal sealed class Conversion : SimpleProcessor<IConversionOperationWrapper>
         operation.ToConversion();
 
     protected override ProgramState Process(SymbolicContext context, IConversionOperationWrapper conversion) =>
-        context.State[conversion.Operand] is { } value
+        context.State[conversion.Operand] is { } value && conversion.OperatorMethod is null // Built-in conversions only
             ? context.State.SetOperationValue(context.Operation, value)
             : context.State;
 }
