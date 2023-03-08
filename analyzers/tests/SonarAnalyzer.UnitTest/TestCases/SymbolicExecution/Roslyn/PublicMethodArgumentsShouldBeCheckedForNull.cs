@@ -44,7 +44,7 @@ public class Program
         throw new NotImplementedException();
     }
 
-    public void CompliantCases(bool b, object o1, object o2, object o3, object o4, object 05, Exception e)
+    public void CompliantCases(bool b, object o1, object o2, object o3, object o4, object o5, Exception e)
     {
         if (o1 != null)
         {
@@ -76,7 +76,6 @@ public class Program
             o5 = o1;
             o5.ToString();
         }
-
 
         o4?.ToString(); // Compliant, conditional operator
 
