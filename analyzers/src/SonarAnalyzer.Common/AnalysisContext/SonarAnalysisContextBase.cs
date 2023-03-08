@@ -126,7 +126,7 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
             descriptor.CustomTags.Contains(tag);
     }
 
-    internal bool ShouldAnalyzeFile(SonarLintXmlReader reader, string filePath) =>
+    private bool ShouldAnalyzeFile(SonarLintXmlReader reader, string filePath) =>
         ProjectConfiguration().ProjectType != ProjectType.Unknown // Not SonarLint context, NuGet or Scanner <= 5.0
         || (FileInclusionCache.GetValue(Compilation, _ => new()) is var cache
             && cache.GetOrAdd(filePath, _ => IsFileIncluded(reader, filePath)));

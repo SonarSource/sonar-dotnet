@@ -84,7 +84,6 @@ namespace SonarAnalyzer.UnitTest
         public static string CreateSonarLintXml(
             TestContext context,
             string language = LanguageNames.CSharp,
-            bool ignoreHeaderComments = false,
             bool analyzeGeneratedCode = false,
             string[] exclusions = null,
             string[] inclusions = null,
@@ -92,19 +91,28 @@ namespace SonarAnalyzer.UnitTest
             string[] testExclusions = null,
             string[] testInclusions = null,
             string[] globalTestExclusions = null) =>
-            TestHelper.WriteFile(context, "SonarLint.xml",
-                new XDocument(
-                    new XDeclaration("1.0", "utf-8", "yes"),
-                    new XElement("AnalysisInput",
-                        new XElement("Settings",
-                            CreateKeyValuePair("Setting", $"sonar.{(language == LanguageNames.CSharp ? "cs" : "vbnet")}.ignoreHeaderComments", ignoreHeaderComments.ToString()),
-                            CreateKeyValuePair("Setting", $"sonar.{(language == LanguageNames.CSharp ? "cs" : "vbnet")}.analyzeGeneratedCode", analyzeGeneratedCode.ToString()),
-                            CreateKeyValuePair("Setting", "sonar.exclusions", string.Join(",", exclusions ?? Array.Empty<string>())),
-                            CreateKeyValuePair("Setting", "sonar.inclusions", string.Join(",", inclusions ?? Array.Empty<string>())),
-                            CreateKeyValuePair("Setting", "sonar.global.exclusions", string.Join(",", globalExclusions ?? Array.Empty<string>())),
-                            CreateKeyValuePair("Setting", "sonar.test.exclusions", string.Join(",", testExclusions ?? Array.Empty<string>())),
-                            CreateKeyValuePair("Setting", "sonar.test.inclusions", string.Join(",", testInclusions ?? Array.Empty<string>())),
-                            CreateKeyValuePair("Setting", "sonar.global.test.exclusions", string.Join(",", globalTestExclusions ?? Array.Empty<string>()))))).ToString());
+            TestHelper.WriteFile(context, "SonarLint.xml", GenerateSonarLintXmlContent(language, analyzeGeneratedCode, exclusions, inclusions, globalExclusions, testExclusions, testInclusions, globalTestExclusions));
+
+        public static string GenerateSonarLintXmlContent(
+            string language = LanguageNames.CSharp,
+            bool analyzeGeneratedCode = false,
+            string[] exclusions = null,
+            string[] inclusions = null,
+            string[] globalExclusions = null,
+            string[] testExclusions = null,
+            string[] testInclusions = null,
+            string[] globalTestExclusions = null) =>
+            new XDocument(
+                new XDeclaration("1.0", "utf-8", "yes"),
+                new XElement("AnalysisInput",
+                    new XElement("Settings",
+                        CreateKeyValuePair("Setting", $"sonar.{(language == LanguageNames.CSharp ? "cs" : "vbnet")}.analyzeGeneratedCode", analyzeGeneratedCode.ToString()),
+                        CreateKeyValuePair("Setting", "sonar.exclusions", string.Join(",", exclusions ?? Array.Empty<string>())),
+                        CreateKeyValuePair("Setting", "sonar.inclusions", string.Join(",", inclusions ?? Array.Empty<string>())),
+                        CreateKeyValuePair("Setting", "sonar.global.exclusions", string.Join(",", globalExclusions ?? Array.Empty<string>())),
+                        CreateKeyValuePair("Setting", "sonar.test.exclusions", string.Join(",", testExclusions ?? Array.Empty<string>())),
+                        CreateKeyValuePair("Setting", "sonar.test.inclusions", string.Join(",", testInclusions ?? Array.Empty<string>())),
+                        CreateKeyValuePair("Setting", "sonar.global.test.exclusions", string.Join(",", globalTestExclusions ?? Array.Empty<string>()))))).ToString();
 
         private static XElement CreateKeyValuePair(string name, string key, string value) =>
             new(name, new XElement("Key", key), new XElement("Value", value));
