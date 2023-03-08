@@ -23,14 +23,11 @@ namespace SonarAnalyzer.Rules.CSharp;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class LockedFieldShouldBeReadonly : SonarDiagnosticAnalyzer
 {
-    private const string LockedFieldDiagnosticId = "S2445";
-    private const string LocalVariableDiagnosticId = "S6507";
-    private const string MessageFormat = "Do not lock on {0}, use a readonly field instead.";
+    private const string DiagnosticId = "S2445";
 
-    private static readonly DiagnosticDescriptor LockedFieldRule = DescriptorFactory.Create(LockedFieldDiagnosticId, MessageFormat);
-    private static readonly DiagnosticDescriptor LocalVariableRule = DescriptorFactory.Create(LocalVariableDiagnosticId, MessageFormat);
+    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, "Do not lock on {0}, use a readonly field instead.");
 
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(LockedFieldRule, LocalVariableRule);
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(CheckLockStatement, SyntaxKind.LockStatement);
@@ -40,24 +37,27 @@ public sealed class LockedFieldShouldBeReadonly : SonarDiagnosticAnalyzer
         var expression = ((LockStatementSyntax)context.Node).Expression?.RemoveParentheses();
         if (IsCreation(expression))
         {
-            context.ReportIssue(Diagnostic.Create(LockedFieldRule, expression.GetLocation(), "a new instance because is a no-op"));
+            ReportIssue("a new instance because is a no-op");
         }
         else
         {
             var lazySymbol = new Lazy<ISymbol>(() => context.SemanticModel.GetSymbolInfo(expression).Symbol);
             if (IsOfTypeString(expression, lazySymbol))
             {
-                context.ReportIssue(Diagnostic.Create(LockedFieldRule, expression.GetLocation(), "strings as they can be interned"));
+                ReportIssue("strings as they can be interned");
             }
             else if (expression is IdentifierNameSyntax && lazySymbol.Value is ILocalSymbol localSymbol)
             {
-                context.ReportIssue(Diagnostic.Create(LocalVariableRule, expression.GetLocation(), $"local variable '{localSymbol.Name}'"));
+                ReportIssue($"local variable '{localSymbol.Name}'");
             }
             else if (FieldWritable(expression, lazySymbol) is { } field)
             {
-                context.ReportIssue(Diagnostic.Create(LockedFieldRule, expression.GetLocation(), $"writable field '{field.Name}'"));
+                ReportIssue($"writable field '{field.Name}'");
             }
         }
+
+        void ReportIssue(string message) =>
+            context.ReportIssue(Diagnostic.Create(Rule, expression.GetLocation(), message));
     }
 
     private static bool IsCreation(ExpressionSyntax expression) =>
