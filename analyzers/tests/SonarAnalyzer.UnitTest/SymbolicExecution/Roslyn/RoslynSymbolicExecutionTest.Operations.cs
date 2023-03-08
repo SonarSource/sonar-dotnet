@@ -217,14 +217,11 @@ public void Method()
             const string code = """
             public void Main()
             {
-                byte b = 42;
-                Half h = b;
                 var isTrue = true;
                 WithImplicit withImplicit = isTrue;
                 WithExplicit withExplicit = (WithExplicit)isTrue;
                 Tag("WithImplicit", withImplicit);
                 Tag("WithExplicit", withExplicit);
-                Tag("Half", h);
             }
 
             public struct WithImplicit
@@ -239,8 +236,23 @@ public void Method()
             var validator = SETestContext.CreateCSMethod(code, new LiteralDummyTestCheck()).Validator;
             validator.ValidateTag("WithImplicit", x => x.Should().BeNull());
             validator.ValidateTag("WithExplicit", x => x.Should().BeNull());
+        }
+
+#if NET
+
+        [TestMethod]
+        public void Conversion_CustomOperators_DoNotPropagateState_Half()
+        {
+            const string code = """
+                byte b = 42;
+                Half h = b;
+                Tag("Half", h);
+                """;
+            var validator = SETestContext.CreateCS(code, new LiteralDummyTestCheck()).Validator;
             validator.ValidateTag("Half", x => x.Should().BeNull());    // While it would be better to propagate constraints here, Half has custom conversion operators
         }
+
+#endif
 
         [TestMethod]
         public void Argument_Ref_ResetsConstraints_CS() =>
