@@ -661,28 +661,31 @@ Tag(""Value"", value);";
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
         }
 
-        [DataTestMethod]    // Just a few examples to demonstrate that we don't set it for all
-        [DataRow("object", "First()")]
-        [DataRow("int", "Min()")]
-        [DataRow("int", "ElementAtOrDefault(42);")]
-        [DataRow("int", "FirstOrDefault();")]
-        [DataRow("int", "LastOrDefault();")]
-        [DataRow("int", "SingleOrDefault();")]
-        [DataRow("object", "ElementAtOrDefault(42);")]
-        public void Invocation_LinqEnumerable_Unknown(string itemType, string expression)
+        [DataTestMethod]    // Just a few examples to demonstrate that we don't set ObjectContraint for all
+        [DataRow("Min()")]
+        [DataRow("ElementAtOrDefault(42);")]
+        [DataRow("FirstOrDefault();")]
+        [DataRow("LastOrDefault();")]
+        [DataRow("SingleOrDefault();")]
+        public void Invocation_LinqEnumerable_Unknown_Int(string expression)
         {
             var code = $@"
 var value = arg.{expression};
 Tag(""Value"", value);";
-            var validator = SETestContext.CreateCS(code, $", IEnumerable<{itemType}> arg").Validator;
-            if (itemType == "int")
-            {
-                validator.ValidateTag("Value", x => x.AllConstraints.Should().ContainSingle().Which.Kind.Should().Be(ConstraintKind.ObjectNotNull));
-            }
-            else
-            {
-                validator.ValidateTag("Value", x => x.Should().BeNull());
-            }
+            var validator = SETestContext.CreateCS(code, $", IEnumerable<int> arg").Validator;
+            validator.ValidateTag("Value", x => x.AllConstraints.Should().ContainSingle().Which.Kind.Should().Be(ConstraintKind.ObjectNotNull));
+        }
+
+        [DataTestMethod]    // Just a few examples to demonstrate that we don't set ObjectContraint for all
+        [DataRow("First()")]
+        [DataRow("ElementAtOrDefault(42);")]
+        public void Invocation_LinqEnumerable_Unknown_Object(string expression)
+        {
+            var code = $@"
+var value = arg.{expression};
+Tag(""Value"", value);";
+            var validator = SETestContext.CreateCS(code, $", IEnumerable<object> arg").Validator;
+            validator.ValidateTag("Value", x => x.Should().BeNull());
         }
 
         [TestMethod]
