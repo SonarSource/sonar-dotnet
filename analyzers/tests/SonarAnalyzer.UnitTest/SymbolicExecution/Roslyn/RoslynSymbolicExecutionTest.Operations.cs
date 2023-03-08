@@ -194,17 +194,37 @@ public void Method()
             validator.ValidateTag("b", x => x.HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
         }
 
+        [DataTestMethod]
+        [DataRow("Int16")]
+        [DataRow("Int32")]
+        [DataRow("Int64")]
+        [DataRow("decimal")]
+        [DataRow("float")]
+        [DataRow("double")]
+        public void Conversion_PropagateState(string type)
+        {
+            var code = $"""
+                byte b = 42;
+                {type} value = b;
+                Tag("Value", value);
+                """;
+            SETestContext.CreateCS(code, new LiteralDummyTestCheck()).Validator.ValidateTag("Value", x => x.HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+        }
+
         [TestMethod]
         public void Conversion_CustomOperators_DoNotPropagateState()
         {
             const string code = """
             public void Main()
             {
+                byte b = 42;
+                Half h = b;
                 var isTrue = true;
                 WithImplicit withImplicit = isTrue;
                 WithExplicit withExplicit = (WithExplicit)isTrue;
                 Tag("WithImplicit", withImplicit);
                 Tag("WithExplicit", withExplicit);
+                Tag("Half", h);
             }
 
             public struct WithImplicit
@@ -216,9 +236,10 @@ public void Method()
                 public static explicit operator WithExplicit(bool b) => new();
             }
             """;
-            var validator = SETestContext.CreateCSMethod(code).Validator;
+            var validator = SETestContext.CreateCSMethod(code, new LiteralDummyTestCheck()).Validator;
             validator.ValidateTag("WithImplicit", x => x.Should().BeNull());
             validator.ValidateTag("WithExplicit", x => x.Should().BeNull());
+            validator.ValidateTag("Half", x => x.Should().BeNull());    // While it would be better to propagate constraints here, Half has custom conversion operators
         }
 
         [TestMethod]
