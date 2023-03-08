@@ -37,6 +37,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 
         public SymbolicValueAssertions(SymbolicValue subject) : base(subject) { }
 
+        [CustomAssertion]
         public AndWhichConstraint<SymbolicValueAssertions, SymbolicConstraint> HaveOnlyConstraint(SymbolicConstraint expected, string because = "", params object[] becauseArgs)
         {
             Execute.Assertion
@@ -57,6 +58,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
             return new(this, Subject.AllConstraints.Single());
         }
 
+        [CustomAssertion]
         public AndConstraint<SymbolicValueAssertions> HaveNoConstraints(string because = "", params object[] becauseArgs)
         {
             Execute.Assertion
@@ -66,9 +68,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
             return new(this);
         }
 
+        [CustomAssertion]
         public AndConstraint<SymbolicValueAssertions> HaveOnlyConstraints(params SymbolicConstraint[] expected) =>
             HaveOnlyConstraints(expected, string.Empty);
 
+        [CustomAssertion]
         public AndConstraint<SymbolicValueAssertions> HaveOnlyConstraints(IEnumerable<SymbolicConstraint> expected, string because = "", params object[] becauseArgs)
         {
             Execute.Assertion
@@ -110,6 +114,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         }
 
         /// <inheritdoc cref="ObjectAssertions.Be(object, string, object[])"/>
+        [CustomAssertion]
         public AndConstraint<SymbolicValueAssertions> Be(object expected, string because = "", params object[] becauseArgs)
         {
             Execute.Assertion
