@@ -13,7 +13,7 @@
         </Setting>
         <Setting>
             <Key>sonar.exclusions</Key>
-            <Value>**/Exclude.cs</Value>
+            <Value>**/Excluded.cs</Value>
         </Setting>
     </Settings>
 </AnalysisInput>

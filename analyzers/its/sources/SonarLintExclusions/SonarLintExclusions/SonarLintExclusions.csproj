@@ -2,6 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <SonarUnknownProjectType>true</SonarUnknownProjectType>
   </PropertyGroup>
 

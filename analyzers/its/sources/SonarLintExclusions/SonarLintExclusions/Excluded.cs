@@ -1,7 +1,7 @@
 ﻿namespace SonarLintExclusions
 {
-    public class Excluded
+    public static class Excluded
     {
-
+        public static async void S3168() { }
     }
 }

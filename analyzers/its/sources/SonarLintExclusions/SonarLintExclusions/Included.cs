@@ -1,7 +1,4 @@
 ﻿namespace SonarLintExclusions
 {
-    public class Class1
-    {
-
-    }
+    public class Included { } // S2094
 }

@@ -1,11 +1,10 @@
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace SonarLintExclusionsTest
 {
     [TestClass]
     public class UnitTest1
     {
         [TestMethod]
-        public void TestMethod1()
-        {
-        }
+        public void TestMethod1(){ }
     }
 }
