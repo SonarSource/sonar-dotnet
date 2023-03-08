@@ -67,7 +67,7 @@ namespace Tests.Diagnostics
         }
         bool OutP(out object o) { o = new object(); return true; }
 
-        void Test_Struct()
+        void Test_NullableValueTypes()
         {
             int? i = null;
             _ = i.GetType();            // FN
