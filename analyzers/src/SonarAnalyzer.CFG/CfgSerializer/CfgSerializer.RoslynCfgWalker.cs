@@ -126,7 +126,7 @@ namespace SonarAnalyzer.CFG
                 }
                 if (region.CaptureIds.Any())
                 {
-                    sb.Append(", Captures: ").Append(string.Join(", ", region.CaptureIds.Select(x => "#" + x.GetHashCode())));  // Same as IOperationExtension.SerializeSuffix
+                    sb.Append(", Captures: ").Append(string.Join(", ", region.CaptureIds.Select(x => x.Serialize())));  // Same as IOperationExtension.SerializeSuffix
                 }
                 return sb.ToString();
             }
