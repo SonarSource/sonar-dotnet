@@ -9,6 +9,7 @@ public class Program
     public void NotCompliantCases(object o, Exception e)
     {
         o.ToString(); // FIXME Non-compliant {{Refactor this method to add validation of parameter 'o' before using it.}}
+    //  FIXME hathathat
 
         Bar(o); // Compliant, we care about dereference only
 
