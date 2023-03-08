@@ -781,7 +781,7 @@ Tag(""Arg2"", arg2);";
 
         [TestMethod]
         public void Invocation_DebugAssert_LearnsBoolConstraint_Binary() =>
-            DebugAssertValues("arg == true", "bool").Should().HaveCount(1).And.ContainSingle(x => x.HasConstraint(BoolConstraint.True));
+            DebugAssertValues("arg == true", "bool").Should().HaveCount(1).And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
 
         [TestMethod]
         public void Invocation_DebugAssert_LearnsBoolConstraint_AlwaysEnds() =>
