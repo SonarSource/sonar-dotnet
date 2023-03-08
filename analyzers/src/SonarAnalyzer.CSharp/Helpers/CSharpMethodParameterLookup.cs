@@ -18,26 +18,25 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+internal class CSharpMethodParameterLookup : MethodParameterLookupBase<ArgumentSyntax>
 {
-    internal class CSharpMethodParameterLookup : MethodParameterLookupBase<ArgumentSyntax>
-    {
-        public CSharpMethodParameterLookup(InvocationExpressionSyntax invocation, SemanticModel semanticModel)
-            : this(invocation.ArgumentList, semanticModel) { }
+    public CSharpMethodParameterLookup(InvocationExpressionSyntax invocation, SemanticModel semanticModel)
+        : this(invocation.ArgumentList, semanticModel) { }
 
-        public CSharpMethodParameterLookup(InvocationExpressionSyntax invocation, IMethodSymbol methodSymbol)
-            : this(invocation.ArgumentList, methodSymbol) { }
+    public CSharpMethodParameterLookup(InvocationExpressionSyntax invocation, IMethodSymbol methodSymbol)
+        : this(invocation.ArgumentList, methodSymbol) { }
 
-        public CSharpMethodParameterLookup(ArgumentListSyntax argumentList, SemanticModel semanticModel)
-            : base(argumentList?.Arguments, argumentList == null ? null : semanticModel.GetSymbolInfo(argumentList.Parent).Symbol as IMethodSymbol) { }
+    public CSharpMethodParameterLookup(ArgumentListSyntax argumentList, SemanticModel semanticModel)
+        : base(argumentList.Arguments, semanticModel.GetSymbolInfo(argumentList.Parent)) { }
 
-        public CSharpMethodParameterLookup(ArgumentListSyntax argumentList, IMethodSymbol methodSymbol)
-            : base(argumentList?.Arguments, methodSymbol) { }
+    public CSharpMethodParameterLookup(ArgumentListSyntax argumentList, IMethodSymbol methodSymbol)
+        : base(argumentList.Arguments, methodSymbol) { }
 
-        protected override SyntaxNode Expression(ArgumentSyntax argument) =>
-            argument.Expression;
+    protected override SyntaxNode Expression(ArgumentSyntax argument) =>
+        argument.Expression;
 
-        protected override SyntaxToken? GetNameColonArgumentIdentifier(ArgumentSyntax argument) =>
-            argument.NameColon?.Name.Identifier;
-    }
+    protected override SyntaxToken? GetNameColonArgumentIdentifier(ArgumentSyntax argument) =>
+        argument.NameColon?.Name.Identifier;
 }

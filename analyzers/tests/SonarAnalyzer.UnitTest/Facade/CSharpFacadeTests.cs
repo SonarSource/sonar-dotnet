@@ -28,7 +28,7 @@ namespace SonarAnalyzer.UnitTest.Facade;
 public class CSharpFacadeTests
 {
     [TestMethod]
-    public void MethodParameterLookupForInvocation()
+    public void MethodParameterLookup_ForInvocation()
     {
         var sut = CSharpFacade.Instance;
         var code = """
@@ -47,7 +47,22 @@ public class CSharpFacadeTests
     }
 
     [TestMethod]
-    public void MethodParameterLookupForObjectCreation()
+    public void MethodParameterLookup_SemanticModelOverload()
+    {
+        var code = """
+            public class C
+            {
+                public int M(int arg) =>
+                    M(1);
+            }
+            """;
+        var (tree, model) = TestHelper.CompileCS(code);
+        var lookup = CSharpFacade.Instance.MethodParameterLookup(tree.GetRoot().DescendantNodes().OfType<InvocationExpressionSyntax>().First(), model);
+        lookup.Should().NotBeNull().And.BeOfType<CSharpMethodParameterLookup>();
+    }
+
+    [TestMethod]
+    public void MethodParameterLookup_ForObjectCreation()
     {
         var sut = CSharpFacade.Instance;
         var code = """
@@ -68,7 +83,7 @@ public class CSharpFacadeTests
     }
 
     [TestMethod]
-    public void MethodParameterLookupForImplicitObjectCreation()
+    public void MethodParameterLookup_ForImplicitObjectCreation()
     {
         var sut = CSharpFacade.Instance;
         var code = """
@@ -89,7 +104,26 @@ public class CSharpFacadeTests
     }
 
     [TestMethod]
-    public void MethodParameterLookupUnsupportedSyntaxKind()
+    public void MethodParameterLookup_ForArgumentList()
+    {
+        var sut = CSharpFacade.Instance;
+        var code = """
+            public class C
+            {
+                public int M(int arg) =>
+                    M(1);
+            }
+            """;
+        var (tree, model) = TestHelper.CompileCS(code);
+        var root = tree.GetRoot();
+        var invocation = root.DescendantNodes().OfType<ArgumentListSyntax>().First();
+        var method = model.GetDeclaredSymbol(root.DescendantNodes().OfType<MethodDeclarationSyntax>().First());
+        var actual = sut.MethodParameterLookup(invocation, method);
+        actual.Should().NotBeNull().And.BeOfType<CSharpMethodParameterLookup>();
+    }
+
+    [TestMethod]
+    public void MethodParameterLookup_UnsupportedSyntaxKind()
     {
         var sut = CSharpFacade.Instance;
         var code = """
@@ -108,7 +142,7 @@ public class CSharpFacadeTests
     }
 
     [TestMethod]
-    public void MethodParameterLookupNull()
+    public void MethodParameterLookup_Null()
     {
         var sut = CSharpFacade.Instance;
         var code = """
@@ -122,6 +156,22 @@ public class CSharpFacadeTests
         var root = tree.GetRoot();
         var method = model.GetDeclaredSymbol(root.DescendantNodes().OfType<MethodDeclarationSyntax>().First());
         var actual = sut.MethodParameterLookup(null, method);
+        actual.Should().BeNull();
+    }
+
+    [TestMethod]
+    public void MethodParameterLookup_Null_SemanticModelOverload()
+    {
+        var sut = CSharpFacade.Instance;
+        var code = """
+            public class C
+            {
+                public int M(int arg) =>
+                    M(1);
+            }
+            """;
+        var (_, model) = TestHelper.CompileCS(code);
+        var actual = sut.MethodParameterLookup(null, model);
         actual.Should().BeNull();
     }
 }

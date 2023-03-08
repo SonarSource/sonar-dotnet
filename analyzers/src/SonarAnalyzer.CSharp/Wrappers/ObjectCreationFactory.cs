@@ -49,6 +49,12 @@ namespace SonarAnalyzer.Wrappers
                  ? Create(node)
                  : null;
 
+        public static bool TryCreate(SyntaxNode node, out IObjectCreation objectCreation)
+        {
+            objectCreation = TryCreate(node);
+            return objectCreation is not null;
+        }
+
         private class ObjectCreation : IObjectCreation
         {
             private readonly ObjectCreationExpressionSyntax objectCreation;

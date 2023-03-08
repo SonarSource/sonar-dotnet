@@ -18,116 +18,132 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+public interface IMethodParameterLookup
 {
-    public interface IMethodParameterLookup
+    bool TryGetSymbol(SyntaxNode argument, out IParameterSymbol parameter);
+    bool TryGetSyntax(IParameterSymbol parameter, out ImmutableArray<SyntaxNode> expressions);
+    bool TryGetSyntax(string parameterName, out ImmutableArray<SyntaxNode> expressions);
+    bool TryGetNonParamsSyntax(IParameterSymbol parameter, out SyntaxNode expression);
+}
+
+// This should come from the Roslyn API (https://github.com/dotnet/roslyn/issues/9)
+internal abstract class MethodParameterLookupBase<TArgumentSyntax> : IMethodParameterLookup
+    where TArgumentSyntax : SyntaxNode
+{
+    private readonly SeparatedSyntaxList<TArgumentSyntax> argumentList;
+
+    protected abstract SyntaxToken? GetNameColonArgumentIdentifier(TArgumentSyntax argument);
+    protected abstract SyntaxNode Expression(TArgumentSyntax argument);
+
+    public IMethodSymbol MethodSymbol { get; }
+    private ImmutableArray<IMethodSymbol> MethodSymbolOrCandidates { get; }
+
+    protected MethodParameterLookupBase(SeparatedSyntaxList<TArgumentSyntax> argumentList, SymbolInfo? methodSymbolInfo)
+        : this(argumentList, methodSymbolInfo?.Symbol as IMethodSymbol, methodSymbolInfo?.AllSymbols().OfType<IMethodSymbol>()) { }
+
+    protected MethodParameterLookupBase(SeparatedSyntaxList<TArgumentSyntax> argumentList, IMethodSymbol methodSymbol)
+        : this(argumentList, methodSymbol, new[] { methodSymbol }) { }
+
+    private MethodParameterLookupBase(SeparatedSyntaxList<TArgumentSyntax> argumentList, IMethodSymbol methodSymbol, IEnumerable<IMethodSymbol> methodSymbolOrCandidates)
     {
-        bool TryGetSymbol(SyntaxNode argument, out IParameterSymbol parameter);
-        bool TryGetSyntax(IParameterSymbol parameter, out ImmutableArray<SyntaxNode> expressions);
-        bool TryGetSyntax(string parameterName, out ImmutableArray<SyntaxNode> expressions);
-        bool TryGetNonParamsSyntax(IParameterSymbol parameter, out SyntaxNode expression);
+        this.argumentList = argumentList;
+        MethodSymbol = methodSymbol;
+        MethodSymbolOrCandidates = methodSymbolOrCandidates?.ToImmutableArray() ?? ImmutableArray.Create<IMethodSymbol>();
     }
 
-    // This should come from the Roslyn API (https://github.com/dotnet/roslyn/issues/9)
-    internal abstract class MethodParameterLookupBase<TArgumentSyntax> : IMethodParameterLookup
-        where TArgumentSyntax : SyntaxNode
+    public bool TryGetSymbol(SyntaxNode argument, out IParameterSymbol parameter) =>
+        TryGetSymbol(argument, MethodSymbol, out parameter);
+
+    private bool TryGetSymbol(SyntaxNode argument, IMethodSymbol methodSymbol, out IParameterSymbol parameter)
     {
-        private readonly SeparatedSyntaxList<TArgumentSyntax>? argumentList;
+        parameter = null;
+        var arg = argument as TArgumentSyntax ?? throw new ArgumentException($"{nameof(argument)} must be of type {typeof(TArgumentSyntax)}", nameof(argument));
 
-        protected abstract SyntaxToken? GetNameColonArgumentIdentifier(TArgumentSyntax argument);
-        protected abstract SyntaxNode Expression(TArgumentSyntax argument);
-
-        public IMethodSymbol MethodSymbol { get; }
-
-        protected MethodParameterLookupBase(SeparatedSyntaxList<TArgumentSyntax>? argumentList, IMethodSymbol methodSymbol)
+        if (!argumentList.Contains(arg)
+            || methodSymbol == null
+            || methodSymbol.IsVararg)
         {
-            this.argumentList = argumentList;
-            MethodSymbol = methodSymbol;
-        }
-
-        public bool TryGetSymbol(SyntaxNode argument, out IParameterSymbol parameter)
-        {
-            parameter = null;
-            var arg = argument as TArgumentSyntax ?? throw new ArgumentException($"{nameof(argument)} must be of type {typeof(TArgumentSyntax)}", nameof(argument));
-
-            if (!argumentList.HasValue
-                || !argumentList.Value.Contains(arg)
-                || MethodSymbol == null
-                || MethodSymbol.IsVararg)
-            {
-                return false;
-            }
-
-            if (GetNameColonArgumentIdentifier(arg) is { } nameColonArgumentIdentifier)
-            {
-                parameter = MethodSymbol.Parameters.FirstOrDefault(symbol => symbol.Name == nameColonArgumentIdentifier.ValueText);
-                return parameter != null;
-            }
-
-            var index = argumentList.Value.IndexOf(arg);
-            if (index >= MethodSymbol.Parameters.Length)
-            {
-                var lastParameter = MethodSymbol.Parameters.Last();
-                parameter = lastParameter.IsParams ? lastParameter : null;
-                return parameter != null;
-            }
-            parameter = MethodSymbol.Parameters[index];
-            return true;
-        }
-
-        /// <summary>
-        /// Method returns array of argument syntaxes that represents all syntaxes passed to the parameter.
-        ///
-        /// There could be multiple syntaxes for ParamArray/params.
-        /// There could be zero or one result for optional parameters.
-        /// There will be single result for normal parameters.
-        /// </summary>
-        public bool TryGetSyntax(IParameterSymbol parameter, out ImmutableArray<SyntaxNode> expressions) =>
-            TryGetSyntax(parameter.Name, out expressions);
-
-        /// <summary>
-        /// Method returns array of argument syntaxes that represents all syntaxes passed to the parameter.
-        ///
-        /// There could be multiple syntaxes for ParamArray/params.
-        /// There could be zero or one result for optional parameters.
-        /// There will be single result for normal parameters.
-        public bool TryGetSyntax(string parameterName, out ImmutableArray<SyntaxNode> expressions)
-        {
-            expressions = GetAllArgumentParameterMappings().Where(x => x.Symbol.Name == parameterName).Select(x => Expression(x.Node)).ToImmutableArray();
-            return !expressions.IsEmpty;
-        }
-
-        /// <summary>
-        /// Method returns zero or one argument syntax that represents syntax passed to the parameter.
-        ///
-        /// Caller must ensure that given parameter is not ParamArray/params.
-        /// </summary>
-        public bool TryGetNonParamsSyntax(IParameterSymbol parameter, out SyntaxNode expression)
-        {
-            if (parameter.IsParams)
-            {
-                throw new System.InvalidOperationException("Cannot call TryGetNonParamsSyntax on ParamArray/params parameters.");
-            }
-            if (TryGetSyntax(parameter, out var all))
-            {
-                expression = all.Single();
-                return true;
-            }
-            expression = null;
             return false;
         }
 
-        internal IEnumerable<NodeAndSymbol<TArgumentSyntax, IParameterSymbol>> GetAllArgumentParameterMappings()
+        if (GetNameColonArgumentIdentifier(arg) is { } nameColonArgumentIdentifier)
         {
-            if (argumentList.HasValue)
+            parameter = methodSymbol.Parameters.FirstOrDefault(symbol => symbol.Name == nameColonArgumentIdentifier.ValueText);
+            return parameter != null;
+        }
+
+        var index = argumentList.IndexOf(arg);
+        if (index >= methodSymbol.Parameters.Length)
+        {
+            var lastParameter = methodSymbol.Parameters.Last();
+            parameter = lastParameter.IsParams ? lastParameter : null;
+            return parameter != null;
+        }
+        parameter = methodSymbol.Parameters[index];
+        return true;
+    }
+
+    /// <summary>
+    /// Method returns array of argument syntaxes that represents all syntaxes passed to the parameter.
+    ///
+    /// There could be multiple syntaxes for ParamArray/params.
+    /// There could be zero or one result for optional parameters.
+    /// There will be single result for normal parameters.
+    /// </summary>
+    public bool TryGetSyntax(IParameterSymbol parameter, out ImmutableArray<SyntaxNode> expressions) =>
+        TryGetSyntax(parameter.Name, out expressions);
+
+    /// <summary>
+    /// Method returns array of argument syntaxes that represents all syntaxes passed to the parameter.
+    ///
+    /// There could be multiple syntaxes for ParamArray/params.
+    /// There could be zero or one result for optional parameters.
+    /// There will be single result for normal parameters.
+    public bool TryGetSyntax(string parameterName, out ImmutableArray<SyntaxNode> expressions)
+    {
+        var candidateArgumentLists = MethodSymbolOrCandidates
+            .Select(x => GetAllArgumentParameterMappings(x).Where(x => x.Symbol.Name == parameterName).Select(x => Expression(x.Node)).ToImmutableArray()).ToImmutableArray();
+        expressions = candidateArgumentLists.Any() && AllArgumentsAreTheSame(candidateArgumentLists)
+            ? candidateArgumentLists[0]
+            : Enumerable.Empty<SyntaxNode>().ToImmutableArray();
+        return !expressions.IsEmpty;
+
+        static bool AllArgumentsAreTheSame(ImmutableArray<ImmutableArray<SyntaxNode>> candidateArgumentLists) =>
+            candidateArgumentLists.Skip(1).All(x => x.SequenceEqual(candidateArgumentLists[0]));
+    }
+
+    /// <summary>
+    /// Method returns zero or one argument syntax that represents syntax passed to the parameter.
+    ///
+    /// Caller must ensure that given parameter is not ParamArray/params.
+    /// </summary>
+    public bool TryGetNonParamsSyntax(IParameterSymbol parameter, out SyntaxNode expression)
+    {
+        if (parameter.IsParams)
+        {
+            throw new InvalidOperationException("Cannot call TryGetNonParamsSyntax on ParamArray/params parameters.");
+        }
+        if (TryGetSyntax(parameter, out var all))
+        {
+            expression = all.Single();
+            return true;
+        }
+        expression = null;
+        return false;
+    }
+
+    internal IEnumerable<NodeAndSymbol<TArgumentSyntax, IParameterSymbol>> GetAllArgumentParameterMappings() =>
+        GetAllArgumentParameterMappings(MethodSymbol);
+
+    private IEnumerable<NodeAndSymbol<TArgumentSyntax, IParameterSymbol>> GetAllArgumentParameterMappings(IMethodSymbol methodSymbol)
+    {
+        foreach (var argument in argumentList)
+        {
+            if (TryGetSymbol(argument, methodSymbol, out var parameter))
             {
-                foreach (var argument in argumentList)
-                {
-                    if (TryGetSymbol(argument, out var parameter))
-                    {
-                        yield return new NodeAndSymbol<TArgumentSyntax, IParameterSymbol>(argument, parameter);
-                    }
-                }
+                yield return new NodeAndSymbol<TArgumentSyntax, IParameterSymbol>(argument, parameter);
             }
         }
     }
