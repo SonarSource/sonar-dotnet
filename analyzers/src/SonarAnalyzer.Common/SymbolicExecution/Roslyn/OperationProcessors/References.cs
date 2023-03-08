@@ -75,11 +75,11 @@ internal sealed class PropertyReference : BranchingProcessor<IPropertyReferenceO
     {
         if (operation.Instance.TrackedSymbol() is { } symbol)
         {
-            if (!IsNullableHasValue(operation))
+            if (!IsNullableProperty(operation, "HasValue"))
             {
                 state = state.SetSymbolConstraint(symbol, ObjectConstraint.NotNull);
             }
-            if (operation.Property.Name == "Value" && state[symbol] is { } value)
+            if (IsNullableProperty(operation, "Value") && state[symbol] is { } value)
             {
                 state = state.SetOperationValue(operation, value);
             }
@@ -88,15 +88,15 @@ internal sealed class PropertyReference : BranchingProcessor<IPropertyReferenceO
     }
 
     protected override SymbolicConstraint BoolConstraintFromOperation(ProgramState state, IPropertyReferenceOperationWrapper operation) =>
-        IsNullableHasValue(operation) && state[operation.Instance]?.Constraint<ObjectConstraint>() is { } objectConstraint
+        IsNullableProperty(operation, "HasValue") && state[operation.Instance]?.Constraint<ObjectConstraint>() is { } objectConstraint
             ? BoolConstraint.From(objectConstraint == ObjectConstraint.NotNull)
             : null;
 
     protected override ProgramState LearnBranchingConstraint(ProgramState state, IPropertyReferenceOperationWrapper operation, bool falseBranch) =>
         state;  // ToDo: Implement later to support branching on .HasValue
 
-    private static bool IsNullableHasValue(IPropertyReferenceOperationWrapper operation) =>
-        operation.Instance is not null && operation.Instance.Type.IsNullableValueType() && operation.Property.Name == "HasValue";
+    private static bool IsNullableProperty(IPropertyReferenceOperationWrapper operation, string name) =>
+        operation.Instance is not null && operation.Instance.Type.IsNullableValueType() && operation.Property.Name == name;
 }
 
 internal sealed class ArrayElementReference : SimpleProcessor<IArrayElementReferenceOperationWrapper>

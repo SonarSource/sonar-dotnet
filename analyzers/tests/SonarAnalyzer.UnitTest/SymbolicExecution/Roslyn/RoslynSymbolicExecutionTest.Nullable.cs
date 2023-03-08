@@ -44,7 +44,7 @@ public partial class RoslynSymbolicExecutionTest
     {
         const string code = """
             var value = arg.Value;
-            Tag("Unknown", value);
+            Tag("Unknown", arg);
             arg = true;
             value = arg.Value;
             Tag("True", value);
