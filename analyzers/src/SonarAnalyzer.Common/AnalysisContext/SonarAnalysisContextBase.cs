@@ -58,8 +58,9 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
     /// <param name="tree">Tree to decide on. Can be null for Symbol-based and Compilation-based scenarios. And we want to analyze those too.</param>
     /// <param name="generatedCodeRecognizer">When set, generated trees are analyzed only when language-specific 'analyzeGeneratedCode' configuration property is also set.</param>
     public bool ShouldAnalyzeTree(SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer) =>
-        (generatedCodeRecognizer is null || SonarLintFile().AnalyzeGeneratedCode || !tree.IsGenerated(generatedCodeRecognizer, Compilation))
-        && (tree is null || (!IsUnchanged(tree) && ShouldAnalyzeFile(tree.FilePath)));
+        SonarLintFile() is { } sonarLintReader
+        && (generatedCodeRecognizer is null || sonarLintReader.AnalyzeGeneratedCode || !tree.IsGenerated(generatedCodeRecognizer, Compilation))
+        && (tree is null || (!IsUnchanged(tree) && ShouldAnalyzeFile(sonarLintReader, tree.FilePath)));
 
     /// <summary>
     /// Reads configuration from SonarProjectConfig.xml file and caches the result for scope of this analysis.
@@ -125,18 +126,18 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
             descriptor.CustomTags.Contains(tag);
     }
 
-    public bool ShouldAnalyzeFile(string filePath) =>
-        ProjectConfiguration().ProjectType != ProjectType.Unknown
-        || (FileInclusionCache.GetValue(Compilation, _ => new()) is var cache // SonarLint, NuGet or Scanner <= 5.0
-            && cache.GetOrAdd(filePath, _ => IsFileIncluded(filePath)));
+    internal bool ShouldAnalyzeFile(SonarLintXmlReader reader, string filePath) =>
+        ProjectConfiguration().ProjectType != ProjectType.Unknown // Not SonarLint context, NuGet or Scanner <= 5.0
+        || (FileInclusionCache.GetValue(Compilation, _ => new()) is var cache
+            && cache.GetOrAdd(filePath, _ => IsFileIncluded(reader, filePath)));
 
     private ImmutableHashSet<string> CreateUnchangedFilesHashSet() =>
         ImmutableHashSet.Create(StringComparer.OrdinalIgnoreCase, ProjectConfiguration().AnalysisConfig?.UnchangedFiles() ?? Array.Empty<string>());
 
-    private bool IsFileIncluded(string filePath) =>
+    private bool IsFileIncluded(SonarLintXmlReader reader, string filePath) =>
         IsTestProject()
-        ? IsFileIncluded(SonarLintFile().TestInclusions, SonarLintFile().TestExclusions, SonarLintFile().GlobalTestExclusions, filePath)
-        : IsFileIncluded(SonarLintFile().Inclusions, SonarLintFile().Exclusions, SonarLintFile().GlobalExclusions, filePath);
+        ? IsFileIncluded(reader.TestInclusions, reader.TestExclusions, reader.GlobalTestExclusions, filePath)
+        : IsFileIncluded(reader.Inclusions, reader.Exclusions, reader.GlobalExclusions, filePath);
 
     private static bool IsFileIncluded(string[] inclusions, string[] exclusions, string[] globalExclusions, string filePath) =>
         IsIncluded(inclusions, filePath)

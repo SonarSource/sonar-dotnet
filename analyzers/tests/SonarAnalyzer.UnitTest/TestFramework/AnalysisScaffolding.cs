@@ -83,6 +83,7 @@ namespace SonarAnalyzer.UnitTest
 
         public static string CreateSonarLintXml(
             TestContext context,
+            string language = LanguageNames.CSharp,
             bool ignoreHeaderComments = false,
             bool analyzeGeneratedCode = false,
             string[] exclusions = null,
@@ -96,8 +97,8 @@ namespace SonarAnalyzer.UnitTest
                     new XDeclaration("1.0", "utf-8", "yes"),
                     new XElement("AnalysisInput",
                         new XElement("Settings",
-                            CreateKeyValuePair("Setting", "sonar.cs.ignoreHeaderComments", ignoreHeaderComments.ToString()),
-                            CreateKeyValuePair("Setting", "sonar.cs.analyzeGeneratedCode", analyzeGeneratedCode.ToString()),
+                            CreateKeyValuePair("Setting", $"sonar.{(language == LanguageNames.CSharp ? "cs" : "vbnet")}.ignoreHeaderComments", ignoreHeaderComments.ToString()),
+                            CreateKeyValuePair("Setting", $"sonar.{(language == LanguageNames.CSharp ? "cs" : "vbnet")}.analyzeGeneratedCode", analyzeGeneratedCode.ToString()),
                             CreateKeyValuePair("Setting", "sonar.exclusions", string.Join(",", exclusions ?? Array.Empty<string>())),
                             CreateKeyValuePair("Setting", "sonar.inclusions", string.Join(",", inclusions ?? Array.Empty<string>())),
                             CreateKeyValuePair("Setting", "sonar.global.exclusions", string.Join(",", globalExclusions ?? Array.Empty<string>())),
