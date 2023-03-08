@@ -138,7 +138,7 @@ if (value = boolParameter)
     Tag(""Value"", value);
 }";
             var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("True", x => x.HasConstraint<BoolConstraint>().Should().BeFalse());
+            validator.ValidateTag("True", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
             validator.ValidateTag("False", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
             validator.ValidateTag("Value", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());    // Visited only for "true" condition
         }
