@@ -102,7 +102,7 @@ public partial class SonarAnalysisContextBaseTest
         sut.ShouldAnalyzeTree(tree, CSharpGeneratedCodeRecognizer.Instance).Should().BeTrue();
 
         // GetText should be called every time ShouldAnalyzeGenerated is called...
-        additionalText.Verify(x => x.GetText(It.IsAny<CancellationToken>()), Times.Exactly(6));
+        additionalText.Verify(x => x.GetText(It.IsAny<CancellationToken>()), Times.Exactly(3));
         sonarLintXml.ToStringCallCount.Should().Be(1); // ... but we should only try to read the file once
     }
 
