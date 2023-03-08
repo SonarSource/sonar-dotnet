@@ -30,10 +30,15 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
     protected override SymbolicConstraint BoolConstraintFromOperation(ProgramState state, IBinaryOperationWrapper operation) =>
         BinaryConstraint(operation.OperatorKind, state[operation.LeftOperand], state[operation.RightOperand]);
 
-    protected override ProgramState LearnBranchingConstraint(ProgramState state, IBinaryOperationWrapper operation, bool falseBranch) =>
-        operation.OperatorKind.IsAnyEquality()
-            ? LearnBranchingConstraint<ObjectConstraint>(state, operation, falseBranch) ?? LearnBranchingConstraint<BoolConstraint>(state, operation, falseBranch) ?? state
-            : state;
+    protected override ProgramState LearnBranchingConstraint(ProgramState state, IBinaryOperationWrapper operation, bool falseBranch)
+    {
+        if (operation.OperatorKind.IsAnyEquality())
+        {
+            state = LearnBranchingConstraint<ObjectConstraint>(state, operation, falseBranch) ?? state;
+            state = LearnBranchingConstraint<BoolConstraint>(state, operation, falseBranch) ?? state;
+        }
+        return state;
+    }
 
     private static ProgramState LearnBranchingConstraint<T>(ProgramState state, IBinaryOperationWrapper binary, bool falseBranch)
         where T : SymbolicConstraint
@@ -79,7 +84,7 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
         {
             return BinaryBoolConstraint(kind, leftBool == BoolConstraint.True, rightBool == BoolConstraint.True);
         }
-        else if (left.HasConstraint<ObjectConstraint>() && right.HasConstraint<ObjectConstraint>())
+        else if (left?.HasConstraint<ObjectConstraint>() is true && right?.HasConstraint<ObjectConstraint>() is true)
         {
             return BinaryNullConstraint(kind, left.HasConstraint(ObjectConstraint.Null), right.HasConstraint(ObjectConstraint.Null));
         }
