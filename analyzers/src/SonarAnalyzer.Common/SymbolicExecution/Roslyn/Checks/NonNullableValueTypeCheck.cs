@@ -22,7 +22,7 @@ using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
 {
-    internal sealed class NotNullCheck : SymbolicCheck
+    internal sealed class NonNullableValueTypeCheck : SymbolicCheck
     {
         protected override ProgramState PreProcessSimple(SymbolicContext context) =>
             context.Operation.Instance.Type.IsNonNullableValueType()

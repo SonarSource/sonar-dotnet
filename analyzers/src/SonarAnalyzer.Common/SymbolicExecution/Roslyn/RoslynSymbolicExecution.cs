@@ -46,7 +46,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             {
                 throw new ArgumentException("At least one check is expected", nameof(checks));
             }
-            this.checks = new(new SymbolicCheck[] { new NotNullCheck(), new ConstantCheck() }.Concat(checks).ToArray());
+            this.checks = new(new SymbolicCheck[] { new NonNullableValueTypeCheck(), new ConstantCheck() }.Concat(checks).ToArray());
             this.cancel = cancel;
             exceptionCandidate = new(cfg.OriginalOperation.ToSonar().SemanticModel.Compilation);
             lva = new(cfg, cancel);
