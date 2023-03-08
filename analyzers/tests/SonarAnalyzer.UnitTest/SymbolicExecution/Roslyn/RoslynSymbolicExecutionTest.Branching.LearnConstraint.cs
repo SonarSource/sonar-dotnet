@@ -632,6 +632,40 @@ Tag(""End"", arg);";
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
         }
 
+        [DataTestMethod]
+        [DataRow("arg.HasValue")]
+        [DataRow("!!arg.HasValue")]
+        public void Branching_LearnsObjectConstraint_Nullable_HasValue_True(string expression)
+        {
+            var validator = CreateIfElseEndValidatorCS(expression, OperationKind.DeclarationPattern, "int?");
+            validator.ValidateTag("If", x => x.Should().BeNull());
+            validator.ValidateTag("Else", x => x.Should().BeNull());
+            validator.ValidateTag("End", x => x.Should().BeNull());
+            //FIXME: Should be like this
+            //validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            //validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            //validator.TagValues("End").Should().HaveCount(2)
+            //    .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
+            //    .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
+        }
+
+        [DataTestMethod]
+        [DataRow("!arg.HasValue")]
+        [DataRow("!!!arg.HasValue")]
+        public void Branching_LearnsObjectConstraint_Nullable_HasValue_Negated(string expression)
+        {
+            var validator = CreateIfElseEndValidatorCS(expression, OperationKind.DeclarationPattern, "int?");
+            validator.ValidateTag("If", x => x.Should().BeNull());
+            validator.ValidateTag("Else", x => x.Should().BeNull());
+            validator.ValidateTag("End", x => x.Should().BeNull());
+            //FIXME: Should be like this
+            //validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            //validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            //validator.TagValues("End").Should().HaveCount(2)
+            //    .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
+            //    .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
+        }
+
         [TestMethod]
         public void Branching_IsNullOperation_WithIsNullOrEmpty()
         {
