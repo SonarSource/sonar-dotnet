@@ -15,5 +15,9 @@
             <Key>sonar.exclusions</Key>
             <Value>**/Excluded.cs</Value>
         </Setting>
+        <Setting>
+            <Key>sonar.test.exclusions</Key>
+            <Value>**/ExcludedTest.cs</Value>
+        </Setting>
     </Settings>
 </AnalysisInput>
