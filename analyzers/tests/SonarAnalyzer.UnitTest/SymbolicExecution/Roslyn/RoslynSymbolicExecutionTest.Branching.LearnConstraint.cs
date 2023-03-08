@@ -634,6 +634,9 @@ Tag(""End"", arg);";
 
         [DataTestMethod]
         [DataRow("arg.HasValue")]
+        [DataRow("arg.HasValue is true")]
+        [DataRow("arg.HasValue == true")]
+        [DataRow("arg.HasValue != false")]
         [DataRow("!!arg.HasValue")]
         public void Branching_LearnsObjectConstraint_Nullable_HasValue_True(string expression)
         {
@@ -647,6 +650,9 @@ Tag(""End"", arg);";
 
         [DataTestMethod]
         [DataRow("!arg.HasValue")]
+        [DataRow("arg.HasValue != true")]
+        [DataRow("arg.HasValue == false")]
+        [DataRow("arg.HasValue is false")]
         [DataRow("!!!arg.HasValue")]
         public void Branching_LearnsObjectConstraint_Nullable_HasValue_Negated(string expression)
         {
