@@ -37,6 +37,13 @@ public class Program
         o.ToString(); // Compliant, not public
     }
 
+    public void OnlyThrowsException(object arg) => throw new NotImplementedException();
+
+    public void OnlyThrows2Exception(object arg)
+    {
+        throw new NotImplementedException();
+    }
+
     public void CompliantCases(bool b, object o1, object o2, object o3, object o4, Exception e)
     {
         if (o1 != null)

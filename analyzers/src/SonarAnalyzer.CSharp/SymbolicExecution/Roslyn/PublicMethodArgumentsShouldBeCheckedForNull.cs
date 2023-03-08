@@ -54,6 +54,7 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : PublicMethodArguments
             }
 
             var walker = new ArgumentDereferenceWalker(argumentNames);
+            walker.SafeVisit(method);
             return walker.PossiblyDereferencesMethodArguments;
         }
     }
