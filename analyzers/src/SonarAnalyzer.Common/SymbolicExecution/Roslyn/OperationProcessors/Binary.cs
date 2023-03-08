@@ -81,7 +81,7 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
         {
             return BinaryBoolConstraint(kind, left.HasConstraint(BoolConstraint.True), right.HasConstraint(BoolConstraint.True));
         }
-        else if (left?.HasConstraint<ObjectConstraint>() is true && right?.HasConstraint<ObjectConstraint>() is true)
+        else if (left.HasConstraint<ObjectConstraint>() && right.HasConstraint<ObjectConstraint>())
         {
             return BinaryNullConstraint(kind, left.HasConstraint(ObjectConstraint.Null), right.HasConstraint(ObjectConstraint.Null));
         }
