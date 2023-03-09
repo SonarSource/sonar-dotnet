@@ -44,13 +44,10 @@
   </Settings>
   <Rules>
     <Rule>
-      <Key>S0001</Key>
+      <Key>S2225</Key>
     </Rule>
     <Rule>
-      <Key>S0002</Key>
-    </Rule>
-    <Rule>
-      <Key>S0003</Key>
+      <Key>S2342</Key>
       <Parameters>
         <Parameter>
           <Key>format</Key>
@@ -63,15 +60,14 @@
       </Parameters>
     </Rule>
     <Rule>
-      <Key>S0004</Key>
+      <Key>S2346</Key>
+    </Rule>
+	<Rule>
+      <Key>S1067</Key>
       <Parameters>
         <Parameter>
-          <Key>threshold</Key>
-          <Value>15</Value>
-        </Parameter>
-        <Parameter>
-          <Key>propertyThreshold</Key>
-          <Value>3</Value>
+          <Key>max</Key>
+          <Value>1</Value>
         </Parameter>
       </Parameters>
     </Rule>
