@@ -40,4 +40,13 @@ namespace Issue_6878
         public object?[]? GetNullableArrayOfNullableReferenceType(string itemId) => null; // Noncompliant FP
         public byte[] GetArray(string itemId) => null; // Noncompliant
     }
+
+    class MyGenericClass<T> where T : struct
+    {
+        public List<T>? GetNullableListOfNonNullableValueGenericType(string itemId) => null; // Noncompliant FP, Should not raise because nullable is allowed
+        public List<T?> GetNonNullableListOfNullableValueGenericType(string itemId) => null; // Noncompliant
+        public List<T?>? GetNullableListOfNullableValueGenericType(string itemId) => null; // Noncompliant, FP
+
+        public List<T> GetList(string itemId) => null; // Noncompliant
+    }
 }
