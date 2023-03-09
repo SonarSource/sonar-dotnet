@@ -234,8 +234,8 @@ public void Method()
             }
             """;
             var validator = SETestContext.CreateCSMethod(code, new LiteralDummyTestCheck()).Validator;
-            validator.ValidateTag("WithImplicit", x => x.Should().BeNull());
-            validator.ValidateTag("WithExplicit", x => x.Should().BeNull());
+            validator.ValidateTag("WithImplicit", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("WithExplicit", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
         }
 
 #if NET
@@ -249,7 +249,7 @@ public void Method()
                 Tag("Half", h);
                 """;
             var validator = SETestContext.CreateCS(code, new LiteralDummyTestCheck()).Validator;
-            validator.ValidateTag("Half", x => x.Should().BeNull());    // While it would be better to propagate constraints here, Half has custom conversion operators
+            validator.ValidateTag("Half", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));    // While it would be better to propagate constraints here, Half has custom conversion operators
         }
 
 #endif
