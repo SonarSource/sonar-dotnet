@@ -53,5 +53,6 @@ public abstract class ExcludeFromCodeCoverageAttributesNeedJustificationBase<TSy
         GetJustificationExpression(node) is not { } justification
         || string.IsNullOrWhiteSpace(Language.FindConstantValue(model, justification) as string);
 
-    private static bool HasJustificationProperty(INamedTypeSymbol symbol) => symbol.MemberNames.Contains("Justification");
+    private static bool HasJustificationProperty(INamedTypeSymbol symbol) =>
+        symbol.MemberNames.Contains(JustificationPropertyName);
 }
