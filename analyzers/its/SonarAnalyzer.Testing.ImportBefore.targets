@@ -11,6 +11,7 @@
       <!-- Only projects with explicit SonarQubeTestProject=true will be classified as test ones. -->
       <SonarProjectType Condition="$(SonarQubeTestProject) != 'true'">Product</SonarProjectType>
       <SonarProjectType Condition="$(SonarQubeTestProject) == 'true'">Test</SonarProjectType>
+      <!-- When SonarUnknownProjectType is present and it's true, indicated that we emulate the SonarLint envirorment -->
       <SonarProjectType Condition="$(SonarUnknownProjectType) == 'true'">Unknown</SonarProjectType>
     </PropertyGroup>
 
