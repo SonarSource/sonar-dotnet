@@ -70,7 +70,7 @@ namespace Tests.Diagnostics
         void Test_NullableValueTypes()
         {
             int? i = null;
-            _ = i.GetType();            // FN
+            _ = i.GetType();            // Noncompliant
             i = 42;
             _ = i.GetType();            // Compliant
             i = null;

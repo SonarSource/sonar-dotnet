@@ -20,34 +20,36 @@
 
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
-namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
+namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
+
+public abstract class NullPointerDereferenceBase : SymbolicRuleCheck
 {
-    public abstract class NullPointerDereferenceBase : SymbolicRuleCheck
+    internal const string DiagnosticId = "S2259";
+
+    protected virtual bool IsSupressed(SyntaxNode node) => false;
+
+    protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
-        internal const string DiagnosticId = "S2259";
-
-        protected virtual bool IsSupressed(SyntaxNode node) => false;
-
-        protected override ProgramState PreProcessSimple(SymbolicContext context)
-        {
-            var reference = context.Operation.Instance.Kind switch
+        var instance = context.Operation.Instance;
+        if (instance.Kind switch
             {
-                OperationKindEx.Invocation => context.Operation.Instance.ToInvocation().Instance,
-                OperationKindEx.PropertyReference => context.Operation.Instance.ToPropertyReference().Instance,
-                OperationKindEx.Await => context.Operation.Instance.ToAwait().Operation,
-                OperationKindEx.ArrayElementReference => context.Operation.Instance.ToArrayElementReference().ArrayReference,
+                OperationKindEx.Invocation => instance.ToInvocation() is { TargetMethod: var method } invocation && !method.IsAny(KnownType.System_Nullable_T, "GetValueOrDefault", "Equals", "ToString", "GetHashCode")
+                    ? invocation.Instance
+                    : null,
+                OperationKindEx.PropertyReference => instance.ToPropertyReference() is { Property: var property } propertyReference && !(property.IsInType(KnownType.System_Nullable_T) && property.Name is "HasValue" or "Value")
+                    ? propertyReference.Instance
+                    : null,
+                OperationKindEx.Await => instance.ToAwait().Operation,
+                OperationKindEx.ArrayElementReference => instance.ToArrayElementReference().ArrayReference,
                 _ => null,
-            };
-            if (reference != null
-                && context.HasConstraint(reference, ObjectConstraint.Null)
-                && !reference.Type.IsStruct() // ToDo: IsStruct() is a workaround before MMF-2401
-                && !IsSupressed(reference.Syntax)
-                && SemanticModel.GetTypeInfo(reference.Syntax).Nullability().FlowState != NullableFlowState.NotNull)
-            {
-                ReportIssue(reference, reference.Syntax.ToString());
-            }
-
-            return context.State;
+            } is { } reference
+            && context.HasConstraint(reference, ObjectConstraint.Null)
+            && !IsSupressed(reference.Syntax)
+            && SemanticModel.GetTypeInfo(reference.Syntax).Nullability().FlowState != NullableFlowState.NotNull)
+        {
+            ReportIssue(reference, reference.Syntax.ToString());
         }
+
+        return context.State;
     }
 }
