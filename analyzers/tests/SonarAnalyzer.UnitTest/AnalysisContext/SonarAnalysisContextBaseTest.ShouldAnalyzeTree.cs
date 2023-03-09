@@ -376,16 +376,20 @@ public partial class SonarAnalysisContextBaseTest
         ShouldAnalyzeTree_WithExclusionInclusionParametersSet_ReturnsTrueForIncludedFilesOnly(filePath, projectType, expectedResult, testInclusions: testInclusions);
 
     [DataTestMethod]
-    [DataRow("Foo", new string[] { "Foo" }, new string[] { "Foo" }, ProjectType.Product, false)]
-    [DataRow("Foo", new string[] { "NotFoo" }, new string[] { "Foo" }, ProjectType.Product, false)]
-    [DataRow("Foo", new string[] { "Foo" }, new string[] { "NotFoo" }, ProjectType.Product, true)]
-    [DataRow("Foo", new string[] { "NotFoo" }, new string[] { "NotFoo" }, ProjectType.Product, false)]
-    [DataRow("Foo", new string[] { "Foo" }, new string[] { "Foo" }, ProjectType.Test, true)]
-    [DataRow("Foo", new string[] { "NotFoo" }, new string[] { "Foo" }, ProjectType.Test, true)]
-    [DataRow("Foo", new string[] { "Foo" }, new string[] { "NotFoo" }, ProjectType.Test, true)]
-    [DataRow("Foo", new string[] { "NotFoo" }, new string[] { "NotFoo" }, ProjectType.Test, true)]
-    public void ShouldAnalyzeTree_MixedInput_ReturnExpected(string filePath, string[] inclusions, string[] exclusions, ProjectType projectType, bool expectedResult) =>
-        ShouldAnalyzeTree_WithExclusionInclusionParametersSet_ReturnsTrueForIncludedFilesOnly(filePath, projectType, expectedResult, inclusions: inclusions, exclusions: exclusions);
+    [DataRow("Foo", new string[] { "Foo" }, new string[] { "Foo" }, false)]
+    [DataRow("Foo", new string[] { "NotFoo" }, new string[] { "Foo" }, false)]
+    [DataRow("Foo", new string[] { "Foo" }, new string[] { "NotFoo" }, true)]
+    [DataRow("Foo", new string[] { "NotFoo" }, new string[] { "NotFoo" }, false)]
+    public void ShouldAnalyzeTree_MixedInput_ProductProject_ReturnExpected(string filePath, string[] inclusions, string[] exclusions, bool expectedResult) =>
+        ShouldAnalyzeTree_WithExclusionInclusionParametersSet_ReturnsTrueForIncludedFilesOnly(filePath, ProjectType.Product, expectedResult, inclusions: inclusions, exclusions: exclusions);
+
+    [DataTestMethod]
+    [DataRow("Foo", new string[] { "Foo" }, new string[] { "Foo" }, false)]
+    [DataRow("Foo", new string[] { "NotFoo" }, new string[] { "Foo" }, false)]
+    [DataRow("Foo", new string[] { "Foo" }, new string[] { "NotFoo" }, true)]
+    [DataRow("Foo", new string[] { "NotFoo" }, new string[] { "NotFoo" }, false)]
+    public void ShouldAnalyzeTree_MixedInput_TestProject_ReturnExpected(string filePath, string[] testInclusions, string[] testExclusions, bool expectedResult) =>
+        ShouldAnalyzeTree_WithExclusionInclusionParametersSet_ReturnsTrueForIncludedFilesOnly(filePath, ProjectType.Test, expectedResult, testInclusions: testInclusions, testExclusions: testExclusions);
 
     private void ShouldAnalyzeTree_WithExclusionInclusionParametersSet_ReturnsTrueForIncludedFilesOnly(
         string fileName,
