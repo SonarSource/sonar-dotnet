@@ -24,6 +24,8 @@ public abstract class ExcludeFromCodeCoverageAttributesNeedJustificationBase<TSy
     where TSyntaxKind : struct
 {
     private const string DiagnosticId = "S6513";
+
+    /// <summary>"Justification" was added in .Net 5, while ExcludeFromCodeCoverage in netstandard2.0.</summary>
     protected const string JustificationPropertyName = "Justification";
 
     protected override string MessageFormat => "Add a justification.";
@@ -47,8 +49,7 @@ public abstract class ExcludeFromCodeCoverageAttributesNeedJustificationBase<TSy
             },
             Language.SyntaxKind.Attribute);
 
-    /// <summary>"Justification" was added in .Net 5 whileExcludeFromCodeCoverage in netstandard2.0.</summary>
-    private bool NoJustification(SyntaxNode node, SemanticModel model) =>
+   private bool NoJustification(SyntaxNode node, SemanticModel model) =>
         GetJustificationExpression(node) is not { } justification
         || string.IsNullOrWhiteSpace(Language.FindConstantValue(model, justification) as string);
 
