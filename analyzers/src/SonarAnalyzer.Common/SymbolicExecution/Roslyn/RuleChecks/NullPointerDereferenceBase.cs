@@ -30,26 +30,35 @@ public abstract class NullPointerDereferenceBase : SymbolicRuleCheck
 
     protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
-        var instance = context.Operation.Instance;
-        if (instance.Kind switch
-            {
-                OperationKindEx.Invocation => instance.ToInvocation() is { TargetMethod: var method } invocation && !method.IsAny(KnownType.System_Nullable_T, "GetValueOrDefault", "Equals", "ToString", "GetHashCode")
-                    ? invocation.Instance
-                    : null,
-                OperationKindEx.PropertyReference => instance.ToPropertyReference() is { Property: var property } propertyReference && !(property.IsInType(KnownType.System_Nullable_T) && property.Name is "HasValue" or "Value")
-                    ? propertyReference.Instance
-                    : null,
-                OperationKindEx.Await => instance.ToAwait().Operation,
-                OperationKindEx.ArrayElementReference => instance.ToArrayElementReference().ArrayReference,
-                _ => null,
-            } is { } reference
+        if (ReferenceOrDefault(context.Operation.Instance) is { } reference
             && context.HasConstraint(reference, ObjectConstraint.Null)
             && !IsSupressed(reference.Syntax)
             && SemanticModel.GetTypeInfo(reference.Syntax).Nullability().FlowState != NullableFlowState.NotNull)
         {
             ReportIssue(reference, reference.Syntax.ToString());
         }
-
         return context.State;
     }
+
+    private static IOperation ReferenceOrDefault(IOperation instance) =>
+        instance.Kind switch
+        {
+            OperationKindEx.Invocation => InvocationOrDefault(instance),
+            OperationKindEx.PropertyReference => PropertyReferenceOrDefault(instance),
+            OperationKindEx.Await => instance.ToAwait().Operation,
+            OperationKindEx.ArrayElementReference => instance.ToArrayElementReference().ArrayReference,
+            _ => null,
+        };
+
+    private static IOperation InvocationOrDefault(IOperation instance) =>
+        instance.ToInvocation() is { TargetMethod: var method } invocation
+        && !method.IsAny(KnownType.System_Nullable_T, nameof(Nullable<int>.GetValueOrDefault), nameof(Nullable<int>.Equals), nameof(Nullable<int>.ToString), nameof(Nullable<int>.GetHashCode))     // GetType raises, since it throws NRE
+            ? invocation.Instance
+            : null;
+
+    private static IOperation PropertyReferenceOrDefault(IOperation instance) =>
+        instance.ToPropertyReference() is { Property: var property } propertyReference
+        && !(property.IsInType(KnownType.System_Nullable_T) && property.Name is nameof(Nullable<int>.HasValue) or nameof(Nullable<int>.Value))  // HasValue doesn't throw; Value is covered by S3655
+            ? propertyReference.Instance
+            : null;
 }
