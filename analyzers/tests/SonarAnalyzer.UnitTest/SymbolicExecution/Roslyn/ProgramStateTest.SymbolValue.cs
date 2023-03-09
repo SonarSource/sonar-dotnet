@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 
@@ -78,9 +79,9 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var sut = ProgramState.Empty;
 
             sut = sut.SetSymbolValue(symbol, value);
-            sut[symbol].Should().NotBeNull();
+            sut[symbol].Should().NotBeNull().And.HaveNoConstraints();
             sut = sut.SetSymbolValue(symbol, null);
-            sut[symbol].Should().BeNull();
+            sut[symbol].Should().BeNull().And.HaveNoConstraints();
         }
 
         [TestMethod]
@@ -140,7 +141,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         {
             var symbol = CreateSymbols().First();
             var sut = ProgramState.Empty.SetSymbolConstraint(symbol, DummyConstraint.Dummy);
-            sut[symbol].HasConstraint(DummyConstraint.Dummy).Should().BeTrue();
+            sut[symbol].Should().HaveOnlyConstraint(DummyConstraint.Dummy);
         }
 
         [TestMethod]
@@ -150,8 +151,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var sut = ProgramState.Empty
                 .SetSymbolValue(symbol, new SymbolicValue().WithConstraint(TestConstraint.First))
                 .SetSymbolConstraint(symbol, DummyConstraint.Dummy);
-            sut[symbol].HasConstraint(TestConstraint.First).Should().BeTrue("original constraints of different type should be preserved");
-            sut[symbol].HasConstraint(DummyConstraint.Dummy).Should().BeTrue();
+            sut[symbol].Should().HaveOnlyConstraints(new SymbolicConstraint[] { TestConstraint.First, DummyConstraint.Dummy }, "original constraints of different type should be preserved");
         }
     }
 }
