@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using Alias = System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute;
 
 [ExcludeFromCodeCoverage] // Noncompliant ^2#23 {{Add a justification.}}
 class Noncompliant
@@ -21,6 +22,9 @@ class Noncompliant
 
     [ExcludeFromCodeCoverage(Justification = "  ")] // Noncompliant
     void WithWhiteSpace() { }
+
+    [Alias(Justification = "")] // Noncompliant
+    void WithAlias() { }
 
     [ExcludeFromCodeCoverage] // Noncompliant
     [CLSCompliant(false)]

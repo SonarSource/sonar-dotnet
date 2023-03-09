@@ -1,5 +1,6 @@
 ﻿' Commented line for concurrent namespace
 Imports System.Diagnostics.CodeAnalysis
+Imports [Alias] = System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute
 
 <ExcludeFromCodeCoverage> ' Noncompliant^2#23 {{Add a justification.}}
 Class Noncompliant
@@ -12,6 +13,10 @@ Class Noncompliant
 
     <Global.System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage> ' Noncompliant
     Sub GloballyDeclaredNamespace()
+    End Sub
+
+    <[Alias](Justification:="")> ' Noncompliant
+    Sub WithAlias()
     End Sub
 
     <ExcludeFromCodeCoverage(Justification:=Nothing)> ' Noncompliant
