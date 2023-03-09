@@ -2,9 +2,9 @@
 namespace SonarLintExclusionsTest
 {
     [TestClass]
-    public class UnitTest1
+    public class NotIncludedTest
     {
         [TestMethod]
-        public void TestMethod1(){ }
+        public void TestMethod1() { }
     }
 }

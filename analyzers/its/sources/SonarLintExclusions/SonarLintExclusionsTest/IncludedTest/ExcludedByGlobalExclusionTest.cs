@@ -2,7 +2,7 @@
 namespace SonarLintExclusionsTest
 {
     [TestClass]
-    public class ExcludedTest
+    public class ExcludedByGlobalExclusionTest
     {
         [TestMethod]
         public void TestMethod1() { }
