@@ -47,6 +47,7 @@ public abstract class ExcludeFromCodeCoverageAttributesNeedJustificationBase<TSy
             },
             Language.SyntaxKind.Attribute);
 
+    /// <summary>"Justification" was added in .Net 5 whileExcludeFromCodeCoverage in netstandard2.0.</summary>
     private bool NoJustification(SyntaxNode node, SemanticModel model) =>
         GetJustificationExpression(node) is not { } justification
         || string.IsNullOrWhiteSpace(Language.FindConstantValue(model, justification) as string);
