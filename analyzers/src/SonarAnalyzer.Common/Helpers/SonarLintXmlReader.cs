@@ -58,7 +58,7 @@ public class SonarLintXmlReader
     public string[] GlobalTestExclusions => globalTestExclusions ??= ReadCommaSeparatedArray(ReadSettingsProperty("sonar.global.test.exclusions"));
 
     private List<SonarLintXmlRule> parametrizedRules;
-    public List<SonarLintXmlRule> ParametrizedRules => parametrizedRules ??= ReadRulesParameters();
+    public List<SonarLintXmlRule> ParametrizedRules => parametrizedRules ??= ReadRuleParameters();
 
     public SonarLintXmlReader(SourceText sonarLintXml, string language = LanguageNames.CSharp)
     {
@@ -83,7 +83,7 @@ public class SonarLintXmlReader
         }
     }
 
-    private List<SonarLintXmlRule> ReadRulesParameters() =>
+    private List<SonarLintXmlRule> ReadRuleParameters() =>
         sonarLintXml is { Rules: { } rules }
         ? rules.Where(x => x.Parameters.Any()).ToList()
         : new();

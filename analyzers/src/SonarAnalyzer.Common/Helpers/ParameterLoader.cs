@@ -38,6 +38,11 @@ namespace SonarAnalyzer.Helpers
          */
         internal static void SetParameterValues(ParametrizedDiagnosticAnalyzer parameteredAnalyzer, SonarLintXmlReader sonarLintReader)
         {
+            if (!sonarLintReader.ParametrizedRules.Any())
+            {
+                return;
+            }
+
             var propertyParameterPairs = parameteredAnalyzer.GetType()
                 .GetRuntimeProperties()
                 .Select(x => new { Property = x, Descriptor = x.GetCustomAttributes<RuleParameterAttribute>().SingleOrDefault() })

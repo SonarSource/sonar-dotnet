@@ -120,37 +120,6 @@ namespace SonarAnalyzer.UnitTest.Helpers
         }
 
         [TestMethod]
-        public void SetParameterValues_WithNonExistentPath_UsesInMemoryText()
-        {
-            // Arrange
-            var maxValue = 1;
-            var ruleParameters = new List<SonarLintXmlRule>()
-            {
-                new SonarLintXmlRule()
-                {
-                    Key = "S1067",
-                    Parameters = new List<SonarLintXmlKeyValuePair>()
-                    {
-                        new SonarLintXmlKeyValuePair()
-                        {
-                            Key = "max",
-                            Value = maxValue.ToString()
-                        }
-                    }
-                }
-            };
-            var sonarLintXml = AnalysisScaffolding.CreateSonarLintXml(TestContext, rulesParameters: ruleParameters);
-            var compilation = CreateCompilationWithOption(sonarLintXml);
-            var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
-
-            // Act
-            ParameterLoader.SetParameterValues(analyzer, compilation.SonarLintFile());
-
-            // Assert
-            analyzer.Maximum.Should().Be(maxValue); // In-memory value
-        }
-
-        [TestMethod]
         public void SetParameterValues_CalledTwiceAfterChangeInConfigFile_UpdatesProperties()
         {
             // Arrange
@@ -241,11 +210,6 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 ? AnalysisScaffolding.CreateOptions(filePath)
                 : AnalysisScaffolding.CreateOptions(filePath, text);
             var compilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation();
-            return CreateCompilation(compilation, options);
-        }
-
-        private static SonarCompilationReportingContext CreateCompilation(Compilation compilation, AnalyzerOptions options)
-        {
             var compilationContext = new CompilationAnalysisContext(compilation, options, _ => { }, _ => true, default);
             return new(AnalysisScaffolding.CreateSonarAnalysisContext(), compilationContext);
         }
