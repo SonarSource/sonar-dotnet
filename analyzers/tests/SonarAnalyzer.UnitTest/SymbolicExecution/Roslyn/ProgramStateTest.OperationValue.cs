@@ -27,7 +27,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
     public partial class ProgramStateTest
     {
         [TestMethod]
-        public void SetOperationValue_WithWrapper_ReturnsValues()
+        public void SetOperationValue_WithWrapperSonar_ReturnsValues()
         {
             var value1 = new SymbolicValue();
             var value2 = new SymbolicValue();
@@ -35,6 +35,29 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var op1 = new IOperationWrapperSonar(operations[0]);
             var op2 = new IOperationWrapperSonar(operations[1]);
             var op3 = new IOperationWrapperSonar(operations[2]);
+            var sut = ProgramState.Empty;
+
+            sut[op1].Should().BeNull();
+            sut[op2].Should().BeNull();
+            sut[op3].Should().BeNull();
+
+            sut = sut.SetOperationValue(op1, value1);
+            sut = sut.SetOperationValue(op2, value2);
+
+            sut[op1].Should().Be(value1);
+            sut[op2].Should().Be(value2);
+            sut[op3].Should().BeNull();     // Value was not set
+        }
+
+        [TestMethod]
+        public void SetOperationValue_WithWrapper_ReturnsValues()
+        {
+            var value1 = new SymbolicValue();
+            var value2 = new SymbolicValue();
+            var operations = TestHelper.CompileCfgBodyCS("var x = 0; x = 1; x = 42;").Blocks[1].Operations;
+            var op1 = ISimpleAssignmentOperationWrapper.FromOperation(operations[0]);
+            var op2 = IExpressionStatementOperationWrapper.FromOperation(operations[1]);
+            var op3 = IExpressionStatementOperationWrapper.FromOperation(operations[2]);
             var sut = ProgramState.Empty;
 
             sut[op1].Should().BeNull();
@@ -163,6 +186,10 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
 
         [TestMethod]
         public void SetOperationValue_WithWrapper_NullOperation_Throws() =>
+            ProgramState.Empty.Invoking(x => x.SetOperationValue((IOperationWrapper)null, new())).Should().Throw<ArgumentNullException>();
+
+        [TestMethod]
+        public void SetOperationValue_WithWrapperSonar_NullOperation_Throws() =>
             ProgramState.Empty.Invoking(x => x.SetOperationValue((IOperationWrapperSonar)null, new())).Should().Throw<ArgumentNullException>();
 
         [TestMethod]

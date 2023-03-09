@@ -30,21 +30,26 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 internal abstract class BranchingProcessor<T> : MultiProcessor<T>
     where T : IOperationWrapper
 {
-    protected abstract SymbolicConstraint BoolConstraintFromOperation(SymbolicContext context, T operation);
+    protected abstract SymbolicConstraint BoolConstraintFromOperation(ProgramState state, T operation);
     protected abstract ProgramState LearnBranchingConstraint(ProgramState state, T operation, bool falseBranch);
+
+    protected virtual ProgramState PreProcess(ProgramState state, T operation) =>
+        state;
 
     protected override ProgramState[] Process(SymbolicContext context, T operation)
     {
-        if (BoolConstraintFromOperation(context, operation) is { } constraint)
+        var state = PreProcess(context.State, operation);
+        if (BoolConstraintFromOperation(state, operation) is { } constraint)
         {
-            return context.SetOperationConstraint(constraint).ToArray();    // We already know the answer from existing constraints
+            return state.SetOperationConstraint(context.Operation, constraint).ToArray();    // We already know the answer from existing constraints
         }
         else
         {
-            var positive = LearnBranchingConstraint(context.State, operation, false);
-            var negative = LearnBranchingConstraint(context.State, operation, true);
-            return positive == context.State && negative == context.State
-                ? context.State.ToArray()   // We can't learn anything, just move on
+            var beforeLearningState = state;
+            var positive = LearnBranchingConstraint(state, operation, false);
+            var negative = LearnBranchingConstraint(state, operation, true);
+            return positive == beforeLearningState && negative == beforeLearningState
+                ? beforeLearningState.ToArray()   // We can't learn anything, just move on
                 : new[]
                 {
                     positive.SetOperationConstraint(context.Operation, BoolConstraint.True),
