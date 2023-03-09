@@ -37,11 +37,11 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void SetParameterValues_WhenNoSonarLintIsGiven_DoesNotPopulateParameters(string filePath)
         {
             // Arrange
-            var sut = CreateSutWithOption(filePath, SourceText.From(File.ReadAllText("ResourceTests\\SonarLint.xml")));
+            var compilation = CreateCompilationWithOption(filePath, SourceText.From(File.ReadAllText("ResourceTests\\SonarLint.xml")));
             var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
             // Act
-            ParameterLoader.SetParameterValues(analyzer, sut.SonarLintFile());
+            ParameterLoader.SetParameterValues(analyzer, compilation.SonarLintFile());
 
             // Assert
             analyzer.Maximum.Should().Be(3); // Default value
@@ -53,11 +53,11 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void SetParameterValues_WhenGivenValidSonarLintFilePath_PopulatesProperties(string filePath)
         {
             // Arrange
-            var sut = CreateSutWithOption(filePath, SourceText.From(File.ReadAllText("ResourceTests\\SonarLint.xml")));
+            var compilation = CreateCompilationWithOption(filePath, SourceText.From(File.ReadAllText("ResourceTests\\SonarLint.xml")));
             var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
             // Act
-            ParameterLoader.SetParameterValues(analyzer, sut.SonarLintFile());
+            ParameterLoader.SetParameterValues(analyzer, compilation.SonarLintFile());
 
             // Assert
             analyzer.Maximum.Should().Be(1); // Value from the xml file
@@ -67,11 +67,11 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void SetParameterValues_WhenGivenSonarLintFileHasIntParameterType_PopulatesProperties()
         {
             // Arrange
-            var sut = CreateSutWithOption("ResourceTests\\SonarLint.xml");
+            var compilation = CreateCompilationWithOption("ResourceTests\\SonarLint.xml");
             var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
             // Act
-            ParameterLoader.SetParameterValues(analyzer, sut.SonarLintFile());
+            ParameterLoader.SetParameterValues(analyzer, compilation.SonarLintFile());
 
             // Assert
             analyzer.Maximum.Should().Be(1); // Value from the xml file
@@ -81,11 +81,11 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void SetParameterValues_WhenGivenSonarLintFileHasStringParameterType_OnlyOneParameter_PopulatesProperty()
         {
             // Arrange
-            var sut = CreateSutWithOption("ResourceTests\\RuleWithStringParameter\\SonarLint.xml");
+            var compilation = CreateCompilationWithOption("ResourceTests\\RuleWithStringParameter\\SonarLint.xml");
             var analyzer = new EnumNameShouldFollowRegex(); // Cannot use mock because we use reflection to find properties.
 
             // Act
-            ParameterLoader.SetParameterValues(analyzer, sut.SonarLintFile());
+            ParameterLoader.SetParameterValues(analyzer, compilation.SonarLintFile());
 
             // Assert
             analyzer.FlagsEnumNamePattern.Should().Be("1"); // value from XML file
@@ -95,11 +95,11 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void SetParameterValues_WhenGivenSonarLintFileHasBooleanParameterType_OnlyOneParameter_PopulatesProperty()
         {
             // Arrange
-            var sut = CreateSutWithOption("ResourceTests\\RuleWithBooleanParameter\\SonarLint.xml");
+            var compilation = CreateCompilationWithOption("ResourceTests\\RuleWithBooleanParameter\\SonarLint.xml");
             var analyzer = new CheckFileLicense(); // Cannot use mock because we use reflection to find properties.
 
             // Act
-            ParameterLoader.SetParameterValues(analyzer, sut.SonarLintFile());
+            ParameterLoader.SetParameterValues(analyzer, compilation.SonarLintFile());
 
             // Assert
             analyzer.IsRegularExpression.Should().BeTrue(); // value from XML file
@@ -109,11 +109,11 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void SetParameterValues_WhenGivenValidSonarLintFileAndDoesNotContainAnalyzerParameters_DoesNotPopulateProperties()
         {
             // Arrange
-            var sut = CreateSutWithOption("ResourceTests\\SonarLint.xml");
+            var compilation = CreateCompilationWithOption("ResourceTests\\SonarLint.xml");
             var analyzer = new LineLength(); // Cannot use mock because we use reflection to find properties.
 
             // Act
-            ParameterLoader.SetParameterValues(analyzer, sut.SonarLintFile());
+            ParameterLoader.SetParameterValues(analyzer, compilation.SonarLintFile());
 
             // Assert
             analyzer.Maximum.Should().Be(200); // Default value
@@ -140,11 +140,11 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 }
             };
             var sonarLintXml = AnalysisScaffolding.CreateSonarLintXml(TestContext, rulesParameters: ruleParameters);
-            var sut = CreateSutWithOption(sonarLintXml);
+            var compilation = CreateCompilationWithOption(sonarLintXml);
             var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
             // Act
-            ParameterLoader.SetParameterValues(analyzer, sut.SonarLintFile());
+            ParameterLoader.SetParameterValues(analyzer, compilation.SonarLintFile());
 
             // Assert
             analyzer.Maximum.Should().Be(maxValue); // In-memory value
@@ -172,11 +172,11 @@ namespace SonarAnalyzer.UnitTest.Helpers
             };
             var sonarLintXml = AnalysisScaffolding.GenerateSonarLintXmlContent(rulesParameters: ruleParameters);
             var filePath = TestHelper.WriteFile(TestContext, "SonarLint.xml", sonarLintXml);
-            var sut = CreateSutWithOption(filePath);
+            var compilation = CreateCompilationWithOption(filePath);
             var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
             // Act
-            ParameterLoader.SetParameterValues(analyzer, sut.SonarLintFile());
+            ParameterLoader.SetParameterValues(analyzer, compilation.SonarLintFile());
             analyzer.Maximum.Should().Be(maxValue);
 
             // Modify the in-memory additional file
@@ -184,9 +184,9 @@ namespace SonarAnalyzer.UnitTest.Helpers
             ruleParameters.First().Parameters.First().Value = maxValue.ToString();
             var modifiedSonarLintXml = AnalysisScaffolding.GenerateSonarLintXmlContent(rulesParameters: ruleParameters);
             var modifiedFilePath = TestHelper.WriteFile(TestContext, "SonarLint.xml", modifiedSonarLintXml);
-            sut = CreateSutWithOption(modifiedFilePath);
+            compilation = CreateCompilationWithOption(modifiedFilePath);
 
-            ParameterLoader.SetParameterValues(analyzer, sut.SonarLintFile());
+            ParameterLoader.SetParameterValues(analyzer, compilation.SonarLintFile());
             analyzer.Maximum.Should().Be(maxValue);
         }
 
@@ -197,11 +197,11 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void SetParameterValues_WithMalformedXml_DoesNotPopulateProperties(string sonarLintXmlContent)
         {
             // Arrange
-            var sut = CreateSutWithOption("fakePath\\SonarLint.xml", SourceText.From(sonarLintXmlContent));
+            var compilation = CreateCompilationWithOption("fakePath\\SonarLint.xml", SourceText.From(sonarLintXmlContent));
             var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
             // Act
-            ParameterLoader.SetParameterValues(analyzer, sut.SonarLintFile());
+            ParameterLoader.SetParameterValues(analyzer, compilation.SonarLintFile());
 
             // Assert
             analyzer.Maximum.Should().Be(3); // Default value
@@ -211,11 +211,11 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void SetParameterValues_WithWrongPropertyType_StringInsteadOfInt_DoesNotPopulateProperties()
         {
             // Arrange
-            var sut = CreateSutWithOption("ResourceTests\\StringInsteadOfInt\\SonarLint.xml");
+            var compilation = CreateCompilationWithOption("ResourceTests\\StringInsteadOfInt\\SonarLint.xml");
             var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
             // Act
-            ParameterLoader.SetParameterValues(analyzer, sut.SonarLintFile());
+            ParameterLoader.SetParameterValues(analyzer, compilation.SonarLintFile());
 
             // Assert
             analyzer.Maximum.Should().Be(3); // Default value
@@ -225,26 +225,26 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void SetParameterValues_WithWrongPropertyType_StringInsteadOfBoolean_DoesNotPopulateProperties()
         {
             // Arrange
-            var sut = CreateSutWithOption("ResourceTests\\StringInsteadOfBoolean\\SonarLint.xml");
+            var compilation = CreateCompilationWithOption("ResourceTests\\StringInsteadOfBoolean\\SonarLint.xml");
             var analyzer = new CheckFileLicense(); // Cannot use mock because we use reflection to find properties.
 
             // Act
-            ParameterLoader.SetParameterValues(analyzer, sut.SonarLintFile());
+            ParameterLoader.SetParameterValues(analyzer, compilation.SonarLintFile());
 
             // Assert
             analyzer.IsRegularExpression.Should().BeFalse(); // Default value
         }
 
-        private static SonarCompilationReportingContext CreateSutWithOption(string filePath, SourceText text = null)
+        private static SonarCompilationReportingContext CreateCompilationWithOption(string filePath, SourceText text = null)
         {
             var options = text is null
                 ? AnalysisScaffolding.CreateOptions(filePath)
                 : AnalysisScaffolding.CreateOptions(filePath, text);
             var compilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation();
-            return CreateSut(compilation, options);
+            return CreateCompilation(compilation, options);
         }
 
-        private static SonarCompilationReportingContext CreateSut(Compilation compilation, AnalyzerOptions options)
+        private static SonarCompilationReportingContext CreateCompilation(Compilation compilation, AnalyzerOptions options)
         {
             var compilationContext = new CompilationAnalysisContext(compilation, options, _ => { }, _ => true, default);
             return new(AnalysisScaffolding.CreateSonarAnalysisContext(), compilationContext);

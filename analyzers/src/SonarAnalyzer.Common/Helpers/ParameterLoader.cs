@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Helpers
             var propertyParameterPairs = parameteredAnalyzer.GetType()
                 .GetRuntimeProperties()
                 .Select(x => new { Property = x, Descriptor = x.GetCustomAttributes<RuleParameterAttribute>().SingleOrDefault() })
-                .Where(x => x.Descriptor != null);
+                .Where(x => x.Descriptor is { });
 
             var ids = new HashSet<string>(parameteredAnalyzer.SupportedDiagnostics.Select(diagnostic => diagnostic.Id));
             foreach (var propertyParameterPair in propertyParameterPairs)
