@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.IO;
 using System.Text;
 using Microsoft.CodeAnalysis.Text;
 using Moq;
@@ -78,7 +77,7 @@ public partial class SonarAnalysisContextBaseTest
     [DataRow(OtherFileName, true)]
     public void ShouldAnalyzeTree_GeneratedFile_NoSonarLintXml(string fileName, bool expected)
     {
-        var sonarLintXml = CreateSonarLintXml(true);
+        var sonarLintXml = new DummySourceText(AnalysisScaffolding.GenerateSonarLintXmlContent(analyzeGeneratedCode: true));
         var (compilation, tree) = CreateDummyCompilation(AnalyzerLanguage.CSharp, fileName);
         var sut = CreateSut(compilation, CreateOptions(sonarLintXml, @"ResourceTests\Foo.xml"));
 
@@ -89,7 +88,7 @@ public partial class SonarAnalysisContextBaseTest
     [TestMethod]
     public void ShouldAnalyzeTree_GeneratedFile_ShouldAnalyzeGeneratedProvider_IsCached()
     {
-        var sonarLintXml = CreateSonarLintXml(true);
+        var sonarLintXml = new DummySourceText(AnalysisScaffolding.GenerateSonarLintXmlContent(analyzeGeneratedCode: true));
         var additionalText = new Mock<AdditionalText>();
         additionalText.Setup(x => x.Path).Returns("SonarLint.xml");
         additionalText.Setup(x => x.GetText(default)).Returns(sonarLintXml);
@@ -129,7 +128,7 @@ public partial class SonarAnalysisContextBaseTest
     [DataRow(OtherFileName)]
     public void ShouldAnalyzeTree_GeneratedFile_AnalyzeGenerated_AnalyzeAllFiles(string fileName)
     {
-        var sonarLintXml = CreateSonarLintXml(true);
+        var sonarLintXml = new DummySourceText(AnalysisScaffolding.GenerateSonarLintXmlContent(analyzeGeneratedCode: true));
         var (compilation, tree) = CreateDummyCompilation(AnalyzerLanguage.CSharp, fileName);
         var sut = CreateSut(compilation, CreateOptions(sonarLintXml));
 
@@ -137,25 +136,24 @@ public partial class SonarAnalysisContextBaseTest
     }
 
     [DataTestMethod]
-    [DataRow(GeneratedFileName, false)]
-    [DataRow(OtherFileName, true)]
-    public void ShouldAnalyzeTree_CorrectSettingUsed(string fileName, bool expectedCSharp)
+    [DataRow(GeneratedFileName, LanguageNames.CSharp, false)]
+    [DataRow(OtherFileName, LanguageNames.CSharp, true)]
+    [DataRow(GeneratedFileName, LanguageNames.VisualBasic, false)]
+    [DataRow(OtherFileName, LanguageNames.VisualBasic, true)]
+    public void ShouldAnalyzeTree_CorrectSettingUsed(string fileName, string language, bool expected)
     {
-        var sonarLintXml = CreateSonarLintXml(false);
-        var (compilationCS, treeCS) = CreateDummyCompilation(AnalyzerLanguage.CSharp, fileName);
-        var (compilationVB, treeVB) = CreateDummyCompilation(AnalyzerLanguage.VisualBasic, fileName);
-        var sutCS = CreateSut(compilationCS, CreateOptions(sonarLintXml));
-        var sutVB = CreateSut(compilationVB, CreateOptions(sonarLintXml));
+        var sonarLintXml = new DummySourceText(AnalysisScaffolding.GenerateSonarLintXmlContent(language: language, analyzeGeneratedCode: false));
+        var analyzerLanguage = language == LanguageNames.CSharp ? AnalyzerLanguage.CSharp : AnalyzerLanguage.VisualBasic;
+        var (compilation, tree) = CreateDummyCompilation(analyzerLanguage, fileName);
+        var sut = CreateSut(compilation, CreateOptions(sonarLintXml));
+        GeneratedCodeRecognizer generatedCodeRecognizer = language == LanguageNames.CSharp ? CSharpGeneratedCodeRecognizer.Instance : VisualBasicGeneratedCodeRecognizer.Instance;
 
-        sutCS.ShouldAnalyzeTree(treeCS, CSharpGeneratedCodeRecognizer.Instance).Should().Be(expectedCSharp);
-        sutVB.ShouldAnalyzeTree(treeVB, VisualBasicGeneratedCodeRecognizer.Instance).Should().BeTrue();
-
-        sonarLintXml.ToStringCallCount.Should().Be(2, "file should be read once per language");
+        sut.ShouldAnalyzeTree(tree, generatedCodeRecognizer).Should().Be(expected);
+        sonarLintXml.ToStringCallCount.Should().Be(1, "file should be read once per language");
 
         // Read again to check caching
-        sutVB.ShouldAnalyzeTree(treeVB, VisualBasicGeneratedCodeRecognizer.Instance).Should().BeTrue();
-
-        sonarLintXml.ToStringCallCount.Should().Be(2, "file should not have been read again");
+        sut.ShouldAnalyzeTree(tree, generatedCodeRecognizer).Should().Be(expected);
+        sonarLintXml.ToStringCallCount.Should().Be(1, "file should not have been read again");
     }
 
     // Until https://github.com/SonarSource/sonar-dotnet/issues/2228, we were considering a file as generated if the word "generated" was contained inside a region.
@@ -329,26 +327,106 @@ public partial class SonarAnalysisContextBaseTest
         VerifyEmpty("test.cs", sourceCs, new CS.EmptyStatement());
     }
 
-    private static DummySourceText CreateSonarLintXml(bool analyzeGeneratedCSharp) =>
-        new($"""
-            <?xml version="1.0" encoding="UTF-8"?>
-            <AnalysisInput>
-                <Settings>
-                    <Setting>
-                        <Key>dummy</Key>
-                        <Value>false</Value>
-                    </Setting>
-                    <Setting>
-                        <Key>sonar.cs.analyzeGeneratedCode</Key>
-                        <Value>{analyzeGeneratedCSharp.ToString().ToLower()}</Value>
-                    </Setting>
-                    <Setting>
-                        <Key>sonar.vbnet.analyzeGeneratedCode</Key>
-                        <Value>true</Value>
-                    </Setting>
-                </Settings>
-            </AnalysisInput>
-            """);
+    [DataTestMethod]
+    [DataRow("Foo", new string[] { "Foo" }, ProjectType.Product, false)]
+    [DataRow("Foo", new string[] { "NotFoo" }, ProjectType.Product, true)]
+    [DataRow("Foo", new string[] { "Foo" }, ProjectType.Test, true)]
+    [DataRow("Foo", new string[] { "NotFoo" }, ProjectType.Test, true)]
+    public void ShouldAnalyzeTree_Exclusions_ReturnExpected(string filePath, string[] exclusions, ProjectType projectType, bool expectedResult) =>
+        ShouldAnalyzeTree_WithExclusionInclusionParametersSet_ReturnsTrueForIncludedFilesOnly(filePath, projectType, expectedResult, exclusions: exclusions);
+
+    [DataTestMethod]
+    [DataRow("Foo", new string[] { "Foo" }, ProjectType.Product, false)]
+    [DataRow("Foo", new string[] { "NotFoo" }, ProjectType.Product, true)]
+    [DataRow("Foo", new string[] { "Foo" }, ProjectType.Test, true)]
+    [DataRow("Foo", new string[] { "NotFoo" }, ProjectType.Test, true)]
+    public void ShouldAnalyzeTree_GlobalExclusions_ReturnExpected(string filePath, string[] globalExclusions, ProjectType projectType, bool expectedResult) =>
+        ShouldAnalyzeTree_WithExclusionInclusionParametersSet_ReturnsTrueForIncludedFilesOnly(filePath, projectType, expectedResult, globalExclusions: globalExclusions);
+
+    [DataTestMethod]
+    [DataRow("Foo", new string[] { "Foo" }, ProjectType.Product, true)]
+    [DataRow("Foo", new string[] { "NotFoo" }, ProjectType.Product, true)]
+    [DataRow("Foo", new string[] { "Foo" }, ProjectType.Test, false)]
+    [DataRow("Foo", new string[] { "NotFoo" }, ProjectType.Test, true)]
+    public void ShouldAnalyzeTree_TestExclusions_ReturnExpected(string filePath, string[] testExclusions, ProjectType projectType, bool expectedResult) =>
+        ShouldAnalyzeTree_WithExclusionInclusionParametersSet_ReturnsTrueForIncludedFilesOnly(filePath, projectType, expectedResult, testExclusions: testExclusions);
+
+    [DataTestMethod]
+    [DataRow("Foo", new string[] { "Foo" }, ProjectType.Product, true)]
+    [DataRow("Foo", new string[] { "NotFoo" }, ProjectType.Product, true)]
+    [DataRow("Foo", new string[] { "Foo" }, ProjectType.Test, false)]
+    [DataRow("Foo", new string[] { "NotFoo" }, ProjectType.Test, true)]
+    public void ShouldAnalyzeTree_GlobalTestExclusions_ReturnExpected(string filePath, string[] globalTestExclusions, ProjectType projectType, bool expectedResult) =>
+        ShouldAnalyzeTree_WithExclusionInclusionParametersSet_ReturnsTrueForIncludedFilesOnly(filePath, projectType, expectedResult, globalTestExclusions: globalTestExclusions);
+
+    [DataTestMethod]
+    [DataRow("Foo", new string[] { "Foo" }, ProjectType.Product, true)]
+    [DataRow("Foo", new string[] { "NotFoo" }, ProjectType.Product, false)]
+    [DataRow("Foo", new string[] { "Foo" }, ProjectType.Test, true)]
+    [DataRow("Foo", new string[] { "NotFoo" }, ProjectType.Test, true)]
+    public void ShouldAnalyzeTree_Inclusions_ReturnExpected(string filePath, string[] inclusions, ProjectType projectType, bool expectedResult) =>
+        ShouldAnalyzeTree_WithExclusionInclusionParametersSet_ReturnsTrueForIncludedFilesOnly(filePath, projectType, expectedResult, inclusions: inclusions);
+
+    [DataTestMethod]
+    [DataRow("Foo", new string[] { "Foo" }, ProjectType.Product, true)]
+    [DataRow("Foo", new string[] { "NotFoo" }, ProjectType.Product, true)]
+    [DataRow("Foo", new string[] { "Foo" }, ProjectType.Test, true)]
+    [DataRow("Foo", new string[] { "NotFoo" }, ProjectType.Test, false)]
+    public void ShouldAnalyzeTree_TestInclusions_ReturnExpected(string filePath, string[] testInclusions, ProjectType projectType, bool expectedResult) =>
+        ShouldAnalyzeTree_WithExclusionInclusionParametersSet_ReturnsTrueForIncludedFilesOnly(filePath, projectType, expectedResult, testInclusions: testInclusions);
+
+    [DataTestMethod]
+    [DataRow("Foo", new string[] { "Foo" }, new string[] { "Foo" }, false)]
+    [DataRow("Foo", new string[] { "NotFoo" }, new string[] { "Foo" }, false)]
+    [DataRow("Foo", new string[] { "Foo" }, new string[] { "NotFoo" }, true)]
+    [DataRow("Foo", new string[] { "NotFoo" }, new string[] { "NotFoo" }, false)]
+    public void ShouldAnalyzeTree_MixedInput_ProductProject_ReturnExpected(string filePath, string[] inclusions, string[] exclusions, bool expectedResult) =>
+        ShouldAnalyzeTree_WithExclusionInclusionParametersSet_ReturnsTrueForIncludedFilesOnly(filePath, ProjectType.Product, expectedResult, inclusions: inclusions, exclusions: exclusions);
+
+    [DataTestMethod]
+    [DataRow("Foo", new string[] { "Foo" }, new string[] { "Foo" }, false)]
+    [DataRow("Foo", new string[] { "NotFoo" }, new string[] { "Foo" }, false)]
+    [DataRow("Foo", new string[] { "Foo" }, new string[] { "NotFoo" }, true)]
+    [DataRow("Foo", new string[] { "NotFoo" }, new string[] { "NotFoo" }, false)]
+    public void ShouldAnalyzeTree_MixedInput_TestProject_ReturnExpected(string filePath, string[] testInclusions, string[] testExclusions, bool expectedResult) =>
+        ShouldAnalyzeTree_WithExclusionInclusionParametersSet_ReturnsTrueForIncludedFilesOnly(filePath, ProjectType.Test, expectedResult, testInclusions: testInclusions, testExclusions: testExclusions);
+
+    private void ShouldAnalyzeTree_WithExclusionInclusionParametersSet_ReturnsTrueForIncludedFilesOnly(
+        string fileName,
+        ProjectType projectType,
+        bool shouldAnalyze,
+        string language = LanguageNames.CSharp,
+        string[] exclusions = null,
+        string[] inclusions = null,
+        string[] globalExclusions = null,
+        string[] testExclusions = null,
+        string[] testInclusions = null,
+        string[] globalTestExclusions = null)
+    {
+        var analyzerLanguage = language == LanguageNames.CSharp ? AnalyzerLanguage.CSharp : AnalyzerLanguage.VisualBasic;
+        var sonarLintXml = AnalysisScaffolding.CreateSonarLintXml(
+            TestContext,
+            language: language,
+            exclusions: exclusions,
+            inclusions: inclusions,
+            globalExclusions: globalExclusions,
+            testExclusions: testExclusions,
+            testInclusions: testInclusions,
+            globalTestExclusions: globalTestExclusions);
+        var options = AnalysisScaffolding.CreateOptions(sonarLintXml);
+
+        var compilation = SolutionBuilder
+            .Create()
+            .AddProject(analyzerLanguage, createExtraEmptyFile: false)
+            .AddReferences(TestHelper.ProjectTypeReference(projectType))
+            .AddSnippet(string.Empty, fileName)
+            .GetCompilation();
+        var tree = compilation.SyntaxTrees.Single(x => x.FilePath.Contains(fileName));
+        var sut = CreateSut(compilation, options);
+
+        GeneratedCodeRecognizer codeRecognizer = language == LanguageNames.CSharp ? CSharpGeneratedCodeRecognizer.Instance : VisualBasicGeneratedCodeRecognizer.Instance;
+        sut.ShouldAnalyzeTree(tree, codeRecognizer).Should().Be(shouldAnalyze);
+    }
 
     private AnalyzerOptions CreateOptions(string[] unchangedFiles) =>
         AnalysisScaffolding.CreateOptions(AnalysisScaffolding.CreateSonarProjectConfigWithUnchangedFiles(TestContext, unchangedFiles));

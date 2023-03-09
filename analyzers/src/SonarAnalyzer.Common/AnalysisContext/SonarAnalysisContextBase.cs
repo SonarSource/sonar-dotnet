@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Concurrent;
 using System.IO;
 using System.Runtime.CompilerServices;
 using static SonarAnalyzer.Helpers.DiagnosticDescriptorFactory;
@@ -26,6 +27,7 @@ namespace SonarAnalyzer.AnalysisContext;
 
 public class SonarAnalysisContextBase
 {
+    protected static readonly ConditionalWeakTable<Compilation, ConcurrentDictionary<string, bool>> FileInclusionCache = new();
     protected static readonly ConditionalWeakTable<Compilation, ImmutableHashSet<string>> UnchangedFilesCache = new();
     protected static readonly SourceTextValueProvider<ProjectConfigReader> ProjectConfigProvider = new(x => new ProjectConfigReader(x));
     protected static readonly SourceTextValueProvider<SonarLintXmlReader> SonarLintXmlProviderCS = new(x => new SonarLintXmlReader(x, LanguageNames.CSharp));
@@ -56,8 +58,9 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
     /// <param name="tree">Tree to decide on. Can be null for Symbol-based and Compilation-based scenarios. And we want to analyze those too.</param>
     /// <param name="generatedCodeRecognizer">When set, generated trees are analyzed only when language-specific 'analyzeGeneratedCode' configuration property is also set.</param>
     public bool ShouldAnalyzeTree(SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer) =>
-        (generatedCodeRecognizer is null || SonarLintFile().AnalyzeGeneratedCode || !tree.IsGenerated(generatedCodeRecognizer, Compilation))
-        && (tree is null || !IsUnchanged(tree));
+        SonarLintFile() is var sonarLintReader
+        && (generatedCodeRecognizer is null || sonarLintReader.AnalyzeGeneratedCode || !tree.IsGenerated(generatedCodeRecognizer, Compilation))
+        && (tree is null || (!IsUnchanged(tree) && ShouldAnalyzeFile(sonarLintReader, tree.FilePath)));
 
     /// <summary>
     /// Reads configuration from SonarProjectConfig.xml file and caches the result for scope of this analysis.
@@ -123,6 +126,27 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
             descriptor.CustomTags.Contains(tag);
     }
 
+    private bool ShouldAnalyzeFile(SonarLintXmlReader sonarLintXml, string filePath) =>
+        ProjectConfiguration().ProjectType != ProjectType.Unknown // Not SonarLint context, NuGet or Scanner <= 5.0
+        || (FileInclusionCache.GetValue(Compilation, _ => new()) is var cache
+            && cache.GetOrAdd(filePath, _ => IsFileIncluded(sonarLintXml, filePath)));
+
     private ImmutableHashSet<string> CreateUnchangedFilesHashSet() =>
         ImmutableHashSet.Create(StringComparer.OrdinalIgnoreCase, ProjectConfiguration().AnalysisConfig?.UnchangedFiles() ?? Array.Empty<string>());
+
+    private bool IsFileIncluded(SonarLintXmlReader sonarLintXml, string filePath) =>
+        IsTestProject()
+        ? IsFileIncluded(sonarLintXml.TestInclusions, sonarLintXml.TestExclusions, sonarLintXml.GlobalTestExclusions, filePath)
+        : IsFileIncluded(sonarLintXml.Inclusions, sonarLintXml.Exclusions, sonarLintXml.GlobalExclusions, filePath);
+
+    private static bool IsFileIncluded(string[] inclusions, string[] exclusions, string[] globalExclusions, string filePath) =>
+        IsIncluded(inclusions, filePath)
+        && !IsExcluded(exclusions, filePath)
+        && !IsExcluded(globalExclusions, filePath);
+
+    private static bool IsIncluded(string[] inclusions, string filePath) =>
+        inclusions is { Length: 0 } || inclusions.Any(x => WildcardPatternMatcher.IsMatch(x, filePath));
+
+    private static bool IsExcluded(string[] exclusions, string filePath) =>
+        exclusions.Any(x => WildcardPatternMatcher.IsMatch(x, filePath));
 }
