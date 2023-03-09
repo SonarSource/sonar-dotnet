@@ -25,3 +25,13 @@ namespace Issue_6491
             };
     }
 }
+
+// Reproducer for #6878 https://github.com/SonarSource/sonar-dotnet/issues/6494
+namespace Issue_6878
+{
+    class MyClass
+    {
+        public byte[]? GetNullableArray(string itemId) => null; // Noncompliant FP, Should not raise because nullable is allowed
+        public byte[] GetArray(string itemId) => null; // Noncompliant
+    }
+}
