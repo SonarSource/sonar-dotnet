@@ -58,7 +58,7 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
     /// <param name="tree">Tree to decide on. Can be null for Symbol-based and Compilation-based scenarios. And we want to analyze those too.</param>
     /// <param name="generatedCodeRecognizer">When set, generated trees are analyzed only when language-specific 'analyzeGeneratedCode' configuration property is also set.</param>
     public bool ShouldAnalyzeTree(SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer) =>
-        SonarLintFile() is { } sonarLintReader
+        SonarLintFile() is var sonarLintReader
         && (generatedCodeRecognizer is null || sonarLintReader.AnalyzeGeneratedCode || !tree.IsGenerated(generatedCodeRecognizer, Compilation))
         && (tree is null || (!IsUnchanged(tree) && ShouldAnalyzeFile(sonarLintReader, tree.FilePath)));
 
@@ -126,18 +126,18 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
             descriptor.CustomTags.Contains(tag);
     }
 
-    private bool ShouldAnalyzeFile(SonarLintXmlReader reader, string filePath) =>
+    private bool ShouldAnalyzeFile(SonarLintXmlReader sonarLintXml, string filePath) =>
         ProjectConfiguration().ProjectType != ProjectType.Unknown // Not SonarLint context, NuGet or Scanner <= 5.0
         || (FileInclusionCache.GetValue(Compilation, _ => new()) is var cache
-            && cache.GetOrAdd(filePath, _ => IsFileIncluded(reader, filePath)));
+            && cache.GetOrAdd(filePath, _ => IsFileIncluded(sonarLintXml, filePath)));
 
     private ImmutableHashSet<string> CreateUnchangedFilesHashSet() =>
         ImmutableHashSet.Create(StringComparer.OrdinalIgnoreCase, ProjectConfiguration().AnalysisConfig?.UnchangedFiles() ?? Array.Empty<string>());
 
-    private bool IsFileIncluded(SonarLintXmlReader reader, string filePath) =>
+    private bool IsFileIncluded(SonarLintXmlReader sonarLintXml, string filePath) =>
         IsTestProject()
-        ? IsFileIncluded(reader.TestInclusions, reader.TestExclusions, reader.GlobalTestExclusions, filePath)
-        : IsFileIncluded(reader.Inclusions, reader.Exclusions, reader.GlobalExclusions, filePath);
+        ? IsFileIncluded(sonarLintXml.TestInclusions, sonarLintXml.TestExclusions, sonarLintXml.GlobalTestExclusions, filePath)
+        : IsFileIncluded(sonarLintXml.Inclusions, sonarLintXml.Exclusions, sonarLintXml.GlobalExclusions, filePath);
 
     private static bool IsFileIncluded(string[] inclusions, string[] exclusions, string[] globalExclusions, string filePath) =>
         IsIncluded(inclusions, filePath)

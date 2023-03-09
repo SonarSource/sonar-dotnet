@@ -80,6 +80,7 @@ public partial class SonarAnalysisContextBaseTest
         var sonarLintXml = new DummySourceText(AnalysisScaffolding.GenerateSonarLintXmlContent(analyzeGeneratedCode: true));
         var (compilation, tree) = CreateDummyCompilation(AnalyzerLanguage.CSharp, fileName);
         var sut = CreateSut(compilation, CreateOptions(sonarLintXml, @"ResourceTests\Foo.xml"));
+
         sut.ShouldAnalyzeTree(tree, CSharpGeneratedCodeRecognizer.Instance).Should().Be(expected);
         sonarLintXml.ToStringCallCount.Should().Be(0, "this file doesn't have 'SonarLint.xml' name");
     }
@@ -331,58 +332,62 @@ public partial class SonarAnalysisContextBaseTest
     [DataRow("Foo", new string[] { "NotFoo" }, ProjectType.Product, true)]
     [DataRow("Foo", new string[] { "Foo" }, ProjectType.Test, true)]
     [DataRow("Foo", new string[] { "NotFoo" }, ProjectType.Test, true)]
-    public void ShouldAnalyzeTree_Exclusions_ReturnExpected(string filePath, string[] exclusions, ProjectType projectType, bool shouldAnalyze) =>
-        AssertShouldAnalyzeTree_SonarLint(filePath, projectType, shouldAnalyze, exclusions: exclusions);
+    public void ShouldAnalyzeTree_Exclusions_ReturnExpected(string filePath, string[] exclusions, ProjectType projectType, bool expectedResult) =>
+        ShouldAnalyzeTree_WithExclusionInclusionParametersSet_ReturnsTrueForIncludedFilesOnly(filePath, projectType, expectedResult, exclusions: exclusions);
 
     [DataTestMethod]
     [DataRow("Foo", new string[] { "Foo" }, ProjectType.Product, false)]
     [DataRow("Foo", new string[] { "NotFoo" }, ProjectType.Product, true)]
     [DataRow("Foo", new string[] { "Foo" }, ProjectType.Test, true)]
     [DataRow("Foo", new string[] { "NotFoo" }, ProjectType.Test, true)]
-    public void ShouldAnalyzeTree_GlobalExclusions_ReturnExpected(string filePath, string[] globalExclusions, ProjectType projectType, bool shouldAnalyze) =>
-        AssertShouldAnalyzeTree_SonarLint(filePath, projectType, shouldAnalyze, globalExclusions: globalExclusions);
+    public void ShouldAnalyzeTree_GlobalExclusions_ReturnExpected(string filePath, string[] globalExclusions, ProjectType projectType, bool expectedResult) =>
+        ShouldAnalyzeTree_WithExclusionInclusionParametersSet_ReturnsTrueForIncludedFilesOnly(filePath, projectType, expectedResult, globalExclusions: globalExclusions);
 
     [DataTestMethod]
     [DataRow("Foo", new string[] { "Foo" }, ProjectType.Product, true)]
     [DataRow("Foo", new string[] { "NotFoo" }, ProjectType.Product, true)]
     [DataRow("Foo", new string[] { "Foo" }, ProjectType.Test, false)]
     [DataRow("Foo", new string[] { "NotFoo" }, ProjectType.Test, true)]
-    public void ShouldAnalyzeTree_TestExclusions_ReturnExpected(string filePath, string[] testExclusions, ProjectType projectType, bool shouldAnalyze) =>
-        AssertShouldAnalyzeTree_SonarLint(filePath, projectType, shouldAnalyze, testExclusions: testExclusions);
+    public void ShouldAnalyzeTree_TestExclusions_ReturnExpected(string filePath, string[] testExclusions, ProjectType projectType, bool expectedResult) =>
+        ShouldAnalyzeTree_WithExclusionInclusionParametersSet_ReturnsTrueForIncludedFilesOnly(filePath, projectType, expectedResult, testExclusions: testExclusions);
 
     [DataTestMethod]
     [DataRow("Foo", new string[] { "Foo" }, ProjectType.Product, true)]
     [DataRow("Foo", new string[] { "NotFoo" }, ProjectType.Product, true)]
     [DataRow("Foo", new string[] { "Foo" }, ProjectType.Test, false)]
     [DataRow("Foo", new string[] { "NotFoo" }, ProjectType.Test, true)]
-    public void ShouldAnalyzeTree_GlobalTestExclusions_ReturnExpected(string filePath, string[] globalTestExclusions, ProjectType projectType, bool shouldAnalyze) =>
-        AssertShouldAnalyzeTree_SonarLint(filePath, projectType, shouldAnalyze, globalTestExclusions: globalTestExclusions);
+    public void ShouldAnalyzeTree_GlobalTestExclusions_ReturnExpected(string filePath, string[] globalTestExclusions, ProjectType projectType, bool expectedResult) =>
+        ShouldAnalyzeTree_WithExclusionInclusionParametersSet_ReturnsTrueForIncludedFilesOnly(filePath, projectType, expectedResult, globalTestExclusions: globalTestExclusions);
 
     [DataTestMethod]
     [DataRow("Foo", new string[] { "Foo" }, ProjectType.Product, true)]
     [DataRow("Foo", new string[] { "NotFoo" }, ProjectType.Product, false)]
     [DataRow("Foo", new string[] { "Foo" }, ProjectType.Test, true)]
     [DataRow("Foo", new string[] { "NotFoo" }, ProjectType.Test, true)]
-    public void ShouldAnalyzeTree_Inclusions_ReturnExpected(string filePath, string[] inclusions, ProjectType projectType, bool shouldAnalyze) =>
-        AssertShouldAnalyzeTree_SonarLint(filePath, projectType, shouldAnalyze, inclusions: inclusions);
+    public void ShouldAnalyzeTree_Inclusions_ReturnExpected(string filePath, string[] inclusions, ProjectType projectType, bool expectedResult) =>
+        ShouldAnalyzeTree_WithExclusionInclusionParametersSet_ReturnsTrueForIncludedFilesOnly(filePath, projectType, expectedResult, inclusions: inclusions);
 
     [DataTestMethod]
     [DataRow("Foo", new string[] { "Foo" }, ProjectType.Product, true)]
     [DataRow("Foo", new string[] { "NotFoo" }, ProjectType.Product, true)]
     [DataRow("Foo", new string[] { "Foo" }, ProjectType.Test, true)]
     [DataRow("Foo", new string[] { "NotFoo" }, ProjectType.Test, false)]
-    public void ShouldAnalyzeTree_TestInclusions_ReturnExpected(string filePath, string[] testInclusions, ProjectType projectType, bool shouldAnalyze) =>
-        AssertShouldAnalyzeTree_SonarLint(filePath, projectType, shouldAnalyze, testInclusions: testInclusions);
+    public void ShouldAnalyzeTree_TestInclusions_ReturnExpected(string filePath, string[] testInclusions, ProjectType projectType, bool expectedResult) =>
+        ShouldAnalyzeTree_WithExclusionInclusionParametersSet_ReturnsTrueForIncludedFilesOnly(filePath, projectType, expectedResult, testInclusions: testInclusions);
 
     [DataTestMethod]
     [DataRow("Foo", new string[] { "Foo" }, new string[] { "Foo" }, ProjectType.Product, false)]
     [DataRow("Foo", new string[] { "NotFoo" }, new string[] { "Foo" }, ProjectType.Product, false)]
     [DataRow("Foo", new string[] { "Foo" }, new string[] { "NotFoo" }, ProjectType.Product, true)]
     [DataRow("Foo", new string[] { "NotFoo" }, new string[] { "NotFoo" }, ProjectType.Product, false)]
-    public void ShouldAnalyzeTree_MixedInput_ReturnExpected(string filePath, string[] inclusions, string[] exclusions, ProjectType projectType, bool shouldAnalyze) =>
-        AssertShouldAnalyzeTree_SonarLint(filePath, projectType, shouldAnalyze, inclusions: inclusions, exclusions: exclusions);
+    [DataRow("Foo", new string[] { "Foo" }, new string[] { "Foo" }, ProjectType.Test, true)]
+    [DataRow("Foo", new string[] { "NotFoo" }, new string[] { "Foo" }, ProjectType.Test, true)]
+    [DataRow("Foo", new string[] { "Foo" }, new string[] { "NotFoo" }, ProjectType.Test, true)]
+    [DataRow("Foo", new string[] { "NotFoo" }, new string[] { "NotFoo" }, ProjectType.Test, true)]
+    public void ShouldAnalyzeTree_MixedInput_ReturnExpected(string filePath, string[] inclusions, string[] exclusions, ProjectType projectType, bool expectedResult) =>
+        ShouldAnalyzeTree_WithExclusionInclusionParametersSet_ReturnsTrueForIncludedFilesOnly(filePath, projectType, expectedResult, inclusions: inclusions, exclusions: exclusions);
 
-    private void AssertShouldAnalyzeTree_SonarLint(
+    private void ShouldAnalyzeTree_WithExclusionInclusionParametersSet_ReturnsTrueForIncludedFilesOnly(
         string fileName,
         ProjectType projectType,
         bool shouldAnalyze,
@@ -470,5 +475,5 @@ public partial class SonarAnalysisContextBaseTest
 
         public override void CopyTo(int sourceIndex, char[] destination, int destinationIndex, int count) =>
             throw new NotImplementedException();
-        }
     }
+}

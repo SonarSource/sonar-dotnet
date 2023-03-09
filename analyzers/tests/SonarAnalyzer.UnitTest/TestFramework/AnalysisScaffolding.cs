@@ -106,16 +106,19 @@ namespace SonarAnalyzer.UnitTest
                 new XDeclaration("1.0", "utf-8", "yes"),
                 new XElement("AnalysisInput",
                     new XElement("Settings",
-                        CreateKeyValuePair("Setting", $"sonar.{(language == LanguageNames.CSharp ? "cs" : "vbnet")}.analyzeGeneratedCode", analyzeGeneratedCode.ToString()),
-                        CreateKeyValuePair("Setting", "sonar.exclusions", string.Join(",", exclusions ?? Array.Empty<string>())),
-                        CreateKeyValuePair("Setting", "sonar.inclusions", string.Join(",", inclusions ?? Array.Empty<string>())),
-                        CreateKeyValuePair("Setting", "sonar.global.exclusions", string.Join(",", globalExclusions ?? Array.Empty<string>())),
-                        CreateKeyValuePair("Setting", "sonar.test.exclusions", string.Join(",", testExclusions ?? Array.Empty<string>())),
-                        CreateKeyValuePair("Setting", "sonar.test.inclusions", string.Join(",", testInclusions ?? Array.Empty<string>())),
-                        CreateKeyValuePair("Setting", "sonar.global.test.exclusions", string.Join(",", globalTestExclusions ?? Array.Empty<string>()))))).ToString();
+                        CreateSetting($"sonar.{(language == LanguageNames.CSharp ? "cs" : "vbnet")}.analyzeGeneratedCode", analyzeGeneratedCode.ToString()),
+                        CreateSetting("sonar.exclusions", ConcatenateStringArray(exclusions)),
+                        CreateSetting("sonar.inclusions", ConcatenateStringArray(inclusions)),
+                        CreateSetting("sonar.global.exclusions", ConcatenateStringArray(globalExclusions)),
+                        CreateSetting("sonar.test.exclusions", ConcatenateStringArray(testExclusions)),
+                        CreateSetting("sonar.test.inclusions", ConcatenateStringArray(testInclusions)),
+                        CreateSetting("sonar.global.test.exclusions", ConcatenateStringArray(globalTestExclusions))))).ToString();
 
-        private static XElement CreateKeyValuePair(string name, string key, string value) =>
-            new(name, new XElement("Key", key), new XElement("Value", value));
+        private static XElement CreateSetting(string key, string value) =>
+            new("Setting", new XElement("Key", key), new XElement("Value", value));
+
+        private static string ConcatenateStringArray(string[] array) =>
+            string.Join(",", array ?? Array.Empty<string>());
 
         private static string CreateSonarProjectConfig(TestContext context, string element, string value, bool isScannerRun, string analysisConfigPath = null)
         {
