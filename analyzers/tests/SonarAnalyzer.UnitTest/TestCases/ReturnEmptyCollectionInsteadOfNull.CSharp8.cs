@@ -31,7 +31,13 @@ namespace Issue_6878
 {
     class MyClass
     {
-        public byte[]? GetNullableArray(string itemId) => null; // Noncompliant FP, Should not raise because nullable is allowed
+        public byte[]? GetNullableArrayOfNonNullableValueType(string itemId) => null; // Noncompliant FP, Should not raise because nullable is allowed
+        public byte?[] GetNonNullableArrayOfNullableValueType(string itemId) => null; // Noncompliant
+        public byte?[]? GetNullableArrayOfNullableValueType(string itemId) => null; // Noncompliant, FP
+        
+        public object[]? GetNullableArrayOfNonNullableReferenceType(string itemId) => null; // Noncompliant FP
+        public object?[] GetNonNullableArrayOfNullableReferenceType(string itemId) => null; // Noncompliant
+        public object?[]? GetNullableArrayOfNullableReferenceType(string itemId) => null; // Noncompliant FP
         public byte[] GetArray(string itemId) => null; // Noncompliant
     }
 }
