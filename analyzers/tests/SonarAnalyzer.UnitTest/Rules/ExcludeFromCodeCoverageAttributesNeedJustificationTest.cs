@@ -53,7 +53,9 @@ public class ExcludeFromCodeCoverageAttributesNeedJustificationTest
     [TestMethod]
     public void ExcludeFromCodeCoverageAttributesNeedJustification_VB() =>
         builderVB.AddPaths("ExcludeFromCodeCoverageAttributesNeedJustification.vb").Verify();
-#else
+#end if
+
+#if netframework
     [TestMethod]
     public void ExcludeFromCodeCoverageAttributesNeedJustification_IgnoredForNet48() =>
         builderCS.AddPaths("ExcludeFromCodeCoverageAttributesNeedJustification.net48.cs").Verify();
