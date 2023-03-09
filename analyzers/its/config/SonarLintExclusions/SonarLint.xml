@@ -23,9 +23,18 @@
             <Key>sonar.global.exclusions</Key>
             <Value>**/ExcludedByGlobalExclusion.cs</Value>
         </Setting>
+        <!-- Test parameters -->
+        <Setting>
+            <Key>sonar.test.inclusions</Key>
+            <Value>**/IncludedTest/*.cs</Value>
+        </Setting>
         <Setting>
             <Key>sonar.test.exclusions</Key>
-            <Value>**/ExcludedTest.cs</Value>
+            <Value>**/ExcludedByExclusionTest.cs</Value>
+        </Setting>
+        <Setting>
+            <Key>sonar.global.test.exclusions</Key>
+            <Value>**/ExcludedByGlobalExclusionTest.cs</Value>
         </Setting>
     </Settings>
 </AnalysisInput>
