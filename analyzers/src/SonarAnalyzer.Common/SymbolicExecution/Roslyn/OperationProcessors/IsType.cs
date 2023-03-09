@@ -27,7 +27,7 @@ internal sealed class IsType : BranchingProcessor<IIsTypeOperationWrapper>
     protected override IIsTypeOperationWrapper Convert(IOperation operation) =>
         IIsTypeOperationWrapper.FromOperation(operation);
 
-    protected override SymbolicConstraint BoolConstraintFromOperation(SymbolicContext context, IIsTypeOperationWrapper operation) =>
+    protected override SymbolicConstraint BoolConstraintFromOperation(ProgramState state, IIsTypeOperationWrapper operation) =>
         null;
 
     protected override ProgramState LearnBranchingConstraint(ProgramState state, IIsTypeOperationWrapper operation, bool falseBranch) =>

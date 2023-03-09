@@ -883,5 +883,24 @@ Tag(""Value"", value);";
             validator.ValidateContainsOperation(OperationKind.Unary);
             validator.ValidateTag("Value", x => x.AllConstraints.Select(x => x.Kind).Should().ContainSingle().Which.Should().Be(expectedConstraint));
         }
+
+        [TestMethod]
+        public void ParameterReference_NonNullableValue_DoesNotPropagateState()
+        {
+            const string code = """
+                public class WithValue
+                {
+                    public object Value {get;}
+                };
+
+                public void Main()
+                {
+                    var instance = new WithValue();
+                    var value = instance.Value;     // Same name as Nullable.Value
+                    Tag("Value", value);
+                }
+                """;
+            SETestContext.CreateCSMethod(code).Validator.ValidateTag("Value", x => x.Should().BeNull());
+        }
     }
 }
