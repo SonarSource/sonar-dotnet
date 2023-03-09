@@ -27,8 +27,8 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
     protected override IBinaryOperationWrapper Convert(IOperation operation) =>
         IBinaryOperationWrapper.FromOperation(operation);
 
-    protected override SymbolicConstraint BoolConstraintFromOperation(SymbolicContext context, IBinaryOperationWrapper operation) =>
-        BinaryConstraint(operation.OperatorKind, context.State[operation.LeftOperand], context.State[operation.RightOperand]);
+    protected override SymbolicConstraint BoolConstraintFromOperation(ProgramState state, IBinaryOperationWrapper operation) =>
+        BinaryConstraint(operation.OperatorKind, state[operation.LeftOperand], state[operation.RightOperand]);
 
     protected override ProgramState LearnBranchingConstraint(ProgramState state, IBinaryOperationWrapper operation, bool falseBranch) =>
         operation.OperatorKind.IsAnyEquality()
