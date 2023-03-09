@@ -30,16 +30,23 @@ public abstract class ExcludeFromCodeCoverageAttributesNeedJustificationBase<TSy
     protected ExcludeFromCodeCoverageAttributesNeedJustificationBase() : base(DiagnosticId) { }
 
     protected sealed override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterSyntaxNodeActionInNonGenerated(
+        context.RegisterNodeAction(
             Language.GeneratedCodeRecognizer,
             c =>
             {
-                if (!Language.Syntax.ArgumentExpressions(c.Node).Any()
-                    && c.SemanticModel.GetSymbolInfo(c.Node).Symbol is { } attribute
-                    && attribute.IsInType(KnownType.System_Diagnostics_CodeAnalysis_ExcludeFromCodeCoverageAttribute))
+                var att = c.SemanticModel.GetSymbolInfo(c.Node).Symbol;
+                if (NoJustification(c.Node, c.SemanticModel)
+                    && c.SemanticModel.GetSymbolInfo(c.Node).Symbol is IMethodSymbol attribute
+                    && attribute.IsInType(KnownType.System_Diagnostics_CodeAnalysis_ExcludeFromCodeCoverageAttribute)
+                    && HasJustificationProperty(attribute.ContainingType))
                 {
                     c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
                 }
             },
             Language.SyntaxKind.Attribute);
+    private bool NoJustification(SyntaxNode node, SemanticModel model) =>
+        Language.Syntax.ArgumentExpressions(node).FirstOrDefault() is not { } justification
+        || string.IsNullOrWhiteSpace(Language.FindConstantValue(model, justification) as string);
+
+    private static bool HasJustificationProperty(INamedTypeSymbol symbol) => symbol.MemberNames.Contains("Justification");
 }

@@ -13,6 +13,15 @@ class Noncompliant
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage] // Noncompliant
     void GloballyDeclaredNamespace() { }
 
+    [ExcludeFromCodeCoverage(Justification = null)] // Noncompliant
+    void WithNull() { }
+
+    [ExcludeFromCodeCoverage(Justification = "")] // Noncompliant
+    void WithEmptyString() { }
+
+    [ExcludeFromCodeCoverage(Justification = "  ")] // Noncompliant
+    void WithWhiteSpace() { }
+
     [ExcludeFromCodeCoverage] // Noncompliant
     [CLSCompliant(false)]
     uint Multiple() { return 0; }

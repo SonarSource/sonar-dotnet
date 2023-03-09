@@ -3,40 +3,52 @@ Imports System.Diagnostics.CodeAnalysis
 
 <ExcludeFromCodeCoverage> ' Noncompliant^2#23 {{Add a justification.}}
 Class Noncompliant
-    <ExcludeFromCodeCoverage()> Private Sub WithBrackets() ' Noncompliant^6#25
+    <ExcludeFromCodeCoverage()> Sub WithBrackets() ' Noncompliant^6#25
     End Sub
 
     <System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage> ' Noncompliant
-    Private Sub FullyDeclaredNamespace()
+    Sub FullyDeclaredNamespace()
     End Sub
 
     <Global.System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage> ' Noncompliant
-    Private Sub GloballyDeclaredNamespace()
+    Sub GloballyDeclaredNamespace()
+    End Sub
+
+    <ExcludeFromCodeCoverage(Justification:=Nothing)> ' Noncompliant
+    Sub WithNothing() { }
+    End Sub
+
+    <ExcludeFromCodeCoverage(Justification:="")> ' Noncompliant
+    Sub WithEmptyString() { }
+    End Sub
+
+    <ExcludeFromCodeCoverage(Justification:="  ")> ' Noncompliant
+    Sub WithWhiteSpace() { }
     End Sub
 
     <ExcludeFromCodeCoverage> ' Noncompliant
     <CLSCompliant(False)>
-    Private Function Multiple() As UInteger
+    Function Multiple() As UInteger
         Return 0
     End Function
 
-    <ExcludeFromCodeCoverage, CLSCompliant(False)> Private Function Combined() As UInteger ' Noncompliant
+    <ExcludeFromCodeCoverage, CLSCompliant(False)> Function Combined() As UInteger ' Noncompliant
         Return 0
     End Function
 
     <ExcludeFromCodeCoverage> ' Noncompliant
-    Private Sub New()
+    Sub New()
     End Sub
 
     <ExcludeFromCodeCoverage> ' Noncompliant
-    Private Sub Method()
+    Sub Method()
     End Sub
 
     <ExcludeFromCodeCoverage> ' Noncompliant
-    Private Property [Property] As Integer
+    Property [Property] As Integer
 
     <ExcludeFromCodeCoverage> ' Noncompliant
-    Private Event [Event] As EventHandler
+    Event [Event] As EventHandler
 
 End Class
 
@@ -48,7 +60,7 @@ End Interface
 <ExcludeFromCodeCoverage> ' Noncompliant
 Structure ProgramStruct
     <ExcludeFromCodeCoverage> ' Noncompliant
-    Private Sub Method()
+    Sub Method()
     End Sub
 End Structure
 
@@ -56,18 +68,18 @@ End Structure
 Class Compliant
 
     <ExcludeFromCodeCoverage(Justification:="justification")>
-    Private Sub New()
+    Sub New()
     End Sub
 
     <ExcludeFromCodeCoverage(Justification:="justification")>
-    Private Sub Method()
+    Sub Method()
     End Sub
 
     <ExcludeFromCodeCoverage(Justification:="justification")>
-    Private Property [Property] As String
+    Property [Property] As String
 
     <ExcludeFromCodeCoverage(Justification:="justification")>
-    Private Event [Event] As EventHandler
+    Event [Event] As EventHandler
 End Class
 
 Interface IComplaintInterface
@@ -78,24 +90,24 @@ End Interface
 <ExcludeFromCodeCoverage(Justification:="justification")>
 Structure ComplaintStruct
     <ExcludeFromCodeCoverage(Justification:="justification")>
-    Private Sub Method()
+    Sub Method()
     End Sub
 End Structure
 
 Class NotApplicable
 
-    Private Sub New()
+    Sub New()
     End Sub
 
-    Private Sub Method()
+    Sub Method()
     End Sub
 
-    Private Property [Property] As Integer
+    Property [Property] As Integer
 
-    Private Event [Event] As EventHandler
+    Event [Event] As EventHandler
 
     <NotSystem.ExcludeFromCodeCoverageAttribute>
-    Private Sub SameName()
+    Sub SameName()
     End Sub
 End Class
 

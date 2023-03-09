@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
-internal class TestCases
+class NonCompliant
 {
-    public void Bar(IEnumerable<int> collection)
+    public void Method(IEnumerable<int> collection)
     {
         [ExcludeFromCodeCoverage] int Get() => 1; // Noncompliant
 
@@ -14,8 +14,8 @@ internal class TestCases
         Action a = [ExcludeFromCodeCoverage] () => { }; // Noncompliant
 
         Action x = true
-                       ? ([ExcludeFromCodeCoverage] () => { }) // Noncompliant
-                       : [ExcludeFromCodeCoverage] () => { }; // Noncompliant
+            ? ([ExcludeFromCodeCoverage] () => { }) // Noncompliant
+            : [ExcludeFromCodeCoverage] () => { }; // Noncompliant
 
         Call([ExcludeFromCodeCoverage(Justification = "justification")] (x) => { });
     }

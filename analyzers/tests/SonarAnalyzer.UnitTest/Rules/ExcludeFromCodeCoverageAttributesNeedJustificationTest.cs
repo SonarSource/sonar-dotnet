@@ -29,6 +29,7 @@ public class ExcludeFromCodeCoverageAttributesNeedJustificationTest
     private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ExcludeFromCodeCoverageAttributesNeedJustification>();
     private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.ExcludeFromCodeCoverageAttributesNeedJustification>();
 
+#if NET
     [TestMethod]
     public void ExcludeFromCodeCoverageAttributesNeedJustification_OnAssembly_CS() =>
         builderCS.AddSnippet("[assembly:System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage] // Noncompliant").Verify();
@@ -41,7 +42,6 @@ public class ExcludeFromCodeCoverageAttributesNeedJustificationTest
     public void ExcludeFromCodeCoverageAttributesNeedJustification_CS() =>
        builderCS.AddPaths("ExcludeFromCodeCoverageAttributesNeedJustification.cs").Verify();
 
-#if NET
     [TestMethod]
     public void ExcludeFromCodeCoverageAttributesNeedJustification_CSharp9() =>
         builderCS.AddPaths("ExcludeFromCodeCoverageAttributesNeedJustification.CSharp9.cs").WithTopLevelStatements().Verify();
@@ -49,9 +49,13 @@ public class ExcludeFromCodeCoverageAttributesNeedJustificationTest
     [TestMethod]
     public void ExcludeFromCodeCoverageAttributesNeedJustification_CSharp10() =>
         builderCS.AddPaths("ExcludeFromCodeCoverageAttributesNeedJustification.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
-#endif
 
     [TestMethod]
     public void ExcludeFromCodeCoverageAttributesNeedJustification_VB() =>
         builderVB.AddPaths("ExcludeFromCodeCoverageAttributesNeedJustification.vb").Verify();
+#else
+    [TestMethod]
+    public void ExcludeFromCodeCoverageAttributesNeedJustification_IgnoredForNet48() =>
+        builderCS.AddPaths("ExcludeFromCodeCoverageAttributesNeedJustification.net48.cs").Verify();
+#endif
 }
