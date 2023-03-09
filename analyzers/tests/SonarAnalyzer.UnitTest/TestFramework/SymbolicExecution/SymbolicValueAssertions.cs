@@ -94,19 +94,19 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
                     Actual = actual,
                 })
                 .ForCondition(given => given is { Missing.Count: 0 } or { Additional.Count: > 0 })
-                .FailWith("Expected {context:SymbolicValue} to have constraints {0}{reason}, but constraints {1} are missing. Actual constraints are {2}.",
+                .FailWith("Expected {context:SymbolicValue} to have constraints {0}{reason}, but {1} are missing. Actual are {2}.",
                     _ => expected,
                     given => given.Missing,
                     given => given.Actual)
                 .Then
                 .ForCondition(given => given is { Missing.Count: > 0 } or { Additional.Count: 0 })
-                .FailWith("Expected {context:SymbolicValue} to have constraints {0}{reason}, but additional constraints {1} are present. Actual constraints are {2}.",
+                .FailWith("Expected {context:SymbolicValue} to have constraints {0}{reason}, but additional {1} are present. Actual are {2}.",
                     _ => expected,
                     given => given.Additional,
                     given => given.Actual)
                 .Then
                 .ForCondition(given => given is { Missing.Count: 0, Additional.Count: 0 })
-                .FailWith("Expected {context:SymbolicValue} to have constraints {0}{reason}, but constraints {1} are missing and additional constraints {2} are present. Actual constraints are {3}.",
+                .FailWith("Expected {context:SymbolicValue} to have constraints {0}{reason}, but {1} are missing and additional {2} are present. Actual are {3}.",
                     _ => expected,
                     given => given.Missing,
                     given => given.Additional,

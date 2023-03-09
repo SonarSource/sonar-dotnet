@@ -125,7 +125,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             var sv = new SymbolicValue().WithConstraint(BoolConstraint.True);
             sv.Invoking(x => x.Should().HaveOnlyConstraints(BoolConstraint.True, ObjectConstraint.NotNull)).Should().Throw<AssertFailedException>()
                 // * = x or SymbolicValue depending on compilation
-                .WithMessage(@"Expected * to have constraints {True, NotNull}, but constraints {NotNull} are missing. Actual constraints are {True}.");
+                .WithMessage(@"Expected * to have constraints {True, NotNull}, but {NotNull} are missing. Actual are {True}.");
         }
 
         [TestMethod]
@@ -134,7 +134,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             var sv = new SymbolicValue().WithConstraint(BoolConstraint.True).WithConstraint(ObjectConstraint.NotNull);
             sv.Invoking(x => x.Should().HaveOnlyConstraints(BoolConstraint.True)).Should().Throw<AssertFailedException>()
                 // * = x or SymbolicValue depending on compilation
-                .WithMessage(@"Expected * to have constraints {True}, but additional constraints {NotNull} are present. Actual constraints are {NotNull, True}.");
+                .WithMessage(@"Expected * to have constraints {True}, but additional {NotNull} are present. Actual are {NotNull, True}.");
         }
 
         [TestMethod]
@@ -143,7 +143,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             var sv = new SymbolicValue().WithConstraint(BoolConstraint.True).WithConstraint(ObjectConstraint.NotNull);
             sv.Invoking(x => x.Should().HaveOnlyConstraints(BoolConstraint.True, ObjectConstraint.Null)).Should().Throw<AssertFailedException>()
                 // * = x or SymbolicValue depending on compilation
-                .WithMessage(@"Expected * to have constraints {True, Null}, but constraints {Null} are missing and additional constraints {NotNull} are present. Actual constraints are {NotNull, True}.");
+                .WithMessage(@"Expected * to have constraints {True, Null}, but {Null} are missing and additional {NotNull} are present. Actual are {NotNull, True}.");
         }
     }
 }
