@@ -23,7 +23,7 @@ namespace SonarAnalyzer.Rules;
 public abstract class ExcludeFromCodeCoverageAttributesNeedJustificationBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
     where TSyntaxKind : struct
 {
-    private const string DiagnosticId = "S1123"; // TODO: Update DiagnosticID.
+    private const string DiagnosticId = "S6513";
     protected const string JustificationPropertyName = "Justification";
 
     protected override string MessageFormat => "Add a justification.";
