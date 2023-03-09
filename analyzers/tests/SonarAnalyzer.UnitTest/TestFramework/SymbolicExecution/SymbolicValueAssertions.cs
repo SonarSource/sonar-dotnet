@@ -43,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
             Execute.Assertion
                 .BecauseOf(because, becauseArgs)
                 .ForCondition(Subject is not null)
-                .FailWith("The {context:SymbolicValue} is null and can not have constraint {0}.", expected)
+                .FailWith("The {context:SymbolicValue} is <null> and can not have constraint {0}.", expected)
                 .Then
                 .Given(() => Subject.AllConstraints.ToList())
                 .ForCondition(actuals => actuals.Count > 0)
@@ -81,7 +81,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
                 .FailWith("Expected constraints are empty. Use HaveNoConstraints() instead.")
                 .Then
                 .ForCondition(Subject is not null)
-                .FailWith("The {context:SymbolicValue} is null and can not have constraints {0}.", expected)
+                .FailWith("The {context:SymbolicValue} is <null> and can not have constraints {0}.", expected)
                 .Then
                 .Given(() => Subject.AllConstraints.ToList())
                 .ForCondition(actual => actual.Count != 0)
