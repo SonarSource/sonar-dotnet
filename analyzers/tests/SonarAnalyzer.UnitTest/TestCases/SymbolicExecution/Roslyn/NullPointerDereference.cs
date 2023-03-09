@@ -70,19 +70,19 @@ namespace Tests.Diagnostics
         void Test_NullableValueTypes()
         {
             int? i = null;
-            _ = i.GetType();            // Noncompliant
+            i.GetType();            // Noncompliant
             i = 42;
-            _ = i.GetType();            // Compliant
+            i.GetType();            // Compliant
             i = null;
-            _ = i.HasValue;             // Compliant
+            _ = i.HasValue;         // Compliant
             i = null;
-            _ = i.Value;                // Compliant
+            _ = i.Value;            // Compliant
             i = null;
-            _ = i.GetValueOrDefault();  // Compliant
+            i.GetValueOrDefault();  // Compliant
             i = null;
-            _ = i.Equals(null);         // Compliant
+            i.Equals(null);         // Compliant
             i = null;
-            _ = i.GetHashCode();        // Compliant
+            i.GetHashCode();        // Compliant
         }
 
         void Test_Foreach()
