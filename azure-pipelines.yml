@@ -10,7 +10,10 @@ schedules:
 trigger:
 - master
 
-pool: '.Net Bubble - GCP'
+pool: 
+  name: '.Net Bubble staging'
+  demands:
+    - PR_NUMBER -equal 182
 
 variables:
   - group: sonar-dotnet-variables
