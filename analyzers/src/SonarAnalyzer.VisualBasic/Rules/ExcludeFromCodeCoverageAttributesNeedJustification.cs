@@ -24,4 +24,11 @@ namespace SonarAnalyzer.Rules.VisualBasic;
 public sealed class ExcludeFromCodeCoverageAttributesNeedJustification : ExcludeFromCodeCoverageAttributesNeedJustificationBase<SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+
+    protected override SyntaxNode GetJustificationExpression(SyntaxNode node) =>
+        node is AttributeSyntax { ArgumentList.Arguments: { Count: 1 } arguments }
+            && arguments[0] is SimpleArgumentSyntax { Expression: { } } argument
+            && Language.NameComparer.Equals(argument.GetName(), JustificationPropertyName)
+                ? argument.Expression
+                : null;
 }

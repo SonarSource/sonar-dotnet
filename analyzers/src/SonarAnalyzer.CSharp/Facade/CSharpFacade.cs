@@ -18,56 +18,113 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Helpers.Facade;
+namespace SonarAnalyzer.Helpers.Facade;
 
-namespace SonarAnalyzer.Helpers;
-
-internal sealed class CSharpFacade : ILanguageFacade<SyntaxKind>
+internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
 {
-    private static readonly Lazy<CSharpFacade> Singleton = new(() => new CSharpFacade());
-    private static readonly Lazy<AssignmentFinder> AssignmentFinderLazy = new(() => new CSharpAssignmentFinder());
-    private static readonly Lazy<IExpressionNumericConverter> ExpressionNumericConverterLazy = new(() => new CSharpExpressionNumericConverter());
-    private static readonly Lazy<SyntaxFacade<SyntaxKind>> SyntaxLazy = new(() => new CSharpSyntaxFacade());
-    private static readonly Lazy<ISyntaxKindFacade<SyntaxKind>> SyntaxKindLazy = new(() => new CSharpSyntaxKindFacade());
-    private static readonly Lazy<ITrackerFacade<SyntaxKind>> TrackerLazy = new(() => new CSharpTrackerFacade());
+    public override SyntaxKind Kind(SyntaxNode node) => node.Kind();
 
-    public AssignmentFinder AssignmentFinder => AssignmentFinderLazy.Value;
-    public StringComparison NameComparison => StringComparison.Ordinal;
-    public StringComparer NameComparer => StringComparer.Ordinal;
-    public GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
-    public IExpressionNumericConverter ExpressionNumericConverter => ExpressionNumericConverterLazy.Value;
-    public SyntaxFacade<SyntaxKind> Syntax => SyntaxLazy.Value;
-    public ISyntaxKindFacade<SyntaxKind> SyntaxKind => SyntaxKindLazy.Value;
-    public ITrackerFacade<SyntaxKind> Tracker => TrackerLazy.Value;
-
-    public static CSharpFacade Instance => Singleton.Value;
-
-    private CSharpFacade() { }
-
-    public DiagnosticDescriptor CreateDescriptor(string id, string messageFormat, bool? isEnabledByDefault = null, bool fadeOutCode = false) =>
-        DescriptorFactory.Create(id, messageFormat, isEnabledByDefault, fadeOutCode);
-
-    public object FindConstantValue(SemanticModel model, SyntaxNode node) =>
-        node.FindConstantValue(model);
-
-    public IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, IMethodSymbol methodSymbol) =>
-        invocation != null ? new CSharpMethodParameterLookup(GetArgumentList(invocation), methodSymbol) : null;
-
-    public IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, SemanticModel semanticModel) =>
-        invocation != null ? new CSharpMethodParameterLookup(GetArgumentList(invocation), semanticModel) : null;
-
-    private static ArgumentListSyntax GetArgumentList(SyntaxNode invocation) =>
-        invocation switch
+    public override ComparisonKind ComparisonKind(SyntaxNode node) =>
+        node.Kind() switch
         {
-            ArgumentListSyntax x => x,
-            ObjectCreationExpressionSyntax x => x.ArgumentList,
-            InvocationExpressionSyntax x => x.ArgumentList,
-            _ when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(invocation) =>
-                ((ImplicitObjectCreationExpressionSyntaxWrapper)invocation).ArgumentList,
-            _ => throw new ArgumentException($"{invocation.GetType()} does not contain an ArgumentList.", nameof(invocation)),
+            SyntaxKind.EqualsExpression => Helpers.ComparisonKind.Equals,
+            SyntaxKind.NotEqualsExpression => Helpers.ComparisonKind.NotEquals,
+            SyntaxKind.LessThanExpression => Helpers.ComparisonKind.LessThan,
+            SyntaxKind.LessThanOrEqualExpression => Helpers.ComparisonKind.LessThanOrEqual,
+            SyntaxKind.GreaterThanExpression => Helpers.ComparisonKind.GreaterThan,
+            SyntaxKind.GreaterThanOrEqualExpression => Helpers.ComparisonKind.GreaterThanOrEqual,
+            _ => Helpers.ComparisonKind.None,
         };
 
-    public string GetName(SyntaxNode expression) =>
-        expression.GetName();
+    public override bool IsKind(SyntaxNode node, SyntaxKind kind) => node.IsKind(kind);
+
+    public override bool IsKind(SyntaxToken token, SyntaxKind kind) => token.IsKind(kind);
+
+    public override bool IsKind(SyntaxTrivia trivia, SyntaxKind kind) => trivia.IsKind(kind);
+
+    public override bool IsAnyKind(SyntaxNode node, ISet<SyntaxKind> syntaxKinds) => node.IsAnyKind(syntaxKinds);
+
+    public override bool IsAnyKind(SyntaxNode node, params SyntaxKind[] syntaxKinds) => node.IsAnyKind(syntaxKinds);
+
+    public override bool IsAnyKind(SyntaxTrivia trivia, params SyntaxKind[] syntaxKinds) => trivia.IsAnyKind(syntaxKinds);
+
+    public override bool IsNullLiteral(SyntaxNode node) => node.IsNullLiteral();
+
+    public override bool IsKnownAttributeType(SemanticModel model, SyntaxNode attribute, KnownType knownType) =>
+        AttributeSyntaxExtensions.IsKnownType(Cast<AttributeSyntax>(attribute), knownType, model);
+
+    public override IEnumerable<SyntaxNode> ArgumentExpressions(SyntaxNode node) =>
+        node switch
+        {
+            ObjectCreationExpressionSyntax creation => creation.ArgumentList?.Arguments.Select(x => x.Expression) ?? Enumerable.Empty<SyntaxNode>(),
+            null => Enumerable.Empty<SyntaxNode>(),
+            var _ when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(node)
+                => ((ImplicitObjectCreationExpressionSyntaxWrapper)node).ArgumentList?.Arguments.Select(x => x.Expression) ?? Enumerable.Empty<SyntaxNode>(),
+            _ => throw InvalidOperation(node, nameof(ArgumentExpressions))
+        };
+
+    public override ImmutableArray<SyntaxNode> AssignmentTargets(SyntaxNode assignment) =>
+        Cast<AssignmentExpressionSyntax>(assignment).AssignmentTargets();
+
+    public override SyntaxNode AssignmentLeft(SyntaxNode assignment) =>
+        Cast<AssignmentExpressionSyntax>(assignment).Left;
+
+    public override SyntaxNode AssignmentRight(SyntaxNode assignment) =>
+        Cast<AssignmentExpressionSyntax>(assignment).Right;
+
+    public override SyntaxNode BinaryExpressionLeft(SyntaxNode binaryExpression) =>
+        Cast<BinaryExpressionSyntax>(binaryExpression).Left;
+
+    public override SyntaxNode BinaryExpressionRight(SyntaxNode binaryExpression) =>
+        Cast<BinaryExpressionSyntax>(binaryExpression).Right;
+
+    public override IEnumerable<SyntaxNode> EnumMembers(SyntaxNode @enum) =>
+        @enum == null ? Enumerable.Empty<SyntaxNode>() : Cast<EnumDeclarationSyntax>(@enum).Members;
+
+    public override SyntaxToken? InvocationIdentifier(SyntaxNode invocation) =>
+        invocation == null ? null : Cast<InvocationExpressionSyntax>(invocation).GetMethodCallIdentifier();
+
+    public override ImmutableArray<SyntaxToken> LocalDeclarationIdentifiers(SyntaxNode node) =>
+        Cast<LocalDeclarationStatementSyntax>(node).Declaration.Variables.Select(x => x.Identifier).ToImmutableArray();
+
+    public override ImmutableArray<SyntaxToken> FieldDeclarationIdentifiers(SyntaxNode node) =>
+        Cast<FieldDeclarationSyntax>(node).Declaration.Variables.Select(x => x.Identifier).ToImmutableArray();
+
+    public override SyntaxKind[] ModifierKinds(SyntaxNode node) =>
+        node is TypeDeclarationSyntax typeDeclaration
+            ? typeDeclaration.Modifiers.Select(x => x.Kind()).ToArray()
+            : Array.Empty<SyntaxKind>();
+
+    public override SyntaxNode NodeExpression(SyntaxNode node) =>
+        node switch
+        {
+            ArrowExpressionClauseSyntax x => x.Expression,
+            AttributeArgumentSyntax x => x.Expression,
+            InterpolationSyntax x => x.Expression,
+            InvocationExpressionSyntax x => x.Expression,
+            LockStatementSyntax x => x.Expression,
+            ReturnStatementSyntax x => x.Expression,
+            null => null,
+            _ => throw InvalidOperation(node, nameof(NodeExpression))
+        };
+
+    public override SyntaxToken? NodeIdentifier(SyntaxNode node) =>
+        node.NodeIdentifier();
+
+    public override SyntaxNode RemoveConditionalAccess(SyntaxNode node) =>
+        node is ExpressionSyntax expression
+            ? expression.RemoveConditionalAccess()
+            : node;
+
+    public override SyntaxNode RemoveParentheses(SyntaxNode node) =>
+        node.RemoveParentheses();
+
+    public override string StringValue(SyntaxNode node, SemanticModel semanticModel) =>
+        CSharpSyntaxHelper.StringValue(node, semanticModel);
+
+    public override bool TryGetInterpolatedTextValue(SyntaxNode node, SemanticModel semanticModel, out string interpolatedValue) =>
+        Cast<InterpolatedStringExpressionSyntax>(node).TryGetInterpolatedTextValue(semanticModel, out interpolatedValue);
+
+    public override bool IsStatic(SyntaxNode node) =>
+        Cast<BaseMethodDeclarationSyntax>(node).IsStatic();
 }

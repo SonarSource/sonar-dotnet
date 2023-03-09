@@ -24,4 +24,10 @@ namespace SonarAnalyzer.Rules.CSharp;
 public sealed class ExcludeFromCodeCoverageAttributesNeedJustification : ExcludeFromCodeCoverageAttributesNeedJustificationBase<SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
+    protected override SyntaxNode GetJustificationExpression(SyntaxNode node) =>
+        node is AttributeSyntax { ArgumentList.Arguments: { Count: 1 } arguments }
+            && arguments[0] is { NameEquals.Name.Identifier.ValueText: JustificationPropertyName, Expression: { } expression }
+                ? expression
+                : null;
 }

@@ -24,8 +24,11 @@ public abstract class ExcludeFromCodeCoverageAttributesNeedJustificationBase<TSy
     where TSyntaxKind : struct
 {
     private const string DiagnosticId = "S1123"; // TODO: Update DiagnosticID.
+    protected const string JustificationPropertyName = "Justification";
 
     protected override string MessageFormat => "Add a justification.";
+
+    protected abstract SyntaxNode GetJustificationExpression(SyntaxNode node);
 
     protected ExcludeFromCodeCoverageAttributesNeedJustificationBase() : base(DiagnosticId) { }
 
@@ -43,8 +46,9 @@ public abstract class ExcludeFromCodeCoverageAttributesNeedJustificationBase<TSy
                 }
             },
             Language.SyntaxKind.Attribute);
+
     private bool NoJustification(SyntaxNode node, SemanticModel model) =>
-        Language.Syntax.ArgumentExpressions(node).FirstOrDefault() is not { } justification
+        GetJustificationExpression(node) is not { } justification
         || string.IsNullOrWhiteSpace(Language.FindConstantValue(model, justification) as string);
 
     private static bool HasJustificationProperty(INamedTypeSymbol symbol) => symbol.MemberNames.Contains("Justification");
