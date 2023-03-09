@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3168",
+"message":  "Return 'Task' instead.",
+"location":  {
+"uri":  "sources\SonarLintExclusions\SonarLintExclusions\Excluded.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  29,
+"endLine":  5,
+"endColumn":  33
+}
+}
+}
+]
+}

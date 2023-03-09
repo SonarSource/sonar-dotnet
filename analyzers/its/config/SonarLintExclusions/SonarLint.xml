@@ -12,8 +12,16 @@
             <Value>true</Value>
         </Setting>
         <Setting>
+            <Key>sonar.inclusions</Key>
+            <Value>**/Included/*.cs</Value>
+        </Setting>
+        <Setting>
             <Key>sonar.exclusions</Key>
-            <Value>**/Excluded.cs</Value>
+            <Value>**/ExcludedByExclusion.cs</Value>
+        </Setting>
+        <Setting>
+            <Key>sonar.global.exclusions</Key>
+            <Value>**/ExcludedByGlobalExclusion.cs</Value>
         </Setting>
         <Setting>
             <Key>sonar.test.exclusions</Key>
