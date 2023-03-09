@@ -34,30 +34,33 @@ public class SonarLintXmlReader
     private readonly string propertyLanguage;
 
     private bool? ignoreHeaderComments;
-    public bool IgnoreHeaderComments => ignoreHeaderComments ??= ReadBoolean(ReadProperty($"sonar.{propertyLanguage}.ignoreHeaderComments"));
+    public bool IgnoreHeaderComments => ignoreHeaderComments ??= ReadBoolean(ReadSettingsProperty($"sonar.{propertyLanguage}.ignoreHeaderComments"));
 
     private bool? analyzeGeneratedCode;
-    public bool AnalyzeGeneratedCode => analyzeGeneratedCode ??= ReadBoolean(ReadProperty($"sonar.{propertyLanguage}.analyzeGeneratedCode"));
+    public bool AnalyzeGeneratedCode => analyzeGeneratedCode ??= ReadBoolean(ReadSettingsProperty($"sonar.{propertyLanguage}.analyzeGeneratedCode"));
 
     private string[] exclusions;
-    public string[] Exclusions => exclusions ??= ReadCommaSeparatedArray(ReadProperty("sonar.exclusions"));
+    public string[] Exclusions => exclusions ??= ReadCommaSeparatedArray(ReadSettingsProperty("sonar.exclusions"));
 
     private string[] inclusions;
-    public string[] Inclusions => inclusions ??= ReadCommaSeparatedArray(ReadProperty("sonar.inclusions"));
+    public string[] Inclusions => inclusions ??= ReadCommaSeparatedArray(ReadSettingsProperty("sonar.inclusions"));
 
     private string[] globalExclusions;
-    public string[] GlobalExclusions => globalExclusions ??= ReadCommaSeparatedArray(ReadProperty("sonar.global.exclusions"));
+    public string[] GlobalExclusions => globalExclusions ??= ReadCommaSeparatedArray(ReadSettingsProperty("sonar.global.exclusions"));
 
     private string[] testExclusions;
-    public string[] TestExclusions => testExclusions ??= ReadCommaSeparatedArray(ReadProperty("sonar.test.exclusions"));
+    public string[] TestExclusions => testExclusions ??= ReadCommaSeparatedArray(ReadSettingsProperty("sonar.test.exclusions"));
 
     private string[] testInclusions;
-    public string[] TestInclusions => testInclusions ??= ReadCommaSeparatedArray(ReadProperty("sonar.test.inclusions"));
+    public string[] TestInclusions => testInclusions ??= ReadCommaSeparatedArray(ReadSettingsProperty("sonar.test.inclusions"));
 
     private string[] globalTestExclusions;
-    public string[] GlobalTestExclusions => globalTestExclusions ??= ReadCommaSeparatedArray(ReadProperty("sonar.global.test.exclusions"));
+    public string[] GlobalTestExclusions => globalTestExclusions ??= ReadCommaSeparatedArray(ReadSettingsProperty("sonar.global.test.exclusions"));
 
-    public SonarLintXmlReader(SourceText sonarLintXml, string language)
+    private List<SonarLintXmlRule> parametrizedRules;
+    public List<SonarLintXmlRule> ParametrizedRules => parametrizedRules ??= ReadRulesParameters();
+
+    public SonarLintXmlReader(SourceText sonarLintXml, string language = LanguageNames.CSharp)
     {
         this.sonarLintXml = sonarLintXml == null ? SonarLintXml.Empty : ParseContent(sonarLintXml);
         propertyLanguage = language == LanguageNames.CSharp ? "cs" : "vbnet";
@@ -80,7 +83,12 @@ public class SonarLintXmlReader
         }
     }
 
-    private string ReadProperty(string property) =>
+    private List<SonarLintXmlRule> ReadRulesParameters() =>
+        sonarLintXml is { Rules: { } rules }
+        ? rules.Where(x => x.Parameters.Any()).ToList()
+        : new();
+
+    private string ReadSettingsProperty(string property) =>
         sonarLintXml is { Settings: { } settings }
         ? settings.Where(x => x.Key.Equals(property)).Select(x => x.Value).FirstOrDefault()
         : string.Empty;
