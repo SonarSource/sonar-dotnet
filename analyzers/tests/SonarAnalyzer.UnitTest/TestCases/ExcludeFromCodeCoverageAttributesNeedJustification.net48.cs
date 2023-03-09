@@ -7,7 +7,7 @@ class Ignores
     [ExcludeFromCodeCoverage(Justification = "not existing")] // Error[CS0246]
     void JustifcationDoesNotExist() { }
 
-    [ExcludeFromCodeCoverage()]
+    [ExcludeFromCodeCoverage()] // Compliant: "Justification" property was added in .Net 5
     void WithBrackets() { }
 
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
