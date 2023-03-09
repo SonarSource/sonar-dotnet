@@ -30,7 +30,8 @@ internal static class OperationDispatcher
         { OperationKindEx.Invocation, new Invocation() },
         { OperationKindEx.IsNull, new IsNull() },
         { OperationKindEx.IsPattern, new IsPattern() },
-        { OperationKindEx.IsType, new IsType() }
+        { OperationKindEx.IsType, new IsType() },
+        { OperationKindEx.PropertyReference, new PropertyReference() },
     };
 
     private static readonly Dictionary<OperationKind, ISimpleProcessor> Simple = new()
@@ -53,7 +54,6 @@ internal static class OperationDispatcher
         { OperationKindEx.LocalReference, new LocalReference() },
         { OperationKindEx.ObjectCreation, new ObjectCreation() },
         { OperationKindEx.ParameterReference, new ParameterReference() },
-        { OperationKindEx.PropertyReference, new PropertyReference() },
         { OperationKindEx.RecursivePattern, new RecursivePattern() },
         { OperationKindEx.ReDimClause, new ReDimClause() },
         { OperationKindEx.SimpleAssignment, new Assignment() },
