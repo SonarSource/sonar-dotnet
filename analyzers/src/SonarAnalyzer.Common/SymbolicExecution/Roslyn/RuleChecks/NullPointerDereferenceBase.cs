@@ -45,8 +45,9 @@ public abstract class NullPointerDereferenceBase : SymbolicRuleCheck
         operation.Kind switch
         {
             OperationKindEx.Invocation => NullInstanceCandidate(operation.ToInvocation()),
-            OperationKindEx.PropertyReference => NullInstanceCandidate(operation.ToPropertyReference()),,
             OperationKindEx.FieldReference => operation.ToFieldReference().Instance,
+            OperationKindEx.PropertyReference => NullInstanceCandidate(operation.ToPropertyReference()),
+            OperationKindEx.EventReference => operation.ToEventReference().Instance,
             OperationKindEx.Await => operation.ToAwait().Operation,
             OperationKindEx.ArrayElementReference => operation.ToArrayElementReference().ArrayReference,
             _ => null,

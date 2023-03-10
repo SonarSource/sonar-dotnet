@@ -64,9 +64,10 @@ namespace Tests.Diagnostics
         void Test_Event()
         {
             MyClass o = null;
-            o.MyEvent += null;  // FN FIXME
+            o.MyEvent += null;  // Noncompliant
             o = null;
-            o.MyEvent -= null;  // FN FIXME
+            o.MyEvent -= null;  // Noncompliant
+            o = null;
         }
 
         void Test_ExtensionMethodWithNull()
