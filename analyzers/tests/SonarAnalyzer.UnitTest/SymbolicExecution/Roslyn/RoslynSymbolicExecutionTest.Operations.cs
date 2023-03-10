@@ -267,9 +267,9 @@ public void Method()
                 Tag("Convert", convert);
                 Tag("Explicit", explicitCast);
                 """, new LiteralDummyTestCheck()).Validator;
-            validator.ValidateTag("Object", x => x.AllConstraints.Select(x => x.Kind).Should().BeEquivalentTo(new[] { ConstraintKind.ObjectNull, (ConstraintKind)ConstraintKindTest.Dummy }));
-            validator.ValidateTag("Convert", x => x.AllConstraints.Select(x => x.Kind).Should().BeEquivalentTo(new[] { ConstraintKind.ObjectNotNull }));
-            validator.ValidateTag("Explicit", x => x.AllConstraints.Select(x => x.Kind).Should().BeEquivalentTo(new[] { ConstraintKind.ObjectNotNull, (ConstraintKind)ConstraintKindTest.Dummy }));
+            validator.ValidateTag("Object", x => x.Should().HaveOnlyConstraints(ObjectConstraint.Null, DummyConstraint.Dummy));
+            validator.ValidateTag("Convert", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
+            validator.ValidateTag("Explicit", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy));
         }
 
         [TestMethod]
@@ -290,10 +290,10 @@ public void Method()
                 Tag("DirectCast", iDirectCast)
                 Tag("Implicit", iImplicit)
                 """, new LiteralDummyTestCheck()).Validator;
-            validator.ValidateTag("Object", x => x.AllConstraints.Select(x => x.Kind).Should().BeEquivalentTo(new[] { ConstraintKind.ObjectNull, (ConstraintKind)ConstraintKindTest.Dummy }));
-            validator.ValidateTag("CType", x => x.AllConstraints.Select(x => x.Kind).Should().BeEquivalentTo(new[] { ConstraintKind.ObjectNotNull, (ConstraintKind)ConstraintKindTest.Dummy }));
-            validator.ValidateTag("DirectCast", x => x.AllConstraints.Select(x => x.Kind).Should().BeEquivalentTo(new[] { ConstraintKind.ObjectNotNull, (ConstraintKind)ConstraintKindTest.Dummy }));
-            validator.ValidateTag("Implicit", x => x.AllConstraints.Select(x => x.Kind).Should().BeEquivalentTo(new[] { ConstraintKind.ObjectNotNull, (ConstraintKind)ConstraintKindTest.Dummy }));
+            validator.ValidateTag("Object", x => x.Should().HaveOnlyConstraints(ObjectConstraint.Null, DummyConstraint.Dummy));
+            validator.ValidateTag("CType", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy));
+            validator.ValidateTag("DirectCast", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy));
+            validator.ValidateTag("Implicit", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy));
         }
 
         [TestMethod]
