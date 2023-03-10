@@ -31,7 +31,9 @@ namespace SonarAnalyzer.Rules
         protected abstract string GetCpdValue(SyntaxToken token);
         protected abstract bool IsUsingDirective(SyntaxNode node);
 
-        protected override UtilityAnalyzerParameter ReadParameters(SonarCompilationStartAnalysisContext context) => base.ReadParameters(context) with { AnalyzeTestProjects = false };
+        protected override UtilityAnalyzerParameter ReadParameters(SonarCompilationStartAnalysisContext context) =>
+            base.ReadParameters(context) with { AnalyzeTestProjects = false };
+
         protected sealed override bool AnalyzeUnchangedFiles => true;
         protected sealed override string FileName => "token-cpd.pb";
 

@@ -99,7 +99,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             tree.SetupGet(x => x.Encoding).Returns(() => null);
             var sut = new TestFileMetadataAnalyzer(null, isTestProject);
 
-            sut.TestCreateMessage(default(UtilityAnalyzerParameter), tree.Object, null).Encoding.Should().BeEmpty();
+            sut.TestCreateMessage(UtilityAnalyzerParameter.Default, tree.Object, null).Encoding.Should().BeEmpty();
         }
 
         [DataTestMethod]

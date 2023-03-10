@@ -31,7 +31,8 @@ namespace SonarAnalyzer.Rules
         protected abstract string LanguageVersion(Compilation compilation);
 
         protected sealed override string FileName => "log.pb";
-        protected override UtilityAnalyzerParameter ReadParameters(SonarCompilationStartAnalysisContext context) => base.ReadParameters(context) with { AnalyzeGeneratedCode = true };
+        protected override UtilityAnalyzerParameter ReadParameters(SonarCompilationStartAnalysisContext context) =>
+            base.ReadParameters(context) with { AnalyzeGeneratedCode = true };
 
         protected LogAnalyzerBase() : base(DiagnosticId, Title) { }
 
