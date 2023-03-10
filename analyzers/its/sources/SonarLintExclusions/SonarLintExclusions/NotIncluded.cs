@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SonarLintExclusions
+﻿namespace SonarLintExclusions
 {
-    internal class NotIncluded
-    {
-    }
+    public class NotIncluded { }  // S2094
 }

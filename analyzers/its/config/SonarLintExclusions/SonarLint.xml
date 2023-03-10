@@ -17,7 +17,7 @@
         </Setting>
         <Setting>
             <Key>sonar.exclusions</Key>
-            <Value>**/ExcludedByExclusion.cs</Value>
+            <Value>**/ExcludedByExclusion.cs,**/ExcludedByExclusion2.cs</Value>
         </Setting>
         <Setting>
             <Key>sonar.global.exclusions</Key>
