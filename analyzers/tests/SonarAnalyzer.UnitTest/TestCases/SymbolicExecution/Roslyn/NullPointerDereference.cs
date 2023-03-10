@@ -53,12 +53,16 @@ namespace Tests.Diagnostics
         {
             MyClass o = null;
             _ = o.MyProperty;   // Noncompliant
+            o = null;
+            o.MyProperty = "";  // Compliant
         }
 
         void Test_Field()
         {
             MyClass o = null;
             _ = o.MyField;  // Noncompliant
+            o = null;
+            o.MyField = ""; // Compliant
         }
 
         void Test_Event()
@@ -67,7 +71,6 @@ namespace Tests.Diagnostics
             o.MyEvent += null;  // Noncompliant
             o = null;
             o.MyEvent -= null;  // Noncompliant
-            o = null;
         }
 
         void Test_ExtensionMethodWithNull()
