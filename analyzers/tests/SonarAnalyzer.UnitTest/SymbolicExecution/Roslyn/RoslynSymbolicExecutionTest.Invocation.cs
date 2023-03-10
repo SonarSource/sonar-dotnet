@@ -536,9 +536,9 @@ Tag(""IsNullOrEmpy"", isNullOrEmpy);
 Tag(""Arg"", arg);";
             var validator = SETestContext.CreateCS(code, ", string arg").Validator;
             validator.TagValues("IsNullOrEmpy").Should().Equal(
-                new SymbolicValue().WithConstraint(BoolConstraint.False),      // False/NotNull
-                new SymbolicValue().WithConstraint(BoolConstraint.True),       // True/Null
-                new SymbolicValue().WithConstraint(BoolConstraint.True));      // True/NotNull
+                SymbolicValue.NotNull.WithConstraint(BoolConstraint.False),      // False/NotNull
+                SymbolicValue.NotNull.WithConstraint(BoolConstraint.True),       // True/Null
+                SymbolicValue.NotNull.WithConstraint(BoolConstraint.True));      // True/NotNull
             validator.TagValues("Arg").Should().Equal(
                 new SymbolicValue().WithConstraint(ObjectConstraint.NotNull),  // False/NotNull
                 new SymbolicValue().WithConstraint(ObjectConstraint.Null),     // True/Null
@@ -661,21 +661,30 @@ Tag(""Value"", value);";
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
         }
 
-        [DataTestMethod]    // Just a few examples to demonstrate that we don't set it for all
-        [DataRow("object", "First()")]
-        [DataRow("int", "Min()")]
-        [DataRow("int", "Min()")]
-        [DataRow("int", "ElementAtOrDefault(42);")]
-        [DataRow("int", "FirstOrDefault();")]
-        [DataRow("int", "LastOrDefault();")]
-        [DataRow("int", "SingleOrDefault();")]
-        [DataRow("object", "ElementAtOrDefault(42);")]
-        public void Invocation_LinqEnumerable_Unknown(string itemType, string expression)
+        [DataTestMethod]    // Just a few examples to demonstrate that we don't set ObjectContraint for all
+        [DataRow("Min()")]
+        [DataRow("ElementAtOrDefault(42);")]
+        [DataRow("FirstOrDefault();")]
+        [DataRow("LastOrDefault();")]
+        [DataRow("SingleOrDefault();")]
+        public void Invocation_LinqEnumerable_Unknown_Int(string expression)
         {
             var code = $@"
 var value = arg.{expression};
 Tag(""Value"", value);";
-            var validator = SETestContext.CreateCS(code, $", IEnumerable<{itemType}> arg").Validator;
+            var validator = SETestContext.CreateCS(code, $", IEnumerable<int> arg").Validator;
+            validator.ValidateTag("Value", x => x.AllConstraints.Should().ContainSingle().Which.Kind.Should().Be(ConstraintKind.ObjectNotNull));
+        }
+
+        [DataTestMethod]    // Just a few examples to demonstrate that we don't set ObjectContraint for all
+        [DataRow("First()")]
+        [DataRow("ElementAtOrDefault(42);")]
+        public void Invocation_LinqEnumerable_Unknown_Object(string expression)
+        {
+            var code = $@"
+var value = arg.{expression};
+Tag(""Value"", value);";
+            var validator = SETestContext.CreateCS(code, $", IEnumerable<object> arg").Validator;
             validator.ValidateTag("Value", x => x.Should().BeNull());
         }
 
@@ -737,7 +746,7 @@ End Sub";
 Dim Result As Boolean = IsNothing("""" & Arg.ToString())
 Tag(""Result"", Result)";
             var validator = SETestContext.CreateVB(code, ", Arg As Object").Validator;
-            validator.ValidateTag("Result", x => x.Should().BeNull());
+            validator.ValidateTag("Result", x => x.AllConstraints.Should().ContainSingle().Which.Should().Be(ObjectConstraint.NotNull));
         }
 
         [DataTestMethod]
@@ -775,7 +784,7 @@ Tag(""Arg2"", arg2);";
 
         [TestMethod]
         public void Invocation_DebugAssert_LearnsBoolConstraint_Binary() =>
-            DebugAssertValues("arg == true", "bool").Should().HaveCount(1).And.ContainSingle(x => x.HasConstraint(BoolConstraint.True));
+            DebugAssertValues("arg == true", "bool").Should().SatisfyRespectively(x => x.AllConstraints.Select(x => x.Kind).Should().BeEquivalentTo(new[] { ConstraintKind.ObjectNotNull }));
 
         [TestMethod]
         public void Invocation_DebugAssert_LearnsBoolConstraint_AlwaysEnds() =>
@@ -897,6 +906,7 @@ f()();";
         [DataRow("new object()", "null", false, ConstraintKind.ObjectNotNull, ConstraintKind.ObjectNull)]
         [DataRow("new int?()", "null", true, ConstraintKind.ObjectNull, ConstraintKind.ObjectNull)]
         [DataRow("new int?(42)", "null", false, ConstraintKind.ObjectNotNull, ConstraintKind.ObjectNull)]
+        [DataRow("new int?()", "42", false, ConstraintKind.ObjectNull, ConstraintKind.ObjectNotNull)]
         public void Invocation_Equals_LearnResult(string left, string right, bool expectedResult, ConstraintKind expectedConstraintLeft, ConstraintKind expectedConstraintRight)
         {
             var code = $@"
@@ -925,7 +935,7 @@ object right = {right};
 var result = object.Equals(left, right);
 Tag(""Result"", result);";
             var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("Result", x => x.Should().BeNull());
+            validator.ValidateTag("Result", x => x.AllConstraints.Should().ContainSingle().Which.Should().Be(ObjectConstraint.NotNull));
         }
 
         [DataTestMethod]
@@ -952,22 +962,6 @@ Tag(""End"");";
                 });
         }
 
-        [DataTestMethod]
-        [DataRow("new int?()", "42")]   // ToDo: Should be moved to Invocation_Equals_LearnResult once we build NotNull for int
-        public void Invocation_Equals_SplitsToBothResults_Nullable(string left, string right)
-        {
-            var code = $@"
-object left = {left};
-object right = {right};
-var result = object.Equals(left, right);
-Tag(""End"");";
-            var validator = SETestContext.CreateCS(code).Validator;
-            var result = validator.Symbol("result");
-            validator.TagStates("End").Should().SatisfyRespectively(
-                x => x[result].HasConstraint(BoolConstraint.True).Should().BeTrue(),
-                x => x[result].HasConstraint(BoolConstraint.False).Should().BeTrue());
-        }
-
         [TestMethod]
         public void Invocation_Equals_CustomSignatures_NotSupported()
         {
@@ -990,10 +984,10 @@ private bool Equals(object a, object b) => false;
 private static bool Equals() => false;
 private static bool Equals(object a, object b, object c) => false;";
             var validator = SETestContext.CreateCSMethod(code).Validator;
-            validator.ValidateTag("InstanceOne", x => x.Should().BeNull());
-            validator.ValidateTag("InstanceTwo", x => x.Should().BeNull());
-            validator.ValidateTag("NoArgs", x => x.Should().BeNull());
-            validator.ValidateTag("MoreArgs", x => x.Should().BeNull());
+            validator.ValidateTag("InstanceOne", x => x.AllConstraints.Should().ContainSingle().Which.Should().Be(ObjectConstraint.NotNull));
+            validator.ValidateTag("InstanceTwo", x => x.AllConstraints.Should().ContainSingle().Which.Should().Be(ObjectConstraint.NotNull));
+            validator.ValidateTag("NoArgs", x => x.AllConstraints.Should().ContainSingle().Which.Should().Be(ObjectConstraint.NotNull));
+            validator.ValidateTag("MoreArgs", x => x.AllConstraints.Should().ContainSingle().Which.Should().Be(ObjectConstraint.NotNull));
         }
     }
 }
