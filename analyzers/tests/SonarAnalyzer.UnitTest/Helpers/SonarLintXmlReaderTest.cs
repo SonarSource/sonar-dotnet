@@ -41,6 +41,13 @@ public class SonarLintXmlReaderTest
         AssertArrayContent(sut.TestInclusions, nameof(sut.TestInclusions));
         AssertArrayContent(sut.GlobalTestExclusions, nameof(sut.GlobalTestExclusions));
 
+        sut.ParametrizedRules.Should().HaveCount(8);
+        var rule = sut.ParametrizedRules.First(x => x.Key.Equals("S2342"));
+        rule.Parameters[0].Key.Should().Be("format");
+        rule.Parameters[0].Value.Should().Be("^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$");
+        rule.Parameters[1].Key.Should().Be("flagsAttributeFormat");
+        rule.Parameters[1].Value.Should().Be("^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?s$");
+
         static void AssertArrayContent(string[] array, string folder)
         {
             array.Should().HaveCount(2);
@@ -61,6 +68,7 @@ public class SonarLintXmlReaderTest
         sut.TestExclusions.Should().NotBeNull().And.HaveCount(0);
         sut.TestInclusions.Should().NotBeNull().And.HaveCount(0);
         sut.GlobalTestExclusions.Should().NotBeNull().And.HaveCount(0);
+        sut.ParametrizedRules.Should().NotBeNull().And.HaveCount(0);
     }
 
     [DataTestMethod]
@@ -92,6 +100,7 @@ public class SonarLintXmlReaderTest
         sut.TestExclusions.Should().NotBeNull().And.HaveCount(0);
         sut.TestInclusions.Should().NotBeNull().And.HaveCount(0);
         sut.GlobalTestExclusions.Should().NotBeNull().And.HaveCount(0);
+        sut.ParametrizedRules.Should().NotBeNull().And.HaveCount(0);
     }
 
     private static void AssertArrayContent(string[] array, string folder)

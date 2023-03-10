@@ -19,10 +19,7 @@
  */
 
 using System.Globalization;
-using System.IO;
 using System.Reflection;
-using System.Xml;
-using System.Xml.Linq;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -39,82 +36,28 @@ namespace SonarAnalyzer.Helpers
          * - diffing the contents of the configuration file
          * - associating the file with a unique identifier for the build project
          */
-        internal static void SetParameterValues(ParametrizedDiagnosticAnalyzer parameteredAnalyzer,
-            AnalyzerOptions options)
+        internal static void SetParameterValues(ParametrizedDiagnosticAnalyzer parameteredAnalyzer, SonarLintXmlReader sonarLintXml)
         {
-            var sonarLintXml = options.SonarLintXml();
-            if (sonarLintXml == null)
-            {
-                return;
-            }
-
-            var parameters = ParseParameters(sonarLintXml);
-            if (parameters.IsEmpty)
+            if (!sonarLintXml.ParametrizedRules.Any())
             {
                 return;
             }
 
             var propertyParameterPairs = parameteredAnalyzer.GetType()
                 .GetRuntimeProperties()
-                .Select(p => new { Property = p, Descriptor = p.GetCustomAttributes<RuleParameterAttribute>().SingleOrDefault() })
-                .Where(p => p.Descriptor != null);
+                .Select(x => new { Property = x, Descriptor = x.GetCustomAttributes<RuleParameterAttribute>().SingleOrDefault() })
+                .Where(x => x.Descriptor is not null);
 
             var ids = new HashSet<string>(parameteredAnalyzer.SupportedDiagnostics.Select(diagnostic => diagnostic.Id));
             foreach (var propertyParameterPair in propertyParameterPairs)
             {
-                var parameter = parameters
-                    .FirstOrDefault(p => ids.Contains(p.RuleId));
-
-                var parameterValue = parameter?.ParameterValues
-                    .FirstOrDefault(pv => pv.ParameterKey == propertyParameterPair.Descriptor.Key);
-
-                if (TryConvertToParameterType(parameterValue?.ParameterValue, propertyParameterPair.Descriptor.Type, out var value))
+                var parameter = sonarLintXml.ParametrizedRules.FirstOrDefault(x => ids.Contains(x.Key));
+                var parameterValue = parameter?.Parameters.FirstOrDefault(x => x.Key == propertyParameterPair.Descriptor.Key);
+                if (TryConvertToParameterType(parameterValue?.Value, propertyParameterPair.Descriptor.Type, out var value))
                 {
                     propertyParameterPair.Property.SetValue(parameteredAnalyzer, value);
                 }
             }
-        }
-
-        private static ImmutableList<RuleParameterValues> ParseParameters(AdditionalText sonarLintXml)
-        {
-            try
-            {
-                var xml = XDocument.Parse(sonarLintXml.GetText().ToString());
-                return ParseParameters(xml);
-            }
-            catch (Exception ex) when (ex is IOException || ex is XmlException)
-            {
-                // cannot log exception
-                return ImmutableList.Create<RuleParameterValues>();
-            }
-        }
-
-        private static ImmutableList<RuleParameterValues> ParseParameters(XContainer xml)
-        {
-            var builder = ImmutableList.CreateBuilder<RuleParameterValues>();
-            foreach (var rule in xml.Descendants("Rule").Where(e => e.Elements("Parameters").Any()))
-            {
-                var analyzerId = rule.Elements("Key").Single().Value;
-
-                var parameterValues = rule
-                    .Elements("Parameters").Single()
-                    .Elements("Parameter")
-                    .Select(e => new RuleParameterValue
-                    {
-                        ParameterKey = e.Elements("Key").Single().Value,
-                        ParameterValue = e.Elements("Value").Single().Value
-                    });
-
-                var pvs = new RuleParameterValues
-                {
-                    RuleId = analyzerId
-                };
-                pvs.ParameterValues.AddRange(parameterValues);
-
-                builder.Add(pvs);
-            }
-
-            return builder.ToImmutable();
         }
 
         private static bool TryConvertToParameterType(string parameter, PropertyType type, out object result)
@@ -143,20 +86,6 @@ namespace SonarAnalyzer.Helpers
                     result = null;
                     return false;
             }
-        }
-
-        private sealed class RuleParameterValues
-        {
-            public string RuleId { get; set; }
-
-            public List<RuleParameterValue> ParameterValues { get; } = new List<RuleParameterValue>();
-        }
-
-        private sealed class RuleParameterValue
-        {
-            public string ParameterKey { get; set; }
-
-            public string ParameterValue { get; set; }
         }
     }
 }
