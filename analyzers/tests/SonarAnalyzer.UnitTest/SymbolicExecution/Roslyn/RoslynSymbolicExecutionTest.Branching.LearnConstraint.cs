@@ -138,9 +138,9 @@ if (value = boolParameter)
     Tag(""Value"", value);
 }";
             var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("True", x => x.HasConstraint<BoolConstraint>().Should().BeFalse());
-            validator.ValidateTag("False", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
-            validator.ValidateTag("Value", x => x.HasConstraint(BoolConstraint.True).Should().BeFalse());    // Visited only for "true" condition
+            validator.ValidateTag("True", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True));
+            validator.ValidateTag("False", x => x.Should().HaveOnlyConstraint(BoolConstraint.False));
+            validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True));    // Visited only for "true" condition
         }
 
         [DataTestMethod]
