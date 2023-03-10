@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 public class Sample
@@ -97,24 +98,19 @@ public partial class Partial
     }
 }
 
-namespace UsingAttributes
+public class UsingFromServicesAttribute
 {
-    using Microsoft.AspNetCore.Mvc;
+    public int GetProduct([FromServices] IService service) =>
+         service.GetValue(); // Compliant, it's attributed with FromServices attribute
 
-    public class UsingFromServicesAttribute
+    public int GetProductMultipleAttr([FromServices][FromRoute] IService service) =>
+        service.GetValue(); // Compliant, it's attributed with FromServices attribute
+
+    public int GetPrice(IService service) =>
+        service.GetValue();  // FIXME non-compliant
+
+    public interface IService
     {
-        public int GetProduct([FromServices] IService service) =>
-             service.GetValue(); // Compliant, it's attributed with FromServices attribute
-
-        public int GetProductMultipleAttr([FromServices] [FromRoute] IService service) =>
-            service.GetValue(); // Compliant, it's attributed with FromServices attribute
-
-        public int GetPrice(IService service) =>
-            service.GetValue();  // FIXME non-compliant
-
-        public interface IService
-        {
-            int GetValue();
-        }
+        int GetValue();
     }
 }
