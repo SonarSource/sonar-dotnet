@@ -28,16 +28,15 @@ namespace SonarAnalyzer.Helpers;
 
 public class SonarLintXmlReader
 {
-    public static readonly SonarLintXmlReader Empty = new(null, LanguageNames.CSharp);
+    public static readonly SonarLintXmlReader Empty = new(null);
 
     private readonly SonarLintXml sonarLintXml;
-    private readonly string propertyLanguage;
 
     private bool? ignoreHeaderComments;
-    public bool IgnoreHeaderComments => ignoreHeaderComments ??= ReadBoolean(ReadSettingsProperty($"sonar.{propertyLanguage}.ignoreHeaderComments"));
+    public bool IgnoreHeaderComments(string language = LanguageNames.CSharp) => ignoreHeaderComments ??= ReadBoolean(ReadSettingsProperty($"sonar.{LanguageXmlName(language)}.ignoreHeaderComments"));
 
     private bool? analyzeGeneratedCode;
-    public bool AnalyzeGeneratedCode => analyzeGeneratedCode ??= ReadBoolean(ReadSettingsProperty($"sonar.{propertyLanguage}.analyzeGeneratedCode"));
+    public bool AnalyzeGeneratedCode(string language = LanguageNames.CSharp) => analyzeGeneratedCode ??= ReadBoolean(ReadSettingsProperty($"sonar.{LanguageXmlName(language)}.analyzeGeneratedCode"));
 
     private string[] exclusions;
     public string[] Exclusions => exclusions ??= ReadCommaSeparatedArray(ReadSettingsProperty("sonar.exclusions"));
@@ -60,11 +59,9 @@ public class SonarLintXmlReader
     private List<SonarLintXmlRule> parametrizedRules;
     public List<SonarLintXmlRule> ParametrizedRules => parametrizedRules ??= ReadRuleParameters();
 
-    public SonarLintXmlReader(SourceText sonarLintXml, string language = LanguageNames.CSharp)
+    public SonarLintXmlReader(SourceText sonarLintXml, string language)
     {
         this.sonarLintXml = sonarLintXml == null ? SonarLintXml.Empty : ParseContent(sonarLintXml);
-        propertyLanguage = language == LanguageNames.CSharp ? "cs" : "vbnet";
-    }
 
     private static SonarLintXml ParseContent(SourceText sonarLintXml)
     {
@@ -98,4 +95,6 @@ public class SonarLintXmlReader
 
     private static bool ReadBoolean(string str, bool defaultValue = false) =>
         bool.TryParse(str, out var propertyValue) ? propertyValue : defaultValue;
+
+    private string LanguageXmlName(string language) => language.Equals(LanguageNames.CSharp) ? "cs" : "vbnet";
 }

@@ -29,11 +29,11 @@ public class SonarLintXmlReaderTest
     [DataTestMethod]
     [DataRow(LanguageNames.CSharp, "cs")]
     [DataRow(LanguageNames.VisualBasic, "vbnet")]
-    public void SonarLintXmlReader_WhenAllValuesAreSet_ExpectedValues(string language, string propertyLanguage)
+    public void SonarLintXmlReader_WhenAllValuesAreSet_ExpectedValues(string language, string xmlLanguageName)
     {
-        var sut = CreateSonarLintXmlReader($"ResourceTests\\SonarLintXml\\All_Properties_{propertyLanguage}\\SonarLint.xml", language);
-        sut.IgnoreHeaderComments.Should().BeTrue();
-        sut.AnalyzeGeneratedCode.Should().BeFalse();
+        var sut = CreateSonarLintXmlReader($"ResourceTests\\SonarLintXml\\All_Properties_{xmlLanguageName}\\SonarLint.xml");
+        sut.IgnoreHeaderComments(language).Should().BeTrue();
+        sut.AnalyzeGeneratedCode(language).Should().BeFalse();
         AssertArrayContent(sut.Exclusions, nameof(sut.Exclusions));
         AssertArrayContent(sut.Inclusions, nameof(sut.Inclusions));
         AssertArrayContent(sut.GlobalExclusions, nameof(sut.GlobalExclusions));
@@ -60,8 +60,8 @@ public class SonarLintXmlReaderTest
     public void SonarLintXmlReader_PartiallyMissingProperties_ExpectedAndDefaultValues()
     {
         var sut = CreateSonarLintXmlReader("ResourceTests\\SonarLintXml\\Partially_missing_properties\\SonarLint.xml");
-        sut.IgnoreHeaderComments.Should().BeFalse();
-        sut.AnalyzeGeneratedCode.Should().BeTrue();
+        sut.IgnoreHeaderComments().Should().BeFalse();
+        sut.AnalyzeGeneratedCode().Should().BeTrue();
         AssertArrayContent(sut.Exclusions, nameof(sut.Exclusions));
         AssertArrayContent(sut.Inclusions, nameof(sut.Inclusions));
         sut.GlobalExclusions.Should().NotBeNull().And.HaveCount(0);
@@ -76,7 +76,7 @@ public class SonarLintXmlReaderTest
     [DataRow("this is not an xml")]
     [DataRow(@"<?xml version=""1.0"" encoding=""UTF - 8""?><AnalysisInput><Settings>")]
     public void SonarLintXmlReader_WithMalformedXml_DefaultBehaviour(string sonarLintXmlContent) =>
-        CheckSonarLintXmlReaderDefaultValues(new SonarLintXmlReader(SourceText.From(sonarLintXmlContent), LanguageNames.CSharp));
+        CheckSonarLintXmlReaderDefaultValues(new SonarLintXmlReader(SourceText.From(sonarLintXmlContent)));
 
     [TestMethod]
     public void SonarLintXmlReader_MissingProperties_DefaultBehaviour() =>
@@ -92,8 +92,8 @@ public class SonarLintXmlReaderTest
 
     private static void CheckSonarLintXmlReaderDefaultValues(SonarLintXmlReader sut)
     {
-        sut.AnalyzeGeneratedCode.Should().BeFalse();
-        sut.IgnoreHeaderComments.Should().BeFalse();
+        sut.AnalyzeGeneratedCode().Should().BeFalse();
+        sut.IgnoreHeaderComments().Should().BeFalse();
         sut.Exclusions.Should().NotBeNull().And.HaveCount(0);
         sut.Inclusions.Should().NotBeNull().And.HaveCount(0);
         sut.GlobalExclusions.Should().NotBeNull().And.HaveCount(0);
@@ -110,6 +110,6 @@ public class SonarLintXmlReaderTest
         array[1].Should().BeEquivalentTo($"Fake/{folder}/Second*/**/*");
     }
 
-    private static SonarLintXmlReader CreateSonarLintXmlReader(string relativePath, string language = LanguageNames.CSharp) =>
-        new(SourceText.From(File.ReadAllText(relativePath)), language);
+    private static SonarLintXmlReader CreateSonarLintXmlReader(string relativePath) =>
+        new(SourceText.From(File.ReadAllText(relativePath)));
 }

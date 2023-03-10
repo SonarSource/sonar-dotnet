@@ -61,8 +61,8 @@ namespace SonarAnalyzer.Rules
             if (context.Options.SonarLintXml() != null && !string.IsNullOrEmpty(outPath))
             {
                 var sonarLintXml = context.SonarLintFile();
-                IgnoreHeaderComments = sonarLintXml.IgnoreHeaderComments;
-                AnalyzeGeneratedCode = sonarLintXml.AnalyzeGeneratedCode;
+                IgnoreHeaderComments = sonarLintXml.IgnoreHeaderComments(context.Compilation.Language);
+                AnalyzeGeneratedCode = sonarLintXml.AnalyzeGeneratedCode(context.Compilation.Language);
                 OutPath = Path.Combine(outPath, context.Compilation.Language == LanguageNames.CSharp ? "output-cs" : "output-vbnet");
                 IsAnalyzerEnabled = true;
                 IsTestProject = context.IsTestProject();
