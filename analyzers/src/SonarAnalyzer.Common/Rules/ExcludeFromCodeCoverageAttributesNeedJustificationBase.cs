@@ -49,7 +49,7 @@ public abstract class ExcludeFromCodeCoverageAttributesNeedJustificationBase<TSy
             },
             Language.SyntaxKind.Attribute);
 
-   private bool NoJustification(SyntaxNode node, SemanticModel model) =>
+    private bool NoJustification(SyntaxNode node, SemanticModel model) =>
         GetJustificationExpression(node) is not { } justification
         || string.IsNullOrWhiteSpace(Language.FindConstantValue(model, justification) as string);
 
