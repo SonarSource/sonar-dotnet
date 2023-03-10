@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using System.Threading.Tasks;
 
 public class Program
 {
@@ -116,6 +117,23 @@ public class Program
             o2 = o1;
             o2.ToString();
         }
+    }
+
+    public async void AsyncTest(Task task1, Task task2, Task task3, Task task4)
+    {
+        if (task1 != null)
+        {
+            await task1;
+        }
+
+        await task2; // FIXME non-compliant
+
+        if (task3 != null)
+        {
+            await task3.ConfigureAwait(false);
+        }
+
+        await task4.ConfigureAwait(false); // FIXME non-compliant
     }
 
     public Program(int i) { }
