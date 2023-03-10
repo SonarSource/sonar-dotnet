@@ -38,7 +38,7 @@ public class EmptyNullableValueAccess
         }
 
         Console.WriteLine(i1.Value); // FIXME Non-compliant {{'i1' is null on at least one execution path.}}
-//                        ^^^^^^^^
+        // FIXME          ~~~~~~~~
     }
 
     public IEnumerable<TestClass> TestEnumerableExpressionWithCompilableCode() => numbers.OrderBy(i => i.Number.HasValue).ThenBy(i => i.Number);
