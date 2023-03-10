@@ -172,7 +172,7 @@ public void Method()
                 @"Invocation: Tag(""c"", c)",
                 @"ExpressionStatement: Tag(""c"", c);");
             validator.ValidateTag("b", x => x.HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
-            validator.ValidateTag("c", x => x.Should().BeNull());
+            validator.ValidateTag("c", x => x.AllConstraints.Should().ContainSingle().Which.Should().Be(ObjectConstraint.NotNull));
         }
 
         [TestMethod]
@@ -234,8 +234,8 @@ public void Method()
             }
             """;
             var validator = SETestContext.CreateCSMethod(code, new LiteralDummyTestCheck()).Validator;
-            validator.ValidateTag("WithImplicit", x => x.Should().BeNull());
-            validator.ValidateTag("WithExplicit", x => x.Should().BeNull());
+            validator.ValidateTag("WithImplicit", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("WithExplicit", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
         }
 
 #if NET
@@ -249,7 +249,7 @@ public void Method()
                 Tag("Half", h);
                 """;
             var validator = SETestContext.CreateCS(code, new LiteralDummyTestCheck()).Validator;
-            validator.ValidateTag("Half", x => x.Should().BeNull());    // While it would be better to propagate constraints here, Half has custom conversion operators
+            validator.ValidateTag("Half", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));    // While it would be better to propagate constraints here, Half has custom conversion operators
         }
 
 #endif
@@ -418,7 +418,7 @@ Tag(""AfterNullableInt"", argNullableInt);";
             validator.ValidateTag("BeforeNullableInt", x => x.Should().BeNull());
             validator.ValidateTag("AfterObjNull", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
             validator.ValidateTag("AfterObjDefault", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-            validator.ValidateTag("AfterInt", x => x.Should().BeNull());
+            validator.ValidateTag("AfterInt", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.ValidateTag("AfterNullableInt", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
         }
 
@@ -437,7 +437,7 @@ Tag(""AfterInt"", ArgInt)";
             validator.ValidateTag("BeforeObj", x => x.Should().BeNull());
             validator.ValidateTag("BeforeInt", x => x.Should().BeNull());
             validator.ValidateTag("AfterObj", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-            validator.ValidateTag("AfterInt", x => x.Should().BeNull());
+            validator.ValidateTag("AfterInt", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
         }
 
         [TestMethod]
@@ -493,7 +493,7 @@ Tag(""ObjectFromException"", o);
 Tag(""IntegerFromByte"", i);";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateTag("ObjectFromException", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-            validator.ValidateTag("IntegerFromByte", x => x.Should().BeNull());
+            validator.ValidateTag("IntegerFromByte", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
         }
 
         [TestMethod]
@@ -536,7 +536,7 @@ Tag(""Value"", value);";
 var value = {literal};
 Tag(""Value"", value);";
             var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("Value", x => x.Should().BeNull());
+            validator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
         }
 
         [TestMethod]
@@ -869,11 +869,11 @@ public async System.Threading.Tasks.Task Main(System.Threading.Tasks.Task T)
         }
 
         [DataTestMethod]
-        [DataRow("bool", "true", ConstraintKind.BoolFalse)]
-        [DataRow("bool", "false", ConstraintKind.BoolTrue)]
+        [DataRow("bool", "true", ConstraintKind.ObjectNotNull, ConstraintKind.BoolFalse)]
+        [DataRow("bool", "false", ConstraintKind.ObjectNotNull, ConstraintKind.BoolTrue)]
         [DataRow("bool?", "default", ConstraintKind.ObjectNull)]
         [DataRow("bool?", "null", ConstraintKind.ObjectNull)]
-        public void Unary_Not_SupportsBoolAndNull(string type, string defaultValue, ConstraintKind expectedConstraint)
+        public void Unary_Not_SupportsBoolAndNull(string type, string defaultValue, params ConstraintKind[] expectedConstraints)
         {
             var code = $@"
 {type} value = {defaultValue};
@@ -881,7 +881,7 @@ value = !value;
 Tag(""Value"", value);";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateContainsOperation(OperationKind.Unary);
-            validator.ValidateTag("Value", x => x.AllConstraints.Select(x => x.Kind).Should().ContainSingle().Which.Should().Be(expectedConstraint));
+            validator.ValidateTag("Value", x => x.AllConstraints.Select(y => y.Kind).Should().BeEquivalentTo(expectedConstraints));
         }
 
         [TestMethod]

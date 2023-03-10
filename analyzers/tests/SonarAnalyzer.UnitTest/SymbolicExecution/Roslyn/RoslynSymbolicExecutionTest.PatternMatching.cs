@@ -512,7 +512,7 @@ static object Tag(string name, object value) => null;";
                 }
                 else
                 {
-                    x.Should().BeNull("we should not learn about the state of result");
+                    x.HasConstraint<BoolConstraint>().Should().BeFalse("we should not learn about the state of result");
                 }
             });
         }
