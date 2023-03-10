@@ -125,10 +125,12 @@ namespace SonarAnalyzer.UnitTest.Rules.Utilities
         private class TestUtilityAnalyzer : UtilityAnalyzerBase
         {
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => throw new NotImplementedException();
-            public bool TestIsAnalyzerEnabled => IsAnalyzerEnabled;
-            public bool TestAnalyzeGeneratedCode => AnalyzeGeneratedCode;
-            public bool TestIgnoreHeaderComments => IgnoreHeaderComments;
-            public string TestOutPath => OutPath;
+            public UtilityAnalyzerParameter Parameters { get; }
+            public bool TestIsAnalyzerEnabled => Parameters.IsAnalyzerEnabled;
+            public bool TestAnalyzeGeneratedCode => Parameters.AnalyzeGeneratedCode;
+            public bool TestIgnoreHeaderComments => Parameters.IgnoreHeaderComments;
+            public string TestOutPath => Parameters.OutPath;
+
 
             public TestUtilityAnalyzer(string language, params string[] additionalPaths) : base("S9999-test", "Title")
             {
@@ -140,7 +142,7 @@ namespace SonarAnalyzer.UnitTest.Rules.Utilities
                     _ => throw new InvalidOperationException($"Unexpected {nameof(language)}: {language}")
                 };
                 var context = new Mock<CompilationStartAnalysisContext>(compilation, new AnalyzerOptions(additionalFiles), default).Object;
-                ReadParameters(new SonarCompilationStartAnalysisContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context));
+                Parameters = ReadParameters(new SonarCompilationStartAnalysisContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context));
             }
 
             protected override void Initialize(SonarAnalysisContext context) =>

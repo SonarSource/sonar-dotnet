@@ -19,6 +19,7 @@
  */
 
 using System.IO;
+using SonarAnalyzer.AnalysisContext;
 using SonarAnalyzer.CFG.Helpers;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Rules;
@@ -88,25 +89,35 @@ public class AnalysisWarningAnalyzerTest
 
     private sealed class TestAnalysisWarningAnalyzer_CS : CS.AnalysisWarningAnalyzer
     {
+        private readonly bool isAnalyzerEnabled;
+        private readonly string outPath;
         protected override int MinimalSupportedRoslynVersion { get; }
 
         public TestAnalysisWarningAnalyzer_CS(bool isAnalyzerEnabled, int minimalSupportedRoslynVersion, string outPath)
         {
-            IsAnalyzerEnabled = isAnalyzerEnabled;
+            this.isAnalyzerEnabled = isAnalyzerEnabled;
             MinimalSupportedRoslynVersion = minimalSupportedRoslynVersion;
-            OutPath = outPath;
+            this.outPath = outPath;
         }
+
+        protected override UtilityAnalyzerParameter ReadParameters(SonarCompilationStartAnalysisContext context) =>
+            base.ReadParameters(context) with { IsAnalyzerEnabled = isAnalyzerEnabled, OutPath = outPath };
     }
 
     private sealed class TestAnalysisWarningAnalyzer_VB : VB.AnalysisWarningAnalyzer
     {
+        private readonly bool isAnalyzerEnabled;
+        private readonly string outPath;
         protected override int MinimalSupportedRoslynVersion { get; }
 
         public TestAnalysisWarningAnalyzer_VB(bool isAnalyzerEnabled, int minimalSupportedRoslynVersion, string outPath)
         {
-            IsAnalyzerEnabled = isAnalyzerEnabled;
+            this.isAnalyzerEnabled = isAnalyzerEnabled;
             MinimalSupportedRoslynVersion = minimalSupportedRoslynVersion;
-            OutPath = outPath;
+            this.outPath = outPath;
         }
+
+        protected override UtilityAnalyzerParameter ReadParameters(SonarCompilationStartAnalysisContext context) =>
+            base.ReadParameters(context) with { IsAnalyzerEnabled = isAnalyzerEnabled, OutPath = outPath };
     }
 }

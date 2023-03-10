@@ -19,7 +19,9 @@
  */
 
 using System.IO;
+using SonarAnalyzer.AnalysisContext;
 using SonarAnalyzer.Protobuf;
+using SonarAnalyzer.Rules;
 using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -85,12 +87,17 @@ namespace SonarAnalyzer.UnitTest.Rules
         // We need to set protected properties and this class exists just to enable the analyzer without bothering with additional files with parameters
         private sealed class TestMetricsAnalyzer : MetricsAnalyzer
         {
+            private readonly string outPath;
+            private readonly bool isTestProject;
+
             public TestMetricsAnalyzer(string outPath, bool isTestProject)
             {
-                IsAnalyzerEnabled = true;
-                OutPath = outPath;
-                IsTestProject = isTestProject;
+                this.outPath = outPath;
+                this.isTestProject = isTestProject;
             }
+
+            protected override UtilityAnalyzerParameter ReadParameters(SonarCompilationStartAnalysisContext context) =>
+                base.ReadParameters(context) with { IsAnalyzerEnabled = true, OutPath = outPath, IsTestProject = isTestProject };
         }
     }
 }
