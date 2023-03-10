@@ -9,18 +9,18 @@ namespace Tests.Diagnostics
 
         public void NotCompliantCases(object o, Exception e)
         {
-            o.ToString(); // Noncompliant {{Refactor this method to add validation of parameter 'o' before using it.}}
+            o.ToString(); // FIXME non-compliant {{Refactor this method to add validation of parameter 'o' before using it.}}
 
             Bar(o); // Compliant, we care about dereference only
 
-            throw e; // Noncompliant
+            throw e; // FIXME non-compliant
         }
 
         public void Bar(object o) { }
 
         protected void NotCompliantCases_Nonpublic(object o)
         {
-            o.ToString(); // Noncompliant
+            o.ToString(); // FIXME non-compliant
         }
 
         private void CompliantCases_Private(object o)
@@ -30,7 +30,7 @@ namespace Tests.Diagnostics
 
         protected internal void NotCompliantCases_ProtectedInternal(object o)
         {
-            o.ToString(); // Noncompliant
+            o.ToString(); // FIXME non-compliant
         }
 
         internal void CompliantCases_Internal(object o)
@@ -76,7 +76,7 @@ namespace Tests.Diagnostics
         {
             if (string.IsNullOrEmpty(s1))
             {
-                s1.ToString(); // Noncompliant, could be null
+                s1.ToString(); // FIXME non-compliant, could be null
             }
             else
             {
@@ -85,7 +85,7 @@ namespace Tests.Diagnostics
 
             if (string.IsNullOrWhiteSpace(s2))
             {
-                s2.ToString(); // Noncompliant, could be null
+                s2.ToString(); // FIXME non-compliant, could be null
             }
             else
             {
@@ -95,14 +95,14 @@ namespace Tests.Diagnostics
 
         public Program(int i) { }
 
-        public Program(string s) : this(s.Length) { }   // Noncompliant {{Refactor this constructor to avoid using members of parameter 's' because it could be null.}}
+        public Program(string s) : this(s.Length) { }   // FIXME non-compliant {{Refactor this constructor to avoid using members of parameter 's' because it could be null.}}
 
         public void NonCompliant1(object o)
         {
             var c = o?.ToString()?.IsNormalized();
             if (c == null)
             {
-                o.GetType().GetMethods();  // Noncompliant
+                o.GetType().GetMethods();  // FIXME non-compliant
             }
         }
 
@@ -188,7 +188,7 @@ namespace Tests.Diagnostics
             if (infixes != null)
             {
                 Method(ref infixes, infixes.Length);
-                var x = infixes.Length; // Noncompliant when passed by ref can be set to null
+                var x = infixes.Length; // FIXME non-compliant when passed by ref can be set to null
             }
 
         }
@@ -197,15 +197,15 @@ namespace Tests.Diagnostics
         {
             if (infixes == null)
             {
-                Method(ref infixes, infixes.Length); // Noncompliant
+                Method(ref infixes, infixes.Length); // FIXME non-compliant
                 var x = infixes.Length;
             }
         }
 
         public void Method3(string infixes)
         {
-            Method(ref infixes, infixes.Length); // Noncompliant
-            var x = infixes.Length; // Noncompliant
+            Method(ref infixes, infixes.Length); // FIXME non-compliant
+            var x = infixes.Length; // FIXME non-compliant
         }
 
         public void Method4(string contentType)
@@ -250,7 +250,7 @@ namespace Tests.Diagnostics
                 contentType = null;
             }
 
-            var parts = contentType.Split('/', ';'); // Noncompliant
+            var parts = contentType.Split('/', ';'); // FIXME non-compliant
         }
     }
 
@@ -264,7 +264,7 @@ namespace Tests.Diagnostics
                 name = Guid.NewGuid().ToString("N");
             }
 
-            return name.Trim(); // Noncompliant FP
+            return name.Trim(); // FIXME non-compliant FP
         }
 
         public string FooWithStringJoin(string name)
@@ -274,7 +274,7 @@ namespace Tests.Diagnostics
                 name = Guid.NewGuid().ToString("N");
             }
 
-            return string.Join("_", name.Split(System.IO.Path.GetInvalidFileNameChars())); // Noncompliant FP
+            return string.Join("_", name.Split(System.IO.Path.GetInvalidFileNameChars())); // FIXME non-compliant FP
         }
 
         public string FooWithObject(object name)
@@ -284,7 +284,7 @@ namespace Tests.Diagnostics
                 name = Guid.NewGuid().ToString("N");
             }
 
-            return name.ToString(); // Noncompliant FP
+            return name.ToString(); // FIXME non-compliant FP
         }
     }
 
@@ -299,7 +299,7 @@ namespace Tests.Diagnostics
             }
             if (b)
             {
-                int index = argument.LastIndexOf('c'); // Noncompliant FP
+                int index = argument.LastIndexOf('c'); // FIXME non-compliant FP
             }
         }
 
@@ -311,7 +311,7 @@ namespace Tests.Diagnostics
             }
             if (b)
             {
-                int index = argument.LastIndexOf('c'); // Noncompliant FP
+                int index = argument.LastIndexOf('c'); // FIXME non-compliant FP
             }
         }
 
@@ -333,7 +333,7 @@ namespace Tests.Diagnostics
     {
         public override bool Equals(object obj)
         {
-            var equals = (obj is string) && (obj.GetHashCode() == GetHashCode()); // Noncompliant FP
+            var equals = (obj is string) && (obj.GetHashCode() == GetHashCode()); // FIXME non-compliant FP
             if (equals)
             {
                 // do stuff
@@ -352,7 +352,7 @@ namespace Tests.Diagnostics
             if (imdbId.StartsWith(" "))
                 imdbId = string.Concat("tt", imdbId);
 
-            if (imdbId.Length != 9) // Noncompliant - FP
+            if (imdbId.Length != 9) // FIXME non-compliant - FP
                 imdbId = string.Empty;
 
             return imdbId;
@@ -373,7 +373,7 @@ namespace CSharp8
         public void NullCoalescenceAssignment_Null(string s1)
         {
             s1 ??= null;
-            s1.ToString(); // Noncompliant
+            s1.ToString(); // FIXME non-compliant
         }
 
         public void InsideIf(string str)
@@ -399,7 +399,7 @@ namespace CSharp8
 
         void Reset(string s)
         {
-            s.ToString(); // Noncompliant
+            s.ToString(); // FIXME non-compliant
         }
     }
 
@@ -445,7 +445,7 @@ namespace CSharp8
         {
             var result = b switch
             {
-                _ => s.ToString() // Noncompliant
+                _ => s.ToString() // FIXME non-compliant
             };
         }
 
@@ -454,7 +454,7 @@ namespace CSharp8
             var result = val switch
             {
                 1 => "a",
-                2 => s.ToString(), // Noncompliant
+                2 => s.ToString(), // FIXME non-compliant
                 _ => "b"
             };
         }
@@ -466,7 +466,7 @@ namespace CSharp8
                 1 => "a",
                 2 => condition switch
                 {
-                    _ => s.ToString() // Noncompliant
+                    _ => s.ToString() // FIXME non-compliant
                 },
                 _ => "b"
             };
@@ -476,7 +476,7 @@ namespace CSharp8
         {
             var result = s switch
             {
-                null => s.ToString(), // Noncompliant
+                null => s.ToString(), // FIXME non-compliant
                 _ => s.ToString() // Compliant as null was already handled
             };
         }
@@ -495,7 +495,7 @@ namespace CSharp8
         {
             return address switch
             {
-                { State: "WA" } addr => s.ToString(), // Noncompliant
+                { State: "WA" } addr => s.ToString(), // FIXME non-compliant
                 _ => string.Empty
             };
         }
@@ -504,7 +504,7 @@ namespace CSharp8
         {
             return s switch
             {
-                { Length: 5 } => s.ToString(), // Noncompliant - FP we know that the length is 5 so the string cannot be null
+                { Length: 5 } => s.ToString(), // FIXME non-compliant - FP we know that the length is 5 so the string cannot be null
                 _ => string.Empty
             };
         }
@@ -513,7 +513,7 @@ namespace CSharp8
         {
             return person switch
             {
-                { Address: { State: "WA" } } pers => s.ToString(), // Noncompliant
+                { Address: { State: "WA" } } pers => s.ToString(), // FIXME non-compliant
                 _ => string.Empty
             };
         }
@@ -531,8 +531,8 @@ namespace CSharp8
         {
             return address switch
             {
-                Address addr when addr.Name.Length > 0 => s.ToString(), // Noncompliant
-                Address addr when addr.Name.Length == s.Length => string.Empty, // Noncompliant
+                Address addr when addr.Name.Length > 0 => s.ToString(), // FIXME non-compliant
+                Address addr when addr.Name.Length == s.Length => string.Empty, // FIXME non-compliant
                 _ => string.Empty
             };
         }
@@ -541,7 +541,7 @@ namespace CSharp8
         {
             return address switch
             {
-                Address addr => s.ToString(), // Noncompliant
+                Address addr => s.ToString(), // FIXME non-compliant
                 _ => string.Empty
             };
         }
@@ -550,8 +550,8 @@ namespace CSharp8
         {
             return condition switch
             {
-                true => s.ToString(), // Noncompliant
-                false => s.ToString() // Noncompliant
+                true => s.ToString(), // FIXME non-compliant
+                false => s.ToString() // FIXME non-compliant
             };
         }
     }
@@ -583,7 +583,7 @@ namespace Repro_3400
         public void ReassignedFromMethod(StringBuilder parameter)
         {
             parameter = Create();
-            parameter.Capacity = 1; // Noncompliant FP
+            parameter.Capacity = 1; // FIXME non-compliant FP
         }
 
         public void ReassignedFromConstructor(StringBuilder parameter)
@@ -595,7 +595,7 @@ namespace Repro_3400
         public void ReassignedFromMethodOut(out StringBuilder parameter)
         {
             parameter = Create();
-            parameter.Capacity = 1; // Noncompliant FP
+            parameter.Capacity = 1; // FIXME non-compliant FP
         }
 
         public void ReassignedFromConstructorOut(out StringBuilder parameter)

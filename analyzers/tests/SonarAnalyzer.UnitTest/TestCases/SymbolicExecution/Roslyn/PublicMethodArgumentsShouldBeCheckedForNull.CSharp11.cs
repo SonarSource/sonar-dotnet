@@ -9,7 +9,7 @@ namespace Tests.Diagnostics
 
         public void NotCompliantCases(object[] o)
         {
-            o[1].ToString(); // Noncompliant {{Refactor this method to add validation of parameter 'o' before using it.}}
+            o[1].ToString(); // FIXME non-compliant {{Refactor this method to add validation of parameter 'o' before using it.}}
         }
 
         public void Compliant(object[] o)
@@ -26,7 +26,7 @@ namespace Tests.Diagnostics
     {
         public static virtual void NotCompliantCases(object o, Exception e)
         {
-            o.ToString(); // Noncompliant {{Refactor this method to add validation of parameter 'o' before using it.}}
+            o.ToString(); // FIXME non-compliant {{Refactor this method to add validation of parameter 'o' before using it.}}
         }
     }
 }

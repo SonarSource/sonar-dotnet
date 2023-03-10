@@ -62,7 +62,7 @@ public class Sample
         get => null;
         set
         {
-            field = value.ToString();   // Noncompliant
+            field = value.ToString();   // FIXME non-compliant
         }
     }
 
@@ -71,7 +71,7 @@ public class Sample
         get => null;
         init
         {
-            field = value.ToString();   // Noncompliant
+            field = value.ToString();   // FIXME non-compliant
         }
     }
 }
@@ -80,7 +80,7 @@ public record Record
 {
     public void Method(object arg)
     {
-        arg.ToString();   // Noncompliant
+        arg.ToString();   // FIXME non-compliant
     }
 }
 
@@ -93,7 +93,7 @@ public partial class Partial
 {
     public partial void Method(object arg)
     {
-        arg.ToString();   // Noncompliant
+        arg.ToString();   // FIXME non-compliant
     }
 }
 
@@ -110,7 +110,7 @@ namespace UsingAttributes
             service.GetValue(); // Compliant, it's attributed with FromServices attribute
 
         public int GetPrice(IService service) =>
-            service.GetValue();  // Noncompliant
+            service.GetValue();  // FIXME non-compliant
 
         public interface IService
         {
