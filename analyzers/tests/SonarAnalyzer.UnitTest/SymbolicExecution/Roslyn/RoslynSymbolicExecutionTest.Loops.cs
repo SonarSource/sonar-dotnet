@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 
@@ -42,8 +43,9 @@ Tag(""End"", value);";
             var validator = SETestContext.CreateCS(code, ", int[] items", new AddConstraintOnInvocationCheck(), new PreserveTestCheck("value")).Validator;
             validator.ValidateExitReachCount(2);
             validator.TagValues("End").Should().HaveCount(2)
-                .And.ContainSingle(x => x == null)
-                .And.ContainSingle(x => x != null && x.HasConstraint(TestConstraint.First) && !x.HasConstraint(BoolConstraint.True));
+                .And.SatisfyRespectively(
+                    x => x.AllConstraints.Should().BeEquivalentTo(new SymbolicConstraint[] { ObjectConstraint.NotNull }),
+                    x => x.AllConstraints.Should().BeEquivalentTo(new SymbolicConstraint[] { ObjectConstraint.NotNull, TestConstraint.First }));
         }
 
         [TestMethod]
@@ -64,8 +66,9 @@ Tag(""End"", value);";
             // - System.IDisposable.Dispose()
             validator.ValidateExitReachCount(6);                // foreach produces implicit TryFinally region where it can throw and changes the flow
             validator.TagValues("End").Should().HaveCount(2)    // These Exception flows do not reach the Tag("End") line
-                .And.ContainSingle(x => x == null)
-                .And.ContainSingle(x => x != null && x.HasConstraint(TestConstraint.First) && !x.HasConstraint(BoolConstraint.True));
+                .And.SatisfyRespectively(
+                    x => x.AllConstraints.Should().BeEquivalentTo(new SymbolicConstraint[] { ObjectConstraint.NotNull }),
+                    x => x.AllConstraints.Should().BeEquivalentTo(new SymbolicConstraint[] { ObjectConstraint.NotNull, TestConstraint.First }));
         }
 
         [TestMethod]

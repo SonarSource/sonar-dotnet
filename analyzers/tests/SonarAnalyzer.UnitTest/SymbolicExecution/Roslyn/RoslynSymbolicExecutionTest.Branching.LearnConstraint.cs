@@ -138,9 +138,9 @@ if (value = boolParameter)
     Tag(""Value"", value);
 }";
             var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("True", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+            validator.ValidateTag("True", x => x.HasConstraint<BoolConstraint>().Should().BeFalse());
             validator.ValidateTag("False", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
-            validator.ValidateTag("Value", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());    // Visited only for "true" condition
+            validator.ValidateTag("Value", x => x.HasConstraint(BoolConstraint.True).Should().BeFalse());    // Visited only for "true" condition
         }
 
         [DataTestMethod]
@@ -392,9 +392,9 @@ if (value = boolParameter)
         public void Branching_LearnsObjectConstraint_ConstantPattern_ValueTypes_InputIsNotReferenceType(string expression, string argType)
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.ConstantPattern, argType);
-            validator.ValidateTag("If", x => x.Should().BeNull());
+            validator.ValidateTag("If", x => x.AllConstraints.Should().ContainSingle().Which.Should().Be(ObjectConstraint.NotNull));
             validator.ValidateTag("Else", x => x.Should().BeNull());
-            validator.ValidateTag("End", x => x.Should().BeNull());
+            validator.TagValues("End").Should().BeEquivalentTo(new SymbolicValue[] { SymbolicValue.NotNull, null });
         }
 
         [DataTestMethod]
@@ -485,7 +485,6 @@ if (value = boolParameter)
         }
 
         [DataTestMethod]
-        [DataRow("arg is { }", "int")]
         [DataRow("arg is { }", "T")]
         [DataRow("arg is { }", "TStruct")]
         [DataRow("arg is string { }", "T")]     // Could have NotNull instead. T is not known to be reference type.
@@ -559,7 +558,6 @@ if (value = boolParameter)
 
         [DataTestMethod]
         [DataRow("arg is var o")]
-        [DataRow("arg is object o", "int")]
         [DataRow("arg is object o", "T")]
         [DataRow("arg is object o", "TStruct")]
         public void Branching_LearnsObjectConstraint_DeclarationPattern_NoConstraints(string expression, string argType = "object")
@@ -653,9 +651,7 @@ Tag(""End"", arg);";
         public void Branching_IsNullOperation_Equals(string expression)
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.IsNull, "string");
-            validator.TagValues("If").Should().HaveCount(2)
-                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null)) // ToDo: MMF-2401 This should not be here
-                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
+            validator.TagValues("If").Should().ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
             validator.TagValues("Else").Should().HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));

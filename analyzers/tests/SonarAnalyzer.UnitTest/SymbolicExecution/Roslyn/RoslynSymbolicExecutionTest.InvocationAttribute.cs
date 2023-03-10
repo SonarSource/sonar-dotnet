@@ -152,7 +152,7 @@ Tag(""Result"", result);
 Tag(""ObjectField"", ObjectField);";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateTag("ByteString", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-            validator.ValidateTag("Success", x => x.Should().BeNull());
+            validator.ValidateTag("Success", x => x.HasConstraint<BoolConstraint>().Should().BeFalse());
             validator.ValidateTag("Result", x => x.Should().BeNull());
             validator.ValidateTag("ObjectField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
         }
