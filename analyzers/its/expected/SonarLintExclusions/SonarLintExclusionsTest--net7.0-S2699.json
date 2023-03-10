@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\SonarLintExclusions\SonarLintExclusionsTest\IncludedTest\IncludedTest.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  21,
+"endLine":  8,
+"endColumn":  32
+}
+}
+}
+]
+}
