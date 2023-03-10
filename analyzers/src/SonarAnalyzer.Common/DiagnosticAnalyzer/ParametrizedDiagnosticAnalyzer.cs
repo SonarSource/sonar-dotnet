@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Helpers
             context.RegisterCompilationStartAction(
                 c =>
                 {
-                    ParameterLoader.SetParameterValues(this, c.Options);
+                    ParameterLoader.SetParameterValues(this, c.SonarLintFile());
                     parameterContext.ExecutePostponedActions(c);
                 });
         }
