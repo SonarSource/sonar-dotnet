@@ -58,7 +58,7 @@ namespace Tests.Diagnostics
         void Test_Field()
         {
             MyClass o = null;
-            _ = o.MyField;  // FN FIXME
+            _ = o.MyField;  // Noncompliant
         }
 
         void Test_Event()

@@ -63,6 +63,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         internal static IInvocationOperationWrapper ToInvocation(this IOperation operation) =>
             IInvocationOperationWrapper.FromOperation(operation);
 
+        internal static IFieldReferenceOperationWrapper ToFieldReference(this IOperation operation) =>
+            IFieldReferenceOperationWrapper.FromOperation(operation);
+
         internal static IPropertyReferenceOperationWrapper ToPropertyReference(this IOperation operation) =>
             IPropertyReferenceOperationWrapper.FromOperation(operation);
 

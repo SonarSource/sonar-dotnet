@@ -19,6 +19,7 @@
  */
 
 using SonarAnalyzer.SymbolicExecution.Constraints;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
 
@@ -44,7 +45,8 @@ public abstract class NullPointerDereferenceBase : SymbolicRuleCheck
         operation.Kind switch
         {
             OperationKindEx.Invocation => NullInstanceCandidate(operation.ToInvocation()),
-            OperationKindEx.PropertyReference => NullInstanceCandidate(operation.ToPropertyReference()),
+            OperationKindEx.PropertyReference => NullInstanceCandidate(operation.ToPropertyReference()),,
+            OperationKindEx.FieldReference => operation.ToFieldReference().Instance,
             OperationKindEx.Await => operation.ToAwait().Operation,
             OperationKindEx.ArrayElementReference => operation.ToArrayElementReference().ArrayReference,
             _ => null,
