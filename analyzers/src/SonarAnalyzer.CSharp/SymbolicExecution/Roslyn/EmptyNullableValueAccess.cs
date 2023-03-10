@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.SymbolicExecution.Constraints;
+
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 
 public class EmptyNullableValueAccess : SymbolicRuleCheck
@@ -34,6 +36,33 @@ public class EmptyNullableValueAccess : SymbolicRuleCheck
         var finder = new NullableAccessFinder();
         finder.SafeVisit(Node);
         return finder.HasPotentialNullableValueAccess;
+    }
+
+    protected override ProgramState PreProcessSimple(SymbolicContext context)
+    {
+        var operationInstance = context.Operation.Instance;
+        if (operationInstance.Kind == OperationKindEx.PropertyReference
+            && operationInstance.ToPropertyReference() is { Instance: var instance } propertyReference
+            && propertyReference.Property.Name == nameof(Nullable<int>.Value)
+            && IsNull(instance))
+        {
+            ReportIssue(instance, instance.Syntax.ToString());
+        }
+        else if (operationInstance.Kind == OperationKindEx.Conversion
+            && operationInstance.ToConversion() is { Operand: var operand } conversion
+            && operand.Type.IsNullableValueType()
+            && !conversion.Type.IsNullableValueType()
+            && conversion.Type.IsStruct()
+            && IsNull(operand))
+        {
+            ReportIssue(operand, operand.Syntax.ToString());
+        }
+
+        return context.State;
+
+        bool IsNull(IOperation operation) =>
+            context.HasConstraint(operation, ObjectConstraint.Null)
+            && SemanticModel.GetTypeInfo(operation.Syntax).Nullability().FlowState != NullableFlowState.NotNull;
     }
 
     private sealed class NullableAccessFinder : SafeCSharpSyntaxWalker
