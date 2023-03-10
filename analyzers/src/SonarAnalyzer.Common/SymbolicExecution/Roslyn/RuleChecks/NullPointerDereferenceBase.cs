@@ -51,14 +51,14 @@ public abstract class NullPointerDereferenceBase : SymbolicRuleCheck
         };
 
     private static IOperation InvocationOrDefault(IOperation operation) =>
-        operation.ToInvocation() is { TargetMethod: var method } invocation
+        operation.ToInvocation() is { Instance: var instance, TargetMethod: var method }
         && (!method.ContainingType.Is(KnownType.System_Nullable_T) || method.Name == nameof(Nullable<int>.GetType)) // All methods on Nullable but .GetType() are safe to call
-            ? invocation.Instance
+            ? instance
             : null;
 
     private static IOperation PropertyReferenceOrDefault(IOperation operation) =>
-        operation.ToPropertyReference() is { Property: var property } propertyReference
+        operation.ToPropertyReference() is { Instance: var instance, Property: var property }
         && !property.IsInType(KnownType.System_Nullable_T)  // HasValue doesn't throw; Value is covered by S3655
-            ? propertyReference.Instance
+            ? instance
             : null;
 }
