@@ -74,15 +74,17 @@ namespace Tests.Diagnostics
             i = 42;
             i.GetType();            // Compliant
             i = null;
-            _ = i.HasValue;         // Compliant
+            _ = i.HasValue;         // Compliant - safe to call
             i = null;
-            _ = i.Value;            // Compliant
+            _ = i.Value;            // Compliant - handled by rule S3655
             i = null;
-            i.GetValueOrDefault();  // Compliant
+            i.GetValueOrDefault();  // Compliant - safe to call
             i = null;
-            i.Equals(null);         // Compliant
+            i.Equals(null);         // Compliant - safe to call
             i = null;
-            i.GetHashCode();        // Compliant
+            i.GetHashCode();        // Compliant - safe to call
+            i = null;
+            i.ToString();           // Compliant - safe to call
         }
 
         void Test_Foreach()
