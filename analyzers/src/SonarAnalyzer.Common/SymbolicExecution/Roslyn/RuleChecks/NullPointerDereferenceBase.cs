@@ -30,7 +30,7 @@ public abstract class NullPointerDereferenceBase : SymbolicRuleCheck
 
     protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
-        if (ReferenceOrDefault(context.Operation.Instance) is { Syntax: var syntax} reference
+        if (AsUnsafeReference(context.Operation.Instance) is { Syntax: var syntax } reference
             && context.HasConstraint(reference, ObjectConstraint.Null)
             && !IsSupressed(syntax)
             && SemanticModel.GetTypeInfo(syntax).Nullability().FlowState != NullableFlowState.NotNull)
@@ -40,25 +40,24 @@ public abstract class NullPointerDereferenceBase : SymbolicRuleCheck
         return context.State;
     }
 
-    private static IOperation ReferenceOrDefault(IOperation operation) =>
+    private static IOperation AsUnsafeReference(IOperation operation) =>
         operation.Kind switch
         {
-            OperationKindEx.Invocation => InvocationOrDefault(operation),
-            OperationKindEx.PropertyReference => PropertyReferenceOrDefault(operation),
+            OperationKindEx.Invocation => AsUnsafeInvocation(operation.ToInvocation()),
+            OperationKindEx.PropertyReference => AsUnsafePropertyReference(operation.ToPropertyReference()),
             OperationKindEx.Await => operation.ToAwait().Operation,
             OperationKindEx.ArrayElementReference => operation.ToArrayElementReference().ArrayReference,
             _ => null,
         };
 
-    private static IOperation InvocationOrDefault(IOperation operation) =>
-        operation.ToInvocation() is { Instance: var instance, TargetMethod: var method }
-        && (!method.ContainingType.Is(KnownType.System_Nullable_T) || method.Name == nameof(Nullable<int>.GetType)) // All methods on Nullable but .GetType() are safe to call
-            ? instance
-            : null;
+    private static IOperation AsUnsafeInvocation(IInvocationOperationWrapper operation) =>
+        operation.TargetMethod.ContainingType.Is(KnownType.System_Nullable_T)
+        && operation.TargetMethod.Name != nameof(Nullable<int>.GetType) // All methods on Nullable but .GetType() are safe to call
+            ? null
+            : operation.Instance;
 
-    private static IOperation PropertyReferenceOrDefault(IOperation operation) =>
-        operation.ToPropertyReference() is { Instance: var instance, Property: var property }
-        && !property.IsInType(KnownType.System_Nullable_T)  // HasValue doesn't throw; Value is covered by S3655
-            ? instance
-            : null;
+    private static IOperation AsUnsafePropertyReference(IPropertyReferenceOperationWrapper operation) =>
+        operation.Property.IsInType(KnownType.System_Nullable_T)    // HasValue doesn't throw; Value is covered by S3655
+            ? null
+            : operation.Instance;
 }

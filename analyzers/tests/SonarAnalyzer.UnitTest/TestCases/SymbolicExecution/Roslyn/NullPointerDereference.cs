@@ -78,6 +78,8 @@ namespace Tests.Diagnostics
             i = null;
             _ = i.Value;            // Compliant - handled by rule S3655
             i = null;
+            _ = (int)i;            // Compliant - handled by rule S3655
+            i = null;
             i.GetValueOrDefault();  // Compliant - safe to call
             i = null;
             i.Equals(null);         // Compliant - safe to call
