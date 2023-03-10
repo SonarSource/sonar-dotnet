@@ -68,9 +68,9 @@ namespace Tests.Diagnostics
         void Test_Event()
         {
             MyClass o = null;
-            o.MyEvent += null;  // Noncompliant
+            o.MyEvent += (s, e) => throw new NotImplementedException(); // Noncompliant
             o = null;
-            o.MyEvent -= null;  // Noncompliant
+            o.MyEvent -= (s, e) => throw new NotImplementedException(); // Noncompliant
         }
 
         void Test_ExtensionMethodWithNull()
