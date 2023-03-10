@@ -643,9 +643,9 @@ Tag(""End"", arg);";
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.DeclarationPattern, "int?");
             validator.ValidateTag("If", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
-            validator.TagValues("End").Should().HaveCount(2)
-                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
-                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
+            validator.TagValues("End").Should().SatisfyRespectively(
+                    x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull),
+                    x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
         }
 
         [DataTestMethod]
@@ -659,9 +659,9 @@ Tag(""End"", arg);";
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.DeclarationPattern, "int?");
             validator.ValidateTag("If", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
             validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
-            validator.TagValues("End").Should().HaveCount(2)
-                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
-                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
+            validator.TagValues("End").Should().SatisfyRespectively(
+                    x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull),
+                    x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
         }
 
         [TestMethod]
