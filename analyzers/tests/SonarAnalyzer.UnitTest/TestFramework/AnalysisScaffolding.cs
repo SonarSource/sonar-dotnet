@@ -19,6 +19,7 @@
  */
 
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Xml.Linq;
 using Microsoft.CodeAnalysis.Text;
 using Moq;
@@ -90,8 +91,9 @@ namespace SonarAnalyzer.UnitTest
             string[] globalExclusions = null,
             string[] testExclusions = null,
             string[] testInclusions = null,
-            string[] globalTestExclusions = null) =>
-            TestHelper.WriteFile(context, "SonarLint.xml", GenerateSonarLintXmlContent(language, analyzeGeneratedCode, exclusions, inclusions, globalExclusions, testExclusions, testInclusions, globalTestExclusions));
+            string[] globalTestExclusions = null,
+            List<SonarLintXmlRule> rulesParameters = null) =>
+            TestHelper.WriteFile(context, "SonarLint.xml", GenerateSonarLintXmlContent(language, analyzeGeneratedCode, exclusions, inclusions, globalExclusions, testExclusions, testInclusions, globalTestExclusions, rulesParameters));
 
         public static string GenerateSonarLintXmlContent(
             string language = LanguageNames.CSharp,
@@ -101,7 +103,8 @@ namespace SonarAnalyzer.UnitTest
             string[] globalExclusions = null,
             string[] testExclusions = null,
             string[] testInclusions = null,
-            string[] globalTestExclusions = null) =>
+            string[] globalTestExclusions = null,
+            List<SonarLintXmlRule> rulesParameters = null) =>
             new XDocument(
                 new XDeclaration("1.0", "utf-8", "yes"),
                 new XElement("AnalysisInput",
@@ -112,10 +115,32 @@ namespace SonarAnalyzer.UnitTest
                         CreateSetting("sonar.global.exclusions", ConcatenateStringArray(globalExclusions)),
                         CreateSetting("sonar.test.exclusions", ConcatenateStringArray(testExclusions)),
                         CreateSetting("sonar.test.inclusions", ConcatenateStringArray(testInclusions)),
-                        CreateSetting("sonar.global.test.exclusions", ConcatenateStringArray(globalTestExclusions))))).ToString();
+                        CreateSetting("sonar.global.test.exclusions", ConcatenateStringArray(globalTestExclusions))),
+                    new XElement("Rules", CreateRules(rulesParameters)))).ToString();
+
+        private static IEnumerable<XElement> CreateRules(List<SonarLintXmlRule> ruleParameters)
+        {
+            foreach (var rule in ruleParameters ?? new())
+            {
+                yield return CreateRule(rule);
+            }
+        }
+
+        private static XElement CreateRule(SonarLintXmlRule rule)
+        {
+            List<XElement> elements = new();
+            foreach (var param in rule.Parameters)
+            {
+                elements.Add(CreateKeyValuePair("Parameter", param.Key, param.Value));
+            }
+            return new("Rule", new XElement("Key", rule.Key), new XElement("Parameters", elements));
+        }
 
         private static XElement CreateSetting(string key, string value) =>
-            new("Setting", new XElement("Key", key), new XElement("Value", value));
+            CreateKeyValuePair("Setting", key, value);
+
+        private static XElement CreateKeyValuePair(string containerName, string key, string value) =>
+            new(containerName, new XElement("Key", key), new XElement("Value", value));
 
         private static string ConcatenateStringArray(string[] array) =>
             string.Join(",", array ?? Array.Empty<string>());
