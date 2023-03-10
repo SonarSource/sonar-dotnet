@@ -20,8 +20,9 @@
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 
-public class EmptyNullableValueAccess : EmptyNullableValueAccessBase
+public class EmptyNullableValueAccess : SymbolicRuleCheck
 {
+    private const string DiagnosticId = "S3655";
     private const string MessageFormat = "'{0}' is null on at least one execution path.";
 
     internal static readonly DiagnosticDescriptor S3655 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
