@@ -49,6 +49,26 @@ namespace Tests.Diagnostics
             M2(o.ToString()); // Noncompliant
         }
 
+        void Test_Property()
+        {
+            MyClass o = null;
+            _ = o.MyProperty;   // Noncompliant
+        }
+
+        void Test_Field()
+        {
+            MyClass o = null;
+            _ = o.MyField;  // FN FIXME
+        }
+
+        void Test_Event()
+        {
+            MyClass o = null;
+            o.MyEvent += null;  // FN FIXME
+            o = null;
+            o.MyEvent -= null;  // FN FIXME
+        }
+
         void Test_ExtensionMethodWithNull()
         {
             object o = null;
@@ -285,6 +305,8 @@ namespace Tests.Diagnostics
         class MyClass
         {
             public string MyProperty { get; set; }
+            public string MyField;
+            public event EventHandler MyEvent;
         }
 
         public void Assert1(object o)
