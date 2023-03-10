@@ -46,8 +46,8 @@ namespace SonarAnalyzer.UnitTest.Rules.Utilities
             // We do not test what is read from the SonarLint file, but we need it
             var utilityAnalyzer = new TestUtilityAnalyzer(language, @"TestResources\SonarLintXml\All_properties_cs\SonarLint.xml", additionalPath);
 
-            utilityAnalyzer.TestOutPath.Should().Be(expectedOutPath);
-            utilityAnalyzer.TestIsAnalyzerEnabled.Should().BeTrue();
+            utilityAnalyzer.Parameters.OutPath.Should().Be(expectedOutPath);
+            utilityAnalyzer.Parameters.IsAnalyzerEnabled.Should().BeTrue();
         }
 
         [DataTestMethod]
@@ -58,8 +58,8 @@ namespace SonarAnalyzer.UnitTest.Rules.Utilities
             // We do not test what is read from the SonarLint file, but we need it
             var utilityAnalyzer = new TestUtilityAnalyzer(LanguageNames.CSharp, @"TestResources\SonarLintXml\All_properties_cs\SonarLint.xml", firstFile, secondFile);
 
-            utilityAnalyzer.TestOutPath.Should().Be(@"C:\foo\bar\.sonarqube\out\0\output-cs");
-            utilityAnalyzer.TestIsAnalyzerEnabled.Should().BeTrue();
+            utilityAnalyzer.Parameters.OutPath.Should().Be(@"C:\foo\bar\.sonarqube\out\0\output-cs");
+            utilityAnalyzer.Parameters.IsAnalyzerEnabled.Should().BeTrue();
         }
 
         [DataTestMethod]
@@ -72,8 +72,8 @@ namespace SonarAnalyzer.UnitTest.Rules.Utilities
             var sonarLintXmlPath = AnalysisScaffolding.CreateSonarLintXml(TestContext, language: language, analyzeGeneratedCode: analyzeGenerated);
             var utilityAnalyzer = new TestUtilityAnalyzer(language, sonarLintXmlPath, DefaultSonarProjectConfig);
 
-            utilityAnalyzer.TestAnalyzeGeneratedCode.Should().Be(analyzeGenerated);
-            utilityAnalyzer.TestIsAnalyzerEnabled.Should().BeTrue();
+            utilityAnalyzer.Parameters.AnalyzeGeneratedCode.Should().Be(analyzeGenerated);
+            utilityAnalyzer.Parameters.IsAnalyzerEnabled.Should().BeTrue();
         }
 
         [DataTestMethod]
@@ -86,20 +86,20 @@ namespace SonarAnalyzer.UnitTest.Rules.Utilities
             var sonarLintXmlPath = AnalysisScaffolding.CreateSonarLintXml(TestContext, language: language, ignoreHeaderComments: ignoreHeaderComments);
             var utilityAnalyzer = new TestUtilityAnalyzer(language, sonarLintXmlPath, DefaultSonarProjectConfig);
 
-            utilityAnalyzer.TestIgnoreHeaderComments.Should().Be(ignoreHeaderComments);
-            utilityAnalyzer.TestIsAnalyzerEnabled.Should().BeTrue();
+            utilityAnalyzer.Parameters.IgnoreHeaderComments.Should().Be(ignoreHeaderComments);
+            utilityAnalyzer.Parameters.IsAnalyzerEnabled.Should().BeTrue();
         }
 
         [TestMethod]
         public void NoSonarLintXml_AnalyzerNotEnabled()
         {
-            new TestUtilityAnalyzer(LanguageNames.CSharp, DefaultProjectOutFolderPath).TestIsAnalyzerEnabled.Should().BeFalse();
-            new TestUtilityAnalyzer(LanguageNames.CSharp, DefaultSonarProjectConfig).TestIsAnalyzerEnabled.Should().BeFalse();
+            new TestUtilityAnalyzer(LanguageNames.CSharp, DefaultProjectOutFolderPath).Parameters.IsAnalyzerEnabled.Should().BeFalse();
+            new TestUtilityAnalyzer(LanguageNames.CSharp, DefaultSonarProjectConfig).Parameters.IsAnalyzerEnabled.Should().BeFalse();
         }
 
         [TestMethod]
         public void NoOutputPath_AnalyzerNotEnabled() =>
-            new TestUtilityAnalyzer(LanguageNames.CSharp, AnalysisScaffolding.CreateSonarLintXml(TestContext, analyzeGeneratedCode: true)).TestIsAnalyzerEnabled.Should().BeFalse();
+            new TestUtilityAnalyzer(LanguageNames.CSharp, AnalysisScaffolding.CreateSonarLintXml(TestContext, analyzeGeneratedCode: true)).Parameters.IsAnalyzerEnabled.Should().BeFalse();
 
         [TestMethod]
         public void GetTextRange()
@@ -126,11 +126,6 @@ namespace SonarAnalyzer.UnitTest.Rules.Utilities
         {
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => throw new NotImplementedException();
             public UtilityAnalyzerParameter Parameters { get; }
-            public bool TestIsAnalyzerEnabled => Parameters.IsAnalyzerEnabled;
-            public bool TestAnalyzeGeneratedCode => Parameters.AnalyzeGeneratedCode;
-            public bool TestIgnoreHeaderComments => Parameters.IgnoreHeaderComments;
-            public string TestOutPath => Parameters.OutPath;
-
 
             public TestUtilityAnalyzer(string language, params string[] additionalPaths) : base("S9999-test", "Title")
             {
