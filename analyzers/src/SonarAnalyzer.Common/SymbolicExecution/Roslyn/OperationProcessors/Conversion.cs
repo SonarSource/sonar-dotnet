@@ -28,13 +28,18 @@ internal sealed class Conversion : SimpleProcessor<IConversionOperationWrapper>
         operation.ToConversion();
 
     protected override ProgramState Process(SymbolicContext context, IConversionOperationWrapper conversion) =>
-        context.State[conversion.Operand] is { } value && conversion.OperatorMethod is null // Built-in conversions only
+        context.State[conversion.Operand] is { } value
         && PropagateSymbolValue(value, conversion) is { } propagatedValue
-            ? context.State.SetOperationValue(context.Operation, value)
+            ? context.State.SetOperationValue(context.Operation, propagatedValue)
             : context.State;
 
     private static SymbolicValue PropagateSymbolValue(SymbolicValue value, IConversionOperationWrapper conversion)
     {
+        if (conversion.OperatorMethod is not null)
+        {
+            // Don't propagate state in user-defined conversions
+            value = SymbolicValue.Constraintless;
+        }
         if (conversion.Type.IsNonNullableValueType())
         {
             value = value.WithConstraint(ObjectConstraint.NotNull);
