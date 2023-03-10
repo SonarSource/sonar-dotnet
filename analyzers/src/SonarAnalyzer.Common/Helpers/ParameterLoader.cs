@@ -36,9 +36,9 @@ namespace SonarAnalyzer.Helpers
          * - diffing the contents of the configuration file
          * - associating the file with a unique identifier for the build project
          */
-        internal static void SetParameterValues(ParametrizedDiagnosticAnalyzer parameteredAnalyzer, SonarLintXmlReader sonarLintReader)
+        internal static void SetParameterValues(ParametrizedDiagnosticAnalyzer parameteredAnalyzer, SonarLintXmlReader sonarLintXml)
         {
-            if (!sonarLintReader.ParametrizedRules.Any())
+            if (!sonarLintXml.ParametrizedRules.Any())
             {
                 return;
             }
@@ -46,15 +46,13 @@ namespace SonarAnalyzer.Helpers
             var propertyParameterPairs = parameteredAnalyzer.GetType()
                 .GetRuntimeProperties()
                 .Select(x => new { Property = x, Descriptor = x.GetCustomAttributes<RuleParameterAttribute>().SingleOrDefault() })
-                .Where(x => x.Descriptor is { });
+                .Where(x => x.Descriptor is not null);
 
             var ids = new HashSet<string>(parameteredAnalyzer.SupportedDiagnostics.Select(diagnostic => diagnostic.Id));
             foreach (var propertyParameterPair in propertyParameterPairs)
             {
-                var parameter = sonarLintReader.ParametrizedRules.FirstOrDefault(x => ids.Contains(x.Key));
-
+                var parameter = sonarLintXml.ParametrizedRules.FirstOrDefault(x => ids.Contains(x.Key));
                 var parameterValue = parameter?.Parameters.FirstOrDefault(x => x.Key == propertyParameterPair.Descriptor.Key);
-
                 if (TryConvertToParameterType(parameterValue?.Value, propertyParameterPair.Descriptor.Type, out var value))
                 {
                     propertyParameterPair.Property.SetValue(parameteredAnalyzer, value);
