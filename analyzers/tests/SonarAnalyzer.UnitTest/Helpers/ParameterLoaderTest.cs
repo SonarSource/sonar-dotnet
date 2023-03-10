@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void SetParameterValues_WhenNoSonarLintIsGiven_DoesNotPopulateParameters(string filePath)
         {
             // Arrange
-            var compilation = CreateCompilationWithOption(filePath, SourceText.From(File.ReadAllText("ResourceTests\\SonarLintXml\\All_properties_small_template\\SonarLint.xml")));
+            var compilation = CreateCompilationWithOption(filePath, SourceText.From(File.ReadAllText("ResourceTests\\SonarLintXml\\All_properties_cs\\SonarLint.xml")));
             var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
             // Act
@@ -53,7 +53,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void SetParameterValues_WhenGivenValidSonarLintFilePath_PopulatesProperties(string filePath)
         {
             // Arrange
-            var compilation = CreateCompilationWithOption(filePath, SourceText.From(File.ReadAllText("ResourceTests\\SonarLintXml\\All_properties_small_template\\SonarLint.xml")));
+            var compilation = CreateCompilationWithOption(filePath, SourceText.From(File.ReadAllText("ResourceTests\\SonarLintXml\\All_properties_cs\\SonarLint.xml")));
             var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
             // Act
@@ -67,7 +67,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void SetParameterValues_WhenGivenSonarLintFileHasIntParameterType_PopulatesProperties()
         {
             // Arrange
-            var compilation = CreateCompilationWithOption("ResourceTests\\SonarLintXml\\All_properties_small_template\\SonarLint.xml");
+            var compilation = CreateCompilationWithOption("ResourceTests\\SonarLintXml\\All_properties_cs\\SonarLint.xml");
             var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
             // Act
@@ -109,7 +109,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void SetParameterValues_WhenGivenValidSonarLintFileAndDoesNotContainAnalyzerParameters_DoesNotPopulateProperties()
         {
             // Arrange
-            var compilation = CreateCompilationWithOption("ResourceTests\\SonarLintXml\\All_properties_small_template\\SonarLint.xml");
+            var compilation = CreateCompilationWithOption("ResourceTests\\SonarLintXml\\All_properties_cs\\SonarLint.xml");
             var analyzer = new LineLength(); // Cannot use mock because we use reflection to find properties.
 
             // Act
