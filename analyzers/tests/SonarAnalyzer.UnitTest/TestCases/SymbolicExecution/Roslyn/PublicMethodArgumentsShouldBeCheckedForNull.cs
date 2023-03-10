@@ -9,15 +9,16 @@ public class Program
     public void NotCompliantCases(object o, Exception e)
     {
         o.ToString(); // FIXME non-compliant {{Refactor this method to add validation of parameter 'o' before using it.}}
-
+//      ~~~~~~~~~~
         Bar(o); // Compliant, we care about dereference only
 
-        throw e; // FIXME non-compliant
+        throw e; // FIXME non-compliant - attempting to throw null as an exception will result in a NullReferenceException
+//      ~~~~~~~
     }
 
     public void Bar(object o) { }
 
-    protected void NotCompliantCases_Nonpublic(object o)
+    protected void NotCompliantCases_Protected(object o)
     {
         o.ToString(); // FIXME non-compliant
     }
@@ -89,6 +90,31 @@ public class Program
         else
         {
             s2.ToString(); // Compliant
+        }
+    }
+
+    public void Transitivity(object o1, object o2)
+    {
+        if (o1 == null && o1 == o2)
+        {
+            o2.ToString(); // FIXME non-compliant
+        }
+
+        if (o1 != null && o1 == o2)
+        {
+            o2.ToString();
+        }
+
+        if (o1 == null)
+        {
+            o2 = o1;
+            o2.ToString(); // FIXME non-compliant
+        }
+
+        if (o1 != null)
+        {
+            o2 = o1;
+            o2.ToString();
         }
     }
 
