@@ -63,7 +63,7 @@ public class Sample
         get => null;
         set
         {
-            field = value.ToString();   // FIXME non-compliant
+            field = value.ToString();   // FIXME Non-compliant
         }
     }
 
@@ -72,7 +72,7 @@ public class Sample
         get => null;
         init
         {
-            field = value.ToString();   // FIXME non-compliant
+            field = value.ToString();   // FIXME Non-compliant
         }
     }
 }
@@ -81,7 +81,7 @@ public record Record
 {
     public void Method(object arg)
     {
-        arg.ToString();   // FIXME non-compliant
+        arg.ToString();   // FIXME Non-compliant
     }
 }
 
@@ -94,7 +94,7 @@ public partial class Partial
 {
     public partial void Method(object arg)
     {
-        arg.ToString();   // FIXME non-compliant
+        arg.ToString();   // FIXME Non-compliant
     }
 }
 
@@ -107,7 +107,7 @@ public class UsingFromServicesAttribute
         service.GetValue(); // Compliant, it's attributed with FromServices attribute
 
     public int GetPrice(IService service) =>
-        service.GetValue();  // FIXME non-compliant
+        service.GetValue();  // FIXME Non-compliant
 
     public interface IService
     {

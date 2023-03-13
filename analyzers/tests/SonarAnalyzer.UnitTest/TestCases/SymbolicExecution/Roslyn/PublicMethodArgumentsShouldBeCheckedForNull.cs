@@ -9,11 +9,11 @@ public class Program
 
     public void NotCompliantCases(object o, Exception e)
     {
-        o.ToString(); // FIXME non-compliant {{Refactor this method to add validation of parameter 'o' before using it.}}
+        o.ToString(); // FIXME Non-compliant {{Refactor this method to add validation of parameter 'o' before using it.}}
 //      ~~~~~~~~~~
         Bar(o); // Compliant, we care about dereference only
 
-        throw e; // FIXME non-compliant - attempting to throw null as an exception will result in a NullReferenceException
+        throw e; // FIXME Non-compliant - attempting to throw null as an exception will result in a NullReferenceException
 //      ~~~~~~~
     }
 
@@ -21,7 +21,7 @@ public class Program
 
     protected void NotCompliantCases_Protected(object o)
     {
-        o.ToString(); // FIXME non-compliant
+        o.ToString(); // FIXME Non-compliant
     }
 
     private void CompliantCases_Private(object o)
@@ -31,7 +31,7 @@ public class Program
 
     protected internal void NotCompliantCases_ProtectedInternal(object o)
     {
-        o.ToString(); // FIXME non-compliant
+        o.ToString(); // FIXME Non-compliant
     }
 
     internal void CompliantCases_Internal(object o)
@@ -77,7 +77,7 @@ public class Program
     {
         if (string.IsNullOrEmpty(s1))
         {
-            s1.ToString(); // FIXME non-compliant, could be null
+            s1.ToString(); // FIXME Non-compliant, could be null
         }
         else
         {
@@ -86,7 +86,7 @@ public class Program
 
         if (string.IsNullOrWhiteSpace(s2))
         {
-            s2.ToString(); // FIXME non-compliant, could be null
+            s2.ToString(); // FIXME Non-compliant, could be null
         }
         else
         {
@@ -98,7 +98,7 @@ public class Program
     {
         if (o1 == null && o1 == o2)
         {
-            o2.ToString(); // FIXME non-compliant
+            o2.ToString(); // FIXME Non-compliant
         }
 
         if (o1 != null && o1 == o2)
@@ -109,7 +109,7 @@ public class Program
         if (o1 == null)
         {
             o2 = o1;
-            o2.ToString(); // FIXME non-compliant
+            o2.ToString(); // FIXME Non-compliant
         }
 
         if (o1 != null)
@@ -126,26 +126,26 @@ public class Program
             await task1;
         }
 
-        await task2; // FIXME non-compliant
+        await task2; // FIXME Non-compliant
 
         if (task3 != null)
         {
             await task3.ConfigureAwait(false);
         }
 
-        await task4.ConfigureAwait(false); // FIXME non-compliant
+        await task4.ConfigureAwait(false); // FIXME Non-compliant
     }
 
     public Program(int i) { }
 
-    public Program(string s) : this(s.Length) { }   // FIXME non-compliant {{Refactor this constructor to avoid using members of parameter 's' because it could be null.}}
+    public Program(string s) : this(s.Length) { }   // FIXME Non-compliant {{Refactor this constructor to avoid using members of parameter 's' because it could be null.}}
 
     public void NonCompliant1(object o)
     {
         var c = o?.ToString()?.IsNormalized();
         if (c == null)
         {
-            o.GetType().GetMethods();  // FIXME non-compliant
+            o.GetType().GetMethods();  // FIXME Non-compliant
         }
     }
 
@@ -231,7 +231,7 @@ public class ReproIssue2476
         if (infixes != null)
         {
             Method(ref infixes, infixes.Length);
-            var x = infixes.Length; // FIXME non-compliant when passed by ref can be set to null
+            var x = infixes.Length; // FIXME Non-compliant when passed by ref can be set to null
         }
 
     }
@@ -240,15 +240,15 @@ public class ReproIssue2476
     {
         if (infixes == null)
         {
-            Method(ref infixes, infixes.Length); // FIXME non-compliant
+            Method(ref infixes, infixes.Length); // FIXME Non-compliant
             var x = infixes.Length;
         }
     }
 
     public void Method3(string infixes)
     {
-        Method(ref infixes, infixes.Length); // FIXME non-compliant
-        var x = infixes.Length; // FIXME non-compliant
+        Method(ref infixes, infixes.Length); // FIXME Non-compliant
+        var x = infixes.Length; // FIXME Non-compliant
     }
 
     public void Method4(string contentType)
@@ -293,7 +293,7 @@ public class ReproIssue2476
             contentType = null;
         }
 
-        var parts = contentType.Split('/', ';'); // FIXME non-compliant
+        var parts = contentType.Split('/', ';'); // FIXME Non-compliant
     }
 }
 
@@ -307,7 +307,7 @@ public class ReproIssue2591
             name = Guid.NewGuid().ToString("N");
         }
 
-        return name.Trim(); // FIXME non-compliant FP
+        return name.Trim(); // FIXME Non-compliant FP
     }
 
     public string FooWithStringJoin(string name)
@@ -317,7 +317,7 @@ public class ReproIssue2591
             name = Guid.NewGuid().ToString("N");
         }
 
-        return string.Join("_", name.Split(System.IO.Path.GetInvalidFileNameChars())); // FIXME non-compliant FP
+        return string.Join("_", name.Split(System.IO.Path.GetInvalidFileNameChars())); // FIXME Non-compliant FP
     }
 
     public string FooWithObject(object name)
@@ -327,7 +327,7 @@ public class ReproIssue2591
             name = Guid.NewGuid().ToString("N");
         }
 
-        return name.ToString(); // FIXME non-compliant FP
+        return name.ToString(); // FIXME Non-compliant FP
     }
 }
 
@@ -342,7 +342,7 @@ public class ReproIssue2670
         }
         if (b)
         {
-            int index = argument.LastIndexOf('c'); // FIXME non-compliant FP
+            int index = argument.LastIndexOf('c'); // FIXME Non-compliant FP
         }
     }
 
@@ -354,7 +354,7 @@ public class ReproIssue2670
         }
         if (b)
         {
-            int index = argument.LastIndexOf('c'); // FIXME non-compliant FP
+            int index = argument.LastIndexOf('c'); // FIXME Non-compliant FP
         }
     }
 
@@ -376,7 +376,7 @@ public class ReproWithIs
 {
     public override bool Equals(object obj)
     {
-        var equals = (obj is string) && (obj.GetHashCode() == GetHashCode()); // FIXME non-compliant FP
+        var equals = (obj is string) && (obj.GetHashCode() == GetHashCode()); // FIXME Non-compliant FP
         if (equals)
         {
             // do stuff
@@ -395,7 +395,7 @@ public class ReproWithIsNullOrEmpty
         if (imdbId.StartsWith(" "))
             imdbId = string.Concat("tt", imdbId);
 
-        if (imdbId.Length != 9) // FIXME non-compliant - FP
+        if (imdbId.Length != 9) // FIXME Non-compliant - FP
             imdbId = string.Empty;
 
         return imdbId;
@@ -408,7 +408,7 @@ public class Repro_3400
     public void ReassignedFromMethod(StringBuilder parameter)
     {
         parameter = Create();
-        parameter.Capacity = 1; // FIXME non-compliant FP
+        parameter.Capacity = 1; // FIXME Non-compliant FP
     }
 
     public void ReassignedFromConstructor(StringBuilder parameter)
@@ -420,7 +420,7 @@ public class Repro_3400
     public void ReassignedFromMethodOut(out StringBuilder parameter)
     {
         parameter = Create();
-        parameter.Capacity = 1; // FIXME non-compliant FP
+        parameter.Capacity = 1; // FIXME Non-compliant FP
     }
 
     public void ReassignedFromConstructorOut(out StringBuilder parameter)

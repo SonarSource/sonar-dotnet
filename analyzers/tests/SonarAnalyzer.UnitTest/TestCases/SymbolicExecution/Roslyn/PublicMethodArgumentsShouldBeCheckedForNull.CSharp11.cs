@@ -5,7 +5,7 @@
 
     public void NotCompliantCases(object[] o)
     {
-        o[1].ToString(); // FIXME non-compliant {{Refactor this method to add validation of parameter 'o' before using it.}}
+        o[1].ToString(); // FIXME Non-compliant {{Refactor this method to add validation of parameter 'o' before using it.}}
     }
 
     public void Compliant(object[] o)
@@ -22,6 +22,6 @@ public interface ISomeInterface
 {
     public static virtual void NotCompliantCases(object o)
     {
-        o.ToString(); // FIXME non-compliant {{Refactor this method to add validation of parameter 'o' before using it.}}
+        o.ToString(); // FIXME Non-compliant {{Refactor this method to add validation of parameter 'o' before using it.}}
     }
 }
