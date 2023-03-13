@@ -632,6 +632,38 @@ Tag(""End"", arg);";
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
         }
 
+        [DataTestMethod]
+        [DataRow("arg.HasValue")]
+        [DataRow("arg.HasValue is true")]
+        [DataRow("arg.HasValue == true")]
+        [DataRow("arg.HasValue != false")]
+        [DataRow("!!arg.HasValue")]
+        public void Branching_LearnsObjectConstraint_Nullable_HasValue_True(string expression)
+        {
+            var validator = CreateIfElseEndValidatorCS(expression, OperationKind.DeclarationPattern, "int?");
+            validator.ValidateTag("If", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
+            validator.TagValues("End").Should().SatisfyRespectively(
+                x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull),
+                x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
+        }
+
+        [DataTestMethod]
+        [DataRow("!arg.HasValue")]
+        [DataRow("arg.HasValue != true")]
+        [DataRow("arg.HasValue == false")]
+        [DataRow("arg.HasValue is false")]
+        [DataRow("!!!arg.HasValue")]
+        public void Branching_LearnsObjectConstraint_Nullable_HasValue_Negated(string expression)
+        {
+            var validator = CreateIfElseEndValidatorCS(expression, OperationKind.DeclarationPattern, "int?");
+            validator.ValidateTag("If", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
+            validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            validator.TagValues("End").Should().SatisfyRespectively(
+                x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull),
+                x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
+        }
+
         [TestMethod]
         public void Branching_IsNullOperation_WithIsNullOrEmpty()
         {
