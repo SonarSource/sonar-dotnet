@@ -19,8 +19,6 @@
  */
 
 using System.Collections.Concurrent;
-using System.Data;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
