@@ -221,6 +221,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var compilationContext = new CompilationAnalysisContext(compilation, options, _ => { }, _ => true, default);
             return new(AnalysisScaffolding.CreateSonarAnalysisContext(), compilationContext);
         }
+
         private string GenerateSonarLintXmlWithParametrizedRule(string ruleId, string key, string value)
         {
             var ruleParameters = new List<SonarLintXmlRule>()
