@@ -30,7 +30,7 @@ public abstract class NullPointerDereferenceBase : SymbolicRuleCheck
 
     protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
-        if (AsUnsafeReference(context.Operation.Instance) is { Syntax: var syntax } reference
+        if (AsUnsafeReference(context.Operation.Instance) is { Syntax: { } syntax } reference
             && context.HasConstraint(reference, ObjectConstraint.Null)
             && !IsSupressed(syntax)
             && SemanticModel.GetTypeInfo(syntax).Nullability().FlowState != NullableFlowState.NotNull)
