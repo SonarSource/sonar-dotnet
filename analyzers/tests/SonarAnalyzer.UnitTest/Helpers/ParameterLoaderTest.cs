@@ -238,8 +238,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                     }
                 }
             };
-            var sonarLintXml = AnalysisScaffolding.GenerateSonarLintXmlContent(rulesParameters: ruleParameters);
-            return TestHelper.WriteFile(TestContext, "SonarLint.xml", sonarLintXml);
+            return AnalysisScaffolding.CreateSonarLintXml(TestContext, rulesParameters: ruleParameters);
         }
     }
 }
