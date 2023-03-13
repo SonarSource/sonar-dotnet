@@ -25,7 +25,6 @@ public abstract class ExcludeFromCodeCoverageAttributesNeedJustificationBase<TSy
 {
     private const string DiagnosticId = "S6513";
 
-    /// <summary>"Justification" was added in .Net 5, while ExcludeFromCodeCoverage in netstandard2.0.</summary>
     protected const string JustificationPropertyName = "Justification";
 
     protected override string MessageFormat => "Add a justification.";
