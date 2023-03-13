@@ -44,15 +44,14 @@ public class EmptyNullableValueAccess : SymbolicRuleCheck
         {
             if (!HasPotentialNullableValueAccess)
             {
-                HasPotentialNullableValueAccess = node switch
-                {
-                    MemberAccessExpressionSyntax => node.NameIs(nameof(Nullable<int>.Value)),
-                    CastExpressionSyntax => true,
-                    _ => false,
-                };
-
                 base.Visit(node);
             }
         }
+
+        public override void VisitMemberAccessExpression(MemberAccessExpressionSyntax node) =>
+            HasPotentialNullableValueAccess = node.NameIs(nameof(Nullable<int>.Value));
+
+        public override void VisitCastExpression(CastExpressionSyntax node) =>
+            HasPotentialNullableValueAccess = true;
     }
 }
