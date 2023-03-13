@@ -86,6 +86,7 @@ namespace SonarAnalyzer.UnitTest
             TestContext context,
             string language = LanguageNames.CSharp,
             bool analyzeGeneratedCode = false,
+            bool ignoreHeaderComments = false,
             string[] exclusions = null,
             string[] inclusions = null,
             string[] globalExclusions = null,
@@ -93,11 +94,12 @@ namespace SonarAnalyzer.UnitTest
             string[] testInclusions = null,
             string[] globalTestExclusions = null,
             List<SonarLintXmlRule> rulesParameters = null) =>
-            TestHelper.WriteFile(context, "SonarLint.xml", GenerateSonarLintXmlContent(language, analyzeGeneratedCode, exclusions, inclusions, globalExclusions, testExclusions, testInclusions, globalTestExclusions, rulesParameters));
+            TestHelper.WriteFile(context, "SonarLint.xml", GenerateSonarLintXmlContent(language, analyzeGeneratedCode, ignoreHeaderComments, exclusions, inclusions, globalExclusions, testExclusions, testInclusions, globalTestExclusions, rulesParameters));
 
         public static string GenerateSonarLintXmlContent(
             string language = LanguageNames.CSharp,
             bool analyzeGeneratedCode = false,
+            bool ignoreHeaderComments = false,
             string[] exclusions = null,
             string[] inclusions = null,
             string[] globalExclusions = null,
@@ -110,6 +112,7 @@ namespace SonarAnalyzer.UnitTest
                 new XElement("AnalysisInput",
                     new XElement("Settings",
                         CreateSetting($"sonar.{(language == LanguageNames.CSharp ? "cs" : "vbnet")}.analyzeGeneratedCode", analyzeGeneratedCode.ToString()),
+                        CreateSetting($"sonar.{(language == LanguageNames.CSharp ? "cs" : "vbnet")}.ignoreHeaderComments", ignoreHeaderComments.ToString()),
                         CreateSetting("sonar.exclusions", ConcatenateStringArray(exclusions)),
                         CreateSetting("sonar.inclusions", ConcatenateStringArray(inclusions)),
                         CreateSetting("sonar.global.exclusions", ConcatenateStringArray(globalExclusions)),
