@@ -426,8 +426,8 @@ Tag(""End"", arg);";
         [DataRow("objectUnknown", "is not string { }", OperationKindEx.NegatedPattern, null, new[] { ConstraintKind.ObjectNotNull })]
         [DataRow("objectUnknown", "is not object { }", OperationKindEx.NegatedPattern, new[] { ConstraintKind.ObjectNull }, new[] { ConstraintKind.ObjectNotNull })]
         [DataRow("objectUnknown", "is not not null", OperationKindEx.NegatedPattern, new[] { ConstraintKind.ObjectNull }, new[] { ConstraintKind.ObjectNotNull })]
-        [DataRow("nullableBoolTrue", "is not false", OperationKindEx.NegatedPattern, new[] { ConstraintKind.BoolTrue }, new[] { ConstraintKind.BoolFalse })]          // Should generate only single state with "true" result instead
-        [DataRow("nullableBoolFalse", "is not true", OperationKindEx.NegatedPattern, new[] { ConstraintKind.BoolFalse }, new[] { ConstraintKind.BoolTrue })]          // Should generate only single state with "true" result instead
+        [DataRow("nullableBoolTrue", "is not false", OperationKindEx.NegatedPattern, new[] { ConstraintKind.ObjectNotNull, ConstraintKind.BoolTrue }, new[] { ConstraintKind.ObjectNotNull, ConstraintKind.BoolFalse })]          // Should generate only single state with "true" result instead
+        [DataRow("nullableBoolFalse", "is not true", OperationKindEx.NegatedPattern, new[] { ConstraintKind.ObjectNotNull, ConstraintKind.BoolFalse }, new[] { ConstraintKind.BoolTrue, ConstraintKind.ObjectNotNull })]          // Should generate only single state with "true" result instead
         [DataRow("nullableBoolNull", "is not true", OperationKindEx.NegatedPattern, new[] { ConstraintKind.ObjectNull }, new[] { ConstraintKind.BoolTrue, ConstraintKind.ObjectNull })]      // Should generate only single state with "true" result instead
         [DataRow("nullableBoolNull", "is not false", OperationKindEx.NegatedPattern, new[] { ConstraintKind.ObjectNull }, new[] { ConstraintKind.BoolFalse, ConstraintKind.ObjectNull })]    // Should generate only single state with "true" result instead
         [DataRow("nullableBoolUnknown", "is not true", OperationKindEx.NegatedPattern, null, new[] { ConstraintKind.BoolTrue })]
