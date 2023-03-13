@@ -30,7 +30,7 @@ public abstract class NullPointerDereferenceBase : SymbolicRuleCheck
 
     protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
-        if (AsUnsafeReference(context.Operation.Instance) is { Syntax: { } syntax } reference
+        if (NotNullSafeReference(context.Operation.Instance) is { Syntax: { } syntax } reference
             && context.HasConstraint(reference, ObjectConstraint.Null)
             && !IsSupressed(syntax)
             && SemanticModel.GetTypeInfo(syntax).Nullability().FlowState != NullableFlowState.NotNull)
@@ -40,23 +40,23 @@ public abstract class NullPointerDereferenceBase : SymbolicRuleCheck
         return context.State;
     }
 
-    private static IOperation AsUnsafeReference(IOperation operation) =>
+    private static IOperation NotNullSafeReference(IOperation operation) =>
         operation.Kind switch
         {
-            OperationKindEx.Invocation => AsUnsafeInvocation(operation.ToInvocation()),
-            OperationKindEx.PropertyReference => AsUnsafePropertyReference(operation.ToPropertyReference()),
+            OperationKindEx.Invocation => NotNullSafeInvocation(operation.ToInvocation()),
+            OperationKindEx.PropertyReference => NotNullSafePropertyReference(operation.ToPropertyReference()),
             OperationKindEx.Await => operation.ToAwait().Operation,
             OperationKindEx.ArrayElementReference => operation.ToArrayElementReference().ArrayReference,
             _ => null,
         };
 
-    private static IOperation AsUnsafeInvocation(IInvocationOperationWrapper operation) =>
+    private static IOperation NotNullSafeInvocation(IInvocationOperationWrapper operation) =>
         operation.TargetMethod.ContainingType.Is(KnownType.System_Nullable_T)
         && operation.TargetMethod.Name != nameof(Nullable<int>.GetType) // All methods on Nullable but .GetType() are safe to call
             ? null
             : operation.Instance;
 
-    private static IOperation AsUnsafePropertyReference(IPropertyReferenceOperationWrapper operation) =>
+    private static IOperation NotNullSafePropertyReference(IPropertyReferenceOperationWrapper operation) =>
         operation.Property.IsInType(KnownType.System_Nullable_T)    // HasValue doesn't throw; Value is covered by S3655
             ? null
             : operation.Instance;
