@@ -4,14 +4,6 @@ using System.Linq;
 
 class EmptyNullableValueAccess
 {
-    private IEnumerable<TestClass> Numbers = new[]
-    {
-        new TestClass() { Number = 42 },
-        new TestClass(),
-        new TestClass() { Number = 1 },
-        new TestClass() { Number = null }
-    };
-
     void NullAssignment()
     {
         int? i = null;
@@ -23,12 +15,6 @@ class EmptyNullableValueAccess
         Console.WriteLine(i.Value); // Noncompliant {{'i' is null on at least one execution path.}}
         //                ^
     }
-
-    IEnumerable<TestClass> EnumerableExpressionWithCompilableCode() =>
-        Numbers.OrderBy(x => x.Number.HasValue).ThenBy(i => i.Number);
-
-    IEnumerable<int> EnumerableExpressionWithNonCompilableCode() =>
-        Numbers.OrderBy(x => x.Number.HasValue).ThenBy(i => i.Number).Select(x => x.Number ?? 0);
 
     void NonEmpty()
     {
@@ -119,11 +105,6 @@ class EmptyNullableValueAccess
     {
         param ??= 42;
         return param.Value; // OK, value is always set
-    }
-
-    class TestClass
-    {
-        public int? Number { get; set; }
     }
 }
 
@@ -270,6 +251,28 @@ class TernaryOperator
         true || ((b = null) == null) ? b.Value : false;                     // FN
 }
 
+class Linq
+{
+    private IEnumerable<TestClass> Numbers = new[]
+    {
+        new TestClass() { Number = 42 },
+        new TestClass(),
+        new TestClass() { Number = 1 },
+        new TestClass() { Number = null }
+    };
+
+    IEnumerable<int> EnumerableOfEmptyNullableValues1 =>
+        Numbers.Where(x => !x.Number.HasValue).Select(x => x.Number.Value); // FN
+
+    IEnumerable<int> EnumerableOfEmptyNullableValues2 =>
+        Numbers.Select(x => null as int?).Select(x => x.Value);             // FN
+
+    class TestClass
+    {
+        public int? Number { get; set; }
+    }
+}
+
 interface IWithDefaultImplementation
 {
     int DoSomething()
@@ -363,20 +366,19 @@ class Repro_4573
             {
                 if (foo.HasValue)
                 {
-                    Console.WriteLine(foo.Value.ToString());
+                    Console.WriteLine(foo.Value.ToString());    // Compliant, non-empty
                 }
                 if (!foo.HasValue)
                 {
-                    Console.WriteLine(foo.Value.ToString());
+                    Console.WriteLine(foo.Value.ToString());    // Compliant, unreachable
                 }
                 if (foo == null)
                 {
-                    // FIXME the following
-                    Console.WriteLine(foo.Value.ToString());    // FN
+                    Console.WriteLine(foo.Value.ToString());    // Compliant, unreachable
                 }
                 if (foo != null)
                 {
-                    Console.WriteLine(foo.Value.ToString());
+                    Console.WriteLine(foo.Value.ToString());    // Compliant, non-empty
                 }
             }
             else
@@ -387,11 +389,11 @@ class Repro_4573
                 }
                 if (!foo.HasValue)
                 {
-                    Console.WriteLine(foo.Value.ToString());    // FIXME Non-compliant
+                    Console.WriteLine(foo.Value.ToString());    // FN, empty
                 }
                 if (foo == null)
                 {
-                    Console.WriteLine(foo.Value.ToString());    // FN
+                    Console.WriteLine(foo.Value.ToString());    // FN, empty
                 }
                 if (foo != null)
                 {
