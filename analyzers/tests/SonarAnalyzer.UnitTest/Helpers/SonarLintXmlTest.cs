@@ -30,7 +30,7 @@ public class SonarLintXmlTest
     public void SonarLintXml_DeserializeFile_ExpectedValues()
     {
         var deserializer = new XmlSerializer(typeof(SonarLintXml));
-        using TextReader textReader = new StreamReader("ResourceTests\\SonarLintXml\\All_properties_small_template\\SonarLint.xml");
+        using TextReader textReader = new StreamReader("ResourceTests\\SonarLintXml\\All_properties_cs\\SonarLint.xml");
         var sonarLintXml = (SonarLintXml)deserializer.Deserialize(textReader);
 
         AssertSettings(sonarLintXml.Settings);
@@ -58,20 +58,20 @@ public class SonarLintXmlTest
         rules.Should().HaveCount(4);
         rules.Where(x => x.Parameters.Any()).Should().HaveCount(2);
 
-        rules[0].Key.Should().BeEquivalentTo("S0001");
+        rules[0].Key.Should().BeEquivalentTo("S2225");
         rules[0].Parameters.Should().BeEmpty();
-        rules[1].Key.Should().BeEquivalentTo("S0002");
-        rules[1].Parameters.Should().BeEmpty();
 
-        rules[2].Key.Should().BeEquivalentTo("S0003");
-        rules[2].Parameters.Should().HaveCount(2);
-        AssertKeyValuePair(rules[2].Parameters[0], "format", "^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$");
-        AssertKeyValuePair(rules[2].Parameters[1], "flagsAttributeFormat", "^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?s$");
+        rules[1].Key.Should().BeEquivalentTo("S2342");
+        rules[1].Parameters.Should().HaveCount(2);
+        AssertKeyValuePair(rules[1].Parameters[0], "format", "^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$");
+        AssertKeyValuePair(rules[1].Parameters[1], "flagsAttributeFormat", "^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?s$");
 
-        rules[3].Key.Should().BeEquivalentTo("S0004");
-        rules[3].Parameters.Should().HaveCount(2);
-        AssertKeyValuePair(rules[3].Parameters[0], "threshold", "15");
-        AssertKeyValuePair(rules[3].Parameters[1], "propertyThreshold", "3");
+        rules[2].Key.Should().BeEquivalentTo("S2346");
+        rules[2].Parameters.Should().BeEmpty();
+
+        rules[3].Key.Should().BeEquivalentTo("S1067");
+        rules[3].Parameters.Should().HaveCount(1);
+        AssertKeyValuePair(rules[3].Parameters[0], "max", "1");
     }
 
     private static void AssertKeyValuePair(SonarLintXmlKeyValuePair pair, string expectedKey, string expectedValue)

@@ -41,7 +41,7 @@ public class SonarLintXmlReaderTest
         AssertArrayContent(sut.TestInclusions, nameof(sut.TestInclusions));
         AssertArrayContent(sut.GlobalTestExclusions, nameof(sut.GlobalTestExclusions));
 
-        sut.ParametrizedRules.Should().HaveCount(8);
+        sut.ParametrizedRules.Should().HaveCount(2);
         var rule = sut.ParametrizedRules.First(x => x.Key.Equals("S2342"));
         rule.Parameters[0].Key.Should().Be("format");
         rule.Parameters[0].Value.Should().Be("^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$");
