@@ -18,16 +18,22 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Concurrent;
+using System.Data;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
     public sealed record SymbolicValue
     {
+        private static ConcurrentDictionary<ConstraintKind, SymbolicValue> singleConstraintCache = new();
+
         // Reuse instances to save memory. This "True" has the same semantic meaning and any other symbolic value with BoolConstraint.True constraint
-        public static readonly SymbolicValue This = new SymbolicValue().WithConstraint(ObjectConstraint.NotNull);
-        public static readonly SymbolicValue Null = new SymbolicValue().WithConstraint(ObjectConstraint.Null);
-        public static readonly SymbolicValue NotNull = new SymbolicValue().WithConstraint(ObjectConstraint.NotNull);
+        public static readonly SymbolicValue Constraintless = new();
+        public static readonly SymbolicValue This = Constraintless.WithConstraint(ObjectConstraint.NotNull);
+        public static readonly SymbolicValue Null = Constraintless.WithConstraint(ObjectConstraint.Null);
+        public static readonly SymbolicValue NotNull = Constraintless.WithConstraint(ObjectConstraint.NotNull);
         public static readonly SymbolicValue True = NotNull.WithConstraint(BoolConstraint.True);
         public static readonly SymbolicValue False = NotNull.WithConstraint(BoolConstraint.False);
 
@@ -41,19 +47,13 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             SerializeConstraints();
 
         public SymbolicValue WithConstraint(SymbolicConstraint constraint) =>
-            HasConstraint(constraint)
-                ? this
-                : this with { Constraints = Constraints.SetItem(constraint.GetType(), constraint) };
+            AddOrReplaceConstraint(this, constraint);
 
         public SymbolicValue WithoutConstraint(SymbolicConstraint constraint) =>
-            HasConstraint(constraint)
-                ? this with { Constraints = Constraints.Remove(constraint.GetType()) }
-                : this;
+            RemoveConstraint(this, constraint);
 
         public SymbolicValue WithoutConstraint<T>() where T : SymbolicConstraint =>
-            HasConstraint<T>()
-                ? this with { Constraints = Constraints.Remove(typeof(T)) }
-                : this;
+            RemoveConstraint<T>(this);
 
         public bool HasConstraint<T>() where T : SymbolicConstraint =>
             Constraints.ContainsKey(typeof(T));
@@ -74,5 +74,62 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             Constraints.Any()
                 ? Constraints.Values.Select(x => x.ToString()).OrderBy(x => x).JoinStr(", ")
                 : "No constraints";
+
+        private static SymbolicValue RemoveConstraint(SymbolicValue baseValue, SymbolicConstraint constraint) =>
+            baseValue.HasConstraint(constraint) ? RemoveConstraint(baseValue, constraint.GetType()) : baseValue;
+
+        private static SymbolicValue RemoveConstraint<T>(SymbolicValue baseValue) where T : SymbolicConstraint =>
+            baseValue.HasConstraint<T>() ? RemoveConstraint(baseValue, typeof(T)) : baseValue;
+
+        private static SymbolicValue AddOrReplaceConstraint(SymbolicValue baseValue, SymbolicConstraint constraint)
+        {
+            if (baseValue.HasConstraint(constraint))
+            {
+                return baseValue;
+            }
+
+            var constraintCount = baseValue.Constraints.Count;
+            if (constraintCount == 0)
+            {
+                return GetOrAddSingleConstraint(baseValue, constraint);
+            }
+
+            if (constraintCount == 1 && baseValue.Constraints.ContainsKey(constraint.GetType()))
+            {
+                return AddOrReplaceConstraint(Constraintless, constraint);
+            }
+
+            return baseValue with { Constraints = baseValue.Constraints.SetItem(constraint.GetType(), constraint) };
+        }
+
+        private static SymbolicValue RemoveConstraint(SymbolicValue baseValue, Type type)
+        {
+            var constraintCount = baseValue.Constraints.Count;
+            if (constraintCount == 1)
+            {
+                return Constraintless;
+            }
+
+            if (constraintCount == 2)
+            {
+                var otherConstraint = baseValue.Constraints.Keys.FirstOrDefault(x => x != type);
+                return GetOrAddSingleConstraint(Constraintless, baseValue.Constraints[otherConstraint]);
+            }
+
+            return baseValue with { Constraints = baseValue.Constraints.Remove(type) };
+        }
+
+        private static SymbolicValue GetOrAddSingleConstraint(SymbolicValue baseValue, SymbolicConstraint constraint)
+        {
+            if (singleConstraintCache.TryGetValue(constraint.Kind, out var result))
+            {
+                return result;
+            }
+            else
+            {
+                result = baseValue with { Constraints = baseValue.Constraints.SetItem(constraint.GetType(), constraint) };
+                return singleConstraintCache.GetOrAdd(constraint.Kind, result);
+            }
+        }
     }
 }
