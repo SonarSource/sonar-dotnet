@@ -400,9 +400,9 @@ public void Main<T>() where T : new()
         public void Index_SetsNotNull()
         {
             const string code = """
-            var index = ^0;
-            Tag("Index", index);
-            """;
+                var index = ^0;
+                Tag("Index", index);
+                """;
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateContainsOperation(OperationKind.Unary);
             validator.ValidateTag("Index", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
@@ -412,9 +412,9 @@ public void Main<T>() where T : new()
         public void Range_SetsNotNull()
         {
             const string code = """
-            var range = 0..1;
-            Tag("Range", range);
-            """;
+                var range = 0..1;
+                Tag("Range", range);
+                """;
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateContainsOperation(OperationKind.Range);
             validator.ValidateTag("Range", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
