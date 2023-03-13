@@ -644,8 +644,8 @@ Tag(""End"", arg);";
             validator.ValidateTag("If", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
             validator.TagValues("End").Should().SatisfyRespectively(
-                    x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull),
-                    x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
+                x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull),
+                x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
         }
 
         [DataTestMethod]
@@ -660,8 +660,8 @@ Tag(""End"", arg);";
             validator.ValidateTag("If", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
             validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.TagValues("End").Should().SatisfyRespectively(
-                    x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull),
-                    x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
+                x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull),
+                x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
         }
 
         [TestMethod]
