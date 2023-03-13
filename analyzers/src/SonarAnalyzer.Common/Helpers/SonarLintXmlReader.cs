@@ -32,11 +32,21 @@ public class SonarLintXmlReader
 
     private readonly SonarLintXml sonarLintXml;
 
-    private bool? ignoreHeaderComments;
-    public bool IgnoreHeaderComments(string language = LanguageNames.CSharp) => ignoreHeaderComments ??= ReadBoolean(ReadSettingsProperty($"sonar.{LanguageXmlName(language)}.ignoreHeaderComments"));
+    public bool IgnoreHeaderComments(string language) =>
+        language switch
+        {
+            LanguageNames.CSharp => ReadBoolean(ReadProperty("sonar.cs.ignoreHeaderComments")),
+            LanguageNames.VisualBasic => ReadBoolean(ReadProperty("sonar.vbnet.ignoreHeaderComments")),
+            _ => throw new UnexpectedLanguageException($"Language '{language}' is not supported.")
+        };
 
-    private bool? analyzeGeneratedCode;
-    public bool AnalyzeGeneratedCode(string language = LanguageNames.CSharp) => analyzeGeneratedCode ??= ReadBoolean(ReadSettingsProperty($"sonar.{LanguageXmlName(language)}.analyzeGeneratedCode"));
+    public bool AnalyzeGeneratedCode(string language) =>
+        language switch
+        {
+            LanguageNames.CSharp => ReadBoolean(ReadProperty("sonar.cs.analyzeGeneratedCode")),
+            LanguageNames.VisualBasic => ReadBoolean(ReadProperty("sonar.vbnet.analyzeGeneratedCode")),
+            _ => throw new UnexpectedLanguageException($"Language '{language}' is not supported.")
+        };
 
     private string[] exclusions;
     public string[] Exclusions => exclusions ??= ReadCommaSeparatedArray(ReadSettingsProperty("sonar.exclusions"));
@@ -95,6 +105,4 @@ public class SonarLintXmlReader
 
     private static bool ReadBoolean(string str, bool defaultValue = false) =>
         bool.TryParse(str, out var propertyValue) ? propertyValue : defaultValue;
-
-    private string LanguageXmlName(string language) => language.Equals(LanguageNames.CSharp) ? "cs" : "vbnet";
 }

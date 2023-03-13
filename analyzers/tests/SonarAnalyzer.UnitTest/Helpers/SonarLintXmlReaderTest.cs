@@ -20,6 +20,7 @@
 
 using System.IO;
 using Microsoft.CodeAnalysis.Text;
+using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.UnitTest.Helpers;
 
@@ -60,8 +61,8 @@ public class SonarLintXmlReaderTest
     public void SonarLintXmlReader_PartiallyMissingProperties_ExpectedAndDefaultValues()
     {
         var sut = CreateSonarLintXmlReader("ResourceTests\\SonarLintXml\\Partially_missing_properties\\SonarLint.xml");
-        sut.IgnoreHeaderComments().Should().BeFalse();
-        sut.AnalyzeGeneratedCode().Should().BeTrue();
+        sut.IgnoreHeaderComments(LanguageNames.CSharp).Should().BeFalse();
+        sut.AnalyzeGeneratedCode(LanguageNames.CSharp).Should().BeTrue();
         AssertArrayContent(sut.Exclusions, nameof(sut.Exclusions));
         AssertArrayContent(sut.Inclusions, nameof(sut.Inclusions));
         sut.GlobalExclusions.Should().NotBeNull().And.HaveCount(0);
@@ -69,6 +70,14 @@ public class SonarLintXmlReaderTest
         sut.TestInclusions.Should().NotBeNull().And.HaveCount(0);
         sut.GlobalTestExclusions.Should().NotBeNull().And.HaveCount(0);
         sut.ParametrizedRules.Should().NotBeNull().And.HaveCount(0);
+    }
+
+    [TestMethod]
+    public void SonarLintXmlReader_IgnoreHeaderCommentsCSharpTrueVBNetFalse_ExpectedValues()
+    {
+        var sut = CreateSonarLintXmlReader("ResourceTests\\IgnoreHeaderCommentsTrueCSharpFalseVbnet\\SonarLint.xml");
+        sut.IgnoreHeaderComments(LanguageNames.CSharp).Should().BeTrue();
+        sut.IgnoreHeaderComments(LanguageNames.VisualBasic).Should().BeFalse();
     }
 
     [DataTestMethod]
@@ -90,10 +99,20 @@ public class SonarLintXmlReaderTest
     public void SonarLintXmlReader_CheckEmpty_DefaultBehaviour() =>
         CheckSonarLintXmlReaderDefaultValues(SonarLintXmlReader.Empty);
 
+    [TestMethod]
+    public void SonarLintXmlReader_LanguageDoesNotExist_Throws()
+    {
+        var sut = CreateSonarLintXmlReader($"ResourceTests\\SonarLintXml\\All_Properties_cs\\SonarLint.xml");
+        sut.Invoking(x => x.IgnoreHeaderComments("fsharp"))
+            .Should()
+            .Throw<UnexpectedLanguageException>()
+            .WithMessage("Language 'fsharp' is not supported.");
+    }
+
     private static void CheckSonarLintXmlReaderDefaultValues(SonarLintXmlReader sut)
     {
-        sut.AnalyzeGeneratedCode().Should().BeFalse();
-        sut.IgnoreHeaderComments().Should().BeFalse();
+        sut.AnalyzeGeneratedCode(LanguageNames.CSharp).Should().BeFalse();
+        sut.IgnoreHeaderComments(LanguageNames.CSharp).Should().BeFalse();
         sut.Exclusions.Should().NotBeNull().And.HaveCount(0);
         sut.Inclusions.Should().NotBeNull().And.HaveCount(0);
         sut.GlobalExclusions.Should().NotBeNull().And.HaveCount(0);
