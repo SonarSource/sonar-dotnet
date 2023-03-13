@@ -571,9 +571,9 @@ Tag(""This"", fromThis);";
         public void SizeOf_SetNotNullconstraint()
         {
             var code = """
-            var size = sizeof(int);
-            Tag("Size", size);
-            """;
+                var size = sizeof(int);
+                Tag("Size", size);
+                """;
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateTag("Size", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
         }
