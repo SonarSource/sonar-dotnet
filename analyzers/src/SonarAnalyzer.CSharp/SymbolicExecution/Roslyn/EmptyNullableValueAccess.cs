@@ -29,5 +29,29 @@ public class EmptyNullableValueAccess : SymbolicRuleCheck
 
     protected override DiagnosticDescriptor Rule => S3655;
 
-    public override bool ShouldExecute() => false;
+    public override bool ShouldExecute()
+    {
+        var finder = new NullableAccessFinder();
+        finder.SafeVisit(Node);
+        return finder.HasPotentialNullableValueAccess;
+    }
+
+    private sealed class NullableAccessFinder : SafeCSharpSyntaxWalker
+    {
+        public bool HasPotentialNullableValueAccess { get; private set; }
+
+        public override void Visit(SyntaxNode node)
+        {
+            if (!HasPotentialNullableValueAccess)
+            {
+                base.Visit(node);
+            }
+        }
+
+        public override void VisitMemberAccessExpression(MemberAccessExpressionSyntax node) =>
+            HasPotentialNullableValueAccess = node.NameIs(nameof(Nullable<int>.Value));
+
+        public override void VisitCastExpression(CastExpressionSyntax node) =>
+            HasPotentialNullableValueAccess = true;
+    }
 }
