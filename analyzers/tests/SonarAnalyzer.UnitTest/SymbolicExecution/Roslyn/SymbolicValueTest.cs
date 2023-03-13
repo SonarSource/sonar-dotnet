@@ -268,15 +268,15 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void RemoveEntry_Miss_Returns_Instance_Kind()
         {
-            var sut = SymbolicValue.Constraintless.WithConstraint(TestConstraint.First).WithConstraint(TestConstraint.Second);
+            var sut = SymbolicValue.Null.WithConstraint(TestConstraint.First);
             sut.WithoutConstraint(DummyConstraint.Dummy).Should().BeSameAs(sut);
         }
 
         [TestMethod]
         public void RemoveEntry_Miss_Returns_Instance_Type()
         {
-            var sut = SymbolicValue.Constraintless.WithConstraint(TestConstraint.First).WithConstraint(TestConstraint.Second);
-            sut.WithoutConstraint<DummyConstraint>().Should().BeSameAs(sut);
+            var sut = SymbolicValue.Null.WithConstraint(TestConstraint.First);
+            sut.WithoutConstraint<DummyConstraint>().Should().BeSameAs(sut).And.HaveOnlyConstraints(ObjectConstraint.Null, TestConstraint.First);
         }
     }
 }
