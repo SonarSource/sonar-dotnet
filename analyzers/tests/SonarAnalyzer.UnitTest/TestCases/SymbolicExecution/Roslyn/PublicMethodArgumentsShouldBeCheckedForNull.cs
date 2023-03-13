@@ -94,31 +94,6 @@ public class Program
         }
     }
 
-    public void Transitivity(object o1, object o2)
-    {
-        if (o1 == null && o1 == o2)
-        {
-            o2.ToString(); // FIXME Non-compliant
-        }
-
-        if (o1 != null && o1 == o2)
-        {
-            o2.ToString();
-        }
-
-        if (o1 == null)
-        {
-            o2 = o1;
-            o2.ToString(); // FIXME Non-compliant
-        }
-
-        if (o1 != null)
-        {
-            o2 = o1;
-            o2.ToString();
-        }
-    }
-
     public async void AsyncTest(Task task1, Task task2, Task task3, Task task4)
     {
         if (task1 != null)
