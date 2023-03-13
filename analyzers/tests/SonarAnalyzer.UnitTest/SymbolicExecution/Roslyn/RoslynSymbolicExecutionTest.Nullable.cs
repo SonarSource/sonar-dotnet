@@ -65,25 +65,34 @@ public partial class RoslynSymbolicExecutionTest
     {
         const string code = """
             var hasValue = arg.HasValue;
-            Tag("HasValueUnknown", hasValue);
-            Tag("SymbolUnknown", arg);
-            arg = true;
+            Tag("AfterUnknown");
+            arg = 42;
             hasValue = arg.HasValue;
-            Tag("HasValueAfterTrue", hasValue);
-            Tag("SymbolAfterTrue", arg);
+            Tag("HasValueAfter42", hasValue);
+            Tag("SymbolAfter42", arg);
             arg = null;
             hasValue = arg.HasValue;
             Tag("HasValueAfterNull", hasValue);
             Tag("SymbolAfterNull", arg);
             """;
-        var validator = SETestContext.CreateCS(code, ", bool? arg").Validator;
-        validator.ValidateTag("HasValueUnknown", x => x.HasConstraint<BoolConstraint>().Should().BeFalse());
-        validator.ValidateTag("SymbolUnknown", x => x.Should().BeNull());
-        validator.ValidateTag("HasValueAfterTrue", x => x.HasConstraint<BoolConstraint>().Should().BeFalse());   // ToDo: Should be x.HasConstraint(BoolConstraint.True).Should().BeTrue()); after we build NotNull for bool literal.
-        validator.ValidateTag("SymbolAfterTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
-        validator.ValidateTag("SymbolAfterTrue", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeFalse());    // ToDo: Should be BeTrue() after we build NotNull for bool literal
-        validator.ValidateTag("HasValueAfterNull", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
-        validator.ValidateTag("SymbolAfterNull", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+        var validator = SETestContext.CreateCS(code, ", int? arg").Validator;
+        var arg = validator.Symbol("arg");
+        var hasValue = validator.Symbol("hasValue");
+        validator.TagStates("AfterUnknown").Should().SatisfyRespectively(
+            x =>
+            {
+                x[hasValue].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True);
+                x[arg].Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+            },
+            x =>
+            {
+                x[hasValue].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False);
+                x[arg].Should().HaveOnlyConstraint(ObjectConstraint.Null);
+            });
+        validator.ValidateTag("HasValueAfter42", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True));
+        validator.ValidateTag("SymbolAfter42", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+        validator.ValidateTag("HasValueAfterNull", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False));
+        validator.ValidateTag("SymbolAfterNull", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
     }
 
     [TestMethod]
