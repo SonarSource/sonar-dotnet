@@ -75,12 +75,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 ? Constraints.Values.Select(x => x.ToString()).OrderBy(x => x).JoinStr(", ")
                 : "No constraints";
 
-        private static SymbolicValue RemoveConstraint(SymbolicValue baseValue, SymbolicConstraint constraint) =>
-            baseValue.HasConstraint(constraint) ? RemoveConstraint(baseValue, constraint.GetType()) : baseValue;
-
-        private static SymbolicValue RemoveConstraint<T>(SymbolicValue baseValue) where T : SymbolicConstraint =>
-            baseValue.HasConstraint<T>() ? RemoveConstraint(baseValue, typeof(T)) : baseValue;
-
         private static SymbolicValue AddOrReplaceConstraint(SymbolicValue baseValue, SymbolicConstraint constraint)
         {
             if (baseValue.HasConstraint(constraint))
@@ -102,6 +96,12 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             return baseValue with { Constraints = baseValue.Constraints.SetItem(constraint.GetType(), constraint) };
         }
 
+        private static SymbolicValue RemoveConstraint(SymbolicValue baseValue, SymbolicConstraint constraint) =>
+            baseValue.HasConstraint(constraint) ? RemoveConstraint(baseValue, constraint.GetType()) : baseValue;
+
+        private static SymbolicValue RemoveConstraint<T>(SymbolicValue baseValue) where T : SymbolicConstraint =>
+            baseValue.HasConstraint<T>() ? RemoveConstraint(baseValue, typeof(T)) : baseValue;
+
         private static SymbolicValue RemoveConstraint(SymbolicValue baseValue, Type type)
         {
             var constraintCount = baseValue.Constraints.Count;
@@ -112,8 +112,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
             if (constraintCount == 2)
             {
-                var otherConstraint = baseValue.Constraints.Keys.FirstOrDefault(x => x != type);
-                return GetOrAddSingleConstraint(Constraintless, baseValue.Constraints[otherConstraint]);
+                var otherConstraintType = baseValue.Constraints.Keys.FirstOrDefault(x => x != type);
+                return GetOrAddSingleConstraint(Constraintless, baseValue.Constraints[otherConstraintType]);
             }
 
             return baseValue with { Constraints = baseValue.Constraints.Remove(type) };
