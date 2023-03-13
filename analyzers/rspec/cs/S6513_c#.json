@@ -1,0 +1,17 @@
+{
+  "title": "\"ExcludeFromCodeCoverage\" attributes should include a justification",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "bad-practice"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-6513",
+  "sqKey": "S6513",
+  "scope": "All",
+  "quickfix": "unknown"
+}
