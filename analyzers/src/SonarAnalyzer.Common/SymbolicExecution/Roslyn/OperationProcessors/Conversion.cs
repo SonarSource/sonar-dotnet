@@ -29,11 +29,11 @@ internal sealed class Conversion : SimpleProcessor<IConversionOperationWrapper>
 
     protected override ProgramState Process(SymbolicContext context, IConversionOperationWrapper conversion) =>
         context.State[conversion.Operand] is { } value
-        && PropagateSymbolValue(value, conversion) is { } propagatedValue
+        && PropagateSymbolValue(conversion, value) is { } propagatedValue
             ? context.State.SetOperationValue(context.Operation, propagatedValue)
             : context.State;
 
-    private static SymbolicValue PropagateSymbolValue(SymbolicValue value, IConversionOperationWrapper conversion)
+    private static SymbolicValue PropagateSymbolValue(IConversionOperationWrapper conversion, SymbolicValue value)
     {
         if (conversion.OperatorMethod is not null)
         {
