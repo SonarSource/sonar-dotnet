@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
@@ -30,12 +31,12 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
     {
         [TestMethod]
         public void ToString_NoConstraints() =>
-            new SymbolicValue().ToString().Should().Be("No constraints");
+            SymbolicValue.Constraintless.ToString().Should().Be("No constraints");
 
         [TestMethod]
         public void ToString_WithConstraints()
         {
-            var sut = new SymbolicValue();
+            var sut = SymbolicValue.Constraintless;
 
             sut = sut.WithConstraint(LockConstraint.Held);
             sut.ToString().Should().Be("LockHeld");
@@ -53,7 +54,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void WithConstraint_Contains()
         {
-            var sut = new SymbolicValue().WithConstraint(TestConstraint.First);
+            var sut = SymbolicValue.Constraintless.WithConstraint(TestConstraint.First);
             sut.HasConstraint(TestConstraint.First).Should().BeTrue();
             sut.HasConstraint(TestConstraint.Second).Should().BeFalse();
             sut.HasConstraint(LockConstraint.Held).Should().BeFalse();
@@ -62,7 +63,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void WithConstraint_Overwrites_IsImmutable()
         {
-            var one = new SymbolicValue().WithConstraint(TestConstraint.First);
+            var one = SymbolicValue.Constraintless.WithConstraint(TestConstraint.First);
             var two = one.WithConstraint(TestConstraint.Second);
             one.HasConstraint(TestConstraint.First).Should().BeTrue();
             two.HasConstraint(TestConstraint.First).Should().BeFalse();
@@ -72,7 +73,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void WithoutConstraint_RemovesOnlyTheSame()
         {
-            var sut = new SymbolicValue()
+            var sut = SymbolicValue.Constraintless
                 .WithoutConstraint(TestConstraint.First)    // Do nothing
                 .WithConstraint(TestConstraint.First)
                 .WithoutConstraint(TestConstraint.Second);  // Do nothing
@@ -84,7 +85,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void WithoutConstraint_RemovesType()
         {
-            var sut = new SymbolicValue()
+            var sut = SymbolicValue.Constraintless
                 .WithConstraint(TestConstraint.First)
                 .WithConstraint(DummyConstraint.Dummy)
                 .WithoutConstraint<TestConstraint>();   // Act
@@ -95,7 +96,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void HasConstraint_ByType()
         {
-            var sut = new SymbolicValue();
+            var sut = SymbolicValue.Constraintless;
             sut.HasConstraint<TestConstraint>().Should().BeFalse();
             sut = sut.WithConstraint(TestConstraint.First);
             sut.HasConstraint<TestConstraint>().Should().BeTrue();
@@ -105,7 +106,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void HasConstraint_ByValue()
         {
-            var sut = new SymbolicValue();
+            var sut = SymbolicValue.Constraintless;
             sut.HasConstraint(TestConstraint.First).Should().BeFalse();
             sut = sut.WithConstraint(TestConstraint.First);
             sut.HasConstraint(TestConstraint.First).Should().BeTrue();
@@ -115,22 +116,22 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void Constraint_Existing_ReturnsInstance()
         {
-            var sut = new SymbolicValue().WithConstraint(TestConstraint.First).WithConstraint(DummyConstraint.Dummy);
+            var sut = SymbolicValue.Constraintless.WithConstraint(TestConstraint.First).WithConstraint(DummyConstraint.Dummy);
             sut.Constraint<TestConstraint>().Should().Be(TestConstraint.First);
         }
 
         [TestMethod]
         public void Constraint_Missing_ReturnsNull() =>
-            new SymbolicValue().Constraint<BoolConstraint>().Should().BeNull();
+            SymbolicValue.Constraintless.Constraint<BoolConstraint>().Should().BeNull();
 
         [TestMethod]
         public void GetHashCode_ComputedFromConstraints()
         {
-            var empty1 = new SymbolicValue();
-            var empty2 = new SymbolicValue();
-            var basic = new SymbolicValue().WithConstraint(TestConstraint.First);
-            var same = new SymbolicValue().WithConstraint(TestConstraint.First);
-            var different = new SymbolicValue().WithConstraint(BoolConstraint.True);
+            var empty1 = SymbolicValue.Constraintless;
+            var empty2 = SymbolicValue.Constraintless;
+            var basic = SymbolicValue.Constraintless.WithConstraint(TestConstraint.First);
+            var same = SymbolicValue.Constraintless.WithConstraint(TestConstraint.First);
+            var different = SymbolicValue.Constraintless.WithConstraint(BoolConstraint.True);
             empty1.GetHashCode().Should().Be(empty2.GetHashCode()).And.Be(0);   // Hash seed for empty dictionary is zero
             basic.GetHashCode().Should().Be(basic.GetHashCode()).And.NotBe(0);
             basic.GetHashCode().Should().Be(same.GetHashCode());
@@ -140,12 +141,12 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void Equals_ReturnsTrueForSameConstraints()
         {
-            var basicSingle = new SymbolicValue().WithConstraint(TestConstraint.First);
-            var sameSingle = new SymbolicValue().WithConstraint(TestConstraint.First);
-            var basicMore = new SymbolicValue().WithConstraint(TestConstraint.First).WithConstraint(BoolConstraint.True);
-            var sameMore = new SymbolicValue().WithConstraint(TestConstraint.First).WithConstraint(BoolConstraint.True);
-            var differentConstraintValue = new SymbolicValue().WithConstraint(TestConstraint.Second);
-            var differentConstraintType = new SymbolicValue().WithConstraint(BoolConstraint.True);
+            var basicSingle = SymbolicValue.Constraintless.WithConstraint(TestConstraint.First);
+            var sameSingle = SymbolicValue.Constraintless.WithConstraint(TestConstraint.First);
+            var basicMore = SymbolicValue.Constraintless.WithConstraint(TestConstraint.First).WithConstraint(BoolConstraint.True);
+            var sameMore = SymbolicValue.Constraintless.WithConstraint(TestConstraint.First).WithConstraint(BoolConstraint.True);
+            var differentConstraintValue = SymbolicValue.Constraintless.WithConstraint(TestConstraint.Second);
+            var differentConstraintType = SymbolicValue.Constraintless.WithConstraint(BoolConstraint.True);
 
             basicSingle.Equals(basicSingle).Should().BeTrue();
             basicSingle.Equals(sameSingle).Should().BeTrue();
@@ -162,13 +163,121 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
 
         [TestMethod]
         public void AllConstraints_Empty() =>
-            new SymbolicValue().AllConstraints.Should().BeEmpty();
+            SymbolicValue.Constraintless.AllConstraints.Should().BeEmpty();
 
         [TestMethod]
         public void AllConstraints_ResturnsConstraints()
         {
-            var sut = new SymbolicValue().WithConstraint(TestConstraint.First).WithConstraint(DummyConstraint.Dummy);
+            var sut = SymbolicValue.Constraintless.WithConstraint(TestConstraint.First).WithConstraint(DummyConstraint.Dummy);
             sut.AllConstraints.Should().HaveCount(2).And.Contain(new SymbolicConstraint[] { TestConstraint.First, DummyConstraint.Dummy });
+        }
+
+        [TestMethod]
+        public void SingleCache_AddSameConstraintKind_FromPredefined()
+        {
+            var sut = SymbolicValue.Null;
+            sut.Should().BeSameAs(SymbolicValue.Null);
+            sut.Should().BeSameAs(sut.WithConstraint(ObjectConstraint.Null));
+        }
+
+        [TestMethod]
+        public void SingleCache_AddSameConstraintKind_FromCustom()
+        {
+            var sut = SymbolicValue.Constraintless.WithConstraint(DummyConstraint.Dummy);
+            sut.Should().BeSameAs(SymbolicValue.Constraintless.WithConstraint(DummyConstraint.Dummy));
+            sut.Should().BeSameAs(sut.WithConstraint(DummyConstraint.Dummy));
+        }
+
+        [TestMethod]
+        public void SingleCache_AddSameConstraintType()
+        {
+            SymbolicValue.Constraintless.WithConstraint(ObjectConstraint.Null).Should().BeSameAs(SymbolicValue.Null);
+            SymbolicValue.NotNull.WithConstraint(ObjectConstraint.Null).Should().BeSameAs(SymbolicValue.Null);
+        }
+
+        [TestMethod]
+        public void SingleCache_AddOtherConstraintType()
+        {
+            SymbolicValue.Constraintless.WithConstraint(ObjectConstraint.Null).Should().BeSameAs(SymbolicValue.Null);
+            var one = SymbolicValue.NotNull.WithConstraint(DummyConstraint.Dummy);
+            var two = SymbolicValue.NotNull.WithConstraint(DummyConstraint.Dummy);
+            one.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy).And.NotBeSameAs(two); // Requires a cache for pairs
+        }
+
+        [TestMethod]
+        public void SingleCache_RemoveLastEntry_Kind()
+        {
+            var sut = SymbolicValue.Null;
+            sut.WithoutConstraint(ObjectConstraint.Null).Should().BeSameAs(SymbolicValue.Constraintless);
+        }
+
+        [TestMethod]
+        public void SingleCache_RemoveLastEntry_Type()
+        {
+            var sut = SymbolicValue.Null;
+            sut.WithoutConstraint<ObjectConstraint>().Should().BeSameAs(SymbolicValue.Constraintless);
+        }
+
+        [TestMethod]
+        public void SingleCache_RemoveLastEntry_Miss_Kind()
+        {
+            var sut = SymbolicValue.Null;
+            sut.WithoutConstraint(ObjectConstraint.NotNull).Should().BeSameAs(SymbolicValue.Null);
+        }
+
+        [TestMethod]
+        public void SingleCache_RemoveLastEntry_Miss_Type()
+        {
+            var sut = SymbolicValue.Null;
+            sut.WithoutConstraint<DummyConstraint>().Should().BeSameAs(SymbolicValue.Null);
+        }
+
+        [TestMethod]
+        public void SingleCache_RemoveSecondLastEntry_Kind()
+        {
+            var sut = SymbolicValue.Null.WithConstraint(DummyConstraint.Dummy);
+            sut.WithoutConstraint(DummyConstraint.Dummy).Should().BeSameAs(SymbolicValue.Null);
+        }
+
+        [TestMethod]
+        public void SingleCache_RemoveSecondLastEntry_Type()
+        {
+            var sut = SymbolicValue.Null.WithConstraint(DummyConstraint.Dummy);
+            sut.WithoutConstraint<DummyConstraint>().Should().BeSameAs(SymbolicValue.Null);
+        }
+
+        [TestMethod]
+        public void SingleCache_RemoveThirdLastEntry_Kind()
+        {
+            var sut = SymbolicValue.Null.WithConstraint(DummyConstraint.Dummy).WithConstraint(TestConstraint.First);
+            sut.Should().HaveOnlyConstraints(ObjectConstraint.Null, DummyConstraint.Dummy, TestConstraint.First);
+            var one = sut.WithoutConstraint(DummyConstraint.Dummy);
+            var two = sut.WithoutConstraint(DummyConstraint.Dummy);
+            one.Should().HaveOnlyConstraints(ObjectConstraint.Null, TestConstraint.First).And.NotBeSameAs(two); // Requires a cache for pairs
+        }
+
+        [TestMethod]
+        public void SingleCache_RemoveThirdLastEntry_Type()
+        {
+            var sut = SymbolicValue.Null.WithConstraint(DummyConstraint.Dummy).WithConstraint(TestConstraint.First);
+            sut.Should().HaveOnlyConstraints(ObjectConstraint.Null, DummyConstraint.Dummy, TestConstraint.First);
+            var one = sut.WithoutConstraint<DummyConstraint>();
+            var two = sut.WithoutConstraint<DummyConstraint>();
+            one.Should().HaveOnlyConstraints(ObjectConstraint.Null, TestConstraint.First).And.NotBeSameAs(two); // Requires a cache for pairs
+        }
+
+        [TestMethod]
+        public void RemoveEntry_Miss_Returns_Instance_Kind()
+        {
+            var sut = SymbolicValue.Constraintless.WithConstraint(TestConstraint.First).WithConstraint(TestConstraint.Second);
+            sut.WithoutConstraint(DummyConstraint.Dummy).Should().BeSameAs(sut);
+        }
+
+        [TestMethod]
+        public void RemoveEntry_Miss_Returns_Instance_Type()
+        {
+            var sut = SymbolicValue.Constraintless.WithConstraint(TestConstraint.First).WithConstraint(TestConstraint.Second);
+            sut.WithoutConstraint<DummyConstraint>().Should().BeSameAs(sut);
         }
     }
 }
