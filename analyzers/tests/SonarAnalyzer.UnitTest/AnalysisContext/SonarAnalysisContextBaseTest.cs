@@ -179,7 +179,7 @@ public partial class SonarAnalysisContextBaseTest
         var analyzerLanguage = language == "cs" ? AnalyzerLanguage.CSharp : AnalyzerLanguage.VisualBasic;
         var (compilation, _) = CreateDummyCompilation(analyzerLanguage, "ExtraEmptyFile");
         var options = AnalysisScaffolding.CreateOptions($"ResourceTests\\SonarLintXml\\All_properties_{language}\\SonarLint.xml");
-        var sut = CreateSut(compilation, options).SonarLintFile();
+        var sut = CreateSut(compilation, options).ReadSonarLintXml();
 
         sut.IgnoreHeaderComments(analyzerLanguage.LanguageName).Should().BeTrue();
         sut.AnalyzeGeneratedCode(analyzerLanguage.LanguageName).Should().BeFalse();
@@ -204,8 +204,8 @@ public partial class SonarAnalysisContextBaseTest
         var options = AnalysisScaffolding.CreateOptions("ResourceTests\\SonarLintXml\\All_properties_cs\\SonarLint.xml");
         var firstSut = CreateSut(options);
         var secondSut = CreateSut(options);
-        var firstFile = firstSut.SonarLintFile();
-        var secondFile = secondSut.SonarLintFile();
+        var firstFile = firstSut.ReadSonarLintXml();
+        var secondFile = secondSut.ReadSonarLintXml();
 
         secondFile.Should().BeSameAs(firstFile);
     }
@@ -215,8 +215,8 @@ public partial class SonarAnalysisContextBaseTest
     {
         var firstOptions = AnalysisScaffolding.CreateOptions("ResourceTests\\SonarLintXml\\All_properties_cs\\SonarLint.xml");
         var secondOptions = AnalysisScaffolding.CreateOptions("ResourceTests\\SonarLintXml\\All_properties_vbnet\\SonarLint.xml");
-        var firstFile = CreateSut(firstOptions).SonarLintFile();
-        var secondFile = CreateSut(secondOptions).SonarLintFile();
+        var firstFile = CreateSut(firstOptions).ReadSonarLintXml();
+        var secondFile = CreateSut(secondOptions).ReadSonarLintXml();
 
         secondFile.Should().NotBeSameAs(firstFile);
     }
@@ -229,14 +229,14 @@ public partial class SonarAnalysisContextBaseTest
     [DataRow("path//SonarLint.xmla")] // different extension
     public void SonarLintFile_WhenAdditionalFileNotPresent_ReturnsDefaultValues(string folder)
     {
-        var sut = CreateSut(AnalysisScaffolding.CreateOptions(folder)).SonarLintFile();
+        var sut = CreateSut(AnalysisScaffolding.CreateOptions(folder)).ReadSonarLintXml();
         CheckSonarLintXmlDefaultValues(sut);
     }
 
     [TestMethod]
     public void SonarLintFile_WhenInvalidXml_ReturnsDefaultValues()
     {
-        var sut = CreateSut(AnalysisScaffolding.CreateOptions("ResourceTests\\SonarLintXml\\Invalid_Xml\\SonarLint.xml")).SonarLintFile();
+        var sut = CreateSut(AnalysisScaffolding.CreateOptions("ResourceTests\\SonarLintXml\\Invalid_Xml\\SonarLint.xml")).ReadSonarLintXml();
         CheckSonarLintXmlDefaultValues(sut);
     }
 
@@ -245,7 +245,7 @@ public partial class SonarAnalysisContextBaseTest
     {
         var sut = CreateSut(AnalysisScaffolding.CreateOptions("ThisPathDoesNotExist\\SonarLint.xml"));
 
-        sut.Invoking(x => x.SonarLintFile())
+        sut.Invoking(x => x.ReadSonarLintXml())
            .Should()
            .Throw<InvalidOperationException>()
            .WithMessage("File 'SonarLint.xml' has been added as an AdditionalFile but could not be read and parsed.");

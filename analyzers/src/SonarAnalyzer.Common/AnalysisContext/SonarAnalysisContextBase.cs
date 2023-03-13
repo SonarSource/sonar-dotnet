@@ -79,7 +79,7 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
     /// <summary>
     /// Reads the properties from the SonarLint.xml file and caches the result for the scope of this analysis.
     /// </summary>
-    public SonarLintXmlReader SonarLintFile()
+    public SonarLintXmlReader ReadSonarLintXml()
     {
         if (Options.SonarLintXml() is { } sonarLintXml)
         {
