@@ -12,8 +12,8 @@
     {
         if (o is [not null, not null])
         {
-            o.ToString(); // Compliant
-            o[1].ToString(); // Compliant
+            o.ToString();       // Compliant
+            o[1].ToString();    // Compliant
         }
     }
 }

@@ -9,7 +9,7 @@ public class Sample
 
     public void TargetTypedNew(object arg)
     {
-        arg.ToString(); // FN, can't build CFG for this method
+        arg.ToString();         // FN, can't build CFG for this method
 
         StringBuilder sb = new();
     }
@@ -53,7 +53,7 @@ public class Sample
     {
         Func<object, string> a = static (arg) =>
         {
-            return arg.ToString();    // Compliant, it's not a public method argument
+            return arg.ToString();      // Compliant, it's not a public method argument
         };
         a(null);
     }
@@ -81,7 +81,7 @@ public record Record
 {
     public void Method(object arg)
     {
-        arg.ToString();   // FIXME Non-compliant
+        arg.ToString();                 // FIXME Non-compliant
     }
 }
 
@@ -94,20 +94,20 @@ public partial class Partial
 {
     public partial void Method(object arg)
     {
-        arg.ToString();   // FIXME Non-compliant
+        arg.ToString();                 // FIXME Non-compliant
     }
 }
 
 public class UsingFromServicesAttribute
 {
     public int GetProduct([FromServices] IService service) =>
-         service.GetValue(); // Compliant, it's attributed with FromServices attribute
+         service.GetValue();            // Compliant, it's attributed with FromServices attribute
 
     public int GetProductMultipleAttr([FromServices][FromRoute] IService service) =>
-        service.GetValue(); // Compliant, it's attributed with FromServices attribute
+        service.GetValue();             // Compliant, it's attributed with FromServices attribute
 
     public int GetPrice(IService service) =>
-        service.GetValue();  // FIXME Non-compliant
+        service.GetValue();             // FIXME Non-compliant
 
     public interface IService
     {

@@ -9,11 +9,11 @@ public class Program
 
     public void NotCompliantCases(object o, Exception e)
     {
-        o.ToString(); // FIXME Non-compliant {{Refactor this method to add validation of parameter 'o' before using it.}}
+        o.ToString();   // FIXME Non-compliant {{Refactor this method to add validation of parameter 'o' before using it.}}
 //      ~~~~~~~~~~
-        Bar(o); // Compliant, we care about dereference only
+        Bar(o);         // Compliant, we care about dereference only
 
-        throw e; // FIXME Non-compliant - attempting to throw null as an exception will result in a NullReferenceException
+        throw e;        // FIXME Non-compliant - attempting to throw null as an exception will result in a NullReferenceException
 //      ~~~~~~~
     }
 
@@ -43,32 +43,32 @@ public class Program
     {
         if (o1 != null)
         {
-            o1.ToString(); // Compliant, we did the check
+            o1.ToString();  // Compliant, we did the check
         }
 
         o2 = o2 ?? new object();
-        o2.ToString(); // Compliant, we coalesce
+        o2.ToString();      // Compliant, we coalesce
 
         if (o3 == null)
         {
             throw new Exception();
         }
 
-        o3.ToString(); // Compliant, we did the check
+        o3.ToString();                  // Compliant, we did the check
 
         if (e != null)
         {
-            throw e; // Compliant
+            throw e;                    // Compliant
         }
 
-        o4?.ToString(); // Compliant, conditional operator
+        o4?.ToString();                 // Compliant, conditional operator
 
-        b.ToString(); // Compliant, bool cannot be null
+        b.ToString();                   // Compliant, bool cannot be null
 
         object v = null;
-        v.ToString(); // Compliant, we don't care about local variables
+        v.ToString();                   // Compliant, we don't care about local variables
 
-        field.ToString(); // Compliant
+        field.ToString();               // Compliant
 
         Program.staticField.ToString(); // Compliant
     }
@@ -126,14 +126,14 @@ public class Program
             await task1;
         }
 
-        await task2; // FIXME Non-compliant
+        await task2;                                // FIXME Non-compliant
 
         if (task3 != null)
         {
             await task3.ConfigureAwait(false);
         }
 
-        await task4.ConfigureAwait(false); // FIXME Non-compliant
+        await task4.ConfigureAwait(false);          // FIXME Non-compliant
     }
 
     public Program(int i) { }
@@ -145,7 +145,7 @@ public class Program
         var c = o?.ToString()?.IsNormalized();
         if (c == null)
         {
-            o.GetType().GetMethods();  // FIXME Non-compliant
+            o.GetType().GetMethods();               // FIXME Non-compliant
         }
     }
 
@@ -231,7 +231,7 @@ public class ReproIssue2476
         if (infixes != null)
         {
             Method(ref infixes, infixes.Length);
-            var x = infixes.Length; // FIXME Non-compliant when passed by ref can be set to null
+            var x = infixes.Length;                 // FIXME Non-compliant when passed by ref can be set to null
         }
 
     }
@@ -240,15 +240,15 @@ public class ReproIssue2476
     {
         if (infixes == null)
         {
-            Method(ref infixes, infixes.Length); // FIXME Non-compliant
+            Method(ref infixes, infixes.Length);    // FIXME Non-compliant
             var x = infixes.Length;
         }
     }
 
     public void Method3(string infixes)
     {
-        Method(ref infixes, infixes.Length); // FIXME Non-compliant
-        var x = infixes.Length; // FIXME Non-compliant
+        Method(ref infixes, infixes.Length);        // FIXME Non-compliant
+        var x = infixes.Length;                     // FIXME Non-compliant
     }
 
     public void Method4(string contentType)

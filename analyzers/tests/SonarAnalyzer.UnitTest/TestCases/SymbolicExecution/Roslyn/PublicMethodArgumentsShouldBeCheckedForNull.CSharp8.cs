@@ -9,7 +9,7 @@
     public void NullCoalescenceAssignment_Null(string s1)
     {
         s1 ??= null;
-        s1.ToString(); // FIXME Non-compliant
+        s1.ToString(); // FN
     }
 
     public void InsideIf(string str)
@@ -45,12 +45,12 @@ public class LocalStaticFunctions
     {
         string LocalFunction(object o)
         {
-            return o.ToString(); // Compliant - FN: local functions are not supported by the CFG
+            return o.ToString(); // FN: local functions are not supported by the CFG
         }
 
         static string LocalStaticFunction(object o)
         {
-            return o.ToString(); // Compliant - FN: local functions are not supported by the CFG
+            return o.ToString(); // FN: local functions are not supported by the CFG
         }
     }
 }
@@ -112,8 +112,8 @@ public class SwitchExpressions
     {
         var result = s switch
         {
-            null => s.ToString(), // FIXME Non-compliant
-            _ => s.ToString() // Compliant as null was already handled
+            null => s.ToString(),   // FIXME Non-compliant
+            _ => s.ToString()       // Compliant as null was already handled
         };
     }
 
@@ -158,7 +158,7 @@ public class SwitchExpressions
     {
         return address switch
         {
-            var (name, state) => s.ToString(), // Compliant - FN
+            var (name, state) => s.ToString(), // FN
             _ => string.Empty
         };
     }
@@ -167,7 +167,7 @@ public class SwitchExpressions
     {
         return address switch
         {
-            Address addr when addr.Name.Length > 0 => s.ToString(), // FIXME Non-compliant
+            Address addr when addr.Name.Length > 0 => s.ToString(),         // FIXME Non-compliant
             Address addr when addr.Name.Length == s.Length => string.Empty, // FIXME Non-compliant
             _ => string.Empty
         };
