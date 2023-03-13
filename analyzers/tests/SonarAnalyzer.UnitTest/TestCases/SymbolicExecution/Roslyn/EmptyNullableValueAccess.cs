@@ -12,7 +12,7 @@ class Basics
             Console.WriteLine(i.Value);
         }
 
-        Console.WriteLine(i.Value); // Noncompliant {{'i' is null on at least one execution path.}}
+        Console.WriteLine(i.Value);    // Noncompliant {{'i' is null on at least one execution path.}}
         //                ^
     }
 
@@ -64,7 +64,7 @@ class Basics
         if (!b1) { }                                         // Error[CS0266]
     }
 
-    void Assignment2(object o)
+    void AssignmentAndNullComparison(object o)
     {
         if (o != null)
         {
@@ -75,6 +75,19 @@ class Basics
         {
             _ = b.Value;                                     // Compliant
         }
+    }
+
+    void AssignmentTransitivity()
+    {
+        bool? b1 = null;
+        bool? b2 = b1;
+        _ = b1.Value;                                        // Noncompliant
+    }
+
+    void AssignmentAndDestructuring()
+    {
+        var (b1, _) = (null as bool?, null as bool?);
+        _ = b1.Value;                                        // FN, b is null
     }
 
     void SwitchExpressions(bool zero)
@@ -101,23 +114,24 @@ class Basics
 
     int SwitchExpressions5(int? value, bool flag)
     {
-        return flag switch { true => value.Value, false => 0 };           // FN - switch expressions are not constrained
+        return flag switch { true => value.Value, false => 0 };           // Compliant, constraint on flag doesn't constrain value
     }
 
     int StaticLocalFunctions(int? param)
     {
+        return ExtractValue(param);
+
         static int ExtractValue(int? intOrNull)
         {
-            return intOrNull.Value; // FN - content of static local function is not inspected by SE
+            intOrNull = null;
+            return intOrNull.Value;                                       // FN - content of static local function is not inspected by SE
         }
-
-        return ExtractValue(param);
     }
 
     int NullCoalescingAssignment(int? param)
     {
         param ??= 42;
-        return param.Value; // OK, value is always set
+        return param.Value;                                               // Compliant, value is always set
     }
 }
 
@@ -246,15 +260,36 @@ class ComplexConditionsSingleNullable
 
     bool XorWithTrue(bool? b) => (true ^ b.HasValue) && b.Value;            // Noncompliant
     bool XorWithFalse(bool? b) => (false ^ b.HasValue) && b.Value;          // Compliant
+
+    void Reachability1(bool? b)
+    {
+        b = null;
+        _ = true || b.Value; // Compliant, "||" is short-circuited
+        _ = b.Value;         // Noncompliant
+        _ = b.Value;         // Compliant, unreachable
+    }
+
+    void Reachability2(bool? b)
+    {
+        b = null;
+        _ = true | b.Value;  // Noncompliant, "|" evaluates both sides
+        _ = b.Value;         // Compliant, unreachable
+        _ = b.Value;         // Compliant, unreachable
+    }
+
+    void Reachability3(bool? b1)
+    {
+
+    }
 }
 
 class ComplexConditionMultipleNullables
 {
-    bool IndependentConditions1(double? d, float? f) => f == null && d.Value == 42.0;  // Compliant, f imposes no constraints on d
-    bool IndependentConditions2(double? d, float? f) => f != null && d.Value == 42.0;  // Compliant
-    bool IndependentConditions3(double? d, float? f) => f.HasValue && d.Value == 42.0; // Compliant
-    bool IndependentConditions4(double? d, float? f) => null == f && d.Value == 42.0;  // Compliant
-    bool IndependentConditions5(double? d, float? f) => null == f && d.Value == 42.0;  // Compliant
+    bool IndependentConditions1(double? d, float? f) => f == null && d.Value == 42.0;       // Compliant, f imposes no constraints on d
+    bool IndependentConditions2(double? d, float? f) => f != null && d.Value == 42.0;       // Compliant
+    bool IndependentConditions3(double? d, float? f) => f.HasValue && d.Value == 42.0;      // Compliant
+    bool IndependentConditions4(double? d, float? f) => null == f && d.Value == 42.0;       // Compliant
+    bool IndependentConditions5(double? d, float? f) => null == f && d.Value == 42.0;       // Compliant
 
     bool DependentConditions1(double? d, float? f) =>
         !d.HasValue && d.Value == 42.0;                                 // Noncompliant, f presence doesn't affect d
@@ -262,6 +297,36 @@ class ComplexConditionMultipleNullables
         d.Value == 42.0 && d.HasValue == f.HasValue && f.Value == 42.0; // Compliant, d is non-null, as well as f
     bool DependentConditions3(double? d, float? f) =>
         d.Value == 42.0 && d.HasValue != f.HasValue && f.Value == 42.0; // Noncompliant, d is non-null, unlike f
+
+    void Transitivity(bool? b1, bool? b2, bool? b3)
+    {
+        if (b1 == b2 && b1 != b3 && b2 == b3) { _ = (null as int?).Value; }                 // Noncompliant, FP: unreachable
+        if (b1 != b2 && b1 != b3 && b2 != b3 && b1 != null && b2 != null) { _ = b3.Value; } // FN: b3 is null
+    }
+
+    void Reachability1(bool? b1)
+    {
+        b1 = null;
+        _ = b1.Value;       // Noncompliant
+        _ = b1.Value;       // Compliant, unreachable
+    }
+
+    void Reachability2(bool? b1, bool? b2)
+    {
+        b2 = null;
+        if (b1 == b2)
+        {
+            _ = b1.Value;     // Noncompliant
+            _ = b2.Value;     // Noncompliant, FP: unreachable
+        }
+    }
+
+    void Reachability3(bool? b1, bool? b2)
+    {
+        _ = b1.Value | b2.Value;
+        _ = b1.Value;         // Compliant, "&" evaluates both sides
+        _ = b2.Value;         // Compliant, "&" evaluates both sides
+    }
 }
 
 class TernaryOperator
