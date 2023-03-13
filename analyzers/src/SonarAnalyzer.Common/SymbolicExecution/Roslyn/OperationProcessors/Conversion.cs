@@ -38,7 +38,7 @@ internal sealed class Conversion : SimpleProcessor<IConversionOperationWrapper>
         if (conversion.OperatorMethod is not null)
         {
             // Don't propagate state in user-defined conversions
-            value = SymbolicValue.Constraintless;
+            value = SymbolicValue.Empty;
         }
         if (conversion.Type.IsNonNullableValueType())
         {
