@@ -405,8 +405,11 @@ if (value = boolParameter)
         [DataTestMethod]
         [DataRow("arg is true")]
         [DataRow("arg is true", "bool")]
+        [DataRow("arg is true", "bool?")]
         [DataRow("!!(arg is true)")]
+        [DataRow("!!(arg is true)", "bool?")]
         [DataRow("arg is not not true")]
+        [DataRow("arg is not not true", "bool?")]
         public void Branching_LearnsObjectConstraint_ConstantPattern_True(string expression, string argType = "object")
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.ConstantPattern, argType);
@@ -420,6 +423,7 @@ if (value = boolParameter)
         [DataTestMethod]
         [DataRow("arg is not true", "object")]
         [DataRow("arg is not true", "bool")]
+        [DataRow("arg is not true", "bool?")]
         public void Branching_LearnsObjectConstraint_ConstantPattern_True_Negated(string expression, string argType)
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.ConstantPattern, argType);
@@ -445,6 +449,7 @@ if (value = boolParameter)
 
         [DataTestMethod]
         [DataRow("arg is 42", "int")]
+        [DataRow("arg is 42", "int?")]
         [DataRow("arg is 42", "T")]
         [DataRow("arg is 42", "TStruct")]
         public void Branching_LearnsObjectConstraint_ConstantPattern_ValueTypes_InputIsNotReferenceType(string expression, string argType)
@@ -459,6 +464,7 @@ if (value = boolParameter)
         [DataRow(@"arg is ""some text""")]
         [DataRow(@"arg is """"")]
         [DataRow("arg is 42")]
+        [DataRow("arg is 42", "int?")]
         [DataRow("arg is System.ConsoleKey.Enter")]     // Enum
         [DataRow("arg is 42", "TClass")]
         [DataRow("arg is 42", "IComparable")]           // arg is either a class implementing the interface or a boxed value type
