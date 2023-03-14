@@ -394,6 +394,34 @@ public void Main<T>() where T : new()
             validator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
         }
 
+#if NET
+
+        [TestMethod]
+        public void Index_SetsNotNull()
+        {
+            const string code = """
+                var index = ^0;
+                Tag("Index", index);
+                """;
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateContainsOperation(OperationKind.Unary);
+            validator.ValidateTag("Index", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+        }
+
+        [TestMethod]
+        public void Range_SetsNotNull()
+        {
+            const string code = """
+                var range = 0..1;
+                Tag("Range", range);
+                """;
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateContainsOperation(OperationKind.Range);
+            validator.ValidateTag("Range", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+        }
+
+#endif
+
         [TestMethod]
         public void Literal_NullAndDefault_SetsNull_CS()
         {
