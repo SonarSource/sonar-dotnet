@@ -25,8 +25,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
     public sealed record SymbolicValue
     {
-        private static ConcurrentDictionary<ConstraintKind, SymbolicValue> singleConstraintCache = new();
-
         // Reuse instances to save memory. This "True" has the same semantic meaning and any other symbolic value with BoolConstraint.True constraint
         public static readonly SymbolicValue Constraintless = new();
         public static readonly SymbolicValue This = Constraintless.WithConstraint(ObjectConstraint.NotNull);
@@ -119,17 +117,12 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             return baseValue with { Constraints = baseValue.Constraints.Remove(type) };
         }
 
-        private static SymbolicValue SingleConstraint(SymbolicConstraint constraint)
-        {
-            if (singleConstraintCache.TryGetValue(constraint.Kind, out var result))
+        private static SymbolicValue SingleConstraint(SymbolicConstraint constraint) =>
+            constraint.Kind switch
             {
-                return result;
-            }
-            else
-            {
-                result = Constraintless with { Constraints = Constraintless.Constraints.SetItem(constraint.GetType(), constraint) };
-                return singleConstraintCache.GetOrAdd(constraint.Kind, result);
-            }
-        }
+                ConstraintKind.ObjectNotNull => NotNull,
+                ConstraintKind.ObjectNull => Null,
+                _ => null,
+            } ?? Constraintless with { Constraints = Constraintless.Constraints.SetItem(constraint.GetType(), constraint) };
     }
 }
