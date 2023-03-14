@@ -16,6 +16,14 @@ class Basics
         //                ^
     }
 
+    void DereferenceOnValueResult(int? i)
+    {
+        _ = i.Value.ToString();                                           // Compliant, unknown
+        i = null;
+        _ = i.Value.ToString();                                           // Noncompliant
+        //  ^
+    }
+
     void NonEmpty()
     {
         int? i = 42;
@@ -87,7 +95,7 @@ class Basics
     void AssignmentAndDestructuring()
     {
         var (b1, _) = (null as bool?, null as bool?);
-        _ = b1.Value;                                        // FN, b is null
+        _ = b1.Value;                                        // FN, b is empty
     }
 
     void SwitchExpressions(bool zero)
@@ -203,7 +211,7 @@ class NullableOfCustomTypes
     void ForeachCast()
     {
         foreach (AStruct x in new AStruct?[] { null }) ;                 // FN
-        foreach (AStruct x in new AStruct?[] { new AStruct() }) ;        // Compliant, all items not null
+        foreach (AStruct x in new AStruct?[] { new AStruct() }) ;        // Compliant, all items not empty
         foreach (AStruct x in new AStruct?[] { new AStruct(), null }) ;  // FN
         foreach (AStruct? x in new AStruct?[] { new AStruct(), null }) ; // Compliant, no value access
         foreach (var x in new AStruct?[] { new AStruct(), null }) ;      // Compliant, no value access
@@ -277,10 +285,7 @@ class ComplexConditionsSingleNullable
         _ = b.Value;         // Compliant, unreachable
     }
 
-    void Reachability3(bool? b1)
-    {
-
-    }
+    bool LiftedNot(bool? b) => !b == b && b.Value; // FN, b.Value reached only when b is empty
 }
 
 class ComplexConditionMultipleNullables
@@ -301,14 +306,14 @@ class ComplexConditionMultipleNullables
     void Transitivity(bool? b1, bool? b2, bool? b3)
     {
         if (b1 == b2 && b1 != b3 && b2 == b3) { _ = (null as int?).Value; }                 // Noncompliant, FP: unreachable
-        if (b1 != b2 && b1 != b3 && b2 != b3 && b1 != null && b2 != null) { _ = b3.Value; } // FN: b3 is null
+        if (b1 != b2 && b1 != b3 && b2 != b3 && b1 != null && b2 != null) { _ = b3.Value; } // FN: b3 is empty
     }
 
     void Reachability1(bool? b1)
     {
         b1 = null;
-        _ = b1.Value;       // Noncompliant
-        _ = b1.Value;       // Compliant, unreachable
+        _ = b1.Value;        // Noncompliant
+        _ = b1.Value;        // Compliant, unreachable
     }
 
     void Reachability2(bool? b1, bool? b2)
@@ -407,11 +412,11 @@ class Repro_4573
             }
             if (!foo.HasValue)
             {
-                Console.WriteLine(foo.Value.ToString());    // FN
+                Console.WriteLine(foo.Value.ToString());    // Noncompliant, foo is empty
             }
             if (foo == null)
             {
-                Console.WriteLine(foo.Value.ToString());    // FN
+                Console.WriteLine(foo.Value.ToString());    // FN, foo is empty
             }
             if (foo != null)
             {
@@ -428,7 +433,7 @@ class Repro_4573
             {
                 if (!foo.HasValue)
                 {
-                    Console.WriteLine(foo.Value.ToString());    // Compliant
+                    Console.WriteLine(foo.Value.ToString());    // Noncompliant, FP: unreachable
                 }
             }
         }
@@ -442,7 +447,7 @@ class Repro_4573
             {
                 if (foo == null)
                 {
-                    Console.WriteLine(foo.Value.ToString());    // FN
+                    Console.WriteLine(foo.Value.ToString());    // Noncompliant
                 }
             }
         }
@@ -460,7 +465,7 @@ class Repro_4573
                 }
                 if (!foo.HasValue)
                 {
-                    Console.WriteLine(foo.Value.ToString());    // Compliant, unreachable
+                    Console.WriteLine(foo.Value.ToString());    // Noncompliant, FP: unreachable
                 }
                 if (foo == null)
                 {
@@ -479,11 +484,11 @@ class Repro_4573
                 }
                 if (!foo.HasValue)
                 {
-                    Console.WriteLine(foo.Value.ToString());    // FN, empty
+                    Console.WriteLine(foo.Value.ToString());    // Noncompliant, foo is empty
                 }
                 if (foo == null)
                 {
-                    Console.WriteLine(foo.Value.ToString());    // FN, empty
+                    Console.WriteLine(foo.Value.ToString());    // FN, foo is empty
                 }
                 if (foo != null)
                 {
@@ -491,5 +496,89 @@ class Repro_4573
                 }
             }
         }
+    }
+}
+
+class Casts
+{
+    void Downcast(int? i)
+    {
+        _ = (int)i;                   // Compliant, same as i.Value with i unknown
+        i = null;
+        _ = (int)i;                   // Noncompliant
+        i = 42;
+        _ = (int)i;                   // Compliant
+        i = null;
+        _ = i.Value;                  // Noncompliant
+        _ = (int)i;                   // Compliant, unreachable
+    }
+
+    void Upcast(int? i1, int? i2)
+    {
+        _ = ((int?)null).Value;       // Noncompliant
+        i2 = null;
+        _ = ((int?)i2).Value;         // Noncompliant
+    }
+
+    void AsOperator(int? i)
+    {
+        _ = (i as int?).Value;        // Compliant
+        _ = (null as int?).Value;     // Noncompliant
+        i = null;
+        _ = (i as int?).Value;        // Noncompliant
+    }
+}
+
+namespace WithAliases
+{
+    using MaybeInt = Nullable<System.Int32>;
+
+    class Test
+    {
+        void Basics(MaybeInt i)
+        {
+            _ = i.Value;              // Compliant, value unknown
+            i = null;
+            _ = (i as int?).Value;    // Noncompliant
+        }
+    }
+}
+
+namespace TypeWithValueProperty
+{
+    class Test
+    {
+        void Basics1(ClassWithValueProperty i)
+        {
+            i = null;
+            _ = i.Value;                                 // Compliant, ClassWithValueProperty not a nullable type
+        }
+
+        void Basics2(ClassWithValueProperty i)
+        {
+            i = null;
+            _ = i.APropertyNotCalledValue;               // Compliant
+        }
+
+        void Basics3(StructWithValueProperty i)
+        {
+            i = null;
+            _ = i.Value;                                 // Compliant, StructWithValueProperty not a nullable type
+            _ = (null as StructWithValueProperty).Value; // Compliant
+        }
+    }
+
+    class ClassWithValueProperty
+    {
+        public int Value => 42;
+        public int APropertyNotCalledValue => 42;
+    }
+
+    class StructWithValueProperty
+    {
+        public int Value => 42;
+        public int APropertyNotCalledValue => 42;
+
+        public static implicit operator StructWithValueProperty(int? value) => new StructWithValueProperty();
     }
 }

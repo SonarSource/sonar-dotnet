@@ -44,6 +44,7 @@ public class EmptyNullableValueAccess : SymbolicRuleCheck
         if (operationInstance.Kind == OperationKindEx.PropertyReference
             && operationInstance.ToPropertyReference() is var reference
             && reference.Property.Name == nameof(Nullable<int>.Value)
+            && reference.Instance.Type.IsNullableValueType()
             && context.HasConstraint(reference.Instance, ObjectConstraint.Null))
         {
             ReportIssue(reference.Instance, reference.Instance.Syntax.ToString());
@@ -73,8 +74,17 @@ public class EmptyNullableValueAccess : SymbolicRuleCheck
             }
         }
 
-        public override void VisitMemberAccessExpression(MemberAccessExpressionSyntax node) =>
-            HasPotentialNullableValueAccess = node.NameIs(nameof(Nullable<int>.Value));
+        public override void VisitMemberAccessExpression(MemberAccessExpressionSyntax node)
+        {
+            if (node.NameIs(nameof(Nullable<int>.Value)))
+            {
+                HasPotentialNullableValueAccess = true;
+            }
+            else
+            {
+                base.VisitMemberAccessExpression(node);
+            }
+        }
 
         public override void VisitCastExpression(CastExpressionSyntax node) =>
             HasPotentialNullableValueAccess = true;
