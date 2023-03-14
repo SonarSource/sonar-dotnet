@@ -255,6 +255,44 @@ public void Method()
 #endif
 
         [TestMethod]
+        public void Conversion_ToLocalNonNullableValueType_CS()
+        {
+            var validator = SETestContext.CreateCS("""
+                object o = null; // Set ObjectConstraint.Null and Dummy (LiteralDummyTestCheck)
+                int convert = System.Convert.ToInt32(o);
+                int explicitCast = (int)o;
+                Tag("Object", o);
+                Tag("Convert", convert);
+                Tag("Explicit", explicitCast);
+                """, new LiteralDummyTestCheck()).Validator;
+            validator.ValidateTag("Object", x => x.Should().HaveOnlyConstraints(ObjectConstraint.Null, DummyConstraint.Dummy));
+            validator.ValidateTag("Convert", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
+            validator.ValidateTag("Explicit", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy));
+        }
+
+        [TestMethod]
+        public void Conversion_ToLocalNonNullableValueType_VB()
+        {
+            var validator = SETestContext.CreateVB("""
+                Dim o As Object = Nothing ' Set ObjectConstraint.Null and Dummy (LiteralDummyTestCheck)
+                Dim iCType As Integer
+                Dim iDirectCast As Integer
+                Dim iImplicit As Integer
+                iCType = CType(o, Integer)
+                iDirectCast = DirectCast(o, Integer)
+                iImplicit = o
+                Tag("Object", o)
+                Tag("CType", iCType)
+                Tag("DirectCast", iDirectCast)
+                Tag("Implicit", iImplicit)
+                """, new LiteralDummyTestCheck()).Validator;
+            validator.ValidateTag("Object", x => x.Should().HaveOnlyConstraints(ObjectConstraint.Null, DummyConstraint.Dummy));
+            validator.ValidateTag("CType", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy));
+            validator.ValidateTag("DirectCast", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy));
+            validator.ValidateTag("Implicit", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy));
+        }
+
+        [TestMethod]
         public void Argument_Ref_ResetsConstraints_CS() =>
             SETestContext.CreateCS(@"var b = true; Main(boolParameter, ref b); Tag(""B"", b);", ", ref bool outParam").Validator.ValidateTag("B", x => x.Should().BeNull());
 
