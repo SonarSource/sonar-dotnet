@@ -26,7 +26,8 @@ namespace SonarAnalyzer.Rules
 {
     public readonly record struct UtilityAnalyzerParameter(bool IsAnalyzerEnabled, bool IgnoreHeaderComments, bool AnalyzeGeneratedCode, bool AnalyzeTestProjects, string OutPath, bool IsTestProject)
     {
-        public static readonly UtilityAnalyzerParameter Default = new(IsAnalyzerEnabled: false, IgnoreHeaderComments: false, AnalyzeGeneratedCode: false, AnalyzeTestProjects: true, OutPath: null, IsTestProject: false);
+        public static readonly UtilityAnalyzerParameter Default =
+            new(IsAnalyzerEnabled: false, IgnoreHeaderComments: false, AnalyzeGeneratedCode: false, AnalyzeTestProjects: true, OutPath: null, IsTestProject: false);
     }
 
     public abstract class UtilityAnalyzerBase : SonarDiagnosticAnalyzer
