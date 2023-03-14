@@ -192,4 +192,58 @@ public partial class RoslynSymbolicExecutionTest
         validator.ValidateTag("ToNullableAs", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
         validator.ValidateTag("ToBoolExplicit", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
     }
+
+    [TestMethod]
+    public void Nullable_GetValueOrDefault_Int()
+    {
+        const string code = """
+            var value = arg.GetValueOrDefault();
+            Tag("UnknownArg", arg);
+            Tag("UnknownValue", value);
+
+            arg = null;
+            value = arg.GetValueOrDefault();
+            Tag("NullArg", arg);
+            Tag("NullValue", value);
+
+            arg = 42;
+            value = arg.GetValueOrDefault();
+            Tag("NotNullArg", arg);
+            Tag("NotNullValue", value);
+            """;
+        var validator = SETestContext.CreateCS(code, ", int? arg").Validator;
+        validator.ValidateTag("UnknownArg", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));      // FIXME: Should be HaveNoConstraints());
+        validator.ValidateTag("UnknownValue", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));    // FIXME: Should be HaveNoConstraints());
+        validator.ValidateTag("NullArg", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));         // FIXME: Should be HaveOnlyConstraint(ObjectConstraint.Null));
+        validator.ValidateTag("NullValue", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));       // FIXME: Should be HaveOnlyConstraint(ObjectConstraint.Null));
+        validator.ValidateTag("NotNullArg", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+        validator.ValidateTag("NotNullValue", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+    }
+
+    [TestMethod]
+    public void Nullable_GetValueOrDefault_Bool()
+    {
+        const string code = """
+            var value = arg.GetValueOrDefault();
+            Tag("UnknownArg", arg);
+            Tag("UnknownValue", value);
+
+            arg = null;
+            value = arg.GetValueOrDefault();
+            Tag("NullArg", arg);
+            Tag("NullValue", value);
+
+            arg = true;
+            value = arg.GetValueOrDefault();
+            Tag("NotNullArg", arg);
+            Tag("NotNullValue", value);
+            """;
+        var validator = SETestContext.CreateCS(code, ", bool? arg").Validator;
+        validator.ValidateTag("UnknownArg", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));      // FIXME: Should be HaveNoConstraints());
+        validator.ValidateTag("UnknownValue", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));    // FIXME: Should be HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False));
+        validator.ValidateTag("NullArg", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));         // FIXME: Should be HaveOnlyConstraint(ObjectConstraint.Null));
+        validator.ValidateTag("NullValue", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));       // FIXME: Should be HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False));
+        validator.ValidateTag("NotNullArg", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True));
+        validator.ValidateTag("NotNullValue", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));    // FIXME: SHould be HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True));
+    }
 }
