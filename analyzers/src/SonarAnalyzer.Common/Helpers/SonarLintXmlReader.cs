@@ -35,16 +35,16 @@ public class SonarLintXmlReader
     public bool IgnoreHeaderComments(string language) =>
         language switch
         {
-            LanguageNames.CSharp => ReadBoolean(ReadProperty("sonar.cs.ignoreHeaderComments")),
-            LanguageNames.VisualBasic => ReadBoolean(ReadProperty("sonar.vbnet.ignoreHeaderComments")),
+            LanguageNames.CSharp => ReadBoolean(ReadSettingsProperty("sonar.cs.ignoreHeaderComments")),
+            LanguageNames.VisualBasic => ReadBoolean(ReadSettingsProperty("sonar.vbnet.ignoreHeaderComments")),
             _ => throw new UnexpectedLanguageException($"Language '{language}' is not supported.")
         };
 
     public bool AnalyzeGeneratedCode(string language) =>
         language switch
         {
-            LanguageNames.CSharp => ReadBoolean(ReadProperty("sonar.cs.analyzeGeneratedCode")),
-            LanguageNames.VisualBasic => ReadBoolean(ReadProperty("sonar.vbnet.analyzeGeneratedCode")),
+            LanguageNames.CSharp => ReadBoolean(ReadSettingsProperty("sonar.cs.analyzeGeneratedCode")),
+            LanguageNames.VisualBasic => ReadBoolean(ReadSettingsProperty("sonar.vbnet.analyzeGeneratedCode")),
             _ => throw new UnexpectedLanguageException($"Language '{language}' is not supported.")
         };
 
@@ -69,8 +69,7 @@ public class SonarLintXmlReader
     private List<SonarLintXmlRule> parametrizedRules;
     public List<SonarLintXmlRule> ParametrizedRules => parametrizedRules ??= ReadRuleParameters();
 
-    public SonarLintXmlReader(SourceText sonarLintXml, string language)
-    {
+    public SonarLintXmlReader(SourceText sonarLintXml) =>
         this.sonarLintXml = sonarLintXml == null ? SonarLintXml.Empty : ParseContent(sonarLintXml);
 
     private static SonarLintXml ParseContent(SourceText sonarLintXml)
