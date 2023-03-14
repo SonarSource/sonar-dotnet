@@ -46,6 +46,14 @@ namespace SonarAnalyzer.Extensions
             }
         }
 
+        public static bool HasAttributeUsageInherited(this AttributeData attribute) =>
+            attribute.AttributeClass.GetAttributes()
+                .Where(x => x.AttributeClass.Is(KnownType.System_AttributeUsageAttribute))
+                .SelectMany(x => x.NamedArguments.Where(x => x.Key == nameof(AttributeUsageAttribute.Inherited)))
+                .Where(x => x.Value is { Kind: TypedConstantKind.Primitive, Type.SpecialType: SpecialType.System_Boolean })
+                .Select(x => (bool?)x.Value.Value)
+                .FirstOrDefault() ?? true; // Default value of Inherited is true
+
         private static bool TryConvertConstant<T>(TypedConstant constant, out T value)
         {
             value = default;

@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.IO;
+using System.Reflection;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.VisualBasic;
 using SonarAnalyzer.AnalysisContext;
@@ -32,8 +34,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
     /// </summary>
     internal class SnippetCompiler
     {
-        private readonly Compilation compilation;
-
+        public Compilation Compilation { get; }
         public SyntaxTree SyntaxTree { get; }
         public SemanticModel SemanticModel { get; }
 
@@ -43,25 +44,25 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public SnippetCompiler(string code, bool ignoreErrors, AnalyzerLanguage language, IEnumerable<MetadataReference> additionalReferences = null, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary)
         {
-            compilation = SolutionBuilder
+            Compilation = SolutionBuilder
                 .Create()
                 .AddProject(language, createExtraEmptyFile: false, outputKind)
                 .AddSnippet(code)
                 .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
                 .GetCompilation();
 
-            if (!ignoreErrors && HasCompilationErrors(compilation))
+            if (!ignoreErrors && HasCompilationErrors(Compilation))
             {
-                DumpCompilationErrors(compilation);
+                DumpCompilationErrors(Compilation);
                 throw new InvalidOperationException("Test setup error: test code snippet did not compile. See output window for details.");
             }
 
-            SyntaxTree = compilation.SyntaxTrees.First();
-            SemanticModel = compilation.GetSemanticModel(SyntaxTree);
+            SyntaxTree = Compilation.SyntaxTrees.First();
+            SemanticModel = Compilation.GetSemanticModel(SyntaxTree);
         }
 
         public bool IsCSharp() =>
-            compilation.Language == LanguageNames.CSharp;
+            Compilation.Language == LanguageNames.CSharp;
 
         public IEnumerable<TSyntaxNodeType> GetNodes<TSyntaxNodeType>() where TSyntaxNodeType : SyntaxNode =>
             SyntaxTree.GetRoot().DescendantNodes().OfType<TSyntaxNodeType>();
@@ -144,6 +145,13 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         {
             var nodeContext =  new SyntaxNodeAnalysisContext(node, SemanticModel, null, null, null, default);
             return new(AnalysisScaffolding.CreateSonarAnalysisContext(), nodeContext);
+        }
+
+        public Assembly EmitAssembly()
+        {
+            using var memoryStream = new MemoryStream();
+            Compilation.Emit(memoryStream).Success.Should().BeTrue("The provided snippet should emit assembly.");
+            return Assembly.Load(memoryStream.ToArray());
         }
 
         private static bool HasCompilationErrors(Compilation compilation) =>

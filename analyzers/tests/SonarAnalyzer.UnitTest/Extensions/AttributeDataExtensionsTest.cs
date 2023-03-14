@@ -21,6 +21,7 @@
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Moq;
 using Moq.Protected;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 
 namespace SonarAnalyzer.UnitTest.Extensions
@@ -141,6 +142,91 @@ namespace SonarAnalyzer.UnitTest.Extensions
             actualValue.Should().Be(value);
         }
 
+        [DataTestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
+        public void HasAttributeUsageInherited_InheritedSpecified(bool inherited)
+        {
+            var code = $$"""
+                using System;
+
+                [AttributeUsage(AttributeTargets.All, Inherited = {{inherited.ToString().ToLower()}})]
+                public class MyAttribute: Attribute { }
+
+                [My]
+                public class Program { }
+                """;
+            CompileAttribute(code).HasAttributeUsageInherited().Should().Be(inherited);
+        }
+
+        [TestMethod]
+        public void HasAttributeUsageInherited_InheritedUnSpecified()
+        {
+            const string code = """
+                using System;
+
+                [AttributeUsage(AttributeTargets.All)]
+                public class MyAttribute: Attribute { }
+
+                [My]
+                public class Program { }
+                """;
+            CompileAttribute(code).HasAttributeUsageInherited().Should().Be(true); // The default for Inherited = true
+        }
+
+        [TestMethod]
+        public void HasAttributeUsageInherited_NoUsageAttribute()
+        {
+            const string code = """
+                using System;
+
+                public class MyAttribute: Attribute { }
+
+                [My]
+                public class Program { }
+                """;
+            CompileAttribute(code).HasAttributeUsageInherited().Should().Be(true); // The default for Inherited = true
+        }
+
+        [DataTestMethod]
+        [DataRow(true, true)]
+        [DataRow(false, true)] // The "Inherited" flag is not inherited for the AttributeUsage attribute itself. See also the SymbolHelperTest.GetAttributesWithInherited... tests,
+                               // where the reflection behavior of MemberInfo.GetCustomAttributes is also tested.
+        public void HasAttributeUsageInherited_UsageInherited(bool inherited, bool expected)
+        {
+            var code = $$"""
+                using System;
+
+                [AttributeUsage(AttributeTargets.All, Inherited = {{inherited.ToString().ToLower()}})]
+                public class BaseAttribute: Attribute { }
+
+                public class MyAttribute: BaseAttribute { }
+
+                [My]
+                public class Program { }
+                """;
+            CompileAttribute(code).HasAttributeUsageInherited().Should().Be(expected);
+        }
+
+        [TestMethod]
+        public void HasAttributeUsageInherited_DuplicateAttributeUsage()
+        {
+            const string code = """
+                using System;
+
+                [AttributeUsage(AttributeTargets.All, Inherited = true)]
+                [AttributeUsage(AttributeTargets.All, Inherited = false)] // Compiler error
+                public class MyAttribute: Attribute { }
+
+                [My]
+                public class Program { }
+                """;
+            CompileAttribute(code, ignoreErrors: true).HasAttributeUsageInherited().Should().BeTrue();
+        }
+
+        private static AttributeData CompileAttribute(string code, bool ignoreErrors = false) =>
+            new SnippetCompiler(code, ignoreErrors, AnalyzerLanguage.CSharp).GetTypeSymbol("Program").GetAttributes().Single(x => x.HasName("MyAttribute"));
+
         private static AttributeData AttributeDataWithName(string attributeClassName)
         {
             var namedType = new Mock<INamedTypeSymbol>();
@@ -155,20 +241,21 @@ namespace SonarAnalyzer.UnitTest.Extensions
             namedArguments ??= new();
             constructorArguments ??= new();
             var separator = (constructorArguments.Any() && namedArguments.Any()) ? ", " : string.Empty;
-            var code = $@"
-using System;
+            var code = $$"""
+                using System;
 
-public class MyAttribute: Attribute
-{{
-    public MyAttribute({constructorArguments.Select(x => $"{TypeName(x.Value)} {x.Key}").JoinStr(", ")})
-    {{
-    }}
+                public class MyAttribute: Attribute
+                {
+                    public MyAttribute({{constructorArguments.Select(x => $"{TypeName(x.Value)} {x.Key}").JoinStr(", ")}})
+                    {
+                    }
 
-    {namedArguments.Select(x => $@"public {TypeName(x.Value)} {x.Key} {{ get; set; }}").JoinStr("\r\n")}
-}}
+                    {{namedArguments.Select(x => $@"public {TypeName(x.Value)} {x.Key} {{ get; set; }}").JoinStr("\r\n")}}
+                }
 
-[My({constructorArguments.Select(x => Quote(x.Value)).JoinStr(", ")}{separator}{namedArguments.Select(x => $"{x.Key}={Quote(x.Value)}").JoinStr(", ")})]
-public class Dummy {{ }}";
+                [My({{constructorArguments.Select(x => Quote(x.Value)).JoinStr(", ")}}{{separator}}{{namedArguments.Select(x => $"{x.Key}={Quote(x.Value)}").JoinStr(", ")}})]
+                public class Dummy { }
+                """;
             var snippet = new SnippetCompiler(code);
             var classDeclaration = snippet.SyntaxTree.GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>().Last();
             var symbol = (INamedTypeSymbol)snippet.SemanticModel.GetDeclaredSymbol(classDeclaration);

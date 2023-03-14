@@ -19,6 +19,7 @@
  */
 
 using System.Reflection;
+using static System.Net.WebRequestMethods;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -208,6 +209,40 @@ namespace SonarAnalyzer.Helpers
         internal static IEnumerable<AttributeData> GetAttributes(this ISymbol symbol, ImmutableArray<KnownType> attributeTypes) =>
             symbol?.GetAttributes().Where(a => a.AttributeClass.IsAny(attributeTypes))
             ?? Enumerable.Empty<AttributeData>();
+
+        /// <summary>
+        /// Returns attributes for the symbol by also respecting <see cref="AttributeUsageAttribute.Inherited"/>.
+        /// The returned <see cref="AttributeData"/> is consistent with the results from <see cref="MemberInfo.GetCustomAttributes(bool)"/>.
+        /// </summary>
+        public static IEnumerable<AttributeData> GetAttributesWithInherited(this ISymbol symbol)
+        {
+            foreach (var attribute in symbol.GetAttributes())
+            {
+                yield return attribute;
+            }
+
+            var baseSymbol = BaseSymbol(symbol);
+            while (baseSymbol is not null)
+            {
+                foreach (var attribute in baseSymbol.GetAttributes().Where(x => x.HasAttributeUsageInherited()))
+                {
+                    yield return attribute;
+                }
+
+                baseSymbol = BaseSymbol(baseSymbol);
+            }
+
+            static ISymbol BaseSymbol(ISymbol symbol) =>
+                symbol switch
+                {
+                    INamedTypeSymbol namedType => namedType.BaseType,
+                    IMethodSymbol { OriginalDefinition: { } originalDefinition } method when !method.Equals(originalDefinition) => BaseSymbol(originalDefinition),
+                    IMethodSymbol { OverriddenMethod: { } overridenMethod } => overridenMethod,
+                    // Support for other kinds of symbols needs to be implemented/tested as needed. A full list can be found here:
+                    // https://learn.microsoft.com/dotnet/api/system.attributetargets
+                    _ => null,
+                };
+        }
 
         internal static bool AnyAttributeDerivesFrom(this ISymbol symbol, KnownType attributeType) =>
             symbol?.GetAttributes().Any(a => a.AttributeClass.DerivesFrom(attributeType)) ?? false;
