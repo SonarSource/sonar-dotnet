@@ -30,12 +30,12 @@ public sealed class ClassShouldNotBeEmpty : ClassShouldNotBeEmptyBase<SyntaxKind
         && !typeDeclaration.Modifiers.Any(x => x.IsKind(SyntaxKind.PartialKeyword))
         && (node is ClassDeclarationSyntax || IsParameterlessRecord(node));
 
-    protected override BaseTypeDeclarationSyntax GetIfHasDeclaredBaseClass(SyntaxNode node) =>
+    protected override BaseTypeDeclarationSyntax GetIfHasDeclaredBaseClassOrInterface(SyntaxNode node) =>
         node is ClassDeclarationSyntax { BaseList: not null } declaration
             ? declaration
             : null;
 
-    protected override bool HasGenericBaseClassOrInterface(BaseTypeDeclarationSyntax declaration) =>
+    protected override bool HasInterfaceOrGenericBaseClass(BaseTypeDeclarationSyntax declaration) =>
         declaration.BaseList.Types.Any(x => x.Type is GenericNameSyntax);
 
     protected override bool HasAnyAttribute(SyntaxNode node) =>

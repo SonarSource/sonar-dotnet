@@ -22,7 +22,7 @@ namespace SonarAnalyzer.Rules;
 
 public abstract class ClassShouldNotBeEmptyBase<TSyntaxKind, TDeclarationSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
     where TSyntaxKind : struct
-    where TDeclarationSyntax: SyntaxNode
+    where TDeclarationSyntax : SyntaxNode
 {
     private const string DiagnosticId = "S2094";
 
@@ -31,12 +31,9 @@ public abstract class ClassShouldNotBeEmptyBase<TSyntaxKind, TDeclarationSyntax>
         KnownType.System_Attribute,
         KnownType.System_Exception);
 
-    private static readonly ImmutableArray<KnownType> InterfacesToIgnore = ImmutableArray.Create(
-        KnownType.Microsoft_AspNetCore_Mvc_IActionResult);
-
     protected abstract bool IsEmptyAndNotPartial(SyntaxNode node);
-    protected abstract TDeclarationSyntax GetIfHasDeclaredBaseClass(SyntaxNode node);
-    protected abstract bool HasGenericBaseClassOrInterface(TDeclarationSyntax declaration);
+    protected abstract TDeclarationSyntax GetIfHasDeclaredBaseClassOrInterface(SyntaxNode node);
+    protected abstract bool HasInterfaceOrGenericBaseClass(TDeclarationSyntax declaration);
     protected abstract bool HasAnyAttribute(SyntaxNode node);
     protected abstract string DeclarationTypeKeyword(SyntaxNode node);
     protected abstract bool HasConditionalCompilationDirectives(SyntaxNode node);
@@ -62,12 +59,12 @@ public abstract class ClassShouldNotBeEmptyBase<TSyntaxKind, TDeclarationSyntax>
             Language.SyntaxKind.ClassAndRecordClassDeclarations);
 
     private bool ShouldIgnoreBecauseOfBaseClassOrInterface(SyntaxNode node, SemanticModel model) =>
-        GetIfHasDeclaredBaseClass(node) is { } declaration
-        && (HasGenericBaseClassOrInterface(declaration) || ShouldIgnoreType(declaration, model));
+        GetIfHasDeclaredBaseClassOrInterface(node) is { } declaration
+        && (HasInterfaceOrGenericBaseClass(declaration) || ShouldIgnoreType(declaration, model));
 
     private static bool ShouldIgnoreType(TDeclarationSyntax node, SemanticModel model) =>
         model.GetDeclaredSymbol(node) is INamedTypeSymbol classSymbol
             && (classSymbol.BaseType is { IsAbstract: true }
             || classSymbol.DerivesFromAny(BaseClassesToIgnore)
-            || classSymbol.ImplementsAny(InterfacesToIgnore));
+            || classSymbol.Interfaces.Any());
 }
