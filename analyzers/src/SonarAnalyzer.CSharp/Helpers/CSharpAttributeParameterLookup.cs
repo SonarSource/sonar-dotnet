@@ -23,7 +23,7 @@ namespace SonarAnalyzer.Helpers;
 internal class CSharpAttributeParameterLookup : MethodParameterLookupBase<AttributeArgumentSyntax>
 {
     public CSharpAttributeParameterLookup(AttributeSyntax attribute, IMethodSymbol methodSymbol)
-        : base(attribute.ArgumentList?.Arguments, methodSymbol) { }
+        : base(attribute.ArgumentList?.Arguments ?? default, methodSymbol) { }
 
     protected override SyntaxNode Expression(AttributeArgumentSyntax argument) =>
         argument.Expression;
