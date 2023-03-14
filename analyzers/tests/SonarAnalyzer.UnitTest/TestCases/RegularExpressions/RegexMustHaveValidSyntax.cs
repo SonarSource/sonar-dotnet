@@ -26,6 +26,27 @@ class Compliant
         var regex = new NoRegex(unknown + "[A", RegexOptions.None); // Compliant
     }
 
+    bool Multiline(string input)
+    {
+        return Regex.IsMatch(input,
+            @"|a
+              |b
+              |d");  // Compliant
+    }
+
+    bool ConcatanationMultiline(string input)
+    {
+        return Regex.IsMatch(input, "a"
+            + "|b"
+            + "|c"
+            + "|d"); // Compliant
+    }
+
+    bool ConcatanationSingleIne(string input)
+    {
+        return Regex.IsMatch(input, "a" + "|b" + "|c" + "|[A"); // Noncompliant
+    }
+
     [RegularExpression("[0-9]+")] // Compliant
     public string Attribute { get; set; }
 }
