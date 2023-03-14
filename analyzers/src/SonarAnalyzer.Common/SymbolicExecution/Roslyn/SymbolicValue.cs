@@ -81,14 +81,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             }
 
             var constraintCount = baseValue.Constraints.Count;
-            if (constraintCount == 0)
+            if (constraintCount == 0 || (constraintCount == 1 && baseValue.Constraints.ContainsKey(constraint.GetType())))
             {
-                return GetOrAddSingleConstraint(baseValue, constraint);
-            }
-
-            if (constraintCount == 1 && baseValue.Constraints.ContainsKey(constraint.GetType()))
-            {
-                return AddOrReplaceConstraint(Constraintless, constraint);
+                return GetOrAddSingleConstraint(constraint);
             }
 
             return baseValue with { Constraints = baseValue.Constraints.SetItem(constraint.GetType(), constraint) };
@@ -110,14 +105,21 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
             if (constraintCount == 2)
             {
-                var otherConstraintType = baseValue.Constraints.Keys.FirstOrDefault(x => x != type);
-                return GetOrAddSingleConstraint(Constraintless, baseValue.Constraints[otherConstraintType]);
+                SymbolicConstraint otherConstraint = null;
+                foreach (var kvp in baseValue.Constraints)
+                {
+                    if (kvp.Key != type)
+                    {
+                        otherConstraint = kvp.Value;
+                    }
+                }
+                return GetOrAddSingleConstraint(otherConstraint);
             }
 
             return baseValue with { Constraints = baseValue.Constraints.Remove(type) };
         }
 
-        private static SymbolicValue GetOrAddSingleConstraint(SymbolicValue baseValue, SymbolicConstraint constraint)
+        private static SymbolicValue GetOrAddSingleConstraint(SymbolicConstraint constraint)
         {
             if (singleConstraintCache.TryGetValue(constraint.Kind, out var result))
             {
@@ -125,7 +127,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             }
             else
             {
-                result = baseValue with { Constraints = baseValue.Constraints.SetItem(constraint.GetType(), constraint) };
+                result = Constraintless with { Constraints = Constraintless.Constraints.SetItem(constraint.GetType(), constraint) };
                 return singleConstraintCache.GetOrAdd(constraint.Kind, result);
             }
         }
