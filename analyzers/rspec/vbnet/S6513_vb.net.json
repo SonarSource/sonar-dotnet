@@ -9,9 +9,9 @@
   "tags": [
     "bad-practice"
   ],
-  "defaultSeverity": "Major",
+  "defaultSeverity": "Minor",
   "ruleSpecification": "RSPEC-6513",
   "sqKey": "S6513",
-  "scope": "All",
+  "scope": "Main",
   "quickfix": "unknown"
 }

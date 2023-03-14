@@ -1,17 +1,13 @@
 <p>The <a
 href="https://learn.microsoft.com/dotnet/api/system.diagnostics.codeanalysis.excludefromcodecoverageattribute">ExcludeFromCodeCoverageAttribute</a> is
 used to exclude portions of code from <a href="https://learn.microsoft.com/dotnet/core/testing/unit-testing-code-coverage">code coverage
-reporting</a>. Code not covered by unit tests is a bad practice and needs a justification.</p>
+reporting</a>. It is a bad practice to retain code that is not covered by unit tests. In .Net 5, the <code>Justification</code> property was added to
+the <code>ExcludeFromCodeCoverageAttribute</code> as an opportunity to document the rationale for the exclusion. This rule raises an issue when no
+such justification is given.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 public struct Coordinates
 {
-    public Coordinates(int x, int y)
-    {
-        X = x;
-        Y = y;
-    }
-
     public int X { get; }
     public int Y { get; }
 
@@ -32,12 +28,6 @@ public struct Coordinates
 <pre>
 public struct Coordinates
 {
-    public Coordinates(int x, int y)
-    {
-        X = x;
-        Y = y;
-    }
-
     public int X { get; }
     public int Y { get; }
 
