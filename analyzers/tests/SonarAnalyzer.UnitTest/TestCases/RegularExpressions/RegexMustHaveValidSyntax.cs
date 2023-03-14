@@ -21,6 +21,11 @@ class Compliant
         var noRegex = NoRegex.IsMatch("some input", "[A", RegexOptions.None); // Compliant
     }
 
+    void Unknown(string unknown)
+    {
+        var regex = new NoRegex(unknown + "[A", RegexOptions.None); // Compliant
+    }
+
     [RegularExpression("[0-9]+")] // Compliant
     public string Attribute { get; set; }
 }
@@ -50,10 +55,23 @@ class Noncompliant
 
     bool Multiline(string input)
     {
+        return Regex.IsMatch(input,
+            @"|b
+              |c
+              |[A");  // Noncompliant @-2
+    }
+
+    bool ConcatanationMultiline(string input)
+    {
         return Regex.IsMatch(input, "a" // Noncompliant
             + "|b"
             + "|c"
             + "|[A");
+    }
+
+    bool ConcatanationSingleIne(string input)
+    {
+        return Regex.IsMatch(input, "a" + "|b" + "|c" + "|[A"); // Noncompliant
     }
 
     [RegularExpression("[A")] // Noncompliant
