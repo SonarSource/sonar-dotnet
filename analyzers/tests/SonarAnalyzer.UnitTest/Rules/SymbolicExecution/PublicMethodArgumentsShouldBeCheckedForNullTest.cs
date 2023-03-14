@@ -41,20 +41,25 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void PublicMethodArgumentsShouldBeCheckedForNull_Sonar_CS(ProjectType projectType) =>
-            sonar.AddReferences(TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21))
+            sonar.AddReferences(TestHelper.ProjectTypeReference(projectType))
                 .AddPaths("PublicMethodArgumentsShouldBeCheckedForNull.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .Verify();
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void PublicMethodArgumentsShouldBeCheckedForNull_Roslyn_CS(ProjectType projectType) =>
-            roslynCS.AddReferences(TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21))
+            roslynCS.AddReferences(TestHelper.ProjectTypeReference(projectType))
                 .AddPaths("PublicMethodArgumentsShouldBeCheckedForNull.cs")
                 .Verify();
 
 #if NET
+
+        [TestMethod]
+        public void PublicMethodArgumentsShouldBeCheckedForNull_Sonar_CSharp8() =>
+            sonar.AddPaths("PublicMethodArgumentsShouldBeCheckedForNull.CSharp8.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
 
         [TestMethod]
         public void PublicMethodArgumentsShouldBeCheckedForNull_Roslyn_CSharp8() =>
