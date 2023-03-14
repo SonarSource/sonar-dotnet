@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-class EmptyNullableValueAccess
+class Basics
 {
     void NullAssignment()
     {
@@ -49,7 +49,7 @@ class EmptyNullableValueAccess
         Console.WriteLine(i.Value);
     }
 
-    void Assignment(int? i1)
+    void Assignment1(int? i1)
     {
         int? i2, i3;
         if (i1 == (i2 = null)) { _ = i1.Value; }             // Noncompliant
@@ -62,6 +62,19 @@ class EmptyNullableValueAccess
         if (b1) { }                                          // Error[CS0266]
                                                              // Noncompliant@-1 FP
         if (!b1) { }                                         // Error[CS0266]
+    }
+
+    void Assignment2(object o)
+    {
+        if (o != null)
+        {
+        }
+
+        var b = o as bool?;
+        if (b != null)
+        {
+            _ = b.Value;                                     // Noncompliant, FP
+        }
     }
 
     void SwitchExpressions(bool zero)
