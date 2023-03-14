@@ -36,7 +36,8 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
         var state = context.State;
         if (!invocation.TargetMethod.IsStatic             // Also applies to C# extensions
             && !invocation.TargetMethod.IsExtensionMethod // VB extensions in modules are not marked as static
-            && invocation.Instance.TrackedSymbol() is { } symbol)
+            && invocation.Instance.TrackedSymbol() is { } symbol
+            && !IsNullableGetValueOrDefault(invocation))
         {
             state = state.SetSymbolConstraint(symbol, ObjectConstraint.NotNull);
         }
@@ -216,4 +217,7 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
             },
             _ => context.State.ToArray()
         };
+
+    private static bool IsNullableGetValueOrDefault(IInvocationOperationWrapper invocation) =>
+        invocation.TargetMethod.Is(KnownType.System_Nullable_T, nameof(Nullable<int>.GetValueOrDefault));
 }
