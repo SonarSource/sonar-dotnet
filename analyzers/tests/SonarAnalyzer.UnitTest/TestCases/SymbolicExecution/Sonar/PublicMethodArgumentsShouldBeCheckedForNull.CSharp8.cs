@@ -1,5 +1,4 @@
-﻿
-public class NullCoalescenceAssignment
+﻿public class NullCoalescenceAssignment
 {
     public void NullCoalescenceAssignment_NotNull(string s1)
     {
