@@ -40,16 +40,14 @@ internal static class WildcardPatternMatcher
         private static readonly ConcurrentDictionary<string, WildcardPattern> Cache = new();
         private readonly Regex pattern;
 
-        private WildcardPattern(string pattern, string directorySeparator) =>
-            this.pattern = new Regex(ToRegexp(pattern, directorySeparator), RegexOptions.Compiled, RegexConstants.DefaultTimeout);
+        private WildcardPattern(string pattern) =>
+            this.pattern = new Regex(ToRegex(pattern), RegexOptions.None, RegexConstants.DefaultTimeout);
 
         public bool Match(string value)
         {
-            value = value.TrimStart('/');
-            value = value.TrimEnd('/');
             try
             {
-                return pattern.IsMatch(value);
+                return pattern.IsMatch(value.Trim('/'));
             }
             catch (RegexMatchTimeoutException)
             {
@@ -58,14 +56,11 @@ internal static class WildcardPatternMatcher
         }
 
         public static WildcardPattern Create(string pattern) =>
-            Create(pattern, Path.DirectorySeparatorChar.ToString());
+            Cache.GetOrAdd(pattern + Path.DirectorySeparatorChar, _ => new WildcardPattern(pattern));
 
-        private static WildcardPattern Create(string pattern, string directorySeparator) =>
-            Cache.GetOrAdd(pattern + directorySeparator, _ => new WildcardPattern(pattern, directorySeparator));
-
-        private static string ToRegexp(string wildcardPattern, string directorySeparator)
+        private static string ToRegex(string wildcardPattern)
         {
-            var escapedDirectorySeparator = '\\' + directorySeparator;
+            var escapedDirectorySeparator = Regex.Escape(Path.DirectorySeparatorChar.ToString());
             var sb = new StringBuilder(wildcardPattern.Length);
 
             sb.Append('^');
@@ -75,10 +70,10 @@ internal static class WildcardPatternMatcher
             {
                 var ch = wildcardPattern[i];
 
-                if (SpecialChars.IndexOf(ch) != -1)
+                if (SpecialChars.Contains(ch))
                 {
-                    // Escape regexp-specific characters
-                    sb.Append('\\').Append(ch);
+                    // Escape regex-specific characters
+                    sb.Append(Regex.Escape(ch.ToString()));
                 }
                 else if (ch == '*')
                 {
@@ -88,7 +83,7 @@ internal static class WildcardPatternMatcher
                         // Zero or more directories
                         if (i + 2 < wildcardPattern.Length && IsSlash(wildcardPattern[i + 2]))
                         {
-                            sb.Append("(?:.*").Append(escapedDirectorySeparator).Append("|)");
+                            sb.Append($"(.*{escapedDirectorySeparator}|)");
                             i += 2;
                         }
                         else
@@ -101,13 +96,13 @@ internal static class WildcardPatternMatcher
                     {
                         // Single asterisk
                         // Zero or more characters excluding directory separator
-                        sb.Append("[^").Append(escapedDirectorySeparator).Append("]*?");
+                        sb.Append($"[^{escapedDirectorySeparator}]*?");
                     }
                 }
                 else if (ch == '?')
                 {
                     // Any single character excluding directory separator
-                    sb.Append("[^").Append(escapedDirectorySeparator).Append("]");
+                    sb.Append($"[^{escapedDirectorySeparator}]");
                 }
                 else if (IsSlash(ch))
                 {
@@ -119,13 +114,9 @@ internal static class WildcardPatternMatcher
                     // Single character
                     sb.Append(ch);
                 }
-
                 i++;
             }
-
-            sb.Append('$');
-
-            return sb.ToString();
+            return sb.Append('$').ToString();
         }
 
         private static bool IsSlash(char ch) =>
