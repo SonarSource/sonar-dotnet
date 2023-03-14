@@ -20,11 +20,14 @@
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 
-public class PublicMethodArgumentsShouldBeCheckedForNull : PublicMethodArgumentsShouldBeCheckedForNullBase
+public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
 {
+    private const string DiagnosticId = "S3900";
+    private const string MessageFormat = "Refactor this method to add validation of parameter '{0}' before using it.";
+
     internal static readonly DiagnosticDescriptor S3900 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
     protected override DiagnosticDescriptor Rule => S3900;
 
-    public override bool ShouldExecute() => true;
+    public override bool ShouldExecute() => false;
 }
