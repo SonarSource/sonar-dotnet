@@ -28,7 +28,7 @@ public abstract class SonarReportingContextBase<TContext> : SonarAnalysisContext
 
     protected void ReportIssueCore(Diagnostic diagnostic)
     {
-        if (HasMatchingScope(diagnostic.Descriptor))
+        if (HasMatchingScope(diagnostic.Descriptor) && SonarAnalysisContext.LegacyIsRegisteredActionEnabled(diagnostic.Descriptor, diagnostic.Location?.SourceTree))
         {
             var reportingContext = CreateReportingContext(diagnostic);
             if (reportingContext is { Compilation: { } compilation, Diagnostic.Location: { Kind: LocationKind.SourceFile, SourceTree: { } tree } } && !compilation.ContainsSyntaxTree(tree))
@@ -58,6 +58,8 @@ public abstract class SonarReportingContextBase<TContext> : SonarAnalysisContext
 /// </summary>
 public abstract class SonarTreeReportingContextBase<TContext> : SonarReportingContextBase<TContext>
 {
+    public abstract SyntaxTree Tree { get; }
+
     protected SonarTreeReportingContextBase(SonarAnalysisContext analysisContext, TContext context) : base(analysisContext, context) { }
 
     public void ReportIssue(Diagnostic diagnostic) =>

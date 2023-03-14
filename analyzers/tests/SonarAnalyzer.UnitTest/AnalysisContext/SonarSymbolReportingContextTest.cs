@@ -37,7 +37,6 @@ public class SonarSymbolReportingContextTest
         var context = new SymbolAnalysisContext(symbol, model.Compilation, options, _ => { }, _ => true, cancel);
         var sut = new SonarSymbolReportingContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context);
 
-        sut.Tree.Should().BeSameAs(tree);
         sut.Compilation.Should().BeSameAs(model.Compilation);
         sut.Options.Should().BeSameAs(options);
         sut.Cancel.Should().Be(cancel);

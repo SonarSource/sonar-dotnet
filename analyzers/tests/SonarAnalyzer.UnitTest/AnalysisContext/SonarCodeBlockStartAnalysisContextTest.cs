@@ -38,7 +38,6 @@ public class SonarCodeBlockStartAnalysisContextTest
         var context = new Mock<CodeBlockStartAnalysisContext<SyntaxKind>>(codeBlock, owningSymbol, model, options, cancel).Object;
         var sut = new SonarCodeBlockStartAnalysisContext<SyntaxKind>(AnalysisScaffolding.CreateSonarAnalysisContext(), context);
 
-        sut.Tree.Should().BeSameAs(codeBlock.SyntaxTree);
         sut.Compilation.Should().BeSameAs(model.Compilation);
         sut.Options.Should().BeSameAs(options);
         sut.Cancel.Should().Be(cancel);
