@@ -102,7 +102,7 @@ try {
             $skipTests = ""
         }
         Invoke-InLocation ".." {
-            Exec { & mvn clean install -P local-analyzer -D analyzer.configuration=$buildConfiguration $skipTests }
+            Exec { & mvn clean install -D analyzer.configuration=$buildConfiguration $skipTests }
         }
     }
 
