@@ -75,7 +75,7 @@ public class SonarLintXmlReaderTest
     [TestMethod]
     public void SonarLintXmlReader_PropertiesCSharpTrueVBNetFalse_ExpectedValues()
     {
-        var sut = CreateSonarLintXmlReader("ResourceTests\\PropertiesCSharpTrueVbnetFalse\\SonarLint.xml");
+        var sut = CreateSonarLintXmlReader("ResourceTests\\SonarLintXml\\PropertiesCSharpTrueVbnetFalse\\SonarLint.xml");
         sut.IgnoreHeaderComments(LanguageNames.CSharp).Should().BeTrue();
         sut.IgnoreHeaderComments(LanguageNames.VisualBasic).Should().BeFalse();
         sut.AnalyzeGeneratedCode(LanguageNames.CSharp).Should().BeTrue();
