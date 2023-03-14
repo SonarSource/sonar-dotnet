@@ -130,20 +130,4 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
 
     private ImmutableHashSet<string> CreateUnchangedFilesHashSet() =>
         ImmutableHashSet.Create(StringComparer.OrdinalIgnoreCase, ProjectConfiguration().AnalysisConfig?.UnchangedFiles() ?? Array.Empty<string>());
-
-    private bool IsFileIncluded(SonarLintXmlReader sonarLintXml, string filePath) =>
-        IsTestProject()
-        ? IsFileIncluded(sonarLintXml.TestInclusions, sonarLintXml.TestExclusions, sonarLintXml.GlobalTestExclusions, filePath)
-        : IsFileIncluded(sonarLintXml.Inclusions, sonarLintXml.Exclusions, sonarLintXml.GlobalExclusions, filePath);
-
-    private static bool IsFileIncluded(string[] inclusions, string[] exclusions, string[] globalExclusions, string filePath) =>
-        IsIncluded(inclusions, filePath)
-        && !IsExcluded(exclusions, filePath)
-        && !IsExcluded(globalExclusions, filePath);
-
-    private static bool IsIncluded(string[] inclusions, string filePath) =>
-        inclusions is { Length: 0 } || inclusions.Any(x => WildcardPatternMatcher.IsMatch(x, filePath, true));
-
-    private static bool IsExcluded(string[] exclusions, string filePath) =>
-        exclusions.Any(x => WildcardPatternMatcher.IsMatch(x, filePath, false));
 }

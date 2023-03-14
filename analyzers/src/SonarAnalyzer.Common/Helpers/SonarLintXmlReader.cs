@@ -76,6 +76,22 @@ public class SonarLintXmlReader
     public SonarLintXmlReader(SourceText sonarLintXml) =>
         this.sonarLintXml = sonarLintXml == null ? SonarLintXml.Empty : ParseContent(sonarLintXml);
 
+    public bool IsFileIncluded(string filePath, bool isTestProject) =>
+        isTestProject
+        ? IsFileIncluded(TestInclusions, TestExclusions, GlobalTestExclusions, filePath)
+        : IsFileIncluded(Inclusions, Exclusions, GlobalExclusions, filePath);
+
+    private static bool IsFileIncluded(string[] inclusions, string[] exclusions, string[] globalExclusions, string filePath) =>
+    IsIncluded(inclusions, filePath)
+    && !IsExcluded(exclusions, filePath)
+    && !IsExcluded(globalExclusions, filePath);
+
+    private static bool IsIncluded(string[] inclusions, string filePath) =>
+        inclusions is { Length: 0 } || inclusions.Any(x => WildcardPatternMatcher.IsMatch(x, filePath));
+
+    private static bool IsExcluded(string[] exclusions, string filePath) =>
+        exclusions.Any(x => WildcardPatternMatcher.IsMatch(x, filePath));
+
     private static SonarLintXml ParseContent(SourceText sonarLintXml)
     {
         try
