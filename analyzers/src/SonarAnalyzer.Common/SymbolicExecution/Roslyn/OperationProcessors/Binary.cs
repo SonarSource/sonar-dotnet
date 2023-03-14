@@ -43,11 +43,13 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
     private static ProgramState LearnBranchingConstraint<T>(ProgramState state, IBinaryOperationWrapper binary, bool falseBranch)
         where T : SymbolicConstraint
     {
+        var useOpposite = falseBranch ^ binary.OperatorKind.IsNotEquals();
         // We can fall through ?? because "constraint" and "testedSymbol" are exclusive. Symbols with the constraint will be recognized as "constraint" side.
         if ((OperandConstraint(binary.LeftOperand) ?? OperandConstraint(binary.RightOperand)) is { } constraint
-            && (OperandSymbolWithoutConstraint(binary.LeftOperand) ?? OperandSymbolWithoutConstraint(binary.RightOperand)) is { } testedSymbol)
+            && (OperandSymbolWithoutConstraint(binary.LeftOperand) ?? OperandSymbolWithoutConstraint(binary.RightOperand)) is { } testedSymbol
+            && (!testedSymbol.GetSymbolType().IsNullableBoolean() || !useOpposite))
         {
-            constraint = constraint.ApplyOpposite(falseBranch ^ binary.OperatorKind.IsNotEquals());
+            constraint = constraint.ApplyOpposite(useOpposite);
             return constraint is null ? null : state.SetSymbolConstraint(testedSymbol, constraint);
         }
         else

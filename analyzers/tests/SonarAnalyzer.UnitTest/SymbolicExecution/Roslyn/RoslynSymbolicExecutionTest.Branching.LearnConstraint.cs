@@ -228,11 +228,17 @@ if (value = boolParameter)
         }
 
         [DataTestMethod]
-        [DataRow("arg == isObject")]
-        [DataRow("isObject == arg")]
-        public void Branching_LearnsObjectConstraint_Binary_UndefinedInOtherBranch_CS(string expression)
+        [DataRow("arg == isObject", "object")]
+        [DataRow("isObject == arg", "object")]
+        [DataRow("arg == true", "bool?")]
+        [DataRow("arg == false", "bool?")]
+        [DataRow("true == arg", "bool?")]
+        [DataRow("false == arg", "bool?")]
+        [DataRow("arg == 42", "int?")]
+        [DataRow("42 == arg", "int?")]
+        public void Branching_LearnsObjectConstraint_Binary_UndefinedInOtherBranch_CS(string expression, string argType)
         {
-            var validator = CreateIfElseEndValidatorCS(expression, OperationKind.Binary);
+            var validator = CreateIfElseEndValidatorCS(expression, OperationKind.Binary, argType);
             validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.ValidateTag("Else", x => x.Should().BeNull("We can't tell if it is Null or NotNull in this branch"));
             validator.TagValues("End").Should().HaveCount(2)
@@ -241,11 +247,17 @@ if (value = boolParameter)
         }
 
         [DataTestMethod]
-        [DataRow("arg != isObject")]
-        [DataRow("isObject != arg")]
-        public void Branching_LearnsObjectConstraint_Binary_UndefinedInOtherBranch_Negated_CS(string expression)
+        [DataRow("arg != isObject", "object")]
+        [DataRow("isObject != arg", "object")]
+        [DataRow("arg != true", "bool?")]
+        [DataRow("arg != false", "bool?")]
+        [DataRow("true != arg", "bool?")]
+        [DataRow("false != arg", "bool?")]
+        [DataRow("arg != 42", "int?")]
+        [DataRow("42 != arg", "int?")]
+        public void Branching_LearnsObjectConstraint_Binary_UndefinedInOtherBranch_Negated_CS(string expression, string argType)
         {
-            var validator = CreateIfElseEndValidatorCS(expression, OperationKind.Binary);
+            var validator = CreateIfElseEndValidatorCS(expression, OperationKind.Binary, argType);
             validator.ValidateTag("If", x => x.Should().BeNull("We can't tell if it is Null or NotNull in this branch"));
             validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.TagValues("End").Should().HaveCount(2)
