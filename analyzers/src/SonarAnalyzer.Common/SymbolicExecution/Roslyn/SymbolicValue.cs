@@ -83,7 +83,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             var constraintCount = baseValue.Constraints.Count;
             if (constraintCount == 0 || (constraintCount == 1 && baseValue.Constraints.ContainsKey(constraint.GetType())))
             {
-                return GetOrAddSingleConstraint(constraint);
+                return SingleConstraint(constraint);
             }
 
             return baseValue with { Constraints = baseValue.Constraints.SetItem(constraint.GetType(), constraint) };
@@ -113,13 +113,13 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                         otherConstraint = kvp.Value;
                     }
                 }
-                return GetOrAddSingleConstraint(otherConstraint);
+                return SingleConstraint(otherConstraint);
             }
 
             return baseValue with { Constraints = baseValue.Constraints.Remove(type) };
         }
 
-        private static SymbolicValue GetOrAddSingleConstraint(SymbolicConstraint constraint)
+        private static SymbolicValue SingleConstraint(SymbolicConstraint constraint)
         {
             if (singleConstraintCache.TryGetValue(constraint.Kind, out var result))
             {
