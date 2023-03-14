@@ -595,6 +595,17 @@ Tag(""This"", fromThis);";
             validator.ValidateTag("This", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
         }
 
+        [TestMethod]
+        public void SizeOf_SetNotNullconstraint()
+        {
+            var code = """
+                var size = sizeof(int);
+                Tag("Size", size);
+                """;
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("Size", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+        }
+
         [DataTestMethod]
         [DataRow("[ValidatedNotNull]")]
         [DataRow("[ValidatedNotNullAttribute]")]
