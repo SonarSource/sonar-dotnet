@@ -2,6 +2,214 @@
 "issues":  [
 {
 "id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberXMLScraperModule._AssemblyName)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLMediaSettingsHolder.vb",
+"region":  {
+"startLine":  51,
+"startColumn":  36,
+"endLine":  51,
+"endColumn":  164
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.PostScraperOrder = order + 1)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLMediaSettingsHolder.vb",
+"region":  {
+"startLine":  53,
+"startColumn":  17,
+"endLine":  53,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberXMLScraperModule._AssemblyName)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLMediaSettingsHolder.vb",
+"region":  {
+"startLine":  54,
+"startColumn":  17,
+"endLine":  54,
+"endColumn":  145
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberXMLScraperModule._AssemblyName)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLMediaSettingsHolder.vb",
+"region":  {
+"startLine":  63,
+"startColumn":  36,
+"endLine":  63,
+"endColumn":  164
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberXMLScraperModule._AssemblyName)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLMediaSettingsHolder.vb",
+"region":  {
+"startLine":  72,
+"startColumn":  36,
+"endLine":  72,
+"endColumn":  164
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.PostScraperOrder = order - 1)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLMediaSettingsHolder.vb",
+"region":  {
+"startLine":  74,
+"startColumn":  17,
+"endLine":  74,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberXMLScraperModule._AssemblyName)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLMediaSettingsHolder.vb",
+"region":  {
+"startLine":  75,
+"startColumn":  17,
+"endLine":  75,
+"endColumn":  145
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberXMLScraperModule._AssemblyName)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLSettingsHolder.vb",
+"region":  {
+"startLine":  108,
+"startColumn":  32,
+"endLine":  108,
+"endColumn":  160
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.ScraperOrder = order + 1)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLSettingsHolder.vb",
+"region":  {
+"startLine":  110,
+"startColumn":  13,
+"endLine":  110,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberXMLScraperModule._AssemblyName)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLSettingsHolder.vb",
+"region":  {
+"startLine":  111,
+"startColumn":  13,
+"endLine":  111,
+"endColumn":  141
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberXMLScraperModule._AssemblyName)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLSettingsHolder.vb",
+"region":  {
+"startLine":  117,
+"startColumn":  32,
+"endLine":  117,
+"endColumn":  160
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberXMLScraperModule._AssemblyName)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLSettingsHolder.vb",
+"region":  {
+"startLine":  123,
+"startColumn":  32,
+"endLine":  123,
+"endColumn":  160
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.ScraperOrder = order - 1)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLSettingsHolder.vb",
+"region":  {
+"startLine":  125,
+"startColumn":  13,
+"endLine":  125,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberXMLScraperModule._AssemblyName)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLSettingsHolder.vb",
+"region":  {
+"startLine":  126,
+"startColumn":  13,
+"endLine":  126,
+"endColumn":  141
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.OrderBy(Function(y) y.ScraperOrder).FirstOrDefault(Function(e) e.ProcessorModule.IsScraper AndAlso e.ProcessorModule.ScraperEnabled)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  234,
+"startColumn":  21,
+"endLine":  234,
+"endColumn":  201
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.OrderBy(Function(y) y.ScraperOrder).FirstOrDefault(Function(e) e.ProcessorModule.IsScraper AndAlso e.ProcessorModule.ScraperEnabled)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  291,
+"startColumn":  21,
+"endLine":  291,
+"endColumn":  201
+}
+}
+},
+{
+"id":  "S2259",
 "message":  "'obj' is Nothing on at least one execution path.",
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\PersonInfo.vb",

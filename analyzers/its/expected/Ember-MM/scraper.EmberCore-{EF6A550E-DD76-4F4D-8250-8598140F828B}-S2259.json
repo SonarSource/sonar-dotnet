@@ -2,6 +2,383 @@
 "issues":  [
 {
 "id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmInfoSettingsHolder.vb",
+"region":  {
+"startLine":  37,
+"startColumn":  32,
+"endLine":  37,
+"endColumn":  163
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.ScraperOrder = order + 1)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmInfoSettingsHolder.vb",
+"region":  {
+"startLine":  39,
+"startColumn":  13,
+"endLine":  39,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmInfoSettingsHolder.vb",
+"region":  {
+"startLine":  40,
+"startColumn":  13,
+"endLine":  40,
+"endColumn":  144
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmInfoSettingsHolder.vb",
+"region":  {
+"startLine":  47,
+"startColumn":  32,
+"endLine":  47,
+"endColumn":  163
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.ScraperOrder = order - 1)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmInfoSettingsHolder.vb",
+"region":  {
+"startLine":  49,
+"startColumn":  13,
+"endLine":  49,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmInfoSettingsHolder.vb",
+"region":  {
+"startLine":  50,
+"startColumn":  13,
+"endLine":  50,
+"endColumn":  144
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmInfoSettingsHolder.vb",
+"region":  {
+"startLine":  188,
+"startColumn":  32,
+"endLine":  188,
+"endColumn":  163
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmMediaSettingsHolder.vb",
+"region":  {
+"startLine":  37,
+"startColumn":  32,
+"endLine":  37,
+"endColumn":  163
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.PostScraperOrder = order + 1)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmMediaSettingsHolder.vb",
+"region":  {
+"startLine":  39,
+"startColumn":  13,
+"endLine":  39,
+"endColumn":  119
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmMediaSettingsHolder.vb",
+"region":  {
+"startLine":  40,
+"startColumn":  13,
+"endLine":  40,
+"endColumn":  144
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmMediaSettingsHolder.vb",
+"region":  {
+"startLine":  47,
+"startColumn":  32,
+"endLine":  47,
+"endColumn":  163
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.PostScraperOrder = order - 1)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmMediaSettingsHolder.vb",
+"region":  {
+"startLine":  49,
+"startColumn":  13,
+"endLine":  49,
+"endColumn":  119
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmMediaSettingsHolder.vb",
+"region":  {
+"startLine":  50,
+"startColumn":  13,
+"endLine":  50,
+"endColumn":  144
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmMediaSettingsHolder.vb",
+"region":  {
+"startLine":  120,
+"startColumn":  32,
+"endLine":  120,
+"endColumn":  163
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmTVInfoSettingsHolder.vb",
+"region":  {
+"startLine":  37,
+"startColumn":  32,
+"endLine":  37,
+"endColumn":  163
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.ScraperOrder = order + 1)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmTVInfoSettingsHolder.vb",
+"region":  {
+"startLine":  39,
+"startColumn":  13,
+"endLine":  39,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmTVInfoSettingsHolder.vb",
+"region":  {
+"startLine":  40,
+"startColumn":  13,
+"endLine":  40,
+"endColumn":  144
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmTVInfoSettingsHolder.vb",
+"region":  {
+"startLine":  47,
+"startColumn":  32,
+"endLine":  47,
+"endColumn":  163
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.ScraperOrder = order - 1)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmTVInfoSettingsHolder.vb",
+"region":  {
+"startLine":  49,
+"startColumn":  13,
+"endLine":  49,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmTVInfoSettingsHolder.vb",
+"region":  {
+"startLine":  50,
+"startColumn":  13,
+"endLine":  50,
+"endColumn":  144
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmTVInfoSettingsHolder.vb",
+"region":  {
+"startLine":  67,
+"startColumn":  32,
+"endLine":  67,
+"endColumn":  163
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmTVMediaSettingsHolder.vb",
+"region":  {
+"startLine":  37,
+"startColumn":  32,
+"endLine":  37,
+"endColumn":  163
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.ScraperOrder = order + 1)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmTVMediaSettingsHolder.vb",
+"region":  {
+"startLine":  39,
+"startColumn":  13,
+"endLine":  39,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmTVMediaSettingsHolder.vb",
+"region":  {
+"startLine":  40,
+"startColumn":  13,
+"endLine":  40,
+"endColumn":  144
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmTVMediaSettingsHolder.vb",
+"region":  {
+"startLine":  47,
+"startColumn":  32,
+"endLine":  47,
+"endColumn":  163
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.ScraperOrder = order - 1)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmTVMediaSettingsHolder.vb",
+"region":  {
+"startLine":  49,
+"startColumn":  13,
+"endLine":  49,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmTVMediaSettingsHolder.vb",
+"region":  {
+"startLine":  50,
+"startColumn":  13,
+"endLine":  50,
+"endColumn":  144
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmTVMediaSettingsHolder.vb",
+"region":  {
+"startLine":  67,
+"startColumn":  32,
+"endLine":  67,
+"endColumn":  163
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.OrderBy(Function(y) y.ScraperOrder).FirstOrDefault(Function(e) e.ProcessorModule.IsScraper AndAlso e.ProcessorModule.ScraperEnabled)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\scraperMovieNativeModule.vb",
+"region":  {
+"startLine":  560,
+"startColumn":  21,
+"endLine":  560,
+"endColumn":  201
+}
+}
+},
+{
+"id":  "S2259",
 "message":  "'sResults' is Nothing on at least one execution path.",
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVDBSearchResults.vb",
