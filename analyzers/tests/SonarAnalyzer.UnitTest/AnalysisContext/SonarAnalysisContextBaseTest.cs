@@ -181,8 +181,8 @@ public partial class SonarAnalysisContextBaseTest
         var options = AnalysisScaffolding.CreateOptions($"ResourceTests\\SonarLintXml\\All_properties_{language}\\SonarLint.xml");
         var sut = CreateSut(compilation, options).SonarLintFile();
 
-        sut.IgnoreHeaderComments.Should().BeTrue();
-        sut.AnalyzeGeneratedCode.Should().BeFalse();
+        sut.IgnoreHeaderComments(analyzerLanguage.LanguageName).Should().BeTrue();
+        sut.AnalyzeGeneratedCode(analyzerLanguage.LanguageName).Should().BeFalse();
         AssertArrayContent(sut.Exclusions, nameof(sut.Exclusions));
         AssertArrayContent(sut.Inclusions, nameof(sut.Inclusions));
         AssertArrayContent(sut.GlobalExclusions, nameof(sut.GlobalExclusions));
@@ -253,8 +253,8 @@ public partial class SonarAnalysisContextBaseTest
 
     private static void CheckSonarLintXmlDefaultValues(SonarLintXmlReader sut)
     {
-        sut.AnalyzeGeneratedCode.Should().BeFalse();
-        sut.IgnoreHeaderComments.Should().BeFalse();
+        sut.AnalyzeGeneratedCode(LanguageNames.CSharp).Should().BeFalse();
+        sut.IgnoreHeaderComments(LanguageNames.CSharp).Should().BeFalse();
         sut.Exclusions.Should().NotBeNull().And.HaveCount(0);
         sut.Inclusions.Should().NotBeNull().And.HaveCount(0);
         sut.GlobalExclusions.Should().NotBeNull().And.HaveCount(0);

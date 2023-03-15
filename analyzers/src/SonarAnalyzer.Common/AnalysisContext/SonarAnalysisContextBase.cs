@@ -30,13 +30,9 @@ public class SonarAnalysisContextBase
     protected static readonly ConditionalWeakTable<Compilation, ConcurrentDictionary<string, bool>> FileInclusionCache = new();
     protected static readonly ConditionalWeakTable<Compilation, ImmutableHashSet<string>> UnchangedFilesCache = new();
     protected static readonly SourceTextValueProvider<ProjectConfigReader> ProjectConfigProvider = new(x => new ProjectConfigReader(x));
-    protected static readonly SourceTextValueProvider<SonarLintXmlReader> SonarLintXmlProviderCS = new(x => new SonarLintXmlReader(x, LanguageNames.CSharp));
-    protected static readonly SourceTextValueProvider<SonarLintXmlReader> SonarLintXmlProviderVB = new(x => new SonarLintXmlReader(x, LanguageNames.VisualBasic));
+    protected static readonly SourceTextValueProvider<SonarLintXmlReader> SonarLintXmlProvider = new(x => new SonarLintXmlReader(x));
 
     protected SonarAnalysisContextBase() { }
-
-    protected static SourceTextValueProvider<SonarLintXmlReader> SonarLintXmlReader(string language) =>
-        language == LanguageNames.CSharp ? SonarLintXmlProviderCS : SonarLintXmlProviderVB;
 }
 
 public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextBase
@@ -58,7 +54,7 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
     /// <param name="generatedCodeRecognizer">When set, generated trees are analyzed only when language-specific 'analyzeGeneratedCode' configuration property is also set.</param>
     public bool ShouldAnalyzeTree(SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer) =>
         SonarLintFile() is var sonarLintReader
-        && (generatedCodeRecognizer is null || sonarLintReader.AnalyzeGeneratedCode || !tree.IsGenerated(generatedCodeRecognizer, Compilation))
+        && (generatedCodeRecognizer is null || sonarLintReader.AnalyzeGeneratedCode(Compilation.Language) || !tree.IsGenerated(generatedCodeRecognizer, Compilation))
         && (tree is null || (!IsUnchanged(tree) && ShouldAnalyzeFile(sonarLintReader, tree.FilePath)));
 
     /// <summary>
@@ -88,7 +84,7 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
         if (Options.SonarLintXml() is { } sonarLintXml)
         {
             return sonarLintXml.GetText() is { } sourceText
-                && AnalysisContext.TryGetValue(sourceText, SonarLintXmlReader(Compilation.Language), out var sonarLintXmlReader)
+                && AnalysisContext.TryGetValue(sourceText, SonarLintXmlProvider, out var sonarLintXmlReader)
                 ? sonarLintXmlReader
                 : throw new InvalidOperationException($"File '{Path.GetFileName(sonarLintXml.Path)}' has been added as an AdditionalFile but could not be read and parsed.");
         }
