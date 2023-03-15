@@ -782,23 +782,23 @@ Sample UntrackedSymbol() => this;";
         }
 
         [TestMethod]
-        public void PropertyReference_Write_SetsNotNull_AndRead_SetsNotNull()
+        public void PropertyReference_Write_SetsNotNull_AndRead_SetsNotNull_ForAutoProperties()
         {
             const string code = """
-                public object Property { get; set; }
+                public object AutoProperty { get; set; }
 
                 public void M()
                 {
-                    Property = null;
-                    Tag("AfterSetNull", Property);
-                    _ = Property.ToString();
-                    Tag("AfterReadReference", Property);
+                    AutoProperty = null;
+                    Tag("AfterSetNull", AutoProperty);
+                    AutoProperty.ToString();
+                    Tag("AfterReadReference", AutoProperty);
                 }
                 """;
             var validator = SETestContext.CreateCSMethod(code).Validator;
             validator.ValidateContainsOperation(OperationKind.PropertyReference);
-            validator.ValidateTag("AfterSetNull", x => x.Should().HaveNoConstraints()); // FN Auto-properties should behave the same as fields.
-            validator.ValidateTag("AfterReadReference", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("AfterSetNull", x => x.Should().HaveNoConstraints()); // FN Auto-properties should behave the same as fields. Expected: HaveOnlyConstraint(ObjectConstraint.Null)
+            validator.ValidateTag("AfterReadReference", x => x.Should().HaveNoConstraints()); // FN Auto-properties should behave the same as fields. Expected: HaveOnlyConstraint(ObjectConstraint.NotNull)
         }
 
         [TestMethod]
