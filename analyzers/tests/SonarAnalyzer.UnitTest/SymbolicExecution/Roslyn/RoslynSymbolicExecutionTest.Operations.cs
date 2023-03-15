@@ -798,7 +798,7 @@ Sample UntrackedSymbol() => this;";
             var validator = SETestContext.CreateCSMethod(code).Validator;
             validator.ValidateContainsOperation(OperationKind.PropertyReference);
             validator.ValidateTag("AfterSetNull", x => x.Should().HaveNoConstraints()); // FN Auto-properties should behave the same as fields. Expected: HaveOnlyConstraint(ObjectConstraint.Null)
-            validator.ValidateTag("AfterReadReference", x => x.Should().HaveNoConstraints()); // FN Auto-properties should behave the same as fields. Expected: HaveOnlyConstraint(ObjectConstraint.NotNull)
+            validator.ValidateTag("AfterReadReference", x => x.Should().HaveNoConstraints()); // FN Expected: HaveOnlyConstraint(ObjectConstraint.NotNull)
         }
 
         [TestMethod]
