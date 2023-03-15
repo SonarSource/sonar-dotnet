@@ -261,13 +261,23 @@ public void Method()
                 object o = null; // Set ObjectConstraint.Null and Dummy (LiteralDummyTestCheck)
                 int convert = System.Convert.ToInt32(o);
                 int explicitCast = (int)o;
+                object implicitBoxing = explicitCast;
+                object asBoxing = explicitCast as object;
+                object unboxingBoxing = (object)(int)o;
+
                 Tag("Object", o);
                 Tag("Convert", convert);
                 Tag("Explicit", explicitCast);
+                Tag("ImplicitBoxing", implicitBoxing);
+                Tag("AsBoxing", asBoxing);
+                Tag("UnboxingBoxing", unboxingBoxing);
                 """, new LiteralDummyTestCheck()).Validator;
             validator.ValidateTag("Object", x => x.Should().HaveOnlyConstraints(ObjectConstraint.Null, DummyConstraint.Dummy));
             validator.ValidateTag("Convert", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
             validator.ValidateTag("Explicit", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy));
+            validator.ValidateTag("ImplicitBoxing", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy));
+            validator.ValidateTag("AsBoxing", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy));
+            validator.ValidateTag("UnboxingBoxing", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy));
         }
 
         [TestMethod]
