@@ -117,11 +117,13 @@ namespace Tests.Diagnostics
             arg.GetType();          // Noncompliant
 
             T? localNotNull = new T();
-            localNotNull.GetType();     // Compliant
+            localNotNull.GetType();             // Compliant
+            T? localNull = null;
+            localNull.GetType();                // Noncompliant
             T? localNewNull = new T?();
-            localNewNull.GetType();     // Noncompliant
+            localNewNull.GetType();             // Noncompliant
             T? localDefaultT = default(T);
-            localDefaultT.GetType();    // Compliant
+            localDefaultT.GetType();            // Compliant
             T? localDefaultNullableT = default(T?);
             localDefaultNullableT.GetType();    // Noncompliant
         }
