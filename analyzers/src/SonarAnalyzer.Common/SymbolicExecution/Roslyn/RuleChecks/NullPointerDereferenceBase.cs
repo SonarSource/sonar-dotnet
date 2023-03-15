@@ -44,20 +44,22 @@ public abstract class NullPointerDereferenceBase : SymbolicRuleCheck
         operation.Kind switch
         {
             OperationKindEx.Invocation => NullInstanceCandidate(operation.ToInvocation()),
+            OperationKindEx.FieldReference => operation.ToFieldReference().Instance,
             OperationKindEx.PropertyReference => NullInstanceCandidate(operation.ToPropertyReference()),
+            OperationKindEx.EventReference => operation.ToEventReference().Instance,
             OperationKindEx.Await => operation.ToAwait().Operation,
             OperationKindEx.ArrayElementReference => operation.ToArrayElementReference().ArrayReference,
             _ => null,
         };
 
     private static IOperation NullInstanceCandidate(IInvocationOperationWrapper operation) =>
-        operation.TargetMethod.ContainingType.Is(KnownType.System_Nullable_T)
+        operation.TargetMethod.ContainingType.IsNullableValueType()
         && operation.TargetMethod.Name != nameof(Nullable<int>.GetType) // All methods on Nullable but .GetType() are safe to call
             ? null
             : operation.Instance;
 
     private static IOperation NullInstanceCandidate(IPropertyReferenceOperationWrapper operation) =>
-        operation.Property.IsInType(KnownType.System_Nullable_T)    // HasValue doesn't throw; Value is covered by S3655
+        operation.Property.ContainingType.IsNullableValueType() // HasValue doesn't throw; Value is covered by S3655
             ? null
             : operation.Instance;
 }

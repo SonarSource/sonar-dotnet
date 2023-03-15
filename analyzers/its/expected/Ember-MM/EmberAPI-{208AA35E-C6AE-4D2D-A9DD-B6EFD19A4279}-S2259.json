@@ -2,6 +2,71 @@
 "issues":  [
 {
 "id":  "S2259",
+"message":  "'_ComplexAdvancedSettings.FirstOrDefault(Function(f) f.Name = key AndAlso f.Section = Assembly)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"region":  {
+"startLine":  192,
+"startColumn":  17,
+"endLine":  192,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'_AdvancedSettings.FirstOrDefault(Function(f) f.Name = ii.@Name AndAlso f.Section = ii.@Section)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"region":  {
+"startLine":  215,
+"startColumn":  25,
+"endLine":  215,
+"endColumn":  120
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'cs' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"region":  {
+"startLine":  231,
+"startColumn":  21,
+"endLine":  231,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'_AdvancedSettings.FirstOrDefault(Function(f) f.Name = key AndAlso f.Section = Assembly)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"region":  {
+"startLine":  304,
+"startColumn":  17,
+"endLine":  304,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'_AdvancedSettings.FirstOrDefault(Function(f) f.Name = key AndAlso f.Section = Assembly)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"region":  {
+"startLine":  327,
+"startColumn":  17,
+"endLine":  327,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S2259",
 "message":  "'_mediaDBConn' is Nothing on at least one execution path.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
