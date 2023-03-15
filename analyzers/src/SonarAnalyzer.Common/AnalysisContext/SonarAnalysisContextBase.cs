@@ -122,8 +122,10 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
     }
 
     private bool FileIsIncludedInAnalysis(SonarLintXmlReader sonarLintXml, string filePath) =>
-        ProjectConfiguration().ProjectType != ProjectType.Unknown // If ProjectType != 'Unknown' we are in S4NET context and all files are analyzed.
-                                                                  // If ProjectType == 'Unknown' then we are in SonarLint or NuGet context and we need to check if the file has been excluded from analysis through SonarLint.xml.
+        // If ProjectType != 'Unknown' we are in S4NET context and all files are analyzed.
+        // If ProjectType == 'Unknown' then we are in SonarLint or NuGet context and
+        // we need to check if the file has been excluded from analysis through SonarLint.xml.
+        ProjectConfiguration().ProjectType != ProjectType.Unknown
         || (FileInclusionCache.GetValue(Compilation, _ => new()) is var cache
             && cache.GetOrAdd(filePath, _ => IsFileIncluded(sonarLintXml, filePath)));
 
