@@ -46,5 +46,16 @@ namespace SonarAnalyzer.UnitTest.Helpers
             dict1.DictionaryEquals(dict1).Should().BeTrue();
             dict1.DictionaryEquals(dict2).Should().BeTrue();
         }
+
+        [TestMethod]
+        public void DictionaryEquals_SameContent_DifferentOrdering()
+        {
+            var numbers = Enumerable.Range(1, 1000);
+            var dict1 = numbers.ToDictionary(x => x, x => x);
+            var dict2 = numbers.OrderByDescending(x => x).ToDictionary(x => x, x => x);
+            dict1.DictionaryEquals(dict1).Should().BeTrue();
+            dict1.DictionaryEquals(dict2).Should().BeTrue();
+            dict2.DictionaryEquals(dict1).Should().BeTrue();
+        }
     }
 }
