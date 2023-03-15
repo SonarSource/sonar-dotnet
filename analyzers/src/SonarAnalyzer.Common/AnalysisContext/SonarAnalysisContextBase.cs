@@ -144,7 +144,7 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
         && !IsExcluded(globalExclusions, filePath);
 
     private static bool IsIncluded(string[] inclusions, string filePath) =>
-        inclusions is { Length: 0 } || inclusions.Any(x => WildcardPatternMatcher.IsMatch(x, filePath));
+        inclusions is { Length: 0 } || inclusions.Any(x => WildcardPatternMatcher.IsMatch(x, filePath, true));
 
     private static bool IsExcluded(string[] exclusions, string filePath) =>
         exclusions.Any(x => WildcardPatternMatcher.IsMatch(x, filePath));

@@ -25,25 +25,24 @@ using System.Text.RegularExpressions;
 
 namespace SonarAnalyzer.Helpers;
 
-internal static class WildcardPatternMatcher
+internal class WildcardPatternMatcher
 {
-    public static bool IsMatch(string pattern, string input) =>
+    public static bool IsMatch(string pattern, string input, bool timoutFallback = false) =>
         !(string.IsNullOrWhiteSpace(pattern) || string.IsNullOrWhiteSpace(input))
-        && WildcardPattern.Create(pattern).Match(input);
+        && WildcardPattern.Create(pattern).Match(input, timoutFallback);
 
     /// <summary>
     /// Copied from https://github.com/SonarSource/sonar-plugin-api/blob/a9bd7ff48f0f77811ed909070030678c443c975a/sonar-plugin-api/src/main/java/org/sonar/api/utils/WildcardPattern.java.
     /// </summary>
     private sealed class WildcardPattern
     {
-        private const string SpecialChars = "()[]^$.{}+|";
         private static readonly ConcurrentDictionary<string, WildcardPattern> Cache = new();
         private readonly Regex pattern;
 
         private WildcardPattern(string pattern) =>
             this.pattern = new Regex(ToRegex(pattern), RegexOptions.None, RegexConstants.DefaultTimeout);
 
-        public bool Match(string value)
+        public bool Match(string value, bool timoutFallback)
         {
             try
             {
@@ -51,7 +50,7 @@ internal static class WildcardPatternMatcher
             }
             catch (RegexMatchTimeoutException)
             {
-                return false;
+                return timoutFallback;
             }
         }
 
@@ -61,26 +60,16 @@ internal static class WildcardPatternMatcher
         private static string ToRegex(string wildcardPattern)
         {
             var escapedDirectorySeparator = Regex.Escape(Path.DirectorySeparatorChar.ToString());
-            var sb = new StringBuilder(wildcardPattern.Length);
-
-            sb.Append('^');
-
-            var i = wildcardPattern.StartsWith("/") || wildcardPattern.StartsWith("\\") ? 1 : 0;
+            var sb = new StringBuilder("^", wildcardPattern.Length);
+            var i = IsSlash(wildcardPattern[0]) ? 1 : 0;
             while (i < wildcardPattern.Length)
             {
                 var ch = wildcardPattern[i];
-
-                if (SpecialChars.Contains(ch))
-                {
-                    // Escape regex-specific characters
-                    sb.Append(Regex.Escape(ch.ToString()));
-                }
-                else if (ch == '*')
+                if (ch == '*')
                 {
                     if (i + 1 < wildcardPattern.Length && wildcardPattern[i + 1] == '*')
                     {
-                        // Double asterisk
-                        // Zero or more directories
+                        // Double asterisk - Zero or more directories
                         if (i + 2 < wildcardPattern.Length && IsSlash(wildcardPattern[i + 2]))
                         {
                             sb.Append($"(.*{escapedDirectorySeparator}|)");
@@ -94,8 +83,7 @@ internal static class WildcardPatternMatcher
                     }
                     else
                     {
-                        // Single asterisk
-                        // Zero or more characters excluding directory separator
+                        // Single asterisk - Zero or more characters excluding directory separator
                         sb.Append($"[^{escapedDirectorySeparator}]*?");
                     }
                 }
@@ -106,13 +94,11 @@ internal static class WildcardPatternMatcher
                 }
                 else if (IsSlash(ch))
                 {
-                    // Directory separator
                     sb.Append(escapedDirectorySeparator);
                 }
                 else
                 {
-                    // Single character
-                    sb.Append(ch);
+                    sb.Append(Regex.Escape(ch.ToString()));
                 }
                 i++;
             }
