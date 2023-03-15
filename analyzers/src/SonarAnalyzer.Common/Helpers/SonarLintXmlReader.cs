@@ -32,6 +32,14 @@ public class SonarLintXmlReader
 
     private readonly SonarLintXml sonarLintXml;
 
+    public string[] Exclusions { get; private set; }
+    public string[] Inclusions { get; private set; }
+    public string[] GlobalExclusions { get; private set; }
+    public string[] TestExclusions { get; private set; }
+    public string[] TestInclusions { get; private set; }
+    public string[] GlobalTestExclusions { get; private set; }
+    public List<SonarLintXmlRule> ParametrizedRules { get; private set; }
+
     private bool? ignoreHeaderCommentsCS;
     private bool? ignoreHeaderCommentsVB;
     public bool IgnoreHeaderComments(string language) =>
@@ -52,29 +60,17 @@ public class SonarLintXmlReader
             _ => throw new UnexpectedLanguageException(language)
         };
 
-    private string[] exclusions;
-    public string[] Exclusions => exclusions ??= ReadCommaSeparatedArray(ReadSettingsProperty("sonar.exclusions"));
-
-    private string[] inclusions;
-    public string[] Inclusions => inclusions ??= ReadCommaSeparatedArray(ReadSettingsProperty("sonar.inclusions"));
-
-    private string[] globalExclusions;
-    public string[] GlobalExclusions => globalExclusions ??= ReadCommaSeparatedArray(ReadSettingsProperty("sonar.global.exclusions"));
-
-    private string[] testExclusions;
-    public string[] TestExclusions => testExclusions ??= ReadCommaSeparatedArray(ReadSettingsProperty("sonar.test.exclusions"));
-
-    private string[] testInclusions;
-    public string[] TestInclusions => testInclusions ??= ReadCommaSeparatedArray(ReadSettingsProperty("sonar.test.inclusions"));
-
-    private string[] globalTestExclusions;
-    public string[] GlobalTestExclusions => globalTestExclusions ??= ReadCommaSeparatedArray(ReadSettingsProperty("sonar.global.test.exclusions"));
-
-    private List<SonarLintXmlRule> parametrizedRules;
-    public List<SonarLintXmlRule> ParametrizedRules => parametrizedRules ??= ReadRuleParameters();
-
-    public SonarLintXmlReader(SourceText sonarLintXml) =>
+    public SonarLintXmlReader(SourceText sonarLintXml)
+    {
         this.sonarLintXml = sonarLintXml == null ? SonarLintXml.Empty : ParseContent(sonarLintXml);
+        Exclusions = ReadCommaSeparatedArray(ReadSettingsProperty("sonar.exclusions"));
+        Inclusions = ReadCommaSeparatedArray(ReadSettingsProperty("sonar.inclusions"));
+        GlobalExclusions = ReadCommaSeparatedArray(ReadSettingsProperty("sonar.global.exclusions"));
+        TestExclusions = ReadCommaSeparatedArray(ReadSettingsProperty("sonar.test.exclusions"));
+        TestInclusions = ReadCommaSeparatedArray(ReadSettingsProperty("sonar.test.inclusions"));
+        GlobalTestExclusions = ReadCommaSeparatedArray(ReadSettingsProperty("sonar.global.test.exclusions"));
+        ParametrizedRules = ReadRuleParameters();
+    }
 
     public bool IsFileIncluded(string filePath, bool isTestProject) =>
         isTestProject
