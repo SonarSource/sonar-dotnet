@@ -246,4 +246,16 @@ public partial class RoslynSymbolicExecutionTest
         validator.ValidateTag("NotNullArg", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True));
         validator.ValidateTag("NotNullValue", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True));
     }
+
+    [TestMethod]
+    public void Nullable_GetValueOrDefault_SubExpression()
+    {
+        const string code = """
+            var value = (Condition ? null : (bool?)true).GetValueOrDefault();
+            Tag("Value", value);
+            """;
+        SETestContext.CreateCS(code).Validator.TagValues("Value").Should().SatisfyRespectively(
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False),
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True));
+    }
 }
