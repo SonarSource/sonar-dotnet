@@ -557,12 +557,12 @@ public void Main<TClass, TStruct, TUnknown, TType, TInterface, TUnmanaged, TEnum
             var validator = SETestContext.CreateCSMethod(code).Validator;
             validator.ValidateContainsOperation(OperationKind.Literal);
             validator.ValidateTag("Class", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
-            validator.ValidateTag("Struct", x => x.Should().HaveNoConstraints("struct cannot be null."));
+            validator.ValidateTag("Struct", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull, "struct cannot be null."));
             validator.ValidateTag("Unknown", x => x.Should().HaveNoConstraints("it can be struct."));
             validator.ValidateTag("Type", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
             validator.ValidateTag("Interface", x => x.Should().HaveNoConstraints("interfaces can be implemented by a struct."));
-            validator.ValidateTag("Unmanaged", x => x.Should().HaveNoConstraints("unmanaged implies struct and cannot be null."));
-            validator.ValidateTag("Enum", x => x.Should().HaveNoConstraints("Enum cannot be null."));
+            validator.ValidateTag("Unmanaged", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull, "unmanaged implies struct and cannot be null."));
+            validator.ValidateTag("Enum", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull, "Enum cannot be null."));
             validator.ValidateTag("Delegate", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
         }
 

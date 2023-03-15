@@ -532,15 +532,24 @@ if (value = boolParameter)
 
         [DataTestMethod]
         [DataRow("arg is { }", "T")]
-        [DataRow("arg is { }", "TStruct")]
         [DataRow("arg is string { }", "T")]     // Could have NotNull instead. T is not known to be reference type.
         [DataRow("(arg, Unknown<object>()) is ({ }, { })", "object")]   // We don't support learning for tuples (yet). Should behave same as "arg is { }". Gets tricky when nesting (a, (b, c))
         public void Branching_LearnsObjectConstraint_RecursivePattern_NoConstraint(string expression, string argType)
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.RecursivePattern, argType);
-            validator.ValidateTag("If", x => x.Should().BeNull());
-            validator.ValidateTag("Else", x => x.Should().BeNull());
-            validator.ValidateTag("End", x => x.Should().BeNull());
+            validator.ValidateTag("If", x => x.Should().HaveNoConstraints());
+            validator.ValidateTag("Else", x => x.Should().HaveNoConstraints());
+            validator.ValidateTag("End", x => x.Should().HaveNoConstraints());
+        }
+
+        [DataTestMethod]
+        [DataRow("arg is { }", "TStruct")]
+        public void Branching_LearnsObjectConstraint_RecursivePattern_ValueTypeConstraint(string expression, string argType)
+        {
+            var validator = CreateIfElseEndValidatorCS(expression, OperationKind.RecursivePattern, argType);
+            validator.ValidateTagOrder("If", "End");
+            validator.ValidateTag("If", x => x.Should().HaveNoConstraints());
+            validator.ValidateTag("End", x => x.Should().HaveNoConstraints());
         }
 
         [DataTestMethod]
