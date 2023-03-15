@@ -52,7 +52,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
                 // Update DefaultValue when adding new types
                 true => SymbolicValue.True,
                 false => SymbolicValue.False,
-                null when (operation.Instance.Type ?? ConvertedType(operation.Parent)).CanBeNull() => SymbolicValue.Null,  // ToDo: MMF-2401, this will need to be reviewed
+                null when CanBeNull(operation) => SymbolicValue.Null,
                 string => SymbolicValue.NotNull,
                 _ => null
             };
@@ -60,5 +60,11 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
         private static ITypeSymbol ConvertedType(IOperation operation) =>
             // Some version of Roslyn can send null here with "return default;". It's not reproducible by UTs, as we have "Type" set in that case.
             operation?.Kind == OperationKindEx.Conversion ? operation.ToConversion().Type : null;
+
+        private static bool CanBeNull(IOperationWrapperSonar operation)
+        {
+            var type = operation.Instance.Type ?? ConvertedType(operation.Parent);
+            return type is null || type.CanBeNull();
+        }
     }
 }
