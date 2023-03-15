@@ -60,7 +60,7 @@ namespace SonarAnalyzer.Rules
             }
             if (context.Options.SonarLintXml() != null && !string.IsNullOrEmpty(outPath))
             {
-                var sonarLintXml = context.SonarLintFile();
+                var sonarLintXml = context.SonarLintXml();
                 IgnoreHeaderComments = sonarLintXml.IgnoreHeaderComments(context.Compilation.Language);
                 AnalyzeGeneratedCode = sonarLintXml.AnalyzeGeneratedCode(context.Compilation.Language);
                 OutPath = Path.Combine(outPath, context.Compilation.Language == LanguageNames.CSharp ? "output-cs" : "output-vbnet");
