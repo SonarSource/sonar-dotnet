@@ -77,9 +77,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 ? this with { OperationValue = OperationValue.Remove(ResolveCapture(operation)) }
                 : this with { OperationValue = OperationValue.SetItem(ResolveCapture(operation), value) };
 
-        public ProgramState SetOperationConstraint(IOperationWrapper operation, SymbolicConstraint constraint) =>
-            SetOperationConstraint(operation.WrappedOperation, constraint);
-
         public ProgramState SetOperationConstraint(IOperationWrapperSonar operation, SymbolicConstraint constraint) =>
             SetOperationConstraint(operation.Instance, constraint);
 
