@@ -25,3 +25,28 @@ namespace Issue_6491
             };
     }
 }
+
+// Reproducer for #6878 https://github.com/SonarSource/sonar-dotnet/issues/6494
+namespace Issue_6878
+{
+    class MyClass
+    {
+        public byte[]? GetNullableArrayOfNonNullableValueType(string itemId) => null; // Noncompliant FP, Should not raise because nullable is allowed
+        public byte?[] GetNonNullableArrayOfNullableValueType(string itemId) => null; // Noncompliant
+        public byte?[]? GetNullableArrayOfNullableValueType(string itemId) => null; // Noncompliant, FP
+        
+        public object[]? GetNullableArrayOfNonNullableReferenceType(string itemId) => null; // Noncompliant FP
+        public object?[] GetNonNullableArrayOfNullableReferenceType(string itemId) => null; // Noncompliant
+        public object?[]? GetNullableArrayOfNullableReferenceType(string itemId) => null; // Noncompliant FP
+        public byte[] GetArray(string itemId) => null; // Noncompliant
+    }
+
+    class MyGenericClass<T> where T : struct
+    {
+        public List<T>? GetNullableListOfNonNullableValueGenericType(string itemId) => null; // Noncompliant FP, Should not raise because nullable is allowed
+        public List<T?> GetNonNullableListOfNullableValueGenericType(string itemId) => null; // Noncompliant
+        public List<T?>? GetNullableListOfNullableValueGenericType(string itemId) => null; // Noncompliant, FP
+
+        public List<T> GetList(string itemId) => null; // Noncompliant
+    }
+}
