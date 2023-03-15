@@ -39,7 +39,7 @@ public class SonarLintXmlReader
         {
             LanguageNames.CSharp => ignoreHeaderCommentsCS ??= ReadBoolean(ReadSettingsProperty("sonar.cs.ignoreHeaderComments")),
             LanguageNames.VisualBasic => ignoreHeaderCommentsVB ??= ReadBoolean(ReadSettingsProperty("sonar.vbnet.ignoreHeaderComments")),
-            _ => throw new UnexpectedLanguageException($"Language '{language}' is not supported.")
+            _ => throw new UnexpectedLanguageException(language)
         };
 
     private bool? analyzeGeneratedCodeCS;
@@ -49,7 +49,7 @@ public class SonarLintXmlReader
         {
             LanguageNames.CSharp => analyzeGeneratedCodeCS ??= ReadBoolean(ReadSettingsProperty("sonar.cs.analyzeGeneratedCode")),
             LanguageNames.VisualBasic => analyzeGeneratedCodeVB ??= ReadBoolean(ReadSettingsProperty("sonar.vbnet.analyzeGeneratedCode")),
-            _ => throw new UnexpectedLanguageException($"Language '{language}' is not supported.")
+            _ => throw new UnexpectedLanguageException(language)
         };
 
     private string[] exclusions;
