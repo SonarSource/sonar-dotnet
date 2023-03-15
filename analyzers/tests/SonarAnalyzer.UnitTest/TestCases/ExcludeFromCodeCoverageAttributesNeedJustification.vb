@@ -20,15 +20,15 @@ Class Noncompliant
     End Sub
 
     <ExcludeFromCodeCoverage(Justification:=Nothing)> ' Noncompliant
-    Sub WithNothing() { }
+    Sub WithNothing()
     End Sub
 
     <ExcludeFromCodeCoverage(Justification:="")> ' Noncompliant
-    Sub WithEmptyString() { }
+    Sub WithEmptyString()
     End Sub
 
     <ExcludeFromCodeCoverage(Justification:="  ")> ' Noncompliant
-    Sub WithWhiteSpace() { }
+    Sub WithWhiteSpace()
     End Sub
 
     <ExcludeFromCodeCoverage> ' Noncompliant
