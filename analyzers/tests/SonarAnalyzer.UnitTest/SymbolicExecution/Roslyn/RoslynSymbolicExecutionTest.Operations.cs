@@ -275,12 +275,9 @@ public void Method()
         {
             var validator = SETestContext.CreateVB("""
                 Dim o As Object = Nothing ' Set ObjectConstraint.Null and Dummy (LiteralDummyTestCheck)
-                Dim iCType As Integer
-                Dim iDirectCast As Integer
-                Dim iImplicit As Integer
-                iCType = CType(o, Integer)
-                iDirectCast = DirectCast(o, Integer)
-                iImplicit = o
+                Dim iCType As Integer = CType(o, Integer)
+                Dim iDirectCast As Integer = DirectCast(o, Integer)
+                Dim iImplicit As Integer = o
                 Tag("Object", o)
                 Tag("CType", iCType)
                 Tag("DirectCast", iDirectCast)
