@@ -18,13 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.SymbolicExecution.Constraints;
-
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 
-public class EmptyNullableValueAccess : SymbolicRuleCheck
+public class EmptyNullableValueAccess : EmptyNullableValueAccessBase
 {
-    private const string DiagnosticId = "S3655";
     private const string MessageFormat = "'{0}' is null on at least one execution path.";
 
     internal static readonly DiagnosticDescriptor S3655 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
@@ -36,30 +33,6 @@ public class EmptyNullableValueAccess : SymbolicRuleCheck
         var finder = new NullableAccessFinder();
         finder.SafeVisit(Node);
         return finder.HasPotentialNullableValueAccess;
-    }
-
-    protected override ProgramState PreProcessSimple(SymbolicContext context)
-    {
-        var operationInstance = context.Operation.Instance;
-        if (operationInstance.Kind == OperationKindEx.PropertyReference
-            && operationInstance.ToPropertyReference() is var reference
-            && reference.Property.Name == nameof(Nullable<int>.Value)
-            && reference.Instance.Type.IsNullableValueType()
-            && context.HasConstraint(reference.Instance, ObjectConstraint.Null))
-        {
-            ReportIssue(reference.Instance, reference.Instance.Syntax.ToString());
-        }
-        else if (operationInstance.Kind == OperationKindEx.Conversion
-            && operationInstance.ToConversion() is var conversion
-            && conversion.Operand.Type.IsNullableValueType()
-            && !conversion.Type.IsNullableValueType()
-            && conversion.Type.IsStruct()
-            && context.HasConstraint(conversion.Operand, ObjectConstraint.Null))
-        {
-            ReportIssue(conversion.Operand, conversion.Operand.Syntax.ToString());
-        }
-
-        return context.State;
     }
 
     private sealed class NullableAccessFinder : SafeCSharpSyntaxWalker
