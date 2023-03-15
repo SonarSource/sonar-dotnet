@@ -211,7 +211,7 @@ class NullableOfCustomTypes
     void ForeachCast()
     {
         foreach (AStruct x in new AStruct?[] { null }) ;                 // FN
-        foreach (AStruct x in new AStruct?[] { new AStruct() }) ;        // Compliant, all items not empty
+        foreach (AStruct x in new AStruct?[] { new AStruct() }) ;        // Compliant, all items are not empty
         foreach (AStruct x in new AStruct?[] { new AStruct(), null }) ;  // FN
         foreach (AStruct? x in new AStruct?[] { new AStruct(), null }) ; // Compliant, no value access
         foreach (var x in new AStruct?[] { new AStruct(), null }) ;      // Compliant, no value access
@@ -269,17 +269,17 @@ class ComplexConditionsSingleNullable
     bool XorWithTrue(bool? b) => (true ^ b.HasValue) && b.Value;            // Noncompliant
     bool XorWithFalse(bool? b) => (false ^ b.HasValue) && b.Value;          // Compliant
 
-    void Reachability1(bool? b)
+    void Reachability1()
     {
-        b = null;
+        bool? b = null;
         _ = true || b.Value; // Compliant, "||" is short-circuited
         _ = b.Value;         // Noncompliant
         _ = b.Value;         // Compliant, unreachable
     }
 
-    void Reachability2(bool? b)
+    void Reachability2()
     {
-        b = null;
+        bool? b = null;
         _ = true | b.Value;  // Noncompliant, "|" evaluates both sides
         _ = b.Value;         // Compliant, unreachable
         _ = b.Value;         // Compliant, still unreachable
@@ -314,16 +314,16 @@ class ComplexConditionMultipleNullables
         if (b1 != b2 && b1 != b3 && b2 != b3 && b1 != null && b2 != null) { _ = b3.Value; } // FN: b3 is empty
     }
 
-    void Reachability1(bool? b1)
+    void Reachability1()
     {
-        b1 = null;
+        bool? b1 = null;
         _ = b1.Value;        // Noncompliant
         _ = b1.Value;        // Compliant, unreachable
     }
 
-    void Reachability2(bool? b1, bool? b2)
+    void Reachability2(bool? b1)
     {
-        b2 = null;
+        bool? b2 = null;
         if (b1 == b2)
         {
             _ = b1.Value;     // Noncompliant
@@ -379,6 +379,17 @@ interface IWithDefaultImplementation
     {
         int? i = null;
         return i.Value; // Noncompliant
+    }
+}
+
+class MemberAccessSequence
+{
+    void Basics(DateTime? dt)
+    {
+        _ = dt.Value.ToString(); // Compliant, unknown
+        dt = null;
+        _ = dt.Value.ToString(); // Noncompliant, empty
+        _ = dt.Value.ToString(); // Compliant, unreachable
     }
 }
 
@@ -521,9 +532,9 @@ class Casts
         _ = (int)i;                   // Compliant, non-empty
     }
 
-    void Downcast3(int? i)
+    void Downcast3()
     {
-        i = null;
+        int? i = null;
         _ = i.Value;                  // Noncompliant, empty
         _ = (int)i;                   // Compliant, unreachable
     }
@@ -575,21 +586,21 @@ namespace TypeWithValueProperty
 {
     class Test
     {
-        void Basics1(ClassWithValueProperty i)
+        void Basics1()
         {
-            i = null;
+            ClassWithValueProperty i = null;
             _ = i.Value;                                                       // Compliant, ClassWithValueProperty not a nullable type
         }
 
-        void Basics2(ClassWithValueProperty i)
+        void Basics2()
         {
-            i = null;
+            ClassWithValueProperty i = null;
             _ = i.APropertyNotCalledValue;                                     // Compliant, ClassWithValuePropertyAndImplicitCast not a nullable type
         }
 
-        void ImplicitCast(StructWithValuePropertyAndCastOperators i)
+        void ImplicitCast()
         {
-            i = null as int?;                                                  // Noncompliant, FP
+            StructWithValuePropertyAndCastOperators i = null as int?;          // Noncompliant, FP
             _ = i.Value;                                                       // Compliant, ClassWithValuePropertyAndImplicitCast not a nullable type
         }
 
