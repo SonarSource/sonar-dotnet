@@ -38,5 +38,16 @@ namespace SonarAnalyzer.UnitTest.Helpers
             hash4.Should().NotBe(0).And.NotBe(hash2).And.NotBe(hash3);
             hash5.Should().NotBe(0).And.NotBe(hash2).And.NotBe(hash3).And.NotBe(hash4);
         }
+
+        [TestMethod]
+        public void DictionaryContentHash_StableForUnsortedDictionary()
+        {
+            var numbers = Enumerable.Range(1, 1000);
+            var dict1 = numbers.ToDictionary(x => x, x => x);
+            var dict2 = numbers.OrderByDescending(x => x).ToDictionary(x => x, x => x);
+            var hashCode1 = SonarAnalyzer.Helpers.HashCode.DictionaryContentHash(dict1);
+            var hashCode2 = SonarAnalyzer.Helpers.HashCode.DictionaryContentHash(dict2);
+            hashCode1.Should().Be(hashCode2);
+        }
     }
 }
