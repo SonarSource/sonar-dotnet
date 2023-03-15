@@ -125,8 +125,7 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
         // If ProjectType is not 'Unknown' it means we are in S4NET context and all files are analyzed.
         // If ProjectType is 'Unknown' then we are in SonarLint or NuGet context and we need to check if the file has been excluded from analysis through SonarLint.xml.
         ProjectConfiguration().ProjectType == ProjectType.Unknown
-        && FileInclusionCache.GetValue(Compilation, _ => new()) is var cache
-        && !cache.GetOrAdd(filePath, _ => IsFileIncluded(sonarLintXml, filePath));
+        && !FileInclusionCache.GetValue(Compilation, _ => new()).GetOrAdd(filePath, _ => sonarLintXml.IsFileIncluded(filePath, IsTestProject()));
 
     private ImmutableHashSet<string> CreateUnchangedFilesHashSet() =>
         ImmutableHashSet.Create(StringComparer.OrdinalIgnoreCase, ProjectConfiguration().AnalysisConfig?.UnchangedFiles() ?? Array.Empty<string>());

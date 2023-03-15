@@ -78,9 +78,9 @@ public class SonarLintXmlReader
         : IsFileIncluded(Inclusions, Exclusions, GlobalExclusions, filePath);
 
     private static bool IsFileIncluded(string[] inclusions, string[] exclusions, string[] globalExclusions, string filePath) =>
-    IsIncluded(inclusions, filePath)
-    && !IsExcluded(exclusions, filePath)
-    && !IsExcluded(globalExclusions, filePath);
+        IsIncluded(inclusions, filePath)
+        && !IsExcluded(exclusions, filePath)
+        && !IsExcluded(globalExclusions, filePath);
 
     private static bool IsIncluded(string[] inclusions, string filePath) =>
         inclusions is { Length: 0 } || inclusions.Any(x => WildcardPatternMatcher.IsMatch(x, filePath));
