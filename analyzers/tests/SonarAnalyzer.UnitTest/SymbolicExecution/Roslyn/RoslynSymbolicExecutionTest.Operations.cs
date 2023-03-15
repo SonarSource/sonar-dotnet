@@ -802,6 +802,27 @@ Sample UntrackedSymbol() => this;";
         }
 
         [TestMethod]
+        public void PropertyReference_NotTrackedFor_FullProperties()
+        {
+            const string code = """
+                private object _FullProperty;
+                public object FullProperty { get => _FullProperty; set => _FullProperty = value; }
+
+                public void M()
+                {
+                    FullProperty = null;
+                    Tag("AfterSetNull", FullProperty);
+                    FullProperty.ToString();
+                    Tag("AfterReadReference", FullProperty);
+                }
+                """;
+            var validator = SETestContext.CreateCSMethod(code).Validator;
+            validator.ValidateContainsOperation(OperationKind.PropertyReference);
+            validator.ValidateTag("AfterSetNull", x => x.Should().HaveNoConstraints());
+            validator.ValidateTag("AfterReadReference", x => x.Should().HaveNoConstraints());
+        }
+
+        [TestMethod]
         public void ArrayElementReference_Read_SetsNotNull()
         {
             const string code = @"
