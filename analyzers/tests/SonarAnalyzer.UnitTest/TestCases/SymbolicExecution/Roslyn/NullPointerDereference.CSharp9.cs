@@ -217,6 +217,12 @@ public class Sample
             }
         }
     }
+
+    void Nullable<T>() where T : struct
+    {
+        T? localTargetTypeNew = new();
+        localTargetTypeNew.GetType();   // Compliant localTargetTypeNew is 0
+    }
 }
 
 public record Record

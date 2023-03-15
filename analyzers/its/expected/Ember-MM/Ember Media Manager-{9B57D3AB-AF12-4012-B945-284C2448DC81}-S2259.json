@@ -41,6 +41,19 @@
 },
 {
 "id":  "S2259",
+"message":  "'MyTVShowRegExProfiles.Profiles.FirstOrDefault(Function(y) y.Name = lstProfiles.SelectedItems(0).Text)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgTVRegExProfiles.vb",
+"region":  {
+"startLine":  13,
+"startColumn":  36,
+"endLine":  13,
+"endColumn":  137
+}
+}
+},
+{
+"id":  "S2259",
 "message":  "'Me.tLangList.FirstOrDefault(Function(l) l.ShortLang = Master.eSettings.TVDBLanguage)' is Nothing on at least one execution path.",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgWizard.vb",

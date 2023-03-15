@@ -1,6 +1,5 @@
 ﻿Imports System
 Imports System.Threading.Tasks
-Imports Microsoft.VisualBasic.Information
 
 Public Class Program
 
@@ -94,6 +93,50 @@ Public Class Program
         Dim B As Boolean = IsNothing(Arg)   ' Learn possible null
         Arg.ToString()  ' Noncompliant
     End Sub
+
+    Private Sub Test_NullableValueTypes(Of T As Structure)(ByVal arg As T?)
+        Dim i As Integer? = Nothing
+        i.GetType()             ' Noncompliant
+        i = Nothing
+        i.gettype()             ' Noncompliant
+        i = 42
+        i.GetType()             ' Compliant
+        i = Nothing
+        Dim X = i.HasValue      ' Compliant - safe to call
+        i = Nothing
+        X = i.Value             ' Compliant - handled by rule S3655
+        i = Nothing
+        X = CInt(i)             ' Compliant - handled by rule S3655
+        i = Nothing
+        i.GetValueOrDefault()   ' Compliant - safe to call
+        i = Nothing
+        i.Equals(Nothing)       ' Compliant - safe to call
+        i = Nothing
+        i.GetHashCode()         ' Compliant - safe to call
+        i = Nothing
+        i.ToString()            ' Compliant - safe to call
+
+        arg.GetType()           ' Compliant
+        arg = Nothing
+        arg.GetType()           ' Noncompliant
+        Dim localNotNull As T? = New T()
+        localNotNull.GetType()  ' Compliant
+        Dim localNull As T? = Nothing
+        localNull.GetType()     ' Noncompliant
+    End Sub
+
+    Class HasGenericNullable(Of T As Structure)
+        Public Property Prop As T?
+
+        Public Sub M()
+            Prop = Nothing
+            Dim X = Prop.HasValue   ' Compliant
+            Prop = Nothing
+            Prop.GetType()          ' FN https://github.com/SonarSource/sonar-dotnet/issues/6930
+            Prop = Nothing
+            Prop.GetType()          ' Compliant
+        End Sub
+    End Class
 
 End Class
 
