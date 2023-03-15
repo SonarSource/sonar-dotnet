@@ -204,7 +204,8 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
         var instanceValue = context.State[invocation.Instance];
         if (instanceValue?.HasConstraint(ObjectConstraint.Null) is true)
         {
-            return ConstantCheck.ConstraintFromType(((INamedTypeSymbol)invocation.Instance.Type).TypeArguments.Single()) is { } orDefaultConstraint
+            var valueType = ((INamedTypeSymbol)invocation.Instance.Type).TypeArguments.Single();
+            return ConstantCheck.ConstraintFromType(valueType) is { } orDefaultConstraint
                 ? context.SetOperationConstraint(orDefaultConstraint).ToArray()
                 : context.State.ToArray();
         }

@@ -258,4 +258,34 @@ public partial class RoslynSymbolicExecutionTest
             x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False),
             x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True));
     }
+
+    [TestMethod]
+    public void Nullable_GetValueOrDefault_SubExpression_Branching()
+    {
+        const string code = """
+            bool? nullable;
+            if(boolParameter)
+                nullable = true;
+            else
+                nullable = null;
+            var value = nullable.GetValueOrDefault();
+            Tag("End");
+            """;
+        var validator = SETestContext.CreateCS(code, new PreserveTestCheck("boolParameter", "nullable", "value")).Validator;
+        var boolParameter = validator.Symbol("boolParameter");
+        var nullable = validator.Symbol("nullable");
+        var value = validator.Symbol("value");
+        validator.TagStates("End").Should().SatisfyRespectively(
+            x =>
+            {
+                x[boolParameter].Should().HaveOnlyConstraints(BoolConstraint.True);                     // NotNull is missing
+                x[nullable].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True);
+                x[value].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True);
+            }, x =>
+            {
+                x[boolParameter].Should().HaveOnlyConstraints(BoolConstraint.False);                    // NotNull is missing
+                x[nullable].Should().HaveOnlyConstraint(ObjectConstraint.Null);
+                x[value].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False);
+            });
+    }
 }
