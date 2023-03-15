@@ -454,7 +454,7 @@ public partial class SonarAnalysisContextBaseTest
         {
             LanguageNames.CSharp => builder.WithLanguageVersion(Microsoft.CodeAnalysis.CSharp.LanguageVersion.Latest),
             LanguageNames.VisualBasic => builder.WithLanguageVersion(Microsoft.CodeAnalysis.VisualBasic.LanguageVersion.Latest),
-            _ => throw new UnexpectedLanguageException(language.LanguageName)
+            _ => throw new UnexpectedLanguageException(language)
         };
         builder.VerifyNoIssueReported();
     }
