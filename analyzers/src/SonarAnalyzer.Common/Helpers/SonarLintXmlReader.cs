@@ -100,8 +100,8 @@ public class SonarLintXmlReader
 
     private string ReadSettingsProperty(string property) =>
         sonarLintXml is { Settings: { } settings }
-        ? settings.Where(x => x.Key.Equals(property)).Select(x => x.Value).FirstOrDefault()
-        : null;
+            ? settings.Where(x => x.Key.Equals(property)).Select(x => x.Value).FirstOrDefault()
+            : null;
 
     private static string[] ReadCommaSeparatedArray(string str) =>
         string.IsNullOrEmpty(str) ? Array.Empty<string>() : str.Split(',');
