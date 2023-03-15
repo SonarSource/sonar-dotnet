@@ -279,18 +279,24 @@ public void Method()
                 Dim iCInt = CInt(o)
                 Dim iDirectCast As Integer = DirectCast(o, Integer)
                 Dim iImplicit As Integer = o
+                Dim iTryCast As Integer = TryCast(o, Object) ' Two conversions: Implicit and TryCast
+                Dim iTryCastBoxing As Object = TryCast(iTryCast, Object)
 
                 Tag("Object", o)
                 Tag("CType", iCType)
                 Tag("CInt", iCInt)
                 Tag("DirectCast", iDirectCast)
                 Tag("Implicit", iImplicit)
+                Tag("TryCast", iTryCast)
+                Tag("TryCastBoxing", iTryCastBoxing)
                 """, new LiteralDummyTestCheck()).Validator;
             validator.ValidateTag("Object", x => x.Should().HaveOnlyConstraints(ObjectConstraint.Null, DummyConstraint.Dummy));
             validator.ValidateTag("CType", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy));
             validator.ValidateTag("CInt", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy));
             validator.ValidateTag("DirectCast", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy));
             validator.ValidateTag("Implicit", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy));
+            validator.ValidateTag("TryCast", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy));
+            validator.ValidateTag("TryCastBoxing", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy));
         }
 
         [TestMethod]
