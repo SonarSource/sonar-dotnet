@@ -136,6 +136,24 @@ namespace Tests.Diagnostics
             }
         }
 
+        const int constInt = 42;
+        const string constNullString = null;
+        const string constNotNullString = "const text";
+        const object constNullObject = null;
+
+        void Const()
+        {
+            constInt.GetType();             // Compliant
+
+            constNullString.ToString();     // Noncompliant
+            constNullString.ToString();     // Compliant - can only be reached when not null
+
+            constNotNullString.ToString();  // Compliant
+
+            constNullObject.ToString();     // Noncompliant
+            constNullObject.ToString();     // Compliant - can only be reached when not null
+        }
+
         void Test_Foreach()
         {
             IEnumerable<int> en = null;
