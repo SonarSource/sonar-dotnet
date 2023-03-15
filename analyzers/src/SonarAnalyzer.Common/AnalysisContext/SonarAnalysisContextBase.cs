@@ -53,9 +53,9 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
     /// <param name="tree">Tree to decide on. Can be null for Symbol-based and Compilation-based scenarios. And we want to analyze those too.</param>
     /// <param name="generatedCodeRecognizer">When set, generated trees are analyzed only when language-specific 'analyzeGeneratedCode' configuration property is also set.</param>
     public bool ShouldAnalyzeTree(SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer) =>
-        ReadSonarLintXml() is var sonarLint
-        && (generatedCodeRecognizer is null || sonarLint.AnalyzeGeneratedCode || !tree.IsGenerated(generatedCodeRecognizer, Compilation))
-        && (tree is null || ShouldAnalyzeFile(sonarLint, tree));
+        SonarLintXml() is var sonarLintXml
+        && (generatedCodeRecognizer is null || sonarLintXml.AnalyzeGeneratedCode || !tree.IsGenerated(generatedCodeRecognizer, Compilation))
+        && (tree is null || (!IsUnchanged(tree) && FileIsIncludedInAnalysis(sonarLintXml, tree.FilePath)));
 
     /// <summary>
     /// Reads configuration from SonarProjectConfig.xml file and caches the result for scope of this analysis.
@@ -79,7 +79,7 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
     /// <summary>
     /// Reads the properties from the SonarLint.xml file and caches the result for the scope of this analysis.
     /// </summary>
-    public SonarLintXmlReader ReadSonarLintXml()
+    public SonarLintXmlReader SonarLintXml()
     {
         if (Options.SonarLintXml() is { } sonarLintXml)
         {
@@ -121,11 +121,9 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
             descriptor.CustomTags.Contains(tag);
     }
 
-    private bool ShouldAnalyzeFile(SonarLintXmlReader sonarLintXml, SyntaxTree tree) =>
-        !IsUnchanged(tree) && IsInSonarLintContextAndIncluded(sonarLintXml, tree.FilePath);
-
-    private bool IsInSonarLintContextAndIncluded(SonarLintXmlReader sonarLintXml, string filePath) =>
-        ProjectConfiguration().ProjectType != ProjectType.Unknown // Not SonarLint context, NuGet or Scanner <= 5.0
+    private bool FileIsIncludedInAnalysis(SonarLintXmlReader sonarLintXml, string filePath) =>
+        ProjectConfiguration().ProjectType != ProjectType.Unknown // If ProjectType != 'Unknown' we are in S4NET context and all files are analyzed.
+                                                                  // If ProjectType == 'Unknown' then we are in SonarLint or NuGet context and we need to check if the file has been excluded from analysis through SonarLint.xml.
         || (FileInclusionCache.GetValue(Compilation, _ => new()) is var cache
             && cache.GetOrAdd(filePath, _ => IsFileIncluded(sonarLintXml, filePath)));
 
