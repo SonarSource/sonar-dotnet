@@ -18,9 +18,9 @@ class Basics
 
     void DereferenceOnValueResult(int? i)
     {
-        _ = i.Value.ToString();                                           // Compliant, unknown
+        _ = i.Value.ToString();        // Compliant, unknown
         i = null;
-        _ = i.Value.ToString();                                           // Noncompliant
+        _ = i.Value.ToString();        // Noncompliant
         //  ^
     }
 
@@ -92,10 +92,10 @@ class Basics
         _ = b1.Value;                                        // Noncompliant
     }
 
-    void AssignmentAndDestructuring()
+    void AssignmentAndDeconstruction()
     {
-        var (b1, _) = (null as bool?, null as bool?);
-        _ = b1.Value;                                        // FN, b is empty
+        var (b, _) = (null as bool?, null as bool?);
+        _ = b.Value;                                         // FN, b is empty
     }
 
     void SwitchExpressions(bool zero)
@@ -282,7 +282,7 @@ class ComplexConditionsSingleNullable
         b = null;
         _ = true | b.Value;  // Noncompliant, "|" evaluates both sides
         _ = b.Value;         // Compliant, unreachable
-        _ = b.Value;         // Compliant, unreachable
+        _ = b.Value;         // Compliant, still unreachable
     }
 
     bool LiftedNot(bool? b) => !b == b && b.Value; // FN, b.Value reached only when b is empty
@@ -302,6 +302,11 @@ class ComplexConditionMultipleNullables
         d.Value == 42.0 && d.HasValue == f.HasValue && f.Value == 42.0; // Compliant, d is non-null, as well as f
     bool DependentConditions3(double? d, float? f) =>
         d.Value == 42.0 && d.HasValue != f.HasValue && f.Value == 42.0; // Noncompliant, d is non-null, unlike f
+
+    void ThirdExcluded(bool? b1, bool? b2)
+    {
+        if (b1 == b2 && b1 != b2) { _ = (null as int?).Value; }                             // Noncompliant, FP: unreachable
+    }
 
     void Transitivity(bool? b1, bool? b2, bool? b3)
     {
@@ -329,8 +334,8 @@ class ComplexConditionMultipleNullables
     void Reachability3(bool? b1, bool? b2)
     {
         _ = b1.Value | b2.Value;
-        _ = b1.Value;         // Compliant, "&" evaluates both sides
-        _ = b2.Value;         // Compliant, "&" evaluates both sides
+        _ = b1.Value;         // Compliant, "|" evaluates both sides
+        _ = b2.Value;         // Compliant, "|" evaluates both sides
     }
 }
 
@@ -416,7 +421,7 @@ class Repro_4573
             }
             if (foo == null)
             {
-                Console.WriteLine(foo.Value.ToString());    // FN, foo is empty
+                Console.WriteLine(foo.Value.ToString());    // Compliant, unreachable
             }
             if (foo != null)
             {
@@ -488,7 +493,7 @@ class Repro_4573
                 }
                 if (foo == null)
                 {
-                    Console.WriteLine(foo.Value.ToString());    // FN, foo is empty
+                    Console.WriteLine(foo.Value.ToString());    // Compliant, unreachable
                 }
                 if (foo != null)
                 {
@@ -501,31 +506,53 @@ class Repro_4573
 
 class Casts
 {
-    void Downcast(int? i)
+    void Downcast1(int? i)
     {
         _ = (int)i;                   // Compliant, same as i.Value with i unknown
         i = null;
-        _ = (int)i;                   // Noncompliant
+        _ = (int)i;                   // Noncompliant, empty
         i = 42;
-        _ = (int)i;                   // Compliant
-        i = null;
-        _ = i.Value;                  // Noncompliant
         _ = (int)i;                   // Compliant, unreachable
     }
 
-    void Upcast(int? i1, int? i2)
+    void Downcast2(int? i)
+    {
+        i = 42;
+        _ = (int)i;                   // Compliant, non-empty
+    }
+
+    void Downcast3(int? i)
+    {
+        i = null;
+        _ = i.Value;                  // Noncompliant, empty
+        _ = (int)i;                   // Compliant, unreachable
+    }
+
+    void Upcast1(int? i1, int? i2)
+    {
+        _ = ((int?)null).Value;       // Noncompliant
+    }
+
+    void Upcast2(int? i1, int? i2)
     {
         _ = ((int?)null).Value;       // Noncompliant
         i2 = null;
-        _ = ((int?)i2).Value;         // Noncompliant
+        _ = ((int?)i2).Value;         // Noncompliant, FP: unreachable
     }
 
-    void AsOperator(int? i)
+    void AsOperator1(int? i)
     {
         _ = (i as int?).Value;        // Compliant
         _ = (null as int?).Value;     // Noncompliant
         i = null;
-        _ = (i as int?).Value;        // Noncompliant
+        _ = (i as int?).Value;        // Noncompliant, FP: unreachable
+    }
+
+    void AsOperator2(int? i)
+    {
+        _ = (i as int?).Value;        // Compliant
+        i = null;
+        _ = (i as int?).Value;        // Noncompliant, empty
     }
 }
 
@@ -551,21 +578,24 @@ namespace TypeWithValueProperty
         void Basics1(ClassWithValueProperty i)
         {
             i = null;
-            _ = i.Value;                                 // Compliant, ClassWithValueProperty not a nullable type
+            _ = i.Value;                                                       // Compliant, ClassWithValueProperty not a nullable type
         }
 
         void Basics2(ClassWithValueProperty i)
         {
             i = null;
-            _ = i.APropertyNotCalledValue;               // Compliant
+            _ = i.APropertyNotCalledValue;                                     // Compliant, ClassWithValuePropertyAndImplicitCast not a nullable type
         }
 
-        void Basics3(StructWithValueProperty i)
+        void ImplicitCast(StructWithValuePropertyAndCastOperators i)
         {
-            i = null;
-            _ = i.Value;                                 // Compliant, StructWithValueProperty not a nullable type
-            _ = (null as StructWithValueProperty).Value; // Compliant
+            i = null as int?;                                                  // Noncompliant, FP
+            _ = i.Value;                                                       // Compliant, ClassWithValuePropertyAndImplicitCast not a nullable type
         }
+
+        int ExplicitCast1 => ((StructWithValuePropertyAndCastOperators)(null as long?)).Value;                              // Noncompliant, FP, just gives 42
+        StructWithValuePropertyAndCastOperators ExplicitCast2 => (null as StructWithValuePropertyAndCastOperators?).Value;  // Noncompliant, FP, just gives a struct
+        int ExplicitCast3 => (null as StructWithValuePropertyAndCastOperators?).Value.Value;                                // Noncompliant, FP, just gives 42
     }
 
     class ClassWithValueProperty
@@ -574,11 +604,12 @@ namespace TypeWithValueProperty
         public int APropertyNotCalledValue => 42;
     }
 
-    class StructWithValueProperty
+    struct StructWithValuePropertyAndCastOperators
     {
         public int Value => 42;
         public int APropertyNotCalledValue => 42;
 
-        public static implicit operator StructWithValueProperty(int? value) => new StructWithValueProperty();
+        public static implicit operator StructWithValuePropertyAndCastOperators(int? value) => new StructWithValuePropertyAndCastOperators();
+        public static explicit operator StructWithValuePropertyAndCastOperators(long? value) => new StructWithValuePropertyAndCastOperators();
     }
 }
