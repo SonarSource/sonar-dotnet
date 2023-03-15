@@ -19,6 +19,7 @@
  */
 
 using SonarAnalyzer.SymbolicExecution.Constraints;
+using SonarAnalyzer.SymbolicExecution.Roslyn.Checks;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
@@ -198,8 +199,24 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
         return context.State.ToArray();
     }
 
-    private static ProgramState[] ProcessNullableGetValueOrDefault(SymbolicContext context, IInvocationOperationWrapper invocation) =>
-        context.State.SetOperationValue(invocation, context.State[invocation.Instance]).ToArray();
+    private static ProgramState[] ProcessNullableGetValueOrDefault(SymbolicContext context, IInvocationOperationWrapper invocation)
+    {
+        var instanceValue = context.State[invocation.Instance];
+        if (instanceValue?.HasConstraint(ObjectConstraint.Null) is true)
+        {
+            return ((INamedTypeSymbol)invocation.Instance.Type).TypeArguments.Single().Is(KnownType.System_Boolean)
+                ? context.State.SetOperationValue(invocation, SymbolicValue.False).ToArray()
+                : context.State.ToArray();
+        }
+        else if (instanceValue is not null)
+        {
+            return context.State.SetOperationValue(invocation, instanceValue).ToArray();
+        }
+        else
+        {
+            return context.State.ToArray();
+        }
+    }
 
     private static bool IsThrowHelper(IMethodSymbol method) =>
         method.Is(KnownType.System_Diagnostics_Debug, nameof(Debug.Fail))

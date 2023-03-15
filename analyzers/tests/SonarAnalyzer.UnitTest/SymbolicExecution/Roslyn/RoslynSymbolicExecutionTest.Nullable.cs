@@ -213,9 +213,9 @@ public partial class RoslynSymbolicExecutionTest
             """;
         var validator = SETestContext.CreateCS(code, ", int? arg").Validator;
         validator.ValidateTag("UnknownArg", x => x.Should().HaveNoConstraints());
-        validator.ValidateTag("UnknownValue", x => x.Should().HaveNoConstraints());
+        validator.ValidateTag("UnknownValue", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
         validator.ValidateTag("NullArg", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
-        validator.ValidateTag("NullValue", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
+        validator.ValidateTag("NullValue", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
         validator.ValidateTag("NotNullArg", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
         validator.ValidateTag("NotNullValue", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
     }
@@ -240,9 +240,9 @@ public partial class RoslynSymbolicExecutionTest
             """;
         var validator = SETestContext.CreateCS(code, ", bool? arg").Validator;
         validator.ValidateTag("UnknownArg", x => x.Should().HaveNoConstraints());
-        validator.ValidateTag("UnknownValue", x => x.Should().HaveNoConstraints());                             // FIXME: Should be HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False));
+        validator.ValidateTag("UnknownValue", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
         validator.ValidateTag("NullArg", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
-        validator.ValidateTag("NullValue", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));          // FIXME: Should be HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False));
+        validator.ValidateTag("NullValue", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False));
         validator.ValidateTag("NotNullArg", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True));
         validator.ValidateTag("NotNullValue", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True));
     }
