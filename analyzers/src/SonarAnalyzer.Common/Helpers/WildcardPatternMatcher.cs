@@ -25,87 +25,78 @@ using System.Text.RegularExpressions;
 
 namespace SonarAnalyzer.Helpers;
 
-internal class WildcardPatternMatcher
+internal static class WildcardPatternMatcher
 {
-    public static bool IsMatch(string pattern, string input, bool timoutFallback = false) =>
+    private static readonly ConcurrentDictionary<string, Regex> Cache = new();
+
+    public static bool IsMatch(string pattern, string input, bool timeoutFallbackResult) =>
         !(string.IsNullOrWhiteSpace(pattern) || string.IsNullOrWhiteSpace(input))
-        && WildcardPattern.Create(pattern).Match(input, timoutFallback);
+        && Cache.GetOrAdd(pattern + Path.DirectorySeparatorChar, _ => new Regex(ToRegex(pattern), RegexOptions.None, RegexConstants.DefaultTimeout)) is var regex
+        && IsMatch(regex, input, timeoutFallbackResult);
+
+    private static bool IsMatch(Regex regex, string value, bool timeoutFallbackResult)
+    {
+        try
+        {
+            return regex.IsMatch(value.Trim('/'));
+        }
+        catch (RegexMatchTimeoutException)
+        {
+            return timeoutFallbackResult;
+        }
+    }
 
     /// <summary>
     /// Copied from https://github.com/SonarSource/sonar-plugin-api/blob/a9bd7ff48f0f77811ed909070030678c443c975a/sonar-plugin-api/src/main/java/org/sonar/api/utils/WildcardPattern.java.
     /// </summary>
-    private sealed class WildcardPattern
+    private static string ToRegex(string wildcardPattern)
     {
-        private static readonly ConcurrentDictionary<string, WildcardPattern> Cache = new();
-        private readonly Regex pattern;
-
-        private WildcardPattern(string pattern) =>
-            this.pattern = new Regex(ToRegex(pattern), RegexOptions.None, RegexConstants.DefaultTimeout);
-
-        public bool Match(string value, bool timoutFallback)
+        var escapedDirectorySeparator = Regex.Escape(Path.DirectorySeparatorChar.ToString());
+        var sb = new StringBuilder("^", wildcardPattern.Length);
+        var i = IsSlash(wildcardPattern[0]) ? 1 : 0;
+        while (i < wildcardPattern.Length)
         {
-            try
+            var ch = wildcardPattern[i];
+            if (ch == '*')
             {
-                return pattern.IsMatch(value.Trim('/'));
-            }
-            catch (RegexMatchTimeoutException)
-            {
-                return timoutFallback;
-            }
-        }
-
-        public static WildcardPattern Create(string pattern) =>
-            Cache.GetOrAdd(pattern + Path.DirectorySeparatorChar, _ => new WildcardPattern(pattern));
-
-        private static string ToRegex(string wildcardPattern)
-        {
-            var escapedDirectorySeparator = Regex.Escape(Path.DirectorySeparatorChar.ToString());
-            var sb = new StringBuilder("^", wildcardPattern.Length);
-            var i = IsSlash(wildcardPattern[0]) ? 1 : 0;
-            while (i < wildcardPattern.Length)
-            {
-                var ch = wildcardPattern[i];
-                if (ch == '*')
+                if (i + 1 < wildcardPattern.Length && wildcardPattern[i + 1] == '*')
                 {
-                    if (i + 1 < wildcardPattern.Length && wildcardPattern[i + 1] == '*')
+                    // Double asterisk - Zero or more directories
+                    if (i + 2 < wildcardPattern.Length && IsSlash(wildcardPattern[i + 2]))
                     {
-                        // Double asterisk - Zero or more directories
-                        if (i + 2 < wildcardPattern.Length && IsSlash(wildcardPattern[i + 2]))
-                        {
-                            sb.Append($"(.*{escapedDirectorySeparator}|)");
-                            i += 2;
-                        }
-                        else
-                        {
-                            sb.Append(".*");
-                            i += 1;
-                        }
+                        sb.Append($"(.*{escapedDirectorySeparator}|)");
+                        i += 2;
                     }
                     else
                     {
-                        // Single asterisk - Zero or more characters excluding directory separator
-                        sb.Append($"[^{escapedDirectorySeparator}]*?");
+                        sb.Append(".*");
+                        i += 1;
                     }
-                }
-                else if (ch == '?')
-                {
-                    // Any single character excluding directory separator
-                    sb.Append($"[^{escapedDirectorySeparator}]");
-                }
-                else if (IsSlash(ch))
-                {
-                    sb.Append(escapedDirectorySeparator);
                 }
                 else
                 {
-                    sb.Append(Regex.Escape(ch.ToString()));
+                    // Single asterisk - Zero or more characters excluding directory separator
+                    sb.Append($"[^{escapedDirectorySeparator}]*?");
                 }
-                i++;
             }
-            return sb.Append('$').ToString();
+            else if (ch == '?')
+            {
+                // Any single character excluding directory separator
+                sb.Append($"[^{escapedDirectorySeparator}]");
+            }
+            else if (IsSlash(ch))
+            {
+                sb.Append(escapedDirectorySeparator);
+            }
+            else
+            {
+                sb.Append(Regex.Escape(ch.ToString()));
+            }
+            i++;
         }
-
-        private static bool IsSlash(char ch) =>
-            ch == '/' || ch == '\\';
+        return sb.Append('$').ToString();
     }
+
+    private static bool IsSlash(char ch) =>
+        ch == '/' || ch == '\\';
 }

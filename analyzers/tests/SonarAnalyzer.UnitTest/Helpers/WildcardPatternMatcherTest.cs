@@ -88,7 +88,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             // The test cases are copied from the plugin-api and the directory separators need replacing as Roslyn will not give us the paths with '/'.
             input = input.Replace("/", Path.DirectorySeparatorChar.ToString());
 
-            WildcardPatternMatcher.IsMatch(pattern, input).Should().Be(expectedResult);
+            WildcardPatternMatcher.IsMatch(pattern, input, false).Should().Be(expectedResult);
         }
 
         [DataTestMethod]
@@ -97,12 +97,12 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [DataRow("/")]
         [DataRow("\\")]
         public void IsMatch_InvalidPattern_ReturnsFalse(string pattern) =>
-            WildcardPatternMatcher.IsMatch(pattern, "foo").Should().BeFalse();
+            WildcardPatternMatcher.IsMatch(pattern, "foo", false).Should().BeFalse();
 
         [DataTestMethod]
         [DataRow(null, "foo")]
         [DataRow("foo", null)]
         public void IsMatch_InputParametersArenull_DoesNotThrow(string pattern, string input) =>
-            WildcardPatternMatcher.IsMatch(pattern, input).Should().BeFalse();
+            WildcardPatternMatcher.IsMatch(pattern, input, false).Should().BeFalse();
     }
 }
