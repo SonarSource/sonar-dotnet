@@ -255,6 +255,61 @@ public void Method()
 #endif
 
         [TestMethod]
+        public void Conversion_ToLocalNonNullableValueType_CS()
+        {
+            var validator = SETestContext.CreateCS("""
+                object o = null; // Set ObjectConstraint.Null and Dummy (LiteralDummyTestCheck)
+                int convert = System.Convert.ToInt32(o);
+                int explicitCast = (int)o;
+                object implicitBoxing = explicitCast;
+                object asBoxing = explicitCast as object;
+                object unboxingBoxing = (object)(int)o;
+
+                Tag("Object", o);
+                Tag("Convert", convert);
+                Tag("Explicit", explicitCast);
+                Tag("ImplicitBoxing", implicitBoxing);
+                Tag("AsBoxing", asBoxing);
+                Tag("UnboxingBoxing", unboxingBoxing);
+                """, new LiteralDummyTestCheck()).Validator;
+            validator.ValidateTag("Object", x => x.Should().HaveOnlyConstraints(ObjectConstraint.Null, DummyConstraint.Dummy));
+            validator.ValidateTag("Convert", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
+            validator.ValidateTag("Explicit", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy));
+            validator.ValidateTag("ImplicitBoxing", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy));
+            validator.ValidateTag("AsBoxing", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy));
+            validator.ValidateTag("UnboxingBoxing", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy));
+        }
+
+        [TestMethod]
+        public void Conversion_ToLocalNonNullableValueType_VB()
+        {
+            var validator = SETestContext.CreateVB("""
+                Dim o As Object = Nothing ' Set ObjectConstraint.Null and Dummy (LiteralDummyTestCheck)
+                Dim iCType As Integer = CType(o, Integer)
+                Dim iCInt = CInt(o)
+                Dim iDirectCast As Integer = DirectCast(o, Integer)
+                Dim iImplicit As Integer = o
+                Dim iTryCast As Integer = TryCast(o, Object) ' Two conversions: Implicit and TryCast
+                Dim iTryCastBoxing As Object = TryCast(iTryCast, Object)
+
+                Tag("Object", o)
+                Tag("CType", iCType)
+                Tag("CInt", iCInt)
+                Tag("DirectCast", iDirectCast)
+                Tag("Implicit", iImplicit)
+                Tag("TryCast", iTryCast)
+                Tag("TryCastBoxing", iTryCastBoxing)
+                """, new LiteralDummyTestCheck()).Validator;
+            validator.ValidateTag("Object", x => x.Should().HaveOnlyConstraints(ObjectConstraint.Null, DummyConstraint.Dummy));
+            validator.ValidateTag("CType", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy));
+            validator.ValidateTag("CInt", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy));
+            validator.ValidateTag("DirectCast", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy));
+            validator.ValidateTag("Implicit", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy));
+            validator.ValidateTag("TryCast", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy));
+            validator.ValidateTag("TryCastBoxing", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy));
+        }
+
+        [TestMethod]
         public void Argument_Ref_ResetsConstraints_CS() =>
             SETestContext.CreateCS(@"var b = true; Main(boolParameter, ref b); Tag(""B"", b);", ", ref bool outParam").Validator.ValidateTag("B", x => x.Should().BeNull());
 
