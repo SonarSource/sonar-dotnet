@@ -782,6 +782,26 @@ Sample UntrackedSymbol() => this;";
         }
 
         [TestMethod]
+        public void PropertyReference_Write_SetsNotNull_AndRead_SetsNotNull()
+        {
+            const string code = """
+                public object Property { get; set; }
+
+                public void M()
+                {
+                    Property = null;
+                    Tag("AfterSetNull", Property);
+                    _ = Property.ToString();
+                    Tag("AfterReadReference", Property);
+                }
+                """;
+            var validator = SETestContext.CreateCSMethod(code).Validator;
+            validator.ValidateContainsOperation(OperationKind.PropertyReference);
+            validator.ValidateTag("AfterSetNull", x => x.Should().HaveNoConstraints()); // FN Auto-properties should behave the same as fields.
+            validator.ValidateTag("AfterReadReference", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+        }
+
+        [TestMethod]
         public void ArrayElementReference_Read_SetsNotNull()
         {
             const string code = @"
