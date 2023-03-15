@@ -52,25 +52,25 @@ namespace Tests.Diagnostics
         void Test_Property()
         {
             MyClass o = null;
-            _ = o.MyProperty;   // Noncompliant
+            _ = o.Property;   // Noncompliant
             o = null;
-            o.MyProperty = "";  // Noncompliant
+            o.Property = "";  // Noncompliant
         }
 
         void Test_Field()
         {
             MyClass o = null;
-            _ = o.MyField;  // Noncompliant
+            _ = o.Field;  // Noncompliant
             o = null;
-            o.MyField = ""; // Noncompliant
+            o.Field = ""; // Noncompliant
         }
 
         void Test_Event()
         {
             MyClass o = null;
-            o.MyEvent += (s, e) => throw new NotImplementedException(); // Noncompliant
+            o.Event += (s, e) => throw new NotImplementedException(); // Noncompliant
             o = null;
-            o.MyEvent -= (s, e) => throw new NotImplementedException(); // Noncompliant
+            o.Event -= (s, e) => throw new NotImplementedException(); // Noncompliant
         }
 
         void Test_ExtensionMethodWithNull()
@@ -91,7 +91,7 @@ namespace Tests.Diagnostics
         }
         bool OutP(out object o) { o = new object(); return true; }
 
-        void Test_NullableValueTypes()
+        void Test_NullableValueTypes<T>(T? arg) where T : struct
         {
             int? i = null;
             i.GetType();            // Noncompliant
@@ -111,6 +111,29 @@ namespace Tests.Diagnostics
             i.GetHashCode();        // Compliant - safe to call
             i = null;
             i.ToString();           // Compliant - safe to call
+
+            arg.GetType();          // Compliant
+            arg = null;
+            arg.GetType();          // Noncompliant
+            T? localNotNull = new T();
+            localNotNull.GetType(); // Compliant
+            T? localNull = null;
+            localNull.GetType();    // Noncompliant
+        }
+
+        class HasGenericNullable<T> where T : struct
+        {
+            public T? Property { get; set; }
+
+            public void M()
+            {
+                Property = null;
+                _ = Property.HasValue;  // Compliant
+                Property = null;
+                _ = Property.GetType(); // FN
+                Property = default(T);
+                _ = Property.GetType(); // Compliant
+            }
         }
 
         void Test_Foreach()
@@ -301,16 +324,22 @@ namespace Tests.Diagnostics
             MyClass o = null;
             o = new MyClass
             {
-                MyProperty = ""
+                Property = ""
             };
             o.ToString(); // Compliant
         }
 
         class MyClass
         {
-            public string MyProperty { get; set; }
-            public string MyField;
-            public event EventHandler MyEvent;
+            public string Property { get; set; }
+            public string Field;
+            public event EventHandler Event;
+
+            public void M()
+            {
+                Property = null;
+                _ = Property.ToString();  // FN
+            }
         }
 
         public void Assert1(object o)
