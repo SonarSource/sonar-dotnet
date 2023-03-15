@@ -77,6 +77,12 @@ namespace Tests.Diagnostics.CSharp8
             int? i1 = null;
             i1 = i1 ?? i1.GetHashCode(); // FN, was supported before
         }
+
+        void Default<T>() where T : struct
+        {
+            T? localDefault = default;
+            localDefault.GetType(); // Noncompliant
+        }
     }
 
     public class SwitchExpressions

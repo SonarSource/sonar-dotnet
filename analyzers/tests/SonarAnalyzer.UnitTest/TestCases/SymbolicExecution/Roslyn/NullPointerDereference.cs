@@ -49,6 +49,30 @@ namespace Tests.Diagnostics
             M2(o.ToString()); // Noncompliant
         }
 
+        void Test_Property()
+        {
+            MyClass o = null;
+            _ = o.Property;   // Noncompliant
+            o = null;
+            o.Property = "";  // Noncompliant
+        }
+
+        void Test_Field()
+        {
+            MyClass o = null;
+            _ = o.Field;  // Noncompliant
+            o = null;
+            o.Field = ""; // Noncompliant
+        }
+
+        void Test_Event()
+        {
+            MyClass o = null;
+            o.Event += (s, e) => throw new NotImplementedException(); // Noncompliant
+            o = null;
+            o.Event -= (s, e) => throw new NotImplementedException(); // Noncompliant
+        }
+
         void Test_ExtensionMethodWithNull()
         {
             object o = null;
@@ -67,7 +91,7 @@ namespace Tests.Diagnostics
         }
         bool OutP(out object o) { o = new object(); return true; }
 
-        void Test_NullableValueTypes()
+        void Test_NullableValueTypes<T>(T? arg) where T : struct
         {
             int? i = null;
             i.GetType();            // Noncompliant
@@ -87,6 +111,54 @@ namespace Tests.Diagnostics
             i.GetHashCode();        // Compliant - safe to call
             i = null;
             i.ToString();           // Compliant - safe to call
+
+            arg.GetType();          // Compliant
+            arg = null;
+            arg.GetType();          // Noncompliant
+
+            T? localNotNull = new T();
+            localNotNull.GetType();             // Compliant
+            T? localNull = null;
+            localNull.GetType();                // Noncompliant
+            T? localNewNull = new T?();
+            localNewNull.GetType();             // Noncompliant
+            T? localDefaultT = default(T);
+            localDefaultT.GetType();            // Compliant
+            T? localDefaultNullableT = default(T?);
+            localDefaultNullableT.GetType();    // Noncompliant
+        }
+
+        class HasGenericNullable<T> where T : struct
+        {
+            public T? Property { get; set; }
+
+            public void M()
+            {
+                Property = null;
+                _ = Property.HasValue;  // Compliant
+                Property = null;
+                Property.GetType();     // FN https://github.com/SonarSource/sonar-dotnet/issues/6930
+                Property = default(T);
+                Property.GetType();     // Compliant
+            }
+        }
+
+        const int constInt = 42;
+        const string constNullString = null;
+        const string constNotNullString = "const text";
+        const object constNullObject = null;
+
+        void Const()
+        {
+            constInt.GetType();             // Compliant
+
+            constNullString.ToString();     // Noncompliant
+            constNullString.ToString();     // Compliant - can only be reached when not null
+
+            constNotNullString.ToString();  // Compliant
+
+            constNullObject.ToString();     // Noncompliant
+            constNullObject.ToString();     // Compliant - can only be reached when not null
         }
 
         void Test_Foreach()
@@ -277,14 +349,22 @@ namespace Tests.Diagnostics
             MyClass o = null;
             o = new MyClass
             {
-                MyProperty = ""
+                Property = ""
             };
             o.ToString(); // Compliant
         }
 
         class MyClass
         {
-            public string MyProperty { get; set; }
+            public string Property { get; set; }
+            public string Field;
+            public event EventHandler Event;
+
+            public void M()
+            {
+                Property = null;
+                Property.ToString();  // FN https://github.com/SonarSource/sonar-dotnet/issues/6930
+            }
         }
 
         public void Assert1(object o)
