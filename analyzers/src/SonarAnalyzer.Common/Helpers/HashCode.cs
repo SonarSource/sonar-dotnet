@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Helpers
         private const int RotateOffset = 17;
 
         public static int DictionaryContentHash<TKey, TValue>(IDictionary<TKey, TValue> dictionary) =>
-            dictionary.Aggregate(0, (seed, kvp) => Combine(seed, kvp.Key, kvp.Value));
+            dictionary.Aggregate(0, (seed, kvp) => seed ^ Combine(kvp.Key, kvp.Value));
 
         public static int EnumerableContentHash<TValue>(IEnumerable<TValue> enumerable) =>
             enumerable.Aggregate(0, (seed, x) => Combine(seed, x));
