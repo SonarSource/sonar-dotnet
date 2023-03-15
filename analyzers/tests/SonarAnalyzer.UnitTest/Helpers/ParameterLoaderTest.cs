@@ -41,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
             // Act
-            ParameterLoader.SetParameterValues(analyzer, compilation.SonarLintFile());
+            ParameterLoader.SetParameterValues(analyzer, compilation.ReadSonarLintXml());
 
             // Assert
             analyzer.Maximum.Should().Be(3); // Default value
@@ -57,7 +57,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
             // Act
-            ParameterLoader.SetParameterValues(analyzer, compilation.SonarLintFile());
+            ParameterLoader.SetParameterValues(analyzer, compilation.ReadSonarLintXml());
 
             // Assert
             analyzer.Maximum.Should().Be(1); // Value from the xml file
@@ -71,7 +71,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
             // Act
-            ParameterLoader.SetParameterValues(analyzer, compilation.SonarLintFile());
+            ParameterLoader.SetParameterValues(analyzer, compilation.ReadSonarLintXml());
 
             // Assert
             analyzer.Maximum.Should().Be(1); // Value from the xml file
@@ -87,7 +87,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var analyzer = new EnumNameShouldFollowRegex(); // Cannot use mock because we use reflection to find properties.
 
             // Act
-            ParameterLoader.SetParameterValues(analyzer, compilation.SonarLintFile());
+            ParameterLoader.SetParameterValues(analyzer, compilation.ReadSonarLintXml());
 
             // Assert
             analyzer.FlagsEnumNamePattern.Should().Be(parameterValue); // value from XML file
@@ -103,7 +103,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var analyzer = new CheckFileLicense(); // Cannot use mock because we use reflection to find properties.
 
             // Act
-            ParameterLoader.SetParameterValues(analyzer, compilation.SonarLintFile());
+            ParameterLoader.SetParameterValues(analyzer, compilation.ReadSonarLintXml());
 
             // Assert
             analyzer.IsRegularExpression.Should().Be(parameterValue); // value from XML file
@@ -117,7 +117,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var analyzer = new LineLength(); // Cannot use mock because we use reflection to find properties.
 
             // Act
-            ParameterLoader.SetParameterValues(analyzer, compilation.SonarLintFile());
+            ParameterLoader.SetParameterValues(analyzer, compilation.ReadSonarLintXml());
 
             // Assert
             analyzer.Maximum.Should().Be(200); // Default value
@@ -149,7 +149,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
             // Act
-            ParameterLoader.SetParameterValues(analyzer, compilation.SonarLintFile());
+            ParameterLoader.SetParameterValues(analyzer, compilation.ReadSonarLintXml());
             analyzer.Maximum.Should().Be(maxValue);
 
             // Modify the in-memory additional file
@@ -159,7 +159,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var modifiedFilePath = TestHelper.WriteFile(TestContext, "SonarLint.xml", modifiedSonarLintXml);
             compilation = CreateCompilationWithOption(modifiedFilePath);
 
-            ParameterLoader.SetParameterValues(analyzer, compilation.SonarLintFile());
+            ParameterLoader.SetParameterValues(analyzer, compilation.ReadSonarLintXml());
             analyzer.Maximum.Should().Be(maxValue);
         }
 
@@ -174,7 +174,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
             // Act
-            ParameterLoader.SetParameterValues(analyzer, compilation.SonarLintFile());
+            ParameterLoader.SetParameterValues(analyzer, compilation.ReadSonarLintXml());
 
             // Assert
             analyzer.Maximum.Should().Be(3); // Default value
@@ -190,7 +190,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
             // Act
-            ParameterLoader.SetParameterValues(analyzer, compilation.SonarLintFile());
+            ParameterLoader.SetParameterValues(analyzer, compilation.ReadSonarLintXml());
 
             // Assert
             analyzer.Maximum.Should().Be(3); // Default value
@@ -206,7 +206,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var analyzer = new CheckFileLicense(); // Cannot use mock because we use reflection to find properties.
 
             // Act
-            ParameterLoader.SetParameterValues(analyzer, compilation.SonarLintFile());
+            ParameterLoader.SetParameterValues(analyzer, compilation.ReadSonarLintXml());
 
             // Assert
             analyzer.IsRegularExpression.Should().BeFalse(); // Default value
