@@ -782,7 +782,7 @@ Sample UntrackedSymbol() => this;";
         }
 
         [TestMethod]
-        public void PropertyReference_Write_SetsNull_AndRead_SetsNotNull_ForAutoProperties()
+        public void PropertyReference_AutoProperty_IsTracked()
         {
             const string code = """
                 public object AutoProperty { get; set; }
@@ -797,12 +797,12 @@ Sample UntrackedSymbol() => this;";
                 """;
             var validator = SETestContext.CreateCSMethod(code).Validator;
             validator.ValidateContainsOperation(OperationKind.PropertyReference);
-            validator.ValidateTag("AfterSetNull", x => x.Should().HaveNoConstraints()); // FN Auto-properties should behave the same as fields. Expected: HaveOnlyConstraint(ObjectConstraint.Null)
+            validator.ValidateTag("AfterSetNull", x => x.Should().HaveNoConstraints()); // FIXME Auto-properties should behave the same as fields. Expected: HaveOnlyConstraint(ObjectConstraint.Null)
             validator.ValidateTag("AfterReadReference", x => x.Should().HaveNoConstraints()); // FN Expected: HaveOnlyConstraint(ObjectConstraint.NotNull)
         }
 
         [TestMethod]
-        public void PropertyReference_NotTrackedFor_FullProperties()
+        public void PropertyReference_FullProperties_NotTracked()
         {
             const string code = """
                 private object _FullProperty;
