@@ -22,8 +22,8 @@ namespace SonarAnalyzer.Common
 {
     public sealed class UnexpectedLanguageException : Exception
     {
-        public UnexpectedLanguageException(AnalyzerLanguage language) : base($"Unexpected language: {language}") { }
-
         public UnexpectedLanguageException(string language) : base($"Unexpected language: {language}") { }
+
+        public UnexpectedLanguageException(AnalyzerLanguage language) : this(language.LanguageName) { }
     }
 }
