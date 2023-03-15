@@ -32,19 +32,23 @@ public class SonarLintXmlReader
 
     private readonly SonarLintXml sonarLintXml;
 
+    private bool? ignoreHeaderCommentsCS;
+    private bool? ignoreHeaderCommentsVB;
     public bool IgnoreHeaderComments(string language) =>
         language switch
         {
-            LanguageNames.CSharp => ReadBoolean(ReadSettingsProperty("sonar.cs.ignoreHeaderComments")),
-            LanguageNames.VisualBasic => ReadBoolean(ReadSettingsProperty("sonar.vbnet.ignoreHeaderComments")),
+            LanguageNames.CSharp => ignoreHeaderCommentsCS ??= ReadBoolean(ReadSettingsProperty("sonar.cs.ignoreHeaderComments")),
+            LanguageNames.VisualBasic => ignoreHeaderCommentsVB ??= ReadBoolean(ReadSettingsProperty("sonar.vbnet.ignoreHeaderComments")),
             _ => throw new UnexpectedLanguageException($"Language '{language}' is not supported.")
         };
 
+    private bool? analyzeGeneratedCodeCS;
+    private bool? analyzeGeneratedCodeVB;
     public bool AnalyzeGeneratedCode(string language) =>
         language switch
         {
-            LanguageNames.CSharp => ReadBoolean(ReadSettingsProperty("sonar.cs.analyzeGeneratedCode")),
-            LanguageNames.VisualBasic => ReadBoolean(ReadSettingsProperty("sonar.vbnet.analyzeGeneratedCode")),
+            LanguageNames.CSharp => analyzeGeneratedCodeCS ??= ReadBoolean(ReadSettingsProperty("sonar.cs.analyzeGeneratedCode")),
+            LanguageNames.VisualBasic => analyzeGeneratedCodeVB ??= ReadBoolean(ReadSettingsProperty("sonar.vbnet.analyzeGeneratedCode")),
             _ => throw new UnexpectedLanguageException($"Language '{language}' is not supported.")
         };
 
