@@ -115,10 +115,15 @@ namespace Tests.Diagnostics
             arg.GetType();          // Compliant
             arg = null;
             arg.GetType();          // Noncompliant
+
             T? localNotNull = new T();
-            localNotNull.GetType(); // Compliant
-            T? localNull = null;
-            localNull.GetType();    // Noncompliant
+            localNotNull.GetType();     // Compliant
+            T? localNewNull = new T?();
+            localNewNull.GetType();     // Noncompliant
+            T? localDefaultT = default(T);
+            localDefaultT.GetType();    // Compliant
+            T? localDefaultNullableT = default(T?);
+            localDefaultNullableT.GetType();    // Noncompliant
         }
 
         class HasGenericNullable<T> where T : struct
