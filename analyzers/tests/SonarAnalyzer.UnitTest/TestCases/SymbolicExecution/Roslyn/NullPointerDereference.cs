@@ -130,7 +130,7 @@ namespace Tests.Diagnostics
                 Property = null;
                 _ = Property.HasValue;  // Compliant
                 Property = null;
-                _ = Property.GetType(); // FN
+                _ = Property.GetType(); // FN https://github.com/SonarSource/sonar-dotnet/issues/6930
                 Property = default(T);
                 _ = Property.GetType(); // Compliant
             }
@@ -356,7 +356,7 @@ namespace Tests.Diagnostics
             public void M()
             {
                 Property = null;
-                _ = Property.ToString();  // FN
+                Property.ToString();  // FN https://github.com/SonarSource/sonar-dotnet/issues/6930
             }
         }
 
