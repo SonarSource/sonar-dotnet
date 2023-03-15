@@ -23,7 +23,7 @@ using System.Xml.Serialization;
 namespace SonarAnalyzer.Helpers;
 
 /// <summary>
-/// DTO to represent the SonarLint.xml for our analyzers.
+/// Data class to represent the SonarLint.xml for our analyzers.
 /// </summary>
 /// <remarks>
 /// This class should not be used in this codebase. To get SonarLint.xml properties, use <see cref="SonarLintXmlReader"/>.
