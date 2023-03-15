@@ -20,34 +20,44 @@
 
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
-namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
+namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
+
+public abstract class NullPointerDereferenceBase : SymbolicRuleCheck
 {
-    public abstract class NullPointerDereferenceBase : SymbolicRuleCheck
+    internal const string DiagnosticId = "S2259";
+
+    protected virtual bool IsSupressed(SyntaxNode node) => false;
+
+    protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
-        internal const string DiagnosticId = "S2259";
-
-        protected virtual bool IsSupressed(SyntaxNode node) => false;
-
-        protected override ProgramState PreProcessSimple(SymbolicContext context)
+        if (NullDereferenceCandidate(context.Operation.Instance) is { } reference
+            && context.HasConstraint(reference, ObjectConstraint.Null)
+            && !IsSupressed(reference.Syntax)
+            && SemanticModel.GetTypeInfo(reference.Syntax).Nullability().FlowState != NullableFlowState.NotNull)
         {
-            var reference = context.Operation.Instance.Kind switch
-            {
-                OperationKindEx.Invocation => context.Operation.Instance.ToInvocation().Instance,
-                OperationKindEx.PropertyReference => context.Operation.Instance.ToPropertyReference().Instance,
-                OperationKindEx.Await => context.Operation.Instance.ToAwait().Operation,
-                OperationKindEx.ArrayElementReference => context.Operation.Instance.ToArrayElementReference().ArrayReference,
-                _ => null,
-            };
-            if (reference != null
-                && context.HasConstraint(reference, ObjectConstraint.Null)
-                && !reference.Type.IsStruct() // ToDo: IsStruct() is a workaround before MMF-2401
-                && !IsSupressed(reference.Syntax)
-                && SemanticModel.GetTypeInfo(reference.Syntax).Nullability().FlowState != NullableFlowState.NotNull)
-            {
-                ReportIssue(reference, reference.Syntax.ToString());
-            }
-
-            return context.State;
+            ReportIssue(reference, reference.Syntax.ToString());
         }
+        return context.State;
     }
+
+    private static IOperation NullDereferenceCandidate(IOperation operation) =>
+        operation.Kind switch
+        {
+            OperationKindEx.Invocation => NullInstanceCandidate(operation.ToInvocation()),
+            OperationKindEx.PropertyReference => NullInstanceCandidate(operation.ToPropertyReference()),
+            OperationKindEx.Await => operation.ToAwait().Operation,
+            OperationKindEx.ArrayElementReference => operation.ToArrayElementReference().ArrayReference,
+            _ => null,
+        };
+
+    private static IOperation NullInstanceCandidate(IInvocationOperationWrapper operation) =>
+        operation.TargetMethod.ContainingType.Is(KnownType.System_Nullable_T)
+        && operation.TargetMethod.Name != nameof(Nullable<int>.GetType) // All methods on Nullable but .GetType() are safe to call
+            ? null
+            : operation.Instance;
+
+    private static IOperation NullInstanceCandidate(IPropertyReferenceOperationWrapper operation) =>
+        operation.Property.IsInType(KnownType.System_Nullable_T)    // HasValue doesn't throw; Value is covered by S3655
+            ? null
+            : operation.Instance;
 }
