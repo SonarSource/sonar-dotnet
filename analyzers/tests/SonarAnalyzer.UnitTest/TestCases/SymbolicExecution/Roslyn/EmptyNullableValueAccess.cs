@@ -73,7 +73,7 @@ class Basics
         var b = o as bool?;
         if (b != null)
         {
-            _ = b.Value;                                     // Noncompliant, FP
+            _ = b.Value;                                     // Compliant
         }
     }
 

@@ -106,7 +106,7 @@ public class Sample
         {
             if (value == null)
             {
-                field = value.Value;   // FN
+                field = value.Value;   // Noncompliant
             }
         }
     }
