@@ -276,15 +276,19 @@ public void Method()
             var validator = SETestContext.CreateVB("""
                 Dim o As Object = Nothing ' Set ObjectConstraint.Null and Dummy (LiteralDummyTestCheck)
                 Dim iCType As Integer = CType(o, Integer)
+                Dim iCInt = CInt(o)
                 Dim iDirectCast As Integer = DirectCast(o, Integer)
                 Dim iImplicit As Integer = o
+
                 Tag("Object", o)
                 Tag("CType", iCType)
+                Tag("CInt", iCInt)
                 Tag("DirectCast", iDirectCast)
                 Tag("Implicit", iImplicit)
                 """, new LiteralDummyTestCheck()).Validator;
             validator.ValidateTag("Object", x => x.Should().HaveOnlyConstraints(ObjectConstraint.Null, DummyConstraint.Dummy));
             validator.ValidateTag("CType", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy));
+            validator.ValidateTag("CInt", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy));
             validator.ValidateTag("DirectCast", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy));
             validator.ValidateTag("Implicit", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy));
         }
