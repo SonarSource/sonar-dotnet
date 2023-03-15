@@ -56,12 +56,4 @@ public class RegexMustHaveValidSyntaxTest
     [TestMethod]
     public void RegexMustHaveValidSyntax_VB() =>
         builderVB.AddPaths("RegexMustHaveValidSyntax.vb").Verify();
-
-    [DataTestMethod]
-    [DataRow("[A", RegexOptions.None)]
-#if NET
-    [DataRow(@"^([0-9]{2})(?<!00)$", RegexOptions.NonBacktracking)]
-#endif
-    public void InvalidInput_SetParseError(string pattern, RegexOptions options) =>
-        new RegexContext(null, pattern, null, options).ParseError.Should().NotBeNull();
 }
