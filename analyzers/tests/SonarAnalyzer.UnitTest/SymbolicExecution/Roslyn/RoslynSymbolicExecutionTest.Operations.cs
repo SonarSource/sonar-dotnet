@@ -785,38 +785,27 @@ Sample UntrackedSymbol() => this;";
         public void PropertyReference_AutoProperty_IsTracked()
         {
             const string code = """
-                public object AutoProperty { get; set; }
-
-                public void M()
-                {
-                    AutoProperty = null;
-                    Tag("AfterSetNull", AutoProperty);
-                    AutoProperty.ToString();
-                    Tag("AfterReadReference", AutoProperty);
-                }
+                AutoProperty = null;
+                Tag("AfterSetNull", AutoProperty);
+                AutoProperty.ToString();
+                Tag("AfterReadReference", AutoProperty);
                 """;
-            var validator = SETestContext.CreateCSMethod(code).Validator;
+            var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateContainsOperation(OperationKind.PropertyReference);
             validator.ValidateTag("AfterSetNull", x => x.Should().HaveNoConstraints()); // FIXME Auto-properties should behave the same as fields. Expected: HaveOnlyConstraint(ObjectConstraint.Null)
-            validator.ValidateTag("AfterReadReference", x => x.Should().HaveNoConstraints()); // FN Expected: HaveOnlyConstraint(ObjectConstraint.NotNull)
+            validator.ValidateTag("AfterReadReference", x => x.Should().HaveNoConstraints()); // FIXME Expected: HaveOnlyConstraint(ObjectConstraint.NotNull)
         }
 
         [TestMethod]
         public void PropertyReference_FullProperties_NotTracked()
         {
             const string code = """
-                private object _FullProperty;
-                public object FullProperty { get => _FullProperty; set => _FullProperty = value; }
-
-                public void M()
-                {
-                    FullProperty = null;
-                    Tag("AfterSetNull", FullProperty);
-                    FullProperty.ToString();
-                    Tag("AfterReadReference", FullProperty);
-                }
+                FullProperty = null;
+                Tag("AfterSetNull", FullProperty);
+                FullProperty.ToString();
+                Tag("AfterReadReference", FullProperty);
                 """;
-            var validator = SETestContext.CreateCSMethod(code).Validator;
+            var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateContainsOperation(OperationKind.PropertyReference);
             validator.ValidateTag("AfterSetNull", x => x.Should().HaveNoConstraints());
             validator.ValidateTag("AfterReadReference", x => x.Should().HaveNoConstraints());
