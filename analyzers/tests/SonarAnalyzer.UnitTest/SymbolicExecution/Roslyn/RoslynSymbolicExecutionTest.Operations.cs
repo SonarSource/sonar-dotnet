@@ -782,7 +782,7 @@ Sample UntrackedSymbol() => this;";
         }
 
         [TestMethod]
-        public void PropertyReference_Write_SetsNotNull_AndRead_SetsNotNull_ForAutoProperties()
+        public void PropertyReference_Write_SetsNull_AndRead_SetsNotNull_ForAutoProperties()
         {
             const string code = """
                 public object AutoProperty { get; set; }
