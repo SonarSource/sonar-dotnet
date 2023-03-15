@@ -55,7 +55,7 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
     public bool ShouldAnalyzeTree(SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer) =>
         SonarLintXml() is var sonarLintXml
         && (generatedCodeRecognizer is null || sonarLintXml.AnalyzeGeneratedCode || !tree.IsGenerated(generatedCodeRecognizer, Compilation))
-        && (tree is null || (!IsUnchanged(tree) && FileIsIncludedInAnalysis(sonarLintXml, tree.FilePath)));
+        && (tree is null || (!IsUnchanged(tree) && !IsExcluded(sonarLintXml, tree.FilePath)));
 
     /// <summary>
     /// Reads configuration from SonarProjectConfig.xml file and caches the result for scope of this analysis.
@@ -121,13 +121,12 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
             descriptor.CustomTags.Contains(tag);
     }
 
-    private bool FileIsIncludedInAnalysis(SonarLintXmlReader sonarLintXml, string filePath) =>
-        // If ProjectType != 'Unknown' we are in S4NET context and all files are analyzed.
-        // If ProjectType == 'Unknown' then we are in SonarLint or NuGet context and
-        // we need to check if the file has been excluded from analysis through SonarLint.xml.
-        ProjectConfiguration().ProjectType != ProjectType.Unknown
-        || (FileInclusionCache.GetValue(Compilation, _ => new()) is var cache
-            && cache.GetOrAdd(filePath, _ => IsFileIncluded(sonarLintXml, filePath)));
+    private bool IsExcluded(SonarLintXmlReader sonarLintXml, string filePath) =>
+        // If ProjectType is not 'Unknown' it means we are in S4NET context and all files are analyzed.
+        // If ProjectType is 'Unknown' then we are in SonarLint or NuGet context and we need to check if the file has been excluded from analysis through SonarLint.xml.
+        ProjectConfiguration().ProjectType == ProjectType.Unknown
+        && FileInclusionCache.GetValue(Compilation, _ => new()) is var cache
+        && !cache.GetOrAdd(filePath, _ => IsFileIncluded(sonarLintXml, filePath));
 
     private ImmutableHashSet<string> CreateUnchangedFilesHashSet() =>
         ImmutableHashSet.Create(StringComparer.OrdinalIgnoreCase, ProjectConfiguration().AnalysisConfig?.UnchangedFiles() ?? Array.Empty<string>());
