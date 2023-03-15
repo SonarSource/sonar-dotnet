@@ -67,11 +67,26 @@ namespace Tests.Diagnostics
         }
         bool OutP(out object o) { o = new object(); return true; }
 
-        void Test_Struct()
+        void Test_NullableValueTypes()
         {
             int? i = null;
-            if (i.HasValue) // Compliant
-            { }
+            i.GetType();            // Noncompliant
+            i = 42;
+            i.GetType();            // Compliant
+            i = null;
+            _ = i.HasValue;         // Compliant - safe to call
+            i = null;
+            _ = i.Value;            // Compliant - handled by rule S3655
+            i = null;
+            _ = (int)i;             // Compliant - handled by rule S3655
+            i = null;
+            i.GetValueOrDefault();  // Compliant - safe to call
+            i = null;
+            i.Equals(null);         // Compliant - safe to call
+            i = null;
+            i.GetHashCode();        // Compliant - safe to call
+            i = null;
+            i.ToString();           // Compliant - safe to call
         }
 
         void Test_Foreach()
@@ -255,19 +270,6 @@ namespace Tests.Diagnostics
             {
                 Console.WriteLine(arr[10, 10]);
             }
-        }
-
-        void NullableGetTypeCall()
-        {
-            int? i = null;
-            var v = i.HasValue;
-            var s = i.ToString();
-
-            i = 5;
-            var t = i.GetType();
-
-            i = null;
-            var t2 = i.GetType(); // FN, was supported in the old engine. Should be fixed by MMF-2401
         }
 
         static void MultiplePop()
