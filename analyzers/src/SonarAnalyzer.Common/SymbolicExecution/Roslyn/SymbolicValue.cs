@@ -18,13 +18,41 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Concurrent;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
     public sealed record SymbolicValue
     {
-        private static ConcurrentDictionary<ConstraintKind, SymbolicValue> singleConstraintCache = new();
+        private readonly record struct CacheKey
+        {
+            public readonly ConstraintKind First;
+            public readonly ConstraintKind? Second;
+
+            public CacheKey(ConstraintKind first) : this(first, null) { }
+
+            public CacheKey(ConstraintKind first, ConstraintKind? second)
+            {
+                if (first == second)
+                {
+                    First = first;
+                    Second = null;
+                }
+                else if (first < second || second == null)
+                {
+                    First = first;
+                    Second = second;
+                }
+                else
+                {
+                    First = second.Value;
+                    Second = first;
+                }
+            }
+        }
+
+        private static ConcurrentDictionary<CacheKey, SymbolicValue> singleConstraintCache = new();
 
         // Reuse instances to save memory. This "True" has the same semantic meaning and any other symbolic value with BoolConstraint.True constraint
         public static readonly SymbolicValue Constraintless = new();
@@ -120,14 +148,15 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         private static SymbolicValue SingleConstraint(SymbolicConstraint constraint)
         {
-            if (singleConstraintCache.TryGetValue(constraint.Kind, out var result))
+            var cacheKey = new CacheKey(constraint.Kind);
+            if (singleConstraintCache.TryGetValue(cacheKey, out var result))
             {
                 return result;
             }
             else
             {
                 result = Constraintless with { Constraints = Constraintless.Constraints.SetItem(constraint.GetType(), constraint) };
-                return singleConstraintCache.GetOrAdd(constraint.Kind, result);
+                return singleConstraintCache.GetOrAdd(cacheKey, result);
             }
         }
     }

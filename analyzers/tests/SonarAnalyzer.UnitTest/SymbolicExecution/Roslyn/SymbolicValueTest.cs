@@ -183,7 +183,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         public void SingleCache_AddSameConstraintKind_FromCustom()
         {
             var sut = SymbolicValue.Constraintless.WithConstraint(DummyConstraint.Dummy);
-            sut.Should().NotBeSameAs(SymbolicValue.Constraintless.WithConstraint(DummyConstraint.Dummy));
+            sut.Should().BeSameAs(SymbolicValue.Constraintless.WithConstraint(DummyConstraint.Dummy));
             sut.Should().BeSameAs(sut.WithConstraint(DummyConstraint.Dummy));
         }
 
