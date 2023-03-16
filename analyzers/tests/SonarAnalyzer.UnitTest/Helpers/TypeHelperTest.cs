@@ -147,10 +147,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
                     T field;
                 }
                 """);
-            var field = tree.GetRoot().DescendantNodes().OfType<FieldDeclarationSyntax>().First();
-            var fieldSymbol = (IFieldSymbol)model.GetDeclaredSymbol(field.Declaration.Variables[0]);
-            var fieldType = fieldSymbol.Type;
-            fieldType.IsStruct().Should().BeTrue();
+            var fieldSymbol = FirstFieldSymbol(tree, model);
+            fieldSymbol.Type.IsStruct().Should().BeTrue();
         }
 
         [DataTestMethod]
@@ -166,10 +164,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
                     {{type}} field;
                 }
                 """);
-            var field = tree.GetRoot().DescendantNodes().OfType<FieldDeclarationSyntax>().First();
-            var fieldSymbol = (IFieldSymbol)model.GetDeclaredSymbol(field.Declaration.Variables[0]);
-            var fieldType = fieldSymbol.Type;
-            fieldType.IsStruct().Should().BeTrue();
+            var fieldSymbol = FirstFieldSymbol(tree, model);
+            fieldSymbol.Type.IsStruct().Should().BeTrue();
         }
 
         [DataTestMethod]
@@ -188,10 +184,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
                     T field;
                 }
                 """);
-            var field = tree.GetRoot().DescendantNodes().OfType<FieldDeclarationSyntax>().First();
-            var fieldSymbol = (IFieldSymbol)model.GetDeclaredSymbol(field.Declaration.Variables[0]);
-            var fieldType = fieldSymbol.Type;
-            fieldType.IsStruct().Should().BeFalse();
+            var fieldSymbol = FirstFieldSymbol(tree, model);
+            fieldSymbol.Type.IsStruct().Should().BeFalse();
         }
 
         [DataTestMethod]
@@ -217,10 +211,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
                     T? field;
                 }
                 """);
-            var field = tree.GetRoot().DescendantNodes().OfType<FieldDeclarationSyntax>().First();
-            var fieldSymbol = (IFieldSymbol)model.GetDeclaredSymbol(field.Declaration.Variables[0]);
-            var fieldType = fieldSymbol.Type;
-            fieldType.IsStruct().Should().BeFalse();
+            var fieldSymbol = FirstFieldSymbol(tree, model);
+            fieldSymbol.Type.IsStruct().Should().BeFalse();
         }
 
         [TestMethod]
@@ -233,10 +225,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
                     U field;
                 }
                 """);
-            var field = tree.GetRoot().DescendantNodes().OfType<FieldDeclarationSyntax>().First();
-            var fieldSymbol = (IFieldSymbol)model.GetDeclaredSymbol(field.Declaration.Variables[0]);
-            var fieldType = fieldSymbol.Type;
-            fieldType.IsStruct().Should().BeFalse();
+            var fieldSymbol = FirstFieldSymbol(tree, model);
+            fieldSymbol.Type.IsStruct().Should().BeFalse();
         }
 
         [TestMethod]
@@ -256,6 +246,13 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var parameter = tree.GetRoot().DescendantNodes().OfType<ParameterSyntax>().First();
             var parameterSymbol = (IParameterSymbol)model.GetDeclaredSymbol(parameter);
             parameterSymbol.Type.IsStruct().Should().BeFalse(); // parameter must be a struct, but even the compiler doesn't recognizes this
+        }
+
+        private static IFieldSymbol FirstFieldSymbol(SyntaxTree tree, SemanticModel model)
+        {
+            var field = tree.GetRoot().DescendantNodes().OfType<FieldDeclarationSyntax>().First();
+            var fieldSymbol = (IFieldSymbol)model.GetDeclaredSymbol(field.Declaration.Variables[0]);
+            return fieldSymbol;
         }
     }
 }
