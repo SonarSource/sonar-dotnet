@@ -406,3 +406,130 @@ public class Repro_3400
 
     private StringBuilder Create() => null;
 }
+
+public class ClassAccessibility
+{
+    private object field = null;
+
+    public void PublicWithoutArgs()
+    {
+        field.ToString(); // Compliant - not a method argument
+    }
+
+    public void PublicWithArgs(object o)
+    {
+        o.ToString(); // FIXME Non-compliant
+    }
+
+    protected void ProtectedWithArgs(object o)
+    {
+        o.ToString(); // FIXME Non-compliant
+    }
+
+    protected internal void ProtectedInternalWithArgs(object o)
+    {
+        o.ToString(); // FIXME Non-compliant
+    }
+
+    internal void InternalWithArgs(object o)
+    {
+        o.ToString(); // Compliant - method is not accessible from other assemblies
+    }
+
+    private void PrivateWithArgs(object o)
+    {
+        o.ToString();
+    }
+
+    void ImplicitlyPrivateWithArgs(object o)
+    {
+        o.ToString(); // FIXME Non-compliant
+    }
+}
+
+public struct StructAccessibility
+{
+    private object field;
+
+    public void PublicWithoutArgs()
+    {
+        field.ToString(); // Compliant - not a method argument
+    }
+
+    public void PublicWithArgs(object o)
+    {
+        o.ToString(); // FIXME Non-compliant
+    }
+
+    internal void InternalWithArgs(object o)
+    {
+        o.ToString(); // Compliant - method is not accessible from other assemblies
+    }
+
+    void ImplicitlyInternalWithArgs(object o)
+    {
+        o.ToString();
+    }
+
+    private void PrivateWithArgs(object o)
+    {
+        o.ToString();
+    }
+}
+
+class PropertyAccessibility
+{
+    public object PublicProperty
+    {
+        get => null;
+        set => _ = value.ToString();                    // FIXME Non-compliant
+    }
+
+    protected object ProtectedProperty
+    {
+        get => null;
+        set => _ = value.ToString();                    // FIXME Non-compliant
+    }
+
+    protected internal object ProtectedInternalProperty
+    {
+        get => null;
+        set => _ = value.ToString();                    // FIXME Non-compliant
+    }
+
+    internal object InternalProperty
+    {
+        get => null;
+        set => _ = value.ToString();
+    }
+
+    private object PrivateProperty
+    {
+        get => null;
+        set => _ = value.ToString();
+    }
+
+    object ImplicitlyPrivateProperty
+    {
+        get => null;
+        set => _ = value.ToString();
+    }
+
+    public object ProtectedSetter
+    {
+        get => null;
+        protected set => _ = value.ToString();          // FIXME Non-compliant
+    }
+
+    public object ProtectedInternalSetter
+    {
+        get => null;
+        protected internal set => _ = value.ToString(); // FIXME Non-compliant
+    }
+
+    public object PrivateSetter
+    {
+        get => null;
+        private set => _ = value.ToString();            // Compliant - setter is not accessible from other assemblies
+    }
+}
