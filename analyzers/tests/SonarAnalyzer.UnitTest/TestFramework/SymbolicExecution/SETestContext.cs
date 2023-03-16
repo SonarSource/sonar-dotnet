@@ -122,6 +122,8 @@ public unsafe class Sample
     public event EventHandler Event;
     public int Property {{ get; set; }}
     public Sample SampleProperty {{ get; set; }}
+    public object AutoProperty {{ get; set; }}
+    public object FullProperty {{ get => ObjectField; set => ObjectField = value; }}
     public NotImplementedException PropertyException {{ get; set; }}
     public int this[int index] {{get => 42; set {{ }} }}
     private int field;
