@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Concurrent;
-using System.Data;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
@@ -72,8 +71,35 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public override string ToString() =>
             SerializeConstraints();
 
-        public SymbolicValue WithConstraint(SymbolicConstraint constraint) =>
-            AddOrReplaceConstraint(this, constraint);
+        public SymbolicValue WithConstraint(SymbolicConstraint constraint)
+        {
+            var constraintCount = Constraints.Count;
+            if (constraintCount == 0)
+            {
+                return SingleConstraint(constraint);
+            }
+
+            if (HasConstraint(constraint))
+            {
+                return this;
+            }
+
+            var constraintType = constraint.GetType();
+            var containsContraintType = Constraints.ContainsKey(constraintType);
+            if (constraintCount == 1)
+            {
+                return containsContraintType
+                    ? SingleConstraint(constraint)
+                    : PairConstraint(Constraints.Values.First(), constraint);
+            }
+
+            if (constraintCount == 2 && containsContraintType)
+            {
+                return PairConstraint(OtherSingle(this, constraintType), constraint);
+            }
+
+            return this with { Constraints = Constraints.SetItem(constraint.GetType(), constraint) };
+        }
 
         public SymbolicValue WithoutConstraint(SymbolicConstraint constraint) =>
             RemoveConstraint(this, constraint);
@@ -100,36 +126,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             Constraints.Any()
                 ? Constraints.Values.Select(x => x.ToString()).OrderBy(x => x).JoinStr(", ")
                 : "No constraints";
-
-        private static SymbolicValue AddOrReplaceConstraint(SymbolicValue baseValue, SymbolicConstraint constraint)
-        {
-            var constraintCount = baseValue.Constraints.Count;
-            if (constraintCount == 0)
-            {
-                return SingleConstraint(constraint);
-            }
-
-            if (baseValue.HasConstraint(constraint))
-            {
-                return baseValue;
-            }
-
-            var constraintType = constraint.GetType();
-            var containsContraintType = baseValue.Constraints.ContainsKey(constraintType);
-            if (constraintCount == 1)
-            {
-                return containsContraintType
-                    ? SingleConstraint(constraint)
-                    : PairConstraint(baseValue.Constraints.Values.First(), constraint);
-            }
-
-            if (constraintCount == 2 && containsContraintType)
-            {
-                return PairConstraint(OtherSingle(baseValue, constraintType), constraint);
-            }
-
-            return baseValue with { Constraints = baseValue.Constraints.SetItem(constraint.GetType(), constraint) };
-        }
 
         private static SymbolicValue RemoveConstraint(SymbolicValue baseValue, SymbolicConstraint constraint) =>
             baseValue.HasConstraint(constraint) ? RemoveConstraint(baseValue, constraint.GetType()) : baseValue;
