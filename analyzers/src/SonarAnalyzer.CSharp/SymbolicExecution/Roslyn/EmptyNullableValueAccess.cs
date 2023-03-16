@@ -42,27 +42,22 @@ public class EmptyNullableValueAccess : SymbolicRuleCheck
     {
         var operationInstance = context.Operation.Instance;
         if (operationInstance.Kind == OperationKindEx.PropertyReference
-            && operationInstance.ToPropertyReference() is { Instance: var instance } propertyReference
-            && propertyReference.Property.Name == nameof(Nullable<int>.Value)
-            && IsNull(instance))
+            && operationInstance.ToPropertyReference() is { Instance: { } instance, Property.Name: nameof(Nullable<int>.Value) }
+            && context.HasConstraint(instance, ObjectConstraint.Null))
         {
             ReportIssue(instance, instance.Syntax.ToString());
         }
         else if (operationInstance.Kind == OperationKindEx.Conversion
-            && operationInstance.ToConversion() is { Operand: var operand } conversion
+            && operationInstance.ToConversion() is { Operand: { } operand } conversion
             && operand.Type.IsNullableValueType()
             && !conversion.Type.IsNullableValueType()
             && conversion.Type.IsStruct()
-            && IsNull(operand))
+            && context.HasConstraint(operand, ObjectConstraint.Null))
         {
             ReportIssue(operand, operand.Syntax.ToString());
         }
 
         return context.State;
-
-        bool IsNull(IOperation operation) =>
-            context.HasConstraint(operation, ObjectConstraint.Null)
-            && SemanticModel.GetTypeInfo(operation.Syntax).Nullability().FlowState != NullableFlowState.NotNull;
     }
 
     private sealed class NullableAccessFinder : SafeCSharpSyntaxWalker

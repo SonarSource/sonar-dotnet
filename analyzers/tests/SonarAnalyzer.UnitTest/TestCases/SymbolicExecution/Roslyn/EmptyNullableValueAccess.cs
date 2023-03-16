@@ -148,29 +148,42 @@ class NullableOfCustomTypes
 {
     void Assignment(AStruct? nullable)
     {
-        _ = nullable.Value;                                              // Compliant, unknown
-        _ = (AStruct)nullable;                                           // Compliant, unknown
+        _ = nullable.Value;                           // Compliant, unknown
+        _ = (AStruct)nullable;                        // Compliant, non-empty
         _ = new AStruct?(nullable.Value).Value;
 
         nullable = null;
-        _ = nullable.Value;                                              // Noncompliant
+        _ = nullable.Value;                           // Noncompliant
         nullable = new AStruct();
         _ = nullable.Value;
         nullable = new AStruct?(new AStruct());
         _ = nullable.Value;
 
         nullable = new AStruct?();
-        _ = nullable.Value;                                              // Noncompliant
+        _ = nullable.Value;                           // Noncompliant
         nullable = new Nullable<AStruct>();
-        _ = nullable.Value;                                              // Noncompliant
+        _ = nullable.Value;                           // Noncompliant
 
-        _ = (new Nullable<AStruct>()).Value;                             // Noncompliant
-        _ = (null as Nullable<AStruct>).Value;                           // Noncompliant
+        _ = (new Nullable<AStruct>()).Value;          // Noncompliant
+        _ = (null as Nullable<AStruct>).Value;        // Noncompliant
 
         nullable = null;
-        _ = ((AStruct?)nullable).Value;                                  // Noncompliant
-        _ = (nullable as AStruct?).Value;                                // FN
-        _ = ((AStruct?)(nullable as AStruct?)).Value;                    // FN
+        _ = ((AStruct?)nullable).Value;               // Noncompliant
+        _ = (nullable as AStruct?).Value;             // Compliant, unreachable
+    }
+
+    void AssignmentAndReachability1()
+    {
+        AStruct? nullable = null;
+        _ = ((AStruct?)nullable).Value;               // Noncompliant
+        _ = (nullable as AStruct?).Value;             // Compliant, unreachable
+    }
+
+    void AssignmentAndReachability2()
+    {
+        AStruct? nullable = null;
+        _ = ((AStruct?)nullable).Value;               // Noncompliant
+        _ = ((AStruct?)(nullable as AStruct?)).Value; // Compliant, unreachable
     }
 
     void ForeachCast()
@@ -212,6 +225,7 @@ class ComplexConditionsSingleNullable
     bool LogicalAndLearningNonNull3(bool? b) => b.HasValue != false && b.Value;
     bool LogicalAndLearningNonNull4(bool? b) => b.HasValue == !false && b.Value;
     bool LogicalAndLearningNonNull5(bool? b) => !!b.HasValue && b.Value;
+    bool LogicalAndLearningNonNull6(bool? b) => b.Value && b.HasValue;
 
     bool LogicalAndLeaningNull1(bool? b) => !b.HasValue && b.Value;         // Noncompliant - parameter should be null-constrained
     bool LogicalAndLeaningNull2(bool? b) => b.HasValue == false && b.Value; // Noncompliant
@@ -227,8 +241,8 @@ class ComplexConditionsSingleNullable
 
     bool Tautology(bool? b) => (!b.HasValue || b.HasValue) && b.Value;      // Noncompliant
 
-    bool ShortCircuitedOr(bool? b) => (true || b.HasValue) && b.Value;      // Compliant
-    bool ShortCircuitedAnd(bool? b) => (false &&  b.HasValue) || b.Value;   // Compliant
+    bool ShortCircuitedOr(bool? b) => (true || b.HasValue) && b.Value;      // FN, won't fix
+    bool ShortCircuitedAnd(bool? b) => (false && b.HasValue) || b.Value;    // FN, won't fix
 
     bool XorWithTrue(bool? b) => (true ^ b.HasValue) && b.Value;            // Noncompliant
     bool XorWithFalse(bool? b) => (false ^ b.HasValue) && b.Value;          // Compliant
@@ -243,12 +257,10 @@ class ComplexConditionMultipleNullables
     bool IndependentConditions5(double? d, float? f) => null == f && d.Value == 42.0;  // Compliant
 
     bool DependentConditions1(double? d, float? f) =>
-        !d.HasValue && d.Value == 42.0;                                 // Noncompliant
+        !d.HasValue && d.Value == 42.0;                                 // Noncompliant, f presence doesn't affect d
     bool DependentConditions2(double? d, float? f) =>
-        d.Value == 42.0 && d.HasValue;                                  // Compliant, d is constrained after access
-    bool DependentConditions3(double? d, float? f) =>
         d.Value == 42.0 && d.HasValue == f.HasValue && f.Value == 42.0; // Compliant, d is non-null, as well as f
-    bool DependentConditions4(double? d, float? f) =>
+    bool DependentConditions3(double? d, float? f) =>
         d.Value == 42.0 && d.HasValue != f.HasValue && f.Value == 42.0; // Noncompliant, d is non-null, unlike f
 }
 
@@ -322,7 +334,7 @@ class Repro_4573
         {
             // HasValue and NoValue constraints are set here
         }
-        if (foo == value)   // Relationship is added here
+        if (foo == value)   // Relationship should be created here
         {
             if (foo.HasValue)
             {
@@ -345,7 +357,7 @@ class Repro_4573
 
     public void NestedIsolated1(DateTime? value)
     {
-        if (foo == value)   // Relationship is added here
+        if (foo == value)   // Relationship should be created here
         {
             if (value.HasValue)
             {
@@ -359,7 +371,7 @@ class Repro_4573
 
     public void NestedIsolated2(DateTime? value)
     {
-        if (foo == value)   // Relationship is added here
+        if (foo == value)   // Relationship should be created here
         {
             if (!value.HasValue)
             {
@@ -373,7 +385,7 @@ class Repro_4573
 
     public void NestedCombined(DateTime? value)
     {
-        if (foo == value)   // Relationship is added here
+        if (foo == value)   // Relationship should be created here
         {
             if (value.HasValue)
             {

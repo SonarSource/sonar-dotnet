@@ -30,7 +30,7 @@ public class Sample
         v = nullable.Value;    // Noncompliant
     }
 
-    public void PatternMatching(int? arg)
+    public void PatternMatching1(int? arg)
     {
         int v;
         if (arg is int)
@@ -70,13 +70,13 @@ public class Sample
         }
     }
 
-    void PatternMatching(int? i, double? d, float? f)
+    void PatternMatching2(int? i)
     {
         if (i.HasValue is true && i.Value == 42) { }
         if (i is not null && i.Value == 42) { }
 
         if (i.HasValue is not true && i.Value == 42) { } // Noncompliant
-        if (i is null && i.Value == 42) { } // Noncompliant
+        if (i is null && i.Value == 42) { }              // Noncompliant
     }
 
     public void StaticLambda()
