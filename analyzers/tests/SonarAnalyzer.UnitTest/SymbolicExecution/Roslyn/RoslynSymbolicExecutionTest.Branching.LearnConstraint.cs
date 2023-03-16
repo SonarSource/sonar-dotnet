@@ -544,6 +544,7 @@ if (value = boolParameter)
 
         [DataTestMethod]
         [DataRow("arg is { }", "TStruct")]
+        [DataRow("arg is TStruct { }", "TStruct")]
         public void Branching_LearnsObjectConstraint_RecursivePattern_ValueTypeConstraint(string expression, string argType)
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.RecursivePattern, argType);
