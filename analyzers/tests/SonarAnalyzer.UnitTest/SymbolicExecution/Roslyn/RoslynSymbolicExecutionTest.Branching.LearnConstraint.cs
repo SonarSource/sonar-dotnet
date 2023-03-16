@@ -62,8 +62,8 @@ Tag(""End"");";
                 "TrueTrue",
                 "FalseFalse",
                 "End");
-            validator.ValidateTag("True", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
-            validator.ValidateTag("False", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+            validator.ValidateTag("True", x => x.Should().HaveOnlyConstraint(BoolConstraint.True));
+            validator.ValidateTag("False", x => x.Should().HaveOnlyConstraint(BoolConstraint.False));
         }
 
         [TestMethod]
@@ -80,8 +80,8 @@ else
 };
 Tag(""End"", boolParameter);";
             var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("True", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
-            validator.ValidateTag("False", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+            validator.ValidateTag("True", x => x.Should().HaveOnlyConstraint(BoolConstraint.True));
+            validator.ValidateTag("False", x => x.Should().HaveOnlyConstraint(BoolConstraint.False));
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(BoolConstraint.True))
                 .And.ContainSingle(x => x.HasConstraint(BoolConstraint.False));
@@ -116,7 +116,7 @@ Tag(""End"", collection);";
                                                                  ? x.SetSymbolConstraint(x.Operation.Instance.AsPropertyReference().Value.Instance.TrackedSymbol(), DummyConstraint.Dummy)
                                                                  : x.State);
             var validator = SETestContext.CreateCS(code, ", ICollection<object> collection", check).Validator;
-            validator.ValidateTag("If", x => x.HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+            validator.ValidateTag("If", x => x.Should().HaveOnlyConstraint(DummyConstraint.Dummy));
             validator.TagStates("End").Should().HaveCount(2);
         }
 
@@ -159,8 +159,8 @@ if (value = boolParameter)
         public void Branching_LearnsObjectConstraint_CS(string expression)
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.Binary);
-            validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-            validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("If", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
+            validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
@@ -180,8 +180,8 @@ if (value = boolParameter)
         public void Branching_LearnsObjectConstraint_NullableInt_CS(string expression)
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.Binary, "int?");
-            validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-            validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("If", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
+            validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
@@ -201,8 +201,8 @@ if (value = boolParameter)
         public void Branching_LearnsObjectConstraint_NullableBool_CS(string expression)
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.Binary, "bool?");
-            validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-            validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("If", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
+            validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
@@ -222,8 +222,8 @@ if (value = boolParameter)
         public void Branching_LearnsObjectConstraint_Binary_Negated_CS(string expression)
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.Binary);
-            validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-            validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("If", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
@@ -241,8 +241,8 @@ if (value = boolParameter)
         public void Branching_LearnsObjectConstraint_Binary_Negated_NullableInt_CS(string expression)
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.Binary, "int?");
-            validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-            validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("If", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
@@ -260,8 +260,8 @@ if (value = boolParameter)
         public void Branching_LearnsObjectConstraint_Binary_Negated_NullableBool_CS(string expression)
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.Binary, "bool?");
-            validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-            validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("If", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
@@ -279,7 +279,7 @@ if (value = boolParameter)
         public void Branching_LearnsObjectConstraint_Binary_UndefinedInOtherBranch_CS(string expression, string argType)
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.Binary, argType);
-            validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("If", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.ValidateTag("Else", x => x.Should().BeNull("We can't tell if it is Null or NotNull in this branch"));
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x == null)
@@ -299,7 +299,7 @@ if (value = boolParameter)
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.Binary, argType);
             validator.ValidateTag("If", x => x.Should().BeNull("We can't tell if it is Null or NotNull in this branch"));
-            validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x == null)
                 .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
@@ -315,8 +315,8 @@ if (value = boolParameter)
         public void Branching_LearnsObjectConstraint_Binary_VB(string expression)
         {
             var validator = CreateIfElseEndValidatorVB(expression, OperationKind.Binary);
-            validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-            validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("If", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
+            validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
@@ -332,8 +332,8 @@ if (value = boolParameter)
         public void Branching_LearnsObjectConstraint_Binary_Negated_VB(string expression)
         {
             var validator = CreateIfElseEndValidatorVB(expression, OperationKind.Binary);
-            validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-            validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("If", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
@@ -347,7 +347,7 @@ if (value = boolParameter)
         public void Branching_LearnsObjectConstraint_IsType_CS(string expression)
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.IsType);
-            validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("If", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.ValidateTag("Else", x => x.Should().BeNull("it could be null or any other type"));
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x == null)
@@ -363,7 +363,7 @@ if (value = boolParameter)
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.IsType);
             validator.ValidateTag("If", x => x.Should().BeNull("it could be null or any other type"));
-            validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x == null)
                 .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
@@ -386,7 +386,7 @@ if (value = boolParameter)
         public void Branching_LearnsObjectConstraint_IsType_VB(string expression)
         {
             var validator = CreateIfElseEndValidatorVB(expression, OperationKind.IsType);
-            validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("If", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.ValidateTag("Else", x => x.Should().BeNull("it could be null or any other type"));
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x == null)
@@ -402,7 +402,7 @@ if (value = boolParameter)
         {
             var validator = CreateIfElseEndValidatorVB(expression, OperationKind.IsType);
             validator.ValidateTag("If", x => x.Should().BeNull("it could be null or any other type"));
-            validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x == null)
                 .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
@@ -418,8 +418,8 @@ if (value = boolParameter)
         public void Branching_LearnsObjectConstraint_ConstantPattern_Null(string expression, string argType)
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.ConstantPattern, argType);
-            validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-            validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("If", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
+            validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
@@ -435,8 +435,8 @@ if (value = boolParameter)
         public void Branching_LearnsObjectConstraint_ConstantPattern_Null_Negated(string expression, string argType)
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.ConstantPattern, argType);
-            validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-            validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("If", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
@@ -453,7 +453,7 @@ if (value = boolParameter)
         public void Branching_LearnsObjectConstraint_ConstantPattern_True(string expression, string argType = "object")
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.ConstantPattern, argType);
-            validator.ValidateTag("If", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+            validator.ValidateTag("If", x => x.Should().HaveOnlyConstraint(BoolConstraint.True));
             validator.ValidateTag("Else", x => x.Should().BeNull("it could be False, null or any other type"));
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x == null)
@@ -468,7 +468,7 @@ if (value = boolParameter)
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.ConstantPattern, argType);
             validator.ValidateTag("If", x => x.Should().BeNull("it could be False, null or any other type"));
-            validator.ValidateTag("Else", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+            validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraint(BoolConstraint.True));
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x == null)
                 .And.ContainSingle(x => x != null && x.HasConstraint(BoolConstraint.True));
@@ -480,7 +480,7 @@ if (value = boolParameter)
         public void Branching_LearnsObjectConstraint_ConstantPattern_False(string expression)
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.ConstantPattern);
-            validator.ValidateTag("If", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+            validator.ValidateTag("If", x => x.Should().HaveOnlyConstraint(BoolConstraint.False));
             validator.ValidateTag("Else", x => x.Should().BeNull("it could be True, null or any other type"));
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x == null)
@@ -511,7 +511,7 @@ if (value = boolParameter)
         public void Branching_LearnsObjectConstraint_ConstantPattern_Literals(string expression, string argType = "object")
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.ConstantPattern, argType);
-            validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("If", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.ValidateTag("Else", x => x.Should().BeNull());
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x == null)
@@ -524,7 +524,7 @@ if (value = boolParameter)
         public void Branching_LearnsObjectConstraint_TypePattern(string expression)
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.TypePattern);
-            validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("If", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.ValidateTag("Else", x => x.Should().BeNull("it could be null or any other type"));
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x == null)
@@ -538,7 +538,7 @@ if (value = boolParameter)
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.TypePattern);
             validator.ValidateTag("If", x => x.Should().BeNull("it could be null or any other type"));
-            validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x == null)
                 .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
@@ -561,8 +561,8 @@ if (value = boolParameter)
         public void Branching_LearnsObjectConstraint_RecursivePattern_ElseIsNull(string expression, string argType = "object")
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.RecursivePattern, argType);
-            validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-            validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("If", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
@@ -581,7 +581,7 @@ if (value = boolParameter)
         public void Branching_LearnsObjectConstraint_RecursivePattern_ElseIsUnknown(string expression, string argType = "object")
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.RecursivePattern, argType);
-            validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("If", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.ValidateTag("Else", x => x.Should().BeNull("it could be null or any other type"));
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x == null)
@@ -607,8 +607,8 @@ if (value = boolParameter)
         public void Branching_LearnsObjectConstraint_RecursivePattern_Negated_IfIsNotNull(string expression)
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.RecursivePattern);
-            validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-            validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("If", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
+            validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
@@ -621,7 +621,7 @@ if (value = boolParameter)
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.RecursivePattern);
             validator.ValidateTag("If", x => x.Should().BeNull("it could be null or any other type"));
-            validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x == null)
                 .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
@@ -638,7 +638,7 @@ if (value = boolParameter)
         public void Branching_LearnsObjectConstraint_DeclarationPattern(string expression, string argType = "object")
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.DeclarationPattern, argType);
-            validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("If", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.ValidateTag("Else", x => x.Should().BeNull("it could be null or any other type"));
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x == null)
@@ -653,8 +653,8 @@ if (value = boolParameter)
         public void Branching_LearnsObjectConstraint_DeclarationPattern_ElseIsNull(string expression, string argType = "object")
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.DeclarationPattern, argType);
-            validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-            validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("If", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
@@ -680,7 +680,7 @@ if (value = boolParameter)
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.DeclarationPattern);
             validator.ValidateTag("If", x => x.Should().BeNull("it could be null or any other type"));
-            validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x == null)
                 .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
@@ -692,8 +692,8 @@ if (value = boolParameter)
         public void Branching_LearnsObjectConstraint_DeclarationPattern_Negated_ElseIsNull(string expression)
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.DeclarationPattern);
-            validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-            validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("If", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
+            validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
@@ -715,8 +715,8 @@ switch (arg)
 Tag(""End"", arg);";
             var validator = SETestContext.CreateCS(code, ", object arg").Validator;
             validator.ValidateContainsOperation(OperationKind.FlowCaptureReference);
-            validator.ValidateTag("Null", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-            validator.ValidateTag("Default", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("Null", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
+            validator.ValidateTag("Default", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
@@ -775,7 +775,7 @@ Tag(""End"", arg);";
             validator.TagValues("If").Should().HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
-            validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
