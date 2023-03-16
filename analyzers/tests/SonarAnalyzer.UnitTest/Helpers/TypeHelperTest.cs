@@ -194,6 +194,35 @@ namespace SonarAnalyzer.UnitTest.Helpers
             fieldType.IsStruct().Should().BeFalse();
         }
 
+        [DataTestMethod]
+        [DataRow("")]                      // Unbounded (can be nullable reference type or nullable value type)
+        [DataRow("where T: new()")]        // Unbounded
+        [DataRow("where T: notnull")]      // Unbounded
+        [DataRow("where T: class")]
+        [DataRow("where T: class?")]
+        [DataRow("where T: class, new()")]
+        [DataRow("where T: Exception")]
+        [DataRow("where T: Exception?")]
+        [DataRow("where T: IComparable")]
+        [DataRow("where T: IComparable?")]
+        [DataRow("where T: Delegate")]
+        [DataRow("where T: Delegate?")]
+        public void IsStruct_False_Generic_NullableReferenceType(string typeConstraint)
+        {
+            var (tree, model) = TestHelper.CompileCS($$"""
+                #nullable enable
+                using System;
+                class Test<T> {{typeConstraint}}
+                {
+                    T? field;
+                }
+                """);
+            var field = tree.GetRoot().DescendantNodes().OfType<FieldDeclarationSyntax>().First();
+            var fieldSymbol = (IFieldSymbol)model.GetDeclaredSymbol(field.Declaration.Variables[0]);
+            var fieldType = fieldSymbol.Type;
+            fieldType.IsStruct().Should().BeFalse();
+        }
+
         [TestMethod]
         public void IsStruct_False_Generic_Derived()
         {
