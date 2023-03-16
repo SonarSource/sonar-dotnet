@@ -52,7 +52,40 @@ Local functions should always be placed at the end of a method.
 
 ### Separation
 
-Individual members must be separated by empty line, except sequence of constants, fields and abstract members. These should not be separated by empty lines.
+Individual members must be separated by empty line, except sequence of constants, fields, single-line properties and abstract members. These members should not be separated by empty lines.
+
+```csharp
+private const int ValueA = 42;
+private const int ValueB = 24;
+
+private int valueA;
+private int valueB;
+
+protected abstract int AbstractA { get; }
+protected abstract void AbstractB();
+
+public SemanticModel Model { get; }
+public SyntaxNode Node { get; }
+
+public int ComplexProperty
+{
+    get => 42;
+    set
+    {
+        // ...
+    }
+}
+
+public Constructor() { }
+
+public void MethodA() =>
+    MethodB();
+
+public void MethodB()
+{
+    // ...
+}
+```
 
 ## Naming conventions
 
