@@ -125,7 +125,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
             if (constraintCount == 2 && containsContraintType)
             {
-                return PairConstraint(OtherConstraint(baseValue, constraintType), constraint);
+                return PairConstraint(OtherSingle(baseValue, constraintType), constraint);
             }
 
             return baseValue with { Constraints = baseValue.Constraints.SetItem(constraint.GetType(), constraint) };
@@ -140,21 +140,22 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         private static SymbolicValue RemoveConstraint(SymbolicValue baseValue, Type type)
         {
             var constraintCount = baseValue.Constraints.Count;
-            if (constraintCount == 1)
+            switch (constraintCount)
             {
-                return Constraintless;
+                case 1:
+                    return Constraintless;
+                case 2:
+                    var otherConstraint = OtherSingle(baseValue, type);
+                    return SingleConstraint(otherConstraint);
+                case 3:
+                    OtherPair(baseValue, type, out var first, out var second);
+                    return PairConstraint(first, second);
+                default:
+                    return baseValue with { Constraints = baseValue.Constraints.Remove(type) };
             }
-
-            if (constraintCount == 2)
-            {
-                var otherConstraint = OtherConstraint(baseValue, type);
-                return SingleConstraint(otherConstraint);
-            }
-
-            return baseValue with { Constraints = baseValue.Constraints.Remove(type) };
         }
 
-        private static SymbolicConstraint OtherConstraint(SymbolicValue baseValue, Type type)
+        private static SymbolicConstraint OtherSingle(SymbolicValue baseValue, Type type)
         {
             SymbolicConstraint otherConstraint = null;
             foreach (var kvp in baseValue.Constraints)
@@ -167,6 +168,27 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             }
 
             return otherConstraint;
+        }
+
+        private static void OtherPair(SymbolicValue baseValue, Type type, out SymbolicConstraint first, out SymbolicConstraint second)
+        {
+            first = null;
+            second = null;
+            foreach (var kvp in baseValue.Constraints)
+            {
+                if (kvp.Key != type)
+                {
+                    if (first == null)
+                    {
+                        first = kvp.Value;
+                    }
+                    else
+                    {
+                        second = kvp.Value;
+                        break;
+                    }
+                }
+            }
         }
 
         private static SymbolicValue SingleConstraint(SymbolicConstraint constraint)

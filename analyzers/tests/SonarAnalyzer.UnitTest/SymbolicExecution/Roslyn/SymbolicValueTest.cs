@@ -261,7 +261,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             sut.Should().HaveOnlyConstraints(ObjectConstraint.Null, DummyConstraint.Dummy, TestConstraint.First);
             var one = sut.WithoutConstraint(DummyConstraint.Dummy);
             var two = sut.WithoutConstraint(DummyConstraint.Dummy);
-            one.Should().HaveOnlyConstraints(ObjectConstraint.Null, TestConstraint.First).And.NotBeSameAs(two); // Requires a cache for pairs
+            one.Should().HaveOnlyConstraints(ObjectConstraint.Null, TestConstraint.First).And.BeSameAs(two);
         }
 
         [TestMethod]
@@ -271,7 +271,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             sut.Should().HaveOnlyConstraints(ObjectConstraint.Null, DummyConstraint.Dummy, TestConstraint.First);
             var one = sut.WithoutConstraint<DummyConstraint>();
             var two = sut.WithoutConstraint<DummyConstraint>();
-            one.Should().HaveOnlyConstraints(ObjectConstraint.Null, TestConstraint.First).And.NotBeSameAs(two); // Requires a cache for pairs
+            one.Should().HaveOnlyConstraints(ObjectConstraint.Null, TestConstraint.First).And.BeSameAs(two);
         }
 
         [TestMethod]
