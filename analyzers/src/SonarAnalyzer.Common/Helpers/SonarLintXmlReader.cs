@@ -32,45 +32,39 @@ public class SonarLintXmlReader
 
     private readonly SonarLintXml sonarLintXml;
 
-    public string[] Exclusions { get; private set; }
-    public string[] Inclusions { get; private set; }
-    public string[] GlobalExclusions { get; private set; }
-    public string[] TestExclusions { get; private set; }
-    public string[] TestInclusions { get; private set; }
-    public string[] GlobalTestExclusions { get; private set; }
-    public List<SonarLintXmlRule> ParametrizedRules { get; private set; }
+    public string[] Exclusions { get => Exclusions; init => ReadCommaSeparatedArray(ReadSettingsProperty("sonar.exclusions")); }
+    public string[] Inclusions { get => Inclusions;  init => ReadCommaSeparatedArray(ReadSettingsProperty("sonar.inclusions")); }
+    public string[] GlobalExclusions { get => GlobalExclusions; init => ReadCommaSeparatedArray(ReadSettingsProperty("sonar.global.exclusions")); }
+    public string[] TestExclusions { get => TestExclusions; init => ReadCommaSeparatedArray(ReadSettingsProperty("sonar.test.exclusions")); }
+    public string[] TestInclusions { get => TestInclusions; init => ReadCommaSeparatedArray(ReadSettingsProperty("sonar.test.inclusions")); }
+    public string[] GlobalTestExclusions { get => GlobalTestExclusions; init => ReadCommaSeparatedArray(ReadSettingsProperty("sonar.global.test.exclusions")); }
+    public List<SonarLintXmlRule> ParametrizedRules { get => ParametrizedRules; init => ReadRuleParameters(); }
 
-    private bool? ignoreHeaderCommentsCS;
-    private bool? ignoreHeaderCommentsVB;
-    public bool IgnoreHeaderComments(string language) =>
-        language switch
-        {
-            LanguageNames.CSharp => ignoreHeaderCommentsCS ??= ReadBoolean(ReadSettingsProperty("sonar.cs.ignoreHeaderComments")),
-            LanguageNames.VisualBasic => ignoreHeaderCommentsVB ??= ReadBoolean(ReadSettingsProperty("sonar.vbnet.ignoreHeaderComments")),
-            _ => throw new UnexpectedLanguageException(language)
-        };
-
-    private bool? analyzeGeneratedCodeCS;
-    private bool? analyzeGeneratedCodeVB;
-    public bool AnalyzeGeneratedCode(string language) =>
-        language switch
-        {
-            LanguageNames.CSharp => analyzeGeneratedCodeCS ??= ReadBoolean(ReadSettingsProperty("sonar.cs.analyzeGeneratedCode")),
-            LanguageNames.VisualBasic => analyzeGeneratedCodeVB ??= ReadBoolean(ReadSettingsProperty("sonar.vbnet.analyzeGeneratedCode")),
-            _ => throw new UnexpectedLanguageException(language)
-        };
+    private bool IgnoreHeaderCommentsCS { get => IgnoreHeaderCommentsCS; init => ReadBoolean(ReadSettingsProperty("sonar.cs.ignoreHeaderComments")); }
+    private bool IgnoreHeaderCommentsVB { get => IgnoreHeaderCommentsVB; init => ReadBoolean(ReadSettingsProperty("sonar.vbnet.ignoreHeaderComments")); }
+    private bool AnalyzeGeneratedCodeCS { get => AnalyzeGeneratedCodeCS; init => ReadBoolean(ReadSettingsProperty("sonar.cs.analyzeGeneratedCode")); }
+    private bool AnalyzeGeneratedCodeVB { get => AnalyzeGeneratedCodeVB; init => ReadBoolean(ReadSettingsProperty("sonar.vbnet.analyzeGeneratedCode")); }
 
     public SonarLintXmlReader(SourceText sonarLintXml)
     {
         this.sonarLintXml = sonarLintXml == null ? SonarLintXml.Empty : ParseContent(sonarLintXml);
-        Exclusions = ReadCommaSeparatedArray(ReadSettingsProperty("sonar.exclusions"));
-        Inclusions = ReadCommaSeparatedArray(ReadSettingsProperty("sonar.inclusions"));
-        GlobalExclusions = ReadCommaSeparatedArray(ReadSettingsProperty("sonar.global.exclusions"));
-        TestExclusions = ReadCommaSeparatedArray(ReadSettingsProperty("sonar.test.exclusions"));
-        TestInclusions = ReadCommaSeparatedArray(ReadSettingsProperty("sonar.test.inclusions"));
-        GlobalTestExclusions = ReadCommaSeparatedArray(ReadSettingsProperty("sonar.global.test.exclusions"));
-        ParametrizedRules = ReadRuleParameters();
     }
+
+    public bool IgnoreHeaderComments(string language) =>
+    language switch
+    {
+        LanguageNames.CSharp => IgnoreHeaderCommentsCS,
+        LanguageNames.VisualBasic => IgnoreHeaderCommentsVB,
+        _ => throw new UnexpectedLanguageException(language)
+    };
+
+    public bool AnalyzeGeneratedCode(string language) =>
+        language switch
+        {
+            LanguageNames.CSharp => AnalyzeGeneratedCodeCS,
+            LanguageNames.VisualBasic => AnalyzeGeneratedCodeVB,
+            _ => throw new UnexpectedLanguageException(language)
+        };
 
     public bool IsFileIncluded(string filePath, bool isTestProject) =>
         isTestProject
@@ -83,7 +77,7 @@ public class SonarLintXmlReader
         && !IsExcluded(globalExclusions, filePath);
 
     private static bool IsIncluded(string[] inclusions, string filePath) =>
-        inclusions is { Length: 0 } || inclusions.Any(x => WildcardPatternMatcher.IsMatch(x, filePath, true));
+        inclusions.Length == 0 || inclusions.Any(x => WildcardPatternMatcher.IsMatch(x, filePath, true));
 
     private static bool IsExcluded(string[] exclusions, string filePath) =>
         exclusions.Any(x => WildcardPatternMatcher.IsMatch(x, filePath, false));
