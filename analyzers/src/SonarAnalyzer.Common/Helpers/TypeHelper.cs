@@ -36,7 +36,6 @@ namespace SonarAnalyzer.Helpers
                 { TypeKind: TypeKind.Struct } => true,
                 ITypeParameterSymbol { IsValueType: true } => true,
                 ITypeParameterSymbol { HasReferenceTypeConstraint: false, ConstraintTypes: { IsEmpty: false } constraintTypes } => constraintTypes.Any(x => x.SpecialType == SpecialType.System_Enum),
-                ITypeParameterSymbol typeParameter when typeParameter != self => typeParameter.OriginalDefinition.IsStruct(),
                 _ => false,
             };
 
