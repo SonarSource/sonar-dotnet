@@ -177,9 +177,30 @@ if (value = boolParameter)
         [DataRow("!(bool)(object)!!(null != arg)")]
         [DataRow("!!!((object)arg != (object)null)")]
         [DataRow("!!!((object)null != (object)arg)")]
-        public void Branching_LearnsObjectConstraint_Nullable_CS(string expression)
+        public void Branching_LearnsObjectConstraint_NullableInt_CS(string expression)
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.Binary, "int?");
+            validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
+        }
+
+        [DataTestMethod]
+        [DataRow("arg == null")]
+        [DataRow("null == arg")]
+        [DataRow("(object)(object)arg == (object)(object)null")]
+        [DataRow("(object)(object)arg == (object)(object)isNull")]
+        [DataRow("!!!(arg != null)")]
+        [DataRow("!!!(null != arg)")]
+        [DataRow("!(bool)(object)!!(arg != null)")]
+        [DataRow("!(bool)(object)!!(null != arg)")]
+        [DataRow("!!!((object)arg != (object)null)")]
+        [DataRow("!!!((object)null != (object)arg)")]
+        public void Branching_LearnsObjectConstraint_NullableBool_CS(string expression)
+        {
+            var validator = CreateIfElseEndValidatorCS(expression, OperationKind.Binary, "bool?");
             validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
             validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.TagValues("End").Should().HaveCount(2)
@@ -217,9 +238,28 @@ if (value = boolParameter)
         [DataRow("!!!(null == arg)")]
         [DataRow("!(bool)(object)!!(arg == null)")]
         [DataRow("!(bool)(object)!!(null == arg)")]
-        public void Branching_LearnsObjectConstraint_Binary_Negated_Nullable_CS(string expression)
+        public void Branching_LearnsObjectConstraint_Binary_Negated_NullableInt_CS(string expression)
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.Binary, "int?");
+            validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
+                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
+        }
+
+        [DataTestMethod]
+        [DataRow("arg != null")]
+        [DataRow("null != arg")]
+        [DataRow("(object)(object)arg != (object)(object)null")]
+        [DataRow("(object)(object)arg != (object)(object)isNull")]
+        [DataRow("!!!(arg == null)")]
+        [DataRow("!!!(null == arg)")]
+        [DataRow("!(bool)(object)!!(arg == null)")]
+        [DataRow("!(bool)(object)!!(null == arg)")]
+        public void Branching_LearnsObjectConstraint_Binary_Negated_NullableBool_CS(string expression)
+        {
+            var validator = CreateIfElseEndValidatorCS(expression, OperationKind.Binary, "bool?");
             validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
             validator.TagValues("End").Should().HaveCount(2)
