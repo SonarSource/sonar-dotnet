@@ -548,7 +548,7 @@ if (value = boolParameter)
         public void Branching_LearnsObjectConstraint_RecursivePattern_ValueTypeConstraint(string expression, string argType)
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.RecursivePattern, argType);
-            validator.ValidateTagOrder("If", "End");
+            validator.ValidateTagOrder("If", "End"); // Always true, else branch is not visited
             validator.ValidateTag("If", x => x.Should().HaveNoConstraints());
             validator.ValidateTag("End", x => x.Should().HaveNoConstraints());
         }
