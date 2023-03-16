@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Concurrent;
+using System.Data;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
@@ -52,7 +53,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             }
         }
 
-        private static ConcurrentDictionary<CacheKey, SymbolicValue> singleConstraintCache = new();
+        private static ConcurrentDictionary<CacheKey, SymbolicValue> constraintCache = new();
 
         // Reuse instances to save memory. This "True" has the same semantic meaning and any other symbolic value with BoolConstraint.True constraint
         public static readonly SymbolicValue Constraintless = new();
@@ -102,15 +103,21 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         private static SymbolicValue AddOrReplaceConstraint(SymbolicValue baseValue, SymbolicConstraint constraint)
         {
+            var constraintCount = baseValue.Constraints.Count;
+            if (constraintCount == 0)
+            {
+                return SingleConstraint(constraint);
+            }
             if (baseValue.HasConstraint(constraint))
             {
                 return baseValue;
             }
-
-            var constraintCount = baseValue.Constraints.Count;
-            if (constraintCount == 0 || (constraintCount == 1 && baseValue.Constraints.ContainsKey(constraint.GetType())))
+            var containsContraintType = baseValue.Constraints.ContainsKey(constraint.GetType());
+            if (constraintCount == 1)
             {
-                return SingleConstraint(constraint);
+                return containsContraintType
+                    ? SingleConstraint(constraint)
+                    : PairConstraint(baseValue.Constraints.Values.First(), constraint);
             }
 
             return baseValue with { Constraints = baseValue.Constraints.SetItem(constraint.GetType(), constraint) };
@@ -149,14 +156,29 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         private static SymbolicValue SingleConstraint(SymbolicConstraint constraint)
         {
             var cacheKey = new CacheKey(constraint.Kind);
-            if (singleConstraintCache.TryGetValue(cacheKey, out var result))
+            if (constraintCache.TryGetValue(cacheKey, out var result))
             {
                 return result;
             }
             else
             {
                 result = Constraintless with { Constraints = Constraintless.Constraints.SetItem(constraint.GetType(), constraint) };
-                return singleConstraintCache.GetOrAdd(cacheKey, result);
+                return constraintCache.GetOrAdd(cacheKey, result);
+            }
+        }
+
+        private static SymbolicValue PairConstraint(SymbolicConstraint first, SymbolicConstraint second)
+        {
+            var cacheKey = new CacheKey(first.Kind, second.Kind);
+            if (constraintCache.TryGetValue(cacheKey, out var result))
+            {
+                return result;
+            }
+            else
+            {
+                var single = SingleConstraint(first);
+                result = single with { Constraints = single.Constraints.SetItem(second.GetType(), second) };
+                return constraintCache.GetOrAdd(cacheKey, result);
             }
         }
     }

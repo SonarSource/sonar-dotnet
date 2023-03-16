@@ -200,7 +200,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             SymbolicValue.Constraintless.WithConstraint(ObjectConstraint.Null).Should().BeSameAs(SymbolicValue.Null);
             var one = SymbolicValue.NotNull.WithConstraint(DummyConstraint.Dummy);
             var two = SymbolicValue.NotNull.WithConstraint(DummyConstraint.Dummy);
-            one.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy).And.NotBeSameAs(two); // Requires a cache for pairs
+            one.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy).And.BeSameAs(two); // Requires a cache for pairs
         }
 
         [TestMethod]
