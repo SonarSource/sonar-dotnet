@@ -277,10 +277,32 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         public void PairCache_RemoveThirdLastEntry_Type()
         {
             var sut = SymbolicValue.Null.WithConstraint(DummyConstraint.Dummy).WithConstraint(TestConstraint.First);
-            sut.Should().HaveOnlyConstraints(ObjectConstraint.Null, DummyConstraint.Dummy, TestConstraint.First);
             var one = sut.WithoutConstraint<DummyConstraint>();
             var two = sut.WithoutConstraint<DummyConstraint>();
             one.Should().HaveOnlyConstraints(ObjectConstraint.Null, TestConstraint.First).And.BeSameAs(two);
+        }
+
+        [TestMethod]
+        public void PairCache_RemoveFourthLastEntry_Kind()
+        {
+            var boolSymbolValue = SymbolicValue.Constraintless.WithConstraint(ObjectConstraint.NotNull).WithConstraint(BoolConstraint.True);
+            var sut = boolSymbolValue.WithConstraint(DummyConstraint.Dummy).WithConstraint(TestConstraint.First);
+            sut.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True, DummyConstraint.Dummy, TestConstraint.First);
+            var one = sut.WithoutConstraint(DummyConstraint.Dummy);
+            var two = sut.WithoutConstraint(DummyConstraint.Dummy);
+            one.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True, TestConstraint.First).And.NotBeSameAs(two); // Requires cache for triplets
+            one.WithoutConstraint(TestConstraint.First).Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True).And.BeSameAs(boolSymbolValue);
+        }
+
+        [TestMethod]
+        public void PairCache_RemoveFourthLastEntry_Type()
+        {
+            var boolSymbolValue = SymbolicValue.Constraintless.WithConstraint(ObjectConstraint.NotNull).WithConstraint(BoolConstraint.True);
+            var sut = boolSymbolValue.WithConstraint(DummyConstraint.Dummy).WithConstraint(TestConstraint.First);
+            var one = sut.WithoutConstraint<DummyConstraint>();
+            var two = sut.WithoutConstraint<DummyConstraint>();
+            one.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True, TestConstraint.First).And.NotBeSameAs(two); // Requires cache for triplets
+            one.WithoutConstraint<TestConstraint>().Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True).And.BeSameAs(boolSymbolValue);
         }
 
         [TestMethod]
