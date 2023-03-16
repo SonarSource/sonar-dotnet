@@ -195,7 +195,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         }
 
         [DataTestMethod]
-        [DataRow("")]                      // Unbounded (can be nullable reference type or nullable value type)
+        [DataRow("")]                      // Unbounded (can be reference type or value type)
         [DataRow("where T: new()")]        // Unbounded
         [DataRow("where T: notnull")]      // Unbounded
         [DataRow("where T: class")]
