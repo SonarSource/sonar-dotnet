@@ -195,6 +195,15 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         }
 
         [TestMethod]
+        public void PairCache_OrderDosntMatter()
+        {
+            var one = SymbolicValue.Constraintless.WithConstraint(ObjectConstraint.Null).WithConstraint(DummyConstraint.Dummy);
+            var two = SymbolicValue.Constraintless.WithConstraint(DummyConstraint.Dummy).WithConstraint(ObjectConstraint.Null);
+            var three = SymbolicValue.Constraintless.WithConstraint(ObjectConstraint.NotNull).WithConstraint(DummyConstraint.Dummy).WithConstraint(ObjectConstraint.Null);
+            one.Should().HaveOnlyConstraints(ObjectConstraint.Null, DummyConstraint.Dummy).And.BeSameAs(two).And.BeSameAs(three);
+        }
+
+        [TestMethod]
         public void PairCache_AddOtherConstraintType()
         {
             SymbolicValue.Constraintless.WithConstraint(ObjectConstraint.Null).Should().BeSameAs(SymbolicValue.Null);
@@ -255,7 +264,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         }
 
         [TestMethod]
-        public void SingleCache_RemoveThirdLastEntry_Kind()
+        public void PairCache_RemoveThirdLastEntry_Kind()
         {
             var sut = SymbolicValue.Null.WithConstraint(DummyConstraint.Dummy).WithConstraint(TestConstraint.First);
             sut.Should().HaveOnlyConstraints(ObjectConstraint.Null, DummyConstraint.Dummy, TestConstraint.First);
@@ -265,7 +274,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         }
 
         [TestMethod]
-        public void SingleCache_RemoveThirdLastEntry_Type()
+        public void PairCache_RemoveThirdLastEntry_Type()
         {
             var sut = SymbolicValue.Null.WithConstraint(DummyConstraint.Dummy).WithConstraint(TestConstraint.First);
             sut.Should().HaveOnlyConstraints(ObjectConstraint.Null, DummyConstraint.Dummy, TestConstraint.First);
