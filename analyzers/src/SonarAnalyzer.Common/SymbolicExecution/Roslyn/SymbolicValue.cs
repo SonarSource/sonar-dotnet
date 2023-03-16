@@ -102,10 +102,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         }
 
         public SymbolicValue WithoutConstraint(SymbolicConstraint constraint) =>
-            RemoveConstraint(this, constraint);
+            HasConstraint(constraint) ? RemoveConstraint(this, constraint.GetType()) : this;
 
         public SymbolicValue WithoutConstraint<T>() where T : SymbolicConstraint =>
-            RemoveConstraint<T>(this);
+            HasConstraint<T>() ? RemoveConstraint(this, typeof(T)) : this;
 
         public bool HasConstraint<T>() where T : SymbolicConstraint =>
             Constraints.ContainsKey(typeof(T));
@@ -126,12 +126,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             Constraints.Any()
                 ? Constraints.Values.Select(x => x.ToString()).OrderBy(x => x).JoinStr(", ")
                 : "No constraints";
-
-        private static SymbolicValue RemoveConstraint(SymbolicValue baseValue, SymbolicConstraint constraint) =>
-            baseValue.HasConstraint(constraint) ? RemoveConstraint(baseValue, constraint.GetType()) : baseValue;
-
-        private static SymbolicValue RemoveConstraint<T>(SymbolicValue baseValue) where T : SymbolicConstraint =>
-            baseValue.HasConstraint<T>() ? RemoveConstraint(baseValue, typeof(T)) : baseValue;
 
         private static SymbolicValue RemoveConstraint(SymbolicValue baseValue, Type type)
         {
