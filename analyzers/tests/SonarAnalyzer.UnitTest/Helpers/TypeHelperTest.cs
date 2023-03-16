@@ -99,7 +99,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [DataRow("CustomRefStruct")]
         public void IsStruct_Simple(string type)
         {
-            var (tree, model) = TestHelper.CompileCS($$"""
+            var fieldSymbol = FirstFieldSymbolFromCode($$"""
                 struct CustomStruct { }
                 ref struct CustomRefStruct { }
 
@@ -108,10 +108,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                     {{type}} field;
                 }
                 """);
-            var field = tree.GetRoot().DescendantNodes().OfType<FieldDeclarationSyntax>().First();
-            var fieldSymbol = (IFieldSymbol)model.GetDeclaredSymbol(field.Declaration.Variables[0]);
-            var fieldType = fieldSymbol.Type;
-            fieldType.IsStruct().Should().BeTrue();
+            fieldSymbol.Type.IsStruct().Should().BeTrue();
         }
 
         [DataTestMethod]
@@ -119,16 +116,13 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [DataRow("System.IComparable")]
         public void IsStruct_False_Simple(string type)
         {
-            var (tree, model) = TestHelper.CompileCS($$"""
+            var fieldSymbol = FirstFieldSymbolFromCode($$"""
                 class Test
                 {
                     {{type}} field;
                 }
                 """);
-            var field = tree.GetRoot().DescendantNodes().OfType<FieldDeclarationSyntax>().First();
-            var fieldSymbol = (IFieldSymbol)model.GetDeclaredSymbol(field.Declaration.Variables[0]);
-            var fieldType = fieldSymbol.Type;
-            fieldType.IsStruct().Should().BeFalse();
+            fieldSymbol.Type.IsStruct().Should().BeFalse();
         }
 
         [DataTestMethod]
@@ -140,14 +134,13 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [DataRow("Enum, IComparable, new()")]
         public void IsStruct_Generic(string typeConstraint)
         {
-            var (tree, model) = TestHelper.CompileCS($$"""
+            var fieldSymbol = FirstFieldSymbolFromCode($$"""
                 using System;
                 class Test<T> where T: {{typeConstraint}}
                 {
                     T field;
                 }
                 """);
-            var fieldSymbol = FirstFieldSymbol(tree, model);
             fieldSymbol.Type.IsStruct().Should().BeTrue();
         }
 
@@ -157,14 +150,13 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [DataRow("Nullable<T>")]
         public void IsStruct_Generic_Nullable(string type)
         {
-            var (tree, model) = TestHelper.CompileCS($$"""
+            var fieldSymbol = FirstFieldSymbolFromCode($$"""
                 using System;
                 class Test<T> where T: struct
                 {
                     {{type}} field;
                 }
                 """);
-            var fieldSymbol = FirstFieldSymbol(tree, model);
             fieldSymbol.Type.IsStruct().Should().BeTrue();
         }
 
@@ -177,14 +169,13 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [DataRow("where T: notnull")]
         public void IsStruct_False_Generic(string typeConstraint)
         {
-            var (tree, model) = TestHelper.CompileCS($$"""
+            var fieldSymbol = FirstFieldSymbolFromCode($$"""
                 using System;
                 class Test<T> {{typeConstraint}}
                 {
                     T field;
                 }
                 """);
-            var fieldSymbol = FirstFieldSymbol(tree, model);
             fieldSymbol.Type.IsStruct().Should().BeFalse();
         }
 
@@ -203,7 +194,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [DataRow("where T: Delegate?")]
         public void IsStruct_False_Generic_NullableReferenceType(string typeConstraint)
         {
-            var (tree, model) = TestHelper.CompileCS($$"""
+            var fieldSymbol = FirstFieldSymbolFromCode($$"""
                 #nullable enable
                 using System;
                 class Test<T> {{typeConstraint}}
@@ -211,21 +202,19 @@ namespace SonarAnalyzer.UnitTest.Helpers
                     T? field;
                 }
                 """);
-            var fieldSymbol = FirstFieldSymbol(tree, model);
             fieldSymbol.Type.IsStruct().Should().BeFalse();
         }
 
         [TestMethod]
         public void IsStruct_False_Generic_Derived()
         {
-            var (tree, model) = TestHelper.CompileCS($$"""
+            var fieldSymbol = FirstFieldSymbolFromCode($$"""
                 using System;
                 class Test<T, U> where U: T
                 {
                     U field;
                 }
                 """);
-            var fieldSymbol = FirstFieldSymbol(tree, model);
             fieldSymbol.Type.IsStruct().Should().BeFalse();
         }
 
@@ -248,8 +237,9 @@ namespace SonarAnalyzer.UnitTest.Helpers
             parameterSymbol.Type.IsStruct().Should().BeFalse(); // parameter must be a struct, but even the compiler doesn't recognizes this
         }
 
-        private static IFieldSymbol FirstFieldSymbol(SyntaxTree tree, SemanticModel model)
+        private static IFieldSymbol FirstFieldSymbolFromCode(string code)
         {
+            var (tree, model) = TestHelper.CompileCS(code);
             var field = tree.GetRoot().DescendantNodes().OfType<FieldDeclarationSyntax>().First();
             var fieldSymbol = (IFieldSymbol)model.GetDeclaredSymbol(field.Declaration.Variables[0]);
             return fieldSymbol;
