@@ -116,7 +116,7 @@ Tag(""End"", collection);";
                                                                  ? x.SetSymbolConstraint(x.Operation.Instance.AsPropertyReference().Value.Instance.TrackedSymbol(), DummyConstraint.Dummy)
                                                                  : x.State);
             var validator = SETestContext.CreateCS(code, ", ICollection<object> collection", check).Validator;
-            validator.ValidateTag("If", x => x.Should().HaveOnlyConstraint(DummyConstraint.Dummy));
+            validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(DummyConstraint.Dummy, ObjectConstraint.NotNull));
             validator.TagStates("End").Should().HaveCount(2);
         }
 
@@ -270,10 +270,6 @@ if (value = boolParameter)
         [DataTestMethod]
         [DataRow("arg == isObject", "object")]
         [DataRow("isObject == arg", "object")]
-        [DataRow("arg == true", "bool?")]
-        [DataRow("arg == false", "bool?")]
-        [DataRow("true == arg", "bool?")]
-        [DataRow("false == arg", "bool?")]
         [DataRow("arg == 42", "int?")]
         [DataRow("42 == arg", "int?")]
         public void Branching_LearnsObjectConstraint_Binary_UndefinedInOtherBranch_CS(string expression, string argType)
@@ -287,12 +283,24 @@ if (value = boolParameter)
         }
 
         [DataTestMethod]
+        [DataRow("arg == true", true)]
+        [DataRow("arg == false", false)]
+        [DataRow("true == arg", true)]
+        [DataRow("false == arg", false)]
+        public void Branching_LearnsObjectConstraint_Binary_UndefinedInOtherBranch_NullableBool_CS(string expression, bool expected)
+        {
+            var expectedBoolConstraint = BoolConstraint.From(expected);
+            var validator = CreateIfElseEndValidatorCS(expression, OperationKind.Binary, "bool?");
+            validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, expectedBoolConstraint));
+            validator.ValidateTag("Else", x => x.Should().BeNull("We can't tell if it is Null or NotNull in this branch"));
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x == null)
+                .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
+        }
+
+        [DataTestMethod]
         [DataRow("arg != isObject", "object")]
         [DataRow("isObject != arg", "object")]
-        [DataRow("arg != true", "bool?")]
-        [DataRow("arg != false", "bool?")]
-        [DataRow("true != arg", "bool?")]
-        [DataRow("false != arg", "bool?")]
         [DataRow("arg != 42", "int?")]
         [DataRow("42 != arg", "int?")]
         public void Branching_LearnsObjectConstraint_Binary_UndefinedInOtherBranch_Negated_CS(string expression, string argType)
@@ -300,6 +308,22 @@ if (value = boolParameter)
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.Binary, argType);
             validator.ValidateTag("If", x => x.Should().BeNull("We can't tell if it is Null or NotNull in this branch"));
             validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x == null)
+                .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
+        }
+
+        [DataTestMethod]
+        [DataRow("arg != true", true)]
+        [DataRow("arg != false", false)]
+        [DataRow("true != arg", true)]
+        [DataRow("false != arg", false)]
+        public void Branching_LearnsObjectConstraint_Binary_UndefinedInOtherBranch_NulalbleBool_Negated_CS(string expression, bool expected)
+        {
+            var expectedBoolConstraint = BoolConstraint.From(expected);
+            var validator = CreateIfElseEndValidatorCS(expression, OperationKind.Binary, "bool?");
+            validator.ValidateTag("If", x => x.Should().BeNull("We can't tell if it is Null or NotNull in this branch"));
+            validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, expectedBoolConstraint));
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x == null)
                 .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
