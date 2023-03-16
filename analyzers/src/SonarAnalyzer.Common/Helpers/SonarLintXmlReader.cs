@@ -74,8 +74,8 @@ public class SonarLintXmlReader
 
     public bool IsFileIncluded(string filePath, bool isTestProject) =>
         isTestProject
-        ? IsFileIncluded(TestInclusions, TestExclusions, GlobalTestExclusions, filePath)
-        : IsFileIncluded(Inclusions, Exclusions, GlobalExclusions, filePath);
+            ? IsFileIncluded(TestInclusions, TestExclusions, GlobalTestExclusions, filePath)
+            : IsFileIncluded(Inclusions, Exclusions, GlobalExclusions, filePath);
 
     private static bool IsFileIncluded(string[] inclusions, string[] exclusions, string[] globalExclusions, string filePath) =>
         IsIncluded(inclusions, filePath)
@@ -104,8 +104,8 @@ public class SonarLintXmlReader
 
     private List<SonarLintXmlRule> ReadRuleParameters() =>
         sonarLintXml is { Rules: { } rules }
-        ? rules.Where(x => x.Parameters.Any()).ToList()
-        : new();
+            ? rules.Where(x => x.Parameters.Any()).ToList()
+            : new();
 
     private string ReadSettingsProperty(string property) =>
         sonarLintXml is { Settings: { } settings }
