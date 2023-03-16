@@ -222,6 +222,23 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         }
 
         [TestMethod]
+        public void TripletCache_AddOtherConstraintType()
+        {
+            var one = SymbolicValue.NotNull.WithConstraint(DummyConstraint.Dummy).WithConstraint(TestConstraint.First);
+            var two = SymbolicValue.NotNull.WithConstraint(DummyConstraint.Dummy).WithConstraint(TestConstraint.First);
+            one.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy, TestConstraint.First).And.NotBeSameAs(two); // Requires cache for triplets
+        }
+
+        [TestMethod]
+        public void TripletCache_ReplaceExistingConstraintType()
+        {
+            var sut = SymbolicValue.Null.WithConstraint(TestConstraint.First).WithConstraint(DummyConstraint.Dummy);
+            var one = sut.WithConstraint(TestConstraint.Second).WithConstraint(TestConstraint.First);
+            var two = one.WithConstraint(TestConstraint.Second).WithConstraint(TestConstraint.First);
+            sut.Should().HaveOnlyConstraints(ObjectConstraint.Null, TestConstraint.First, DummyConstraint.Dummy).And.NotBeSameAs(one).And.NotBeSameAs(two); // Requires cache for triplets
+        }
+
+        [TestMethod]
         public void SingleCache_RemoveLastEntry_Kind()
         {
             var sut = SymbolicValue.Null;
@@ -283,7 +300,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         }
 
         [TestMethod]
-        public void PairCache_RemoveFourthLastEntry_Kind()
+        public void TripletCache_RemoveFourthLastEntry_Kind()
         {
             var boolSymbolValue = SymbolicValue.Constraintless.WithConstraint(ObjectConstraint.NotNull).WithConstraint(BoolConstraint.True);
             var sut = boolSymbolValue.WithConstraint(DummyConstraint.Dummy).WithConstraint(TestConstraint.First);
@@ -295,7 +312,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         }
 
         [TestMethod]
-        public void PairCache_RemoveFourthLastEntry_Type()
+        public void TripletCache_RemoveFourthLastEntry_Type()
         {
             var boolSymbolValue = SymbolicValue.Constraintless.WithConstraint(ObjectConstraint.NotNull).WithConstraint(BoolConstraint.True);
             var sut = boolSymbolValue.WithConstraint(DummyConstraint.Dummy).WithConstraint(TestConstraint.First);
