@@ -274,15 +274,15 @@ class ComplexConditionsSingleNullable
         bool? b = null;
         _ = true || b.Value; // Compliant, "||" is short-circuited
         _ = b.Value;         // Noncompliant
-        _ = b.Value;         // Compliant, unreachable
+        _ = b.Value;         // Compliant, unreachable if b is empty
     }
 
     void Reachability2()
     {
         bool? b = null;
         _ = true | b.Value;  // Noncompliant, "|" evaluates both sides
-        _ = b.Value;         // Compliant, unreachable
-        _ = b.Value;         // Compliant, still unreachable
+        _ = b.Value;         // Compliant, unreachable if b is empty
+        _ = b.Value;         // Compliant, still unreachable if b is empty
     }
 
     bool LiftedNot(bool? b) => !b == b && b.Value; // FN, b.Value reached only when b is empty
@@ -318,7 +318,7 @@ class ComplexConditionMultipleNullables
     {
         bool? b1 = null;
         _ = b1.Value;        // Noncompliant
-        _ = b1.Value;        // Compliant, unreachable
+        _ = b1.Value;        // Compliant, unreachable if b1 is empty
     }
 
     void Reachability2(bool? b1)
@@ -327,7 +327,7 @@ class ComplexConditionMultipleNullables
         if (b1 == b2)
         {
             _ = b1.Value;     // Noncompliant
-            _ = b2.Value;     // Noncompliant, FP: unreachable
+            _ = b2.Value;     // Noncompliant, FP: unreachable if b1 is empty, so if b1 is empty
         }
     }
 
@@ -389,7 +389,7 @@ class MemberAccessSequence
         _ = dt.Value.ToString(); // Compliant, unknown
         dt = null;
         _ = dt.Value.ToString(); // Noncompliant, empty
-        _ = dt.Value.ToString(); // Compliant, unreachable
+        _ = dt.Value.ToString(); // Compliant, unreachable if dt is empty
     }
 }
 
@@ -405,7 +405,7 @@ class Repro_4573
         {
             if (value.HasValue)
             {
-                //HasValue and NoValue constraints are set here
+                // HasValue and NoValue constraints are set here
             }
             if (foo != value || foo.HasValue)
             {
@@ -432,7 +432,7 @@ class Repro_4573
             }
             if (foo == null)
             {
-                Console.WriteLine(foo.Value.ToString());    // Compliant, unreachable
+                Console.WriteLine(foo.Value.ToString());    // Compliant, unreachable if foo is empty
             }
             if (foo != null)
             {
@@ -449,7 +449,7 @@ class Repro_4573
             {
                 if (!foo.HasValue)
                 {
-                    Console.WriteLine(foo.Value.ToString());    // Noncompliant, FP: unreachable
+                    Console.WriteLine(foo.Value.ToString());    // Noncompliant, FP: unreachable if foo is empty
                 }
             }
         }
@@ -517,53 +517,62 @@ class Repro_4573
 
 class Casts
 {
-    void Downcast1(int? i)
+    void DowncastWithReassignment(int? i)
     {
         _ = (int)i;                   // Compliant, same as i.Value with i unknown
         i = null;
         _ = (int)i;                   // Noncompliant, empty
         i = 42;
-        _ = (int)i;                   // Compliant, unreachable
+        _ = (int)i;                   // Compliant
     }
 
-    void Downcast2(int? i)
+    void DowncastAfterLearnedNotNullViaLiteral(int? i)
     {
         i = 42;
-        _ = (int)i;                   // Compliant, non-empty
+        _ = (int)i;                   // Compliant
     }
 
-    void Downcast3()
+    void DowncastAfterLearnedNotNullViaValue()
     {
         int? i = null;
         _ = i.Value;                  // Noncompliant, empty
-        _ = (int)i;                   // Compliant, unreachable
+        _ = (int)i;                   // Compliant, unreachable if empty
     }
 
-    void Upcast1(int? i1, int? i2)
+    void UpcastWithNull()
     {
         _ = ((int?)null).Value;       // Noncompliant
     }
 
-    void Upcast2(int? i1, int? i2)
+    void UpcastWithReassignment(int? i)
     {
         _ = ((int?)null).Value;       // Noncompliant
-        i2 = null;
-        _ = ((int?)i2).Value;         // Noncompliant, FP: unreachable
+        i = null;
+        _ = ((int?)i).Value;          // Noncompliant, FP: unreachable
     }
 
-    void AsOperator1(int? i)
+    void UpcastWithNonNullLiteral(int? i)
     {
-        _ = (i as int?).Value;        // Compliant
+        _ = ((int?)42).Value;         // Compliant
+    }
+
+    void AsOperatorAndUnreachability(int? i)
+    {
         _ = (null as int?).Value;     // Noncompliant
         i = null;
         _ = (i as int?).Value;        // Noncompliant, FP: unreachable
     }
 
-    void AsOperator2(int? i)
+    void AsOperatorWithUnknownAndReassignment(int? i)
     {
         _ = (i as int?).Value;        // Compliant
         i = null;
         _ = (i as int?).Value;        // Noncompliant, empty
+    }
+
+    void AsOperatorWithNonNullLiteral(int? i)
+    {
+        _ = (42 as int?).Value;       // Compliant
     }
 }
 
