@@ -41,34 +41,27 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
             && MethodDereferencesArguments(method);
 
         static bool IsSupportedPropertyAccessor(SyntaxNode node) =>
-            node is AccessorDeclarationSyntax { RawKind: (int)SyntaxKind.SetAccessorDeclaration or (int)SyntaxKindEx.InitAccessorDeclaration }
-            && IsPropertyAccessorAccessibleFromOtherAssemblies(Modifiers(node));
-
-        static SyntaxTokenList Modifiers(SyntaxNode node) =>
-            node switch
-            {
-                AccessorDeclarationSyntax accessor => accessor.Modifiers,
-                MemberDeclarationSyntax member => member.Modifiers(),
-                _ => default
-            };
+            node is AccessorDeclarationSyntax { RawKind: (int)SyntaxKind.SetAccessorDeclaration or (int)SyntaxKindEx.InitAccessorDeclaration } accessor
+            && IsPropertyAccessorAccessibleFromOtherAssemblies(accessor.Modifiers);
 
         static bool IsAccessibleFromOtherAssemblies(SyntaxNode node) =>
             node.AncestorsAndSelf().OfType<MemberDeclarationSyntax>().FirstOrDefault() is { } containingMember
             && node.Ancestors().OfType<BaseTypeDeclarationSyntax>().FirstOrDefault() is { } containingType
-            && IsMemberAccessibleFromOtherAssemblies(Modifiers(containingMember), containingType)
+            && IsMemberAccessibleFromOtherAssemblies(containingMember.Modifiers(), containingType)
             && IsTypeAccessibleFromOtherAssemblies(containingType.Modifiers);
 
         static bool IsMemberAccessibleFromOtherAssemblies(SyntaxTokenList modifiers, BaseTypeDeclarationSyntax containingType) =>
-            modifiers.Any(x => x.IsKind(SyntaxKind.PublicKeyword))
-            || (modifiers.Any(x => x.IsKind(SyntaxKind.ProtectedKeyword)) && !modifiers.Any(x => x.IsKind(SyntaxKind.PrivateKeyword)))
+            IsPublicOrProtectedOrProtectedInternal(modifiers)
             || (containingType is InterfaceDeclarationSyntax && HasNoDeclaredAccessabilityModifier(modifiers));
 
         static bool IsPropertyAccessorAccessibleFromOtherAssemblies(SyntaxTokenList modifiers) =>
-            modifiers.Any(x => x.IsKind(SyntaxKind.PublicKeyword))
-            || (modifiers.Any(x => x.IsKind(SyntaxKind.ProtectedKeyword)) && !modifiers.Any(x => x.IsKind(SyntaxKind.PrivateKeyword)))
+            IsPublicOrProtectedOrProtectedInternal(modifiers)
             || HasNoDeclaredAccessabilityModifier(modifiers);
 
         static bool IsTypeAccessibleFromOtherAssemblies(SyntaxTokenList modifiers) =>
+            IsPublicOrProtectedOrProtectedInternal(modifiers);
+
+        static bool IsPublicOrProtectedOrProtectedInternal(SyntaxTokenList modifiers) =>
             modifiers.Any(x => x.IsKind(SyntaxKind.PublicKeyword))
             || (modifiers.Any(x => x.IsKind(SyntaxKind.ProtectedKeyword)) && !modifiers.Any(x => x.IsKind(SyntaxKind.PrivateKeyword)));
 
