@@ -31,38 +31,87 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
 
     protected override DiagnosticDescriptor Rule => S3900;
 
-    public override bool ShouldExecute() =>
-        Node is BaseMethodDeclarationSyntax or AccessorDeclarationSyntax;
-
-    protected override ProgramState PreProcessSimple(SymbolicContext context)
+    public override bool ShouldExecute()
     {
-        var operation = context.Operation.Instance;
-        if (operation.Kind == OperationKindEx.ParameterReference
-            && operation.ToParameterReference().Parameter is var parameter
-            && !parameter.Type.IsValueType
-            && IsParameterDereferenced(context.Operation)
-            && NullableStateIsNotKnownForParameter(parameter)
-            && !parameter.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_FromServicesAttribute))
+        return IsAccessibleFromOtherAssemblies(Node)
+               && (IsSupportedMethod(Node) || IsSupportedPropertyAccessor(Node));
+
+        static bool IsSupportedMethod(SyntaxNode node) =>
+            node is BaseMethodDeclarationSyntax { ParameterList.Parameters.Count: > 0 } method
+            && MethodDereferencesArguments(method);
+
+        static bool IsSupportedPropertyAccessor(SyntaxNode node) =>
+            node is AccessorDeclarationSyntax { RawKind: (int)SyntaxKind.SetAccessorDeclaration or (int)SyntaxKindEx.InitAccessorDeclaration }
+            && IsPropertyAccessorAccessibleFromOtherAssemblies(Modifiers(node));
+
+        static SyntaxTokenList Modifiers(SyntaxNode node) =>
+            node switch
+            {
+                AccessorDeclarationSyntax accessor => accessor.Modifiers,
+                MemberDeclarationSyntax member => member.Modifiers(),
+                _ => default
+            };
+
+        static bool IsAccessibleFromOtherAssemblies(SyntaxNode node) =>
+            node.AncestorsAndSelf().OfType<MemberDeclarationSyntax>().FirstOrDefault() is { } containingMember
+            && node.Ancestors().OfType<BaseTypeDeclarationSyntax>().FirstOrDefault() is { } containingType
+            && IsMemberAccessibleFromOtherAssemblies(Modifiers(containingMember), containingType)
+            && IsTypeAccessibleFromOtherAssemblies(containingType.Modifiers);
+
+        static bool IsMemberAccessibleFromOtherAssemblies(SyntaxTokenList modifiers, BaseTypeDeclarationSyntax containingType) =>
+            modifiers.Any(x => x.IsKind(SyntaxKind.PublicKeyword))
+            || (modifiers.Any(x => x.IsKind(SyntaxKind.ProtectedKeyword)) && !modifiers.Any(x => x.IsKind(SyntaxKind.PrivateKeyword)))
+            || (containingType is InterfaceDeclarationSyntax && HasNoDeclaredAccessabilityModifier(modifiers));
+
+        static bool IsPropertyAccessorAccessibleFromOtherAssemblies(SyntaxTokenList modifiers) =>
+            modifiers.Any(x => x.IsKind(SyntaxKind.PublicKeyword))
+            || (modifiers.Any(x => x.IsKind(SyntaxKind.ProtectedKeyword)) && !modifiers.Any(x => x.IsKind(SyntaxKind.PrivateKeyword)))
+            || HasNoDeclaredAccessabilityModifier(modifiers);
+
+        static bool IsTypeAccessibleFromOtherAssemblies(SyntaxTokenList modifiers) =>
+            modifiers.Any(x => x.IsKind(SyntaxKind.PublicKeyword))
+            || (modifiers.Any(x => x.IsKind(SyntaxKind.ProtectedKeyword)) && !modifiers.Any(x => x.IsKind(SyntaxKind.PrivateKeyword)));
+
+        static bool HasNoDeclaredAccessabilityModifier(SyntaxTokenList modifiers) =>
+            !modifiers.Any(x => x.IsKind(SyntaxKind.PrivateKeyword)
+                                || x.IsKind(SyntaxKind.ProtectedKeyword)
+                                || x.IsKind(SyntaxKind.InternalKeyword)
+                                || x.IsKind(SyntaxKind.PublicKeyword));
+
+        static bool MethodDereferencesArguments(BaseMethodDeclarationSyntax method)
         {
-            var message = SemanticModel.GetDeclaredSymbol(Node).IsConstructor()
-                ? "Refactor this constructor to avoid using members of parameter '{0}' because it could be null."
-                : "Refactor this method to add validation of parameter '{0}' before using it.";
-            ReportIssue(operation, string.Format(message, operation.Syntax), context);
+            var argumentNames = method.ParameterList.Parameters.Select(x => x.Identifier.ValueText).ToArray();
+            var walker = new ArgumentDereferenceWalker(argumentNames);
+            walker.SafeVisit(method);
+            return walker.DereferencesMethodArguments;
         }
-
-        return context.State;
-
-        bool NullableStateIsNotKnownForParameter(IParameterSymbol symbol) =>
-            context.State[symbol] is null || !context.State[symbol].HasConstraint<ObjectConstraint>();
     }
 
-    private static bool IsParameterDereferenced(IOperationWrapperSonar operation) =>
-        operation.Parent != null
-        && operation.Parent.IsAnyKind(
-            OperationKindEx.Invocation,
-            OperationKindEx.FieldReference,
-            OperationKindEx.PropertyReference,
-            OperationKindEx.EventReference,
-            OperationKindEx.Await,
-            OperationKindEx.ArrayElementReference);
+    private sealed class ArgumentDereferenceWalker : SafeCSharpSyntaxWalker
+    {
+        private readonly string[] argumentNames;
+
+        public bool DereferencesMethodArguments { get; private set; }
+
+        public ArgumentDereferenceWalker(string[] argumentNames) =>
+            this.argumentNames = argumentNames;
+
+        public override void Visit(SyntaxNode node)
+        {
+            if (!DereferencesMethodArguments)
+            {
+                base.Visit(node);
+            }
+        }
+
+        public override void VisitIdentifierName(IdentifierNameSyntax node) =>
+            DereferencesMethodArguments |=
+                argumentNames.Contains(node.Identifier.ValueText)
+                && node.Ancestors().Any(x => x.IsAnyKind(
+                    SyntaxKind.AwaitExpression,
+                    SyntaxKind.ElementAccessExpression,
+                    SyntaxKind.ForEachStatement,
+                    SyntaxKind.ThrowStatement,
+                    SyntaxKind.SimpleMemberAccessExpression));
+    }
 }
