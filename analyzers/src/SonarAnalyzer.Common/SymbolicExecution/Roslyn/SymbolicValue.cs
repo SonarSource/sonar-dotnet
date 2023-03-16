@@ -112,12 +112,17 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             {
                 return baseValue;
             }
-            var containsContraintType = baseValue.Constraints.ContainsKey(constraint.GetType());
+            var constraintType = constraint.GetType();
+            var containsContraintType = baseValue.Constraints.ContainsKey(constraintType);
             if (constraintCount == 1)
             {
                 return containsContraintType
                     ? SingleConstraint(constraint)
                     : PairConstraint(baseValue.Constraints.Values.First(), constraint);
+            }
+            if (constraintCount == 2 && containsContraintType)
+            {
+                return PairConstraint(OtherConstraint(baseValue, constraintType), constraint);
             }
 
             return baseValue with { Constraints = baseValue.Constraints.SetItem(constraint.GetType(), constraint) };
@@ -139,18 +144,26 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
             if (constraintCount == 2)
             {
-                SymbolicConstraint otherConstraint = null;
-                foreach (var kvp in baseValue.Constraints)
-                {
-                    if (kvp.Key != type)
-                    {
-                        otherConstraint = kvp.Value;
-                    }
-                }
+                var otherConstraint = OtherConstraint(baseValue, type);
                 return SingleConstraint(otherConstraint);
             }
 
             return baseValue with { Constraints = baseValue.Constraints.Remove(type) };
+        }
+
+        private static SymbolicConstraint OtherConstraint(SymbolicValue baseValue, Type type)
+        {
+            SymbolicConstraint otherConstraint = null;
+            foreach (var kvp in baseValue.Constraints)
+            {
+                if (kvp.Key != type)
+                {
+                    otherConstraint = kvp.Value;
+                    break;
+                }
+            }
+
+            return otherConstraint;
         }
 
         private static SymbolicValue SingleConstraint(SymbolicConstraint constraint)

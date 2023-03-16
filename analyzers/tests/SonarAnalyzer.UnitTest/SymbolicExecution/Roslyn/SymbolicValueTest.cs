@@ -195,12 +195,21 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         }
 
         [TestMethod]
-        public void SingleCache_AddOtherConstraintType()
+        public void PairCache_AddOtherConstraintType()
         {
             SymbolicValue.Constraintless.WithConstraint(ObjectConstraint.Null).Should().BeSameAs(SymbolicValue.Null);
             var one = SymbolicValue.NotNull.WithConstraint(DummyConstraint.Dummy);
             var two = SymbolicValue.NotNull.WithConstraint(DummyConstraint.Dummy);
-            one.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy).And.BeSameAs(two); // Requires a cache for pairs
+            one.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy).And.BeSameAs(two);
+        }
+
+        [TestMethod]
+        public void PairCache_ReplaceExistingConstraintType()
+        {
+            var sut = SymbolicValue.Null.WithConstraint(TestConstraint.First);
+            var one = sut.WithConstraint(TestConstraint.Second).WithConstraint(TestConstraint.First);
+            var two = one.WithConstraint(TestConstraint.Second).WithConstraint(TestConstraint.First);
+            sut.Should().HaveOnlyConstraints(ObjectConstraint.Null, TestConstraint.First).And.BeSameAs(one).And.BeSameAs(two);
         }
 
         [TestMethod]
