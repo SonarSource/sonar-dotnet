@@ -71,3 +71,25 @@ public class IndexerClass
 {
     public int this[params int[] i] => 1;
 }
+
+public class Repro6894
+{
+    //Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/6894
+
+    public void Method(params object[] args) { }
+    public void MethodJuggedArray(params int[][] args) { }
+
+    public void CallMethod()
+    {
+        Method(new String[] { "1", "2" }); // Noncompliant, TP. Elements in args: {"1", "2"}
+        Method(new object[] { new int[] { 1, 2} }); // Noncompliant. Elements in args: {System.Int32[]}
+        Method(new int[] { 1, 2, 3, }); // Noncompliant, FP. Elements in args: {System.Int32[]}
+        Method(new String[] { "1", "2" }, new String[] { "1", "2"}); // Noncompliant, FP. Elements in args: {System.String[], System.String[]}
+        //                                ^^^^^^^^^^^^^^^^^^^^^^^^
+        Method(new String[] { "1", "2"}, new int[] { 1, 2}); // Noncompliant, FP. Elements in args: {System.String[], System.Int32[]}
+        //                               ^^^^^^^^^^^^^^^^^
+
+        MethodJuggedArray(new object[] { 1, 2 }); // Noncompliant, FP. Elements in args: {System.Object[]}
+    }
+}
+
