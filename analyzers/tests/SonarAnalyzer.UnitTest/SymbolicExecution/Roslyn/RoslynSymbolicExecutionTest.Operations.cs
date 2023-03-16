@@ -837,6 +837,36 @@ Sample UntrackedSymbol() => this;";
         }
 
         [TestMethod]
+        public void PropertyReference_AutoProperty_IsTracked()
+        {
+            const string code = """
+                AutoProperty = null;
+                Tag("AfterSetNull", AutoProperty);
+                AutoProperty.ToString();
+                Tag("AfterReadReference", AutoProperty);
+                """;
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateContainsOperation(OperationKind.PropertyReference);
+            validator.ValidateTag("AfterSetNull", x => x.Should().HaveNoConstraints()); // FIXME Auto-properties should behave the same as fields. Expected: HaveOnlyConstraint(ObjectConstraint.Null)
+            validator.ValidateTag("AfterReadReference", x => x.Should().HaveNoConstraints()); // FIXME Expected: HaveOnlyConstraint(ObjectConstraint.NotNull)
+        }
+
+        [TestMethod]
+        public void PropertyReference_FullProperties_NotTracked()
+        {
+            const string code = """
+                FullProperty = null;
+                Tag("AfterSetNull", FullProperty);
+                FullProperty.ToString();
+                Tag("AfterReadReference", FullProperty);
+                """;
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateContainsOperation(OperationKind.PropertyReference);
+            validator.ValidateTag("AfterSetNull", x => x.Should().HaveNoConstraints());
+            validator.ValidateTag("AfterReadReference", x => x.Should().HaveNoConstraints());
+        }
+
+        [TestMethod]
         public void ArrayElementReference_Read_SetsNotNull()
         {
             const string code = @"
