@@ -108,10 +108,12 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             {
                 return SingleConstraint(constraint);
             }
+
             if (baseValue.HasConstraint(constraint))
             {
                 return baseValue;
             }
+
             var constraintType = constraint.GetType();
             var containsContraintType = baseValue.Constraints.ContainsKey(constraintType);
             if (constraintCount == 1)
@@ -120,6 +122,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                     ? SingleConstraint(constraint)
                     : PairConstraint(baseValue.Constraints.Values.First(), constraint);
             }
+
             if (constraintCount == 2 && containsContraintType)
             {
                 return PairConstraint(OtherConstraint(baseValue, constraintType), constraint);
