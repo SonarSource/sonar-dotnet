@@ -81,11 +81,8 @@ public class SonarLintXmlReader
         try
         {
             var serializer = new XmlSerializer(typeof(SonarLintXml));
-            var byteArray = Encoding.UTF8.GetBytes(sonarLintXml.ToString());
-            var stream = new MemoryStream(byteArray);
-            using var sr = new StreamReader(stream, Encoding.UTF8, false);
-            using var reader = XmlReader.Create(sr);
-            return (SonarLintXml)serializer.Deserialize(reader);
+            using var sr = new StringReader(sonarLintXml.ToString());
+            return (SonarLintXml)serializer.Deserialize(sr);
         }
         catch
         {
