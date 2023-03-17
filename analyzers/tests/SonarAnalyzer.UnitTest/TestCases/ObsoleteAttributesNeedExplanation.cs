@@ -21,6 +21,15 @@ class Noncompliant
     [Obsolete("  ")] // Noncompliant
     void WithWhiteSpace() { }
 
+    [Obsolete("", true)] // Noncompliant
+    void WithTwoArguments() { }
+
+    [Obsolete("", true, DiagnosticId = "42")] // Noncompliant
+    void WithDiagnostics() { }
+
+    [Obsolete("", true, DiagnosticId = "42", UrlFormat = "https://sonarsource.com")] // Noncompliant
+    void WithDiagnosticsAndUrlFormat() { }
+
     [Obsolete] // Noncompliant
     [CLSCompliant(false)]
     uint Multiple() { return 0; }
@@ -78,6 +87,15 @@ class Compliant
     [Obsolete("explanation")]
     void Method() { }
 
+    [Obsolete("explanation", true)]
+    void WithTwoArguments() { }
+
+    [Obsolete("explanation", true, DiagnosticId = "42")]
+    void WithDiagnostics() { }
+
+    [Obsolete("explanation", true, DiagnosticId = "42", UrlFormat = "https://sonarsource.com")]
+    void WithDiagnosticsAndUrlFormat() { }
+
     [Obsolete("explanation")]
     string Property { get; set; }
 
@@ -103,6 +121,19 @@ struct ComplaintStruct
 {
     [Obsolete("explanation")]
     void Method() { }
+}
+
+class Ignore
+{
+    // FN the value of error is taken.
+    [Obsolete(error: true, message: "explanation")] // Noncompliant
+    public void NamedParmetersDifferentOrderFP() { }
+
+    [Obsolete(error: true, message: "")] // Noncompliant for wrong reason 
+    public void NamedParmetersDifferentOrder() { }
+
+    [Obsolete(UrlFormat = "https://sonarsource.com")]
+    void NamedParametersOnly() { } // FP
 }
 
 class NotApplicable

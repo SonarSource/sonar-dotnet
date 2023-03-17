@@ -2,16 +2,16 @@
 
 <Obsolete>  ' Noncompliant^2#8 {{Add an explanation.}}
 Class Noncompliant
-    <Obsolete()> Private Sub WithBrackets() ' Noncompliant {{Add an explanation.}}
+    <Obsolete()> Sub WithBrackets() ' Noncompliant {{Add an explanation.}}
 '    ^^^^^^^^^^
     End Sub
 
     <System.Obsolete> ' Noncompliant
-    Private Sub FullyDeclaredNamespace()
+    Sub FullyDeclaredNamespace()
     End Sub
 
     <Global.System.Obsolete> ' Noncompliant
-    Private Sub GloballyDeclaredNamespace()
+    Sub GloballyDeclaredNamespace()
     End Sub
 
     <Obsolete(Nothing)> ' Noncompliant
@@ -26,13 +26,25 @@ Class Noncompliant
     Sub WithWhiteSpace() { }
     End Sub
 
+    <Obsolete("", True)> ' Noncompliant
+    Sub WithTwoArguments()
+    End Sub
+
+    <Obsolete("", True, DiagnosticId:="42")> ' Noncompliant
+    Sub WithDiagnostics()
+    End Sub
+
+    <Obsolete("", True, DiagnosticId:="42", UrlFormat:="https://sonarsource.com")> ' Noncompliant
+    Sub WithDiagnosticsAndUrlFormat()
+    End Sub
+
     <Obsolete> ' Noncompliant
     <CLSCompliant(False)>
-    Private Function Multiple() As UInteger
+    Function Multiple() As UInteger
         Return 0
     End Function
 
-    <Obsolete, CLSCompliant(False)> Private Function Combined() As UInteger ' Noncompliant
+    <Obsolete, CLSCompliant(False)> Function Combined() As UInteger ' Noncompliant
         Return 0
     End Function
 
@@ -43,19 +55,22 @@ Class Noncompliant
     End Enum
 
     <Obsolete> ' Noncompliant
-    Private Sub New()
+    Sub New()
     End Sub
 
     <Obsolete> ' Noncompliant
-    Private Sub Method()
+    Sub Method()
     End Sub
 
     <Obsolete> ' Noncompliant
-    Private Property [Property] As Integer
+    Property [Property] As Integer
+
     <Obsolete> ' Noncompliant
     Private Field As Integer
+
     <Obsolete> ' Noncompliant
-    Private Event [Event] As EventHandler
+    Event [Event] As EventHandler
+
     <Obsolete> ' Noncompliant
     Delegate Sub [Delegate]()
 End Class
@@ -69,7 +84,7 @@ End Interface
 <Obsolete> ' Noncompliant
 Structure ProgramStruct
     <Obsolete> ' Noncompliant
-    Private Sub Method()
+    Sub Method()
     End Sub
 End Structure
 
@@ -82,19 +97,34 @@ Class Compliant
     End Enum
 
     <Obsolete("explanation")>
-    Private Sub New()
+    Sub New()
     End Sub
 
     <Obsolete("explanation")>
-    Private Sub Method()
+    Sub Method()
+    End Sub
+
+    <Obsolete("explanation", True)>
+    Sub WithTwoArguments()
+    End Sub
+
+    <Obsolete("explanation", True, DiagnosticId:="42")>
+    Sub WithDiagnostics()
+    End Sub
+
+    <Obsolete("explanation", True, DiagnosticId:="42", UrlFormat:="https://sonarsource.com")>
+    Sub WithDiagnosticsAndUrlFormat()
     End Sub
 
     <Obsolete("explanation")>
-    Private Property [Property] As String
+    Property [Property] As String
+
     <Obsolete("explanation", True)>
     Private Field As Integer
+
     <Obsolete("explanation", False)>
-    Private Event [Event] As EventHandler
+    Event [Event] As EventHandler
+
     <Obsolete("explanation")>
     Delegate Sub [Delegate]()
 End Class
@@ -108,9 +138,15 @@ End Interface
 <Obsolete("explanation")>
 Structure ComplaintStruct
     <Obsolete("explanation")>
-    Private Sub Method()
+    Sub Method()
     End Sub
 End Structure
+
+Class Ignore
+    <Obsolete(UrlFormat:="https://sonarsource.com")>
+    Private Sub NamedParametersOnly() ' FP
+    End Sub
+End Class
 
 Class NotApplicable
     <CLSCompliant(False)>
@@ -119,24 +155,27 @@ Class NotApplicable
         bar
     End Enum
 
-    Private Sub New()
+    Sub New()
     End Sub
 
-    Private Sub Method()
+    Sub Method()
     End Sub
 
-    Private Property [Property] As Integer
+    Property [Property] As Integer
+
     Private Field As Integer
-    Private Event [Event] As EventHandler
+
+    Event [Event] As EventHandler
+
     Delegate Sub [Delegate]()
 
     <NotSystem.ObsoleteAttribute>
-    Private Sub SameName()
+    Sub SameName()
     End Sub
 End Class
 
 Namespace NotSystem
-    Public Class ObsoleteAttribute
+    Class ObsoleteAttribute
         Inherits Attribute
     End Class
 End Namespace
