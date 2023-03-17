@@ -34,14 +34,14 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
     public override bool ShouldExecute()
     {
         return IsAccessibleFromOtherAssemblies(Node)
-               && (IsSupportedMethod(Node) || IsSupportedPropertyAccessor(Node));
+            && (IsRelevantMethod(Node) || IsRelevantPropertyAccessor(Node));
 
-        static bool IsSupportedMethod(SyntaxNode node) =>
+        static bool IsRelevantMethod(SyntaxNode node) =>
             node is BaseMethodDeclarationSyntax { ParameterList.Parameters.Count: > 0 } method
             && MethodDereferencesArguments(method);
 
-        static bool IsSupportedPropertyAccessor(SyntaxNode node) =>
-            node is AccessorDeclarationSyntax { RawKind: (int)SyntaxKind.SetAccessorDeclaration or (int)SyntaxKindEx.InitAccessorDeclaration } accessor
+        static bool IsRelevantPropertyAccessor(SyntaxNode node) =>
+            node is AccessorDeclarationSyntax accessor
             && IsPropertyAccessorAccessibleFromOtherAssemblies(accessor.Modifiers);
 
         static bool IsAccessibleFromOtherAssemblies(SyntaxNode node) =>
@@ -73,7 +73,7 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
 
         static bool MethodDereferencesArguments(BaseMethodDeclarationSyntax method)
         {
-            var argumentNames = method.ParameterList.Parameters.Select(x => x.Identifier.ValueText).ToArray();
+            var argumentNames = method.ParameterList.Parameters.Select(x => x.GetName()).ToArray();
             var walker = new ArgumentDereferenceWalker(argumentNames);
             walker.SafeVisit(method);
             return walker.DereferencesMethodArguments;

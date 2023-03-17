@@ -533,3 +533,12 @@ class PropertyAccessibility
         private set => _ = value.ToString();            // Compliant - setter is not accessible from other assemblies
     }
 }
+
+public class ClassWithIndexer
+{
+    public string this[object index]
+    {
+        get { return index.ToString(); }                // FIXME Non-compliant
+        set { _ = value.ToString(); }                   // FIXME Non-compliant
+    }
+}
