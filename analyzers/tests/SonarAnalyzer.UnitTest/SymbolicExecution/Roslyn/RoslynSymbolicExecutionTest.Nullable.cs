@@ -201,23 +201,23 @@ public partial class RoslynSymbolicExecutionTest
             Tag("UnknownArg", arg);
             Tag("UnknownValue", value);
 
-            arg = null;
+            arg = null;     // Adds DummyConstraint
             value = arg.GetValueOrDefault();
             Tag("NullArg", arg);
             Tag("NullValue", value);
 
-            arg = 42;
+            arg = 42;       // Adds DummyConstraint
             value = arg.GetValueOrDefault();
             Tag("NotNullArg", arg);
             Tag("NotNullValue", value);
             """;
-        var validator = SETestContext.CreateCS(code, ", int? arg").Validator;
+        var validator = SETestContext.CreateCS(code, ", int? arg", new LiteralDummyTestCheck()).Validator;
         validator.ValidateTag("UnknownArg", x => x.Should().HaveNoConstraints());
         validator.ValidateTag("UnknownValue", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
-        validator.ValidateTag("NullArg", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
+        validator.ValidateTag("NullArg", x => x.Should().HaveOnlyConstraints(ObjectConstraint.Null, DummyConstraint.Dummy));
         validator.ValidateTag("NullValue", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
-        validator.ValidateTag("NotNullArg", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
-        validator.ValidateTag("NotNullValue", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+        validator.ValidateTag("NotNullArg", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy));
+        validator.ValidateTag("NotNullValue", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy));
     }
 
     [TestMethod]
@@ -228,23 +228,23 @@ public partial class RoslynSymbolicExecutionTest
             Tag("UnknownArg", arg);
             Tag("UnknownValue", value);
 
-            arg = null;
+            arg = null;       // Adds DummyConstraint
             value = arg.GetValueOrDefault();
             Tag("NullArg", arg);
             Tag("NullValue", value);
 
-            arg = true;
+            arg = true;       // Adds DummyConstraint
             value = arg.GetValueOrDefault();
             Tag("NotNullArg", arg);
             Tag("NotNullValue", value);
             """;
-        var validator = SETestContext.CreateCS(code, ", bool? arg").Validator;
+        var validator = SETestContext.CreateCS(code, ", bool? arg", new LiteralDummyTestCheck()).Validator;
         validator.ValidateTag("UnknownArg", x => x.Should().HaveNoConstraints());
         validator.ValidateTag("UnknownValue", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
-        validator.ValidateTag("NullArg", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
+        validator.ValidateTag("NullArg", x => x.Should().HaveOnlyConstraints(ObjectConstraint.Null, DummyConstraint.Dummy));
         validator.ValidateTag("NullValue", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False));
-        validator.ValidateTag("NotNullArg", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True));
-        validator.ValidateTag("NotNullValue", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True));
+        validator.ValidateTag("NotNullArg", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True, DummyConstraint.Dummy));
+        validator.ValidateTag("NotNullValue", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True, DummyConstraint.Dummy));
     }
 
     [TestMethod]
