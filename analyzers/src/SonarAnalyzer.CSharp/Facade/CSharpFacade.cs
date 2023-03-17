@@ -65,7 +65,6 @@ internal sealed class CSharpFacade : ILanguageFacade<SyntaxKind>
     private static ArgumentListSyntax GetArgumentList(SyntaxNode invocation) =>
         invocation switch
         {
-            null => null,
             ArgumentListSyntax x => x,
             ObjectCreationExpressionSyntax x => x.ArgumentList,
             InvocationExpressionSyntax x => x.ArgumentList,
