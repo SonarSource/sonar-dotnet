@@ -107,15 +107,15 @@ public class SonarLintXmlReader
         }
     }
 
+    private Dictionary<string, string> SettingsToDictionary() =>
+        sonarLintXml is { Settings: { } settingsList }
+            ? settingsList.ToDictionary(x => x.Key, x => x.Value)
+            : new();
+
     private List<SonarLintXmlRule> ReadRuleParameters() =>
         sonarLintXml is { Rules: { } rules }
             ? rules.Where(x => x.Parameters.Any()).ToList()
             : new();
-
-    private Dictionary<string, string> SettingsToDictionary() =>
-    sonarLintXml is { Settings: { } settingsList }
-        ? settingsList.ToDictionary(x => x.Key, x => x.Value)
-        : new();
 
     private static string[] ReadCommaSeparatedArray(string str) =>
         string.IsNullOrEmpty(str) ? Array.Empty<string>() : str.Split(',');
