@@ -307,27 +307,14 @@ namespace SonarAnalyzer.UnitTest.Helpers
         }
 
         [DataTestMethod]
-        [DataRow("struct")]
-        [DataRow("unmanaged")]
-        [DataRow("Enum")]
-        [DataRow("struct, Enum")]
-        [DataRow("struct, Enum, IComparable")]
-        public void IsNonNullableValueType_Generic_Constraint_Nullable(string constraint)
-        {
-            var fieldSymbol = FirstFieldSymbolFromCode($$"""
-                using System;
-                class Test<T> where T: {{constraint}}
-                {
-                    T? field;
-                }
-                """);
-            fieldSymbol.Type.IsNonNullableValueType().Should().BeFalse();
-        }
-
-        [DataTestMethod]
         [DataRow("")]                      // Unbounded (can be reference type or value type)
         [DataRow("where T: new()")]        // Unbounded
         [DataRow("where T: notnull")]      // Unbounded
+        [DataRow("where T: struct")]
+        [DataRow("where T: unmanaged")]
+        [DataRow("where T: Enum")]
+        [DataRow("where T: struct, Enum")]
+        [DataRow("where T: struct, Enum, IComparable")]
         [DataRow("where T: class")]
         [DataRow("where T: class?")]
         [DataRow("where T: class, new()")]
@@ -337,12 +324,12 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [DataRow("where T: IComparable?")]
         [DataRow("where T: Delegate")]
         [DataRow("where T: Delegate?")]
-        public void IsNonNullableValueType_False_Generic_NullableReferenceType(string typeConstraint)
+        public void IsNonNullableValueType_Generic_Constraint_Nullable(string constraint)
         {
             var fieldSymbol = FirstFieldSymbolFromCode($$"""
                 #nullable enable
                 using System;
-                class Test<T> {{typeConstraint}}
+                class Test<T> {{constraint}}
                 {
                     T? field;
                 }
@@ -390,10 +377,14 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [DataTestMethod]
         [DataRow("T?")]
         [DataRow("Nullable<T>")]
+        [DataRow("CustomStruct?")]
+        [DataRow("RecordStruct?")]
         public void IsNullableValueType_Generic_ConstraintStruct_Nullable(string type)
         {
             var fieldSymbol = FirstFieldSymbolFromCode($$"""
                 using System;
+                struct CustomStruct { }
+                record struct RecordStruct { }
                 class Test<T> where T: struct
                 {
                     {{type}} field;
