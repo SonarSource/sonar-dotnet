@@ -264,7 +264,7 @@ public partial class RoslynSymbolicExecutionTest
     {
         const string code = """
             bool? nullable;
-            if(boolParameter)
+            if (boolParameter)
                 nullable = true;
             else
                 nullable = null;
