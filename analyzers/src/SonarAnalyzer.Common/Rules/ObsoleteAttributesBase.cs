@@ -31,6 +31,8 @@ public abstract class ObsoleteAttributesBase<TSyntaxKind> : SonarDiagnosticAnaly
 
     protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
+    protected abstract SyntaxNode GetExplanationExpression(SyntaxNode node);
+
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; }
 
     internal DiagnosticDescriptor ExplanationNeededRule { get; }
@@ -54,11 +56,15 @@ public abstract class ObsoleteAttributesBase<TSyntaxKind> : SonarDiagnosticAnaly
                     var location = c.Node.GetLocation();
                     c.ReportIssue(Diagnostic.Create(RemoveRule, location));
 
-                    if (!attribute.GetParameters().Any())
+                    if (NoExplanation(c.Node, c.SemanticModel))
                     {
                         c.ReportIssue(Diagnostic.Create(ExplanationNeededRule, location));
                     }
                 }
             },
             Language.SyntaxKind.Attribute);
+
+    private bool NoExplanation(SyntaxNode node, SemanticModel model) =>
+        GetExplanationExpression(node) is not { } justification
+        || string.IsNullOrWhiteSpace(Language.FindConstantValue(model, justification) as string);
 }

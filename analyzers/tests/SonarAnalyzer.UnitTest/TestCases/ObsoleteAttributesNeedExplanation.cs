@@ -12,6 +12,15 @@ class Noncompliant
     [global::System.Obsolete] // Noncompliant
     void GloballyDeclaredNamespace() { }
 
+    [Obsolete(null)] // Noncompliant
+    void WithNull() { }
+
+    [Obsolete("")] // Noncompliant
+    void WithEmptyString() { }
+
+    [Obsolete("  ")] // Noncompliant
+    void WithWhiteSpace() { }
+
     [Obsolete] // Noncompliant
     [CLSCompliant(false)]
     uint Multiple() { return 0; }

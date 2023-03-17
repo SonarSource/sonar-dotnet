@@ -14,6 +14,18 @@ Class Noncompliant
     Private Sub GloballyDeclaredNamespace()
     End Sub
 
+    <Obsolete(Nothing)> ' Noncompliant
+    Sub WithNothing() { }
+    End Sub
+
+    <Obsolete("")> ' Noncompliant
+    Sub WithEmptyString() { }
+    End Sub
+
+    <Obsolete("  ")> ' Noncompliant
+    Sub WithWhiteSpace() { }
+    End Sub
+
     <Obsolete> ' Noncompliant
     <CLSCompliant(False)>
     Private Function Multiple() As UInteger

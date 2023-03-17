@@ -24,4 +24,10 @@ namespace SonarAnalyzer.Rules.VisualBasic;
 public sealed class ObsoleteAttributes : ObsoleteAttributesBase<SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+
+    protected override SyntaxNode GetExplanationExpression(SyntaxNode node) =>
+       node is AttributeSyntax { ArgumentList.Arguments: { Count: >= 1 } arguments }
+           && arguments[0] is SimpleArgumentSyntax { Expression: { } } argument
+               ? argument.Expression
+               : null;
 }

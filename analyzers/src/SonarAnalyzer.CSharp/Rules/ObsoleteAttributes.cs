@@ -24,4 +24,10 @@ namespace SonarAnalyzer.Rules.CSharp;
 public sealed class ObsoleteAttributes : ObsoleteAttributesBase<SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
+    protected override SyntaxNode GetExplanationExpression(SyntaxNode node) =>
+        node is AttributeSyntax { ArgumentList.Arguments: { Count: >= 1 } arguments }
+            && arguments[0] is { Expression: { } expression }
+                ? expression
+                : null;
 }
