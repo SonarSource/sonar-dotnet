@@ -22,6 +22,9 @@ package com.sonar.it.shared;
 import com.sonar.orchestrator.build.BuildResult;
 import com.sonar.orchestrator.build.SonarScanner;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -51,16 +54,24 @@ public class ScannerCliTest {
     SonarScanner scanner = getSonarScanner(RAZOR_PAGES_PROJECT, "projects/" + RAZOR_PAGES_PROJECT);
     BuildResult result = ORCHESTRATOR.executeBuild(scanner);
 
-    assertThat(result.getLogsLines(l -> l.contains("WARN")))
-      .containsExactlyInAnyOrder(
-        "WARN: Your project contains C# files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html",
-        "WARN: Your project contains VB.NET files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html",
-        INCREMENTAL_PR_ANALYSIS_WARNING,
-        INCREMENTAL_PR_ANALYSIS_WARNING
-      );
+    String[] warnings = {
+      INCREMENTAL_PR_ANALYSIS_WARNING,
+      INCREMENTAL_PR_ANALYSIS_WARNING,
+      "WARN: Your project contains C# files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html",
+      "WARN: The properties 'sonar.login' and 'sonar.password' are deprecated. They will not be supported in the future. Please instead use the 'sonar.token' parameter.",
+    };
+
     // The HTML plugin works
     assertThat(TestUtils.getMeasureAsInt(ORCHESTRATOR, RAZOR_PAGES_PROJECT, "violations")).isEqualTo(2);
-    TestUtils.verifyNoGuiWarnings(ORCHESTRATOR, result);
+
+    if (ORCHESTRATOR.getServer().version().isGreaterThanOrEquals(10, 0)) {
+      // The assertion of the warning regarding 'sonar.token' is temporary, until the `sonar.token` parameter will be fully supported.
+      assertThat(result.getLogsLines(l -> l.contains("WARN"))).containsExactlyInAnyOrder(warnings);
+    }
+    else {
+      assertThat(result.getLogsLines(l -> l.contains("WARN"))).containsExactlyInAnyOrder(Arrays.copyOfRange(warnings, 0, 3));
+      TestUtils.verifyNoGuiWarnings(ORCHESTRATOR, result);
+    }
   }
 
   @Test
@@ -70,14 +81,23 @@ public class ScannerCliTest {
       .setTestDirs("test");
     BuildResult result = ORCHESTRATOR.executeBuild(scanner);
 
-    assertThat(result.getLogsLines(l -> l.contains("WARN")))
-      .containsExactlyInAnyOrder(
-        "WARN: Your project contains C# files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html",
-        INCREMENTAL_PR_ANALYSIS_WARNING
-      );
+    String[] warnings = {
+      INCREMENTAL_PR_ANALYSIS_WARNING,
+      "WARN: Your project contains C# files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html",
+      "WARN: The properties 'sonar.login' and 'sonar.password' are deprecated. They will not be supported in the future. Please instead use the 'sonar.token' parameter.",
+    };
+
     // The HTML plugin works
     assertThat(TestUtils.getMeasureAsInt(ORCHESTRATOR, HTML_IN_MAIN_AND_CSHARP_IN_TEST_SUBFOLDERS, "violations")).isEqualTo(2);
-    TestUtils.verifyNoGuiWarnings(ORCHESTRATOR, result);
+
+    if (ORCHESTRATOR.getServer().version().isGreaterThanOrEquals(10, 0)) {
+      // The assertion of the warning regarding 'sonar.token' is temporary, until the `sonar.token` parameter will be fully supported.
+      assertThat(result.getLogsLines(l -> l.contains("WARN"))).containsExactlyInAnyOrder(warnings);
+    }
+    else {
+      assertThat(result.getLogsLines(l -> l.contains("WARN"))).containsExactlyInAnyOrder(Arrays.copyOfRange(warnings, 0, 2));
+      TestUtils.verifyNoGuiWarnings(ORCHESTRATOR, result);
+    }
   }
 
   @Test
@@ -87,12 +107,20 @@ public class ScannerCliTest {
       .setTestDirs("main,test");
     BuildResult result = ORCHESTRATOR.executeBuild(scanner);
 
-    assertThat(result.getLogsLines(l -> l.contains("WARN")))
-      .containsExactlyInAnyOrder(
-        "WARN: Your project contains C# files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html",
-        INCREMENTAL_PR_ANALYSIS_WARNING
-      );
-    TestUtils.verifyNoGuiWarnings(ORCHESTRATOR, result);
+    String[] warnings = {
+      INCREMENTAL_PR_ANALYSIS_WARNING,
+      "WARN: Your project contains C# files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html",
+      "WARN: The properties 'sonar.login' and 'sonar.password' are deprecated. They will not be supported in the future. Please instead use the 'sonar.token' parameter.",
+    };
+
+    if (ORCHESTRATOR.getServer().version().isGreaterThanOrEquals(10, 0)) {
+      // The assertion of the warning regarding 'sonar.token' is temporary, until the `sonar.token` parameter will be fully supported.
+      assertThat(result.getLogsLines(l -> l.contains("WARN"))).containsExactlyInAnyOrder(warnings);
+    }
+    else {
+      assertThat(result.getLogsLines(l -> l.contains("WARN"))).containsExactlyInAnyOrder(Arrays.copyOfRange(warnings, 0, 2));
+      TestUtils.verifyNoGuiWarnings(ORCHESTRATOR, result);
+    }
   }
 
   @Test
@@ -103,8 +131,17 @@ public class ScannerCliTest {
       .setProperty("sonar.cs.file.suffixes=", ".no_extension");
     BuildResult result = ORCHESTRATOR.executeBuild(scanner);
 
-    assertThat(result.getLogsLines(l -> l.contains("WARN"))).isEmpty();
-    TestUtils.verifyNoGuiWarnings(ORCHESTRATOR, result);
+
+    if (ORCHESTRATOR.getServer().version().isGreaterThanOrEquals(10, 0)) {
+      // The assertion of the warning regarding 'sonar.token' is temporary, until the `sonar.token` parameter will be fully supported.
+      assertThat(result.getLogsLines(l -> l.contains("WARN"))).containsExactlyInAnyOrder(
+        "WARN: The properties 'sonar.login' and 'sonar.password' are deprecated. They will not be supported in the future. Please instead use the 'sonar.token' parameter."
+        );
+    }
+    else {
+      assertThat(result.getLogsLines(l -> l.contains("WARN"))).isEmpty();
+      TestUtils.verifyNoGuiWarnings(ORCHESTRATOR, result);
+    }
   }
 
   private SonarScanner getSonarScanner(String projectKey, String projectDir) {

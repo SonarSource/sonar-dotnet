@@ -25,6 +25,7 @@ import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import org.sonarqube.ws.Ce;
 
 import static com.sonar.it.vbnet.Tests.ORCHESTRATOR;
 import static com.sonar.it.vbnet.Tests.getMeasureAsInt;
@@ -58,7 +59,16 @@ public class TestProjectTest {
         "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects");
 
     assertThat(buildResult.getLogsLines(l -> l.contains("INFO"))).contains("INFO: Found 1 MSBuild VB.NET project: 1 TEST project.");
-    TestUtils.verifyGuiTestOnlyProjectAnalysisWarning(ORCHESTRATOR, buildResult, "VB.NET");
+
+    if (ORCHESTRATOR.getServer().version().isGreaterThanOrEquals(10, 0)) {
+      // The below message is temporary, until the `sonar.token` parameter will be fully supported.
+      assertThat(buildResult.getLogsLines(l -> l.contains("WARN"))).contains(
+        "WARN: The properties 'sonar.login' and 'sonar.password' are deprecated. They will not be supported in the future. Please instead use the 'sonar.token' parameter."
+      );
+    }
+    else {
+      TestUtils.verifyGuiTestOnlyProjectAnalysisWarning(ORCHESTRATOR, buildResult, "VB.NET");
+    }
   }
 
   @Test

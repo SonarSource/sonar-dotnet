@@ -56,7 +56,18 @@ public class AnalysisWarningsTest {
 
     Ce.Task task = TestUtils.getAnalysisWarningsTask(ORCHESTRATOR, buildResult);
     assertThat(task.getStatus()).isEqualTo(Ce.TaskStatus.SUCCESS);
-    assertThat(task.getWarningsList()).containsExactly("First message", "Second message");
+
+    if (ORCHESTRATOR.getServer().version().isGreaterThanOrEquals(10, 0)) {
+      // The assertion of this warning is temporary, until the `sonar.token` parameter will be fully supported.
+      assertThat(task.getWarningsList()).containsExactly(
+        "The properties 'sonar.login' and 'sonar.password' are deprecated. They will not be supported in the future. Please instead use the 'sonar.token' parameter.",
+        "First message",
+        "Second message"
+        );
+    }
+    else {
+      assertThat(task.getWarningsList()).containsExactly("First message", "Second message");
+    }
   }
 
   @Test
@@ -65,6 +76,15 @@ public class AnalysisWarningsTest {
 
     Ce.Task task = TestUtils.getAnalysisWarningsTask(ORCHESTRATOR, buildResult);
     assertThat(task.getStatus()).isEqualTo(Ce.TaskStatus.SUCCESS);
-    assertThat(task.getWarningsList()).containsExactly("Analysis using MsBuild 14 and 15 build tools is deprecated. Please update your pipeline to MsBuild 16 or higher.");
+    if (ORCHESTRATOR.getServer().version().isGreaterThanOrEquals(10, 0)) {
+      // The assertion of this warning is temporary, until the `sonar.token` parameter will be fully supported.
+      assertThat(task.getWarningsList()).containsExactly(
+        "The properties 'sonar.login' and 'sonar.password' are deprecated. They will not be supported in the future. Please instead use the 'sonar.token' parameter.",
+        "Analysis using MsBuild 14 and 15 build tools is deprecated. Please update your pipeline to MsBuild 16 or higher."
+      );
+    }
+    else {
+      assertThat(task.getWarningsList()).containsExactly("Analysis using MsBuild 14 and 15 build tools is deprecated. Please update your pipeline to MsBuild 16 or higher.");
+    }
   }
 }

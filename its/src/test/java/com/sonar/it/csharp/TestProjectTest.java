@@ -21,6 +21,7 @@ package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.build.BuildResult;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.BeforeClass;
@@ -66,7 +67,13 @@ public class TestProjectTest {
         "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects",
       "Found 1 MSBuild C# project: 1 TEST project."
     );
-    TestUtils.verifyGuiTestOnlyProjectAnalysisWarning(ORCHESTRATOR, buildResult, "C#");
+    if (ORCHESTRATOR.getServer().version().isGreaterThanOrEquals(10, 0)) {
+      // The assertion of this warning is temporary, until the `sonar.token` parameter will be fully supported.
+      assertThat(buildResult.getLogsLines(l -> l.contains("WARN"))).contains("WARN: The properties 'sonar.login' and 'sonar.password' are deprecated. They will not be supported in the future. Please instead use the 'sonar.token' parameter.");
+    }
+    else {
+      TestUtils.verifyGuiTestOnlyProjectAnalysisWarning(ORCHESTRATOR, buildResult, "C#");
+    }
   }
 
   @Test
@@ -108,6 +115,13 @@ public class TestProjectTest {
         "Many of our rules (e.g. vulnerabilities) are raised only on MAIN-code. " +
         "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects");
     assertThat(buildResult.getLogsLines(l -> l.contains("INFO"))).contains("INFO: Found 1 MSBuild C# project: 1 TEST project.");
-    TestUtils.verifyGuiTestOnlyProjectAnalysisWarning(ORCHESTRATOR, buildResult, "C#");
+
+    if (ORCHESTRATOR.getServer().version().isGreaterThanOrEquals(10, 0)) {
+      // The assertion of this warning is temporary, until the `sonar.token` parameter will be fully supported.
+      assertThat(buildResult.getLogsLines(l -> l.contains("WARN"))).contains("WARN: The properties 'sonar.login' and 'sonar.password' are deprecated. They will not be supported in the future. Please instead use the 'sonar.token' parameter.");
+    }
+    else {
+      TestUtils.verifyGuiTestOnlyProjectAnalysisWarning(ORCHESTRATOR, buildResult, "C#");
+    }
   }
 }

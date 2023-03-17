@@ -26,6 +26,7 @@ import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import org.sonarqube.ws.Ce;
 import org.sonarqube.ws.Issues;
 
 import static com.sonar.it.shared.Tests.ORCHESTRATOR;
@@ -72,7 +73,16 @@ public class VbMainCodeCsTestCodeTest {
     assertThat(buildResult.getLogsLines(l -> l.contains("INFO"))).contains(
       "INFO: Found 1 MSBuild VB.NET project: 1 MAIN project.",
       "INFO: Found 1 MSBuild C# project: 1 TEST project.");
-    TestUtils.verifyNoGuiWarnings(ORCHESTRATOR, buildResult);
+
+    if (orchestrator.getServer().version().isGreaterThanOrEquals(10, 0)) {
+      // The below message is temporary, until the `sonar.token` parameter will be fully supported.
+      assertThat(buildResult.getLogsLines(l -> l.contains("WARN"))).contains(
+        "WARN: The properties 'sonar.login' and 'sonar.password' are deprecated. They will not be supported in the future. Please instead use the 'sonar.token' parameter."
+      );
+    }
+    else {
+      TestUtils.verifyNoGuiWarnings(ORCHESTRATOR, buildResult);
+    }
   }
 
   @Test
