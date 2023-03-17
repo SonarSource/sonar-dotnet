@@ -66,10 +66,11 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
             || (modifiers.AnyOfKind(SyntaxKind.ProtectedKeyword) && !modifiers.AnyOfKind(SyntaxKind.PrivateKeyword));
 
         static bool HasNoDeclaredAccessabilityModifier(SyntaxTokenList modifiers) =>
-            !modifiers.Any(x => x.IsKind(SyntaxKind.PrivateKeyword)
-                                || x.IsKind(SyntaxKind.ProtectedKeyword)
-                                || x.IsKind(SyntaxKind.InternalKeyword)
-                                || x.IsKind(SyntaxKind.PublicKeyword));
+            !modifiers.Any(x => x.IsAnyKind(
+                SyntaxKind.PrivateKeyword,
+                SyntaxKind.ProtectedKeyword,
+                SyntaxKind.InternalKeyword,
+                SyntaxKind.PublicKeyword));
 
         static bool MethodDereferencesArguments(BaseMethodDeclarationSyntax method)
         {
@@ -99,7 +100,7 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
 
         public override void VisitIdentifierName(IdentifierNameSyntax node) =>
             DereferencesMethodArguments |=
-                argumentNames.Contains(node.Identifier.ValueText)
+                argumentNames.Contains(node.GetName())
                 && node.Ancestors().Any(x => x.IsAnyKind(
                     SyntaxKind.AwaitExpression,
                     SyntaxKind.ElementAccessExpression,
