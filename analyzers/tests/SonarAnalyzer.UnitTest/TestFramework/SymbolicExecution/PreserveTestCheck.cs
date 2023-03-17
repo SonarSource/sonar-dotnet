@@ -24,13 +24,19 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 {
     public class PreserveTestCheck : SymbolicCheck
     {
-        private readonly string symbolName;
+        private readonly HashSet<string> symbolNames;
 
-        public PreserveTestCheck(string symbolName) =>
-            this.symbolName = symbolName;
+        public PreserveTestCheck(params string[] symbolNames)
+        {
+            if (symbolNames.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be empty", nameof(symbolNames));
+            }
+            this.symbolNames = new(symbolNames);
+        }
 
         protected override ProgramState PreProcessSimple(SymbolicContext context) =>
-            context.Operation.Instance.TrackedSymbol() is { } symbol && symbol.Name == symbolName
+            context.Operation.Instance.TrackedSymbol() is { } symbol && symbolNames.Contains(symbol.Name)
                 ? context.State.Preserve(symbol)
                 : context.State;
     }
