@@ -8,8 +8,7 @@
   },
   "tags": [
     "cwe",
-    "sans-top25-insecure",
-    "owasp-a6"
+    "sans-top25-insecure"
   ],
   "defaultSeverity": "Critical",
   "ruleSpecification": "RSPEC-4502",

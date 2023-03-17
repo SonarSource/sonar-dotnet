@@ -8,8 +8,7 @@
   },
   "tags": [
     "cwe",
-    "sans-top25-porous",
-    "owasp-a3"
+    "sans-top25-porous"
   ],
   "defaultSeverity": "Critical",
   "ruleSpecification": "RSPEC-2257",
