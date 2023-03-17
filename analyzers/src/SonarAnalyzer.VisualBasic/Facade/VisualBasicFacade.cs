@@ -59,7 +59,6 @@ internal sealed class VisualBasicFacade : ILanguageFacade<SyntaxKind>
     private static ArgumentListSyntax GetArgumentList(SyntaxNode invocation) =>
         invocation switch
         {
-            null => null,
             ArgumentListSyntax x => x,
             AttributeSyntax x => x.ArgumentList,
             ObjectCreationExpressionSyntax x => x.ArgumentList,
