@@ -29,17 +29,17 @@ class Compliant
     bool Multiline(string input)
     {
         return Regex.IsMatch(input,
-            @"|a
+            @"[a
               |b
-              |d");  // Compliant
+              |d]");  // Compliant
     }
 
     bool ConcatanationMultiline(string input)
     {
-        return Regex.IsMatch(input, "a"
+        return Regex.IsMatch(input, "[a"
             + "|b"
             + "|c"
-            + "|d"); // Compliant
+            + "|d]"); // Compliant
     }
 
     bool ConcatanationSingleIne(string input)
