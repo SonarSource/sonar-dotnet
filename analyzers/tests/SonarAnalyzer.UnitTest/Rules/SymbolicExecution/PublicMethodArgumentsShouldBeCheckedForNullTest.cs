@@ -18,38 +18,78 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Rules.CSharp;
-using SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;
+using SonarAnalyzer.Common;
+using ChecksCS = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
     public class PublicMethodArgumentsShouldBeCheckedForNullTest
     {
-        private readonly VerifierBuilder sonar = new VerifierBuilder<SymbolicExecutionRunner>().WithBasePath(@"SymbolicExecution\Sonar")
-            .WithOnlyDiagnostics(PublicMethodArgumentsShouldBeCheckedForNull.S3900);
+        private readonly VerifierBuilder sonar = new VerifierBuilder()
+            .AddAnalyzer(() => new CS.SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg))
+            .WithBasePath(@"SymbolicExecution\Sonar")
+            .WithOnlyDiagnostics(ChecksCS.PublicMethodArgumentsShouldBeCheckedForNull.S3900);
+
+        private readonly VerifierBuilder roslynCS = new VerifierBuilder()
+            .AddAnalyzer(() => new CS.SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabled))
+            .WithBasePath(@"SymbolicExecution\Roslyn")
+            .WithOnlyDiagnostics(ChecksCS.PublicMethodArgumentsShouldBeCheckedForNull.S3900);
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        public void PublicMethodArgumentsShouldBeCheckedForNull_CS(ProjectType projectType) =>
-            sonar.AddReferences(TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21))
+        public void PublicMethodArgumentsShouldBeCheckedForNull_Sonar_CS(ProjectType projectType) =>
+            sonar.AddReferences(TestHelper.ProjectTypeReference(projectType))
                 .AddPaths("PublicMethodArgumentsShouldBeCheckedForNull.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
+
+        [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
+        public void PublicMethodArgumentsShouldBeCheckedForNull_Roslyn_CS(ProjectType projectType) =>
+            roslynCS.AddReferences(TestHelper.ProjectTypeReference(projectType))
+                .AddPaths("PublicMethodArgumentsShouldBeCheckedForNull.cs")
                 .Verify();
 
 #if NET
 
         [TestMethod]
-        public void PublicMethodArgumentsShouldBeCheckedForNull_CSharp9() =>
+        public void PublicMethodArgumentsShouldBeCheckedForNull_Sonar_CSharp8() =>
+            sonar.AddPaths("PublicMethodArgumentsShouldBeCheckedForNull.CSharp8.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
+
+        [TestMethod]
+        public void PublicMethodArgumentsShouldBeCheckedForNull_Roslyn_CSharp8() =>
+            roslynCS.AddPaths("PublicMethodArgumentsShouldBeCheckedForNull.CSharp8.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
+
+        [TestMethod]
+        public void PublicMethodArgumentsShouldBeCheckedForNull_Sonar_CSharp9() =>
             sonar.AddPaths("PublicMethodArgumentsShouldBeCheckedForNull.CSharp9.cs")
                 .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(Constants.NuGetLatestVersion))
                 .WithOptions(ParseOptionsHelper.FromCSharp9)
                 .Verify();
 
         [TestMethod]
-        public void PublicMethodArgumentsShouldBeCheckedForNull_CSharp11() =>
+        public void PublicMethodArgumentsShouldBeCheckedForNull_Roslyn_CSharp9() =>
+            roslynCS.AddPaths("PublicMethodArgumentsShouldBeCheckedForNull.CSharp9.cs")
+                .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(Constants.NuGetLatestVersion))
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
+
+        [TestMethod]
+        public void PublicMethodArgumentsShouldBeCheckedForNull_Sonar_CSharp11() =>
             sonar.AddPaths("PublicMethodArgumentsShouldBeCheckedForNull.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
+        [TestMethod]
+        public void PublicMethodArgumentsShouldBeCheckedForNull_Roslyn_CSharp11() =>
+            roslynCS.AddPaths("PublicMethodArgumentsShouldBeCheckedForNull.CSharp11.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
                 .Verify();
 
