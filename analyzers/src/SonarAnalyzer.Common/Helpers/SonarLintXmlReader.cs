@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml;
@@ -32,22 +33,34 @@ public class SonarLintXmlReader
 
     private readonly SonarLintXml sonarLintXml;
 
-    public string[] Exclusions { get => Exclusions; init => ReadCommaSeparatedArray(ReadSettingsProperty("sonar.exclusions")); }
-    public string[] Inclusions { get => Inclusions;  init => ReadCommaSeparatedArray(ReadSettingsProperty("sonar.inclusions")); }
-    public string[] GlobalExclusions { get => GlobalExclusions; init => ReadCommaSeparatedArray(ReadSettingsProperty("sonar.global.exclusions")); }
-    public string[] TestExclusions { get => TestExclusions; init => ReadCommaSeparatedArray(ReadSettingsProperty("sonar.test.exclusions")); }
-    public string[] TestInclusions { get => TestInclusions; init => ReadCommaSeparatedArray(ReadSettingsProperty("sonar.test.inclusions")); }
-    public string[] GlobalTestExclusions { get => GlobalTestExclusions; init => ReadCommaSeparatedArray(ReadSettingsProperty("sonar.global.test.exclusions")); }
-    public List<SonarLintXmlRule> ParametrizedRules { get => ParametrizedRules; init => ReadRuleParameters(); }
-
-    private bool IgnoreHeaderCommentsCS { get => IgnoreHeaderCommentsCS; init => ReadBoolean(ReadSettingsProperty("sonar.cs.ignoreHeaderComments")); }
-    private bool IgnoreHeaderCommentsVB { get => IgnoreHeaderCommentsVB; init => ReadBoolean(ReadSettingsProperty("sonar.vbnet.ignoreHeaderComments")); }
-    private bool AnalyzeGeneratedCodeCS { get => AnalyzeGeneratedCodeCS; init => ReadBoolean(ReadSettingsProperty("sonar.cs.analyzeGeneratedCode")); }
-    private bool AnalyzeGeneratedCodeVB { get => AnalyzeGeneratedCodeVB; init => ReadBoolean(ReadSettingsProperty("sonar.vbnet.analyzeGeneratedCode")); }
+    public string[] Exclusions { get; }
+    public string[] Inclusions { get; }
+    public string[] GlobalExclusions { get; }
+    public string[] TestExclusions { get; }
+    public string[] TestInclusions { get; }
+    public string[] GlobalTestExclusions { get; }
+    public List<SonarLintXmlRule> ParametrizedRules { get; }
+    private bool IgnoreHeaderCommentsCS { get; }
+    private bool IgnoreHeaderCommentsVB { get; }
+    private bool AnalyzeGeneratedCodeCS { get; }
+    private bool AnalyzeGeneratedCodeVB { get; }
 
     public SonarLintXmlReader(SourceText sonarLintXml)
     {
         this.sonarLintXml = sonarLintXml == null ? SonarLintXml.Empty : ParseContent(sonarLintXml);
+
+        var settings = SettingsToDictionary();
+        Exclusions = ReadCommaSeparatedArray(settings.GetValueOrDefault("sonar.exclusions"));
+        Inclusions = ReadCommaSeparatedArray(settings.GetValueOrDefault("sonar.inclusions"));
+        GlobalExclusions = ReadCommaSeparatedArray(settings.GetValueOrDefault("sonar.global.exclusions"));
+        TestExclusions = ReadCommaSeparatedArray(settings.GetValueOrDefault("sonar.test.exclusions"));
+        TestInclusions = ReadCommaSeparatedArray(settings.GetValueOrDefault("sonar.test.inclusions"));
+        GlobalTestExclusions = ReadCommaSeparatedArray(settings.GetValueOrDefault("sonar.global.test.exclusions"));
+        ParametrizedRules = ReadRuleParameters();
+        IgnoreHeaderCommentsCS = ReadBoolean(settings.GetValueOrDefault("sonar.cs.ignoreHeaderComments"));
+        IgnoreHeaderCommentsVB = ReadBoolean(settings.GetValueOrDefault("sonar.vbnet.ignoreHeaderComments"));
+        AnalyzeGeneratedCodeCS = ReadBoolean(settings.GetValueOrDefault("sonar.cs.analyzeGeneratedCode"));
+        AnalyzeGeneratedCodeVB = ReadBoolean(settings.GetValueOrDefault("sonar.vbnet.analyzeGeneratedCode"));
     }
 
     public bool IgnoreHeaderComments(string language) =>
@@ -77,7 +90,7 @@ public class SonarLintXmlReader
         && !IsExcluded(globalExclusions, filePath);
 
     private static bool IsIncluded(string[] inclusions, string filePath) =>
-        inclusions.Length == 0 || inclusions.Any(x => WildcardPatternMatcher.IsMatch(x, filePath, true));
+        inclusions is { Length: 0 } || inclusions.Any(x => WildcardPatternMatcher.IsMatch(x, filePath, true));
 
     private static bool IsExcluded(string[] exclusions, string filePath) =>
         exclusions.Any(x => WildcardPatternMatcher.IsMatch(x, filePath, false));
@@ -101,10 +114,10 @@ public class SonarLintXmlReader
             ? rules.Where(x => x.Parameters.Any()).ToList()
             : new();
 
-    private string ReadSettingsProperty(string property) =>
-        sonarLintXml is { Settings: { } settings }
-            ? settings.Where(x => x.Key.Equals(property)).Select(x => x.Value).FirstOrDefault()
-            : null;
+    private Dictionary<string, string> SettingsToDictionary() =>
+    sonarLintXml is { Settings: { } settingsList }
+        ? settingsList.ToDictionary(x => x.Key, x => x.Value)
+        : new();
 
     private static string[] ReadCommaSeparatedArray(string str) =>
         string.IsNullOrEmpty(str) ? Array.Empty<string>() : str.Split(',');
