@@ -89,5 +89,160 @@ namespace SonarAnalyzer.UnitTest.Helpers
             symbol.ToString().Should().Be("PropertyBag");
             type.ToString().Should().Be("System.Collections.Generic.Dictionary<string, object>");
         }
+
+        [DataTestMethod]
+        [DataRow("int")]
+        [DataRow("System.Int32")]
+        [DataRow("int?")]
+        [DataRow("System.Nullable<int>")]
+        [DataRow("CustomStruct")]
+        [DataRow("CustomRefStruct")]
+        public void IsStruct_Simple(string type)
+        {
+            var fieldSymbol = FirstFieldSymbolFromCode($$"""
+                struct CustomStruct { }
+                ref struct CustomRefStruct { }
+
+                ref struct Test
+                {
+                    {{type}} field;
+                }
+                """);
+            fieldSymbol.Type.IsStruct().Should().BeTrue();
+        }
+
+        [DataTestMethod]
+        [DataRow("object")]
+        [DataRow("System.IComparable")]
+        public void IsStruct_False_Simple(string type)
+        {
+            var fieldSymbol = FirstFieldSymbolFromCode($$"""
+                class Test
+                {
+                    {{type}} field;
+                }
+                """);
+            fieldSymbol.Type.IsStruct().Should().BeFalse();
+        }
+
+        [DataTestMethod]
+        [DataRow("struct")]
+        [DataRow("unmanaged")]
+        [DataRow("Enum")]
+        [DataRow("Enum, IComparable")]
+        [DataRow("Enum, new()")]
+        [DataRow("Enum, IComparable, new()")]
+        public void IsStruct_Generic(string typeConstraint)
+        {
+            var fieldSymbol = FirstFieldSymbolFromCode($$"""
+                using System;
+                class Test<T> where T: {{typeConstraint}}
+                {
+                    T field;
+                }
+                """);
+            fieldSymbol.Type.IsStruct().Should().BeTrue();
+        }
+
+        [DataTestMethod]
+        [DataRow("T")]
+        [DataRow("T?")]
+        [DataRow("Nullable<T>")]
+        public void IsStruct_Generic_Nullable(string type)
+        {
+            var fieldSymbol = FirstFieldSymbolFromCode($$"""
+                using System;
+                class Test<T> where T: struct
+                {
+                    {{type}} field;
+                }
+                """);
+            fieldSymbol.Type.IsStruct().Should().BeTrue();
+        }
+
+        [DataTestMethod]
+        [DataRow("")]
+        [DataRow("where T: new()")]
+        [DataRow("where T: class")]
+        [DataRow("where T: class, new()")]
+        [DataRow("where T: Exception")]
+        [DataRow("where T: notnull")]
+        public void IsStruct_False_Generic(string typeConstraint)
+        {
+            var fieldSymbol = FirstFieldSymbolFromCode($$"""
+                using System;
+                class Test<T> {{typeConstraint}}
+                {
+                    T field;
+                }
+                """);
+            fieldSymbol.Type.IsStruct().Should().BeFalse();
+        }
+
+        [DataTestMethod]
+        [DataRow("")]                      // Unbounded (can be reference type or value type)
+        [DataRow("where T: new()")]        // Unbounded
+        [DataRow("where T: notnull")]      // Unbounded
+        [DataRow("where T: class")]
+        [DataRow("where T: class?")]
+        [DataRow("where T: class, new()")]
+        [DataRow("where T: Exception")]
+        [DataRow("where T: Exception?")]
+        [DataRow("where T: IComparable")]
+        [DataRow("where T: IComparable?")]
+        [DataRow("where T: Delegate")]
+        [DataRow("where T: Delegate?")]
+        public void IsStruct_False_Generic_NullableReferenceType(string typeConstraint)
+        {
+            var fieldSymbol = FirstFieldSymbolFromCode($$"""
+                #nullable enable
+                using System;
+                class Test<T> {{typeConstraint}}
+                {
+                    T? field;
+                }
+                """);
+            fieldSymbol.Type.IsStruct().Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void IsStruct_False_Generic_Derived()
+        {
+            var fieldSymbol = FirstFieldSymbolFromCode($$"""
+                using System;
+                class Test<T, U> where U: T
+                {
+                    U field;
+                }
+                """);
+            fieldSymbol.Type.IsStruct().Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void IsStruct_SelfRefrencingStruct()
+        {
+            var (tree, model) = TestHelper.CompileCS("""
+                interface Interface<T> where T: struct, Interface<T> { }
+                struct Impl: Interface<Impl> { } // For demonstration how an implementation can look like
+
+                class Test
+                {
+                    static void Method<T>(Interface<T> parameter) where T: struct, Interface<T>
+                    {
+                    }
+                }
+                """);
+            var parameter = tree.GetRoot().DescendantNodes().OfType<ParameterSyntax>().First();
+            var parameterSymbol = (IParameterSymbol)model.GetDeclaredSymbol(parameter);
+            parameterSymbol.Type.IsStruct().Should().BeFalse(); // parameter must be a struct, but even the compiler doesn't recognizes this
+        }
+
+        private static IFieldSymbol FirstFieldSymbolFromCode(string code)
+        {
+            var (tree, model) = TestHelper.CompileCS(code);
+            var field = tree.GetRoot().DescendantNodes().OfType<FieldDeclarationSyntax>().First();
+            var fieldSymbol = (IFieldSymbol)model.GetDeclaredSymbol(field.Declaration.Variables[0]);
+            return fieldSymbol;
+        }
     }
 }
