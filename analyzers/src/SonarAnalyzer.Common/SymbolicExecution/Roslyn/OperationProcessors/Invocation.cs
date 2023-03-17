@@ -52,7 +52,7 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
         }
         return invocation switch
         {
-            _ when IsNullableGetValueOrDefault(invocation) => ProcessNullableGetValueOrDefault(context, invocation),
+            _ when IsNullableGetValueOrDefault(invocation) => ProcessNullableGetValueOrDefault(context, invocation).ToArray(),
             _ when invocation.TargetMethod.Is(KnownType.Microsoft_VisualBasic_Information, "IsNothing") => ProcessInformationIsNothing(context, invocation),
             _ when invocation.TargetMethod.Is(KnownType.System_Diagnostics_Debug, nameof(Debug.Assert)) => ProcessDebugAssert(context, invocation),
             _ when invocation.TargetMethod.ContainingType.IsAny(KnownType.System_Linq_Enumerable, KnownType.System_Linq_Queryable) => ProcessLinqEnumerableAndQueryable(context, invocation),
@@ -199,23 +199,21 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
         return context.State.ToArray();
     }
 
-    private static ProgramState[] ProcessNullableGetValueOrDefault(SymbolicContext context, IInvocationOperationWrapper invocation)
+    private static ProgramState ProcessNullableGetValueOrDefault(SymbolicContext context, IInvocationOperationWrapper invocation)
     {
-        var instanceValue = context.State[invocation.Instance];
-        if (instanceValue?.HasConstraint(ObjectConstraint.Null) is true)
+        return context.State[invocation.Instance] switch
+        {
+            { } instanceValue when instanceValue.HasConstraint(ObjectConstraint.Null) => NullableDefaultState(),
+            { } instanceValue => context.State.SetOperationValue(invocation, instanceValue),
+            _ => context.State
+        };
+
+        ProgramState NullableDefaultState()
         {
             var valueType = ((INamedTypeSymbol)invocation.Instance.Type).TypeArguments.Single();
             return ConstantCheck.ConstraintFromType(valueType) is { } orDefaultConstraint
-                ? context.SetOperationConstraint(orDefaultConstraint).ToArray()
-                : context.State.ToArray();
-        }
-        else if (instanceValue is not null)
-        {
-            return context.State.SetOperationValue(invocation, instanceValue).ToArray();
-        }
-        else
-        {
-            return context.State.ToArray();
+                ? context.SetOperationConstraint(orDefaultConstraint)
+                : context.State;
         }
     }
 
