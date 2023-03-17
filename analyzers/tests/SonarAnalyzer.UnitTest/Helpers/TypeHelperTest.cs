@@ -97,10 +97,12 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [DataRow("System.Nullable<int>")]
         [DataRow("CustomStruct")]
         [DataRow("CustomRefStruct")]
+        [DataRow("RecordStruct")]
         public void IsStruct_Simple(string type)
         {
             var fieldSymbol = FirstFieldSymbolFromCode($$"""
                 struct CustomStruct { }
+                record struct RecordStruct { }
                 ref struct CustomRefStruct { }
 
                 ref struct Test
@@ -235,6 +237,91 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var parameter = tree.GetRoot().DescendantNodes().OfType<ParameterSyntax>().First();
             var parameterSymbol = (IParameterSymbol)model.GetDeclaredSymbol(parameter);
             parameterSymbol.Type.IsStruct().Should().BeFalse(); // parameter must be a struct, but even the compiler doesn't recognizes this
+        }
+
+        [DataTestMethod]
+        [DataRow("int")]
+        [DataRow("System.Int32")]
+        [DataRow("CustomStruct")]
+        [DataRow("CustomRefStruct")]
+        [DataRow("RecordStruct")]
+        public void IsNonNullableValueType_Simple(string type)
+        {
+            var fieldSymbol = FirstFieldSymbolFromCode($$"""
+                struct CustomStruct { }
+                record struct RecordStruct { }
+                ref struct CustomRefStruct { }
+
+                ref struct Test
+                {
+                    {{type}} field;
+                }
+                """);
+            fieldSymbol.Type.IsNonNullableValueType().Should().BeTrue();
+        }
+
+        [DataTestMethod]
+        [DataRow("object")]
+        [DataRow("System.IComparable")]
+        [DataRow("int?")]
+        [DataRow("System.Nullable<int>")]
+        public void IsNonNullableValueType_False_Simple(string type)
+        {
+            var fieldSymbol = FirstFieldSymbolFromCode($$"""
+                class Test
+                {
+                    {{type}} field;
+                }
+                """);
+            fieldSymbol.Type.IsNonNullableValueType().Should().BeFalse();
+        }
+
+        [DataTestMethod]
+        [DataRow("struct")]
+        [DataRow("unmanaged")]
+        public void IsNonNullableValueType_Generic(string typeConstraint)
+        {
+            var fieldSymbol = FirstFieldSymbolFromCode($$"""
+                using System;
+                class Test<T> where T: {{typeConstraint}}
+                {
+                    T field;
+                }
+                """);
+            fieldSymbol.Type.IsNonNullableValueType().Should().BeTrue();
+        }
+
+        [DataTestMethod]
+        [DataRow("T?")]
+        [DataRow("Nullable<T>")]
+        public void IsNonNullableValueType_Generic_ConstraintStruct_Nullable(string type)
+        {
+            var fieldSymbol = FirstFieldSymbolFromCode($$"""
+                using System;
+                class Test<T> where T: struct
+                {
+                    {{type}} field;
+                }
+                """);
+            fieldSymbol.Type.IsNonNullableValueType().Should().BeFalse();
+        }
+
+        [DataTestMethod]
+        [DataRow("struct")]
+        [DataRow("unmanaged")]
+        [DataRow("Enum")]
+        [DataRow("struct, Enum")]
+        [DataRow("struct, Enum, IComparable")]
+        public void IsNonNullableValueType_Generic_Constraint_Nullable(string constraint)
+        {
+            var fieldSymbol = FirstFieldSymbolFromCode($$"""
+                using System;
+                class Test<T> where T: {{constraint}}
+                {
+                    T? field;
+                }
+                """);
+            fieldSymbol.Type.IsNonNullableValueType().Should().BeFalse();
         }
 
         private static IFieldSymbol FirstFieldSymbolFromCode(string code)

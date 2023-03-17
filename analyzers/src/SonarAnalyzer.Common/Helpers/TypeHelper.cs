@@ -35,8 +35,7 @@ namespace SonarAnalyzer.Helpers
             {
                 { TypeKind: TypeKind.Struct } => true,
                 ITypeParameterSymbol { IsValueType: true } => true,
-                ITypeParameterSymbol { HasReferenceTypeConstraint: false, ConstraintTypes: { IsEmpty: false } constraintTypes } => constraintTypes.Any(x => x.SpecialType == SpecialType.System_Enum),
-                _ => false,
+                _ => HasEnumConstraint(self),
             };
 
         public static bool IsClassOrStruct(this ITypeSymbol self) =>
@@ -49,7 +48,11 @@ namespace SonarAnalyzer.Helpers
             self.IsStruct() && self is { SpecialType: SpecialType.System_Nullable_T } or { OriginalDefinition.SpecialType: SpecialType.System_Nullable_T };
 
         public static bool IsNonNullableValueType(this ITypeSymbol self) =>
-            self.IsStruct() && !self.IsNullableValueType();
+            self.IsStruct() && !self.IsNullableValueType() && !self.HasEnumConstraint();
+
+        public static bool HasEnumConstraint(this ITypeSymbol self) =>
+            self is ITypeParameterSymbol { HasReferenceTypeConstraint: false, ConstraintTypes: { IsEmpty: false } constraintTypes }
+            && constraintTypes.Any(x => x.SpecialType == SpecialType.System_Enum);
 
         public static bool CanBeNull(this ITypeSymbol self) =>
             self is { IsReferenceType: true } || self.IsNullableValueType();
