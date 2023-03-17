@@ -62,8 +62,8 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
             IsPublicOrProtectedOrProtectedInternal(modifiers);
 
         static bool IsPublicOrProtectedOrProtectedInternal(SyntaxTokenList modifiers) =>
-            modifiers.Any(x => x.IsKind(SyntaxKind.PublicKeyword))
-            || (modifiers.Any(x => x.IsKind(SyntaxKind.ProtectedKeyword)) && !modifiers.Any(x => x.IsKind(SyntaxKind.PrivateKeyword)));
+            modifiers.AnyOfKind(SyntaxKind.PublicKeyword)
+            || (modifiers.AnyOfKind(SyntaxKind.ProtectedKeyword) && !modifiers.AnyOfKind(SyntaxKind.PrivateKeyword));
 
         static bool HasNoDeclaredAccessabilityModifier(SyntaxTokenList modifiers) =>
             !modifiers.Any(x => x.IsKind(SyntaxKind.PrivateKeyword)
