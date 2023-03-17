@@ -31,7 +31,13 @@ namespace SonarAnalyzer.Helpers
             self is { TypeKind: TypeKind.Class };
 
         public static bool IsStruct(this ITypeSymbol self) =>
-            self is { TypeKind: TypeKind.Struct };
+            self switch
+            {
+                { TypeKind: TypeKind.Struct } => true,
+                ITypeParameterSymbol { IsValueType: true } => true,
+                ITypeParameterSymbol { HasReferenceTypeConstraint: false, ConstraintTypes: { IsEmpty: false } constraintTypes } => constraintTypes.Any(x => x.SpecialType == SpecialType.System_Enum),
+                _ => false,
+            };
 
         public static bool IsClassOrStruct(this ITypeSymbol self) =>
             self.IsStruct() || self.IsClass();

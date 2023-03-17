@@ -556,14 +556,14 @@ public void Main<TClass, TStruct, TUnknown, TType, TInterface, TUnmanaged, TEnum
 }";
             var validator = SETestContext.CreateCSMethod(code).Validator;
             validator.ValidateContainsOperation(OperationKind.Literal);
-            validator.ValidateTag("Class", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-            validator.ValidateTag("Struct", x => x.Should().BeNull("struct cannot be null."));
-            validator.ValidateTag("Unknown", x => x.Should().BeNull("it can be struct."));
-            validator.ValidateTag("Type", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-            validator.ValidateTag("Interface", x => x.Should().BeNull("interfaces can be implemented by a struct."));
-            validator.ValidateTag("Unmanaged", x => x.Should().BeNull("unmanaged implies struct and cannot be null."));
-            validator.ValidateTag("Enum", x => x.Should().BeNull("Enum cannot be null."));
-            validator.ValidateTag("Delegate", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("Class", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
+            validator.ValidateTag("Struct", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull, "struct cannot be null."));
+            validator.ValidateTag("Unknown", x => x.Should().HaveNoConstraints("it can be struct."));
+            validator.ValidateTag("Type", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
+            validator.ValidateTag("Interface", x => x.Should().HaveNoConstraints("interfaces can be implemented by a struct."));
+            validator.ValidateTag("Unmanaged", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull, "unmanaged implies struct and cannot be null."));
+            validator.ValidateTag("Enum", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull, "Enum cannot be null."));
+            validator.ValidateTag("Delegate", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
         }
 
         [TestMethod]
