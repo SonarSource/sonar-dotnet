@@ -130,10 +130,6 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [DataTestMethod]
         [DataRow("struct")]
         [DataRow("unmanaged")]
-        [DataRow("Enum")]
-        [DataRow("Enum, IComparable")]
-        [DataRow("Enum, new()")]
-        [DataRow("Enum, IComparable, new()")]
         public void IsStruct_Generic(string typeConstraint)
         {
             var fieldSymbol = FirstFieldSymbolFromCode($$"""
@@ -168,6 +164,10 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [DataRow("where T: class")]
         [DataRow("where T: class, new()")]
         [DataRow("where T: Exception")]
+        [DataRow("where T: Enum")]
+        [DataRow("where T: Enum, IComparable")]
+        [DataRow("where T: Enum, new()")]
+        [DataRow("where T: Enum, IComparable, new()")]
         [DataRow("where T: notnull")]
         public void IsStruct_False_Generic(string typeConstraint)
         {
@@ -317,6 +317,32 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var fieldSymbol = FirstFieldSymbolFromCode($$"""
                 using System;
                 class Test<T> where T: {{constraint}}
+                {
+                    T? field;
+                }
+                """);
+            fieldSymbol.Type.IsNonNullableValueType().Should().BeFalse();
+        }
+
+        [DataTestMethod]
+        [DataRow("")]                      // Unbounded (can be reference type or value type)
+        [DataRow("where T: new()")]        // Unbounded
+        [DataRow("where T: notnull")]      // Unbounded
+        [DataRow("where T: class")]
+        [DataRow("where T: class?")]
+        [DataRow("where T: class, new()")]
+        [DataRow("where T: Exception")]
+        [DataRow("where T: Exception?")]
+        [DataRow("where T: IComparable")]
+        [DataRow("where T: IComparable?")]
+        [DataRow("where T: Delegate")]
+        [DataRow("where T: Delegate?")]
+        public void IsNonNullableValueType_False_Generic_NullableReferenceType(string typeConstraint)
+        {
+            var fieldSymbol = FirstFieldSymbolFromCode($$"""
+                #nullable enable
+                using System;
+                class Test<T> {{typeConstraint}}
                 {
                     T? field;
                 }
