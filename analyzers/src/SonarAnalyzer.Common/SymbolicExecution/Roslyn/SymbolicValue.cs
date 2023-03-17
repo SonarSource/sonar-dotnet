@@ -25,33 +25,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
     public sealed record SymbolicValue
     {
-        private readonly record struct CacheKey
-        {
-            public readonly ConstraintKind First;
-            public readonly ConstraintKind? Second;
-
-            public CacheKey(ConstraintKind first) : this(first, null) { }
-
-            public CacheKey(ConstraintKind first, ConstraintKind? second)
-            {
-                if (first == second)
-                {
-                    First = first;
-                    Second = null;
-                }
-                else if (first < second || second == null)
-                {
-                    First = first;
-                    Second = second;
-                }
-                else
-                {
-                    First = second.Value;
-                    Second = first;
-                }
-            }
-        }
-
         private static ConcurrentDictionary<CacheKey, SymbolicValue> cache = new();
 
         // Reuse instances to save memory. This "True" has the same semantic meaning and any other symbolic value with BoolConstraint.True constraint
@@ -73,39 +46,30 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         public SymbolicValue WithConstraint(SymbolicConstraint constraint)
         {
-            var constraintCount = Constraints.Count;
-            if (constraintCount == 0)
+            if (Constraints.Count == 0)
             {
-                return SingleConstraint(constraint);
+                return SingleConstraintValue(constraint);
             }
-
-            if (HasConstraint(constraint))
+            else if (HasConstraint(constraint))
             {
                 return this;
             }
 
-            var constraintType = constraint.GetType();
-            var containsContraintType = Constraints.ContainsKey(constraintType);
-            if (constraintCount == 1)
+            var containsContraintType = Constraints.ContainsKey(constraint.GetType());
+            return Constraints.Count switch
             {
-                return containsContraintType
-                    ? SingleConstraint(constraint)
-                    : PairConstraint(Constraints.Values.First(), constraint);
-            }
-
-            if (constraintCount == 2 && containsContraintType)
-            {
-                return PairConstraint(OtherSingle(this, constraintType), constraint);
-            }
-
-            return this with { Constraints = Constraints.SetItem(constraint.GetType(), constraint) };
+                1 when containsContraintType => SingleConstraintValue(constraint),
+                1 => PairConstraintValue(Constraints.Values.First(), constraint),
+                2 when containsContraintType => PairConstraintValue(OtherSingleConstraint(constraint.GetType()), constraint),
+                _ => this with { Constraints = Constraints.SetItem(constraint.GetType(), constraint) },
+            };
         }
 
         public SymbolicValue WithoutConstraint(SymbolicConstraint constraint) =>
-            HasConstraint(constraint) ? RemoveConstraint(this, constraint.GetType()) : this;
+            HasConstraint(constraint) ? RemoveConstraint(constraint.GetType()) : this;
 
         public SymbolicValue WithoutConstraint<T>() where T : SymbolicConstraint =>
-            HasConstraint<T>() ? RemoveConstraint(this, typeof(T)) : this;
+            HasConstraint<T>() ? RemoveConstraint(typeof(T)) : this;
 
         public bool HasConstraint<T>() where T : SymbolicConstraint =>
             Constraints.ContainsKey(typeof(T));
@@ -127,29 +91,24 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 ? Constraints.Values.Select(x => x.ToString()).OrderBy(x => x).JoinStr(", ")
                 : "No constraints";
 
-        private static SymbolicValue RemoveConstraint(SymbolicValue baseValue, Type type)
-        {
-            switch (baseValue.Constraints.Count)
+        private SymbolicValue RemoveConstraint(Type type) =>
+            Constraints.Count switch
             {
-                case 1:
-                    return Empty;
-                case 2:
-                    var otherConstraint = OtherSingle(baseValue, type);
-                    return SingleConstraint(otherConstraint);
-                case 3:
-                    OtherPair(baseValue, type, out var first, out var second);
-                    return PairConstraint(first, second);
-                default:
-                    return baseValue with { Constraints = baseValue.Constraints.Remove(type) };
-            }
-        }
+                1 => Empty,
+                2 => OtherSingle(type),
+                3 => OtherPair(type),
+                _ => this with { Constraints = Constraints.Remove(type) },
+            };
 
-        private static SymbolicConstraint OtherSingle(SymbolicValue baseValue, Type type)
+        private SymbolicValue OtherSingle(Type except)
+            => SingleConstraintValue(OtherSingleConstraint(except));
+
+        private SymbolicConstraint OtherSingleConstraint(Type except)
         {
             SymbolicConstraint otherConstraint = null;
-            foreach (var kvp in baseValue.Constraints)
+            foreach (var kvp in Constraints)
             {
-                if (kvp.Key != type)
+                if (kvp.Key != except)
                 {
                     otherConstraint = kvp.Value;
                     break;
@@ -159,13 +118,13 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             return otherConstraint;
         }
 
-        private static void OtherPair(SymbolicValue baseValue, Type type, out SymbolicConstraint first, out SymbolicConstraint second)
+        private SymbolicValue OtherPair(Type except)
         {
-            first = null;
-            second = null;
-            foreach (var kvp in baseValue.Constraints)
+            SymbolicConstraint first = null;
+            SymbolicConstraint second = null;
+            foreach (var kvp in Constraints)
             {
-                if (kvp.Key != type)
+                if (kvp.Key != except)
                 {
                     if (first == null)
                     {
@@ -178,34 +137,63 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                     }
                 }
             }
+
+            return PairConstraintValue(first, second);
         }
 
         private static SymbolicValue SingleConstraintValue(SymbolicConstraint constraint)
         {
             var cacheKey = new CacheKey(constraint.Kind);
-            if (constraintCache.TryGetValue(cacheKey, out var result))
+            if (cache.TryGetValue(cacheKey, out var result))
             {
                 return result;
             }
             else
             {
                 result = Empty with { Constraints = Empty.Constraints.SetItem(constraint.GetType(), constraint) };
-                return constraintCache.GetOrAdd(cacheKey, result);
+                return cache.GetOrAdd(cacheKey, result);
             }
         }
 
         private static SymbolicValue PairConstraintValue(SymbolicConstraint first, SymbolicConstraint second)
         {
             var cacheKey = new CacheKey(first.Kind, second.Kind);
-            if (constraintCache.TryGetValue(cacheKey, out var result))
+            if (cache.TryGetValue(cacheKey, out var result))
             {
                 return result;
             }
             else
             {
-                var single = SingleConstraint(first);
+                var single = SingleConstraintValue(first);
                 result = single with { Constraints = single.Constraints.SetItem(second.GetType(), second) };
-                return constraintCache.GetOrAdd(cacheKey, result);
+                return cache.GetOrAdd(cacheKey, result);
+            }
+        }
+
+        private readonly record struct CacheKey
+        {
+            private readonly ConstraintKind first;
+            private readonly ConstraintKind? second;
+
+            public CacheKey(ConstraintKind first) : this(first, null) { }
+
+            public CacheKey(ConstraintKind first, ConstraintKind? second)
+            {
+                if (first == second)
+                {
+                    this.first = first;
+                    this.second = null;
+                }
+                else if (first < second || second == null)
+                {
+                    this.first = first;
+                    this.second = second;
+                }
+                else
+                {
+                    this.first = second.Value;
+                    this.second = first;
+                }
             }
         }
     }
