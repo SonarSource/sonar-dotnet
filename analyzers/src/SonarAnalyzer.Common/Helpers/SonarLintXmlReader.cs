@@ -18,10 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
-using System.Xml;
 using System.Xml.Serialization;
 using Microsoft.CodeAnalysis.Text;
 
@@ -45,11 +42,12 @@ public class SonarLintXmlReader
     private bool AnalyzeGeneratedCodeCS { get; }
     private bool AnalyzeGeneratedCodeVB { get; }
 
-    public SonarLintXmlReader(SourceText sonarLintXml)
+    public SonarLintXmlReader(SourceText sonarLintXmlText)
     {
-        this.sonarLintXml = sonarLintXml == null ? SonarLintXml.Empty : ParseContent(sonarLintXml);
+        sonarLintXml = ParseContent(sonarLintXmlText);
 
         var settings = SettingsToDictionary();
+
         Exclusions = ReadCommaSeparatedArray(settings.GetValueOrDefault("sonar.exclusions"));
         Inclusions = ReadCommaSeparatedArray(settings.GetValueOrDefault("sonar.inclusions"));
         GlobalExclusions = ReadCommaSeparatedArray(settings.GetValueOrDefault("sonar.global.exclusions"));
@@ -90,7 +88,7 @@ public class SonarLintXmlReader
         && !IsExcluded(globalExclusions, filePath);
 
     private static bool IsIncluded(string[] inclusions, string filePath) =>
-        inclusions is { Length: 0 } || inclusions.Any(x => WildcardPatternMatcher.IsMatch(x, filePath, true));
+        inclusions.Length == 0 || inclusions.Any(x => WildcardPatternMatcher.IsMatch(x, filePath, true));
 
     private static bool IsExcluded(string[] exclusions, string filePath) =>
         exclusions.Any(x => WildcardPatternMatcher.IsMatch(x, filePath, false));
