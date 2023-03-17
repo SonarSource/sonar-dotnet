@@ -195,7 +195,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         }
 
         [TestMethod]
-        public void PairCache_OrderDosntMatter()
+        public void PairCache_OrderDoesNotMatter()
         {
             var one = SymbolicValue.Empty.WithConstraint(ObjectConstraint.Null).WithConstraint(DummyConstraint.Dummy);
             var two = SymbolicValue.Empty.WithConstraint(DummyConstraint.Dummy).WithConstraint(ObjectConstraint.Null);

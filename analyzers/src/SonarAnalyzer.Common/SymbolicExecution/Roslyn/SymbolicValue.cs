@@ -52,7 +52,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             }
         }
 
-        private static ConcurrentDictionary<CacheKey, SymbolicValue> constraintCache = new();
+        private static ConcurrentDictionary<CacheKey, SymbolicValue> cache = new();
 
         // Reuse instances to save memory. This "True" has the same semantic meaning and any other symbolic value with BoolConstraint.True constraint
         public static readonly SymbolicValue Empty = new();
@@ -129,8 +129,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         private static SymbolicValue RemoveConstraint(SymbolicValue baseValue, Type type)
         {
-            var constraintCount = baseValue.Constraints.Count;
-            switch (constraintCount)
+            switch (baseValue.Constraints.Count)
             {
                 case 1:
                     return Empty;
@@ -181,7 +180,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             }
         }
 
-        private static SymbolicValue SingleConstraint(SymbolicConstraint constraint)
+        private static SymbolicValue SingleConstraintValue(SymbolicConstraint constraint)
         {
             var cacheKey = new CacheKey(constraint.Kind);
             if (constraintCache.TryGetValue(cacheKey, out var result))
@@ -195,7 +194,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             }
         }
 
-        private static SymbolicValue PairConstraint(SymbolicConstraint first, SymbolicConstraint second)
+        private static SymbolicValue PairConstraintValue(SymbolicConstraint first, SymbolicConstraint second)
         {
             var cacheKey = new CacheKey(first.Kind, second.Kind);
             if (constraintCache.TryGetValue(cacheKey, out var result))
