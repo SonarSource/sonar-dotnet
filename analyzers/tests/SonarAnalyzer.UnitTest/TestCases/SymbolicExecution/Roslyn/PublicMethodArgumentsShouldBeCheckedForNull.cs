@@ -527,10 +527,16 @@ class PropertyAccessibility
         protected internal set => _ = value.ToString(); // FIXME Non-compliant
     }
 
+    public object InternalSetter
+    {
+        get => null;
+        internal set => _ = value.ToString();           // Compliant - setter is not accessible from other assemblies
+    }
+
     public object PrivateSetter
     {
         get => null;
-        private set => _ = value.ToString();            // Compliant - setter is not accessible from other assemblies
+        private set => _ = value.ToString();
     }
 }
 
@@ -540,5 +546,24 @@ public class ClassWithIndexer
     {
         get { return index.ToString(); }                // FIXME Non-compliant
         set { _ = value.ToString(); }                   // FIXME Non-compliant
+    }
+}
+
+public class NestedClasses
+{
+    protected class ProtectedNestedClass
+    {
+        public void Method(object o)
+        {
+            o.ToString();                               // FIXME Non-compliant
+        }
+    }
+
+    private class PrivateNestedClass
+    {
+        public void Method(object o)                    
+        {
+            o.ToString();                               // Compliant - method is not accessible from other assemblies
+        }
     }
 }
