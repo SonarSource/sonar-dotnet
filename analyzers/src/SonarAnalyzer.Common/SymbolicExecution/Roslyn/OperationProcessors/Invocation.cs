@@ -19,6 +19,7 @@
  */
 
 using SonarAnalyzer.SymbolicExecution.Constraints;
+using SonarAnalyzer.SymbolicExecution.Roslyn.Checks;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
@@ -36,7 +37,8 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
         var state = context.State;
         if (!invocation.TargetMethod.IsStatic             // Also applies to C# extensions
             && !invocation.TargetMethod.IsExtensionMethod // VB extensions in modules are not marked as static
-            && invocation.Instance.TrackedSymbol() is { } symbol)
+            && invocation.Instance.TrackedSymbol() is { } symbol
+            && !IsNullableGetValueOrDefault(invocation))
         {
             state = state.SetSymbolConstraint(symbol, ObjectConstraint.NotNull);
         }
@@ -50,6 +52,7 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
         }
         return invocation switch
         {
+            _ when IsNullableGetValueOrDefault(invocation) => ProcessNullableGetValueOrDefault(context, invocation).ToArray(),
             _ when invocation.TargetMethod.Is(KnownType.Microsoft_VisualBasic_Information, "IsNothing") => ProcessInformationIsNothing(context, invocation),
             _ when invocation.TargetMethod.Is(KnownType.System_Diagnostics_Debug, nameof(Debug.Assert)) => ProcessDebugAssert(context, invocation),
             _ when invocation.TargetMethod.ContainingType.IsAny(KnownType.System_Linq_Enumerable, KnownType.System_Linq_Queryable) => ProcessLinqEnumerableAndQueryable(context, invocation),
@@ -196,6 +199,24 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
         return context.State.ToArray();
     }
 
+    private static ProgramState ProcessNullableGetValueOrDefault(SymbolicContext context, IInvocationOperationWrapper invocation)
+    {
+        return context.State[invocation.Instance] switch
+        {
+            { } instanceValue when instanceValue.HasConstraint(ObjectConstraint.Null) => NullableDefaultState(),
+            { } instanceValue => context.State.SetOperationValue(invocation, instanceValue),
+            _ => context.State
+        };
+
+        ProgramState NullableDefaultState()
+        {
+            var valueType = ((INamedTypeSymbol)invocation.Instance.Type).TypeArguments.Single();
+            return ConstantCheck.ConstraintFromType(valueType) is { } orDefaultConstraint
+                ? context.SetOperationConstraint(orDefaultConstraint)
+                : context.State;
+        }
+    }
+
     private static bool IsThrowHelper(IMethodSymbol method) =>
         method.Is(KnownType.System_Diagnostics_Debug, nameof(Debug.Fail))
         || method.IsAny(KnownType.System_Environment, nameof(Environment.FailFast), nameof(Environment.Exit))
@@ -216,4 +237,7 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
             },
             _ => context.State.ToArray()
         };
+
+    private static bool IsNullableGetValueOrDefault(IInvocationOperationWrapper invocation) =>
+        invocation.TargetMethod.Is(KnownType.System_Nullable_T, nameof(Nullable<int>.GetValueOrDefault));
 }
