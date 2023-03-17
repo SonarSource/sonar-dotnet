@@ -34,7 +34,6 @@ namespace SonarAnalyzer.Rules.CSharp
         // ToDo: This should be migrated to SymbolicExecutionRunnerBase.AllRules.
         private static readonly ImmutableArray<ISymbolicExecutionAnalyzer> SonarRules = ImmutableArray.Create<ISymbolicExecutionAnalyzer>(
             new SonarRules.ObjectsShouldNotBeDisposedMoreThanOnce(),
-            new SonarRules.PublicMethodArgumentsShouldBeCheckedForNull(),
             new SonarRules.EmptyCollectionsShouldNotBeEnumerated(),
             new SonarRules.ConditionEvaluatesToConstant(),
             new SonarRules.InvalidCastToInterfaceSymbolicExecution(),
@@ -49,7 +48,8 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules { get; } = ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
             .Add(LocksReleasedAllPaths.S2222, CreateFactory<LocksReleasedAllPaths>())
             .Add(NullPointerDereference.S2259, CreateFactory<NullPointerDereference, SonarRules.NullPointerDereference>())
-            .Add(EmptyNullableValueAccess.S3655, CreateFactory<EmptyNullableValueAccess, SonarRules.EmptyNullableValueAccess>());
+            .Add(EmptyNullableValueAccess.S3655, CreateFactory<EmptyNullableValueAccess, SonarRules.EmptyNullableValueAccess>())
+            .Add(PublicMethodArgumentsShouldBeCheckedForNull.S3900, CreateFactory<PublicMethodArgumentsShouldBeCheckedForNull, SonarRules.PublicMethodArgumentsShouldBeCheckedForNull>());
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => base.SupportedDiagnostics.Concat(SonarRules.SelectMany(x => x.SupportedDiagnostics)).ToImmutableArray();
 
