@@ -526,34 +526,35 @@ Tag(""AfterInt"", ArgInt)";
         [TestMethod]
         public void Literal_Default_ForGenericType()
         {
-            const string code = @"
-public void Main<TClass, TStruct, TUnknown, TType, TInterface, TUnmanaged, TEnum, TDelegate>
-    (TClass argClass, TStruct argStruct, TUnknown argUnknown, TType argType, TInterface argInterface, TUnmanaged argUnmanaged, TEnum argEnum, TDelegate argDelegate)
-    where TClass : class
-    where TStruct: struct
-    where TType : EventArgs
-    where TInterface : IDisposable
-    where TUnmanaged : unmanaged
-    where TEnum : Enum
-    where TDelegate : Delegate
-{
-    argClass = default;
-    argStruct = default;
-    argUnknown = default;
-    argType = default;
-    argInterface = default;
-    argUnmanaged = default;
-    argEnum = default;
-    argDelegate = default;
-    Tag(""Class"", argClass);
-    Tag(""Struct"", argStruct);
-    Tag(""Unknown"", argUnknown);
-    Tag(""Type"", argType);
-    Tag(""Interface"", argInterface);
-    Tag(""Unmanaged"", argUnmanaged);
-    Tag(""Enum"", argEnum);
-    Tag(""Delegate"", argDelegate);
-}";
+            const string code = """
+                public void Main<TClass, TStruct, TUnknown, TType, TInterface, TUnmanaged, TEnum, TDelegate>
+                    (TClass argClass, TStruct argStruct, TUnknown argUnknown, TType argType, TInterface argInterface, TUnmanaged argUnmanaged, TEnum argEnum, TDelegate argDelegate)
+                    where TClass : class
+                    where TStruct: struct
+                    where TType : EventArgs
+                    where TInterface : IDisposable
+                    where TUnmanaged : unmanaged
+                    where TEnum : Enum
+                    where TDelegate : Delegate
+                {
+                    argClass = default;
+                    argStruct = default;
+                    argUnknown = default;
+                    argType = default;
+                    argInterface = default;
+                    argUnmanaged = default;
+                    argEnum = default;
+                    argDelegate = default;
+                    Tag("Class", argClass);
+                    Tag("Struct", argStruct);
+                    Tag("Unknown", argUnknown);
+                    Tag("Type", argType);
+                    Tag("Interface", argInterface);
+                    Tag("Unmanaged", argUnmanaged);
+                    Tag("Enum", argEnum);
+                    Tag("Delegate", argDelegate);
+                }
+                """;
             var validator = SETestContext.CreateCSMethod(code).Validator;
             validator.ValidateContainsOperation(OperationKind.Literal);
             validator.ValidateTag("Class", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
@@ -562,7 +563,7 @@ public void Main<TClass, TStruct, TUnknown, TType, TInterface, TUnmanaged, TEnum
             validator.ValidateTag("Type", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
             validator.ValidateTag("Interface", x => x.Should().HaveNoConstraints("interfaces can be implemented by a struct."));
             validator.ValidateTag("Unmanaged", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull, "unmanaged implies struct and cannot be null."));
-            validator.ValidateTag("Enum", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull, "Enum cannot be null."));
+            validator.ValidateTag("Enum", x => x.Should().HaveNoConstraints("Enum cannot be null."));
             validator.ValidateTag("Delegate", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
         }
 
