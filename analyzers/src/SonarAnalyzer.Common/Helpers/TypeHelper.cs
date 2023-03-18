@@ -189,5 +189,13 @@ namespace SonarAnalyzer.Helpers
                 ITypeSymbol x => x,
                 _ => null,
             };
+
+        public static int NullableAnnotation(this ITypeSymbol type)
+        {
+            var prop = type.GetType().GetProperty(nameof(NullableAnnotation), System.Reflection.BindingFlags.NonPublic|System.Reflection.BindingFlags.Instance);
+            return prop is { }
+                ? Convert.ToInt32(prop.GetValue(type))
+                : 0;
+        }
     }
 }
