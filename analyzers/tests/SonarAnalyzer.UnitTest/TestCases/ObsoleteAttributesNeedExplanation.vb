@@ -30,14 +30,6 @@ Class Noncompliant
     Sub WithTwoArguments()
     End Sub
 
-    <Obsolete("", True, DiagnosticId:="42")> ' Noncompliant
-    Sub WithDiagnostics()
-    End Sub
-
-    <Obsolete("", True, DiagnosticId:="42", UrlFormat:="https://sonarsource.com")> ' Noncompliant
-    Sub WithDiagnosticsAndUrlFormat()
-    End Sub
-
     <Obsolete> ' Noncompliant
     <CLSCompliant(False)>
     Function Multiple() As UInteger
@@ -108,14 +100,6 @@ Class Compliant
     Sub WithTwoArguments()
     End Sub
 
-    <Obsolete("explanation", True, DiagnosticId:="42")>
-    Sub WithDiagnostics()
-    End Sub
-
-    <Obsolete("explanation", True, DiagnosticId:="42", UrlFormat:="https://sonarsource.com")>
-    Sub WithDiagnosticsAndUrlFormat()
-    End Sub
-
     <Obsolete("explanation")>
     Property [Property] As String
 
@@ -141,12 +125,6 @@ Structure ComplaintStruct
     Sub Method()
     End Sub
 End Structure
-
-Class Ignore
-    <Obsolete(UrlFormat:="https://sonarsource.com")>
-    Private Sub NamedParametersOnly() ' FP
-    End Sub
-End Class
 
 Class NotApplicable
     <CLSCompliant(False)>
