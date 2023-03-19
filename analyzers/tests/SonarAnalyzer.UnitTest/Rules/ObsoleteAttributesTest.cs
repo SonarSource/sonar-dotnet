@@ -60,6 +60,7 @@ public class ObsoleteAttributesTest
     [TestMethod]
     public void ObsoleteAttributesNeedExplanation_VB14() =>
         explanationNeededVB.AddPaths("ObsoleteAttributesNeedExplanation.VB14.vb").WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
+
 #endif
 
     [TestMethod]
