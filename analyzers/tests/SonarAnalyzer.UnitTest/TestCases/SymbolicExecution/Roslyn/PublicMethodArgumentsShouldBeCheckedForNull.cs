@@ -549,6 +549,17 @@ public class ClassWithIndexer
     }
 }
 
+public class ClassWithEvent
+{
+    public event EventHandler CustomEvent;
+
+    public void Method(ClassWithEvent c)
+    {
+        c.CustomEvent += (sender, args)                 // FIXME Non-compliant
+            => Console.WriteLine(); 
+    }
+}
+
 public class NestedClasses
 {
     protected class ProtectedNestedClass
