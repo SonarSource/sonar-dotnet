@@ -54,7 +54,17 @@ public sealed class ClassShouldNotBeEmpty : ClassShouldNotBeEmptyBase<SyntaxKind
             SyntaxKind.ElseDirectiveTrivia,
             SyntaxKind.EndIfDirectiveTrivia));
 
-    private bool IsParameterlessRecord(SyntaxNode node) =>
+    private static bool IsParameterlessRecord(SyntaxNode node) =>
+        RecordDeclarationSyntax(node) is { ParameterList.Parameters.Count: 0 } declaration
+        && !ProvidesBaseWithParameters(declaration);
+
+    private static bool ProvidesBaseWithParameters(RecordDeclarationSyntaxWrapper node) =>
+        node.BaseList?.Types.FirstOrDefault() is { } type
+        && PrimaryConstructorBaseTypeSyntaxWrapper.IsInstance(type)
+        && (PrimaryConstructorBaseTypeSyntaxWrapper)type is { ArgumentList.Arguments.Count: >= 1 };
+
+    private static RecordDeclarationSyntaxWrapper? RecordDeclarationSyntax(SyntaxNode node) =>
         RecordDeclarationSyntaxWrapper.IsInstance(node)
-        && (RecordDeclarationSyntaxWrapper)node is { ParameterList.Parameters.Count: 0 };
+        ? (RecordDeclarationSyntaxWrapper)node
+        : null;
 }
