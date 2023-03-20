@@ -43,9 +43,7 @@ public class SonarLintXmlReader
     public SonarLintXmlReader(SourceText sonarLintXmlText)
     {
         var sonarLintXml = ParseContent(sonarLintXmlText);
-        var settings = sonarLintXml is { Settings: { } settingsList }
-            ? settingsList.ToDictionary(x => x.Key, x => x.Value)
-            : new Dictionary<string, string>();
+        var settings = sonarLintXml.Settings?.ToDictionary(x => x.Key, x => x.Value) ?? new Dictionary<string, string>();
         Exclusions = ReadArray("sonar.exclusions");
         Inclusions = ReadArray("sonar.inclusions");
         GlobalExclusions = ReadArray("sonar.global.exclusions");
@@ -59,15 +57,15 @@ public class SonarLintXmlReader
         analyzeGeneratedCodeVB = ReadBoolean("sonar.vbnet.analyzeGeneratedCode");
 
         string[] ReadArray(string key) =>
-            settings.GetValueOrDefault(key) is { } value ? value.Split(',') : Array.Empty<string>();
+            settings.GetValueOrDefault(key) is string value && !string.IsNullOrEmpty(value)
+                ? value.Split(',')
+                : Array.Empty<string>();
 
         bool ReadBoolean(string key) =>
             bool.TryParse(settings.GetValueOrDefault(key), out var value) && value;
 
         List<SonarLintXmlRule> ReadRuleParameters() =>
-            sonarLintXml is { Rules: { } rules }
-                ? rules.Where(x => x.Parameters.Any()).ToList()
-                : new();
+            sonarLintXml.Rules?.Where(x => x.Parameters.Any()).ToList() ?? new();
     }
 
     public bool IgnoreHeaderComments(string language) =>
