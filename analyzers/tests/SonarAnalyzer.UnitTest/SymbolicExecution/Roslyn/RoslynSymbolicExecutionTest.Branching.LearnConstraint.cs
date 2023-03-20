@@ -582,6 +582,7 @@ if (value = boolParameter)
         [DataRow("arg is not not { }")]
         [DataRow("!!(arg is { })")]
         [DataRow("arg is (A: var a, B: _)", "Deconstructable")]
+        [DataRow("arg is { }", "T")]
         public void Branching_LearnsObjectConstraint_RecursivePattern_ElseIsNull(string expression, string argType = "object")
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.RecursivePattern, argType);
@@ -602,6 +603,7 @@ if (value = boolParameter)
         [DataRow("arg is TClass { }")]
         [DataRow("arg is TStruct { }")]
         [DataRow("arg is DateTime { Ticks: 0 }")]
+        [DataRow("arg is string { }", "T")]
         public void Branching_LearnsObjectConstraint_RecursivePattern_ElseIsUnknown(string expression, string argType = "object")
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.RecursivePattern, argType);
@@ -612,13 +614,11 @@ if (value = boolParameter)
                 .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
         }
 
-        [DataTestMethod]
-        [DataRow("arg is { }", "T")]
-        [DataRow("arg is string { }", "T")]     // Could have NotNull instead. T is not known to be reference type.
-        [DataRow("(arg, Unknown<object>()) is ({ }, { })", "object")]   // We don't support learning for tuples (yet). Should behave same as "arg is { }". Gets tricky when nesting (a, (b, c))
-        public void Branching_LearnsObjectConstraint_RecursivePattern_NoConstraint(string expression, string argType)
+        [TestMethod]
+        public void Branching_LearnsObjectConstraint_RecursivePattern_Tuple_NoConstraint()
         {
-            var validator = CreateIfElseEndValidatorCS(expression, OperationKind.RecursivePattern, argType);
+            // We don't support learning for tuples (yet). Should behave same as "arg is { }". Gets tricky when nesting (a, (b, c))
+            var validator = CreateIfElseEndValidatorCS("(arg, Unknown<object>()) is ({ }, { })", OperationKind.RecursivePattern);
             validator.ValidateTag("If", x => x.Should().HaveNoConstraints());
             validator.ValidateTag("Else", x => x.Should().HaveNoConstraints());
             validator.ValidateTag("End", x => x.Should().HaveNoConstraints());
