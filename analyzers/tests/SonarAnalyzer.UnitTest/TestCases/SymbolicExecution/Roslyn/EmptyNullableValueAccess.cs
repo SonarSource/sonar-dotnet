@@ -149,41 +149,41 @@ class NullableOfCustomTypes
     void Assignment(AStruct? nullable)
     {
         _ = nullable.Value;                           // Compliant, unknown
-        _ = (AStruct)nullable;                        // Compliant, non-empty
-        _ = new AStruct?(nullable.Value).Value;
+        nullable = MethodReturningEmpty();
+        _ = nullable.Value;                           // Compliant, unknown
+        nullable = MethodReturningNonEmpty();
+        _ = nullable.Value;                           // Compliant, unknown
+        nullable = MethodReturningEmpty();
+        _ = (AStruct)nullable;                        // Compliant, unknown
+        nullable = MethodReturningNonEmpty();
+        _ = (AStruct)nullable;                        // Compliant, unknown
+        nullable = MethodReturningEmpty();
+        _ = new AStruct?(nullable.Value).Value;       // Compliant, unknown then non-empty
+        nullable = MethodReturningNonEmpty();
+        _ = new AStruct?(nullable.Value).Value;       // Compliant, unknown then non-empty
+
+        nullable = new AStruct();
+        _ = nullable.Value;                           // Compliant, non-empty
+        nullable = new AStruct?(new AStruct());
+        _ = nullable.Value;                           // Compliant, non-empty
 
         nullable = null;
-        _ = nullable.Value;                           // Noncompliant
-        nullable = new AStruct();
-        _ = nullable.Value;
-        nullable = new AStruct?(new AStruct());
-        _ = nullable.Value;
-
+        _ = nullable.Value;                           // Noncompliant, empty
         nullable = new AStruct?();
-        _ = nullable.Value;                           // Noncompliant
+        _ = nullable.Value;                           // Noncompliant, empty
         nullable = new Nullable<AStruct>();
-        _ = nullable.Value;                           // Noncompliant
+        _ = nullable.Value;                           // Noncompliant, empty
 
         _ = (new Nullable<AStruct>()).Value;          // Noncompliant
         _ = (null as Nullable<AStruct>).Value;        // Noncompliant
 
         nullable = null;
         _ = ((AStruct?)nullable).Value;               // Noncompliant
-        _ = (nullable as AStruct?).Value;             // Compliant, unreachable
-    }
+        _ = (nullable as AStruct?).Value;             // Compliant, when reached .Value above implies nullable is not null
+        _ = ((AStruct?)(nullable as AStruct?)).Value; // Compliant, same as above
 
-    void AssignmentAndReachability1()
-    {
-        AStruct? nullable = null;
-        _ = ((AStruct?)nullable).Value;               // Noncompliant
-        _ = (nullable as AStruct?).Value;             // Compliant, unreachable
-    }
-
-    void AssignmentAndReachability2()
-    {
-        AStruct? nullable = null;
-        _ = ((AStruct?)nullable).Value;               // Noncompliant
-        _ = ((AStruct?)(nullable as AStruct?)).Value; // Compliant, unreachable
+        static AStruct? MethodReturningEmpty() => null;
+        static AStruct? MethodReturningNonEmpty() => new AStruct();
     }
 
     void ForeachCast()
