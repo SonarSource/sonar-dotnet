@@ -452,6 +452,43 @@ namespace SonarAnalyzer.UnitTest.Helpers
             fieldSymbol.Type.IsNullableValueType().Should().BeFalse();
         }
 
+        [DataTestMethod]
+        [DataRow("", "AttributeTargets")]
+        [DataRow("where T: Enum", "T")]
+        [DataRow("where T: struct, Enum", "T")]
+        [DataRow("where T: Enum", "T?")] // Here ? means either nullable value type or nullable reference type (unbound generic) and T? is an Enum
+        public void IsEnum_True(string typeConstraint, string fieldType)
+        {
+            var fieldSymbol = FirstFieldSymbolFromCode($$"""
+                #nullable enable
+                using System;
+                class Test<T> {{typeConstraint}}
+                {
+                    {{fieldType}} field;
+                }
+                """);
+            fieldSymbol.Type.IsEnum().Should().BeTrue();
+        }
+
+        [DataTestMethod]
+        [DataRow("", "int")]
+        [DataRow("", "object")]
+        [DataRow("", "IComparable")]
+        [DataRow("where T: struct, Enum", "T?")] // Here ? means nullable value type because of the additional struct constraint and T? is an Nullable<Enum>
+        [DataRow("where T: struct, Enum", "Nullable<T>")]
+        public void IsEnum_False(string typeConstraint, string fieldType)
+        {
+            var fieldSymbol = FirstFieldSymbolFromCode($$"""
+                #nullable enable
+                using System;
+                class Test<T> {{typeConstraint}}
+                {
+                    {{fieldType}} field;
+                }
+                """);
+            fieldSymbol.Type.IsEnum().Should().BeFalse();
+        }
+
         private static IFieldSymbol FirstFieldSymbolFromCode(string code)
         {
             var (tree, model) = TestHelper.CompileCS(code);
