@@ -980,7 +980,7 @@ Tag(""End"");";
                 var result = left.Equals(right);
                 Tag("Result", result);
                 """;
-            SETestContext.CreateCS(code).Validator.ValidateTag("Result", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));    //FIXME: Should also have , BoolConstraint.From(expectedResult)
+            SETestContext.CreateCS(code).Validator.ValidateTag("Result", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expectedResult)));
         }
 
         [DataTestMethod]
@@ -1014,19 +1014,14 @@ Tag(""End"");";
             validator.TagStates("End").Should().SatisfyRespectively(
                 x =>
                 {
-                    x[result].Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-                    x[arg].Should().HaveNoConstraints();
+                    x[result].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True);
+                    x[arg].Should().HaveOnlyConstraint(ObjectConstraint.Null);
+                },
+                x =>
+                {
+                    x[result].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False);
+                    x[arg].Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
                 });
-                //x =>
-                //{
-                //    x[result].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True);
-                //    x[arg].Should().HaveOnlyConstraint(ObjectConstraint.Null);
-                //},
-                //x =>
-                //{
-                //    x[result].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False);
-                //    x[arg].Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-                //});
         }
 
         [TestMethod]
@@ -1045,21 +1040,21 @@ Tag(""End"");";
                      x[result].Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
                      x[arg].Should().HaveNoConstraints();
                  });
-                //x =>
-                //{
-                //    x[result].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True);
-                //    x[arg].Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-                //},
-                //x =>
-                //{
-                //    x[result].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False);
-                //    x[arg].Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-                //},
-                //x =>
-                //{
-                //    x[result].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False);
-                //    x[arg].Should().HaveOnlyConstraint(ObjectConstraint.Null);
-                //});
+            //x =>
+            //{
+            //    x[result].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True);
+            //    x[arg].Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+            //},
+            //x =>
+            //{
+            //    x[result].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False);
+            //    x[arg].Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+            //},
+            //x =>
+            //{
+            //    x[result].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False);
+            //    x[arg].Should().HaveOnlyConstraint(ObjectConstraint.Null);
+            //});
         }
 
         [TestMethod]
