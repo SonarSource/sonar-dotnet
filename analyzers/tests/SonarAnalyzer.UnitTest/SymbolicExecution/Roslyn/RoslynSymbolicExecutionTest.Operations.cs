@@ -563,7 +563,7 @@ Tag(""AfterInt"", ArgInt)";
             validator.ValidateTag("Type", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
             validator.ValidateTag("Interface", x => x.Should().HaveNoConstraints("interfaces can be implemented by a struct."));
             validator.ValidateTag("Unmanaged", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull, "unmanaged implies struct and cannot be null."));
-            validator.ValidateTag("Enum", x => x.Should().HaveNoConstraints("Enum cannot be null."));
+            validator.ValidateTag("Enum", x => x.Should().HaveNoConstraints("Enum cannot be null.")); // TODO: A NotNull constraint needs to be added. #6958
             validator.ValidateTag("Delegate", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
         }
 
