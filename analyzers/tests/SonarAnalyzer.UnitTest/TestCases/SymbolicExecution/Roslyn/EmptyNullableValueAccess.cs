@@ -553,7 +553,7 @@ class Casts
     {
         _ = (null as int?).Value;     // Noncompliant
         i = null;
-        _ = (i as int?).Value;        // Noncompliant, FP: when reached i.Value above implies i is not null
+        _ = (i as int?).Value;        // Noncompliant, when reached assignment above implies i is null
     }
 
     void AsOperatorWithUnknownAndReassignment(int? i)
