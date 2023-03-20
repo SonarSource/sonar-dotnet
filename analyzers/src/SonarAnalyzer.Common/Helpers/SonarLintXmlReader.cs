@@ -27,8 +27,10 @@ namespace SonarAnalyzer.Helpers;
 public class SonarLintXmlReader
 {
     public static readonly SonarLintXmlReader Empty = new(null);
-
-    private readonly SonarLintXml sonarLintXml;
+    private bool ignoreHeaderCommentsCS;
+    private bool ignoreHeaderCommentsVB;
+    private bool analyzeGeneratedCodeCS;
+    private bool analyzeGeneratedCodeVB;
 
     public string[] Exclusions { get; }
     public string[] Inclusions { get; }
@@ -37,43 +39,50 @@ public class SonarLintXmlReader
     public string[] TestInclusions { get; }
     public string[] GlobalTestExclusions { get; }
     public List<SonarLintXmlRule> ParametrizedRules { get; }
-    private bool IgnoreHeaderCommentsCS { get; }
-    private bool IgnoreHeaderCommentsVB { get; }
-    private bool AnalyzeGeneratedCodeCS { get; }
-    private bool AnalyzeGeneratedCodeVB { get; }
 
     public SonarLintXmlReader(SourceText sonarLintXmlText)
     {
-        sonarLintXml = ParseContent(sonarLintXmlText);
-
-        var settings = SettingsToDictionary();
-
-        Exclusions = ReadCommaSeparatedArray(settings.GetValueOrDefault("sonar.exclusions"));
-        Inclusions = ReadCommaSeparatedArray(settings.GetValueOrDefault("sonar.inclusions"));
-        GlobalExclusions = ReadCommaSeparatedArray(settings.GetValueOrDefault("sonar.global.exclusions"));
-        TestExclusions = ReadCommaSeparatedArray(settings.GetValueOrDefault("sonar.test.exclusions"));
-        TestInclusions = ReadCommaSeparatedArray(settings.GetValueOrDefault("sonar.test.inclusions"));
-        GlobalTestExclusions = ReadCommaSeparatedArray(settings.GetValueOrDefault("sonar.global.test.exclusions"));
+        var sonarLintXml = ParseContent(sonarLintXmlText);
+        var settings = sonarLintXml is { Settings: { } settingsList }
+            ? settingsList.ToDictionary(x => x.Key, x => x.Value)
+            : new Dictionary<string, string>();
+        Exclusions = ReadArray("sonar.exclusions");
+        Inclusions = ReadArray("sonar.inclusions");
+        GlobalExclusions = ReadArray("sonar.global.exclusions");
+        TestExclusions = ReadArray("sonar.test.exclusions");
+        TestInclusions = ReadArray("sonar.test.inclusions");
+        GlobalTestExclusions = ReadArray("sonar.global.test.exclusions");
         ParametrizedRules = ReadRuleParameters();
-        IgnoreHeaderCommentsCS = ReadBoolean(settings.GetValueOrDefault("sonar.cs.ignoreHeaderComments"));
-        IgnoreHeaderCommentsVB = ReadBoolean(settings.GetValueOrDefault("sonar.vbnet.ignoreHeaderComments"));
-        AnalyzeGeneratedCodeCS = ReadBoolean(settings.GetValueOrDefault("sonar.cs.analyzeGeneratedCode"));
-        AnalyzeGeneratedCodeVB = ReadBoolean(settings.GetValueOrDefault("sonar.vbnet.analyzeGeneratedCode"));
+        ignoreHeaderCommentsCS = ReadBoolean("sonar.cs.ignoreHeaderComments");
+        ignoreHeaderCommentsVB = ReadBoolean("sonar.vbnet.ignoreHeaderComments");
+        analyzeGeneratedCodeCS = ReadBoolean("sonar.cs.analyzeGeneratedCode");
+        analyzeGeneratedCodeVB = ReadBoolean("sonar.vbnet.analyzeGeneratedCode");
+
+        string[] ReadArray(string key) =>
+            settings.GetValueOrDefault(key) is { } value ? value.Split(',') : Array.Empty<string>();
+
+        bool ReadBoolean(string key) =>
+            bool.TryParse(settings.GetValueOrDefault(key), out var value) && value;
+
+        List<SonarLintXmlRule> ReadRuleParameters() =>
+            sonarLintXml is { Rules: { } rules }
+                ? rules.Where(x => x.Parameters.Any()).ToList()
+                : new();
     }
 
     public bool IgnoreHeaderComments(string language) =>
     language switch
     {
-        LanguageNames.CSharp => IgnoreHeaderCommentsCS,
-        LanguageNames.VisualBasic => IgnoreHeaderCommentsVB,
+        LanguageNames.CSharp => ignoreHeaderCommentsCS,
+        LanguageNames.VisualBasic => ignoreHeaderCommentsVB,
         _ => throw new UnexpectedLanguageException(language)
     };
 
     public bool AnalyzeGeneratedCode(string language) =>
         language switch
         {
-            LanguageNames.CSharp => AnalyzeGeneratedCodeCS,
-            LanguageNames.VisualBasic => AnalyzeGeneratedCodeVB,
+            LanguageNames.CSharp => analyzeGeneratedCodeCS,
+            LanguageNames.VisualBasic => analyzeGeneratedCodeVB,
             _ => throw new UnexpectedLanguageException(language)
         };
 
@@ -106,20 +115,4 @@ public class SonarLintXmlReader
             return SonarLintXml.Empty;
         }
     }
-
-    private Dictionary<string, string> SettingsToDictionary() =>
-        sonarLintXml is { Settings: { } settingsList }
-            ? settingsList.ToDictionary(x => x.Key, x => x.Value)
-            : new();
-
-    private List<SonarLintXmlRule> ReadRuleParameters() =>
-        sonarLintXml is { Rules: { } rules }
-            ? rules.Where(x => x.Parameters.Any()).ToList()
-            : new();
-
-    private static string[] ReadCommaSeparatedArray(string str) =>
-        string.IsNullOrEmpty(str) ? Array.Empty<string>() : str.Split(',');
-
-    private static bool ReadBoolean(string str, bool defaultValue = false) =>
-        bool.TryParse(str, out var propertyValue) ? propertyValue : defaultValue;
 }
