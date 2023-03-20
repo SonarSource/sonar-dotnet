@@ -27,10 +27,10 @@ namespace SonarAnalyzer.Helpers;
 public class SonarLintXmlReader
 {
     public static readonly SonarLintXmlReader Empty = new(null);
-    private bool ignoreHeaderCommentsCS;
-    private bool ignoreHeaderCommentsVB;
-    private bool analyzeGeneratedCodeCS;
-    private bool analyzeGeneratedCodeVB;
+    private readonly bool ignoreHeaderCommentsCS;
+    private readonly bool ignoreHeaderCommentsVB;
+    private readonly bool analyzeGeneratedCodeCS;
+    private readonly bool analyzeGeneratedCodeVB;
 
     public string[] Exclusions { get; }
     public string[] Inclusions { get; }
