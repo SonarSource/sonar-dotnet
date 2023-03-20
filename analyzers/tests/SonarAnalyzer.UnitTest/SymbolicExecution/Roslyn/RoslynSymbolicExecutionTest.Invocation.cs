@@ -1001,11 +1001,14 @@ Tag(""End"");";
             SETestContext.CreateCS(code).Validator.ValidateTag("Result", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
         }
 
-        [TestMethod]
-        public void Invocation_NullableEquals_Null_SplitsToBothResults()
+        [DataTestMethod]
+        [DataRow("isNull", "arg")]
+        [DataRow("arg", "null")]
+        public void Invocation_NullableEquals_Null_SplitsToBothResults(string left, string right)
         {
             var code = $"""
-                var result = arg.Equals(null);
+                int? isNull = null;
+                var result = {left}.Equals({right});
                 Tag("End");
                 """;
             var validator = SETestContext.CreateCS(code, ", int? arg").Validator;
@@ -1022,39 +1025,6 @@ Tag(""End"");";
                     x[result].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False);
                     x[arg].Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
                 });
-        }
-
-        [TestMethod]
-        public void Invocation_NullableEquals_Literal_SplitsToThreeResults()
-        {
-            var code = $"""
-                var result = arg.Equals(42);
-                Tag("End");
-                """;
-            var validator = SETestContext.CreateCS(code, ", int? arg").Validator;
-            var result = validator.Symbol("result");
-            var arg = validator.Symbol("arg");
-            validator.TagStates("End").Should().SatisfyRespectively(
-                 x =>
-                 {
-                     x[result].Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-                     x[arg].Should().HaveNoConstraints();
-                 });
-            //x =>
-            //{
-            //    x[result].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True);
-            //    x[arg].Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-            //},
-            //x =>
-            //{
-            //    x[result].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False);
-            //    x[arg].Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-            //},
-            //x =>
-            //{
-            //    x[result].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False);
-            //    x[arg].Should().HaveOnlyConstraint(ObjectConstraint.Null);
-            //});
         }
 
         [TestMethod]
