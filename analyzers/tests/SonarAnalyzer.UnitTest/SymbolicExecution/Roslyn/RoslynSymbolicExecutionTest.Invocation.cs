@@ -750,11 +750,17 @@ Tag(""Result"", Result)";
         }
 
         [DataTestMethod]
-        [DataRow("arg != null")]
-        [DataRow("arg is not null")]
-        [DataRow("arg is { }")]
-        public void Invocation_DebugAssert_LearnsNotNull_Simple(string expression) =>
-            DebugAssertValues(expression).Should().HaveCount(1).And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
+        [DataRow("arg != null", "object")]
+        [DataRow("arg != null", "int?")]
+        [DataRow("arg != null", "bool?")]
+        [DataRow("arg is not null", "object")]
+        [DataRow("arg is not null", "int?")]
+        [DataRow("arg is not null", "bool?")]
+        [DataRow("arg is { }", "object")]
+        [DataRow("arg is { }", "int?")]
+        [DataRow("arg is { }", "bool?")]
+        public void Invocation_DebugAssert_LearnsNotNull_Simple(string expression, string argType) =>
+            DebugAssertValues(expression, argType).Should().SatisfyRespectively(x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
 
         [TestMethod]
         public void Invocation_DebugAssert_LearnsNotNull_AndAlso() =>
@@ -822,6 +828,18 @@ namespace System.Diagnostics
 }";
             new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator.ValidateTagOrder("End");
         }
+
+        [DataTestMethod]
+        [DataRow("int?")]
+        [DataRow("bool?")]
+        public void Invocation_DebugAssert_NullableHasValue_Simple(string argType) =>
+            DebugAssertValues("arg.HasValue", argType).Should().SatisfyRespectively(x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+
+        [DataTestMethod]
+        [DataRow("int?")]
+        [DataRow("bool?")]
+        public void Invocation_DebugAssert_NullableHasValue_Binary(string argType) =>
+            DebugAssertValues("arg.HasValue == true", argType).Should().SatisfyRespectively(x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
 
         private static SymbolicValue[] DebugAssertValues(string expression, string argType = "object")
         {
