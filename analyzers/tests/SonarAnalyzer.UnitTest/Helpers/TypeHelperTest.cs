@@ -98,7 +98,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [DataRow("CustomStruct")]
         [DataRow("CustomRefStruct")]
         [DataRow("RecordStruct")]
-        public void IsStruct_Simple(string type)
+        public void IsStruct_Simple_True(string type)
         {
             var fieldSymbol = FirstFieldSymbolFromCode($$"""
                 struct CustomStruct { }
@@ -116,7 +116,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [DataTestMethod]
         [DataRow("object")]
         [DataRow("System.IComparable")]
-        public void IsStruct_False_Simple(string type)
+        public void IsStruct_Simple_False(string type)
         {
             var fieldSymbol = FirstFieldSymbolFromCode($$"""
                 class Test
@@ -245,7 +245,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [DataRow("CustomStruct")]
         [DataRow("CustomRefStruct")]
         [DataRow("RecordStruct")]
-        public void IsNonNullableValueType_Simple(string type)
+        public void IsNonNullableValueType_Simple_True(string type)
         {
             var fieldSymbol = FirstFieldSymbolFromCode($$"""
                 struct CustomStruct { }
@@ -265,7 +265,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [DataRow("System.IComparable")]
         [DataRow("int?")]
         [DataRow("System.Nullable<int>")]
-        public void IsNonNullableValueType_False_Simple(string type)
+        public void IsNonNullableValueType_Simple_False(string type)
         {
             var fieldSymbol = FirstFieldSymbolFromCode($$"""
                 class Test
@@ -340,7 +340,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [DataTestMethod]
         [DataRow("int?")]
         [DataRow("System.Nullable<int>")]
-        public void IsNullableValueType_Simple(string type)
+        public void IsNullableValueType_Simple_True(string type)
         {
             var fieldSymbol = FirstFieldSymbolFromCode($$"""
                 class Test
@@ -359,7 +359,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [DataRow("RecordStruct")]
         [DataRow("object")]
         [DataRow("System.IComparable")]
-        public void IsNullableValueType_False_Simple(string type)
+        public void IsNullableValueType_Simple_False(string type)
         {
             var fieldSymbol = FirstFieldSymbolFromCode($$"""
                 struct CustomStruct { }
