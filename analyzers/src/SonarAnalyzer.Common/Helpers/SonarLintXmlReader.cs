@@ -57,7 +57,7 @@ public class SonarLintXmlReader
         analyzeGeneratedCodeVB = ReadBoolean("sonar.vbnet.analyzeGeneratedCode");
 
         string[] ReadArray(string key) =>
-            settings.GetValueOrDefault(key) is string value && !string.IsNullOrEmpty(value)
+            settings.GetValueOrDefault(key) is { } value && !string.IsNullOrEmpty(value)
                 ? value.Split(',')
                 : Array.Empty<string>();
 
