@@ -78,7 +78,7 @@ public class Tests {
   @ClassRule
   public static final Orchestrator ORCHESTRATOR = Orchestrator.builderEnv()
     .useDefaultAdminCredentialsForBuilds(true)
-    .setSonarVersion(TestUtils.replaceLtsVersion(System.getProperty("sonar.runtimeVersion", "LATEST_RELEASE")))
+    .setSonarVersion(TestUtils.replaceLtsVersion(System.getProperty("sonar.runtimeVersion", "DEV")))
     .addPlugin(TestUtils.getPluginLocation("sonar-csharp-plugin")) // Do not add VB.NET here, use shared project instead
     .setEdition(Edition.DEVELOPER)
     .restoreProfileAtStartup(FileLocation.of("profiles/no_rule.xml"))
