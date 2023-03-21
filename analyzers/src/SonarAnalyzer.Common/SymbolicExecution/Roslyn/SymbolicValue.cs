@@ -38,13 +38,19 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public static readonly SymbolicValue False = NotNull.WithConstraint(BoolConstraint.False);
 
         // SymbolicValue can have only one constraint instance of specific type at a time
-        private ImmutableDictionary<Type, SymbolicConstraint> Constraints { get; init; } = ImmutableDictionary<Type, SymbolicConstraint>.Empty;
+        private ImmutableDictionary<Type, SymbolicConstraint> Constraints { get; init; }
 
         public IEnumerable<SymbolicConstraint> AllConstraints =>
             Constraints.Values;
 
-        public SymbolicValue()
+        public SymbolicValue() : this(null)
         {
+            hashCode = new(() => HashCode.DictionaryContentHash(Constraints), LazyThreadSafetyMode.ExecutionAndPublication);
+        }
+
+        private SymbolicValue(SymbolicValue other)
+        {
+            Constraints = other?.Constraints ?? ImmutableDictionary<Type, SymbolicConstraint>.Empty;
             hashCode = new(() => HashCode.DictionaryContentHash(Constraints), LazyThreadSafetyMode.ExecutionAndPublication);
         }
 
