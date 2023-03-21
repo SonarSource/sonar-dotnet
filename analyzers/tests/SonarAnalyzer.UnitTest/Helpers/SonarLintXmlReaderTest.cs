@@ -95,7 +95,7 @@ public class SonarLintXmlReaderTest
 
     [TestMethod]
     public void SonarLintXmlReader_MissingProperties_DefaultBehaviour() =>
-        CheckSonarLintXmlReaderDefaultValues(CreateSonarLintXmlReader(@"ResourceTests\SonarLintXml\Missing_propertiesSonarLint.xml"));
+        CheckSonarLintXmlReaderDefaultValues(CreateSonarLintXmlReader(@"ResourceTests\SonarLintXml\Missing_properties\SonarLint.xml"));
 
     [TestMethod]
     public void SonarLintXmlReader_WithIncorrectValueType_DefaultBehaviour() =>
@@ -108,7 +108,7 @@ public class SonarLintXmlReaderTest
     [TestMethod]
     public void SonarLintXmlReader_LanguageDoesNotExist_Throws()
     {
-        var sut = CreateSonarLintXmlReader(@$"ResourceTests\SonarLintXmlAll_Properties_csSonarLint.xml");
+        var sut = CreateSonarLintXmlReader(@$"ResourceTests\SonarLintXml\All_Properties_cs\SonarLint.xml");
         sut.Invoking(x => x.IgnoreHeaderComments(LanguageNames.FSharp)).Should().Throw<UnexpectedLanguageException>().WithMessage("Unexpected language: F#");
         sut.Invoking(x => x.AnalyzeGeneratedCode(LanguageNames.FSharp)).Should().Throw<UnexpectedLanguageException>().WithMessage("Unexpected language: F#");
     }
