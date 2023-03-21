@@ -92,10 +92,47 @@ class Basics
         _ = b1.Value;                                        // Noncompliant
     }
 
-    void AssignmentAndDeconstruction()
+    void AssignmentAndDeconstructionUpcasting()
     {
         var (b, _) = (null as bool?, null as bool?);
-        _ = b.Value;                                         // FN, b is empty
+        _ = b.Value;                                         // FN: b is empty
+    }
+
+    void AssignmentAndDeconstructionTypeInference()
+    {
+        (int? discard, int? b) = (null, null);
+        _ = b.Value;                                         // FN: b is empty
+    }
+
+    void TwoWaySwappingViaTemporaryVar()
+    {
+        bool? b1 = null;
+        bool? b2 = true;
+        bool? t = b1;
+        b1 = b2;
+        b2 = t;
+        _ = b1.Value;           // Compliant, after swapping is non-empty
+        _ = b2.Value;           // Noncompliant, after swapping is empty
+    }
+
+    void TwoWaySwappingViaDeconstruction()
+    {
+        bool? b1 = null;
+        bool? b2 = true;
+        (b1, b2) = (b2, b1);
+        _ = b1.Value;           // Noncompliant, FP: after swapping is non-empty
+        _ = b2.Value;           // FN: after swapping is empty
+    }
+
+    void ThreeWaySwappingViaDeconstruction()
+    {
+        bool? b1 = null;
+        bool? b2 = true;
+        bool? b3 = null;
+        (b1, b2, b3) = (b2, b3, b2);
+        _ = b1.Value;           // Noncompliant, FP: after swapping is non-empty
+        _ = b2.Value;           // FN: after swapping is empty
+        _ = b3.Value;           // Noncompliant, FP: after swapping is non-empty
     }
 
     void SwitchExpressions(bool zero)
