@@ -42,4 +42,11 @@ public class CommentedOutCodeTest
             .WithConcurrentAnalysis(false)
             .WithOptions(ImmutableArray.Create<ParseOptions>(new CSharpParseOptions(documentationMode: DocumentationMode.None)))
             .Verify();
+
+    [TestMethod]
+    public void CommentedOutCode_CodeFix() =>
+        builder.AddPaths("CommentedOutCode.cs")
+            .WithCodeFix<CommentedOutCodeCodeFix>()
+            .WithCodeFixedPaths("CommentedOutCode.Fixed.cs")
+            .VerifyCodeFix();
 }
