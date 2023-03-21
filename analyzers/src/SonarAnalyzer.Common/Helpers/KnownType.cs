@@ -229,13 +229,14 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Collections_Specialized_NameObjectCollectionBase = new("System.Collections.Specialized.NameObjectCollectionBase");
         public static readonly KnownType System_Collections_Specialized_NameValueCollection = new("System.Collections.Specialized.NameValueCollection");
         public static readonly KnownType System_Composition_ExportAttribute = new("System.Composition.ExportAttribute");
-        public static readonly KnownType System_ComponentModel_DefaultValueAttribute = new("System.ComponentModel.DefaultValueAttribute");
-        public static readonly KnownType System_ComponentModel_EditorBrowsableAttribute = new("System.ComponentModel.EditorBrowsableAttribute");
-        public static readonly KnownType System_ComponentModel_LocalizableAttribute = new("System.ComponentModel.LocalizableAttribute");
         public static readonly KnownType System_ComponentModel_Composition_CreationPolicy = new("System.ComponentModel.Composition.CreationPolicy");
         public static readonly KnownType System_ComponentModel_Composition_ExportAttribute = new("System.ComponentModel.Composition.ExportAttribute");
         public static readonly KnownType System_ComponentModel_Composition_InheritedExportAttribute = new("System.ComponentModel.Composition.InheritedExportAttribute");
         public static readonly KnownType System_ComponentModel_Composition_PartCreationPolicyAttribute = new("System.ComponentModel.Composition.PartCreationPolicyAttribute");
+        public static readonly KnownType System_ComponentModel_DataAnnotations_RegularExpressionAttribute = new("System.ComponentModel.DataAnnotations.RegularExpressionAttribute");
+        public static readonly KnownType System_ComponentModel_DefaultValueAttribute = new("System.ComponentModel.DefaultValueAttribute");
+        public static readonly KnownType System_ComponentModel_EditorBrowsableAttribute = new("System.ComponentModel.EditorBrowsableAttribute");
+        public static readonly KnownType System_ComponentModel_LocalizableAttribute = new("System.ComponentModel.LocalizableAttribute");
         public static readonly KnownType System_Configuration_ConfigXmlDocument = new("System.Configuration.ConfigXmlDocument");
         public static readonly KnownType System_Console = new("System.Console");
         public static readonly KnownType System_Data_Common_CommandTrees_DbExpression = new("System.Data.Common.CommandTrees.DbExpression");

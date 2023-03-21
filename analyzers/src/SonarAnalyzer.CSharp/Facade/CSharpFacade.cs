@@ -52,7 +52,12 @@ internal sealed class CSharpFacade : ILanguageFacade<SyntaxKind>
         node.FindConstantValue(model);
 
     public IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, IMethodSymbol methodSymbol) =>
-        invocation != null ? new CSharpMethodParameterLookup(GetArgumentList(invocation), methodSymbol) : null;
+        invocation switch
+        {
+            null => null,
+            AttributeSyntax x => new CSharpAttributeParameterLookup(x, methodSymbol),
+            _ => new CSharpMethodParameterLookup(GetArgumentList(invocation), methodSymbol),
+        };
 
     public IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, SemanticModel semanticModel) =>
         invocation != null ? new CSharpMethodParameterLookup(GetArgumentList(invocation), semanticModel) : null;
