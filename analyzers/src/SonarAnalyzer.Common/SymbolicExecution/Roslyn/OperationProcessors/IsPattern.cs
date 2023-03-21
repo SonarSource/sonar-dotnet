@@ -70,9 +70,9 @@ internal sealed class IsPattern : BranchingProcessor<IIsPatternOperationWrapper>
 
     private static ObjectConstraint ConstraintFromRecursivePattern(IRecursivePatternOperationWrapper recursive, bool falseBranch, bool hasObjectConstraint)
     {
-        if (hasObjectConstraint || !recursive.InputType.IsReferenceType)
+        if (hasObjectConstraint)
         {
-            return null;    // Don't learn if we can't, or we already know the answer
+            return null;    // Don't learn if we already know the answer
         }
         else if (falseBranch)
         {
