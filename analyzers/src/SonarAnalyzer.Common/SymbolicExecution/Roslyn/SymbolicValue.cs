@@ -141,27 +141,25 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             throw new InvalidOperationException("Unreachable. This method is called when there are exactly two other value present.");
         }
 
-        private static SymbolicValue CachedSymbolicValue(SymbolicConstraint constraint)
+        private static SymbolicValue CachedSymbolicValue(SymbolicConstraint first, SymbolicConstraint second = null)
         {
             // Performance: Don't use the factory overload of GetOrAdd
-            var cacheKey = new CacheKey(constraint.Kind);
-            return cache.TryGetValue(cacheKey, out var result)
-                ? result
-                : cache.GetOrAdd(cacheKey, Empty with { Constraints = Empty.Constraints.SetItem(constraint.GetType(), constraint) });
-        }
-
-        private static SymbolicValue CachedSymbolicValue(SymbolicConstraint first, SymbolicConstraint second)
-        {
-            // Performance: Don't use the factory overload of GetOrAdd
-            var cacheKey = new CacheKey(first.Kind, second.Kind);
+            var cacheKey = new CacheKey(first.Kind, second?.Kind);
             if (cache.TryGetValue(cacheKey, out var result))
             {
                 return result;
             }
             else
             {
-                var single = CachedSymbolicValue(first);
-                result = single with { Constraints = single.Constraints.SetItem(second.GetType(), second) };
+                if (second is null)
+                {
+                    result = Empty with { Constraints = Empty.Constraints.SetItem(first.GetType(), first) };
+                }
+                else
+                {
+                    result = CachedSymbolicValue(first);
+                    result = result with { Constraints = result.Constraints.SetItem(second.GetType(), second) };
+                }
                 return cache.GetOrAdd(cacheKey, result);
             }
         }
