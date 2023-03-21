@@ -37,7 +37,8 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
             && (IsRelevantMethod(Node) || IsRelevantPropertyAccessor(Node));
 
         static bool IsRelevantMethod(SyntaxNode node) =>
-            node is BaseMethodDeclarationSyntax { ParameterList.Parameters.Count: > 0 } method
+            node is BaseMethodDeclarationSyntax { ParameterList.Parameters: var parameters } method
+            && parameters.Any(x => !x.Modifiers.AnyOfKind(SyntaxKind.OutKeyword))
             && MethodDereferencesArguments(method);
 
         static bool IsRelevantPropertyAccessor(SyntaxNode node) =>
