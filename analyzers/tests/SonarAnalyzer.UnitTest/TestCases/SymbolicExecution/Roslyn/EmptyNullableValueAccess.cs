@@ -462,7 +462,7 @@ class Repro_4573
         }
     }
 
-    public void NestedCombined(DateTime? value)
+    public void NestedConditionsWithHasValue(DateTime? value)
     {
         if (foo == value)   // Relationship should be created here
         {
@@ -476,14 +476,6 @@ class Repro_4573
                 {
                     Console.WriteLine(foo.Value.ToString());    // Noncompliant, FP: logically unreachable
                 }
-                if (foo == null)
-                {
-                    Console.WriteLine(foo.Value.ToString());    // Compliant, logically unreachable
-                }
-                if (foo != null)
-                {
-                    Console.WriteLine(foo.Value.ToString());    // Compliant, non-empty
-                }
             }
             else
             {
@@ -495,13 +487,34 @@ class Repro_4573
                 {
                     Console.WriteLine(foo.Value.ToString());    // Noncompliant, foo is empty
                 }
+            }
+        }
+    }
+
+    public void NestedConditionsUsingNullComparisons(DateTime? value)
+    {
+        if (foo == value)   // Relationship should be created here
+        {
+            if (value.HasValue)
+            {
                 if (foo == null)
                 {
-                    Console.WriteLine(foo.Value.ToString());    // Compliant, logically unreachable
+                    Console.WriteLine(foo.Value.ToString());    // Noncompliant, FP: logically unreachable
                 }
                 if (foo != null)
                 {
+                    Console.WriteLine(foo.Value.ToString());    // Compliant, non-empty
+                }
+            }
+            else
+            {
+                if (foo != null)
+                {
                     Console.WriteLine(foo.Value.ToString());    // Compliant, logically unreachable
+                }
+                if (foo == null)
+                {
+                    Console.WriteLine(foo.Value.ToString());    // Noncompliant, empty
                 }
             }
         }
