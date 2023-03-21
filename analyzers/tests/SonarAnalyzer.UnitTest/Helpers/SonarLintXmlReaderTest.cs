@@ -82,6 +82,22 @@ public class SonarLintXmlReaderTest
         sut.AnalyzeGeneratedCode(LanguageNames.VisualBasic).Should().BeFalse();
     }
 
+    [TestMethod]
+    public void SonarLintXmlReader_DuplicatedProperties_DoesNotFail()
+    {
+        try
+        {
+            _ = CreateSonarLintXmlReader("ResourceTests\\SonarLintXml\\Duplicated_Properties\\SonarLint.xml");
+        }
+        catch (ArgumentException ex)
+        {
+            if (ex.Message.Contains("An item with the same key has already been added."))
+            {
+                Assert.Fail("Expected no exception, but got: " + ex.Message);
+            }
+        }
+    }
+
     [DataTestMethod]
     [DataRow("")]
     [DataRow("this is not an xml")]
