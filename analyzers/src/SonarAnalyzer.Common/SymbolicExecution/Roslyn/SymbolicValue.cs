@@ -27,6 +27,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
     {
         private static ConcurrentDictionary<CacheKey, SymbolicValue> cache = new();
 
+        private readonly Lazy<int> hashCode;
+
         // Reuse instances to save memory. This "True" has the same semantic meaning and any other symbolic value with BoolConstraint.True constraint
         public static readonly SymbolicValue Empty = new();
         public static readonly SymbolicValue This = Empty.WithConstraint(ObjectConstraint.NotNull);
@@ -40,6 +42,11 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         public IEnumerable<SymbolicConstraint> AllConstraints =>
             Constraints.Values;
+
+        public SymbolicValue()
+        {
+            hashCode = new(() => HashCode.DictionaryContentHash(Constraints), LazyThreadSafetyMode.ExecutionAndPublication);
+        }
 
         public override string ToString() =>
             SerializeConstraints();
@@ -83,7 +90,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             Constraints.TryGetValue(typeof(T), out var value) ? (T)value : null;
 
         public override int GetHashCode() =>
-            HashCode.DictionaryContentHash(Constraints);
+            hashCode.Value;
 
         public bool Equals(SymbolicValue other) =>
             other is not null && other.Constraints.DictionaryEquals(Constraints);
