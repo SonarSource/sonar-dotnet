@@ -67,12 +67,17 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         private SymbolicContext[] InvokeChecks(SymbolicContext context, Func<SymbolicCheck, SymbolicContext, ProgramState[]> process)
         {
-            var contexts = new[] { context };
+            var contexts = new List<SymbolicContext>();
             foreach (var check in checks)
             {
-                contexts = contexts.SelectMany(x => process(check, x).Select(newState => x.WithState(newState))).ToArray();
+                var newStates = process(check, context);
+                foreach (var newState in newStates)
+                {
+                    context = context.WithState(newState);
+                    contexts.Add(context);
+                }
             }
-            return contexts;
+            return contexts.ToArray();
         }
     }
 }
