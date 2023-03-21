@@ -3,12 +3,12 @@ Imports System.Text.RegularExpressions
 
 Class Compliant
     Private Sub Ctor()
-        Dim defaultOrder = New Regex("some pattern", RegexOptions.None)
-        Dim namedArgs = New Regex(options:=RegexOptions.None, pattern:="some pattern")
+        Dim defaultOrder = New Regex("valid pattern", RegexOptions.None)
+        Dim namedArgs = New Regex(options:=RegexOptions.None, pattern:="valid pattern")
     End Sub
 
     Private Sub [Static]()
-        Dim isMatch = Regex.IsMatch("some input", "some pattern", RegexOptions.None)
+        Dim isMatch = Regex.IsMatch("some input", "valid pattern", RegexOptions.None)
     End Sub
 
     <RegularExpression("[0-9]+")>
@@ -22,11 +22,11 @@ Class Noncompliant
     End Sub
 
     Private Sub [Static]()
-        Dim isMatch = Regex.IsMatch("some input", "A*") ' Noncompliant
-        Dim match = Regex.Match("some input", "A*") ' Noncompliant
-        Dim matches = Regex.Matches("some input", "A*") ' Noncompliant
+        Dim isMatch = Regex.IsMatch("some input", "A*")                     ' Noncompliant
+        Dim match = Regex.Match("some input", "A*")                         ' Noncompliant
+        Dim matches = Regex.Matches("some input", "A*")                     ' Noncompliant
         Dim replace = Regex.Replace("some input", "A*", "some replacement") ' Noncompliant
-        Dim split = Regex.Split("some input", "A*") ' Noncompliant
+        Dim split = Regex.Split("some input", "A*")                         ' Noncompliant
     End Sub
 
     <RegularExpression("A*")> ' Noncompliant
