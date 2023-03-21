@@ -662,6 +662,63 @@ class Casts
     }
 }
 
+class OutAndRefParams
+{
+    int? nullableField;
+    readonly int? nullableReadonlyField = null;
+
+    OutAndRefParams()
+    {
+        nullableReadonlyField = null;
+        ModifyOutParamInCtor(out nullableReadonlyField);
+        _ = nullableReadonlyField.Value;  // Compliant
+
+        static void ModifyOutParamInCtor(out int? i) => i = null;
+    }
+
+    void OutParams(int? iParam)
+    {
+        iParam = null;
+        ModifyOutParam(out iParam);
+        _ = iParam.Value;                                // Compliant, unknown after method call
+
+        int? iLocal;
+        ModifyOutParam(out iLocal);
+        _ = iLocal.Value;                                // Compliant
+
+        iLocal = null;
+        ModifyOutParam(out iLocal);
+        _ = iLocal.Value;                                // Compliant
+
+        iLocal = null;
+        ModifyOutParamAndRead(out iLocal, iLocal.Value); // Compliant, FN
+
+        iLocal = null;
+        ReadAndModifyOutParam(iLocal.Value, out iLocal); // Noncompliant
+
+        nullableField = null;
+        ModifyOutParam(out nullableField);
+        _ = nullableField.Value;                         // Compliant
+
+        static void ModifyOutParam(out int? i) => i = null;
+        static void ModifyOutParamAndRead(out int? i1, int? i2) => i1 = i2;
+        static void ReadAndModifyOutParam(int? i1, out int? i2) => i2 = i1;
+    }
+
+    void RefParams(int? iParam)
+    {
+        iParam = null;
+        ModifyRefParam(ref iParam);
+        _ = iParam.Value;                                // Compliant, unknown after method call
+
+        int? iLocal = null;
+        ModifyRefParam(ref iLocal);
+        _ = iLocal.Value;                                // Compliant
+
+        static void ModifyRefParam(ref int? i) => i = null;
+    }
+}
+
 namespace WithAliases
 {
     using MaybeInt = Nullable<System.Int32>;
