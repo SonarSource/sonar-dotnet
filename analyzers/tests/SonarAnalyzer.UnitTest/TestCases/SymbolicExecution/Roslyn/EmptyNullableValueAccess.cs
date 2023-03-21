@@ -554,7 +554,7 @@ class Casts
     {
         _ = ((int?)null).Value;       // Noncompliant
         i = null;
-        _ = ((int?)i).Value;          // Noncompliant, FP: when reached i.Value above implies i is not null
+        _ = ((int?)i).Value;          // Noncompliant, when reached i.Value above implies i is not null
     }
 
     void UpcastWithNonNullLiteral(int? i)
