@@ -314,7 +314,7 @@ class ComplexConditionMultipleNullables
         if (b1 != b2 && b1 != b3 && b2 != b3 && b1 != null && b2 != null) { _ = b3.Value; } // FN: b3 is empty
     }
 
-    void Reachability1(bool? b1)
+    void RelationsEquality(bool? b1)
     {
         bool? b2 = null;
         if (b1 == b2)
@@ -324,7 +324,7 @@ class ComplexConditionMultipleNullables
         }
     }
 
-    void Reachability2(bool? b1, bool? b2)
+    void RelationsBitOr(bool? b1, bool? b2)
     {
         _ = b1.Value | b2.Value;
         _ = b1.Value;         // Compliant, "|" evaluates both sides
