@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Google.Protobuf.WellKnownTypes;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
@@ -625,6 +626,7 @@ if (value = boolParameter)
         }
 
         [DataTestMethod]
+        [DataRow("arg is { }", "int")]
         [DataRow("arg is { }", "TStruct")]
         [DataRow("arg is TStruct { }", "TStruct")]
         public void Branching_LearnsObjectConstraint_RecursivePattern_ValueTypeConstraint(string expression, string argType)
