@@ -21,7 +21,7 @@ class NullForgivingOperator
         _ = i!.Value;               // Compliant, non-empty
     }
 
-    void Downcast(int? i)
+    void CastToValueType(int? i)
     {
         _ = (int)i!;                // Compliant, unknown
         i = SomeMethod();
@@ -35,7 +35,7 @@ class NullForgivingOperator
         _ = (int)i!;                // Noncompliant, empty
     }
 
-    void Upcast(int? i)
+    void CastToNullableType(int? i)
     {
         _ = ((int?)i)!.Value;       // Compliant, unknown
         _ = (i as int?)!.Value;     // Compliant, unknown

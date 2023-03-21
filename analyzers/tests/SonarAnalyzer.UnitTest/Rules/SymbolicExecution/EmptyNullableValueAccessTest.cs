@@ -62,8 +62,8 @@ public class EmptyNullableValueAccessTest
             .Verify();
 
     [TestMethod]
-    public void EmptyNullableValueAccess_Nullable_Roslyn_CSharp8() =>
-        roslynCS.AddPaths("EmptyNullableValueAccess.Nullable.cs").WithOptions(ParseOptionsHelper.FromCSharp8).WithConcurrentAnalysis(false).Verify();
+    public void EmptyNullableValueAccess_Roslyn_NullableContext() =>
+        roslynCS.AddPaths("EmptyNullableValueAccess.NullableContext.cs").WithOptions(ParseOptionsHelper.FromCSharp8).WithConcurrentAnalysis(false).Verify();
 
     [DataTestMethod]
     [DataRow(ProjectType.Product)]
