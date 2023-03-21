@@ -21,26 +21,25 @@
 using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.UnitTest.Rules;
+
+[TestClass]
+public class CommentedOutCodeTest
 {
-    [TestClass]
-    public class CommentedOutCodeTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<CommentedOutCode>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<CommentedOutCode>();
 
-        [TestMethod]
-        public void CommentedOutCode_Nonconcurrent() =>
-            builder.AddPaths("CommentedOutCode_Nonconcurrent.cs").WithConcurrentAnalysis(false).Verify();
+    [TestMethod]
+    public void CommentedOutCode_Nonconcurrent() =>
+        builder.AddPaths("CommentedOutCode_Nonconcurrent.cs").WithConcurrentAnalysis(false).Verify();
 
-        [TestMethod]
-        public void CommentedOutCode() =>
-            builder.AddPaths("CommentedOutCode.cs").Verify();
+    [TestMethod]
+    public void CommentedOutCode() =>
+        builder.AddPaths("CommentedOutCode.cs").Verify();
 
-        [TestMethod]
-        public void CommentedOutCode_NoDocumentation() =>
-            builder.AddPaths("CommentedOutCode.cs")
-                .WithConcurrentAnalysis(false)
-                .WithOptions(ImmutableArray.Create<ParseOptions>(new CSharpParseOptions(documentationMode: DocumentationMode.None)))
-                .Verify();
-    }
+    [TestMethod]
+    public void CommentedOutCode_NoDocumentation() =>
+        builder.AddPaths("CommentedOutCode.cs")
+            .WithConcurrentAnalysis(false)
+            .WithOptions(ImmutableArray.Create<ParseOptions>(new CSharpParseOptions(documentationMode: DocumentationMode.None)))
+            .Verify();
 }
