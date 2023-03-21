@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 public class EmptyNullableValueAccess
 {
-    [Obsolete(nameof(argument.Value))]  // Compliant
+    [Obsolete(nameof(argument.Value))]        // Compliant
     public void ExtendedScopeNameOfInAttribute(int? argument)
     {
         int? nullArgument = null;
-        var shouldThrow = nullArgument.Value; // FIXME Non-compliant
+        var shouldThrow = nullArgument.Value; // Noncompliant
     }
 }
 
