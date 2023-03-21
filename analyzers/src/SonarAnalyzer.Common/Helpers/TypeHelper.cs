@@ -38,7 +38,6 @@ internal static class TypeHelper
         {
             { TypeKind: TypeKind.Struct } => true,
             ITypeParameterSymbol { IsValueType: true } => true,
-            ITypeParameterSymbol { HasReferenceTypeConstraint: false, ConstraintTypes: { IsEmpty: false } constraintTypes } => constraintTypes.Any(x => x.SpecialType == SpecialType.System_Enum),
             _ => false,
         };
 
