@@ -92,10 +92,20 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
 
         public override void Visit(SyntaxNode node)
         {
-            if (!DereferencesMethodArguments)
+            if (!DereferencesMethodArguments
+             && !IsStaticLocalFunction(node)
+             && !IsStaticLambda(node))
             {
                 base.Visit(node);
             }
+
+            static bool IsStaticLocalFunction(SyntaxNode node) =>
+                LocalFunctionStatementSyntaxWrapper.IsInstance(node)
+                && ((LocalFunctionStatementSyntaxWrapper)node).Modifiers.AnyOfKind(SyntaxKind.StaticKeyword);
+
+            static bool IsStaticLambda(SyntaxNode node) =>
+                SimpleLambdaExpressionSyntaxWrapper.IsInstance(node)
+                && ((SimpleLambdaExpressionSyntaxWrapper)node).Modifiers.AnyOfKind(SyntaxKind.StaticKeyword);
         }
 
         public override void VisitIdentifierName(IdentifierNameSyntax node) =>
