@@ -53,11 +53,11 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
 
         static bool IsMemberAccessibleFromOtherAssemblies(SyntaxTokenList modifiers, BaseTypeDeclarationSyntax containingType) =>
             IsPublicOrProtectedOrProtectedInternal(modifiers)
-            || (containingType is InterfaceDeclarationSyntax && HasNoDeclaredAccessabilityModifier(modifiers));
+            || (containingType is InterfaceDeclarationSyntax && HasNoDeclaredAccessibilityModifier(modifiers));
 
         static bool IsPropertyAccessorAccessibleFromOtherAssemblies(SyntaxTokenList modifiers) =>
             IsPublicOrProtectedOrProtectedInternal(modifiers)
-            || HasNoDeclaredAccessabilityModifier(modifiers);
+            || HasNoDeclaredAccessibilityModifier(modifiers);
 
         static bool IsTypeAccessibleFromOtherAssemblies(SyntaxTokenList modifiers) =>
             IsPublicOrProtectedOrProtectedInternal(modifiers);
@@ -66,7 +66,7 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
             modifiers.AnyOfKind(SyntaxKind.PublicKeyword)
             || (modifiers.AnyOfKind(SyntaxKind.ProtectedKeyword) && !modifiers.AnyOfKind(SyntaxKind.PrivateKeyword));
 
-        static bool HasNoDeclaredAccessabilityModifier(SyntaxTokenList modifiers) =>
+        static bool HasNoDeclaredAccessibilityModifier(SyntaxTokenList modifiers) =>
             !modifiers.Any(x => x.IsAnyKind(
                 SyntaxKind.PrivateKeyword,
                 SyntaxKind.ProtectedKeyword,
